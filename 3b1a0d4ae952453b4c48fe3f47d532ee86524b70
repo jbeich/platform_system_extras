@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAA33///rQ\u003d",
+        "filename": "tests/bionic/libc/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000411
+      },
+      "writtenOn": "2010-08-01T07:33:25Z",
+      "side": 1,
+      "message": "can you keep the list in alphabetical order ? thanks in advance.",
+      "revId": "3b1a0d4ae952453b4c48fe3f47d532ee86524b70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA33///rM\u003d",
+        "filename": "tests/bionic/libc/common/test_pthread_mutex_timedlock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000411
+      },
+      "writtenOn": "2010-08-01T07:33:25Z",
+      "side": 1,
+      "message": "probably should use CLOCK_REALTIME instead.",
+      "revId": "3b1a0d4ae952453b4c48fe3f47d532ee86524b70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA33///rI\u003d",
+        "filename": "tests/bionic/libc/common/test_pthread_mutex_timedlock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1000411
+      },
+      "writtenOn": "2010-08-01T07:33:25Z",
+      "side": 1,
+      "message": "same here",
+      "revId": "3b1a0d4ae952453b4c48fe3f47d532ee86524b70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA33///rE\u003d",
+        "filename": "tests/bionic/libc/common/test_pthread_mutex_timedlock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000411
+      },
+      "writtenOn": "2010-08-01T07:33:25Z",
+      "side": 1,
+      "message": "and here",
+      "revId": "3b1a0d4ae952453b4c48fe3f47d532ee86524b70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA33///q8\u003d",
+        "filename": "tests/bionic/libc/common/test_pthread_mutex_timedlock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1000411
+      },
+      "writtenOn": "2010-08-01T07:33:25Z",
+      "side": 1,
+      "message": "can you put the semaphore in TState instead of a global variable ?",
+      "revId": "3b1a0d4ae952453b4c48fe3f47d532ee86524b70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA33///rA\u003d",
+        "filename": "tests/bionic/libc/common/test_pthread_mutex_timedlock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1000411
+      },
+      "writtenOn": "2010-08-01T07:33:25Z",
+      "side": 1,
+      "message": "why is t1 set here, it doesn\u0027t seem to be used (I assume remains of debug code).",
+      "revId": "3b1a0d4ae952453b4c48fe3f47d532ee86524b70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAA33///q4\u003d",
+        "filename": "tests/bionic/libc/common/test_pthread_mutex_timedlock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1000411
+      },
+      "writtenOn": "2010-08-01T07:33:25Z",
+      "side": 1,
+      "message": "it\u0027d be nice to check that the call took more than s-\u003ewaitDelay here.",
+      "revId": "3b1a0d4ae952453b4c48fe3f47d532ee86524b70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
