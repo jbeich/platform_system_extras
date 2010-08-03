@@ -73,6 +73,7 @@ sources := \
     common/test_strftime_2039.c \
     common/test_tm_zone.c \
     common/test_udp.c \
+    common/test_pthread_mutex_timedlock.c \
 
 # _XOPEN_SOURCE=600 is needed to get pthread_mutexattr_settype() on GLibc
 #
