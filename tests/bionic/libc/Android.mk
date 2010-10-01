@@ -86,7 +86,7 @@ sources := \
 # _XOPEN_SOURCE=600 is needed to get pthread_mutexattr_settype() on GLibc
 #
 EXTRA_LDLIBS := -lpthread -lrt
-EXTRA_CFLAGS := -D_XOPEN_SOURCE=600 -DHOST
+EXTRA_CFLAGS := -D_XOPEN_SOURCE=600 -DHOST -D_GNU_SOURCE
 $(call host-test, $(sources))
 $(call device-test, $(sources))
 
