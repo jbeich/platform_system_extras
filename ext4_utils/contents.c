@@ -52,7 +52,7 @@ static struct ext4_dir_entry_2 *add_dentry(u8 *data, u32 *offset,
 
 	u32 start_block = *offset / info.block_size;
 	u32 end_block = (*offset + rec_len) / info.block_size;
-	if (start_block != end_block) {
+	if (start_block != end_block && ((*offset + rec_len) % info.block_size)) {
 		/* Adding this dentry will cross a block boundary, so pad the previous
 		   dentry to the block boundary */
 		if (!prev)
@@ -150,11 +150,16 @@ u32 make_directory(u32 dir_inode_num, u32 entries, struct dentry *dentries,
 		}
 	}
 
-	dentry = (struct ext4_dir_entry_2 *)(data + offset);
-	dentry->inode = 0;
-	dentry->rec_len = len - offset;
-	dentry->name_len = 0;
-	dentry->file_type = EXT4_FT_UNKNOWN;
+	if (len - offset >= 8) {
+		dentry = (struct ext4_dir_entry_2 *)(data + offset);
+		dentry->inode = 0;
+		dentry->rec_len = len - offset;
+		dentry->name_len = 0;
+		dentry->file_type = EXT4_FT_UNKNOWN;
+	}
+	else {
+		dentry->rec_len += len - offset;
+	}
 
 	return inode_num;
 }
