@@ -419,10 +419,6 @@ void write_data_file(struct output_file *out, u64 off, const char *file,
 			goto err;
 	}
 
-	munmap(data, len);
-
-	close(file_fd);
-
 err:
 	munmap(data, len);
 	close(file_fd);
