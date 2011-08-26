@@ -3,6 +3,12 @@
 
 static char  tab[8];
 
+typedef union __attribute__((packed)) {
+    unsigned char c;
+    unsigned short s;
+    unsigned int i;
+} unaligned;
+
 static void
 read4( int  o, unsigned val )
 {
@@ -17,7 +23,7 @@ read4( int  o, unsigned val )
     printf( "read4: offset=%d value=%08x: ", o, val );
     fflush(stdout);
 
-    v2 = *(unsigned*)(tab+o);
+    v2 = ((unaligned *)(tab+o))->i;
 
     if (v2 != val) {
         printf( "FAIL (%08x)\n", v2 );
@@ -35,7 +41,7 @@ writ4( int  o, unsigned val )
     printf( "writ4: offset=%d value=%08x: ", o, val );
     fflush(stdout);
 
-    *(unsigned*)(tab+o) = v;
+    ((unaligned *)(tab+o))->i = v;
 
     v2 = ((unsigned)tab[o+0] << 24) |
          ((unsigned)tab[o+1] << 16) |
@@ -61,7 +67,7 @@ read2( int  o, unsigned val )
     printf( "read2: offset=%d value=%08x: ", o, val );
     fflush(stdout);
 
-    v2 = *(unsigned short*)(tab+o);
+    v2 = ((unaligned *)(tab+o))->s;
 
     if (v2 != val) {
         printf( "FAIL (%04x)\n", v2 );
@@ -79,7 +85,7 @@ writ2( int  o, unsigned val )
     printf( "writ2: offset=%d value=%08x: ", o, val );
     fflush(stdout);
 
-    *(unsigned short*)(tab+o) = v;
+    ((unaligned *)(tab+o))->s = v;
 
     v2 = ((unsigned)tab[o+0] << 8) |
          ((unsigned)tab[o+1]       );
