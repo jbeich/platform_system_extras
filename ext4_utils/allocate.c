@@ -73,6 +73,13 @@ struct block_allocation *create_allocation()
 	return alloc;
 }
 
+static struct region *last_region_of_regions(struct region *reg) {
+	while(reg->next) {
+		reg = reg->next;
+	}
+	return reg;
+}
+
 static void region_list_remove(struct region_list *list, struct region *reg)
 {
 	if (reg->prev)
@@ -473,7 +480,7 @@ struct block_allocation *allocate_blocks(u32 len)
 
 	struct block_allocation *alloc = create_allocation();
 	alloc->list.first = reg;
-	alloc->list.last = reg;
+	alloc->list.last = last_region_of_regions(reg);
 	alloc->list.iter = alloc->list.first;
 	alloc->list.partial_iter = 0;
 	return alloc;
