@@ -23,13 +23,13 @@ fi
 /system/bin/screencap -p $screenshot &
 
 # run bugreport
-/system/bin/dumpstate -o $bugreport $@
+/system/bin/dumpstate -z -o $bugreport $@
 
 
 # make files readable
-chown root.sdcard_rw $bugreport.txt
+chown root.sdcard_rw $bugreport.txt.gz
 chown root.sdcard_rw $screenshot
 
 # invoke send_bug to look up email accounts and fire intents
 # make it convenient to send bugreport to oneself
-/system/bin/send_bug $bugreport.txt $screenshot
+/system/bin/send_bug $bugreport.txt.gz $screenshot
