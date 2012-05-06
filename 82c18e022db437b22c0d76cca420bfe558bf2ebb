@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAFUX///2E\u003d",
+        "filename": "ext4_utils/indirect.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 503,
+      "author": {
+        "id": 1000660
+      },
+      "writtenOn": "2012-05-06T23:26:38Z",
+      "side": 1,
+      "message": "We might want braces here. Not sure what the established style is for this file.",
+      "revId": "82c18e022db437b22c0d76cca420bfe558bf2ebb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
