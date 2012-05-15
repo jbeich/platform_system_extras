@@ -394,37 +394,30 @@ static struct region *ext4_allocate_partial(u32 len)
 	unsigned int i;
 	struct region *reg;
 
+	/* fill an empty block group if needed */
 	for (i = 0; i < aux_info.groups; i++) {
 		if (aux_info.bgs[i].data_blocks_used == 0) {
 			u32 bg_len = aux_info.bgs[i].free_blocks;
 			u32 block;
 
-			if (len <= bg_len) {
-				/* If the requested length would fit in a block group,
-				 use the regular allocator to try to fit it in a partially
-				 used block group */
-				bg_len = len;
-				reg = ext4_allocate_contiguous_blocks(len);
-			} else {
+			if (len >= bg_len) {
 				block = ext4_allocate_blocks_from_block_group(bg_len, i);
-
 				if (block == EXT4_ALLOCATE_FAILED) {
 					error("failed to allocate %d blocks in block group %d", bg_len, i);
 					return NULL;
 				}
-
 				reg = malloc(sizeof(struct region));
 				reg->block = block;
 				reg->len = bg_len;
 				reg->next = NULL;
 				reg->prev = NULL;
 				reg->bg = i;
+				return reg;
 			}
-
-			return reg;
 		}
 	}
-	return NULL;
+	/* when full block group not needed, use regular allocator */
+	return ext4_allocate_contiguous_blocks(len);
 }
 
 static struct region *ext4_allocate_multiple_contiguous_blocks(u32 len)
