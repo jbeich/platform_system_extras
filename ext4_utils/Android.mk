@@ -130,38 +130,6 @@ include $(BUILD_HOST_EXECUTABLE)
 
 include $(CLEAR_VARS)
 
-LOCAL_SRC_FILES := simg2img.c \
-	sparse_crc32.c
-LOCAL_MODULE := simg2img
-LOCAL_MODULE_TAGS := debug
-
-include $(BUILD_HOST_EXECUTABLE)
-
-include $(CLEAR_VARS)
-
-LOCAL_SRC_FILES := simg2img.c \
-	sparse_crc32.c
-LOCAL_MODULE := simg2img
-LOCAL_MODULE_TAGS := optional
-
-include $(BUILD_EXECUTABLE)
-
-include $(CLEAR_VARS)
-
-LOCAL_SRC_FILES := img2simg.c
-LOCAL_MODULE := img2simg
-LOCAL_MODULE_TAGS := debug
-
-include $(BUILD_HOST_EXECUTABLE)
-
-include $(CLEAR_VARS)
-
-LOCAL_SRC_FILES := img2simg.c
-LOCAL_MODULE := img2simg
-LOCAL_MODULE_TAGS := optional
-
-include $(BUILD_EXECUTABLE)
-
 include $(CLEAR_VARS)
 LOCAL_SRC_FILES := setup_fs.c
 LOCAL_MODULE := setup_fs
@@ -200,13 +168,5 @@ LOCAL_IS_HOST_MODULE := true
 include $(BUILD_PREBUILT)
 
 include $(CLEAR_VARS)
-
-LOCAL_MODULE := simg_dump.py
-LOCAL_MODULE_TAGS := debug
-LOCAL_SRC_FILES := simg_dump.py
-LOCAL_MODULE_CLASS := EXECUTABLES
-LOCAL_IS_HOST_MODULE := true
-
-include $(BUILD_PREBUILT)
 
 endif
