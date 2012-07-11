@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAHJ3///k4\u003d",
+        "filename": "ext4_utils/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1003966
+      },
+      "writtenOn": "2012-07-11T17:54:49Z",
+      "side": 1,
+      "message": "It seems like this CFLAG shouldn\u0027t be per-package, but rather, a global CFLAG defined in build/core/combo/TARGET-linux-arm.mk (for example).\n\nIs there any advantage to placing it here vs there?",
+      "revId": "0b766cda9c192f999a4e420ec950b0ae9c14af01",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
