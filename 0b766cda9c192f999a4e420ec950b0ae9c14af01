@@ -16,6 +16,24 @@
       "revId": "0b766cda9c192f999a4e420ec950b0ae9c14af01",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAHMX///20\u003d",
+        "filename": "ext4_utils/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1013157
+      },
+      "writtenOn": "2012-07-11T18:42:27Z",
+      "side": 1,
+      "message": "Never considered this approach when we created all those CFLAGS per-package. Might be a hassle to switch now with -DHAVE_SELINUX in a lot of places. Though I do like the more general approach you\u0027ve outlined.",
+      "parentUuid": "AAAHJ3///k4\u003d",
+      "revId": "0b766cda9c192f999a4e420ec950b0ae9c14af01",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
