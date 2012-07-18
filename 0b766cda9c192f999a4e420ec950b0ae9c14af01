@@ -34,6 +34,24 @@
       "revId": "0b766cda9c192f999a4e420ec950b0ae9c14af01",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAHdn///8w\u003d",
+        "filename": "ext4_utils/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1013034
+      },
+      "writtenOn": "2012-07-18T19:48:54Z",
+      "side": 1,
+      "message": "Ok to move forward with this as is, or should we try to make these changes?",
+      "parentUuid": "AAAHJ3///k4\u003d",
+      "revId": "0b766cda9c192f999a4e420ec950b0ae9c14af01",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
