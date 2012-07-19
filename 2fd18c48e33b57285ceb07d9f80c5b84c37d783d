@@ -16,6 +16,24 @@
       "revId": "2fd18c48e33b57285ceb07d9f80c5b84c37d783d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "AAAHqn///+I\u003d",
+        "filename": "bugmailer/bugmailer.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1011333
+      },
+      "writtenOn": "2012-07-19T21:27:42Z",
+      "side": 1,
+      "message": "This mechanism takes the bug report and attaches it to an email which is sent to the user\u0027s GMail account. So the receiving end is (currently) a human.",
+      "parentUuid": "AAAHoH///2w\u003d",
+      "revId": "2fd18c48e33b57285ceb07d9f80c5b84c37d783d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
