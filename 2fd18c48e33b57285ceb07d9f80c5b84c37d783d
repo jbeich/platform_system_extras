@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAHoH///2w\u003d",
+        "filename": "bugmailer/bugmailer.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1005576
+      },
+      "writtenOn": "2012-07-19T20:52:02Z",
+      "side": 1,
+      "message": "doesn\u0027t this depend on what the receiving end of send_bug is expecting?  We can\u0027t unilaterally compress content on the client side of the connection if the server side isn\u0027t changed alongside it.",
+      "revId": "2fd18c48e33b57285ceb07d9f80c5b84c37d783d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
