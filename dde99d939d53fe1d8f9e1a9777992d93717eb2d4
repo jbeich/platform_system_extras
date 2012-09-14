@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAJF3///Lw\u003d",
+        "filename": "tests/framebuffer/fb_test.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1010669
+      },
+      "writtenOn": "2012-09-14T22:42:56Z",
+      "side": 1,
+      "message": "would be clearer to evaluate\n\n   offset_in_page \u003d fi.smem_start \u0026 (pagesize-1);\n\njust once.",
+      "revId": "dde99d939d53fe1d8f9e1a9777992d93717eb2d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
