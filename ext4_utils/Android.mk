@@ -41,6 +41,7 @@ LOCAL_STATIC_LIBRARIES += \
 ifeq ($(HOST_OS),windows)
   LOCAL_LDLIBS += -lws2_32
 else
+  LOCAL_CFLAGS := -DHOST
   ifeq ($(HAVE_SELINUX), true)
     LOCAL_C_INCLUDES += external/libselinux/include
     LOCAL_STATIC_LIBRARIES += libselinux
