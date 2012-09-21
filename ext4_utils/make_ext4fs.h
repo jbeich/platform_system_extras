@@ -27,6 +27,7 @@ extern "C" {
 #ifdef HAVE_SELINUX
 #include <selinux/selinux.h>
 #include <selinux/label.h>
+#include <selinux/android.h>
 #else
 struct selabel_handle;
 #endif
