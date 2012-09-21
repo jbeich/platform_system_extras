@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAJWH///5s\u003d",
+        "filename": "ext4_utils/make_ext4fs_main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1010111
+      },
+      "writtenOn": "2012-09-21T19:13:47Z",
+      "side": 1,
+      "message": "Since we\u0027ll need a mountpoint directory too (i.e. -a option) in order to perform the selabel lookups from file_contexts, we should likely also require mountpoint[0] !\u003d \u0027\\0\u0027 here, e.g. if (!sehnd \u0026\u0026 mountpoint[0] !\u003d \u0027\\0\u0027)",
+      "revId": "dfe70ca57eeab864b16e7fddc69501e80b451bd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
