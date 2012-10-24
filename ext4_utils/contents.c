@@ -160,11 +160,14 @@ u32 make_directory(u32 dir_inode_num, u32 entries, struct dentry *dentries,
 		}
 	}
 
-	dentry = (struct ext4_dir_entry_2 *)(data + offset);
-	dentry->inode = 0;
-	dentry->rec_len = len - offset;
-	dentry->name_len = 0;
-	dentry->file_type = EXT4_FT_UNKNOWN;
+	/* Add pad entry */
+	dentry = add_dentry(data, &offset, dentry, 0, "", EXT4_FT_UNKNOWN);
+	if (!dentry) {
+		error("failed to add directory pad entry");
+		return EXT4_ALLOCATE_FAILED;
+	}
+	dentry = (struct ext4_dir_entry_2 *)(data + offset - 8);
+	dentry->rec_len = len - offset + 8;
 
 	return inode_num;
 }
