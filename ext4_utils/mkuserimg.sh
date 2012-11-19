@@ -45,7 +45,8 @@ if [ -z $MOUNT_POINT ]; then
 fi
 
 if [ -z $SIZE ]; then
-    SIZE=128M
+  echo "Need size of filesystem"
+  exit 2
 fi
 
 if [ -n "$FC" ]; then
