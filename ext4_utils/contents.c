@@ -44,11 +44,6 @@ static u32 dentry_size(u32 entries, struct dentry *dentries)
 		len += dentry_len;
 	}
 
-	/* include size of the dentry used to pad until the end of the block */
-	if (len % info.block_size + 8 > info.block_size)
-		len += info.block_size - (len % info.block_size);
-	len += 8;
-
 	return len;
 }
 
@@ -160,11 +155,17 @@ u32 make_directory(u32 dir_inode_num, u32 entries, struct dentry *dentries,
 		}
 	}
 
-	dentry = (struct ext4_dir_entry_2 *)(data + offset);
-	dentry->inode = 0;
-	dentry->rec_len = len - offset;
-	dentry->name_len = 0;
-	dentry->file_type = EXT4_FT_UNKNOWN;
+	if (len - offset > 8) {
+		dentry = (struct ext4_dir_entry_2 *)(data + offset);
+		dentry->inode = 0;
+		dentry->rec_len = len - offset;
+		dentry->name_len = 0;
+		dentry->file_type = EXT4_FT_UNKNOWN;
+	} else {
+		/* Remaining space in the block is too small to be filled by an
+		   empty dentry, pad the last one out to the end of the block */
+		dentry->rec_len += len - offset;
+	}
 
 	return inode_num;
 }
