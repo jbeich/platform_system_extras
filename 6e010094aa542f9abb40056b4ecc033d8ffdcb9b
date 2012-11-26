@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAALu3//+jc\u003d",
+        "filename": "ext4_utils/make_ext4fs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1004285
+      },
+      "writtenOn": "2012-11-26T21:36:27Z",
+      "side": 1,
+      "message": "I think S_IRWXU (0700) is preferred over S_IRUSR.\n\nAlso, S_IFDIR is not specified in build_default_directory_structure() for the entry for lost+found, but looking at created images, the i_mode field is correct, because make_directory() forces that field to S_IFDIR. But it seems setting S_IFDIR here doesn\u0027t hurt.",
+      "revId": "6e010094aa542f9abb40056b4ecc033d8ffdcb9b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
