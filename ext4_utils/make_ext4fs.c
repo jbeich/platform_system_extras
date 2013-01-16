@@ -179,8 +179,7 @@ static u32 build_directory_structure(const char *full_path, const char *dir_path
 			if (selabel_lookup(sehnd, &dentries[i].secon, dentries[i].path, stat.st_mode) < 0) {
 				error("cannot lookup security context for %s", dentries[i].path);
 			}
-#if 0
-			// TODO make this a debug flag
+#if SELINUX_DEBUG
 			if (dentries[i].secon)
 				printf("Labeling %s as %s\n", dentries[i].path, dentries[i].secon);
 #endif
