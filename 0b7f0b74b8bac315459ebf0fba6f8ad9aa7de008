@@ -51,6 +51,24 @@
       "revId": "0b7f0b74b8bac315459ebf0fba6f8ad9aa7de008",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "OZ9ja7HI",
+        "filename": "ext4_utils/make_ext4fs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2013-01-17T21:50:25Z",
+      "side": 1,
+      "message": "The whole point of make_ext4fs vs make_ext4fs_internal is to hide every time we change the _internal api from every project that links against libmake_ext4fs",
+      "parentUuid": "Of2N84qw",
+      "revId": "0b7f0b74b8bac315459ebf0fba6f8ad9aa7de008",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
