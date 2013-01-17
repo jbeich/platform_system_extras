@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "OZ5gSJFs",
+        "filename": "ext4_utils/make_ext4fs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2013-01-17T21:40:35Z",
+      "side": 1,
+      "message": "All the callers to this pass 0, why not leave the function parameters alone and pass 0 to make_ext4fs_internal?",
+      "revId": "0b7f0b74b8bac315459ebf0fba6f8ad9aa7de008",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
