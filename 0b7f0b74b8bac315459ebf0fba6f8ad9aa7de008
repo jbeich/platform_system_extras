@@ -104,6 +104,24 @@
       "revId": "0b7f0b74b8bac315459ebf0fba6f8ad9aa7de008",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Of6Mvuqc",
+        "filename": "ext4_utils/make_ext4fs_main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1013433
+      },
+      "writtenOn": "2013-01-17T22:09:28Z",
+      "side": 1,
+      "message": "It\u0027s not that hard to get the build command from the make output and add -v and run it via command line. Although I like just being able to set/unset and env var for this, It the forces the software to behave differently on different environments and essentially passes the option via a \"global\" which isn\u0027t always the best idea.\n\nAlthough, if Collin thinks this ok, it\u0027s his project and I can easily add that in a separate patch later.",
+      "parentUuid": "Oa12Qi1M",
+      "revId": "0b7f0b74b8bac315459ebf0fba6f8ad9aa7de008",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
