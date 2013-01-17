@@ -69,6 +69,41 @@
       "revId": "0b7f0b74b8bac315459ebf0fba6f8ad9aa7de008",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Oa-2pX5I",
+        "filename": "ext4_utils/make_ext4fs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 1010466
+      },
+      "writtenOn": "2013-01-17T21:55:37Z",
+      "side": 1,
+      "message": "agreed: don\u0027t change the public API",
+      "parentUuid": "OZ9ja7HI",
+      "revId": "0b7f0b74b8bac315459ebf0fba6f8ad9aa7de008",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Oa12Qi1M",
+        "filename": "ext4_utils/make_ext4fs_main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1010466
+      },
+      "writtenOn": "2013-01-17T21:55:37Z",
+      "side": 1,
+      "message": "It would be nice to support the environment option, as well.  That would mean adding envp here, and searching for an appropriate environment variable.",
+      "revId": "0b7f0b74b8bac315459ebf0fba6f8ad9aa7de008",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
