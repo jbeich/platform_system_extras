@@ -105,7 +105,7 @@ static u32 build_default_directory_structure()
    if the image were mounted at the specified mount point */
 static u32 build_directory_structure(const char *full_path, const char *dir_path,
 		u32 dir_inode, fs_config_func_t fs_config_func,
-		struct selabel_handle *sehnd)
+		struct selabel_handle *sehnd, int verbose)
 {
 	int entries = 0;
 	struct dentry *dentries;
@@ -179,11 +179,9 @@ static u32 build_directory_structure(const char *full_path, const char *dir_path
 			if (selabel_lookup(sehnd, &dentries[i].secon, dentries[i].path, stat.st_mode) < 0) {
 				error("cannot lookup security context for %s", dentries[i].path);
 			}
-#if 0
-			// TODO make this a debug flag
-			if (dentries[i].secon)
+
+			if (dentries[i].secon && verbose)
 				printf("Labeling %s as %s\n", dentries[i].path, dentries[i].secon);
-#endif
 		}
 #endif
 
@@ -252,7 +250,7 @@ static u32 build_directory_structure(const char *full_path, const char *dir_path
 			if (ret < 0)
 				critical_error_errno("asprintf");
 			entry_inode = build_directory_structure(subdir_full_path,
-					subdir_dir_path, inode, fs_config_func, sehnd);
+					subdir_dir_path, inode, fs_config_func, sehnd, verbose);
 			free(subdir_full_path);
 			free(subdir_dir_path);
 		} else if (dentries[i].file_type == EXT4_FT_SYMLINK) {
@@ -368,7 +366,7 @@ int make_ext4fs(const char *filename, s64 len,
 		return EXIT_FAILURE;
 	}
 
-	status = make_ext4fs_internal(fd, NULL, mountpoint, NULL, 0, 0, 0, 1, 0, sehnd);
+	status = make_ext4fs_internal(fd, NULL, mountpoint, NULL, 0, 0, 0, 1, 0, sehnd, 0);
 	close(fd);
 
 	return status;
@@ -434,7 +432,7 @@ static char *canonicalize_rel_slashes(const char *str)
 int make_ext4fs_internal(int fd, const char *_directory,
                          const char *_mountpoint, fs_config_func_t fs_config_func, int gzip,
                          int sparse, int crc, int wipe, int init_itabs,
-                         struct selabel_handle *sehnd)
+                         struct selabel_handle *sehnd, int verbose)
 {
 	u32 root_inode_num;
 	u16 root_mode;
@@ -542,7 +540,7 @@ int make_ext4fs_internal(int fd, const char *_directory,
 #else
 	if (directory)
 		root_inode_num = build_directory_structure(directory, mountpoint, 0,
-                        fs_config_func, sehnd);
+                        fs_config_func, sehnd, verbose);
 	else
 		root_inode_num = build_default_directory_structure();
 #endif
@@ -557,7 +555,7 @@ int make_ext4fs_internal(int fd, const char *_directory,
 		if (selabel_lookup(sehnd, &secontext, mountpoint, S_IFDIR) < 0) {
 			error("cannot lookup security context for %s", mountpoint);
 		}
-		if (secontext) {
+		if (secontext && verbose) {
 			printf("Labeling %s as %s\n", mountpoint, secontext);
 			inode_set_selinux(root_inode_num, secontext);
 		}
