@@ -16,6 +16,24 @@
       "revId": "2fb254914888a474e39d07cc4dcd88544b76ccee",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Op2ImPrw",
+        "filename": "ext4_utils/make_ext4fs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 1013433
+      },
+      "writtenOn": "2013-01-24T00:46:02Z",
+      "side": 1,
+      "message": "Also, why would a len of a file ever be negative, why does the backing struct even define it as signed?",
+      "parentUuid": "Op4eIPMM",
+      "revId": "2fb254914888a474e39d07cc4dcd88544b76ccee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
