@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "Op4eIPMM",
+        "filename": "ext4_utils/make_ext4fs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 1013433
+      },
+      "writtenOn": "2013-01-24T00:38:51Z",
+      "side": 1,
+      "message": "Don\u0027t need the signed in front, it is implied, I would drop that. Doesn\u0027t seem to follow convention.\n\nHowever, it does match the existing type your replacing verbatim.\ntypedef signed long long s64\n\nWhy not move your shared types between the internal/external world else where, looks like from ext4_utils.h to make_ext4fs.h",
+      "revId": "2fb254914888a474e39d07cc4dcd88544b76ccee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
