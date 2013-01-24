@@ -34,6 +34,42 @@
       "revId": "2fb254914888a474e39d07cc4dcd88544b76ccee",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "Ova0Bj0g",
+        "filename": "ext4_utils/make_ext4fs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2013-01-24T00:59:33Z",
+      "side": 1,
+      "message": "I\u0027ll switch to long long.\n\nI\u0027d like to avoid exporting the types completely, as they are likely to conflict with local types in other libraries.",
+      "parentUuid": "Op4eIPMM",
+      "revId": "2fb254914888a474e39d07cc4dcd88544b76ccee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "OvW37lzk",
+        "filename": "ext4_utils/make_ext4fs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2013-01-24T00:59:33Z",
+      "side": 1,
+      "message": "Negative sizes are used to specify \"size of the underlying block device - x\", used for formatting a partition with a key block at the end of the device.",
+      "parentUuid": "Op2ImPrw",
+      "revId": "2fb254914888a474e39d07cc4dcd88544b76ccee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
