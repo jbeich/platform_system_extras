@@ -1,0 +1,35 @@
+From 3c86ef63bd45a01671be0d82735bf952ca7b86ae Mon Sep 17 00:00:00 2001
+From: Robert Craig <rpcraig@tycho.ncsc.mil>
+Date: Wed, 30 Jan 2013 12:54:46 -0500
+Subject: [PATCH] Fix root inode security labeling issue.
+
+Introducing the verbose flag accidentally wrapped the
+security label function call for the root inode. The
+system.img will not be correctly labeled without this change.
+
+Change-Id: If73b63d4ee815bbf428dc3d72b9df000a2075a45
+Signed-off-by: Robert Craig <rpcraig@tycho.ncsc.mil>
+---
+ ext4_utils/make_ext4fs.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/ext4_utils/make_ext4fs.c b/ext4_utils/make_ext4fs.c
+index 5c1003d..95ced27 100644
+--- a/ext4_utils/make_ext4fs.c
++++ b/ext4_utils/make_ext4fs.c
+@@ -568,8 +568,10 @@ int make_ext4fs_internal(int fd, const char *_directory,
+ 		if (selabel_lookup(sehnd, &secontext, mountpoint, S_IFDIR) < 0) {
+ 			error("cannot lookup security context for %s", mountpoint);
+ 		}
+-		if (secontext && verbose) {
+-			printf("Labeling %s as %s\n", mountpoint, secontext);
++		if (secontext) {
++			if (verbose) {
++					printf("Labeling %s as %s\n", mountpoint, secontext);
++			}
+ 			inode_set_selinux(root_inode_num, secontext);
+ 		}
+ 		freecon(secontext);
+-- 
+1.7.11.7
+
