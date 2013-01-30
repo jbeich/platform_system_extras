@@ -16,6 +16,24 @@
       "revId": "f8b6569c51398b82a7babd38f988a8ac19dee64d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "PFoyuh.g",
+        "filename": "ext4_utils/make_ext4fs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 574,
+      "author": {
+        "id": 1013887
+      },
+      "writtenOn": "2013-01-30T18:36:28Z",
+      "side": 1,
+      "message": "good point. one sec on the new patch.",
+      "parentUuid": "PDV7SZM4",
+      "revId": "f8b6569c51398b82a7babd38f988a8ac19dee64d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
