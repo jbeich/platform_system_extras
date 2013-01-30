@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "PDV7SZM4",
+        "filename": "ext4_utils/make_ext4fs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 574,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2013-01-30T18:31:01Z",
+      "side": 1,
+      "message": "this isn\u0027t right either, you will call inode_set_selinux even when secontext is null, which is different from the behavior before the verbose patch was applied.\n\nyou want:\n    if (secontext) {\n        if (verbose) {\n            printf(\"Labeling %s as %s\\n\", mountpoint, secontext);\n        }\n        inode_set_selinux(root_inode_num, secontext);\n    }",
+      "revId": "f8b6569c51398b82a7babd38f988a8ac19dee64d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
