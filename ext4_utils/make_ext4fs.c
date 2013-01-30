@@ -570,8 +570,8 @@ int make_ext4fs_internal(int fd, const char *_directory,
 		}
 		if (secontext && verbose) {
 			printf("Labeling %s as %s\n", mountpoint, secontext);
-			inode_set_selinux(root_inode_num, secontext);
 		}
+		inode_set_selinux(root_inode_num, secontext);
 		freecon(secontext);
 	}
 #endif
