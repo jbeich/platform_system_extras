@@ -16,6 +16,23 @@
       "revId": "2929313c66014bce5d53cf4323a9db507ca5b139",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "PHyO-qtI",
+        "filename": "ext4_utils/make_ext4fs.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 575,
+      "author": {
+        "id": 1010111
+      },
+      "writtenOn": "2013-01-30T19:00:25Z",
+      "side": 1,
+      "message": "FWIW, inode_set_selinux(NULL) is legal and does nothing.  Ditto for freecon().\nSo they can go inside or outside the if (secontext) block.",
+      "revId": "2929313c66014bce5d53cf4323a9db507ca5b139",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
