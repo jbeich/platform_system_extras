@@ -28,6 +28,7 @@ LOCAL_STATIC_LIBRARIES := \
 ifneq ($(HOST_OS),windows)
   LOCAL_STATIC_LIBRARIES += libselinux
 endif
+LOCAL_CFLAGS += -Wall -Werror
 include $(BUILD_HOST_STATIC_LIBRARY)
 
 
@@ -44,6 +45,7 @@ else
   LOCAL_STATIC_LIBRARIES += libselinux
   LOCAL_CFLAGS := -DHOST
 endif
+LOCAL_CFLAGS += -Wall -Werror
 include $(BUILD_HOST_EXECUTABLE)
 
 
@@ -60,6 +62,7 @@ LOCAL_SHARED_LIBRARIES := \
     libselinux \
     libsparse \
     libz
+LOCAL_CFLAGS += -Wall -Werror
 include $(BUILD_SHARED_LIBRARY)
 
 
@@ -69,6 +72,7 @@ LOCAL_MODULE := libext4_utils_static
 LOCAL_STATIC_LIBRARIES += \
     libselinux \
     libsparse_static
+LOCAL_CFLAGS += -Wall -Werror
 include $(BUILD_STATIC_LIBRARY)
 
 
@@ -79,6 +83,7 @@ LOCAL_SHARED_LIBRARIES := \
     libext4_utils \
     libselinux \
     libz
+LOCAL_CFLAGS += -Wall -Werror
 include $(BUILD_EXECUTABLE)
 
 
@@ -90,6 +95,7 @@ LOCAL_SHARED_LIBRARIES += \
     libselinux \
     libsparse \
     libz
+LOCAL_CFLAGS += -Wall -Werror
 include $(BUILD_EXECUTABLE)
 
 
@@ -101,6 +107,7 @@ LOCAL_STATIC_LIBRARIES += \
     libselinux \
     libsparse_host \
     libz
+LOCAL_CFLAGS += -Wall -Werror
 include $(BUILD_HOST_EXECUTABLE)
 
 
@@ -108,6 +115,7 @@ include $(CLEAR_VARS)
 LOCAL_SRC_FILES := setup_fs.c
 LOCAL_MODULE := setup_fs
 LOCAL_SHARED_LIBRARIES += libcutils
+LOCAL_CFLAGS += -Wall -Werror
 include $(BUILD_EXECUTABLE)
 
 
@@ -118,6 +126,7 @@ LOCAL_SHARED_LIBRARIES += \
     libext4_utils \
     libsparse \
     libz
+LOCAL_CFLAGS += -Wall -Werror
 include $(BUILD_EXECUTABLE)
 
 
@@ -128,6 +137,7 @@ LOCAL_STATIC_LIBRARIES += \
     libext4_utils_host \
     libsparse_host \
     libz
+LOCAL_CFLAGS += -Wall -Werror
 include $(BUILD_HOST_EXECUTABLE)
 
 
