@@ -31,18 +31,40 @@
 
 #include <private/android_filesystem_config.h>
 
+#define NR_SUPP_GIDS 32
+
+gid_t parse_gid(char *s)
+{
+    struct passwd *pw = getpwnam(s);
+
+    return pw? pw->pw_gid: (gid_t)atoi(s);
+}
+
+uid_t parse_uid(char *s)
+{
+    struct passwd *pw = getpwnam(s);
+
+    return pw? pw->pw_uid: (gid_t)atoi(s);
+}
+
 /*
  * SU can be given a specific command to exec. UID _must_ be
  * specified for this (ie argc => 3).
  *
  * Usage:
- * su 1000
- * su 1000 ls -l
+ * su [user].<primary group>[,<supp group 1>,...<supp group n>] [command] [args]
  */
 int main(int argc, char **argv)
 {
-    struct passwd *pw;
-    int uid, gid, myuid;
+    uid_t uid = 0;
+    gid_t gid = 0;
+    uid_t myuid = 0;
+
+    gid_t supp_gids[NR_SUPP_GIDS];
+    char *user = NULL;
+    char *group = NULL;
+    int num_gids = 0;
+    int i=0;
 
     /* Until we have something better, only root and the shell can use su. */
     myuid = getuid();
@@ -54,18 +76,41 @@ int main(int argc, char **argv)
     if(argc < 2) {
         uid = gid = 0;
     } else {
-        pw = getpwnam(argv[1]);
+        user = strtok(argv[1], ".");
 
-        if(pw == 0) {
-            uid = gid = atoi(argv[1]);
-        } else {
-            uid = pw->pw_uid;
-            gid = pw->pw_gid;
+        if(user != NULL) {
+            uid = parse_uid(user);
+
+            if((group = strtok(NULL, ",")) != NULL) {
+                gid = parse_gid(group);
+
+                memset(supp_gids, 0, sizeof(supp_gids));
+                while((group = strtok(NULL, ",")) && (num_gids < NR_SUPP_GIDS)) {
+                    supp_gids[num_gids] = parse_gid(group);
+                    num_gids++;
+                }
+            } else {
+                gid = uid;
+            }
         }
     }
 
-    if(setgid(gid) || setuid(uid)) {
-        fprintf(stderr,"su: permission denied\n");
+    /* set primary gid */
+    if(setgid(gid)) {
+        fprintf(stderr,"su: permission denied setting primary group\n");
+        return 1;
+    }
+
+    /* set supplemental gids, if needed */
+    if(num_gids > 0) {
+        if(setgroups(num_gids, supp_gids)) {
+            fprintf(stderr,"su: permission denied setting supplemental groups\n");
+            return 1;
+        }
+    }
+
+    if(setuid(uid)) {
+        fprintf(stderr,"su: permission denied setting uid\n");
         return 1;
     }
 
