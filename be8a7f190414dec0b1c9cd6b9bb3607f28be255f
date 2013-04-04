@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "TBT1tbz4",
+        "filename": "libc_test/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000234
+      },
+      "writtenOn": "2013-04-04T19:19:27Z",
+      "side": 1,
+      "message": "Actually do you need to put LOCAL_MODULE_TAGS here?",
+      "revId": "be8a7f190414dec0b1c9cd6b9bb3607f28be255f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
