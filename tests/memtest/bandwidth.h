@@ -414,6 +414,11 @@ public:
 
         return true;
     }
+
+protected:
+    char *_buffer;
+
+    static const unsigned int DEFAULT_WRITE_SIZE = 16000;
 };
 
 class WriteStrdBenchmark : public WriteBandwidthBenchmark {
