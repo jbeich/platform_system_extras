@@ -13,7 +13,8 @@ libext4_utils_src_files := \
     uuid.c \
     sha1.c \
     wipe.c \
-    crc16.c
+    crc16.c \
+    ext4_sb.c
 
 #
 # -- All host/targets including windows
@@ -71,6 +72,10 @@ LOCAL_STATIC_LIBRARIES += \
     libsparse_static
 include $(BUILD_STATIC_LIBRARY)
 
+include $(CLEAR_VARS)
+LOCAL_SRC_FILES := ext4_sb.c
+LOCAL_MODULE := libext4_sb
+include $(BUILD_STATIC_LIBRARY)
 
 include $(CLEAR_VARS)
 LOCAL_SRC_FILES := make_ext4fs_main.c
