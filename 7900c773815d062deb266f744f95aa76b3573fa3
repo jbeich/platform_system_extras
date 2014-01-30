@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f2b4c6fd_430b35ad",
+        "filename": "ext4_utils/contents.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1005480
+      },
+      "writtenOn": "2014-01-30T03:11:30Z",
+      "side": 1,
+      "message": "Why sometimes go from __u32 to u32, sometomes to uint32_t, and sometimes from u32 to __u32?",
+      "range": {
+        "startLine": 331,
+        "startChar": 1,
+        "endLine": 331,
+        "endChar": 4
+      },
+      "revId": "7900c773815d062deb266f744f95aa76b3573fa3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
