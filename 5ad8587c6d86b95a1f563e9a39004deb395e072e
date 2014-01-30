@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "52811216_70982167",
+        "filename": "ext4_utils/ext2simg.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1005480
+      },
+      "writtenOn": "2014-01-30T03:37:00Z",
+      "side": 1,
+      "message": "I think the style guide wants\n%\"PRIu64\"  (no spaces)\n\nhttp://google-styleguide.googlecode.com/svn/trunk/cppguide.xml#64-bit_Portability",
+      "range": {
+        "startLine": 90,
+        "startChar": 20,
+        "endLine": 90,
+        "endChar": 31
+      },
+      "revId": "5ad8587c6d86b95a1f563e9a39004deb395e072e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
