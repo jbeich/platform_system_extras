@@ -22,6 +22,30 @@
       "revId": "7900c773815d062deb266f744f95aa76b3573fa3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f2b4c6fd_43fe951b",
+        "filename": "ext4_utils/contents.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2014-01-30T03:42:27Z",
+      "side": 1,
+      "message": "__u32 is the kernel type deliberately chosen to avoid collisions with userspace, and should only be used in a kernel header.  u32 is what the kernel uses internally, and is what I typdef\u0027d myself for use in ext4_utils.  I later regretted that decision, especially for interfaces that are exported to other modules.  ext4_parse_sb is very widely exported, so I switched back to uint32_t to avoid having to clutter the namespace of all callers with u32.",
+      "parentUuid": "f2b4c6fd_430b35ad",
+      "range": {
+        "startLine": 331,
+        "startChar": 1,
+        "endLine": 331,
+        "endChar": 4
+      },
+      "revId": "7900c773815d062deb266f744f95aa76b3573fa3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
