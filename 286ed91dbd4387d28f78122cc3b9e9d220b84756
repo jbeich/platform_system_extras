@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f26f6639_4a3457be",
+        "filename": "ext4_utils/allocate.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 1005480
+      },
+      "writtenOn": "2014-01-30T19:57:01Z",
+      "side": 1,
+      "message": "ext4_allocate_best_fit_paritial()?\nI had to expand the common lines to realize that it was acceptable to return a smaller-than-requested region.",
+      "range": {
+        "startLine": 375,
+        "startChar": 22,
+        "endLine": 375,
+        "endChar": 48
+      },
+      "revId": "286ed91dbd4387d28f78122cc3b9e9d220b84756",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
