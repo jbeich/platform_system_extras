@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d29502be_417756a7",
+        "filename": "tests/binder/driverinterface/binderDriverInterfaceTest.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2014-02-07T05:10:23Z",
+      "side": 1,
+      "message": "remove",
+      "revId": "4647aa63d0c5b84a6f94ca51877bd5fc733d4c52",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
