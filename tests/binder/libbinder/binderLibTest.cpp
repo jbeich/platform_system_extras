@@ -23,6 +23,9 @@
 
 #include <gtest/gtest.h>
 
+#define private public
+#include <binder/Parcel.h>
+#undef private
 #include <binder/Binder.h>
 #include <binder/IBinder.h>
 #include <binder/IPCThreadState.h>
@@ -670,6 +673,59 @@ TEST_F(BinderLibTest, PromoteRemote) {
 
     ret = server->transact(BINDER_LIB_TEST_PROMOTE_WEAK_REF_TRANSACTION, data, &reply);
     EXPECT_GE(ret, 0);
+}
+
+TEST_F(BinderLibTest, BadObjOffset) {
+    status_t ret;
+    sp<TestDeathRecipient> testDeathRecipient = new TestDeathRecipient();
+
+    {
+        sp<IBinder> server = addServer();
+        ASSERT_TRUE(server != NULL);
+        ret = server->linkToDeath(testDeathRecipient);
+        EXPECT_EQ(NO_ERROR, ret);
+        {
+            Parcel data, reply;
+            struct flat_binder_object *fb1, *fb2;
+            BinderLibTestBundle datai;
+            ssize_t overlapOffset = -4;
+
+            data.writeInt32(1);
+            data.writeStrongBinder(server);
+            data.writeInt32(BINDER_LIB_TEST_NOP_TRANSACTION);
+            datai.appendTo(&data);
+            data.writeStrongBinder(server);
+
+            EXPECT_EQ(4, data.mObjects[0]);
+            fb1 = (struct flat_binder_object *)(data.mData + 4);
+            fb2 = (struct flat_binder_object *)(data.mData + 4 + overlapOffset);
+            data.mObjects[1] = data.mObjects[0] + overlapOffset;
+            fb2->type = fb1->type;
+            fb2->handle = fb1->handle;
+            EXPECT_EQ(fb1->type, fb2->type);
+            EXPECT_EQ(fb1->handle, fb2->handle);
+
+            ret = server->transact(BINDER_LIB_TEST_INDIRECT_TRANSACTION, data, &reply);
+            /* Returns BAD_VALUE (-22) if only user-space is fixed,
+             * DEAD_OBJECT (-32) if target crashes and FAILED_TRANSACTION
+             * if the driver rejects the invalid object.
+             */
+            EXPECT_EQ((status_t)FAILED_TRANSACTION, ret);
+        }
+        {
+            Parcel data, reply;
+            ret = server->transact(BINDER_LIB_TEST_NOP_TRANSACTION, data, &reply);
+            EXPECT_EQ(NO_ERROR, ret);
+        }
+        {
+            Parcel data, reply;
+            ret = server->transact(BINDER_LIB_TEST_DELAYED_EXIT_TRANSACTION, data, &reply);
+            EXPECT_EQ(NO_ERROR, ret);
+        }
+    }
+    IPCThreadState::self()->flushCommands();
+    ret = testDeathRecipient->waitEvent(5);
+    EXPECT_EQ(NO_ERROR, ret); /* Fails if kernel bug causes a strong reference leak */
 }
 
 class BinderLibTestService : public BBinder
