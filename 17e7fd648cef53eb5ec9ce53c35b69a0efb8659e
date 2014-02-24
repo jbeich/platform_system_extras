@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5cf6894a_421bb459",
+        "filename": "tests/netd/dns_responder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1005480
+      },
+      "writtenOn": "2014-02-24T20:13:19Z",
+      "side": 1,
+      "message": "I\u0027m not sure the gTest should ever exit().\n\nIsn\u0027t there a better test failure like \"incomplete\"?",
+      "range": {
+        "startLine": 75,
+        "startChar": 8,
+        "endLine": 75,
+        "endChar": 12
+      },
+      "revId": "17e7fd648cef53eb5ec9ce53c35b69a0efb8659e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1cf89137_203784c1",
+        "filename": "tests/netd/resolver_test.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1005480
+      },
+      "writtenOn": "2014-02-24T20:13:19Z",
+      "side": 1,
+      "message": "Android\u0027s bionic doesn\u0027t have endhostent(). But then again, doesn\u0027t bionic have some magic internal caching that handles all the connection stuff which would make endhostent()\u0027s work of closing descriptors unnecessary?",
+      "range": {
+        "startLine": 158,
+        "startChar": 7,
+        "endLine": 158,
+        "endChar": 44
+      },
+      "revId": "17e7fd648cef53eb5ec9ce53c35b69a0efb8659e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
