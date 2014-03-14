@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1cd6d13f_b086b650",
+        "filename": "ksmutils/ksminfo.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 452,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2014-03-14T20:33:08Z",
+      "side": 1,
+      "message": "There\u0027s still no guarantee that pid is a int32_t type, and there is no printf format that explictly selects the pid_t type.  You should cast pid to the type you are using to print.  int or long or int32_t should work fine.",
+      "revId": "991a9f59517c389fcb2e3257c2925c7f49081886",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
