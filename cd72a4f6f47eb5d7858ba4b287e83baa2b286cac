@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5cbf69de_60ad087f",
+        "filename": "ksmutils/ksminfo.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 452,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2014-03-14T20:07:10Z",
+      "side": 1,
+      "message": "maybe you should cast pid to uint32_t if you\u0027re going to print it with PRIu32",
+      "revId": "cd72a4f6f47eb5d7858ba4b287e83baa2b286cac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
