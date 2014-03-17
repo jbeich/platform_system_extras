@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1cd6d13f_811c8ac7",
+        "filename": "librank/librank.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2014-03-17T21:40:22Z",
+      "side": 1,
+      "message": "asking for troubles?",
+      "range": {
+        "startLine": 332,
+        "startChar": 16,
+        "endLine": 332,
+        "endChar": 37
+      },
+      "revId": "986020c69690260ef7e1a897401073137f8f76d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
