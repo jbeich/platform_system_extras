@@ -22,6 +22,30 @@
       "revId": "da25e2082a8926c0ad4ac5d34e68a9c15f9692d2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bc6a2564_aab42ffb",
+        "filename": "tests/iptables/qtaguid/socketTag.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2014-03-20T22:57:54Z",
+      "side": 1,
+      "message": "Good catch, this is a typo finger-movement inherited from line 203.\n\nThis triggers another thought. Testing on build/runtime is an issue since doCtlrCommand has no __format__ checking. I will add it rather than relying on wetware to confirm/catch them correctly. This has caught another dozen problems as a result!",
+      "parentUuid": "dc4d1911_64689b4e",
+      "range": {
+        "startLine": 265,
+        "startChar": 41,
+        "endLine": 265,
+        "endChar": 47
+      },
+      "revId": "da25e2082a8926c0ad4ac5d34e68a9c15f9692d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
