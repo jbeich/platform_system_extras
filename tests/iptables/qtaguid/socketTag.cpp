@@ -23,6 +23,7 @@
 #include <assert.h>
 #include <errno.h>
 #include <fcntl.h>
+#include <inttypes.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <gtest/gtest.h>
@@ -100,7 +101,7 @@ int SockInfo::setup(uint64_t tag) {
         testPrintE("socket creation failed: %s", strerror(errno));
         return -1;
     }
-    if (doCtrlCommand("t %d %llu", fd, tag) < 0) {
+    if (doCtrlCommand("t %d %" PRIu64, fd, tag) < 0) {
         testPrintE("socket setup: failed to tag");
         close(fd);
         return -1;
@@ -151,11 +152,11 @@ bool SockInfo::checkTag(uint64_t acct_tag, uid_t uid) {
 
     if (addr) {
         assert(sizeof(void*) == sizeof(long int));  // Why does %p use 0x? grrr. %lx.
-        asprintf(&match_template, "sock=%lx %s", addr, "tag=0x%llx (uid=%u)");
+        asprintf(&match_template, "sock=%" PRIxPTR " %s", (uintptr_t)addr, "tag=0x%" PRIx64" (uid=%u)");
     }
     else {
         /* Allocate for symmetry */
-        asprintf(&match_template, "%s", " tag=0x%llx (uid=%u)");
+        asprintf(&match_template, "%s", " tag=0x%" PRIx64 " (uid=%u)");
     }
 
     full_tag = acct_tag | uid;
@@ -167,8 +168,8 @@ bool SockInfo::checkTag(uint64_t acct_tag, uid_t uid) {
     if (pos && !addr) {
         assert(sizeof(void*) == sizeof(long int));  // Why does %p use 0x? grrr. %lx.
         res = sscanf(pos - strlen("sock=1234abcd"),
-                     "sock=%lx tag=0x%llx (uid=%lu) pid=%u f_count=%lu",
-                     &addr, &k_tag, &k_uid, &dummy_pid, &dummy_count );
+                     "sock=%" SCNxPTR " tag=0x%" SCNx64 " (uid=%" SCNu32 ") pid=%u f_count=%lu",
+                     (uintptr_t *)&addr, &k_tag, &k_uid, &dummy_pid, &dummy_count );
         if (!(res == 5 && k_tag == full_tag && k_uid == uid)) {
             testPrintE("Unable to read sock addr res=%d", res);
            addr = 0;
@@ -199,8 +200,10 @@ protected:
         valid_tag2 = ((uint64_t)my_pid << 48) | ((uint64_t)testRand() << 32);
         valid_tag2 &= 0xffffff00ffffffffllu;  // Leave some room to make counts visible.
         testPrintI("* start: pid=%lu uid=%lu uid1=0x%lx/%lu uid2=0x%lx/%lu"
-                   " tag1=0x%llx/%llu tag2=0x%llx/%llu",
-                   my_pid, my_uid, fake_uid, fake_uid, fake_uid2, fake_uid2,
+                   " tag1=0x%" PRIx64 "/%" PRIu64 " tag2=0x%" PRIx64 "/% "PRIu64,
+                   (unsigned long)my_pid, (unsigned long)my_uid,
+                   (unsigned long)fake_uid, (unsigned long)fake_uid,
+                   (unsigned long)fake_uid2, (unsigned long)fake_uid2,
                    valid_tag1, valid_tag1, valid_tag2, valid_tag2);
         max_uint_tag = 0xffffffff00000000llu;
         max_uint_tag = 1llu << 63 | (((uint64_t)my_pid << 48) ^ max_uint_tag);
@@ -259,14 +262,14 @@ TEST_F(SocketTaggingTest, TagData) {
     testPrintI("tag quota reach limit");
     for (int cnt = 0; cnt < max_tags; cnt++ ) {
         uint64_t tag = valid_tag2 + ((uint64_t)cnt << 32);
-        EXPECT_GE(doCtrlCommand("t %d %llu %u", sock0.fd, tag , fake_uid2), 0)
+        EXPECT_GE(doCtrlCommand("t %d %" PRIx64 " %u", sock0.fd, tag , fake_uid2), 0)
             << "Tagging within limit failed";
         EXPECT_TRUE(sock0.checkTag(tag, fake_uid2))<<  "Unexpected results: tag not found";
     }
 
     testPrintI("tag quota go over limit");
     uint64_t new_tag = valid_tag2 + ((uint64_t)max_tags << 32);
-    EXPECT_LT(doCtrlCommand("t %d %llu %u", sock0.fd, new_tag , fake_uid2), 0);
+    EXPECT_LT(doCtrlCommand("t %d %" PRIu64 " %u", sock0.fd, new_tag, fake_uid2), 0);
     EXPECT_TRUE(sock0.checkTag(valid_tag2 + (((uint64_t)max_tags - 1) << 32),
                                fake_uid2)) << "Unexpected results: tag not found";
 
@@ -277,22 +280,22 @@ TEST_F(SocketTaggingTest, TagData) {
 
     testPrintI("tag after untag should not free up max tags");
     uint64_t new_tag2 = valid_tag2 + ((uint64_t)max_tags << 32);
-    EXPECT_LT(doCtrlCommand("t %d %llu %u", sock0.fd, new_tag2 , fake_uid2), 0);
+    EXPECT_LT(doCtrlCommand("t %d %" PRIu64 " %u", sock0.fd, new_tag2 , fake_uid2), 0);
     EXPECT_FALSE(sock0.checkTag(valid_tag2 + ((uint64_t)max_tags << 32), fake_uid2))
         << "Tag should not be there";
 
     testPrintI("delete one tag");
     uint64_t new_tag3 = valid_tag2 + (((uint64_t)max_tags / 2) << 32);
-    EXPECT_GE(doCtrlCommand("d %llu %u", new_tag3, fake_uid2), 0);
+    EXPECT_GE(doCtrlCommand("d %" PRIu64 " %u", new_tag3, fake_uid2), 0);
 
     testPrintI("2 tags after 1 delete pass/fail");
     uint64_t new_tag4;
     new_tag4 = valid_tag2 + (((uint64_t)max_tags + 1 ) << 32);
-    EXPECT_GE(doCtrlCommand("t %d %llu %u", sock0.fd, new_tag4 , fake_uid2), 0);
+    EXPECT_GE(doCtrlCommand("t %d %" PRIu64 " %u", sock0.fd, new_tag4 , fake_uid2), 0);
     EXPECT_TRUE(sock0.checkTag(valid_tag2 + (((uint64_t)max_tags + 1) << 32), fake_uid2))
         << "Tag not found";
     new_tag4 = valid_tag2 + (((uint64_t)max_tags + 2 ) << 32);
-    EXPECT_LT(doCtrlCommand("t %d %llu %u", sock0.fd, new_tag4 , fake_uid2), 0);
+    EXPECT_LT(doCtrlCommand("t %d %" PRIu64 " %u", sock0.fd, new_tag4 , fake_uid2), 0);
     EXPECT_FALSE(sock0.checkTag(valid_tag2 + (((uint64_t)max_tags + 2) << 32), fake_uid2))
         << "Tag should not be there";
 
@@ -319,13 +322,13 @@ TEST_F(SocketTaggingTest, NoTagNoUid) {
 
 TEST_F(SocketTaggingTest, InvalidTagFail) {
     // Invalid tag. Expected failure
-    EXPECT_LE(doCtrlCommand("t %d %llu", sock0.fd, invalid_tag1), 0);
+    EXPECT_LE(doCtrlCommand("t %d %" PRIu64, sock0.fd, invalid_tag1), 0);
     ASSERT_FALSE(sock0.checkTag(invalid_tag1, my_uid)) << "Tag should not be there";
 }
 
 TEST_F(SocketTaggingTest, ValidTagWithNoUid) {
     // Valid tag with no uid
-    EXPECT_GE(doCtrlCommand("t %d %llu", sock0.fd, valid_tag1), 0);
+    EXPECT_GE(doCtrlCommand("t %d %" PRIu64, sock0.fd, valid_tag1), 0);
     EXPECT_TRUE(sock0.checkTag(valid_tag1, my_uid)) << "Tag not found";
 }
 
