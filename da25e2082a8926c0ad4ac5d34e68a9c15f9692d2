@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dc4d1911_64689b4e",
+        "filename": "tests/iptables/qtaguid/socketTag.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1005480
+      },
+      "writtenOn": "2014-03-20T21:19:33Z",
+      "side": 1,
+      "message": "seems wrong. Did you test it?\nPRIu64",
+      "range": {
+        "startLine": 265,
+        "startChar": 41,
+        "endLine": 265,
+        "endChar": 47
+      },
+      "revId": "da25e2082a8926c0ad4ac5d34e68a9c15f9692d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
