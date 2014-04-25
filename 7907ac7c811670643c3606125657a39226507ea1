@@ -16,6 +16,24 @@
       "revId": "7907ac7c811670643c3606125657a39226507ea1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "05767712_a953199a",
+        "filename": "ext4_utils/make_ext4fs.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1010111
+      },
+      "writtenOn": "2014-04-25T19:48:57Z",
+      "side": 1,
+      "message": "At present, yes, e.g. asec image lost+found directories will be labeled differently than /cache/lost+found.  Depends on the policy file_contexts configuration; could map them all to a single context there, but this gives us the flexibility to distinguish or not as desired in policy.",
+      "parentUuid": "25a61bd4_825a5c08",
+      "revId": "7907ac7c811670643c3606125657a39226507ea1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
