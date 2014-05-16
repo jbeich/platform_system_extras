@@ -5,14 +5,14 @@
 static void *
 thread1_func(void* arg)
 {
-    printf("Thread 1 (arg=%d tid=%d) entered.\n", (unsigned)arg, gettid());
+    printf("Thread 1 (arg=%p tid=%d) entered.\n", arg, gettid());
     return 0;
 }
 
 static void *
 thread2_func(void* arg)
 {
-    printf("thread 2 (arg=%d tid=%d) entered.\n", (unsigned)arg, gettid());
+    printf("thread 2 (arg=%p tid=%d) entered.\n", arg, gettid());
     return 1;
 }
 
