@@ -44,7 +44,7 @@ thread2_func(void* arg)
     void* result;
 
     pthread_join(t1, &result);
-    printf("thread2 received code %08x from thread1\n", (int)result);
+    printf("thread2 received code %p from thread1\n", result);
     return NULL;
 }
 
@@ -56,7 +56,7 @@ thread3_func(void* arg)
     void* result;
 
     pthread_join(t1, &result);
-    printf("thread3 received code %08x from thread1\n", (int)result);
+    printf("thread3 received code %p from thread1\n", result);
     return NULL;
 }
 

@@ -41,7 +41,7 @@ static int g_ok3 = 0;
 static void
 cleanup1( void* arg )
 {
-    if ((unsigned)arg != MAGIC1)
+    if ((unsigned long)arg != MAGIC1)
         g_ok1 = -1;
     else
         g_ok1 = +1;
@@ -50,7 +50,7 @@ cleanup1( void* arg )
 static void
 cleanup2( void* arg )
 {
-    if ((unsigned)arg != MAGIC2) {
+    if ((unsigned long)arg != MAGIC2) {
         g_ok2 = -1;
     } else
         g_ok2 = +1;
@@ -59,7 +59,7 @@ cleanup2( void* arg )
 static void
 cleanup3( void* arg )
 {
-    if ((unsigned)arg != MAGIC3)
+    if ((unsigned long)arg != MAGIC3)
         g_ok3 = -1;
     else
         g_ok3 = +1;
@@ -83,7 +83,7 @@ thread1_func( void* arg )
     return NULL;
 }
 
-static int test( int do_exit )
+static int test( long do_exit )
 {
     pthread_t t;
 
@@ -127,8 +127,8 @@ static int test( int do_exit )
 
 int main( void )
 {
-    test(0);
-    test(1);
+    test(0l);
+    test(1l);
     printf("OK\n");
     return 0;
 }

@@ -100,7 +100,6 @@ include $(CLEAR_VARS)
 LOCAL_MODULE := test_static_executable_destructor
 LOCAL_SRC_FILES := common/test_executable_destructor.c
 LOCAL_MODULE_TAGS := tests
-LOCAL_LDFLAGS := -static
 include $(BUILD_HOST_EXECUTABLE)
 
 # The 'test_dlopen_null' tests requires specific linker flags
