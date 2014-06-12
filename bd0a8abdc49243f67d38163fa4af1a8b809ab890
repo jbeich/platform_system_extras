@@ -16,6 +16,24 @@
       "revId": "bd0a8abdc49243f67d38163fa4af1a8b809ab890",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "df74307d_44fe7817",
+        "filename": "ext4_utils/make_ext4fs.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 1000411
+      },
+      "writtenOn": "2014-06-12T20:52:32Z",
+      "side": 1,
+      "message": "I\u0027ll fix it, thanks.",
+      "parentUuid": "7f6424c8_ce1aa342",
+      "revId": "bd0a8abdc49243f67d38163fa4af1a8b809ab890",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
