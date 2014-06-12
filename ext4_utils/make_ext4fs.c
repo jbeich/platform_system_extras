@@ -398,6 +398,13 @@ int make_ext4fs_sparse_fd(int fd, long long len,
 int make_ext4fs(const char *filename, long long len,
                 const char *mountpoint, struct selabel_handle *sehnd)
 {
+	return make_ext4fs_extra(filename, len, mountpoint, sehnd, 1, 0);
+}
+
+int make_ext4fs_extra(const char *filename, long long len,
+                      const char *mountpoint, struct selabel_handle *sehnd,
+		              int wipe, int verbose)
+{
 	int fd;
 	int status;
 
@@ -410,7 +417,7 @@ int make_ext4fs(const char *filename, long long len,
 		return EXIT_FAILURE;
 	}
 
-	status = make_ext4fs_internal(fd, NULL, mountpoint, NULL, 0, 0, 0, 1, sehnd, 0);
+	status = make_ext4fs_internal(fd, NULL, mountpoint, NULL, 0, 0, 0, wipe, sehnd, verbose);
 	close(fd);
 
 	return status;
