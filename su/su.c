@@ -85,6 +85,20 @@ void extract_uidgids(const char *uidgids, uid_t *uid, gid_t *gid, gid_t *gids,
     free(clobberablegids);
 }
 
+char **transform_cmd(char **args, int *argc, char **realargs)
+{
+    int i = 0;
+    int count = *argc;
+    for (i = 0; i < count; i++) {
+        while ((realargs[i + *argc - count] = strtok(args[i], " ")) != NULL) {
+            (*argc)++;
+            args[i] = NULL;
+        }
+        (*argc)--;
+    }
+    return realargs;
+}
+
 /*
  * SU can be given a specific command to exec. UID _must_ be
  * specified for this (ie argc => 3).
@@ -104,6 +118,11 @@ int main(int argc, char **argv)
     struct passwd *pw;
     uid_t uid, myuid;
     gid_t gid, gids[10];
+
+    /* Support cmd like: su -c 'ls -all', 64 args at most. */
+    char *realargs[argc + 64];
+    memset(realargs, 0, sizeof(realargs));
+    argv = transform_cmd(argv, &argc, realargs);
 
     /* Until we have something better, only root and the shell can use su. */
     myuid = getuid();
