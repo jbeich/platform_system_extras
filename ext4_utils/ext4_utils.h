@@ -145,16 +145,6 @@ u64 parse_num(const char *arg);
 void ext4_parse_sb_info(struct ext4_super_block *sb);
 u16 ext4_crc16(u16 crc_in, const void *buf, int size);
 
-typedef void (*fs_config_func_t)(const char *path, int dir, unsigned *uid, unsigned *gid,
-        unsigned *mode, uint64_t *capabilities);
-
-struct selabel_handle;
-
-int make_ext4fs_internal(int fd, const char *directory,
-                         const char *mountpoint, fs_config_func_t fs_config_func, int gzip,
-                         int sparse, int crc, int wipe,
-                         struct selabel_handle *sehnd, int verbose);
-
 #ifdef __cplusplus
 }
 #endif

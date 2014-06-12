@@ -17,6 +17,8 @@
 #ifndef _MAKE_EXT4FS_H_
 #define _MAKE_EXT4FS_H_
 
+#include <inttypes.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -25,8 +27,17 @@ struct selabel_handle;
 
 int make_ext4fs(const char *filename, long long len,
                 const char *mountpoint, struct selabel_handle *sehnd);
+
 int make_ext4fs_sparse_fd(int fd, long long len,
                 const char *mountpoint, struct selabel_handle *sehnd);
+
+typedef void (*fs_config_func_t)(const char *path, int dir, unsigned *uid, unsigned *gid,
+        unsigned *mode, uint64_t *capabilities);
+
+int make_ext4fs_internal(int fd, const char *directory,
+                         const char *mountpoint, fs_config_func_t fs_config_func, int gzip,
+                         int sparse, int crc, int wipe,
+                         struct selabel_handle *sehnd, int verbose);
 
 #ifdef __cplusplus
 }
