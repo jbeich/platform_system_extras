@@ -16,6 +16,24 @@
       "revId": "d6c0e17d4fc53db1d123134866d8ec610288221a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "24446156_f5e7104c",
+        "filename": "libpagemap/pm_process.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2014-06-17T18:23:53Z",
+      "side": 1,
+      "message": "firstpage is divided down from unsigned long low, so there is no point making it uint64_t without a much larger change to use uint64_t for all virtual addresses.  I plan to fix that in a later patch.",
+      "parentUuid": "c4046504_a5f04470",
+      "revId": "d6c0e17d4fc53db1d123134866d8ec610288221a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
