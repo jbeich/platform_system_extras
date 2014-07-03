@@ -127,7 +127,8 @@ static u32 build_default_directory_structure(const char *dir_path,
    if the image were mounted at the specified mount point */
 static u32 build_directory_structure(const char *full_path, const char *dir_path,
 		u32 dir_inode, fs_config_func_t fs_config_func,
-		struct selabel_handle *sehnd, int verbose)
+		struct selabel_handle *sehnd, int verbose,
+		int preserve_ownership)
 {
 	int entries = 0;
 	struct dentry *dentries;
@@ -198,6 +199,12 @@ static u32 build_directory_structure(const char *full_path, const char *dir_path
 			error("can't set android permissions - built without android support");
 #endif
 		}
+
+		if (preserve_ownership) {
+			dentries[i].uid = stat.st_uid;
+			dentries[i].gid = stat.st_gid;
+		}
+
 #ifndef USE_MINGW
 		if (sehnd) {
 			if (selabel_lookup(sehnd, &dentries[i].secon, dentries[i].path, stat.st_mode) < 0) {
@@ -274,7 +281,8 @@ static u32 build_directory_structure(const char *full_path, const char *dir_path
 			if (ret < 0)
 				critical_error_errno("asprintf");
 			entry_inode = build_directory_structure(subdir_full_path,
-					subdir_dir_path, inode, fs_config_func, sehnd, verbose);
+					subdir_dir_path, inode, fs_config_func,
+					sehnd, verbose, preserve_ownership);
 			free(subdir_full_path);
 			free(subdir_dir_path);
 		} else if (dentries[i].file_type == EXT4_FT_SYMLINK) {
@@ -392,7 +400,7 @@ int make_ext4fs_sparse_fd(int fd, long long len,
 	reset_ext4fs_info();
 	info.len = len;
 
-	return make_ext4fs_internal(fd, NULL, mountpoint, NULL, 0, 1, 0, 0, sehnd, 0);
+	return make_ext4fs_internal(fd, NULL, mountpoint, NULL, 0, 1, 0, 0, sehnd, 0, 0);
 }
 
 int make_ext4fs(const char *filename, long long len,
@@ -410,7 +418,7 @@ int make_ext4fs(const char *filename, long long len,
 		return EXIT_FAILURE;
 	}
 
-	status = make_ext4fs_internal(fd, NULL, mountpoint, NULL, 0, 0, 0, 1, sehnd, 0);
+	status = make_ext4fs_internal(fd, NULL, mountpoint, NULL, 0, 0, 0, 1, sehnd, 0, 0);
 	close(fd);
 
 	return status;
@@ -479,7 +487,8 @@ static char *canonicalize_rel_slashes(const char *str)
 int make_ext4fs_internal(int fd, const char *_directory,
                          const char *_mountpoint, fs_config_func_t fs_config_func, int gzip,
                          int sparse, int crc, int wipe,
-                         struct selabel_handle *sehnd, int verbose)
+                         struct selabel_handle *sehnd, int verbose,
+                         int preserve_ownership)
 {
 	u32 root_inode_num;
 	u16 root_mode;
@@ -588,7 +597,7 @@ int make_ext4fs_internal(int fd, const char *_directory,
 #else
 	if (directory)
 		root_inode_num = build_directory_structure(directory, mountpoint, 0,
-                        fs_config_func, sehnd, verbose);
+                        fs_config_func, sehnd, verbose, preserve_ownership);
 	else
 		root_inode_num = build_default_directory_structure(mountpoint, sehnd);
 #endif
