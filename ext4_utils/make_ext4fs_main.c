@@ -51,7 +51,7 @@ static void usage(char *path)
 {
 	fprintf(stderr, "%s [ -l <len> ] [ -j <journal size> ] [ -b <block_size> ]\n", basename(path));
 	fprintf(stderr, "    [ -g <blocks per group> ] [ -i <inodes> ] [ -I <inode size> ]\n");
-	fprintf(stderr, "    [ -L <label> ] [ -f ] [ -a <android mountpoint> ]\n");
+	fprintf(stderr, "    [ -L <label> ] [ -f ] [ -a <android mountpoint> | -p ]\n");
 	fprintf(stderr, "    [ -S file_contexts ]\n");
 	fprintf(stderr, "    [ -z | -s ] [ -w ] [ -c ] [ -J ] [ -v ]\n");
 	fprintf(stderr, "    <filename> [<directory>]\n");
@@ -71,12 +71,13 @@ int main(int argc, char **argv)
 	int fd;
 	int exitcode;
 	int verbose = 0;
+	int preserve_ownership = 0;
 	struct selabel_handle *sehnd = NULL;
 #ifndef USE_MINGW
 	struct selinux_opt seopts[] = { { SELABEL_OPT_PATH, "" } };
 #endif
 
-	while ((opt = getopt(argc, argv, "l:j:b:g:i:I:L:a:S:fwzJsctv")) != -1) {
+	while ((opt = getopt(argc, argv, "l:j:b:g:i:I:L:a:S:fwzJsctvp")) != -1) {
 		switch (opt) {
 		case 'l':
 			info.len = parse_num(optarg);
@@ -143,11 +144,21 @@ int main(int argc, char **argv)
 		case 'v':
 			verbose = 1;
 			break;
+		case 'p':
+			preserve_ownership = 1;
+			break;
 		default: /* '?' */
 			usage(argv[0]);
 			exit(EXIT_FAILURE);
 		}
 	}
+
+#ifdef ANDROID
+	if (fs_config_func && preserve_ownership) {
+		fprintf(stderr, "can't specify -a and -p together\n");
+		exit(EXIT_FAILURE);
+	}
+#endif
 
 #if !defined(HOST)
 	// Use only if -S option not requested
@@ -201,7 +212,7 @@ int main(int argc, char **argv)
 	}
 
 	exitcode = make_ext4fs_internal(fd, directory, mountpoint, fs_config_func, gzip,
-			sparse, crc, wipe, sehnd, verbose);
+			sparse, crc, wipe, sehnd, verbose, preserve_ownership);
 	close(fd);
 	if (exitcode && strcmp(filename, "-"))
 		unlink(filename);
