@@ -87,14 +87,10 @@ public class BootSignature extends ASN1Object
         return signable;
     }
 
-    public byte[] sign(byte[] image, PrivateKey key) throws Exception {
+    public void sign(byte[] image, PrivateKey key) throws Exception {
         byte[] signable = generateSignableImage(image);
         byte[] signature = Utils.sign(key, signable);
-        byte[] signed = Arrays.copyOf(image, image.length + signature.length);
-        for (int i=0; i < signature.length; i++) {
-            signed[i+image.length] = signature[i];
-        }
-        return signed;
+        setSignature(signature);
     }
 
     public ASN1Primitive toASN1Primitive() {
@@ -113,8 +109,15 @@ public class BootSignature extends ASN1Object
         byte[] image = Utils.read(imagePath);
         BootSignature bootsig = new BootSignature(target, image.length);
         PrivateKey key = Utils.loadPEMPrivateKeyFromFile(keyPath);
-        byte[] signature = bootsig.sign(image, key);
-        Utils.write(signature, outPath);
+        bootsig.sign(image, key);
+        byte[] signature = bootsig.getEncoded();
+
+        byte[] signed = Arrays.copyOf(image, image.length + signature.length);
+        for (int i=0; i < signature.length; i++) {
+            signed[i+image.length] = signature[i];
+        }
+
+        Utils.write(signed, outPath);
     }
 
     // java -cp ../../../out/host/common/obj/JAVA_LIBRARIES/AndroidVerifiedBootSigner_intermediates/classes/ com.android.verity.AndroidVerifiedBootSigner boot ../../../out/target/product/flounder/boot.img ../../../build/target/product/security/verity_private_dev_key /tmp/boot.img.signed
