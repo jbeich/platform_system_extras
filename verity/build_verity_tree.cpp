@@ -125,7 +125,7 @@ int main(int argc, char **argv)
     size_t salt_size = 0;
     bool sparse = false;
     size_t block_size = 4096;
-    size_t calculate_size = 0;
+    uint64_t calculate_size = 0;
 
     while (1) {
         const static struct option long_options[] = {
@@ -171,7 +171,7 @@ int main(int argc, char **argv)
             sparse = true;
             break;
         case 's':
-            calculate_size = strtoul(optarg, NULL, 0);
+            calculate_size = strtoull(optarg, NULL, 0);
             break;
         case '?':
             usage();
