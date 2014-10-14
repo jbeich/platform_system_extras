@@ -126,7 +126,7 @@ int main(int argc, char **argv)
     size_t salt_size = 0;
     bool sparse = false;
     size_t block_size = 4096;
-    size_t calculate_size = 0;
+    uint64_t calculate_size = 0;
 
     while (1) {
         const static struct option long_options[] = {
@@ -135,6 +135,7 @@ int main(int argc, char **argv)
             {"help", no_argument, 0, 'h'},
             {"sparse", no_argument, 0, 'S'},
             {"verity-size", required_argument, 0, 's'},
+            {NULL, 0, 0, 0}
         };
         int c = getopt_long(argc, argv, "a:A:hSs:", long_options, NULL);
         if (c < 0) {
@@ -172,7 +173,13 @@ int main(int argc, char **argv)
             sparse = true;
             break;
         case 's':
-            calculate_size = strtoul(optarg, NULL, 0);
+            char* endptr;
+            errno = 0;
+            calculate_size = strtoull(optarg, &endptr, 0);
+            if (optarg[0] == '\0' || *endptr != '\0' ||
+                    (errno == ERANGE && calculate_size == ULLONG_MAX)) {
+                FATAL("invalid value of verity-size\n");
+            }
             break;
         case '?':
             usage();
@@ -226,7 +233,7 @@ int main(int argc, char **argv)
             verity_blocks += level_blocks;
         } while (level_blocks > 1);
 
-        printf("%zu\n", verity_blocks * block_size);
+        printf("%"PRIu64"\n", (uint64_t)verity_blocks * block_size);
         return 0;
     }
 
