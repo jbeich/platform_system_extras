@@ -62,7 +62,6 @@ endef
 
 sources := \
     common/test_pthread_mutex.c \
-    common/test_pthread_rwlock.c \
 
 # _XOPEN_SOURCE=600 is needed to get pthread_mutexattr_settype() on GLibc
 #
