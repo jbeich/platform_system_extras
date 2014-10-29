@@ -77,7 +77,6 @@ $(call device-test, $(sources))
 # Second, the Bionic-specific tests
 
 sources :=  \
-    bionic/test_cond.c \
     bionic/test_pthread_cond.c \
     bionic/test_setjmp.c \
 
