@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "55abca56_f96a7f58",
+        "filename": "tests/bionic/libc/common/test_pthread_mutex.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1041813
+      },
+      "writtenOn": "2014-10-29T16:21:17Z",
+      "side": 0,
+      "message": "I am confused here:(, according to the description from here:http://pubs.opengroup.org/onlinepubs/009695399/functions/pthread_mutex_lock.html, seems EBUSY can only be reported by pthread_mutex_trylock(), and EDEADLK can only be reported by pthread_mutex_lock(). So I think the change here is right https://android-review.googlesource.com/#/c/112073. But from here seems pthread_mutex_trylock() can report EDEADLK as well. I misunderstood the pthread_mutex_lock.html link above?",
+      "parentUuid": "b5396603_893da158",
+      "revId": "a24d452af19456c3104b0f3d1f8de26f27591777",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b5396603_89b2c18d",
         "filename": "tests/bionic/libc/common/test_pthread_mutex.c",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2014-10-28T17:26:31Z",
       "side": 0,
       "message": "yes, we\u0027re missing a test here, but, no, this is not a useful test. this test just shows that we define PTHREAD_PROCESS_SHARED and that it doesn\u0027t break the regular behavior. it doesn\u0027t check that it actually _does_ anything. we\u0027d need a test with fork(2) to actually do that.",
+      "revId": "a24d452af19456c3104b0f3d1f8de26f27591777",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "354d76af_451c2090",
+        "filename": "tests/bionic/libc/common/test_pthread_mutex.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1041813
+      },
+      "writtenOn": "2014-10-29T16:21:17Z",
+      "side": 0,
+      "message": "do we have existing examples that uses fork(2) to do the test for PTHREAD_PROCESS_SHARED?",
+      "parentUuid": "b5396603_89b2c18d",
       "revId": "a24d452af19456c3104b0f3d1f8de26f27591777",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
