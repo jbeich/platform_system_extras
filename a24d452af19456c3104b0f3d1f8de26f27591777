@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "f5fd9e73_f21368c9",
+        "filename": "tests/bionic/libc/common/test_pthread_mutex.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2014-10-29T18:11:43Z",
+      "side": 0,
+      "message": "yeah, sorry, my \"d\u0027oh\" comment just meant \"not only did our predecessors get the code wrong, they got their test wrong too\". (in particular, anywhere you\u0027re saying \"glibc is wrong\" you probably want to get a second or third opinion. even when it _is_ wrong, it may be fixed in a newer version than the one you\u0027re using. and even when it\u0027s both wrong and unfixed, the fact that it\u0027s what everyone else is using means you might want to think seriously about just doing the same anyway.)",
+      "parentUuid": "55abca56_f96a7f58",
+      "revId": "a24d452af19456c3104b0f3d1f8de26f27591777",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b5396603_89b2c18d",
         "filename": "tests/bionic/libc/common/test_pthread_mutex.c",
         "patchSetId": 1
@@ -66,6 +84,24 @@
       "side": 0,
       "message": "do we have existing examples that uses fork(2) to do the test for PTHREAD_PROCESS_SHARED?",
       "parentUuid": "b5396603_89b2c18d",
+      "revId": "a24d452af19456c3104b0f3d1f8de26f27591777",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "35665637_3d6ad3de",
+        "filename": "tests/bionic/libc/common/test_pthread_mutex.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2014-10-29T18:11:43Z",
+      "side": 0,
+      "message": "no. that\u0027s what i meant by \"we\u0027re missing a test here\".",
+      "parentUuid": "354d76af_451c2090",
       "revId": "a24d452af19456c3104b0f3d1f8de26f27591777",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
