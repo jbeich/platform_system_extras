@@ -75,7 +75,6 @@ $(call device-test, $(sources))
 
 sources :=  \
     bionic/test_cond.c \
-    bionic/test_pthread_cond.c \
 
 $(call device-test, $(sources))
 
