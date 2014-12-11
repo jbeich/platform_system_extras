@@ -129,7 +129,7 @@ public class Utils {
     }
 
     static byte[] sign(PrivateKey privateKey, byte[] input) throws Exception {
-        Signature signer = Signature.getInstance("SHA1withRSA");
+        Signature signer = Signature.getInstance("SHA256withRSA");
         signer.initSign(privateKey);
         signer.update(input);
         return signer.sign();
