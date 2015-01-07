@@ -143,8 +143,12 @@ static u32 build_directory_structure(const char *full_path, const char *dir_path
 	if (full_path) {
 		entries = scandir(full_path, &namelist, filter_dot, (void*)alphasort);
 		if (entries < 0) {
-			error_errno("scandir");
-			return EXT4_ALLOCATE_FAILED;
+			if (errno == ENOMEM)
+				entries = scandir(full_path, &namelist, filter_dot, (void*)alphasort);
+			if (entries < 0) {
+				error_errno("scandir");
+				return EXT4_ALLOCATE_FAILED;
+			}
 		}
 	}
 
