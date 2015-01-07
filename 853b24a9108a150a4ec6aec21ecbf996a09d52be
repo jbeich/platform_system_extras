@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae075951_70ddb024",
+        "filename": "ext4_utils/make_ext4fs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1000411
+      },
+      "writtenOn": "2015-01-07T12:50:01Z",
+      "side": 1,
+      "message": "I\u0027m ok with the change, but I would prefer if you would add a comment right in the source to explain why the scandir() is tried twice (preferably with a link to the glibc bug too). Otherwise, a future maintainer could be tempted to remove it.\n\nIt might also be a good idea to use __GLIBC__ and __GLIBC_MINOR__ to make this even more explicit and avoid the retry on other platforms (e.g. this source file is compiled as part of the emulator right now)",
+      "revId": "853b24a9108a150a4ec6aec21ecbf996a09d52be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
