@@ -53,6 +53,9 @@ NLA_ALIGNTO = 4
 
 ### rtnetlink constants. See include/uapi/linux/rtnetlink.h.
 # Message types.
+RTM_NEWLINK = 16
+RTM_DELLINK = 17
+RTM_GETLINK = 18
 RTM_NEWADDR = 20
 RTM_DELADDR = 21
 RTM_GETADDR = 22
@@ -98,6 +101,8 @@ RTA_UID = 18
 RTAX_MTU = 2
 
 # Data structure formats.
+IfinfoMsg = cstruct.Struct(
+    "IfinfoMsg", "=BBHiII", "family pad type index flags change")
 RTMsg = cstruct.Struct(
     "RTMsg", "=BBBBBBBBI",
     "family dst_len src_len tos table protocol scope type flags")
@@ -147,11 +152,32 @@ NdMsg = cstruct.Struct(
 ### FIB rule constants. See include/uapi/linux/fib_rules.h.
 FRA_PRIORITY = 6
 FRA_FWMARK = 10
+FRA_SUPPRESS_PREFIXLEN = 14
 FRA_TABLE = 15
 FRA_OIFNAME = 17
 FRA_UID_START = 18
 FRA_UID_END = 19
 
+
+# Link constants. See include/uapi/linux/if_link.h.
+IFLA_ADDRESS = 1
+IFLA_BROADCAST = 2
+IFLA_IFNAME = 3
+IFLA_MTU = 4
+IFLA_QDISC = 6
+IFLA_STATS = 7
+IFLA_TXQLEN = 13
+IFLA_MAP = 14
+IFLA_OPERSTATE = 16
+IFLA_LINKMODE = 17
+IFLA_STATS64 = 23
+IFLA_AF_SPEC = 26
+IFLA_GROUP = 27
+IFLA_EXT_MASK = 29
+IFLA_PROMISCUITY = 30
+IFLA_NUM_TX_QUEUES = 31
+IFLA_NUM_RX_QUEUES = 32
+IFLA_CARRIER = 33
 
 def CommandVerb(command):
   return ["NEW", "DEL", "GET", "SET"][command % 4]
@@ -246,6 +272,8 @@ class IPRoute(object):
       name = self._GetConstantName(nla_type, "RTAX_")
     elif CommandSubject(command) == "ADDR":
       name = self._GetConstantName(nla_type, "IFA_")
+    elif CommandSubject(command) == "LINK":
+      name = self._GetConstantName(nla_type, "IFLA_")
     elif CommandSubject(command) == "RULE":
       name = self._GetConstantName(nla_type, "FRA_")
     elif CommandSubject(command) == "ROUTE":
@@ -258,13 +286,20 @@ class IPRoute(object):
 
     if name in ["FRA_PRIORITY", "FRA_FWMARK", "FRA_TABLE",
                 "FRA_UID_START", "FRA_UID_END",
-                "RTA_OIF", "RTA_PRIORITY", "RTA_TABLE", "RTA_MARK"]:
+                "RTA_OIF", "RTA_PRIORITY", "RTA_TABLE", "RTA_MARK",
+                "IFLA_MTU", "IFLA_TXQLEN", "IFLA_GROUP", "IFLA_EXT_MASK",
+                "IFLA_PROMISCUITY", "IFLA_NUM_RX_QUEUES",
+                "IFLA_NUM_TX_QUEUES"]:
       data = struct.unpack("=I", nla_data)[0]
+    elif name ==  "FRA_SUPPRESS_PREFIXLEN":
+      data = struct.unpack("=i", nla_data)[0]
+    elif name in ["IFLA_LINKMODE", "IFLA_OPERSTATE", "IFLA_CARRIER"]:
+      data = ord(nla_data)
     elif name in ["IFA_ADDRESS", "IFA_LOCAL", "RTA_DST", "RTA_SRC",
                   "RTA_GATEWAY", "RTA_PREFSRC", "RTA_UID",
                   "NDA_DST"]:
       data = socket.inet_ntop(family, nla_data)
-    elif name in ["FRA_IIFNAME", "FRA_OIFNAME"]:
+    elif name in ["FRA_IIFNAME", "FRA_OIFNAME", "IFLA_IFNAME", "IFLA_QDISC"]:
       data = nla_data.strip("\x00")
     elif name == "RTA_METRICS":
       data = self._ParseAttributes(-RTA_METRICS, family, nla_data)
@@ -272,7 +307,7 @@ class IPRoute(object):
       data = RTACacheinfo(nla_data)
     elif name == "IFA_CACHEINFO":
       data = IFACacheinfo(nla_data)
-    elif name == "NDA_LLADDR":
+    elif name in ["NDA_LLADDR", "IFLA_ADDRESS"]:
       data = ":".join(x.encode("hex") for x in nla_data)
     else:
       data = nla_data
@@ -314,7 +349,7 @@ class IPRoute(object):
         raise ValueError("Duplicate attribute %d" % nla_name)
 
       attributes[nla_name] = nla_data
-      self._Debug("      %s" % str((nla, nla_data)))
+      self._Debug("      %s" % str((nla_name, nla_data)))
 
     return attributes
 
@@ -460,10 +495,10 @@ class IPRoute(object):
     data = data[attrlen:]
     return (nlmsg, attributes), data
 
-  def _GetRTMsgList(self, data, expect_done):
+  def _GetMsgList(self, msgtype, data, expect_done):
     out = []
     while data:
-      msg, data = self._ParseNLMsg(data, RTMsg)
+      msg, data = self._ParseNLMsg(data, msgtype)
       if msg is None:
         break
       out.append(msg)
@@ -479,6 +514,7 @@ class IPRoute(object):
     try:
       struct_type = {
           "ADDR": IfAddrMsg,
+          "LINK": IfinfoMsg,
           "NEIGH": NdMsg,
           "ROUTE": RTMsg,
           "RULE": RTMsg,
@@ -488,21 +524,30 @@ class IPRoute(object):
     except KeyError:
       raise ValueError("Don't know how to print command type %s" % name)
 
+  def MaybeDebugMessage(self, message):
+    hdr = NLMsgHdr(message)
+    self.MaybeDebugCommand(hdr.type, message)
+
+  def _Dump(self, command, msg, msgtype, expect_done):
+    # Create a netlink dump request containing the msg.
+    flags = NLM_F_DUMP | NLM_F_REQUEST
+    length = len(NLMsgHdr) + len(msg)
+    nlmsghdr = NLMsgHdr((length, command, flags, self.seq, self.pid))
+
+    self._Send(nlmsghdr.Pack() + msg.Pack())
+    data = self._Recv()
+    return self._GetMsgList(msgtype, data, expect_done)
+
   def DumpRules(self, version):
     """Returns the IP rules for the specified IP version."""
     # Create a struct rtmsg specifying the table and the given match attributes.
     family = self._AddressFamily(version)
     rtmsg = RTMsg((family, 0, 0, 0, 0, 0, 0, 0, 0))
+    return self._Dump(RTM_GETRULE, rtmsg, RTMsg, True)
 
-    # Create a netlink dump request containing the rtmsg.
-    command = RTM_GETRULE
-    flags = NLM_F_DUMP | NLM_F_REQUEST
-    length = len(NLMsgHdr) + len(rtmsg)
-    nlmsghdr = NLMsgHdr((length, command, flags, self.seq, self.pid))
-
-    self._Send(nlmsghdr.Pack() + rtmsg.Pack())
-    data = self._Recv()
-    return self._GetRTMsgList(data, True)
+  def DumpLinks(self):
+    ifinfomsg = IfinfoMsg((0, 0, 0, 0, 0, 0))
+    return self._Dump(RTM_GETLINK, ifinfomsg, IfinfoMsg, False)
 
   def _Address(self, version, command, addr, prefixlen, flags, scope, ifindex):
     """Adds or deletes an IP address."""
@@ -576,7 +621,7 @@ class IPRoute(object):
     # The response will either be an error or a list of routes.
     if NLMsgHdr(data).type == NLMSG_ERROR:
       self._ParseAck(data)
-    routes = self._GetRTMsgList(data, False)
+    routes = self._GetMsgList(RTMsg, data, False)
     return routes
 
   def _Neighbour(self, version, is_add, addr, lladdr, dev, state):
@@ -608,4 +653,5 @@ if __name__ == "__main__":
   iproute = IPRoute()
   iproute.DEBUG = True
   iproute.DumpRules(6)
+  iproute.DumpLinks()
   print iproute.GetRoutes("2001:4860:4860::8888", 0, 0, None)
