@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9c581443_1c264531",
+        "filename": "tests/net_test/all_tests",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2015-02-04T09:44:58Z",
+      "side": 1,
+      "message": "Copyright and license?",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 3
+      },
+      "revId": "0dcb2bc807a6690b5c919bdf2f9fabc04aec1838",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fc48307a_e3ad1203",
+        "filename": "tests/net_test/all_tests",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2015-02-04T09:44:58Z",
+      "side": 1,
+      "message": "Because \"Found $count test(s)\" was not stylish enough?",
+      "range": {
+        "startLine": 19,
+        "startChar": 21,
+        "endLine": 19,
+        "endChar": 26
+      },
+      "revId": "0dcb2bc807a6690b5c919bdf2f9fabc04aec1838",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fc48307a_43886688",
+        "filename": "tests/net_test/all_tests",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2015-02-04T09:44:58Z",
+      "side": 1,
+      "message": "Remove trailing whitespace.",
+      "range": {
+        "startLine": 31,
+        "startChar": 4,
+        "endLine": 31,
+        "endChar": 5
+      },
+      "revId": "0dcb2bc807a6690b5c919bdf2f9fabc04aec1838",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9c3f34b5_9331fe67",
+        "filename": "tests/net_test/all_tests",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2015-02-04T09:44:58Z",
+      "side": 1,
+      "message": "Does this exit the VM or does it drop you to a root shell?",
+      "range": {
+        "startLine": 34,
+        "startChar": 6,
+        "endLine": 34,
+        "endChar": 15
+      },
+      "revId": "0dcb2bc807a6690b5c919bdf2f9fabc04aec1838",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
