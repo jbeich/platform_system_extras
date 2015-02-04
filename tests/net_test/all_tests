@@ -1,0 +1,17 @@
+#!/bin/bash
+
+readonly PREFIX="#####"
+
+readonly tests=$(find . -name '*_test.py' -type f -executable)
+readonly count=$(echo $tests | wc -w)
+echo "$PREFIX Found $count tests."
+
+i=0
+for test in $tests; do
+  i=$((i + 1))
+  echo ""
+  echo "$PREFIX $test ($i/$count)"
+  echo ""
+  $test
+  echo ""
+done 
