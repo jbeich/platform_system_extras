@@ -99,5 +99,5 @@ LOCAL_SRC_FILES := build_verity_tree.cpp
 LOCAL_MODULE_TAGS := optional
 LOCAL_STATIC_LIBRARIES := libsparse_host libz
 LOCAL_SHARED_LIBRARIES := libcrypto-host
-LOCAL_CFLAGS += -Wall -Werror
+LOCAL_CFLAGS += -Wall -Werror -D_FILE_OFFSET_BITS=64
 include $(BUILD_HOST_EXECUTABLE)
