@@ -88,13 +88,13 @@ int hash_blocks(const EVP_MD *md,
     return 0;
 }
 
-int hash_chunk(void *priv, const void *data, int len)
+int hash_chunk(void *priv, const void *data, int64_t len)
 {
     struct sparse_hash_ctx *ctx = (struct sparse_hash_ctx *)priv;
     assert(len % ctx->block_size == 0);
     if (data) {
         size_t s;
-        hash_blocks(ctx->md, (const unsigned char *)data, len,
+        hash_blocks(ctx->md, (const unsigned char *)data, (size_t)len,
                     ctx->hashes, &s,
                     ctx->salt, ctx->salt_size, ctx->block_size);
         ctx->hashes += s;
