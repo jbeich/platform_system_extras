@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b19ee36a_f4f6d6e2",
+        "filename": "tests/net_test/run_net_test.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000451
+      },
+      "writtenOn": "2015-02-09T20:46:40Z",
+      "side": 1,
+      "message": "Just to double-check: it *is* expected that this 404\u0027s at this time, yes?",
+      "range": {
+        "startLine": 19,
+        "startChar": 26,
+        "endLine": 19,
+        "endChar": 28
+      },
+      "revId": "bb8d02cdf160f6b68c20f30dc3b85f76a970ba59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d1999784_956e6698",
+        "filename": "tests/net_test/run_net_test.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000451
+      },
+      "writtenOn": "2015-02-09T20:46:40Z",
+      "side": 1,
+      "message": "Given that you use $ROOTFS.xz 5 times, you might consider\n\n    COMPRESSED_ROOTFS\u003d$ROOTFS.xz\n    some --shell\u003dcommand --with $COMPRESSED_ROOTFS",
+      "range": {
+        "startLine": 39,
+        "startChar": 8,
+        "endLine": 39,
+        "endChar": 14
+      },
+      "revId": "bb8d02cdf160f6b68c20f30dc3b85f76a970ba59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
