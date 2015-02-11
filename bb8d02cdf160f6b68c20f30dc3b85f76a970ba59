@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "d66c2df3_dafa257a",
+        "filename": "tests/net_test/run_net_test.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2015-02-11T05:34:32Z",
+      "side": 1,
+      "message": "Yes. It works now.",
+      "parentUuid": "b19ee36a_f4f6d6e2",
+      "range": {
+        "startLine": 19,
+        "startChar": 26,
+        "endLine": 19,
+        "endChar": 28
+      },
+      "revId": "bb8d02cdf160f6b68c20f30dc3b85f76a970ba59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d1999784_956e6698",
         "filename": "tests/net_test/run_net_test.sh",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2015-02-09T20:46:40Z",
       "side": 1,
       "message": "Given that you use $ROOTFS.xz 5 times, you might consider\n\n    COMPRESSED_ROOTFS\u003d$ROOTFS.xz\n    some --shell\u003dcommand --with $COMPRESSED_ROOTFS",
+      "range": {
+        "startLine": 39,
+        "startChar": 8,
+        "endLine": 39,
+        "endChar": 14
+      },
+      "revId": "bb8d02cdf160f6b68c20f30dc3b85f76a970ba59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3694a9fe_3dc30f10",
+        "filename": "tests/net_test/run_net_test.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2015-02-11T05:34:32Z",
+      "side": 1,
+      "message": "Done, though in a scripting language like sh, it\u0027s not clear to me what advantage $COMPRESSED_ROOTFS might have over $ROOTFS.xz.",
+      "parentUuid": "d1999784_956e6698",
       "range": {
         "startLine": 39,
         "startChar": 8,
