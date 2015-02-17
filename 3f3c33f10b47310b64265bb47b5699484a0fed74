@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2b736025_659b068b",
+        "filename": "verity/build_verity_tree.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1019036
+      },
+      "writtenOn": "2015-02-17T16:19:03Z",
+      "side": 1,
+      "message": "getopt_long says[1] that the last element of the long_options array has to be filled with zeros, but there\u0027s no sentinel element at the end of long_options. \n\n[1] http://linux.die.net/man/3/getopt_long",
+      "revId": "3f3c33f10b47310b64265bb47b5699484a0fed74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0bc21c57_1457d4a1",
+        "filename": "verity/build_verity_tree.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1019036
+      },
+      "writtenOn": "2015-02-17T16:19:03Z",
+      "side": 1,
+      "message": "I believe that new throws an exception (or aborts the process if exceptions are disabled) rather than returning NULL. (Here and elsewhere.)",
+      "revId": "3f3c33f10b47310b64265bb47b5699484a0fed74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4bc89475_f6da6099",
+        "filename": "verity/build_verity_tree.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1019036
+      },
+      "writtenOn": "2015-02-17T16:19:03Z",
+      "side": 1,
+      "message": "There\u0027s no error checking here! (Also, an unsigned long long could be longer than 64 bits, although I\u0027m not sure that I would care about that.)",
+      "revId": "3f3c33f10b47310b64265bb47b5699484a0fed74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0bc21c57_7466488d",
+        "filename": "verity/build_verity_tree.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1019036
+      },
+      "writtenOn": "2015-02-17T16:19:03Z",
+      "side": 1,
+      "message": "Do these types also need to be changed? (I\u0027m unsure quite what this code is doing.)",
+      "revId": "3f3c33f10b47310b64265bb47b5699484a0fed74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0bc21c57_946a044e",
+        "filename": "verity/build_verity_tree.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1019036
+      },
+      "writtenOn": "2015-02-17T16:19:03Z",
+      "side": 1,
+      "message": "(the multiplication here can probably overflow a size_t if the types aren\u0027t changed above.)",
+      "revId": "3f3c33f10b47310b64265bb47b5699484a0fed74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
