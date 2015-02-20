@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c8e56a1d_72705871",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1005480
+      },
+      "writtenOn": "2015-02-20T20:25:27Z",
+      "side": 1,
+      "message": "It doesn\u0027t match what the verified-boot doc says: wait for final user confirmation only if the user interacted withing 5s of the warning being displayed.\nThe code does the right thing.\n\nTo make it more useful as a slideshow (yet still respect the first-image/last-image case) have a button press just go to the next image:\n\n\"\"\"\nIf the user presses a button, it moves to the next image.\nOn the last image, if the user did press a button previously, it will not use the default timeout, and instead wait longer for another button press.\n\"\"\"\n\nI\u0027m not a big fan of the lengthy 5min timeout. 30s seems more than enough.",
+      "range": {
+        "startLine": 12,
+        "startChar": 55,
+        "endLine": 18,
+        "endChar": 21
+      },
+      "revId": "4f258870e4c8a55b6d78b42e73b85d6d2b0d9c75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a813d6da_c9dcf124",
+        "filename": "slideshow/slideshow.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1005480
+      },
+      "writtenOn": "2015-02-20T20:25:27Z",
+      "side": 1,
+      "message": "key_code",
+      "range": {
+        "startLine": 84,
+        "startChar": 8,
+        "endLine": 84,
+        "endChar": 12
+      },
+      "revId": "4f258870e4c8a55b6d78b42e73b85d6d2b0d9c75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
