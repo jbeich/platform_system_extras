@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0533edf5_ccd12f56",
+        "filename": "slideshow/slideshow.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1005480
+      },
+      "writtenOn": "2015-02-23T23:09:57Z",
+      "side": 1,
+      "message": "Doesn\u0027t apply anymore. Tweak if you need to upload another version.",
+      "range": {
+        "startLine": 116,
+        "startChar": 30,
+        "endLine": 116,
+        "endChar": 60
+      },
+      "revId": "ba4fa9ba2dcc3edaba22c24cec035c8bd24b9f98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
