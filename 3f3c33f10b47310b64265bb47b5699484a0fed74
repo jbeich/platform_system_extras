@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "22dc672f_3da4afc7",
+        "filename": "verity/build_verity_tree.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1004424
+      },
+      "writtenOn": "2015-02-26T11:03:30Z",
+      "side": 1,
+      "message": "yes, if i remember correctly exceptions are turned of an process aborts, however the FATAL(..) macro does pretty much the same, print and exit(1). \n\nDo you think its worth the effort to remove the i statements? Another option would be to add (std::nothrow) to the new call and things would work as intended, but same as above is it worth the effort?",
+      "parentUuid": "0bc21c57_1457d4a1",
+      "revId": "3f3c33f10b47310b64265bb47b5699484a0fed74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4bc89475_f6da6099",
         "filename": "verity/build_verity_tree.cpp",
         "patchSetId": 1
