@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "6242dfdd_3fdb8775",
+        "filename": "verity/build_verity_tree.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1019036
+      },
+      "writtenOn": "2015-02-26T21:02:52Z",
+      "side": 1,
+      "message": "I\u0027m not sure. It\u0027s odd to have if statements that can\u0027t happen, but I don\u0027t really know this code at all and don\u0027t maintain it.",
+      "parentUuid": "22dc672f_3da4afc7",
+      "revId": "3f3c33f10b47310b64265bb47b5699484a0fed74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4bc89475_f6da6099",
         "filename": "verity/build_verity_tree.cpp",
         "patchSetId": 1
