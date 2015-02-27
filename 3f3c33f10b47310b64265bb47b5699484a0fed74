@@ -124,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "e2a7af21_abbf2909",
+        "filename": "verity/build_verity_tree.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1004424
+      },
+      "writtenOn": "2015-02-27T11:18:32Z",
+      "side": 1,
+      "message": "If calculate_size is big enough this is a problem, however since this is the size of the image on a device, I do not think this is a problem in practice.\n\nThe size of the image needs to be in Terabyte range for this to be a problem since size is divided by block_size (4092) and hash_per_block(minimum 2).",
+      "parentUuid": "0bc21c57_7466488d",
+      "revId": "3f3c33f10b47310b64265bb47b5699484a0fed74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0bc21c57_946a044e",
         "filename": "verity/build_verity_tree.cpp",
         "patchSetId": 1
