@@ -1,0 +1,153 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "42787b6f_16459c3c",
+        "filename": "verity/build_verity_tree.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2015-02-27T18:58:26Z",
+      "side": 1,
+      "message": "as long as you\u0027re in here can you add {NULL, 0, 0, 0} to the end of this list?",
+      "revId": "e6216e928c88fff7eba498a7884eb916f1adb655",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "42787b6f_16ce7c68",
+        "filename": "verity/build_verity_tree.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2015-02-27T18:58:26Z",
+      "side": 1,
+      "message": "this needs to be strtoull to work on 32-bit",
+      "range": {
+        "startLine": 176,
+        "startChar": 29,
+        "endLine": 176,
+        "endChar": 36
+      },
+      "revId": "e6216e928c88fff7eba498a7884eb916f1adb655",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "22754777_3590d061",
+        "filename": "verity/build_verity_tree.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2015-02-27T18:58:26Z",
+      "side": 1,
+      "message": "Save the return value in a unsigned long long for a later comparison to ULLONG_MAX",
+      "range": {
+        "startLine": 176,
+        "startChar": 12,
+        "endLine": 176,
+        "endChar": 26
+      },
+      "revId": "e6216e928c88fff7eba498a7884eb916f1adb655",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "42787b6f_96ab6c70",
+        "filename": "verity/build_verity_tree.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2015-02-27T18:58:26Z",
+      "side": 1,
+      "message": "this check isn\u0027t valid unless the return value from strtoull was ULLONG_MAX.",
+      "range": {
+        "startLine": 177,
+        "startChar": 34,
+        "endLine": 177,
+        "endChar": 48
+      },
+      "revId": "e6216e928c88fff7eba498a7884eb916f1adb655",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "42787b6f_76c7b03a",
+        "filename": "verity/build_verity_tree.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2015-02-27T18:58:26Z",
+      "side": 1,
+      "message": "this should be a fatal error",
+      "revId": "e6216e928c88fff7eba498a7884eb916f1adb655",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "42787b6f_567c7447",
+        "filename": "verity/build_verity_tree.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2015-02-27T18:58:26Z",
+      "side": 1,
+      "message": "Use PRIu64 from inttypes.h to print a uint64_t",
+      "range": {
+        "startLine": 234,
+        "startChar": 17,
+        "endLine": 234,
+        "endChar": 20
+      },
+      "revId": "e6216e928c88fff7eba498a7884eb916f1adb655",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "22754777_9507e418",
+        "filename": "verity/build_verity_tree.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2015-02-27T18:58:26Z",
+      "side": 1,
+      "message": "This calculation will overflow when size_t is 32-bit, cast to uint64_t",
+      "range": {
+        "startLine": 234,
+        "startChar": 25,
+        "endLine": 234,
+        "endChar": 51
+      },
+      "revId": "e6216e928c88fff7eba498a7884eb916f1adb655",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
