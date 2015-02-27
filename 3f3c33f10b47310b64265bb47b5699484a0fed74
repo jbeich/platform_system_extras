@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "025843e4_e4deda18",
+        "filename": "verity/build_verity_tree.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1004424
+      },
+      "writtenOn": "2015-02-27T09:57:07Z",
+      "side": 1,
+      "message": "Agree its odd, probably just a c programmer doing this out of habit, just a guess however.",
+      "parentUuid": "6242dfdd_3fdb8775",
+      "revId": "3f3c33f10b47310b64265bb47b5699484a0fed74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4bc89475_f6da6099",
         "filename": "verity/build_verity_tree.cpp",
         "patchSetId": 1
