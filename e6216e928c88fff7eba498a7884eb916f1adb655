@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "62581f1b_0ff6655b",
+        "filename": "verity/build_verity_tree.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1004424
+      },
+      "writtenOn": "2015-03-02T10:26:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "42787b6f_16459c3c",
+      "revId": "e6216e928c88fff7eba498a7884eb916f1adb655",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "42787b6f_16ce7c68",
         "filename": "verity/build_verity_tree.cpp",
         "patchSetId": 2
@@ -58,6 +76,54 @@
         "startChar": 12,
         "endLine": 176,
         "endChar": 26
+      },
+      "revId": "e6216e928c88fff7eba498a7884eb916f1adb655",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "62581f1b_2ff3296c",
+        "filename": "verity/build_verity_tree.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1004424
+      },
+      "writtenOn": "2015-03-02T10:26:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "22754777_3590d061",
+      "range": {
+        "startLine": 176,
+        "startChar": 12,
+        "endLine": 176,
+        "endChar": 26
+      },
+      "revId": "e6216e928c88fff7eba498a7884eb916f1adb655",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a24e9754_d11a44e4",
+        "filename": "verity/build_verity_tree.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1004424
+      },
+      "writtenOn": "2015-03-02T10:26:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "42787b6f_16ce7c68",
+      "range": {
+        "startLine": 176,
+        "startChar": 29,
+        "endLine": 176,
+        "endChar": 36
       },
       "revId": "e6216e928c88fff7eba498a7884eb916f1adb655",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
@@ -105,6 +171,24 @@
     },
     {
       "key": {
+        "uuid": "32d2fae7_92dc7c64",
+        "filename": "verity/build_verity_tree.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1004424
+      },
+      "writtenOn": "2015-03-02T10:26:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "42787b6f_76c7b03a",
+      "revId": "e6216e928c88fff7eba498a7884eb916f1adb655",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "42787b6f_567c7447",
         "filename": "verity/build_verity_tree.cpp",
         "patchSetId": 2
@@ -139,6 +223,54 @@
       "writtenOn": "2015-02-27T18:58:26Z",
       "side": 1,
       "message": "This calculation will overflow when size_t is 32-bit, cast to uint64_t",
+      "range": {
+        "startLine": 234,
+        "startChar": 25,
+        "endLine": 234,
+        "endChar": 51
+      },
+      "revId": "e6216e928c88fff7eba498a7884eb916f1adb655",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b2c50a26_8edc5b64",
+        "filename": "verity/build_verity_tree.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1004424
+      },
+      "writtenOn": "2015-03-02T10:26:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "42787b6f_567c7447",
+      "range": {
+        "startLine": 234,
+        "startChar": 17,
+        "endLine": 234,
+        "endChar": 20
+      },
+      "revId": "e6216e928c88fff7eba498a7884eb916f1adb655",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d2defef5_0fe06512",
+        "filename": "verity/build_verity_tree.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1004424
+      },
+      "writtenOn": "2015-03-02T10:26:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "22754777_9507e418",
       "range": {
         "startLine": 234,
         "startChar": 25,
