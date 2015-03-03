@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "72e9d2ce_7f41cb61",
+        "filename": "tests/net_test/ping6_test.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 1000451
+      },
+      "writtenOn": "2015-03-03T08:11:18Z",
+      "side": 1,
+      "message": "Even if you want to leave these commented out, shouldn\u0027t there, for completeness, be:\n\ncsocket.Bind, s6, ipv4sockaddr\ncsocket.Sendmsg, s4, ipv6sockaddr, net_test.IPV6_PING, None, 0\n\n?",
+      "revId": "eecc56c26886b7c11a72ea184563f2f5250dd71b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
