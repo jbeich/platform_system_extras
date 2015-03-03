@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "72663238_1a4d5d4a",
+        "filename": "verity/build_verity_tree.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2015-03-03T19:09:08Z",
+      "side": 1,
+      "message": "Minor nit, but unsigned long long could technically be bigger than 64 bits.  Use a local unsigned long long to store the return value of strtoull, compare it against ULLONG_MAX (and maybe UINT64_MAX too), and then cast it to uint64_t when copying to calculate_size.",
+      "range": {
+        "startLine": 178,
+        "startChar": 12,
+        "endLine": 178,
+        "endChar": 26
+      },
+      "revId": "9d75af8cff4d779d34a8fb254195259860dc03d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
