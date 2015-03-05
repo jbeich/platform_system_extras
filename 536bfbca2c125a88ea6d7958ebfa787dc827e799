@@ -119,6 +119,24 @@
     },
     {
       "key": {
+        "uuid": "77a1c45d_df53fff3",
+        "filename": "perfprofd/base/logging.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1049408
+      },
+      "writtenOn": "2015-03-05T20:53:09Z",
+      "side": 1,
+      "message": "If it\u0027s common practice in android, then it\u0027s fine. Please make this the same as other copies in android tree (especially pay attention to the copyright section).",
+      "parentUuid": "570040ef_3ef7a511",
+      "revId": "536bfbca2c125a88ea6d7958ebfa787dc827e799",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "974d5888_45c98a53",
         "filename": "perfprofd/perf_data_converter.h",
         "patchSetId": 1
@@ -183,6 +201,47 @@
       "side": 1,
       "message": "How about a return type of std::pair\u003cbool, wireless_android_play_playlog::AndroidPerfProfile\u003e -- I assume that would be ok?",
       "parentUuid": "974d5888_05d39207",
+      "revId": "536bfbca2c125a88ea6d7958ebfa787dc827e799",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "579cc029_3eec65be",
+        "filename": "perfprofd/perf_data_converter.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1049408
+      },
+      "writtenOn": "2015-03-05T20:53:09Z",
+      "side": 1,
+      "message": "Can we check the success of the call by looking at ret.load_module_samples().size()? If not, pass in result as a pointer instead of a reference.",
+      "parentUuid": "3233dad8_502c8494",
+      "revId": "536bfbca2c125a88ea6d7958ebfa787dc827e799",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "376d8ced_3de6bb31",
+        "filename": "perfprofd/perfprofdcore.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1049408
+      },
+      "writtenOn": "2015-03-05T20:53:09Z",
+      "side": 1,
+      "message": "There are also some trailing white-space in this file, and possibly in other files too.",
+      "range": {
+        "startLine": 34,
+        "startChar": 30,
+        "endLine": 34,
+        "endChar": 31
+      },
       "revId": "536bfbca2c125a88ea6d7958ebfa787dc827e799",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
