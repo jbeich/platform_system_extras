@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "570040ef_9e8479a1",
+        "filename": "perfprofd/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-03-05T18:47:10Z",
+      "side": 1,
+      "message": "Fixed.",
+      "parentUuid": "f7585443_28642b20",
+      "range": {
+        "startLine": 5,
+        "startChar": 1,
+        "endLine": 5,
+        "endChar": 2
+      },
+      "revId": "536bfbca2c125a88ea6d7958ebfa787dc827e799",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "974d5888_851f8285",
         "filename": "perfprofd/address_mapper.h",
         "patchSetId": 1
@@ -36,6 +60,24 @@
       "writtenOn": "2015-03-05T17:23:24Z",
       "side": 1,
       "message": "Are you directly copying this file from quipper? If so, please put these files in a separate folder.",
+      "revId": "536bfbca2c125a88ea6d7958ebfa787dc827e799",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "570040ef_7e53edc1",
+        "filename": "perfprofd/address_mapper.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-03-05T18:47:10Z",
+      "side": 1,
+      "message": "That is a good suggestion. I will look into relocating the quipper files into a subdirectory. NB: the versions I am submitting are not exact copies -- I had to make changes in order to get them to build in Android.",
+      "parentUuid": "974d5888_851f8285",
       "revId": "536bfbca2c125a88ea6d7958ebfa787dc827e799",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -59,6 +101,24 @@
     },
     {
       "key": {
+        "uuid": "570040ef_3ef7a511",
+        "filename": "perfprofd/base/logging.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-03-05T18:47:10Z",
+      "side": 1,
+      "message": "When I started porting the quipper code over, that had been my intent... however the problem is that there isn\u0027t any standard/public copy of logging.h/logging.cc -- each project seems to have its own copy (my current AOSP client has 30 separate copies of logging.h). It seems distasteful to have yet another copy, but that seems to be the paradigm for Android.",
+      "parentUuid": "d742704b_4f21ad58",
+      "revId": "536bfbca2c125a88ea6d7958ebfa787dc827e799",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "974d5888_45c98a53",
         "filename": "perfprofd/perf_data_converter.h",
         "patchSetId": 1
@@ -76,6 +136,24 @@
     },
     {
       "key": {
+        "uuid": "b7525c21_a6a5e6b2",
+        "filename": "perfprofd/perf_data_converter.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-03-05T18:47:10Z",
+      "side": 1,
+      "message": "OK, that seems reasonable. I\u0027ll see about migrating my changes into the internal version.",
+      "parentUuid": "974d5888_45c98a53",
+      "revId": "536bfbca2c125a88ea6d7958ebfa787dc827e799",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "974d5888_05d39207",
         "filename": "perfprofd/perf_data_converter.h",
         "patchSetId": 1
@@ -87,6 +165,24 @@
       "writtenOn": "2015-03-05T17:39:55Z",
       "side": 1,
       "message": "It\u0027s not recommend to pass in a non-const reference to a function. Let\u0027s make it as the return value, same as google internal impl.",
+      "revId": "536bfbca2c125a88ea6d7958ebfa787dc827e799",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3233dad8_502c8494",
+        "filename": "perfprofd/perf_data_converter.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-03-05T18:47:10Z",
+      "side": 1,
+      "message": "How about a return type of std::pair\u003cbool, wireless_android_play_playlog::AndroidPerfProfile\u003e -- I assume that would be ok?",
+      "parentUuid": "974d5888_05d39207",
       "revId": "536bfbca2c125a88ea6d7958ebfa787dc827e799",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
