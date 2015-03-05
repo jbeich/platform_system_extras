@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f7585443_28642b20",
+        "filename": "perfprofd/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1049408
+      },
+      "writtenOn": "2015-03-05T17:23:24Z",
+      "side": 1,
+      "message": "Please remove all trailing whitespaces",
+      "range": {
+        "startLine": 5,
+        "startChar": 1,
+        "endLine": 5,
+        "endChar": 2
+      },
+      "revId": "536bfbca2c125a88ea6d7958ebfa787dc827e799",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "974d5888_851f8285",
+        "filename": "perfprofd/address_mapper.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1049408
+      },
+      "writtenOn": "2015-03-05T17:23:24Z",
+      "side": 1,
+      "message": "Are you directly copying this file from quipper? If so, please put these files in a separate folder.",
+      "revId": "536bfbca2c125a88ea6d7958ebfa787dc827e799",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d742704b_4f21ad58",
+        "filename": "perfprofd/base/logging.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1049408
+      },
+      "writtenOn": "2015-03-05T17:23:24Z",
+      "side": 1,
+      "message": "For all the files in base/ I think it\u0027s very likely that there are equivalences in android tree? Maybe we should simply use them instead.",
+      "revId": "536bfbca2c125a88ea6d7958ebfa787dc827e799",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
