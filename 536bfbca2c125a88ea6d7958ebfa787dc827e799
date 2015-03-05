@@ -56,6 +56,40 @@
       "revId": "536bfbca2c125a88ea6d7958ebfa787dc827e799",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "974d5888_45c98a53",
+        "filename": "perfprofd/perf_data_converter.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1049408
+      },
+      "writtenOn": "2015-03-05T17:39:55Z",
+      "side": 1,
+      "message": "It\u0027s better that we keep perf_data_convert.{h|cc} in sync with google internal impl  (except include path) so that it\u0027s easy to update in the future.\n\nIf you want to change the behavior of the code, please send patches to internal first, and then we port it back here.",
+      "revId": "536bfbca2c125a88ea6d7958ebfa787dc827e799",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "974d5888_05d39207",
+        "filename": "perfprofd/perf_data_converter.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1049408
+      },
+      "writtenOn": "2015-03-05T17:39:55Z",
+      "side": 1,
+      "message": "It\u0027s not recommend to pass in a non-const reference to a function. Let\u0027s make it as the return value, same as google internal impl.",
+      "revId": "536bfbca2c125a88ea6d7958ebfa787dc827e799",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
