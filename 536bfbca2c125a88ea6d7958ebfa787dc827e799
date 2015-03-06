@@ -225,6 +225,24 @@
     },
     {
       "key": {
+        "uuid": "1701683d_91813cfc",
+        "filename": "perfprofd/perf_data_converter.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-03-06T15:41:25Z",
+      "side": 1,
+      "message": "I suppose you\u0027re right, I can just check the load_module_samples.size() -- if this is zero then it is pretty much certain that something bad happened in PerfParser (e.g. like the kernel address mapping issue that I ran into).\nI\u0027ll make this change...",
+      "parentUuid": "579cc029_3eec65be",
+      "revId": "536bfbca2c125a88ea6d7958ebfa787dc827e799",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "376d8ced_3de6bb31",
         "filename": "perfprofd/perfprofdcore.cc",
         "patchSetId": 1
@@ -236,6 +254,30 @@
       "writtenOn": "2015-03-05T20:53:09Z",
       "side": 1,
       "message": "There are also some trailing white-space in this file, and possibly in other files too.",
+      "range": {
+        "startLine": 34,
+        "startChar": 30,
+        "endLine": 34,
+        "endChar": 31
+      },
+      "revId": "536bfbca2c125a88ea6d7958ebfa787dc827e799",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "77a8e45b_27a1d477",
+        "filename": "perfprofd/perfprofdcore.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-03-06T15:41:25Z",
+      "side": 1,
+      "message": "I\u0027ll do a general cleanup.",
+      "parentUuid": "376d8ced_3de6bb31",
       "range": {
         "startLine": 34,
         "startChar": 30,
