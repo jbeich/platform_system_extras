@@ -101,16 +101,8 @@ void extract_uidgids(const char *uidgids, uid_t *uid, gid_t *gid, gid_t *gids,
  */
 int main(int argc, char **argv)
 {
-    struct passwd *pw;
-    uid_t uid, myuid;
+    uid_t uid;
     gid_t gid, gids[10];
-
-    /* Until we have something better, only root and the shell can use su. */
-    myuid = getuid();
-    if (myuid != AID_ROOT && myuid != AID_SHELL) {
-        fprintf(stderr,"su: uid %d not allowed to su\n", myuid);
-        return 1;
-    }
 
     if(argc < 2) {
         uid = gid = 0;
