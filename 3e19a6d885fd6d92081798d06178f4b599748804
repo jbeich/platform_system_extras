@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "c6aba49c_7eec913a",
+        "filename": "perfprofd/Android.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-03-18T19:00:20Z",
+      "side": 1,
+      "message": "Will fix that.",
+      "parentUuid": "86e9acd1_cb4ce1d0",
+      "range": {
+        "startLine": 3,
+        "startChar": 0,
+        "endLine": 3,
+        "endChar": 21
+      },
+      "revId": "3e19a6d885fd6d92081798d06178f4b599748804",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e67fc8e4_9b23fbd1",
         "filename": "perfprofd/Android.mk",
         "patchSetId": 5
@@ -36,6 +60,30 @@
       "writtenOn": "2015-03-18T18:08:38Z",
       "side": 1,
       "message": "Do you really need this? If you add libcutils to your shared libraries for this, I believe you\u0027ll get this include directory by default.",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 39
+      },
+      "revId": "3e19a6d885fd6d92081798d06178f4b599748804",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a6a6b0d3_a0b55432",
+        "filename": "perfprofd/Android.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-03-18T19:00:20Z",
+      "side": 1,
+      "message": "You are right, I don\u0027t need it... removed.",
+      "parentUuid": "e67fc8e4_9b23fbd1",
       "range": {
         "startLine": 8,
         "startChar": 0,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "c6aba49c_1ee34d49",
+        "filename": "perfprofd/Android.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-03-18T19:00:20Z",
+      "side": 1,
+      "message": "At an earlier point I needed that, but you are right, it\u0027s not needed now. Removed.",
+      "parentUuid": "067dbcec_6e8dab83",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 23
+      },
+      "revId": "3e19a6d885fd6d92081798d06178f4b599748804",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4683341d_b0b1c0d4",
         "filename": "perfprofd/Android.mk",
         "patchSetId": 5
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "86b52cfa_9f2e37bb",
+        "filename": "perfprofd/Android.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-03-18T19:00:20Z",
+      "side": 1,
+      "message": "They are needed to compile the ChromeOS quipper code (in quipper subdirectory). I\u0027ve updated the makefile so that the flags are now consistent for all compiles.",
+      "parentUuid": "4683341d_b0b1c0d4",
+      "range": {
+        "startLine": 22,
+        "startChar": 24,
+        "endLine": 22,
+        "endChar": 62
+      },
+      "revId": "3e19a6d885fd6d92081798d06178f4b599748804",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e67fc8e4_5bb7c3ea",
         "filename": "perfprofd/Android.mk",
         "patchSetId": 5
@@ -105,6 +201,30 @@
       "writtenOn": "2015-03-18T18:08:38Z",
       "side": 1,
       "message": "Is there a reason this also got broken up into another separate static library?\n\nIt seems odd to have a single file library. I see the other library used in tests, and I don\u0027t think it\u0027s going to hurt to put everything in the same library.",
+      "range": {
+        "startLine": 27,
+        "startChar": 2,
+        "endLine": 27,
+        "endChar": 72
+      },
+      "revId": "3e19a6d885fd6d92081798d06178f4b599748804",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "86b52cfa_1f1b47a0",
+        "filename": "perfprofd/Android.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-03-18T19:00:20Z",
+      "side": 1,
+      "message": "See the README file in the tests subdirectory. It explains that reasons why the code is broken up into multiple libraries/layers (it is to make unit testing easier).",
+      "parentUuid": "e67fc8e4_5bb7c3ea",
       "range": {
         "startLine": 27,
         "startChar": 2,
@@ -157,6 +277,30 @@
     },
     {
       "key": {
+        "uuid": "a6a6b0d3_409c50b6",
+        "filename": "perfprofd/perf_data_converter.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-03-18T19:00:20Z",
+      "side": 1,
+      "message": "Will add copyright and header guard.",
+      "parentUuid": "067dbcec_91ce7eae",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 0
+      },
+      "revId": "3e19a6d885fd6d92081798d06178f4b599748804",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4683341d_70a6688d",
         "filename": "perfprofd/perf_data_converter.h",
         "patchSetId": 5
@@ -168,6 +312,30 @@
       "writtenOn": "2015-03-18T18:08:38Z",
       "side": 1,
       "message": "You should be able to use:\n\n#include \"perf_profile.ph.h\"\n\nAnd modify the include directory as needed.\n\nHowever, this is odd to have system/extras/perfprofd. Is this file being generated and placed here somehow?",
+      "range": {
+        "startLine": 2,
+        "startChar": 9,
+        "endLine": 2,
+        "endChar": 52
+      },
+      "revId": "3e19a6d885fd6d92081798d06178f4b599748804",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a6a6b0d3_e060fc32",
+        "filename": "perfprofd/perf_data_converter.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-03-18T19:00:20Z",
+      "side": 1,
+      "message": "perf_profile.pb.h is an auto-generated source created by the protocol compiler from perf_profile.proto -- hence the specific path (so as to pick it up from the out/* dir).",
+      "parentUuid": "4683341d_70a6688d",
       "range": {
         "startLine": 2,
         "startChar": 9,
@@ -226,6 +394,30 @@
     },
     {
       "key": {
+        "uuid": "86b52cfa_9f44f777",
+        "filename": "perfprofd/perf_data_converter.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-03-18T19:00:20Z",
+      "side": 1,
+      "message": "Will fix.",
+      "parentUuid": "4683341d_306a309b",
+      "range": {
+        "startLine": 4,
+        "startChar": 0,
+        "endLine": 4,
+        "endChar": 18
+      },
+      "revId": "3e19a6d885fd6d92081798d06178f4b599748804",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e67fc8e4_3b9ccf43",
         "filename": "perfprofd/perf_data_converter.h",
         "patchSetId": 5
@@ -237,6 +429,30 @@
       "writtenOn": "2015-03-18T18:08:38Z",
       "side": 1,
       "message": "Is this namespace from something else?\n\nIt\u0027s a bit confusing since none of this is wireless code. Also is awp already an acronym for android wp?",
+      "range": {
+        "startLine": 6,
+        "startChar": 10,
+        "endLine": 6,
+        "endChar": 38
+      },
+      "revId": "3e19a6d885fd6d92081798d06178f4b599748804",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a6a6b0d3_83cf02ab",
+        "filename": "perfprofd/perf_data_converter.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-03-18T19:00:20Z",
+      "side": 1,
+      "message": "Let me follow up off-line about this. I will send you an email.",
+      "parentUuid": "e67fc8e4_3b9ccf43",
       "range": {
         "startLine": 6,
         "startChar": 10,
@@ -319,6 +535,30 @@
     },
     {
       "key": {
+        "uuid": "c6aba49c_de7965f9",
+        "filename": "perfprofd/tests/Android.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-03-18T19:00:20Z",
+      "side": 1,
+      "message": "Fixed.",
+      "parentUuid": "e67fc8e4_9baa1b4e",
+      "range": {
+        "startLine": 15,
+        "startChar": 42,
+        "endLine": 15,
+        "endChar": 43
+      },
+      "revId": "3e19a6d885fd6d92081798d06178f4b599748804",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e67fc8e4_bba7df84",
         "filename": "perfprofd/tests/Android.mk",
         "patchSetId": 5
@@ -342,6 +582,30 @@
     },
     {
       "key": {
+        "uuid": "a6a6b0d3_43d9fa75",
+        "filename": "perfprofd/tests/Android.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-03-18T19:00:20Z",
+      "side": 1,
+      "message": "Fixed.",
+      "parentUuid": "e67fc8e4_bba7df84",
+      "range": {
+        "startLine": 21,
+        "startChar": 45,
+        "endLine": 21,
+        "endChar": 46
+      },
+      "revId": "3e19a6d885fd6d92081798d06178f4b599748804",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "067dbcec_d17c76b5",
         "filename": "perfprofd/tests/Android.mk",
         "patchSetId": 5
@@ -353,6 +617,30 @@
       "writtenOn": "2015-03-18T18:08:38Z",
       "side": 1,
       "message": "Whitespace.",
+      "range": {
+        "startLine": 39,
+        "startChar": 25,
+        "endLine": 39,
+        "endChar": 26
+      },
+      "revId": "3e19a6d885fd6d92081798d06178f4b599748804",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "86b52cfa_5f578f2b",
+        "filename": "perfprofd/tests/Android.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-03-18T19:00:20Z",
+      "side": 1,
+      "message": "Fixed.",
+      "parentUuid": "067dbcec_d17c76b5",
       "range": {
         "startLine": 39,
         "startChar": 25,
