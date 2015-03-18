@@ -2,6 +2,253 @@
   "comments": [
     {
       "key": {
+        "uuid": "86e9acd1_cb4ce1d0",
+        "filename": "perfprofd/Android.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2015-03-18T18:08:38Z",
+      "side": 1,
+      "message": "A small nit, you should move this below the comment along with all of the other instances of include $(CLEAR_VARS).",
+      "range": {
+        "startLine": 3,
+        "startChar": 0,
+        "endLine": 3,
+        "endChar": 21
+      },
+      "revId": "3e19a6d885fd6d92081798d06178f4b599748804",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e67fc8e4_9b23fbd1",
+        "filename": "perfprofd/Android.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2015-03-18T18:08:38Z",
+      "side": 1,
+      "message": "Do you really need this? If you add libcutils to your shared libraries for this, I believe you\u0027ll get this include directory by default.",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 39
+      },
+      "revId": "3e19a6d885fd6d92081798d06178f4b599748804",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "067dbcec_6e8dab83",
+        "filename": "perfprofd/Android.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2015-03-18T18:08:38Z",
+      "side": 1,
+      "message": "I don\u0027t think you\u0027ll need this for static libraries, only for shared libraries and executables.",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 23
+      },
+      "revId": "3e19a6d885fd6d92081798d06178f4b599748804",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4683341d_b0b1c0d4",
+        "filename": "perfprofd/Android.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2015-03-18T18:08:38Z",
+      "side": 1,
+      "message": "Any reason you need these here and not down below?\n\nUsually we define a local makefile variable that is something like so:\n\nperfprofd_cflags :\u003d -Wall ...\nperfprofd_cppflags :\u003d -std\u003dgnu++11\n\nLOCAL_CFLAGS :\u003d $(perfprofd_cflags)\nLOCAL_CPPFLAGS :\u003d $(perfprofd_cppflags)",
+      "range": {
+        "startLine": 22,
+        "startChar": 24,
+        "endLine": 22,
+        "endChar": 62
+      },
+      "revId": "3e19a6d885fd6d92081798d06178f4b599748804",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e67fc8e4_5bb7c3ea",
+        "filename": "perfprofd/Android.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2015-03-18T18:08:38Z",
+      "side": 1,
+      "message": "Is there a reason this also got broken up into another separate static library?\n\nIt seems odd to have a single file library. I see the other library used in tests, and I don\u0027t think it\u0027s going to hurt to put everything in the same library.",
+      "range": {
+        "startLine": 27,
+        "startChar": 2,
+        "endLine": 27,
+        "endChar": 72
+      },
+      "revId": "3e19a6d885fd6d92081798d06178f4b599748804",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "067dbcec_91ce7eae",
+        "filename": "perfprofd/perf_data_converter.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2015-03-18T18:08:38Z",
+      "side": 1,
+      "message": "Can you add a header guard?",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 0
+      },
+      "revId": "3e19a6d885fd6d92081798d06178f4b599748804",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4683341d_30edd0ba",
+        "filename": "perfprofd/perf_data_converter.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2015-03-18T18:08:38Z",
+      "side": 1,
+      "message": "Add the Android copyright header to all files.",
+      "revId": "3e19a6d885fd6d92081798d06178f4b599748804",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4683341d_70a6688d",
+        "filename": "perfprofd/perf_data_converter.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2015-03-18T18:08:38Z",
+      "side": 1,
+      "message": "You should be able to use:\n\n#include \"perf_profile.ph.h\"\n\nAnd modify the include directory as needed.\n\nHowever, this is odd to have system/extras/perfprofd. Is this file being generated and placed here somehow?",
+      "range": {
+        "startLine": 2,
+        "startChar": 9,
+        "endLine": 2,
+        "endChar": 52
+      },
+      "revId": "3e19a6d885fd6d92081798d06178f4b599748804",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "067dbcec_51132692",
+        "filename": "perfprofd/perf_data_converter.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2015-03-18T18:08:38Z",
+      "side": 1,
+      "message": "Add an\n\n#include \u003cstring\u003e\n\nfor std::string.",
+      "range": {
+        "startLine": 4,
+        "startChar": 0,
+        "endLine": 4,
+        "endChar": 18
+      },
+      "revId": "3e19a6d885fd6d92081798d06178f4b599748804",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4683341d_306a309b",
+        "filename": "perfprofd/perf_data_converter.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2015-03-18T18:08:38Z",
+      "side": 1,
+      "message": "It might also be better to skip the using statement to avoid people doing something bad with string.",
+      "range": {
+        "startLine": 4,
+        "startChar": 0,
+        "endLine": 4,
+        "endChar": 18
+      },
+      "revId": "3e19a6d885fd6d92081798d06178f4b599748804",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e67fc8e4_3b9ccf43",
+        "filename": "perfprofd/perf_data_converter.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2015-03-18T18:08:38Z",
+      "side": 1,
+      "message": "Is this namespace from something else?\n\nIt\u0027s a bit confusing since none of this is wireless code. Also is awp already an acronym for android wp?",
+      "range": {
+        "startLine": 6,
+        "startChar": 10,
+        "endLine": 6,
+        "endChar": 38
+      },
+      "revId": "3e19a6d885fd6d92081798d06178f4b599748804",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "46309412_22358e0b",
         "filename": "perfprofd/perfprofdcore.cc",
         "patchSetId": 5
@@ -42,6 +289,75 @@
         "startChar": 0,
         "endLine": 724,
         "endChar": 3
+      },
+      "revId": "3e19a6d885fd6d92081798d06178f4b599748804",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e67fc8e4_9baa1b4e",
+        "filename": "perfprofd/tests/Android.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2015-03-18T18:08:38Z",
+      "side": 1,
+      "message": "Extra whitespace.",
+      "range": {
+        "startLine": 15,
+        "startChar": 42,
+        "endLine": 15,
+        "endChar": 43
+      },
+      "revId": "3e19a6d885fd6d92081798d06178f4b599748804",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e67fc8e4_bba7df84",
+        "filename": "perfprofd/tests/Android.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2015-03-18T18:08:38Z",
+      "side": 1,
+      "message": "Whitespace.",
+      "range": {
+        "startLine": 21,
+        "startChar": 45,
+        "endLine": 21,
+        "endChar": 46
+      },
+      "revId": "3e19a6d885fd6d92081798d06178f4b599748804",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "067dbcec_d17c76b5",
+        "filename": "perfprofd/tests/Android.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2015-03-18T18:08:38Z",
+      "side": 1,
+      "message": "Whitespace.",
+      "range": {
+        "startLine": 39,
+        "startChar": 25,
+        "endLine": 39,
+        "endChar": 26
       },
       "revId": "3e19a6d885fd6d92081798d06178f4b599748804",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
