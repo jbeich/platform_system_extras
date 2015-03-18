@@ -348,6 +348,30 @@
     },
     {
       "key": {
+        "uuid": "06f05cdb_b0fc7887",
+        "filename": "perfprofd/perf_data_converter.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2015-03-18T20:40:12Z",
+      "side": 1,
+      "message": "I think if you use:\n\nLOCAL_PROTOC_FLAGS :\u003d --proto_path\u003d$(LOCAL_PATH)/XXX\n\nYou can put this somewhere else and avoid using the full path like this.\n\nI\u0027d recommend the way another piece of code sets XXX to protos, and then uses #include \"protos/perf_profile.pb.h\".\n\nI think that makes this a bit more obvious and avoids the hard-coding of this in case this code moves at some point in the future.",
+      "parentUuid": "a6a6b0d3_e060fc32",
+      "range": {
+        "startLine": 2,
+        "startChar": 9,
+        "endLine": 2,
+        "endChar": 52
+      },
+      "revId": "3e19a6d885fd6d92081798d06178f4b599748804",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "067dbcec_51132692",
         "filename": "perfprofd/perf_data_converter.h",
         "patchSetId": 5
