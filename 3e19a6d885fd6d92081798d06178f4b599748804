@@ -468,6 +468,30 @@
     },
     {
       "key": {
+        "uuid": "a64230dc_6c596318",
+        "filename": "perfprofd/perf_data_converter.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2015-03-19T19:32:51Z",
+      "side": 1,
+      "message": "Put the same value in LOCAL_EXPORT_C_INCLUDE_DIRS in your library, and then anything that depends on your library will get the include path",
+      "parentUuid": "c6aba49c_3261987f",
+      "range": {
+        "startLine": 2,
+        "startChar": 9,
+        "endLine": 2,
+        "endChar": 52
+      },
+      "revId": "3e19a6d885fd6d92081798d06178f4b599748804",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "067dbcec_51132692",
         "filename": "perfprofd/perf_data_converter.h",
         "patchSetId": 5
