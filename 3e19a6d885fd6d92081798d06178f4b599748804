@@ -396,6 +396,30 @@
     },
     {
       "key": {
+        "uuid": "460fb4b1_a77d5d33",
+        "filename": "perfprofd/perf_data_converter.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2015-03-19T16:58:43Z",
+      "side": 1,
+      "message": "You could add to your makefile:\n\n LOCAL_MODULE :\u003d perfprofd\n LOCAL_MODULE_CLASS :\u003d STATIC_LIBRARIES\n LOCAL_C_INCLUDES :\u003d $(call local-generated-sources-dir)/proto/$(LOCAL_PATH)\n\nLOCAL_MODULE and LOCAL_MODULE_CLASS are required before local-generated-sources-dir",
+      "parentUuid": "c6aba49c_2735d854",
+      "range": {
+        "startLine": 2,
+        "startChar": 9,
+        "endLine": 2,
+        "endChar": 52
+      },
+      "revId": "3e19a6d885fd6d92081798d06178f4b599748804",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "067dbcec_51132692",
         "filename": "perfprofd/perf_data_converter.h",
         "patchSetId": 5
