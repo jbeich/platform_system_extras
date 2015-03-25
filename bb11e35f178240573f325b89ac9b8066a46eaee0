@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2339d2d0_d79534bd",
+        "filename": "perfprofd/perfprofdcore.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 507,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-03-25T18:41:36Z",
+      "side": 1,
+      "message": "Fixed (replaced with strerror)",
+      "parentUuid": "c3fb9632_999b6c4b",
+      "revId": "bb11e35f178240573f325b89ac9b8066a46eaee0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2362b2ee_f2883e23",
         "filename": "perfprofd/perfprofdcore.cc",
         "patchSetId": 8
@@ -30,6 +48,24 @@
       "writtenOn": "2015-03-25T06:20:03Z",
       "side": 1,
       "message": "if you\u0027re forking, you might want to take more care to use the \u0027e\u0027 flag.",
+      "revId": "bb11e35f178240573f325b89ac9b8066a46eaee0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "03592e45_2b68a5ee",
+        "filename": "perfprofd/perfprofdcore.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 518,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-03-25T18:41:36Z",
+      "side": 1,
+      "message": "OK, I can add that. Note that the file in question is immediately closed (will not be open at the subsequent fork).",
+      "parentUuid": "2362b2ee_f2883e23",
       "revId": "bb11e35f178240573f325b89ac9b8066a46eaee0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "4336c6df_5bf72fa5",
+        "filename": "perfprofd/perfprofdcore.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 520,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-03-25T18:41:36Z",
+      "side": 1,
+      "message": "Given that I\u0027m intercepting all logging operations for unit testing purposes, I think it makes sense to stick with the current scheme.",
+      "parentUuid": "c3fb9632_79a0a070",
+      "revId": "bb11e35f178240573f325b89ac9b8066a46eaee0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c3fb9632_99848ce3",
         "filename": "perfprofd/perfprofdcore.cc",
         "patchSetId": 8
@@ -64,6 +118,24 @@
       "writtenOn": "2015-03-25T06:20:03Z",
       "side": 1,
       "message": "why chdir if you\u0027re going to use -o?",
+      "revId": "bb11e35f178240573f325b89ac9b8066a46eaee0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "03592e45_ab549527",
+        "filename": "perfprofd/perfprofdcore.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 608,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-03-25T18:41:36Z",
+      "side": 1,
+      "message": "The encoded profile is going to be written in the destination directory as well. Is your concern that the destination dir might disappear?",
+      "parentUuid": "c3fb9632_99848ce3",
       "revId": "bb11e35f178240573f325b89ac9b8066a46eaee0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -121,6 +193,24 @@
     },
     {
       "key": {
+        "uuid": "03592e45_6bf21db7",
+        "filename": "perfprofd/perfprofdcore.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 694,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-03-25T18:41:36Z",
+      "side": 1,
+      "message": "Good suggestion. Fixed.",
+      "parentUuid": "435fa627_f3af220d",
+      "revId": "bb11e35f178240573f325b89ac9b8066a46eaee0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c3fb9632_99692ca7",
         "filename": "perfprofd/perfprofdcore.cc",
         "patchSetId": 8
@@ -132,6 +222,24 @@
       "writtenOn": "2015-03-25T06:20:03Z",
       "side": 1,
       "message": "use ro.debuggable instead.",
+      "revId": "bb11e35f178240573f325b89ac9b8066a46eaee0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4336c6df_fbb383db",
+        "filename": "perfprofd/perfprofdcore.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 723,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-03-25T18:41:36Z",
+      "side": 1,
+      "message": "Fixed.",
+      "parentUuid": "c3fb9632_99692ca7",
       "revId": "bb11e35f178240573f325b89ac9b8066a46eaee0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -155,6 +263,24 @@
     },
     {
       "key": {
+        "uuid": "2339d2d0_37b00042",
+        "filename": "perfprofd/perfprofdutils.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-03-25T18:41:36Z",
+      "side": 1,
+      "message": "OK, I will add a comment.",
+      "parentUuid": "2362b2ee_f2571ee4",
+      "revId": "bb11e35f178240573f325b89ac9b8066a46eaee0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2362b2ee_12cf525d",
         "filename": "perfprofd/quipper/address_mapper.cc",
         "patchSetId": 8
@@ -166,6 +292,24 @@
       "writtenOn": "2015-03-25T06:20:03Z",
       "side": 1,
       "message": "?",
+      "revId": "bb11e35f178240573f325b89ac9b8066a46eaee0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4336c6df_7be9d3ac",
+        "filename": "perfprofd/quipper/address_mapper.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-03-25T18:41:36Z",
+      "side": 1,
+      "message": "Leftover debugging code... removed. Thanks for catching that.",
+      "parentUuid": "2362b2ee_12cf525d",
       "revId": "bb11e35f178240573f325b89ac9b8066a46eaee0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -189,6 +333,24 @@
     },
     {
       "key": {
+        "uuid": "03592e45_0b1a816d",
+        "filename": "perfprofd/quipper/base/logging.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-03-25T18:41:36Z",
+      "side": 1,
+      "message": "Let me look into that -- seems like it would be a good idea.",
+      "parentUuid": "c3fb9632_3958d812",
+      "revId": "bb11e35f178240573f325b89ac9b8066a46eaee0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "435fa627_53aa6efa",
         "filename": "perfprofd/quipper/kernel/perf_event.h",
         "patchSetId": 8
@@ -200,6 +362,24 @@
       "writtenOn": "2015-03-25T06:20:03Z",
       "side": 1,
       "message": "this is not acceptable for checkin.\n\njust #include \u003clinux/perf_event.h\u003e instead.",
+      "revId": "bb11e35f178240573f325b89ac9b8066a46eaee0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "03592e45_ebb3addb",
+        "filename": "perfprofd/quipper/kernel/perf_event.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-03-25T18:41:36Z",
+      "side": 1,
+      "message": "I sent an email to ask about this. More info needed.",
+      "parentUuid": "435fa627_53aa6efa",
       "revId": "bb11e35f178240573f325b89ac9b8066a46eaee0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -223,6 +403,24 @@
     },
     {
       "key": {
+        "uuid": "4336c6df_9bd357fe",
+        "filename": "perfprofd/quipper/kernel/perf_internals.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-03-25T18:41:36Z",
+      "side": 1,
+      "message": "Sent email to discuss.",
+      "parentUuid": "2362b2ee_529b8a4b",
+      "revId": "bb11e35f178240573f325b89ac9b8066a46eaee0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c3fb9632_19dabc13",
         "filename": "perfprofd/quipper/perf_utils.cc",
         "patchSetId": 8
@@ -234,6 +432,24 @@
       "writtenOn": "2015-03-25T06:20:03Z",
       "side": 1,
       "message": "you know Android\u0027s off_t is 32-bit on LP32? we do have _FILE_OFFSET_BITS\u003d64, but you\u0027ll have to explicitly set it, and if you do, this code still won\u0027t work for ABI reasons. (but at least it should fail to compile.) you\u0027ll have to rewrite this with fileno(3) if you care.",
+      "revId": "bb11e35f178240573f325b89ac9b8066a46eaee0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4336c6df_5b9baf4b",
+        "filename": "perfprofd/quipper/perf_utils.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-03-25T18:41:36Z",
+      "side": 1,
+      "message": "Fixed. This and one other routine are not actually called, so I am deleting them.",
+      "parentUuid": "c3fb9632_19dabc13",
       "revId": "bb11e35f178240573f325b89ac9b8066a46eaee0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -257,6 +473,24 @@
     },
     {
       "key": {
+        "uuid": "03592e45_6b969d27",
+        "filename": "perfprofd/quipper/quipper_test.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-03-25T18:41:36Z",
+      "side": 1,
+      "message": "Fixed.",
+      "parentUuid": "c3fb9632_b94d0850",
+      "revId": "bb11e35f178240573f325b89ac9b8066a46eaee0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c3fb9632_99524cef",
         "filename": "perfprofd/tests/README.txt",
         "patchSetId": 8
@@ -268,6 +502,24 @@
       "writtenOn": "2015-03-25T06:20:03Z",
       "side": 1,
       "message": "impractical",
+      "revId": "bb11e35f178240573f325b89ac9b8066a46eaee0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "03592e45_4b9bd94b",
+        "filename": "perfprofd/tests/README.txt",
+        "patchSetId": 8
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-03-25T18:41:36Z",
+      "side": 1,
+      "message": "Fixed.",
+      "parentUuid": "c3fb9632_99524cef",
       "revId": "bb11e35f178240573f325b89ac9b8066a46eaee0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -291,6 +543,24 @@
     },
     {
       "key": {
+        "uuid": "4336c6df_fb5703e4",
+        "filename": "perfprofd/tests/perfprofd_test.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-03-25T18:41:36Z",
+      "side": 1,
+      "message": "Fixed. I rewrote the test to discover it\u0027s containing directory from argv[0].",
+      "parentUuid": "2362b2ee_5284aae1",
+      "revId": "bb11e35f178240573f325b89ac9b8066a46eaee0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2362b2ee_3279367e",
         "filename": "perfprofd/tests/perfprofd_test.cc",
         "patchSetId": 8
@@ -302,6 +572,24 @@
       "writtenOn": "2015-03-25T06:20:03Z",
       "side": 1,
       "message": "actual",
+      "revId": "bb11e35f178240573f325b89ac9b8066a46eaee0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2339d2d0_7af2edb6",
+        "filename": "perfprofd/tests/perfprofd_test.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-03-25T18:41:36Z",
+      "side": 1,
+      "message": "Fixed.",
+      "parentUuid": "2362b2ee_3279367e",
       "revId": "bb11e35f178240573f325b89ac9b8066a46eaee0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -325,6 +613,24 @@
     },
     {
       "key": {
+        "uuid": "4336c6df_9bfd9737",
+        "filename": "perfprofd/tests/perfprofd_test.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-03-25T18:41:36Z",
+      "side": 1,
+      "message": "Fixed.",
+      "parentUuid": "435fa627_f39842f5",
+      "revId": "bb11e35f178240573f325b89ac9b8066a46eaee0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2362b2ee_928902f5",
         "filename": "perfprofd/tests/perfprofd_test.cc",
         "patchSetId": 8
@@ -336,6 +642,24 @@
       "writtenOn": "2015-03-25T06:20:03Z",
       "side": 1,
       "message": "/dev/null/null?",
+      "revId": "bb11e35f178240573f325b89ac9b8066a46eaee0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2339d2d0_ba0f3530",
+        "filename": "perfprofd/tests/perfprofd_test.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-03-25T18:41:36Z",
+      "side": 1,
+      "message": "Replaced with \"/does/not/exist\" (hopefully more descriptive)",
+      "parentUuid": "2362b2ee_928902f5",
       "revId": "bb11e35f178240573f325b89ac9b8066a46eaee0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -359,6 +683,24 @@
     },
     {
       "key": {
+        "uuid": "4336c6df_1b27676a",
+        "filename": "perfprofd/tests/perfprofd_test.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-03-25T18:41:36Z",
+      "side": 1,
+      "message": "Moved to a helper function and replaced with unlink.",
+      "parentUuid": "c3fb9632_594cc44e",
+      "revId": "bb11e35f178240573f325b89ac9b8066a46eaee0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "435fa627_938fc6a7",
         "filename": "perfprofd/tests/perfprofd_test.cc",
         "patchSetId": 8
@@ -370,6 +712,24 @@
       "writtenOn": "2015-03-25T06:20:03Z",
       "side": 1,
       "message": "why? can\u0027t you unit test the parsing rather than having to go through the whole daemon?",
+      "revId": "bb11e35f178240573f325b89ac9b8066a46eaee0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4336c6df_fb0b83d4",
+        "filename": "perfprofd/tests/perfprofd_test.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 447,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-03-25T18:41:36Z",
+      "side": 1,
+      "message": "Not sure I understand your comment -- this testpoint doesn\u0027t do config file parsing -- it is focused on testing the encoder. \n\nI could break out the config file parsing into a separate test, but that seems like overkill.",
+      "parentUuid": "435fa627_938fc6a7",
       "revId": "bb11e35f178240573f325b89ac9b8066a46eaee0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -393,6 +753,24 @@
     },
     {
       "key": {
+        "uuid": "2339d2d0_1a1ac16d",
+        "filename": "perfprofd/tests/perfprofd_test.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-03-25T18:41:36Z",
+      "side": 1,
+      "message": "Fixed.",
+      "parentUuid": "435fa627_b392cad1",
+      "revId": "bb11e35f178240573f325b89ac9b8066a46eaee0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2362b2ee_72644ecf",
         "filename": "perfprofd/tests/perfprofd_test.cc",
         "patchSetId": 8
@@ -404,6 +782,24 @@
       "writtenOn": "2015-03-25T06:20:03Z",
       "side": 1,
       "message": "rename",
+      "revId": "bb11e35f178240573f325b89ac9b8066a46eaee0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2339d2d0_7ac0ad2e",
+        "filename": "perfprofd/tests/perfprofd_test.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 463,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-03-25T18:41:36Z",
+      "side": 1,
+      "message": "Fixed.",
+      "parentUuid": "2362b2ee_72644ecf",
       "revId": "bb11e35f178240573f325b89ac9b8066a46eaee0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
