@@ -1,0 +1,412 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c3fb9632_999b6c4b",
+        "filename": "perfprofd/perfprofdcore.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 507,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-03-25T06:20:03Z",
+      "side": 1,
+      "message": "there\u0027s no reason to use strerror_r on Android.",
+      "revId": "bb11e35f178240573f325b89ac9b8066a46eaee0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2362b2ee_f2883e23",
+        "filename": "perfprofd/perfprofdcore.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 518,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-03-25T06:20:03Z",
+      "side": 1,
+      "message": "if you\u0027re forking, you might want to take more care to use the \u0027e\u0027 flag.",
+      "revId": "bb11e35f178240573f325b89ac9b8066a46eaee0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c3fb9632_79a0a070",
+        "filename": "perfprofd/perfprofdcore.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 520,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-03-25T06:20:03Z",
+      "side": 1,
+      "message": "you should probably add an equivalent of PLOG and use that.",
+      "revId": "bb11e35f178240573f325b89ac9b8066a46eaee0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c3fb9632_99848ce3",
+        "filename": "perfprofd/perfprofdcore.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 608,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-03-25T06:20:03Z",
+      "side": 1,
+      "message": "why chdir if you\u0027re going to use -o?",
+      "revId": "bb11e35f178240573f325b89ac9b8066a46eaee0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2362b2ee_52202a99",
+        "filename": "perfprofd/perfprofdcore.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 633,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-03-25T06:20:03Z",
+      "side": 1,
+      "message": "agreed. we might even want yabinc\u0027s perf replacement to be a library so you can just make a function call.",
+      "revId": "bb11e35f178240573f325b89ac9b8066a46eaee0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2362b2ee_d22bfa77",
+        "filename": "perfprofd/perfprofdcore.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 641,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-03-25T06:20:03Z",
+      "side": 1,
+      "message": "yabinc: this is the subset of perf that\u0027s needed first.",
+      "revId": "bb11e35f178240573f325b89ac9b8066a46eaee0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "435fa627_f3af220d",
+        "filename": "perfprofd/perfprofdcore.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 694,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-03-25T06:20:03Z",
+      "side": 1,
+      "message": "don\u0027t do this yourself. call arc4random.",
+      "revId": "bb11e35f178240573f325b89ac9b8066a46eaee0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c3fb9632_99692ca7",
+        "filename": "perfprofd/perfprofdcore.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 723,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-03-25T06:20:03Z",
+      "side": 1,
+      "message": "use ro.debuggable instead.",
+      "revId": "bb11e35f178240573f325b89ac9b8066a46eaee0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2362b2ee_f2571ee4",
+        "filename": "perfprofd/perfprofdutils.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-03-25T06:20:03Z",
+      "side": 1,
+      "message": "the comment about these being for testing might usefully be here rather than the README.",
+      "revId": "bb11e35f178240573f325b89ac9b8066a46eaee0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2362b2ee_12cf525d",
+        "filename": "perfprofd/quipper/address_mapper.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-03-25T06:20:03Z",
+      "side": 1,
+      "message": "?",
+      "revId": "bb11e35f178240573f325b89ac9b8066a46eaee0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c3fb9632_3958d812",
+        "filename": "perfprofd/quipper/base/logging.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-03-25T06:20:03Z",
+      "side": 1,
+      "message": "you might be able to use the ones we have in libbase.",
+      "revId": "bb11e35f178240573f325b89ac9b8066a46eaee0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "435fa627_53aa6efa",
+        "filename": "perfprofd/quipper/kernel/perf_event.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-03-25T06:20:03Z",
+      "side": 1,
+      "message": "this is not acceptable for checkin.\n\njust #include \u003clinux/perf_event.h\u003e instead.",
+      "revId": "bb11e35f178240573f325b89ac9b8066a46eaee0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2362b2ee_529b8a4b",
+        "filename": "perfprofd/quipper/kernel/perf_internals.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-03-25T06:20:03Z",
+      "side": 1,
+      "message": "no.\n\nthis one you\u0027ll have to rewrite, since it\u0027s not a uapi header.",
+      "revId": "bb11e35f178240573f325b89ac9b8066a46eaee0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c3fb9632_19dabc13",
+        "filename": "perfprofd/quipper/perf_utils.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-03-25T06:20:03Z",
+      "side": 1,
+      "message": "you know Android\u0027s off_t is 32-bit on LP32? we do have _FILE_OFFSET_BITS\u003d64, but you\u0027ll have to explicitly set it, and if you do, this code still won\u0027t work for ABI reasons. (but at least it should fail to compile.) you\u0027ll have to rewrite this with fileno(3) if you care.",
+      "revId": "bb11e35f178240573f325b89ac9b8066a46eaee0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c3fb9632_b94d0850",
+        "filename": "perfprofd/quipper/quipper_test.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-03-25T06:20:03Z",
+      "side": 1,
+      "message": "?",
+      "revId": "bb11e35f178240573f325b89ac9b8066a46eaee0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c3fb9632_99524cef",
+        "filename": "perfprofd/tests/README.txt",
+        "patchSetId": 8
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-03-25T06:20:03Z",
+      "side": 1,
+      "message": "impractical",
+      "revId": "bb11e35f178240573f325b89ac9b8066a46eaee0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2362b2ee_5284aae1",
+        "filename": "perfprofd/tests/perfprofd_test.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-03-25T06:20:03Z",
+      "side": 1,
+      "message": "yeah; why did you need to hard-code it?",
+      "revId": "bb11e35f178240573f325b89ac9b8066a46eaee0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2362b2ee_3279367e",
+        "filename": "perfprofd/tests/perfprofd_test.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-03-25T06:20:03Z",
+      "side": 1,
+      "message": "actual",
+      "revId": "bb11e35f178240573f325b89ac9b8066a46eaee0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "435fa627_f39842f5",
+        "filename": "perfprofd/tests/perfprofd_test.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-03-25T06:20:03Z",
+      "side": 1,
+      "message": "apwd?",
+      "revId": "bb11e35f178240573f325b89ac9b8066a46eaee0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2362b2ee_928902f5",
+        "filename": "perfprofd/tests/perfprofd_test.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-03-25T06:20:03Z",
+      "side": 1,
+      "message": "/dev/null/null?",
+      "revId": "bb11e35f178240573f325b89ac9b8066a46eaee0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c3fb9632_594cc44e",
+        "filename": "perfprofd/tests/perfprofd_test.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-03-25T06:20:03Z",
+      "side": 1,
+      "message": "unlink?",
+      "revId": "bb11e35f178240573f325b89ac9b8066a46eaee0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "435fa627_938fc6a7",
+        "filename": "perfprofd/tests/perfprofd_test.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 447,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-03-25T06:20:03Z",
+      "side": 1,
+      "message": "why? can\u0027t you unit test the parsing rather than having to go through the whole daemon?",
+      "revId": "bb11e35f178240573f325b89ac9b8066a46eaee0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "435fa627_b392cad1",
+        "filename": "perfprofd/tests/perfprofd_test.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-03-25T06:20:03Z",
+      "side": 1,
+      "message": "open/close",
+      "revId": "bb11e35f178240573f325b89ac9b8066a46eaee0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2362b2ee_72644ecf",
+        "filename": "perfprofd/tests/perfprofd_test.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 463,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-03-25T06:20:03Z",
+      "side": 1,
+      "message": "rename",
+      "revId": "bb11e35f178240573f325b89ac9b8066a46eaee0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
