@@ -178,6 +178,24 @@
     },
     {
       "key": {
+        "uuid": "837a7ea8_3dbb13d7",
+        "filename": "perfprofd/perfprofdcore.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 608,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-03-27T18:44:40Z",
+      "side": 1,
+      "message": "OK, fair enough. I will get rid of the chdir() and construct full paths to represent the output perf.data file etc and pass them in when invoking perf.",
+      "parentUuid": "63a3ca80_97d79443",
+      "revId": "bb11e35f178240573f325b89ac9b8066a46eaee0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2362b2ee_52202a99",
         "filename": "perfprofd/perfprofdcore.cc",
         "patchSetId": 8
@@ -784,6 +802,24 @@
       "side": 1,
       "message": "no, i meant parsing the output file. you have a canned.perf.data, and you pretend to run the daemon and then move the canned file into place... that seems crazy. why isn\u0027t there an entry point into the encoder you can call directly?",
       "parentUuid": "4336c6df_fb0b83d4",
+      "revId": "bb11e35f178240573f325b89ac9b8066a46eaee0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "43308612_05ce94dc",
+        "filename": "perfprofd/tests/perfprofd_test.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 447,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-03-27T18:44:40Z",
+      "side": 1,
+      "message": "Did not seem like a big deal to me, but if this bothers you, I can expose an entry point in the daemon code and then call it directly from the unit test. I will look into this",
+      "parentUuid": "63a3ca80_d7fbccba",
       "revId": "bb11e35f178240573f325b89ac9b8066a46eaee0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
