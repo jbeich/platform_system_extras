@@ -107,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "63758ab8_30db31f1",
+        "filename": "perfprofd/perfprofdcore.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 520,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-03-27T17:58:33Z",
+      "side": 1,
+      "message": "yeah, that\u0027s still on our to-do list.",
+      "parentUuid": "4336c6df_5bf72fa5",
+      "revId": "bb11e35f178240573f325b89ac9b8066a46eaee0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c3fb9632_99848ce3",
         "filename": "perfprofd/perfprofdcore.cc",
         "patchSetId": 8
@@ -136,6 +154,24 @@
       "side": 1,
       "message": "The encoded profile is going to be written in the destination directory as well. Is your concern that the destination dir might disappear?",
       "parentUuid": "c3fb9632_99848ce3",
+      "revId": "bb11e35f178240573f325b89ac9b8066a46eaee0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "63a3ca80_97d79443",
+        "filename": "perfprofd/perfprofdcore.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 608,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-03-27T17:58:33Z",
+      "side": 1,
+      "message": "no, i just don\u0027t like chdir because global state is hard to reason about. we already pass the destdir to encode_to_proto, so this ought to be redundant?",
+      "parentUuid": "03592e45_ab549527",
       "revId": "bb11e35f178240573f325b89ac9b8066a46eaee0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -730,6 +766,24 @@
       "side": 1,
       "message": "Not sure I understand your comment -- this testpoint doesn\u0027t do config file parsing -- it is focused on testing the encoder. \n\nI could break out the config file parsing into a separate test, but that seems like overkill.",
       "parentUuid": "435fa627_938fc6a7",
+      "revId": "bb11e35f178240573f325b89ac9b8066a46eaee0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "63a3ca80_d7fbccba",
+        "filename": "perfprofd/tests/perfprofd_test.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 447,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-03-27T17:58:33Z",
+      "side": 1,
+      "message": "no, i meant parsing the output file. you have a canned.perf.data, and you pretend to run the daemon and then move the canned file into place... that seems crazy. why isn\u0027t there an entry point into the encoder you can call directly?",
+      "parentUuid": "4336c6df_fb0b83d4",
       "revId": "bb11e35f178240573f325b89ac9b8066a46eaee0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
