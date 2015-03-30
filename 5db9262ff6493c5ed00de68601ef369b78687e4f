@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "43308612_dc880524",
+        "filename": "ext4_utils/ext4_crypt_init_extensions.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2015-03-30T16:37:46Z",
+      "side": 1,
+      "message": "In the change I\u0027m still trying to get approved",
+      "parentUuid": "a3a94260_eeddcee4",
+      "revId": "5db9262ff6493c5ed00de68601ef369b78687e4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e3b7bab3_d092f224",
         "filename": "ext4_utils/ext4_crypt_init_extensions.cpp",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2015-03-30T16:27:14Z",
       "side": 1,
       "message": "you trust all implementations to not return EEXIST? maybe \"ensure_dir_exists\" rather than \"make_dir\" then, to imply the desired behavior. (though just putting the errno test back seems easier.)",
+      "revId": "5db9262ff6493c5ed00de68601ef369b78687e4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "03dccefb_45cba8ef",
+        "filename": "ext4_utils/ext4_crypt_init_extensions.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2015-03-30T16:37:46Z",
+      "side": 1,
+      "message": "To me, this is cleaner. I guess it\u0027s personal preference?",
+      "parentUuid": "e3b7bab3_d092f224",
       "revId": "5db9262ff6493c5ed00de68601ef369b78687e4f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
