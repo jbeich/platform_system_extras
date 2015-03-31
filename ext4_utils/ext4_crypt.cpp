@@ -16,6 +16,48 @@
 
 namespace {
     std::map<std::string, std::string> s_password_store;
+
+    // ext4enc:TODO Include structure from somewhere sensible
+    // MUST be in sync with ext4_crypto.c in kernel
+    const int EXT4_MAX_KEY_SIZE = 76;
+    struct ext4_encryption_key {
+            uint32_t mode;
+            char raw[EXT4_MAX_KEY_SIZE];
+            uint32_t size;
+    };
+}
+
+int e4crypt_enable(const char* path)
+{
+    UnencryptedProperties props(path);
+    if (props.Get<std::string>(properties::key).empty()) {
+        // Create new key since it doesn't already exist
+        std::ifstream urandom("/dev/urandom", std::ifstream::binary);
+        if (!urandom) {
+            KLOG_ERROR(TAG, "Failed to open /dev/urandom\n");
+            return -1;
+        }
+
+        // ext4enc:TODO Don't hardcode 32
+        std::string key_material(32, '\0');
+        urandom.read(&key_material[0], key_material.length());
+        if (!urandom) {
+            KLOG_ERROR(TAG, "Failed to read random bytes\n");
+            return -1;
+        }
+
+        if (!props.Set(properties::key, key_material)) {
+            KLOG_ERROR(TAG, "Failed to write key material");
+            return -1;
+        }
+    }
+
+    if (!props.Remove(properties::ref)) {
+        KLOG_ERROR(TAG, "Failed to remove key ref\n");
+        return -1;
+    }
+
+    return e4crypt_check_passwd(path, "");
 }
 
 bool e4crypt_non_default_key(const char* dir)
@@ -63,19 +105,63 @@ int e4crypt_crypto_complete(const char* path)
 int e4crypt_check_passwd(const char* path, const char* password)
 {
     UnencryptedProperties props(path);
-    if (props.Get<std::string>(properties::key).empty()) {
+    auto key = props.Get<std::string>(properties::key);
+    if (key.empty()) {
         KLOG_INFO(TAG, "No master key, so not ext4enc\n");
         return -1;
     }
 
     auto actual_password = props.Get<std::string>(properties::password);
-
-    if (actual_password == password) {
-        s_password_store[path] = password;
-        return 0;
-    } else {
+    if (actual_password != password) {
         return -1;
     }
+
+    s_password_store[path] = password;
+
+    // Install password into global keyring
+    ext4_encryption_key ext4_key = {0, {0}, 0};
+    if (key.length() > sizeof(ext4_key.raw)) {
+        KLOG_ERROR(TAG, "Key too long\n");
+        return -1;
+    }
+
+    ext4_key.mode = 0;
+    memcpy(ext4_key.raw, &key[0], key.length());
+    ext4_key.size = key.length();
+
+    // ext4enc:TODO Use better reference not 1234567890
+    key_serial_t device_keyring = keyctl_search(KEY_SPEC_SESSION_KEYRING,
+                                                "keyring", "e4crypt", 0);
+
+    KLOG_INFO(TAG, "Found device_keyring - id is %d\n", device_keyring);
+
+    key_serial_t key_id = add_key("logon", "ext4-key:1234567890",
+                                  (void*)&ext4_key, sizeof(ext4_key),
+                                  device_keyring);
+
+    if (key_id == -1) {
+        KLOG_ERROR(TAG,"Failed to insert key into keyring with error %s\n",
+                   strerror(errno));
+        return -1;
+    }
+
+    KLOG_INFO(TAG, "Added key %d to keyring %d in process %d\n",
+              key_id, device_keyring, getpid());
+
+    // ext4enc:TODO set correct permissions
+    long result = keyctl_setperm(key_id, 0x3f3f3f3f);
+    if (result) {
+        KLOG_ERROR(TAG, "KEYCTL_SETPERM failed with error %ld\n", result);
+        return -1;
+    }
+
+    // Save reference to key so we can set policy later
+    if (!props.Set(properties::ref, "@s.ext4-key:1234567890")) {
+        KLOG_ERROR(TAG, "Cannot save key reference\n");
+        return -1;
+    }
+
+    return 0;
 }
 
 int e4crypt_restart(const char* path)

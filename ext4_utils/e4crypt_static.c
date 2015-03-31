@@ -25,6 +25,15 @@
 #define XATTR_NAME_ENCRYPTION_POLICY "encryption.policy"
 #define EXT4_KEYREF_DELIMITER ((char)'.')
 
+// ext4enc:TODO Include structure from somewhere sensible
+// MUST be in sync with ext4_crypto.c in kernel
+#define EXT4_MAX_KEY_SIZE 76
+struct ext4_encryption_key {
+        uint32_t mode;
+        char raw[EXT4_MAX_KEY_SIZE];
+        uint32_t size;
+};
+
 /* Validate that all path items are available and accessible. */
 static int is_path_valid(const char *path)
 {
@@ -101,7 +110,8 @@ int do_policy_set(const char *directory, const char *policy)
     }
 
     if (!is_dir_empty(directory)) {
-        KLOG_ERROR(TAG, "Can only set policy on an empty directory (%s)\n", directory);
+        KLOG_ERROR(TAG, "Can only set policy on an empty directory (%s)\n",
+                   directory);
         return -EINVAL;
     }
 
@@ -144,4 +154,10 @@ key_serial_t add_key(const char *type,
 long keyctl_setperm(key_serial_t id, int permissions)
 {
     return keyctl(KEYCTL_SETPERM, id, permissions);
+}
+
+long keyctl_search(key_serial_t ringid, const char *type,
+                   const char *description, key_serial_t destringid)
+{
+    return keyctl(KEYCTL_SEARCH, ringid, type, description, destringid);
 }
