@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "630f4a79_6c94aa42",
+        "filename": "perfprofd/perfprofdcore.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-03-31T16:50:07Z",
+      "side": 1,
+      "message": "Switched to using getline(3)",
+      "parentUuid": "03d68e0c_20748a00",
+      "revId": "c8dbfd65ae216e461fb22c3138ea61dba99d644d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a3da2233_3d63cf17",
         "filename": "perfprofd/quipper/kernel/perf_event.h",
         "patchSetId": 10
@@ -30,6 +48,24 @@
       "writtenOn": "2015-03-31T16:22:50Z",
       "side": 1,
       "message": "oops.",
+      "revId": "c8dbfd65ae216e461fb22c3138ea61dba99d644d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "630f4a79_4cf28eb6",
+        "filename": "perfprofd/quipper/kernel/perf_event.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-03-31T16:50:07Z",
+      "side": 1,
+      "message": "Sorry about that. original \u0027kernel\u0027 headers now removed.",
+      "parentUuid": "a3da2233_3d63cf17",
       "revId": "c8dbfd65ae216e461fb22c3138ea61dba99d644d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "a315c284_e4ed4f04",
+        "filename": "perfprofd/quipper/kernel/perf_internals.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-03-31T16:50:07Z",
+      "side": 1,
+      "message": "See previous comment",
+      "parentUuid": "03d68e0c_607e92e0",
+      "revId": "c8dbfd65ae216e461fb22c3138ea61dba99d644d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "03d68e0c_c064be4c",
         "filename": "perfprofd/quipper/original-kernel-headers/tools/perf/util/include/linux/bitmap.h",
         "patchSetId": 10
@@ -64,6 +118,24 @@
       "writtenOn": "2015-03-31T16:22:50Z",
       "side": 1,
       "message": "why is this in here but not in the scrubbed headers?",
+      "revId": "c8dbfd65ae216e461fb22c3138ea61dba99d644d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "83143e89_c17125de",
+        "filename": "perfprofd/quipper/original-kernel-headers/tools/perf/util/include/linux/bitmap.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-03-31T16:50:07Z",
+      "side": 1,
+      "message": "Thanks for catching that (leftover from earlier attempt). I\u0027ve removed it.",
+      "parentUuid": "03d68e0c_c064be4c",
       "revId": "c8dbfd65ae216e461fb22c3138ea61dba99d644d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
