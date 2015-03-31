@@ -5,8 +5,7 @@
 namespace properties {
     const char* key = "key";
     const char* ref = "ref";
-    const char* type = "type";
-    const char* password = "password";
+    const char* is_default = "is_default";
 }
 
 namespace
@@ -24,7 +23,7 @@ UnencryptedProperties::UnencryptedProperties()
 }
 
 template<> std::string UnencryptedProperties::Get(const char* name,
-                                      std::string default_value)
+                                      std::string default_value) const
 {
     if (!OK()) return default_value;
     std::ifstream i(folder_ + "/" + name, std::ios::binary);
@@ -56,7 +55,7 @@ template<> bool UnencryptedProperties::Set(const char* name, std::string const& 
     return !o.fail();
 }
 
-UnencryptedProperties UnencryptedProperties::GetChild(const char* name)
+UnencryptedProperties UnencryptedProperties::GetChild(const char* name) const
 {
     UnencryptedProperties e4p;
     if (!OK()) return e4p;
