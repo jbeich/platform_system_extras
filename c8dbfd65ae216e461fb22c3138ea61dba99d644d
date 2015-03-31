@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "03d68e0c_20748a00",
+        "filename": "perfprofd/perfprofdcore.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-03-31T16:22:50Z",
+      "side": 1,
+      "message": "getline(3) rather than fixed-length buffer?",
+      "revId": "c8dbfd65ae216e461fb22c3138ea61dba99d644d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a3da2233_3d63cf17",
+        "filename": "perfprofd/quipper/kernel/perf_event.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-03-31T16:22:50Z",
+      "side": 1,
+      "message": "oops.",
+      "revId": "c8dbfd65ae216e461fb22c3138ea61dba99d644d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "03d68e0c_607e92e0",
+        "filename": "perfprofd/quipper/kernel/perf_internals.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-03-31T16:22:50Z",
+      "side": 1,
+      "message": "oops.",
+      "revId": "c8dbfd65ae216e461fb22c3138ea61dba99d644d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "03d68e0c_c064be4c",
+        "filename": "perfprofd/quipper/original-kernel-headers/tools/perf/util/include/linux/bitmap.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-03-31T16:22:50Z",
+      "side": 1,
+      "message": "why is this in here but not in the scrubbed headers?",
+      "revId": "c8dbfd65ae216e461fb22c3138ea61dba99d644d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
