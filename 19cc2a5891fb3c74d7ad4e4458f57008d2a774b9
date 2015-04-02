@@ -22,6 +22,30 @@
       "revId": "19cc2a5891fb3c74d7ad4e4458f57008d2a774b9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e3bdfae6_0ff8b049",
+        "filename": "ext4_utils/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2015-04-02T18:20:57Z",
+      "side": 1,
+      "message": "Nope, better to keep this static since it is in the DISTTOOLS in build/core/Makefile",
+      "parentUuid": "63de6a5c_a0bae0cf",
+      "range": {
+        "startLine": 39,
+        "startChar": 4,
+        "endLine": 39,
+        "endChar": 15
+      },
+      "revId": "19cc2a5891fb3c74d7ad4e4458f57008d2a774b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
