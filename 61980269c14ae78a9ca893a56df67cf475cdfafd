@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e37fbae4_b68ff6f8",
+        "filename": "ext4_utils/ext4_crypt.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1005480
+      },
+      "writtenOn": "2015-04-02T00:26:49Z",
+      "side": 1,
+      "message": "lost info message about type, and not shown in caller either.",
+      "range": {
+        "startLine": 37,
+        "startChar": 4,
+        "endLine": 37,
+        "endChar": 47
+      },
+      "revId": "61980269c14ae78a9ca893a56df67cf475cdfafd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
