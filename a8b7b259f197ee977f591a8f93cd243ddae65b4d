@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "83cefea1_77a02a9f",
+        "filename": "squashfs_utils/squashfs_utils.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1018087
+      },
+      "writtenOn": "2015-04-02T02:50:30Z",
+      "side": 1,
+      "message": "Not super critical but I\u0027m a little worried that this may grow and someone might forget the cleanup path. How about you try to make a cleanup path the way the kernel does it?",
+      "revId": "a8b7b259f197ee977f591a8f93cd243ddae65b4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
