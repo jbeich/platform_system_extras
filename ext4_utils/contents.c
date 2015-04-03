@@ -310,10 +310,14 @@ static struct ext4_xattr_entry* xattr_get_last(struct ext4_xattr_entry *entry)
  * This method is intended to implement the sorting function defined in
  * the Linux kernel file fs/ext4/xattr.c function ext4_xattr_find_entry().
  */
-static void xattr_assert_sane(struct ext4_xattr_entry *entry)
+static void xattr_assert_sane(struct ext4_xattr_entry *entry, char *end)
 {
-	for( ; !IS_LAST_ENTRY(entry); entry = EXT4_XATTR_NEXT(entry)) {
+	while (!IS_LAST_ENTRY(entry)) {
 		struct ext4_xattr_entry *next = EXT4_XATTR_NEXT(entry);
+		end -= EXT4_XATTR_SIZE(le32_to_cpu(entry->e_value_size));
+                if (next > (struct ext4_xattr_entry *)(end - sizeof(uint32_t))) {
+			return;
+                }
 		if (IS_LAST_ENTRY(next)) {
 			return;
 		}
@@ -331,6 +335,7 @@ static void xattr_assert_sane(struct ext4_xattr_entry *entry)
 			error("BUG: duplicate extended attributes detected\n");
 			return;
 		}
+		entry = next;
 	}
 }
 
@@ -401,7 +406,7 @@ static struct ext4_xattr_entry* xattr_addto_range(
 	memset(val, 0, EXT4_XATTR_SIZE(value_len));
 	memcpy(val, value, value_len);
 
-	xattr_assert_sane(first);
+	xattr_assert_sane(first, block_end);
 	return new_entry;
 }
 
