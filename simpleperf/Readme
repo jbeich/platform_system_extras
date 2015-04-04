@@ -1,0 +1,77 @@
+Simpleperf
+
+Supported Subcommands:
+
+list:
+  Support hardware events, software events, hw cache events.
+  Missing pmu events, raw events, tracing events, breakpoint events.
+
+stat:
+  Support -e option.
+  Support -a option.
+
+record:
+  Try to run a complete record command:
+    1. copy code from stat to run a workload.
+    2. extend event.cpp into event.cpp and event_fd.cpp.
+    3. remove sys_perf_event.cpp, focus perf_event_file_operation in event_fd.cpp.
+    4. add event_attr.cpp to support diverse attr content setting *
+    5. add default event_attr configuration in cmd_record.cpp. *
+    6. print what we get in mmaped area. *
+    7. dump events into file.
+    8. see what else is missing for standard perf.data.
+
+Class Design:
+
+class list:
+  command.cpp
+  cmd_list.cpp
+  cmd_record.cpp
+  cmd_stat.cpp
+  environment.cpp
+  event.cpp
+  event_attr.cpp
+  event_fd.cpp
+  perf_main.cpp
+  record_file.cpp
+  workload.cpp
+  record.cpp
+
+Command, ListCommand, HelpCommand, StatCommand, RecordCommand, ReadRecordCommand:
+As simpleperf needs to support a bunch of commands, use Command class as the base class,
+derive from Command for each command, like HelpCommand, Listcommand, RecordCommand, StatCommand.
+The Command class structure can be used to register commands, and show command help info in a unified
+method.
+
+Event, EventAttr, EventFd:
+Use Event class (in event.cpp) to represent a perf event. It can't be changed outside event.cpp.
+Event can be used to construct EventAttr class (in event_attr.cpp), EventAttr is used to create
+perf event file in EventFd class (in event_fd.cpp). EventAttr represents the configuration to open
+perf event file, it must contains a Event type, but also contains other information like sampling rate.
+EventFd class represents a opened event file, which has EventAttr, pid, cpu info. We can also read
+from EventFd, or mmap data from EventFd.
+
+RecordCommand, RecordFile:
+RecordFile class (in record_file.cpp) is used to represent the file format of perf.data. It is used
+by RecordCommand to write record file.
+
+ReadRecordCommand, Record:
+ReadRecordCommand read the content in perf.data. and parse different records by Record.
+
+StatCommand, RecordCommand, WorkLoad:
+WorkLoad class (in workload.cpp) is used to start a workload either in the current process or in a
+new process. It is used by StatCommand and RecordCommand.
+
+Environment:
+Environment class (in environment.cpp) is used to manage some system environment, like getting online
+cpu numbers.
+
+Remember:
+create perf.data only read/write by user?
+move cmd_help out of perf_main.cpp
+may not work when endian-issue is involved.
+
+binary file is so hard to understand, add a record_file_read command to read data back and print in
+text mode.
+
+Add Record to analyse all types of events. It helps us to know what is going on in perf.
