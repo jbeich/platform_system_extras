@@ -1,0 +1,73 @@
+Simpleperf
+
+Supported Subcommands:
+
+list:
+  Support hardware events, software events, hw cache events.
+  Missing pmu events, raw events, tracing events, breakpoint events.
+
+stat:
+  Support -e option.
+  Support -a option.
+
+record:
+  Support -e option.
+  Support -a option.
+  Support -c/-f/-F option.
+  Support -o option.
+
+readrecord:
+  Read binary perf.data, and output parsed text file.
+
+Class Design:
+
+class list:
+  command.cpp
+  cmd_list.cpp
+  cmd_record.cpp
+  cmd_stat.cpp
+  cmd_readrecord.cpp
+  environment.cpp
+  event.cpp
+  event_attr.cpp
+  event_fd.cpp
+  perf_main.cpp
+  record_file.cpp
+  workload.cpp
+  record.cpp
+
+Command, ListCommand, HelpCommand, StatCommand, RecordCommand, ReadRecordCommand:
+As simpleperf needs to support a bunch of commands, use Command class as the base class,
+derive from Command for each command, like HelpCommand, Listcommand, RecordCommand, StatCommand.
+The Command class structure can be used to register commands, and show command help info in a unified
+method.
+
+Event, EventAttr, EventFd:
+Use Event class (in event.cpp) to represent a perf event. It can't be changed outside event.cpp.
+Event can be used to construct EventAttr class (in event_attr.cpp), EventAttr is used to create
+perf event file in EventFd class (in event_fd.cpp). EventAttr represents the configuration to open
+perf event file, it must contains a Event type, but also contains other information like sampling rate.
+EventFd class represents a opened event file, which has EventAttr, pid, cpu info. We can also read
+from EventFd, or mmap data from EventFd.
+
+RecordCommand, RecordFile:
+RecordFile class (in record_file.cpp) is used to represent the file format of perf.data. It is used
+by RecordCommand to write record file.
+
+ReadRecordCommand, Record:
+ReadRecordCommand read the content in perf.data. and parse different records by Record.
+
+StatCommand, RecordCommand, WorkLoad:
+WorkLoad class (in workload.cpp) is used to start a workload either in the current process or in a
+new process. It is used by StatCommand and RecordCommand.
+
+
+TODO list:
+
+refactor Record classes, don't keep buffer in it.
+
+change read/write perf.data to mmap.
+
+Make perf.data more correct, especially on devices.
+
+support mac/windows build.
