@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "c34716eb_cd26756c",
+        "filename": "simpleperf/event_fd.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-06T16:11:52Z",
+      "side": 1,
+      "message": "(and a comment saying that we can\u0027t use PERF_FLAG_FD_CLOEXEC until we don\u0027t have to support kernels older than 3.14.)",
+      "parentUuid": "83519eaa_7f034b0f",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 1
+      },
+      "revId": "cbddd26af5996220be123904908314055229b13a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a34222dc_e3ab4685",
         "filename": "simpleperf/record_file.cpp",
         "patchSetId": 2
