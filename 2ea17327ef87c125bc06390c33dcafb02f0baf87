@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c34716eb_59f1c4e1",
+        "filename": "perfprofd/perfprofdcore.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2015-04-06T23:10:06Z",
+      "side": 1,
+      "message": "For these kinds of calls, we usually do an exact check. So this would be acces(...) \u003d\u003d -1.",
+      "range": {
+        "startLine": 479,
+        "startChar": 35,
+        "endLine": 479,
+        "endChar": 36
+      },
+      "revId": "2ea17327ef87c125bc06390c33dcafb02f0baf87",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c34716eb_5e6f6a23",
+        "filename": "perfprofd/perfprofdcore.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 480,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2015-04-06T23:10:06Z",
+      "side": 1,
+      "message": "Might want to change this error message to match what it\u0027s doing now.",
+      "range": {
+        "startLine": 480,
+        "startChar": 13,
+        "endLine": 480,
+        "endChar": 27
+      },
+      "revId": "2ea17327ef87c125bc06390c33dcafb02f0baf87",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a34222dc_903f1d38",
+        "filename": "perfprofd/perfprofdcore.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 578,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2015-04-06T23:10:06Z",
+      "side": 1,
+      "message": "It would probably be better to make this check for 0, since this looks wrong at first glance.",
+      "range": {
+        "startLine": 578,
+        "startChar": 42,
+        "endLine": 578,
+        "endChar": 44
+      },
+      "revId": "2ea17327ef87c125bc06390c33dcafb02f0baf87",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
