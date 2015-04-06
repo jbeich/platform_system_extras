@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "83519eaa_7f034b0f",
+        "filename": "simpleperf/event_fd.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-04-06T15:40:22Z",
+      "side": 1,
+      "message": "It seems like a good idea to add in\n fcntl(perf_event_fd, F_SETFD, FD_CLOEXEC);\nafter the check for -1, since it would be undesirable to have the child process inherit",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 1
+      },
+      "revId": "cbddd26af5996220be123904908314055229b13a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a34222dc_e3ab4685",
+        "filename": "simpleperf/record_file.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-04-06T15:40:22Z",
+      "side": 1,
+      "message": "Is there any way this could be put into a separate file that doesn\u0027t get linked in on the target? Most likely this code will only ever execute on the host, I am guessing.",
+      "range": {
+        "startLine": 171,
+        "startChar": 1,
+        "endLine": 171,
+        "endChar": 42
+      },
+      "revId": "cbddd26af5996220be123904908314055229b13a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "83519eaa_5f58cf13",
+        "filename": "simpleperf/workload.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-04-06T15:40:22Z",
+      "side": 1,
+      "message": "CLOEXEC for pipe fds as well?",
+      "range": {
+        "startLine": 116,
+        "startChar": 2,
+        "endLine": 117,
+        "endChar": 29
+      },
+      "revId": "cbddd26af5996220be123904908314055229b13a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
