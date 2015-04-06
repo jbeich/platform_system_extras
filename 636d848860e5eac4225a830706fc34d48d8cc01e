@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a34222dc_e6c82fa5",
+        "filename": "ext4_utils/contents.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1003966
+      },
+      "writtenOn": "2015-04-06T19:24:40Z",
+      "side": 1,
+      "message": "perhaps we should modify this assertion so that it asserts the minimum gap?",
+      "revId": "636d848860e5eac4225a830706fc34d48d8cc01e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
