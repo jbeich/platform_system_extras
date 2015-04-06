@@ -16,6 +16,24 @@
       "revId": "636d848860e5eac4225a830706fc34d48d8cc01e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c34716eb_7b359887",
+        "filename": "ext4_utils/contents.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2015-04-06T19:31:11Z",
+      "side": 1,
+      "message": "Yup, I will make a followup CL ...",
+      "parentUuid": "a34222dc_e6c82fa5",
+      "revId": "636d848860e5eac4225a830706fc34d48d8cc01e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
