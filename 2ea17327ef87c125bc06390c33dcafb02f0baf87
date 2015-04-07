@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "a34222dc_ee6d5db0",
+        "filename": "perfprofd/perfprofdcore.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-04-07T00:59:25Z",
+      "side": 1,
+      "message": "Ok, it now reads \"access(...) \u003d\u003d -1\"",
+      "parentUuid": "c34716eb_59f1c4e1",
+      "range": {
+        "startLine": 479,
+        "startChar": 35,
+        "endLine": 479,
+        "endChar": 36
+      },
+      "revId": "2ea17327ef87c125bc06390c33dcafb02f0baf87",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c34716eb_5e6f6a23",
         "filename": "perfprofd/perfprofdcore.cc",
         "patchSetId": 14
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "a34222dc_ce5501dd",
+        "filename": "perfprofd/perfprofdcore.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 480,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-04-07T00:59:25Z",
+      "side": 1,
+      "message": "Error message now reads \"unable to access/execute %s\"",
+      "parentUuid": "c34716eb_5e6f6a23",
+      "range": {
+        "startLine": 480,
+        "startChar": 13,
+        "endLine": 480,
+        "endChar": 27
+      },
+      "revId": "2ea17327ef87c125bc06390c33dcafb02f0baf87",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a34222dc_903f1d38",
         "filename": "perfprofd/perfprofdcore.cc",
         "patchSetId": 14
@@ -59,6 +107,30 @@
       "writtenOn": "2015-04-06T23:10:06Z",
       "side": 1,
       "message": "It would probably be better to make this check for 0, since this looks wrong at first glance.",
+      "range": {
+        "startLine": 578,
+        "startChar": 42,
+        "endLine": 578,
+        "endChar": 44
+      },
+      "revId": "2ea17327ef87c125bc06390c33dcafb02f0baf87",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2320f22c_932c1492",
+        "filename": "perfprofd/perfprofdcore.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 578,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-04-07T00:59:25Z",
+      "side": 1,
+      "message": "It now reads \"stat(...) \u003d\u003d 0\"",
+      "parentUuid": "a34222dc_903f1d38",
       "range": {
         "startLine": 578,
         "startChar": 42,
