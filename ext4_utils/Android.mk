@@ -38,6 +38,7 @@ LOCAL_MODULE := make_ext4fs
 LOCAL_STATIC_LIBRARIES += \
     libcutils \
     libext4_utils_host \
+    liblog \
     libsparse_host \
     libz
 ifeq ($(HOST_OS),windows)
@@ -66,6 +67,7 @@ LOCAL_MODULE := libext4_utils
 LOCAL_C_INCLUDES += system/core/logwrapper/include
 LOCAL_SHARED_LIBRARIES := \
     libcutils \
+    liblog \
     libselinux \
     libsparse \
     libz
@@ -87,6 +89,7 @@ LOCAL_MODULE := make_ext4fs
 LOCAL_SHARED_LIBRARIES := \
     libcutils \
     libext4_utils \
+    liblog \
     libselinux \
     libz
 include $(BUILD_EXECUTABLE)
