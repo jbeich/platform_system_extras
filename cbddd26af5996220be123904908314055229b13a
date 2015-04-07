@@ -2,6 +2,312 @@
   "comments": [
     {
       "key": {
+        "uuid": "2320f22c_e24b3736",
+        "filename": "simpleperf/Android.build.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-07T04:16:44Z",
+      "side": 1,
+      "message": "copyright header.",
+      "revId": "cbddd26af5996220be123904908314055229b13a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a34222dc_d1b7e636",
+        "filename": "simpleperf/Android.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-07T04:16:44Z",
+      "side": 1,
+      "message": "copyright header.",
+      "revId": "cbddd26af5996220be123904908314055229b13a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2320f22c_e2d817f7",
+        "filename": "simpleperf/Android.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-07T04:16:44Z",
+      "side": 1,
+      "message": "(remember that one of the goals of this project is to have something that works on Mac OS and Windows too.)",
+      "revId": "cbddd26af5996220be123904908314055229b13a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2320f22c_a2dbffee",
+        "filename": "simpleperf/Android.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-07T04:16:44Z",
+      "side": 1,
+      "message": "really?",
+      "revId": "cbddd26af5996220be123904908314055229b13a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a34222dc_b1a33af3",
+        "filename": "simpleperf/Android.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-07T04:16:44Z",
+      "side": 1,
+      "message": "this seems like overkill for such a simple project. it would probably be a lot clearer to just write it out.",
+      "revId": "cbddd26af5996220be123904908314055229b13a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a34222dc_118eae7f",
+        "filename": "simpleperf/Android.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-07T04:16:44Z",
+      "side": 1,
+      "message": "really?\n\nyou probably want to use LOCAL_EXPORT_C_INCLUDE_DIRS on the library and then just get the headers from the library. (and you definitely *don\u0027t* want the directory with all the source to contain headers that are API. if you must, have all your headers in include/ and all your source in src/. but you never want to have a directory with source on your include path.)",
+      "revId": "cbddd26af5996220be123904908314055229b13a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c34716eb_06018c07",
+        "filename": "simpleperf/cmd_help.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-07T04:16:44Z",
+      "side": 1,
+      "message": "all files should start with a copyright header.",
+      "revId": "cbddd26af5996220be123904908314055229b13a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c34716eb_46f794a4",
+        "filename": "simpleperf/cmd_list.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-07T04:16:44Z",
+      "side": 1,
+      "message": "these functions are all the same. just have a PrintEvents that takes a const char* like \"hardware\" and a collection like Event::HardwareEvents() instead.",
+      "revId": "cbddd26af5996220be123904908314055229b13a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a34222dc_d165a646",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-07T04:16:44Z",
+      "side": 1,
+      "message": "prev_head?",
+      "revId": "cbddd26af5996220be123904908314055229b13a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a34222dc_b151fa6a",
+        "filename": "simpleperf/cmd_stat.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-07T04:16:44Z",
+      "side": 1,
+      "message": "s/scalled/scaled/",
+      "revId": "cbddd26af5996220be123904908314055229b13a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c34716eb_06e8aca5",
+        "filename": "simpleperf/environment.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-07T04:16:44Z",
+      "side": 1,
+      "message": "getline",
+      "revId": "cbddd26af5996220be123904908314055229b13a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a34222dc_74f120e2",
+        "filename": "simpleperf/environment.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-07T04:16:44Z",
+      "side": 1,
+      "message": "this isn\u0027t really a class. may as well just make these global functions.",
+      "revId": "cbddd26af5996220be123904908314055229b13a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2320f22c_22c12fd2",
+        "filename": "simpleperf/event.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-07T04:16:44Z",
+      "side": 1,
+      "message": "if you\u0027re generating code, generate it into a file that you #include. preferably from the out directory. see https://android-review.googlesource.com/#/c/143958/ for an example.",
+      "revId": "cbddd26af5996220be123904908314055229b13a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c34716eb_c6dac413",
+        "filename": "simpleperf/event.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-07T04:16:44Z",
+      "side": 1,
+      "message": "is this really \"NotYetChecked\"?",
+      "revId": "cbddd26af5996220be123904908314055229b13a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c34716eb_a6dd380d",
+        "filename": "simpleperf/event.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-07T04:16:44Z",
+      "side": 1,
+      "message": "\"unsupported\" is a word.",
+      "revId": "cbddd26af5996220be123904908314055229b13a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2320f22c_429303d8",
+        "filename": "simpleperf/event_attr.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-07T04:16:44Z",
+      "side": 1,
+      "message": "this fits on the previous line, so it should be there. but if you do break the line, you need to double-indent.",
+      "revId": "cbddd26af5996220be123904908314055229b13a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c34716eb_a658d814",
+        "filename": "simpleperf/event_attr.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-07T04:16:44Z",
+      "side": 1,
+      "message": "can\u0027t you use %*s with \"\" for this?",
+      "revId": "cbddd26af5996220be123904908314055229b13a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c34716eb_6662d0bf",
+        "filename": "simpleperf/event_attr.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-07T04:16:44Z",
+      "side": 1,
+      "message": "?",
+      "revId": "cbddd26af5996220be123904908314055229b13a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "83519eaa_7f034b0f",
         "filename": "simpleperf/event_fd.cpp",
         "patchSetId": 2
@@ -49,6 +355,193 @@
     },
     {
       "key": {
+        "uuid": "c34716eb_46cf942d",
+        "filename": "simpleperf/event_fd.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-07T04:16:44Z",
+      "side": 1,
+      "message": "?",
+      "revId": "cbddd26af5996220be123904908314055229b13a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a34222dc_f440d066",
+        "filename": "simpleperf/lib_interface.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-07T04:16:44Z",
+      "side": 1,
+      "message": "no need for else. you\u0027ve already returned.",
+      "revId": "cbddd26af5996220be123904908314055229b13a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a34222dc_d458345d",
+        "filename": "simpleperf/perf_main.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-07T04:16:44Z",
+      "side": 1,
+      "message": "this is a bad idea, because you\u0027ll end up having to deal with escaping later. why don\u0027t you just fill a std::vector\u003cstd::string\u003e here and pass it through?",
+      "revId": "cbddd26af5996220be123904908314055229b13a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2320f22c_42e78355",
+        "filename": "simpleperf/record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-07T04:16:44Z",
+      "side": 1,
+      "message": "this seems weird. did you really want to just reinterpret_cast a struct { uint32_t, uint32_t, uint32_t, uint64_t } on top of \"buf\"?\n\nalternatively, don\u0027t take ownership of buf. it\u0027s weird to take ownership of the memory *and* duplicate its contents.",
+      "revId": "cbddd26af5996220be123904908314055229b13a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2320f22c_62cba7cc",
+        "filename": "simpleperf/record.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-07T04:16:44Z",
+      "side": 1,
+      "message": "why is this special? did you really want a union below?",
+      "revId": "cbddd26af5996220be123904908314055229b13a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a34222dc_f4b530e3",
+        "filename": "simpleperf/record_file.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-07T04:16:44Z",
+      "side": 1,
+      "message": "TRACING",
+      "revId": "cbddd26af5996220be123904908314055229b13a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a34222dc_14bbfcd6",
+        "filename": "simpleperf/record_file.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-07T04:16:44Z",
+      "side": 1,
+      "message": "no tabs.",
+      "revId": "cbddd26af5996220be123904908314055229b13a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c34716eb_e65020b9",
+        "filename": "simpleperf/record_file.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-07T04:16:44Z",
+      "side": 1,
+      "message": "static",
+      "revId": "cbddd26af5996220be123904908314055229b13a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a34222dc_74aa807e",
+        "filename": "simpleperf/record_file.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-07T04:16:44Z",
+      "side": 1,
+      "message": "really? we don\u0027t want to just exit with an error?",
+      "revId": "cbddd26af5996220be123904908314055229b13a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a34222dc_b489e827",
+        "filename": "simpleperf/record_file.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-07T04:16:44Z",
+      "side": 1,
+      "message": "maybe worth a comment that this is broken for files with \u003e 2GiB of ids. (is that possible?)",
+      "revId": "cbddd26af5996220be123904908314055229b13a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a34222dc_74836006",
+        "filename": "simpleperf/record_file.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-07T04:16:44Z",
+      "side": 1,
+      "message": "failed",
+      "revId": "cbddd26af5996220be123904908314055229b13a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a34222dc_e3ab4685",
         "filename": "simpleperf/record_file.cpp",
         "patchSetId": 2
@@ -66,6 +559,57 @@
         "endLine": 171,
         "endChar": 42
       },
+      "revId": "cbddd26af5996220be123904908314055229b13a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a34222dc_54f744a4",
+        "filename": "simpleperf/record_file.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-07T04:16:44Z",
+      "side": 1,
+      "message": "?",
+      "revId": "cbddd26af5996220be123904908314055229b13a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2320f22c_a2b77f37",
+        "filename": "simpleperf/test/noploop.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-07T04:16:44Z",
+      "side": 1,
+      "message": "you already have this in your library.",
+      "revId": "cbddd26af5996220be123904908314055229b13a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2320f22c_42c463ac",
+        "filename": "simpleperf/tool/gen_events.rb",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-07T04:16:44Z",
+      "side": 1,
+      "message": "this should probably be translated to python for checkin.",
       "revId": "cbddd26af5996220be123904908314055229b13a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
