@@ -14,6 +14,7 @@
 #include <cutils/klog.h>
 #include <cutils/properties.h>
 #include <cutils/sockets.h>
+#include <poll.h>
 
 #include "unencrypted_properties.h"
 
@@ -28,6 +29,7 @@ struct ext4_encryption_key {
 
 static const std::string keyring = "@s";
 static const std::string arbitrary_sequence_number = "42";
+static const int vold_command_timeout_ms = 10 * 1000;
 
 static key_serial_t device_keyring = -1;
 
@@ -62,22 +64,16 @@ static std::string vold_command(std::string const& command)
     }
 
     while (1) {
-        struct timeval to;
-        to.tv_sec = 10;
-        to.tv_usec = 0;
+        struct pollfd poll_sock = {sock, POLLIN, 0};
 
-        fd_set read_fds;
-        FD_ZERO(&read_fds);
-        FD_SET(sock, &read_fds);
-
-        int rc = select(sock + 1, &read_fds, NULL, NULL, &to);
+        int rc = poll(&poll_sock, 1, vold_command_timeout_ms);
         if (rc < 0) {
-            KLOG_ERROR(TAG, "Error in select %s\n", strerror(errno));
+            KLOG_ERROR(TAG, "Error in poll %s\n", strerror(errno));
             return "";
         } else if (!rc) {
             KLOG_ERROR(TAG, "Timeout\n");
             return "";
-        } else if (FD_ISSET(sock, &read_fds)) {
+        } else if (poll_sock.revents & POLLIN) {
             char buffer[4096];
             memset(buffer, 0, sizeof(buffer));
             rc = read(sock, buffer, sizeof(buffer));
@@ -97,6 +93,7 @@ static std::string vold_command(std::string const& command)
             // error
             return std::string(buffer, rc);
         }
+        // Otherwise loop around again
     }
 }
 
