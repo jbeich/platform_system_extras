@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "e356daec_3b68c21d",
+        "filename": "simpleperf/Android.build.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-10T17:24:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2320f22c_e24b3736",
+      "revId": "cbddd26af5996220be123904908314055229b13a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a34222dc_d1b7e636",
         "filename": "simpleperf/Android.mk",
         "patchSetId": 2
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "636d8ab3_d29a4547",
+        "filename": "simpleperf/Android.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-10T17:24:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a34222dc_d1b7e636",
+      "revId": "cbddd26af5996220be123904908314055229b13a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2320f22c_e2d817f7",
         "filename": "simpleperf/Android.mk",
         "patchSetId": 2
@@ -47,6 +83,24 @@
       "writtenOn": "2015-04-07T04:16:44Z",
       "side": 1,
       "message": "(remember that one of the goals of this project is to have something that works on Mac OS and Windows too.)",
+      "revId": "cbddd26af5996220be123904908314055229b13a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e356daec_0ee2de18",
+        "filename": "simpleperf/Android.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-10T17:24:47Z",
+      "side": 1,
+      "message": "We may partition commands into two types, one type contains everything and run in linux, the other type contains part that can run in mac/windows. I prefer to do it in further CLs.",
+      "parentUuid": "2320f22c_e2d817f7",
       "revId": "cbddd26af5996220be123904908314055229b13a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -87,6 +141,24 @@
     },
     {
       "key": {
+        "uuid": "234d525a_9fc1969e",
+        "filename": "simpleperf/Android.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-10T17:24:47Z",
+      "side": 1,
+      "message": "Done. It is more clear to write simple Makefile.",
+      "parentUuid": "a34222dc_b1a33af3",
+      "revId": "cbddd26af5996220be123904908314055229b13a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a34222dc_118eae7f",
         "filename": "simpleperf/Android.mk",
         "patchSetId": 2
@@ -98,6 +170,24 @@
       "writtenOn": "2015-04-07T04:16:44Z",
       "side": 1,
       "message": "really?\n\nyou probably want to use LOCAL_EXPORT_C_INCLUDE_DIRS on the library and then just get the headers from the library. (and you definitely *don\u0027t* want the directory with all the source to contain headers that are API. if you must, have all your headers in include/ and all your source in src/. but you never want to have a directory with source on your include path.)",
+      "revId": "cbddd26af5996220be123904908314055229b13a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e356daec_2e3fa239",
+        "filename": "simpleperf/Android.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-10T17:24:47Z",
+      "side": 1,
+      "message": "It seems no need to include $(LOCAL_PATH). I don\u0027t remember why I add this. I saw some examples in system/extras having header files in the same directory as source files. As file count is small, so I think it is fine to keep them together.",
+      "parentUuid": "a34222dc_118eae7f",
       "revId": "cbddd26af5996220be123904908314055229b13a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -121,6 +211,24 @@
     },
     {
       "key": {
+        "uuid": "e356daec_8e36ce60",
+        "filename": "simpleperf/cmd_help.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-10T17:24:47Z",
+      "side": 1,
+      "message": "Yeah, copyright added.",
+      "parentUuid": "c34716eb_06018c07",
+      "revId": "cbddd26af5996220be123904908314055229b13a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c34716eb_46f794a4",
         "filename": "simpleperf/cmd_list.cpp",
         "patchSetId": 2
@@ -132,6 +240,24 @@
       "writtenOn": "2015-04-07T04:16:44Z",
       "side": 1,
       "message": "these functions are all the same. just have a PrintEvents that takes a const char* like \"hardware\" and a collection like Event::HardwareEvents() instead.",
+      "revId": "cbddd26af5996220be123904908314055229b13a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e356daec_8ecb2ecb",
+        "filename": "simpleperf/cmd_list.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-10T17:24:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c34716eb_46f794a4",
       "revId": "cbddd26af5996220be123904908314055229b13a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -155,6 +281,24 @@
     },
     {
       "key": {
+        "uuid": "e356daec_ee567a62",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-10T17:24:47Z",
+      "side": 1,
+      "message": "Name changed. Also add some comment for explanation.",
+      "parentUuid": "a34222dc_d165a646",
+      "revId": "cbddd26af5996220be123904908314055229b13a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a34222dc_b151fa6a",
         "filename": "simpleperf/cmd_stat.cpp",
         "patchSetId": 2
@@ -166,6 +310,24 @@
       "writtenOn": "2015-04-07T04:16:44Z",
       "side": 1,
       "message": "s/scalled/scaled/",
+      "revId": "cbddd26af5996220be123904908314055229b13a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "234d525a_bf1c9995",
+        "filename": "simpleperf/cmd_stat.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-10T17:24:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a34222dc_b151fa6a",
       "revId": "cbddd26af5996220be123904908314055229b13a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -189,6 +351,24 @@
     },
     {
       "key": {
+        "uuid": "234d525a_3f6d09ff",
+        "filename": "simpleperf/environment.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-10T17:24:47Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "c34716eb_06e8aca5",
+      "revId": "cbddd26af5996220be123904908314055229b13a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a34222dc_74f120e2",
         "filename": "simpleperf/environment.h",
         "patchSetId": 2
@@ -200,6 +380,24 @@
       "writtenOn": "2015-04-07T04:16:44Z",
       "side": 1,
       "message": "this isn\u0027t really a class. may as well just make these global functions.",
+      "revId": "cbddd26af5996220be123904908314055229b13a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2368f29d_4d2cd990",
+        "filename": "simpleperf/environment.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-10T17:24:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a34222dc_74f120e2",
       "revId": "cbddd26af5996220be123904908314055229b13a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -223,6 +421,24 @@
     },
     {
       "key": {
+        "uuid": "83999efb_4222f6cf",
+        "filename": "simpleperf/event.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-10T17:24:47Z",
+      "side": 1,
+      "message": "Now I can generate it into a separate header file. But generating it in the out directory seems hard. Because I have several targets that need event.cpp directly, and I have to write a work-around for each target. I think the gain doesn\u0027t deserves the complexity.",
+      "parentUuid": "2320f22c_22c12fd2",
+      "revId": "cbddd26af5996220be123904908314055229b13a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c34716eb_c6dac413",
         "filename": "simpleperf/event.h",
         "patchSetId": 2
@@ -234,6 +450,24 @@
       "writtenOn": "2015-04-07T04:16:44Z",
       "side": 1,
       "message": "is this really \"NotYetChecked\"?",
+      "revId": "cbddd26af5996220be123904908314055229b13a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4365e6c2_ddb5ffe3",
+        "filename": "simpleperf/event.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-10T17:24:47Z",
+      "side": 1,
+      "message": "Yes",
+      "parentUuid": "c34716eb_c6dac413",
       "revId": "cbddd26af5996220be123904908314055229b13a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -257,6 +491,24 @@
     },
     {
       "key": {
+        "uuid": "83999efb_821cfe95",
+        "filename": "simpleperf/event.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-10T17:24:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c34716eb_a6dd380d",
+      "revId": "cbddd26af5996220be123904908314055229b13a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2320f22c_429303d8",
         "filename": "simpleperf/event_attr.cpp",
         "patchSetId": 2
@@ -268,6 +520,24 @@
       "writtenOn": "2015-04-07T04:16:44Z",
       "side": 1,
       "message": "this fits on the previous line, so it should be there. but if you do break the line, you need to double-indent.",
+      "revId": "cbddd26af5996220be123904908314055229b13a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "83999efb_e267821f",
+        "filename": "simpleperf/event_attr.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-10T17:24:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2320f22c_429303d8",
       "revId": "cbddd26af5996220be123904908314055229b13a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -291,6 +561,24 @@
     },
     {
       "key": {
+        "uuid": "83999efb_22724ae2",
+        "filename": "simpleperf/event_attr.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-10T17:24:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c34716eb_a658d814",
+      "revId": "cbddd26af5996220be123904908314055229b13a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c34716eb_6662d0bf",
         "filename": "simpleperf/event_attr.cpp",
         "patchSetId": 2
@@ -302,6 +590,24 @@
       "writtenOn": "2015-04-07T04:16:44Z",
       "side": 1,
       "message": "?",
+      "revId": "cbddd26af5996220be123904908314055229b13a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4365e6c2_1da0579e",
+        "filename": "simpleperf/event_attr.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-10T17:24:47Z",
+      "side": 1,
+      "message": "Removed.",
+      "parentUuid": "c34716eb_6662d0bf",
       "revId": "cbddd26af5996220be123904908314055229b13a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -355,6 +661,30 @@
     },
     {
       "key": {
+        "uuid": "e356daec_780170bc",
+        "filename": "simpleperf/event_fd.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-10T17:24:47Z",
+      "side": 1,
+      "message": "Done. It is not critical as we always fork() before calling perf_event_open.",
+      "parentUuid": "c34716eb_cd26756c",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 1
+      },
+      "revId": "cbddd26af5996220be123904908314055229b13a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c34716eb_46cf942d",
         "filename": "simpleperf/event_fd.cpp",
         "patchSetId": 2
@@ -366,6 +696,24 @@
       "writtenOn": "2015-04-07T04:16:44Z",
       "side": 1,
       "message": "?",
+      "revId": "cbddd26af5996220be123904908314055229b13a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "636d8ab3_7fb4dab2",
+        "filename": "simpleperf/event_fd.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-10T17:24:47Z",
+      "side": 1,
+      "message": "Currently not useful, removed.",
+      "parentUuid": "c34716eb_46cf942d",
       "revId": "cbddd26af5996220be123904908314055229b13a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -406,6 +754,24 @@
     },
     {
       "key": {
+        "uuid": "83999efb_426f56f5",
+        "filename": "simpleperf/perf_main.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-10T17:24:47Z",
+      "side": 1,
+      "message": "Because I wanted to use the execute() interface here. Yes, it may have trouble on windows. I have changed this.",
+      "parentUuid": "a34222dc_d458345d",
+      "revId": "cbddd26af5996220be123904908314055229b13a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2320f22c_42e78355",
         "filename": "simpleperf/record.cpp",
         "patchSetId": 2
@@ -417,6 +783,24 @@
       "writtenOn": "2015-04-07T04:16:44Z",
       "side": 1,
       "message": "this seems weird. did you really want to just reinterpret_cast a struct { uint32_t, uint32_t, uint32_t, uint64_t } on top of \"buf\"?\n\nalternatively, don\u0027t take ownership of buf. it\u0027s weird to take ownership of the memory *and* duplicate its contents.",
+      "revId": "cbddd26af5996220be123904908314055229b13a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4365e6c2_3d9d1b6b",
+        "filename": "simpleperf/record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-10T17:24:47Z",
+      "side": 1,
+      "message": "Yes, it is weird. I think I am struggling between raw Record structure on buffer and complete parsed data in Record class.  Based on current implementation, \nI think the record data can be complex,  so I prefer Record class now. What I need to do it to remove buffer in Record, and construct the buffer when needed.",
+      "parentUuid": "2320f22c_42e78355",
       "revId": "cbddd26af5996220be123904908314055229b13a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -440,6 +824,24 @@
     },
     {
       "key": {
+        "uuid": "83999efb_82795ec3",
+        "filename": "simpleperf/record.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-10T17:24:47Z",
+      "side": 1,
+      "message": "It is used as part of in RecordSample.  In RecordSample, flags like PERF_SAMPLE_IP, PERF_SAMPLE_TID can be set at the same time, so I can\u0027t use union.",
+      "parentUuid": "2320f22c_62cba7cc",
+      "revId": "cbddd26af5996220be123904908314055229b13a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a34222dc_f4b530e3",
         "filename": "simpleperf/record_file.cpp",
         "patchSetId": 2
@@ -451,6 +853,24 @@
       "writtenOn": "2015-04-07T04:16:44Z",
       "side": 1,
       "message": "TRACING",
+      "revId": "cbddd26af5996220be123904908314055229b13a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e356daec_b85678b3",
+        "filename": "simpleperf/record_file.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-10T17:24:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a34222dc_f4b530e3",
       "revId": "cbddd26af5996220be123904908314055229b13a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -474,6 +894,24 @@
     },
     {
       "key": {
+        "uuid": "234d525a_ee9af646",
+        "filename": "simpleperf/record_file.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-10T17:24:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a34222dc_14bbfcd6",
+      "revId": "cbddd26af5996220be123904908314055229b13a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c34716eb_e65020b9",
         "filename": "simpleperf/record_file.cpp",
         "patchSetId": 2
@@ -485,6 +923,24 @@
       "writtenOn": "2015-04-07T04:16:44Z",
       "side": 1,
       "message": "static",
+      "revId": "cbddd26af5996220be123904908314055229b13a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "234d525a_0e79fa7d",
+        "filename": "simpleperf/record_file.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-10T17:24:47Z",
+      "side": 1,
+      "message": "Moved to record_file_format.h and defined as macro.",
+      "parentUuid": "c34716eb_e65020b9",
       "revId": "cbddd26af5996220be123904908314055229b13a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -508,6 +964,24 @@
     },
     {
       "key": {
+        "uuid": "e356daec_181144da",
+        "filename": "simpleperf/record_file.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-10T17:24:47Z",
+      "side": 1,
+      "message": "I try to check every function return value, and return false when met error.",
+      "parentUuid": "a34222dc_74aa807e",
+      "revId": "cbddd26af5996220be123904908314055229b13a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a34222dc_b489e827",
         "filename": "simpleperf/record_file.cpp",
         "patchSetId": 2
@@ -525,6 +999,24 @@
     },
     {
       "key": {
+        "uuid": "636d8ab3_bff2f26b",
+        "filename": "simpleperf/record_file.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-10T17:24:47Z",
+      "side": 1,
+      "message": "I think it doesn\u0027t matter. I don\u0027t believe any one want to write perf.data \u003e2GiB on a 32-bit device. I also prefer to change file read/write to mmap in later changes, maybe using mmap is more efficient.",
+      "parentUuid": "a34222dc_b489e827",
+      "revId": "cbddd26af5996220be123904908314055229b13a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a34222dc_74836006",
         "filename": "simpleperf/record_file.cpp",
         "patchSetId": 2
@@ -536,6 +1028,24 @@
       "writtenOn": "2015-04-07T04:16:44Z",
       "side": 1,
       "message": "failed",
+      "revId": "cbddd26af5996220be123904908314055229b13a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "636d8ab3_5f047ecd",
+        "filename": "simpleperf/record_file.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-10T17:24:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a34222dc_74836006",
       "revId": "cbddd26af5996220be123904908314055229b13a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -565,6 +1075,30 @@
     },
     {
       "key": {
+        "uuid": "636d8ab3_bf175200",
+        "filename": "simpleperf/record_file.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-10T17:24:47Z",
+      "side": 1,
+      "message": "Done. Moved to separate file. Although I think all files in this CL can be used in target, separating command and function is always good.",
+      "parentUuid": "a34222dc_e3ab4685",
+      "range": {
+        "startLine": 171,
+        "startChar": 1,
+        "endLine": 171,
+        "endChar": 42
+      },
+      "revId": "cbddd26af5996220be123904908314055229b13a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a34222dc_54f744a4",
         "filename": "simpleperf/record_file.cpp",
         "patchSetId": 2
@@ -576,6 +1110,24 @@
       "writtenOn": "2015-04-07T04:16:44Z",
       "side": 1,
       "message": "?",
+      "revId": "cbddd26af5996220be123904908314055229b13a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "234d525a_ce17f2ff",
+        "filename": "simpleperf/record_file.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-10T17:24:47Z",
+      "side": 1,
+      "message": "Early printing. Removed.",
+      "parentUuid": "a34222dc_54f744a4",
       "revId": "cbddd26af5996220be123904908314055229b13a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -599,6 +1151,24 @@
     },
     {
       "key": {
+        "uuid": "4365e6c2_5daacf7d",
+        "filename": "simpleperf/test/noploop.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-10T17:24:47Z",
+      "side": 1,
+      "message": "Yes, but this test src file is compiled and linked separately. And I think I may change NanoTime() to c++ library later.",
+      "parentUuid": "2320f22c_a2b77f37",
+      "revId": "cbddd26af5996220be123904908314055229b13a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2320f22c_42c463ac",
         "filename": "simpleperf/tool/gen_events.rb",
         "patchSetId": 2
@@ -616,6 +1186,24 @@
     },
     {
       "key": {
+        "uuid": "2368f29d_6d8d1dff",
+        "filename": "simpleperf/tool/gen_events.rb",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-10T17:24:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2320f22c_42c463ac",
+      "revId": "cbddd26af5996220be123904908314055229b13a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "83519eaa_5f58cf13",
         "filename": "simpleperf/workload.cpp",
         "patchSetId": 2
@@ -627,6 +1215,30 @@
       "writtenOn": "2015-04-06T15:40:22Z",
       "side": 1,
       "message": "CLOEXEC for pipe fds as well?",
+      "range": {
+        "startLine": 116,
+        "startChar": 2,
+        "endLine": 117,
+        "endChar": 29
+      },
+      "revId": "cbddd26af5996220be123904908314055229b13a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "636d8ab3_1f4046f3",
+        "filename": "simpleperf/workload.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-10T17:24:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "83519eaa_5f58cf13",
       "range": {
         "startLine": 116,
         "startChar": 2,
