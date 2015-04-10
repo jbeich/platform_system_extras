@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c326369c_a60666a0",
+        "filename": "simpleperf/read_elf.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-04-10T20:15:23Z",
+      "side": 1,
+      "message": "This is kind of a nit, but I would call the note section, not the note segment. Segments mean something different in an ELF file context AFAIK.",
+      "range": {
+        "startLine": 110,
+        "startChar": 10,
+        "endLine": 110,
+        "endChar": 35
+      },
+      "revId": "cf9d349a89febc2f783cee17796f5e921a9db9ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
