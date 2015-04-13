@@ -71,6 +71,23 @@
     },
     {
       "key": {
+        "uuid": "90056600_3ce451d5",
+        "filename": "simpleperf/cmd_list.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1041673
+      },
+      "writtenOn": "2015-04-13T18:10:14Z",
+      "side": 1,
+      "message": "I thought default for aosp is apache license, no?",
+      "revId": "cf9d349a89febc2f783cee17796f5e921a9db9ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9033a6f4_0c7bb775",
         "filename": "simpleperf/cmd_record.cpp",
         "patchSetId": 5
@@ -117,6 +134,40 @@
     },
     {
       "key": {
+        "uuid": "90056600_fcddc90b",
+        "filename": "simpleperf/command.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1041673
+      },
+      "writtenOn": "2015-04-13T18:10:14Z",
+      "side": 1,
+      "message": "I think you meant to use std::lower_bound() here.. the vector is sorted for a reason.",
+      "revId": "cf9d349a89febc2f783cee17796f5e921a9db9ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0fb5e32_9e711d09",
+        "filename": "simpleperf/environment.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1041673
+      },
+      "writtenOn": "2015-04-13T18:10:14Z",
+      "side": 1,
+      "message": "unique_ptr...",
+      "revId": "cf9d349a89febc2f783cee17796f5e921a9db9ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b0242aae_2d4e6d1c",
         "filename": "simpleperf/environment.cpp",
         "patchSetId": 5
@@ -140,6 +191,46 @@
     },
     {
       "key": {
+        "uuid": "d0fb5e32_fe6a6118",
+        "filename": "simpleperf/environment.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 541,
+      "author": {
+        "id": 1041673
+      },
+      "writtenOn": "2015-04-13T18:10:14Z",
+      "side": 1,
+      "message": "scanf? same elsewhere...",
+      "revId": "cf9d349a89febc2f783cee17796f5e921a9db9ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7000f2ef_61491293",
+        "filename": "simpleperf/event.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1041673
+      },
+      "writtenOn": "2015-04-13T18:10:14Z",
+      "side": 1,
+      "message": "it looks like these are not used.",
+      "range": {
+        "startLine": 71,
+        "startChar": 0,
+        "endLine": 73,
+        "endChar": 58
+      },
+      "revId": "cf9d349a89febc2f783cee17796f5e921a9db9ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c326369c_a60666a0",
         "filename": "simpleperf/read_elf.cpp",
         "patchSetId": 5
@@ -156,6 +247,29 @@
         "startChar": 10,
         "endLine": 110,
         "endChar": 35
+      },
+      "revId": "cf9d349a89febc2f783cee17796f5e921a9db9ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7000f2ef_c1510635",
+        "filename": "simpleperf/record.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1041673
+      },
+      "writtenOn": "2015-04-13T18:10:14Z",
+      "side": 1,
+      "message": "spaces",
+      "range": {
+        "startLine": 159,
+        "startChar": 0,
+        "endLine": 159,
+        "endChar": 3
       },
       "revId": "cf9d349a89febc2f783cee17796f5e921a9db9ee",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
