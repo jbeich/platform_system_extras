@@ -274,8 +274,7 @@ void ext4_fill_in_sb()
 				memcpy(aux_info.backup_sb[i], sb, info.block_size);
 				/* Update the block group nr of this backup superblock */
 				aux_info.backup_sb[i]->s_block_group_nr = i;
-				sparse_file_add_data(ext4_sparse_file, aux_info.backup_sb[i],
-						info.block_size, group_start_block);
+				ext4_queue_backup_sb(group_start_block, aux_info.backup_sb[i]);
 			}
 			sparse_file_add_data(ext4_sparse_file, aux_info.bg_desc,
 				aux_info.bg_desc_blocks * info.block_size,
@@ -293,8 +292,23 @@ void ext4_fill_in_sb()
 	}
 }
 
-void ext4_queue_sb(void)
+/* Queue the zero'ed superblocks into layer 0, backup superblocks into layer 1
+ * and primary superblock into layer 2 - this will ensure invalid superblocks
+ * being written firstly, and the primary superblock being written in the very
+ * last.  This will significantly improve the reliability of the file system
+ * creation with long time and high likelihood of being interrupted -  the
+ * file-system will only be valid once the correct superblocks are written to
+ * the disk.
+ *
+ * Note the 2nd call of sparse_file_add_*() will switch back to default layer 0
+ */
+static u8 *sb_zero = NULL;
+
+void ext4_queue_primary_sb(void)
 {
+	if (sb_zero == NULL)
+		sb_zero = calloc(1, info.block_size);
+
 	/* The write_data* functions expect only block aligned calls.
 	 * This is not an issue, except when we write out the super
 	 * block on a system with a block size > 1K.  So, we need to
@@ -303,10 +317,25 @@ void ext4_queue_sb(void)
 	if (info.block_size > 1024) {
 		u8 *buf = calloc(info.block_size, 1);
 		memcpy(buf + 1024, (u8*)aux_info.sb, 1024);
-		sparse_file_add_data(ext4_sparse_file, buf, info.block_size, 0);
+		sparse_file_add_data_ordered(ext4_sparse_file, 2, buf, info.block_size, 0);
+		sparse_file_add_data_ordered(ext4_sparse_file, 0, sb_zero, info.block_size, 0);
 	} else {
-		sparse_file_add_data(ext4_sparse_file, aux_info.sb, 1024, 1);
+		sparse_file_add_data_ordered(ext4_sparse_file, 2, aux_info.sb, 1024, 1);
+		sparse_file_add_data_ordered(ext4_sparse_file, 0, sb_zero, 1024, 1);
 	}
+}
+
+void ext4_queue_backup_sb(u64 start_block, struct ext4_super_block *sb)
+{
+	static u8 *sb_zero = NULL;
+
+	if (sb_zero == NULL)
+		sb_zero = calloc(1, info.block_size);
+
+	sparse_file_add_data_ordered(ext4_sparse_file, 1, sb,
+				info.block_size, start_block);
+	sparse_file_add_data_ordered(ext4_sparse_file, 0, sb_zero,
+				info.block_size, start_block);
 }
 
 void ext4_parse_sb_info(struct ext4_super_block *sb)

@@ -630,7 +630,7 @@ int make_ext4fs_internal(int fd, const char *_directory,
 
 	ext4_update_free();
 
-	ext4_queue_sb();
+	ext4_queue_primary_sb();
 
 	if (block_list_file) {
 		size_t dirlen = directory ? strlen(directory) : 0;
