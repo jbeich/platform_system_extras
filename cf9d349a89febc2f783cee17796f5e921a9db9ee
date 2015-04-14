@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "9033a6f4_c2ea0bee",
+        "filename": "simpleperf/Android.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-14T00:22:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a3214287_a730191e",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 20
+      },
+      "revId": "cf9d349a89febc2f783cee17796f5e921a9db9ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e32fba6e_29dde40b",
         "filename": "simpleperf/Android.mk",
         "patchSetId": 5
@@ -36,6 +60,30 @@
       "writtenOn": "2015-04-13T15:08:36Z",
       "side": 1,
       "message": "I assume this is temporary and won\u0027t get submitted?",
+      "range": {
+        "startLine": 61,
+        "startChar": 60,
+        "endLine": 61,
+        "endChar": 67
+      },
+      "revId": "cf9d349a89febc2f783cee17796f5e921a9db9ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b0242aae_4cfbf28d",
+        "filename": "simpleperf/Android.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-14T00:22:09Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "e32fba6e_29dde40b",
       "range": {
         "startLine": 61,
         "startChar": 60,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "9033a6f4_267c4a33",
+        "filename": "simpleperf/Android.mk",
+        "patchSetId": 5
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-14T00:22:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a3214287_47f925c2",
+      "range": {
+        "startLine": 72,
+        "startChar": 61,
+        "endLine": 72,
+        "endChar": 67
+      },
+      "revId": "cf9d349a89febc2f783cee17796f5e921a9db9ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "90056600_3ce451d5",
         "filename": "simpleperf/cmd_list.cpp",
         "patchSetId": 5
@@ -88,6 +160,24 @@
     },
     {
       "key": {
+        "uuid": "d0299e86_ff280081",
+        "filename": "simpleperf/cmd_list.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-14T00:22:09Z",
+      "side": 1,
+      "message": "I copied it from bionc/libc/pthread_mutex.cpp. There is also apache license version. I don\u0027t know which is preferred.",
+      "parentUuid": "90056600_3ce451d5",
+      "revId": "cf9d349a89febc2f783cee17796f5e921a9db9ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9033a6f4_0c7bb775",
         "filename": "simpleperf/cmd_record.cpp",
         "patchSetId": 5
@@ -99,6 +189,30 @@
       "writtenOn": "2015-04-13T15:08:36Z",
       "side": 1,
       "message": "Sent email off-line about this.",
+      "range": {
+        "startLine": 317,
+        "startChar": 0,
+        "endLine": 323,
+        "endChar": 1
+      },
+      "revId": "cf9d349a89febc2f783cee17796f5e921a9db9ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9033a6f4_617c7ce6",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-14T00:22:09Z",
+      "side": 1,
+      "message": "I just thought the devices should always support cpu-cycles. Add code to check measured_event \u003d\u003d nullptr. I also didn\u0027t realize cpus can offline by condition. So I make OpenEventFilesForCpus() more tolerant, in case some cpus are offline while simpleperf is running.",
+      "parentUuid": "9033a6f4_0c7bb775",
       "range": {
         "startLine": 317,
         "startChar": 0,
@@ -134,6 +248,30 @@
     },
     {
       "key": {
+        "uuid": "b0242aae_ea35de54",
+        "filename": "simpleperf/cmd_stat.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-14T00:22:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b0242aae_ed806595",
+      "range": {
+        "startLine": 329,
+        "startChar": 0,
+        "endLine": 329,
+        "endChar": 63
+      },
+      "revId": "cf9d349a89febc2f783cee17796f5e921a9db9ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "90056600_fcddc90b",
         "filename": "simpleperf/command.cpp",
         "patchSetId": 5
@@ -151,6 +289,24 @@
     },
     {
       "key": {
+        "uuid": "b0242aae_2429d683",
+        "filename": "simpleperf/command.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-14T00:22:09Z",
+      "side": 1,
+      "message": "I sorted it to print the commands in alphabetical order. And if I use std::lower_bound() here, I need to add another compare function. So I changed the place to sort.",
+      "parentUuid": "90056600_fcddc90b",
+      "revId": "cf9d349a89febc2f783cee17796f5e921a9db9ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d0fb5e32_9e711d09",
         "filename": "simpleperf/environment.cpp",
         "patchSetId": 5
@@ -162,6 +318,24 @@
       "writtenOn": "2015-04-13T18:10:14Z",
       "side": 1,
       "message": "unique_ptr...",
+      "revId": "cf9d349a89febc2f783cee17796f5e921a9db9ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0299e86_d84b22b6",
+        "filename": "simpleperf/environment.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-14T00:22:09Z",
+      "side": 1,
+      "message": "As getline() uses realloc, I can\u0027t use unique_ptr here. So I added class FileReader for RAII.",
+      "parentUuid": "d0fb5e32_9e711d09",
       "revId": "cf9d349a89febc2f783cee17796f5e921a9db9ee",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -191,6 +365,30 @@
     },
     {
       "key": {
+        "uuid": "b0242aae_aa8c768d",
+        "filename": "simpleperf/environment.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-14T00:22:09Z",
+      "side": 1,
+      "message": "Because /sys/devices/system/cpu/online file content can be  as complex as: 0, 1-3, 5, 7-8.",
+      "parentUuid": "b0242aae_2d4e6d1c",
+      "range": {
+        "startLine": 60,
+        "startChar": 3,
+        "endLine": 92,
+        "endChar": 28
+      },
+      "revId": "cf9d349a89febc2f783cee17796f5e921a9db9ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d0fb5e32_fe6a6118",
         "filename": "simpleperf/environment.cpp",
         "patchSetId": 5
@@ -208,6 +406,24 @@
     },
     {
       "key": {
+        "uuid": "b0242aae_8053dbf0",
+        "filename": "simpleperf/environment.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 541,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-14T00:22:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d0fb5e32_fe6a6118",
+      "revId": "cf9d349a89febc2f783cee17796f5e921a9db9ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7000f2ef_61491293",
         "filename": "simpleperf/event.h",
         "patchSetId": 5
@@ -219,6 +435,30 @@
       "writtenOn": "2015-04-13T18:10:14Z",
       "side": 1,
       "message": "it looks like these are not used.",
+      "range": {
+        "startLine": 71,
+        "startChar": 0,
+        "endLine": 73,
+        "endChar": 58
+      },
+      "revId": "cf9d349a89febc2f783cee17796f5e921a9db9ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9033a6f4_c7bfbd0b",
+        "filename": "simpleperf/event.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-14T00:22:09Z",
+      "side": 1,
+      "message": "They are used in cmd_list.cpp to list all events.",
+      "parentUuid": "7000f2ef_61491293",
       "range": {
         "startLine": 71,
         "startChar": 0,
@@ -254,6 +494,30 @@
     },
     {
       "key": {
+        "uuid": "9033a6f4_a6383a9c",
+        "filename": "simpleperf/read_elf.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-14T00:22:09Z",
+      "side": 1,
+      "message": "As I parse note information from program header, it should be note segment. If I parse it from section header, it will be note section. I think both methods are fine.",
+      "parentUuid": "c326369c_a60666a0",
+      "range": {
+        "startLine": 110,
+        "startChar": 10,
+        "endLine": 110,
+        "endChar": 35
+      },
+      "revId": "cf9d349a89febc2f783cee17796f5e921a9db9ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7000f2ef_c1510635",
         "filename": "simpleperf/record.cpp",
         "patchSetId": 5
@@ -265,6 +529,30 @@
       "writtenOn": "2015-04-13T18:10:14Z",
       "side": 1,
       "message": "spaces",
+      "range": {
+        "startLine": 159,
+        "startChar": 0,
+        "endLine": 159,
+        "endChar": 3
+      },
+      "revId": "cf9d349a89febc2f783cee17796f5e921a9db9ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0299e86_bf15d8f0",
+        "filename": "simpleperf/record.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-14T00:22:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7000f2ef_c1510635",
       "range": {
         "startLine": 159,
         "startChar": 0,
