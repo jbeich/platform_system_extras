@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b07b4aac_68953e3a",
+        "filename": "simpleperf/Android.mk",
+        "patchSetId": 6
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-15T23:34:51Z",
+      "side": 1,
+      "message": "why don\u0027t you just link against your library?",
+      "revId": "214507d3a091c15204761391d522e4f6de20c01c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b07b4aac_28874615",
+        "filename": "simpleperf/Android.mk",
+        "patchSetId": 6
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-15T23:34:51Z",
+      "side": 1,
+      "message": "you don\u0027t need this any more.",
+      "revId": "214507d3a091c15204761391d522e4f6de20c01c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b07b4aac_2368c867",
+        "filename": "simpleperf/cmd_list.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-15T23:34:51Z",
+      "side": 1,
+      "message": "auto\u0026",
+      "revId": "214507d3a091c15204761391d522e4f6de20c01c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "907ac6a8_4f25ee60",
+        "filename": "simpleperf/cmd_readrecord.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-15T23:34:51Z",
+      "side": 1,
+      "message": "i think this is usually called \u0027dump\u0027.",
+      "revId": "214507d3a091c15204761391d522e4f6de20c01c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d080bec6_33f49f03",
+        "filename": "simpleperf/command.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-15T23:34:51Z",
+      "side": 1,
+      "message": "operator\u003c?",
+      "revId": "214507d3a091c15204761391d522e4f6de20c01c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b07b4aac_6671ee8a",
+        "filename": "simpleperf/event_attr.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-15T23:34:51Z",
+      "side": 1,
+      "message": "since this is only for debug output, a switch is preferable. a switch also lets you easily construct fake entries like PERF_SAMPLE_UNKNOWN_BIT_24 for bit 24 even if you didn\u0027t know about that sample type when you built your tool.",
+      "revId": "214507d3a091c15204761391d522e4f6de20c01c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b07b4aac_46b4f2c0",
+        "filename": "simpleperf/event_fd.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-15T23:34:51Z",
+      "side": 1,
+      "message": "code like this leaks an fd.",
+      "revId": "214507d3a091c15204761391d522e4f6de20c01c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d080bec6_7301b78a",
+        "filename": "simpleperf/perf_event.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-15T23:34:51Z",
+      "side": 1,
+      "message": "you should say whether this is for glibc or bionic. (or both.) also, if you know what version you need, say so rather than just \"old\".",
+      "revId": "214507d3a091c15204761391d522e4f6de20c01c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
