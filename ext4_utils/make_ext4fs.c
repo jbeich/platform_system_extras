@@ -585,7 +585,7 @@ int make_ext4fs_internal(int fd, const char *_directory,
 
 	block_allocator_init();
 
-	ext4_fill_in_sb();
+	ext4_fill_in_sb(fd);
 
 	if (reserve_inodes(0, 10) == EXT4_ALLOCATE_FAILED)
 		error("failed to reserve first 10 inodes");
@@ -630,7 +630,7 @@ int make_ext4fs_internal(int fd, const char *_directory,
 
 	ext4_update_free();
 
-	ext4_queue_sb();
+	ext4_queue_primary_sb(fd);
 
 	if (block_list_file) {
 		size_t dirlen = directory ? strlen(directory) : 0;

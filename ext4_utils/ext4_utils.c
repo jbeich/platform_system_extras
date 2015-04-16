@@ -127,10 +127,34 @@ void write_sb(int fd, unsigned long long offset, struct ext4_super_block *sb)
 		critical_error("failed to write all of superblock");
 }
 
+static void block_device_write_sb(int fd)
+{
+	unsigned long long offset;
+	u32 i;
+
+	/* write out the backup superblocks */
+	for (i = 1; i < aux_info.groups; i++) {
+		if (ext4_bg_has_super_block(i)) {
+			offset = aux_info.first_data_block
+				+ i * info.blocks_per_group;
+			write_sb(fd, offset, aux_info.backup_sb[i]);
+		}
+	}
+
+	/* write out the primary superblock */
+	if (info.block_size > 1024)
+		write_sb(fd, 0, aux_info.sb);
+	else
+		write_sb(fd, 1024, aux_info.sb);
+}
+
 /* Write the filesystem image to a file */
 void write_ext4_image(int fd, int gz, int sparse, int crc)
 {
 	sparse_file_write(ext4_sparse_file, fd, gz, sparse, crc);
+
+	if (is_block_device_fd(fd))
+		block_device_write_sb(fd);
 }
 
 /* Compute the rest of the parameters of the filesystem from the basic info */
@@ -188,7 +212,7 @@ void ext4_free_fs_aux_info()
 }
 
 /* Fill in the superblock memory buffer based on the filesystem parameters */
-void ext4_fill_in_sb()
+void ext4_fill_in_sb(int fd)
 {
 	unsigned int i;
 	struct ext4_super_block *sb = aux_info.sb;
@@ -274,8 +298,7 @@ void ext4_fill_in_sb()
 				memcpy(aux_info.backup_sb[i], sb, info.block_size);
 				/* Update the block group nr of this backup superblock */
 				aux_info.backup_sb[i]->s_block_group_nr = i;
-				sparse_file_add_data(ext4_sparse_file, aux_info.backup_sb[i],
-						info.block_size, group_start_block);
+				ext4_queue_backup_sb(fd, group_start_block, aux_info.backup_sb[i]);
 			}
 			sparse_file_add_data(ext4_sparse_file, aux_info.bg_desc,
 				aux_info.bg_desc_blocks * info.block_size,
@@ -293,8 +316,26 @@ void ext4_fill_in_sb()
 	}
 }
 
-void ext4_queue_sb(void)
+
+/* Queue the zero'ed superblocks for block device - this will ensure invalid
+ * superblocks being written firstly, and the valid superblock being written
+ * in the very last.  This will significantly improve the reliability of the
+ * file system creation of long time and high likelihood of being interrupted
+ * so that the file-system will only be valid once the correct superblocks are
+ * written to the disk.
+ */
+static u8 *sb_zero = NULL;
+
+void ext4_queue_primary_sb(int fd)
 {
+	struct ext4_super_block *sb = aux_info.sb;
+
+	if (is_block_device_fd(fd)) {
+		if (sb_zero == NULL)
+			sb_zero = calloc(1, info.block_size);
+		sb = (struct ext4_super_block *)sb_zero;
+	}
+
 	/* The write_data* functions expect only block aligned calls.
 	 * This is not an issue, except when we write out the super
 	 * block on a system with a block size > 1K.  So, we need to
@@ -302,11 +343,22 @@ void ext4_queue_sb(void)
 	 */
 	if (info.block_size > 1024) {
 		u8 *buf = calloc(info.block_size, 1);
-		memcpy(buf + 1024, (u8*)aux_info.sb, 1024);
+		memcpy(buf + 1024, (u8*)sb, 1024);
 		sparse_file_add_data(ext4_sparse_file, buf, info.block_size, 0);
 	} else {
-		sparse_file_add_data(ext4_sparse_file, aux_info.sb, 1024, 1);
+		sparse_file_add_data(ext4_sparse_file, sb, 1024, 1);
 	}
+}
+
+void ext4_queue_backup_sb(int fd, u64 start_block, struct ext4_super_block *sb)
+{
+	if (is_block_device_fd(fd)) {
+		if (sb_zero == NULL)
+			sb_zero = calloc(1, info.block_size);
+		sb = (struct ext4_super_block *)sb_zero;
+	}
+	sparse_file_add_data(ext4_sparse_file, sb,
+				info.block_size, start_block);
 }
 
 void ext4_parse_sb_info(struct ext4_super_block *sb)
