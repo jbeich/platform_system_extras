@@ -158,6 +158,30 @@
       "revId": "214507d3a091c15204761391d522e4f6de20c01c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9033a6f4_4ace1be0",
+        "filename": "simpleperf/perf_main.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-04-16T18:53:03Z",
+      "side": 1,
+      "message": "Apologies -- please disregard this comment. \nCode is correct; I managed to mess up cmd_record.cpp in my client while testing for memory leaks (oops).",
+      "parentUuid": "d0299e86_d9c428e5",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 61
+      },
+      "revId": "214507d3a091c15204761391d522e4f6de20c01c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
