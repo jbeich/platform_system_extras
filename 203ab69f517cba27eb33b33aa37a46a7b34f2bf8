@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d080bec6_ab5348be",
+        "filename": "ext4_utils/ext4_utils.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2015-04-16T23:47:14Z",
+      "side": 1,
+      "message": "instead of passing around the fd and checking if it is a block device every time, pass a bool block_device into here and into write_ext4_image.  Also error out in make_ext4fs.c if sparse and block_device are both set, as that will result in a corrupted file.",
+      "range": {
+        "startLine": 215,
+        "startChar": 21,
+        "endLine": 215,
+        "endChar": 27
+      },
+      "revId": "203ab69f517cba27eb33b33aa37a46a7b34f2bf8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10dc16fc_b01f2d89",
+        "filename": "ext4_utils/ext4_utils.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2015-04-16T23:47:14Z",
+      "side": 1,
+      "message": "This comment is confusing, because it describes a special case of the function.  Can you add a more generic comment explaining what the function does, and then explain the special case?",
+      "revId": "203ab69f517cba27eb33b33aa37a46a7b34f2bf8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10dc16fc_1002b90b",
+        "filename": "ext4_utils/make_ext4fs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 633,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2015-04-16T23:47:14Z",
+      "side": 1,
+      "message": "I think it makes sense to move this into ext4_fill_in_sb.  It was originally here because it might memcpy sb into the middle of a block, so it has to be done after all changes to sb, but I think it makes more sense to queue the block up front and have aux_info.sb be a pointer into the middle of the block.",
+      "revId": "203ab69f517cba27eb33b33aa37a46a7b34f2bf8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
