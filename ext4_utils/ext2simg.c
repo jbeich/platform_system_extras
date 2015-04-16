@@ -186,7 +186,7 @@ int main(int argc, char **argv)
 		outfd = STDOUT_FILENO;
 	}
 
-	write_ext4_image(outfd, gzip, sparse, crc);
+	write_ext4_image(outfd, gzip, sparse, crc, false);
 	close(outfd);
 
 	sparse_file_destroy(ext4_sparse_file);
