@@ -135,6 +135,29 @@
       "revId": "214507d3a091c15204761391d522e4f6de20c01c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0299e86_d9c428e5",
+        "filename": "simpleperf/perf_main.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-04-16T18:40:47Z",
+      "side": 1,
+      "message": "There is a problem with this way of doing things... the following works:\n\n  simpleperf record sleep 1\n\nhowever this does not:\n\n  /system/bin/simpleperf record sleep 1\n\nNeed to use basename or equivalent here before calling FindCommand.",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 61
+      },
+      "revId": "214507d3a091c15204761391d522e4f6de20c01c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
