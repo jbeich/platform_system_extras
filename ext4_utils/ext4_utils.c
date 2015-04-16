@@ -127,10 +127,34 @@ void write_sb(int fd, unsigned long long offset, struct ext4_super_block *sb)
 		critical_error("failed to write all of superblock");
 }
 
+static void block_device_write_sb(int fd)
+{
+	unsigned long long offset;
+	u32 i;
+
+	/* write out the backup superblocks */
+	for (i = 1; i < aux_info.groups; i++) {
+		if (ext4_bg_has_super_block(i)) {
+			offset = aux_info.first_data_block
+				+ i * info.blocks_per_group;
+			write_sb(fd, offset, aux_info.backup_sb[i]);
+		}
+	}
+
+	/* write out the primary superblock */
+	if (info.block_size > 1024)
+		write_sb(fd, 0, aux_info.sb);
+	else
+		write_sb(fd, 1024, aux_info.sb);
+}
+
 /* Write the filesystem image to a file */
-void write_ext4_image(int fd, int gz, int sparse, int crc)
+void write_ext4_image(int fd, int gz, int sparse, int crc, int block_device)
 {
 	sparse_file_write(ext4_sparse_file, fd, gz, sparse, crc);
+
+	if (block_device)
+		block_device_write_sb(fd);
 }
 
 /* Compute the rest of the parameters of the filesystem from the basic info */
@@ -188,10 +212,11 @@ void ext4_free_fs_aux_info()
 }
 
 /* Fill in the superblock memory buffer based on the filesystem parameters */
-void ext4_fill_in_sb()
+void ext4_fill_in_sb(int block_device)
 {
 	unsigned int i;
 	struct ext4_super_block *sb = aux_info.sb;
+	struct ext4_super_block *sb_zero = calloc(1, sizeof(*sb_zero));
 
 	sb->s_inodes_count = info.inodes_per_group * aux_info.groups;
 	sb->s_blocks_count_lo = aux_info.len_blocks;
@@ -274,8 +299,8 @@ void ext4_fill_in_sb()
 				memcpy(aux_info.backup_sb[i], sb, info.block_size);
 				/* Update the block group nr of this backup superblock */
 				aux_info.backup_sb[i]->s_block_group_nr = i;
-				sparse_file_add_data(ext4_sparse_file, aux_info.backup_sb[i],
-						info.block_size, group_start_block);
+				ext4_queue_backup_sb(group_start_block, block_device ?
+						aux_info.backup_sb[i] : sb_zero);
 			}
 			sparse_file_add_data(ext4_sparse_file, aux_info.bg_desc,
 				aux_info.bg_desc_blocks * info.block_size,
@@ -291,9 +316,24 @@ void ext4_fill_in_sb()
 		aux_info.bg_desc[i].bg_free_inodes_count = sb->s_inodes_per_group;
 		aux_info.bg_desc[i].bg_used_dirs_count = 0;
 	}
+
+	ext4_queue_primary_sb(block_device ? aux_info.sb : sb_zero);
 }
 
-void ext4_queue_sb(void)
+
+/* Queue the superblock to be written out - if it's a block device, queue a
+ * zero-filled block first, the correct version of superblocks will be written
+ * to the block device after all other blocks are written.
+ *
+ * The file-system on the block device will not be valid until the correct
+ * version of superblocks are written, this is to avoid the likelihood of a
+ * partially created file-system.
+ *
+ * Backup superblocks always start from block no > 1, and are always allocated
+ * block size aligned. Primary superblock could be on block 0 or block 1 based
+ * on block size.
+ */
+void ext4_queue_primary_sb(struct ext4_super_block *sb)
 {
 	/* The write_data* functions expect only block aligned calls.
 	 * This is not an issue, except when we write out the super
@@ -302,11 +342,16 @@ void ext4_queue_sb(void)
 	 */
 	if (info.block_size > 1024) {
 		u8 *buf = calloc(info.block_size, 1);
-		memcpy(buf + 1024, (u8*)aux_info.sb, 1024);
+		memcpy(buf + 1024, (u8*)sb, 1024);
 		sparse_file_add_data(ext4_sparse_file, buf, info.block_size, 0);
 	} else {
-		sparse_file_add_data(ext4_sparse_file, aux_info.sb, 1024, 1);
+		sparse_file_add_data(ext4_sparse_file, sb, 1024, 1);
 	}
+}
+
+void ext4_queue_backup_sb(u64 start_block, struct ext4_super_block *sb)
+{
+	sparse_file_add_data(ext4_sparse_file, sb, info.block_size, start_block);
 }
 
 void ext4_parse_sb_info(struct ext4_super_block *sb)
