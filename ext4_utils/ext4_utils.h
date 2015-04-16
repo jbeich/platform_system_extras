@@ -37,6 +37,7 @@ extern "C" {
 #include <string.h>
 #include <setjmp.h>
 #include <stdint.h>
+#include <stdbool.h>
 
 #if defined(__APPLE__) && defined(__MACH__)
 #define lseek64 lseek
@@ -99,6 +100,8 @@ struct ext2_group_desc {
 
 struct fs_aux_info {
 	struct ext4_super_block *sb;
+	struct ext4_super_block *sb_block;
+	struct ext4_super_block *sb_zero;
 	struct ext4_super_block **backup_sb;
 	struct ext2_group_desc *bg_desc;
 	struct block_group_info *bgs;
@@ -135,14 +138,14 @@ void bitmap_clear_bit(u8 *bitmap, u32 bit);
 int ext4_bg_has_super_block(int bg);
 void read_sb(int fd, struct ext4_super_block *sb);
 void write_sb(int fd, unsigned long long offset, struct ext4_super_block *sb);
-void write_ext4_image(int fd, int gz, int sparse, int crc);
+void write_ext4_image(int fd, int gz, int sparse, int crc, bool block_device);
 void ext4_create_fs_aux_info(void);
 void ext4_free_fs_aux_info(void);
-void ext4_fill_in_sb(void);
+void ext4_fill_in_sb(bool block_device);
 void ext4_create_resize_inode(void);
 void ext4_create_journal_inode(void);
 void ext4_update_free(void);
-void ext4_queue_sb(void);
+void ext4_queue_sb(u64 start_block, struct ext4_super_block *sb);
 u64 get_block_device_size(int fd);
 int is_block_device_fd(int fd);
 u64 get_file_size(int fd);
