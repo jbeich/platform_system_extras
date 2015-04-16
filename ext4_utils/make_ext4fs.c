@@ -500,9 +500,15 @@ int make_ext4fs_internal(int fd, const char *_directory,
 	u16 root_mode;
 	char *mountpoint;
 	char *directory = NULL;
+	int block_device = is_block_device_fd(fd);
 
 	if (setjmp(setjmp_env))
 		return EXIT_FAILURE; /* Handle a call to longjmp() */
+
+	if (block_device && (sparse || gzip || crc)) {
+		fprintf(stderr, "No sparse image parameters for block device\n");
+		return EXIT_FAILURE;
+	}
 
 	if (_mountpoint == NULL) {
 		mountpoint = strdup("");
@@ -585,7 +591,7 @@ int make_ext4fs_internal(int fd, const char *_directory,
 
 	block_allocator_init();
 
-	ext4_fill_in_sb();
+	ext4_fill_in_sb(block_device);
 
 	if (reserve_inodes(0, 10) == EXT4_ALLOCATE_FAILED)
 		error("failed to reserve first 10 inodes");
@@ -630,8 +636,6 @@ int make_ext4fs_internal(int fd, const char *_directory,
 
 	ext4_update_free();
 
-	ext4_queue_sb();
-
 	if (block_list_file) {
 		size_t dirlen = directory ? strlen(directory) : 0;
 		struct block_allocation* p = get_saved_allocation_chain();
@@ -659,7 +663,7 @@ int make_ext4fs_internal(int fd, const char *_directory,
 		wipe_block_device(fd, info.len);
 	}
 
-	write_ext4_image(fd, gzip, sparse, crc);
+	write_ext4_image(fd, gzip, sparse, crc, block_device);
 
 	sparse_file_destroy(ext4_sparse_file);
 	ext4_sparse_file = NULL;
