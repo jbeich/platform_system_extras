@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "d0c51e25_e41bb3f2",
+        "filename": "simpleperf/cmd_help.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-17T21:46:25Z",
+      "side": 1,
+      "message": "yes, always use auto\u0026 if you can. then the reader doesn\u0027t have to think \"is something special happening here?\". it\u0027s not like it\u0027s an optimization to miss the \u0026 off just because it\u0027s a pointer.",
+      "parentUuid": "10dc16fc_46b96bdb",
+      "revId": "b9410ede16c4a310ee5deec9017f73a0c68da889",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "10dc16fc_0bb36e7b",
         "filename": "simpleperf/cmd_list.cpp",
         "patchSetId": 2
@@ -136,6 +154,24 @@
       "side": 1,
       "message": "Done. \"used\" is an abbreviation of \"it is used\", doesn\u0027t make sense?",
       "parentUuid": "10dc16fc_2b8d1204",
+      "revId": "b9410ede16c4a310ee5deec9017f73a0c68da889",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "70a39280_c304761a",
+        "filename": "simpleperf/command.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-17T21:46:25Z",
+      "side": 1,
+      "message": "no. you can\u0027t abbreviate like that in English. \"before it is used\" would have been fine though.",
+      "parentUuid": "10dc16fc_66a4af85",
       "revId": "b9410ede16c4a310ee5deec9017f73a0c68da889",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -451,6 +487,24 @@
       "side": 1,
       "message": "As simpleperf is a standalone command, I think logging its message into logd, and can be seen in `adb logcat` is not a good choice. That\u0027s why I don\u0027t use base/logging.h here. And PLOG() seems using c++ stream style for logging. But I do think creating another macro for logging with errno is a good suggestion.",
       "parentUuid": "10dc16fc_4baf36e4",
+      "revId": "b9410ede16c4a310ee5deec9017f73a0c68da889",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0c51e25_84faeff1",
+        "filename": "simpleperf/event_fd.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-17T21:46:25Z",
+      "side": 1,
+      "message": "you can tell libbase to log to stderr. see StderrLogger in \"base/logging.h\".",
+      "parentUuid": "d0c51e25_49818248",
       "revId": "b9410ede16c4a310ee5deec9017f73a0c68da889",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
