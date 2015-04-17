@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "907ac6a8_3242431d",
+        "filename": "simpleperf/cmd_help.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-17T21:22:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "907ac6a8_f74b5db5",
+      "revId": "b9410ede16c4a310ee5deec9017f73a0c68da889",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d080bec6_aed836f4",
         "filename": "simpleperf/cmd_help.cpp",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2015-04-17T00:33:57Z",
       "side": 1,
       "message": "auto\u0026",
+      "revId": "b9410ede16c4a310ee5deec9017f73a0c68da889",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10dc16fc_46b96bdb",
+        "filename": "simpleperf/cmd_help.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-17T21:22:23Z",
+      "side": 1,
+      "message": "Done. Is there a style about when to use \"auto\", and when to use \"auto\u0026\"? Do we want to use \"auto\u0026\" wherever it can be used? Because here is a pointer, both \"auto\u0026\" and \"auto\" are ok.",
+      "parentUuid": "d080bec6_aed836f4",
       "revId": "b9410ede16c4a310ee5deec9017f73a0c68da889",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "d080bec6_2e72e60b",
+        "filename": "simpleperf/cmd_list.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-17T21:22:23Z",
+      "side": 1,
+      "message": "I think it would be worth doing when at least two commands need it.",
+      "parentUuid": "10dc16fc_0bb36e7b",
+      "revId": "b9410ede16c4a310ee5deec9017f73a0c68da889",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "10dc16fc_2b8d1204",
         "filename": "simpleperf/command.cpp",
         "patchSetId": 2
@@ -64,6 +118,24 @@
       "writtenOn": "2015-04-17T00:33:57Z",
       "side": 1,
       "message": "use",
+      "revId": "b9410ede16c4a310ee5deec9017f73a0c68da889",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10dc16fc_66a4af85",
+        "filename": "simpleperf/command.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-17T21:22:23Z",
+      "side": 1,
+      "message": "Done. \"used\" is an abbreviation of \"it is used\", doesn\u0027t make sense?",
+      "parentUuid": "10dc16fc_2b8d1204",
       "revId": "b9410ede16c4a310ee5deec9017f73a0c68da889",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "907ac6a8_b8dab563",
+        "filename": "simpleperf/command.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-17T21:22:23Z",
+      "side": 1,
+      "message": "Changed for all data members in classes.",
+      "parentUuid": "907ac6a8_f2084b5c",
+      "revId": "b9410ede16c4a310ee5deec9017f73a0c68da889",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d080bec6_0efe0a32",
         "filename": "simpleperf/event.h",
         "patchSetId": 2
@@ -98,6 +188,24 @@
       "writtenOn": "2015-04-17T00:33:57Z",
       "side": 1,
       "message": "what do \u0027type\u0027 and \u0027config\u0027 mean?",
+      "revId": "b9410ede16c4a310ee5deec9017f73a0c68da889",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f0b782b3_27179a45",
+        "filename": "simpleperf/event.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-17T21:22:23Z",
+      "side": 1,
+      "message": "Comment added for Event class. I hope that can explain.",
+      "parentUuid": "d080bec6_0efe0a32",
       "revId": "b9410ede16c4a310ee5deec9017f73a0c68da889",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "d0c51e25_c94b32b6",
+        "filename": "simpleperf/event.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-17T21:22:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "10dc16fc_2b58b210",
+      "revId": "b9410ede16c4a310ee5deec9017f73a0c68da889",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "10dc16fc_0bddaee2",
         "filename": "simpleperf/event.h",
         "patchSetId": 2
@@ -132,6 +258,24 @@
       "writtenOn": "2015-04-17T00:33:57Z",
       "side": 1,
       "message": "IsSupported\n\n(boolean getters usually start \"is\" or \"has\".)",
+      "revId": "b9410ede16c4a310ee5deec9017f73a0c68da889",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0c51e25_294f56c6",
+        "filename": "simpleperf/event.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-17T21:22:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "10dc16fc_0bddaee2",
       "revId": "b9410ede16c4a310ee5deec9017f73a0c68da889",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -155,6 +299,24 @@
     },
     {
       "key": {
+        "uuid": "d080bec6_75818948",
+        "filename": "simpleperf/event_attr.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-17T21:22:23Z",
+      "side": 1,
+      "message": "Yes, I think a static method is more clear. And we can remove the pointer to Event from EventAttr, which clarifies the responsibility of EventAttr.",
+      "parentUuid": "10dc16fc_0b15aec1",
+      "revId": "b9410ede16c4a310ee5deec9017f73a0c68da889",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "10dc16fc_cb2fa636",
         "filename": "simpleperf/event_attr.h",
         "patchSetId": 2
@@ -166,6 +328,24 @@
       "writtenOn": "2015-04-17T00:33:57Z",
       "side": 1,
       "message": "a comment explaining what this is for?",
+      "revId": "b9410ede16c4a310ee5deec9017f73a0c68da889",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0c51e25_a29366d3",
+        "filename": "simpleperf/event_attr.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-17T21:22:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "10dc16fc_cb2fa636",
       "revId": "b9410ede16c4a310ee5deec9017f73a0c68da889",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -189,6 +369,24 @@
     },
     {
       "key": {
+        "uuid": "d080bec6_35a9d15c",
+        "filename": "simpleperf/event_attr.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-17T21:22:23Z",
+      "side": 1,
+      "message": "I think EventAttr is useful for managing perf_event_attr, especially when the attribute configuration can be flexible and complex in the future. And I don\u0027t want to operate on perf_event_attr directly whenever possible. The pain point is that perf_event_open() syscall needs non const perf_event_attr*, that\u0027s why I returns perf_event_attr\u0026 in Attr(). I think I should return perf_event_attr instead, which makes EventAttr more clear.",
+      "parentUuid": "d080bec6_ae7cb634",
+      "revId": "b9410ede16c4a310ee5deec9017f73a0c68da889",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "10dc16fc_ebcdcae2",
         "filename": "simpleperf/event_fd.cpp",
         "patchSetId": 2
@@ -200,6 +398,24 @@
       "writtenOn": "2015-04-17T00:33:57Z",
       "side": 1,
       "message": "these two methods could share most of their code.",
+      "revId": "b9410ede16c4a310ee5deec9017f73a0c68da889",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "907ac6a8_0df12565",
+        "filename": "simpleperf/event_fd.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-17T21:22:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "10dc16fc_ebcdcae2",
       "revId": "b9410ede16c4a310ee5deec9017f73a0c68da889",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -223,6 +439,24 @@
     },
     {
       "key": {
+        "uuid": "d0c51e25_49818248",
+        "filename": "simpleperf/event_fd.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-17T21:22:23Z",
+      "side": 1,
+      "message": "As simpleperf is a standalone command, I think logging its message into logd, and can be seen in `adb logcat` is not a good choice. That\u0027s why I don\u0027t use base/logging.h here. And PLOG() seems using c++ stream style for logging. But I do think creating another macro for logging with errno is a good suggestion.",
+      "parentUuid": "10dc16fc_4baf36e4",
+      "revId": "b9410ede16c4a310ee5deec9017f73a0c68da889",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d080bec6_2e9186ca",
         "filename": "simpleperf/utils.cpp",
         "patchSetId": 2
@@ -234,6 +468,24 @@
       "writtenOn": "2015-04-17T00:33:57Z",
       "side": 1,
       "message": "maybe PrintIndented? or at least PrintWithSpaces?",
+      "revId": "b9410ede16c4a310ee5deec9017f73a0c68da889",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0c51e25_c97492fa",
+        "filename": "simpleperf/utils.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-17T21:22:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d080bec6_2e9186ca",
       "revId": "b9410ede16c4a310ee5deec9017f73a0c68da889",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
