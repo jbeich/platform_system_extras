@@ -17,7 +17,6 @@ LOCAL_MODULE := libperfprofdcore
 LOCAL_MODULE_CLASS := STATIC_LIBRARIES
 proto_header_dir := $(call local-generated-sources-dir)/proto/$(LOCAL_PATH)
 LOCAL_C_INCLUDES += $(proto_header_dir) $(LOCAL_PATH)/quipper/kernel-headers
-
 LOCAL_EXPORT_C_INCLUDE_DIRS += $(proto_header_dir)
 LOCAL_SRC_FILES :=  \
 	perf_profile.proto \
@@ -29,7 +28,6 @@ LOCAL_SRC_FILES :=  \
 	perf_data_converter.cc \
 	cpuconfig.cc \
 	perfprofdcore.cc \
-
 
 LOCAL_CPPFLAGS += $(perfprofd_cppflags)
 include $(BUILD_STATIC_LIBRARY)

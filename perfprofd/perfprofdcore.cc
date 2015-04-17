@@ -194,11 +194,11 @@ void ConfigReader::addDefaultEntries()
   // Currently defaults to 1 (true).
   addUnsignedEntry("only_debug_build", 1, 0, 1);
 
-  // If the "mpdecision" service is running at the point we
-  // are ready to kick off a profiling run, then temporarily
-  // disable the service and and hard-wire all cores on prior
-  // to the collection run. Applies only if the collection interval
-  // is 5 seconds or less.
+  // If the "mpdecision" service is running at the point we are ready
+  // to kick off a profiling run, then temporarily disable the service
+  // and and hard-wire all cores on prior to the collection
+  // run. Applies only if the collection interval is 5 seconds or
+  // less.
   addUnsignedEntry("hardwire_cpus", 1, 0, 1);
 
   // If set to 1, pass the -g option when invoking 'perf' (requests
