@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "10597645_69da1367",
+        "filename": "ext4_utils/ext4_utils.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1071282
+      },
+      "writtenOn": "2015-04-17T01:05:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d080bec6_ab5348be",
+      "range": {
+        "startLine": 215,
+        "startChar": 21,
+        "endLine": 215,
+        "endChar": 27
+      },
+      "revId": "203ab69f517cba27eb33b33aa37a46a7b34f2bf8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "10dc16fc_b01f2d89",
         "filename": "ext4_utils/ext4_utils.c",
         "patchSetId": 1
@@ -42,6 +66,24 @@
     },
     {
       "key": {
+        "uuid": "506daeeb_a9c289a0",
+        "filename": "ext4_utils/ext4_utils.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1071282
+      },
+      "writtenOn": "2015-04-17T01:05:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "10dc16fc_b01f2d89",
+      "revId": "203ab69f517cba27eb33b33aa37a46a7b34f2bf8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "10dc16fc_1002b90b",
         "filename": "ext4_utils/make_ext4fs.c",
         "patchSetId": 1
@@ -53,6 +95,24 @@
       "writtenOn": "2015-04-16T23:47:14Z",
       "side": 1,
       "message": "I think it makes sense to move this into ext4_fill_in_sb.  It was originally here because it might memcpy sb into the middle of a block, so it has to be done after all changes to sb, but I think it makes more sense to queue the block up front and have aux_info.sb be a pointer into the middle of the block.",
+      "revId": "203ab69f517cba27eb33b33aa37a46a7b34f2bf8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10597645_49df4f55",
+        "filename": "ext4_utils/make_ext4fs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 633,
+      "author": {
+        "id": 1071282
+      },
+      "writtenOn": "2015-04-17T01:05:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "10dc16fc_1002b90b",
       "revId": "203ab69f517cba27eb33b33aa37a46a7b34f2bf8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
