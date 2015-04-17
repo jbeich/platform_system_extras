@@ -1,0 +1,174 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d0c51e25_c4c237a2",
+        "filename": "simpleperf/command.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-17T22:18:33Z",
+      "side": 1,
+      "message": "Defining",
+      "revId": "4a971cc90dbd37cc4123b03f5b1c976870b09f11",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "70a39280_c3dd560c",
+        "filename": "simpleperf/event.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-17T22:18:33Z",
+      "side": 1,
+      "message": "i don\u0027t know what this sentence means.",
+      "revId": "4a971cc90dbd37cc4123b03f5b1c976870b09f11",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "70a39280_c3a8f65a",
+        "filename": "simpleperf/event.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-17T22:18:33Z",
+      "side": 1,
+      "message": "okay, but what\u0027s the relationship between type and type_specific_config? where do valid values come from?",
+      "revId": "4a971cc90dbd37cc4123b03f5b1c976870b09f11",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f0b782b3_8a7a0bb4",
+        "filename": "simpleperf/event_attr.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-17T22:18:33Z",
+      "side": 1,
+      "message": "unknown",
+      "revId": "4a971cc90dbd37cc4123b03f5b1c976870b09f11",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f0b782b3_e7eae21f",
+        "filename": "simpleperf/event_attr.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-17T22:18:33Z",
+      "side": 1,
+      "message": "event being created by what?\n\ntell who?",
+      "revId": "4a971cc90dbd37cc4123b03f5b1c976870b09f11",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "70a39280_266c7805",
+        "filename": "simpleperf/event_fd.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-17T22:18:33Z",
+      "side": 1,
+      "message": "where does the name come from? give me an example so i know when looking at the API what this might be useful for.",
+      "revId": "4a971cc90dbd37cc4123b03f5b1c976870b09f11",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f0b782b3_6a81d7d1",
+        "filename": "simpleperf/event_fd.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-17T22:18:33Z",
+      "side": 1,
+      "message": "what do these functions do?",
+      "revId": "4a971cc90dbd37cc4123b03f5b1c976870b09f11",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "70a39280_2310ead1",
+        "filename": "simpleperf/event_fd.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-17T22:18:33Z",
+      "side": 1,
+      "message": "i think it\u0027s traditional to list these at the top, since they\u0027re the moral equivalent of constructors for this class.",
+      "revId": "4a971cc90dbd37cc4123b03f5b1c976870b09f11",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f0b782b3_2aa43f84",
+        "filename": "simpleperf/event_fd.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-17T22:18:33Z",
+      "side": 1,
+      "message": "use the DISALLOW* macros from \u003cbase/macros.h\u003e. (for the same reason as auto\u0026 --- if you\u0027re manually deleting member functions, we have to stop and think. specifically: what are you trying to do? did you delete the correct function(s) for what you\u0027re trying to do?)",
+      "revId": "4a971cc90dbd37cc4123b03f5b1c976870b09f11",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "70a39280_a64e2895",
+        "filename": "simpleperf/utils.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-17T22:18:33Z",
+      "side": 1,
+      "message": "(not that it matters because this should use \u003cbase/logging.h\u003e, but S is already used in Android to differentiate the system log from the main log.)",
+      "revId": "4a971cc90dbd37cc4123b03f5b1c976870b09f11",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
