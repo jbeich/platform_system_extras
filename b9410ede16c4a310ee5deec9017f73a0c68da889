@@ -1,0 +1,242 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "907ac6a8_f74b5db5",
+        "filename": "simpleperf/cmd_help.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-17T00:33:57Z",
+      "side": 1,
+      "message": "args.empty()",
+      "revId": "b9410ede16c4a310ee5deec9017f73a0c68da889",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d080bec6_aed836f4",
+        "filename": "simpleperf/cmd_help.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-17T00:33:57Z",
+      "side": 1,
+      "message": "auto\u0026",
+      "revId": "b9410ede16c4a310ee5deec9017f73a0c68da889",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10dc16fc_0bb36e7b",
+        "filename": "simpleperf/cmd_list.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-17T00:33:57Z",
+      "side": 1,
+      "message": "alternatively, Command\u0027s constructor could take a minimum and maximum number of arguments, and the dispatcher could automatically handle reporting this kind of usage error.",
+      "revId": "b9410ede16c4a310ee5deec9017f73a0c68da889",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10dc16fc_2b8d1204",
+        "filename": "simpleperf/command.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-17T00:33:57Z",
+      "side": 1,
+      "message": "use",
+      "revId": "b9410ede16c4a310ee5deec9017f73a0c68da889",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "907ac6a8_f2084b5c",
+        "filename": "simpleperf/command.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-17T00:33:57Z",
+      "side": 1,
+      "message": "name_\n\nhttps://google-styleguide.googlecode.com/svn/trunk/cppguide.html#Variable_Names",
+      "revId": "b9410ede16c4a310ee5deec9017f73a0c68da889",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d080bec6_0efe0a32",
+        "filename": "simpleperf/event.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-17T00:33:57Z",
+      "side": 1,
+      "message": "what do \u0027type\u0027 and \u0027config\u0027 mean?",
+      "revId": "b9410ede16c4a310ee5deec9017f73a0c68da889",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10dc16fc_2b58b210",
+        "filename": "simpleperf/event.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-17T00:33:57Z",
+      "side": 1,
+      "message": "stray ;",
+      "revId": "b9410ede16c4a310ee5deec9017f73a0c68da889",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10dc16fc_0bddaee2",
+        "filename": "simpleperf/event.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-17T00:33:57Z",
+      "side": 1,
+      "message": "IsSupported\n\n(boolean getters usually start \"is\" or \"has\".)",
+      "revId": "b9410ede16c4a310ee5deec9017f73a0c68da889",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10dc16fc_0b15aec1",
+        "filename": "simpleperf/event_attr.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-17T00:33:57Z",
+      "side": 1,
+      "message": "i\u0027m not sure this should be a public constructor. would it make more sense as a static method with a name explaining what it means to convert an Event into an EventAttr? (i think that an Event is how the kernel tells you what you can monitor, and an EventAttr is how you tell the kernel what you want to monitor?)",
+      "revId": "b9410ede16c4a310ee5deec9017f73a0c68da889",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10dc16fc_cb2fa636",
+        "filename": "simpleperf/event_attr.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-17T00:33:57Z",
+      "side": 1,
+      "message": "a comment explaining what this is for?",
+      "revId": "b9410ede16c4a310ee5deec9017f73a0c68da889",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d080bec6_ae7cb634",
+        "filename": "simpleperf/event_attr.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-17T00:33:57Z",
+      "side": 1,
+      "message": "does wrapping the perf_event_attr like this add any value, or should we just expose the perf_event_attr\u0026 instead?",
+      "revId": "b9410ede16c4a310ee5deec9017f73a0c68da889",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10dc16fc_ebcdcae2",
+        "filename": "simpleperf/event_fd.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-17T00:33:57Z",
+      "side": 1,
+      "message": "these two methods could share most of their code.",
+      "revId": "b9410ede16c4a310ee5deec9017f73a0c68da889",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10dc16fc_4baf36e4",
+        "filename": "simpleperf/event_fd.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-17T00:33:57Z",
+      "side": 1,
+      "message": "the PLOG(ERROR) macro in libbase would do the strerror for you.",
+      "revId": "b9410ede16c4a310ee5deec9017f73a0c68da889",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d080bec6_2e9186ca",
+        "filename": "simpleperf/utils.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-17T00:33:57Z",
+      "side": 1,
+      "message": "maybe PrintIndented? or at least PrintWithSpaces?",
+      "revId": "b9410ede16c4a310ee5deec9017f73a0c68da889",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
