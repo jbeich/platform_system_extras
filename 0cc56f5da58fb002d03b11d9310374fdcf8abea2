@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "f055c239_ddb91b59",
+        "filename": "simpleperf/cmd_list.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-18T20:59:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d0435e7f_1eceed34",
+      "revId": "0cc56f5da58fb002d03b11d9310374fdcf8abea2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d0435e7f_7ed3b1d8",
         "filename": "simpleperf/event_attr.cpp",
         "patchSetId": 5
@@ -30,6 +48,24 @@
       "writtenOn": "2015-04-18T01:37:50Z",
       "side": 1,
       "message": "simpler:\n\n  result +\u003d p.second;\n  if (!result.empty()) result +\u003d \", \";",
+      "revId": "0cc56f5da58fb002d03b11d9310374fdcf8abea2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d06c3e17_4a44237c",
+        "filename": "simpleperf/event_attr.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-18T20:59:21Z",
+      "side": 1,
+      "message": "Better choice.",
+      "parentUuid": "d0435e7f_7ed3b1d8",
       "revId": "0cc56f5da58fb002d03b11d9310374fdcf8abea2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -70,6 +106,24 @@
     },
     {
       "key": {
+        "uuid": "f055c239_5da50b28",
+        "filename": "simpleperf/event_fd.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-18T20:59:21Z",
+      "side": 1,
+      "message": "Comment added for it. list command tests which event types are supported by the kernel/machine by trying to open the perf_event_file for it. So it is not an error to fail. But this suggestion makes me consider that the PLOG(DEBUG) for fcntl and ioctl below should be PLOG(ERROR).",
+      "parentUuid": "d0435e7f_fee6a1b1",
+      "revId": "0cc56f5da58fb002d03b11d9310374fdcf8abea2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d0435e7f_bedc19e8",
         "filename": "simpleperf/event_fd.h",
         "patchSetId": 5
@@ -81,6 +135,24 @@
       "writtenOn": "2015-04-18T01:37:50Z",
       "side": 1,
       "message": "event\n\n(you can probably find a spelling checker plug-in for whatever editor you\u0027re using.)",
+      "revId": "0cc56f5da58fb002d03b11d9310374fdcf8abea2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "305cba63_5f318319",
+        "filename": "simpleperf/event_fd.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-18T20:59:21Z",
+      "side": 1,
+      "message": "Great suggestion!",
+      "parentUuid": "d0435e7f_bedc19e8",
       "revId": "0cc56f5da58fb002d03b11d9310374fdcf8abea2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -104,6 +176,24 @@
     },
     {
       "key": {
+        "uuid": "f055c239_dd90fbc8",
+        "filename": "simpleperf/event_fd.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-18T20:59:21Z",
+      "side": 1,
+      "message": "Well, I think monitor may not be a good name, and I actually don\u0027t know what the kernel will do for this. I think before I know it very well, I\u0027d better make the function name similar to the ioctl command name in implementation. To make the function clear, I also add my understanding in the comment.",
+      "parentUuid": "f03ce2f3_7f48cf3e",
+      "revId": "0cc56f5da58fb002d03b11d9310374fdcf8abea2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d0435e7f_3ef00961",
         "filename": "simpleperf/event_type.cpp",
         "patchSetId": 5
@@ -115,6 +205,24 @@
       "writtenOn": "2015-04-18T01:37:50Z",
       "side": 1,
       "message": "why is this on a separate line?",
+      "revId": "0cc56f5da58fb002d03b11d9310374fdcf8abea2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d06c3e17_2a1d6766",
+        "filename": "simpleperf/event_type.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-18T20:59:21Z",
+      "side": 1,
+      "message": "I uses clang-format to format the code, and this is what it insists on.",
+      "parentUuid": "d0435e7f_3ef00961",
       "revId": "0cc56f5da58fb002d03b11d9310374fdcf8abea2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -138,6 +246,24 @@
     },
     {
       "key": {
+        "uuid": "d06c3e17_6a175f44",
+        "filename": "simpleperf/event_type.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-18T20:59:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d0435e7f_dee3e59f",
+      "revId": "0cc56f5da58fb002d03b11d9310374fdcf8abea2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b03eeaea_40f1b0ac",
         "filename": "simpleperf/main.cpp",
         "patchSetId": 5
@@ -149,6 +275,24 @@
       "writtenOn": "2015-04-18T01:37:50Z",
       "side": 1,
       "message": "why don\u0027t you want to pass argv?",
+      "revId": "0cc56f5da58fb002d03b11d9310374fdcf8abea2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "305cba63_1f626b13",
+        "filename": "simpleperf/main.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-18T20:59:21Z",
+      "side": 1,
+      "message": "Sorry, I didn\u0027t realize that it is used for program name parsing.",
+      "parentUuid": "b03eeaea_40f1b0ac",
       "revId": "0cc56f5da58fb002d03b11d9310374fdcf8abea2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
