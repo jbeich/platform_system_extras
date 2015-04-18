@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d0435e7f_1eceed34",
+        "filename": "simpleperf/cmd_list.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-18T01:37:50Z",
+      "side": 1,
+      "message": "OfType or WithType",
+      "revId": "0cc56f5da58fb002d03b11d9310374fdcf8abea2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0435e7f_7ed3b1d8",
+        "filename": "simpleperf/event_attr.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-18T01:37:50Z",
+      "side": 1,
+      "message": "simpler:\n\n  result +\u003d p.second;\n  if (!result.empty()) result +\u003d \", \";",
+      "revId": "0cc56f5da58fb002d03b11d9310374fdcf8abea2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f03ce2f3_3f4e474e",
+        "filename": "simpleperf/event_attr.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-18T01:37:50Z",
+      "side": 1,
+      "message": "...because now you can remove this.",
+      "revId": "0cc56f5da58fb002d03b11d9310374fdcf8abea2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0435e7f_fee6a1b1",
+        "filename": "simpleperf/event_fd.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-18T01:37:50Z",
+      "side": 1,
+      "message": "this seems like an ERROR, no?",
+      "revId": "0cc56f5da58fb002d03b11d9310374fdcf8abea2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0435e7f_bedc19e8",
+        "filename": "simpleperf/event_fd.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-18T01:37:50Z",
+      "side": 1,
+      "message": "event\n\n(you can probably find a spelling checker plug-in for whatever editor you\u0027re using.)",
+      "revId": "0cc56f5da58fb002d03b11d9310374fdcf8abea2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f03ce2f3_7f48cf3e",
+        "filename": "simpleperf/event_fd.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-18T01:37:50Z",
+      "side": 1,
+      "message": "what will count and record events?\n\n\"Events can be read from the fd.\"? but how does anything access the fd if it\u0027s private?",
+      "revId": "0cc56f5da58fb002d03b11d9310374fdcf8abea2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0435e7f_3ef00961",
+        "filename": "simpleperf/event_type.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-18T01:37:50Z",
+      "side": 1,
+      "message": "why is this on a separate line?",
+      "revId": "0cc56f5da58fb002d03b11d9310374fdcf8abea2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0435e7f_dee3e59f",
+        "filename": "simpleperf/event_type.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-18T01:37:50Z",
+      "side": 1,
+      "message": "ooh, i like \"ByName\". maybe use that for FindCommand too? FindCommandByName?",
+      "revId": "0cc56f5da58fb002d03b11d9310374fdcf8abea2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b03eeaea_40f1b0ac",
+        "filename": "simpleperf/main.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-18T01:37:50Z",
+      "side": 1,
+      "message": "why don\u0027t you want to pass argv?",
+      "revId": "0cc56f5da58fb002d03b11d9310374fdcf8abea2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
