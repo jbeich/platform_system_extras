@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "302afabf_ef4b75b5",
+        "filename": "ext4_utils/ext4_utils.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2015-04-20T22:18:53Z",
+      "side": 1,
+      "message": "I know everything else in here uses int instead of bool, but we might as well do the right thing for new code.  You\u0027ll need to add #include \u003cstdbool.h\u003e",
+      "range": {
+        "startLine": 215,
+        "startChar": 21,
+        "endLine": 215,
+        "endChar": 24
+      },
+      "revId": "dd5b4ea534f466af7602c048bae1e0e09d8e8713",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f02302ea_db90f3c8",
+        "filename": "ext4_utils/ext4_utils.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2015-04-20T22:18:53Z",
+      "side": 1,
+      "message": "I assume you haven\u0027t tested this on a non-block device, because it isn\u0027t going to produce a clean filesystem.  If you call ext4_queue_primary_sb here, and it memcpy\u0027s the superblock, before queuing it, the queued superblock will not get updates to the free count, etc. from the later allocations.  To put the superblock queue here you have to take the memcpy out of ext4_queue_primary_sb, and fix aux_info.sb to be a pointer into the middle of a block.",
+      "revId": "dd5b4ea534f466af7602c048bae1e0e09d8e8713",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
