@@ -1,0 +1,276 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d01a7eb3_069a2fb9",
+        "filename": "simpleperf/cmd_stat.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-21T05:17:50Z",
+      "side": 1,
+      "message": "i don\u0027t understand these macros. why do you need them? anyone reading this code needs to look up what these macros do, but what they do is so trivial that there\u0027s no value to the abstraction.",
+      "revId": "2dd53e365146f4de0a22b2554db1b3026bee07e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "302afabf_c3676a97",
+        "filename": "simpleperf/cmd_stat.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-21T05:17:50Z",
+      "side": 1,
+      "message": "is this necessary? couldn\u0027t we just default to { \"sleep\", \"999999999\" } arguments and reuse all the same code as the normal path? that would mean less code (which is a good thing in itself) and mean more testing of the regular path (because we\u0027re always going down it).",
+      "revId": "2dd53e365146f4de0a22b2554db1b3026bee07e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f02302ea_a6da4310",
+        "filename": "simpleperf/cmd_stat.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-21T05:17:50Z",
+      "side": 1,
+      "message": "(this is a perfect example of where the new macros make things less readable.)",
+      "revId": "2dd53e365146f4de0a22b2554db1b3026bee07e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d01a7eb3_610b0d5e",
+        "filename": "simpleperf/cmd_stat.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-21T05:17:50Z",
+      "side": 1,
+      "message": "android::base::Split?",
+      "revId": "2dd53e365146f4de0a22b2554db1b3026bee07e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d01a7eb3_e1feddaa",
+        "filename": "simpleperf/cmd_stat.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-21T05:17:50Z",
+      "side": 1,
+      "message": "report_unsupported_types",
+      "revId": "2dd53e365146f4de0a22b2554db1b3026bee07e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "302afabf_63a5de28",
+        "filename": "simpleperf/cmd_stat.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-21T05:17:50Z",
+      "side": 1,
+      "message": "no need to duplicate this.\n\n  LOG(report_unsupported_types ? ERROR : DEBUG) \u003c\u003c ...",
+      "revId": "2dd53e365146f4de0a22b2554db1b3026bee07e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "302afabf_c3992af8",
+        "filename": "simpleperf/cmd_stat.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-21T05:17:50Z",
+      "side": 1,
+      "message": "the default list",
+      "revId": "2dd53e365146f4de0a22b2554db1b3026bee07e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f02302ea_e661dbb9",
+        "filename": "simpleperf/cmd_stat.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-21T05:17:50Z",
+      "side": 1,
+      "message": "since this isn\u0027t important, how about we just use the printf \u0027 modifier -- even though it isn\u0027t currently implemented on Android -- and come back and fix that later?",
+      "revId": "2dd53e365146f4de0a22b2554db1b3026bee07e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f02302ea_a63ec388",
+        "filename": "simpleperf/environment.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-21T05:17:50Z",
+      "side": 1,
+      "message": "this seems like it would be testable if we broke it in two, separating the file reading from the parsing.",
+      "revId": "2dd53e365146f4de0a22b2554db1b3026bee07e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f02302ea_8648df3f",
+        "filename": "simpleperf/environment.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-21T05:17:50Z",
+      "side": 1,
+      "message": "\"re\"",
+      "revId": "2dd53e365146f4de0a22b2554db1b3026bee07e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "302afabf_4301ba8a",
+        "filename": "simpleperf/environment.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-21T05:17:50Z",
+      "side": 1,
+      "message": "what use is this?",
+      "revId": "2dd53e365146f4de0a22b2554db1b3026bee07e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f02302ea_46c9c72b",
+        "filename": "simpleperf/perf_event.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-21T05:17:50Z",
+      "side": 1,
+      "message": "it\u0027s probably clearer to give all your types CamelCaseNames.\n\nthe name is a bit confusing too. what is this class for? it seems like you only use it to read data from the perf event fd. so this is some kernel type, but one that isn\u0027t in perf_event.h? does it have a name in the kernel we can just use?",
+      "revId": "2dd53e365146f4de0a22b2554db1b3026bee07e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "302afabf_e31b8ef2",
+        "filename": "simpleperf/perf_event.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-21T05:17:50Z",
+      "side": 1,
+      "message": "event_count\n\n(unless we\u0027re using the same names as the kernel.)",
+      "revId": "2dd53e365146f4de0a22b2554db1b3026bee07e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d01a7eb3_41c89157",
+        "filename": "simpleperf/utils.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-21T05:17:50Z",
+      "side": 1,
+      "message": "this is confusing because you don\u0027t actually use \u0027filename\u0027 except for error reporting.\n\nyou can\u0027t use ReadFdToString because you only want to read \u0027bytes\u0027 bytes? in which case the name here is misleading because we\u0027re not reading the whole file. ReadN? (yeah, that\u0027s not a great name either but it\u0027s late, i\u0027m sick, and i spent too many years using Plan 9 [http://man.cat-v.org/plan_9/2/read] so it\u0027s all that\u0027s coming to mind.)",
+      "revId": "2dd53e365146f4de0a22b2554db1b3026bee07e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d01a7eb3_a186a568",
+        "filename": "simpleperf/workload.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-21T05:17:50Z",
+      "side": 1,
+      "message": "FATAL?",
+      "revId": "2dd53e365146f4de0a22b2554db1b3026bee07e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d01a7eb3_e19ffda9",
+        "filename": "simpleperf/workload.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-21T05:17:50Z",
+      "side": 1,
+      "message": "LOG(FATAL)?",
+      "revId": "2dd53e365146f4de0a22b2554db1b3026bee07e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
