@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f02302ea_9addcc97",
+        "filename": "ext4_utils/ext4_utils.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2015-04-21T18:05:15Z",
+      "side": 1,
+      "message": "this might as well come from aux_info too",
+      "range": {
+        "startLine": 152,
+        "startChar": 57,
+        "endLine": 152,
+        "endChar": 76
+      },
+      "revId": "6f0dce608f053cafb1395ca3187dc2d11f0d89ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
