@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f02302ea_b0543926",
+        "filename": "ext4_utils/ext4_utils.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2015-04-21T00:35:02Z",
+      "side": 1,
+      "message": "This is a little inscrutable, can you use the same if block that came from ext4_queues_sb?",
+      "revId": "a1b40e9be1c04f56a8918f20b1eb6a2b3bad66d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d01a7eb3_d0673197",
+        "filename": "ext4_utils/ext4_utils.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2015-04-21T00:35:02Z",
+      "side": 1,
+      "message": "This memory is untracked, can you allocate it in ext4_create_fs_aux_info and assign it to aux_info.sb_zero?",
+      "revId": "a1b40e9be1c04f56a8918f20b1eb6a2b3bad66d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f02302ea_301de966",
+        "filename": "ext4_utils/ext4_utils.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2015-04-21T00:35:02Z",
+      "side": 1,
+      "message": "precompute this and store it in aux_info",
+      "range": {
+        "startLine": 323,
+        "startChar": 15,
+        "endLine": 323,
+        "endChar": 45
+      },
+      "revId": "a1b40e9be1c04f56a8918f20b1eb6a2b3bad66d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "302afabf_f8b21dc3",
+        "filename": "ext4_utils/ext4_utils.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2015-04-21T00:35:02Z",
+      "side": 1,
+      "message": "This doesn\u0027t apply here any more, this is just queuing whatever was passed to it.  Put the comment in ext4_fill_in_sb when you queue the primary sb.",
+      "range": {
+        "startLine": 328,
+        "startChar": 3,
+        "endLine": 334,
+        "endChar": 33
+      },
+      "revId": "a1b40e9be1c04f56a8918f20b1eb6a2b3bad66d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d01a7eb3_f0cd0de3",
+        "filename": "ext4_utils/make_ext4fs.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2015-04-21T00:35:02Z",
+      "side": 1,
+      "message": "gzip is not specific to sparse images, you can write out a gzipped non-sparse image.  If you want to check gzip and crc, check the following combinations:\nblockdevice \u0026\u0026 sparse\nblockdevice \u0026\u0026 gzip\ncrc \u0026\u0026 !sparse",
+      "range": {
+        "startLine": 509,
+        "startChar": 18,
+        "endLine": 509,
+        "endChar": 65
+      },
+      "revId": "a1b40e9be1c04f56a8918f20b1eb6a2b3bad66d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
