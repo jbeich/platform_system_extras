@@ -19,12 +19,15 @@ LOCAL_PATH := $(call my-dir)
 simpleperf_src_files := \
   cmd_help.cpp \
   cmd_list.cpp \
+  cmd_stat.cpp \
   command.cpp \
+  environment.cpp \
   event_attr.cpp \
   event_fd.cpp \
   event_type.cpp \
   main.cpp \
   utils.cpp \
+  workload.cpp \
 
 simpleperf_cppflags := -std=c++11 -Wall -Wextra -Werror -Wunused
 
