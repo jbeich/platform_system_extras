@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f02302ea_8dce3301",
+        "filename": "perfprofd/tests/perfprofd_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 596,
+      "author": {
+        "id": 1049408
+      },
+      "writtenOn": "2015-04-21T23:25:52Z",
+      "side": 0,
+      "message": "why remove this?",
+      "range": {
+        "startLine": 596,
+        "startChar": 37,
+        "endLine": 596,
+        "endChar": 40
+      },
+      "revId": "7f223030ffe1a24600b09f52f17209f42dc0dcc0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
