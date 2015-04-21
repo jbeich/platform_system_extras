@@ -16,8 +16,12 @@
 
 #include "utils.h"
 
+#include <errno.h>
 #include <stdarg.h>
 #include <stdio.h>
+#include <unistd.h>
+
+#include <base/logging.h>
 
 void PrintIndented(size_t indent, const char* fmt, ...) {
   va_list ap;
@@ -25,4 +29,20 @@ void PrintIndented(size_t indent, const char* fmt, ...) {
   printf("%*s", static_cast<int>(indent), "");
   vprintf(fmt, ap);
   va_end(ap);
+}
+
+bool ReadFileBytes(const std::string& filename, int fd, void* buf, size_t bytes) {
+  char* p = reinterpret_cast<char*>(buf);
+  size_t last_bytes = bytes;
+  while (last_bytes > 0) {
+    ssize_t nread = TEMP_FAILURE_RETRY(read(fd, p, last_bytes));
+    if (nread <= 0) {
+      PLOG(ERROR) << "ReadFileBytes() for " << filename << " failed";
+      return false;
+    } else {
+      p += nread;
+      last_bytes -= nread;
+    }
+  }
+  return true;
 }

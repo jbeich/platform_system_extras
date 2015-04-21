@@ -18,7 +18,48 @@
 #define SIMPLE_PERF_UTILS_H_
 
 #include <stddef.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string>
 
 void PrintIndented(size_t indent, const char* fmt, ...);
+
+#define RETURN_IF_FALSE(expression) \
+  do {                              \
+    if (!(expression)) {            \
+      return false;                 \
+    }                               \
+  } while (0)
+
+#define RETURN_IF_TRUE(expression) RETURN_IF_FALSE(!(expression))
+
+class LineReader {
+ public:
+  LineReader(FILE* fp) : fp_(fp), buf_(nullptr), bufsize_(0) {
+  }
+
+  ~LineReader() {
+    free(buf_);
+    fclose(fp_);
+  }
+
+  char* ReadLine() {
+    if (getline(&buf_, &bufsize_, fp_) != -1) {
+      return buf_;
+    }
+    return nullptr;
+  }
+
+  size_t MaxLineSize() {
+    return bufsize_;
+  }
+
+ private:
+  FILE* fp_;
+  char* buf_;
+  size_t bufsize_;
+};
+
+bool ReadFileBytes(const std::string& filename, int fd, void* buf, size_t bytes);
 
 #endif  // SIMPLE_PERF_UTILS_H_

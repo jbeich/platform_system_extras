@@ -94,3 +94,8 @@ bool EventFd::DisableEvent() {
   }
   return true;
 }
+
+bool EventFd::ReadCounter(read_format* counter) {
+  RETURN_IF_TRUE(counter == nullptr);
+  return ReadFileBytes(Name(), perf_event_fd_, counter, sizeof(read_format));
+}

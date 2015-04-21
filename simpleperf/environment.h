@@ -14,16 +14,11 @@
  * limitations under the License.
  */
 
-#ifndef SIMPLE_PERF_PERF_EVENT_H_
-#define SIMPLE_PERF_PERF_EVENT_H_
+#ifndef SIMPLE_PERF_ENVIRONMENT_H_
+#define SIMPLE_PERF_ENVIRONMENT_H_
 
-#include <linux/perf_event.h>
+#include <vector>
 
-struct read_format {
-  uint64_t nr;            // The number of events.
-  uint64_t time_enabled;  // If PERF_FORMAT_TOTAL_TIME_ENABLED.
-  uint64_t time_running;  // If PERF_FORMAT_TOTAL_TIME_RUNNING.
-  uint64_t id;            // If PERF_FORMAT_ID.
-};
+std::vector<int> GetOnlineCpus();
 
-#endif  // SIMPLE_PERF_PERF_EVENT_H_
+#endif  // SIMPLE_PERF_ENVIRONMENT_H_
