@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "d08d1e46_82df0a54",
+        "filename": "simpleperf/cmd_stat.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-22T01:30:42Z",
+      "side": 1,
+      "message": "i think you\u0027re confusing \"readable\" with \"fewer lines\". i agree that v1 isn\u0027t very good, but v2 is worse, because there\u0027s more to think about.\n\nobvious questions that come to mind given v1:\n\n1. can StopCounting actually fail? (given that the StartCounting succeeded.) if so, does that actually imply that the command failed?\n\n2. if Start or WaitFinish fails, shouldn\u0027t we StopCounting anyway?\n\n3. do we ever want to Start without calling WaitFinish? do we really just want a \"Run\" that doesn\u0027t return until everything\u0027s over?\n\ni suspect it should look more like this:\n\n  if (!StartCounting()) return false;\n  bool success \u003d workload-\u003eRun();\n  StopCounting();\n\n  ...\n\nyou probably want a class so you can use RAII to do your timing too.",
+      "parentUuid": "f02302ea_9a4e6c1a",
+      "revId": "2dd53e365146f4de0a22b2554db1b3026bee07e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "302afabf_c3676a97",
         "filename": "simpleperf/cmd_stat.cpp",
         "patchSetId": 2
@@ -66,6 +84,24 @@
       "side": 1,
       "message": "This is absolutely not necessary. And it is only useful when we are collecting system wide information. The only benefit is that it costs less resource. Because you prefer to link libsimpleperf.so into \"perf profile collection daemon\", so I think you may want to avoid fork() and exec() if possible. But your comment about less code and regular path are good consideration on the other side. After all, I prefer keep current code a little, but it is up to you.",
       "parentUuid": "302afabf_c3676a97",
+      "revId": "2dd53e365146f4de0a22b2554db1b3026bee07e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "309d9a70_f75ed8c3",
+        "filename": "simpleperf/cmd_stat.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-22T01:30:42Z",
+      "side": 1,
+      "message": "if it\u0027s not necessary, let\u0027s get rid of it. only having one path to maintain is far more valuable to us than saving a fork in one caller.",
+      "parentUuid": "d01a7eb3_372674b3",
       "revId": "2dd53e365146f4de0a22b2554db1b3026bee07e4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
