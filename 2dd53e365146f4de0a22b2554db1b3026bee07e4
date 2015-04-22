@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "309d9a70_1d39b69f",
+        "filename": "simpleperf/cmd_stat.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-22T23:16:28Z",
+      "side": 1,
+      "message": "Macros are removed.\n1. I don\u0027t know if StopCounting can fail, the kernel knows it. I think we don\u0027t need to work with failure in the kernel or the environment. It just stops working once something doesn\u0027t meet the expectation. I think It is easier to consider in that way.\n2. I think it doesn\u0027t matter, we will close the event_fd finally. (It makes me think StatCommand is not a good place to hold measured_events_ resources, because it has only one global instance. Using a new class to implement stat command seems to be better.)\n3. Here we use a combination of (Start + WaitFinish), and in cmd_record we need a combination of (Start + IsFinish).",
+      "parentUuid": "d08d1e46_82df0a54",
+      "revId": "2dd53e365146f4de0a22b2554db1b3026bee07e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "302afabf_c3676a97",
         "filename": "simpleperf/cmd_stat.cpp",
         "patchSetId": 2
@@ -102,6 +120,24 @@
       "side": 1,
       "message": "if it\u0027s not necessary, let\u0027s get rid of it. only having one path to maintain is far more valuable to us than saving a fork in one caller.",
       "parentUuid": "d01a7eb3_372674b3",
+      "revId": "2dd53e365146f4de0a22b2554db1b3026bee07e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "309d9a70_dd4e4ec8",
+        "filename": "simpleperf/cmd_stat.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-22T23:16:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "309d9a70_f75ed8c3",
       "revId": "2dd53e365146f4de0a22b2554db1b3026bee07e4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
