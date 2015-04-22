@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "10a416b9_57f6bba6",
+        "filename": "librank/librank.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 452,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2015-04-22T17:58:49Z",
+      "side": 1,
+      "message": "this style was already pretty bad, can you change this line and the line above to put each statement on its own line?",
+      "revId": "bbca44b02870495b4eb59d71bc91be4df4358b09",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
