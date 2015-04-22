@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "9070061a_2aaabbd4",
+        "filename": "perfprofd/cpuconfig.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-04-22T19:23:29Z",
+      "side": 1,
+      "message": "This is just paranoid programming on my part -- I\u0027ll get rid of the extra initialization.",
+      "parentUuid": "5083ee1c_0d44357b",
+      "revId": "56d8970fd4e46350f10211685a0d98e2c3728d3b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "30867a2e_2c101b84",
         "filename": "perfprofd/cpuconfig.cc",
         "patchSetId": 2
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "9070061a_aa9cebb6",
+        "filename": "perfprofd/cpuconfig.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-04-22T19:23:29Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "30867a2e_2c101b84",
+      "revId": "56d8970fd4e46350f10211685a0d98e2c3728d3b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5083ee1c_2d49f993",
         "filename": "perfprofd/cpuconfig.cc",
         "patchSetId": 2
@@ -47,6 +83,24 @@
       "writtenOn": "2015-04-22T16:59:42Z",
       "side": 1,
       "message": "\"we\"",
+      "revId": "56d8970fd4e46350f10211685a0d98e2c3728d3b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9070061a_0a77bf03",
+        "filename": "perfprofd/cpuconfig.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-04-22T19:23:29Z",
+      "side": 1,
+      "message": "Fixed.",
+      "parentUuid": "5083ee1c_2d49f993",
       "revId": "56d8970fd4e46350f10211685a0d98e2c3728d3b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
