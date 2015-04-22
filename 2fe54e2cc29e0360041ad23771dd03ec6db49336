@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "706b9231_a34edac6",
+        "filename": "perfprofd/cpuconfig.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-04-22T13:14:35Z",
+      "side": 1,
+      "message": "Fixed. I moved the threshold test out of this function and back into the core code.",
+      "parentUuid": "b0150a85_ebed2508",
+      "range": {
+        "startLine": 39,
+        "startChar": 31,
+        "endLine": 39,
+        "endChar": 32
+      },
+      "revId": "2fe54e2cc29e0360041ad23771dd03ec6db49336",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b0150a85_8bf0f1dd",
         "filename": "perfprofd/cpuconfig.cc",
         "patchSetId": 1
@@ -42,6 +66,24 @@
     },
     {
       "key": {
+        "uuid": "9070061a_271d9466",
+        "filename": "perfprofd/cpuconfig.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-04-22T13:14:35Z",
+      "side": 1,
+      "message": "Fixed.",
+      "parentUuid": "b0150a85_8bf0f1dd",
+      "revId": "2fe54e2cc29e0360041ad23771dd03ec6db49336",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "90148689_47a55028",
         "filename": "perfprofd/cpuconfig.h",
         "patchSetId": 1
@@ -53,6 +95,24 @@
       "writtenOn": "2015-04-21T23:25:52Z",
       "side": 1,
       "message": "Can you add more comments to member functions in this class?",
+      "revId": "2fe54e2cc29e0360041ad23771dd03ec6db49336",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9070061a_47129055",
+        "filename": "perfprofd/cpuconfig.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-04-22T13:14:35Z",
+      "side": 1,
+      "message": "Added comments.",
+      "parentUuid": "90148689_47a55028",
       "revId": "2fe54e2cc29e0360041ad23771dd03ec6db49336",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -82,6 +142,30 @@
     },
     {
       "key": {
+        "uuid": "9070061a_c70e8037",
+        "filename": "perfprofd/perfprofdcore.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 707,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-04-22T13:14:35Z",
+      "side": 1,
+      "message": "Fixed",
+      "parentUuid": "d01a7eb3_7bef32b5",
+      "range": {
+        "startLine": 707,
+        "startChar": 0,
+        "endLine": 707,
+        "endChar": 34
+      },
+      "revId": "2fe54e2cc29e0360041ad23771dd03ec6db49336",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f02302ea_2d9467bb",
         "filename": "perfprofd/tests/perfprofd_test.cc",
         "patchSetId": 1
@@ -93,6 +177,30 @@
       "writtenOn": "2015-04-21T23:25:52Z",
       "side": 1,
       "message": "looks like clean_ is always true?",
+      "range": {
+        "startLine": 84,
+        "startChar": 13,
+        "endLine": 84,
+        "endChar": 14
+      },
+      "revId": "2fe54e2cc29e0360041ad23771dd03ec6db49336",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b0718a1d_a896b3c3",
+        "filename": "perfprofd/tests/perfprofd_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-04-22T13:14:35Z",
+      "side": 1,
+      "message": "Yes.  The only time I turn off cleaning is when I am trying to debug the unit test.",
+      "parentUuid": "f02302ea_2d9467bb",
       "range": {
         "startLine": 84,
         "startChar": 13,
