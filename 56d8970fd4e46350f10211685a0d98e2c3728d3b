@@ -130,6 +130,30 @@
     },
     {
       "key": {
+        "uuid": "b0718a1d_ce08575d",
+        "filename": "perfprofd/cpuconfig.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-04-22T20:18:00Z",
+      "side": 1,
+      "message": "Fixed",
+      "parentUuid": "90b566fa_e290029f",
+      "range": {
+        "startLine": 31,
+        "startChar": 2,
+        "endLine": 31,
+        "endChar": 20
+      },
+      "revId": "56d8970fd4e46350f10211685a0d98e2c3728d3b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "10a416b9_edd60244",
         "filename": "perfprofd/perfprofdcore.cc",
         "patchSetId": 2
@@ -141,6 +165,30 @@
       "writtenOn": "2015-04-22T19:28:14Z",
       "side": 1,
       "message": "Extra and in here.",
+      "range": {
+        "startLine": 199,
+        "startChar": 9,
+        "endLine": 199,
+        "endChar": 12
+      },
+      "revId": "56d8970fd4e46350f10211685a0d98e2c3728d3b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "706b9231_a97dd92f",
+        "filename": "perfprofd/perfprofdcore.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-04-22T20:18:00Z",
+      "side": 1,
+      "message": "Thanks, fixed.",
+      "parentUuid": "10a416b9_edd60244",
       "range": {
         "startLine": 199,
         "startChar": 9,
@@ -176,6 +224,30 @@
     },
     {
       "key": {
+        "uuid": "9070061a_cd25c1a7",
+        "filename": "perfprofd/perfprofdcore.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 583,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-04-22T20:18:00Z",
+      "side": 1,
+      "message": "Actually this is one case where I want \"w\" and not \"we\" since I want this FD to survive the exec.",
+      "parentUuid": "10a416b9_cd6dbe01",
+      "range": {
+        "startLine": 583,
+        "startChar": 48,
+        "endLine": 583,
+        "endChar": 51
+      },
+      "revId": "56d8970fd4e46350f10211685a0d98e2c3728d3b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "10a416b9_2d448a7b",
         "filename": "perfprofd/perfprofdcore.cc",
         "patchSetId": 2
@@ -199,6 +271,30 @@
     },
     {
       "key": {
+        "uuid": "b0718a1d_6e31231a",
+        "filename": "perfprofd/perfprofdcore.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 629,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-04-22T20:18:00Z",
+      "side": 1,
+      "message": "It\u0027s going into the previously opened error output file alongside the perf.data file. This is purely for debugging -- if something goes wrong, it provides more context for a human being reading the file.",
+      "parentUuid": "10a416b9_2d448a7b",
+      "range": {
+        "startLine": 625,
+        "startChar": 4,
+        "endLine": 629,
+        "endChar": 26
+      },
+      "revId": "56d8970fd4e46350f10211685a0d98e2c3728d3b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "90b566fa_055d3856",
         "filename": "perfprofd/perfprofdcore.cc",
         "patchSetId": 2
@@ -210,6 +306,30 @@
       "writtenOn": "2015-04-22T19:28:14Z",
       "side": 1,
       "message": "Same as above.",
+      "range": {
+        "startLine": 633,
+        "startChar": 4,
+        "endLine": 633,
+        "endChar": 12
+      },
+      "revId": "56d8970fd4e46350f10211685a0d98e2c3728d3b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "706b9231_89673d98",
+        "filename": "perfprofd/perfprofdcore.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 633,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-04-22T20:18:00Z",
+      "side": 1,
+      "message": "See above",
+      "parentUuid": "90b566fa_055d3856",
       "range": {
         "startLine": 633,
         "startChar": 4,
