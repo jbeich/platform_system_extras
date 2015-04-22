@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5083ee1c_0d44357b",
+        "filename": "perfprofd/cpuconfig.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-22T16:59:42Z",
+      "side": 1,
+      "message": "did you find a case where property_get neither returns the property value nor your supplied default? if so, we should fix property_get rather than work around it.",
+      "revId": "56d8970fd4e46350f10211685a0d98e2c3728d3b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30867a2e_2c101b84",
+        "filename": "perfprofd/cpuconfig.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-22T16:59:42Z",
+      "side": 1,
+      "message": "just fscanf directly?",
+      "revId": "56d8970fd4e46350f10211685a0d98e2c3728d3b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5083ee1c_2d49f993",
+        "filename": "perfprofd/cpuconfig.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-22T16:59:42Z",
+      "side": 1,
+      "message": "\"we\"",
+      "revId": "56d8970fd4e46350f10211685a0d98e2c3728d3b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
