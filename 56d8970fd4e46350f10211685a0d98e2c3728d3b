@@ -104,6 +104,121 @@
       "revId": "56d8970fd4e46350f10211685a0d98e2c3728d3b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "90b566fa_e290029f",
+        "filename": "perfprofd/cpuconfig.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2015-04-22T19:28:14Z",
+      "side": 1,
+      "message": "Probably want to make this virtual in case you ever subclass.",
+      "range": {
+        "startLine": 31,
+        "startChar": 2,
+        "endLine": 31,
+        "endChar": 20
+      },
+      "revId": "56d8970fd4e46350f10211685a0d98e2c3728d3b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10a416b9_edd60244",
+        "filename": "perfprofd/perfprofdcore.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2015-04-22T19:28:14Z",
+      "side": 1,
+      "message": "Extra and in here.",
+      "range": {
+        "startLine": 199,
+        "startChar": 9,
+        "endLine": 199,
+        "endChar": 12
+      },
+      "revId": "56d8970fd4e46350f10211685a0d98e2c3728d3b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10a416b9_cd6dbe01",
+        "filename": "perfprofd/perfprofdcore.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 583,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2015-04-22T19:28:14Z",
+      "side": 1,
+      "message": "\"we\"",
+      "range": {
+        "startLine": 583,
+        "startChar": 48,
+        "endLine": 583,
+        "endChar": 51
+      },
+      "revId": "56d8970fd4e46350f10211685a0d98e2c3728d3b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10a416b9_2d448a7b",
+        "filename": "perfprofd/perfprofdcore.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 629,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2015-04-22T19:28:14Z",
+      "side": 1,
+      "message": "Where is the stderr for this command going? Wouldn\u0027t it be better to put this in the log since we could see it logcat if we needed to?",
+      "range": {
+        "startLine": 625,
+        "startChar": 4,
+        "endLine": 629,
+        "endChar": 26
+      },
+      "revId": "56d8970fd4e46350f10211685a0d98e2c3728d3b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "90b566fa_055d3856",
+        "filename": "perfprofd/perfprofdcore.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 633,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2015-04-22T19:28:14Z",
+      "side": 1,
+      "message": "Same as above.",
+      "range": {
+        "startLine": 633,
+        "startChar": 4,
+        "endLine": 633,
+        "endChar": 12
+      },
+      "revId": "56d8970fd4e46350f10211685a0d98e2c3728d3b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
