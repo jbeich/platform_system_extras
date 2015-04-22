@@ -70,6 +70,30 @@
       "revId": "7f223030ffe1a24600b09f52f17209f42dc0dcc0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "706b9231_89b2dd74",
+        "filename": "perfprofd/tests/perfprofd_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 596,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-04-22T20:20:33Z",
+      "side": 0,
+      "message": "OK, thanks. Stack profiles are still very much in the long term future for this stuff -- there is no support (yet) for encoding them in the protobuf definition, so even if simpleperf supported them we wouldn\u0027t be able to use the data.",
+      "parentUuid": "309d9a70_a6edfc3a",
+      "range": {
+        "startLine": 596,
+        "startChar": 37,
+        "endLine": 596,
+        "endChar": 40
+      },
+      "revId": "7f223030ffe1a24600b09f52f17209f42dc0dcc0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
