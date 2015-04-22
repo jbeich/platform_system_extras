@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "90b566fa_cb9f61dc",
+        "filename": "simpleperf/event_fd.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-22T23:16:36Z",
+      "side": 1,
+      "message": "This is not expected. But I want to follow the c++ style guide of using pointers for output parameters. Maybe I don\u0027t need to test if it is null, or I can use a LOG(FATAL) to clarify the intention of the test.",
+      "parentUuid": "10a416b9_f92c0b44",
+      "revId": "444c4b62fd88cb1c47b061f92f29f034da3e1150",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "309d9a70_f79098c8",
         "filename": "simpleperf/tests/Android.mk",
         "patchSetId": 4
@@ -30,6 +48,24 @@
       "writtenOn": "2015-04-22T01:42:26Z",
       "side": 1,
       "message": "just put the tests in the same directory as the code.",
+      "revId": "444c4b62fd88cb1c47b061f92f29f034da3e1150",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "90b566fa_6b8ded02",
+        "filename": "simpleperf/tests/Android.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-22T23:16:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "309d9a70_f79098c8",
       "revId": "444c4b62fd88cb1c47b061f92f29f034da3e1150",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "10a416b9_bc2506da",
+        "filename": "simpleperf/tests/cmd_list_test.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-22T23:16:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d08d1e46_a289662a",
+      "revId": "444c4b62fd88cb1c47b061f92f29f034da3e1150",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "309d9a70_b711b0d6",
         "filename": "simpleperf/utils.cpp",
         "patchSetId": 4
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "90b566fa_a30439d0",
+        "filename": "simpleperf/utils.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-22T23:16:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "309d9a70_b711b0d6",
+      "revId": "444c4b62fd88cb1c47b061f92f29f034da3e1150",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d08d1e46_c2011208",
         "filename": "simpleperf/workload.h",
         "patchSetId": 4
@@ -81,6 +153,24 @@
       "writtenOn": "2015-04-22T01:42:26Z",
       "side": 1,
       "message": "do IsFinished and GetWorkPid need to be public?",
+      "revId": "444c4b62fd88cb1c47b061f92f29f034da3e1150",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "309d9a70_b09ff1aa",
+        "filename": "simpleperf/workload.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-22T23:16:36Z",
+      "side": 1,
+      "message": "Yes. IsFinished() will be needed by \"record command\". And GetWorkPid() is needed for perf_event_open(xxx, pid, xxx).",
+      "parentUuid": "d08d1e46_c2011208",
       "revId": "444c4b62fd88cb1c47b061f92f29f034da3e1150",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
