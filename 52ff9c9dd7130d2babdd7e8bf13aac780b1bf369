@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "309d9a70_7fd392d8",
+        "filename": "simpleperf/cmd_stat.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-23T18:15:41Z",
+      "side": 1,
+      "message": "ShowCounters() doesn\u0027t need start_time and end_time. But the duration_cast is annoying here. I move it inside ShowCounters().",
+      "parentUuid": "309d9a70_29ce38df",
+      "revId": "52ff9c9dd7130d2babdd7e8bf13aac780b1bf369",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "309d9a70_49fa9cf4",
         "filename": "simpleperf/cmd_stat.cpp",
         "patchSetId": 7
@@ -30,6 +48,24 @@
       "writtenOn": "2015-04-23T03:34:45Z",
       "side": 1,
       "message": "the code that invokes commands can just have\n\n  LOG(DEBUG) \u003c\u003c \"command \u0027\" \u003c\u003c name \"\u0027 \" \u003c\u003c (success ? \"finished successfully\" : \"failed\");\n\nrather than repeat this in every command.",
+      "revId": "52ff9c9dd7130d2babdd7e8bf13aac780b1bf369",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10a416b9_51bf9c43",
+        "filename": "simpleperf/cmd_stat.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-23T18:15:41Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "309d9a70_49fa9cf4",
       "revId": "52ff9c9dd7130d2babdd7e8bf13aac780b1bf369",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "d0d43e30_56b6543a",
+        "filename": "simpleperf/cmd_stat.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-23T18:15:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "90b566fa_cd42ce6d",
+      "revId": "52ff9c9dd7130d2babdd7e8bf13aac780b1bf369",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "309d9a70_09d1747b",
         "filename": "simpleperf/environment.cpp",
         "patchSetId": 7
@@ -64,6 +118,24 @@
       "writtenOn": "2015-04-23T03:34:45Z",
       "side": 1,
       "message": "this seems more like a CHECK kind of situation. you read the file, and were told no cpus were online.\n\n  CHECK(!result.empty()) \u003c\u003c line; ?",
+      "revId": "52ff9c9dd7130d2babdd7e8bf13aac780b1bf369",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "309d9a70_ffbce24a",
+        "filename": "simpleperf/environment.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-23T18:15:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "309d9a70_09d1747b",
       "revId": "52ff9c9dd7130d2babdd7e8bf13aac780b1bf369",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "d0d43e30_39098b5f",
+        "filename": "simpleperf/event_fd.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-23T18:15:41Z",
+      "side": 1,
+      "message": "Last time I found a SIGSEGV error is by adding some printf (not hard but annoying). So if you don\u0027t worry about the performance lose, I prefer to use CHECK() here.",
+      "parentUuid": "90b566fa_4d4fde92",
+      "revId": "52ff9c9dd7130d2babdd7e8bf13aac780b1bf369",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "90b566fa_0db436e3",
         "filename": "simpleperf/workload.cpp",
         "patchSetId": 7
@@ -98,6 +188,24 @@
       "writtenOn": "2015-04-23T03:34:45Z",
       "side": 1,
       "message": "rather than delete on failure and construct a unique_ptr on success, put raw pointers straight into a unique_ptr and move them/release them on success.",
+      "revId": "52ff9c9dd7130d2babdd7e8bf13aac780b1bf369",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0d43e30_f995533e",
+        "filename": "simpleperf/workload.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-23T18:15:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "90b566fa_0db436e3",
       "revId": "52ff9c9dd7130d2babdd7e8bf13aac780b1bf369",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "309d9a70_3fd3ca8b",
+        "filename": "simpleperf/workload.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-23T18:15:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "309d9a70_a9f948fd",
+      "revId": "52ff9c9dd7130d2babdd7e8bf13aac780b1bf369",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "309d9a70_69aa00d6",
         "filename": "simpleperf/workload.cpp",
         "patchSetId": 7
@@ -138,6 +264,24 @@
     },
     {
       "key": {
+        "uuid": "d0d43e30_39d86b18",
+        "filename": "simpleperf/workload.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-23T18:15:41Z",
+      "side": 1,
+      "message": "comment added.",
+      "parentUuid": "309d9a70_69aa00d6",
+      "revId": "52ff9c9dd7130d2babdd7e8bf13aac780b1bf369",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "309d9a70_c9b84c29",
         "filename": "simpleperf/workload.cpp",
         "patchSetId": 7
@@ -149,6 +293,24 @@
       "writtenOn": "2015-04-23T03:34:45Z",
       "side": 1,
       "message": "if write or close failed, you\u0027ve clobbered errno by this point.",
+      "revId": "52ff9c9dd7130d2babdd7e8bf13aac780b1bf369",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10a416b9_d151cc66",
+        "filename": "simpleperf/workload.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-23T18:15:41Z",
+      "side": 1,
+      "message": "save/restore errno is added.",
+      "parentUuid": "309d9a70_c9b84c29",
       "revId": "52ff9c9dd7130d2babdd7e8bf13aac780b1bf369",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -189,6 +351,24 @@
     },
     {
       "key": {
+        "uuid": "10a416b9_bc2a5f30",
+        "filename": "simpleperf/workload.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-23T18:15:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "10a416b9_2b846b0d",
+      "revId": "52ff9c9dd7130d2babdd7e8bf13aac780b1bf369",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "90b566fa_8d02860a",
         "filename": "simpleperf/workload.cpp",
         "patchSetId": 7
@@ -200,6 +380,24 @@
       "writtenOn": "2015-04-23T03:34:45Z",
       "side": 1,
       "message": "is there a reason you don\u0027t include this case in IsFinished?",
+      "revId": "52ff9c9dd7130d2babdd7e8bf13aac780b1bf369",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10a416b9_9c259b64",
+        "filename": "simpleperf/workload.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-23T18:15:41Z",
+      "side": 1,
+      "message": "Sorry, I am too lazy to distinguish between result \u003d 0 and result \u003d -1 in IsFinished.",
+      "parentUuid": "90b566fa_8d02860a",
       "revId": "52ff9c9dd7130d2babdd7e8bf13aac780b1bf369",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
