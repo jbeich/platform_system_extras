@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "d0d43e30_6beba125",
+        "filename": "simpleperf/workload.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-23T21:47:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d0d43e30_b0a4882d",
+      "revId": "408788311bff83a12e88e88e7748c3c1414d2265",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "309d9a70_88be39f5",
         "filename": "simpleperf/workload.cpp",
         "patchSetId": 8
@@ -30,6 +48,24 @@
       "writtenOn": "2015-04-23T21:03:11Z",
       "side": 1,
       "message": "errno isn\u0027t going to be meaningful here, right?",
+      "revId": "408788311bff83a12e88e88e7748c3c1414d2265",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0d43e30_cbae35e7",
+        "filename": "simpleperf/workload.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-23T21:47:26Z",
+      "side": 1,
+      "message": "Yes. normally nread should be 1, no errno.",
+      "parentUuid": "309d9a70_88be39f5",
       "revId": "408788311bff83a12e88e88e7748c3c1414d2265",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "d0d43e30_abb3f94a",
+        "filename": "simpleperf/workload.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-23T21:47:26Z",
+      "side": 1,
+      "message": "Yes, meaningless.",
+      "parentUuid": "d0d43e30_108c5c8b",
+      "revId": "408788311bff83a12e88e88e7748c3c1414d2265",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "309d9a70_88e55925",
         "filename": "simpleperf/workload.cpp",
         "patchSetId": 8
@@ -64,6 +118,24 @@
       "writtenOn": "2015-04-23T21:03:11Z",
       "side": 1,
       "message": "this might be clearer with an explict\n\n  } else if (result \u003d\u003d 0) {\n    return false;\n  }\n\n\nyou could factor more of this out if your helper function does the waitpid. you can pass in the flags, it does the PLOG(FATAL) on failure, the LOG(ERROR) if the child exited, and it updates work_state_ for you. then all the duplication disappears.",
+      "revId": "408788311bff83a12e88e88e7748c3c1414d2265",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "309d9a70_68775503",
+        "filename": "simpleperf/workload.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-23T21:47:26Z",
+      "side": 1,
+      "message": "good suggestion.",
+      "parentUuid": "309d9a70_88e55925",
       "revId": "408788311bff83a12e88e88e7748c3c1414d2265",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
