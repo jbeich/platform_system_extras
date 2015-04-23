@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d0d43e30_b0a4882d",
+        "filename": "simpleperf/workload.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-23T21:03:11Z",
+      "side": 1,
+      "message": "CHECK_EQ?",
+      "revId": "408788311bff83a12e88e88e7748c3c1414d2265",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "309d9a70_88be39f5",
+        "filename": "simpleperf/workload.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-23T21:03:11Z",
+      "side": 1,
+      "message": "errno isn\u0027t going to be meaningful here, right?",
+      "revId": "408788311bff83a12e88e88e7748c3c1414d2265",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0d43e30_108c5c8b",
+        "filename": "simpleperf/workload.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-23T21:03:11Z",
+      "side": 1,
+      "message": "errno is meaningless here, no?",
+      "revId": "408788311bff83a12e88e88e7748c3c1414d2265",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "309d9a70_88e55925",
+        "filename": "simpleperf/workload.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-23T21:03:11Z",
+      "side": 1,
+      "message": "this might be clearer with an explict\n\n  } else if (result \u003d\u003d 0) {\n    return false;\n  }\n\n\nyou could factor more of this out if your helper function does the waitpid. you can pass in the flags, it does the PLOG(FATAL) on failure, the LOG(ERROR) if the child exited, and it updates work_state_ for you. then all the duplication disappears.",
+      "revId": "408788311bff83a12e88e88e7748c3c1414d2265",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
