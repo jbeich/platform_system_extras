@@ -349,11 +349,13 @@ int main(int argc, char **argv)
     }
     printf("\n");
 
-    fd = open(verity_filename, O_WRONLY|O_CREAT, 0666);
+    fd = open(verity_filename, O_WRONLY|O_CREAT|O_CLOEXEC, 0666);
     if (fd < 0) {
         FATAL("failed to open output file '%s'\n", verity_filename);
     }
-    write(fd, verity_tree, verity_blocks * block_size);
+    if (TEMP_FAILURE_RETRY(write(fd, verity_tree, verity_blocks * block_size)) == -1) {
+        FATAL("failed to write output file '%s': %s\n", verity_filename, strerror(errno));
+    }
     close(fd);
 
     delete[] verity_tree_levels;
