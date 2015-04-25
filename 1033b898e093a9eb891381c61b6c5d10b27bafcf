@@ -52,6 +52,24 @@
       "revId": "1033b898e093a9eb891381c61b6c5d10b27bafcf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0d99e70_37d87a18",
+        "filename": "verity/build_verity_tree.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-25T04:09:14Z",
+      "side": 1,
+      "message": "we keep promising to move one of the various WriteFully implementations into libbase, but we haven\u0027t done so yet. right now there are literally tens of copies of this (and the equivalent ReadFully) lying around.\n\nTEMP_FAILURE_RETRY is fine here. the guarantee is that if any bytes were transferred before the interrupt, you\u0027re told that number. it\u0027s only if 0 bytes were transferred before the interrupt that you get -1 and EINTR. so TEMP_FAILURE_RETRY will only try again if 0 bytes were transferred so far. so TEMP_FAILURE_RETRY is necessary, but not sufficient --- you need to actually check how many bytes were transferred and then try to write the rest.",
+      "parentUuid": "b0d42a38_61fcfeb1",
+      "revId": "1033b898e093a9eb891381c61b6c5d10b27bafcf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
