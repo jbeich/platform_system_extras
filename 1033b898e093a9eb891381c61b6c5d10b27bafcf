@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d0d99e70_17233ea3",
+        "filename": "verity/build_verity_tree.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-25T03:42:01Z",
+      "side": 1,
+      "message": "note that write could also return less than verity_blocks * block_size. i assume that\u0027s an error for this code too?",
+      "revId": "1033b898e093a9eb891381c61b6c5d10b27bafcf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
