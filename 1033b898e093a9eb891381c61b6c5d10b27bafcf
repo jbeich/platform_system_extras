@@ -16,6 +16,24 @@
       "revId": "1033b898e093a9eb891381c61b6c5d10b27bafcf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b0d42a38_61fcfeb1",
+        "filename": "verity/build_verity_tree.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 1003966
+      },
+      "writtenOn": "2015-04-25T03:55:49Z",
+      "side": 1,
+      "message": "ugh, who designed this API... :-( Do you know of a better function, like \"writefully\", for glibc?\n\nMore generally, it seems like anyone using TEMP_FAILURE_RETRY with write() could end up with writes occurring multiple times.",
+      "parentUuid": "d0d99e70_17233ea3",
+      "revId": "1033b898e093a9eb891381c61b6c5d10b27bafcf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
