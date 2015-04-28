@@ -16,7 +16,11 @@
 
 #include "environment.h"
 
+#include <dirent.h>
+#include <inttypes.h>
 #include <stdlib.h>
+#include <sys/stat.h>
+#include <unordered_map>
 #include <vector>
 
 #include <base/logging.h>

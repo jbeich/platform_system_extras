@@ -52,7 +52,6 @@ class StatCommandImpl {
   bool OpenEventFilesForCpus(const std::vector<int>& cpus);
   bool OpenEventFilesForProcess(pid_t pid);
   bool StartCounting();
-  bool StopCounting();
   bool ReadCounters();
   bool ShowCounters(std::chrono::steady_clock::duration counting_duration);
 
@@ -108,16 +107,17 @@ bool StatCommandImpl::Run(const std::vector<std::string>& args) {
 
   // 5. Count events while workload running.
   auto start_time = std::chrono::steady_clock::now();
-  if (!StartCounting()) {
-    return false;
+  // If monitoring only one process, we use the enable_on_exec flag, and don't need to start
+  // counting manually.
+  if (system_wide_collection_) {
+    if (!StartCounting()) {
+      return false;
+    }
   }
   if (!workload->Start()) {
     return false;
   }
   workload->WaitFinish();
-  if (!StopCounting()) {
-    return false;
-  }
   auto end_time = std::chrono::steady_clock::now();
 
   // 6. Read and print counters.
@@ -138,11 +138,9 @@ bool StatCommandImpl::ParseOptions(const std::vector<std::string>& args,
     if (args[i] == "-a") {
       system_wide_collection_ = true;
     } else if (args[i] == "-e") {
-      if (i + 1 == args.size()) {
-        LOG(ERROR) << "No event list following -e option. Try `simpleperf help stat`";
+      if (!NextArgumentOrError(args, &i)) {
         return false;
       }
-      ++i;
       std::vector<std::string> event_types = android::base::Split(args[i], ",");
       for (auto& event_type : event_types) {
         if (!AddMeasuredEventType(event_type)) {
@@ -171,13 +169,11 @@ bool StatCommandImpl::AddMeasuredEventType(const std::string& event_type_name,
                                            bool report_unsupported_types) {
   const EventType* event_type = EventTypeFactory::FindEventTypeByName(event_type_name);
   if (event_type == nullptr) {
-    LOG(ERROR) << "Unknown event_type: " << event_type_name;
-    LOG(ERROR) << "Try `simpleperf help list` to list all possible event type names";
     return false;
   }
   if (!event_type->IsSupportedByKernel()) {
-    (report_unsupported_types ? LOG(ERROR) : LOG(DEBUG)) << "Event type " << event_type->name
-                                                         << " is not supported by the kernel";
+    (report_unsupported_types ? LOG(ERROR) : LOG(DEBUG)) << "Event type '" << event_type->name
+                                                         << "' is not supported by the kernel";
     return false;
   }
   measured_events_.push_back(EventElem(event_type));
@@ -222,6 +218,7 @@ bool StatCommandImpl::OpenEventFilesForCpus(const std::vector<int>& cpus) {
 bool StatCommandImpl::OpenEventFilesForProcess(pid_t pid) {
   for (auto& elem : measured_events_) {
     EventAttr attr = EventAttr::CreateDefaultAttrToMonitorEvent(*elem.event_type);
+    attr.SetEnableOnExec();
     std::vector<std::unique_ptr<EventFd>> event_fds;
     auto event_fd = EventFd::OpenEventFileForProcess(attr, pid);
     if (event_fd == nullptr) {
@@ -239,17 +236,6 @@ bool StatCommandImpl::StartCounting() {
   for (auto& elem : measured_events_) {
     for (auto& event_fd : elem.event_fds) {
       if (!event_fd->EnableEvent()) {
-        return false;
-      }
-    }
-  }
-  return true;
-}
-
-bool StatCommandImpl::StopCounting() {
-  for (auto& elem : measured_events_) {
-    for (auto& event_fd : elem.event_fds) {
-      if (!event_fd->DisableEvent()) {
         return false;
       }
     }
@@ -326,17 +312,10 @@ class StatCommand : public Command {
                 "    -a           Collect system-wide information.\n"
                 "    -e event1,event2,... Select the event list to count. Use `simpleperf list`\n"
                 "                         to find all possible event names.\n"
-                "    --verbose    Show result in verbose mode.\n"
-                "    --help       Print this help information.\n") {
+                "    --verbose    Show result in verbose mode.\n") {
   }
 
   bool Run(const std::vector<std::string>& args) override {
-    for (auto& arg : args) {
-      if (arg == "--help") {
-        printf("%s\n", LongHelpString().c_str());
-        return true;
-      }
-    }
     StatCommandImpl impl;
     return impl.Run(args);
   }
