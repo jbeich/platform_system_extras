@@ -21,6 +21,8 @@
 #include <vector>
 
 std::vector<int> GetOnlineCpus();
+
+// Export below functions for unit tests.
 std::vector<int> GetOnlineCpusFromString(const std::string& s);
 
 #endif  // SIMPLE_PERF_ENVIRONMENT_H_

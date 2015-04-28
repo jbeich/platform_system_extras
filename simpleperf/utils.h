@@ -53,4 +53,8 @@ class LineReader {
 
 bool ReadNBytesFromFile(int fd, void* buf, size_t nbytes);
 
+bool IsPowerOfTwo(uint64_t value);
+
+#define ALIGN(value, alignment) (((value) + (alignment)-1) & ~((alignment)-1))
+
 #endif  // SIMPLE_PERF_UTILS_H_
