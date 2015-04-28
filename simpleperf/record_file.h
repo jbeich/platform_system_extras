@@ -1,0 +1,113 @@
+/*
+ * Copyright (C) 2015 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+#ifndef SIMPLE_PERF_RECORD_FILE_H_
+#define SIMPLE_PERF_RECORD_FILE_H_
+
+#include <stdio.h>
+#include <memory>
+#include <string>
+#include <vector>
+
+#include <base/macros.h>
+
+#include "event_attr.h"
+#include "record.h"
+#include "record_file_format.h"
+
+class EventFd;
+
+// RecordFileWriter writes to perf record file, like perf.data.
+class RecordFileWriter {
+ public:
+  static std::unique_ptr<RecordFileWriter> CreateInstance(
+      const std::string& filename, const EventAttr& event_attr,
+      const std::vector<std::unique_ptr<EventFd>>& event_fds);
+
+  ~RecordFileWriter();
+
+  // To keep the format of the record file, we should first call WriteData(), then write features.
+  // And different types of features should be written in a strict order.
+  bool WriteData(const void* buf, size_t len);
+
+  bool WriteData(const std::vector<char>& data) {
+    return WriteData(data.data(), data.size());
+  }
+
+  // GetHitModules() is used to know which files should dump build_id.
+  bool GetHitModules(std::vector<std::string>& hit_kernel_modules,
+                     std::vector<std::string>& hit_user_files);
+
+  bool WriteFeatureHeader(size_t max_feature_count);
+  bool WriteBuildIdFeature(const std::vector<BuildIdRecord>& build_id_records);
+
+  bool Close();
+
+ private:
+  RecordFileWriter(const std::string& filename, FILE* fp);
+  bool WriteAttrSection(const EventAttr& event_attr,
+                        const std::vector<std::unique_ptr<EventFd>>& event_fds);
+  bool WriteFileHeader();
+  bool Write(const void* buf, size_t len);
+
+  const std::string filename_;
+  FILE* record_fp_;
+
+  EventAttr event_attr_;
+  uint64_t attr_section_offset_;
+  uint64_t attr_section_size_;
+  uint64_t data_section_offset_;
+  uint64_t data_section_size_;
+
+  size_t max_feature_count_;
+  size_t current_feature_index_;
+  std::vector<int> features_;
+
+  DISALLOW_COPY_AND_ASSIGN(RecordFileWriter);
+};
+
+// RecordFileReader read contents from perf record file, like perf.data.
+class RecordFileReader {
+ public:
+  static std::unique_ptr<RecordFileReader> CreateInstance(const std::string& filename);
+
+  ~RecordFileReader();
+
+  const RecordFileFormat::FileHeader* FileHeader();
+  std::vector<const RecordFileFormat::FileAttr*> AttrSection();
+  std::vector<uint64_t> IdsForAttr(const RecordFileFormat::FileAttr* attr);
+  std::vector<std::unique_ptr<const Record>> DataSection();
+  std::vector<RecordFileFormat::SectionDesc> FeatureSectionDescriptors();
+  const char* DataAtOffset(uint64_t offset) {
+    return mmap_addr_ + offset;
+  }
+
+  bool Close();
+
+ private:
+  RecordFileReader(const std::string& filename, int fd);
+  bool MmapFile();
+
+  const std::string filename_;
+  int record_fd_;
+
+  const char* mmap_addr_;
+  size_t mmap_len_;
+
+  DISALLOW_COPY_AND_ASSIGN(RecordFileReader);
+};
+
+#endif  // SIMPLE_PERF_RECORD_FILE_H_

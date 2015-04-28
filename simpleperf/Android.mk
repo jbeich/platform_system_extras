@@ -18,15 +18,33 @@ LOCAL_PATH := $(call my-dir)
 
 simpleperf_common_cppflags := -std=c++11 -Wall -Wextra -Werror -Wunused
 
+simpleperf_common_static_libraries := \
+  libbase \
+  libcutils \
+  liblog \
+  libLLVMObject \
+  libLLVMBitReader \
+  libLLVMMC \
+  libLLVMMCParser \
+  libLLVMCore \
+  libLLVMSupport \
+
+LLVM_ROOT_PATH := external/llvm
+
 libsimpleperf_src_files := \
+  cmd_dumprecord.cpp \
   cmd_help.cpp \
   cmd_list.cpp \
+  cmd_record.cpp \
   cmd_stat.cpp \
   command.cpp \
   environment.cpp \
   event_attr.cpp \
   event_fd.cpp \
   event_type.cpp \
+  read_elf.cpp \
+  record.cpp \
+  record_file.cpp \
   utils.cpp \
   workload.cpp \
 
@@ -34,11 +52,14 @@ include $(CLEAR_VARS)
 LOCAL_CLANG := true
 LOCAL_CPPFLAGS := $(simpleperf_common_cppflags)
 LOCAL_SRC_FILES := $(libsimpleperf_src_files)
-LOCAL_STATIC_LIBRARIES := libbase libcutils liblog
+LOCAL_STATIC_LIBRARIES := $(simpleperf_common_static_libraries)
 LOCAL_MODULE := libsimpleperf
 LOCAL_MODULE_TAGS := debug
 LOCAL_MODULE_PATH := $(TARGET_OUT_OPTIONAL_EXECUTABLES)
 LOCAL_ADDITIONAL_DEPENDENCIES := $(LOCAL_PATH)/Android.mk
+
+include $(LLVM_ROOT_PATH)/llvm.mk
+include $(LLVM_DEVICE_BUILD_MK)
 include $(BUILD_STATIC_LIBRARY)
 
 ifeq ($(HOST_OS),linux)
@@ -46,11 +67,14 @@ include $(CLEAR_VARS)
 LOCAL_CLANG := true
 LOCAL_CPPFLAGS := $(simpleperf_common_cppflags)
 LOCAL_SRC_FILES := $(libsimpleperf_src_files)
-LOCAL_STATIC_LIBRARIES := libbase libcutils liblog
+LOCAL_STATIC_LIBRARIES := $(simpleperf_common_static_libraries)
 LOCAL_LDLIBS := -lrt
 LOCAL_MODULE := libsimpleperf
 LOCAL_MODULE_TAGS := optional
 LOCAL_ADDITIONAL_DEPENDENCIES := $(LOCAL_PATH)/Android.mk
+
+include $(LLVM_ROOT_PATH)/llvm.mk
+include $(LLVM_HOST_BUILD_MK)
 include $(BUILD_HOST_STATIC_LIBRARY)
 endif
 
@@ -59,11 +83,14 @@ LOCAL_CLANG := true
 LOCAL_CPPFLAGS := $(simpleperf_common_cppflags)
 LOCAL_SRC_FILES := main.cpp
 LOCAL_WHOLE_STATIC_LIBRARIES := libsimpleperf
-LOCAL_STATIC_LIBRARIES := libbase libcutils liblog
+LOCAL_STATIC_LIBRARIES := $(simpleperf_common_static_libraries)
 LOCAL_MODULE := simpleperf
 LOCAL_MODULE_TAGS := debug
 LOCAL_MODULE_PATH := $(TARGET_OUT_OPTIONAL_EXECUTABLES)
 LOCAL_ADDITIONAL_DEPENDENCIES := $(LOCAL_PATH)/Android.mk
+
+include $(LLVM_ROOT_PATH)/llvm.mk
+include $(LLVM_DEVICE_BUILD_MK)
 include $(BUILD_EXECUTABLE)
 
 ifeq ($(HOST_OS),linux)
@@ -72,20 +99,27 @@ LOCAL_CLANG := true
 LOCAL_CPPFLAGS := $(simpleperf_common_cppflags)
 LOCAL_SRC_FILES := main.cpp
 LOCAL_WHOLE_STATIC_LIBRARIES := libsimpleperf
-LOCAL_STATIC_LIBRARIES := libbase libcutils liblog
+LOCAL_STATIC_LIBRARIES := $(simpleperf_common_static_libraries)
 LOCAL_LDLIBS := -lrt
 LOCAL_MODULE := simpleperf
 LOCAL_MODULE_TAGS := optional
 LOCAL_ADDITIONAL_DEPENDENCIES := $(LOCAL_PATH)/Android.mk
+
+include $(LLVM_ROOT_PATH)/llvm.mk
+include $(LLVM_HOST_BUILD_MK)
 include $(BUILD_HOST_EXECUTABLE)
 endif
 
 simpleperf_unit_test_src_files := \
+  cmd_dumprecord_test.cpp \
   cmd_list_test.cpp \
+  cmd_record_test.cpp \
   cmd_stat_test.cpp \
   command_test.cpp \
   environment_test.cpp \
   gtest_main.cpp \
+  record_test.cpp \
+  record_file_test.cpp \
   workload_test.cpp \
 
 include $(CLEAR_VARS)
@@ -93,10 +127,13 @@ LOCAL_CLANG := true
 LOCAL_CPPFLAGS := $(simpleperf_common_cppflags)
 LOCAL_SRC_FILES := $(simpleperf_unit_test_src_files)
 LOCAL_WHOLE_STATIC_LIBRARIES := libsimpleperf
-LOCAL_STATIC_LIBRARIES := libbase libcutils liblog
+LOCAL_STATIC_LIBRARIES := $(simpleperf_common_static_libraries)
 LOCAL_MODULE := simpleperf_unit_test
 LOCAL_MODULE_TAGS := optional
 LOCAL_ADDITIONAL_DEPENDENCIES := $(LOCAL_PATH)/Android.mk
+
+include $(LLVM_ROOT_PATH)/llvm.mk
+include $(LLVM_DEVICE_BUILD_MK)
 include $(BUILD_NATIVE_TEST)
 
 ifeq ($(HOST_OS),linux)
@@ -105,9 +142,12 @@ LOCAL_CLANG := true
 LOCAL_CPPFLAGS := $(simpleperf_common_cppflags)
 LOCAL_SRC_FILES := $(simpleperf_unit_test_src_files)
 LOCAL_WHOLE_STATIC_LIBRARIES := libsimpleperf
-LOCAL_STATIC_LIBRARIES := libbase libcutils liblog
+LOCAL_STATIC_LIBRARIES := $(simpleperf_common_static_libraries)
 LOCAL_MODULE := simpleperf_unit_test
 LOCAL_MODULE_TAGS := optional
 LOCAL_ADDITIONAL_DEPENDENCIES := $(LOCAL_PATH)/Android.mk
+
+include $(LLVM_ROOT_PATH)/llvm.mk
+include $(LLVM_HOST_BUILD_MK)
 include $(BUILD_HOST_NATIVE_TEST)
 endif

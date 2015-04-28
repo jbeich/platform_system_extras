@@ -19,6 +19,7 @@
 #include <fcntl.h>
 #include <stdio.h>
 #include <sys/ioctl.h>
+#include <sys/mman.h>
 #include <sys/syscall.h>
 #include <sys/types.h>
 #include <memory>
@@ -69,6 +70,9 @@ std::unique_ptr<EventFd> EventFd::OpenEventFile(const EventAttr& attr, pid_t pid
 }
 
 EventFd::~EventFd() {
+  if (mmap_addr_ != nullptr) {
+    munmap(mmap_addr_, mmap_len_);
+  }
   close(perf_event_fd_);
 }
 
@@ -102,4 +106,65 @@ bool EventFd::ReadCounter(PerfCounter* counter) {
     return false;
   }
   return true;
+}
+
+bool EventFd::MmapContent(size_t mmap_pages) {
+  CHECK(IsPowerOfTwo(mmap_pages));
+  size_t page_size = sysconf(_SC_PAGE_SIZE);
+  size_t mmap_len = (mmap_pages + 1) * page_size;
+  void* mmap_addr = mmap(nullptr, mmap_len, PROT_READ | PROT_WRITE, MAP_SHARED, perf_event_fd_, 0);
+  if (mmap_addr == MAP_FAILED) {
+    PLOG(ERROR) << "mmap() failed for " << Name();
+    return false;
+  }
+  mmap_addr_ = mmap_addr;
+  mmap_len_ = mmap_len;
+  mmap_metadata_page_ = reinterpret_cast<perf_event_mmap_page*>(mmap_addr_);
+  mmap_data_buffer_ = reinterpret_cast<char*>(mmap_addr_) + page_size;
+  mmap_data_buffer_size_ = mmap_len_ - page_size;
+  return true;
+}
+
+bool EventFd::GetAvailableMmapData(char** pdata, size_t* psize) {
+  // The mmap_data_buffer is used as a ring buffer like below. The kernel continuously writes
+  // records to the buffer, and the user continuously read records out.
+  //         _________________________________________
+  // buffer | can write   |   can read   |  can write |
+  //                      ^              ^
+  //                    read_head       write_head
+  //
+  // So the user can read records in [read_head, write_head), and the kernel can write records
+  // in [write_head, read_head). The kernel is responsible for updating write_head, and the user
+  // is responsible for updating read_head.
+
+  uint64_t buf_mask = mmap_data_buffer_size_ - 1;
+  uint64_t write_head = mmap_metadata_page_->data_head & buf_mask;
+  uint64_t read_head = mmap_metadata_page_->data_tail & buf_mask;
+
+  if (read_head == write_head) {
+    // No available data.
+    *psize = 0;
+    return false;
+  }
+
+  // Make sure we can see the data after the fence.
+  std::atomic_thread_fence(std::memory_order_acquire);
+
+  *pdata = mmap_data_buffer_ + read_head;
+  if (read_head < write_head) {
+    *psize = write_head - read_head;
+  } else {
+    *psize = mmap_data_buffer_size_ - read_head;
+  }
+  return true;
+}
+
+void EventFd::CommitMmapData(size_t commit_size) {
+  mmap_metadata_page_->data_tail += commit_size;
+}
+
+void EventFd::PreparePollForMmapData(pollfd* poll_fd) {
+  memset(poll_fd, 0, sizeof(pollfd));
+  poll_fd->fd = perf_event_fd_;
+  poll_fd->events = POLLIN;
 }

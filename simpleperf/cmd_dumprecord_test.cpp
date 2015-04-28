@@ -18,29 +18,25 @@
 
 #include <command.h>
 
-class StatCommandTest : public ::testing::Test {
+class DumpRecordCommandTest : public ::testing::Test {
  protected:
   virtual void SetUp() {
-    stat_cmd = Command::FindCommandByName("stat");
-    ASSERT_TRUE(stat_cmd != nullptr);
+    record_cmd = Command::FindCommandByName("record");
+    ASSERT_TRUE(record_cmd != nullptr);
+    dumprecord_cmd = Command::FindCommandByName("dumprecord");
+    ASSERT_TRUE(dumprecord_cmd != nullptr);
   }
 
- protected:
-  Command* stat_cmd;
+  Command* record_cmd;
+  Command* dumprecord_cmd;
 };
 
-TEST_F(StatCommandTest, no_options) {
-  ASSERT_TRUE(stat_cmd->Run({"sleep", "1"}));
+TEST_F(DumpRecordCommandTest, no_options) {
+  ASSERT_TRUE(record_cmd->Run({"-a", "sleep", "1"}));
+  ASSERT_TRUE(dumprecord_cmd->Run({}));
 }
 
-TEST_F(StatCommandTest, event_option) {
-  ASSERT_TRUE(stat_cmd->Run({"-e", "cpu-clock,task-clock", "sleep", "1"}));
-}
-
-TEST_F(StatCommandTest, system_wide_option) {
-  ASSERT_TRUE(stat_cmd->Run({"-a", "sleep", "1"}));
-}
-
-TEST_F(StatCommandTest, verbose_option) {
-  ASSERT_TRUE(stat_cmd->Run({"--verbose", "sleep", "1"}));
+TEST_F(DumpRecordCommandTest, record_file_option) {
+  ASSERT_TRUE(record_cmd->Run({"-a", "-o", "perf2.data", "sleep", "1"}));
+  ASSERT_TRUE(dumprecord_cmd->Run({"perf2.data"}));
 }
