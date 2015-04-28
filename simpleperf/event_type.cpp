@@ -19,6 +19,9 @@
 #include <unistd.h>
 #include <string>
 #include <vector>
+
+#include <base/logging.h>
+
 #include "event_attr.h"
 #include "event_fd.h"
 
@@ -31,8 +34,7 @@ static std::vector<const EventType> event_type_array = {
 };
 
 static bool IsEventTypeSupportedByKernel(const EventType& event_type) {
-  auto event_fd = EventFd::OpenEventFileForProcess(
-      EventAttr::CreateDefaultAttrToMonitorEvent(event_type), getpid());
+  auto event_fd = EventFd::OpenEventFileForProcess(CreateDefaultPerfEventAttr(event_type), getpid());
   return event_fd != nullptr;
 }
 
@@ -50,6 +52,8 @@ const EventType* EventTypeFactory::FindEventTypeByName(const std::string& name) 
       return &event_type;
     }
   }
+  LOG(ERROR) << "Unknown event_type '" << name
+             << "', try `simpleperf list` to list all possible event type names";
   return nullptr;
 }
 
