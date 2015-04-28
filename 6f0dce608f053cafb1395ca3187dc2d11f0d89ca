@@ -46,6 +46,30 @@
       "revId": "6f0dce608f053cafb1395ca3187dc2d11f0d89ca",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b0d42a38_3a903c4b",
+        "filename": "ext4_utils/ext4_utils.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2015-04-28T22:59:22Z",
+      "side": 1,
+      "message": "Actually, put it in info, and set it in make_ext4fs_internal",
+      "parentUuid": "d076fe11_e948b1bb",
+      "range": {
+        "startLine": 152,
+        "startChar": 57,
+        "endLine": 152,
+        "endChar": 76
+      },
+      "revId": "6f0dce608f053cafb1395ca3187dc2d11f0d89ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
