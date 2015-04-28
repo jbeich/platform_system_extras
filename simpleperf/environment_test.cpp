@@ -16,7 +16,10 @@
 
 #include <gtest/gtest.h>
 
-#include <environment.h>
+#include <inttypes.h>
+#include <base/file.h>
+
+#include "environment.h"
 
 TEST(environment, GetOnlineCpusFromString) {
   ASSERT_EQ(GetOnlineCpusFromString(""), std::vector<int>());
