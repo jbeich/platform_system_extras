@@ -34,16 +34,15 @@ class EventAttr {
   EventAttr(const perf_event_attr& attr) : attr_(attr) {
   }
 
+  EventAttr() {
+  }
+
   perf_event_attr Attr() const {
     return attr_;
   }
 
   uint64_t SampleType() const {
     return attr_.sample_type;
-  }
-
-  void EnableOnExec() {
-    attr_.enable_on_exec = 1;
   }
 
   void SetSampleFreq(uint64_t freq) {
@@ -56,8 +55,16 @@ class EventAttr {
     attr_.sample_period = period;
   }
 
-  void SetSampleAll() {
+  void SetSampleIdAll() {
     attr_.sample_id_all = 1;
+  }
+
+  bool GetSampleIdAll() const {
+    return attr_.sample_id_all;
+  }
+
+  void SetEnableOnExec() {
+    attr_.enable_on_exec = 1;
   }
 
   void Dump(size_t indent = 0) const;

@@ -19,6 +19,9 @@
 #include <unistd.h>
 #include <string>
 #include <vector>
+
+#include <base/logging.h>
+
 #include "event_attr.h"
 #include "event_fd.h"
 
@@ -50,6 +53,8 @@ const EventType* EventTypeFactory::FindEventTypeByName(const std::string& name) 
       return &event_type;
     }
   }
+  LOG(ERROR) << "Unknown event_type '" << name
+             << "', try `simpleperf list` to list all possible event type names";
   return nullptr;
 }
 
