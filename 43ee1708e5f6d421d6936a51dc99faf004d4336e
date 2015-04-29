@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "50e04e3c_82e85a28",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-04-29T19:18:25Z",
+      "side": 1,
+      "message": "99999 not 1?",
+      "range": {
+        "startLine": 101,
+        "startChar": 56,
+        "endLine": 101,
+        "endChar": 61
+      },
+      "revId": "43ee1708e5f6d421d6936a51dc99faf004d4336e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "905806e7_87e368ce",
+        "filename": "simpleperf/cmd_stat.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-04-29T19:18:25Z",
+      "side": 1,
+      "message": "Same question here -- why 99999 and not 1 as before?",
+      "range": {
+        "startLine": 89,
+        "startChar": 56,
+        "endLine": 89,
+        "endChar": 61
+      },
+      "revId": "43ee1708e5f6d421d6936a51dc99faf004d4336e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
