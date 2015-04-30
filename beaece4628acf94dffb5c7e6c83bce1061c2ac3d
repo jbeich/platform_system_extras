@@ -22,6 +22,30 @@
       "revId": "beaece4628acf94dffb5c7e6c83bce1061c2ac3d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "90fd66eb_b162023a",
+        "filename": "ext4_utils/ext4_crypt_init_extensions.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2015-04-30T16:21:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "30e3da4b_674f2693",
+      "range": {
+        "startLine": 154,
+        "startChar": 18,
+        "endLine": 154,
+        "endChar": 21
+      },
+      "revId": "beaece4628acf94dffb5c7e6c83bce1061c2ac3d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
