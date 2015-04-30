@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "70f8f2fa_d527bc32",
+        "filename": "simpleperf/cmd_stat.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-30T00:08:35Z",
+      "side": 0,
+      "message": "why don\u0027t we need this any more?",
+      "revId": "249518de7cb7ddb1c066b3bb8b10bc0f66222f7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}

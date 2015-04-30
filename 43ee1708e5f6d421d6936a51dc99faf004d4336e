@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "70f8f2fa_4f5b1d10",
+        "filename": "simpleperf/cmd_dumprecord.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-30T00:08:35Z",
+      "side": 1,
+      "message": "rename to just \"dump\"? there\u0027s no recording going on.",
+      "revId": "43ee1708e5f6d421d6936a51dc99faf004d4336e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "300cbaed_68eb6bf3",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-30T00:08:35Z",
+      "side": 1,
+      "message": "or a lambda?",
+      "revId": "43ee1708e5f6d421d6936a51dc99faf004d4336e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "50e04e3c_82e85a28",
         "filename": "simpleperf/cmd_record.cpp",
         "patchSetId": 2
@@ -49,6 +83,132 @@
     },
     {
       "key": {
+        "uuid": "300cbaed_6806cb4e",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-30T00:08:35Z",
+      "side": 1,
+      "message": "or add a TODO?",
+      "parentUuid": "f0f222e5_0faf86e4",
+      "range": {
+        "startLine": 101,
+        "startChar": 56,
+        "endLine": 101,
+        "endChar": 61
+      },
+      "revId": "43ee1708e5f6d421d6936a51dc99faf004d4336e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "90fd66eb_a5364413",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-30T00:08:35Z",
+      "side": 1,
+      "message": "this block is also in cmd_stat, so it seems like we could factor it out.",
+      "revId": "43ee1708e5f6d421d6936a51dc99faf004d4336e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "90fd66eb_852068c7",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-30T00:08:35Z",
+      "side": 1,
+      "message": "this seems useful. promote this into Command? then you can clean up similar code in the other commands.",
+      "revId": "43ee1708e5f6d421d6936a51dc99faf004d4336e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "90fd66eb_e56b2ced",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-30T00:08:35Z",
+      "side": 1,
+      "message": "do you output this everywhere that FindEventTypeByName returns nullptr? if so, move it into FindEventTypeByName.",
+      "revId": "43ee1708e5f6d421d6936a51dc99faf004d4336e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "300cbaed_488ae71e",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-30T00:08:35Z",
+      "side": 1,
+      "message": "likewise.",
+      "revId": "43ee1708e5f6d421d6936a51dc99faf004d4336e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "90fd66eb_c5439073",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-30T00:08:35Z",
+      "side": 1,
+      "message": "i\u0027ve seen this code somewhere before. please factor it out rather than duplicate it.",
+      "revId": "43ee1708e5f6d421d6936a51dc99faf004d4336e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "300cbaed_2802130c",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-30T00:08:35Z",
+      "side": 1,
+      "message": "this looks familiar too.",
+      "revId": "43ee1708e5f6d421d6936a51dc99faf004d4336e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "905806e7_87e368ce",
         "filename": "simpleperf/cmd_stat.cpp",
         "patchSetId": 2
@@ -90,6 +250,295 @@
         "endLine": 89,
         "endChar": 61
       },
+      "revId": "43ee1708e5f6d421d6936a51dc99faf004d4336e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "70f8f2fa_f5e1184e",
+        "filename": "simpleperf/event_attr.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-30T00:08:35Z",
+      "side": 1,
+      "message": "auto\u0026",
+      "revId": "43ee1708e5f6d421d6936a51dc99faf004d4336e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "70f8f2fa_15f48402",
+        "filename": "simpleperf/event_attr.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-30T00:08:35Z",
+      "side": 1,
+      "message": "factor this out. only the vector is different.",
+      "revId": "43ee1708e5f6d421d6936a51dc99faf004d4336e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "70f8f2fa_15af64e4",
+        "filename": "simpleperf/event_fd.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-30T00:08:35Z",
+      "side": 1,
+      "message": "page_count !\u003d mmap_pages\n\nwhat is perf_event_file?",
+      "revId": "43ee1708e5f6d421d6936a51dc99faf004d4336e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "90fd66eb_301270da",
+        "filename": "simpleperf/event_fd.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-30T00:08:35Z",
+      "side": 1,
+      "message": "the mapped region grows?",
+      "revId": "43ee1708e5f6d421d6936a51dc99faf004d4336e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "90fd66eb_d027cc32",
+        "filename": "simpleperf/event_fd.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-30T00:08:35Z",
+      "side": 1,
+      "message": "doesn\u0027t *psize !\u003d 0 tell us that data is available?",
+      "revId": "43ee1708e5f6d421d6936a51dc99faf004d4336e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "90fd66eb_503c5c42",
+        "filename": "simpleperf/event_fd.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-30T00:08:35Z",
+      "side": 1,
+      "message": "reuse\n\n\"commit\" seems like the wrong verb. discard?",
+      "revId": "43ee1708e5f6d421d6936a51dc99faf004d4336e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "70f8f2fa_359d40b2",
+        "filename": "simpleperf/event_fd.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-30T00:08:35Z",
+      "side": 1,
+      "message": "no pointer? so this is always from the start of the region? does this mean the region just marches up through the address space?",
+      "revId": "43ee1708e5f6d421d6936a51dc99faf004d4336e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "70f8f2fa_1581244a",
+        "filename": "simpleperf/event_fd.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-30T00:08:35Z",
+      "side": 1,
+      "message": "what\u0027s on the first page?",
+      "revId": "43ee1708e5f6d421d6936a51dc99faf004d4336e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "70f8f2fa_5071fad8",
+        "filename": "simpleperf/record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-30T00:08:35Z",
+      "side": 1,
+      "message": "why don\u0027t you have a struct and reinterpret_cast? and why copy field by field? why not just have\n\n  my_data_ \u003d *reinterpret_cast\u003cdata_layout_t*\u003e(p);",
+      "revId": "43ee1708e5f6d421d6936a51dc99faf004d4336e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "300cbaed_c20ff366",
+        "filename": "simpleperf/record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-30T00:08:35Z",
+      "side": 1,
+      "message": "isn\u0027t this the same missing struct as above?",
+      "revId": "43ee1708e5f6d421d6936a51dc99faf004d4336e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "70f8f2fa_9009c261",
+        "filename": "simpleperf/record.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-30T00:08:35Z",
+      "side": 1,
+      "message": "these two functions are a little odd and need more explanation.",
+      "revId": "43ee1708e5f6d421d6936a51dc99faf004d4336e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "70f8f2fa_1090124b",
+        "filename": "simpleperf/record_file.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-30T00:08:35Z",
+      "side": 1,
+      "message": "why not just O_TRUNC in the open?",
+      "revId": "43ee1708e5f6d421d6936a51dc99faf004d4336e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "70f8f2fa_900f0233",
+        "filename": "simpleperf/record_file.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-30T00:08:35Z",
+      "side": 1,
+      "message": "fdopen failed\n\n(you didn\u0027t fail to call it. you called it just fine. it just didn\u0027t succeed.)",
+      "revId": "43ee1708e5f6d421d6936a51dc99faf004d4336e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "300cbaed_6271c7d9",
+        "filename": "simpleperf/record_file.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-30T00:08:35Z",
+      "side": 1,
+      "message": "what\u0027s a feature, and how do i write one?",
+      "revId": "43ee1708e5f6d421d6936a51dc99faf004d4336e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "90fd66eb_1058148c",
+        "filename": "simpleperf/record_file.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-30T00:08:35Z",
+      "side": 1,
+      "message": "what\u0027s the relationship between Close and the destructor? that should be documented.",
+      "revId": "43ee1708e5f6d421d6936a51dc99faf004d4336e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "90fd66eb_ab361513",
+        "filename": "simpleperf/record_file_format.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-30T00:08:35Z",
+      "side": 1,
+      "message": "PerfFileFormat?\n\na namespace of random stuff is usually a bad sign. are you missing a PerfFile class? or did you actually want all your code in a \u0027perf\u0027 namespace?",
+      "revId": "43ee1708e5f6d421d6936a51dc99faf004d4336e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "300cbaed_625b8710",
+        "filename": "simpleperf/record_file_format.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-04-30T00:08:35Z",
+      "side": 1,
+      "message": "or \"enum class Feature\" so you can say Feature::HOSTNAME et cetera? or are these the kernel\u0027s names and you want to keep them the same?",
       "revId": "43ee1708e5f6d421d6936a51dc99faf004d4336e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
