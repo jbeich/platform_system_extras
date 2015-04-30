@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "90fd66eb_1ccdca66",
+        "filename": "simpleperf/cmd_dumprecord.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-30T22:15:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "70f8f2fa_4f5b1d10",
+      "revId": "43ee1708e5f6d421d6936a51dc99faf004d4336e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "300cbaed_68eb6bf3",
         "filename": "simpleperf/cmd_record.cpp",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2015-04-30T00:08:35Z",
       "side": 1,
       "message": "or a lambda?",
+      "revId": "43ee1708e5f6d421d6936a51dc99faf004d4336e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "300cbaed_1bb4ad31",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-30T22:15:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "300cbaed_68eb6bf3",
       "revId": "43ee1708e5f6d421d6936a51dc99faf004d4336e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -107,6 +143,30 @@
     },
     {
       "key": {
+        "uuid": "300cbaed_b6ee7801",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-30T22:15:19Z",
+      "side": 1,
+      "message": "Too many TODOs, I prefer to add them in the \"Android perf\" documentation.",
+      "parentUuid": "300cbaed_6806cb4e",
+      "range": {
+        "startLine": 101,
+        "startChar": 56,
+        "endLine": 101,
+        "endChar": 61
+      },
+      "revId": "43ee1708e5f6d421d6936a51dc99faf004d4336e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "90fd66eb_a5364413",
         "filename": "simpleperf/cmd_record.cpp",
         "patchSetId": 2
@@ -118,6 +178,24 @@
       "writtenOn": "2015-04-30T00:08:35Z",
       "side": 1,
       "message": "this block is also in cmd_stat, so it seems like we could factor it out.",
+      "revId": "43ee1708e5f6d421d6936a51dc99faf004d4336e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "90fd66eb_5cb3d27a",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-30T22:15:19Z",
+      "side": 1,
+      "message": "Yes. both \"record\" and \"stat\" cmds should open perf event files. But the implementations are different. \"record\" cmd open files only for one event_type, but \"stat\" cmd open files for one or more event_types. And we can\u0027t make this block a non-member function, or make a base class just for cmd_stat and cmd_record. So it is not easy to refactor.\nThe method I can think up of is using another class like evsel_list in perf source code, to manage all the event_types, event_attrs, and event_fds. But it is a lot of work, and I don\u0027t want to introduce another level of encapsulation now.",
+      "parentUuid": "90fd66eb_a5364413",
       "revId": "43ee1708e5f6d421d6936a51dc99faf004d4336e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -141,6 +219,24 @@
     },
     {
       "key": {
+        "uuid": "300cbaed_d6716c5e",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-30T22:15:19Z",
+      "side": 1,
+      "message": "Unfortunately, this is not in RecordCommand, but in RecordCommandImpl. I moved it to utils.h.",
+      "parentUuid": "90fd66eb_852068c7",
+      "revId": "43ee1708e5f6d421d6936a51dc99faf004d4336e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "90fd66eb_e56b2ced",
         "filename": "simpleperf/cmd_record.cpp",
         "patchSetId": 2
@@ -152,6 +248,24 @@
       "writtenOn": "2015-04-30T00:08:35Z",
       "side": 1,
       "message": "do you output this everywhere that FindEventTypeByName returns nullptr? if so, move it into FindEventTypeByName.",
+      "revId": "43ee1708e5f6d421d6936a51dc99faf004d4336e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "90fd66eb_7ce5ee4b",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-30T22:15:19Z",
+      "side": 1,
+      "message": "Yes, done.",
+      "parentUuid": "90fd66eb_e56b2ced",
       "revId": "43ee1708e5f6d421d6936a51dc99faf004d4336e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -175,6 +289,24 @@
     },
     {
       "key": {
+        "uuid": "70f8f2fa_b08154ff",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-30T22:15:19Z",
+      "side": 1,
+      "message": "If some default event_types in cmd_stat is not supported by the kernel, we don\u0027t print error.",
+      "parentUuid": "300cbaed_488ae71e",
+      "revId": "43ee1708e5f6d421d6936a51dc99faf004d4336e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "90fd66eb_c5439073",
         "filename": "simpleperf/cmd_record.cpp",
         "patchSetId": 2
@@ -192,6 +324,24 @@
     },
     {
       "key": {
+        "uuid": "70f8f2fa_10180876",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-30T22:15:19Z",
+      "side": 1,
+      "message": "Same explain as line 110.",
+      "parentUuid": "90fd66eb_c5439073",
+      "revId": "43ee1708e5f6d421d6936a51dc99faf004d4336e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "300cbaed_2802130c",
         "filename": "simpleperf/cmd_record.cpp",
         "patchSetId": 2
@@ -203,6 +353,24 @@
       "writtenOn": "2015-04-30T00:08:35Z",
       "side": 1,
       "message": "this looks familiar too.",
+      "revId": "43ee1708e5f6d421d6936a51dc99faf004d4336e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "90fd66eb_1c866a6a",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-30T22:15:19Z",
+      "side": 1,
+      "message": "Same explain as line 110.",
+      "parentUuid": "300cbaed_2802130c",
       "revId": "43ee1708e5f6d421d6936a51dc99faf004d4336e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -273,6 +441,24 @@
     },
     {
       "key": {
+        "uuid": "300cbaed_168be473",
+        "filename": "simpleperf/event_attr.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-30T22:15:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "70f8f2fa_f5e1184e",
+      "revId": "43ee1708e5f6d421d6936a51dc99faf004d4336e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "70f8f2fa_15f48402",
         "filename": "simpleperf/event_attr.cpp",
         "patchSetId": 2
@@ -284,6 +470,24 @@
       "writtenOn": "2015-04-30T00:08:35Z",
       "side": 1,
       "message": "factor this out. only the vector is different.",
+      "revId": "43ee1708e5f6d421d6936a51dc99faf004d4336e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "90fd66eb_97aa537d",
+        "filename": "simpleperf/event_attr.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-30T22:15:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "70f8f2fa_15f48402",
       "revId": "43ee1708e5f6d421d6936a51dc99faf004d4336e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -307,6 +511,24 @@
     },
     {
       "key": {
+        "uuid": "70f8f2fa_709d0cb1",
+        "filename": "simpleperf/event_fd.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-30T22:15:19Z",
+      "side": 1,
+      "message": "page_count changed to mmap_pages.\nperf uses the file handling interface to interact with the kernel. So I call it perf event file.",
+      "parentUuid": "70f8f2fa_15af64e4",
+      "revId": "43ee1708e5f6d421d6936a51dc99faf004d4336e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "90fd66eb_301270da",
         "filename": "simpleperf/event_fd.h",
         "patchSetId": 2
@@ -318,6 +540,24 @@
       "writtenOn": "2015-04-30T00:08:35Z",
       "side": 1,
       "message": "the mapped region grows?",
+      "revId": "43ee1708e5f6d421d6936a51dc99faf004d4336e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "300cbaed_3cc3678c",
+        "filename": "simpleperf/event_fd.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-30T22:15:19Z",
+      "side": 1,
+      "message": "No. It is a ring buffer.",
+      "parentUuid": "90fd66eb_301270da",
       "revId": "43ee1708e5f6d421d6936a51dc99faf004d4336e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -341,6 +581,24 @@
     },
     {
       "key": {
+        "uuid": "90fd66eb_d71fbb14",
+        "filename": "simpleperf/event_fd.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-30T22:15:19Z",
+      "side": 1,
+      "message": "Yes, It does. changed to return size_t.",
+      "parentUuid": "90fd66eb_d027cc32",
+      "revId": "43ee1708e5f6d421d6936a51dc99faf004d4336e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "90fd66eb_503c5c42",
         "filename": "simpleperf/event_fd.h",
         "patchSetId": 2
@@ -352,6 +610,24 @@
       "writtenOn": "2015-04-30T00:08:35Z",
       "side": 1,
       "message": "reuse\n\n\"commit\" seems like the wrong verb. discard?",
+      "revId": "43ee1708e5f6d421d6936a51dc99faf004d4336e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "90fd66eb_b7194f2f",
+        "filename": "simpleperf/event_fd.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-30T22:15:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "90fd66eb_503c5c42",
       "revId": "43ee1708e5f6d421d6936a51dc99faf004d4336e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -375,6 +651,24 @@
     },
     {
       "key": {
+        "uuid": "90fd66eb_374edf1b",
+        "filename": "simpleperf/event_fd.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-30T22:15:19Z",
+      "side": 1,
+      "message": "The kernel keeps trace of how much data it has written, and the user keeps trace of how much data it has read. (data_size % mmap_buffer_size) is the offset of write head or read head in the mmap_buffer.",
+      "parentUuid": "70f8f2fa_359d40b2",
+      "revId": "43ee1708e5f6d421d6936a51dc99faf004d4336e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "70f8f2fa_1581244a",
         "filename": "simpleperf/event_fd.h",
         "patchSetId": 2
@@ -392,6 +686,24 @@
     },
     {
       "key": {
+        "uuid": "70f8f2fa_d384ea0f",
+        "filename": "simpleperf/event_fd.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-30T22:15:19Z",
+      "side": 1,
+      "message": "mmap_metadata_page_",
+      "parentUuid": "70f8f2fa_1581244a",
+      "revId": "43ee1708e5f6d421d6936a51dc99faf004d4336e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "70f8f2fa_5071fad8",
         "filename": "simpleperf/record.cpp",
         "patchSetId": 2
@@ -403,6 +715,24 @@
       "writtenOn": "2015-04-30T00:08:35Z",
       "side": 1,
       "message": "why don\u0027t you have a struct and reinterpret_cast? and why copy field by field? why not just have\n\n  my_data_ \u003d *reinterpret_cast\u003cdata_layout_t*\u003e(p);",
+      "revId": "43ee1708e5f6d421d6936a51dc99faf004d4336e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "300cbaed_304eeb4d",
+        "filename": "simpleperf/record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-30T22:15:19Z",
+      "side": 1,
+      "message": "Although it is tedious to copy field one by one, it makes the MmapRecord fields clean. If I introduce mdata here, I need to write record-\u003emdata.pid, record-\u003emdata.tid when accessing the fields. So I would rather to hide the complexity inside the member functions used to read from or write to binary format.",
+      "parentUuid": "70f8f2fa_5071fad8",
       "revId": "43ee1708e5f6d421d6936a51dc99faf004d4336e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -443,6 +773,24 @@
     },
     {
       "key": {
+        "uuid": "70f8f2fa_3376ee83",
+        "filename": "simpleperf/record.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-30T22:15:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "70f8f2fa_9009c261",
+      "revId": "43ee1708e5f6d421d6936a51dc99faf004d4336e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "70f8f2fa_1090124b",
         "filename": "simpleperf/record_file.cpp",
         "patchSetId": 2
@@ -454,6 +802,24 @@
       "writtenOn": "2015-04-30T00:08:35Z",
       "side": 1,
       "message": "why not just O_TRUNC in the open?",
+      "revId": "43ee1708e5f6d421d6936a51dc99faf004d4336e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "90fd66eb_12ef7183",
+        "filename": "simpleperf/record_file.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-30T22:15:19Z",
+      "side": 1,
+      "message": "If we don\u0027t remove old file, imagine below situation: user A create the perf.data, and root runs \"perf record\", the perf.data still belongs to user A. It may not be suitable.",
+      "parentUuid": "70f8f2fa_1090124b",
       "revId": "43ee1708e5f6d421d6936a51dc99faf004d4336e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -477,6 +843,24 @@
     },
     {
       "key": {
+        "uuid": "90fd66eb_b2fe7d2f",
+        "filename": "simpleperf/record_file.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-30T22:15:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "70f8f2fa_900f0233",
+      "revId": "43ee1708e5f6d421d6936a51dc99faf004d4336e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "300cbaed_6271c7d9",
         "filename": "simpleperf/record_file.h",
         "patchSetId": 2
@@ -488,6 +872,24 @@
       "writtenOn": "2015-04-30T00:08:35Z",
       "side": 1,
       "message": "what\u0027s a feature, and how do i write one?",
+      "revId": "43ee1708e5f6d421d6936a51dc99faf004d4336e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "90fd66eb_92d541e1",
+        "filename": "simpleperf/record_file.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-30T22:15:19Z",
+      "side": 1,
+      "message": "moved to next patches due to code size.",
+      "parentUuid": "300cbaed_6271c7d9",
       "revId": "43ee1708e5f6d421d6936a51dc99faf004d4336e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -511,6 +913,24 @@
     },
     {
       "key": {
+        "uuid": "300cbaed_700b43ac",
+        "filename": "simpleperf/record_file.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-30T22:15:19Z",
+      "side": 1,
+      "message": "comment added.",
+      "parentUuid": "90fd66eb_1058148c",
+      "revId": "43ee1708e5f6d421d6936a51dc99faf004d4336e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "90fd66eb_ab361513",
         "filename": "simpleperf/record_file_format.h",
         "patchSetId": 2
@@ -528,6 +948,24 @@
     },
     {
       "key": {
+        "uuid": "300cbaed_53d8c9f3",
+        "filename": "simpleperf/record_file_format.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-30T22:15:19Z",
+      "side": 1,
+      "message": "Done. RecordFileFormat is not unique in a global scope, so PerfFileFormat is better. In fact, I already have RecordFileWriter and RecordFileReader for that. I am not convinced that perf only uses this only binary file format, so I call it record file.",
+      "parentUuid": "90fd66eb_ab361513",
+      "revId": "43ee1708e5f6d421d6936a51dc99faf004d4336e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "300cbaed_625b8710",
         "filename": "simpleperf/record_file_format.h",
         "patchSetId": 2
@@ -539,6 +977,24 @@
       "writtenOn": "2015-04-30T00:08:35Z",
       "side": 1,
       "message": "or \"enum class Feature\" so you can say Feature::HOSTNAME et cetera? or are these the kernel\u0027s names and you want to keep them the same?",
+      "revId": "43ee1708e5f6d421d6936a51dc99faf004d4336e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "70f8f2fa_76398451",
+        "filename": "simpleperf/record_file_format.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-30T22:15:19Z",
+      "side": 1,
+      "message": "They are not types in the kernel. But \"enum class\" doesn\u0027t match well with int types. I can\u0027t use \"(1 \u003c\u003c Feature::HOSTNAME)\", and I don\u0027t need to create any instance of Feature. So using the normal enum type is more suitable here.",
+      "parentUuid": "300cbaed_625b8710",
       "revId": "43ee1708e5f6d421d6936a51dc99faf004d4336e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false

@@ -16,6 +16,24 @@
       "revId": "249518de7cb7ddb1c066b3bb8b10bc0f66222f7d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "90fd66eb_7c496ebd",
+        "filename": "simpleperf/cmd_stat.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-04-30T22:15:19Z",
+      "side": 0,
+      "message": "We only read the result once when workload is finished. So there is no need to stop the counters before we close the perf event files.",
+      "parentUuid": "70f8f2fa_d527bc32",
+      "revId": "249518de7cb7ddb1c066b3bb8b10bc0f66222f7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
