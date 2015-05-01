@@ -16,6 +16,24 @@
       "revId": "65c5615bba8c6c3f054723f6b2c036ac189bb299",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "70f8f2fa_2ce04813",
+        "filename": "simpleperf/utils.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-05-01T04:50:04Z",
+      "side": 1,
+      "message": "The parseOptions is in RecordCommandImpl, not in RecordCommand, so make it a member of Command doesn\u0027t help.\nHowever, I keep the cmd name in args[0], so we can print it here.",
+      "parentUuid": "70f8f2fa_22d21604",
+      "revId": "65c5615bba8c6c3f054723f6b2c036ac189bb299",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
