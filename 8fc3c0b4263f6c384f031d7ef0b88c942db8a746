@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "105fb6fa_a14d8452",
+        "filename": "simpleperf/cmd_dumprecord.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-05-01T22:28:21Z",
+      "side": 1,
+      "message": "I will try.",
+      "parentUuid": "f06142bc_7dba2f4e",
+      "revId": "8fc3c0b4263f6c384f031d7ef0b88c942db8a746",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f06142bc_fda47f2e",
         "filename": "simpleperf/cmd_record.cpp",
         "patchSetId": 6
@@ -30,6 +48,24 @@
       "writtenOn": "2015-05-01T20:30:01Z",
       "side": 1,
       "message": "why couldn\u0027t you move this into FindEventTypeByName?",
+      "revId": "8fc3c0b4263f6c384f031d7ef0b88c942db8a746",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "105fb6fa_a1ef4484",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-05-01T22:28:21Z",
+      "side": 1,
+      "message": "In cmd_list.cpp, it first gets all event types, then tests every event_type whether or not supported by kernel. So cmd_list doesn\u0027t use FindEventTypeByName, but uses IsSupportedByKernel.",
+      "parentUuid": "f06142bc_fda47f2e",
       "revId": "8fc3c0b4263f6c384f031d7ef0b88c942db8a746",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "d078be71_6b0fc133",
+        "filename": "simpleperf/event_attr.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-05-01T22:28:21Z",
+      "side": 1,
+      "message": "As EventSelection is being used, we can hide the detail in EventSelection now.",
+      "parentUuid": "d078be71_dfdc179b",
+      "revId": "8fc3c0b4263f6c384f031d7ef0b88c942db8a746",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f06142bc_fd0f1fb4",
         "filename": "simpleperf/event_selection.h",
         "patchSetId": 6
@@ -64,6 +118,24 @@
       "writtenOn": "2015-05-01T20:30:01Z",
       "side": 1,
       "message": "what is an event selection?",
+      "revId": "8fc3c0b4263f6c384f031d7ef0b88c942db8a746",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d078be71_f0c820f9",
+        "filename": "simpleperf/event_selection.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-05-01T22:28:21Z",
+      "side": 1,
+      "message": "comment added.",
+      "parentUuid": "f06142bc_fd0f1fb4",
       "revId": "8fc3c0b4263f6c384f031d7ef0b88c942db8a746",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "f06142bc_2642681d",
+        "filename": "simpleperf/event_selection.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-05-01T22:28:21Z",
+      "side": 1,
+      "message": "comment added. We only need EventSelection in cmd_record.cpp.",
+      "parentUuid": "d078be71_1fee8f35",
+      "revId": "8fc3c0b4263f6c384f031d7ef0b88c942db8a746",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "105fb6fa_1eddade2",
         "filename": "simpleperf/event_selection.h",
         "patchSetId": 6
@@ -98,6 +188,24 @@
       "writtenOn": "2015-05-01T20:30:01Z",
       "side": 1,
       "message": "should this be copyable?",
+      "revId": "8fc3c0b4263f6c384f031d7ef0b88c942db8a746",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f06142bc_26c7c8c5",
+        "filename": "simpleperf/event_selection.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-05-01T22:28:21Z",
+      "side": 1,
+      "message": "As EventSelection is managing event_fds_, I think both EventSelection and EventSelectionList shouldn\u0027t be copyable, but they are movable.",
+      "parentUuid": "105fb6fa_1eddade2",
       "revId": "8fc3c0b4263f6c384f031d7ef0b88c942db8a746",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "f06142bc_e62b10ae",
+        "filename": "simpleperf/record.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-05-01T22:28:21Z",
+      "side": 1,
+      "message": "How the data is used depends on the sample_type, so I can\u0027t replace L71-94 by a simple memcpy(mdata, p, sizeof(mdata)). Do you suggest to use mdata for just pid and tid? It only has two items, no need?",
+      "parentUuid": "d078be71_2a26a7e4",
+      "revId": "8fc3c0b4263f6c384f031d7ef0b88c942db8a746",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "105fb6fa_7e330970",
         "filename": "simpleperf/record_file.h",
         "patchSetId": 6
@@ -132,6 +258,24 @@
       "writtenOn": "2015-05-01T20:30:01Z",
       "side": 1,
       "message": "to a",
+      "revId": "8fc3c0b4263f6c384f031d7ef0b88c942db8a746",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d078be71_50cab49d",
+        "filename": "simpleperf/record_file.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-05-01T22:28:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "105fb6fa_7e330970",
       "revId": "8fc3c0b4263f6c384f031d7ef0b88c942db8a746",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -155,6 +299,24 @@
     },
     {
       "key": {
+        "uuid": "105fb6fa_a1002489",
+        "filename": "simpleperf/record_file.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-05-01T22:28:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f06142bc_a053c0c1",
+      "revId": "8fc3c0b4263f6c384f031d7ef0b88c942db8a746",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f06142bc_2015f0c1",
         "filename": "simpleperf/record_file_format.h",
         "patchSetId": 6
@@ -166,6 +328,24 @@
       "writtenOn": "2015-05-01T20:30:01Z",
       "side": 1,
       "message": "*The* feature section *has* *the* following structure:",
+      "revId": "8fc3c0b4263f6c384f031d7ef0b88c942db8a746",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "105fb6fa_219a54ec",
+        "filename": "simpleperf/record_file_format.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-05-01T22:28:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f06142bc_2015f0c1",
       "revId": "8fc3c0b4263f6c384f031d7ef0b88c942db8a746",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -189,6 +369,24 @@
     },
     {
       "key": {
+        "uuid": "d078be71_a58bc874",
+        "filename": "simpleperf/utils.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-05-01T22:28:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "105fb6fa_9ea45d09",
+      "revId": "8fc3c0b4263f6c384f031d7ef0b88c942db8a746",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f06142bc_60360862",
         "filename": "simpleperf/utils.h",
         "patchSetId": 6
@@ -200,6 +398,24 @@
       "writtenOn": "2015-05-01T20:30:01Z",
       "side": 1,
       "message": "i didn\u0027t understand why this isn\u0027t in Command.",
+      "revId": "8fc3c0b4263f6c384f031d7ef0b88c942db8a746",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f06142bc_4b4f65c4",
+        "filename": "simpleperf/utils.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-05-01T22:28:21Z",
+      "side": 1,
+      "message": "If I include it in Command, when I use it, I need to write Command::NextArgumentOrError(xxx). You may not notice that the callers of it are not derived classes of Command.",
+      "parentUuid": "f06142bc_60360862",
       "revId": "8fc3c0b4263f6c384f031d7ef0b88c942db8a746",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
