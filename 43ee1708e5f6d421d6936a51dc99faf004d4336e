@@ -191,6 +191,30 @@
     },
     {
       "key": {
+        "uuid": "300cbaed_585e1d7c",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-05-01T04:49:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "70f8f2fa_c2eed202",
+      "range": {
+        "startLine": 101,
+        "startChar": 56,
+        "endLine": 101,
+        "endChar": 61
+      },
+      "revId": "43ee1708e5f6d421d6936a51dc99faf004d4336e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "90fd66eb_a5364413",
         "filename": "simpleperf/cmd_record.cpp",
         "patchSetId": 2
@@ -238,6 +262,24 @@
       "side": 1,
       "message": "i think you should though. your current way of doing things isn\u0027t working out well -- there\u0027s a lot of duplication -- and it\u0027s easier to fix it early rather than continuing to add duplication.",
       "parentUuid": "90fd66eb_5cb3d27a",
+      "revId": "43ee1708e5f6d421d6936a51dc99faf004d4336e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "70f8f2fa_4cdf9454",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-05-01T04:49:59Z",
+      "side": 1,
+      "message": "I moved management of event_type/event_attr/event_fds to EventSelection and EventSelectionList in event_selection.h. Hopefully it can be better than before.",
+      "parentUuid": "90fd66eb_ee614110",
       "revId": "43ee1708e5f6d421d6936a51dc99faf004d4336e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -799,6 +841,24 @@
     },
     {
       "key": {
+        "uuid": "90fd66eb_5158d48c",
+        "filename": "simpleperf/record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-05-01T04:49:59Z",
+      "side": 1,
+      "message": "It seems that I always need to sacrifice one piece of code to make another piece of code better.\nInstead of using member function to access public data in struct. I\u0027d rather using:\nunion {\n  struct {\n\n  };\n  char mdata[32];\n};",
+      "parentUuid": "70f8f2fa_a2aaa67c",
+      "revId": "43ee1708e5f6d421d6936a51dc99faf004d4336e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "300cbaed_c20ff366",
         "filename": "simpleperf/record.cpp",
         "patchSetId": 2
@@ -810,6 +870,24 @@
       "writtenOn": "2015-04-30T00:08:35Z",
       "side": 1,
       "message": "isn\u0027t this the same missing struct as above?",
+      "revId": "43ee1708e5f6d421d6936a51dc99faf004d4336e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "300cbaed_9b154f76",
+        "filename": "simpleperf/record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-05-01T04:49:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "300cbaed_c20ff366",
       "revId": "43ee1708e5f6d421d6936a51dc99faf004d4336e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -898,6 +976,24 @@
       "side": 1,
       "message": "i don\u0027t think we care. and a user who cares shouldn\u0027t be working in a directory writable by others.",
       "parentUuid": "90fd66eb_12ef7183",
+      "revId": "43ee1708e5f6d421d6936a51dc99faf004d4336e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "300cbaed_b8b65937",
+        "filename": "simpleperf/record_file.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-05-01T04:49:59Z",
+      "side": 1,
+      "message": "Ok. Let\u0027s simplify it.",
+      "parentUuid": "90fd66eb_2ebe89c4",
       "revId": "43ee1708e5f6d421d6936a51dc99faf004d4336e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false

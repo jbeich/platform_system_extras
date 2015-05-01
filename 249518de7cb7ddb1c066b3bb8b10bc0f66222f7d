@@ -52,6 +52,24 @@
       "revId": "249518de7cb7ddb1c066b3bb8b10bc0f66222f7d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "300cbaed_dbf4e7d3",
+        "filename": "simpleperf/cmd_stat.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-05-01T04:49:59Z",
+      "side": 0,
+      "message": "I added EventSelection. But I think it can\u0027t start and stop counting automatically. It stills needs control depending on the condition. It is because of two reasons: 1. it doesn\u0027t control system_wide_collection_, 2. It doesn\u0027t know when to start, when to stop.\nI am not sure if it is suitable, but I feel that if EventSelection takes more control, it needs more information, like system_wide_collection_, workload. That takes the risk to make EventSelection complex.",
+      "parentUuid": "300cbaed_3f4194f9",
+      "revId": "249518de7cb7ddb1c066b3bb8b10bc0f66222f7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
