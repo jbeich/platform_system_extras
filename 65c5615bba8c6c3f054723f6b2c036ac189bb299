@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "70f8f2fa_22d21604",
+        "filename": "simpleperf/utils.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-05-01T00:05:30Z",
+      "side": 1,
+      "message": "one reason to have this as a member of Command is that it would then know the command name.",
+      "revId": "65c5615bba8c6c3f054723f6b2c036ac189bb299",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
