@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "105fb6fa_8c4997c0",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-05-01T22:38:09Z",
+      "side": 1,
+      "message": "but stat and record both have this same check and this same message. so a \u0027bool return_unsupported\u0027 parameter sounds reasonable.",
+      "parentUuid": "105fb6fa_a1ef4484",
+      "revId": "8fc3c0b4263f6c384f031d7ef0b88c942db8a746",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d078be71_dfdc179b",
         "filename": "simpleperf/event_attr.h",
         "patchSetId": 6
@@ -247,6 +265,24 @@
     },
     {
       "key": {
+        "uuid": "105fb6fa_c7e44829",
+        "filename": "simpleperf/record.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-05-01T22:38:09Z",
+      "side": 1,
+      "message": "i\u0027m saying each of these is a missing type. you shouldn\u0027t have this much pointer arithmetic anywhere, especially not when all you\u0027re trying to say is \"copy this struct\".",
+      "parentUuid": "f06142bc_e62b10ae",
+      "revId": "8fc3c0b4263f6c384f031d7ef0b88c942db8a746",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "105fb6fa_7e330970",
         "filename": "simpleperf/record_file.h",
         "patchSetId": 6
@@ -416,6 +452,24 @@
       "side": 1,
       "message": "If I include it in Command, when I use it, I need to write Command::NextArgumentOrError(xxx). You may not notice that the callers of it are not derived classes of Command.",
       "parentUuid": "f06142bc_60360862",
+      "revId": "8fc3c0b4263f6c384f031d7ef0b88c942db8a746",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f06142bc_f1dca89a",
+        "filename": "simpleperf/utils.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-05-01T22:38:09Z",
+      "side": 1,
+      "message": "i don\u0027t understand why there\u0027s an XCommand and an XCommandImpl though. what are you hiding, and from whom? StatCommand isn\u0027t actually an API.",
+      "parentUuid": "f06142bc_4b4f65c4",
       "revId": "8fc3c0b4263f6c384f031d7ef0b88c942db8a746",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
