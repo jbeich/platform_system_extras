@@ -167,6 +167,30 @@
     },
     {
       "key": {
+        "uuid": "70f8f2fa_c2eed202",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-05-01T00:02:36Z",
+      "side": 1,
+      "message": "TODOs are better because they\u0027re at the place where the code needs to be fixed. so someone who comes along later and thinks \"this looks weird\" has an explanation in place.",
+      "parentUuid": "300cbaed_b6ee7801",
+      "range": {
+        "startLine": 101,
+        "startChar": 56,
+        "endLine": 101,
+        "endChar": 61
+      },
+      "revId": "43ee1708e5f6d421d6936a51dc99faf004d4336e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "90fd66eb_a5364413",
         "filename": "simpleperf/cmd_record.cpp",
         "patchSetId": 2
@@ -196,6 +220,24 @@
       "side": 1,
       "message": "Yes. both \"record\" and \"stat\" cmds should open perf event files. But the implementations are different. \"record\" cmd open files only for one event_type, but \"stat\" cmd open files for one or more event_types. And we can\u0027t make this block a non-member function, or make a base class just for cmd_stat and cmd_record. So it is not easy to refactor.\nThe method I can think up of is using another class like evsel_list in perf source code, to manage all the event_types, event_attrs, and event_fds. But it is a lot of work, and I don\u0027t want to introduce another level of encapsulation now.",
       "parentUuid": "90fd66eb_a5364413",
+      "revId": "43ee1708e5f6d421d6936a51dc99faf004d4336e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "90fd66eb_ee614110",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-05-01T00:02:36Z",
+      "side": 1,
+      "message": "i think you should though. your current way of doing things isn\u0027t working out well -- there\u0027s a lot of duplication -- and it\u0027s easier to fix it early rather than continuing to add duplication.",
+      "parentUuid": "90fd66eb_5cb3d27a",
       "revId": "43ee1708e5f6d421d6936a51dc99faf004d4336e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -739,6 +781,24 @@
     },
     {
       "key": {
+        "uuid": "70f8f2fa_a2aaa67c",
+        "filename": "simpleperf/record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-05-01T00:02:36Z",
+      "side": 1,
+      "message": "that seems like a bad choice because repetitive code like this is the easiest code to get wrong.\n\nif you really access the fields all that often (which surprises me), you can always add accessor functions like\n\n  pid_t pid() { return mdata.pid; }",
+      "parentUuid": "300cbaed_304eeb4d",
+      "revId": "43ee1708e5f6d421d6936a51dc99faf004d4336e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "300cbaed_c20ff366",
         "filename": "simpleperf/record.cpp",
         "patchSetId": 2
@@ -820,6 +880,24 @@
       "side": 1,
       "message": "If we don\u0027t remove old file, imagine below situation: user A create the perf.data, and root runs \"perf record\", the perf.data still belongs to user A. It may not be suitable.",
       "parentUuid": "70f8f2fa_1090124b",
+      "revId": "43ee1708e5f6d421d6936a51dc99faf004d4336e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "90fd66eb_2ebe89c4",
+        "filename": "simpleperf/record_file.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-05-01T00:02:36Z",
+      "side": 1,
+      "message": "i don\u0027t think we care. and a user who cares shouldn\u0027t be working in a directory writable by others.",
+      "parentUuid": "90fd66eb_12ef7183",
       "revId": "43ee1708e5f6d421d6936a51dc99faf004d4336e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false

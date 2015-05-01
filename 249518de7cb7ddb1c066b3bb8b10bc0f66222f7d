@@ -34,6 +34,24 @@
       "revId": "249518de7cb7ddb1c066b3bb8b10bc0f66222f7d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "300cbaed_3f4194f9",
+        "filename": "simpleperf/cmd_stat.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-05-01T00:02:36Z",
+      "side": 0,
+      "message": "i see. but a better abstraction would probably handle the \"stop\" for you, and then you wouldn\u0027t need to explain why the code looks wrong with unbalanced starts and stops.",
+      "parentUuid": "90fd66eb_7c496ebd",
+      "revId": "249518de7cb7ddb1c066b3bb8b10bc0f66222f7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
