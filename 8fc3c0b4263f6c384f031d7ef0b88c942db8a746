@@ -90,6 +90,24 @@
     },
     {
       "key": {
+        "uuid": "f06142bc_0c4d834d",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-05-02T00:35:45Z",
+      "side": 1,
+      "message": "Sorry, I thought you want to remove IsSupportedByKernel. Each time we call FindEventTypeByName, IsSupportedByKernel is also called. So we can move IsSupportedByKernel here inside FindEventTypeByName.",
+      "parentUuid": "105fb6fa_8c4997c0",
+      "revId": "8fc3c0b4263f6c384f031d7ef0b88c942db8a746",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d078be71_dfdc179b",
         "filename": "simpleperf/event_attr.h",
         "patchSetId": 6
@@ -283,6 +301,24 @@
     },
     {
       "key": {
+        "uuid": "d078be71_b68bfd74",
+        "filename": "simpleperf/record.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-05-02T00:35:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "105fb6fa_c7e44829",
+      "revId": "8fc3c0b4263f6c384f031d7ef0b88c942db8a746",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "105fb6fa_7e330970",
         "filename": "simpleperf/record_file.h",
         "patchSetId": 6
@@ -470,6 +506,24 @@
       "side": 1,
       "message": "i don\u0027t understand why there\u0027s an XCommand and an XCommandImpl though. what are you hiding, and from whom? StatCommand isn\u0027t actually an API.",
       "parentUuid": "f06142bc_4b4f65c4",
+      "revId": "8fc3c0b4263f6c384f031d7ef0b88c942db8a746",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d078be71_311a97a5",
+        "filename": "simpleperf/utils.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-05-02T00:35:45Z",
+      "side": 1,
+      "message": "comment added in L234 in cmd_stat.cpp. Because in unit tests, one command is called multiple times with different options. But XCommand has only one global command, it can\u0027t clean up resources automatically when cmd-\u003eRun() finishes. So the reason to add XCommandImpl is to clean up resources after each Run().",
+      "parentUuid": "f06142bc_f1dca89a",
       "revId": "8fc3c0b4263f6c384f031d7ef0b88c942db8a746",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
