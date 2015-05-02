@@ -1,0 +1,191 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "105fb6fa_edd92d72",
+        "filename": "simpleperf/cmd_stat.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-05-02T01:05:24Z",
+      "side": 1,
+      "message": "i think the problem here is that commands register themselves, but shouldn\u0027t. you probably want a CommandRegisterer (or some better name):\n\n  static CommandRegisterer g_stat_command(new StatCommand);\n\nbut we can leave this for a later change (since this change isn\u0027t introducing the problem).",
+      "revId": "84f4bb62e60c9849df66bd735d6e314c63e7334e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "105fb6fa_6deefd04",
+        "filename": "simpleperf/event_attr.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-05-02T01:05:24Z",
+      "side": 1,
+      "message": "is there a reason for this not to just be in \"perf_event.h\"?",
+      "revId": "84f4bb62e60c9849df66bd735d6e314c63e7334e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "105fb6fa_6d099d5e",
+        "filename": "simpleperf/event_selection.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-05-02T01:05:24Z",
+      "side": 1,
+      "message": "*the* user\n\nand \u0027notifies\u0027 isn\u0027t the right verb --- the user *creates* and EventSelection for the specific event type they want to monitor.",
+      "revId": "84f4bb62e60c9849df66bd735d6e314c63e7334e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f06142bc_e3aa1dfc",
+        "filename": "simpleperf/event_selection.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-05-02T01:05:24Z",
+      "side": 1,
+      "message": "is EventTypeSet a better name? can i monitor the same event type twice? what does that mean?",
+      "revId": "84f4bb62e60c9849df66bd735d6e314c63e7334e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f06142bc_23ced502",
+        "filename": "simpleperf/event_selection.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-05-02T01:05:24Z",
+      "side": 1,
+      "message": "do we need EventSelection to be public at all?",
+      "revId": "84f4bb62e60c9849df66bd735d6e314c63e7334e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f06142bc_831fa1e0",
+        "filename": "simpleperf/record.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-05-02T01:05:24Z",
+      "side": 1,
+      "message": "explain why this isn\u0027t EQ?",
+      "revId": "84f4bb62e60c9849df66bd735d6e314c63e7334e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f06142bc_c327d932",
+        "filename": "simpleperf/record.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-05-02T01:05:24Z",
+      "side": 1,
+      "message": "when does this happen?",
+      "revId": "84f4bb62e60c9849df66bd735d6e314c63e7334e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d078be71_31b45732",
+        "filename": "simpleperf/record.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-05-02T01:05:24Z",
+      "side": 1,
+      "message": "these are out of order, right? the data comes at the end? and is actually in one of the subclasses? that\u0027s worth documenting.",
+      "revId": "84f4bb62e60c9849df66bd735d6e314c63e7334e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d078be71_d1a4030a",
+        "filename": "simpleperf/record.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-05-02T01:05:24Z",
+      "side": 1,
+      "message": "we can see this below. it would be more useful to tell us what this is for. (though probably best is to add a comment to SampleId.)",
+      "revId": "84f4bb62e60c9849df66bd735d6e314c63e7334e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d078be71_91c36ba6",
+        "filename": "simpleperf/record.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-05-02T01:05:24Z",
+      "side": 1,
+      "message": ")",
+      "revId": "84f4bb62e60c9849df66bd735d6e314c63e7334e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f06142bc_63b60d3b",
+        "filename": "simpleperf/record.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-05-02T01:05:24Z",
+      "side": 1,
+      "message": "probably worth pointing out that sample_type is a *bitmask*.",
+      "revId": "84f4bb62e60c9849df66bd735d6e314c63e7334e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
