@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "f06142bc_eaa90ae1",
+        "filename": "simpleperf/cmd_stat.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-05-04T17:36:23Z",
+      "side": 1,
+      "message": "your stated reason for needing XCommandImpl is so that you can create an XCommand instance multiple times without it being registered multiple times.\n\nthe Command constructor should not be responsible for registering the command, for exactly this reason. (pretty much everyone who writes this kind of code writes it this way first, realizes their mistake, and then splits up the two different jobs.)",
+      "parentUuid": "f06142bc_767b29ba",
+      "revId": "84f4bb62e60c9849df66bd735d6e314c63e7334e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "105fb6fa_6deefd04",
         "filename": "simpleperf/event_attr.h",
         "patchSetId": 8
@@ -241,6 +259,24 @@
       "side": 1,
       "message": "Now it doesn\u0027t happen. But I prefer to keep it for debugging.",
       "parentUuid": "f06142bc_c327d932",
+      "revId": "84f4bb62e60c9849df66bd735d6e314c63e7334e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7042b231_3f550f21",
+        "filename": "simpleperf/record.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-05-04T17:36:23Z",
+      "side": 1,
+      "message": "this won\u0027t help you if something changes though. you\u0027d be better off moving the CHECK_EQ out of the \u0027if\u0027 above, and checking in both cases.",
+      "parentUuid": "f06142bc_0a671e23",
       "revId": "84f4bb62e60c9849df66bd735d6e314c63e7334e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
