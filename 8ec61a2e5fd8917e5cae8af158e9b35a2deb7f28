@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "7042b231_1adea107",
+        "filename": "simpleperf/event_selection_set.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-05-04T18:44:42Z",
+      "side": 1,
+      "message": "removed. The member functions in EventSelection and EventSelectionSet all contain one loop, I think separating them can make things more clear. You don\u0027t need to mix the fact that we are operating on multiple event types, and how to operate on one event type. As we add functions, I think EventSelection may become more complex, so it\u0027s better wait to see.",
+      "parentUuid": "f06142bc_053e31dd",
+      "revId": "8ec61a2e5fd8917e5cae8af158e9b35a2deb7f28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "105fb6fa_f83d66e1",
         "filename": "simpleperf/record.h",
         "patchSetId": 10
@@ -30,6 +48,24 @@
       "writtenOn": "2015-05-04T17:43:32Z",
       "side": 1,
       "message": "i\u0027m confused about the \"copy\" here. is this is binary format or not? why wouldn\u0027t you want to refer to perf_event_attr?",
+      "revId": "8ec61a2e5fd8917e5cae8af158e9b35a2deb7f28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "102df676_a890fb9d",
+        "filename": "simpleperf/record.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-05-04T18:44:42Z",
+      "side": 1,
+      "message": "comment changed. This is not only binary format, we are also using something helpful to represent the record content, like sample_id_all/sample_type here, std::string for name, sample_type in SampleRecord.",
+      "parentUuid": "105fb6fa_f83d66e1",
       "revId": "8ec61a2e5fd8917e5cae8af158e9b35a2deb7f28",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
