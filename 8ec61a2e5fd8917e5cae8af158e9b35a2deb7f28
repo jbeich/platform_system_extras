@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "7042b231_b4ef6184",
+        "filename": "simpleperf/event_selection_set.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-05-04T20:04:05Z",
+      "side": 1,
+      "message": "YAGNI. at the moment you\u0027re adding complexity (that\u0027s already introduced one bug that would have been more obvious without it) on the assumption you might need it later? it\u0027s always easier to add complexity than remove it, so you should prefer to avoid it where possible.\n\nat the moment, the methods in EventSelectionSet don\u0027t really do anything; anyone trying to understand them needs to jump back and forth.\n\nif you want to factor something out, you might want to look at those loops. a member function that\u0027s basically a for-each over the \u0027pair.second\u0027s in your map could be made more readable than something that only uses \u0027auto\u0027 and \u0027pair.second\u0027.",
+      "parentUuid": "7042b231_1adea107",
+      "revId": "8ec61a2e5fd8917e5cae8af158e9b35a2deb7f28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "105fb6fa_f83d66e1",
         "filename": "simpleperf/record.h",
         "patchSetId": 10
