@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "105fb6fa_e4cdbf38",
+        "filename": "simpleperf/event_selection_set.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-05-04T22:41:44Z",
+      "side": 1,
+      "message": "lol. yes, that\u0027s even clearer than my suggestion.",
+      "revId": "9759e1b1ce76185aa539aeea2fb1cbd8382156e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
