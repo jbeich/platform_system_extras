@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "f06142bc_767b29ba",
+        "filename": "simpleperf/cmd_stat.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-05-04T17:28:07Z",
+      "side": 1,
+      "message": "I think whether using CommandRegister doesn\u0027t relate to the necessary of using XCommandImpl, no?",
+      "parentUuid": "105fb6fa_edd92d72",
+      "revId": "84f4bb62e60c9849df66bd735d6e314c63e7334e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "105fb6fa_6deefd04",
         "filename": "simpleperf/event_attr.h",
         "patchSetId": 8
@@ -30,6 +48,24 @@
       "writtenOn": "2015-05-02T01:05:24Z",
       "side": 1,
       "message": "is there a reason for this not to just be in \"perf_event.h\"?",
+      "revId": "84f4bb62e60c9849df66bd735d6e314c63e7334e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f06142bc_5655451f",
+        "filename": "simpleperf/event_attr.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-05-04T17:28:07Z",
+      "side": 1,
+      "message": "keep a distinct header file for event_attr.cpp. And perf_event.h may copy the content of \u003clinux/perf_event.h\u003e someday, so I don\u0027t want to make it containing other stuff.",
+      "parentUuid": "105fb6fa_6deefd04",
       "revId": "84f4bb62e60c9849df66bd735d6e314c63e7334e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "d078be71_acb00cbc",
+        "filename": "simpleperf/event_selection.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-05-04T17:28:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "105fb6fa_6d099d5e",
+      "revId": "84f4bb62e60c9849df66bd735d6e314c63e7334e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f06142bc_e3aa1dfc",
         "filename": "simpleperf/event_selection.h",
         "patchSetId": 8
@@ -64,6 +118,24 @@
       "writtenOn": "2015-05-02T01:05:24Z",
       "side": 1,
       "message": "is EventTypeSet a better name? can i monitor the same event type twice? what does that mean?",
+      "revId": "84f4bb62e60c9849df66bd735d6e314c63e7334e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "105fb6fa_952353a1",
+        "filename": "simpleperf/event_selection.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-05-04T17:28:07Z",
+      "side": 1,
+      "message": "Although possible, monitor the same event type twice doesn\u0027t make sense. So *Set may be better than *List. EventTypeSet seems to be a collection of EventType, but here it should manage the whole process of event monitoring. So I prefer to EventSelectionSet.",
+      "parentUuid": "f06142bc_e3aa1dfc",
       "revId": "84f4bb62e60c9849df66bd735d6e314c63e7334e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "f06142bc_8f7500f6",
+        "filename": "simpleperf/event_selection.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-05-04T17:28:07Z",
+      "side": 1,
+      "message": "If making cmd_record.cpp use EventSelectionSet, we can hide EventSelection entirely.",
+      "parentUuid": "f06142bc_23ced502",
+      "revId": "84f4bb62e60c9849df66bd735d6e314c63e7334e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f06142bc_831fa1e0",
         "filename": "simpleperf/record.cpp",
         "patchSetId": 8
@@ -98,6 +188,24 @@
       "writtenOn": "2015-05-02T01:05:24Z",
       "side": 1,
       "message": "explain why this isn\u0027t EQ?",
+      "revId": "84f4bb62e60c9849df66bd735d6e314c63e7334e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "105fb6fa_b57bf776",
+        "filename": "simpleperf/record.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-05-04T17:28:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f06142bc_831fa1e0",
       "revId": "84f4bb62e60c9849df66bd735d6e314c63e7334e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "f06142bc_0a671e23",
+        "filename": "simpleperf/record.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-05-04T17:28:07Z",
+      "side": 1,
+      "message": "Now it doesn\u0027t happen. But I prefer to keep it for debugging.",
+      "parentUuid": "f06142bc_c327d932",
+      "revId": "84f4bb62e60c9849df66bd735d6e314c63e7334e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d078be71_31b45732",
         "filename": "simpleperf/record.h",
         "patchSetId": 8
@@ -132,6 +258,24 @@
       "writtenOn": "2015-05-02T01:05:24Z",
       "side": 1,
       "message": "these are out of order, right? the data comes at the end? and is actually in one of the subclasses? that\u0027s worth documenting.",
+      "revId": "84f4bb62e60c9849df66bd735d6e314c63e7334e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "105fb6fa_35360793",
+        "filename": "simpleperf/record.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-05-04T17:28:07Z",
+      "side": 1,
+      "message": "they are in order in binary format. That\u0027s why I want to comment. The old comment may not be clear.",
+      "parentUuid": "d078be71_31b45732",
       "revId": "84f4bb62e60c9849df66bd735d6e314c63e7334e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -155,6 +299,24 @@
     },
     {
       "key": {
+        "uuid": "f06142bc_8ad88e1a",
+        "filename": "simpleperf/record.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-05-04T17:28:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d078be71_d1a4030a",
+      "revId": "84f4bb62e60c9849df66bd735d6e314c63e7334e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d078be71_91c36ba6",
         "filename": "simpleperf/record.h",
         "patchSetId": 8
@@ -172,6 +334,24 @@
     },
     {
       "key": {
+        "uuid": "105fb6fa_55337ba1",
+        "filename": "simpleperf/record.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-05-04T17:28:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d078be71_91c36ba6",
+      "revId": "84f4bb62e60c9849df66bd735d6e314c63e7334e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f06142bc_63b60d3b",
         "filename": "simpleperf/record.h",
         "patchSetId": 8
@@ -183,6 +363,24 @@
       "writtenOn": "2015-05-02T01:05:24Z",
       "side": 1,
       "message": "probably worth pointing out that sample_type is a *bitmask*.",
+      "revId": "84f4bb62e60c9849df66bd735d6e314c63e7334e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "105fb6fa_b56cd789",
+        "filename": "simpleperf/record.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-05-04T17:28:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f06142bc_63b60d3b",
       "revId": "84f4bb62e60c9849df66bd735d6e314c63e7334e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
