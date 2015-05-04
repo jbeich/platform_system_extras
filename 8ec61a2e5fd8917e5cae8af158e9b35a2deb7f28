@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f06142bc_053e31dd",
+        "filename": "simpleperf/event_selection_set.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-05-04T17:43:32Z",
+      "side": 1,
+      "message": "surely this isn\u0027t right?\n\nmight it be clearer to lose all the member functions on EventSelection and just have EventSelectionSet do the work? i\u0027m not sure EventSelection is adding any value. it just seems like another place to have to jump to to understand what\u0027s going on, and a place to introduce bugs like this.",
+      "revId": "8ec61a2e5fd8917e5cae8af158e9b35a2deb7f28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "105fb6fa_f83d66e1",
+        "filename": "simpleperf/record.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-05-04T17:43:32Z",
+      "side": 1,
+      "message": "i\u0027m confused about the \"copy\" here. is this is binary format or not? why wouldn\u0027t you want to refer to perf_event_attr?",
+      "revId": "8ec61a2e5fd8917e5cae8af158e9b35a2deb7f28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7042b231_ff946740",
+        "filename": "simpleperf/record.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-05-04T17:43:32Z",
+      "side": 1,
+      "message": "that\u0027s much clearer!",
+      "revId": "8ec61a2e5fd8917e5cae8af158e9b35a2deb7f28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
