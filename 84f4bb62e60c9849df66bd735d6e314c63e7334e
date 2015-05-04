@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "7042b231_658b8ab8",
+        "filename": "simpleperf/cmd_stat.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-05-04T18:44:38Z",
+      "side": 1,
+      "message": "I think what I really need to register is a callback function, which I can call multiple times. But c++ programming habit makes me prefer to relying on constructor/destructors of objects.",
+      "parentUuid": "f06142bc_eaa90ae1",
+      "revId": "84f4bb62e60c9849df66bd735d6e314c63e7334e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "105fb6fa_6deefd04",
         "filename": "simpleperf/event_attr.h",
         "patchSetId": 8
@@ -277,6 +295,24 @@
       "side": 1,
       "message": "this won\u0027t help you if something changes though. you\u0027d be better off moving the CHECK_EQ out of the \u0027if\u0027 above, and checking in both cases.",
       "parentUuid": "f06142bc_0a671e23",
+      "revId": "84f4bb62e60c9849df66bd735d6e314c63e7334e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f06142bc_05dab165",
+        "filename": "simpleperf/record.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-05-04T18:44:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7042b231_3f550f21",
       "revId": "84f4bb62e60c9849df66bd735d6e314c63e7334e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
