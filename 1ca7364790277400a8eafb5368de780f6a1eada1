@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "102df676_944fc191",
+        "filename": "simpleperf/environment.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-05-05T20:28:00Z",
+      "side": 1,
+      "message": "changed. I didn\u0027t consider that unprivileged user should also be able to read /proc/kallsyms.",
+      "parentUuid": "d026fe9b_e1ee7db7",
+      "revId": "1ca7364790277400a8eafb5368de780f6a1eada1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d026fe9b_e152fdec",
         "filename": "simpleperf/environment.cpp",
         "patchSetId": 2
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "b0218a87_599af3ba",
+        "filename": "simpleperf/environment.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-05-05T20:28:00Z",
+      "side": 1,
+      "message": "changed. using %c needs exact space between items. I am not very confident about it.",
+      "parentUuid": "d026fe9b_e152fdec",
+      "revId": "1ca7364790277400a8eafb5368de780f6a1eada1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "102df676_d9617410",
         "filename": "simpleperf/environment.cpp",
         "patchSetId": 2
@@ -47,6 +83,24 @@
       "writtenOn": "2015-05-05T17:51:28Z",
       "side": 1,
       "message": "you\u0027re storing the address of a local in your struct here. you need to either strdup or switch to std::string.",
+      "revId": "1ca7364790277400a8eafb5368de780f6a1eada1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "102df676_9a360b5f",
+        "filename": "simpleperf/environment.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-05-05T20:28:00Z",
+      "side": 1,
+      "message": "but the struct variable symbol has the same scope as module/name, I think we don\u0027t need to alloc/free std::string on heap for each line if that is not necessary.",
+      "parentUuid": "102df676_d9617410",
       "revId": "1ca7364790277400a8eafb5368de780f6a1eada1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -87,6 +141,24 @@
     },
     {
       "key": {
+        "uuid": "d026fe9b_d79a236e",
+        "filename": "simpleperf/environment.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-05-05T20:28:00Z",
+      "side": 1,
+      "message": "comment added. no /proc/modules on android device. so I don\u0027t print error if can\u0027t open it.",
+      "parentUuid": "102df676_596e64fd",
+      "revId": "1ca7364790277400a8eafb5368de780f6a1eada1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b0218a87_4ec307a7",
         "filename": "simpleperf/environment.cpp",
         "patchSetId": 2
@@ -98,6 +170,24 @@
       "writtenOn": "2015-05-05T17:51:28Z",
       "side": 1,
       "message": "what if there\u0027s another hex value in the middle? can\u0027t you give sscanf the exact format string?",
+      "revId": "1ca7364790277400a8eafb5368de780f6a1eada1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b0218a87_f419e6b0",
+        "filename": "simpleperf/environment.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-05-05T20:28:00Z",
+      "side": 1,
+      "message": "good consideration. I think rfind or sscanf both work here.",
+      "parentUuid": "b0218a87_4ec307a7",
       "revId": "1ca7364790277400a8eafb5368de780f6a1eada1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -121,6 +211,24 @@
     },
     {
       "key": {
+        "uuid": "d026fe9b_1753dbc0",
+        "filename": "simpleperf/environment.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-05-05T20:28:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d026fe9b_81bdc946",
+      "revId": "1ca7364790277400a8eafb5368de780f6a1eada1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "102df676_39053014",
         "filename": "simpleperf/environment.cpp",
         "patchSetId": 2
@@ -132,6 +240,24 @@
       "writtenOn": "2015-05-05T17:51:28Z",
       "side": 1,
       "message": "do you know that there\u0027s another caller of ProcessModules coming later? otherwise this is all more complicated than it needs to be.",
+      "revId": "1ca7364790277400a8eafb5368de780f6a1eada1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d026fe9b_b243f573",
+        "filename": "simpleperf/environment.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-05-05T20:28:00Z",
+      "side": 1,
+      "message": "no. Done.",
+      "parentUuid": "102df676_39053014",
       "revId": "1ca7364790277400a8eafb5368de780f6a1eada1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -155,6 +281,24 @@
     },
     {
       "key": {
+        "uuid": "d026fe9b_d7fea3e5",
+        "filename": "simpleperf/environment.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-05-05T20:28:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b0218a87_4e4ce7ce",
+      "revId": "1ca7364790277400a8eafb5368de780f6a1eada1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "102df676_59290483",
         "filename": "simpleperf/environment.cpp",
         "patchSetId": 2
@@ -166,6 +310,24 @@
       "writtenOn": "2015-05-05T17:51:28Z",
       "side": 1,
       "message": "this isn\u0027t going to be useful on Android, but we can worry about that later.",
+      "revId": "1ca7364790277400a8eafb5368de780f6a1eada1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d026fe9b_72adfd95",
+        "filename": "simpleperf/environment.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-05-05T20:28:00Z",
+      "side": 1,
+      "message": "Yes, both /proc/modules and /lib/modules don\u0027t work. addresses in /proc/kallsyms are all 0, which is not useful.",
+      "parentUuid": "102df676_59290483",
       "revId": "1ca7364790277400a8eafb5368de780f6a1eada1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -189,6 +351,24 @@
     },
     {
       "key": {
+        "uuid": "d026fe9b_d2eeb1b7",
+        "filename": "simpleperf/environment.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-05-05T20:28:00Z",
+      "side": 1,
+      "message": "it means adding another function besides GetEntriesInDir. I think I need to change the interface of GetEntriesInDir.",
+      "parentUuid": "d026fe9b_619d2db1",
+      "revId": "1ca7364790277400a8eafb5368de780f6a1eada1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d026fe9b_2186d561",
         "filename": "simpleperf/environment_test.cpp",
         "patchSetId": 2
@@ -200,6 +380,24 @@
       "writtenOn": "2015-05-05T17:51:28Z",
       "side": 1,
       "message": "existent",
+      "revId": "1ca7364790277400a8eafb5368de780f6a1eada1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b0218a87_3965378f",
+        "filename": "simpleperf/environment_test.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-05-05T20:28:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d026fe9b_2186d561",
       "revId": "1ca7364790277400a8eafb5368de780f6a1eada1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -223,6 +421,24 @@
     },
     {
       "key": {
+        "uuid": "d026fe9b_5c657a8d",
+        "filename": "simpleperf/utils.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-05-05T20:28:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d026fe9b_fcd9c671",
+      "revId": "1ca7364790277400a8eafb5368de780f6a1eada1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "102df676_d96b349f",
         "filename": "simpleperf/utils.h",
         "patchSetId": 2
@@ -234,6 +450,24 @@
       "writtenOn": "2015-05-05T17:51:28Z",
       "side": 1,
       "message": "s/are//",
+      "revId": "1ca7364790277400a8eafb5368de780f6a1eada1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "102df676_99e53c4f",
+        "filename": "simpleperf/utils.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-05-05T20:28:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "102df676_d96b349f",
       "revId": "1ca7364790277400a8eafb5368de780f6a1eada1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
