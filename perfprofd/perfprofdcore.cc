@@ -174,8 +174,10 @@ void ConfigReader::addDefaultEntries()
 
   // Destination directory (where to write profiles). This location
   // chosen since it is accessible to the uploader service.
-  addStringEntry("destination_directory",
-                 "/data/data/com.google.android.gms/files");
+  addStringEntry("destination_directory", "/data/misc/perfprofd");
+
+  // Config directory (where to read configs).
+  addStringEntry("config_directory", "/data/data/com.google.android.gms/files");
 
   // Full path to 'perf' executable.
   addStringEntry("perf_path", "/system/xbin/simpleperf");
@@ -443,7 +445,7 @@ const char *profile_result_to_string(PROFILE_RESULT result)
 //
 static void read_aux_config(ConfigReader &config)
 {
-  std::string destConfig(config.getStringValue("destination_directory"));
+  std::string destConfig(config.getStringValue("config_directory"));
   destConfig += "/perfprofd.conf";
   FILE *fp = fopen(destConfig.c_str(), "r");
   if (fp) {
@@ -473,7 +475,7 @@ static CKPROFILE_RESULT check_profiling_enabled(ConfigReader &config)
   //
   // Check for the existence of the destination directory
   //
-  std::string destdir = config.getStringValue("destination_directory");
+  std::string destdir = config.getStringValue("config_directory");
   DIR* dir = opendir(destdir.c_str());
   if (!dir) {
     W_ALOGW("unable to open destination directory %s: (%s)",
