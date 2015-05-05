@@ -16,6 +16,7 @@
 
 #include <gtest/gtest.h>
 
+#include <string.h>
 #include "environment.h"
 #include "event_attr.h"
 #include "event_fd.h"
@@ -41,6 +42,13 @@ class RecordFileTest : public ::testing::Test {
   std::vector<std::unique_ptr<EventFd>> event_fds;
 };
 
+void CheckRecordEqual(const MmapRecord& r1, const MmapRecord& r2) {
+  ASSERT_EQ(0, memcmp(&r1.header, &r2.header, sizeof(r1.header)));
+  ASSERT_EQ(0, memcmp(&r1.sample_id, &r2.sample_id, sizeof(r1.sample_id)));
+  ASSERT_EQ(0, memcmp(&r1.data, &r2.data, sizeof(r1.data)));
+  ASSERT_EQ(r1.filename, r2.filename);
+}
+
 TEST_F(RecordFileTest, smoke) {
   // Write to a record file.
   std::unique_ptr<RecordFileWriter> writer =
@@ -48,9 +56,8 @@ TEST_F(RecordFileTest, smoke) {
   ASSERT_TRUE(writer != nullptr);
 
   // Write Data section.
-  MmapRecord mmap_record;
-  mmap_record.header.type = PERF_RECORD_MMAP;
-  mmap_record.header.size = sizeof(mmap_record);
+  MmapRecord mmap_record =
+      CreateMmapRecord(event_attr, true, 1, 1, 0x1000, 0x2000, 0x3000, "mmap_record_example");
   ASSERT_TRUE(writer->WriteData(mmap_record.BinaryFormat()));
   ASSERT_TRUE(writer->Close());
 
@@ -69,6 +76,7 @@ TEST_F(RecordFileTest, smoke) {
   std::vector<std::unique_ptr<const Record>> records = reader->DataSection();
   ASSERT_EQ(1u, records.size());
   ASSERT_EQ(mmap_record.header.type, records[0]->header.type);
+  CheckRecordEqual(mmap_record, *static_cast<const MmapRecord*>(records[0].get()));
 
   ASSERT_TRUE(reader->Close());
 }
