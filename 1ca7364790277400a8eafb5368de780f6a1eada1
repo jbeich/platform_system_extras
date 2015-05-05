@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "b0218a87_ffe1bf4d",
+        "filename": "simpleperf/environment.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-05-05T20:49:04Z",
+      "side": 1,
+      "message": "did you check the corresponding format string in the kernel? that\u0027s what i usually do. i\u0027ve never had one of those change, and i think they know they\u0027d break a lot of code if they did.",
+      "parentUuid": "b0218a87_599af3ba",
+      "revId": "1ca7364790277400a8eafb5368de780f6a1eada1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "102df676_d9617410",
         "filename": "simpleperf/environment.cpp",
         "patchSetId": 2
@@ -101,6 +119,24 @@
       "side": 1,
       "message": "but the struct variable symbol has the same scope as module/name, I think we don\u0027t need to alloc/free std::string on heap for each line if that is not necessary.",
       "parentUuid": "102df676_d9617410",
+      "revId": "1ca7364790277400a8eafb5368de780f6a1eada1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b0218a87_7fceafdf",
+        "filename": "simpleperf/environment.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-05-05T20:49:04Z",
+      "side": 1,
+      "message": "oh, yeah, i didn\u0027t notice that. i just assumed we were collecting these.",
+      "parentUuid": "102df676_9a360b5f",
       "revId": "1ca7364790277400a8eafb5368de780f6a1eada1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
