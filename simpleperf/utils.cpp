@@ -16,9 +16,11 @@
 
 #include "utils.h"
 
+#include <dirent.h>
 #include <errno.h>
 #include <stdarg.h>
 #include <stdio.h>
+#include <sys/stat.h>
 #include <unistd.h>
 
 #include <base/logging.h>
@@ -43,4 +45,35 @@ bool NextArgumentOrError(const std::vector<std::string>& args, size_t* pi) {
   }
   ++*pi;
   return true;
+}
+
+std::vector<std::string> GetEntriesInDir(std::string dirpath) {
+  if (dirpath.back() != '/') {
+    dirpath += "/";
+  }
+  std::vector<std::string> result;
+  DIR* dir = opendir(dirpath.c_str());
+  if (dir == nullptr) {
+    PLOG(DEBUG) << "can't open dir " << dirpath;
+    return result;
+  }
+  dirent entry, *entry_p;
+  while (readdir_r(dir, &entry, &entry_p) == 0 && entry_p != nullptr) {
+    std::string subname = entry_p->d_name;
+    if (subname == "." || subname == "..") {
+      continue;
+    }
+    std::string subpath = dirpath + subname;
+    struct stat st;
+    if (stat(subpath.c_str(), &st) != 0) {
+      PLOG(DEBUG) << "stat() failed for " << subpath;
+      continue;
+    }
+    if (S_ISDIR(st.st_mode)) {
+      subname += "/";
+    }
+    result.push_back(subname);
+  }
+  closedir(dir);
+  return result;
 }

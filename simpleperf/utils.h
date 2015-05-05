@@ -23,7 +23,7 @@
 #include <string>
 #include <vector>
 
-void PrintIndented(size_t indent, const char* fmt, ...);
+#define ALIGN(value, alignment) (((value) + (alignment)-1) & ~((alignment)-1))
 
 class LineReader {
  public:
@@ -52,10 +52,13 @@ class LineReader {
   size_t bufsize_;
 };
 
+void PrintIndented(size_t indent, const char* fmt, ...);
+
 bool IsPowerOfTwo(uint64_t value);
 
 bool NextArgumentOrError(const std::vector<std::string>& args, size_t* pi);
 
-#define ALIGN(value, alignment) (((value) + (alignment)-1) & ~((alignment)-1))
+// Return file names and subdir names in a directory. subdir names are end with '/'.
+std::vector<std::string> GetEntriesInDir(std::string dirpath);
 
 #endif  // SIMPLE_PERF_UTILS_H_
