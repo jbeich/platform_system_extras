@@ -1,0 +1,242 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d026fe9b_e1ee7db7",
+        "filename": "simpleperf/environment.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-05-05T17:51:28Z",
+      "side": 1,
+      "message": "ERROR? this isn\u0027t expected behavior is it?",
+      "revId": "1ca7364790277400a8eafb5368de780f6a1eada1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d026fe9b_e152fdec",
+        "filename": "simpleperf/environment.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-05-05T17:51:28Z",
+      "side": 1,
+      "message": "should you have used %c instead?",
+      "revId": "1ca7364790277400a8eafb5368de780f6a1eada1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "102df676_d9617410",
+        "filename": "simpleperf/environment.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-05-05T17:51:28Z",
+      "side": 1,
+      "message": "you\u0027re storing the address of a local in your struct here. you need to either strdup or switch to std::string.",
+      "revId": "1ca7364790277400a8eafb5368de780f6a1eada1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b0218a87_aefe3be4",
+        "filename": "simpleperf/environment.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-05-05T17:51:28Z",
+      "side": 1,
+      "message": "you could probably use an empty std::string just fine.",
+      "revId": "1ca7364790277400a8eafb5368de780f6a1eada1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "102df676_596e64fd",
+        "filename": "simpleperf/environment.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-05-05T17:51:28Z",
+      "side": 1,
+      "message": "ERROR",
+      "revId": "1ca7364790277400a8eafb5368de780f6a1eada1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b0218a87_4ec307a7",
+        "filename": "simpleperf/environment.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-05-05T17:51:28Z",
+      "side": 1,
+      "message": "what if there\u0027s another hex value in the middle? can\u0027t you give sscanf the exact format string?",
+      "revId": "1ca7364790277400a8eafb5368de780f6a1eada1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d026fe9b_81bdc946",
+        "filename": "simpleperf/environment.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-05-05T17:51:28Z",
+      "side": 1,
+      "message": "android::base::ReadFileToString is probably a better choice here.",
+      "revId": "1ca7364790277400a8eafb5368de780f6a1eada1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "102df676_39053014",
+        "filename": "simpleperf/environment.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-05-05T17:51:28Z",
+      "side": 1,
+      "message": "do you know that there\u0027s another caller of ProcessModules coming later? otherwise this is all more complicated than it needs to be.",
+      "revId": "1ca7364790277400a8eafb5368de780f6a1eada1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b0218a87_4e4ce7ce",
+        "filename": "simpleperf/environment.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-05-05T17:51:28Z",
+      "side": 1,
+      "message": "you could probably just have GetLinuxVersion return std::string and CHECK if something goes wrong. you\u0027re unlikely to get much further if you can\u0027t even read /proc/version (or you\u0027re not actually on Linux!).",
+      "revId": "1ca7364790277400a8eafb5368de780f6a1eada1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "102df676_59290483",
+        "filename": "simpleperf/environment.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-05-05T17:51:28Z",
+      "side": 1,
+      "message": "this isn\u0027t going to be useful on Android, but we can worry about that later.",
+      "revId": "1ca7364790277400a8eafb5368de780f6a1eada1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d026fe9b_619d2db1",
+        "filename": "simpleperf/environment.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-05-05T17:51:28Z",
+      "side": 1,
+      "message": "aren\u0027t you just making life hard for yourself here? why don\u0027t you just return the directories, since that\u0027s all you want anyway?",
+      "revId": "1ca7364790277400a8eafb5368de780f6a1eada1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d026fe9b_2186d561",
+        "filename": "simpleperf/environment_test.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-05-05T17:51:28Z",
+      "side": 1,
+      "message": "existent",
+      "revId": "1ca7364790277400a8eafb5368de780f6a1eada1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d026fe9b_fcd9c671",
+        "filename": "simpleperf/utils.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-05-05T17:51:28Z",
+      "side": 1,
+      "message": "you shouldn\u0027t need to do this. dirent::d_type should be enough.",
+      "revId": "1ca7364790277400a8eafb5368de780f6a1eada1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "102df676_d96b349f",
+        "filename": "simpleperf/utils.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-05-05T17:51:28Z",
+      "side": 1,
+      "message": "s/are//",
+      "revId": "1ca7364790277400a8eafb5368de780f6a1eada1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
