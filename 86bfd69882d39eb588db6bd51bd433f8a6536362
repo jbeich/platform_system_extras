@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0d595d45_8bbe710e",
+        "filename": "simpleperf/Android.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-05-06T13:18:29Z",
+      "side": 1,
+      "message": "Why static libraries? Seems like shared libraries would be a much better option for final system image size",
+      "range": {
+        "startLine": 25,
+        "startChar": 2,
+        "endLine": 30,
+        "endChar": 16
+      },
+      "revId": "86bfd69882d39eb588db6bd51bd433f8a6536362",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0d595d45_cbb46934",
+        "filename": "simpleperf/cmd_dumprecord.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-05-06T13:18:29Z",
+      "side": 1,
+      "message": "leftover debugging printf?",
+      "range": {
+        "startLine": 173,
+        "startChar": 4,
+        "endLine": 173,
+        "endChar": 10
+      },
+      "revId": "86bfd69882d39eb588db6bd51bd433f8a6536362",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
