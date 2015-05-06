@@ -38,5 +38,6 @@ TEST_F(DumpRecordCommandTest, no_options) {
 
 TEST_F(DumpRecordCommandTest, record_file_option) {
   ASSERT_TRUE(record_cmd->Run({"record", "-a", "-o", "perf2.data", "sleep", "1"}));
+  fprintf(stderr, "record over\n");
   ASSERT_TRUE(dumprecord_cmd->Run({"dump", "perf2.data"}));
 }
