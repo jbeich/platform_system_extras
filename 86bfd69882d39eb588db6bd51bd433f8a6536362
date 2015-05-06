@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "ed5b293d_70b8c609",
+        "filename": "simpleperf/Android.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-05-06T19:46:43Z",
+      "side": 1,
+      "message": "OK, much better (123K instead of 1.3M binary). Thanks.",
+      "parentUuid": "8d1e2d58_6a3f98d9",
+      "range": {
+        "startLine": 25,
+        "startChar": 2,
+        "endLine": 30,
+        "endChar": 16
+      },
+      "revId": "86bfd69882d39eb588db6bd51bd433f8a6536362",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0d595d45_cbb46934",
         "filename": "simpleperf/cmd_dumprecord.cpp",
         "patchSetId": 2
