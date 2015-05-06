@@ -22,6 +22,14 @@ simpleperf_common_static_libraries := \
   libbase \
   libcutils \
   liblog \
+  libLLVMObject \
+  libLLVMBitReader \
+  libLLVMMC \
+  libLLVMMCParser \
+  libLLVMCore \
+  libLLVMSupport \
+
+LLVM_ROOT_PATH := external/llvm
 
 libsimpleperf_src_files := \
   cmd_dumprecord.cpp \
@@ -35,6 +43,7 @@ libsimpleperf_src_files := \
   event_fd.cpp \
   event_selection_set.cpp \
   event_type.cpp \
+  read_elf.cpp \
   record.cpp \
   record_file.cpp \
   utils.cpp \
@@ -49,6 +58,8 @@ LOCAL_MODULE := libsimpleperf
 LOCAL_MODULE_TAGS := debug
 LOCAL_MODULE_PATH := $(TARGET_OUT_OPTIONAL_EXECUTABLES)
 LOCAL_ADDITIONAL_DEPENDENCIES := $(LOCAL_PATH)/Android.mk
+include $(LLVM_ROOT_PATH)/llvm.mk
+include $(LLVM_DEVICE_BUILD_MK)
 include $(BUILD_STATIC_LIBRARY)
 
 ifeq ($(HOST_OS),linux)
@@ -61,6 +72,8 @@ LOCAL_LDLIBS := -lrt
 LOCAL_MODULE := libsimpleperf
 LOCAL_MODULE_TAGS := optional
 LOCAL_ADDITIONAL_DEPENDENCIES := $(LOCAL_PATH)/Android.mk
+include $(LLVM_ROOT_PATH)/llvm.mk
+include $(LLVM_HOST_BUILD_MK)
 include $(BUILD_HOST_STATIC_LIBRARY)
 endif
 
@@ -74,6 +87,8 @@ LOCAL_MODULE := simpleperf
 LOCAL_MODULE_TAGS := debug
 LOCAL_MODULE_PATH := $(TARGET_OUT_OPTIONAL_EXECUTABLES)
 LOCAL_ADDITIONAL_DEPENDENCIES := $(LOCAL_PATH)/Android.mk
+include $(LLVM_ROOT_PATH)/llvm.mk
+include $(LLVM_DEVICE_BUILD_MK)
 include $(BUILD_EXECUTABLE)
 
 ifeq ($(HOST_OS),linux)
@@ -87,6 +102,8 @@ LOCAL_LDLIBS := -lrt
 LOCAL_MODULE := simpleperf
 LOCAL_MODULE_TAGS := optional
 LOCAL_ADDITIONAL_DEPENDENCIES := $(LOCAL_PATH)/Android.mk
+include $(LLVM_ROOT_PATH)/llvm.mk
+include $(LLVM_HOST_BUILD_MK)
 include $(BUILD_HOST_EXECUTABLE)
 endif
 
@@ -110,6 +127,8 @@ LOCAL_WHOLE_STATIC_LIBRARIES := libsimpleperf
 LOCAL_STATIC_LIBRARIES := $(simpleperf_common_static_libraries)
 LOCAL_MODULE := simpleperf_unit_test
 LOCAL_MODULE_TAGS := optional
+include $(LLVM_ROOT_PATH)/llvm.mk
+include $(LLVM_DEVICE_BUILD_MK)
 LOCAL_ADDITIONAL_DEPENDENCIES := $(LOCAL_PATH)/Android.mk
 include $(BUILD_NATIVE_TEST)
 
@@ -123,5 +142,7 @@ LOCAL_STATIC_LIBRARIES := $(simpleperf_common_static_libraries)
 LOCAL_MODULE := simpleperf_unit_test
 LOCAL_MODULE_TAGS := optional
 LOCAL_ADDITIONAL_DEPENDENCIES := $(LOCAL_PATH)/Android.mk
+include $(LLVM_ROOT_PATH)/llvm.mk
+include $(LLVM_HOST_BUILD_MK)
 include $(BUILD_HOST_NATIVE_TEST)
 endif
