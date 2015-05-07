@@ -56,7 +56,7 @@ static std::string dest_dir;
 static std::string encoded_file_path()
 {
   std::string path(dest_dir);
-  path += "/perf.data.encoded";
+  path += "/perf.data.encoded.0";
   return path;
 }
 
@@ -475,7 +475,7 @@ TEST_F(PerfProfdTest, BasicRunWithCannedPerf)
 
   // Kick off encoder and check return code
   PROFILE_RESULT result =
-      encode_to_proto(input_perf_data, encoded_file_path());
+      encode_to_proto(input_perf_data, encoded_file_path().c_str());
   EXPECT_EQ(OK_PROFILE_COLLECTION, result);
 
   // Read and decode the resulting perf.data.encoded file
