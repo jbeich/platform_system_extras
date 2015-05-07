@@ -31,6 +31,7 @@
 #include <string>
 #include <sstream>
 #include <map>
+#include <set>
 #include <cctype>
 
 #include <cutils/properties.h>
@@ -482,7 +483,7 @@ inline char* string_as_array(std::string* str) {
 }
 
 PROFILE_RESULT encode_to_proto(const std::string &data_file_path,
-                               const std::string &encoded_file_path)
+                               const char *encoded_file_path)
 {
   //
   // Open and read perf.data file
@@ -510,7 +511,7 @@ PROFILE_RESULT encode_to_proto(const std::string &data_file_path,
   //
   // Open file and write encoded data to it
   //
-  FILE *fp = fopen(encoded_file_path.c_str(), "w");
+  FILE *fp = fopen(encoded_file_path, "w");
   if (!fp) {
     return ERR_OPEN_ENCODED_FILE_FAILED;
   }
@@ -520,8 +521,7 @@ PROFILE_RESULT encode_to_proto(const std::string &data_file_path,
     return ERR_WRITE_ENCODED_FILE_FAILED;
   }
   fclose(fp);
-  chmod(encoded_file_path.c_str(),
-        S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH);
+  chmod(encoded_file_path, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH);
 
   return OK_PROFILE_COLLECTION;
 }
@@ -620,11 +620,71 @@ static PROFILE_RESULT invoke_perf(const std::string &perf_path,
 }
 
 //
+// Post-process after profile is collected and converted to protobuf.
+// * GMS core stores processed file sequence numbers in
+//   /data/data/com.google.android.gms/files/perfprofd_processed.txt
+// * Update /data/misc/perfprofd/perfprofd_produced.txt to remove the sequence
+//   numbers that has been processed and append the current seq number
+//
+static void post_process(const ConfigReader &config, int current_seq)
+{
+  std::string dest_dir = config.getStringValue("destination_directory");
+  std::string processed_file_path =
+      config.getStringValue("config_directory") + "/" + PROCESSED_FILENAME;
+  std::string produced_file_path = dest_dir + "/" + PRODUCED_FILENAME;
+
+  FILE *fp = fopen(processed_file_path.c_str(), "r");
+  if (fp == NULL) {
+    W_ALOGW("Cannot read %s", processed_file_path.c_str());
+    return;
+  }
+  int seq;
+  std::set<int> processed;
+  while(fscanf(fp, "%d\n", &seq) > 0) {
+    char buf[128];
+    snprintf(buf, 128, "%s/perf.data.encoded.%d", dest_dir.c_str(), seq);
+    if (remove(buf) == 0) {
+      processed.insert(seq);
+    } else {
+      W_ALOGW("Cannot remove %s", buf);
+    }
+  }
+  fclose(fp);
+
+  fp = fopen(produced_file_path.c_str(), "r");
+  if (fp == NULL) {
+    W_ALOGW("Cannot read %s", produced_file_path.c_str());
+    return;
+  }
+  std::set<int> produced;
+  produced.insert(current_seq);
+  while(fscanf(fp, "%d\n", &seq) > 0) {
+    if (processed.find(seq) == processed.end()) {
+      produced.insert(seq);
+    }
+  }
+  fclose(fp);
+
+  produced.insert(current_seq);
+
+  fp = fopen(produced_file_path.c_str(), "w");
+  if (fp == NULL) {
+    W_ALOGW("Cannot write %s", produced_file_path.c_str());
+    return;
+  }
+  for (std::set<int>::const_iterator iter = produced.begin();
+       iter != produced.end(); ++iter) {
+    fprintf(fp, "%d\n", *iter);
+  }
+  fclose(fp);
+}
+
+//
 // Collect a perf profile. Steps for this operation are:
 // - kick off 'perf record'
 // - read perf.data, convert to protocol buf
 //
-static PROFILE_RESULT collect_profile(ConfigReader &config)
+static PROFILE_RESULT collect_profile(const ConfigReader &config, int seq)
 {
   //
   // Form perf.data file name, perf error output file name
@@ -687,8 +747,9 @@ static PROFILE_RESULT collect_profile(ConfigReader &config)
   // Read the resulting perf.data file, encode into protocol buffer, then write
   // the result to the file perf.data.encoded
   //
-  std::string encoded_file_path(data_file_path);
-  encoded_file_path += ".encoded";
+  char encoded_file_path[128];
+  snprintf(encoded_file_path, 128, "%s.encoded.%d",
+           data_file_path.c_str(), seq);
   return encode_to_proto(data_file_path, encoded_file_path);
 }
 
@@ -786,6 +847,7 @@ int perfprofd_main(int argc, char** argv)
   }
 
   unsigned iterations = 0;
+  int seq = 0;
   while(config.getUnsignedValue("main_loop_iterations") == 0 ||
         iterations < config.getUnsignedValue("main_loop_iterations")) {
 
@@ -811,11 +873,12 @@ int perfprofd_main(int argc, char** argv)
     } else {
       // Kick off the profiling run...
       W_ALOGI("initiating profile collection");
-      PROFILE_RESULT result = collect_profile(config);
+      PROFILE_RESULT result = collect_profile(config, seq);
       if (result != OK_PROFILE_COLLECTION) {
         W_ALOGI("profile collection failed (%s)",
                 profile_result_to_string(result));
       } else {
+        post_process(config, seq++);
         W_ALOGI("profile collection complete");
       }
     }

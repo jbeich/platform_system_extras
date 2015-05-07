@@ -18,6 +18,14 @@
 // Semaphore file that indicates that the user is opting in
 #define SEMAPHORE_FILENAME "perf_profile_collection_enabled.txt"
 
+// File that stores a list of sequence numbers that has been processed
+// by GMS core
+#define PROCESSED_FILENAME "perfprofd_processed.txt"
+
+// File that stores a list of sequence numbers that has be produced
+// by perfprofd
+#define PRODUCED_FILENAME "perfprofd_produced.txt"
+
 // Main routine for perfprofd daemon
 extern int perfprofd_main(int argc, char **argv);
 
