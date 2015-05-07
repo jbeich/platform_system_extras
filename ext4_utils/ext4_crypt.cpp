@@ -38,7 +38,10 @@ struct ext4_encryption_policy {
 #define EXT4_ENCRYPTION_MODE_AES_256_XTS    1
 #define EXT4_ENCRYPTION_MODE_AES_256_CTS    4
 
-// ext4enc:TODO Get value from somewhere sensible
+// ext4enc:TODO Get these values from somewhere sensible
+#define EXT4_IOC_GET_ENCRYPTION_POLICY \
+    _IOW('f', 21, struct ext4_encryption_policy)
+
 #define EXT4_IOC_SET_ENCRYPTION_POLICY \
     _IOR('f', 19, struct ext4_encryption_policy)
 
@@ -77,11 +80,12 @@ int do_policy_set(const char *directory, const char *policy, int policy_length)
     ssize_t ret;
 
     if (policy_length != EXT4_KEY_DESCRIPTOR_SIZE) {
-        KLOG_ERROR("Policy wrong length\n");
+        KLOG_ERROR(TAG, "Policy wrong length\n");
         return -EINVAL;
     }
 
     if (!is_path_valid(directory)) {
+        KLOG_ERROR(TAG, "Directory %s does not exist\n", directory);
         return -EINVAL;
     }
 
@@ -91,36 +95,64 @@ int do_policy_set(const char *directory, const char *policy, int policy_length)
         return -EINVAL;
     }
 
-    if (!is_dir_empty(directory)) {
-        KLOG_ERROR(TAG, "Can only set policy on an empty directory (%s)\n",
-                   directory);
-        return -EINVAL;
-    }
-
     int fd = open(directory, O_DIRECTORY);
     if (fd == -1) {
         KLOG_ERROR(TAG, "Failed to open directory (%s)\n", directory);
         return -EINVAL;
     }
 
-    ext4_encryption_policy eep;
-    eep.version = 0;
-    eep.contents_encryption_mode = EXT4_ENCRYPTION_MODE_AES_256_XTS;
-    eep.filenames_encryption_mode = EXT4_ENCRYPTION_MODE_AES_256_CTS;
-    eep.flags = 0;
-    memcpy(eep.master_key_descriptor, policy, EXT4_KEY_DESCRIPTOR_SIZE);
-    ret = ioctl(fd, EXT4_IOC_SET_ENCRYPTION_POLICY, &eep);
-    auto preserve_errno = errno;
-    close(fd);
+    struct Closer {
+        Closer(int fd) : fd_(fd) {}
+        ~Closer() {close(fd_);}
+        int fd_;
+    };
 
+    Closer closer(fd);
+
+    ext4_encryption_policy eep_existing, eep_required;
+    eep_required.version = 0;
+    eep_required.contents_encryption_mode = EXT4_ENCRYPTION_MODE_AES_256_XTS;
+    eep_required.filenames_encryption_mode = EXT4_ENCRYPTION_MODE_AES_256_CTS;
+    eep_required.flags = 0;
+    memcpy(eep_required.master_key_descriptor, policy,
+           EXT4_KEY_DESCRIPTOR_SIZE);
+
+    //memcpy(&eep_existing, 0, sizeof(eep_existing));
+    memcpy(&eep_existing, &eep_required, sizeof(eep_existing));
+
+    ret = ioctl(fd, EXT4_IOC_GET_ENCRYPTION_POLICY, &eep_existing);
+    if (ret == 0) {
+        if (memcmp(&eep_existing, &eep_required, sizeof(eep_existing)) == 0) {
+            KLOG_INFO(TAG,
+                      "Encryption policy for %s already to %02x%02x%02x%02x\n",
+                      directory, policy[0], policy[1], policy[2], policy[3]);
+            return 0;
+        } else {
+            const char* existing = eep_existing.master_key_descriptor;
+            KLOG_ERROR(TAG,
+                      "Encryption policy for %s is %02x%02x%02x%02x",
+                      "which does not match %02x%02x%02x%02x",
+                      directory,
+                      existing[0], existing[1], existing[2], existing[3],
+                      policy[0], policy[1], policy[2], policy[3]);
+            return -EINVAL;
+        }
+    }
+
+    // ext4enc:TODO remove this!
+    KLOG_INFO(TAG, "Getting policy failed with message %s\n", strerror(errno));
+
+    ret = ioctl(fd, EXT4_IOC_SET_ENCRYPTION_POLICY, &eep_required);
     if (ret) {
         KLOG_ERROR(TAG, "Failed to set encryption policy for %s: %s\n",
-                   directory, strerror(preserve_errno));
+                   directory, strerror(errno));
         return -EINVAL;
     }
 
-    KLOG_INFO(TAG, "Encryption policy for %s is set to %02x%02x%02x%02x\n",
+    KLOG_INFO(TAG,
+              "Encryption policy for %s is set to %02x%02x%02x%02x\n",
               directory, policy[0], policy[1], policy[2], policy[3]);
+
     return 0;
 }
 

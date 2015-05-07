@@ -3,12 +3,14 @@
 #include "ext4_crypt_init_extensions.h"
 
 #include <string>
+#include <sstream>
 
 #include <dirent.h>
 #include <errno.h>
 #include <sys/mount.h>
 #include <sys/stat.h>
 
+#include <cutils/android_reboot.h>
 #include <cutils/klog.h>
 #include <cutils/properties.h>
 #include <cutils/sockets.h>
@@ -86,7 +88,7 @@ static std::string vold_command(std::string const& command)
     // it should be OK unless someone is running vdc at the same time.
     // Worst case we force a reboot in the very rare synchronization
     // error
-    return std::string(buffer, rc);
+    return std::string(buffer, rc - 1);
 }
 
 int e4crypt_create_device_key(const char* dir,
@@ -109,9 +111,11 @@ int e4crypt_create_device_key(const char* dir,
     }
 
     auto result = vold_command("cryptfs enablefilecrypto");
-    // ext4enc:TODO proper error handling
-    KLOG_INFO(TAG, "enablefilecrypto returned with result %s\n",
-              result.c_str());
+    if (result != "200 42 0") {
+        KLOG_ERROR(TAG, "enablefilecrypto returned with result \"%s\", %d\n",
+                   result.c_str(), result.size());
+        return -1;
+    }
 
     return 0;
 }
@@ -148,13 +152,30 @@ int e4crypt_set_directory_policy(const char* dir)
         return 0;
     }
 
-    KLOG_INFO(TAG, "Setting policy on %s\n", dir);
     int result = do_policy_set(dir, policy.c_str(), policy.size());
-    if (result) {
-        KLOG_ERROR(TAG, "Setting %s policy on %s failed!\n",
-                   policy.c_str(), dir);
-        return -1;
+    if (!result) {
+        return 0;
     }
 
-    return 0;
+    KLOG_ERROR(TAG,
+               "Setting %02x%02x%02x%02xs policy on %s failed!"
+               " Delete folder and retry\n",
+               policy[0], policy[1], policy[2], policy[3], dir);
+
+    system((std::string() + "exec rm -rf " + dir + "/*").c_str());
+    system((std::string() + "exec rm -rf " + dir + "/.*").c_str());
+
+    result = do_policy_set(dir, policy.c_str(), policy.size());
+    if (!result) {
+        return 0;
+    }
+
+    KLOG_ERROR(TAG,
+               "Setting %02x%02x%02x%02xs policy on %s still failed!"
+               " Reboot to factory reset ...\n",
+               policy[0], policy[1], policy[2], policy[3], dir);
+
+    android_reboot(ANDROID_RB_RESTART2, 0, "recovery");
+    while (true) { pause(); }  // never reached
+    return -1;
 }
