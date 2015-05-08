@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ed5b293d_51b33f7b",
+        "filename": "perfprofd/perfprofdcore.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 698,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-05-08T19:49:49Z",
+      "side": 1,
+      "message": "I think we need to adjust the protections here:\n\n  chmod(produced_file_path.c_str(), S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH);",
+      "revId": "c0ea7112da5b23addc1f22965abf393c447eac57",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
