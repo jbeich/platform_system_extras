@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6d2e5992_1ac76198",
+        "filename": "tests/net_test/iproute.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000451
+      },
+      "writtenOn": "2015-05-08T07:45:05Z",
+      "side": 1,
+      "message": "NDACacheInfo?",
+      "range": {
+        "startLine": 138,
+        "startChar": 5,
+        "endLine": 138,
+        "endChar": 17
+      },
+      "revId": "c4e38145ca0386ae4d6acbe6304337921c4e8042",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
