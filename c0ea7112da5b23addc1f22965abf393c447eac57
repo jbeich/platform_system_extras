@@ -2,6 +2,52 @@
   "comments": [
     {
       "key": {
+        "uuid": "ad921112_0c561f2f",
+        "filename": "perfprofd/perfprofdcore.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 646,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-05-09T01:26:49Z",
+      "side": 1,
+      "message": "have been",
+      "range": {
+        "startLine": 646,
+        "startChar": 18,
+        "endLine": 646,
+        "endChar": 26
+      },
+      "revId": "c0ea7112da5b23addc1f22965abf393c447eac57",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ad921112_ac528b37",
+        "filename": "perfprofd/perfprofdcore.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 667,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-05-09T01:26:49Z",
+      "side": 1,
+      "message": "There is a potential issue/problem here in cases where the collection interval is less than the upload interval (saw this during my testing). Let\u0027s suppose that perfprofd collects a new profile every 5 minutes, but the uploader uploads profiles only every 90 minutes.\n\n   Time 0:    perfprofd collects a set of profiles (let\u0027s say 0 - 9)\n   Time 90:   uploader runs, uploads all 10 profiles, writes 0 .. 9 to\n              the perfprofd_processed.txt file\n   Time 95:   perfprofd runs, cleans up stale profiles 0 - 9, produces 10\n   Time 100:  perfprofd runs again. At this point it will read the\n              perfprofd_processed.txt file, which still contains 0 .. 9.\n              It will try to remove the file for sequence number 0, but that\n              file was already removed at time 95 -- this will generate\n              a spurious \"Cannot remove\" error message.",
+      "range": {
+        "startLine": 667,
+        "startChar": 0,
+        "endLine": 667,
+        "endChar": 41
+      },
+      "revId": "c0ea7112da5b23addc1f22965abf393c447eac57",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ed5b293d_51b33f7b",
         "filename": "perfprofd/perfprofdcore.cc",
         "patchSetId": 3
@@ -13,6 +59,52 @@
       "writtenOn": "2015-05-08T19:49:49Z",
       "side": 1,
       "message": "I think we need to adjust the protections here:\n\n  chmod(produced_file_path.c_str(), S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH);",
+      "revId": "c0ea7112da5b23addc1f22965abf393c447eac57",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4d5fd527_ca17b8f8",
+        "filename": "perfprofd/perfprofdcore.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-05-09T01:26:49Z",
+      "side": 1,
+      "message": "Maybe add more detail, e.g. \n// File containing a list of sequence numbers corresponding to profiles\n// that have been processed/uploaded. Written by the GmsCore uploader,\n// within the GmsCore files directory.",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 14
+      },
+      "revId": "c0ea7112da5b23addc1f22965abf393c447eac57",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4d5fd527_aa1484f4",
+        "filename": "perfprofd/perfprofdcore.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-05-09T01:26:49Z",
+      "side": 1,
+      "message": "Typo \"that has be\"\n? Reword as \n// File containing a list of sequence numbers corresponding to profiles\n// that have been created by the perfprofd but not yet uploaded. Written\n// by perfprofd within the destination directory; consumed by GmsCore.",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 15
+      },
       "revId": "c0ea7112da5b23addc1f22965abf393c447eac57",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
