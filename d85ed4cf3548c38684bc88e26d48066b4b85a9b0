@@ -19,6 +19,75 @@
     },
     {
       "key": {
+        "uuid": "cd43c57f_7e4286ff",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2015-05-12T21:08:38Z",
+      "side": 1,
+      "message": "I wouldn\u0027t expect that all modules would have a build id, so I don\u0027t think it\u0027s correct to fail in this case.",
+      "range": {
+        "startLine": 342,
+        "startChar": 6,
+        "endLine": 342,
+        "endChar": 52
+      },
+      "revId": "d85ed4cf3548c38684bc88e26d48066b4b85a9b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ad3e91ea_ee97fdc0",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2015-05-12T21:08:38Z",
+      "side": 1,
+      "message": "Same as above, this isn\u0027t really an error. The elf file might be unreadable, it might not contain a build id, both are okay.",
+      "range": {
+        "startLine": 355,
+        "startChar": 6,
+        "endLine": 355,
+        "endChar": 65
+      },
+      "revId": "d85ed4cf3548c38684bc88e26d48066b4b85a9b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cd43c57f_54e68931",
+        "filename": "simpleperf/environment.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2015-05-12T21:08:38Z",
+      "side": 1,
+      "message": "I don\u0027t think we should consider this fatal. Also, if you have a case where a failure can occur and you are not going to error out, it\u0027s best to change this like all of the other functions that take build_id and return a bool.",
+      "range": {
+        "startLine": 356,
+        "startChar": 2,
+        "endLine": 356,
+        "endChar": 49
+      },
+      "revId": "d85ed4cf3548c38684bc88e26d48066b4b85a9b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2d338121_fb818ffe",
         "filename": "simpleperf/read_elf.cpp",
         "patchSetId": 3
@@ -30,6 +99,144 @@
       "writtenOn": "2015-05-12T17:03:15Z",
       "side": 1,
       "message": "this code might be clearer without the \u0027using\u0027s.",
+      "revId": "d85ed4cf3548c38684bc88e26d48066b4b85a9b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2d338121_408243d9",
+        "filename": "simpleperf/read_elf.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2015-05-12T21:08:38Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be p + 12 \u003c end since you are going to read 12 bytes?",
+      "range": {
+        "startLine": 45,
+        "startChar": 13,
+        "endLine": 45,
+        "endChar": 19
+      },
+      "revId": "d85ed4cf3548c38684bc88e26d48066b4b85a9b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2d338121_208bbfef",
+        "filename": "simpleperf/read_elf.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2015-05-12T21:08:38Z",
+      "side": 1,
+      "message": "Is this always 32 bit values even on a 64 bit system? I think it is, but I don\u0027t remember.",
+      "range": {
+        "startLine": 46,
+        "startChar": 44,
+        "endLine": 46,
+        "endChar": 52
+      },
+      "revId": "d85ed4cf3548c38684bc88e26d48066b4b85a9b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cd43c57f_b9242868",
+        "filename": "simpleperf/read_elf.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2015-05-12T21:08:38Z",
+      "side": 1,
+      "message": "Do you want to check that this p + namesz \u003c end?",
+      "range": {
+        "startLine": 56,
+        "startChar": 6,
+        "endLine": 56,
+        "endChar": 79
+      },
+      "revId": "d85ed4cf3548c38684bc88e26d48066b4b85a9b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ad3e91ea_d4773488",
+        "filename": "simpleperf/read_elf.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2015-05-12T21:08:38Z",
+      "side": 1,
+      "message": "This whole piece of code feels a bit awkward.\n\nWhy are you using the section name, why not just:\n\nfor (auto section \u003d elf-\u003ebegin_sections ...)\n\nAlso the elf-\u003egetSectionContents returning two different types of values is really odd.\n\nwhy not:\n\nauto contents \u003d elf-\u003egetSectionContents(section);\nif (contents.getError()) {\n  ...\n}\n\nif (GetBuildIdFromNoteSection(reinrepret_cast\u003cconst char*\u003e(contents-\u003edata()), contents-\u003esize(), build_id)) {\n  ...\n}\n\nIn fact, why don\u0027t you just pass the section into the GetBuildIdFromNoteSection rather than do all of this outside of that function?\n\nThe whole code would look like this:\n\nfor (auto section \u003d ...) {\n  if (section-\u003esh_type \u003d\u003d SHT_NOTE) {\n    if (GetBuildIdFromNoteSection(section, build_id)) {\n      return true;\n    }\n  }\n}",
+      "range": {
+        "startLine": 80,
+        "startChar": 0,
+        "endLine": 92,
+        "endChar": 5
+      },
+      "revId": "d85ed4cf3548c38684bc88e26d48066b4b85a9b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ad3e91ea_f43fd083",
+        "filename": "simpleperf/read_elf.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2015-05-12T21:08:38Z",
+      "side": 1,
+      "message": "This name is really confusing. It would be better to have:\n\nauto binary \u003d createBinary(...);\nif (binary.getError()) {\n  ...\n}",
+      "range": {
+        "startLine": 98,
+        "startChar": 7,
+        "endLine": 98,
+        "endChar": 20
+      },
+      "revId": "d85ed4cf3548c38684bc88e26d48066b4b85a9b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ad3e91ea_b47b883a",
+        "filename": "simpleperf/read_elf.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2015-05-12T21:08:38Z",
+      "side": 1,
+      "message": "This dyn_cast make me uncomfortable. Is there no way to have these object derived such that you can make a call to a pure virtual function to do this?\n\nAlso, do we really have four different elf formats you have to support? I thought we really only support two different formats.",
+      "range": {
+        "startLine": 105,
+        "startChar": 0,
+        "endLine": 105,
+        "endChar": 56
+      },
       "revId": "d85ed4cf3548c38684bc88e26d48066b4b85a9b0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
