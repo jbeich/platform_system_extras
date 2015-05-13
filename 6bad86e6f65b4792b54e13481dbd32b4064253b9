@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ad15b184_bf1367de",
+        "filename": "perfprofd/perfprofdcore.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 663,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-05-13T17:16:53Z",
+      "side": 1,
+      "message": "no need for fixed-size buffers. android::base::StringPrintf.\n\n(looks like you already have a function for this anyway.)",
+      "revId": "6bad86e6f65b4792b54e13481dbd32b4064253b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ad15b184_df33c36e",
+        "filename": "perfprofd/perfprofdcore.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 773,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-05-13T17:16:53Z",
+      "side": 1,
+      "message": "likewise.",
+      "revId": "6bad86e6f65b4792b54e13481dbd32b4064253b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
