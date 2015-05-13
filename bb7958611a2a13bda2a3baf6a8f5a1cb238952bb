@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ad15b184_b69ee836",
+        "filename": "simpleperf/read_elf.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-05-13T23:17:20Z",
+      "side": 1,
+      "message": "Yes. I don\u0027t believe it can happen. So I prefer to make the effort processing it to the lowest level.",
+      "parentUuid": "ad15b184_e2dedf05",
+      "range": {
+        "startLine": 43,
+        "startChar": 4,
+        "endLine": 43,
+        "endChar": 12
+      },
+      "revId": "bb7958611a2a13bda2a3baf6a8f5a1cb238952bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ed2329ea_13370f5f",
         "filename": "simpleperf/read_elf.cpp",
         "patchSetId": 4
@@ -36,6 +60,30 @@
       "writtenOn": "2015-05-13T22:47:13Z",
       "side": 1,
       "message": "I think it would be better to get rid of this variable. You aren\u0027t really using this, and it really doesn\u0027t add anything to readability since you have an auto.",
+      "range": {
+        "startLine": 80,
+        "startChar": 4,
+        "endLine": 80,
+        "endChar": 38
+      },
+      "revId": "bb7958611a2a13bda2a3baf6a8f5a1cb238952bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ad15b184_b6d268d3",
+        "filename": "simpleperf/read_elf.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-05-13T23:17:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ed2329ea_13370f5f",
       "range": {
         "startLine": 80,
         "startChar": 4,
