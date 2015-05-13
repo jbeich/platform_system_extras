@@ -84,6 +84,30 @@
     },
     {
       "key": {
+        "uuid": "ad15b184_c7a135a6",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2015-05-13T22:47:13Z",
+      "side": 1,
+      "message": "I think logging it is okay.",
+      "parentUuid": "2d338121_a3c879f6",
+      "range": {
+        "startLine": 342,
+        "startChar": 6,
+        "endLine": 342,
+        "endChar": 52
+      },
+      "revId": "d85ed4cf3548c38684bc88e26d48066b4b85a9b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ad3e91ea_ee97fdc0",
         "filename": "simpleperf/cmd_record.cpp",
         "patchSetId": 3
