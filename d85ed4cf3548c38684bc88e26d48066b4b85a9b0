@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "cd43c57f_cf296284",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-05-13T00:40:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2d338121_3b0f7769",
+      "revId": "d85ed4cf3548c38684bc88e26d48066b4b85a9b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cd43c57f_7e4286ff",
         "filename": "simpleperf/cmd_record.cpp",
         "patchSetId": 3
@@ -30,6 +48,30 @@
       "writtenOn": "2015-05-12T21:08:38Z",
       "side": 1,
       "message": "I wouldn\u0027t expect that all modules would have a build id, so I don\u0027t think it\u0027s correct to fail in this case.",
+      "range": {
+        "startLine": 342,
+        "startChar": 6,
+        "endLine": 342,
+        "endChar": 52
+      },
+      "revId": "d85ed4cf3548c38684bc88e26d48066b4b85a9b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2d338121_a3c879f6",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-05-13T00:40:15Z",
+      "side": 1,
+      "message": "I agree. So I don\u0027t return false in this condition. Do you think it matters to remove the LOG(DEBUG)? Because it is not and error, and can only be seen when logging \u003c\u003d debugging level.",
+      "parentUuid": "cd43c57f_7e4286ff",
       "range": {
         "startLine": 342,
         "startChar": 6,
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "2d338121_c3ae5d13",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-05-13T00:40:15Z",
+      "side": 1,
+      "message": "Same answer as above.",
+      "parentUuid": "ad3e91ea_ee97fdc0",
+      "range": {
+        "startLine": 355,
+        "startChar": 6,
+        "endLine": 355,
+        "endChar": 65
+      },
+      "revId": "d85ed4cf3548c38684bc88e26d48066b4b85a9b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cd43c57f_54e68931",
         "filename": "simpleperf/environment.cpp",
         "patchSetId": 3
@@ -76,6 +142,30 @@
       "writtenOn": "2015-05-12T21:08:38Z",
       "side": 1,
       "message": "I don\u0027t think we should consider this fatal. Also, if you have a case where a failure can occur and you are not going to error out, it\u0027s best to change this like all of the other functions that take build_id and return a bool.",
+      "range": {
+        "startLine": 356,
+        "startChar": 2,
+        "endLine": 356,
+        "endChar": 49
+      },
+      "revId": "d85ed4cf3548c38684bc88e26d48066b4b85a9b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cd43c57f_0fd6aaec",
+        "filename": "simpleperf/environment.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-05-13T00:40:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cd43c57f_54e68931",
       "range": {
         "startLine": 356,
         "startChar": 2,
@@ -105,6 +195,24 @@
     },
     {
       "key": {
+        "uuid": "cd43c57f_8ac74896",
+        "filename": "simpleperf/read_elf.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-05-13T00:40:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2d338121_fb818ffe",
+      "revId": "d85ed4cf3548c38684bc88e26d48066b4b85a9b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2d338121_408243d9",
         "filename": "simpleperf/read_elf.cpp",
         "patchSetId": 3
@@ -116,6 +224,30 @@
       "writtenOn": "2015-05-12T21:08:38Z",
       "side": 1,
       "message": "Shouldn\u0027t this be p + 12 \u003c end since you are going to read 12 bytes?",
+      "range": {
+        "startLine": 45,
+        "startChar": 13,
+        "endLine": 45,
+        "endChar": 19
+      },
+      "revId": "d85ed4cf3548c38684bc88e26d48066b4b85a9b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2d338121_de291484",
+        "filename": "simpleperf/read_elf.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-05-13T00:40:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2d338121_408243d9",
       "range": {
         "startLine": 45,
         "startChar": 13,
@@ -151,6 +283,30 @@
     },
     {
       "key": {
+        "uuid": "2d338121_1e241ca9",
+        "filename": "simpleperf/read_elf.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-05-13T00:40:15Z",
+      "side": 1,
+      "message": "yes.",
+      "parentUuid": "2d338121_208bbfef",
+      "range": {
+        "startLine": 46,
+        "startChar": 44,
+        "endLine": 46,
+        "endChar": 52
+      },
+      "revId": "d85ed4cf3548c38684bc88e26d48066b4b85a9b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cd43c57f_b9242868",
         "filename": "simpleperf/read_elf.cpp",
         "patchSetId": 3
@@ -162,6 +318,30 @@
       "writtenOn": "2015-05-12T21:08:38Z",
       "side": 1,
       "message": "Do you want to check that this p + namesz \u003c end?",
+      "range": {
+        "startLine": 56,
+        "startChar": 6,
+        "endLine": 56,
+        "endChar": 79
+      },
+      "revId": "d85ed4cf3548c38684bc88e26d48066b4b85a9b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cd43c57f_cf668254",
+        "filename": "simpleperf/read_elf.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-05-13T00:40:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cd43c57f_b9242868",
       "range": {
         "startLine": 56,
         "startChar": 6,
@@ -197,6 +377,30 @@
     },
     {
       "key": {
+        "uuid": "2d338121_be137058",
+        "filename": "simpleperf/read_elf.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-05-13T00:40:15Z",
+      "side": 1,
+      "message": "elf-\u003ebegin_sections() returns iterator type, not Shdr*. If using (auto section \u003d elf-\u003ebegin_sections()), I need to write \"++section and elf-\u003egetSectionContents(\u0026*section)\".\n\nGetBuildIdFromNoteFile also calls GetBuildIdFromNoteSection, and GetBuildIdFromNoteFile doesn\u0027t have \"const Shdr\u003cELFT\u003e\" structure.",
+      "parentUuid": "ad3e91ea_d4773488",
+      "range": {
+        "startLine": 80,
+        "startChar": 0,
+        "endLine": 92,
+        "endChar": 5
+      },
+      "revId": "d85ed4cf3548c38684bc88e26d48066b4b85a9b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ad3e91ea_f43fd083",
         "filename": "simpleperf/read_elf.cpp",
         "patchSetId": 3
@@ -208,6 +412,30 @@
       "writtenOn": "2015-05-12T21:08:38Z",
       "side": 1,
       "message": "This name is really confusing. It would be better to have:\n\nauto binary \u003d createBinary(...);\nif (binary.getError()) {\n  ...\n}",
+      "range": {
+        "startLine": 98,
+        "startChar": 7,
+        "endLine": 98,
+        "endChar": 20
+      },
+      "revId": "d85ed4cf3548c38684bc88e26d48066b4b85a9b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2d338121_3eef6000",
+        "filename": "simpleperf/read_elf.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-05-13T00:40:15Z",
+      "side": 1,
+      "message": "Done. It is actually Error\u003cOwningBinary\u003cBinary\u003e\u003e, so I change it to owning_binary.",
+      "parentUuid": "ad3e91ea_f43fd083",
       "range": {
         "startLine": 98,
         "startChar": 7,
@@ -243,6 +471,30 @@
     },
     {
       "key": {
+        "uuid": "ad3e91ea_1a2ee339",
+        "filename": "simpleperf/read_elf.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-05-13T00:40:15Z",
+      "side": 1,
+      "message": "I guess dyn_cast is preferred by llvm. we can\u0027t process files types other than elf, and only ELF32LEObjectFile/ELF64LEObjectFile have getELFFile method. ELF32LEObjectFile/ELF64LEObjectFile are actually ELFObjectFile with templates, and getELFFile is not a virtual function.",
+      "parentUuid": "ad3e91ea_b47b883a",
+      "range": {
+        "startLine": 105,
+        "startChar": 0,
+        "endLine": 105,
+        "endChar": 56
+      },
+      "revId": "d85ed4cf3548c38684bc88e26d48066b4b85a9b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2d338121_db580b5c",
         "filename": "simpleperf/record_file.cpp",
         "patchSetId": 3
@@ -254,6 +506,24 @@
       "writtenOn": "2015-05-12T17:03:15Z",
       "side": 1,
       "message": "you don\u0027t use \u0027header\u0027 outside the loop.",
+      "revId": "d85ed4cf3548c38684bc88e26d48066b4b85a9b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2d338121_3ed9201c",
+        "filename": "simpleperf/record_file.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-05-13T00:40:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2d338121_db580b5c",
       "revId": "d85ed4cf3548c38684bc88e26d48066b4b85a9b0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
