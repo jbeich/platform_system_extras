@@ -32,6 +32,8 @@
 #include "perf_event.h"
 #include "utils.h"
 
+extern void DisableCpuHotplug();
+
 static int perf_event_open(perf_event_attr* attr, pid_t pid, int cpu, int group_fd,
                            unsigned long flags) {
   return syscall(__NR_perf_event_open, attr, pid, cpu, group_fd, flags);
@@ -46,6 +48,7 @@ std::unique_ptr<EventFd> EventFd::OpenEventFileForCpu(const perf_event_attr& att
 }
 
 std::unique_ptr<EventFd> EventFd::OpenEventFile(const perf_event_attr& attr, pid_t pid, int cpu) {
+  DisableCpuHotplug();
   perf_event_attr perf_attr = attr;
   std::string event_name = "unknown event";
   const EventType* event_type =

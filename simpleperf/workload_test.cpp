@@ -25,13 +25,17 @@ using namespace std::chrono;
 TEST(workload, smoke) {
   auto workload = Workload::CreateWorkload({"sleep", "1"});
   ASSERT_TRUE(workload != nullptr);
-  ASSERT_FALSE(workload->IsFinished());
+  bool finished;
+  ASSERT_TRUE(workload->CheckWorkState(&finished));
+  ASSERT_FALSE(finished);
   ASSERT_TRUE(workload->GetPid() != 0);
   auto start_time = steady_clock::now();
   ASSERT_TRUE(workload->Start());
-  ASSERT_FALSE(workload->IsFinished());
+  ASSERT_TRUE(workload->CheckWorkState(&finished));
+  ASSERT_FALSE(finished);
   workload->WaitFinish();
-  ASSERT_TRUE(workload->IsFinished());
+  ASSERT_TRUE(workload->CheckWorkState(&finished));
+  ASSERT_TRUE(finished);
   auto end_time = steady_clock::now();
   ASSERT_TRUE(end_time >= start_time + seconds(1));
 }

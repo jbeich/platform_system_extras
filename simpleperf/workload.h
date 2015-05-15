@@ -46,8 +46,10 @@ class Workload {
   }
 
   bool Start();
-  bool IsFinished();
-  void WaitFinish();
+
+  // Return false is something wrong happens.
+  bool CheckWorkState(bool* finished);
+  bool WaitFinish();
   pid_t GetPid() {
     return work_pid_;
   }
@@ -62,7 +64,7 @@ class Workload {
   }
 
   bool CreateNewProcess();
-  void WaitChildProcess(bool no_hang);
+  bool WaitChildProcess(bool no_hang);
 
   WorkState work_state_;
   std::vector<std::string> args_;

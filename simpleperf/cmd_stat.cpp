@@ -32,8 +32,9 @@
 #include "workload.h"
 
 static std::vector<std::string> default_measured_event_types{
-    "cpu-cycles", "stalled-cycles-frontend", "stalled-cycles-backend", "instructions",
-    "branch-instructions", "branch-misses", "task-clock", "context-switches", "page-faults",
+    "cpu-cycles",   "stalled-cycles-frontend", "stalled-cycles-backend",
+    "instructions", "branch-instructions",     "branch-misses",
+    "task-clock",   "context-switches",        "page-faults",
 };
 
 class StatCommandImpl {
@@ -103,7 +104,9 @@ bool StatCommandImpl::Run(const std::vector<std::string>& args) {
   if (!workload->Start()) {
     return false;
   }
-  workload->WaitFinish();
+  if (!workload->WaitFinish()) {
+    return false;
+  }
   auto end_time = std::chrono::steady_clock::now();
 
   // 6. Read and print counters.

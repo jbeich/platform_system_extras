@@ -46,16 +46,11 @@ static std::string BitsToString(const std::string& name, uint64_t bits,
 
 static std::string SampleTypeToString(uint64_t sample_type) {
   static std::vector<std::pair<int, std::string>> sample_type_names = {
-      {PERF_SAMPLE_IP, "ip"},
-      {PERF_SAMPLE_TID, "tid"},
-      {PERF_SAMPLE_TIME, "time"},
-      {PERF_SAMPLE_ADDR, "addr"},
-      {PERF_SAMPLE_READ, "read"},
-      {PERF_SAMPLE_CALLCHAIN, "callchain"},
-      {PERF_SAMPLE_ID, "id"},
-      {PERF_SAMPLE_CPU, "cpu"},
-      {PERF_SAMPLE_PERIOD, "period"},
-      {PERF_SAMPLE_STREAM_ID, "stream_id"},
+      {PERF_SAMPLE_IP, "ip"},         {PERF_SAMPLE_TID, "tid"},
+      {PERF_SAMPLE_TIME, "time"},     {PERF_SAMPLE_ADDR, "addr"},
+      {PERF_SAMPLE_READ, "read"},     {PERF_SAMPLE_CALLCHAIN, "callchain"},
+      {PERF_SAMPLE_ID, "id"},         {PERF_SAMPLE_CPU, "cpu"},
+      {PERF_SAMPLE_PERIOD, "period"}, {PERF_SAMPLE_STREAM_ID, "stream_id"},
       {PERF_SAMPLE_RAW, "raw"},
   };
   return BitsToString("sample_type", sample_type, sample_type_names);
