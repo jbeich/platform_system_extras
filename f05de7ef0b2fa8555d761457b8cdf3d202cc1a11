@@ -22,6 +22,30 @@
       "revId": "f05de7ef0b2fa8555d761457b8cdf3d202cc1a11",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cd8d8546_72001789",
+        "filename": "simpleperf/cpu_hotplug_device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-05-15T20:28:54Z",
+      "side": 1,
+      "message": "AFAI, there is no strong guarantee that mpdecision is killed before property_set() returns. Firstly, property_set calls send_prop_msg(), which wait 250ms at most. Secondly, the property_server sends acknowledgement (by close(s)) before handling control message. And in my experiment, if running \"setprop ctl.stop mpdecision \u0026\u0026 getprop init.svc.mpdecision\", there are small chances that mpdecision is not in stopped state. So I think it is safer to make sure mpdecision is stopped here.",
+      "parentUuid": "6de499f7_d07c8a33",
+      "range": {
+        "startLine": 35,
+        "startChar": 4,
+        "endLine": 35,
+        "endChar": 34
+      },
+      "revId": "f05de7ef0b2fa8555d761457b8cdf3d202cc1a11",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
