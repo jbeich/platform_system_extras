@@ -104,7 +104,9 @@ bool StatCommandImpl::Run(const std::vector<std::string>& args) {
   if (!workload->Start()) {
     return false;
   }
-  workload->WaitFinish();
+  if (!workload->WaitFinish()) {
+    return false;
+  }
   auto end_time = std::chrono::steady_clock::now();
 
   // 6. Read and print counters.

@@ -117,21 +117,27 @@ bool Workload::Start() {
   return true;
 }
 
-bool Workload::IsFinished() {
+bool Workload::CheckWorkState(bool* finished) {
   if (work_state_ == Started) {
-    WaitChildProcess(true);
+    if (!WaitChildProcess(true)) {
+      return false;
+    }
   }
-  return work_state_ == Finished;
+  *finished = (work_state_ == Finished);
+  return true;
 }
 
-void Workload::WaitFinish() {
+bool Workload::WaitFinish() {
   CHECK(work_state_ == Started || work_state_ == Finished);
   if (work_state_ == Started) {
-    WaitChildProcess(false);
+    if (!WaitChildProcess(false)) {
+      return false;
+    }
   }
+  return true;
 }
 
-void Workload::WaitChildProcess(bool no_hang) {
+bool Workload::WaitChildProcess(bool no_hang) {
   int status;
   pid_t result = TEMP_FAILURE_RETRY(waitpid(work_pid_, &status, (no_hang ? WNOHANG : 0)));
   if (result == work_pid_) {
@@ -142,6 +148,8 @@ void Workload::WaitChildProcess(bool no_hang) {
       LOG(ERROR) << "work process exited with exit code " << WEXITSTATUS(status);
     }
   } else if (result == -1) {
-    PLOG(FATAL) << "waitpid() failed";
+    PLOG(ERROR) << "waitpid() failed";
+    return false;
   }
+  return true;
 }

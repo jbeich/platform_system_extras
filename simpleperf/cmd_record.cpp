@@ -156,7 +156,11 @@ bool RecordCommandImpl::Run(const std::vector<std::string>& args) {
     if (!event_selection_set_.ReadMmapEventData(callback)) {
       return false;
     }
-    if (workload->IsFinished()) {
+    bool finished;
+    if (!workload->CheckWorkState(&finished)) {
+      return false;
+    }
+    if (finished) {
       break;
     }
     poll(&pollfds[0], pollfds.size(), -1);

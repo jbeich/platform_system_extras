@@ -20,6 +20,7 @@ simpleperf_common_cppflags := -std=c++11 -Wall -Wextra -Werror -Wunused
 
 simpleperf_common_shared_libraries := \
   libbase \
+  libcutils \
   libLLVM \
 
 LLVM_ROOT_PATH := external/llvm
@@ -45,7 +46,9 @@ libsimpleperf_src_files := \
 include $(CLEAR_VARS)
 LOCAL_CLANG := true
 LOCAL_CPPFLAGS := $(simpleperf_common_cppflags)
-LOCAL_SRC_FILES := $(libsimpleperf_src_files)
+LOCAL_SRC_FILES := $(libsimpleperf_src_files) \
+                   cpu_hotplug_device.cpp \
+
 LOCAL_SHARED_LIBRARIES := $(simpleperf_common_shared_libraries)
 LOCAL_MODULE := libsimpleperf
 LOCAL_MODULE_TAGS := debug
@@ -59,7 +62,9 @@ ifeq ($(HOST_OS),linux)
 include $(CLEAR_VARS)
 LOCAL_CLANG := true
 LOCAL_CPPFLAGS := $(simpleperf_common_cppflags)
-LOCAL_SRC_FILES := $(libsimpleperf_src_files)
+LOCAL_SRC_FILES := $(libsimpleperf_src_files) \
+                   cpu_hotplug_host.cpp \
+
 LOCAL_SHARED_LIBRARIES := $(simpleperf_common_shared_libraries)
 LOCAL_LDLIBS := -lrt
 LOCAL_MODULE := libsimpleperf
@@ -111,7 +116,9 @@ simpleperf_unit_test_src_files := \
 include $(CLEAR_VARS)
 LOCAL_CLANG := true
 LOCAL_CPPFLAGS := $(simpleperf_common_cppflags)
-LOCAL_SRC_FILES := $(simpleperf_unit_test_src_files)
+LOCAL_SRC_FILES := $(simpleperf_unit_test_src_files) \
+                   cpu_hotplug_device_test.cpp \
+
 LOCAL_WHOLE_STATIC_LIBRARIES := libsimpleperf
 LOCAL_SHARED_LIBRARIES := $(simpleperf_common_shared_libraries)
 LOCAL_MODULE := simpleperf_unit_test
