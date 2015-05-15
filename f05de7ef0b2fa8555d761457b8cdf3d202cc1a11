@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6de499f7_d07c8a33",
+        "filename": "simpleperf/cpu_hotplug_device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-05-15T19:31:38Z",
+      "side": 1,
+      "message": "I had assumed that \"setprop ctl.stop mpdecision\" would not return until the service was actually stopped-- but from my reading of your code, this is not the case? E.g. \"ctl.stop\" just initiates the stop in the background?",
+      "range": {
+        "startLine": 35,
+        "startChar": 4,
+        "endLine": 35,
+        "endChar": 34
+      },
+      "revId": "f05de7ef0b2fa8555d761457b8cdf3d202cc1a11",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
