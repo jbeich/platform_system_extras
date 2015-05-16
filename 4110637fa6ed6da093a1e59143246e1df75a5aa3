@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0da4fdb8_37d3e855",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-05-16T00:03:35Z",
+      "side": 1,
+      "message": "mention the other stuff you do in a change, like the improvements to \u0027list\u0027 here.",
+      "revId": "4110637fa6ed6da093a1e59143246e1df75a5aa3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eda6c9c2_4f61aeb8",
+        "filename": "simpleperf/event_attr.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-05-16T00:03:35Z",
+      "side": 1,
+      "message": "these lists are better with one item per line (to keep diff size down when future changes are made), preferably sorted alphabetically (so it\u0027s easier to see whether an item is present/missing/duplicated at a glance).",
+      "revId": "4110637fa6ed6da093a1e59143246e1df75a5aa3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
