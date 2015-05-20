@@ -94,27 +94,27 @@ static struct block_allocation *do_inode_allocate_extents(
 		extent_block = get_oob_block(alloc, 0);
 	}
 
+	char *extent_region = (char *)&inode->i_block[0];
 	if (!extent_block) {
 		struct ext4_extent_header *hdr =
-			(struct ext4_extent_header *)&inode->i_block[0];
+			(struct ext4_extent_header *)extent_region;
 		hdr->eh_magic = EXT4_EXT_MAGIC;
 		hdr->eh_entries = allocation_len;
 		hdr->eh_max = 3;
 		hdr->eh_generation = 0;
 		hdr->eh_depth = 0;
 
-		extent = (struct ext4_extent *)&inode->i_block[3];
+		extent = EXT_FIRST_EXTENT(hdr);
 	} else {
 		struct ext4_extent_header *hdr =
-			(struct ext4_extent_header *)&inode->i_block[0];
+			(struct ext4_extent_header *)extent_region;
 		hdr->eh_magic = EXT4_EXT_MAGIC;
 		hdr->eh_entries = 1;
 		hdr->eh_max = 3;
 		hdr->eh_generation = 0;
 		hdr->eh_depth = 1;
 
-		struct ext4_extent_idx *idx =
-			(struct ext4_extent_idx *)&inode->i_block[3];
+		struct ext4_extent_idx *idx = EXT_FIRST_INDEX(hdr);
 		idx->ei_block = 0;
 		idx->ei_leaf_lo = extent_block;
 		idx->ei_leaf_hi = 0;
