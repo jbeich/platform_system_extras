@@ -11,6 +11,9 @@ OPTIONS="$OPTIONS IPV6_PRIVACY IPV6_OPTIMISTIC_DAD"
 # For 3.1 kernels, where devtmpfs is not on by default.
 OPTIONS="$OPTIONS DEVTMPFS DEVTMPFS_MOUNT"
 
+# These two break the flo kernel due to differences in -Werror on recent GCC.
+DISABLE_OPTIONS=" CONFIG_REISERFS_FS CONFIG_ANDROID_PMEM"
+
 # How many tap interfaces to create.
 NUMTAPINTERFACES=2
 
@@ -71,6 +74,10 @@ done
 
 # Enable the kernel config options listed in $OPTIONS.
 cmdline=${OPTIONS// / -e }
+./scripts/config $cmdline
+
+# Enable the kernel config options listed in $OPTIONS.
+cmdline=${DISABLE_OPTIONS// / -d }
 ./scripts/config $cmdline
 
 # olddefconfig doesn't work on old kernels.
