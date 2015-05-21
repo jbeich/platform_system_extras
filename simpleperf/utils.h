@@ -57,6 +57,7 @@ void PrintIndented(size_t indent, const char* fmt, ...);
 bool IsPowerOfTwo(uint64_t value);
 
 bool NextArgumentOrError(const std::vector<std::string>& args, size_t* pi);
+void ReportUnknownOptionForCommand(const std::vector<std::string>& args, size_t unknown_arg_pos);
 
 void GetEntriesInDir(const std::string& dirpath, std::vector<std::string>* files,
                      std::vector<std::string>* subdirs);
