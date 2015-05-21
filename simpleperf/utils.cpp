@@ -46,6 +46,11 @@ bool NextArgumentOrError(const std::vector<std::string>& args, size_t* pi) {
   return true;
 }
 
+void ReportUnknownOptionForCommand(const std::vector<std::string>& args, size_t unknown_arg_pos) {
+  LOG(ERROR) << "Unknown option for " << args[0] << " command: '" << args[unknown_arg_pos] << "'";
+  LOG(ERROR) << "Try `simpleperf help " << args[0] << "`";
+}
+
 void GetEntriesInDir(const std::string& dirpath, std::vector<std::string>* files,
                      std::vector<std::string>* subdirs) {
   if (files != nullptr) {
