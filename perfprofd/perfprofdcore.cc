@@ -205,6 +205,11 @@ void ConfigReader::addDefaultEntries()
   addUnsignedEntry("hardwire_cpus", 1, 0, 1);
   addUnsignedEntry("hardwire_cpus_max_duration", 5, 1, UINT32_MAX);
 
+  // Maximum number of unprocessed profiles we can accumulate in the
+  // destination directory. Once we reach this limit, we continue
+  // to collect, but we just overwrite the most recent profile.
+  addUnsignedEntry("max_unprocessed_profiles", 10, 1, UINT32_MAX);
+
   // If set to 1, pass the -g option when invoking 'perf' (requests
   // stack traces as opposed to flat profile).
   addUnsignedEntry("stack_profile", 0, 0, 1);
@@ -680,7 +685,8 @@ static bool post_process(const ConfigReader &config, int current_seq)
     fclose(fp);
   }
 
-  if (produced.size() >= MAX_UNPROCESSED_FILE) {
+  unsigned maxLive = config.getUnsignedValue("max_unprocessed_profiles");
+  if (produced.size() >= maxLive) {
     return false;
   }
 
