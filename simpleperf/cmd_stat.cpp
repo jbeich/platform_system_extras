@@ -137,8 +137,7 @@ bool StatCommandImpl::ParseOptions(const std::vector<std::string>& args,
     } else if (args[i] == "--verbose") {
       verbose_mode_ = true;
     } else {
-      LOG(ERROR) << "Unknown option for stat command: " << args[i];
-      LOG(ERROR) << "Try `simpleperf help stat`";
+      ReportUnknownOptionForCommand(args, i);
       return false;
     }
   }

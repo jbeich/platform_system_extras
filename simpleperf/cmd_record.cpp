@@ -213,8 +213,7 @@ bool RecordCommandImpl::ParseOptions(const std::vector<std::string>& args,
       }
       record_filename_ = args[i];
     } else {
-      LOG(ERROR) << "Unknown option for record command: '" << args[i] << "'\n";
-      LOG(ERROR) << "Try `simpleperf help record`";
+      ReportUnknownOptionForCommand(args, i);
       return false;
     }
   }
