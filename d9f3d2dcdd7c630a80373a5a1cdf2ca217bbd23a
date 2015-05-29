@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ed56c9ec_d44da9ca",
+        "filename": "simpleperf/cpu_offline_test.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-05-29T21:25:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0d54fde2_d76bfc6e",
+      "revId": "d9f3d2dcdd7c630a80373a5a1cdf2ca217bbd23a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0d54fde2_5780ec94",
         "filename": "simpleperf/cpu_offline_test.cpp",
         "patchSetId": 2
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "b91fb853_3e4fa83a",
+        "filename": "simpleperf/cpu_offline_test.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-05-29T21:25:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0d54fde2_5780ec94",
+      "revId": "d9f3d2dcdd7c630a80373a5a1cdf2ca217bbd23a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b91fb853_f57b989f",
         "filename": "simpleperf/cpu_offline_test.cpp",
         "patchSetId": 2
@@ -47,6 +83,24 @@
       "writtenOn": "2015-05-29T17:38:19Z",
       "side": 1,
       "message": "devices",
+      "revId": "d9f3d2dcdd7c630a80373a5a1cdf2ca217bbd23a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ed56c9ec_f44aadb0",
+        "filename": "simpleperf/cpu_offline_test.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-05-29T21:25:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b91fb853_f57b989f",
       "revId": "d9f3d2dcdd7c630a80373a5a1cdf2ca217bbd23a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
