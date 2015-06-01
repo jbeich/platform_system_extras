@@ -30,15 +30,25 @@
 #include "read_elf.h"
 #include "record.h"
 #include "record_file.h"
-#include "utils.h"
 #include "workload.h"
 
 static std::string default_measured_event_type = "cpu-cycles";
 
-class RecordCommandImpl {
+class RecordCommand : public Command {
  public:
-  RecordCommandImpl()
-      : use_sample_freq_(true),
+  RecordCommand()
+      : Command("record", "record sampling info in perf.data",
+                "Usage: simpleperf record [options] [command [command-args]]\n"
+                "    Gather sampling information when running [command]. If [command]\n"
+                "    is not specified, sleep 1 is used instead.\n"
+                "    -a           System-wide collection.\n"
+                "    -c count     Set event sample period.\n"
+                "    -e event     Select the event to sample (Use `simpleperf list`)\n"
+                "                 to find all possible event names.\n"
+                "    -f freq      Set event sample frequency.\n"
+                "    -F freq      Same as '-f freq'.\n"
+                "    -o record_file_name    Set record file name, default is perf.data.\n"),
+        use_sample_freq_(true),
         sample_freq_(1000),
         system_wide_collection_(false),
         measured_event_type_(nullptr),
@@ -48,7 +58,7 @@ class RecordCommandImpl {
     saved_sigchild_handler_ = signal(SIGCHLD, [](int) {});
   }
 
-  ~RecordCommandImpl() {
+  ~RecordCommand() {
     signal(SIGCHLD, saved_sigchild_handler_);
   }
 
@@ -83,7 +93,7 @@ class RecordCommandImpl {
   sighandler_t saved_sigchild_handler_;
 };
 
-bool RecordCommandImpl::Run(const std::vector<std::string>& args) {
+bool RecordCommand::Run(const std::vector<std::string>& args) {
   // 1. Parse options, and use default measured event type if not given.
   std::vector<std::string> workload_args;
   if (!ParseOptions(args, &workload_args)) {
@@ -151,7 +161,7 @@ bool RecordCommandImpl::Run(const std::vector<std::string>& args) {
     return false;
   }
   auto callback =
-      std::bind(&RecordCommandImpl::WriteData, this, std::placeholders::_1, std::placeholders::_2);
+      std::bind(&RecordCommand::WriteData, this, std::placeholders::_1, std::placeholders::_2);
   while (true) {
     if (!event_selection_set_.ReadMmapEventData(callback)) {
       return false;
@@ -172,10 +182,10 @@ bool RecordCommandImpl::Run(const std::vector<std::string>& args) {
   return true;
 }
 
-bool RecordCommandImpl::ParseOptions(const std::vector<std::string>& args,
-                                     std::vector<std::string>* non_option_args) {
+bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
+                                 std::vector<std::string>* non_option_args) {
   size_t i;
-  for (i = 1; i < args.size() && args[i].size() > 0 && args[i][0] == '-'; ++i) {
+  for (i = 0; i < args.size() && args[i].size() > 0 && args[i][0] == '-'; ++i) {
     if (args[i] == "-a") {
       system_wide_collection_ = true;
     } else if (args[i] == "-c") {
@@ -213,8 +223,7 @@ bool RecordCommandImpl::ParseOptions(const std::vector<std::string>& args,
       }
       record_filename_ = args[i];
     } else {
-      LOG(ERROR) << "Unknown option for record command: '" << args[i] << "'\n";
-      LOG(ERROR) << "Try `simpleperf help record`";
+      ReportUnknownOption(args, i);
       return false;
     }
   }
@@ -228,7 +237,7 @@ bool RecordCommandImpl::ParseOptions(const std::vector<std::string>& args,
   return true;
 }
 
-bool RecordCommandImpl::SetMeasuredEventType(const std::string& event_type_name) {
+bool RecordCommand::SetMeasuredEventType(const std::string& event_type_name) {
   const EventType* event_type = EventTypeFactory::FindEventTypeByName(event_type_name);
   if (event_type == nullptr) {
     return false;
@@ -237,7 +246,7 @@ bool RecordCommandImpl::SetMeasuredEventType(const std::string& event_type_name)
   return true;
 }
 
-void RecordCommandImpl::SetEventSelection() {
+void RecordCommand::SetEventSelection() {
   event_selection_set_.AddEventType(*measured_event_type_);
   if (use_sample_freq_) {
     event_selection_set_.SetSampleFreq(sample_freq_);
@@ -247,11 +256,11 @@ void RecordCommandImpl::SetEventSelection() {
   event_selection_set_.SampleIdAll();
 }
 
-bool RecordCommandImpl::WriteData(const char* data, size_t size) {
+bool RecordCommand::WriteData(const char* data, size_t size) {
   return record_file_writer_->WriteData(data, size);
 }
 
-bool RecordCommandImpl::DumpKernelAndModuleMmaps() {
+bool RecordCommand::DumpKernelAndModuleMmaps() {
   KernelMmap kernel_mmap;
   std::vector<ModuleMmap> module_mmaps;
   if (!GetKernelAndModuleMmaps(&kernel_mmap, &module_mmaps)) {
@@ -277,7 +286,7 @@ bool RecordCommandImpl::DumpKernelAndModuleMmaps() {
   return true;
 }
 
-bool RecordCommandImpl::DumpThreadCommAndMmaps() {
+bool RecordCommand::DumpThreadCommAndMmaps() {
   std::vector<ThreadComm> thread_comms;
   if (!GetThreadComms(&thread_comms)) {
     return false;
@@ -310,14 +319,14 @@ bool RecordCommandImpl::DumpThreadCommAndMmaps() {
   return true;
 }
 
-bool RecordCommandImpl::DumpAdditionalFeatures() {
+bool RecordCommand::DumpAdditionalFeatures() {
   if (!record_file_writer_->WriteFeatureHeader(1)) {
     return false;
   }
   return DumpBuildIdFeature();
 }
 
-bool RecordCommandImpl::DumpBuildIdFeature() {
+bool RecordCommand::DumpBuildIdFeature() {
   std::vector<std::string> hit_kernel_modules;
   std::vector<std::string> hit_user_files;
   if (!record_file_writer_->GetHitModules(&hit_kernel_modules, &hit_user_files)) {
@@ -363,26 +372,6 @@ bool RecordCommandImpl::DumpBuildIdFeature() {
   return true;
 }
 
-class RecordCommand : public Command {
- public:
-  RecordCommand()
-      : Command("record", "record sampling info in perf.data",
-                "Usage: simpleperf record [options] [command [command-args]]\n"
-                "    Gather sampling information when running [command]. If [command]\n"
-                "    is not specified, sleep 1 is used instead.\n"
-                "    -a           System-wide collection.\n"
-                "    -c count     Set event sample period.\n"
-                "    -e event     Select the event to sample (Use `simpleperf list`)\n"
-                "                 to find all possible event names.\n"
-                "    -f freq      Set event sample frequency.\n"
-                "    -F freq      Same as '-f freq'.\n"
-                "    -o record_file_name    Set record file name, default is perf.data.\n") {
-  }
-
-  bool Run(const std::vector<std::string>& args) override {
-    RecordCommandImpl impl;
-    return impl.Run(args);
-  }
-};
-
-RecordCommand record_command;
+__attribute__((constructor)) static void RegisterRecordCommand() {
+  RegisterCommand("record", [] { return std::unique_ptr<Command>(new RecordCommand()); });
+}
