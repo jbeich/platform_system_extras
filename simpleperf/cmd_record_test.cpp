@@ -26,40 +26,43 @@ using namespace PerfFileFormat;
 class RecordCommandTest : public ::testing::Test {
  protected:
   virtual void SetUp() {
-    record_cmd = Command::FindCommandByName("record");
+    record_cmd = CreateCommandInstance("record");
     ASSERT_TRUE(record_cmd != nullptr);
   }
 
-  Command* record_cmd;
+  std::unique_ptr<Command> record_cmd;
 };
 
 TEST_F(RecordCommandTest, no_options) {
-  ASSERT_TRUE(record_cmd->Run({"record", "sleep", "1"}));
+  ASSERT_TRUE(record_cmd->Run({"sleep", "1"}));
 }
 
 TEST_F(RecordCommandTest, system_wide_option) {
-  ASSERT_TRUE(record_cmd->Run({"record", "-a", "sleep", "1"}));
+  ASSERT_TRUE(record_cmd->Run({"-a", "sleep", "1"}));
 }
 
 TEST_F(RecordCommandTest, sample_period_option) {
-  ASSERT_TRUE(record_cmd->Run({"record", "-c", "100000", "sleep", "1"}));
+  ASSERT_TRUE(record_cmd->Run({"-c", "100000", "sleep", "1"}));
 }
 
 TEST_F(RecordCommandTest, event_option) {
-  ASSERT_TRUE(record_cmd->Run({"record", "-e", "cpu-clock", "sleep", "1"}));
+  ASSERT_TRUE(record_cmd->Run({"-e", "cpu-clock", "sleep", "1"}));
 }
 
-TEST_F(RecordCommandTest, freq_option) {
-  ASSERT_TRUE(record_cmd->Run({"record", "-f", "99", "sleep", "1"}));
-  ASSERT_TRUE(record_cmd->Run({"record", "-F", "99", "sleep", "1"}));
+TEST_F(RecordCommandTest, freq_option_f) {
+  ASSERT_TRUE(record_cmd->Run({"-f", "99", "sleep", "1"}));
+}
+
+TEST_F(RecordCommandTest, freq_option_F) {
+  ASSERT_TRUE(record_cmd->Run({"-F", "99", "sleep", "1"}));
 }
 
 TEST_F(RecordCommandTest, output_file_option) {
-  ASSERT_TRUE(record_cmd->Run({"record", "-o", "perf2.data", "sleep", "1"}));
+  ASSERT_TRUE(record_cmd->Run({"-o", "perf2.data", "sleep", "1"}));
 }
 
 TEST_F(RecordCommandTest, dump_kernel_mmap) {
-  ASSERT_TRUE(record_cmd->Run({"record", "sleep", "1"}));
+  ASSERT_TRUE(record_cmd->Run({"sleep", "1"}));
   std::unique_ptr<RecordFileReader> reader = RecordFileReader::CreateInstance("perf.data");
   ASSERT_TRUE(reader != nullptr);
   std::vector<std::unique_ptr<const Record>> records = reader->DataSection();
@@ -78,7 +81,7 @@ TEST_F(RecordCommandTest, dump_kernel_mmap) {
 }
 
 TEST_F(RecordCommandTest, dump_build_id_feature) {
-  ASSERT_TRUE(record_cmd->Run({"record", "sleep", "1"}));
+  ASSERT_TRUE(record_cmd->Run({"sleep", "1"}));
   std::unique_ptr<RecordFileReader> reader = RecordFileReader::CreateInstance("perf.data");
   ASSERT_TRUE(reader != nullptr);
   const FileHeader* file_header = reader->FileHeader();
@@ -88,5 +91,5 @@ TEST_F(RecordCommandTest, dump_build_id_feature) {
 }
 
 TEST_F(RecordCommandTest, tracepoint_event) {
-  ASSERT_TRUE(record_cmd->Run({"record", "-a", "-e", "sched:sched_switch", "sleep", "1"}));
+  ASSERT_TRUE(record_cmd->Run({"-a", "-e", "sched:sched_switch", "sleep", "1"}));
 }
