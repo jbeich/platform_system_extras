@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "d96c6c17_6baac15d",
+        "filename": "simpleperf/perf_event.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-06-03T22:24:37Z",
+      "side": 1,
+      "message": "coping the whole perf_event.h from bionic seems a simpler choice.",
+      "parentUuid": "b967b830_5ea184b0",
+      "revId": "731f95264638017bb56261696f5f6003074faa0f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f955b039_46f41c84",
         "filename": "simpleperf/perf_event.h",
         "patchSetId": 3
