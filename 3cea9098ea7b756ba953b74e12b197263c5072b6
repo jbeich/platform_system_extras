@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b9a97860_1f83bb55",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-06-03T04:21:59Z",
+      "side": 1,
+      "message": "branch",
+      "revId": "3cea9098ea7b756ba953b74e12b197263c5072b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "99a8345d_59694fa1",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 423,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-06-03T04:21:59Z",
+      "side": 1,
+      "message": "This option\n\ns/amony/among/",
+      "revId": "3cea9098ea7b756ba953b74e12b197263c5072b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "99a8345d_f9591b0c",
+        "filename": "simpleperf/perf_event.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-06-03T04:21:59Z",
+      "side": 1,
+      "message": "no, you can\u0027t copy from linux header files. you should copy from bionic scrubbed headers instead.",
+      "revId": "3cea9098ea7b756ba953b74e12b197263c5072b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b9a97860_bf73870c",
+        "filename": "simpleperf/record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-06-03T04:21:59Z",
+      "side": 1,
+      "message": "no caller?",
+      "revId": "3cea9098ea7b756ba953b74e12b197263c5072b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
