@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b967b830_5ea184b0",
+        "filename": "simpleperf/perf_event.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-06-03T22:12:29Z",
+      "side": 1,
+      "message": "this seems to be perf_event_sample_format in bionic.",
+      "revId": "731f95264638017bb56261696f5f6003074faa0f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f955b039_46f41c84",
+        "filename": "simpleperf/perf_event.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-06-03T22:12:29Z",
+      "side": 1,
+      "message": "this should be the scrubbed version too.",
+      "revId": "731f95264638017bb56261696f5f6003074faa0f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
