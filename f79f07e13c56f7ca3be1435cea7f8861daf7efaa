@@ -16,6 +16,24 @@
       "revId": "f79f07e13c56f7ca3be1435cea7f8861daf7efaa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "99e914d2_1c9b7552",
+        "filename": "simpleperf/workload.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-06-05T00:28:25Z",
+      "side": 1,
+      "message": "It should be 0 in normal case. Because normally the child process runs execvp() successfully and closes this pipe without sending any data. Only when execvp() fails, the child process write one byte to this pipe.",
+      "parentUuid": "d9df0c22_5eab3591",
+      "revId": "f79f07e13c56f7ca3be1435cea7f8861daf7efaa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
