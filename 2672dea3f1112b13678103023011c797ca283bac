@@ -16,6 +16,24 @@
       "revId": "2672dea3f1112b13678103023011c797ca283bac",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d9ab8c9c_c41f5262",
+        "filename": "simpleperf/cmd_report.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-06-06T02:58:46Z",
+      "side": 1,
+      "message": "I will fix it in the next patch.",
+      "parentUuid": "796b8031_e37d322b",
+      "revId": "2672dea3f1112b13678103023011c797ca283bac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
