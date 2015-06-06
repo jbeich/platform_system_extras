@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "796b8031_e37d322b",
+        "filename": "simpleperf/cmd_report.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-06-06T00:11:12Z",
+      "side": 1,
+      "message": "it might be nice to auto-size these columns based on the actual data. for example:\n\n  Overhead              Command      Pid        Shared Object\n    64.08%                 lsof     5632    [kernel.kallsyms]\n    19.13%                 lsof     5632 /system/lib64/libc.so\n    16.78%                 lsof     5632 /system/bin/linker64\n\nhere dso has too little space to line up correctly (and at the same time, comm has lots of space it doesn\u0027t need).",
+      "revId": "2672dea3f1112b13678103023011c797ca283bac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
