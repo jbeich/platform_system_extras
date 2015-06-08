@@ -18,6 +18,8 @@
 
 #include <base/logging.h>
 
+#include "environment.h"
+
 bool SampleTree::MapComparator::operator()(const MapEntry* map1, const MapEntry* map2) {
   if (map1->pid != map2->pid) {
     return map1->pid < map2->pid;
@@ -43,31 +45,49 @@ void SampleTree::AddProcess(int pid, const std::string& comm) {
 
 void SampleTree::AddKernelMap(uint64_t start_addr, uint64_t len, uint64_t pgoff, uint64_t time,
                               const std::string& filename) {
+  DsoEntry* dso = FindKernelDsoOrNew(filename);
   MapEntry* map = new MapEntry{
-      .pid = -1,
-      .start_addr = start_addr,
-      .len = len,
-      .pgoff = pgoff,
-      .time = time,
-      .filename = filename,
+      .pid = -1, .start_addr = start_addr, .len = len, .pgoff = pgoff, .time = time, .dso = dso,
   };
   map_storage_.push_back(map);
   kernel_map_tree_.insert(map);
 }
 
+DsoEntry* SampleTree::FindKernelDsoOrNew(const std::string& filename) {
+  if (filename == DEFAULT_KERNEL_MMAP_NAME) {
+    if (kernel_dso_.path.empty()) {
+      kernel_dso_ = DsoFactory::LoadKernel();
+    }
+    return &kernel_dso_;
+  }
+  auto it = module_dso_tree_.find(filename);
+  if (it == module_dso_tree_.end()) {
+    DsoEntry dso = DsoFactory::LoadKernelModule(filename);
+    module_dso_tree_[filename] = std::move(dso);
+    it = module_dso_tree_.find(filename);
+  }
+  return &it->second;
+}
+
 void SampleTree::AddUserMap(int pid, uint64_t start_addr, uint64_t len, uint64_t pgoff,
                             uint64_t time, const std::string& filename) {
+  DsoEntry* dso = FindUserDsoOrNew(filename);
   MapEntry* map = new MapEntry{
-      .pid = pid,
-      .start_addr = start_addr,
-      .len = len,
-      .pgoff = pgoff,
-      .time = time,
-      .filename = filename,
+      .pid = pid, .start_addr = start_addr, .len = len, .pgoff = pgoff, .time = time, .dso = dso,
   };
   map_storage_.push_back(map);
   RemoveOverlappedUserMap(map);
   user_map_tree_.insert(map);
+}
+
+DsoEntry* SampleTree::FindUserDsoOrNew(const std::string& filename) {
+  auto it = user_dso_tree_.find(filename);
+  if (it == user_dso_tree_.end()) {
+    DsoEntry dso = DsoFactory::LoadDso(filename);
+    user_dso_tree_[filename] = std::move(dso);
+    it = user_dso_tree_.find(filename);
+  }
+  return &it->second;
 }
 
 void SampleTree::RemoveOverlappedUserMap(const MapEntry* map) {
@@ -132,7 +152,7 @@ const MapEntry* SampleTree::FindUnknownMapEntryOrNew(int pid) {
         .len = static_cast<uint64_t>(-1),
         .pgoff = 0,
         .time = 0,
-        .filename = "unknown",
+        .dso = &unknown_dso_,
     };
     map_storage_.push_back(map);
     auto pair = unknown_maps_.insert(std::make_pair(pid, map));
@@ -144,6 +164,7 @@ const MapEntry* SampleTree::FindUnknownMapEntryOrNew(int pid) {
 void SampleTree::AddSample(int pid, int tid, uint64_t ip, uint64_t time, uint64_t period) {
   const ProcessEntry* process_entry = FindProcessEntryOrNew(pid);
   const MapEntry* map_entry = FindMapEntryOrNew(pid, ip);
+  const SymbolEntry* symbol_entry = FindSymbolEntry(ip, map_entry);
 
   SampleEntry find_sample = {
       .tid = tid,
@@ -151,8 +172,9 @@ void SampleTree::AddSample(int pid, int tid, uint64_t ip, uint64_t time, uint64_
       .time = time,
       .period = period,
       .sample_count = 1,
-      .process_entry = process_entry,
-      .map_entry = map_entry,
+      .process = process_entry,
+      .map = map_entry,
+      .symbol = symbol_entry,
   };
   auto it = sample_tree_.find(find_sample);
   if (it == sample_tree_.end()) {
@@ -164,6 +186,20 @@ void SampleTree::AddSample(int pid, int tid, uint64_t ip, uint64_t time, uint64_
   }
   total_samples_++;
   total_period_ += period;
+}
+
+const SymbolEntry* SampleTree::FindSymbolEntry(uint64_t ip, const MapEntry* map_entry) {
+  uint64_t offset_in_file;
+  if (map_entry->dso == &kernel_dso_) {
+    offset_in_file = ip;
+  } else {
+    offset_in_file = ip - map_entry->start_addr + map_entry->pgoff;
+  }
+  const SymbolEntry* symbol = map_entry->dso->FindSymbol(offset_in_file);
+  if (symbol == nullptr) {
+    symbol = &unknown_symbol_;
+  }
+  return symbol;
 }
 
 void SampleTree::VisitAllSamples(std::function<void(const SampleEntry&)> callback) {
