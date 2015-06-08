@@ -14,25 +14,35 @@
  * limitations under the License.
  */
 
-#ifndef SIMPLE_PERF_READ_ELF_H_
-#define SIMPLE_PERF_READ_ELF_H_
+#ifndef SIMPLE_PERF_DSO_H_
+#define SIMPLE_PERF_DSO_H_
 
-#include <functional>
+#include <memory>
+#include <set>
 #include <string>
-#include "build_id.h"
 
-bool GetBuildIdFromNoteFile(const std::string& filename, BuildId* build_id);
-bool GetBuildIdFromElfFile(const std::string& filename, BuildId* build_id);
-
-struct ElfFileSymbol {
-  uint64_t start_in_file;
-  uint64_t len;
-  bool is_func;
-  bool is_in_text_section;
+struct SymbolEntry {
   std::string name;
+  uint64_t addr;
+  uint64_t len;
 };
 
-bool ParseSymbolsFromElfFile(const std::string& filename,
-                             std::function<void(const ElfFileSymbol&)> callback);
+struct SymbolComparator {
+  bool operator()(const SymbolEntry& symbol1, const SymbolEntry& symbol2);
+};
 
-#endif  // SIMPLE_PERF_READ_ELF_H_
+struct DsoEntry {
+  std::string path;
+  std::set<SymbolEntry, SymbolComparator> symbols;
+
+  const SymbolEntry* FindSymbol(uint64_t offset_in_dso);
+};
+
+class DsoFactory {
+ public:
+  static DsoEntry LoadKernel();
+  static DsoEntry LoadKernelModule(const std::string& dso_path);
+  static DsoEntry LoadDso(const std::string& dso_path);
+};
+
+#endif  // SIMPLE_PERF_DSO_H_
