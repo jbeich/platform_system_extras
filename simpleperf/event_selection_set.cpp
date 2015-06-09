@@ -103,8 +103,6 @@ bool EventSelectionSet::OpenEventFilesForProcess(pid_t pid) {
   for (auto& selection : selections_) {
     auto event_fd = EventFd::OpenEventFileForProcess(selection.event_attr, pid);
     if (event_fd == nullptr) {
-      PLOG(ERROR) << "failed to open perf event file for event type " << selection.event_type->name
-                  << " on pid " << pid;
       return false;
     }
     selection.event_fds.push_back(std::move(event_fd));
