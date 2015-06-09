@@ -61,6 +61,9 @@ class SampleTree {
   }
 
   ~SampleTree() {
+    for (auto& pair : process_tree_) {
+      delete pair.second;
+    }
     for (auto& map : map_storage_) {
       delete map;
     }
@@ -116,7 +119,7 @@ class SampleTree {
     compare_sample_func_t compare_function;
   };
 
-  std::unordered_map<int, ProcessEntry> process_tree_;
+  std::unordered_map<int, ProcessEntry*> process_tree_;
 
   std::set<MapEntry*, MapComparator> kernel_map_tree_;
   std::set<MapEntry*, MapComparator> user_map_tree_;
