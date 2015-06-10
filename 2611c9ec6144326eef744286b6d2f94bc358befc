@@ -16,6 +16,24 @@
       "revId": "2611c9ec6144326eef744286b6d2f94bc358befc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d9754c3f_17d55e2d",
+        "filename": "simpleperf/cmd_record_test.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-06-10T23:57:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b92b3816_bbb9ef3b",
+      "revId": "2611c9ec6144326eef744286b6d2f94bc358befc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
