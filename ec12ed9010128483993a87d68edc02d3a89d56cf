@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "39c4a87c_58867499",
+        "filename": "simpleperf/dso.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-06-10T15:19:43Z",
+      "side": 1,
+      "message": "a local std::unique_ptr is supposed to delete its underlying object when it goes out of scope -- which means that this line will be returning free\u0027d memory, no?",
+      "range": {
+        "startLine": 36,
+        "startChar": 1,
+        "endLine": 36,
+        "endChar": 25
+      },
+      "revId": "ec12ed9010128483993a87d68edc02d3a89d56cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b9fdf8c1_4e5b67cd",
+        "filename": "simpleperf/dso.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-06-10T15:19:43Z",
+      "side": 1,
+      "message": "libc.so has more than one symbol pointing to the same text address. Ex: __aeabi_memset4, __aeabi_memset8, __aeabi_memset, etc. Will this implementation just pick the first one?",
+      "range": {
+        "startLine": 37,
+        "startChar": 2,
+        "endLine": 37,
+        "endChar": 67
+      },
+      "revId": "ec12ed9010128483993a87d68edc02d3a89d56cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "39c4a87c_582d541f",
+        "filename": "simpleperf/read_elf.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-06-10T15:19:43Z",
+      "side": 1,
+      "message": "Do we care about symbols that are not STT_FUNC?",
+      "range": {
+        "startLine": 145,
+        "startChar": 6,
+        "endLine": 145,
+        "endChar": 28
+      },
+      "revId": "ec12ed9010128483993a87d68edc02d3a89d56cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
