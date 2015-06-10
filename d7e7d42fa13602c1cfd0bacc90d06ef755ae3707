@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b9fdf8c1_2e76ebb6",
+        "filename": "simpleperf/event_fd.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-06-10T13:11:05Z",
+      "side": 1,
+      "message": "\"by arm\" -\u003e \"on this device\" ?",
+      "range": {
+        "startLine": 65,
+        "startChar": 63,
+        "endLine": 65,
+        "endChar": 69
+      },
+      "revId": "d7e7d42fa13602c1cfd0bacc90d06ef755ae3707",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
