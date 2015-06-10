@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b92b3816_bbb9ef3b",
+        "filename": "simpleperf/cmd_record_test.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-06-10T22:16:17Z",
+      "side": 1,
+      "message": "is not",
+      "revId": "2611c9ec6144326eef744286b6d2f94bc358befc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
