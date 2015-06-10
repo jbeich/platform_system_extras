@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "d902ac8c_0104191b",
+        "filename": "simpleperf/dso.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-06-10T18:34:17Z",
+      "side": 1,
+      "message": "Actually I thought std::set\u003cstd::unique_ptr\u003c\u003e\u003e couldn\u0027t work. But it works. I think it is because std::move() is used everywhere in std::set\u0027s implementation.\nHere \u0027it\u0027 is a iterator, \u0027*it\u0027 is a const std::unique_ptr\u003c\u003e\u0026. So the std::unique_ptr\u003c\u003e is still valid in the set, and we are returning valid SymbolEntry from the std::unique_ptr\u003c\u003e.",
+      "parentUuid": "39c4a87c_58867499",
+      "range": {
+        "startLine": 36,
+        "startChar": 1,
+        "endLine": 36,
+        "endChar": 25
+      },
+      "revId": "ec12ed9010128483993a87d68edc02d3a89d56cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b9fdf8c1_4e5b67cd",
         "filename": "simpleperf/dso.h",
         "patchSetId": 4
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "99fcb4c6_53bc2e27",
+        "filename": "simpleperf/dso.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-06-10T18:34:17Z",
+      "side": 1,
+      "message": "I think so, below insertions will fail. If more than one symbol point to the same text address, I am interested in how perf handles this situation.",
+      "parentUuid": "b9fdf8c1_4e5b67cd",
+      "range": {
+        "startLine": 37,
+        "startChar": 2,
+        "endLine": 37,
+        "endChar": 67
+      },
+      "revId": "ec12ed9010128483993a87d68edc02d3a89d56cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "39c4a87c_582d541f",
         "filename": "simpleperf/read_elf.cpp",
         "patchSetId": 4
@@ -59,6 +107,30 @@
       "writtenOn": "2015-06-10T15:19:43Z",
       "side": 1,
       "message": "Do we care about symbols that are not STT_FUNC?",
+      "range": {
+        "startLine": 145,
+        "startChar": 6,
+        "endLine": 145,
+        "endChar": 28
+      },
+      "revId": "ec12ed9010128483993a87d68edc02d3a89d56cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "193e044a_1a4fad0b",
+        "filename": "simpleperf/read_elf.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-06-10T18:34:17Z",
+      "side": 1,
+      "message": "Currently I don\u0027t care about DATA symbols. I prefer to add symbols used as labels in text sections.",
+      "parentUuid": "39c4a87c_582d541f",
       "range": {
         "startLine": 145,
         "startChar": 6,
