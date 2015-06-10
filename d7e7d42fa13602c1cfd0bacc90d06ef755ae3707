@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "99fcb4c6_738ccaba",
+        "filename": "simpleperf/event_fd.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-06-10T19:43:36Z",
+      "side": 1,
+      "message": "I guess you care that branch stack sampling may not be supported by other devices other than arm. And I care that EOPNOTSUPP error may not be caused by branch sampling request. So I include the sentence in braces as an addition information. I think if we can test desperately whether branch sampling is supported, it will be better.",
+      "parentUuid": "b9fdf8c1_2e76ebb6",
+      "range": {
+        "startLine": 65,
+        "startChar": 63,
+        "endLine": 65,
+        "endChar": 69
+      },
+      "revId": "d7e7d42fa13602c1cfd0bacc90d06ef755ae3707",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b9fdf8c1_79f26fe6",
         "filename": "simpleperf/workload.cpp",
         "patchSetId": 1
@@ -36,6 +60,24 @@
       "writtenOn": "2015-06-10T16:22:26Z",
       "side": 1,
       "message": "do you need to wait?",
+      "revId": "d7e7d42fa13602c1cfd0bacc90d06ef755ae3707",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "99fcb4c6_137eb626",
+        "filename": "simpleperf/workload.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-06-10T19:43:36Z",
+      "side": 1,
+      "message": "I don\u0027t need the child process\u0027s exiting status. So I think not necessary to wait.",
+      "parentUuid": "b9fdf8c1_79f26fe6",
       "revId": "d7e7d42fa13602c1cfd0bacc90d06ef755ae3707",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
