@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "797aa034_915cfc4f",
+        "filename": "simpleperf/cmd_report.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-06-11T19:46:17Z",
+      "side": 1,
+      "message": "This is a cool trick-- I wonder why quipper code doesn\u0027t use it? I will ask.",
+      "range": {
+        "startLine": 251,
+        "startChar": 0,
+        "endLine": 251,
+        "endChar": 98
+      },
+      "revId": "78e60eab051a32ca3be6e44db8580d25f674597c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
