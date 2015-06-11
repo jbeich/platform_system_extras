@@ -397,6 +397,24 @@ std::vector<uint64_t> RecordFileReader::IdsForAttr(const FileAttr* attr) {
   return result;
 }
 
+static bool CompareRecordByTime(const std::unique_ptr<const Record>& r1,
+                                const std::unique_ptr<const Record>& r2) {
+  bool is_r1_sample = (r1->header.type == PERF_RECORD_SAMPLE);
+  bool is_r2_sample = (r2->header.type == PERF_RECORD_SAMPLE);
+  uint64_t time1 = (is_r1_sample ? static_cast<const SampleRecord*>(r1.get())->time_data.time
+                                 : r1->sample_id.time_data.time);
+  uint64_t time2 = (is_r2_sample ? static_cast<const SampleRecord*>(r2.get())->time_data.time
+                                 : r2->sample_id.time_data.time);
+  if (time1 != time2) {
+    return time1 < time2;
+  }
+  // Move sample record toward the end.
+  if (is_r1_sample != is_r2_sample) {
+    return is_r1_sample ? false : true;
+  }
+  return false;
+}
+
 std::vector<std::unique_ptr<const Record>> RecordFileReader::DataSection() {
   std::vector<std::unique_ptr<const Record>> result;
   const struct FileHeader* header = FileHeader();
@@ -412,6 +430,9 @@ std::vector<std::unique_ptr<const Record>> RecordFileReader::DataSection() {
       result.push_back(std::move(ReadRecordFromBuffer(attr, header)));
     }
     p += header->size;
+  }
+  if ((attr.sample_type & PERF_SAMPLE_TIME) && attr.sample_id_all) {
+    std::sort(result.begin(), result.end(), CompareRecordByTime);
   }
   return result;
 }
