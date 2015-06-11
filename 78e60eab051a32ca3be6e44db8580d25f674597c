@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "992af412_be49d636",
+        "filename": "simpleperf/record_file.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-06-11T22:15:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "79254042_1f9d66eb",
+      "range": {
+        "startLine": 400,
+        "startChar": 12,
+        "endLine": 400,
+        "endChar": 31
+      },
+      "revId": "78e60eab051a32ca3be6e44db8580d25f674597c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f9ecd03d_8e9fe366",
         "filename": "simpleperf/record_file.cpp",
         "patchSetId": 1
@@ -65,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "b92b3816_e38011d1",
+        "filename": "simpleperf/record_file.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-06-11T22:15:40Z",
+      "side": 1,
+      "message": "It first compares time. Record with smaller time happens first. Then if the time equals (I think which almost can\u0027t happen), make non-sample records before sample records, because non-sample records may contain useful information to parse sample records.",
+      "parentUuid": "f9ecd03d_8e9fe366",
+      "revId": "78e60eab051a32ca3be6e44db8580d25f674597c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "992af412_bbe6c85e",
         "filename": "simpleperf/record_file.cpp",
         "patchSetId": 1
@@ -76,6 +118,24 @@
       "writtenOn": "2015-06-11T21:29:43Z",
       "side": 1,
       "message": "what if both are not samples - this check is going to pass and the function is going to return true... is this expected?",
+      "revId": "78e60eab051a32ca3be6e44db8580d25f674597c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "992af412_3ee2a6c1",
+        "filename": "simpleperf/record_file.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-06-11T22:15:40Z",
+      "side": 1,
+      "message": "If the records happens at the same time, and both are samples or both are not samples, I don\u0027t care of which goes first, and returns false (which means equal).",
+      "parentUuid": "992af412_bbe6c85e",
       "revId": "78e60eab051a32ca3be6e44db8580d25f674597c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
