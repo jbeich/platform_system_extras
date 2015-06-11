@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "59e07c3c_eb9021a3",
+        "filename": "simpleperf/read_elf.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1041673
+      },
+      "writtenOn": "2015-06-11T19:22:01Z",
+      "side": 1,
+      "message": "linker uses objcopy to prefix all symbols with __dl_; should we ignore them as well?",
+      "revId": "b378355f34b2b585eaf2be262bcd9baae9f3d36a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
