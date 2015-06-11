@@ -16,6 +16,24 @@
       "revId": "b378355f34b2b585eaf2be262bcd9baae9f3d36a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "59e07c3c_76d23847",
+        "filename": "simpleperf/read_elf.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-06-11T19:34:13Z",
+      "side": 1,
+      "message": "I think so. I noticed that linker uses symbols with prefix, it also makes demangling unable work. I plan to fix it in a later patch.",
+      "parentUuid": "59e07c3c_eb9021a3",
+      "revId": "b378355f34b2b585eaf2be262bcd9baae9f3d36a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
