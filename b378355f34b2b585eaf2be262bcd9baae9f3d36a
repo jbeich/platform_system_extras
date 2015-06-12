@@ -34,6 +34,24 @@
       "revId": "b378355f34b2b585eaf2be262bcd9baae9f3d36a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "59e07c3c_971a569e",
+        "filename": "simpleperf/read_elf.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-06-12T00:11:48Z",
+      "side": 1,
+      "message": "sgtm. if you do, you should consider fixing debuggerd too.",
+      "parentUuid": "59e07c3c_76d23847",
+      "revId": "b378355f34b2b585eaf2be262bcd9baae9f3d36a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
