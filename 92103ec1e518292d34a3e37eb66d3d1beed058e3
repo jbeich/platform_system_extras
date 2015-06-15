@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "594a3c43_a6c65e0c",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-06-15T23:30:57Z",
+      "side": 1,
+      "message": "use an array rather than a vector?",
+      "revId": "92103ec1e518292d34a3e37eb66d3d1beed058e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5965dcc2_290959e3",
+        "filename": "simpleperf/cmd_stat.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-06-15T23:30:57Z",
+      "side": 1,
+      "message": "this all looks very familiar. factor it out?",
+      "revId": "92103ec1e518292d34a3e37eb66d3d1beed058e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
