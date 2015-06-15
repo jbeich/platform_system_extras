@@ -99,3 +99,7 @@ TEST(record_cmd, branch_sampling) {
         << "This test does nothing as branch stack sampling is not supported on this device.";
   }
 }
+
+TEST(record_cmd, event_modifier) {
+  ASSERT_TRUE(RecordCmd()->Run({"-e", "cpu-cycles:u", "sleep", "1"}));
+}

@@ -75,7 +75,6 @@ class RecordCommand : public Command {
         sample_freq_(1000),
         system_wide_collection_(false),
         branch_sampling_(0),
-        measured_event_type_(nullptr),
         perf_mmap_pages_(256),
         record_filename_("perf.data") {
     // We need signal SIGCHLD to break poll().
@@ -106,7 +105,7 @@ class RecordCommand : public Command {
 
   bool system_wide_collection_;
   uint64_t branch_sampling_;
-  const EventType* measured_event_type_;
+  std::unique_ptr<EventTypeAndModifier> measured_event_type_modifier_;
   EventSelectionSet event_selection_set_;
 
   // mmap pages used by each perf event file, should be power of 2.
@@ -124,7 +123,7 @@ bool RecordCommand::Run(const std::vector<std::string>& args) {
   if (!ParseOptions(args, &workload_args)) {
     return false;
   }
-  if (measured_event_type_ == nullptr) {
+  if (measured_event_type_modifier_ == nullptr) {
     if (!SetMeasuredEventType(default_measured_event_type)) {
       return false;
     }
@@ -163,8 +162,9 @@ bool RecordCommand::Run(const std::vector<std::string>& args) {
 
   // 4. Open record file writer, and dump kernel/modules/threads mmap information.
   record_file_writer_ = RecordFileWriter::CreateInstance(
-      record_filename_, event_selection_set_.FindEventAttrByType(*measured_event_type_),
-      event_selection_set_.FindEventFdsByType(*measured_event_type_));
+      record_filename_,
+      event_selection_set_.FindEventAttrByType(measured_event_type_modifier_->event_type),
+      event_selection_set_.FindEventFdsByType(measured_event_type_modifier_->event_type));
   if (record_file_writer_ == nullptr) {
     return false;
   }
@@ -280,16 +280,16 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
 }
 
 bool RecordCommand::SetMeasuredEventType(const std::string& event_type_name) {
-  const EventType* event_type = EventTypeFactory::FindEventTypeByName(event_type_name);
-  if (event_type == nullptr) {
+  std::unique_ptr<EventTypeAndModifier> event_type_modifier = ParseEventType(event_type_name);
+  if (event_type_modifier == nullptr) {
     return false;
   }
-  measured_event_type_ = event_type;
+  measured_event_type_modifier_ = std::move(event_type_modifier);
   return true;
 }
 
 bool RecordCommand::SetEventSelection() {
-  event_selection_set_.AddEventType(*measured_event_type_);
+  event_selection_set_.AddEventType(*measured_event_type_modifier_);
   if (use_sample_freq_) {
     event_selection_set_.SetSampleFreq(sample_freq_);
   } else {
@@ -312,7 +312,8 @@ bool RecordCommand::DumpKernelAndModuleMmaps() {
   if (!GetKernelAndModuleMmaps(&kernel_mmap, &module_mmaps)) {
     return false;
   }
-  const perf_event_attr& attr = event_selection_set_.FindEventAttrByType(*measured_event_type_);
+  const perf_event_attr& attr =
+      event_selection_set_.FindEventAttrByType(measured_event_type_modifier_->event_type);
   MmapRecord mmap_record = CreateMmapRecord(attr, true, UINT_MAX, 0, kernel_mmap.start_addr,
                                             kernel_mmap.len, kernel_mmap.pgoff, kernel_mmap.name);
   if (!record_file_writer_->WriteData(mmap_record.BinaryFormat())) {
@@ -337,7 +338,8 @@ bool RecordCommand::DumpThreadCommAndMmaps() {
   if (!GetThreadComms(&thread_comms)) {
     return false;
   }
-  const perf_event_attr& attr = event_selection_set_.FindEventAttrByType(*measured_event_type_);
+  const perf_event_attr& attr =
+      event_selection_set_.FindEventAttrByType(measured_event_type_modifier_->event_type);
   for (auto& thread : thread_comms) {
     CommRecord record = CreateCommRecord(attr, thread.tgid, thread.tid, thread.comm);
     if (!record_file_writer_->WriteData(record.BinaryFormat())) {
