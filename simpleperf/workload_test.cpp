@@ -18,22 +18,11 @@
 
 #include <workload.h>
 
-#include <chrono>
-
-using namespace std::chrono;
-
 TEST(workload, smoke) {
   auto workload = Workload::CreateWorkload({"sleep", "1"});
   ASSERT_TRUE(workload != nullptr);
-  ASSERT_FALSE(workload->IsFinished());
   ASSERT_TRUE(workload->GetPid() != 0);
-  auto start_time = steady_clock::now();
   ASSERT_TRUE(workload->Start());
-  ASSERT_FALSE(workload->IsFinished());
-  workload->WaitFinish();
-  ASSERT_TRUE(workload->IsFinished());
-  auto end_time = steady_clock::now();
-  ASSERT_TRUE(end_time >= start_time + seconds(1));
 }
 
 TEST(workload, execvp_failure) {
