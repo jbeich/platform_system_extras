@@ -44,6 +44,11 @@ static std::unordered_map<std::string, uint64_t> branch_sampling_type_map = {
     {"ind_call", PERF_SAMPLE_BRANCH_IND_CALL},
 };
 
+static bool signaled;
+static void signal_handler(int) {
+  signaled = true;
+}
+
 class RecordCommand : public Command {
  public:
   RecordCommand()
@@ -78,12 +83,18 @@ class RecordCommand : public Command {
         measured_event_type_(nullptr),
         perf_mmap_pages_(256),
         record_filename_("perf.data") {
-    // We need signal SIGCHLD to break poll().
-    saved_sigchild_handler_ = signal(SIGCHLD, [](int) {});
+
+    signaled = false;
+    for (auto& sig : std::vector<int>{SIGCHLD, SIGINT, SIGTERM}) {
+      sighandler_t old_handler = signal(sig, signal_handler);
+      saved_signal_handlers_.push_back(std::make_pair(sig, old_handler));
+    }
   }
 
   ~RecordCommand() {
-    signal(SIGCHLD, saved_sigchild_handler_);
+    for (auto& pair : saved_signal_handlers_) {
+      signal(pair.first, pair.second);
+    }
   }
 
   bool Run(const std::vector<std::string>& args);
@@ -115,7 +126,7 @@ class RecordCommand : public Command {
   std::string record_filename_;
   std::unique_ptr<RecordFileWriter> record_file_writer_;
 
-  sighandler_t saved_sigchild_handler_;
+  std::vector<std::pair<int, sighandler_t>> saved_signal_handlers_;
 };
 
 bool RecordCommand::Run(const std::vector<std::string>& args) {
@@ -189,12 +200,9 @@ bool RecordCommand::Run(const std::vector<std::string>& args) {
   }
   auto callback =
       std::bind(&RecordCommand::WriteData, this, std::placeholders::_1, std::placeholders::_2);
-  while (true) {
+  while (!signaled) {
     if (!event_selection_set_.ReadMmapEventData(callback)) {
       return false;
-    }
-    if (workload->IsFinished()) {
-      break;
     }
     poll(&pollfds[0], pollfds.size(), -1);
   }

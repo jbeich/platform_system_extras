@@ -30,7 +30,6 @@ class Workload {
     NotYetCreateNewProcess,
     NotYetStartNewProcess,
     Started,
-    Finished,
   };
 
  public:
@@ -39,8 +38,6 @@ class Workload {
   ~Workload();
 
   bool Start();
-  bool IsFinished();
-  void WaitFinish();
   pid_t GetPid() {
     return work_pid_;
   }
@@ -55,7 +52,6 @@ class Workload {
   }
 
   bool CreateNewProcess();
-  void WaitChildProcess(bool no_hang);
 
   WorkState work_state_;
   std::vector<std::string> args_;

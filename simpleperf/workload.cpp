@@ -32,8 +32,9 @@ std::unique_ptr<Workload> Workload::CreateWorkload(const std::vector<std::string
 }
 
 Workload::~Workload() {
-  if (work_pid_ != -1 && work_state_ != NotYetCreateNewProcess && work_state_ != Finished) {
+  if (work_pid_ != -1 && work_state_ != NotYetCreateNewProcess) {
     kill(work_pid_, SIGKILL);
+    waitpid(work_pid_, nullptr, 0);
   }
   if (start_signal_fd_ != -1) {
     close(start_signal_fd_);
@@ -127,33 +128,4 @@ bool Workload::Start() {
   }
   work_state_ = Started;
   return true;
-}
-
-bool Workload::IsFinished() {
-  if (work_state_ == Started) {
-    WaitChildProcess(true);
-  }
-  return work_state_ == Finished;
-}
-
-void Workload::WaitFinish() {
-  CHECK(work_state_ == Started || work_state_ == Finished);
-  if (work_state_ == Started) {
-    WaitChildProcess(false);
-  }
-}
-
-void Workload::WaitChildProcess(bool no_hang) {
-  int status;
-  pid_t result = TEMP_FAILURE_RETRY(waitpid(work_pid_, &status, (no_hang ? WNOHANG : 0)));
-  if (result == work_pid_) {
-    work_state_ = Finished;
-    if (WIFSIGNALED(status)) {
-      LOG(ERROR) << "work process was terminated by signal " << strsignal(WTERMSIG(status));
-    } else if (WIFEXITED(status) && WEXITSTATUS(status) != 0) {
-      LOG(ERROR) << "work process exited with exit code " << WEXITSTATUS(status);
-    }
-  } else if (result == -1) {
-    PLOG(FATAL) << "waitpid() failed";
-  }
 }
