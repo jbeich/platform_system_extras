@@ -95,7 +95,7 @@ perf_event_attr CreateDefaultPerfEventAttr(const EventType& event_type) {
 
 void DumpPerfEventAttr(const perf_event_attr& attr, size_t indent) {
   std::string event_name = "unknown";
-  const EventType* event_type = EventTypeFactory::FindEventTypeByConfig(attr.type, attr.config);
+  const EventType* event_type = FindEventTypeByConfig(attr.type, attr.config);
   if (event_type != nullptr) {
     event_name = event_type->name;
   }

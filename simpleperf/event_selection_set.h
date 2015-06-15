@@ -25,6 +25,7 @@
 #include <base/macros.h>
 
 #include "event_fd.h"
+#include "event_type.h"
 #include "perf_event.h"
 
 struct EventType;
@@ -47,7 +48,7 @@ class EventSelectionSet {
     return selections_.empty();
   }
 
-  void AddEventType(const EventType& event_type);
+  void AddEventType(const EventTypeAndModifier& event_type_modifier);
 
   void EnableOnExec();
   void SampleIdAll();
@@ -69,7 +70,7 @@ class EventSelectionSet {
 
  private:
   struct EventSelection {
-    const EventType* event_type;
+    EventType event_type;
     perf_event_attr event_attr;
     std::vector<std::unique_ptr<EventFd>> event_fds;
   };
