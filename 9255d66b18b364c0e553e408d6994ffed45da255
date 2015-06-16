@@ -16,6 +16,24 @@
       "revId": "9255d66b18b364c0e553e408d6994ffed45da255",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "594a3c43_a14f283a",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-06-16T01:58:15Z",
+      "side": 1,
+      "message": "But signaled should be accessed in the signal handler. And I don\u0027t know how to access a non global variable in the signal handler. lambda doesn\u0027t help here.",
+      "parentUuid": "5965dcc2_94451c65",
+      "revId": "9255d66b18b364c0e553e408d6994ffed45da255",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
