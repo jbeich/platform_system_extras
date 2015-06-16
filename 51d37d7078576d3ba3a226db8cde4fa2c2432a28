@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5965dcc2_d43eb4eb",
+        "filename": "simpleperf/event_type.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-06-16T01:05:28Z",
+      "side": 1,
+      "message": "would this be simpler if you just set all the defaults before the loop and just had one switch inside?",
+      "revId": "51d37d7078576d3ba3a226db8cde4fa2c2432a28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
