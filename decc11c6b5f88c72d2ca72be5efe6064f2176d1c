@@ -22,6 +22,30 @@
       "revId": "decc11c6b5f88c72d2ca72be5efe6064f2176d1c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b98a589d_f0190139",
+        "filename": "simpleperf/workload.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-06-16T21:04:36Z",
+      "side": 0,
+      "message": "done. currently it will report an error message if the child process exited with nonzero code or was signaled. But the error in child process will not affect the exit code of simpleperf.",
+      "parentUuid": "d9caacdd_cc9603cd",
+      "range": {
+        "startLine": 152,
+        "startChar": 0,
+        "endLine": 152,
+        "endChar": 92
+      },
+      "revId": "decc11c6b5f88c72d2ca72be5efe6064f2176d1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
