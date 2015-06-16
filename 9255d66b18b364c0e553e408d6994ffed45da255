@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5965dcc2_94451c65",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-06-16T01:07:46Z",
+      "side": 1,
+      "message": "move these inside the SignalHandler object too?",
+      "revId": "9255d66b18b364c0e553e408d6994ffed45da255",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
