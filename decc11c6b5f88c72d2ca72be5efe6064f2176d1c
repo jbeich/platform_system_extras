@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d9caacdd_cc9603cd",
+        "filename": "simpleperf/workload.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-06-16T12:54:27Z",
+      "side": 0,
+      "message": "I actually kind of liked this error message -- is there any way you can keep it? With the old version there was some feedback when the profiled program received a fatal signal:\n\nroot@hammerhead:/sdcard/tmp # simpleperf record prog                         \nsimpleperf E 25623 25623 system/extras/simpleperf/workload.cpp:140] work process was terminated by signal Segmentation fault\nroot@hammerhead:/sdcard/tmp # \n\nNew version (run on same program):\n\nroot@hammerhead:/sdcard/tmp # simpleperf record prog                           \nroot@hammerhead:/sdcard/tmp # \n\nIt would be nice to preserve the old behavior.",
+      "range": {
+        "startLine": 152,
+        "startChar": 0,
+        "endLine": 152,
+        "endChar": 92
+      },
+      "revId": "decc11c6b5f88c72d2ca72be5efe6064f2176d1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
