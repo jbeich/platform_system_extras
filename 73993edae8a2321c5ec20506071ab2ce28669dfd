@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "99203484_274b547c",
+        "filename": "simpleperf/workload_test.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-06-17T21:28:48Z",
+      "side": 1,
+      "message": "destructors (here and below).",
+      "revId": "73993edae8a2321c5ec20506071ab2ce28669dfd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "99203484_a7a584be",
+        "filename": "simpleperf/workload_test.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-06-17T21:28:48Z",
+      "side": 1,
+      "message": "(we should probably replace \"work\" with \"child\" in all error messages.)",
+      "revId": "73993edae8a2321c5ec20506071ab2ce28669dfd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
