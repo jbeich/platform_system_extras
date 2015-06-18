@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3e700ec3_bf45df65",
+        "filename": "simpleperf/record_file.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-06-18T18:03:31Z",
+      "side": 1,
+      "message": "i think \"seek\" is more obvious than \"move\".",
+      "revId": "ff5dd2065fda9062b3feaa4c625611fadc0d1191",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
