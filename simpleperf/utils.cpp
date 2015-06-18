@@ -68,6 +68,15 @@ void GetEntriesInDir(const std::string& dirpath, std::vector<std::string>* files
   closedir(dir);
 }
 
+bool IsDir(const std::string& dirpath) {
+  DIR* dir = opendir(dirpath.c_str());
+  if (dir == nullptr) {
+    return false;
+  }
+  closedir(dir);
+  return true;
+}
+
 bool RemovePossibleFile(const std::string& filename) {
   struct stat st;
   if (stat(filename.c_str(), &st) == 0) {
