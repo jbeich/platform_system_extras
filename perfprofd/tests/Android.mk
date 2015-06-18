@@ -43,5 +43,24 @@ LOCAL_SHARED_LIBRARIES += libcutils
 LOCAL_MODULE := perfprofd_test
 include $(BUILD_NATIVE_TEST)
 
+#
+# This helper program is for debugging. You provide it with the name
+# of a perf.data file collected by hand (ex: "perf.data") and it runs
+# encodes the data into a protobuf and emits the result to <infile>.encoded.
+# Useful for creating encoded files from hand-collected perf.data files.
+#
+include $(CLEAR_VARS)
+LOCAL_CLANG := true
+LOCAL_CPP_EXTENSION := cc
+LOCAL_CXX_STL := libc++
+LOCAL_STATIC_LIBRARIES := libperfprofdcore libperfprofdmockutils libbase
+LOCAL_SHARED_LIBRARIES := libprotobuf-cpp-lite
+LOCAL_C_INCLUDES += system/extras/perfprofd external/protobuf/src
+LOCAL_SRC_FILES := encoder_driver.cc
+LOCAL_CPPFLAGS += $(perfprofd_test_cppflags)
+LOCAL_SHARED_LIBRARIES += libcutils
+LOCAL_MODULE := perfprofd_encoder
+include $(BUILD_EXECUTABLE)
+
 # Clean temp vars
 perfprofd_test_cppflags :=
