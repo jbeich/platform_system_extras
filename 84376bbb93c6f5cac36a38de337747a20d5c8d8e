@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1e67ca0f_cd72690a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-06-18T22:00:32Z",
+      "side": 1,
+      "message": "danalbert was complaining about this the other day. maybe it made sense on the machines perf was originally developed on and they just never updated it?",
+      "revId": "84376bbb93c6f5cac36a38de337747a20d5c8d8e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1e67ca0f_8d7d51e1",
+        "filename": "simpleperf/utils.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-06-18T22:00:32Z",
+      "side": 1,
+      "message": "not stat and S_ISDIR?",
+      "revId": "84376bbb93c6f5cac36a38de337747a20d5c8d8e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
