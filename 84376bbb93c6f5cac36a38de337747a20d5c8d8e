@@ -33,6 +33,24 @@
       "revId": "84376bbb93c6f5cac36a38de337747a20d5c8d8e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5e6dc2eb_d43194f6",
+        "filename": "simpleperf/utils.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-06-18T23:52:33Z",
+      "side": 1,
+      "message": "Changed. I thought stat() and S_ISDIR() may not consider symlink, but I was wrong.",
+      "parentUuid": "1e67ca0f_8d7d51e1",
+      "revId": "84376bbb93c6f5cac36a38de337747a20d5c8d8e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
