@@ -16,6 +16,24 @@
       "revId": "ff5dd2065fda9062b3feaa4c625611fadc0d1191",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7e9c462a_e44e708a",
+        "filename": "simpleperf/record_file.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-06-18T18:32:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3e700ec3_bf45df65",
+      "revId": "ff5dd2065fda9062b3feaa4c625611fadc0d1191",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
