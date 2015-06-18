@@ -17,8 +17,9 @@
 #include <gtest/gtest.h>
 
 #include <signal.h>
-#include <utils.h>
-#include <workload.h>
+
+#include "utils.h"
+#include "workload.h"
 
 static volatile bool signaled;
 static void signal_handler(int) {
