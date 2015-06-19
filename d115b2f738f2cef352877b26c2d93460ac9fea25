@@ -16,6 +16,24 @@
       "revId": "d115b2f738f2cef352877b26c2d93460ac9fea25",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1e67ca0f_0456eca2",
+        "filename": "simpleperf/event_type.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-06-19T23:36:23Z",
+      "side": 1,
+      "message": "Because I think only u and k are useful on device. And I don\u0027t know the other modifiers very well.",
+      "parentUuid": "5efea270_552cdece",
+      "revId": "d115b2f738f2cef352877b26c2d93460ac9fea25",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
