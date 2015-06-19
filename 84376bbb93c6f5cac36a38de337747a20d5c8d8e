@@ -51,6 +51,24 @@
       "revId": "84376bbb93c6f5cac36a38de337747a20d5c8d8e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1e67ca0f_5571fb57",
+        "filename": "simpleperf/utils.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-06-19T00:07:38Z",
+      "side": 1,
+      "message": "yeah, you can use lstat(2) if you don\u0027t want to follow symlinks, but stat(2) will follow them.",
+      "parentUuid": "5e6dc2eb_d43194f6",
+      "revId": "84376bbb93c6f5cac36a38de337747a20d5c8d8e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
