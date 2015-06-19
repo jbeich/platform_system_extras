@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5efea270_552cdece",
+        "filename": "simpleperf/event_type.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-06-19T21:51:48Z",
+      "side": 1,
+      "message": "why does the help text only mention u and k?",
+      "revId": "d115b2f738f2cef352877b26c2d93460ac9fea25",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
