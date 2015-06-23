@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5ecce27c_6872f790",
+        "filename": "simpleperf/read_elf.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-06-23T19:34:53Z",
+      "side": 1,
+      "message": "why the rfind if these symbols start \u0027$\u0027?",
+      "revId": "b3caabf922e9a0ce2c094d895a88f7e05cabf850",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
