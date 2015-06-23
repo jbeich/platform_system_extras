@@ -16,6 +16,24 @@
       "revId": "b3caabf922e9a0ce2c094d895a88f7e05cabf850",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9e149a89_6d278dee",
+        "filename": "simpleperf/read_elf.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-06-23T20:50:23Z",
+      "side": 1,
+      "message": "find() also works. I use a broader match than I see here, because there may have other meaningless symbols like $a or something else. Maybe rfind() makes people think there are some hidden rules there.",
+      "parentUuid": "5ecce27c_6872f790",
+      "revId": "b3caabf922e9a0ce2c094d895a88f7e05cabf850",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
