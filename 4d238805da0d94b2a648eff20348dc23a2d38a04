@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fe23d6e9_504a22f8",
+        "filename": "simpleperf/read_elf.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-06-23T21:12:38Z",
+      "side": 1,
+      "message": "i didn\u0027t really mean find versus rfind --- i meant \"what is the exact set of names you\u0027re trying to exclude, and where are they defined?\".",
+      "revId": "4d238805da0d94b2a648eff20348dc23a2d38a04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
