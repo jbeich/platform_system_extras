@@ -32,9 +32,10 @@
 
 #pragma clang diagnostic pop
 
-#include <elf.h>
-
 #include "utils.h"
+
+#define ELF_NOTE_GNU "GNU"
+#define NT_GNU_BUILD_ID 3
 
 static bool GetBuildIdFromNoteSection(const char* section, size_t section_size, BuildId* build_id) {
   const char* p = section;
@@ -77,7 +78,7 @@ template <class ELFT>
 bool GetBuildIdFromELFFile(const llvm::object::ELFFile<ELFT>* elf, BuildId* build_id) {
   for (auto section_iterator = elf->begin_sections(); section_iterator != elf->end_sections();
        ++section_iterator) {
-    if (section_iterator->sh_type == SHT_NOTE) {
+    if (section_iterator->sh_type == llvm::ELF::SHT_NOTE) {
       auto contents = elf->getSectionContents(&*section_iterator);
       if (contents.getError()) {
         LOG(DEBUG) << "read note section error";
@@ -117,7 +118,8 @@ bool GetBuildIdFromElfFile(const std::string& filename, BuildId* build_id) {
 template <class ELFT>
 bool ParseSymbolsFromELFFile(const llvm::object::ELFFile<ELFT>* elf,
                              std::function<void(const ElfFileSymbol&)> callback) {
-  bool is_arm = (elf->getHeader()->e_machine == EM_ARM);
+  bool is_arm = (elf->getHeader()->e_machine == llvm::ELF::EM_ARM ||
+                 elf->getHeader()->e_machine == llvm::ELF::EM_AARCH64);
   auto begin = elf->begin_symbols();
   auto end = elf->end_symbols();
   if (begin == end) {
@@ -158,17 +160,22 @@ bool ParseSymbolsFromELFFile(const llvm::object::ELFFile<ELFT>* elf,
     }
     symbol.len = elf_symbol.st_size;
     int type = elf_symbol.getType();
-    if (type == STT_FUNC) {
+    if (type == llvm::ELF::STT_FUNC) {
       symbol.is_func = true;
-    } else if (type == STT_NOTYPE) {
+    } else if (type == llvm::ELF::STT_NOTYPE) {
       if (symbol.is_in_text_section) {
         symbol.is_label = true;
-
-        // Arm has meaningless labels like $t, $d, $x, exclude them.
         if (is_arm) {
-          size_t test_pos = (symbol.name.find(linker_prefix) == 0) ? linker_prefix.size() : 0;
-          if (test_pos + 2 == symbol.name.size() && symbol.name[test_pos] == '$') {
-            symbol.is_label = false;
+          // Remove mapping symbols in arm, which are described in "ELF for ARM Architecture" and
+          // "ELF for ARM 64-bit Architecture".
+          size_t test_pos = (symbol.name.compare(0, linker_prefix.size(), linker_prefix) == 0)
+                                ? linker_prefix.size()
+                                : 0;
+          if (test_pos + 2 <= symbol.name.size() && symbol.name[test_pos] == '$' &&
+              strchr("adtx", symbol.name[test_pos + 1]) != nullptr) {
+            if (test_pos + 2 == symbol.name.size() || symbol.name[test_pos + 2] == '.') {
+              symbol.is_label = false;
+            }
           }
         }
       }
