@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1e098aaf_ab92d5d9",
+        "filename": "simpleperf/read_elf.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-06-24T19:26:27Z",
+      "side": 1,
+      "message": "can you describe them here? is there a regular expression or something? or can we break this out and unit test the new function with an example of each class?\n\n(this expression is way too complicated to not be broken out into its own function anyway.)",
+      "revId": "0a3551eb160925b3f4cc37de990769e332c1481a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
