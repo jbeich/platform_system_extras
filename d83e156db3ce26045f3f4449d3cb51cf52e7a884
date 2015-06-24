@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fe0bd6a6_90861a63",
+        "filename": "simpleperf/record_file.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-06-24T21:22:02Z",
+      "side": 1,
+      "message": "can you explain better what\u0027s going on here?\n\nalso, it\u0027s only used in one place, so i\u0027m not sure it should be global.",
+      "revId": "d83e156db3ce26045f3f4449d3cb51cf52e7a884",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
