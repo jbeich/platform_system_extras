@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "9e99fafb_3ccd11d5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-06-25T22:20:19Z",
+      "side": 1,
+      "message": "It is supported in gcc c99, clang, but not in c++ standard or g++. My eclipse IDE can\u0027t recognize this and shows the code in syntax warnings. This is very boring and I want to get rid of it.\nI agree it is more readable, but is more error-prone with partially initialized structs.",
+      "parentUuid": "fe6116bc_b755c8cd",
+      "revId": "be6afa300a01ad1e6cb493e748d709d0b3b5e3b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "de8ff2ab_7ef0710a",
         "filename": "/COMMIT_MSG",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2015-06-25T21:40:49Z",
       "side": 1,
       "message": "isn\u0027t there a warning we can turn on?",
+      "revId": "be6afa300a01ad1e6cb493e748d709d0b3b5e3b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "de8ff2ab_01d54cb1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-06-25T22:20:19Z",
+      "side": 1,
+      "message": "g++ said it is detected with [-Werror\u003dmissing-field-initializers], but even I turn on this option in clang, clang can\u0027t detect the same thing. I think it is a choice, g++ chooses to be safer and doesn\u0027t support partial initialization with designation, but clang agrees with c and supports partial initialization with designation.",
+      "parentUuid": "de8ff2ab_7ef0710a",
       "revId": "be6afa300a01ad1e6cb493e748d709d0b3b5e3b5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
