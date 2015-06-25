@@ -48,7 +48,6 @@ libsimpleperf_src_files := \
   workload.cpp \
 
 include $(CLEAR_VARS)
-LOCAL_CLANG := true
 LOCAL_CPPFLAGS := $(simpleperf_common_cppflags)
 LOCAL_SRC_FILES := $(libsimpleperf_src_files)
 LOCAL_SHARED_LIBRARIES := $(simpleperf_common_shared_libraries)
@@ -62,7 +61,6 @@ include $(BUILD_STATIC_LIBRARY)
 
 ifeq ($(HOST_OS),linux)
 include $(CLEAR_VARS)
-LOCAL_CLANG := true
 LOCAL_CPPFLAGS := $(simpleperf_host_common_cppflags)
 LOCAL_SRC_FILES := $(libsimpleperf_src_files)
 LOCAL_SHARED_LIBRARIES := $(simpleperf_common_shared_libraries)
@@ -76,7 +74,6 @@ include $(BUILD_HOST_STATIC_LIBRARY)
 endif
 
 include $(CLEAR_VARS)
-LOCAL_CLANG := true
 LOCAL_CPPFLAGS := $(simpleperf_common_cppflags)
 LOCAL_SRC_FILES := main.cpp
 LOCAL_WHOLE_STATIC_LIBRARIES := libsimpleperf
@@ -89,7 +86,6 @@ include $(BUILD_EXECUTABLE)
 
 ifeq ($(HOST_OS),linux)
 include $(CLEAR_VARS)
-LOCAL_CLANG := true
 LOCAL_CPPFLAGS := $(simpleperf_host_common_cppflags)
 LOCAL_SRC_FILES := main.cpp
 LOCAL_WHOLE_STATIC_LIBRARIES := libsimpleperf
@@ -118,7 +114,6 @@ simpleperf_unit_test_src_files := \
   workload_test.cpp \
 
 include $(CLEAR_VARS)
-LOCAL_CLANG := true
 LOCAL_CPPFLAGS := $(simpleperf_common_cppflags)
 LOCAL_SRC_FILES := $(simpleperf_unit_test_src_files)
 LOCAL_WHOLE_STATIC_LIBRARIES := libsimpleperf
@@ -130,7 +125,6 @@ include $(BUILD_NATIVE_TEST)
 
 ifeq ($(HOST_OS),linux)
 include $(CLEAR_VARS)
-LOCAL_CLANG := true
 LOCAL_CPPFLAGS := $(simpleperf_host_common_cppflags)
 LOCAL_SRC_FILES := $(simpleperf_unit_test_src_files)
 LOCAL_WHOLE_STATIC_LIBRARIES := libsimpleperf
