@@ -16,6 +16,24 @@
       "revId": "d83e156db3ce26045f3f4449d3cb51cf52e7a884",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "beeebe34_66c72435",
+        "filename": "simpleperf/record_file.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-06-25T03:22:49Z",
+      "side": 1,
+      "message": "Removed. I think it is just the alignment used by perf.data when writing strings in the feature sections. originally I used it in both reading/writing, but I removed it in reading part, so it is no long worth keeping.",
+      "parentUuid": "fe0bd6a6_90861a63",
+      "revId": "d83e156db3ce26045f3f4449d3cb51cf52e7a884",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
