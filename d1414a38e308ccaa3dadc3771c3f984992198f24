@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fed3d693_0773d661",
+        "filename": "simpleperf/dso.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-06-26T03:47:17Z",
+      "side": 1,
+      "message": "this doesn\u0027t seem right. doesn\u0027t this mean this is broken for Android too? if you\u0027re using the _host_ kernel symbols?",
+      "revId": "d1414a38e308ccaa3dadc3771c3f984992198f24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fed3d693_6780d295",
+        "filename": "simpleperf/event_type.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-06-26T03:47:17Z",
+      "side": 1,
+      "message": "this seems suspicious too. is there a better way to factor this so we don\u0027t call this in the host code?",
+      "revId": "d1414a38e308ccaa3dadc3771c3f984992198f24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dea1b20d_2ec0671e",
+        "filename": "simpleperf/perf_event_on_darwin.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-06-26T03:47:17Z",
+      "side": 1,
+      "message": "might it be better to just add these files for darwin, but fake ones where your typedefs from the other file are in darwin-support/linux/types.h and you have something like\n\n  #define _IO(x,y,z) /**/\n\nin darwin-support/linux/ioctl.h? and then use the bionic header directly. you might be able to do the same for glibc too, rather than use the glibc header.",
+      "revId": "d1414a38e308ccaa3dadc3771c3f984992198f24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}

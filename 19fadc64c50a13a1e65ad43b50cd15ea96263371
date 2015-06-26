@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9eabbaef_4c9e9fb2",
+        "filename": "simpleperf/utils.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-06-26T03:47:17Z",
+      "side": 0,
+      "message": "darwin calls sighandler_t sig_t. glibc has both. we could add that to bionic. or you could add a \"typedef void (*sighandler_t)(int);\" to darwin-support/fixes.h and -include that in the darwin LOCAL_CFLAGS...",
+      "revId": "19fadc64c50a13a1e65ad43b50cd15ea96263371",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
