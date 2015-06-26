@@ -107,7 +107,9 @@ static void ParseSymbolCallback(const ElfFileSymbol& elf_symbol, DsoEntry* dso,
                                 bool (*filter)(const ElfFileSymbol&)) {
   if (filter(elf_symbol)) {
     SymbolEntry* symbol = new SymbolEntry{
-        .name = elf_symbol.name, .addr = elf_symbol.start_in_file, .len = elf_symbol.len,
+      elf_symbol.name,  // name
+      elf_symbol.start_in_file,  // addr
+      elf_symbol.len,  // len
     };
     dso->symbols.insert(std::unique_ptr<SymbolEntry>(symbol));
   }
