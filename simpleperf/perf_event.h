@@ -21,6 +21,18 @@
 
 #include <libc/kernel/uapi/linux/perf_event.h>
 
+#elif defined(USE_PERF_EVENT_ON_DARWIN_H)
+
+#include <stdint.h>
+
+typedef uint8_t __u8;
+typedef uint16_t __u16;
+typedef uint32_t __u32;
+typedef uint64_t __u64;
+typedef int64_t __s64;
+
+#include "perf_event_on_darwin.h"
+
 #else
 
 #include <linux/perf_event.h>
