@@ -36,14 +36,12 @@ static const std::vector<EventType> static_event_type_array = {
 #include "event_type_table.h"
 };
 
-static bool IsEventTypeSupportedByKernel(const EventType& event_type) {
-  auto event_fd =
-      EventFd::OpenEventFile(CreateDefaultPerfEventAttr(event_type), getpid(), -1, false);
-  return event_fd != nullptr;
+bool __attribute__((weak)) IsEventAttrSupportedByKernel(perf_event_attr) {
+  return false;
 }
 
 bool EventType::IsSupportedByKernel() const {
-  return IsEventTypeSupportedByKernel(*this);
+  return IsEventAttrSupportedByKernel(CreateDefaultPerfEventAttr(*this));
 }
 
 static const std::vector<EventType> GetTracepointEventTypes() {

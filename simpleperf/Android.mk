@@ -18,7 +18,8 @@ LOCAL_PATH := $(call my-dir)
 
 simpleperf_common_cppflags := -std=c++11 -Wall -Wextra -Werror -Wunused
 simpleperf_use_bionic_perf_event_h_flag := -DUSE_BIONIC_PERF_EVENT_H -I bionic
-simpleperf_host_common_cppflags := $(simpleperf_common_cppflags) $(simpleperf_use_bionic_perf_event_h_flag)
+simpleperf_host_linux_cppflags := $(simpleperf_common_cppflags) $(simpleperf_use_bionic_perf_event_h_flag)
+simpleperf_host_darwin_cppflags := $(simpleperf_common_cppflags) -DUSE_PERF_EVENT_ON_DARWIN_H
 
 simpleperf_common_shared_libraries := \
   libbase \
@@ -26,25 +27,29 @@ simpleperf_common_shared_libraries := \
 
 LLVM_ROOT_PATH := external/llvm
 
+libsimpleperf_common_src_files := \
+	cmd_dumprecord.cpp \
+	cmd_help.cpp \
+	cmd_report.cpp \
+	command.cpp \
+	dso.cpp \
+	event_attr.cpp \
+	event_type.cpp \
+	read_elf.cpp \
+	record.cpp \
+	record_file_reader.cpp \
+	sample_tree.cpp \
+	utils.cpp \
+
 libsimpleperf_src_files := \
-  cmd_dumprecord.cpp \
-  cmd_help.cpp \
+  $(libsimpleperf_common_src_files) \
   cmd_list.cpp \
   cmd_record.cpp \
-  cmd_report.cpp \
   cmd_stat.cpp \
-  command.cpp \
-  dso.cpp \
   environment.cpp \
-  event_attr.cpp \
   event_fd.cpp \
   event_selection_set.cpp \
-  event_type.cpp \
-  read_elf.cpp \
-  record.cpp \
-  record_file.cpp \
-  sample_tree.cpp \
-  utils.cpp \
+  record_file_writer.cpp \
   workload.cpp \
 
 include $(CLEAR_VARS)
@@ -63,7 +68,7 @@ include $(BUILD_STATIC_LIBRARY)
 ifeq ($(HOST_OS),linux)
 include $(CLEAR_VARS)
 LOCAL_CLANG := true
-LOCAL_CPPFLAGS := $(simpleperf_host_common_cppflags)
+LOCAL_CPPFLAGS := $(simpleperf_host_linux_cppflags)
 LOCAL_SRC_FILES := $(libsimpleperf_src_files)
 LOCAL_SHARED_LIBRARIES := $(simpleperf_common_shared_libraries)
 LOCAL_LDLIBS := -lrt
@@ -73,6 +78,20 @@ LOCAL_ADDITIONAL_DEPENDENCIES := $(LOCAL_PATH)/Android.mk
 include $(LLVM_ROOT_PATH)/llvm.mk
 include $(LLVM_HOST_BUILD_MK)
 include $(BUILD_HOST_STATIC_LIBRARY)
+endif
+
+ifeq ($(HOST_OS),darwin)
+include $(CLEAR_VARS)
+LOCAL_CLANG := true
+LOCAL_CPPFLAGS := $(simpleperf_host_darwin_cppflags)
+LOCAL_SRC_FILES := $(libsimpleperf_common_src_files)
+LOCAL_SHARED_LIBRARIES := $(simpleperf_common_shared_libraries)
+LOCAL_MODULE := libsimpleperf
+LOCAL_MODULE_TAGS := optional
+LOCAL_ADDITIONAL_DEPENDENCIES := $(LOCAL_PATH)/Android.mk
+include $(LLVM_ROOT_PATH)/llvm.mk
+include $(LLVM_HOST_BUILD_MK)
+include $(BUILD_HOST_SHARED_LIBRARY)
 endif
 
 include $(CLEAR_VARS)
@@ -90,7 +109,7 @@ include $(BUILD_EXECUTABLE)
 ifeq ($(HOST_OS),linux)
 include $(CLEAR_VARS)
 LOCAL_CLANG := true
-LOCAL_CPPFLAGS := $(simpleperf_host_common_cppflags)
+LOCAL_CPPFLAGS := $(simpleperf_host_linux_cppflags)
 LOCAL_SRC_FILES := main.cpp
 LOCAL_WHOLE_STATIC_LIBRARIES := libsimpleperf
 LOCAL_SHARED_LIBRARIES := $(simpleperf_common_shared_libraries)
@@ -101,20 +120,35 @@ LOCAL_ADDITIONAL_DEPENDENCIES := $(LOCAL_PATH)/Android.mk
 include $(BUILD_HOST_EXECUTABLE)
 endif
 
+ifeq ($(HOST_OS),darwin)
+include $(CLEAR_VARS)
+LOCAL_CLANG := true
+LOCAL_CPPFLAGS := $(simpleperf_host_darwin_cppflags)
+LOCAL_SRC_FILES := main.cpp
+LOCAL_SHARED_LIBRARIES := libsimpleperf $(simpleperf_common_shared_libraries)
+LOCAL_MODULE := simpleperf
+LOCAL_MODULE_TAGS := optional
+LOCAL_ADDITIONAL_DEPENDENCIES := $(LOCAL_PATH)/Android.mk
+include $(BUILD_HOST_EXECUTABLE)
+endif
+
+simpleperf_unit_test_common_src_files := \
+	command_test.cpp \
+	gtest_main.cpp \
+	sample_tree_test.cpp \
+
 simpleperf_unit_test_src_files := \
+  $(simpleperf_unit_test_common_src_files) \
   cmd_dumprecord_test.cpp \
   cmd_list_test.cpp \
   cmd_record_test.cpp \
   cmd_report_test.cpp \
   cmd_stat_test.cpp \
-  command_test.cpp \
   cpu_offline_test.cpp \
   environment_test.cpp \
-  gtest_main.cpp \
   read_elf_test.cpp \
   record_file_test.cpp \
   record_test.cpp \
-  sample_tree_test.cpp \
   workload_test.cpp \
 
 include $(CLEAR_VARS)
@@ -131,10 +165,22 @@ include $(BUILD_NATIVE_TEST)
 ifeq ($(HOST_OS),linux)
 include $(CLEAR_VARS)
 LOCAL_CLANG := true
-LOCAL_CPPFLAGS := $(simpleperf_host_common_cppflags)
+LOCAL_CPPFLAGS := $(simpleperf_host_linux_cppflags)
 LOCAL_SRC_FILES := $(simpleperf_unit_test_src_files)
 LOCAL_WHOLE_STATIC_LIBRARIES := libsimpleperf
 LOCAL_SHARED_LIBRARIES := $(simpleperf_common_shared_libraries)
+LOCAL_MODULE := simpleperf_unit_test
+LOCAL_MODULE_TAGS := optional
+LOCAL_ADDITIONAL_DEPENDENCIES := $(LOCAL_PATH)/Android.mk
+include $(BUILD_HOST_NATIVE_TEST)
+endif
+
+ifeq ($(HOST_OS),darwin)
+include $(CLEAR_VARS)
+LOCAL_CLANG := true
+LOCAL_CPPFLAGS := $(simpleperf_host_darwin_cppflags)
+LOCAL_SRC_FILES := $(simpleperf_unit_test_common_src_files)
+LOCAL_SHARED_LIBRARIES := libsimpleperf $(simpleperf_common_shared_libraries)
 LOCAL_MODULE := simpleperf_unit_test
 LOCAL_MODULE_TAGS := optional
 LOCAL_ADDITIONAL_DEPENDENCIES := $(LOCAL_PATH)/Android.mk

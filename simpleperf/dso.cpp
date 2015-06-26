@@ -93,6 +93,11 @@ static void FixupSymbolLength(DsoEntry* dso) {
   }
 }
 
+bool __attribute__((weak))
+ProcessKernelSymbols(const std::string&, std::function<bool(const KernelSymbol&)>) {
+  return false;
+}
+
 std::unique_ptr<DsoEntry> DsoFactory::LoadKernel() {
   std::unique_ptr<DsoEntry> dso(new DsoEntry);
   dso->path = "[kernel.kallsyms]";

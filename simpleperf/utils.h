@@ -54,10 +54,13 @@ class LineReader {
 };
 
 class SignalHandlerRegister {
+ private:
+  typedef void (*signal_handler_type)(int);
+
  public:
   SignalHandlerRegister(const std::vector<int>& signums, void (*handler)(int)) {
     for (auto& sig : signums) {
-      sighandler_t old_handler = signal(sig, handler);
+      signal_handler_type old_handler = signal(sig, handler);
       saved_signal_handlers_.push_back(std::make_pair(sig, old_handler));
     }
   }
@@ -69,7 +72,7 @@ class SignalHandlerRegister {
   }
 
  private:
-  std::vector<std::pair<int, sighandler_t>> saved_signal_handlers_;
+  std::vector<std::pair<int, signal_handler_type>> saved_signal_handlers_;
 };
 
 template <class T>
