@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5e7ce256_42e672d7",
+        "filename": "squashfs_utils/squashfs_utils.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1069095
+      },
+      "writtenOn": "2015-06-26T14:59:15Z",
+      "side": 1,
+      "message": "Is it assumed that buf is always of the type squashfs_super_block? Should there be some validation for this?",
+      "range": {
+        "startLine": 42,
+        "startChar": 4,
+        "endLine": 43,
+        "endChar": 48
+      },
+      "revId": "d640b023a6272852551550df15c2de01c335d43d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
