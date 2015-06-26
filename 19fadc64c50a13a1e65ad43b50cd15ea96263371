@@ -16,6 +16,24 @@
       "revId": "19fadc64c50a13a1e65ad43b50cd15ea96263371",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1ed18a8c_68f38318",
+        "filename": "simpleperf/utils.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-06-26T03:49:59Z",
+      "side": 0,
+      "message": "actually, bionic already has sig_t too.",
+      "parentUuid": "9eabbaef_4c9e9fb2",
+      "revId": "19fadc64c50a13a1e65ad43b50cd15ea96263371",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
