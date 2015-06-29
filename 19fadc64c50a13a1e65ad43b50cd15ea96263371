@@ -34,6 +34,24 @@
       "revId": "19fadc64c50a13a1e65ad43b50cd15ea96263371",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "138ee5ef_07c9159c",
+        "filename": "simpleperf/utils.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-06-29T19:12:50Z",
+      "side": 0,
+      "message": "yes. I can use sig_t directly.",
+      "parentUuid": "1ed18a8c_68f38318",
+      "revId": "19fadc64c50a13a1e65ad43b50cd15ea96263371",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }

@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "5384ddcb_3c00f170",
+        "filename": "simpleperf/dso.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-06-29T19:12:50Z",
+      "side": 1,
+      "message": "yes. If you record perf.data on device, and report it on host, the kernel symbols are not right. I didn\u0027t fix this because I think it is not urgent. I plan to fix it in further patches: 1. add more features in perf.data to distinguish device and host, 2. add option to read kernel symbols from vmlinux.",
+      "parentUuid": "fed3d693_0773d661",
+      "revId": "d1414a38e308ccaa3dadc3771c3f984992198f24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fed3d693_6780d295",
         "filename": "simpleperf/event_type.cpp",
         "patchSetId": 2
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "f390710b_cbb0187a",
+        "filename": "simpleperf/event_type.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-06-29T19:12:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fed3d693_6780d295",
+      "revId": "d1414a38e308ccaa3dadc3771c3f984992198f24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dea1b20d_2ec0671e",
         "filename": "simpleperf/perf_event_on_darwin.h",
         "patchSetId": 2
@@ -47,6 +83,24 @@
       "writtenOn": "2015-06-26T03:47:17Z",
       "side": 1,
       "message": "might it be better to just add these files for darwin, but fake ones where your typedefs from the other file are in darwin-support/linux/types.h and you have something like\n\n  #define _IO(x,y,z) /**/\n\nin darwin-support/linux/ioctl.h? and then use the bionic header directly. you might be able to do the same for glibc too, rather than use the glibc header.",
+      "revId": "d1414a38e308ccaa3dadc3771c3f984992198f24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "93a1f560_b168a29b",
+        "filename": "simpleperf/perf_event_on_darwin.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-06-29T19:12:50Z",
+      "side": 1,
+      "message": "Done. glibc perf_event.h was not used.",
+      "parentUuid": "dea1b20d_2ec0671e",
       "revId": "d1414a38e308ccaa3dadc3771c3f984992198f24",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
