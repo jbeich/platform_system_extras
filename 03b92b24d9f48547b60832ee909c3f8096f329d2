@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "132185e2_48f55f7a",
+        "filename": "simpleperf/environment_fake.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-06-29T20:37:38Z",
+      "side": 1,
+      "message": "// TODO and a link to the bug tracking support of dealing with kernel symbols correctly?",
+      "revId": "03b92b24d9f48547b60832ee909c3f8096f329d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
