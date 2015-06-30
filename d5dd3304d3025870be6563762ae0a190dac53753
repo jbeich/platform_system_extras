@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "339be98e_a498ccf8",
+        "filename": "simpleperf/cmd_report.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-06-30T21:15:27Z",
+      "side": 1,
+      "message": "the naming is confusing here. normally class names are nouns, and methods have these kind of verb-noun names, like \"AdjustWidth\" below.\n\nthis seems more like an interface. should this be something like \"Displayable\"?",
+      "revId": "d5dd3304d3025870be6563762ae0a190dac53753",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "339be98e_848ee8b3",
+        "filename": "simpleperf/cmd_report.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-06-30T21:15:27Z",
+      "side": 1,
+      "message": "(using a verb is fine here, because a method does something.)",
+      "revId": "d5dd3304d3025870be6563762ae0a190dac53753",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "33c4c97c_bf10df88",
+        "filename": "simpleperf/cmd_report.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-06-30T21:15:27Z",
+      "side": 1,
+      "message": "Accumulated?",
+      "revId": "d5dd3304d3025870be6563762ae0a190dac53753",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "33c4c97c_5f1f838e",
+        "filename": "simpleperf/cmd_report.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-06-30T21:15:27Z",
+      "side": 1,
+      "message": "again, \"Sortable\" or \"Comparable\"? and is this really a subclass, or an orthogonal interface?",
+      "revId": "d5dd3304d3025870be6563762ae0a190dac53753",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
