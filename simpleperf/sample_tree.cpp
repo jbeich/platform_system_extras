@@ -160,14 +160,15 @@ const MapEntry* SampleTree::FindMap(const ThreadEntry* thread, uint64_t ip, bool
   return &unknown_map_;
 }
 
-void SampleTree::AddSample(int pid, int tid, uint64_t ip, uint64_t time, uint64_t period,
-                           bool in_kernel) {
+SampleEntry* SampleTree::AddSample(int pid, int tid, uint64_t ip, uint64_t time,
+                                         uint64_t period, bool in_kernel) {
   const ThreadEntry* thread = FindThreadOrNew(pid, tid);
   const MapEntry* map = FindMap(thread, ip, in_kernel);
   const SymbolEntry* symbol = FindSymbol(map, ip);
 
   SampleEntry sample = {
       ip, time, period,
+      0,  // children_period
       1,  // sample_count
       thread,
       thread->comm,  // thead_comm
@@ -179,7 +180,7 @@ void SampleTree::AddSample(int pid, int tid, uint64_t ip, uint64_t time, uint64_
           0,        // flags
       },
   };
-  InsertSample(sample);
+  return InsertSample(sample);
 }
 
 void SampleTree::AddBranchSample(int pid, int tid, uint64_t from_ip, uint64_t to_ip,
@@ -198,6 +199,7 @@ void SampleTree::AddBranchSample(int pid, int tid, uint64_t from_ip, uint64_t to
 
   SampleEntry sample = {to_ip,  // ip
                         time, period,
+                        0,  // children_period
                         1,  // sample_count
                         thread,
                         thread->comm,  // thread_comm
@@ -212,18 +214,55 @@ void SampleTree::AddBranchSample(int pid, int tid, uint64_t from_ip, uint64_t to
   InsertSample(sample);
 }
 
-void SampleTree::InsertSample(const SampleEntry& sample) {
+SampleEntry* SampleTree::AddCallChainSample(int pid, int tid, uint64_t ip, uint64_t time, uint64_t period,
+                                    bool in_kernel, const std::vector<SampleEntry*>& callchain) {
+  const ThreadEntry* thread = FindThreadOrNew(pid, tid);
+  const MapEntry* map = FindMap(thread, ip, in_kernel);
+  const SymbolEntry* symbol = FindSymbol(map, ip);
+
+  SampleEntry sample = {
+      ip, time,
+      0,       // period
+      period,  // child_period
+      0,       // sample_count
+      thread,
+      thread->comm,  // thread_comm
+      map, symbol,
+      BranchFromEntry{
+          0,        // ip
+          nullptr,  // map
+          nullptr,  // symbol
+          0,        // flags
+      },
+  };
+  auto it = sample_tree_.find(sample);
+  if (it != sample_tree_.end()) {
+    SampleEntry* find_sample = const_cast<SampleEntry*>(&*it);
+    // Process only once for recursive function call.
+    if (std::find(callchain.begin(), callchain.end(), find_sample) != callchain.end()) {
+      return find_sample;
+    }
+  }
+  return InsertSample(sample);
+}
+
+SampleEntry* SampleTree::InsertSample(const SampleEntry& sample) {
+  SampleEntry* result;
   auto it = sample_tree_.find(sample);
   if (it == sample_tree_.end()) {
     auto pair = sample_tree_.insert(sample);
     CHECK(pair.second);
+    result = const_cast<SampleEntry*>(&*pair.first);
   } else {
     SampleEntry* find_sample = const_cast<SampleEntry*>(&*it);
     find_sample->period += sample.period;
-    find_sample->sample_count++;
+    find_sample->children_period += sample.children_period;
+    find_sample->sample_count += sample.sample_count;
+    result = find_sample;
   }
-  total_samples_++;
+  total_samples_ += sample.sample_count;
   total_period_ += sample.period;
+  return result;
 }
 
 const SymbolEntry* SampleTree::FindSymbol(const MapEntry* map, uint64_t ip) {
