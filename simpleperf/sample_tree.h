@@ -56,6 +56,7 @@ struct SampleEntry {
   uint64_t ip;
   uint64_t time;
   uint64_t period;
+  uint64_t children_period;
   uint64_t sample_count;
   const ThreadEntry* thread;
   const char* thread_comm;  // It refers to the thread comm when the sample happens.
@@ -96,9 +97,12 @@ class SampleTree {
                     const std::string& filename);
   void AddThreadMap(int pid, int tid, uint64_t start_addr, uint64_t len, uint64_t pgoff,
                     uint64_t time, const std::string& filename);
-  void AddSample(int pid, int tid, uint64_t ip, uint64_t time, uint64_t period, bool in_kernel);
+  const SampleEntry* AddSample(int pid, int tid, uint64_t ip, uint64_t time, uint64_t period,
+                               bool in_kernel);
   void AddBranchSample(int pid, int tid, uint64_t from_ip, uint64_t to_ip, uint64_t branch_flags,
                        uint64_t time, uint64_t period);
+  void AddCallChainSample(int pid, int tid, uint64_t ip, uint64_t time, uint64_t period,
+                          bool in_kernel, std::set<const SampleEntry*>* callchains);
   void VisitAllSamples(std::function<void(const SampleEntry&)> callback);
 
   uint64_t TotalSamples() const {
@@ -115,7 +119,7 @@ class SampleTree {
   DsoEntry* FindKernelDsoOrNew(const std::string& filename);
   DsoEntry* FindUserDsoOrNew(const std::string& filename);
   const SymbolEntry* FindSymbol(const MapEntry* map, uint64_t ip);
-  void InsertSample(const SampleEntry& sample);
+  const SampleEntry* InsertSample(const SampleEntry& sample);
 
   struct SampleComparator {
     bool operator()(const SampleEntry& sample1, const SampleEntry& sample2) const {
@@ -129,8 +133,10 @@ class SampleTree {
 
   struct SortedSampleComparator {
     bool operator()(const SampleEntry& sample1, const SampleEntry& sample2) const {
-      if (sample1.period != sample2.period) {
-        return sample1.period > sample2.period;
+      uint64_t period1 = sample1.period + sample1.children_period;
+      uint64_t period2 = sample2.period + sample2.children_period;
+      if (period1 != period2) {
+        return period1 > period2;
       }
       return compare_function(sample1, sample2) < 0;
     }
