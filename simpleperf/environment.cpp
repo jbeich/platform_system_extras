@@ -359,7 +359,9 @@ bool GetThreadMmapsInProcess(pid_t pid, std::vector<ThreadMmap>* thread_mmaps) {
 }
 
 bool GetKernelBuildId(BuildId* build_id) {
-  return GetBuildIdFromNoteFile("/sys/kernel/notes", build_id);
+  bool result = GetBuildIdFromNoteFile("/sys/kernel/notes", build_id);
+  LOG(DEBUG) << "get kernel build id: " << build_id->ToString();
+  return result;
 }
 
 bool GetModuleBuildId(const std::string& module_name, BuildId* build_id) {
