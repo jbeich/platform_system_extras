@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "339be98e_55564ca1",
+        "filename": "simpleperf/cmd_report.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-07-01T00:50:43Z",
+      "side": 1,
+      "message": "Done. It seems although \"show\" and \"sort\" can be nouns, they are more naturally thought as verbs.",
+      "parentUuid": "339be98e_a498ccf8",
+      "revId": "d5dd3304d3025870be6563762ae0a190dac53753",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "339be98e_848ee8b3",
         "filename": "simpleperf/cmd_report.cpp",
         "patchSetId": 3
@@ -53,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "339be98e_3553c8b1",
+        "filename": "simpleperf/cmd_report.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-07-01T00:50:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "33c4c97c_bf10df88",
+      "revId": "d5dd3304d3025870be6563762ae0a190dac53753",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "33c4c97c_5f1f838e",
         "filename": "simpleperf/cmd_report.cpp",
         "patchSetId": 3
@@ -64,6 +100,24 @@
       "writtenOn": "2015-06-30T21:15:27Z",
       "side": 1,
       "message": "again, \"Sortable\" or \"Comparable\"? and is this really a subclass, or an orthogonal interface?",
+      "revId": "d5dd3304d3025870be6563762ae0a190dac53753",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b3a6f9d3_b146c8f3",
+        "filename": "simpleperf/cmd_report.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-07-01T00:50:43Z",
+      "side": 1,
+      "message": "Currently all sortable items are also displayable. But making them orthogonal seems to make the code more clear.",
+      "parentUuid": "33c4c97c_5f1f838e",
       "revId": "d5dd3304d3025870be6563762ae0a190dac53753",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
