@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "133ee549_201b6a7b",
+        "filename": "simpleperf/callchain.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-07-01T18:57:18Z",
+      "side": 1,
+      "message": "MatchSampleByName?",
+      "revId": "0ae43483bb1eda234fb3f96bba191acab636a83a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b34279dc_7d94b748",
+        "filename": "simpleperf/callchain.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-07-01T18:57:18Z",
+      "side": 1,
+      "message": "this is a bit weird. you\u0027re really measuring how much of samples2 equals the subsequence of samples2 starting at samples2_start. can you think of a better name for this?\n\nif not, maybe it should just be inlined with a comment explaining.",
+      "revId": "0ae43483bb1eda234fb3f96bba191acab636a83a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d347edea_be2239ac",
+        "filename": "simpleperf/callchain.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-07-01T18:57:18Z",
+      "side": 1,
+      "message": "why Select rather than Find?",
+      "revId": "0ae43483bb1eda234fb3f96bba191acab636a83a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "133ee549_e0cee258",
+        "filename": "simpleperf/callchain.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-07-01T18:57:18Z",
+      "side": 1,
+      "message": "this isn\u0027t a count of matches. can you add some comments in this function to explain what you\u0027re doing.",
+      "revId": "0ae43483bb1eda234fb3f96bba191acab636a83a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3337696d_e17a66e7",
+        "filename": "simpleperf/cmd_report.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 608,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-07-01T18:57:18Z",
+      "side": 1,
+      "message": "stopped\n\nor, better, \"truncated\"",
+      "revId": "0ae43483bb1eda234fb3f96bba191acab636a83a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
