@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "339be98e_5542ccbf",
+        "filename": "simpleperf/cmd_report.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 507,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-07-01T00:57:39Z",
+      "side": 1,
+      "message": "or you could just have a default implementation of Compare that returns 0 and lose comparable_items_?",
+      "revId": "36c662b538bd89e591b1bfcbce59fc0de3602bf6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
