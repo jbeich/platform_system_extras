@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "1317c5d9_7b8b5ba5",
+        "filename": "simpleperf/callchain.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-07-01T21:59:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "133ee549_201b6a7b",
+      "revId": "0ae43483bb1eda234fb3f96bba191acab636a83a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b34279dc_7d94b748",
         "filename": "simpleperf/callchain.cpp",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2015-07-01T18:57:18Z",
       "side": 1,
       "message": "this is a bit weird. you\u0027re really measuring how much of samples2 equals the subsequence of samples2 starting at samples2_start. can you think of a better name for this?\n\nif not, maybe it should just be inlined with a comment explaining.",
+      "revId": "0ae43483bb1eda234fb3f96bba191acab636a83a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1317c5d9_7b1efbeb",
+        "filename": "simpleperf/callchain.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-07-01T21:59:15Z",
+      "side": 1,
+      "message": "Function name and arguments are changed. the function partition may be a little better than before.",
+      "parentUuid": "b34279dc_7d94b748",
       "revId": "0ae43483bb1eda234fb3f96bba191acab636a83a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "3320492d_bcd32dcb",
+        "filename": "simpleperf/callchain.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-07-01T21:59:15Z",
+      "side": 1,
+      "message": "Changed. Didn\u0027t think up of Find at all.",
+      "parentUuid": "d347edea_be2239ac",
+      "revId": "0ae43483bb1eda234fb3f96bba191acab636a83a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "133ee549_e0cee258",
         "filename": "simpleperf/callchain.cpp",
         "patchSetId": 1
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "9351f5aa_c522d0ad",
+        "filename": "simpleperf/callchain.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-07-01T21:59:15Z",
+      "side": 1,
+      "message": "As variable name and function name are changed, they are enough to explain the intention?",
+      "parentUuid": "133ee549_e0cee258",
+      "revId": "0ae43483bb1eda234fb3f96bba191acab636a83a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3337696d_e17a66e7",
         "filename": "simpleperf/cmd_report.cpp",
         "patchSetId": 1
@@ -81,6 +153,24 @@
       "writtenOn": "2015-07-01T18:57:18Z",
       "side": 1,
       "message": "stopped\n\nor, better, \"truncated\"",
+      "revId": "0ae43483bb1eda234fb3f96bba191acab636a83a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f319510f_1ae499cc",
+        "filename": "simpleperf/cmd_report.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 608,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-07-01T21:59:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3337696d_e17a66e7",
       "revId": "0ae43483bb1eda234fb3f96bba191acab636a83a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
