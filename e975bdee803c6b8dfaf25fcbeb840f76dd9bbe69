@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "13f0a5db_301528f4",
+        "filename": "tests/net_test/neighbour_test.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2015-07-01T04:48:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "13f0a5db_50430c14",
+      "range": {
+        "startLine": 3,
+        "startChar": 12,
+        "endLine": 3,
+        "endChar": 16
+      },
+      "revId": "e975bdee803c6b8dfaf25fcbeb840f76dd9bbe69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f3f231e5_2f46e972",
         "filename": "tests/net_test/neighbour_test.py",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2015-07-01T04:40:41Z",
       "side": 1,
       "message": "You could reorder DELAY_TIME and this declaration, changing it to:\n\n    REACHABLE_TIME_MS \u003d 2 * DELAY_TIME",
+      "range": {
+        "startLine": 50,
+        "startChar": 2,
+        "endLine": 50,
+        "endChar": 19
+      },
+      "revId": "e975bdee803c6b8dfaf25fcbeb840f76dd9bbe69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d3d9ad70_0e756ba6",
+        "filename": "tests/net_test/neighbour_test.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2015-07-01T04:48:33Z",
+      "side": 1,
+      "message": "Good idea. Done.",
+      "parentUuid": "f3f231e5_2f46e972",
       "range": {
         "startLine": 50,
         "startChar": 2,
