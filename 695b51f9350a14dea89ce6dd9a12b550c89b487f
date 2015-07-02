@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "33da09aa_c9d391ca",
+        "filename": "tests/net_test/srcaddr_selection_test.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2015-07-02T08:34:40Z",
+      "side": 1,
+      "message": "Add a comment reminding the reader that self.test_ifname does not have a global address?",
+      "range": {
+        "startLine": 324,
+        "startChar": 9,
+        "endLine": 324,
+        "endChar": 30
+      },
+      "revId": "695b51f9350a14dea89ce6dd9a12b550c89b487f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
