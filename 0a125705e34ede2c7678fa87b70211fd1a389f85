@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b3eef934_5d6c7bfd",
+        "filename": "simpleperf/dso.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-07-02T03:34:14Z",
+      "side": 1,
+      "message": "s/unmatched/didn\u0027t match/\n\nor \"match\" : \"mismatch\".",
+      "revId": "0a125705e34ede2c7678fa87b70211fd1a389f85",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "53ae9dfa_3211f05a",
+        "filename": "simpleperf/environment.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-07-02T03:34:14Z",
+      "side": 1,
+      "message": "did you mean to leave this in?",
+      "revId": "0a125705e34ede2c7678fa87b70211fd1a389f85",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "130345c0_1835e5e0",
+        "filename": "simpleperf/read_elf.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-07-02T03:34:14Z",
+      "side": 1,
+      "message": "this seems closer to FATAL than DEBUG. at least ERROR :-)",
+      "revId": "0a125705e34ede2c7678fa87b70211fd1a389f85",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b3eef934_bd377f0d",
+        "filename": "simpleperf/read_elf.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-07-02T03:34:14Z",
+      "side": 1,
+      "message": "can we distinguish between \"can\u0027t read\" and \"no build id present\"?",
+      "revId": "0a125705e34ede2c7678fa87b70211fd1a389f85",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
