@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "33da09aa_29ea2d9e",
+        "filename": "tests/net_test/srcaddr_selection_test.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2015-07-02T06:53:28Z",
+      "side": 1,
+      "message": "s/bad/RFC violation/",
+      "range": {
+        "startLine": 293,
+        "startChar": 40,
+        "endLine": 293,
+        "endChar": 43
+      },
+      "revId": "c722eb790cdd3f6a3b668d0569a7d95a6cc8918a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}

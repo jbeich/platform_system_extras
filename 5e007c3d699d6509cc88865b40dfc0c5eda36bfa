@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "33da09aa_09e769d4",
+        "filename": "tests/net_test/srcaddr_selection_test.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2015-07-02T06:53:28Z",
+      "side": 0,
+      "message": "Isn\u0027t this the same as self.test_lladdr? If so, then how was the test passing on android 3.10?",
+      "range": {
+        "startLine": 301,
+        "startChar": 8,
+        "endLine": 301,
+        "endChar": 56
+      },
+      "revId": "5e007c3d699d6509cc88865b40dfc0c5eda36bfa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
