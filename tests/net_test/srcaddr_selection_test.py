@@ -49,6 +49,9 @@ class IPv6SourceAddressSelectionTest(multinetwork_base.MultiNetworkBaseTest):
   def SetUseOptimistic(self, ifname, value):
     self.SetSysctl("/proc/sys/net/ipv6/conf/%s/use_optimistic" % ifname, value)
 
+  def SetRestrictSourceAddresses(self, ifname, value):
+    self.SetSysctl("/proc/sys/net/ipv6/conf/%s/restrict_srcaddr" % ifname, value)
+
   def GetSourceIP(self, netid, mode="mark"):
     s = self.BuildSocket(6, net_test.UDPSocket, netid, mode)
     # Because why not...testing for temporary addresses is a separate thing.
@@ -115,10 +118,12 @@ class MultiInterfaceSourceAddressSelectionTest(IPv6SourceAddressSelectionTest):
     # [0]  Make sure DAD, optimistic DAD, and the use_optimistic option
     # are all consistently disabled at the outset.
     for netid in self.tuns:
-      self.SetDAD(self.GetInterfaceName(netid), 0)
-      self.SetOptimisticDAD(self.GetInterfaceName(netid), 0)
-      self.SetUseTempaddrs(self.GetInterfaceName(netid), 0)
-      self.SetUseOptimistic(self.GetInterfaceName(netid), 0)
+      ifname = self.GetInterfaceName(netid)
+      self.SetDAD(ifname, 0)
+      self.SetOptimisticDAD(ifname, 0)
+      self.SetUseTempaddrs(ifname, 0)
+      self.SetUseOptimistic(ifname, 0)
+      self.SetRestrictSourceAddresses(ifname, 0)
 
     # [1]  Pick an interface on which to test.
     self.test_netid = random.choice(self.tuns.keys())
@@ -299,6 +304,26 @@ class NoNsFromOptimisticTest(MultiInterfaceSourceAddressSelectionTest):
 
 
 # TODO(ek): add tests listening for netlink events.
+
+
+class DefaultCandidateSrcAddrsTest(MultiInterfaceSourceAddressSelectionTest):
+
+  def testChoosesNonInterfaceSourceAddress(self):
+    self.SetRestrictSourceAddresses(self.test_ifname, 0)
+    src_ip = self.GetSourceIP(self.test_netid)
+    self.assertFalse(src_ip in [self.test_ip, self.test_lladdr])
+    self.assertTrue(src_ip in
+        [self.MyAddress(6, netid)
+         for netid in self.tuns if netid != self.test_netid])
+
+
+class RestrictedCandidateSrcAddrsTest(MultiInterfaceSourceAddressSelectionTest):
+
+  def testChoosesOnlyInterfaceSourceAddress(self):
+    self.SetRestrictSourceAddresses(self.test_ifname, 1)
+    # self.test_ifname does not have a global IPv6 address, so the only
+    # candidate is the existing link-local address.
+    self.assertAddressSelected(self.test_lladdr, self.test_netid)
 
 
 if __name__ == "__main__":
