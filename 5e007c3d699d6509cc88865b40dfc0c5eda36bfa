@@ -22,6 +22,30 @@
       "revId": "5e007c3d699d6509cc88865b40dfc0c5eda36bfa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "73a64129_4bca0540",
+        "filename": "tests/net_test/srcaddr_selection_test.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2015-07-02T07:07:59Z",
+      "side": 0,
+      "message": "Never mind. On pre-3.18, the whole test was being skipped.",
+      "parentUuid": "33da09aa_09e769d4",
+      "range": {
+        "startLine": 301,
+        "startChar": 8,
+        "endLine": 301,
+        "endChar": 56
+      },
+      "revId": "5e007c3d699d6509cc88865b40dfc0c5eda36bfa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
