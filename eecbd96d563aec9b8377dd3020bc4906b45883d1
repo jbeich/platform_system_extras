@@ -16,6 +16,24 @@
       "revId": "eecbd96d563aec9b8377dd3020bc4906b45883d1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f3ba3136_0ffda531",
+        "filename": "simpleperf/main.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-07-02T00:02:12Z",
+      "side": 1,
+      "message": "find a more convenient way of using ScopedLogSeverity.",
+      "parentUuid": "f3bdd1e6_b7892881",
+      "revId": "eecbd96d563aec9b8377dd3020bc4906b45883d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
