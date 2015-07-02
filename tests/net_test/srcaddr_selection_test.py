@@ -49,6 +49,9 @@ class IPv6SourceAddressSelectionTest(multinetwork_base.MultiNetworkBaseTest):
   def SetUseOptimistic(self, ifname, value):
     self.SetSysctl("/proc/sys/net/ipv6/conf/%s/use_optimistic" % ifname, value)
 
+  def SetRestrictSourceAddresses(self, ifname, value):
+    self.SetSysctl("/proc/sys/net/ipv6/conf/%s/restrict_srcaddrs" % ifname, value)
+
   def GetSourceIP(self, netid, mode="mark"):
     s = self.BuildSocket(6, net_test.UDPSocket, netid, mode)
     # Because why not...testing for temporary addresses is a separate thing.
