@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "334da95a_9137dc0d",
+        "filename": "simpleperf/environment.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-07-06T17:53:31Z",
+      "side": 1,
+      "message": "or just \"return ...\"?",
+      "revId": "bc4b5030858ecdb53e0da254c670f40d404633c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
