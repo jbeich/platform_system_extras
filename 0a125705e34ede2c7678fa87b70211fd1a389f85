@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "f36151bc_dd1dfb69",
+        "filename": "simpleperf/dso.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-07-06T17:51:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b3eef934_5d6c7bfd",
+      "revId": "0a125705e34ede2c7678fa87b70211fd1a389f85",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "53ae9dfa_3211f05a",
         "filename": "simpleperf/environment.cpp",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2015-07-02T03:34:14Z",
       "side": 1,
       "message": "did you mean to leave this in?",
+      "revId": "0a125705e34ede2c7678fa87b70211fd1a389f85",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "736d61b3_1365ac13",
+        "filename": "simpleperf/environment.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-07-06T17:51:51Z",
+      "side": 1,
+      "message": "removed. not a good place to dump things.",
+      "parentUuid": "53ae9dfa_3211f05a",
       "revId": "0a125705e34ede2c7678fa87b70211fd1a389f85",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "534a1d43_72d0b83b",
+        "filename": "simpleperf/read_elf.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-07-06T17:51:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "130345c0_1835e5e0",
+      "revId": "0a125705e34ede2c7678fa87b70211fd1a389f85",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b3eef934_bd377f0d",
         "filename": "simpleperf/read_elf.cpp",
         "patchSetId": 1
@@ -64,6 +118,24 @@
       "writtenOn": "2015-07-02T03:34:14Z",
       "side": 1,
       "message": "can we distinguish between \"can\u0027t read\" and \"no build id present\"?",
+      "revId": "0a125705e34ede2c7678fa87b70211fd1a389f85",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "334da95a_31c6308c",
+        "filename": "simpleperf/read_elf.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-07-06T17:51:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b3eef934_bd377f0d",
       "revId": "0a125705e34ede2c7678fa87b70211fd1a389f85",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
