@@ -16,7 +16,7 @@
 
 LOCAL_PATH := $(call my-dir)
 
-simpleperf_common_cppflags := -std=c++11 -Wall -Wextra -Werror -Wunused
+simpleperf_common_cppflags := -std=c++11 -Wall -Wextra -Werror -Wunused -Wno-pessimizing-move
 simpleperf_host_common_cppflags := $(simpleperf_common_cppflags) \
                                    -DUSE_BIONIC_PERF_EVENT_H -I bionic \
 
