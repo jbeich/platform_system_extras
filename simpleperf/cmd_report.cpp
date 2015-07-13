@@ -247,7 +247,9 @@ class ReportCommand : public Command {
             "                  include pid, tid, comm, dso, symbol, dso_from, dso_to, symbol_from\n"
             "                  symbol_to. dso_from, dso_to, symbol_from, symbol_to can only be\n"
             "                  used with -b option. Default keys are \"comm,pid,tid,dso,symbol\"\n"
-            "    --symfs <dir>  Look for files with symbols relative to this directory.\n"),
+            "    --symfs <dir> Look for files with symbols relative to this directory.\n"
+            "    --vmlinux <file>\n"
+            "                  Parse kernel symbols from <file>.\n"),
         record_filename_("perf.data"),
         use_branch_address_(false),
         accumulate_callchain_(false),
@@ -313,6 +315,7 @@ bool ReportCommand::Run(const std::vector<std::string>& args) {
 bool ReportCommand::ParseOptions(const std::vector<std::string>& args) {
   bool demangle = true;
   std::string symfs_dir;
+  std::string vmlinux;
   bool print_sample_count = false;
   std::vector<std::string> sort_keys = {"comm", "pid", "tid", "dso", "symbol"};
   for (size_t i = 0; i < args.size(); ++i) {
@@ -345,15 +348,23 @@ bool ReportCommand::ParseOptions(const std::vector<std::string>& args) {
         return false;
       }
       symfs_dir = args[i];
+    } else if (args[i] == "--vmlinux") {
+      if (!NextArgumentOrError(args, &i)) {
+        return false;
+      }
+      vmlinux = args[i];
     } else {
       ReportUnknownOption(args, i);
       return false;
     }
   }
 
-  DsoFactory::SetDemangle(demangle);
-  if (!DsoFactory::SetSymFsDir(symfs_dir)) {
+  DsoFactory::GetInstance()->SetDemangle(demangle);
+  if (!DsoFactory::GetInstance()->SetSymFsDir(symfs_dir)) {
     return false;
+  }
+  if (!vmlinux.empty()) {
+    DsoFactory::GetInstance()->SetVmlinux(vmlinux);
   }
 
   if (!accumulate_callchain_) {
@@ -534,7 +545,7 @@ void ReportCommand::ReadFeaturesFromRecordFile() {
   for (auto& r : records) {
     build_ids.push_back(std::make_pair(r.filename, r.build_id));
   }
-  DsoFactory::SetBuildIds(build_ids);
+  DsoFactory::GetInstance()->SetBuildIds(build_ids);
   std::vector<std::string> cmdline = record_file_reader_->ReadCmdlineFeature();
   if (!cmdline.empty()) {
     record_cmdline_ = android::base::Join(cmdline, ' ');
