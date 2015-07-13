@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "9870321a_e7437c60",
+        "filename": "simpleperf/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-07-13T22:53:57Z",
+      "side": 1,
+      "message": "Done. I didn\u0027t realize bionic/libc/kernel/uapi is already on the include path for device.",
+      "parentUuid": "187d22ed_c89f6f63",
+      "revId": "6c4efb5a7b86150d3ec99e95edd04ce94c9193f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "187d22ed_088b4729",
         "filename": "simpleperf/cmd_record.cpp",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2015-07-13T21:04:56Z",
       "side": 1,
       "message": "is",
+      "revId": "6c4efb5a7b86150d3ec99e95edd04ce94c9193f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9870321a_47ac50aa",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-07-13T22:53:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "187d22ed_088b4729",
       "revId": "6c4efb5a7b86150d3ec99e95edd04ce94c9193f0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "9870321a_0725f8b8",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-07-13T22:53:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9870321a_64386afb",
+      "revId": "6c4efb5a7b86150d3ec99e95edd04ce94c9193f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "58987a8f_e2548627",
         "filename": "simpleperf/cmd_record.cpp",
         "patchSetId": 1
@@ -64,6 +118,24 @@
       "writtenOn": "2015-07-13T21:04:56Z",
       "side": 1,
       "message": "s/dump/call graph/?",
+      "revId": "6c4efb5a7b86150d3ec99e95edd04ce94c9193f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "58987a8f_a2055e83",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-07-13T22:53:57Z",
+      "side": 1,
+      "message": "I think \"call graph stack\" makes me confusing. They are two different things, and here the size just means how much user stack do you want to dump.",
+      "parentUuid": "58987a8f_e2548627",
       "revId": "6c4efb5a7b86150d3ec99e95edd04ce94c9193f0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
