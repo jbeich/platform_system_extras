@@ -16,7 +16,8 @@
 
 LOCAL_PATH := $(call my-dir)
 
-simpleperf_common_cppflags := -std=c++11 -Wall -Wextra -Werror -Wunused
+simpleperf_common_cppflags := -std=c++11 -Wall -Wextra -Werror -Wunused \
+                              -I external/libunwind/include/tdep \
 
 simpleperf_host_common_cppflags := $(simpleperf_common_cppflags) \
                                    -DUSE_BIONIC_UAPI_HEADERS -I bionic/libc/kernel \
@@ -27,6 +28,7 @@ simpleperf_host_darwin_cppflags := $(simpleperf_host_common_cppflags) \
 simpleperf_common_shared_libraries := \
   libbase \
   libLLVM \
+  libunwind \
 
 LLVM_ROOT_PATH := external/llvm
 
@@ -39,6 +41,7 @@ libsimpleperf_common_src_files := \
   cmd_report.cpp \
   command.cpp \
   dso.cpp \
+  dwarf_unwind.cpp \
   event_attr.cpp \
   event_type.cpp \
   perf_regs.cpp \
