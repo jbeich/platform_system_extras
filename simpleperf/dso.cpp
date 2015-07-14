@@ -44,6 +44,10 @@ const SymbolEntry* DsoEntry::FindSymbol(uint64_t offset_in_dso) {
   return nullptr;
 }
 
+std::string DsoEntry::GetFullPath() const {
+  return DsoFactory::GetInstance()->GetSymFsDir() + path;
+}
+
 DsoFactory* DsoFactory::GetInstance() {
   static DsoFactory dso_factory;
   return &dso_factory;
@@ -72,6 +76,10 @@ bool DsoFactory::SetSymFsDir(const std::string& symfs_dir) {
   }
   symfs_dir_ = dirname;
   return true;
+}
+
+std::string DsoFactory::GetSymFsDir() const {
+  return symfs_dir_;
 }
 
 void DsoFactory::SetVmlinux(const std::string& vmlinux) {
