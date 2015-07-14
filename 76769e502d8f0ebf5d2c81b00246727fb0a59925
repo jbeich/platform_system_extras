@@ -33,6 +33,24 @@
       "revId": "76769e502d8f0ebf5d2c81b00246727fb0a59925",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "78b0de09_fec3fdff",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-07-14T02:08:19Z",
+      "side": 1,
+      "message": "Yes, the kernel aligns the stack size with sizeof(u64). And I think requiring the exact stack size is better than allowing any unaligned stack size.",
+      "parentUuid": "98975254_bbb8b331",
+      "revId": "76769e502d8f0ebf5d2c81b00246727fb0a59925",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
