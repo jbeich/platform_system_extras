@@ -16,15 +16,21 @@
 
 LOCAL_PATH := $(call my-dir)
 
-simpleperf_common_cppflags := -std=c++11 -Wall -Wextra -Werror -Wunused
+simpleperf_common_cppflags := -std=c++11 -Wall -Wextra -Werror -Wunused \
+                              -I external/libunwind/include/tdep \
 
 simpleperf_host_common_cppflags := $(simpleperf_common_cppflags) \
                                    -DUSE_BIONIC_UAPI_HEADERS -I bionic/libc/kernel \
 
 simpleperf_host_darwin_cppflags := $(simpleperf_host_common_cppflags) \
-                                   -I $(LOCAL_PATH)/darwin_support \
+                                   -I $(LOCAL_PATH)/darwin_support -D NO_LIBUNWIND \
 
 simpleperf_common_shared_libraries := \
+  libbase \
+  libLLVM \
+  libunwind \
+
+simpleperf_darwin_shared_libraries := \
   libbase \
   libLLVM \
 
@@ -54,6 +60,7 @@ libsimpleperf_src_files := \
   cmd_list.cpp \
   cmd_record.cpp \
   cmd_stat.cpp \
+  dwarf_unwind.cpp \
   environment.cpp \
   event_fd.cpp \
   event_selection_set.cpp \
@@ -62,7 +69,7 @@ libsimpleperf_src_files := \
 
 libsimpleperf_darwin_src_files := \
   $(libsimpleperf_common_src_files) \
-  environment_fake.cpp \
+  darwin_support.cpp \
 
 include $(CLEAR_VARS)
 LOCAL_CLANG := true
@@ -97,7 +104,7 @@ include $(CLEAR_VARS)
 LOCAL_CLANG := true
 LOCAL_CPPFLAGS := $(simpleperf_host_darwin_cppflags)
 LOCAL_SRC_FILES := $(libsimpleperf_darwin_src_files)
-LOCAL_SHARED_LIBRARIES := $(simpleperf_common_shared_libraries)
+LOCAL_SHARED_LIBRARIES := $(simpleperf_darwin_shared_libraries)
 LOCAL_MODULE := libsimpleperf
 LOCAL_MODULE_TAGS := optional
 LOCAL_ADDITIONAL_DEPENDENCIES := $(LOCAL_PATH)/Android.mk
@@ -139,7 +146,7 @@ include $(CLEAR_VARS)
 LOCAL_CLANG := true
 LOCAL_CPPFLAGS := $(simpleperf_host_darwin_cppflags)
 LOCAL_SRC_FILES := main.cpp
-LOCAL_SHARED_LIBRARIES := libsimpleperf $(simpleperf_common_shared_libraries)
+LOCAL_SHARED_LIBRARIES := libsimpleperf $(simpleperf_darwin_shared_libraries)
 LOCAL_MODULE := simpleperf
 LOCAL_MODULE_TAGS := optional
 LOCAL_ADDITIONAL_DEPENDENCIES := $(LOCAL_PATH)/Android.mk
@@ -196,7 +203,7 @@ include $(CLEAR_VARS)
 LOCAL_CLANG := true
 LOCAL_CPPFLAGS := $(simpleperf_host_darwin_cppflags)
 LOCAL_SRC_FILES := $(simpleperf_unit_test_common_src_files)
-LOCAL_SHARED_LIBRARIES := libsimpleperf $(simpleperf_common_shared_libraries)
+LOCAL_SHARED_LIBRARIES := libsimpleperf $(simpleperf_darwin_shared_libraries)
 LOCAL_MODULE := simpleperf_unit_test
 LOCAL_MODULE_TAGS := optional
 LOCAL_ADDITIONAL_DEPENDENCIES := $(LOCAL_PATH)/Android.mk

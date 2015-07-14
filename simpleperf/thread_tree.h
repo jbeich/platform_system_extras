@@ -89,4 +89,6 @@ class ThreadTree {
   SymbolEntry unknown_symbol_;
 };
 
+MapEntry* FindMapByAddr(const std::set<MapEntry*, MapComparator>& maps, uint64_t addr);
+
 #endif  // SIMPLE_PERF_THREAD_TREE_H_

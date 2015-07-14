@@ -19,6 +19,7 @@
 
 #include <functional>
 #include <string>
+#include <vector>
 #include "build_id.h"
 
 bool GetBuildIdFromNoteFile(const std::string& filename, BuildId* build_id);
@@ -39,6 +40,15 @@ struct ElfFileSymbol {
 
 bool ParseSymbolsFromElfFile(const std::string& filename, const BuildId& expected_build_id,
                              std::function<void(const ElfFileSymbol&)> callback);
+
+struct ElfFileSection {
+  std::string name;
+  uint64_t offset;
+  std::vector<uint8_t> data;
+};
+
+bool ReadSectionsFromElfFileByName(const std::string& filename,
+                                   std::vector<ElfFileSection>* sections);
 
 // Expose the following functions for unit tests.
 bool IsArmMappingSymbol(const char* name);

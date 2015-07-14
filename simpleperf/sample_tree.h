@@ -142,4 +142,6 @@ class SampleTree {
   uint64_t total_period_;
 };
 
+MapEntry* FindMapByAddr(const std::set<MapEntry*, MapComparator>& maps, uint64_t addr);
+
 #endif  // SIMPLE_PERF_SAMPLE_TREE_H_
