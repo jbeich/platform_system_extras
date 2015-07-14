@@ -14,8 +14,26 @@
  * limitations under the License.
  */
 
-// Add fake functions to build successfully on non-linux environments.
+// Add fake functions to build successfully on darwin.
+#include <base/logging.h>
+#include "dwarf_unwind.h"
 #include "environment.h"
+#include "perf_regs.h"
+
+DwarfUnwindAdapter* DwarfUnwindAdapter::GetInstance() {
+  static DwarfUnwindAdapter adapter;
+  return &adapter;
+}
+
+std::vector<uint64_t> DwarfUnwindAdapter::UnwindCallChain(const ThreadEntry&, const RegSet& regs,
+                                                          const std::vector<char>&) {
+  uint64_t ip;
+  if (!GetIpRegValue(regs, &ip)) {
+    LOG(ERROR) << "can't read IP reg value";
+    return std::vector<uint64_t>();
+  }
+  return std::vector<uint64_t>(1, ip);
+}
 
 bool ProcessKernelSymbols(const std::string&, std::function<bool(const KernelSymbol&)>) {
   return false;
