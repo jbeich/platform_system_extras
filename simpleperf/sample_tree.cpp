@@ -133,31 +133,34 @@ DsoEntry* SampleTree::FindUserDsoOrNew(const std::string& filename) {
   return it->second.get();
 }
 
-static bool IsIpInMap(uint64_t ip, const MapEntry* map) {
-  return (map->start_addr <= ip && map->start_addr + map->len > ip);
+static bool IsAddrInMap(uint64_t addr, const MapEntry* map) {
+  return (addr >= map->start_addr && addr < map->start_addr + map->len);
 }
 
-const MapEntry* SampleTree::FindMap(const ThreadEntry* thread, uint64_t ip, bool in_kernel) {
+MapEntry* FindMapByAddr(const std::set<MapEntry*, MapComparator>& maps, uint64_t addr) {
   // Construct a map_entry which is strictly after the searched map_entry, based on MapComparator.
   MapEntry find_map = {
-      ip,          // start_addr
+      addr,        // start_addr
       ULLONG_MAX,  // len
       0,           // pgoff
       ULLONG_MAX,  // time
       nullptr,     // dso
   };
-  if (!in_kernel) {
-    auto it = thread->maps.upper_bound(&find_map);
-    if (it != thread->maps.begin() && IsIpInMap(ip, *--it)) {
-      return *it;
-    }
-  } else {
-    auto it = kernel_map_tree_.upper_bound(&find_map);
-    if (it != kernel_map_tree_.begin() && IsIpInMap(ip, *--it)) {
-      return *it;
-    }
+  auto it = maps.upper_bound(&find_map);
+  if (it != maps.begin() && IsAddrInMap(addr, *--it)) {
+    return *it;
   }
-  return &unknown_map_;
+  return nullptr;
+}
+
+const MapEntry* SampleTree::FindMap(const ThreadEntry* thread, uint64_t ip, bool in_kernel) {
+  MapEntry* result = nullptr;
+  if (!in_kernel) {
+    result = FindMapByAddr(thread->maps, ip);
+  } else {
+    result = FindMapByAddr(kernel_map_tree_, ip);
+  }
+  return result != nullptr ? result : &unknown_map_;
 }
 
 SampleEntry* SampleTree::AddSample(int pid, int tid, uint64_t ip, uint64_t time, uint64_t period,

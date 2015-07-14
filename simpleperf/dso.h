@@ -41,6 +41,7 @@ struct DsoEntry {
   std::set<std::unique_ptr<SymbolEntry>, SymbolComparator> symbols;
 
   const SymbolEntry* FindSymbol(uint64_t offset_in_dso);
+  std::string GetFullPath() const;
 };
 
 class DsoFactory {
@@ -48,6 +49,7 @@ class DsoFactory {
   static DsoFactory* GetInstance();
   void SetDemangle(bool demangle);
   bool SetSymFsDir(const std::string& symfs_dir);
+  std::string GetSymFsDir() const;
   void SetVmlinux(const std::string& vmlinux);
   void SetBuildIds(const std::vector<std::pair<std::string, BuildId>>& build_ids);
   std::unique_ptr<DsoEntry> LoadKernel();
