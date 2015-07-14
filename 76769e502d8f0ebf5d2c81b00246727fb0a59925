@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "98975254_dbc57fa0",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-07-14T00:59:31Z",
+      "side": 1,
+      "message": "ah, i see what you mean. this isn\u0027t the size of the call graph; this the number of bytes of stack you\u0027ll record and try to unwind later.\n\ni can\u0027t really think of a better name for that, so let\u0027s wait until it confuses someone in practice :-)",
+      "revId": "76769e502d8f0ebf5d2c81b00246727fb0a59925",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "98975254_bbb8b331",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-07-14T00:59:31Z",
+      "side": 1,
+      "message": "does this need to be 8-byte aligned, or sizeof(uintptr_t)-byte aligned?",
+      "revId": "76769e502d8f0ebf5d2c81b00246727fb0a59925",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
