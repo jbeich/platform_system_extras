@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0da7a2c0_32f5ce7b",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 562,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-07-24T16:44:41Z",
+      "side": 1,
+      "message": "why not std::string?",
+      "revId": "3f3de42fd6f11c903c5de37ec8e81d7f6792d360",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6d83be1d_f0a098ec",
+        "filename": "simpleperf/record.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-07-24T16:44:41Z",
+      "side": 1,
+      "message": "?",
+      "revId": "3f3de42fd6f11c903c5de37ec8e81d7f6792d360",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8dbd52cc_96604aaf",
+        "filename": "simpleperf/record_file.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-07-24T16:44:41Z",
+      "side": 1,
+      "message": "processing",
+      "revId": "3f3de42fd6f11c903c5de37ec8e81d7f6792d360",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
