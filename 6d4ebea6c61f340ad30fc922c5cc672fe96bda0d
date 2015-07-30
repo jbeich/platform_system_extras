@@ -22,6 +22,30 @@
       "revId": "6d4ebea6c61f340ad30fc922c5cc672fe96bda0d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0d57a2ea_4feead2a",
+        "filename": "tests/net_test/srcaddr_selection_test.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000451
+      },
+      "writtenOn": "2015-07-30T03:57:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6d4ade43_55b39e82",
+      "range": {
+        "startLine": 40,
+        "startChar": 4,
+        "endLine": 40,
+        "endChar": 75
+      },
+      "revId": "6d4ebea6c61f340ad30fc922c5cc672fe96bda0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
