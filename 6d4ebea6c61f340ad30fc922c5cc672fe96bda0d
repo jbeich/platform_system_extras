@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6d4ade43_55b39e82",
+        "filename": "tests/net_test/srcaddr_selection_test.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2015-07-30T03:34:40Z",
+      "side": 1,
+      "message": "It\u0027s starting to look like we need a SetIPv6Sysctl(ifname, sysctl, value) function. Not necessarily in this CL.",
+      "range": {
+        "startLine": 40,
+        "startChar": 4,
+        "endLine": 40,
+        "endChar": 75
+      },
+      "revId": "6d4ebea6c61f340ad30fc922c5cc672fe96bda0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
