@@ -142,7 +142,7 @@ static bool IsAddrInMap(uint64_t addr, const MapEntry* map) {
   return (addr >= map->start_addr && addr < map->start_addr + map->len);
 }
 
-static MapEntry* FindMapByAddr(const std::set<MapEntry*, MapComparator>& maps, uint64_t addr) {
+MapEntry* FindMapByAddr(const std::set<MapEntry*, MapComparator>& maps, uint64_t addr) {
   // Construct a map_entry which is strictly after the searched map_entry, based on MapComparator.
   MapEntry find_map = {
       addr,        // start_addr
