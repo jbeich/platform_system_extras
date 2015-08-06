@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2abb6cf3_876a70dd",
+        "filename": "simpleperf/build_id.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-08-06T17:06:17Z",
+      "side": 1,
+      "message": "static?",
+      "revId": "3bbb44defc946ba503edef50c9f0bb86018bf8c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
