@@ -20,6 +20,7 @@
 #include <set>
 #include <string>
 #include <unordered_map>
+#include <unordered_set>
 #include <vector>
 
 #include <base/logging.h>
@@ -35,6 +36,7 @@
 #include "record_file.h"
 #include "sample_tree.h"
 #include "thread_tree.h"
+#include "utils.h"
 
 class Displayable {
  public:
@@ -240,16 +242,24 @@ class ReportCommand : public Command {
             "                  the instruction addresses. Only valid for perf.data recorded with\n"
             "                  -b/-j option.\n"
             "    --children    Print the overhead accumulated by appearing in the callchain.\n"
+            "    --comms comm1,comm2,...\n"
+            "                  Report only for selected comms.\n"
+            "    --dsos dso1,dso2,...\n"
+            "                  Report only for selected dsos.\n"
             "    -g            Print call graph.\n"
             "    -i <file>     Specify path of record file, default is perf.data.\n"
             "    -n            Print the sample count for each item.\n"
             "    --no-demangle        Don't demangle symbol names.\n"
+            "    --pid pid1,pid2,...\n"
+            "                  Report only for selected pids.\n"
             "    --sort key1,key2,...\n"
             "                  Select the keys to sort and print the report. Possible keys\n"
             "                  include pid, tid, comm, dso, symbol, dso_from, dso_to, symbol_from\n"
             "                  symbol_to. dso_from, dso_to, symbol_from, symbol_to can only be\n"
             "                  used with -b option. Default keys are \"comm,pid,tid,dso,symbol\"\n"
             "    --symfs <dir> Look for files with symbols relative to this directory.\n"
+            "    --tids tid1,tid2,...\n"
+            "                  Report only for selected tids.\n"
             "    --vmlinux <file>\n"
             "                  Parse kernel symbols from <file>.\n"),
         record_filename_("perf.data"),
@@ -324,11 +334,30 @@ bool ReportCommand::ParseOptions(const std::vector<std::string>& args) {
   std::string vmlinux;
   bool print_sample_count = false;
   std::vector<std::string> sort_keys = {"comm", "pid", "tid", "dso", "symbol"};
+  std::unordered_set<std::string> comm_filter;
+  std::unordered_set<std::string> dso_filter;
+  std::unordered_set<int> pid_filter;
+  std::unordered_set<int> tid_filter;
+
   for (size_t i = 0; i < args.size(); ++i) {
     if (args[i] == "-b") {
       use_branch_address_ = true;
     } else if (args[i] == "--children") {
       accumulate_callchain_ = true;
+    } else if (args[i] == "--comms") {
+      if (!NextArgumentOrError(args, &i)) {
+        return false;
+      }
+      std::vector<std::string> comms = android::base::Split(args[i], ",");
+      comm_filter.insert(comms.begin(), comms.end());
+
+    } else if (args[i] == "--dsos") {
+      if (!NextArgumentOrError(args, &i)) {
+        return false;
+      }
+      std::vector<std::string> dsos = android::base::Split(args[i], ",");
+      dso_filter.insert(dsos.begin(), dsos.end());
+
     } else if (args[i] == "-g") {
       print_callgraph_ = true;
       accumulate_callchain_ = true;
@@ -344,6 +373,20 @@ bool ReportCommand::ParseOptions(const std::vector<std::string>& args) {
     } else if (args[i] == "--no-demangle") {
       demangle = false;
 
+    } else if (args[i] == "--pids") {
+      if (!NextArgumentOrError(args, &i)) {
+        return false;
+      }
+      std::vector<std::string> pids = android::base::Split(args[i], ",");
+      for (auto& s : pids) {
+        int pid;
+        if (!StringToPid(s, &pid)) {
+          LOG(ERROR) << "invalid pid in --pids option: " << s;
+          return false;
+        }
+        pid_filter.insert(pid);
+      }
+
     } else if (args[i] == "--sort") {
       if (!NextArgumentOrError(args, &i)) {
         return false;
@@ -354,6 +397,20 @@ bool ReportCommand::ParseOptions(const std::vector<std::string>& args) {
         return false;
       }
       symfs_dir = args[i];
+    } else if (args[i] == "--tids") {
+      if (!NextArgumentOrError(args, &i)) {
+        return false;
+      }
+      std::vector<std::string> tids = android::base::Split(args[i], ",");
+      for (auto& s : tids) {
+        int tid;
+        if (!StringToPid(s, &tid)) {
+          LOG(ERROR) << "invalid tid in --tids option: " << s;
+          return false;
+        }
+        tid_filter.insert(tid);
+      }
+
     } else if (args[i] == "--vmlinux") {
       if (!NextArgumentOrError(args, &i)) {
         return false;
@@ -430,6 +487,7 @@ bool ReportCommand::ParseOptions(const std::vector<std::string>& args) {
       return false;
     }
   }
+  sample_tree_->SetFilters(pid_filter, tid_filter, comm_filter, dso_filter);
   return true;
 }
 
@@ -470,7 +528,9 @@ void ReportCommand::ProcessSampleRecord(const SampleRecord& r) {
     bool in_kernel = (r.header.misc & PERF_RECORD_MISC_CPUMODE_MASK) == PERF_RECORD_MISC_KERNEL;
     SampleEntry* sample = sample_tree_->AddSample(r.tid_data.pid, r.tid_data.tid, r.ip_data.ip,
                                                   r.time_data.time, r.period_data.period, in_kernel);
-    CHECK(sample != nullptr);
+    if (sample == nullptr) {
+      return;
+    }
     if (accumulate_callchain_ && (r.sample_type & PERF_SAMPLE_CALLCHAIN) != 0) {
       std::vector<SampleEntry*> callchain;
       callchain.push_back(sample);
