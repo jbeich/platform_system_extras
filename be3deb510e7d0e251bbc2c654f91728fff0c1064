@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e7242fa6_d930d7ee",
+        "filename": "simpleperf/cmd_report.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-08-07T02:30:04Z",
+      "side": 1,
+      "message": "factor the comms/dsos and pids/tids code out?",
+      "revId": "be3deb510e7d0e251bbc2c654f91728fff0c1064",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
