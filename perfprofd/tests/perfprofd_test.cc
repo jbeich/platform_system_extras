@@ -29,6 +29,7 @@
 #include "perfprofdcore.h"
 #include "perfprofdutils.h"
 #include "perfprofdmockutils.h"
+#include "quipper/zip_inspector.h"
 
 #include "perf_profile.pb.h"
 #include "google/protobuf/text_format.h"
@@ -48,9 +49,6 @@ static const char *executable_path;
 //
 static std::string test_dir;
 static std::string dest_dir;
-
-// Path to perf executable on device
-#define PERFPATH "/system/bin/perf"
 
 // Temporary config file that we will emit for the daemon to read
 #define CONFIGFILE "perfprofd.conf"
@@ -214,8 +212,8 @@ class PerfProfdRunner {
 
 //......................................................................
 
-static void readEncodedProfile(const char *testpoint,
-                               wireless_android_play_playlog::AndroidPerfProfile &encodedProfile)
+void readEncodedProfile(const char *testpoint,
+                        wireless_android_play_playlog::AndroidPerfProfile &encodedProfile)
 {
   struct stat statb;
   int perf_data_stat_result = stat(encoded_file_path(0).c_str(), &statb);
@@ -234,7 +232,7 @@ static void readEncodedProfile(const char *testpoint,
   encodedProfile.ParseFromString(encoded);
 }
 
-static std::string encodedLoadModuleToString(const wireless_android_play_playlog::LoadModule &lm)
+std::string encodedLoadModuleToString(const wireless_android_play_playlog::LoadModule &lm)
 {
   std::stringstream ss;
   ss << "name: \"" << lm.name() << "\"\n";
@@ -244,7 +242,7 @@ static std::string encodedLoadModuleToString(const wireless_android_play_playlog
   return ss.str();
 }
 
-static std::string encodedModuleSamplesToString(const wireless_android_play_playlog::LoadModuleSamples &mod)
+std::string encodedModuleSamplesToString(const wireless_android_play_playlog::LoadModuleSamples &mod)
 {
   std::stringstream ss;
 
@@ -271,10 +269,10 @@ static std::string encodedModuleSamplesToString(const wireless_android_play_play
 // match, e.g. if we see the expected excerpt anywhere in the
 // result, it's a match (for exact match, set exact to true)
 //
-static void compareLogMessages(const std::string &actual,
-                               const std::string &expected,
-                               const char *testpoint,
-                               bool exactMatch=false)
+void compareLogMessages(const std::string &actual,
+                        const std::string &expected,
+                        const char *testpoint,
+                        bool exactMatch=false)
 {
    std::string sqexp = squeezeWhite(expected, "expected");
    std::string sqact = squeezeWhite(actual, "actual");
@@ -291,6 +289,41 @@ static void compareLogMessages(const std::string &actual,
      }
      EXPECT_TRUE(wasFound);
    }
+}
+
+TEST_F(PerfProfdTest, ZipInspector)
+{
+  ZipInspector inspector;
+
+  // Any zip files in /dev/null?
+  ZipInspector::ZipElfEntry *res = inspector.FindElfInZipByMmapOffset("/dev/null", 0);
+  EXPECT_TRUE(res == nullptr);
+
+  // A real zip file, but bad offsets
+  std::string testzip(test_dir);
+  testzip += "/perfprofd.test.smallish.zip";
+  res = inspector.FindElfInZipByMmapOffset(testzip, 1<<24);
+  EXPECT_TRUE(res == nullptr);
+  res = inspector.FindElfInZipByMmapOffset(testzip, 0);
+  EXPECT_TRUE(res == nullptr);
+
+  // An offset that points to a non-ELF file
+  res = inspector.FindElfInZipByMmapOffset(testzip, 0x42);
+  EXPECT_TRUE(res == nullptr);
+
+  // 32-bit elf
+  res = inspector.FindElfInZipByMmapOffset(testzip, 0x90);
+  ASSERT_TRUE(res != nullptr);
+  EXPECT_TRUE(res->offset == 136);
+  EXPECT_TRUE(res->esize == 13888);
+
+  // 64-bit elf (look twice so as to get cached result)
+  for (int i = 0; i < 2; ++i) {
+    res = inspector.FindElfInZipByMmapOffset(testzip, 14200);
+    ASSERT_TRUE(res != nullptr);
+    EXPECT_TRUE(res->offset == 14160);
+    EXPECT_TRUE(res->esize == 5792);
+  }
 }
 
 TEST_F(PerfProfdTest, MissingGMS)
@@ -327,7 +360,6 @@ TEST_F(PerfProfdTest, MissingGMS)
   compareLogMessages(mock_perfprofdutils_getlogged(),
                      expected, "MissingGMS");
 }
-
 
 TEST_F(PerfProfdTest, MissingOptInSemaphoreFile)
 {

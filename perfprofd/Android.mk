@@ -19,7 +19,8 @@ LOCAL_MODULE_PATH := $(TARGET_OUT_OPTIONAL_EXECUTABLES)
 LOCAL_MODULE_TAGS := debug
 proto_header_dir := $(call local-generated-sources-dir)/proto/$(LOCAL_PATH)
 LOCAL_C_INCLUDES += $(proto_header_dir) $(LOCAL_PATH)/quipper/kernel-headers
-LOCAL_STATIC_LIBRARIES := libbase
+LOCAL_STATIC_LIBRARIES := libziparchive libbase
+LOCAL_SHARED_LIBRARIES := libbase
 LOCAL_EXPORT_C_INCLUDE_DIRS += $(proto_header_dir)
 LOCAL_SRC_FILES :=  \
 	perf_profile.proto \
@@ -28,6 +29,7 @@ LOCAL_SRC_FILES :=  \
 	quipper/address_mapper.cc \
 	quipper/perf_reader.cc \
 	quipper/perf_parser.cc \
+	quipper/zip_inspector.cc \
 	perf_data_converter.cc \
 	cpuconfig.cc \
 	perfprofdcore.cc \
@@ -57,7 +59,7 @@ LOCAL_CLANG := true
 LOCAL_CPP_EXTENSION := cc
 LOCAL_CXX_STL := libc++
 LOCAL_SRC_FILES := perfprofdmain.cc
-LOCAL_STATIC_LIBRARIES := libperfprofdcore libperfprofdutils
+LOCAL_STATIC_LIBRARIES := libperfprofdcore libperfprofdutils libziparchive
 LOCAL_SHARED_LIBRARIES := liblog libprotobuf-cpp-lite libbase
 LOCAL_SYSTEM_SHARED_LIBRARIES := libc libstdc++
 LOCAL_CPPFLAGS += $(perfprofd_cppflags)

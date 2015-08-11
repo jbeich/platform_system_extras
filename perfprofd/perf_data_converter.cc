@@ -33,6 +33,10 @@ struct BinaryProfile {
 wireless_android_play_playlog::AndroidPerfProfile
 RawPerfDataToAndroidPerfProfile(const string &perf_file) {
   wireless_android_play_playlog::AndroidPerfProfile ret;
+  // quipper::PerfParser::Options options;
+  // options.discard_unused_events = true;
+  // options.rewrite_dso_from_apk_mmap_events = true;
+  // quipper::PerfParser parser(options);
   quipper::PerfParser parser;
   if (!parser.ReadFile(perf_file) || !parser.ParseRawEvents()) {
     return ret;

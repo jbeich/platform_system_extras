@@ -9,6 +9,7 @@
 #include <set>
 
 #include "base/logging.h"
+#include "zip_inspector.h"
 
 #include "address_mapper.h"
 #include "quipper_string.h"
@@ -511,6 +512,7 @@ bool PerfParser::MapMmapEvent(uint64_t id,
     pgoff = 0;
   }
 
+  CHECK(mapper != nullptr);
   if (!mapper->MapWithID(start, len, id, pgoff, true)) {
     mapper->DumpToLog();
     return false;
@@ -572,5 +574,47 @@ bool PerfParser::MapForkEvent(const struct fork_event& event) {
 
   return true;
 }
+
+void PerfParser::RewriteMmapsFromApk() {
+
+  size_t idx;
+  ZipInspector zipinspector;
+  for (idx = 0; idx < parsed_events_.size(); ++idx) {
+    ParsedEvent& event = parsed_events_[idx];
+    if (event.raw_event->header.type != PERF_RECORD_MMAP &&
+        event.raw_event->header.type != PERF_RECORD_MMAP2) {
+      continue;
+    }
+
+    string dso_name = event.dso_and_offset.dso_name();
+    size_t offset = event.dso_and_offset.offset();
+    ZipInspector::ZipElfEntry *result =
+        zipinspector.FindElfInZipByMmapOffset(dso_name, offset);
+    if (result) {
+      // Collect build ID for embedded Elf
+      string build_id;
+#if 0
+      // not yet implemented
+      string build_id = CollectBuildId(...);
+#endif
+
+      // Create a new DSOInfo with name "zipfile!entryname". Example:
+      // "/data/app/com.android.chrome-1/base.apk!lib/arm64-v8a/crazy.libchrome.so".
+      DSOInfo dso_info;
+      dso_info.name = dso_name;
+      dso_info.name += "!";
+      dso_info.name += result->zip_entry_name;
+      dso_info.build_id = build_id;
+
+      // Update the dso_and_offset for the event to point at the
+      std::set<DSOInfo>::const_iterator dso_iter = dso_set_.find(dso_info);
+      CHECK(dso_iter != dso_set_.end());
+      event.set_dso_and_offset(&(*dso_iter), result->offset);
+      event.dso_and_offset.dso_info_ = &(*dso_iter);
+      // todo: rewrite offset
+    }
+  }
+}
+
 
 }  // namespace quipper

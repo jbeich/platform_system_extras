@@ -85,6 +85,11 @@ struct ParsedEvent {
                      offset_(0) {}
   } dso_and_offset;
 
+  void set_dso_and_offset(const DSOInfo *dso, size_t offset) {
+    dso_and_offset.dso_info_ = dso;
+    dso_and_offset.offset_ = offset;
+  }
+
   // DSO+offset info for callchain.
   std::vector<DSOAndOffset> callchain;
 
@@ -131,6 +136,9 @@ class PerfParser : public PerfReader {
     // By default, most samples must be properly mapped in order for sample
     // mapping to be considered successful.
     float sample_mapping_percentage_threshold = 95.0f;
+    // Set this flag to enable post-processing of MMAP events that
+    // correspond to DSO load directly from an APK.
+    bool rewrite_dso_from_apk_mmap_events = false;
   };
 
   // Constructor that takes in options at PerfParser creation time.
@@ -141,6 +149,9 @@ class PerfParser : public PerfReader {
 
   // Gets parsed event/sample info from raw event data.
   bool ParseRawEvents();
+
+  // Rewrite MMAP events corresponding to DSO's directly loaded from apks
+  void RewriteMmapsFromApk();
 
   const std::vector<ParsedEvent>& parsed_events() const {
     return parsed_events_;
