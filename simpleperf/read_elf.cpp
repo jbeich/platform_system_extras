@@ -231,3 +231,87 @@ bool ParseSymbolsFromElfFile(const std::string& filename, const BuildId& expecte
   }
   return true;
 }
+
+template <class ELFT>
+bool ReadSectionsFromELFFile(const llvm::object::ELFFile<ELFT>* elf,
+                             std::vector<ElfFileSection>* sections) {
+  for (auto it = elf->begin_sections(); it != elf->end_sections(); ++it) {
+    llvm::ErrorOr<llvm::StringRef> name = elf->getSectionName(&*it);
+    if (name) {
+      for (auto& section : *sections) {
+        if (name.get() == section.name) {
+          llvm::ErrorOr<llvm::ArrayRef<uint8_t>> data = elf->getSectionContents(&*it);
+          if (data) {
+            section.data.clear();
+            section.data.insert(section.data.begin(), data->data(), data->data() + data->size());
+            section.vaddr = it->sh_addr;
+          } else {
+            LOG(ERROR) << "can't read section " << section.name;
+            return false;
+          }
+          break;
+        }
+      }
+    }
+  }
+  return true;
+}
+
+bool ReadSectionsFromElfFile(const std::string& filename, std::vector<ElfFileSection>* sections) {
+  auto owning_binary = llvm::object::createBinary(llvm::StringRef(filename));
+  if (owning_binary.getError()) {
+    PLOG(DEBUG) << "can't open file " << filename;
+    return false;
+  }
+  llvm::object::Binary* binary = owning_binary.get().getBinary();
+  auto obj = llvm::dyn_cast<llvm::object::ObjectFile>(binary);
+  if (obj == nullptr) {
+    LOG(DEBUG) << filename << " is not an object file.";
+    return false;
+  }
+  if (auto elf = llvm::dyn_cast<llvm::object::ELF32LEObjectFile>(obj)) {
+    return ReadSectionsFromELFFile(elf->getELFFile(), sections);
+  }
+  if (auto elf = llvm::dyn_cast<llvm::object::ELF64LEObjectFile>(obj)) {
+    return ReadSectionsFromELFFile(elf->getELFFile(), sections);
+  }
+  LOG(ERROR) << "unknown elf format in file " << filename;
+  return false;
+}
+
+template <class ELFT>
+void ReadProgramHeadersFromELFFile(const llvm::object::ELFFile<ELFT>* elf,
+                                   std::vector<ElfFileProgramHeader>* program_headers) {
+  for (auto it = elf->begin_program_headers(); it != elf->end_program_headers(); ++it) {
+    ElfFileProgramHeader header;
+    header.vaddr = it->p_vaddr;
+    header.file_offset = it->p_offset;
+    header.file_size = it->p_filesz;
+    program_headers->push_back(header);
+  }
+}
+
+bool ReadProgramHeadersFromElfFile(const std::string& filename,
+                                   std::vector<ElfFileProgramHeader>* program_headers) {
+  auto owning_binary = llvm::object::createBinary(llvm::StringRef(filename));
+  if (owning_binary.getError()) {
+    PLOG(DEBUG) << "can't open file " << filename;
+    return false;
+  }
+  llvm::object::Binary* binary = owning_binary.get().getBinary();
+  auto obj = llvm::dyn_cast<llvm::object::ObjectFile>(binary);
+  if (obj == nullptr) {
+    LOG(DEBUG) << filename << " is not an object file.";
+    return false;
+  }
+  if (auto elf = llvm::dyn_cast<llvm::object::ELF32LEObjectFile>(obj)) {
+    ReadProgramHeadersFromELFFile(elf->getELFFile(), program_headers);
+    return true;
+  }
+  if (auto elf = llvm::dyn_cast<llvm::object::ELF64LEObjectFile>(obj)) {
+    ReadProgramHeadersFromELFFile(elf->getELFFile(), program_headers);
+    return true;
+  }
+  LOG(ERROR) << "unknown elf format in file " << filename;
+  return false;
+}
