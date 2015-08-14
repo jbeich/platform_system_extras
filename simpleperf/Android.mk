@@ -16,15 +16,20 @@
 
 LOCAL_PATH := $(call my-dir)
 
-simpleperf_common_cppflags := -std=c++11 -Wall -Wextra -Werror -Wunused
+simpleperf_common_cppflags := -std=c++11 -Wall -Wextra -Werror -Wunused \
 
 simpleperf_host_common_cppflags := $(simpleperf_common_cppflags) \
                                    -DUSE_BIONIC_UAPI_HEADERS -I bionic/libc/kernel \
 
 simpleperf_host_darwin_cppflags := $(simpleperf_host_common_cppflags) \
-                                   -I $(LOCAL_PATH)/darwin_support \
+                                   -I $(LOCAL_PATH)/darwin_support/include \
 
 simpleperf_common_shared_libraries := \
+  libbacktrace \
+  libbase \
+  libLLVM \
+
+simpleperf_darwin_shared_libraries := \
   libbase \
   libLLVM \
 
@@ -54,6 +59,7 @@ libsimpleperf_src_files := \
   cmd_list.cpp \
   cmd_record.cpp \
   cmd_stat.cpp \
+  dwarf_unwind.cpp \
   environment.cpp \
   event_fd.cpp \
   event_selection_set.cpp \
@@ -62,7 +68,7 @@ libsimpleperf_src_files := \
 
 libsimpleperf_darwin_src_files := \
   $(libsimpleperf_common_src_files) \
-  environment_fake.cpp \
+  darwin_support/darwin_support.cpp \
 
 include $(CLEAR_VARS)
 LOCAL_CLANG := true
@@ -72,7 +78,6 @@ LOCAL_SHARED_LIBRARIES := $(simpleperf_common_shared_libraries)
 LOCAL_MODULE := libsimpleperf
 LOCAL_MODULE_TAGS := debug
 LOCAL_MODULE_PATH := $(TARGET_OUT_OPTIONAL_EXECUTABLES)
-LOCAL_ADDITIONAL_DEPENDENCIES := $(LOCAL_PATH)/Android.mk
 include $(LLVM_ROOT_PATH)/llvm.mk
 include $(LLVM_DEVICE_BUILD_MK)
 include $(BUILD_STATIC_LIBRARY)
@@ -86,7 +91,6 @@ LOCAL_SHARED_LIBRARIES := $(simpleperf_common_shared_libraries)
 LOCAL_LDLIBS := -lrt
 LOCAL_MODULE := libsimpleperf
 LOCAL_MODULE_TAGS := optional
-LOCAL_ADDITIONAL_DEPENDENCIES := $(LOCAL_PATH)/Android.mk
 include $(LLVM_ROOT_PATH)/llvm.mk
 include $(LLVM_HOST_BUILD_MK)
 include $(BUILD_HOST_STATIC_LIBRARY)
@@ -97,10 +101,9 @@ include $(CLEAR_VARS)
 LOCAL_CLANG := true
 LOCAL_CPPFLAGS := $(simpleperf_host_darwin_cppflags)
 LOCAL_SRC_FILES := $(libsimpleperf_darwin_src_files)
-LOCAL_SHARED_LIBRARIES := $(simpleperf_common_shared_libraries)
+LOCAL_SHARED_LIBRARIES := $(simpleperf_darwin_shared_libraries)
 LOCAL_MODULE := libsimpleperf
 LOCAL_MODULE_TAGS := optional
-LOCAL_ADDITIONAL_DEPENDENCIES := $(LOCAL_PATH)/Android.mk
 include $(LLVM_ROOT_PATH)/llvm.mk
 include $(LLVM_HOST_BUILD_MK)
 include $(BUILD_HOST_SHARED_LIBRARY)
@@ -117,7 +120,6 @@ LOCAL_SHARED_LIBRARIES := $(simpleperf_common_shared_libraries)
 LOCAL_MODULE := simpleperf
 LOCAL_MODULE_TAGS := debug
 LOCAL_MODULE_PATH := $(TARGET_OUT_OPTIONAL_EXECUTABLES)
-LOCAL_ADDITIONAL_DEPENDENCIES := $(LOCAL_PATH)/Android.mk
 include $(BUILD_EXECUTABLE)
 
 ifeq ($(HOST_OS),linux)
@@ -139,10 +141,9 @@ include $(CLEAR_VARS)
 LOCAL_CLANG := true
 LOCAL_CPPFLAGS := $(simpleperf_host_darwin_cppflags)
 LOCAL_SRC_FILES := main.cpp
-LOCAL_SHARED_LIBRARIES := libsimpleperf $(simpleperf_common_shared_libraries)
+LOCAL_SHARED_LIBRARIES := libsimpleperf $(simpleperf_darwin_shared_libraries)
 LOCAL_MODULE := simpleperf
 LOCAL_MODULE_TAGS := optional
-LOCAL_ADDITIONAL_DEPENDENCIES := $(LOCAL_PATH)/Android.mk
 include $(BUILD_HOST_EXECUTABLE)
 endif
 
@@ -175,7 +176,6 @@ LOCAL_WHOLE_STATIC_LIBRARIES := libsimpleperf
 LOCAL_SHARED_LIBRARIES := $(simpleperf_common_shared_libraries)
 LOCAL_MODULE := simpleperf_unit_test
 LOCAL_MODULE_TAGS := optional
-LOCAL_ADDITIONAL_DEPENDENCIES := $(LOCAL_PATH)/Android.mk
 include $(BUILD_NATIVE_TEST)
 
 ifeq ($(HOST_OS),linux)
@@ -187,7 +187,6 @@ LOCAL_WHOLE_STATIC_LIBRARIES := libsimpleperf
 LOCAL_SHARED_LIBRARIES := $(simpleperf_common_shared_libraries)
 LOCAL_MODULE := simpleperf_unit_test
 LOCAL_MODULE_TAGS := optional
-LOCAL_ADDITIONAL_DEPENDENCIES := $(LOCAL_PATH)/Android.mk
 include $(BUILD_HOST_NATIVE_TEST)
 endif
 
@@ -196,9 +195,8 @@ include $(CLEAR_VARS)
 LOCAL_CLANG := true
 LOCAL_CPPFLAGS := $(simpleperf_host_darwin_cppflags)
 LOCAL_SRC_FILES := $(simpleperf_unit_test_common_src_files)
-LOCAL_SHARED_LIBRARIES := libsimpleperf $(simpleperf_common_shared_libraries)
+LOCAL_SHARED_LIBRARIES := libsimpleperf $(simpleperf_darwin_shared_libraries)
 LOCAL_MODULE := simpleperf_unit_test
 LOCAL_MODULE_TAGS := optional
-LOCAL_ADDITIONAL_DEPENDENCIES := $(LOCAL_PATH)/Android.mk
 include $(BUILD_HOST_NATIVE_TEST)
 endif
