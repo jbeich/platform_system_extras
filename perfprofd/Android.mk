@@ -66,7 +66,17 @@ LOCAL_MODULE := perfprofd
 LOCAL_MODULE_PATH := $(TARGET_OUT_OPTIONAL_EXECUTABLES)
 LOCAL_MODULE_TAGS := debug
 LOCAL_SHARED_LIBRARIES += libcutils
+LOCAL_REQUIRED_MODULES := perfprofd.rc
 include $(BUILD_EXECUTABLE)
+
+include $(CLEAR_VARS)
+
+LOCAL_MODULE := perfprofd.rc
+LOCAL_SRC_FILES := $(LOCAL_MODULE)
+LOCAL_MODULE_CLASS := ETC
+LOCAL_MODULE_PATH := $(TARGET_OUT)/init
+
+include $(BUILD_PREBUILT)
 
 # Clean temp vars
 perfprofd_cppflags :=
