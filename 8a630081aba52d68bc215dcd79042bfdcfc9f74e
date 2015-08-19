@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "c471e91c_e7a371b1",
+        "filename": "simpleperf/cmd_stat.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-08-19T23:19:42Z",
+      "side": 1,
+      "message": "yes. I am not sure if it helps by implementing it in printf. As in the printf manual:\nFor some numeric conversions a radix character (\"decimal point\") or thousands\u0027 grouping character is used.  The\n       actual character used depends on the LC_NUMERIC part of the locale.  The POSIX locale uses \u0027.\u0027 as radix charac‐\n       ter, and does not have a grouping character.  Thus,\n\n               printf(\"%\u0027.2f\", 1234567.89);\n\n       results in \"1234567.89\" in the POSIX locale, in \"1234567,89\" in the nl_NL locale, and in \"1.234.567,89\" in  the\n       da_DK locale.\n\nSo if I follow the manual, I can only print 1,234,567 in \nnon POSIX locale, which I think is not used in bionic.",
+      "parentUuid": "a4fb1585_3800173a",
+      "revId": "8a630081aba52d68bc215dcd79042bfdcfc9f74e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c471e91c_64121fe7",
         "filename": "simpleperf/cmd_stat.cpp",
         "patchSetId": 1
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "243ac5f6_32de6efc",
+        "filename": "simpleperf/cmd_stat.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-08-19T23:19:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c471e91c_64121fe7",
+      "revId": "8a630081aba52d68bc215dcd79042bfdcfc9f74e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "04b861a5_d33e6a40",
         "filename": "simpleperf/cmd_stat.cpp",
         "patchSetId": 1
@@ -47,6 +83,24 @@
       "writtenOn": "2015-08-19T22:18:37Z",
       "side": 1,
       "message": "Hz",
+      "revId": "8a630081aba52d68bc215dcd79042bfdcfc9f74e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e4434d7f_cce84273",
+        "filename": "simpleperf/cmd_stat.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-08-19T23:19:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "04b861a5_d33e6a40",
       "revId": "8a630081aba52d68bc215dcd79042bfdcfc9f74e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
