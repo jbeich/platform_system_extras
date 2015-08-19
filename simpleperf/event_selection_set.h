@@ -68,11 +68,12 @@ class EventSelectionSet {
   bool ReadMmapEventData(std::function<bool(const char*, size_t)> callback);
 
   std::string FindEventFileNameById(uint64_t id);
-  const perf_event_attr& FindEventAttrByType(const EventTypeAndModifier& event_type_modifier);
-  const std::vector<std::unique_ptr<EventFd>>& FindEventFdsByType(
+  const perf_event_attr* FindEventAttrByType(const EventTypeAndModifier& event_type_modifier);
+  const std::vector<std::unique_ptr<EventFd>>* FindEventFdsByType(
       const EventTypeAndModifier& event_type_modifier);
 
  private:
+  void UnionSampleType();
   bool OpenEventFiles(const std::vector<pid_t>& threads, const std::vector<int>& cpus);
 
   struct EventSelection {
