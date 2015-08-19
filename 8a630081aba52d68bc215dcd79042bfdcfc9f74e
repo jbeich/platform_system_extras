@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a4fb1585_3800173a",
+        "filename": "simpleperf/cmd_stat.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-08-19T22:18:37Z",
+      "side": 1,
+      "message": "i thought you wrote this code already?\n\nalso, since you keep needing this, feel free to implement the \u0027 printf flag in bionic... :-)\n\n(iirc one of the BSDs already has it; just not the BSD we\u0027re using.)",
+      "revId": "8a630081aba52d68bc215dcd79042bfdcfc9f74e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c471e91c_64121fe7",
+        "filename": "simpleperf/cmd_stat.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-08-19T22:18:37Z",
+      "side": 1,
+      "message": "summaries",
+      "revId": "8a630081aba52d68bc215dcd79042bfdcfc9f74e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "04b861a5_d33e6a40",
+        "filename": "simpleperf/cmd_stat.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-08-19T22:18:37Z",
+      "side": 1,
+      "message": "Hz",
+      "revId": "8a630081aba52d68bc215dcd79042bfdcfc9f74e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
