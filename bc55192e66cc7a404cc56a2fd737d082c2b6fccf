@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e447cdea_01a42c36",
+        "filename": "simpleperf/dso.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-08-21T22:32:15Z",
+      "side": 1,
+      "message": "Would it worth checking to see if the demangled name is the same as the original name? If so you could avoid the allocation (just point demangled_name_ to name_).",
+      "revId": "bc55192e66cc7a404cc56a2fd737d082c2b6fccf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
