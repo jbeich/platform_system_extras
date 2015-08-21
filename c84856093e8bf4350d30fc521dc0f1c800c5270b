@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c4700952_fca0b57d",
+        "filename": "simpleperf/dso.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-08-21T19:18:24Z",
+      "side": 1,
+      "message": "(i was actually thinking you\u0027d use decltype so you wouldn\u0027t have to explicitly name a type here. otherwise the macro\u0027s fine.)",
+      "revId": "c84856093e8bf4350d30fc521dc0f1c800c5270b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
