@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "e45eedce_09722dd6",
+        "filename": "verity/fec/image.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2015-08-24T15:37:21Z",
+      "side": 1,
+      "message": "When decoding, the file is corrected in place, instead of creating a new file where the corrected version is stored.",
+      "parentUuid": "24656596_8b6db17b",
+      "range": {
+        "startLine": 36,
+        "startChar": 9,
+        "endLine": 36,
+        "endChar": 16
+      },
+      "revId": "ac9b4ec5bf3d637cdc59b3f142a3cea12a6f240a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "446ed97b_cc8e5f3c",
         "filename": "verity/fec/image.h",
         "patchSetId": 21
@@ -36,6 +60,30 @@
       "writtenOn": "2015-08-24T15:31:21Z",
       "side": 1,
       "message": "what is roots used for?",
+      "range": {
+        "startLine": 43,
+        "startChar": 8,
+        "endLine": 43,
+        "endChar": 13
+      },
+      "revId": "ac9b4ec5bf3d637cdc59b3f142a3cea12a6f240a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "845371c9_c6f2c493",
+        "filename": "verity/fec/image.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2015-08-24T15:37:21Z",
+      "side": 1,
+      "message": "This refers to the number of roots in the Reed-Solomon generator polynomial. The value is the same as the number of parity bytes we generate.",
+      "parentUuid": "446ed97b_cc8e5f3c",
       "range": {
         "startLine": 43,
         "startChar": 8,
