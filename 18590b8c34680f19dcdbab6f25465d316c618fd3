@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2419e672_5302644a",
+        "filename": "verity/fec/image.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2015-08-31T16:27:03Z",
+      "side": 1,
+      "message": "What does this mean? We cannot error correct files larger than 4Gb on a 32-bit device?",
+      "revId": "18590b8c34680f19dcdbab6f25465d316c618fd3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e438aece_512954c8",
+        "filename": "verity/fec/image.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2015-08-31T16:27:03Z",
+      "side": 1,
+      "message": "Magic number? And an odd one - \u003c\u003d255 would be more normal. Comment as to why this is correct",
+      "revId": "18590b8c34680f19dcdbab6f25465d316c618fd3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a40dd62d_d75bfc6a",
+        "filename": "verity/fec/main.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2015-08-31T16:27:03Z",
+      "side": 1,
+      "message": "It wouldn\u0027t hurt to explain what the program actually does under usage",
+      "revId": "18590b8c34680f19dcdbab6f25465d316c618fd3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "240006ef_bb6d07fb",
+        "filename": "verity/fec/main.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2015-08-31T16:27:03Z",
+      "side": 1,
+      "message": "It would be possible to break this up into smaller functions.",
+      "revId": "18590b8c34680f19dcdbab6f25465d316c618fd3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
