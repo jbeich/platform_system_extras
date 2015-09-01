@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "84529221_cdfc7a39",
+        "filename": "boot_control_copy/bootinfo.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2015-09-01T20:59:09Z",
+      "side": 1,
+      "message": "This was changed to slotselect",
+      "range": {
+        "startLine": 44,
+        "startChar": 39,
+        "endLine": 44,
+        "endChar": 49
+      },
+      "revId": "f7840cce68ad46c3eb36d22840cdc10a861d4053",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0484e2ca_bc964139",
+        "filename": "boot_control_copy/bootinfo.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2015-09-01T20:59:09Z",
+      "side": 1,
+      "message": "The value here is generally gotten from ro.hardware",
+      "range": {
+        "startLine": 59,
+        "startChar": 36,
+        "endLine": 59,
+        "endChar": 42
+      },
+      "revId": "f7840cce68ad46c3eb36d22840cdc10a861d4053",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e4618eea_18c2d18f",
+        "filename": "boot_control_copy/bootinfo.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2015-09-01T20:59:09Z",
+      "side": 1,
+      "message": "If you add fd !\u003d -1 to the condition, you can remove the if (fd \u003d\u003d -1) case above. Alternatively, you can move free(path) above it since that\u0027s done unconditionally.",
+      "range": {
+        "startLine": 91,
+        "startChar": 2,
+        "endLine": 97,
+        "endChar": 3
+      },
+      "revId": "f7840cce68ad46c3eb36d22840cdc10a861d4053",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
