@@ -36,6 +36,23 @@ IPV6_PREFER_SRC_PUBLIC = 0x0002
 
 class IPv6SourceAddressSelectionTest(multinetwork_base.MultiNetworkBaseTest):
 
+  """Test for IPv6 source address selection.
+
+  Relevant kernel commits:
+    upstream net-next:
+      7fd2561 net: ipv6: Add a sysctl to make optimistic addresses useful candidates
+      c58da4c net: ipv6: allow explicitly choosing optimistic addresses
+      9131f3d ipv6: Do not iterate over all interfaces when finding source address on specific interface.
+      c0b8da1 ipv6: Fix finding best source address in ipv6_dev_get_saddr().
+      c15df30 ipv6: Remove unused arguments for __ipv6_dev_get_saddr().
+      3985e8a ipv6: sysctl to restrict candidate source addresses
+
+    android-3.10:
+      2ce95507 net: ipv6: Add a sysctl to make optimistic addresses useful candidates
+      0065bf4 net: ipv6: allow choosing optimistic addresses with use_optimistic
+      0633924 ipv6: sysctl to restrict candidate source addresses
+  """
+
   def SetIPv6Sysctl(self, ifname, sysctl, value):
     self.SetSysctl("/proc/sys/net/ipv6/conf/%s/%s" % (ifname, sysctl), value)
 
