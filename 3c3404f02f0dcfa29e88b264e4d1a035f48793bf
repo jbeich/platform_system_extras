@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "444c1a8b_8a0e6f67",
+        "filename": "tests/net_test/multinetwork_test.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 986,
+      "author": {
+        "id": 1016583
+      },
+      "writtenOn": "2015-09-01T10:29:31Z",
+      "side": 1,
+      "message": "In two other places you put a new line between class definition and comment, but here you did not.",
+      "revId": "3c3404f02f0dcfa29e88b264e4d1a035f48793bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
