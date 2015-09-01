@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "e4d42ed5_51fdb4a7",
+        "filename": "verity/fec/image.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2015-09-01T10:39:35Z",
+      "side": 1,
+      "message": "This tool is not run on devices. We cannot encode images larger than 4 GiB on a 32-bit host using memory mapping, because the address space is not large enough. The error message below has a hint of why this check exists, but comment added.",
+      "parentUuid": "2419e672_5302644a",
+      "revId": "18590b8c34680f19dcdbab6f25465d316c618fd3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e438aece_512954c8",
         "filename": "verity/fec/image.cpp",
         "patchSetId": 22
@@ -30,6 +48,24 @@
       "writtenOn": "2015-08-31T16:27:03Z",
       "side": 1,
       "message": "Magic number? And an odd one - \u003c\u003d255 would be more normal. Comment as to why this is correct",
+      "revId": "18590b8c34680f19dcdbab6f25465d316c618fd3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "247566b9_13072c5a",
+        "filename": "verity/fec/image.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2015-09-01T10:39:35Z",
+      "side": 1,
+      "message": "Replaced with a constant from libfec.",
+      "parentUuid": "e438aece_512954c8",
       "revId": "18590b8c34680f19dcdbab6f25465d316c618fd3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "a46956e6_d7e99cef",
+        "filename": "verity/fec/main.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2015-09-01T10:39:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a40dd62d_d75bfc6a",
+      "revId": "18590b8c34680f19dcdbab6f25465d316c618fd3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "240006ef_bb6d07fb",
         "filename": "verity/fec/main.cpp",
         "patchSetId": 22
@@ -64,6 +118,24 @@
       "writtenOn": "2015-08-31T16:27:03Z",
       "side": 1,
       "message": "It would be possible to break this up into smaller functions.",
+      "revId": "18590b8c34680f19dcdbab6f25465d316c618fd3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a4deb6f4_4ffd0da8",
+        "filename": "verity/fec/main.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2015-09-01T10:39:35Z",
+      "side": 1,
+      "message": "Correct. Done",
+      "parentUuid": "240006ef_bb6d07fb",
       "revId": "18590b8c34680f19dcdbab6f25465d316c618fd3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
