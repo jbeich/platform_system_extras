@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "e4d42ed5_11072c5a",
+        "filename": "verity/fec/image.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2015-09-01T10:39:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "04114242_1a319d20",
+      "range": {
+        "startLine": 36,
+        "startChar": 9,
+        "endLine": 36,
+        "endChar": 16
+      },
+      "revId": "ac9b4ec5bf3d637cdc59b3f142a3cea12a6f240a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "446ed97b_cc8e5f3c",
         "filename": "verity/fec/image.h",
         "patchSetId": 21
