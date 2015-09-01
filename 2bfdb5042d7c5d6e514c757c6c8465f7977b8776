@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "249c8629_9e133922",
+        "filename": "tests/net_test/ping6_test.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 1016583
+      },
+      "writtenOn": "2015-09-01T11:01:38Z",
+      "side": 1,
+      "message": "how come new line here but not in other files?",
+      "revId": "2bfdb5042d7c5d6e514c757c6c8465f7977b8776",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
