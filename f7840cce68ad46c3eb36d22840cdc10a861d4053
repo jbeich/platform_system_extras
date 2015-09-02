@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "6492fe15_d210d216",
+        "filename": "boot_control_copy/bootinfo.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2015-09-02T19:30:14Z",
+      "side": 1,
+      "message": "It\u0027s not always set up that way, but places that try to look for it generically often use that. For instance, in fs_mgr_verity.c. I think there are other devices that don\u0027t follow this, but I can\u0027t think of any off the top of my head.",
+      "parentUuid": "44333af5_a022627d",
+      "range": {
+        "startLine": 59,
+        "startChar": 36,
+        "endLine": 59,
+        "endChar": 42
+      },
+      "revId": "f7840cce68ad46c3eb36d22840cdc10a861d4053",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e4618eea_18c2d18f",
         "filename": "boot_control_copy/bootinfo.c",
         "patchSetId": 1
