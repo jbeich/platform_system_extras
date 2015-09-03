@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "e45b4e6b_bc5eed5b",
+        "filename": "tests/net_test/ping6_test.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2015-09-03T16:18:35Z",
+      "side": 1,
+      "message": "Harmonized.",
+      "parentUuid": "249c8629_9e133922",
+      "revId": "2bfdb5042d7c5d6e514c757c6c8465f7977b8776",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e486eed4_600c877c",
         "filename": "tests/net_test/srcaddr_selection_test.py",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2015-09-02T17:28:51Z",
       "side": 1,
       "message": "Please add to the list:\n\n  c58da4c65980 net: ipv6: allow explicitly choosing optimistic addresses\n\nIt is also relevant here.\n\n(Or, if you prefer, I can follow up your commit with one of mine adding it to the list, once it\u0027s merged.)\n\nCheers,\nFilipe",
+      "revId": "2bfdb5042d7c5d6e514c757c6c8465f7977b8776",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "84ae1264_ecb95f50",
+        "filename": "tests/net_test/srcaddr_selection_test.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2015-09-03T16:18:35Z",
+      "side": 1,
+      "message": "It\u0027s already in the list, look two lines down.",
+      "parentUuid": "e486eed4_600c877c",
       "revId": "2bfdb5042d7c5d6e514c757c6c8465f7977b8776",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
