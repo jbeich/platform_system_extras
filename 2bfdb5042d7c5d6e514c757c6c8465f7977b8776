@@ -69,6 +69,24 @@
       "revId": "2bfdb5042d7c5d6e514c757c6c8465f7977b8776",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "240f267a_8642ac73",
+        "filename": "tests/net_test/srcaddr_selection_test.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1074903
+      },
+      "writtenOn": "2015-09-03T16:25:48Z",
+      "side": 1,
+      "message": "Somehow I missed that, probably because we had the similar one (that we reverted to replace with this one) with a similar name... Sorry for the distraction.",
+      "parentUuid": "84ae1264_ecb95f50",
+      "revId": "2bfdb5042d7c5d6e514c757c6c8465f7977b8776",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
