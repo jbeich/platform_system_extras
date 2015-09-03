@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "e45b4e6b_9c5b296c",
+        "filename": "tests/net_test/anycast_test.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2015-09-03T16:18:35Z",
+      "side": 1,
+      "message": "Removed.",
+      "parentUuid": "e486eed4_35080830",
+      "revId": "3c3404f02f0dcfa29e88b264e4d1a035f48793bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "444c1a8b_8a0e6f67",
         "filename": "tests/net_test/multinetwork_test.py",
         "patchSetId": 1
@@ -54,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "44a89a5b_443e4e57",
+        "filename": "tests/net_test/multinetwork_test.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 986,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2015-09-03T16:18:35Z",
+      "side": 1,
+      "message": "Removed all such newlines in this directory.",
+      "parentUuid": "8429b287_d741b629",
+      "revId": "3c3404f02f0dcfa29e88b264e4d1a035f48793bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "045f8228_33625a4d",
         "filename": "tests/net_test/srcaddr_selection_test.py",
         "patchSetId": 1
@@ -65,6 +101,24 @@
       "writtenOn": "2015-09-01T15:01:42Z",
       "side": 1,
       "message": "Unusual newline.",
+      "revId": "3c3404f02f0dcfa29e88b264e4d1a035f48793bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "24cac639_6b9fa19d",
+        "filename": "tests/net_test/srcaddr_selection_test.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2015-09-03T16:18:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "045f8228_33625a4d",
       "revId": "3c3404f02f0dcfa29e88b264e4d1a035f48793bf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
