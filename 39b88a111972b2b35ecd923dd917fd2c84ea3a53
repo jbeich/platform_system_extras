@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c4580a44_717b2a56",
+        "filename": "boot_control_copy/bootinfo.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1076971
+      },
+      "writtenOn": "2015-09-03T16:48:24Z",
+      "side": 1,
+      "message": "Still need to fix this, stay tuned.",
+      "range": {
+        "startLine": 59,
+        "startChar": 42,
+        "endLine": 59,
+        "endChar": 45
+      },
+      "revId": "39b88a111972b2b35ecd923dd917fd2c84ea3a53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
