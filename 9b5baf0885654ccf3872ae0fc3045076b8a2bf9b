@@ -247,6 +247,24 @@
     },
     {
       "key": {
+        "uuid": "240f267a_7d061796",
+        "filename": "iotop/log.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-09-04T22:57:02Z",
+      "side": 1,
+      "message": "just supply a literal 0 then. or use the functions in \u003cerr.h\u003e instead.\n\nif you can\u0027t use \u003cerr.h\u003e, \u003cerror.h\u003e, or \u003cbase/logging.h\u003e in new code, tell us why so we can fix it! everything having its own logging with inconsistent rules about things like the trailing \\n is just annoying.",
+      "parentUuid": "64159e82_ffc67fcf",
+      "revId": "9b5baf0885654ccf3872ae0fc3045076b8a2bf9b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6492fe15_9551cf01",
         "filename": "iotop/tasklist.cpp",
         "patchSetId": 2
