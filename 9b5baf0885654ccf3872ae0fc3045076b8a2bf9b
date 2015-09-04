@@ -1,0 +1,276 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "04cce27b_173fc67b",
+        "filename": "iotop/Android.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-09-04T15:26:57Z",
+      "side": 1,
+      "message": "14\u0027s the default now.",
+      "revId": "9b5baf0885654ccf3872ae0fc3045076b8a2bf9b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "240f267a_378040e9",
+        "filename": "iotop/NOTICE",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-09-04T15:26:57Z",
+      "side": 1,
+      "message": "where did this come from?\n\n\n(i don\u0027t think you need a NOTICE at all if you have the MODULE_* --- doesn\u0027t the build system sort that out at build time?)",
+      "revId": "9b5baf0885654ccf3872ae0fc3045076b8a2bf9b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0484e2ca_c4db1c57",
+        "filename": "iotop/iotop.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-09-04T15:26:57Z",
+      "side": 1,
+      "message": "constexpr?",
+      "revId": "9b5baf0885654ccf3872ae0fc3045076b8a2bf9b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "644d9e85_7811c0cd",
+        "filename": "iotop/iotop.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-09-04T15:26:57Z",
+      "side": 1,
+      "message": "easier if usage() just calls exit?",
+      "revId": "9b5baf0885654ccf3872ae0fc3045076b8a2bf9b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8497f201_13fdcd32",
+        "filename": "iotop/iotop.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-09-04T15:26:57Z",
+      "side": 1,
+      "message": "tab",
+      "revId": "9b5baf0885654ccf3872ae0fc3045076b8a2bf9b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0484e2ca_64d01032",
+        "filename": "iotop/iotop.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-09-04T15:26:57Z",
+      "side": 1,
+      "message": "auto\u0026",
+      "revId": "9b5baf0885654ccf3872ae0fc3045076b8a2bf9b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "44141a88_de9d8527",
+        "filename": "iotop/log.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-09-04T15:26:57Z",
+      "side": 1,
+      "message": "use \u003cerror.h\u003e instead?",
+      "revId": "9b5baf0885654ccf3872ae0fc3045076b8a2bf9b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6492fe15_9551cf01",
+        "filename": "iotop/tasklist.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-09-04T15:26:57Z",
+      "side": 1,
+      "message": "just use readdir instead.\n\nhttp://elliotth.blogspot.com/2012/10/how-not-to-use-readdirr3.html",
+      "revId": "9b5baf0885654ccf3872ae0fc3045076b8a2bf9b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8497f201_9300fdc8",
+        "filename": "iotop/tasklist.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-09-04T15:26:57Z",
+      "side": 1,
+      "message": "toybox takes advantage of 0 not being a pid and just unconditionally does the atoi and then compares against 0. i\u0027m still not sure whether i like that. if you stick with this style, isdigit(3).",
+      "revId": "9b5baf0885654ccf3872ae0fc3045076b8a2bf9b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "64159e82_74bd960e",
+        "filename": "iotop/tasklist.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-09-04T15:26:57Z",
+      "side": 1,
+      "message": "factor these out so you have a function that takes a path and returns a list of pids? it\u0027s not like you\u0027d be making Scan any more racy than it inherently must be.",
+      "revId": "9b5baf0885654ccf3872ae0fc3045076b8a2bf9b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "44141a88_3e6ad9b7",
+        "filename": "iotop/tasklist.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-09-04T15:26:57Z",
+      "side": 1,
+      "message": "stray ;",
+      "revId": "9b5baf0885654ccf3872ae0fc3045076b8a2bf9b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0484e2ca_44e70c1a",
+        "filename": "iotop/taskstats.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-09-04T15:26:57Z",
+      "side": 1,
+      "message": "don\u0027t need to say struct in C++ (unless you\u0027re disambiguating; \"stat\" vs \"struct stat\" being the common exception).",
+      "revId": "9b5baf0885654ccf3872ae0fc3045076b8a2bf9b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "44141a88_1e6f1dc8",
+        "filename": "iotop/taskstats.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-09-04T15:26:57Z",
+      "side": 1,
+      "message": "pid_t ret \u003d ...?",
+      "revId": "9b5baf0885654ccf3872ae0fc3045076b8a2bf9b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "240f267a_977014d4",
+        "filename": "iotop/taskstats.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-09-04T15:26:57Z",
+      "side": 1,
+      "message": "does this need to be in this header file? does it need to be nested?",
+      "revId": "9b5baf0885654ccf3872ae0fc3045076b8a2bf9b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0484e2ca_84d51423",
+        "filename": "iotop/taskstats.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-09-04T15:26:57Z",
+      "side": 1,
+      "message": "comment why this is backwards compared to the rest?",
+      "revId": "9b5baf0885654ccf3872ae0fc3045076b8a2bf9b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "644d9e85_380b489e",
+        "filename": "iotop/taskstats.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-09-04T15:26:57Z",
+      "side": 1,
+      "message": "abort is safer. the compiler can fuck you over here if you ever do add an enum value but forget to fix the switch.",
+      "revId": "9b5baf0885654ccf3872ae0fc3045076b8a2bf9b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
