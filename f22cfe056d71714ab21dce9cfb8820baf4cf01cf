@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e4bd0e95_0c55d739",
+        "filename": "tests/net_test/neighbour_test.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2015-09-04T04:21:33Z",
+      "side": 1,
+      "message": "upstream net-next",
+      "range": {
+        "startLine": 151,
+        "startChar": 6,
+        "endLine": 151,
+        "endChar": 14
+      },
+      "revId": "f22cfe056d71714ab21dce9cfb8820baf4cf01cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "24cac639_0ed06b30",
+        "filename": "tests/net_test/neighbour_test.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2015-09-04T04:21:33Z",
+      "side": 1,
+      "message": "Remove this? It\u0027s not part of the commit description.",
+      "range": {
+        "startLine": 152,
+        "startChar": 16,
+        "endLine": 152,
+        "endChar": 23
+      },
+      "revId": "f22cfe056d71714ab21dce9cfb8820baf4cf01cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "44a89a5b_84a766f0",
+        "filename": "tests/net_test/neighbour_test.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2015-09-04T04:21:33Z",
+      "side": 1,
+      "message": "on earlier kernels",
+      "range": {
+        "startLine": 181,
+        "startChar": 26,
+        "endLine": 181,
+        "endChar": 52
+      },
+      "revId": "f22cfe056d71714ab21dce9cfb8820baf4cf01cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
