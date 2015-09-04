@@ -2,6 +2,46 @@
   "comments": [
     {
       "key": {
+        "uuid": "e486eed4_a99a6fab",
+        "filename": "iotop/iotop.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1064128
+      },
+      "writtenOn": "2015-09-04T23:37:58Z",
+      "side": 1,
+      "message": "Capital letter for type name",
+      "range": {
+        "startLine": 53,
+        "startChar": 6,
+        "endLine": 53,
+        "endChar": 65
+      },
+      "revId": "bf69967ce231b0294334148afaa92d586e50766c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "04cce27b_9f268c4e",
+        "filename": "iotop/iotop.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1064128
+      },
+      "writtenOn": "2015-09-04T23:37:58Z",
+      "side": 1,
+      "message": "I\u0027m still a fan of std::bind instead of the nested lambda",
+      "revId": "bf69967ce231b0294334148afaa92d586e50766c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "44141a88_ee27f075",
         "filename": "iotop/iotop.cpp",
         "patchSetId": 6
@@ -13,6 +53,103 @@
       "writtenOn": "2015-09-04T22:59:24Z",
       "side": 1,
       "message": "this seems like a reasonable compromise compared to the triply-nested lambdas :-)",
+      "revId": "bf69967ce231b0294334148afaa92d586e50766c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6492fe15_cbd01458",
+        "filename": "iotop/iotop.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1064128
+      },
+      "writtenOn": "2015-09-04T23:37:58Z",
+      "side": 1,
+      "message": "const",
+      "revId": "bf69967ce231b0294334148afaa92d586e50766c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "84529221_ea4383db",
+        "filename": "iotop/taskstats.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1064128
+      },
+      "writtenOn": "2015-09-04T23:37:58Z",
+      "side": 1,
+      "message": "} on following line here and ::Close()",
+      "revId": "bf69967ce231b0294334148afaa92d586e50766c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6492fe15_ebfaafaa",
+        "filename": "iotop/taskstats.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1064128
+      },
+      "writtenOn": "2015-09-04T23:37:58Z",
+      "side": 1,
+      "message": "const?",
+      "range": {
+        "startLine": 160,
+        "startChar": 31,
+        "endLine": 160,
+        "endChar": 40
+      },
+      "revId": "bf69967ce231b0294334148afaa92d586e50766c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e486eed4_4972c324",
+        "filename": "iotop/taskstats.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1064128
+      },
+      "writtenOn": "2015-09-04T23:37:58Z",
+      "side": 1,
+      "message": "no need for struct",
+      "range": {
+        "startLine": 27,
+        "startChar": 17,
+        "endLine": 27,
+        "endChar": 23
+      },
+      "revId": "bf69967ce231b0294334148afaa92d586e50766c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "84529221_ca5c47e1",
+        "filename": "iotop/taskstats.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1064128
+      },
+      "writtenOn": "2015-09-04T23:37:58Z",
+      "side": 1,
+      "message": "getters should be lowercase; member vars should have an _ at the end",
       "revId": "bf69967ce231b0294334148afaa92d586e50766c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
