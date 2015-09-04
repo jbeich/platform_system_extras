@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "0484e2ca_e4fc2039",
+        "filename": "iotop/Android.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2015-09-04T20:15:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "04cce27b_173fc67b",
+      "revId": "9b5baf0885654ccf3872ae0fc3045076b8a2bf9b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "240f267a_378040e9",
         "filename": "iotop/NOTICE",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2015-09-04T15:26:57Z",
       "side": 1,
       "message": "where did this come from?\n\n\n(i don\u0027t think you need a NOTICE at all if you have the MODULE_* --- doesn\u0027t the build system sort that out at build time?)",
+      "revId": "9b5baf0885654ccf3872ae0fc3045076b8a2bf9b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "240f267a_37c960e7",
+        "filename": "iotop/NOTICE",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2015-09-04T20:15:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "240f267a_378040e9",
       "revId": "9b5baf0885654ccf3872ae0fc3045076b8a2bf9b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "6492fe15_959a2fac",
+        "filename": "iotop/iotop.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2015-09-04T20:15:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0484e2ca_c4db1c57",
+      "revId": "9b5baf0885654ccf3872ae0fc3045076b8a2bf9b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "644d9e85_7811c0cd",
         "filename": "iotop/iotop.cpp",
         "patchSetId": 2
@@ -64,6 +118,24 @@
       "writtenOn": "2015-09-04T15:26:57Z",
       "side": 1,
       "message": "easier if usage() just calls exit?",
+      "revId": "9b5baf0885654ccf3872ae0fc3045076b8a2bf9b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "44141a88_3924b3f1",
+        "filename": "iotop/iotop.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2015-09-04T20:15:06Z",
+      "side": 1,
+      "message": "-h returns EXIT_SUCCESS",
+      "parentUuid": "644d9e85_7811c0cd",
       "revId": "9b5baf0885654ccf3872ae0fc3045076b8a2bf9b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "644d9e85_33692bc0",
+        "filename": "iotop/iotop.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2015-09-04T20:15:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8497f201_13fdcd32",
+      "revId": "9b5baf0885654ccf3872ae0fc3045076b8a2bf9b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0484e2ca_64d01032",
         "filename": "iotop/iotop.cpp",
         "patchSetId": 2
@@ -98,6 +188,24 @@
       "writtenOn": "2015-09-04T15:26:57Z",
       "side": 1,
       "message": "auto\u0026",
+      "revId": "9b5baf0885654ccf3872ae0fc3045076b8a2bf9b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "04cce27b_699e765a",
+        "filename": "iotop/iotop.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2015-09-04T20:15:06Z",
+      "side": 1,
+      "message": "Switched to TaskStatistics\u0026",
+      "parentUuid": "0484e2ca_64d01032",
       "revId": "9b5baf0885654ccf3872ae0fc3045076b8a2bf9b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "64159e82_ffc67fcf",
+        "filename": "iotop/log.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2015-09-04T20:15:06Z",
+      "side": 1,
+      "message": "Isn\u0027t error.h mostly useful for printing errno values?  Most of my errors don\u0027t have errno.",
+      "parentUuid": "44141a88_de9d8527",
+      "revId": "9b5baf0885654ccf3872ae0fc3045076b8a2bf9b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6492fe15_9551cf01",
         "filename": "iotop/tasklist.cpp",
         "patchSetId": 2
@@ -132,6 +258,24 @@
       "writtenOn": "2015-09-04T15:26:57Z",
       "side": 1,
       "message": "just use readdir instead.\n\nhttp://elliotth.blogspot.com/2012/10/how-not-to-use-readdirr3.html",
+      "revId": "9b5baf0885654ccf3872ae0fc3045076b8a2bf9b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e486eed4_431f0469",
+        "filename": "iotop/tasklist.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2015-09-04T20:15:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6492fe15_9551cf01",
       "revId": "9b5baf0885654ccf3872ae0fc3045076b8a2bf9b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -155,6 +299,24 @@
     },
     {
       "key": {
+        "uuid": "240f267a_97277449",
+        "filename": "iotop/tasklist.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2015-09-04T20:15:06Z",
+      "side": 1,
+      "message": "I like the explicit check, it\u0027s less tricky",
+      "parentUuid": "8497f201_9300fdc8",
+      "revId": "9b5baf0885654ccf3872ae0fc3045076b8a2bf9b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "64159e82_74bd960e",
         "filename": "iotop/tasklist.cpp",
         "patchSetId": 2
@@ -172,6 +334,24 @@
     },
     {
       "key": {
+        "uuid": "644d9e85_f3415329",
+        "filename": "iotop/tasklist.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2015-09-04T20:15:06Z",
+      "side": 1,
+      "message": "Scan is producing a map, calling a function that returns a vector and then putting the values in a map seems wasteful",
+      "parentUuid": "64159e82_74bd960e",
+      "revId": "9b5baf0885654ccf3872ae0fc3045076b8a2bf9b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "44141a88_3e6ad9b7",
         "filename": "iotop/tasklist.h",
         "patchSetId": 2
@@ -183,6 +363,24 @@
       "writtenOn": "2015-09-04T15:26:57Z",
       "side": 1,
       "message": "stray ;",
+      "revId": "9b5baf0885654ccf3872ae0fc3045076b8a2bf9b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e486eed4_e3041822",
+        "filename": "iotop/tasklist.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2015-09-04T20:15:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "44141a88_3e6ad9b7",
       "revId": "9b5baf0885654ccf3872ae0fc3045076b8a2bf9b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -240,6 +438,24 @@
     },
     {
       "key": {
+        "uuid": "e486eed4_83c42c2c",
+        "filename": "iotop/taskstats.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2015-09-04T20:15:06Z",
+      "side": 1,
+      "message": "It doesn\u0027t need to be nested, but it is tightly coupled to class TaskStatistics. Any reason not to nest it?  It needs to be declared in the header, it is used by iotop.cpp.",
+      "parentUuid": "240f267a_977014d4",
+      "revId": "9b5baf0885654ccf3872ae0fc3045076b8a2bf9b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0484e2ca_84d51423",
         "filename": "iotop/taskstats.h",
         "patchSetId": 2
@@ -257,6 +473,24 @@
     },
     {
       "key": {
+        "uuid": "0484e2ca_448cecb9",
+        "filename": "iotop/taskstats.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2015-09-04T20:15:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0484e2ca_84d51423",
+      "revId": "9b5baf0885654ccf3872ae0fc3045076b8a2bf9b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "644d9e85_380b489e",
         "filename": "iotop/taskstats.h",
         "patchSetId": 2
@@ -268,6 +502,24 @@
       "writtenOn": "2015-09-04T15:26:57Z",
       "side": 1,
       "message": "abort is safer. the compiler can fuck you over here if you ever do add an enum value but forget to fix the switch.",
+      "revId": "9b5baf0885654ccf3872ae0fc3045076b8a2bf9b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "04cce27b_c9a8625d",
+        "filename": "iotop/taskstats.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2015-09-04T20:15:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "644d9e85_380b489e",
       "revId": "9b5baf0885654ccf3872ae0fc3045076b8a2bf9b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
