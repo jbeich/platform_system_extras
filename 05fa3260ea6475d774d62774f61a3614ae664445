@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "240f267a_32996e71",
+        "filename": "perfprofd/configreader.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-09-04T19:28:15Z",
+      "side": 1,
+      "message": "why not making config_file_path std::string? avoiding global constructor and destructor?",
+      "range": {
+        "startLine": 42,
+        "startChar": 2,
+        "endLine": 42,
+        "endChar": 34
+      },
+      "revId": "05fa3260ea6475d774d62774f61a3614ae664445",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0484e2ca_1f8dd126",
+        "filename": "perfprofd/configreader.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-09-04T19:28:15Z",
+      "side": 1,
+      "message": "would SetEntry() be better? And I prefer calling setUnsignedEntry() in this function. trace_config_read is considered in this function, but not in setUnsignedEntry().",
+      "range": {
+        "startLine": 186,
+        "startChar": 19,
+        "endLine": 186,
+        "endChar": 28
+      },
+      "revId": "05fa3260ea6475d774d62774f61a3614ae664445",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e486eed4_c36d543f",
+        "filename": "perfprofd/configreader.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-09-04T19:28:15Z",
+      "side": 1,
+      "message": "use android::base::ReadFileToString?",
+      "range": {
+        "startLine": 243,
+        "startChar": 2,
+        "endLine": 243,
+        "endChar": 42
+      },
+      "revId": "05fa3260ea6475d774d62774f61a3614ae664445",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "64159e82_fa77ad98",
+        "filename": "perfprofd/configreader.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-09-04T19:28:15Z",
+      "side": 1,
+      "message": "If initial is only used for error reporting, why not returning a bool value, and let the caller report the error?\nBecause initial seems confusing here.",
+      "range": {
+        "startLine": 245,
+        "startChar": 4,
+        "endLine": 245,
+        "endChar": 18
+      },
+      "revId": "05fa3260ea6475d774d62774f61a3614ae664445",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "644d9e85_b3a4fbeb",
+        "filename": "perfprofd/perfprofdcore.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-09-04T19:28:15Z",
+      "side": 1,
+      "message": "ReadFdToString?",
+      "range": {
+        "startLine": 320,
+        "startChar": 2,
+        "endLine": 320,
+        "endChar": 37
+      },
+      "revId": "05fa3260ea6475d774d62774f61a3614ae664445",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "240f267a_b2cf1e3f",
+        "filename": "perfprofd/tests/Android.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-09-04T19:28:15Z",
+      "side": 1,
+      "message": "why adding it?",
+      "range": {
+        "startLine": 37,
+        "startChar": 65,
+        "endLine": 37,
+        "endChar": 73
+      },
+      "revId": "05fa3260ea6475d774d62774f61a3614ae664445",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
