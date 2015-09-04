@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "44141a88_ee27f075",
+        "filename": "iotop/iotop.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-09-04T22:59:24Z",
+      "side": 1,
+      "message": "this seems like a reasonable compromise compared to the triply-nested lambdas :-)",
+      "revId": "bf69967ce231b0294334148afaa92d586e50766c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
