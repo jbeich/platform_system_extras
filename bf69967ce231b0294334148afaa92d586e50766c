@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "04cce27b_c2faf77c",
+        "filename": "iotop/iotop.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2015-09-05T00:07:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e486eed4_a99a6fab",
+      "range": {
+        "startLine": 53,
+        "startChar": 6,
+        "endLine": 53,
+        "endChar": 65
+      },
+      "revId": "bf69967ce231b0294334148afaa92d586e50766c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "04cce27b_9f268c4e",
         "filename": "iotop/iotop.cpp",
         "patchSetId": 6
@@ -36,6 +60,24 @@
       "writtenOn": "2015-09-04T23:37:58Z",
       "side": 1,
       "message": "I\u0027m still a fan of std::bind instead of the nested lambda",
+      "revId": "bf69967ce231b0294334148afaa92d586e50766c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0484e2ca_a54b729e",
+        "filename": "iotop/iotop.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2015-09-05T00:07:00Z",
+      "side": 1,
+      "message": "Bind on the sort gets really ugly because sort is overloaded, so you have to specify the function type to bind.",
+      "parentUuid": "04cce27b_9f268c4e",
       "revId": "bf69967ce231b0294334148afaa92d586e50766c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -76,6 +118,24 @@
     },
     {
       "key": {
+        "uuid": "84529221_6dc0cd64",
+        "filename": "iotop/iotop.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2015-09-05T00:07:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6492fe15_cbd01458",
+      "revId": "bf69967ce231b0294334148afaa92d586e50766c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "84529221_ea4383db",
         "filename": "iotop/taskstats.cpp",
         "patchSetId": 6
@@ -93,6 +153,24 @@
     },
     {
       "key": {
+        "uuid": "64159e82_2413e768",
+        "filename": "iotop/taskstats.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2015-09-05T00:07:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "84529221_ea4383db",
+      "revId": "bf69967ce231b0294334148afaa92d586e50766c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6492fe15_ebfaafaa",
         "filename": "iotop/taskstats.cpp",
         "patchSetId": 6
@@ -104,6 +182,30 @@
       "writtenOn": "2015-09-04T23:37:58Z",
       "side": 1,
       "message": "const?",
+      "range": {
+        "startLine": 160,
+        "startChar": 31,
+        "endLine": 160,
+        "endChar": 40
+      },
+      "revId": "bf69967ce231b0294334148afaa92d586e50766c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6492fe15_eb04ef21",
+        "filename": "iotop/taskstats.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2015-09-05T00:07:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6492fe15_ebfaafaa",
       "range": {
         "startLine": 160,
         "startChar": 31,
@@ -139,6 +241,30 @@
     },
     {
       "key": {
+        "uuid": "6492fe15_2b7417c7",
+        "filename": "iotop/taskstats.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2015-09-05T00:07:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e486eed4_4972c324",
+      "range": {
+        "startLine": 27,
+        "startChar": 17,
+        "endLine": 27,
+        "endChar": 23
+      },
+      "revId": "bf69967ce231b0294334148afaa92d586e50766c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "84529221_ca5c47e1",
         "filename": "iotop/taskstats.h",
         "patchSetId": 6
@@ -150,6 +276,24 @@
       "writtenOn": "2015-09-04T23:37:58Z",
       "side": 1,
       "message": "getters should be lowercase; member vars should have an _ at the end",
+      "revId": "bf69967ce231b0294334148afaa92d586e50766c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6492fe15_4b7163d5",
+        "filename": "iotop/taskstats.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2015-09-05T00:07:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "84529221_ca5c47e1",
       "revId": "bf69967ce231b0294334148afaa92d586e50766c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
