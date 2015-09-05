@@ -84,6 +84,24 @@
     },
     {
       "key": {
+        "uuid": "04cce27b_a26973c1",
+        "filename": "iotop/iotop.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1064128
+      },
+      "writtenOn": "2015-09-05T00:33:33Z",
+      "side": 1,
+      "message": "I mean instead of the nested lambda you can have \nauto comparator \u003d [](const TaskStatistics\u0026 lhs, const TaskStatistics\u0026 rhs, auto field, bool ascending) { ... } outside of make_sorter.\n\nmake_sorter would become\nauto make_sorter \u003d [] (auto field, bool ascending) {\nauto bound_comparator \u003d std::bind(comparator, _1, _2, field, ascending);\nreturn [bound_comparator](auto\u0026 vector) {\n      return std::sort(vector.begin(), vector.end(), bound_comparator);\n    };\n};\n\nYou\u0027d remove one level of nested lambdas.\n\nOn a side note, do we know if anything happens if we make these lambdas static? or is the compiler smart enough to only generate them once?",
+      "parentUuid": "0484e2ca_a54b729e",
+      "revId": "bf69967ce231b0294334148afaa92d586e50766c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "44141a88_ee27f075",
         "filename": "iotop/iotop.cpp",
         "patchSetId": 6
