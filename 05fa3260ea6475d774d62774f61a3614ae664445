@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "44e97ace_9cfa257c",
+        "filename": "perfprofd/configreader.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-09-08T12:22:43Z",
+      "side": 1,
+      "message": "Yes",
+      "parentUuid": "240f267a_32996e71",
+      "range": {
+        "startLine": 42,
+        "startChar": 2,
+        "endLine": 42,
+        "endChar": 34
+      },
+      "revId": "05fa3260ea6475d774d62774f61a3614ae664445",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0484e2ca_1f8dd126",
         "filename": "perfprofd/configreader.cc",
         "patchSetId": 3
@@ -36,6 +60,30 @@
       "writtenOn": "2015-09-04T19:28:15Z",
       "side": 1,
       "message": "would SetEntry() be better? And I prefer calling setUnsignedEntry() in this function. trace_config_read is considered in this function, but not in setUnsignedEntry().",
+      "range": {
+        "startLine": 186,
+        "startChar": 19,
+        "endLine": 186,
+        "endChar": 28
+      },
+      "revId": "05fa3260ea6475d774d62774f61a3614ae664445",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c48d6af4_a9412501",
+        "filename": "perfprofd/configreader.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-09-08T12:22:43Z",
+      "side": 1,
+      "message": "I prefer parseLine to setEntry -- latter implies that something is definitely going to be set (which is not the case if the key can\u0027t be recognized or the value is out of range). \n\nsetUnsignedEntry was intended just as a way to override the defaults in the config file for unit testing; it asserts if you give it a bad value (as opposed to parseLine, which issues a warning message). I\u0027ll change the name to make this more clear. ...",
+      "parentUuid": "0484e2ca_1f8dd126",
       "range": {
         "startLine": 186,
         "startChar": 19,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "c4580a44_5cea7d1f",
+        "filename": "perfprofd/configreader.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-09-08T12:22:43Z",
+      "side": 1,
+      "message": "Fixed.",
+      "parentUuid": "e486eed4_c36d543f",
+      "range": {
+        "startLine": 243,
+        "startChar": 2,
+        "endLine": 243,
+        "endChar": 42
+      },
+      "revId": "05fa3260ea6475d774d62774f61a3614ae664445",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "64159e82_fa77ad98",
         "filename": "perfprofd/configreader.cc",
         "patchSetId": 3
@@ -82,6 +154,30 @@
       "writtenOn": "2015-09-04T19:28:15Z",
       "side": 1,
       "message": "If initial is only used for error reporting, why not returning a bool value, and let the caller report the error?\nBecause initial seems confusing here.",
+      "range": {
+        "startLine": 245,
+        "startChar": 4,
+        "endLine": 245,
+        "endChar": 18
+      },
+      "revId": "05fa3260ea6475d774d62774f61a3614ae664445",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "249c8629_c427b476",
+        "filename": "perfprofd/configreader.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-09-08T12:22:43Z",
+      "side": 1,
+      "message": "Fixed.",
+      "parentUuid": "64159e82_fa77ad98",
       "range": {
         "startLine": 245,
         "startChar": 4,
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "44e97ace_bcaa81b8",
+        "filename": "perfprofd/perfprofdcore.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-09-08T12:22:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "644d9e85_b3a4fbeb",
+      "range": {
+        "startLine": 320,
+        "startChar": 2,
+        "endLine": 320,
+        "endChar": 37
+      },
+      "revId": "05fa3260ea6475d774d62774f61a3614ae664445",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "240f267a_b2cf1e3f",
         "filename": "perfprofd/tests/Android.mk",
         "patchSetId": 3
@@ -128,6 +248,30 @@
       "writtenOn": "2015-09-04T19:28:15Z",
       "side": 1,
       "message": "why adding it?",
+      "range": {
+        "startLine": 37,
+        "startChar": 65,
+        "endLine": 37,
+        "endChar": 73
+      },
+      "revId": "05fa3260ea6475d774d62774f61a3614ae664445",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "647bdead_69830dcf",
+        "filename": "perfprofd/tests/Android.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2015-09-08T12:22:43Z",
+      "side": 1,
+      "message": "I wanted to make the dependency explicit-- it seemed odd that there were calls to things in the gtest library but no mention of gtest in the makefile. I can take it out if it is a problem.",
+      "parentUuid": "240f267a_b2cf1e3f",
       "range": {
         "startLine": 37,
         "startChar": 65,
