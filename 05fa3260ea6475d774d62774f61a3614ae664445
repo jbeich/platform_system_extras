@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "a4bdd6e7_1d9b53dc",
+        "filename": "perfprofd/configreader.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-09-09T01:11:47Z",
+      "side": 1,
+      "message": "personally, I don\u0027t think overrideUnsignedEntry() is more clear than setUnsignedEntry(). Because parseLine() also overrides unsigned entry initialized in addDefaultEntries(). \nI prefer to let setUnsignedEntry() return a bool value, and let unit tests calling it to ASSERT_TRUE(). But you don\u0027t need to do that if you don\u0027t want to.",
+      "parentUuid": "c48d6af4_a9412501",
+      "range": {
+        "startLine": 186,
+        "startChar": 19,
+        "endLine": 186,
+        "endChar": 28
+      },
+      "revId": "05fa3260ea6475d774d62774f61a3614ae664445",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e486eed4_c36d543f",
         "filename": "perfprofd/configreader.cc",
         "patchSetId": 3
