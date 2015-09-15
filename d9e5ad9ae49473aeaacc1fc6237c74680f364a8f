@@ -16,6 +16,24 @@
       "revId": "d9e5ad9ae49473aeaacc1fc6237c74680f364a8f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "44209a82_e73bfc98",
+        "filename": "verity/BootSignature.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2015-09-15T16:23:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "44725a92_aa239082",
+      "revId": "d9e5ad9ae49473aeaacc1fc6237c74680f364a8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
