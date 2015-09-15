@@ -16,6 +16,24 @@
       "revId": "42ffcd262eba8379c022d332596924985df996de",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "848ff2ac_28c4e429",
+        "filename": "memory_replay/err.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2015-09-15T21:33:29Z",
+      "side": 1,
+      "message": "Oops, yeah, I should have remembered that this functionality already exists. I\u0027ve moved to using err.",
+      "parentUuid": "848ff2ac_78a881c1",
+      "revId": "42ffcd262eba8379c022d332596924985df996de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
