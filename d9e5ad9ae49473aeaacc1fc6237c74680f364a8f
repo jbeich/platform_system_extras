@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "44725a92_aa239082",
+        "filename": "verity/BootSignature.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1018773
+      },
+      "writtenOn": "2015-09-15T16:21:42Z",
+      "side": 1,
+      "message": "How about \"using public key from certificate \" + certPath. Or, better yet, \"Verifying using public key from \" + certPath.",
+      "revId": "d9e5ad9ae49473aeaacc1fc6237c74680f364a8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
