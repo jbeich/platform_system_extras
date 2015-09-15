@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "848ff2ac_78a881c1",
+        "filename": "memory_replay/err.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-09-15T02:19:36Z",
+      "side": 1,
+      "message": "no, i meant that there are two standard implementations already -- BSD \u003cerr.h\u003e and glibc \u003cerror.h\u003e -- and we should reuse one of those.",
+      "revId": "42ffcd262eba8379c022d332596924985df996de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
