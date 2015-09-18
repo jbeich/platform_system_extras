@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "69c3b75a_6a5adb1b",
+        "filename": "mmap-perf/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2015-09-18T20:16:50Z",
+      "side": 1,
+      "message": "Should probably have LOCAL_MODULES_TAGS :\u003d optional",
+      "range": {
+        "startLine": 26,
+        "startChar": 29,
+        "endLine": 26,
+        "endChar": 30
+      },
+      "revId": "6e61ea96f3d9765dd9cbf4fa248d90b856c5412a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
