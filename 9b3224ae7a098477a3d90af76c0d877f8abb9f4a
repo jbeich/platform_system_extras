@@ -1,0 +1,174 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e99c0776_9ad77161",
+        "filename": "tests/net_test/tcp_nuke_addr.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1074903
+      },
+      "writtenOn": "2015-09-18T16:02:52Z",
+      "side": 1,
+      "message": "nitpick: imports in alphabetical order.",
+      "revId": "9b3224ae7a098477a3d90af76c0d877f8abb9f4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69dad736_06f880e7",
+        "filename": "tests/net_test/tcp_nuke_addr.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1074903
+      },
+      "writtenOn": "2015-09-18T16:02:52Z",
+      "side": 1,
+      "message": "If you\u0027re just calling the method of the superclass, this shouldn\u0027t really be necessary...",
+      "revId": "9b3224ae7a098477a3d90af76c0d877f8abb9f4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c9ae6393_3e859142",
+        "filename": "tests/net_test/tcp_nuke_addr.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1074903
+      },
+      "writtenOn": "2015-09-18T16:02:52Z",
+      "side": 1,
+      "message": "Is this to override a setUp() from the superclass? If so, a comment would be helpful to indicate that\u0027s the case.",
+      "revId": "9b3224ae7a098477a3d90af76c0d877f8abb9f4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e9b7a7e1_3f6e6f3a",
+        "filename": "tests/net_test/tcp_nuke_addr.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1074903
+      },
+      "writtenOn": "2015-09-18T16:02:52Z",
+      "side": 1,
+      "message": "I wonder if the indirection is worth it...\n\nPerhaps a comment would be more helpful here:\n\n  # Create a Datagram socket\n  s \u003d socket.socket(socket.AF_INET6, socket.SOCK_DGRAM)",
+      "revId": "9b3224ae7a098477a3d90af76c0d877f8abb9f4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c91663dc_78160186",
+        "filename": "tests/net_test/tcp_nuke_addr.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1074903
+      },
+      "writtenOn": "2015-09-18T16:02:52Z",
+      "side": 1,
+      "message": "If it\u0027s a classmethod, it should have \"cls\" instead of \"self\", though here I\u0027d recommend using a normal method instead. (No good reason to use classmethods in TestCase classes I\u0027d say.)\n\nAlternatively, you could make it a top level function and make it parameterizable, by receiving the ip_addr, tcp_port, buffer_size as parameters. You could still default to the constants you have, which, by the way, could be declared at module scope and not necessarily class scope (class scope is only useful if you plan to override them in subclasses.)\n\nFurthermore, I wouldn\u0027t call this method *Thread since it doesn\u0027t really create a thread by itself... I\u0027d just call it IPv6TcpReceive or similar which is more in line to what it actually does.",
+      "revId": "9b3224ae7a098477a3d90af76c0d877f8abb9f4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c9ae6393_9e5cdd8d",
+        "filename": "tests/net_test/tcp_nuke_addr.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1074903
+      },
+      "writtenOn": "2015-09-18T16:02:52Z",
+      "side": 1,
+      "message": "nitpick: no spaces around \"\u003d\" when you\u0027re passing named arguments:\n\n  recv_thread \u003d threading.Thread(target\u003dself.IPv6RcpReceive)\n\nhttps://www.python.org/dev/peps/pep-0008/#other-recommendations",
+      "revId": "9b3224ae7a098477a3d90af76c0d877f8abb9f4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "49c27358_da1ca574",
+        "filename": "tests/net_test/tcp_nuke_addr.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1074903
+      },
+      "writtenOn": "2015-09-18T16:02:52Z",
+      "side": 1,
+      "message": "Slight preference for importing \"time\" and using time.sleep. This is recommended in Google Python Style Guide (not sure we follow it to the T in Android codebase, but still):\n\nhttps://google-styleguide.googlecode.com/svn/trunk/pyguide.html?showone\u003dImports#Imports\n\nSame above regarding Thread vs. threading.Thread.\n\nIn another note, if you want to do synchronization here you could use threading.Event:\n\n  def IPv6TcpReceive(self, ip_addr, tcp_port, buffer_size, ready_event\u003dNone):\n    ...\n    s.listen(1)\n    if ready_event:\n      ready_event.set()\n    conn, addr \u003d s.accept()\n    ...\n  \n  def IPv6CreateLoopbackTimeWaitSocket(self)\n    ready_to_receive \u003d threading.Event()\n    recv_thread \u003d threading.Thread(\n        target\u003dself.IPv6TcpReceive,\n        args\u003d(recv_ip, recv_port, recv_buffer_size, ready_to_receive))\n    recv_thread.start()\n    ready_to_receive.wait()\n    ...\n\nThat way you\u0027re free of race conditions...",
+      "revId": "9b3224ae7a098477a3d90af76c0d877f8abb9f4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69dad736_66bce412",
+        "filename": "tests/net_test/tcp_nuke_addr.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1074903
+      },
+      "writtenOn": "2015-09-18T16:02:52Z",
+      "side": 1,
+      "message": "Same as above, this could be parameterizable to take the ip_addr, tcp_port, message as arguments.",
+      "revId": "9b3224ae7a098477a3d90af76c0d877f8abb9f4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e99c0776_7a0c8db3",
+        "filename": "tests/net_test/tcp_nuke_addr.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1074903
+      },
+      "writtenOn": "2015-09-18T16:02:52Z",
+      "side": 1,
+      "message": "A comment indicating what this does would be helpful here.",
+      "revId": "9b3224ae7a098477a3d90af76c0d877f8abb9f4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "49c27358_5ad7b5db",
+        "filename": "tests/net_test/tcp_nuke_addr.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1074903
+      },
+      "writtenOn": "2015-09-18T16:02:52Z",
+      "side": 1,
+      "message": "Not really needed, the self.assert*() methods do nothing except raise an exception when they fail, so a test will succeed if it terminates even if there\u0027s no assert statements in it...\n\nThe comment is good though, you could keep it at the end of the function, perhaps mentioning explicitly that finishing the function is enough to make the test case pass.",
+      "revId": "9b3224ae7a098477a3d90af76c0d877f8abb9f4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
