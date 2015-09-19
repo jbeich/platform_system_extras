@@ -29,6 +29,7 @@ simpleperf_common_shared_libraries := \
   libLLVM \
 
 LLVM_ROOT_PATH := external/llvm
+include $(LLVM_ROOT_PATH)/llvm.mk
 
 # libsimpleperf
 # =========================================================
@@ -73,7 +74,6 @@ LOCAL_MODULE := libsimpleperf
 LOCAL_MODULE_TAGS := debug
 LOCAL_MODULE_PATH := $(TARGET_OUT_OPTIONAL_EXECUTABLES)
 LOCAL_ADDITIONAL_DEPENDENCIES := $(LOCAL_PATH)/Android.mk
-include $(LLVM_ROOT_PATH)/llvm.mk
 include $(LLVM_DEVICE_BUILD_MK)
 include $(BUILD_STATIC_LIBRARY)
 
@@ -86,8 +86,8 @@ LOCAL_SHARED_LIBRARIES := $(simpleperf_common_shared_libraries)
 LOCAL_LDLIBS := -lrt
 LOCAL_MODULE := libsimpleperf
 LOCAL_MODULE_TAGS := optional
+LOCAL_MULTILIB := first
 LOCAL_ADDITIONAL_DEPENDENCIES := $(LOCAL_PATH)/Android.mk
-include $(LLVM_ROOT_PATH)/llvm.mk
 include $(LLVM_HOST_BUILD_MK)
 include $(BUILD_HOST_STATIC_LIBRARY)
 endif
@@ -100,8 +100,8 @@ LOCAL_SRC_FILES := $(libsimpleperf_darwin_src_files)
 LOCAL_SHARED_LIBRARIES := $(simpleperf_common_shared_libraries)
 LOCAL_MODULE := libsimpleperf
 LOCAL_MODULE_TAGS := optional
+LOCAL_MULTILIB := first
 LOCAL_ADDITIONAL_DEPENDENCIES := $(LOCAL_PATH)/Android.mk
-include $(LLVM_ROOT_PATH)/llvm.mk
 include $(LLVM_HOST_BUILD_MK)
 include $(BUILD_HOST_SHARED_LIBRARY)
 endif
