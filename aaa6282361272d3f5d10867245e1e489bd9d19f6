@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae5bf53d_c759fe72",
+        "filename": "boot_control_copy/Android.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2015-09-23T22:48:49Z",
+      "side": 1,
+      "message": "This should be using LOCAL_MODULE_RELATIVE_PATH :\u003d hw -- you\u0027re causing a build warning:\n\n\n  build/core/shared_library.mk:12: bootctrl.default: LOCAL_MODULE_PATH for shared libraries is unsupported in multiarch builds, use LOCAL_MODULE_RELATIVE_PATH instead",
+      "revId": "aaa6282361272d3f5d10867245e1e489bd9d19f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
