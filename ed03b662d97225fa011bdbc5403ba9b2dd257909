@@ -25,6 +25,74 @@
     },
     {
       "key": {
+        "uuid": "49a1935d_82319ebd",
+        "filename": "libfec/fec_open.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2015-09-23T20:47:29Z",
+      "side": 1,
+      "message": "add a log?",
+      "revId": "ed03b662d97225fa011bdbc5403ba9b2dd257909",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a9692fe6_ba6ded88",
+        "filename": "libfec/fec_open.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2015-09-23T20:47:29Z",
+      "side": 1,
+      "message": "Does this mean that if the header is corrupt, we\u0027re screwed?",
+      "revId": "ed03b662d97225fa011bdbc5403ba9b2dd257909",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69ec97ce_4d5f390a",
+        "filename": "libfec/fec_open.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2015-09-23T20:47:29Z",
+      "side": 1,
+      "message": "It\u0027s nicer to follow a consistent convention - if () { log error; return -1}",
+      "revId": "ed03b662d97225fa011bdbc5403ba9b2dd257909",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "09279bf5_aa74cfc9",
+        "filename": "libfec/fec_open.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2015-09-23T20:47:29Z",
+      "side": 1,
+      "message": "Do we have a test suite for these various cases? Seems like we should ....",
+      "revId": "ed03b662d97225fa011bdbc5403ba9b2dd257909",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "49fd13e8_dcec0d89",
         "filename": "libfec/fec_open.cpp",
         "patchSetId": 20
@@ -65,6 +133,74 @@
         "endLine": 502,
         "endChar": 77
       },
+      "revId": "ed03b662d97225fa011bdbc5403ba9b2dd257909",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c9d58301_c0ecbef7",
+        "filename": "libfec/fec_open.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 502,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2015-09-23T20:47:29Z",
+      "side": 1,
+      "message": "Trailing whitespace",
+      "revId": "ed03b662d97225fa011bdbc5403ba9b2dd257909",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e92967cb_09e3699b",
+        "filename": "libfec/fec_open.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 518,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2015-09-23T20:47:29Z",
+      "side": 1,
+      "message": "why does this make me think you want a copy constructor?\n\n(Not a checkin blocker)",
+      "revId": "ed03b662d97225fa011bdbc5403ba9b2dd257909",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "49fb5386_2c82b3cb",
+        "filename": "libfec/fec_open.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 557,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2015-09-23T20:47:29Z",
+      "side": 1,
+      "message": "I\u0027d log on all error paths, me. Plus the one below.",
+      "revId": "ed03b662d97225fa011bdbc5403ba9b2dd257909",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69ec97ce_8d176110",
+        "filename": "libfec/fec_private.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2015-09-23T20:47:29Z",
+      "side": 1,
+      "message": "It almost feels like this should be pulled in from elsewhere, like a shared verity header",
       "revId": "ed03b662d97225fa011bdbc5403ba9b2dd257909",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -134,6 +270,46 @@
         "endLine": 103,
         "endChar": 12
       },
+      "revId": "ed03b662d97225fa011bdbc5403ba9b2dd257909",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "09279bf5_2a829fcb",
+        "filename": "libfec/fec_process.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2015-09-23T20:47:29Z",
+      "side": 1,
+      "message": "this doesn\u0027t seem quite right. If left \u003e 0 we should continue. Perhaps check left \u003e 0 and assert that i \u003c threads?",
+      "range": {
+        "startLine": 82,
+        "startChar": 32,
+        "endLine": 82,
+        "endChar": 34
+      },
+      "revId": "ed03b662d97225fa011bdbc5403ba9b2dd257909",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a905afc4_20f7d095",
+        "filename": "libfec/fec_verity.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2015-09-23T20:47:29Z",
+      "side": 1,
+      "message": "Doesn\u0027t really matter, but if strlen is odd, this might still pass ....",
       "revId": "ed03b662d97225fa011bdbc5403ba9b2dd257909",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
