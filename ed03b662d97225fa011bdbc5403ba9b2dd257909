@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "0e9a4178_12ffeca0",
+        "filename": "libfec/fec_open.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2015-09-24T10:11:04Z",
+      "side": 1,
+      "message": "It\u0027s an anonymous function that calculates a rough estimate for the encoding data size to use as a starting point. Does it need additional comments?",
+      "parentUuid": "e99a4788_c4ef50bb",
+      "range": {
+        "startLine": 83,
+        "startChar": 14,
+        "endLine": 87,
+        "endChar": 54
+      },
+      "revId": "ed03b662d97225fa011bdbc5403ba9b2dd257909",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "49a1935d_82319ebd",
         "filename": "libfec/fec_open.cpp",
         "patchSetId": 20
@@ -36,6 +60,24 @@
       "writtenOn": "2015-09-23T20:47:29Z",
       "side": 1,
       "message": "add a log?",
+      "revId": "ed03b662d97225fa011bdbc5403ba9b2dd257909",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce074951_50250cec",
+        "filename": "libfec/fec_open.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2015-09-24T10:11:04Z",
+      "side": 1,
+      "message": "This function is used to check if there\u0027s a header at a specific offset and logging the error here might lead to unnecessary log spam, hence I omitted it. There\u0027s logging elsewhere if this fails.",
+      "parentUuid": "49a1935d_82319ebd",
       "revId": "ed03b662d97225fa011bdbc5403ba9b2dd257909",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -59,6 +101,24 @@
     },
     {
       "key": {
+        "uuid": "ce074951_702010de",
+        "filename": "libfec/fec_open.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2015-09-24T10:11:04Z",
+      "side": 1,
+      "message": "Yes. Although there is another copy of the header at the end of the block.",
+      "parentUuid": "a9692fe6_ba6ded88",
+      "revId": "ed03b662d97225fa011bdbc5403ba9b2dd257909",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "69ec97ce_4d5f390a",
         "filename": "libfec/fec_open.cpp",
         "patchSetId": 20
@@ -76,6 +136,24 @@
     },
     {
       "key": {
+        "uuid": "eeb7ade1_b9e45f18",
+        "filename": "libfec/fec_open.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2015-09-24T10:11:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "69ec97ce_4d5f390a",
+      "revId": "ed03b662d97225fa011bdbc5403ba9b2dd257909",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "09279bf5_aa74cfc9",
         "filename": "libfec/fec_open.cpp",
         "patchSetId": 20
@@ -87,6 +165,24 @@
       "writtenOn": "2015-09-23T20:47:29Z",
       "side": 1,
       "message": "Do we have a test suite for these various cases? Seems like we should ....",
+      "revId": "ed03b662d97225fa011bdbc5403ba9b2dd257909",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0eb5e1d9_9af22dd1",
+        "filename": "libfec/fec_open.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2015-09-24T10:11:04Z",
+      "side": 1,
+      "message": "We don\u0027t, but I can add one in a follow-up CL. There\u0027s a chance the metadata or header locations will still change due to other changes.",
+      "parentUuid": "09279bf5_aa74cfc9",
       "revId": "ed03b662d97225fa011bdbc5403ba9b2dd257909",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -156,6 +252,24 @@
     },
     {
       "key": {
+        "uuid": "4ec27958_74d3a83b",
+        "filename": "libfec/fec_open.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 502,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2015-09-24T10:11:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c9d58301_c0ecbef7",
+      "revId": "ed03b662d97225fa011bdbc5403ba9b2dd257909",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e92967cb_09e3699b",
         "filename": "libfec/fec_open.cpp",
         "patchSetId": 20
@@ -167,6 +281,24 @@
       "writtenOn": "2015-09-23T20:47:29Z",
       "side": 1,
       "message": "why does this make me think you want a copy constructor?\n\n(Not a checkin blocker)",
+      "revId": "ed03b662d97225fa011bdbc5403ba9b2dd257909",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ec8f176_d6e1e406",
+        "filename": "libfec/fec_open.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 518,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2015-09-24T10:11:04Z",
+      "side": 1,
+      "message": "It does look like one, but this is a C API and fec_ecc_metadata includes only some of the internal fields.",
+      "parentUuid": "e92967cb_09e3699b",
       "revId": "ed03b662d97225fa011bdbc5403ba9b2dd257909",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -190,6 +322,24 @@
     },
     {
       "key": {
+        "uuid": "eececd75_6109366e",
+        "filename": "libfec/fec_open.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 557,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2015-09-24T10:11:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "49fb5386_2c82b3cb",
+      "revId": "ed03b662d97225fa011bdbc5403ba9b2dd257909",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "69ec97ce_8d176110",
         "filename": "libfec/fec_private.h",
         "patchSetId": 20
@@ -207,6 +357,24 @@
     },
     {
       "key": {
+        "uuid": "ce074951_f013608e",
+        "filename": "libfec/fec_private.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2015-09-24T10:11:04Z",
+      "side": 1,
+      "message": "This is the only verity implementation in the tree (and will be the only place where verity headers are parsed).",
+      "parentUuid": "69ec97ce_8d176110",
+      "revId": "ed03b662d97225fa011bdbc5403ba9b2dd257909",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8902ab8b_29fa69ab",
         "filename": "libfec/fec_private.h",
         "patchSetId": 20
@@ -218,6 +386,30 @@
       "writtenOn": "2015-09-23T15:50:29Z",
       "side": 1,
       "message": "is this used as an address? offset?",
+      "range": {
+        "startLine": 89,
+        "startChar": 13,
+        "endLine": 89,
+        "endChar": 18
+      },
+      "revId": "ed03b662d97225fa011bdbc5403ba9b2dd257909",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e9a4178_722598ec",
+        "filename": "libfec/fec_private.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2015-09-24T10:11:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8902ab8b_29fa69ab",
       "range": {
         "startLine": 89,
         "startChar": 13,
@@ -253,6 +445,30 @@
     },
     {
       "key": {
+        "uuid": "ceae6993_384e89b1",
+        "filename": "libfec/fec_private.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2015-09-24T10:11:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "69ee5738_fd32a7d6",
+      "range": {
+        "startLine": 102,
+        "startChar": 8,
+        "endLine": 102,
+        "endChar": 13
+      },
+      "revId": "ed03b662d97225fa011bdbc5403ba9b2dd257909",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "69ee5738_9d3d63a9",
         "filename": "libfec/fec_private.h",
         "patchSetId": 20
@@ -264,6 +480,30 @@
       "writtenOn": "2015-09-23T15:50:29Z",
       "side": 1,
       "message": "what is this for?",
+      "range": {
+        "startLine": 103,
+        "startChar": 8,
+        "endLine": 103,
+        "endChar": 12
+      },
+      "revId": "ed03b662d97225fa011bdbc5403ba9b2dd257909",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eececd75_810e3a75",
+        "filename": "libfec/fec_private.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2015-09-24T10:11:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "69ee5738_9d3d63a9",
       "range": {
         "startLine": 103,
         "startChar": 8,
@@ -299,6 +539,30 @@
     },
     {
       "key": {
+        "uuid": "2ebd45ca_f3def03f",
+        "filename": "libfec/fec_process.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2015-09-24T10:11:04Z",
+      "side": 1,
+      "message": "We calculate the number of threads and the number of bytes each thread should process above, so it should be enough to just iterate through 0..threads. I removed left \u003e 0 from the loop and added sanity checks for it in and after the loop.",
+      "parentUuid": "09279bf5_2a829fcb",
+      "range": {
+        "startLine": 82,
+        "startChar": 32,
+        "endLine": 82,
+        "endChar": 34
+      },
+      "revId": "ed03b662d97225fa011bdbc5403ba9b2dd257909",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a905afc4_20f7d095",
         "filename": "libfec/fec_verity.cpp",
         "patchSetId": 20
@@ -310,6 +574,24 @@
       "writtenOn": "2015-09-23T20:47:29Z",
       "side": 1,
       "message": "Doesn\u0027t really matter, but if strlen is odd, this might still pass ....",
+      "revId": "ed03b662d97225fa011bdbc5403ba9b2dd257909",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce074951_304968a9",
+        "filename": "libfec/fec_verity.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2015-09-24T10:11:04Z",
+      "side": 1,
+      "message": "Good catch. Done",
+      "parentUuid": "a905afc4_20f7d095",
       "revId": "ed03b662d97225fa011bdbc5403ba9b2dd257909",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
