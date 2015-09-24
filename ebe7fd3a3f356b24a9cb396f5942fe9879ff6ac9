@@ -46,6 +46,30 @@
       "revId": "ebe7fd3a3f356b24a9cb396f5942fe9879ff6ac9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e6de1ec_3a58016f",
+        "filename": "tests/net_test/tcp_nuke_addr_test.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2015-09-24T04:39:13Z",
+      "side": 1,
+      "message": "That statement seems geared to long-running servers and production code, not tests. But fine.",
+      "parentUuid": "ce582944_8b9c31d1",
+      "range": {
+        "startLine": 74,
+        "startChar": 2,
+        "endLine": 74,
+        "endChar": 25
+      },
+      "revId": "ebe7fd3a3f356b24a9cb396f5942fe9879ff6ac9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
