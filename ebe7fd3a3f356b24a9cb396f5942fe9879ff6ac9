@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e971102_5e9b7567",
+        "filename": "tests/net_test/tcp_nuke_addr_test.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2015-09-24T04:06:01Z",
+      "side": 1,
+      "message": "Why use this? Won\u0027t the socket be closed by the garbage collector and closed as soon as it goes out of scope?",
+      "range": {
+        "startLine": 74,
+        "startChar": 2,
+        "endLine": 74,
+        "endChar": 25
+      },
+      "revId": "ebe7fd3a3f356b24a9cb396f5942fe9879ff6ac9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
