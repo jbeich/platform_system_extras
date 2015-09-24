@@ -16,6 +16,24 @@
       "revId": "23cbf82c16ac4d555235fda0c103689c9fe1a79b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e4c398b_ed761d16",
+        "filename": "simpleperf/workload.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-09-24T20:40:40Z",
+      "side": 1,
+      "message": "Yeah, _exit might be better as we don\u0027t need clean up here.\nI thought ChildProcessFn would never return. But I failed to guarantee that. So move _exit() to CreateNewProcess() should be a stronger guarantee.",
+      "parentUuid": "ee616dea_9d16b34e",
+      "revId": "23cbf82c16ac4d555235fda0c103689c9fe1a79b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
