@@ -22,6 +22,30 @@
       "revId": "ebe7fd3a3f356b24a9cb396f5942fe9879ff6ac9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ce582944_8b9c31d1",
+        "filename": "tests/net_test/tcp_nuke_addr_test.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1074903
+      },
+      "writtenOn": "2015-09-24T04:21:59Z",
+      "side": 1,
+      "message": "Long explanation:\nhttps://google-styleguide.googlecode.com/svn/trunk/pyguide.html?showone\u003dFiles_and_Sockets#Files_and_Sockets\n\nAs a parallel, in a C program used as a short-lived test, you can probably get by with leaking memory (skipping the free()s) and file descriptors (skipping the close()s), doesn\u0027t mean you should do it...",
+      "parentUuid": "8e971102_5e9b7567",
+      "range": {
+        "startLine": 74,
+        "startChar": 2,
+        "endLine": 74,
+        "endChar": 25
+      },
+      "revId": "ebe7fd3a3f356b24a9cb396f5942fe9879ff6ac9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
