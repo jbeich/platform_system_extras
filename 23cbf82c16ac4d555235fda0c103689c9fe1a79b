@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee616dea_9d16b34e",
+        "filename": "simpleperf/workload.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-09-24T20:26:12Z",
+      "side": 1,
+      "message": "_exit?\n\nwould it make more sense for this to be in CreateNewProcess?",
+      "revId": "23cbf82c16ac4d555235fda0c103689c9fe1a79b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
