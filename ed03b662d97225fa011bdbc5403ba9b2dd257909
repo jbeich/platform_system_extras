@@ -595,6 +595,29 @@
       "revId": "ed03b662d97225fa011bdbc5403ba9b2dd257909",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e9a4178_753bc260",
+        "filename": "libfec/fec_verity.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1069095
+      },
+      "writtenOn": "2015-09-28T11:41:46Z",
+      "side": 1,
+      "message": "how will the caller know the correct size to preallocate for this array?",
+      "range": {
+        "startLine": 91,
+        "startChar": 18,
+        "endLine": 91,
+        "endChar": 30
+      },
+      "revId": "ed03b662d97225fa011bdbc5403ba9b2dd257909",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
