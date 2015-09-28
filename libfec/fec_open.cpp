@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-#include <linux/fs.h>
 #include <stdlib.h>
 #include <sys/ioctl.h>
 #include <sys/stat.h>
@@ -23,6 +22,12 @@ extern "C" {
     #include <squashfs_utils.h>
     #include <ext4_sb.h>
 }
+
+#if defined(__linux__)
+    #include <linux/fs.h>
+#elif defined(__APPLE__)
+    #define BLKGETSIZE64 DKIOCGETBLOCKCOUNT
+#endif
 
 #include "fec_private.h"
 

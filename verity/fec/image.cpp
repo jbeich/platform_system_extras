@@ -26,7 +26,6 @@ extern "C" {
 #include <errno.h>
 #include <fcntl.h>
 #include <getopt.h>
-#include <linux/fs.h>
 #include <openssl/sha.h>
 #include <pthread.h>
 #include <stdbool.h>
@@ -38,6 +37,13 @@ extern "C" {
 #include <sparse/sparse.h>
 #endif
 #include "image.h"
+
+#if defined(__linux__)
+    #include <linux/fs.h>
+#elif defined(__APPLE__)
+    #define BLKGETSIZE64 DKIOCGETBLOCKCOUNT
+    #define O_LARGEFILE 0
+#endif
 
 void image_init(image *ctx)
 {
