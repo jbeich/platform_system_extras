@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "15a33681_1dbae3a2",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2015-10-01T19:27:13Z",
+      "side": 1,
+      "message": "This wording is a bit awkward. How about something like:\n\nthen the user\u0027s stack will be unwound by default. Use this option to disable the unwinding of the users\u0027s stack.",
+      "range": {
+        "startLine": 94,
+        "startChar": 70,
+        "endLine": 96,
+        "endChar": 52
+      },
+      "revId": "a7170f17474883d8d6e539895a966b4948a2a247",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "75439281_13c89e8e",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2015-10-01T19:27:13Z",
+      "side": 1,
+      "message": "It\u0027s probably a good idea to have an error if the --call-graph option is not specified.",
+      "range": {
+        "startLine": 340,
+        "startChar": 6,
+        "endLine": 340,
+        "endChar": 38
+      },
+      "revId": "a7170f17474883d8d6e539895a966b4948a2a247",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9555663b_ecc38f1a",
+        "filename": "simpleperf/record.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2015-10-01T19:27:13Z",
+      "side": 1,
+      "message": "It feels a bit clunky to return a vector. I think it would be better to pass in the vector. That would also remove the need for a pair return down below if you pass the vector to it too.",
+      "range": {
+        "startLine": 144,
+        "startChar": 28,
+        "endLine": 144,
+        "endChar": 40
+      },
+      "revId": "a7170f17474883d8d6e539895a966b4948a2a247",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
