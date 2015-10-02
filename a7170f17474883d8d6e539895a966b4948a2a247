@@ -96,6 +96,40 @@
     },
     {
       "key": {
+        "uuid": "1548969f_fdc33a1a",
+        "filename": "simpleperf/record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-10-02T15:24:41Z",
+      "side": 1,
+      "message": "especially because callers only want the size or the data.",
+      "revId": "a7170f17474883d8d6e539895a966b4948a2a247",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b5398a03_157d1e76",
+        "filename": "simpleperf/record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-10-02T15:24:41Z",
+      "side": 1,
+      "message": "if this is a new vector, why isn\u0027t .size() the \"real\" size?",
+      "revId": "a7170f17474883d8d6e539895a966b4948a2a247",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9555663b_ecc38f1a",
         "filename": "simpleperf/record.h",
         "patchSetId": 2
@@ -131,6 +165,30 @@
       "side": 1,
       "message": "You may feel clunky because it was a time consuming way when c++ compilers were not clever. But now I think it is no longer a problem as compilers can use move operations to return vectors. From how BinaryFormat() is used, I think this interface is more convenient to use. Feel free to argue with me.",
       "parentUuid": "9555663b_ecc38f1a",
+      "range": {
+        "startLine": 144,
+        "startChar": 28,
+        "endLine": 144,
+        "endChar": 40
+      },
+      "revId": "a7170f17474883d8d6e539895a966b4948a2a247",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b5398a03_756e2ac5",
+        "filename": "simpleperf/record.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-10-02T15:24:41Z",
+      "side": 1,
+      "message": "i don\u0027t think that relying on RVO here is what seems weird; i think it\u0027s BinaryFormatWithRealSize returning a pair that seems weird. especially without any comments. vectors already carry a size and a capacity, so it seems awkward to need a \"real size\" too.",
+      "parentUuid": "75df1224_4dfd45a2",
       "range": {
         "startLine": 144,
         "startChar": 28,
