@@ -247,3 +247,5 @@ LOCAL_MODULE := simpleperf_unit_test
 LOCAL_MODULE_TAGS := optional
 include $(BUILD_HOST_NATIVE_TEST)
 endif
+
+include $(call first-makefiles-under,$(LOCAL_PATH))
