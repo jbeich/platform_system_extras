@@ -113,6 +113,24 @@
     },
     {
       "key": {
+        "uuid": "b5526a4f_1f19c485",
+        "filename": "simpleperf/record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-10-02T17:54:27Z",
+      "side": 1,
+      "message": "It seems weird because I want to reuse the code of BinaryFormat() for GenerateSize(). I still think it deserves. Comment is added to explain it.",
+      "parentUuid": "1548969f_fdc33a1a",
+      "revId": "a7170f17474883d8d6e539895a966b4948a2a247",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b5398a03_157d1e76",
         "filename": "simpleperf/record.cpp",
         "patchSetId": 2
@@ -124,6 +142,24 @@
       "writtenOn": "2015-10-02T15:24:41Z",
       "side": 1,
       "message": "if this is a new vector, why isn\u0027t .size() the \"real\" size?",
+      "revId": "a7170f17474883d8d6e539895a966b4948a2a247",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1548969f_78d3b845",
+        "filename": "simpleperf/record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-10-02T17:54:27Z",
+      "side": 1,
+      "message": "because the buf\u0027s size is set to be header.size, which may not match real need if we do stack unwinding and change sample record.",
+      "parentUuid": "b5398a03_157d1e76",
       "revId": "a7170f17474883d8d6e539895a966b4948a2a247",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
