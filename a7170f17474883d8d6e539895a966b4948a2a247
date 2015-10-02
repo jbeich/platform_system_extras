@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "1548969f_7d0a8a2c",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-10-02T01:10:40Z",
+      "side": 1,
+      "message": "Yeah, I hope I could think up of \u0027disable\u0027 at the first time.",
+      "parentUuid": "15a33681_1dbae3a2",
+      "range": {
+        "startLine": 94,
+        "startChar": 70,
+        "endLine": 96,
+        "endChar": 52
+      },
+      "revId": "a7170f17474883d8d6e539895a966b4948a2a247",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "75439281_13c89e8e",
         "filename": "simpleperf/cmd_record.cpp",
         "patchSetId": 2
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "5515ae81_cb6f89ea",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-10-02T01:10:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "75439281_13c89e8e",
+      "range": {
+        "startLine": 340,
+        "startChar": 6,
+        "endLine": 340,
+        "endChar": 38
+      },
+      "revId": "a7170f17474883d8d6e539895a966b4948a2a247",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9555663b_ecc38f1a",
         "filename": "simpleperf/record.h",
         "patchSetId": 2
@@ -59,6 +107,30 @@
       "writtenOn": "2015-10-01T19:27:13Z",
       "side": 1,
       "message": "It feels a bit clunky to return a vector. I think it would be better to pass in the vector. That would also remove the need for a pair return down below if you pass the vector to it too.",
+      "range": {
+        "startLine": 144,
+        "startChar": 28,
+        "endLine": 144,
+        "endChar": 40
+      },
+      "revId": "a7170f17474883d8d6e539895a966b4948a2a247",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "75df1224_4dfd45a2",
+        "filename": "simpleperf/record.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-10-02T01:10:40Z",
+      "side": 1,
+      "message": "You may feel clunky because it was a time consuming way when c++ compilers were not clever. But now I think it is no longer a problem as compilers can use move operations to return vectors. From how BinaryFormat() is used, I think this interface is more convenient to use. Feel free to argue with me.",
+      "parentUuid": "9555663b_ecc38f1a",
       "range": {
         "startLine": 144,
         "startChar": 28,
