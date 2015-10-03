@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b5526a4f_186c3a0f",
+        "filename": "simpleperf/runtest/Android.build.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-10-03T02:42:33Z",
+      "side": 1,
+      "message": "c++14 is the default now. do you really need c++11?",
+      "revId": "d7628968419dfd2559d0b81d1496d530f029b4c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9555663b_0f287059",
+        "filename": "simpleperf/runtest/Android.build.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-10-03T02:42:33Z",
+      "side": 1,
+      "message": "-O0?",
+      "revId": "d7628968419dfd2559d0b81d1496d530f029b4c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "15a33681_25ea2519",
+        "filename": "simpleperf/runtest/function_indirect_recursive.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-10-03T02:42:33Z",
+      "side": 1,
+      "message": "why \u003c\u003d in this file?",
+      "revId": "d7628968419dfd2559d0b81d1496d530f029b4c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1548969f_094fc858",
+        "filename": "simpleperf/runtest/function_pthread.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-10-03T02:42:33Z",
+      "side": 1,
+      "message": "\"pthread_create failed: %s\", strerror(ret) like always.\n\n(or use \u003cerror.h\u003e.)",
+      "revId": "d7628968419dfd2559d0b81d1496d530f029b4c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
