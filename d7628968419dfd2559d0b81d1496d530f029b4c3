@@ -139,6 +139,115 @@
       "revId": "d7628968419dfd2559d0b81d1496d530f029b4c3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8b92a812_dd022b1e",
+        "filename": "simpleperf/runtest/runtest.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2015-10-05T19:28:24Z",
+      "side": 1,
+      "message": "might be better to put before the import lines",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 3
+      },
+      "revId": "d7628968419dfd2559d0b81d1496d530f029b4c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ba1f45d_5c2a9db8",
+        "filename": "simpleperf/runtest/runtest.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2015-10-05T19:28:24Z",
+      "side": 1,
+      "message": "blank line not needed here. same below like L166, 181, and etc.",
+      "revId": "d7628968419dfd2559d0b81d1496d530f029b4c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0b7078c2_5959431f",
+        "filename": "simpleperf/runtest/runtest.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2015-10-05T19:28:24Z",
+      "side": 1,
+      "message": "use raw string for regex: r\u0027xxx\u0027, otherwise you may need double backslashes (https://docs.python.org/2/library/re.html#raw-string-notation)",
+      "range": {
+        "startLine": 194,
+        "startChar": 30,
+        "endLine": 194,
+        "endChar": 62
+      },
+      "revId": "d7628968419dfd2559d0b81d1496d530f029b4c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4b9c302a_1b165b8f",
+        "filename": "simpleperf/runtest/runtest.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2015-10-05T19:28:24Z",
+      "side": 1,
+      "message": "[False] * len(test.symbol_overhead_requirements)",
+      "range": {
+        "startLine": 209,
+        "startChar": 18,
+        "endLine": 210,
+        "endChar": 73
+      },
+      "revId": "d7628968419dfd2559d0b81d1496d530f029b4c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cb90200c_bfb717c1",
+        "filename": "simpleperf/runtest/runtest.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2015-10-05T19:28:24Z",
+      "side": 1,
+      "message": "the char limit for each line is inconsistent (there\u0027re some long lines below like 220). seems we don\u0027t have python code style for AOSP, but i\u0027m seeing most of the python files are using 79-char limit (L213 has 80 chars). and we can use 2-space indentation to put more useful things in each line.",
+      "range": {
+        "startLine": 214,
+        "startChar": 20,
+        "endLine": 214,
+        "endChar": 22
+      },
+      "revId": "d7628968419dfd2559d0b81d1496d530f029b4c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
