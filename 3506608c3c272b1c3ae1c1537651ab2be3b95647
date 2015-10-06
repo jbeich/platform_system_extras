@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ab976c01_585945e4",
+        "filename": "simpleperf/runtest/runtest.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2015-10-06T17:56:32Z",
+      "side": 1,
+      "message": "line break not needed",
+      "range": {
+        "startLine": 218,
+        "startChar": 12,
+        "endLine": 218,
+        "endChar": 14
+      },
+      "revId": "3506608c3c272b1c3ae1c1537651ab2be3b95647",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "50478167_832bfe62",
+        "filename": "simpleperf/runtest/runtest.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2015-10-06T17:56:32Z",
+      "side": 1,
+      "message": "same as above",
+      "range": {
+        "startLine": 222,
+        "startChar": 14,
+        "endLine": 222,
+        "endChar": 21
+      },
+      "revId": "3506608c3c272b1c3ae1c1537651ab2be3b95647",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
