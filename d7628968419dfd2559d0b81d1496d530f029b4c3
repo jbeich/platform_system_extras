@@ -165,6 +165,30 @@
     },
     {
       "key": {
+        "uuid": "ab976c01_b8d169db",
+        "filename": "simpleperf/runtest/runtest.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-10-06T17:40:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8b92a812_dd022b1e",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 3
+      },
+      "revId": "d7628968419dfd2559d0b81d1496d530f029b4c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ba1f45d_5c2a9db8",
         "filename": "simpleperf/runtest/runtest.py",
         "patchSetId": 2
@@ -182,6 +206,24 @@
     },
     {
       "key": {
+        "uuid": "8b92a812_cc8d97bd",
+        "filename": "simpleperf/runtest/runtest.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-10-06T17:40:10Z",
+      "side": 1,
+      "message": "It is insisted by autopep8.",
+      "parentUuid": "6ba1f45d_5c2a9db8",
+      "revId": "d7628968419dfd2559d0b81d1496d530f029b4c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0b7078c2_5959431f",
         "filename": "simpleperf/runtest/runtest.py",
         "patchSetId": 2
@@ -193,6 +235,30 @@
       "writtenOn": "2015-10-05T19:28:24Z",
       "side": 1,
       "message": "use raw string for regex: r\u0027xxx\u0027, otherwise you may need double backslashes (https://docs.python.org/2/library/re.html#raw-string-notation)",
+      "range": {
+        "startLine": 194,
+        "startChar": 30,
+        "endLine": 194,
+        "endChar": 62
+      },
+      "revId": "d7628968419dfd2559d0b81d1496d530f029b4c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ab804cc5_45a0749a",
+        "filename": "simpleperf/runtest/runtest.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-10-06T17:40:10Z",
+      "side": 1,
+      "message": "Done. Don\u0027t know why it works before.",
+      "parentUuid": "0b7078c2_5959431f",
       "range": {
         "startLine": 194,
         "startChar": 30,
@@ -228,6 +294,30 @@
     },
     {
       "key": {
+        "uuid": "4b9c302a_103152d6",
+        "filename": "simpleperf/runtest/runtest.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-10-06T17:40:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4b9c302a_1b165b8f",
+      "range": {
+        "startLine": 209,
+        "startChar": 18,
+        "endLine": 210,
+        "endChar": 73
+      },
+      "revId": "d7628968419dfd2559d0b81d1496d530f029b4c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cb90200c_bfb717c1",
         "filename": "simpleperf/runtest/runtest.py",
         "patchSetId": 2
@@ -239,6 +329,30 @@
       "writtenOn": "2015-10-05T19:28:24Z",
       "side": 1,
       "message": "the char limit for each line is inconsistent (there\u0027re some long lines below like 220). seems we don\u0027t have python code style for AOSP, but i\u0027m seeing most of the python files are using 79-char limit (L213 has 80 chars). and we can use 2-space indentation to put more useful things in each line.",
+      "range": {
+        "startLine": 214,
+        "startChar": 20,
+        "endLine": 214,
+        "endChar": 22
+      },
+      "revId": "d7628968419dfd2559d0b81d1496d530f029b4c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eb66c411_8d2f91c6",
+        "filename": "simpleperf/runtest/runtest.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-10-06T17:40:10Z",
+      "side": 1,
+      "message": "changed to 2-space indentation. But autopep8 seems not aggressive enough that I have to format lines like L220 by myself.",
+      "parentUuid": "cb90200c_bfb717c1",
       "range": {
         "startLine": 214,
         "startChar": 20,
