@@ -19,6 +19,7 @@
 
 #include <sys/types.h>
 
+#include <queue>
 #include <string>
 #include <vector>
 
@@ -142,6 +143,7 @@ struct Record {
 
   void Dump(size_t indent = 0) const;
   virtual std::vector<char> BinaryFormat() const = 0;
+  virtual uint64_t Timestamp() const;
 
  protected:
   virtual void DumpData(size_t) const = 0;
@@ -257,6 +259,7 @@ struct SampleRecord : public Record {
   SampleRecord(const perf_event_attr& attr, const perf_event_header* pheader);
   std::vector<char> BinaryFormat() const override;
   void AdjustSizeBasedOnData();
+  uint64_t Timestamp() const override;
 
  protected:
   void DumpData(size_t indent) const override;
@@ -288,6 +291,40 @@ struct UnknownRecord : public Record {
 
  protected:
   void DumpData(size_t indent) const override;
+};
+
+// RecordCache is a cache used when receiving records from the kernel.
+// It sorts received records based on type and timestamp, and pops records
+// in sorted order. Records from the kernel need to be sorted because
+// records may come from different cpus at the same time, and it is affected
+// by the order how we collect records from different cpus.
+// RecordCache pushes records and pops sorted record online. It uses two thresholds
+// to make sure the record popped is the earliest record: cache_size_before_pop and
+// time_diff_before_pop. cache_size_before_pop controls that you can only pop a record
+// when the cache contains the minimum requirement of records. So the record popped
+// is the earliest one among records in the cache. time_diff_before_pop controls that
+// the record popped is generated a time period earlier than the latest record.
+// So you are not expected not receive records earlier than the popped one.
+class RecordCache {
+ public:
+  RecordCache(const perf_event_attr& attr, size_t cache_size_before_pop,
+              uint64_t time_diff_before_pop);
+  ~RecordCache();
+  void Push(const char* data, size_t size);
+  std::unique_ptr<Record> Pop();
+  std::vector<std::unique_ptr<Record>> PopAll();
+
+ private:
+  struct RecordComparator {
+    bool operator()(const Record* r1, const Record* r2);
+  };
+
+  const perf_event_attr attr_;
+  bool has_timestamp_;
+  size_t cache_size_before_pop_;
+  uint64_t time_diff_before_pop_;  // In nanoseconds.
+  uint64_t last_time_;
+  std::priority_queue<Record*, std::vector<Record*>, RecordComparator> queue_;
 };
 
 std::vector<std::unique_ptr<Record>> ReadRecordsFromBuffer(const perf_event_attr& attr,
