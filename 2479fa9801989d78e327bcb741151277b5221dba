@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "90673931_9272eda4",
+        "filename": "simpleperf/report.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-10-08T20:38:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "504861a0_4776e10d",
+      "revId": "2479fa9801989d78e327bcb741151277b5221dba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "504861a0_3aabe8b2",
         "filename": "simpleperf/report.py",
         "patchSetId": 2
@@ -30,6 +48,30 @@
       "writtenOn": "2015-10-08T20:30:55Z",
       "side": 1,
       "message": "nit: os.path might be the one you want. it\u0027s a separate module than os, although \u0027import os\u0027 usually just works.",
+      "range": {
+        "startLine": 27,
+        "startChar": 7,
+        "endLine": 27,
+        "endChar": 9
+      },
+      "revId": "2479fa9801989d78e327bcb741151277b5221dba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30592d74_2b672613",
+        "filename": "simpleperf/report.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-10-08T20:38:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "504861a0_3aabe8b2",
       "range": {
         "startLine": 27,
         "startChar": 7,
