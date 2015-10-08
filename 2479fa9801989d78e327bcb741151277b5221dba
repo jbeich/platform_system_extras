@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "504861a0_4776e10d",
+        "filename": "simpleperf/report.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2015-10-08T20:24:38Z",
+      "side": 1,
+      "message": "Don\u0027t indent the docstring body",
+      "revId": "2479fa9801989d78e327bcb741151277b5221dba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
