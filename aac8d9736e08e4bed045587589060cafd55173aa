@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "451b415b_a652e8cf",
+        "filename": "brillo_config/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1077068
+      },
+      "writtenOn": "2015-10-09T01:34:59Z",
+      "side": 1,
+      "message": "Is it safe to assume that BUILD_NUMBER is not modified/loaded after this file is processed? Otherwise you will need a bash if instead.",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 4
+      },
+      "revId": "aac8d9736e08e4bed045587589060cafd55173aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "45426131_2e55e784",
         "filename": "brillo_config/Android.mk",
         "patchSetId": 1
