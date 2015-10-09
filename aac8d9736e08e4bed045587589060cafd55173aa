@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "45426131_2e55e784",
+        "filename": "brillo_config/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1076133
+      },
+      "writtenOn": "2015-10-09T00:11:34Z",
+      "side": 1,
+      "message": "I could also use BUILD_DATETIME directly (number of seconds since the epoch) but this seems more human friendly.",
+      "range": {
+        "startLine": 55,
+        "startChar": 26,
+        "endLine": 55,
+        "endChar": 54
+      },
+      "revId": "aac8d9736e08e4bed045587589060cafd55173aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
