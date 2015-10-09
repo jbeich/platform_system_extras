@@ -118,11 +118,13 @@ int main(int argc, char **argv)
     while (optind < argc - 1) {
         draw(argv[optind++]);
 
-        if (ev_wait(timeout) == 0) {
+        /* while timeout did not happen */
+        while (ev_wait(timeout) == 0) {
             ev_dispatch();
 
             if (key_code != -1) {
                 input = true;
+                break;
             }
         }
     };
