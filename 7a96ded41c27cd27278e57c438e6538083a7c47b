@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aadf6a22_de5d8555",
+        "filename": "slideshow/slideshow.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2015-10-09T11:43:13Z",
+      "side": 1,
+      "message": "Isn\u0027t it now possible that we wait for input longer than the timeout if there are events that we ignore? How about doing this similarly to the loop below and measuring actual time?",
+      "range": {
+        "startLine": 122,
+        "startChar": 8,
+        "endLine": 122,
+        "endChar": 13
+      },
+      "revId": "7a96ded41c27cd27278e57c438e6538083a7c47b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
