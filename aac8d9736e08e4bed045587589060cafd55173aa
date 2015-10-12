@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "dfb462b2_4ea66700",
+        "filename": "brillo_config/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1076133
+      },
+      "writtenOn": "2015-10-12T21:52:51Z",
+      "side": 1,
+      "message": "I agree this is not ideal :/\nThis CL is blocking some of my team members. If we need a new build rule for this, I\u0027d rather not block this CL on the new mechanism.",
+      "parentUuid": "1f30ba11_281d6fb0",
+      "revId": "aac8d9736e08e4bed045587589060cafd55173aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3fa3be81_e93e31f4",
         "filename": "brillo_config/Android.mk",
         "patchSetId": 1
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "7fa9b65d_0b6e212e",
+        "filename": "brillo_config/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1076133
+      },
+      "writtenOn": "2015-10-12T21:52:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3fa3be81_e93e31f4",
+      "revId": "aac8d9736e08e4bed045587589060cafd55173aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "df39c202_438d3876",
         "filename": "brillo_config/Android.mk",
         "patchSetId": 1
@@ -47,6 +83,24 @@
       "writtenOn": "2015-10-12T20:30:26Z",
       "side": 1,
       "message": "Same",
+      "revId": "aac8d9736e08e4bed045587589060cafd55173aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bf3c0ef3_62ce78ba",
+        "filename": "brillo_config/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1076133
+      },
+      "writtenOn": "2015-10-12T21:52:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "df39c202_438d3876",
       "revId": "aac8d9736e08e4bed045587589060cafd55173aa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -135,6 +189,30 @@
       "side": 1,
       "message": "FYI, using a shell command here will cause the command line to change every time the Android.mk file is parsed, which will cause this file to get rewritten and any downstream dependencies rebuilt unnecessarily, slowing down incremental builds.  If you use $(BUILD_DATETIME_FROM_FILE) it will get the date from a file written in main.mk, but without a dependency that causes it to get rewritten every time, so you will likely get the date from the last time you did a clean build.",
       "parentUuid": "45426131_2e55e784",
+      "range": {
+        "startLine": 55,
+        "startChar": 26,
+        "endLine": 55,
+        "endChar": 54
+      },
+      "revId": "aac8d9736e08e4bed045587589060cafd55173aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bfb7aeb4_2da539ef",
+        "filename": "brillo_config/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1076133
+      },
+      "writtenOn": "2015-10-12T21:52:51Z",
+      "side": 1,
+      "message": "That feels better, thanks!",
+      "parentUuid": "3fa3be81_09286db7",
       "range": {
         "startLine": 55,
         "startChar": 26,
