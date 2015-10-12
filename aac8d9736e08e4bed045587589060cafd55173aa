@@ -2,6 +2,57 @@
   "comments": [
     {
       "key": {
+        "uuid": "1f30ba11_281d6fb0",
+        "filename": "brillo_config/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2015-10-12T20:30:26Z",
+      "side": 1,
+      "message": "Any time you include base_rules.mk it is a red flag.  base_rules.mk should be treated as an internal implementation detail of the build system as much as possible.  If we don\u0027t have a supported way to run an arbitrary command to generate an installed file then we should add one.  Maybe Ying can weigh in if there is a more appropriate way of handling this.",
+      "revId": "aac8d9736e08e4bed045587589060cafd55173aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3fa3be81_e93e31f4",
+        "filename": "brillo_config/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2015-10-12T20:30:26Z",
+      "side": 1,
+      "message": "This isn\u0027t a phony rule, it is building a real file.",
+      "revId": "aac8d9736e08e4bed045587589060cafd55173aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "df39c202_438d3876",
+        "filename": "brillo_config/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2015-10-12T20:30:26Z",
+      "side": 1,
+      "message": "Same",
+      "revId": "aac8d9736e08e4bed045587589060cafd55173aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "451b415b_a652e8cf",
         "filename": "brillo_config/Android.mk",
         "patchSetId": 1
@@ -25,6 +76,30 @@
     },
     {
       "key": {
+        "uuid": "1f30ba11_8812bb9c",
+        "filename": "brillo_config/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2015-10-12T20:30:26Z",
+      "side": 1,
+      "message": "BUILD_NUMBER should be fine here, it is set in main.mk before anything Android.mk files get parsed",
+      "parentUuid": "451b415b_a652e8cf",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 4
+      },
+      "revId": "aac8d9736e08e4bed045587589060cafd55173aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "45426131_2e55e784",
         "filename": "brillo_config/Android.mk",
         "patchSetId": 1
@@ -36,6 +111,30 @@
       "writtenOn": "2015-10-09T00:11:34Z",
       "side": 1,
       "message": "I could also use BUILD_DATETIME directly (number of seconds since the epoch) but this seems more human friendly.",
+      "range": {
+        "startLine": 55,
+        "startChar": 26,
+        "endLine": 55,
+        "endChar": 54
+      },
+      "revId": "aac8d9736e08e4bed045587589060cafd55173aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3fa3be81_09286db7",
+        "filename": "brillo_config/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2015-10-12T20:30:26Z",
+      "side": 1,
+      "message": "FYI, using a shell command here will cause the command line to change every time the Android.mk file is parsed, which will cause this file to get rewritten and any downstream dependencies rebuilt unnecessarily, slowing down incremental builds.  If you use $(BUILD_DATETIME_FROM_FILE) it will get the date from a file written in main.mk, but without a dependency that causes it to get rewritten every time, so you will likely get the date from the last time you did a clean build.",
+      "parentUuid": "45426131_2e55e784",
       "range": {
         "startLine": 55,
         "startChar": 26,
