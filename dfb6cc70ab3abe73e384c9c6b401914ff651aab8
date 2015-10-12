@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "bf3c0ef3_c5e66e9a",
+        "filename": "brillo_config/Android.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1077068
+      },
+      "writtenOn": "2015-10-12T23:30:05Z",
+      "side": 1,
+      "message": "The PRODUCT_ID is indeed a value you specify in your product config to identify your product when talking to the backend (for A/B updates, metrics and crash reports). This is assigned to you by the server when you create a new product. Should we add PRODUCT_ID to the list in build/core/product.mk ? Or is there another PRODUCT_ var already with a similar purpose?\n\nNote that this is a server-generated id, so not necessarily human-readable (something like a hash).",
+      "parentUuid": "ff32061b_e7bf3635",
+      "range": {
+        "startLine": 29,
+        "startChar": 23,
+        "endLine": 29,
+        "endChar": 33
+      },
+      "revId": "dfb6cc70ab3abe73e384c9c6b401914ff651aab8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1f30ba11_6bc93187",
         "filename": "brillo_config/Android.mk",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2015-10-12T22:12:25Z",
       "side": 1,
       "message": "ditto",
+      "range": {
+        "startLine": 42,
+        "startChar": 21,
+        "endLine": 42,
+        "endChar": 36
+      },
+      "revId": "dfb6cc70ab3abe73e384c9c6b401914ff651aab8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7fa9b65d_3917b78f",
+        "filename": "brillo_config/Android.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1077068
+      },
+      "writtenOn": "2015-10-12T23:30:05Z",
+      "side": 1,
+      "message": "The version of the current build is defined again by the product. This is not the android version (such as 6.0 or 5.1), this is the version of the product you build on top of that. We require it to be three numbers separated by . because that\u0027s what our backend uses to sort versions.",
+      "parentUuid": "1f30ba11_6bc93187",
       "range": {
         "startLine": 42,
         "startChar": 21,
