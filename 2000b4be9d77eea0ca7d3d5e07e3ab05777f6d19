@@ -1,0 +1,146 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dfb462b2_3c2a4919",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-10-13T00:47:38Z",
+      "side": 1,
+      "message": "can\u0027t",
+      "revId": "2000b4be9d77eea0ca7d3d5e07e3ab05777f6d19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7fa9b65d_99fd8bd1",
+        "filename": "simpleperf/event_fd.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-10-13T00:47:38Z",
+      "side": 1,
+      "message": "comment?",
+      "revId": "2000b4be9d77eea0ca7d3d5e07e3ab05777f6d19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "df39c202_d4dd7c46",
+        "filename": "simpleperf/event_fd.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-10-13T00:47:38Z",
+      "side": 1,
+      "message": "\", it\"\n\nreside",
+      "revId": "2000b4be9d77eea0ca7d3d5e07e3ab05777f6d19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5fa8725b_ad612510",
+        "filename": "simpleperf/event_fd.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-10-13T00:47:38Z",
+      "side": 1,
+      "message": "...but i think you probably want to say s/doesn\u0027t resides in a continuous memory/is wrapped/\n\n\", so\"",
+      "revId": "2000b4be9d77eea0ca7d3d5e07e3ab05777f6d19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bfb7aeb4_bb1b9f3d",
+        "filename": "simpleperf/record.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-10-13T00:47:38Z",
+      "side": 1,
+      "message": "s/how/in which/",
+      "revId": "2000b4be9d77eea0ca7d3d5e07e3ab05777f6d19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "df39c202_b4e1d8f2",
+        "filename": "simpleperf/record.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-10-13T00:47:38Z",
+      "side": 1,
+      "message": "records",
+      "revId": "2000b4be9d77eea0ca7d3d5e07e3ab05777f6d19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bf3c0ef3_2881eff8",
+        "filename": "simpleperf/record.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-10-13T00:47:38Z",
+      "side": 1,
+      "message": "i\u0027m not sure i understand this.",
+      "range": {
+        "startLine": 302,
+        "startChar": 58,
+        "endLine": 307,
+        "endChar": 75
+      },
+      "revId": "2000b4be9d77eea0ca7d3d5e07e3ab05777f6d19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bf3c0ef3_487c33a9",
+        "filename": "simpleperf/record.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-10-13T00:47:38Z",
+      "side": 1,
+      "message": "add \"ns\" to the name rather than just comment the units.",
+      "revId": "2000b4be9d77eea0ca7d3d5e07e3ab05777f6d19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
