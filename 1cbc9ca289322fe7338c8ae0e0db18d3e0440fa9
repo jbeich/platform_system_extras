@@ -16,6 +16,24 @@
       "revId": "1cbc9ca289322fe7338c8ae0e0db18d3e0440fa9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9fae6a64_f59cc2e1",
+        "filename": "simpleperf/read_elf.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-10-13T19:54:02Z",
+      "side": 1,
+      "message": "Yeah, as simpleperf doesn\u0027t record non-exec maps now, we should choose executable program header only.",
+      "parentUuid": "1ce8c864_62a7d6e3",
+      "revId": "1cbc9ca289322fe7338c8ae0e0db18d3e0440fa9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
