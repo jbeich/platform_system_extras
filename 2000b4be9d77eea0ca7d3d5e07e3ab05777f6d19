@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "dfb462b2_42563643",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-10-13T03:11:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dfb462b2_3c2a4919",
+      "revId": "2000b4be9d77eea0ca7d3d5e07e3ab05777f6d19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7fa9b65d_99fd8bd1",
         "filename": "simpleperf/event_fd.cpp",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2015-10-13T00:47:38Z",
       "side": 1,
       "message": "comment?",
+      "revId": "2000b4be9d77eea0ca7d3d5e07e3ab05777f6d19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "df39c202_5477ac5c",
+        "filename": "simpleperf/event_fd.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-10-13T03:11:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7fa9b65d_99fd8bd1",
       "revId": "2000b4be9d77eea0ca7d3d5e07e3ab05777f6d19",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "df39c202_1436c4aa",
+        "filename": "simpleperf/event_fd.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-10-13T03:11:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "df39c202_d4dd7c46",
+      "revId": "2000b4be9d77eea0ca7d3d5e07e3ab05777f6d19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5fa8725b_ad612510",
         "filename": "simpleperf/event_fd.h",
         "patchSetId": 2
@@ -64,6 +118,24 @@
       "writtenOn": "2015-10-13T00:47:38Z",
       "side": 1,
       "message": "...but i think you probably want to say s/doesn\u0027t resides in a continuous memory/is wrapped/\n\n\", so\"",
+      "revId": "2000b4be9d77eea0ca7d3d5e07e3ab05777f6d19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "df39c202_f43240b4",
+        "filename": "simpleperf/event_fd.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-10-13T03:11:35Z",
+      "side": 1,
+      "message": "yes.",
+      "parentUuid": "5fa8725b_ad612510",
       "revId": "2000b4be9d77eea0ca7d3d5e07e3ab05777f6d19",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -127,6 +199,30 @@
     },
     {
       "key": {
+        "uuid": "ff32061b_d5dc5c83",
+        "filename": "simpleperf/record.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-10-13T03:11:35Z",
+      "side": 1,
+      "message": "comment refactored. Hopefully it is helpful.",
+      "parentUuid": "bf3c0ef3_2881eff8",
+      "range": {
+        "startLine": 302,
+        "startChar": 58,
+        "endLine": 307,
+        "endChar": 75
+      },
+      "revId": "2000b4be9d77eea0ca7d3d5e07e3ab05777f6d19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bf3c0ef3_487c33a9",
         "filename": "simpleperf/record.h",
         "patchSetId": 2
@@ -138,6 +234,24 @@
       "writtenOn": "2015-10-13T00:47:38Z",
       "side": 1,
       "message": "add \"ns\" to the name rather than just comment the units.",
+      "revId": "2000b4be9d77eea0ca7d3d5e07e3ab05777f6d19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3fa3be81_d26f5ae6",
+        "filename": "simpleperf/record.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-10-13T03:11:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bf3c0ef3_487c33a9",
       "revId": "2000b4be9d77eea0ca7d3d5e07e3ab05777f6d19",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
