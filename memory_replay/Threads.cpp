@@ -18,6 +18,8 @@
 #include <errno.h>
 #include <pthread.h>
 #include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <sys/mman.h>
 #include <unistd.h>
@@ -30,17 +32,18 @@
 
 void* ThreadRunner(void* data) {
   Thread* thread = reinterpret_cast<Thread*>(data);
+  uint32_t total_nsecs = 0;
   while (true) {
     thread->WaitForPending();
     Action* action = thread->GetAction();
-    action->Execute(thread->pointers());
+    total_nsecs += static_cast<uint32_t>(action->Execute(thread->pointers()));
     bool end_thread = action->EndThread();
     thread->ClearPending();
     if (end_thread) {
       break;
     }
   }
-  return nullptr;
+  return reinterpret_cast<void*>(total_nsecs);
 }
 
 Threads::Threads(Pointers* pointers, size_t max_threads)
@@ -135,9 +138,15 @@ Thread* Threads::FindEmptyEntry(pid_t tid) {
 }
 
 void Threads::Finish(Thread* thread) {
-  pthread_join(thread->thread_id_, nullptr);
+  void* retval = nullptr;
+  int ret = pthread_join(thread->thread_id_, &retval);
+  if (ret != 0) {
+    fprintf(stderr, "pthread_join failed: %s\n", strerror(ret));
+    exit(1);
+  }
   thread->tid_ = 0;
   num_threads_--;
+  total_time_nsecs_ += static_cast<uint32_t>(reinterpret_cast<uintptr_t>(retval));
 }
 
 void Threads::FinishAll() {
