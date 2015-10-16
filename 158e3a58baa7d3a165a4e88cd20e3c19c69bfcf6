@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "99ae8a64_555cb6da",
+        "filename": "simpleperf/read_elf.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1041673
+      },
+      "writtenOn": "2015-10-16T18:40:47Z",
+      "side": 1,
+      "message": "This will work only if all the other segments are thrown away. Otherwise this change needs to be removed..",
+      "range": {
+        "startLine": 252,
+        "startChar": 47,
+        "endLine": 252,
+        "endChar": 76
+      },
+      "revId": "158e3a58baa7d3a165a4e88cd20e3c19c69bfcf6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "99ae8a64_55c7d6d0",
+        "filename": "simpleperf/thread_tree.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1041673
+      },
+      "writtenOn": "2015-10-16T18:40:47Z",
+      "side": 1,
+      "message": "Encapsulate this to MapEntry? replace with something like map-\u003eget_end_addr()",
+      "range": {
+        "startLine": 133,
+        "startChar": 29,
+        "endLine": 133,
+        "endChar": 55
+      },
+      "revId": "158e3a58baa7d3a165a4e88cd20e3c19c69bfcf6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "996cca16_fc9b41e3",
+        "filename": "simpleperf/thread_tree.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1041673
+      },
+      "writtenOn": "2015-10-16T18:40:47Z",
+      "side": 1,
+      "message": "are we guaranteed to have set iterator return values in order? shouldn\u0027t this be ++it?",
+      "revId": "158e3a58baa7d3a165a4e88cd20e3c19c69bfcf6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
