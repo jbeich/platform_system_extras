@@ -1,0 +1,146 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "79d47637_e50b51aa",
+        "filename": "native_alloc/Android.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2015-10-20T23:00:35Z",
+      "side": 1,
+      "message": "This is unnecessary",
+      "revId": "9ef60328d078797f11c4cf79de36ecef8c4d9e51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "99f3ea1a_85eea1e0",
+        "filename": "native_alloc/Android.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2015-10-20T23:00:35Z",
+      "side": 1,
+      "message": "This is unnecessary, for make we always add a dependency on Android.mk, for ninja we strip dependencies on *.mk because ninja checks the command line",
+      "revId": "9ef60328d078797f11c4cf79de36ecef8c4d9e51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b9f26ee4_51954736",
+        "filename": "native_alloc/CpuUtils.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2015-10-20T23:00:35Z",
+      "side": 1,
+      "message": "sched_setaffinity",
+      "range": {
+        "startLine": 62,
+        "startChar": 21,
+        "endLine": 62,
+        "endChar": 38
+      },
+      "revId": "9ef60328d078797f11c4cf79de36ecef8c4d9e51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "791716fc_be749d56",
+        "filename": "native_alloc/GetPss.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2015-10-20T23:00:35Z",
+      "side": 1,
+      "message": "why not just put this on the stack in GetPssBytes?",
+      "revId": "9ef60328d078797f11c4cf79de36ecef8c4d9e51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "99f3ea1a_e544c58d",
+        "filename": "native_alloc/GetPss.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2015-10-20T23:00:35Z",
+      "side": 1,
+      "message": "system/extras/libpagemap implements all this, any reason not to use it?  statically link to it if you don\u0027t want a runtime dependency",
+      "revId": "9ef60328d078797f11c4cf79de36ecef8c4d9e51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "99f3ea1a_4556593e",
+        "filename": "native_alloc/GetPss.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2015-10-20T23:00:35Z",
+      "side": 1,
+      "message": "libpagemap uses fopen and getline",
+      "revId": "9ef60328d078797f11c4cf79de36ecef8c4d9e51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "79d47637_05a9bdcf",
+        "filename": "native_alloc/GetPss.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2015-10-20T23:00:35Z",
+      "side": 1,
+      "message": "libpagemap reads this in one read, which will be significantly more efficient for these contiguous regions.",
+      "revId": "9ef60328d078797f11c4cf79de36ecef8c4d9e51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d90802ae_beac460e",
+        "filename": "native_alloc/native_alloc.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2015-10-20T23:00:35Z",
+      "side": 1,
+      "message": "libbenchmark from bionic/benchmarks can provide this timing loop, although it may be more trouble than it is worth to get all your parameters into it",
+      "revId": "9ef60328d078797f11c4cf79de36ecef8c4d9e51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
