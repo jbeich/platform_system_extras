@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "16d269e7_951f8628",
+        "filename": "simpleperf/read_elf.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-10-23T00:27:01Z",
+      "side": 1,
+      "message": "This is read from elf file, other non executable segments are still there. But I think we should use first executable loadable segment instead of the first loadable segment. Because this function is used to map from ip address (in memory) to vaddr written in elf file.",
+      "parentUuid": "99ae8a64_555cb6da",
+      "range": {
+        "startLine": 252,
+        "startChar": 47,
+        "endLine": 252,
+        "endChar": 76
+      },
+      "revId": "158e3a58baa7d3a165a4e88cd20e3c19c69bfcf6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "99ae8a64_55c7d6d0",
         "filename": "simpleperf/thread_tree.cpp",
         "patchSetId": 2
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "f66f95e4_c2c0f8b3",
+        "filename": "simpleperf/thread_tree.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-10-23T00:27:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "99ae8a64_55c7d6d0",
+      "range": {
+        "startLine": 133,
+        "startChar": 29,
+        "endLine": 133,
+        "endChar": 55
+      },
+      "revId": "158e3a58baa7d3a165a4e88cd20e3c19c69bfcf6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "996cca16_fc9b41e3",
         "filename": "simpleperf/thread_tree.cpp",
         "patchSetId": 2
@@ -59,6 +107,24 @@
       "writtenOn": "2015-10-16T18:40:47Z",
       "side": 1,
       "message": "are we guaranteed to have set iterator return values in order? shouldn\u0027t this be ++it?",
+      "revId": "158e3a58baa7d3a165a4e88cd20e3c19c69bfcf6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "56a1415d_a2613a14",
+        "filename": "simpleperf/thread_tree.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2015-10-23T00:27:01Z",
+      "side": 1,
+      "message": "yes. map_set is sorted based on MapEntry.start_addr.",
+      "parentUuid": "996cca16_fc9b41e3",
       "revId": "158e3a58baa7d3a165a4e88cd20e3c19c69bfcf6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
