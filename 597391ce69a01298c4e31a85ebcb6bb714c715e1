@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "16b509da_6ec677a5",
+        "filename": "tests/net_test/net_test.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1000451
+      },
+      "writtenOn": "2015-10-26T07:18:20Z",
+      "side": 1,
+      "message": "could be a list of dictionaries, that way order never matters if things are expanded in the future",
+      "range": {
+        "startLine": 360,
+        "startChar": 23,
+        "endLine": 360,
+        "endChar": 28
+      },
+      "revId": "597391ce69a01298c4e31a85ebcb6bb714c715e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
