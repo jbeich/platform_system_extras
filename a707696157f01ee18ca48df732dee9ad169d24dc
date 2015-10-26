@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "96df3923_d251f49e",
+        "filename": "tests/net_test/run_net_test.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000451
+      },
+      "writtenOn": "2015-10-26T07:28:51Z",
+      "side": 1,
+      "message": "This could just as easily be the NUMTAPINTERFACES variable itself, I think.\n\nThen we could just check if $NUMTAPINTERFACES \u003e 0...",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 14
+      },
+      "revId": "a707696157f01ee18ca48df732dee9ad169d24dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
