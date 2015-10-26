@@ -22,6 +22,30 @@
       "revId": "a707696157f01ee18ca48df732dee9ad169d24dc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "96df3923_92f92ced",
+        "filename": "tests/net_test/run_net_test.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2015-10-26T08:07:05Z",
+      "side": 1,
+      "message": "Good idea. Done.",
+      "parentUuid": "96df3923_d251f49e",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 14
+      },
+      "revId": "a707696157f01ee18ca48df732dee9ad169d24dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
