@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d6ae1193_82dabbd2",
+        "filename": "tests/net_test/tcp_nuke_addr_test.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1000451
+      },
+      "writtenOn": "2015-10-27T06:57:56Z",
+      "side": 1,
+      "message": "This is the reverse of the order they\u0027re returned by CreateSocketPair",
+      "range": {
+        "startLine": 200,
+        "startChar": 8,
+        "endLine": 200,
+        "endChar": 20
+      },
+      "revId": "fac0dbcbc3b5485716421bfd8c0798dab6c5fc9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
