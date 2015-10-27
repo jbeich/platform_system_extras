@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "56e941ce_a3017953",
+        "filename": "tests/net_test/tcp_nuke_addr_test.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2015-10-27T08:05:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "56e941ce_23d4891b",
+      "range": {
+        "startLine": 136,
+        "startChar": 37,
+        "endLine": 136,
+        "endChar": 39
+      },
+      "revId": "fac0dbcbc3b5485716421bfd8c0798dab6c5fc9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d6ae1193_82dabbd2",
         "filename": "tests/net_test/tcp_nuke_addr_test.py",
         "patchSetId": 3
@@ -36,6 +60,30 @@
       "writtenOn": "2015-10-27T06:57:56Z",
       "side": 1,
       "message": "This is the reverse of the order they\u0027re returned by CreateSocketPair",
+      "range": {
+        "startLine": 200,
+        "startChar": 8,
+        "endLine": 200,
+        "endChar": 20
+      },
+      "revId": "fac0dbcbc3b5485716421bfd8c0798dab6c5fc9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f6ceb575_e367014f",
+        "filename": "tests/net_test/tcp_nuke_addr_test.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2015-10-27T08:05:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d6ae1193_82dabbd2",
       "range": {
         "startLine": 200,
         "startChar": 8,
