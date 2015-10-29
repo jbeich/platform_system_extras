@@ -222,7 +222,7 @@ class IPRoute(netlink.NetlinkSocket):
   def _GetConstantName(self, value, prefix):
     return super(IPRoute, self)._GetConstantName(__name__, value, prefix)
 
-  def _Decode(self, command, family, nla_type, nla_data):
+  def _Decode(self, command, msg, nla_type, nla_data):
     """Decodes netlink attributes to Python types.
 
     Values for which the code knows the type (e.g., the fwmark ID in a
@@ -270,6 +270,8 @@ class IPRoute(netlink.NetlinkSocket):
     else:
       # Don't know what this is. Leave it as an integer.
       name = nla_type
+
+    family = msg.family
 
     if name in ["FRA_PRIORITY", "FRA_FWMARK", "FRA_TABLE", "FRA_FWMASK",
                 "FRA_UID_START", "FRA_UID_END",
