@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "765c8636_67d932a8",
+        "filename": "brillo_config/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1077068
+      },
+      "writtenOn": "2015-10-30T18:06:24Z",
+      "side": 1,
+      "message": "I would add a note about how you should define \"BUILD_NUMBER\" if you don\u0027t want this to change on every build. You will have somebody from the android build team coming later and changing this back to _FROM_FILE.",
+      "range": {
+        "startLine": 50,
+        "startChar": 26,
+        "endLine": 50,
+        "endChar": 27
+      },
+      "revId": "62ca4232b44b73b0418c9a7b60d3d7399075a7b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
