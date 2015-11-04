@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "16d0aae3_e0cc0ae5",
+        "filename": "sconsole/Android.mk",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1013508
+      },
+      "writtenOn": "2015-11-04T03:30:16Z",
+      "side": 1,
+      "message": "Could you also duplicate and do a BUILD_EXECUTABLE too?  (Because reasons.)",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 32
+      },
+      "revId": "015f2b0049326839d018dacf82c12df5bd383bef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
