@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "16a98a5f_189bd598",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2015-11-04T18:02:00Z",
+      "side": 1,
+      "message": "Add the git repo and sha this was taken from",
+      "revId": "015f2b0049326839d018dacf82c12df5bd383bef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "16d0aae3_e0cc0ae5",
         "filename": "sconsole/Android.mk",
         "patchSetId": 3
