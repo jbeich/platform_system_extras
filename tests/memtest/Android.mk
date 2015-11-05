@@ -17,6 +17,7 @@ LOCAL_CFLAGS += \
     -fomit-frame-pointer \
     -Wall \
     -Werror \
+    -Wno-unused-parameter \
 
 LOCAL_MULTILIB := 32
 
