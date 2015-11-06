@@ -211,6 +211,24 @@ class SockDiag(netlink.NetlinkSocket):
     data = self._Recv()
     return self._ParseNLMsg(data, InetDiagMsg)[0]
 
+  def _CloseSocket(self, req):
+    self._SendNlRequest(SOCK_DESTROY, req.Pack(),
+                        netlink.NLM_F_REQUEST | netlink.NLM_F_ACK)
+
+  def CloseSocket(self, family, protocol, sock_id, ext=0, states=0xffffffff):
+    req = InetDiagReqV2((family, protocol, ext, states, sock_id))
+    self._CloseSocket(req)
+
+  def CloseSocketFromFd(self, s):
+    req = self.DiagReqFromSocket(s)
+    req.id.cookie = self.GetSockDiagForFd(s).id.cookie
+    # If this socket was blocked in connect(), our getpeername() returned
+    # ENOTCONN and our diag_msg won't have a dst or dport set. Fetch them
+    # based on the results of the socket scan.
+    req.id.dst = self.GetSockDiagForFd(s).id.dst
+    req.id.dport = self.GetSockDiagForFd(s).id.dport
+    self._CloseSocket(req)
+
 
 if __name__ == "__main__":
   n = SockDiag()
