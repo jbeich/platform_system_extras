@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "162b4a19_74336838",
+        "filename": "tests/tcp_nuke_addr/tcp_nuke_addr_test.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2015-11-09T14:51:14Z",
+      "side": 1,
+      "message": "Why will netd race you? It only calls SIOCKILLADDR when an IP address is removed from the system.\n\nAlso, calling system() here involves fork() and exec(), which takes a long time. On my device it looks like the code can only call SIOCKILLADDR only once every second or two:\n\n[pid 10193] 20:05:31.237429 ioctl(39, _IOC(0, 0x89, 0x39, 0x00), 0x7f8c00f3c0) \u003d 0\n...\n[pid 10193] 20:05:32.717612 ioctl(19, _IOC(0, 0x89, 0x39, 0x00), 0x7f8c00f3c0) \u003d 0",
+      "range": {
+        "startLine": 148,
+        "startChar": 57,
+        "endLine": 149,
+        "endChar": 12
+      },
+      "revId": "b44c023be575ea2c463adcbd13899148a3db031e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
