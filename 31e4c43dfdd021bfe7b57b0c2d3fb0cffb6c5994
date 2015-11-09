@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1680aa4d_2ce853cf",
+        "filename": "tests/net_test/netlink.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000451
+      },
+      "writtenOn": "2015-11-09T03:47:16Z",
+      "side": 1,
+      "message": "s/the/and/?",
+      "range": {
+        "startLine": 102,
+        "startChar": 58,
+        "endLine": 102,
+        "endChar": 61
+      },
+      "revId": "31e4c43dfdd021bfe7b57b0c2d3fb0cffb6c5994",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
