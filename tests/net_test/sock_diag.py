@@ -14,23 +14,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Partial Python implementation of iproute functionality."""
+"""Partial Python implementation of sock_diag functionality."""
 
 # pylint: disable=g-bad-todo
 
 import errno
-import os
-import random
-import socket
-import struct
-import sys
+from socket import *  # pylint: disable=wildcard-import
 
 import cstruct
 import net_test
 import netlink
-
-SO_PROTOCOL = 38
-SO_DOMAIN = 39
 
 ### Base netlink constants. See include/uapi/linux/netlink.h.
 NETLINK_SOCK_DIAG = 4
@@ -44,6 +37,7 @@ SOCK_DESTROY = 21
 # Message types.
 TCPDIAG_GETSOCK = 18
 
+# Extensions.
 INET_DIAG_NONE = 0
 INET_DIAG_MEMINFO = 1
 INET_DIAG_INFO = 2
@@ -65,7 +59,8 @@ InetDiagMsg = cstruct.Struct("InetDiagMsg", "=BBBBSLLLLL",
                              "family state timer retrans id expires rqueue wqueue uid inode",
                              [InetDiagSockId])
 
-class SockDiagSocket(netlink.NetlinkSocket):
+
+class SockDiag(netlink.NetlinkSocket):
 
   FAMILY = NETLINK_SOCK_DIAG
   NL_DEBUG = []
@@ -87,10 +82,6 @@ class SockDiagSocket(netlink.NetlinkSocket):
 
     return name, data
 
-  @staticmethod
-  def _EmptyInetDiagSockId():
-    return InetDiagSockId(("\x00" * len(InetDiagSockId)))
-
   def MaybeDebugCommand(self, command, data):
     name = self._GetConstantName(__name__, command, "SOCK_")
     if "ALL" not in self.NL_DEBUG and "SOCK" not in self.NL_DEBUG:
@@ -98,7 +89,12 @@ class SockDiagSocket(netlink.NetlinkSocket):
     parsed = self._ParseNLMsg(data, InetDiagReqV2)
     print "%s %s" % (name, str(parsed))
 
+  @staticmethod
+  def _EmptyInetDiagSockId():
+    return InetDiagSockId(("\x00" * len(InetDiagSockId)))
+
   def DumpSockets(self, family, protocol, ext, states, sock_id):
+    """Dumps sockets matching the specified parameters."""
     if sock_id is None:
       sock_id = self._EmptyInetDiagSockId()
 
@@ -106,49 +102,47 @@ class SockDiagSocket(netlink.NetlinkSocket):
     return self._Dump(SOCK_DIAG_BY_FAMILY, diag_req, InetDiagMsg)
 
   def DumpAllInetSockets(self, protocol, sock_id=None, ext=0, states=0xffffffff):
-    # TODO: DumpSockets(AF_UNSPEC, ...) results in diag_msg structures that are
-    # 60 instead of 72 bytes long, why?
     sockets = []
-    for family in [socket.AF_INET, socket.AF_INET6]:
+    for family in [AF_INET, AF_INET6]:
       sockets += self.DumpSockets(family, protocol, ext, states, None)
     return sockets
 
   @staticmethod
   def GetSourceAddress(diag_msg):
-    addrlen = {socket.AF_INET:4, socket.AF_INET6: 16}[diag_msg.family]
-    return socket.inet_ntop(diag_msg.family, diag_msg.id.src[:addrlen])
+    """Fetches the source address from an InetDiagMsg."""
+    addrlen = {AF_INET:4, AF_INET6: 16}[diag_msg.family]
+    return inet_ntop(diag_msg.family, diag_msg.id.src[:addrlen])
 
   @staticmethod
   def PaddedAddress(family, addr):
-    padded = socket.inet_pton(family, addr)
+    """Converts an IP address string to binary format for InetDiagSockId."""
+    padded = inet_pton(family, addr)
     if len(padded) < 16:
       padded += "\x00" * (16 - len(padded))
     return padded
 
-  @classmethod
-  def DiagReqFromSocket(cls, s):
-    family = s.getsockopt(socket.SOL_SOCKET, SO_DOMAIN)
-    protocol = s.getsockopt(socket.SOL_SOCKET, SO_PROTOCOL)
-    iface = s.getsockopt(socket.SOL_SOCKET, net_test.SO_BINDTODEVICE)
+  @staticmethod
+  def DiagReqFromSocket(s):
+    """Creates an InetDiagReqV2 that matches the specified socket."""
+    family = s.getsockopt(net_test.SOL_SOCKET, net_test.SO_DOMAIN)
+    protocol = s.getsockopt(net_test.SOL_SOCKET, net_test.SO_PROTOCOL)
+    iface = s.getsockopt(SOL_SOCKET, net_test.SO_BINDTODEVICE)
     src, sport = s.getsockname()[:2]
     dst, dport = s.getpeername()[:2]
-    src = cls.PaddedAddress(family, src)
-    dst = cls.PaddedAddress(family, dst)
+    src = SockDiag.PaddedAddress(family, src)
+    dst = SockDiag.PaddedAddress(family, dst)
     sock_id = InetDiagSockId((sport, dport, src, dst, iface, "\x00" * 8))
     return InetDiagReqV2((family, protocol, 0, 0xffffffff, sock_id))
 
-  def GetSocketFromFd(self, s):
+  def GetSockDiagForFd(self, s):
+    """Gets an InetDiagMsg from the kernel for the specified socket."""
     req = self.DiagReqFromSocket(s)
     for diag_msg in self._Dump(SOCK_DIAG_BY_FAMILY, req, InetDiagMsg):
       return diag_msg
     raise ValueError("Dump of %s returned no sockets" % req)
 
-  def CloseSocketFromFd(self, s):
-    req = self.DiagReqFromSocket(s)
-    self._SendNlRequest(SOCK_DESTROY, req.Pack(),
-                        netlink.NLM_F_REQUEST | netlink.NLM_F_ACK)
-
-  def GetSocket(self, family, protocol, sock_id, ext=0, states=0xffffffff):
+  def GetSockDiag(self, family, protocol, sock_id, ext=0, states=0xffffffff):
+    """Gets an InetDiagMsg from the kernel for the specified parameters."""
     req = InetDiagReqV2((family, protocol, ext, states, sock_id))
     self._SendNlRequest(SOCK_DIAG_BY_FAMILY, req.Pack(), netlink.NLM_F_REQUEST)
     data = self._Recv()
@@ -159,13 +153,19 @@ class SockDiagSocket(netlink.NetlinkSocket):
     self._SendNlRequest(SOCK_DESTROY, req.Pack(),
                         netlink.NLM_F_REQUEST | netlink.NLM_F_ACK)
 
+  def CloseSocketFromFd(self, s):
+    req = self.DiagReqFromSocket(s)
+    self._SendNlRequest(SOCK_DESTROY, req.Pack(),
+                        netlink.NLM_F_REQUEST | netlink.NLM_F_ACK)
+
 
 if __name__ == "__main__":
-  n = SockDiagSocket()
+  n = SockDiag()
+  n.DEBUG = True
   sock_id = n._EmptyInetDiagSockId()
   sock_id.dport = 443
-  family = socket.AF_INET6
-  protocol = socket.IPPROTO_TCP
+  family = AF_INET6
+  protocol = IPPROTO_TCP
   ext = 0
   states = 0xffffffff
   ext = 1 << (INET_DIAG_TOS - 1) | 1 << (INET_DIAG_TCLASS - 1)

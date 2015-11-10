@@ -48,7 +48,7 @@ class SockDiagTest(net_test.NetworkTest):
       self.assertRaisesErrno(errno.ENOTCONN, sock.getpeername)
 
   def setUp(self):
-    self.sock_diag = sock_diag.SockDiagSocket()
+    self.sock_diag = sock_diag.SockDiag()
     self.socketpairs = self._CreateLotsOfSockets()
 
   def tearDown(self):
@@ -91,12 +91,12 @@ class SockDiagTest(net_test.NetworkTest):
       sock_id.dport = dport
       sock_id.cookie = cookies[(addr, sport, dport)]
 
-      diag_msg, attrs = self.sock_diag.GetSocket(family, IPPROTO_TCP, sock_id)
+      diag_msg, attrs = self.sock_diag.GetSockDiag(family, IPPROTO_TCP, sock_id)
       self.assertEqual(diag_msg.id.src, rawaddr)
       self.assertEqual(diag_msg.id.dst, rawaddr)
       self.assertEqual(diag_msg.id.sport, sport)
       self.assertEqual(diag_msg.id.dport, dport)
-      s = self.sock_diag.GetSocket(family, IPPROTO_TCP, sock_id)
+      s = self.sock_diag.GetSockDiag(family, IPPROTO_TCP, sock_id)
       self.assertEqual(diag_msg.id.src, rawaddr)
       self.assertEqual(diag_msg.id.dst, rawaddr)
       self.assertEqual(diag_msg.id.sport, sport)
@@ -116,7 +116,7 @@ class SockDiagTest(net_test.NetworkTest):
   def testNonTcpSockets(self):
     s = socket(AF_INET6, SOCK_DGRAM, 0)
     s.connect(("::1", 53))
-    diag_msg = self.sock_diag.GetSocketFromFd(s)
+    diag_msg = self.sock_diag.GetSockDiagForFd(s)
     self.assertRaisesErrno(errno.EINVAL, self.sock_diag.CloseSocketFromFd, s)
     
   # TODO:
