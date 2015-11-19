@@ -132,8 +132,9 @@ static int parse_slot(int pos, int argc, char *argv[])
         exit(EX_USAGE);
         return -1;
     }
-    int ret = strtol(argv[pos], NULL, 10);
-    if (ret == LONG_MIN || ret == LONG_MAX) {
+    errno = 0;
+    long int ret = strtol(argv[pos], NULL, 10);
+    if (errno != 0) {
         usage(stderr, argc, argv);
         exit(EX_USAGE);
         return -1;
