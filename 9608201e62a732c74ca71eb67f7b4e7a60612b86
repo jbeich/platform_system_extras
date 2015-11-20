@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7b6aafda_ef30772c",
+        "filename": "bootctl/bootctl.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-11-20T04:15:28Z",
+      "side": 1,
+      "message": "(i was going to suggest ParseInt, but apparently we have new C code being written in 2015 :-/ .)",
+      "revId": "9608201e62a732c74ca71eb67f7b4e7a60612b86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
