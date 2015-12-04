@@ -60,7 +60,7 @@ void ConfigReader::addDefaultEntries()
   // set to 100, then over time we want to see a perf profile
   // collected every 100 seconds). The actual time within the interval
   // for the collection is chosen randomly.
-  addUnsignedEntry("collection_interval", 14400, 100, UINT32_MAX);
+  addUnsignedEntry("collection_interval", 14400, 10, UINT32_MAX);
 
   // Use the specified fixed seed for random number generation (unit
   // testing)
@@ -88,6 +88,10 @@ void ConfigReader::addDefaultEntries()
   // Length of time to collect samples (number of seconds for 'perf
   // record -a' run).
   addUnsignedEntry("sample_duration", 3, 2, 600);
+
+  // This option is for testing purposes. If set to 1, pick
+  // a random sample duration between 1 and sample duration above.
+  addUnsignedEntry("randomize_duration", 0, 0, 1);
 
   // If this parameter is non-zero it will cause perfprofd to
   // exit immediately if the build type is not userdebug or eng.

@@ -451,6 +451,7 @@ TEST_F(PerfProfdTest, ConfigFileParsing)
   runner.addToConfig("only_debug_build=0");
   runner.addToConfig("main_loop_iterations=1");
   runner.addToConfig("collection_interval=100");
+  runner.addToConfig("randomize_duration=1");
   runner.addToConfig("use_fixed_seed=1");
   runner.addToConfig("destination_directory=/does/not/exist");
 

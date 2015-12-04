@@ -697,6 +697,22 @@ static bool post_process(const ConfigReader &config, int current_seq)
 }
 
 //
+// Decide the profile duration
+//
+static unsigned compute_duration(const ConfigReader &config)
+{
+  unsigned duration = config.getUnsignedValue("sample_duration");
+  unsigned randomize = config.getUnsignedValue("randomize_duration");
+  if (!randomize)
+    return duration;
+  double frac = erand48(random_seed);
+  double rduration = (unsigned) (((double)duration) * frac);
+  if (rduration < 2)
+    rduration = 2;
+  return rduration;
+}
+
+//
 // Collect a perf profile. Steps for this operation are:
 // - kick off 'perf record'
 // - read perf.data, convert to protocol buf
@@ -744,11 +760,13 @@ static PROFILE_RESULT collect_profile(const ConfigReader &config, int seq)
   // destructor (invoked when this routine terminates) will then
   // restart the service again when needed.
   //
-  unsigned duration = config.getUnsignedValue("sample_duration");
+  unsigned duration = compute_duration(config);
   unsigned hardwire = config.getUnsignedValue("hardwire_cpus");
   unsigned max_duration = config.getUnsignedValue("hardwire_cpus_max_duration");
   bool take_action = (hardwire && duration <= max_duration);
   HardwireCpuHelper helper(take_action);
+
+  W_ALOGI("initiating profile collection (%d seconds)", duration);
 
   //
   // Invoke perf
@@ -899,7 +917,6 @@ int perfprofd_main(int argc, char** argv)
               ckprofile_result_to_string(ckresult));
     } else {
       // Kick off the profiling run...
-      W_ALOGI("initiating profile collection");
       PROFILE_RESULT result = collect_profile(config, seq);
       if (result != OK_PROFILE_COLLECTION) {
         W_ALOGI("profile collection failed (%s)",
