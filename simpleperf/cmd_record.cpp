@@ -55,6 +55,9 @@ static void signal_handler(int) {
   signaled = true;
 }
 
+// Used in cpu-hotplug test.
+bool fail_on_system_wide_perf_event_open = false;
+
 class RecordCommand : public Command {
  public:
   RecordCommand()
@@ -212,6 +215,7 @@ bool RecordCommand::Run(const std::vector<std::string>& args) {
   //    for perf_event_files.
   if (system_wide_collection_) {
     if (!event_selection_set_.OpenEventFilesForCpus(cpus_)) {
+      fail_on_system_wide_perf_event_open = true;
       return false;
     }
   } else {
