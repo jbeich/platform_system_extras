@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c0e3a848_c471d0eb",
+        "filename": "showmap/showmap.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-12-08T23:32:36Z",
+      "side": 1,
+      "message": "cferris: don\u0027t we have this code lying around somewhere that we could reuse?",
+      "revId": "22de7c6f0d540493a1aebb2e5e8ef4b9a2aef036",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
