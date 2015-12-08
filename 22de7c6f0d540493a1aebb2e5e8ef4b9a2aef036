@@ -16,6 +16,24 @@
       "revId": "22de7c6f0d540493a1aebb2e5e8ef4b9a2aef036",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "40efb832_6008ac06",
+        "filename": "showmap/showmap.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2015-12-08T23:40:50Z",
+      "side": 1,
+      "message": "Since this is smaps parsing, no. There is something in frameworks that parses the smaps data, but it\u0027s not exactly the same.\n\nThat code is in:\n\nframeworks/base/core/jni/android_os_Debug.cpp",
+      "parentUuid": "c0e3a848_c471d0eb",
+      "revId": "22de7c6f0d540493a1aebb2e5e8ef4b9a2aef036",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
