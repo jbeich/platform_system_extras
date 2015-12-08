@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "40db3839_71466000",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2015-12-08T16:45:15Z",
+      "side": 1,
+      "message": "isn\u0027t this actually \u0027system_wide_perf_event_open_failed\u0027?\n\n(fail_on_x is like saying \"we should fail if x happens\".)",
+      "revId": "9747d61b8a2f58b972a5c96a36ddcb682f21bb74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
