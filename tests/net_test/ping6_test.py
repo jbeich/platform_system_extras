@@ -21,6 +21,7 @@ import os
 import posix
 import random
 from socket import *  # pylint: disable=wildcard-import
+import struct
 import threading
 import time
 import unittest
@@ -703,6 +704,24 @@ class Ping6Test(multinetwork_base.MultiNetworkBaseTest):
     s.bind(("::1", 0xace))
     s.connect(("::1", 0xbeef))
     self.CheckSockStatFile("raw6", "::1", 0xff, "::1", 0, 1)
+
+  def testIPv6MTU(self):
+    IPV6_MTU_DISCOVER = 23
+    IPV6_DONTFRAG = 62
+    IPV6_PATHMTU = 61
+    s = net_test.IPv6PingSocket()
+    s.setsockopt(net_test.SOL_IPV6, IPV6_DONTFRAG, 1)
+    s.setsockopt(net_test.SOL_IPV6, IPV6_MTU_DISCOVER, 2)
+    s.setsockopt(net_test.SOL_IPV6, net_test.IPV6_RECVERR, 1)
+    s.connect((net_test.IPV6_ADDR, 55))
+    pkt = net_test.IPV6_PING + 1500 * "a"
+    self.assertRaisesErrno(errno.EMSGSIZE, s.send, pkt)
+    ip6_mtuinfo = s.getsockopt(net_test.SOL_IPV6, IPV6_PATHMTU, 32)
+    unused_sockaddr, mtu = struct.unpack("=28sI", ip6_mtuinfo)
+    self.assertEquals(1500, mtu)
+    self.assertValidPingResponse(s, net_test.IPV6_PING)
+    # Test a packet too big error
+
 
 
 if __name__ == "__main__":
