@@ -40,6 +40,19 @@
 #define ELF_NOTE_GNU "GNU"
 #define NT_GNU_BUILD_ID 3
 
+bool IsValidElfPath(const std::string& filename) {
+  if (strncmp(filename.c_str(), "/dev/", strlen("/dev/")) == 0) {
+    return false;
+  }
+  if (strncmp(filename.c_str(), "/sys/", strlen("/sys/")) == 0) {
+    return false;
+  }
+  if (strncmp(filename.c_str(), "/proc/", strlen("/proc/")) == 0) {
+    return false;
+  }
+  return true;
+}
+
 static bool GetBuildIdFromNoteSection(const char* section, size_t section_size, BuildId* build_id) {
   const char* p = section;
   const char* end = p + section_size;
@@ -112,6 +125,9 @@ static bool GetBuildIdFromObjectFile(llvm::object::ObjectFile* obj, BuildId* bui
 }
 
 bool GetBuildIdFromElfFile(const std::string& filename, BuildId* build_id) {
+  if (!IsValidElfPath(filename)) {
+    return false;
+  }
   auto owning_binary = llvm::object::createBinary(llvm::StringRef(filename));
   if (owning_binary.getError()) {
     PLOG(DEBUG) << "can't open file " << filename;
@@ -227,6 +243,9 @@ static llvm::object::ObjectFile* GetObjectFile(
 
 bool ParseSymbolsFromElfFile(const std::string& filename, const BuildId& expected_build_id,
                              std::function<void(const ElfFileSymbol&)> callback) {
+  if (!IsValidElfPath(filename)) {
+    return false;
+  }
   auto owning_binary = llvm::object::createBinary(llvm::StringRef(filename));
   llvm::object::ObjectFile* obj = GetObjectFile(owning_binary, filename, expected_build_id);
   if (obj == nullptr) {
@@ -265,6 +284,9 @@ bool ReadMinExecutableVirtualAddress(const llvm::object::ELFFile<ELFT>* elf, uin
 bool ReadMinExecutableVirtualAddressFromElfFile(const std::string& filename,
                                                 const BuildId& expected_build_id,
                                                 uint64_t* min_vaddr) {
+  if (!IsValidElfPath(filename)) {
+    return false;
+  }
   auto owning_binary = llvm::object::createBinary(llvm::StringRef(filename));
   llvm::object::ObjectFile* obj = GetObjectFile(owning_binary, filename, expected_build_id);
   if (obj == nullptr) {

@@ -45,3 +45,10 @@ TEST(read_elf, arm_mapping_symbol) {
   ASSERT_TRUE(IsArmMappingSymbol("$a.anything"));
   ASSERT_FALSE(IsArmMappingSymbol("$a_no_dot"));
 }
+
+TEST(read_elf, IsValidElfPath) {
+  ASSERT_FALSE(IsValidElfPath("/dev/zero"));
+  ASSERT_FALSE(IsValidElfPath("/sys/kernel"));
+  ASSERT_FALSE(IsValidElfPath("/proc/self"));
+  ASSERT_TRUE(IsValidElfPath("/data/tmp"));
+}
