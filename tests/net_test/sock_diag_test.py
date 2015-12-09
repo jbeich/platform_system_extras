@@ -143,11 +143,95 @@ class SockDiagTest(multinetwork_base.MultiNetworkBaseTest):
     self.assertRaisesErrno(errno.EINVAL, self.sock_diag.CloseSocketFromFd, s)
 
   # TODO:
-  # Test that killing UDP sockets does EINVAL
   # Test that killing unix sockets returns EINVAL
   # Test that botching the cookie returns ENOENT
-  # Test that killing accepted sockets works?
-  # Test that killing sockets in connect() works?
+
+
+# TODO: Take a tun fd as input, make this a utility class, and reuse at least
+# in forwarding_test.
+# TODO: Generalize to support both incoming and outgoing connections.
+class IncomingConnectionTest(multinetwork_base.MultiNetworkBaseTest):
+
+  def OpenListenSocket(self, version):
+    self.port = packets.RandomPort()
+    family = {4: AF_INET, 6: AF_INET6}[version]
+    address = {4: "0.0.0.0", 6: "::"}[version]
+    s = net_test.TCPSocket(family)
+    s.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)
+    s.bind((address, self.port))
+    # We haven't configured inbound iptables marking, so bind explicitly.
+    self.SetSocketMark(s, self.netid)
+    s.listen(100)
+    return s
+
+  def _ReceiveAndExpectResponse(self, netid, packet, reply, msg):
+    pkt = super(IncomingConnectionTest, self)._ReceiveAndExpectResponse(
+        netid, packet, reply, msg)
+    self.last_packet = pkt
+    return pkt
+
+  def ReceivePacketOn(self, netid, packet):
+    super(IncomingConnectionTest, self).ReceivePacketOn(netid, packet)
+    self.last_packet = packet
+
+  def IncomingConnection(self, version, end_state, netid):
+    self.version = version
+    self.s = self.OpenListenSocket(version)
+    self.end_state = end_state
+
+    remoteaddr = self.remoteaddr = self.GetRemoteAddress(version)
+    myaddr = self.myaddr = self.MyAddress(version, netid)
+
+    if end_state == sock_diag.TCP_LISTEN:
+      return
+
+    desc, syn = packets.SYN(self.port, version, remoteaddr, myaddr)
+    synack_desc, synack = packets.SYNACK(version, myaddr, remoteaddr, syn)
+    msg = "Sent %s, expected %s" % (desc, synack_desc)
+    reply = self._ReceiveAndExpectResponse(netid, syn, synack, msg)
+    if end_state == sock_diag.TCP_SYN_RECV:
+      return
+
+    establishing_ack = packets.ACK(version, remoteaddr, myaddr, reply)[1]
+    self.ReceivePacketOn(netid, establishing_ack)
+    if end_state == sock_diag.TCP_ESTABLISHED:
+      return
+
+
+  def RstPacket(self):
+    return packets.RST(self.version, self.myaddr, self.remoteaddr,
+                       self.last_packet)
+
+  def setUp(self):
+    self.sock_diag = sock_diag.SockDiag()
+    self.netid = random.choice(self.tuns.keys())
+
+  def assertSocketClosed(self, sock):
+    self.assertRaisesErrno(errno.ENOTCONN, sock.getpeername)
+
+  def testTcpResets(self):
+    self.IncomingConnection(6, sock_diag.TCP_LISTEN, self.netid)
+    self.assertRaisesErrno(errno.EAGAIN, self.s.accept)
+    self.sock_diag.CloseSocketFromFd(self.s)
+    self.ExpectNoPacketsOn(self.netid, "Destroying listen socket")
+    self.assertRaisesErrno(errno.EINVAL, self.s.accept)
+    self.s.close()
+
+    self.IncomingConnection(6, sock_diag.TCP_SYN_RECV, self.netid)
+    self.assertRaisesErrno(errno.EAGAIN, self.s.accept)
+    self.sock_diag.CloseSocketFromFd(self.s)
+    self.ExpectNoPacketsOn(self.netid, "Destroying listen socket")
+    self.assertRaisesErrno(errno.EINVAL, self.s.accept)
+    self.s.close()
+
+    self.IncomingConnection(6, sock_diag.TCP_ESTABLISHED, self.netid)
+    accepted, peer = self.s.accept()
+    self.sock_diag.CloseSocketFromFd(self.s)
+    self.ExpectNoPacketsOn(self.netid, "Destroying listen socket")
+    msg, rst = self.RstPacket()
+    self.sock_diag.CloseSocketFromFd(accepted)
+    self.ExpectPacketOn(self.netid, msg, rst)
+    self.assertSocketClosed(accepted)
 
 
 if __name__ == "__main__":
