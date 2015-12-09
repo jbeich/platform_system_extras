@@ -24,13 +24,18 @@ static void ParseSymbol(const ElfFileSymbol& symbol, bool* result) {
   }
 }
 
-TEST(read_elf, parse_symbols_from_elf_file) {
+static void ReadLink(const std::string& from, std::string* to) {
   char elf_file[PATH_MAX];
-  ssize_t elf_file_len = readlink("/proc/self/exe", elf_file, sizeof(elf_file));
+  ssize_t elf_file_len = readlink(from.c_str(), elf_file, sizeof(elf_file));
   ASSERT_GT(elf_file_len, 0L);
   ASSERT_LT(static_cast<size_t>(elf_file_len), sizeof(elf_file));
   elf_file[elf_file_len] = '\0';
+  *to = elf_file;
+}
 
+TEST(read_elf, parse_symbols_from_elf_file) {
+  std::string elf_file;
+  ReadLink("/proc/self/exe", &elf_file);
   BuildId build_id;
   GetBuildIdFromElfFile(elf_file, &build_id);
   bool result = false;
@@ -44,4 +49,13 @@ TEST(read_elf, arm_mapping_symbol) {
   ASSERT_FALSE(IsArmMappingSymbol("$b"));
   ASSERT_TRUE(IsArmMappingSymbol("$a.anything"));
   ASSERT_FALSE(IsArmMappingSymbol("$a_no_dot"));
+}
+
+TEST(read_elf, IsValidElfPath) {
+  ASSERT_FALSE(IsValidElfPath("/dev/zero"));
+  ASSERT_FALSE(IsValidElfPath("/sys/devices/system/cpu/online"));
+  ASSERT_FALSE(IsValidElfPath("/proc/self/exe"));
+  std::string elf_file;
+  ReadLink("/proc/self/exe", &elf_file);
+  ASSERT_TRUE(IsValidElfPath(elf_file));
 }
