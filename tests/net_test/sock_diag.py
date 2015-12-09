@@ -158,7 +158,7 @@ class SockDiag(netlink.NetlinkSocket):
     and no are relative jump offsets measured in instructions. The yes branch
     is taken if the instruction matches.
 
-    The accept, jump 1 past the last instruction. To reject, jump 2 past the
+    To accept, jump 1 past the last instruction. To reject, jump 2 past the
     last instruction.
 
     The target of a no jump is only valid if it is reachable by following
@@ -191,7 +191,6 @@ class SockDiag(netlink.NetlinkSocket):
     Returns:
       A string, the raw bytecode.
     """
-    lastlength = 0
     args = []
     positions = [0]
 

@@ -79,12 +79,12 @@ class NetlinkSocket(object):
   def _GetConstantName(self, module, value, prefix):
     thismodule = sys.modules[module]
     for name in dir(thismodule):
+      if name.startswith("INET_DIAG_BC"):
+        break
       if (name.startswith(prefix) and
           not name.startswith(prefix + "F_") and
-          not name.startswith("INET_DIAG_BC_") and
-          name.isupper() and
-          getattr(thismodule, name) == value):
-        return name
+          name.isupper() and getattr(thismodule, name) == value):
+          return name
     return value
 
   def _Decode(self, command, msg, nla_type, nla_data):
