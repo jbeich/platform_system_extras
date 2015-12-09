@@ -65,6 +65,10 @@ class SockDiagTest(multinetwork_base.MultiNetworkBaseTest):
   def tearDown(self):
     [s.close() for socketpair in self.socketpairs.values() for s in socketpair]
 
+  def assertSocketsClosed(self, socketpair):
+    for sock in socketpair:
+      self.assertRaisesErrno(errno.ENOTCONN, sock.getpeername)
+
   def assertSockDiagMatchesSocket(self, s, diag_msg):
     src, sport = s.getsockname()[0:2]
     dst, dport = s.getpeername()[0:2]
@@ -99,6 +103,33 @@ class SockDiagTest(multinetwork_base.MultiNetworkBaseTest):
         self.assertSockDiagMatchesSocket(
             sock,
             self.sock_diag.GetSockDiagForFd(sock))
+
+  def testClosesSockets(self):
+    for (addr, _, _), socketpair in self.socketpairs.iteritems():
+      # Close one of the sockets.
+      # This will send a RST that will close the other side as well.
+      s = random.choice(socketpair)
+      if random.randrange(0, 2) == 1:
+        self.sock_diag.CloseSocketFromFd(s)
+      else:
+        diag_msg = self.sock_diag.GetSockDiagForFd(s)
+        family = AF_INET6 if ":" in addr else AF_INET
+        self.sock_diag.CloseSocket(family, IPPROTO_TCP, diag_msg.id)
+      # Check that both sockets in the pair are closed.
+      self.assertSocketsClosed(socketpair)
+
+  def testNonTcpSockets(self):
+    s = socket(AF_INET6, SOCK_DGRAM, 0)
+    s.connect(("::1", 53))
+    diag_msg = self.sock_diag.GetSockDiagForFd(s)
+    self.assertRaisesErrno(errno.EINVAL, self.sock_diag.CloseSocketFromFd, s)
+
+  # TODO:
+  # Test that killing UDP sockets does EINVAL
+  # Test that killing unix sockets returns EINVAL
+  # Test that botching the cookie returns ENOENT
+  # Test that killing accepted sockets works?
+  # Test that killing sockets in connect() works?
 
 
 if __name__ == "__main__":
