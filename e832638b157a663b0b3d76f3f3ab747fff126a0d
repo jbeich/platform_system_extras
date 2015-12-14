@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e5b51edb_5aded5fd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000451
+      },
+      "writtenOn": "2015-12-14T07:56:32Z",
+      "side": 1,
+      "message": "resetting..things other than SYNs and FINs?",
+      "range": {
+        "startLine": 7,
+        "startChar": 17,
+        "endLine": 7,
+        "endChar": 26
+      },
+      "revId": "e832638b157a663b0b3d76f3f3ab747fff126a0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
