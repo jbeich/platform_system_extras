@@ -140,7 +140,7 @@ class SockDiagTest(multinetwork_base.MultiNetworkBaseTest):
     s = socket(AF_INET6, SOCK_DGRAM, 0)
     s.connect(("::1", 53))
     diag_msg = self.sock_diag.GetSockDiagForFd(s)
-    self.assertRaisesErrno(errno.EINVAL, self.sock_diag.CloseSocketFromFd, s)
+    self.assertRaisesErrno(errno.EOPNOTSUPP, self.sock_diag.CloseSocketFromFd, s)
 
   # TODO:
   # Test that killing unix sockets returns EINVAL
@@ -156,7 +156,7 @@ class IncomingConnectionTest(multinetwork_base.MultiNetworkBaseTest):
     self.port = packets.RandomPort()
     family = {4: AF_INET, 6: AF_INET6}[version]
     address = {4: "0.0.0.0", 6: "::"}[version]
-    s = net_test.TCPSocket(family)
+    s = net_test.Socket(family, SOCK_STREAM, IPPROTO_TCP)
     s.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)
     s.bind((address, self.port))
     # We haven't configured inbound iptables marking, so bind explicitly.
@@ -187,14 +187,35 @@ class IncomingConnectionTest(multinetwork_base.MultiNetworkBaseTest):
 
     desc, syn = packets.SYN(self.port, version, remoteaddr, myaddr)
     synack_desc, synack = packets.SYNACK(version, myaddr, remoteaddr, syn)
-    msg = "Sent %s, expected %s" % (desc, synack_desc)
+    msg = "Received %s, expected to see reply %s" % (desc, synack_desc)
     reply = self._ReceiveAndExpectResponse(netid, syn, synack, msg)
     if end_state == sock_diag.TCP_SYN_RECV:
       return
 
     establishing_ack = packets.ACK(version, remoteaddr, myaddr, reply)[1]
     self.ReceivePacketOn(netid, establishing_ack)
+
+    self.accepted, _ = self.s.accept()
+    desc, data = packets.ACK(version, myaddr, remoteaddr, establishing_ack,
+                             payload=net_test.UDP_PAYLOAD)
+
     if end_state == sock_diag.TCP_ESTABLISHED:
+      return
+
+    self.accepted.send(net_test.UDP_PAYLOAD)
+    self.ExpectPacketOn(netid, msg + ": expecting %s" % desc, data)
+
+    desc, fin = packets.FIN(version, remoteaddr, myaddr, data)
+    fin = packets._GetIpLayer(version)(str(fin))
+    ack_desc, ack = packets.ACK(version, myaddr, remoteaddr, fin)
+    msg = "Received %s, expected to see reply %s" % (desc, ack_desc)
+
+    # TODO: Why can't we use this?
+    #   self._ReceiveAndExpectResponse(netid, fin, ack, msg)
+    self.ReceivePacketOn(netid, fin)
+    time.sleep(0.1)
+    self.ExpectPacketOn(netid, msg + ": expecting %s" % ack_desc, ack)
+    if end_state == sock_diag.TCP_CLOSE_WAIT:
       return
 
 
@@ -209,30 +230,34 @@ class IncomingConnectionTest(multinetwork_base.MultiNetworkBaseTest):
   def assertSocketClosed(self, sock):
     self.assertRaisesErrno(errno.ENOTCONN, sock.getpeername)
 
+  def CheckRstOnClose(self, sock, expect_reset):
+    self.sock_diag.CloseSocketFromFd(sock)
+    self.assertRaisesErrno(errno.EINVAL, sock.accept)
+    if expect_reset:
+      msg, rst = self.RstPacket()
+      self.ExpectPacketOn(self.netid, msg, rst)
+    else:
+      self.ExpectNoPacketsOn(self.netid, "Destroying listen socket")
+    sock.close()
+
   def testTcpResets(self):
     self.IncomingConnection(6, sock_diag.TCP_LISTEN, self.netid)
-    self.assertRaisesErrno(errno.EAGAIN, self.s.accept)
-    self.sock_diag.CloseSocketFromFd(self.s)
-    self.ExpectNoPacketsOn(self.netid, "Destroying listen socket")
-    self.assertRaisesErrno(errno.EINVAL, self.s.accept)
-    self.s.close()
+    self.CheckRstOnClose(self.s, False)
 
     self.IncomingConnection(6, sock_diag.TCP_SYN_RECV, self.netid)
-    self.assertRaisesErrno(errno.EAGAIN, self.s.accept)
-    self.sock_diag.CloseSocketFromFd(self.s)
-    self.ExpectNoPacketsOn(self.netid, "Destroying listen socket")
-    self.assertRaisesErrno(errno.EINVAL, self.s.accept)
-    self.s.close()
+    self.CheckRstOnClose(self.s, False)
+    # TODO: check that the closing the embryonic socket sends a RST.
 
     self.IncomingConnection(6, sock_diag.TCP_ESTABLISHED, self.netid)
-    accepted, peer = self.s.accept()
-    self.sock_diag.CloseSocketFromFd(self.s)
-    self.ExpectNoPacketsOn(self.netid, "Destroying listen socket")
-    msg, rst = self.RstPacket()
-    self.sock_diag.CloseSocketFromFd(accepted)
-    self.ExpectPacketOn(self.netid, msg, rst)
-    self.assertSocketClosed(accepted)
+    self.CheckRstOnClose(self.s, False)
+    self.CheckRstOnClose(self.accepted, True)
 
+    self.IncomingConnection(6, sock_diag.TCP_CLOSE_WAIT, self.netid)
+    self.CheckRstOnClose(self.s, False)
+    self.CheckRstOnClose(self.accepted, True)
+
+  def testSystemCallsInterrupted(self):
+    self.IncomingConnection(6, sock_diag.TCP_LISTEN, self.netid)
 
 if __name__ == "__main__":
   unittest.main()
