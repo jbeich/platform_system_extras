@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a5088664_9063f41f",
+        "filename": "tests/net_test/sock_diag.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000451
+      },
+      "writtenOn": "2015-12-14T08:22:35Z",
+      "side": 1,
+      "message": "Can these not be socket.AF_INET{,6}?",
+      "range": {
+        "startLine": 101,
+        "startChar": 40,
+        "endLine": 101,
+        "endChar": 42
+      },
+      "revId": "77bc850a5045925c4cae0b0f2a51c0ead2632b6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
