@@ -22,6 +22,30 @@
       "revId": "77bc850a5045925c4cae0b0f2a51c0ead2632b6c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c59bba8b_617bd6ce",
+        "filename": "tests/net_test/sock_diag.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2015-12-14T17:17:15Z",
+      "side": 1,
+      "message": "Can, and should! Done.",
+      "parentUuid": "a5088664_9063f41f",
+      "range": {
+        "startLine": 101,
+        "startChar": 40,
+        "endLine": 101,
+        "endChar": 42
+      },
+      "revId": "77bc850a5045925c4cae0b0f2a51c0ead2632b6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
