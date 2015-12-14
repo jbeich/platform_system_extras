@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c501fa3e_717ad89d",
+        "filename": "tests/net_test/neighbour_test.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1000451
+      },
+      "writtenOn": "2015-12-14T07:53:07Z",
+      "side": 1,
+      "message": "Move this two lines up, so it\u0027s in the same block with the comment that describes it.",
+      "range": {
+        "startLine": 282,
+        "startChar": 9,
+        "endLine": 282,
+        "endChar": 26
+      },
+      "revId": "f5c2f28f115a742a58ffcdf4046858478a5fff8d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
