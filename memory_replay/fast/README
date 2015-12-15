@@ -1,0 +1,18 @@
+The files in this directory are an alternative implementation of the memory_replay tool in the
+parent directory, targeting performance at the cost of requiring a preprocessing step for each
+replay.
+
+The preprocessor scans the memory replay for when pointers are freed or realloced in threads other
+than the ones that allocated them. Prior to each point of exchange, a sync point between the two
+threads is inserted. Global sync points are inserted for when threads enter and exit, and on a
+regular interval to print the current state of the process. This allows the runner to do work on
+multiple threads at once and synchronize when it needs to, instead of the original implementation of
+serializating actions on each thread. The preprocessor also writes the replay into a format that
+does not require parsing in the runner. The combination of these two optimizations results in
+performance that is 8-15x faster than the original implementation, at the cost of a relatively cheap
+one-time preprocessing step.
+
+The preprocessor is a Scala script that can be run directly with `./preprocess.scala input.txt
+output.dump`. Note that the version of Scala packaged on Ubuntu versions older than 15.10 is
+incompatible with Java 8, requiring you to specfy a JAVA_HOME with Java 6 or 7.
+   e.g.: JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64 preprocess.scala input.txt output.dump

@@ -21,6 +21,27 @@ include $(BUILD_EXECUTABLE)
 
 include $(CLEAR_VARS)
 
+LOCAL_SRC_FILES := fast/main.cpp LineBuffer.cpp NativeInfo.cpp
+LOCAL_CFLAGS := -Wall -Wextra -Werror
+LOCAL_MODULE_TAGS := debug
+LOCAL_MODULE := memreplay_fast
+LOCAL_MULTILIB := both
+LOCAL_MODULE_STEM_32 := $(LOCAL_MODULE)32
+LOCAL_MODULE_STEM_64 := $(LOCAL_MODULE)64
+include $(BUILD_EXECUTABLE)
+
+include $(CLEAR_VARS)
+
+LOCAL_SRC_FILES := fast/main.cpp LineBuffer.cpp NativeInfo.cpp
+LOCAL_CFLAGS := -Wall -Wextra -Werror
+LOCAL_MODULE_TAGS := debug
+LOCAL_MODULE := memreplay_fast
+LOCAL_MODULE_HOST_OS := linux
+LOCAL_LDLIBS := -lrt
+include $(BUILD_HOST_EXECUTABLE)
+
+include $(CLEAR_VARS)
+
 LOCAL_SRC_FILES := $(memory_replay_src_files) main.cpp
 LOCAL_CFLAGS := -Wall -Wextra -Werror
 LOCAL_MODULE_TAGS := debug
