@@ -34,6 +34,24 @@
       "revId": "f882fb057bd1260c73b9f5a9f15bd7ed4ca3421a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aa593347_68958367",
+        "filename": "memory_replay/fast/preprocess.scala",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2015-12-17T23:02:42Z",
+      "side": 1,
+      "message": "Yes, please use something like python. Anybody who has to maintain this in the future is probably not going to know scala, while there is chance they will know python.",
+      "parentUuid": "4a2517a8_8d4a012f",
+      "revId": "f882fb057bd1260c73b9f5a9f15bd7ed4ca3421a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
