@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0512320e_7c0a0d00",
+        "filename": "memory_replay/fast/preprocess.scala",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1079148
+      },
+      "writtenOn": "2015-12-17T04:05:22Z",
+      "side": 1,
+      "message": "Anyyone have an opinion on having a scala script checked into the tree? I was prototyping with it because I could play around with things in the REPL, and just kept fleshing it out. Should I rewrite it in Java or C++?",
+      "revId": "f882fb057bd1260c73b9f5a9f15bd7ed4ca3421a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
