@@ -1,6 +1,6 @@
 The files in this directory are an alternative implementation of the memory_replay tool in the
 parent directory, targeting performance at the cost of requiring a preprocessing step for each
-replay.
+replay. A set of pre-preprocessed dumps is stored in dumps.
 
 The preprocessor scans the memory replay for when pointers are freed or realloced in threads other
 than the ones that allocated them. Prior to each point of exchange, a sync point between the two
