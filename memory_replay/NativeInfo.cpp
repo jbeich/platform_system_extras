@@ -32,6 +32,7 @@
 // the line data.
 void GetNativeInfo(int smaps_fd, size_t* pss_bytes, size_t* va_bytes) {
   static char map_buffer[65535];
+  memset(map_buffer, 0, sizeof(map_buffer));
   LineBuffer line_buf(smaps_fd, map_buffer, sizeof(map_buffer));
   char* line;
   size_t total_pss_bytes = 0;
@@ -73,6 +74,4 @@ void PrintNativeInfo(const char* preamble) {
   printf("%sNative PSS: %zu bytes %0.2fMB\n", preamble, pss_bytes, pss_bytes/(1024*1024.0));
   printf("%sNative VA Space: %zu bytes %0.2fMB\n", preamble, va_bytes, va_bytes/(1024*1024.0));
   fflush(stdout);
-
-  close(smaps_fd);
 }
