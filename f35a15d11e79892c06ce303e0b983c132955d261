@@ -16,6 +16,24 @@
       "revId": "f35a15d11e79892c06ce303e0b983c132955d261",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4a7c37a4_d538bcca",
+        "filename": "verity/fec/image.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2015-12-18T17:47:45Z",
+      "side": 1,
+      "message": "See bug 20501816 and this post from Linus: http://lkml.iu.edu/hypermail/linux/kernel/0509.1/0877.html",
+      "parentUuid": "4a2517a8_f6dcb63a",
+      "revId": "f35a15d11e79892c06ce303e0b983c132955d261",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
