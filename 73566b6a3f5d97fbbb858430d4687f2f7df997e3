@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4a2517a8_dc1c395a",
+        "filename": "memory_replay/NativeInfo.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2015-12-19T00:23:29Z",
+      "side": 1,
+      "message": "It\u0027s probably better to move this out of here into PrintNativeinfo. I think it makes more sense for smaps_fd to be owned by the caller.",
+      "range": {
+        "startLine": 59,
+        "startChar": 2,
+        "endLine": 59,
+        "endChar": 18
+      },
+      "revId": "73566b6a3f5d97fbbb858430d4687f2f7df997e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
