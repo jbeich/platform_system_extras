@@ -16,6 +16,24 @@
       "revId": "608e46d381432339e01fe8caae0811ec541d474a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ca9bc78b_61d87674",
+        "filename": "simpleperf/perf_regs.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2016-01-04T17:01:58Z",
+      "side": 1,
+      "message": "I am not sure if \"x86\" occurs in the wild. \nThe main other device of interest (at least from my perspective) is Edison -- I don\u0027t have any hardware, so I\u0027m not sure what it returns. I poked around in the edison kernel source tree, but that wasn\u0027t very helpful. I\u0027ll ask one of the brillo guys.",
+      "parentUuid": "ca2ae7be_666047b2",
+      "revId": "608e46d381432339e01fe8caae0811ec541d474a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }

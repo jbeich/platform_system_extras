@@ -16,6 +16,24 @@
       "revId": "61b10650690438354e829cad7135326a1b286934",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ca86672d_4c12afe7",
+        "filename": "simpleperf/perf_regs.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2016-01-04T17:01:58Z",
+      "side": 0,
+      "message": "Drat -- looks like that was left over from previous hacking. I\u0027ll remove.",
+      "parentUuid": "ca2ae7be_466543c0",
+      "revId": "61b10650690438354e829cad7135326a1b286934",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
