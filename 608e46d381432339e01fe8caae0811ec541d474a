@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ca2ae7be_666047b2",
+        "filename": "simpleperf/perf_regs.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2016-01-04T16:13:38Z",
+      "side": 1,
+      "message": "does x86 actually occur in the wild? when does uname(2) report \"x86\" and when \"i686\"? do we have to worry about \"i386\" too?",
+      "revId": "608e46d381432339e01fe8caae0811ec541d474a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
