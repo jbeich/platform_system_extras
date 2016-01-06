@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "65c92e79_567a349d",
+        "filename": "tests/net_test/sock_diag_test.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000451
+      },
+      "writtenOn": "2016-01-06T08:19:22Z",
+      "side": 1,
+      "message": "If you want to further test their closed-ness you could additionally check that getsockname() fails.  As it stands now, this is really \"assertSocketNotConnected\".  (fcntl with F_GETFL should also complain)",
+      "range": {
+        "startLine": 60,
+        "startChar": 44,
+        "endLine": 60,
+        "endChar": 55
+      },
+      "revId": "002f3ee732b1d984579ac262ec63a5302f3bd312",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
