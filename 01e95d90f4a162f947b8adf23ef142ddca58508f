@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6a765b4c_4e7273ba",
+        "filename": "tests/net_test/sock_diag_test.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1000451
+      },
+      "writtenOn": "2016-01-06T08:29:05Z",
+      "side": 1,
+      "message": "esTablished",
+      "range": {
+        "startLine": 386,
+        "startChar": 31,
+        "endLine": 386,
+        "endChar": 41
+      },
+      "revId": "01e95d90f4a162f947b8adf23ef142ddca58508f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
