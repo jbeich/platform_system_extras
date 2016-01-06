@@ -22,6 +22,30 @@
       "revId": "afc8b1a61159e2ef7366f998fc2adcb5cf641ee7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aa8cd387_3040a836",
+        "filename": "tests/net_test/sock_diag_test.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2016-01-06T08:33:46Z",
+      "side": 1,
+      "message": "Good idea. Done.",
+      "parentUuid": "aa03f3bd_f84e3170",
+      "range": {
+        "startLine": 290,
+        "startChar": 6,
+        "endLine": 290,
+        "endChar": 12
+      },
+      "revId": "afc8b1a61159e2ef7366f998fc2adcb5cf641ee7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
