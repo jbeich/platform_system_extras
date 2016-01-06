@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8a062fce_57b60cfa",
+        "filename": "tests/net_test/sock_diag.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1000451
+      },
+      "writtenOn": "2016-01-06T06:05:43Z",
+      "side": 1,
+      "message": "Do you need this [0]?  Because there\u0027s one in _GetMsg(), but probably I don\u0027t know what the struct return is so perhaps [0][0] is appropriate.",
+      "range": {
+        "startLine": 226,
+        "startChar": 36,
+        "endLine": 226,
+        "endChar": 39
+      },
+      "revId": "0691be8b32d7be2184db4a9b6fccefb26c95f93f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
