@@ -56,6 +56,8 @@ IPV6_FL_S_NONE = 0
 IPV6_FL_S_EXCL = 1
 IPV6_FL_S_ANY = 255
 
+IFNAMSIZ = 16
+
 IPV4_PING = "\x08\x00\x00\x00\x0a\xce\x00\x03"
 IPV6_PING = "\x80\x00\x00\x00\x0a\xce\x00\x03"
 
