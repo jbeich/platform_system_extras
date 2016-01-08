@@ -34,6 +34,24 @@
       "revId": "608e46d381432339e01fe8caae0811ec541d474a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4a9d17d3_30956604",
+        "filename": "simpleperf/perf_regs.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2016-01-08T19:33:49Z",
+      "side": 1,
+      "message": "Looks like \"i686\" is what you get on Edison hardware.",
+      "parentUuid": "ca9bc78b_61d87674",
+      "revId": "608e46d381432339e01fe8caae0811ec541d474a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
