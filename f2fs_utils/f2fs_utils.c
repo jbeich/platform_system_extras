@@ -40,17 +40,17 @@ struct selabel_handle;
 
 #include "make_f2fs.h"
 
-extern void flush_sparse_buffs();
+static struct f2fs_configuration* pConfig;
+static struct sparse_file *f2fs_sparse_file;
 
-struct f2fs_configuration config;
-struct sparse_file *f2fs_sparse_file;
-extern int dlopenf2fs();
+extern void* dlopenf2fs();
+extern int dlclosef2fs(void*);
 
 static void reset_f2fs_info() {
 	// Reset all the global data structures used by make_f2fs so it
 	// can be called again.
-	memset(&config, 0, sizeof(config));
-	config.fd = -1;
+	memset(pConfig, 0, sizeof(struct f2fs_configuration));
+	pConfig->fd = -1;
 	if (f2fs_sparse_file) {
 		sparse_file_destroy(f2fs_sparse_file);
 		f2fs_sparse_file = NULL;
@@ -60,19 +60,43 @@ static void reset_f2fs_info() {
 int make_f2fs_sparse_fd(int fd, long long len,
 		const char *mountpoint, struct selabel_handle *sehnd)
 {
-	if (dlopenf2fs() < 0) {
-		return -1;
+	int retVal = 0;
+	void* dllHandle = NULL;
+	dllHandle = dlopenf2fs();
+	if (!dllHandle) {
+		printf("failed to open dynamic lib \n");
+		retVal = -1;
+		goto cleanUp;
 	}
+	pConfig = f2fs_assign_config_ptr();
+	if (!pConfig) {
+		printf("failed f2fs_assign_config_ptr \n");
+		retVal = -1;
+		goto cleanUp;
+	}
+
 	reset_f2fs_info();
-	f2fs_init_configuration(&config);
+	f2fs_init_configuration(pConfig);
 	len &= ~((__u64)(F2FS_BLKSIZE - 1));
-	config.total_sectors = len / config.sector_size;
-	config.start_sector = 0;
+	pConfig->total_sectors = len / pConfig->sector_size;
+	pConfig->start_sector = 0;
 	f2fs_sparse_file = sparse_file_new(F2FS_BLKSIZE, len);
+	if (assign_f2fs_sparse_file_ptr((void*)f2fs_sparse_file) < 0) {
+		printf("failed assign_f2fs_sparse_file_ptr \n");
+		retVal = -1;
+		goto cleanUp;
+	}
 	f2fs_format_device();
 	sparse_file_write(f2fs_sparse_file, fd, /*gzip*/0, /*sparse*/1, /*crc*/0);
 	sparse_file_destroy(f2fs_sparse_file);
 	flush_sparse_buffs();
 	f2fs_sparse_file = NULL;
-	return 0;
+cleanUp:
+	if (dllHandle) {
+		if (dlclosef2fs(dllHandle) < 0) {
+			printf("failed dlclosef2fs \n");
+			retVal = -1;
+		}
+	}
+	return retVal;
 }

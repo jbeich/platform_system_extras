@@ -28,9 +28,12 @@
 
 #define _LARGEFILE64_SOURCE
 
+#ifndef USE_MINGW
 #include <asm/types.h>
-#include <errno.h>
 #include <linux/fs.h>
+#endif
+
+#include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>  /* memset() */
@@ -38,7 +41,6 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <fcntl.h>
-#include <dlfcn.h>
 
 #include <assert.h>
 
@@ -84,7 +86,7 @@ struct selabel_handle;
 #endif
 
 struct f2fs_configuration config;
-struct sparse_file *f2fs_sparse_file;
+static struct sparse_file *f2fs_sparse_file;
 
 struct buf_item {
 	void *buf;
@@ -190,3 +192,11 @@ int dev_read_blocks(void *buf, __u64 addr, __u32 nr_blks)
 	return 0;
 }
 
+int assign_f2fs_sparse_file_ptr(void* f)
+{
+	if (!f) {
+		return -1;
+	}
+	f2fs_sparse_file = (struct sparse_file*)f;
+	return 0;
+}
