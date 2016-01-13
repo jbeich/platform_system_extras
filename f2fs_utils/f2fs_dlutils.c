@@ -35,10 +35,24 @@
 
 #include <f2fs_fs.h>
 #include <f2fs_format_utils.h>
+#if defined(__linux__)
 #define F2FS_DYN_LIB "libf2fs_fmt_host_dyn.so"
+#elif defined(__APPLE__) && defined(__MACH__)
+#define F2FS_DYN_LIB "libf2fs_fmt_host_dyn.dylib"
+#else
+#ifdef USE_MINGW
+#define F2FS_DYN_LIB "libf2fs_fmt_host_dyn.dll"
+#else
+#error Unsupported platform
+#endif
+#endif
 
 int (*f2fs_format_device_dl)(void);
 void (*f2fs_init_configuration_dl)(struct f2fs_configuration *);
+// int (*f2fs_assign_config_ptr_dl)(struct f2fs_configuration* );
+struct f2fs_configuration* (*f2fs_assign_config_ptr_dl)();
+void (*flush_sparse_buffs_dl)(void);
+int (*assign_f2fs_sparse_file_ptr_dl)(void* );
 
 int f2fs_format_device(void) {
 	assert(f2fs_format_device_dl);
@@ -48,18 +62,54 @@ void f2fs_init_configuration(struct f2fs_configuration *config) {
 	assert(f2fs_init_configuration_dl);
 	f2fs_init_configuration_dl(config);
 }
+/* int f2fs_assign_config_ptr(struct f2fs_configuration *config) {
+	assert(f2fs_assign_config_ptr_dl);
+	return f2fs_assign_config_ptr_dl(config);
+} */
+struct f2fs_configuration* f2fs_assign_config_ptr() {
+	assert(f2fs_assign_config_ptr_dl);
+	return f2fs_assign_config_ptr_dl();
+}
 
-int dlopenf2fs() {
-	void* f2fs_lib;
+void flush_sparse_buffs(){
+	assert(flush_sparse_buffs_dl);
+	flush_sparse_buffs_dl();
+}
+int assign_f2fs_sparse_file_ptr(void* sparse_file_ptr) {
+	assert(assign_f2fs_sparse_file_ptr_dl);
+	return assign_f2fs_sparse_file_ptr_dl(sparse_file_ptr);
+}
 
-	f2fs_lib = dlopen(F2FS_DYN_LIB, RTLD_NOW);
+void* dlopenf2fs() {
+	void* f2fs_lib = NULL;
+
+	f2fs_lib = dlopen(F2FS_DYN_LIB, RTLD_NOW | RTLD_LOCAL);
 	if (!f2fs_lib) {
-		return -1;
+		printf("f2fs_lib is NULL \n");
+		return NULL;
 	}
 	f2fs_format_device_dl = dlsym(f2fs_lib, "f2fs_format_device");
 	f2fs_init_configuration_dl = dlsym(f2fs_lib, "f2fs_init_configuration");
-	if (!f2fs_format_device_dl || !f2fs_init_configuration_dl) {
+	f2fs_assign_config_ptr_dl = dlsym(f2fs_lib, "f2fs_assign_config_ptr");
+	flush_sparse_buffs_dl = dlsym(f2fs_lib, "flush_sparse_buffs");
+	assign_f2fs_sparse_file_ptr_dl = dlsym(f2fs_lib, "assign_f2fs_sparse_file_ptr");
+	if (
+		!f2fs_format_device_dl || 
+		!f2fs_init_configuration_dl || 
+		!f2fs_assign_config_ptr_dl ||
+		!flush_sparse_buffs_dl ||
+		!assign_f2fs_sparse_file_ptr_dl
+		) {
+		printf("One of the dynamic lib fcn pointers is NULL \n");
+		return NULL;
+	}
+	return f2fs_lib;
+}
+
+int dlclosef2fs(void* h){
+	if(!h){
+		printf("cannot close dl handle. h is NULL \n");
 		return -1;
 	}
-	return 0;
+	return dlclose(h);
 }
