@@ -150,6 +150,15 @@ class SockDiagTest(SockDiagBaseTest):
         diag_msg = self.sock_diag.GetSockDiag(req)
         self.assertSockDiagMatchesSocket(sock, diag_msg)
 
+  @staticmethod
+  def CreatePortFilterBytecode(diag_msg):
+    return [
+        (sock_diag.INET_DIAG_BC_S_GE, 1, 5, diag_msg.id.sport),
+        (sock_diag.INET_DIAG_BC_S_LE, 1, 4, diag_msg.id.sport),
+        (sock_diag.INET_DIAG_BC_D_GE, 1, 3, diag_msg.id.dport),
+        (sock_diag.INET_DIAG_BC_D_LE, 1, 2, diag_msg.id.dport),
+    ]
+
   def testBytecodeCompilation(self):
     instructions = [
         (sock_diag.INET_DIAG_BC_S_GE,   1, 8, 0),                      # 0
@@ -184,12 +193,7 @@ class SockDiagTest(SockDiagBaseTest):
     for socketpair in self.socketpairs.values()[:20]:
       for s in socketpair:
         diag_msg = self.sock_diag.FindSockDiagFromFd(s)
-        instructions = [
-            (sock_diag.INET_DIAG_BC_S_GE, 1, 5, diag_msg.id.sport),
-            (sock_diag.INET_DIAG_BC_S_LE, 1, 4, diag_msg.id.sport),
-            (sock_diag.INET_DIAG_BC_D_GE, 1, 3, diag_msg.id.dport),
-            (sock_diag.INET_DIAG_BC_D_LE, 1, 2, diag_msg.id.dport),
-        ]
+        instructions = self.CreatePortFilterBytecode(diag_msg)
         bytecode = self.sock_diag.PackBytecode(instructions)
         self.assertEquals(32, len(bytecode))
         sockets = self.sock_diag.DumpAllInetSockets(IPPROTO_TCP, bytecode)
@@ -197,6 +201,15 @@ class SockDiagTest(SockDiagBaseTest):
 
         # TODO: why doesn't comparing the cstructs work?
         self.assertEquals(diag_msg.Pack(), sockets[0][0].Pack())
+
+  def testCrossFamilyBytecode(self):
+    pair4 = net_test.CreateSocketPair(AF_INET, SOCK_STREAM, "127.0.0.1")
+    pair6 = net_test.CreateSocketPair(AF_INET6, SOCK_STREAM, "::1")
+
+    for version, pair in [(6, pair4), (4, pair6)]:
+      s = random.choice(pair)
+      diag_msg = self.sock_diag.FindSockDiagFromFd(s)
+      instructions = self.CreatePortFilterBytecode(diag_msg)
 
   @unittest.skipUnless(HAVE_SOCK_DESTROY, "SOCK_DESTROY not supported")
   def testClosesSockets(self):
