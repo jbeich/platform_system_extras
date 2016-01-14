@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "07df9a57_abf40977",
+        "filename": "tests/net_test/sock_diag.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2016-01-14T08:42:47Z",
+      "side": 1,
+      "message": "Bad interactive rebase. :) Done.",
+      "parentUuid": "c7e902fc_f1d1e8f5",
+      "revId": "1598152c8d640500abe52f81104924dd85d5f67a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "67da1666_ce1d23f8",
         "filename": "tests/net_test/sock_diag.py",
         "patchSetId": 1
@@ -30,6 +48,30 @@
       "writtenOn": "2016-01-14T08:24:38Z",
       "side": 1,
       "message": "Where is this used?",
+      "range": {
+        "startLine": 254,
+        "startChar": 2,
+        "endLine": 254,
+        "endChar": 10
+      },
+      "revId": "1598152c8d640500abe52f81104924dd85d5f67a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c712e2d7_897399ee",
+        "filename": "tests/net_test/sock_diag.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2016-01-14T08:42:47Z",
+      "side": 1,
+      "message": "This is left over from a future change:\n\nhttps://android-review.googlesource.com/#/c/196434/\n\nIf you don\u0027t mind I\u0027ll leave this in, because as soon as that change is merged the code will be correct again.",
+      "parentUuid": "67da1666_ce1d23f8",
       "range": {
         "startLine": 254,
         "startChar": 2,
