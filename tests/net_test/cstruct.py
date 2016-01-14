@@ -143,6 +143,15 @@ def Struct(name, fmt, fields, substructs={}):
     def __len__(cls):
       return cls._length
 
+    def __ne__(self, other):
+      return not self.__eq__(other)
+
+    def __eq__(self, other):
+      return (isinstance(other, self.__class__) and
+              self._name == other._name and
+              self._fields == other._fields and
+              self._values == other._values)
+
     @staticmethod
     def _MaybePackStruct(value):
       if hasattr(value, "__metaclass__"):# and value.__metaclass__ == Meta:
