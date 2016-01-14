@@ -36,9 +36,7 @@ include $(BUILD_HOST_STATIC_LIBRARY)
 
 include $(CLEAR_VARS)
 LOCAL_SRC_FILES := f2fs_dlutils.c
-LOCAL_SRC_FILES_windows := dlfcn_win/dlfcn.c
 LOCAL_C_INCLUDES := external/f2fs-tools/include external/f2fs-tools/mkfs
-LOCAL_C_INCLUDES_windows := system/extras/f2fs_utils/dlfcn_win
 # Will attempt to dlopen("libf2fs_fmt_host_dyn")
 LOCAL_LDLIBS := -ldl
 LOCAL_MODULE := libf2fs_dlutils_host

@@ -30,13 +30,13 @@
 
 #include <stdio.h>
 
-#include <dlfcn.h>
 #include <assert.h>
 
 #include <f2fs_fs.h>
 #include <f2fs_format_utils.h>
 #if defined(__linux__)
 #define F2FS_DYN_LIB "libf2fs_fmt_host_dyn.so"
+#include <dlfcn.h>
 #elif defined(__APPLE__) && defined(__MACH__)
 #define F2FS_DYN_LIB "libf2fs_fmt_host_dyn.dylib"
 #else
@@ -47,25 +47,28 @@
 #endif
 #endif
 
-int (*f2fs_format_device_dl)(void);
-void (*f2fs_init_configuration_dl)(struct f2fs_configuration *);
-// int (*f2fs_assign_config_ptr_dl)(struct f2fs_configuration* );
-struct f2fs_configuration* (*f2fs_assign_config_ptr_dl)();
-void (*flush_sparse_buffs_dl)(void);
-int (*assign_f2fs_sparse_file_ptr_dl)(void* );
+typedef int (*f2fs_format_device_dl_type)(void);
+typedef void (*f2fs_init_configuration_dl_type)(struct f2fs_configuration *);
+typedef struct f2fs_configuration* (*f2fs_assign_config_ptr_dl_type)();
+typedef void (*flush_sparse_buffs_dl_type)(void);
+typedef int (*assign_f2fs_sparse_file_ptr_dl_type)(void* );
+
+f2fs_format_device_dl_type 				f2fs_format_device_dl;
+f2fs_init_configuration_dl_type 		f2fs_init_configuration_dl;
+f2fs_assign_config_ptr_dl_type 			f2fs_assign_config_ptr_dl;
+flush_sparse_buffs_dl_type 				flush_sparse_buffs_dl;
+assign_f2fs_sparse_file_ptr_dl_type 	assign_f2fs_sparse_file_ptr_dl;
 
 int f2fs_format_device(void) {
 	assert(f2fs_format_device_dl);
 	return f2fs_format_device_dl();
 }
+
 void f2fs_init_configuration(struct f2fs_configuration *config) {
 	assert(f2fs_init_configuration_dl);
 	f2fs_init_configuration_dl(config);
 }
-/* int f2fs_assign_config_ptr(struct f2fs_configuration *config) {
-	assert(f2fs_assign_config_ptr_dl);
-	return f2fs_assign_config_ptr_dl(config);
-} */
+
 struct f2fs_configuration* f2fs_assign_config_ptr() {
 	assert(f2fs_assign_config_ptr_dl);
 	return f2fs_assign_config_ptr_dl();
@@ -83,16 +86,59 @@ int assign_f2fs_sparse_file_ptr(void* sparse_file_ptr) {
 void* dlopenf2fs() {
 	void* f2fs_lib = NULL;
 
+#ifdef USE_MINGW
+	f2fs_lib = (void*)LoadLibrary(F2FS_DYN_LIB);
+#else
 	f2fs_lib = dlopen(F2FS_DYN_LIB, RTLD_NOW | RTLD_LOCAL);
+#endif
 	if (!f2fs_lib) {
 		printf("f2fs_lib is NULL \n");
 		return NULL;
 	}
-	f2fs_format_device_dl = dlsym(f2fs_lib, "f2fs_format_device");
-	f2fs_init_configuration_dl = dlsym(f2fs_lib, "f2fs_init_configuration");
-	f2fs_assign_config_ptr_dl = dlsym(f2fs_lib, "f2fs_assign_config_ptr");
-	flush_sparse_buffs_dl = dlsym(f2fs_lib, "flush_sparse_buffs");
-	assign_f2fs_sparse_file_ptr_dl = dlsym(f2fs_lib, "assign_f2fs_sparse_file_ptr");
+
+#ifdef USE_MINGW
+	f2fs_format_device_dl = (f2fs_format_device_dl_type)GetProcAddress(
+		(HMODULE)f2fs_lib,
+		"f2fs_format_device"
+		);
+	f2fs_init_configuration_dl = (f2fs_init_configuration_dl_type)GetProcAddress(
+		(HMODULE)f2fs_lib,
+		"f2fs_init_configuration"
+		);
+	f2fs_assign_config_ptr_dl = (f2fs_assign_config_ptr_dl_type)GetProcAddress(
+		(HMODULE)f2fs_lib, 
+		"f2fs_assign_config_ptr"
+		);
+	flush_sparse_buffs_dl = (flush_sparse_buffs_dl_type)GetProcAddress(
+		(HMODULE)f2fs_lib,
+		"flush_sparse_buffs"
+		);
+	assign_f2fs_sparse_file_ptr_dl = (assign_f2fs_sparse_file_ptr_dl_type)GetProcAddress(
+		(HMODULE)f2fs_lib,
+		"assign_f2fs_sparse_file_ptr"
+		);
+#else
+	f2fs_format_device_dl = (f2fs_format_device_dl_type)dlsym(
+		f2fs_lib,
+		"f2fs_format_device"
+		);
+	f2fs_init_configuration_dl = (f2fs_init_configuration_dl_type)dlsym(
+		f2fs_lib,
+		"f2fs_init_configuration"
+		);
+	f2fs_assign_config_ptr_dl = (f2fs_assign_config_ptr_dl_type)dlsym(
+		f2fs_lib,
+		"f2fs_assign_config_ptr"
+		);
+	flush_sparse_buffs_dl = (flush_sparse_buffs_dl_type)dlsym(
+		f2fs_lib,
+		"flush_sparse_buffs"
+		);
+	assign_f2fs_sparse_file_ptr_dl = (assign_f2fs_sparse_file_ptr_dl_type)dlsym(
+		f2fs_lib,
+		"assign_f2fs_sparse_file_ptr"
+		);
+#endif
 	if (
 		!f2fs_format_device_dl || 
 		!f2fs_init_configuration_dl || 
@@ -111,5 +157,14 @@ int dlclosef2fs(void* h){
 		printf("cannot close dl handle. h is NULL \n");
 		return -1;
 	}
+#ifdef USE_MINGW
+	if(!FreeLibrary((HMODULE)h))
+	{
+		return -1;
+	} 
+#else
 	return dlclose(h);
+#endif
+
+	return 0;
 }
