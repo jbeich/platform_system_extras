@@ -81,6 +81,7 @@ class NetlinkSocket(object):
     for name in dir(thismodule):
       if (name.startswith(prefix) and
           not name.startswith(prefix + "F_") and
+          not name.startswith("INET_DIAG_BC_") and
           name.isupper() and
           getattr(thismodule, name) == value):
         return name
