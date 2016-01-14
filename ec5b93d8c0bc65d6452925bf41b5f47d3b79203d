@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e7e60628_720f384b",
+        "filename": "tests/net_test/sock_diag_test.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1093208
+      },
+      "writtenOn": "2016-01-14T08:30:31Z",
+      "side": 1,
+      "message": "Two lines should be enough, that\u0027s all I can comment on here. Feel free to ignore.",
+      "revId": "ec5b93d8c0bc65d6452925bf41b5f47d3b79203d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
