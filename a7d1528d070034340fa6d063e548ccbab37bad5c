@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e70fe6af_2a1b7f60",
+        "filename": "tests/net_test/cstruct_test.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000451
+      },
+      "writtenOn": "2016-01-15T04:38:42Z",
+      "side": 1,
+      "message": "for what this test is doing you could include a3 in the list (since you\u0027re testing i \u003d\u003d i).\n\nHow about something like:\n\n    for i, j in itertools.product([a1, a2, b]):\n        self.CheckEquals(i, j)",
+      "range": {
+        "startLine": 53,
+        "startChar": 21,
+        "endLine": 53,
+        "endChar": 22
+      },
+      "revId": "a7d1528d070034340fa6d063e548ccbab37bad5c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
