@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c7e902fc_d19264d0",
+        "filename": "tests/net_test/sock_diag_test.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1093208
+      },
+      "writtenOn": "2016-01-15T04:23:25Z",
+      "side": 1,
+      "message": "Seems unnecessary, if you assert / assume that AF_INET !\u003d AF_INET6.",
+      "range": {
+        "startLine": 220,
+        "startChar": 9,
+        "endLine": 220,
+        "endChar": 20
+      },
+      "revId": "efa84774893bd8c1af0742349a85b41b133e5e2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a7f08edd_104c6449",
+        "filename": "tests/net_test/sock_diag_test.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1093208
+      },
+      "writtenOn": "2016-01-15T04:23:25Z",
+      "side": 1,
+      "message": "Likewise.",
+      "range": {
+        "startLine": 225,
+        "startChar": 9,
+        "endLine": 225,
+        "endChar": 20
+      },
+      "revId": "efa84774893bd8c1af0742349a85b41b133e5e2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
