@@ -35,6 +35,7 @@
 #include "read_elf.h"
 #include "record.h"
 #include "record_file.h"
+#include "signal_handler_register.h"
 #include "thread_tree.h"
 #include "utils.h"
 #include "workload.h"

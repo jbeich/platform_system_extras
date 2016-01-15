@@ -34,6 +34,7 @@
 #include "event_fd.h"
 #include "event_selection_set.h"
 #include "event_type.h"
+#include "signal_handler_register.h"
 #include "utils.h"
 #include "workload.h"
 

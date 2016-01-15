@@ -18,6 +18,7 @@
 
 #include <signal.h>
 
+#include "signal_handler_register.h"
 #include "utils.h"
 #include "workload.h"
 

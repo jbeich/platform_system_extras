@@ -18,8 +18,6 @@
 
 #include <fcntl.h>
 #include <string.h>
-#include <sys/mman.h>
-#include <unistd.h>
 #include <set>
 #include <vector>
 
