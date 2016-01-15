@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "07df9a57_ab2649a3",
+        "filename": "tests/net_test/sock_diag_test.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2016-01-15T04:34:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c7e902fc_d19264d0",
+      "range": {
+        "startLine": 220,
+        "startChar": 9,
+        "endLine": 220,
+        "endChar": 20
+      },
+      "revId": "efa84774893bd8c1af0742349a85b41b133e5e2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a7f08edd_104c6449",
         "filename": "tests/net_test/sock_diag_test.py",
         "patchSetId": 5
@@ -36,6 +60,30 @@
       "writtenOn": "2016-01-15T04:23:25Z",
       "side": 1,
       "message": "Likewise.",
+      "range": {
+        "startLine": 225,
+        "startChar": 9,
+        "endLine": 225,
+        "endChar": 20
+      },
+      "revId": "efa84774893bd8c1af0742349a85b41b133e5e2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "47d51232_cd488967",
+        "filename": "tests/net_test/sock_diag_test.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2016-01-15T04:34:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a7f08edd_104c6449",
       "range": {
         "startLine": 225,
         "startChar": 9,
