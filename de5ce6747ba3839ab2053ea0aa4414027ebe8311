@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "87f38ae9_d2c7026d",
+        "filename": "tests/net_test/netlink.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2016-01-15T00:13:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "87f38ae9_4ffb6d2c",
+      "range": {
+        "startLine": 84,
+        "startChar": 31,
+        "endLine": 84,
+        "endChar": 44
+      },
+      "revId": "de5ce6747ba3839ab2053ea0aa4414027ebe8311",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e7e60628_728058e3",
         "filename": "tests/net_test/sock_diag.py",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2016-01-14T06:55:41Z",
       "side": 1,
       "message": "s/The/To/",
+      "range": {
+        "startLine": 161,
+        "startChar": 4,
+        "endLine": 161,
+        "endChar": 7
+      },
+      "revId": "de5ce6747ba3839ab2053ea0aa4414027ebe8311",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e70fe6af_2a093f44",
+        "filename": "tests/net_test/sock_diag.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2016-01-15T00:13:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e7e60628_728058e3",
       "range": {
         "startLine": 161,
         "startChar": 4,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "e70fe6af_4a0c7354",
+        "filename": "tests/net_test/sock_diag.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2016-01-15T00:13:09Z",
+      "side": 1,
+      "message": "Oops, removed.",
+      "parentUuid": "47d51232_ed8b4509",
+      "range": {
+        "startLine": 194,
+        "startChar": 4,
+        "endLine": 194,
+        "endChar": 14
+      },
+      "revId": "de5ce6747ba3839ab2053ea0aa4414027ebe8311",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e7e60628_1287ccf9",
         "filename": "tests/net_test/sock_diag.py",
         "patchSetId": 1
@@ -82,6 +154,30 @@
       "writtenOn": "2016-01-14T06:55:41Z",
       "side": 1,
       "message": "Please use different variable names for the binary and the text form, e.g. addr_str for the text.",
+      "range": {
+        "startLine": 211,
+        "startChar": 15,
+        "endLine": 211,
+        "endChar": 24
+      },
+      "revId": "de5ce6747ba3839ab2053ea0aa4414027ebe8311",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "67da1666_0eeb2b09",
+        "filename": "tests/net_test/sock_diag.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2016-01-15T00:13:09Z",
+      "side": 1,
+      "message": "I\u0027d prefer to leave this as is. There is no possibility of confusion, since there is only one code path, and the variable is never reused out of this block.",
+      "parentUuid": "e7e60628_1287ccf9",
       "range": {
         "startLine": 211,
         "startChar": 15,
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "c712e2d7_698065e3",
+        "filename": "tests/net_test/sock_diag_test.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2016-01-15T00:13:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c712e2d7_494fe1b9",
+      "range": {
+        "startLine": 178,
+        "startChar": 47,
+        "endLine": 178,
+        "endChar": 50
+      },
+      "revId": "de5ce6747ba3839ab2053ea0aa4414027ebe8311",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a7f08edd_1006a434",
         "filename": "tests/net_test/sock_diag_test.py",
         "patchSetId": 1
@@ -128,6 +248,30 @@
       "writtenOn": "2016-01-14T06:55:41Z",
       "side": 1,
       "message": "There\u0027s only 100 socket pairs, correct? If so, how about using random.shuffle to get a permutation of the socket pairs and checking the first 10 or so of them?",
+      "range": {
+        "startLine": 185,
+        "startChar": 8,
+        "endLine": 185,
+        "endChar": 14
+      },
+      "revId": "de5ce6747ba3839ab2053ea0aa4414027ebe8311",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c712e2d7_298a6d01",
+        "filename": "tests/net_test/sock_diag_test.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2016-01-15T00:13:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a7f08edd_1006a434",
       "range": {
         "startLine": 185,
         "startChar": 8,
