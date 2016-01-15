@@ -22,6 +22,30 @@
       "revId": "a7d1528d070034340fa6d063e548ccbab37bad5c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e70fe6af_eae9e766",
+        "filename": "tests/net_test/cstruct_test.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2016-01-15T04:48:04Z",
+      "side": 1,
+      "message": "Added a3. I can\u0027t use itertools.product because it would include pairs of the form (b, b) for which I can\u0027t do CheckNotEquals.",
+      "parentUuid": "e70fe6af_2a1b7f60",
+      "range": {
+        "startLine": 53,
+        "startChar": 21,
+        "endLine": 53,
+        "endChar": 22
+      },
+      "revId": "a7d1528d070034340fa6d063e548ccbab37bad5c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
