@@ -46,7 +46,8 @@ bool IsValidElfPath(const std::string& filename) {
   if (!IsRegularFile(filename)) {
     return false;
   }
-  FILE* fp = fopen(filename.c_str(), "reb");
+  std::string mode = std::string("rb") + CLOSE_ON_EXEC_MODE;
+  FILE* fp = fopen(filename.c_str(), mode.c_str());
   if (fp == nullptr) {
     return false;
   }
