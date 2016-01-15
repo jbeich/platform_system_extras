@@ -46,7 +46,8 @@ bool IsValidElfPath(const std::string& filename) {
   if (!IsRegularFile(filename)) {
     return false;
   }
-  FILE* fp = fopen(filename.c_str(), "reb");
+  std::string mode = std::string("rb") + CLOSE_ON_EXEC_MODE;
+  FILE* fp = fopen(filename.c_str(), mode.c_str());
   if (fp == nullptr) {
     return false;
   }
@@ -170,7 +171,6 @@ void ParseSymbolsFromELFFile(const llvm::object::ELFFile<ELFT>* elf,
     auto& elf_symbol = *begin;
 
     ElfFileSymbol symbol;
-    memset(&symbol, '\0', sizeof(symbol));
 
     auto shdr = elf->getSection(&elf_symbol);
     if (shdr == nullptr) {
@@ -205,6 +205,7 @@ void ParseSymbolsFromELFFile(const llvm::object::ELFFile<ELFT>* elf,
       if (symbol.is_in_text_section) {
         symbol.is_label = true;
         if (is_arm) {
+
           // Remove mapping symbols in arm.
           const char* p = (symbol.name.compare(0, linker_prefix.size(), linker_prefix) == 0)
                               ? symbol.name.c_str() + linker_prefix.size()
