@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "47d51232_ed43454a",
+        "filename": "tests/net_test/ping6_test.py",
+        "patchSetId": 30
+      },
+      "lineNbr": 717,
+      "author": {
+        "id": 1093208
+      },
+      "writtenOn": "2016-01-15T04:30:32Z",
+      "side": 1,
+      "message": "Please don\u0027t hard code 1500 in here twice. How about PAYLOAD_SIZE \u003d 1500?",
+      "range": {
+        "startLine": 717,
+        "startChar": 31,
+        "endLine": 717,
+        "endChar": 35
+      },
+      "revId": "5226cca7b12ea429bea65cdadadd76309f70100a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "27e49e25_ccc9afd2",
+        "filename": "tests/net_test/ping6_test.py",
+        "patchSetId": 30
+      },
+      "lineNbr": 723,
+      "author": {
+        "id": 1093208
+      },
+      "writtenOn": "2016-01-15T04:30:32Z",
+      "side": 1,
+      "message": "Is this one left over from another CL again? Or is it just at the wrong place and needs rephrasing?",
+      "range": {
+        "startLine": 723,
+        "startChar": 4,
+        "endLine": 723,
+        "endChar": 33
+      },
+      "revId": "5226cca7b12ea429bea65cdadadd76309f70100a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
