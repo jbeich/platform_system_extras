@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "87562a44_6f7ac7c4",
+        "filename": "simpleperf/perf_regs.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-01-16T02:25:31Z",
+      "side": 1,
+      "message": "I want to keep the interface the same as regno in GetRegValue() below.",
+      "parentUuid": "07495aa4_d3774a1a",
+      "revId": "c57eb84ff74de569970a34ec7b47287a70d84761",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "27673e34_c95b1709",
         "filename": "simpleperf/signal_handler_register.h",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2016-01-15T23:50:52Z",
       "side": 1,
       "message": "ScopedSignalHandler?",
+      "revId": "c57eb84ff74de569970a34ec7b47287a70d84761",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2752dead_b6c2580c",
+        "filename": "simpleperf/signal_handler_register.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-01-16T02:25:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "27673e34_c95b1709",
       "revId": "c57eb84ff74de569970a34ec7b47287a70d84761",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
