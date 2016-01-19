@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "07623a24_f93a1d07",
+        "filename": "tests/net_test/sock_diag.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 1093208
+      },
+      "writtenOn": "2016-01-19T14:37:00Z",
+      "side": 1,
+      "message": "Probably better in here than in the kernel, IMHO.",
+      "range": {
+        "startLine": 348,
+        "startChar": 48,
+        "endLine": 348,
+        "endChar": 71
+      },
+      "revId": "5457c0ec72a37f96fa7ef842a273cd25b8ee1d2f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
