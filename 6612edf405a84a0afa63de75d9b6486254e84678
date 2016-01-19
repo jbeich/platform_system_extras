@@ -1,0 +1,280 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2752dead_c6709375",
+        "filename": "f2fs_utils/f2fs_dlutils.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2016-01-19T18:44:13Z",
+      "side": 1,
+      "message": "Remove blank",
+      "range": {
+        "startLine": 109,
+        "startChar": 20,
+        "endLine": 109,
+        "endChar": 21
+      },
+      "revId": "6612edf405a84a0afa63de75d9b6486254e84678",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "87562a44_b859c343",
+        "filename": "f2fs_utils/f2fs_dlutils.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2016-01-19T18:44:13Z",
+      "side": 1,
+      "message": "remove blank",
+      "range": {
+        "startLine": 143,
+        "startChar": 27,
+        "endLine": 143,
+        "endChar": 28
+      },
+      "revId": "6612edf405a84a0afa63de75d9b6486254e84678",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "274e5eac_832d6e84",
+        "filename": "f2fs_utils/f2fs_dlutils.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2016-01-19T18:44:13Z",
+      "side": 1,
+      "message": "same here",
+      "range": {
+        "startLine": 144,
+        "startChar": 32,
+        "endLine": 144,
+        "endChar": 33
+      },
+      "revId": "6612edf405a84a0afa63de75d9b6486254e84678",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e759a674_6863d619",
+        "filename": "f2fs_utils/f2fs_dlutils.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2016-01-19T18:44:13Z",
+      "side": 1,
+      "message": "Same here",
+      "range": {
+        "startLine": 164,
+        "startChar": 1,
+        "endLine": 164,
+        "endChar": 2
+      },
+      "revId": "6612edf405a84a0afa63de75d9b6486254e84678",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "07623a24_f98a1d89",
+        "filename": "f2fs_utils/f2fs_ioutils.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2016-01-19T18:44:13Z",
+      "side": 1,
+      "message": "Please move to next line",
+      "range": {
+        "startLine": 195,
+        "startChar": 41,
+        "endLine": 195,
+        "endChar": 42
+      },
+      "revId": "6612edf405a84a0afa63de75d9b6486254e84678",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2752dead_06775b6e",
+        "filename": "f2fs_utils/f2fs_ioutils.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2016-01-19T18:44:13Z",
+      "side": 1,
+      "message": "if (",
+      "range": {
+        "startLine": 196,
+        "startChar": 3,
+        "endLine": 196,
+        "endChar": 5
+      },
+      "revId": "6612edf405a84a0afa63de75d9b6486254e84678",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "676db610_6bee301a",
+        "filename": "f2fs_utils/f2fs_utils.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2016-01-19T18:44:13Z",
+      "side": 1,
+      "message": "Please remove",
+      "range": {
+        "startLine": 69,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 1
+      },
+      "revId": "6612edf405a84a0afa63de75d9b6486254e84678",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4768b202_82a56d74",
+        "filename": "f2fs_utils/f2fs_utils.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2016-01-19T18:44:13Z",
+      "side": 1,
+      "message": "if (",
+      "range": {
+        "startLine": 71,
+        "startChar": 3,
+        "endLine": 71,
+        "endChar": 5
+      },
+      "revId": "6612edf405a84a0afa63de75d9b6486254e84678",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4768b202_e2aa613f",
+        "filename": "f2fs_utils/f2fs_utils.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2016-01-19T18:44:13Z",
+      "side": 1,
+      "message": "Do we want dclosef2fs() here?",
+      "range": {
+        "startLine": 73,
+        "startChar": 2,
+        "endLine": 73,
+        "endChar": 8
+      },
+      "revId": "6612edf405a84a0afa63de75d9b6486254e84678",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "87562a44_f8897bde",
+        "filename": "f2fs_utils/f2fs_utils.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2016-01-19T18:44:13Z",
+      "side": 1,
+      "message": "if (...) {",
+      "range": {
+        "startLine": 82,
+        "startChar": 3,
+        "endLine": 82,
+        "endChar": 4
+      },
+      "revId": "6612edf405a84a0afa63de75d9b6486254e84678",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "274e5eac_233f3aaf",
+        "filename": "f2fs_utils/f2fs_utils.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2016-01-19T18:44:13Z",
+      "side": 1,
+      "message": "And dclosef2fs()",
+      "range": {
+        "startLine": 85,
+        "startChar": 2,
+        "endLine": 85,
+        "endChar": 8
+      },
+      "revId": "6612edf405a84a0afa63de75d9b6486254e84678",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "274e5eac_43424642",
+        "filename": "f2fs_utils/f2fs_utils.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000414
+      },
+      "writtenOn": "2016-01-19T18:44:13Z",
+      "side": 1,
+      "message": "if () {",
+      "range": {
+        "startLine": 92,
+        "startChar": 3,
+        "endLine": 92,
+        "endChar": 4
+      },
+      "revId": "6612edf405a84a0afa63de75d9b6486254e84678",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
