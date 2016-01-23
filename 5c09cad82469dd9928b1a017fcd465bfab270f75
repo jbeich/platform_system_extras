@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d4be1290_f2cffeda",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2016-01-23T03:29:34Z",
+      "side": 1,
+      "message": "_the_ buffer\n_the_ kernel",
+      "revId": "5c09cad82469dd9928b1a017fcd465bfab270f75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "74c64632_974f8e43",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2016-01-23T03:29:34Z",
+      "side": 1,
+      "message": "_a_ power of",
+      "revId": "5c09cad82469dd9928b1a017fcd465bfab270f75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "34d04ee4_e0340a84",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2016-01-23T03:29:34Z",
+      "side": 1,
+      "message": "(should be \"a power of\" here too.)",
+      "revId": "5c09cad82469dd9928b1a017fcd465bfab270f75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
