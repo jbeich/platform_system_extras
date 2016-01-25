@@ -34,9 +34,6 @@ import threading
 NUM_SOCKETS = 30
 NO_BYTECODE = ""
 
-# TODO: Backport SOCK_DESTROY and delete this.
-HAVE_SOCK_DESTROY = net_test.LINUX_VERSION >= (4, 4)
-
 
 class SockDiagBaseTest(multinetwork_base.MultiNetworkBaseTest):
 
@@ -263,7 +260,6 @@ class SockDiagTest(SockDiagBaseTest):
     self.assertRaisesErrno(EINVAL, DiagDump, op + 17)
 
 
-@unittest.skipUnless(HAVE_SOCK_DESTROY, "SOCK_DESTROY not supported")
 class SockDestroyTest(SockDiagBaseTest):
 
   def testClosesSockets(self):
@@ -345,7 +341,6 @@ class SockDiagTcpTest(tcp_test.TcpBaseTest, SockDiagBaseTest):
                        child.id.src)
 
 
-@unittest.skipUnless(HAVE_SOCK_DESTROY, "SOCK_DESTROY not supported")
 class SockDestroyTcpTest(tcp_test.TcpBaseTest, SockDiagBaseTest):
 
   def setUp(self):
