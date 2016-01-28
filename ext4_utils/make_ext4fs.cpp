@@ -83,12 +83,12 @@ static u32 build_default_directory_structure(const char *dir_path,
 	u32 inode;
 	u32 root_inode;
 	struct dentry dentries = {
-			.filename = "lost+found",
-			.file_type = EXT4_FT_DIR,
-			.mode = S_IRWXU,
-			.uid = 0,
-			.gid = 0,
-			.mtime = 0,
+			filename: "lost+found",
+			file_type: EXT4_FT_DIR,
+			mode: S_IRWXU,
+			uid: 0,
+			gid: 0,
+			mtime: 0,
 	};
 	root_inode = make_directory(0, 1, &dentries, 1);
 	inode = make_directory(root_inode, 0, NULL, 0);
@@ -165,7 +165,7 @@ static u32 build_directory_structure(const char *full_path, const char *dir_path
 			needs_lost_and_found = true;
 	}
 
-	dentries = calloc(entries, sizeof(struct dentry));
+	dentries = static_cast<struct dentry*>(calloc(entries, sizeof(struct dentry)));
 	if (dentries == NULL)
 		critical_error_errno("malloc");
 
@@ -236,7 +236,7 @@ static u32 build_directory_structure(const char *full_path, const char *dir_path
 			dentries[i].file_type = EXT4_FT_SOCK;
 		} else if (S_ISLNK(stat.st_mode)) {
 			dentries[i].file_type = EXT4_FT_SYMLINK;
-			dentries[i].link = calloc(info.block_size, 1);
+			dentries[i].link = static_cast<char*>(calloc(info.block_size, 1));
 			readlink(dentries[i].full_path, dentries[i].link, info.block_size - 1);
 		} else {
 			error("unknown file type on %s", dentries[i].path);
@@ -248,7 +248,7 @@ static u32 build_directory_structure(const char *full_path, const char *dir_path
 
 	if (needs_lost_and_found) {
 		/* insert a lost+found directory at the beginning of the dentries */
-		struct dentry *tmp = calloc(entries + 1, sizeof(struct dentry));
+		struct dentry *tmp = static_cast<struct dentry*>(calloc(entries + 1, sizeof(struct dentry)));
 		memset(tmp, 0, sizeof(struct dentry));
 		memcpy(tmp + 1, dentries, entries * sizeof(struct dentry));
 		dentries = tmp;
@@ -452,7 +452,7 @@ static char *canonicalize_slashes(const char *str, bool absolute)
 	if (str[len - 1] != '/') {
 		newlen++;
 	}
-	ret = malloc(newlen + 1);
+	ret = static_cast<char*>(malloc(newlen + 1));
 	if (!ret) {
 		critical_error("malloc");
 	}
@@ -577,7 +577,7 @@ int make_ext4fs_internal(int fd, const char *_directory, const char *_target_out
 	info.bg_desc_reserve_blocks = compute_bg_desc_reserve_blocks();
 
 	printf("Creating filesystem with parameters:\n");
-	printf("    Size: %"PRIu64"\n", info.len);
+	printf("    Size: %" PRIu64 "\n", info.len);
 	printf("    Block size: %d\n", info.block_size);
 	printf("    Blocks per group: %d\n", info.blocks_per_group);
 	printf("    Inodes per group: %d\n", info.inodes_per_group);
@@ -587,7 +587,7 @@ int make_ext4fs_internal(int fd, const char *_directory, const char *_target_out
 
 	ext4_create_fs_aux_info();
 
-	printf("    Blocks: %"PRIu64"\n", aux_info.len_blocks);
+	printf("    Blocks: %" PRIu64 "\n", aux_info.len_blocks);
 	printf("    Block groups: %d\n", aux_info.groups);
 	printf("    Reserved block group size: %d\n", info.bg_desc_reserve_blocks);
 

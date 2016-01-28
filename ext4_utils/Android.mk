@@ -3,17 +3,17 @@
 LOCAL_PATH:= $(call my-dir)
 
 libext4_utils_src_files := \
-    make_ext4fs.c \
-    ext4fixup.c \
-    ext4_utils.c \
-    allocate.c \
-    contents.c \
-    extent.c \
-    indirect.c \
+    make_ext4fs.cpp \
+    ext4fixup.cpp \
+    ext4_utils.cpp \
+    allocate.cpp \
+    contents.cpp \
+    extent.cpp \
+    indirect.cpp \
     sha1.c \
-    wipe.c \
-    crc16.c \
-    ext4_sb.c
+    wipe.cpp \
+    crc16.cpp \
+    ext4_sb.cpp
 
 #
 # -- All host/targets including windows
@@ -22,7 +22,7 @@ libext4_utils_src_files := \
 include $(CLEAR_VARS)
 LOCAL_SRC_FILES := $(libext4_utils_src_files)
 LOCAL_MODULE := libext4_utils_host
-# Various instances of dereferencing a type-punned pointer in extent.c
+# Various instances of dereferencing a type-punned pointer in extent.cpp
 LOCAL_CFLAGS += -fno-strict-aliasing
 LOCAL_STATIC_LIBRARIES := \
     libsparse_host \
@@ -34,7 +34,7 @@ include $(BUILD_HOST_STATIC_LIBRARY)
 
 
 include $(CLEAR_VARS)
-LOCAL_SRC_FILES := make_ext4fs_main.c canned_fs_config.c
+LOCAL_SRC_FILES := make_ext4fs_main.cpp canned_fs_config.cpp
 LOCAL_MODULE := make_ext4fs
 LOCAL_SHARED_LIBRARIES += libcutils
 LOCAL_STATIC_LIBRARIES += \
@@ -64,7 +64,7 @@ include $(CLEAR_VARS)
 LOCAL_SRC_FILES := $(libext4_utils_src_files)
 LOCAL_MODULE := libext4_utils
 LOCAL_C_INCLUDES += system/core/logwrapper/include
-# Various instances of dereferencing a type-punned pointer in extent.c
+# Various instances of dereferencing a type-punned pointer in extent.cpp
 LOCAL_CFLAGS += -fno-strict-aliasing
 LOCAL_SHARED_LIBRARIES := \
     libcutils \
@@ -80,7 +80,7 @@ include $(CLEAR_VARS)
 LOCAL_SRC_FILES := $(libext4_utils_src_files) \
     ext4_crypt_init_extensions.cpp
 LOCAL_MODULE := libext4_utils_static
-# Various instances of dereferencing a type-punned pointer in extent.c
+# Various instances of dereferencing a type-punned pointer in extent.cpp
 LOCAL_CFLAGS += -fno-strict-aliasing
 LOCAL_STATIC_LIBRARIES := \
     libsparse_static \
@@ -89,7 +89,7 @@ include $(BUILD_STATIC_LIBRARY)
 
 
 include $(CLEAR_VARS)
-LOCAL_SRC_FILES := make_ext4fs_main.c canned_fs_config.c
+LOCAL_SRC_FILES := make_ext4fs_main.cpp canned_fs_config.cpp
 LOCAL_MODULE := make_ext4fs
 LOCAL_SHARED_LIBRARIES := \
     libcutils \
@@ -102,7 +102,7 @@ include $(BUILD_EXECUTABLE)
 
 
 include $(CLEAR_VARS)
-LOCAL_SRC_FILES := ext2simg.c
+LOCAL_SRC_FILES := ext2simg.cpp
 LOCAL_MODULE := ext2simg
 LOCAL_SHARED_LIBRARIES += \
     libext4_utils \
@@ -113,7 +113,7 @@ include $(BUILD_EXECUTABLE)
 
 
 include $(CLEAR_VARS)
-LOCAL_SRC_FILES := ext2simg.c
+LOCAL_SRC_FILES := ext2simg.cpp
 LOCAL_MODULE := ext2simg
 LOCAL_SHARED_LIBRARIES += \
     libselinux
@@ -125,14 +125,14 @@ include $(BUILD_HOST_EXECUTABLE)
 
 
 include $(CLEAR_VARS)
-LOCAL_SRC_FILES := setup_fs.c
+LOCAL_SRC_FILES := setup_fs.cpp
 LOCAL_MODULE := setup_fs
 LOCAL_SHARED_LIBRARIES += libcutils
 include $(BUILD_EXECUTABLE)
 
 
 include $(CLEAR_VARS)
-LOCAL_SRC_FILES := ext4fixup_main.c
+LOCAL_SRC_FILES := ext4fixup_main.cpp
 LOCAL_MODULE := ext4fixup
 LOCAL_SHARED_LIBRARIES += \
     libext4_utils \
@@ -142,7 +142,7 @@ include $(BUILD_EXECUTABLE)
 
 
 include $(CLEAR_VARS)
-LOCAL_SRC_FILES := ext4fixup_main.c
+LOCAL_SRC_FILES := ext4fixup_main.cpp
 LOCAL_MODULE := ext4fixup
 LOCAL_STATIC_LIBRARIES += \
     libext4_utils_host \

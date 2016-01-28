@@ -227,7 +227,7 @@ void ext4_create_fs_aux_info()
 	/* A zero-filled superblock to be written firstly to the block
 	 * device to mark the file-system as invalid
 	 */
-	aux_info.sb_zero = calloc(1, info.block_size);
+	aux_info.sb_zero = static_cast<struct ext4_super_block*>(calloc(1, info.block_size));
 	if (!aux_info.sb_zero)
 		critical_error_errno("calloc");
 
@@ -236,7 +236,7 @@ void ext4_create_fs_aux_info()
 	 * block on a system with a block size > 1K.  So, we need to
 	 * deal with that here.
 	 */
-	aux_info.sb_block = calloc(1, info.block_size);
+	aux_info.sb_block = static_cast<struct ext4_super_block*>(calloc(1, info.block_size));
 	if (!aux_info.sb_block)
 		critical_error_errno("calloc");
 
@@ -246,12 +246,12 @@ void ext4_create_fs_aux_info()
 		aux_info.sb = aux_info.sb_block;
 
 	/* Alloc an array to hold the pointers to the backup superblocks */
-	aux_info.backup_sb = calloc(aux_info.groups, sizeof(char *));
+	aux_info.backup_sb = static_cast<struct ext4_super_block**>(calloc(aux_info.groups, sizeof(char *)));
 
 	if (!aux_info.sb)
 		critical_error_errno("calloc");
 
-	aux_info.bg_desc = calloc(info.block_size, aux_info.bg_desc_blocks);
+	aux_info.bg_desc = static_cast<struct ext2_group_desc*>(calloc(info.block_size, aux_info.bg_desc_blocks));
 	if (!aux_info.bg_desc)
 		critical_error_errno("calloc");
 	aux_info.xattrs = NULL;
@@ -362,7 +362,7 @@ void ext4_fill_in_sb(int real_uuid)
 		u32 header_size = 0;
 		if (ext4_bg_has_super_block(i)) {
 			if (i != 0) {
-				aux_info.backup_sb[i] = calloc(info.block_size, 1);
+				aux_info.backup_sb[i] = static_cast<struct ext4_super_block*>(calloc(info.block_size, 1));
 				memcpy(aux_info.backup_sb[i], sb, sizeof(struct ext4_super_block));
 				/* Update the block group nr of this backup superblock */
 				aux_info.backup_sb[i]->s_block_group_nr = i;
@@ -616,13 +616,13 @@ int read_ext(int fd, int verbose)
 
 	if (verbose) {
 		printf("Found filesystem with parameters:\n");
-		printf("    Size: %"PRIu64"\n", info.len);
+		printf("    Size: %" PRIu64 "\n", info.len);
 		printf("    Block size: %d\n", info.block_size);
 		printf("    Blocks per group: %d\n", info.blocks_per_group);
 		printf("    Inodes per group: %d\n", info.inodes_per_group);
 		printf("    Inode size: %d\n", info.inode_size);
 		printf("    Label: %s\n", info.label);
-		printf("    Blocks: %"PRIu64"\n", aux_info.len_blocks);
+		printf("    Blocks: %" PRIu64 "\n", aux_info.len_blocks);
 		printf("    Block groups: %d\n", aux_info.groups);
 		printf("    Reserved block group size: %d\n", info.bg_desc_reserve_blocks);
 		printf("    Used %d/%d inodes and %d/%d blocks\n",

@@ -61,7 +61,7 @@ static int build_sparse_ext(int fd, const char *filename)
 	u8 *block_bitmap;
 	off64_t ret;
 
-	block_bitmap = malloc(info.block_size);
+	block_bitmap = static_cast<u8*>(malloc(info.block_size));
 	if (!block_bitmap)
 		critical_error("failed to allocate block bitmap");
 

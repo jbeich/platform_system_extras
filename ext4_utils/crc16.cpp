@@ -48,7 +48,7 @@ static u16 crc16_tab[] = {
 
 u16 ext4_crc16(u16 crc_in, const void *buf, int size)
 {
-        const u8 *p = buf;
+	const u8 *p = static_cast<const u8*>(buf);
         u16 crc = crc_in;
 
         while (size--)

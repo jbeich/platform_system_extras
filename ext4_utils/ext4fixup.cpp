@@ -544,7 +544,7 @@ static int recurse_dir(int fd, struct ext4_inode *inode, char *dirbuf, int dirsi
 
     num_blocks = dirsize / info.block_size;
 
-    block_list = malloc((num_blocks + 1) * sizeof(*block_list));
+    block_list = static_cast<unsigned long long*>(malloc((num_blocks + 1) * sizeof(*block_list)));
     if (block_list == 0) {
         critical_error("failed to allocate memory for block_list\n");
     }
@@ -628,7 +628,7 @@ static int recurse_dir(int fd, struct ext4_inode *inode, char *dirbuf, int dirsi
                 printf("dir size = %d bytes\n", tmp_dirsize);
             }
 
-            tmp_dirbuf = malloc(tmp_dirsize);
+            tmp_dirbuf = static_cast<char*>(malloc(tmp_dirsize));
             if (tmp_dirbuf == 0) {
                 critical_error("failed to allocate memory for tmp_dirbuf\n");
             }
@@ -756,7 +756,7 @@ int ext4fixup_internal(char *fsdev, int v_flag, int n_flag,
         printf("root dir size = %d bytes\n", dirsize);
     }
 
-    dirbuf = malloc(dirsize);
+    dirbuf = static_cast<char*>(malloc(dirsize));
     if (dirbuf == 0) {
         critical_error("failed to allocate memory for dirbuf\n");
     }
