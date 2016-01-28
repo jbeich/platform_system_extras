@@ -55,7 +55,7 @@ struct xattr_list_element {
 
 struct block_allocation *create_allocation()
 {
-	struct block_allocation *alloc = malloc(sizeof(struct block_allocation));
+	struct block_allocation *alloc = static_cast<struct block_allocation*>malloc(sizeof(struct block_allocation));
 	alloc->list.first = NULL;
 	alloc->list.last = NULL;
 	alloc->oob_list.first = NULL;
