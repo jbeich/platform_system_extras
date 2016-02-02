@@ -22,6 +22,30 @@
       "revId": "fe7b68df61a494c179228512a2cf144cf59f61a5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "31a94060_67c6ec76",
+        "filename": "simpleperf/read_apk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2016-02-02T21:03:01Z",
+      "side": 1,
+      "message": "Thanks for catching that. I have rewritten to eliminate the issue.",
+      "parentUuid": "11f7dc9a_aeba1724",
+      "range": {
+        "startLine": 157,
+        "startChar": 2,
+        "endLine": 158,
+        "endChar": 42
+      },
+      "revId": "fe7b68df61a494c179228512a2cf144cf59f61a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
