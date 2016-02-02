@@ -215,6 +215,30 @@
     },
     {
       "key": {
+        "uuid": "d1be2490_ac536bbb",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 831,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2016-02-02T23:16:21Z",
+      "side": 1,
+      "message": "OK, I\u0027ve updated the comment to incorporate the new language. Let me know if it looks ok.",
+      "parentUuid": "3115c084_47743064",
+      "range": {
+        "startLine": 831,
+        "startChar": 10,
+        "endLine": 831,
+        "endChar": 53
+      },
+      "revId": "f6d7bb51870194c16713cfe0459bcd00d1aac564",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "548b02a3_558b8749",
         "filename": "simpleperf/cmd_record.cpp",
         "patchSetId": 1
