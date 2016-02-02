@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "11f7dc9a_aeba1724",
+        "filename": "simpleperf/read_apk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-02-02T20:20:54Z",
+      "side": 1,
+      "message": "This is the same mistake I have made several times in simpleperf. You use std::vector\u003cEmbeddedElf\u003e to store EmbeddedElfs, and store its pointer in cache_[ami]. When the vector wants to increase its memory, old pointers are no longer valid. I recommend using std::vector\u003cstd::unique_ptr\u003cEmbeddedElf\u003e\u003e or std::map\u003cApkOffset, std::unique_ptr\u003cEmbeddedElf\u003e\u003e.",
+      "range": {
+        "startLine": 157,
+        "startChar": 2,
+        "endLine": 158,
+        "endChar": 42
+      },
+      "revId": "fe7b68df61a494c179228512a2cf144cf59f61a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
