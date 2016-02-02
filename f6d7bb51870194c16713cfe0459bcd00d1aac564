@@ -167,6 +167,30 @@
     },
     {
       "key": {
+        "uuid": "f1308814_e5fd7084",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 831,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2016-02-02T21:03:01Z",
+      "side": 1,
+      "message": "I will add a comment. \n\nI think your earlier note about pgoff not being sane any more makes sense-- I will add code to update the pgoff so that it is relative to the start of the embedded ELF as opposed to the start of the APK. Let me know if you have concerns about that.",
+      "parentUuid": "b121b0e4_0b7a4151",
+      "range": {
+        "startLine": 831,
+        "startChar": 10,
+        "endLine": 831,
+        "endChar": 53
+      },
+      "revId": "f6d7bb51870194c16713cfe0459bcd00d1aac564",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "548b02a3_558b8749",
         "filename": "simpleperf/cmd_record.cpp",
         "patchSetId": 1
