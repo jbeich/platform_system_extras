@@ -191,6 +191,30 @@
     },
     {
       "key": {
+        "uuid": "3115c084_47743064",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 831,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-02-02T21:43:59Z",
+      "side": 1,
+      "message": "LGTM. If possible, I prefer the comment contains something like this: We need to change r.filename because we want to report correct shared library name even when we don\u0027t have the apk file.",
+      "parentUuid": "f1308814_e5fd7084",
+      "range": {
+        "startLine": 831,
+        "startChar": 10,
+        "endLine": 831,
+        "endChar": 53
+      },
+      "revId": "f6d7bb51870194c16713cfe0459bcd00d1aac564",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "548b02a3_558b8749",
         "filename": "simpleperf/cmd_record.cpp",
         "patchSetId": 1
