@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "91b82ca8_aacb4f74",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 821,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2016-02-02T16:01:41Z",
+      "side": 1,
+      "message": "Fixed.",
+      "parentUuid": "f465d6c4_1042f1ee",
+      "range": {
+        "startLine": 821,
+        "startChar": 24,
+        "endLine": 821,
+        "endChar": 52
+      },
+      "revId": "f6d7bb51870194c16713cfe0459bcd00d1aac564",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5422228b_d1e31756",
         "filename": "simpleperf/cmd_record.cpp",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2016-02-02T05:00:28Z",
       "side": 1,
       "message": "map-\u003epgoff !\u003d 0u ?",
+      "range": {
+        "startLine": 827,
+        "startChar": 10,
+        "endLine": 827,
+        "endChar": 20
+      },
+      "revId": "f6d7bb51870194c16713cfe0459bcd00d1aac564",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "11a43c86_060b7c03",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 827,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2016-02-02T16:01:41Z",
+      "side": 1,
+      "message": "Fixed",
+      "parentUuid": "5422228b_d1e31756",
       "range": {
         "startLine": 827,
         "startChar": 10,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "91b82ca8_8ae76bff",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 831,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2016-02-02T16:01:41Z",
+      "side": 1,
+      "message": "If we leave the MMAP records as is (don\u0027t update the filename) then it seems to me that we would not always be able to report the library name once the perf.data has been uploaded to the host. An alternative would be to show just the APK + offset in the host report, e.g.\n\n  Overhead  Command          Pid    Tid    Shared Object\n  90.22%    b_open_from_apk  19066  19066  mumble.apk ! \u003clibrary @ offset 0x91000 \u003e\n   4.85%    b_open_from_apk  19066  19066  mumble.apk ! \u003clibrary @ offset 0x95000 \u003e\n\nIt seems to me that rewriting the filename might be a bit more human-friendly. I suppose I am ok with either way of doing it-- let me know what your preference is.",
+      "parentUuid": "14950abd_079719bd",
+      "range": {
+        "startLine": 831,
+        "startChar": 10,
+        "endLine": 831,
+        "endChar": 53
+      },
+      "revId": "f6d7bb51870194c16713cfe0459bcd00d1aac564",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "548b02a3_558b8749",
         "filename": "simpleperf/cmd_record.cpp",
         "patchSetId": 1
@@ -82,6 +154,30 @@
       "writtenOn": "2016-02-02T05:00:28Z",
       "side": 1,
       "message": "so embedded_dso_table_ is used to store both embedded elf and empty case, and cache_ in ApkInspectorImpl stores only the embedded elf case. Can we combine the two caches, and store only in ApkInspectorImpl? Because that will make cmd_record.cpp simpler.",
+      "range": {
+        "startLine": 846,
+        "startChar": 0,
+        "endLine": 850,
+        "endChar": 48
+      },
+      "revId": "f6d7bb51870194c16713cfe0459bcd00d1aac564",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "11a43c86_0644dc31",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 850,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2016-02-02T16:01:41Z",
+      "side": 1,
+      "message": "Fixed.",
+      "parentUuid": "548b02a3_558b8749",
       "range": {
         "startLine": 846,
         "startChar": 0,
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "31d060e4_8c93077d",
+        "filename": "simpleperf/read_apk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2016-02-02T16:01:41Z",
+      "side": 1,
+      "message": "Removed.",
+      "parentUuid": "9489faaa_7e64e821",
+      "range": {
+        "startLine": 55,
+        "startChar": 0,
+        "endLine": 55,
+        "endChar": 23
+      },
+      "revId": "f6d7bb51870194c16713cfe0459bcd00d1aac564",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f465d6c4_5088e994",
         "filename": "simpleperf/read_apk.cpp",
         "patchSetId": 1
@@ -128,6 +248,30 @@
       "writtenOn": "2016-02-02T05:00:28Z",
       "side": 1,
       "message": "not needed. And the whole function can be like below?\nreturn std::string(reinterpret_cast\u003cchar*\u003e(zstring.name), zstring.name_length);\nAs there is only one user of unpack_zipstring, shall we remove the function?",
+      "range": {
+        "startLine": 85,
+        "startChar": 2,
+        "endLine": 85,
+        "endChar": 37
+      },
+      "revId": "f6d7bb51870194c16713cfe0459bcd00d1aac564",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "51c15418_7041ce92",
+        "filename": "simpleperf/read_apk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2016-02-02T16:01:41Z",
+      "side": 1,
+      "message": "Fixed.",
+      "parentUuid": "f465d6c4_5088e994",
       "range": {
         "startLine": 85,
         "startChar": 2,
@@ -163,6 +307,30 @@
     },
     {
       "key": {
+        "uuid": "91b82ca8_aae4affa",
+        "filename": "simpleperf/read_apk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2016-02-02T16:01:41Z",
+      "side": 1,
+      "message": "Fixed",
+      "parentUuid": "9462dabe_e3ce9d3b",
+      "range": {
+        "startLine": 122,
+        "startChar": 7,
+        "endLine": 122,
+        "endChar": 8
+      },
+      "revId": "f6d7bb51870194c16713cfe0459bcd00d1aac564",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b486fe94_bd46785a",
         "filename": "simpleperf/read_apk.cpp",
         "patchSetId": 1
@@ -174,6 +342,30 @@
       "writtenOn": "2016-02-02T05:00:28Z",
       "side": 1,
       "message": "void *iteration_cookie ?",
+      "range": {
+        "startLine": 130,
+        "startChar": 2,
+        "endLine": 130,
+        "endChar": 25
+      },
+      "revId": "f6d7bb51870194c16713cfe0459bcd00d1aac564",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b1b530ae_e85953dd",
+        "filename": "simpleperf/read_apk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2016-02-02T16:01:41Z",
+      "side": 1,
+      "message": "I picked this name based on the code I found in system/core/libziparchive/zip_archive_test.cc ... I can change it to something else if there is a better name?",
+      "parentUuid": "b486fe94_bd46785a",
       "range": {
         "startLine": 130,
         "startChar": 2,
@@ -209,6 +401,30 @@
     },
     {
       "key": {
+        "uuid": "71af3862_06793a0b",
+        "filename": "simpleperf/read_apk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2016-02-02T16:01:41Z",
+      "side": 1,
+      "message": "Fixed",
+      "parentUuid": "349a0eef_542382e5",
+      "range": {
+        "startLine": 131,
+        "startChar": 48,
+        "endLine": 131,
+        "endChar": 58
+      },
+      "revId": "f6d7bb51870194c16713cfe0459bcd00d1aac564",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "14950abd_a73665b5",
         "filename": "simpleperf/read_apk.cpp",
         "patchSetId": 1
@@ -220,6 +436,30 @@
       "writtenOn": "2016-02-02T05:00:28Z",
       "side": 1,
       "message": "PLOG(ERROR)?",
+      "range": {
+        "startLine": 155,
+        "startChar": 4,
+        "endLine": 155,
+        "endChar": 14
+      },
+      "revId": "f6d7bb51870194c16713cfe0459bcd00d1aac564",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "91b82ca8_6a18f7c4",
+        "filename": "simpleperf/read_apk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2016-02-02T16:01:41Z",
+      "side": 1,
+      "message": "Fixed",
+      "parentUuid": "14950abd_a73665b5",
       "range": {
         "startLine": 155,
         "startChar": 4,
@@ -255,6 +495,30 @@
     },
     {
       "key": {
+        "uuid": "d1be2490_a9059d9b",
+        "filename": "simpleperf/read_apk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2016-02-02T16:01:41Z",
+      "side": 1,
+      "message": "Added an error report",
+      "parentUuid": "749006cb_59a10413",
+      "range": {
+        "startLine": 158,
+        "startChar": 38,
+        "endLine": 158,
+        "endChar": 39
+      },
+      "revId": "f6d7bb51870194c16713cfe0459bcd00d1aac564",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "548b02a3_d5f23702",
         "filename": "simpleperf/read_apk.h",
         "patchSetId": 1
@@ -266,6 +530,30 @@
       "writtenOn": "2016-02-02T05:00:28Z",
       "side": 1,
       "message": "bionic team prefers using code style like below:\nif (res1 !\u003d 0) {\n  return res1 \u003c 0;\n}",
+      "range": {
+        "startLine": 70,
+        "startChar": 4,
+        "endLine": 70,
+        "endChar": 34
+      },
+      "revId": "f6d7bb51870194c16713cfe0459bcd00d1aac564",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f1308814_e21ba649",
+        "filename": "simpleperf/read_apk.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2016-02-02T16:01:41Z",
+      "side": 1,
+      "message": "Fixed",
+      "parentUuid": "548b02a3_d5f23702",
       "range": {
         "startLine": 70,
         "startChar": 4,
@@ -301,6 +589,30 @@
     },
     {
       "key": {
+        "uuid": "51c15418_b0565653",
+        "filename": "simpleperf/read_apk.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2016-02-02T16:01:41Z",
+      "side": 1,
+      "message": "Fixed",
+      "parentUuid": "d468d2a0_67e291c1",
+      "range": {
+        "startLine": 72,
+        "startChar": 4,
+        "endLine": 72,
+        "endChar": 34
+      },
+      "revId": "f6d7bb51870194c16713cfe0459bcd00d1aac564",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "349a0eef_544c62c9",
         "filename": "simpleperf/read_apk.h",
         "patchSetId": 1
@@ -312,6 +624,30 @@
       "writtenOn": "2016-02-02T05:00:28Z",
       "side": 1,
       "message": "const std::string\u0026 ?",
+      "range": {
+        "startLine": 88,
+        "startChar": 40,
+        "endLine": 88,
+        "endChar": 51
+      },
+      "revId": "f6d7bb51870194c16713cfe0459bcd00d1aac564",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "91b82ca8_0a0dbb85",
+        "filename": "simpleperf/read_apk.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2016-02-02T16:01:41Z",
+      "side": 1,
+      "message": "Fixed",
+      "parentUuid": "349a0eef_544c62c9",
       "range": {
         "startLine": 88,
         "startChar": 40,
@@ -347,6 +683,30 @@
     },
     {
       "key": {
+        "uuid": "51c15418_5025b2eb",
+        "filename": "simpleperf/read_elf.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2016-02-02T16:01:41Z",
+      "side": 1,
+      "message": "Hmm. I am confused, since when I look at my build, I can see read_elf.cpp being compiled correctly with   x86_64-w64-mingw32-g++.   Are you sure that open() is not allowed?",
+      "parentUuid": "d468d2a0_a703c924",
+      "range": {
+        "startLine": 49,
+        "startChar": 8,
+        "endLine": 49,
+        "endChar": 53
+      },
+      "revId": "f6d7bb51870194c16713cfe0459bcd00d1aac564",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "349a0eef_d4ecf2b3",
         "filename": "simpleperf/read_elf.cpp",
         "patchSetId": 1
@@ -370,6 +730,30 @@
     },
     {
       "key": {
+        "uuid": "51c15418_3024a6ed",
+        "filename": "simpleperf/read_elf.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2016-02-02T16:01:41Z",
+      "side": 1,
+      "message": "Fixed.",
+      "parentUuid": "349a0eef_d4ecf2b3",
+      "range": {
+        "startLine": 186,
+        "startChar": 4,
+        "endLine": 186,
+        "endChar": 17
+      },
+      "revId": "f6d7bb51870194c16713cfe0459bcd00d1aac564",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9489faaa_3ee500c8",
         "filename": "simpleperf/record.cpp",
         "patchSetId": 1
@@ -381,6 +765,30 @@
       "writtenOn": "2016-02-02T05:00:28Z",
       "side": 1,
       "message": "If this function is really needed, object oriented way is preferred, like SampleRecord::AdjustSizeBasedOnData().",
+      "range": {
+        "startLine": 635,
+        "startChar": 5,
+        "endLine": 635,
+        "endChar": 29
+      },
+      "revId": "f6d7bb51870194c16713cfe0459bcd00d1aac564",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "51c15418_508e121e",
+        "filename": "simpleperf/record.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 635,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2016-02-02T16:01:41Z",
+      "side": 1,
+      "message": "I had the same thought when I was writing the code, but couldn\u0027t follow through -- in CreateMmapRecord() when the original size calculation is done, it inspects the contents of \"attr\", which is no longer available once I come to the point where I want to update it. Admittedly the \"record.sample_id.CreateContent(attr)\" call on line 629 is always going to return 0 for mmap records at the moment, but I wasn\u0027t sure if this would hold fast in the future. Your thoughts?",
+      "parentUuid": "9489faaa_3ee500c8",
       "range": {
         "startLine": 635,
         "startChar": 5,
