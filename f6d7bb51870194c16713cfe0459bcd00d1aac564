@@ -143,6 +143,30 @@
     },
     {
       "key": {
+        "uuid": "b121b0e4_0b7a4151",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 831,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-02-02T20:20:54Z",
+      "side": 1,
+      "message": "I see. You need to know the library name in apk file without having the apk. Then I agree with your initial behavior. Can you add a comment here? So I or others will not attempt to change that.",
+      "parentUuid": "91b82ca8_8ae76bff",
+      "range": {
+        "startLine": 831,
+        "startChar": 10,
+        "endLine": 831,
+        "endChar": 53
+      },
+      "revId": "f6d7bb51870194c16713cfe0459bcd00d1aac564",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "548b02a3_558b8749",
         "filename": "simpleperf/cmd_record.cpp",
         "patchSetId": 1
@@ -695,6 +719,30 @@
       "side": 1,
       "message": "Hmm. I am confused, since when I look at my build, I can see read_elf.cpp being compiled correctly with   x86_64-w64-mingw32-g++.   Are you sure that open() is not allowed?",
       "parentUuid": "d468d2a0_a703c924",
+      "range": {
+        "startLine": 49,
+        "startChar": 8,
+        "endLine": 49,
+        "endChar": 53
+      },
+      "revId": "f6d7bb51870194c16713cfe0459bcd00d1aac564",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "11f7dc9a_0ef7ebf3",
+        "filename": "simpleperf/read_elf.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-02-02T20:20:54Z",
+      "side": 1,
+      "message": "sorry, I forgot to verify my comment. It works. no need to change.",
+      "parentUuid": "51c15418_5025b2eb",
       "range": {
         "startLine": 49,
         "startChar": 8,
