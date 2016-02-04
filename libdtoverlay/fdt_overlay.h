@@ -1,3 +1,4 @@
+// From http://people.freebsd.org/~gonzo/arm/patches/fdt-overlays-20150723.diff
 /*-
  * Copyright (c) 2015 Oleksandr Tymoshenko <gonzo@FreeBSD.org>
  * All rights reserved.
@@ -29,6 +30,22 @@
 #ifndef FDT_OVERLAY_H
 #define FDT_OVERLAY_H
 
-int fdt_overlay_apply(void *main_fdtp, void *overlay_fdtp, size_t overlay_length);
+#include "libfdt.h"
+
+/* Given an FDT and a buffer containing the contents of a .dtbo file,
+ * it creates a new FDT containing the applied overlay in a
+ * malloc'd buffer and returns it, or NULL in case of error.
+ * In case of error, it may printf() diagnostic messages.
+ * It is allowed to modify the buffers passed in.
+ * It does not free the buffers passed in.
+ */
+struct fdt_header *apply_overlay(struct fdt_header *fdtp, size_t fdt_size, void *overlay, size_t overlay_size);
+
+/* Given a buffer in RAM containing the contents of a .dtb file,
+ * it initializes an FDT in-place and returns a pointer to the
+ * given buffer, or NULL in case of error.
+ * In case of error, it may printf() diagnostic messages.
+ */
+struct fdt_header *fdt_install_blob(void *blob, size_t blob_size);
 
 #endif /* FDT_OVERLAY_H */
