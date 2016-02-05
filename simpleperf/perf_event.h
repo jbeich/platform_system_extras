@@ -17,10 +17,18 @@
 #ifndef SIMPLE_PERF_PERF_EVENT_H_
 #define SIMPLE_PERF_PERF_EVENT_H_
 
-#if defined(USE_BIONIC_UAPI_HEADERS)
-#include <uapi/linux/perf_event.h>
-#else
-#include <linux/perf_event.h>
-#endif
+#include <stdint.h>
+
+typedef uint8_t __u8;
+typedef uint16_t __u16;
+typedef uint32_t __u32;
+typedef unsigned long long __u64;
+
+typedef int8_t __s8;
+typedef int16_t __s16;
+typedef int32_t __s32;
+typedef long long __s64;
+
+#include "kernel-headers/perf_event.h"
 
 #endif  // SIMPLE_PERF_PERF_EVENT_H_
