@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "fdc21c56_f42418f5",
+        "filename": "simpleperf/cpu_hotplug_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-02-09T03:14:43Z",
+      "side": 1,
+      "message": "That is fine. But I didn\u0027t see this function repeated in other places except in simpleperf/gtest_main.cpp (I separate the two because I want to handle -t in gtest_main.cpp).",
+      "parentUuid": "9d5cc065_592fe384",
+      "range": {
+        "startLine": 256,
+        "startChar": 0,
+        "endLine": 260,
+        "endChar": 1
+      },
+      "revId": "480a9ecfc6b6eb3bf9581af3bd3000ec6c419444",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fd669c35_d4be1c86",
         "filename": "simpleperf/gtest_main.cpp",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2016-02-09T02:30:52Z",
       "side": 1,
       "message": "where does this come from?",
+      "range": {
+        "startLine": 30,
+        "startChar": 25,
+        "endLine": 30,
+        "endChar": 27
+      },
+      "revId": "480a9ecfc6b6eb3bf9581af3bd3000ec6c419444",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ddbd58cb_533de415",
+        "filename": "simpleperf/gtest_main.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-02-09T03:14:43Z",
+      "side": 1,
+      "message": "like in system/core/libziparchive, I want to use files in testdata/ to help testing. I need to pass an argument to tell where is the testdata/ directory. And we should run unit tests like this:\n#simpleperf_unit_test -t system/extras/simpleperf/testdata\n\nDoes it sound ok? Previously thanm@ uses Android.mk to download testdata/* to device, but it doesn\u0027t help host testing very well.\n\nI changed error message to make it clearer.",
+      "parentUuid": "fd669c35_d4be1c86",
       "range": {
         "startLine": 30,
         "startChar": 25,
