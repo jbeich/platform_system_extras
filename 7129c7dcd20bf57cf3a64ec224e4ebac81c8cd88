@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1dd0d03a_69260d97",
+        "filename": "tests/kernel.config/pstore_test.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1015340
+      },
+      "writtenOn": "2016-02-10T23:10:51Z",
+      "side": 1,
+      "message": "This won\u0027t be accessible because of SELinux restrictions.",
+      "range": {
+        "startLine": 26,
+        "startChar": 2,
+        "endLine": 26,
+        "endChar": 63
+      },
+      "revId": "7129c7dcd20bf57cf3a64ec224e4ebac81c8cd88",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
