@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bde6e426_66c3f672",
+        "filename": "simpleperf/Android.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2016-02-11T13:44:56Z",
+      "side": 1,
+      "message": "simpleperf is in /system/xbin -- should simpleperf_static also go into /system/xbin?",
+      "range": {
+        "startLine": 137,
+        "startChar": 0,
+        "endLine": 137,
+        "endChar": 29
+      },
+      "revId": "6d8c8342eefa962c6eff29bb7f589487782de572",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
