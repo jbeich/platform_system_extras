@@ -22,6 +22,30 @@
       "revId": "6d8c8342eefa962c6eff29bb7f589487782de572",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bd0fc4b0_de66e5f8",
+        "filename": "simpleperf/Android.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2016-02-11T16:42:15Z",
+      "side": 1,
+      "message": "we should probably move simpleperf to /system/bin. (simpleperf_static won\u0027t be shipping on the device, but there is an /sbin.)",
+      "parentUuid": "bde6e426_66c3f672",
+      "range": {
+        "startLine": 137,
+        "startChar": 0,
+        "endLine": 137,
+        "endChar": 29
+      },
+      "revId": "6d8c8342eefa962c6eff29bb7f589487782de572",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
