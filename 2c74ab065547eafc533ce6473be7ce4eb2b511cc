@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7d09ccae_925059d9",
+        "filename": "tests/kernel.config/AndroidTest.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1016663
+      },
+      "writtenOn": "2016-02-12T03:11:19Z",
+      "side": 1,
+      "message": "Not necessary if the runtime is less than a minute",
+      "range": {
+        "startLine": 25,
+        "startChar": 43,
+        "endLine": 25,
+        "endChar": 49
+      },
+      "revId": "2c74ab065547eafc533ce6473be7ce4eb2b511cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
