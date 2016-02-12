@@ -806,6 +806,9 @@ int ext4fixup_internal(char *fsdev, int v_flag, int n_flag,
     }
 
     close(fd);
+    if (dirbuf) {
+        free(dirbuf);
+    }
 
     return 0;
 }
