@@ -26,6 +26,7 @@
 #include <android-base/logging.h>
 
 #include "environment.h"
+#include "read_apk.h"
 #include "read_elf.h"
 #include "utils.h"
 
@@ -199,9 +200,14 @@ bool Dso::Load() {
     case DSO_KERNEL_MODULE:
       result = LoadKernelModule();
       break;
-    case DSO_ELF_FILE:
-      result = LoadElfFile();
+    case DSO_ELF_FILE: {
+      if (path_.find('!') != std::string::npos) {
+        result = LoadEmbeddedElfFile();
+      } else {
+        result = LoadElfFile();
+      }
       break;
+    }
   }
   if (result) {
     std::sort(symbols_.begin(), symbols_.end(), SymbolComparator());
@@ -303,6 +309,18 @@ bool Dso::LoadElfFile() {
         std::bind(ElfFileSymbolCallback, std::placeholders::_1, this, SymbolFilterForDso));
   }
   return loaded;
+}
+
+bool Dso::LoadEmbeddedElfFile() {
+  std::string path = GetAccessiblePath();
+  BuildId build_id = GetExpectedBuildId(path);
+  size_t pos = path.find('!');
+  CHECK_NE(pos, std::string::npos);
+  std::string apk_path = path.substr(0, pos);
+  std::string elf_filename = path.substr(pos + 1);
+  return ParseSymbolsFromApkFile(apk_path, elf_filename, build_id,
+                                 std::bind(ElfFileSymbolCallback, std::placeholders::_1,
+                                           this, SymbolFilterForDso));
 }
 
 void Dso::InsertSymbol(const Symbol& symbol) {
