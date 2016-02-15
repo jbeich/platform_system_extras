@@ -16,8 +16,12 @@
 
 #include <gtest/gtest.h>
 
+#include <android-base/file.h>
+#include <android-base/test_utils.h>
+
 #include "command.h"
 #include "event_selection_set.h"
+#include "get_test_data.h"
 
 static std::unique_ptr<Command> RecordCmd() {
   return CreateCommandInstance("record");
@@ -101,4 +105,14 @@ TEST(report_cmd, dwarf_callgraph) {
     GTEST_LOG_(INFO)
         << "This test does nothing as dwarf callchain sampling is not supported on this device.";
   }
+}
+
+TEST(report_cmd, report_symbols_of_nativelib_in_apk) {
+  TemporaryFile tmp_file;
+  ASSERT_TRUE(ReportCmd()->Run({"-i", GetTestData(NATIVELIB_IN_APK_PERF_DATA),
+                                "--symfs", GetTestDataDir(), "-o", tmp_file.path}));
+  std::string content;
+  ASSERT_TRUE(android::base::ReadFileToString(tmp_file.path, &content));
+  ASSERT_NE(content.find("has_embedded_native_libs.apk!lib/arm64-v8a/libhello-jni.so"), std::string::npos);
+  ASSERT_NE(content.find("GlobalFunc"), std::string::npos);
 }

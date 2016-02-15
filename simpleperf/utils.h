@@ -22,6 +22,8 @@
 #include <string>
 #include <vector>
 
+#include <android-base/macros.h>
+
 #define ALIGN(value, alignment) (((value) + (alignment)-1) & ~((alignment)-1))
 
 #ifdef _WIN32
@@ -50,6 +52,26 @@ class OneTimeFreeAllocator {
   std::vector<char*> v_;
   char* cur_;
   char* end_;
+};
+
+class FileHelper {
+ public:
+  FileHelper();
+  explicit FileHelper(const std::string& filename);
+  ~FileHelper();
+
+  explicit operator bool() const {
+    return fd_ != -1;
+  }
+
+  int fd() const {
+    return fd_;
+  }
+
+ private:
+  int fd_;
+
+  DISALLOW_COPY_AND_ASSIGN(FileHelper);
 };
 
 template <class T>
