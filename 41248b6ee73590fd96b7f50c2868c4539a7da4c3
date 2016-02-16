@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "bd82644f_55975ec0",
+        "filename": "simpleperf/build_id.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-02-16T21:41:12Z",
+      "side": 1,
+      "message": "comment added.",
+      "parentUuid": "fdce9ca2_05853530",
+      "revId": "41248b6ee73590fd96b7f50c2868c4539a7da4c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3dacb4b4_793380d7",
         "filename": "simpleperf/cmd_record.cpp",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2016-02-16T20:35:14Z",
       "side": 1,
       "message": "In the previous version, simpleperf would only dig into the contents of an APK file if there was actually a sample attributed to some MMAP\u0027d section in the APK. Now it looks as though it opens/inspects the APK as soon as it sees the MMAP record...  could this increase overhead?  I don\u0027t know enough about how the kernel PMU stuff works here -- if the kernel is only reporting MMAPs for things that have samples, then it would not be an issue.",
+      "revId": "41248b6ee73590fd96b7f50c2868c4539a7da4c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bd82644f_35473a1d",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 642,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-02-16T21:41:12Z",
+      "side": 1,
+      "message": "I think it is the same as before. Previously we checked Apk file for each MmapRecord, as ProcessRecord-\u003eCollectHitFileInfo-\u003eTestForEmbeddedElf. The kernel reports mmaps whenever there is a do_mmap() syscall. I think we can keep current simple logic unless there is a real need to optimize this.",
+      "parentUuid": "3dacb4b4_793380d7",
       "revId": "41248b6ee73590fd96b7f50c2868c4539a7da4c3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
