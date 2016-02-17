@@ -1,0 +1,279 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7d8c6c87_a4ff7a4e",
+        "filename": "simpleperf/build_id.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1041673
+      },
+      "writtenOn": "2016-02-17T18:52:57Z",
+      "side": 1,
+      "message": "else? I am not sure if this method is supposed to handle invalid strings..",
+      "revId": "56801f887d4f3c89fc59429416f9a05ee7d19e86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9d85a05b_4044783e",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 655,
+      "author": {
+        "id": 1041673
+      },
+      "writtenOn": "2016-02-17T18:52:57Z",
+      "side": 1,
+      "message": "remove the code duplication in this method? template function to set record fields maybe?",
+      "revId": "56801f887d4f3c89fc59429416f9a05ee7d19e86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bd82644f_a6553ecb",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 662,
+      "author": {
+        "id": 1041673
+      },
+      "writtenOn": "2016-02-17T18:52:57Z",
+      "side": 1,
+      "message": "!/",
+      "range": {
+        "startLine": 662,
+        "startChar": 44,
+        "endLine": 662,
+        "endChar": 45
+      },
+      "revId": "56801f887d4f3c89fc59429416f9a05ee7d19e86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bd82644f_4647b21b",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 674,
+      "author": {
+        "id": 1041673
+      },
+      "writtenOn": "2016-02-17T18:52:57Z",
+      "side": 1,
+      "message": "!/",
+      "range": {
+        "startLine": 674,
+        "startChar": 35,
+        "endLine": 674,
+        "endChar": 36
+      },
+      "revId": "56801f887d4f3c89fc59429416f9a05ee7d19e86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9d85a05b_807340b7",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 685,
+      "author": {
+        "id": 1041673
+      },
+      "writtenOn": "2016-02-17T18:52:57Z",
+      "side": 1,
+      "message": "!/",
+      "range": {
+        "startLine": 685,
+        "startChar": 35,
+        "endLine": 685,
+        "endChar": 36
+      },
+      "revId": "56801f887d4f3c89fc59429416f9a05ee7d19e86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fd7f7c1f_be7217ea",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 818,
+      "author": {
+        "id": 1041673
+      },
+      "writtenOn": "2016-02-17T18:52:57Z",
+      "side": 1,
+      "message": "\"!/\"",
+      "range": {
+        "startLine": 818,
+        "startChar": 31,
+        "endLine": 818,
+        "endChar": 34
+      },
+      "revId": "56801f887d4f3c89fc59429416f9a05ee7d19e86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bd82644f_26a14e1c",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 821,
+      "author": {
+        "id": 1041673
+      },
+      "writtenOn": "2016-02-17T18:52:57Z",
+      "side": 1,
+      "message": "2",
+      "range": {
+        "startLine": 821,
+        "startChar": 55,
+        "endLine": 821,
+        "endChar": 56
+      },
+      "revId": "56801f887d4f3c89fc59429416f9a05ee7d19e86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bd82644f_867b5a50",
+        "filename": "simpleperf/cmd_report_test.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1041673
+      },
+      "writtenOn": "2016-02-17T18:52:57Z",
+      "side": 1,
+      "message": "!/",
+      "range": {
+        "startLine": 116,
+        "startChar": 54,
+        "endLine": 116,
+        "endChar": 55
+      },
+      "revId": "56801f887d4f3c89fc59429416f9a05ee7d19e86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fd7f7c1f_3ed947f8",
+        "filename": "simpleperf/dso.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1041673
+      },
+      "writtenOn": "2016-02-17T18:52:57Z",
+      "side": 1,
+      "message": "\"!/\"",
+      "range": {
+        "startLine": 204,
+        "startChar": 21,
+        "endLine": 204,
+        "endChar": 24
+      },
+      "revId": "56801f887d4f3c89fc59429416f9a05ee7d19e86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bd82644f_26786e52",
+        "filename": "simpleperf/dso.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 1041673
+      },
+      "writtenOn": "2016-02-17T18:52:57Z",
+      "side": 1,
+      "message": "\"!/\"",
+      "range": {
+        "startLine": 317,
+        "startChar": 25,
+        "endLine": 317,
+        "endChar": 28
+      },
+      "revId": "56801f887d4f3c89fc59429416f9a05ee7d19e86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bd82644f_06d68a6f",
+        "filename": "simpleperf/read_apk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1041673
+      },
+      "writtenOn": "2016-02-17T18:52:57Z",
+      "side": 1,
+      "message": "return plain pointer here? there are no advantages in using unique_ptr\u003c\u003e as return type.",
+      "range": {
+        "startLine": 129,
+        "startChar": 0,
+        "endLine": 129,
+        "endChar": 28
+      },
+      "revId": "56801f887d4f3c89fc59429416f9a05ee7d19e86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fd2a1c13_0ed0df41",
+        "filename": "simpleperf/read_elf.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1041673
+      },
+      "writtenOn": "2016-02-17T18:52:57Z",
+      "side": 1,
+      "message": "Is there an advantage in having separate implementation for 0 offset? is it significantly faster?",
+      "revId": "56801f887d4f3c89fc59429416f9a05ee7d19e86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fd7f7c1f_fe0c1f1d",
+        "filename": "simpleperf/read_elf.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1041673
+      },
+      "writtenOn": "2016-02-17T18:52:57Z",
+      "side": 1,
+      "message": "call the function below with 0 offset to avoid code duplication?",
+      "revId": "56801f887d4f3c89fc59429416f9a05ee7d19e86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
