@@ -154,6 +154,30 @@
     },
     {
       "key": {
+        "uuid": "1d8b70a4_d166d4f8",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 662,
+      "author": {
+        "id": 1041673
+      },
+      "writtenOn": "2016-02-18T03:28:24Z",
+      "side": 1,
+      "message": "mostly for uniformity: http://developer.android.com/reference/java/net/JarURLConnection.html",
+      "parentUuid": "dd7ab832_176f978f",
+      "range": {
+        "startLine": 662,
+        "startChar": 44,
+        "endLine": 662,
+        "endChar": 45
+      },
+      "revId": "56801f887d4f3c89fc59429416f9a05ee7d19e86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bd82644f_4647b21b",
         "filename": "simpleperf/cmd_record.cpp",
         "patchSetId": 2
