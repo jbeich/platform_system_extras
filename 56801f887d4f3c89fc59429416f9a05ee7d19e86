@@ -178,6 +178,30 @@
     },
     {
       "key": {
+        "uuid": "dd9478c3_c16c460c",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 662,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-02-18T06:10:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1d8b70a4_d166d4f8",
+      "range": {
+        "startLine": 662,
+        "startChar": 44,
+        "endLine": 662,
+        "endChar": 45
+      },
+      "revId": "56801f887d4f3c89fc59429416f9a05ee7d19e86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bd82644f_4647b21b",
         "filename": "simpleperf/cmd_record.cpp",
         "patchSetId": 2
@@ -189,6 +213,30 @@
       "writtenOn": "2016-02-17T18:52:57Z",
       "side": 1,
       "message": "!/",
+      "range": {
+        "startLine": 674,
+        "startChar": 35,
+        "endLine": 674,
+        "endChar": 36
+      },
+      "revId": "56801f887d4f3c89fc59429416f9a05ee7d19e86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5d8968a7_a5482a5c",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 674,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-02-18T06:10:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bd82644f_4647b21b",
       "range": {
         "startLine": 674,
         "startChar": 35,
@@ -224,6 +272,30 @@
     },
     {
       "key": {
+        "uuid": "fd993cfa_e2e8629f",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 685,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-02-18T06:10:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9d85a05b_807340b7",
+      "range": {
+        "startLine": 685,
+        "startChar": 35,
+        "endLine": 685,
+        "endChar": 36
+      },
+      "revId": "56801f887d4f3c89fc59429416f9a05ee7d19e86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fd7f7c1f_be7217ea",
         "filename": "simpleperf/cmd_record.cpp",
         "patchSetId": 2
@@ -247,6 +319,30 @@
     },
     {
       "key": {
+        "uuid": "9d6840a0_5fb563f8",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 818,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-02-18T06:10:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fd7f7c1f_be7217ea",
+      "range": {
+        "startLine": 818,
+        "startChar": 31,
+        "endLine": 818,
+        "endChar": 34
+      },
+      "revId": "56801f887d4f3c89fc59429416f9a05ee7d19e86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bd82644f_26a14e1c",
         "filename": "simpleperf/cmd_record.cpp",
         "patchSetId": 2
@@ -258,6 +354,30 @@
       "writtenOn": "2016-02-17T18:52:57Z",
       "side": 1,
       "message": "2",
+      "range": {
+        "startLine": 821,
+        "startChar": 55,
+        "endLine": 821,
+        "endChar": 56
+      },
+      "revId": "56801f887d4f3c89fc59429416f9a05ee7d19e86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9d7f604c_6797066f",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 821,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-02-18T06:10:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bd82644f_26a14e1c",
       "range": {
         "startLine": 821,
         "startChar": 55,
@@ -468,6 +588,24 @@
       "side": 1,
       "message": "forgot about this function?",
       "parentUuid": "9d85a05b_8bcfe175",
+      "revId": "56801f887d4f3c89fc59429416f9a05ee7d19e86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bd6504c6_e0da1693",
+        "filename": "simpleperf/read_elf.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-02-18T06:10:09Z",
+      "side": 1,
+      "message": "Done. I thought it was the same thing as comment above.",
+      "parentUuid": "5d8968a7_a5acaa6b",
       "revId": "56801f887d4f3c89fc59429416f9a05ee7d19e86",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
