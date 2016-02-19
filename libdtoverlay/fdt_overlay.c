@@ -29,12 +29,10 @@
 
 #include "fdt_overlay.h"
 
-#include <sys/cdefs.h>
-// CJP __FBSDID("$FreeBSD$");
-
 // CJP #include <stand.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <errno.h>
 
 
 // CJP from BSD/sys/boot/common/commands.c
@@ -503,11 +501,13 @@ struct fdt_header *apply_overlay(struct fdt_header *fdtp, size_t fdt_size, void 
 
   if (overlay_size < 8 || overlay_size != fdt_totalsize(overlay)) {
     printf("Bad overlay size!\n");
-    exit(1);
+    errno = EINVAL;
+    return NULL;
   }
   if (fdt_size < 8 || fdt_size != fdt_totalsize(fdtp)) {
     printf("Bad fdt size!\n");
-    exit(1);
+    errno = EINVAL;
+    return NULL;
   }
 
   new_fdtp_size = fdt_totalsize(fdtp) + overlay_size;
