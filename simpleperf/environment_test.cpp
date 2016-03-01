@@ -31,7 +31,8 @@ TEST(environment, GetCpusFromString) {
 static bool FindKernelSymbol(const KernelSymbol& sym1, const KernelSymbol& sym2) {
   return sym1.addr == sym2.addr && sym1.type == sym2.type && strcmp(sym1.name, sym2.name) == 0 &&
          ((sym1.module == nullptr && sym2.module == nullptr) ||
-          (strcmp(sym1.module, sym2.module) == 0));
+          (sym1.module != nullptr && sym2.module != nullptr &&
+              strcmp(sym1.module, sym2.module) == 0));
 }
 
 TEST(environment, ProcessKernelSymbols) {
