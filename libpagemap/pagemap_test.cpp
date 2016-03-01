@@ -32,7 +32,7 @@ TEST(pagemap, maps) {
   bool found_heap = false;
   bool found_stack = false;
   for (size_t i = 0; i < num_maps; i++) {
-    if (strcmp(maps[i]->name, "[heap]") == 0) found_heap = true;
+    if (strcmp(maps[i]->name, "[anon:libc_malloc]") == 0) found_heap = true;
     if (strcmp(maps[i]->name, "[stack]") == 0) found_stack = true;
   }
 
