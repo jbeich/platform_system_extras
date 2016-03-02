@@ -31,29 +31,6 @@
 #include "read_elf.h"
 #include "utils.h"
 
-class ArchiveHelper {
- public:
-  explicit ArchiveHelper(int fd, const std::string& debug_filename) : valid_(false) {
-    int rc = OpenArchiveFd(fd, "", &handle_, false);
-    if (rc == 0) {
-      valid_ = true;
-    } else {
-      LOG(ERROR) << "Failed to open archive " << debug_filename << ": " << ErrorCodeString(rc);
-    }
-  }
-  ~ArchiveHelper() {
-    if (valid_) {
-      CloseArchive(handle_);
-    }
-  }
-  bool valid() const { return valid_; }
-  ZipArchiveHandle &archive_handle() { return handle_; }
-
- private:
-  ZipArchiveHandle handle_;
-  bool valid_;
-};
-
 std::map<ApkInspector::ApkOffset, std::unique_ptr<EmbeddedElf>> ApkInspector::embedded_elf_cache_;
 
 EmbeddedElf* ApkInspector::FindElfInApkByOffset(const std::string& apk_path, uint64_t file_offset) {
@@ -81,7 +58,7 @@ std::unique_ptr<EmbeddedElf> ApkInspector::FindElfInApkByOffsetWithoutCache(cons
   }
 
   ArchiveHelper ahelper(fhelper.fd(), apk_path);
-  if (!ahelper.valid()) {
+  if (!ahelper) {
     return nullptr;
   }
   ZipArchiveHandle &handle = ahelper.archive_handle();
@@ -140,7 +117,7 @@ std::unique_ptr<EmbeddedElf> ApkInspector::FindElfInApkByName(const std::string&
     return nullptr;
   }
   ArchiveHelper ahelper(fhelper.fd(), apk_path);
-  if (!ahelper.valid()) {
+  if (!ahelper) {
     return nullptr;
   }
   ZipArchiveHandle& handle = ahelper.archive_handle();
