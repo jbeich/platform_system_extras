@@ -16,6 +16,24 @@
       "revId": "7c26d16df9bdef1914bfb550028cd33230c4e749",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e211990a_f67abefd",
+        "filename": "simpleperf/environment_test.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1052399
+      },
+      "writtenOn": "2016-03-02T00:29:47Z",
+      "side": 1,
+      "message": "i hope it is not ruled out by google3 or android style guide.\nIf not, i like shorter forms like\n  (sym1.module \u003d\u003d sym2.module) ||\n  (sym1.module \u0026\u0026 sym2.module \u0026\u0026 !strcmp(....))\nAnyway, any thing that satisfies the style guide is fine for me.",
+      "parentUuid": "a26ec178_17e9d7d0",
+      "revId": "7c26d16df9bdef1914bfb550028cd33230c4e749",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
