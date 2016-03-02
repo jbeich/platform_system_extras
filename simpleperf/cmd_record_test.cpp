@@ -21,6 +21,7 @@
 #include "command.h"
 #include "environment.h"
 #include "event_selection_set.h"
+#include "get_test_data.h"
 #include "record.h"
 #include "record_file.h"
 #include "test_util.h"
@@ -36,7 +37,9 @@ TEST(record_cmd, no_options) {
 }
 
 TEST(record_cmd, system_wide_option) {
-  ASSERT_TRUE(RecordCmd()->Run({"-a", "sleep", SLEEP_SEC}));
+  if (IsRoot()) {
+    ASSERT_TRUE(RecordCmd()->Run({"-a", "sleep", SLEEP_SEC}));
+  }
 }
 
 TEST(record_cmd, sample_period_option) {
@@ -85,12 +88,14 @@ TEST(record_cmd, dump_build_id_feature) {
 }
 
 TEST(record_cmd, tracepoint_event) {
-  ASSERT_TRUE(RecordCmd()->Run({"-a", "-e", "sched:sched_switch", "sleep", SLEEP_SEC}));
+  if (IsRoot()) {
+    ASSERT_TRUE(RecordCmd()->Run({"-a", "-e", "sched:sched_switch", "sleep", SLEEP_SEC}));
+  }
 }
 
 TEST(record_cmd, branch_sampling) {
   if (IsBranchSamplingSupported()) {
-    ASSERT_TRUE(RecordCmd()->Run({"-a", "-b", "sleep", SLEEP_SEC}));
+    ASSERT_TRUE(RecordCmd()->Run({"-b", "sleep", SLEEP_SEC}));
     ASSERT_TRUE(RecordCmd()->Run({"-j", "any,any_call,any_ret,ind_call", "sleep", SLEEP_SEC}));
     ASSERT_TRUE(RecordCmd()->Run({"-j", "any,k", "sleep", SLEEP_SEC}));
     ASSERT_TRUE(RecordCmd()->Run({"-j", "any,u", "sleep", SLEEP_SEC}));
@@ -170,7 +175,9 @@ TEST(record_cmd, more_than_one_event_types) {
 
 TEST(record_cmd, cpu_option) {
   ASSERT_TRUE(RecordCmd()->Run({"--cpu", "0", "sleep", SLEEP_SEC}));
-  ASSERT_TRUE(RecordCmd()->Run({"--cpu", "0", "-a", "sleep", SLEEP_SEC}));
+  if (IsRoot()) {
+    ASSERT_TRUE(RecordCmd()->Run({"--cpu", "0", "-a", "sleep", SLEEP_SEC}));
+  }
 }
 
 TEST(record_cmd, mmap_page_option) {
