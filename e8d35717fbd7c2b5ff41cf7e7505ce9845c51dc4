@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e27a7932_ba51b6de",
+        "filename": "simpleperf/environment_test.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2016-03-02T02:23:43Z",
+      "side": 1,
+      "message": "this just keeps getting worse. either put it back how it originally was (because actually being able to read the code always beats what the guide says), or come up with a name for this last part. something like\n\n  return sym1.addr \u003d\u003d sym2.addr \u0026\u0026\n         sym1.type \u003d\u003d sym2.type \u0026\u0026\n         strcmp(sym1.name, sym2.name) \u003d\u003d 0 \u0026\u0026\n         ModulesMatch(sym1.module, sym2.module);\n\n(\u0027Find\u0027 is the wrong verb here. this function is really \u0027Equals\u0027 or \u0027Match\u0027 or somesuch.)",
+      "revId": "e8d35717fbd7c2b5ff41cf7e7505ce9845c51dc4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
