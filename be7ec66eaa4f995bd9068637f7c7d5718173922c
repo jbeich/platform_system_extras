@@ -22,6 +22,30 @@
       "revId": "be7ec66eaa4f995bd9068637f7c7d5718173922c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "02feade5_c2aa5448",
+        "filename": "simpleperf/utils.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-03-03T18:59:34Z",
+      "side": 1,
+      "message": "Yeah, I didn\u0027t use unique_fd because functions like OpenReadOnly are missing there. I think I can make them available in unique_fd. Will do in another change.",
+      "parentUuid": "428ee542_c53d8e76",
+      "range": {
+        "startLine": 58,
+        "startChar": 6,
+        "endLine": 58,
+        "endChar": 16
+      },
+      "revId": "be7ec66eaa4f995bd9068637f7c7d5718173922c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
