@@ -46,6 +46,30 @@
       "revId": "be7ec66eaa4f995bd9068637f7c7d5718173922c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "22ef3134_0debc65a",
+        "filename": "simpleperf/utils.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2016-03-03T19:10:08Z",
+      "side": 1,
+      "message": "no, i don\u0027t think they\u0027re appropriate for unique_fd. but you can have your own functions that return a unique_fd...",
+      "parentUuid": "02feade5_c2aa5448",
+      "range": {
+        "startLine": 58,
+        "startChar": 6,
+        "endLine": 58,
+        "endChar": 16
+      },
+      "revId": "be7ec66eaa4f995bd9068637f7c7d5718173922c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
