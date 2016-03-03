@@ -142,6 +142,30 @@
       "revId": "be7ec66eaa4f995bd9068637f7c7d5718173922c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e211990a_0b246846",
+        "filename": "simpleperf/utils.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2016-03-03T22:10:36Z",
+      "side": 1,
+      "message": "it seems like these functions make more sense in simpleperf/utils.h until we find that others need it too. and i don\u0027t think they do --- most code can just read/write the entire file as a std::string (with libbase), and most others should probably use FILE* rather than using fds directly.\n\nunqiue_fd exists because people keep writing the same code over and over again in multiple projects.",
+      "parentUuid": "a2e32149_9d8a5f07",
+      "range": {
+        "startLine": 58,
+        "startChar": 6,
+        "endLine": 58,
+        "endChar": 16
+      },
+      "revId": "be7ec66eaa4f995bd9068637f7c7d5718173922c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
