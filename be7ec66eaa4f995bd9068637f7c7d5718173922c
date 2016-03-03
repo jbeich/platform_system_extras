@@ -70,6 +70,30 @@
       "revId": "be7ec66eaa4f995bd9068637f7c7d5718173922c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e27a7932_2c07c66a",
+        "filename": "simpleperf/utils.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-03-03T19:17:13Z",
+      "side": 1,
+      "message": "why not? adding OpenReadOnly/OpenWriteOnly to unique_fd won\u0027t make it a werid monster class, As opening regular file is a common task for unique_fd, and it won\u0027t affect other uses like socket. Is there any special consideration I don\u0027t know?",
+      "parentUuid": "22ef3134_0debc65a",
+      "range": {
+        "startLine": 58,
+        "startChar": 6,
+        "endLine": 58,
+        "endChar": 16
+      },
+      "revId": "be7ec66eaa4f995bd9068637f7c7d5718173922c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
