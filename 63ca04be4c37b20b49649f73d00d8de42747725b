@@ -22,6 +22,52 @@
       "revId": "63ca04be4c37b20b49649f73d00d8de42747725b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "62804914_fcfdc383",
+        "filename": "simpleperf/gtest_main.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2016-03-03T01:54:08Z",
+      "side": 1,
+      "message": "not just (getuid() \u003d\u003d 0)? that\u0027s what we do in the bionic tests.",
+      "range": {
+        "startLine": 142,
+        "startChar": 9,
+        "endLine": 142,
+        "endChar": 16
+      },
+      "revId": "63ca04be4c37b20b49649f73d00d8de42747725b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "02986d84_61d5b2bc",
+        "filename": "simpleperf/utils.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2016-03-03T01:54:08Z",
+      "side": 1,
+      "message": "read_only?\n\nmaybe make this private and have two factory methods instead, OpenReadOnly and OpenWriteOnly?",
+      "range": {
+        "startLine": 61,
+        "startChar": 56,
+        "endLine": 61,
+        "endChar": 63
+      },
+      "revId": "63ca04be4c37b20b49649f73d00d8de42747725b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
