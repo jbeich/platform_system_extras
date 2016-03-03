@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "c26bb568_d825a48a",
+        "filename": "simpleperf/Android.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-03-03T01:54:53Z",
+      "side": 1,
+      "message": "It appears also in bionic unit tests. If you remove this build type, I will have to link gtest manually.",
+      "parentUuid": "a26ec178_6ca71d81",
+      "range": {
+        "startLine": 322,
+        "startChar": 0,
+        "endLine": 322,
+        "endChar": 36
+      },
+      "revId": "63ca04be4c37b20b49649f73d00d8de42747725b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "62804914_fcfdc383",
         "filename": "simpleperf/gtest_main.cpp",
         "patchSetId": 2
