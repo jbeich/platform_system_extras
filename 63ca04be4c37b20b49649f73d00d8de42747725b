@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a26ec178_6ca71d81",
+        "filename": "simpleperf/Android.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2016-03-03T01:14:43Z",
+      "side": 1,
+      "message": ":-/ I was considering removing this, since I just removed the last two users of BUILD[_HOST]_(STATIC|SHARED)_TEST_LIBRARY. But this seems like a reasonable use case, so I\u0027ll leave them in.",
+      "range": {
+        "startLine": 322,
+        "startChar": 0,
+        "endLine": 322,
+        "endChar": 36
+      },
+      "revId": "63ca04be4c37b20b49649f73d00d8de42747725b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
