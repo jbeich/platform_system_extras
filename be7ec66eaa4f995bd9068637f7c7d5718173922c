@@ -94,6 +94,30 @@
       "revId": "be7ec66eaa4f995bd9068637f7c7d5718173922c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e27a7932_cc12c276",
+        "filename": "simpleperf/utils.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2016-03-03T19:21:12Z",
+      "side": 1,
+      "message": "yes it will --- because where do we stop? why not pipes? why not sockets? socketpairs? and what about if you want to create a file? what about O_CLOEXEC?\n\nthis is exactly where \"weird monster class\"es come from. they rarely start as monsters. they just grow one piece of not wholly unreasonable cruft at a time.\n\nunique_fd is a holder for fds, not a file abstraction.",
+      "parentUuid": "e27a7932_2c07c66a",
+      "range": {
+        "startLine": 58,
+        "startChar": 6,
+        "endLine": 58,
+        "endChar": 16
+      },
+      "revId": "be7ec66eaa4f995bd9068637f7c7d5718173922c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
