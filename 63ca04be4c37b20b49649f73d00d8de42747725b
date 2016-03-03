@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "a2e32149_1170016f",
+        "filename": "simpleperf/gtest_main.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-03-03T02:22:58Z",
+      "side": 1,
+      "message": "I thought about providing more flexibility by using --no-root argument, but detecting automatically is simpler and may be better.",
+      "parentUuid": "62804914_fcfdc383",
+      "range": {
+        "startLine": 142,
+        "startChar": 9,
+        "endLine": 142,
+        "endChar": 16
+      },
+      "revId": "63ca04be4c37b20b49649f73d00d8de42747725b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "02986d84_61d5b2bc",
         "filename": "simpleperf/utils.h",
         "patchSetId": 2
@@ -107,6 +131,30 @@
       "writtenOn": "2016-03-03T01:54:08Z",
       "side": 1,
       "message": "read_only?\n\nmaybe make this private and have two factory methods instead, OpenReadOnly and OpenWriteOnly?",
+      "range": {
+        "startLine": 61,
+        "startChar": 56,
+        "endLine": 61,
+        "endChar": 63
+      },
+      "revId": "63ca04be4c37b20b49649f73d00d8de42747725b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e27a7932_d8d8403a",
+        "filename": "simpleperf/utils.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-03-03T02:22:58Z",
+      "side": 1,
+      "message": "use factory methods sounds more clear.",
+      "parentUuid": "02986d84_61d5b2bc",
       "range": {
         "startLine": 61,
         "startChar": 56,
