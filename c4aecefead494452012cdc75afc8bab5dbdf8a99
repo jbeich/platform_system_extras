@@ -22,6 +22,30 @@
       "revId": "c4aecefead494452012cdc75afc8bab5dbdf8a99",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d747f965_a6c3a801",
+        "filename": "postinst/postinst.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1077068
+      },
+      "writtenOn": "2016-03-07T19:09:57Z",
+      "side": 1,
+      "message": "The name of the module is \"postinst_example\" and is an EXECUTABLE so this gets installed as /system/bin/postinst_example, regardless of what was the name of the SRC_FILE, right?",
+      "parentUuid": "97ebc162_e4c09468",
+      "range": {
+        "startLine": 26,
+        "startChar": 40,
+        "endLine": 26,
+        "endChar": 48
+      },
+      "revId": "c4aecefead494452012cdc75afc8bab5dbdf8a99",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
