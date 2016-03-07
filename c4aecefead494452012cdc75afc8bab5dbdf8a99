@@ -70,6 +70,30 @@
       "revId": "c4aecefead494452012cdc75afc8bab5dbdf8a99",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "17c19119_8d0221ed",
+        "filename": "postinst/postinst.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2016-03-07T21:13:13Z",
+      "side": 1,
+      "message": "However, it seems it needs to be system/bin...",
+      "parentUuid": "17935119_bd54ff27",
+      "range": {
+        "startLine": 26,
+        "startChar": 40,
+        "endLine": 26,
+        "endChar": 48
+      },
+      "revId": "c4aecefead494452012cdc75afc8bab5dbdf8a99",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
