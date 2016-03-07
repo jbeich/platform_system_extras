@@ -46,6 +46,30 @@
       "revId": "c4aecefead494452012cdc75afc8bab5dbdf8a99",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "17935119_bd54ff27",
+        "filename": "postinst/postinst.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2016-03-07T19:27:19Z",
+      "side": 1,
+      "message": "Yeah, you\u0027re right, should have inspected the Makefile. Why not be consistent, though?",
+      "parentUuid": "d747f965_a6c3a801",
+      "range": {
+        "startLine": 26,
+        "startChar": 40,
+        "endLine": 26,
+        "endChar": 48
+      },
+      "revId": "c4aecefead494452012cdc75afc8bab5dbdf8a99",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
