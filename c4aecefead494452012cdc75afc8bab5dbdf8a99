@@ -94,6 +94,30 @@
       "revId": "c4aecefead494452012cdc75afc8bab5dbdf8a99",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "37af7563_a693860e",
+        "filename": "postinst/postinst.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1077068
+      },
+      "writtenOn": "2016-03-07T21:18:23Z",
+      "side": 1,
+      "message": "Nope, this path is relative to the partitions for which you are enabling post-install (\"system\" in this case); so unless your device mounts \"system\" as / instead /system this path should be what\u0027s stated there.",
+      "parentUuid": "17c19119_8d0221ed",
+      "range": {
+        "startLine": 26,
+        "startChar": 40,
+        "endLine": 26,
+        "endChar": 48
+      },
+      "revId": "c4aecefead494452012cdc75afc8bab5dbdf8a99",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
