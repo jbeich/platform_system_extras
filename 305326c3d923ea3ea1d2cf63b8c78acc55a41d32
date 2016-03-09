@@ -22,6 +22,30 @@
       "revId": "305326c3d923ea3ea1d2cf63b8c78acc55a41d32",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b70fe5b0_b08a409a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2016-03-09T16:47:10Z",
+      "side": 1,
+      "message": "Yes, correct, unknown, I will correct this.",
+      "parentUuid": "b70fe5b0_0d4c55b8",
+      "range": {
+        "startLine": 7,
+        "startChar": 26,
+        "endLine": 7,
+        "endChar": 35
+      },
+      "revId": "305326c3d923ea3ea1d2cf63b8c78acc55a41d32",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
