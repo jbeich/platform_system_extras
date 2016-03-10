@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "37a21512_eeb81fa7",
+        "filename": "simpleperf/event_fd.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-03-10T21:26:48Z",
+      "side": 1,
+      "message": "It is because I need to include event_selection_set.h in cmd_report_test.cpp. And cmd_report_test.cpp can be built on windows, which doesn\u0027t have poll.h, so I have to move poll.h from .h file to .cpp file.",
+      "parentUuid": "9737416b_4446c04a",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 14
+      },
+      "revId": "deb357b22480a328869d4f7e85334c7d9a80a572",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9737416b_e43114eb",
         "filename": "simpleperf/event_selection_set.h",
         "patchSetId": 1
