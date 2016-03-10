@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9737416b_4446c04a",
+        "filename": "simpleperf/event_fd.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2016-03-10T19:56:17Z",
+      "side": 1,
+      "message": "???",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 14
+      },
+      "revId": "deb357b22480a328869d4f7e85334c7d9a80a572",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9737416b_e43114eb",
+        "filename": "simpleperf/event_selection_set.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2016-03-10T19:56:17Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 14
+      },
+      "revId": "deb357b22480a328869d4f7e85334c7d9a80a572",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
