@@ -30,6 +30,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 #include <unistd.h>
 #include <sys/stat.h>
 #include <sys/types.h>
@@ -91,7 +92,8 @@ static int filter_dot(const struct dirent *d)
 }
 
 static u32 build_default_directory_structure(const char *dir_path,
-					     struct selabel_handle *sehnd)
+					     struct selabel_handle *sehnd,
+                                             time_t fixed_time)
 {
 	u32 inode;
 	u32 root_inode;
@@ -101,7 +103,7 @@ static u32 build_default_directory_structure(const char *dir_path,
 			.mode = S_IRWXU,
 			.uid = 0,
 			.gid = 0,
-			.mtime = 0,
+			.mtime = (fixed_time == -1 ? time(NULL) : fixed_time),
 	};
 	root_inode = make_directory(0, 1, &dentries, 1);
 	inode = make_directory(root_inode, 0, NULL, 0);
@@ -622,17 +624,18 @@ int make_ext4fs_internal(int fd, const char *_directory, const char *_target_out
 #ifdef USE_MINGW
 	// Windows needs only 'create an empty fs image' functionality
 	assert(!directory);
-	root_inode_num = build_default_directory_structure(mountpoint, sehnd);
+	root_inode_num = build_default_directory_structure(mountpoint, sehnd, fixed_time);
 #else
 	if (directory)
 		root_inode_num = build_directory_structure(directory, mountpoint, target_out_directory, 0,
 			fs_config_func, sehnd, verbose, fixed_time);
 	else
-		root_inode_num = build_default_directory_structure(mountpoint, sehnd);
+                root_inode_num = build_default_directory_structure(mountpoint, sehnd, fixed_time);
 #endif
 
 	root_mode = S_IRWXU | S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH;
-	inode_set_permissions(root_inode_num, root_mode, 0, 0, 0);
+	inode_set_permissions(root_inode_num, root_mode, 0, 0,
+                              fixed_time == -1 ? time(NULL) : fixed_time);
 
 #ifndef USE_MINGW
 	if (sehnd) {
