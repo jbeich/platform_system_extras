@@ -29,9 +29,9 @@
 
 static std::string testdata_dir;
 
-#if defined(IN_CTS_TEST)
 static const std::string testdata_section = ".testzipdata";
 
+#if defined(__ANDROID__)
 static bool ExtractTestDataFromElfSection() {
   if (!MkdirWithParents(testdata_dir)) {
     PLOG(ERROR) << "failed to create testdata_dir " << testdata_dir;
@@ -90,7 +90,7 @@ static bool ExtractTestDataFromElfSection() {
   EndIteration(cookie);
   return true;
 }
-#endif  // defined(IN_CTS_TEST)
+#endif  // defined(__ANDROID__)
 
 int main(int argc, char** argv) {
   InitLogging(argv, android::base::StderrLogger);
@@ -103,7 +103,7 @@ int main(int argc, char** argv) {
     }
   }
 
-#if defined(IN_CTS_TEST)
+#if defined(__ANDROID__)
   std::unique_ptr<TemporaryDir> tmp_dir;
   if (!::testing::GTEST_FLAG(list_tests) && testdata_dir.empty()) {
     tmp_dir.reset(new TemporaryDir);
@@ -114,6 +114,7 @@ int main(int argc, char** argv) {
     }
   }
 #endif
+
   if (!::testing::GTEST_FLAG(list_tests) && testdata_dir.empty()) {
     printf("Usage: %s -t <testdata_dir>\n", argv[0]);
     return 1;
