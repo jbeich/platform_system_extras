@@ -15,7 +15,9 @@
  */
 
 #include <map>
+#include <memory>
 #include <string>
+#include <vector>
 
 #include "read_elf.h"
 #include "workload.h"
@@ -25,4 +27,5 @@ static const std::string SLEEP_SEC = "0.001";
 void CreateProcesses(size_t count, std::vector<std::unique_ptr<Workload>>* workloads);
 
 void ParseSymbol(const ElfFileSymbol& symbol, std::map<std::string, ElfFileSymbol>* symbols);
-void CheckElfFileSymbols(const std::map<std::string, ElfFileSymbol>& symbols);
+void CheckElfFileSymbols(const std::map<std::string, ElfFileSymbol>& symbols,
+                         bool check_global_variable = true);
