@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5c240ef3_c18be6da",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2016-03-18T22:07:27Z",
+      "side": 1,
+      "message": "This is a bit confusing. Maybe rephrase something like:\n\nWhen running unit tests, there could be failures if attempting to run over an elf file of a different architecture than the current architecture. Fix this by reading the architecture from the elf file and using that instead of the current architecture.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 27
+      },
+      "revId": "29c3f31d9270e752f5535028cdd0107607db50e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
