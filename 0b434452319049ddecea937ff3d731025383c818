@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "5c240ef3_9ccdd181",
+        "filename": "simpleperf/read_elf.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2016-03-18T23:15:32Z",
+      "side": 1,
+      "message": "I meant can you print out the error code. For example, should the above be:\n\nLOG(ERROR) \u003c\u003c ... \u003c\u003c \": \" \u003c\u003c report_error;\n\nI don\u0027t know if that prints anything useful though.",
+      "parentUuid": "5c240ef3_01485e54",
+      "range": {
+        "startLine": 227,
+        "startChar": 0,
+        "endLine": 229,
+        "endChar": 7
+      },
+      "revId": "0b434452319049ddecea937ff3d731025383c818",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5c240ef3_c175a6d4",
         "filename": "simpleperf/read_elf.cpp",
         "patchSetId": 3
