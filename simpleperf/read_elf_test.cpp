@@ -20,6 +20,7 @@
 
 #include <map>
 #include "get_test_data.h"
+#include "test_util.h"
 
 TEST(read_elf, GetBuildIdFromElfFile) {
   BuildId build_id;
@@ -38,11 +39,13 @@ void ParseSymbol(const ElfFileSymbol& symbol, std::map<std::string, ElfFileSymbo
   (*symbols)[symbol.name] = symbol;
 }
 
-void CheckElfFileSymbols(const std::map<std::string, ElfFileSymbol>& symbols) {
-  auto pos = symbols.find("GlobalVar");
-  ASSERT_NE(pos, symbols.end());
-  ASSERT_FALSE(pos->second.is_func);
-  pos = symbols.find("GlobalFunc");
+void CheckElfFileSymbols(const std::map<std::string, ElfFileSymbol>& symbols, bool check_global_variable) {
+  if (check_global_variable) {
+    auto pos = symbols.find("GlobalVar");
+    ASSERT_NE(pos, symbols.end());
+    ASSERT_FALSE(pos->second.is_func);
+  }
+  auto pos = symbols.find("GlobalFunc");
   ASSERT_NE(pos, symbols.end());
   ASSERT_TRUE(pos->second.is_func);
   ASSERT_TRUE(pos->second.is_in_text_section);
@@ -75,6 +78,13 @@ TEST(read_elf, ParseSymbolsFromEmbeddedElfFile) {
                                               NATIVELIB_SIZE_IN_APK, native_lib_build_id,
                                               std::bind(ParseSymbol, std::placeholders::_1, &symbols)));
   CheckElfFileSymbols(symbols);
+}
+
+TEST(read_elf, ParseSymbolFromMiniDebugInfoElfFile) {
+  std::map<std::string, ElfFileSymbol> symbols;
+  ASSERT_TRUE(ParseSymbolsFromElfFile(GetTestData(ELF_FILE_WITH_MINI_DEBUG_INFO), BuildId(),
+                                      std::bind(ParseSymbol, std::placeholders::_1, &symbols)));
+  CheckElfFileSymbols(symbols, false);
 }
 
 TEST(read_elf, arm_mapping_symbol) {
