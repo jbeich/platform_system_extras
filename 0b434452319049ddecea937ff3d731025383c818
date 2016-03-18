@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "5c240ef3_01485e54",
+        "filename": "simpleperf/read_elf.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-03-18T23:09:23Z",
+      "side": 1,
+      "message": "It returns std::error_code, do you have better way to check std::error_code?",
+      "parentUuid": "5c240ef3_a12992d0",
+      "range": {
+        "startLine": 227,
+        "startChar": 0,
+        "endLine": 229,
+        "endChar": 7
+      },
+      "revId": "0b434452319049ddecea937ff3d731025383c818",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5c240ef3_c175a6d4",
         "filename": "simpleperf/read_elf.cpp",
         "patchSetId": 3
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "5c240ef3_21e92263",
+        "filename": "simpleperf/read_elf.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-03-18T23:09:23Z",
+      "side": 1,
+      "message": "I didn\u0027t find such interface in llvm.",
+      "parentUuid": "5c240ef3_c175a6d4",
+      "range": {
+        "startLine": 316,
+        "startChar": 6,
+        "endLine": 316,
+        "endChar": 28
+      },
+      "revId": "0b434452319049ddecea937ff3d731025383c818",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5c240ef3_c15e464a",
         "filename": "simpleperf/read_elf.cpp",
         "patchSetId": 3
@@ -59,6 +107,30 @@
       "writtenOn": "2016-03-18T21:52:18Z",
       "side": 1,
       "message": "It\u0027s not immediately clear to me, are you caching the decompressed data? Is there any speed issue if there are multiple symbols in a compressed section?",
+      "range": {
+        "startLine": 321,
+        "startChar": 22,
+        "endLine": 321,
+        "endChar": 46
+      },
+      "revId": "0b434452319049ddecea937ff3d731025383c818",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c240ef3_01021eef",
+        "filename": "simpleperf/read_elf.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-03-18T23:09:23Z",
+      "side": 1,
+      "message": "The decompressed data is stored in memory, and released when this function returns. I think the speed is acceptable as we only call this function once for each elf file.",
+      "parentUuid": "5c240ef3_c15e464a",
       "range": {
         "startLine": 321,
         "startChar": 22,
