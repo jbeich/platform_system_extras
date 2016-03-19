@@ -24,10 +24,11 @@
 #include <sys/types.h>
 #include <unistd.h>
 
+#include <memory>
+
 #include <android-base/file.h>
 #include <android-base/logging.h>
-#include <ziparchive/zip_archive.h>
-
+#include <ziparchive/zip_archive_holder.h>
 #include "read_elf.h"
 #include "utils.h"
 
@@ -52,22 +53,19 @@ std::unique_ptr<EmbeddedElf> ApkInspector::FindElfInApkByOffsetWithoutCache(cons
   if (!IsValidApkPath(apk_path)) {
     return nullptr;
   }
-  FileHelper fhelper = FileHelper::OpenReadOnly(apk_path);
-  if (!fhelper) {
-    return nullptr;
-  }
 
-  ArchiveHelper ahelper(fhelper.fd(), apk_path);
-  if (!ahelper) {
+  std::string err_msg;
+  std::unique_ptr<ZipArchiveHolder> zip = ZipArchiveHolder::Open(apk_path.c_str(), &err_msg);
+  if (zip == nullptr) {
+    LOG(DEBUG) << "failed to open archive " << apk_path << ": " << err_msg;
     return nullptr;
   }
-  ZipArchiveHandle &handle = ahelper.archive_handle();
 
   // Iterate through the zip file. Look for a zip entry corresponding
   // to an uncompressed blob whose range intersects with the mmap
   // offset we're interested in.
   void* iteration_cookie;
-  if (StartIteration(handle, &iteration_cookie, nullptr, nullptr) < 0) {
+  if (StartIteration(zip->handle(), &iteration_cookie, nullptr, nullptr) < 0) {
     return nullptr;
   }
   ZipEntry zentry;
@@ -89,14 +87,14 @@ std::unique_ptr<EmbeddedElf> ApkInspector::FindElfInApkByOffsetWithoutCache(cons
   }
 
   // We found something in the zip file at the right spot. Is it an ELF?
-  if (lseek(fhelper.fd(), zentry.offset, SEEK_SET) != zentry.offset) {
+  if (lseek(zip->fd(), zentry.offset, SEEK_SET) != zentry.offset) {
     PLOG(ERROR) << "lseek() failed in " << apk_path << " offset " << zentry.offset;
     return nullptr;
   }
   std::string entry_name;
   entry_name.resize(zname.name_length,'\0');
   memcpy(&entry_name[0], zname.name, zname.name_length);
-  if (!IsValidElfFile(fhelper.fd())) {
+  if (!IsValidElfFile(zip->fd())) {
     LOG(ERROR) << "problems reading ELF from in " << apk_path << " entry '"
                << entry_name << "'";
     return nullptr;
@@ -112,17 +110,14 @@ std::unique_ptr<EmbeddedElf> ApkInspector::FindElfInApkByName(const std::string&
   if (!IsValidApkPath(apk_path)) {
     return nullptr;
   }
-  FileHelper fhelper = FileHelper::OpenReadOnly(apk_path);
-  if (!fhelper) {
+  std::string err_msg;
+  std::unique_ptr<ZipArchiveHolder> zip = ZipArchiveHolder::Open(apk_path.c_str(), &err_msg);
+  if (zip == nullptr) {
+    LOG(DEBUG) << "failed to open archive " << apk_path << ": " << err_msg;
     return nullptr;
   }
-  ArchiveHelper ahelper(fhelper.fd(), apk_path);
-  if (!ahelper) {
-    return nullptr;
-  }
-  ZipArchiveHandle& handle = ahelper.archive_handle();
   ZipEntry zentry;
-  int32_t rc = FindEntry(handle, ZipString(elf_filename.c_str()), &zentry);
+  int32_t rc = FindEntry(zip->handle(), ZipString(elf_filename.c_str()), &zentry);
   if (rc != 0) {
     LOG(ERROR) << "failed to find " << elf_filename << " in " << apk_path
         << ": " << ErrorCodeString(rc);

@@ -21,7 +21,7 @@
 #include <android-base/file.h>
 #include <android-base/logging.h>
 #include <android-base/test_utils.h>
-#include <ziparchive/zip_archive.h>
+#include <ziparchive/zip_archive_holder.h>
 
 #include "get_test_data.h"
 #include "read_elf.h"
@@ -47,18 +47,19 @@ static bool ExtractTestDataFromElfSection() {
     PLOG(ERROR) << "failed to write file " << tmp_file.path;
     return false;
   }
-  ArchiveHelper ahelper(tmp_file.fd, tmp_file.path);
-  if (!ahelper) {
-    LOG(ERROR) << "failed to open archive " << tmp_file.path;
+  std::string err_msg;
+  std::unique_ptr<ZipArchiveHolder> zip = ZipArchiveHolder::Open(tmp_file.path, &err_msg);
+  if (zip == nullptr) {
+    LOG(ERROR) << "failed to open archive " << tmp_file.path << ": " << err_msg;
     return false;
   }
-  ZipArchiveHandle& handle = ahelper.archive_handle();
   void* cookie;
-  int ret = StartIteration(handle, &cookie, nullptr, nullptr);
+  int ret = StartIteration(zip->handle(), &cookie, nullptr, nullptr);
   if (ret != 0) {
     LOG(ERROR) << "failed to start iterating zip entries";
     return false;
   }
+  std::unique_ptr<void, decltype(&EndIteration)> guard(cookie, EndIteration);
   ZipEntry entry;
   ZipString name;
   while (Next(cookie, &entry, &name) == 0) {
@@ -78,7 +79,7 @@ static bool ExtractTestDataFromElfSection() {
       return false;
     }
     std::vector<uint8_t> data(entry.uncompressed_length);
-    if (ExtractToMemory(handle, &entry, data.data(), data.size()) != 0) {
+    if (ExtractToMemory(zip->handle(), &entry, data.data(), data.size()) != 0) {
       LOG(ERROR) << "failed to extract entry " << entry_name;
       return false;
     }
@@ -87,7 +88,6 @@ static bool ExtractTestDataFromElfSection() {
       return false;
     }
   }
-  EndIteration(cookie);
   return true;
 }
 #endif  // defined(__ANDROID__)

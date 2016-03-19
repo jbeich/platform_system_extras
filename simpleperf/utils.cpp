@@ -75,21 +75,6 @@ FileHelper::~FileHelper() {
   }
 }
 
-ArchiveHelper::ArchiveHelper(int fd, const std::string& debug_filename) : valid_(false) {
-  int rc = OpenArchiveFd(fd, "", &handle_, false);
-  if (rc == 0) {
-    valid_ = true;
-  } else {
-    LOG(ERROR) << "Failed to open archive " << debug_filename << ": " << ErrorCodeString(rc);
-  }
-}
-
-ArchiveHelper::~ArchiveHelper() {
-  if (valid_) {
-    CloseArchive(handle_);
-  }
-}
-
 void PrintIndented(size_t indent, const char* fmt, ...) {
   va_list ap;
   va_start(ap, fmt);

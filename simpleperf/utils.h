@@ -82,26 +82,6 @@ class FileHelper {
   DISALLOW_COPY_AND_ASSIGN(FileHelper);
 };
 
-
-class ArchiveHelper {
- public:
-  ArchiveHelper(int fd, const std::string& debug_filename);
-  ~ArchiveHelper();
-
-  explicit operator bool() const {
-    return valid_;
-  }
-  ZipArchiveHandle &archive_handle() {
-    return handle_;
-  }
-
- private:
-  ZipArchiveHandle handle_;
-  bool valid_;
-
-  DISALLOW_COPY_AND_ASSIGN(ArchiveHelper);
-};
-
 template <class T>
 void MoveFromBinaryFormat(T& data, const char*& p) {
   data = *reinterpret_cast<const T*>(p);
