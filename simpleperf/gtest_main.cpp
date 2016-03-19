@@ -59,6 +59,7 @@ static bool ExtractTestDataFromElfSection() {
     LOG(ERROR) << "failed to start iterating zip entries";
     return false;
   }
+  std::unique_ptr<void, decltype(&EndIteration)> guard(cookie, EndIteration);
   ZipEntry entry;
   ZipString name;
   while (Next(cookie, &entry, &name) == 0) {
@@ -87,7 +88,6 @@ static bool ExtractTestDataFromElfSection() {
       return false;
     }
   }
-  EndIteration(cookie);
   return true;
 }
 #endif  // defined(__ANDROID__)

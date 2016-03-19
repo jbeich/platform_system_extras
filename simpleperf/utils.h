@@ -82,7 +82,6 @@ class FileHelper {
   DISALLOW_COPY_AND_ASSIGN(FileHelper);
 };
 
-
 class ArchiveHelper {
  public:
   ArchiveHelper(int fd, const std::string& debug_filename);
