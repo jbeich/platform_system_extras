@@ -38,11 +38,11 @@ static const std::string APK_FILE = "data/app/com.example.hellojni-1/base.apk";
 static const std::string NATIVELIB_IN_APK = "lib/arm64-v8a/libhello-jni.so";
 static const std::string NATIVELIB_IN_APK_PERF_DATA = "has_embedded_native_libs_apk_perf.data";
 
-constexpr size_t NATIVELIB_OFFSET_IN_APK = 0x8000;
-constexpr size_t NATIVELIB_SIZE_IN_APK = 0x15d8;
+constexpr size_t NATIVELIB_OFFSET_IN_APK = 0x639000;
+constexpr size_t NATIVELIB_SIZE_IN_APK = 0x1678;
 
 static BuildId elf_file_build_id("0b12a384a9f4a3f3659b7171ca615dbec3a81f71");
 
-static BuildId native_lib_build_id("b46f51cb9c4b71fb08a2fdbefc2c187894f14008");
+static BuildId native_lib_build_id("bd6a9279bd2b4ea14895a7a7e4a3337e5bc44b1f");
 
 #endif  // SIMPLE_PERF_GET_TEST_DATA_H_
