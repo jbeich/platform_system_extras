@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5c240ef3_337df38d",
+        "filename": "simpleperf/get_test_data.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2016-03-21T17:49:47Z",
+      "side": 1,
+      "message": "It would probably be a good idea to add a comment about how this is generated, and why it\u0027s hard coded.",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 48
+      },
+      "revId": "d40eecdb58f8d7ff5040a40b4dbff3bc163c5ed9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c240ef3_9382dfc1",
+        "filename": "simpleperf/read_apk_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2016-03-21T17:49:47Z",
+      "side": 1,
+      "message": "Please add a comment about why the + 0x100 is here.",
+      "range": {
+        "startLine": 34,
+        "startChar": 75,
+        "endLine": 34,
+        "endChar": 105
+      },
+      "revId": "d40eecdb58f8d7ff5040a40b4dbff3bc163c5ed9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
