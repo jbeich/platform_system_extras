@@ -16,6 +16,24 @@
       "revId": "05400539d15c50a52a388daba2e831b86824cc8e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5c240ef3_131b8f51",
+        "filename": "simpleperf/get_test_data.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-03-21T18:21:41Z",
+      "side": 1,
+      "message": "We can pass output filename for simpleperf recording by\n`simpleperf record -o [output_filename]`, and if -o option is not used, the default output filename is perf.data.",
+      "parentUuid": "5c240ef3_f044f143",
+      "revId": "05400539d15c50a52a388daba2e831b86824cc8e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
