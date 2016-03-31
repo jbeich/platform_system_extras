@@ -689,7 +689,8 @@ void RecordCommand::UnwindRecord(Record* record) {
       RegSet regs = CreateRegSet(r.regs_user_data.reg_mask, r.regs_user_data.regs);
       std::vector<char>& stack = r.stack_user_data.data;
       ArchType arch = GetArchForAbi(GetBuildArch(), r.regs_user_data.abi);
-      std::vector<uint64_t> unwind_ips = UnwindCallChain(arch, *thread, regs, stack);
+      std::vector<uint64_t> unwind_ips = UnwindCallChain(arch, *thread, regs, stack,
+                                                         !system_wide_collection_);
       r.callchain_data.ips.push_back(PERF_CONTEXT_USER);
       r.callchain_data.ips.insert(r.callchain_data.ips.end(), unwind_ips.begin(), unwind_ips.end());
       r.regs_user_data.abi = 0;
