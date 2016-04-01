@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "4ec61432_6e080f4d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-04-01T17:56:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "915f51f9_42f74338",
+      "range": {
+        "startLine": 7,
+        "startChar": 12,
+        "endLine": 7,
+        "endChar": 17
+      },
+      "revId": "6d1ab2241c2fc46d099204f03a9681b426a5cd59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "915f51f9_62f44733",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2016-04-01T01:20:36Z",
       "side": 1,
       "message": "loosen",
+      "range": {
+        "startLine": 11,
+        "startChar": 31,
+        "endLine": 11,
+        "endChar": 36
+      },
+      "revId": "6d1ab2241c2fc46d099204f03a9681b426a5cd59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ec61432_4e03d333",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-04-01T17:56:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "915f51f9_62f44733",
       "range": {
         "startLine": 11,
         "startChar": 31,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "4ec61432_0ecb8b21",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 693,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-04-01T17:56:12Z",
+      "side": 1,
+      "message": "a local variable and corresponding comment are added.",
+      "parentUuid": "915f51f9_c230b3ce",
+      "range": {
+        "startLine": 693,
+        "startChar": 57,
+        "endLine": 693,
+        "endChar": 81
+      },
+      "revId": "6d1ab2241c2fc46d099204f03a9681b426a5cd59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "915f51f9_421e634a",
         "filename": "simpleperf/dwarf_unwind.cpp",
         "patchSetId": 1
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "4ec61432_cec4a311",
+        "filename": "simpleperf/dwarf_unwind.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-04-01T17:56:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "915f51f9_421e634a",
+      "range": {
+        "startLine": 99,
+        "startChar": 43,
+        "endLine": 99,
+        "endChar": 60
+      },
+      "revId": "6d1ab2241c2fc46d099204f03a9681b426a5cd59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "915f51f9_82187b5c",
         "filename": "simpleperf/test_util.h",
         "patchSetId": 1
@@ -105,6 +201,30 @@
       "writtenOn": "2016-04-01T01:20:36Z",
       "side": 1,
       "message": "requires root privileges.",
+      "range": {
+        "startLine": 39,
+        "startChar": 68,
+        "endLine": 39,
+        "endChar": 96
+      },
+      "revId": "6d1ab2241c2fc46d099204f03a9681b426a5cd59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ec61432_2e8d27f3",
+        "filename": "simpleperf/test_util.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-04-01T17:56:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "915f51f9_82187b5c",
       "range": {
         "startLine": 39,
         "startChar": 68,
