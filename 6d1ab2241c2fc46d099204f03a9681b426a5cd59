@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "915f51f9_42f74338",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2016-04-01T01:20:36Z",
+      "side": 1,
+      "message": "loosen",
+      "range": {
+        "startLine": 7,
+        "startChar": 12,
+        "endLine": 7,
+        "endChar": 17
+      },
+      "revId": "6d1ab2241c2fc46d099204f03a9681b426a5cd59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "915f51f9_62f44733",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2016-04-01T01:20:36Z",
+      "side": 1,
+      "message": "loosen",
+      "range": {
+        "startLine": 11,
+        "startChar": 31,
+        "endLine": 11,
+        "endChar": 36
+      },
+      "revId": "6d1ab2241c2fc46d099204f03a9681b426a5cd59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "915f51f9_c230b3ce",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 693,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2016-04-01T01:20:36Z",
+      "side": 1,
+      "message": "Minor nit, since you are passing a bool, it\u0027s not clear what this means.\n\nIt might be better to name this variable require_strict_arch_check_ instead.",
+      "range": {
+        "startLine": 693,
+        "startChar": 57,
+        "endLine": 693,
+        "endChar": 81
+      },
+      "revId": "6d1ab2241c2fc46d099204f03a9681b426a5cd59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "915f51f9_421e634a",
+        "filename": "simpleperf/dwarf_unwind.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2016-04-01T01:20:36Z",
+      "side": 1,
+      "message": "Might be better named strict_arch_check.",
+      "range": {
+        "startLine": 99,
+        "startChar": 43,
+        "endLine": 99,
+        "endChar": 60
+      },
+      "revId": "6d1ab2241c2fc46d099204f03a9681b426a5cd59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "915f51f9_82187b5c",
+        "filename": "simpleperf/test_util.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2016-04-01T01:20:36Z",
+      "side": 1,
+      "message": "requires root privileges.",
+      "range": {
+        "startLine": 39,
+        "startChar": 68,
+        "endLine": 39,
+        "endChar": 96
+      },
+      "revId": "6d1ab2241c2fc46d099204f03a9681b426a5cd59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
