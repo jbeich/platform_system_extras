@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e24b8f3_ea9b672c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2016-04-05T13:31:57Z",
+      "side": 1,
+      "message": "types -\u003e type",
+      "range": {
+        "startLine": 7,
+        "startChar": 50,
+        "endLine": 7,
+        "endChar": 55
+      },
+      "revId": "19b8447c23762d586c986e76e1b1e4831b378ffa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e24b8f3_ca982333",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2016-04-05T13:31:57Z",
+      "side": 1,
+      "message": "Maybe PrepareToReadMmapEventData would be a better name than PrepareReadMmapEventData?",
+      "range": {
+        "startLine": 248,
+        "startChar": 23,
+        "endLine": 248,
+        "endChar": 47
+      },
+      "revId": "19b8447c23762d586c986e76e1b1e4831b378ffa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e24b8f3_2a673ff5",
+        "filename": "simpleperf/event_attr.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2016-04-05T13:31:57Z",
+      "side": 1,
+      "message": "Just for my own curiosity, what is the distinction between PERF_SAMPLE_ID and PERF_SAMPLE_IDENTIFIER?",
+      "range": {
+        "startLine": 160,
+        "startChar": 8,
+        "endLine": 160,
+        "endChar": 30
+      },
+      "revId": "19b8447c23762d586c986e76e1b1e4831b378ffa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
