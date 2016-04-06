@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae9b108c_b6511eb4",
+        "filename": "verity/generate_verity_key.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2016-04-06T15:25:01Z",
+      "side": 1,
+      "message": "isn\u0027t this test the wrong way round? ah, no, because you\u0027re not using 0\u003dsuccess/-1\u003dfailure.\n\n(this is why we\u0027ve just been using bool in new APIs. much less confusing. only hardware engineers are crazy enough to use negative logic!)",
+      "revId": "c494733146710a0182b5bd7bdbcb4e7118326288",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
