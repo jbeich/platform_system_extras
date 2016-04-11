@@ -26,6 +26,7 @@ LOCAL_STATIC_LIBRARIES += \
     libtestUtil
 
 LOCAL_SHARED_LIBRARIES += \
+    libbase \
     libutils \
     liblog \
     libbinder
