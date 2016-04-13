@@ -71,11 +71,9 @@ dtoverlay_test_app "$test_gen/$fname.base_dtb" \
   "$test_gen/$fname.add_ov_dtbo" \
   "$test_gen/$fname.base_ov.dtb"
 
-dt_source () {
-  dtc -O dts -qq -f -s -o - $1
-}
+source base.sh
 
 # Run the diff
-diff -u <(dt_source "$test_gen/$fname.base_inc.dtb") <((dt_source "$test_gen/$fname.base_ov.dtb") | sed "/__symbols__/,/[}];/d" | sed "/\(^[ \t]*phandle\)/d" | sed "/\(^[ \t]*linux,phandle\)/d" | sed '$!N; /^\(.*\)\n\1$/!P; D')
+dt_diff $test_gen/$fname.base_inc.dtb $test_gen/$fname.base_ov.dtb
 
 set +x
