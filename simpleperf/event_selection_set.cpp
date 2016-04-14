@@ -231,6 +231,17 @@ bool EventSelectionSet::OpenEventFiles(const std::vector<pid_t>& threads,
   return true;
 }
 
+bool EventSelectionSet::EnableEvents() {
+  for (auto& selection : selections_) {
+    for (auto& event_fd : selection.event_fds) {
+      if (!event_fd->EnableEvent()) {
+        return false;
+      }
+    }
+  }
+  return true;
+}
+
 bool EventSelectionSet::ReadCounters(std::vector<CountersInfo>* counters) {
   counters->clear();
   for (auto& selection : selections_) {

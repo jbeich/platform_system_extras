@@ -35,6 +35,7 @@
 #include "command.h"
 #include "event_attr.h"
 #include "event_fd.h"
+#include "event_selection_set.h"
 #include "event_type.h"
 
 static std::unique_ptr<Command> RecordCmd() {
@@ -219,6 +220,58 @@ TEST(cpu_offline, offline_while_recording) {
   cpu_toggle_arg.end_flag = true;
   cpu_toggle_thread.join();
 }
+
+static void CpuToggleThreadWithoutSleep(CpuToggleThreadArg* arg) {
+  while (!arg->end_flag) {
+    SetCpuOnline(arg->toggle_cpu, true);
+    SetCpuOnline(arg->toggle_cpu, false);
+  }
+}
+
+TEST(cpu_offline, offline_while_ioctl_enable) {
+  ScopedMpdecisionKiller scoped_mpdecision_killer;
+  CpuOnlineRestorer cpuonline_restorer;
+
+  if (GetCpuCount() == 1) {
+    GTEST_LOG_(INFO) << "This test does nothing, because there is only one cpu in the system.";
+    return;
+  }
+  for (int i = 1; i < GetCpuCount(); ++i) {
+    if (!IsCpuOnline(i)) {
+      SetCpuOnline(i, true);
+    }
+  }
+  // Start cpu hotplugger.
+  int test_cpu = GetCpuCount() - 1;
+  CpuToggleThreadArg cpu_toggle_arg;
+  cpu_toggle_arg.toggle_cpu = test_cpu;
+  cpu_toggle_arg.end_flag = false;
+  std::thread cpu_toggle_thread(CpuToggleThreadWithoutSleep, &cpu_toggle_arg);
+
+  std::unique_ptr<EventTypeAndModifier> event_type = ParseEventType("cpu-cycles");
+  ASSERT_TRUE(event_type != nullptr);
+
+  const std::chrono::hours test_duration(10);  // Test for 10 hours.
+
+  auto end_time = std::chrono::steady_clock::now() + test_duration;
+  size_t iterations = 0;
+  while (std::chrono::steady_clock::now() < end_time) {
+    iterations++;
+    GTEST_LOG_(INFO) << "Test for " << iterations << " times.";
+    EventSelectionSet event_selection_set;
+    ASSERT_TRUE(event_selection_set.AddEventType(*event_type));
+    event_selection_set.SetEnableOnExec(false);
+    bool ret = event_selection_set.OpenEventFilesForCpus({test_cpu});
+    if (!ret) {
+      // Failed to open because the test_cpu is offline.
+      continue;
+    }
+    ASSERT_TRUE(event_selection_set.EnableEvents());
+  }
+  cpu_toggle_arg.end_flag = true;
+  cpu_toggle_thread.join();
+}
+
 
 static std::unique_ptr<EventFd> OpenHardwareEventOnCpu(int cpu) {
   std::unique_ptr<EventTypeAndModifier> event_type_modifier = ParseEventType("cpu-cycles");
