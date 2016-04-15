@@ -77,7 +77,7 @@ bool RecordFileWriter::WriteAttrSection(const std::vector<AttrWithId>& attr_ids)
   }
 
   // Write id section.
-  long id_section_offset = ftell(record_fp_);
+  auto id_section_offset = ftell(record_fp_);
   if (id_section_offset == -1) {
     return false;
   }
@@ -88,7 +88,7 @@ bool RecordFileWriter::WriteAttrSection(const std::vector<AttrWithId>& attr_ids)
   }
 
   // Write attr section.
-  long attr_section_offset = ftell(record_fp_);
+  auto attr_section_offset = ftell(record_fp_);
   if (attr_section_offset == -1) {
     return false;
   }
@@ -103,7 +103,7 @@ bool RecordFileWriter::WriteAttrSection(const std::vector<AttrWithId>& attr_ids)
     }
   }
 
-  long data_section_offset = ftell(record_fp_);
+  auto data_section_offset = ftell(record_fp_);
   if (data_section_offset == -1) {
     return false;
   }
@@ -138,7 +138,7 @@ bool RecordFileWriter::SeekFileEnd(uint64_t* file_end) {
     PLOG(ERROR) << "fseek() failed";
     return false;
   }
-  long offset = ftell(record_fp_);
+  auto offset = ftell(record_fp_);
   if (offset == -1) {
     PLOG(ERROR) << "ftell() failed";
     return false;
