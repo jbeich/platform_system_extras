@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "e847c065_c3afb6ee",
+        "filename": "simpleperf/environment.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-04-15T23:25:36Z",
+      "side": 1,
+      "message": "shall we make cpu and last_cpu type int, and use static_cast\u003cint\u003e(strtol()) here?",
+      "range": {
+        "startLine": 89,
+        "startChar": 16,
+        "endLine": 89,
+        "endChar": 22
+      },
+      "revId": "d9d00ff9f187054a887fc45c1bcc57020e71162d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e847c065_e3c992d0",
         "filename": "simpleperf/record_file_writer.cpp",
         "patchSetId": 1
