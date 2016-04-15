@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e847c065_e3c992d0",
+        "filename": "simpleperf/record_file_writer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2016-04-15T23:22:37Z",
+      "side": 1,
+      "message": "this whole change is pretty dubious, but this is actually making the code worse by hiding the problem.\n\nuse ftello if you want off_t. but otherwise, long is the return type of ftell, and there\u0027s nothing anyone can do about it.\n\nthis google nonsense might be slightly useful in some places (for our own API, say), but it\u0027s a bad idea globally.",
+      "range": {
+        "startLine": 80,
+        "startChar": 2,
+        "endLine": 80,
+        "endChar": 6
+      },
+      "revId": "d9d00ff9f187054a887fc45c1bcc57020e71162d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
