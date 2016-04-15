@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e847c065_63236242",
+        "filename": "simpleperf/event_fd.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-04-15T23:40:56Z",
+      "side": 1,
+      "message": "so the lint hates long/unsigned long/long long/unsigned long long ?",
+      "range": {
+        "startLine": 41,
+        "startChar": 51,
+        "endLine": 41,
+        "endChar": 60
+      },
+      "revId": "99e4f7f44e45f41603f7f0ce4eefb7033863fe95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
