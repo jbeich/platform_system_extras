@@ -22,6 +22,30 @@
       "revId": "99e4f7f44e45f41603f7f0ce4eefb7033863fe95",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e847c065_0695dc2b",
+        "filename": "simpleperf/event_fd.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1052399
+      },
+      "writtenOn": "2016-04-16T01:04:39Z",
+      "side": 1,
+      "message": "It\u0027s  google-runtime-int complaining now.\nNot every C/C++ lint or compiler gives such warning.\nSometimes it\u0027s helpful to make code more portable to 32-bit and 64-bit targets.",
+      "parentUuid": "e847c065_63236242",
+      "range": {
+        "startLine": 41,
+        "startChar": 51,
+        "endLine": 41,
+        "endChar": 60
+      },
+      "revId": "99e4f7f44e45f41603f7f0ce4eefb7033863fe95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
