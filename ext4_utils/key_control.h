@@ -1,7 +1,8 @@
-#include <sys/cdefs.h>
 #include <sys/types.h>
 
-__BEGIN_DECLS
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 // ext4enc:TODO - get these keyring standard definitions from proper system file
 // keyring serial number type
@@ -28,4 +29,6 @@ long keyctl_setperm(key_serial_t id, int permissions);
 long keyctl_search(key_serial_t ringid, const char *type,
                    const char *description, key_serial_t destringid);
 
-__END_DECLS
+#ifdef __cplusplus
+}
+#endif
