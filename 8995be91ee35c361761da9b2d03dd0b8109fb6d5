@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "a884e9cc_a5c38847",
+        "filename": "simpleperf/cpu_hotplug_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-04-26T17:55:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8839e5d2_94c0ca3b",
+      "range": {
+        "startLine": 214,
+        "startChar": 15,
+        "endLine": 214,
+        "endChar": 25
+      },
+      "revId": "8995be91ee35c361761da9b2d03dd0b8109fb6d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8839e5d2_74dd6624",
         "filename": "simpleperf/cpu_hotplug_test.cpp",
         "patchSetId": 1
@@ -36,6 +60,24 @@
       "writtenOn": "2016-04-26T12:50:26Z",
       "side": 1,
       "message": "truncated comment?",
+      "revId": "8995be91ee35c361761da9b2d03dd0b8109fb6d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a884e9cc_05c7d456",
+        "filename": "simpleperf/cpu_hotplug_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-04-26T17:55:45Z",
+      "side": 1,
+      "message": "oh, I added the comment in the wrong code base.",
+      "parentUuid": "8839e5d2_74dd6624",
       "revId": "8995be91ee35c361761da9b2d03dd0b8109fb6d5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
