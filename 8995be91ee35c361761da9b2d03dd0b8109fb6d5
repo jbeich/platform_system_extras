@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8839e5d2_94c0ca3b",
+        "filename": "simpleperf/cpu_hotplug_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2016-04-26T12:50:26Z",
+      "side": 1,
+      "message": "nit: typo (extra \u0027e\u0027)",
+      "range": {
+        "startLine": 214,
+        "startChar": 15,
+        "endLine": 214,
+        "endChar": 25
+      },
+      "revId": "8995be91ee35c361761da9b2d03dd0b8109fb6d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8839e5d2_74dd6624",
+        "filename": "simpleperf/cpu_hotplug_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2016-04-26T12:50:26Z",
+      "side": 1,
+      "message": "truncated comment?",
+      "revId": "8995be91ee35c361761da9b2d03dd0b8109fb6d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
