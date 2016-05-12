@@ -1,0 +1,195 @@
+#! /bin/sh
+progname="${0##*/}"
+progname="${progname%.sh}"
+
+usage() {
+  echo "Filter to convert kernel /proc/lockdep_chains via graphviz into"
+  echo "dependency chart for visualization. Watch out for up-arrows!"
+  echo
+  echo "Usage: ${progname} [flags...] [regex...] < lockdep_chains > outputfile"
+  echo
+  echo "flags:"
+  echo "       --format={png|ps|svg|fig|imap|cmapx} | -T<format>"
+  echo "           Output format, default png"
+  echo "       --debug | -d"
+  echo "           Leave intermediate files /tmp/${progname}.*"
+  echo "       --verbose | -v"
+  echo "           Do not strip address from lockname"
+  echo "       --focus | -f"
+  echo "           Show only primary references for regex matches"
+  echo "       --cluster"
+  echo "           Cluster the primary references for regex matches"
+  echo
+  echo "ps or pdf formats tend to pixelate. Chart is best viewed in portrait."
+  echo "png formats tend to hit a bug in cairo rendering at scale."
+  echo "Not having a set of regex matches for locknames will probably give you"
+  echo "what you deserve ..."
+  echo
+  echo "Kernel Prerequisite to get /proc/lockdep_chains:"
+  echo "       CONFIG_PROVE_LOCKING=y"
+  echo "       CONFIG_LOCK_STAT=y"
+  echo "       CONFIG_DEBUG_LOCKDEP=y"
+}
+
+rm -f /tmp/${progname}.*
+
+# Indent rules and strip out address
+beautify() {
+  sed 's/^./    &/
+       s/"[[][0-9a-f]*[]] /"/g'
+}
+
+dot_format="-Tpng"
+filter=
+debug=
+focus=
+cluster=
+while [ ${#} -gt 0 ]; do
+  case ${1} in
+    -T*)
+      dot_format="${1}"
+      ;;
+    --format=?*)
+      dot_format="-T${1#--format=}"
+      ;;
+    --debug|-d)
+      debug=1
+      ;;
+    --verbose|-v)
+      # indent, but do _not_ strip out addresses
+      beautify() {
+        sed 's/^./    &/'
+      }
+      ;;
+    --focus|-f|--primary) # reserving --primary
+      focus=1
+      ;;
+    --secondary) # reserving --secondary
+      focus=
+      ;;
+    --cluster) # reserve -c for dot (configure plugins)
+      cluster=1
+      ;;
+    --help|-h|-\?)
+      usage
+      exit
+      ;;
+    *)
+      if [ X"${1}" = X"${1#* }" ]; then
+        if [ -z "${filter}" ]; then
+          filter="${1}"
+        else
+          filter="${filter}|${1}"
+        fi
+      else
+        if [ -z "${filter}" ]; then
+          filter=" ${1}"
+        else
+          filter="${filter}| ${1}"
+        fi
+      fi
+      ;;
+  esac
+  shift
+done
+
+if [ -z "${filter}" ]; then
+  echo "WARNING: no regex specified will give you what you deserve!" >&2
+fi
+if [ -n "${focus}" -a -z "${filter}" ]; then
+  echo "WARNING: --focus without regex, ignored" >&2
+fi
+if [ -n "${cluster}" -a -z "${filter}" ]; then
+  echo "WARNING: --cluster without regex, ignored" >&2
+fi
+if [ -n "${cluster}" -a -n "${focus}" -a -n "${filter}" ]; then
+  echo "WARNING: orthogonal options --cluster & --focus, ignoring --cluster" >&2
+  cluster=
+fi
+
+# convert to dot digraph series
+sed '/^all lock chains:$/d
+     / [&]__lockdep_no_validate__$/d
+     /irq_context: 0/d
+     s/irq_context: [1-9]/irq_context/
+     s/..*/"&" ->/
+     s/^$/;/' |
+  sed ': loop
+       N
+       s/ ->\n;$/ ;/
+       t
+       s/ ->\n/ -> /
+       b loop' > /tmp/${progname}.formed
+
+if [ -n "${filter}" ]; then
+  grep "${filter}" /tmp/${progname}.formed |
+    sed 's/ ;//
+         s/ -> /|/g' |
+      tr '|' '\n' |
+        sort -u > /tmp/${progname}.symbols
+fi
+
+(
+  echo 'digraph G {'
+  (
+    echo 'remincross="true";'
+    echo 'concentrate="true";'
+    echo
+    if [ -s /tmp/${progname}.symbols ]; then
+      if [ -n "${cluster}" ]; then
+        echo 'subgraph cluster_symbols {'
+        (
+          grep "${filter}" /tmp/${progname}.symbols |
+            sed 's/.*/& [shape=box] ;/'
+          grep -v "${filter}" /tmp/${progname}.symbols |
+            sed 's/.*/& [shape=diamond] ;/'
+        ) | beautify
+        echo '}'
+      else
+        grep "${filter}" /tmp/${progname}.symbols |
+          sed 's/.*/& [shape=box] ;/'
+        grep -v "${filter}" /tmp/${progname}.symbols |
+          sed 's/.*/& [shape=diamond] ;/'
+      fi
+      echo
+    fi
+  ) | beautify
+  if [ -s /tmp/${progname}.symbols ]; then
+    if [ -z "${focus}" ]; then
+      # Secondary relationships
+      fgrep -f /tmp/${progname}.symbols /tmp/${progname}.formed
+    else
+      # Focus only on primary relationships
+      grep "${filter}" /tmp/${progname}.formed
+    fi
+  else
+    cat /tmp/${progname}.formed
+  fi |
+    # optimize int A -> B ; single references
+    sed 's/\("[^"]*"\) -> \("[^"]*"\) ->/\1 -> \2 ;|\2 ->/g' |
+      sed 's/\("[^"]*"\) -> \("[^"]*"\) ->/\1 -> \2 ;|\2 ->/g' |
+        tr '|' '\n' |
+          beautify |
+            grep ' -> ' |
+              sort -u |
+              if [ -s /tmp/${progname}.symbols ]; then
+                beautify < /tmp/${progname}.symbols |
+                  sed 's/^  */ /' > /tmp/${progname}.short
+                tee /tmp/${progname}.split |
+                  fgrep -f /tmp/${progname}.short |
+                    sed 's/ ;$/ [color=red] ;/'
+                fgrep -v -f /tmp/${progname}.short /tmp/${progname}.split
+                rm -f /tmp/${progname}.short /tmp/${progname}.split
+              else
+                cat -
+              fi
+  echo '}'
+) |
+  tee /tmp/${progname}.input |
+    dot ${dot_format} &&
+      if [ -z "${debug}" ]; then
+        rm -f /tmp/${progname}.*
+      else
+        # keep formed and input around
+        rm -f /tmp/${progname}.symbols
+      fi
