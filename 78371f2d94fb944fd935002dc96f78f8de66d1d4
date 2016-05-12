@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7254a4e4_65538cd1",
+        "filename": "tools/graph_lockdep_chains",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2016-05-12T21:00:41Z",
+      "side": 1,
+      "message": "Is the filter useful for anything besides /proc/lockdep_chains? If not, it would be better to make /proc/lockdep_chains the default instead of forcing the user to specify it as the input stream. You could have a flag to override (eg \"--input\u003d\u003cinput path\u003e\").\n\nIf they don\u0027t specify an output file, do they get a bunch of gibberish on the screen? If so, I\u0027d prefer an argument to specify the output file (eg \"--output\u003d\u003coutputfile\u003e\")\n\nThen this would be \"Usage: ${progname} [flags...] [regex...]\"",
+      "revId": "78371f2d94fb944fd935002dc96f78f8de66d1d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
