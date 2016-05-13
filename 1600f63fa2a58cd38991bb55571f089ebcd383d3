@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7254a4e4_1044b90b",
+        "filename": "tools/graph_lockdep_chains",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2016-05-13T16:07:43Z",
+      "side": 1,
+      "message": "\"from\"",
+      "range": {
+        "startLine": 26,
+        "startChar": 59,
+        "endLine": 26,
+        "endChar": 61
+      },
+      "revId": "1600f63fa2a58cd38991bb55571f089ebcd383d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
