@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "57f5d23b_e86747db",
+        "filename": "tests/pagingtest/pageinout_test.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1105434
+      },
+      "writtenOn": "2016-05-17T18:17:41Z",
+      "side": 1,
+      "message": "Very minor. Rename this \"prefetch\" or \"readahead\" instead ? Since that is what is being disabled (or left enabled) ? With the cache hits (because we are reading ahead) being a effect of that ?",
+      "range": {
+        "startLine": 12,
+        "startChar": 34,
+        "endLine": 12,
+        "endChar": 44
+      },
+      "revId": "f63f1206023881a8b14e5e14ea51c08b561dae78",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "57f5d23b_a8b25f56",
+        "filename": "tests/pagingtest/pageinout_test.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1105434
+      },
+      "writtenOn": "2016-05-17T18:17:41Z",
+      "side": 1,
+      "message": "While true that prefetch results in cache hits since we are sequentially reading, should we mention prefetch enabled/disabled instead of (un)cached ?",
+      "range": {
+        "startLine": 88,
+        "startChar": 4,
+        "endLine": 88,
+        "endChar": 62
+      },
+      "revId": "f63f1206023881a8b14e5e14ea51c08b561dae78",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
