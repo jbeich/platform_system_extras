@@ -115,6 +115,15 @@ void ConfigReader::addDefaultEntries()
   // file parsing.
   addUnsignedEntry("trace_config_read", 0, 0, 1);
 
+  // For unit testing only: set to 0 to turn off OAT
+  // remapping/postprocessing.
+  addUnsignedEntry("oatfile_remap", 1, 0, 1);
+
+  // For testing purposes, this controls whether OAT file
+  // mapping data is generated internally (the default)
+  // or read from oatdump (testing only)
+  addUnsignedEntry("oatmap_with_oatdump", 0, 1, 1);
+
   // Control collection of various additional profile tags
   addUnsignedEntry("collect_cpu_utilization", 1, 0, 1);
   addUnsignedEntry("collect_charging_state", 1, 0, 1);
@@ -185,6 +194,14 @@ void ConfigReader::overrideUnsignedEntry(const char *key, unsigned new_value)
   W_ALOGI("option %s overridden to %u", key, new_value);
 }
 
+void ConfigReader::overrideStringEntry(const char *key, const char *val)
+{
+  std::string ks(key);
+  auto it = s_entries.find(ks);
+  assert(it != s_entries.end());
+  it->second = std::string(val);
+  W_ALOGI("option %s overridden to %s", key, val);
+}
 
 //
 // Parse a key=value pair read from the config file. This will issue
