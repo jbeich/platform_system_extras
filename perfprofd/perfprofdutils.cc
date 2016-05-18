@@ -48,6 +48,14 @@ void perfprofd_log_info(const char *fmt, ...)
     va_end(ap);
 }
 
+void perfprofd_log_debug(const char *fmt, ...)
+{
+    va_list ap;
+    va_start(ap, fmt);
+    LOG_PRI_VA(ANDROID_LOG_DEBUG, LOG_TAG, fmt, ap);
+    va_end(ap);
+}
+
 void perfprofd_sleep(int seconds)
 {
   sleep(seconds);
