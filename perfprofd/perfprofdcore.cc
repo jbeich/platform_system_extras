@@ -43,6 +43,8 @@
 #include "perf_data_converter.h"
 #include "cpuconfig.h"
 #include "configreader.h"
+#include "alarmhelper.h"
+#include "oatmapper.h"
 
 //
 // Perf profiling daemon -- collects system-wide profiles using
@@ -226,53 +228,6 @@ bool get_booting()
   propBuf[0] = '\0';
   property_get("sys.boot_completed", propBuf, "");
   return (propBuf[0] != '1');
-}
-
-//
-// Constructor takes a timeout (in seconds) and a child pid; If an
-// alarm set for the specified number of seconds triggers, then a
-// SIGKILL is sent to the child. Destructor resets alarm. Example:
-//
-//       pid_t child_pid = ...;
-//       { AlarmHelper h(10, child_pid);
-//         ... = read_from_child(child_pid, ...);
-//       }
-//
-// NB: this helper is not re-entrant-- avoid nested use or
-// use by multiple threads
-//
-class AlarmHelper {
- public:
-  AlarmHelper(unsigned num_seconds, pid_t child)
-  {
-    struct sigaction sigact;
-    assert(child);
-    assert(child_ == 0);
-    memset(&sigact, 0, sizeof(sigact));
-    sigact.sa_sigaction = handler;
-    sigaction(SIGALRM, &sigact, &oldsigact_);
-    child_ = child;
-    alarm(num_seconds);
-  }
-  ~AlarmHelper()
-  {
-    alarm(0);
-    child_ = 0;
-    sigaction(SIGALRM, &oldsigact_, NULL);
-  }
-  static void handler(int, siginfo_t *, void *);
-
- private:
-  struct sigaction oldsigact_;
-  static pid_t child_;
-};
-
-pid_t AlarmHelper::child_;
-
-void AlarmHelper::handler(int, siginfo_t *, void *)
-{
-  W_ALOGW("SIGALRM timeout");
-  kill(child_, SIGKILL);
 }
 
 //
@@ -462,10 +417,6 @@ static void annotate_encoded_perf_profile(wireless_android_play_playlog::Android
   }
 }
 
-inline char* string_as_array(std::string* str) {
-  return str->empty() ? NULL : &*str->begin();
-}
-
 PROFILE_RESULT encode_to_proto(const std::string &data_file_path,
                                const char *encoded_file_path,
                                const ConfigReader &config,
@@ -484,11 +435,25 @@ PROFILE_RESULT encode_to_proto(const std::string &data_file_path,
     return ERR_PERF_ENCODE_FAILED;
   }
 
-  // All of the info in 'encodedProfile' is derived from the perf.data file;
-  // here we tack display status, cpu utilization, system load, etc.
   wireless_android_play_playlog::AndroidPerfProfile &prof =
       const_cast<wireless_android_play_playlog::AndroidPerfProfile&>
       (encodedProfile);
+
+  //
+  // Post-process to handle OAT files.
+  //
+  if (config.getUnsignedValue("oatfile_remap")) {
+    std::string dest_dir = config.getStringValue("destination_directory");
+    unsigned od = config.getUnsignedValue("oatmap_with_oatdump");
+    OatMapGenFlavor mgflav = (od ? OATMAPGEN_OATDUMP : OATMAPGEN_NORMAL);
+    OatMapper oatmapper(dest_dir.c_str(), mgflav);
+    oatmapper.postprocess_encoded_profile(prof);
+  }
+
+  //
+  // All of the info in 'encodedProfile' is derived from the perf.data file;
+  // here we tack display status, cpu utilization, system load, etc.
+  //
   annotate_encoded_perf_profile(&prof, config, cpu_utilization);
 
   //
