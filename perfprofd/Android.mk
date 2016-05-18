@@ -23,6 +23,7 @@ LOCAL_STATIC_LIBRARIES := libbase
 LOCAL_EXPORT_C_INCLUDE_DIRS += $(proto_header_dir)
 LOCAL_SRC_FILES :=  \
 	perf_profile.proto \
+	oatmap.proto \
 	quipper/perf_utils.cc \
 	quipper/base/logging.cc \
 	quipper/address_mapper.cc \
@@ -31,6 +32,8 @@ LOCAL_SRC_FILES :=  \
 	perf_data_converter.cc \
 	configreader.cc \
 	cpuconfig.cc \
+	oatmapper.cc \
+	alarmhelper.cc \
 	perfprofdcore.cc \
 
 LOCAL_CPPFLAGS += $(perfprofd_cppflags)

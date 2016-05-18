@@ -114,6 +114,7 @@ RawPerfDataToAndroidPerfProfile(const string &perf_file) {
         auto address_samples = module->add_address_samples();
         address_samples->add_address(addr_count.first);
         address_samples->set_count(addr_count.second);
+
       }
       for (const auto &range_count : module_profile.second.range_count_map) {
         auto range_samples = module->add_range_samples();
