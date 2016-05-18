@@ -1,0 +1,9 @@
+//
+// My attempt to avoid duplicating oatmap.proto between
+// perfprod and oatdump, which did not seem to work as
+// expected (this sort of wrapping isn't supported).
+//
+syntax = "proto2";
+option optimize_for = LITE_RUNTIME;
+package oatmap;
+import public "oatmap.proto";
