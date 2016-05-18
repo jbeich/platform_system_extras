@@ -45,8 +45,9 @@ class ConfigReader {
   static void setConfigFilePath(const char *path);
   static const char *getConfigFilePath();
 
-  // override a config item (for unit testing purposes)
+  // override config items (for unit testing purposes)
   void overrideUnsignedEntry(const char *key, unsigned new_value);
+  void overrideStringEntry(const char *key, const char *value);
 
  private:
   void addUnsignedEntry(const char *key,
