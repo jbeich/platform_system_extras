@@ -20,6 +20,10 @@
 
 class ConfigReader;
 
+inline char* string_as_array(std::string* str) {
+  return str->empty() ? NULL : &*str->begin();
+}
+
 // Semaphore file that indicates that the user is opting in
 #define SEMAPHORE_FILENAME "perf_profile_collection_enabled.txt"
 
