@@ -28,6 +28,17 @@ LOCAL_SRC_FILES := canned.perf.data
 include $(BUILD_PREBUILT)
 
 #
+# Canned OAT file needed by unit test.
+#
+include $(CLEAR_VARS)
+LOCAL_MODULE := smallish.odex
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := DATA
+LOCAL_MODULE_PATH := $(TARGET_OUT_DATA)/nativetest/perfprofd_test
+LOCAL_SRC_FILES := smallish.odex
+include $(BUILD_PREBUILT)
+
+#
 # Unit test for perfprofd
 #
 include $(CLEAR_VARS)
