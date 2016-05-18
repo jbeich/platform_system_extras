@@ -30,9 +30,13 @@
 #include "configreader.h"
 #include "perfprofdutils.h"
 #include "perfprofdmockutils.h"
+#include "oatmapper.h"
 
 #include "perf_profile.pb.h"
 #include "google/protobuf/text_format.h"
+
+using wireless_android_play_playlog::OatFileInfo;
+
 
 //
 // Set to argv[0] on startup
@@ -440,6 +444,62 @@ TEST_F(PerfProfdTest, BadPerfRun)
   // check to make sure log excerpt matches
   compareLogMessages(mock_perfprofdutils_getlogged(),
                      expected, "BadPerfRun");
+}
+
+TEST_F(PerfProfdTest, OatFileProcessing)
+{
+  std::string input_oat(test_dir);
+  input_oat += "/smallish.odex";
+
+  //
+  // Non-existent oat path, cache files
+  //
+  { OatFileInfo oatinfo;
+    bool res = collect_oatfile_checksums("/this/file/does/not/exist",
+                                         "/this/file/does/not/exist",
+                                         "/this/file/does/not/exist",
+                                         oatinfo);
+    EXPECT_FALSE(res);
+  }
+
+  //
+  // Files exist but have no usable content
+  //
+  { OatFileInfo oatinfo;
+    bool res = collect_oatfile_checksums("/dev/null",
+                                         "/dev/null",
+                                         "/dev/null",
+                                         oatinfo);
+    EXPECT_FALSE(res);
+  }
+
+  //
+  // Real oat file this time
+  //
+  { OatFileInfo oatinfo;
+    std::string oatinfo_cache(dest_dir);
+    oatinfo_cache += "/oatinfo.cache";
+    std::string oatmap_cache(dest_dir);
+    oatmap_cache += "/oatmap.cache";
+    bool res = collect_oatfile_checksums(input_oat.c_str(),
+                                         oatmap_cache.c_str(),
+                                         oatinfo_cache.c_str(),
+                                         oatinfo);
+    EXPECT_TRUE(res);
+
+    // Verify expected contents
+    EXPECT_EQ(oatinfo.dex_sha1_signatures().size(), 2);
+    EXPECT_EQ(oatinfo.dex_sha1_signatures(0),
+              "4e3e47a666a0de661f688fd82fc2dfd9dc38e99c");
+    EXPECT_EQ(oatinfo.adler32_checksum(), 1999272847);
+
+    // Verify that cache files were created
+    struct stat statb;
+    EXPECT_EQ(stat(oatinfo_cache.c_str(), &statb), 0);
+    EXPECT_EQ(statb.st_size, 90);
+    EXPECT_EQ(stat(oatmap_cache.c_str(), &statb), 0);
+    EXPECT_EQ(statb.st_size, 1371);
+  }
 }
 
 TEST_F(PerfProfdTest, ConfigFileParsing)
