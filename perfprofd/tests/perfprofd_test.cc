@@ -31,9 +31,13 @@
 #include "configreader.h"
 #include "perfprofdutils.h"
 #include "perfprofdmockutils.h"
+#include "oatmapper.h"
 
 #include "perf_profile.pb.h"
 #include "google/protobuf/text_format.h"
+
+using wireless_android_play_playlog::OatFileInfo;
+
 
 //
 // Set to argv[0] on startup
@@ -50,9 +54,6 @@ static const char *executable_path;
 //
 static std::string test_dir;
 static std::string dest_dir;
-
-// Path to perf executable on device
-#define PERFPATH "/system/bin/perf"
 
 // Temporary config file that we will emit for the daemon to read
 #define CONFIGFILE "perfprofd.conf"
@@ -443,6 +444,78 @@ TEST_F(PerfProfdTest, BadPerfRun)
                      expected, "BadPerfRun");
 }
 
+TEST_F(PerfProfdTest, OatFileProcessing)
+{
+  std::string input_oat(test_dir);
+  input_oat += "/smallish.odex";
+
+  //
+  // Non-existent oat path, cache files
+  //
+  {
+    OatFileInfo oatinfo;
+    OatMapper mapper(dest_dir.c_str(), OATMAPGEN_NORMAL);
+    uint64_t start_addr = 0;
+    bool res = mapper.collect_oatfile_checksums("/this/file/does/not/exist",
+                                                start_addr,
+                                                oatinfo);
+    EXPECT_FALSE(res);
+  }
+
+  //
+  // Files exist but have no usable content
+  //
+  {
+    OatFileInfo oatinfo;
+    OatMapper mapper(dest_dir.c_str(), OATMAPGEN_NORMAL);
+    uint64_t start_addr = 0;
+    bool res = mapper.collect_oatfile_checksums("/dev/null",
+                                                start_addr,
+                                                oatinfo);
+    EXPECT_FALSE(res);
+  }
+
+  //
+  // Real oat file this time
+  //
+  OatFileInfo oatinfo;
+  OatMapper mapper(dest_dir.c_str(), OATMAPGEN_NORMAL);
+  uint64_t start_addr = 0x8000;
+  std::string oatmap_cache = mapper.cachepath(input_oat.c_str());
+  unlink(oatmap_cache.c_str());
+  bool res = mapper.collect_oatfile_checksums(input_oat.c_str(),
+                                              start_addr,
+                                              oatinfo);
+  EXPECT_TRUE(res);
+
+  // Verify expected contents
+  ASSERT_EQ(oatinfo.dex_sha1_signatures().size(), 1);
+  EXPECT_EQ(oatinfo.dex_sha1_signatures(0), "fd56aced78355c305a953d6f3dfe1f7ff6ac440");
+  EXPECT_EQ(oatinfo.adler32_checksum(), 1680763076);
+
+  // Verify that cache file was created just for grins
+  struct stat statb;
+  EXPECT_EQ(0, stat(oatmap_cache.c_str(), &statb));
+
+  // exercise address encoding meth
+
+  uint64_t addrs[] = { 0, 0x7014, 0x7019, 0x702d, 0x7704, 0x7706, 0x77a1 };
+  uint64_t expected_encodings[] = { 0, 1, 0, 2, 6, 6, 0 };
+  ASSERT_EQ(sizeof(addrs), sizeof(expected_encodings));
+  for (unsigned ii = 0; ii < sizeof(addrs)/sizeof(addrs[0]); ++ii) {
+    uint64_t encoded = mapper.encode_addr(input_oat.c_str(),
+                                          OAT_ADDR_METHOD,
+                                          addrs[ii]);
+
+    std::cerr << "iter " << ii << " addr=" << std::hex << addrs[ii]
+              << " encoded=" << std::dec << encoded << " expected="
+              << expected_encodings[ii] << "\n";
+
+    EXPECT_EQ(expected_encodings[ii], encoded);
+  }
+
+}
+
 TEST_F(PerfProfdTest, ConfigFileParsing)
 {
   //
@@ -512,6 +585,10 @@ TEST_F(PerfProfdTest, BasicRunWithCannedPerf)
   config.overrideUnsignedEntry("collect_cpu_utilization", 0);
   config.overrideUnsignedEntry("collect_charging_state", 0);
   config.overrideUnsignedEntry("collect_camera_active", 0);
+
+  // use local destination dir; turn off oat remapping
+  config.overrideStringEntry("destination_directory", dest_dir.c_str());
+  config.overrideUnsignedEntry("oatfile_remap", 0);
 
   // Kick off encoder and check return code
   PROFILE_RESULT result =
@@ -646,6 +723,33 @@ TEST_F(PerfProfdTest, CallchainRunWithCannedPerf)
   }
 }
 
+TEST_F(PerfProfdTest, AnotherRunWithCannedPerf)
+{
+  // Testing of OAT file symbolization
+  std::string input_perf_data(test_dir);
+  input_perf_data += "/oatsamples.perf.data";
+
+  // Set up config to avoid these annotations (they are tested elsewhere)
+  ConfigReader config;
+  config.overrideUnsignedEntry("collect_cpu_utilization", 0);
+  config.overrideUnsignedEntry("collect_charging_state", 0);
+  config.overrideUnsignedEntry("collect_camera_active", 0);
+
+  // use local destination dir; turn on oat remapping
+  config.overrideStringEntry("destination_directory", dest_dir.c_str());
+  config.overrideUnsignedEntry("oatfile_remap", 1);
+
+  // Kick off encoder and check return code
+  PROFILE_RESULT result =
+      encode_to_proto(input_perf_data, encoded_file_path(0).c_str(), config, 0);
+  EXPECT_EQ(OK_PROFILE_COLLECTION, result);
+
+  // Read and decode the resulting perf.data.encoded file
+  wireless_android_play_playlog::AndroidPerfProfile encodedProfile;
+  readEncodedProfile("AnotherRunWithCannedPerf",
+                     encodedProfile);
+}
+
 TEST_F(PerfProfdTest, BasicRunWithLivePerf)
 {
   //
@@ -662,7 +766,7 @@ TEST_F(PerfProfdTest, BasicRunWithLivePerf)
   runner.addToConfig("use_fixed_seed=12345678");
   runner.addToConfig("max_unprocessed_profiles=100");
   runner.addToConfig("collection_interval=9999");
-  runner.addToConfig("sample_duration=2");
+  runner.addToConfig("sample_duration=3");
 
   // Create semaphore file
   runner.create_semaphore_file();
@@ -726,7 +830,7 @@ TEST_F(PerfProfdTest, MultipleRunWithLivePerf)
 
   // Read and decode the resulting perf.data.encoded file
   wireless_android_play_playlog::AndroidPerfProfile encodedProfile;
-  readEncodedProfile("BasicRunWithLivePerf", encodedProfile);
+  readEncodedProfile("MultipleRunWithLivePerf", encodedProfile);
 
   // Examine what we get back. Since it's a live profile, we can't
   // really do much in terms of verifying the contents.
@@ -758,7 +862,7 @@ TEST_F(PerfProfdTest, MultipleRunWithLivePerf)
                                           );
   // check to make sure log excerpt matches
   compareLogMessages(mock_perfprofdutils_getlogged(),
-                     expected, "BasicRunWithLivePerf", true);
+                     expected, "MultipleRunWithLivePerf", true);
 }
 
 TEST_F(PerfProfdTest, CallChainRunWithLivePerf)

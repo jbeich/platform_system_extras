@@ -40,6 +40,26 @@ message RangeSample {
   optional int64 count = 4;
 };
 
+message OatFileInfo {
+  // OAT file checksum
+  optional int32 adler32_checksum = 1;
+
+  // Sha-1 signatures from each of the DEX files in the
+  // APK that this OAT files was compiled from
+  repeated string dex_sha1_signatures = 2;
+
+  // Address encoding method for this OAT file.
+  // 0 - unencoded (raw text address)
+  // 1 - map each text addr to its dex method ID
+  // 2 - map each text addr to its dex bytecode (where possible)
+  optional int32 address_encoding = 3;
+
+  // Base text address for OAT file. Typically interesting only
+  // we're recording raw text addresses (base for encoded addresses
+  // will be zero).
+  optional int64 base_text = 4;
+};
+
 // A load module.
 message LoadModule {
   // Name of the load_module.
@@ -47,6 +67,9 @@ message LoadModule {
 
   // LoadModule's linker build_id.
   optional string build_id = 2;
+
+  // OAT file information (if this load module is an OAT)
+  optional OatFileInfo oat_info = 3;
 }
 
 // All samples for a load_module.
@@ -60,6 +83,17 @@ message LoadModuleSamples {
   repeated RangeSample range_samples = 3;
 }
 
+message ApkInfo {
+  // name of APK
+  optional string apk_name = 1;
+
+  // top level package name (com.google.android.mumble)
+  optional string package_name = 2;
+
+  // application version code
+  optional string version_code = 3;
+};
+
 // All samples for a program.
 message ProgramSamples {
   // Name of the program.
@@ -67,6 +101,9 @@ message ProgramSamples {
 
   // Load module profiles.
   repeated LoadModuleSamples modules = 2;
+
+  // APK info if this program is an Android java application
+  optional ApkInfo apk_info = 3;
 }
 
 // A compressed representation of a perf profile, which contains samples from

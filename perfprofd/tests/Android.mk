@@ -1,3 +1,4 @@
+
 # Build the unit tests.
 LOCAL_PATH := $(call my-dir)
 
@@ -36,6 +37,27 @@ LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE_CLASS := DATA
 LOCAL_MODULE_PATH := $(TARGET_OUT_DATA)/nativetest/perfprofd_test
 LOCAL_SRC_FILES := callchain.canned.perf.data
+
+#
+# Third canned perf.data files needed by unit test.
+#
+include $(CLEAR_VARS)
+LOCAL_MODULE := oatsamples.perf.data
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := DATA
+LOCAL_MODULE_PATH := $(TARGET_OUT_DATA)/nativetest/perfprofd_test
+LOCAL_SRC_FILES := oatsamples.perf.data
+include $(BUILD_PREBUILT)
+
+#
+# Canned OAT file needed by unit test.
+#
+include $(CLEAR_VARS)
+LOCAL_MODULE := smallish.odex
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := DATA
+LOCAL_MODULE_PATH := $(TARGET_OUT_DATA)/nativetest/perfprofd_test
+LOCAL_SRC_FILES := smallish.odex
 include $(BUILD_PREBUILT)
 
 #
@@ -45,14 +67,63 @@ include $(CLEAR_VARS)
 LOCAL_CLANG := true
 LOCAL_CPP_EXTENSION := .cc
 LOCAL_CXX_STL := libc++
-LOCAL_STATIC_LIBRARIES := libperfprofdcore libperfprofdmockutils libgtest libbase
-LOCAL_SHARED_LIBRARIES := libprotobuf-cpp-lite
+LOCAL_STATIC_LIBRARIES := \
+  libperfprofdcore \
+  libperfprofdoatutils \
+  libperfprofdoatreader \
+  libperfprofileproto \
+  liboatmapproto \
+  libperfprofdmockutils \
+  libgtest \
+  libbase
+LOCAL_SHARED_LIBRARIES := \
+  libprotobuf-cpp-lite \
+  libart \
+  libLLVM \
+  libcutils
 LOCAL_C_INCLUDES += system/extras/perfprofd external/protobuf/src
 LOCAL_SRC_FILES := perfprofd_test.cc
 LOCAL_CPPFLAGS += $(perfprofd_test_cppflags)
-LOCAL_SHARED_LIBRARIES += libcutils
 LOCAL_MODULE := perfprofd_test
 include $(BUILD_NATIVE_TEST)
+
+#
+# Canned DEX file needed by unit test.
+#
+include $(CLEAR_VARS)
+LOCAL_MODULE := smallish.dex
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := DATA
+LOCAL_MODULE_PATH := $(TARGET_OUT_DATA)/nativetest/oatdexreader_test
+LOCAL_SRC_FILES := smallish.dex
+include $(BUILD_PREBUILT)
+
+#
+# Unit test for oatdexreader
+#
+include $(CLEAR_VARS)
+LOCAL_CLANG := true
+LOCAL_CPP_EXTENSION := .cc
+LOCAL_CXX_STL := libc++
+LOCAL_STATIC_LIBRARIES := \
+  libperfprofdoatutils \
+  libperfprofdoatreader \
+  libperfprofileproto \
+  liboatmapproto \
+  libperfprofdmockutils \
+  libgtest \
+  libbase
+LOCAL_SHARED_LIBRARIES := \
+  libprotobuf-cpp-lite \
+  libart \
+  libLLVM \
+  libcutils
+LOCAL_C_INCLUDES += system/extras/perfprofd external/protobuf/src
+LOCAL_SRC_FILES := oatdexreader_test.cc
+LOCAL_CPPFLAGS += $(perfprofd_test_cppflags)
+LOCAL_MODULE := oatdexreader_test
+include $(BUILD_NATIVE_TEST)
+
 
 # Clean temp vars
 perfprofd_test_cppflags :=
