@@ -15,7 +15,11 @@
 ** limitations under the License.
 */
 
+#ifndef SYSTEM_EXTRAS_PERFPROFD_PERFPROFDUTILS_H_
+#define SYSTEM_EXTRAS_PERFPROFD_PERFPROFDUTILS_H_
+
 #include <sys/cdefs.h>
+#include <string>
 
 __BEGIN_DECLS
 
@@ -27,10 +31,39 @@ __BEGIN_DECLS
 extern void perfprofd_log_error(const char *fmt, ...);
 extern void perfprofd_log_warning(const char *fmt, ...);
 extern void perfprofd_log_info(const char *fmt, ...);
+extern void perfprofd_log_debug(const char *fmt, ...);
 extern void perfprofd_sleep(int seconds);
 
 #define W_ALOGE perfprofd_log_error
 #define W_ALOGW perfprofd_log_warning
 #define W_ALOGI perfprofd_log_info
+#define W_ALOGD perfprofd_log_debug
 
 __END_DECLS
+
+inline char* string_as_array(std::string* str) {
+  return str->empty() ? NULL : &*str->begin();
+}
+
+//
+// Alignment helpers
+//
+inline bool IsAlignedPtr(unsigned char *ptr, unsigned pow2) {
+  uint64_t val64 = reinterpret_cast<uint64_t>(ptr);
+  assert((pow2 & (pow2-1)) == 0);
+  return (val64 & (pow2-1) ? false : true);
+}
+
+inline bool IsWordAlignedPtr(unsigned char *ptr) {
+  return IsAlignedPtr(ptr, 4);
+  uint64_t val64 = reinterpret_cast<uint64_t>(ptr);
+  return (val64 & 0x3 ? false : true);
+}
+
+#if DEBUGGING
+#define DEBUGLOG(x) W_ALOGD x
+#else
+#define DEBUGLOG(x)
+#endif
+
+#endif // SYSTEM_EXTRAS_PERFPROFD_PERFPROFDUTILS_H_
