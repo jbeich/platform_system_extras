@@ -1,6 +1,7 @@
 
 #include "perf_data_converter.h"
 #include "quipper/perf_parser.h"
+#include "oatmapper.h"
 #include <map>
 
 using std::map;
@@ -102,6 +103,7 @@ RawPerfDataToAndroidPerfProfile(const string &perf_file) {
         load_module->set_build_id(build_id);
       }
     }
+    postprocess_oatfile(name_id.first.c_str(), *load_module);
   }
   for (const auto &program_profile : name_profile_map) {
     auto program = ret.add_programs();
