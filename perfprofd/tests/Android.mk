@@ -28,14 +28,28 @@ LOCAL_SRC_FILES := canned.perf.data
 include $(BUILD_PREBUILT)
 
 #
+# Canned OAT file needed by unit test.
+#
+include $(CLEAR_VARS)
+LOCAL_MODULE := smallish.odex
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := DATA
+LOCAL_MODULE_PATH := $(TARGET_OUT_DATA)/nativetest/perfprofd_test
+LOCAL_SRC_FILES := smallish.odex
+include $(BUILD_PREBUILT)
+
+#
 # Unit test for perfprofd
 #
 include $(CLEAR_VARS)
 LOCAL_CLANG := true
 LOCAL_CPP_EXTENSION := .cc
 LOCAL_CXX_STL := libc++
-LOCAL_STATIC_LIBRARIES := libperfprofdcore libperfprofdmockutils libgtest libbase
-LOCAL_SHARED_LIBRARIES := libprotobuf-cpp-lite
+LOCAL_STATIC_LIBRARIES := libperfprofdcore libperfprofdoatutils libperfprofdmockutils libgtest libbase
+LOCAL_SHARED_LIBRARIES := \
+  libprotobuf-cpp-lite \
+  libLLVM
+
 LOCAL_C_INCLUDES += system/extras/perfprofd external/protobuf/src
 LOCAL_SRC_FILES := perfprofd_test.cc
 LOCAL_CPPFLAGS += $(perfprofd_test_cppflags)
