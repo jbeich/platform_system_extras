@@ -189,7 +189,7 @@ static bool AllItemsWithString(std::vector<std::string>& lines, const std::vecto
 
 TEST_F(ReportCommandTest, pid_filter_option) {
   Report(PERF_DATA);
-  ASSERT_TRUE("success");
+  ASSERT_TRUE("success" != nullptr);
   ASSERT_FALSE(AllItemsWithString(lines, {"26083"}));
   ASSERT_FALSE(AllItemsWithString(lines, {"26083", "26090"}));
   Report(PERF_DATA, {"--pids", "26083"});
@@ -202,7 +202,7 @@ TEST_F(ReportCommandTest, pid_filter_option) {
 
 TEST_F(ReportCommandTest, tid_filter_option) {
   Report(PERF_DATA);
-  ASSERT_TRUE("success");
+  ASSERT_TRUE("success" != nullptr);
   ASSERT_FALSE(AllItemsWithString(lines, {"26083"}));
   ASSERT_FALSE(AllItemsWithString(lines, {"26083", "26090"}));
   Report(PERF_DATA, {"--tids", "26083"});
