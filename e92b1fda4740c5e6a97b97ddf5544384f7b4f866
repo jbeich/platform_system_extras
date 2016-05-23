@@ -22,6 +22,30 @@
       "revId": "e92b1fda4740c5e6a97b97ddf5544384f7b4f866",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3c91230e_f9fdb749",
+        "filename": "tests/kernel.config/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2016-05-23T23:31:11Z",
+      "side": 1,
+      "message": "In this branch, nothing uses this variable at all, since we don\u0027t have the new cts build infrastructure. I believe all the N+ branches (which have the infrastructure) only take cts now.\n\nSo that should probably be a separate change, since AFAIK, it\u0027ll enable this test in CTS, where it\u0027s been disabled since they swapped from cts_v2 to cts. I guess it wouldn\u0027t hurt to make that change in this branch, but if you want it to happen in N, it should be made in that branch.",
+      "parentUuid": "3c91230e_797d27d4",
+      "range": {
+        "startLine": 70,
+        "startChar": 29,
+        "endLine": 70,
+        "endChar": 35
+      },
+      "revId": "e92b1fda4740c5e6a97b97ddf5544384f7b4f866",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
