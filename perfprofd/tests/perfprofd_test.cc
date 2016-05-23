@@ -25,6 +25,7 @@
 #include <fcntl.h>
 
 #include <android-base/stringprintf.h>
+#include <cutils/properties.h>
 
 #include "perfprofdcore.h"
 #include "configreader.h"
@@ -683,6 +684,68 @@ TEST_F(PerfProfdTest, MultipleRunWithLivePerf)
   // check to make sure log excerpt matches
   compareLogMessages(mock_perfprofdutils_getlogged(),
                      expected, "BasicRunWithLivePerf", true);
+}
+
+TEST_F(PerfProfdTest, CallChainRunWithLivePerf)
+{
+  //
+  // Callchain profiles are only supported on certain devices.
+  // For now this test is stubbed out except when run on "angler".
+  //
+  char propBuf[PROPERTY_VALUE_MAX];
+  propBuf[0] = '\0';
+  property_get("ro.hardware", propBuf, "");
+  if (strcmp(propBuf, "angler")) {
+    return;
+  }
+
+  //
+  // Collect a callchain profile, so as to exercise the code in
+  // perf_data post-processing that digests callchains.
+  //
+  PerfProfdRunner runner;
+  std::string ddparam("destination_directory="); ddparam += dest_dir;
+  runner.addToConfig(ddparam);
+  std::string cfparam("config_directory="); cfparam += test_dir;
+  runner.addToConfig(cfparam);
+  runner.addToConfig("main_loop_iterations=1");
+  runner.addToConfig("use_fixed_seed=12345678");
+  runner.addToConfig("max_unprocessed_profiles=100");
+  runner.addToConfig("collection_interval=9999");
+  runner.addToConfig("stack_profile=1");
+  runner.addToConfig("sample_duration=2");
+
+  // Create semaphore file
+  runner.create_semaphore_file();
+
+  // Kick off daemon
+  int daemon_main_return_code = runner.invoke();
+
+  // Check return code from daemon
+  EXPECT_EQ(0, daemon_main_return_code);
+
+  // Read and decode the resulting perf.data.encoded file
+  wireless_android_play_playlog::AndroidPerfProfile encodedProfile;
+  readEncodedProfile("CallChainRunWithLivePerf", encodedProfile);
+
+  // Examine what we get back. Since it's a live profile, we can't
+  // really do much in terms of verifying the contents.
+  EXPECT_LT(0, encodedProfile.programs_size());
+
+  // Verify log contents
+  const std::string expected = RAW_RESULT(
+      I: starting Android Wide Profiling daemon
+      I: config file path set to /data/nativetest/perfprofd_test/perfprofd.conf
+      I: random seed set to 12345678
+      I: sleep 674 seconds
+      I: initiating profile collection
+      I: profile collection complete
+      I: sleep 9325 seconds
+      I: finishing Android Wide Profiling daemon
+                                          );
+  // check to make sure log excerpt matches
+  compareLogMessages(mock_perfprofdutils_getlogged(),
+                     expected, "CallChainRunWithLivePerf", true);
 }
 
 int main(int argc, char **argv) {
