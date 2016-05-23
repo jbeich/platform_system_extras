@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3c91230e_8e6c63f7",
+        "filename": "tests/bootloader/bootctl.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2016-05-23T23:03:42Z",
+      "side": 1,
+      "message": "Copyright headers?",
+      "revId": "21b59d24140a1ca4544b5c0eb464b0d626de03cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3c91230e_798be72b",
+        "filename": "tests/bootloader/common.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2016-05-23T23:03:42Z",
+      "side": 1,
+      "message": "Probably better as an optional argument to the constructor.\n\n    def __init__(self, serial\u003dNone, *args, **kwargs):\n        super(ShellTest, self).__init__(*args, **kwargs)\n        self.serial \u003d serial\n        if self.serial is None:\n            self.serial \u003d os.getenv(\u0027BOOTLOADER_TEST_SERIAL\u0027)\n\nOnly real change in behavior is that importers can alter the environment after importing and still have their changes take effect.",
+      "revId": "21b59d24140a1ca4544b5c0eb464b0d626de03cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3c91230e_d9a553ac",
+        "filename": "tests/bootloader/haltest.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2016-05-23T23:03:42Z",
+      "side": 1,
+      "message": "Space after the comma",
+      "range": {
+        "startLine": 19,
+        "startChar": 17,
+        "endLine": 19,
+        "endChar": 22
+      },
+      "revId": "21b59d24140a1ca4544b5c0eb464b0d626de03cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3c91230e_199c1b6f",
+        "filename": "tests/bootloader/haltest.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2016-05-23T23:03:42Z",
+      "side": 1,
+      "message": "repr(1 - slot) to be python3 compatible?",
+      "range": {
+        "startLine": 27,
+        "startChar": 29,
+        "endLine": 27,
+        "endChar": 39
+      },
+      "revId": "21b59d24140a1ca4544b5c0eb464b0d626de03cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
