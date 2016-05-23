@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3c91230e_797d27d4",
+        "filename": "tests/kernel.config/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2016-05-23T23:22:10Z",
+      "side": 1,
+      "message": "I have a separate request to drop this to cts (instead of cts_v2) as that is what gTests comply with. Please do this to save me the trouble ;-}",
+      "range": {
+        "startLine": 70,
+        "startChar": 29,
+        "endLine": 70,
+        "endChar": 35
+      },
+      "revId": "e92b1fda4740c5e6a97b97ddf5544384f7b4f866",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
