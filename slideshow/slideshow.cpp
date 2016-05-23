@@ -20,6 +20,8 @@
 #include <time.h>
 #include <linux/input.h>
 #include <cutils/klog.h>
+#include <cutils/android_reboot.h>
+#include <cutils/properties.h>
 #include <utils/SystemClock.h>
 #include "minui/minui.h"
 
@@ -76,7 +78,7 @@ static void draw(const char *resname)
 
 int usage()
 {
-    LOGE("usage: slideshow [-t timeout] image.png [image2.png ...] last.png\n");
+    LOGE("usage: slideshow [-p] [-t timeout] image.png [image2.png ...] last.png\n");
     return EXIT_FAILURE;
 }
 
@@ -87,8 +89,9 @@ int main(int argc, char **argv)
     int opt;
     long int timeout = NEXT_TIMEOUT_MS;
     int64_t start;
+    bool power_off = false;
 
-    while ((opt = getopt(argc, argv, "t:")) != -1) {
+    while ((opt = getopt(argc, argv, "t:p")) != -1) {
         switch (opt) {
         case 't':
             timeout = strtol(optarg, NULL, 0);
@@ -98,6 +101,9 @@ int main(int argc, char **argv)
                 LOGE("invalid timeout %s, defaulting to %ld\n", optarg,
                     timeout);
             }
+            break;
+        case 'p':
+            power_off = true;
             break;
         default:
             return usage();
@@ -152,6 +158,11 @@ int main(int argc, char **argv)
                 break;
             }
         } while (key_code != KEY_POWER);
+    }
+
+    if (power_off && key_code != KEY_POWER) {
+        LOGE("Timeout, turning off the device\n");
+        property_set(ANDROID_RB_PROPERTY, "shutdown,");
     }
 
     clear();
