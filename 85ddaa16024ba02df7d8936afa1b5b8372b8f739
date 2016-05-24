@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "3c24c3f2_6a86572a",
+        "filename": "procrank/procrank.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2016-05-24T20:22:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3c24c3f2_4a21d389",
+      "range": {
+        "startLine": 334,
+        "startChar": 25,
+        "endLine": 334,
+        "endChar": 36
+      },
+      "revId": "85ddaa16024ba02df7d8936afa1b5b8372b8f739",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3c24c3f2_ea2fe773",
         "filename": "procrank/procrank.cpp",
         "patchSetId": 2
@@ -42,6 +66,24 @@
     },
     {
       "key": {
+        "uuid": "3c24c3f2_4a8b9330",
+        "filename": "procrank/procrank.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2016-05-24T20:22:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3c24c3f2_ea2fe773",
+      "revId": "85ddaa16024ba02df7d8936afa1b5b8372b8f739",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3c24c3f2_2a49ff5a",
         "filename": "procrank/procrank.cpp",
         "patchSetId": 2
@@ -53,6 +95,30 @@
       "writtenOn": "2016-05-24T19:49:55Z",
       "side": 1,
       "message": "i assume these are like nice values?",
+      "range": {
+        "startLine": 586,
+        "startChar": 19,
+        "endLine": 586,
+        "endChar": 20
+      },
+      "revId": "85ddaa16024ba02df7d8936afa1b5b8372b8f739",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3c24c3f2_aa7faf00",
+        "filename": "procrank/procrank.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 586,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2016-05-24T20:22:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3c24c3f2_2a49ff5a",
       "range": {
         "startLine": 586,
         "startChar": 19,
