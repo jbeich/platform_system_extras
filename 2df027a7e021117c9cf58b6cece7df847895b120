@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3c91230e_942792a1",
+        "filename": "tests/bootloader/haltest.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2016-05-24T01:33:57Z",
+      "side": 1,
+      "message": "not getting the purpose of this stmt... seems i is not used at all. if it\u0027s only for iterating twice, why not using something like \"for _ in range(2):\" instead?",
+      "range": {
+        "startLine": 33,
+        "startChar": 8,
+        "endLine": 33,
+        "endChar": 24
+      },
+      "revId": "2df027a7e021117c9cf58b6cece7df847895b120",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
