@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3c24c3f2_d0061213",
+        "filename": "tests/bootloader/common.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1085413
+      },
+      "writtenOn": "2016-05-24T21:50:38Z",
+      "side": 1,
+      "message": "FTR adb.get_device uses ANDROID_SERIAL internally, but I think it makes sense to use a separate env variable anyway.",
+      "revId": "774b11bf8c0b96fc372c8c1edd1902bc74bdc240",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
