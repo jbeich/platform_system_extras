@@ -314,6 +314,7 @@ bool ReportCommand::Run(const std::vector<std::string>& args) {
     return false;
   }
   ScopedCurrentArch scoped_arch(record_file_arch_);
+  ScopedKernelVersion scoped_kernel_version;
   if (!ReadSampleTreeFromRecordFile()) {
     return false;
   }
@@ -583,7 +584,7 @@ bool ReportCommand::ReadSampleTreeFromRecordFile() {
 
 bool ReportCommand::ProcessRecord(std::unique_ptr<Record> record) {
   BuildThreadTree(*record, &thread_tree_);
-  if (record->header.type == PERF_RECORD_SAMPLE) {
+  if (record->type() == PERF_RECORD_SAMPLE) {
     sample_tree_builder_->ProcessSampleRecord(
         *static_cast<const SampleRecord*>(record.get()));
   }
@@ -616,6 +617,7 @@ void ReportCommand::PrintReportContext(FILE* report_fp) {
   if (!record_cmdline_.empty()) {
     fprintf(report_fp, "Cmdline: %s\n", record_cmdline_.c_str());
   }
+  fprintf(report_fp, "Arch: %s\n", GetArchString(record_file_arch_).c_str());
   for (const auto& attr : event_attrs_) {
     const EventType* event_type = FindEventTypeByConfig(attr.type, attr.config);
     std::string name;
