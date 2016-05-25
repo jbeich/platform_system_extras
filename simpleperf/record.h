@@ -25,6 +25,8 @@
 #include <string>
 #include <vector>
 
+#include <android-base/logging.h>
+
 #include "build_id.h"
 #include "perf_event.h"
 
@@ -34,11 +36,16 @@ struct ThreadComm;
 struct ThreadMmap;
 
 enum user_record_type {
+  PERF_RECORD_USER_DEFINED_TYPE_START = 64,
   PERF_RECORD_ATTR = 64,
   PERF_RECORD_EVENT_TYPE,
   PERF_RECORD_TRACING_DATA,
   PERF_RECORD_BUILD_ID,
   PERF_RECORD_FINISHED_ROUND,
+
+  SIMPLE_PERF_RECORD_TYPE_START = 32768,
+  SIMPLE_PERF_RECORD_TYPE_FLAG = 32768,
+  SIMPLE_PERF_RECORD_KERNEL_INFO,
 };
 
 struct PerfSampleIpType {
@@ -102,6 +109,57 @@ struct PerfSampleStackUserType {
   uint64_t dyn_size;
 };
 
+// RecordHeader is the representation of perf_event_header in memory.
+// perf_event_header has a 16-bit misc and 16-bit size. So normal record
+// types only support records with size < (1<<16). As we want to support
+// records with bigger size, we add simpleperf defined record types having
+// 0-bit misc and 32-bit size. This behavior is expressed by how RecordHeader
+// handles perf_event_header.
+class RecordHeader {
+ public:
+  RecordHeader() : type_(0), misc_(0), size_(0) {
+  }
+
+  RecordHeader(const perf_event_header* pheader)
+      : type_(pheader->type), misc_(pheader->misc), size_(pheader->size) {
+    if (UNLIKELY(type_ & SIMPLE_PERF_RECORD_TYPE_FLAG)) {
+      misc_ = 0;
+      size_ = (pheader->misc << 16) | pheader->size;
+    }
+  }
+
+  uint32_t type() const {
+    return type_;
+  }
+
+  uint16_t misc() const {
+    return misc_;
+  }
+
+  uint32_t size() const {
+    return size_;
+  }
+
+  void SetTypeAndMisc(uint32_t type, uint16_t misc) {
+    type_ = type;
+    misc_ = misc;
+  }
+
+  void SetSize(uint32_t size) {
+    if (LIKELY(!(type_ & SIMPLE_PERF_RECORD_TYPE_FLAG))) {
+      CHECK_LT(size, 1u << 16);
+    }
+    size_ = size;
+  }
+
+  void WriteToBinaryFormat(char*& p) const;
+
+ private:
+  uint32_t type_;
+  uint16_t misc_;
+  uint32_t size_;
+};
+
 // SampleId is optional at the end of a record in binary format. Its content is determined by
 // sample_id_all and sample_type in perf_event_attr. To avoid the complexity of referring to
 // perf_event_attr each time, we copy sample_id_all and sample_type inside the SampleId structure.
@@ -136,25 +194,43 @@ struct SampleId {
 // We hold the common parts (perf_event_header and sample_id) in the base class Record, and
 // hold the type specific data part in classes derived from Record.
 struct Record {
-  perf_event_header header;
+  RecordHeader header;
   SampleId sample_id;
 
-  Record();
-  Record(const perf_event_header* pheader);
+  Record() {
+  }
+  Record(const perf_event_header* pheader) : header(pheader) {
+  }
 
   virtual ~Record() {
   }
 
-  size_t size() const {
-    return header.size;
+  uint32_t type() const {
+    return header.type();
   }
 
-  uint32_t type() const {
-    return header.type;
+  uint16_t misc() const {
+    return header.misc();
+  }
+
+  size_t size() const {
+    return header.size();
+  }
+
+  uint32_t header_size() const {
+    return sizeof(perf_event_header);
   }
 
   bool InKernel() const {
-    return (header.misc & PERF_RECORD_MISC_CPUMODE_MASK) == PERF_RECORD_MISC_KERNEL;
+    return (header.misc() & PERF_RECORD_MISC_CPUMODE_MASK) == PERF_RECORD_MISC_KERNEL;
+  }
+
+  void SetTypeAndMisc(uint32_t type, uint16_t misc) {
+    header.SetTypeAndMisc(type, misc);
+  }
+
+  void SetSize(uint32_t size) {
+    header.SetSize(size);
   }
 
   void Dump(size_t indent = 0) const;
@@ -299,6 +375,20 @@ struct BuildIdRecord : public Record {
   void DumpData(size_t indent) const override;
 };
 
+struct KernelInfoRecord : public Record {
+  std::string version;
+  std::string kallsyms;
+
+  KernelInfoRecord() {
+  }
+
+  KernelInfoRecord(const perf_event_header* pheader);
+  std::vector<char> BinaryFormat() const override;
+
+ protected:
+  void DumpData(size_t indent) const override;
+};
+
 // UnknownRecord is used for unknown record types, it makes sure all unknown records
 // are not changed when modifying perf.data.
 struct UnknownRecord : public Record {
@@ -371,5 +461,6 @@ ForkRecord CreateForkRecord(const perf_event_attr& attr, uint32_t pid, uint32_t 
                             uint32_t ptid, uint64_t event_id);
 BuildIdRecord CreateBuildIdRecord(bool in_kernel, pid_t pid, const BuildId& build_id,
                                   const std::string& filename);
+KernelInfoRecord CreateKernelInfoRecord(std::string version, std::string kallsyms);
 
 #endif  // SIMPLE_PERF_RECORD_H_

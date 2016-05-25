@@ -125,4 +125,36 @@ bool GetLogSeverity(const std::string& name, android::base::LogSeverity* severit
 
 bool IsRoot();
 
+class ScopedKernelVersion {
+ public:
+  ScopedKernelVersion() : saved_version_(current_version_) {
+  }
+
+  ~ScopedKernelVersion() {
+    current_version_ = saved_version_;
+  }
+
+  static const std::string& GetCurrentVersion() {
+    return current_version_;
+  }
+
+  static void SetCurrentVersion(const std::string& version) {
+    current_version_ = version;
+  }
+
+ private:
+  std::string saved_version_;
+  static std::string current_version_;
+};
+
+struct KernelSymbol {
+  uint64_t addr;
+  char type;
+  const char* name;
+  const char* module;  // If nullptr, the symbol is not in a kernel module.
+};
+
+bool ProcessKernelSymbols(std::string& symbol_data,
+                          std::function<bool(const KernelSymbol&)> callback);
+
 #endif  // SIMPLE_PERF_UTILS_H_
