@@ -77,6 +77,24 @@
     },
     {
       "key": {
+        "uuid": "1c037f92_ba045908",
+        "filename": "tests/bootloader/common.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1085413
+      },
+      "writtenOn": "2016-05-25T21:33:50Z",
+      "side": 1,
+      "message": "In production this test will be running on a host that runs other tests simultaneously and while in general the tests have segregated environments there could be some collision if a bunch of concurrent tests are all trying to set and read the same ANDROID_SERIAL variable. For ad-hoc testing it doesn\u0027t make a difference.",
+      "parentUuid": "1c037f92_fac2d115",
+      "revId": "774b11bf8c0b96fc372c8c1edd1902bc74bdc240",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1c037f92_fab77192",
         "filename": "tests/bootloader/haltest.py",
         "patchSetId": 7
