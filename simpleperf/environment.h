@@ -28,6 +28,7 @@
 
 std::vector<int> GetOnlineCpus();
 std::vector<int> GetCpusFromString(const std::string& s);
+std::string GetLinuxVersion();
 
 constexpr char DEFAULT_KERNEL_MMAP_NAME[] = "[kernel.kallsyms]_text";
 
@@ -68,16 +69,5 @@ bool GetValidThreadsFromProcessString(const std::string& pid_str, std::set<pid_t
 bool GetValidThreadsFromThreadString(const std::string& tid_str, std::set<pid_t>* tid_set);
 
 bool GetExecPath(std::string* exec_path);
-
-// Expose the following functions for unit tests.
-struct KernelSymbol {
-  uint64_t addr;
-  char type;
-  const char* name;
-  const char* module;  // If nullptr, the symbol is not in a kernel module.
-};
-
-bool ProcessKernelSymbols(const std::string& symbol_file,
-                          std::function<bool(const KernelSymbol&)> callback);
 
 #endif  // SIMPLE_PERF_ENVIRONMENT_H_

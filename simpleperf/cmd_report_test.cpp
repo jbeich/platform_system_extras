@@ -274,6 +274,13 @@ TEST_F(ReportCommandTest, report_more_than_one_event_types) {
   ASSERT_NE(content.find("cpu-clock"), std::string::npos);
 }
 
+TEST_F(ReportCommandTest, report_kernel_info) {
+  Report(PERF_DATA_WITH_KERNEL_INFO);
+  ASSERT_TRUE(success);
+  ASSERT_NE(content.find("Kernel:"), std::string::npos);
+  ASSERT_NE(content.find("__kmalloc"), std::string::npos);
+}
+
 #if defined(__linux__)
 
 static std::unique_ptr<Command> RecordCmd() {
