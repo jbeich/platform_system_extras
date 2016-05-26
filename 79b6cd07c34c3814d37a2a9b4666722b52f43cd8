@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1c037f92_1c3362b2",
+        "filename": "simpleperf/record.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2016-05-26T23:24:35Z",
+      "side": 1,
+      "message": "how is this 0-bit?",
+      "revId": "79b6cd07c34c3814d37a2a9b4666722b52f43cd8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1c037f92_5c51dacc",
+        "filename": "simpleperf/utils.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2016-05-26T23:24:35Z",
+      "side": 1,
+      "message": "that\u0027s kind of a weird idea...",
+      "range": {
+        "startLine": 128,
+        "startChar": 6,
+        "endLine": 128,
+        "endChar": 25
+      },
+      "revId": "79b6cd07c34c3814d37a2a9b4666722b52f43cd8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
