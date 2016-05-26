@@ -22,6 +22,30 @@
       "revId": "6243e4f18f9282f2765bfff984257237c0024416",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1c037f92_61f86d57",
+        "filename": "simpleperf/cmd_report_test.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1066743
+      },
+      "writtenOn": "2016-05-26T19:53:01Z",
+      "side": 1,
+      "message": "No idea. It turns out that this change is unnecessary after I made a tweak to gtest that was needed for other stuff so this is now building correctly without modifications.",
+      "parentUuid": "1c037f92_a6267b51",
+      "range": {
+        "startLine": 192,
+        "startChar": 2,
+        "endLine": 192,
+        "endChar": 36
+      },
+      "revId": "6243e4f18f9282f2765bfff984257237c0024416",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
