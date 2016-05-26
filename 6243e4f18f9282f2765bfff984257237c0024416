@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1c037f92_a6267b51",
+        "filename": "simpleperf/cmd_report_test.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1076138
+      },
+      "writtenOn": "2016-05-26T18:42:09Z",
+      "side": 1,
+      "message": "What\u0027s the point of asserting a static value? Isn\u0027t this always going to be true?",
+      "range": {
+        "startLine": 192,
+        "startChar": 2,
+        "endLine": 192,
+        "endChar": 36
+      },
+      "revId": "6243e4f18f9282f2765bfff984257237c0024416",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
