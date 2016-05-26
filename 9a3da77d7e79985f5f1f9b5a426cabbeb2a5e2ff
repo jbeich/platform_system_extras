@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1c037f92_c1e8418a",
+        "filename": "tests/bootloader/bootctl.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1077068
+      },
+      "writtenOn": "2016-05-26T19:51:04Z",
+      "side": 1,
+      "message": "This will need to run as root and/or permissive mode for some of the operations. Is that guaranteed in this setup?",
+      "range": {
+        "startLine": 21,
+        "startChar": 41,
+        "endLine": 21,
+        "endChar": 50
+      },
+      "revId": "9a3da77d7e79985f5f1f9b5a426cabbeb2a5e2ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1c037f92_01ef7993",
+        "filename": "tests/bootloader/haltest.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1077068
+      },
+      "writtenOn": "2016-05-26T19:51:04Z",
+      "side": 1,
+      "message": "The spec is the standard for shell commands: \"0\" means true, non-zero means false. I\u0027d recommend converting these to True/False in the Bootctl class, but certainly not comparing against the error code that we decided to return.",
+      "range": {
+        "startLine": 67,
+        "startChar": 29,
+        "endLine": 67,
+        "endChar": 31
+      },
+      "revId": "9a3da77d7e79985f5f1f9b5a426cabbeb2a5e2ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
