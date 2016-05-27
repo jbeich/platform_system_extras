@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "5c7df7eb_2e349336",
+        "filename": "simpleperf/record.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2016-05-27T13:00:16Z",
+      "side": 1,
+      "message": "This seems like a significant break with the existing perf.data conventions. Instead of moving to records with 32-bit size, maybe you could break up the kernel symbols into chunks (e.g. emit a series of records that could then be combined later)?",
+      "revId": "79b6cd07c34c3814d37a2a9b4666722b52f43cd8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1c037f92_1c3362b2",
         "filename": "simpleperf/record.h",
         "patchSetId": 2
