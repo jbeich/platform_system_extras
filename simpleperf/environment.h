@@ -30,7 +30,7 @@ std::vector<int> GetOnlineCpus();
 std::vector<int> GetCpusFromString(const std::string& s);
 std::string GetLinuxVersion();
 
-constexpr char DEFAULT_KERNEL_MMAP_NAME[] = "[kernel.kallsyms]_text";
+constexpr char DEFAULT_KERNEL_MMAP_NAME[] = "[kernel.kallsyms]";
 
 struct KernelMmap {
   std::string name;

@@ -18,6 +18,7 @@
 #define SIMPLE_PERF_DSO_H_
 
 #include <memory>
+#include <set>
 #include <string>
 #include <unordered_map>
 #include <vector>
@@ -35,9 +36,24 @@ struct Symbol {
 
   const char* DemangledName() const;
 
+  bool HasDumped() const {
+    return has_dumped_;
+  }
+
+  void SetDumped() const {
+    has_dumped_ = true;
+  }
+
  private:
   const char* name_;
   mutable const char* demangled_name_;
+  mutable bool has_dumped_;
+};
+
+struct SymbolComparator {
+  bool operator()(const Symbol& symbol1, const Symbol& symbol2) {
+    return symbol1.addr < symbol2.addr;
+  }
 };
 
 enum DsoType {
@@ -62,13 +78,17 @@ struct Dso {
   }
   static void SetBuildIds(const std::vector<std::pair<std::string, BuildId>>& build_ids);
 
-  static std::unique_ptr<Dso> CreateDso(DsoType dso_type, const std::string& dso_path = "");
+  static std::unique_ptr<Dso> CreateDso(DsoType dso_type, const std::string& dso_path);
 
   ~Dso();
 
   // Return the path recorded in perf.data.
   const std::string& Path() const {
     return path_;
+  }
+
+  DsoType type() const {
+    return type_;
   }
 
   // Return the accessible path. It may be the same as Path(), or
@@ -79,6 +99,7 @@ struct Dso {
   uint64_t MinVirtualAddress();
 
   const Symbol* FindSymbol(uint64_t vaddr_in_dso);
+  void InsertSymbol(const Symbol& symbol);
 
  private:
   static BuildId GetExpectedBuildId(const std::string& filename);
@@ -100,14 +121,15 @@ struct Dso {
   bool LoadKernelModule();
   bool LoadElfFile();
   bool LoadEmbeddedElfFile();
-  void InsertSymbol(const Symbol& symbol);
   void FixupSymbolLength();
 
   const DsoType type_;
   const std::string path_;
   uint64_t min_vaddr_;
-  std::vector<Symbol> symbols_;
+  std::set<Symbol, SymbolComparator> symbols_;
   bool is_loaded_;
 };
+
+const char* DsoTypeToString(DsoType dso_type);
 
 #endif  // SIMPLE_PERF_DSO_H_

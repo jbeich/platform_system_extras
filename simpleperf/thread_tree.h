@@ -24,6 +24,9 @@
 #include <set>
 
 #include "dso.h"
+#include "environment.h"
+
+struct Record;
 
 namespace simpleperf {
 
@@ -63,7 +66,7 @@ class ThreadTree {
     unknown_dso_ = Dso::CreateDso(DSO_ELF_FILE, "unknown");
     unknown_map_ =
         MapEntry(0, std::numeric_limits<unsigned long long>::max(), 0, 0, unknown_dso_.get(), false);
-    kernel_dso_ = Dso::CreateDso(DSO_KERNEL);
+    kernel_dso_ = Dso::CreateDso(DSO_KERNEL, DEFAULT_KERNEL_MMAP_NAME);
   }
 
   void AddThread(int pid, int tid, const std::string& comm);
@@ -81,7 +84,10 @@ class ThreadTree {
     return &unknown_map_;
   }
 
-  void Clear();
+  // Clear thread and map information, but keep loaded dso information. It saves
+  // the time to reload dso information.
+  void ClearThreadAndMap();
+  void BuildThreadTree(const Record& record);
 
  private:
   Dso* FindKernelDsoOrNew(const std::string& filename);
@@ -108,9 +114,5 @@ class ThreadTree {
 using MapEntry = simpleperf::MapEntry;
 using ThreadEntry = simpleperf::ThreadEntry;
 using ThreadTree = simpleperf::ThreadTree;
-
-struct Record;
-
-void BuildThreadTree(const Record& record, ThreadTree* thread_tree);
 
 #endif  // SIMPLE_PERF_THREAD_TREE_H_

@@ -583,7 +583,7 @@ bool ReportCommand::ReadSampleTreeFromRecordFile() {
 }
 
 bool ReportCommand::ProcessRecord(std::unique_ptr<Record> record) {
-  BuildThreadTree(*record, &thread_tree_);
+  thread_tree_.BuildThreadTree(*record);
   if (record->type() == PERF_RECORD_SAMPLE) {
     sample_tree_builder_->ProcessSampleRecord(
         *static_cast<const SampleRecord*>(record.get()));

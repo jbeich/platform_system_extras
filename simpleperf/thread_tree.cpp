@@ -212,44 +212,51 @@ const Symbol* ThreadTree::FindSymbol(const MapEntry* map, uint64_t ip) {
   return symbol;
 }
 
-void ThreadTree::Clear() {
+void ThreadTree::ClearThreadAndMap() {
   thread_tree_.clear();
   thread_comm_storage_.clear();
   kernel_map_tree_.clear();
   map_storage_.clear();
-  kernel_dso_.reset();
-  module_dso_tree_.clear();
-  user_dso_tree_.clear();
 }
 
-}  // namespace simpleperf
-
-void BuildThreadTree(const Record& record, ThreadTree* thread_tree) {
+void ThreadTree::BuildThreadTree(const Record& record) {
   if (record.type() == PERF_RECORD_MMAP) {
     const MmapRecord& r = *static_cast<const MmapRecord*>(&record);
     if (r.InKernel()) {
-      thread_tree->AddKernelMap(r.data.addr, r.data.len, r.data.pgoff, r.sample_id.time_data.time,
+      AddKernelMap(r.data.addr, r.data.len, r.data.pgoff, r.sample_id.time_data.time,
                                 r.filename);
     } else {
-      thread_tree->AddThreadMap(r.data.pid, r.data.tid, r.data.addr, r.data.len, r.data.pgoff,
+      AddThreadMap(r.data.pid, r.data.tid, r.data.addr, r.data.len, r.data.pgoff,
                                 r.sample_id.time_data.time, r.filename);
     }
   } else if (record.type() == PERF_RECORD_MMAP2) {
     const Mmap2Record& r = *static_cast<const Mmap2Record*>(&record);
     if (r.InKernel()) {
-      thread_tree->AddKernelMap(r.data.addr, r.data.len, r.data.pgoff, r.sample_id.time_data.time,
+      AddKernelMap(r.data.addr, r.data.len, r.data.pgoff, r.sample_id.time_data.time,
                                 r.filename);
     } else {
       std::string filename =
           (r.filename == DEFAULT_EXECNAME_FOR_THREAD_MMAP) ? "[unknown]" : r.filename;
-      thread_tree->AddThreadMap(r.data.pid, r.data.tid, r.data.addr, r.data.len, r.data.pgoff,
+      AddThreadMap(r.data.pid, r.data.tid, r.data.addr, r.data.len, r.data.pgoff,
                                 r.sample_id.time_data.time, filename);
     }
   } else if (record.type() == PERF_RECORD_COMM) {
     const CommRecord& r = *static_cast<const CommRecord*>(&record);
-    thread_tree->AddThread(r.data.pid, r.data.tid, r.comm);
+    AddThread(r.data.pid, r.data.tid, r.comm);
   } else if (record.type() == PERF_RECORD_FORK) {
     const ForkRecord& r = *static_cast<const ForkRecord*>(&record);
-    thread_tree->ForkThread(r.data.pid, r.data.tid, r.data.ppid, r.data.ptid);
+    ForkThread(r.data.pid, r.data.tid, r.data.ppid, r.data.ptid);
+  } else if (record.type() == SIMPLE_PERF_RECORD_SYMBOL) {
+    const SymbolRecord& r = *static_cast<const SymbolRecord*>(&record);
+    Dso* dso;
+    if (r.dso_type == DSO_KERNEL || r.dso_type == DSO_KERNEL_MODULE) {
+      dso = FindKernelDsoOrNew(r.dso_name);
+    } else {
+      dso = FindUserDsoOrNew(r.dso_name);
+    }
+    LOG(ERROR) << "dso [" << dso->Path() << "] add symbol (" << r.name << ", [" << std::hex << r.addr << "-" << (r.addr + r.len) << "])";
+    dso->InsertSymbol(Symbol(r.name, r.addr, r.len));
   }
 }
+
+}  // namespace simpleperf

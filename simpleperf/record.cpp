@@ -23,6 +23,7 @@
 #include <android-base/logging.h>
 #include <android-base/stringprintf.h>
 
+#include "dso.h"
 #include "environment.h"
 #include "perf_regs.h"
 #include "utils.h"
@@ -35,6 +36,7 @@ static std::string RecordTypeToString(int record_type) {
       {PERF_RECORD_FORK, "fork"},         {PERF_RECORD_READ, "read"},
       {PERF_RECORD_SAMPLE, "sample"},     {PERF_RECORD_BUILD_ID, "build_id"},
       {PERF_RECORD_MMAP2, "mmap2"},       {SIMPLE_PERF_RECORD_KERNEL_INFO, "kernel_info"},
+      {SIMPLE_PERF_RECORD_SYMBOL, "symbol"},
   };
 
   auto it = record_type_names.find(record_type);
@@ -607,6 +609,40 @@ void KernelInfoRecord::DumpData(size_t indent) const {
   PrintIndented(indent, "kallsyms: %s\n", kallsyms.c_str());
 }
 
+SymbolRecord::SymbolRecord(const perf_event_header* pheader) : Record(pheader) {
+  const char* p = reinterpret_cast<const char*>(pheader + 1);
+  const char* end = reinterpret_cast<const char*>(pheader) + size();
+  MoveFromBinaryFormat(addr, p);
+  MoveFromBinaryFormat(len, p);
+  MoveFromBinaryFormat(dso_type, p);
+  name = p;
+  p += ALIGN(name.size() + 1, 8);
+  dso_name = p;
+  p += ALIGN(dso_name.size() + 1, 8);
+  CHECK_EQ(p, end);
+}
+
+std::vector<char> SymbolRecord::BinaryFormat() const {
+  std::vector<char> buf(size());
+  char* p = buf.data();
+  header.WriteToBinaryFormat(p);
+  MoveToBinaryFormat(addr, p);
+  MoveToBinaryFormat(len, p);
+  MoveToBinaryFormat(dso_type, p);
+  strcpy(p, name.c_str());
+  p += ALIGN(name.size() + 1, 8);
+  strcpy(p, dso_name.c_str());
+  return buf;
+}
+
+void SymbolRecord::DumpData(size_t indent) const {
+  PrintIndented(indent, "name: %s\n", name.c_str());
+  PrintIndented(indent, "addr: 0x%" PRIx64 "\n", addr);
+  PrintIndented(indent, "len: 0x%" PRIx64 "\n", len);
+  PrintIndented(indent, "dso_type: %s(%" PRIu64 ")\n", DsoTypeToString(static_cast<DsoType>(dso_type)), dso_type);
+  PrintIndented(indent, "dso_name: %s\n", dso_name.c_str());
+}
+
 UnknownRecord::UnknownRecord(const perf_event_header* pheader) : Record(pheader) {
   const char* p = reinterpret_cast<const char*>(pheader + 1);
   const char* end = reinterpret_cast<const char*>(pheader) + size();
@@ -641,6 +677,8 @@ std::unique_ptr<Record> ReadRecordFromBuffer(const perf_event_attr& attr,
       return std::unique_ptr<Record>(new SampleRecord(attr, pheader));
     case SIMPLE_PERF_RECORD_KERNEL_INFO:
       return std::unique_ptr<Record>(new KernelInfoRecord(pheader));
+    case SIMPLE_PERF_RECORD_SYMBOL:
+      return std::unique_ptr<Record>(new SymbolRecord(pheader));
     default:
       return std::unique_ptr<Record>(new UnknownRecord(pheader));
   }
@@ -725,6 +763,20 @@ KernelInfoRecord CreateKernelInfoRecord(std::string version, std::string kallsym
   record.kallsyms = std::move(kallsyms);
   record.SetSize(record.header_size() + 4 + ALIGN(record.version.size(), 64) +
                  4 + ALIGN(record.kallsyms.size(), 64));
+  return record;
+}
+
+SymbolRecord CreateSymbolRecord(const std::string& name, uint64_t addr, uint64_t len,
+                                const std::string& dso_name, uint64_t dso_type) {
+  SymbolRecord record;
+  record.SetTypeAndMisc(SIMPLE_PERF_RECORD_SYMBOL, 0);
+  record.addr = addr;
+  record.len = len;
+  record.dso_type = dso_type;
+  record.name = name;
+  record.dso_name = dso_name;
+  record.SetSize(record.header_size() + 3 * sizeof(uint64_t) +
+                 ALIGN(record.name.size() + 1, 8) + ALIGN(record.dso_name.size() + 1, 8));
   return record;
 }
 

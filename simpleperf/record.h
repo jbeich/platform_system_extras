@@ -46,6 +46,7 @@ enum user_record_type {
   SIMPLE_PERF_RECORD_TYPE_START = 32768,
   SIMPLE_PERF_RECORD_TYPE_FLAG = 32768,
   SIMPLE_PERF_RECORD_KERNEL_INFO,
+  SIMPLE_PERF_RECORD_SYMBOL,
 };
 
 struct PerfSampleIpType {
@@ -389,6 +390,23 @@ struct KernelInfoRecord : public Record {
   void DumpData(size_t indent) const override;
 };
 
+struct SymbolRecord : public Record {
+  uint64_t addr;
+  uint64_t len;
+  uint64_t dso_type;
+  std::string name;
+  std::string dso_name;
+
+  SymbolRecord() {
+  }
+
+  SymbolRecord(const perf_event_header* pheader);
+  std::vector<char> BinaryFormat() const override;
+
+ protected:
+  void DumpData(size_t indent) const override;
+};
+
 // UnknownRecord is used for unknown record types, it makes sure all unknown records
 // are not changed when modifying perf.data.
 struct UnknownRecord : public Record {
@@ -462,5 +480,7 @@ ForkRecord CreateForkRecord(const perf_event_attr& attr, uint32_t pid, uint32_t 
 BuildIdRecord CreateBuildIdRecord(bool in_kernel, pid_t pid, const BuildId& build_id,
                                   const std::string& filename);
 KernelInfoRecord CreateKernelInfoRecord(std::string version, std::string kallsyms);
+SymbolRecord CreateSymbolRecord(const std::string& symbol_name, uint64_t addr, uint64_t len,
+                                const std::string& dso_name, uint64_t dso_type);
 
 #endif  // SIMPLE_PERF_RECORD_H_

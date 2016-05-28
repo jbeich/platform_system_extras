@@ -77,6 +77,7 @@ libsimpleperf_src_files := \
   cmd_dumprecord.cpp \
   cmd_help.cpp \
   cmd_report.cpp \
+  cmd_report_sample.cpp \
   command.cpp \
   dso.cpp \
   event_attr.cpp \

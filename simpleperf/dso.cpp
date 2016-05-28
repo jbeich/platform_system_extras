@@ -37,7 +37,8 @@ Symbol::Symbol(const std::string& name, uint64_t addr, uint64_t len)
     : addr(addr),
       len(len),
       name_(symbol_name_allocator.AllocateString(name)),
-      demangled_name_(nullptr) {
+      demangled_name_(nullptr),
+      has_dumped_(false) {
 }
 
 const char* Symbol::DemangledName() const {
@@ -130,11 +131,7 @@ BuildId Dso::GetExpectedBuildId(const std::string& filename) {
 }
 
 std::unique_ptr<Dso> Dso::CreateDso(DsoType dso_type, const std::string& dso_path) {
-  std::string path = dso_path;
-  if (dso_type == DSO_KERNEL) {
-    path = "[kernel.kallsyms]";
-  }
-  return std::unique_ptr<Dso>(new Dso(dso_type, path));
+  return std::unique_ptr<Dso>(new Dso(dso_type, dso_path));
 }
 
 Dso::Dso(DsoType type, const std::string& path)
@@ -154,12 +151,6 @@ Dso::~Dso() {
   }
 }
 
-struct SymbolComparator {
-  bool operator()(const Symbol& symbol1, const Symbol& symbol2) {
-    return symbol1.addr < symbol2.addr;
-  }
-};
-
 std::string Dso::GetAccessiblePath() const {
   return symfs_dir_ + path_;
 }
@@ -167,14 +158,18 @@ std::string Dso::GetAccessiblePath() const {
 const Symbol* Dso::FindSymbol(uint64_t vaddr_in_dso) {
   if (!is_loaded_) {
     is_loaded_ = true;
-    if (!Load()) {
-      LOG(DEBUG) << "failed to load dso: " << path_;
-      return nullptr;
+    // If symbols have been read from SymbolRecords, no need to load dso.
+    if (symbols_.empty()) {
+      if (!Load()) {
+        LOG(DEBUG) << "failed to load dso: " << path_;
+        return nullptr;
+      }
     }
   }
-
-  auto it = std::upper_bound(symbols_.begin(), symbols_.end(), Symbol("", vaddr_in_dso, 0),
-                             SymbolComparator());
+  if (symbols_.empty()) {
+    return nullptr;
+  }
+  auto it = symbols_.upper_bound(Symbol("", vaddr_in_dso, 0));
   if (it != symbols_.begin()) {
     --it;
     if (it->addr <= vaddr_in_dso && it->addr + it->len > vaddr_in_dso) {
@@ -218,7 +213,6 @@ bool Dso::Load() {
     }
   }
   if (result) {
-    std::sort(symbols_.begin(), symbols_.end(), SymbolComparator());
     FixupSymbolLength();
   }
   return result;
@@ -351,7 +345,7 @@ bool Dso::LoadEmbeddedElfFile() {
 }
 
 void Dso::InsertSymbol(const Symbol& symbol) {
-  symbols_.push_back(symbol);
+  symbols_.insert(symbol);
 }
 
 void Dso::FixupSymbolLength() {
@@ -360,9 +354,22 @@ void Dso::FixupSymbolLength() {
     if (prev_symbol != nullptr && prev_symbol->len == 0) {
       prev_symbol->len = symbol.addr - prev_symbol->addr;
     }
-    prev_symbol = &symbol;
+    prev_symbol = const_cast<Symbol*>(&symbol);
   }
   if (prev_symbol != nullptr && prev_symbol->len == 0) {
     prev_symbol->len = std::numeric_limits<uint64_t>::max() - prev_symbol->addr;
+  }
+}
+
+const char* DsoTypeToString(DsoType dso_type) {
+  switch (dso_type) {
+    case DSO_KERNEL:
+      return "dso_kernel";
+    case DSO_KERNEL_MODULE:
+      return "dso_kernel_module";
+    case DSO_ELF_FILE:
+      return "dso_elf_file";
+    default:
+      return "unknown";
   }
 }
