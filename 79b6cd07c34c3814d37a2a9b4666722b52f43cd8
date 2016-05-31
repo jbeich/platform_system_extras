@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "1c037f92_9719681a",
+        "filename": "simpleperf/record.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-05-31T21:21:43Z",
+      "side": 1,
+      "message": "yes, your concern makes sense. I thought about splitting kernel symbols into multiple records, but I worried what if other records \u003e65535 would be added? Currently I can\u0027t think up of need to add other records \u003e65535, so it seems only kernel symbols is not reasonable enough to break perf.data conventions.",
+      "parentUuid": "5c7df7eb_2e349336",
+      "revId": "79b6cd07c34c3814d37a2a9b4666722b52f43cd8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1c037f92_1c3362b2",
         "filename": "simpleperf/record.h",
         "patchSetId": 2
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "1998f132_0456fa50",
+        "filename": "simpleperf/record.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-05-31T21:21:43Z",
+      "side": 1,
+      "message": "I thought of having 16-bit misc in memory, but 0-bit in perf.data. But this tricky logic is no longer needed as we don\u0027t need to support large records now.",
+      "parentUuid": "1c037f92_1c3362b2",
+      "revId": "79b6cd07c34c3814d37a2a9b4666722b52f43cd8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1c037f92_5c51dacc",
         "filename": "simpleperf/utils.h",
         "patchSetId": 2
@@ -47,6 +83,30 @@
       "writtenOn": "2016-05-26T23:24:35Z",
       "side": 1,
       "message": "that\u0027s kind of a weird idea...",
+      "range": {
+        "startLine": 128,
+        "startChar": 6,
+        "endLine": 128,
+        "endChar": 25
+      },
+      "revId": "79b6cd07c34c3814d37a2a9b4666722b52f43cd8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1998f132_e4d50ece",
+        "filename": "simpleperf/utils.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-05-31T21:21:43Z",
+      "side": 1,
+      "message": "removed. I did this because I wanted to use global variable (as it is convenient) while cleaning it after using.",
+      "parentUuid": "1c037f92_5c51dacc",
       "range": {
         "startLine": 128,
         "startChar": 6,
