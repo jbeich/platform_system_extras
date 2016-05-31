@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "1c037f92_bc8b2ef8",
+        "filename": "tests/bootloader/bootctl.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2016-05-31T19:10:39Z",
+      "side": 1,
+      "message": "I call adb.root()/adb.wait() before I use those inside of the tests.",
+      "parentUuid": "1c037f92_c1e8418a",
+      "range": {
+        "startLine": 21,
+        "startChar": 41,
+        "endLine": 21,
+        "endChar": 50
+      },
+      "revId": "9a3da77d7e79985f5f1f9b5a426cabbeb2a5e2ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1c037f92_01ef7993",
         "filename": "tests/bootloader/haltest.py",
         "patchSetId": 9
