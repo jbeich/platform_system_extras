@@ -61,4 +61,12 @@ class PerfSampleCustodian {
 
 typedef perf_event event_t;
 
+//
+// Simpleperf-specific extensions.
+//
+enum simpleperf_record_type {
+  SIMPLE_PERF_RECORD_TYPE_START = 32768,
+  SIMPLE_PERF_RECORD_KERNEL_SYMBOL,
+};
+
 #endif
