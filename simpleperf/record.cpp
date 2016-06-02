@@ -25,6 +25,7 @@
 
 #include "environment.h"
 #include "perf_regs.h"
+#include "tracing.h"
 #include "utils.h"
 
 static std::string RecordTypeToString(int record_type) {
@@ -35,6 +36,7 @@ static std::string RecordTypeToString(int record_type) {
       {PERF_RECORD_FORK, "fork"},         {PERF_RECORD_READ, "read"},
       {PERF_RECORD_SAMPLE, "sample"},     {PERF_RECORD_BUILD_ID, "build_id"},
       {PERF_RECORD_MMAP2, "mmap2"},       {SIMPLE_PERF_RECORD_KERNEL_SYMBOL, "kernel_symbol"},
+      {PERF_RECORD_TRACING_DATA, "tracing_data"},
   };
 
   auto it = record_type_names.find(record_type);
@@ -596,6 +598,32 @@ void KernelSymbolRecord::DumpData(size_t indent) const {
   PrintIndented(indent, "kallsyms: %s\n", kallsyms.c_str());
 }
 
+TracingDataRecord::TracingDataRecord(const perf_event_header* pheader) : Record(pheader) {
+  const char* p = reinterpret_cast<const char*>(pheader + 1);
+  const char* end = reinterpret_cast<const char*>(pheader) + pheader->size;
+  uint32_t size;
+  MoveFromBinaryFormat(size, p);
+  data.resize(size);
+  memcpy(data.data(), p, size);
+  p += ALIGN(size, 64);
+  CHECK_EQ(p, end);
+}
+
+std::vector<char> TracingDataRecord::BinaryFormat() const {
+  std::vector<char> buf(size());
+  char* p = buf.data();
+  MoveToBinaryFormat(header, p);
+  uint32_t size = static_cast<uint32_t>(data.size());
+  MoveToBinaryFormat(size, p);
+  memcpy(p, data.data(), size);
+  return buf;
+}
+
+void TracingDataRecord::DumpData(size_t indent) const {
+  Tracing tracing(data);
+  tracing.Dump(indent);
+}
+
 UnknownRecord::UnknownRecord(const perf_event_header* pheader) : Record(pheader) {
   const char* p = reinterpret_cast<const char*>(pheader + 1);
   const char* end = reinterpret_cast<const char*>(pheader) + size();
@@ -628,6 +656,8 @@ std::unique_ptr<Record> ReadRecordFromBuffer(const perf_event_attr& attr,
       return std::unique_ptr<Record>(new ForkRecord(attr, pheader));
     case PERF_RECORD_SAMPLE:
       return std::unique_ptr<Record>(new SampleRecord(attr, pheader));
+    case PERF_RECORD_TRACING_DATA:
+      return std::unique_ptr<Record>(new TracingDataRecord(pheader));
     case SIMPLE_PERF_RECORD_KERNEL_SYMBOL:
       return std::unique_ptr<Record>(new KernelSymbolRecord(pheader));
     default:
@@ -724,6 +754,14 @@ std::vector<KernelSymbolRecord> CreateKernelSymbolRecords(const std::string& kal
     left_bytes -= used_bytes;
   }
   return result;
+}
+
+TracingDataRecord CreateTracingDataRecord(std::vector<char> tracing_data) {
+  TracingDataRecord record;
+  record.SetTypeAndMisc(PERF_RECORD_TRACING_DATA, 0);
+  record.data = std::move(tracing_data);
+  record.SetSize(sizeof(perf_event_header) + 4 + ALIGN(record.data.size(), 64));
+  return record;
 }
 
 bool RecordCache::RecordWithSeq::IsHappensBefore(const RecordWithSeq& other) const {
