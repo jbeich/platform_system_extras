@@ -100,14 +100,22 @@ class RecordFileReader {
     return header_;
   }
 
-  const std::vector<PerfFileFormat::FileAttr>& AttrSection() const {
-    return file_attrs_;
+  std::vector<AttrWithId> AttrSection() const {
+    std::vector<AttrWithId> result(file_attrs_.size());
+    for (size_t i = 0; i < file_attrs_.size(); ++i) {
+      result[i].attr = &file_attrs_[i].attr;
+      result[i].ids = event_ids_for_file_attrs_[i];
+    }
+    return result;
   }
 
   const std::map<int, PerfFileFormat::SectionDesc>& FeatureSectionDescriptors() const {
     return feature_section_descriptors_;
   }
-
+  bool HasFeature(int feature) const {
+    return feature_section_descriptors_.find(feature) != feature_section_descriptors_.end();
+  }
+  bool ReadFeatureSection(int feature, std::vector<char>* data);
   bool ReadIdsForAttr(const PerfFileFormat::FileAttr& attr, std::vector<uint64_t>* ids);
   // If sorted is true, sort records before passing them to callback function.
   bool ReadDataSection(std::function<bool(std::unique_ptr<Record>)> callback, bool sorted = true);
@@ -124,7 +132,6 @@ class RecordFileReader {
   bool ReadHeader();
   bool ReadAttrSection();
   bool ReadFeatureSectionDescriptors();
-  bool ReadFeatureSection(int feature, std::vector<char>* data);
   std::unique_ptr<Record> ReadRecord();
 
   const std::string filename_;
@@ -132,6 +139,7 @@ class RecordFileReader {
 
   PerfFileFormat::FileHeader header_;
   std::vector<PerfFileFormat::FileAttr> file_attrs_;
+  std::vector<std::vector<uint64_t>> event_ids_for_file_attrs_;
   std::unordered_map<uint64_t, perf_event_attr*> event_id_to_attr_map_;
   std::map<int, PerfFileFormat::SectionDesc> feature_section_descriptors_;
 

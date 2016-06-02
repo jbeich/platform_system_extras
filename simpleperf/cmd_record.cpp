@@ -39,6 +39,7 @@
 #include "record_file.h"
 #include "scoped_signal_handler.h"
 #include "thread_tree.h"
+#include "tracing.h"
 #include "utils.h"
 #include "workload.h"
 
@@ -144,6 +145,7 @@ class RecordCommand : public Command {
   std::unique_ptr<RecordFileWriter> CreateRecordFile(
       const std::string& filename);
   bool DumpKernelSymbol();
+  bool DumpTracingData();
   bool DumpKernelAndModuleMmaps(const perf_event_attr* attr, uint64_t event_id);
   bool DumpThreadCommAndMmaps(const perf_event_attr* attr, uint64_t event_id,
                               bool all_threads,
@@ -514,6 +516,9 @@ bool RecordCommand::CreateAndInitRecordFile() {
   if (!DumpKernelSymbol()) {
     return false;
   }
+  if (!DumpTracingData()) {
+    return false;
+  }
   if (!DumpKernelAndModuleMmaps(attr, event_id)) {
     return false;
   }
@@ -574,6 +579,28 @@ bool RecordCommand::DumpKernelSymbol() {
         return false;
       }
     }
+  }
+  return true;
+}
+
+bool RecordCommand::DumpTracingData() {
+  bool has_tracepoint = false;
+  for (const auto& type : measured_event_types_) {
+    if (type.event_type.type == PERF_TYPE_TRACEPOINT) {
+      has_tracepoint = true;
+      break;
+    }
+  }
+  if (!has_tracepoint) {
+    return true;  // No need to dump tracing data.
+  }
+  std::vector<char> tracing_data;
+  if (!GetTracingData(measured_event_types_, &tracing_data)) {
+    return false;
+  }
+  TracingDataRecord record = CreateTracingDataRecord(std::move(tracing_data));
+  if (!ProcessRecord(&record)) {
+    return false;
   }
   return true;
 }

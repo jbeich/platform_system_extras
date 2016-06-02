@@ -341,6 +341,19 @@ struct KernelSymbolRecord : public Record {
   void DumpData(size_t indent) const override;
 };
 
+struct TracingDataRecord : public Record {
+  std::vector<char> data;
+
+  TracingDataRecord() {
+  }
+
+  TracingDataRecord(const perf_event_header* pheader);
+  std::vector<char> BinaryFormat() const override;
+
+ protected:
+  void DumpData(size_t indent) const override;
+};
+
 // UnknownRecord is used for unknown record types, it makes sure all unknown records
 // are not changed when modifying perf.data.
 struct UnknownRecord : public Record {
@@ -414,5 +427,6 @@ ForkRecord CreateForkRecord(const perf_event_attr& attr, uint32_t pid, uint32_t 
 BuildIdRecord CreateBuildIdRecord(bool in_kernel, pid_t pid, const BuildId& build_id,
                                   const std::string& filename);
 std::vector<KernelSymbolRecord> CreateKernelSymbolRecords(const std::string& kallsyms);
+TracingDataRecord CreateTracingDataRecord(std::vector<char> tracing_data);
 
 #endif  // SIMPLE_PERF_RECORD_H_

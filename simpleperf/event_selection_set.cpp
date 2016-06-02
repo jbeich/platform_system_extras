@@ -115,16 +115,26 @@ void EventSelectionSet::SampleIdAll() {
 void EventSelectionSet::SetSampleFreq(uint64_t sample_freq) {
   for (auto& selection : selections_) {
     perf_event_attr& attr = selection.event_attr;
-    attr.freq = 1;
-    attr.sample_freq = sample_freq;
+    if (attr.type == PERF_TYPE_TRACEPOINT) {
+      attr.freq = 0;
+      attr.sample_period = 1;
+    } else {
+      attr.freq = 1;
+      attr.sample_freq = sample_freq;
+    }
   }
 }
 
 void EventSelectionSet::SetSamplePeriod(uint64_t sample_period) {
   for (auto& selection : selections_) {
     perf_event_attr& attr = selection.event_attr;
-    attr.freq = 0;
-    attr.sample_period = sample_period;
+    if (attr.type == PERF_TYPE_TRACEPOINT) {
+      attr.freq = 0;
+      attr.sample_period = 1;
+    } else {
+      attr.freq = 0;
+      attr.sample_period = sample_period;
+    }
   }
 }
 
