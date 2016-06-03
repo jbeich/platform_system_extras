@@ -47,6 +47,8 @@ simpleperf_static_libraries_target := \
   libLLVMMCParser \
   libLLVMCore \
   libLLVMSupport \
+  libsimpleperf_protobuf \
+  libprotobuf-cpp-full \
   libc \
 
 simpleperf_static_libraries_host := \
@@ -62,6 +64,8 @@ simpleperf_static_libraries_host := \
   libLLVMMCParser \
   libLLVMCore \
   libLLVMSupport \
+  libsimpleperf_protobuf \
+  libprotobuf-cpp-full \
 
 simpleperf_static_libraries_host_linux := \
   libbacktrace_offline \
@@ -70,6 +74,35 @@ simpleperf_static_libraries_host_linux := \
   libcutils \
 
 simpleperf_ldlibs_host_linux := -lrt
+
+# libsimpleperf_protobuf
+# =========================================================
+
+libsimpleperf_protobuf_src_files := \
+  report_sample.proto \
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := libsimpleperf_protobuf
+LOCAL_SRC_FILES := report_sample.proto
+LOCAL_PROTOC_OPTIMIZE_TYPE := full
+include $(BUILD_STATIC_LIBRARY)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := libsimpleperf_protobuf
+LOCAL_MODULE_HOST_OS := darwin linux windows
+LOCAL_SRC_FILES := report_sample.proto
+LOCAL_PROTOC_OPTIMIZE_TYPE := full
+include $(BUILD_HOST_STATIC_LIBRARY)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := simpleperf_protobuf_reader
+LOCAL_MODULE_HOST_OS := darwin linux windows
+LOCAL_SRC_FILES := protobuf_reader.cpp
+LOCAL_CPPFLAGS := -DBUILD_EXECUTABLE
+LOCAL_STATIC_LIBRARIES := $(simpleperf_static_libraries_host)
+LOCAL_STATIC_LIBRARIES_linux := $(simpleperf_static_libraries_host_linux)
+LOCAL_LDLIBS_linux := $(simpleperf_ldlibs_host_linux)
+include $(BUILD_HOST_EXECUTABLE)
 
 # libsimpleperf
 # =========================================================
@@ -190,6 +223,7 @@ simpleperf_unit_test_src_files := \
   cmd_report_sample_test.cpp \
   command_test.cpp \
   gtest_main.cpp \
+  protobuf_reader.cpp \
   read_apk_test.cpp \
   read_elf_test.cpp \
   record_test.cpp \
