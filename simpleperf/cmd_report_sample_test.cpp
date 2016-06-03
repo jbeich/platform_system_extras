@@ -41,3 +41,12 @@ TEST(cmd_report_sample, show_callchain_option) {
   ASSERT_TRUE(ReportSampleCmd()->Run({"-i", GetTestData(CALLGRAPH_FP_PERF_DATA),
                                       "-o", tmpfile.path, "--show-callchain"}));
 }
+
+extern bool ReadProtobufReport(const std::string& filename);
+
+TEST(cmd_report_sample, protobuf_option) {
+  TemporaryFile tmpfile;
+  ASSERT_TRUE(ReportSampleCmd()->Run({"-i", GetTestData(PERF_DATA_WITH_SYMBOLS),
+                                      "-o", tmpfile.path, "--protobuf"}));
+  ASSERT_TRUE(ReadProtobufReport(tmpfile.path));
+}
