@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "66ea2a22_e61cda69",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-06-03T22:44:19Z",
+      "side": 1,
+      "message": "It is a common sense to return bool value to indicate whether the call is successful, plus this is a private member function (assuming whoever touches it knows its function well)",
+      "parentUuid": "1998f132_5ed6153f",
+      "revId": "2c4b15ac3fa9a273e4c472b212cd49b8e09c37ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1998f132_215f6868",
         "filename": "simpleperf/cmd_record.cpp",
         "patchSetId": 1
@@ -30,6 +48,30 @@
       "writtenOn": "2016-05-31T19:07:20Z",
       "side": 1,
       "message": "Any idea how bad this will affect performances? We don\u0027t have metrics on how much time it takes to unwind now. It would be useful to compare with and without symbolizing dump.",
+      "range": {
+        "startLine": 709,
+        "startChar": 40,
+        "endLine": 709,
+        "endChar": 50
+      },
+      "revId": "2c4b15ac3fa9a273e4c472b212cd49b8e09c37ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "66ea2a22_066c5ebd",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 709,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-06-03T22:44:19Z",
+      "side": 1,
+      "message": "yes, it worth attention. I have created a bug https://b/29126335 for it.",
+      "parentUuid": "1998f132_215f6868",
       "range": {
         "startLine": 709,
         "startChar": 40,
