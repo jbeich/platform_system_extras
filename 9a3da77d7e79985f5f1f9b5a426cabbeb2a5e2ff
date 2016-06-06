@@ -73,6 +73,52 @@
     },
     {
       "key": {
+        "uuid": "e34d2cb0_bf3413cc",
+        "filename": "tests/bootloader/haltest.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1077068
+      },
+      "writtenOn": "2016-06-06T21:23:50Z",
+      "side": 1,
+      "message": "Please add a comment saying what are these tests testing. \n\nIn this case for example it tests that all the slot names are different.",
+      "range": {
+        "startLine": 25,
+        "startChar": 8,
+        "endLine": 25,
+        "endChar": 18
+      },
+      "revId": "9a3da77d7e79985f5f1f9b5a426cabbeb2a5e2ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e34d2cb0_5f598f25",
+        "filename": "tests/bootloader/haltest.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1077068
+      },
+      "writtenOn": "2016-06-06T21:23:50Z",
+      "side": 1,
+      "message": "The slot is likely already marked as successful at this point. While this test is still ok and a all bootloaders should pass it; think about adding this to the next test setup if possible. Maybe the fact that we mark the new slot as successful right after boot will prevent you from doing this.",
+      "range": {
+        "startLine": 39,
+        "startChar": 41,
+        "endLine": 39,
+        "endChar": 66
+      },
+      "revId": "9a3da77d7e79985f5f1f9b5a426cabbeb2a5e2ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1c037f92_01ef7993",
         "filename": "tests/bootloader/haltest.py",
         "patchSetId": 9
