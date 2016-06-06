@@ -1,0 +1,130 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "66ea2a22_55e9e6f3",
+        "filename": "simpleperf/cmd_record_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1083168
+      },
+      "writtenOn": "2016-06-06T19:32:44Z",
+      "side": 1,
+      "message": "I thought the norm was to return a bool related to opeation success. But you are using a pointer here?",
+      "range": {
+        "startLine": 219,
+        "startChar": 7,
+        "endLine": 219,
+        "endChar": 11
+      },
+      "revId": "767dd17947f1ae9dd3d02f738d442a23ed76f2f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "66ea2a22_d5a696cf",
+        "filename": "simpleperf/cmd_record_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1083168
+      },
+      "writtenOn": "2016-06-06T19:32:44Z",
+      "side": 1,
+      "message": "This function could help having a comment.",
+      "revId": "767dd17947f1ae9dd3d02f738d442a23ed76f2f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "66ea2a22_35e6e223",
+        "filename": "simpleperf/cmd_record_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1083168
+      },
+      "writtenOn": "2016-06-06T19:32:44Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 251,
+        "startChar": 7,
+        "endLine": 251,
+        "endChar": 11
+      },
+      "revId": "767dd17947f1ae9dd3d02f738d442a23ed76f2f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "66ea2a22_f5b59aef",
+        "filename": "simpleperf/cmd_report_sample.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1083168
+      },
+      "writtenOn": "2016-06-06T19:32:44Z",
+      "side": 1,
+      "message": "I like the comment breakdown. This makes the code very easy to read :)! More of these!",
+      "revId": "767dd17947f1ae9dd3d02f738d442a23ed76f2f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e34d2cb0_dc576d17",
+        "filename": "simpleperf/dso.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1083168
+      },
+      "writtenOn": "2016-06-06T19:32:44Z",
+      "side": 1,
+      "message": "Can we add comment describing what a buildID is?",
+      "range": {
+        "startLine": 73,
+        "startChar": 14,
+        "endLine": 73,
+        "endChar": 25
+      },
+      "revId": "767dd17947f1ae9dd3d02f738d442a23ed76f2f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e34d2cb0_1c2435af",
+        "filename": "simpleperf/get_test_data.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1083168
+      },
+      "writtenOn": "2016-06-06T19:32:44Z",
+      "side": 1,
+      "message": "From Android Studio we will not have access to root. Will it still work with app id user?",
+      "range": {
+        "startLine": 74,
+        "startChar": 43,
+        "endLine": 74,
+        "endChar": 48
+      },
+      "revId": "767dd17947f1ae9dd3d02f738d442a23ed76f2f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
