@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a3fed46d_52b074e7",
+        "filename": "simpleperf/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2016-06-07T13:00:44Z",
+      "side": 1,
+      "message": "why full? I would think you\u0027d be able to get away with lite for the device side (save space, no real loss of functionality)",
+      "range": {
+        "startLine": 87,
+        "startChar": 0,
+        "endLine": 87,
+        "endChar": 34
+      },
+      "revId": "e0195f1ac074b9ee5d985f08a84556c976ae5894",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a3fed46d_f2a528b0",
+        "filename": "simpleperf/report_sample.proto",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2016-06-07T13:00:44Z",
+      "side": 1,
+      "message": "Recommend using \"option optimize_for \u003d LITE_RUNTIME;\" also here (that is standard practice for protos used on device). Reduces size of code, means that you don\u0027t have to link against the full library.",
+      "revId": "e0195f1ac074b9ee5d985f08a84556c976ae5894",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a3fed46d_12b6ece6",
+        "filename": "simpleperf/report_sample.proto",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2016-06-07T13:00:44Z",
+      "side": 1,
+      "message": "As weird as it sounds, required enums are discouraged (as I understand it) in the proto developer community at large. Might take a look at go/default-values-enums-protobufs for some of the context. The folks who reviewed the perfprofd protos urged us to avoid any use of enums at all (this seemed strange to me at first, but it does provides maximum future-proofing at no significant cost).",
+      "range": {
+        "startLine": 27,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 27
+      },
+      "revId": "e0195f1ac074b9ee5d985f08a84556c976ae5894",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
