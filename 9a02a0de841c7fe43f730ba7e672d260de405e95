@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "23310483_b9fc9be3",
+        "filename": "simpleperf/Android.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-06-08T04:22:31Z",
+      "side": 1,
+      "message": "I agree that is fine by making some workarounds in this file (linking shared library for libsimpleperf, but static library for simpleperf). but I think that is not good for maintenance.",
+      "parentUuid": "23310483_d984f776",
+      "range": {
+        "startLine": 126,
+        "startChar": 0,
+        "endLine": 126,
+        "endChar": 34
+      },
+      "revId": "9a02a0de841c7fe43f730ba7e672d260de405e95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "23310483_19482f51",
         "filename": "simpleperf/Android.mk",
         "patchSetId": 2
@@ -101,6 +125,24 @@
       "writtenOn": "2016-06-08T04:03:44Z",
       "side": 1,
       "message": "I\u0027m assuming the goal is to distribute this binary -- you\u0027ll either need to distribute libc++.so as well, or use LOCAL_CXX_STL :\u003d libc++_static",
+      "revId": "9a02a0de841c7fe43f730ba7e672d260de405e95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "23310483_59e22743",
+        "filename": "simpleperf/Android.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-06-08T04:22:31Z",
+      "side": 1,
+      "message": "It is a goal (that\u0027s why I link static libprotobuf), but currently not forced to be that.",
+      "parentUuid": "23310483_f989b38b",
       "revId": "9a02a0de841c7fe43f730ba7e672d260de405e95",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
