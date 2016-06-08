@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "23310483_d984f776",
+        "filename": "simpleperf/Android.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2016-06-08T04:03:44Z",
+      "side": 1,
+      "message": "And that\u0027s fine, since this is a static library, which doesn\u0027t link to any other libraries. All static and shared libraries are only used for header file inclusion (and some basic sanity)",
+      "parentUuid": "23310483_79ada3f5",
+      "range": {
+        "startLine": 126,
+        "startChar": 0,
+        "endLine": 126,
+        "endChar": 34
+      },
+      "revId": "9a02a0de841c7fe43f730ba7e672d260de405e95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "23310483_19482f51",
         "filename": "simpleperf/Android.mk",
         "patchSetId": 2
@@ -60,6 +84,23 @@
       "writtenOn": "2016-06-08T03:43:19Z",
       "side": 1,
       "message": "this makes no difference, since this is a static library",
+      "revId": "9a02a0de841c7fe43f730ba7e672d260de405e95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "23310483_f989b38b",
+        "filename": "simpleperf/Android.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2016-06-08T04:03:44Z",
+      "side": 1,
+      "message": "I\u0027m assuming the goal is to distribute this binary -- you\u0027ll either need to distribute libc++.so as well, or use LOCAL_CXX_STL :\u003d libc++_static",
       "revId": "9a02a0de841c7fe43f730ba7e672d260de405e95",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
