@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "23310483_794123ff",
+        "filename": "simpleperf/Android.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2016-06-08T05:00:00Z",
+      "side": 1,
+      "message": "simpleperf_protobuf_dump?",
+      "range": {
+        "startLine": 191,
+        "startChar": 2,
+        "endLine": 191,
+        "endChar": 28
+      },
+      "revId": "d54b66c2f397c985a4bda1f2d1d8cc47e3886f4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "23310483_194eef2e",
+        "filename": "simpleperf/Android.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2016-06-08T05:00:00Z",
+      "side": 1,
+      "message": "why not a separate file for the main?",
+      "range": {
+        "startLine": 197,
+        "startChar": 19,
+        "endLine": 197,
+        "endChar": 36
+      },
+      "revId": "d54b66c2f397c985a4bda1f2d1d8cc47e3886f4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
