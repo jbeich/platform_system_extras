@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "23310483_793b63b2",
+        "filename": "simpleperf/Android.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2016-06-08T03:43:19Z",
+      "side": 1,
+      "message": "this makes no difference, since this is a static library",
+      "range": {
+        "startLine": 126,
+        "startChar": 0,
+        "endLine": 126,
+        "endChar": 34
+      },
+      "revId": "9a02a0de841c7fe43f730ba7e672d260de405e95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "23310483_19482f51",
+        "filename": "simpleperf/Android.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2016-06-08T03:43:19Z",
+      "side": 1,
+      "message": "this makes no difference, since this is a static library",
+      "revId": "9a02a0de841c7fe43f730ba7e672d260de405e95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
