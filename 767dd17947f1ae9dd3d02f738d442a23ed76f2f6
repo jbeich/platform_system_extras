@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "23310483_d972b79b",
+        "filename": "simpleperf/cmd_record_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-06-08T03:46:28Z",
+      "side": 1,
+      "message": "Because gtest macros like ASSERT_TRUE needs a void return type.",
+      "parentUuid": "66ea2a22_55e9e6f3",
+      "range": {
+        "startLine": 219,
+        "startChar": 7,
+        "endLine": 219,
+        "endChar": 11
+      },
+      "revId": "767dd17947f1ae9dd3d02f738d442a23ed76f2f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "66ea2a22_d5a696cf",
         "filename": "simpleperf/cmd_record_test.cpp",
         "patchSetId": 1
@@ -36,6 +60,24 @@
       "writtenOn": "2016-06-06T19:32:44Z",
       "side": 1,
       "message": "This function could help having a comment.",
+      "revId": "767dd17947f1ae9dd3d02f738d442a23ed76f2f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "23310483_7964c3d3",
+        "filename": "simpleperf/cmd_record_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-06-08T03:46:28Z",
+      "side": 1,
+      "message": "will done in later patches.",
+      "parentUuid": "66ea2a22_d5a696cf",
       "revId": "767dd17947f1ae9dd3d02f738d442a23ed76f2f6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -105,6 +147,30 @@
     },
     {
       "key": {
+        "uuid": "23310483_b971fb95",
+        "filename": "simpleperf/dso.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-06-08T03:46:28Z",
+      "side": 1,
+      "message": "will add comment in build_id.h.",
+      "parentUuid": "e34d2cb0_dc576d17",
+      "range": {
+        "startLine": 73,
+        "startChar": 14,
+        "endLine": 73,
+        "endChar": 25
+      },
+      "revId": "767dd17947f1ae9dd3d02f738d442a23ed76f2f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e34d2cb0_1c2435af",
         "filename": "simpleperf/get_test_data.h",
         "patchSetId": 1
@@ -116,6 +182,30 @@
       "writtenOn": "2016-06-06T19:32:44Z",
       "side": 1,
       "message": "From Android Studio we will not have access to root. Will it still work with app id user?",
+      "range": {
+        "startLine": 74,
+        "startChar": 43,
+        "endLine": 74,
+        "endChar": 48
+      },
+      "revId": "767dd17947f1ae9dd3d02f738d442a23ed76f2f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "23310483_596787d9",
+        "filename": "simpleperf/get_test_data.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-06-08T03:46:28Z",
+      "side": 1,
+      "message": "yes. I just use it to dump some kernel symbols, not necessary.",
+      "parentUuid": "e34d2cb0_1c2435af",
       "range": {
         "startLine": 74,
         "startChar": 43,
