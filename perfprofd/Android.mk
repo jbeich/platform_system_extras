@@ -18,17 +18,12 @@ LOCAL_MODULE_CLASS := STATIC_LIBRARIES
 LOCAL_MODULE_PATH := $(TARGET_OUT_OPTIONAL_EXECUTABLES)
 LOCAL_MODULE_TAGS := debug
 proto_header_dir := $(call local-generated-sources-dir)/proto/$(LOCAL_PATH)
-LOCAL_C_INCLUDES += $(proto_header_dir) $(LOCAL_PATH)/quipper/kernel-headers
+LOCAL_C_INCLUDES += $(proto_header_dir) $(simpleperf_dir) system/extras/simpleperf
 LOCAL_STATIC_LIBRARIES := libbase
 LOCAL_EXPORT_C_INCLUDE_DIRS += $(proto_header_dir)
 LOCAL_SRC_FILES :=  \
 	perf_profile.proto \
-	quipper/perf_utils.cc \
-	quipper/base/logging.cc \
-	quipper/address_mapper.cc \
-	quipper/perf_reader.cc \
-	quipper/perf_parser.cc \
-	perf_data_converter.cc \
+	perf_data_converter_new.cc \
 	configreader.cc \
 	cpuconfig.cc \
 	perfprofdcore.cc \
