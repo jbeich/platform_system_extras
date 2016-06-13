@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "54595544_eb63ad2d",
+        "filename": "simpleperf/Android.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-06-13T22:55:58Z",
+      "side": 1,
+      "message": "changed to --dump-protobuf-report option in report-sample cmd.",
+      "parentUuid": "23310483_794123ff",
+      "range": {
+        "startLine": 191,
+        "startChar": 2,
+        "endLine": 191,
+        "endChar": 28
+      },
+      "revId": "d54b66c2f397c985a4bda1f2d1d8cc47e3886f4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "23310483_194eef2e",
         "filename": "simpleperf/Android.mk",
         "patchSetId": 4
@@ -36,6 +60,30 @@
       "writtenOn": "2016-06-08T05:00:00Z",
       "side": 1,
       "message": "why not a separate file for the main?",
+      "range": {
+        "startLine": 197,
+        "startChar": 19,
+        "endLine": 197,
+        "endChar": 36
+      },
+      "revId": "d54b66c2f397c985a4bda1f2d1d8cc47e3886f4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "54595544_cb60e923",
+        "filename": "simpleperf/Android.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-06-13T22:55:58Z",
+      "side": 1,
+      "message": "I thought it is not necessary to create another file, but now protobuf_reader.cpp is merged into cmd_report_sample.cpp.",
+      "parentUuid": "23310483_194eef2e",
       "range": {
         "startLine": 197,
         "startChar": 19,
