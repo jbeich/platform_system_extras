@@ -16,6 +16,24 @@
       "revId": "b54c5e5e3d6529a7363e5493745a6bbcf30b964f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "54595544_bc0979d1",
+        "filename": "simpleperf/utils.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-06-14T18:01:14Z",
+      "side": 1,
+      "message": "That is also fine. I choose macro just because alignment is usually a macro.",
+      "parentUuid": "b42e118f_2ed8a7f8",
+      "revId": "b54c5e5e3d6529a7363e5493745a6bbcf30b964f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
