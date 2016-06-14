@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b42e118f_2ed8a7f8",
+        "filename": "simpleperf/utils.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2016-06-14T15:01:32Z",
+      "side": 1,
+      "message": "you didn\u0027t want to switch to a template Align?",
+      "revId": "b54c5e5e3d6529a7363e5493745a6bbcf30b964f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
