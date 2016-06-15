@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d4162500_17781642",
+        "filename": "simpleperf/event_attr.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2016-06-15T19:21:20Z",
+      "side": 1,
+      "message": "Are there a lot of events typically? If not, then this is fine, but if there are, it might be better to use a map.",
+      "range": {
+        "startLine": 226,
+        "startChar": 2,
+        "endLine": 226,
+        "endChar": 51
+      },
+      "revId": "24c9c34cf1183132572ff968abfc6bb324dde8a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d4162500_d74cde2c",
+        "filename": "simpleperf/event_attr.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2016-06-15T19:21:20Z",
+      "side": 1,
+      "message": "found the event is a bit awkward. How about, if the event is found.",
+      "range": {
+        "startLine": 35,
+        "startChar": 38,
+        "endLine": 35,
+        "endChar": 53
+      },
+      "revId": "24c9c34cf1183132572ff968abfc6bb324dde8a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
