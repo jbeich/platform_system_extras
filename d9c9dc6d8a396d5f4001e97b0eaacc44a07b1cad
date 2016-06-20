@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "298f287e_ef02416b",
+        "filename": "slideshow/slideshow.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2016-06-20T16:11:24Z",
+      "side": 1,
+      "message": "You should follow the coding style of the rest of the file. Or just x \u003d max(..., 0).",
+      "range": {
+        "startLine": 72,
+        "startChar": 4,
+        "endLine": 72,
+        "endChar": 21
+      },
+      "revId": "d9c9dc6d8a396d5f4001e97b0eaacc44a07b1cad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
