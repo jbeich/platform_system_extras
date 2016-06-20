@@ -68,6 +68,13 @@ static void draw(const char *resname)
     x = (gr_fb_width() - w) / 2;
     y = (gr_fb_height() - h) / 2;
 
+
+    if (x < 0) {
+        x = 0;
+    }
+    if (y < 0) {
+        y = 0;
+    }
     gr_blit(surface, 0, 0, w, h, x, y);
     gr_flip();
 
