@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "298f287e_12e1ea35",
+        "filename": "simpleperf/cmd_kmem.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2016-06-20T17:50:23Z",
+      "side": 1,
+      "message": "is there anything the user can do with this information? if not, let\u0027s just give them the high-level message.",
+      "range": {
+        "startLine": 155,
+        "startChar": 51,
+        "endLine": 156,
+        "endChar": 49
+      },
+      "revId": "f662f0bc400b063be46e8d1cee0b7d7d103e42fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "298f287e_7275d647",
+        "filename": "simpleperf/cmd_kmem.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2016-06-20T17:50:23Z",
+      "side": 1,
+      "message": "?",
+      "range": {
+        "startLine": 161,
+        "startChar": 8,
+        "endLine": 161,
+        "endChar": 23
+      },
+      "revId": "f662f0bc400b063be46e8d1cee0b7d7d103e42fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "298f287e_72d15628",
+        "filename": "simpleperf/get_test_data.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2016-06-20T17:50:23Z",
+      "side": 1,
+      "message": "why two names for the same file?",
+      "range": {
+        "startLine": 79,
+        "startChar": 25,
+        "endLine": 79,
+        "endChar": 66
+      },
+      "revId": "f662f0bc400b063be46e8d1cee0b7d7d103e42fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
