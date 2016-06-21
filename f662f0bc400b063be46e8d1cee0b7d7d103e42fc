@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "298f287e_6e93aa13",
+        "filename": "simpleperf/cmd_kmem.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-06-21T00:46:03Z",
+      "side": 1,
+      "message": "nothing user can do. moved this to comment.",
+      "parentUuid": "298f287e_12e1ea35",
+      "range": {
+        "startLine": 155,
+        "startChar": 51,
+        "endLine": 156,
+        "endChar": 49
+      },
+      "revId": "f662f0bc400b063be46e8d1cee0b7d7d103e42fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "298f287e_7275d647",
         "filename": "simpleperf/cmd_kmem.cpp",
         "patchSetId": 2
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "298f287e_8e904e06",
+        "filename": "simpleperf/cmd_kmem.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-06-21T00:46:03Z",
+      "side": 1,
+      "message": "comment is added above.",
+      "parentUuid": "298f287e_7275d647",
+      "range": {
+        "startLine": 161,
+        "startChar": 8,
+        "endLine": 161,
+        "endChar": 23
+      },
+      "revId": "f662f0bc400b063be46e8d1cee0b7d7d103e42fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "298f287e_72d15628",
         "filename": "simpleperf/get_test_data.h",
         "patchSetId": 2
@@ -59,6 +107,30 @@
       "writtenOn": "2016-06-20T17:50:23Z",
       "side": 1,
       "message": "why two names for the same file?",
+      "range": {
+        "startLine": 79,
+        "startChar": 25,
+        "endLine": 79,
+        "endChar": 66
+      },
+      "revId": "f662f0bc400b063be46e8d1cee0b7d7d103e42fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "298f287e_2e9da21c",
+        "filename": "simpleperf/get_test_data.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-06-21T00:46:03Z",
+      "side": 1,
+      "message": "because the same file can be used for two tests, merged into one name.",
+      "parentUuid": "298f287e_72d15628",
       "range": {
         "startLine": 79,
         "startChar": 25,
