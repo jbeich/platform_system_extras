@@ -32,24 +32,24 @@
 namespace {
 
 struct SlabSample {
+  uint64_t alloc_count;            // count of allocations
   const Symbol* symbol;            // the function making allocation
   uint64_t ptr;                    // the start address of the allocated space
   uint64_t bytes_req;              // requested space size
   uint64_t bytes_alloc;            // allocated space size
-  uint64_t sample_count;           // count of allocations
   uint64_t gfp_flags;              // flags used for allocation
   uint64_t cross_cpu_allocations;  // count of allocations freed not on the
                                    // cpu allocating them
   CallChainRoot<SlabSample> callchain;  // a callchain tree representing all
                                         // callchains in this sample
-  SlabSample(const Symbol* symbol, uint64_t ptr, uint64_t bytes_req,
-             uint64_t bytes_alloc, uint64_t sample_count, uint64_t gfp_flags,
+  SlabSample(uint64_t alloc_count, const Symbol* symbol, uint64_t ptr,
+             uint64_t bytes_req, uint64_t bytes_alloc, uint64_t gfp_flags,
              uint64_t cross_cpu_allocations)
-      : symbol(symbol),
+      : alloc_count(alloc_count),
+        symbol(symbol),
         ptr(ptr),
         bytes_req(bytes_req),
         bytes_alloc(bytes_alloc),
-        sample_count(sample_count),
         gfp_flags(gfp_flags),
         cross_cpu_allocations(cross_cpu_allocations) {}
 };
@@ -59,6 +59,7 @@ struct SlabAccumulateInfo {
   uint64_t bytes_alloc;
 };
 
+BUILD_COMPARE_VALUE_FUNCTION_REVERSE(CompareAllocCount, alloc_count);
 BUILD_COMPARE_VALUE_FUNCTION(ComparePtr, ptr);
 BUILD_COMPARE_VALUE_FUNCTION_REVERSE(CompareBytesReq, bytes_req);
 BUILD_COMPARE_VALUE_FUNCTION_REVERSE(CompareBytesAlloc, bytes_alloc);
@@ -66,6 +67,7 @@ BUILD_COMPARE_VALUE_FUNCTION(CompareGfpFlags, gfp_flags);
 BUILD_COMPARE_VALUE_FUNCTION_REVERSE(CompareCrossCpuAllocations,
                                      cross_cpu_allocations);
 
+BUILD_DISPLAY_UINT64_FUNCTION(DisplayAllocCount, alloc_count);
 BUILD_DISPLAY_HEX64_FUNCTION(DisplayPtr, ptr);
 BUILD_DISPLAY_UINT64_FUNCTION(DisplayBytesReq, bytes_req);
 BUILD_DISPLAY_UINT64_FUNCTION(DisplayBytesAlloc, bytes_alloc);
@@ -116,6 +118,7 @@ class SlabSampleTreeBuilder
         total_requested_bytes_(0),
         total_allocated_bytes_(0),
         nr_allocations_(0),
+        nr_frees_(0),
         nr_cross_cpu_allocations_(0) {}
 
   SlabSampleTree GetSampleTree() const {
@@ -157,7 +160,7 @@ class SlabSampleTreeBuilder
             // tracepoint events because of lacking
             // perf_arch_fetch_caller_regs().
             LOG(WARNING) << "simpleperf may not get callchains for tracepoint"
-                << " events because of lacking kernel support.";
+                         << " events because of lacking kernel support.";
           }
         }
       } else {
@@ -180,7 +183,7 @@ class SlabSampleTreeBuilder
       uint64_t gfp_flags = format->gfp_flags.ReadFromData(raw_data);
       SlabSample* sample =
           InsertSample(std::unique_ptr<SlabSample>(new SlabSample(
-              symbol, ptr, bytes_req, bytes_alloc, 1, gfp_flags, 0)));
+              1, symbol, ptr, bytes_req, bytes_alloc, gfp_flags, 0)));
       alloc_cpu_record_map_.insert(
           std::make_pair(ptr, std::make_pair(r.cpu_data.cpu, sample)));
       acc_info->bytes_req = bytes_req;
@@ -217,8 +220,8 @@ class SlabSampleTreeBuilder
     const Symbol* symbol = thread_tree_->FindKernelSymbol(ip);
     return InsertCallChainSample(
         std::unique_ptr<SlabSample>(
-            new SlabSample(symbol, sample->ptr, acc_info.bytes_req,
-                           acc_info.bytes_alloc, 1, sample->gfp_flags, 0)),
+            new SlabSample(1, symbol, sample->ptr, acc_info.bytes_req,
+                           acc_info.bytes_alloc, sample->gfp_flags, 0)),
         callchain);
   }
 
@@ -239,9 +242,9 @@ class SlabSampleTreeBuilder
   }
 
   void MergeSample(SlabSample* sample1, SlabSample* sample2) override {
+    sample1->alloc_count += sample2->alloc_count;
     sample1->bytes_req += sample2->bytes_req;
     sample1->bytes_alloc += sample2->bytes_alloc;
-    sample1->sample_count += sample2->sample_count;
   }
 
  private:
@@ -260,6 +263,204 @@ class SlabSampleTreeBuilder
 
 using SlabSampleTreeSorter = SampleTreeSorter<SlabSample>;
 using SlabSampleTreeDisplayer = SampleTreeDisplayer<SlabSample, SlabSampleTree>;
+
+struct PageSample {
+  uint64_t alloc_count;  // count of allocations
+  const Symbol* symbol;  // the function making allocation
+  uint64_t page;         // the allocated page frame number
+  uint64_t order;        // (1 << order) pages are allocated once.
+  uint64_t bytes_alloc;  // allocated space size
+  uint64_t gfp_flags;    // flags used for allocation
+  uint64_t migratetype;  // the migratetype, like MOVABLE and UNMOVABLE
+  CallChainRoot<PageSample> callchain;  // a callchain tree representing all
+                                        // allocation callchains in this sample
+  PageSample(uint64_t alloc_count, const Symbol* symbol, uint64_t page,
+             uint64_t order, uint64_t bytes_alloc, uint64_t gfp_flags,
+             uint64_t migratetype)
+      : alloc_count(alloc_count),
+        symbol(symbol),
+        page(page),
+        order(order),
+        bytes_alloc(bytes_alloc),
+        gfp_flags(gfp_flags),
+        migratetype(migratetype) {}
+};
+
+struct PageAccumulateInfo {
+  uint64_t bytes_alloc;  // total allocated bytes
+};
+
+BUILD_COMPARE_VALUE_FUNCTION(ComparePage, page);
+BUILD_COMPARE_VALUE_FUNCTION(CompareOrder, order);
+BUILD_COMPARE_VALUE_FUNCTION(CompareMigratetype, migratetype);
+
+BUILD_DISPLAY_HEX64_FUNCTION(DisplayPage, page);
+BUILD_DISPLAY_UINT64_FUNCTION(DisplayOrder, order);
+BUILD_DISPLAY_HEX64_FUNCTION(DisplayMigratetype, migratetype);
+
+struct PageSampleTree {
+  std::vector<PageSample*> samples;
+  uint64_t total_allocated_bytes;
+  uint64_t total_freed_bytes;
+  uint64_t nr_allocations;
+  uint64_t nr_failed_allocations;
+  uint64_t nr_frees;
+};
+
+struct PageFormat {
+  enum {
+    MM_PAGE_ALLOC,
+    MM_PAGE_FREE,
+  } type;
+  TracingFieldPlace page;
+  TracingFieldPlace order;
+  TracingFieldPlace gfp_flags;
+  TracingFieldPlace migratetype;
+};
+
+class PageSampleTreeBuilder
+    : public SampleTreeBuilder<PageSample, PageAccumulateInfo> {
+ public:
+  PageSampleTreeBuilder(SampleComparator<PageSample> sample_comparator,
+                        ThreadTree* thread_tree)
+      : SampleTreeBuilder(sample_comparator),
+        thread_tree_(thread_tree),
+        page_size_(0),
+        total_allocated_bytes_(0),
+        total_freed_bytes_(0),
+        nr_allocations_(0),
+        nr_failed_allocations_(0),
+        nr_frees_(0) {}
+
+  void SetPageSize(uint64_t page_size) { page_size_ = page_size; }
+
+  PageSampleTree GetSampleTree() const {
+    PageSampleTree sample_tree;
+    sample_tree.samples = GetSamples();
+    sample_tree.total_allocated_bytes = total_allocated_bytes_;
+    sample_tree.total_freed_bytes = total_freed_bytes_;
+    sample_tree.nr_allocations = nr_allocations_;
+    sample_tree.nr_failed_allocations = nr_failed_allocations_;
+    sample_tree.nr_frees = nr_frees_;
+    return sample_tree;
+  }
+
+  void AddPageFormat(const std::vector<uint64_t>& event_ids,
+                     PageFormat format) {
+    std::unique_ptr<PageFormat> p(new PageFormat(format));
+    for (auto id : event_ids) {
+      event_id_to_format_map_[id] = p.get();
+    }
+    formats_.push_back(std::move(p));
+  }
+
+ protected:
+  PageSample* CreateSample(const SampleRecord& r, bool in_kernel,
+                           PageAccumulateInfo* acc_info) {
+    if (!in_kernel) {
+      // Normally we don't parse records in user space because tracepoint
+      // events all happen in kernel. But if r.ip_data.ip == 0, it may be
+      // a kernel record failed to dump ip register and is still useful.
+      if (r.ip_data.ip == 0) {
+        // It seems we are on a kernel can't dump regset for tracepoint events
+        // because of lacking perf_arch_fetch_caller_regs(). We can't get
+        // callchain, but we can still do a normal report.
+        static bool first = true;
+        if (first) {
+          first = false;
+          // The kernel doesn't seem to support dumping registers for
+          // tracepoint events because of lacking perf_arch_fetch_caller_regs().
+          LOG(WARNING)
+              << "simpleperf may not get symbols or callchains for"
+              << " tracepoint events because of lacking kernel support.";
+        }
+      } else {
+        return nullptr;
+      }
+    }
+    uint64_t id = r.id_data.id;
+    auto it = event_id_to_format_map_.find(id);
+    if (it == event_id_to_format_map_.end()) {
+      return nullptr;
+    }
+    const char* raw_data = r.raw_data.data.data();
+    PageFormat* format = it->second;
+    if (format->type == PageFormat::MM_PAGE_ALLOC) {
+      const Symbol* symbol = thread_tree_->FindKernelSymbol(r.ip_data.ip);
+      uint64_t page = format->page.ReadFromData(raw_data);
+      uint64_t order = format->order.ReadFromData(raw_data);
+      uint64_t gfp_flags = format->gfp_flags.ReadFromData(raw_data);
+      uint64_t migratetype = format->migratetype.ReadFromData(raw_data);
+      uint64_t bytes_alloc = (1 << order) * page_size_;
+      PageSample* sample =
+          InsertSample(std::unique_ptr<PageSample>(new PageSample(
+              1, symbol, page, order, bytes_alloc, gfp_flags, migratetype)));
+      acc_info->bytes_alloc = bytes_alloc;
+      return sample;
+    } else if (format->type == PageFormat::MM_PAGE_FREE) {
+      uint64_t order = format->order.ReadFromData(raw_data);
+      uint64_t bytes_free = (1 << order) * page_size_;
+      nr_frees_++;
+      total_freed_bytes_ += bytes_free;
+    }
+    return nullptr;
+  }
+
+  PageSample* CreateBranchSample(const SampleRecord&,
+                                 const BranchStackItemType&) override {
+    return nullptr;
+  }
+
+  PageSample* CreateCallChainSample(
+      const PageSample* sample, uint64_t ip, bool in_kernel,
+      const std::vector<PageSample*>& callchain,
+      const PageAccumulateInfo& acc_info) override {
+    if (!in_kernel) {
+      return nullptr;
+    }
+    const Symbol* symbol = thread_tree_->FindKernelSymbol(ip);
+    return InsertCallChainSample(
+        std::unique_ptr<PageSample>(new PageSample(
+            1, symbol, sample->page, sample->order, acc_info.bytes_alloc,
+            sample->gfp_flags, sample->migratetype)),
+        callchain);
+  }
+  const ThreadEntry* GetThreadOfSample(PageSample*) override { return nullptr; }
+  void InsertCallChainForSample(PageSample* sample,
+                                const std::vector<PageSample*>& callchain,
+                                const PageAccumulateInfo&) override {
+    sample->callchain.AddCallChain(callchain, 1);
+  }
+
+  void UpdateSummary(const PageSample* sample) {
+    if (sample->page != 0) {
+      total_allocated_bytes_ += sample->bytes_alloc;
+      nr_allocations_ += sample->alloc_count;
+    } else {
+      nr_failed_allocations_++;
+    }
+  }
+
+  void MergeSample(PageSample* sample1, PageSample* sample2) override {
+    sample1->alloc_count += sample2->alloc_count;
+    sample1->bytes_alloc += sample2->bytes_alloc;
+  }
+
+ private:
+  ThreadTree* thread_tree_;
+  uint64_t page_size_;
+  uint64_t total_allocated_bytes_;
+  uint64_t total_freed_bytes_;
+  uint64_t nr_allocations_;
+  uint64_t nr_failed_allocations_;
+  uint64_t nr_frees_;
+
+  std::unordered_map<uint64_t, PageFormat*> event_id_to_format_map_;
+  std::vector<std::unique_ptr<PageFormat>> formats_;
+};
+
+using PageSampleTreeSorter = SampleTreeSorter<PageSample>;
+using PageSampleTreeDisplayer = SampleTreeDisplayer<PageSample, PageSampleTree>;
 
 struct EventAttrWithName {
   perf_event_attr attr;
@@ -289,6 +490,20 @@ class KmemCommand : public Command {
 "                     the hit count of the callchain.\n"
 "-i          Specify path of record file, default is perf.data\n"
 "-o report_file_name  Set report file name, default is stdout.\n"
+"--page      Report page allocation information.\n"
+"--page-sort key1,key2,...\n"
+"            Select the keys to sort and print page allocation information.\n"
+"            Should be used with --page option. Possible keys include:\n"
+"              hit         -- the allocation count.\n"
+"              symbol      -- the function making the allocation.\n"
+"              page        -- the allocated page frame number.\n"
+"              order       -- the page allocation order.\n"
+"                             (1 << order) pages are allocated once.\n"
+"              bytes_alloc -- the total allocated bytes.\n"
+"              gfp_flags   -- the flags used for allocation.\n"
+"              migratetype -- the migratetype used for allocation.\n"
+"            The default page allocation sort keys are:\n"
+"              hit,symbol,bytes_alloc,migratetype.\n"
 "--slab      Report slab allocation information. Default option.\n"
 "--slab-sort key1,key2,...\n"
 "            Select the keys to sort and print slab allocation information.\n"
@@ -308,12 +523,14 @@ class KmemCommand : public Command {
             // clang-format on
             ),
         is_record_(false),
+        use_page_(false),
         use_slab_(false),
         accumulate_callchain_(false),
         print_callgraph_(false),
         callgraph_show_callee_(false),
         record_filename_("perf.data"),
-        record_file_arch_(GetBuildArch()) {}
+        record_file_arch_(GetBuildArch()),
+        page_size_(0) {}
 
   bool Run(const std::vector<std::string>& args);
 
@@ -331,9 +548,12 @@ class KmemCommand : public Command {
   bool PrintReport();
   void PrintReportContext(FILE* fp);
   void PrintSlabReportContext(FILE* fp);
+  void PrintPageReportContext(FILE* fp);
 
   bool is_record_;
+  bool use_page_;
   bool use_slab_;
+  std::vector<std::string> page_sort_keys_;
   std::vector<std::string> slab_sort_keys_;
   bool accumulate_callchain_;
   bool print_callgraph_;
@@ -350,6 +570,12 @@ class KmemCommand : public Command {
   std::unique_ptr<SlabSampleTreeBuilder> slab_sample_tree_builder_;
   std::unique_ptr<SlabSampleTreeSorter> slab_sample_tree_sorter_;
   std::unique_ptr<SlabSampleTreeDisplayer> slab_sample_tree_displayer_;
+  PageSampleTree page_sample_tree_;
+  std::unique_ptr<PageSampleTreeBuilder> page_sample_tree_builder_;
+  std::unique_ptr<PageSampleTreeSorter> page_sample_tree_sorter_;
+  std::unique_ptr<PageSampleTreeDisplayer> page_sample_tree_displayer_;
+
+  uint32_t page_size_;
 
   std::string report_filename_;
 };
@@ -359,7 +585,7 @@ bool KmemCommand::Run(const std::vector<std::string>& args) {
   if (!ParseOptions(args, &left_args)) {
     return false;
   }
-  if (!use_slab_) {
+  if (!use_slab_ && !use_page_) {
     use_slab_ = true;
   }
   if (is_record_) {
@@ -387,6 +613,8 @@ bool KmemCommand::ParseOptions(const std::vector<std::string>& args,
         left_args->push_back("fp");
       } else if (args[i] == "--slab") {
         use_slab_ = true;
+      } else if (args[i] == "--page") {
+        use_page_ = true;
       } else {
         left_args->push_back(args[i]);
       }
@@ -422,6 +650,13 @@ bool KmemCommand::ParseOptions(const std::vector<std::string>& args,
           return false;
         }
         report_filename_ = args[i];
+      } else if (args[i] == "--page") {
+        use_page_ = true;
+      } else if (args[i] == "--page-sort") {
+        if (!NextArgumentOrError(args, &i)) {
+          return false;
+        }
+        page_sort_keys_ = android::base::Split(args[i], ",");
       } else if (args[i] == "--slab") {
         use_slab_ = true;
       } else if (args[i] == "--slab-sort") {
@@ -449,6 +684,16 @@ bool KmemCommand::RecordKmemInfo(const std::vector<std::string>& record_args) {
         "kmem:kmalloc",      "kmem:kmem_cache_alloc",
         "kmem:kmalloc_node", "kmem:kmem_cache_alloc_node",
         "kmem:kfree",        "kmem:kmem_cache_free"};
+    for (const auto& name : trace_events) {
+      if (ParseEventType(name)) {
+        args.insert(args.end(), {"-e", name});
+      }
+    }
+  }
+  if (use_page_) {
+    std::vector<std::string> trace_events = {
+        "kmem:mm_page_alloc", "kmem:mm_page_free",
+    };
     for (const auto& name : trace_events) {
       if (ParseEventType(name)) {
         args.insert(args.end(), {"-e", name});
@@ -507,9 +752,9 @@ bool KmemCommand::PrepareToBuildSampleTree() {
 
     for (const auto& key : slab_sort_keys_) {
       if (key == "hit") {
-        sort_comparator.AddCompareFunction(CompareSampleCount);
+        sort_comparator.AddCompareFunction(CompareAllocCount);
         displayer.AddDisplayFunction(accumulated_name + "Hit",
-                                     DisplaySampleCount);
+                                     DisplayAllocCount);
       } else if (key == "caller") {
         comparator.AddCompareFunction(CompareSymbol);
         displayer.AddDisplayFunction("Caller", DisplaySymbol);
@@ -538,15 +783,64 @@ bool KmemCommand::PrepareToBuildSampleTree() {
         LOG(ERROR) << "Unknown sort key for slab allocation: " << key;
         return false;
       }
-      slab_sample_tree_builder_.reset(
-          new SlabSampleTreeBuilder(comparator, &thread_tree_));
-      slab_sample_tree_builder_->SetCallChainSampleOptions(
-          accumulate_callchain_, print_callgraph_, !callgraph_show_callee_,
-          false);
-      sort_comparator.AddComparator(comparator);
-      slab_sample_tree_sorter_.reset(new SlabSampleTreeSorter(sort_comparator));
-      slab_sample_tree_displayer_.reset(new SlabSampleTreeDisplayer(displayer));
     }
+    slab_sample_tree_builder_.reset(
+        new SlabSampleTreeBuilder(comparator, &thread_tree_));
+    slab_sample_tree_builder_->SetCallChainSampleOptions(
+        accumulate_callchain_, print_callgraph_, !callgraph_show_callee_,
+        false);
+    sort_comparator.AddComparator(comparator);
+    slab_sample_tree_sorter_.reset(new SlabSampleTreeSorter(sort_comparator));
+    slab_sample_tree_displayer_.reset(new SlabSampleTreeDisplayer(displayer));
+  }
+  if (use_page_) {
+    if (page_sort_keys_.empty()) {
+      page_sort_keys_ = {"hit", "symbol", "bytes_alloc", "migratetype"};
+    }
+    SampleComparator<PageSample> comparator;
+    SampleComparator<PageSample> sort_comparator;
+    SampleDisplayer<PageSample, PageSampleTree> displayer;
+    std::string accumulated_name = accumulate_callchain_ ? "Accumulated_" : "";
+    if (print_callgraph_) {
+      displayer.AddExclusiveDisplayFunction(DisplayCallgraph);
+    }
+    for (const auto& key : page_sort_keys_) {
+      if (key == "hit") {
+        sort_comparator.AddCompareFunction(CompareAllocCount);
+        displayer.AddDisplayFunction(accumulated_name + "Hit",
+                                     DisplayAllocCount);
+      } else if (key == "symbol") {
+        comparator.AddCompareFunction(CompareSymbol);
+        displayer.AddDisplayFunction("Symbol", DisplaySymbol);
+      } else if (key == "page") {
+        comparator.AddCompareFunction(ComparePage);
+        displayer.AddDisplayFunction("Page", DisplayPage);
+      } else if (key == "order") {
+        comparator.AddCompareFunction(CompareOrder);
+        displayer.AddDisplayFunction("Order", DisplayOrder);
+      } else if (key == "bytes_alloc") {
+        sort_comparator.AddCompareFunction(CompareBytesAlloc);
+        displayer.AddDisplayFunction(accumulated_name + "BytesAlloc",
+                                     DisplayBytesAlloc);
+      } else if (key == "gfp_flags") {
+        comparator.AddCompareFunction(CompareGfpFlags);
+        displayer.AddDisplayFunction("GfpFlags", DisplayGfpFlags);
+      } else if (key == "migratetype") {
+        comparator.AddCompareFunction(CompareMigratetype);
+        displayer.AddDisplayFunction("Migratetype", DisplayMigratetype);
+      } else {
+        LOG(ERROR) << "Unknown sort key for page allocation: " << key;
+        return false;
+      }
+    }
+    page_sample_tree_builder_.reset(
+        new PageSampleTreeBuilder(comparator, &thread_tree_));
+    page_sample_tree_builder_->SetCallChainSampleOptions(
+        accumulate_callchain_, print_callgraph_, !callgraph_show_callee_,
+        false);
+    sort_comparator.AddComparator(comparator);
+    page_sample_tree_sorter_.reset(new PageSampleTreeSorter(sort_comparator));
+    page_sample_tree_displayer_.reset(new PageSampleTreeDisplayer(displayer));
   }
   return true;
 }
@@ -597,6 +891,10 @@ bool KmemCommand::ReadSampleTreeFromRecordFile() {
     slab_sample_tree_ = slab_sample_tree_builder_->GetSampleTree();
     slab_sample_tree_sorter_->Sort(slab_sample_tree_.samples, print_callgraph_);
   }
+  if (use_page_) {
+    page_sample_tree_ = page_sample_tree_builder_->GetSampleTree();
+    page_sample_tree_sorter_->Sort(page_sample_tree_.samples, print_callgraph_);
+  }
   return true;
 }
 
@@ -605,6 +903,10 @@ bool KmemCommand::ProcessRecord(std::unique_ptr<Record> record) {
   if (record->type() == PERF_RECORD_SAMPLE) {
     if (use_slab_) {
       slab_sample_tree_builder_->ProcessSampleRecord(
+          *static_cast<const SampleRecord*>(record.get()));
+    }
+    if (use_page_) {
+      page_sample_tree_builder_->ProcessSampleRecord(
           *static_cast<const SampleRecord*>(record.get()));
     }
   } else if (record->type() == PERF_RECORD_TRACING_DATA) {
@@ -641,7 +943,28 @@ void KmemCommand::ProcessTracingData(const std::vector<char>& data) {
           slab_sample_tree_builder_->AddSlabFormat(attr.event_ids, f);
         }
       }
+      if (use_page_) {
+        if (format.name == "mm_page_alloc") {
+          PageFormat f;
+          f.type = PageFormat::MM_PAGE_ALLOC;
+          format.GetField("page", f.page);
+          format.GetField("order", f.order);
+          format.GetField("gfp_flags", f.gfp_flags);
+          format.GetField("migratetype", f.migratetype);
+          page_sample_tree_builder_->AddPageFormat(attr.event_ids, f);
+        } else if (format.name == "mm_page_free") {
+          PageFormat f;
+          f.type = PageFormat::MM_PAGE_FREE;
+          format.GetField("page", f.page);
+          format.GetField("order", f.order);
+          page_sample_tree_builder_->AddPageFormat(attr.event_ids, f);
+        }
+      }
     }
+  }
+  if (use_page_) {
+    page_size_ = tracing.GetPageSize();
+    page_sample_tree_builder_->SetPageSize(page_size_);
   }
 }
 
@@ -662,6 +985,12 @@ bool KmemCommand::PrintReport() {
     PrintSlabReportContext(report_fp);
     slab_sample_tree_displayer_->DisplaySamples(
         report_fp, slab_sample_tree_.samples, &slab_sample_tree_);
+  }
+  if (use_page_) {
+    fprintf(report_fp, "\n\n");
+    PrintPageReportContext(report_fp);
+    page_sample_tree_displayer_->DisplaySamples(
+        report_fp, page_sample_tree_.samples, &page_sample_tree_);
   }
   return true;
 }
@@ -700,6 +1029,22 @@ void KmemCommand::PrintSlabReportContext(FILE* fp) {
   }
   fprintf(fp, "Total cross cpu allocation/free: %" PRIu64 ", %f%%\n",
           slab_sample_tree_.nr_cross_cpu_allocations, percentage);
+  fprintf(fp, "\n");
+}
+
+void KmemCommand::PrintPageReportContext(FILE* fp) {
+  fprintf(fp, "Page allocation information:\n");
+  fprintf(fp, "Bytes of one page: %u\n", page_size_);
+  fprintf(fp, "Total successful page allocation count: %" PRIu64 "\n",
+          page_sample_tree_.nr_allocations);
+  fprintf(fp, "Total failed page allocation count: %" PRIu64 "\n",
+          page_sample_tree_.nr_failed_allocations);
+  fprintf(fp, "Total page allocation bytes: %" PRIu64 "\n",
+          page_sample_tree_.total_allocated_bytes);
+  fprintf(fp, "Total page free count: %" PRIu64 "\n",
+          page_sample_tree_.nr_frees);
+  fprintf(fp, "Total page free bytes: %" PRIu64 "\n",
+          page_sample_tree_.total_freed_bytes);
   fprintf(fp, "\n");
 }
 
