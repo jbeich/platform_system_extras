@@ -66,9 +66,7 @@ struct Dso {
   static bool SetSymFsDir(const std::string& symfs_dir);
   static void SetVmlinux(const std::string& vmlinux);
   static void SetKallsyms(std::string kallsyms) {
-    if (!kallsyms.empty()) {
-      kallsyms_ = std::move(kallsyms);
-    }
+    kallsyms_ = std::move(kallsyms);
   }
   static void SetBuildIds(
       const std::vector<std::pair<std::string, BuildId>>& build_ids);

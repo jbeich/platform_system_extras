@@ -91,34 +91,55 @@ TEST(kmem_cmd, record_slab) {
   TEST_IN_ROOT(ASSERT_TRUE(RunKmemRecordCmd({"--slab"})));
 }
 
-TEST(kmem_cmd, record_fp_callchain_sampling) {
+TEST(kmem_cmd, record_page) {
+  TEST_IN_ROOT(ASSERT_TRUE(RunKmemRecordCmd({"--page"})));
+}
+
+TEST(kmem_cmd, record_slab_callchain_sampling) {
   TEST_IN_ROOT(ASSERT_TRUE(RunKmemRecordCmd({"--slab", "-g"})));
   TEST_IN_ROOT(ASSERT_TRUE(RunKmemRecordCmd({"--slab", "--call-graph", "fp"})));
 }
 
-TEST(kmem_cmd, record_and_report) {
-  TemporaryFile tmp_file;
+TEST(kmem_cmd, record_page_callchain_sampling) {
+  TEST_IN_ROOT(ASSERT_TRUE(RunKmemRecordCmd({"--page", "-g"})));
+  TEST_IN_ROOT(ASSERT_TRUE(RunKmemRecordCmd({"--page", "--call-graph", "fp"})));
+}
+
+static void KmemRecordAndReport(
+    const std::vector<std::string>& record_options,
+    const std::vector<std::string>& report_options) {
   TEST_IN_ROOT({
-    ASSERT_TRUE(RunKmemRecordCmd({"--slab"}, tmp_file.path));
+    TemporaryFile tmp_file;
+    ASSERT_TRUE(RunKmemRecordCmd(record_options, tmp_file.path));
     ReportResult result;
-    KmemReportRawFile(tmp_file.path, {}, &result);
+    KmemReportRawFile(tmp_file.path, report_options, &result);
     ASSERT_TRUE(result.success);
   });
 }
 
-TEST(kmem_cmd, record_and_report_callgraph) {
-  TemporaryFile tmp_file;
-  TEST_IN_ROOT({
-    ASSERT_TRUE(RunKmemRecordCmd({"--slab", "-g"}, tmp_file.path));
-    ReportResult result;
-    KmemReportRawFile(tmp_file.path, {"-g"}, &result);
-    ASSERT_TRUE(result.success);
-  });
+TEST(kmem_cmd, record_and_report_slab) {
+  KmemRecordAndReport({"--slab"}, {"--slab"});
+}
+
+TEST(kmem_cmd, record_and_report_page) {
+  KmemRecordAndReport({"--page"}, {"--page"});
+}
+
+TEST(kmem_cmd, record_and_report_page_and_slab) {
+  KmemRecordAndReport({"--slab", "--page"}, {"--slab", "--page"});
+}
+
+TEST(kmem_cmd, record_and_report_slab_callgraph) {
+  KmemRecordAndReport({"--slab", "-g"}, {"--slab", "-g"});
+}
+
+TEST(kmem_cmd, record_and_report_page_callgraph) {
+  KmemRecordAndReport({"--page", "-g"}, {"--page", "-g"});
 }
 
 #endif
 
-TEST(kmem_cmd, report) {
+TEST(kmem_cmd, report_slab) {
   ReportResult result;
   KmemReportFile(PERF_DATA_WITH_KMEM_SLAB_CALLGRAPH_RECORD, {}, &result);
   ASSERT_TRUE(result.success);
@@ -126,7 +147,7 @@ TEST(kmem_cmd, report) {
   ASSERT_NE(result.content.find("__alloc_skb"), std::string::npos);
 }
 
-TEST(kmem_cmd, report_all_sort_options) {
+TEST(kmem_cmd, report_slab_all_sort_options) {
   ReportResult result;
   KmemReportFile(
       PERF_DATA_WITH_KMEM_SLAB_CALLGRAPH_RECORD,
@@ -138,11 +159,41 @@ TEST(kmem_cmd, report_all_sort_options) {
   ASSERT_NE(result.content.find("GfpFlags"), std::string::npos);
 }
 
-TEST(kmem_cmd, report_callgraph) {
+TEST(kmem_cmd, report_slab_callgraph) {
   ReportResult result;
   KmemReportFile(PERF_DATA_WITH_KMEM_SLAB_CALLGRAPH_RECORD, {"-g"}, &result);
   ASSERT_TRUE(result.success);
   ASSERT_NE(result.content.find("kmem:kmalloc"), std::string::npos);
   ASSERT_NE(result.content.find("__alloc_skb"), std::string::npos);
   ASSERT_NE(result.content.find("system_call_fastpath"), std::string::npos);
+}
+
+TEST(kmem_cmd, report_page) {
+  ReportResult result;
+  KmemReportFile(PERF_DATA_WITH_KMEM_PAGE_CALLGRAPH_RECORD, {"--page"},
+                 &result);
+  ASSERT_TRUE(result.success);
+  ASSERT_NE(result.content.find("kmem:mm_page_alloc"), std::string::npos);
+  ASSERT_NE(result.content.find("__alloc_pages_nodemask"), std::string::npos);
+}
+
+TEST(kmem_cmd, report_page_all_sort_options) {
+  ReportResult result;
+  KmemReportFile(PERF_DATA_WITH_KMEM_PAGE_CALLGRAPH_RECORD,
+                 {"--page", "--page-sort",
+                  "hit,symbol,page,order,bytes_alloc,gfp_flags,migratetype"},
+                 &result);
+  ASSERT_TRUE(result.success);
+  ASSERT_NE(result.content.find("Page"), std::string::npos);
+  ASSERT_NE(result.content.find("Migratetype"), std::string::npos);
+}
+
+TEST(kmem_cmd, report_page_callgraph) {
+  ReportResult result;
+  KmemReportFile(PERF_DATA_WITH_KMEM_PAGE_CALLGRAPH_RECORD, {"--page", "-g"},
+                 &result);
+  ASSERT_TRUE(result.success);
+  ASSERT_NE(result.content.find("kmem:mm_page_alloc"), std::string::npos);
+  ASSERT_NE(result.content.find("__alloc_pages_nodemask"), std::string::npos);
+  ASSERT_NE(result.content.find("handle_mm_fault"), std::string::npos);
 }
