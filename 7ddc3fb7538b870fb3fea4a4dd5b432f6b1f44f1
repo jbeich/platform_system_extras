@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "6e0cc6ee_d99ed3ca",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-06-22T21:32:26Z",
+      "side": 1,
+      "message": "good idea.",
+      "parentUuid": "aeb07e0a_3bd4d7ef",
+      "range": {
+        "startLine": 310,
+        "startChar": 16,
+        "endLine": 310,
+        "endChar": 22
+      },
+      "revId": "7ddc3fb7538b870fb3fea4a4dd5b432f6b1f44f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e48aafc_1e3ecd1c",
         "filename": "simpleperf/cmd_record.cpp",
         "patchSetId": 2
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "6e0cc6ee_39a42f20",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-06-22T21:32:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e48aafc_1e3ecd1c",
+      "range": {
+        "startLine": 317,
+        "startChar": 35,
+        "endLine": 317,
+        "endChar": 42
+      },
+      "revId": "7ddc3fb7538b870fb3fea4a4dd5b432f6b1f44f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ce5132aa_5cca1d52",
         "filename": "simpleperf/cmd_record.cpp",
         "patchSetId": 2
@@ -59,6 +107,30 @@
       "writtenOn": "2016-06-22T20:28:10Z",
       "side": 1,
       "message": "just \"(-m)\" is shorter without losing any useful information.",
+      "range": {
+        "startLine": 318,
+        "startChar": 57,
+        "endLine": 318,
+        "endChar": 69
+      },
+      "revId": "7ddc3fb7538b870fb3fea4a4dd5b432f6b1f44f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e5fcacc_669bce8a",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-06-22T21:32:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce5132aa_5cca1d52",
       "range": {
         "startLine": 318,
         "startChar": 57,
