@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "20df3ff4_ef364144",
+        "filename": "perfprofd/quipper/perf_reader.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1449,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-06-28T17:09:02Z",
+      "side": 1,
+      "message": "All simpleperf custom record types set (1 \u003c\u003c 15). If you don\u0027t want to catch unexpected record types, you can omit all records with type setting (1 \u003c\u003c 15).",
+      "range": {
+        "startLine": 1449,
+        "startChar": 2,
+        "endLine": 1449,
+        "endChar": 4
+      },
+      "revId": "18b0775d68a04d78a4a4bcd6d23d717245aba184",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
