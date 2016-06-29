@@ -354,6 +354,7 @@ static u32 ext4_allocate_blocks_from_block_group(u32 len, int bg_num)
 	}
 
 	aux_info.bgs[bg_num].data_blocks_used += len;
+	aux_info.sb->s_free_blocks_count_lo -= len;
 
 	return bg->first_block + block;
 }
