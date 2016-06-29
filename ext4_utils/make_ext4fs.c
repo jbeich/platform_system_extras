@@ -399,6 +399,35 @@ static u32 compute_bg_desc_reserve_blocks()
 	return bg_desc_reserve_blocks;
 }
 
+static u32 compute_reserve_blocks(void)
+{
+	u32 resv_blocks = 0;
+
+	/* There's no need to reserve anything when we aren't using extents.
+	 * The space estimates are exact, there are no unwritten extents,
+	 * hole punching doesn't need new metadata... This is needed especially
+	 * to keep ext2/3 backward compability.
+	 */
+	if ((info.feat_incompat & EXT4_FEATURE_INCOMPAT_EXTENTS) == 0) {
+		return 0;
+	}
+
+	/* By default we reserve 2% or 4096 blocks, whichever is smaller.
+	 * This should cover the situations where we can not afford to run
+	 * out of space like for example punch hole, or coverting
+	 * uninitialized extents in delalloc path. In most cases such
+	 * allocation would require 1, or 2 blocks, higher numbers are very
+	 * rare.
+	 */
+	resv_blocks  = info.len / info.block_size;
+	resv_blocks *= 0.02;
+	resv_blocks  = min(resv_blocks, 4096);
+
+	return resv_blocks;
+}
+
+
+
 void reset_ext4fs_info() {
 	// Reset all the global data structures used by make_ext4fs so it
 	// can be called again.
@@ -589,6 +618,8 @@ int make_ext4fs_internal(int fd, const char *_directory, const char *_target_out
 
 	info.bg_desc_reserve_blocks = compute_bg_desc_reserve_blocks();
 
+	info.reserve_blocks = compute_reserve_blocks();
+
 	printf("Creating filesystem with parameters:\n");
 	printf("    Size: %"PRIu64"\n", info.len);
 	printf("    Block size: %d\n", info.block_size);
@@ -603,6 +634,7 @@ int make_ext4fs_internal(int fd, const char *_directory, const char *_target_out
 	printf("    Blocks: %"PRIu64"\n", aux_info.len_blocks);
 	printf("    Block groups: %d\n", aux_info.groups);
 	printf("    Reserved block group size: %d\n", info.bg_desc_reserve_blocks);
+	printf("    Reserved blocks: %d\n", info.reserve_blocks);
 
 	ext4_sparse_file = sparse_file_new(info.block_size, info.len);
 

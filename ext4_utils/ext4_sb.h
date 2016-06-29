@@ -41,6 +41,7 @@ struct fs_info {
 	uint16_t feat_compat;
 	uint16_t feat_incompat;
 	uint32_t bg_desc_reserve_blocks;
+	uint32_t reserve_blocks;
 	const char *label;
 	uint8_t no_journal;
 	bool block_device;	/* target fd is a block device? */

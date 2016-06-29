@@ -270,6 +270,18 @@ void ext4_free_fs_aux_info()
 	free(aux_info.bg_desc);
 }
 
+static u32 ext4_calculate_free_blocks(void)
+{
+	u32 i;
+	u32 free_blocks = 0;
+
+	for (i = 0; i < aux_info.groups; ++i) {
+		free_blocks += get_free_blocks(i);
+	}
+
+	return free_blocks;
+}
+
 /* Fill in the superblock memory buffer based on the filesystem parameters */
 void ext4_fill_in_sb(int real_uuid)
 {
@@ -279,7 +291,7 @@ void ext4_fill_in_sb(int real_uuid)
 	sb->s_inodes_count = info.inodes_per_group * aux_info.groups;
 	sb->s_blocks_count_lo = aux_info.len_blocks;
 	sb->s_r_blocks_count_lo = 0;
-	sb->s_free_blocks_count_lo = 0;
+	sb->s_free_blocks_count_lo = ext4_calculate_free_blocks();
 	sb->s_free_inodes_count = 0;
 	sb->s_first_data_block = aux_info.first_data_block;
 	sb->s_log_block_size = log_2(info.block_size / 1024);
@@ -492,6 +504,8 @@ void ext4_update_free()
 {
 	u32 i;
 
+	aux_info.sb->s_free_blocks_count_lo = 0;
+
 	for (i = 0; i < aux_info.groups; i++) {
 		u32 bg_free_blocks = get_free_blocks(i);
 		u32 bg_free_inodes = get_free_inodes(i);
@@ -635,3 +649,32 @@ int read_ext(int fd, int verbose)
 	return 0;
 }
 
+/*
+ * Claim block_len free blocks.
+ *
+ * block_len: The number of blocks a file needs.
+ * flags: Default is 0, if set EXT4_MB_USE_RESERVED, can allocate blocks from reserved pool.
+ */
+int ext4_claim_free_blocks(u32 block_len, u32 flags)
+{
+	u32 free_blocks = aux_info.sb->s_free_blocks_count_lo;
+	u32 resv_blocks = info.reserve_blocks;
+
+	/* Check wheather we have space after accounting for current
+	 * reserved blocks.
+	 */
+	if (free_blocks >= (resv_blocks + block_len)) {
+		return 1;
+	}
+	/* No free blocks. Let's see if we can dip into reserved pool */
+	if (flags & EXT4_MB_USE_RESERVED) {
+		if (free_blocks >= block_len) {
+			return 1;
+		}
+	}
+
+	warn("Free Blocks: %u\n", free_blocks);
+	warn("Reserved Blocks: %u\n", resv_blocks);
+
+	return 0;
+}
