@@ -58,6 +58,10 @@ typedef unsigned int ext4_group_t;
 
 #define EXT4_MB_STREAM_ALLOC 0x0800
 
+#define EXT4_MB_USE_ROOT_BLOCKS 0x1000
+
+#define EXT4_MB_USE_RESERVED 0x2000
+
 struct ext4_allocation_request {
 
  struct inode *inode;
@@ -78,6 +82,7 @@ struct ext4_allocation_request {
 
  unsigned int flags;
 };
+
 
 #define EXT4_BAD_INO 1  
 #define EXT4_ROOT_INO 2  
