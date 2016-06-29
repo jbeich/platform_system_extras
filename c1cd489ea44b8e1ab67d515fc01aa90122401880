@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "20b2dff6_57630cc5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1013433
+      },
+      "writtenOn": "2016-06-29T15:23:55Z",
+      "side": 1,
+      "message": "\"if the user did not press the power button\"",
+      "revId": "c1cd489ea44b8e1ab67d515fc01aa90122401880",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "20b2dff6_975cc409",
+        "filename": "slideshow/slideshow.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1013433
+      },
+      "writtenOn": "2016-06-29T15:23:55Z",
+      "side": 1,
+      "message": "Who actually calls this in tree with -p? You have the dependency on sepolicy, but is their a dep on someone actually invoking this with -p?\n\nWhy cant the caller just exec this then do a reboot?",
+      "revId": "c1cd489ea44b8e1ab67d515fc01aa90122401880",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
