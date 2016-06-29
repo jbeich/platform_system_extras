@@ -443,8 +443,15 @@ static struct region *ext4_allocate_best_fit(u32 len)
           allocate the largest contiguous region and loop
       2.  Otherwise, allocate the smallest contiguous region that it fits in
 */
-struct block_allocation *allocate_blocks(u32 len)
+struct block_allocation *allocate_blocks(u32 len, u32 flags)
 {
+	/* We do still charge estimated metadata to the sb though;
+	 * we cannot afford to run out of free blocks.
+	 */
+	if (!ext4_claim_free_blocks(len, flags)) {
+		return NULL;
+	}
+
 	struct region *reg = ext4_allocate_best_fit(len);
 
 	if (reg == NULL)

@@ -389,7 +389,7 @@ static struct block_allocation *do_inode_allocate_indirect(
 {
 	u32 indirect_len = indirect_blocks_needed(block_len);
 
-	struct block_allocation *alloc = allocate_blocks(block_len + indirect_len);
+	struct block_allocation *alloc = allocate_blocks(block_len + indirect_len, EXT4_MB_USE_RESERVED);
 
 	if (alloc == NULL) {
 		error("Failed to allocate %d blocks", block_len + indirect_len);
