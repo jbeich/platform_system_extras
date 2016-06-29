@@ -41,7 +41,7 @@ struct block_allocation {
 void block_allocator_init();
 void block_allocator_free();
 u32 allocate_block();
-struct block_allocation *allocate_blocks(u32 len);
+struct block_allocation *allocate_blocks(u32 len, u32 flags);
 int block_allocation_num_regions(struct block_allocation *alloc);
 int block_allocation_len(struct block_allocation *alloc);
 struct ext4_inode *get_inode(u32 inode);
