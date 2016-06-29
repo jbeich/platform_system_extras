@@ -76,12 +76,20 @@ static struct block_allocation *do_inode_allocate_extents(
 {
 	u32 block_len = DIV_ROUND_UP(len, info.block_size), prealloc_block_len;
 	struct block_allocation *alloc;
+
+
+
 	u32 extent_block = 0;
 	u32 file_block = 0;
 	struct ext4_extent *extent;
 	u64 blocks;
 
 	if (!prealloc) {
+		if (!ext4_claim_free_blocks(block_len + 1, 0)) {
+			error("Failed to claim %u blocks\n", block_len + 1);
+			return NULL;
+		}
+
 		alloc = allocate_blocks(block_len + 1);
 		if (alloc == NULL) {
 			error("Failed to allocate %d blocks\n", block_len + 1);
@@ -90,6 +98,10 @@ static struct block_allocation *do_inode_allocate_extents(
 	} else {
 		prealloc_block_len = block_allocation_len(prealloc);
 		if (block_len + 1 > prealloc_block_len) {
+			if (!ext4_claim_free_blocks(block_len + 1 - prealloc_block_len, 0)) {
+				error("Failed to claim %u blocks\n", block_len + 1 - prealloc_block_len);
+				return NULL;
+			}
 			alloc = allocate_blocks(block_len + 1 - prealloc_block_len);
 			if (alloc == NULL) {
 				error("Failed to allocate %d blocks\n",

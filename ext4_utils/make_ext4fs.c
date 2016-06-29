@@ -781,6 +781,7 @@ int make_ext4fs_internal(int fd, const char *_directory, const char *_target_out
 	printf("    Blocks: %"PRIu64"\n", aux_info.len_blocks);
 	printf("    Block groups: %d\n", aux_info.groups);
 	printf("    Reserved block group size: %d\n", info.bg_desc_reserve_blocks);
+	printf("    Reserved size: %"PRIu64"\n", info.reserve_size);
 
 	ext4_sparse_file = sparse_file_new(info.block_size, info.len);
 

@@ -58,6 +58,7 @@ static void usage(char *path)
 	fprintf(stderr, "    [ -S file_contexts ] [ -C fs_config ] [ -T timestamp ]\n");
 	fprintf(stderr, "    [ -z | -s ] [ -w ] [ -c ] [ -J ] [ -v ] [ -B <block_list_file> ]\n");
 	fprintf(stderr, "    [ -d <base_alloc_file_in> ] [ -D <base_alloc_file_out> ]\n");
+	fprintf(stderr, "    [ -r <reserve_size> ]\n");
 	fprintf(stderr, "    <filename> [[<directory>] <target_out_directory>]\n");
 }
 
@@ -87,7 +88,7 @@ int main(int argc, char **argv)
 	struct selinux_opt seopts[] = { { SELABEL_OPT_PATH, "" } };
 #endif
 
-	while ((opt = getopt(argc, argv, "l:j:b:g:i:I:L:a:S:T:C:B:d:D:fwzJsctvu")) != -1) {
+	while ((opt = getopt(argc, argv, "l:j:b:g:i:I:L:a:S:T:C:B:d:D:r:fwzJsctvu")) != -1) {
 		switch (opt) {
 		case 'l':
 			info.len = parse_num(optarg);
@@ -182,6 +183,8 @@ int main(int argc, char **argv)
 				fprintf(stderr, "failed to open base_alloc_file_out: %s\n", strerror(errno));
 				exit(EXIT_FAILURE);
 			}
+		case 'r':
+			info.reserve_size = parse_num(optarg);
 			break;
 		default: /* '?' */
 			usage(argv[0]);

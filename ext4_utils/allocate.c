@@ -224,6 +224,7 @@ static int reserve_blocks(struct block_group_info *bg, u32 bg_num, u32 start, u3
 
 	bg->free_blocks -= num;
 
+	aux_info.sb->s_free_blocks_count_lo -= num;
 	return 0;
 }
 
@@ -233,6 +234,7 @@ static void free_blocks(struct block_group_info *bg, u32 block, u32 num_blocks)
 	for (i = 0; i < num_blocks; i++, block--)
 		bg->block_bitmap[block / 8] &= ~(1 << (block % 8));
 	bg->free_blocks += num_blocks;
+	aux_info.sb->s_free_blocks_count_lo += num_blocks;
 }
 
 /* Reduces an existing allocation by len blocks by return the last blocks
@@ -814,4 +816,3 @@ int reserve_blocks_for_allocation(struct block_allocation *alloc) {
 	}
 	return 0;
 }
-

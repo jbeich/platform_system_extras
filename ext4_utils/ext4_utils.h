@@ -166,6 +166,8 @@ int make_ext4fs_internal(int fd, const char *directory, const char *_target_out_
 
 int read_ext(int fd, int verbose);
 
+int ext4_claim_free_blocks(u32 block_len, u32 flags);
+
 #ifdef __cplusplus
 }
 #endif
