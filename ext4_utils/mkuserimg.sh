@@ -43,6 +43,12 @@ if [ "$1" = "-j" ]; then
   shift; shift
 fi
 
+RESERVE_FLAGS=
+if [ "$1" = "-r" ]; then
+    RESERVE_FLAGS="-r $2"
+  shift; shift
+fi
+
 TIMESTAMP=-1
 if [[ "$1" == "-T" ]]; then
   TIMESTAMP=$2
@@ -104,7 +110,7 @@ if [ -n "$LABEL" ]; then
   OPT="$OPT -L $LABEL"
 fi
 
-MAKE_EXT4FS_CMD="make_ext4fs $ENABLE_SPARSE_IMAGE -T $TIMESTAMP $OPT -l $SIZE $JOURNAL_FLAGS -a $MOUNT_POINT $OUTPUT_FILE $SRC_DIR $PRODUCT_OUT"
+MAKE_EXT4FS_CMD="make_ext4fs $ENABLE_SPARSE_IMAGE -T $TIMESTAMP $OPT -l $SIZE $JOURNAL_FLAGS $RESERVE_FLAGS -a $MOUNT_POINT $OUTPUT_FILE $SRC_DIR $PRODUCT_OUT"
 echo $MAKE_EXT4FS_CMD
 $MAKE_EXT4FS_CMD
 if [ $? -ne 0 ]; then
