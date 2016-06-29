@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "607057c4_f3671036",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2016-06-29T20:03:55Z",
+      "side": 1,
+      "message": "Clarify that this is when mounting and modifying the image, not during make_ext4fs.",
+      "revId": "68e419e07586fa834bd92c504f78a9a71fa03b54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "607057c4_53835ce8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2016-06-29T20:03:55Z",
+      "side": 1,
+      "message": "Put a link to the change",
+      "revId": "68e419e07586fa834bd92c504f78a9a71fa03b54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "607057c4_337ee8c7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2016-06-29T20:03:55Z",
+      "side": 1,
+      "message": "Use a link to the code.google.com issue, Gerrit assumes a number here is an internal bug #.",
+      "revId": "68e419e07586fa834bd92c504f78a9a71fa03b54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "607057c4_d319accd",
+        "filename": "ext4_utils/allocate.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2016-06-29T20:03:55Z",
+      "side": 1,
+      "message": "I don\u0027t like passing a flags argument, its unclear which flags are valid or what 0 means.  I prefer two functions, one that enforces the limit and one that does not, or an enum.",
+      "revId": "68e419e07586fa834bd92c504f78a9a71fa03b54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "607057c4_737460e9",
+        "filename": "ext4_utils/ext4.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2016-06-29T20:03:55Z",
+      "side": 1,
+      "message": "This is an automatically generated file, don\u0027t add things to it.",
+      "revId": "68e419e07586fa834bd92c504f78a9a71fa03b54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "607057c4_9379f4e0",
+        "filename": "ext4_utils/ext4_utils.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 680,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2016-06-29T20:03:55Z",
+      "side": 1,
+      "message": "These seem unnecessary to recalculate every time, why not store them in aux_info?",
+      "revId": "68e419e07586fa834bd92c504f78a9a71fa03b54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
