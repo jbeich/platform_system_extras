@@ -75,6 +75,15 @@ static struct block_allocation *do_inode_allocate_extents(
 	struct ext4_inode *inode, u64 len)
 {
 	u32 block_len = DIV_ROUND_UP(len, info.block_size);
+
+	/* We do still charge estimated metadata to the sb though;
+	 * we cannot afford to run out of free blocks.
+	 */
+	if (!ext4_claim_free_blocks(block_len + 1, 0)) {
+		error("Failed to claim %u blocks\n", block_len + 1);
+		return NULL;
+	}
+
 	struct block_allocation *alloc = allocate_blocks(block_len + 1);
 	u32 extent_block = 0;
 	u32 file_block = 0;
