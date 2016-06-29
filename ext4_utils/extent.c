@@ -75,7 +75,7 @@ static struct block_allocation *do_inode_allocate_extents(
 	struct ext4_inode *inode, u64 len)
 {
 	u32 block_len = DIV_ROUND_UP(len, info.block_size);
-	struct block_allocation *alloc = allocate_blocks(block_len + 1);
+	struct block_allocation *alloc = allocate_blocks(block_len + 1, 0);
 	u32 extent_block = 0;
 	u32 file_block = 0;
 	struct ext4_extent *extent;
