@@ -31,6 +31,8 @@
 #include "configreader.h"
 #include "perfprofdutils.h"
 #include "perfprofdmockutils.h"
+#include "oatdexvisitor.h"
+#include "dexread.h"
 
 #include "perf_profile.pb.h"
 #include "google/protobuf/text_format.h"
@@ -821,6 +823,84 @@ TEST_F(PerfProfdTest, CallChainRunWithLivePerf)
   // check to make sure log excerpt matches
   compareLogMessages(mock_perfprofdutils_getlogged(),
                      expected, "CallChainRunWithLivePerf", true);
+}
+
+class CaptureDexVisitor : public OatDexVisitor {
+ public:
+  CaptureDexVisitor() { }
+  ~CaptureDexVisitor() { }
+
+  void visitOAT(bool is64bit,
+                uint32_t adler32_checksum,
+                uint64_t executable_offset,
+                uint64_t base_text) {
+    ss_ << "OAT is64=" << (is64bit ? "yes" : "no")
+        << " checksum=" << std::hex << adler32_checksum
+        << " executable_offset=0x" << std::hex << executable_offset
+        << " base_text=0x" << std::hex << base_text << "\n";
+  }
+
+  void visitDEX(unsigned char sha1sig[20]) {
+    ss_ << "DEX sha1 ";
+    for (unsigned i = 0; i < 20; ++i)
+      ss_ << std::hex << (int) sha1sig[i];
+    ss_ << "\n";
+  }
+
+  void visitClass(const std::string &className, uint32_t nMethods) {
+    ss_ << std::dec << " class " << className
+        << " nmethods=" << nMethods << "\n";
+  }
+
+  void visitMethod(const std::string &methodName,
+                   unsigned dexMethodIdx,
+                   uint32_t numDexInstrs,
+                   uint64_t *nativeCodeOffset,
+                   uint32_t *nativeCodeSize) {
+    ss_ << " method " << std::dec << dexMethodIdx
+        << " name=" << methodName
+        << " numDexInstrs=" << numDexInstrs;
+    if (nativeCodeOffset)
+      ss_ << " nativeCodeOffset=" << std::hex << *nativeCodeOffset;
+    if (nativeCodeSize)
+      ss_ << " nativeCodeSize=" << std::dec << *nativeCodeSize;
+    ss_ << "\n";
+  }
+
+  std::string result() { return ss_.str(); }
+
+ private:
+  std::stringstream ss_;
+};
+
+TEST_F(PerfProfdTest, BasicDexRead)
+{
+  //
+  // Visit a DEX file
+  //
+  CaptureDexVisitor vis;
+  std::string dexfile(test_dir);
+  dexfile += "/smallish.dex";
+  auto res = examineDexFile(dexfile, vis);
+  ASSERT_TRUE(res);
+
+  //
+  // Test for correct output
+  //
+  const std::string dex_expected = RAW_RESULT(
+      DEX sha1 fd56aced78355c305a953d6f3dfe1f7ff6ac440
+      class Lfibonacci nmethods=6
+      method 0 name=<init> numDexInstrs=4
+      method 1 name=ifibonacci numDexInstrs=16
+      method 2 name=main numDexInstrs=159
+      method 3 name=rcnm1 numDexInstrs=7
+      method 4 name=rcnm2 numDexInstrs=7
+      method 5 name=rfibonacci numDexInstrs=17
+                                              );
+  std::string sqexp = squeezeWhite(dex_expected, "expected");
+  std::string result = vis.result();
+  std::string sqact = squeezeWhite(result, "actual");
+  EXPECT_STREQ(sqexp.c_str(), sqact.c_str());
 }
 
 int main(int argc, char **argv) {

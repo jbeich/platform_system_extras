@@ -39,13 +39,24 @@ LOCAL_SRC_FILES := callchain.canned.perf.data
 include $(BUILD_PREBUILT)
 
 #
+# Canned DEX file needed by unit test.
+#
+include $(CLEAR_VARS)
+LOCAL_MODULE := smallish.dex
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_CLASS := DATA
+LOCAL_MODULE_PATH := $(TARGET_OUT_DATA)/nativetest/perfprofd_test
+LOCAL_SRC_FILES := smallish.dex
+include $(BUILD_PREBUILT)
+
+#
 # Unit test for perfprofd
 #
 include $(CLEAR_VARS)
 LOCAL_CLANG := true
 LOCAL_CPP_EXTENSION := .cc
 LOCAL_CXX_STL := libc++
-LOCAL_STATIC_LIBRARIES := libperfprofdcore libperfprofdmockutils libgtest libbase
+LOCAL_STATIC_LIBRARIES := libperfprofdcore libperfprofileproto libperfprofddexutils libperfprofdmockutils libgtest libbase
 LOCAL_SHARED_LIBRARIES := libprotobuf-cpp-lite
 LOCAL_C_INCLUDES += system/extras/perfprofd external/protobuf/src
 LOCAL_SRC_FILES := perfprofd_test.cc

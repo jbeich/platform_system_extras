@@ -8,6 +8,33 @@ perfprofd_cppflags := \
   -std=gnu++11 \
 
 #
+# Static library containing perf_profile.proto machinery
+#
+include $(CLEAR_VARS)
+LOCAL_SRC_FILES := perf_profile.proto
+LOCAL_MODULE := libperfprofileproto
+LOCAL_MODULE_CLASS := STATIC_LIBRARIES
+proto_header_dir := $(call local-generated-sources-dir)/proto/$(LOCAL_PATH)
+LOCAL_EXPORT_C_INCLUDE_DIRS += $(proto_header_dir)
+LOCAL_CPPFLAGS += $(perfprofd_cppflags)
+include $(BUILD_STATIC_LIBRARY)
+
+#
+# Static library libperfprofddexutils containing DEX reader
+#
+include $(CLEAR_VARS)
+LOCAL_CLANG := true
+LOCAL_CPP_EXTENSION := .cc
+LOCAL_MODULE := libperfprofddexutils
+LOCAL_MODULE_PATH := $(TARGET_OUT_OPTIONAL_EXECUTABLES)
+LOCAL_MODULE_TAGS := debug
+LOCAL_STATIC_LIBRARIES := libbase
+LOCAL_SRC_FILES := dexread.cc oatdexvisitor.cc
+LOCAL_CPPFLAGS += $(perfprofd_cppflags)
+include $(LLVM_DEVICE_BUILD_MK)
+include $(BUILD_STATIC_LIBRARY)
+
+#
 # Static library containing guts of AWP daemon.
 #
 include $(CLEAR_VARS)
@@ -17,12 +44,10 @@ LOCAL_MODULE := libperfprofdcore
 LOCAL_MODULE_CLASS := STATIC_LIBRARIES
 LOCAL_MODULE_PATH := $(TARGET_OUT_OPTIONAL_EXECUTABLES)
 LOCAL_MODULE_TAGS := debug
-proto_header_dir := $(call local-generated-sources-dir)/proto/$(LOCAL_PATH)
-LOCAL_C_INCLUDES += $(proto_header_dir) $(LOCAL_PATH)/quipper/kernel-headers
-LOCAL_STATIC_LIBRARIES := libbase
+LOCAL_C_INCLUDES += $(LOCAL_PATH)/quipper/kernel-headers
+LOCAL_STATIC_LIBRARIES := libperfprofileproto libbase
 LOCAL_EXPORT_C_INCLUDE_DIRS += $(proto_header_dir)
 LOCAL_SRC_FILES :=  \
-	perf_profile.proto \
 	quipper/perf_utils.cc \
 	quipper/base/logging.cc \
 	quipper/address_mapper.cc \
@@ -58,7 +83,11 @@ LOCAL_CLANG := true
 LOCAL_CPP_EXTENSION := .cc
 LOCAL_CXX_STL := libc++
 LOCAL_SRC_FILES := perfprofdmain.cc
-LOCAL_STATIC_LIBRARIES := libperfprofdcore libperfprofdutils
+LOCAL_STATIC_LIBRARIES := \
+	libperfprofdcore \
+	libperfprofdutils \
+	libperfprofileproto \
+	libperfprofddexutils
 LOCAL_SHARED_LIBRARIES := liblog libprotobuf-cpp-lite libbase
 LOCAL_SYSTEM_SHARED_LIBRARIES := libc libstdc++
 LOCAL_CPPFLAGS += $(perfprofd_cppflags)

@@ -462,10 +462,6 @@ static void annotate_encoded_perf_profile(wireless_android_play_playlog::Android
   }
 }
 
-inline char* string_as_array(std::string* str) {
-  return str->empty() ? NULL : &*str->begin();
-}
-
 PROFILE_RESULT encode_to_proto(const std::string &data_file_path,
                                const char *encoded_file_path,
                                const ConfigReader &config,
