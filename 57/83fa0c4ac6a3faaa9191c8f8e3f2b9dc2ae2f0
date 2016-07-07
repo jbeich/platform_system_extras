@@ -1,0 +1,8 @@
+Presubmit-Ready+1: Treehugger Robot <treehugger-gerrit@google.com>
+Code-Review+2: Dimitry Ivanov <dimitry@google.com>
+Verified+1: Yabin Cui <yabinc@google.com>
+Submitted-by: Yabin Cui <yabinc@google.com>
+Submitted-at: Thu, 07 Jul 2016 18:23:40 +0000
+Reviewed-on: https://android-review.googlesource.com/246140
+Project: platform/system/extras
+Branch: refs/heads/master
