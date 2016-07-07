@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3d8cca86_938abe2e",
+        "filename": "simpleperf/cmd_stat.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1041673
+      },
+      "writtenOn": "2016-07-07T00:55:34Z",
+      "side": 1,
+      "message": "where is this number coming from?",
+      "range": {
+        "startLine": 81,
+        "startChar": 25,
+        "endLine": 81,
+        "endChar": 35
+      },
+      "revId": "1abfb287e262e45e5e27c67cb221e19b0096bc7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3d8cca86_73b95ad9",
+        "filename": "simpleperf/cmd_stat.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1041673
+      },
+      "writtenOn": "2016-07-07T00:55:34Z",
+      "side": 1,
+      "message": "+ // Converting nanos to millis?",
+      "revId": "1abfb287e262e45e5e27c67cb221e19b0096bc7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3d8cca86_b3e102d7",
+        "filename": "simpleperf/cmd_stat.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1041673
+      },
+      "writtenOn": "2016-07-07T00:55:34Z",
+      "side": 1,
+      "message": "Add comment about converting 1000000 to 1,000,000?",
+      "revId": "1abfb287e262e45e5e27c67cb221e19b0096bc7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3d8cca86_b3a90248",
+        "filename": "simpleperf/cmd_stat_test.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1041673
+      },
+      "writtenOn": "2016-07-07T00:55:34Z",
+      "side": 1,
+      "message": ", pos?",
+      "revId": "1abfb287e262e45e5e27c67cb221e19b0096bc7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
