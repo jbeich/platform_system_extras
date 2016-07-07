@@ -22,6 +22,30 @@
       "revId": "02e02650e12b915936803e2a5f1104636d04a944",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fd26b29b_e9d751c9",
+        "filename": "simpleperf/read_elf.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-07-07T18:18:20Z",
+      "side": 1,
+      "message": "comment changed. In my experiment, the plt code takes only 12% for calling a noop function on host, but if the noop function is optimized to not having stack frame, the plt code can take up to 35%.",
+      "parentUuid": "fd26b29b_09ee6dbd",
+      "range": {
+        "startLine": 310,
+        "startChar": 30,
+        "endLine": 310,
+        "endChar": 42
+      },
+      "revId": "02e02650e12b915936803e2a5f1104636d04a944",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
