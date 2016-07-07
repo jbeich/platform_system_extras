@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fd26b29b_09ee6dbd",
+        "filename": "simpleperf/read_elf.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 1041673
+      },
+      "writtenOn": "2016-07-07T17:59:28Z",
+      "side": 1,
+      "message": "I could imagine a program calling to noop function where plt code is actually doing the most of the work... :)",
+      "range": {
+        "startLine": 310,
+        "startChar": 30,
+        "endLine": 310,
+        "endChar": 42
+      },
+      "revId": "02e02650e12b915936803e2a5f1104636d04a944",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
