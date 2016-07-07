@@ -91,7 +91,7 @@ struct Dso {
 
   // Return the accessible path. It may be the same as Path(), or
   // return the path with prefix set by SetSymFsDir().
-  std::string GetAccessiblePath() const;
+  std::string GetAccessiblePath() const { return accessible_path_; }
 
   // Return the minimum virtual address in program header.
   uint64_t MinVirtualAddress();
@@ -124,6 +124,7 @@ struct Dso {
   const DsoType type_;
   const uint64_t id_;
   const std::string path_;
+  std::string accessible_path_;
   uint64_t min_vaddr_;
   std::set<Symbol, SymbolComparator> symbols_;
   bool is_loaded_;

@@ -138,9 +138,20 @@ Dso::Dso(DsoType type, uint64_t id, const std::string& path)
     : type_(type),
       id_(id),
       path_(path),
+      accessible_path_(path),
       min_vaddr_(std::numeric_limits<uint64_t>::max()),
       is_loaded_(false),
       has_dumped_(false) {
+  if (!symfs_dir_.empty()) {
+    std::string path_in_symfs = symfs_dir_ + path_;
+    std::tuple<bool, std::string, std::string> tuple =
+        SplitUrlInApk(path_in_symfs);
+    std::string file_path =
+        std::get<0>(tuple) ? std::get<1>(tuple) : path_in_symfs;
+    if (IsRegularFile(file_path)) {
+      accessible_path_ = path_in_symfs;
+    }
+  }
   dso_count_++;
 }
 
@@ -155,8 +166,6 @@ Dso::~Dso() {
     build_id_map_.clear();
   }
 }
-
-std::string Dso::GetAccessiblePath() const { return symfs_dir_ + path_; }
 
 const Symbol* Dso::FindSymbol(uint64_t vaddr_in_dso) {
   if (!is_loaded_) {
