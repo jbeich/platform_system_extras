@@ -61,14 +61,14 @@ struct CounterSummary {
 
   CounterSummary(const std::string& type_name, const std::string& modifier,
                  uint32_t group_id, uint64_t count, double scale,
-                 bool auto_generated)
+                 bool auto_generated, bool csv)
       : type_name(type_name),
         modifier(modifier),
         group_id(group_id),
         count(count),
         scale(scale),
         auto_generated(auto_generated) {
-    readable_count = ReadableCountValue();
+    readable_count = ReadableCountValue(csv);
   }
 
   bool IsMonitoredAtTheSameTime(const CounterSummary& other) const {
@@ -82,13 +82,13 @@ struct CounterSummary {
 
   std::string Name() const {
     if (modifier.empty()) {
-      return type_name;
+        return type_name;
     }
     return type_name + ":" + modifier;
   }
 
  private:
-  std::string ReadableCountValue() {
+  std::string ReadableCountValue(bool csv) {
     if (type_name == "cpu-clock" || type_name == "task-clock") {
       // Convert nanoseconds to milliseconds.
       double value = count / 1e6;
@@ -97,13 +97,17 @@ struct CounterSummary {
       // Convert big numbers to human friendly mode. For example,
       // 1000000 will be converted to 1,000,000.
       std::string s = android::base::StringPrintf("%" PRIu64, count);
-      for (size_t i = s.size() - 1, j = 1; i > 0; --i, ++j) {
-        if (j == 3) {
-          s.insert(s.begin() + i, ',');
-          j = 0;
+      if (csv) {
+        return s;
+      } else {
+        for (size_t i = s.size() - 1, j = 1; i > 0; --i, ++j) {
+          if (j == 3) {
+            s.insert(s.begin() + i, ',');
+            j = 0;
+          }
         }
+        return s;
       }
-      return s;
     }
   }
 
@@ -139,7 +143,7 @@ class CounterSummaries {
   // then we can automatically generate a summary combining the two results.
   // For example, a summary of branch-misses:u and a summary for branch-misses:k
   // can generate a summary of branch-misses.
-  void AutoGenerateSummaries() {
+  void AutoGenerateSummaries(bool csv) {
     for (size_t i = 0; i < summaries_.size(); ++i) {
       const CounterSummary& s = summaries_[i];
       if (s.modifier == "u") {
@@ -147,20 +151,20 @@ class CounterSummaries {
         if (other != nullptr && other->IsMonitoredAtTheSameTime(s)) {
           if (FindSummary(s.type_name, "") == nullptr) {
             AddSummary(CounterSummary(s.type_name, "", s.group_id,
-                                      s.count + other->count, s.scale, true));
+                                      s.count + other->count, s.scale, true, csv));
           }
         }
       }
     }
   }
 
-  void GenerateComments(double duration_in_sec) {
+  void GenerateComments(double duration_in_sec, bool csv) {
     for (auto& s : summaries_) {
-      s.comment = GetCommentForSummary(s, duration_in_sec);
+      s.comment = GetCommentForSummary(s, duration_in_sec, csv);
     }
   }
 
-  void Show(FILE* fp) {
+  void Show(FILE* fp, bool csv) {
     size_t count_column_width = 0;
     size_t name_column_width = 0;
     size_t comment_column_width = 0;
@@ -172,34 +176,49 @@ class CounterSummaries {
     }
 
     for (auto& s : summaries_) {
-      fprintf(fp, "  %*s  %-*s   # %-*s  (%.0lf%%)%s\n",
-              static_cast<int>(count_column_width), s.readable_count.c_str(),
-              static_cast<int>(name_column_width), s.Name().c_str(),
-              static_cast<int>(comment_column_width), s.comment.c_str(),
-              1.0 / s.scale * 100, (s.auto_generated ? " (generated)" : ""));
+      if (csv) {
+        fprintf(fp, "%s,%s,%s,(%.0lf%%)%s\n",
+                s.readable_count.c_str(),
+                s.Name().c_str(),
+                s.comment.c_str(),
+                1.0 / s.scale * 100, (s.auto_generated ? " (generated)," : ","));
+      } else {
+        fprintf(fp, "  %*s  %-*s   # %-*s  (%.0lf%%)%s\n",
+                static_cast<int>(count_column_width), s.readable_count.c_str(),
+                static_cast<int>(name_column_width), s.Name().c_str(),
+                static_cast<int>(comment_column_width), s.comment.c_str(),
+                1.0 / s.scale * 100, (s.auto_generated ? " (generated)" : ""));
+      }
     }
   }
 
  private:
   std::string GetCommentForSummary(const CounterSummary& s,
-                                   double duration_in_sec) {
+                                   double duration_in_sec,
+                                   bool csv) {
+    char sap_mid;
+    if (csv) {
+      sap_mid = ',';
+    } else {
+      sap_mid = ' ';
+    }
     if (s.type_name == "task-clock") {
       double run_sec = s.count / 1e9;
       double used_cpus = run_sec / (duration_in_sec / s.scale);
-      return android::base::StringPrintf("%lf cpus used", used_cpus);
+      return android::base::StringPrintf("%lf%ccpus used", used_cpus, sap_mid);
     }
     if (s.type_name == "cpu-clock") {
       return "";
     }
     if (s.type_name == "cpu-cycles") {
       double hz = s.count / (duration_in_sec / s.scale);
-      return android::base::StringPrintf("%lf GHz", hz / 1e9);
+      return android::base::StringPrintf("%lf%cGHz", hz / 1e9, sap_mid);
     }
     if (s.type_name == "instructions" && s.count != 0) {
       const CounterSummary* other = FindSummary("cpu-cycles", s.modifier);
       if (other != nullptr && other->IsMonitoredAtTheSameTime(s)) {
         double cpi = static_cast<double>(other->count) / s.count;
-        return android::base::StringPrintf("%lf cycles per instruction", cpi);
+        return android::base::StringPrintf("%lf%ccycles per instruction", cpi, sap_mid);
       }
     }
     if (android::base::EndsWith(s.type_name, "-misses")) {
@@ -216,20 +235,20 @@ class CounterSummaries {
       if (other != nullptr && other->IsMonitoredAtTheSameTime(s) &&
           other->count != 0) {
         double miss_rate = static_cast<double>(s.count) / other->count;
-        return android::base::StringPrintf("%lf%% miss rate", miss_rate * 100);
+        return android::base::StringPrintf("%lf%%%cmiss rate", miss_rate * 100, sap_mid);
       }
     }
     double rate = s.count / (duration_in_sec / s.scale);
     if (rate > 1e9) {
-      return android::base::StringPrintf("%.3lf G/sec", rate / 1e9);
+      return android::base::StringPrintf("%.3lf%cG/sec", rate / 1e9, sap_mid);
     }
     if (rate > 1e6) {
-      return android::base::StringPrintf("%.3lf M/sec", rate / 1e6);
+      return android::base::StringPrintf("%.3lf%cM/sec", rate / 1e6, sap_mid);
     }
     if (rate > 1e3) {
-      return android::base::StringPrintf("%.3lf K/sec", rate / 1e3);
+      return android::base::StringPrintf("%.3lf%cK/sec", rate / 1e3, sap_mid);
     }
-    return android::base::StringPrintf("%.3lf /sec", rate);
+    return android::base::StringPrintf("%.3lf%c/sec", rate, sap_mid);
   }
 
  private:
@@ -248,6 +267,7 @@ class StatCommand : public Command {
 "--cpu cpu_item1,cpu_item2,...\n"
 "                 Collect information only on the selected cpus. cpu_item can\n"
 "                 be a cpu number like 1, or a cpu range like 0-3.\n"
+"--csv output_filename Write report in comma separate form\n"
 "-e event1[:modifier1],event2[:modifier2],...\n"
 "                 Select the event list to count. Use `simpleperf list` to find\n"
 "                 all possible event names. Modifiers can be added to define\n"
@@ -267,7 +287,8 @@ class StatCommand : public Command {
             ),
         verbose_mode_(false),
         system_wide_collection_(false),
-        child_inherit_(true) {
+        child_inherit_(true),
+        csv_(false) {
     signaled = false;
     scoped_signal_handler_.reset(
         new ScopedSignalHandler({SIGCHLD, SIGINT, SIGTERM}, signal_handler));
@@ -290,6 +311,7 @@ class StatCommand : public Command {
   std::vector<int> cpus_;
   EventSelectionSet event_selection_set_;
   std::string output_filename_;
+  bool csv_;
 
   std::unique_ptr<ScopedSignalHandler> scoped_signal_handler_;
 };
@@ -382,6 +404,8 @@ bool StatCommand::ParseOptions(const std::vector<std::string>& args,
         return false;
       }
       cpus_ = GetCpusFromString(args[i]);
+    } else if (args[i] == "--csv") {
+      csv_ = true;
     } else if (args[i] == "-e") {
       if (!NextArgumentOrError(args, &i)) {
         return false;
@@ -481,19 +505,32 @@ bool StatCommand::ShowCounters(const std::vector<CountersInfo>& counters,
     }
     fp = fp_holder.get();
   }
-  fprintf(fp, "Performance counter statistics:\n\n");
+  if (csv_) {
+    fprintf(fp, "Performance counter statistics,\n");
+  } else {
+    fprintf(fp, "Performance counter statistics:\n\n");
+  }
 
   if (verbose_mode_) {
     for (auto& counters_info : counters) {
       const EventTypeAndModifier& event_type =
           counters_info.selection->event_type_modifier;
       for (auto& counter_info : counters_info.counters) {
-        fprintf(fp,
-                "%s(tid %d, cpu %d): count %" PRIu64 ", time_enabled %" PRIu64
-                ", time running %" PRIu64 ", id %" PRIu64 "\n",
-                event_type.name.c_str(), counter_info.tid, counter_info.cpu,
-                counter_info.counter.value, counter_info.counter.time_enabled,
-                counter_info.counter.time_running, counter_info.counter.id);
+        if (csv_) {
+          fprintf(fp,
+                  "%s,tid,%d,cpu,%d,count,%" PRIu64 ",time_enabled,%" PRIu64
+                  ",time running,%" PRIu64 ",id,%" PRIu64 ",\n",
+                  event_type.name.c_str(), counter_info.tid, counter_info.cpu,
+                  counter_info.counter.value, counter_info.counter.time_enabled,
+                  counter_info.counter.time_running, counter_info.counter.id);
+        } else {
+          fprintf(fp,
+                  "%s(tid %d, cpu %d): count %" PRIu64 ", time_enabled %" PRIu64
+                  ", time running %" PRIu64 ", id %" PRIu64 "\n",
+                  event_type.name.c_str(), counter_info.tid, counter_info.cpu,
+                  counter_info.counter.value, counter_info.counter.time_enabled,
+                  counter_info.counter.time_running, counter_info.counter.id);
+        }
       }
     }
   }
@@ -519,13 +556,16 @@ bool StatCommand::ShowCounters(const std::vector<CountersInfo>& counters,
     summaries.AddSummary(CounterSummary(
         counters_info.selection->event_type_modifier.event_type.name,
         counters_info.selection->event_type_modifier.modifier,
-        counters_info.selection->group_id, value_sum, scale, false));
+        counters_info.selection->group_id, value_sum, scale, false, csv_));
   }
-  summaries.AutoGenerateSummaries();
-  summaries.GenerateComments(duration_in_sec);
-  summaries.Show(fp);
+  summaries.AutoGenerateSummaries(csv_);
+  summaries.GenerateComments(duration_in_sec, csv_);
+  summaries.Show(fp, csv_);
 
-  fprintf(fp, "\nTotal test time: %lf seconds.\n", duration_in_sec);
+  if (csv_)
+    fprintf(fp, "Total test time,%lf,seconds,\n", duration_in_sec);
+  else
+    fprintf(fp, "\nTotal test time: %lf seconds.\n", duration_in_sec);
   return true;
 }
 
