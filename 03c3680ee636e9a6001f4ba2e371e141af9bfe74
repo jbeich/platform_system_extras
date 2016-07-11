@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da673430_5b0cfb90",
+        "filename": "simpleperf/cmd_stat.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-07-11T18:31:40Z",
+      "side": 1,
+      "message": "align \"Write...\" with \"Collect...\" in L269?",
+      "range": {
+        "startLine": 271,
+        "startChar": 7,
+        "endLine": 271,
+        "endChar": 12
+      },
+      "revId": "03c3680ee636e9a6001f4ba2e371e141af9bfe74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
