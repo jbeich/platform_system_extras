@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ba144089_ad3185fc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-07-11T23:49:34Z",
+      "side": 1,
+      "message": "The function name can contain colon if it is a member function.",
+      "parentUuid": "ba144089_8d66493b",
+      "range": {
+        "startLine": 7,
+        "startChar": 67,
+        "endLine": 7,
+        "endChar": 76
+      },
+      "revId": "05ef2eab98caee49b6b27cac518856b7f5124bee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ba144089_ad522551",
         "filename": "simpleperf/cmd_report.cpp",
         "patchSetId": 1
@@ -36,6 +60,24 @@
       "writtenOn": "2016-07-11T23:24:12Z",
       "side": 1,
       "message": "one separator for everything?",
+      "revId": "05ef2eab98caee49b6b27cac518856b7f5124bee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba144089_ad1a2570",
+        "filename": "simpleperf/cmd_report.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-07-11T23:49:34Z",
+      "side": 1,
+      "message": "all options except --symbols use comma as separator, like -e, --pids, --tids, --comms, --sort, --tids, --dsos. record/stat command also use comma as separator. So it changes too much if I use semicolon as separator in all places. As --symbols is rarely used (only useful when --sort vaddr_in_file is used), I think we can only the separator of --symbols.",
+      "parentUuid": "ba144089_ad522551",
       "revId": "05ef2eab98caee49b6b27cac518856b7f5124bee",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
