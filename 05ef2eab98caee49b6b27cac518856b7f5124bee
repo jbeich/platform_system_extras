@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba144089_8d66493b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1041673
+      },
+      "writtenOn": "2016-07-11T23:24:12Z",
+      "side": 1,
+      "message": "colon instead? It looks more intuitive since colon is a path separator in linux.",
+      "range": {
+        "startLine": 7,
+        "startChar": 67,
+        "endLine": 7,
+        "endChar": 76
+      },
+      "revId": "05ef2eab98caee49b6b27cac518856b7f5124bee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba144089_ad522551",
+        "filename": "simpleperf/cmd_report.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 1041673
+      },
+      "writtenOn": "2016-07-11T23:24:12Z",
+      "side": 1,
+      "message": "one separator for everything?",
+      "revId": "05ef2eab98caee49b6b27cac518856b7f5124bee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
