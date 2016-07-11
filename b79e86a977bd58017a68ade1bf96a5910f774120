@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba144089_cdfb2146",
+        "filename": "simpleperf/environment.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 1041673
+      },
+      "writtenOn": "2016-07-11T23:27:07Z",
+      "side": 1,
+      "message": "I do not really understand this case. Does /proc/sys/kernel/kptr_restrict enable reporting kernel symbol addresses?",
+      "revId": "b79e86a977bd58017a68ade1bf96a5910f774120",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
