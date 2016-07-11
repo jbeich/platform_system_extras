@@ -16,6 +16,24 @@
       "revId": "b79e86a977bd58017a68ade1bf96a5910f774120",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba144089_0d99b9e8",
+        "filename": "simpleperf/environment.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-07-11T23:59:51Z",
+      "side": 1,
+      "message": "As in https://cs.corp.google.com/kernel/Documentation/sysctl/kernel.txt?type\u003dcs\u0026q\u003dkernel.txt+\u0026l\u003d289, `echo 0 \u003ekptr_restrict` makes no restriction, and we can see kernel symbol addresses.",
+      "parentUuid": "ba144089_cdfb2146",
+      "revId": "b79e86a977bd58017a68ade1bf96a5910f774120",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
