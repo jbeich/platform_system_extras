@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "ba144089_6d130d52",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2016-07-11T23:52:21Z",
+      "side": 1,
+      "message": "it\u0027s a pity Split isn\u0027t smart enough to distinguish : and ::, since only the latter is valid in a name...",
+      "parentUuid": "ba144089_ad3185fc",
+      "range": {
+        "startLine": 7,
+        "startChar": 67,
+        "endLine": 7,
+        "endChar": 76
+      },
+      "revId": "05ef2eab98caee49b6b27cac518856b7f5124bee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ba144089_ad522551",
         "filename": "simpleperf/cmd_report.cpp",
         "patchSetId": 1
