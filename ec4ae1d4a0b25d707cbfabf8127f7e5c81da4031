@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba144089_0e424c9b",
+        "filename": "libpagemap/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2016-07-12T21:12:06Z",
+      "side": 1,
+      "message": "I\u0027m not sure if we properly pass this through. I\u0027d argue that this should go into one of the core product definition files using PRODUCT_PACKAGES_DEBUG instead of being forced by the module itself. It\u0027s often not true on other device types, like brillo / wear / etc.",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 20
+      },
+      "revId": "ec4ae1d4a0b25d707cbfabf8127f7e5c81da4031",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
