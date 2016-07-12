@@ -1,0 +1,8 @@
+Presubmit-Ready+1: Treehugger Robot <treehugger-gerrit@google.com>
+Code-Review+2: Alex Deymo <deymo@google.com>
+Verified+1: Daniel Rosenberg <drosen@google.com>
+Submitted-by: Daniel Rosenberg <drosen@google.com>
+Submitted-at: Tue, 12 Jul 2016 22:47:52 +0000
+Reviewed-on: https://android-review.googlesource.com/231850
+Project: platform/system/extras
+Branch: refs/heads/master
