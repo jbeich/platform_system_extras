@@ -34,6 +34,24 @@
       "revId": "b79e86a977bd58017a68ade1bf96a5910f774120",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba144089_ab1deaba",
+        "filename": "simpleperf/environment.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 1041673
+      },
+      "writtenOn": "2016-07-12T18:52:31Z",
+      "side": 1,
+      "message": "Maybe something along the lines \"access to kernel symbol addresses is restricted - please do echo .. to fix this\"?",
+      "parentUuid": "ba144089_0d99b9e8",
+      "revId": "b79e86a977bd58017a68ade1bf96a5910f774120",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
