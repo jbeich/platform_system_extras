@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba144089_8ea47c70",
+        "filename": "simpleperf/thread_tree.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1041673
+      },
+      "writtenOn": "2016-07-12T21:32:23Z",
+      "side": 0,
+      "message": "unused method?",
+      "range": {
+        "startLine": 93,
+        "startChar": 18,
+        "endLine": 93,
+        "endChar": 28
+      },
+      "revId": "3c614cb52dede238e161f1937823e039b6fd77ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
