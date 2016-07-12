@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba144089_4ec3a4fd",
+        "filename": "tests/bootloader/bootctl.py",
+        "patchSetId": 13
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1077068
+      },
+      "writtenOn": "2016-07-12T21:35:45Z",
+      "side": 1,
+      "message": "I think you need to change these to [0] !\u003d 0 because 0 will evaluate to False in python... or did I miss something?\nSame for the next 4 methods.",
+      "range": {
+        "startLine": 30,
+        "startChar": 49,
+        "endLine": 30,
+        "endChar": 52
+      },
+      "revId": "16f09b9d1ef3a878b3c333a0a2339196fcebfab7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba144089_0ee6ccbb",
+        "filename": "tests/bootloader/haltest.py",
+        "patchSetId": 13
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1077068
+      },
+      "writtenOn": "2016-07-12T21:35:45Z",
+      "side": 1,
+      "message": "Normally all these comments explaining what the tests do are \"\"\" \"\"\" as the first line/lines of the method so they become method docstring. The unittest framework will print the docstring on the output when a test fails (actually, the first line of it).",
+      "range": {
+        "startLine": 27,
+        "startChar": 4,
+        "endLine": 27,
+        "endChar": 5
+      },
+      "revId": "16f09b9d1ef3a878b3c333a0a2339196fcebfab7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
