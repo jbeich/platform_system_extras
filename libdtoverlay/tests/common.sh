@@ -1,16 +1,29 @@
 #!/bin/bash
 
+alert() {
+  echo "$*" >&2
+}
+
+die() {
+  echo "ERROR: $@"
+  exit 1
+}
+
+command_exists () {
+  type "$1" &> /dev/null;
+}
+
 dtb_to_dts () {
-  dtc -O dts -qq -f -s $1
+  dtc -O dts -s $1
   if [ $? -ne 0 ]; then
-    exit 1
+    die "dtb_to_dts $1 failed!"
   fi
 }
 
 dts_to_dtb () {
-  dtc -O dtb -qq -f -s -@ $1
+  dtc -O dtb -s -@ $1
   if [ $? -ne 0 ]; then
-    exit 1
+    die "dts_to_dtb $1 failed!"
   fi
 }
 
