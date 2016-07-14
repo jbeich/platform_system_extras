@@ -173,31 +173,6 @@ fdt_increase_u32(void *pos, uint32_t offset)
 }
 
 /*
- * Process local fixups
- * @fixups is property value, array of NUL-terminated strings
- *   with fixup locations
- * @fixups_len length of the fixups array in bytes
- * @offset value these locations should be increased by
- */
-static int
-fdt_do_local_fixup(void *fdtp, const char *fixups, int fixups_len, int offset)
-{
-  void *fixup_pos;
-
-  while (fixups_len > 0) {
-    fixup_pos = fdt_get_fixup_location(fdtp, fixups);
-    if (fixup_pos != NULL) {
-      fdt_increase_u32(fixup_pos, offset);
-    }
-
-    fixups_len -= strlen(fixups) + 1;
-    fixups += strlen(fixups) + 1;
-  }
-
-  return 0;
-}
-
-/*
  * Increase node phandle by phandle_offset
  */
 static void
@@ -373,17 +348,83 @@ fdt_overlay_do_fixups(void *main_fdtp, void *overlay_fdtp)
   return 0;
 }
 
+static int
+fdt_local_fixup_node(void *fdtp, int target_o, int local_fixups_o, uint32_t phandle_offset)
+{
+  int len, o, lenp;
+  const char *name;
+  const void *val;
+  void *target_prop;
+  uint32_t offset;
+  int target_subnode_o;
+  int i;
+
+  for(o = fdt_first_property_offset(fdtp, local_fixups_o);
+      o >= 0;
+      o = fdt_next_property_offset(fdtp, o)) {
+
+    val = fdt_getprop_by_offset(fdtp, o, &name, &len);
+
+    target_prop = fdt_getprop_w(fdtp, target_o, name, &lenp);
+    if(!target_prop) {
+      printf("failed when flfn tries to find preperty \"%s\"\n", name);
+      return -1;
+    }
+
+    for(i = 0; i < len; i += sizeof(fdt32_t)) {
+
+      offset = fdt32_to_cpu(*(fdt32_t*)(val + i));
+
+      fdt_increase_u32((target_prop + offset), phandle_offset);
+    }
+
+  }
+
+  for(o = fdt_first_subnode(fdtp, local_fixups_o);
+      o >= 0;
+      o = fdt_next_subnode(fdtp, o)) {
+
+    name = fdt_get_name(fdtp, o, NULL);
+    target_subnode_o = fdt_subnode_offset(fdtp, target_o, name);
+
+    if (target_subnode_o < 0) {
+      printf("failed to find subnode in flfn \"%s\": %d\n",
+             name, target_subnode_o);
+      return -1;
+    }
+
+    fdt_local_fixup_node(fdtp, target_subnode_o, o, phandle_offset);
+  }
+  return 0;
+}
+
 /*
  * Handle __local_fixups__ node in overlay DTB
+ * The __local_fixups__ format we expect is
+ * __local_fixups__ {
+ *   path {
+ *    to {
+ *      local_ref1 = <offset>;
+ *    };
+ *   };
+ *   path2 {
+ *    to2 {
+ *      local_ref2 = <offset1 offset2 ...>;
+ *    };
+ *   };
+ * };
+ *
+ * which follows the dtc patch from:
+ * https://marc.info/?l=devicetree&m=144061468601974&w=4
  */
 static int
 fdt_overlay_do_local_fixups(void *main_fdtp, void *overlay_fdtp)
 {
-  int overlay_local_fixups_o;
-  int len;
-  const char *fixups;
+  int err;
+  int overlay_local_fixups_o , overlay_root_o;
   uint32_t phandle_offset;
 
+  overlay_root_o = fdt_path_offset(overlay_fdtp, "/");
   overlay_local_fixups_o = fdt_path_offset(overlay_fdtp, "/__local_fixups__");
 
   if (overlay_local_fixups_o < 0) {
@@ -391,15 +432,13 @@ fdt_overlay_do_local_fixups(void *main_fdtp, void *overlay_fdtp)
   }
 
   phandle_offset = fdt_max_phandle(main_fdtp);
-  fdt_increase_phandles(overlay_fdtp, phandle_offset);
-  fixups = fdt_getprop_w(overlay_fdtp, overlay_local_fixups_o, "fixup", &len);
-  if (fixups) {
-    if (fdt_do_local_fixup(overlay_fdtp, fixups, len, phandle_offset) < 0) {
-      printf("Failed a local fixup in fodlf\n");
-      return -1;
-    }
-  }
 
+  err = fdt_local_fixup_node(overlay_fdtp, overlay_root_o, overlay_local_fixups_o,
+                             phandle_offset);
+  if( err < 0 ) {
+    printf("Failed local fixup in fodlf\n");
+    return -1;
+  }
   return 0;
 }
 
@@ -423,12 +462,31 @@ fdt_overlay_apply_fragments(void *main_fdtp, void *overlay_fdtp)
   return 0;
 }
 
+/*
+ * update phandles in overlay DTB
+ */
+static int
+fdt_overlay_update_phandles(void *main_fdtp, void *overlay_fdtp)
+{
+  uint32_t phandle_offset;
+
+  phandle_offset = fdt_max_phandle(main_fdtp);
+  fdt_increase_phandles(overlay_fdtp, phandle_offset);
+
+  return 0;
+}
+
 static int
 fdt_overlay_apply(void *main_fdtp, void *overlay_fdtp, size_t overlay_length)
 {
   if (overlay_length < sizeof(struct fdt_header)) {
     printf("Overlay_length %zu smaller than header size %zu\n",
            overlay_length, sizeof(struct fdt_header));
+    return -1;
+  }
+
+  if(fdt_overlay_update_phandles(main_fdtp, overlay_fdtp) < 0) {
+    printf("failed to update phandles in overlay\n");
     return -1;
   }
 
