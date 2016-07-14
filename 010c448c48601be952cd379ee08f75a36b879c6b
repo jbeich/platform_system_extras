@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3abbf0f3_1efc6d3d",
+        "filename": "simpleperf/dso.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1041673
+      },
+      "writtenOn": "2016-07-14T21:14:49Z",
+      "side": 1,
+      "message": "should this be an error? the case where basename is empty string.",
+      "range": {
+        "startLine": 158,
+        "startChar": 34,
+        "endLine": 158,
+        "endChar": 55
+      },
+      "revId": "010c448c48601be952cd379ee08f75a36b879c6b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
