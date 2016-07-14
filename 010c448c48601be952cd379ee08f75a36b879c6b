@@ -22,6 +22,30 @@
       "revId": "010c448c48601be952cd379ee08f75a36b879c6b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a68ec6f_27ae3a42",
+        "filename": "simpleperf/dso.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-07-14T21:34:03Z",
+      "side": 1,
+      "message": "It is an error, or can never exist. Making it a CHECK() seems too strict (as it doesn\u0027t affect running of simpleperf). Giving a warning to user seems not proper because user probably can\u0027t help fixing it. Another choice is removing this condition, as we also don\u0027t have check to see if path is empty.",
+      "parentUuid": "3abbf0f3_1efc6d3d",
+      "range": {
+        "startLine": 158,
+        "startChar": 34,
+        "endLine": 158,
+        "endChar": 55
+      },
+      "revId": "010c448c48601be952cd379ee08f75a36b879c6b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
