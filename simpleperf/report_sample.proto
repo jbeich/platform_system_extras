@@ -22,6 +22,7 @@ message Sample {
   }
 
   repeated CallChainEntry callchain = 2;
+  optional int32 thread_id = 3;
 }
 
 message Record {
