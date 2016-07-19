@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8a2d6b96_65e80ae6",
+        "filename": "simpleperf/cmd_report_sample.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2016-07-19T23:24:07Z",
+      "side": 1,
+      "message": "What happens if this was generated with a proto that does not include the thread id data? Does it print out random data?",
+      "range": {
+        "startLine": 241,
+        "startChar": 4,
+        "endLine": 241,
+        "endChar": 60
+      },
+      "revId": "cfc7034af88bc2fb111925dc01f32a1b4b6f6917",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
