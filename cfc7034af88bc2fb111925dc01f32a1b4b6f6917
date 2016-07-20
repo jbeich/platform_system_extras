@@ -49,6 +49,23 @@
     },
     {
       "key": {
+        "uuid": "8a2d6b96_80de44d8",
+        "filename": "simpleperf/report_sample.proto",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1083168
+      },
+      "writtenOn": "2016-07-20T00:05:45Z",
+      "side": 1,
+      "message": "This should be done in an other CL but that would help the StudioProfiler team if we could set:\n\noption java_package \u003d \"com.android.tools.profiler.proto\";\noption java_outer_classname \u003d \"SimpleprefReport\";",
+      "revId": "cfc7034af88bc2fb111925dc01f32a1b4b6f6917",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8a2d6b96_8069a42c",
         "filename": "simpleperf/report_sample.proto",
         "patchSetId": 1
