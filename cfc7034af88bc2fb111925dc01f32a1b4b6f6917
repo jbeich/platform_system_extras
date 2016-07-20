@@ -89,6 +89,30 @@
     },
     {
       "key": {
+        "uuid": "8a2d6b96_c0d44cbc",
+        "filename": "simpleperf/report_sample.proto",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-07-20T00:10:20Z",
+      "side": 1,
+      "message": "but it seems android platform doesn\u0027t have proto3. And we have to use proto2.",
+      "parentUuid": "8a2d6b96_8069a42c",
+      "range": {
+        "startLine": 21,
+        "startChar": 4,
+        "endLine": 21,
+        "endChar": 12
+      },
+      "revId": "cfc7034af88bc2fb111925dc01f32a1b4b6f6917",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8a2d6b96_25c0c245",
         "filename": "simpleperf/report_sample.proto",
         "patchSetId": 1
@@ -100,6 +124,24 @@
       "writtenOn": "2016-07-19T23:55:35Z",
       "side": 1,
       "message": "I am not sure why the proto compiler is not flagging this but I think enum MUST start with 0 in proto3",
+      "revId": "cfc7034af88bc2fb111925dc01f32a1b4b6f6917",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8a2d6b96_c0eb2c74",
+        "filename": "simpleperf/report_sample.proto",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-07-20T00:10:20Z",
+      "side": 1,
+      "message": "It seems a mistake I made. As no one cares the compatibility of this proto except you, I think I can correct it directly here.",
+      "parentUuid": "8a2d6b96_25c0c245",
       "revId": "cfc7034af88bc2fb111925dc01f32a1b4b6f6917",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
