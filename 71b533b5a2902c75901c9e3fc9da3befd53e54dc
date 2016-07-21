@@ -46,6 +46,30 @@
       "revId": "71b533b5a2902c75901c9e3fc9da3befd53e54dc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aa94ef50_01df98ff",
+        "filename": "simpleperf/cmd_report_sample.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-07-21T23:56:28Z",
+      "side": 1,
+      "message": "This patch forces output to prefix unknown symbol with *, and use binary[+ip_offset] format. And you can\u0027t control it with command line options. If you are fine with this, we can avoid the complexity to add options.",
+      "parentUuid": "aa94ef50_46553652",
+      "range": {
+        "startLine": 83,
+        "startChar": 17,
+        "endLine": 83,
+        "endChar": 39
+      },
+      "revId": "71b533b5a2902c75901c9e3fc9da3befd53e54dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
