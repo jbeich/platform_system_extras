@@ -22,6 +22,30 @@
       "revId": "71b533b5a2902c75901c9e3fc9da3befd53e54dc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aa94ef50_46553652",
+        "filename": "simpleperf/cmd_report_sample.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1083168
+      },
+      "writtenOn": "2016-07-21T22:38:22Z",
+      "side": 1,
+      "message": "It looks like there is already an option to prefix unknown symbol with \u0027*\u0027. What do you suggest?",
+      "parentUuid": "aa94ef50_00c6b6af",
+      "range": {
+        "startLine": 83,
+        "startChar": 17,
+        "endLine": 83,
+        "endChar": 39
+      },
+      "revId": "71b533b5a2902c75901c9e3fc9da3befd53e54dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
