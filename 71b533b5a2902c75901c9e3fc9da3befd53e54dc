@@ -70,6 +70,23 @@
       "revId": "71b533b5a2902c75901c9e3fc9da3befd53e54dc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ca45a3e6_a3d9be80",
+        "filename": "simpleperf/thread_tree.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1083168
+      },
+      "writtenOn": "2016-07-22T21:28:52Z",
+      "side": 1,
+      "message": "Should we change the symbol if show_mark_for_symbol is set to false?\nPersonnaly, I am fine with having the * mark always here and no show_mark_for_symbol_ option at all.",
+      "revId": "71b533b5a2902c75901c9e3fc9da3befd53e54dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
