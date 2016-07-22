@@ -87,6 +87,24 @@
       "revId": "71b533b5a2902c75901c9e3fc9da3befd53e54dc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ca45a3e6_269dbc56",
+        "filename": "simpleperf/thread_tree.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-07-22T21:54:57Z",
+      "side": 1,
+      "message": "ThreadTree set show_mark_for_unknown_symbol_ to false at ctor. And ShowMarkForUnknownSymbol() will only be called only in report-sample command. So it won\u0027t affect report command. And there is no need to provide an interface to set show_mark_for_unknown_symbol_ to false in ThreadTree.",
+      "parentUuid": "ca45a3e6_a3d9be80",
+      "revId": "71b533b5a2902c75901c9e3fc9da3befd53e54dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
