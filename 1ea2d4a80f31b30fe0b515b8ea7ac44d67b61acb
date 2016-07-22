@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ca45a3e6_a06774bb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1041673
+      },
+      "writtenOn": "2016-07-22T20:15:34Z",
+      "side": 1,
+      "message": "http://b/30292111",
+      "range": {
+        "startLine": 11,
+        "startChar": 5,
+        "endLine": 11,
+        "endChar": 13
+      },
+      "revId": "1ea2d4a80f31b30fe0b515b8ea7ac44d67b61acb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ca45a3e6_20860411",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 570,
+      "author": {
+        "id": 1041673
+      },
+      "writtenOn": "2016-07-22T20:15:34Z",
+      "side": 1,
+      "message": "Is there a use case where it would be useful to have --duration with a command?",
+      "revId": "1ea2d4a80f31b30fe0b515b8ea7ac44d67b61acb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
