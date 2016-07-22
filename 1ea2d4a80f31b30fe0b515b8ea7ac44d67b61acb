@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ca45a3e6_6378968d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-07-22T21:18:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ca45a3e6_a06774bb",
+      "range": {
+        "startLine": 11,
+        "startChar": 5,
+        "endLine": 11,
+        "endChar": 13
+      },
+      "revId": "1ea2d4a80f31b30fe0b515b8ea7ac44d67b61acb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ca45a3e6_20860411",
         "filename": "simpleperf/cmd_record.cpp",
         "patchSetId": 1
@@ -36,6 +60,24 @@
       "writtenOn": "2016-07-22T20:15:34Z",
       "side": 1,
       "message": "Is there a use case where it would be useful to have --duration with a command?",
+      "revId": "1ea2d4a80f31b30fe0b515b8ea7ac44d67b61acb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ca45a3e6_a37d3e80",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 570,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-07-22T21:18:10Z",
+      "side": 1,
+      "message": "We can support --duration with a command, but I think it makes more trouble than providing benefits, because there will have more than one thing to control monitor time in cmdline, one is --duration, the other is the command running time. Then It is hard to decide which one should have the priority (and it is hard for user to understand).\n\nEven without --duration, we can use Ctrl-C to stop monitoring a command running. So we don\u0027t lose any use case.",
+      "parentUuid": "ca45a3e6_20860411",
       "revId": "1ea2d4a80f31b30fe0b515b8ea7ac44d67b61acb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
