@@ -16,6 +16,24 @@
       "revId": "2f823b010ad786f054e3efa56dafc9963f2254b3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8f601d1d_2d574136",
+        "filename": "simpleperf/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-07-27T17:39:57Z",
+      "side": 1,
+      "message": "adb_version gets the latest commit in system/core project, and simpleperf_version gets the latest commit in system/extras/simpleperf directory instead of system/extras project.",
+      "parentUuid": "8f601d1d_67079ae9",
+      "revId": "2f823b010ad786f054e3efa56dafc9963f2254b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
