@@ -16,7 +16,10 @@
 
 LOCAL_PATH := $(call my-dir)
 
-simpleperf_common_cppflags := -Wextra -Wunused -Wno-unknown-pragmas
+simpleperf_version := $(word 1, $(shell cd $(LOCAL_PATH) && git log --oneline -n 1 .))
+
+simpleperf_common_cppflags := -Wextra -Wunused -Wno-unknown-pragmas \
+                              -DSIMPLEPERF_REVISION='"$(simpleperf_version)"'
 
 simpleperf_cppflags_target := $(simpleperf_common_cppflags)
 
