@@ -34,6 +34,24 @@
       "revId": "2f823b010ad786f054e3efa56dafc9963f2254b3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8f601d1d_4d3d5d77",
+        "filename": "simpleperf/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2016-07-27T18:20:05Z",
+      "side": 1,
+      "message": "yeah, but if you copied it here it wouldn\u0027t :-)\n\nwhat i mean is \"why did you reinvent this wheel?\". if yours is better in some way, we should fix the instances of the other. if the other is better, we should use that here. (and if they\u0027re the same, we should keep using the one we\u0027re already using.)",
+      "parentUuid": "8f601d1d_2d574136",
+      "revId": "2f823b010ad786f054e3efa56dafc9963f2254b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
