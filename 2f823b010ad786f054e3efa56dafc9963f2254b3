@@ -52,6 +52,24 @@
       "revId": "2f823b010ad786f054e3efa56dafc9963f2254b3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8f601d1d_a8bcdfaf",
+        "filename": "simpleperf/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-07-27T18:37:00Z",
+      "side": 1,
+      "message": "I am not an git expert, so I can\u0027t guarantee that this command line works all the time. But I think this is better because I don\u0027t want to update simpleperf_version when there is some change in system/extras project but not in system/extras/simpleperf directory. I will change the one in adb if this can pass code review.",
+      "parentUuid": "8f601d1d_4d3d5d77",
+      "revId": "2f823b010ad786f054e3efa56dafc9963f2254b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
