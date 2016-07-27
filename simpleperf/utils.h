@@ -136,7 +136,7 @@ struct KernelSymbol {
 };
 
 bool ProcessKernelSymbols(std::string& symbol_data,
-                          std::function<bool(const KernelSymbol&)> callback);
+                          const std::function<bool(const KernelSymbol&)>& callback);
 
 size_t GetPageSize();
 

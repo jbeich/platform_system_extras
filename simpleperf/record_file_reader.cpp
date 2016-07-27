@@ -158,7 +158,7 @@ bool RecordFileReader::ReadIdsForAttr(const FileAttr& attr, std::vector<uint64_t
   return true;
 }
 
-bool RecordFileReader::ReadDataSection(std::function<bool(std::unique_ptr<Record>)> callback,
+bool RecordFileReader::ReadDataSection(const std::function<bool(std::unique_ptr<Record>)>& callback,
                                        bool sorted) {
   if (fseek(record_fp_, header_.data.offset, SEEK_SET) != 0) {
     PLOG(ERROR) << "failed to fseek()";

@@ -271,7 +271,7 @@ bool IsRoot() {
 }
 
 bool ProcessKernelSymbols(std::string& symbol_data,
-                          std::function<bool(const KernelSymbol&)> callback) {
+                          const std::function<bool(const KernelSymbol&)>& callback) {
   char* p = &symbol_data[0];
   char* data_end = p + symbol_data.size();
   while (p < data_end) {
