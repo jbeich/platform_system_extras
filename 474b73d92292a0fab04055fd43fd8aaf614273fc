@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6f6689d2_c9245dcc",
+        "filename": "avb/libavb/avb_property_descriptor.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2016-07-29T20:32:59Z",
+      "side": 1,
+      "message": "Still needed?",
+      "range": {
+        "startLine": 77,
+        "startChar": 5,
+        "endLine": 77,
+        "endChar": 9
+      },
+      "revId": "474b73d92292a0fab04055fd43fd8aaf614273fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "af7c012e_9202bc10",
+        "filename": "avb/libavb/avb_slot_verify.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2016-07-29T20:32:59Z",
+      "side": 1,
+      "message": "*vbmeta",
+      "range": {
+        "startLine": 191,
+        "startChar": 58,
+        "endLine": 191,
+        "endChar": 64
+      },
+      "revId": "474b73d92292a0fab04055fd43fd8aaf614273fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2f62d18f_77dcda3a",
+        "filename": "avb/libavb/avb_slot_verify.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 428,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2016-07-29T20:32:59Z",
+      "side": 1,
+      "message": "*Explicit",
+      "range": {
+        "startLine": 428,
+        "startChar": 9,
+        "endLine": 428,
+        "endChar": 18
+      },
+      "revId": "474b73d92292a0fab04055fd43fd8aaf614273fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6f6689d2_091d7568",
+        "filename": "avb/libavb/avb_sysdeps_posix.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2016-07-29T20:32:59Z",
+      "side": 1,
+      "message": "Unnecessary cast",
+      "range": {
+        "startLine": 30,
+        "startChar": 27,
+        "endLine": 30,
+        "endChar": 35
+      },
+      "revId": "474b73d92292a0fab04055fd43fd8aaf614273fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6f6689d2_83f32406",
+        "filename": "avb/libavb/avb_vbmeta_image.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2016-07-29T20:32:59Z",
+      "side": 1,
+      "message": "most?",
+      "range": {
+        "startLine": 400,
+        "startChar": 41,
+        "endLine": 400,
+        "endChar": 46
+      },
+      "revId": "474b73d92292a0fab04055fd43fd8aaf614273fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6f6689d2_2e66bf27",
+        "filename": "avb/libavb/avb_vbmeta_image.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 467,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2016-07-29T20:32:59Z",
+      "side": 1,
+      "message": "What\u0027s the purpose of this? It doesn\u0027t appear to be used anywhere.",
+      "range": {
+        "startLine": 467,
+        "startChar": 2,
+        "endLine": 467,
+        "endChar": 15
+      },
+      "revId": "474b73d92292a0fab04055fd43fd8aaf614273fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6f6689d2_1ac05d26",
+        "filename": "avb/libavb/avb_vbmeta_image.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2016-07-29T20:32:59Z",
+      "side": 1,
+      "message": "s/auxilary/auxiliary/g?",
+      "range": {
+        "startLine": 64,
+        "startChar": 8,
+        "endLine": 64,
+        "endChar": 16
+      },
+      "revId": "474b73d92292a0fab04055fd43fd8aaf614273fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
