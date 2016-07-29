@@ -208,8 +208,12 @@ uint64_t Dso::MinVirtualAddress() {
       BuildId build_id = GetExpectedBuildId();
 
       uint64_t addr;
-      if (ReadMinExecutableVirtualAddressFromElfFile(GetDebugFilePath(),
-                                                     build_id, &addr)) {
+      ReadElfRet result = ReadMinExecutableVirtualAddressFromElfFile(
+          GetDebugFilePath(), build_id, &addr);
+      if (result != ReadElfRet::NO_ERROR) {
+        LOG(WARNING) << "failed to read min virtual address of "
+                     << GetDebugFilePath() << ": " << ReadElfRetToString(result);
+      } else {
         min_vaddr_ = addr;
       }
     }
@@ -237,6 +241,8 @@ bool Dso::Load() {
   }
   if (result) {
     FixupSymbolLength();
+  } else {
+    symbols_.clear();
   }
   return result;
 }
@@ -263,9 +269,12 @@ static void VmlinuxSymbolCallback(const ElfFileSymbol& elf_symbol, Dso* dso) {
 bool Dso::LoadKernel() {
   BuildId build_id = GetExpectedBuildId();
   if (!vmlinux_.empty()) {
-    ParseSymbolsFromElfFile(
-        vmlinux_, build_id,
+    ReadElfRet result = ParseSymbolsFromElfFile(vmlinux_, build_id,
         std::bind(VmlinuxSymbolCallback, std::placeholders::_1, this));
+    if (result != ReadElfRet::NO_ERROR) {
+      LOG(WARNING) << "failed to read symbols from " << vmlinux_
+                   << ": " << ReadElfRetToString(result);
+    }
   } else if (!kallsyms_.empty()) {
     ProcessKernelSymbols(kallsyms_, std::bind(&KernelSymbolCallback,
                                               std::placeholders::_1, this));
@@ -286,13 +295,12 @@ bool Dso::LoadKernel() {
   } else {
     if (!build_id.IsEmpty()) {
       BuildId real_build_id;
-      GetKernelBuildId(&real_build_id);
+      if (!GetKernelBuildId(&real_build_id)) {
+        return false;
+      }
       bool match = (build_id == real_build_id);
-      LOG(WARNING) << "check kernel build id ("
-                   << (match ? "match" : "mismatch") << "): expected "
-                   << build_id.ToString() << ", real "
-                   << real_build_id.ToString();
       if (!match) {
+        LOG(WARNING) << "kernel build id mismatch";
         return false;
       }
     }
@@ -336,10 +344,13 @@ static bool SymbolFilterForKernelModule(const ElfFileSymbol& elf_symbol) {
 
 bool Dso::LoadKernelModule() {
   BuildId build_id = GetExpectedBuildId();
-  ParseSymbolsFromElfFile(
-      symfs_dir_ + path_, build_id,
+  ReadElfRet result = ParseSymbolsFromElfFile(symfs_dir_ + path_, build_id,
       std::bind(ElfFileSymbolCallback, std::placeholders::_1, this,
                 SymbolFilterForKernelModule));
+  if (result != ReadElfRet::NO_ERROR) {
+    LOG(WARNING) << "failed to read symbols from " << symfs_dir_ + path_
+                 << ": " << ReadElfRetToString(result);
+  }
   return true;
 }
 
@@ -349,23 +360,33 @@ static bool SymbolFilterForDso(const ElfFileSymbol& elf_symbol) {
 }
 
 bool Dso::LoadElfFile() {
-  bool loaded = false;
   BuildId build_id = GetExpectedBuildId();
 
   if (symfs_dir_.empty()) {
     // Linux host can store debug shared libraries in /usr/lib/debug.
-    loaded = ParseSymbolsFromElfFile(
+    ReadElfRet result = ParseSymbolsFromElfFile(
         "/usr/lib/debug" + path_, build_id,
         std::bind(ElfFileSymbolCallback, std::placeholders::_1, this,
                   SymbolFilterForDso));
+    if (result == ReadElfRet::NO_ERROR) {
+      return true;
+    }
   }
-  if (!loaded) {
-    loaded = ParseSymbolsFromElfFile(
-        GetDebugFilePath(), build_id,
-        std::bind(ElfFileSymbolCallback, std::placeholders::_1, this,
-                  SymbolFilterForDso));
+  ReadElfRet result = ParseSymbolsFromElfFile(
+      GetDebugFilePath(), build_id,
+      std::bind(ElfFileSymbolCallback, std::placeholders::_1, this,
+                SymbolFilterForDso));
+  if (result == ReadElfRet::NO_ERROR) {
+    return true;
+  } else if (result == ReadElfRet::NO_SYMBOL_TABLE) {
+    // Laking symbol table is not considered as an error.
+    LOG(WARNING) << GetDebugFilePath() << " doesn't contain symbol table";
+    return true;
+  } else {
+    LOG(WARNING) << "failed to read symbols from " << GetDebugFilePath()
+                  << ": " << ReadElfRetToString(result);
+    return false;
   }
-  return loaded;
 }
 
 bool Dso::LoadEmbeddedElfFile() {
@@ -373,10 +394,20 @@ bool Dso::LoadEmbeddedElfFile() {
   BuildId build_id = GetExpectedBuildId();
   auto tuple = SplitUrlInApk(path);
   CHECK(std::get<0>(tuple));
-  return ParseSymbolsFromApkFile(
+  ReadElfRet result = ParseSymbolsFromApkFile(
       std::get<1>(tuple), std::get<2>(tuple), build_id,
       std::bind(ElfFileSymbolCallback, std::placeholders::_1, this,
                 SymbolFilterForDso));
+  if (result == ReadElfRet::NO_ERROR) {
+    return true;
+  } else if (result == ReadElfRet::NO_SYMBOL_TABLE) {
+    LOG(WARNING) << GetDebugFilePath() << " doesn't contain symbol table";
+    return true;
+  } else {
+    LOG(WARNING) << "failed to read symbols from " << GetDebugFilePath()
+                 << ": " << ReadElfRetToString(result);
+    return false;
+  }
 }
 
 void Dso::InsertSymbol(const Symbol& symbol) { symbols_.insert(symbol); }

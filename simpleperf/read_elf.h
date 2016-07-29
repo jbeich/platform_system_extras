@@ -21,9 +21,26 @@
 #include <string>
 #include "build_id.h"
 
-bool GetBuildIdFromNoteFile(const std::string& filename, BuildId* build_id);
-bool GetBuildIdFromElfFile(const std::string& filename, BuildId* build_id);
-bool GetBuildIdFromEmbeddedElfFile(const std::string& filename, uint64_t file_offset,
+// Read ELF functions are called in different situations, so it is hard to
+// decide whether to report error or not. So read ELF functions don't report
+// error when something wrong happens, instead they return ReadElfRet, which
+// identifies different errors met while reading elf file.
+enum ReadElfRet {
+  NO_ERROR,
+  FILE_NOT_EXIST,
+  READ_FAILED,
+  FILE_MALFORMAT,
+  NO_SYMBOL_TABLE,
+  NO_BUILD_ID,
+  BUILD_ID_MISMATCH,
+  SECTION_NOT_FOUND,
+};
+
+const char* ReadElfRetToString(ReadElfRet result);
+
+ReadElfRet GetBuildIdFromNoteFile(const std::string& filename, BuildId* build_id);
+ReadElfRet GetBuildIdFromElfFile(const std::string& filename, BuildId* build_id);
+ReadElfRet GetBuildIdFromEmbeddedElfFile(const std::string& filename, uint64_t file_offset,
                                    uint32_t file_size, BuildId* build_id);
 
 // The symbol prefix used to indicate that the symbol belongs to android linker.
@@ -41,22 +58,23 @@ struct ElfFileSymbol {
   }
 };
 
-bool ParseSymbolsFromElfFile(const std::string& filename, const BuildId& expected_build_id,
-                             const std::function<void(const ElfFileSymbol&)>& callback);
-bool ParseSymbolsFromEmbeddedElfFile(const std::string& filename, uint64_t file_offset,
-                                     uint32_t file_size, const BuildId& expected_build_id,
-                                     const std::function<void(const ElfFileSymbol&)>& callback);
+ReadElfRet ParseSymbolsFromElfFile(const std::string& filename,
+                                   const BuildId& expected_build_id,
+                                   const std::function<void(const ElfFileSymbol&)>& callback);
+ReadElfRet ParseSymbolsFromEmbeddedElfFile(const std::string& filename, uint64_t file_offset,
+                                           uint32_t file_size, const BuildId& expected_build_id,
+                                           const std::function<void(const ElfFileSymbol&)>& callback);
 
-bool ReadMinExecutableVirtualAddressFromElfFile(const std::string& filename,
-                                                const BuildId& expected_build_id,
-                                                uint64_t* min_addr);
+ReadElfRet ReadMinExecutableVirtualAddressFromElfFile(const std::string& filename,
+                                                      const BuildId& expected_build_id,
+                                                      uint64_t* min_addr);
 
-bool ReadSectionFromElfFile(const std::string& filename, const std::string& section_name,
-                            std::string* content);
+ReadElfRet ReadSectionFromElfFile(const std::string& filename, const std::string& section_name,
+                                  std::string* content);
 
 // Expose the following functions for unit tests.
 bool IsArmMappingSymbol(const char* name);
-bool IsValidElfFile(int fd);
-bool IsValidElfPath(const std::string& filename);
+ReadElfRet IsValidElfFile(int fd);
+ReadElfRet IsValidElfPath(const std::string& filename);
 
 #endif  // SIMPLE_PERF_READ_ELF_H_
