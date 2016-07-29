@@ -42,8 +42,10 @@ static bool ExtractTestDataFromElfSection() {
     return false;
   }
   std::string content;
-  if (!ReadSectionFromElfFile("/proc/self/exe", testdata_section, &content)) {
-    LOG(ERROR) << "failed to read section " << testdata_section;
+  ReadElfRet result = ReadSectionFromElfFile("/proc/self/exe", testdata_section, &content);
+  if (result != ReadElfRet::NO_ERROR) {
+    LOG(ERROR) << "failed to read section " << testdata_section
+               << ": " << ReadElfRetToString(result);
     return false;
   }
   TemporaryFile tmp_file;

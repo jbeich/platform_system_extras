@@ -335,7 +335,11 @@ bool GetThreadMmapsInProcess(pid_t pid, std::vector<ThreadMmap>* thread_mmaps) {
 }
 
 bool GetKernelBuildId(BuildId* build_id) {
-  return GetBuildIdFromNoteFile("/sys/kernel/notes", build_id);
+  ReadElfRet result = GetBuildIdFromNoteFile("/sys/kernel/notes", build_id);
+  if (result != ReadElfRet::NO_ERROR) {
+    LOG(WARNING) << "failed to read /sys/kernel/notes: " << ReadElfRetToString(result);
+  }
+  return result == ReadElfRet::NO_ERROR;
 }
 
 bool GetModuleBuildId(const std::string& module_name, BuildId* build_id) {

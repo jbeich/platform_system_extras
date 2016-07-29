@@ -91,10 +91,10 @@ bool IsValidApkPath(const std::string& apk_path);
 std::string GetUrlInApk(const std::string& apk_path, const std::string& elf_filename);
 std::tuple<bool, std::string, std::string> SplitUrlInApk(const std::string& path);
 
-bool GetBuildIdFromApkFile(const std::string& apk_path, const std::string& elf_filename,
-                           BuildId* build_id);
+ReadElfRet GetBuildIdFromApkFile(const std::string& apk_path, const std::string& elf_filename,
+                                 BuildId* build_id);
 
-bool ParseSymbolsFromApkFile(const std::string& apk_path, const std::string& elf_filename,
+ReadElfRet ParseSymbolsFromApkFile(const std::string& apk_path, const std::string& elf_filename,
                              const BuildId& expected_build_id,
                              const std::function<void(const ElfFileSymbol&)>& callback);
 
