@@ -70,6 +70,24 @@
       "revId": "2f823b010ad786f054e3efa56dafc9963f2254b3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4f6b859b_5622a5ac",
+        "filename": "simpleperf/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2016-08-01T23:29:13Z",
+      "side": 1,
+      "message": "Should probably just move simpleperf into its own project instead of lumping it in to system/extras.\n\nThat takes time though, so for just getting this CL in for now either approach seems fine to me (I\u0027d lean toward the version that\u0027s in adb because you\u0027d stand a slightly better chance of being able to build the tree after a git checkout if you know exactly what it was built with, but it still isn\u0027t very likely since you don\u0027t know what revision all your dependencies were at).\n\nFor simpleperf in the NDK we\u0027ll pack up the repo.prop from the build and that will record the SHAs for every project in the tree.",
+      "parentUuid": "8f601d1d_a8bcdfaf",
+      "revId": "2f823b010ad786f054e3efa56dafc9963f2254b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
