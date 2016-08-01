@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "4f6b859b_e21e97c6",
+        "filename": "simpleperf/dso.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-08-01T20:45:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4f6b859b_4e05afbc",
+      "range": {
+        "startLine": 273,
+        "startChar": 7,
+        "endLine": 273,
+        "endChar": 13
+      },
+      "revId": "d705f5c50d8a86fbc413db415534dd6ab6c28c8e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4f6b859b_8e0fc7da",
         "filename": "simpleperf/dso.cpp",
         "patchSetId": 3
@@ -42,6 +66,24 @@
     },
     {
       "key": {
+        "uuid": "4f6b859b_6214479c",
+        "filename": "simpleperf/dso.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-08-01T20:45:20Z",
+      "side": 1,
+      "message": "The original warning code is actually for debugging. The new code doesn\u0027t print ids, because the code printing elf file build id mismatch also doesn\u0027t print ids. The user can use dump command to dump build ids in perf.data, so I think it is not necessary to print ids in the warning.\nImprove the warning message a little.",
+      "parentUuid": "4f6b859b_8e0fc7da",
+      "revId": "d705f5c50d8a86fbc413db415534dd6ab6c28c8e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4f6b859b_ce41bff7",
         "filename": "simpleperf/read_apk.cpp",
         "patchSetId": 3
@@ -53,6 +95,30 @@
       "writtenOn": "2016-08-01T20:10:11Z",
       "side": 1,
       "message": "remove \u0027in\u0027",
+      "range": {
+        "startLine": 103,
+        "startChar": 45,
+        "endLine": 103,
+        "endChar": 47
+      },
+      "revId": "d705f5c50d8a86fbc413db415534dd6ab6c28c8e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4f6b859b_82823ba4",
+        "filename": "simpleperf/read_apk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-08-01T20:45:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4f6b859b_ce41bff7",
       "range": {
         "startLine": 103,
         "startChar": 45,
@@ -88,6 +154,30 @@
     },
     {
       "key": {
+        "uuid": "4f6b859b_a2eadf6d",
+        "filename": "simpleperf/read_apk.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-08-01T20:45:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4f6b859b_ae3c8b7c",
+      "range": {
+        "startLine": 95,
+        "startChar": 32,
+        "endLine": 95,
+        "endChar": 33
+      },
+      "revId": "d705f5c50d8a86fbc413db415534dd6ab6c28c8e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4f6b859b_0e3c9777",
         "filename": "simpleperf/read_apk_test.cpp",
         "patchSetId": 3
@@ -99,6 +189,24 @@
       "writtenOn": "2016-08-01T20:10:11Z",
       "side": 1,
       "message": "formatting wrong now.",
+      "revId": "d705f5c50d8a86fbc413db415534dd6ab6c28c8e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4f6b859b_c2ac333c",
+        "filename": "simpleperf/read_apk_test.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-08-01T20:45:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4f6b859b_0e3c9777",
       "revId": "d705f5c50d8a86fbc413db415534dd6ab6c28c8e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -122,6 +230,24 @@
     },
     {
       "key": {
+        "uuid": "4f6b859b_02ef0bb5",
+        "filename": "simpleperf/read_elf.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-08-01T20:45:20Z",
+      "side": 1,
+      "message": "Done. There can have several note sections in an Elf file. Originally I thought that even if I failed to read some note sections not containing build id, I might still successfully read the note section containing build id. But it might be a wrong consideration or not worth implementing comparing to code clarity.",
+      "parentUuid": "4f6b859b_8e6187ae",
+      "revId": "d705f5c50d8a86fbc413db415534dd6ab6c28c8e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4f6b859b_aee1eb04",
         "filename": "simpleperf/read_elf.h",
         "patchSetId": 3
@@ -139,6 +265,24 @@
     },
     {
       "key": {
+        "uuid": "4f6b859b_42a1033e",
+        "filename": "simpleperf/read_elf.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-08-01T20:45:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4f6b859b_aee1eb04",
+      "revId": "d705f5c50d8a86fbc413db415534dd6ab6c28c8e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4f6b859b_6e2b532d",
         "filename": "simpleperf/read_elf.h",
         "patchSetId": 3
@@ -150,6 +294,30 @@
       "writtenOn": "2016-08-01T20:10:11Z",
       "side": 1,
       "message": "all these too",
+      "range": {
+        "startLine": 63,
+        "startChar": 34,
+        "endLine": 63,
+        "endChar": 35
+      },
+      "revId": "d705f5c50d8a86fbc413db415534dd6ab6c28c8e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4f6b859b_629e07fd",
+        "filename": "simpleperf/read_elf.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-08-01T20:45:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4f6b859b_6e2b532d",
       "range": {
         "startLine": 63,
         "startChar": 34,
