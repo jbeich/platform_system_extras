@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "4f6b859b_f30110d6",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1065,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-08-01T18:48:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6f6689d2_e1e3f5a0",
+      "range": {
+        "startLine": 1065,
+        "startChar": 30,
+        "endLine": 1065,
+        "endChar": 48
+      },
+      "revId": "f769dc1d449dcdc0332b0ee9dfc30979ea7c29ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6f6689d2_01d9c9ed",
         "filename": "simpleperf/read_elf.h",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2016-07-30T16:13:38Z",
       "side": 1,
       "message": "ElfStatus would be one character shorter and avoid an abbreviation.",
+      "range": {
+        "startLine": 28,
+        "startChar": 5,
+        "endLine": 28,
+        "endChar": 15
+      },
+      "revId": "f769dc1d449dcdc0332b0ee9dfc30979ea7c29ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4f6b859b_130764e9",
+        "filename": "simpleperf/read_elf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-08-01T18:48:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6f6689d2_01d9c9ed",
       "range": {
         "startLine": 28,
         "startChar": 5,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "4f6b859b_33ec6825",
+        "filename": "simpleperf/read_elf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-08-01T18:48:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6f6689d2_21decdd5",
+      "range": {
+        "startLine": 30,
+        "startChar": 2,
+        "endLine": 30,
+        "endChar": 16
+      },
+      "revId": "f769dc1d449dcdc0332b0ee9dfc30979ea7c29ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6f6689d2_41f3c171",
         "filename": "simpleperf/read_elf.h",
         "patchSetId": 2
@@ -82,6 +154,30 @@
       "writtenOn": "2016-07-30T16:13:38Z",
       "side": 1,
       "message": "FILE_MALFORMED (or MALFORMED_FILE)",
+      "range": {
+        "startLine": 32,
+        "startChar": 2,
+        "endLine": 32,
+        "endChar": 16
+      },
+      "revId": "f769dc1d449dcdc0332b0ee9dfc30979ea7c29ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4f6b859b_53e9dc13",
+        "filename": "simpleperf/read_elf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-08-01T18:48:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6f6689d2_41f3c171",
       "range": {
         "startLine": 32,
         "startChar": 2,
