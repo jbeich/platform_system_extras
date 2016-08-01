@@ -2,6 +2,52 @@
   "comments": [
     {
       "key": {
+        "uuid": "f4fc122d_7e3411e2",
+        "filename": "avb/README",
+        "patchSetId": 1
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2016-08-01T11:11:59Z",
+      "side": 1,
+      "message": "Just curious, any reason to make 4096-bits as default, compared to current AOSP using 2048 bits as default.",
+      "range": {
+        "startLine": 190,
+        "startChar": 26,
+        "endLine": 190,
+        "endChar": 40
+      },
+      "revId": "474b73d92292a0fab04055fd43fd8aaf614273fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f4fc122d_9e27ddb9",
+        "filename": "avb/avbtool",
+        "patchSetId": 1
+      },
+      "lineNbr": 1456,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2016-08-01T11:11:59Z",
+      "side": 1,
+      "message": "How about: Target size of partition.\n  \nBTW, should we make this as an optional argument.\nBy default it should automatically adjust the final partition size. \n  \nCurrently I have to run it and see how many bytes it lacks (from the err msg \"%d bytes too small\").\nThen use --partition_size $((a + lack_bytes)) to complete it.",
+      "range": {
+        "startLine": 1456,
+        "startChar": 22,
+        "endLine": 1456,
+        "endChar": 40
+      },
+      "revId": "474b73d92292a0fab04055fd43fd8aaf614273fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6f6689d2_c9245dcc",
         "filename": "avb/libavb/avb_property_descriptor.c",
         "patchSetId": 1
