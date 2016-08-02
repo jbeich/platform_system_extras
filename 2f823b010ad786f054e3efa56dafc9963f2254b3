@@ -88,6 +88,24 @@
       "revId": "2f823b010ad786f054e3efa56dafc9963f2254b3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4f6b859b_91660754",
+        "filename": "simpleperf/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-08-02T00:00:09Z",
+      "side": 1,
+      "message": "I see. I don\u0027t mind keep here the same as adb_version. Because currently I think there is no strong reason to use git log in current directory, and dan\u0027s concern is reasonable.",
+      "parentUuid": "4f6b859b_5622a5ac",
+      "revId": "2f823b010ad786f054e3efa56dafc9963f2254b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
