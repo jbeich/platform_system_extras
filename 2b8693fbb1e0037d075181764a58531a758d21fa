@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0f56eded_877dd14b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1079236
+      },
+      "writtenOn": "2016-08-02T18:49:19Z",
+      "side": 1,
+      "message": "typo: avbtool",
+      "range": {
+        "startLine": 10,
+        "startChar": 47,
+        "endLine": 10,
+        "endChar": 54
+      },
+      "revId": "2b8693fbb1e0037d075181764a58531a758d21fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4f39c5b7_7c7dd848",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1079236
+      },
+      "writtenOn": "2016-08-02T18:49:19Z",
+      "side": 1,
+      "message": "nit: grammar: to create",
+      "range": {
+        "startLine": 14,
+        "startChar": 27,
+        "endLine": 14,
+        "endChar": 39
+      },
+      "revId": "2b8693fbb1e0037d075181764a58531a758d21fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0f56eded_071e4116",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1079236
+      },
+      "writtenOn": "2016-08-02T18:49:19Z",
+      "side": 1,
+      "message": "nit: contains",
+      "range": {
+        "startLine": 18,
+        "startChar": 59,
+        "endLine": 18,
+        "endChar": 66
+      },
+      "revId": "2b8693fbb1e0037d075181764a58531a758d21fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3464ea09_1887450c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1079236
+      },
+      "writtenOn": "2016-08-02T18:49:19Z",
+      "side": 1,
+      "message": "nit: \"a 3rd party\"",
+      "range": {
+        "startLine": 25,
+        "startChar": 31,
+        "endLine": 25,
+        "endChar": 40
+      },
+      "revId": "2b8693fbb1e0037d075181764a58531a758d21fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
