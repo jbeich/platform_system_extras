@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "f4fc122d_bef859e1",
+        "filename": "avb/README",
+        "patchSetId": 1
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2016-08-02T02:56:04Z",
+      "side": 1,
+      "message": "Noted, thanks for the info!",
+      "parentUuid": "4f6b859b_22232f62",
+      "range": {
+        "startLine": 190,
+        "startChar": 26,
+        "endLine": 190,
+        "endChar": 40
+      },
+      "revId": "474b73d92292a0fab04055fd43fd8aaf614273fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f4fc122d_9e27ddb9",
         "filename": "avb/avbtool",
         "patchSetId": 1
@@ -84,6 +108,30 @@
       "side": 1,
       "message": "I don\u0027t think this can be optional.\n\nRemember, the size of system.img and the size of the \u0027system\u0027 partition (or \u0027system_a\u0027 or \u0027system_b\u0027 partition if A/B is used) that will hold this image may not necessarily be the same. Specifically, system.img is usually a lot smaller and only just big enough to hold the filesystem, while the size of the \u0027system\u0027 partition is sized with a bit of slack so system.img can grow in the future etc.\n\nIf you set --partition_size so it has just enough bytes the end of system.img won\u0027t be at the end of the \u0027system\u0027 partition like it should!\n\nNote that the build system already knows the size of the partition - it\u0027s $(BOARD_SYSTEMIMAGE_PARTITION_SIZE) - so this will be automatically set. When I upload the CL for build/core/Makefile changes, you\u0027ll see (I\u0027ll paste the URL for the CL here).",
       "parentUuid": "f4fc122d_9e27ddb9",
+      "range": {
+        "startLine": 1456,
+        "startChar": 22,
+        "endLine": 1456,
+        "endChar": 40
+      },
+      "revId": "474b73d92292a0fab04055fd43fd8aaf614273fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f4fc122d_9ef59de9",
+        "filename": "avb/avbtool",
+        "patchSetId": 1
+      },
+      "lineNbr": 1456,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2016-08-02T02:56:04Z",
+      "side": 1,
+      "message": "OK, it makes sense to me.\nThanks for the detailed explanation!",
+      "parentUuid": "4f6b859b_a2abbf82",
       "range": {
         "startLine": 1456,
         "startChar": 22,
