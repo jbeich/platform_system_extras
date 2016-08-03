@@ -1,0 +1,498 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "54d87e08_800f403c",
+        "filename": "avb/README",
+        "patchSetId": 3
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2016-08-03T16:31:46Z",
+      "side": 1,
+      "message": "Does that mean avbtool will have major/minor version as arguments in the future?",
+      "range": {
+        "startLine": 131,
+        "startChar": 19,
+        "endLine": 131,
+        "endChar": 61
+      },
+      "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b477fabf_0ee7ffdc",
+        "filename": "avb/libavb/avb_chain_partition_descriptor.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2016-08-03T16:31:46Z",
+      "side": 1,
+      "message": "Using 0 as error return value seems uncommon to me.\n  \nBut as it\u0027s consistent inside this folder, this should not be a concern. \n (plus it has warn_unused_result to enforce the caller check the return value)",
+      "range": {
+        "startLine": 28,
+        "startChar": 4,
+        "endLine": 28,
+        "endChar": 13
+      },
+      "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d4954efc_1fd39e5a",
+        "filename": "avb/libavb/avb_crypto.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2016-08-03T16:31:46Z",
+      "side": 1,
+      "message": "s/four/three ?",
+      "range": {
+        "startLine": 34,
+        "startChar": 46,
+        "endLine": 34,
+        "endChar": 50
+      },
+      "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "54d87e08_20bf7477",
+        "filename": "avb/libavb/avb_crypto.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2016-08-03T16:31:46Z",
+      "side": 1,
+      "message": "s/avb_rsa_public_key_header_to_host_byte_order/avb_rsa_public_key_header_validate_and_byteswap ?",
+      "range": {
+        "startLine": 105,
+        "startChar": 27,
+        "endLine": 105,
+        "endChar": 71
+      },
+      "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3464ea09_2c4f6b3d",
+        "filename": "avb/libavb/avb_descriptor.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2016-08-03T16:31:46Z",
+      "side": 1,
+      "message": "s/AvbHashtreeDescriptor/AvbHashDescriptor",
+      "range": {
+        "startLine": 34,
+        "startChar": 33,
+        "endLine": 34,
+        "endChar": 54
+      },
+      "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "746e62eb_f56b6fec",
+        "filename": "avb/libavb/avb_ops.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2016-08-03T16:31:46Z",
+      "side": 1,
+      "message": "How do we know if a public key is trusted as it doesn\u0027t provide the partition name in question.\n  \nOr this means the OEM key embedded in the bootloader?\nIf so, how about rename it to \"validate_vbmeta_public_key\".",
+      "range": {
+        "startLine": 103,
+        "startChar": 8,
+        "endLine": 103,
+        "endChar": 27
+      },
+      "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3464ea09_27230414",
+        "filename": "avb/libavb/avb_ops.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2016-08-03T16:31:46Z",
+      "side": 1,
+      "message": "How about add:\n  In Android, it checks the property androidboot.avb.device_state, which might be \"locked\" or \"unlocked\".",
+      "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f48172c9_c7ba3e86",
+        "filename": "avb/libavb/avb_ops.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2016-08-03T16:31:46Z",
+      "side": 1,
+      "message": "nit: maybe \"is_device_unlocked\" is better?",
+      "range": {
+        "startLine": 133,
+        "startChar": 8,
+        "endLine": 133,
+        "endChar": 24
+      },
+      "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "54d87e08_0049108b",
+        "filename": "avb/libavb/avb_rsa.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2016-08-03T16:31:46Z",
+      "side": 1,
+      "message": "Is this little endian or host byte order?",
+      "range": {
+        "startLine": 34,
+        "startChar": 34,
+        "endLine": 34,
+        "endChar": 47
+      },
+      "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "14552639_776630c4",
+        "filename": "avb/libavb/avb_rsa.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2016-08-03T16:31:46Z",
+      "side": 1,
+      "message": "how about: \n  uint32_t tmp \u003d avb_be32toh(((uint32_t*)inout)[key-\u003elen - 1 - i]);",
+      "range": {
+        "startLine": 163,
+        "startChar": 0,
+        "endLine": 166,
+        "endChar": 62
+      },
+      "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "14552639_9ad84947",
+        "filename": "avb/libavb/avb_rsa.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2016-08-03T16:31:46Z",
+      "side": 1,
+      "message": "key",
+      "range": {
+        "startLine": 48,
+        "startChar": 27,
+        "endLine": 48,
+        "endChar": 37
+      },
+      "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f4989235_08c36835",
+        "filename": "avb/libavb/avb_util.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2016-08-03T16:31:46Z",
+      "side": 1,
+      "message": "The i-th occurrence will be mem-copied multiple (K - i + 1) times, \nwhere K is the total occurrences of the \"search\" in str.\n\nMaybe we could consider using two passes: \nscan how many occurrences at first, allocate the final size then do a memcpy at the second pass \n(similar to SetDescriptorData used in avb_descriptor_get_all()).\n  \nI\u0027m ok with the current approach now, given this is only \nused for kernel cmdline processing (which should be short?).",
+      "range": {
+        "startLine": 214,
+        "startChar": 0,
+        "endLine": 226,
+        "endChar": 28
+      },
+      "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f48172c9_4ab5d5c7",
+        "filename": "avb/libavb/avb_util.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2016-08-03T16:31:46Z",
+      "side": 1,
+      "message": "should this be (although the ret_len is unused later):\n  ret_len \u003d num_new - 1;",
+      "range": {
+        "startLine": 248,
+        "startChar": 0,
+        "endLine": 248,
+        "endChar": 22
+      },
+      "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9474b6be_8d8b1580",
+        "filename": "avb/libavb/avb_util.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2016-08-03T16:31:46Z",
+      "side": 1,
+      "message": "s/opration/operation",
+      "range": {
+        "startLine": 68,
+        "startChar": 27,
+        "endLine": 68,
+        "endChar": 35
+      },
+      "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "74d3c2eb_1245e14e",
+        "filename": "avb/libavb/avb_util.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2016-08-03T16:31:46Z",
+      "side": 1,
+      "message": "s/occurence/occurrence",
+      "range": {
+        "startLine": 84,
+        "startChar": 19,
+        "endLine": 84,
+        "endChar": 28
+      },
+      "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b477fabf_893d49e8",
+        "filename": "avb/libavb/avb_util.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2016-08-03T16:31:46Z",
+      "side": 1,
+      "message": "How about:\n  points into |haystack| for the first occurrence of needle.",
+      "range": {
+        "startLine": 88,
+        "startChar": 40,
+        "endLine": 88,
+        "endChar": 62
+      },
+      "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3464ea09_07504003",
+        "filename": "avb/libavb/avb_util.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2016-08-03T16:31:46Z",
+      "side": 1,
+      "message": "occurrences",
+      "range": {
+        "startLine": 93,
+        "startChar": 16,
+        "endLine": 93,
+        "endChar": 26
+      },
+      "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "14552639_3a381df6",
+        "filename": "avb/libavb/avb_vbmeta_image.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2016-08-03T16:31:46Z",
+      "side": 1,
+      "message": "Should we add a separate enum for it? e.g.,   \n  AVB_VBMETA_VERIFY_PUBLIC_KEY_MISMATCH",
+      "range": {
+        "startLine": 174,
+        "startChar": 52,
+        "endLine": 175,
+        "endChar": 13
+      },
+      "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "74d3c2eb_52ada934",
+        "filename": "avb/libavb/avb_vbmeta_image.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2016-08-03T16:31:46Z",
+      "side": 1,
+      "message": "remove payload?",
+      "range": {
+        "startLine": 193,
+        "startChar": 51,
+        "endLine": 193,
+        "endChar": 58
+      },
+      "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3464ea09_07eda08b",
+        "filename": "avb/libavb/avb_vbmeta_image.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2016-08-03T16:31:46Z",
+      "side": 1,
+      "message": "three?",
+      "range": {
+        "startLine": 193,
+        "startChar": 3,
+        "endLine": 193,
+        "endChar": 7
+      },
+      "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3464ea09_878c50e1",
+        "filename": "avb/libavb/avb_vbmeta_image.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2016-08-03T16:31:46Z",
+      "side": 1,
+      "message": "Just to be clear, does it mean:\n  ... extract the key at build time, store it into the bootloader and compare it ... at run time.",
+      "range": {
+        "startLine": 209,
+        "startChar": 11,
+        "endLine": 209,
+        "endChar": 55
+      },
+      "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3464ea09_2791c4f3",
+        "filename": "avb/libavb/avb_vbmeta_image.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2016-08-03T16:31:46Z",
+      "side": 1,
+      "message": "Should we add:\n  The read/write of the rollback_index in NVRAM is implemented in function read_rollback_index and write_rollback_index, respectively. \n  See avb_ops.h for details.",
+      "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
