@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "749bc27c_5275f4fa",
+        "filename": "avb/README",
+        "patchSetId": 3
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1076971
+      },
+      "writtenOn": "2016-08-03T20:05:46Z",
+      "side": 1,
+      "message": "We always want to encourage people to use the latest and greatest version of avbtool, I think.\n\nThis very guarantee is what makes this possible, e.g. if you don\u0027t change cmdline args to avbtool any future version (with the same major version) will create the exact same images, bit-for-bit (modulo salt etc.).\n\nSo if this is true, taking major/minor target version as parameters (to e.g. instruct avbtool to create an image matching version 1.42 of the vbmeta format) would make no difference because images targeting different versions would be the same anyway :-)\n\nThe reason for mentioning this right here is mostly to remind whoever approves CLs for avbtool in the future that they must not break this guarantee. In reality we\u0027ll find out if the unit tests start breaking since those unit tests have hashes embedded which would need to get updated... so that\u0027s an extra alarm bell!",
+      "parentUuid": "54d87e08_800f403c",
+      "range": {
+        "startLine": 131,
+        "startChar": 19,
+        "endLine": 131,
+        "endChar": 61
+      },
+      "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b477fabf_0ee7ffdc",
         "filename": "avb/libavb/avb_chain_partition_descriptor.c",
         "patchSetId": 3
@@ -36,6 +60,30 @@
       "writtenOn": "2016-08-03T16:31:46Z",
       "side": 1,
       "message": "Using 0 as error return value seems uncommon to me.\n  \nBut as it\u0027s consistent inside this folder, this should not be a concern. \n (plus it has warn_unused_result to enforce the caller check the return value)",
+      "range": {
+        "startLine": 28,
+        "startChar": 4,
+        "endLine": 28,
+        "endChar": 13
+      },
+      "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "749bc27c_f265084a",
+        "filename": "avb/libavb/avb_chain_partition_descriptor.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1076971
+      },
+      "writtenOn": "2016-08-03T20:05:46Z",
+      "side": 1,
+      "message": "The idea is that this function (and many others like it), return a \"boolean\" and TRUE/FALSE.\n\nHowever for various practical reasons, I didn\u0027t want to use C99\u0027s \u0027bool\u0027 type and TRUE/FALSE since that might introduce compatibility issues for users of this library... thinking more about it now, it may make more sense to just use \u0027bool\u0027, TRUE, and FALSE and require/check in avb_sysdeps.h that they work. Thoughts?",
+      "parentUuid": "b477fabf_0ee7ffdc",
       "range": {
         "startLine": 28,
         "startChar": 4,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "749bc27c_12528c6a",
+        "filename": "avb/libavb/avb_crypto.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1076971
+      },
+      "writtenOn": "2016-08-03T20:05:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d4954efc_1fd39e5a",
+      "range": {
+        "startLine": 34,
+        "startChar": 46,
+        "endLine": 34,
+        "endChar": 50
+      },
+      "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "54d87e08_20bf7477",
         "filename": "avb/libavb/avb_crypto.h",
         "patchSetId": 3
@@ -82,6 +154,30 @@
       "writtenOn": "2016-08-03T16:31:46Z",
       "side": 1,
       "message": "s/avb_rsa_public_key_header_to_host_byte_order/avb_rsa_public_key_header_validate_and_byteswap ?",
+      "range": {
+        "startLine": 105,
+        "startChar": 27,
+        "endLine": 105,
+        "endChar": 71
+      },
+      "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "749bc27c_72511862",
+        "filename": "avb/libavb/avb_crypto.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1076971
+      },
+      "writtenOn": "2016-08-03T20:05:46Z",
+      "side": 1,
+      "message": "Ah, yeah, that was the old name. Nice catch. Fixing.",
+      "parentUuid": "54d87e08_20bf7477",
       "range": {
         "startLine": 105,
         "startChar": 27,
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "749bc27c_12b52c96",
+        "filename": "avb/libavb/avb_descriptor.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1076971
+      },
+      "writtenOn": "2016-08-03T20:05:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3464ea09_2c4f6b3d",
+      "range": {
+        "startLine": 34,
+        "startChar": 33,
+        "endLine": 34,
+        "endChar": 54
+      },
+      "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "746e62eb_f56b6fec",
         "filename": "avb/libavb/avb_ops.h",
         "patchSetId": 3
@@ -128,6 +248,30 @@
       "writtenOn": "2016-08-03T16:31:46Z",
       "side": 1,
       "message": "How do we know if a public key is trusted as it doesn\u0027t provide the partition name in question.\n  \nOr this means the OEM key embedded in the bootloader?\nIf so, how about rename it to \"validate_vbmeta_public_key\".",
+      "range": {
+        "startLine": 103,
+        "startChar": 8,
+        "endLine": 103,
+        "endChar": 27
+      },
+      "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "749bc27c_92c83c22",
+        "filename": "avb/libavb/avb_ops.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1076971
+      },
+      "writtenOn": "2016-08-03T20:05:46Z",
+      "side": 1,
+      "message": "Yep, this refers to the OEM key embedded in the bootloader. I will update the docs to point this out. Agree on renaming, doing that too!",
+      "parentUuid": "746e62eb_f56b6fec",
       "range": {
         "startLine": 103,
         "startChar": 8,
@@ -157,6 +301,24 @@
     },
     {
       "key": {
+        "uuid": "749bc27c_52d6d4bd",
+        "filename": "avb/libavb/avb_ops.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1076971
+      },
+      "writtenOn": "2016-08-03T20:05:46Z",
+      "side": 1,
+      "message": "Well, this would only be true when we\u0027ve booted the kernel and actually running Android. When in the bootloader - where this library is intended to be used [1] - we\u0027re not yet running Android...\n\n[1] : OK, we\u0027ll also use it in fs_mgr and for the boot_control HAL and in those cases the way to implement the read_is_unlocked() operation would indeed be to check an androidboot.* property.",
+      "parentUuid": "3464ea09_27230414",
+      "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f48172c9_c7ba3e86",
         "filename": "avb/libavb/avb_ops.h",
         "patchSetId": 3
@@ -168,6 +330,30 @@
       "writtenOn": "2016-08-03T16:31:46Z",
       "side": 1,
       "message": "nit: maybe \"is_device_unlocked\" is better?",
+      "range": {
+        "startLine": 133,
+        "startChar": 8,
+        "endLine": 133,
+        "endChar": 24
+      },
+      "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "749bc27c_72dbd8e4",
+        "filename": "avb/libavb/avb_ops.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1076971
+      },
+      "writtenOn": "2016-08-03T20:05:46Z",
+      "side": 1,
+      "message": "Makes sense, I\u0027ll change it!",
+      "parentUuid": "f48172c9_c7ba3e86",
       "range": {
         "startLine": 133,
         "startChar": 8,
@@ -203,6 +389,30 @@
     },
     {
       "key": {
+        "uuid": "749bc27c_b2ec6091",
+        "filename": "avb/libavb/avb_rsa.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1076971
+      },
+      "writtenOn": "2016-08-03T20:05:46Z",
+      "side": 1,
+      "message": "It\u0027s host byte order. Fixing. Nice catch.",
+      "parentUuid": "54d87e08_0049108b",
+      "range": {
+        "startLine": 34,
+        "startChar": 34,
+        "endLine": 34,
+        "endChar": 47
+      },
+      "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "14552639_776630c4",
         "filename": "avb/libavb/avb_rsa.c",
         "patchSetId": 3
@@ -214,6 +424,30 @@
       "writtenOn": "2016-08-03T16:31:46Z",
       "side": 1,
       "message": "how about: \n  uint32_t tmp \u003d avb_be32toh(((uint32_t*)inout)[key-\u003elen - 1 - i]);",
+      "range": {
+        "startLine": 163,
+        "startChar": 0,
+        "endLine": 166,
+        "endChar": 62
+      },
+      "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "749bc27c_1287ecbd",
+        "filename": "avb/libavb/avb_rsa.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1076971
+      },
+      "writtenOn": "2016-08-03T20:05:46Z",
+      "side": 1,
+      "message": "This code is from Chromium which is from Android and I\u0027d rather not change it (makes security patching harder). I\u0027d also like to avoid the function call overhead of avb_be32toh(). I\u0027ll update the comment for s/little-endian order/host-byte order/.",
+      "parentUuid": "14552639_776630c4",
       "range": {
         "startLine": 163,
         "startChar": 0,
@@ -249,6 +483,30 @@
     },
     {
       "key": {
+        "uuid": "749bc27c_92ef5c85",
+        "filename": "avb/libavb/avb_rsa.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1076971
+      },
+      "writtenOn": "2016-08-03T20:05:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "14552639_9ad84947",
+      "range": {
+        "startLine": 48,
+        "startChar": 27,
+        "endLine": 48,
+        "endChar": 37
+      },
+      "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f4989235_08c36835",
         "filename": "avb/libavb/avb_util.c",
         "patchSetId": 3
@@ -260,6 +518,30 @@
       "writtenOn": "2016-08-03T16:31:46Z",
       "side": 1,
       "message": "The i-th occurrence will be mem-copied multiple (K - i + 1) times, \nwhere K is the total occurrences of the \"search\" in str.\n\nMaybe we could consider using two passes: \nscan how many occurrences at first, allocate the final size then do a memcpy at the second pass \n(similar to SetDescriptorData used in avb_descriptor_get_all()).\n  \nI\u0027m ok with the current approach now, given this is only \nused for kernel cmdline processing (which should be short?).",
+      "range": {
+        "startLine": 214,
+        "startChar": 0,
+        "endLine": 226,
+        "endChar": 28
+      },
+      "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "749bc27c_f28188a1",
+        "filename": "avb/libavb/avb_util.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1076971
+      },
+      "writtenOn": "2016-08-03T20:05:46Z",
+      "side": 1,
+      "message": "Yeah, this wasn\u0027t written with performance in mind exactly because its use is so limited... if this changes, I\u0027m all for optimizing it!",
+      "parentUuid": "f4989235_08c36835",
       "range": {
         "startLine": 214,
         "startChar": 0,
@@ -295,6 +577,30 @@
     },
     {
       "key": {
+        "uuid": "749bc27c_12ae0c36",
+        "filename": "avb/libavb/avb_util.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1076971
+      },
+      "writtenOn": "2016-08-03T20:05:46Z",
+      "side": 1,
+      "message": "It should. Good eyes! Fixing.",
+      "parentUuid": "f48172c9_4ab5d5c7",
+      "range": {
+        "startLine": 248,
+        "startChar": 0,
+        "endLine": 248,
+        "endChar": 22
+      },
+      "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9474b6be_8d8b1580",
         "filename": "avb/libavb/avb_util.h",
         "patchSetId": 3
@@ -306,6 +612,30 @@
       "writtenOn": "2016-08-03T16:31:46Z",
       "side": 1,
       "message": "s/opration/operation",
+      "range": {
+        "startLine": 68,
+        "startChar": 27,
+        "endLine": 68,
+        "endChar": 35
+      },
+      "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "749bc27c_328cf0df",
+        "filename": "avb/libavb/avb_util.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1076971
+      },
+      "writtenOn": "2016-08-03T20:05:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9474b6be_8d8b1580",
       "range": {
         "startLine": 68,
         "startChar": 27,
@@ -341,6 +671,30 @@
     },
     {
       "key": {
+        "uuid": "749bc27c_529174f2",
+        "filename": "avb/libavb/avb_util.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1076971
+      },
+      "writtenOn": "2016-08-03T20:05:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "74d3c2eb_1245e14e",
+      "range": {
+        "startLine": 84,
+        "startChar": 19,
+        "endLine": 84,
+        "endChar": 28
+      },
+      "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b477fabf_893d49e8",
         "filename": "avb/libavb/avb_util.h",
         "patchSetId": 3
@@ -352,6 +706,30 @@
       "writtenOn": "2016-08-03T16:31:46Z",
       "side": 1,
       "message": "How about:\n  points into |haystack| for the first occurrence of needle.",
+      "range": {
+        "startLine": 88,
+        "startChar": 40,
+        "endLine": 88,
+        "endChar": 62
+      },
+      "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "749bc27c_729678ed",
+        "filename": "avb/libavb/avb_util.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1076971
+      },
+      "writtenOn": "2016-08-03T20:05:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b477fabf_893d49e8",
       "range": {
         "startLine": 88,
         "startChar": 40,
@@ -387,6 +765,30 @@
     },
     {
       "key": {
+        "uuid": "749bc27c_927afcc9",
+        "filename": "avb/libavb/avb_util.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1076971
+      },
+      "writtenOn": "2016-08-03T20:05:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3464ea09_07504003",
+      "range": {
+        "startLine": 93,
+        "startChar": 16,
+        "endLine": 93,
+        "endChar": 26
+      },
+      "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "14552639_3a381df6",
         "filename": "avb/libavb/avb_vbmeta_image.h",
         "patchSetId": 3
@@ -398,6 +800,30 @@
       "writtenOn": "2016-08-03T16:31:46Z",
       "side": 1,
       "message": "Should we add a separate enum for it? e.g.,   \n  AVB_VBMETA_VERIFY_PUBLIC_KEY_MISMATCH",
+      "range": {
+        "startLine": 174,
+        "startChar": 52,
+        "endLine": 175,
+        "endChar": 13
+      },
+      "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "749bc27c_72ad9835",
+        "filename": "avb/libavb/avb_vbmeta_image.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1076971
+      },
+      "writtenOn": "2016-08-03T20:05:46Z",
+      "side": 1,
+      "message": "We don\u0027t know which one it is. The caller of avb_vbmeta_image_verify() however can check if the key stored in the header matches whatever is embedded in e.g. the boot loader.",
+      "parentUuid": "14552639_3a381df6",
       "range": {
         "startLine": 174,
         "startChar": 52,
@@ -456,6 +882,30 @@
     },
     {
       "key": {
+        "uuid": "749bc27c_92a11c42",
+        "filename": "avb/libavb/avb_vbmeta_image.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1076971
+      },
+      "writtenOn": "2016-08-03T20:05:46Z",
+      "side": 1,
+      "message": "Right. Version 1 of this code also had a payload block. Fixing.",
+      "parentUuid": "74d3c2eb_52ada934",
+      "range": {
+        "startLine": 193,
+        "startChar": 51,
+        "endLine": 193,
+        "endChar": 58
+      },
+      "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3464ea09_878c50e1",
         "filename": "avb/libavb/avb_vbmeta_image.h",
         "patchSetId": 3
@@ -479,6 +929,30 @@
     },
     {
       "key": {
+        "uuid": "749bc27c_b29e20f9",
+        "filename": "avb/libavb/avb_vbmeta_image.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1076971
+      },
+      "writtenOn": "2016-08-03T20:05:46Z",
+      "side": 1,
+      "message": "Yes. I concede it\u0027s not very clear, I\u0027ll update it.",
+      "parentUuid": "3464ea09_878c50e1",
+      "range": {
+        "startLine": 209,
+        "startChar": 11,
+        "endLine": 209,
+        "endChar": 55
+      },
+      "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3464ea09_2791c4f3",
         "filename": "avb/libavb/avb_vbmeta_image.h",
         "patchSetId": 3
@@ -490,6 +964,24 @@
       "writtenOn": "2016-08-03T16:31:46Z",
       "side": 1,
       "message": "Should we add:\n  The read/write of the rollback_index in NVRAM is implemented in function read_rollback_index and write_rollback_index, respectively. \n  See avb_ops.h for details.",
+      "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "749bc27c_d29ba407",
+        "filename": "avb/libavb/avb_vbmeta_image.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1076971
+      },
+      "writtenOn": "2016-08-03T20:05:46Z",
+      "side": 1,
+      "message": "I would prefer not to. I like to think as this as a \"low-level\" function and that\u0027s why I\u0027m pointing to avb_slot_verify() below. Plumbing vs. porcelain, all that good stuff.",
+      "parentUuid": "3464ea09_2791c4f3",
       "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
