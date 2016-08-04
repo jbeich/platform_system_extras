@@ -49,6 +49,29 @@
     },
     {
       "key": {
+        "uuid": "3464ea09_7843e1ff",
+        "filename": "avb/libavb/avb_chain_partition_descriptor.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1079236
+      },
+      "writtenOn": "2016-08-04T00:46:08Z",
+      "side": 1,
+      "message": "\u0026src-\u003eparent_descriptor instead of a cast? Same for dest below.",
+      "range": {
+        "startLine": 26,
+        "startChar": 66,
+        "endLine": 26,
+        "endChar": 69
+      },
+      "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b477fabf_0ee7ffdc",
         "filename": "avb/libavb/avb_chain_partition_descriptor.c",
         "patchSetId": 3
@@ -89,6 +112,75 @@
         "startChar": 4,
         "endLine": 28,
         "endChar": 13
+      },
+      "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3464ea09_d8f46dc0",
+        "filename": "avb/libavb/avb_chain_partition_descriptor.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1079236
+      },
+      "writtenOn": "2016-08-04T00:46:08Z",
+      "side": 1,
+      "message": "Should the warnings here and below be errors since we\u0027re returning 0?",
+      "range": {
+        "startLine": 31,
+        "startChar": 4,
+        "endLine": 31,
+        "endChar": 15
+      },
+      "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3464ea09_b8fbb9ab",
+        "filename": "avb/libavb/avb_chain_partition_descriptor.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1079236
+      },
+      "writtenOn": "2016-08-04T00:46:08Z",
+      "side": 1,
+      "message": "%u? (here and throughout)",
+      "range": {
+        "startLine": 41,
+        "startChar": 51,
+        "endLine": 41,
+        "endChar": 53
+      },
+      "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3464ea09_fb8dab28",
+        "filename": "avb/libavb/avb_crypto.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1079236
+      },
+      "writtenOn": "2016-08-04T00:46:08Z",
+      "side": 1,
+      "message": "no validation? this can only be one of a few values, right?",
+      "range": {
+        "startLine": 26,
+        "startChar": 8,
+        "endLine": 26,
+        "endChar": 20
       },
       "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
@@ -143,6 +235,29 @@
     },
     {
       "key": {
+        "uuid": "3464ea09_1894253b",
+        "filename": "avb/libavb/avb_crypto.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1079236
+      },
+      "writtenOn": "2016-08-04T00:46:08Z",
+      "side": 1,
+      "message": "No longer in this header?",
+      "range": {
+        "startLine": 92,
+        "startChar": 41,
+        "endLine": 92,
+        "endChar": 45
+      },
+      "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "54d87e08_20bf7477",
         "filename": "avb/libavb/avb_crypto.h",
         "patchSetId": 3
@@ -183,6 +298,121 @@
         "startChar": 27,
         "endLine": 105,
         "endChar": 71
+      },
+      "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3464ea09_bb973333",
+        "filename": "avb/libavb/avb_crypto.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1079236
+      },
+      "writtenOn": "2016-08-04T00:46:08Z",
+      "side": 1,
+      "message": "Should there be an AvbAlgorithmType in here or is that metadata held elsewhere? Derived from key_num_bits?",
+      "range": {
+        "startLine": 113,
+        "startChar": 15,
+        "endLine": 113,
+        "endChar": 36
+      },
+      "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3464ea09_9b3fcf09",
+        "filename": "avb/libavb/avb_descriptor.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1079236
+      },
+      "writtenOn": "2016-08-04T00:46:08Z",
+      "side": 1,
+      "message": "s/warning/error in this file too? (and throughout CL)",
+      "range": {
+        "startLine": 27,
+        "startChar": 4,
+        "endLine": 27,
+        "endChar": 15
+      },
+      "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3464ea09_9be90f81",
+        "filename": "avb/libavb/avb_descriptor.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1079236
+      },
+      "writtenOn": "2016-08-04T00:46:08Z",
+      "side": 1,
+      "message": "This requirement is not documented in the header file.",
+      "range": {
+        "startLine": 65,
+        "startChar": 2,
+        "endLine": 65,
+        "endChar": 25
+      },
+      "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3464ea09_fec59907",
+        "filename": "avb/libavb/avb_descriptor.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1079236
+      },
+      "writtenOn": "2016-08-04T00:46:08Z",
+      "side": 1,
+      "message": "nit: consider more descriptive var names here\n\ndh -\u003e descriptor\nnb_* -\u003e num_bytes_*",
+      "range": {
+        "startLine": 81,
+        "startChar": 1,
+        "endLine": 85,
+        "endChar": 61
+      },
+      "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3464ea09_5b52976b",
+        "filename": "avb/libavb/avb_descriptor.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1079236
+      },
+      "writtenOn": "2016-08-04T00:46:08Z",
+      "side": 1,
+      "message": "nit: more descriptive variable names, please",
+      "range": {
+        "startLine": 117,
+        "startChar": 0,
+        "endLine": 118,
+        "endChar": 28
       },
       "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
@@ -237,6 +467,138 @@
     },
     {
       "key": {
+        "uuid": "3464ea09_7bfbdb7a",
+        "filename": "avb/libavb/avb_descriptor.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1079236
+      },
+      "writtenOn": "2016-08-04T00:46:08Z",
+      "side": 1,
+      "message": "Is there any concern about struct versioning within the vbmetaimage itself? Always assume consistency within an image version? Plan to create a new tag if needed? (E.g. AVB_DESCRIPTOR_TAG_HASH_V2).",
+      "range": {
+        "startLine": 54,
+        "startChar": 15,
+        "endLine": 54,
+        "endChar": 28
+      },
+      "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3464ea09_3bf56383",
+        "filename": "avb/libavb/avb_descriptor.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1079236
+      },
+      "writtenOn": "2016-08-04T00:46:08Z",
+      "side": 1,
+      "message": "why 64 bits for the tag? future plans? padding? (If padding, I\u0027d prefer it to be explicit e.g. uint8_t reserved[4]).",
+      "range": {
+        "startLine": 55,
+        "startChar": 11,
+        "endLine": 55,
+        "endChar": 14
+      },
+      "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "94dd9660_abeac9dd",
+        "filename": "avb/libavb/avb_hashtree_descriptor.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1079236
+      },
+      "writtenOn": "2016-08-04T00:46:08Z",
+      "side": 1,
+      "message": "Can we have stricter expectations about the length of these fields? For instance a hash likely has no business being larger than 64 bytes and same for salt. (Same for other descriptor types).",
+      "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "94dd9660_0bfc3da2",
+        "filename": "avb/libavb/avb_hashtree_descriptor.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1079236
+      },
+      "writtenOn": "2016-08-04T00:46:08Z",
+      "side": 1,
+      "message": "nit: Any reason for the inconsistency between the terms \u0027digest\u0027 (e.g. AvbHashDescriptor) and \u0027hash\u0027?",
+      "range": {
+        "startLine": 52,
+        "startChar": 16,
+        "endLine": 52,
+        "endChar": 20
+      },
+      "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "94dd9660_ae86570c",
+        "filename": "avb/libavb/avb_ops.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1079236
+      },
+      "writtenOn": "2016-08-04T00:46:08Z",
+      "side": 1,
+      "message": "style nit: out args after in args? Also s/buf/buffer throughout please.",
+      "range": {
+        "startLine": 77,
+        "startChar": 37,
+        "endLine": 77,
+        "endChar": 46
+      },
+      "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3406aa9f_482fdf3c",
+        "filename": "avb/libavb/avb_ops.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1079236
+      },
+      "writtenOn": "2016-08-04T00:46:08Z",
+      "side": 1,
+      "message": "nit: to",
+      "range": {
+        "startLine": 80,
+        "startChar": 43,
+        "endLine": 80,
+        "endChar": 47
+      },
+      "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "746e62eb_f56b6fec",
         "filename": "avb/libavb/avb_ops.h",
         "patchSetId": 3
@@ -277,6 +639,29 @@
         "startChar": 8,
         "endLine": 103,
         "endChar": 27
+      },
+      "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3414ead3_f881b1f7",
+        "filename": "avb/libavb/avb_ops.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1079236
+      },
+      "writtenOn": "2016-08-04T00:46:08Z",
+      "side": 1,
+      "message": "Is there any way to lock a rollback index so it cannot be tampered with beyond a certain point in the verified boot flow?",
+      "range": {
+        "startLine": 126,
+        "startChar": 8,
+        "endLine": 126,
+        "endChar": 28
       },
       "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
@@ -360,6 +745,178 @@
         "endLine": 133,
         "endChar": 24
       },
+      "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3414ead3_b8a25994",
+        "filename": "avb/libavb/avb_ops.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1079236
+      },
+      "writtenOn": "2016-08-04T00:46:08Z",
+      "side": 1,
+      "message": "Out of curiosity, why not get the raw 16 byte value and do the formatting as needed?",
+      "range": {
+        "startLine": 138,
+        "startChar": 17,
+        "endLine": 139,
+        "endChar": 15
+      },
+      "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3414ead3_582d3dfb",
+        "filename": "avb/libavb/avb_property_descriptor.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1079236
+      },
+      "writtenOn": "2016-08-04T00:46:08Z",
+      "side": 1,
+      "message": "nit: more descriptive please",
+      "range": {
+        "startLine": 64,
+        "startChar": 24,
+        "endLine": 64,
+        "endChar": 26
+      },
+      "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3414ead3_b8da59df",
+        "filename": "avb/libavb/avb_property_descriptor.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1079236
+      },
+      "writtenOn": "2016-08-04T00:46:08Z",
+      "side": 1,
+      "message": "Is it ok to ignore the value length? E.g. val\u003d\"123\\x00\\xFF\" val_len\u003d5. This function will return \u0027123\u0027 and will not trip on the 0x00 or 0xFF bytes. Maybe this is ok, but it could end up masking bugs. Also, should this behavior be documented?",
+      "range": {
+        "startLine": 125,
+        "startChar": 69,
+        "endLine": 125,
+        "endChar": 73
+      },
+      "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3414ead3_7845a14d",
+        "filename": "avb/libavb/avb_property_descriptor.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1079236
+      },
+      "writtenOn": "2016-08-04T00:46:08Z",
+      "side": 1,
+      "message": "optional: if you put \u0027base \u003d\u003d 16 \u0026\u0026 \u0027 into this and the next conditions you can do away with the switch statement.",
+      "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3414ead3_38af297c",
+        "filename": "avb/libavb/avb_property_descriptor.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1079236
+      },
+      "writtenOn": "2016-08-04T00:46:08Z",
+      "side": 1,
+      "message": "This is inconsistent with the layout of other descriptors. Why the null bytes? If the *_num_bytes fields need to be populated anyways it seems easy enough to work with without null terminators.",
+      "range": {
+        "startLine": 33,
+        "startChar": 3,
+        "endLine": 33,
+        "endChar": 25
+      },
+      "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3414ead3_984bd5b7",
+        "filename": "avb/libavb/avb_property_descriptor.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1079236
+      },
+      "writtenOn": "2016-08-04T00:46:08Z",
+      "side": 1,
+      "message": "For clarity, consider \"If |key_size| is 0, |key| must be NUL-terminated.\"",
+      "range": {
+        "startLine": 53,
+        "startChar": 33,
+        "endLine": 54,
+        "endChar": 30
+      },
+      "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3414ead3_3885e904",
+        "filename": "avb/libavb/avb_rsa.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1079236
+      },
+      "writtenOn": "2016-08-04T00:46:08Z",
+      "side": 1,
+      "message": "But this is Android\u0027s RSA verification code.",
+      "range": {
+        "startLine": 23,
+        "startChar": 41,
+        "endLine": 23,
+        "endChar": 72
+      },
+      "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3414ead3_5b91b740",
+        "filename": "avb/libavb/avb_rsa.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1079236
+      },
+      "writtenOn": "2016-08-04T00:46:08Z",
+      "side": 1,
+      "message": "I assume this code has been separately reviewed by a crypto expert? Same with hash implementations?",
       "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -460,6 +1017,23 @@
     },
     {
       "key": {
+        "uuid": "3414ead3_f870d176",
+        "filename": "avb/libavb/avb_rsa.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1079236
+      },
+      "writtenOn": "2016-08-04T00:46:08Z",
+      "side": 1,
+      "message": "This will give a timing oracle as to whether the signature was ok vs an unexpected hash. While I don\u0027t know of any related attack it would be easy to eliminate by taking the fully padded expected value as one input, not two (and doing a single safe_memcmp), or by always computing both safe_memcmp even if the first fails.\n\nIt would also be good to avoid returning success based on a single branch. E.g. compute the result as an accumulated XOR instead of using safe_memcmp.",
+      "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "14552639_9ad84947",
         "filename": "avb/libavb/avb_rsa.h",
         "patchSetId": 3
@@ -500,6 +1074,52 @@
         "startChar": 27,
         "endLine": 48,
         "endChar": 37
+      },
+      "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3414ead3_9b22ef0d",
+        "filename": "avb/libavb/avb_slot_verify.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1079236
+      },
+      "writtenOn": "2016-08-04T00:46:08Z",
+      "side": 1,
+      "message": "nit: This sentence could be more clear. \"AvbSlotVerifyData contains data needed to boot a particular slot.\" Or something...",
+      "range": {
+        "startLine": 47,
+        "startChar": 3,
+        "endLine": 47,
+        "endChar": 61
+      },
+      "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3414ead3_db514767",
+        "filename": "avb/libavb/avb_slot_verify.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1079236
+      },
+      "writtenOn": "2016-08-04T00:46:08Z",
+      "side": 1,
+      "message": "nit: remove \u0027and\u0027",
+      "range": {
+        "startLine": 104,
+        "startChar": 49,
+        "endLine": 104,
+        "endChar": 52
       },
       "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
