@@ -1,0 +1,14 @@
+
+/*
+ * It's the enum type needed by ufdt_apply_fragment().
+ */
+
+enum overlay_result {
+  OVERLAY_RESULT_OK,
+  OVERLAY_RESULT_MISSING_TARGET,
+  OVERLAY_RESULT_MISSING_OVERLAY,
+  OVERLAY_RESULT_TARGET_PATH_INVALID,
+  OVERLAY_RESULT_TARGET_INVALID,
+  OVERLAY_RESULT_MERGE_FAIL,
+};
+

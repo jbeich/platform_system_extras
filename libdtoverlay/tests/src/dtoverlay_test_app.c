@@ -2,6 +2,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 char *load_file(char *fname, size_t *pLen);
 
@@ -15,7 +16,7 @@ char *load_file(char *fname, size_t *pLen) {
   fseek(f, 0, SEEK_END);
   *pLen = ftell(f);
   fseek(f, 0, SEEK_SET);
-  char *buf = malloc(*pLen);
+  char *buf = dto_malloc(*pLen);
   if (fread(buf, *pLen, 1, f) != 1) {
     printf("Bad fread");
     exit(1);
@@ -36,12 +37,22 @@ int main(int argc, char **argv) {
   overlay_buf = load_file(argv[2], &overlay_len);
   if (!overlay_buf) return 1;
   blob = fdt_install_blob(base_buf, blob_len);
+
   if (!blob) {
     printf("fdt_install_blob returned null\n");
     exit(1);
   }
-  struct fdt_header *new_blob = apply_overlay(blob, blob_len, overlay_buf, overlay_len);
-  // Do not free(blob) - it's the same as base_buf.
+  clock_t start, end;
+  double cpu_time_used;
+  start = clock();
+  struct fdt_header *new_blob =
+      apply_overlay(blob, blob_len, overlay_buf, overlay_len);
+  end = clock();
+  cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
+
+  printf("apply_overlay took %.9f second\n", cpu_time_used);
+
+  // Do not dto_free(blob) - it's the same as base_buf.
 
   out_file = fopen(argv[3], "wb");
   if (fwrite(new_blob, 1, fdt_totalsize(new_blob), out_file) < 1) {
