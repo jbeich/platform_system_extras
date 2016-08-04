@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "54e6be5a_019e0a4d",
+        "filename": "avb/README",
+        "patchSetId": 3
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2016-08-04T10:55:02Z",
+      "side": 1,
+      "message": "Cool, thanks for the detailed explanation!\n\nI was confused about what does \"such input\" mean.\nLooks like they\u0027re parameters like --hash_algorithm, --partition_size, --algorithm, etc. And avbtool should guarantee the compatibility when the same cmd-line arguments are provided under the same MAJOR version.",
+      "parentUuid": "749bc27c_5275f4fa",
+      "range": {
+        "startLine": 131,
+        "startChar": 19,
+        "endLine": 131,
+        "endChar": 61
+      },
+      "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3464ea09_7843e1ff",
         "filename": "avb/libavb/avb_chain_partition_descriptor.c",
         "patchSetId": 3
@@ -107,6 +131,30 @@
       "side": 1,
       "message": "The idea is that this function (and many others like it), return a \"boolean\" and TRUE/FALSE.\n\nHowever for various practical reasons, I didn\u0027t want to use C99\u0027s \u0027bool\u0027 type and TRUE/FALSE since that might introduce compatibility issues for users of this library... thinking more about it now, it may make more sense to just use \u0027bool\u0027, TRUE, and FALSE and require/check in avb_sysdeps.h that they work. Thoughts?",
       "parentUuid": "b477fabf_0ee7ffdc",
+      "range": {
+        "startLine": 28,
+        "startChar": 4,
+        "endLine": 28,
+        "endChar": 13
+      },
+      "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "54e6be5a_e1504661",
+        "filename": "avb/libavb/avb_chain_partition_descriptor.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2016-08-04T10:55:02Z",
+      "side": 1,
+      "message": "Yup, I think it\u0027s ok to use bool, TRUE and FALSE for that.\n  \nI didn\u0027t notice this function intends to return true/false, because of its name.\nI\u0027m used to the following:\n\n if (avb_chain_partition_descriptor_validate_and_byteswap(...))\n   error handling.\n  \nOr if the function name changes to:\n if (!avb_chain_partition_descriptor_isvalid(...))\n   error handling.\n\nAnyway, this is just my personal preference so feel free to use your own style.",
+      "parentUuid": "749bc27c_f265084a",
       "range": {
         "startLine": 28,
         "startChar": 4,
@@ -704,6 +752,24 @@
     },
     {
       "key": {
+        "uuid": "54e6be5a_21434e9d",
+        "filename": "avb/libavb/avb_ops.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2016-08-04T10:55:02Z",
+      "side": 1,
+      "message": "Make sense, thanks for the excellent explanation.\n\nI conflated different contexts when adding the comment: bootloader, fs_mgr and boot_control HAL.",
+      "parentUuid": "749bc27c_52d6d4bd",
+      "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f48172c9_c7ba3e86",
         "filename": "avb/libavb/avb_ops.h",
         "patchSetId": 3
@@ -1005,6 +1071,30 @@
       "side": 1,
       "message": "This code is from Chromium which is from Android and I\u0027d rather not change it (makes security patching harder). I\u0027d also like to avoid the function call overhead of avb_be32toh(). I\u0027ll update the comment for s/little-endian order/host-byte order/.",
       "parentUuid": "14552639_776630c4",
+      "range": {
+        "startLine": 163,
+        "startChar": 0,
+        "endLine": 166,
+        "endChar": 62
+      },
+      "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "54e6be5a_613d560f",
+        "filename": "avb/libavb/avb_rsa.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2016-08-04T10:55:02Z",
+      "side": 1,
+      "message": "Sure, np!\n\nI wasn\u0027t aware this code is from Chromium (but noticed that avb_sha256.c or avb_sha512.c are from open source).\n\nBut I totally agree to reuse the same codes for security related operations.",
+      "parentUuid": "749bc27c_1287ecbd",
       "range": {
         "startLine": 163,
         "startChar": 0,
@@ -1456,6 +1546,30 @@
     },
     {
       "key": {
+        "uuid": "54e6be5a_c1b4229c",
+        "filename": "avb/libavb/avb_vbmeta_image.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2016-08-04T10:55:02Z",
+      "side": 1,
+      "message": "OK, makes sense!",
+      "parentUuid": "749bc27c_72ad9835",
+      "range": {
+        "startLine": 174,
+        "startChar": 52,
+        "endLine": 175,
+        "endChar": 13
+      },
+      "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "74d3c2eb_52ada934",
         "filename": "avb/libavb/avb_vbmeta_image.h",
         "patchSetId": 3
@@ -1602,6 +1716,24 @@
       "side": 1,
       "message": "I would prefer not to. I like to think as this as a \"low-level\" function and that\u0027s why I\u0027m pointing to avb_slot_verify() below. Plumbing vs. porcelain, all that good stuff.",
       "parentUuid": "3464ea09_2791c4f3",
+      "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "54e6be5a_a1b91e94",
+        "filename": "avb/libavb/avb_vbmeta_image.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2016-08-04T10:55:02Z",
+      "side": 1,
+      "message": "OK, sounds good!",
+      "parentUuid": "749bc27c_d29ba407",
       "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
