@@ -1,0 +1,146 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "946cb6b9_3311c8a9",
+        "filename": "avb/libavb/avb_slot_verify.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 622,
+      "author": {
+        "id": 1079236
+      },
+      "writtenOn": "2016-08-04T22:41:18Z",
+      "side": 1,
+      "message": "nit: please document literals\n\nex: 0 /* rollback_index */",
+      "revId": "994c729c2ad8357b36df147f58c786f0974cc28c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "946cb6b9_d3741402",
+        "filename": "avb/libavb/avb_slot_verify.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 624,
+      "author": {
+        "id": 1079236
+      },
+      "writtenOn": "2016-08-04T22:41:18Z",
+      "side": 1,
+      "message": "nit: consistency with comment style (// vs /**/). At least within file and preferably for entire repo.",
+      "revId": "994c729c2ad8357b36df147f58c786f0974cc28c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "946cb6b9_936b7c8d",
+        "filename": "avb/libavb/avb_sysdeps.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1079236
+      },
+      "writtenOn": "2016-08-04T22:41:18Z",
+      "side": 1,
+      "message": "Call this avb_fatal and s/avb_warning/avb_error?",
+      "range": {
+        "startLine": 138,
+        "startChar": 8,
+        "endLine": 138,
+        "endChar": 17
+      },
+      "revId": "994c729c2ad8357b36df147f58c786f0974cc28c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "946cb6b9_130becd6",
+        "filename": "avb/libavb/avb_sysdeps_posix.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1079236
+      },
+      "writtenOn": "2016-08-04T22:41:18Z",
+      "side": 1,
+      "message": "Looks like ordinary C, maybe this shouldn\u0027t be in sysdeps?",
+      "revId": "994c729c2ad8357b36df147f58c786f0974cc28c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "946cb6b9_531564ea",
+        "filename": "avb/libavb/avb_sysdeps_posix.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1079236
+      },
+      "writtenOn": "2016-08-04T22:41:18Z",
+      "side": 1,
+      "message": "Ignore earlier comment, didn\u0027t realize safe_memcmp already did this.",
+      "revId": "994c729c2ad8357b36df147f58c786f0974cc28c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "946cb6b9_532c8446",
+        "filename": "avb/libavb/avb_util.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1079236
+      },
+      "writtenOn": "2016-08-04T22:41:18Z",
+      "side": 1,
+      "message": "not used?",
+      "revId": "994c729c2ad8357b36df147f58c786f0974cc28c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "946cb6b9_36c0d626",
+        "filename": "avb/libavb/avb_vbmeta_image.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1079236
+      },
+      "writtenOn": "2016-08-04T22:41:18Z",
+      "side": 1,
+      "message": "This padding can be easily constructed minus the encoded hash id. Why have all it all static?",
+      "revId": "994c729c2ad8357b36df147f58c786f0974cc28c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "946cb6b9_b66f862f",
+        "filename": "avb/test/avb_slot_verify_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1079236
+      },
+      "writtenOn": "2016-08-04T22:41:18Z",
+      "side": 1,
+      "message": "Would be great to have fuzz tests too.",
+      "revId": "994c729c2ad8357b36df147f58c786f0974cc28c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
