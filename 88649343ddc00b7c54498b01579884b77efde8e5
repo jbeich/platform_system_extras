@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3414ead3_cc3c2f7a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1083168
+      },
+      "writtenOn": "2016-08-04T19:16:10Z",
+      "side": 1,
+      "message": "Keep commit lines below 100 characters. Easier to read in Gerrit :)",
+      "revId": "88649343ddc00b7c54498b01579884b77efde8e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
