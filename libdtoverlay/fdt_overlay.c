@@ -29,22 +29,6 @@
 
 #include "fdt_overlay.h"
 
-// CJP #include <stand.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <errno.h>
-
-
-// CJP from BSD/sys/boot/common/commands.c
-char *command_errmsg;
-char command_errbuf[256];
-#ifdef DEBUG
-#define debugf(fmt, args...) do { printf("%s(): ", __func__);   \
-    printf(fmt,##args); } while (0)
-#else
-#define debugf(fmt, args...)
-#endif
-
 /*
  * Get max phandle
  */
@@ -78,53 +62,55 @@ fdt_get_fixup_location(void *fdtp, const char *fixup)
   int prop_offset, o, proplen;
   void *prop_w;
 
-  // TODO: Keep track of substring lengths so we don't have to malloc
-  // a copy and split it up.
-  path = strdup(fixup);
-  prop = strchr(path, ':');
+  /*
+   * TODO: Keep track of substring lengths so we don't have to dto_malloc
+   * a copy and split it up.
+  */
+  path = dto_strdup(fixup);
+  prop = dto_strchr(path, ':');
   if (prop == NULL) {
-    printf("missing property part in \"%s\"\n", path);
-    free(path);
+    dto_error("missing property part in \"%s\"\n", path);
+    dto_free(path);
     return NULL;
   }
 
   *prop = 0;
   prop++;
 
-  offsetp = strchr(prop, ':');
+  offsetp = dto_strchr(prop, ':');
   if (offsetp == NULL) {
-    printf("missing offset part in \"%s\"\n", path);
-    free(path);
+    dto_error("missing offset part in \"%s\"\n", path);
+    dto_free(path);
     return NULL;
   }
 
   *offsetp = 0;
   offsetp++;
 
-  prop_offset = strtoul(offsetp, &endp, 10);
+  prop_offset = dto_strtoul(offsetp, &endp, 10);
   if (*endp != '\0') {
-    printf("\"%s\" is not valid number\n", offsetp);
-    free(path);
+    dto_error("\"%s\" is not valid number\n", offsetp);
+    dto_free(path);
     return NULL;
   }
 
   o = fdt_path_offset(fdtp, path);
   if (o < 0) {
-    printf("path \"%s\" not found\n", path);
-    free(path);
+    dto_error("path \"%s\" not found\n", path);
+    dto_free(path);
     return NULL;
   }
 
   prop_w = fdt_getprop_w(fdtp, o, prop, &proplen);
   if (prop_w == NULL){
-    printf("property \"%s\" not found in  \"%s\" node\n", prop, path);
-    free(path);
+    dto_error("property \"%s\" not found in  \"%s\" node\n", prop, path);
+    dto_free(path);
     return NULL;
   }
 
   if (proplen < prop_offset + (int)sizeof(uint32_t)) {
-    printf("%s: property length is too small for fixup\n", path);
-    free(path);
+    dto_error("%s: property length is too small for fixup\n", path);
+    dto_free(path);
     return NULL;
   }
 
@@ -149,11 +135,11 @@ fdt_do_one_fixup(void *fdtp, const char *fixups, int fixups_len, int phandle)
   while (fixups_len > 0) {
     fixup_pos = fdt_get_fixup_location(fdtp, fixups);
     if (fixup_pos != NULL) {
-      memcpy(fixup_pos, &val, sizeof(val));
+      dto_memcpy(fixup_pos, &val, sizeof(val));
     }
 
-    fixups_len -= strlen(fixups) + 1;
-    fixups += strlen(fixups) + 1;
+    fixups_len -= dto_strlen(fixups) + 1;
+    fixups += dto_strlen(fixups) + 1;
   }
 
   return 0;
@@ -167,9 +153,9 @@ fdt_increase_u32(void *pos, uint32_t offset)
 {
   uint32_t val;
 
-  memcpy(&val, pos,  sizeof(val));
+  dto_memcpy(&val, pos,  sizeof(val));
   val = cpu_to_fdt32(fdt32_to_cpu(val) + offset);
-  memcpy(pos, &val, sizeof(val));
+  dto_memcpy(pos, &val, sizeof(val));
 }
 
 /*
@@ -239,7 +225,7 @@ fdt_overlay_node(void *main_fdtp, int target_o, void *overlay_fdtp, int overlay_
       /* create new subnode and run merge recursively */
       target_subnode_o = fdt_add_subnode(main_fdtp, target_o, name);
       if (target_subnode_o < 0) {
-        printf("failed to create subnode \"%s\": %d\n",
+        dto_error("failed to create subnode \"%s\": %d\n",
                name, target_subnode_o);
         return;
       }
@@ -264,11 +250,11 @@ fdt_apply_fragment(void *main_fdtp, void *overlay_fdtp, int fragment_o)
   target_node_o = -1;
   val = fdt_getprop(overlay_fdtp, fragment_o, "target", NULL);
   if (val) {
-    memcpy(&target, val, sizeof(target));
+    dto_memcpy(&target, val, sizeof(target));
     target = fdt32_to_cpu(target);
     target_node_o = fdt_node_offset_by_phandle(main_fdtp, target);
     if (target_node_o < 0) {
-      printf("failed to find target %04x\n", target);
+      dto_error("failed to find target %04x\n", target);
       return;
     }
   }
@@ -281,7 +267,7 @@ fdt_apply_fragment(void *main_fdtp, void *overlay_fdtp, int fragment_o)
 
     target_node_o = fdt_path_offset(main_fdtp, target_path);
     if (target_node_o < 0) {
-      printf("failed to find target-path %s\n", target_path);
+      dto_error("failed to find target-path %s\n", target_path);
       return;
     }
   }
@@ -292,7 +278,7 @@ fdt_apply_fragment(void *main_fdtp, void *overlay_fdtp, int fragment_o)
 
   overlay_node_o = fdt_subnode_offset(overlay_fdtp, fragment_o, "__overlay__");
   if (overlay_node_o < 0) {
-    printf("missing __overlay__ sub-node\n");
+    dto_error("missing __overlay__ sub-node\n");
     return;
   }
 
@@ -316,11 +302,11 @@ fdt_overlay_do_fixups(void *main_fdtp, void *overlay_fdtp)
   overlay_fixups_o = fdt_path_offset(overlay_fdtp, "/__fixups__");
 
   if (main_symbols_o < 0) {
-    printf("Bad main_symbols in fodf\n");
+    dto_error("Bad main_symbols in fodf\n");
     return -1;
   }
   if (overlay_fixups_o < 0) {
-    printf("Bad overlay_fixups in fodf\n");
+    dto_error("Bad overlay_fixups in fodf\n");
     return -1;
   }
 
@@ -330,17 +316,17 @@ fdt_overlay_do_fixups(void *main_fdtp, void *overlay_fdtp)
     fixups = fdt_getprop_by_offset(overlay_fdtp, fixup_prop_o, &name, &len);
     symbol_path = fdt_getprop(main_fdtp, main_symbols_o, name, NULL);
     if (symbol_path == NULL) {
-      printf("couldn't find \"%s\" symbol in main dtb\n", name);
+      dto_error("couldn't find \"%s\" symbol in main dtb\n", name);
       return -1;
     }
     symbol_o = fdt_path_offset(main_fdtp, symbol_path);
     if (symbol_o < 0) {
-      printf("couldn't find \"%s\" path in main dtb\n", symbol_path);
+      dto_error("couldn't find \"%s\" path in main dtb\n", symbol_path);
       return -1;
     }
     phandle = fdt_get_phandle(main_fdtp, symbol_o);
     if (fdt_do_one_fixup(overlay_fdtp, fixups, len, phandle) < 0) {
-      printf("Failed one fixup in fodf\n");
+      dto_error("Failed one fixup in fodf\n");
       return -1;
     }
   }
@@ -367,7 +353,7 @@ fdt_local_fixup_node(void *fdtp, int target_o, int local_fixups_o, uint32_t phan
 
     target_prop = fdt_getprop_w(fdtp, target_o, name, &lenp);
     if(!target_prop) {
-      printf("failed when flfn tries to find preperty \"%s\"\n", name);
+      dto_error("failed when flfn tries to find preperty \"%s\"\n", name);
       return -1;
     }
 
@@ -388,7 +374,7 @@ fdt_local_fixup_node(void *fdtp, int target_o, int local_fixups_o, uint32_t phan
     target_subnode_o = fdt_subnode_offset(fdtp, target_o, name);
 
     if (target_subnode_o < 0) {
-      printf("failed to find subnode in flfn \"%s\": %d\n",
+      dto_error("failed to find subnode in flfn \"%s\": %d\n",
              name, target_subnode_o);
       return -1;
     }
@@ -436,7 +422,7 @@ fdt_overlay_do_local_fixups(void *main_fdtp, void *overlay_fdtp)
   err = fdt_local_fixup_node(overlay_fdtp, overlay_root_o, overlay_local_fixups_o,
                              phandle_offset);
   if( err < 0 ) {
-    printf("Failed local fixup in fodlf\n");
+    dto_error("Failed local fixup in fodlf\n");
     return -1;
   }
   return 0;
@@ -480,75 +466,39 @@ static int
 fdt_overlay_apply(void *main_fdtp, void *overlay_fdtp, size_t overlay_length)
 {
   if (overlay_length < sizeof(struct fdt_header)) {
-    printf("Overlay_length %zu smaller than header size %zu\n",
+    dto_error("Overlay_length %zu smaller than header size %zu\n",
            overlay_length, sizeof(struct fdt_header));
     return -1;
   }
 
   if(fdt_overlay_update_phandles(main_fdtp, overlay_fdtp) < 0) {
-    printf("failed to update phandles in overlay\n");
+    dto_error("failed to update phandles in overlay\n");
     return -1;
   }
 
   if (fdt_overlay_do_fixups(main_fdtp, overlay_fdtp) < 0) {
-    printf("failed to perform fixups in overlay\n");
+    dto_error("failed to perform fixups in overlay\n");
     return -1;
   }
 
   if (fdt_overlay_do_local_fixups(main_fdtp, overlay_fdtp) < 0) {
-    printf("failed to perform local fixups in overlay\n");
+    dto_error("failed to perform local fixups in overlay\n");
     return -1;
   }
 
   if (fdt_overlay_apply_fragments(main_fdtp, overlay_fdtp) < 0) {
-    printf("failed to apply fragments\n");
+    dto_error("failed to apply fragments\n");
     return -1;
   }
 
   return 0;
 }
 
-
-// From fdt_loader_cmd.c
-
-struct fdt_header *
-fdt_install_blob(void *blob, size_t blob_size)
-{
-  struct fdt_header *pHeader;
-  int err;
-  struct fdt_header *fdtp = NULL;
-  size_t fdtp_size = 0;
-
-  debugf("fdt_load_dtb(0x%08jx)\n", (uintmax_t)blob);
-
-  if (blob_size < sizeof(struct fdt_header)) {
-    printf("Blob_size %zu smaller than header size %zu\n",
-           blob_size, sizeof(struct fdt_header));
-    return NULL;
-  }
-
-  pHeader = (struct fdt_header *)blob;
-  err = fdt_check_header(pHeader);
-  if (err < 0) {
-    if (err == -FDT_ERR_BADVERSION) {
-      sprintf(command_errbuf,
-              "incompatible blob version: %d, should be: %d",
-              fdt_version(fdtp), FDT_LAST_SUPPORTED_VERSION);
-
-    } else {
-      sprintf(command_errbuf, "error validating blob: %s",
-              fdt_strerror(err));
-    }
-    return NULL;
-  }
-
-  return pHeader;
-}
-
-
-// From Google, based on fdt_overlay_apply() logic
-// Will malloc a new fdt blob and return it. Will not free parameters.
-struct fdt_header *apply_overlay(struct fdt_header *fdtp, size_t fdt_size, void *overlay, size_t overlay_size)
+/*
+ * From Google, based on fdt_overlay_apply() logic
+ * Will dto_malloc a new fdt blob and return it. Will not dto_free parameters.
+ */
+struct fdt_header *apply_overlay_libfdt(struct fdt_header *fdtp, size_t fdt_size, void *overlay_fdtp, size_t overlay_size)
 {
   size_t new_fdtp_size;
   int rv;
@@ -557,32 +507,31 @@ struct fdt_header *apply_overlay(struct fdt_header *fdtp, size_t fdt_size, void 
     return NULL;
   }
 
-  if (overlay_size < 8 || overlay_size != fdt_totalsize(overlay)) {
-    printf("Bad overlay size!\n");
-    errno = EINVAL;
+  if (overlay_size < 8 || overlay_size != fdt_totalsize(overlay_fdtp)) {
+    dto_error("Bad overlay size!\n");
     return NULL;
   }
   if (fdt_size < 8 || fdt_size != fdt_totalsize(fdtp)) {
-    printf("Bad fdt size!\n");
-    errno = EINVAL;
+    dto_error("Bad fdt size!\n");
     return NULL;
   }
 
   new_fdtp_size = fdt_totalsize(fdtp) + overlay_size;
   /* It's actually more than enough */
-  struct fdt_header *new_fdtp = malloc(new_fdtp_size);
+  struct fdt_header *new_fdtp = dto_malloc(new_fdtp_size);
 
   if (new_fdtp == NULL) {
-    printf("failed to allocate memory for DTB blob with overlays\n");
+    dto_error("failed to allocate memory for DTB blob with overlays\n");
     return NULL;
   }
 
   rv = fdt_open_into(fdtp, new_fdtp, new_fdtp_size);
   if (rv != 0) {
-    printf("failed to open DTB blob for applying overlays\n");
+    dto_error("failed to open DTB blob for applying overlays\n");
     return NULL;
   }
 
-  fdt_overlay_apply(new_fdtp, overlay, overlay_size);
+  fdt_overlay_apply(new_fdtp, overlay_fdtp, overlay_size);
   return new_fdtp;
 }
+
