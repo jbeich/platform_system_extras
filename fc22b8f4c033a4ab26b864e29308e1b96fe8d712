@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d97e679c_7e1d05c8",
+        "filename": "simpleperf/record_file_writer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2016-08-05T20:54:28Z",
+      "side": 1,
+      "message": "interesting. maybe we should move TemporaryFile (and TemporaryDirectory?) into their own header, since they are potentially useful outside of tests...\n\n(adb and fastboot could both use this, and maybe we should be using GetTempPathW for Windows rather than GetTempPathA --- amusing that we currently have one call to each of GetTempPath, GetTempPathA, and GetTempPathW in system/core...)",
+      "revId": "fc22b8f4c033a4ab26b864e29308e1b96fe8d712",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
