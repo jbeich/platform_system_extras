@@ -16,6 +16,24 @@
       "revId": "85d7350ee22cb7909455efc4e45dafae55c62bc1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d97e679c_fbb8472a",
+        "filename": "simpleperf/cmd_record_test.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-08-05T20:21:26Z",
+      "side": 1,
+      "message": "The goal for --cpu option is to fix profiling on a subset of cpus. Using --cpu option is fundamentally racy as the selected cpus can be offlined between typing the command and opening the perf event files. I think having --cpu pick a cpu for us lose the meaning of --cpu option. So I\u0027d rather remove the test in cts test.",
+      "parentUuid": "d97e679c_bbf5ef21",
+      "revId": "85d7350ee22cb7909455efc4e45dafae55c62bc1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
