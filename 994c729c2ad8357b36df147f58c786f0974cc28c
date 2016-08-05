@@ -371,6 +371,29 @@
       "revId": "994c729c2ad8357b36df147f58c786f0974cc28c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "59d8b708_f18ce82c",
+        "filename": "avb/test/avb_slot_verify_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2016-08-05T14:03:44Z",
+      "side": 1,
+      "message": "This is a bit tricky, took me some time to figure it out with the MyAvbOps struct. Is it possible or make sense to use C++ inheritance, e.g., class MyOps: AvbOps { ... }; ?",
+      "range": {
+        "startLine": 44,
+        "startChar": 2,
+        "endLine": 44,
+        "endChar": 49
+      },
+      "revId": "994c729c2ad8357b36df147f58c786f0974cc28c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
