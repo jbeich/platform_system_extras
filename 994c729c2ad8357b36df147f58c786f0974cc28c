@@ -2,6 +2,213 @@
   "comments": [
     {
       "key": {
+        "uuid": "d922e799_f58f181f",
+        "filename": "avb/libavb/avb_slot_verify.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2016-08-05T13:55:49Z",
+      "side": 1,
+      "message": "nit, maybe document here?\n   0 /* offset */,",
+      "range": {
+        "startLine": 80,
+        "startChar": 63,
+        "endLine": 80,
+        "endChar": 65
+      },
+      "revId": "994c729c2ad8357b36df147f58c786f0974cc28c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f9532b25_26869610",
+        "filename": "avb/libavb/avb_slot_verify.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2016-08-05T13:55:49Z",
+      "side": 1,
+      "message": "Looks like it only allow one expected public key per partition.\n\nIf there are 2+ AvbChainPartitionDescriptors for the same partition (e.g., (/system): with two different public keys.\n\none of them will return AVB_SLOT_VERIFY_RESULT_ERROR_PUBLIC_KEY_REJECTED, right?\n  \nJust double confirm so I could document this in the external shared doc.",
+      "range": {
+        "startLine": 151,
+        "startChar": 19,
+        "endLine": 151,
+        "endChar": 38
+      },
+      "revId": "994c729c2ad8357b36df147f58c786f0974cc28c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d922e799_d58c1c2d",
+        "filename": "avb/libavb/avb_slot_verify.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2016-08-05T13:55:49Z",
+      "side": 1,
+      "message": "Why not: char part_name[PART_NAME_MAX_SIZE]? Just for consistency in this file.",
+      "range": {
+        "startLine": 153,
+        "startChar": 2,
+        "endLine": 153,
+        "endChar": 32
+      },
+      "revId": "994c729c2ad8357b36df147f58c786f0974cc28c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f9532b25_468192f6",
+        "filename": "avb/libavb/avb_slot_verify.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2016-08-05T13:55:49Z",
+      "side": 1,
+      "message": "why this allow \u0027\u003c\u0027 ?",
+      "range": {
+        "startLine": 250,
+        "startChar": 29,
+        "endLine": 250,
+        "endChar": 31
+      },
+      "revId": "994c729c2ad8357b36df147f58c786f0974cc28c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f9532b25_e68f5e1f",
+        "filename": "avb/libavb/avb_slot_verify.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2016-08-05T13:55:49Z",
+      "side": 1,
+      "message": "Should we error out if (!is_main_vbmeta \u0026\u0026 !expected_public_key)",
+      "range": {
+        "startLine": 265,
+        "startChar": 6,
+        "endLine": 265,
+        "endChar": 25
+      },
+      "revId": "994c729c2ad8357b36df147f58c786f0974cc28c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f9532b25_c68c622d",
+        "filename": "avb/libavb/avb_slot_verify.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2016-08-05T13:55:49Z",
+      "side": 1,
+      "message": "Should this be\n  else if (is_main_vbmeta) {",
+      "range": {
+        "startLine": 275,
+        "startChar": 4,
+        "endLine": 275,
+        "endChar": 10
+      },
+      "revId": "994c729c2ad8357b36df147f58c786f0974cc28c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f9532b25_a6996669",
+        "filename": "avb/libavb/avb_slot_verify.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2016-08-05T13:55:49Z",
+      "side": 1,
+      "message": "How about restructure the if-else block to\n  \n  if (expected_public_key !\u003d NULL) {\n    ...\n  } else if (is_main_vbmeta) {\n     if (!ops-\u003evalidate_vbmeta_public_key(ops, pk_data, pk_len)) \n       ...\n  } else {\n     ERROR out: not provide expected_public_key\n  }\n  \n Or maybe we should consider enforce bootloader to always provide the expected_public_key to verify /vbmeta. So we don\u0027t have to define ops-\u003e validate_vbmeta_public_key().\n  \n  Thus, the code can be simplified to:\n    if (expected_public_key !\u003d NULL) {\n  } else {\n    ERROR out: not provide expected_public_key\n  }\n\n　Or ops-\u003evalidate_vbmeta_public_key() is to allow bootloader embed multiple public keys to find a matched one? If so, let\u0027s keep it.",
+      "range": {
+        "startLine": 264,
+        "startChar": 0,
+        "endLine": 282,
+        "endChar": 3
+      },
+      "revId": "994c729c2ad8357b36df147f58c786f0974cc28c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f9532b25_e6c19e2d",
+        "filename": "avb/libavb/avb_slot_verify.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2016-08-05T13:55:49Z",
+      "side": 1,
+      "message": "nit (alignment): add one leading space?",
+      "range": {
+        "startLine": 364,
+        "startChar": 31,
+        "endLine": 364,
+        "endChar": 66
+      },
+      "revId": "994c729c2ad8357b36df147f58c786f0974cc28c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f9532b25_a6cba649",
+        "filename": "avb/libavb/avb_slot_verify.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2016-08-05T13:55:49Z",
+      "side": 1,
+      "message": "add one more leading space?",
+      "range": {
+        "startLine": 391,
+        "startChar": 25,
+        "endLine": 391,
+        "endChar": 60
+      },
+      "revId": "994c729c2ad8357b36df147f58c786f0974cc28c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "946cb6b9_3311c8a9",
         "filename": "avb/libavb/avb_slot_verify.c",
         "patchSetId": 4
@@ -30,6 +237,29 @@
       "writtenOn": "2016-08-04T22:41:18Z",
       "side": 1,
       "message": "nit: consistency with comment style (// vs /**/). At least within file and preferably for entire repo.",
+      "revId": "994c729c2ad8357b36df147f58c786f0974cc28c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "946cb6b9_7cd06dc3",
+        "filename": "avb/libavb/avb_slot_verify.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 669,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2016-08-05T13:55:49Z",
+      "side": 1,
+      "message": "Is it ok to hard code sha256 here (how about sha512?)\nShould we check /vbmeta-\u003ealgorithm_type then decide it should be sha256 or sha512?",
+      "range": {
+        "startLine": 659,
+        "startChar": 3,
+        "endLine": 669,
+        "endChar": 45
+      },
       "revId": "994c729c2ad8357b36df147f58c786f0974cc28c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
