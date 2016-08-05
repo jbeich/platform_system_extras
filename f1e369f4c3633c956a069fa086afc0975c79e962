@@ -802,6 +802,30 @@
     },
     {
       "key": {
+        "uuid": "d97e679c_5eb28900",
+        "filename": "avb/libavb/avb_descriptor.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1079236
+      },
+      "writtenOn": "2016-08-05T22:05:07Z",
+      "side": 1,
+      "message": "sgtm",
+      "parentUuid": "5904374d_11270cd2",
+      "range": {
+        "startLine": 54,
+        "startChar": 15,
+        "endLine": 54,
+        "endChar": 28
+      },
+      "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3464ea09_3bf56383",
         "filename": "avb/libavb/avb_descriptor.h",
         "patchSetId": 3
@@ -837,6 +861,30 @@
       "side": 1,
       "message": "Mostly so we end up with 16 bytes.\n\nThe thinking was this: I definitely wanted |num_bytes_following| to be 64-bit because we might actually want to stash payloads in a vbmeta struct and those could easily exceed 4 GiB in a not-so-far-fetched star-trek future.\n\nI loathe adding reserved bytes because then it looks like an intent to add future features to the descriptor struct which is in conflict with the nice-and-simple \"just add a HASH_V2 descriptor if you need changes\" versioning-approach.\n\nAt the same time I do understand your concern that 64-bit space for descriptor identifiers is overkill...\n\nThoughts?",
       "parentUuid": "3464ea09_3bf56383",
+      "range": {
+        "startLine": 55,
+        "startChar": 11,
+        "endLine": 55,
+        "endChar": 14
+      },
+      "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d97e679c_9ed6e118",
+        "filename": "avb/libavb/avb_descriptor.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1079236
+      },
+      "writtenOn": "2016-08-05T22:05:07Z",
+      "side": 1,
+      "message": "sgtm",
+      "parentUuid": "5904374d_51319406",
       "range": {
         "startLine": 55,
         "startChar": 11,
@@ -1718,6 +1766,24 @@
       "side": 1,
       "message": "Ah, OK, that\u0027s what you meant with in the other comment on safe_memcmp. So I\u0027ll disregard this since I believe we\u0027re good.",
       "parentUuid": "3414ead3_f870d176",
+      "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d97e679c_1ec3b160",
+        "filename": "avb/libavb/avb_rsa.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1079236
+      },
+      "writtenOn": "2016-08-05T22:05:07Z",
+      "side": 1,
+      "message": "The timing oracle still exists, but if this is the way chromiumos does it then not diverging may be more important.",
+      "parentUuid": "5904374d_b151e00c",
       "revId": "f1e369f4c3633c956a069fa086afc0975c79e962",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
