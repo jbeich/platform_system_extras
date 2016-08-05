@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "5904374d_d10bc477",
+        "filename": "avb/libavb/avb_slot_verify.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1076971
+      },
+      "writtenOn": "2016-08-05T19:00:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d922e799_f58f181f",
+      "range": {
+        "startLine": 80,
+        "startChar": 63,
+        "endLine": 80,
+        "endChar": 65
+      },
+      "revId": "994c729c2ad8357b36df147f58c786f0974cc28c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f9532b25_26869610",
         "filename": "avb/libavb/avb_slot_verify.c",
         "patchSetId": 4
@@ -36,6 +60,30 @@
       "writtenOn": "2016-08-05T13:55:49Z",
       "side": 1,
       "message": "Looks like it only allow one expected public key per partition.\n\nIf there are 2+ AvbChainPartitionDescriptors for the same partition (e.g., (/system): with two different public keys.\n\none of them will return AVB_SLOT_VERIFY_RESULT_ERROR_PUBLIC_KEY_REJECTED, right?\n  \nJust double confirm so I could document this in the external shared doc.",
+      "range": {
+        "startLine": 151,
+        "startChar": 19,
+        "endLine": 151,
+        "endChar": 38
+      },
+      "revId": "994c729c2ad8357b36df147f58c786f0974cc28c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5904374d_316a1021",
+        "filename": "avb/libavb/avb_slot_verify.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1076971
+      },
+      "writtenOn": "2016-08-05T19:00:30Z",
+      "side": 1,
+      "message": "Correct, I think my original \"changes in verified boot for for brillo 2.0\" said that the chained partition descriptor would contain an array of acceptable keys.\n\nWhen I implemented it, I changed it such that this descriptor can only hold a single public key. The main reason was to avoid complexity (both in libavb but also for the user-interface of avbtool) and the fact that I could not think of a single valid use-case for when you\u0027d use more than one public key.\n\nI originally had multiple public keys as a mechanism for key transitions but in an A/B world you don\u0027t need this since you can atomically update both vbmeta and the partition in question.\n\nIn fact, since the chained partition thing is used to delegate ownership of a partition to another entity, it would be somewhat of a liability to even support multiple public keys.\n\nSo, yeah, if you can the doc with this I\u0027d appreciate it - thanks!",
+      "parentUuid": "f9532b25_26869610",
       "range": {
         "startLine": 151,
         "startChar": 19,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "5904374d_11e26ca0",
+        "filename": "avb/libavb/avb_slot_verify.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1076971
+      },
+      "writtenOn": "2016-08-05T19:00:30Z",
+      "side": 1,
+      "message": "Yeah. Fixing.",
+      "parentUuid": "d922e799_d58c1c2d",
+      "range": {
+        "startLine": 153,
+        "startChar": 2,
+        "endLine": 153,
+        "endChar": 32
+      },
+      "revId": "994c729c2ad8357b36df147f58c786f0974cc28c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f9532b25_468192f6",
         "filename": "avb/libavb/avb_slot_verify.c",
         "patchSetId": 4
@@ -82,6 +154,30 @@
       "writtenOn": "2016-08-05T13:55:49Z",
       "side": 1,
       "message": "why this allow \u0027\u003c\u0027 ?",
+      "range": {
+        "startLine": 250,
+        "startChar": 29,
+        "endLine": 250,
+        "endChar": 31
+      },
+      "revId": "994c729c2ad8357b36df147f58c786f0974cc28c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5904374d_71749801",
+        "filename": "avb/libavb/avb_slot_verify.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1076971
+      },
+      "writtenOn": "2016-08-05T19:00:30Z",
+      "side": 1,
+      "message": "That\u0027s for the case where |is_main_vbmeta| is TRUE. In this case we try to read 64 KiB from the \u0027vbmeta{_a,_b}\u0027 partition (e.g. |vbmeta_offset| is 0 and |vbmeta_size| is 64 KiB. The partition may not be that big so the read may be partial, e.g. |vbmeta_num_read| \u003c |vbmeta_size|. In our test setup this happens since the \u0027partition\u0027 is the vbmeta.img file which is definitely smaller than 64 KiB.",
+      "parentUuid": "f9532b25_468192f6",
       "range": {
         "startLine": 250,
         "startChar": 29,
@@ -163,6 +259,30 @@
     },
     {
       "key": {
+        "uuid": "5904374d_1158ac87",
+        "filename": "avb/libavb/avb_slot_verify.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1076971
+      },
+      "writtenOn": "2016-08-05T19:00:30Z",
+      "side": 1,
+      "message": "The reason for having ops-\u003evalidate_vbmeta_public_key() and not just have the bootloader pass a public key is to allow the boot loader to accept multiple keys.\n\nFor example in Brillo we envision being able to set a \"developer-key\" via fastboot (after suitable security checks) and in this case the bootloader would check both the embedded public key and this \"developer-key\". This feature is useful for automated testing.\n\nSo since we want to keep ops-\u003evalidate_vbmeta_public_key() the latter restructuring proposal is out.\n\nFor the former restructuring proposal, that\u0027s almost what we have but I can see your point: you want to ensure that the former condition only happens for when we\u0027re not dealing with vbmeta and the latter ones for when we do. I think adding asserts for this makes the code more readable. I\u0027ll go ahead and do this.",
+      "parentUuid": "f9532b25_a6996669",
+      "range": {
+        "startLine": 264,
+        "startChar": 0,
+        "endLine": 282,
+        "endChar": 3
+      },
+      "revId": "994c729c2ad8357b36df147f58c786f0974cc28c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f9532b25_e6c19e2d",
         "filename": "avb/libavb/avb_slot_verify.c",
         "patchSetId": 4
@@ -174,6 +294,30 @@
       "writtenOn": "2016-08-05T13:55:49Z",
       "side": 1,
       "message": "nit (alignment): add one leading space?",
+      "range": {
+        "startLine": 364,
+        "startChar": 31,
+        "endLine": 364,
+        "endChar": 66
+      },
+      "revId": "994c729c2ad8357b36df147f58c786f0974cc28c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5904374d_714db8c9",
+        "filename": "avb/libavb/avb_slot_verify.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 1076971
+      },
+      "writtenOn": "2016-08-05T19:00:30Z",
+      "side": 1,
+      "message": "Actually, that\u0027s the way clang-format ended up formatting it so it should probably stay that way ... I generally run the code through\n\n clang-format -i test/*.cc test/*.h libavb/*.[ch]\n\nbefore uploading so any whitespace or formatting is not my doing :-)",
+      "parentUuid": "f9532b25_e6c19e2d",
       "range": {
         "startLine": 364,
         "startChar": 31,
@@ -226,6 +370,24 @@
     },
     {
       "key": {
+        "uuid": "5904374d_51523469",
+        "filename": "avb/libavb/avb_slot_verify.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 622,
+      "author": {
+        "id": 1076971
+      },
+      "writtenOn": "2016-08-05T19:00:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "946cb6b9_3311c8a9",
+      "revId": "994c729c2ad8357b36df147f58c786f0974cc28c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "946cb6b9_d3741402",
         "filename": "avb/libavb/avb_slot_verify.c",
         "patchSetId": 4
@@ -243,6 +405,24 @@
     },
     {
       "key": {
+        "uuid": "5904374d_b14600ac",
+        "filename": "avb/libavb/avb_slot_verify.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 624,
+      "author": {
+        "id": 1076971
+      },
+      "writtenOn": "2016-08-05T19:00:30Z",
+      "side": 1,
+      "message": "OK. I\u0027ll switch all C code to /* */ - will keep using // in the tests as it\u0027s more common there.",
+      "parentUuid": "946cb6b9_d3741402",
+      "revId": "994c729c2ad8357b36df147f58c786f0974cc28c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "946cb6b9_7cd06dc3",
         "filename": "avb/libavb/avb_slot_verify.c",
         "patchSetId": 4
@@ -254,6 +434,30 @@
       "writtenOn": "2016-08-05T13:55:49Z",
       "side": 1,
       "message": "Is it ok to hard code sha256 here (how about sha512?)\nShould we check /vbmeta-\u003ealgorithm_type then decide it should be sha256 or sha512?",
+      "range": {
+        "startLine": 659,
+        "startChar": 3,
+        "endLine": 669,
+        "endChar": 45
+      },
+      "revId": "994c729c2ad8357b36df147f58c786f0974cc28c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5904374d_f1408890",
+        "filename": "avb/libavb/avb_slot_verify.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 669,
+      "author": {
+        "id": 1076971
+      },
+      "writtenOn": "2016-08-05T19:00:30Z",
+      "side": 1,
+      "message": "OK, I\u0027ll change it so it\u0027s using the same digest size as vbmeta-\u003ealgorithm.",
+      "parentUuid": "946cb6b9_7cd06dc3",
       "range": {
         "startLine": 659,
         "startChar": 3,
@@ -289,6 +493,30 @@
     },
     {
       "key": {
+        "uuid": "5904374d_d13d8410",
+        "filename": "avb/libavb/avb_sysdeps.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1076971
+      },
+      "writtenOn": "2016-08-05T19:00:30Z",
+      "side": 1,
+      "message": "OK, not a bad idea. Will do.",
+      "parentUuid": "946cb6b9_936b7c8d",
+      "range": {
+        "startLine": 138,
+        "startChar": 8,
+        "endLine": 138,
+        "endChar": 17
+      },
+      "revId": "994c729c2ad8357b36df147f58c786f0974cc28c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "946cb6b9_130becd6",
         "filename": "avb/libavb/avb_sysdeps_posix.c",
         "patchSetId": 4
@@ -300,6 +528,24 @@
       "writtenOn": "2016-08-04T22:41:18Z",
       "side": 1,
       "message": "Looks like ordinary C, maybe this shouldn\u0027t be in sysdeps?",
+      "revId": "994c729c2ad8357b36df147f58c786f0974cc28c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5904374d_11b9cc90",
+        "filename": "avb/libavb/avb_sysdeps_posix.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1076971
+      },
+      "writtenOn": "2016-08-05T19:00:30Z",
+      "side": 1,
+      "message": "Yeah, moving it to avb_util.c.",
+      "parentUuid": "946cb6b9_130becd6",
       "revId": "994c729c2ad8357b36df147f58c786f0974cc28c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -340,6 +586,24 @@
     },
     {
       "key": {
+        "uuid": "5904374d_71be587a",
+        "filename": "avb/libavb/avb_util.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1076971
+      },
+      "writtenOn": "2016-08-05T19:00:30Z",
+      "side": 1,
+      "message": "Nice catch. Nuking it.",
+      "parentUuid": "946cb6b9_532c8446",
+      "revId": "994c729c2ad8357b36df147f58c786f0974cc28c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "946cb6b9_36c0d626",
         "filename": "avb/libavb/avb_vbmeta_image.c",
         "patchSetId": 4
@@ -351,6 +615,24 @@
       "writtenOn": "2016-08-04T22:41:18Z",
       "side": 1,
       "message": "This padding can be easily constructed minus the encoded hash id. Why have all it all static?",
+      "revId": "994c729c2ad8357b36df147f58c786f0974cc28c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5904374d_b1c72011",
+        "filename": "avb/libavb/avb_vbmeta_image.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1076971
+      },
+      "writtenOn": "2016-08-05T19:00:30Z",
+      "side": 1,
+      "message": "Mostly because it\u0027s a lot simpler this way (a simple memcmp() really). If we\u0027d have to reconstruct it we\u0027d have to allocate memory (or, brr, use the stack) and potentially use something like a mutex/lock for thread-safety  ... or explicitly comment that we\u0027re not thread-safe or that we don\u0027t care that the precomputation routine runs multiple times and the last one wins.\n\nCould also play games by not having the simple memcmp() and instead check for this or that many 0xff\u0027s. I don\u0027t think that\u0027s a good tradeoff either.",
+      "parentUuid": "946cb6b9_36c0d626",
       "revId": "994c729c2ad8357b36df147f58c786f0974cc28c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -374,6 +656,24 @@
     },
     {
       "key": {
+        "uuid": "5904374d_f1d1a8c9",
+        "filename": "avb/test/avb_slot_verify_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1076971
+      },
+      "writtenOn": "2016-08-05T19:00:30Z",
+      "side": 1,
+      "message": "We kinda already have this for the vbmeta image, see VerifyTest::test_modification() in test/avb_vbmeta_image_unittest.cc ... this one tries flips a bit in N (currently 16) different places and checks that verification fails as expected.\n\nI guess it would make sense to fuzz the boot partition (e.g. where we use AvbHashDescriptor)... at least this would test that avb_slot_verify() calculates the hash over the entire boot partition, not just part of it.\n\nThoughts?",
+      "parentUuid": "946cb6b9_b66f862f",
+      "revId": "994c729c2ad8357b36df147f58c786f0974cc28c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "59d8b708_f18ce82c",
         "filename": "avb/test/avb_slot_verify_unittest.cc",
         "patchSetId": 4
@@ -385,6 +685,30 @@
       "writtenOn": "2016-08-05T14:03:44Z",
       "side": 1,
       "message": "This is a bit tricky, took me some time to figure it out with the MyAvbOps struct. Is it possible or make sense to use C++ inheritance, e.g., class MyOps: AvbOps { ... }; ?",
+      "range": {
+        "startLine": 44,
+        "startChar": 2,
+        "endLine": 44,
+        "endChar": 49
+      },
+      "revId": "994c729c2ad8357b36df147f58c786f0974cc28c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5904374d_d1ce2429",
+        "filename": "avb/test/avb_slot_verify_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1076971
+      },
+      "writtenOn": "2016-08-05T19:00:30Z",
+      "side": 1,
+      "message": "Yeah, I concede it\u0027s messy. I don\u0027t think there\u0027s an easier way to bridge C and C++ though :-(",
+      "parentUuid": "59d8b708_f18ce82c",
       "range": {
         "startLine": 44,
         "startChar": 2,
