@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d97e679c_49317106",
+        "filename": "simpleperf/record_file_writer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2016-08-05T22:39:13Z",
+      "side": 1,
+      "message": "permission",
+      "range": {
+        "startLine": 249,
+        "startChar": 25,
+        "endLine": 249,
+        "endChar": 33
+      },
+      "revId": "65f7562ddf0dfea7fe651752094c2331874ff5e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d97e679c_e915dd4f",
+        "filename": "simpleperf/record_file_writer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2016-08-05T22:39:13Z",
+      "side": 1,
+      "message": "include path in error to aid debugging?",
+      "range": {
+        "startLine": 252,
+        "startChar": 39,
+        "endLine": 252,
+        "endChar": 46
+      },
+      "revId": "65f7562ddf0dfea7fe651752094c2331874ff5e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
