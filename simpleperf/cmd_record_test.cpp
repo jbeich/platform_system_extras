@@ -206,10 +206,17 @@ TEST(record_cmd, more_than_one_event_types) {
   ASSERT_TRUE(RunRecordCmd({"-e", "cpu-cycles", "-e", "cpu-clock"}));
 }
 
+#if !defined(IN_CTS_TEST)
+// This test is not added in cts test because it can fail when cpus[0] is
+// offlined in the time slot between GetOnlineCpus() and RunRecordCmd().
 TEST(record_cmd, cpu_option) {
-  ASSERT_TRUE(RunRecordCmd({"--cpu", "0"}));
-  TEST_IN_ROOT(ASSERT_TRUE(RunRecordCmd({"--cpu", "0", "-a"})));
+  std::vector<int> cpus = GetOnlineCpus();
+  ASSERT_FALSE(cpus.empty());
+  ASSERT_TRUE(RunRecordCmd({"--cpu", std::to_string(cpus[0])}));
+  TEST_IN_ROOT(
+      ASSERT_TRUE(RunRecordCmd({"--cpu", std::to_string(cpus[0]), "-a"})));
 }
+#endif
 
 TEST(record_cmd, mmap_page_option) {
   ASSERT_TRUE(RunRecordCmd({"-m", "1"}));

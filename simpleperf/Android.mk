@@ -312,7 +312,7 @@ libsimpleperf_cts_test_src_files := \
 include $(CLEAR_VARS)
 LOCAL_CLANG := true
 LOCAL_MODULE := libsimpleperf_cts_test
-LOCAL_CPPFLAGS := $(simpleperf_cppflags_target)
+LOCAL_CPPFLAGS := $(simpleperf_cppflags_target) -DIN_CTS_TEST
 LOCAL_SRC_FILES := $(libsimpleperf_cts_test_src_files)
 LOCAL_STATIC_LIBRARIES := $(simpleperf_static_libraries_target)
 LOCAL_MULTILIB := both
@@ -325,7 +325,7 @@ include $(CLEAR_VARS)
 LOCAL_CLANG := true
 LOCAL_MODULE := libsimpleperf_cts_test
 LOCAL_MODULE_HOST_OS := linux
-LOCAL_CPPFLAGS := $(simpleperf_cppflags_host)
+LOCAL_CPPFLAGS := $(simpleperf_cppflags_host) -DIN_CTS_TEST
 LOCAL_CPPFLAGS_linux := $(simpleperf_cppflags_host_linux)
 LOCAL_SRC_FILES := $(libsimpleperf_cts_test_src_files)
 LOCAL_STATIC_LIBRARIES := $(simpleperf_static_libraries_host)
