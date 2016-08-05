@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d97e679c_bbf5ef21",
+        "filename": "simpleperf/cmd_record_test.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2016-08-05T20:03:21Z",
+      "side": 1,
+      "message": "this is just fundamentally racy? we couldn\u0027t fix this by having a way for --cpu to pick a cpu for us?",
+      "revId": "85d7350ee22cb7909455efc4e45dafae55c62bc1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
