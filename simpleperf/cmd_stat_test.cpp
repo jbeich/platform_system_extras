@@ -82,10 +82,17 @@ TEST(stat_cmd, existing_threads) {
 
 TEST(stat_cmd, no_monitored_threads) { ASSERT_FALSE(StatCmd()->Run({""})); }
 
+#if !defined(IN_CTS_TEST)
+// This test is not added in cts test because it can fail when cpus[0] is
+// offlined in the time slot between GetOnlineCpus() and RunRecordCmd().
 TEST(stat_cmd, cpu_option) {
-  ASSERT_TRUE(StatCmd()->Run({"--cpu", "0", "sleep", "1"}));
-  TEST_IN_ROOT(ASSERT_TRUE(StatCmd()->Run({"--cpu", "0", "-a", "sleep", "1"})));
+  std::vector<int> cpus = GetOnlineCpus();
+  ASSERT_FALSE(cpus.empty());
+  ASSERT_TRUE(StatCmd()->Run({"--cpu", std::to_string(cpus[0]), "sleep", "1"}));
+  TEST_IN_ROOT(ASSERT_TRUE(
+      StatCmd()->Run({"--cpu", std::to_string(cpus[0]), "-a", "sleep", "1"})));
 }
+#endif
 
 TEST(stat_cmd, group_option) {
   ASSERT_TRUE(
