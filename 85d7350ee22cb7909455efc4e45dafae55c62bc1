@@ -88,6 +88,24 @@
       "revId": "85d7350ee22cb7909455efc4e45dafae55c62bc1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d97e679c_5ece0962",
+        "filename": "simpleperf/cmd_record_test.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-08-05T20:46:26Z",
+      "side": 1,
+      "message": "flaky tests are removed.",
+      "parentUuid": "d97e679c_9bafd392",
+      "revId": "85d7350ee22cb7909455efc4e45dafae55c62bc1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
