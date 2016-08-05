@@ -674,6 +674,24 @@
     },
     {
       "key": {
+        "uuid": "d97e679c_bb108ffc",
+        "filename": "avb/test/avb_slot_verify_unittest.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1079236
+      },
+      "writtenOn": "2016-08-05T20:32:50Z",
+      "side": 1,
+      "message": "Nice! I missed that skimming tests. The more the merrier of course, but I think vbmeta is the most important and this is at least a start.\n\nAgreed a basic test that the entire boot partition is verified would be a good test.",
+      "parentUuid": "5904374d_f1d1a8c9",
+      "revId": "994c729c2ad8357b36df147f58c786f0974cc28c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "59d8b708_f18ce82c",
         "filename": "avb/test/avb_slot_verify_unittest.cc",
         "patchSetId": 4
