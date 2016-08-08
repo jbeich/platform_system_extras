@@ -1,0 +1,8 @@
+Code-Review+2: Colin Cross <ccross@android.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Verified+1: Josh Gao <jmgao@google.com>
+Submitted-by: Josh Gao <jmgao@google.com>
+Submitted-at: Mon, 08 Aug 2016 18:29:10 +0000
+Reviewed-on: https://android-review.googlesource.com/254315
+Project: platform/system/extras
+Branch: refs/heads/master
