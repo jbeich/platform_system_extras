@@ -195,29 +195,33 @@ static bool AllItemsWithString(std::vector<std::string>& lines,
 }
 
 TEST_F(ReportCommandTest, pid_filter_option) {
-  Report(PERF_DATA);
+  Report(PERF_DATA_WITH_MULTIPLE_PIDS_AND_TIDS, {"--sort", "pid"});
   ASSERT_TRUE("success");
-  ASSERT_FALSE(AllItemsWithString(lines, {"26083"}));
-  ASSERT_FALSE(AllItemsWithString(lines, {"26083", "26090"}));
-  Report(PERF_DATA, {"--pids", "26083"});
+  ASSERT_FALSE(AllItemsWithString(lines, {"17441"}));
+  ASSERT_FALSE(AllItemsWithString(lines, {"17441", "17443"}));
+  Report(PERF_DATA_WITH_MULTIPLE_PIDS_AND_TIDS,
+         {"--sort", "pid", "--pids", "17441"});
   ASSERT_TRUE(success);
-  ASSERT_TRUE(AllItemsWithString(lines, {"26083"}));
-  Report(PERF_DATA, {"--pids", "26083,26090"});
+  ASSERT_TRUE(AllItemsWithString(lines, {"17441"}));
+  Report(PERF_DATA_WITH_MULTIPLE_PIDS_AND_TIDS,
+         {"--sort", "pid", "--pids", "17441,17443"});
   ASSERT_TRUE(success);
-  ASSERT_TRUE(AllItemsWithString(lines, {"26083", "26090"}));
+  ASSERT_TRUE(AllItemsWithString(lines, {"17441", "17443"}));
 }
 
 TEST_F(ReportCommandTest, tid_filter_option) {
-  Report(PERF_DATA);
+  Report(PERF_DATA_WITH_MULTIPLE_PIDS_AND_TIDS, {"--sort", "tid"});
   ASSERT_TRUE("success");
-  ASSERT_FALSE(AllItemsWithString(lines, {"26083"}));
-  ASSERT_FALSE(AllItemsWithString(lines, {"26083", "26090"}));
-  Report(PERF_DATA, {"--tids", "26083"});
+  ASSERT_FALSE(AllItemsWithString(lines, {"17441"}));
+  ASSERT_FALSE(AllItemsWithString(lines, {"17441", "17445"}));
+  Report(PERF_DATA_WITH_MULTIPLE_PIDS_AND_TIDS,
+         {"--sort", "tid", "--tids", "17441"});
   ASSERT_TRUE(success);
-  ASSERT_TRUE(AllItemsWithString(lines, {"26083"}));
-  Report(PERF_DATA, {"--tids", "26083,26090"});
+  ASSERT_TRUE(AllItemsWithString(lines, {"17441"}));
+  Report(PERF_DATA_WITH_MULTIPLE_PIDS_AND_TIDS,
+         {"--sort", "tid", "--tids", "17441,17445"});
   ASSERT_TRUE(success);
-  ASSERT_TRUE(AllItemsWithString(lines, {"26083", "26090"}));
+  ASSERT_TRUE(AllItemsWithString(lines, {"17441", "17445"}));
 }
 
 TEST_F(ReportCommandTest, comm_filter_option) {
