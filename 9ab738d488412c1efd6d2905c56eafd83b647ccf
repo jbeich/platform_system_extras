@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "996a2f2c_a38c1a2c",
+        "filename": "simpleperf/cmd_report.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 451,
+      "author": {
+        "id": 1097779
+      },
+      "writtenOn": "2016-08-09T15:32:34Z",
+      "side": 1,
+      "message": "This use of args[i] is also questionable.\nFor \"simpleperf report --pids 3,bogus\" it would reply\n\"invalid id in 3,bogus option: bogus\" but it should reply\n\"invalid id in --pids option: bogus\".",
+      "range": {
+        "startLine": 451,
+        "startChar": 44,
+        "endLine": 451,
+        "endChar": 51
+      },
+      "revId": "9ab738d488412c1efd6d2905c56eafd83b647ccf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
