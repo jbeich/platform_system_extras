@@ -22,6 +22,23 @@
       "revId": "50dbf5a788ee38413463a2bce82e945c05533161",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3ed3e91e_23381484",
+        "filename": "tests/bootloader/fastboot.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1015340
+      },
+      "writtenOn": "2016-08-12T16:44:48Z",
+      "side": 1,
+      "message": "Should this go under development/python-packages alongside the adb package?  This seems like something that other people could find useful.",
+      "revId": "50dbf5a788ee38413463a2bce82e945c05533161",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
