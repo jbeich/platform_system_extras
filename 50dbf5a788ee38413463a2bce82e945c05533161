@@ -25,6 +25,40 @@
     },
     {
       "key": {
+        "uuid": "3ed3e91e_692cbd95",
+        "filename": "tests/bootloader/bootloadertest.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1085413
+      },
+      "writtenOn": "2016-08-12T20:19:39Z",
+      "side": 1,
+      "message": "same here, use self.fail",
+      "revId": "50dbf5a788ee38413463a2bce82e945c05533161",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3ed3e91e_a945e553",
+        "filename": "tests/bootloader/bootloadertest.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1085413
+      },
+      "writtenOn": "2016-08-12T20:19:39Z",
+      "side": 1,
+      "message": "this should have a side effect of some sort besides printing. probably fail here",
+      "revId": "50dbf5a788ee38413463a2bce82e945c05533161",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3ed3e91e_23381484",
         "filename": "tests/bootloader/fastboot.py",
         "patchSetId": 3
@@ -36,6 +70,24 @@
       "writtenOn": "2016-08-12T16:44:48Z",
       "side": 1,
       "message": "Should this go under development/python-packages alongside the adb package?  This seems like something that other people could find useful.",
+      "revId": "50dbf5a788ee38413463a2bce82e945c05533161",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3ed3e91e_e9560d06",
+        "filename": "tests/bootloader/fastboot.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1085413
+      },
+      "writtenOn": "2016-08-12T20:19:39Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "3ed3e91e_23381484",
       "revId": "50dbf5a788ee38413463a2bce82e945c05533161",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
