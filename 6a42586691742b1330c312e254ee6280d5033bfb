@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3ed3e91e_8031d6ee",
+        "filename": "tests/bootloader/bootloadertest.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1018087
+      },
+      "writtenOn": "2016-08-12T02:36:25Z",
+      "side": 1,
+      "message": "Fix whitespace",
+      "revId": "6a42586691742b1330c312e254ee6280d5033bfb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3ed3e91e_a045fa53",
+        "filename": "tests/bootloader/fastboot.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1018087
+      },
+      "writtenOn": "2016-08-12T02:36:25Z",
+      "side": 1,
+      "message": "whitespace",
+      "revId": "6a42586691742b1330c312e254ee6280d5033bfb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
