@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3ed3e91e_035eb0ee",
+        "filename": "tests/bootloader/bootloadertest.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1015340
+      },
+      "writtenOn": "2016-08-12T16:42:30Z",
+      "side": 1,
+      "message": "Use self.fail(\"some message\") instead of self.assertFalse(True).  The former gives you use useful context when something fails, and the latter just tells you \"True is not False\".",
+      "range": {
+        "startLine": 45,
+        "startChar": 12,
+        "endLine": 45,
+        "endChar": 34
+      },
+      "revId": "50dbf5a788ee38413463a2bce82e945c05533161",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
