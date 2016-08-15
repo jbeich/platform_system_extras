@@ -1,0 +1,9 @@
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Code-Review+1: Dan Willemsen <dwillemsen@google.com>
+Code-Review+2: Dan Albert <danalbert@google.com>
+Verified+1: Yabin Cui <yabinc@google.com>
+Submitted-by: Yabin Cui <yabinc@google.com>
+Submitted-at: Mon, 15 Aug 2016 23:42:30 +0000
+Reviewed-on: https://android-review.googlesource.com/256341
+Project: platform/system/extras
+Branch: refs/heads/master
