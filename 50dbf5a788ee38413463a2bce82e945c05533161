@@ -59,6 +59,24 @@
     },
     {
       "key": {
+        "uuid": "5bd26f19_642864e8",
+        "filename": "tests/bootloader/bootloadertest.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2016-08-16T23:16:15Z",
+      "side": 1,
+      "message": "I\u0027m not sure if this should be considered a failure. A value of 0 would mean slots are not supported. I\u0027m unsure if 1 is a reasonable value, but would probably mean slots aren\u0027t supported as well. I don\u0027t know if there\u0027s any meaningful difference between the two.",
+      "parentUuid": "3ed3e91e_a945e553",
+      "revId": "50dbf5a788ee38413463a2bce82e945c05533161",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3ed3e91e_23381484",
         "filename": "tests/bootloader/fastboot.py",
         "patchSetId": 3
