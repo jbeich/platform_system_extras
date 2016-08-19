@@ -67,7 +67,7 @@ class IOEventLoop;
 
 class EventSelectionSet {
  public:
-  EventSelectionSet() {}
+  EventSelectionSet(bool for_stat_cmd) : for_stat_cmd_(for_stat_cmd) {}
 
   bool empty() const { return groups_.empty(); }
 
@@ -104,6 +104,8 @@ class EventSelectionSet {
                       const std::vector<int>& cpus);
   bool MmapEventFiles(size_t mmap_pages, bool report_error);
   bool ReadMmapEventDataForFd(std::unique_ptr<EventFd>& event_fd);
+
+  const bool for_stat_cmd_;
 
   std::vector<EventSelectionGroup> groups_;
 
