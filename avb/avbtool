@@ -22,6 +22,7 @@ import os
 import struct
 import subprocess
 import sys
+import tempfile
 
 import Crypto.PublicKey.RSA
 
@@ -360,6 +361,202 @@ def lookup_algorithm_by_type(alg_type):
     if alg_data.algorithm_type == alg_type:
       return (alg_name, alg_data)
   raise AvbError('Unknown algorithm type {}'.format(alg_type))
+
+
+class ImageHandler(object):
+  """Abstraction for image I/O with support for Android sparse images.
+
+  This class provides transparent support (e.g. use instances of this
+  class as if it were a file object) for working with Android sparse
+  images. When constructed a check is made to see if the file is an
+  Android sparse file.
+
+  If the given file isn't an Android sparse file, subsequent
+  operations happen directly on the passed-in file. Otherwise the file
+  is de-sparsified (using the simg2img tool) into a temporary file and
+  subsequent operations will be on the temporary file.
+
+  Call commit() when you are done making changes - this will sparsify
+  the file (using the img2simg tool). As a convenience, commit() is
+  also called when an object instance is deleted.
+
+  The |content_size| attribute can be thought of as the size of the
+  image and is useful for calcuating how much of the image should be
+  integrity-checked and how much is just padding.
+
+  Attributes:
+    is_sparse: Whether the image is sparse.
+    image_size: The size of the image when unsparsified.
+    content_size: For non-sparse images this is the same as
+      image_size. For sparse images, this is the smallest offset of
+      where only 'Don't Care' chunks follow.
+
+  """
+
+  # See system/core/libsparse/sparse_format.h for details.
+  MAGIC = 0xED26FF3A
+
+  def __init__(self, image_filename):
+    """Initializes an image handler.
+
+    Arguments:
+      image_filename: The filename of the image.
+
+    Raises:
+      AvbError: If sparse header is invalid.
+    """
+    self.is_sparse = False
+    self._image = open(image_filename, 'r+b')
+    self._image.seek(0, os.SEEK_END)
+    self.content_size = self._image.tell()
+    self.image_size = self._image.tell()
+
+    self._image.seek(0, os.SEEK_SET)
+    (magic, major_version, minor_version, file_hdr_sz, chunk_hdr_sz,
+     blk_sz, total_blks, total_chunks,
+     _) = struct.unpack('<I4H4I', self._image.read(28))
+    if magic != self.MAGIC:
+      # Not a sparse image, our job here is done.
+      return
+    if not (major_version == 1 and minor_version == 0):
+      raise AvbError('Encountered sparse image format version {}.{} but only '
+                     '1.0 is supported'.format(major_version, minor_version))
+    if file_hdr_sz != 28:
+      raise AvbError('Expected file_hdr_sz to be 28 but it\'s {}.'.
+                     format(file_hdr_sz))
+    if chunk_hdr_sz != 12:
+      raise AvbError('Expected chunk_hdr_sz to be 12 but it\'s {}.'.
+                     format(chunk_hdr_sz))
+
+    # Find the smallest offset where only "Don't care" chunks
+    # follow. This will be the size of the content in the sparse
+    # image.
+    offset = 0
+    output_offset = 0
+    last_dont_care_section_output_offset = None
+    last_section_was_dont_care = False
+    for _ in xrange(1, total_chunks + 1):
+      header_bin = self._image.read(12)
+      (chunk_type, _, chunk_sz, total_sz) = struct.unpack('<2H2I', header_bin)
+      data_sz = total_sz - 12
+
+      last_section_was_dont_care = False
+
+      if chunk_type == 0xCAC1:
+        if data_sz != (chunk_sz * blk_sz):
+          raise AvbError('Raw chunk input size ({}) does not match output '
+                         'size ({})'.format(data_sz, chunk_sz * blk_sz))
+        else:
+          self._image.read(data_sz)
+      elif chunk_type == 0xCAC2:
+        if data_sz != 4:
+          raise AvbError('Fill chunk should have 4 bytes of fill, but this '
+                         'has {}'.format(data_sz))
+        self._image.read(4)
+      elif chunk_type == 0xCAC3:
+        if data_sz != 0:
+          raise AvbError('Don\'t care chunk input size is non-zero ({})'.
+                         format(data_sz))
+        else:
+          if not last_section_was_dont_care:
+            last_dont_care_section_output_offset = output_offset
+            last_section_was_dont_care = True
+      elif chunk_type == 0xCAC4:
+        if data_sz != 4:
+          raise AvbError('CRC32 chunk should have 4 bytes of CRC, but '
+                         'this has {}'.format(data_sz))
+        self._image.read(4)
+      else:
+        raise AvbError('Unknown chunk type {}'.format(chunk_type))
+
+      offset += chunk_sz
+      output_offset += chunk_sz * blk_sz
+
+    # Now that we've traversed all chunks, sanity check.
+    if total_blks != offset:
+      raise AvbError('The header said we should have {} output blocks, '
+                     'but we saw {}'.format(total_blks, offset))
+    junk_len = len(self._image.read())
+    if junk_len:
+      raise AvbError('There were {} bytes of extra data at the end of the '
+                     'file.'.format(junk_len))
+
+    # Assign |image_size| and |content_size| attributes.
+    self._image_size = output_offset
+    if last_section_was_dont_care:
+      self.content_size = last_dont_care_section_output_offset
+    else:
+      self.content_size = output_offset
+
+    self._block_size = blk_sz
+
+    # Unsparsify and operate on the unsparsified image.
+    self.is_sparse = True
+    self._orig_image = self._image
+    self._image = tempfile.NamedTemporaryFile(prefix='avbtool-tmp-')
+    subprocess.call(['simg2img', self._orig_image.name, self._image.name])
+    self._modified = False
+
+  def __del__(self):
+    """Destructor.
+
+    This just calls the commit() method.
+    """
+    self.commit()
+
+  def commit(self):
+    """Commit all changes already made, if any.
+
+    If constructed with a sparse file and changes were made, the
+    backing file will be sparsified and written to the original
+    provided image file.
+
+    This method is idempotent.
+    """
+    if not self.is_sparse:
+      return
+    if not self._image:
+      return
+    if self._modified:
+      self._image.flush()
+      subprocess.call(['img2simg', self._image.name, self._orig_image.name,
+                       str(self._block_size)])
+    # This will cause the temporary file to be deleted.
+    self._image = None
+
+  def seek(self, offset, whence=0):
+    """Wrapper for file.seek()."""
+    if not self._image:
+      raise Exception('Trying to operate on a committed file.')
+    self._image.seek(offset, whence)
+
+  def read(self, size):
+    """Wrapper for file.read()."""
+    if not self._image:
+      raise Exception('Trying to operate on a committed file.')
+    return self._image.read(size)
+
+  def tell(self):
+    """Wrapper for file.tell()."""
+    if not self._image:
+      raise Exception('Trying to operate on a committed file.')
+    return self._image.tell()
+
+  def truncate(self, size):
+    """Wrapper for file.truncate()."""
+    if not self._image:
+      raise Exception('Trying to operate on a committed file.')
+    self._image.truncate(size)
+    if self.is_sparse:
+      self._modified = True
+
+  def write(self, data):
+    """Wrapper for file.write()."""
+    if not self._image:
+      raise Exception('Trying to operate on a committed file.')
+    self._image.write(data)
+    if self.is_sparse:
+      self._modified = True
 
 
 class AvbDescriptor(object):
@@ -1052,16 +1249,18 @@ class AvbVBMetaHeader(object):
 class Avb(object):
   """Business logic for avbtool command-line tool."""
 
-  def erase_footer(self, image, keep_hashtree):
+  def erase_footer(self, image_filename, keep_hashtree):
     """Implements the 'erase_footer' command.
 
     Arguments:
-      image: File to erase a footer from.
+      image_filename: File to erase a footer from.
       keep_hashtree: If True, keep the hashtree around.
 
     Raises:
       AvbError: If there's no footer in the image.
     """
+
+    image = ImageHandler(image_filename)
 
     (footer, _, descriptors, _) = self._parse_image(image)
 
@@ -1087,13 +1286,15 @@ class Avb(object):
     # And cut...
     image.truncate(new_image_size)
 
-  def info_image(self, image, output):
+  def info_image(self, image_filename, output):
     """Implements the 'info_image' command.
 
     Arguments:
-      image: Image file to get information from (file object).
+      image_filename: Image file to get information from (file object).
       output: Output file to write human-readable information to (file object).
     """
+
+    image = ImageHandler(image_filename)
 
     o = output
 
@@ -1111,8 +1312,9 @@ class Avb(object):
 
     (alg_name, _) = lookup_algorithm_by_type(header.algorithm_type)
 
-    o.write('VBMeta image version:     {}.{}\n'.format(
-        header.header_version_major, header.header_version_minor))
+    o.write('VBMeta image version:     {}.{}{}\n'.format(
+        header.header_version_major, header.header_version_minor,
+        ' (Sparse)' if image.is_sparse else ''))
     o.write('Header Block:             {} bytes\n'.format(AvbVBMetaHeader.SIZE))
     o.write('Authentication Block:     {} bytes\n'.format(
         header.authentication_data_block_size))
@@ -1136,7 +1338,7 @@ class Avb(object):
     The image can either be a vbmeta or an image with a footer.
 
     Arguments:
-      image: An image (vbmeta or footer) with a hashtree descriptor.
+      image: An ImageHandler (vbmeta or footer) with a hashtree descriptor.
 
     Returns:
       A tuple where the first argument is a AvbFooter (None if there
@@ -1145,9 +1347,9 @@ class Avb(object):
       AvbDescriptor-derived instances, and the fourth argument is the
       size of |image|.
     """
+    assert isinstance(image, ImageHandler)
     footer = None
-    image.seek(0, os.SEEK_END)
-    image_size = image.tell()
+    image_size = image.content_size
     image.seek(image_size - AvbFooter.SIZE)
     try:
       footer = AvbFooter(image.read(AvbFooter.SIZE))
@@ -1174,7 +1376,7 @@ class Avb(object):
     """Generate kernel cmdline descriptor for dm-verity.
 
     Arguments:
-      image: An image (vbmeta or footer) with a hashtree descriptor.
+      image: An ImageHandler (vbmeta or footer) with a hashtree descriptor.
 
     Returns:
       A AvbKernelCmdlineDescriptor with dm-verity kernel cmdline
@@ -1337,8 +1539,9 @@ class Avb(object):
 
     # Add AvbKernelCmdline descriptor for dm-verity, if requested.
     if generate_dm_verity_cmdline_from_hashtree:
+      img_handler = ImageHandler(generate_dm_verity_cmdline_from_hashtree.name)
       encoded_descriptors.extend(self._get_cmdline_descriptor_for_dm_verity(
-          generate_dm_verity_cmdline_from_hashtree).encode())
+          img_handler).encode())
 
     # Add kernel command-lines.
     if kernel_cmdlines:
@@ -1350,7 +1553,8 @@ class Avb(object):
     # Add descriptors from other images.
     if include_descriptors_from_image:
       for image in include_descriptors_from_image:
-        (_, _, image_descriptors, _) = self._parse_image(image)
+        image_handler = ImageHandler(image.name)
+        (_, _, image_descriptors, _) = self._parse_image(image_handler)
         for desc in image_descriptors:
           encoded_descriptors.extend(desc.encode())
 
@@ -1447,15 +1651,15 @@ class Avb(object):
     key = Crypto.PublicKey.RSA.importKey(open(key_path).read())
     write_rsa_key(output, key)
 
-  def add_hash_footer(self, image, partition_size, partition_name,
+  def add_hash_footer(self, image_filename, partition_size, partition_name,
                       hash_algorithm, salt, algorithm_name, key_path,
                       rollback_index, props, props_from_file, kernel_cmdlines,
                       generate_dm_verity_cmdline_from_hashtree,
                       include_descriptors_from_image):
-    """Implements the 'add_hash_footer' command.
+    """Implementation of the add_hash_footer on unsparse images.
 
     Arguments:
-      image: File to add the footer to.
+      image_filename: File to add the footer to.
       partition_size: Size of partition.
       partition_name: Name of partition (without A/B suffix).
       hash_algorithm: Hash algorithm to use.
@@ -1471,11 +1675,12 @@ class Avb(object):
       include_descriptors_from_image: List of file objects for which
         to insert descriptors from.
     """
+    image = ImageHandler(image_filename)
+
     # If there's already a footer, truncate the image to its original
     # size. This way 'avbtool add_hash_footer' is idempotent (modulo
     # salts).
-    image.seek(0, os.SEEK_END)
-    image_size = image.tell()
+    image_size = image.content_size
     image.seek(image_size - AvbFooter.SIZE)
     try:
       footer = AvbFooter(image.read(AvbFooter.SIZE))
@@ -1545,7 +1750,7 @@ class Avb(object):
       image.truncate(original_image_size)
       raise
 
-  def add_hashtree_footer(self, image, partition_size, partition_name,
+  def add_hashtree_footer(self, image_filename, partition_size, partition_name,
                           hash_algorithm, block_size, salt, algorithm_name,
                           key_path, rollback_index, props, props_from_file,
                           kernel_cmdlines,
@@ -1557,7 +1762,7 @@ class Avb(object):
     more information about dm-verity and these hashes.
 
     Arguments:
-      image: File to add the footer to.
+      image_filename: File to add the footer to.
       partition_size: Size of partition.
       partition_name: Name of partition (without A/B suffix).
       hash_algorithm: Hash algorithm to use.
@@ -1574,11 +1779,12 @@ class Avb(object):
       include_descriptors_from_image: List of file objects for which
         to insert descriptors from.
     """
+    image = ImageHandler(image_filename)
+
     # If there's already a footer, truncate the image to its original
     # size. This way 'avbtool add_hashtree_footer' is idempotent
     # (modulo salts).
-    image.seek(0, os.SEEK_END)
-    image_size = image.tell()
+    image_size = image.content_size
     image.seek(image_size - AvbFooter.SIZE)
     try:
       footer = AvbFooter(image.read(AvbFooter.SIZE))
@@ -1916,7 +2122,7 @@ class AvbTool(object):
     try:
       args.func(args)
     except AvbError as e:
-      sys.stderr.write('{}\n'.format(e.message))
+      sys.stderr.write('{}: {}\n'.format(argv[0], e.message))
       sys.exit(1)
 
   def version(self, _):
@@ -1938,7 +2144,7 @@ class AvbTool(object):
 
   def add_hash_footer(self, args):
     """Implements the 'add_hash_footer' sub-command."""
-    self.avb.add_hash_footer(args.image, args.partition_size,
+    self.avb.add_hash_footer(args.image.name, args.partition_size,
                              args.partition_name, args.hash_algorithm,
                              args.salt, args.algorithm, args.key,
                              args.rollback_index, args.prop,
@@ -1948,7 +2154,7 @@ class AvbTool(object):
 
   def add_hashtree_footer(self, args):
     """Implements the 'add_hashtree_footer' sub-command."""
-    self.avb.add_hashtree_footer(args.image, args.partition_size,
+    self.avb.add_hashtree_footer(args.image.name, args.partition_size,
                                  args.partition_name, args.hash_algorithm,
                                  args.block_size, args.salt, args.algorithm,
                                  args.key, args.rollback_index, args.prop,
@@ -1958,11 +2164,11 @@ class AvbTool(object):
 
   def erase_footer(self, args):
     """Implements the 'erase_footer' sub-command."""
-    self.avb.erase_footer(args.image, args.keep_hashtree)
+    self.avb.erase_footer(args.image.name, args.keep_hashtree)
 
   def info_image(self, args):
     """Implements the 'info_image' sub-command."""
-    self.avb.info_image(args.image, args.output)
+    self.avb.info_image(args.image.name, args.output)
 
 
 if __name__ == '__main__':
