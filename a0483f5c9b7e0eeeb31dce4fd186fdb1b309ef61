@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "2823afed_87b0e6d5",
+        "filename": "avb/README",
+        "patchSetId": 1
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1076971
+      },
+      "writtenOn": "2016-08-22T21:12:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "885adb66_dad6451b",
+      "range": {
+        "startLine": 222,
+        "startChar": 47,
+        "endLine": 222,
+        "endChar": 48
+      },
+      "revId": "a0483f5c9b7e0eeeb31dce4fd186fdb1b309ef61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "885adb66_dddc7f0e",
         "filename": "avb/avbtool",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2016-08-22T20:55:53Z",
       "side": 1,
       "message": "nit: use struct.calcsize(format)?",
+      "range": {
+        "startLine": 417,
+        "startChar": 51,
+        "endLine": 417,
+        "endChar": 53
+      },
+      "revId": "a0483f5c9b7e0eeeb31dce4fd186fdb1b309ef61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2823afed_e7ad6280",
+        "filename": "avb/avbtool",
+        "patchSetId": 1
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 1076971
+      },
+      "writtenOn": "2016-08-22T21:12:57Z",
+      "side": 1,
+      "message": "Yeah, I lifted this code from system/core/libsparse/simg_dump.py and it looked like this (will mention this in the commit message too). Fixing.",
+      "parentUuid": "885adb66_dddc7f0e",
       "range": {
         "startLine": 417,
         "startChar": 51,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "2823afed_67d5f2eb",
+        "filename": "avb/avbtool",
+        "patchSetId": 1
+      },
+      "lineNbr": 445,
+      "author": {
+        "id": 1076971
+      },
+      "writtenOn": "2016-08-22T21:12:57Z",
+      "side": 1,
+      "message": "Ditto. Adding them.",
+      "parentUuid": "885adb66_dd691f23",
+      "range": {
+        "startLine": 445,
+        "startChar": 23,
+        "endLine": 445,
+        "endChar": 29
+      },
+      "revId": "a0483f5c9b7e0eeeb31dce4fd186fdb1b309ef61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "885adb66_1d41d76a",
         "filename": "avb/avbtool",
         "patchSetId": 1
@@ -82,6 +154,24 @@
       "writtenOn": "2016-08-22T20:55:53Z",
       "side": 1,
       "message": "Is this expected to work cross-platform or only linux? IIUC, in some cases this won\u0027t work b/c _image is holding an open handle.",
+      "revId": "a0483f5c9b7e0eeeb31dce4fd186fdb1b309ef61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2823afed_47da6e1d",
+        "filename": "avb/avbtool",
+        "patchSetId": 1
+      },
+      "lineNbr": 497,
+      "author": {
+        "id": 1076971
+      },
+      "writtenOn": "2016-08-22T21:12:57Z",
+      "side": 1,
+      "message": "I think it\u0027ll work on any POSIX platform which I think is good enough for now. (Ideally we\u0027d do this without simg2img/img2simg but that\u0027s a lot more work.)",
+      "parentUuid": "885adb66_1d41d76a",
       "revId": "a0483f5c9b7e0eeeb31dce4fd186fdb1b309ef61",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -105,6 +195,24 @@
     },
     {
       "key": {
+        "uuid": "2823afed_a7becaa1",
+        "filename": "avb/avbtool",
+        "patchSetId": 1
+      },
+      "lineNbr": 503,
+      "author": {
+        "id": 1076971
+      },
+      "writtenOn": "2016-08-22T21:12:57Z",
+      "side": 1,
+      "message": "I don\u0027t think we need that since we never leak any file handles and such objects automatically close() themselves when their reference count drops to zero.",
+      "parentUuid": "885adb66_3d83fbb5",
+      "revId": "a0483f5c9b7e0eeeb31dce4fd186fdb1b309ef61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "885adb66_5ac6b56a",
         "filename": "avb/avbtool",
         "patchSetId": 1
@@ -116,6 +224,30 @@
       "writtenOn": "2016-08-22T20:55:53Z",
       "side": 1,
       "message": "nit: img -\u003e image",
+      "range": {
+        "startLine": 1542,
+        "startChar": 6,
+        "endLine": 1542,
+        "endChar": 9
+      },
+      "revId": "a0483f5c9b7e0eeeb31dce4fd186fdb1b309ef61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2823afed_87bbc6b1",
+        "filename": "avb/avbtool",
+        "patchSetId": 1
+      },
+      "lineNbr": 1542,
+      "author": {
+        "id": 1076971
+      },
+      "writtenOn": "2016-08-22T21:12:57Z",
+      "side": 1,
+      "message": "Yeah, I did that just to avoid the 80 character-limit! I\u0027ll change it!",
+      "parentUuid": "885adb66_5ac6b56a",
       "range": {
         "startLine": 1542,
         "startChar": 6,
