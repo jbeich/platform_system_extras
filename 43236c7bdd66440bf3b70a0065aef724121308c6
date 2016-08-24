@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "68e6875b_84b508de",
+        "filename": "simpleperf/cpu_hotplug_test.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2016-08-24T19:54:41Z",
+      "side": 1,
+      "message": "static constexpr?",
+      "revId": "43236c7bdd66440bf3b70a0065aef724121308c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "68e6875b_64b284f5",
+        "filename": "simpleperf/cpu_hotplug_test.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2016-08-24T19:54:41Z",
+      "side": 1,
+      "message": "you can\u0027t use the chrono literals because of windows? :-(",
+      "range": {
+        "startLine": 73,
+        "startChar": 32,
+        "endLine": 73,
+        "endChar": 57
+      },
+      "revId": "43236c7bdd66440bf3b70a0065aef724121308c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
