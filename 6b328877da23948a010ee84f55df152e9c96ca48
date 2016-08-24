@@ -16,6 +16,24 @@
       "revId": "6b328877da23948a010ee84f55df152e9c96ca48",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e82ef725_298115a6",
+        "filename": "simpleperf/cpu_hotplug_test.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-08-24T00:32:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e800b787_b93347a4",
+      "revId": "6b328877da23948a010ee84f55df152e9c96ca48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
