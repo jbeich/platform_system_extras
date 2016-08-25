@@ -35,7 +35,7 @@ TEST(workload, success) {
 }
 
 TEST(workload, execvp_failure) {
-  auto workload = Workload::CreateWorkload({"/dev/null"});
+  auto workload = Workload::CreateWorkload({"not_exist_file"});
   ASSERT_TRUE(workload != nullptr);
   ASSERT_FALSE(workload->Start());
 }
