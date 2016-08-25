@@ -1,0 +1,9 @@
+Autosubmit+1: Alex Deymo <deymo@google.com>
+Verified+1: Alex Deymo <deymo@google.com>
+Presubmit-Verified-1: Treehugger Robot <treehugger-gerrit@google.com>
+Code-Review+2: Erik Kline <ek@google.com>
+Submitted-by: Alex Deymo <deymo@google.com>
+Submitted-at: Thu, 25 Aug 2016 01:28:42 +0000
+Reviewed-on: https://android-review.googlesource.com/262643
+Project: platform/system/extras
+Branch: refs/heads/master
