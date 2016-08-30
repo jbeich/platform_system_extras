@@ -1,0 +1,10 @@
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Code-Review+2: Jed Estep <jestep@google.com>
+Verified+1: Daniel Rosenberg <drosen@google.com>
+Autosubmit+1: Daniel Rosenberg <drosen@google.com>
+Presubmit-Ready+1: Daniel Rosenberg <drosen@google.com>
+Submitted-by: Daniel Rosenberg <drosen@google.com>
+Submitted-at: Tue, 30 Aug 2016 20:35:22 +0000
+Reviewed-on: https://android-review.googlesource.com/255962
+Project: platform/system/extras
+Branch: refs/heads/master
