@@ -22,6 +22,30 @@
       "revId": "a447c0d5f1d5227af30c0cbb4320ad878bd78c43",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f1c6e968_b5e2a0ef",
+        "filename": "simpleperf/scripts/report_sample.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2016-08-31T18:59:55Z",
+      "side": 1,
+      "message": "ah, I think rather than --symfs, what I\u0027m referring to is the --vmlinux argument.",
+      "parentUuid": "f1c6e968_95fe8498",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 31
+      },
+      "revId": "a447c0d5f1d5227af30c0cbb4320ad878bd78c43",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
