@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f1c6e968_95fe8498",
+        "filename": "simpleperf/scripts/report_sample.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2016-08-31T18:56:36Z",
+      "side": 1,
+      "message": "should we be able to pass in multiple symfs_dirs?\n\nThis may be a naive question, but I think we need to pass in symbols for the system, and for the corresponding kernel version, otherwise we end up with a bunch of:\n\n[kernel.kallsyms]",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 31
+      },
+      "revId": "a447c0d5f1d5227af30c0cbb4320ad878bd78c43",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
