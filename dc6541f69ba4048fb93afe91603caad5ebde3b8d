@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "31d32198_0add9bff",
+        "filename": "verity/fec/main.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2016-09-01T22:25:22Z",
+      "side": 1,
+      "message": "This is completely unnecessary",
+      "range": {
+        "startLine": 351,
+        "startChar": 16,
+        "endLine": 351,
+        "endChar": 31
+      },
+      "revId": "dc6541f69ba4048fb93afe91603caad5ebde3b8d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
