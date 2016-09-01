@@ -294,11 +294,9 @@ bool image_ecc_save(image *ctx)
     assert(sizeof(fec_header) <= FEC_BLOCKSIZE);
 
     uint8_t header[FEC_BLOCKSIZE];
-    uint8_t *p = header;
+    memset(header, 0, FEC_BLOCKSIZE);
 
-    memset(p, 0, FEC_BLOCKSIZE);
-
-    fec_header *f = (fec_header *)p;
+    fec_header *f = (fec_header *)header;
 
     f->magic = FEC_MAGIC;
     f->version = FEC_VERSION;
@@ -310,7 +308,8 @@ bool image_ecc_save(image *ctx)
     SHA256(ctx->fec, ctx->fec_size, f->hash);
 
     /* store a copy of the fec_header at the end of the header block */
-    memcpy(&p[sizeof(header) - sizeof(fec_header)], p, sizeof(fec_header));
+    memcpy(&header[sizeof(header) - sizeof(fec_header)], header,
+        sizeof(fec_header));
 
     assert(ctx->fec_filename);
 
@@ -322,9 +321,23 @@ bool image_ecc_save(image *ctx)
             strerror(errno));
     }
 
-    if (!android::base::WriteFully(fd, ctx->fec, ctx->fec_size) ||
-        !android::base::WriteFully(fd, header, sizeof(header))) {
+    if (!android::base::WriteFully(fd, ctx->fec, ctx->fec_size)) {
         FATAL("failed to write to output: %s\n", strerror(errno));
+    }
+
+    if (ctx->padding > 0) {
+        uint8_t padding[FEC_BLOCKSIZE];
+        memset(padding, 0, FEC_BLOCKSIZE);
+
+        for (uint32_t i = 0; i < ctx->padding; i += FEC_BLOCKSIZE) {
+            if (!android::base::WriteFully(fd, padding, FEC_BLOCKSIZE)) {
+                FATAL("failed to write padding: %s\n", strerror(errno));
+            }
+        }
+    }
+
+    if (!android::base::WriteFully(fd, header, sizeof(header))) {
+        FATAL("failed to write to header: %s\n", strerror(errno));
     }
 
     close(fd);
