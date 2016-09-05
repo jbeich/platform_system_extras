@@ -5,11 +5,6 @@
 #include "fdt_internal.h"
 #include "ufdt_types.h"
 
-static uint32_t tag_of(const struct ufdt_node *node) {
-  if (!node) return FDT_END;
-  return fdt32_to_cpu(*node->fdt_tag_ptr);
-}
-
 static const char *tag_name(uint32_t tag) {
   switch (tag) {
     case FDT_BEGIN_NODE:
@@ -24,7 +19,7 @@ static const char *tag_name(uint32_t tag) {
   return "";
 }
 
-static const char *name_of(void *fdtp, struct ufdt_node *node) {
+static const char *get_name(void *fdtp, struct ufdt_node *node) {
   if (!fdtp || !node) return NULL;
 
   const struct fdt_node_header *nh;

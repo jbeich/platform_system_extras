@@ -18,7 +18,7 @@
  * @return: a pointer to the newly created ufdt_node_dict or
  *          NULL if dto_malloc failed
  */
-struct ufdt_node_dict *ufdt_node_dict_construct();
+struct ufdt_node_dict ufdt_node_dict_construct();
 
 /*
  * Frees all space dto_malloced, not including ufdt_nodes in the table.
@@ -27,12 +27,12 @@ void ufdt_node_dict_destruct(struct ufdt_node_dict *dict);
 
 /*
  * Adds a ufdt_node (as pointer) to the ufdt_node_dict.
- * @return: dict
+ * @return: 0 if success
+ *          < 0 otherwise
  *
  * @Time: O(length of node->name) w.h.p.
  */
-struct ufdt_node_dict *ufdt_node_dict_add(struct ufdt_node_dict *dict,
-                                          struct ufdt_node *node);
+int ufdt_node_dict_add(struct ufdt_node_dict *dict, struct ufdt_node *node);
 
 /*
  * Returns the pointer to the entry in ufdt_node_dict with node->name =
@@ -104,9 +104,12 @@ void ufdt_node_destruct(struct ufdt_node *node);
  * It's been done by add entries in parent->prop_list or node_list depending on
  * the tag type of child.
  *
+ * @return: 0 if success
+ *          < 0 otherwise
+ *
  * @Time: O(1) w.h.p.
  */
-void ufdt_node_add_child(struct ufdt_node *parent, struct ufdt_node *child);
+int ufdt_node_add_child(struct ufdt_node *parent, struct ufdt_node *child);
 
 /* BEGIN of FDT_PROP related functions .*/
 
@@ -150,6 +153,21 @@ void *ufdt_node_get_fdt_prop_data_by_name(const struct ufdt_node *node,
                                           const char *name, int *out_len);
 
 /* END of FDT_PROP related functions .*/
+
+/*
+ * Gets pointer to FDT_BEGIN_NODE subnode of node with name equals to
+ * name[0..len-1].
+ *
+ * @return: a pointer to the subnode or
+ *          NULL if no such subnode.
+ *
+ * @Time: O(len = length of name) w.h.p.
+ */
+
+struct ufdt_node *ufdt_node_get_subnode_by_name_len(const struct ufdt_node *node,
+                                                  const char *name, int len);
+struct ufdt_node *ufdt_node_get_subnode_by_name(const struct ufdt_node *node,
+                                              const char *name);
 
 /*
  * Gets the pointer to FDT_NODE node whose relative path to *node is
@@ -329,7 +347,8 @@ struct ufdt *fdt_to_ufdt(void *fdtp, size_t fdt_size);
  * provide(fdt_property()) is really slow. Since it runs through all strings
  * stored in fdt to find the right `nameoff` for the property node.
  *
- * So we implement our own fdt_property() called `output_property_to_fdt()`, the basic
+ * So we implement our own fdt_property() called `output_property_to_fdt()`, the
+ * basic
  * idea is that we keep a hash table that we can search for the nameoff of the
  * string in constant time instead of O(total length of strings) search.
  *
@@ -339,7 +358,7 @@ struct ufdt *fdt_to_ufdt(void *fdtp, size_t fdt_size);
  * @Time: O(total length of all names + # of nodes in subtree rooted at *root)
  */
 int output_ufdt_node_to_fdt(struct ufdt_node *node, void *fdtp,
-                   struct ufdt_node_dict *all_props);
+                            struct ufdt_node_dict *all_props);
 
 /*
  * Sequentially dumps the whole ufdt to FDT buffer fdtp with buffer size

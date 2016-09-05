@@ -48,7 +48,7 @@ static int _ufdt_node_dict_find_index_by_name(struct ufdt_node **hash_table,
 static int _ufdt_node_dict_find_index_in_ht(struct ufdt_node **hash_table,
                                             int size, struct ufdt_node *x) {
   if (x == NULL) return -1;
-  return _ufdt_node_dict_find_index_by_name(hash_table, size, x->name);
+  return _ufdt_node_dict_find_index_by_name(hash_table, size, name_of(x));
 }
 
 /*
@@ -59,26 +59,27 @@ static int _ufdt_node_dict_find_index_in_ht(struct ufdt_node **hash_table,
  * ufdt_node_dict methods.
  */
 
-struct ufdt_node_dict *ufdt_node_dict_construct() {
-  struct ufdt_node_dict *res = dto_malloc(sizeof(struct ufdt_node_dict));
-  if (res == NULL) return NULL;
-  res->mem_size = DTNL_INIT_SZ;
-  res->num_used = 0;
-  res->nodes = dto_malloc(DTNL_INIT_SZ * sizeof(struct ufdt_node *));
-  if (res->nodes == NULL) return NULL;
-  dto_memset(res->nodes, 0, DTNL_INIT_SZ * sizeof(struct ufdt_node *));
+struct ufdt_node_dict ufdt_node_dict_construct() {
+  struct ufdt_node_dict res;
+  res.mem_size = DTNL_INIT_SZ;
+  res.num_used = 0;
+  res.nodes = dto_malloc(DTNL_INIT_SZ * sizeof(struct ufdt_node *));
+  if (res.nodes == NULL) {
+    res.mem_size = 0;
+    return res;
+  }
+  dto_memset(res.nodes, 0, DTNL_INIT_SZ * sizeof(struct ufdt_node *));
   return res;
 }
 
 void ufdt_node_dict_destruct(struct ufdt_node_dict *dict) {
   if (dict == NULL) return;
   dto_free(dict->nodes);
-  dto_free(dict);
+  dict->mem_size = dict->num_used = 0;
 }
 
-static struct ufdt_node_dict *ufdt_node_dict_resize(
-    struct ufdt_node_dict *dict) {
-  if (dict == NULL) dict = ufdt_node_dict_construct();
+static int ufdt_node_dict_resize(struct ufdt_node_dict *dict) {
+  if (dict == NULL) return -1;
 
   int new_size = dict->mem_size << 1;
 
@@ -94,9 +95,9 @@ static struct ufdt_node_dict *ufdt_node_dict_resize(
     if (idx < 0) {
       dto_error(
           "failed to find new index in ufdt_node_dict resize for entry :%s:\n",
-          node->name);
+          name_of(node));
       dto_free(new_nodes);
-      return dict;
+      return -1;
     }
     new_nodes[idx] = node;
   }
@@ -105,19 +106,18 @@ static struct ufdt_node_dict *ufdt_node_dict_resize(
 
   dict->mem_size = new_size;
   dict->nodes = new_nodes;
-  return dict;
+  return 0;
 }
 
-struct ufdt_node_dict *ufdt_node_dict_add(struct ufdt_node_dict *dict,
-                                          struct ufdt_node *node) {
-  if (node == NULL) return dict;
-  if (dict == NULL) dict = ufdt_node_dict_construct();
+int ufdt_node_dict_add(struct ufdt_node_dict *dict, struct ufdt_node *node) {
+  if (node == NULL) return -1;
+  if (dict == NULL) return -1;
 
   int idx = _ufdt_node_dict_find_index_in_ht(dict->nodes, dict->mem_size, node);
   if (idx < 0) {
     dto_error("failed to find new index in ufdt_node_dict add for entry :%s:\n",
-              node->name);
-    return dict;
+              name_of(node));
+    return -1;
   }
 
   if (dict->nodes[idx] == NULL) ++dict->num_used;
@@ -126,11 +126,12 @@ struct ufdt_node_dict *ufdt_node_dict_add(struct ufdt_node_dict *dict,
   /*
    * When the hash table is too full, double the size and rehashing.
    */
+  int err = 0;
   if (_ufdt_node_dict_is_too_full(dict)) {
-    dict = ufdt_node_dict_resize(dict);
+    err = ufdt_node_dict_resize(dict);
   }
 
-  return dict;
+  return err;
 }
 
 /*
@@ -173,5 +174,5 @@ struct ufdt_node *ufdt_node_dict_find_node(struct ufdt_node_dict *dict,
 
 void ufdt_node_dict_print(struct ufdt_node_dict *dict) {
   struct ufdt_node **it;
-  for_each(it, dict) dto_print("%ld -> %s\n", it - dict->nodes, (*it)->name);
+  for_each(it, dict) dto_print("%ld -> %s\n", it - dict->nodes, name_of(*it));
 }

@@ -250,11 +250,11 @@ static int ufdt_overlay_do_fixups(struct ufdt *main_tree,
      */
 
     struct ufdt_node *fixups = *it;
-    char *symbol_path = ufdt_node_get_fdt_prop_data_by_name(main_symbols_node,
-                                                            fixups->name, &len);
+    char *symbol_path = ufdt_node_get_fdt_prop_data_by_name(
+        main_symbols_node, name_of(fixups), &len);
 
     if (!symbol_path) {
-      dto_error("Couldn't find '%s' symbol in main dtb\n", fixups->name);
+      dto_error("Couldn't find '%s' symbol in main dtb\n", name_of(fixups));
       return -1;
     }
 
@@ -348,8 +348,8 @@ static enum overlay_result ufdt_apply_fragment(struct ufdt *tree,
   int err = ufdt_overlay_node(target_node, overlay_node);
 
   if (err < 0) {
-    dto_error("failed to overlay node %s to target %s\n", overlay_node->name,
-              target_node->name);
+    dto_error("failed to overlay node %s to target %s\n", name_of(overlay_node),
+              name_of(target_node));
     return OVERLAY_RESULT_MERGE_FAIL;
   }
 
@@ -441,7 +441,7 @@ static int ufdt_local_fixup_node(struct ufdt_node *target_node,
 
   for_each_prop(it_local_fixups, local_fixups_node) {
     sub_target_node =
-        ufdt_node_get_property_by_name(target_node, (*it_local_fixups)->name);
+        ufdt_node_get_property_by_name(target_node, name_of(*it_local_fixups));
 
     if (sub_target_node != NULL) {
       int err = ufdt_local_fixup_prop(sub_target_node, *it_local_fixups,
@@ -454,7 +454,7 @@ static int ufdt_local_fixup_node(struct ufdt_node *target_node,
 
   for_each_node(it_local_fixups, local_fixups_node) {
     sub_target_node =
-        ufdt_node_get_node_by_path(target_node, (*it_local_fixups)->name);
+        ufdt_node_get_node_by_path(target_node, name_of(*it_local_fixups));
     if (sub_target_node != NULL) {
       int err = ufdt_local_fixup_node(sub_target_node, *it_local_fixups,
                                       phandle_offset);

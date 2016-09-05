@@ -55,6 +55,9 @@ main() {
   run_test_case \
     "local_fixup_with_offset" \
     "Run test about dealing with local fixup with offset > 0"
+  run_test_case \
+    "overlay_2_layers" \
+    "Run test about dealing with overlay deep tree"
   )
 
   if [ $? -ne 0 ]; then

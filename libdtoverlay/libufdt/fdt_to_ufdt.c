@@ -61,7 +61,6 @@ static struct ufdt_node *fdt_to_ufdt_tree(void *fdtp, int cur_fdt_tag_offset,
                                       next_fdt_tag_offset, tag);
         ufdt_node_add_child(res, child_node);
       } while (tag != FDT_END_NODE);
-
       break;
 
     default:
@@ -142,38 +141,47 @@ struct ufdt_node *ufdt_get_node_by_phandle(struct ufdt *tree,
   return res;
 }
 
-static struct ufdt_node_dict *merge_node_dict(struct ufdt_node_dict *base_dict,
-                                              struct ufdt_node_dict *add_dict) {
-  if (add_dict == NULL) return base_dict;
-  struct ufdt_node **it;
-  for_each(it, add_dict) {
-    struct ufdt_node *target_node =
-        ufdt_node_dict_find_node(base_dict, (*it)->name);
-    if (target_node != NULL) {
-      merge_ufdt_into(target_node, *it);
+int merge_children(struct ufdt_node *node_a, struct ufdt_node *node_b) {
+  int err = 0;
+  struct ufdt_node *it;
+  for (it = ((struct fdt_node_ufdt_node *)node_b)->child; it;) {
+    struct ufdt_node *cur_node = it;
+    it = it->sibling;
+    cur_node->sibling = NULL;
+    struct ufdt_node *target_node = NULL;
+    if (tag_of(cur_node) == FDT_BEGIN_NODE) {
+      target_node = ufdt_node_get_subnode_by_name(node_a, name_of(cur_node));
     } else {
-      base_dict = ufdt_node_dict_add(base_dict, *it);
+      target_node = ufdt_node_get_property_by_name(node_a, name_of(cur_node));
     }
-    /*
-     * The ufdt_node* in add_dict will be copied to base_dict.
-     * To prevent the ufdt_node from being freed twice
-     * (main_tree and overlay_tree) at the end of function
-     * apply_overlay_libufdt(), set this node in add_dict
-     * (overlay_tree) to NULL.
-     */
-    *it = NULL;
+    if (target_node == NULL) {
+      err = ufdt_node_add_child(node_a, cur_node);
+    } else {
+      err = merge_ufdt_into(target_node, cur_node);
+    }
+    if (err < 0) return -1;
   }
-  return base_dict;
+  /*
+   * The ufdt_node* in node_b will be copied to node_a.
+   * To prevent the ufdt_node from being freed twice
+   * (main_tree and overlay_tree) at the end of function
+   * apply_overlay_libufdt(), set this node in node_b
+   * (overlay_tree) to NULL.
+   */
+  ((struct fdt_node_ufdt_node *)node_b)->child = NULL;
+
+  return 0;
 }
 
-int merge_ufdt_into(struct ufdt_node *tree_a, struct ufdt_node *tree_b) {
-  if (tag_of(tree_a) == FDT_PROP) {
-    tree_a->fdt_tag_ptr = tree_b->fdt_tag_ptr;
+int merge_ufdt_into(struct ufdt_node *node_a, struct ufdt_node *node_b) {
+  if (tag_of(node_a) == FDT_PROP) {
+    node_a->fdt_tag_ptr = node_b->fdt_tag_ptr;
     return 0;
   }
 
-  tree_a->prop_dict = merge_node_dict(tree_a->prop_dict, tree_b->prop_dict);
-  tree_a->node_dict = merge_node_dict(tree_a->node_dict, tree_b->node_dict);
+  int err = 0;
+  err = merge_children(node_a, node_b);
+  if (err < 0) return -1;
 
   return 0;
 }
@@ -188,7 +196,7 @@ static int count_phandle_node(struct ufdt_node *node) {
   int res = 0;
   if (ufdt_node_get_phandle(node) > 0) res++;
   struct ufdt_node **it;
-  for_each_node(it, node) res += count_phandle_node(*it);
+  for_each_child(it, node) { res += count_phandle_node(*it); }
   return res;
 }
 
@@ -264,11 +272,15 @@ int ufdt_to_fdt(struct ufdt *tree, void *buf, int buf_size) {
   err = fdt_finish_reservemap(buf);
   if (err < 0) return -1;
 
-  struct ufdt_node_dict *all_props = ufdt_node_dict_construct();
-  err = output_ufdt_node_to_fdt(tree->root, buf, all_props);
+  /*
+   * Obtains all props for later use because getting them from
+   * FDT requires complicated manipulation.
+  */
+  struct ufdt_node_dict all_props = ufdt_node_dict_construct();
+  err = output_ufdt_node_to_fdt(tree->root, buf, &all_props);
   if (err < 0) return -1;
 
-  ufdt_node_dict_destruct(all_props);
+  ufdt_node_dict_destruct(&all_props);
 
   err = fdt_finish(buf);
   if (err < 0) return -1;
