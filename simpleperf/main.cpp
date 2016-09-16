@@ -22,6 +22,7 @@
 #include <android-base/logging.h>
 
 #include "command.h"
+#include "environment.h"
 #include "utils.h"
 
 constexpr int SIMPLEPERF_VERSION = 1;

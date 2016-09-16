@@ -28,6 +28,7 @@
 #include "event_attr.h"
 #include "event_fd.h"
 #include "event_type.h"
+#include "inplace_sampler.h"
 #include "perf_event.h"
 #include "record.h"
 
@@ -124,14 +125,18 @@ class EventSelectionSet {
     std::vector<std::unique_ptr<EventFd>> event_fds;
     // counters for event files closed for cpu hotplug events
     std::vector<CounterInfo> hotplugged_counters;
+    std::unique_ptr<InplaceSampler> inplace_sampler;
   };
   typedef std::vector<EventSelection> EventSelectionGroup;
 
   bool BuildAndCheckEventSelection(const std::string& event_name,
                                    EventSelection* selection);
   void UnionSampleType();
-  bool OpenEventFilesOnGroup(EventSelectionGroup& group, pid_t tid, int cpu,
-                             std::string* failed_event_type);
+  bool IsUserSpaceSamplerGroup(const EventSelectionGroup& group) const;
+
+  bool OpenEventFilesOnGroup(EventSelectionGroup& group, pid_t tid,
+                             int cpu, std::string* failed_event_type);
+  bool OpenUserSpaceSampler(EventSelectionGroup& group);
 
   bool MmapEventFiles(size_t mmap_pages, bool report_error);
   bool ReadMmapEventDataForFd(EventFd* event_fd);

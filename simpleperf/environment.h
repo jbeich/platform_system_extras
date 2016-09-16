@@ -44,6 +44,7 @@ struct ThreadComm {
   std::string comm;
 };
 
+bool GetThreadComm(pid_t pid, std::vector<ThreadComm>* thread_comms);
 bool GetThreadComms(std::vector<ThreadComm>* thread_comms);
 bool GetProcessIdForThread(pid_t tid, pid_t* pid);
 
