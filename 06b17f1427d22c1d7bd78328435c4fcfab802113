@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "4b2aa261_dcc40d58",
+        "filename": "simpleperf/perf_clock.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-09-16T01:49:54Z",
+      "side": 1,
+      "message": "I think it\u0027s fine. if one mmap() or GetSystemClock() fails, has_error \u003d true, then GetClockDiff() and InitPerfClock() will fail, and simpleperf will exit. So no need to worry about a little resource leak here.",
+      "parentUuid": "4b2aa261_dcfc0dd3",
+      "range": {
+        "startLine": 96,
+        "startChar": 4,
+        "endLine": 96,
+        "endChar": 10
+      },
+      "revId": "06b17f1427d22c1d7bd78328435c4fcfab802113",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4b2aa261_7c9321a8",
         "filename": "simpleperf/perf_clock.cpp",
         "patchSetId": 3
@@ -36,6 +60,30 @@
       "writtenOn": "2016-09-16T00:29:36Z",
       "side": 1,
       "message": "Please document why we are using end_system_time_in_ns, not start_system_time_in_ns.",
+      "range": {
+        "startLine": 99,
+        "startChar": 52,
+        "endLine": 99,
+        "endChar": 73
+      },
+      "revId": "06b17f1427d22c1d7bd78328435c4fcfab802113",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4b2aa261_5c901d4c",
+        "filename": "simpleperf/perf_clock.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-09-16T01:49:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4b2aa261_7c9321a8",
       "range": {
         "startLine": 99,
         "startChar": 52,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "4b2aa261_7c8de134",
+        "filename": "simpleperf/perf_clock.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-09-16T01:49:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4b2aa261_bcde795c",
+      "range": {
+        "startLine": 166,
+        "startChar": 2,
+        "endLine": 166,
+        "endChar": 4
+      },
+      "revId": "06b17f1427d22c1d7bd78328435c4fcfab802113",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4b2aa261_3c99a9ca",
         "filename": "simpleperf/perf_clock.h",
         "patchSetId": 3
@@ -82,6 +154,30 @@
       "writtenOn": "2016-09-16T00:29:36Z",
       "side": 1,
       "message": "Better documentation?\n\nReturns true on ...\nMust call InitPerfClock() before calling GetPerfClock().",
+      "range": {
+        "startLine": 22,
+        "startChar": 3,
+        "endLine": 22,
+        "endChar": 7
+      },
+      "revId": "06b17f1427d22c1d7bd78328435c4fcfab802113",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4b2aa261_b7793224",
+        "filename": "simpleperf/perf_clock.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-09-16T01:49:54Z",
+      "side": 1,
+      "message": "Done. No need to document return value, because it is a common sense to return true if success, and return false on error.",
+      "parentUuid": "4b2aa261_3c99a9ca",
       "range": {
         "startLine": 22,
         "startChar": 3,
