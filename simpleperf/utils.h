@@ -111,6 +111,26 @@ void MoveFromBinaryFormat(T& data, const char*& p) {
   p += sizeof(T);
 }
 
+template <class T>
+void MoveFromBinaryFormat(T* data_p, size_t n, const char*& p) {
+  size_t size = n * sizeof(T);
+  memcpy(data_p, p, size);
+  p += size;
+}
+
+template <class T>
+void MoveToBinaryFormat(const T& data, char*& p) {
+  *reinterpret_cast<T*>(p) = data;
+  p += sizeof(T);
+}
+
+template <class T>
+void MoveToBinaryFormat(const T* data_p, size_t n, char*& p) {
+  size_t size = n * sizeof(T);
+  memcpy(p, data_p, size);
+  p += size;
+}
+
 void PrintIndented(size_t indent, const char* fmt, ...);
 void FprintIndented(FILE* fp, size_t indent, const char* fmt, ...);
 
