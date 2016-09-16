@@ -109,9 +109,11 @@ libsimpleperf_src_files_linux := \
   environment.cpp \
   event_fd.cpp \
   event_selection_set.cpp \
+  inplace_sampler.cpp \
   IOEventLoop.cpp \
   perf_clock.cpp \
   record_file_writer.cpp \
+  UnixSocket.cpp \
   workload.cpp \
 
 libsimpleperf_src_files_darwin := \
@@ -222,7 +224,6 @@ include $(CLEAR_VARS)
 LOCAL_MODULE := libsimpleperf_report
 LOCAL_MODULE_HOST_OS := darwin linux windows
 LOCAL_CPPFLAGS := $(simpleperf_cppflags_host)
-LOCAL_CPPFLAGS := $(simpleperf_cppflags_host)
 LOCAL_CPPFLAGS_darwin := $(simpleperf_cppflags_host_darwin)
 LOCAL_CPPFLAGS_linux := $(simpleperf_cppflags_host_linux)
 LOCAL_CPPFLAGS_windows := $(simpleperf_cppflags_host_windows)
@@ -235,6 +236,94 @@ LOCAL_CXX_STL := libc++_static
 include $(LLVM_HOST_BUILD_MK)
 include $(BUILD_HOST_SHARED_LIBRARY)
 
+
+# libsimpleperf_inplace_sampler_server.so target
+
+simpleperf_inplace_sampler_server_static_libraries_target := \
+  libbacktrace_offline \
+  libbacktrace \
+  libunwind \
+  libziparchive \
+  libz \
+  libbase \
+  libcutils \
+  liblog \
+  libutils \
+  liblzma \
+  libLLVMObject \
+  libLLVMBitReader \
+  libLLVMMC \
+  libLLVMMCParser \
+  libLLVMCore \
+  libLLVMSupport \
+  libprotobuf-cpp-lite \
+  libevent \
+  libc \
+
+simpleperf_inplace_sampler_server_static_libraries_target := \
+  libunwindbacktrace \
+  libbase \
+  libcutils \
+  liblog \
+  libutils \
+  liblzma \
+  libevent \
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := libinplace_sampler_server
+LOCAL_CPPFLAGS := $(simpleperf_cppflags_target)
+LOCAL_SRC_FILES := inplace_sampler_server.cpp
+LOCAL_STATIC_LIBRARIES := libsimpleperf $(simpleperf_inplace_sampler_server_static_libraries_target)
+LOCAL_MULTILIB := both
+LOCAL_CXX_STL := libc++_static
+LOCAL_LDLIBS := -Wl,--exclude-libs,ALL -z muldefs
+include $(LLVM_DEVICE_BUILD_MK)
+include $(BUILD_SHARED_LIBRARY)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := inplace_sampler_measure
+LOCAL_CPPFLAGS := $(simpleperf_cppflags_target) -O0
+LOCAL_SRC_FILES := inplace_sampler_measure.cpp
+LOCAL_SHARED_LIBRARIES := libinplace_sampler_server
+ifdef TARGET_2ND_ARCH
+LOCAL_MULTILIB := both
+LOCAL_MODULE_STEM_32 := inplace_sampler_measure32
+LOCAL_MODULE_STEM_64 := inplace_sampler_measure
+endif
+LOCAL_CXX_STL := libc++_static
+LOCAL_LDLIBS := -Wl,--exclude-libs,ALL
+include $(LLVM_DEVICE_BUILD_MK)
+include $(BUILD_EXECUTABLE)
+
+
+# libsimpleperf_inplace_sampler_server.so host
+include $(CLEAR_VARS)
+LOCAL_MODULE := libinplace_sampler_server
+LOCAL_MODULE_HOST_OS := linux
+LOCAL_CPPFLAGS := $(simpleperf_cppflags_host)
+LOCAL_CPPFLAGS_linux := $(simpleperf_cppflags_host_linux)
+LOCAL_SRC_FILES := inplace_sampler_server.cpp
+LOCAL_STATIC_LIBRARIES := libsimpleperf $(simpleperf_static_libraries_host)
+LOCAL_STATIC_LIBRARIES_linux := $(simpleperf_static_libraries_host_linux)
+LOCAL_LDLIBS_linux := $(simpleperf_ldlibs_host_linux) -Wl,--exclude-libs,ALL
+LOCAL_MULTILIB := first
+LOCAL_CXX_STL := libc++_static
+include $(LLVM_HOST_BUILD_MK)
+include $(BUILD_HOST_SHARED_LIBRARY)
+
+# libsimpleperf_inplace_sampler_server.so host
+include $(CLEAR_VARS)
+LOCAL_MODULE := inplace_sampler_measure
+LOCAL_MODULE_HOST_OS := linux
+LOCAL_CPPFLAGS := $(simpleperf_cppflags_host) -O0
+LOCAL_CPPFLAGS_linux := $(simpleperf_cppflags_host_linux)
+LOCAL_SRC_FILES := inplace_sampler_measure.cpp
+LOCAL_SHARED_LIBRARIES := libinplace_sampler_server
+LOCAL_LDLIBS_linux := $(simpleperf_ldlibs_host_linux) -Wl,--exclude-libs,ALL
+LOCAL_MULTILIB := first
+LOCAL_CXX_STL := libc++_static
+include $(LLVM_HOST_BUILD_MK)
+include $(BUILD_HOST_EXECUTABLE)
 
 # simpleperf_unit_test
 # =========================================================

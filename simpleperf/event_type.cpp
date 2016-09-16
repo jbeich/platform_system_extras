@@ -31,6 +31,7 @@
 
 static const std::vector<EventType> static_event_type_array = {
 #include "event_type_table.h"
+    {"inplace-sampler", USER_SPACE_SAMPLER_EVENT_TYPE, INPLACE_SAMPLER_CONFIG},
 };
 
 static const std::vector<EventType> GetTracepointEventTypes() {

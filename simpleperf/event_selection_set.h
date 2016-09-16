@@ -25,8 +25,10 @@
 
 #include <android-base/macros.h>
 
+#include "event_attr.h"
 #include "event_fd.h"
 #include "event_type.h"
+#include "inplace_sampler.h"
 #include "perf_event.h"
 #include "record.h"
 
@@ -38,24 +40,15 @@ struct CounterInfo {
   PerfCounter counter;
 };
 
-struct EventSelection;
+class EventSelection;
+class EventSelectionSet;
 
 struct CountersInfo {
-  const EventSelection* selection;
+  uint32_t group_id;
+  std::string event_name;
+  std::string event_modifier;
   std::vector<CounterInfo> counters;
 };
-
-struct EventSelection {
-  uint32_t group_id;
-  uint32_t selection_id;
-  EventTypeAndModifier event_type_modifier;
-  perf_event_attr event_attr;
-  std::vector<std::unique_ptr<EventFd>> event_fds;
-  // counters for event files closed for cpu hotplug events
-  std::vector<CounterInfo> hotplugged_counters;
-};
-
-typedef std::vector<EventSelection> EventSelectionGroup;
 
 class IOEventLoop;
 
@@ -81,21 +74,23 @@ class EventSelectionSet {
 
   bool empty() const { return groups_.empty(); }
 
-  const std::vector<EventSelectionGroup>& groups() { return groups_; }
-
   bool AddEventType(const std::string& event_name);
   bool AddEventGroup(const std::vector<std::string>& event_names);
+  std::vector<const EventType*> GetTracepointEvents() const;
+  std::vector<EventAttrWithId> GetEventAttrWithId() const;
 
   void SetEnableOnExec(bool enable);
   bool GetEnableOnExec();
   void SampleIdAll();
-  void SetSampleFreq(const EventSelection& selection, uint64_t sample_freq);
-  void SetSamplePeriod(const EventSelection& selection, uint64_t sample_period);
+  void SetSampleFreq(uint64_t sample_freq);
+  void SetSamplePeriod(uint64_t sample_period);
+  void UseDefaultSampleFreq();
   bool SetBranchSampling(uint64_t branch_sample_type);
   void EnableFpCallChainSampling();
   bool EnableDwarfCallChainSampling(uint32_t dump_stack_size);
   void SetInherit(bool enable);
   void SetLowWatermark();
+  bool NeedKernelSymbol() const;
 
   void AddMonitoredProcesses(const std::set<pid_t>& processes) {
     processes_.insert(processes.begin(), processes.end());
@@ -131,9 +126,25 @@ class EventSelectionSet {
           DEFAULT_PERIOD_TO_DETECT_CPU_HOTPLUG_EVENTS_IN_SEC);
 
  private:
+  struct EventSelection {
+    EventTypeAndModifier event_type_modifier;
+    perf_event_attr event_attr;
+    std::vector<std::unique_ptr<EventFd>> event_fds;
+    // counters for event files closed for cpu hotplug events
+    std::vector<CounterInfo> hotplugged_counters;
+    std::unique_ptr<InplaceSampler> inplace_sampler;
+  };
+  typedef std::vector<EventSelection> EventSelectionGroup;
+
   bool BuildAndCheckEventSelection(const std::string& event_name,
                                    EventSelection* selection);
   void UnionSampleType();
+  bool IsUserSpaceSamplerGroup(const EventSelectionGroup& group) const;
+
+  bool OpenEventFilesOnGroup(EventSelectionGroup& group, pid_t tid,
+                             int cpu, std::string* failed_event_type);
+  bool OpenUserSpaceSampler(EventSelectionGroup& group);
+
   bool MmapEventFiles(size_t mmap_pages, bool report_error);
   bool ReadMmapEventDataForFd(EventFd* event_fd);
 

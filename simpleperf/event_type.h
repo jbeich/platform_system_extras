@@ -22,6 +22,12 @@
 #include <string>
 #include <vector>
 
+static constexpr uint32_t USER_SPACE_SAMPLER_EVENT_TYPE = 32768;
+
+enum {
+  INPLACE_SAMPLER_CONFIG = 0,
+};
+
 // EventType represents one type of event, like cpu_cycle_event, cache_misses_event.
 // The user knows one event type by its name, and the kernel knows one event type by its
 // (type, config) pair. EventType connects the two representations, and tells the user if

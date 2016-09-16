@@ -36,6 +36,7 @@
 #endif
 
 #include "read_elf.h"
+#include "thread_tree.h"
 #include "utils.h"
 
 class LineReader {
@@ -259,7 +260,7 @@ std::vector<pid_t> GetThreadsInProcess(pid_t pid) {
   return result;
 }
 
-static bool GetThreadComm(pid_t pid, std::vector<ThreadComm>* thread_comms) {
+bool GetThreadComm(pid_t pid, std::vector<ThreadComm>* thread_comms) {
   std::vector<pid_t> tids = GetThreadsInProcess(pid);
   for (auto& tid : tids) {
     std::string status_file = android::base::StringPrintf("/proc/%d/task/%d/status", pid, tid);
@@ -290,6 +291,17 @@ bool GetThreadComms(std::vector<ThreadComm>* thread_comms) {
       return false;
     }
   }
+  return true;
+}
+
+bool GetProcessIdForThread(pid_t tid, pid_t* pid) {
+  std::string status_file = android::base::StringPrintf("/proc/%d/status", tid);
+  std::string comm;
+  pid_t tgid;
+  if (!ReadThreadNameAndTgid(status_file, &comm, &tgid)) {
+    return false;
+  }
+  *pid = tgid;
   return true;
 }
 
