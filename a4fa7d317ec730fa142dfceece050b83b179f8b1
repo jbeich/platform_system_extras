@@ -16,6 +16,24 @@
       "revId": "a4fa7d317ec730fa142dfceece050b83b179f8b1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "300b1fab_27929a4e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-09-21T23:10:39Z",
+      "side": 1,
+      "message": "you can run `out/host/linux-x86/nativetest64/simpleperf_unit_test/simpleperf_unit_test -t system/extras/simpleperf/testdata` on host, or push out/target/product/$DEVICE/data/nativetest64/simpleperf_unit_test/simpleperf_unit_test on device and run it.",
+      "parentUuid": "f018a7be_65284646",
+      "revId": "a4fa7d317ec730fa142dfceece050b83b179f8b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
