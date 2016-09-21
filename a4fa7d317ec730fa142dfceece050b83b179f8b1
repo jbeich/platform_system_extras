@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f018a7be_65284646",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2016-09-21T22:58:53Z",
+      "side": 1,
+      "message": "Yabin, is there any particular test that I should run?",
+      "revId": "a4fa7d317ec730fa142dfceece050b83b179f8b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
