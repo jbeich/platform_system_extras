@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9034cbbf_4dc94da1",
+        "filename": "perfprofd/perfprofdcore.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 889,
+      "author": {
+        "id": 1059614
+      },
+      "writtenOn": "2016-09-26T12:44:03Z",
+      "side": 1,
+      "message": "This LGTM, although if you are only interested in exercising the encoding path (don\u0027t care about the annotations like screen on, etc) then you might think about the possibility of creating a separate host executable for doing this (as opposed to putting the code in the daemon).",
+      "revId": "a5cbb7a0538bd63d87f11be13ce1d85bb594e20d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
