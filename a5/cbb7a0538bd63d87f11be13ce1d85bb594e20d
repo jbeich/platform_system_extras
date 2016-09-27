@@ -1,0 +1,9 @@
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Code-Review+1: Than McIntosh <thanm@google.com>
+Code-Review+2: Yabin Cui <yabinc@google.com>
+Verified+1: Than McIntosh <thanm@google.com>
+Submitted-by: Than McIntosh <thanm@google.com>
+Submitted-at: Tue, 27 Sep 2016 02:18:56 +0000
+Reviewed-on: https://android-review.googlesource.com/278659
+Project: platform/system/extras
+Branch: refs/heads/master
