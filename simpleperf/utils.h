@@ -145,4 +145,14 @@ uint64_t ConvertBytesToValue(const char* bytes, uint32_t size);
 
 timeval SecondToTimeval(double time_in_sec);
 
+static inline bool ParseDouble(const char* s, double* out) {
+  errno = 0;
+  char* end;
+  *out = strtod(s, &end);
+  if (errno != 0 || s == end || *end != '\0') {
+    return false;
+  }
+  return true;
+}
+
 #endif  // SIMPLE_PERF_UTILS_H_

@@ -423,10 +423,8 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
       if (!NextArgumentOrError(args, &i)) {
         return false;
       }
-      errno = 0;
-      char* endptr;
-      duration_in_sec_ = strtod(args[i].c_str(), &endptr);
-      if (duration_in_sec_ <= 0 || *endptr != '\0' || errno == ERANGE) {
+      if (!ParseDouble(args[i].c_str(), &duration_in_sec_) ||
+          duration_in_sec_ <= 0) {
         LOG(ERROR) << "Invalid duration: " << args[i].c_str();
         return false;
       }
