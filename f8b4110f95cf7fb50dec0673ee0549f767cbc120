@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "425b693f_47074e27",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2016-09-29T19:23:37Z",
+      "side": 1,
+      "message": "please put a more descriptive title as these are seen in the git log one-liners. For example:\n\nqtaguid: test: switch from asprintf to android::base::StringPrintf",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 8
+      },
+      "revId": "f8b4110f95cf7fb50dec0673ee0549f767cbc120",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
