@@ -173,9 +173,14 @@ LOCAL_CPPFLAGS := $(simpleperf_cppflags_target)
 LOCAL_SRC_FILES := main.cpp
 LOCAL_STATIC_LIBRARIES := libsimpleperf $(simpleperf_static_libraries_target)
 ifdef TARGET_2ND_ARCH
+ifeq ($(TARGET_TRANSLATE_2ND_ARCH),true)
+LOCAL_MULTILIB := first
+LOCAL_FORCE_STATIC_EXECUTABLE := true
+else
 LOCAL_MULTILIB := both
 LOCAL_MODULE_STEM_32 := simpleperf32
 LOCAL_MODULE_STEM_64 := simpleperf
+endif
 endif
 LOCAL_FORCE_STATIC_EXECUTABLE := true
 include $(LLVM_DEVICE_BUILD_MK)
