@@ -1,0 +1,10 @@
+Code-Review+1: Wei Wang <wvw@google.com>
+Code-Review+2: Martijn Coenen <maco@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Verified+1: Wei Wang <wvw@google.com>
+Autosubmit+1: Wei Wang <wvw@google.com>
+Submitted-by: Wei Wang <wvw@google.com>
+Submitted-at: Tue, 04 Oct 2016 21:52:54 +0000
+Reviewed-on: https://android-review.googlesource.com/281298
+Project: platform/system/extras
+Branch: refs/heads/master
