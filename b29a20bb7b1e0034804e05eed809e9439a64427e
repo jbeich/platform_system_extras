@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "3f0db02c_577fec6a",
+        "filename": "simpleperf/cmd_report.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-10-05T18:43:18Z",
+      "side": 1,
+      "message": "This is call chain length instead of bytes in stack. I named this option following linux-tools-perf.",
+      "parentUuid": "62a14daa_f38fca2d",
+      "revId": "b29a20bb7b1e0034804e05eed809e9439a64427e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "62a14daa_d392c65a",
         "filename": "simpleperf/cmd_report.cpp",
         "patchSetId": 1
@@ -42,6 +60,30 @@
     },
     {
       "key": {
+        "uuid": "3f0db02c_17797483",
+        "filename": "simpleperf/cmd_report.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-10-05T18:43:18Z",
+      "side": 1,
+      "message": "I named this option following linux-tools-perf. Although it is a little confusing, I think it is better to give another name, no?",
+      "parentUuid": "62a14daa_d392c65a",
+      "range": {
+        "startLine": 285,
+        "startChar": 3,
+        "endLine": 285,
+        "endChar": 16
+      },
+      "revId": "b29a20bb7b1e0034804e05eed809e9439a64427e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "62a14daa_768108ff",
         "filename": "simpleperf/utils.h",
         "patchSetId": 1
@@ -53,6 +95,24 @@
       "writtenOn": "2016-10-03T23:31:56Z",
       "side": 1,
       "message": "libbase style with the min/max arguments? that way you can easily add the missing check for percentages \u003c 0 or \u003e 100. (and maybe this should go into libbase eventually?)",
+      "revId": "b29a20bb7b1e0034804e05eed809e9439a64427e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3f0db02c_f76de0c1",
+        "filename": "simpleperf/utils.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-10-05T18:43:18Z",
+      "side": 1,
+      "message": "Yes, there are other places using strtod.",
+      "parentUuid": "62a14daa_768108ff",
       "revId": "b29a20bb7b1e0034804e05eed809e9439a64427e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
