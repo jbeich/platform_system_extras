@@ -24,6 +24,8 @@ LOCAL_SRC_FILES := $(libext4_utils_src_files)
 LOCAL_MODULE := libext4_utils_host
 # Various instances of dereferencing a type-punned pointer in extent.c
 LOCAL_CFLAGS += -fno-strict-aliasing
+LOCAL_EXPORT_C_INCLUDE_DIRS := \
+    $(LOCAL_PATH)/include
 LOCAL_STATIC_LIBRARIES := \
     libsparse_host \
     libz
@@ -72,6 +74,8 @@ LOCAL_MODULE := libext4_utils
 LOCAL_C_INCLUDES += system/core/logwrapper/include
 # Various instances of dereferencing a type-punned pointer in extent.c
 LOCAL_CFLAGS += -fno-strict-aliasing
+LOCAL_EXPORT_C_INCLUDE_DIRS := \
+    $(LOCAL_PATH)/include
 LOCAL_SHARED_LIBRARIES := \
     libbase \
     libcutils \
@@ -89,6 +93,8 @@ LOCAL_SRC_FILES := $(libext4_utils_src_files) \
 LOCAL_MODULE := libext4_utils_static
 # Various instances of dereferencing a type-punned pointer in extent.c
 LOCAL_CFLAGS += -fno-strict-aliasing
+LOCAL_EXPORT_C_INCLUDE_DIRS := \
+    $(LOCAL_PATH)/include
 LOCAL_STATIC_LIBRARIES := \
     libbase \
     liblogwrap \
