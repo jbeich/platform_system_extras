@@ -18,7 +18,7 @@
 #define _EXTENT_H_
 
 #include "allocate.h"
-#include "ext4_utils.h"
+#include "ext4_utils/ext4_utils.h"
 
 void inode_allocate_extents(struct ext4_inode *inode, u64 len);
 struct block_allocation* inode_allocate_file_extents(

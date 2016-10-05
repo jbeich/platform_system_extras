@@ -16,16 +16,15 @@
 
 #include "ext4_crypt.h"
 
+#include <asm/ioctl.h>
 #include <dirent.h>
 #include <errno.h>
-#include <string.h>
-#include <unistd.h>
-
 #include <fcntl.h>
-#include <asm/ioctl.h>
+#include <string.h>
 #include <sys/syscall.h>
 #include <sys/stat.h>
 #include <sys/types.h>
+#include <unistd.h>
 
 #include <android-base/logging.h>
 #include <cutils/properties.h>

@@ -14,6 +14,9 @@
  * limitations under the License.
  */
 
+#ifndef _EXT4_CRYPT_H_
+#define _EXT4_CRYPT_H_
+
 #include <sys/cdefs.h>
 #include <stdbool.h>
 #include <cutils/multiuser.h>
@@ -28,3 +31,5 @@ static const char* e4crypt_unencrypted_folder = "/unencrypted";
 static const char* e4crypt_key_ref = "/unencrypted/ref";
 
 __END_DECLS
+
+#endif // _EXT4_CRYPT_H_
