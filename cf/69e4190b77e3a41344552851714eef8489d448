@@ -1,0 +1,11 @@
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Verified+1: Wei Wang <wvw@google.com>
+Code-Review+1: Wei Wang <wvw@google.com>
+Code-Review+2: Yabin Cui <yabinc@google.com>
+Code-Review+2: John Dias <joaodias@google.com>
+Autosubmit+1: Wei Wang <wvw@google.com>
+Submitted-by: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-at: Thu, 06 Oct 2016 19:32:37 +0000
+Reviewed-on: https://android-review.googlesource.com/285065
+Project: platform/system/extras
+Branch: refs/heads/master
