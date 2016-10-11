@@ -1,0 +1,406 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9f669ccf_c07ef26d",
+        "filename": "libfec/fec_avb.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2016-10-11T16:08:37Z",
+      "side": 1,
+      "message": "struct unnecessary, this is C++.",
+      "range": {
+        "startLine": 20,
+        "startChar": 32,
+        "endLine": 20,
+        "endChar": 38
+      },
+      "revId": "4a240df411f78f70a15632986e87608bc7c19ea0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9f669ccf_e073f6a2",
+        "filename": "libfec/fec_avb.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2016-10-11T16:08:37Z",
+      "side": 1,
+      "message": "check(f) and other pointers for consistency with the rest of the library.",
+      "revId": "4a240df411f78f70a15632986e87608bc7c19ea0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9f669ccf_20a08eef",
+        "filename": "libfec/fec_avb.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2016-10-11T16:08:37Z",
+      "side": 1,
+      "message": "check(f-\u003esize \u003e AVB_FOOTER_SIZE)?",
+      "range": {
+        "startLine": 26,
+        "startChar": 18,
+        "endLine": 26,
+        "endChar": 25
+      },
+      "revId": "4a240df411f78f70a15632986e87608bc7c19ea0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9f669ccf_0079ca83",
+        "filename": "libfec/fec_avb.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2016-10-11T16:08:37Z",
+      "side": 1,
+      "message": "nit: messages start with lowercase character",
+      "range": {
+        "startLine": 33,
+        "startChar": 15,
+        "endLine": 33,
+        "endChar": 16
+      },
+      "revId": "4a240df411f78f70a15632986e87608bc7c19ea0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9f669ccf_60c3669f",
+        "filename": "libfec/fec_avb.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2016-10-11T16:08:37Z",
+      "side": 1,
+      "message": "unnecessary struct",
+      "range": {
+        "startLine": 46,
+        "startChar": 43,
+        "endLine": 46,
+        "endChar": 49
+      },
+      "revId": "4a240df411f78f70a15632986e87608bc7c19ea0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9f669ccf_c0a992e9",
+        "filename": "libfec/fec_avb.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2016-10-11T16:08:37Z",
+      "side": 1,
+      "message": "Declare variables when they are needed instead of having a huge list at the beginning of the function.",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 17
+      },
+      "revId": "4a240df411f78f70a15632986e87608bc7c19ea0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9f669ccf_80979a96",
+        "filename": "libfec/fec_avb.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2016-10-11T16:08:37Z",
+      "side": 1,
+      "message": "check(f) etc.",
+      "revId": "4a240df411f78f70a15632986e87608bc7c19ea0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9f669ccf_a0f65eec",
+        "filename": "libfec/fec_avb.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2016-10-11T16:08:37Z",
+      "side": 1,
+      "message": "return -1;",
+      "range": {
+        "startLine": 62,
+        "startChar": 15,
+        "endLine": 62,
+        "endChar": 18
+      },
+      "revId": "4a240df411f78f70a15632986e87608bc7c19ea0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9f669ccf_8065dad6",
+        "filename": "libfec/fec_avb.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2016-10-11T16:08:37Z",
+      "side": 1,
+      "message": "Use std::unique_ptr and new, and return from the function on error instead of using ret and goto. For example:\n\n  std::unique_ptr\u003cuint8_t[]\u003e buffer(new (std::nothrow) uint8_t[vbmeta_size]);\n  if (!buffer) {\n    error(\"...\");\n    return -1;\n  }",
+      "range": {
+        "startLine": 65,
+        "startChar": 17,
+        "endLine": 65,
+        "endChar": 23
+      },
+      "revId": "4a240df411f78f70a15632986e87608bc7c19ea0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9f669ccf_40b66242",
+        "filename": "libfec/fec_avb.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2016-10-11T16:08:37Z",
+      "side": 1,
+      "message": "nit: lowercase for consistency",
+      "range": {
+        "startLine": 68,
+        "startChar": 15,
+        "endLine": 68,
+        "endChar": 16
+      },
+      "revId": "4a240df411f78f70a15632986e87608bc7c19ea0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9f669ccf_20840e47",
+        "filename": "libfec/fec_avb.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2016-10-11T16:08:37Z",
+      "side": 1,
+      "message": "What\u0027s this and why would libfec just ignore verity in this case?",
+      "range": {
+        "startLine": 80,
+        "startChar": 22,
+        "endLine": 80,
+        "endChar": 54
+      },
+      "revId": "4a240df411f78f70a15632986e87608bc7c19ea0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9f669ccf_8064fab1",
+        "filename": "libfec/fec_avb.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2016-10-11T16:08:37Z",
+      "side": 1,
+      "message": "nit: lowercase",
+      "range": {
+        "startLine": 81,
+        "startChar": 14,
+        "endLine": 81,
+        "endChar": 15
+      },
+      "revId": "4a240df411f78f70a15632986e87608bc7c19ea0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9f669ccf_c074325f",
+        "filename": "libfec/fec_avb.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2016-10-11T16:08:37Z",
+      "side": 1,
+      "message": "error message?",
+      "range": {
+        "startLine": 97,
+        "startChar": 0,
+        "endLine": 97,
+        "endChar": 21
+      },
+      "revId": "4a240df411f78f70a15632986e87608bc7c19ea0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9f669ccf_c0fb52d5",
+        "filename": "libfec/fec_avb.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2016-10-11T16:08:37Z",
+      "side": 1,
+      "message": "nit: lowercase and\n\n  error(\"... long string ...\"\n        \"... continued ...\");",
+      "range": {
+        "startLine": 105,
+        "startChar": 17,
+        "endLine": 105,
+        "endChar": 18
+      },
+      "revId": "4a240df411f78f70a15632986e87608bc7c19ea0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9f669ccf_80c95aa8",
+        "filename": "libfec/fec_avb.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2016-10-11T16:08:37Z",
+      "side": 1,
+      "message": "Something like this instead:\n\n  std::unique_ptr\u003cAvbDescriptor*, decltype(\u0026avb_free)\u003e descriptors(avb_descriptor_get_all(...), avb_free);\n\n  if (!descriptors || num_descriptors !\u003d 1) {\n    error(\"...\");\n    return -1;\n  }",
+      "range": {
+        "startLine": 111,
+        "startChar": 4,
+        "endLine": 111,
+        "endChar": 15
+      },
+      "revId": "4a240df411f78f70a15632986e87608bc7c19ea0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9f669ccf_20eb2e07",
+        "filename": "libfec/fec_avb.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2016-10-11T16:08:37Z",
+      "side": 1,
+      "message": "This returns if the condition doesn\u0027t match and you\u0027ll never free the allocated memory. Use unique_ptr.",
+      "range": {
+        "startLine": 114,
+        "startChar": 4,
+        "endLine": 114,
+        "endChar": 9
+      },
+      "revId": "4a240df411f78f70a15632986e87608bc7c19ea0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9f669ccf_60f526db",
+        "filename": "libfec/fec_avb.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2016-10-11T16:08:37Z",
+      "side": 1,
+      "message": "Might be better to have a more informative error message here.",
+      "range": {
+        "startLine": 121,
+        "startChar": 4,
+        "endLine": 121,
+        "endChar": 9
+      },
+      "revId": "4a240df411f78f70a15632986e87608bc7c19ea0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9f669ccf_80c07a92",
+        "filename": "libfec/fec_open.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2016-10-11T16:08:37Z",
+      "side": 1,
+      "message": "This might be sufficient for fs_mgr, but it breaks libfec for AVB partitions. You need to populate f-\u003everity, so the library can read and validate the partition.",
+      "range": {
+        "startLine": 310,
+        "startChar": 0,
+        "endLine": 310,
+        "endChar": 51
+      },
+      "revId": "4a240df411f78f70a15632986e87608bc7c19ea0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
