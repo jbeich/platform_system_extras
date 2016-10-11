@@ -20,7 +20,8 @@ common_static_libraries := \
     libcrypto_utils \
     libcrypto \
     libcutils \
-    libbase
+    libbase \
+    libavb
 
 include $(CLEAR_VARS)
 LOCAL_CFLAGS := $(common_cflags)

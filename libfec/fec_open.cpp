@@ -306,6 +306,11 @@ static int load_verity(fec_handle *f)
     check(f);
     debug("size = %" PRIu64 ", flags = %d", f->data_size, f->flags);
 
+    if (f->flags & FEC_VERITY_AVB) {
+        debug("Skip load_verity() when using AVB");
+        return 0;
+    }
+
     uint64_t offset = f->data_size - VERITY_METADATA_SIZE;
 
     /* verity header is at the end of the data area */

@@ -19,6 +19,7 @@
 
 #include <fcntl.h>
 #include <inttypes.h>
+#include <libavb.h>
 #include <limits.h>
 #include <stdbool.h>
 #include <stdio.h>
@@ -81,7 +82,8 @@ struct fec_verity_metadata {
 enum {
     FEC_FS_EXT4 = 1 << 0,
     FEC_FS_SQUASH = 1 << 1,
-    FEC_VERITY_DISABLE = 1 << 8
+    FEC_VERITY_DISABLE = 1 << 8,
+    FEC_VERITY_AVB = 1 << 9
 };
 
 struct fec_handle;
@@ -165,6 +167,10 @@ namespace fec {
 
         bool get_verity_metadata(fec_verity_metadata& data) {
             return !fec_verity_get_metadata(handle_.get(), &data);
+        }
+
+        bool get_avb_hashtree_descriptor(AvbHashtreeDescriptor& desc) {
+            return !fec_avb_get_hashtree_descriptor(handle_.get(), &desc);
         }
 
         bool has_verity() {
