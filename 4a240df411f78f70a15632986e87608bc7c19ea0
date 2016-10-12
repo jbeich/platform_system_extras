@@ -243,6 +243,30 @@
     },
     {
       "key": {
+        "uuid": "dc9e6221_5cc29d32",
+        "filename": "libfec/fec_avb.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2016-10-12T04:06:51Z",
+      "side": 1,
+      "message": "This is for \"adb disable_verity\"\nhttps://android.googlesource.com/platform/system/core/+/master/fs_mgr/fs_mgr_verity.cpp#900\n\nOr see fec_verity_set_status() in fec_verity.cpp.\n\nPreviously I also made a CL in avb to allow disable:\nhttps://android-review.googlesource.com/#/c/287061/\nAfter some thoughts, I think the CL is unnecessary.\n\nWe can probably maintain the verity enable/disable state only inside libfec.",
+      "parentUuid": "9f669ccf_20840e47",
+      "range": {
+        "startLine": 80,
+        "startChar": 22,
+        "endLine": 80,
+        "endChar": 54
+      },
+      "revId": "4a240df411f78f70a15632986e87608bc7c19ea0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9f669ccf_8064fab1",
         "filename": "libfec/fec_avb.cpp",
         "patchSetId": 1
