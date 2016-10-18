@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5c0a735e_a984d159",
+        "filename": "verity/build_verity_metadata.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2016-10-18T18:19:44Z",
+      "side": 1,
+      "message": "PS1 missed this one, and thus failed the verification.",
+      "range": {
+        "startLine": 107,
+        "startChar": 41,
+        "endLine": 107,
+        "endChar": 48
+      },
+      "revId": "39d1756abe66538a6cbdfc4c7b5377ce279e332c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
