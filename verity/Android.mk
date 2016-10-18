@@ -46,13 +46,25 @@ LOCAL_STATIC_JAVA_LIBRARIES := bouncycastle-host
 include $(BUILD_HOST_JAVA_LIBRARY)
 
 include $(CLEAR_VARS)
-LOCAL_SRC_FILES := verity_verifier
+LOCAL_SRC_FILES := verity_verifier.cpp
 LOCAL_MODULE := verity_verifier
 LOCAL_MODULE_CLASS := EXECUTABLES
+LOCAL_MODULE_HOST_OS := linux
 LOCAL_IS_HOST_MODULE := true
 LOCAL_MODULE_TAGS := optional
-LOCAL_REQUIRED_MODULES := VerityVerifier
-include $(BUILD_PREBUILT)
+LOCAL_SANITIZE := integer
+LOCAL_STATIC_LIBRARIES := \
+    libfec \
+    libfec_rs_host \
+    libcrypto_utils \
+    libcrypto \
+    libext4_utils_host \
+    libsparse_host \
+    libsquashfs_utils_host \
+    libbase \
+    libz
+LOCAL_CFLAGS := -Wall -Werror
+include $(BUILD_HOST_EXECUTABLE)
 
 include $(CLEAR_VARS)
 LOCAL_SRC_FILES := verity_signer
