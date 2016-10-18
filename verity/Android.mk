@@ -14,6 +14,22 @@ include $(BUILD_HOST_EXECUTABLE)
 endif # HOST_OS == linux
 
 include $(CLEAR_VARS)
+LOCAL_MODULE := image_verifier
+LOCAL_SRC_FILES := image_verifier.cpp
+LOCAL_MODULE_HOST_OS := linux
+LOCAL_SANITIZE := integer
+LOCAL_STATIC_LIBRARIES := \
+    libfec_host \
+    libfec_rs_host \
+    libcrypto_utils \
+    libcrypto \
+    libext4_utils_host \
+    libsquashfs_utils_host \
+    libbase
+LOCAL_CFLAGS := -Wall -Werror
+include $(BUILD_HOST_EXECUTABLE)
+
+include $(CLEAR_VARS)
 LOCAL_MODULE := generate_verity_key
 LOCAL_SRC_FILES := generate_verity_key.c
 LOCAL_MODULE_CLASS := EXECUTABLES
