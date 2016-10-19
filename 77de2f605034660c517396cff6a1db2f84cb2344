@@ -1,0 +1,193 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5cf273e7_6f063184",
+        "filename": "simpleperf/IOEventLoop.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1058713
+      },
+      "writtenOn": "2016-10-19T09:50:33Z",
+      "side": 1,
+      "message": "written to",
+      "range": {
+        "startLine": 43,
+        "startChar": 69,
+        "endLine": 43,
+        "endChar": 74
+      },
+      "revId": "77de2f605034660c517396cff6a1db2f84cb2344",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5cf273e7_8ff03576",
+        "filename": "simpleperf/IOEventLoop.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1058713
+      },
+      "writtenOn": "2016-10-19T09:50:33Z",
+      "side": 1,
+      "message": "callback",
+      "range": {
+        "startLine": 43,
+        "startChar": 33,
+        "endLine": 43,
+        "endChar": 40
+      },
+      "revId": "77de2f605034660c517396cff6a1db2f84cb2344",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5cf273e7_4f036d72",
+        "filename": "simpleperf/IOEventLoop.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1058713
+      },
+      "writtenOn": "2016-10-19T09:50:33Z",
+      "side": 1,
+      "message": "an",
+      "range": {
+        "startLine": 67,
+        "startChar": 13,
+        "endLine": 67,
+        "endChar": 14
+      },
+      "revId": "77de2f605034660c517396cff6a1db2f84cb2344",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5cf273e7_0ffd6549",
+        "filename": "simpleperf/IOEventLoop_test.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1058713
+      },
+      "writtenOn": "2016-10-19T09:50:33Z",
+      "side": 1,
+      "message": "I don\u0027t think this should be static.",
+      "range": {
+        "startLine": 67,
+        "startChar": 2,
+        "endLine": 67,
+        "endChar": 8
+      },
+      "revId": "77de2f605034660c517396cff6a1db2f84cb2344",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5cf273e7_ef58e1a6",
+        "filename": "simpleperf/IOEventLoop_test.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1058713
+      },
+      "writtenOn": "2016-10-19T09:50:33Z",
+      "side": 1,
+      "message": "Closing fd[0] should happen after you join the reader thread, so you can be sure it is not using it.",
+      "revId": "77de2f605034660c517396cff6a1db2f84cb2344",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5cf273e7_ef3fc11f",
+        "filename": "simpleperf/UnixSocket.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1058713
+      },
+      "writtenOn": "2016-10-19T09:50:33Z",
+      "side": 1,
+      "message": "Do we need the return value if it is always returning true? All it does is encourage users to write dead code checking for errors.",
+      "revId": "77de2f605034660c517396cff6a1db2f84cb2344",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5cf273e7_cf44fdb6",
+        "filename": "simpleperf/inplace_sampler.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1058713
+      },
+      "writtenOn": "2016-10-19T09:50:33Z",
+      "side": 1,
+      "message": "processes.front()",
+      "range": {
+        "startLine": 52,
+        "startChar": 10,
+        "endLine": 52,
+        "endChar": 28
+      },
+      "revId": "77de2f605034660c517396cff6a1db2f84cb2344",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5cf273e7_4f312d4e",
+        "filename": "simpleperf/inplace_sampler.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1058713
+      },
+      "writtenOn": "2016-10-19T09:50:33Z",
+      "side": 1,
+      "message": "Do we want to consider security at any point here. It looks like this would be easy to spoof by e.g. a malicious application.\n\nBTW, if you don\u0027t want to deal with filesystem paths, you can use \"abstract\" unix sockets, and then you don\u0027t need this retry-logic. OTOH, if we want to make this more secure, we can use the filesystem to our advantage, and create the socket file in a location, where only the thing we want can access.",
+      "revId": "77de2f605034660c517396cff6a1db2f84cb2344",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5cf273e7_2f2ee9ed",
+        "filename": "simpleperf/inplace_sampler.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1058713
+      },
+      "writtenOn": "2016-10-19T09:50:33Z",
+      "side": 1,
+      "message": "I\u0027d consider using one of the real time signals (SIGRMMIN+XXX),\nas it has less chance of colliding with the application.",
+      "range": {
+        "startLine": 184,
+        "startChar": 21,
+        "endLine": 184,
+        "endChar": 28
+      },
+      "revId": "77de2f605034660c517396cff6a1db2f84cb2344",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
