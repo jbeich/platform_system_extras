@@ -18,9 +18,21 @@ message Sample {
   optional uint64 time = 1;
 
   message CallChainEntry {
+    // ip address of the code running in memory
     optional uint64 ip = 1;
-    optional string symbol = 2;
-    optional string file = 3;
+
+    // To save space, we don't store symbol name and file name here.
+    // instead we add a SymbolTable for each binary. To find symbol for a
+    // CallChainEntry, we need to find the symbol table with
+    // id == symbol_table_id. Then search in symbol_table.symbol array to
+    // find the symbol with symbol.start <= vaddr_in_file < symbol.end.
+    // If we can't find such a symbol, then there is no symbol for this
+    // CallChainEntry.
+
+    // virtual address of ip in binary
+    optional uint64 vaddr_in_file = 2;
+    // the symbol table id of the binary containing the code
+    optional uint32 symbol_table_id = 3;
   }
 
   repeated CallChainEntry callchain = 2;
@@ -32,17 +44,31 @@ message LostSituation {
   optional uint64 lost_count = 2;
 }
 
-message Record {
-  enum Type {
-    UNKOWN = 0;
-    SAMPLE = 1;
-    LOST_SITUATION = 2;
+message SymbolTable {
+  // id of current symbol table, has unique value for each symbol table.
+  // The first table id is 0, second is 1, and etc.
+  optional uint32 id = 1;
+  // the path of binary holding current symbol table, like /system/lib/libc.so.
+  optional string file = 2;
+
+  message Symbol {
+    // The range of code represented by current symbol is [start, end).
+    // virtual start address of a symbol in binary
+    optional uint64 start = 1;
+    // virtual end address of a symbol in binary
+    optional uint64  end = 2;
+    // symbol name
+    optional string name = 3;
   }
 
-  // Identifies which field is filled in.
-  optional Type type = 1;
+  // The symbol array is already sorted by symbol.start.
+  repeated Symbol symbol = 3;
+}
 
-  // One of the following will be filled in.
-  optional Sample sample = 2;
-  optional LostSituation lost = 3;
+message Record {
+  oneof record_data {
+    Sample sample = 1;
+    LostSituation lost = 2;
+    SymbolTable symbol_table = 3;
+  }
 }

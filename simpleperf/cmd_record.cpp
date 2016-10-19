@@ -820,9 +820,10 @@ bool RecordCommand::DumpSymbolForRecord(const SampleRecord& r,
     if (symbol == thread_tree_.UnknownSymbol()) {
       continue;
     }
-    if (!map->dso->HasDumped()) {
-      map->dso->SetDumped();
-      DsoRecord dso_record(map->dso->type(), map->dso->id(), map->dso->Path(),
+    uint32_t dso_id;
+    if (!map->dso->GetDumpId(dso_id)) {
+      dso_id = map->dso->CreateDumpId();
+      DsoRecord dso_record(map->dso->type(), dso_id, map->dso->Path(),
                            map->dso->MinVirtualAddress());
       if (!record_file_writer_->WriteRecord(dso_record)) {
         return false;
@@ -831,7 +832,7 @@ bool RecordCommand::DumpSymbolForRecord(const SampleRecord& r,
     if (!symbol->HasDumped()) {
       symbol->SetDumped();
       SymbolRecord symbol_record(symbol->addr, symbol->len, symbol->Name(),
-                                 map->dso->id());
+                                 dso_id);
       if (!record_file_writer_->WriteRecord(symbol_record)) {
         return false;
       }

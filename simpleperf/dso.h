@@ -80,8 +80,6 @@ struct Dso {
 
   DsoType type() const { return type_; }
 
-  uint64_t id() const { return id_; }
-
   // Return the path recorded in perf.data.
   const std::string& Path() const { return path_; }
   // Return the path containing symbol table and debug information.
@@ -89,9 +87,15 @@ struct Dso {
   // Return the file name without directory info.
   const std::string& FileName() const { return file_name_; }
 
-  bool HasDumped() const { return has_dumped_; }
+  bool GetDumpId(uint32_t& dump_id) {
+    if (dump_id_ == UINT_MAX) {
+      return false;
+    }
+    dump_id = dump_id_;
+    return true;
+  }
 
-  void SetDumped() { has_dumped_ = true; }
+  uint32_t CreateDumpId();
 
   // Return the minimum virtual address in program header.
   uint64_t MinVirtualAddress();
@@ -99,6 +103,11 @@ struct Dso {
 
   const Symbol* FindSymbol(uint64_t vaddr_in_dso);
   void InsertSymbol(const Symbol& symbol);
+  bool LoadSymbols();
+
+  const std::set<Symbol, SymbolComparator> Symbols() const {
+    return symbols_;
+  }
 
  private:
   static bool demangle_;
@@ -108,8 +117,7 @@ struct Dso {
   static std::unordered_map<std::string, BuildId> build_id_map_;
   static size_t dso_count_;
 
-  Dso(DsoType type, uint64_t id, const std::string& path);
-  bool Load();
+  Dso(DsoType type, const std::string& path);
   bool LoadKernel();
   bool LoadKernelModule();
   bool LoadElfFile();
@@ -118,7 +126,6 @@ struct Dso {
   BuildId GetExpectedBuildId();
 
   const DsoType type_;
-  const uint64_t id_;
   // path of the shared library used by the profiled program
   const std::string path_;
   // path of the shared library having symbol table and debug information
@@ -129,7 +136,8 @@ struct Dso {
   uint64_t min_vaddr_;
   std::set<Symbol, SymbolComparator> symbols_;
   bool is_loaded_;
-  bool has_dumped_;
+  // Used to identify current dso if it needs to be dumped.
+  uint32_t dump_id_;
 };
 
 const char* DsoTypeToString(DsoType dso_type);
