@@ -128,6 +128,98 @@
     },
     {
       "key": {
+        "uuid": "5cf273e7_8f2dd5ad",
+        "filename": "simpleperf/UnixSocket.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1059813
+      },
+      "writtenOn": "2016-10-19T13:45:53Z",
+      "side": 1,
+      "message": "Do we need a mutex around write_event_ and write_event_enabled_?",
+      "range": {
+        "startLine": 100,
+        "startChar": 2,
+        "endLine": 100,
+        "endChar": 14
+      },
+      "revId": "77de2f605034660c517396cff6a1db2f84cb2344",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5cf273e7_8ff6f51f",
+        "filename": "simpleperf/UnixSocket.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1059813
+      },
+      "writtenOn": "2016-10-19T13:45:53Z",
+      "side": 1,
+      "message": "(nit): You don\u0027t need this as you define the struct in the next (non empty) line",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 25
+      },
+      "revId": "77de2f605034660c517396cff6a1db2f84cb2344",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9c15cbc1_89671963",
+        "filename": "simpleperf/UnixSocket.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1059813
+      },
+      "writtenOn": "2016-10-19T13:45:53Z",
+      "side": 1,
+      "message": "(nit): explicit",
+      "range": {
+        "startLine": 45,
+        "startChar": 2,
+        "endLine": 45,
+        "endChar": 25
+      },
+      "revId": "77de2f605034660c517396cff6a1db2f84cb2344",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5cf273e7_cf23ddc0",
+        "filename": "simpleperf/UnixSocket.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1059813
+      },
+      "writtenOn": "2016-10-19T13:45:53Z",
+      "side": 1,
+      "message": "What do you think about updating read_head in this function? I felt the current implementation a bit confusing when you read out the same data twice for the length field.",
+      "range": {
+        "startLine": 87,
+        "startChar": 2,
+        "endLine": 87,
+        "endChar": 43
+      },
+      "revId": "77de2f605034660c517396cff6a1db2f84cb2344",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5cf273e7_cf44fdb6",
         "filename": "simpleperf/inplace_sampler.cpp",
         "patchSetId": 3
@@ -184,6 +276,29 @@
         "startChar": 21,
         "endLine": 184,
         "endChar": 28
+      },
+      "revId": "77de2f605034660c517396cff6a1db2f84cb2344",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5cf273e7_0f68c5ce",
+        "filename": "simpleperf/inplace_sampler_server.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1059813
+      },
+      "writtenOn": "2016-10-19T13:45:53Z",
+      "side": 1,
+      "message": "(nit): explicit",
+      "range": {
+        "startLine": 284,
+        "startChar": 2,
+        "endLine": 284,
+        "endChar": 15
       },
       "revId": "77de2f605034660c517396cff6a1db2f84cb2344",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
