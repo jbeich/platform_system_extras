@@ -127,18 +127,16 @@ BuildId Dso::GetExpectedBuildId() {
 
 std::unique_ptr<Dso> Dso::CreateDso(DsoType dso_type,
                                     const std::string& dso_path) {
-  static uint64_t id = 0;
-  return std::unique_ptr<Dso>(new Dso(dso_type, ++id, dso_path));
+  return std::unique_ptr<Dso>(new Dso(dso_type, dso_path));
 }
 
-Dso::Dso(DsoType type, uint64_t id, const std::string& path)
+Dso::Dso(DsoType type, const std::string& path)
     : type_(type),
-      id_(id),
       path_(path),
       debug_file_path_(path),
       min_vaddr_(std::numeric_limits<uint64_t>::max()),
       is_loaded_(false),
-      has_dumped_(false) {
+      dump_id_(UINT_MAX) {
   // Check if file matching path_ exists in symfs directory before using it as
   // debug_file_path_.
   if (!symfs_dir_.empty()) {
@@ -172,20 +170,16 @@ Dso::~Dso() {
   }
 }
 
+uint32_t Dso::CreateDumpId() {
+  static uint32_t id = 0;
+  return dump_id_ = id++;
+}
+
 const Symbol* Dso::FindSymbol(uint64_t vaddr_in_dso) {
   if (!is_loaded_) {
-    is_loaded_ = true;
-    // If symbols has been read from SymbolRecords, no need to load them from
-    // dso.
-    if (symbols_.empty()) {
-      if (!Load()) {
-        LOG(DEBUG) << "failed to load dso: " << path_;
-        return nullptr;
-      }
+    if (!LoadSymbols()) {
+      return nullptr;
     }
-  }
-  if (symbols_.empty()) {
-    return nullptr;
   }
 
   auto it = symbols_.upper_bound(Symbol("", vaddr_in_dso, 0));
@@ -218,7 +212,16 @@ uint64_t Dso::MinVirtualAddress() {
   return min_vaddr_;
 }
 
-bool Dso::Load() {
+bool Dso::LoadSymbols() {
+  if (is_loaded_) {
+    return true;
+  }
+  is_loaded_ = true;
+  // If symbols has been read from SymbolRecords, no need to load them from
+  // dso.
+  if (!symbols_.empty()) {
+    return true;
+  }
   bool result = false;
   switch (type_) {
     case DSO_KERNEL:
@@ -236,12 +239,13 @@ bool Dso::Load() {
       break;
     }
   }
-  if (result) {
-    FixupSymbolLength();
-  } else {
+  if (!result) {
     symbols_.clear();
+    LOG(DEBUG) << "failed to load dso: " << path_;
+    return false;
   }
-  return result;
+  FixupSymbolLength();
+  return true;
 }
 
 static bool IsKernelFunctionSymbol(const KernelSymbol& symbol) {
