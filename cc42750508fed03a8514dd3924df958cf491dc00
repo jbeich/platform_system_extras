@@ -65,6 +65,30 @@
     },
     {
       "key": {
+        "uuid": "7c83b787_001aa6e2",
+        "filename": "simpleperf/report_sample.proto",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-10-20T23:15:45Z",
+      "side": 1,
+      "message": "without this, you may need to put SymbolTable into an unordered_map. But with this, you can savely put SymbolTable into vector\u003cSymbolTable\u003e. Doesn\u0027t it help?",
+      "parentUuid": "fc7c072f_cf58a1a7",
+      "range": {
+        "startLine": 49,
+        "startChar": 5,
+        "endLine": 49,
+        "endChar": 51
+      },
+      "revId": "cc42750508fed03a8514dd3924df958cf491dc00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fc7c072f_ef5d5d94",
         "filename": "simpleperf/report_sample.proto",
         "patchSetId": 3
