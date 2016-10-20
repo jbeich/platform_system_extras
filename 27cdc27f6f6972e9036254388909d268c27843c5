@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5cba7338_afbc59a5",
+        "filename": "simpleperf/record_equal_test.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1058713
+      },
+      "writtenOn": "2016-10-20T09:12:05Z",
+      "side": 1,
+      "message": "It looks like you should also be checking that (r1.sample_type \u0026 PERF_SAMPLE_TID) \u003d\u003d (r2.sample_type \u0026 PERF_SAMPLE_TID). Otherwise you may not detect that r2 has this flag set (and the comparison will not be symmetrical).\n\nBTW, I don\u0027t know if there is a policy against EXPECT_* macros here, but I think the EXPECT_* macros work better for this case, as you will get notified about all mismatches, rather than just the first one. ASSERT is good for when the following code would crash if the expectation is not met (which seems to be only true for the callchain_data.ip_nr comparison here).",
+      "revId": "27cdc27f6f6972e9036254388909d268c27843c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c0657a0_28e82bc8",
+        "filename": "simpleperf/utils.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1058713
+      },
+      "writtenOn": "2016-10-20T09:12:05Z",
+      "side": 1,
+      "message": "Random suggestion. Add:\nstatic_assert(std::is_standard_layout\u003cT\u003e::value, \"...\");\nto make sure someone does not accidentally serialize a vtable.",
+      "revId": "27cdc27f6f6972e9036254388909d268c27843c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
