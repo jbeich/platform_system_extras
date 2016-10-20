@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "fc7c072f_6c3dfb82",
+        "filename": "simpleperf/report_sample.proto",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-10-20T00:14:10Z",
+      "side": 1,
+      "message": "comments are added.",
+      "parentUuid": "5c0a735e_c4c5b299",
+      "range": {
+        "startLine": 26,
+        "startChar": 20,
+        "endLine": 26,
+        "endChar": 33
+      },
+      "revId": "d8d7637b79ed249402165b3ea2446a5182b0789b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5c0a735e_24d63e52",
         "filename": "simpleperf/report_sample.proto",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2016-10-19T22:45:37Z",
       "side": 1,
       "message": "What\u0027s this \u0027file\u0027?",
+      "range": {
+        "startLine": 41,
+        "startChar": 18,
+        "endLine": 41,
+        "endChar": 22
+      },
+      "revId": "d8d7637b79ed249402165b3ea2446a5182b0789b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fc7c072f_0c3a378c",
+        "filename": "simpleperf/report_sample.proto",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-10-20T00:14:10Z",
+      "side": 1,
+      "message": "comments are added.",
+      "parentUuid": "5c0a735e_24d63e52",
       "range": {
         "startLine": 41,
         "startChar": 18,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "fc7c072f_4c403ffe",
+        "filename": "simpleperf/report_sample.proto",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-10-20T00:14:10Z",
+      "side": 1,
+      "message": "comments are added.",
+      "parentUuid": "bc844f25_bed431d4",
+      "range": {
+        "startLine": 44,
+        "startChar": 20,
+        "endLine": 44,
+        "endChar": 25
+      },
+      "revId": "d8d7637b79ed249402165b3ea2446a5182b0789b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5c0a735e_c42932a2",
         "filename": "simpleperf/report_sample.proto",
         "patchSetId": 1
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "fc7c072f_2c729392",
+        "filename": "simpleperf/report_sample.proto",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-10-20T00:14:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5c0a735e_c42932a2",
+      "range": {
+        "startLine": 54,
+        "startChar": 4,
+        "endLine": 54,
+        "endChar": 10
+      },
+      "revId": "d8d7637b79ed249402165b3ea2446a5182b0789b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5c0a735e_c4401252",
         "filename": "simpleperf/report_sample.proto",
         "patchSetId": 1
@@ -105,6 +201,30 @@
       "writtenOn": "2016-10-19T22:45:37Z",
       "side": 1,
       "message": "[No Action Required] protobuf\u0027s \u0027oneof\u0027 may be handy, so we don\u0027t need to worry if the |type| field and the other three fields match.",
+      "range": {
+        "startLine": 61,
+        "startChar": 11,
+        "endLine": 61,
+        "endChar": 15
+      },
+      "revId": "d8d7637b79ed249402165b3ea2446a5182b0789b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fc7c072f_4ceeffd8",
+        "filename": "simpleperf/report_sample.proto",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-10-20T00:14:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5c0a735e_c4401252",
       "range": {
         "startLine": 61,
         "startChar": 11,
