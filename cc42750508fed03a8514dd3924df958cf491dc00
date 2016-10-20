@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fc7c072f_a0c68232",
+        "filename": "simpleperf/report_sample.proto",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1079424
+      },
+      "writtenOn": "2016-10-20T22:21:50Z",
+      "side": 1,
+      "message": "[Optional] clang-format this file.",
+      "revId": "cc42750508fed03a8514dd3924df958cf491dc00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fc7c072f_0f29c9fc",
+        "filename": "simpleperf/report_sample.proto",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1079424
+      },
+      "writtenOn": "2016-10-20T22:21:50Z",
+      "side": 1,
+      "message": "Nit: s/array/list/.\n\nProto itself doesn\u0027t require repeated fields have to be in an array.",
+      "range": {
+        "startLine": 27,
+        "startChar": 65,
+        "endLine": 27,
+        "endChar": 70
+      },
+      "revId": "cc42750508fed03a8514dd3924df958cf491dc00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fc7c072f_cf58a1a7",
+        "filename": "simpleperf/report_sample.proto",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1079424
+      },
+      "writtenOn": "2016-10-20T22:21:50Z",
+      "side": 1,
+      "message": "Nit: This sentence doesn\u0027t feel like part of the interface. It is more about implementation. I think we can safely remove it from the proto file.",
+      "range": {
+        "startLine": 49,
+        "startChar": 5,
+        "endLine": 49,
+        "endChar": 51
+      },
+      "revId": "cc42750508fed03a8514dd3924df958cf491dc00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fc7c072f_ef5d5d94",
+        "filename": "simpleperf/report_sample.proto",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1079424
+      },
+      "writtenOn": "2016-10-20T22:21:50Z",
+      "side": 1,
+      "message": "Nit: s/holding/associated with/.",
+      "range": {
+        "startLine": 51,
+        "startChar": 24,
+        "endLine": 51,
+        "endChar": 31
+      },
+      "revId": "cc42750508fed03a8514dd3924df958cf491dc00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
