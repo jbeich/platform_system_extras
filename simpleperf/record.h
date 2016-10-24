@@ -45,6 +45,7 @@ enum user_record_type {
 
   SIMPLE_PERF_RECORD_TYPE_START = 32768,
   SIMPLE_PERF_RECORD_KERNEL_SYMBOL,
+  // TODO: remove DsoRecord and SymbolRecord.
   SIMPLE_PERF_RECORD_DSO,
   SIMPLE_PERF_RECORD_SYMBOL,
   SIMPLE_PERF_RECORD_SPLIT,
@@ -516,6 +517,11 @@ std::unique_ptr<Record> ReadRecordFromOwnedBuffer(const perf_event_attr& attr,
 // the buffer.
 std::vector<std::unique_ptr<Record>> ReadRecordsFromBuffer(
     const perf_event_attr& attr, const char* buf, size_t buf_size);
+
+// Read one record from the buffer pointed by [p]. But the record doesn't
+// own the buffer.
+std::unique_ptr<Record> ReadRecordFromBuffer(const perf_event_attr& attr,
+                                             const char* p);
 
 // RecordCache is a cache used when receiving records from the kernel.
 // It sorts received records based on type and timestamp, and pops records

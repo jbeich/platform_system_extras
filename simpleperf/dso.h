@@ -44,12 +44,6 @@ struct Symbol {
   mutable bool has_dumped_;
 };
 
-struct SymbolComparator {
-  bool operator()(const Symbol& symbol1, const Symbol& symbol2) {
-    return symbol1.addr < symbol2.addr;
-  }
-};
-
 enum DsoType {
   DSO_KERNEL,
   DSO_KERNEL_MODULE,
@@ -80,18 +74,12 @@ struct Dso {
 
   DsoType type() const { return type_; }
 
-  uint64_t id() const { return id_; }
-
   // Return the path recorded in perf.data.
   const std::string& Path() const { return path_; }
   // Return the path containing symbol table and debug information.
   const std::string& GetDebugFilePath() const { return debug_file_path_; }
   // Return the file name without directory info.
   const std::string& FileName() const { return file_name_; }
-
-  bool HasDumped() const { return has_dumped_; }
-
-  void SetDumped() { has_dumped_ = true; }
 
   // Set when there are samples hit in current dso.
   void SetHitFlag() { hit_flag_ = true; }
@@ -102,7 +90,11 @@ struct Dso {
   void SetMinVirtualAddress(uint64_t min_vaddr) { min_vaddr_ = min_vaddr; }
 
   const Symbol* FindSymbol(uint64_t vaddr_in_dso);
-  void InsertSymbol(const Symbol& symbol);
+
+  const std::vector<Symbol>& GetSymbols();
+
+  void SetSymbols(std::vector<Symbol>* symbols);
+  void AddUnknownSymbol(uint64_t vaddr_in_dso, const std::string& name);
 
  private:
   static bool demangle_;
@@ -112,8 +104,8 @@ struct Dso {
   static std::unordered_map<std::string, BuildId> build_id_map_;
   static size_t dso_count_;
 
-  Dso(DsoType type, uint64_t id, const std::string& path);
-  bool Load();
+  Dso(DsoType type, const std::string& path);
+  void Load();
   bool LoadKernel();
   bool LoadKernelModule();
   bool LoadElfFile();
@@ -122,7 +114,6 @@ struct Dso {
   BuildId GetExpectedBuildId();
 
   const DsoType type_;
-  const uint64_t id_;
   // path of the shared library used by the profiled program
   const std::string path_;
   // path of the shared library having symbol table and debug information
@@ -131,9 +122,10 @@ struct Dso {
   // File name of the shared library, got by removing directories in path_.
   std::string file_name_;
   uint64_t min_vaddr_;
-  std::set<Symbol, SymbolComparator> symbols_;
+  std::vector<Symbol> symbols_;
+  // unknown symbols are like [libc.so+0x1234].
+  std::unordered_map<uint64_t, Symbol> unknown_symbols_;
   bool is_loaded_;
-  bool has_dumped_;
   bool hit_flag_;
 };
 

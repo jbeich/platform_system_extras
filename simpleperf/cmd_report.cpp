@@ -637,6 +637,18 @@ bool ReportCommand::ReadFeaturesFromRecordFile() {
   }
   Dso::SetBuildIds(build_ids);
 
+  if (record_file_reader_->HasFeature(PerfFileFormat::FEAT_FILE)) {
+    std::string file_path;
+    uint32_t file_type;
+    uint64_t min_vaddr;
+    std::vector<Symbol> symbols;
+    size_t read_pos = 0;
+    while (record_file_reader_->ReadFileFeature(
+        read_pos, &file_path, &file_type, &min_vaddr, &symbols)) {
+      thread_tree_.AddDsoInfo(file_path, file_type, min_vaddr, &symbols);
+    }
+  }
+
   std::string arch =
       record_file_reader_->ReadFeatureString(PerfFileFormat::FEAT_ARCH);
   if (!arch.empty()) {
