@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a15fc857_5951a34c",
+        "filename": "simpleperf/thread_tree.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2016-10-25T00:23:52Z",
+      "side": 1,
+      "message": "GetAllDsos?",
+      "range": {
+        "startLine": 115,
+        "startChar": 20,
+        "endLine": 115,
+        "endChar": 29
+      },
+      "revId": "97c65e1fae67a5cf984c71d95cdf3bea1dab8176",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
