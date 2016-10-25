@@ -1,0 +1,146 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a1d26816_0125ca1f",
+        "filename": "simpleperf/UnixSocket.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1058713
+      },
+      "writtenOn": "2016-10-25T09:51:17Z",
+      "side": 1,
+      "message": "is there a difference between PF_UNIX and AF_UNIX? I generally use AF_UNIX everywhere. It seems more consistent. man 2 socket lists AF_* as the arguments for the first argument.",
+      "range": {
+        "startLine": 39,
+        "startChar": 25,
+        "endLine": 39,
+        "endChar": 32
+      },
+      "revId": "f746da15015c2d98d68d4c524ec83c1c7238da26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a1d26816_41f8b25e",
+        "filename": "simpleperf/UnixSocket.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1058713
+      },
+      "writtenOn": "2016-10-25T09:51:17Z",
+      "side": 1,
+      "message": "It looks like a helper function for populating struct sockaddr_un would be useful, as you\u0027re doing the same thing in the server code.",
+      "revId": "f746da15015c2d98d68d4c524ec83c1c7238da26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a1d26816_c103e270",
+        "filename": "simpleperf/UnixSocket.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1058713
+      },
+      "writtenOn": "2016-10-25T09:51:17Z",
+      "side": 1,
+      "message": "The shutdown story here is a bit unclear to me. Is there anything that guarantees WriteMessage will not execute concurrently (of even after) the UnixSocketConnection destructor. Should the destructor perhaps wait for all the pending writes to clear before completing?",
+      "revId": "f746da15015c2d98d68d4c524ec83c1c7238da26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a1d26816_e100e666",
+        "filename": "simpleperf/UnixSocket.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1058713
+      },
+      "writtenOn": "2016-10-25T09:51:17Z",
+      "side": 1,
+      "message": "I suggest using send(2) with the MSG_NOSIGNAL flag. This is going to be executing in random applications, and we don\u0027t want to surprise them with a random SIGPIPE.",
+      "revId": "f746da15015c2d98d68d4c524ec83c1c7238da26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a1d26816_01feaa45",
+        "filename": "simpleperf/UnixSocket.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1058713
+      },
+      "writtenOn": "2016-10-25T09:51:17Z",
+      "side": 1,
+      "message": "What is the anticipated usage of the close callback? I am asking because you invoke it from different contexts. Here you call it when the remove end has closed (the write side of) the connection, and our fd is still open. In WriteMessage() you call it when *we* have closed our fd. I think the callback might end up being called multiple times in different contexts for the same connections, which does not sound like a good api. It could use some clarity.\n\nIn fact I think it can even be called multiple times from ReadMessage. Since you don\u0027t stop monitoring the descriptor for reads after reaching EOF, i think ReadMessage will end up being called over and over again -- I am not sure about epoll but this is certainly the behaviour with select() -- an EOF descriptor always registers as readable.",
+      "revId": "f746da15015c2d98d68d4c524ec83c1c7238da26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a1d26816_01b78abb",
+        "filename": "simpleperf/UnixSocket.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1058713
+      },
+      "writtenOn": "2016-10-25T09:51:17Z",
+      "side": 1,
+      "message": "This is a non-standard extension. I don\u0027t know if we care about that though..",
+      "revId": "f746da15015c2d98d68d4c524ec83c1c7238da26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a1d26816_61df76f3",
+        "filename": "simpleperf/UnixSocket.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1058713
+      },
+      "writtenOn": "2016-10-25T09:51:17Z",
+      "side": 1,
+      "message": "As write head is always going to be (read_head_+valid_bytes_)%data_.size(), maybe we don\u0027t need to store it separately. Instead we could just have a helper function that computes it?",
+      "revId": "f746da15015c2d98d68d4c524ec83c1c7238da26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a1d26816_e1d2a6e6",
+        "filename": "simpleperf/UnixSocket.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1058713
+      },
+      "writtenOn": "2016-10-25T09:51:17Z",
+      "side": 1,
+      "message": "This function looks very similar to the previous one. I think we should merge them and have a \"bool delayed\" parameter (perhaps with a default value).",
+      "revId": "f746da15015c2d98d68d4c524ec83c1c7238da26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
