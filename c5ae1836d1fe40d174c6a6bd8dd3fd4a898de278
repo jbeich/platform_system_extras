@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c1d83cb2_f3fbe2a0",
+        "filename": "simpleperf/event_selection_set.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 622,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2016-10-26T23:58:14Z",
+      "side": 1,
+      "message": "lose",
+      "range": {
+        "startLine": 622,
+        "startChar": 40,
+        "endLine": 622,
+        "endChar": 44
+      },
+      "revId": "c5ae1836d1fe40d174c6a6bd8dd3fd4a898de278",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
