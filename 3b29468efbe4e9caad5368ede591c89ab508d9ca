@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "c1d83cb2_caa1c3e1",
+        "filename": "verity/build_verity_metadata.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2016-10-26T05:09:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c1d83cb2_ea2487e2",
+      "range": {
+        "startLine": 30,
+        "startChar": 54,
+        "endLine": 30,
+        "endChar": 64
+      },
+      "revId": "3b29468efbe4e9caad5368ede591c89ab508d9ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c1d83cb2_0a491bd1",
         "filename": "verity/build_verity_metadata.py",
         "patchSetId": 1
