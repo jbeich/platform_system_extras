@@ -1,0 +1,228 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c1d83cb2_d0ce946a",
+        "filename": "perfprofd/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2016-10-26T21:44:47Z",
+      "side": 1,
+      "message": "remove?",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 44
+      },
+      "revId": "77018568833f12f2c452f54b33551315a5118453",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c1d83cb2_73ba52a4",
+        "filename": "perfprofd/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2016-10-26T21:44:47Z",
+      "side": 1,
+      "message": "Now that this is the default, should it be removed?",
+      "revId": "77018568833f12f2c452f54b33551315a5118453",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c1d83cb2_33b0dac4",
+        "filename": "perfprofd/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2016-10-26T21:44:47Z",
+      "side": 1,
+      "message": "Should we start propagating this dependency for Soong modules?",
+      "range": {
+        "startLine": 69,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 31
+      },
+      "revId": "77018568833f12f2c452f54b33551315a5118453",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c1d83cb2_73a53288",
+        "filename": "perfprofd/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2016-10-26T21:44:47Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be chosen based on stl? Why are we removing libm?",
+      "range": {
+        "startLine": 74,
+        "startChar": 15,
+        "endLine": 75,
+        "endChar": 20
+      },
+      "revId": "77018568833f12f2c452f54b33551315a5118453",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c1d83cb2_b3bb2aac",
+        "filename": "perfprofd/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2016-10-26T21:44:47Z",
+      "side": 1,
+      "message": "These are duplicated in perfprofd_cppflags (and there aren\u0027t any non-C++ sources)",
+      "range": {
+        "startLine": 78,
+        "startChar": 0,
+        "endLine": 81,
+        "endChar": 6
+      },
+      "revId": "77018568833f12f2c452f54b33551315a5118453",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c1d83cb2_939b864f",
+        "filename": "perfprofd/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2016-10-26T21:44:47Z",
+      "side": 1,
+      "message": "I\u0027ve been trying to keep the name near the top of the definition, but mostly because I think that\u0027s more readable.",
+      "range": {
+        "startLine": 82,
+        "startChar": 0,
+        "endLine": 82,
+        "endChar": 22
+      },
+      "revId": "77018568833f12f2c452f54b33551315a5118453",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c1d83cb2_d395fe1a",
+        "filename": "perfprofd/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2016-10-26T21:44:47Z",
+      "side": 1,
+      "message": "I\u0027ve been removing these when possible. If we actually want the debug behavior for this tool, this should be removed, and we should add PRODUCT_PACKAGES_debug +\u003d perfprofd",
+      "range": {
+        "startLine": 84,
+        "startChar": 0,
+        "endLine": 84,
+        "endChar": 20
+      },
+      "revId": "77018568833f12f2c452f54b33551315a5118453",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c1d83cb2_f3de42f5",
+        "filename": "perfprofd/tests/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2016-10-26T21:44:47Z",
+      "side": 1,
+      "message": "This is implied, since gtest isn\u0027t being turned off",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 19
+      },
+      "revId": "77018568833f12f2c452f54b33551315a5118453",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c1d83cb2_93e9c6a3",
+        "filename": "perfprofd/tests/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2016-10-26T21:44:47Z",
+      "side": 1,
+      "message": "combine these arrays",
+      "range": {
+        "startLine": 36,
+        "startChar": 17,
+        "endLine": 36,
+        "endChar": 45
+      },
+      "revId": "77018568833f12f2c452f54b33551315a5118453",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c1d83cb2_b3e4cacb",
+        "filename": "perfprofd/tests/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2016-10-26T21:44:47Z",
+      "side": 1,
+      "message": "This should be exported by libperfprofdcore probably",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 34
+      },
+      "revId": "77018568833f12f2c452f54b33551315a5118453",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
