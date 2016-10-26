@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c1d83cb2_0a491bd1",
+        "filename": "verity/build_verity_metadata.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2016-10-26T01:31:41Z",
+      "side": 1,
+      "message": "weirdly verity_signer doesn\u0027t take any arguments, and passing the list directly will cause the subprocess to fail",
+      "range": {
+        "startLine": 54,
+        "startChar": 27,
+        "endLine": 54,
+        "endChar": 39
+      },
+      "revId": "3b29468efbe4e9caad5368ede591c89ab508d9ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
