@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c1d83cb2_6adff74e",
+        "filename": "verity/build_verity_metadata.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2016-10-26T06:44:49Z",
+      "side": 1,
+      "message": "think about the case of signer_args\u003d\"arg1 arg2\": you\u0027re passing them as one parameter. may consider using shlex.split()",
+      "range": {
+        "startLine": 54,
+        "startChar": 34,
+        "endLine": 54,
+        "endChar": 45
+      },
+      "revId": "d946e0182b683838778dd38fbed488556959ecc3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
