@@ -19,7 +19,7 @@ import os
 import sys
 import struct
 import tempfile
-import commands
+import subprocess
 
 VERSION = 0
 MAGIC_NUMBER = 0xb001b001
@@ -27,9 +27,10 @@ BLOCK_SIZE = 4096
 METADATA_SIZE = BLOCK_SIZE * 8
 
 def run(cmd):
-    status, output = commands.getstatusoutput(cmd)
+    p = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)
+    output, _ = p.communicate()
     print output
-    if status:
+    if p.returncode:
         exit(-1)
 
 def get_verity_metadata_size(data_size):
