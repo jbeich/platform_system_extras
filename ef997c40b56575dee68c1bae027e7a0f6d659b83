@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "c1d83cb2_90aa5c24",
+        "filename": "simpleperf/UnixSocket.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-10-26T19:15:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a1dd08a2_094929d1",
+      "revId": "ef997c40b56575dee68c1bae027e7a0f6d659b83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a13988ba_89bb39ac",
         "filename": "simpleperf/UnixSocket.cpp",
         "patchSetId": 4
@@ -42,6 +60,30 @@
     },
     {
       "key": {
+        "uuid": "c1d83cb2_6d8d514b",
+        "filename": "simpleperf/UnixSocket.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-10-26T19:15:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a13988ba_89bb39ac",
+      "range": {
+        "startLine": 141,
+        "startChar": 20,
+        "endLine": 141,
+        "endChar": 25
+      },
+      "revId": "ef997c40b56575dee68c1bae027e7a0f6d659b83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "815c8406_184ce5e0",
         "filename": "simpleperf/UnixSocket.cpp",
         "patchSetId": 4
@@ -53,6 +95,24 @@
       "writtenOn": "2016-10-26T10:48:03Z",
       "side": 1,
       "message": "Do we need to disable the write event in the case that the send buffer is empty? (I.e., we have sent all queued messages and are no more messages coming at the moment) Or does that happen automatically somehow?",
+      "revId": "ef997c40b56575dee68c1bae027e7a0f6d659b83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c1d83cb2_4d716d8d",
+        "filename": "simpleperf/UnixSocket.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-10-26T19:15:02Z",
+      "side": 1,
+      "message": "comment added. L155 is the code to disable the write event in the case the send buffer is empty. If we don\u0027t disable the write event, the WriteData() callback will be called in a loop.",
+      "parentUuid": "815c8406_184ce5e0",
       "revId": "ef997c40b56575dee68c1bae027e7a0f6d659b83",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
