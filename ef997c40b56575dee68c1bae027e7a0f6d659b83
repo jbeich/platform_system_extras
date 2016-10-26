@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a1dd08a2_094929d1",
+        "filename": "simpleperf/UnixSocket.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1058713
+      },
+      "writtenOn": "2016-10-26T10:48:03Z",
+      "side": 1,
+      "message": "The logic would be less confusing (checking for write_data_size_ \u003d\u003d 0 twice) if write_data_size_ was not actually a part of the state of this object. As far as I can tell it\u0027s only used transiently to pass information from GetDataFromSendBuffer() to here. So, you could have GetDataFromSendBuffer really return these values and the logic in this function would be like:\n\ndata, size \u003d GetDataFromSendBuffer();\nif (size \u003d\u003d 0)\n  return true;\nresult \u003d send(...);\nif(result \u003e\u003d 0)\n  send_buffer.CommitData(result);\n\n(note that I don\u0027t need to mirror the write_data_+\u003dresult logic as that is already done in CommitData())",
+      "revId": "ef997c40b56575dee68c1bae027e7a0f6d659b83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a13988ba_89bb39ac",
+        "filename": "simpleperf/UnixSocket.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1058713
+      },
+      "writtenOn": "2016-10-26T10:48:03Z",
+      "side": 1,
+      "message": "send",
+      "range": {
+        "startLine": 141,
+        "startChar": 20,
+        "endLine": 141,
+        "endChar": 25
+      },
+      "revId": "ef997c40b56575dee68c1bae027e7a0f6d659b83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "815c8406_184ce5e0",
+        "filename": "simpleperf/UnixSocket.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1058713
+      },
+      "writtenOn": "2016-10-26T10:48:03Z",
+      "side": 1,
+      "message": "Do we need to disable the write event in the case that the send buffer is empty? (I.e., we have sent all queued messages and are no more messages coming at the moment) Or does that happen automatically somehow?",
+      "revId": "ef997c40b56575dee68c1bae027e7a0f6d659b83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a13988ba_09abc95f",
+        "filename": "simpleperf/UnixSocket.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1058713
+      },
+      "writtenOn": "2016-10-26T10:48:03Z",
+      "side": 1,
+      "message": "I like this. :)",
+      "revId": "ef997c40b56575dee68c1bae027e7a0f6d659b83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
