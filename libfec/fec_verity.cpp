@@ -312,11 +312,6 @@ static int verify_tree(fec_handle *f, const uint8_t *root)
 
     debug("valid");
 
-    if (v->hash) {
-        delete[] v->hash;
-        v->hash = NULL;
-    }
-
     v->hash = data_hashes.release();
     return 0;
 }
@@ -324,7 +319,7 @@ static int verify_tree(fec_handle *f, const uint8_t *root)
 /* reads, corrects and parses the verity table, validates parameters, and if
    `f->flags' does not have `FEC_VERITY_DISABLE' set, calls `verify_tree' to
    load and validate the hash tree */
-static int parse_table(fec_handle *f, uint64_t offset, uint32_t size, bool useecc)
+static int parse_table(fec_handle *f, uint64_t offset, uint32_t size)
 {
     check(f);
     check(size >= VERITY_MIN_TABLE_SIZE);
@@ -340,13 +335,8 @@ static int parse_table(fec_handle *f, uint64_t offset, uint32_t size, bool useec
         return -1;
     }
 
-    if (!useecc) {
-        if (!raw_pread(f, table.get(), size, offset)) {
-            error("failed to read verity table: %s", strerror(errno));
-            return -1;
-        }
-    } else if (fec_pread(f, table.get(), size, offset) != (ssize_t)size) {
-        error("failed to ecc read verity table: %s", strerror(errno));
+    if (fec_pread(f, table.get(), size, offset) != (ssize_t)size) {
+        error("failed to read verity table: %s", strerror(errno));
         return -1;
     }
 
@@ -440,18 +430,7 @@ static int parse_table(fec_handle *f, uint64_t offset, uint32_t size, bool useec
         check(v->data_blocks == v->hash_start / FEC_BLOCKSIZE);
     }
 
-    if (v->salt) {
-        delete[] v->salt;
-        v->salt = NULL;
-    }
-
     v->salt = salt.release();
-
-    if (v->table) {
-        delete[] v->table;
-        v->table = NULL;
-    }
-
     v->table = table.release();
 
     if (!(f->flags & FEC_VERITY_DISABLE)) {
@@ -610,10 +589,7 @@ int verity_parse_header(fec_handle *f, uint64_t offset)
 
     v->metadata_start = offset;
 
-    if (parse_table(f, offset + sizeof(v->header), v->header.length,
-            false) == -1 &&
-        parse_table(f, offset + sizeof(v->header), v->header.length,
-            true)  == -1) {
+    if (parse_table(f, offset + sizeof(v->header), v->header.length) == -1) {
         return -1;
     }
 
