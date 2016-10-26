@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "a1c7c880_3c605d18",
+        "filename": "simpleperf/UnixSocket.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-10-26T01:21:17Z",
+      "side": 1,
+      "message": "I think no. But using the same macro seems a good behavior.",
+      "parentUuid": "a1d26816_0125ca1f",
+      "range": {
+        "startLine": 39,
+        "startChar": 25,
+        "endLine": 39,
+        "endChar": 32
+      },
+      "revId": "f746da15015c2d98d68d4c524ec83c1c7238da26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a1d26816_41f8b25e",
         "filename": "simpleperf/UnixSocket.cpp",
         "patchSetId": 2
@@ -36,6 +60,24 @@
       "writtenOn": "2016-10-25T09:51:17Z",
       "side": 1,
       "message": "It looks like a helper function for populating struct sockaddr_un would be useful, as you\u0027re doing the same thing in the server code.",
+      "revId": "f746da15015c2d98d68d4c524ec83c1c7238da26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a1c7c880_dc7041c2",
+        "filename": "simpleperf/UnixSocket.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-10-26T01:21:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a1d26816_41f8b25e",
       "revId": "f746da15015c2d98d68d4c524ec83c1c7238da26",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -59,6 +101,24 @@
     },
     {
       "key": {
+        "uuid": "a1c7c880_dca721f5",
+        "filename": "simpleperf/UnixSocket.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-10-26T01:21:17Z",
+      "side": 1,
+      "message": "Yes, WriteMessage/ReadMessage are callbacks from IOEventLoop, which can only happen in the thread running IOEventLoop::RunLoop(). The destructor doesn\u0027t need to wait for pending writes (as there is no need to do so). I have added these comments in the definition of UnixSocketConnection.",
+      "parentUuid": "a1d26816_c103e270",
+      "revId": "f746da15015c2d98d68d4c524ec83c1c7238da26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a1d26816_e100e666",
         "filename": "simpleperf/UnixSocket.cpp",
         "patchSetId": 2
@@ -76,6 +136,24 @@
     },
     {
       "key": {
+        "uuid": "a1c7c880_3c229d6a",
+        "filename": "simpleperf/UnixSocket.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-10-26T01:21:17Z",
+      "side": 1,
+      "message": "good suggestion!",
+      "parentUuid": "a1d26816_e100e666",
+      "revId": "f746da15015c2d98d68d4c524ec83c1c7238da26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a1d26816_01feaa45",
         "filename": "simpleperf/UnixSocket.cpp",
         "patchSetId": 2
@@ -87,6 +165,24 @@
       "writtenOn": "2016-10-25T09:51:17Z",
       "side": 1,
       "message": "What is the anticipated usage of the close callback? I am asking because you invoke it from different contexts. Here you call it when the remove end has closed (the write side of) the connection, and our fd is still open. In WriteMessage() you call it when *we* have closed our fd. I think the callback might end up being called multiple times in different contexts for the same connections, which does not sound like a good api. It could use some clarity.\n\nIn fact I think it can even be called multiple times from ReadMessage. Since you don\u0027t stop monitoring the descriptor for reads after reaching EOF, i think ReadMessage will end up being called over and over again -- I am not sure about epoll but this is certainly the behaviour with select() -- an EOF descriptor always registers as readable.",
+      "revId": "f746da15015c2d98d68d4c524ec83c1c7238da26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a1c7c880_dcdf2122",
+        "filename": "simpleperf/UnixSocket.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-10-26T01:21:17Z",
+      "side": 1,
+      "message": "I only call IOEventLoop::ExitLoop() in close_callback_, which ensures all callbacks (including ReadMessage/WriteMessage) will not be called further. close_callback_ will only be called once, in the thread running IOEventLoop::RunLoop(). But since we don\u0027t know what close_callback_ is going to do here, I have changed the code to disable read_event and write_event before calling close_callback_.",
+      "parentUuid": "a1d26816_01feaa45",
       "revId": "f746da15015c2d98d68d4c524ec83c1c7238da26",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -127,6 +223,24 @@
     },
     {
       "key": {
+        "uuid": "a1c7c880_7ce37590",
+        "filename": "simpleperf/UnixSocket.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-10-26T01:21:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a1d26816_61df76f3",
+      "revId": "f746da15015c2d98d68d4c524ec83c1c7238da26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a1d26816_e1d2a6e6",
         "filename": "simpleperf/UnixSocket.h",
         "patchSetId": 2
@@ -138,6 +252,24 @@
       "writtenOn": "2016-10-25T09:51:17Z",
       "side": 1,
       "message": "This function looks very similar to the previous one. I think we should merge them and have a \"bool delayed\" parameter (perhaps with a default value).",
+      "revId": "f746da15015c2d98d68d4c524ec83c1c7238da26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a1c7c880_dc460196",
+        "filename": "simpleperf/UnixSocket.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-10-26T01:21:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a1d26816_e1d2a6e6",
       "revId": "f746da15015c2d98d68d4c524ec83c1c7238da26",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
