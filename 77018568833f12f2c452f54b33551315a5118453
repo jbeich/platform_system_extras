@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "c1667cd0_cf78dde9",
+        "filename": "perfprofd/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2016-10-27T22:45:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c1d83cb2_d0ce946a",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 44
+      },
+      "revId": "77018568833f12f2c452f54b33551315a5118453",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c1d83cb2_73ba52a4",
         "filename": "perfprofd/Android.bp",
         "patchSetId": 1
@@ -42,6 +66,24 @@
     },
     {
       "key": {
+        "uuid": "868bbadf_e00422c6",
+        "filename": "perfprofd/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2016-10-27T22:45:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c1d83cb2_73ba52a4",
+      "revId": "77018568833f12f2c452f54b33551315a5118453",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c1d83cb2_33b0dac4",
         "filename": "perfprofd/Android.bp",
         "patchSetId": 1
@@ -53,6 +95,30 @@
       "writtenOn": "2016-10-26T21:44:47Z",
       "side": 1,
       "message": "Should we start propagating this dependency for Soong modules?",
+      "range": {
+        "startLine": 69,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 31
+      },
+      "revId": "77018568833f12f2c452f54b33551315a5118453",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "81b56446_7767df00",
+        "filename": "perfprofd/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2016-10-27T22:45:14Z",
+      "side": 1,
+      "message": "I\u0027d rather do that in a later patch",
+      "parentUuid": "c1d83cb2_33b0dac4",
       "range": {
         "startLine": 69,
         "startChar": 0,
@@ -88,6 +154,30 @@
     },
     {
       "key": {
+        "uuid": "c1667cd0_ef7da1d6",
+        "filename": "perfprofd/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2016-10-27T22:45:14Z",
+      "side": 1,
+      "message": "Removed libstdc++, left the rest since they probably don\u0027t need libm",
+      "parentUuid": "c1d83cb2_73a53288",
+      "range": {
+        "startLine": 74,
+        "startChar": 15,
+        "endLine": 75,
+        "endChar": 20
+      },
+      "revId": "77018568833f12f2c452f54b33551315a5118453",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c1d83cb2_b3bb2aac",
         "filename": "perfprofd/Android.bp",
         "patchSetId": 1
@@ -99,6 +189,30 @@
       "writtenOn": "2016-10-26T21:44:47Z",
       "side": 1,
       "message": "These are duplicated in perfprofd_cppflags (and there aren\u0027t any non-C++ sources)",
+      "range": {
+        "startLine": 78,
+        "startChar": 0,
+        "endLine": 81,
+        "endChar": 6
+      },
+      "revId": "77018568833f12f2c452f54b33551315a5118453",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "868bbadf_c0947e29",
+        "filename": "perfprofd/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2016-10-27T22:45:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c1d83cb2_b3bb2aac",
       "range": {
         "startLine": 78,
         "startChar": 0,
@@ -134,6 +248,30 @@
     },
     {
       "key": {
+        "uuid": "a16b489a_22cecf13",
+        "filename": "perfprofd/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2016-10-27T22:45:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c1d83cb2_939b864f",
+      "range": {
+        "startLine": 82,
+        "startChar": 0,
+        "endLine": 82,
+        "endChar": 22
+      },
+      "revId": "77018568833f12f2c452f54b33551315a5118453",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c1d83cb2_d395fe1a",
         "filename": "perfprofd/Android.bp",
         "patchSetId": 1
@@ -145,6 +283,30 @@
       "writtenOn": "2016-10-26T21:44:47Z",
       "side": 1,
       "message": "I\u0027ve been removing these when possible. If we actually want the debug behavior for this tool, this should be removed, and we should add PRODUCT_PACKAGES_debug +\u003d perfprofd",
+      "range": {
+        "startLine": 84,
+        "startChar": 0,
+        "endLine": 84,
+        "endChar": 20
+      },
+      "revId": "77018568833f12f2c452f54b33551315a5118453",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "81b56446_978d234e",
+        "filename": "perfprofd/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2016-10-27T22:45:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c1d83cb2_d395fe1a",
       "range": {
         "startLine": 84,
         "startChar": 0,
