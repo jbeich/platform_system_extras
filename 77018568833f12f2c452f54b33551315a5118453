@@ -342,6 +342,30 @@
     },
     {
       "key": {
+        "uuid": "064b4a9d_dc55ad64",
+        "filename": "perfprofd/tests/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2016-10-28T18:12:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c1d83cb2_f3de42f5",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 19
+      },
+      "revId": "77018568833f12f2c452f54b33551315a5118453",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c1d83cb2_93e9c6a3",
         "filename": "perfprofd/tests/Android.bp",
         "patchSetId": 1
@@ -365,6 +389,30 @@
     },
     {
       "key": {
+        "uuid": "064b4a9d_3c42d1ac",
+        "filename": "perfprofd/tests/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2016-10-28T18:12:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c1d83cb2_93e9c6a3",
+      "range": {
+        "startLine": 36,
+        "startChar": 17,
+        "endLine": 36,
+        "endChar": 45
+      },
+      "revId": "77018568833f12f2c452f54b33551315a5118453",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c1d83cb2_b3e4cacb",
         "filename": "perfprofd/tests/Android.bp",
         "patchSetId": 1
@@ -376,6 +424,30 @@
       "writtenOn": "2016-10-26T21:44:47Z",
       "side": 1,
       "message": "This should be exported by libperfprofdcore probably",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 34
+      },
+      "revId": "77018568833f12f2c452f54b33551315a5118453",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "064b4a9d_1c4715bd",
+        "filename": "perfprofd/tests/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2016-10-28T18:12:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c1d83cb2_b3e4cacb",
       "range": {
         "startLine": 41,
         "startChar": 0,
