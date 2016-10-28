@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "064b4a9d_7c3c5929",
+        "filename": "perfprofd/tests/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2016-10-28T18:12:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "868bbadf_86468e96",
+      "revId": "1051dcdd1f29c2be05cd9835846c57ce1d65e668",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a6eefe70_4a1aa251",
         "filename": "perfprofd/tests/Android.bp",
         "patchSetId": 2
@@ -30,6 +48,30 @@
       "writtenOn": "2016-10-28T00:25:51Z",
       "side": 1,
       "message": "Also this",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 18
+      },
+      "revId": "1051dcdd1f29c2be05cd9835846c57ce1d65e668",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "064b4a9d_5c419da3",
+        "filename": "perfprofd/tests/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2016-10-28T18:12:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a6eefe70_4a1aa251",
       "range": {
         "startLine": 16,
         "startChar": 0,
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "064b4a9d_bc35413c",
+        "filename": "perfprofd/tests/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2016-10-28T18:12:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "01a974f7_f6cd8d17",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 32
+      },
+      "revId": "1051dcdd1f29c2be05cd9835846c57ce1d65e668",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e19380d8_84e967ce",
         "filename": "perfprofd/tests/Android.bp",
         "patchSetId": 2
@@ -76,6 +142,30 @@
       "writtenOn": "2016-10-28T00:25:51Z",
       "side": 1,
       "message": "And names to the top",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 27
+      },
+      "revId": "1051dcdd1f29c2be05cd9835846c57ce1d65e668",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "064b4a9d_9c320550",
+        "filename": "perfprofd/tests/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2016-10-28T18:12:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e19380d8_84e967ce",
       "range": {
         "startLine": 47,
         "startChar": 0,
