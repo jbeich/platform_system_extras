@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "064b4a9d_1fdd472a",
+        "filename": "simpleperf/environment.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2016-10-28T23:29:01Z",
+      "side": 1,
+      "message": "can you rewrite this to use uname(2) instead?",
+      "revId": "f73f1a0543a2b8081f40f82ce7b91a52eaaa81be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
