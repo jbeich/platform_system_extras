@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "868bbadf_86468e96",
+        "filename": "perfprofd/tests/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2016-10-28T00:25:51Z",
+      "side": 1,
+      "message": "Looks like you missed my comments in PS1 for this file.",
+      "revId": "1051dcdd1f29c2be05cd9835846c57ce1d65e668",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a6eefe70_4a1aa251",
+        "filename": "perfprofd/tests/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2016-10-28T00:25:51Z",
+      "side": 1,
+      "message": "Also this",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 18
+      },
+      "revId": "1051dcdd1f29c2be05cd9835846c57ce1d65e668",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "01a974f7_f6cd8d17",
+        "filename": "perfprofd/tests/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2016-10-28T00:25:51Z",
+      "side": 1,
+      "message": "This is exported by libprotobuf-cpp-lite already",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 32
+      },
+      "revId": "1051dcdd1f29c2be05cd9835846c57ce1d65e668",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e19380d8_84e967ce",
+        "filename": "perfprofd/tests/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2016-10-28T00:25:51Z",
+      "side": 1,
+      "message": "And names to the top",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 27
+      },
+      "revId": "1051dcdd1f29c2be05cd9835846c57ce1d65e668",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
