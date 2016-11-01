@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "86ed7a09_f940ab7d",
+        "filename": "bootctl/bootctl.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1077068
+      },
+      "writtenOn": "2016-11-01T21:51:33Z",
+      "side": 1,
+      "message": "We should switch to the new name (boot) or leave the legacy name as is (boot_control).",
+      "range": {
+        "startLine": 34,
+        "startChar": 47,
+        "endLine": 34,
+        "endChar": 58
+      },
+      "revId": "ad3c86a18c6b6396a24170bc89efca0dc81033d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "86ed7a09_395f5357",
+        "filename": "bootctl/bootctl.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1077068
+      },
+      "writtenOn": "2016-11-01T21:51:33Z",
+      "side": 1,
+      "message": "pass the linter?",
+      "range": {
+        "startLine": 150,
+        "startChar": 75,
+        "endLine": 150,
+        "endChar": 91
+      },
+      "revId": "ad3c86a18c6b6396a24170bc89efca0dc81033d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
