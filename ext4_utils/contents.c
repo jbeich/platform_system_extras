@@ -474,18 +474,18 @@ int inode_set_selinux(u32 inode_num, const char *secon)
 		XATTR_SELINUX_SUFFIX, secon, strlen(secon) + 1);
 }
 
-int inode_set_capabilities(u32 inode_num, uint64_t capabilities) {
-	if (capabilities == 0)
+int inode_set_capabilities(u32 inode_num, struct fs_capabilities *capabilities) {
+	if (!capabilities->permitted && !capabilities->inheritable)
 		return 0;
 
 	struct vfs_cap_data cap_data;
 	memset(&cap_data, 0, sizeof(cap_data));
 
 	cap_data.magic_etc = VFS_CAP_REVISION | VFS_CAP_FLAGS_EFFECTIVE;
-	cap_data.data[0].permitted = (uint32_t) (capabilities & 0xffffffff);
-	cap_data.data[0].inheritable = 0;
-	cap_data.data[1].permitted = (uint32_t) (capabilities >> 32);
-	cap_data.data[1].inheritable = 0;
+	cap_data.data[0].permitted = (uint32_t) (capabilities->permitted & 0xffffffff);
+	cap_data.data[0].inheritable = (uint32_t) (capabilities->inheritable & 0xffffffff);
+	cap_data.data[1].permitted = (uint32_t) (capabilities->permitted >> 32);
+	cap_data.data[1].inheritable = (uint32_t) (capabilities->inheritable >> 32);
 
 	return xattr_add(inode_num, EXT4_XATTR_INDEX_SECURITY,
 		XATTR_CAPS_SUFFIX, &cap_data, sizeof(cap_data));

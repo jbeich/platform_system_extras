@@ -37,6 +37,7 @@ extern "C" {
 #include <string.h>
 #include <setjmp.h>
 #include <stdint.h>
+#include <private/android_filesystem_config.h>
 
 #if defined(__APPLE__) && defined(__MACH__)
 #define lseek64 lseek
@@ -154,7 +155,7 @@ void ext4_parse_sb_info(struct ext4_super_block *sb);
 u16 ext4_crc16(u16 crc_in, const void *buf, int size);
 
 typedef void (*fs_config_func_t)(const char *path, int dir, const char *target_out_path,
-        unsigned *uid, unsigned *gid, unsigned *mode, uint64_t *capabilities);
+        unsigned *uid, unsigned *gid, unsigned *mode, struct fs_capabilities *capabilities);
 
 struct selabel_handle;
 

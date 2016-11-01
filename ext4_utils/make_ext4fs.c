@@ -219,18 +219,17 @@ static u32 build_directory_structure(const char *full_path, const char *dir_path
 		} else {
 			dentries[i].mtime = fixed_time;
 		}
-		uint64_t capabilities;
+
 		if (fs_config_func != NULL) {
 #ifdef ANDROID
 			unsigned int mode = 0;
 			unsigned int uid = 0;
 			unsigned int gid = 0;
 			int dir = S_ISDIR(stat.st_mode);
-			fs_config_func(dentries[i].path, dir, target_out_path, &uid, &gid, &mode, &capabilities);
+			fs_config_func(dentries[i].path, dir, target_out_path, &uid, &gid, &mode, &(dentries[i].capabilities));
 			dentries[i].mode = mode;
 			dentries[i].uid = uid;
 			dentries[i].gid = gid;
-			dentries[i].capabilities = capabilities;
 #else
 			error("can't set android permissions - built without android support");
 #endif
@@ -338,7 +337,7 @@ static u32 build_directory_structure(const char *full_path, const char *dir_path
 		ret = inode_set_selinux(entry_inode, dentries[i].secon);
 		if (ret)
 			error("failed to set SELinux context on %s\n", dentries[i].path);
-		ret = inode_set_capabilities(entry_inode, dentries[i].capabilities);
+		ret = inode_set_capabilities(entry_inode, &(dentries[i].capabilities));
 		if (ret)
 			error("failed to set capability on %s\n", dentries[i].path);
 
