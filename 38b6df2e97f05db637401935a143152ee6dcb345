@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4be1cbe3_45bef99b",
+        "filename": "bootctl/bootctl.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1077068
+      },
+      "writtenOn": "2016-11-08T03:48:08Z",
+      "side": 1,
+      "message": "I tried to build this in master and this file is apparently missing... and also not needed because all the objects you use are in hardware::boot::V1_0::...",
+      "range": {
+        "startLine": 18,
+        "startChar": 9,
+        "endLine": 18,
+        "endChar": 33
+      },
+      "revId": "38b6df2e97f05db637401935a143152ee6dcb345",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
