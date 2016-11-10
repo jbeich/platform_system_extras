@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4b91cbcd_6d6c41e6",
+        "filename": "simpleperf/report_sample.proto",
+        "patchSetId": 6
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1079424
+      },
+      "writtenOn": "2016-11-10T23:34:35Z",
+      "side": 1,
+      "message": "[Optional] Replace \"File[file_id]\" by \"File with \u0027id\u0027 field being \u0027file_id\u0027\". This .proto interface doesn\u0027t specify a File[] array. Records containing file messages may not be continuous.",
+      "range": {
+        "startLine": 30,
+        "startChar": 10,
+        "endLine": 30,
+        "endChar": 23
+      },
+      "revId": "c4c3218b08d311ef50029a864b6967dd54785463",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
