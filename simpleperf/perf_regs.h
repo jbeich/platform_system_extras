@@ -85,6 +85,7 @@ struct RegSet {
 };
 
 RegSet CreateRegSet(uint64_t valid_mask, const uint64_t* valid_regs);
+void SetIpReg(ArchType arch, uint64_t ip, RegSet* regs);
 
 bool GetRegValue(const RegSet& regs, size_t regno, uint64_t* value);
 bool GetSpRegValue(const RegSet& regs, ArchType arch, uint64_t* value);

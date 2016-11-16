@@ -167,6 +167,26 @@ RegSet CreateRegSet(uint64_t valid_mask, const uint64_t* valid_regs) {
   return regs;
 }
 
+void SetIpReg(ArchType arch, uint64_t ip, RegSet* regs) {
+  int regno;
+  switch (arch) {
+    case ARCH_X86_64:
+    case ARCH_X86_32:
+      regno = PERF_REG_X86_IP;
+      break;
+    case ARCH_ARM:
+      regno = PERF_REG_ARM_PC;
+      break;
+    case ARCH_ARM64:
+      regno = PERF_REG_ARM64_PC;
+      break;
+    default:
+      return;
+  }
+  regs->valid_mask |= (1ULL << regno);
+  regs->data[regno] = ip;
+}
+
 bool GetRegValue(const RegSet& regs, size_t regno, uint64_t* value) {
   CHECK_LT(regno, 64U);
   if ((regs.valid_mask >> regno) & 1) {

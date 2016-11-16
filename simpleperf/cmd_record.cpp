@@ -828,9 +828,12 @@ bool RecordCommand::UnwindRecord(Record* record) {
         (r.GetValidStackSize() > 0)) {
       ThreadEntry* thread =
           thread_tree_.FindThreadOrNew(r.tid_data.pid, r.tid_data.tid);
+      ArchType arch = GetArchForAbi(GetBuildArch(), r.regs_user_data.abi);
       RegSet regs =
           CreateRegSet(r.regs_user_data.reg_mask, r.regs_user_data.regs);
-      ArchType arch = GetArchForAbi(GetBuildArch(), r.regs_user_data.abi);
+      // On angler, arm64 kernel doesn't set ip reg properly for arm. So set ip
+      // reg explicitly here.
+      SetIpReg(arch, r.ip_data.ip, &regs);
       // Normally do strict arch check when unwinding stack. But allow unwinding
       // 32-bit processes on 64-bit devices for system wide profiling.
       bool strict_arch_check = !system_wide_collection_;
