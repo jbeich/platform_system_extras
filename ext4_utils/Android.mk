@@ -15,6 +15,11 @@ libext4_utils_src_files := \
     crc16.c \
     ext4_sb.c
 
+libext2fs_lib := libext2fs \
+    libext2_com_err
+
+libext2fs_lib_host = $(addsuffix -host, $(libext2fs_lib))
+
 #
 # -- All host/targets including windows
 #
@@ -129,11 +134,8 @@ include $(BUILD_EXECUTABLE)
 include $(CLEAR_VARS)
 LOCAL_SRC_FILES := ext2simg.c
 LOCAL_MODULE := ext2simg
-LOCAL_C_INCLUDES := \
-    $(LOCAL_PATH)/include
 LOCAL_SHARED_LIBRARIES += \
-    libext4_utils \
-    libselinux \
+    $(libext2fs_lib) \
     libsparse \
     libz
 include $(BUILD_EXECUTABLE)
@@ -142,12 +144,9 @@ include $(BUILD_EXECUTABLE)
 include $(CLEAR_VARS)
 LOCAL_SRC_FILES := ext2simg.c
 LOCAL_MODULE := ext2simg
-LOCAL_C_INCLUDES := \
-    $(LOCAL_PATH)/include
 LOCAL_SHARED_LIBRARIES += \
-    libselinux
+    $(libext2fs_lib_host)
 LOCAL_STATIC_LIBRARIES += \
-    libext4_utils_host \
     libsparse_host \
     libz
 include $(BUILD_HOST_EXECUTABLE)
