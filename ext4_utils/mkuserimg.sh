@@ -6,13 +6,28 @@ function usage() {
 cat<<EOT
 Usage:
 mkuserimg.sh [-s] SRC_DIR OUTPUT_FILE EXT_VARIANT MOUNT_POINT SIZE [-j <journal_size>]
-             [-T TIMESTAMP] [-C FS_CONFIG] [-D PRODUCT_OUT] [-B BLOCK_LIST_FILE] [-d BASE_ALLOC_FILE_IN ] [-A BASE_ALLOC_FILE_OUT ] [-L LABEL] [FILE_CONTEXTS]
+             [-T TIMESTAMP] [-C FS_CONFIG] [-D PRODUCT_OUT] [-B BLOCK_LIST_FILE]
+             [-d BASE_ALLOC_FILE_IN ] [-A BASE_ALLOC_FILE_OUT ] [-L LABEL]
+             [ -i INODES ] [FILE_CONTEXTS]
 EOT
 }
 
-ENABLE_SPARSE_IMAGE=
+OPTS=""
+EXTENDED_OPTS=""
+
+function add_extended_opt() {
+    if [ -z "$EXTENDED_OPTS" ]; then
+        EXTENDED_OPTS="-E $1"
+    else
+        EXTENDED_OPTS+=",$1"
+    fi
+    if [ ! -z "$2" ]; then
+        EXTENDED_OPTS+="=$2"
+    fi
+}
+
 if [ "$1" = "-s" ]; then
-  ENABLE_SPARSE_IMAGE="-s"
+    add_extended_opt "sparse_file"
   shift
 fi
 
@@ -33,59 +48,56 @@ MOUNT_POINT=$4
 SIZE=$5
 shift; shift; shift; shift; shift
 
-JOURNAL_FLAGS=
 if [ "$1" = "-j" ]; then
   if [ "$2" = "0" ]; then
-    JOURNAL_FLAGS="-J"
+    OPTS+="-O ^has_journal"
   else
-    JOURNAL_FLAGS="-j $2"
+    OPTS+="-J size=$2"
   fi
   shift; shift
 fi
 
-TIMESTAMP=-1
 if [[ "$1" == "-T" ]]; then
-  TIMESTAMP=$2
+  add_extended_opt "timestamp" "$2"
   shift; shift
 fi
 
-FS_CONFIG=
 if [[ "$1" == "-C" ]]; then
-  FS_CONFIG=$2
+  add_extended_opt "fs_config" "$2"
   shift; shift
 fi
 
-PRODUCT_OUT=
 if [[ "$1" == "-D" ]]; then
-  PRODUCT_OUT=$2
+  add_extended_opt "target_out" "$2"
   shift; shift
 fi
 
-BLOCK_LIST=
 if [[ "$1" == "-B" ]]; then
-  BLOCK_LIST=$2
+  add_extended_opt "block_list" "$2"
   shift; shift
 fi
 
-BASE_ALLOC_FILE_IN=
 if [[ "$1" == "-d" ]]; then
-  BASE_ALLOC_FILE_IN=$2
+  add_extended_opt "base_fs_in" "$2"
   shift; shift
 fi
 
-BASE_ALLOC_FILE_OUT=
 if [[ "$1" == "-A" ]]; then
-  BASE_ALLOC_FILE_OUT=$2
+  add_extended_opt "base_fs_out" "$2"
   shift; shift
 fi
 
-LABEL=
 if [[ "$1" == "-L" ]]; then
-  LABEL=$2
+  OPTS+=" -L $2"
   shift; shift
 fi
 
-FC=$1
+if [[ "$1" == "-i" ]]; then
+  OPTS+=" -N $2"
+  shift; shift
+fi
+
+add_extended_opt "file_contexts" "$1"
 
 case $EXT_VARIANT in
   ext4) ;;
@@ -102,27 +114,15 @@ if [ -z $SIZE ]; then
   exit 2
 fi
 
-OPT=""
-if [ -n "$FC" ]; then
-  OPT="$OPT -S $FC"
-fi
-if [ -n "$FS_CONFIG" ]; then
-  OPT="$OPT -C $FS_CONFIG"
-fi
-if [ -n "$BLOCK_LIST" ]; then
-  OPT="$OPT -B $BLOCK_LIST"
-fi
-if [ -n "$BASE_ALLOC_FILE_IN" ]; then
-  OPT="$OPT -d $BASE_ALLOC_FILE_IN"
-fi
-if [ -n "$BASE_ALLOC_FILE_OUT" ]; then
-  OPT="$OPT -D $BASE_ALLOC_FILE_OUT"
-fi
-if [ -n "$LABEL" ]; then
-  OPT="$OPT -L $LABEL"
-fi
+BLOCKSIZE=4096
+OPTS+=" -d $SRC_DIR"
+OPTS+=" -t $EXT_VARIANT"
+OPTS+=" -b $BLOCKSIZE"
+add_extended_opt "mountpoint" "/$MOUNT_POINT"
+# Round down the filesystem length to be a multiple of the block size
+SIZE=$((SIZE / BLOCKSIZE))
 
-MAKE_EXT4FS_CMD="make_ext4fs $ENABLE_SPARSE_IMAGE -T $TIMESTAMP $OPT -l $SIZE $JOURNAL_FLAGS -a $MOUNT_POINT $OUTPUT_FILE $SRC_DIR $PRODUCT_OUT"
+MAKE_EXT4FS_CMD="mke2fs $OPTS $EXTENDED_OPTS $OUTPUT_FILE $SIZE"
 echo $MAKE_EXT4FS_CMD
 $MAKE_EXT4FS_CMD
 if [ $? -ne 0 ]; then
