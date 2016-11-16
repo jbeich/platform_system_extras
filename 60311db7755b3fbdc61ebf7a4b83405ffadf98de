@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d0a2cc7b_d02df6c0",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 835,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2016-11-16T22:56:11Z",
+      "side": 1,
+      "message": "but other arm64 kernels do? or are all arm64 kernels broken? \ndo we have a kernel bug to get this fixed? (and a CTS test?)\n\nwhy are we doing this for all architectures?",
+      "revId": "60311db7755b3fbdc61ebf7a4b83405ffadf98de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
