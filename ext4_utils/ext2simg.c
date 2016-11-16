@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010 The Android Open Source Project
+ * Copyright (C) 2016 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,186 +14,212 @@
  * limitations under the License.
  */
 
-#ifndef _FILE_OFFSET_BITS
-#define _FILE_OFFSET_BITS 64
-#endif
-
-#ifndef _LARGEFILE64_SOURCE
-#define _LARGEFILE64_SOURCE 1
-#endif
-
-#include <fcntl.h>
 #include <libgen.h>
-#include <sys/mman.h>
-#include <sys/stat.h>
-#include <sys/types.h>
 #include <unistd.h>
-
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <ext2fs/ext2fs.h>
+#include <et/com_err.h>
 #include <sparse/sparse.h>
 
-#include "allocate.h"
-#include "ext4_utils/ext4_utils.h"
-#include "ext4_utils/make_ext4fs.h"
+struct {
+	int	crc;
+	int	sparse;
+	int	gzip;
+	char	*in_file;
+	char	*out_file;
+	bool	overwrite_input;
+} params = {
+	.crc	    = 0,
+	.sparse	    = 1,
+	.gzip	    = 0,
+};
 
-#if defined(__APPLE__) && defined(__MACH__)
-#define off64_t off_t
-#endif
+#define ext2fs_fatal(Retval, Format, ...) \
+	do { \
+		com_err("error", Retval, Format, __VA_ARGS__); \
+		exit(EXIT_FAILURE); \
+	} while(0)
 
-#ifndef _WIN32 /* O_BINARY is windows-specific flag */
-#define O_BINARY 0
-#endif
-
-extern struct fs_info info;
-
-static int verbose = 0;
+#define sparse_fatal(Format) \
+	do { \
+		fprintf(stderr, "sparse: "Format); \
+		exit(EXIT_FAILURE); \
+	} while(0)
 
 static void usage(char *path)
 {
-	fprintf(stderr, "%s [ options ] <image or block device> <output image>\n", path);
-	fprintf(stderr, "\n");
-	fprintf(stderr, "  -c include CRC block\n");
-	fprintf(stderr, "  -v verbose output\n");
-	fprintf(stderr, "  -z gzip output\n");
-	fprintf(stderr, "  -S don't use sparse output format\n");
+	char *progname = basename(path);
+
+	fprintf(stderr, "%s [ options ] <image or block device> <output image>\n"
+			"  -c include CRC block\n"
+			"  -z gzip output\n"
+			"  -S don't use sparse output format\n", progname);
 }
 
-static int build_sparse_ext(int fd, const char *filename)
+static struct buf_item {
+	struct buf_item	    *next;
+	void		    *buf[0];
+} *buf_list;
+
+static void add_chunk(ext2_filsys fs, struct sparse_file *s, blk_t chunk_start, blk_t chunk_end)
 {
-	unsigned int i;
-	unsigned int block;
-	int start_contiguous_block;
-	u8 *block_bitmap;
-	off64_t ret;
+	int retval;
+	unsigned int nb_blk = chunk_end - chunk_start;
+	size_t len = nb_blk * fs->blocksize;
+	int64_t offset = (int64_t)chunk_start * (int64_t)fs->blocksize;
 
-	block_bitmap = malloc(info.block_size);
-	if (!block_bitmap)
-		critical_error("failed to allocate block bitmap");
-
-	if (aux_info.first_data_block > 0)
-		sparse_file_add_file(ext4_sparse_file, filename, 0,
-				info.block_size * aux_info.first_data_block, 0);
-
-	for (i = 0; i < aux_info.groups; i++) {
-		u32 first_block = aux_info.first_data_block + i * info.blocks_per_group;
-		u32 last_block = min(info.blocks_per_group, aux_info.len_blocks - first_block);
-
-		ret = lseek64(fd, (u64)info.block_size * aux_info.bg_desc[i].bg_block_bitmap,
-				SEEK_SET);
-		if (ret < 0)
-			critical_error_errno("failed to seek to block group bitmap %d", i);
-
-		ret = read(fd, block_bitmap, info.block_size);
-		if (ret < 0)
-			critical_error_errno("failed to read block group bitmap %d", i);
-		if (ret != (int)info.block_size)
-			critical_error("failed to read all of block group bitmap %d", i);
-
-		start_contiguous_block = -1;
-		for (block = 0; block < last_block; block++) {
-			if (start_contiguous_block >= 0) {
-				if (!bitmap_get_bit(block_bitmap, block)) {
-					u32 start_block = first_block + start_contiguous_block;
-					u32 len_blocks = block - start_contiguous_block;
-
-					sparse_file_add_file(ext4_sparse_file, filename,
-							(u64)info.block_size * start_block,
-							info.block_size * len_blocks, start_block);
-					start_contiguous_block = -1;
-				}
-			} else {
-				if (bitmap_get_bit(block_bitmap, block))
-					start_contiguous_block = block;
-			}
+	if (params.overwrite_input == false) {
+		if (sparse_file_add_file(s, params.in_file, offset, len, chunk_start) < 0)
+			sparse_fatal("adding data to the sparse file");
+	} else {
+		/*
+		 * The input file will be overwritten, make a copy of
+		 * the blocks
+		 */
+		struct buf_item *bi = calloc(1, sizeof(struct buf_item) + len);
+		if (buf_list == NULL)
+			buf_list = bi;
+		else {
+			bi->next = buf_list;
+			buf_list = bi;
 		}
 
-		if (start_contiguous_block >= 0) {
-			u32 start_block = first_block + start_contiguous_block;
-			u32 len_blocks = last_block - start_contiguous_block;
-			sparse_file_add_file(ext4_sparse_file, filename,
-					(u64)info.block_size * start_block,
-					info.block_size * len_blocks, start_block);
+		retval = io_channel_read_blk64(fs->io, chunk_start, nb_blk, bi->buf);
+		if (retval < 0)
+			ext2fs_fatal(retval, "reading block %u - %u", chunk_start, chunk_end);
+
+		if (sparse_file_add_data(s, bi->buf, len, chunk_start) < 0)
+			sparse_fatal("adding data to the sparse file");
+	}
+}
+
+static void free_chunks(void)
+{
+	struct buf_item *bi;
+
+	while (buf_list) {
+		bi = buf_list->next;
+		free(buf_list);
+		buf_list = bi;
+	}
+}
+
+static struct sparse_file *ext_to_sparse(const char *in_file)
+{
+	errcode_t retval;
+	ext2_filsys fs;
+	struct sparse_file *s;
+	int64_t chunk_start = -1;
+	blk_t first_blk, last_blk, nb_blk, cur_blk;
+
+	retval = ext2fs_open(in_file, 0, 0, 0, unix_io_manager, &fs);
+	if (retval)
+		ext2fs_fatal(retval, "while reading %s", in_file);
+
+	retval = ext2fs_read_block_bitmap(fs);
+	if (retval)
+		ext2fs_fatal(retval, "while reading block bitmap of %s", in_file);
+
+	first_blk = ext2fs_get_block_bitmap_start2(fs->block_map);
+	last_blk = ext2fs_get_block_bitmap_end2(fs->block_map);
+	nb_blk = last_blk - first_blk + 1;
+
+	s = sparse_file_new(fs->blocksize, (uint64_t)fs->blocksize * (uint64_t)nb_blk);
+	if (!s)
+		sparse_fatal("creating sparse file");
+
+	/*
+	 * The sparse format encodes the size of a chunk (and its header) in a
+	 * 32-bit unsigned integer (UINT32_MAX)
+	 * When writing the chunk, the library uses a single call to write().
+	 * Linux's implementation of the 'write' syscall does not allow transfers
+	 * larger than INT32_MAX (32-bit _and_ 64-bit systems).
+	 * Make sure we do not create chunks larger than this limit.
+	 */
+	int64_t max_blk_per_chunk = (INT32_MAX - 12) / fs->blocksize;
+
+	/* Iter on the blocks to merge contiguous chunk */
+	for (cur_blk = first_blk; cur_blk <= last_blk; ++cur_blk) {
+		if (ext2fs_test_block_bitmap2(fs->block_map, cur_blk)) {
+			if (chunk_start == -1) {
+				chunk_start = cur_blk;
+			} else if (cur_blk - chunk_start + 1 == max_blk_per_chunk) {
+				add_chunk(fs, s, chunk_start, cur_blk);
+				chunk_start = -1;
+			}
+		} else if (chunk_start != -1) {
+			add_chunk(fs, s, chunk_start, cur_blk);
+			chunk_start = -1;
 		}
 	}
+	if (chunk_start != -1)
+		add_chunk(fs, s, chunk_start, cur_blk - 1);
 
-	return 0;
+	ext2fs_free(fs);
+	return s;
 }
 
-int main(int argc, char **argv)
+static bool same_file(const char *in, const char *out)
+{
+	struct stat st1, st2;
+
+	if (access(out, F_OK) == -1)
+		return false;
+
+	if (lstat(in, &st1) == -1)
+		ext2fs_fatal(errno, "stat %s\n", in);
+	if (lstat(out, &st2) == -1)
+		ext2fs_fatal(errno, "stat %s\n", out);
+	return st1.st_ino == st2.st_ino;
+}
+
+int main(int argc, char *argv[])
 {
 	int opt;
-	const char *in = NULL;
-	const char *out = NULL;
-	int gzip = 0;
-	int sparse = 1;
-	int infd, outfd;
-	int crc = 0;
+	int out_fd;
+	errcode_t retval;
+	struct sparse_file *s;
 
-	while ((opt = getopt(argc, argv, "cvzS")) != -1) {
-		switch (opt) {
+	while ((opt = getopt(argc, argv, "czS")) != -1) {
+		switch(opt) {
 		case 'c':
-			crc = 1;
-			break;
-		case 'v':
-			verbose = 1;
+			params.crc = 1;
 			break;
 		case 'z':
-			gzip = 1;
+			params.gzip = 1;
 			break;
 		case 'S':
-			sparse = 0;
+			params.sparse = 0;
 			break;
+		default:
+			usage(argv[0]);
+			exit(EXIT_FAILURE);
 		}
 	}
-
-	if (optind >= argc) {
-		fprintf(stderr, "Expected image or block device after options\n");
+	if (optind + 1 >= argc) {
 		usage(argv[0]);
 		exit(EXIT_FAILURE);
 	}
+	params.in_file = strdup(argv[optind++]);
+	params.out_file = strdup(argv[optind]);
+	params.overwrite_input = same_file(params.in_file, params.out_file);
 
-	in = argv[optind++];
+	s = ext_to_sparse(params.in_file);
 
-	if (optind >= argc) {
-		fprintf(stderr, "Expected output image after input image\n");
-		usage(argv[0]);
-		exit(EXIT_FAILURE);
-	}
+	out_fd = open(params.out_file, O_WRONLY | O_CREAT | O_TRUNC, 0664);
+	if (out_fd == -1)
+		ext2fs_fatal(errno, "opening %s\n", params.out_file);
+	if (sparse_file_write(s, out_fd, params.gzip, params.sparse, params.crc) < 0)
+		sparse_fatal("writing sparse file");
 
-	out = argv[optind++];
+	sparse_file_destroy(s);
 
-	if (optind < argc) {
-		fprintf(stderr, "Unexpected argument: %s\n", argv[optind]);
-		usage(argv[0]);
-		exit(EXIT_FAILURE);
-	}
-
-	infd = open(in, O_RDONLY);
-
-	if (infd < 0)
-		critical_error_errno("failed to open input image");
-
-	read_ext(infd, verbose);
-
-	ext4_sparse_file = sparse_file_new(info.block_size, info.len);
-
-	build_sparse_ext(infd, in);
-
-	close(infd);
-
-	if (strcmp(out, "-")) {
-		outfd = open(out, O_WRONLY | O_CREAT | O_TRUNC | O_BINARY, 0644);
-		if (outfd < 0) {
-			error_errno("open");
-			return EXIT_FAILURE;
-		}
-	} else {
-		outfd = STDOUT_FILENO;
-	}
-
-	write_ext4_image(outfd, gzip, sparse, crc);
-	close(outfd);
-
-	sparse_file_destroy(ext4_sparse_file);
+	free(params.in_file);
+	free(params.out_file);
+	free_chunks();
+	close(out_fd);
 
 	return 0;
 }
