@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d0a2cc7b_cf856399",
+        "filename": "simpleperf/cmd_record_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-11-16T03:03:51Z",
+      "side": 1,
+      "message": "this line is too line, wrap to the next line? I prefer to limit line to 80 columns, 100 columns is also fine.",
+      "range": {
+        "startLine": 91,
+        "startChar": 74,
+        "endLine": 91,
+        "endChar": 80
+      },
+      "revId": "1a31dacc16f0330515228c70d340dd379dd8a156",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0a2cc7b_af334726",
+        "filename": "simpleperf/report_lib_interface.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-11-16T03:03:51Z",
+      "side": 1,
+      "message": "use std::move(kallsyms), so it avoid memory allocation and copy.",
+      "range": {
+        "startLine": 159,
+        "startChar": 19,
+        "endLine": 159,
+        "endChar": 27
+      },
+      "revId": "1a31dacc16f0330515228c70d340dd379dd8a156",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0a2cc7b_6fa54fe6",
+        "filename": "simpleperf/scripts/report_sample.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-11-16T03:03:51Z",
+      "side": 1,
+      "message": "when using python3 to print this, the output is like below:\n\nb\u0027simpleperf\u0027\t13317 [009] 1570372.0:\t\t692557 b\u0027cpu-cycles\u0027:\n\nIt seems we need to convert all bytes into utf-8 strs in python3. I am considering adding a conversion layer in simpleperf_report_lib.py later. It has performance penalties but may still worth a try. What\u0027s your opinion?",
+      "range": {
+        "startLine": 56,
+        "startChar": 60,
+        "endLine": 56,
+        "endChar": 71
+      },
+      "revId": "1a31dacc16f0330515228c70d340dd379dd8a156",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0a2cc7b_cf3b23fa",
+        "filename": "simpleperf/scripts/report_sample.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-11-16T03:03:51Z",
+      "side": 1,
+      "message": "this line in python2 prints \"()\", add \"from __future__ import print_function\" at the top of the file?",
+      "range": {
+        "startLine": 61,
+        "startChar": 8,
+        "endLine": 61,
+        "endChar": 15
+      },
+      "revId": "1a31dacc16f0330515228c70d340dd379dd8a156",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0a2cc7b_2fb75721",
+        "filename": "simpleperf/scripts/simpleperf_report_lib.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-11-16T03:03:51Z",
+      "side": 1,
+      "message": "extra space",
+      "range": {
+        "startLine": 119,
+        "startChar": 0,
+        "endLine": 119,
+        "endChar": 1
+      },
+      "revId": "1a31dacc16f0330515228c70d340dd379dd8a156",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
