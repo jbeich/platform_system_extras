@@ -16,6 +16,24 @@
       "revId": "60311db7755b3fbdc61ebf7a4b83405ffadf98de",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0a2cc7b_412dba03",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 835,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-11-17T00:50:41Z",
+      "side": 1,
+      "message": "All arm64 kernels are the same. It is not actually a bug, and is never fixed in kernel. AFAIK, when an exception happens, the arm64 kernel saves the same register set no matter it is for a arm32 process or a arm64 process. As in http://infocenter.arm.com/help/index.jsp?topic\u003d/com.arm.doc.den0024a/ch04s05s01.html, there is a one to one map from arm64 registers w0-w14 to arm registers r0-r14. The problem happens that w15 is mapped to r13(hyp) instead of pc. When libunwind reads regs[15] for pc value, it actually gets value for r13(hyp).\nI think a better way to fix it is to dump all arm64 registers, then correct the pc value for arm processes. So it works better when we can unwind both arm and arm64 stacks at the same time.",
+      "parentUuid": "d0a2cc7b_d02df6c0",
+      "revId": "60311db7755b3fbdc61ebf7a4b83405ffadf98de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
