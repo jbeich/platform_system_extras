@@ -39,35 +39,25 @@ simpleperf_static_libraries_target := \
   libunwind \
   libziparchive \
   libz \
+  libelf_reader \
   libbase \
   libcutils \
   liblog \
   libprocinfo \
   libutils \
   liblzma \
-  libLLVMObject \
-  libLLVMBitReader \
-  libLLVMMC \
-  libLLVMMCParser \
-  libLLVMCore \
-  libLLVMSupport \
   libprotobuf-cpp-lite \
   libevent \
   libc \
 
 simpleperf_static_libraries_host := \
   libziparchive \
+  libelf_reader \
   libbase \
   liblog \
   liblzma \
   libz \
   libutils \
-  libLLVMObject \
-  libLLVMBitReader \
-  libLLVMMC \
-  libLLVMMCParser \
-  libLLVMCore \
-  libLLVMSupport \
   libprotobuf-cpp-lite \
 
 simpleperf_static_libraries_host_linux := \

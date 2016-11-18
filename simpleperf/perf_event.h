@@ -18,6 +18,18 @@
 #define SIMPLE_PERF_PERF_EVENT_H_
 
 #if defined(USE_BIONIC_UAPI_HEADERS)
+
+#if !defined(__linux__)
+#include <stdint.h>
+
+typedef uint8_t __u8;
+typedef uint16_t __u16;
+typedef uint32_t __u32;
+typedef int32_t __s32;
+typedef uint64_t __u64;
+typedef int64_t __s64;
+#endif
+
 #include <uapi/linux/perf_event.h>
 #else
 #include <linux/perf_event.h>
