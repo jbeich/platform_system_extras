@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "102f0424_dbc4eb53",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1119728
+      },
+      "writtenOn": "2016-11-22T22:16:54Z",
+      "side": 1,
+      "message": "Sure.",
+      "parentUuid": "102f0424_7b12771d",
+      "range": {
+        "startLine": 11,
+        "startChar": 6,
+        "endLine": 11,
+        "endChar": 12
+      },
+      "revId": "b0ef1e9bea7a5ac07eae4e3e50dfe69380111e1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "102f0424_3b1cff2c",
         "filename": "/COMMIT_MSG",
         "patchSetId": 4
@@ -42,6 +66,24 @@
     },
     {
       "key": {
+        "uuid": "102f0424_bb056fc4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1119728
+      },
+      "writtenOn": "2016-11-22T22:16:54Z",
+      "side": 1,
+      "message": "No but it is part of \"replacing make_ext4fs with libext2fs\".\nThis new version uses the upstream libext2fs instead of libext4_utils.\nAlso the old ext2simg was buggy: it creates corrupted images if the size is too big. It takes 1h+ to flash these images on a device with fastboot flash...\n\next2simg is just a \u0027debug\u0027 tool, it is not necessary to build android, but we often use it to create custom userdata.img (which is a pretty big image).",
+      "parentUuid": "102f0424_3b1cff2c",
+      "revId": "b0ef1e9bea7a5ac07eae4e3e50dfe69380111e1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "102f0424_fb7e8757",
         "filename": "ext4_utils/ext2simg.c",
         "patchSetId": 4
@@ -53,6 +95,30 @@
       "writtenOn": "2016-11-22T22:05:14Z",
       "side": 1,
       "message": "Do we define 4k block size somewhere? I thought it can be set to 1k?",
+      "range": {
+        "startLine": 141,
+        "startChar": 42,
+        "endLine": 141,
+        "endChar": 44
+      },
+      "revId": "b0ef1e9bea7a5ac07eae4e3e50dfe69380111e1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "102f0424_bbdc8f32",
+        "filename": "ext4_utils/ext2simg.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1119728
+      },
+      "writtenOn": "2016-11-22T22:16:54Z",
+      "side": 1,
+      "message": "I don\u0027t really understand the question. This function read an existing ext4 image with \u0027ext2fs_open\u0027 and extract the block size from the superblock. It can be 1k, 2k or 4k, it does not change anything because the sparse format do not store blocks but segments of data.\nThe only restriction is that the size of a single segment must not exceed INT32_MAX.",
+      "parentUuid": "102f0424_fb7e8757",
       "range": {
         "startLine": 141,
         "startChar": 42,
