@@ -128,6 +128,30 @@
       "revId": "b0ef1e9bea7a5ac07eae4e3e50dfe69380111e1f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "102f0424_deb859af",
+        "filename": "ext4_utils/ext2simg.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1051712
+      },
+      "writtenOn": "2016-11-22T22:25:40Z",
+      "side": 1,
+      "message": "Oh, is 12 the header size? Can we have a define here? Just make it more readable. Thanks.",
+      "parentUuid": "102f0424_bbdc8f32",
+      "range": {
+        "startLine": 141,
+        "startChar": 42,
+        "endLine": 141,
+        "endChar": 44
+      },
+      "revId": "b0ef1e9bea7a5ac07eae4e3e50dfe69380111e1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
