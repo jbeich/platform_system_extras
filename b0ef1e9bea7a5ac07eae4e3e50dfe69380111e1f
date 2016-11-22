@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "102f0424_7b12771d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1051712
+      },
+      "writtenOn": "2016-11-22T22:05:14Z",
+      "side": 1,
+      "message": "Can we try \"cmp\" command to be safe?",
+      "range": {
+        "startLine": 11,
+        "startChar": 6,
+        "endLine": 11,
+        "endChar": 12
+      },
+      "revId": "b0ef1e9bea7a5ac07eae4e3e50dfe69380111e1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "102f0424_3b1cff2c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1051712
+      },
+      "writtenOn": "2016-11-22T22:05:14Z",
+      "side": 1,
+      "message": "is there a bug id for this work?",
+      "revId": "b0ef1e9bea7a5ac07eae4e3e50dfe69380111e1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "102f0424_fb7e8757",
+        "filename": "ext4_utils/ext2simg.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1051712
+      },
+      "writtenOn": "2016-11-22T22:05:14Z",
+      "side": 1,
+      "message": "Do we define 4k block size somewhere? I thought it can be set to 1k?",
+      "range": {
+        "startLine": 141,
+        "startChar": 42,
+        "endLine": 141,
+        "endChar": 44
+      },
+      "revId": "b0ef1e9bea7a5ac07eae4e3e50dfe69380111e1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
