@@ -152,6 +152,30 @@
       "revId": "b0ef1e9bea7a5ac07eae4e3e50dfe69380111e1f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "102f0424_1eced145",
+        "filename": "ext4_utils/ext2simg.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1119728
+      },
+      "writtenOn": "2016-11-22T22:29:19Z",
+      "side": 1,
+      "message": "Exactly. Unfortunately the header is a \u0027private struct\u0027 (i.e. not exported). So I can\u0027t use sizeof(struct chunk_header).\n\nI\u0027ll add a define.",
+      "parentUuid": "102f0424_deb859af",
+      "range": {
+        "startLine": 141,
+        "startChar": 42,
+        "endLine": 141,
+        "endChar": 44
+      },
+      "revId": "b0ef1e9bea7a5ac07eae4e3e50dfe69380111e1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
