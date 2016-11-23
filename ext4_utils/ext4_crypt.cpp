@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-#include "ext4_utils/ext4_crypt.h"
+#include "ext4_crypt/ext4_crypt.h"
 
 #include <asm/ioctl.h>
 #include <dirent.h>

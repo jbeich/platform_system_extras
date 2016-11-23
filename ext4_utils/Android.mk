@@ -66,11 +66,31 @@ include $(BUILD_HOST_EXECUTABLE)
 # -- All host/targets excluding windows
 #
 
-libext4_utils_src_files += \
+ifneq ($(HOST_OS),windows)
+
+libext4_crypt_src_files += \
+    ext4_crypt_init_extensions.cpp \
     key_control.cpp \
     ext4_crypt.cpp
 
-ifneq ($(HOST_OS),windows)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := libext4_crypt
+LOCAL_SRC_FILES := $(libext4_crypt_src_files)
+LOCAL_SHARED_LIBRARIES := libbase libcutils liblogwrap
+LOCAL_C_INCLUDES += $(LOCAL_PATH)/include/ext4_crypt
+LOCAL_EXPORT_C_INCLUDE_DIRS = $(LOCAL_PATH)/include/ext4_crypt
+include $(BUILD_SHARED_LIBRARY)
+
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := libext4_crypt
+LOCAL_SRC_FILES := $(libext4_crypt_src_files)
+LOCAL_STATIC_LIBRARIES := libbase libcutils liblogwrap
+LOCAL_C_INCLUDES += $(LOCAL_PATH)/include/ext4_crypt
+LOCAL_EXPORT_C_INCLUDE_DIRS = $(LOCAL_PATH)/include/ext4_crypt
+include $(BUILD_STATIC_LIBRARY)
+
 
 include $(CLEAR_VARS)
 LOCAL_SRC_FILES := $(libext4_utils_src_files)
@@ -94,8 +114,7 @@ include $(BUILD_SHARED_LIBRARY)
 
 include $(CLEAR_VARS)
 LOCAL_SRC_FILES := \
-    $(libext4_utils_src_files) \
-    ext4_crypt_init_extensions.cpp
+    $(libext4_utils_src_files)
 LOCAL_MODULE := libext4_utils_static
 LOCAL_C_INCLUDES := \
     $(LOCAL_PATH)/include

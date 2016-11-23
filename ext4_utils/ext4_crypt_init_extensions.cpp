@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-#include "ext4_utils/ext4_crypt_init_extensions.h"
+#include "ext4_crypt/ext4_crypt_init_extensions.h"
 
 #include <dirent.h>
 #include <errno.h>
@@ -33,10 +33,10 @@
 #include <cutils/sockets.h>
 #include <logwrap/logwrap.h>
 
-#include "ext4_utils/ext4_crypt.h"
-#include "ext4_utils/key_control.h"
+#include "ext4_crypt/ext4_crypt.h"
+#include "ext4_crypt/key_control.h"
 
-#define TAG "ext4_utils"
+#define TAG "ext4_crypt"
 
 static const std::string arbitrary_sequence_number = "42";
 static const int vold_command_timeout_ms = 60 * 1000;
