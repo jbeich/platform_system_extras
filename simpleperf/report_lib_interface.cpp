@@ -51,6 +51,7 @@ struct SymbolEntry {
   const char* dso_name;
   uint64_t vaddr_in_file;
   const char* symbol_name;
+  uint64_t symbol_addr;
 };
 
 struct CallChainEntry {
@@ -80,6 +81,8 @@ Sample* GetNextSample(ReportLib* report_lib) EXPORT;
 Event* GetEventOfCurrentSample(ReportLib* report_lib) EXPORT;
 SymbolEntry* GetSymbolOfCurrentSample(ReportLib* report_lib) EXPORT;
 CallChain* GetCallChainOfCurrentSample(ReportLib* report_lib) EXPORT;
+
+const char* GetBuildIdForPath(ReportLib* report_lib, const char* path) EXPORT;
 }
 
 struct EventAttrWithName {
@@ -122,6 +125,8 @@ class ReportLib {
   SymbolEntry* GetSymbolOfCurrentSample();
   CallChain* GetCallChainOfCurrentSample();
 
+  const char* GetBuildIdForPath(const char* path);
+
  private:
   Sample* GetCurrentSample();
 
@@ -136,6 +141,7 @@ class ReportLib {
   SymbolEntry current_symbol_;
   CallChain current_callchain_;
   std::vector<CallChainEntry> callchain_entries_;
+  std::string build_id_string_;
   int update_flag_;
   std::vector<EventAttrWithName> event_attrs_;
 };
@@ -236,6 +242,7 @@ SymbolEntry* ReportLib::GetSymbolOfCurrentSample() {
     current_symbol_.dso_name = map->dso->Path().c_str();
     current_symbol_.vaddr_in_file = vaddr_in_file;
     current_symbol_.symbol_name = symbol->DemangledName();
+    current_symbol_.symbol_addr = symbol->addr;
     update_flag_ |= UPDATE_FLAG_OF_SYMBOL;
   }
   return &current_symbol_;
@@ -281,6 +288,7 @@ CallChain* ReportLib::GetCallChainOfCurrentSample() {
           entry.symbol.dso_name = map->dso->Path().c_str();
           entry.symbol.vaddr_in_file = vaddr_in_file;
           entry.symbol.symbol_name = symbol->DemangledName();
+          entry.symbol.symbol_addr = symbol->addr;
           callchain_entries_.push_back(entry);
         }
       }
@@ -290,6 +298,16 @@ CallChain* ReportLib::GetCallChainOfCurrentSample() {
     update_flag_ |= UPDATE_FLAG_OF_CALLCHAIN;
   }
   return &current_callchain_;
+}
+
+const char* ReportLib::GetBuildIdForPath(const char* path) {
+  BuildId build_id = Dso::FindExpectedBuildIdForPath(path);
+  if (build_id.IsEmpty()) {
+    build_id_string_.clear();
+  } else {
+    build_id_string_ = build_id.ToString();
+  }
+  return build_id_string_.c_str();
 }
 
 // Exported methods working with a client created instance
@@ -335,4 +353,8 @@ SymbolEntry* GetSymbolOfCurrentSample(ReportLib* report_lib) {
 
 CallChain* GetCallChainOfCurrentSample(ReportLib* report_lib) {
   return report_lib->GetCallChainOfCurrentSample();
+}
+
+const char* GetBuildIdForPath(ReportLib* report_lib, const char* path) {
+  return report_lib->GetBuildIdForPath(path);
 }

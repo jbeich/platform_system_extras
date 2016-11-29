@@ -55,6 +55,13 @@ def _char_pt(str):
     return str.encode('utf-8')
 
 
+def _char_pt_to_str(char_pt):
+    if sys.version_info < (3, 0):
+        return char_pt
+    return char_pt.decode('utf-8')
+
+
+# TODO: convert fields of type c_char_p into str for python3.
 class SampleStruct(ct.Structure):
     _fields_ = [('ip', ct.c_uint64),
                 ('pid', ct.c_uint32),
@@ -73,7 +80,8 @@ class EventStruct(ct.Structure):
 class SymbolStruct(ct.Structure):
     _fields_ = [('dso_name', ct.c_char_p),
                 ('vaddr_in_file', ct.c_uint64),
-                ('symbol_name', ct.c_char_p)]
+                ('symbol_name', ct.c_char_p),
+                ('symbol_addr', ct.c_uint64)]
 
 
 class CallChainEntryStructure(ct.Structure):
@@ -114,6 +122,8 @@ class ReportLib(object):
         self._GetCallChainOfCurrentSampleFunc = self._lib.GetCallChainOfCurrentSample
         self._GetCallChainOfCurrentSampleFunc.restype = ct.POINTER(
             CallChainStructure)
+        self._GetBuildIdForPathFunc = self._lib.GetBuildIdForPath
+        self._GetBuildIdForPathFunc.restype = ct.c_char_p
         self._instance = self._CreateReportLibFunc()
         assert(not _is_null(self._instance))
 
@@ -174,6 +184,11 @@ class ReportLib(object):
         callchain = self._GetCallChainOfCurrentSampleFunc(self.getInstance())
         assert(not _is_null(callchain))
         return callchain
+
+    def GetBuildIdForPath(self, path):
+        build_id = self._GetBuildIdForPathFunc(self.getInstance(), _char_pt(path))
+        assert(not _is_null(build_id))
+        return _char_pt_to_str(build_id)
 
     def getInstance(self):
         if self._instance is None:
