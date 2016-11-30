@@ -2,6 +2,52 @@
   "comments": [
     {
       "key": {
+        "uuid": "502fbc70_85e867f8",
+        "filename": "simpleperf/scripts/report_sample.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2016-11-30T17:11:20Z",
+      "side": 1,
+      "message": "nit: you can just wrap the long line, as long as they\u0027re inside a pair of parentheses.",
+      "range": {
+        "startLine": 56,
+        "startChar": 50,
+        "endLine": 56,
+        "endChar": 132
+      },
+      "revId": "f5655f5b7479a1e904b004fdc6f1e1733db20603",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "502fbc70_25589b17",
+        "filename": "simpleperf/scripts/report_sample.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2016-11-30T17:11:20Z",
+      "side": 1,
+      "message": "nit: add \"from __future__ import print_function\" to the beginning of this file (before any other import). because print is a statement in python2 (\"print something\"), until it becomes a function in python3 (\"print(something)\").",
+      "range": {
+        "startLine": 57,
+        "startChar": 8,
+        "endLine": 57,
+        "endChar": 13
+      },
+      "revId": "f5655f5b7479a1e904b004fdc6f1e1733db20603",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "502fbc70_ae970d30",
         "filename": "simpleperf/scripts/simpleperf_report_lib.py",
         "patchSetId": 1
