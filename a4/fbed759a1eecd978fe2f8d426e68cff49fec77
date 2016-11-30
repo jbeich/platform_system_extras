@@ -1,0 +1,8 @@
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Code-Review+2: Rom Lemarchand <romlem@google.com>
+Verified+1: Connor O'Brien <connoro@google.com>
+Submitted-by: Connor O'Brien <connoro@google.com>
+Submitted-at: Wed, 30 Nov 2016 19:33:34 +0000
+Reviewed-on: https://android-review.googlesource.com/290166
+Project: platform/system/extras
+Branch: refs/heads/master
