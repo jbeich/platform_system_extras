@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "6d506749_734597b6",
+        "filename": "simpleperf/scripts/binary_cache_builder.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-12-02T18:23:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6d506749_75de1f2b",
+      "range": {
+        "startLine": 18,
+        "startChar": 3,
+        "endLine": 18,
+        "endChar": 24
+      },
+      "revId": "23b86701ee651497aaf65eec4debbf953bd39be1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6d506749_95ce536f",
         "filename": "simpleperf/scripts/binary_cache_builder.py",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2016-12-02T08:03:35Z",
       "side": 1,
       "message": "use \"_\" for unused?",
+      "range": {
+        "startLine": 113,
+        "startChar": 22,
+        "endLine": 113,
+        "endChar": 26
+      },
+      "revId": "23b86701ee651497aaf65eec4debbf953bd39be1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6d506749_d3358339",
+        "filename": "simpleperf/scripts/binary_cache_builder.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-12-02T18:23:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6d506749_95ce536f",
       "range": {
         "startLine": 113,
         "startChar": 22,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "6d506749_33c03fe8",
+        "filename": "simpleperf/scripts/binary_cache_builder.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-12-02T18:23:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6d506749_b84c2ee6",
+      "range": {
+        "startLine": 195,
+        "startChar": 77,
+        "endLine": 195,
+        "endChar": 78
+      },
+      "revId": "23b86701ee651497aaf65eec4debbf953bd39be1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6d506749_784456b8",
         "filename": "simpleperf/scripts/binary_cache_builder.py",
         "patchSetId": 2
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "6d506749_d3562348",
+        "filename": "simpleperf/scripts/binary_cache_builder.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-12-02T18:23:39Z",
+      "side": 1,
+      "message": "yeah, argparse is convenient.",
+      "parentUuid": "6d506749_784456b8",
+      "range": {
+        "startLine": 231,
+        "startChar": 4,
+        "endLine": 231,
+        "endChar": 28
+      },
+      "revId": "23b86701ee651497aaf65eec4debbf953bd39be1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6d506749_b8354e3a",
         "filename": "simpleperf/scripts/utils.py",
         "patchSetId": 2
@@ -105,6 +201,30 @@
       "writtenOn": "2016-12-02T08:03:35Z",
       "side": 1,
       "message": "subproc.returncode already has the returncode after calling communicate(). no need to call wait() again.",
+      "range": {
+        "startLine": 95,
+        "startChar": 8,
+        "endLine": 95,
+        "endChar": 35
+      },
+      "revId": "23b86701ee651497aaf65eec4debbf953bd39be1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6d506749_93cdcbc5",
+        "filename": "simpleperf/scripts/utils.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-12-02T18:23:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6d506749_b8354e3a",
       "range": {
         "startLine": 95,
         "startChar": 8,
