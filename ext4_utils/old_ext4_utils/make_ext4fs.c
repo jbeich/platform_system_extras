@@ -441,6 +441,17 @@ int make_ext4fs_sparse_fd_directory(int fd, long long len,
 								sehnd, 0, -1, NULL, NULL, NULL);
 }
 
+int make_ext4fs_fd(int fd, long long len,
+                   const char *mountpoint, struct selabel_handle *sehnd)
+{
+	reset_ext4fs_info();
+	info.len = len;
+
+	return make_ext4fs_internal(fd, NULL, NULL, mountpoint, NULL,
+								0, 0, 0, 0, 0,
+								sehnd, 0, -1, NULL, NULL, NULL);
+}
+
 int make_ext4fs(const char *filename, long long len,
 				const char *mountpoint, struct selabel_handle *sehnd)
 {
