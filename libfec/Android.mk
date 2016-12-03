@@ -32,6 +32,9 @@ LOCAL_SRC_FILES := $(common_src_files)
 LOCAL_STATIC_LIBRARIES := \
     libfec_rs \
     libext4_utils_static \
+    libext2fs \
+    libext2_uuid_static \
+    libext2_com_err \
     libsquashfs_utils \
     libcutils \
     $(common_static_libraries)
@@ -50,6 +53,9 @@ LOCAL_SRC_FILES := $(common_src_files)
 LOCAL_STATIC_LIBRARIES := \
     libfec_rs_host \
     libext4_utils_host \
+    libext2fs-host \
+    libext2_uuid-host \
+    libext2_com_err-host \
     libsquashfs_utils_host \
     $(common_static_libraries)
 include $(BUILD_HOST_STATIC_LIBRARY)

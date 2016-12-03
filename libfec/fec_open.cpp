@@ -18,7 +18,7 @@
 #include <sys/ioctl.h>
 #include <sys/stat.h>
 
-#include <ext4_utils/ext4_sb.h>
+#include <ext4_utils/ext4_utils.h>
 
 extern "C" {
     #include <squashfs_utils.h>
@@ -259,15 +259,7 @@ static int get_ext4_size(fec_handle *f, uint64_t *offset)
         return -1;
     }
 
-    fs_info info;
-    info.len = 0;  /* only len is set to 0 to ask the device for real size. */
-
-    if (ext4_parse_sb(&sb, &info) != 0) {
-        errno = EINVAL;
-        return -1;
-    }
-
-    *offset = info.len;
+    *offset = ext4_get_volume_size_sb(&sb);
     return 0;
 }
 
