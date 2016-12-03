@@ -29,7 +29,6 @@
 #include <unistd.h>
 
 #include "cutils/properties.h"
-#include <ext4_utils/ext4.h>
 #include <ext4_utils/ext4_utils.h>
 
 #define LOG_TAG "fsRecoveryTest"
@@ -43,6 +42,10 @@ static char UMOUNT_BIN[] = "/system/bin/umount";
 static char VDC_BIN[] = "/system/bin/vdc";
 
 enum Fs_Type { FS_UNKNOWN, FS_EXT4, FS_F2FS };
+
+#ifndef DIV_ROUND_UP
+# define DIV_ROUND_UP(n,d) (((n) + (d) - 1) / (d))
+#endif
 
 namespace android {
 
@@ -138,7 +141,7 @@ bool corruptGdtFreeBlock(const int blk_fd) {
       return false;
   }
   int block_size = 1 << (10 + sb.s_log_block_size);
-  int num_bgs = DIV_ROUND_UP(sb.s_blocks_count_lo, sb.s_blocks_per_group);
+  int num_bgs = DIV_ROUND_UP(sb.s_blocks_count, sb.s_blocks_per_group);
 
   if (sb.s_desc_size != sizeof(struct ext2_group_desc)) {
     testPrintE("Can't handle ext4 block group descriptor size of %d",
