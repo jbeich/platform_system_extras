@@ -38,6 +38,7 @@
 #include "contents.h"
 #include "ext4_utils/ext4_utils.h"
 #include "ext4_utils/wipe.h"
+#include "ext4_utils/log.h"
 
 #ifdef _WIN32
 

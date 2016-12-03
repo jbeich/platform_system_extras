@@ -102,12 +102,30 @@ struct ext4_allocation_request {
 
 struct ext4_group_desc
 {
- __le32 bg_block_bitmap_lo;
+ union {
+  __le32 bg_block_bitmap_lo;
+  __le32 bg_block_bitmap;
+ };
+ union {
  __le32 bg_inode_bitmap_lo;
+ __le32 bg_inode_bitmap;
+ };
+ union {
  __le32 bg_inode_table_lo;
+ __le32 bg_inode_table;
+ };
+ union {
  __le16 bg_free_blocks_count_lo;
+ __le16 bg_free_blocks_count;
+ };
+ union {
  __le16 bg_free_inodes_count_lo;
+ __le16 bg_free_inodes_count;
+ };
+ union {
  __le16 bg_used_dirs_count_lo;
+ __le16 bg_used_dirs_count;
+ };
  __le16 bg_flags;
  __u32 bg_reserved[2];
  __le16 bg_itable_unused_lo;
@@ -381,9 +399,18 @@ struct move_extent {
 
 struct ext4_super_block {
   __le32 s_inodes_count;
- __le32 s_blocks_count_lo;
- __le32 s_r_blocks_count_lo;
- __le32 s_free_blocks_count_lo;
+  union {
+   __le32 s_blocks_count_lo;
+   __le32 s_blocks_count;
+  };
+  union {
+   __le32 s_r_blocks_count_lo;
+   __le32 s_r_blocks_count;
+  };
+  union {
+   __le32 s_free_blocks_count_lo;
+   __le32 s_free_blocks_count;
+  };
   __le32 s_free_inodes_count;
  __le32 s_first_data_block;
  __le32 s_log_block_size;

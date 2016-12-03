@@ -21,6 +21,7 @@
 
 #include <sparse/sparse.h>
 
+#include "ext4_utils/log.h"
 #include "ext4_utils/ext4_utils.h"
 
 struct xattr_list_element {

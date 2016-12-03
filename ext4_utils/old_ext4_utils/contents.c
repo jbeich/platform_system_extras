@@ -21,6 +21,7 @@
 #include <stdio.h>
 
 #include "allocate.h"
+#include "ext4_utils/log.h"
 #include "ext4_utils/ext4_utils.h"
 #include "ext4_utils/make_ext4fs.h"
 #include "extent.h"

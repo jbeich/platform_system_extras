@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+#include "ext4_utils/log.h"
 #include "ext4_utils/wipe.h"
 
 #include "ext4_utils/ext4_utils.h"

@@ -23,6 +23,7 @@
 #include <sparse/sparse.h>
 
 #include "allocate.h"
+#include "ext4_utils/log.h"
 #include "ext4_utils/ext4_utils.h"
 
 /* Creates data buffers for the first backing_len bytes of a block allocation

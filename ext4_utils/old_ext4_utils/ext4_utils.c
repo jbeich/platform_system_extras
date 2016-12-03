@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+#include "ext4_utils/log.h"
 #include "ext4_utils/ext4_utils.h"
 
 #include <fcntl.h>
@@ -638,3 +639,15 @@ int read_ext(int fd, int verbose)
 	return 0;
 }
 
+
+int64_t ext4_get_volume_size_sb(struct ext4_super_block *sb)
+{
+	struct fs_info info;
+	info.len = 0; /* only len is set to 0 to ask the device for real size. */
+
+	if (ext4_parse_sb(sb, &info) != 0) {
+		errno = EINVAL;
+		return -1;
+	}
+	return info.len;
+}

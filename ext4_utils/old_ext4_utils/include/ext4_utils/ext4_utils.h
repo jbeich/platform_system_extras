@@ -49,17 +49,7 @@ extern "C" {
 
 extern int force;
 
-#define warn(fmt, args...) do { fprintf(stderr, "warning: %s: " fmt "\n", __func__, ## args); } while (0)
-#define error(fmt, args...) do { fprintf(stderr, "error: %s: " fmt "\n", __func__, ## args); if (!force) longjmp(setjmp_env, EXIT_FAILURE); } while (0)
-#define error_errno(s, args...) error(s ": %s", ##args, strerror(errno))
-#define critical_error(fmt, args...) do { fprintf(stderr, "critical error: %s: " fmt "\n", __func__, ## args); longjmp(setjmp_env, EXIT_FAILURE); } while (0)
-#define critical_error_errno(s, args...) critical_error(s ": %s", ##args, strerror(errno))
-
 #define EXT4_JNL_BACKUP_BLOCKS 1
-
-#ifndef min /* already defined by windows.h */
-#define min(a, b) ((a) < (b) ? (a) : (b))
-#endif
 
 #define DIV_ROUND_UP(x, y) (((x) + (y) - 1)/(y))
 #define EXT4_ALIGN(x, y) ((y) * DIV_ROUND_UP((x), (y)))
@@ -165,6 +155,7 @@ int make_ext4fs_internal(int fd, const char *directory, const char *_target_out_
 						 FILE* block_list_file, FILE* base_alloc_file_in, FILE* base_alloc_file_out);
 
 int read_ext(int fd, int verbose);
+int64_t ext4_get_volume_size_sb(struct ext4_super_block *sb);
 
 #ifdef __cplusplus
 }
