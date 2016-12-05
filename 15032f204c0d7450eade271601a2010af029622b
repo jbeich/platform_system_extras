@@ -22,6 +22,30 @@
       "revId": "15032f204c0d7450eade271601a2010af029622b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ede0d714_336be709",
+        "filename": "libfec/fec_open.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1051712
+      },
+      "writtenOn": "2016-12-05T19:14:26Z",
+      "side": 1,
+      "message": "Noted. We will continue working on those patches. Andrien finished his internship last Friday. Uploaded here just for future reference.",
+      "parentUuid": "ede0d714_4138e0e5",
+      "range": {
+        "startLine": 262,
+        "startChar": 14,
+        "endLine": 262,
+        "endChar": 37
+      },
+      "revId": "15032f204c0d7450eade271601a2010af029622b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
