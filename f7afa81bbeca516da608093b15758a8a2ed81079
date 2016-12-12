@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ba37f7d9_edebbe31",
+        "filename": "simpleperf/scripts/app_profiler.config",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-12-12T20:03:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba37f7d9_af4a4e70",
+      "range": {
+        "startLine": 18,
+        "startChar": 3,
+        "endLine": 18,
+        "endChar": 68
+      },
+      "revId": "f7afa81bbeca516da608093b15758a8a2ed81079",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ba37f7d9_6f70e6b8",
         "filename": "simpleperf/scripts/app_profiler.config",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2016-12-12T07:33:41Z",
       "side": 1,
       "message": "missing the matching backquote",
+      "range": {
+        "startLine": 43,
+        "startChar": 9,
+        "endLine": 43,
+        "endChar": 10
+      },
+      "revId": "f7afa81bbeca516da608093b15758a8a2ed81079",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba37f7d9_cd335a06",
+        "filename": "simpleperf/scripts/app_profiler.config",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-12-12T20:03:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba37f7d9_6f70e6b8",
       "range": {
         "startLine": 43,
         "startChar": 9,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "ba37f7d9_ad401658",
+        "filename": "simpleperf/scripts/app_profiler.config",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-12-12T20:03:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba37f7d9_4f7522a7",
+      "range": {
+        "startLine": 61,
+        "startChar": 6,
+        "endLine": 61,
+        "endChar": 9
+      },
+      "revId": "f7afa81bbeca516da608093b15758a8a2ed81079",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ba37f7d9_4f3ac2da",
         "filename": "simpleperf/scripts/app_profiler.py",
         "patchSetId": 1
@@ -82,6 +154,30 @@
       "writtenOn": "2016-12-12T07:33:41Z",
       "side": 1,
       "message": "nit: per https://www.python.org/dev/peps/pep-0257/#multi-line-docstrings, it may look cleaner with:\n\n    \"\"\"Used to manage the process of profiling an android app.\n    \u003cblank line\u003e\n    There are three steps:\n       1. Prepare profiling.\n       2. Profile the app.\n       3. Collect profiling data.\n    \"\"\"\n\n(similar for the docstring at L19)",
+      "range": {
+        "startLine": 38,
+        "startChar": 4,
+        "endLine": 42,
+        "endChar": 7
+      },
+      "revId": "f7afa81bbeca516da608093b15758a8a2ed81079",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba37f7d9_8d455269",
+        "filename": "simpleperf/scripts/app_profiler.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-12-12T20:03:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba37f7d9_4f3ac2da",
       "range": {
         "startLine": 38,
         "startChar": 4,
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "ba37f7d9_6d3a2edb",
+        "filename": "simpleperf/scripts/app_profiler.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-12-12T20:03:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba37f7d9_0f5f1a2d",
+      "range": {
+        "startLine": 92,
+        "startChar": 8,
+        "endLine": 92,
+        "endChar": 64
+      },
+      "revId": "f7afa81bbeca516da608093b15758a8a2ed81079",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ba37f7d9_2f3f7eca",
         "filename": "simpleperf/scripts/app_profiler.py",
         "patchSetId": 1
@@ -128,6 +248,30 @@
       "writtenOn": "2016-12-12T07:33:41Z",
       "side": 1,
       "message": "nit: one more space ahead of \"self\"?",
+      "range": {
+        "startLine": 142,
+        "startChar": 31,
+        "endLine": 142,
+        "endChar": 35
+      },
+      "revId": "f7afa81bbeca516da608093b15758a8a2ed81079",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba37f7d9_ed4dfe8b",
+        "filename": "simpleperf/scripts/app_profiler.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-12-12T20:03:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba37f7d9_2f3f7eca",
       "range": {
         "startLine": 142,
         "startChar": 31,
@@ -163,6 +307,30 @@
     },
     {
       "key": {
+        "uuid": "ba37f7d9_4d91aa9d",
+        "filename": "simpleperf/scripts/app_profiler.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-12-12T20:03:36Z",
+      "side": 1,
+      "message": "items is from /proc/xxx/maps on android. so it uses / as path separator. And I plan to extend to run scripts on windows, so deliberately using \u0027/\u0027 here. comment is added.",
+      "parentUuid": "ba37f7d9_ef29769c",
+      "range": {
+        "startLine": 229,
+        "startChar": 27,
+        "endLine": 229,
+        "endChar": 53
+      },
+      "revId": "f7afa81bbeca516da608093b15758a8a2ed81079",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ba37f7d9_cf36b2f8",
         "filename": "simpleperf/scripts/app_profiler.py",
         "patchSetId": 1
@@ -174,6 +342,30 @@
       "writtenOn": "2016-12-12T07:33:41Z",
       "side": 1,
       "message": "nit: \"os.path.dirname(item)[1:]\"?",
+      "range": {
+        "startLine": 230,
+        "startChar": 26,
+        "endLine": 230,
+        "endChar": 49
+      },
+      "revId": "f7afa81bbeca516da608093b15758a8a2ed81079",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba37f7d9_0d83a258",
+        "filename": "simpleperf/scripts/app_profiler.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-12-12T20:03:36Z",
+      "side": 1,
+      "message": "same comment as above.",
+      "parentUuid": "ba37f7d9_cf36b2f8",
       "range": {
         "startLine": 230,
         "startChar": 26,
@@ -209,6 +401,30 @@
     },
     {
       "key": {
+        "uuid": "ba37f7d9_4dcc0aca",
+        "filename": "simpleperf/scripts/app_profiler.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-12-12T20:03:36Z",
+      "side": 1,
+      "message": "yes, it looks better.",
+      "parentUuid": "ba37f7d9_0f54ba14",
+      "range": {
+        "startLine": 242,
+        "startChar": 8,
+        "endLine": 242,
+        "endChar": 74
+      },
+      "revId": "f7afa81bbeca516da608093b15758a8a2ed81079",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ba37f7d9_ef505622",
         "filename": "simpleperf/scripts/binary_cache_builder.py",
         "patchSetId": 1
@@ -232,6 +448,30 @@
     },
     {
       "key": {
+        "uuid": "ba37f7d9_cdd7da4e",
+        "filename": "simpleperf/scripts/binary_cache_builder.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-12-12T20:03:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba37f7d9_ef505622",
+      "range": {
+        "startLine": 135,
+        "startChar": 14,
+        "endLine": 135,
+        "endChar": 28
+      },
+      "revId": "f7afa81bbeca516da608093b15758a8a2ed81079",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ba37f7d9_ef5bb63c",
         "filename": "simpleperf/scripts/binary_cache_builder.py",
         "patchSetId": 1
@@ -243,6 +483,30 @@
       "writtenOn": "2016-12-12T07:33:41Z",
       "side": 1,
       "message": "an",
+      "range": {
+        "startLine": 196,
+        "startChar": 19,
+        "endLine": 196,
+        "endChar": 20
+      },
+      "revId": "f7afa81bbeca516da608093b15758a8a2ed81079",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba37f7d9_ada496f0",
+        "filename": "simpleperf/scripts/binary_cache_builder.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-12-12T20:03:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba37f7d9_ef5bb63c",
       "range": {
         "startLine": 196,
         "startChar": 19,
