@@ -1,0 +1,257 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba37f7d9_af4a4e70",
+        "filename": "simpleperf/scripts/app_profiler.config",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2016-12-12T07:33:41Z",
+      "side": 1,
+      "message": "nit: per https://www.python.org/dev/peps/pep-0008/#programming-recommendations:\n\nFor sequences, (strings, lists, tuples), use the fact that empty sequences are false.",
+      "range": {
+        "startLine": 18,
+        "startChar": 3,
+        "endLine": 18,
+        "endChar": 68
+      },
+      "revId": "f7afa81bbeca516da608093b15758a8a2ed81079",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba37f7d9_6f70e6b8",
+        "filename": "simpleperf/scripts/app_profiler.config",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2016-12-12T07:33:41Z",
+      "side": 1,
+      "message": "missing the matching backquote",
+      "range": {
+        "startLine": 43,
+        "startChar": 9,
+        "endLine": 43,
+        "endChar": 10
+      },
+      "revId": "f7afa81bbeca516da608093b15758a8a2ed81079",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba37f7d9_4f7522a7",
+        "filename": "simpleperf/scripts/app_profiler.config",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2016-12-12T07:33:41Z",
+      "side": 1,
+      "message": "to",
+      "range": {
+        "startLine": 61,
+        "startChar": 6,
+        "endLine": 61,
+        "endChar": 9
+      },
+      "revId": "f7afa81bbeca516da608093b15758a8a2ed81079",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba37f7d9_4f3ac2da",
+        "filename": "simpleperf/scripts/app_profiler.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2016-12-12T07:33:41Z",
+      "side": 1,
+      "message": "nit: per https://www.python.org/dev/peps/pep-0257/#multi-line-docstrings, it may look cleaner with:\n\n    \"\"\"Used to manage the process of profiling an android app.\n    \u003cblank line\u003e\n    There are three steps:\n       1. Prepare profiling.\n       2. Profile the app.\n       3. Collect profiling data.\n    \"\"\"\n\n(similar for the docstring at L19)",
+      "range": {
+        "startLine": 38,
+        "startChar": 4,
+        "endLine": 42,
+        "endChar": 7
+      },
+      "revId": "f7afa81bbeca516da608093b15758a8a2ed81079",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba37f7d9_0f5f1a2d",
+        "filename": "simpleperf/scripts/app_profiler.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2016-12-12T07:33:41Z",
+      "side": 1,
+      "message": "just \"if build_version:\"?",
+      "range": {
+        "startLine": 92,
+        "startChar": 8,
+        "endLine": 92,
+        "endChar": 64
+      },
+      "revId": "f7afa81bbeca516da608093b15758a8a2ed81079",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba37f7d9_2f3f7eca",
+        "filename": "simpleperf/scripts/app_profiler.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2016-12-12T07:33:41Z",
+      "side": 1,
+      "message": "nit: one more space ahead of \"self\"?",
+      "range": {
+        "startLine": 142,
+        "startChar": 31,
+        "endLine": 142,
+        "endChar": 35
+      },
+      "revId": "f7afa81bbeca516da608093b15758a8a2ed81079",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba37f7d9_ef29769c",
+        "filename": "simpleperf/scripts/app_profiler.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2016-12-12T07:33:41Z",
+      "side": 1,
+      "message": "nit: os.path.basename(item)?",
+      "range": {
+        "startLine": 229,
+        "startChar": 27,
+        "endLine": 229,
+        "endChar": 53
+      },
+      "revId": "f7afa81bbeca516da608093b15758a8a2ed81079",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba37f7d9_cf36b2f8",
+        "filename": "simpleperf/scripts/app_profiler.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2016-12-12T07:33:41Z",
+      "side": 1,
+      "message": "nit: \"os.path.dirname(item)[1:]\"?",
+      "range": {
+        "startLine": 230,
+        "startChar": 26,
+        "endLine": 230,
+        "endChar": 49
+      },
+      "revId": "f7afa81bbeca516da608093b15758a8a2ed81079",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba37f7d9_0f54ba14",
+        "filename": "simpleperf/scripts/app_profiler.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2016-12-12T07:33:41Z",
+      "side": 1,
+      "message": "when reading the code, i find it a bit confusing to have three return values of -1, 0 and 1. since you\u0027re just using the boolean result at its call site, shall we just return boolean instead? the function name might be adjusted to something like \"_has_better_lib(new_path, old_path)\"?",
+      "range": {
+        "startLine": 242,
+        "startChar": 8,
+        "endLine": 242,
+        "endChar": 74
+      },
+      "revId": "f7afa81bbeca516da608093b15758a8a2ed81079",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba37f7d9_ef505622",
+        "filename": "simpleperf/scripts/binary_cache_builder.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2016-12-12T07:33:41Z",
+      "side": 1,
+      "message": "The existing file",
+      "range": {
+        "startLine": 135,
+        "startChar": 14,
+        "endLine": 135,
+        "endChar": 28
+      },
+      "revId": "f7afa81bbeca516da608093b15758a8a2ed81079",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba37f7d9_ef5bb63c",
+        "filename": "simpleperf/scripts/binary_cache_builder.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2016-12-12T07:33:41Z",
+      "side": 1,
+      "message": "an",
+      "range": {
+        "startLine": 196,
+        "startChar": 19,
+        "endLine": 196,
+        "endChar": 20
+      },
+      "revId": "f7afa81bbeca516da608093b15758a8a2ed81079",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
