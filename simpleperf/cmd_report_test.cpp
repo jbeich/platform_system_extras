@@ -45,6 +45,7 @@ class ReportCommandTest : public ::testing::Test {
       const std::string& perf_data,
       const std::vector<std::string>& add_args = std::vector<std::string>()) {
     success = false;
+    TemporaryFile tmp_file;
     std::vector<std::string> args = {
         "-i", perf_data, "--symfs", GetTestDataDir(), "-o", tmp_file.path};
     args.insert(args.end(), add_args.begin(), add_args.end());
@@ -63,7 +64,6 @@ class ReportCommandTest : public ::testing::Test {
     success = true;
   }
 
-  TemporaryFile tmp_file;
   std::string content;
   std::vector<std::string> lines;
   bool success;
@@ -217,12 +217,12 @@ TEST_F(ReportCommandTest, pid_filter_option) {
 }
 
 TEST_F(ReportCommandTest, wrong_pid_filter_option) {
-  ASSERT_EXIT(
-      {
-        Report(PERF_DATA_WITH_MULTIPLE_PIDS_AND_TIDS, {"--pids", "2,bogus"});
-        exit(success ? 0 : 1);
-      },
-      testing::ExitedWithCode(1), "invalid id in --pids option: bogus");
+  CapturedStderr cap;
+  success = ReportCmd()->Run({"-i", GetTestData(PERF_DATA_WITH_MULTIPLE_PIDS_AND_TIDS),
+                              "--pids", "2,bogus"});
+  cap.reset();
+  ASSERT_FALSE(success) << cap.output();
+  ASSERT_NE(cap.output().find("invalid id in --pids option: bogus"), std::string::npos);
 }
 
 TEST_F(ReportCommandTest, tid_filter_option) {
@@ -241,12 +241,12 @@ TEST_F(ReportCommandTest, tid_filter_option) {
 }
 
 TEST_F(ReportCommandTest, wrong_tid_filter_option) {
-  ASSERT_EXIT(
-      {
-        Report(PERF_DATA_WITH_MULTIPLE_PIDS_AND_TIDS, {"--tids", "2,bogus"});
-        exit(success ? 0 : 1);
-      },
-      testing::ExitedWithCode(1), "invalid id in --tids option: bogus");
+  CapturedStderr cap;
+  success = ReportCmd()->Run({"-i", GetTestData(PERF_DATA_WITH_MULTIPLE_PIDS_AND_TIDS),
+                              "--tids", "2,bogus"});
+  cap.reset();
+  ASSERT_FALSE(success) << cap.output();
+  ASSERT_NE(cap.output().find("invalid id in --tids option: bogus"), std::string::npos);
 }
 
 TEST_F(ReportCommandTest, comm_filter_option) {
@@ -354,19 +354,12 @@ TEST_F(ReportCommandTest, check_build_id) {
          {"--symfs", GetTestData(CORRECT_SYMFS_FOR_BUILD_ID_CHECK)});
   ASSERT_TRUE(success);
   ASSERT_NE(content.find("main"), std::string::npos);
-  ASSERT_EXIT(
-      {
-        Report(PERF_DATA_FOR_BUILD_ID_CHECK,
-               {"--symfs", GetTestData(WRONG_SYMFS_FOR_BUILD_ID_CHECK)});
-        if (!success) {
-          exit(1);
-        }
-        if (content.find("main") != std::string::npos) {
-          exit(2);
-        }
-        exit(0);
-      },
-      testing::ExitedWithCode(0), "Build id mismatch");
+  CapturedStderr cap;
+  Report(PERF_DATA_FOR_BUILD_ID_CHECK, {"--symfs", GetTestData(WRONG_SYMFS_FOR_BUILD_ID_CHECK)});
+  cap.reset();
+  ASSERT_TRUE(success) << cap.output();
+  ASSERT_EQ(content.find("main"), std::string::npos);
+  ASSERT_NE(cap.output().find("Build id mismatch"), std::string::npos);
 }
 
 TEST_F(ReportCommandTest, no_show_ip_option) {
@@ -379,35 +372,21 @@ TEST_F(ReportCommandTest, no_show_ip_option) {
 }
 
 TEST_F(ReportCommandTest, no_symbol_table_warning) {
-  ASSERT_EXIT(
-      {
-        Report(PERF_DATA,
-               {"--symfs", GetTestData(SYMFS_FOR_NO_SYMBOL_TABLE_WARNING)});
-        if (!success) {
-          exit(1);
-        }
-        if (content.find("GlobalFunc") != std::string::npos) {
-          exit(2);
-        }
-        exit(0);
-      },
-      testing::ExitedWithCode(0), "elf doesn't contain symbol table");
+  CapturedStderr cap;
+  Report(PERF_DATA, {"--symfs", GetTestData(SYMFS_FOR_NO_SYMBOL_TABLE_WARNING)});
+  cap.reset();
+  ASSERT_TRUE(success) << cap.output();
+  ASSERT_EQ(content.find("GlobalFunc"), std::string::npos);
+  ASSERT_NE(cap.output().find("elf doesn't contain symbol table"), std::string::npos);
 }
 
 TEST_F(ReportCommandTest, read_elf_file_warning) {
-  ASSERT_EXIT(
-      {
-        Report(PERF_DATA,
-               {"--symfs", GetTestData(SYMFS_FOR_READ_ELF_FILE_WARNING)});
-        if (!success) {
-          exit(1);
-        }
-        if (content.find("GlobalFunc") != std::string::npos) {
-          exit(2);
-        }
-        exit(0);
-      },
-      testing::ExitedWithCode(0), "elf: Read failed");
+  CapturedStderr cap;
+  Report(PERF_DATA, {"--symfs", GetTestData(SYMFS_FOR_READ_ELF_FILE_WARNING)});
+  cap.reset();
+  ASSERT_TRUE(success) << cap.output();
+  ASSERT_EQ(content.find("GlobalFunc"), std::string::npos);
+  ASSERT_NE(cap.output().find("elf: Read failed"), std::string::npos);
 }
 
 TEST_F(ReportCommandTest, report_data_generated_by_linux_perf) {

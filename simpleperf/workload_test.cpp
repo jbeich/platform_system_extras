@@ -18,6 +18,8 @@
 
 #include <signal.h>
 
+#include <android-base/test_utils.h>
+
 #include "IOEventLoop.h"
 #include "utils.h"
 #include "workload.h"
@@ -40,7 +42,8 @@ TEST(workload, execvp_failure) {
   ASSERT_FALSE(workload->Start());
 }
 
-static void run_signaled_workload() {
+TEST(workload, signaled_warning) {
+  CapturedStderr cap;
   {
     IOEventLoop loop;
     ASSERT_TRUE(loop.AddSignalEvent(SIGCHLD, [&]() {
@@ -51,17 +54,14 @@ static void run_signaled_workload() {
     ASSERT_TRUE(workload->Start());
     ASSERT_EQ(0, kill(workload->GetPid(), SIGKILL));
     ASSERT_TRUE(loop.RunLoop());
+    // Make sure the destructor of workload is called.
   }
-  // Make sure all destructors are called before exit().
-  exit(0);
+  cap.reset();
+  ASSERT_NE(cap.output().find("child process was terminated by signal"), std::string::npos);
 }
 
-TEST(workload, signaled_warning) {
-  ASSERT_EXIT(run_signaled_workload(), testing::ExitedWithCode(0),
-              "child process was terminated by signal");
-}
-
-static void run_exit_nonzero_workload() {
+TEST(workload, exit_nonzero_warning) {
+  CapturedStderr cap;
   {
     IOEventLoop loop;
     ASSERT_TRUE(loop.AddSignalEvent(SIGCHLD, [&]() {
@@ -71,12 +71,8 @@ static void run_exit_nonzero_workload() {
     ASSERT_TRUE(workload != nullptr);
     ASSERT_TRUE(workload->Start());
     ASSERT_TRUE(loop.RunLoop());
+    // Make sure the destructor of workload is called.
   }
-  // Make sure all destructors are called before exit().
-  exit(0);
-}
-
-TEST(workload, exit_nonzero_warning) {
-  ASSERT_EXIT(run_exit_nonzero_workload(), testing::ExitedWithCode(0),
-              "child process exited with exit code");
+  cap.reset();
+  ASSERT_NE(cap.output().find("child process exited with exit code"), std::string::npos);
 }
