@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "dabe6b36_063bdc8b",
+        "filename": "simpleperf/scripts/annotate.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-12-15T21:03:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dabe6b36_431026ff",
+      "range": {
+        "startLine": 83,
+        "startChar": 12,
+        "endLine": 83,
+        "endChar": 23
+      },
+      "revId": "65a093bb2a447c5e50037db896b9ec3424f4331a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dabe6b36_431e6625",
         "filename": "simpleperf/scripts/annotate.py",
         "patchSetId": 3
@@ -36,6 +60,30 @@
       "writtenOn": "2016-12-15T20:28:06Z",
       "side": 1,
       "message": "using \"Period\" for \"event count\" looks weird to me. Shall we just call them as \"EventCount\", \"FileEventCount\"?\n\nsame for \".period\" and \".acc_period\": shall we just call them something like \".count\"?",
+      "range": {
+        "startLine": 148,
+        "startChar": 6,
+        "endLine": 148,
+        "endChar": 12
+      },
+      "revId": "65a093bb2a447c5e50037db896b9ec3424f4331a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dabe6b36_894a3dc7",
+        "filename": "simpleperf/scripts/annotate.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-12-15T21:03:33Z",
+      "side": 1,
+      "message": "period is weird. But it originates from uapi/linux/perf_event.h, and has been used all over simpleperf. So I think using it at least makes things conform to the same meaning.",
+      "parentUuid": "dabe6b36_431e6625",
       "range": {
         "startLine": 148,
         "startChar": 6,
