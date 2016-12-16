@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fa6fafa9_a3ad8486",
+        "filename": "simpleperf/dso.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2016-12-16T20:30:19Z",
+      "side": 1,
+      "message": "is there a reason not to use std::merge?",
+      "revId": "309dfaa41572ffb2de0cf9947369e79d2b45b8c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
