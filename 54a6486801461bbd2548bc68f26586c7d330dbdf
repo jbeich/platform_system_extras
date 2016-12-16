@@ -16,6 +16,24 @@
       "revId": "54a6486801461bbd2548bc68f26586c7d330dbdf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa6fafa9_2e8ebbc1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-12-16T21:27:45Z",
+      "side": 1,
+      "message": "The temporary file location is hard written in\nhttps://github.com/google/googletest/blob/master/googletest/src/gtest-port.cc#L972. As in the comment, it precludes running the code as part of a standalone executable. This problem only happens when running in app\u0027s context, native tests (like bionic tests) running in shell context are fine. \n\nIf you think there is a need to fix this, I can send a patch to upstream: the easiest change might be asking gtest-port.cc to try $TMPDIR after failing to access /sdcard, and user code can change $TMPDIR.",
+      "parentUuid": "fa6fafa9_e3d5bc04",
+      "revId": "54a6486801461bbd2548bc68f26586c7d330dbdf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
