@@ -34,6 +34,24 @@
       "revId": "53febd8cf666aa424494603969421045dbf78ed2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa6fafa9_68218b61",
+        "filename": "simpleperf/thread_tree.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2016-12-16T18:59:11Z",
+      "side": 1,
+      "message": "but that information only belongs as a comment here, not spread all throughout the code. the rest of the code only cares about the interface.\n\n(and presumably std::unordered_set would be fine too, given a hash function?)",
+      "parentUuid": "fa6fafa9_08cc97c8",
+      "revId": "53febd8cf666aa424494603969421045dbf78ed2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
