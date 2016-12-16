@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fa6fafa9_e3713c85",
+        "filename": "simpleperf/dso.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2016-12-16T20:20:27Z",
+      "side": 1,
+      "message": "\u0026",
+      "range": {
+        "startLine": 254,
+        "startChar": 70,
+        "endLine": 254,
+        "endChar": 71
+      },
+      "revId": "4b731533619d9610598316dbca0114215d2adfe7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
