@@ -52,6 +52,24 @@
       "revId": "53febd8cf666aa424494603969421045dbf78ed2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa6fafa9_033f18c9",
+        "filename": "simpleperf/thread_tree.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-12-16T19:54:03Z",
+      "side": 1,
+      "message": "I see your point, it is the same reason why std::set is not std::tree: it only supports set operations, although sometimes we are relying on the fact that it is implemented by a binary search tree (like here).",
+      "parentUuid": "fa6fafa9_68218b61",
+      "revId": "53febd8cf666aa424494603969421045dbf78ed2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
