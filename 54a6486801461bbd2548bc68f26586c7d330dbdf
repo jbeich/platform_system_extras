@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fa6fafa9_e3d5bc04",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2016-12-16T20:27:23Z",
+      "side": 1,
+      "message": "should we fix gtest instead? (or our custom runner.)\n\notherwise everyone with an ASSERT_EXIT test will need to do similar work.",
+      "revId": "54a6486801461bbd2548bc68f26586c7d330dbdf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
