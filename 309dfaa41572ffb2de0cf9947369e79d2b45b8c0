@@ -16,6 +16,24 @@
       "revId": "309dfaa41572ffb2de0cf9947369e79d2b45b8c0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa6fafa9_6e2b53f4",
+        "filename": "simpleperf/dso.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-12-16T21:03:20Z",
+      "side": 1,
+      "message": "I didn\u0027t know std::merge. use std::set_union to only keep one copy for symbols both in s1 and s2.",
+      "parentUuid": "fa6fafa9_a3ad8486",
+      "revId": "309dfaa41572ffb2de0cf9947369e79d2b45b8c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
