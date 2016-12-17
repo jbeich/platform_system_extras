@@ -16,6 +16,8 @@
 
 #include <gtest/gtest.h>
 
+#include <libgen.h>
+
 #include <memory>
 
 #include <android-base/file.h>
@@ -34,68 +36,6 @@
 static std::string testdata_dir;
 
 #if defined(__ANDROID__)
-static const std::string testdata_section = ".testzipdata";
-
-static bool ExtractTestDataFromElfSection() {
-  if (!MkdirWithParents(testdata_dir)) {
-    PLOG(ERROR) << "failed to create testdata_dir " << testdata_dir;
-    return false;
-  }
-  std::string content;
-  ElfStatus result = ReadSectionFromElfFile("/proc/self/exe", testdata_section, &content);
-  if (result != ElfStatus::NO_ERROR) {
-    LOG(ERROR) << "failed to read section " << testdata_section
-               << ": " << result;
-    return false;
-  }
-  TemporaryFile tmp_file;
-  if (!android::base::WriteStringToFile(content, tmp_file.path)) {
-    PLOG(ERROR) << "failed to write file " << tmp_file.path;
-    return false;
-  }
-  ArchiveHelper ahelper(tmp_file.fd, tmp_file.path);
-  if (!ahelper) {
-    LOG(ERROR) << "failed to open archive " << tmp_file.path;
-    return false;
-  }
-  ZipArchiveHandle& handle = ahelper.archive_handle();
-  void* cookie;
-  int ret = StartIteration(handle, &cookie, nullptr, nullptr);
-  if (ret != 0) {
-    LOG(ERROR) << "failed to start iterating zip entries";
-    return false;
-  }
-  std::unique_ptr<void, decltype(&EndIteration)> guard(cookie, EndIteration);
-  ZipEntry entry;
-  ZipString name;
-  while (Next(cookie, &entry, &name) == 0) {
-    std::string entry_name(name.name, name.name + name.name_length);
-    std::string path = testdata_dir + entry_name;
-    // Skip dir.
-    if (path.back() == '/') {
-      continue;
-    }
-    if (!MkdirWithParents(path)) {
-      LOG(ERROR) << "failed to create dir for " << path;
-      return false;
-    }
-    FileHelper fhelper = FileHelper::OpenWriteOnly(path);
-    if (!fhelper) {
-      PLOG(ERROR) << "failed to create file " << path;
-      return false;
-    }
-    std::vector<uint8_t> data(entry.uncompressed_length);
-    if (ExtractToMemory(handle, &entry, data.data(), data.size()) != 0) {
-      LOG(ERROR) << "failed to extract entry " << entry_name;
-      return false;
-    }
-    if (!android::base::WriteFully(fhelper.fd(), data.data(), data.size())) {
-      LOG(ERROR) << "failed to write file " << path;
-      return false;
-    }
-  }
-  return true;
-}
 
 class SavedPerfHardenProperty {
  public:
@@ -156,17 +96,11 @@ int main(int argc, char** argv) {
   }
   android::base::ScopedLogSeverity severity(log_severity);
 
-#if defined(__ANDROID__)
-  std::unique_ptr<TemporaryDir> tmp_dir;
   if (!::testing::GTEST_FLAG(list_tests) && testdata_dir.empty()) {
-    tmp_dir.reset(new TemporaryDir);
-    testdata_dir = std::string(tmp_dir->path) + "/";
-    if (!ExtractTestDataFromElfSection()) {
-      LOG(ERROR) << "failed to extract test data from elf section";
-      return 1;
-    }
+    testdata_dir = std::string(dirname(argv[0])) + "/testdata";
   }
 
+#if defined(__ANDROID__)
   // A cts test PerfEventParanoidTest.java is testing if
   // /proc/sys/kernel/perf_event_paranoid is 3, so restore perf_harden
   // value after current test to not break that test.
