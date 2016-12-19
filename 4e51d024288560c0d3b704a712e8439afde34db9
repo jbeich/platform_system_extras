@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fa6fafa9_8a86d434",
+        "filename": "simpleperf/gtest_main.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2016-12-19T18:34:46Z",
+      "side": 1,
+      "message": "gtest_main.cpp is also used in SimpleperfCtsTestCase, so we need to keep the decompress code for cts test. Maybe call IsDir(./testdata) here (IsDir is in utils.h), and don\u0027t decompress the binary if ./testdata is a directory.",
+      "range": {
+        "startLine": 101,
+        "startChar": 2,
+        "endLine": 101,
+        "endChar": 3
+      },
+      "revId": "4e51d024288560c0d3b704a712e8439afde34db9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
