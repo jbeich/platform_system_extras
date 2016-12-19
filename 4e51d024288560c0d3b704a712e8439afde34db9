@@ -22,6 +22,24 @@
       "revId": "4e51d024288560c0d3b704a712e8439afde34db9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fa6fafa9_65b28997",
+        "filename": "simpleperf/gtest_main.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2016-12-19T19:09:42Z",
+      "side": 1,
+      "message": "This was confusing, since the module wasn\u0027t defined here, but I found it: https://android.git.corp.google.com/platform/cts/+/master/tests/tests/simpleperf/Android.mk -- CTS tests can be defined anywhere now, so we may want to consider moving it back here.\n\nSounds like we need to ensure that gets LOCAL_TEST_DATA too.",
+      "parentUuid": "fa6fafa9_8a86d434",
+      "revId": "4e51d024288560c0d3b704a712e8439afde34db9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
