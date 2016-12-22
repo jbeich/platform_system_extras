@@ -454,7 +454,12 @@ int benchmarkMemread(const char *name, const command_data_t &cmd_data, void_func
     volatile int foo;
     size_t k;
     MAINLOOP_DATA(name, cmd_data, size,
+#if defined(__aarch64__)
+    asm(".align 8\n"); \
                   for (k = 0; k < size/sizeof(uint32_t); k++) foo = src[k]);
+#else
+                  for (k = 0; k < size/sizeof(uint32_t); k++) foo = src[k]);
+#endif
     free(src);
 
     return 0;
