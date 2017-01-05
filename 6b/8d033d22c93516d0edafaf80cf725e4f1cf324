@@ -1,0 +1,9 @@
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Code-Review+1: Yifan Hong <elsk@google.com>
+Code-Review+2: Martijn Coenen <maco@google.com>
+Verified+1: Steven Moreland <smoreland@google.com>
+Submitted-by: Steven Moreland <smoreland@google.com>
+Submitted-at: Thu, 05 Jan 2017 18:24:11 +0000
+Reviewed-on: https://android-review.googlesource.com/318618
+Project: platform/system/extras
+Branch: refs/heads/master
