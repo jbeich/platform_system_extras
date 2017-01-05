@@ -1,0 +1,10 @@
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Code-Review+2: Tao Bao <tbao@google.com>
+Code-Review+2: Sami Tolvanen <samitolvanen@google.com>
+Verified+1: Sami Tolvanen <samitolvanen@google.com>
+Autosubmit+1: Sami Tolvanen <samitolvanen@google.com>
+Submitted-by: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-at: Thu, 05 Jan 2017 18:28:05 +0000
+Reviewed-on: https://android-review.googlesource.com/319123
+Project: platform/system/extras
+Branch: refs/heads/master
