@@ -46,6 +46,30 @@
       "revId": "6b8d033d22c93516d0edafaf80cf725e4f1cf324",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3745e284_e7d3b0ba",
+        "filename": "bootctl/bootctl.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2017-01-05T17:59:45Z",
+      "side": 1,
+      "message": "Yeah if this is what you intended, fine with me. I\u0027m not sure if that is what getDescriptor() should do though, but that\u0027s a separate discussion.",
+      "parentUuid": "77a11aaa_2dc64a5e",
+      "range": {
+        "startLine": 61,
+        "startChar": 16,
+        "endLine": 61,
+        "endChar": 24
+      },
+      "revId": "6b8d033d22c93516d0edafaf80cf725e4f1cf324",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
