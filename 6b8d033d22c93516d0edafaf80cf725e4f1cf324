@@ -22,6 +22,30 @@
       "revId": "6b8d033d22c93516d0edafaf80cf725e4f1cf324",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "77a11aaa_2dc64a5e",
+        "filename": "bootctl/bootctl.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2017-01-05T16:57:09Z",
+      "side": 1,
+      "message": "It will also return IBase.\n\nI think this is the intended log/a better log.",
+      "parentUuid": "1728de81_9c5eb15a",
+      "range": {
+        "startLine": 61,
+        "startChar": 16,
+        "endLine": 61,
+        "endChar": 24
+      },
+      "revId": "6b8d033d22c93516d0edafaf80cf725e4f1cf324",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
