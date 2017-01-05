@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1728de81_9c5eb15a",
+        "filename": "bootctl/bootctl.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2017-01-05T08:33:43Z",
+      "side": 1,
+      "message": "Note that this may now print a different version than it did before. If you have an object implementing:\n\nvendor.boot@1.4::IVendorBootControl : android.hardware.boot@1.0::IBootControl\n\nand you register this with hwservicemanager, hwservicemanager will register both with the same service object.\n\nIf you then retrieve that service object here and call interfaceChain() on it, it will go to the actual (vendor-extended) server object and return {\"vendor.boot@1.4::IVendorBootControl\", \"android.hardware.boot@1.0\"}.\n\nright?",
+      "range": {
+        "startLine": 61,
+        "startChar": 16,
+        "endLine": 61,
+        "endChar": 24
+      },
+      "revId": "6b8d033d22c93516d0edafaf80cf725e4f1cf324",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
