@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "237845b1_35f238ec",
+        "filename": "simpleperf/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 667,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-01-13T06:25:14Z",
+      "side": 1,
+      "message": "these sections look wrong if i follow the gitiles link.",
+      "revId": "aa8de0d57373bae5ba6026c3f6c0912995dc4be6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
