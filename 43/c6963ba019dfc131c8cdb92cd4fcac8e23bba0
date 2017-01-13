@@ -1,0 +1,8 @@
+Presubmit-Ready+1: Yabin Cui <yabinc@google.com>
+Code-Review+2: Elliott Hughes <enh@google.com>
+Verified+1: Yabin Cui <yabinc@google.com>
+Submitted-by: Yabin Cui <yabinc@google.com>
+Submitted-at: Fri, 13 Jan 2017 22:24:42 +0000
+Reviewed-on: https://android-review.googlesource.com/321959
+Project: platform/system/extras
+Branch: refs/heads/master
