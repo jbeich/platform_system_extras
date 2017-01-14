@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "63ca3d70_30385840",
+        "filename": "ext4_utils/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2017-01-14T02:04:42Z",
+      "side": 1,
+      "message": "Soong automatically imports exported include dirs, so this isn\u0027t necessary.",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 36
+      },
+      "revId": "1f7877d2b0f1225091970623165b6c9ce65e323a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "63ca3d70_50b87427",
+        "filename": "ext4_utils/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2017-01-14T02:04:42Z",
+      "side": 1,
+      "message": "This is duplicated below for android targets",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 20
+      },
+      "revId": "1f7877d2b0f1225091970623165b6c9ce65e323a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "63ca3d70_50b4f492",
+        "filename": "ext4_utils/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2017-01-14T02:04:42Z",
+      "side": 1,
+      "message": "It seems like this should be host: { static_libs: [\"libselinux\"], } instead of linux/darwin",
+      "range": {
+        "startLine": 29,
+        "startChar": 8,
+        "endLine": 34,
+        "endChar": 10
+      },
+      "revId": "1f7877d2b0f1225091970623165b6c9ce65e323a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "63ca3d70_90be8c71",
+        "filename": "ext4_utils/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2017-01-14T02:04:42Z",
+      "side": 1,
+      "message": "liblogwrap exports this include, so you don\u0027t need to explicitly reference it",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 61
+      },
+      "revId": "1f7877d2b0f1225091970623165b6c9ce65e323a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "63ca3d70_f0cc201b",
+        "filename": "ext4_utils/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2017-01-14T02:04:42Z",
+      "side": 1,
+      "message": "static libraries don\u0027t actually link against shared_libs / static_libs, it\u0027s just used for imported headers currently, so you could probably omit this and just extract the shared_libs section from the shared section below.",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 17
+      },
+      "revId": "1f7877d2b0f1225091970623165b6c9ce65e323a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "63ca3d70_90c20c86",
+        "filename": "libfec/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2017-01-14T02:04:42Z",
+      "side": 1,
+      "message": "this isn\u0027t necessary",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 36
+      },
+      "revId": "1f7877d2b0f1225091970623165b6c9ce65e323a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "63ca3d70_f0a7c0f6",
+        "filename": "libfec/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2017-01-14T02:04:42Z",
+      "side": 1,
+      "message": "This isn\u0027t necessary with my proposal to libfec_rs",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 35
+      },
+      "revId": "1f7877d2b0f1225091970623165b6c9ce65e323a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
