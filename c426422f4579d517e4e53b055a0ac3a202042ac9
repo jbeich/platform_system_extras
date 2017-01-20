@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a856d212_7a59ac6b",
+        "filename": "ext4_utils/ext4_utils.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 1105434
+      },
+      "writtenOn": "2017-01-20T21:31:31Z",
+      "side": 1,
+      "message": "These changes expect both flash_logical_block_size and flash_erase_block_size params to be in bytes. But historically, mke2fs expects the stride/stripe params to be passed in in \"filesystem block\" units. So make_ext4 diverges from mke2fs in this regard. Should we change this so the units for these 2 options remain consistent with mke2fs ?",
+      "range": {
+        "startLine": 355,
+        "startChar": 1,
+        "endLine": 362,
+        "endChar": 73
+      },
+      "revId": "c426422f4579d517e4e53b055a0ac3a202042ac9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a856d212_3a6d7419",
+        "filename": "ext4_utils/make_ext4fs_main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1105434
+      },
+      "writtenOn": "2017-01-20T21:31:31Z",
+      "side": 1,
+      "message": "These 2 lines are harmless but unnecessary, info is part of .bss (and zeroed already).",
+      "range": {
+        "startLine": 90,
+        "startChar": 1,
+        "endLine": 91,
+        "endChar": 35
+      },
+      "revId": "c426422f4579d517e4e53b055a0ac3a202042ac9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
