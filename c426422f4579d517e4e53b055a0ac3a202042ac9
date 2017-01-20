@@ -45,6 +45,29 @@
       "revId": "c426422f4579d517e4e53b055a0ac3a202042ac9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a856d212_da165869",
+        "filename": "ext4_utils/mkuserimg.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1105434
+      },
+      "writtenOn": "2017-01-20T21:36:46Z",
+      "side": 1,
+      "message": "One option is, the caller to mkuserimg would pass in these in \"bytes\" units, but we could convert them to \"filesystem blocks\" here. This will make it consistent to the other code which passes these parameters to mke2fs. So everything remains consistent.",
+      "range": {
+        "startLine": 96,
+        "startChar": 0,
+        "endLine": 107,
+        "endChar": 5
+      },
+      "revId": "c426422f4579d517e4e53b055a0ac3a202042ac9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
