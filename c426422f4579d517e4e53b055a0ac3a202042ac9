@@ -25,6 +25,29 @@
     },
     {
       "key": {
+        "uuid": "031b415c_43f046aa",
+        "filename": "ext4_utils/ext4_utils.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 1115183
+      },
+      "writtenOn": "2017-01-20T21:56:49Z",
+      "side": 1,
+      "message": "Is there an inconsistency? The options I added for make_ext4 are flash erase/logical block sizes, not stride/stripe, so I think they may be more analogous to mke2fs\u0027s \"block size\" parameter which is measured in bytes",
+      "range": {
+        "startLine": 355,
+        "startChar": 1,
+        "endLine": 362,
+        "endChar": 73
+      },
+      "revId": "c426422f4579d517e4e53b055a0ac3a202042ac9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a856d212_3a6d7419",
         "filename": "ext4_utils/make_ext4fs_main.c",
         "patchSetId": 1
@@ -59,6 +82,29 @@
       "writtenOn": "2017-01-20T21:36:46Z",
       "side": 1,
       "message": "One option is, the caller to mkuserimg would pass in these in \"bytes\" units, but we could convert them to \"filesystem blocks\" here. This will make it consistent to the other code which passes these parameters to mke2fs. So everything remains consistent.",
+      "range": {
+        "startLine": 96,
+        "startChar": 0,
+        "endLine": 107,
+        "endChar": 5
+      },
+      "revId": "c426422f4579d517e4e53b055a0ac3a202042ac9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e8e9aa6a_223b0ea3",
+        "filename": "ext4_utils/mkuserimg.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1115183
+      },
+      "writtenOn": "2017-01-20T21:56:49Z",
+      "side": 1,
+      "message": "I did think about this, but I figured all else being equal we might want to avoid moving the math into the shell script and hard coding the block size instead of using info.block_size. You\u0027re right that it would be more consistent with the approach I used for mke2fs, so if that\u0027s a bigger concern I can go ahead and change it.",
       "range": {
         "startLine": 96,
         "startChar": 0,
