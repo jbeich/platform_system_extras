@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a856d212_0b7a64d2",
+        "filename": "simpleperf/scripts/app_profiler.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1010334
+      },
+      "writtenOn": "2017-01-21T00:38:27Z",
+      "side": 1,
+      "message": "several methods (like this one, ps, cat) don\u0027t need to run in the app dir. I assume you\u0027d just prefer it this way for consistency between root/non-root code?",
+      "revId": "8f3d1485e1b915d500579aedae40555a78d74744",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
