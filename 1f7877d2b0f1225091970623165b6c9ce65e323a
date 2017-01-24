@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "a856d212_78f40da0",
+        "filename": "ext4_utils/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1077068
+      },
+      "writtenOn": "2017-01-24T02:11:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "63ca3d70_30385840",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 36
+      },
+      "revId": "1f7877d2b0f1225091970623165b6c9ce65e323a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "63ca3d70_50b87427",
         "filename": "ext4_utils/Android.bp",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2017-01-14T02:04:42Z",
       "side": 1,
       "message": "This is duplicated below for android targets",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 20
+      },
+      "revId": "1f7877d2b0f1225091970623165b6c9ce65e323a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a805f24b_d6ebb429",
+        "filename": "ext4_utils/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1077068
+      },
+      "writtenOn": "2017-01-24T02:11:26Z",
+      "side": 1,
+      "message": "Fixed",
+      "parentUuid": "63ca3d70_50b87427",
       "range": {
         "startLine": 25,
         "startChar": 0,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "a856d212_f8ffdd85",
+        "filename": "ext4_utils/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1077068
+      },
+      "writtenOn": "2017-01-24T02:11:26Z",
+      "side": 1,
+      "message": "Sorry, I forgot to enable windows on this module, so these are needed like this. Now I added windows{enabled:true}.",
+      "parentUuid": "63ca3d70_50b4f492",
+      "range": {
+        "startLine": 29,
+        "startChar": 8,
+        "endLine": 34,
+        "endChar": 10
+      },
+      "revId": "1f7877d2b0f1225091970623165b6c9ce65e323a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "63ca3d70_90be8c71",
         "filename": "ext4_utils/Android.bp",
         "patchSetId": 2
@@ -82,6 +154,30 @@
       "writtenOn": "2017-01-14T02:04:42Z",
       "side": 1,
       "message": "liblogwrap exports this include, so you don\u0027t need to explicitly reference it",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 61
+      },
+      "revId": "1f7877d2b0f1225091970623165b6c9ce65e323a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a856d212_980ea1e9",
+        "filename": "ext4_utils/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1077068
+      },
+      "writtenOn": "2017-01-24T02:11:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "63ca3d70_90be8c71",
       "range": {
         "startLine": 40,
         "startChar": 0,
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "a805f24b_d630d40b",
+        "filename": "ext4_utils/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1077068
+      },
+      "writtenOn": "2017-01-24T02:11:26Z",
+      "side": 1,
+      "message": "Factored out common libs, not all the libs are in all the variants which is quite weird.",
+      "parentUuid": "63ca3d70_f0cc201b",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 17
+      },
+      "revId": "1f7877d2b0f1225091970623165b6c9ce65e323a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "63ca3d70_90c20c86",
         "filename": "libfec/Android.bp",
         "patchSetId": 2
@@ -140,6 +260,30 @@
     },
     {
       "key": {
+        "uuid": "a856d212_13b5f2c0",
+        "filename": "libfec/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1077068
+      },
+      "writtenOn": "2017-01-24T02:11:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "63ca3d70_90c20c86",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 36
+      },
+      "revId": "1f7877d2b0f1225091970623165b6c9ce65e323a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "63ca3d70_f0a7c0f6",
         "filename": "libfec/Android.bp",
         "patchSetId": 2
@@ -151,6 +295,30 @@
       "writtenOn": "2017-01-14T02:04:42Z",
       "side": 1,
       "message": "This isn\u0027t necessary with my proposal to libfec_rs",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 35
+      },
+      "revId": "1f7877d2b0f1225091970623165b6c9ce65e323a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a856d212_f3b93ebb",
+        "filename": "libfec/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1077068
+      },
+      "writtenOn": "2017-01-24T02:11:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "63ca3d70_f0a7c0f6",
       "range": {
         "startLine": 14,
         "startChar": 0,
