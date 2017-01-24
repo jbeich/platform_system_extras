@@ -1,0 +1,8 @@
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Code-Review+2: Yabin Cui <yabinc@google.com>
+Verified+1: Chris Craik <ccraik@google.com>
+Submitted-by: Chris Craik <ccraik@google.com>
+Submitted-at: Tue, 24 Jan 2017 20:07:35 +0000
+Reviewed-on: https://android-review.googlesource.com/326801
+Project: platform/system/extras
+Branch: refs/heads/master
