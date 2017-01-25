@@ -45,6 +45,29 @@
       "revId": "1192bffa24bcec773c83b7364d2fca80560c6368",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "70ee2fa9_eb9fc76a",
+        "filename": "libfec/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1077068
+      },
+      "writtenOn": "2017-01-25T00:01:58Z",
+      "side": 1,
+      "message": "This \"works\" on mac, but because the -fsanitize\u003d flag is not being passed to the compiler when compiling for the host or the target. Actually, I don\u0027t see the flag passed when compiling on linux build either... is that expected?",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 6
+      },
+      "revId": "1192bffa24bcec773c83b7364d2fca80560c6368",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
