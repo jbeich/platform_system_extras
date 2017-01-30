@@ -28,6 +28,7 @@
 #include "event_attr.h"
 #include "event_fd.h"
 #include "event_type.h"
+#include "InplaceSamplerClient.h"
 #include "perf_event.h"
 #include "record.h"
 
@@ -74,6 +75,7 @@ class EventSelectionSet {
   bool AddEventType(const std::string& event_name);
   bool AddEventGroup(const std::vector<std::string>& event_names);
   std::vector<const EventType*> GetTracepointEvents() const;
+  bool HasInplaceSampler() const;
   std::vector<EventAttrWithId> GetEventAttrWithId() const;
 
   void SetEnableOnExec(bool enable);
@@ -128,6 +130,7 @@ class EventSelectionSet {
     EventTypeAndModifier event_type_modifier;
     perf_event_attr event_attr;
     std::vector<std::unique_ptr<EventFd>> event_fds;
+    std::vector<std::unique_ptr<InplaceSamplerClient>> inplace_samplers;
     // counters for event files closed for cpu hotplug events
     std::vector<CounterInfo> hotplugged_counters;
   };
@@ -136,6 +139,9 @@ class EventSelectionSet {
   bool BuildAndCheckEventSelection(const std::string& event_name,
                                    EventSelection* selection);
   void UnionSampleType();
+  bool IsUserSpaceSamplerGroup(EventSelectionGroup& group);
+  bool OpenUserSpaceSamplersOnGroup(EventSelectionGroup& group,
+                                    const std::map<pid_t, std::set<pid_t>>& process_map);
   bool OpenEventFilesOnGroup(EventSelectionGroup& group, pid_t tid, int cpu,
                              std::string* failed_event_type);
 
@@ -147,6 +153,7 @@ class EventSelectionSet {
   bool HandleCpuOfflineEvent(int cpu);
   bool CreateMappedBufferForCpu(int cpu);
   bool CheckMonitoredTargets();
+  bool HasSampler();
 
   const bool for_stat_cmd_;
 
