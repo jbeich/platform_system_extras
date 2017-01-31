@@ -1,0 +1,257 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "10672af9_cacca3ea",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2017-01-31T21:06:59Z",
+      "side": 1,
+      "message": "Doesn\u0027t this free the IOEventLoop? You save the pointer in event_selection_set_ above, is this pointer every used again, or should you set it to nullptr before this call?",
+      "range": {
+        "startLine": 328,
+        "startChar": 2,
+        "endLine": 328,
+        "endChar": 17
+      },
+      "revId": "52702dbb57d9d786e0f997e0615071dfa0ae9ad2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e999b5a6_b9c3cefe",
+        "filename": "simpleperf/event_selection_set.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2017-01-31T21:06:59Z",
+      "side": 1,
+      "message": "You use a similar construct in other places. Should this be a single function so that you don\u0027t need to worry about any name issues?\n\nIt could be IsSupportedEvent(selection-\u003eevent_attr), if that\u0027s what this is really checking.",
+      "range": {
+        "startLine": 81,
+        "startChar": 6,
+        "endLine": 82,
+        "endChar": 58
+      },
+      "revId": "52702dbb57d9d786e0f997e0615071dfa0ae9ad2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2cc444fe_4d99fdd6",
+        "filename": "simpleperf/event_selection_set.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2017-01-31T21:06:59Z",
+      "side": 1,
+      "message": "This doesn\u0027t match the check any more.",
+      "range": {
+        "startLine": 84,
+        "startChar": 21,
+        "endLine": 84,
+        "endChar": 51
+      },
+      "revId": "52702dbb57d9d786e0f997e0615071dfa0ae9ad2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6a440d10_5fdd44b0",
+        "filename": "simpleperf/event_selection_set.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2017-01-31T21:06:59Z",
+      "side": 1,
+      "message": "This could use a comment. It\u0027s not clear what this is supposed to be doing, or what a -1 tid means.",
+      "range": {
+        "startLine": 376,
+        "startChar": 6,
+        "endLine": 376,
+        "endChar": 28
+      },
+      "revId": "52702dbb57d9d786e0f997e0615071dfa0ae9ad2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "38a90cfd_9d634559",
+        "filename": "simpleperf/event_selection_set.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 543,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2017-01-31T21:06:59Z",
+      "side": 1,
+      "message": "Is there a reason you didn\u0027t just call this in place? I don\u0027t see the close_callback being used anywhere else. However, it might be hard to read that way.",
+      "range": {
+        "startLine": 543,
+        "startChar": 53,
+        "endLine": 543,
+        "endChar": 67
+      },
+      "revId": "52702dbb57d9d786e0f997e0615071dfa0ae9ad2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "059fbfb3_85e0d458",
+        "filename": "simpleperf/event_type.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2017-01-31T21:06:59Z",
+      "side": 1,
+      "message": "You should probably add a comment about why you chose this particular number.",
+      "range": {
+        "startLine": 25,
+        "startChar": 64,
+        "endLine": 25,
+        "endChar": 69
+      },
+      "revId": "52702dbb57d9d786e0f997e0615071dfa0ae9ad2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "873f581b_b2d2ae7b",
+        "filename": "simpleperf/generate_event_type_table.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2017-01-31T21:06:59Z",
+      "side": 1,
+      "message": "Rather than do this here, wouldn\u0027t it be easier to make sure that gen_event_type_entry_str always returns some kind of string?",
+      "range": {
+        "startLine": 110,
+        "startChar": 2,
+        "endLine": 110,
+        "endChar": 20
+      },
+      "revId": "52702dbb57d9d786e0f997e0615071dfa0ae9ad2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "da5689ab_fc5b207a",
+        "filename": "simpleperf/runtest/comm_change.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2017-01-31T21:06:59Z",
+      "side": 1,
+      "message": "It\u0027s not clear why all of these programs are now infinite loops. What is the reason for this?",
+      "range": {
+        "startLine": 11,
+        "startChar": 2,
+        "endLine": 11,
+        "endChar": 14
+      },
+      "revId": "52702dbb57d9d786e0f997e0615071dfa0ae9ad2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f8d16575_ce455312",
+        "filename": "simpleperf/runtest/runtest.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2017-01-31T21:06:59Z",
+      "side": 1,
+      "message": "It\u0027s kind of weird to have helper functions in python like this. Is there a reason not to just let the callers access it as target and the use_callgraph variable?",
+      "range": {
+        "startLine": 286,
+        "startChar": 2,
+        "endLine": 287,
+        "endChar": 22
+      },
+      "revId": "52702dbb57d9d786e0f997e0615071dfa0ae9ad2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "20542949_021e30cd",
+        "filename": "simpleperf/runtest/runtest.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2017-01-31T21:06:59Z",
+      "side": 1,
+      "message": "Do you expect to support multiple types of callgraph types? If not, this seems like a bit of overkill. Callers could simply set use_callgraph to True.",
+      "range": {
+        "startLine": 289,
+        "startChar": 33,
+        "endLine": 289,
+        "endChar": 49
+      },
+      "revId": "52702dbb57d9d786e0f997e0615071dfa0ae9ad2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "03c3bfbb_e1d03a96",
+        "filename": "simpleperf/runtest/runtest.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 662,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2017-01-31T21:06:59Z",
+      "side": 1,
+      "message": "This seems like overkill, just a simply boolean would be better.",
+      "range": {
+        "startLine": 662,
+        "startChar": 21,
+        "endLine": 662,
+        "endChar": 50
+      },
+      "revId": "52702dbb57d9d786e0f997e0615071dfa0ae9ad2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
