@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "f730a6b1_d8d1ed48",
+        "filename": "simpleperf/InplaceSamplerClient.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-02-03T18:38:49Z",
+      "side": 1,
+      "message": "Done. It is a good way. But sometimes I\u0027m too lazy. And some of them are introduced by apis in InplaceSamplerClient.h.",
+      "parentUuid": "498759bf_7f6f2db9",
+      "range": {
+        "startLine": 24,
+        "startChar": 17,
+        "endLine": 24,
+        "endChar": 25
+      },
+      "revId": "97fb517029c66e29008cc972c0e710b50d89d431",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "291b4753_f70e5fb8",
         "filename": "simpleperf/InplaceSamplerClient.cpp",
         "patchSetId": 3
@@ -36,6 +60,30 @@
       "writtenOn": "2017-02-03T01:32:46Z",
       "side": 1,
       "message": "Needs #include \u003cmemory\u003e??",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 15
+      },
+      "revId": "97fb517029c66e29008cc972c0e710b50d89d431",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6ff701fc_1c338420",
+        "filename": "simpleperf/InplaceSamplerClient.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-02-03T18:38:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "291b4753_f70e5fb8",
       "range": {
         "startLine": 26,
         "startChar": 0,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "174da6ac_5c706aa0",
+        "filename": "simpleperf/InplaceSamplerClient.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-02-03T18:38:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d5790879_a7f351d9",
+      "range": {
+        "startLine": 27,
+        "startChar": 67,
+        "endLine": 27,
+        "endChar": 72
+      },
+      "revId": "97fb517029c66e29008cc972c0e710b50d89d431",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "85f7f8c2_1477e733",
         "filename": "simpleperf/InplaceSamplerClient.cpp",
         "patchSetId": 3
@@ -82,6 +154,30 @@
       "writtenOn": "2017-02-03T01:32:46Z",
       "side": 1,
       "message": "Does this require #include \u003ctime.h\u003e?",
+      "range": {
+        "startLine": 84,
+        "startChar": 2,
+        "endLine": 84,
+        "endChar": 9
+      },
+      "revId": "97fb517029c66e29008cc972c0e710b50d89d431",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "15c575fd_fa3fc432",
+        "filename": "simpleperf/InplaceSamplerClient.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-02-03T18:38:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "85f7f8c2_1477e733",
       "range": {
         "startLine": 84,
         "startChar": 2,
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "7041202a_89522d0e",
+        "filename": "simpleperf/event_fd.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-02-03T18:38:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "61f4a039_269635a6",
+      "range": {
+        "startLine": 263,
+        "startChar": 5,
+        "endLine": 263,
+        "endChar": 33
+      },
+      "revId": "97fb517029c66e29008cc972c0e710b50d89d431",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a8b2e22b_b2fe80b3",
         "filename": "simpleperf/event_fd.cpp",
         "patchSetId": 3
@@ -140,6 +260,30 @@
     },
     {
       "key": {
+        "uuid": "8fa9f872_2a9f8227",
+        "filename": "simpleperf/event_fd.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-02-03T18:38:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a8b2e22b_b2fe80b3",
+      "range": {
+        "startLine": 269,
+        "startChar": 2,
+        "endLine": 269,
+        "endChar": 6
+      },
+      "revId": "97fb517029c66e29008cc972c0e710b50d89d431",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "eebbc08d_f54f7525",
         "filename": "simpleperf/runtest/comm_change.cpp",
         "patchSetId": 3
@@ -151,6 +295,30 @@
       "writtenOn": "2017-02-03T01:32:46Z",
       "side": 1,
       "message": "This phrasing is a bit awkward. How about something like:\n\nThis scheme also allows simpleperf to control how long to profile.",
+      "range": {
+        "startLine": 12,
+        "startChar": 42,
+        "endLine": 12,
+        "endChar": 68
+      },
+      "revId": "97fb517029c66e29008cc972c0e710b50d89d431",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "86883893_638bf30b",
+        "filename": "simpleperf/runtest/comm_change.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-02-03T18:38:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eebbc08d_f54f7525",
       "range": {
         "startLine": 12,
         "startChar": 42,
