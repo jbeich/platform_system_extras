@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "498759bf_7f6f2db9",
+        "filename": "simpleperf/InplaceSamplerClient.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2017-02-03T01:32:46Z",
+      "side": 1,
+      "message": "Should add #include \u003cstdint.h\u003e?\n\nI\u0027m not sure if you have a common include which includes all of these, but I try and default to include everything in the source file that is actually being used. That way if something changes in the header files, I don\u0027t have to worry about errors from missing includes.",
+      "range": {
+        "startLine": 24,
+        "startChar": 17,
+        "endLine": 24,
+        "endChar": 25
+      },
+      "revId": "97fb517029c66e29008cc972c0e710b50d89d431",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "291b4753_f70e5fb8",
+        "filename": "simpleperf/InplaceSamplerClient.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2017-02-03T01:32:46Z",
+      "side": 1,
+      "message": "Needs #include \u003cmemory\u003e??",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 15
+      },
+      "revId": "97fb517029c66e29008cc972c0e710b50d89d431",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d5790879_a7f351d9",
+        "filename": "simpleperf/InplaceSamplerClient.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2017-02-03T01:32:46Z",
+      "side": 1,
+      "message": "Add #include \u003csys/types.h\u003e?",
+      "range": {
+        "startLine": 27,
+        "startChar": 67,
+        "endLine": 27,
+        "endChar": 72
+      },
+      "revId": "97fb517029c66e29008cc972c0e710b50d89d431",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "85f7f8c2_1477e733",
+        "filename": "simpleperf/InplaceSamplerClient.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2017-02-03T01:32:46Z",
+      "side": 1,
+      "message": "Does this require #include \u003ctime.h\u003e?",
+      "range": {
+        "startLine": 84,
+        "startChar": 2,
+        "endLine": 84,
+        "endChar": 9
+      },
+      "revId": "97fb517029c66e29008cc972c0e710b50d89d431",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "61f4a039_269635a6",
+        "filename": "simpleperf/event_fd.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2017-02-03T01:32:46Z",
+      "side": 1,
+      "message": "This name doesn\u0027t match the code. Perhaps IsEventAttrSupported?",
+      "range": {
+        "startLine": 263,
+        "startChar": 5,
+        "endLine": 263,
+        "endChar": 33
+      },
+      "revId": "97fb517029c66e29008cc972c0e710b50d89d431",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a8b2e22b_b2fe80b3",
+        "filename": "simpleperf/event_fd.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2017-02-03T01:32:46Z",
+      "side": 1,
+      "message": "I didn\u0027t notice this before, but I think it might be better to define the type here. That way it\u0027s clear that this is not leaking anything since this is returning a std::unique_ptr.",
+      "range": {
+        "startLine": 269,
+        "startChar": 2,
+        "endLine": 269,
+        "endChar": 6
+      },
+      "revId": "97fb517029c66e29008cc972c0e710b50d89d431",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eebbc08d_f54f7525",
+        "filename": "simpleperf/runtest/comm_change.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2017-02-03T01:32:46Z",
+      "side": 1,
+      "message": "This phrasing is a bit awkward. How about something like:\n\nThis scheme also allows simpleperf to control how long to profile.",
+      "range": {
+        "startLine": 12,
+        "startChar": 42,
+        "endLine": 12,
+        "endChar": 68
+      },
+      "revId": "97fb517029c66e29008cc972c0e710b50d89d431",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
