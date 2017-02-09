@@ -153,6 +153,8 @@ void read_sb(int fd, struct ext4_super_block *sb)
 		critical_error_errno("failed to read superblock");
 	if (ret != sizeof(*sb))
 		critical_error("failed to read all of superblock");
+	if (sb->s_magic != EXT4_SUPER_MAGIC)
+		critical_error("bad magic of read superblock");
 }
 
 /* Function to write a primary or backup superblock at a given offset */
@@ -160,6 +162,8 @@ void write_sb(int fd, unsigned long long offset, struct ext4_super_block *sb)
 {
 	off64_t ret;
 
+	if (sb->s_magic != EXT4_SUPER_MAGIC)
+		critical_error("bad magic of write superblock");
 	ret = lseek64(fd, offset, SEEK_SET);
 	if (ret < 0)
 		critical_error_errno("failed to seek to superblock");
