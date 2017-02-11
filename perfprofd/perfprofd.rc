@@ -3,4 +3,4 @@ service perfprofd /system/xbin/perfprofd
     user root
     group root wakelock
     oneshot
-    writepid /dev/cpuset/system-background/tasks
+    cpuset /system-background
