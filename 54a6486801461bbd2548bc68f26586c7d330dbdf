@@ -34,6 +34,24 @@
       "revId": "54a6486801461bbd2548bc68f26586c7d330dbdf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ffa29689_b02f6c9e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-02-15T19:50:21Z",
+      "side": 1,
+      "message": "The fix has been checked in locally, and a patch has been sent to upstream.",
+      "parentUuid": "fa6fafa9_2e8ebbc1",
+      "revId": "54a6486801461bbd2548bc68f26586c7d330dbdf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
