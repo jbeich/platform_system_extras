@@ -91,6 +91,8 @@ static bool is_dir_empty(const char *dirname, bool *is_empty)
         if (strcmp(entry->d_name, "lost+found") != 0) { // Skip lost+found
             ++n;
             if (n > 2) {
+                LOG(INFO) << "Found the first entry '" << entry->d_name
+                          << "' of the directory '" << dirname << "'";
                 *is_empty = false;
                 return true;
             }
