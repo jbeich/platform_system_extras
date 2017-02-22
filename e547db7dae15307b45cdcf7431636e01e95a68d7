@@ -52,6 +52,24 @@
       "revId": "e547db7dae15307b45cdcf7431636e01e95a68d7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6353aff0_649f6c2f",
+        "filename": "ext4_utils/ext4_crypt.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1064403
+      },
+      "writtenOn": "2017-02-22T07:34:52Z",
+      "side": 1,
+      "message": "The following is the all of logs when boot device:\n\n```\n03-21 10:04:47.145   628   634 I vold    : Found the first entry \u0027accounts_de.db\u0027 of the directory \u0027/data/system_de/0\u0027\n03-21 10:04:47.146   628   634 I vold    : Found the first entry \u0027com.android.cts.priv.ctsshim\u0027 of the directory \u0027/data/user_de/0\u0027\n03-21 10:04:56.335   628   634 I vold    : Found the first entry \u0027recent_tasks\u0027 of the directory \u0027/data/system_ce/0\u0027\n03-21 10:04:56.335   628   634 I vold    : Found the first entry \u0027ramdump\u0027 of the directory \u0027/data/media/0\u0027\n03-21 10:04:56.336   628   634 I vold    : Found the first entry \u0027com.android.cts.priv.ctsshim\u0027 of the directory \u0027/data/data\u0027\n```\n\nThe function only called by set or get encrypt policy for a directory. The /data only a few directory will set encrypt policy, such as: /data/data, /data/user_de/0/ etc. As following:\n\n```\n$ adb logcat -v threadtime | grep \"Found policy\" \n03-21 10:04:47.145   628   634 I vold    : Found policy c77bd4cece59e198 at /data/system_de/0 which matches expected value\n03-21 10:04:47.146   628   634 I vold    : Found policy c77bd4cece59e198 at /data/user_de/0 which matches expected value\n03-21 10:04:56.335   628   634 I vold    : Found policy acea07f4b84904a2 at /data/system_ce/0 which matches expected value\n03-21 10:04:56.335   628   634 I vold    : Found policy acea07f4b84904a2 at /data/media/0 which matches expected value\n03-21 10:04:56.336   628   634 I vold    : Found policy acea07f4b84904a2 at /data/data which matches expected value\n\n```\n\nThe function absolutely not run constantly in a system service.",
+      "parentUuid": "fe5e23ea_290da62a",
+      "revId": "e547db7dae15307b45cdcf7431636e01e95a68d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
