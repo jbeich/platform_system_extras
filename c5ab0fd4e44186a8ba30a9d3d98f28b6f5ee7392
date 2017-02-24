@@ -46,6 +46,30 @@
       "revId": "c5ab0fd4e44186a8ba30a9d3d98f28b6f5ee7392",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d668b35f_6837d98f",
+        "filename": "tests/audio/alsa/pcmtest.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2017-02-24T18:33:56Z",
+      "side": 1,
+      "message": "Okay, after a little searching, it appears that these macros are related to a tool called sparse designed to find problems in the kernel.\n\nI think that someone copied some of this code into a header file incorrectly, and it has been propagated all over the place. They were probably trying to indicate that if the __CHECKER__ is defined, do not compile this module with the sparse stuff enabled.\n\nSome of the external projects have a #ifdef __CHECKER__ that appears to be trying to enable this sparse stuff if defined. But again that looks incorrect and I think we can remove this completely. When I go to fix the external projects, I\u0027ll see if they have any mode that defines __CHECKER__.",
+      "parentUuid": "b4af6dfb_c1ba20fc",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 14
+      },
+      "revId": "c5ab0fd4e44186a8ba30a9d3d98f28b6f5ee7392",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
