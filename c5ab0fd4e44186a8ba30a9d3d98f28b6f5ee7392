@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a4df7501_7a222525",
+        "filename": "tests/audio/alsa/pcmtest.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-02-24T17:34:12Z",
+      "side": 1,
+      "message": "what happens if you just delete all these lines? i don\u0027t understand what they\u0027re trying to do here...",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 14
+      },
+      "revId": "c5ab0fd4e44186a8ba30a9d3d98f28b6f5ee7392",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
