@@ -23,6 +23,9 @@
 #include <stdlib.h>
 #include <gtest/gtest.h>
 #include <linux/ioctl.h>
+#undef __force
+#undef __bitwise
+#undef __user
 #define __force
 #define __bitwise
 #define __user
