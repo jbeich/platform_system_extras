@@ -265,8 +265,8 @@ TEST(cpu_offline, offline_while_recording) {
   cpu_toggle_thread.join();
 }
 
-// http://b/25193162.
-TEST(cpu_offline, offline_while_ioctl_enable) {
+// http://b/25193162. Disable this test as there is no fix in kernel.
+TEST(cpu_offline, DISABLED_offline_while_ioctl_enable) {
   ScopedMpdecisionKiller scoped_mpdecision_killer;
   CpuOnlineRestorer cpuonline_restorer;
   if (GetCpuCount() == 1) {
