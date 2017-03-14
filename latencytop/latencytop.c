@@ -371,6 +371,10 @@ static void print_latency_entries(struct latency_entry *head) {
     unsigned long average;
     int i, count;
 
+    if (!head) {
+        return;
+    }
+
     e = head;
     count = 0;
     while (e) {
