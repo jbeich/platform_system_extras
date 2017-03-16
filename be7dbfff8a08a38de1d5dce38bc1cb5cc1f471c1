@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "79496924_07a305a8",
+        "filename": "simpleperf/scripts/annotate.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2017-03-16T20:58:57Z",
+      "side": 1,
+      "message": "Maybe\n\n    @property\n    def file_key(self):\n        ...\n\n    @property\n    def function_key(self):\n        ...\n\n    @property\n    def line_key(self):\n        ...\n\nThe way this is now, `get_key()` will do be the same as `get_key(for_line\u003dTrue)`, which I don\u0027t think is what you wanted.",
+      "revId": "be7dbfff8a08a38de1d5dce38bc1cb5cc1f471c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "68521e37_a2414ca3",
+        "filename": "simpleperf/scripts/annotate.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2017-03-16T20:58:57Z",
+      "side": 1,
+      "message": "No spaces",
+      "range": {
+        "startLine": 53,
+        "startChar": 48,
+        "endLine": 53,
+        "endChar": 51
+      },
+      "revId": "be7dbfff8a08a38de1d5dce38bc1cb5cc1f471c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a6b6cf90_77455ed7",
+        "filename": "simpleperf/scripts/annotate.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2017-03-16T20:58:57Z",
+      "side": 1,
+      "message": "Parentheses aren\u0027t needed here (and pylint will complain)",
+      "range": {
+        "startLine": 102,
+        "startChar": 16,
+        "endLine": 102,
+        "endChar": 17
+      },
+      "revId": "be7dbfff8a08a38de1d5dce38bc1cb5cc1f471c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dd7034e1_f624e672",
+        "filename": "simpleperf/scripts/annotate.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2017-03-16T20:58:57Z",
+      "side": 1,
+      "message": "Set comprehensions exist too:\n\n    {int(x) for x in config[\u0027pid_filters\u0027]}",
+      "range": {
+        "startLine": 286,
+        "startChar": 30,
+        "endLine": 286,
+        "endChar": 74
+      },
+      "revId": "be7dbfff8a08a38de1d5dce38bc1cb5cc1f471c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "47e4953d_5d73c262",
+        "filename": "simpleperf/scripts/pprof_proto_generator.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2017-03-16T20:58:57Z",
+      "side": 1,
+      "message": "Does pbuf really not have a builtin way to do this?",
+      "revId": "be7dbfff8a08a38de1d5dce38bc1cb5cc1f471c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
