@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "c1f1e72c_c3530aad",
+        "filename": "simpleperf/scripts/annotate.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-03-17T18:26:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "79496924_07a305a8",
+      "revId": "be7dbfff8a08a38de1d5dce38bc1cb5cc1f471c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "68521e37_a2414ca3",
         "filename": "simpleperf/scripts/annotate.py",
         "patchSetId": 1
@@ -42,6 +60,30 @@
     },
     {
       "key": {
+        "uuid": "70db0d92_b742ecfa",
+        "filename": "simpleperf/scripts/annotate.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-03-17T18:26:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "68521e37_a2414ca3",
+      "range": {
+        "startLine": 53,
+        "startChar": 48,
+        "endLine": 53,
+        "endChar": 51
+      },
+      "revId": "be7dbfff8a08a38de1d5dce38bc1cb5cc1f471c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a6b6cf90_77455ed7",
         "filename": "simpleperf/scripts/annotate.py",
         "patchSetId": 1
@@ -53,6 +95,30 @@
       "writtenOn": "2017-03-16T20:58:57Z",
       "side": 1,
       "message": "Parentheses aren\u0027t needed here (and pylint will complain)",
+      "range": {
+        "startLine": 102,
+        "startChar": 16,
+        "endLine": 102,
+        "endChar": 17
+      },
+      "revId": "be7dbfff8a08a38de1d5dce38bc1cb5cc1f471c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c0d9c7e4_fc4dd33d",
+        "filename": "simpleperf/scripts/annotate.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-03-17T18:26:34Z",
+      "side": 1,
+      "message": "Done. and run pylint to fix other errors.",
+      "parentUuid": "a6b6cf90_77455ed7",
       "range": {
         "startLine": 102,
         "startChar": 16,
@@ -99,6 +165,24 @@
       "writtenOn": "2017-03-16T20:58:57Z",
       "side": 1,
       "message": "Does pbuf really not have a builtin way to do this?",
+      "revId": "be7dbfff8a08a38de1d5dce38bc1cb5cc1f471c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a3953ff6_0e19a2c0",
+        "filename": "simpleperf/scripts/pprof_proto_generator.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-03-17T18:26:34Z",
+      "side": 1,
+      "message": "The default string representation of a protobuf object is not clear enough. For example, when given a string_table_id, I want to find and print string in string_table, so I don\u0027t need to search them manually.",
+      "parentUuid": "47e4953d_5d73c262",
       "revId": "be7dbfff8a08a38de1d5dce38bc1cb5cc1f471c1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
