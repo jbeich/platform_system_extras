@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8264819c_ee503760",
+        "filename": "simpleperf/README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 772,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2017-03-18T00:10:06Z",
+      "side": 1,
+      "message": "typo",
+      "range": {
+        "startLine": 772,
+        "startChar": 3,
+        "endLine": 772,
+        "endChar": 6
+      },
+      "revId": "f8cea213401c04b2e881f8de510f83d95873b441",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "82cbf58a_5e5ebb10",
+        "filename": "simpleperf/report_lib_interface.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2017-03-18T00:10:06Z",
+      "side": 1,
+      "message": "should this return a const Mapping* instead? since it\u0027s owned by the private member with a unique_ptr.",
+      "range": {
+        "startLine": 134,
+        "startChar": 2,
+        "endLine": 134,
+        "endChar": 43
+      },
+      "revId": "f8cea213401c04b2e881f8de510f83d95873b441",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ae5c23e6_6f2bf9cc",
+        "filename": "simpleperf/scripts/annotate.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2017-03-18T00:10:06Z",
+      "side": 1,
+      "message": "because of L116, L114 won\u0027t ever happen?",
+      "range": {
+        "startLine": 114,
+        "startChar": 16,
+        "endLine": 116,
+        "endChar": 48
+      },
+      "revId": "f8cea213401c04b2e881f8de510f83d95873b441",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "29733f2c_3b90c82f",
+        "filename": "simpleperf/scripts/pprof_proto_generator.config",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2017-03-18T00:10:06Z",
+      "side": 1,
+      "message": "os.path.join() directly?",
+      "range": {
+        "startLine": 23,
+        "startChar": 26,
+        "endLine": 23,
+        "endChar": 36
+      },
+      "revId": "f8cea213401c04b2e881f8de510f83d95873b441",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2950171b_40166cc1",
+        "filename": "simpleperf/scripts/pprof_proto_generator.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2017-03-18T00:10:06Z",
+      "side": 1,
+      "message": "2017",
+      "range": {
+        "startLine": 3,
+        "startChar": 16,
+        "endLine": 3,
+        "endChar": 20
+      },
+      "revId": "f8cea213401c04b2e881f8de510f83d95873b441",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
