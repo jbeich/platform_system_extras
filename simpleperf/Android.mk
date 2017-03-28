@@ -315,6 +315,7 @@ simpleperf_unit_test_src_files_linux := \
 include $(CLEAR_VARS)
 LOCAL_CLANG := true
 LOCAL_MODULE := simpleperf_unit_test
+LOCAL_COMPATIBILITY_SUITE := device-tests
 LOCAL_CPPFLAGS := $(simpleperf_cppflags_target)
 LOCAL_SRC_FILES := \
   $(simpleperf_unit_test_src_files) \
@@ -330,6 +331,7 @@ include $(BUILD_NATIVE_TEST)
 # simpleperf_unit_test host
 include $(CLEAR_VARS)
 LOCAL_MODULE := simpleperf_unit_test
+LOCAL_COMPATIBILITY_SUITE := device-tests
 LOCAL_MODULE_HOST_OS := darwin linux windows
 LOCAL_CPPFLAGS := $(simpleperf_cppflags_host)
 LOCAL_CPPFLAGS_darwin := $(simpleperf_cppflags_host_darwin)
