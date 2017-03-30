@@ -27,6 +27,7 @@ cc_library {
 
 cc_test {
     name: "pagemap_test",
+    test_suites: ["device-tests"],
     srcs: ["pagemap_test.cpp"],
     shared_libs: ["libpagemap"],
 }
