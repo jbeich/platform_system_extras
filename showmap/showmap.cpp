@@ -29,6 +29,7 @@ static bool verbose = false;
 static bool terse = false;
 static bool addresses = false;
 static bool quiet = false;
+static bool csv = false;
 
 static int is_library(const char *name) {
     int len = strlen(name);
@@ -256,6 +257,35 @@ static void print_mi(mapinfo *mi, bool total)
     if (!verbose && !addresses) {
         printf("%4d ", mi->count);
     }
+    printf("%s%s\n", mi->name, mi->is_bss ? " [bss]" : "");
+}
+
+static void print_header_csv()
+{
+    if (addresses) {
+        printf("start address,end address,");
+    }
+    printf("virtual size,RSS,PSS,shared clean,shared dirty,private clean,private dirty,swap,");
+    if (!verbose && !addresses) {
+        printf("count,");
+    }
+    printf("object\n");
+}
+
+static void print_mi_csv(mapinfo const * mi)
+{
+    if (addresses) {
+        printf("%08x,%08x,", mi->start, mi->end)
+    }
+    printf("%d,%d,%d,%d,%d,%d,%d,%d", mi->size,
+           mi->rss,
+           mi->pss,
+           mi->shared_clean, mi->shared_dirty,
+           mi->private_clean, mi->private_dirty, mi->swap);
+    if (!verbose && !addresses) {
+        printf(",%d", mi->count);
+    }
+    printf(",%s%s\n", mi->name, mi->is_bss ? " [bss]" : "");
 }
 
 static int show_map(int pid)
@@ -268,40 +298,51 @@ static int show_map(int pid)
         return quiet ? 0 : 1;
     }
 
-    print_header();
-    print_divider();
+    if (!csv) {
+        print_header();
+        print_divider();
+    } else {
+        print_header_csv();
+    }
 
     for (mapinfo *mi = milist; mi;) {
         mapinfo* last = mi;
 
-        total.shared_clean += mi->shared_clean;
-        total.shared_dirty += mi->shared_dirty;
-        total.private_clean += mi->private_clean;
-        total.private_dirty += mi->private_dirty;
-        total.swap += mi->swap;
-        total.rss += mi->rss;
-        total.pss += mi->pss;
-        total.size += mi->size;
-        total.count += mi->count;
+        if (!csv) {
+            total.shared_clean += mi->shared_clean;
+            total.shared_dirty += mi->shared_dirty;
+            total.private_clean += mi->private_clean;
+            total.private_dirty += mi->private_dirty;
+            total.swap += mi->swap;
+            total.rss += mi->rss;
+            total.pss += mi->pss;
+            total.size += mi->size;
+            total.count += mi->count;
+        }
 
         if (terse && !mi->private_dirty) {
             goto out;
         }
 
-        print_mi(mi, false);
-        printf("%s%s\n", mi->name, mi->is_bss ? " [bss]" : "");
+        if (!csv) {
+            print_mi(mi, false);
+        } else {
+            print_mi_csv(mi);
+        }
 
 out:
         mi = mi->next;
         free(last);
     }
 
-    print_divider();
-    print_header();
-    print_divider();
+    if (!csv) {
+        print_divider();
+        print_header();
+        print_divider();
 
-    print_mi(&total, true);
-    printf("TOTAL\n");
+        print_mi(&total, true);
+        printf("TOTAL\n");
+    }
 
     return 0;
 }
@@ -333,6 +374,10 @@ int main(int argc, char *argv[])
             quiet = true;
             continue;
         }
+        if (!strcmp(arg,"-c")) {
+            csv = true;
+            continue;
+        }
         if (argc != 1) {
             fprintf(stderr, "too many arguments\n");
             break;
@@ -351,11 +396,12 @@ int main(int argc, char *argv[])
 
     if (usage) {
         fprintf(stderr,
-                "showmap [-t] [-v] [-c] [-q] <pid>\n"
+                "showmap [-t] [-v] [-c] [-q] [-c] <pid>\n"
                 "        -t = terse (show only items with private pages)\n"
                 "        -v = verbose (don't coalesce maps with the same name)\n"
                 "        -a = addresses (show virtual memory map)\n"
                 "        -q = quiet (don't show error if map could not be read)\n"
+                "        -c = print output in CSV format\n"
                 );
         result = 1;
     }
