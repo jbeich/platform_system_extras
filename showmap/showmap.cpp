@@ -29,6 +29,7 @@ static bool verbose = false;
 static bool terse = false;
 static bool addresses = false;
 static bool quiet = false;
+static bool csv = false;
 
 static int is_library(const char *name) {
     int len = strlen(name);
@@ -227,6 +228,11 @@ static void print_header()
     printf("object\n");
 }
 
+static void print_csv_header()
+{
+    printf("virtual size,RSS,PSS,shared clean,shared dirty,private clean,private dirty,swap,object");
+}
+
 static void print_divider()
 {
     if (addresses) {
@@ -258,6 +264,19 @@ static void print_mi(mapinfo *mi, bool total)
     }
 }
 
+static void print_mi_as_csv(mapinfo const * mi)
+{
+    printf("%d,%d,%d,%d,%d,%d,%d,%d", mi->size,
+           mi->rss,
+           mi->pss,
+           mi->shared_clean, mi->shared_dirty,
+           mi->private_clean, mi->private_dirty, mi->swap);
+    if (!verbose && !addresses) {
+        printf(",%d ", mi->count);
+    }
+    printf(",%s%s\n", mi->name, mi->is_bss ? " [bss]" : "");
+}
+
 static int show_map(int pid)
 {
     mapinfo total;
@@ -268,8 +287,12 @@ static int show_map(int pid)
         return quiet ? 0 : 1;
     }
 
-    print_header();
-    print_divider();
+    if (!csv) {
+        print_header();
+        print_divider();
+    } else {
+        print_csv_header();
+    }
 
     for (mapinfo *mi = milist; mi;) {
         mapinfo* last = mi;
@@ -288,8 +311,12 @@ static int show_map(int pid)
             goto out;
         }
 
-        print_mi(mi, false);
-        printf("%s%s\n", mi->name, mi->is_bss ? " [bss]" : "");
+        if (!csv) {
+            print_mi(mi, false);
+            printf("%s%s\n", mi->name, mi->is_bss ? " [bss]" : "");
+        } else {
+            print_mi_as_csv(mi);
+        }
 
 out:
         mi = mi->next;
@@ -300,8 +327,10 @@ out:
     print_header();
     print_divider();
 
-    print_mi(&total, true);
-    printf("TOTAL\n");
+    if (!csv) {
+        print_mi(&total, true);
+        printf("TOTAL\n");
+    }
 
     return 0;
 }
@@ -333,6 +362,10 @@ int main(int argc, char *argv[])
             quiet = true;
             continue;
         }
+        if (!strcmp(arg,"-c")) {
+            csv = true;
+            continue;
+        }
         if (argc != 1) {
             fprintf(stderr, "too many arguments\n");
             break;
@@ -351,11 +384,12 @@ int main(int argc, char *argv[])
 
     if (usage) {
         fprintf(stderr,
-                "showmap [-t] [-v] [-c] [-q] <pid>\n"
+                "showmap [-t] [-v] [-c] [-q] [-c] <pid>\n"
                 "        -t = terse (show only items with private pages)\n"
                 "        -v = verbose (don't coalesce maps with the same name)\n"
                 "        -a = addresses (show virtual memory map)\n"
                 "        -q = quiet (don't show error if map could not be read)\n"
+                "        -c = print output in CSV format\n"
                 );
         result = 1;
     }
