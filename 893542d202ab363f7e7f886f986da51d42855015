@@ -70,6 +70,30 @@
       "revId": "893542d202ab363f7e7f886f986da51d42855015",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "12813b59_1769bf8a",
+        "filename": "perfprofd/tests/AndroidTest.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1088076
+      },
+      "writtenOn": "2017-04-13T21:00:36Z",
+      "side": 1,
+      "message": "We don\u0027t use  /data/local/tmp so the binary can be in its own folder.\n\ntradefed should be enough.\nDo you mean upload perfprofd_test directory to the device?\nI think you can set source to be a directory.",
+      "parentUuid": "8668d07a_6bbef50a",
+      "range": {
+        "startLine": 20,
+        "startChar": 9,
+        "endLine": 20,
+        "endChar": 15
+      },
+      "revId": "893542d202ab363f7e7f886f986da51d42855015",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
