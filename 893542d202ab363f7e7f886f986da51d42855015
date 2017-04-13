@@ -22,6 +22,30 @@
       "revId": "893542d202ab363f7e7f886f986da51d42855015",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7238ff98_bd20778a",
+        "filename": "perfprofd/tests/AndroidTest.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1088076
+      },
+      "writtenOn": "2017-04-13T20:23:36Z",
+      "side": 1,
+      "message": "These 2 lines will push the files to /data/local/tmp/. Note that the files on the device will be like:\n/data/local/tmp/perfprofd_test/perfprofd_test\n/data/local/tmp/canned.perf.data/canned.perf.data\n/data/local/tmp/callchain.canned.perf.data/callchain.canned.perf.data\n\nI guess you want these two data file to be next to the executable? If that\u0027s the case, you want to change to both \"to\" paths to be /data/local/tmp/perfprofd_test\n\nYou can try to verify the change by building google-tradefed-all and the test package (perfprofd_test), then run tradefed command line to run the test, like:\n\ntradefed.sh run template/local --template:map test\u003dperfprofd_test",
+      "parentUuid": "96743f1e_f16300e4",
+      "range": {
+        "startLine": 20,
+        "startChar": 9,
+        "endLine": 20,
+        "endChar": 15
+      },
+      "revId": "893542d202ab363f7e7f886f986da51d42855015",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
