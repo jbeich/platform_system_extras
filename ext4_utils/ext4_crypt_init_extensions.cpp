@@ -88,6 +88,9 @@ int e4crypt_set_directory_policy(const char* dir)
         "misc_ce", "misc_de",
         "media",
         "data", "user", "user_de",
+#ifdef EXCLUDE_DUMP_DIRS
+        "crashdump",
+#endif
     };
     std::string prefix = "/data/";
     for (auto d: directories_to_exclude) {
