@@ -19,6 +19,11 @@ cc_library {
     ],
     // Various instances of dereferencing a type-punned pointer in extent.c
     cflags: ["-fno-strict-aliasing"],
+    product_variables: {
+        debuggable: {
+            cflags: ["-DEXCLUDE_DUMP_DIRS"],
+        },
+    },
     export_include_dirs: ["include"],
     shared_libs: [
         "libsparse",
