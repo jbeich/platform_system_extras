@@ -382,6 +382,15 @@ TEST_F(SocketTaggingTest, TagAnotherSocket) {
     EXPECT_FALSE(sock1.checkTag(valid_tag1, fake_uid2)) << "Tag should not be there";
 }
 
+TEST_F(SocketTaggingTest, checkTagOnCloseSocket) {
+    testPrintI("tag socket0");
+    EXPECT_GE(doCtrlCommand("t %d %" PRIu64 " %u",  sock0.fd, valid_tag1, fake_uid), 0);
+    EXPECT_TRUE(sock0.checkTag(valid_tag1, fake_uid)) << "Tag not found.";
+    testPrintI("close socket 0");
+    close(sock0.fd);
+    EXPECT_FALSE(sock0.checkTag(valid_tag1, fake_uid)) << "Tag should not be there";
+}
+
 TEST_F(SocketTaggingTest, TagInvalidSocketFail) {
     // Invalid tag. Expected failure
     close(sock0.fd);
