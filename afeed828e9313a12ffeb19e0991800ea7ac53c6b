@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7eaa03fd_a7e50f90",
+        "filename": "latencytop/latencytop.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 1096946
+      },
+      "writtenOn": "2017-04-19T00:05:28Z",
+      "side": 1,
+      "message": "looks like we\u0027ll no longer print this out if head \u003d\u003d NULL.\n\ni dunno if there are scripts/etc. that care, but it\u0027s technically a functional change. ¯\\_(ツ)_/¯",
+      "revId": "afeed828e9313a12ffeb19e0991800ea7ac53c6b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
