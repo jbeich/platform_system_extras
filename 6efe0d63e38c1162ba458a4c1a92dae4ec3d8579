@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "caeffde2_e7d9b671",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2017-04-26T20:55:52Z",
+      "side": 1,
+      "message": "Can you add some more details here about how this is based on ART\u0027s utilization of zip? It would also be nice if this commit message explains exactly how to run this benchmark (and describes the expected output too).",
+      "revId": "6efe0d63e38c1162ba458a4c1a92dae4ec3d8579",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8f3ffff2_677d51ca",
+        "filename": "ziparchive-perf/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2017-04-26T20:55:52Z",
+      "side": 1,
+      "message": "This shouldn\u0027t be here. That makes it build for all eng builds, instead of as part of a \"tests\" build target.",
+      "range": {
+        "startLine": 20,
+        "startChar": 21,
+        "endLine": 20,
+        "endChar": 24
+      },
+      "revId": "6efe0d63e38c1162ba458a4c1a92dae4ec3d8579",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "93fef458_1b941330",
+        "filename": "ziparchive-perf/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2017-04-26T20:55:52Z",
+      "side": 1,
+      "message": "This is redundant/unnecessary now.",
+      "revId": "6efe0d63e38c1162ba458a4c1a92dae4ec3d8579",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "15c81f6e_73b74c9a",
+        "filename": "ziparchive-perf/ziparchivePerf.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2017-04-26T20:55:52Z",
+      "side": 1,
+      "message": "There should be a brief copyright header for a new .cpp file.",
+      "revId": "6efe0d63e38c1162ba458a4c1a92dae4ec3d8579",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
