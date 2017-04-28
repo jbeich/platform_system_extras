@@ -179,6 +179,10 @@ class ReportCmdSampleTreeBuilder
                                      const uint64_t& acc_info) override {
     const ThreadEntry* thread = sample->thread;
     const MapEntry* map = thread_tree_->FindMap(thread, ip, in_kernel);
+    if (thread_tree_->IsUnknownDso(map->dso)) {
+      // The unwinders can give wrong ip addresses, which can't map to a valid dso. Skip them.
+      return nullptr;
+    }
     uint64_t vaddr_in_file;
     const Symbol* symbol = thread_tree_->FindSymbol(map, ip, &vaddr_in_file);
     std::unique_ptr<SampleEntry> callchain_sample(new SampleEntry(
