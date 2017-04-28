@@ -16,6 +16,24 @@
       "revId": "aeb9207d52900400a648a687c53452c3a9f30348",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bf547dac_9a6782ad",
+        "filename": "simpleperf/cmd_report.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-04-28T23:37:13Z",
+      "side": 1,
+      "message": "Usually only the last ip address in the callchain is wrong. And we just skip the wrong part, not the whole callchain. Added error callchain output as below:\nSamples: 1887\nError Callchains: 20, 1.059883%",
+      "parentUuid": "a3423756_ee115ac4",
+      "revId": "aeb9207d52900400a648a687c53452c3a9f30348",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
