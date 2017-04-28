@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a3423756_ee115ac4",
+        "filename": "simpleperf/cmd_report.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-04-28T21:56:58Z",
+      "side": 1,
+      "message": "do we want to count these and log at the end how many we skipped? (it\u0027s not clear to me how \"normal\" a case this is.)",
+      "revId": "aeb9207d52900400a648a687c53452c3a9f30348",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
