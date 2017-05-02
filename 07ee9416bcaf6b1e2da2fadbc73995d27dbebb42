@@ -22,6 +22,30 @@
       "revId": "07ee9416bcaf6b1e2da2fadbc73995d27dbebb42",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "173a8bb1_be2fdfa7",
+        "filename": "simpleperf/report_sample.proto",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-05-02T22:49:54Z",
+      "side": 1,
+      "message": "It will be, in case you need to sync the timeline with other events. I will support that in later patches.",
+      "parentUuid": "2e0bf1d1_c7c20177",
+      "range": {
+        "startLine": 19,
+        "startChar": 5,
+        "endLine": 19,
+        "endChar": 16
+      },
+      "revId": "07ee9416bcaf6b1e2da2fadbc73995d27dbebb42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
