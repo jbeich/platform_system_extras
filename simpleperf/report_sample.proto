@@ -15,6 +15,9 @@ option java_package = "com.android.tools.profiler.proto";
 option java_outer_classname = "SimpleperfReport";
 
 message Sample {
+
+  // Wall clock time for current sample.
+  // By default, it is perf clock used in kernel.
   optional uint64 time = 1;
   optional int32 thread_id = 2;
 
@@ -32,6 +35,10 @@ message Sample {
   }
 
   repeated CallChainEntry callchain = 3;
+
+  // Event count for current sample. If profiled with `cpu-cycles`, it is cpu cycle count.
+  optional uint64 period = 4;
+
 }
 
 message LostSituation {
