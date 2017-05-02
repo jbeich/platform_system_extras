@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "e5f36884_71196e91",
+        "filename": "simpleperf/report_sample.proto",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-05-02T22:06:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "70805499_8c8feffc",
+      "revId": "552853c2da40ca2fa45cce8f28f8648e8bee1357",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a4068c0c_f63bd1b3",
         "filename": "simpleperf/report_sample.proto",
         "patchSetId": 1
@@ -66,6 +84,30 @@
     },
     {
       "key": {
+        "uuid": "7207be8b_d8402117",
+        "filename": "simpleperf/report_sample.proto",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-05-02T22:06:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ee1291b_e927bfb0",
+      "range": {
+        "startLine": 39,
+        "startChar": 5,
+        "endLine": 39,
+        "endChar": 90
+      },
+      "revId": "552853c2da40ca2fa45cce8f28f8648e8bee1357",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c9ecd0b3_b043a140",
         "filename": "simpleperf/report_sample.proto",
         "patchSetId": 1
@@ -77,6 +119,30 @@
       "writtenOn": "2017-05-02T21:11:47Z",
       "side": 1,
       "message": "s/period/event_count/.\n\nTo my best understanding, this field is really about what passed in the \"-e\" switch. \u0027period\u0027 isn\u0027t clear IMHO.",
+      "range": {
+        "startLine": 40,
+        "startChar": 18,
+        "endLine": 40,
+        "endChar": 24
+      },
+      "revId": "552853c2da40ca2fa45cce8f28f8648e8bee1357",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6306c6dd_6e3737f0",
+        "filename": "simpleperf/report_sample.proto",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-05-02T22:06:54Z",
+      "side": 1,
+      "message": "changed to event_count. period is used in kernel, and simpleperf just follows it.",
+      "parentUuid": "c9ecd0b3_b043a140",
       "range": {
         "startLine": 40,
         "startChar": 18,
