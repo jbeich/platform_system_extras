@@ -109,9 +109,11 @@ class ReportCmdSampleTreeBuilder
     : public SampleTreeBuilder<SampleEntry, uint64_t> {
  public:
   ReportCmdSampleTreeBuilder(SampleComparator<SampleEntry> sample_comparator,
-                             ThreadTree* thread_tree)
+                             ThreadTree* thread_tree,
+                             bool use_timestamp_diff_as_period)
       : SampleTreeBuilder(sample_comparator),
         thread_tree_(thread_tree),
+        use_timestamp_diff_as_period_(use_timestamp_diff_as_period),
         total_samples_(0),
         total_period_(0),
         total_error_callchains_(0) {}
@@ -148,10 +150,25 @@ class ReportCmdSampleTreeBuilder
     uint64_t vaddr_in_file;
     const Symbol* symbol =
         thread_tree_->FindSymbol(map, r.ip_data.ip, &vaddr_in_file);
-    *acc_info = r.period_data.period;
+
+    uint64_t period = GetPeriod(r);
+    *acc_info = period;
     return InsertSample(std::unique_ptr<SampleEntry>(
-        new SampleEntry(r.time_data.time, r.period_data.period, 0, 1, thread,
+        new SampleEntry(r.time_data.time, period, 0, 1, thread,
                         map, symbol, vaddr_in_file)));
+  }
+
+  uint64_t GetPeriod(const SampleRecord& r) {
+    if (!use_timestamp_diff_as_period_) {
+      return r.period_data.period;
+    }
+    uint64_t period = 1;
+    auto it = last_timestamps_.find(r.tid_data.tid);
+    if (it != last_timestamps_.end() && it->second < r.time_data.time) {
+      period = r.time_data.time - it->second;
+    }
+    last_timestamps_[r.tid_data.tid] = r.time_data.time;
+    return period;
   }
 
   SampleEntry* CreateBranchSample(const SampleRecord& r,
@@ -248,6 +265,10 @@ class ReportCmdSampleTreeBuilder
   std::unordered_set<std::string> dso_filter_;
   std::unordered_set<std::string> symbol_filter_;
 
+  // Map from thread id to last timestamp for that thread.
+  std::unordered_map<int, uint64_t> last_timestamps_;
+  bool use_timestamp_diff_as_period_;
+
   uint64_t total_samples_;
   uint64_t total_period_;
   uint64_t total_error_callchains_;
@@ -266,10 +287,11 @@ struct SampleTreeBuilderOptions {
   bool build_callchain;
   bool use_caller_as_callchain_root;
   bool strict_unwind_arch_check;
+  bool use_timestamp_diff_as_period;
 
   std::unique_ptr<ReportCmdSampleTreeBuilder> CreateSampleTreeBuilder() {
     std::unique_ptr<ReportCmdSampleTreeBuilder> builder(
-        new ReportCmdSampleTreeBuilder(comparator, thread_tree));
+        new ReportCmdSampleTreeBuilder(comparator, thread_tree, use_timestamp_diff_as_period));
     builder->SetFilters(pid_filter, tid_filter, comm_filter, dso_filter, symbol_filter);
     builder->SetBranchSampleOption(use_branch_address);
     builder->SetCallChainSampleOptions(accumulate_callchain, build_callchain,
@@ -308,6 +330,8 @@ class ReportCommand : public Command {
             // clang-format off
 "Usage: simpleperf report [options]\n"
 "The default options are: -i perf.data --sort comm,pid,tid,dso,symbol.\n"
+"--add-sleep-time      Calculate the period of each sample as the difference of\n"
+"                      timestamps of adjacent samples. This includes sleep time.\n"
 "-b    Use the branch-to addresses in sampled take branches instead of the\n"
 "      instruction addresses. Only valid for perf.data recorded with -b/-j\n"
 "      option.\n"
@@ -365,7 +389,8 @@ class ReportCommand : public Command {
         callgraph_max_stack_(UINT32_MAX),
         callgraph_percent_limit_(0),
         raw_period_(false),
-        brief_callgraph_(true) {}
+        brief_callgraph_(true),
+        use_timestamp_diff_as_period_(false) {}
 
   bool Run(const std::vector<std::string>& args);
 
@@ -401,6 +426,7 @@ class ReportCommand : public Command {
   double callgraph_percent_limit_;
   bool raw_period_;
   bool brief_callgraph_;
+  bool use_timestamp_diff_as_period_;
 
   std::string report_filename_;
 };
@@ -445,7 +471,9 @@ bool ReportCommand::ParseOptions(const std::vector<std::string>& args) {
   std::vector<std::string> sort_keys = {"comm", "pid", "tid", "dso", "symbol"};
 
   for (size_t i = 0; i < args.size(); ++i) {
-    if (args[i] == "-b") {
+    if (args[i] == "--add-sleep-time") {
+      use_timestamp_diff_as_period_ = true;
+    } else if (args[i] == "-b") {
       use_branch_address_ = true;
     } else if (args[i] == "--children") {
       accumulate_callchain_ = true;
@@ -753,6 +781,7 @@ bool ReportCommand::ReadSampleTreeFromRecordFile() {
   sample_tree_builder_options_.accumulate_callchain = accumulate_callchain_;
   sample_tree_builder_options_.build_callchain = print_callgraph_;
   sample_tree_builder_options_.use_caller_as_callchain_root = !callgraph_show_callee_;
+  sample_tree_builder_options_.use_timestamp_diff_as_period = use_timestamp_diff_as_period_;
 
   for (size_t i = 0; i < event_attrs_.size(); ++i) {
     sample_tree_builder_.push_back(sample_tree_builder_options_.CreateSampleTreeBuilder());
