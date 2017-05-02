@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "70805499_8c8feffc",
+        "filename": "simpleperf/report_sample.proto",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1079424
+      },
+      "writtenOn": "2017-05-02T21:11:47Z",
+      "side": 1,
+      "message": "Please remove the blank line.",
+      "revId": "552853c2da40ca2fa45cce8f28f8648e8bee1357",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a4068c0c_f63bd1b3",
+        "filename": "simpleperf/report_sample.proto",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1079424
+      },
+      "writtenOn": "2017-05-02T21:11:47Z",
+      "side": 1,
+      "message": "I\u0027d like to rephrase this comment into something like\n\n\"Count of the events that have happened since last sample (regardless of whether the last sample is lost) if \u0027-e\u0027 is used in \u0027simpleperf record\u0027. For example, if \u0027-e cpu-clock\u0027 is used, this field will be the number of CPU cycles.\"",
+      "range": {
+        "startLine": 39,
+        "startChar": 5,
+        "endLine": 39,
+        "endChar": 90
+      },
+      "revId": "552853c2da40ca2fa45cce8f28f8648e8bee1357",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c9ecd0b3_b043a140",
+        "filename": "simpleperf/report_sample.proto",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1079424
+      },
+      "writtenOn": "2017-05-02T21:11:47Z",
+      "side": 1,
+      "message": "s/period/event_count/.\n\nTo my best understanding, this field is really about what passed in the \"-e\" switch. \u0027period\u0027 isn\u0027t clear IMHO.",
+      "range": {
+        "startLine": 40,
+        "startChar": 18,
+        "endLine": 40,
+        "endChar": 24
+      },
+      "revId": "552853c2da40ca2fa45cce8f28f8648e8bee1357",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
