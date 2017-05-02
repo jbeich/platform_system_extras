@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "1a4f1581_a2594ca8",
+        "filename": "simpleperf/README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-05-02T22:48:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "31017377_8afad6e3",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 52
+      },
+      "revId": "eaa1d6fc9afe0f4ddf83d2f7de614f75339f3064",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "205a5ab9_645a0727",
         "filename": "simpleperf/demo/README.md",
         "patchSetId": 4
@@ -36,6 +60,30 @@
       "writtenOn": "2017-05-02T22:23:56Z",
       "side": 1,
       "message": "Java and C++ in this file too",
+      "range": {
+        "startLine": 7,
+        "startChar": 13,
+        "endLine": 7,
+        "endChar": 21
+      },
+      "revId": "eaa1d6fc9afe0f4ddf83d2f7de614f75339f3064",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a7b17755_676549d5",
+        "filename": "simpleperf/demo/README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-05-02T22:48:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "205a5ab9_645a0727",
       "range": {
         "startLine": 7,
         "startChar": 13,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "32a9a016_58f063a0",
+        "filename": "simpleperf/demo/README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-05-02T22:48:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "928520ef_becd735a",
+      "range": {
+        "startLine": 13,
+        "startChar": 66,
+        "endLine": 13,
+        "endChar": 73
+      },
+      "revId": "eaa1d6fc9afe0f4ddf83d2f7de614f75339f3064",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4d243d9b_5a21a7d0",
         "filename": "simpleperf/demo/README.md",
         "patchSetId": 4
@@ -82,6 +154,30 @@
       "writtenOn": "2017-05-02T22:23:56Z",
       "side": 1,
       "message": "Android Studio",
+      "range": {
+        "startLine": 27,
+        "startChar": 4,
+        "endLine": 27,
+        "endChar": 18
+      },
+      "revId": "eaa1d6fc9afe0f4ddf83d2f7de614f75339f3064",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3f630b1f_518b37d3",
+        "filename": "simpleperf/demo/README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-05-02T22:48:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4d243d9b_5a21a7d0",
       "range": {
         "startLine": 27,
         "startChar": 4,
@@ -111,6 +207,24 @@
     },
     {
       "key": {
+        "uuid": "69ee1417_6a7fc8d8",
+        "filename": "simpleperf/demo/README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-05-02T22:48:13Z",
+      "side": 1,
+      "message": "In my experience, the project should be opened by Android Studio. Because it knows how to upgrade android sdk, ndk and other things to build successfully.",
+      "parentUuid": "58cad586_d71684d1",
+      "revId": "eaa1d6fc9afe0f4ddf83d2f7de614f75339f3064",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ebba3b38_99dab07e",
         "filename": "simpleperf/demo/README.md",
         "patchSetId": 4
@@ -122,6 +236,30 @@
       "writtenOn": "2017-05-02T22:23:56Z",
       "side": 1,
       "message": "i think the bit we\u0027re missing is \"i\u0027m a developer with an existing app; what do i need to change to use simpleperf?\" --- this is a useful example for them to test with, but it doesn\u0027t help them enable profiling in their own app, which is probably what they\u0027re really interested in...",
+      "range": {
+        "startLine": 69,
+        "startChar": 3,
+        "endLine": 69,
+        "endChar": 24
+      },
+      "revId": "eaa1d6fc9afe0f4ddf83d2f7de614f75339f3064",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d27e95d2_1e0c5279",
+        "filename": "simpleperf/demo/README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-05-02T22:48:13Z",
+      "side": 1,
+      "message": "That is the meaning of the \"Android application profiling\" section in README.md in the parent directory. That says how to prepare the application, how to profile using command or scripts. And here is the demo directory, and the README.md is to explain how to run the demos.\n\nIt is too hard to say how to change your app to profile it. So we have some examples, where you can read them and copy build scripts from them, and verify whether profiling works in your environment using some examples.",
+      "parentUuid": "ebba3b38_99dab07e",
       "range": {
         "startLine": 69,
         "startChar": 3,
