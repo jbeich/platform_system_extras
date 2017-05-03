@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "922e79cc_d23be0a1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-05-03T22:03:05Z",
+      "side": 1,
+      "message": "not clear, filed bug http://b/37956245",
+      "parentUuid": "1902f9ab_17636608",
+      "range": {
+        "startLine": 13,
+        "startChar": 3,
+        "endLine": 13,
+        "endChar": 48
+      },
+      "revId": "a4cff6736deb0c5d8c987f49f4e01015e1d325e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "17662a57_f3037b54",
         "filename": "simpleperf/scripts/annotate.py",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2017-05-03T21:55:36Z",
       "side": 1,
       "message": "danalbert?",
+      "range": {
+        "startLine": 564,
+        "startChar": 0,
+        "endLine": 566,
+        "endChar": 74
+      },
+      "revId": "a4cff6736deb0c5d8c987f49f4e01015e1d325e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9853a648_68f566b6",
+        "filename": "simpleperf/scripts/annotate.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 566,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-05-03T22:03:05Z",
+      "side": 1,
+      "message": "this is to change abspath on windows to relative path. For example, from C:\\Users\\.. to C\\Users\\...",
+      "parentUuid": "17662a57_f3037b54",
       "range": {
         "startLine": 564,
         "startChar": 0,
