@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "ac1479eb_96f75738",
+        "filename": "simpleperf/event_fd.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-05-04T22:58:00Z",
+      "side": 1,
+      "message": "In EventSelectionSet::ReadCounters(),\neach time it creates a new CounterInfo counter; which we can initialize to 0. But it doesn\u0027t help solving our problem.\n\nAccording to the code in EventFd::ReadCounter(), we want to trace the difference between current counter and the previous counter. That\u0027s why we need a place to keep previous counter.",
+      "parentUuid": "4e9f9952_75389da6",
+      "range": {
+        "startLine": 31,
+        "startChar": 7,
+        "endLine": 31,
+        "endChar": 18
+      },
+      "revId": "d6bfe716743020b63e3b2a9584c4085d4202d555",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bcc76978_c60ad15c",
         "filename": "simpleperf/event_fd.h",
         "patchSetId": 1
