@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "4e9f9952_75389da6",
+        "filename": "simpleperf/event_fd.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1105075
+      },
+      "writtenOn": "2017-05-04T22:18:18Z",
+      "side": 1,
+      "message": "Maybe I missed something, but looks like it is either copied form hotplugged_counters or created from https://cs.corp.google.com/android/system/extras/simpleperf/event_selection_set.cpp?q\u003dEventSelectionSet::ReadCounters\u0026sq\u003dpackage:%5Eandroid$\u0026l\u003d472\nwhich should call the default c\u0027tor in nested struct?",
+      "parentUuid": "7a33ab89_6fec9967",
+      "range": {
+        "startLine": 31,
+        "startChar": 7,
+        "endLine": 31,
+        "endChar": 18
+      },
+      "revId": "d6bfe716743020b63e3b2a9584c4085d4202d555",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bcc76978_c60ad15c",
         "filename": "simpleperf/event_fd.h",
         "patchSetId": 1
