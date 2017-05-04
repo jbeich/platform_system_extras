@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "59961214_b4c016db",
+        "filename": "simpleperf/event_fd.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1105075
+      },
+      "writtenOn": "2017-05-04T18:48:11Z",
+      "side": 1,
+      "message": "Alternatively, can we put a constructor here to init all \u00270\u0027 when allocation?",
+      "range": {
+        "startLine": 31,
+        "startChar": 7,
+        "endLine": 31,
+        "endChar": 18
+      },
+      "revId": "d6bfe716743020b63e3b2a9584c4085d4202d555",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bcc76978_c60ad15c",
+        "filename": "simpleperf/event_fd.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1105075
+      },
+      "writtenOn": "2017-05-04T18:48:11Z",
+      "side": 1,
+      "message": "PerfCounter is held somewhere else, so this is a dup?",
+      "range": {
+        "startLine": 128,
+        "startChar": 11,
+        "endLine": 128,
+        "endChar": 25
+      },
+      "revId": "d6bfe716743020b63e3b2a9584c4085d4202d555",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
