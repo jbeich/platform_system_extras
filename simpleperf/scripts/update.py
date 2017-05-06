@@ -80,10 +80,10 @@ def check_call(cmd):
 
 def fetch_artifact(branch, build, target, pattern):
     """Fetches and artifact from the build server."""
-    if target == 'local':
-        return
     logger().info('Fetching %s from %s %s (artifacts matching %s)', build,
                   target, branch, pattern)
+    if target == 'local':
+        return
     fetch_artifact_path = '/google/data/ro/projects/android/fetch_artifact'
     cmd = [fetch_artifact_path, '--branch', branch, '--target', target,
            '--bid', build, pattern]
@@ -141,7 +141,10 @@ def install_entry(branch, build, install_dir, entry):
     dir = os.path.dirname(install_path)
     if not os.path.isdir(dir):
         os.makedirs(dir)
-    shutil.move(name, install_path)
+    if target == 'local':
+        shutil.copyfile(name, install_path)
+    else:
+        shutil.move(name, install_path)
 
 
 def get_args():
