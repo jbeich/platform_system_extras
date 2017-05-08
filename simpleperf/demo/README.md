@@ -32,11 +32,11 @@ It can be downloaded as below:
 steps:
 1. Build and install app:
 
-    # Open SimpleperfExamplesPureJava project with Android Studio,
-    # and build this project sucessfully, otherwise the `./gradlew` command below will fail.
+    #Open SimpleperfExamplesPureJava project with Android Studio,
+    #and build this project sucessfully, otherwise the `./gradlew` command below will fail.
     $cd SimpleperfExamplePureJava
 
-    # On windows, use "gradlew" instead.
+    #On windows, use "gradlew" instead.
     $./gradlew clean assemble
     $adb install -r app/build/outputs/apk/app-profiling.apk
 
@@ -72,11 +72,11 @@ steps:
 steps:
 1. Build and install app:
 
-    # Open SimpleperfExamplesPureJava project with Android Studio,
-    # and build this project sucessfully, otherwise the `./gradlew` command below will fail.
+    #Open SimpleperfExamplesPureJava project with Android Studio,
+    #and build this project sucessfully, otherwise the `./gradlew` command below will fail.
     $cd SimpleperfExampleWithNative
 
-    # On windows, use "gradlew" instead.
+    #On windows, use "gradlew" instead.
     $./gradlew clean assemble
     $adb install -r app/build/outputs/apk/app-profiling.apk
 

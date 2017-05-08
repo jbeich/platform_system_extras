@@ -464,7 +464,7 @@ examples.
 
 This section shows how to profile an Android application.
 [Here](https://android.googlesource.com/platform/system/extras/+/master/simpleperf/demo/README.md) are examples. And we use
-[SimpleperfExamplePureJava]((https://android.googlesource.com/platform/system/extras/+/master/simpleperf/demo/SimpleperfExamplePureJava) project to show the profiling results.
+[SimpleperfExamplePureJava](https://android.googlesource.com/platform/system/extras/+/master/simpleperf/demo/SimpleperfExamplePureJava) project to show the profiling results.
 
 Simpleperf only supports profiling native instructions in binaries in ELF
 format. If the Java code is executed by interpreter, or with jit cache, it
@@ -501,21 +501,21 @@ the jvm running in oat mode, which is only available >= L.
 To profile Java code, we need the jvm running in oat mode. But on Android O,
 debuggable applications are forced to run in jit mode. To work around this,
 we need to add a `wrap.sh` in the apk. So if you are running on Android O device,
-Check [here]((https://android.googlesource.com/platform/system/extras/+/master/simpleperf/demo/SimpleperfExamplePureJava/app/profiling.gradle)
+Check [here](https://android.googlesource.com/platform/system/extras/+/master/simpleperf/demo/SimpleperfExamplePureJava/app/profiling.gradle)
 for how to add `wrap.sh` in the apk.
 
 **4. Make sure C++ code is compiled with optimizing flags.**
 If the application contains C++ code, it can be compiled with -O0 flag in debug build type.
-This makes C++ code slow. Check [here]((https://android.googlesource.com/platform/system/extras/+/master/simpleperf/demo/SimpleperfExamplePureJava/app/profiling.gradle)
+This makes C++ code slow. Check [here](https://android.googlesource.com/platform/system/extras/+/master/simpleperf/demo/SimpleperfExamplePureJava/app/profiling.gradle)
 for how to avoid that.
 
 **5. Use native libraries with debug info in the apk when possible.**
 If the application contains C++ code or pre-compiled native libraries, try to use
 unstripped libraries in the apk. This helps simpleperf generating better profiling
-results. Check [here]((https://android.googlesource.com/platform/system/extras/+/master/simpleperf/demo/SimpleperfExamplePureJava/app/profiling.gradle)
+results. Check [here](https://android.googlesource.com/platform/system/extras/+/master/simpleperf/demo/SimpleperfExamplePureJava/app/profiling.gradle)
 for how to use unstripped libraries.
 
-Here we use [SimpleperfExamplePureJava]((https://android.googlesource.com/platform/system/extras/+/master/simpleperf/demo/SimpleperfExamplePureJava) as an example.
+Here we use [SimpleperfExamplePureJava](https://android.googlesource.com/platform/system/extras/+/master/simpleperf/demo/SimpleperfExamplePureJava) as an example.
 It builds an app-profiling.apk for profiling.
 
     $git clone https://android.googlesource.com/platform/system/extras
