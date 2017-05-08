@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "97ae518c_df5cb2ce",
+        "filename": "ziparchive-perf/Android.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1080359
+      },
+      "writtenOn": "2017-05-08T16:55:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "308b049e_46ebdd4b",
+      "revId": "caa3ae5732742487465a20b974bdbe225bc4073a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fc9cd388_a06a5ea9",
         "filename": "ziparchive-perf/Android.mk",
         "patchSetId": 2
@@ -30,6 +48,30 @@
       "writtenOn": "2017-05-08T15:13:05Z",
       "side": 1,
       "message": "-benchmark or -benchmarks, like everyone else",
+      "range": {
+        "startLine": 23,
+        "startChar": 26,
+        "endLine": 23,
+        "endChar": 30
+      },
+      "revId": "caa3ae5732742487465a20b974bdbe225bc4073a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3dea2a22_63bec374",
+        "filename": "ziparchive-perf/Android.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1080359
+      },
+      "writtenOn": "2017-05-08T16:55:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fc9cd388_a06a5ea9",
       "range": {
         "startLine": 23,
         "startChar": 26,
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "1e6897c8_02dd04c7",
+        "filename": "ziparchive-perf/Android.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1080359
+      },
+      "writtenOn": "2017-05-08T16:55:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "86323bbf_627013c0",
+      "range": {
+        "startLine": 28,
+        "startChar": 16,
+        "endLine": 28,
+        "endChar": 18
+      },
+      "revId": "caa3ae5732742487465a20b974bdbe225bc4073a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6566b151_74bf679d",
         "filename": "ziparchive-perf/Android.mk",
         "patchSetId": 2
@@ -76,6 +142,30 @@
       "writtenOn": "2017-05-08T15:13:05Z",
       "side": 1,
       "message": "no one should be manually adding include directories to LOCAL_C_INCLUDES.",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 21
+      },
+      "revId": "caa3ae5732742487465a20b974bdbe225bc4073a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a5addfdf_eee2a9ee",
+        "filename": "ziparchive-perf/Android.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1080359
+      },
+      "writtenOn": "2017-05-08T16:55:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6566b151_74bf679d",
       "range": {
         "startLine": 31,
         "startChar": 0,
@@ -111,6 +201,30 @@
     },
     {
       "key": {
+        "uuid": "517a3060_f37d775c",
+        "filename": "ziparchive-perf/NOTICE",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1080359
+      },
+      "writtenOn": "2017-05-08T16:55:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "11a87f65_345d0981",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 55
+      },
+      "revId": "caa3ae5732742487465a20b974bdbe225bc4073a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "87316b91_d7ccacf1",
         "filename": "ziparchive-perf/ziparchivePerf.cpp",
         "patchSetId": 2
@@ -122,6 +236,30 @@
       "writtenOn": "2017-05-08T15:13:05Z",
       "side": 1,
       "message": "why not benchmark/benchmark.h?",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 36
+      },
+      "revId": "caa3ae5732742487465a20b974bdbe225bc4073a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ff6071c0_fc3f63c5",
+        "filename": "ziparchive-perf/ziparchivePerf.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1080359
+      },
+      "writtenOn": "2017-05-08T16:55:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "87316b91_d7ccacf1",
       "range": {
         "startLine": 17,
         "startChar": 0,
@@ -151,6 +289,24 @@
     },
     {
       "key": {
+        "uuid": "e66b0d8f_04df63f4",
+        "filename": "ziparchive-perf/ziparchivePerf.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1080359
+      },
+      "writtenOn": "2017-05-08T16:55:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c4657e0a_d8e79b02",
+      "revId": "caa3ae5732742487465a20b974bdbe225bc4073a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "86e1cb60_80c4f772",
         "filename": "ziparchive-perf/ziparchivePerf.cpp",
         "patchSetId": 2
@@ -162,6 +318,30 @@
       "writtenOn": "2017-05-08T15:13:05Z",
       "side": 1,
       "message": "type*",
+      "range": {
+        "startLine": 38,
+        "startChar": 7,
+        "endLine": 38,
+        "endChar": 22
+      },
+      "revId": "caa3ae5732742487465a20b974bdbe225bc4073a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "717531ae_6f187dec",
+        "filename": "ziparchive-perf/ziparchivePerf.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1080359
+      },
+      "writtenOn": "2017-05-08T16:55:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "86e1cb60_80c4f772",
       "range": {
         "startLine": 38,
         "startChar": 7,
@@ -191,6 +371,24 @@
     },
     {
       "key": {
+        "uuid": "04e6dc84_48ffbf95",
+        "filename": "ziparchive-perf/ziparchivePerf.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1080359
+      },
+      "writtenOn": "2017-05-08T16:55:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7216e2aa_c194e11f",
+      "revId": "caa3ae5732742487465a20b974bdbe225bc4073a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0423d95d_0bbbd36f",
         "filename": "ziparchive-perf/ziparchivePerf.cpp",
         "patchSetId": 2
@@ -202,6 +400,24 @@
       "writtenOn": "2017-05-08T15:13:05Z",
       "side": 1,
       "message": "blank line or braces",
+      "revId": "caa3ae5732742487465a20b974bdbe225bc4073a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2d442e0b_6b9a86f7",
+        "filename": "ziparchive-perf/ziparchivePerf.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1080359
+      },
+      "writtenOn": "2017-05-08T16:55:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0423d95d_0bbbd36f",
       "revId": "caa3ae5732742487465a20b974bdbe225bc4073a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
