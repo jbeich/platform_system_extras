@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3e8dcc9f_5f39c127",
+        "filename": "ziparchive-perf/ziparchivePerf.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-05-08T20:50:59Z",
+      "side": 1,
+      "message": "we try to name benchmarks after the API they\u0027re testing. so here FindEntry or FindEntry_no_match.",
+      "range": {
+        "startLine": 73,
+        "startChar": 10,
+        "endLine": 73,
+        "endChar": 16
+      },
+      "revId": "a29dc3d9effb50a28bf19b741784eab4fe0c8477",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
