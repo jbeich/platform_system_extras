@@ -1,0 +1,210 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "308b049e_46ebdd4b",
+        "filename": "ziparchive-perf/Android.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-05-08T15:13:05Z",
+      "side": 1,
+      "message": "not needed any more",
+      "revId": "caa3ae5732742487465a20b974bdbe225bc4073a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fc9cd388_a06a5ea9",
+        "filename": "ziparchive-perf/Android.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-05-08T15:13:05Z",
+      "side": 1,
+      "message": "-benchmark or -benchmarks, like everyone else",
+      "range": {
+        "startLine": 23,
+        "startChar": 26,
+        "endLine": 23,
+        "endChar": 30
+      },
+      "revId": "caa3ae5732742487465a20b974bdbe225bc4073a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "86323bbf_627013c0",
+        "filename": "ziparchive-perf/Android.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-05-08T15:13:05Z",
+      "side": 1,
+      "message": "-g?",
+      "range": {
+        "startLine": 28,
+        "startChar": 16,
+        "endLine": 28,
+        "endChar": 18
+      },
+      "revId": "caa3ae5732742487465a20b974bdbe225bc4073a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6566b151_74bf679d",
+        "filename": "ziparchive-perf/Android.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-05-08T15:13:05Z",
+      "side": 1,
+      "message": "no one should be manually adding include directories to LOCAL_C_INCLUDES.",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 21
+      },
+      "revId": "caa3ae5732742487465a20b974bdbe225bc4073a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "11a87f65_345d0981",
+        "filename": "ziparchive-perf/NOTICE",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-05-08T15:13:05Z",
+      "side": 1,
+      "message": "i don\u0027t think this is needed. the build system will deal with this. just add the MODULE_LICENSE_* symlink.",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 55
+      },
+      "revId": "caa3ae5732742487465a20b974bdbe225bc4073a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "87316b91_d7ccacf1",
+        "filename": "ziparchive-perf/ziparchivePerf.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-05-08T15:13:05Z",
+      "side": 1,
+      "message": "why not benchmark/benchmark.h?",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 36
+      },
+      "revId": "caa3ae5732742487465a20b974bdbe225bc4073a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c4657e0a_d8e79b02",
+        "filename": "ziparchive-perf/ziparchivePerf.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-05-08T15:13:05Z",
+      "side": 1,
+      "message": "not allowed",
+      "revId": "caa3ae5732742487465a20b974bdbe225bc4073a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "86e1cb60_80c4f772",
+        "filename": "ziparchive-perf/ziparchivePerf.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-05-08T15:13:05Z",
+      "side": 1,
+      "message": "type*",
+      "range": {
+        "startLine": 38,
+        "startChar": 7,
+        "endLine": 38,
+        "endChar": 22
+      },
+      "revId": "caa3ae5732742487465a20b974bdbe225bc4073a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7216e2aa_c194e11f",
+        "filename": "ziparchive-perf/ziparchivePerf.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-05-08T15:13:05Z",
+      "side": 1,
+      "message": "std::unique_ptr",
+      "revId": "caa3ae5732742487465a20b974bdbe225bc4073a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0423d95d_0bbbd36f",
+        "filename": "ziparchive-perf/ziparchivePerf.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-05-08T15:13:05Z",
+      "side": 1,
+      "message": "blank line or braces",
+      "revId": "caa3ae5732742487465a20b974bdbe225bc4073a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
