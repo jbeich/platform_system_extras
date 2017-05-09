@@ -1,0 +1,12 @@
+// Copyright 2015 The Android Open Source Project
+
+cc_binary {
+    name: "bootctl",
+    srcs: ["bootctl.cpp"],
+    shared_libs: [
+        "libhidlbase",
+        "libhidltransport",
+        "libutils",
+        "android.hardware.boot@1.0",
+    ],
+}
