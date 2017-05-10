@@ -27,7 +27,8 @@
 #include "event_attr.h"
 #include "utils.h"
 
-#define EVENT_TYPE_TABLE_ENTRY(name, type, config) {name, type, config},
+#define EVENT_TYPE_TABLE_ENTRY(name, type, config, description) {name, type, config, description, ""},
+#define ARM_EVENT_TYPE_TABLE_ENTRY(name, type, config, description) {name, type, config, description, "arm"},
 
 static const std::vector<EventType> static_event_type_array = {
 #include "event_type_table.h"
@@ -54,7 +55,7 @@ static const std::vector<EventType> GetTracepointEventTypes() {
         LOG(DEBUG) << "unexpected id '" << id_content << "' in " << id_path;
         continue;
       }
-      result.push_back(EventType(system_name + ":" + event_name, PERF_TYPE_TRACEPOINT, id));
+      result.push_back(EventType(system_name + ":" + event_name, PERF_TYPE_TRACEPOINT, id, "", ""));
     }
   }
   std::sort(result.begin(), result.end(),
@@ -163,3 +164,4 @@ std::unique_ptr<EventTypeAndModifier> ParseEventType(const std::string& event_ty
   event_type_modifier->modifier = modifier;
   return event_type_modifier;
 }
+
