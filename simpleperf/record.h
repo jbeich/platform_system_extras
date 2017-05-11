@@ -362,8 +362,8 @@ struct LostRecord : public Record {
 };
 
 struct SampleRecord : public Record {
-  uint64_t sample_type;  // sample_type is a bit mask determining which fields
-                         // below are valid.
+  uint64_t sample_type;  // sample_type is a bit mask determining which fields below are valid.
+  uint64_t attr_config;
 
   PerfSampleIpType ip_data;               // Valid if PERF_SAMPLE_IP.
   PerfSampleTidType tid_data;             // Valid if PERF_SAMPLE_TID.

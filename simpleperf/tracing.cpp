@@ -24,14 +24,61 @@
 
 #include <android-base/file.h>
 #include <android-base/logging.h>
+#include <android-base/parseint.h>
+#include <android-base/quick_exit.h>
 #include <android-base/stringprintf.h>
 #include <android-base/strings.h>
+#include <android-base/test_utils.h>
 
+#include "command.h"
 #include "perf_event.h"
 #include "utils.h"
+#include "workload.h"
+
+#if defined(__linux__)
+#include <sys/wait.h>
+#endif
+
+std::unique_ptr<Tracing> ScopedTracing::current_tracing_;
 
 const char TRACING_INFO_MAGIC[10] = {23,  8,   68,  't', 'r',
                                      'a', 'c', 'i', 'n', 'g'};
+
+std::string TracingValue::toString() const {
+  switch (type) {
+    case TRACING_VALUE_UNSIGNED:
+      return std::to_string(unsigned_value);
+    case TRACING_VALUE_SIGNED:
+      return std::to_string(signed_value);
+    case TRACING_VALUE_STRING:
+      return string_value;
+    default:
+      return "unknown type";
+  }
+}
+
+bool TracingField::ExtractValue(const char* data, size_t data_size, TracingValue* value) const {
+  if (data_size < offset + elem_size * elem_count) {
+    return false;
+  }
+  value->type = TracingValue::TRACING_VALUE_UNKNOWN;
+  if (elem_count == 1) {
+    if (is_signed) {
+      value->type = TracingValue::TRACING_VALUE_SIGNED;
+      value->signed_value = static_cast<int64_t>(ConvertBytesToValue(data + offset, elem_size));
+    } else {
+      value->type = TracingValue::TRACING_VALUE_UNSIGNED;
+      value->unsigned_value = ConvertBytesToValue(data + offset, elem_size);
+    }
+  } else if (is_signed && elem_size == 1u) {
+    char s[elem_count + 1];
+    s[elem_count] = '\0';
+    strncpy(s, data + offset, elem_count);
+    value->type = TracingValue::TRACING_VALUE_STRING;
+    value->string_value = s;
+  }
+  return true;
+}
 
 template <class T>
 void AppendData(std::vector<char>& data, const T& s) {
@@ -86,11 +133,7 @@ struct TraceType {
 class TracingFile {
  public:
   TracingFile();
-  bool RecordHeaderFiles();
-  void RecordFtraceFiles(const std::vector<TraceType>& trace_types);
-  bool RecordEventFiles(const std::vector<TraceType>& trace_types);
-  bool RecordKallsymsFile();
-  bool RecordPrintkFormatsFile();
+  void AddEventFormat(const std::string& event, const std::string& format);
   std::vector<char> BinaryFormat() const;
   void LoadFromBinary(const std::vector<char>& data);
   void Dump(size_t indent) const;
@@ -104,6 +147,8 @@ class TracingFile {
   char endian;
   uint8_t size_of_long;
   uint32_t page_size;
+  // header_page_file, header_event_file, ftrace_format_files,
+  // kallsyms_file, printk_formats_file are only kept to be compatible with linux-tools-perf.
   std::string header_page_file;
   std::string header_event_file;
 
@@ -123,57 +168,8 @@ TracingFile::TracingFile() {
   page_size = static_cast<uint32_t>(::GetPageSize());
 }
 
-bool TracingFile::RecordHeaderFiles() {
-  if (!android::base::ReadFileToString(
-          "/sys/kernel/debug/tracing/events/header_page", &header_page_file)) {
-    PLOG(ERROR)
-        << "failed to read /sys/kernel/debug/tracing/events/header_page";
-    return false;
-  }
-  if (!android::base::ReadFileToString(
-          "/sys/kernel/debug/tracing/events/header_event",
-          &header_event_file)) {
-    PLOG(ERROR)
-        << "failed to read /sys/kernel/debug/tracing/events/header_event";
-    return false;
-  }
-  return true;
-}
-
-void TracingFile::RecordFtraceFiles(const std::vector<TraceType>& trace_types) {
-  for (const auto& type : trace_types) {
-    std::string format_path = android::base::StringPrintf(
-        "/sys/kernel/debug/tracing/events/ftrace/%s/format", type.name.c_str());
-    std::string format_data;
-    if (android::base::ReadFileToString(format_path, &format_data)) {
-      ftrace_format_files.push_back(std::move(format_data));
-    }
-  }
-}
-
-bool TracingFile::RecordEventFiles(const std::vector<TraceType>& trace_types) {
-  for (const auto& type : trace_types) {
-    std::string format_path = android::base::StringPrintf(
-        "/sys/kernel/debug/tracing/events/%s/%s/format", type.system.c_str(),
-        type.name.c_str());
-    std::string format_data;
-    if (!android::base::ReadFileToString(format_path, &format_data)) {
-      PLOG(ERROR) << "failed to read " << format_path;
-      return false;
-    }
-    event_format_files.push_back(
-        std::make_pair(type.system, std::move(format_data)));
-  }
-  return true;
-}
-
-bool TracingFile::RecordPrintkFormatsFile() {
-  if (!android::base::ReadFileToString(
-          "/sys/kernel/debug/tracing/printk_formats", &printk_formats_file)) {
-    PLOG(ERROR) << "failed to read /sys/kernel/debug/tracing/printk_formats";
-    return false;
-  }
-  return true;
+void TracingFile::AddEventFormat(const std::string& event, const std::string& format) {
+  event_format_files.push_back(std::make_pair(event.substr(0, event.find(':')), format));
 }
 
 std::vector<char> TracingFile::BinaryFormat() const {
@@ -330,20 +326,20 @@ std::vector<TracingFormat> TracingFile::LoadTracingFormatsFromEventFiles()
     FormatParsingState state = FormatParsingState::READ_NAME;
     for (const auto& s : strs) {
       if (state == FormatParsingState::READ_NAME) {
-        size_t pos = s.find_first_of("name:");
+        size_t pos = s.find("name:");
         if (pos != std::string::npos) {
           format.name = android::base::Trim(s.substr(pos + strlen("name:")));
           state = FormatParsingState::READ_ID;
         }
       } else if (state == FormatParsingState::READ_ID) {
-        size_t pos = s.find_first_of("ID:");
+        size_t pos = s.find("ID:");
         if (pos != std::string::npos) {
           format.id =
               strtoull(s.substr(pos + strlen("ID:")).c_str(), nullptr, 10);
           state = FormatParsingState::READ_FIELDS;
         }
       } else if (state == FormatParsingState::READ_FIELDS) {
-        size_t pos = s.find_first_of("field:");
+        size_t pos = s.find("field:");
         if (pos != std::string::npos) {
           TracingField field = ParseTracingField(s);
           format.fields.push_back(field);
@@ -364,17 +360,17 @@ Tracing::~Tracing() { delete tracing_file_; }
 
 void Tracing::Dump(size_t indent) { tracing_file_->Dump(indent); }
 
-TracingFormat Tracing::GetTracingFormatHavingId(uint64_t trace_event_id) {
+const TracingFormat* Tracing::GetTracingFormatHavingId(uint64_t trace_event_id) {
   if (tracing_formats_.empty()) {
     tracing_formats_ = tracing_file_->LoadTracingFormatsFromEventFiles();
   }
   for (const auto& format : tracing_formats_) {
     if (format.id == trace_event_id) {
-      return format;
+      return &format;
     }
   }
   LOG(FATAL) << "no tracing format for id " << trace_event_id;
-  return TracingFormat();
+  return nullptr;
 }
 
 std::string Tracing::GetTracingEventNameHavingId(uint64_t trace_event_id) {
@@ -396,31 +392,166 @@ const std::string& Tracing::GetKallsyms() const {
 
 uint32_t Tracing::GetPageSize() const { return tracing_file_->GetPageSize(); }
 
+#if defined(__linux__)
+
+class SimpleperfTracer : public Tracer {
+ public:
+  bool GetAllEvents(std::vector<std::pair<std::string, uint64_t>>* event_with_ids) override;
+  bool GetEventFormats(const std::vector<std::string>& events,
+                       std::vector<std::string>* formats) override;
+  bool StartTracing(const std::vector<std::string>& events, const std::string& clock,
+                    const std::string& output_filename) override;
+  bool StopTracing() override;
+
+ private:
+  std::unique_ptr<Workload> CreateTracerCmdWorkload(const std::vector<std::string>& args);
+
+  std::unique_ptr<Workload> tracing_workload_;
+};
+
+bool SimpleperfTracer::GetAllEvents(std::vector<std::pair<std::string, uint64_t>>* event_with_ids) {
+  TemporaryFile tmpfile;
+  std::unique_ptr<Workload> child_process =
+      CreateTracerCmdWorkload({"--list-events", "-o", tmpfile.path});
+  int status;
+  if (child_process == nullptr || !child_process->Join(0, &status)) {
+    return false;
+  }
+  if (!(WIFEXITED(status) && WEXITSTATUS(status) == 0)) {
+    LOG(ERROR) << "failed to run tracer to list events, status = " << status;
+    return false;
+  }
+  std::string content;
+  if (!ReadFile(tmpfile.path, &content)) {
+    return false;
+  }
+  std::vector<std::string> lines = android::base::Split(content, "\n");
+  event_with_ids->clear();
+  for (auto& line : lines) {
+    size_t sep = line.find(' ');
+    if (sep != std::string::npos && sep > 0 && sep + 1 < line.size()) {
+      uint64_t id;
+      if (android::base::ParseUint(line.substr(sep + 1), &id)) {
+        event_with_ids->push_back(std::make_pair(line.substr(0, sep), id));
+      }
+    }
+  }
+  return true;
+}
+
+bool SimpleperfTracer::GetEventFormats(const std::vector<std::string>& events,
+                                       std::vector<std::string>* formats) {
+  TemporaryFile tmpfile;
+  std::string event_arg = android::base::Join(events, ',');
+  std::unique_ptr<Workload> child_process =
+      CreateTracerCmdWorkload({"--dump-events", event_arg, "-o", tmpfile.path});
+  int status;
+  if (child_process == nullptr || !child_process->Join(&status)) {
+    return false;
+  }
+  if (!(WIFEXITED(status) && WEXITSTATUS(status) == 0)) {
+    LOG(ERROR) << "failed to run tracer to dump events, status = " << status;
+    return false;
+  }
+  std::string content;
+  if (!ReadFile(tmpfile.path, &content)) {
+    return false;
+  }
+  size_t i = 0;
+  size_t content_pos = 0;
+  std::vector<size_t> pos_v;
+  for (; i < events.size() && content_pos < content.size(); ++i) {
+    std::string s = "name: " + events[i].substr(events[i].find(':') + 1);
+    size_t pos = content.find(s, content_pos);
+    if (pos == std::string::npos || (!pos_v.empty() && pos_v.back() >= pos)) {
+      break;
+    }
+    pos_v.push_back(pos);
+  }
+  if (i != events.size()) {
+    LOG(ERROR) << "wrong event format output";
+    return false;
+  }
+  pos_v.push_back(content.size());
+  formats->clear();
+  for (size_t i = 0; i < pos_v.size(); ++i) {
+    formats->push_back(content.substr(pos_v[i], pos_v[i+1] - pos_v[i]));
+  }
+  return true;
+}
+
+bool SimpleperfTracer::StartTracing(const std::vector<std::string>& events,
+                                    const std::string& clock,
+                                    const std::string& output_filename) {
+  if (tracing_workload_ != nullptr) {
+    LOG(ERROR) << "a tracing workload already exists.";
+    return false;
+  }
+  std::string event_arg = android::base::Join(events, ',');
+  tracing_workload_ = CreateTracerCmdWorkload({"--trace-events", event_arg, "-o", output_filename});
+  return tracing_workload_ != nullptr;
+}
+
+bool SimpleperfTracer::StopTracing() {
+  if (tracing_workload_ == nullptr) {
+    LOG(ERROR) << "tracing workload doesn't exist.";
+    return false;
+  }
+  tracing_workload_->SendSignal(SIGINT);
+  int status;
+  if (!tracing_workload_->Join(SIGINT, &status)) {
+    return false;
+  }
+  tracing_workload_ = nullptr;
+  if (!(WIFSIGNALED(status) && WTERMSIG(status) == SIGINT)) {
+    LOG(ERROR) << "tracing workload exit with unexpected status " << status;
+    return false;
+  }
+  return true;
+}
+
+std::unique_ptr<Workload> SimpleperfTracer::CreateTracerCmdWorkload(
+    const std::vector<std::string>& args) {
+  auto child_function = [&]() {
+    std::unique_ptr<Command> tracer_cmd = CreateCommandInstance("tracer");
+    CHECK(tracer_cmd != nullptr);
+    android::base::quick_exit(tracer_cmd->Run(args) ? 0 : 1);
+  };
+  std::unique_ptr<Workload> result = Workload::CreateWorkload(child_function);
+  if (result == nullptr || !result->Start()) {
+    return nullptr;
+  }
+  return result;
+}
+
+std::unique_ptr<Tracer> Tracer::CreateInstance() {
+  if (IsRoot()) {
+    return std::unique_ptr<Tracer>(new SimpleperfTracer());
+  }
+  return nullptr;
+}
+
 bool GetTracingData(const std::vector<const EventType*>& event_types,
                     std::vector<char>* data) {
-  data->clear();
-  std::vector<TraceType> trace_types;
-  for (const auto& type : event_types) {
-    CHECK_EQ(PERF_TYPE_TRACEPOINT, type->type);
-    size_t pos = type->name.find(':');
-    TraceType trace_type;
-    trace_type.system = type->name.substr(0, pos);
-    trace_type.name = type->name.substr(pos + 1);
-    trace_types.push_back(trace_type);
+  std::unique_ptr<Tracer> tracer = Tracer::CreateInstance();
+  if (tracer == nullptr) {
+    LOG(ERROR) << "No tracer is available";
+    return false;
+  }
+  std::vector<std::string> events;
+  for (auto& type : event_types) {
+    events.push_back(type->name);
+  }
+  std::vector<std::string> formats;
+  if (!tracer->GetEventFormats(events, &formats)) {
+    return false;
   }
   TracingFile tracing_file;
-  if (!tracing_file.RecordHeaderFiles()) {
-    return false;
-  }
-  tracing_file.RecordFtraceFiles(trace_types);
-  if (!tracing_file.RecordEventFiles(trace_types)) {
-    return false;
-  }
-  // Don't record /proc/kallsyms here, as it will be contained in
-  // KernelSymbolRecord.
-  if (!tracing_file.RecordPrintkFormatsFile()) {
-    return false;
+  for (size_t i = 0; i < events.size(); ++i) {
+    tracing_file.AddEventFormat(events[i], formats[i]);
   }
   *data = tracing_file.BinaryFormat();
   return true;
 }
+
+#endif   // defined(__linux__)

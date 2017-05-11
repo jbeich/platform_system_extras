@@ -119,6 +119,7 @@ class ThreadTree {
   void Update(const Record& record);
 
   std::vector<Dso*> GetAllDsos() const;
+  std::vector<int> GetThreadIds() const;
 
  private:
   ThreadEntry* CreateThread(int pid, int tid);

@@ -29,6 +29,7 @@
 #include <android-base/parsedouble.h>
 #include <android-base/parseint.h>
 #include <android-base/strings.h>
+#include <android-base/test_utils.h>
 
 #include "command.h"
 #include "dwarf_unwind.h"
@@ -143,6 +144,8 @@ class RecordCommand : public Command {
 "                 This option is used to provide files with symbol table and\n"
 "                 debug information, which are used by --dump-symbols and -g.\n"
 "-t tid1,tid2,... Record events on existing threads. Mutually exclusive with -a.\n"
+"-trace-sleep-time   Use tracing event sched:sched_switch to record where the\n"
+"                   monitored threads are sleeping on.\n"
             // clang-format on
             ),
         use_sample_freq_(false),
@@ -166,7 +169,8 @@ class RecordCommand : public Command {
         start_sampling_time_in_ns_(0),
         sample_record_count_(0),
         lost_record_count_(0),
-        start_profiling_fd_(-1) {
+        start_profiling_fd_(-1),
+        trace_sleep_time_(false) {
     // Stop profiling if parent exits.
     prctl(PR_SET_PDEATHSIG, SIGHUP, 0, 0, 0);
   }
@@ -192,6 +196,11 @@ class RecordCommand : public Command {
   bool DumpBuildIdFeature();
   bool DumpFileFeature();
   void CollectHitFileInfo(const SampleRecord& r);
+
+  // Functions used to add sleep time.
+  bool CanTraceSleepTime();
+  bool StartTracingSleepTime();
+  bool StopTracingSleepTime();
 
   bool use_sample_freq_;
   uint64_t sample_freq_;  // Sample 'sample_freq_' times per second.
@@ -223,6 +232,16 @@ class RecordCommand : public Command {
   uint64_t sample_record_count_;
   uint64_t lost_record_count_;
   int start_profiling_fd_;
+
+  // members used to trace sleep time.
+  bool trace_sleep_time_;
+
+  struct TraceSleepTimeInfo {
+    std::unique_ptr<Tracer> tracer;
+    std::unique_ptr<TemporaryFile> perf_tmpfile;
+    std::unique_ptr<TemporaryFile> trace_tmpfile;
+    std::string saved_record_filename;
+  } trace_sleep_time_info_;
 };
 
 bool RecordCommand::Run(const std::vector<std::string>& args) {
@@ -242,6 +261,9 @@ bool RecordCommand::Run(const std::vector<std::string>& args) {
     if (!event_selection_set_.AddEventType(default_measured_event_type)) {
       return false;
     }
+  }
+  if (trace_sleep_time_ && !StartTracingSleepTime()) {
+    return false;
   }
   if (!SetEventSelectionFlags()) {
     return false;
@@ -335,6 +357,10 @@ bool RecordCommand::Run(const std::vector<std::string>& args) {
     return false;
   }
   if (!event_selection_set_.FinishReadMmapEventData()) {
+    return false;
+  }
+
+  if (trace_sleep_time_ && !StopTracingSleepTime()) {
     return false;
   }
 
@@ -546,6 +572,11 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
         return false;
       }
       event_selection_set_.AddMonitoredThreads(tids);
+    } else if (args[i] == "--trace-sleep-time") {
+      if (!CanTraceSleepTime()) {
+        return false;
+      }
+      trace_sleep_time_ = true;
     } else {
       ReportUnknownOption(args, i);
       return false;
@@ -689,6 +720,7 @@ bool RecordCommand::DumpTracingData() {
   std::vector<const EventType*> tracepoint_event_types =
       event_selection_set_.GetTracepointEvents();
   if (tracepoint_event_types.empty()) {
+    LOG(ERROR) << "No need to dump tracing data";
     return true;  // No need to dump tracing data.
   }
   std::vector<char> tracing_data;
@@ -1136,6 +1168,194 @@ void RecordCommand::CollectHitFileInfo(const SampleRecord& r) {
       }
     }
   }
+}
+
+bool RecordCommand::CanTraceSleepTime() {
+  if (FindEventTypeByName("sched:sched_switch") == nullptr) {
+    LOG(ERROR) << "sched:sched_switch is not supported on device";
+    return false;
+  }
+  if (Tracer::CreateInstance() == nullptr) {
+    LOG(ERROR) << "Can't find tracer to trace sched_switch events.";
+    return false;
+  }
+  return true;
+}
+
+bool RecordCommand::StartTracingSleepTime() {
+  // To trace sleep time, we need:
+  // 1. Add sched:sched_switch event to get the callchain of where the monitored thread is
+  //    scheduled out.
+  // 2. Use tracer to trace global sched:sched_switch info, to know when the monitored thread is
+  //    scheduled in.
+  if (!event_selection_set_.AddEventType("sched:sched_switch")) {
+    return false;
+  }
+  trace_sleep_time_info_.tracer = Tracer::CreateInstance();
+  if (trace_sleep_time_info_.tracer == nullptr) {
+    return false;
+  }
+  trace_sleep_time_info_.perf_tmpfile.reset(new TemporaryFile);
+  trace_sleep_time_info_.trace_tmpfile.reset(new TemporaryFile);
+  trace_sleep_time_info_.saved_record_filename = record_filename_;
+  record_filename_ = trace_sleep_time_info_.perf_tmpfile->path;
+  if (!trace_sleep_time_info_.tracer->StartTracing({"sched:sched_switch"}, "perf",
+                                                   trace_sleep_time_info_.trace_tmpfile->path)) {
+    return false;
+  }
+  return true;
+}
+
+class SchedInfoMerger {
+ private:
+  struct SchedInfo {
+    uint64_t timestamp_in_ns;
+    int to_pid;
+  };
+
+ public:
+  SchedInfoMerger(RecordFileWriter* old_writer, RecordFileWriter* new_writer,
+                        const std::string& trace_filename, const std::vector<int>& threads,
+                        const perf_event_attr* sched_switch_event_attr,
+                        uint64_t sched_switch_event_id)
+      : old_writer_(old_writer), new_writer_(new_writer), trace_filename_(trace_filename),
+        sched_switch_event_attr_(sched_switch_event_attr),
+        sched_switch_event_id_(sched_switch_event_id), no_more_sched_info_(false) {
+    for (auto& tid : threads) {
+      thread_ip_map_[tid] = 0;
+    }
+  }
+
+  bool Merge() {
+    FILE* fp = fopen(trace_filename_.c_str(), "r");
+    if (fp == nullptr) {
+      PLOG(ERROR) << "fopen";
+      return false;
+    }
+    trace_reader_.reset(new LineReader(fp));
+
+    GetNextSchedInfo();
+    bool result = old_writer_->ReadDataSection(
+        [this](std::unique_ptr<Record> r) {
+          return ReadRecordCallback(std::move(r));
+        });
+    return result;
+  }
+
+ private:
+  bool ReadRecordCallback(std::unique_ptr<Record> record) {
+    // compare time and dump records.
+  }
+
+  std::unique_ptr<SampleRecord> BuildRecord() {
+    auto it = thread_ip_map_.find(current_sched_info_.to_pid);
+    if (it != thread_ip_map_.end() && it->second != 0) {
+      return std::unique_ptr<SampleRecord>(new SampleRecord(
+          *sched_switch_event_attr, sched_switch_event_id, it->second,
+          current_sched_info_.to_pid,));
+    }
+    return nullptr;
+  }
+
+  void GetNextSchedInfo() {
+    while (true) {
+      char* line = trace_reader_->ReadLine();
+      if (line == nullptr) {
+        break;
+      }
+      // parse line like: 2174872.383765: sched_switch: ...  next_pid=0 next_prio=120
+      std::string s = line;
+      size_t event_pos = s.find("sched_switch");
+      if (event_pos == std::string::npos) {
+        continue;
+      }
+      size_t next_pid_pos = s.find("next_pid=");
+      if (next_pid_pos == std::string::npos) {
+        continue;
+      }
+      next_pid_pos += strlen("next_pid=");
+      size_t next_pid_end_pos = s.find(' ', next_pid_pos);
+      if (next_pid_end_pos == std::string::npos) {
+        continue;
+      }
+      int to_pid;
+      if (!android::base::ParseInt(s.substr(next_pid_pos, next_pid_end_pos - next_pid_pos),
+                                   &to_pid)) {
+        continue;
+      }
+      // We don't care unrelated threads.
+      if (thread_ip_map_.find(to_pid) == thread_ip_map_.end()) {
+        continue;
+      }
+
+      size_t usec_time_end_pos = s.rfind(':', event_pos);
+      size_t sec_time_end_pos = s.rfind('.', usec_time_end_pos);
+      size_t prev_sec_time_start_pos = s.rfind(' ', sec_time_end_pos);
+      if (usec_time_end_pos == std::string::npos || sec_time_end_pos == std::string::npos ||
+          prev_sec_time_start_pos == std::string::npos) {
+        continue;
+      }
+      std::string sec_str = s.substr(prev_sec_time_start_pos + 1,
+                                     sec_time_end_pos - prev_sec_time_start_pos - 1);
+      std::string usec_str = s.substr(sec_time_end_pos + 1,
+                                      usec_time_end_pos - sec_time_end_pos - 1);
+      uint64_t sec_part;
+      uint64_t usec_part;
+      if (!android::base::ParseUint(sec_str, &sec_part) ||
+          !android::base::ParseUint(usec_str, &usec_part)) {
+        continue;
+      }
+      current_sched_info_.to_pid = to_pid;
+      current_sched_info_.timestamp_in_ns = (sec_part * 1000000 + usec_part) * 1000;
+    }
+    no_more_sched_info_ = true;
+  }
+
+  RecordFileWriter* old_writer_;
+  RecordFileWriter* new_writer_;
+  std::string trace_filename_;
+  const perf_event_attr* sched_switch_event_attr_;
+  uint64_t sched_switch_event_id_;
+  std::unique_ptr<LineReader> trace_reader_;
+  std::unordered_map<int, uint64_t> thread_ip_map_;
+  SchedInfo current_sched_info_;
+  bool no_more_sched_info_;
+};
+
+bool RecordCommand::StopTracingSleepTime() {
+  if (!trace_sleep_time_info_.tracer->StopTracing()) {
+    return false;
+  }
+  // Convert tracer sched switch info into SampleRecords, and merge them into DataSection of
+  // perf.data.
+  record_filename_ = trace_sleep_time_info_.saved_record_filename;
+  std::unique_ptr<RecordFileWriter> new_writer = RecordCommand::CreateRecordFile(record_filename_);
+  if (new_writer == nullptr) {
+    return false;
+  }
+  const perf_event_attr* sched_switch_event_attr = nullptr;
+  uint64_t sched_switch_event_id;
+  std::vector<EventAttrWithId> event_attrs = event_selection_set_.GetEventAttrWithId();
+  const EventType* type = FindEventTypeByName("sched:sched_switch");
+  CHECK(type != nullptr);
+  for (auto& event : event_attrs) {
+    if (event.attr->type == PERF_TYPE_TRACEPOINT && event.attr->config == type->config) {
+      sched_switch_event_attr = event.attr;
+      sched_switch_event_id = event.ids[0];
+    }
+  }
+  CHECK(sched_switch_event_attr != nullptr);
+
+  SchedInfoMerger merger(record_file_writer_.get(), new_writer.get(),
+                               trace_sleep_time_info_.trace_tmpfile,
+                               thread_tree_.GetThreadIds(),
+                               sched_switch_event_attr,
+                               sched_switch_event_id);
+  if (!merger.Merge()) {
+    return false;
+  }
+  record_file_writer_.reset(new_writer.release());
+  return true;
 }
 
 void RegisterRecordCommand() {

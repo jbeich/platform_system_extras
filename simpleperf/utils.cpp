@@ -344,3 +344,19 @@ constexpr int SIMPLEPERF_VERSION = 1;
 std::string GetSimpleperfVersion() {
   return android::base::StringPrintf("%d.%s", SIMPLEPERF_VERSION, SIMPLEPERF_REVISION);
 }
+
+bool ReadFile(const std::string& file, std::string* content) {
+  if (!android::base::ReadFileToString(file, content)) {
+    PLOG(ERROR) << "failed to read " << file;
+    return false;
+  }
+  return true;
+}
+
+bool WriteFile(const std::string& file, const std::string& content) {
+  if (!android::base::WriteStringToFile(content, file)) {
+    PLOG(ERROR) << "failed to write " << file;
+    return false;
+  }
+  return true;
+}

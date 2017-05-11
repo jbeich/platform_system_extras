@@ -380,6 +380,7 @@ SampleRecord::SampleRecord(const perf_event_attr& attr, const char* p)
   const char* end = p + size();
   p += header_size();
   sample_type = attr.sample_type;
+  attr_config = attr.config;
 
   // Set a default id value to report correctly even if ID is not recorded.
   id_data.id = 0;
@@ -465,6 +466,7 @@ SampleRecord::SampleRecord(const perf_event_attr& attr, uint64_t id,
                            const std::vector<uint64_t>& ips) {
   SetTypeAndMisc(PERF_RECORD_SAMPLE, PERF_RECORD_MISC_USER);
   sample_type = attr.sample_type;
+  attr_config = attr.config;
   CHECK_EQ(0u, sample_type & ~(PERF_SAMPLE_IP | PERF_SAMPLE_TID
       | PERF_SAMPLE_TIME | PERF_SAMPLE_ID | PERF_SAMPLE_CPU
       | PERF_SAMPLE_PERIOD | PERF_SAMPLE_CALLCHAIN | PERF_SAMPLE_REGS_USER
@@ -628,10 +630,25 @@ void SampleRecord::DumpData(size_t indent) const {
   }
   if (sample_type & PERF_SAMPLE_RAW) {
     PrintIndented(indent, "raw size=%zu\n", raw_data.size);
-    const uint32_t* data = reinterpret_cast<const uint32_t*>(raw_data.data);
-    size_t size = raw_data.size / sizeof(uint32_t);
-    for (size_t i = 0; i < size; ++i) {
-      PrintIndented(indent + 1, "0x%08x (%zu)\n", data[i], data[i]);
+    const TracingFormat* format = nullptr;
+    Tracing* tracing = ScopedTracing::GetCurrentTracing();
+    if (tracing != nullptr) {
+      format = tracing->GetTracingFormatHavingId(attr_config);
+    }
+    if (format != nullptr) {
+      for (const auto& field : format->fields) {
+        TracingValue value;
+        if (field.ExtractValue(raw_data.data, raw_data.size, &value)) {
+          PrintIndented(indent + 1, "offset %zu: %s = %s\n", field.offset, field.name.c_str(),
+                        value.toString().c_str());
+        }
+      }
+    } else {
+      const uint32_t* data = reinterpret_cast<const uint32_t*>(raw_data.data);
+      size_t size = raw_data.size / sizeof(uint32_t);
+      for (size_t i = 0; i < size; ++i) {
+        PrintIndented(indent + 1, "0x%08x (%zu)\n", data[i], data[i]);
+      }
     }
   }
   if (sample_type & PERF_SAMPLE_BRANCH_STACK) {
