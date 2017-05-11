@@ -29,6 +29,7 @@
 #include <android-base/parsedouble.h>
 #include <android-base/parseint.h>
 #include <android-base/strings.h>
+#include <android-base/test_utils.h>
 
 #include "command.h"
 #include "dwarf_unwind.h"
@@ -41,6 +42,7 @@
 #include "read_elf.h"
 #include "record.h"
 #include "record_file.h"
+#include "SchedInfoMerger.h"
 #include "thread_tree.h"
 #include "tracing.h"
 #include "utils.h"
@@ -143,6 +145,8 @@ class RecordCommand : public Command {
 "                 This option is used to provide files with symbol table and\n"
 "                 debug information, which are used by --dump-symbols and -g.\n"
 "-t tid1,tid2,... Record events on existing threads. Mutually exclusive with -a.\n"
+"-trace-sleep-time   Use tracing event sched:sched_switch to record where the\n"
+"                   monitored threads are sleeping on.\n"
             // clang-format on
             ),
         use_sample_freq_(false),
@@ -166,7 +170,8 @@ class RecordCommand : public Command {
         start_sampling_time_in_ns_(0),
         sample_record_count_(0),
         lost_record_count_(0),
-        start_profiling_fd_(-1) {
+        start_profiling_fd_(-1),
+        trace_sleep_time_(false) {
     // Stop profiling if parent exits.
     prctl(PR_SET_PDEATHSIG, SIGHUP, 0, 0, 0);
   }
@@ -192,6 +197,11 @@ class RecordCommand : public Command {
   bool DumpBuildIdFeature();
   bool DumpFileFeature();
   void CollectHitFileInfo(const SampleRecord& r);
+
+  // Functions used to add sleep time.
+  bool CanTraceSleepTime();
+  bool StartTracingSleepTime();
+  bool StopTracingSleepTime();
 
   bool use_sample_freq_;
   uint64_t sample_freq_;  // Sample 'sample_freq_' times per second.
@@ -223,6 +233,16 @@ class RecordCommand : public Command {
   uint64_t sample_record_count_;
   uint64_t lost_record_count_;
   int start_profiling_fd_;
+
+  // members used to trace sleep time.
+  bool trace_sleep_time_;
+
+  struct TraceSleepTimeInfo {
+    std::unique_ptr<Tracer> tracer;
+    std::unique_ptr<TemporaryFile> perf_tmpfile;
+    std::unique_ptr<TemporaryFile> trace_tmpfile;
+    std::string saved_record_filename;
+  } trace_sleep_time_info_;
 };
 
 bool RecordCommand::Run(const std::vector<std::string>& args) {
@@ -242,6 +262,9 @@ bool RecordCommand::Run(const std::vector<std::string>& args) {
     if (!event_selection_set_.AddEventType(default_measured_event_type)) {
       return false;
     }
+  }
+  if (trace_sleep_time_ && !StartTracingSleepTime()) {
+    return false;
   }
   if (!SetEventSelectionFlags()) {
     return false;
@@ -335,6 +358,10 @@ bool RecordCommand::Run(const std::vector<std::string>& args) {
     return false;
   }
   if (!event_selection_set_.FinishReadMmapEventData()) {
+    return false;
+  }
+
+  if (trace_sleep_time_ && !StopTracingSleepTime()) {
     return false;
   }
 
@@ -546,6 +573,11 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
         return false;
       }
       event_selection_set_.AddMonitoredThreads(tids);
+    } else if (args[i] == "--trace-sleep-time") {
+      if (!CanTraceSleepTime()) {
+        return false;
+      }
+      trace_sleep_time_ = true;
     } else {
       ReportUnknownOption(args, i);
       return false;
@@ -689,6 +721,7 @@ bool RecordCommand::DumpTracingData() {
   std::vector<const EventType*> tracepoint_event_types =
       event_selection_set_.GetTracepointEvents();
   if (tracepoint_event_types.empty()) {
+    LOG(ERROR) << "No need to dump tracing data";
     return true;  // No need to dump tracing data.
   }
   std::vector<char> tracing_data;
@@ -809,10 +842,12 @@ bool RecordCommand::ProcessRecord(Record* record) {
     }
   }
   UpdateRecordForEmbeddedElfPath(record);
-  if (unwind_dwarf_callchain_ && !post_unwind_) {
+  if ((unwind_dwarf_callchain_ && !post_unwind_) || trace_sleep_time_) {
     thread_tree_.Update(*record);
-    if (!UnwindRecord(record)) {
-      return false;
+    if (unwind_dwarf_callchain_ && !post_unwind_) {
+      if (!UnwindRecord(record)) {
+        return false;
+      }
     }
   }
   if (record->type() == PERF_RECORD_SAMPLE) {
@@ -1136,6 +1171,65 @@ void RecordCommand::CollectHitFileInfo(const SampleRecord& r) {
       }
     }
   }
+}
+
+bool RecordCommand::CanTraceSleepTime() {
+  if (FindEventTypeByName("sched:sched_switch") == nullptr) {
+    LOG(ERROR) << "sched:sched_switch is not supported on device";
+    return false;
+  }
+  if (Tracer::CreateInstance() == nullptr) {
+    LOG(ERROR) << "Can't find tracer to trace sched_switch events.";
+    return false;
+  }
+  return true;
+}
+
+bool RecordCommand::StartTracingSleepTime() {
+  // To trace sleep time, we need:
+  // 1. Add sched:sched_switch event to get the callchain of where the monitored thread is
+  //    scheduled out.
+  // 2. Use tracer to trace global sched:sched_switch info, to know when the monitored thread is
+  //    scheduled in.
+  if (!event_selection_set_.AddEventType("sched:sched_switch")) {
+    return false;
+  }
+  trace_sleep_time_info_.tracer = Tracer::CreateInstance();
+  if (trace_sleep_time_info_.tracer == nullptr) {
+    return false;
+  }
+  trace_sleep_time_info_.perf_tmpfile.reset(new TemporaryFile);
+  trace_sleep_time_info_.trace_tmpfile.reset(new TemporaryFile);
+  trace_sleep_time_info_.saved_record_filename = record_filename_;
+  record_filename_ = trace_sleep_time_info_.perf_tmpfile->path;
+  if (!trace_sleep_time_info_.tracer->StartTracing({"sched:sched_switch"}, "perf",
+                                                   trace_sleep_time_info_.trace_tmpfile->path)) {
+    return false;
+  }
+  return true;
+}
+
+bool RecordCommand::StopTracingSleepTime() {
+  if (!trace_sleep_time_info_.tracer->StopTracing()) {
+    return false;
+  }
+  // Convert tracer sched switch info into SampleRecords, and merge them into DataSection of
+  // perf.data.
+  record_filename_ = trace_sleep_time_info_.saved_record_filename;
+  std::unique_ptr<RecordFileWriter> new_writer = RecordCommand::CreateRecordFile(record_filename_);
+  if (new_writer == nullptr) {
+    return false;
+  }
+  SchedInfoMerger merger(record_file_writer_.get(), new_writer.get(),
+                         trace_sleep_time_info_.trace_tmpfile->path,
+                         thread_tree_.GetThreads(),
+                         event_selection_set_.GetEventAttrWithId());
+
+  if (!merger.Merge()) {
+    return false;
+  }
+  record_file_writer_.reset(new_writer.release());
+  return true;
 }
 
 void RegisterRecordCommand() {

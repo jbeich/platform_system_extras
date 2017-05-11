@@ -42,9 +42,9 @@ std::unique_ptr<Workload> Workload::CreateWorkload(const std::function<void ()>&
 
 Workload::~Workload() {
   if (work_pid_ != -1 && work_state_ != NotYetCreateNewProcess) {
-    if (!Workload::WaitChildProcess(false, false)) {
-      kill(work_pid_, SIGKILL);
-      Workload::WaitChildProcess(true, true);
+    if (!Workload::WaitChildProcess(false, 0, nullptr)) {
+      SendSignal(SIGKILL);
+      Workload::WaitChildProcess(true, SIGKILL, nullptr);
     }
   }
   if (start_signal_fd_ != -1) {
@@ -53,6 +53,11 @@ Workload::~Workload() {
   if (exec_child_fd_ != -1) {
     close(exec_child_fd_);
   }
+}
+
+
+void Workload::SendSignal(int sig) {
+  kill(work_pid_, sig);
 }
 
 bool Workload::CreateNewProcess() {
@@ -151,14 +156,19 @@ bool Workload::Start() {
   return true;
 }
 
-bool Workload::WaitChildProcess(bool wait_forever, bool is_child_killed) {
+bool Workload::Join(int* status) {
+  return WaitChildProcess(true, 0, status);
+}
+
+bool Workload::WaitChildProcess(bool wait_forever, int killed_signal, int* pstatus) {
   bool finished = false;
   int status;
   pid_t result = TEMP_FAILURE_RETRY(waitpid(work_pid_, &status, (wait_forever ? 0 : WNOHANG)));
   if (result == work_pid_) {
     finished = true;
+    work_pid_ = -1;
     if (WIFSIGNALED(status)) {
-      if (!(is_child_killed && WTERMSIG(status) == SIGKILL)) {
+      if (WTERMSIG(status) != killed_signal) {
         LOG(WARNING) << "child process was terminated by signal " << strsignal(WTERMSIG(status));
       }
     } else if (WIFEXITED(status) && WEXITSTATUS(status) != 0) {
@@ -166,6 +176,9 @@ bool Workload::WaitChildProcess(bool wait_forever, bool is_child_killed) {
     }
   } else if (result == -1) {
     PLOG(ERROR) << "waitpid() failed";
+  }
+  if (pstatus != nullptr) {
+    *pstatus = status;
   }
   return finished;
 }

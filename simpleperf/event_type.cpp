@@ -25,6 +25,7 @@
 #include <android-base/logging.h>
 
 #include "event_attr.h"
+#include "tracing.h"
 #include "utils.h"
 
 #define EVENT_TYPE_TABLE_ENTRY(name, type, config) {name, type, config},
@@ -33,34 +34,29 @@ static const std::vector<EventType> static_event_type_array = {
 #include "event_type_table.h"
 };
 
+#if defined(__linux__)
 static const std::vector<EventType> GetTracepointEventTypes() {
   std::vector<EventType> result;
-  if (!IsRoot()) {
-    // Not having permission to profile tracing events.
-    return result;
-  }
-  const std::string tracepoint_dirname = "/sys/kernel/debug/tracing/events";
-  for (const auto& system_name : GetSubDirs(tracepoint_dirname)) {
-    std::string system_path = tracepoint_dirname + "/" + system_name;
-    for (const auto& event_name : GetSubDirs(system_path)) {
-      std::string id_path = system_path + "/" + event_name + "/id";
-      std::string id_content;
-      if (!android::base::ReadFileToString(id_path, &id_content)) {
-        continue;
+  std::unique_ptr<Tracer> tracer = Tracer::CreateInstance();
+  if (tracer != nullptr) {
+    std::vector<std::pair<std::string, uint64_t>> events;
+    if (tracer->GetAllEvents(&events)) {
+      for (auto& pair : events) {
+        result.push_back(EventType(pair.first, PERF_TYPE_TRACEPOINT, pair.second));
       }
-      char* endptr;
-      uint64_t id = strtoull(id_content.c_str(), &endptr, 10);
-      if (endptr == id_content.c_str()) {
-        LOG(DEBUG) << "unexpected id '" << id_content << "' in " << id_path;
-        continue;
-      }
-      result.push_back(EventType(system_name + ":" + event_name, PERF_TYPE_TRACEPOINT, id));
     }
   }
   std::sort(result.begin(), result.end(),
             [](const EventType& type1, const EventType& type2) { return type1.name < type2.name; });
   return result;
 }
+#else  // defined(__linux__)
+
+static const std::vector<EventType> GetTracepointEventTypes() {
+  return std::vector<EventType>();
+}
+
+#endif  // defined(__linux__)
 
 const std::vector<EventType>& GetAllEventTypes() {
   static std::vector<EventType> event_type_array;

@@ -362,8 +362,8 @@ struct LostRecord : public Record {
 };
 
 struct SampleRecord : public Record {
-  uint64_t sample_type;  // sample_type is a bit mask determining which fields
-                         // below are valid.
+  uint64_t sample_type;  // sample_type is a bit mask determining which fields below are valid.
+  uint64_t attr_config_for_tracepoint;
 
   PerfSampleIpType ip_data;               // Valid if PERF_SAMPLE_IP.
   PerfSampleTidType tid_data;             // Valid if PERF_SAMPLE_TID.
@@ -384,7 +384,8 @@ struct SampleRecord : public Record {
   SampleRecord(const perf_event_attr& attr, const char* p);
   SampleRecord(const perf_event_attr& attr, uint64_t id, uint64_t ip,
                uint32_t pid, uint32_t tid, uint64_t time, uint32_t cpu,
-               uint64_t period, const std::vector<uint64_t>& ips);
+               uint64_t period, const std::vector<uint64_t>& ips,
+               const std::vector<char>& raw);
 
   void ReplaceRegAndStackWithCallChain(const std::vector<uint64_t>& ips);
   uint64_t Timestamp() const override;

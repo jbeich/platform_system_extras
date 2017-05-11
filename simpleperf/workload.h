@@ -46,6 +46,8 @@ class Workload {
   pid_t GetPid() {
     return work_pid_;
   }
+  void SendSignal(int sig);
+  bool Join(int* status);
 
  private:
   explicit Workload(const std::vector<std::string>& args,
@@ -60,7 +62,7 @@ class Workload {
 
   bool CreateNewProcess();
   void ChildProcessFn(int start_signal_fd, int exec_child_fd);
-  bool WaitChildProcess(bool wait_forever, bool is_child_killed);
+  bool WaitChildProcess(bool wait_forever, int killed_signal, int* pstatus);
 
   WorkState work_state_;
   // The child process either executes child_proc_args or run child_proc_function.

@@ -625,24 +625,27 @@ void KmemCommand::ProcessTracingData(const std::vector<char>& data) {
     if (attr.attr.type == PERF_TYPE_TRACEPOINT) {
       uint64_t trace_event_id = attr.attr.config;
       attr.name = tracing.GetTracingEventNameHavingId(trace_event_id);
-      TracingFormat format = tracing.GetTracingFormatHavingId(trace_event_id);
+      const TracingFormat* format = tracing.GetTracingFormatHavingId(trace_event_id);
+      if (format == nullptr) {
+        continue;
+      }
       if (use_slab_) {
-        if (format.name == "kmalloc" || format.name == "kmem_cache_alloc" ||
-            format.name == "kmalloc_node" ||
-            format.name == "kmem_cache_alloc_node") {
+        if (format->name == "kmalloc" || format->name == "kmem_cache_alloc" ||
+            format->name == "kmalloc_node" ||
+            format->name == "kmem_cache_alloc_node") {
           SlabFormat f;
           f.type = SlabFormat::KMEM_ALLOC;
-          format.GetField("call_site", f.call_site);
-          format.GetField("ptr", f.ptr);
-          format.GetField("bytes_req", f.bytes_req);
-          format.GetField("bytes_alloc", f.bytes_alloc);
-          format.GetField("gfp_flags", f.gfp_flags);
+          format->GetField("call_site", f.call_site);
+          format->GetField("ptr", f.ptr);
+          format->GetField("bytes_req", f.bytes_req);
+          format->GetField("bytes_alloc", f.bytes_alloc);
+          format->GetField("gfp_flags", f.gfp_flags);
           slab_sample_tree_builder_->AddSlabFormat(attr.event_ids, f);
-        } else if (format.name == "kfree" || format.name == "kmem_cache_free") {
+        } else if (format->name == "kfree" || format->name == "kmem_cache_free") {
           SlabFormat f;
           f.type = SlabFormat::KMEM_FREE;
-          format.GetField("call_site", f.call_site);
-          format.GetField("ptr", f.ptr);
+          format->GetField("call_site", f.call_site);
+          format->GetField("ptr", f.ptr);
           slab_sample_tree_builder_->AddSlabFormat(attr.event_ids, f);
         }
       }

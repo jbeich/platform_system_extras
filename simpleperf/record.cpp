@@ -380,6 +380,7 @@ SampleRecord::SampleRecord(const perf_event_attr& attr, const char* p)
   const char* end = p + size();
   p += header_size();
   sample_type = attr.sample_type;
+  attr_config_for_tracepoint = (attr.type == PERF_TYPE_TRACEPOINT) ? attr.config : 0;
 
   // Set a default id value to report correctly even if ID is not recorded.
   id_data.id = 0;
@@ -462,12 +463,14 @@ SampleRecord::SampleRecord(const perf_event_attr& attr, const char* p)
 SampleRecord::SampleRecord(const perf_event_attr& attr, uint64_t id,
                            uint64_t ip, uint32_t pid, uint32_t tid,
                            uint64_t time, uint32_t cpu, uint64_t period,
-                           const std::vector<uint64_t>& ips) {
+                           const std::vector<uint64_t>& ips,
+                           const std::vector<char>& raw) {
   SetTypeAndMisc(PERF_RECORD_SAMPLE, PERF_RECORD_MISC_USER);
   sample_type = attr.sample_type;
+  attr_config_for_tracepoint = (attr.type == PERF_TYPE_TRACEPOINT) ? attr.config : 0;
   CHECK_EQ(0u, sample_type & ~(PERF_SAMPLE_IP | PERF_SAMPLE_TID
       | PERF_SAMPLE_TIME | PERF_SAMPLE_ID | PERF_SAMPLE_CPU
-      | PERF_SAMPLE_PERIOD | PERF_SAMPLE_CALLCHAIN | PERF_SAMPLE_REGS_USER
+      | PERF_SAMPLE_PERIOD | PERF_SAMPLE_CALLCHAIN | PERF_SAMPLE_RAW | PERF_SAMPLE_REGS_USER
       | PERF_SAMPLE_STACK_USER));
   ip_data.ip = ip;
   tid_data.pid = pid;
@@ -478,7 +481,7 @@ SampleRecord::SampleRecord(const perf_event_attr& attr, uint64_t id,
   cpu_data.res = 0;
   period_data.period = period;
   callchain_data.ip_nr = ips.size();
-  raw_data.size = 0;
+  raw_data.size = raw.size();
   branch_stack_data.stack_nr = 0;
   regs_user_data.abi = 0;
   regs_user_data.reg_mask = 0;
@@ -505,6 +508,9 @@ SampleRecord::SampleRecord(const perf_event_attr& attr, uint64_t id,
   }
   if (sample_type & PERF_SAMPLE_CALLCHAIN) {
     size += sizeof(uint64_t) * (ips.size() + 1);
+  }
+  if (sample_type & PERF_SAMPLE_RAW) {
+    size += sizeof(uint32_t) + raw_data.size;
   }
   if (sample_type & PERF_SAMPLE_REGS_USER) {
     size += sizeof(uint64_t);
@@ -539,6 +545,11 @@ SampleRecord::SampleRecord(const perf_event_attr& attr, uint64_t id,
     MoveToBinaryFormat(callchain_data.ip_nr, p);
     callchain_data.ips = reinterpret_cast<uint64_t*>(p);
     MoveToBinaryFormat(ips.data(), ips.size(), p);
+  }
+  if (sample_type & PERF_SAMPLE_RAW) {
+    MoveToBinaryFormat(raw_data.size, p);
+    raw_data.data = reinterpret_cast<char*>(p);
+    MoveToBinaryFormat(raw.data(), raw.size(), p);
   }
   if (sample_type & PERF_SAMPLE_REGS_USER) {
     MoveToBinaryFormat(regs_user_data.abi, p);
@@ -628,10 +639,25 @@ void SampleRecord::DumpData(size_t indent) const {
   }
   if (sample_type & PERF_SAMPLE_RAW) {
     PrintIndented(indent, "raw size=%zu\n", raw_data.size);
-    const uint32_t* data = reinterpret_cast<const uint32_t*>(raw_data.data);
-    size_t size = raw_data.size / sizeof(uint32_t);
-    for (size_t i = 0; i < size; ++i) {
-      PrintIndented(indent + 1, "0x%08x (%zu)\n", data[i], data[i]);
+    const TracingFormat* format = nullptr;
+    Tracing* tracing = ScopedTracing::GetCurrentTracing();
+    if (tracing != nullptr && attr_config_for_tracepoint != 0) {
+      format = tracing->GetTracingFormatHavingId(attr_config_for_tracepoint);
+    }
+    if (format != nullptr) {
+      for (const auto& field : format->fields) {
+        TracingValue value;
+        if (field.ExtractValue(raw_data.data, raw_data.size, &value)) {
+          PrintIndented(indent + 1, "offset %zu: %s = %s\n", field.offset, field.name.c_str(),
+                        value.toString().c_str());
+        }
+      }
+    } else {
+      const uint32_t* data = reinterpret_cast<const uint32_t*>(raw_data.data);
+      size_t size = raw_data.size / sizeof(uint32_t);
+      for (size_t i = 0; i < size; ++i) {
+        PrintIndented(indent + 1, "0x%08x (%zu)\n", data[i], data[i]);
+      }
     }
   }
   if (sample_type & PERF_SAMPLE_BRANCH_STACK) {

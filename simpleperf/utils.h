@@ -171,4 +171,7 @@ timeval SecondToTimeval(double time_in_sec);
 
 std::string GetSimpleperfVersion();
 
+bool ReadFile(const std::string& file, std::string* content);
+bool WriteFile(const std::string& file, const std::string& content);
+
 #endif  // SIMPLE_PERF_UTILS_H_

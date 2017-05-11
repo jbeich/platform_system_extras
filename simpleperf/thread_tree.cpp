@@ -95,6 +95,7 @@ ThreadEntry* ThreadTree::CreateThread(int pid, int tid) {
     maps,
   };
   auto pair = thread_tree_.insert(std::make_pair(tid, std::unique_ptr<ThreadEntry>(thread)));
+  LOG(ERROR) << "insert tid " << tid << ", tree size " << thread_tree_.size();
   CHECK(pair.second);
   return thread;
 }
@@ -324,6 +325,11 @@ std::vector<Dso*> ThreadTree::GetAllDsos() const {
   }
   result.push_back(unknown_dso_.get());
   return result;
+}
+
+const std::unordered_map<int, std::unique_ptr<ThreadEntry>>& ThreadTree::GetThreads() const {
+  LOG(ERROR) << "GetThreads, thread_tree size = " << thread_tree_.size();
+  return thread_tree_;
 }
 
 }  // namespace simpleperf

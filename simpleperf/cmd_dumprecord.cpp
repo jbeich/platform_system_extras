@@ -17,6 +17,7 @@
 #include <inttypes.h>
 
 #include <map>
+#include <memory>
 #include <string>
 #include <vector>
 
@@ -29,6 +30,7 @@
 #include "perf_regs.h"
 #include "record.h"
 #include "record_file.h"
+#include "tracing.h"
 #include "utils.h"
 
 using namespace PerfFileFormat;
@@ -151,6 +153,7 @@ static const std::string GetFeatureName(int feature) {
       {FEAT_PMU_MAPPINGS, "pmu_mappings"},
       {FEAT_GROUP_DESC, "group_desc"},
       {FEAT_FILE, "file"},
+      {FEAT_META_INFO, "meta_info"},
   };
   auto it = feature_name_map.find(feature);
   if (it != feature_name_map.end()) {
@@ -176,8 +179,14 @@ void DumpRecordCommand::DumpAttrSection() {
 }
 
 void DumpRecordCommand::DumpDataSection() {
-  record_file_reader_->ReadDataSection([](std::unique_ptr<Record> record) {
+  std::unique_ptr<ScopedTracing> scoped_tracing;
+  record_file_reader_->ReadDataSection([&](std::unique_ptr<Record> record) {
     record->Dump();
+    if (record->type() == PERF_RECORD_TRACING_DATA) {
+      const auto& r = *static_cast<TracingDataRecord*>(record.get());
+      scoped_tracing.reset(new ScopedTracing(
+          new Tracing(std::vector<char>(r.data, r.data + r.data_size))));
+    }
     return true;
   }, false);
 }

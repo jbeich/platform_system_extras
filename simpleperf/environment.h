@@ -21,6 +21,8 @@
 #include <time.h>
 
 #if defined(__linux__)
+#include <stdio.h>
+#include <stdlib.h>
 #include <sys/syscall.h>
 #include <unistd.h>
 #endif
@@ -74,6 +76,34 @@ bool CheckSampleFrequency(uint64_t sample_freq);
 bool CheckKernelSymbolAddresses();
 
 #if defined(__linux__)
+
+class LineReader {
+ public:
+  explicit LineReader(FILE* fp) : fp_(fp), buf_(nullptr), bufsize_(0) {
+  }
+
+  ~LineReader() {
+    free(buf_);
+    fclose(fp_);
+  }
+
+  char* ReadLine() {
+    if (getline(&buf_, &bufsize_, fp_) != -1) {
+      return buf_;
+    }
+    return nullptr;
+  }
+
+  size_t MaxLineSize() {
+    return bufsize_;
+  }
+
+ private:
+  FILE* fp_;
+  char* buf_;
+  size_t bufsize_;
+};
+
 static inline uint64_t GetSystemClock() {
   timespec ts;
   // Assume clock_gettime() doesn't fail.

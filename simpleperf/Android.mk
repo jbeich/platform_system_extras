@@ -106,6 +106,7 @@ libsimpleperf_src_files_linux := \
   cmd_list.cpp \
   cmd_record.cpp \
   cmd_stat.cpp \
+  cmd_tracer.cpp \
   dwarf_unwind.cpp \
   environment.cpp \
   event_fd.cpp \
@@ -414,5 +415,6 @@ LOCAL_LDLIBS_linux := $(simpleperf_ldlibs_host_linux)
 LOCAL_MULTILIB := both
 include $(LLVM_HOST_BUILD_MK)
 include $(BUILD_HOST_STATIC_TEST_LIBRARY)
+
 
 include $(call first-makefiles-under,$(LOCAL_PATH))
