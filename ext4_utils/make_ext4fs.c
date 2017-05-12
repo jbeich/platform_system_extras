@@ -797,7 +797,8 @@ int make_ext4fs_internal(int fd, const char *_directory, const char *_target_out
 
 	info.feat_incompat |=
 			EXT4_FEATURE_INCOMPAT_EXTENTS |
-			EXT4_FEATURE_INCOMPAT_FILETYPE;
+			EXT4_FEATURE_INCOMPAT_FILETYPE |
+			EXT4_FEATURE_INCOMPAT_ENCRYPT;
 
 
 	info.bg_desc_reserve_blocks = compute_bg_desc_reserve_blocks();
