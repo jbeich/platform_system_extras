@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "78706cb6_424666f9",
+        "filename": "iotop/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2017-05-17T03:02:08Z",
+      "side": 1,
+      "message": "This doesn\u0027t do anything right now in Soong. I\u0027d suggest removing it, but if someone still wants it in debug builds, adding it to PRODUCT_PACKAGES_debug under build/target would be appropriate.",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 20
+      },
+      "revId": "c6a9425dfd15fc2f7cb93d902ce8a03a5d287a2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
