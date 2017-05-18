@@ -18,7 +18,7 @@
 
 #include <memory>
 
-#include "system/extras/simpleperf/report_sample.pb.h"
+#include "report_sample.pb.h"
 
 #include <google/protobuf/io/coded_stream.h>
 #include <google/protobuf/io/zero_copy_stream_impl_lite.h>
