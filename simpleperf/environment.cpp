@@ -454,8 +454,10 @@ bool CheckKernelSymbolAddresses() {
   if (value == 0) {
     return true;
   }
-  if (value == 1 && IsRoot()) {
-    return true;
+  if (IsRoot()) {
+    if (value == 1 || android::base::WriteStringToFile("1", kptr_restrict_file)) {
+      return true;
+    }
   }
   LOG(WARNING) << "Access to kernel symbol addresses is restricted. If "
       << "possible, please do `echo 0 >/proc/sys/kernel/kptr_restrict` "
