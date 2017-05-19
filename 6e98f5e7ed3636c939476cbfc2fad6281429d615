@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "87e0b24a_6146e461",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-05-19T01:38:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7e6ce1e3_f5755265",
+      "range": {
+        "startLine": 91,
+        "startChar": 44,
+        "endLine": 92,
+        "endChar": 48
+      },
+      "revId": "6e98f5e7ed3636c939476cbfc2fad6281429d615",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "97cefea6_7c4a7c22",
         "filename": "simpleperf/cmd_report.cpp",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2017-05-19T00:20:44Z",
       "side": 1,
       "message": "or just replace these with --full-callgraph? kind of makes sense for the default to be \"no arguments\"?",
+      "range": {
+        "startLine": 314,
+        "startChar": 0,
+        "endLine": 315,
+        "endChar": 69
+      },
+      "revId": "6e98f5e7ed3636c939476cbfc2fad6281429d615",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8a5187e9_9759c92c",
+        "filename": "simpleperf/cmd_report.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-05-19T01:38:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "97cefea6_7c4a7c22",
       "range": {
         "startLine": 314,
         "startChar": 0,
