@@ -46,6 +46,30 @@
       "revId": "dfc978cc37c56ceaf26fda7c682193273537eddd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a24090c7_aba814ee",
+        "filename": "simpleperf/environment.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 458,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-05-19T19:32:50Z",
+      "side": 1,
+      "message": "maybe clearer as\n\n  // Accessible to everyone?\n  if (value \u003d\u003d 0) return true;\n\n  // Accessible to root?\n  if (value \u003d\u003d 1 \u0026\u0026 IsRoot()) return true;\n\n  // Can we make it accessible to us?\n  if (IsRoot() \u0026\u0026 android::base::WriteStringToFile(\"1\", kptr_restrict_file)) return true;",
+      "parentUuid": "2e96db4d_8ddd7fe3",
+      "range": {
+        "startLine": 458,
+        "startChar": 56,
+        "endLine": 458,
+        "endChar": 57
+      },
+      "revId": "dfc978cc37c56ceaf26fda7c682193273537eddd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
