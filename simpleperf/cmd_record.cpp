@@ -75,6 +75,7 @@ class RecordCommand : public Command {
 "Usage: simpleperf record [options] [command [command-args]]\n"
 "       Gather sampling information of running [command]. And -a/-p/-t option\n"
 "       can be used to change target of sampling information.\n"
+"       The default options are: -e cpu-cycles -f 4000 --dump-symbols -o perf.data.\n"
 "-a     System-wide collection.\n"
 "-b     Enable take branch stack sampling. Same as '-j any'\n"
 "-c count     Set event sample period. It means recording one sample when\n"
@@ -90,6 +91,7 @@ class RecordCommand : public Command {
 "--dump-symbols  Dump symbols in perf.data. By default perf.data doesn't contain\n"
 "                symbol information for samples. This option is used when there\n"
 "                is no symbol information in report environment.\n"
+"--no-dump-symbols       Don't dump symbols in perf.data.\n"
 "--duration time_in_sec  Monitor for time_in_sec seconds instead of running\n"
 "                        [command]. Here time_in_sec may be any positive\n"
 "                        floating point number.\n"
@@ -159,7 +161,7 @@ class RecordCommand : public Command {
         child_inherit_(true),
         duration_in_sec_(0),
         can_dump_kernel_symbols_(true),
-        dump_symbols_(false),
+        dump_symbols_(true),
         event_selection_set_(false),
         mmap_page_range_(std::make_pair(1, DESIRED_PAGES_IN_MAPPED_BUFFER)),
         record_filename_("perf.data"),
@@ -433,6 +435,8 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
       cpus_ = GetCpusFromString(args[i]);
     } else if (args[i] == "--dump-symbols") {
       dump_symbols_ = true;
+    } else if (args[i] == "--no-dump-symbols") {
+      dump_symbols_ = false;
     } else if (args[i] == "--duration") {
       if (!NextArgumentOrError(args, &i)) {
         return false;

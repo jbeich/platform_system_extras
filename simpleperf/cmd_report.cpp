@@ -307,10 +307,12 @@ class ReportCommand : public Command {
             "report", "report sampling information in perf.data",
             // clang-format off
 "Usage: simpleperf report [options]\n"
+"The default options are: -i perf.data --brief-callgraph --sort comm,pid,tid,dso,symbol.\n"
 "-b    Use the branch-to addresses in sampled take branches instead of the\n"
 "      instruction addresses. Only valid for perf.data recorded with -b/-j\n"
 "      option.\n"
-"--brief-callgraph     Print brief call graph.\n"
+"--brief-callgraph     Print brief call graph. Used with -g option.\n"
+"--no-brief-callgraph  Print full call graph. Used with -g option.\n"
 "--children    Print the overhead accumulated by appearing in the callchain.\n"
 "--comms comm1,comm2,...   Report only for selected comms.\n"
 "--dsos dso1,dso2,...      Report only for selected dsos.\n"
@@ -363,7 +365,7 @@ class ReportCommand : public Command {
         callgraph_max_stack_(UINT32_MAX),
         callgraph_percent_limit_(0),
         raw_period_(false),
-        brief_callgraph_(false) {}
+        brief_callgraph_(true) {}
 
   bool Run(const std::vector<std::string>& args);
 
@@ -447,6 +449,8 @@ bool ReportCommand::ParseOptions(const std::vector<std::string>& args) {
       use_branch_address_ = true;
     } else if (args[i] == "--brief-callgraph") {
       brief_callgraph_ = true;
+    } else if (args[i] == "--no-brief-callgraph") {
+      brief_callgraph_ = false;
     } else if (args[i] == "--children") {
       accumulate_callchain_ = true;
     } else if (args[i] == "--comms" || args[i] == "--dsos") {
