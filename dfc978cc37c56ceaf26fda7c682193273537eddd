@@ -22,6 +22,30 @@
       "revId": "dfc978cc37c56ceaf26fda7c682193273537eddd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e96db4d_8ddd7fe3",
+        "filename": "simpleperf/environment.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 458,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-05-19T19:29:56Z",
+      "side": 1,
+      "message": "0 is accessible for normal users.\n1 is accessible for root. Since here simpleperf is run as root, 1 is enough. I don\u0027t want to make it complex to consider following simpleperf commands not running as root.",
+      "parentUuid": "5098be53_d7f7f579",
+      "range": {
+        "startLine": 458,
+        "startChar": 56,
+        "endLine": 458,
+        "endChar": 57
+      },
+      "revId": "dfc978cc37c56ceaf26fda7c682193273537eddd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
