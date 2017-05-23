@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5d37c6c1_f9032904",
+        "filename": "simpleperf/cmd_list.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-05-23T22:06:04Z",
+      "side": 1,
+      "message": "is there something online we can link to?",
+      "revId": "b0e9aa4de40fd37bbdffca0d63230dd91af9686e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cb23688b_01416eef",
+        "filename": "simpleperf/event_type.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-05-23T22:06:04Z",
+      "side": 1,
+      "message": "if it\u0027s auto-generated, why bother with the two macros? the script isn\u0027t going to make a mistake with the \"\" or \"arm\" argument.",
+      "range": {
+        "startLine": 31,
+        "startChar": 8,
+        "endLine": 31,
+        "endChar": 34
+      },
+      "revId": "b0e9aa4de40fd37bbdffca0d63230dd91af9686e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5deb890d_bbf29c3f",
+        "filename": "simpleperf/event_type_table.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-05-23T22:06:04Z",
+      "side": 1,
+      "message": "do we do case-insensitive lookups in this table? seems annoying that it\u0027s L1 here but l1 below.",
+      "range": {
+        "startLine": 23,
+        "startChar": 24,
+        "endLine": 23,
+        "endChar": 39
+      },
+      "revId": "b0e9aa4de40fd37bbdffca0d63230dd91af9686e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ac8de3e_d283d3d5",
+        "filename": "simpleperf/generate_event_type_table.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-05-23T22:06:04Z",
+      "side": 1,
+      "message": "?",
+      "range": {
+        "startLine": 131,
+        "startChar": 46,
+        "endLine": 131,
+        "endChar": 47
+      },
+      "revId": "b0e9aa4de40fd37bbdffca0d63230dd91af9686e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
