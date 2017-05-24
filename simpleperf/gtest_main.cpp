@@ -65,6 +65,7 @@ static bool ExtractTestDataFromElfSection() {
   int ret = StartIteration(handle, &cookie, nullptr, nullptr);
   if (ret != 0) {
     LOG(ERROR) << "failed to start iterating zip entries";
+    EndIteration(cookie);
     return false;
   }
   std::unique_ptr<void, decltype(&EndIteration)> guard(cookie, EndIteration);
@@ -79,23 +80,28 @@ static bool ExtractTestDataFromElfSection() {
     }
     if (!MkdirWithParents(path)) {
       LOG(ERROR) << "failed to create dir for " << path;
+      EndIteration(cookie);
       return false;
     }
     FileHelper fhelper = FileHelper::OpenWriteOnly(path);
     if (!fhelper) {
       PLOG(ERROR) << "failed to create file " << path;
+      EndIteration(cookie);
       return false;
     }
     std::vector<uint8_t> data(entry.uncompressed_length);
     if (ExtractToMemory(handle, &entry, data.data(), data.size()) != 0) {
       LOG(ERROR) << "failed to extract entry " << entry_name;
+      EndIteration(cookie);
       return false;
     }
     if (!android::base::WriteFully(fhelper.fd(), data.data(), data.size())) {
       LOG(ERROR) << "failed to write file " << path;
+      EndIteration(cookie);
       return false;
     }
   }
+  EndIteration(cookie);
   return true;
 }
 
