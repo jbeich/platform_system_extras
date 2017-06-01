@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "34cb16d2_99645422",
+        "filename": "simpleperf/environment.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-06-01T21:22:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ccb96e6a_f9b8eefc",
+      "range": {
+        "startLine": 365,
+        "startChar": 16,
+        "endLine": 365,
+        "endChar": 34
+      },
+      "revId": "b83f21b8c2a56c78b88d8adecbefb48181b6d5fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2a66fabd_130af004",
         "filename": "simpleperf/environment.cpp",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2017-06-01T20:50:50Z",
       "side": 1,
       "message": "stray \u0027.\u0027",
+      "range": {
+        "startLine": 366,
+        "startChar": 60,
+        "endLine": 366,
+        "endChar": 61
+      },
+      "revId": "b83f21b8c2a56c78b88d8adecbefb48181b6d5fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "478d5cf2_7d8fa519",
+        "filename": "simpleperf/environment.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-06-01T21:22:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2a66fabd_130af004",
       "range": {
         "startLine": 366,
         "startChar": 60,
