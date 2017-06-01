@@ -361,8 +361,11 @@ static const char* GetLimitLevelDescription(int limit_level) {
 }
 
 bool CheckPerfEventLimit() {
-  // root is not limited by /proc/sys/kernel/perf_event_paranoid.
-  if (IsRoot()) {
+  // Root is not limited by /proc/sys/kernel/perf_event_paranoid. Write -1 to perf_event_paranoid
+  // because the monitored threads may create new processes not running as root. The permission to
+  // create inherited perf events in children proceses are limited by perf_event_paranoid.
+  // See http://b/62230699.
+  if (IsRoot() && android::base::WriteStringToFile("-1", "/proc/sys/kernel/perf_event_paranoid")) {
     return true;
   }
   int limit_level;
