@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b53a403f_59f59ee4",
+        "filename": "simpleperf/include/simpleperf.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2017-06-02T23:30:39Z",
+      "side": 1,
+      "message": "What\u0027s the difference here?",
+      "range": {
+        "startLine": 30,
+        "startChar": 70,
+        "endLine": 30,
+        "endChar": 91
+      },
+      "revId": "5d32aeee612f433056a5c30e98f884d7423cd25a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
