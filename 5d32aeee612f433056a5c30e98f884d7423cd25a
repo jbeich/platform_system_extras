@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "f66b5e71_8177464c",
+        "filename": "simpleperf/include/simpleperf.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-06-05T19:08:37Z",
+      "side": 1,
+      "message": "the comment is added.",
+      "parentUuid": "4a814a74_1a575161",
+      "revId": "5d32aeee612f433056a5c30e98f884d7423cd25a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b53a403f_59f59ee4",
         "filename": "simpleperf/include/simpleperf.h",
         "patchSetId": 1
@@ -54,6 +72,30 @@
       "side": 1,
       "message": "and once difference is explained, please use enum rather than boolean (I am a heavy boolean user myself, but once it visible outside own module, it will be easier to read\n\nPerfEventSet::CreateInstance(kPerfForReading)\n\nthen true/false)",
       "parentUuid": "b53a403f_59f59ee4",
+      "range": {
+        "startLine": 30,
+        "startChar": 70,
+        "endLine": 30,
+        "endChar": 91
+      },
+      "revId": "5d32aeee612f433056a5c30e98f884d7423cd25a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "72b61dad_ead9bf95",
+        "filename": "simpleperf/include/simpleperf.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-06-05T19:08:37Z",
+      "side": 1,
+      "message": "The difference is: for counting, there is no need to create a new thread, but for recording, it needs to create a new thread to write perf.data. I think it is too complex and unneeded to support both at the same instance.\n\nIt is not explained in the comment because this patch doesn\u0027t contain code for recording. I will add it later.\n\nDone changing bool to enum.",
+      "parentUuid": "34800e23_06f38b3d",
       "range": {
         "startLine": 30,
         "startChar": 70,
