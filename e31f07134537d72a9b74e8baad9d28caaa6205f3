@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6388d120_4a8962f7",
+        "filename": "simpleperf/include/simpleperf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1074526
+      },
+      "writtenOn": "2017-06-05T20:07:32Z",
+      "side": 1,
+      "message": "nit: could be public inside the class and the lose the PerfEventSet part since that will be reflected by namespace + classname + Type",
+      "revId": "e31f07134537d72a9b74e8baad9d28caaa6205f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
