@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a37bb6b9_45dca0c7",
+        "filename": "tests/kernel.config/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2017-06-05T18:21:46Z",
+      "side": 1,
+      "message": "Because of this, there may be a merge conflict ...",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 19
+      },
+      "revId": "c894a077cf29fd257aac2146a648d9f9c8cd0be4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
