@@ -74,6 +74,24 @@
       "revId": "d25ab7dbb2253eaac874b2526f84911226617944",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3eb22adb_5907143c",
+        "filename": "simpleperf/include/simpleperf.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1021471
+      },
+      "writtenOn": "2017-06-06T15:41:05Z",
+      "side": 1,
+      "message": "\u003e FYI, if you read the bug, this is meant for in-process consumption. If you anyways want a report, it seems just as easy to run simpleperf out-of-process by forking. At least it should be a separate API.\n\nNot sure I understand?\n\nIt would ideally need to start/stop when the benchmark start/stops. Do you suggest forking and killing it every time? And then merging the results (how does one even do that?)",
+      "parentUuid": "33a32f1e_c2f083e7",
+      "revId": "d25ab7dbb2253eaac874b2526f84911226617944",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
