@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "f5881ae4_965f42ca",
+        "filename": "simpleperf/include/simpleperf.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-06-06T18:55:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c44c0833_453543f7",
+      "revId": "d25ab7dbb2253eaac874b2526f84911226617944",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "525440ed_a956d504",
         "filename": "simpleperf/include/simpleperf.h",
         "patchSetId": 3
@@ -30,6 +48,30 @@
       "writtenOn": "2017-06-06T09:55:14Z",
       "side": 1,
       "message": "What is int here? Maybe pid_t ?",
+      "range": {
+        "startLine": 62,
+        "startChar": 64,
+        "endLine": 62,
+        "endChar": 67
+      },
+      "revId": "d25ab7dbb2253eaac874b2526f84911226617944",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bd3aa814_e4464fb3",
+        "filename": "simpleperf/include/simpleperf.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-06-06T18:55:28Z",
+      "side": 1,
+      "message": "Done. Sometimes I use int for pid_t because they are actually the same.",
+      "parentUuid": "525440ed_a956d504",
       "range": {
         "startLine": 62,
         "startChar": 64,
@@ -107,6 +149,24 @@
       "side": 1,
       "message": "-p and sigterm?\n\n(I don\u0027t think _this_ API is meant to merge any complicated results, but maybe it\u0027s easier than I think.)",
       "parentUuid": "3eb22adb_5907143c",
+      "revId": "d25ab7dbb2253eaac874b2526f84911226617944",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cadf26c9_9d842ad7",
+        "filename": "simpleperf/include/simpleperf.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-06-06T18:55:28Z",
+      "side": 1,
+      "message": "I think this library is to profile part of the code. It provides functions similar to simpleperf stat command (using counting interface) and simpleperf record command (using recording interface, not added yet).\nIt can support following use cases:\n1. Know how many perf events happen when running a function. We can have a wrapper function like this:\n   void FunctionWithPerfCounters() {\n     perf-\u003eStartCounters();\n     Function();\n     perf-\u003eStopCounters();\n   }\n   We can get the counters of running the function once, or get the sum of the counters at last.\n   It can be used to compare the benchmark results before and after a change.\n2. Record profiling samples happen when running a function. It can generate a perf.data with samples of calling a function. Of course, we can fork a new process and run simpleperf record each time. However, by using this library, it saves the time to fork and run simpleperf process each time, a new thread is only created once at the beginning. And it merges samples of profiling periods in the one perf.data. And it has a interface much easier to use.\n\nFor counting interface, I have no plan to provide a report interface unless it is requested. I can provide report like simpleperf stat command if you need that.\nFor recording interface, it will generate a perf.data file. And the way to report it is to use simpleperf report command or report scripts.\nI guess Igor means the recording interface, it will be added in later patches.",
+      "parentUuid": "cfc99fb8_5ea42aa9",
       "revId": "d25ab7dbb2253eaac874b2526f84911226617944",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
