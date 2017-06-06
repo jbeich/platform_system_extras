@@ -194,6 +194,24 @@
       "revId": "d25ab7dbb2253eaac874b2526f84911226617944",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "694276bb_a8b91069",
+        "filename": "simpleperf/include/simpleperf.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2017-06-06T19:05:35Z",
+      "side": 1,
+      "message": "Note that my bug was only about the former, as counters are a lot simpler, and you avoid all the issues of \"where to write\" etc.\n\nSo I think this CL should maybe focus on counting only, is what I was trying to point out. Not sure that recording and counting should expose the exact same interface or not. That discussion should be on the bug, probably.",
+      "parentUuid": "cadf26c9_9d842ad7",
+      "revId": "d25ab7dbb2253eaac874b2526f84911226617944",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
