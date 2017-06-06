@@ -56,6 +56,24 @@
       "revId": "d25ab7dbb2253eaac874b2526f84911226617944",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "33a32f1e_c2f083e7",
+        "filename": "simpleperf/include/simpleperf.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2017-06-06T15:33:07Z",
+      "side": 1,
+      "message": "I thought counters/events !\u003d reports?\n\nFYI, if you read the bug, this is meant for in-process consumption. If you anyways want a report, it seems just as easy to run simpleperf out-of-process by forking. At least it should be a separate API.",
+      "parentUuid": "f7cdaf12_9da17cd3",
+      "revId": "d25ab7dbb2253eaac874b2526f84911226617944",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
