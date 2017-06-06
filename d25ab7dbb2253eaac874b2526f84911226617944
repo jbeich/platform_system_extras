@@ -92,6 +92,24 @@
       "revId": "d25ab7dbb2253eaac874b2526f84911226617944",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cfc99fb8_5ea42aa9",
+        "filename": "simpleperf/include/simpleperf.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2017-06-06T16:04:39Z",
+      "side": 1,
+      "message": "-p and sigterm?\n\n(I don\u0027t think _this_ API is meant to merge any complicated results, but maybe it\u0027s easier than I think.)",
+      "parentUuid": "3eb22adb_5907143c",
+      "revId": "d25ab7dbb2253eaac874b2526f84911226617944",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
