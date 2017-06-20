@@ -22,6 +22,30 @@
       "revId": "0a0d208795ac89a1c78bb921ea82a5d6d7919c88",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f1db716d_5e8e43af",
+        "filename": "simpleperf/include/simpleperf.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-06-20T15:39:40Z",
+      "side": 1,
+      "message": "saying \"returns true on success, false otherwise\" is just distracting noise. the uselessness of much javadoc taught us not to belabor that point.\n\nsubclassing, on the other hand, is well worth expanding upon.",
+      "parentUuid": "bf8c343e_5eb6b25b",
+      "range": {
+        "startLine": 73,
+        "startChar": 10,
+        "endLine": 73,
+        "endChar": 14
+      },
+      "revId": "0a0d208795ac89a1c78bb921ea82a5d6d7919c88",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
