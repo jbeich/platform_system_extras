@@ -271,7 +271,7 @@ class AppProfiler(object):
 
 
     def collect_profiling_data(self):
-        self.run_in_app_dir(['cat', 'perf.data'], self.config['perf_data_path'])
+        self.pull_perf_data()
         config = copy.copy(self.config)
         config['symfs_dirs'] = []
         if self.config['native_lib_dir']:
@@ -280,13 +280,23 @@ class AppProfiler(object):
         binary_cache_builder.build_binary_cache()
 
 
+    def pull_perf_data(self):
+        if self.is_root_device:
+            self.run_in_app_dir(['cat', 'perf.data'], self.config['perf_data_path'])
+        else:
+            self.run_in_app_dir(['cat', 'perf.data', '|', 'tee', '/dev/null',
+                                 '>/data/local/tmp/perf.data'])
+            self.adb.check_run_and_return_output(['pull', '/data/local/tmp/perf.data',
+                                                  self.config['perf_data_path']])
+
+
     def run_in_app_dir(self, args, stdout_file=None):
         if self.is_root_device:
             cmd = 'cd /data/data/' + self.config['app_package_name'] + ' && ' + (' '.join(args))
             return self.adb.check_run_and_return_output(['shell', cmd], stdout_file)
         else:
             return self.adb.check_run_and_return_output(
-                ['shell', 'run-as', self.config['app_package_name']] + args, stdout_file)
+                ['shell', '-tt', 'run-as', self.config['app_package_name']] + args, stdout_file)
 
 
 if __name__ == '__main__':

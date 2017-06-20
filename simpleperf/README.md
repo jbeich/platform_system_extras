@@ -28,7 +28,7 @@ Bugs and feature requests can be submitted at http://github.com/android-ndk/ndk/
     - [Record and report call graph](#record-and-report-call-graph)
     - [Visualize profiling data](#visualize-profiling-data)
     - [Annotate source code](#annotate-source-code)
-
+- [FAQ](#faq)
 
 ## Simpleperf introduction
 
@@ -579,7 +579,7 @@ and access the native binaries.
     $ adb shell am start -n com.example.simpleperf.simpleperfexamplepurejava/.MainActivity
 
     # Run `ps` in the app's context. On Android >= O devicces, run `ps -e` instead.
-    $ adb shell run-as com.example.simpleperf.simpleperfexamplepurejava ps | grep simpleperf
+    $ adb shell -t run-as com.example.simpleperf.simpleperfexamplepurejava ps | grep simpleperf
     u0_a151   6885  3346  1590504 53980 SyS_epoll_ 6fc2024b6c S com.example.simpleperf.simpleperfexamplepurejava
 
 So the id of the app process is `6885`. We will use this number in the command lines below,
@@ -588,22 +588,22 @@ please replace this number with what you get by running `ps` command.
 **4. Download simpleperf to the app's data directory**
 
     # Find which architecture the app is using.
-    $ adb shell run-as com.example.simpleperf.simpleperfexamplepurejava cat /proc/6885/maps | grep boot.oat
+    $ adb shell -t run-as com.example.simpleperf.simpleperfexamplepurejava cat /proc/6885/maps | grep boot.oat
     708e6000-70e33000 r--p 00000000 103:09 1214                              /system/framework/arm64/boot.oat
 
     # The app uses /arm64/boot.oat, so push simpleperf in bin/android/arm64/ to device.
     $ cd ../../scripts/
     $ adb push bin/android/arm64/simpleperf /data/local/tmp
     $ adb shell chmod a+x /data/local/tmp/simpleperf
-    $ adb shell run-as com.example.simpleperf.simpleperfexamplepurejava cp /data/local/tmp/simpleperf .
+    $ adb shell -t run-as com.example.simpleperf.simpleperfexamplepurejava cp /data/local/tmp/simpleperf .
 
 
 **5. Record perf.data**
 
-    $ adb shell run-as com.example.simpleperf.simpleperfexamplepurejava ./simpleperf record -p 6885 --duration 10
+    $ adb shell -t run-as com.example.simpleperf.simpleperfexamplepurejava ./simpleperf record -p 6885 --duration 10
     simpleperf I 04-27 20:41:11  6940  6940 cmd_record.cpp:357] Samples recorded: 40008. Samples lost: 0.
 
-    $ adb shell run-as com.example.simpleperf.simpleperfexamplepurejava ls -lh perf.data
+    $ adb shell -t run-as com.example.simpleperf.simpleperfexamplepurejava ls -lh perf.data
     simpleperf I 04-27 20:31:40  5999  5999 cmd_record.cpp:357] Samples recorded: 39949. Samples lost: 0.
 
 The profiling data is recorded at perf.data.
@@ -617,7 +617,8 @@ There are many options to record profiling data, check [record command](#simplep
 **6. Report perf.data**
 
     # Pull perf.data on host.
-    $ adb shell run-as com.example.simpleperf.simpleperfexamplepurejava cat perf.data >perf.data
+    $ adb shell -t "run-as com.example.simpleperf.simpleperfexamplepurejava cat perf.data | tee /dev/null >/data/local/tmp/perf.data"
+    $ adb pull /data/local/tmp/perf.data
 
     # Report samples using corresponding simpleperf executable on host.
     # On windows, use "bin\windows\x86_64\simpleperf" instead.
@@ -693,7 +694,7 @@ A call graph is a tree showing function call relations. Below is an example.
 
 When using command lines, add `-g` option like below:
 
-    $ adb shell run-as com.example.simpleperf.simpleperfexamplepurejava ./simpleperf record -g -p 6685 --duration 10
+    $ adb shell -t run-as com.example.simpleperf.simpleperfexamplepurejava ./simpleperf record -g -p 6685 --duration 10
 
 When using python scripts, change `app-profiler.config` as below:
 
@@ -708,7 +709,7 @@ it is better to contain non-stripped native libraries in the apk.
 
 When using command lines, add `--call-graph fp` option like below:
 
-    $ adb shell run-as com.example.simpleperf.simpleperfexamplepurejava ./simpleperf record --call-graph fp -p 6685 --duration 10
+    $ adb shell -t run-as com.example.simpleperf.simpleperfexamplepurejava ./simpleperf record --call-graph fp -p 6685 --duration 10
 
 When using python scripts, change `app-profiler.config` as below:
 
@@ -808,3 +809,10 @@ It's content is similar to below:
     // p field means how much time is spent just in current line.
     /* acc_p: 99.966552%, p: 83.628188%        */                    i = callFunction(i);
 
+
+## FAQ
+
+**`adb shell run-as xxx` fails silently on Android O devices.**
+It is because the permission of run-as program is weakened in O. A workaround is
+to use `adb shell -t run-as xxx` in a terminal or `adb shell -tt run-as xxx` in
+a script.
