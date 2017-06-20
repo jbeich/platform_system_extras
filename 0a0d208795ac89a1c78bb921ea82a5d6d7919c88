@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bf8c343e_5eb6b25b",
+        "filename": "simpleperf/include/simpleperf.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1038443
+      },
+      "writtenOn": "2017-06-20T13:03:20Z",
+      "side": 1,
+      "message": "Could you add a comment what\u0027s the return value for all these methods?\n\nAlso, maybe add a comment that a PerfEventSet is expected (or can) to be subclassed, with a few examples (in order to motivate the \"virtual\").",
+      "range": {
+        "startLine": 73,
+        "startChar": 10,
+        "endLine": 73,
+        "endChar": 14
+      },
+      "revId": "0a0d208795ac89a1c78bb921ea82a5d6d7919c88",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
