@@ -46,6 +46,30 @@
       "revId": "0a0d208795ac89a1c78bb921ea82a5d6d7919c88",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "116a665d_d330b32e",
+        "filename": "simpleperf/include/simpleperf.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1038443
+      },
+      "writtenOn": "2017-06-20T16:20:08Z",
+      "side": 1,
+      "message": "The  PerfEventSet::AddEvent implementations seems more like a supported / not supported kind of return value. I still think it\u0027s worth documenting (but only mentioning it once for the class, not repeating it for every method).",
+      "parentUuid": "f1db716d_5e8e43af",
+      "range": {
+        "startLine": 73,
+        "startChar": 10,
+        "endLine": 73,
+        "endChar": 14
+      },
+      "revId": "0a0d208795ac89a1c78bb921ea82a5d6d7919c88",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
