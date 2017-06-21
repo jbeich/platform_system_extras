@@ -28,6 +28,7 @@ Bugs and feature requests can be submitted at http://github.com/android-ndk/ndk/
     - [Record and report call graph](#record-and-report-call-graph)
     - [Visualize profiling data](#visualize-profiling-data)
     - [Annotate source code](#annotate-source-code)
+- [FAQ](#faq)
 
 
 ## Simpleperf introduction
@@ -617,7 +618,8 @@ There are many options to record profiling data, check [record command](#simplep
 **6. Report perf.data**
 
     # Pull perf.data on host.
-    $ adb shell run-as com.example.simpleperf.simpleperfexamplepurejava cat perf.data >perf.data
+    $ adb shell "run-as com.example.simpleperf.simpleperfexamplepurejava cat perf.data | tee /data/local/tmp/perf.data >/dev/null"
+    $ adb pull /data/local/tmp/perf.data
 
     # Report samples using corresponding simpleperf executable on host.
     # On windows, use "bin\windows\x86_64\simpleperf" instead.
@@ -808,3 +810,22 @@ It's content is similar to below:
     // p field means how much time is spent just in current line.
     /* acc_p: 99.966552%, p: 83.628188%        */                    i = callFunction(i);
 
+
+## FAQ
+
+**1. The correct way to pull perf.data on host.**
+As perf.data is generated in app's context, it can't be pulled directly to host.
+One way is to `adb shell run-as xxx cat perf.data >perf.data`. However, it
+doesn't work well on windows, because the content can be modified when it goes
+through the pipe. So we first copy it from app's context to shell's context,
+then pull it on host. The commands are as below:
+
+    $adb shell "run-as xxx cat perf.data | tee /data/local/tmp/perf.data >/dev/null"
+    $adb pull /data/local/tmp/perf.data
+
+
+**2. Fails to run run-as command.**
+First check if run-as is on the device, via `adb shell which run-as`.
+If run-as exists, but `adb shell run-as xxx` fails. You may be using some
+android O devices that doesn't give enough privilege to run-as, the workaround
+is to use `adb shell -tt run-as xxx` instead.
