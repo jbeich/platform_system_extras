@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f7d87f7d_1b06073e",
+        "filename": "simpleperf/scripts/app_profiler.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-06-22T00:55:19Z",
+      "side": 1,
+      "message": "unless you use the pid from pidof, you don\u0027t know you\u0027re killing the same one. (should you try to retrieve the pid from the invocation in start_and_wait_profiling instead?)",
+      "range": {
+        "startLine": 295,
+        "startChar": 58,
+        "endLine": 295,
+        "endChar": 68
+      },
+      "revId": "ccf7a5eb35c30401670916250c27e4b79a4c8473",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
