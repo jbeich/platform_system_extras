@@ -22,6 +22,30 @@
       "revId": "530c2e7198255f5cd5760ba61af41884550e71d7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ffd9e643_78312377",
+        "filename": "simpleperf/scripts/app_profiler.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-06-22T00:18:43Z",
+      "side": 1,
+      "message": "Done. `pidof` is still needed to wait until simpleperf exits.",
+      "parentUuid": "af04f915_c4e56732",
+      "range": {
+        "startLine": 288,
+        "startChar": 58,
+        "endLine": 288,
+        "endChar": 63
+      },
+      "revId": "530c2e7198255f5cd5760ba61af41884550e71d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
