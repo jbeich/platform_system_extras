@@ -22,6 +22,30 @@
       "revId": "ccf7a5eb35c30401670916250c27e4b79a4c8473",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fb0b14bc_2bf4869d",
+        "filename": "simpleperf/scripts/app_profiler.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-06-22T01:38:44Z",
+      "side": 1,
+      "message": "I don\u0027t know any easy way for adb to return the process running simpleperf on device.\nBut I think killing all simpleperf processes in the same app\u0027s context is fine. What\u0027s more, this behavior only happens when people send Ctrl-C to app_profiler.py manually. It doesn\u0027t happen all the time.\nSo I think we can leave it until it really need to be changed.",
+      "parentUuid": "f7d87f7d_1b06073e",
+      "range": {
+        "startLine": 295,
+        "startChar": 58,
+        "endLine": 295,
+        "endChar": 68
+      },
+      "revId": "ccf7a5eb35c30401670916250c27e4b79a4c8473",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
