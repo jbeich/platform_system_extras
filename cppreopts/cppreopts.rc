@@ -27,3 +27,19 @@ on property:sys.cppreopt=requested && property:ro.boot.slot_suffix=_b
     exec - system system -- /system/bin/preloads_copy.sh /postinstall
     umount /postinstall
     setprop sys.cppreopt finished
+
+on property:sys.cppreopt_oem=requested && property:ro.boot.slot_suffix=_a
+    mount ext4 /dev/block/bootdevice/by-name/oem_b /postinstall ro nosuid nodev noexec
+    exec - root -- /system/bin/cppreopts.sh /postinstall
+    # Optional script to copy additional preloaded content to data directory
+    exec - system system -- /system/bin/preloads_copy.sh /postinstall
+    umount /postinstall
+    setprop sys.cppreopt_oem finished
+
+on property:sys.cppreopt_oem=requested && property:ro.boot.slot_suffix=_b
+    mount ext4 /dev/block/bootdevice/by-name/oem_a /postinstall ro nosuid nodev noexec
+    exec - root -- /system/bin/cppreopts.sh /postinstall
+    # Optional script to copy additional preloaded content to data directory
+    exec - system system -- /system/bin/preloads_copy.sh /postinstall
+    umount /postinstall
+    setprop sys.cppreopt_oem finished

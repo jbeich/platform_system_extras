@@ -39,20 +39,25 @@ function do_copy() {
 }
 
 if [ $# -eq 1 ]; then
-  # Where the system_b is mounted that contains the preopt'd files
+  # Where the system_b or oem_b is mounted that contains the preopt'd files
   mountpoint=$1
 
-  if ! test -f ${mountpoint}/system-other-odex-marker ; then
-    log -p i -t cppreopts "system_other partition does not appear to have been built to contain preopted files."
+  if ! test -f ${mountpoint}/system-other-odex-marker && ! test -f ${mountpoint}/oem-other-odex-marker; then
+    log -p i -t cppreopts "system_other or oem_other partition does not appear have been built to contain preopted files."
     exit 1
   fi
 
+  if test -f ${mountpoint}/system-other-odex-marker; then
+    rootdir=system
+  elif test -f ${mountpoint}/oem-other-odex-marker; then
+    rootdir=oem
+  fi
   log -p i -t cppreopts "cppreopts from ${mountpoint}"
   # For each odex and vdex file do the copy task
   # NOTE: this implementation will break in any path with spaces to favor
   # background copy tasks
   for file in $(find ${mountpoint} -type f -name "*.odex" -o -type f -name "*.vdex"); do
-    real_name=${file/${mountpoint}/\/system}
+    real_name=${file/${mountpoint}/\/${rootdir}}
     dest_name=$(preopt2cachename ${real_name})
     if ! test $? -eq 0 ; then
       log -p i -t cppreopts "Unable to figure out destination for ${file}"
