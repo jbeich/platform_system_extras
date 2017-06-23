@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "56fbcb49_910c16b2",
+        "filename": "simpleperf/README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 621,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-06-23T00:12:02Z",
+      "side": 1,
+      "message": "Add a line\n\n  # See [link] for why we use tee rather than just \u003e.\n\n?",
+      "revId": "b0c1e46489444fb16282bd944fd8fbec6e9dc19e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5af9e988_03f52235",
+        "filename": "simpleperf/README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 830,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-06-23T00:12:02Z",
+      "side": 1,
+      "message": "i thought you were going to remove this?",
+      "range": {
+        "startLine": 827,
+        "startChar": 0,
+        "endLine": 830,
+        "endChar": 45
+      },
+      "revId": "b0c1e46489444fb16282bd944fd8fbec6e9dc19e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
