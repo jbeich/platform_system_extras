@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "62cc1639_bdcd7549",
+        "filename": "simpleperf/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 831,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-06-26T21:21:27Z",
+      "side": 1,
+      "message": "when would it make sense to profile in an emulator? isn\u0027t that just a bad idea? should we be suggesting folks profile on real devices instead?",
+      "range": {
+        "startLine": 831,
+        "startChar": 0,
+        "endLine": 831,
+        "endChar": 20
+      },
+      "revId": "8f8879c32ac60173c27d9be565dd5d33631c1ab4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
