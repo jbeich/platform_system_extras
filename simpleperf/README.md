@@ -30,6 +30,7 @@ Bugs and feature requests can be submitted at http://github.com/android-ndk/ndk/
     - [Annotate source code](#annotate-source-code)
 - [Answers to common issues](#answers-to-common-issues)
     - [The correct way to pull perf.data on host](#the-correct-way-to-pull-perfdata-on-host)
+    - [Profile on the Android emulator](#profile-on-the-android-emulator)
 
 
 ## Simpleperf introduction
@@ -822,5 +823,25 @@ doesn't work well on Windows, because the content can be modified when it goes
 through the pipe. So we first copy it from app's context to shell's context,
 then pull it on host. The commands are as below:
 
-    $adb shell "run-as xxx cat perf.data | tee /data/local/tmp/perf.data >/dev/null"
-    $adb pull /data/local/tmp/perf.data
+    $ adb shell "run-as xxx cat perf.data | tee /data/local/tmp/perf.data >/dev/null"
+    $ adb pull /data/local/tmp/perf.data
+
+
+### Profile on the Android emulator
+We suggest profiling on a real device, but when an Android device is not
+available, or you need to be root. You can also profile on the Android emulator.
+On the Android emulator, the hardware events are not available, but we can use
+software events instead. An example is as below:
+
+    # simpleperf record sleep 1
+    simpleperf E  1937  1937 event_selection_set.cpp:64] Event type 'cpu-cycles' is not supported by the kernel
+    # simpleperf record -e cpu-clock sleep 1
+    simpleperf I 06-26 14:09:03  1955  1955 cmd_record.cpp:357] Samples recorded: 17. Samples lost: 0.
+
+On the Android emulator, the dwarf based call graph may not be supported by the
+kernel. In this case, you can use stack frame based call graph.
+
+    # simpleperf record -e cpu-clock -g sleep 1
+    simpleperf E 06-26 14:11:01  1970  1970 event_selection_set.cpp:288] dwarf callchain sampling is not supported on this device.
+    # simpleperf record -e cpu-clock --call-graph fp sleep 1
+    simpleperf I 06-26 14:11:37  1974  1974 cmd_record.cpp:357] Samples recorded: 42. Samples lost: 0.
