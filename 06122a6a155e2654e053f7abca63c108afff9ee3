@@ -70,6 +70,30 @@
       "revId": "06122a6a155e2654e053f7abca63c108afff9ee3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f45b0d04_68f9cd08",
+        "filename": "simpleperf/demo/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-06-27T21:20:29Z",
+      "side": 1,
+      "message": "I see, we can\u0027t. Because the examples are Android Studio projects.",
+      "parentUuid": "ee877e7e_3b7726f2",
+      "range": {
+        "startLine": 122,
+        "startChar": 2,
+        "endLine": 123,
+        "endChar": 36
+      },
+      "revId": "06122a6a155e2654e053f7abca63c108afff9ee3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
