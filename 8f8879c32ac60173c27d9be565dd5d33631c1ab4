@@ -22,6 +22,30 @@
       "revId": "8f8879c32ac60173c27d9be565dd5d33631c1ab4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2a1c9ff8_70acb155",
+        "filename": "simpleperf/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 831,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-06-27T00:44:47Z",
+      "side": 1,
+      "message": "Android studio folks are interested in profiling in an emulator. And it can get some meaningful profiling callgraph. And emulators have the advantage that they are rooted (can do things like reading kernel symbols). The comment to suggest real devices are added.",
+      "parentUuid": "62cc1639_bdcd7549",
+      "range": {
+        "startLine": 831,
+        "startChar": 0,
+        "endLine": 831,
+        "endChar": 20
+      },
+      "revId": "8f8879c32ac60173c27d9be565dd5d33631c1ab4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
