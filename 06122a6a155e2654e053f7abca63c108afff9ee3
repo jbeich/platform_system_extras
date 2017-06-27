@@ -118,6 +118,30 @@
       "revId": "06122a6a155e2654e053f7abca63c108afff9ee3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cd0b9517_d4f8f6ed",
+        "filename": "simpleperf/demo/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-06-27T21:43:08Z",
+      "side": 1,
+      "message": "sure. The Android Studio projects are easy for people to download and verify (I think they don\u0027t want to download the whole aosp to build the projects). I plan to have similar examples for testing simpleperf release in ndk, that should be built in aosp build system.",
+      "parentUuid": "6a9b40b5_94b52b67",
+      "range": {
+        "startLine": 122,
+        "startChar": 2,
+        "endLine": 123,
+        "endChar": 36
+      },
+      "revId": "06122a6a155e2654e053f7abca63c108afff9ee3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
