@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f0499410_0527ee4e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1163153
+      },
+      "writtenOn": "2017-06-27T11:16:41Z",
+      "side": 1,
+      "message": "nit: this bug seems unrelated to the change. I might be missing some context, feel free to ignore if that\u0027s the case.",
+      "range": {
+        "startLine": 9,
+        "startChar": 14,
+        "endLine": 9,
+        "endChar": 22
+      },
+      "revId": "5ff8cb89a4e922173b8df77ab401d7d3e8342343",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
