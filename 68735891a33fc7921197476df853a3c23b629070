@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0fd402af_54d47a12",
+        "filename": "tests/kernel.config/pstore_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1004277
+      },
+      "writtenOn": "2017-06-27T20:59:07Z",
+      "side": 1,
+      "message": "Is it one OR the other should be accessible?",
+      "range": {
+        "startLine": 26,
+        "startChar": 64,
+        "endLine": 26,
+        "endChar": 66
+      },
+      "revId": "68735891a33fc7921197476df853a3c23b629070",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
