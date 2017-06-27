@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8808924b_cff27780",
+        "filename": "simpleperf/demo/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-06-27T05:26:00Z",
+      "side": 1,
+      "message": "can we avoid that and make this stand-alone? (for all three of these.)",
+      "range": {
+        "startLine": 122,
+        "startChar": 2,
+        "endLine": 123,
+        "endChar": 36
+      },
+      "revId": "06122a6a155e2654e053f7abca63c108afff9ee3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
