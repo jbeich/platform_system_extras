@@ -70,6 +70,30 @@
       "revId": "8f8879c32ac60173c27d9be565dd5d33631c1ab4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0929dedb_f215204d",
+        "filename": "simpleperf/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 831,
+      "author": {
+        "id": 1079424
+      },
+      "writtenOn": "2017-06-27T19:52:44Z",
+      "side": 1,
+      "message": "Yes, Android Studio Profilers want to profile in an emulator for mainly two reasons. First, because our event, memory, and network profilers do collect (almost) the same meaningful data in an emulator as a physical device, we want CPU profiler to have feature parity in an emulator. Second, even if timing information may be inaccurate in an emulated execution environment due to different ISAs, CPU micro-architectures, etc., a function\u0027s execution frequency can still be a good indicator when a code path is obviously wrong, which may not be a uncommon scenario in our use base.\n\nThat said, I don\u0027t think Elliott\u0027s is baseless. I like the clarification message added in the patch set #2.",
+      "parentUuid": "a86b72bf_f260b7d4",
+      "range": {
+        "startLine": 831,
+        "startChar": 0,
+        "endLine": 831,
+        "endChar": 20
+      },
+      "revId": "8f8879c32ac60173c27d9be565dd5d33631c1ab4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
