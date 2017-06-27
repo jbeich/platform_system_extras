@@ -142,6 +142,30 @@
       "revId": "06122a6a155e2654e053f7abca63c108afff9ee3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1723f025_cffa73fa",
+        "filename": "simpleperf/demo/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-06-27T21:57:50Z",
+      "side": 1,
+      "message": "yes, i agree that both are useful. i just think we have two kinds of user, and they both _only_ want the opposite choice to each other :-)\n\n(we can check prebuilt apks in for the NDK, since all the other simpleperf stuff there is prebuilt anyway.)",
+      "parentUuid": "cd0b9517_d4f8f6ed",
+      "range": {
+        "startLine": 122,
+        "startChar": 2,
+        "endLine": 123,
+        "endChar": 36
+      },
+      "revId": "06122a6a155e2654e053f7abca63c108afff9ee3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
