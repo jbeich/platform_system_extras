@@ -46,6 +46,30 @@
       "revId": "8f8879c32ac60173c27d9be565dd5d33631c1ab4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a86b72bf_f260b7d4",
+        "filename": "simpleperf/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 831,
+      "author": {
+        "id": 1163153
+      },
+      "writtenOn": "2017-06-27T11:14:16Z",
+      "side": 1,
+      "message": "Yes, we are interested in the data for emulators as well. We display method tracing information in trees and charts so users can identify which methods are taking more time to execute. I guess they can do that in emulators as well.",
+      "parentUuid": "2a1c9ff8_70acb155",
+      "range": {
+        "startLine": 831,
+        "startChar": 0,
+        "endLine": 831,
+        "endChar": 20
+      },
+      "revId": "8f8879c32ac60173c27d9be565dd5d33631c1ab4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
