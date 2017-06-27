@@ -42,6 +42,24 @@
     },
     {
       "key": {
+        "uuid": "9a624257_63b01dd8",
+        "filename": "simpleperf/README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 831,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-06-27T21:36:56Z",
+      "side": 1,
+      "message": "Done. The answer is simple. Whether simpleperf supports profiling on the Android emulator has been asked by android studio folks and Quddus Chong, who is writing ndk document for simpleperf. I guess people outside google might also be curious. And since simpleperf supports that, why don\u0027t we document it clearly, so people can take most of the Android emulator.",
+      "parentUuid": "f9a580a5_89476463",
+      "revId": "5ff8cb89a4e922173b8df77ab401d7d3e8342343",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "93056a5f_b5ae232c",
         "filename": "simpleperf/README.md",
         "patchSetId": 2
@@ -53,6 +71,30 @@
       "writtenOn": "2017-06-27T19:53:53Z",
       "side": 1,
       "message": "Nit: s/. Y/, y/.",
+      "range": {
+        "startLine": 832,
+        "startChar": 33,
+        "endLine": 832,
+        "endChar": 36
+      },
+      "revId": "5ff8cb89a4e922173b8df77ab401d7d3e8342343",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "772fedd9_900d7729",
+        "filename": "simpleperf/README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 832,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-06-27T21:36:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "93056a5f_b5ae232c",
       "range": {
         "startLine": 832,
         "startChar": 33,
