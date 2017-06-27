@@ -60,6 +60,24 @@
     },
     {
       "key": {
+        "uuid": "5b488f67_7904af6b",
+        "filename": "simpleperf/README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 831,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-06-27T21:49:41Z",
+      "side": 1,
+      "message": "i think quddus asked because he\u0027s not actually a developer. and the Studio folks have their own weird reasons (and will be making this available anyway).\n\nwhat you document shapes what people will actually do, though, which is what bothers me about this. by writing about it we\u0027re encouraging it, and i still think it\u0027s a mistake. (especially if you don\u0027t already understand the difference between hardware and software events, and the trade-offs there.)\n\ni just don\u0027t believe this is something real people should be doing.\n\n\"when an Android device is not available\" should be basically zero developers: developing an Android app without a device is crazy. and \"you need to be root\" is already solved; you don\u0027t need to be root.\n\nthere\u0027s already a place for helping people shoot themselves in the foot: it\u0027s called stackoverflow.com.",
+      "parentUuid": "9a624257_63b01dd8",
+      "revId": "5ff8cb89a4e922173b8df77ab401d7d3e8342343",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "93056a5f_b5ae232c",
         "filename": "simpleperf/README.md",
         "patchSetId": 2
