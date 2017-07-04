@@ -222,7 +222,7 @@ void ext4_create_fs_aux_info()
 	if (ext4_bg_has_super_block(aux_info.groups - 1))
 		last_header_size += 1 + aux_info.bg_desc_blocks +
 			info.bg_desc_reserve_blocks;
-	if (aux_info.groups <= 1 && last_group_size < last_header_size) {
+	if (aux_info.groups < 1 && last_group_size < last_header_size) {
 		critical_error("filesystem size too small");
 	}
 	if (last_group_size > 0 && last_group_size < last_header_size) {
