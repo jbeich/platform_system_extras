@@ -16,6 +16,24 @@
       "revId": "580c2e3552836196a243280f929176af29c893f0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c0597f5e_2ae88965",
+        "filename": "ext4_utils/include/ext4_utils/ext4.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2017-07-06T19:14:44Z",
+      "side": 1,
+      "message": "\u003e Should also EXT4_FEATURE_INCOMPAT_SUPP flag be added to EXT4_FEATURE_INCOMPAT_SUPP define? Or maybe should this header be cleaned up from unnecessary defines?\n\nIt seems this header was originally generated from fs/ext4/ext4.h in the kernel sources, so it contains definitions like EXT4_FEATURE_INCOMPAT_SUPP that are only used by the kernel and the Android userspace has no use for.  Also the header has never been regenerated and I don\u0027t see any instructions to do so, so it probably was a one-off thing, and there have been other random changes to it too.  So I\u0027m in favor of removing the unused stuff, though I don\u0027t have time for it right now.\n\n\u003e Should feat_incompat\u0027s type be changed to uint32_t? (struct fs_info, ext4_utils/include/ext4_utils/ext4_sb.h file)\n\u003e Because now this flag uses 17 bits.\n\nIndeed, this is clearly wrong, and likewise for feat_ro_compat and feat_compat.  I have no idea why these were made uint16_t, since it seems the corresponding superblock fields have always been 32-bit.  I\u0027ll fix it...",
+      "parentUuid": "ba8b73bb_3895130c",
+      "revId": "580c2e3552836196a243280f929176af29c893f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
