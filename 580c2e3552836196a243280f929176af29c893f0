@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba8b73bb_3895130c",
+        "filename": "ext4_utils/include/ext4_utils/ext4.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 1087743
+      },
+      "writtenOn": "2017-07-06T14:06:06Z",
+      "side": 1,
+      "message": "Should also EXT4_FEATURE_INCOMPAT_SUPP flag be added to EXT4_FEATURE_INCOMPAT_SUPP define? Or maybe should this header be cleaned up from unnecessary defines?\n\nShould feat_incompat\u0027s type be changed to uint32_t? (struct fs_info, ext4_utils/include/ext4_utils/ext4_sb.h file)\nBecause now this flag uses 17 bits.",
+      "revId": "580c2e3552836196a243280f929176af29c893f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
