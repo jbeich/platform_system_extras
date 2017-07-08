@@ -1,0 +1,418 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "246db989_93368c2a",
+        "filename": "simpleperf/inferno/README.md",
+        "patchSetId": 6
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-07-08T06:29:57Z",
+      "side": 1,
+      "message": "\"flame graph generator\"?",
+      "range": {
+        "startLine": 5,
+        "startChar": 13,
+        "endLine": 5,
+        "endChar": 25
+      },
+      "revId": "43d72ea0509ab5aba1c90248f9aca12c73e03c44",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8b4d95ab_9813ed82",
+        "filename": "simpleperf/inferno/README.md",
+        "patchSetId": 6
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-07-08T06:29:57Z",
+      "side": 1,
+      "message": "performance",
+      "range": {
+        "startLine": 6,
+        "startChar": 15,
+        "endLine": 6,
+        "endChar": 27
+      },
+      "revId": "43d72ea0509ab5aba1c90248f9aca12c73e03c44",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f20c4673_82cc93d5",
+        "filename": "simpleperf/inferno/README.md",
+        "patchSetId": 6
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-07-08T06:29:57Z",
+      "side": 1,
+      "message": "\"the total sampling period\"",
+      "range": {
+        "startLine": 8,
+        "startChar": 146,
+        "endLine": 8,
+        "endChar": 152
+      },
+      "revId": "43d72ea0509ab5aba1c90248f9aca12c73e03c44",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d00fd831_c30bd818",
+        "filename": "simpleperf/inferno/README.md",
+        "patchSetId": 6
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-07-08T06:29:57Z",
+      "side": 1,
+      "message": "occurred",
+      "range": {
+        "startLine": 8,
+        "startChar": 232,
+        "endLine": 8,
+        "endChar": 239
+      },
+      "revId": "43d72ea0509ab5aba1c90248f9aca12c73e03c44",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "319ba59a_0824eaa0",
+        "filename": "simpleperf/inferno/README.md",
+        "patchSetId": 6
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-07-08T06:29:57Z",
+      "side": 1,
+      "message": "flame graph",
+      "range": {
+        "startLine": 8,
+        "startChar": 117,
+        "endLine": 8,
+        "endChar": 127
+      },
+      "revId": "43d72ea0509ab5aba1c90248f9aca12c73e03c44",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ece35e61_c14d48b2",
+        "filename": "simpleperf/inferno/README.md",
+        "patchSetId": 6
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-07-08T06:29:57Z",
+      "side": 1,
+      "message": "functions",
+      "range": {
+        "startLine": 8,
+        "startChar": 196,
+        "endLine": 8,
+        "endChar": 204
+      },
+      "revId": "43d72ea0509ab5aba1c90248f9aca12c73e03c44",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "21f492f5_220ff610",
+        "filename": "simpleperf/inferno/README.md",
+        "patchSetId": 6
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-07-08T06:29:57Z",
+      "side": 1,
+      "message": "represents",
+      "range": {
+        "startLine": 8,
+        "startChar": 128,
+        "endLine": 8,
+        "endChar": 137
+      },
+      "revId": "43d72ea0509ab5aba1c90248f9aca12c73e03c44",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d7877493_aefbe4ea",
+        "filename": "simpleperf/inferno/README.md",
+        "patchSetId": 6
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-07-08T06:29:57Z",
+      "side": 1,
+      "message": "thousands",
+      "range": {
+        "startLine": 14,
+        "startChar": 77,
+        "endLine": 14,
+        "endChar": 85
+      },
+      "revId": "43d72ea0509ab5aba1c90248f9aca12c73e03c44",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "06e8b95e_7ecd622d",
+        "filename": "simpleperf/inferno/README.md",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-07-08T06:29:57Z",
+      "side": 1,
+      "message": "web browser",
+      "range": {
+        "startLine": 26,
+        "startChar": 68,
+        "endLine": 26,
+        "endChar": 78
+      },
+      "revId": "43d72ea0509ab5aba1c90248f9aca12c73e03c44",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b77ad3af_18b327f6",
+        "filename": "simpleperf/inferno/README.md",
+        "patchSetId": 6
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-07-08T06:29:57Z",
+      "side": 1,
+      "message": "how long to sample for",
+      "range": {
+        "startLine": 30,
+        "startChar": 15,
+        "endLine": 30,
+        "endChar": 37
+      },
+      "revId": "43d72ea0509ab5aba1c90248f9aca12c73e03c44",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f119a1ff_c4a8a3f7",
+        "filename": "simpleperf/inferno/README.md",
+        "patchSetId": 6
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-07-08T06:29:57Z",
+      "side": 1,
+      "message": "the `-h` flag\n\nor\n\n`-h`",
+      "range": {
+        "startLine": 30,
+        "startChar": 88,
+        "endLine": 30,
+        "endChar": 97
+      },
+      "revId": "43d72ea0509ab5aba1c90248f9aca12c73e03c44",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "13fe48cf_0ec5f9a0",
+        "filename": "simpleperf/inferno/README.md",
+        "patchSetId": 6
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-07-08T06:29:57Z",
+      "side": 1,
+      "message": "flame graph",
+      "range": {
+        "startLine": 38,
+        "startChar": 11,
+        "endLine": 38,
+        "endChar": 21
+      },
+      "revId": "43d72ea0509ab5aba1c90248f9aca12c73e03c44",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "677c6d75_469779cd",
+        "filename": "simpleperf/inferno/README.md",
+        "patchSetId": 6
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-07-08T06:29:57Z",
+      "side": 1,
+      "message": "A",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 2
+      },
+      "revId": "43d72ea0509ab5aba1c90248f9aca12c73e03c44",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ab90e5c_0654e9ea",
+        "filename": "simpleperf/inferno/README.md",
+        "patchSetId": 6
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-07-08T06:29:57Z",
+      "side": 1,
+      "message": "call site",
+      "range": {
+        "startLine": 38,
+        "startChar": 40,
+        "endLine": 38,
+        "endChar": 48
+      },
+      "revId": "43d72ea0509ab5aba1c90248f9aca12c73e03c44",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f0842f16_b8ba91dd",
+        "filename": "simpleperf/inferno/README.md",
+        "patchSetId": 6
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-07-08T06:29:57Z",
+      "side": 1,
+      "message": "problem",
+      "range": {
+        "startLine": 39,
+        "startChar": 197,
+        "endLine": 39,
+        "endChar": 203
+      },
+      "revId": "43d72ea0509ab5aba1c90248f9aca12c73e03c44",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fbfd52af_95f974c1",
+        "filename": "simpleperf/inferno/README.md",
+        "patchSetId": 6
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-07-08T06:29:57Z",
+      "side": 1,
+      "message": "call site",
+      "range": {
+        "startLine": 39,
+        "startChar": 27,
+        "endLine": 39,
+        "endChar": 35
+      },
+      "revId": "43d72ea0509ab5aba1c90248f9aca12c73e03c44",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "08f44d75_47430413",
+        "filename": "simpleperf/inferno/README.md",
+        "patchSetId": 6
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-07-08T06:29:57Z",
+      "side": 1,
+      "message": "from which all flames originate\n\nor\n\nof all flames",
+      "range": {
+        "startLine": 39,
+        "startChar": 81,
+        "endLine": 39,
+        "endChar": 112
+      },
+      "revId": "43d72ea0509ab5aba1c90248f9aca12c73e03c44",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "13602f51_f9685ef7",
+        "filename": "simpleperf/inferno/README.md",
+        "patchSetId": 6
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-07-08T06:29:57Z",
+      "side": 1,
+      "message": "a",
+      "range": {
+        "startLine": 39,
+        "startChar": 17,
+        "endLine": 39,
+        "endChar": 19
+      },
+      "revId": "43d72ea0509ab5aba1c90248f9aca12c73e03c44",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
