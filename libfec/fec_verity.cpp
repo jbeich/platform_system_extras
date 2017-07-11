@@ -570,15 +570,14 @@ int verity_parse_header(fec_handle *f, uint64_t offset)
         v->disabled = true;
     }
 
-    if (fec_pread(f, &v->ecc_header, sizeof(v->ecc_header), offset) !=
-            sizeof(v->ecc_header)) {
-        warn("failed to read verity header: %s", strerror(errno));
-        return -1;
-    }
-
     if (validate_header(f, &v->header, offset)) {
         /* raw verity header is invalid; this could be due to corruption, or
            due to missing verity metadata */
+        if (fec_pread(f, &v->ecc_header, sizeof(v->ecc_header), offset) !=
+                sizeof(v->ecc_header)) {
+            warn("failed to read verity header: %s", strerror(errno));
+            return -1;
+        }
 
         if (validate_header(f, &v->ecc_header, offset)) {
             return -1; /* either way, we cannot recover */
