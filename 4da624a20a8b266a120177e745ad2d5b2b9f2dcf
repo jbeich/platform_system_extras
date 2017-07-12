@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b8b96041_18c3dd49",
+        "filename": "simpleperf/README.md",
+        "patchSetId": 22
+      },
+      "lineNbr": 839,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-07-12T03:11:30Z",
+      "side": 1,
+      "message": "use ./inferno/report.html?",
+      "range": {
+        "startLine": 839,
+        "startChar": 7,
+        "endLine": 839,
+        "endChar": 18
+      },
+      "revId": "4da624a20a8b266a120177e745ad2d5b2b9f2dcf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
