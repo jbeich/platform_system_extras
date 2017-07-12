@@ -22,6 +22,30 @@
       "revId": "a20808b7130f840bd5e35bb19eb131113720240b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4993afb2_1185001f",
+        "filename": "simpleperf/cmd_record_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-07-12T22:55:31Z",
+      "side": 1,
+      "message": "yes. 3s is enough to reproduce this. But if not, we can increase it.",
+      "parentUuid": "c3034cb7_87c9e285",
+      "range": {
+        "startLine": 442,
+        "startChar": 31,
+        "endLine": 442,
+        "endChar": 42
+      },
+      "revId": "a20808b7130f840bd5e35bb19eb131113720240b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
