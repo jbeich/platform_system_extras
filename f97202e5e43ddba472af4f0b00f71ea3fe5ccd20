@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "a2985d11_35175b8a",
+        "filename": "simpleperf/inferno.bat",
+        "patchSetId": 9
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1083168
+      },
+      "writtenOn": "2017-07-12T18:39:22Z",
+      "side": 1,
+      "message": "No you cannot: simpleperf_report_lib is in a directory above in script. You will get an error message because the package cannot be found.",
+      "parentUuid": "7122dcd6_91ea32f9",
+      "range": {
+        "startLine": 1,
+        "startChar": 18,
+        "endLine": 1,
+        "endChar": 25
+      },
+      "revId": "f97202e5e43ddba472af4f0b00f71ea3fe5ccd20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "80888ad6_6231e6f0",
         "filename": "simpleperf/inferno/README.md",
         "patchSetId": 9
@@ -132,6 +156,30 @@
       "side": 1,
       "message": "forgot to remove this file?",
       "parentUuid": "113dd872_b53668aa",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 1
+      },
+      "revId": "f97202e5e43ddba472af4f0b00f71ea3fe5ccd20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "133104ea_5b209f62",
+        "filename": "simpleperf/inferno/README.md",
+        "patchSetId": 9
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1083168
+      },
+      "writtenOn": "2017-07-12T18:39:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b16073a6_91db0352",
       "range": {
         "startLine": 1,
         "startChar": 0,
@@ -273,6 +321,54 @@
       "writtenOn": "2017-07-12T05:38:27Z",
       "side": 1,
       "message": "telling people \"use a 64-bit build for better profiling\" is fine by me... the sooner we move developers over to LP64 the better for everyone.",
+      "parentUuid": "d51767d3_fe07f40f",
+      "range": {
+        "startLine": 6,
+        "startChar": 49,
+        "endLine": 7,
+        "endChar": 73
+      },
+      "revId": "f97202e5e43ddba472af4f0b00f71ea3fe5ccd20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e081603_f87ff583",
+        "filename": "simpleperf/inferno/README.md",
+        "patchSetId": 9
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1083168
+      },
+      "writtenOn": "2017-07-12T18:39:22Z",
+      "side": 1,
+      "message": "I added a note in the troubleshooting section.",
+      "parentUuid": "e05c2322_f967a6ae",
+      "range": {
+        "startLine": 6,
+        "startChar": 49,
+        "endLine": 7,
+        "endChar": 73
+      },
+      "revId": "f97202e5e43ddba472af4f0b00f71ea3fe5ccd20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "935a2569_c1f82adb",
+        "filename": "simpleperf/inferno/README.md",
+        "patchSetId": 9
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1083168
+      },
+      "writtenOn": "2017-07-12T18:39:22Z",
+      "side": 1,
+      "message": "This is for fully c++ applications and NDK based apps. Not java with JNI (c++ combined). \n\n1. It is very useful.I used it on surfaceflinger (full c++) and Filament (NDK C++) and we were able to find many bottlenecks. I just shared the doc I wrote when I profiled SurfaceFlinger: Flamegraphs were key to this effort. I believe all videogame developers will benefit from this tool.\n\n2. I don\u0027t think anybody will go native app and compile to Thumb or even Thumb64. These are ABI of the past decade and are never used.\n\n3. They are similar but the cost makes the dwarf unwinding lose many samples. I cannot sample surfaceflinger at more than 2000Hz without losing sample. At 60fps, that is only 30 samples per frames.\n\n4. See 3.\n\nI added a parameter to allow dwarf unwinding (-du) and added a not in README.md recommending fp unwinding. Hopefully that will satisfy both requirements :) !",
       "parentUuid": "d51767d3_fe07f40f",
       "range": {
         "startLine": 6,
