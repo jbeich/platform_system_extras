@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c3034cb7_87c9e285",
+        "filename": "simpleperf/cmd_record_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-07-12T22:15:21Z",
+      "side": 1,
+      "message": "3s, right?",
+      "range": {
+        "startLine": 442,
+        "startChar": 31,
+        "endLine": 442,
+        "endChar": 42
+      },
+      "revId": "a20808b7130f840bd5e35bb19eb131113720240b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
