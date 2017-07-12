@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "555109a8_778d5009",
+        "filename": "simpleperf/inferno.bat",
+        "patchSetId": 9
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1083168
+      },
+      "writtenOn": "2017-07-12T01:02:18Z",
+      "side": 1,
+      "message": "Because you need to type the package name, so it is not:\npython inferno.py\nbut \npython -m inferno.inferno\n\nI want to make the took as easy to start as possible. A bash script seems perfect to hide the package complexity.",
+      "parentUuid": "95b5bd7c_b6eb2927",
+      "range": {
+        "startLine": 1,
+        "startChar": 18,
+        "endLine": 1,
+        "endChar": 25
+      },
+      "revId": "f97202e5e43ddba472af4f0b00f71ea3fe5ccd20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "80888ad6_6231e6f0",
         "filename": "simpleperf/inferno/README.md",
         "patchSetId": 9
@@ -36,6 +60,30 @@
       "writtenOn": "2017-07-11T01:34:42Z",
       "side": 1,
       "message": "I prefer to add inferno readme as a section in simpleperf/README.md, especially since we want to add inferno to ndk release. But not necessary in this CL.",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 1
+      },
+      "revId": "f97202e5e43ddba472af4f0b00f71ea3fe5ccd20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "113dd872_b53668aa",
+        "filename": "simpleperf/inferno/README.md",
+        "patchSetId": 9
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1083168
+      },
+      "writtenOn": "2017-07-12T01:02:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "80888ad6_6231e6f0",
       "range": {
         "startLine": 1,
         "startChar": 0,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "9e96b86c_6748f3e1",
+        "filename": "simpleperf/inferno/README.md",
+        "patchSetId": 9
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1083168
+      },
+      "writtenOn": "2017-07-12T01:02:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "93e64e40_e117d72a",
+      "range": {
+        "startLine": 5,
+        "startChar": 53,
+        "endLine": 5,
+        "endChar": 60
+      },
+      "revId": "f97202e5e43ddba472af4f0b00f71ea3fe5ccd20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "186546f4_9715adc9",
         "filename": "simpleperf/inferno/README.md",
         "patchSetId": 9
@@ -82,6 +154,30 @@
       "writtenOn": "2017-07-11T01:34:42Z",
       "side": 1,
       "message": "This can be removed. Because:\n1. arm64 has good support for frame pointers.  Even if the code is compiled not using -fno-omit-frame-pointer, it always contains frame pointers as far as I can see.\n2. frame-pointer based callgraph is not the only choice. simpleperf also supports dwarf based callgraph. So we can also support callgraphs on arm via dwarf.",
+      "range": {
+        "startLine": 6,
+        "startChar": 49,
+        "endLine": 7,
+        "endChar": 73
+      },
+      "revId": "f97202e5e43ddba472af4f0b00f71ea3fe5ccd20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "40d1e3d8_8588ca63",
+        "filename": "simpleperf/inferno/README.md",
+        "patchSetId": 9
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1083168
+      },
+      "writtenOn": "2017-07-12T01:02:18Z",
+      "side": 1,
+      "message": "I have never been able to get simpleperf to work well without framepointer unwinding:\n\n1/ When unrolling fails, we get a lot of noise at the base of the flames.\n2/ Even if it works, stack copying is so expensive we cannot get a sampling frequency high enough to be useful, especially for processes like surfaceflinger which uses little CPU.\n\nFor these two reasons I prefer to use Inferno with frame pointers.",
+      "parentUuid": "186546f4_9715adc9",
       "range": {
         "startLine": 6,
         "startChar": 49,
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "8d7e2f90_b01617a4",
+        "filename": "simpleperf/inferno/inferno.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1083168
+      },
+      "writtenOn": "2017-07-12T01:02:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1882fd6a_f869a92c",
+      "range": {
+        "startLine": 58,
+        "startChar": 19,
+        "endLine": 58,
+        "endChar": 29
+      },
+      "revId": "f97202e5e43ddba472af4f0b00f71ea3fe5ccd20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a96df17_2d6c5e70",
         "filename": "simpleperf/inferno/inferno.py",
         "patchSetId": 9
@@ -128,6 +248,30 @@
       "writtenOn": "2017-07-11T01:34:42Z",
       "side": 1,
       "message": "simpleperf has removed this option and dump symbols by default.",
+      "range": {
+        "startLine": 59,
+        "startChar": 4,
+        "endLine": 59,
+        "endChar": 18
+      },
+      "revId": "f97202e5e43ddba472af4f0b00f71ea3fe5ccd20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d0e6b059_8f046293",
+        "filename": "simpleperf/inferno/inferno.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1083168
+      },
+      "writtenOn": "2017-07-12T01:02:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1a96df17_2d6c5e70",
       "range": {
         "startLine": 59,
         "startChar": 4,
