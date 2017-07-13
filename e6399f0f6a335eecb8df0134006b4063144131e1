@@ -164,6 +164,30 @@
       "revId": "e6399f0f6a335eecb8df0134006b4063144131e1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8a3d0d18_34e63889",
+        "filename": "simpleperf/report.html",
+        "patchSetId": 24
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1083168
+      },
+      "writtenOn": "2017-07-13T00:50:34Z",
+      "side": 1,
+      "message": "Fixed README to use all files from inferno folder.",
+      "parentUuid": "57370abe_1b332ad6",
+      "range": {
+        "startLine": 1,
+        "startChar": 7,
+        "endLine": 1,
+        "endChar": 11
+      },
+      "revId": "e6399f0f6a335eecb8df0134006b4063144131e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
