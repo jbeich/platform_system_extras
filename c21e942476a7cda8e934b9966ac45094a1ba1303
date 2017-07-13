@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "8faf0f20_5f3c6d15",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-07-13T22:17:11Z",
+      "side": 1,
+      "message": "Done. I\u0027d rather document it than add unnecessary options. There is no reason for users on rooted devices to use run-as, which limits their ability to profile non debuggable apps. By making the choice in simpleperf, we can save users\u0027 time.",
+      "parentUuid": "49db3400_b24f504c",
+      "range": {
+        "startLine": 82,
+        "startChar": 55,
+        "endLine": 83,
+        "endChar": 58
+      },
+      "revId": "c21e942476a7cda8e934b9966ac45094a1ba1303",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "99c3a550_9f437b60",
         "filename": "simpleperf/cmd_record.cpp",
         "patchSetId": 2
