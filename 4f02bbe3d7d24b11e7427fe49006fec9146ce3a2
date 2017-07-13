@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "38846a49_87fdbb8a",
+        "filename": "simpleperf/inferno/inferno.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-07-13T18:24:49Z",
+      "side": 1,
+      "message": "a change by mistake?",
+      "range": {
+        "startLine": 258,
+        "startChar": 76,
+        "endLine": 258,
+        "endChar": 79
+      },
+      "revId": "4f02bbe3d7d24b11e7427fe49006fec9146ce3a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
