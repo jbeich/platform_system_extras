@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "af793d6a_d60622d2",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-07-13T17:26:37Z",
+      "side": 1,
+      "message": "There are two use cases:\n1. On a non-rooted device, we can only profile debuggable apps.\n2. On a rooted device, some users want to profile non debuggable apps. If we use run-as in rooted devices, it won\u0027t be able to profile non debuggable apps using --app. I have added this to comment.\n\nFor testing, I will change simpleperf cts tests to use --app. So non-rooted devices will be tested. And on rooted devices, it will be tested when using app_profiler.py on a userdebug device.",
+      "parentUuid": "d69348a2_2184d880",
+      "revId": "4d17c732761decc5777b0de117fec7421079b90b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9c0d9cb7_a2847e40",
         "filename": "simpleperf/environment.cpp",
         "patchSetId": 1
@@ -30,6 +48,30 @@
       "writtenOn": "2017-07-13T16:21:51Z",
       "side": 1,
       "message": "Got",
+      "range": {
+        "startLine": 532,
+        "startChar": 24,
+        "endLine": 532,
+        "endChar": 27
+      },
+      "revId": "4d17c732761decc5777b0de117fec7421079b90b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "47ab2a2d_656adf1b",
+        "filename": "simpleperf/environment.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 532,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-07-13T17:26:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9c0d9cb7_a2847e40",
       "range": {
         "startLine": 532,
         "startChar": 24,
@@ -88,6 +130,30 @@
     },
     {
       "key": {
+        "uuid": "5c691373_913f411e",
+        "filename": "simpleperf/environment.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 548,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-07-13T17:26:37Z",
+      "side": 1,
+      "message": "a dot is missing here.",
+      "parentUuid": "fb218d26_ea7eb42a",
+      "range": {
+        "startLine": 548,
+        "startChar": 58,
+        "endLine": 548,
+        "endChar": 61
+      },
+      "revId": "4d17c732761decc5777b0de117fec7421079b90b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e49c728a_caaf7942",
         "filename": "simpleperf/workload.cpp",
         "patchSetId": 1
@@ -99,6 +165,30 @@
       "writtenOn": "2017-07-13T16:21:51Z",
       "side": 1,
       "message": "Join?",
+      "range": {
+        "startLine": 44,
+        "startChar": 2,
+        "endLine": 50,
+        "endChar": 3
+      },
+      "revId": "4d17c732761decc5777b0de117fec7421079b90b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "65966e06_3daf3ab8",
+        "filename": "simpleperf/workload.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-07-13T17:26:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e49c728a_caaf7942",
       "range": {
         "startLine": 44,
         "startChar": 2,
