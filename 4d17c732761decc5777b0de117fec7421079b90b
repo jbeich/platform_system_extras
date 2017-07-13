@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d69348a2_2184d880",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-07-13T16:21:51Z",
+      "side": 1,
+      "message": "is that a good idea? isn\u0027t it more useful for us to be able to test --app whether or not we\u0027re rooted?",
+      "revId": "4d17c732761decc5777b0de117fec7421079b90b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9c0d9cb7_a2847e40",
+        "filename": "simpleperf/environment.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 532,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-07-13T16:21:51Z",
+      "side": 1,
+      "message": "Got",
+      "range": {
+        "startLine": 532,
+        "startChar": 24,
+        "endLine": 532,
+        "endChar": 27
+      },
+      "revId": "4d17c732761decc5777b0de117fec7421079b90b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "69e0e8ec_08423726",
+        "filename": "simpleperf/environment.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 538,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-07-13T16:21:51Z",
+      "side": 1,
+      "message": "Waiting",
+      "range": {
+        "startLine": 538,
+        "startChar": 20,
+        "endLine": 538,
+        "endChar": 24
+      },
+      "revId": "4d17c732761decc5777b0de117fec7421079b90b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fb218d26_ea7eb42a",
+        "filename": "simpleperf/environment.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 548,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-07-13T16:21:51Z",
+      "side": 1,
+      "message": "using implicit concatenation seems needlessly confusing",
+      "range": {
+        "startLine": 548,
+        "startChar": 58,
+        "endLine": 548,
+        "endChar": 61
+      },
+      "revId": "4d17c732761decc5777b0de117fec7421079b90b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e49c728a_caaf7942",
+        "filename": "simpleperf/workload.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-07-13T16:21:51Z",
+      "side": 1,
+      "message": "Join?",
+      "range": {
+        "startLine": 44,
+        "startChar": 2,
+        "endLine": 50,
+        "endChar": 3
+      },
+      "revId": "4d17c732761decc5777b0de117fec7421079b90b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
