@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "49db3400_b24f504c",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-07-13T21:41:14Z",
+      "side": 1,
+      "message": "...except when it doesn\u0027t :-)\n\ni think if you\u0027re going to keep this subtle behavior you need to document it. are you sure a --no-run-as wouldn\u0027t be better, to allow rooted users to skip run-as?",
+      "range": {
+        "startLine": 82,
+        "startChar": 55,
+        "endLine": 83,
+        "endChar": 58
+      },
+      "revId": "c21e942476a7cda8e934b9966ac45094a1ba1303",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "99c3a550_9f437b60",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-07-13T21:41:14Z",
+      "side": 1,
+      "message": "and isn\u0027t this basically the same implementation?",
+      "revId": "c21e942476a7cda8e934b9966ac45094a1ba1303",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
