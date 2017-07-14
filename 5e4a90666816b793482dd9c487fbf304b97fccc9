@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1b959170_44f2cb77",
+        "filename": "simpleperf/scripts/pprof_proto_generator.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 452,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2017-07-14T22:37:25Z",
+      "side": 1,
+      "message": "nit: not needed, then we can skip the indentation below",
+      "range": {
+        "startLine": 452,
+        "startChar": 8,
+        "endLine": 452,
+        "endChar": 13
+      },
+      "revId": "5e4a90666816b793482dd9c487fbf304b97fccc9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6d3263f1_a71047ef",
+        "filename": "simpleperf/scripts/utils.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2017-07-14T22:37:25Z",
+      "side": 1,
+      "message": "Do we need to actually run it? Or can we just stat?",
+      "range": {
+        "startLine": 106,
+        "startChar": 8,
+        "endLine": 106,
+        "endChar": 25
+      },
+      "revId": "5e4a90666816b793482dd9c487fbf304b97fccc9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2e5ea561_274b603d",
+        "filename": "simpleperf/scripts/utils.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2017-07-14T22:37:25Z",
+      "side": 1,
+      "message": "nit: not needed",
+      "range": {
+        "startLine": 251,
+        "startChar": 4,
+        "endLine": 251,
+        "endChar": 15
+      },
+      "revId": "5e4a90666816b793482dd9c487fbf304b97fccc9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
