@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "b109c5dc_42269b79",
+        "filename": "simpleperf/scripts/pprof_proto_generator.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 452,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-07-15T00:41:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1b959170_44f2cb77",
+      "range": {
+        "startLine": 452,
+        "startChar": 8,
+        "endLine": 452,
+        "endChar": 13
+      },
+      "revId": "5e4a90666816b793482dd9c487fbf304b97fccc9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6d3263f1_a71047ef",
         "filename": "simpleperf/scripts/utils.py",
         "patchSetId": 3
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "7762d086_37e82578",
+        "filename": "simpleperf/scripts/utils.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-07-15T00:41:34Z",
+      "side": 1,
+      "message": "It may be in one of the paths of PATH environment. It\u0027s more complex to check them manually. And `which` cmd is not available on windows. So the simplest way I can think up of is running it.",
+      "parentUuid": "6d3263f1_a71047ef",
+      "range": {
+        "startLine": 106,
+        "startChar": 8,
+        "endLine": 106,
+        "endChar": 25
+      },
+      "revId": "5e4a90666816b793482dd9c487fbf304b97fccc9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2e5ea561_274b603d",
         "filename": "simpleperf/scripts/utils.py",
         "patchSetId": 3
@@ -59,6 +107,30 @@
       "writtenOn": "2017-07-14T22:37:25Z",
       "side": 1,
       "message": "nit: not needed",
+      "range": {
+        "startLine": 251,
+        "startChar": 4,
+        "endLine": 251,
+        "endChar": 15
+      },
+      "revId": "5e4a90666816b793482dd9c487fbf304b97fccc9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3ad64ab3_6cf40cb5",
+        "filename": "simpleperf/scripts/utils.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-07-15T00:41:34Z",
+      "side": 1,
+      "message": "arg_list can be None, when an option doesn\u0027t appear in the cmdline.",
+      "parentUuid": "2e5ea561_274b603d",
       "range": {
         "startLine": 251,
         "startChar": 4,
