@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "39146658_f950d25e",
+        "filename": "simpleperf/gtest_main.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-07-15T00:26:51Z",
+      "side": 1,
+      "message": "protected here.",
+      "range": {
+        "startLine": 71,
+        "startChar": 63,
+        "endLine": 71,
+        "endChar": 75
+      },
+      "revId": "fe1abd1686cefd7a033a64721dd835869adcbf03",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
