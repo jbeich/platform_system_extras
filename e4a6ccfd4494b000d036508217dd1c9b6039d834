@@ -98,6 +98,30 @@
       "revId": "e4a6ccfd4494b000d036508217dd1c9b6039d834",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4b49fa0f_e11afea9",
+        "filename": "simpleperf/gtest_main.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-07-15T00:50:41Z",
+      "side": 1,
+      "message": "in an Android.mk you have to put \u0027\u0027s around the whole thing. (Android.bp works directly.)",
+      "parentUuid": "6aae7c4c_2969f9bb",
+      "range": {
+        "startLine": 175,
+        "startChar": 0,
+        "endLine": 176,
+        "endChar": 45
+      },
+      "revId": "e4a6ccfd4494b000d036508217dd1c9b6039d834",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
