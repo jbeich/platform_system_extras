@@ -579,9 +579,8 @@ and access the native binaries.
     # Start the app if needed
     $ adb shell am start -n com.example.simpleperf.simpleperfexamplepurejava/.MainActivity
 
-    # Run `ps` in the app's context. On Android >= O devicces, run `ps -e` instead.
-    $ adb shell run-as com.example.simpleperf.simpleperfexamplepurejava ps | grep simpleperf
-    u0_a151   6885  3346  1590504 53980 SyS_epoll_ 6fc2024b6c S com.example.simpleperf.simpleperfexamplepurejava
+    $ adb shell pidof com.example.simpleperf.simpleperfexamplepurejava
+    6885
 
 So the id of the app process is `6885`. We will use this number in the command lines below,
 please replace this number with what you get by running `ps` command.
@@ -621,9 +620,8 @@ There are many options to record profiling data, check [record command](#simplep
     $ adb shell "run-as com.example.simpleperf.simpleperfexamplepurejava cat perf.data | tee /data/local/tmp/perf.data >/dev/null"
     $ adb pull /data/local/tmp/perf.data
 
-    # Report samples using corresponding simpleperf executable on host.
-    # On windows, use "bin\windows\x86_64\simpleperf" instead.
-    $ bin/linux/x86_64/simpleperf report
+    # Report samples using report.py, report.py is a python wrapper of simpleperf report command.
+    $ python report.py
     ...
     Overhead  Command   Pid   Tid   Shared Object                                                                     Symbol
     83.54%    Thread-2  6885  6900  /data/app/com.example.simpleperf.simpleperfexamplepurejava-2/oat/arm64/base.odex  void com.example.simpleperf.simpleperfexamplepurejava.MainActivity$1.run()
@@ -637,32 +635,19 @@ There are many ways to show reports, check [report command](#simpleperf-report) 
 
 Besides command lines, We can use `app-profiler.py` to profile Android applications.
 It downloads simpleperf on device, records perf.data, and collects profiling
-results and native binaries on host. It is configured by `app-profiler.config`.
+results and native binaries on host.
 
-**1. Fill `app-profiler.config`**
+**1. Record perf.data by running `app-profiler.py`**
 
-    Change `app_package_name` line to  app_package_name="com.example.simpleperf.simpleperfexamplepurejava"
-    Change `apk_file_path` line to apk_file_path = "../SimpleperfExamplePureJava/app/build/outputs/apk/app-profiling.apk"
-    Change `android_studio_project_dir` line to android_studio_project_dir = "../SimpleperfExamplePureJava/"
-    Change `record_options` line to record_options = "--duration 10"
-
-`apk_file_path` is needed to fully compile the application on Android L/M. It is
-not necessary on Android >= N.
-
-`android_studio_project_dir` is used to search native libraries in the
-application. It is not necessary for profiling.
-
-`record_options` can be set to any option accepted by simpleperf record command.
-
-**2. Run `app-profiler.py`**
-
-    $ python app_profiler.py
+    $ python app_profiler.py --app com.example.simpleperf.simpleperfexamplepurejava \
+         --apk ../SimpleperfExamplePureJava/app/build/outputs/apk/app-profiling.apk \
+         -r "-e cpu-cycles:u --duration 10"
 
 
 If running successfully, it will collect profiling data in perf.data in current
 directory, and related native binaries in binary_cache/.
 
-**3. Report perf.data**
+**2. Report perf.data**
 
 We can use `report.py` to report perf.data.
 
@@ -698,9 +683,11 @@ When using command lines, add `-g` option like below:
 
     $ adb shell run-as com.example.simpleperf.simpleperfexamplepurejava ./simpleperf record -g -p 6685 --duration 10
 
-When using python scripts, change `app-profiler.config` as below:
+When using app_profiler.py, add "-g" in record option as below:
 
-    Change `record_options` line to record_options = "--duration 10 -g"
+    $ python app_profiler.py --app com.example.simpleperf.simpleperfexamplepurejava \
+        --apk ../SimpleperfExamplePureJava/app/build/outputs/apk/app-profiling.apk \
+        -r "-e cpu-cycles:u --duration 10 -g"
 
 Recording dwarf based call graph needs support of debug information
 in native binaries. So if using native libraries in the application,
@@ -713,9 +700,11 @@ When using command lines, add `--call-graph fp` option like below:
 
     $ adb shell run-as com.example.simpleperf.simpleperfexamplepurejava ./simpleperf record --call-graph fp -p 6685 --duration 10
 
-When using python scripts, change `app-profiler.config` as below:
+When using app_profiler.py, add "--call-graph fp" in record option as below:
 
-    Change `record_options` line to record_options = "--duration 10 --call-graph fp"
+    $ python app_profiler.py --app com.example.simpleperf.simpleperfexamplepurejava \
+        --apk ../SimpleperfExamplePureJava/app/build/outputs/apk/app-profiling.apk \
+        -r "-e cpu-cycles:u --duration 10 --call-graph fp"
 
 Recording stack frame based call graphs needs support of stack frame
 register. Notice that on arm architecture, the stack frame register
@@ -742,9 +731,12 @@ To report call graph using command lines, add `-g` option.
                |--16.22%-- int com.example.simpleperf.simpleperfexamplepurejava.MainActivity$1.callFunction(int)
                |    |--99.97%-- [hit in function]
 
-To report call graph using python scripts, add `-g` option.
+To report call graph using report.py, add `-g` option.
 
+    # In text mode
     $ python report.py -g
+    # In GUI mode
+    $ python report.py -g --gui
     # Double-click an item started with '+' to show its callgraph.
 
 ### Visualize profiling data
