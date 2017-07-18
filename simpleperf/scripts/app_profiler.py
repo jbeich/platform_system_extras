@@ -339,7 +339,7 @@ def main():
     parser.add_argument('--config', default='app_profiler.config', help=
 """Set configuration file. Default is app_profiler.config. The configurations
 can be overridden by options in cmdline.""")
-    parser.add_argument('-p', '--package_name', help=
+    parser.add_argument('-p', '--app', help=
 """The package name of the profiled Android app.""")
     parser.add_argument('-lib', '--native_lib_dir', help=
 """Path to find debug version of native shared libraries used in the app.""")
@@ -365,8 +365,8 @@ an instrumentation test.""")
 binary_cache directory. It can be used to annotate source code. This option skips it.""")
     args = parser.parse_args()
     config = load_config(args.config)
-    if args.package_name:
-        config['app_package_name'] = args.package_name
+    if args.app:
+        config['app_package_name'] = args.app
     if args.native_lib_dir:
         config['native_lib_dir'] = args.native_lib_dir
     if args.skip_recompile:
