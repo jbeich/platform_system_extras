@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "6ac40f66_fe5d12f5",
+        "filename": "simpleperf/README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 582,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-07-19T22:22:36Z",
+      "side": 1,
+      "message": "Even on M, I tried on shamu that pidof can\u0027t work correctly. commented is added to use ps if pidof doesn\u0027t work well.",
+      "parentUuid": "c6b05d59_37e61fe4",
+      "range": {
+        "startLine": 582,
+        "startChar": 16,
+        "endLine": 582,
+        "endChar": 21
+      },
+      "revId": "5a5a45b34026f67d0239fb32ca2e6c5a15e11a90",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f4819fc5_42ad14ea",
         "filename": "simpleperf/demo/README.md",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2017-07-19T15:18:38Z",
       "side": 1,
       "message": "what\u0027s the \"| cat\" for?",
+      "range": {
+        "startLine": 60,
+        "startChar": 52,
+        "endLine": 60,
+        "endChar": 58
+      },
+      "revId": "5a5a45b34026f67d0239fb32ca2e6c5a15e11a90",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a5f7bf14_4c5daa8a",
+        "filename": "simpleperf/demo/README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-07-19T22:22:36Z",
+      "side": 1,
+      "message": "It should be xargs cat. Remove it because I think find the file is enough.",
+      "parentUuid": "f4819fc5_42ad14ea",
       "range": {
         "startLine": 60,
         "startChar": 52,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "48a6e2e2_5d528ab1",
+        "filename": "simpleperf/scripts/binary_cache_builder.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-07-19T22:22:36Z",
+      "side": 1,
+      "message": "Done, test is added.",
+      "parentUuid": "cbeeda9b_88d56741",
+      "range": {
+        "startLine": 245,
+        "startChar": 38,
+        "endLine": 245,
+        "endChar": 53
+      },
+      "revId": "5a5a45b34026f67d0239fb32ca2e6c5a15e11a90",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5709b466_0e565917",
         "filename": "simpleperf/scripts/pprof_proto_generator.py",
         "patchSetId": 2
@@ -82,6 +154,24 @@
       "writtenOn": "2017-07-19T15:18:38Z",
       "side": 1,
       "message": "how? from where?",
+      "revId": "5a5a45b34026f67d0239fb32ca2e6c5a15e11a90",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a34f51d_91f327ec",
+        "filename": "simpleperf/scripts/pprof_proto_generator.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-07-19T22:22:36Z",
+      "side": 1,
+      "message": "Different platforms have different ways to install it. The best way is to search it manually.",
+      "parentUuid": "5709b466_0e565917",
       "revId": "5a5a45b34026f67d0239fb32ca2e6c5a15e11a90",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
