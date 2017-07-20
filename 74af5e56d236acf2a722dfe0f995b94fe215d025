@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "83de3a98_ada3b69a",
+        "filename": "simpleperf/README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 589,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-07-20T00:45:52Z",
+      "side": 1,
+      "message": "if we don\u0027t think \u003c N works well anyway, is it worth cluttering our documentation?",
+      "range": {
+        "startLine": 588,
+        "startChar": 0,
+        "endLine": 589,
+        "endChar": 69
+      },
+      "revId": "74af5e56d236acf2a722dfe0f995b94fe215d025",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6d636e7d_1d99bde5",
+        "filename": "simpleperf/README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 821,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-07-20T00:45:52Z",
+      "side": 1,
+      "message": "ART",
+      "range": {
+        "startLine": 821,
+        "startChar": 33,
+        "endLine": 821,
+        "endChar": 40
+      },
+      "revId": "74af5e56d236acf2a722dfe0f995b94fe215d025",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
