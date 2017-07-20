@@ -186,5 +186,6 @@ class EventSelectionSet {
 
 bool IsBranchSamplingSupported();
 bool IsDwarfCallChainSamplingSupported();
+bool IsDumpingRegsForTracepointEventsSupported();
 
 #endif  // SIMPLE_PERF_EVENT_SELECTION_SET_H_

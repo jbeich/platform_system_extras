@@ -48,13 +48,27 @@ bool SetTracepointEventsFilePath(const std::string& filepath) {
   return true;
 }
 
+void SetTracepointEvents(const std::string& s) {
+  tracepoint_events = s;
+}
+
 std::string GetTracepointEvents() {
-  std::string result;
+  std::vector<const EventType*> events;
   for (const EventType& event : GetAllEventTypes()) {
+    if (event.type == PERF_TYPE_TRACEPOINT) {
+      events.push_back(&event);
+    }
+  }
+  return GetTracepointEvents(events);
+}
+
+std::string GetTracepointEvents(const std::vector<const EventType*>& events) {
+  std::string result;
+  for (const EventType* event : events) {
     if (!result.empty()) {
       result.push_back('\n');
     }
-    result += android::base::StringPrintf("%s %" PRIu64, event.name.c_str(), event.config);
+    result += android::base::StringPrintf("%s %" PRIu64, event->name.c_str(), event->config);
   }
   return result;
 }

@@ -28,6 +28,7 @@
 #include <android-base/file.h>
 #include <android-base/parsedouble.h>
 #include <android-base/parseint.h>
+#include <android-base/stringprintf.h>
 #include <android-base/strings.h>
 #include <android-base/test_utils.h>
 
@@ -150,6 +151,7 @@ class RecordCommand : public Command {
 "                 This option is used to provide files with symbol table and\n"
 "                 debug information, which are used for unwinding and dumping symbols.\n"
 "-t tid1,tid2,... Record events on existing threads. Mutually exclusive with -a.\n"
+"--trace-offcpu   Generate samples when threads are scheduled off cpu.\n"
 #if 0
 // Below options are only used internally and shouldn't be visible to the public.
 "--in-app         We are already running in the app's context.\n"
@@ -179,7 +181,8 @@ class RecordCommand : public Command {
         sample_record_count_(0),
         lost_record_count_(0),
         start_profiling_fd_(-1),
-        in_app_context_(false) {
+        in_app_context_(false),
+        trace_offcpu_(false) {
     // Stop profiling if parent exits.
     prctl(PR_SET_PDEATHSIG, SIGHUP, 0, 0, 0);
     app_package_name_ = GetDefaultAppPackageName();
@@ -190,6 +193,7 @@ class RecordCommand : public Command {
  private:
   bool ParseOptions(const std::vector<std::string>& args,
                     std::vector<std::string>* non_option_args);
+  bool TraceOffCpu();
   bool SetEventSelectionFlags();
   bool CreateAndInitRecordFile();
   std::unique_ptr<RecordFileWriter> CreateRecordFile(
@@ -239,6 +243,7 @@ class RecordCommand : public Command {
   int start_profiling_fd_;
   std::string app_package_name_;
   bool in_app_context_;
+  bool trace_offcpu_;
 };
 
 bool RecordCommand::Run(const std::vector<std::string>& args) {
@@ -257,13 +262,16 @@ bool RecordCommand::Run(const std::vector<std::string>& args) {
     // root.
     if (!IsRoot()) {
       return RunInAppContext(app_package_name_, "record", args, workload_args.size(),
-                             record_filename_, !event_selection_set_.GetTracepointEvents().empty());
+                             record_filename_, true);
     }
   }
   if (event_selection_set_.empty()) {
     if (!event_selection_set_.AddEventType(default_measured_event_type)) {
       return false;
     }
+  }
+  if (trace_offcpu_ && !TraceOffCpu()) {
+    return false;
   }
   if (!SetEventSelectionFlags()) {
     return false;
@@ -586,6 +594,8 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
         return false;
       }
       event_selection_set_.AddMonitoredThreads(tids);
+    } else if (args[i] == "--trace-offcpu") {
+      trace_offcpu_ = true;
     } else if (args[i] == "--tracepoint-events") {
       if (!NextArgumentOrError(args, &i)) {
         return false;
@@ -652,6 +662,24 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
     non_option_args->push_back(args[i]);
   }
   return true;
+}
+
+bool RecordCommand::TraceOffCpu() {
+  if (FindEventTypeByName("sched:sched_switch") == nullptr) {
+    LOG(ERROR) << "Can't trace off cpu because sched:sched_switch event is not available";
+    return false;
+  }
+  for (auto& event_type : event_selection_set_.GetTracepointEvents()) {
+    if (event_type->name == "sched:sched_switch") {
+      LOG(ERROR) << "Trace offcpu can't be used together with sched:sched_switch event";
+      return false;
+    }
+  }
+  if (!IsDumpingRegsForTracepointEventsSupported()) {
+    LOG(ERROR) << "Dumping regs for tracepoint events is not supported by the kernel";
+    return false;
+  }
+  return event_selection_set_.AddEventType("sched:sched_switch");
 }
 
 bool RecordCommand::SetEventSelectionFlags() {
@@ -1036,6 +1064,10 @@ bool RecordCommand::DumpAdditionalFeatures(
 
   std::unordered_map<std::string, std::string> info_map;
   info_map["simpleperf_version"] = GetSimpleperfVersion();
+  info_map["system_wide_collection"] = system_wide_collection_ ? "true" : "false";
+  info_map["trace_offcpu"] = trace_offcpu_ ? "true" : "false";
+  std::string tracepoint_events = GetTracepointEvents(event_selection_set_.GetTracepointEvents());
+  info_map["tracepoint_events"] = tracepoint_events;
   if (!record_file_writer_->WriteMetaInfoFeature(info_map)) {
     return false;
   }

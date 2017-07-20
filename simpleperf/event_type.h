@@ -53,7 +53,9 @@ struct EventType {
 };
 
 bool SetTracepointEventsFilePath(const std::string& filepath);
+void SetTracepointEvents(const std::string& s);
 std::string GetTracepointEvents();
+std::string GetTracepointEvents(const std::vector<const EventType*>& events);
 const std::vector<EventType>& GetAllEventTypes();
 const EventType* FindEventTypeByName(const std::string& name);
 
