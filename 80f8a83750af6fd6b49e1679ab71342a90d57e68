@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "c7ce4eea_fb0100b8",
+        "filename": "simpleperf/scripts/annotate.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 549,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-07-21T21:33:54Z",
+      "side": 1,
+      "message": "Done. Thanks for catching this!",
+      "parentUuid": "d356e281_eca8ef36",
+      "range": {
+        "startLine": 549,
+        "startChar": 16,
+        "endLine": 549,
+        "endChar": 36
+      },
+      "revId": "80f8a83750af6fd6b49e1679ab71342a90d57e68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f1ca04c7_af4868ac",
         "filename": "simpleperf/scripts/annotate.py",
         "patchSetId": 6
@@ -36,6 +60,30 @@
       "writtenOn": "2017-07-21T19:40:35Z",
       "side": 1,
       "message": "How about os.path.commonprefix?\n\nlen(os.path.commonprefix([a[::-1], b[::-1]]))",
+      "range": {
+        "startLine": 557,
+        "startChar": 8,
+        "endLine": 557,
+        "endChar": 34
+      },
+      "revId": "80f8a83750af6fd6b49e1679ab71342a90d57e68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c38a8f3a_4ca69c1a",
+        "filename": "simpleperf/scripts/annotate.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 557,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-07-21T21:33:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f1ca04c7_af4868ac",
       "range": {
         "startLine": 557,
         "startChar": 8,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "1ebce5a6_15deff10",
+        "filename": "simpleperf/scripts/app_profiler.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-07-21T21:33:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "56712bec_6d480d47",
+      "range": {
+        "startLine": 195,
+        "startChar": 8,
+        "endLine": 195,
+        "endChar": 13
+      },
+      "revId": "80f8a83750af6fd6b49e1679ab71342a90d57e68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "58f94050_01891a88",
         "filename": "simpleperf/scripts/app_profiler.py",
         "patchSetId": 6
@@ -82,6 +154,30 @@
       "writtenOn": "2017-07-21T19:40:35Z",
       "side": 1,
       "message": "nit: it might look cleaner to combine them together (so we don\u0027t reuse \u0027output\u0027)\n\nfor line in output.split(\u0027\\n\u0027):",
+      "range": {
+        "startLine": 199,
+        "startChar": 12,
+        "endLine": 200,
+        "endChar": 31
+      },
+      "revId": "80f8a83750af6fd6b49e1679ab71342a90d57e68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fc82c371_506a0c12",
+        "filename": "simpleperf/scripts/app_profiler.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-07-21T21:33:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "58f94050_01891a88",
       "range": {
         "startLine": 199,
         "startChar": 12,
