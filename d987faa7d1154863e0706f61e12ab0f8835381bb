@@ -22,6 +22,30 @@
       "revId": "d987faa7d1154863e0706f61e12ab0f8835381bb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "75e451e7_06b029ee",
+        "filename": "simpleperf/scripts/annotate.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 545,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-07-21T22:14:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5249d513_7febc33d",
+      "range": {
+        "startLine": 545,
+        "startChar": 25,
+        "endLine": 545,
+        "endChar": 45
+      },
+      "revId": "d987faa7d1154863e0706f61e12ab0f8835381bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
