@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5bcf8a7d_50a9f035",
+        "filename": "simpleperf/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 869,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-07-25T22:51:23Z",
+      "side": 1,
+      "message": "or? you\u0027re moving the files, so it has to be the scripts directory now, doesn\u0027t it?",
+      "range": {
+        "startLine": 869,
+        "startChar": 38,
+        "endLine": 869,
+        "endChar": 40
+      },
+      "revId": "12a6910bac733dccb5e0672be87275b3baef4090",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
