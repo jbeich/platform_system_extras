@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9e53f408_2f176fea",
+        "filename": "simpleperf/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-07-25T14:44:23Z",
+      "side": 1,
+      "message": "this comment should be removed along with the line it referred to!",
+      "revId": "021414c10c83e4283f95ff6feb512ab34c1d8fed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
