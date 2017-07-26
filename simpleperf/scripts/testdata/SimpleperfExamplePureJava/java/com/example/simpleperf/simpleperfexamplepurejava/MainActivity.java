@@ -2,6 +2,7 @@ package com.example.simpleperf.simpleperfexamplepurejava;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -15,7 +16,6 @@ public class MainActivity extends AppCompatActivity {
 
     void createBusyThread() {
         new Thread(new Runnable() {
-
             volatile int i = 0;
 
             @Override
@@ -28,6 +28,6 @@ public class MainActivity extends AppCompatActivity {
             private int callFunction(int a) {
                 return a+1;
             }
-        }).start();
+        }, "BusyThread").start();
     }
 }
