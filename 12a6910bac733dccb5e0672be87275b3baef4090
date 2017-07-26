@@ -46,6 +46,30 @@
       "revId": "12a6910bac733dccb5e0672be87275b3baef4090",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5eb2b8ab_4ae4398f",
+        "filename": "simpleperf/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 869,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-07-26T00:23:35Z",
+      "side": 1,
+      "message": "oh, so in the NDK the scripts directory doesn\u0027t exist, and the scripts are just in a directory called simpleperf?",
+      "parentUuid": "d50b1c45_2f7efbb4",
+      "range": {
+        "startLine": 869,
+        "startChar": 38,
+        "endLine": 869,
+        "endChar": 40
+      },
+      "revId": "12a6910bac733dccb5e0672be87275b3baef4090",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
