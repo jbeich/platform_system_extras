@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "36788edf_4f8ac458",
+        "filename": "simpleperf/demo/SimpleperfExamplePureJava/app/src/main/java/com/example/simpleperf/simpleperfexamplepurejava/MainActivity.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-07-27T17:38:07Z",
+      "side": 1,
+      "message": "removed.",
+      "parentUuid": "d8b038dd_26eda1d3",
+      "revId": "d573e7d96fc4b0c6d7824e7bd2d28996e6ffa685",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c357e835_2b3139a9",
         "filename": "simpleperf/scripts/test.py",
         "patchSetId": 1
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "cee0de04_848c18a8",
+        "filename": "simpleperf/scripts/test.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-07-27T17:38:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c357e835_2b3139a9",
+      "revId": "d573e7d96fc4b0c6d7824e7bd2d28996e6ffa685",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a045f32d_84e699d1",
         "filename": "simpleperf/scripts/testdata/SimpleperfExamplePureJava/java/com/example/simpleperf/simpleperfexamplepurejava/MainActivity.java",
         "patchSetId": 1
@@ -47,6 +83,24 @@
       "writtenOn": "2017-07-27T16:21:40Z",
       "side": 1,
       "message": "?",
+      "revId": "d573e7d96fc4b0c6d7824e7bd2d28996e6ffa685",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d08c8915_39cf436e",
+        "filename": "simpleperf/scripts/testdata/SimpleperfExamplePureJava/java/com/example/simpleperf/simpleperfexamplepurejava/MainActivity.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-07-27T17:38:07Z",
+      "side": 1,
+      "message": "removed",
+      "parentUuid": "a045f32d_84e699d1",
       "revId": "d573e7d96fc4b0c6d7824e7bd2d28996e6ffa685",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
