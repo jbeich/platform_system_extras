@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d8b038dd_26eda1d3",
+        "filename": "simpleperf/demo/SimpleperfExamplePureJava/app/src/main/java/com/example/simpleperf/simpleperfexamplepurejava/MainActivity.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-07-27T16:21:40Z",
+      "side": 1,
+      "message": "doesn\u0027t seem used?",
+      "revId": "d573e7d96fc4b0c6d7824e7bd2d28996e6ffa685",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c357e835_2b3139a9",
+        "filename": "simpleperf/scripts/test.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-07-27T16:21:40Z",
+      "side": 1,
+      "message": "this will have to be an API level check longer term. TODO?",
+      "revId": "d573e7d96fc4b0c6d7824e7bd2d28996e6ffa685",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a045f32d_84e699d1",
+        "filename": "simpleperf/scripts/testdata/SimpleperfExamplePureJava/java/com/example/simpleperf/simpleperfexamplepurejava/MainActivity.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-07-27T16:21:40Z",
+      "side": 1,
+      "message": "?",
+      "revId": "d573e7d96fc4b0c6d7824e7bd2d28996e6ffa685",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
