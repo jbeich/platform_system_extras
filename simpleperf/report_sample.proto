@@ -41,6 +41,8 @@ message Sample {
   // field is the number of cpu cycles.
   optional uint64 event_count = 4;
 
+  // An index in meta_info.event_type, shows which event type current sample belongs to.
+  optional uint32 event_type_id = 5;
 }
 
 message LostSituation {
@@ -65,11 +67,19 @@ message Thread {
   optional string thread_name = 3;
 }
 
+message MetaInfo {
+  // If trace_offcpu is true, we have at least two event types, and one of them is
+  // "sched:sched_switch".
+  optional bool trace_offcpu = 1;
+  repeated string event_type = 2;
+}
+
 message Record {
   oneof record_data {
     Sample sample = 1;
     LostSituation lost = 2;
     File file = 3;
     Thread thread = 4;
+    MetaInfo meta_info = 5;
   }
 }
