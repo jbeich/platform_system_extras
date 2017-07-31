@@ -24,6 +24,7 @@
 #include <google/protobuf/io/zero_copy_stream_impl_lite.h>
 
 #include "command.h"
+#include "event_type.h"
 #include "record_file.h"
 #include "thread_tree.h"
 #include "utils.h"
@@ -79,14 +80,20 @@ class ReportSampleCommand : public Command {
         report_fp_(nullptr),
         coded_os_(nullptr),
         sample_count_(0),
-        lost_count_(0) {}
+        lost_count_(0),
+        trace_offcpu_(false),
+        sched_switch_attr_id_(0) {}
 
   bool Run(const std::vector<std::string>& args) override;
 
  private:
   bool ParseOptions(const std::vector<std::string>& args);
   bool DumpProtobufReport(const std::string& filename);
+  bool OpenRecordFile();
+  bool PrintMetaInfo();
   bool ProcessRecord(std::unique_ptr<Record> record);
+  void ProcessSampleRecordInTraceOffCpuMode(std::unique_ptr<Record>& record);
+  uint64_t TimeToNextSample(const SampleRecord& r);
   bool PrintSampleRecordInProtobuf(const SampleRecord& record);
   bool GetCallEntry(const ThreadEntry* thread, bool in_kernel, uint64_t ip, bool omit_unknown_dso,
                     uint64_t* pvaddr_in_file, uint32_t* pfile_id, int32_t* psymbol_id);
@@ -110,6 +117,10 @@ class ReportSampleCommand : public Command {
   google::protobuf::io::CodedOutputStream* coded_os_;
   size_t sample_count_;
   size_t lost_count_;
+  bool trace_offcpu_;
+  size_t sched_switch_attr_id_;
+  std::unique_ptr<ScopedEventTypes> scoped_event_types_;
+  std::unordered_map<pid_t, std::unique_ptr<SampleRecord>> next_sample_cache_;
 };
 
 bool ReportSampleCommand::Run(const std::vector<std::string>& args) {
@@ -139,12 +150,9 @@ bool ReportSampleCommand::Run(const std::vector<std::string>& args) {
   }
 
   // 4. Open record file.
-  record_file_reader_ = RecordFileReader::CreateInstance(record_filename_);
-  if (record_file_reader_ == nullptr) {
+  if (!OpenRecordFile()) {
     return false;
   }
-  record_file_reader_->LoadBuildIdAndFileFeatures(thread_tree_);
-
   if (use_protobuf_) {
     GOOGLE_PROTOBUF_VERIFY_VERSION;
   } else {
@@ -166,6 +174,9 @@ bool ReportSampleCommand::Run(const std::vector<std::string>& args) {
   }
 
   // 6. Read record file, and print samples online.
+  if (!PrintMetaInfo()) {
+    return false;
+  }
   if (!record_file_reader_->ReadDataSection(
           [this](std::unique_ptr<Record> record) {
             return ProcessRecord(std::move(record));
@@ -279,6 +290,10 @@ bool ReportSampleCommand::DumpProtobufReport(const std::string& filename) {
       FprintIndented(report_fp_, 0, "sample %zu:\n", ++sample_count);
       FprintIndented(report_fp_, 1, "time: %" PRIu64 "\n", sample.time());
       FprintIndented(report_fp_, 1, "event_count: %" PRIu64 "\n", sample.event_count());
+      if (sample.has_time_to_next_sample()) {
+        FprintIndented(report_fp_, 1, "time_to_next_sample: %" PRIu64 "\n",
+                       sample.time_to_next_sample());
+      }
       FprintIndented(report_fp_, 1, "thread_id: %d\n", sample.thread_id());
       FprintIndented(report_fp_, 1, "callchain:\n");
       for (int i = 0; i < sample.callchain_size(); ++i) {
@@ -324,6 +339,11 @@ bool ReportSampleCommand::DumpProtobufReport(const std::string& filename) {
       FprintIndented(report_fp_, 1, "thread_id: %u\n", thread.thread_id());
       FprintIndented(report_fp_, 1, "process_id: %u\n", thread.process_id());
       FprintIndented(report_fp_, 1, "thread_name: %s\n", thread.thread_name().c_str());
+    } else if (proto_record.has_meta_info()) {
+      auto& meta_info = proto_record.meta_info();
+      FprintIndented(report_fp_, 0, "meta_info:\n");
+      FprintIndented(report_fp_, 1, "trace_offcpu: %s\n",
+                     meta_info.trace_offcpu() ? "true" : "false");
     } else {
       LOG(ERROR) << "unexpected record type ";
       return false;
@@ -344,9 +364,61 @@ bool ReportSampleCommand::DumpProtobufReport(const std::string& filename) {
   return true;
 }
 
+bool ReportSampleCommand::OpenRecordFile() {
+  record_file_reader_ = RecordFileReader::CreateInstance(record_filename_);
+  if (record_file_reader_ == nullptr) {
+    return false;
+  }
+  record_file_reader_->LoadBuildIdAndFileFeatures(thread_tree_);
+  if (record_file_reader_->HasFeature(PerfFileFormat::FEAT_META_INFO)) {
+    std::unordered_map<std::string, std::string> meta_info;
+    if (!record_file_reader_->ReadMetaInfoFeature(&meta_info)) {
+      return false;
+    }
+    auto it = meta_info.find("event_type_info");
+    if (it != meta_info.end()) {
+      scoped_event_types_.reset(new ScopedEventTypes(it->second));
+    }
+    it = meta_info.find("trace_offcpu");
+    if (it != meta_info.end()) {
+      trace_offcpu_ = it->second == "true";
+    }
+  }
+  if (trace_offcpu_) {
+    std::vector<EventAttrWithId> attrs = record_file_reader_->AttrSection();
+    size_t i;
+    for (i = 0; i < attrs.size(); ++i) {
+      if (GetEventNameByAttr(*attrs[i].attr) == "sched:sched_switch") {
+        break;
+      }
+    }
+    CHECK_NE(i, attrs.size());
+    sched_switch_attr_id_ = i;
+  }
+  return true;
+}
+
+bool ReportSampleCommand::PrintMetaInfo() {
+  if (use_protobuf_) {
+    proto::Record proto_record;
+    proto::MetaInfo* meta_info = proto_record.mutable_meta_info();
+    meta_info->set_trace_offcpu(trace_offcpu_);
+    return WriteRecordInProtobuf(proto_record);
+  }
+  FprintIndented(report_fp_, 0, "meta_info:\n");
+  FprintIndented(report_fp_, 1, "trace_offcpu: %s\n", trace_offcpu_ ? "true" : "false");
+  return true;
+}
+
 bool ReportSampleCommand::ProcessRecord(std::unique_ptr<Record> record) {
   thread_tree_.Update(*record);
   if (record->type() == PERF_RECORD_SAMPLE) {
+    if (trace_offcpu_) {
+      ProcessSampleRecordInTraceOffCpuMode(record);
+      if (!record) {
+        return true;
+      }
+    }
     sample_count_++;
     auto& r = *static_cast<const SampleRecord*>(record.get());
     if (use_protobuf_) {
@@ -360,6 +432,27 @@ bool ReportSampleCommand::ProcessRecord(std::unique_ptr<Record> record) {
   return true;
 }
 
+void ReportSampleCommand::ProcessSampleRecordInTraceOffCpuMode(std::unique_ptr<Record>& record) {
+  SampleRecord* r = static_cast<SampleRecord*>(record.release());
+  if (record_file_reader_->GetAttrIndexOfRecord(r) == sched_switch_attr_id_) {
+    r->period_data.period = 0;
+  }
+  pid_t tid = r->tid_data.tid;
+  auto it = next_sample_cache_.find(tid);
+  if (it == next_sample_cache_.end()) {
+    next_sample_cache_[tid].reset(r);
+  } else {
+    record.reset(it->second.release());
+    it->second.reset(r);
+  }
+}
+
+uint64_t ReportSampleCommand::TimeToNextSample(const SampleRecord& r) {
+  auto it = next_sample_cache_.find(r.tid_data.tid);
+  CHECK(it != next_sample_cache_.end());
+  return std::max(it->second->time_data.time, r.time_data.time + 1) - r.time_data.time;
+}
+
 bool ReportSampleCommand::PrintSampleRecordInProtobuf(const SampleRecord& r) {
   uint64_t vaddr_in_file;
   uint32_t file_id;
@@ -368,6 +461,9 @@ bool ReportSampleCommand::PrintSampleRecordInProtobuf(const SampleRecord& r) {
   proto::Sample* sample = proto_record.mutable_sample();
   sample->set_time(r.time_data.time);
   sample->set_event_count(r.period_data.period);
+  if (trace_offcpu_) {
+    sample->set_time_to_next_sample(TimeToNextSample(r));
+  }
   sample->set_thread_id(r.tid_data.tid);
 
   bool in_kernel = r.InKernel();
@@ -544,7 +640,12 @@ bool ReportSampleCommand::PrintSampleRecord(const SampleRecord& r) {
   FprintIndented(report_fp_, 0, "sample:\n");
   FprintIndented(report_fp_, 1, "time: %" PRIu64 "\n", r.time_data.time);
   FprintIndented(report_fp_, 1, "event_count: %" PRIu64 "\n", r.period_data.period);
+  if (trace_offcpu_) {
+    FprintIndented(report_fp_, 1, "time_to_next_sample: %" PRIu64 "\n", TimeToNextSample(r));
+  }
   FprintIndented(report_fp_, 1, "thread_id: %d\n", r.tid_data.tid);
+  const char* thread_name = thread_tree_.FindThreadOrNew(r.tid_data.pid, r.tid_data.tid)->comm;
+  FprintIndented(report_fp_, 1, "thread_name: %s\n", thread_name);
   bool in_kernel = r.InKernel();
   const ThreadEntry* thread =
       thread_tree_.FindThreadOrNew(r.tid_data.pid, r.tid_data.tid);

@@ -41,6 +41,9 @@ message Sample {
   // field is the number of cpu cycles.
   optional uint64 event_count = 4;
 
+  // Timestamp difference (in nanoseconds) to the next sample in the same thread.
+  // Used only when meta_info.trace_offcpu is true.
+  optional uint64 time_to_next_sample = 5;
 }
 
 message LostSituation {
@@ -65,11 +68,16 @@ message Thread {
   optional string thread_name = 3;
 }
 
+message MetaInfo {
+  optional bool trace_offcpu = 1;
+}
+
 message Record {
   oneof record_data {
     Sample sample = 1;
     LostSituation lost = 2;
     File file = 3;
     Thread thread = 4;
+    MetaInfo meta_info = 5;
   }
 }
