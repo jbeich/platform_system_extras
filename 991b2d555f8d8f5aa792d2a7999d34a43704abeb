@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "6a06c104_8b080917",
+        "filename": "simpleperf/cmd_report_sample.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 453,
+      "author": {
+        "id": 1163153
+      },
+      "writtenOn": "2017-08-01T13:33:50Z",
+      "side": 1,
+      "message": "Why is it not safe to use the next sample timestamp? In which scenarios it\u0027s greater than current sample? Also, was there a reason to return 1ns in case the next sample\u0027s timestamp is less than the current one?? Maybe an in-line comment explaining such decisions would help.",
+      "range": {
+        "startLine": 453,
+        "startChar": 18,
+        "endLine": 453,
+        "endChar": 66
+      },
+      "revId": "991b2d555f8d8f5aa792d2a7999d34a43704abeb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a62e996b_7656102d",
         "filename": "simpleperf/report_sample.proto",
         "patchSetId": 1
@@ -13,6 +36,30 @@
       "writtenOn": "2017-08-01T00:19:16Z",
       "side": 1,
       "message": "Yabin, thanks for making the reporting proto up-to-date with simpleperf\u0027s capabilities!\n\nI would like to clarify that if this field is populated (1) in every sample, (2) only when the current sample is triggered by the thread being scheduled off CPU (sched:sched_switch), (3) when the thread is scheduled in, or both (2) and (3)?\n\nIf it is (1), this field is a convenient field of redundant info for us because we could calculate it from the neighbor samples. Am I right?\n\nIf it is (1), my biggest concern is we still cannot tell if the callchain is a running callchain or a sleep one. How about add a thread state field?",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 42
+      },
+      "revId": "991b2d555f8d8f5aa792d2a7999d34a43704abeb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a77ae5a_3a2f00fe",
+        "filename": "simpleperf/report_sample.proto",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1163153
+      },
+      "writtenOn": "2017-08-01T13:33:50Z",
+      "side": 1,
+      "message": "I think having an extra field results in a better API in this case. Yes, we could calculate and use the time to next sample when event_count is 0 (which I think is what happens for samples created due to a thread being scheduled out) on our side. \n\nHowever, we would be adding some complexity to the parser based on implementation details we know about simpleperf.  If something changes in their code in the future, we might have a hard time debugging to find the root cause of the issue, which can be hidden in simpleperf code. I\u0027d rather refer to the API/interface to monitor when something changes on simpleperf side, so we can adapt our parsers accordingly.\n\nThe same applies to other users of simpleperf in the future. If simpleperf changes only implementation details, that shouldn\u0027t make its users change the way they use it. However, if the interface/API changes, they should adapt their code.\n\nRegarding your concern, couldn\u0027t we infer if the callchain is running based on event_count field (event_count \u003e 0)?",
+      "parentUuid": "a62e996b_7656102d",
       "range": {
         "startLine": 46,
         "startChar": 0,
