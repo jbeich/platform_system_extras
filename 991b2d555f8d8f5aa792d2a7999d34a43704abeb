@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a62e996b_7656102d",
+        "filename": "simpleperf/report_sample.proto",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1079424
+      },
+      "writtenOn": "2017-08-01T00:19:16Z",
+      "side": 1,
+      "message": "Yabin, thanks for making the reporting proto up-to-date with simpleperf\u0027s capabilities!\n\nI would like to clarify that if this field is populated (1) in every sample, (2) only when the current sample is triggered by the thread being scheduled off CPU (sched:sched_switch), (3) when the thread is scheduled in, or both (2) and (3)?\n\nIf it is (1), this field is a convenient field of redundant info for us because we could calculate it from the neighbor samples. Am I right?\n\nIf it is (1), my biggest concern is we still cannot tell if the callchain is a running callchain or a sleep one. How about add a thread state field?",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 42
+      },
+      "revId": "991b2d555f8d8f5aa792d2a7999d34a43704abeb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
