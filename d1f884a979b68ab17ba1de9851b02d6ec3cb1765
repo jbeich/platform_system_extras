@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dec77ae7_c63e0163",
+        "filename": "f2fs_utils/f2fs_dlutils.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1084139
+      },
+      "writtenOn": "2017-08-01T17:37:20Z",
+      "side": 1,
+      "message": "In case of error, dlclose() should be called. Not a big deal of course.",
+      "revId": "d1f884a979b68ab17ba1de9851b02d6ec3cb1765",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
