@@ -151,6 +151,7 @@ int main(int argc, char **argv)
         switch (c) {
         case 'a':
             salt_size = strlen(optarg);
+            delete[] salt;
             salt = new unsigned char[salt_size]();
             if (salt == NULL) {
                 FATAL("failed to allocate memory for salt\n");
@@ -163,6 +164,7 @@ int main(int argc, char **argv)
                     FATAL("failed to convert salt from hex\n");
                 }
                 salt_size = BN_num_bytes(bn);
+                delete[] salt;
                 salt = new unsigned char[salt_size]();
                 if (salt == NULL) {
                     FATAL("failed to allocate memory for salt\n");
@@ -174,6 +176,7 @@ int main(int argc, char **argv)
             break;
         case 'h':
             usage();
+            delete[] salt;
             return 1;
         case 'S':
             sparse = true;
@@ -196,6 +199,7 @@ int main(int argc, char **argv)
             verbose = true;
             break;
         case '?':
+            delete[] salt;
             usage();
             return 1;
         default:
@@ -236,6 +240,7 @@ int main(int argc, char **argv)
     if (calculate_size) {
         if (argc != 0) {
             usage();
+            delete[] salt;
             return 1;
         }
         size_t verity_blocks = 0;
@@ -248,11 +253,13 @@ int main(int argc, char **argv)
         } while (level_blocks > 1);
 
         printf("%" PRIu64 "\n", (uint64_t)verity_blocks * block_size);
+        delete[] salt;
         return 0;
     }
 
     if (argc != 2) {
         usage();
+        delete[] salt;
         return 1;
     }
 
