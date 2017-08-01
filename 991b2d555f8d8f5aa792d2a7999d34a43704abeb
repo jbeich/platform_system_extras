@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ff2bff97_f5a66a15",
+        "filename": "simpleperf/cmd_report_sample.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 453,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-08-01T17:47:33Z",
+      "side": 1,
+      "message": "Using r.time_data.time + 1 is just for safety. Sorry, I didn\u0027t add comment because I had added one in cmd_report.cpp. I will add comment if we don\u0027t need to remove this code.",
+      "parentUuid": "6a06c104_8b080917",
+      "range": {
+        "startLine": 453,
+        "startChar": 18,
+        "endLine": 453,
+        "endChar": 66
+      },
+      "revId": "991b2d555f8d8f5aa792d2a7999d34a43704abeb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a62e996b_7656102d",
         "filename": "simpleperf/report_sample.proto",
         "patchSetId": 1
@@ -60,6 +84,30 @@
       "side": 1,
       "message": "I think having an extra field results in a better API in this case. Yes, we could calculate and use the time to next sample when event_count is 0 (which I think is what happens for samples created due to a thread being scheduled out) on our side. \n\nHowever, we would be adding some complexity to the parser based on implementation details we know about simpleperf.  If something changes in their code in the future, we might have a hard time debugging to find the root cause of the issue, which can be hidden in simpleperf code. I\u0027d rather refer to the API/interface to monitor when something changes on simpleperf side, so we can adapt our parsers accordingly.\n\nThe same applies to other users of simpleperf in the future. If simpleperf changes only implementation details, that shouldn\u0027t make its users change the way they use it. However, if the interface/API changes, they should adapt their code.\n\nRegarding your concern, couldn\u0027t we infer if the callchain is running based on event_count field (event_count \u003e 0)?",
       "parentUuid": "a62e996b_7656102d",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 42
+      },
+      "revId": "991b2d555f8d8f5aa792d2a7999d34a43704abeb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aef81be8_2d04918a",
+        "filename": "simpleperf/report_sample.proto",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-08-01T17:47:33Z",
+      "side": 1,
+      "message": "Time_to_next_sample is calculated for each sample when trace_offcpu \u003d true, not just for samples when event_count is 0. AFAIK, to compare time spent in sleeping and running, we need to represent the samples in a same way, here it is time_to_next_sample.\n\nYes, we can infer if the callchain is running based on event_count field (event_count \u003e 0).",
+      "parentUuid": "3a77ae5a_3a2f00fe",
       "range": {
         "startLine": 46,
         "startChar": 0,
