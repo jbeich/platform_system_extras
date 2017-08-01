@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "89151739_e8c69499",
+        "filename": "verity/build_verity_tree.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2017-08-01T23:40:04Z",
+      "side": 1,
+      "message": "C++-ify this by making salt a std::string or std::vector\u003cchar\u003e",
+      "revId": "c1828e78d1737a0c340bf4403027e68548a4e8f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
