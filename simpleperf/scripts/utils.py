@@ -22,6 +22,7 @@ from __future__ import print_function
 import logging
 import os
 import os.path
+import shutil
 import subprocess
 import sys
 import time
@@ -253,6 +254,19 @@ class AdbHelper(object):
         return self.run(['shell', 'setprop', name, value])
 
 
+    def get_device_arch(self):
+        output = self.check_run_and_return_output(['shell', 'uname', '-m'])
+        if output.find('aarch64') != -1:
+            return 'arm64'
+        if output.find('arm') != -1:
+            return 'arm'
+        if output.find('x86_64') != -1:
+            return 'x86_64'
+        if output.find('86') != -1:
+            return 'x86'
+        log_fatal('unsupported architecture: %s' % output.strip())
+
+
 def flatten_arg_list(arg_list):
     res = []
     if arg_list:
@@ -260,5 +274,11 @@ def flatten_arg_list(arg_list):
             res += items
     return res
 
+
+def remove(dir_or_file):
+    if os.path.isfile(dir_or_file):
+        os.remove(dir_or_file)
+    elif os.path.isdir(dir_or_file):
+        shutil.rmtree(dir_or_file, ignore_errors=True)
 
 logging.getLogger().setLevel(logging.DEBUG)
