@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "15558cb3_1df60f58",
+        "filename": "simpleperf/scripts/utils.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2017-08-03T21:32:58Z",
+      "side": 1,
+      "message": "nit: using \u0027in\u0027 might be more Pythonic",
+      "range": {
+        "startLine": 259,
+        "startChar": 11,
+        "endLine": 259,
+        "endChar": 39
+      },
+      "revId": "e820b8fe85b4c326a5a67551cfed70ea01983f5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
