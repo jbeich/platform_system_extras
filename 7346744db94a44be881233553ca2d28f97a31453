@@ -45,6 +45,30 @@
       "revId": "7346744db94a44be881233553ca2d28f97a31453",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "22a94e5c_5829604e",
+        "filename": "simpleperf/report_sample.proto",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1163153
+      },
+      "writtenOn": "2017-08-03T18:09:57Z",
+      "side": 1,
+      "message": "Gotcha. Thank you both!",
+      "parentUuid": "6edc8ab5_4828f1ae",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 36
+      },
+      "revId": "7346744db94a44be881233553ca2d28f97a31453",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
