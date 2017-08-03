@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fa697e65_814623fe",
+        "filename": "simpleperf/report_sample.proto",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1079424
+      },
+      "writtenOn": "2017-08-03T00:10:39Z",
+      "side": 1,
+      "message": "Can you update the comment when two or more event types are specified? Suppose we specify \u0027-e E1 -e E2\u0027. In E1 samples (where |event_type_id| \u003d\u003d E1), I guess |event_count| is the count of E1, isn\u0027t it?\n\nIs it the count since last E1 sample, or last any-type-of sample?\n\nRelated but different questions, can simpleperf know the count of E1 when a E2 sample is collected?",
+      "range": {
+        "startLine": 38,
+        "startChar": 50,
+        "endLine": 38,
+        "endChar": 61
+      },
+      "revId": "7346744db94a44be881233553ca2d28f97a31453",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6edc8ab5_4828f1ae",
+        "filename": "simpleperf/report_sample.proto",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1079424
+      },
+      "writtenOn": "2017-08-03T00:10:39Z",
+      "side": 1,
+      "message": "Yabin, thank you for making the change. Yes, I think it is useful to know the event that triggered the sample. For example, if simpleperf supports schedule_in event in the future, we would know exactly when the thread goes off the cpu and goes back, so we can calculate the length of sleep.\n\nAmaury, going off the CPU in this context means thread is not occupying the core according to Yabin. There are several possible reasons (and hence resulting in multiple thread states), e.g., calling sleep(), blocking I/O call, being preempted by the OS.",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 36
+      },
+      "revId": "7346744db94a44be881233553ca2d28f97a31453",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
