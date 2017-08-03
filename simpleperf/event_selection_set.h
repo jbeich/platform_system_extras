@@ -49,6 +49,12 @@ struct CountersInfo {
   std::vector<CounterInfo> counters;
 };
 
+struct SampleSpeed {
+  uint64_t sample_freq;
+  uint64_t sample_period;
+  SampleSpeed(uint64_t freq = 0, uint64_t period = 0) : sample_freq(freq), sample_period(period) {}
+};
+
 // EventSelectionSet helps to monitor events. It is used in following steps:
 // 1. Create an EventSelectionSet, and add event types to monitor by calling
 //    AddEventType() or AddEventGroup().
@@ -71,8 +77,8 @@ class EventSelectionSet {
 
   bool empty() const { return groups_.empty(); }
 
-  bool AddEventType(const std::string& event_name);
-  bool AddEventGroup(const std::vector<std::string>& event_names);
+  bool AddEventType(const std::string& event_name, size_t* group_id = nullptr);
+  bool AddEventGroup(const std::vector<std::string>& event_names, size_t* group_id = nullptr);
   std::vector<const EventType*> GetEvents() const;
   std::vector<const EventType*> GetTracepointEvents() const;
   bool ExcludeKernel() const;
@@ -82,9 +88,7 @@ class EventSelectionSet {
   void SetEnableOnExec(bool enable);
   bool GetEnableOnExec();
   void SampleIdAll();
-  void SetSampleFreq(uint64_t sample_freq);
-  void SetSamplePeriod(uint64_t sample_period);
-  void UseDefaultSampleFreq();
+  void SetSampleSpeed(size_t group_id, const SampleSpeed& speed);
   bool SetBranchSampling(uint64_t branch_sample_type);
   void EnableFpCallChainSampling();
   bool EnableDwarfCallChainSampling(uint32_t dump_stack_size);
