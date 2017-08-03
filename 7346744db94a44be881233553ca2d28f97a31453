@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "49a03bec_b397c7b6",
+        "filename": "simpleperf/report_sample.proto",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-08-03T18:23:39Z",
+      "side": 1,
+      "message": "Done, let me know if it is not clear.\n\nIs it the count since last E1 sample, or last any-type-of sample?\nIt is the count since last E1 sample.\n\ncan simpleperf know the count of E1 when a E2 sample is collected?\nNo, it can\u0027t.",
+      "parentUuid": "fa697e65_814623fe",
+      "range": {
+        "startLine": 38,
+        "startChar": 50,
+        "endLine": 38,
+        "endChar": 61
+      },
+      "revId": "7346744db94a44be881233553ca2d28f97a31453",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6edc8ab5_4828f1ae",
         "filename": "simpleperf/report_sample.proto",
         "patchSetId": 2
