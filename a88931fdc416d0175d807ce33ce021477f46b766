@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0fe7aa72_085bdad7",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-08-04T05:04:59Z",
+      "side": 1,
+      "message": "taken?",
+      "range": {
+        "startLine": 140,
+        "startChar": 21,
+        "endLine": 140,
+        "endChar": 25
+      },
+      "revId": "a88931fdc416d0175d807ce33ce021477f46b766",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fbcf86b4_92693d5c",
+        "filename": "simpleperf/event_selection_set.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-08-04T05:04:59Z",
+      "side": 1,
+      "message": "this is odd too, that the two \"freq\"s are opposites.",
+      "range": {
+        "startLine": 301,
+        "startChar": 14,
+        "endLine": 302,
+        "endChar": 36
+      },
+      "revId": "a88931fdc416d0175d807ce33ce021477f46b766",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e30e0c6_90ba6360",
+        "filename": "simpleperf/event_selection_set.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-08-04T05:04:59Z",
+      "side": 1,
+      "message": "ei think it\u0027s worth explaining what these actually mean. (especially because they\u0027re not the usual period \u003d 1/frequency. maybe s/sample_period/sample_every/? it\u0027s not a great name, but it seems less misleading than \u0027period\u0027 and i\u0027m struggling to think of a better name right now.)",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 25
+      },
+      "revId": "a88931fdc416d0175d807ce33ce021477f46b766",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
