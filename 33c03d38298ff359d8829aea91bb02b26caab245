@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1c01820c_dc449669",
+        "filename": "memory_replay/NativeInfo.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1084139
+      },
+      "writtenOn": "2017-08-07T15:40:50Z",
+      "side": 1,
+      "message": "Double handle close: smaps_fd is already closed by GetNativeInfo (the comment to the latter should be added to make it clear who is doing close of the file)",
+      "revId": "33c03d38298ff359d8829aea91bb02b26caab245",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
