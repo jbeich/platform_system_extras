@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "d69b82c1_343efea7",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-08-07T17:35:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0fe7aa72_085bdad7",
+      "range": {
+        "startLine": 140,
+        "startChar": 21,
+        "endLine": 140,
+        "endChar": 25
+      },
+      "revId": "a88931fdc416d0175d807ce33ce021477f46b766",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fbcf86b4_92693d5c",
         "filename": "simpleperf/event_selection_set.cpp",
         "patchSetId": 2
@@ -59,6 +83,54 @@
       "writtenOn": "2017-08-04T05:04:59Z",
       "side": 1,
       "message": "ei think it\u0027s worth explaining what these actually mean. (especially because they\u0027re not the usual period \u003d 1/frequency. maybe s/sample_period/sample_every/? it\u0027s not a great name, but it seems less misleading than \u0027period\u0027 and i\u0027m struggling to think of a better name right now.)",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 25
+      },
+      "revId": "a88931fdc416d0175d807ce33ce021477f46b766",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4b479238_3c505ee0",
+        "filename": "simpleperf/event_selection_set.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-08-07T17:35:01Z",
+      "side": 1,
+      "message": "Done adding comments. I agree sample_period looks confusing, but it is the name used in kernel interface, as in http://elixir.free-electrons.com/linux/v3.0/source/include/linux/perf_event.h#L186.\nI prefer to keep sample_period to be compatible with the linux kernel.",
+      "parentUuid": "8e30e0c6_90ba6360",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 25
+      },
+      "revId": "a88931fdc416d0175d807ce33ce021477f46b766",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bbfc9882_cac31276",
+        "filename": "simpleperf/event_selection_set.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-08-07T17:35:01Z",
+      "side": 1,
+      "message": "Done adding comments. I prefer to keep sample_period to be compatible with perf_event.h in linux kernel, as in http://elixir.free-electrons.com/linux/v3.0/source/include/linux/perf_event.h#L186.",
+      "parentUuid": "8e30e0c6_90ba6360",
       "range": {
         "startLine": 53,
         "startChar": 0,
