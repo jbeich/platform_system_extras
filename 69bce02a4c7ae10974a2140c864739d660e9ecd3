@@ -16,6 +16,24 @@
       "revId": "69bce02a4c7ae10974a2140c864739d660e9ecd3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f18be8d1_3f3f9e94",
+        "filename": "simpleperf/scripts/inferno/inferno.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-08-08T17:39:09Z",
+      "side": 1,
+      "message": "We can import app_profiler.py, but I don\u0027t understand why the chain is fragile, any explanation?",
+      "parentUuid": "98252819_37efbdeb",
+      "revId": "69bce02a4c7ae10974a2140c864739d660e9ecd3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
