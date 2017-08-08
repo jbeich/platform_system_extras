@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "98252819_37efbdeb",
+        "filename": "simpleperf/scripts/inferno/inferno.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1083168
+      },
+      "writtenOn": "2017-08-08T17:32:58Z",
+      "side": 1,
+      "message": "This chaining is fragile. This is why I had Inferno self contained originally. Is there any way to import app_profiler.py and use the function directly?",
+      "revId": "69bce02a4c7ae10974a2140c864739d660e9ecd3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
