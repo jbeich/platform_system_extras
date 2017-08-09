@@ -52,6 +52,24 @@
       "revId": "69bce02a4c7ae10974a2140c864739d660e9ecd3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee9a8248_aeeebb6e",
+        "filename": "simpleperf/scripts/inferno/inferno.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-08-09T00:47:45Z",
+      "side": 1,
+      "message": "I think this is not a problem, actually test.py tests all scripts by first running a script in a child process, then verifying the generated results. as in https://android.googlesource.com/platform/system/extras/+/master/simpleperf/scripts/test.py#143. And I think this way to test is better than importing the scripts, because it is more like the user\u0027s behavior (going through the cmdline interface).",
+      "parentUuid": "2bec9f08_ff680f9c",
+      "revId": "69bce02a4c7ae10974a2140c864739d660e9ecd3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
