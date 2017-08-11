@@ -1182,6 +1182,12 @@ bool RecordCommand::DumpMetaInfoFeature() {
   // By storing event types information in perf.data, the readers of perf.data have the same
   // understanding of event types, even if they are on another machine.
   info_map["event_type_info"] = ScopedEventTypes::BuildString(event_selection_set_.GetEvents());
+#if defined(__ANDROID__)
+  info_map["product_props"] = android::base::StringPrintf("%s:%s:%s",
+                                  GetSystemProperty("ro.product.manufacturer").c_str(),
+                                  GetSystemProperty("ro.product.model").c_str(),
+                                  GetSystemProperty("ro.product.name").c_str());
+#endif
   return record_file_writer_->WriteMetaInfoFeature(info_map);
 }
 
