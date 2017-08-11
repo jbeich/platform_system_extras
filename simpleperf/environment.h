@@ -82,7 +82,9 @@ static inline uint64_t GetSystemClock() {
   return ts.tv_sec * 1000000000ULL + ts.tv_nsec;
 }
 
-#if !defined(__ANDROID__)
+#if defined(__ANDROID__)
+std::string GetSystemProperty(const std::string& name);
+#else
 static inline int gettid() {
   return syscall(__NR_gettid);
 }
