@@ -82,7 +82,11 @@ static inline uint64_t GetSystemClock() {
   return ts.tv_sec * 1000000000ULL + ts.tv_nsec;
 }
 
-#if !defined(__ANDROID__)
+#if defined(__ANDROID__)
+
+std::string GetSystemProperty(const std::string& name);
+
+#else
 static inline int gettid() {
   return syscall(__NR_gettid);
 }
@@ -100,5 +104,6 @@ bool RunInAppContext(const std::string& app_package_name, const std::string& cmd
 // Below two functions are only used in cts tests, to force stat/record cmd to run in app's context.
 void SetDefaultAppPackageName(const std::string& package_name);
 const std::string& GetDefaultAppPackageName();
+
 
 #endif  // SIMPLE_PERF_ENVIRONMENT_H_

@@ -667,3 +667,21 @@ void SetDefaultAppPackageName(const std::string& package_name) {
 const std::string& GetDefaultAppPackageName() {
   return default_package_name;
 }
+
+#if defined(__ANDROID__)
+
+static void GetSystemPropertyCallback(void* cookie, const char*, const char* value, uint32_t) {
+  std::string* s = static_cast<std::string*>(cookie);
+  *s = value;
+}
+
+std::string GetSystemProperty(const std::string& name) {
+  std::string result;
+  const prop_info* prop = __system_property_find(name.c_str());
+  if (prop != nullptr) {
+    __system_property_read_callback(prop, GetSystemPropertyCallback, &result);
+  }
+  return result;
+}
+
+#endif
