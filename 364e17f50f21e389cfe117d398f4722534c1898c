@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1c5b69a4_776f8e59",
+        "filename": "simpleperf/environment.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 678,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-08-12T05:05:13Z",
+      "side": 1,
+      "message": "android::base::GetProperty?",
+      "range": {
+        "startLine": 678,
+        "startChar": 12,
+        "endLine": 678,
+        "endChar": 29
+      },
+      "revId": "364e17f50f21e389cfe117d398f4722534c1898c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
