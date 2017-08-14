@@ -492,4 +492,26 @@ LOCAL_LDLIBS_linux := $(simpleperf_ldlibs_host_linux)
 LOCAL_MULTILIB := both
 include $(BUILD_HOST_NATIVE_TEST)
 
+
+# simpleperf_script.zip (for release in ndk)
+# ============================================================
+SIMPLEPERF_SCRIPT_LIST := \
+    $(filter-out $(LOCAL_PATH)/scripts/update.py,$(wildcard $(LOCAL_PATH)/scripts/*.py)) \
+    $(wildcard $(LOCAL_PATH)/scripts/inferno/*.py) \
+	  $(LOCAL_PATH)/scripts/inferno/inferno.b64 \
+	  $(LOCAL_PATH)/scripts/inferno/script.js \
+    $(LOCAL_PATH)/doc \
+    $(LOCAL_PATH)/demo \
+    $(LOCAL_PATH)/testdata/perf_with_symbols.data \
+    $(LOCAL_PATH)/testdata/perf_with_trace_offcpu.data
+
+$(HOST_OUT_EXECUTABLES)/simpleperf_script.zip : $(SIMPLEPERF_SCRIPT_LIST)
+	zip -r - $^ >$@
+
+SIMPLEPERF_SCRIPT_LIST :=
+
+sdk: $(HOST_OUT_EXECUTABLES)/simpleperf_script.zip
+
+$(call dist-for-goals,sdk,$(HOST_OUT_EXECUTABLES)/simpleperf_script.zip)
+
 include $(call first-makefiles-under,$(LOCAL_PATH))
