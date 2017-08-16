@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ad00181_29b6af03",
+        "filename": "simpleperf/Android.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 499,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2017-08-16T20:17:45Z",
+      "side": 1,
+      "message": "$(wildcard) should be wrapped with $(sort)",
+      "range": {
+        "startLine": 499,
+        "startChar": 51,
+        "endLine": 499,
+        "endChar": 59
+      },
+      "revId": "060b4bd5d68ea86f493a67d10c037bafac46ece9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7abe6b3e_fe7b28c2",
+        "filename": "simpleperf/Android.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 508,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2017-08-16T20:17:45Z",
+      "side": 1,
+      "message": "This isn\u0027t an executable, so a packaging directory would be better:\n\n $(call intermediates-dir-for,PACKAGING,simplerperf_script,HOST)",
+      "range": {
+        "startLine": 508,
+        "startChar": 0,
+        "endLine": 508,
+        "endChar": 23
+      },
+      "revId": "060b4bd5d68ea86f493a67d10c037bafac46ece9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "99558874_f2de1885",
+        "filename": "simpleperf/Android.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2017-08-16T20:17:45Z",
+      "side": 1,
+      "message": "soong_zip along with a file list is preferred, but if you keep with zip, at least use -rqX instead of -r. $(ZIPTIME) can also be used to remove timestamps to produce reproducible zip files.",
+      "range": {
+        "startLine": 509,
+        "startChar": 1,
+        "endLine": 509,
+        "endChar": 16
+      },
+      "revId": "060b4bd5d68ea86f493a67d10c037bafac46ece9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
