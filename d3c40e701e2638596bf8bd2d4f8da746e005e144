@@ -16,6 +16,24 @@
       "revId": "d3c40e701e2638596bf8bd2d4f8da746e005e144",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d7a66931_970de42c",
+        "filename": "simpleperf/scripts/inferno/script.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-08-17T21:30:07Z",
+      "side": 1,
+      "message": "As explained in the email, width 25 is not enough to show abbreviation of method name.",
+      "parentUuid": "8e416b11_8323f522",
+      "revId": "d3c40e701e2638596bf8bd2d4f8da746e005e144",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
