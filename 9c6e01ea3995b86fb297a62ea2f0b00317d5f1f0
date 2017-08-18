@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e5ffc811_f13b1f12",
+        "filename": "simpleperf/scripts/app_profiler.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 409,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-08-18T22:03:23Z",
+      "side": 1,
+      "message": "so --profile_from_launch and \"Profile an activity from initial launch\"? i still think \"startup profiling\" and \"startup time\" are a bit misleading --- yes, you\u0027d _use_ this option to do those things, but it doesn\u0027t separate out _just_ the startup time for you. (it\u0027s basically like \"strace -f command\", right, versus the more usual \"strace -f -p PID\"?)",
+      "range": {
+        "startLine": 409,
+        "startChar": 27,
+        "endLine": 409,
+        "endChar": 44
+      },
+      "revId": "9c6e01ea3995b86fb297a62ea2f0b00317d5f1f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
