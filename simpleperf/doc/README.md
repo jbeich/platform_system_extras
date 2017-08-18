@@ -29,6 +29,7 @@ Bugs and feature requests can be submitted at http://github.com/android-ndk/ndk/
     - [Visualize profiling data](#visualize-profiling-data)
     - [Annotate source code](#annotate-source-code)
     - [Trace offcpu time](#trace-offcpu-time)
+    - [App startup time profiling](#app-startup-time-profiling)
 - [Answers to common issues](#answers-to-common-issues)
     - [Why we suggest profiling on android >= N devices](#why-we-suggest-profiling-on-android-n-devices)
 
@@ -827,11 +828,11 @@ It's content is similar to below:
 Simpleperf is a cpu profiler, it generates samples for a thread only when it is
 running on a cpu. However, sometimes we want to find out where time of a thread
 is spent, whether it is running on cpu, preempted by other threads, doing I/O
-work, or waiting for some events. To support this, we add a --trace-offcpu
-option in simpleperf record cmd. When --trace-offcpu is used, simpleperf
+work, or waiting for some events. To support this, we added the --trace-offcpu
+option in the simpleperf record command. When --trace-offcpu is used, simpleperf
 generates a sample when a running thread is scheduled out, so we know the
 callstack of a thread when it is scheduled out. And when reporting a perf.data
-generated with --trace-offcpu option, we use timestamp to the next sample
+generated with --trace-offcpu, we use timestamp to the next sample
 (instead of event counts from the previous sample) as the weight of current
 sample. As a result, we can get a callgraph based on timestamp, including both
 on cpu time and off cpu time.
@@ -865,6 +866,28 @@ But if we add --trace-offcpu option, the graph is changed as below.
 
 As shown in the graph, half time is spent in RunFunction(), and half time is
 spent in SleepFunction(). It includes both on cpu time and off cpu time.
+
+### App startup time profiling
+
+Sometimes we want to profile the startup time of an activity of an Android app.
+To support this, we added the --app option in the simpleperf record command.
+The --app option sets the package name of the Android application to profile.
+If the app is not already running, the simpleperf record command will poll for
+the app process in a loop with an interval of 1ms. So to profile app startup
+time, we can first start simpleperf record with --app, then start the app.
+Below is an example.
+
+    $ adb shell /data/local/tmp/simpleperf record -g \
+    --app com.example.simpleperf.simpleperfexamplepurejava --duration 1 \
+    -o /data/local/tmp/perf.data
+    # Start the app manually or using the `am` command.
+
+To make it convenient to use, app_profiler.py combines these in the
+--startup_profiling option. Below is an example.
+
+    $ python app_profiler.py -p com.example.simpleperf.simpleperfexamplepurejava \
+      -a .MainActivity --arch arm64 -r "-g -e cpu-cycles:u --duration 1" \
+      --startup_profiling
 
 
 ## Answers to common issues
