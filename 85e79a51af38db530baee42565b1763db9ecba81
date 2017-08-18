@@ -94,6 +94,30 @@
     },
     {
       "key": {
+        "uuid": "d5c4c961_6f556a93",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 873,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-08-18T21:47:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bbdfb4e0_4d1741c6",
+      "range": {
+        "startLine": 873,
+        "startChar": 41,
+        "endLine": 873,
+        "endChar": 42
+      },
+      "revId": "85e79a51af38db530baee42565b1763db9ecba81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f5492d8a_b5c1bc89",
         "filename": "simpleperf/doc/README.md",
         "patchSetId": 1
@@ -140,6 +164,30 @@
     },
     {
       "key": {
+        "uuid": "3e9a6247_a4ef7c9f",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 875,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-08-18T21:47:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f5492d8a_b5c1bc89",
+      "range": {
+        "startLine": 875,
+        "startChar": 39,
+        "endLine": 875,
+        "endChar": 42
+      },
+      "revId": "85e79a51af38db530baee42565b1763db9ecba81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4a6cfc2e_1bc9cedd",
         "filename": "simpleperf/doc/README.md",
         "patchSetId": 1
@@ -151,6 +199,30 @@
       "writtenOn": "2017-08-18T19:57:54Z",
       "side": 1,
       "message": "an",
+      "range": {
+        "startLine": 876,
+        "startChar": 9,
+        "endLine": 876,
+        "endChar": 10
+      },
+      "revId": "85e79a51af38db530baee42565b1763db9ecba81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f7dc32ab_2beeee4e",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 876,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-08-18T21:47:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4a6cfc2e_1bc9cedd",
       "range": {
         "startLine": 876,
         "startChar": 9,
@@ -186,6 +258,30 @@
     },
     {
       "key": {
+        "uuid": "8509072e_b38d4bcb",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 877,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-08-18T21:47:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b0d6c43a_021aa14e",
+      "range": {
+        "startLine": 877,
+        "startChar": 18,
+        "endLine": 877,
+        "endChar": 21
+      },
+      "revId": "85e79a51af38db530baee42565b1763db9ecba81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "03f281cd_f2101da3",
         "filename": "simpleperf/doc/README.md",
         "patchSetId": 1
@@ -197,6 +293,30 @@
       "writtenOn": "2017-08-18T19:57:54Z",
       "side": 1,
       "message": "easier to just say \"start the app\" here.",
+      "range": {
+        "startLine": 877,
+        "startChar": 46,
+        "endLine": 878,
+        "endChar": 7
+      },
+      "revId": "85e79a51af38db530baee42565b1763db9ecba81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae895493_3a706780",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 878,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-08-18T21:47:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "03f281cd_f2101da3",
       "range": {
         "startLine": 877,
         "startChar": 46,
@@ -278,6 +398,30 @@
     },
     {
       "key": {
+        "uuid": "8dc71e22_1c4ffb66",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 883,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-08-18T21:47:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "67329ab2_03258ba9",
+      "range": {
+        "startLine": 883,
+        "startChar": 42,
+        "endLine": 883,
+        "endChar": 43
+      },
+      "revId": "85e79a51af38db530baee42565b1763db9ecba81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b5c058e8_e5f777d7",
         "filename": "simpleperf/doc/README.md",
         "patchSetId": 1
@@ -301,6 +445,30 @@
     },
     {
       "key": {
+        "uuid": "c84c5611_8d4ec397",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 885,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-08-18T21:47:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b5c058e8_e5f777d7",
+      "range": {
+        "startLine": 885,
+        "startChar": 46,
+        "endLine": 885,
+        "endChar": 69
+      },
+      "revId": "85e79a51af38db530baee42565b1763db9ecba81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5cf9a32e_8c179f03",
         "filename": "simpleperf/scripts/app_profiler.py",
         "patchSetId": 1
@@ -312,6 +480,30 @@
       "writtenOn": "2017-08-18T19:57:54Z",
       "side": 1,
       "message": "Launch an activity and profile it\n\n(because this doesn\u0027t stop once the app has started.)",
+      "range": {
+        "startLine": 410,
+        "startChar": 3,
+        "endLine": 410,
+        "endChar": 37
+      },
+      "revId": "85e79a51af38db530baee42565b1763db9ecba81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "895d6189_ca1b2935",
+        "filename": "simpleperf/scripts/app_profiler.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-08-18T21:47:48Z",
+      "side": 1,
+      "message": "The work of launching an activity is done by -a option. --startup_profiling is to change the running order. With it we need to sacrifice some functionality: 1. user has to specific the arch with --arch option. 2. we don\u0027t download native libs with debug info on device.\n\nchanged the help msg to make it clear.",
+      "parentUuid": "5cf9a32e_8c179f03",
       "range": {
         "startLine": 410,
         "startChar": 3,
