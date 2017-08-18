@@ -1,0 +1,326 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bbdfb4e0_4d1741c6",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 873,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-08-18T19:57:54Z",
+      "side": 1,
+      "message": "the",
+      "range": {
+        "startLine": 873,
+        "startChar": 41,
+        "endLine": 873,
+        "endChar": 42
+      },
+      "revId": "85e79a51af38db530baee42565b1763db9ecba81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3fb1301d_5e721908",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 873,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-08-18T19:57:54Z",
+      "side": 1,
+      "message": "command",
+      "range": {
+        "startLine": 873,
+        "startChar": 60,
+        "endLine": 873,
+        "endChar": 63
+      },
+      "revId": "85e79a51af38db530baee42565b1763db9ecba81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a1533a80_31a156e4",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 873,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-08-18T19:57:54Z",
+      "side": 1,
+      "message": "The",
+      "range": {
+        "startLine": 873,
+        "startChar": 64,
+        "endLine": 873,
+        "endChar": 65
+      },
+      "revId": "85e79a51af38db530baee42565b1763db9ecba81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2fa2c786_93712a94",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 873,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-08-18T19:57:54Z",
+      "side": 1,
+      "message": "the",
+      "range": {
+        "startLine": 873,
+        "startChar": 25,
+        "endLine": 873,
+        "endChar": 26
+      },
+      "revId": "85e79a51af38db530baee42565b1763db9ecba81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f5492d8a_b5c1bc89",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 875,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-08-18T19:57:54Z",
+      "side": 1,
+      "message": "command",
+      "range": {
+        "startLine": 875,
+        "startChar": 39,
+        "endLine": 875,
+        "endChar": 42
+      },
+      "revId": "85e79a51af38db530baee42565b1763db9ecba81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "56ea79a1_a107da58",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 875,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-08-18T19:57:54Z",
+      "side": 1,
+      "message": "If the app is not already running, the",
+      "range": {
+        "startLine": 875,
+        "startChar": 0,
+        "endLine": 875,
+        "endChar": 7
+      },
+      "revId": "85e79a51af38db530baee42565b1763db9ecba81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4a6cfc2e_1bc9cedd",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 876,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-08-18T19:57:54Z",
+      "side": 1,
+      "message": "an",
+      "range": {
+        "startLine": 876,
+        "startChar": 9,
+        "endLine": 876,
+        "endChar": 10
+      },
+      "revId": "85e79a51af38db530baee42565b1763db9ecba81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b0d6c43a_021aa14e",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 877,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-08-18T19:57:54Z",
+      "side": 1,
+      "message": "either \"start simpleperf record\" or \"start the simpleperf record command\"",
+      "range": {
+        "startLine": 877,
+        "startChar": 18,
+        "endLine": 877,
+        "endChar": 21
+      },
+      "revId": "85e79a51af38db530baee42565b1763db9ecba81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "03f281cd_f2101da3",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 878,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-08-18T19:57:54Z",
+      "side": 1,
+      "message": "easier to just say \"start the app\" here.",
+      "range": {
+        "startLine": 877,
+        "startChar": 46,
+        "endLine": 878,
+        "endChar": 7
+      },
+      "revId": "85e79a51af38db530baee42565b1763db9ecba81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e412922e_d2e98b4f",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 883,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-08-18T19:57:54Z",
+      "side": 1,
+      "message": "app",
+      "range": {
+        "startLine": 883,
+        "startChar": 16,
+        "endLine": 883,
+        "endChar": 24
+      },
+      "revId": "85e79a51af38db530baee42565b1763db9ecba81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5d3aa963_9bfd5a3e",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 883,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-08-18T19:57:54Z",
+      "side": 1,
+      "message": "command",
+      "range": {
+        "startLine": 883,
+        "startChar": 48,
+        "endLine": 883,
+        "endChar": 51
+      },
+      "revId": "85e79a51af38db530baee42565b1763db9ecba81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "67329ab2_03258ba9",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 883,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-08-18T19:57:54Z",
+      "side": 1,
+      "message": "the",
+      "range": {
+        "startLine": 883,
+        "startChar": 42,
+        "endLine": 883,
+        "endChar": 43
+      },
+      "revId": "85e79a51af38db530baee42565b1763db9ecba81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b5c058e8_e5f777d7",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 885,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-08-18T19:57:54Z",
+      "side": 1,
+      "message": "combines these in the",
+      "range": {
+        "startLine": 885,
+        "startChar": 46,
+        "endLine": 885,
+        "endChar": 69
+      },
+      "revId": "85e79a51af38db530baee42565b1763db9ecba81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5cf9a32e_8c179f03",
+        "filename": "simpleperf/scripts/app_profiler.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-08-18T19:57:54Z",
+      "side": 1,
+      "message": "Launch an activity and profile it\n\n(because this doesn\u0027t stop once the app has started.)",
+      "range": {
+        "startLine": 410,
+        "startChar": 3,
+        "endLine": 410,
+        "endChar": 37
+      },
+      "revId": "85e79a51af38db530baee42565b1763db9ecba81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
