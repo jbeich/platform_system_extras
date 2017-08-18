@@ -22,6 +22,30 @@
       "revId": "9c6e01ea3995b86fb297a62ea2f0b00317d5f1f0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5f2a9bce_832cc472",
+        "filename": "simpleperf/scripts/app_profiler.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 409,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-08-18T22:40:04Z",
+      "side": 1,
+      "message": "I totally agree. There is no separation between startup and running.",
+      "parentUuid": "e5ffc811_f13b1f12",
+      "range": {
+        "startLine": 409,
+        "startChar": 27,
+        "endLine": 409,
+        "endChar": 44
+      },
+      "revId": "9c6e01ea3995b86fb297a62ea2f0b00317d5f1f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
