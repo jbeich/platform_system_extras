@@ -16,6 +16,24 @@
       "revId": "be31ff488d92a3ca8d0b2bc8d75468bbc411dfbe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d95860ea_d45d269f",
+        "filename": "simpleperf/scripts/inferno/inferno.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-08-21T18:01:22Z",
+      "side": 1,
+      "message": "They are different, one is jquery, the other is jqueryui, and jqueryui is based on jquery.",
+      "parentUuid": "b084247f_7ffab1c1",
+      "revId": "be31ff488d92a3ca8d0b2bc8d75468bbc411dfbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
