@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b084247f_7ffab1c1",
+        "filename": "simpleperf/scripts/inferno/inferno.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1083168
+      },
+      "writtenOn": "2017-08-21T17:48:19Z",
+      "side": 1,
+      "message": "Why is this embedded twice?",
+      "revId": "be31ff488d92a3ca8d0b2bc8d75468bbc411dfbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
