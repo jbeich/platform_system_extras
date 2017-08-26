@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e8405b9_66dc6d79",
+        "filename": "alloc-stress/Android.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-08-26T03:01:02Z",
+      "side": 1,
+      "message": "are you using these?",
+      "range": {
+        "startLine": 24,
+        "startChar": 26,
+        "endLine": 24,
+        "endChar": 47
+      },
+      "revId": "4b9bb02e0390ed595578135e8e83b9d6db85d710",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
