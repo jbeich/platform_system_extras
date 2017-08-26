@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c8b342f0_8d8f09bc",
+        "filename": "alloc-stress/mem-pressure.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-08-26T02:32:03Z",
+      "side": 1,
+      "message": "use strerror?",
+      "range": {
+        "startLine": 27,
+        "startChar": 60,
+        "endLine": 27,
+        "endChar": 65
+      },
+      "revId": "4b3551dd0ca0eedb5629e2897c58360cc8eb419b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "de2e9a03_9d76b18a",
+        "filename": "alloc-stress/mem-pressure.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-08-26T02:32:03Z",
+      "side": 1,
+      "message": "clear *shared",
+      "revId": "4b3551dd0ca0eedb5629e2897c58360cc8eb419b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "90a58ea6_469adb7b",
+        "filename": "alloc-stress/mem-pressure.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-08-26T02:32:03Z",
+      "side": 1,
+      "message": "when is this used?",
+      "revId": "4b3551dd0ca0eedb5629e2897c58360cc8eb419b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
