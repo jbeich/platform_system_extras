@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "34e75388_a20704c0",
+        "filename": "simpleperf/environment.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 550,
+      "author": {
+        "id": 1079148
+      },
+      "writtenOn": "2017-08-28T23:21:35Z",
+      "side": 1,
+      "message": "This doesn\u0027t seem like a very robust way of doing things (e.g. it\u0027ll fail if you have an app with a dumb but allowed package name, like \u0027libc.so\u0027). Looking for an apk in /proc/\u003cpid\u003e/fd might be better?\n\nAlso, does this actually work for apps on the system partition? \"grep com.android.calendar /proc/`pidof com.android.calendar`/maps\" is empty on AOSP hikey960 for me.",
+      "revId": "6d69ae6c0d63d317f079762884112e6376ee8d12",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
