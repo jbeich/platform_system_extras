@@ -533,12 +533,28 @@ int WaitForAppProcess(const std::string& package_name) {
         continue;
       }
       cmdline = android::base::Basename(cmdline);
-      if (cmdline == package_name) {
-        if (loop_count > 0u) {
-          LOG(INFO) << "Got process " << pid << " for package " << package_name;
-        }
-        return pid;
+      if (cmdline != package_name) {
+        continue;
       }
+      // If a debuggable app with wrap.sh runs on Android O, the app will be started with
+      // logwrapper as below:
+      // 1. Zygote forks a child process, rename it to package_name.
+      // 2. The child process execute sh, which starts a child process running
+      //    /system/bin/logwrapper.
+      // 3. logwrapper starts a child process running sh, which interprets wrap.sh.
+      // 4. wrap.sh starts a child process running the app.
+      // The problem here is we want to profile the process started in step 4, but sometimes we
+      // run into the process started in step 1. To solve it, we can double check the process's
+      // maps file.
+      std::string map;
+      if (!android::base::ReadFileToString("/proc/" + std::to_string(pid) + "/maps", &map) ||
+          map.find(package_name) == std::string::npos) {
+        continue;
+      }
+      if (loop_count > 0u) {
+        LOG(INFO) << "Got process " << pid << " for package " << package_name;
+      }
+      return pid;
     }
     if (++loop_count == 1u) {
       LOG(INFO) << "Waiting for process of app " << package_name;
