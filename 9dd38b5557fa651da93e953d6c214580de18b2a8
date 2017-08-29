@@ -16,6 +16,24 @@
       "revId": "9dd38b5557fa651da93e953d6c214580de18b2a8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "af6abd1e_1c3895cf",
+        "filename": "verity/build_verity_tree.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1096946
+      },
+      "writtenOn": "2017-08-29T23:54:37Z",
+      "side": 1,
+      "message": "\u003e is unique_ptr smart enough to do that?\n\nyes: http://en.cppreference.com/w/cpp/memory/unique_ptr\n\n(i have no opinion about what container this ends up being)",
+      "parentUuid": "138995f2_33c1c848",
+      "revId": "9dd38b5557fa651da93e953d6c214580de18b2a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
