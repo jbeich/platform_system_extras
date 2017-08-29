@@ -16,6 +16,24 @@
       "revId": "6d69ae6c0d63d317f079762884112e6376ee8d12",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aadf9bed_6c2524ab",
+        "filename": "simpleperf/environment.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 550,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-08-29T01:10:59Z",
+      "side": 1,
+      "message": "Thanks for reminding me. It doesn\u0027t work for apps on system partition, which have dir different from their package name. Just checking apk file isn\u0027t enough, because zygote has an opened apk file (/system/framework/framework-res.apk). So I changed to check if there is an apk file from an app dir (like /data/app, or /system/app, or /vendor/app).",
+      "parentUuid": "34e75388_a20704c0",
+      "revId": "6d69ae6c0d63d317f079762884112e6376ee8d12",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
