@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "138995f2_33c1c848",
+        "filename": "verity/build_verity_tree.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2017-08-29T23:51:31Z",
+      "side": 1,
+      "message": "Is this valid?  An array must be deleted with delete[], is unique_ptr smart enough to do that?\n\nWhat\u0027s wrong with a std::string or std::vector\u003cunsigned char\u003e?  You can get writeable pointers to either using \u0026string[0] or vector.data()",
+      "revId": "9dd38b5557fa651da93e953d6c214580de18b2a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
