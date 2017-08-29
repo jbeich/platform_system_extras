@@ -126,7 +126,7 @@ int main(int argc, char **argv)
 {
     char *data_filename;
     char *verity_filename;
-    unsigned char *salt = NULL;
+    std::unique_ptr<unsigned char[]> salt;
     size_t salt_size = 0;
     bool sparse = false;
     size_t block_size = 4096;
@@ -151,11 +151,11 @@ int main(int argc, char **argv)
         switch (c) {
         case 'a':
             salt_size = strlen(optarg);
-            salt = new unsigned char[salt_size]();
-            if (salt == NULL) {
+            salt.reset(new unsigned char[salt_size]);
+            if (salt.get() == NULL) {
                 FATAL("failed to allocate memory for salt\n");
             }
-            memcpy(salt, optarg, salt_size);
+            memcpy(salt.get(), optarg, salt_size);
             break;
         case 'A': {
                 BIGNUM *bn = NULL;
@@ -163,11 +163,11 @@ int main(int argc, char **argv)
                     FATAL("failed to convert salt from hex\n");
                 }
                 salt_size = BN_num_bytes(bn);
-                salt = new unsigned char[salt_size]();
-                if (salt == NULL) {
+                salt.reset(new unsigned char[salt_size]);
+                if (salt.get() == NULL) {
                     FATAL("failed to allocate memory for salt\n");
                 }
-                if((size_t)BN_bn2bin(bn, salt) != salt_size) {
+                if((size_t)BN_bn2bin(bn, salt.get()) != salt_size) {
                     FATAL("failed to convert salt to bytes\n");
                 }
             }
@@ -214,9 +214,9 @@ int main(int argc, char **argv)
     size_t hash_size = EVP_MD_size(md);
     assert(hash_size * 2 < block_size);
 
-    if (!salt || !salt_size) {
+    if (!salt.get() || !salt_size) {
         salt_size = hash_size;
-        salt = new unsigned char[salt_size];
+        salt.reset(new unsigned char[salt_size]);
         if (salt == NULL) {
             FATAL("failed to allocate memory for salt\n");
         }
@@ -226,7 +226,7 @@ int main(int argc, char **argv)
             FATAL("failed to open /dev/urandom\n");
         }
 
-        ssize_t ret = read(random_fd, salt, salt_size);
+        ssize_t ret = read(random_fd, salt.get(), salt_size);
         if (ret != (ssize_t)salt_size) {
             FATAL("failed to read %zu bytes from /dev/urandom: %zd %d\n", salt_size, ret, errno);
         }
@@ -310,14 +310,14 @@ int main(int argc, char **argv)
     unsigned char zero_block_hash[hash_size];
     unsigned char zero_block[block_size];
     memset(zero_block, 0, block_size);
-    hash_block(md, zero_block, block_size, salt, salt_size, zero_block_hash, NULL);
+    hash_block(md, zero_block, block_size, salt.get(), salt_size, zero_block_hash, NULL);
 
     unsigned char root_hash[hash_size];
     verity_tree_levels[levels] = root_hash;
 
     struct sparse_hash_ctx ctx;
     ctx.hashes = verity_tree_levels[0];
-    ctx.salt = salt;
+    ctx.salt = salt.get();
     ctx.salt_size = salt_size;
     ctx.hash_size = hash_size;
     ctx.block_size = block_size;
@@ -334,7 +334,7 @@ int main(int argc, char **argv)
         hash_blocks(md,
                 verity_tree_levels[i], verity_tree_level_blocks[i] * block_size,
                 verity_tree_levels[i + 1], &out_size,
-                salt, salt_size, block_size);
+                salt.get(), salt_size, block_size);
           if (i < levels - 1) {
               assert(div_round_up(out_size, block_size) == verity_tree_level_blocks[i + 1]);
           } else {
@@ -347,7 +347,7 @@ int main(int argc, char **argv)
     }
     printf(" ");
     for (size_t i = 0; i < salt_size; i++) {
-        printf("%02x", salt[i]);
+        printf("%02x", salt.get()[i]);
     }
     printf("\n");
 
@@ -363,5 +363,4 @@ int main(int argc, char **argv)
     delete[] verity_tree_levels;
     delete[] verity_tree_level_blocks;
     delete[] verity_tree;
-    delete[] salt;
 }
