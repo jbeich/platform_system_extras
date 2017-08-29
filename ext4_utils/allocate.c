@@ -261,7 +261,11 @@ void reduce_allocation(struct block_allocation *alloc, u32 len)
 				alloc->list.iter = NULL;
 				alloc->list.partial_iter = 0;
 			}
-			free(last_reg);
+			if (last_reg != alloc->list.last) {
+				free(last_reg);
+			} else {
+				error("corrupted list");
+			}
 		}
 	}
 }
