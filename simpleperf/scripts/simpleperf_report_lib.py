@@ -268,6 +268,23 @@ class ReportLib(object):
             self.record_cmd = " ".join(args)
         return self.record_cmd
 
+    def _GetFeatureString(self, feature_name):
+        feature_data = self._GetFeatureSection(self.getInstance(), _char_pt(feature_name))
+        result = ""
+        if not _is_null(feature_data):
+            void_p = ct.cast(feature_data[0].data, ct.c_void_p)
+            str_len = ct.cast(void_p, ct.POINTER(ct.c_uint32)).contents.value
+            void_p.value += 4
+            char_p = ct.cast(void_p, ct.POINTER(ct.c_char))
+            for i in range(str_len):
+                c = bytes_to_str(char_p[i])
+                if c == '\0':
+                    break
+                result += c
+        return result
+
+    def GetArch(self):
+        return self._GetFeatureString("arch")
 
     def MetaInfo(self):
         if self.meta_info is None:

@@ -34,12 +34,11 @@ import datetime
 import os
 import subprocess
 import sys
-import webbrowser
 
 scripts_path = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
 sys.path.append(scripts_path)
 from simpleperf_report_lib import ReportLib
-from utils import log_exit, log_info, AdbHelper
+from utils import log_exit, log_info, AdbHelper, open_report_in_browser
 
 from data_types import *
 from svg_renderer import *
@@ -223,20 +222,6 @@ def collect_machine_info(process):
     process.props['ro.product.model'] = adb.get_property('ro.product.model')
     process.props['ro.product.name'] = adb.get_property('ro.product.name')
     process.props['ro.product.manufacturer'] = adb.get_property('ro.product.manufacturer')
-
-
-def open_report_in_browser(report_path):
-    try:
-        # Try to open the report with Chrome
-        browser_key = ""
-        for key, value in webbrowser._browsers.items():
-            if key.find("chrome") != -1:
-                browser_key = key
-        browser = webbrowser.get(browser_key)
-        browser.open(report_path, new=0, autoraise=True)
-    except:
-        # webbrowser.get() doesn't work well on darwin/windows.
-        webbrowser.open_new_tab(report_path)
 
 
 def main():
