@@ -243,6 +243,7 @@ void reduce_allocation(struct block_allocation *alloc, u32 len)
 {
 	while (len) {
 		struct region *last_reg = alloc->list.last;
+		// NOLINTNEXTLINE: false use-after-free warning from the free(last_reg) below.
 		struct block_group_info *bg = &aux_info.bgs[last_reg->bg];
 
 		if (last_reg->len > len) {
