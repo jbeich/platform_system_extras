@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "21644bf1_5ca04b8f",
+        "filename": "verity/build_verity_tree.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2017-08-30T17:09:29Z",
+      "side": 1,
+      "message": "Use:\n\n salt.clear();\n salt.insert(salt.end(), optarg, \u0026optarg[strlen(optarg)]);",
+      "range": {
+        "startLine": 154,
+        "startChar": 12,
+        "endLine": 154,
+        "endChar": 27
+      },
+      "revId": "1e11ebada2a36040fcd7b5982b98197993036cf6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
