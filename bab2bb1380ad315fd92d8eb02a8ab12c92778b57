@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f0dee0b6_5ae1456b",
+        "filename": "ext4_utils/allocate.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1096946
+      },
+      "writtenOn": "2017-08-30T01:21:43Z",
+      "side": 1,
+      "message": "Can we instead put an assert()/CHECK() here like requested in https://android-review.googlesource.com/#/c/platform/system/core/+/458659/ ?",
+      "revId": "bab2bb1380ad315fd92d8eb02a8ab12c92778b57",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
