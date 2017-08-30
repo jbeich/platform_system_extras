@@ -22,6 +22,30 @@
       "revId": "1e11ebada2a36040fcd7b5982b98197993036cf6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0d9a3f73_aedf79e6",
+        "filename": "verity/build_verity_tree.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1087590
+      },
+      "writtenOn": "2017-08-30T17:15:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "21644bf1_5ca04b8f",
+      "range": {
+        "startLine": 154,
+        "startChar": 12,
+        "endLine": 154,
+        "endChar": 27
+      },
+      "revId": "1e11ebada2a36040fcd7b5982b98197993036cf6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
