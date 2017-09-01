@@ -103,6 +103,17 @@ bool IsDumpingRegsForTracepointEventsSupported() {
   return false;
 }
 
+bool IsSettingClockIdSupported() {
+  const EventType* type = FindEventTypeByName("cpu-cycles");
+  if (type == nullptr) {
+    return false;
+  }
+  perf_event_attr attr = CreateDefaultPerfEventAttr(*type);
+  attr.use_clockid = 1;
+  attr.clockid = CLOCK_MONOTONIC;
+  return IsEventAttrSupported(attr);
+}
+
 bool EventSelectionSet::BuildAndCheckEventSelection(
     const std::string& event_name, EventSelection* selection) {
   std::unique_ptr<EventTypeAndModifier> event_type = ParseEventType(event_name);
@@ -368,6 +379,15 @@ void EventSelectionSet::SetInherit(bool enable) {
   for (auto& group : groups_) {
     for (auto& selection : group) {
       selection.event_attr.inherit = (enable ? 1 : 0);
+    }
+  }
+}
+
+void EventSelectionSet::SetClockId(int clock_id) {
+  for (auto& group : groups_) {
+    for (auto& selection : group) {
+      selection.event_attr.use_clockid = 1;
+      selection.event_attr.clockid = clock_id;
     }
   }
 }
