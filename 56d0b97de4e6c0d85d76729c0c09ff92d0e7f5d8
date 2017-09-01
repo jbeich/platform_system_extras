@@ -16,6 +16,24 @@
       "revId": "56d0b97de4e6c0d85d76729c0c09ff92d0e7f5d8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2c9bca0f_f4ca98d7",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 518,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-09-01T23:18:40Z",
+      "side": 1,
+      "message": "We don\u0027t need to follow everything in upstream. I think it doesn\u0027t make much sense to support that. And it\u0027s better to match the code with names in the help msg above.",
+      "parentUuid": "7a6d4aba_50fe3fc5",
+      "revId": "56d0b97de4e6c0d85d76729c0c09ff92d0e7f5d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
