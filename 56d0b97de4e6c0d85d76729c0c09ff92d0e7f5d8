@@ -60,6 +60,30 @@
     },
     {
       "key": {
+        "uuid": "e86cc741_5a0a3e33",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 525,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-09-05T19:04:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e9a053b_d637d436",
+      "range": {
+        "startLine": 522,
+        "startChar": 8,
+        "endLine": 525,
+        "endChar": 9
+      },
+      "revId": "56d0b97de4e6c0d85d76729c0c09ff92d0e7f5d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "409d0b3d_0ea3e4dc",
         "filename": "simpleperf/event_selection_set.cpp",
         "patchSetId": 1
@@ -71,6 +95,30 @@
       "writtenOn": "2017-09-05T18:27:16Z",
       "side": 1,
       "message": "Is it possible that even though this clock id is supported, that a kernel might not support all clock ids?",
+      "range": {
+        "startLine": 113,
+        "startChar": 17,
+        "endLine": 113,
+        "endChar": 32
+      },
+      "revId": "56d0b97de4e6c0d85d76729c0c09ff92d0e7f5d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7fbad6ee_0b38e90b",
+        "filename": "simpleperf/event_selection_set.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-09-05T19:04:10Z",
+      "side": 1,
+      "message": "The perf interface to support setting clockid was added in kernel v4.0, and all valid clockids were added in v2.6. So just check the perf interface is enough.",
+      "parentUuid": "409d0b3d_0ea3e4dc",
       "range": {
         "startLine": 113,
         "startChar": 17,
