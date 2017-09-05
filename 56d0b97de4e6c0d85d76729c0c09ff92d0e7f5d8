@@ -34,6 +34,52 @@
       "revId": "56d0b97de4e6c0d85d76729c0c09ff92d0e7f5d8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2e9a053b_d637d436",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 525,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2017-09-05T18:27:16Z",
+      "side": 1,
+      "message": "This is a small nit, but would it be worth checking if the clock id is supported before checking if the clock id specified is a valid choice? This might prevent someone from typoing the name, then rerunning with the correct name only to find out the operation is not supported at all.",
+      "range": {
+        "startLine": 522,
+        "startChar": 8,
+        "endLine": 525,
+        "endChar": 9
+      },
+      "revId": "56d0b97de4e6c0d85d76729c0c09ff92d0e7f5d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "409d0b3d_0ea3e4dc",
+        "filename": "simpleperf/event_selection_set.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2017-09-05T18:27:16Z",
+      "side": 1,
+      "message": "Is it possible that even though this clock id is supported, that a kernel might not support all clock ids?",
+      "range": {
+        "startLine": 113,
+        "startChar": 17,
+        "endLine": 113,
+        "endChar": 32
+      },
+      "revId": "56d0b97de4e6c0d85d76729c0c09ff92d0e7f5d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
