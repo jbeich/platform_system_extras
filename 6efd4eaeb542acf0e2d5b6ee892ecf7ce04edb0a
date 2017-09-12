@@ -22,6 +22,30 @@
       "revId": "6efd4eaeb542acf0e2d5b6ee892ecf7ce04edb0a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "39b2f4dd_54c565ec",
+        "filename": "ext4_utils/allocate.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1077838
+      },
+      "writtenOn": "2017-09-12T22:56:52Z",
+      "side": 1,
+      "message": "It turns out to be a real bug. When reg !\u003d 0, the last region was repeatedly freed.",
+      "parentUuid": "089f258f_dc77537a",
+      "range": {
+        "startLine": 264,
+        "startChar": 7,
+        "endLine": 264,
+        "endChar": 15
+      },
+      "revId": "6efd4eaeb542acf0e2d5b6ee892ecf7ce04edb0a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
