@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fbe8685a_de913341",
+        "filename": "ext4_utils/make_ext4fs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1051712
+      },
+      "writtenOn": "2017-09-13T03:32:00Z",
+      "side": 1,
+      "message": "free dentries[i].filename before overriding it in next iteration?",
+      "revId": "5af3afc91900dd224ac85b14bc9d598b09dc87cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b467af7e_c78f70a2",
+        "filename": "ext4_utils/make_ext4fs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1051712
+      },
+      "writtenOn": "2017-09-13T03:32:00Z",
+      "side": 1,
+      "message": "same here?",
+      "revId": "5af3afc91900dd224ac85b14bc9d598b09dc87cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
