@@ -46,3 +46,16 @@ bool IsRoot();
 #else
 #define TEST_REQUIRE_HOST_ROOT()  if (!IsRoot()) return
 #endif
+
+#if defined(__ANDROID__) && defined(__arm__)
+// Used to skip tests not supported on houdini lib, which emulates an arm environment on x86 devices.
+#define OMIT_TEST_ON_HOUDINI()  \
+  do { \
+    if (IsRegularFile("/system/lib/libhoudini.so")) { \
+      GTEST_LOG_(INFO) << "Skip test not supported on libhoudini."; \
+      return; \
+    } \
+  } while (0)
+#else
+#define OMIT_TEST_ON_HOUDINI()
+#endif

@@ -192,6 +192,7 @@ TEST(record_cmd, system_wide_fp_callchain_sampling) {
 }
 
 TEST(record_cmd, dwarf_callchain_sampling) {
+  OMIT_TEST_ON_HOUDINI();
   ASSERT_TRUE(IsDwarfCallChainSamplingSupported());
   std::vector<std::unique_ptr<Workload>> workloads;
   CreateProcesses(1, &workloads);
@@ -203,17 +204,20 @@ TEST(record_cmd, dwarf_callchain_sampling) {
 }
 
 TEST(record_cmd, system_wide_dwarf_callchain_sampling) {
+  OMIT_TEST_ON_HOUDINI();
   ASSERT_TRUE(IsDwarfCallChainSamplingSupported());
   TEST_IN_ROOT(RunRecordCmd({"-a", "--call-graph", "dwarf"}));
 }
 
 TEST(record_cmd, no_unwind_option) {
+  OMIT_TEST_ON_HOUDINI();
   ASSERT_TRUE(IsDwarfCallChainSamplingSupported());
   ASSERT_TRUE(RunRecordCmd({"--call-graph", "dwarf", "--no-unwind"}));
   ASSERT_FALSE(RunRecordCmd({"--no-unwind"}));
 }
 
 TEST(record_cmd, post_unwind_option) {
+  OMIT_TEST_ON_HOUDINI();
   ASSERT_TRUE(IsDwarfCallChainSamplingSupported());
   std::vector<std::unique_ptr<Workload>> workloads;
   CreateProcesses(1, &workloads);
@@ -332,6 +336,7 @@ TEST(record_cmd, no_dump_symbols) {
   ASSERT_TRUE(RunRecordCmd({"--no-dump-symbols"}, tmpfile.path));
   CheckDsoSymbolRecords(tmpfile.path, false, &success);
   ASSERT_TRUE(success);
+  OMIT_TEST_ON_HOUDINI();
   ASSERT_TRUE(IsDwarfCallChainSamplingSupported());
   std::vector<std::unique_ptr<Workload>> workloads;
   CreateProcesses(1, &workloads);
@@ -471,6 +476,7 @@ TEST(record_cmd, cpu_clock_for_a_long_time) {
 
 TEST(record_cmd, dump_regs_for_tracepoint_events) {
   TEST_REQUIRE_HOST_ROOT();
+  OMIT_TEST_ON_HOUDINI();
   // Check if the kernel can dump registers for tracepoint events.
   // If not, probably a kernel patch below is missing:
   // "5b09a094f2 arm64: perf: Fix callchain parse error with kernel tracepoint events"
@@ -480,6 +486,7 @@ TEST(record_cmd, dump_regs_for_tracepoint_events) {
 TEST(record_cmd, trace_offcpu_option) {
   // On linux host, we need root privilege to read tracepoint events.
   TEST_REQUIRE_HOST_ROOT();
+  OMIT_TEST_ON_HOUDINI();
   TemporaryFile tmpfile;
   ASSERT_TRUE(RunRecordCmd({"--trace-offcpu", "-f", "1000"}, tmpfile.path));
   std::unique_ptr<RecordFileReader> reader = RecordFileReader::CreateInstance(tmpfile.path);
