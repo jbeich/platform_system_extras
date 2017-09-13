@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "8ad09d92_24202568",
+        "filename": "simpleperf/cmd_record_test.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-09-13T23:40:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fbe3bc7d_4870f8db",
+      "range": {
+        "startLine": 200,
+        "startChar": 0,
+        "endLine": 201,
+        "endChar": 35
+      },
+      "revId": "475356b6d27ad1978e2d6e737df6661084b6596f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2057b642_76365b5f",
         "filename": "simpleperf/cmd_record_test.cpp",
         "patchSetId": 2
@@ -36,6 +60,24 @@
       "writtenOn": "2017-09-13T22:22:57Z",
       "side": 1,
       "message": "can we call uname(2) and compare?\n\nbecause again, it\u0027s not specifically _arm_ support we\u0027re saying gets a pass: it\u0027s any non-native ABI. an ARM system doing binary translation on x86 would be fine too.",
+      "revId": "475356b6d27ad1978e2d6e737df6661084b6596f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a518171_027f34ff",
+        "filename": "simpleperf/cmd_record_test.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-09-13T23:40:49Z",
+      "side": 1,
+      "message": "comparing `uname -m` with uname(2) doesn\u0027t work well. On a arm64 device, `uname -m` returns aarch64, but an arm32 program uname(2) returns armv8l. So I compare `uname -m` with the binary\u0027s build arch instead.",
+      "parentUuid": "2057b642_76365b5f",
       "revId": "475356b6d27ad1978e2d6e737df6661084b6596f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
