@@ -46,3 +46,17 @@ bool IsRoot();
 #else
 #define TEST_REQUIRE_HOST_ROOT()  if (!IsRoot()) return
 #endif
+
+#if defined(__ANDROID__) && defined(__arm__)
+bool IsInArmTranslation();
+// Used to skip tests not supported on arm translation tools.
+#define OMIT_TEST_ON_ARM_TRANSLATION()  \
+  do { \
+    if (IsInArmTranslation()) { \
+      GTEST_LOG_(INFO) << "Skip test not supported on arm translation tools."; \
+      return; \
+    } \
+  } while (0)
+#else
+#define OMIT_TEST_ON_ARM_TRANSLATION()
+#endif
