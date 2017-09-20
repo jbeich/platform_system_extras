@@ -71,6 +71,30 @@
     },
     {
       "key": {
+        "uuid": "2d2456d1_ed5722dc",
+        "filename": "librank/librank.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2017-09-20T01:17:51Z",
+      "side": 1,
+      "message": "Mark, I understand that you feel that it is obvious that every use of this has a non-zero value. The problem is that if someone refactors this into a separate library, they might not maintain that invariant for a user that wants to start with a zero-sized memory block. Would it be better to just check the non-zero somewhere separately and error out earlier? I think that pulling the check out into its own conditional makes it clear that this API won\u0027t work for those cases. Does that seem ok? The same principle holds below for mappings_size.",
+      "parentUuid": "35c4f0f5_2606ded2",
+      "range": {
+        "startLine": 94,
+        "startChar": 0,
+        "endLine": 101,
+        "endChar": 5
+      },
+      "revId": "573a3c5f7888e80d0d4e0fb75ddfe746d4bd9358",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bfe728cb_72141038",
         "filename": "librank/librank.c",
         "patchSetId": 2
@@ -105,6 +129,30 @@
       "writtenOn": "2017-09-20T00:41:10Z",
       "side": 1,
       "message": "(see below)\n\n... and here\n\nfree(li-\u003emappings);",
+      "range": {
+        "startLine": 419,
+        "startChar": 22,
+        "endLine": 419,
+        "endChar": 23
+      },
+      "revId": "573a3c5f7888e80d0d4e0fb75ddfe746d4bd9358",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "343cb658_679a19cd",
+        "filename": "librank/librank.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 419,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2017-09-20T01:17:51Z",
+      "side": 1,
+      "message": "I agree about just freeing the memory rather than calling exit().",
+      "parentUuid": "8e690f14_e473be39",
       "range": {
         "startLine": 419,
         "startChar": 22,
