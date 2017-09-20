@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "25cff90b_7b52e90e",
+        "filename": "librank/librank.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2017-09-20T00:41:10Z",
+      "side": 1,
+      "message": "This, of course, ensures that libraries_size is _not_ zero ...",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 25
+      },
+      "revId": "573a3c5f7888e80d0d4e0fb75ddfe746d4bd9358",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "41a0b9ae_f23f4f83",
+        "filename": "librank/librank.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2017-09-20T00:41:10Z",
+      "side": 1,
+      "message": "This, of course, ensures that library_mappings_size is _not_ zero.",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 23
+      },
+      "revId": "573a3c5f7888e80d0d4e0fb75ddfe746d4bd9358",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "35c4f0f5_2606ded2",
+        "filename": "librank/librank.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2017-09-20T00:41:10Z",
+      "side": 1,
+      "message": "If libraries_size is zero (which we know it is not), this will cause an out of bounds access on line 122. We should not leave code fragments that will cause future selves distress. Working around a compiler warning with bad code is _not_ desireable.\n\nThe realloc should pick a size that is at least as large as needed. For example:\n\nif (libraries_count \u003e\u003d libraries_size) {\n    libraries_size \u003d max(libraries_size * 2, libraries_count + 1);\n    libraries \u003d realloc(libraries, libraries_size * sizeof(struct library_info));\n    if (!libraries) {\n        . . .\n        exit(EXIT_FAILURE);\n    }\n}\n\nThe above should be recognized by lint as ensuring that realloc will not be supplied a zero-size argument.",
+      "range": {
+        "startLine": 94,
+        "startChar": 0,
+        "endLine": 101,
+        "endChar": 5
+      },
+      "revId": "573a3c5f7888e80d0d4e0fb75ddfe746d4bd9358",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bfe728cb_72141038",
+        "filename": "librank/librank.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2017-09-20T00:41:10Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 136,
+        "startChar": 0,
+        "endLine": 144,
+        "endChar": 5
+      },
+      "revId": "573a3c5f7888e80d0d4e0fb75ddfe746d4bd9358",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e690f14_e473be39",
+        "filename": "librank/librank.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 419,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2017-09-20T00:41:10Z",
+      "side": 1,
+      "message": "(see below)\n\n... and here\n\nfree(li-\u003emappings);",
+      "range": {
+        "startLine": 419,
+        "startChar": 22,
+        "endLine": 419,
+        "endChar": 23
+      },
+      "revId": "573a3c5f7888e80d0d4e0fb75ddfe746d4bd9358",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "87a925de_457b2e04",
+        "filename": "librank/librank.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 422,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2017-09-20T00:41:10Z",
+      "side": 1,
+      "message": "We still have leak detectors that will pick this up even on exit(). It is a small cost to free the content ...\n\nHere:\n\nfree(libraries);\nreturn 0;",
+      "range": {
+        "startLine": 422,
+        "startChar": 3,
+        "endLine": 422,
+        "endChar": 12
+      },
+      "revId": "573a3c5f7888e80d0d4e0fb75ddfe746d4bd9358",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
