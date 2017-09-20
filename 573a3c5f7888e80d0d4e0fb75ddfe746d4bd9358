@@ -95,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "29998cda_9e7753c2",
+        "filename": "librank/librank.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2017-09-20T14:34:20Z",
+      "side": 1,
+      "message": "But doing a max here as I hinted means this (command) _can_ be pulled into a library, and will continue to function should INIT_LIBRARIES become 0.\n\nRegardless, my main concern is about creating buggy code in the name of warning suppression. How one does correct code can remain an opinion, like the number of stars in the heaven, but bad code is clearly a black hole.\n\nIf one does not think this executable can not turn into a library, watch what I did to liblogcat (where the main function just calls a library function), so that anyone can in-process do a logcat without having to do a pipe/fork/exec.",
+      "parentUuid": "2d2456d1_ed5722dc",
+      "range": {
+        "startLine": 94,
+        "startChar": 0,
+        "endLine": 101,
+        "endChar": 5
+      },
+      "revId": "573a3c5f7888e80d0d4e0fb75ddfe746d4bd9358",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bfe728cb_72141038",
         "filename": "librank/librank.c",
         "patchSetId": 2
