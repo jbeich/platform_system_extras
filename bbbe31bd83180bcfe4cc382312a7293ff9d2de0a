@@ -16,6 +16,24 @@
       "revId": "bbbe31bd83180bcfe4cc382312a7293ff9d2de0a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5fa2e488_1737ce01",
+        "filename": "tests/lib/testUtil/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1135414
+      },
+      "writtenOn": "2017-09-21T02:06:42Z",
+      "side": 1,
+      "message": "This CL is a cherry-pick of your original CL on internal master: https://googleplex-android-review.git.corp.google.com/#/c/platform/system/extras/+/2218766/\n\nI think a separate CL is required to change 2010--\u003e2017. Not completely sure though.",
+      "parentUuid": "22d1052f_d45febd7",
+      "revId": "bbbe31bd83180bcfe4cc382312a7293ff9d2de0a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
