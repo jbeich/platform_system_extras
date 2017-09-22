@@ -1,0 +1,11 @@
+Verified+1: Yoshitaka Seto <yoshitaka.seto@sony.com>
+Code-Review+1: Atsushi Mito <amito@google.com>
+Code-Review+2: Tina Zhou <tinazh@google.com>
+Code-Review+1: Mark Salyzyn <salyzyn@google.com>
+Autosubmit+1: Atsushi Mito <amito@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-by: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-at: Fri, 22 Sep 2017 15:45:12 +0000
+Reviewed-on: https://android-review.googlesource.com/490438
+Project: platform/system/extras
+Branch: refs/heads/oreo-cts-dev
