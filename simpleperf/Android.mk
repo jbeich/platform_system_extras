@@ -150,6 +150,7 @@ LOCAL_CPPFLAGS := $(simpleperf_cppflags_host)
 LOCAL_CPPFLAGS_darwin := $(simpleperf_cppflags_host_darwin)
 LOCAL_CPPFLAGS_linux := $(simpleperf_cppflags_host_linux)
 LOCAL_CPPFLAGS_windows := $(simpleperf_cppflags_host_windows)
+LOCAL_LDLIBS_windows := -lws2_32
 LOCAL_SRC_FILES := $(libsimpleperf_src_files)
 LOCAL_SRC_FILES_darwin := $(libsimpleperf_src_files_darwin)
 LOCAL_SRC_FILES_linux := $(libsimpleperf_src_files_linux)
@@ -197,6 +198,7 @@ LOCAL_CPPFLAGS := $(simpleperf_cppflags_host)
 LOCAL_CPPFLAGS_darwin := $(simpleperf_cppflags_host_darwin)
 LOCAL_CPPFLAGS_linux := $(simpleperf_cppflags_host_linux)
 LOCAL_CPPFLAGS_windows := $(simpleperf_cppflags_host_windows)
+LOCAL_LDLIBS_windows := -lws2_32
 LOCAL_SRC_FILES := main.cpp
 LOCAL_STATIC_LIBRARIES := libsimpleperf $(simpleperf_static_libraries_host)
 LOCAL_STATIC_LIBRARIES_linux := $(simpleperf_static_libraries_host_linux)
@@ -258,6 +260,7 @@ LOCAL_SRC_FILES := record_lib_interface.cpp
 LOCAL_STATIC_LIBRARIES := libsimpleperf $(simpleperf_static_libraries_host)
 LOCAL_STATIC_LIBRARIES_linux := $(simpleperf_static_libraries_host_linux)
 LOCAL_LDLIBS_linux := $(simpleperf_ldlibs_host_linux) -Wl,--exclude-libs,ALL
+LOCAL_LDLIBS_windows := -lws2_32
 LOCAL_MULTILIB := both
 LOCAL_CXX_STL := libc++_static
 LOCAL_EXPORT_C_INCLUDE_DIRS := $(LOCAL_PATH)/include
@@ -274,6 +277,7 @@ LOCAL_SRC_FILES := record_lib_interface.cpp
 LOCAL_STATIC_LIBRARIES := libsimpleperf $(simpleperf_static_libraries_host)
 LOCAL_STATIC_LIBRARIES_linux := $(simpleperf_static_libraries_host_linux)
 LOCAL_LDLIBS_linux := $(simpleperf_ldlibs_host_linux) -Wl,--exclude-libs,ALL
+LOCAL_LDLIBS_windows := -lws2_32
 LOCAL_MULTILIB := both
 LOCAL_CXX_STL := libc++_static
 LOCAL_EXPORT_C_INCLUDE_DIRS := $(LOCAL_PATH)/include
@@ -296,6 +300,7 @@ LOCAL_SRC_FILES := report_lib_interface.cpp
 LOCAL_STATIC_LIBRARIES := libsimpleperf $(simpleperf_static_libraries_host)
 LOCAL_STATIC_LIBRARIES_linux := $(simpleperf_static_libraries_host_linux)
 LOCAL_LDLIBS_linux := $(simpleperf_ldlibs_host_linux) -Wl,--exclude-libs,ALL
+LOCAL_LDLIBS_windows := -lws2_32
 LOCAL_MULTILIB := both
 LOCAL_CXX_STL := libc++_static
 include $(LLVM_HOST_BUILD_MK)
@@ -338,6 +343,7 @@ LOCAL_SRC_FILES := inplace_sampler_lib.cpp
 LOCAL_STATIC_LIBRARIES := libsimpleperf $(simpleperf_static_libraries_host)
 LOCAL_STATIC_LIBRARIES_linux := $(simpleperf_static_libraries_host_linux)
 LOCAL_LDLIBS_linux := $(simpleperf_ldlibs_host_linux) -Wl,--exclude-libs,ALL
+LOCAL_LDLIBS_windows := -lws2_32
 LOCAL_MULTILIB := both
 LOCAL_CXX_STL := libc++_static
 include $(LLVM_HOST_BUILD_MK)
@@ -393,6 +399,7 @@ LOCAL_CPPFLAGS := $(simpleperf_cppflags_host)
 LOCAL_CPPFLAGS_darwin := $(simpleperf_cppflags_host_darwin)
 LOCAL_CPPFLAGS_linux := $(simpleperf_cppflags_host_linux)
 LOCAL_CPPFLAGS_windows := $(simpleperf_cppflags_host_windows)
+LOCAL_LDLIBS_windows := -lws2_32
 LOCAL_SRC_FILES := $(simpleperf_unit_test_src_files)
 LOCAL_SRC_FILES_linux := $(simpleperf_unit_test_src_files_linux)
 LOCAL_STATIC_LIBRARIES := libsimpleperf $(simpleperf_static_libraries_host)
@@ -430,6 +437,7 @@ LOCAL_SRC_FILES := $(simpleperf_cpu_hotplug_test_src_files)
 LOCAL_STATIC_LIBRARIES := libsimpleperf $(simpleperf_static_libraries_host)
 LOCAL_STATIC_LIBRARIES_linux := $(simpleperf_static_libraries_host_linux)
 LOCAL_LDLIBS_linux := $(simpleperf_ldlibs_host_linux)
+LOCAL_LDLIBS_windows := -lws2_32
 LOCAL_MULTILIB := first
 include $(LLVM_HOST_BUILD_MK)
 include $(BUILD_HOST_NATIVE_TEST)
@@ -464,6 +472,7 @@ LOCAL_SRC_FILES := $(libsimpleperf_cts_test_src_files)
 LOCAL_STATIC_LIBRARIES := $(simpleperf_static_libraries_host)
 LOCAL_STATIC_LIBRARIES_linux := $(simpleperf_static_libraries_host_linux)
 LOCAL_LDLIBS_linux := $(simpleperf_ldlibs_host_linux)
+LOCAL_LDLIBS_windows := -lws2_32
 LOCAL_MULTILIB := both
 include $(LLVM_HOST_BUILD_MK)
 include $(BUILD_HOST_STATIC_TEST_LIBRARY)
@@ -489,6 +498,7 @@ LOCAL_CPPFLAGS_linux := $(simpleperf_cppflags_host_linux)
 LOCAL_SRC_FILES := record_lib_test.cpp
 LOCAL_SHARED_LIBRARIES := libsimpleperf_record
 LOCAL_LDLIBS_linux := $(simpleperf_ldlibs_host_linux)
+LOCAL_LDLIBS_windows := -lws2_32
 LOCAL_MULTILIB := both
 include $(BUILD_HOST_NATIVE_TEST)
 
