@@ -1,0 +1,9 @@
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Code-Review+2: Yabin Cui <yabinc@google.com>
+Code-Review+2: Shukang Zhou <shukang@google.com>
+Verified+1: Amaury Medeiros <amaurym@google.com>
+Submitted-by: Amaury Medeiros <amaurym@google.com>
+Submitted-at: Wed, 27 Sep 2017 17:06:31 +0000
+Reviewed-on: https://android-review.googlesource.com/495610
+Project: platform/system/extras
+Branch: refs/heads/master
