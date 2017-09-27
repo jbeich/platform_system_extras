@@ -1,0 +1,267 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "732ebca5_f1bec48c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2017-09-27T23:40:25Z",
+      "side": 1,
+      "message": "b/####",
+      "revId": "350369e9026d05b57805fbdd71898fa09d3718d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a32c1bf7_716062be",
+        "filename": "simpleperf/scripts/report_html.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2017-09-27T23:40:25Z",
+      "side": 1,
+      "message": "Whole thing should go in an IIFE.\n\nYou could have gotten away with a lot less if you\u0027d used bootstrap. As an example, you wouldn\u0027t need to deal with tab navigation yourself: https://getbootstrap.com/docs/3.3/javascript/#markup.\n\nBootstrap also kicks ass for making pretty UIs even if you\u0027re a UI noob like me :)\n\nSince it\u0027s already written, /shrug. If this ends up being something that requires much maintenance, you might want to look into that.",
+      "revId": "350369e9026d05b57805fbdd71898fa09d3718d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "48673e77_c51d3868",
+        "filename": "simpleperf/scripts/report_html.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2017-09-27T23:40:25Z",
+      "side": 1,
+      "message": "jquery already has this functionality, fyi\n\n    $link \u003d $(\u0027\u003ca\u003e\u0027, {href: url, text: linkText});\n\n(`link` vs `$link` is just convention to remind you that it\u0027s a jquery object)",
+      "revId": "350369e9026d05b57805fbdd71898fa09d3718d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e3a68c11_a8a74833",
+        "filename": "simpleperf/scripts/report_html.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2017-09-27T23:40:25Z",
+      "side": 1,
+      "message": "Given how easy it is to create an object in js, why not do that instead of a tuple?\n\ni.e. gFunctionMap[funcId].name",
+      "range": {
+        "startLine": 73,
+        "startChar": 31,
+        "endLine": 73,
+        "endChar": 34
+      },
+      "revId": "350369e9026d05b57805fbdd71898fa09d3718d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c4a518e4_20df22a2",
+        "filename": "simpleperf/scripts/report_html.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2017-09-27T23:40:25Z",
+      "side": 1,
+      "message": "and here gFunctionMap[funcId].libId",
+      "range": {
+        "startLine": 77,
+        "startChar": 42,
+        "endLine": 77,
+        "endChar": 45
+      },
+      "revId": "350369e9026d05b57805fbdd71898fa09d3718d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "19a793bf_1ededb32",
+        "filename": "simpleperf/scripts/report_html.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2017-09-27T23:40:25Z",
+      "side": 1,
+      "message": "getHtml(\u0027ul\u0027)",
+      "range": {
+        "startLine": 84,
+        "startChar": 24,
+        "endLine": 84,
+        "endChar": 56
+      },
+      "revId": "350369e9026d05b57805fbdd71898fa09d3718d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "39d969fd_c99cadef",
+        "filename": "simpleperf/scripts/report_html.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2017-09-27T23:40:25Z",
+      "side": 1,
+      "message": "Can\u0027t you do:\n\n    getHtml(\u0027li\u0027, {text: \n        getHtml(\u0027a\u0027, {href: ..., text: title})})\n\n?",
+      "range": {
+        "startLine": 92,
+        "startChar": 43,
+        "endLine": 93,
+        "endChar": 73
+      },
+      "revId": "350369e9026d05b57805fbdd71898fa09d3718d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9dd51ac1_6ece2ade",
+        "filename": "simpleperf/scripts/report_html.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2017-09-27T23:40:25Z",
+      "side": 1,
+      "message": "What does this do? I can\u0027t figure out what this.div.tabs is.",
+      "revId": "350369e9026d05b57805fbdd71898fa09d3718d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1807873f_9d2ab84d",
+        "filename": "simpleperf/scripts/report_html.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2017-09-27T23:40:25Z",
+      "side": 1,
+      "message": "Rebuilding the DOM isn\u0027t necessary. You can build it once and then use jquery\u0027s hide/show to choose what is displayed.",
+      "revId": "350369e9026d05b57805fbdd71898fa09d3718d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d0c8d53a_c1884a70",
+        "filename": "simpleperf/scripts/report_html.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 522,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2017-09-27T23:40:25Z",
+      "side": 1,
+      "message": "Why? Why not 100%?",
+      "range": {
+        "startLine": 522,
+        "startChar": 24,
+        "endLine": 522,
+        "endChar": 28
+      },
+      "revId": "350369e9026d05b57805fbdd71898fa09d3718d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f0306ea9_536d2906",
+        "filename": "simpleperf/scripts/report_html.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2017-09-27T23:40:25Z",
+      "side": 1,
+      "message": "Pity it\u0027s a hassle to ship jinja2 :(",
+      "revId": "350369e9026d05b57805fbdd71898fa09d3718d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "00d2c2e8_b7e9573e",
+        "filename": "simpleperf/scripts/report_html.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2017-09-27T23:40:25Z",
+      "side": 1,
+      "message": "Python is insane and the default value is actually mutable: http://docs.python-guide.org/en/latest/writing/gotchas/\n\nYou should probably run pylint. Let me know when you\u0027ve pylinted this and then I\u0027ll continue my review.",
+      "range": {
+        "startLine": 39,
+        "startChar": 38,
+        "endLine": 39,
+        "endChar": 40
+      },
+      "revId": "350369e9026d05b57805fbdd71898fa09d3718d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dbcf8a05_b87e881d",
+        "filename": "simpleperf/scripts/simpleperf_report_lib.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2017-09-27T23:40:25Z",
+      "side": 1,
+      "message": "At least be consistent across the function you\u0027re adding even if it\u0027s too late for the file.",
+      "range": {
+        "startLine": 281,
+        "startChar": 24,
+        "endLine": 281,
+        "endChar": 25
+      },
+      "revId": "350369e9026d05b57805fbdd71898fa09d3718d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
