@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2fb612eb_a3b76b0e",
+        "filename": "slideshow/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2017-09-28T21:17:05Z",
+      "side": 1,
+      "message": "enh@: I remember these two would be always included. Is it better to list them or just omit? We have similar occurrences in recovery code.",
+      "range": {
+        "startLine": 22,
+        "startChar": 4,
+        "endLine": 23,
+        "endChar": 8
+      },
+      "revId": "647b21fd5d00c3796ba82a9c28a3d917c52eb484",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
