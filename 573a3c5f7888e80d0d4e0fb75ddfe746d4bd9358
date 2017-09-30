@@ -119,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "dd00a35e_69b2c28e",
+        "filename": "librank/librank.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2017-09-30T00:44:20Z",
+      "side": 1,
+      "message": "I think we are both in agreement here that the code could become a library at some point in the future. My suggestion was to create a (libraries_size \u003d\u003d 0) check that errors out earlier in this function.\n\nAn alternative (although more work) would be to rewrite part of this code in C++. \"libraries\" is really just a std::map (but probably could be std::unordered_map).\n\nAre either of these options more acceptable, or should we just leave this the way it is now?",
+      "parentUuid": "29998cda_9e7753c2",
+      "range": {
+        "startLine": 94,
+        "startChar": 0,
+        "endLine": 101,
+        "endChar": 5
+      },
+      "revId": "573a3c5f7888e80d0d4e0fb75ddfe746d4bd9358",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bfe728cb_72141038",
         "filename": "librank/librank.c",
         "patchSetId": 2
