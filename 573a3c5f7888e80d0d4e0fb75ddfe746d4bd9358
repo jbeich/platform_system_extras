@@ -143,6 +143,30 @@
     },
     {
       "key": {
+        "uuid": "99ce1362_d3a08d05",
+        "filename": "librank/librank.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2017-10-02T16:04:24Z",
+      "side": 1,
+      "message": "Need something, anything, to alleviate the hairs standing on end on my back ;-}. Even a comment warning future selves would make a world of difference. Earlier check/exit sounds fine.\n\nWhat about a compile-time zero check as well (a library likely will not make this an option I would hope)? A zero check at runtime means we can not have INIT_LIBRARIES 0 (or INIT MAPPING), but we get late notification if runtime tells us. I could additionally be satiated by a comment _here_ that warns future selves of the limitation, or shortcut to warning suppression, or some such:\n\n#if INIT_LIBRARIES \u003d\u003d 0\n#warning \"We do not support INIT_LIBRARIES starting at zero\"\n#endif\n. . .\nif (unlikely(!libraries_size || !libraries)) {\n    exit(EXIT_FAILURE);\n}\nif (libraries_count \u003e\u003d libraries_size) {\n. . .\n\n[TL;DR]\n\nNB: An aside, being critical of my own alternate code suggestions above, I was writing _bad_ code too ;-/ when dealing with INIT_LIBRARIES set to 0:\n\nif (libraries_count \u003e\u003d libraries_size) {\n    if (libraries_size \u0026\u0026 libraries) {\n        libraries \u003d realloc(libraries, 2 * libraries_size * sizeof(struct library_info *));\n    } else {\n        libraries_size \u003d 1;\n        libraries \u003d malloc(2 * sizeof(library_info *));\n    }\n    . . .\n\nJust a thought, why is libraries as passed to first argument of realloc not checked for null by clang? Could future versions of clang care? _that_ is why I added that check too.",
+      "parentUuid": "dd00a35e_69b2c28e",
+      "range": {
+        "startLine": 94,
+        "startChar": 0,
+        "endLine": 101,
+        "endChar": 5
+      },
+      "revId": "573a3c5f7888e80d0d4e0fb75ddfe746d4bd9358",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bfe728cb_72141038",
         "filename": "librank/librank.c",
         "patchSetId": 2
@@ -159,6 +183,29 @@
         "startChar": 0,
         "endLine": 144,
         "endChar": 5
+      },
+      "revId": "573a3c5f7888e80d0d4e0fb75ddfe746d4bd9358",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "23ae870b_2f3b1766",
+        "filename": "librank/librank.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2017-10-02T16:04:24Z",
+      "side": 1,
+      "message": "NB: if I was to be super-critical of even my previous code suggestion dealing with INIT_LIBRARIES 0:\n\n\nlibraries \u003d INIT_LIBRARIES ? malloc(...) : NULL;\n\nor if INIT_LIBRARIES can never be zero with compile-time check, still missing required code here:\n\nlibraries \u003d malloc(...);\nif (!libraries) {\n    fprintf(stderr, \"Can not allocate libraries\\n\");\n    exit(EXIT_FAILURE);\n}",
+      "range": {
+        "startLine": 317,
+        "startChar": 0,
+        "endLine": 317,
+        "endChar": 71
       },
       "revId": "573a3c5f7888e80d0d4e0fb75ddfe746d4bd9358",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
