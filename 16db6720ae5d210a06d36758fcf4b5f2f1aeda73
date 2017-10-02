@@ -16,6 +16,24 @@
       "revId": "16db6720ae5d210a06d36758fcf4b5f2f1aeda73",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a29f1146_0f602cce",
+        "filename": "Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1052399
+      },
+      "writtenOn": "2017-10-02T23:32:07Z",
+      "side": 1,
+      "message": "ext4_utils still has windows target that uses gcc cross compiler.",
+      "parentUuid": "6b3aab7d_01be1f90",
+      "revId": "16db6720ae5d210a06d36758fcf4b5f2f1aeda73",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
