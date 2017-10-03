@@ -27,6 +27,13 @@
 #include <pagemap/pagemap.h>
 
 #define MAX_CMDLINE 256
+#ifndef MAX
+#define MAX(a, b) ((a) > (b) ? (a) : (b))
+#endif
+
+#ifndef unlikely
+#define unlikely(x)     __builtin_expect((x),0)
+#endif
 
 struct process_info {
     pid_t pid;
@@ -86,18 +93,22 @@ struct library_info *get_library(const char *name, bool all) {
         }
     }
 
+    if (unlikely(!libraries)) {
+        exit(EXIT_FAILURE);
+    }
+
     for (i = 0; i < libraries_count; i++) {
         if (!strcmp(libraries[i]->name, name))
             return libraries[i];
     }
 
-    if (libraries_size && libraries_count >= libraries_size) {
-        libraries = realloc(libraries, 2 * libraries_size * sizeof(struct library_info *));
+    if (libraries_count >= libraries_size) {
+        libraries_size = 2 * MAX(libraries_size, 1);
+        libraries = realloc(libraries, libraries_size * sizeof(struct library_info *));
         if (!libraries) {
             fprintf(stderr, "Couldn't resize libraries array: %s\n", strerror(errno));
             exit(EXIT_FAILURE);
         }
-        libraries_size = 2 * libraries_size;
     }
 
     library = calloc(1, sizeof(*library));
@@ -128,19 +139,23 @@ struct mapping_info *get_mapping(struct library_info *library, struct process_in
     struct mapping_info *mapping;
     size_t i;
 
+    if (unlikely(!library)) {
+        exit(EXIT_FAILURE);
+    }
+
     for (i = 0; i < library->mappings_count; i++) {
         if (library->mappings[i]->proc == proc)
             return library->mappings[i];
     }
 
-    if (library->mappings_size && library->mappings_count >= library->mappings_size) {
+    if (library->mappings_count >= library->mappings_size) {
+        library->mappings_size = 2 * MAX(library->mappings_size, 1);
         library->mappings = realloc(library->mappings,
-            2 * library->mappings_size * sizeof(struct mapping_info*));
+            library->mappings_size * sizeof(struct mapping_info*));
         if (!library->mappings) {
             fprintf(stderr, "Couldn't resize mappings array: %s\n", strerror(errno));
             exit(EXIT_FAILURE);
         }
-        library->mappings_size = 2 * library->mappings_size;
     }
 
     mapping = calloc(1, sizeof(*mapping));
@@ -213,9 +228,10 @@ int main(int argc, char *argv[]) {
 
     struct library_info *li, **lis;
     struct mapping_info *mi, **mis;
-    struct process_info *pi;
+    struct process_info **pi;
 
     size_t i, j;
+    size_t pi_count;
     int error;
     int perm;
     bool all;
@@ -230,6 +246,7 @@ int main(int argc, char *argv[]) {
     prefix = NULL;
     prefix_len = 0;
     opterr = 0;
+    pi_count = 0;
     perm = 0;
     all = false;
     required_flags = 0;
@@ -315,6 +332,11 @@ int main(int argc, char *argv[]) {
     argv += optind;
 
     libraries = malloc(INIT_LIBRARIES * sizeof(struct library_info *));
+    if (!libraries) {
+        fprintf(stderr, "Couldn't allocate libraries array: %s\n", strerror(errno));
+        exit(EXIT_FAILURE);
+    }
+
     libraries_count = 0; libraries_size = INIT_LIBRARIES;
     pm_memusage_zero(&map_usage);
 
@@ -331,6 +353,7 @@ int main(int argc, char *argv[]) {
         exit(EXIT_FAILURE);
     }
 
+    pi = calloc(1, MAX(num_procs, 1) * sizeof(struct process_info *));
     for (i = 0; i < num_procs; i++) {
         error = pm_process_create(ker, pids[i], &proc);
         if (error) {
@@ -338,7 +361,7 @@ int main(int argc, char *argv[]) {
             continue;
         }
 
-        pi = get_process(pids[i]);
+        pi[pi_count++] = get_process(pids[i]);
 
         error = pm_process_maps(proc, &maps, &num_maps);
         if (error) {
@@ -357,7 +380,7 @@ int main(int argc, char *argv[]) {
             if (!li)
                 continue;
 
-            mi = get_mapping(li, pi);
+            mi = get_mapping(li, pi[pi_count - 1]);
 
             error = pm_map_usage_flags(maps[j], &map_usage, flags_mask,
                                        required_flags);
@@ -402,7 +425,6 @@ int main(int argc, char *argv[]) {
 
         for (j = 0; j < li->mappings_count; j++) {
             mi = li->mappings[j];
-            pi = mi->proc;
             printf(   " %6s  %7zdK  %6zdK  %6zdK  %6zdK  ", "",
                 mi->usage.vss / 1024,
                 mi->usage.rss / 1024,
@@ -412,14 +434,24 @@ int main(int argc, char *argv[]) {
                 printf("%6zdK  ", mi->usage.swap / 1024);
             }
             printf("  %s [%d]\n",
-                pi->cmdline,
-                pi->pid);
+                mi->proc->cmdline,
+                mi->proc->pid);
+            free(mi);
         }
         printf("\n");
         fflush(stdout);
+        free(li->name);
+        free(li->mappings);
+        free(li);
     }
+    free(libraries);
 
-    exit(0);
+    for (i = 0; i < pi_count; i++) {
+        free(pi[i]);
+    }
+    free(pi);
+
+    return 0;
 }
 
 static void usage(char *myname) {
