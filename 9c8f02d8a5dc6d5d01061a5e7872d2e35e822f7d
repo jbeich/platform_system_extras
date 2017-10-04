@@ -1,0 +1,372 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7d49b6b8_753cc94a",
+        "filename": "librank/librank.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2017-10-04T15:55:08Z",
+      "side": 1,
+      "message": "sys/param.h defines this ... _maybe_ add it to the include set?",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 6
+      },
+      "revId": "9c8f02d8a5dc6d5d01061a5e7872d2e35e822f7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "595356b5_db0812af",
+        "filename": "librank/librank.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2017-10-04T15:55:08Z",
+      "side": 1,
+      "message": "This is a linux kernel-ism.\n\nsys/cdefs.h defines __predict_true() and __predict_false() for bionic. A #ifndef __predict_false() #define __predict_false() is an ANDROID thingy, the #ifndef deals with a pure linux host build, if ever.\n\nnote that sys/cdefs.h for linux defines this as __glibc_unlikely, but we will prefer the bionic definition.",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 6
+      },
+      "revId": "9c8f02d8a5dc6d5d01061a5e7872d2e35e822f7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e56c2385_770e9827",
+        "filename": "librank/librank.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2017-10-04T15:55:08Z",
+      "side": 1,
+      "message": "this might be considered unlikely() too, just saying because you added the built-in definition.",
+      "range": {
+        "startLine": 108,
+        "startChar": 12,
+        "endLine": 108,
+        "endChar": 22
+      },
+      "revId": "9c8f02d8a5dc6d5d01061a5e7872d2e35e822f7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "50e61ed2_d654aad6",
+        "filename": "librank/librank.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2017-10-04T15:55:08Z",
+      "side": 1,
+      "message": "minor nit: map_usage scope is only in loop from 357 to 401, could move specification into the loop. I am sure there are others (eg: proc, maps, num_maps etc). C-stype block scope does allow the compiler to better manage optimizations.\n\n(do not fall into the trap of managing scope in C++ style in this file, our compiler allows it, but we do not have 100% control over the tools.)",
+      "range": {
+        "startLine": 227,
+        "startChar": 0,
+        "endLine": 227,
+        "endChar": 28
+      },
+      "revId": "9c8f02d8a5dc6d5d01061a5e7872d2e35e822f7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ab388ef_ebf56ad2",
+        "filename": "librank/librank.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2017-10-04T15:55:08Z",
+      "side": 1,
+      "message": "corresponding pm_kernel_destroy(ker) missing. See below.",
+      "range": {
+        "startLine": 343,
+        "startChar": 29,
+        "endLine": 343,
+        "endChar": 33
+      },
+      "revId": "9c8f02d8a5dc6d5d01061a5e7872d2e35e822f7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4102fd51_7a97f165",
+        "filename": "librank/librank.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2017-10-04T15:55:08Z",
+      "side": 1,
+      "message": "Thanks BTW. Good catch regarding libpagemap allocations too! I did not notice this in the original CL that triggered this cleanup request. Now I apologize for all the extra fiddly bits that need to get covered as well...",
+      "range": {
+        "startLine": 350,
+        "startChar": 4,
+        "endLine": 350,
+        "endChar": 26
+      },
+      "revId": "9c8f02d8a5dc6d5d01061a5e7872d2e35e822f7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dbc4eb88_4b4f9c0a",
+        "filename": "librank/librank.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2017-10-04T15:55:08Z",
+      "side": 1,
+      "message": "pids is allocated, but never freed",
+      "range": {
+        "startLine": 350,
+        "startChar": 31,
+        "endLine": 350,
+        "endChar": 37
+      },
+      "revId": "9c8f02d8a5dc6d5d01061a5e7872d2e35e822f7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e8f24071_37e9c67a",
+        "filename": "librank/librank.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2017-10-04T15:55:08Z",
+      "side": 1,
+      "message": "Good catch to add cleanup for all the local process_info data.",
+      "range": {
+        "startLine": 356,
+        "startChar": 4,
+        "endLine": 356,
+        "endChar": 70
+      },
+      "revId": "9c8f02d8a5dc6d5d01061a5e7872d2e35e822f7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ff09323_b9be2161",
+        "filename": "librank/librank.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2017-10-04T15:55:08Z",
+      "side": 1,
+      "message": "Missing the corresponding pm_process_destroy (which is both a memory leak _and_ a file descriptor leak). See below.",
+      "range": {
+        "startLine": 358,
+        "startChar": 48,
+        "endLine": 358,
+        "endChar": 53
+      },
+      "revId": "9c8f02d8a5dc6d5d01061a5e7872d2e35e822f7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0a2dc7fb_6b62de8e",
+        "filename": "librank/librank.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2017-10-04T15:55:08Z",
+      "side": 1,
+      "message": "since free() can take a nullptr and the vector is calloc\u0027d, I do not think you need to squash this vector, ok to skip entries.\n\nacceptable to use i variable here and on line 383 for KISS, and drop pi_count.",
+      "range": {
+        "startLine": 364,
+        "startChar": 11,
+        "endLine": 364,
+        "endChar": 21
+      },
+      "revId": "9c8f02d8a5dc6d5d01061a5e7872d2e35e822f7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dba1be05_a9f8b974",
+        "filename": "librank/librank.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2017-10-04T15:55:08Z",
+      "side": 1,
+      "message": "Odd interface issue here in pm_* functions and regarding maps. iterate through pm_map_destroy(maps[j]) + free(maps) could be considered missing, but the library does a memcpy of the data including an allocated string reference that lives as long as proc-\u003emaps (from line 358), so if we iterate and call pm_map_destroy we incur a double free.\n\nSo all that is really missing is a free(maps) once we are done with this information. (see below).",
+      "range": {
+        "startLine": 366,
+        "startChar": 38,
+        "endLine": 366,
+        "endChar": 43
+      },
+      "revId": "9c8f02d8a5dc6d5d01061a5e7872d2e35e822f7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "47d77df7_e9063dab",
+        "filename": "librank/librank.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2017-10-04T15:55:08Z",
+      "side": 1,
+      "message": "minor nit: if you use pids[i] here instead of proc-\u003epid you can remove our code\u0027s dependency on proc (leaving the dependency within the various pm_*() functions). There are no advantages to this except clarity that we do not dig into structures that belong to another library allowing for adjustments in the implementation detail.",
+      "range": {
+        "startLine": 368,
+        "startChar": 68,
+        "endLine": 368,
+        "endChar": 77
+      },
+      "revId": "9c8f02d8a5dc6d5d01061a5e7872d2e35e822f7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0c39894a_8032b3c2",
+        "filename": "librank/librank.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2017-10-04T15:55:08Z",
+      "side": 1,
+      "message": "nit: if you use pids[i] here instead of proc-\u003epid you can remove our code\u0027s dependency on proc (leaving the dependency with the various pm_*() functions.",
+      "range": {
+        "startLine": 390,
+        "startChar": 46,
+        "endLine": 390,
+        "endChar": 55
+      },
+      "revId": "9c8f02d8a5dc6d5d01061a5e7872d2e35e822f7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d949d9b3_af6097bb",
+        "filename": "librank/librank.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2017-10-04T15:55:08Z",
+      "side": 1,
+      "message": "We proc (and by reference, maps[j]-\u003eproc internal to pm_*() functions) no longer required.\n\nfree(maps);\npm_process_destroy(proc);\n\nlibrank would have failed at num_procs \u003d 1022 (or worse), running out of file descriptors w/o the pm_process_destroy.\n\nBy adding this, we have a bonafide bug fix here, rather than just a cleanup!",
+      "range": {
+        "startLine": 400,
+        "startChar": 8,
+        "endLine": 400,
+        "endChar": 9
+      },
+      "revId": "9c8f02d8a5dc6d5d01061a5e7872d2e35e822f7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "be772292_5e795c0e",
+        "filename": "librank/librank.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2017-10-04T15:55:08Z",
+      "side": 1,
+      "message": "pm_kernel_destroy(ker);\n\nfrees memory, and two file descriptors not needed anymore.",
+      "range": {
+        "startLine": 401,
+        "startChar": 4,
+        "endLine": 401,
+        "endChar": 5
+      },
+      "revId": "9c8f02d8a5dc6d5d01061a5e7872d2e35e822f7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e5365525_620030ed",
+        "filename": "librank/librank.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 451,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2017-10-04T15:55:08Z",
+      "side": 1,
+      "message": "pi_count \u003c\u003d num_procs.\n\nfree() can take a nullptr, so I have no fear to iterate over the entire calloc\u0027d vector should pi_count \u003c num_procs. Given that, a case could be made to drop the complexity of maintaining pi_count.",
+      "range": {
+        "startLine": 449,
+        "startChar": 0,
+        "endLine": 451,
+        "endChar": 5
+      },
+      "revId": "9c8f02d8a5dc6d5d01061a5e7872d2e35e822f7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
