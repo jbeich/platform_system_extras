@@ -90,6 +90,24 @@
     },
     {
       "key": {
+        "uuid": "a1a4c052_507ee2c1",
+        "filename": "simpleperf/scripts/report_html.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-10-05T22:40:23Z",
+      "side": 1,
+      "message": "I searched IIFE, but don\u0027t know what you suggested here. more explanation or example?",
+      "parentUuid": "e46043f6_cbc22591",
+      "revId": "350369e9026d05b57805fbdd71898fa09d3718d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "48673e77_c51d3868",
         "filename": "simpleperf/scripts/report_html.js",
         "patchSetId": 1

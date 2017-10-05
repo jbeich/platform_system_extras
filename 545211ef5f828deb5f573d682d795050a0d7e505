@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "a2797d19_a2bb9654",
+        "filename": "simpleperf/scripts/report_html.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-10-05T22:40:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2d0284dc_266cdf4b",
+      "revId": "545211ef5f828deb5f573d682d795050a0d7e505",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0709785e_6608f903",
         "filename": "simpleperf/scripts/utils.py",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2017-10-05T20:30:48Z",
       "side": 1,
       "message": "if \u0027chrome\u0027 in key:",
+      "revId": "545211ef5f828deb5f573d682d795050a0d7e505",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "feef51d3_ca62cd78",
+        "filename": "simpleperf/scripts/utils.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-10-05T22:40:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0709785e_6608f903",
       "revId": "545211ef5f828deb5f573d682d795050a0d7e505",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
