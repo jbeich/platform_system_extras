@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2d0284dc_266cdf4b",
+        "filename": "simpleperf/scripts/report_html.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2017-10-05T20:30:48Z",
+      "side": 1,
+      "message": "Unnecessary given the for loop below. With zero key word arguments, atttrs will be {} rather than None.",
+      "revId": "545211ef5f828deb5f573d682d795050a0d7e505",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0709785e_6608f903",
+        "filename": "simpleperf/scripts/utils.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2017-10-05T20:30:48Z",
+      "side": 1,
+      "message": "if \u0027chrome\u0027 in key:",
+      "revId": "545211ef5f828deb5f573d682d795050a0d7e505",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}

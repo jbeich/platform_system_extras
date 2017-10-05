@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "e46043f6_cbc22591",
+        "filename": "simpleperf/scripts/report_html.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2017-10-05T20:30:48Z",
+      "side": 1,
+      "message": "Still need the IIFE",
+      "parentUuid": "c86f3b1a_6efa7f00",
+      "revId": "350369e9026d05b57805fbdd71898fa09d3718d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "48673e77_c51d3868",
         "filename": "simpleperf/scripts/report_html.js",
         "patchSetId": 1
@@ -104,6 +122,24 @@
       "revId": "350369e9026d05b57805fbdd71898fa09d3718d0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "691b5bae_fe65d752",
+        "filename": "simpleperf/scripts/report_html.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2017-10-05T20:30:48Z",
+      "side": 1,
+      "message": "SGTM",
+      "parentUuid": "99221d32_b603ce58",
+      "revId": "350369e9026d05b57805fbdd71898fa09d3718d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -151,6 +187,30 @@
       "revId": "350369e9026d05b57805fbdd71898fa09d3718d0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "83c83eb5_b85aeea1",
+        "filename": "simpleperf/scripts/report_html.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2017-10-05T20:30:48Z",
+      "side": 1,
+      "message": "Okay, SGTM",
+      "parentUuid": "2fcb35c4_ca37bf26",
+      "range": {
+        "startLine": 73,
+        "startChar": 31,
+        "endLine": 73,
+        "endChar": 34
+      },
+      "revId": "350369e9026d05b57805fbdd71898fa09d3718d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
