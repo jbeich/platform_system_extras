@@ -437,7 +437,8 @@ bool EventSelectionSet::OpenEventFilesOnGroup(EventSelectionGroup& group,
       }
     }
     if (group_fd == nullptr) {
-      group_fd = event_fd.get();
+      group_fd = event_fds.back().get();
+      CHECK(group_fd != nullptr);
     }
   }
   for (size_t i = 0; i < group.size(); ++i) {
