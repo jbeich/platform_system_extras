@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3cfe72fa_54737ffe",
+        "filename": "simpleperf/scripts/inferno/data_types.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1083168
+      },
+      "writtenOn": "2017-10-12T23:26:52Z",
+      "side": 1,
+      "message": "what this function does is non trivial. A comment would be welcome.",
+      "revId": "72e4b141d108820a91d006cf4f2f168d935e6155",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
