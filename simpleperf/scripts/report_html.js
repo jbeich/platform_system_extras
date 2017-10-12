@@ -73,11 +73,35 @@ function getLibName(libId) {
 }
 
 function getFuncName(funcId) {
-    return gFunctionMap[funcId][1];
+    return gFunctionMap[funcId].f;
+}
+
+function getFuncSourceRange(funcId) {
+    let func = gFunctionMap[funcId];
+    if (func.hasOwnProperty('s') && func.hasOwnProperty('r')) {
+        return {fileId: func.s, startLine: func.r[0], endLine: func.r[1]};
+    }
+    return null;
+}
+
+function getFuncDisassembleCodeList(funcId) {
+    let func = gFunctionMap[funcId];
+    if (func.hasOwnProperty('d')) {
+        return func.d;
+    }
+    return null;
 }
 
 function getLibNameOfFunction(funcId) {
-    return getLibName(gFunctionMap[funcId][0]);
+    return getLibName(gFunctionMap[funcId].l);
+}
+
+function getSourceFilePath(sourceFileId) {
+    return gSourceFiles[sourceFileId].path;
+}
+
+function getSourceCode(sourceFileId) {
+    return gSourceFiles[sourceFileId].code;
 }
 
 class TabManager {
@@ -225,7 +249,7 @@ class ChartView {
         } else if (state == this.states.SHOW_LIB_INFO) {
             this.libInfo = null;
         }
-        this.draw();
+        this.realDraw();
     }
 
     _selectHandler(chart) {
@@ -239,11 +263,15 @@ class ChartView {
             } else if (state == this.states.SHOW_THREAD_INFO) {
                 this.libInfo = this.threadInfo.libs[selectedItem.row];
             }
-            this.draw();
+            this.realDraw();
         }
     }
 
     draw() {
+        google.charts.setOnLoadCallback(() => this.realDraw());
+    }
+
+    realDraw() {
         this.div.empty();
         this._drawTitle();
         let data = new google.visualization.DataTable();
@@ -317,11 +345,9 @@ class ChartStatTab {
     draw() {
         this.recordFileView.draw();
         let thisObj = this;
-        google.charts.setOnLoadCallback(function() {
-            for (let charView of thisObj.chartViews) {
-                charView.draw();
-            }
-        });
+        for (let charView of thisObj.chartViews) {
+            charView.draw();
+        }
     }
 }
 
@@ -338,10 +364,11 @@ class SampleTableTab {
         for (let tId = 0; tId < gSampleInfo.length; tId++) {
             let eventInfo = gSampleInfo[tId];
             let eventName = eventInfo.eventName;
+            this.div.append(getHtml('p', {text: 'Sample table for event ' + eventName}));
             let percentMul = 100.0 / eventInfo.eventCount;
             let tableId = 'reportTable_' + tId;
-            let titles = [eventName + '_WithChildren', eventName, 'sampleCount', 'process',
-                'thread', 'lib', 'function'];
+            // TODO: for cpu-clock, task-clock, change Total/Self into milliseconds.
+            let titles = ['Total', 'Self', 'SampleCount', 'Process', 'Thread', 'Lib', 'Function'];
             let tableStr = openHtml('table', {id: tableId, cellspacing: '0', width: '100%'}) +
                            getHtml('thead', {text: getTableRow(titles, 'th')}) +
                            getHtml('tfoot', {text: getTableRow(titles, 'th')}) +
@@ -387,7 +414,7 @@ class SampleTableTab {
                 let threadInfo = processInfo.threads[indexes[1]];
                 let lib = threadInfo.libs[indexes[2]];
                 let func = lib.functions[indexes[3]];
-                FunctionFlameGraphTab.showFunction(eventInfo, processInfo, threadInfo, lib, func);
+                FunctionTab.showFunction(eventInfo, processInfo, threadInfo, lib, func);
             });
         }
     }
@@ -410,13 +437,16 @@ class FlameGraphTab {
 }
 
 
-// Show the callgraph and reverse callgraph of a function as flamegraphs.
-class FunctionFlameGraphTab {
+// FunctionTab: show information about a function.
+// 1. show the callgraph and reverse callgraph of a function as flamegraphs.
+// 2. show the annotated source code of the function.
+// 3. show the disassemble code of the function.
+class FunctionTab {
     static showFunction(eventInfo, processInfo, threadInfo, lib, func) {
-        let title = 'Function Flamegraph';
+        let title = 'Function';
         let tab = gTabs.findTab(title);
         if (!tab) {
-            tab = gTabs.addTab(title, new FunctionFlameGraphTab());
+            tab = gTabs.addTab(title, new FunctionTab());
         }
         tab.setFunction(eventInfo, processInfo, threadInfo, lib, func);
     }
@@ -436,6 +466,10 @@ class FunctionFlameGraphTab {
         this.threadInfo = threadInfo;
         this.lib = lib;
         this.func = func;
+        this.selectorView = null;
+        this.sourceCodeView = null;
+        this.callgraphView = null;
+        this.reverseCallgraphView = null;
         this.draw();
         gTabs.setActive(this);
     }
@@ -454,52 +488,171 @@ class FunctionFlameGraphTab {
                     getHtml('p', {text: `Process ${processName}`}) +
                     getHtml('p', {text: `Thread ${threadName}`}) +
                     getHtml('p', {text: `Library ${libName}`}) +
-                    getHtml('p', {text: `Functions called by ${funcName}`});
+                    getHtml('p', {text: `Function ${funcName}`});
         this.div.append(title);
 
-        let selectDiv = $('<div>');
-        selectDiv.appendTo(this.div);
-        selectDiv.css('position', 'absolute').css('right', '0%').css('top', '100px');
-        let selectPercentStr =
-            getHtml('label', {for: 'select_percent', text: 'Show percentage relative to:'}) +
-            getHtml('select', {name: 'select_percent', id: 'select_percent', text:
-                getHtml('option', {value: 'all', text: 'All processes'}) +
-                getHtml('option', {value: 'process', text: `Process ${processName}`}) +
-                getHtml('option', {value: 'thread', text: `Thread ${threadName}`}) +
-                getHtml('option', {value: 'func', text: `Function ${funcName}`})});
-        selectDiv.append(selectPercentStr);
-        let thisObj = this;
-        selectDiv.find('#select_percent');
-        let totalEventCount = 0;
-        let selectIndex = 0;
-        if (this.selectPercent == 'all') {
-            totalEventCount = this.eventInfo.eventCount;
-            selectIndex = 0;
-        } else if (this.selectPercent == 'process') {
-            totalEventCount = this.processInfo.eventCount;
-            selectIndex = 1;
-        } else if (this.selectPercent == 'thread') {
-            totalEventCount = this.threadInfo.eventCount;
-            selectIndex = 2;
-        } else {
-            totalEventCount = this.func.g.s;
-            selectIndex = 3;
+        this.selectorView = new FunctionSampleWeightSelectorView(this.div, this.eventInfo,
+            this.processInfo, this.threadInfo, () => this.onSampleWeightChange());
+        this.selectorView.draw();
+
+        this.div.append(getHtml('hr'));
+
+        this.sourceCodeView = new SourceCodeView(this.div, this.func);
+        if (this.sourceCodeView.canShow()) {
+            this.div.append(getHtml('hr'));
         }
-        selectDiv.find('#select_percent').children().eq(selectIndex).attr('selected', 'selected');
-        selectDiv.find('#select_percent').selectmenu({
+
+        this.disassembleCodeView = new DisassembleCodeView(this.div, this.func);
+        if (this.disassembleCodeView.canShow()) {
+            this.div.append(getHtml('hr'));
+        }
+        this.div.append(getHtml('b', {text: 'Function Flamegraphs:'}) + '<br/>');
+        this.callgraphView = new FlameGraphWrapperView(this.div, this.eventInfo, this.processInfo,
+                                                       this.threadInfo, this.func, false);
+
+        this.div.append(getHtml('hr'));
+        this.reverseCallgraphView = new FlameGraphWrapperView(this.div, this.eventInfo, this.processInfo,
+                                                              this.threadInfo, this.func, true);
+        this.onSampleWeightChange();  // manually set sample weight function for the first time.
+    }
+
+    onSampleWeightChange() {
+        let sampleWeightFunction = this.selectorView.getSampleWeightFunction();
+        if (this.sourceCodeView) {
+            this.sourceCodeView.draw(sampleWeightFunction);
+        }
+        if (this.disassembleCodeView) {
+            this.disassembleCodeView.draw(sampleWeightFunction);
+        }
+        if (this.callgraphView) {
+            this.callgraphView.draw(sampleWeightFunction);
+        }
+        if (this.reverseCallgraphView) {
+            this.reverseCallgraphView.draw(sampleWeightFunction);
+        }
+    }
+
+}
+
+
+// Select the way to show sample weight in FunctionTab.
+// 1. Show percentage of event count relative to all processes.
+// 2. Show percentage of event count relative to the current process.
+// 3. Show percentage of event count relative to the current thread.
+// 4. Show absolute event count.
+// 5. Show event count in milliseconds, only possible for cpu-clock or task-clock events.
+class FunctionSampleWeightSelectorView {
+    constructor(divContainer, eventInfo, processInfo, threadInfo, onSelectChange) {
+        this.div = $('<div>');
+        this.div.appendTo(divContainer);
+        this.onSelectChange = onSelectChange;
+        this.eventCountForAllProcesses = eventInfo.eventCount;
+        this.eventCountForProcess = processInfo.eventCount;
+        this.eventCountForThread = threadInfo.eventCount;
+        this.options = {
+            PERCENT_TO_ALL_PROCESSES: 0,
+            PERCENT_TO_CUR_PROCESS: 1,
+            PERCENT_TO_CUR_THREAD: 2,
+            RAW_EVENT_COUNT: 3,
+            EVENT_COUNT_IN_TIME: 4,
+        }
+        let name = eventInfo.eventName;
+        this.supportEventCountInTime = name.includes('task-clock') || name.includes('cpu-clock');
+        if (this.supportEventCountInTime) {
+            this.curOption = this.options.EVENT_COUNT_IN_TIME;
+        } else {
+            this.curOption = this.options.PERCENT_TO_CUR_THREAD;
+        }
+    }
+
+    draw() {
+        let options = [];
+        options.push('Show percentage of event count relative to all processes.');
+        options.push('Show percentage of event count relative to the current process.');
+        options.push('Show percentage of event count relative to the current thread.');
+        options.push('Show event count.');
+        if (this.supportEventCountInTime) {
+            options.push('Show event count in milliseconds.');
+        }
+        let optionStr = '';
+        for (let i = 0; i < options.length; ++i) {
+            optionStr += getHtml('option', {value: i, text: options[i]});
+        }
+        this.div.append(getHtml('select', {text: optionStr}));
+        let selectMenu = this.div.children().last();
+        selectMenu.children().eq(this.curOption).attr('selected', 'selected');
+        let thisObj = this;
+        selectMenu.selectmenu({
             change: function() {
-                thisObj.selectPercent = this.value;
-                thisObj.draw();
+                thisObj.curOption = this.value;
+                thisObj.onSelectChange();
             },
+            width: '100%',
         });
+    }
 
-        let gView = new FlameGraphView(this.div, this.func.g, totalEventCount, false);
+    getSampleWeightFunction() {
+        let thisObj = this;
+        if (this.curOption == this.options.PERCENT_TO_ALL_PROCESSES) {
+            return function(eventCount) {
+                let percent = eventCount * 100.0 / thisObj.eventCountForAllProcesses;
+                return percent.toFixed(2) + '%';
+            };
+        }
+        if (this.curOption == this.options.PERCENT_TO_CUR_PROCESS) {
+            return function(eventCount) {
+                let percent = eventCount * 100.0 / thisObj.eventCountForProcess;
+                return percent.toFixed(2) + '%';
+            };
+        }
+        if (this.curOption == this.options.PERCENT_TO_CUR_THREAD) {
+            return function(eventCount) {
+                let percent = eventCount * 100.0 / thisObj.eventCountForThread;
+                return percent.toFixed(2) + '%';
+            };
+        }
+        if (this.curOption == this.options.RAW_EVENT_COUNT) {
+            return function(eventCount) {
+                return '' + eventCount;
+            };
+        }
+        if (this.curOption == this.options.EVENT_COUNT_IN_TIME) {
+            return function(eventCount) {
+                let timeInMs = eventCount / 1000000.0;
+                return timeInMs.toFixed(3) + ' ms';
+            };
+        }
+
+    }
+
+}
+
+
+// A wrapper of FlameGraphView, with title and support selecting percentage shown in the flamegraph.
+class FlameGraphWrapperView {
+
+    constructor(divContainer, eventInfo, processInfo, threadInfo, func, isReverseCallGraph) {
+        this.id = divContainer.children().length;
+        this.div = $('<div>');
+        this.div.appendTo(divContainer);
+        this.eventInfo = eventInfo;
+        this.processInfo = processInfo;
+        this.threadInfo = threadInfo;
+        this.func = func;
+        this.isReverseCallGraph = isReverseCallGraph;
+    }
+
+    draw(sampleWeightFunction) {
+        this.div.empty();
+        let funcName = getFuncName(this.func.g.f);
+        let title = this.isReverseCallGraph ? `Functions calling ${funcName}` :
+                        `Functions called by ${funcName}`;
+        this.div.append(getHtml('pre', {text: title}));
+
+        let gView = new FlameGraphView(this.div, this.id,
+                            this.isReverseCallGraph ? this.func.rg : this.func.g, this.isReverseCallGraph,
+                            sampleWeightFunction);
         gView.draw();
-
-        this.div.append(getHtml('p'));
-        this.div.append(getHtml('p', {text: `Functions calling ${getFuncName(this.func.g.f)}`}));
-        let rgView = new FlameGraphView(this.div, this.func.rg, totalEventCount, true);
-        rgView.draw();
     }
 }
 
@@ -507,12 +660,12 @@ class FunctionFlameGraphTab {
 class FlameGraphView {
     // If reverseOrder is false, the root of the flamegraph is at the bottom,
     // otherwise it is at the top.
-    constructor(divContainer, callgraph, totalEventCount, reverseOrder) {
-        this.id = divContainer.children().length;
+    constructor(divContainer, id, callgraph, reverseOrder, sampleWeightFunction) {
+        this.id = id;
         this.div = $('<div>', {id: 'fg_' + this.id});
         this.div.appendTo(divContainer);
         this.callgraph = callgraph;
-        this.totalEventCount = totalEventCount;
+        this.sampleWeightFunction = sampleWeightFunction;
         this.reverseOrder = reverseOrder;
         this.svgWidth = $(window).width();
         this.svgNodeHeight = 17;
@@ -574,10 +727,6 @@ class FlameGraphView {
         return eventCount * 100.0 / this.callgraph.s;
     }
 
-    _getEventPercentage(eventCount) {
-        return eventCount * 100.0 / this.totalEventCount;
-    }
-
     _getHeatColor(widthPercentage) {
         return {
             r: Math.floor(245 + 10 * (1 - widthPercentage * 0.01)),
@@ -600,9 +749,9 @@ class FlameGraphView {
         }
         let funcName = getFuncName(callNode.f);
         let libName = getLibNameOfFunction(callNode.f);
-        let eventPercent = this._getEventPercentage(callNode.s);
+        let sampleWeight = this.sampleWeightFunction(callNode.s);
         let title = funcName + ' | ' + libName + ' (' + callNode.s + ' events: ' +
-                    eventPercent.toFixed(2) + '%)';
+                    sampleWeight + ')';
         this.svg.append(`<g> <title>${title}</title> <rect x="${x}%" y="${y}" ox="${x}" \
                         depth="${depth}" width="${width}%" owidth="${width}" height="15.0" \
                         ofill="rgb(${color.r},${color.g},${color.b})" \
@@ -753,10 +902,11 @@ class FlameGraphView {
             // '/system/lib64/libhwbinder.so (4 events: 0.28%)'
             let regexp = /(.*) \(.* (\d*\.\d*%)\)/g;
             let match = regexp.exec(methodAndInfo[1]);
-            if (match.length > 2) {
-                let percentage = match[2];
-                thisObj.svg.find(`#percent_text_${thisObj.id}`).text(percentage);
+            let percentage = '';
+            if (match && match.length > 2) {
+                percentage = match[2];
             }
+            thisObj.svg.find(`#percent_text_${thisObj.id}`).text(percentage);
         });
     }
 
@@ -777,14 +927,266 @@ class FlameGraphView {
     }
 }
 
+class SourceFile {
+
+    constructor(filePath, code) {
+        this.filePath = filePath;
+        this.code = code;
+        this.showLines = {};
+        this.hasAnnotation = false;
+    }
+
+    addLineRange(startLine, endLine) {
+        for (let i = startLine; i <= endLine; ++i) {
+            if (i in this.showLines) {
+                continue;
+            }
+            let codeLine = this.code[i];
+            if (codeLine) {
+                this.showLines[i] = {code: codeLine};
+            }
+        }
+    }
+
+    addLineAnnotation(lineNumber, eventCount, totalEventCount) {
+        let line = this.showLines[lineNumber];
+        if (line) {
+            line.eventCount = eventCount;
+            line.totalEventCount = totalEventCount;
+            this.hasAnnotation = true;
+        }
+    }
+}
+
+// Return an array of SourceFile objects hitted by samples in a function.
+function collectSourceFilesForFunction(func) {
+    if (!func.hasOwnProperty('sc')) {
+        return null;
+    }
+    let hitLines = func.sc;
+    let sourceFiles = {};  // map from sourceFileId to SourceFile.
+    // Collect source code for the whole function.
+    let range = getFuncSourceRange(func.g.f);
+    let fileIdForFunc = null;
+    if (range) {
+        let file = sourceFiles[range.fileId];
+        if (!file) {
+            file = sourceFiles[range.fileId] = new SourceFile(getSourceFilePath(range.fileId),
+                                                    getSourceCode(range.fileId));
+            fileIdForFunc = range.fileId;
+        }
+        file.addLineRange(range.startLine, range.endLine);
+    }
+
+    // Collect source code / annotation for hitted lines in the function.
+    for (let i = 0; i < hitLines.length; ++i) {
+        let hitLine = hitLines[i];
+        let file = sourceFiles[hitLine.f];
+        if (!file) {
+            file = sourceFiles[hitLine.f] = new SourceFile(getSourceFilePath(hitLine.f),
+                                                    getSourceCode(hitLine.f));
+        }
+        file.addLineRange(hitLine.l - 5, hitLine.l + 5);
+        file.addLineAnnotation(hitLine.l, hitLine.e, hitLine.s);
+    }
+
+    let sourceFileList = [];
+    // The source file for the function should appear at the top of the list.
+    if (fileIdForFunc !== null) {
+        let sourceFile = sourceFiles[fileIdForFunc];
+        if (sourceFile.hasAnnotation) {
+            sourceFileList.push(sourceFile);
+        }
+        delete sourceFiles[fileIdForFunc];
+    }
+    for (let fileId in sourceFiles) {
+        let sourceFile = sourceFiles[fileId];
+        if (sourceFile.hasAnnotation) {
+            sourceFileList.push(sourceFile);
+        }
+    }
+    return sourceFileList.length > 0 ? sourceFileList : null;
+}
+
+// Show annotated source code of a function.
+class SourceCodeView {
+    
+    constructor(divContainer, func) {
+        let sourceFiles = collectSourceFilesForFunction(func);
+        if (!sourceFiles) {
+            this.div = null;
+            return;
+        }
+        this.sourceFiles = sourceFiles;
+        this.func = func;
+        this.div = $('<div>');
+        this.div.appendTo(divContainer);
+    }
+
+    canShow() {
+        return this.div != null;
+    }
+
+    draw(sampleWeightFunction) {
+        if (!this.div) {
+            return;
+        }
+        google.charts.setOnLoadCallback(() => this.realDraw(sampleWeightFunction));
+    }
+
+    realDraw(sampleWeightFunction) {
+        this.div.empty();
+        this.div.append(getHtml('b', {text: 'Source Code:'}) + '<br/>');
+        // For each file, draw a table of 'Line', 'Total', 'Self', 'Code'.
+        for (let i = 0; i < this.sourceFiles.length; ++i) {
+            let sourceFile = this.sourceFiles[i];
+
+            let rows = [];
+            let lineNumbers = Object.keys(sourceFile.showLines);
+            lineNumbers.sort((a, b) => a - b);
+            for (let j = 0; j < lineNumbers.length; ++j) {
+                let lineNumber = lineNumbers[j];
+                let line = sourceFile.showLines[lineNumber];
+                let totalValue = '';
+                let selfValue = '';
+                if (line.hasOwnProperty('eventCount')) {
+                    totalValue = sampleWeightFunction(line.totalEventCount);
+                    selfValue = sampleWeightFunction(line.eventCount);
+                }
+                rows.push([lineNumber, totalValue, selfValue, getHtml('pre', {text: line.code})]);
+            }
+
+            let data = new google.visualization.DataTable();
+            data.addColumn('string', 'Line');
+            data.addColumn('string', 'Total');
+            data.addColumn('string', 'Self');
+            data.addColumn('string', 'Code');
+            data.addRows(rows);
+            for (let j = 0; j < lineNumbers.length; ++j) {
+                data.setProperty(j, 0, 'className', 'colForLine');
+                for (let k = 1; k < 3; ++k) {
+                    data.setProperty(j, k, 'className', 'colForCount');
+                }
+            }
+            this.div.append(getHtml('pre', {text: sourceFile.filePath}));
+            let wrapperDiv = $('<div>');
+            wrapperDiv.appendTo(this.div);
+            let table = new google.visualization.Table(wrapperDiv.get(0));
+            table.draw(data, {
+                width: '100%',
+                sort: 'disable',
+                frozenColumns: 3,
+                allowHtml: true,
+            });
+        }
+    }
+}
+
+function collectDisassembleCodeForFunction(func) {
+    if (!func.hasOwnProperty('ad')) {
+        console.log('function ' + func.g.f + " doesn't have ad");
+        return null;
+    }
+    let addrMap = func.ad;
+    let rawCode = getFuncDisassembleCodeList(func.g.f);
+    if (!rawCode) {
+        console.log("can't find dis code for fId " + func.g.f);
+        return null;
+    }
+    let annotatedCode = [];
+    let hasAnnotation = false;
+    for (let i = 0; i < rawCode.length; ++i) {
+        let line = rawCode[i][0];
+        let addr = rawCode[i][1];
+        let eventCount = 0;
+        let totalEventCount = 0;
+        if (addr != 0) {
+            let count = addrMap[addr];
+            if (count) {
+                eventCount = count.e;
+                totalEventCount = count.s;
+                hasAnnotation = true;
+            }
+        }
+        annotatedCode.push({line: line, eventCount: eventCount,
+            totalEventCount: totalEventCount});
+    }
+    return hasAnnotation ? annotatedCode : null;
+}
+
+// Show disassemble code of a function.
+class DisassembleCodeView {
+
+    constructor(divContainer, func) {
+        let code = collectDisassembleCodeForFunction(func);
+        if (!code) {
+            this.div = null;
+            return;
+        }
+        this.code = code;
+        this.div = $('<div>');
+        this.div.appendTo(divContainer);
+    }
+
+    canShow() {
+        return this.div != null;
+    }
+
+    draw(sampleWeightFunction) {
+        if (!this.div) {
+            return;
+        }
+        google.charts.setOnLoadCallback(() => this.realDraw(sampleWeightFunction));
+    }
+
+    realDraw(sampleWeightFunction) {
+        this.div.empty();
+        this.div.append(getHtml('b', {text: 'Disassemble Code:'}) + '<br/>');
+        let rows = [];
+        for (let i = 0; i < this.code.length; ++i) {
+            let cur = this.code[i];
+            let totalValue = '';
+            let selfValue = '';
+            if (cur.totalEventCount > 0) {
+                totalValue = sampleWeightFunction(cur.totalEventCount);
+                selfValue = sampleWeightFunction(cur.eventCount);
+            }
+            rows.push([totalValue, selfValue, getHtml('pre', {text: cur.line})]);
+        }
+        // Draw a table of 'Total', 'Self', 'Code'.
+        let data = new google.visualization.DataTable();
+        data.addColumn('string', 'Total');
+        data.addColumn('string', 'Self');
+        data.addColumn('string', 'Code');
+        data.addRows(rows);
+        for (let i = 0; i < this.code.length; ++i) {
+            for (let j = 0; j < 2; ++j) {
+                data.setProperty(i, j, 'className', 'colForCount');
+            }
+        }
+        let wrapperDiv = $('<div>');
+        wrapperDiv.appendTo(this.div);
+        let table = new google.visualization.Table(wrapperDiv.get(0));
+        table.draw(data, {
+            width: '100%',
+            sort: 'disable',
+            frozenColumns: 3,
+            allowHtml: true,
+        });
+    }
+}
+
+
 function initGlobalObjects() {
     gTabs = new TabManager($('div#report_content'));
-    gRecordInfo = JSON.parse(gRecordInfo);
+    let recordData = $('#record_data').text();
+    gRecordInfo = JSON.parse(recordData);
     gProcesses = gRecordInfo.processNames;
     gThreads = gRecordInfo.threadNames;
     gLibList = gRecordInfo.libList;
     gFunctionMap = gRecordInfo.functionMap;
     gSampleInfo = gRecordInfo.sampleInfo;
+    gSourceFiles = gRecordInfo.sourceFiles;
 }
 
 function createTabs() {
@@ -800,11 +1202,13 @@ function main() {
 }
 
 let gTabs;
+let gRecordInfo;
 let gProcesses;
 let gThreads;
 let gLibList;
 let gFunctionMap;
 let gSampleInfo;
+let gSourceFiles;
 
 $(document).ready(main);
 

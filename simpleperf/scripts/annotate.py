@@ -526,7 +526,10 @@ class SourceFileAnnotator(object):
         for source_dir in self.config['source_dirs']:
             for root, _, files in os.walk(source_dir):
                 for file in files:
-                    if file[file.rfind('.')+1:] in source_file_suffix:
+                    dot_index = file.rfind('.')
+                    if dot_index == -1:
+                        continue
+                    if file[dot_index + 1:] in source_file_suffix:
                         entry = self.source_file_dict.get(file)
                         if entry is None:
                             entry = self.source_file_dict[file] = []
@@ -550,7 +553,7 @@ class SourceFileAnnotator(object):
             elif suffix_len == best_suffix_len:
                 best_path_count += 1
         if best_path_count > 1:
-            log_warning('multiple source for %s, select %s' % (file, result))
+            log_warning('multiple source for %s, select %s' % (file, best_path))
         return best_path
 
 

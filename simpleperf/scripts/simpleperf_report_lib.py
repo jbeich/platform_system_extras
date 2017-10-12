@@ -64,12 +64,19 @@ class MappingStruct(ct.Structure):
                 ('end', ct.c_uint64),
                 ('pgoff', ct.c_uint64)]
 
-
 class SymbolStruct(ct.Structure):
+    """ Symbol info belong to a Sample or CallChainEntry.
+        dso_name: the shared library path.
+        vaddr_in_file: the virtual address of ip field in Sample or CallChainEntry in the shared library.
+        symbol_name: the function name hit by the Sample or CallChainEntry.
+        symbol_addr: the function start virtual address.
+        addr_len: the size of the function.
+    """
     _fields_ = [('dso_name', ct.c_char_p),
                 ('vaddr_in_file', ct.c_uint64),
                 ('symbol_name', ct.c_char_p),
                 ('symbol_addr', ct.c_uint64),
+                ('addr_len', ct.c_uint64),
                 ('mapping', ct.POINTER(MappingStruct))]
 
 
@@ -162,6 +169,7 @@ class ReportLib(object):
         self._GetBuildIdForPathFunc.restype = ct.c_char_p
         self._GetFeatureSection = self._lib.GetFeatureSection
         self._GetFeatureSection.restype = ct.POINTER(FeatureSectionStructure)
+
         self._instance = self._CreateReportLibFunc()
         assert not _is_null(self._instance)
 
