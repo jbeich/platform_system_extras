@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eaf493b7_59d196a5",
+        "filename": "simpleperf/scripts/inferno/data_types.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-10-13T17:07:09Z",
+      "side": 1,
+      "message": "\"Release\"",
+      "range": {
+        "startLine": 113,
+        "startChar": 10,
+        "endLine": 113,
+        "endChar": 16
+      },
+      "revId": "31cc90d7a95c230f33f1283070d674be9ac39a44",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
