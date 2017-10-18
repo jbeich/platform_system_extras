@@ -40,7 +40,9 @@ int pcm_play(unsigned rate, unsigned channels,
              void *cookie)
 {
     struct msm_audio_config config;
+#if 0
     struct msm_audio_stats stats;
+#endif
     unsigned sz, n;
     char buf[8192];
     int afd;
@@ -90,7 +92,6 @@ int pcm_play(unsigned rate, unsigned channels,
             break;
     }
 
-done:
     close(afd);
     return 0;
 }
@@ -153,7 +154,6 @@ void play_file(unsigned rate, unsigned channels,
 int wav_play(const char *fn)
 {
 	struct wav_header hdr;
-    unsigned rate, channels;
 	int fd;
 	fd = open(fn, O_RDONLY);
 	if (fd < 0) {
@@ -195,7 +195,7 @@ int wav_rec(const char *fn, unsigned channels, unsigned rate)
     struct wav_header hdr;
     unsigned char buf[8192];
     struct msm_audio_config cfg;
-    unsigned sz, n;
+    unsigned sz;
     int fd, afd;
     unsigned total = 0;
     unsigned char tmp;
