@@ -37,6 +37,7 @@ simpleperf_static_libraries_target := \
   libbacktrace_offline \
   libbacktrace \
   libunwind \
+  libunwindstack \
   libziparchive \
   libz \
   libbase \
