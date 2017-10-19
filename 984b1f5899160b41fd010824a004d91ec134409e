@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "eccf9be1_ba84a190",
+        "filename": "simpleperf/scripts/test.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-10-19T20:00:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "03d42fe7_45291342",
+      "range": {
+        "startLine": 76,
+        "startChar": 85,
+        "endLine": 76,
+        "endChar": 86
+      },
+      "revId": "984b1f5899160b41fd010824a004d91ec134409e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "32d2f37d_4ad82233",
         "filename": "simpleperf/scripts/utils.py",
         "patchSetId": 2
@@ -59,6 +83,30 @@
       "writtenOn": "2017-10-19T18:33:49Z",
       "side": 1,
       "message": "nit: Saving",
+      "range": {
+        "startLine": 409,
+        "startChar": 10,
+        "endLine": 409,
+        "endChar": 14
+      },
+      "revId": "984b1f5899160b41fd010824a004d91ec134409e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c7cdc945_ee1808ed",
+        "filename": "simpleperf/scripts/utils.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 409,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-10-19T20:00:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "32d2f37d_4ad82233",
       "range": {
         "startLine": 409,
         "startChar": 10,
@@ -94,6 +142,30 @@
     },
     {
       "key": {
+        "uuid": "a4f0d2f7_eb3be569",
+        "filename": "simpleperf/scripts/utils.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 468,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-10-19T20:00:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3c0517b5_c22c1c82",
+      "range": {
+        "startLine": 468,
+        "startChar": 16,
+        "endLine": 468,
+        "endChar": 45
+      },
+      "revId": "984b1f5899160b41fd010824a004d91ec134409e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e2df46fe_46aa3049",
         "filename": "simpleperf/scripts/utils.py",
         "patchSetId": 2
@@ -105,6 +177,30 @@
       "writtenOn": "2017-10-19T18:33:49Z",
       "side": 1,
       "message": "Might be more Pythonic with list comprehension:\n\u0027\\n\u0027.join([\u0027%x\u0027 % addr for addr in sorted(addr_map.keys())])",
+      "range": {
+        "startLine": 473,
+        "startChar": 8,
+        "endLine": 476,
+        "endChar": 46
+      },
+      "revId": "984b1f5899160b41fd010824a004d91ec134409e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fb46a686_6aa5c745",
+        "filename": "simpleperf/scripts/utils.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 476,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-10-19T20:00:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e2df46fe_46aa3049",
       "range": {
         "startLine": 473,
         "startChar": 8,
