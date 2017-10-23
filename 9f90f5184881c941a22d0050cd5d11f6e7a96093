@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "55f27d21_bb01b877",
+        "filename": "simpleperf/scripts/test.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2017-10-23T19:01:11Z",
+      "side": 1,
+      "message": "if (... or ... or\n    ...):",
+      "range": {
+        "startLine": 76,
+        "startChar": 4,
+        "endLine": 77,
+        "endChar": 39
+      },
+      "revId": "9f90f5184881c941a22d0050cd5d11f6e7a96093",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
