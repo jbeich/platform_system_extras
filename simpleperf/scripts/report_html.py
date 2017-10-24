@@ -424,7 +424,7 @@ class RecordData(object):
         record_info['libList'] = self._gen_lib_list()
         record_info['functionMap'] = self._gen_function_map()
         record_info['sampleInfo'] = self._gen_sample_info()
-        out.add("let gRecordInfo = '%s';" % json.dumps(record_info).replace("'", "\\'"))
+        return record_info
 
     def _gen_process_names(self):
         process_names = {}
@@ -500,8 +500,9 @@ class ReportGenerator(object):
         self.hw.open_tag('div', id='report_content').close_tag()
 
     def write_record_data(self, record_data):
-        self.hw.open_tag('script')
-        record_data.gen_record_info(self.hw)
+        record_info = record_data.gen_record_info(self.hw)
+        self.hw.open_tag('script', id='record_data', type='application/json')
+        self.hw.add(json.dumps(record_info))
         self.hw.close_tag()
 
     def write_flamegraph(self, flamegraph):
