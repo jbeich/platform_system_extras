@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "09e14812_44ecb061",
+        "filename": "simpleperf/scripts/report_html.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2017-10-31T06:20:35Z",
+      "side": 1,
+      "message": "nit: tuples now?",
+      "range": {
+        "startLine": 119,
+        "startChar": 59,
+        "endLine": 119,
+        "endChar": 64
+      },
+      "revId": "d0a0c22adb1e54abf3ba1373b453d552c712cbd3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9e9eb6e4_9136d18f",
+        "filename": "simpleperf/scripts/report_html.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2017-10-31T06:20:35Z",
+      "side": 1,
+      "message": "No need to go with a loop:\n\nself.requested_line \u003d set(range(start_line, end_line + 1))",
+      "range": {
+        "startLine": 354,
+        "startChar": 8,
+        "endLine": 355,
+        "endChar": 42
+      },
+      "revId": "d0a0c22adb1e54abf3ba1373b453d552c712cbd3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "79a1a474_387b53a3",
+        "filename": "simpleperf/scripts/report_html.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2017-10-31T06:20:35Z",
+      "side": 1,
+      "message": "requested_lines?",
+      "range": {
+        "startLine": 366,
+        "startChar": 13,
+        "endLine": 366,
+        "endChar": 26
+      },
+      "revId": "d0a0c22adb1e54abf3ba1373b453d552c712cbd3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e9c491cb_ba981357",
+        "filename": "simpleperf/scripts/report_html.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 424,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2017-10-31T06:20:35Z",
+      "side": 1,
+      "message": "Could also use os.path.splitext(file_name)[1] to get the extension",
+      "range": {
+        "startLine": 424,
+        "startChar": 20,
+        "endLine": 424,
+        "endChar": 40
+      },
+      "revId": "d0a0c22adb1e54abf3ba1373b453d552c712cbd3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8c5ee5a4_bda5db23",
+        "filename": "simpleperf/scripts/report_html.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 428,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2017-10-31T06:20:35Z",
+      "side": 1,
+      "message": "Is this to cover the cases of .c/.cc/.cxx/.cpp? It could include some random files like \".html\".",
+      "range": {
+        "startLine": 428,
+        "startChar": 11,
+        "endLine": 428,
+        "endChar": 59
+      },
+      "revId": "d0a0c22adb1e54abf3ba1373b453d552c712cbd3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f6a5828e_851aa49f",
+        "filename": "simpleperf/scripts/report_html.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2017-10-31T06:20:35Z",
+      "side": 1,
+      "message": "not sure if this is intentional, but we have a mix of \"abstrace\" and \"abstract\" here and below",
+      "range": {
+        "startLine": 433,
+        "startChar": 8,
+        "endLine": 433,
+        "endChar": 21
+      },
+      "revId": "d0a0c22adb1e54abf3ba1373b453d552c712cbd3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "72f967cd_d24a2344",
+        "filename": "simpleperf/scripts/report_html.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 711,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2017-10-31T06:20:35Z",
+      "side": 1,
+      "message": "Don\u0027t need to write .keys() when iterating the keys with a loop",
+      "range": {
+        "startLine": 711,
+        "startChar": 55,
+        "endLine": 711,
+        "endChar": 62
+      },
+      "revId": "d0a0c22adb1e54abf3ba1373b453d552c712cbd3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
