@@ -36,6 +36,11 @@ std::string DisplayAccumulatedOverhead(const EntryT* sample,
   return android::base::StringPrintf("%.2f%%", percentage);
 }
 
+template <typename EntryT>
+std::string DisplayAccumulatedPeriod(const EntryT* sample) {
+  return android::base::StringPrintf("%" PRIu64, sample->period + sample->accumulated_period);
+}
+
 template <typename EntryT, typename InfoT>
 std::string DisplaySelfOverhead(const EntryT* sample, const InfoT* info) {
   uint64_t period = sample->period;
@@ -56,6 +61,7 @@ std::string DisplaySelfOverhead(const EntryT* sample, const InfoT* info) {
     return android::base::StringPrintf("0x%" PRIx64, sample->display_part); \
   }
 
+BUILD_DISPLAY_UINT64_FUNCTION(DisplaySelfPeriod, period);
 BUILD_DISPLAY_UINT64_FUNCTION(DisplaySampleCount, sample_count);
 
 template <typename EntryT>
@@ -100,13 +106,21 @@ class CallgraphDisplayer {
 
  public:
   CallgraphDisplayer(uint32_t max_stack = UINT32_MAX,
-                     double percent_limit = 0.0)
-      : max_stack_(max_stack), percent_limit_(percent_limit) {}
+                     double percent_limit = 0.0,
+                     bool brief_callgraph = false)
+      : max_stack_(max_stack), percent_limit_(percent_limit), brief_callgraph_(brief_callgraph) {}
 
   virtual ~CallgraphDisplayer() {}
 
   void operator()(FILE* fp, const SampleT* sample) {
+    if (sample->callchain.children.empty()) {
+      return;
+    }
     std::string prefix = "       ";
+    if (brief_callgraph_ && sample->callchain.duplicated) {
+      fprintf(fp, "%s[skipped in brief callgraph mode]\n", prefix.c_str());
+      return;
+    }
     fprintf(fp, "%s|\n", prefix.c_str());
     fprintf(fp, "%s-- %s\n", prefix.c_str(), PrintSampleName(sample).c_str());
     prefix.append(3, ' ');
@@ -163,6 +177,7 @@ class CallgraphDisplayer {
  private:
   uint32_t max_stack_;
   double percent_limit_;
+  bool brief_callgraph_;
 };
 
 // SampleDisplayer is a class using a collections of display functions to show a

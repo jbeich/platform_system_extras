@@ -56,9 +56,12 @@ bool Dso::demangle_ = true;
 std::string Dso::symfs_dir_;
 std::string Dso::vmlinux_;
 std::string Dso::kallsyms_;
+bool Dso::read_kernel_symbols_from_proc_;
 std::unordered_map<std::string, BuildId> Dso::build_id_map_;
 size_t Dso::dso_count_;
 uint32_t Dso::g_dump_id_;
+std::unique_ptr<TemporaryFile> Dso::vdso_64bit_;
+std::unique_ptr<TemporaryFile> Dso::vdso_32bit_;
 
 void Dso::SetDemangle(bool demangle) { demangle_ = demangle; }
 
@@ -96,7 +99,7 @@ bool Dso::SetSymFsDir(const std::string& symfs_dir) {
     if (dirname.back() != '/') {
       dirname.push_back('/');
     }
-    if (GetEntriesInDir(symfs_dir).empty()) {
+    if (!IsDir(symfs_dir)) {
       LOG(ERROR) << "Invalid symfs_dir '" << symfs_dir << "'";
       return false;
     }
@@ -118,6 +121,14 @@ void Dso::SetBuildIds(
   build_id_map_ = std::move(map);
 }
 
+void Dso::SetVdsoFile(std::unique_ptr<TemporaryFile> vdso_file, bool is_64bit) {
+  if (is_64bit) {
+    vdso_64bit_ = std::move(vdso_file);
+  } else {
+    vdso_32bit_ = std::move(vdso_file);
+  }
+}
+
 BuildId Dso::FindExpectedBuildIdForPath(const std::string& path) {
   auto it = build_id_map_.find(path);
   if (it != build_id_map_.end()) {
@@ -130,19 +141,20 @@ BuildId Dso::GetExpectedBuildId() {
   return FindExpectedBuildIdForPath(path_);
 }
 
-std::unique_ptr<Dso> Dso::CreateDso(DsoType dso_type,
-                                    const std::string& dso_path) {
-  return std::unique_ptr<Dso>(new Dso(dso_type, dso_path));
+std::unique_ptr<Dso> Dso::CreateDso(DsoType dso_type, const std::string& dso_path,
+                                    bool force_64bit) {
+  return std::unique_ptr<Dso>(new Dso(dso_type, dso_path, force_64bit));
 }
 
-Dso::Dso(DsoType type, const std::string& path)
+Dso::Dso(DsoType type, const std::string& path, bool force_64bit)
     : type_(type),
       path_(path),
       debug_file_path_(path),
       min_vaddr_(std::numeric_limits<uint64_t>::max()),
       is_loaded_(false),
       dump_id_(UINT_MAX),
-      symbol_dump_id_(0) {
+      symbol_dump_id_(0),
+      symbol_warning_loglevel_(android::base::WARNING) {
   if (type_ == DSO_KERNEL) {
     min_vaddr_ = 0;
   }
@@ -156,6 +168,12 @@ Dso::Dso(DsoType type, const std::string& path)
         std::get<0>(tuple) ? std::get<1>(tuple) : path_in_symfs;
     if (IsRegularFile(file_path)) {
       debug_file_path_ = path_in_symfs;
+    }
+  } else if (path == "[vdso]") {
+    if (force_64bit && vdso_64bit_ != nullptr) {
+      debug_file_path_ = vdso_64bit_->path;
+    } else if (!force_64bit && vdso_32bit_ != nullptr) {
+      debug_file_path_ = vdso_32bit_->path;
     }
   }
   size_t pos = path.find_last_of("/\\");
@@ -175,8 +193,11 @@ Dso::~Dso() {
     symfs_dir_.clear();
     vmlinux_.clear();
     kallsyms_.clear();
+    read_kernel_symbols_from_proc_ = false;
     build_id_map_.clear();
     g_dump_id_ = 0;
+    vdso_64bit_ = nullptr;
+    vdso_32bit_ = nullptr;
   }
 }
 
@@ -267,6 +288,8 @@ void Dso::Load() {
     // dumped_symbols,  so later we can merge them with symbols read from file system.
     dumped_symbols = std::move(symbols_);
     symbols_.clear();
+    // Don't warn missing symbol table if we have dumped symbols in perf.data.
+    symbol_warning_loglevel_ = android::base::DEBUG;
   }
   bool result = false;
   switch (type_) {
@@ -324,17 +347,20 @@ static void VmlinuxSymbolCallback(const ElfFileSymbol& elf_symbol,
   }
 }
 
-bool CheckReadSymbolResult(ElfStatus result, const std::string& filename) {
+bool Dso::CheckReadSymbolResult(ElfStatus result, const std::string& filename) {
   if (result == ElfStatus::NO_ERROR) {
     LOG(VERBOSE) << "Read symbols from " << filename << " successfully";
     return true;
   } else if (result == ElfStatus::NO_SYMBOL_TABLE) {
+    if (path_ == "[vdso]") {
+      // Vdso only contains dynamic symbol table, and we can't change that.
+      return true;
+    }
     // Lacking symbol table isn't considered as an error but worth reporting.
-    LOG(WARNING) << filename << " doesn't contain symbol table";
+    LOG(symbol_warning_loglevel_) << filename << " doesn't contain symbol table";
     return true;
   } else {
-    LOG(WARNING) << "failed to read symbols from " << filename
-                 << ": " << result;
+    LOG(symbol_warning_loglevel_) << "failed to read symbols from " << filename << ": " << result;
     return false;
   }
 }
@@ -356,24 +382,26 @@ bool Dso::LoadKernel() {
       }
     }
     if (all_zero) {
-      LOG(WARNING)
+      LOG(symbol_warning_loglevel_)
           << "Symbol addresses in /proc/kallsyms on device are all zero. "
              "`echo 0 >/proc/sys/kernel/kptr_restrict` if possible.";
       symbols_.clear();
       return false;
     }
-  } else if (!build_id.IsEmpty()) {
-    // Try /proc/kallsyms only when build_id matches. Otherwise, it is likely to use
-    // /proc/kallsyms on host for perf.data recorded on device.
-    BuildId real_build_id;
-    if (!GetKernelBuildId(&real_build_id)) {
-      return false;
-    }
-    bool match = (build_id == real_build_id);
-    if (!match) {
-      LOG(WARNING) << "failed to read symbols from /proc/kallsyms: Build id "
-                   << "mismatch";
-      return false;
+  } else if (read_kernel_symbols_from_proc_ || !build_id.IsEmpty()) {
+    // Try /proc/kallsyms only when asked to do so, or when build id matches.
+    // Otherwise, it is likely to use /proc/kallsyms on host for perf.data recorded on device.
+    if (!build_id.IsEmpty()) {
+      BuildId real_build_id;
+      if (!GetKernelBuildId(&real_build_id)) {
+        return false;
+      }
+      bool match = (build_id == real_build_id);
+      if (!match) {
+        LOG(symbol_warning_loglevel_) << "failed to read symbols from /proc/kallsyms: Build id "
+                                      << "mismatch";
+        return false;
+      }
     }
 
     std::string kallsyms;
@@ -391,8 +419,8 @@ bool Dso::LoadKernel() {
       }
     }
     if (all_zero) {
-      LOG(WARNING) << "Symbol addresses in /proc/kallsyms are all zero. "
-                      "`echo 0 >/proc/sys/kernel/kptr_restrict` if possible.";
+      LOG(symbol_warning_loglevel_) << "Symbol addresses in /proc/kallsyms are all zero. "
+                                       "`echo 0 >/proc/sys/kernel/kptr_restrict` if possible.";
       symbols_.clear();
       return false;
     }

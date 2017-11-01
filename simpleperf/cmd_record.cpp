@@ -14,10 +14,12 @@
  * limitations under the License.
  */
 
+#include <inttypes.h>
 #include <libgen.h>
 #include <signal.h>
 #include <sys/prctl.h>
 #include <sys/utsname.h>
+#include <time.h>
 #include <unistd.h>
 #include <set>
 #include <string>
@@ -29,6 +31,10 @@
 #include <android-base/parsedouble.h>
 #include <android-base/parseint.h>
 #include <android-base/strings.h>
+#include <android-base/test_utils.h>
+#if defined(__ANDROID__)
+#include <android-base/properties.h>
+#endif
 
 #include "command.h"
 #include "dwarf_unwind.h"
@@ -57,6 +63,13 @@ static std::unordered_map<std::string, uint64_t> branch_sampling_type_map = {
     {"ind_call", PERF_SAMPLE_BRANCH_IND_CALL},
 };
 
+static std::unordered_map<std::string, int> clockid_map = {
+    {"realtime", CLOCK_REALTIME},
+    {"monotonic", CLOCK_MONOTONIC},
+    {"monotonic_raw", CLOCK_MONOTONIC_RAW},
+    {"boottime", CLOCK_BOOTTIME},
+};
+
 // The max size of records dumped by kernel is 65535, and dump stack size
 // should be a multiply of 8, so MAX_DUMP_STACK_SIZE is 65528.
 constexpr uint32_t MAX_DUMP_STACK_SIZE = 65528;
@@ -75,24 +88,19 @@ class RecordCommand : public Command {
 "Usage: simpleperf record [options] [command [command-args]]\n"
 "       Gather sampling information of running [command]. And -a/-p/-t option\n"
 "       can be used to change target of sampling information.\n"
+"       The default options are: -e cpu-cycles -f 4000 -o perf.data.\n"
+"Select monitored threads:\n"
 "-a     System-wide collection.\n"
-"-b     Enable take branch stack sampling. Same as '-j any'\n"
-"-c count     Set event sample period. It means recording one sample when\n"
-"             [count] events happen. Can't be used with -f/-F option.\n"
-"             For tracepoint events, the default option is -c 1.\n"
-"--call-graph fp | dwarf[,<dump_stack_size>]\n"
-"             Enable call graph recording. Use frame pointer or dwarf debug\n"
-"             frame as the method to parse call graph in stack.\n"
-"             Default is dwarf,65528.\n"
-"--cpu cpu_item1,cpu_item2,...\n"
-"             Collect samples only on the selected cpus. cpu_item can be cpu\n"
-"             number like 1, or cpu range like 0-3.\n"
-"--dump-symbols  Dump symbols in perf.data. By default perf.data doesn't contain\n"
-"                symbol information for samples. This option is used when there\n"
-"                is no symbol information in report environment.\n"
-"--duration time_in_sec  Monitor for time_in_sec seconds instead of running\n"
-"                        [command]. Here time_in_sec may be any positive\n"
-"                        floating point number.\n"
+#if defined(__ANDROID__)
+"--app package_name    Profile the process of an Android application.\n"
+"                      On non-rooted devices, the app must be debuggable,\n"
+"                      because we use run-as to switch to the app's context.\n"
+#endif
+"-p pid1,pid2,...       Record events on existing processes. Mutually exclusive\n"
+"                       with -a.\n"
+"-t tid1,tid2,... Record events on existing threads. Mutually exclusive with -a.\n"
+"\n"
+"Select monitored event types:\n"
 "-e event1[:modifier1],event2[:modifier2],...\n"
 "             Select the event list to sample. Use `simpleperf list` to find\n"
 "             all possible event names. Modifiers can be added to define how\n"
@@ -100,15 +108,37 @@ class RecordCommand : public Command {
 "             Possible modifiers are:\n"
 "                u - monitor user space events only\n"
 "                k - monitor kernel space events only\n"
-"-f freq      Set event sample frequency. It means recording at most [freq]\n"
-"             samples every second. For non-tracepoint events, the default\n"
-"             option is -f 4000.\n"
-"-F freq      Same as '-f freq'.\n"
-"-g           Same as '--call-graph dwarf'.\n"
 "--group event1[:modifier],event2[:modifier2],...\n"
 "             Similar to -e option. But events specified in the same --group\n"
 "             option are monitored as a group, and scheduled in and out at the\n"
 "             same time.\n"
+"--trace-offcpu   Generate samples when threads are scheduled off cpu.\n"
+"                 Similar to \"-c 1 -e sched:sched_switch\".\n"
+"\n"
+"Select monitoring options:\n"
+"-f freq      Set event sample frequency. It means recording at most [freq]\n"
+"             samples every second. For non-tracepoint events, the default\n"
+"             option is -f 4000. A -f/-c option affects all event types\n"
+"             following it until meeting another -f/-c option. For example,\n"
+"             for \"-f 1000 cpu-cycles -c 1 -e sched:sched_switch\", cpu-cycles\n"
+"             has sample freq 1000, sched:sched_switch event has sample period 1.\n"
+"-c count     Set event sample period. It means recording one sample when\n"
+"             [count] events happen. For tracepoint events, the default option\n"
+"             is -c 1.\n"
+"--call-graph fp | dwarf[,<dump_stack_size>]\n"
+"             Enable call graph recording. Use frame pointer or dwarf debug\n"
+"             frame as the method to parse call graph in stack.\n"
+"             Default is dwarf,65528.\n"
+"-g           Same as '--call-graph dwarf'.\n"
+"--clockid clock_id      Generate timestamps of samples using selected clock.\n"
+"                        Possible values are: realtime, monotonic,\n"
+"                        monotonic_raw, boottime, perf. Default is perf.\n"
+"--cpu cpu_item1,cpu_item2,...\n"
+"             Collect samples only on the selected cpus. cpu_item can be cpu\n"
+"             number like 1, or cpu range like 0-3.\n"
+"--duration time_in_sec  Monitor for time_in_sec seconds instead of running\n"
+"                        [command]. Here time_in_sec may be any positive\n"
+"                        floating point number.\n"
 "-j branch_filter1,branch_filter2,...\n"
 "             Enable taken branch stack sampling. Each sample captures a series\n"
 "             of consecutive taken branches.\n"
@@ -121,32 +151,38 @@ class RecordCommand : public Command {
 "                k: only when the branch target is in the kernel\n"
 "             This option requires at least one branch type among any, any_call,\n"
 "             any_ret, ind_call.\n"
+"-b           Enable taken branch stack sampling. Same as '-j any'.\n"
 "-m mmap_pages   Set the size of the buffer used to receiving sample data from\n"
 "                the kernel. It should be a power of 2. If not set, the max\n"
 "                possible value <= 1024 will be used.\n"
 "--no-dump-kernel-symbols  Don't dump kernel symbols in perf.data. By default\n"
 "                          kernel symbols will be dumped when needed.\n"
+"--no-dump-symbols       Don't dump symbols in perf.data. By default symbols are\n"
+"                        dumped in perf.data, to support reporting in another\n"
+"                        environment.\n"
 "--no-inherit  Don't record created child threads/processes.\n"
 "--no-unwind   If `--call-graph dwarf` option is used, then the user's stack\n"
 "              will be unwound by default. Use this option to disable the\n"
 "              unwinding of the user's stack.\n"
 "-o record_file_name    Set record file name, default is perf.data.\n"
-"-p pid1,pid2,...       Record events on existing processes. Mutually exclusive\n"
-"                       with -a.\n"
 "--post-unwind  If `--call-graph dwarf` option is used, then the user's stack\n"
 "               will be unwound while recording by default. But it may lose\n"
 "               records as stacking unwinding can be time consuming. Use this\n"
 "               option to unwind the user's stack after recording.\n"
+"--exit-with-parent            Stop recording when the process starting\n"
+"                              simpleperf dies.\n"
+"--start_profiling_fd fd_no    After starting profiling, write \"STARTED\" to\n"
+"                              <fd_no>, then close <fd_no>.\n"
 "--symfs <dir>    Look for files with symbols relative to this directory.\n"
 "                 This option is used to provide files with symbol table and\n"
-"                 debug information, which are used by --dump-symbols and -g.\n"
-"-t tid1,tid2,... Record events on existing threads. Mutually exclusive with -a.\n"
+"                 debug information, which are used for unwinding and dumping symbols.\n"
+#if 0
+// Below options are only used internally and shouldn't be visible to the public.
+"--in-app         We are already running in the app's context.\n"
+"--tracepoint-events file_name   Read tracepoint events from [file_name] instead of tracefs.\n"
+#endif
             // clang-format on
             ),
-        use_sample_freq_(false),
-        sample_freq_(0),
-        use_sample_period_(false),
-        sample_period_(0),
         system_wide_collection_(false),
         branch_sampling_(0),
         fp_callchain_sampling_(false),
@@ -157,15 +193,24 @@ class RecordCommand : public Command {
         child_inherit_(true),
         duration_in_sec_(0),
         can_dump_kernel_symbols_(true),
-        dump_symbols_(false),
+        dump_symbols_(true),
+        clockid_("perf"),
         event_selection_set_(false),
         mmap_page_range_(std::make_pair(1, DESIRED_PAGES_IN_MAPPED_BUFFER)),
         record_filename_("perf.data"),
         start_sampling_time_in_ns_(0),
         sample_record_count_(0),
-        lost_record_count_(0) {
-    // Stop profiling if parent exits.
-    prctl(PR_SET_PDEATHSIG, SIGHUP, 0, 0, 0);
+        lost_record_count_(0),
+        start_profiling_fd_(-1),
+        in_app_context_(false),
+        trace_offcpu_(false),
+        exclude_kernel_callchain_(false) {
+    // If we run `adb shell simpleperf record xxx` and stop profiling by ctrl-c, adb closes
+    // sockets connecting simpleperf. After that, simpleperf will receive SIGPIPE when writing
+    // to stdout/stderr, which is a problem when we use '--app' option. So ignore SIGPIPE to
+    // finish properly.
+    signal(SIGPIPE, SIG_IGN);
+    app_package_name_ = GetDefaultAppPackageName();
   }
 
   bool Run(const std::vector<std::string>& args);
@@ -173,6 +218,7 @@ class RecordCommand : public Command {
  private:
   bool ParseOptions(const std::vector<std::string>& args,
                     std::vector<std::string>* non_option_args);
+  bool TraceOffCpu();
   bool SetEventSelectionFlags();
   bool CreateAndInitRecordFile();
   std::unique_ptr<RecordFileWriter> CreateRecordFile(
@@ -188,13 +234,10 @@ class RecordCommand : public Command {
   bool DumpAdditionalFeatures(const std::vector<std::string>& args);
   bool DumpBuildIdFeature();
   bool DumpFileFeature();
+  bool DumpMetaInfoFeature();
   void CollectHitFileInfo(const SampleRecord& r);
 
-  bool use_sample_freq_;
-  uint64_t sample_freq_;  // Sample 'sample_freq_' times per second.
-  bool use_sample_period_;
-  uint64_t sample_period_;  // Sample once when 'sample_period_' events occur.
-
+  std::unique_ptr<SampleSpeed> sample_speed_;
   bool system_wide_collection_;
   uint64_t branch_sampling_;
   bool fp_callchain_sampling_;
@@ -206,6 +249,7 @@ class RecordCommand : public Command {
   double duration_in_sec_;
   bool can_dump_kernel_symbols_;
   bool dump_symbols_;
+  std::string clockid_;
   std::vector<int> cpus_;
   EventSelectionSet event_selection_set_;
 
@@ -219,13 +263,15 @@ class RecordCommand : public Command {
 
   uint64_t sample_record_count_;
   uint64_t lost_record_count_;
+  int start_profiling_fd_;
+  std::string app_package_name_;
+  bool in_app_context_;
+  bool trace_offcpu_;
+  bool exclude_kernel_callchain_;
 };
 
 bool RecordCommand::Run(const std::vector<std::string>& args) {
   if (!CheckPerfEventLimit()) {
-    return false;
-  }
-  if (!InitPerfClock()) {
     return false;
   }
 
@@ -234,17 +280,40 @@ bool RecordCommand::Run(const std::vector<std::string>& args) {
   if (!ParseOptions(args, &workload_args)) {
     return false;
   }
+  if (!app_package_name_.empty() && !in_app_context_) {
+    // Some users want to profile non debuggable apps on rooted devices. If we use run-as,
+    // it will be impossible when using --app. So don't switch to app's context when we are
+    // root.
+    if (!IsRoot()) {
+      return RunInAppContext(app_package_name_, "record", args, workload_args.size(),
+                             record_filename_, true);
+    }
+  }
   if (event_selection_set_.empty()) {
-    if (!event_selection_set_.AddEventType(default_measured_event_type)) {
+    size_t group_id;
+    if (!event_selection_set_.AddEventType(default_measured_event_type, &group_id)) {
       return false;
     }
+    if (sample_speed_) {
+      event_selection_set_.SetSampleSpeed(group_id, *sample_speed_);
+    }
+  }
+  exclude_kernel_callchain_ = event_selection_set_.ExcludeKernel();
+  if (trace_offcpu_ && !TraceOffCpu()) {
+    return false;
   }
   if (!SetEventSelectionFlags()) {
     return false;
   }
-  ScopedCurrentArch scoped_arch(GetMachineArch());
 
-  // 2. Create workload.
+  // 2. Do some environment preparation.
+  ScopedCurrentArch scoped_arch(GetMachineArch());
+  if (!InitPerfClock()) {
+    return false;
+  }
+  PrepareVdsoFile();
+
+  // 3. Create workload.
   std::unique_ptr<Workload> workload;
   if (!workload_args.empty()) {
     workload = Workload::CreateWorkload(workload_args);
@@ -259,6 +328,18 @@ bool RecordCommand::Run(const std::vector<std::string>& args) {
     if (workload != nullptr) {
       event_selection_set_.AddMonitoredProcesses({workload->GetPid()});
       event_selection_set_.SetEnableOnExec(true);
+      if (event_selection_set_.HasInplaceSampler()) {
+        // Start worker early, because the worker process has to setup inplace-sampler server
+        // before we try to connect it.
+        if (!workload->Start()) {
+          return false;
+        }
+      }
+    } else if (!app_package_name_.empty()) {
+      // If app process is not created, wait for it. This allows simpleperf starts before
+      // app process. In this way, we can have a better support of app start-up time profiling.
+      std::set<pid_t> pids = WaitForAppProcesses(app_package_name_);
+      event_selection_set_.AddMonitoredProcesses(pids);
     } else {
       LOG(ERROR)
           << "No threads to monitor. Try `simpleperf help record` for help";
@@ -268,7 +349,7 @@ bool RecordCommand::Run(const std::vector<std::string>& args) {
     need_to_check_targets = true;
   }
 
-  // 3. Open perf_event_files, create mapped buffers for perf_event_files.
+  // 4. Open perf_event_files, create mapped buffers for perf_event_files.
   if (!event_selection_set_.OpenEventFiles(cpus_)) {
     return false;
   }
@@ -277,14 +358,12 @@ bool RecordCommand::Run(const std::vector<std::string>& args) {
     return false;
   }
 
-  // 4. Create perf.data.
+  // 5. Create perf.data.
   if (!CreateAndInitRecordFile()) {
     return false;
   }
 
-  // 5. Create IOEventLoop and add read/signal/periodic Events.
-  IOEventLoop loop;
-  event_selection_set_.SetIOEventLoop(loop);
+  // 6. Add read/signal/periodic Events.
   auto callback =
       std::bind(&RecordCommand::ProcessRecord, this, std::placeholders::_1);
   if (!event_selection_set_.PrepareToReadMmapEventData(callback)) {
@@ -296,33 +375,40 @@ bool RecordCommand::Run(const std::vector<std::string>& args) {
   if (need_to_check_targets && !event_selection_set_.StopWhenNoMoreTargets()) {
     return false;
   }
-  if (!loop.AddSignalEvents({SIGCHLD, SIGINT, SIGTERM, SIGHUP},
-                            [&]() { return loop.ExitLoop(); })) {
+  IOEventLoop* loop = event_selection_set_.GetIOEventLoop();
+  if (!loop->AddSignalEvents({SIGCHLD, SIGINT, SIGTERM, SIGHUP},
+                             [&]() { return loop->ExitLoop(); })) {
     return false;
   }
   if (duration_in_sec_ != 0) {
-    if (!loop.AddPeriodicEvent(SecondToTimeval(duration_in_sec_),
-                               [&]() { return loop.ExitLoop(); })) {
+    if (!loop->AddPeriodicEvent(SecondToTimeval(duration_in_sec_),
+                                [&]() { return loop->ExitLoop(); })) {
       return false;
     }
   }
 
-  // 6. Write records in mapped buffers of perf_event_files to output file while
+  // 7. Write records in mapped buffers of perf_event_files to output file while
   //    workload is running.
   start_sampling_time_in_ns_ = GetPerfClock();
   LOG(VERBOSE) << "start_sampling_time is " << start_sampling_time_in_ns_
                << " ns";
-  if (workload != nullptr && !workload->Start()) {
+  if (workload != nullptr && !workload->IsStarted() && !workload->Start()) {
     return false;
   }
-  if (!loop.RunLoop()) {
+  if (start_profiling_fd_ != -1) {
+    if (!android::base::WriteStringToFd("STARTED", start_profiling_fd_)) {
+      PLOG(ERROR) << "failed to write to start_profiling_fd_";
+    }
+    close(start_profiling_fd_);
+  }
+  if (!loop->RunLoop()) {
     return false;
   }
   if (!event_selection_set_.FinishReadMmapEventData()) {
     return false;
   }
 
-  // 7. Dump additional features, and close record file.
+  // 8. Dump additional features, and close record file.
   if (!DumpAdditionalFeatures(args)) {
     return false;
   }
@@ -330,14 +416,14 @@ bool RecordCommand::Run(const std::vector<std::string>& args) {
     return false;
   }
 
-  // 8. Unwind dwarf callchain.
+  // 9. Unwind dwarf callchain.
   if (post_unwind_) {
     if (!PostUnwind(args)) {
       return false;
     }
   }
 
-  // 9. Show brief record result.
+  // 10. Show brief record result.
   LOG(INFO) << "Samples recorded: " << sample_record_count_
             << ". Samples lost: " << lost_record_count_ << ".";
   if (sample_record_count_ + lost_record_count_ != 0) {
@@ -356,23 +442,38 @@ bool RecordCommand::Run(const std::vector<std::string>& args) {
 
 bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
                                  std::vector<std::string>* non_option_args) {
+  std::vector<size_t> wait_setting_speed_event_groups_;
   size_t i;
   for (i = 0; i < args.size() && !args[i].empty() && args[i][0] == '-'; ++i) {
     if (args[i] == "-a") {
       system_wide_collection_ = true;
+    } else if (args[i] == "--app") {
+      if (!NextArgumentOrError(args, &i)) {
+        return false;
+      }
+      app_package_name_ = args[i];
     } else if (args[i] == "-b") {
       branch_sampling_ = branch_sampling_type_map["any"];
-    } else if (args[i] == "-c") {
+    } else if (args[i] == "-c" || args[i] == "-f") {
       if (!NextArgumentOrError(args, &i)) {
         return false;
       }
       char* endptr;
-      sample_period_ = strtoull(args[i].c_str(), &endptr, 0);
-      if (*endptr != '\0' || sample_period_ == 0) {
-        LOG(ERROR) << "Invalid sample period: '" << args[i] << "'";
+      uint64_t value = strtoull(args[i].c_str(), &endptr, 0);
+      if (*endptr != '\0' || value == 0) {
+        LOG(ERROR) << "Invalid option for " << args[i-1] << ": '" << args[i] << "'";
         return false;
       }
-      use_sample_period_ = true;
+      if (args[i-1] == "-c") {
+        sample_speed_.reset(new SampleSpeed(0, value));
+      } else {
+        sample_speed_.reset(new SampleSpeed(AdjustSampleFrequency(value), 0));
+      }
+      for (auto group_id : wait_setting_speed_event_groups_) {
+        event_selection_set_.SetSampleSpeed(group_id, *sample_speed_);
+      }
+      wait_setting_speed_event_groups_.clear();
+
     } else if (args[i] == "--call-graph") {
       if (!NextArgumentOrError(args, &i)) {
         return false;
@@ -410,13 +511,26 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
                    << args[i];
         return false;
       }
+    } else if (args[i] == "--clockid") {
+      if (!NextArgumentOrError(args, &i)) {
+        return false;
+      }
+      if (args[i] != "perf") {
+        if (!IsSettingClockIdSupported()) {
+          LOG(ERROR) << "Setting clockid is not supported by the kernel.";
+          return false;
+        }
+        if (clockid_map.find(args[i]) == clockid_map.end()) {
+          LOG(ERROR) << "Invalid clockid: " << args[i];
+          return false;
+        }
+      }
+      clockid_ = args[i];
     } else if (args[i] == "--cpu") {
       if (!NextArgumentOrError(args, &i)) {
         return false;
       }
       cpus_ = GetCpusFromString(args[i]);
-    } else if (args[i] == "--dump-symbols") {
-      dump_symbols_ = true;
     } else if (args[i] == "--duration") {
       if (!NextArgumentOrError(args, &i)) {
         return false;
@@ -432,22 +546,18 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
       }
       std::vector<std::string> event_types = android::base::Split(args[i], ",");
       for (auto& event_type : event_types) {
-        if (!event_selection_set_.AddEventType(event_type)) {
+        size_t group_id;
+        if (!event_selection_set_.AddEventType(event_type, &group_id)) {
           return false;
         }
+        if (sample_speed_) {
+          event_selection_set_.SetSampleSpeed(group_id, *sample_speed_);
+        } else {
+          wait_setting_speed_event_groups_.push_back(group_id);
+        }
       }
-    } else if (args[i] == "-f" || args[i] == "-F") {
-      if (!NextArgumentOrError(args, &i)) {
-        return false;
-      }
-      if (!android::base::ParseUint(args[i].c_str(), &sample_freq_)) {
-        LOG(ERROR) << "Invalid sample frequency: " << args[i];
-        return false;
-      }
-      if (!CheckSampleFrequency(sample_freq_)) {
-        return false;
-      }
-      use_sample_freq_ = true;
+    } else if (args[i] == "--exit-with-parent") {
+      prctl(PR_SET_PDEATHSIG, SIGHUP, 0, 0, 0);
     } else if (args[i] == "-g") {
       fp_callchain_sampling_ = false;
       dwarf_callchain_sampling_ = true;
@@ -456,9 +566,17 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
         return false;
       }
       std::vector<std::string> event_types = android::base::Split(args[i], ",");
-      if (!event_selection_set_.AddEventGroup(event_types)) {
+      size_t group_id;
+      if (!event_selection_set_.AddEventGroup(event_types, &group_id)) {
         return false;
       }
+      if (sample_speed_) {
+        event_selection_set_.SetSampleSpeed(group_id, *sample_speed_);
+      } else {
+        wait_setting_speed_event_groups_.push_back(group_id);
+      }
+    } else if (args[i] == "--in-app") {
+      in_app_context_ = true;
     } else if (args[i] == "-j") {
       if (!NextArgumentOrError(args, &i)) {
         return false;
@@ -486,6 +604,8 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
       mmap_page_range_.first = mmap_page_range_.second = pages;
     } else if (args[i] == "--no-dump-kernel-symbols") {
       can_dump_kernel_symbols_ = false;
+    } else if (args[i] == "--no-dump-symbols") {
+      dump_symbols_ = false;
     } else if (args[i] == "--no-inherit") {
       child_inherit_ = false;
     } else if (args[i] == "--no-unwind") {
@@ -506,6 +626,14 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
       event_selection_set_.AddMonitoredProcesses(pids);
     } else if (args[i] == "--post-unwind") {
       post_unwind_ = true;
+    } else if (args[i] == "--start_profiling_fd") {
+      if (!NextArgumentOrError(args, &i)) {
+        return false;
+      }
+      if (!android::base::ParseInt(args[i].c_str(), &start_profiling_fd_, 0)) {
+        LOG(ERROR) << "Invalid start_profiling_fd: " << args[i];
+        return false;
+      }
     } else if (args[i] == "--symfs") {
       if (!NextArgumentOrError(args, &i)) {
         return false;
@@ -522,15 +650,19 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
         return false;
       }
       event_selection_set_.AddMonitoredThreads(tids);
+    } else if (args[i] == "--trace-offcpu") {
+      trace_offcpu_ = true;
+    } else if (args[i] == "--tracepoint-events") {
+      if (!NextArgumentOrError(args, &i)) {
+        return false;
+      }
+      if (!SetTracepointEventsFilePath(args[i])) {
+        return false;
+      }
     } else {
       ReportUnknownOption(args, i);
       return false;
     }
-  }
-
-  if (use_sample_freq_ && use_sample_period_) {
-    LOG(ERROR) << "-f option can't be used with -c option.";
-    return false;
   }
 
   if (!dwarf_callchain_sampling_) {
@@ -550,6 +682,13 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
     if (!unwind_dwarf_callchain_) {
       LOG(ERROR) << "--post-unwind can't be used with `--no-unwind` option.";
       return false;
+    }
+  }
+
+  if (fp_callchain_sampling_) {
+    if (GetBuildArch() == ARCH_ARM) {
+      LOG(WARNING) << "`--callgraph fp` option doesn't work well on arm architecture, "
+                   << "consider using `-g` option or profiling on aarch64 architecture.";
     }
   }
 
@@ -576,14 +715,25 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
   return true;
 }
 
-bool RecordCommand::SetEventSelectionFlags() {
-  if (use_sample_freq_) {
-    event_selection_set_.SetSampleFreq(sample_freq_);
-  } else if (use_sample_period_) {
-    event_selection_set_.SetSamplePeriod(sample_period_);
-  } else {
-    event_selection_set_.UseDefaultSampleFreq();
+bool RecordCommand::TraceOffCpu() {
+  if (FindEventTypeByName("sched:sched_switch") == nullptr) {
+    LOG(ERROR) << "Can't trace off cpu because sched:sched_switch event is not available";
+    return false;
   }
+  for (auto& event_type : event_selection_set_.GetTracepointEvents()) {
+    if (event_type->name == "sched:sched_switch") {
+      LOG(ERROR) << "Trace offcpu can't be used together with sched:sched_switch event";
+      return false;
+    }
+  }
+  if (!IsDumpingRegsForTracepointEventsSupported()) {
+    LOG(ERROR) << "Dumping regs for tracepoint events is not supported by the kernel";
+    return false;
+  }
+  return event_selection_set_.AddEventType("sched:sched_switch");
+}
+
+bool RecordCommand::SetEventSelectionFlags() {
   event_selection_set_.SampleIdAll();
   if (!event_selection_set_.SetBranchSampling(branch_sampling_)) {
     return false;
@@ -597,6 +747,9 @@ bool RecordCommand::SetEventSelectionFlags() {
     }
   }
   event_selection_set_.SetInherit(child_inherit_);
+  if (clockid_ != "perf") {
+    event_selection_set_.SetClockId(clockid_map[clockid_]);
+  }
   return true;
 }
 
@@ -657,8 +810,8 @@ bool RecordCommand::DumpKernelSymbol() {
 bool RecordCommand::DumpTracingData() {
   std::vector<const EventType*> tracepoint_event_types =
       event_selection_set_.GetTracepointEvents();
-  if (tracepoint_event_types.empty()) {
-    return true;  // No need to dump tracing data.
+  if (tracepoint_event_types.empty() || !CanRecordRawData()) {
+    return true;  // No need to dump tracing data, or can't do it.
   }
   std::vector<char> tracing_data;
   if (!GetTracingData(tracepoint_event_types, &tracing_data)) {
@@ -785,6 +938,12 @@ bool RecordCommand::ProcessRecord(Record* record) {
     }
   }
   if (record->type() == PERF_RECORD_SAMPLE) {
+    if (record->InKernel() && exclude_kernel_callchain_) {
+      if (static_cast<SampleRecord*>(record)->ExcludeKernelCallChain() == 0u) {
+        // If current record contains no user callchain, skip it.
+        return true;
+      }
+    }
     sample_record_count_++;
   } else if (record->type() == PERF_RECORD_LOST) {
     lost_record_count_ += static_cast<LostRecord*>(record)->lost;
@@ -899,6 +1058,9 @@ bool RecordCommand::DumpAdditionalFeatures(
     const std::vector<std::string>& args) {
   // Read data section of perf.data to collect hit file information.
   thread_tree_.ClearThreadAndMap();
+  if (CheckKernelSymbolAddresses()) {
+    Dso::ReadKernelSymbolsFromProc();
+  }
   auto callback = [&](const Record* r) {
     thread_tree_.Update(*r);
     if (r->type() == PERF_RECORD_SAMPLE) {
@@ -909,7 +1071,7 @@ bool RecordCommand::DumpAdditionalFeatures(
     return false;
   }
 
-  size_t feature_count = 4;
+  size_t feature_count = 5;
   if (branch_sampling_) {
     feature_count++;
   }
@@ -952,6 +1114,10 @@ bool RecordCommand::DumpAdditionalFeatures(
       !record_file_writer_->WriteBranchStackFeature()) {
     return false;
   }
+  if (!DumpMetaInfoFeature()) {
+    return false;
+  }
+
   if (!record_file_writer_->EndWriteFeatures()) {
     return false;
   }
@@ -1040,6 +1206,26 @@ bool RecordCommand::DumpFileFeature() {
     }
   }
   return true;
+}
+
+bool RecordCommand::DumpMetaInfoFeature() {
+  std::unordered_map<std::string, std::string> info_map;
+  info_map["simpleperf_version"] = GetSimpleperfVersion();
+  info_map["system_wide_collection"] = system_wide_collection_ ? "true" : "false";
+  info_map["trace_offcpu"] = trace_offcpu_ ? "true" : "false";
+  // By storing event types information in perf.data, the readers of perf.data have the same
+  // understanding of event types, even if they are on another machine.
+  info_map["event_type_info"] = ScopedEventTypes::BuildString(event_selection_set_.GetEvents());
+#if defined(__ANDROID__)
+  info_map["product_props"] = android::base::StringPrintf("%s:%s:%s",
+                                  android::base::GetProperty("ro.product.manufacturer", "").c_str(),
+                                  android::base::GetProperty("ro.product.model", "").c_str(),
+                                  android::base::GetProperty("ro.product.name", "").c_str());
+  info_map["android_version"] = android::base::GetProperty("ro.build.version.release", "");
+#endif
+  info_map["clockid"] = clockid_;
+  info_map["timestamp"] = std::to_string(time(nullptr));
+  return record_file_writer_->WriteMetaInfoFeature(info_map);
 }
 
 void RecordCommand::CollectHitFileInfo(const SampleRecord& r) {

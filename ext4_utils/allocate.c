@@ -234,6 +234,18 @@ static void free_blocks(struct block_group_info *bg, u32 block, u32 num_blocks)
 	for (i = 0; i < num_blocks; i++, block--)
 		bg->block_bitmap[block / 8] &= ~(1 << (block % 8));
 	bg->free_blocks += num_blocks;
+	for (i = bg->chunk_count; i > 0 ;) {
+		--i;
+		if (bg->chunks[i].len >= num_blocks && bg->chunks[i].block <= block) {
+			if (bg->chunks[i].block == block) {
+				bg->chunks[i].block += num_blocks;
+				bg->chunks[i].len -= num_blocks;
+			} else if (bg->chunks[i].block + bg->chunks[i].len - 1 == block + num_blocks) {
+				bg->chunks[i].len -= num_blocks;
+			}
+			break;
+		}
+	}
 }
 
 /* Reduces an existing allocation by len blocks by return the last blocks
@@ -255,6 +267,7 @@ void reduce_allocation(struct block_allocation *alloc, u32 len)
 			len -= last_reg->len;
 			if (reg) {
 				reg->next = NULL;
+				alloc->list.last = reg;
 			} else {
 				alloc->list.first = NULL;
 				alloc->list.last = NULL;

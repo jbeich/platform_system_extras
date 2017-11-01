@@ -60,7 +60,7 @@ class EventFd {
   // this file.
   bool EnableEvent();
 
-  bool ReadCounter(PerfCounter* counter) const;
+  bool ReadCounter(PerfCounter* counter);
 
   // Create mapped buffer used to receive records sent by the kernel.
   // mmap_pages should be power of 2.
@@ -96,8 +96,10 @@ class EventFd {
         mmap_metadata_page_(nullptr),
         mmap_data_buffer_(nullptr),
         mmap_data_buffer_size_(0),
-        ioevent_ref_(nullptr) {}
+        ioevent_ref_(nullptr),
+        last_counter_value_(0) {}
 
+  bool InnerReadCounter(PerfCounter* counter) const;
   // Discard how much data we have read, so the kernel can reuse this part of
   // mapped area to store new data.
   void DiscardMmapData(size_t discard_size);
@@ -123,9 +125,12 @@ class EventFd {
 
   IOEventRef ioevent_ref_;
 
+  // Used by atrace to generate value difference between two ReadCounter() calls.
+  uint64_t last_counter_value_;
+
   DISALLOW_COPY_AND_ASSIGN(EventFd);
 };
 
-bool IsEventAttrSupportedByKernel(perf_event_attr attr);
+bool IsEventAttrSupported(const perf_event_attr& attr);
 
 #endif  // SIMPLE_PERF_EVENT_FD_H_

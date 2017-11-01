@@ -19,11 +19,12 @@
 #include <android-base/file.h>
 #include <android-base/stringprintf.h>
 #include <android-base/test_utils.h>
-#include <sys/syscall.h>
 
 #include <thread>
 
 #include "command.h"
+#include "environment.h"
+#include "event_selection_set.h"
 #include "get_test_data.h"
 #include "test_util.h"
 
@@ -55,18 +56,27 @@ TEST(stat_cmd, event_modifier) {
       StatCmd()->Run({"-e", "cpu-cycles:u,cpu-cycles:k", "sleep", "1"}));
 }
 
+void RunWorkloadFunction() {
+  while (true) {
+    for (volatile int i = 0; i < 10000; ++i);
+    usleep(1);
+  }
+}
+
 void CreateProcesses(size_t count,
                      std::vector<std::unique_ptr<Workload>>* workloads) {
   workloads->clear();
   // Create workloads run longer than profiling time.
-  auto function = []() {
-    while (true) {
-      for (volatile int i = 0; i < 10000; ++i);
-      usleep(1);
-    }
-  };
   for (size_t i = 0; i < count; ++i) {
-    auto workload = Workload::CreateWorkload(function);
+    std::unique_ptr<Workload> workload;
+    if (GetDefaultAppPackageName().empty()) {
+      workload = Workload::CreateWorkload(RunWorkloadFunction);
+    } else {
+      workload = Workload::CreateWorkload({"run-as", GetDefaultAppPackageName(), "./workload"});
+      workload->SetKillFunction([](pid_t pid) {
+        Workload::RunCmd({"run-as", GetDefaultAppPackageName(), "kill", std::to_string(pid)});
+      });
+    }
     ASSERT_TRUE(workload != nullptr);
     ASSERT_TRUE(workload->Start());
     workloads->push_back(std::move(workload));
@@ -117,7 +127,7 @@ TEST(stat_cmd, auto_generated_summary) {
 
 TEST(stat_cmd, duration_option) {
   ASSERT_TRUE(
-      StatCmd()->Run({"--duration", "1.2", "-p", std::to_string(getpid())}));
+      StatCmd()->Run({"--duration", "1.2", "-p", std::to_string(getpid()), "--in-app"}));
   ASSERT_TRUE(StatCmd()->Run({"--duration", "1", "sleep", "2"}));
 }
 
@@ -159,10 +169,24 @@ TEST(stat_cmd, handle_SIGHUP) {
 TEST(stat_cmd, stop_when_no_more_targets) {
   std::atomic<int> tid(0);
   std::thread thread([&]() {
-    tid = syscall(__NR_gettid);
+    tid = gettid();
     sleep(1);
   });
   thread.detach();
   while (tid == 0);
-  ASSERT_TRUE(StatCmd()->Run({"-t", std::to_string(tid)}));
+  ASSERT_TRUE(StatCmd()->Run({"-t", std::to_string(tid), "--in-app"}));
+}
+
+TEST(stat_cmd, sample_speed_should_be_zero) {
+  EventSelectionSet set(true);
+  ASSERT_TRUE(set.AddEventType("cpu-cycles"));
+  set.AddMonitoredProcesses({getpid()});
+  ASSERT_TRUE(set.OpenEventFiles({-1}));
+  std::vector<EventAttrWithId> attrs = set.GetEventAttrWithId();
+  ASSERT_GT(attrs.size(), 0u);
+  for (auto& attr : attrs) {
+    ASSERT_EQ(attr.attr->sample_period, 0u);
+    ASSERT_EQ(attr.attr->sample_freq, 0u);
+    ASSERT_EQ(attr.attr->freq, 0u);
+  }
 }

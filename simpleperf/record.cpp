@@ -187,6 +187,7 @@ void Record::Dump(size_t indent) const {
 
 uint64_t Record::Timestamp() const { return sample_id.time_data.time; }
 uint32_t Record::Cpu() const { return sample_id.cpu_data.cpu; }
+uint64_t Record::Id() const { return sample_id.id_data.id; }
 
 void Record::UpdateBinary(const char* new_binary) {
   if (own_binary_) {
@@ -380,6 +381,8 @@ SampleRecord::SampleRecord(const perf_event_attr& attr, const char* p)
   p += header_size();
   sample_type = attr.sample_type;
 
+  // Set a default id value to report correctly even if ID is not recorded.
+  id_data.id = 0;
   if (sample_type & PERF_SAMPLE_IDENTIFIER) {
     MoveFromBinaryFormat(id_data, p);
   }
@@ -464,7 +467,8 @@ SampleRecord::SampleRecord(const perf_event_attr& attr, uint64_t id,
   sample_type = attr.sample_type;
   CHECK_EQ(0u, sample_type & ~(PERF_SAMPLE_IP | PERF_SAMPLE_TID
       | PERF_SAMPLE_TIME | PERF_SAMPLE_ID | PERF_SAMPLE_CPU
-      | PERF_SAMPLE_PERIOD | PERF_SAMPLE_CALLCHAIN));
+      | PERF_SAMPLE_PERIOD | PERF_SAMPLE_CALLCHAIN | PERF_SAMPLE_REGS_USER
+      | PERF_SAMPLE_STACK_USER));
   ip_data.ip = ip;
   tid_data.pid = pid;
   tid_data.tid = tid;
@@ -502,6 +506,13 @@ SampleRecord::SampleRecord(const perf_event_attr& attr, uint64_t id,
   if (sample_type & PERF_SAMPLE_CALLCHAIN) {
     size += sizeof(uint64_t) * (ips.size() + 1);
   }
+  if (sample_type & PERF_SAMPLE_REGS_USER) {
+    size += sizeof(uint64_t);
+  }
+  if (sample_type & PERF_SAMPLE_STACK_USER) {
+    size += sizeof(uint64_t);
+  }
+
   SetSize(size);
   char* new_binary = new char[size];
   char* p = new_binary;
@@ -528,6 +539,12 @@ SampleRecord::SampleRecord(const perf_event_attr& attr, uint64_t id,
     MoveToBinaryFormat(callchain_data.ip_nr, p);
     callchain_data.ips = reinterpret_cast<uint64_t*>(p);
     MoveToBinaryFormat(ips.data(), ips.size(), p);
+  }
+  if (sample_type & PERF_SAMPLE_REGS_USER) {
+    MoveToBinaryFormat(regs_user_data.abi, p);
+  }
+  if (sample_type & PERF_SAMPLE_STACK_USER) {
+    MoveToBinaryFormat(stack_user_data.size, p);
   }
   CHECK_EQ(p, new_binary + size);
   UpdateBinary(new_binary);
@@ -575,6 +592,31 @@ void SampleRecord::ReplaceRegAndStackWithCallChain(
   callchain_data.ip_nr += ips.size() + 1;
   p -= sizeof(uint64_t);
   *reinterpret_cast<uint64_t*>(p) = callchain_data.ip_nr;
+}
+
+size_t SampleRecord::ExcludeKernelCallChain() {
+  size_t user_callchain_length = 0u;
+  if (sample_type & PERF_SAMPLE_CALLCHAIN) {
+    size_t i;
+    for (i = 0; i < callchain_data.ip_nr; ++i) {
+      if (callchain_data.ips[i] == PERF_CONTEXT_USER) {
+        i++;
+        if (i < callchain_data.ip_nr) {
+          ip_data.ip = callchain_data.ips[i];
+          if (sample_type & PERF_SAMPLE_IP) {
+            *reinterpret_cast<uint64_t*>(const_cast<char*>(binary_ + header_size())) = ip_data.ip;
+          }
+          header.misc = (header.misc & ~PERF_RECORD_MISC_KERNEL) | PERF_RECORD_MISC_USER;
+          reinterpret_cast<perf_event_header*>(const_cast<char*>(binary_))->misc = header.misc;
+        }
+        break;
+      } else {
+        const_cast<uint64_t*>(callchain_data.ips)[i] = PERF_CONTEXT_USER;
+      }
+    }
+    user_callchain_length = callchain_data.ip_nr - i;
+  }
+  return user_callchain_length;
 }
 
 void SampleRecord::DumpData(size_t indent) const {
@@ -656,6 +698,7 @@ void SampleRecord::DumpData(size_t indent) const {
 
 uint64_t SampleRecord::Timestamp() const { return time_data.time; }
 uint32_t SampleRecord::Cpu() const { return cpu_data.cpu; }
+uint64_t SampleRecord::Id() const { return id_data.id; }
 
 BuildIdRecord::BuildIdRecord(const char* p) : Record(p) {
   const char* end = p + size();

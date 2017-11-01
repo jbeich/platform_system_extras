@@ -33,13 +33,15 @@ struct fs_info {
 			 * end of the partition, else use the size given. */
 	uint32_t block_size;
 	uint32_t blocks_per_group;
+	uint32_t flash_erase_block_size;
+	uint32_t flash_logical_block_size;
 	uint32_t inodes_per_group;
 	uint32_t inode_size;
 	uint32_t inodes;
 	uint32_t journal_blocks;
-	uint16_t feat_ro_compat;
-	uint16_t feat_compat;
-	uint16_t feat_incompat;
+	uint32_t feat_ro_compat;
+	uint32_t feat_compat;
+	uint32_t feat_incompat;
 	uint32_t bg_desc_reserve_blocks;
 	const char *label;
 	uint8_t no_journal;

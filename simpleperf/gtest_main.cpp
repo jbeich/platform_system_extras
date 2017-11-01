@@ -16,6 +16,8 @@
 
 #include <gtest/gtest.h>
 
+#include <libgen.h>
+
 #include <memory>
 
 #include <android-base/file.h>
@@ -24,12 +26,16 @@
 #include <ziparchive/zip_archive.h>
 
 #if defined(__ANDROID__)
-#include <sys/system_properties.h>
+#include <android-base/properties.h>
 #endif
 
+#include "command.h"
+#include "environment.h"
 #include "get_test_data.h"
 #include "read_elf.h"
+#include "test_util.h"
 #include "utils.h"
+#include "workload.h"
 
 static std::string testdata_dir;
 
@@ -97,45 +103,78 @@ static bool ExtractTestDataFromElfSection() {
   return true;
 }
 
-class SavedPerfHardenProperty {
+class ScopedEnablingPerf {
  public:
-  SavedPerfHardenProperty() {
-    __system_property_get("security.perf_harden", prop_value_);
-    if (!android::base::ReadFileToString("/proc/sys/kernel/perf_event_paranoid",
-                                    &paranoid_value_)) {
-      PLOG(ERROR) << "failed to read /proc/sys/kernel/perf_event_paranoid";
-    }
+  ScopedEnablingPerf() {
+    prop_value_ = android::base::GetProperty("security.perf_harden", "");
+    SetProp("0");
   }
 
-  ~SavedPerfHardenProperty() {
-    if (strlen(prop_value_) != 0) {
-      __system_property_set("security.perf_harden", prop_value_);
-      // Sleep one second to wait for security.perf_harden changing
-      // /proc/sys/kernel/perf_event_paranoid.
-      sleep(1);
-      std::string paranoid_value;
-      if (!android::base::ReadFileToString("/proc/sys/kernel/perf_event_paranoid",
-                                           &paranoid_value)) {
-        PLOG(ERROR) << "failed to read /proc/sys/kernel/perf_event_paranoid";
-        return;
-      }
-      if (paranoid_value_ != paranoid_value) {
-        LOG(ERROR) << "failed to restore /proc/sys/kernel/perf_event_paranoid";
-      }
+  ~ScopedEnablingPerf() {
+    if (!prop_value_.empty()) {
+      SetProp(prop_value_);
     }
   }
 
  private:
-  char prop_value_[PROP_VALUE_MAX];
-  std::string paranoid_value_;
+  void SetProp(const std::string& value) {
+    android::base::SetProperty("security.perf_harden", value);
+
+    // Sleep one second to wait for security.perf_harden changing
+    // /proc/sys/kernel/perf_event_paranoid.
+    sleep(1);
+  }
+
+  std::string prop_value_;
+};
+
+class ScopedWorkloadExecutable {
+ public:
+  ScopedWorkloadExecutable() {
+    std::string executable_path;
+    if (!android::base::Readlink("/proc/self/exe", &executable_path)) {
+      PLOG(ERROR) << "ReadLink failed";
+    }
+    Workload::RunCmd({"run-as", GetDefaultAppPackageName(), "cp", executable_path, "workload"});
+  }
+
+  ~ScopedWorkloadExecutable() {
+    Workload::RunCmd({"run-as", GetDefaultAppPackageName(), "rm", "workload"});
+  }
+};
+
+class ScopedTempDir {
+ public:
+  ~ScopedTempDir() {
+    Workload::RunCmd({"rm", "-rf", dir_.path});
+  }
+
+  char* path() {
+    return dir_.path;
+  }
+
+ private:
+  TemporaryDir dir_;
 };
 
 #endif  // defined(__ANDROID__)
 
 int main(int argc, char** argv) {
-  InitLogging(argv, android::base::StderrLogger);
-  testing::InitGoogleTest(&argc, argv);
+  android::base::InitLogging(argv, android::base::StderrLogger);
   android::base::LogSeverity log_severity = android::base::WARNING;
+
+#if defined(RUN_IN_APP_CONTEXT)
+  // When RUN_IN_APP_CONTEXT macro is defined, the tests running record/stat commands will
+  // be forced to run with '--app' option. It will copy the test binary to an Android application's
+  // directory, and use run-as to run the binary as simpleperf executable.
+  if (android::base::Basename(argv[0]) == "simpleperf") {
+    return RunSimpleperfCmd(argc, argv) ? 0 : 1;
+  } else if (android::base::Basename(argv[0]) == "workload") {
+    RunWorkloadFunction();
+  }
+  SetDefaultAppPackageName(RUN_IN_APP_CONTEXT);
+  ScopedWorkloadExecutable scoped_workload_executable;
+#endif
 
   for (int i = 1; i < argc; ++i) {
     if (strcmp(argv[i], "-t") == 0 && i + 1 < argc) {
@@ -157,22 +196,27 @@ int main(int argc, char** argv) {
   android::base::ScopedLogSeverity severity(log_severity);
 
 #if defined(__ANDROID__)
-  std::unique_ptr<TemporaryDir> tmp_dir;
-  if (!::testing::GTEST_FLAG(list_tests) && testdata_dir.empty()) {
-    tmp_dir.reset(new TemporaryDir);
-    testdata_dir = std::string(tmp_dir->path) + "/";
-    if (!ExtractTestDataFromElfSection()) {
-      LOG(ERROR) << "failed to extract test data from elf section";
-      return 1;
-    }
-  }
-
   // A cts test PerfEventParanoidTest.java is testing if
   // /proc/sys/kernel/perf_event_paranoid is 3, so restore perf_harden
   // value after current test to not break that test.
-  SavedPerfHardenProperty saved_perf_harden;
+  ScopedEnablingPerf scoped_enabling_perf;
+
+  std::unique_ptr<ScopedTempDir> tmp_dir;
+  if (!::testing::GTEST_FLAG(list_tests) && testdata_dir.empty()) {
+    testdata_dir = std::string(dirname(argv[0])) + "/testdata";
+    if (!IsDir(testdata_dir)) {
+      tmp_dir.reset(new ScopedTempDir);
+      testdata_dir = std::string(tmp_dir->path()) + "/";
+      if (!ExtractTestDataFromElfSection()) {
+        LOG(ERROR) << "failed to extract test data from elf section";
+        return 1;
+      }
+    }
+  }
+
 #endif
 
+  testing::InitGoogleTest(&argc, argv);
   if (!::testing::GTEST_FLAG(list_tests) && testdata_dir.empty()) {
     printf("Usage: %s -t <testdata_dir>\n", argv[0]);
     return 1;

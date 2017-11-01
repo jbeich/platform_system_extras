@@ -57,8 +57,10 @@ extern int force;
 
 #define EXT4_JNL_BACKUP_BLOCKS 1
 
+#ifndef __cplusplus
 #ifndef min /* already defined by windows.h */
 #define min(a, b) ((a) < (b) ? (a) : (b))
+#endif
 #endif
 
 #define DIV_ROUND_UP(x, y) (((x) + (y) - 1)/(y))
@@ -73,9 +75,13 @@ extern int force;
 #ifdef __LP64__
 typedef unsigned long u64;
 typedef signed long s64;
+
+#define PRIext4u64 "lu"
 #else
 typedef unsigned long long u64;
 typedef signed long long s64;
+
+#define PRIext4u64 PRIu64
 #endif
 typedef unsigned int u32;
 typedef unsigned short int u16;

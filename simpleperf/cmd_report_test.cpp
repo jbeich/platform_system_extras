@@ -45,6 +45,7 @@ class ReportCommandTest : public ::testing::Test {
       const std::string& perf_data,
       const std::vector<std::string>& add_args = std::vector<std::string>()) {
     success = false;
+    TemporaryFile tmp_file;
     std::vector<std::string> args = {
         "-i", perf_data, "--symfs", GetTestDataDir(), "-o", tmp_file.path};
     args.insert(args.end(), add_args.begin(), add_args.end());
@@ -63,7 +64,6 @@ class ReportCommandTest : public ::testing::Test {
     success = true;
   }
 
-  TemporaryFile tmp_file;
   std::string content;
   std::vector<std::string> lines;
   bool success;
@@ -131,10 +131,9 @@ TEST_F(ReportCommandTest, children_option) {
 
 static bool CheckCalleeMode(std::vector<std::string>& lines) {
   bool found = false;
-  for (size_t i = 0; i + 2 < lines.size(); ++i) {
+  for (size_t i = 0; i + 1 < lines.size(); ++i) {
     if (lines[i].find("GlobalFunc") != std::string::npos &&
-        lines[i + 1].find('|') != std::string::npos &&
-        lines[i + 2].find("main") != std::string::npos) {
+        lines[i + 1].find("main") != std::string::npos) {
       found = true;
       break;
     }
@@ -144,10 +143,9 @@ static bool CheckCalleeMode(std::vector<std::string>& lines) {
 
 static bool CheckCallerMode(std::vector<std::string>& lines) {
   bool found = false;
-  for (size_t i = 0; i + 2 < lines.size(); ++i) {
+  for (size_t i = 0; i + 1 < lines.size(); ++i) {
     if (lines[i].find("main") != std::string::npos &&
-        lines[i + 1].find('|') != std::string::npos &&
-        lines[i + 2].find("GlobalFunc") != std::string::npos) {
+        lines[i + 1].find("GlobalFunc") != std::string::npos) {
       found = true;
       break;
     }
@@ -324,8 +322,11 @@ TEST_F(ReportCommandTest, report_symbols_of_nativelib_in_apk) {
 TEST_F(ReportCommandTest, report_more_than_one_event_types) {
   Report(PERF_DATA_WITH_TWO_EVENT_TYPES);
   ASSERT_TRUE(success);
-  ASSERT_NE(content.find("cpu-cycles"), std::string::npos);
-  ASSERT_NE(content.find("cpu-clock"), std::string::npos);
+  size_t pos = 0;
+  ASSERT_NE(pos = content.find("cpu-cycles", pos), std::string::npos);
+  ASSERT_NE(pos = content.find("Samples:", pos), std::string::npos);
+  ASSERT_NE(pos = content.find("cpu-clock", pos), std::string::npos);
+  ASSERT_NE(pos = content.find("Samples:", pos), std::string::npos);
 }
 
 TEST_F(ReportCommandTest, report_kernel_symbol) {
@@ -430,7 +431,7 @@ TEST_F(ReportCommandTest, max_stack_and_percent_limit_option) {
   Report(PERF_DATA_MAX_STACK_AND_PERCENT_LIMIT, {"-g", "--max-stack", "0"});
   ASSERT_TRUE(success);
   ASSERT_EQ(content.find("89.03"), std::string::npos);
-  Report(PERF_DATA_MAX_STACK_AND_PERCENT_LIMIT, {"-g", "--max-stack", "1"});
+  Report(PERF_DATA_MAX_STACK_AND_PERCENT_LIMIT, {"-g", "--max-stack", "2"});
   ASSERT_TRUE(success);
   ASSERT_NE(content.find("89.03"), std::string::npos);
 
@@ -454,6 +455,37 @@ TEST_F(ReportCommandTest, invalid_perf_data) {
   ASSERT_FALSE(ReportCmd()->Run({"-i", GetTestData(INVALID_PERF_DATA)}));
 }
 
+TEST_F(ReportCommandTest, raw_period_option) {
+  Report(PERF_DATA, {"--raw-period"});
+  ASSERT_TRUE(success);
+  ASSERT_NE(content.find("GlobalFunc"), std::string::npos);
+  ASSERT_EQ(content.find('%'), std::string::npos);
+}
+
+TEST_F(ReportCommandTest, full_callgraph_option) {
+  Report(CALLGRAPH_FP_PERF_DATA, {"-g"});
+  ASSERT_TRUE(success);
+  ASSERT_NE(content.find("skipped in brief callgraph mode"), std::string::npos);
+  Report(CALLGRAPH_FP_PERF_DATA, {"-g", "--full-callgraph"});
+  ASSERT_TRUE(success);
+  ASSERT_EQ(content.find("skipped in brief callgraph mode"), std::string::npos);
+}
+
+TEST_F(ReportCommandTest, report_offcpu_time) {
+  Report(PERF_DATA_WITH_TRACE_OFFCPU, {"--children"});
+  ASSERT_TRUE(success);
+  ASSERT_NE(content.find("Time in ns"), std::string::npos);
+  bool found = false;
+  for (auto& line : lines) {
+    if (line.find("SleepFunction") != std::string::npos) {
+      ASSERT_NE(line.find("38.77%"), std::string::npos);
+      found = true;
+      break;
+    }
+  }
+  ASSERT_TRUE(found);
+}
+
 #if defined(__linux__)
 #include "event_selection_set.h"
 
@@ -462,19 +494,16 @@ static std::unique_ptr<Command> RecordCmd() {
 }
 
 TEST_F(ReportCommandTest, dwarf_callgraph) {
-  if (IsDwarfCallChainSamplingSupported()) {
-    std::vector<std::unique_ptr<Workload>> workloads;
-    CreateProcesses(1, &workloads);
-    std::string pid = std::to_string(workloads[0]->GetPid());
-    TemporaryFile tmp_file;
-    ASSERT_TRUE(
-        RecordCmd()->Run({"-p", pid, "-g", "-o", tmp_file.path, "sleep", SLEEP_SEC}));
-    ReportRaw(tmp_file.path, {"-g"});
-    ASSERT_TRUE(success);
-  } else {
-    GTEST_LOG_(INFO) << "This test does nothing as dwarf callchain sampling is "
-                        "not supported on this device.";
-  }
+  OMIT_TEST_ON_NON_NATIVE_ABIS();
+  ASSERT_TRUE(IsDwarfCallChainSamplingSupported());
+  std::vector<std::unique_ptr<Workload>> workloads;
+  CreateProcesses(1, &workloads);
+  std::string pid = std::to_string(workloads[0]->GetPid());
+  TemporaryFile tmp_file;
+  ASSERT_TRUE(
+      RecordCmd()->Run({"-p", pid, "-g", "-o", tmp_file.path, "sleep", SLEEP_SEC}));
+  ReportRaw(tmp_file.path, {"-g"});
+  ASSERT_TRUE(success);
 }
 
 TEST_F(ReportCommandTest, report_dwarf_callgraph_of_nativelib_in_apk) {
@@ -491,6 +520,20 @@ TEST_F(ReportCommandTest, report_dwarf_callgraph_of_nativelib_in_apk) {
     GTEST_LOG_(INFO)
         << "This test does nothing as it is only run on arm64 devices";
   }
+}
+
+TEST_F(ReportCommandTest, exclude_kernel_callchain) {
+  TEST_REQUIRE_HOST_ROOT();
+  OMIT_TEST_ON_NON_NATIVE_ABIS();
+  std::vector<std::unique_ptr<Workload>> workloads;
+  CreateProcesses(1, &workloads);
+  std::string pid = std::to_string(workloads[0]->GetPid());
+  TemporaryFile tmpfile;
+  ASSERT_TRUE(RecordCmd()->Run({"--trace-offcpu", "-e", "cpu-cycles:u", "-p", pid,
+                                "--duration", "2", "-o", tmpfile.path, "-g"}));
+  ReportRaw(tmpfile.path, {"-g"});
+  ASSERT_TRUE(success);
+  ASSERT_EQ(content.find("[kernel.kallsyms]"), std::string::npos);
 }
 
 #endif

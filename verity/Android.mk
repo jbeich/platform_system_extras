@@ -5,10 +5,11 @@ ifeq ($(HOST_OS),linux)
 include $(CLEAR_VARS)
 LOCAL_MODULE := verify_boot_signature
 LOCAL_SRC_FILES := verify_boot_signature.c
+LOCAL_CFLAGS := -Wall -Werror
 LOCAL_MODULE_CLASS := EXECUTABLES
 LOCAL_MODULE_TAGS := optional
 LOCAL_SHARED_LIBRARIES := libcrypto
-LOCAL_C_INCLUDES += external/openssl/include system/core/mkbootimg
+LOCAL_C_INCLUDES += system/core/mkbootimg
 include $(BUILD_HOST_EXECUTABLE)
 
 endif # HOST_OS == linux
@@ -16,6 +17,7 @@ endif # HOST_OS == linux
 include $(CLEAR_VARS)
 LOCAL_MODULE := generate_verity_key
 LOCAL_SRC_FILES := generate_verity_key.c
+LOCAL_CFLAGS := -Wall -Werror
 LOCAL_MODULE_CLASS := EXECUTABLES
 LOCAL_MODULE_TAGS := optional
 LOCAL_SHARED_LIBRARIES := libcrypto_utils libcrypto
@@ -47,12 +49,12 @@ LOCAL_MODULE_TAGS := optional
 LOCAL_SANITIZE := integer
 LOCAL_STATIC_LIBRARIES := \
     libfec \
-    libfec_rs_host \
+    libfec_rs \
     libcrypto_utils \
     libcrypto \
-    libext4_utils_host \
-    libsparse_host \
-    libsquashfs_utils_host \
+    libext4_utils \
+    libsparse \
+    libsquashfs_utils \
     libbase \
     libz
 LOCAL_CFLAGS := -Wall -Werror
@@ -88,7 +90,7 @@ include $(CLEAR_VARS)
 LOCAL_MODULE := build_verity_tree
 LOCAL_SRC_FILES := build_verity_tree.cpp
 LOCAL_MODULE_TAGS := optional
-LOCAL_STATIC_LIBRARIES := libsparse_host libz
+LOCAL_STATIC_LIBRARIES := libsparse libz
 LOCAL_SHARED_LIBRARIES := libcrypto libbase
 LOCAL_CFLAGS += -Wall -Werror
 include $(BUILD_HOST_EXECUTABLE)

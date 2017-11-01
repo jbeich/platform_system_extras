@@ -25,6 +25,10 @@ struct selabel_handle;
 
 int make_ext4fs(const char *filename, long long len,
                 const char *mountpoint, struct selabel_handle *sehnd);
+int make_ext4fs_directory_align(const char *filename, long long len,
+		const char *mountpoint, struct selabel_handle *sehnd,
+		const char *directory, unsigned eraseblk,
+		unsigned logicalblk);
 int make_ext4fs_directory(const char *filename, long long len,
                 const char *mountpoint, struct selabel_handle *sehnd,
                 const char *directory);
@@ -33,6 +37,12 @@ int make_ext4fs_sparse_fd(int fd, long long len,
 int make_ext4fs_sparse_fd_directory(int fd, long long len,
                 const char *mountpoint, struct selabel_handle *sehnd,
                 const char *directory);
+int make_ext4fs_sparse_fd_align(int fd, long long len,
+                const char *mountpoint, struct selabel_handle *sehnd,
+                unsigned eraseblk, unsigned logicalblk);
+int make_ext4fs_sparse_fd_directory_align(int fd, long long len,
+                const char *mountpoint, struct selabel_handle *sehnd,
+                const char *directory, unsigned eraseblk, unsigned logicalblk);
 
 #ifdef __cplusplus
 }

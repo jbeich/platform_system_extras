@@ -28,6 +28,8 @@
 #include "event_attr.h"
 #include "event_fd.h"
 #include "event_type.h"
+#include "InplaceSamplerClient.h"
+#include "IOEventLoop.h"
 #include "perf_event.h"
 #include "record.h"
 
@@ -47,7 +49,19 @@ struct CountersInfo {
   std::vector<CounterInfo> counters;
 };
 
-class IOEventLoop;
+struct SampleSpeed {
+  // There are two ways to set sample speed:
+  // 1. sample_freq: take [sample_freq] samples every second.
+  // 2. sample_period: take one sample every [sample_period] events happen.
+  uint64_t sample_freq;
+  uint64_t sample_period;
+  SampleSpeed(uint64_t freq = 0, uint64_t period = 0) : sample_freq(freq), sample_period(period) {}
+  bool UseFreq() const {
+    // Only use one way to set sample speed.
+    CHECK_NE(sample_freq != 0u, sample_period != 0u);
+    return sample_freq != 0u;
+  }
+};
 
 // EventSelectionSet helps to monitor events. It is used in following steps:
 // 1. Create an EventSelectionSet, and add event types to monitor by calling
@@ -67,25 +81,27 @@ class IOEventLoop;
 class EventSelectionSet {
  public:
   EventSelectionSet(bool for_stat_cmd)
-      : for_stat_cmd_(for_stat_cmd), mmap_pages_(0), loop_(nullptr) {}
+      : for_stat_cmd_(for_stat_cmd), mmap_pages_(0), loop_(new IOEventLoop) {}
 
   bool empty() const { return groups_.empty(); }
 
-  bool AddEventType(const std::string& event_name);
-  bool AddEventGroup(const std::vector<std::string>& event_names);
+  bool AddEventType(const std::string& event_name, size_t* group_id = nullptr);
+  bool AddEventGroup(const std::vector<std::string>& event_names, size_t* group_id = nullptr);
+  std::vector<const EventType*> GetEvents() const;
   std::vector<const EventType*> GetTracepointEvents() const;
+  bool ExcludeKernel() const;
+  bool HasInplaceSampler() const;
   std::vector<EventAttrWithId> GetEventAttrWithId() const;
 
   void SetEnableOnExec(bool enable);
   bool GetEnableOnExec();
   void SampleIdAll();
-  void SetSampleFreq(uint64_t sample_freq);
-  void SetSamplePeriod(uint64_t sample_period);
-  void UseDefaultSampleFreq();
+  void SetSampleSpeed(size_t group_id, const SampleSpeed& speed);
   bool SetBranchSampling(uint64_t branch_sample_type);
   void EnableFpCallChainSampling();
   bool EnableDwarfCallChainSampling(uint32_t dump_stack_size);
   void SetInherit(bool enable);
+  void SetClockId(int clock_id);
   bool NeedKernelSymbol() const;
 
   void AddMonitoredProcesses(const std::set<pid_t>& processes) {
@@ -104,8 +120,8 @@ class EventSelectionSet {
     return !processes_.empty() || !threads_.empty();
   }
 
-  void SetIOEventLoop(IOEventLoop& loop) {
-    loop_ = &loop;
+  IOEventLoop* GetIOEventLoop() {
+    return loop_.get();
   }
 
   bool OpenEventFiles(const std::vector<int>& on_cpus);
@@ -128,6 +144,7 @@ class EventSelectionSet {
     EventTypeAndModifier event_type_modifier;
     perf_event_attr event_attr;
     std::vector<std::unique_ptr<EventFd>> event_fds;
+    std::vector<std::unique_ptr<InplaceSamplerClient>> inplace_samplers;
     // counters for event files closed for cpu hotplug events
     std::vector<CounterInfo> hotplugged_counters;
   };
@@ -136,6 +153,9 @@ class EventSelectionSet {
   bool BuildAndCheckEventSelection(const std::string& event_name,
                                    EventSelection* selection);
   void UnionSampleType();
+  bool IsUserSpaceSamplerGroup(EventSelectionGroup& group);
+  bool OpenUserSpaceSamplersOnGroup(EventSelectionGroup& group,
+                                    const std::map<pid_t, std::set<pid_t>>& process_map);
   bool OpenEventFilesOnGroup(EventSelectionGroup& group, pid_t tid, int cpu,
                              std::string* failed_event_type);
 
@@ -147,6 +167,7 @@ class EventSelectionSet {
   bool HandleCpuOfflineEvent(int cpu);
   bool CreateMappedBufferForCpu(int cpu);
   bool CheckMonitoredTargets();
+  bool HasSampler();
 
   const bool for_stat_cmd_;
 
@@ -155,7 +176,7 @@ class EventSelectionSet {
   std::set<pid_t> threads_;
   size_t mmap_pages_;
 
-  IOEventLoop* loop_;
+  std::unique_ptr<IOEventLoop> loop_;
   std::function<bool(Record*)> record_callback_;
 
   std::set<int> monitored_cpus_;
@@ -180,5 +201,7 @@ class EventSelectionSet {
 
 bool IsBranchSamplingSupported();
 bool IsDwarfCallChainSamplingSupported();
+bool IsDumpingRegsForTracepointEventsSupported();
+bool IsSettingClockIdSupported();
 
 #endif  // SIMPLE_PERF_EVENT_SELECTION_SET_H_

@@ -15,6 +15,8 @@ option java_package = "com.android.tools.profiler.proto";
 option java_outer_classname = "SimpleperfReport";
 
 message Sample {
+  // Wall clock time for current sample.
+  // By default, it is perf clock used in kernel.
   optional uint64 time = 1;
   optional int32 thread_id = 2;
 
@@ -32,6 +34,23 @@ message Sample {
   }
 
   repeated CallChainEntry callchain = 3;
+
+  // Simpleperf generates one sample whenever a specified amount of events happen
+  // while running a monitored thread. So each sample belongs to one event type.
+  // Event type can be cpu-cycles, cpu-clock, sched:sched_switch or other types.
+  // By using '-e' option, we can ask simpleperf to record samples for one or more
+  // event types.
+  // Each event type generates samples independently. But recording more event types
+  // will cost more cpu time generating samples, which may affect the monitored threads
+  // and sample lost rate.
+  // event_count field shows the count of the events (belong to the sample's event type)
+  // that have happened since last sample (belong to the sample's event type) for the
+  // same thread. However, if there are lost samples between current sample and previous
+  // sample, the event_count is the count of events from the last lost sample.
+  optional uint64 event_count = 4;
+
+  // An index in meta_info.event_type, shows which event type current sample belongs to.
+  optional uint32 event_type_id = 5;
 }
 
 message LostSituation {
@@ -50,10 +69,22 @@ message File {
   repeated string symbol = 3;
 }
 
+message Thread {
+  optional uint32 thread_id = 1;
+  optional uint32 process_id = 2;
+  optional string thread_name = 3;
+}
+
+message MetaInfo {
+  repeated string event_type = 1;
+}
+
 message Record {
   oneof record_data {
     Sample sample = 1;
     LostSituation lost = 2;
     File file = 3;
+    Thread thread = 4;
+    MetaInfo meta_info = 5;
   }
 }

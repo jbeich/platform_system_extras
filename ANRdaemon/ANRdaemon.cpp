@@ -36,7 +36,6 @@
 #include <ctime>
 #include <cutils/properties.h>
 #include <signal.h>
-#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -134,7 +133,7 @@ static void get_cpu_stat(cpu_stat_t *cpu) {
 
     if ((fp = fopen("/proc/stat", "r")) == NULL) {
         err = true;
-        sprintf(err_msg, "can't read from /proc/stat with errno %d", errno);
+        snprintf(err_msg, sizeof(err_msg), "can't read from /proc/stat with errno %d", errno);
     } else {
         if (fscanf(fp, params, &cpu->utime, &cpu->ntime,
                 &cpu->stime, &cpu->itime, &cpu->iowtime, &cpu->irqtime,
@@ -144,6 +143,7 @@ static void get_cpu_stat(cpu_stat_t *cpu) {
              * is_heavy_loaded() will return false.
              */
             ALOGE("Error in getting cpu status. Skipping this check.");
+            fclose(fp);
             return;
         }
 
@@ -157,7 +157,7 @@ static void get_cpu_stat(cpu_stat_t *cpu) {
 /*
  * Calculate cpu usage in the past interval.
  * If tracing is on, increase the idle threshold by 1.00% so that we do not
- * turn on and off tracing frequently whe the cpu load is right close to
+ * turn on and off tracing frequently when the cpu load is right close to
  * threshold.
  */
 static bool is_heavy_load(void) {
@@ -192,7 +192,7 @@ static int dfs_enable(bool enable, const char* path) {
     int fd = open(path, O_WRONLY);
     if (fd == -1) {
         err = true;
-        sprintf(err_msg, "Can't open %s. Error: %d", path, errno);
+        snprintf(err_msg, sizeof(err_msg), "Can't open %s. Error: %d", path, errno);
         return -1;
     }
     const char* control = (enable?"1":"0");
@@ -205,7 +205,7 @@ static int dfs_enable(bool enable, const char* path) {
         }
 
         err = true;
-        sprintf(err_msg, "Error %d in writing to %s.", errno, path);
+        snprintf(err_msg, sizeof(err_msg), "Error %d in writing to %s.", errno, path);
     }
     close(fd);
     return (err?-1:0);
@@ -216,16 +216,16 @@ static int dfs_enable(bool enable, const char* path) {
  */
 static void dfs_set_property(uint64_t mtag, const char* mapp, bool enable) {
     char buf[64];
-    snprintf(buf, 64, "%#" PRIx64, mtag);
+    snprintf(buf, sizeof(buf), "%#" PRIx64, mtag);
     if (property_set(dfs_tags_property, buf) < 0) {
         err = true;
-        sprintf(err_msg, "Failed to set debug tags system properties.");
+        snprintf(err_msg, sizeof(err_msg), "Failed to set debug tags system properties.");
     }
 
     if (strlen(mapp) > 0
             && property_set(dfs_apps_property, mapp) < 0) {
         err = true;
-        sprintf(err_msg, "Failed to set debug applications.");
+        snprintf(err_msg, sizeof(err_msg), "Failed to set debug applications.");
     }
 
     if (log_sched) {
@@ -403,13 +403,13 @@ static int set_tracing_buffer_size(void) {
     int fd = open(dfs_buffer_size_path, O_WRONLY);
     if (fd == -1) {
         err = true;
-        sprintf(err_msg, "Can't open atrace buffer size file under /d/tracing.");
+        snprintf(err_msg, sizeof(err_msg), "Can't open atrace buffer size file under /d/tracing.");
         return -1;
     }
     ssize_t len = strlen(buf_size_kb);
     if (write(fd, buf_size_kb, len) != len) {
         err = true;
-        sprintf(err_msg, "Error in writing to atrace buffer size file.");
+        snprintf(err_msg, sizeof(err_msg), "Error in writing to atrace buffer size file.");
     }
     close(fd);
     return (err?-1:0);

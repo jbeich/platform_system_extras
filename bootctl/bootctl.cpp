@@ -52,13 +52,10 @@ static void usage(FILE* where, int /* argc */, char* argv[])
 }
 
 static int do_hal_info(const sp<IBootControl> module) {
-    module->interfaceChain([&](const auto& chain) {
-        if (chain.size() == 0) {
-            return; // error, can't dump info
-        }
+    module->interfaceDescriptor([&](const auto& descriptor) {
         fprintf(stdout,
                 "HAL Version: %s\n",
-                chain[0].c_str());
+                descriptor.c_str());
     });
     return EX_OK;
 }
@@ -83,7 +80,7 @@ static std::function<void(CommandResult)> generate_callback(CommandResult *crp) 
     };
 }
 
-static int handle_return(Return<void> ret, CommandResult cr, const char* errStr) {
+static int handle_return(const Return<void> &ret, CommandResult cr, const char* errStr) {
     if (!ret.isOk()) {
         fprintf(stderr, errStr, ret.description().c_str());
         return EX_SOFTWARE;
@@ -117,7 +114,7 @@ static int do_set_slot_as_unbootable(sp<IBootControl> module,
     return handle_return(ret, cr, "Error setting slot as unbootable: %s\n");
 }
 
-static int handle_return(Return<BoolResult> ret, const char* errStr) {
+static int handle_return(const Return<BoolResult> &ret, const char* errStr) {
     if (!ret.isOk()) {
         fprintf(stderr, errStr, ret.description().c_str());
         return EX_SOFTWARE;
@@ -177,14 +174,13 @@ static uint32_t parse_slot(int pos, int argc, char *argv[])
 int main(int argc, char *argv[])
 {
     sp<IBootControl> module;
-    int ret;
 
     if (argc < 2) {
         usage(stderr, argc, argv);
         return EX_USAGE;
     }
 
-    module = IBootControl::getService("bootctrl");
+    module = IBootControl::getService();
     if (module == NULL) {
         fprintf(stderr, "Error getting bootctrl module.\n");
         return EX_SOFTWARE;

@@ -84,6 +84,7 @@
 
 #endif
 
+#undef MAX_PATH
 #define MAX_PATH 4096
 #define MAX_BLK_MAPPING_STR 1000
 
@@ -157,7 +158,7 @@ static u32 build_directory_structure(const char *full_path, const char *dir_path
 	struct dirent **namelist = NULL;
 	struct stat stat;
 	int ret;
-	int i;
+	int i, j;
 	u32 inode;
 	u32 entry_inode;
 	u32 dirs = 0;
@@ -194,21 +195,21 @@ static u32 build_directory_structure(const char *full_path, const char *dir_path
 	if (dentries == NULL)
 		critical_error_errno("malloc");
 
-	for (i = 0; i < entries; i++) {
-		dentries[i].filename = strdup(namelist[i]->d_name);
+	for (i = j = 0; i < entries; i++, j++) {
+		dentries[i].filename = strdup(namelist[j]->d_name);
 		if (dentries[i].filename == NULL)
 			critical_error_errno("strdup");
 
-		asprintf(&dentries[i].path, "%s%s", dir_path, namelist[i]->d_name);
-		asprintf(&dentries[i].full_path, "%s%s", full_path, namelist[i]->d_name);
+		asprintf(&dentries[i].path, "%s%s", dir_path, namelist[j]->d_name);
+		asprintf(&dentries[i].full_path, "%s%s", full_path, namelist[j]->d_name);
 
-		free(namelist[i]);
+		free(namelist[j]);
 
 		ret = lstat(dentries[i].full_path, &stat);
 		if (ret < 0) {
 			error_errno("lstat");
+			free(dentries[i].filename);
 			i--;
-			entries--;
 			continue;
 		}
 
@@ -265,10 +266,11 @@ static u32 build_directory_structure(const char *full_path, const char *dir_path
 			readlink(dentries[i].full_path, dentries[i].link, info.block_size - 1);
 		} else {
 			error("unknown file type on %s", dentries[i].path);
+			free(dentries[i].filename);
 			i--;
-			entries--;
 		}
 	}
+	entries -= j - i;
 	free(namelist);
 
 	if (needs_lost_and_found) {
@@ -426,15 +428,32 @@ void reset_ext4fs_info() {
 int make_ext4fs_sparse_fd(int fd, long long len,
 				const char *mountpoint, struct selabel_handle *sehnd)
 {
-	return make_ext4fs_sparse_fd_directory(fd, len, mountpoint, sehnd, NULL);
+	return make_ext4fs_sparse_fd_align(fd, len, mountpoint, sehnd, 0, 0);
+}
+
+int make_ext4fs_sparse_fd_align(int fd, long long len,
+				const char *mountpoint, struct selabel_handle *sehnd,
+				unsigned eraseblk, unsigned logicalblk)
+{
+	return make_ext4fs_sparse_fd_directory_align(fd, len, mountpoint, sehnd, NULL,
+								eraseblk, logicalblk);
 }
 
 int make_ext4fs_sparse_fd_directory(int fd, long long len,
 				const char *mountpoint, struct selabel_handle *sehnd,
 				const char *directory)
 {
+	return make_ext4fs_sparse_fd_directory_align(fd, len, mountpoint, sehnd, directory, 0, 0);
+}
+
+int make_ext4fs_sparse_fd_directory_align(int fd, long long len,
+				const char *mountpoint, struct selabel_handle *sehnd,
+				const char *directory, unsigned eraseblk, unsigned logicalblk)
+{
 	reset_ext4fs_info();
 	info.len = len;
+	info.flash_erase_block_size = eraseblk;
+	info.flash_logical_block_size = logicalblk;
 
 	return make_ext4fs_internal(fd, directory, NULL, mountpoint, NULL,
 								0, 1, 0, 0, 0,
@@ -451,11 +470,21 @@ int make_ext4fs_directory(const char *filename, long long len,
 						  const char *mountpoint, struct selabel_handle *sehnd,
 						  const char *directory)
 {
+	return make_ext4fs_directory_align(filename, len, mountpoint, sehnd, directory, 0, 0);
+}
+
+int make_ext4fs_directory_align(const char *filename, long long len,
+						  const char *mountpoint, struct selabel_handle *sehnd,
+						  const char *directory, unsigned eraseblk,
+						  unsigned logicalblk)
+{
 	int fd;
 	int status;
 
 	reset_ext4fs_info();
 	info.len = len;
+	info.flash_erase_block_size = eraseblk;
+	info.flash_logical_block_size = logicalblk;
 
 	fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC | O_BINARY, 0644);
 	if (fd < 0) {
@@ -726,16 +755,17 @@ int make_ext4fs_internal(int fd, const char *_directory, const char *_target_out
 	if (info.len <= 0)
 		info.len = get_file_size(fd);
 
-	if (info.len <= 0) {
-		fprintf(stderr, "Need size of filesystem\n");
-		return EXIT_FAILURE;
-	}
-
 	if (info.block_size <= 0)
 		info.block_size = compute_block_size();
 
 	/* Round down the filesystem length to be a multiple of the block size */
 	info.len &= ~((u64)info.block_size - 1);
+
+	if (info.len <= 0) {
+		fprintf(stderr, "filesystem size too small\n");
+		free(mountpoint);
+		return EXIT_FAILURE;
+	}
 
 	if (info.journal_blocks == 0)
 		info.journal_blocks = compute_journal_blocks();
@@ -786,7 +816,7 @@ int make_ext4fs_internal(int fd, const char *_directory, const char *_target_out
 
 	ext4_create_fs_aux_info();
 
-	printf("    Blocks: %"PRIu64"\n", aux_info.len_blocks);
+	printf("    Blocks: %"PRIext4u64"\n", aux_info.len_blocks);
 	printf("    Block groups: %d\n", aux_info.groups);
 	printf("    Reserved block group size: %d\n", info.bg_desc_reserve_blocks);
 

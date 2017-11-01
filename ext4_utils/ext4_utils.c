@@ -222,6 +222,9 @@ void ext4_create_fs_aux_info()
 	if (ext4_bg_has_super_block(aux_info.groups - 1))
 		last_header_size += 1 + aux_info.bg_desc_blocks +
 			info.bg_desc_reserve_blocks;
+	if (aux_info.groups <= 1 && last_group_size < last_header_size) {
+		critical_error("filesystem size too small");
+	}
 	if (last_group_size > 0 && last_group_size < last_header_size) {
 		aux_info.groups--;
 		aux_info.len_blocks -= last_group_size;
@@ -352,10 +355,14 @@ void ext4_fill_in_sb(int real_uuid)
 	sb->s_want_extra_isize = sizeof(struct ext4_inode) -
 		EXT4_GOOD_OLD_INODE_SIZE;
 	sb->s_flags = 2;
-	sb->s_raid_stride = 0;
+	sb->s_raid_stride = info.flash_logical_block_size / info.block_size;
+	// stride should be the max of 8kb and logical block size
+	if (info.flash_logical_block_size != 0 && info.flash_logical_block_size < 8192) {
+		sb->s_raid_stride = 8192 / info.block_size;
+	}
 	sb->s_mmp_interval = 0;
 	sb->s_mmp_block = 0;
-	sb->s_raid_stripe_width = 0;
+	sb->s_raid_stripe_width = info.flash_erase_block_size / info.block_size;
 	sb->s_log_groups_per_flex = 0;
 	sb->s_kbytes_written = 0;
 
@@ -625,7 +632,7 @@ int read_ext(int fd, int verbose)
 		printf("    Inodes per group: %d\n", info.inodes_per_group);
 		printf("    Inode size: %d\n", info.inode_size);
 		printf("    Label: %s\n", info.label);
-		printf("    Blocks: %"PRIu64"\n", aux_info.len_blocks);
+		printf("    Blocks: %"PRIext4u64"\n", aux_info.len_blocks);
 		printf("    Block groups: %d\n", aux_info.groups);
 		printf("    Reserved block group size: %d\n", info.bg_desc_reserve_blocks);
 		printf("    Used %d/%d inodes and %d/%d blocks\n",

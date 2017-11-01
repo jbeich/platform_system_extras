@@ -20,6 +20,11 @@
 #include <sys/types.h>
 #include <time.h>
 
+#if defined(__linux__)
+#include <sys/syscall.h>
+#include <unistd.h>
+#endif
+
 #include <functional>
 #include <set>
 #include <string>
@@ -64,8 +69,10 @@ bool GetThreadName(pid_t tid, std::string* name);
 bool GetValidThreadsFromThreadString(const std::string& tid_str, std::set<pid_t>* tid_set);
 
 bool CheckPerfEventLimit();
-bool CheckSampleFrequency(uint64_t sample_freq);
+bool GetMaxSampleFrequency(uint64_t* max_sample_freq);
+uint64_t AdjustSampleFrequency(uint64_t sample_freq);
 bool CheckKernelSymbolAddresses();
+bool CanRecordRawData();
 
 #if defined(__linux__)
 static inline uint64_t GetSystemClock() {
@@ -74,8 +81,24 @@ static inline uint64_t GetSystemClock() {
   clock_gettime(CLOCK_MONOTONIC, &ts);
   return ts.tv_sec * 1000000000ULL + ts.tv_nsec;
 }
+
+#if !defined(__ANDROID__)
+static inline int gettid() {
+  return syscall(__NR_gettid);
+}
+#endif
 #endif
 
 ArchType GetMachineArch();
+void PrepareVdsoFile();
+
+std::set<pid_t> WaitForAppProcesses(const std::string& package_name);
+bool RunInAppContext(const std::string& app_package_name, const std::string& cmd,
+                     const std::vector<std::string>& args, size_t workload_args_size,
+                     const std::string& output_filepath, bool need_tracepoint_events);
+
+// Below two functions are only used in cts tests, to force stat/record cmd to run in app's context.
+void SetDefaultAppPackageName(const std::string& package_name);
+const std::string& GetDefaultAppPackageName();
 
 #endif  // SIMPLE_PERF_ENVIRONMENT_H_

@@ -22,14 +22,24 @@
 #include <string>
 #include <vector>
 
+// A uint32_t value far from 0 is picked, so it is unlikely to conflict with further
+// PERF_TYPE_* events.
+static constexpr uint32_t SIMPLEPERF_TYPE_USER_SPACE_SAMPLERS = 32768;
+
+enum {
+  SIMPLEPERF_CONFIG_INPLACE_SAMPLER,
+};
+
 // EventType represents one type of event, like cpu_cycle_event, cache_misses_event.
 // The user knows one event type by its name, and the kernel knows one event type by its
 // (type, config) pair. EventType connects the two representations, and tells the user if
 // the event type is supported by the kernel.
 
 struct EventType {
-  EventType(const std::string& name, uint32_t type, uint64_t config)
-      : name(name), type(type), config(config) {
+  EventType(const std::string& name, uint32_t type, uint64_t config,
+            const std::string& description, const std::string& limited_arch)
+      : name(name), type(type), config(config), description(description),
+        limited_arch(limited_arch) {
   }
 
   EventType() : type(0), config(0) {
@@ -38,10 +48,27 @@ struct EventType {
   std::string name;
   uint32_t type;
   uint64_t config;
+  std::string description;
+  std::string limited_arch;
+};
+
+bool SetTracepointEventsFilePath(const std::string& filepath);
+std::string GetTracepointEvents();
+
+// Used to temporarily change event types returned by GetAllEventTypes().
+class ScopedEventTypes {
+ public:
+  static std::string BuildString(const std::vector<const EventType*>& event_types);
+
+  ScopedEventTypes(const std::string& event_type_str);
+  ~ScopedEventTypes();
+
+ private:
+  std::vector<EventType> saved_event_types_;
 };
 
 const std::vector<EventType>& GetAllEventTypes();
-const EventType* FindEventTypeByName(const std::string& name);
+const EventType* FindEventTypeByName(const std::string& name, bool report_error = true);
 
 struct EventTypeAndModifier {
   std::string name;

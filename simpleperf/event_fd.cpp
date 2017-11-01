@@ -32,6 +32,7 @@
 #include <android-base/logging.h>
 #include <android-base/stringprintf.h>
 
+#include "environment.h"
 #include "event_attr.h"
 #include "event_type.h"
 #include "perf_event.h"
@@ -51,7 +52,19 @@ std::unique_ptr<EventFd> EventFd::OpenEventFile(const perf_event_attr& attr,
   if (group_event_fd != nullptr) {
     group_fd = group_event_fd->perf_event_fd_;
   }
-  int perf_event_fd = perf_event_open(attr, tid, cpu, group_fd, 0);
+  perf_event_attr real_attr = attr;
+  if (attr.freq) {
+    uint64_t max_sample_freq;
+    if (GetMaxSampleFrequency(&max_sample_freq) && max_sample_freq < attr.sample_freq) {
+      static bool warned = false;
+      if (!warned) {
+        warned = true;
+        LOG(INFO) << "Adjust sample freq to max allowed sample freq " << max_sample_freq;
+      }
+      real_attr.sample_freq = max_sample_freq;
+    }
+  }
+  int perf_event_fd = perf_event_open(real_attr, tid, cpu, group_fd, 0);
   if (perf_event_fd == -1) {
     if (report_error) {
       PLOG(ERROR) << "open perf_event_file (event " << event_name << ", tid "
@@ -77,7 +90,7 @@ std::unique_ptr<EventFd> EventFd::OpenEventFile(const perf_event_attr& attr,
     return nullptr;
   }
   return std::unique_ptr<EventFd>(
-      new EventFd(attr, perf_event_fd, event_name, tid, cpu));
+      new EventFd(real_attr, perf_event_fd, event_name, tid, cpu));
 }
 
 EventFd::~EventFd() {
@@ -94,7 +107,7 @@ std::string EventFd::Name() const {
 uint64_t EventFd::Id() const {
   if (id_ == 0) {
     PerfCounter counter;
-    if (ReadCounter(&counter)) {
+    if (InnerReadCounter(&counter)) {
       id_ = counter.id;
     }
   }
@@ -110,23 +123,30 @@ bool EventFd::EnableEvent() {
   return true;
 }
 
-bool EventFd::ReadCounter(PerfCounter* counter) const {
+bool EventFd::InnerReadCounter(PerfCounter* counter) const {
   CHECK(counter != nullptr);
-  uint64_t pre_counter = counter->value;
   if (!android::base::ReadFully(perf_event_fd_, counter, sizeof(*counter))) {
     PLOG(ERROR) << "ReadCounter from " << Name() << " failed";
+    return false;
+  }
+  return true;
+}
+
+bool EventFd::ReadCounter(PerfCounter* counter) {
+  if (!InnerReadCounter(counter)) {
     return false;
   }
   // Trace is always available to systrace if enabled
   if (tid_ > 0) {
     ATRACE_INT64(android::base::StringPrintf(
                    "%s_tid%d_cpu%d", event_name_.c_str(), tid_,
-                   cpu_).c_str(), counter->value - pre_counter);
+                   cpu_).c_str(), counter->value - last_counter_value_);
   } else {
     ATRACE_INT64(android::base::StringPrintf(
                    "%s_cpu%d", event_name_.c_str(),
-                   cpu_).c_str(), counter->value - pre_counter);
+                   cpu_).c_str(), counter->value - last_counter_value_);
   }
+  last_counter_value_ = counter->value;
   return true;
 }
 
@@ -260,7 +280,12 @@ bool EventFd::StartPolling(IOEventLoop& loop,
 
 bool EventFd::StopPolling() { return IOEventLoop::DelEvent(ioevent_ref_); }
 
-bool IsEventAttrSupportedByKernel(perf_event_attr attr) {
-  auto event_fd = EventFd::OpenEventFile(attr, getpid(), -1, nullptr, false);
+bool IsEventAttrSupported(const perf_event_attr& attr) {
+  if (attr.type == SIMPLEPERF_TYPE_USER_SPACE_SAMPLERS &&
+      attr.config == SIMPLEPERF_CONFIG_INPLACE_SAMPLER) {
+    // User space samplers don't need kernel support.
+    return true;
+  }
+  std::unique_ptr<EventFd> event_fd = EventFd::OpenEventFile(attr, getpid(), -1, nullptr, false);
   return event_fd != nullptr;
 }

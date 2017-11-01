@@ -17,10 +17,9 @@
 #include <gtest/gtest.h>
 
 #include <sys/stat.h>
-#include <sys/syscall.h>
 #include <unistd.h>
 #if defined(__BIONIC__)
-#include <sys/system_properties.h>
+#include <android-base/properties.h>
 #endif
 
 #include <atomic>
@@ -32,6 +31,7 @@
 #include <android-base/logging.h>
 #include <android-base/stringprintf.h>
 
+#include "environment.h"
 #include "event_attr.h"
 #include "event_fd.h"
 #include "event_type.h"
@@ -59,25 +59,22 @@ class ScopedMpdecisionKiller {
 
  private:
   bool IsMpdecisionRunning() {
-    char value[PROP_VALUE_MAX];
-    int len = __system_property_get("init.svc.mpdecision", value);
-    if (len == 0 || (len > 0 && strstr(value, "stopped") != nullptr)) {
+    std::string value = android::base::GetProperty("init.svc.mpdecision", "");
+    if (value.empty() || value.find("stopped") != std::string::npos) {
       return false;
     }
     return true;
   }
 
   void DisableMpdecision() {
-    int ret = __system_property_set("ctl.stop", "mpdecision");
-    CHECK_EQ(0, ret);
+    CHECK(android::base::SetProperty("ctl.stop", "mpdecision"));
     // Need to wait until mpdecision is actually stopped.
     std::this_thread::sleep_for(std::chrono::milliseconds(500));
     CHECK(!IsMpdecisionRunning());
   }
 
   void EnableMpdecision() {
-    int ret = __system_property_set("ctl.start", "mpdecision");
-    CHECK_EQ(0, ret);
+    CHECK(android::base::SetProperty("ctl.start", "mpdecision"));
     std::this_thread::sleep_for(std::chrono::milliseconds(500));
     CHECK(IsMpdecisionRunning());
   }
@@ -199,13 +196,24 @@ bool FindAHotpluggableCpu(int* hotpluggable_cpu) {
 struct CpuToggleThreadArg {
   int toggle_cpu;
   std::atomic<bool> end_flag;
+  std::atomic<bool> cpu_hotplug_failed;
+
+  CpuToggleThreadArg(int cpu)
+      : toggle_cpu(cpu), end_flag(false), cpu_hotplug_failed(false) {
+  }
 };
 
 static void CpuToggleThread(CpuToggleThreadArg* arg) {
   while (!arg->end_flag) {
-    CHECK(SetCpuOnline(arg->toggle_cpu, true));
+    if (!SetCpuOnline(arg->toggle_cpu, true)) {
+      arg->cpu_hotplug_failed = true;
+      break;
+    }
     std::this_thread::sleep_for(cpu_hotplug_interval);
-    CHECK(SetCpuOnline(arg->toggle_cpu, false));
+    if (!SetCpuOnline(arg->toggle_cpu, false)) {
+      arg->cpu_hotplug_failed = true;
+      break;
+    }
     std::this_thread::sleep_for(cpu_hotplug_interval);
   }
 }
@@ -223,9 +231,7 @@ TEST(cpu_offline, offline_while_recording) {
   if (!FindAHotpluggableCpu(&test_cpu)) {
     return;
   }
-  CpuToggleThreadArg cpu_toggle_arg;
-  cpu_toggle_arg.toggle_cpu = test_cpu;
-  cpu_toggle_arg.end_flag = false;
+  CpuToggleThreadArg cpu_toggle_arg(test_cpu);
   std::thread cpu_toggle_thread(CpuToggleThread, &cpu_toggle_arg);
 
   std::unique_ptr<EventTypeAndModifier> event_type_modifier = ParseEventType("cpu-cycles");
@@ -240,7 +246,7 @@ TEST(cpu_offline, offline_while_recording) {
   auto report_step = std::chrono::seconds(15);
   size_t iterations = 0;
 
-  while (cur_time < end_time) {
+  while (cur_time < end_time && !cpu_toggle_arg.cpu_hotplug_failed) {
     if (cur_time + report_step < std::chrono::steady_clock::now()) {
       // Report test time.
       auto diff = std::chrono::duration_cast<std::chrono::seconds>(
@@ -261,6 +267,9 @@ TEST(cpu_offline, offline_while_recording) {
       GTEST_LOG_(INFO) << "Test offline while recording for " << iterations << " times.";
     }
   }
+  if (cpu_toggle_arg.cpu_hotplug_failed) {
+    GTEST_LOG_(INFO) << "Test ends because of cpu hotplug failure.";
+  }
   cpu_toggle_arg.end_flag = true;
   cpu_toggle_thread.join();
 }
@@ -278,9 +287,7 @@ TEST(cpu_offline, offline_while_ioctl_enable) {
   if (!FindAHotpluggableCpu(&test_cpu)) {
     return;
   }
-  CpuToggleThreadArg cpu_toggle_arg;
-  cpu_toggle_arg.toggle_cpu = test_cpu;
-  cpu_toggle_arg.end_flag = false;
+  CpuToggleThreadArg cpu_toggle_arg(test_cpu);
   std::thread cpu_toggle_thread(CpuToggleThread, &cpu_toggle_arg);
 
   std::unique_ptr<EventTypeAndModifier> event_type_modifier = ParseEventType("cpu-cycles");
@@ -295,7 +302,7 @@ TEST(cpu_offline, offline_while_ioctl_enable) {
   auto report_step = std::chrono::seconds(15);
   size_t iterations = 0;
 
-  while (cur_time < end_time) {
+  while (cur_time < end_time && !cpu_toggle_arg.cpu_hotplug_failed) {
     if (cur_time + report_step < std::chrono::steady_clock::now()) {
       // Report test time.
       auto diff = std::chrono::duration_cast<std::chrono::seconds>(
@@ -319,6 +326,9 @@ TEST(cpu_offline, offline_while_ioctl_enable) {
       GTEST_LOG_(INFO) << "Test offline while ioctl(PERF_EVENT_IOC_ENABLE) for " << iterations << " times.";
     }
   }
+  if (cpu_toggle_arg.cpu_hotplug_failed) {
+    GTEST_LOG_(INFO) << "Test ends because of cpu hotplug failure.";
+  }
   cpu_toggle_arg.end_flag = true;
   cpu_toggle_thread.join();
 }
@@ -330,7 +340,7 @@ struct CpuSpinThreadArg {
 };
 
 static void CpuSpinThread(CpuSpinThreadArg* arg) {
-  arg->tid = syscall(__NR_gettid);
+  arg->tid = gettid();
   while (!arg->end_flag) {
     cpu_set_t mask;
     CPU_ZERO(&mask);
@@ -350,9 +360,7 @@ TEST(cpu_offline, offline_while_user_process_profiling) {
   if (!FindAHotpluggableCpu(&test_cpu)) {
     return;
   }
-  CpuToggleThreadArg cpu_toggle_arg;
-  cpu_toggle_arg.toggle_cpu = test_cpu;
-  cpu_toggle_arg.end_flag = false;
+  CpuToggleThreadArg cpu_toggle_arg(test_cpu);
   std::thread cpu_toggle_thread(CpuToggleThread, &cpu_toggle_arg);
 
   // Start cpu spinner.
@@ -378,7 +386,7 @@ TEST(cpu_offline, offline_while_user_process_profiling) {
   auto report_step = std::chrono::seconds(15);
   size_t iterations = 0;
 
-  while (cur_time < end_time) {
+  while (cur_time < end_time && !cpu_toggle_arg.cpu_hotplug_failed) {
     if (cur_time + report_step < std::chrono::steady_clock::now()) {
       auto diff = std::chrono::duration_cast<std::chrono::seconds>(
           std::chrono::steady_clock::now() - start_time);
@@ -403,13 +411,17 @@ TEST(cpu_offline, offline_while_user_process_profiling) {
       GTEST_LOG_(INFO) << "Test offline while user process profiling for " << iterations << " times.";
     }
   }
+  if (cpu_toggle_arg.cpu_hotplug_failed) {
+    GTEST_LOG_(INFO) << "Test ends because of cpu hotplug failure.";
+  }
   cpu_toggle_arg.end_flag = true;
   cpu_toggle_thread.join();
   cpu_spin_arg.end_flag = true;
   cpu_spin_thread.join();
   // Check if the cpu-cycle event is still available on test_cpu.
-  ASSERT_TRUE(SetCpuOnline(test_cpu, true));
-  ASSERT_TRUE(EventFd::OpenEventFile(attr, -1, test_cpu, nullptr, true) != nullptr);
+  if (SetCpuOnline(test_cpu, true)) {
+    ASSERT_TRUE(EventFd::OpenEventFile(attr, -1, test_cpu, nullptr, true) != nullptr);
+  }
 }
 
 // http://b/19863147.
@@ -433,10 +445,14 @@ TEST(cpu_offline, offline_while_recording_on_another_cpu) {
   const size_t TEST_ITERATION_COUNT = 10u;
   for (size_t i = 0; i < TEST_ITERATION_COUNT; ++i) {
     int record_cpu = 0;
-    ASSERT_TRUE(SetCpuOnline(test_cpu, true));
+    if (!SetCpuOnline(test_cpu, true)) {
+      break;
+    }
     std::unique_ptr<EventFd> event_fd = EventFd::OpenEventFile(attr, getpid(), record_cpu, nullptr);
     ASSERT_TRUE(event_fd != nullptr);
-    ASSERT_TRUE(SetCpuOnline(test_cpu, false));
+    if (!SetCpuOnline(test_cpu, false)) {
+      break;
+    }
     event_fd = nullptr;
     event_fd = EventFd::OpenEventFile(attr, getpid(), record_cpu, nullptr);
     ASSERT_TRUE(event_fd != nullptr);
@@ -473,7 +489,7 @@ int main(int argc, char** argv) {
       verbose_mode = true;
     }
   }
-  InitLogging(argv, android::base::StderrLogger);
+  android::base::InitLogging(argv, android::base::StderrLogger);
   testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
 }

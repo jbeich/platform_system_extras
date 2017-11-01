@@ -31,7 +31,7 @@
 #include <algorithm>
 #include <vector>
 
-#include <android/log.h>
+#include <log/log.h>
 
 FileData::FileData(char *filename, char *buffer, size_t buffer_len)
     : data_(buffer), max_(buffer_len), cur_idx_(0), len_(0),
@@ -68,7 +68,7 @@ bool FileData::isAvail(size_t bytes_needed) {
   while (cur_idx_ + bytes_needed >= len_) {
     bytes = read(fd_, data_ + len_, max_ - len_);
     if (bytes == 0 || bytes == -1) {
-      read_complete_;
+      read_complete_; // unused read?
       break;
     }
     len_ += bytes;
