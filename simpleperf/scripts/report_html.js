@@ -88,6 +88,11 @@ function getFuncSourceRange(funcId) {
     return null;
 }
 
+function getFuncDisassembleCode(funcId) {
+    let func = gFunctionMap[funcId];
+    return func.hasOwnProperty('d') ? func.d : null;
+}
+
 function getSourceFilePath(sourceFileId) {
     return gSourceFiles[sourceFileId].path;
 }
@@ -459,6 +464,7 @@ class FunctionTab {
         this.callgraphView = null;
         this.reverseCallgraphView = null;
         this.sourceCodeView = null;
+        this.disassembleCodeView = null;
         this.draw();
         gTabs.setActive(this);
     }
@@ -499,6 +505,13 @@ class FunctionTab {
             this.sourceCodeView = new SourceCodeView(this.div, sourceFiles);
         }
 
+        let disassembleCode = collectDisassembleCodeForFunction(this.func);
+        if (disassembleCode) {
+            this.div.append(getHtml('hr'));
+            this.div.append(getHtml('b', {text: 'DisassembleCode:'}) + '<br/>');
+            this.disassembleCodeView = new DisassembleCodeView(this.div, disassembleCode);
+        }
+
         this.onSampleWeightChange();  // Manually set sample weight function for the first time.
     }
 
@@ -512,6 +525,9 @@ class FunctionTab {
         }
         if (this.sourceCodeView) {
             this.sourceCodeView.draw(sampleWeightFunction);
+        }
+        if (this.disassembleCodeView) {
+            this.disassembleCodeView.draw(sampleWeightFunction);
         }
     }
 }
@@ -911,10 +927,10 @@ class SourceFile {
 
 // Return a list of SourceFile related to a function.
 function collectSourceFilesForFunction(func) {
-    if (!func.hasOwnProperty('sc')) {
+    if (!func.hasOwnProperty('s')) {
         return null;
     }
-    let hitLines = func.sc;
+    let hitLines = func.s;
     let sourceFiles = {};  // map from sourceFileId to SourceFile.
 
     function getFile(fileId) {
@@ -1008,13 +1024,105 @@ class SourceCodeView {
             table.draw(data, {
                 width: '100%',
                 sort: 'disable',
-                fronzenColumns: 3,
+                frozenColumns: 3,
                 allowHtml: true,
             });
         }
     }
 }
 
+// Return a list of disassemble code related to a function.
+function collectDisassembleCodeForFunction(func) {
+    if (!func.hasOwnProperty('a')) {
+        return null;
+    }
+    let hitAddrs = func.a;
+    let rawCode = getFuncDisassembleCode(func.g.f);
+    if (!rawCode) {
+        return null;
+    }
+
+    // Annotate disassemble code with event count information.
+    let annotatedCode = [];
+    let codeForLastAddr = null;
+    let hitAddrPos = 0;
+    let hasCount = false;
+
+    function addEventCount(addr) {
+        while (hitAddrPos < hitAddrs.length && hitAddrs[hitAddrPos].a < addr) {
+            if (codeForLastAddr) {
+                codeForLastAddr.eventCount += hitAddrs[hitAddrPos].e;
+                codeForLastAddr.subtreeEventCount += hitAddrs[hitAddrPos].s;
+                hasCount = true;
+            }
+            hitAddrPos++;
+        }
+    }
+
+    for (let line of rawCode) {
+        let code = line[0];
+        let addr = line[1];
+
+        addEventCount(addr);
+        let item = {code: code, eventCount: 0, subtreeEventCount: 0};
+        annotatedCode.push(item);
+        // Objdump sets addr to 0 when this disassemble code line is not associated with an addr.
+        if (addr != 0) {
+            codeForLastAddr = item;
+        }
+    }
+    addEventCount(Number.MAX_VALUE);
+    return hasCount ? annotatedCode : null;
+}
+
+// Show annotated disassemble code of a function.
+class DisassembleCodeView {
+
+    constructor(divContainer, disasembleCode) {
+        this.div = $('<div>');
+        this.div.appendTo(divContainer);
+        this.disasembleCode = disasembleCode;
+    }
+
+    draw(sampleWeightFunction) {
+        google.charts.setOnLoadCallback(() => this.realDraw(sampleWeightFunction));
+    }
+
+    realDraw(sampleWeightFunction) {
+        this.div.empty();
+        // Draw a table of 'Total', 'Self', 'Code'.
+        let rows = [];
+        for (let line of this.disasembleCode) {
+            let code = getHtml('pre', {text: line.code});
+            let totalValue = '';
+            let selfValue = '';
+            if (line.subtreeEventCount != 0) {
+                totalValue = sampleWeightFunction(line.subtreeEventCount);
+                selfValue = sampleWeightFunction(line.eventCount);
+            }
+            rows.push([totalValue, selfValue, line.code]);
+        }
+        let data = new google.visualization.DataTable();
+        data.addColumn('string', 'Total');
+        data.addColumn('string', 'Self');
+        data.addColumn('string', 'Code');
+        data.addRows(rows);
+        for (let i = 0; i < this.disasembleCode.length; ++i) {
+            for (let j = 0; j < 2; ++j) {
+                data.setProperty(i, j, 'className', 'colForCount');
+            }
+        }
+        let wrapperDiv = $('<div>');
+        wrapperDiv.appendTo(this.div);
+        let table = new google.visualization.Table(wrapperDiv.get(0));
+        table.draw(data, {
+            width: '100%',
+            sort: 'disable',
+            frozenColumns: 2,
+            allowHtml: true,
+        });
+    }
+}
 
 
 function initGlobalObjects() {
