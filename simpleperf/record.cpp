@@ -700,6 +700,32 @@ uint64_t SampleRecord::Timestamp() const { return time_data.time; }
 uint32_t SampleRecord::Cpu() const { return cpu_data.cpu; }
 uint64_t SampleRecord::Id() const { return id_data.id; }
 
+void SampleRecord::AdjustCallChainGeneratedByKernel() {
+  // The kernel stores return addrs in the callchain, but we want the addrs of call instructions
+  // along the callchain.
+  uint64_t* ips = const_cast<uint64_t*>(callchain_data.ips);
+  bool first_frame = true;
+  for (uint64_t i = 0; i < callchain_data.ip_nr; ++i) {
+    if (ips[i] > 0 && ips[i] < PERF_CONTEXT_MAX) {
+      if (first_frame) {
+        first_frame = false;
+      } else {
+        // Here we want to change the return addr to the addr of the previous instruction. We don't
+        // need to find the exact start addr of the previous instruction. A location in
+        // [start_addr_of_call_inst, start_addr_of_next_inst) is enough.
+#if defined(__arm__) || defined(__aarch64__)
+        // If we are built for arm/aarch64, this may be a callchain of thumb code. For thumb code,
+        // the real instruction addr is (ip & ~1), and ip - 2 can used to hit the address range
+        // of the previous instruction. For non thumb code, any addr in [ip - 4, ip - 1] is fine.
+        ips[i] -= 2;
+#else
+        ips[i]--;
+#endif
+      }
+    }
+  }
+}
+
 BuildIdRecord::BuildIdRecord(const char* p) : Record(p) {
   const char* end = p + size();
   p += header_size();

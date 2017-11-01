@@ -402,6 +402,8 @@ struct SampleRecord : public Record {
     return stack_user_data.dyn_size;
   }
 
+  void AdjustCallChainGeneratedByKernel();
+
  protected:
   void DumpData(size_t indent) const override;
 };
