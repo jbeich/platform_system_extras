@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ddd6f3d9_b215ac81",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 939,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2017-11-02T01:07:00Z",
+      "side": 1,
+      "message": "Why two separate ifs and not just a \u0026\u0026?",
+      "range": {
+        "startLine": 939,
+        "startChar": 49,
+        "endLine": 939,
+        "endChar": 52
+      },
+      "revId": "a19f31e85b19749600c4cddb8f36c87e794b8d74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d39fdf06_93254dda",
+        "filename": "simpleperf/record.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 706,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2017-11-02T01:07:00Z",
+      "side": 1,
+      "message": "This seems like a bad idea. You have data that is marked const, but you are casting that away and then modifying it.\n\nWould it be better to keep this as non const, and pass the data as const?\n\nI worry that if someone coming along later assumes this data is really const, they might make it unchangeable.",
+      "range": {
+        "startLine": 706,
+        "startChar": 18,
+        "endLine": 706,
+        "endChar": 59
+      },
+      "revId": "a19f31e85b19749600c4cddb8f36c87e794b8d74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
