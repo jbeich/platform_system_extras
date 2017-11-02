@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "89753494_c372f749",
+        "filename": "simpleperf/record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 413,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2017-11-02T21:26:24Z",
+      "side": 1,
+      "message": "Are you guaranteed that p is aligned to a uint64_t?\n\nSame below.",
+      "range": {
+        "startLine": 413,
+        "startChar": 25,
+        "endLine": 413,
+        "endChar": 56
+      },
+      "revId": "3d4aa26ae99db7576f352771d704bd9da9a55bcd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cc8c494c_ed4d4e29",
+        "filename": "simpleperf/record.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2017-11-02T21:26:24Z",
+      "side": 1,
+      "message": "Is there a reason for this? Can\u0027t you cast away the const in the tests that need this?",
+      "range": {
+        "startLine": 247,
+        "startChar": 2,
+        "endLine": 247,
+        "endChar": 50
+      },
+      "revId": "3d4aa26ae99db7576f352771d704bd9da9a55bcd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
