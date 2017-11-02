@@ -117,6 +117,7 @@ std::vector<int> GetCpusFromString(const std::string& s) {
   return std::vector<int>(cpu_set.begin(), cpu_set.end());
 }
 
+#if !defined(__ANDROID__)
 static std::vector<KernelMmap> GetLoadedModules() {
   std::vector<KernelMmap> result;
   FILE* fp = fopen("/proc/modules", "re");
@@ -164,8 +165,13 @@ static void GetAllModuleFiles(const std::string& path,
     }
   }
 }
+#endif  // !defined(__ANDROID__)
 
 static std::vector<KernelMmap> GetModulesInUse() {
+#if defined(__ANDROID__)
+  // There is no /lib/modules on Android. So no need to find loaded modules.
+  return std::vector<KernelMmap>();
+#else
   utsname uname_buf;
   if (TEMP_FAILURE_RETRY(uname(&uname_buf)) != 0) {
     PLOG(ERROR) << "uname() failed";
@@ -175,7 +181,6 @@ static std::vector<KernelMmap> GetModulesInUse() {
   std::string module_dirpath = "/lib/modules/" + linux_version + "/kernel";
   std::unordered_map<std::string, std::string> module_file_map;
   GetAllModuleFiles(module_dirpath, &module_file_map);
-  // TODO: There is no /proc/modules or /lib/modules on Android, find methods work on it.
   std::vector<KernelMmap> module_mmaps = GetLoadedModules();
   for (auto& module : module_mmaps) {
     auto it = module_file_map.find(module.name);
@@ -184,6 +189,7 @@ static std::vector<KernelMmap> GetModulesInUse() {
     }
   }
   return module_mmaps;
+#endif
 }
 
 void GetKernelAndModuleMmaps(KernelMmap* kernel_mmap, std::vector<KernelMmap>* module_mmaps) {
