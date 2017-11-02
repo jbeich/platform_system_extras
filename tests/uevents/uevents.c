@@ -30,7 +30,10 @@ int main(int argc, char *argv[])
     if(device_fd < 0)
         return -1;
 
-    while ((n = uevent_kernel_multicast_recv(device_fd, msg, UEVENT_MSG_LEN)) > 0) {
+    uid_t root_uid = uevent_root_uid();
+
+    while ((n = uevent_kernel_multicast_recv(device_fd, msg, UEVENT_MSG_LEN,
+                                             root_uid)) > 0) {
         msg[n] = '\0';
         msg[n+1] = '\0';
 
