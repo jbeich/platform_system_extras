@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "445a8522_59cbae28",
+        "filename": "simpleperf/environment.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1108565
+      },
+      "writtenOn": "2017-11-06T22:40:45Z",
+      "side": 1,
+      "message": "they are at /(odm|system|vendor)/lib/modules/",
+      "range": {
+        "startLine": 172,
+        "startChar": 40,
+        "endLine": 172,
+        "endChar": 41
+      },
+      "revId": "d073ffe7e880143750726f5dfa28b2812cb208ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
