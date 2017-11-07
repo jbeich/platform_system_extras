@@ -22,6 +22,30 @@
       "revId": "d073ffe7e880143750726f5dfa28b2812cb208ed",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "045fd6ce_b9a25738",
+        "filename": "simpleperf/environment.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-11-07T19:46:49Z",
+      "side": 1,
+      "message": "yes, I found the kernel modules on walleye in /vendor/lib/modules. \nhttps://source.android.com/devices/architecture/kernel/modular-kernels says: Kernel modules should not be located in /system. And it seems /lib/modules is needed to support profiling in recovery mode.",
+      "parentUuid": "445a8522_59cbae28",
+      "range": {
+        "startLine": 172,
+        "startChar": 40,
+        "endLine": 172,
+        "endChar": 41
+      },
+      "revId": "d073ffe7e880143750726f5dfa28b2812cb208ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
