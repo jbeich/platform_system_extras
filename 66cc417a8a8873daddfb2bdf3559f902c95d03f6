@@ -22,6 +22,29 @@
       "revId": "66cc417a8a8873daddfb2bdf3559f902c95d03f6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b0122b25_7c2f38fc",
+        "filename": "ext4_utils/blk_alloc_to_base_fs.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2017-11-08T23:17:24Z",
+      "side": 1,
+      "message": "If these are defined as an equation (eg: \u0027( 1024 )\u0027 ) you are in trouble.\n\nAlternative is to do this at runtime\n\nsnprintf(format, sizeof(format), \"%%%ds\", MAX_FILE_VERSION);",
+      "range": {
+        "startLine": 54,
+        "startChar": 63,
+        "endLine": 54,
+        "endChar": 79
+      },
+      "revId": "66cc417a8a8873daddfb2bdf3559f902c95d03f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
