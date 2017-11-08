@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "68185064_448ad64a",
+        "filename": "ext4_utils/blk_alloc_to_base_fs.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2017-11-08T23:13:34Z",
+      "side": 1,
+      "message": "bionic\u0027s sys/cdefs.h defines __STRING(x) and ___STRING(x) respectively.\n\nIf this has to be portable to multiple OSii, include sys/cdefs.h and then #ifndef __STRING and #ifndef ___STRING to deal with the ones that fail to define this.",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 35
+      },
+      "revId": "66cc417a8a8873daddfb2bdf3559f902c95d03f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
