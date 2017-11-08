@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cfc8275e_6dfb720d",
+        "filename": "ext4_utils/blk_alloc_to_base_fs.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2017-11-08T23:48:17Z",
+      "side": 1,
+      "message": "(there may be portability games here, a msdos and mac sdk build should be tested somehow).",
+      "range": {
+        "startLine": 27,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 32
+      },
+      "revId": "41763978fa0b72f58b3ddadca671d7634d67f3ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
