@@ -1,0 +1,642 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "57c4df60_e353d351",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 558,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-11-10T22:46:48Z",
+      "side": 1,
+      "message": "\"How does simpleperf work?\"",
+      "revId": "0ecb8034d37211214cb64b44850a30ef6ed26b1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "86861c19_e13f035e",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 568,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-11-10T22:46:48Z",
+      "side": 1,
+      "message": "you were actually right before :-)\n\nthis needs to be either \"The simpleperf executable has\" or \"Simpleperf has\". (in the latter, \"simpleperf\" is a name like \"yabin\". in the former, \"the executable\" is a noun like \"man\". so \"yabin has\" or \"the man has\".)",
+      "range": {
+        "startLine": 568,
+        "startChar": 0,
+        "endLine": 568,
+        "endChar": 21
+      },
+      "revId": "0ecb8034d37211214cb64b44850a30ef6ed26b1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee817235_3d84f3a3",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 589,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-11-10T22:46:48Z",
+      "side": 1,
+      "message": "same. (i won\u0027t mention any more of these.)",
+      "range": {
+        "startLine": 589,
+        "startChar": 0,
+        "endLine": 589,
+        "endChar": 21
+      },
+      "revId": "0ecb8034d37211214cb64b44850a30ef6ed26b1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c470fc7a_4933fb21",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 589,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-11-10T22:46:48Z",
+      "side": 1,
+      "message": "s/as//",
+      "range": {
+        "startLine": 589,
+        "startChar": 56,
+        "endLine": 589,
+        "endChar": 58
+      },
+      "revId": "0ecb8034d37211214cb64b44850a30ef6ed26b1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ec15cc5a_97f36e53",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 613,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-11-10T22:46:48Z",
+      "side": 1,
+      "message": "\"most used\" or \"most frequently used\"",
+      "range": {
+        "startLine": 613,
+        "startChar": 20,
+        "endLine": 613,
+        "endChar": 31
+      },
+      "revId": "0ecb8034d37211214cb64b44850a30ef6ed26b1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "67ebd043_209ee7ca",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 618,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-11-10T22:46:48Z",
+      "side": 1,
+      "message": "there\u0027s no plural of \"hardware\". you could say \"SoCs\".",
+      "range": {
+        "startLine": 618,
+        "startChar": 35,
+        "endLine": 618,
+        "endChar": 44
+      },
+      "revId": "0ecb8034d37211214cb64b44850a30ef6ed26b1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8642261d_375d02fd",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 635,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-11-10T22:46:48Z",
+      "side": 1,
+      "message": "`simpleperf list` (here and elsewhere)?",
+      "range": {
+        "startLine": 635,
+        "startChar": 14,
+        "endLine": 635,
+        "endChar": 29
+      },
+      "revId": "0ecb8034d37211214cb64b44850a30ef6ed26b1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c7e8dd7a_464d1c5b",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 760,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-11-10T22:46:48Z",
+      "side": 1,
+      "message": "\"a script\"?",
+      "range": {
+        "startLine": 760,
+        "startChar": 21,
+        "endLine": 760,
+        "endChar": 28
+      },
+      "revId": "0ecb8034d37211214cb64b44850a30ef6ed26b1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "84e12cfc_c16f8c52",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 793,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-11-10T22:46:48Z",
+      "side": 1,
+      "message": "either \"the number of events that have happened since\" or just \"the number of events since\"",
+      "range": {
+        "startLine": 793,
+        "startChar": 49,
+        "endLine": 793,
+        "endChar": 64
+      },
+      "revId": "0ecb8034d37211214cb64b44850a30ef6ed26b1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e76349f9_d09d2af1",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 793,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-11-10T22:46:48Z",
+      "side": 1,
+      "message": "should we say \"program counter\" in all the docs? i suspect most readers think 127.0.0.1 when they read \"ip address\". keeping that nomenclature makes sense in the source (because that\u0027s the term the kernel uses), but i think it\u0027s just confusing in the documentation.",
+      "range": {
+        "startLine": 793,
+        "startChar": 88,
+        "endLine": 793,
+        "endChar": 90
+      },
+      "revId": "0ecb8034d37211214cb64b44850a30ef6ed26b1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2c96c9e4_0aac91ef",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 793,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-11-10T22:46:48Z",
+      "side": 1,
+      "message": "\"the time at which the sample was generated\"",
+      "range": {
+        "startLine": 793,
+        "startChar": 26,
+        "endLine": 793,
+        "endChar": 47
+      },
+      "revId": "0ecb8034d37211214cb64b44850a30ef6ed26b1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c8215408_dd9d7c28",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 808,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-11-10T22:46:48Z",
+      "side": 1,
+      "message": "we",
+      "range": {
+        "startLine": 808,
+        "startChar": 78,
+        "endLine": 808,
+        "endChar": 80
+      },
+      "revId": "0ecb8034d37211214cb64b44850a30ef6ed26b1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "40f33672_06541825",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 809,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-11-10T22:46:48Z",
+      "side": 1,
+      "message": "\"via -e\" or \"via the -e option\" (the same name versus thing choice as above).",
+      "range": {
+        "startLine": 809,
+        "startChar": 7,
+        "endLine": 809,
+        "endChar": 20
+      },
+      "revId": "0ecb8034d37211214cb64b44850a30ef6ed26b1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "561b439e_43ada468",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 872,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-11-10T22:46:48Z",
+      "side": 1,
+      "message": "\"a script\". (if there are more, i won\u0027t mention them.)",
+      "range": {
+        "startLine": 872,
+        "startChar": 21,
+        "endLine": 872,
+        "endChar": 28
+      },
+      "revId": "0ecb8034d37211214cb64b44850a30ef6ed26b1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a123af3_a250cebb",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 878,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-11-10T22:46:48Z",
+      "side": 1,
+      "message": "same as -e above. (if there are more, i won\u0027t mention them.)",
+      "range": {
+        "startLine": 878,
+        "startChar": 8,
+        "endLine": 878,
+        "endChar": 23
+      },
+      "revId": "0ecb8034d37211214cb64b44850a30ef6ed26b1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "932f519c_40afb338",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 909,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-11-10T22:46:48Z",
+      "side": 1,
+      "message": "needs \"a\" or \"the\"\n\n(i think either is fine in this case.)",
+      "range": {
+        "startLine": 909,
+        "startChar": 49,
+        "endLine": 909,
+        "endChar": 59
+      },
+      "revId": "0ecb8034d37211214cb64b44850a30ef6ed26b1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "036b4f7e_4f3508dd",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 914,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-11-10T22:46:48Z",
+      "side": 1,
+      "message": "\"a ... call graph\" all through this paragraph",
+      "range": {
+        "startLine": 912,
+        "startChar": 0,
+        "endLine": 914,
+        "endChar": 94
+      },
+      "revId": "0ecb8034d37211214cb64b44850a30ef6ed26b1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dd1199ec_5817cad2",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 924,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-11-10T22:46:48Z",
+      "side": 1,
+      "message": "\"on ARM\"/\"on the ARM architecture\" (same name/noun thing)",
+      "range": {
+        "startLine": 924,
+        "startChar": 10,
+        "endLine": 924,
+        "endChar": 29
+      },
+      "revId": "0ecb8034d37211214cb64b44850a30ef6ed26b1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d2c6a240_af0e863f",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 935,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-11-10T22:46:48Z",
+      "side": 1,
+      "message": "the kernel\u0027s ready queue?",
+      "range": {
+        "startLine": 935,
+        "startChar": 24,
+        "endLine": 935,
+        "endChar": 30
+      },
+      "revId": "0ecb8034d37211214cb64b44850a30ef6ed26b1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7af31f1f_cad6919e",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 997,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-11-10T22:46:48Z",
+      "side": 1,
+      "message": "\"and where\" (since this is the last item in your list)",
+      "range": {
+        "startLine": 997,
+        "startChar": 21,
+        "endLine": 997,
+        "endChar": 26
+      },
+      "revId": "0ecb8034d37211214cb64b44850a30ef6ed26b1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c5baaf7c_04c6dd93",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 1027,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-11-10T22:46:48Z",
+      "side": 1,
+      "message": "the path",
+      "range": {
+        "startLine": 1027,
+        "startChar": 4,
+        "endLine": 1027,
+        "endChar": 6
+      },
+      "revId": "0ecb8034d37211214cb64b44850a30ef6ed26b1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "97f64dd3_0445793d",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 1071,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-11-10T22:46:48Z",
+      "side": 1,
+      "message": "\"use the --sort option\" (i said i wasn\u0027t going to mention any more of these, but i think this was the only other instance, so...)",
+      "range": {
+        "startLine": 1071,
+        "startChar": 19,
+        "endLine": 1071,
+        "endChar": 30
+      },
+      "revId": "0ecb8034d37211214cb64b44850a30ef6ed26b1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "654553a1_3f62e9a6",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 1094,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-11-10T22:46:48Z",
+      "side": 1,
+      "message": "call graphs (because there are lots of them in the file and English insists that you say so, even when it\u0027s obvious)",
+      "range": {
+        "startLine": 1094,
+        "startChar": 77,
+        "endLine": 1094,
+        "endChar": 87
+      },
+      "revId": "0ecb8034d37211214cb64b44850a30ef6ed26b1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "89b8e5eb_231bd6e7",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 1115,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-11-10T22:46:48Z",
+      "side": 1,
+      "message": "results\n\n(because you\u0027re not just talking about one specific case, you\u0027re talking about all possible cases.)",
+      "range": {
+        "startLine": 1115,
+        "startChar": 30,
+        "endLine": 1115,
+        "endChar": 36
+      },
+      "revId": "0ecb8034d37211214cb64b44850a30ef6ed26b1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "42e30d26_9b25c728",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 1118,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-11-10T22:46:48Z",
+      "side": 1,
+      "message": "graphs (throughout this paragraph)",
+      "range": {
+        "startLine": 1118,
+        "startChar": 29,
+        "endLine": 1118,
+        "endChar": 34
+      },
+      "revId": "0ecb8034d37211214cb64b44850a30ef6ed26b1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "45af3f5d_a25fde8b",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 1119,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-11-10T22:46:48Z",
+      "side": 1,
+      "message": "do we have any advice to give on when you\u0027d expect one to beat the other?",
+      "range": {
+        "startLine": 1119,
+        "startChar": 46,
+        "endLine": 1119,
+        "endChar": 56
+      },
+      "revId": "0ecb8034d37211214cb64b44850a30ef6ed26b1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe54adce_8bb9b335",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 1122,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-11-10T22:46:48Z",
+      "side": 1,
+      "message": "Simpleperf",
+      "range": {
+        "startLine": 1122,
+        "startChar": 3,
+        "endLine": 1122,
+        "endChar": 25
+      },
+      "revId": "0ecb8034d37211214cb64b44850a30ef6ed26b1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "973444d3_1e9d48b8",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 1122,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-11-10T22:46:48Z",
+      "side": 1,
+      "message": "good dwarf based call graphs",
+      "range": {
+        "startLine": 1122,
+        "startChar": 89,
+        "endLine": 1122,
+        "endChar": 98
+      },
+      "revId": "0ecb8034d37211214cb64b44850a30ef6ed26b1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
