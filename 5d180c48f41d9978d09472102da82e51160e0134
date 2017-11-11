@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "74aeabaa_bee323a8",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-11-11T19:17:35Z",
+      "side": 1,
+      "message": "colons are weird. you\u0027re allowed to break the usual rules in \"key: value\" situations. what you\u0027ve done is fine, but you didn\u0027t need to. (think of forms with entries like \"Name: Alice // Age: 1 // Address: ...\")",
+      "revId": "5d180c48f41d9978d09472102da82e51160e0134",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "81d96d61_75853228",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 1138,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-11-11T19:17:35Z",
+      "side": 1,
+      "message": "nice! that\u0027s a really useful summary of the tradeoffs, with actionable advice.",
+      "range": {
+        "startLine": 1115,
+        "startChar": 0,
+        "endLine": 1138,
+        "endChar": 42
+      },
+      "revId": "5d180c48f41d9978d09472102da82e51160e0134",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
