@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "536830db_61d1c96c",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 1119,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-11-14T22:24:49Z",
+      "side": 1,
+      "message": "Changed to make it clear.",
+      "parentUuid": "e2ead67c_544e1ded",
+      "range": {
+        "startLine": 1119,
+        "startChar": 33,
+        "endLine": 1119,
+        "endChar": 94
+      },
+      "revId": "16c4f8cf51a42355ef25d2b5e2a0e5de68aa51c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5f994c81_a6dafafb",
         "filename": "simpleperf/doc/README.md",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2017-11-14T21:26:56Z",
       "side": 1,
       "message": "do you mean \"new\", or do you mean \"specific\"?",
+      "range": {
+        "startLine": 1122,
+        "startChar": 78,
+        "endLine": 1122,
+        "endChar": 81
+      },
+      "revId": "16c4f8cf51a42355ef25d2b5e2a0e5de68aa51c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ddea751f_103c4a04",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 1122,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-11-14T22:24:49Z",
+      "side": 1,
+      "message": "I mean \"specific\". Changed to make it clear.",
+      "parentUuid": "5f994c81_a6dafafb",
       "range": {
         "startLine": 1122,
         "startChar": 78,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "cbc4f90a_7895ed9a",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 1178,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-11-14T22:24:49Z",
+      "side": 1,
+      "message": "Add situations of using `simpleperf record` directly.",
+      "parentUuid": "8d17abbe_3ad37ff9",
+      "range": {
+        "startLine": 1178,
+        "startChar": 3,
+        "endLine": 1178,
+        "endChar": 11
+      },
+      "revId": "16c4f8cf51a42355ef25d2b5e2a0e5de68aa51c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "749481e4_b1c978f6",
         "filename": "simpleperf/doc/README.md",
         "patchSetId": 1
@@ -82,6 +154,30 @@
       "writtenOn": "2017-11-14T21:26:56Z",
       "side": 1,
       "message": "This script",
+      "range": {
+        "startLine": 1192,
+        "startChar": 0,
+        "endLine": 1192,
+        "endChar": 2
+      },
+      "revId": "16c4f8cf51a42355ef25d2b5e2a0e5de68aa51c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c22520fd_8177cc0b",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 1192,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-11-14T22:24:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "749481e4_b1c978f6",
       "range": {
         "startLine": 1192,
         "startChar": 0,
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "4158a9c8_aaf2cf05",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 1198,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-11-14T22:24:49Z",
+      "side": 1,
+      "message": "Done. Also changed in other places.",
+      "parentUuid": "23ad0a5b_25809b6a",
+      "range": {
+        "startLine": 1198,
+        "startChar": 48,
+        "endLine": 1198,
+        "endChar": 52
+      },
+      "revId": "16c4f8cf51a42355ef25d2b5e2a0e5de68aa51c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2b990ddc_ef787805",
         "filename": "simpleperf/doc/README.md",
         "patchSetId": 1
@@ -128,6 +248,30 @@
       "writtenOn": "2017-11-14T21:26:56Z",
       "side": 1,
       "message": "Depending on which command-line options are used, the content...",
+      "range": {
+        "startLine": 1213,
+        "startChar": 26,
+        "endLine": 1213,
+        "endChar": 29
+      },
+      "revId": "16c4f8cf51a42355ef25d2b5e2a0e5de68aa51c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "64f292f7_736f903b",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 1213,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-11-14T22:24:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2b990ddc_ef787805",
       "range": {
         "startLine": 1213,
         "startChar": 26,
@@ -163,6 +307,30 @@
     },
     {
       "key": {
+        "uuid": "0b3b7871_e356c740",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 1229,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-11-14T22:24:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3f4e6ae1_e8347e51",
+      "range": {
+        "startLine": 1229,
+        "startChar": 21,
+        "endLine": 1229,
+        "endChar": 32
+      },
+      "revId": "16c4f8cf51a42355ef25d2b5e2a0e5de68aa51c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8731b7b7_f13821a4",
         "filename": "simpleperf/doc/README.md",
         "patchSetId": 1
@@ -174,6 +342,30 @@
       "writtenOn": "2017-11-14T21:26:56Z",
       "side": 1,
       "message": "the time",
+      "range": {
+        "startLine": 1231,
+        "startChar": 73,
+        "endLine": 1231,
+        "endChar": 77
+      },
+      "revId": "16c4f8cf51a42355ef25d2b5e2a0e5de68aa51c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e6ec7d5d_31bcf3f2",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 1231,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-11-14T22:24:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8731b7b7_f13821a4",
       "range": {
         "startLine": 1231,
         "startChar": 73,
@@ -209,6 +401,30 @@
     },
     {
       "key": {
+        "uuid": "3fa36378_92150c9e",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 1237,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-11-14T22:24:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "535b369e_b3b22798",
+      "range": {
+        "startLine": 1237,
+        "startChar": 70,
+        "endLine": 1237,
+        "endChar": 77
+      },
+      "revId": "16c4f8cf51a42355ef25d2b5e2a0e5de68aa51c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8b14d8bf_402c7563",
         "filename": "simpleperf/doc/README.md",
         "patchSetId": 1
@@ -220,6 +436,30 @@
       "writtenOn": "2017-11-14T21:26:56Z",
       "side": 1,
       "message": "fourth",
+      "range": {
+        "startLine": 1239,
+        "startChar": 4,
+        "endLine": 1239,
+        "endChar": 9
+      },
+      "revId": "16c4f8cf51a42355ef25d2b5e2a0e5de68aa51c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "136e084f_9e52643e",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 1239,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-11-14T22:24:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8b14d8bf_402c7563",
       "range": {
         "startLine": 1239,
         "startChar": 4,
