@@ -29,11 +29,9 @@
 #define _LARGEFILE64_SOURCE
 
 #include <assert.h>
-#include <asm/types.h>
 #include <dlfcn.h>
 #include <errno.h>
 #include <fcntl.h>
-#include <linux/fs.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>  /* memset() */
@@ -114,7 +112,11 @@ static int dev_write_fd(void *buf, __u64 offset, size_t len)
 {
 	int fd = __get_device_fd(&offset);
 
+#ifdef HAVE_LSEEK64
 	if (lseek64(fd, (off64_t)offset, SEEK_SET) < 0)
+#else
+	if (lseek(fd, offset, SEEK_SET) < 0)
+#endif
 		return -1;
 	ssize_t written = write(fd, buf, len);
 	if (written == -1)

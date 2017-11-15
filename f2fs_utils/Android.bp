@@ -16,12 +16,6 @@ cc_library_host_static {
         "external/f2fs-tools/include",
         "external/f2fs-tools/mkfs",
     ],
-
-    target: {
-        darwin: {
-            enabled: false,
-        },
-    },
 }
 
 cc_library_host_static {
@@ -42,12 +36,6 @@ cc_library_host_static {
         "libext2_uuid",
         "libz",
     ],
-
-    target: {
-        darwin: {
-            enabled: false,
-        },
-    },
 }
 
 cc_library_host_static {
@@ -61,12 +49,6 @@ cc_library_host_static {
         "external/f2fs-tools/include",
         "external/f2fs-tools/mkfs",
     ],
-
-    target: {
-        darwin: {
-            enabled: false,
-        },
-    },
 }
 
 cc_library_shared {
@@ -80,12 +62,6 @@ cc_library_shared {
         "external/f2fs-tools/include",
         "external/f2fs-tools/mkfs",
     ],
-
-    target: {
-        darwin: {
-            enabled: false,
-        },
-    },
 }
 
 cc_library_static {
@@ -99,12 +75,6 @@ cc_library_static {
         "external/f2fs-tools/include",
         "external/f2fs-tools/mkfs",
     ],
-
-    target: {
-        darwin: {
-            enabled: false,
-        },
-    },
 }
 
 cc_library_static {
@@ -120,12 +90,6 @@ cc_library_static {
     ],
 
     static_libs: ["libsparse"],
-
-    target: {
-        darwin: {
-            enabled: false,
-        },
-    },
 }
 
 cc_library_shared {
