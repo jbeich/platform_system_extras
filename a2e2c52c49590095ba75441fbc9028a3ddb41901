@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2afc3e7a_891d01b5",
+        "filename": "f2fs_utils/f2fs_ioutils.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-11-16T23:29:27Z",
+      "side": 1,
+      "message": "or just set _FILE_OFFSET_BITS\u003d64 and use lseek and off_t everywhere?",
+      "revId": "a2e2c52c49590095ba75441fbc9028a3ddb41901",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
