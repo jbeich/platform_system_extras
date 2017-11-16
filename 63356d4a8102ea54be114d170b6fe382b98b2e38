@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "96b2dc7e_30824350",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-11-16T00:05:36Z",
+      "side": 1,
+      "message": "\"has\" (or \"it has\", like before)",
+      "range": {
+        "startLine": 69,
+        "startChar": 65,
+        "endLine": 69,
+        "endChar": 71
+      },
+      "revId": "63356d4a8102ea54be114d170b6fe382b98b2e38",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a289bc35_a0a802ca",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-11-16T00:05:36Z",
+      "side": 1,
+      "message": "this isn\u0027t obviously a _feature_. maybe something like \"it uses the standard Android stack unwinder, so its results are consistent with all other Android tools\"? (and maybe put this one last, since it\u0027s less interesting than the next three?)",
+      "range": {
+        "startLine": 82,
+        "startChar": 0,
+        "endLine": 83,
+        "endChar": 16
+      },
+      "revId": "63356d4a8102ea54be114d170b6fe382b98b2e38",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eef4719b_87202369",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-11-16T00:05:36Z",
+      "side": 1,
+      "message": ", b",
+      "range": {
+        "startLine": 86,
+        "startChar": 84,
+        "endLine": 86,
+        "endChar": 87
+      },
+      "revId": "63356d4a8102ea54be114d170b6fe382b98b2e38",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aec0b0b6_13de7548",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-11-16T00:05:36Z",
+      "side": 1,
+      "message": "shared libraries embedded in apk files",
+      "range": {
+        "startLine": 88,
+        "startChar": 25,
+        "endLine": 88,
+        "endChar": 63
+      },
+      "revId": "63356d4a8102ea54be114d170b6fe382b98b2e38",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e007ceea_cfd678b2",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-11-16T00:05:36Z",
+      "side": 1,
+      "message": "Detailed documentation for the",
+      "range": {
+        "startLine": 108,
+        "startChar": 0,
+        "endLine": 108,
+        "endChar": 13
+      },
+      "revId": "63356d4a8102ea54be114d170b6fe382b98b2e38",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
