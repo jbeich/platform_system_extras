@@ -34,6 +34,24 @@
       "revId": "9ecf36a285551efb0b092e7351554a5e48f1e995",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f5fb59ec_dafa2874",
+        "filename": "Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2017-11-17T20:39:02Z",
+      "side": 1,
+      "message": "I didn\u0027t realize this was a defaults across the whole directory, which doesn\u0027t make sense.  There is little relationship between each directory in system/extras, they should each have their own flags.",
+      "parentUuid": "28f65849_f7feb8bb",
+      "revId": "9ecf36a285551efb0b092e7351554a5e48f1e995",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
