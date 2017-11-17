@@ -16,6 +16,24 @@
       "revId": "d920a9cb6bd5e1ce540886c69901861e6090ccaa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "73bd9665_ad063a58",
+        "filename": "f2fs_utils/f2fs_ioutils.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2017-11-17T20:54:25Z",
+      "side": 1,
+      "message": "The static_assert() gives build failure showing \"\u0027static_assert\u0027 is invalid in C99.\" Let me just remove this assertion, and later clean up the most of f2fs_utils again.",
+      "parentUuid": "44ad2e94_e85a6772",
+      "revId": "d920a9cb6bd5e1ce540886c69901861e6090ccaa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
