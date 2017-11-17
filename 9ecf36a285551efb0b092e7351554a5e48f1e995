@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1b80b92d_f70b434e",
+        "filename": "Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-11-17T19:04:52Z",
+      "side": 1,
+      "message": "so why wasn\u0027t this added for mac only, and just in those directories that need it, rather than for all architectures and all the different projects in system/extras?",
+      "revId": "9ecf36a285551efb0b092e7351554a5e48f1e995",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
