@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "44ad2e94_e85a6772",
+        "filename": "f2fs_utils/f2fs_ioutils.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-11-17T19:01:22Z",
+      "side": 1,
+      "message": "why do you care? (a) we don\u0027t support GCC any more and (b) even when we did, the last version we supported was 4.9.",
+      "revId": "d920a9cb6bd5e1ce540886c69901861e6090ccaa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
