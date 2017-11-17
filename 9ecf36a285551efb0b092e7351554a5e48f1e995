@@ -16,6 +16,24 @@
       "revId": "9ecf36a285551efb0b092e7351554a5e48f1e995",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "28f65849_f7feb8bb",
+        "filename": "Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1052399
+      },
+      "writtenOn": "2017-11-17T20:24:12Z",
+      "side": 1,
+      "message": "This was a quick-and-dirty change to fix a broken build introduced by adding -Werror. It\u0027s better than removing -Werror.\nThe format warnings will still be warnings as before adding -Werror.\nYes, the next step should be limiting this to mac, or just fixing all those warnings in source.",
+      "parentUuid": "1b80b92d_f70b434e",
+      "revId": "9ecf36a285551efb0b092e7351554a5e48f1e995",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
