@@ -35,11 +35,3 @@ cc_binary {
         "system/core/include/log",
     ],
 }
-
-cc_prebuilt_binary {
-    name: "mkf2fsuserimg.sh",
-
-    srcs: ["mkf2fsuserimg.sh"],
-
-    host_supported: true,
-}
