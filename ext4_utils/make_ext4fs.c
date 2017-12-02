@@ -95,7 +95,6 @@ const char *blk_file_header_fmt = "Base EXT4 version %d.%d";
 /* TODO: Not implemented:
    Allocating blocks in the same block group as the file inode
    Hash or binary tree directories
-   Special files: sockets, devices, fifos
  */
 
 static int filter_dot(const struct dirent *d)
@@ -318,6 +317,13 @@ static u32 build_directory_structure(const char *full_path, const char *dir_path
 			free(subdir_dir_path);
 		} else if (dentries[i].file_type == EXT4_FT_SYMLINK) {
 			entry_inode = make_link(dentries[i].link);
+#ifndef _WIN32
+		} else if (dentries[i].file_type == EXT4_FT_CHRDEV ||
+				dentries[i].file_type == EXT4_FT_BLKDEV ||
+				dentries[i].file_type == EXT4_FT_SOCK ||
+				dentries[i].file_type == EXT4_FT_FIFO) {
+			entry_inode = make_special(dentries[i].full_path);
+#endif
 		} else {
 			error("unknown file type on %s", dentries[i].path);
 			entry_inode = 0;
