@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a698060_84b21c72",
+        "filename": "ext4_utils/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2017-12-05T22:24:41Z",
+      "side": 1,
+      "message": "This will be marked as an executable -- why does this need to go into the bin directory?",
+      "range": {
+        "startLine": 129,
+        "startChar": 22,
+        "endLine": 129,
+        "endChar": 33
+      },
+      "revId": "f921a59e6eb81bb430c88c13923a2e81ca6cc26a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
