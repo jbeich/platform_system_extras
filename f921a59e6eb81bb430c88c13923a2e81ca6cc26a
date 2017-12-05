@@ -22,6 +22,30 @@
       "revId": "f921a59e6eb81bb430c88c13923a2e81ca6cc26a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d719b280_d9618a24",
+        "filename": "ext4_utils/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1051712
+      },
+      "writtenOn": "2017-12-05T22:31:41Z",
+      "side": 1,
+      "message": "This is just to make it easy for fastboot packaging so that all files are in same directory. Also out/host doesn\u0027t have a etc directory.",
+      "parentUuid": "9a698060_84b21c72",
+      "range": {
+        "startLine": 129,
+        "startChar": 22,
+        "endLine": 129,
+        "endChar": 33
+      },
+      "revId": "f921a59e6eb81bb430c88c13923a2e81ca6cc26a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
