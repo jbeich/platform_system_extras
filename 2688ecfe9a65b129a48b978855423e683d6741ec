@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a7685406_e1c130ac",
+        "filename": "f2fs_utils/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2017-12-06T21:11:27Z",
+      "side": 1,
+      "message": "Why is this moving back to make? The only changes that I see is that you\u0027re adding required modules. That can be done in Android.bp still:\n\n  required: [\"make_f2fs\", \"sload_f2fs\"],\n\n(That\u0027s the only place in Android.bp that you can reference make modules)",
+      "revId": "2688ecfe9a65b129a48b978855423e683d6741ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7185e196_e73cba3a",
+        "filename": "f2fs_utils/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2017-12-06T21:11:27Z",
+      "side": 1,
+      "message": "HOST_OS will never be windows",
+      "range": {
+        "startLine": 5,
+        "startChar": 0,
+        "endLine": 5,
+        "endChar": 26
+      },
+      "revId": "2688ecfe9a65b129a48b978855423e683d6741ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
