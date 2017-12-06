@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3764524f_6c8bd909",
+        "filename": "simpleperf/environment.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 685,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-12-06T17:27:45Z",
+      "side": 1,
+      "message": "isn\u0027t this the same on Android? don\u0027t we set both to 32Ki now (and both to 1Ki in the past)?",
+      "revId": "8c201462561048bec2daf234699e99fa5fccef3a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
