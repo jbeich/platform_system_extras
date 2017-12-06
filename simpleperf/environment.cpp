@@ -20,6 +20,7 @@
 #include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <sys/resource.h>
 #include <sys/utsname.h>
 
 #include <limits>
@@ -676,4 +677,12 @@ void SetDefaultAppPackageName(const std::string& package_name) {
 
 const std::string& GetDefaultAppPackageName() {
   return default_package_name;
+}
+
+void AllowMoreOpenedFiles() {
+  rlimit limit;
+  if (getrlimit(RLIMIT_NOFILE, &limit) == 0) {
+    limit.rlim_cur = limit.rlim_max;
+    setrlimit(RLIMIT_NOFILE, &limit);
+  }
 }
