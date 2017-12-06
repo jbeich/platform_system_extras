@@ -1,0 +1,10 @@
+Code-Review+1: Hyojun Kim <hyojun@google.com>
+Code-Review+2: Jaegeuk Kim <jaegeuk@google.com>
+Verified+1: Jaegeuk Kim <jaegeuk@google.com>
+Autosubmit+1: Jaegeuk Kim <jaegeuk@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-by: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-at: Wed, 06 Dec 2017 21:09:02 +0000
+Reviewed-on: https://android-review.googlesource.com/553679
+Project: platform/system/extras
+Branch: refs/heads/master
