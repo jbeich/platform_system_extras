@@ -36,6 +36,7 @@
 #include <android-base/properties.h>
 #endif
 
+#include "CallChainJoiner.h"
 #include "command.h"
 #include "dwarf_unwind.h"
 #include "environment.h"
@@ -51,6 +52,8 @@
 #include "tracing.h"
 #include "utils.h"
 #include "workload.h"
+
+using namespace simpleperf;
 
 static std::string default_measured_event_type = "cpu-cycles";
 
@@ -78,6 +81,9 @@ constexpr uint32_t MAX_DUMP_STACK_SIZE = 65528;
 // Here 1024 is a desired value for pages in mapped buffer. If mapped
 // successfully, the buffer size = 1024 * 4K (page size) = 4M.
 constexpr size_t DESIRED_PAGES_IN_MAPPED_BUFFER = 1024;
+
+// Cache size used by CallChainJoiner to cache call chains in memory.
+constexpr size_t DEFAULT_CALL_CHAIN_JOINER_CACHE_SIZE = 8 * 1024 * 1024;
 
 class RecordCommand : public Command {
  public:
@@ -164,6 +170,14 @@ class RecordCommand : public Command {
 "--no-unwind   If `--call-graph dwarf` option is used, then the user's stack\n"
 "              will be unwound by default. Use this option to disable the\n"
 "              unwinding of the user's stack.\n"
+"--no-callchain-joiner  If `--call-graph dwarf` option is used, then callchain\n"
+"                       joiner is used to break the 64k stack limit and build\n"
+"                       more complete call graphs. However, the built call graphs\n"
+"                       may not be correct in all cases. It can be disabled by\n"
+"                       this options.\n"
+"--matched-nodes-to-join-callchains count\n"
+"               When callchain joiner is used, set the matched nodes needed to join\n"
+"               callchains. The count should be >= 1. By default it is 1.\n"
 "-o record_file_name    Set record file name, default is perf.data.\n"
 "--post-unwind  If `--call-graph dwarf` option is used, then the user's stack\n"
 "               will be unwound while recording by default. But it may lose\n"
@@ -204,7 +218,9 @@ class RecordCommand : public Command {
         start_profiling_fd_(-1),
         in_app_context_(false),
         trace_offcpu_(false),
-        exclude_kernel_callchain_(false) {
+        exclude_kernel_callchain_(false),
+        allow_callchain_joiner_(true),
+        matched_nodes_to_join_callchains_(1u) {
     // If we run `adb shell simpleperf record xxx` and stop profiling by ctrl-c, adb closes
     // sockets connecting simpleperf. After that, simpleperf will receive SIGPIPE when writing
     // to stdout/stderr, which is a problem when we use '--app' option. So ignore SIGPIPE to
@@ -218,6 +234,9 @@ class RecordCommand : public Command {
  private:
   bool ParseOptions(const std::vector<std::string>& args,
                     std::vector<std::string>* non_option_args);
+  bool PrepareRecording(Workload* workload);
+  bool DoRecording(Workload* workload);
+  bool PostProcessRecording(const std::vector<std::string>& args);
   bool TraceOffCpu();
   bool SetEventSelectionFlags();
   bool CreateAndInitRecordFile();
@@ -231,6 +250,7 @@ class RecordCommand : public Command {
   void UpdateRecordForEmbeddedElfPath(Record* record);
   bool UnwindRecord(SampleRecord& r);
   bool PostUnwind(const std::vector<std::string>& args);
+  bool JoinCallChains();
   bool DumpAdditionalFeatures(const std::vector<std::string>& args);
   bool DumpBuildIdFeature();
   bool DumpFileFeature();
@@ -268,15 +288,20 @@ class RecordCommand : public Command {
   bool in_app_context_;
   bool trace_offcpu_;
   bool exclude_kernel_callchain_;
+
+  // For CallChainJoiner
+  bool allow_callchain_joiner_;
+  size_t matched_nodes_to_join_callchains_;
+  std::unique_ptr<CallChainJoiner> callchain_joiner_;
 };
 
 bool RecordCommand::Run(const std::vector<std::string>& args) {
+  ScopedCurrentArch scoped_arch(GetMachineArch());
   if (!CheckPerfEventLimit()) {
     return false;
   }
   AllowMoreOpenedFiles();
 
-  // 1. Parse options, and use default measured event type if not given.
   std::vector<std::string> workload_args;
   if (!ParseOptions(args, &workload_args)) {
     return false;
@@ -290,6 +315,30 @@ bool RecordCommand::Run(const std::vector<std::string>& args) {
                              record_filename_, true);
     }
   }
+  std::unique_ptr<Workload> workload;
+  if (!workload_args.empty()) {
+    workload = Workload::CreateWorkload(workload_args);
+    if (workload == nullptr) {
+      return false;
+    }
+  }
+  if (!PrepareRecording(workload.get())) {
+    return false;
+  }
+  if (!DoRecording(workload.get())) {
+    return false;
+  }
+  return PostProcessRecording(args);
+}
+
+bool RecordCommand::PrepareRecording(Workload* workload) {
+  // 1. Prepare in other modules.
+  if (!InitPerfClock()) {
+    return false;
+  }
+  PrepareVdsoFile();
+
+  // 2. Add default event type.
   if (event_selection_set_.empty()) {
     size_t group_id;
     if (!event_selection_set_.AddEventType(default_measured_event_type, &group_id)) {
@@ -299,6 +348,8 @@ bool RecordCommand::Run(const std::vector<std::string>& args) {
       event_selection_set_.SetSampleSpeed(group_id, *sample_speed_);
     }
   }
+
+  // 3. Process options before opening perf event files.
   exclude_kernel_callchain_ = event_selection_set_.ExcludeKernel();
   if (trace_offcpu_ && !TraceOffCpu()) {
     return false;
@@ -306,22 +357,14 @@ bool RecordCommand::Run(const std::vector<std::string>& args) {
   if (!SetEventSelectionFlags()) {
     return false;
   }
-
-  // 2. Do some environment preparation.
-  ScopedCurrentArch scoped_arch(GetMachineArch());
-  if (!InitPerfClock()) {
-    return false;
+  if (unwind_dwarf_callchain_ && !post_unwind_ && allow_callchain_joiner_) {
+    bool keep_original_callchains = WOULD_LOG(DEBUG);
+    callchain_joiner_.reset(new CallChainJoiner(DEFAULT_CALL_CHAIN_JOINER_CACHE_SIZE,
+                                                matched_nodes_to_join_callchains_,
+                                                keep_original_callchains));
   }
-  PrepareVdsoFile();
 
-  // 3. Create workload.
-  std::unique_ptr<Workload> workload;
-  if (!workload_args.empty()) {
-    workload = Workload::CreateWorkload(workload_args);
-    if (workload == nullptr) {
-      return false;
-    }
-  }
+  // 4. Add monitored targets.
   bool need_to_check_targets = false;
   if (system_wide_collection_) {
     event_selection_set_.AddMonitoredThreads({-1});
@@ -350,7 +393,7 @@ bool RecordCommand::Run(const std::vector<std::string>& args) {
     need_to_check_targets = true;
   }
 
-  // 4. Open perf_event_files, create mapped buffers for perf_event_files.
+  // 5. Open perf event files and create mapped buffers.
   if (!event_selection_set_.OpenEventFiles(cpus_)) {
     return false;
   }
@@ -359,12 +402,12 @@ bool RecordCommand::Run(const std::vector<std::string>& args) {
     return false;
   }
 
-  // 5. Create perf.data.
+  // 6. Create perf.data.
   if (!CreateAndInitRecordFile()) {
     return false;
   }
 
-  // 6. Add read/signal/periodic Events.
+  // 7. Add read/signal/periodic Events.
   auto callback =
       std::bind(&RecordCommand::ProcessRecord, this, std::placeholders::_1);
   if (!event_selection_set_.PrepareToReadMmapEventData(callback)) {
@@ -378,21 +421,22 @@ bool RecordCommand::Run(const std::vector<std::string>& args) {
   }
   IOEventLoop* loop = event_selection_set_.GetIOEventLoop();
   if (!loop->AddSignalEvents({SIGCHLD, SIGINT, SIGTERM, SIGHUP},
-                             [&]() { return loop->ExitLoop(); })) {
+                             [loop]() { return loop->ExitLoop(); })) {
     return false;
   }
   if (duration_in_sec_ != 0) {
     if (!loop->AddPeriodicEvent(SecondToTimeval(duration_in_sec_),
-                                [&]() { return loop->ExitLoop(); })) {
+                                [loop]() { return loop->ExitLoop(); })) {
       return false;
     }
   }
+  return true;
+}
 
-  // 7. Write records in mapped buffers of perf_event_files to output file while
-  //    workload is running.
+bool RecordCommand::DoRecording(Workload* workload) {
+  // Write records in mapped buffers of perf_event_files to output file while workload is running.
   start_sampling_time_in_ns_ = GetPerfClock();
-  LOG(VERBOSE) << "start_sampling_time is " << start_sampling_time_in_ns_
-               << " ns";
+  LOG(VERBOSE) << "start_sampling_time is " << start_sampling_time_in_ns_ << " ns";
   if (workload != nullptr && !workload->IsStarted() && !workload->Start()) {
     return false;
   }
@@ -402,14 +446,22 @@ bool RecordCommand::Run(const std::vector<std::string>& args) {
     }
     close(start_profiling_fd_);
   }
-  if (!loop->RunLoop()) {
+  if (!event_selection_set_.GetIOEventLoop()->RunLoop()) {
     return false;
   }
   if (!event_selection_set_.FinishReadMmapEventData()) {
     return false;
   }
+  return true;
+}
 
-  // 8. Dump additional features, and close record file.
+bool RecordCommand::PostProcessRecording(const std::vector<std::string>& args) {
+  // 1. Optionally join Callchains.
+  if (callchain_joiner_) {
+    JoinCallChains();
+  }
+
+  // 2. Dump additional features, and close record file.
   if (!DumpAdditionalFeatures(args)) {
     return false;
   }
@@ -417,14 +469,14 @@ bool RecordCommand::Run(const std::vector<std::string>& args) {
     return false;
   }
 
-  // 9. Unwind dwarf callchain.
+  // 3. Post unwind dwarf callchain.
   if (post_unwind_) {
     if (!PostUnwind(args)) {
       return false;
     }
   }
 
-  // 10. Show brief record result.
+  // 4. Show brief record result.
   LOG(INFO) << "Samples recorded: " << sample_record_count_
             << ". Samples lost: " << lost_record_count_ << ".";
   if (sample_record_count_ + lost_record_count_ != 0) {
@@ -437,6 +489,9 @@ bool RecordCommand::Run(const std::vector<std::string>& args) {
                    << "or decreasing sample frequency(-f), "
                    << "or increasing sample period(-c).";
     }
+  }
+  if (callchain_joiner_) {
+    callchain_joiner_->DumpStat();
   }
   return true;
 }
@@ -611,6 +666,17 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
       child_inherit_ = false;
     } else if (args[i] == "--no-unwind") {
       unwind_dwarf_callchain_ = false;
+    } else if (args[i] == "--no-callchain-joiner") {
+      allow_callchain_joiner_ = false;
+    } else if (args[i] == "--matched-nodes-to-join-callchains") {
+      if (!NextArgumentOrError(args, &i)) {
+        return false;
+      }
+      if (!android::base::ParseUint(args[i].c_str(), &matched_nodes_to_join_callchains_) ||
+          matched_nodes_to_join_callchains_ < 1u) {
+        LOG(ERROR) << "unexpected argument for " << args[i - 1] << " option";
+        return false;
+      }
     } else if (args[i] == "-o") {
       if (!NextArgumentOrError(args, &i)) {
         return false;
@@ -1008,11 +1074,17 @@ bool RecordCommand::UnwindRecord(SampleRecord& r) {
     // Normally do strict arch check when unwinding stack. But allow unwinding
     // 32-bit processes on 64-bit devices for system wide profiling.
     bool strict_arch_check = !system_wide_collection_;
-    std::vector<uint64_t> unwind_ips =
-        UnwindCallChain(r.regs_user_data.abi, *thread, regs,
-                        r.stack_user_data.data,
-                        r.GetValidStackSize(), strict_arch_check);
-    r.ReplaceRegAndStackWithCallChain(unwind_ips);
+    std::vector<uint64_t> ips;
+    std::vector<uint64_t> sps;
+    if (!UnwindCallChain(r.regs_user_data.abi, *thread, regs, r.stack_user_data.data,
+                         r.GetValidStackSize(), strict_arch_check, &ips, &sps)) {
+      return false;
+    }
+    r.ReplaceRegAndStackWithCallChain(ips);
+    if (callchain_joiner_) {
+      return callchain_joiner_->AddCallChain(r.tid_data.pid, r.tid_data.tid,
+                                             CallChainJoiner::ORIGINAL_OFFLINE, ips, sps);
+    }
   }
   return true;
 }
@@ -1060,6 +1132,62 @@ bool RecordCommand::PostUnwind(const std::vector<std::string>& args) {
     return false;
   }
   return true;
+}
+
+bool RecordCommand::JoinCallChains() {
+  // 1. Prepare joined callchains.
+  if (!callchain_joiner_->JoinCallChains()) {
+    return false;
+  }
+  // 2. Move records from record_filename_ to a temporary file.
+  if (!record_file_writer_->Close()) {
+    return false;
+  }
+  record_file_writer_.reset();
+  std::unique_ptr<TemporaryFile> tmpfile = CreateTempFileUsedInRecording();
+  if (!Workload::RunCmd({"mv", record_filename_, tmpfile->path})) {
+    return false;
+  }
+
+  // 3. Read records from the temporary file, and write record with joined call chains back
+  // to record_filename_.
+  std::unique_ptr<RecordFileReader> reader = RecordFileReader::CreateInstance(tmpfile->path);
+  record_file_writer_ = CreateRecordFile(record_filename_);
+  if (!reader || !record_file_writer_) {
+    return false;
+  }
+  bool store_callchains = WOULD_LOG(DEBUG);
+
+  auto record_callback = [&](std::unique_ptr<Record> r) {
+    if (r->type() != PERF_RECORD_SAMPLE) {
+      return record_file_writer_->WriteRecord(*r);
+    }
+    SampleRecord& sr = *static_cast<SampleRecord*>(r.get());
+    if (!sr.HasUserCallChain()) {
+      return record_file_writer_->WriteRecord(sr);
+    }
+    pid_t pid;
+    pid_t tid;
+    CallChainJoiner::ChainType type;
+    std::vector<uint64_t> ips;
+    std::vector<uint64_t> sps;
+    do {
+      if (!callchain_joiner_->GetNextCallChain(pid, tid, type, ips, sps)) {
+        return false;
+      }
+      if (store_callchains) {
+        CallChainRecord record(pid, tid, type, sr.Timestamp(), ips, sps);
+        if (!record_file_writer_->WriteRecord(record)) {
+          return false;
+        }
+      }
+    } while (type != CallChainJoiner::JOINED_OFFLINE);
+    CHECK_EQ(pid, static_cast<pid_t>(sr.tid_data.pid));
+    CHECK_EQ(tid, static_cast<pid_t>(sr.tid_data.tid));
+    sr.UpdateUserCallChain(ips);
+    return record_file_writer_->WriteRecord(sr);
+  };
+  return reader->ReadDataSection(record_callback, false);
 }
 
 bool RecordCommand::DumpAdditionalFeatures(
