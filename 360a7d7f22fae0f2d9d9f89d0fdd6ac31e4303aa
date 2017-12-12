@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aa8b1e5a_9c70f979",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-12-12T20:57:28Z",
+      "side": 1,
+      "message": "\"option\". but you may as well just remove this sentence. maybe say \", then by default ...\" on the first line?\n\nshould we be adding stuff to the docs about how you can recognize mismatched call graphs?",
+      "range": {
+        "startLine": 176,
+        "startChar": 56,
+        "endLine": 177,
+        "endChar": 37
+      },
+      "revId": "360a7d7f22fae0f2d9d9f89d0fdd6ac31e4303aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "857cd740_29fc0222",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-12-12T20:57:28Z",
+      "side": 1,
+      "message": "maybe --callchain-joiner-min-matching-nodes? (to keep \"callchain-joiner\" in both.)\n\ni\u0027m surprised the default is 1... i\u0027d have expected false positives from that?",
+      "revId": "360a7d7f22fae0f2d9d9f89d0fdd6ac31e4303aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
