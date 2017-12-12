@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "bb6e8dd1_d2fff21f",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-12-12T23:26:34Z",
+      "side": 1,
+      "message": "should we have some way of recording that a call chain was joined (in the proto too, in case we want to show it in the UI)?",
+      "parentUuid": "4da8d727_76d59ad5",
+      "range": {
+        "startLine": 176,
+        "startChar": 56,
+        "endLine": 177,
+        "endChar": 37
+      },
+      "revId": "360a7d7f22fae0f2d9d9f89d0fdd6ac31e4303aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "857cd740_29fc0222",
         "filename": "simpleperf/cmd_record.cpp",
         "patchSetId": 2
@@ -78,6 +102,24 @@
       "side": 1,
       "message": "Done. Using callchain joiner is a guess of call chains, it always has false positive unless we don\u0027t use it. I think the chance of false positive is low because it has to match three situations to be false positive:\n1. the two chains must call a common function.\n2. the two chains must have the same sp when calling the common function.\n3. the unwinding of one chain just stops at a common function of the two chains. However, another chain passes the common function.\nAnd the two chains have to be called often to be noticed by users.\n\nSo I think we can enable it by default until we find bad false positive cases.\nI will make checking of unwinding pcs more strict in libBacktraceOffline, it also helps to avoid false positives.",
       "parentUuid": "857cd740_29fc0222",
+      "revId": "360a7d7f22fae0f2d9d9f89d0fdd6ac31e4303aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ad97498e_5cf73581",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-12-12T23:26:34Z",
+      "side": 1,
+      "message": "yeah, i guess #2 alone makes false positives a lot less likely than i was imagining...\n\n(this text like a good thing to add to the docs :-) )",
+      "parentUuid": "16e6d4e6_c79c1edc",
       "revId": "360a7d7f22fae0f2d9d9f89d0fdd6ac31e4303aa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
