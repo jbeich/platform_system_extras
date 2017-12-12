@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "a24a7920_6236060b",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-12-12T23:49:34Z",
+      "side": 1,
+      "message": "the android studio side doesn\u0027t need the flag because they know the record options they use. Not sure if we need a warning, I will reconsider it after adding all patches.",
+      "parentUuid": "bb6e8dd1_d2fff21f",
+      "range": {
+        "startLine": 176,
+        "startChar": 56,
+        "endLine": 177,
+        "endChar": 37
+      },
+      "revId": "360a7d7f22fae0f2d9d9f89d0fdd6ac31e4303aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "857cd740_29fc0222",
         "filename": "simpleperf/cmd_record.cpp",
         "patchSetId": 2
