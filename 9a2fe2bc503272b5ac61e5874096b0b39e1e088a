@@ -16,6 +16,24 @@
       "revId": "9a2fe2bc503272b5ac61e5874096b0b39e1e088a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9e5102c4_1906efe7",
+        "filename": "simpleperf/cmd_report_sample.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 493,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-12-12T22:21:33Z",
+      "side": 1,
+      "message": "_start or _start_main. comment is added.",
+      "parentUuid": "44c56d00_3ab0b8d2",
+      "revId": "9a2fe2bc503272b5ac61e5874096b0b39e1e088a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
