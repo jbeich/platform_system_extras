@@ -30,6 +30,8 @@
 #include <string>
 #include <vector>
 
+#include <android-base/test_utils.h>
+
 #include "build_id.h"
 #include "perf_regs.h"
 
@@ -99,5 +101,9 @@ bool RunInAppContext(const std::string& app_package_name, const std::string& cmd
 // Below two functions are only used in cts tests, to force stat/record cmd to run in app's context.
 void SetDefaultAppPackageName(const std::string& package_name);
 const std::string& GetDefaultAppPackageName();
+void AllowMoreOpenedFiles();
+
+void SetTempDirectoryUsedInRecording(const std::string& tmp_dir);
+std::unique_ptr<TemporaryFile> CreateTempFileUsedInRecording();
 
 #endif  // SIMPLE_PERF_ENVIRONMENT_H_
