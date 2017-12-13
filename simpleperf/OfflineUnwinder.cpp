@@ -14,14 +14,20 @@
  * limitations under the License.
  */
 
-#include "dwarf_unwind.h"
+#include "OfflineUnwinder.h"
 
 #include <ucontext.h>
 
-#include <backtrace/Backtrace.h>
 #include <android-base/logging.h>
+#include <backtrace/Backtrace.h>
+#include <backtrace/BacktraceOffline.h>
 
+#include "environment.h"
 #include "thread_tree.h"
+
+using namespace libbacktrace;
+
+namespace simpleperf {
 
 #define SetUContextReg(dst, perf_regno)          \
   do {                                           \
@@ -94,14 +100,18 @@ static ucontext_t BuildUContextFromRegs(const RegSet& regs __attribute__((unused
   return ucontext;
 }
 
-bool UnwindCallChain(int abi, const ThreadEntry& thread, const RegSet& regs, const char* stack,
-                     size_t stack_size, bool strict_arch_check,
-                     std::vector<uint64_t>* ips, std::vector<uint64_t>* sps) {
+bool OfflineUnwinder::UnwindCallChain(int abi, const ThreadEntry& thread, const RegSet& regs,
+                                      const char* stack, size_t stack_size,
+                                      std::vector<uint64_t>* ips, std::vector<uint64_t>* sps) {
+  uint64_t start_time;
+  if (collect_stat_) {
+    start_time = GetSystemClock();
+  }
   std::vector<uint64_t> result;
   ArchType arch = (abi != PERF_SAMPLE_REGS_ABI_32) ?
                       ScopedCurrentArch::GetCurrentArch() :
                       ScopedCurrentArch::GetCurrentArch32();
-  if (!IsArchTheSame(arch, GetBuildArch(), strict_arch_check)) {
+  if (!IsArchTheSame(arch, GetBuildArch(), strict_arch_check_)) {
     LOG(ERROR) << "simpleperf is built in arch " << GetArchString(GetBuildArch())
                 << ", and can't do stack unwinding for arch " << GetArchString(arch);
     return false;
@@ -119,6 +129,10 @@ bool UnwindCallChain(int abi, const ThreadEntry& thread, const RegSet& regs, con
     }
     ips->push_back(ip_reg_value);
     sps->push_back(sp_reg_value);
+    if (collect_stat_) {
+      stat_.used_time = GetSystemClock() - start_time;
+      stat_.stop_reason = UnwindingStat::DIFFERENT_ARCH;
+    }
     return true;
   }
   uint64_t stack_addr = sp_reg_value;
@@ -153,5 +167,47 @@ bool UnwindCallChain(int abi, const ThreadEntry& thread, const RegSet& regs, con
       sps->push_back(it->sp);
     }
   }
-  return !ips->empty();
+  if (ips->empty()) {
+    return false;
+  }
+  if (collect_stat_) {
+    stat_.used_time = GetSystemClock() - start_time;
+    BacktraceOffline* bt = static_cast<BacktraceOffline*>(backtrace.get());
+    const BacktraceOfflineFailure& failure = bt->GetBacktraceOfflineFailure();
+    switch (failure.reason) {
+      case BacktraceOfflineFailure::UNKNOWN_REASON:
+        stat_.stop_reason = UnwindingStat::UNKNOWN_REASON;
+        break;
+      case BacktraceOfflineFailure::UNW_STEP_STOPPED:
+        stat_.stop_reason = UnwindingStat::UNW_STEP_STOPPED;
+        break;
+      case BacktraceOfflineFailure::MAX_FRAMES_LIMIT:
+        stat_.stop_reason = UnwindingStat::MAX_FRAMES_LIMIT;
+        break;
+      case BacktraceOfflineFailure::ACCESS_REG_FAILED:
+        stat_.stop_reason = UnwindingStat::ACCESS_REG_FAILED;
+        stat_.stop_info.regno = failure.regno;
+        break;
+      case BacktraceOfflineFailure::ACCESS_MEM_FAILED:
+        // Because we don't have precise stack range here, just guess an addr if in stack
+        // if sp - 128K <= addr <= sp.
+        if (failure.addr <= stack_addr && failure.addr >= stack_addr - 128 * 1024) {
+          stat_.stop_reason = UnwindingStat::ACCESS_STACK_FAILED;
+        } else {
+          stat_.stop_reason = UnwindingStat::ACCESS_MEM_FAILED;
+        }
+        stat_.stop_info.addr = failure.addr;
+        break;
+      case BacktraceOfflineFailure::FIND_PROC_INFO_FAILED:
+        stat_.stop_reason = UnwindingStat::FIND_PROC_INFO_FAILED;
+        break;
+      case BacktraceOfflineFailure::EXECUTE_DWARF_INSTRUCTION_FAILED:
+        stat_.stop_reason = UnwindingStat::EXECUTE_DWARF_INSTRUCTION_FAILED;
+        stat_.stop_info.execute_result = failure.execute_result;
+        break;
+    }
+  }
+  return true;
 }
+
+}  // namespace simpleperf
