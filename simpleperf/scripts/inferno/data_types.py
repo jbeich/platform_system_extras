@@ -56,13 +56,25 @@ class Process:
         self.threads = {}
         self.cmd = ""
         self.props = {}
+        # num_samples is the count of samples recorded in the profiling file.
         self.num_samples = 0
+        # event_count is the count of events contained in all samples. Each sample contains a
+        # count of events happened since last sample. If we use cpu-cycles event, the count
+        # shows how many cpu-cycles have happened during recording.
+        self.event_count = 0
 
     def get_thread(self, tid, pid):
         thread = self.threads.get(tid)
         if thread is None:
             thread = self.threads[tid] = Thread(tid, pid)
         return thread
+
+    def add_sample(self, sample, symbol, callchain):
+        thread = self.get_thread(sample.tid, sample.pid)
+        thread.add_callchain(callchain, symbol, sample)
+        self.num_samples += 1
+        # sample.period is the count of events happened since last sample.
+        self.event_count += sample.period
 
 
 class FlameGraphCallSite:

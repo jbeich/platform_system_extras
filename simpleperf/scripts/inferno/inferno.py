@@ -110,8 +110,7 @@ def parse_samples(process, args):
             break
         symbol = lib.GetSymbolOfCurrentSample()
         callchain = lib.GetCallChainOfCurrentSample()
-        process.get_thread(sample.tid, sample.pid).add_callchain(callchain, symbol, sample)
-        process.num_samples += 1
+        process.add_sample(sample, symbol, callchain)
 
     if process.pid == 0:
         main_threads = [thread for thread in process.threads.values() if thread.tid == thread.pid]
@@ -165,11 +164,13 @@ def output_report(process, args):
                   Date&nbsp;&nbsp;&nbsp;&nbsp;: %s<br/>
                   Threads : %d <br/>
                   Samples : %d</br>
+                  Event count: %d</br>
                   %s""" % (
         process_entry,
         datetime.datetime.now().strftime("%Y-%m-%d (%A) %H:%M:%S"),
         len(process.threads),
         process.num_samples,
+        process.event_count,
         duration_entry))
     if 'ro.product.model' in process.props:
         f.write(
