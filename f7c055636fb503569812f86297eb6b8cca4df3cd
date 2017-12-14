@@ -22,6 +22,30 @@
       "revId": "f7c055636fb503569812f86297eb6b8cca4df3cd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e8faa411_d4615447",
+        "filename": "simpleperf/scripts/inferno/data_types.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-12-14T19:44:07Z",
+      "side": 1,
+      "message": "I am trying to be consistent with class Thread and class FlameGraphCallSite, which already use event_count. Comment is added.",
+      "parentUuid": "6dd93835_7c81a9d4",
+      "range": {
+        "startLine": 60,
+        "startChar": 13,
+        "endLine": 60,
+        "endChar": 24
+      },
+      "revId": "f7c055636fb503569812f86297eb6b8cca4df3cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
