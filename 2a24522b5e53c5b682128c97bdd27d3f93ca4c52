@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "bfe92c20_db87957b",
+        "filename": "simpleperf/scripts/inferno/svg_renderer.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-12-14T19:28:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c84a03de_a9b230f6",
+      "range": {
+        "startLine": 22,
+        "startChar": 12,
+        "endLine": 22,
+        "endChar": 13
+      },
+      "revId": "2a24522b5e53c5b682128c97bdd27d3f93ca4c52",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "85d3cc61_1b97d563",
         "filename": "simpleperf/scripts/inferno/svg_renderer.py",
         "patchSetId": 1
@@ -45,6 +69,30 @@
       "revId": "2a24522b5e53c5b682128c97bdd27d3f93ca4c52",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "655821eb_e3c08524",
+        "filename": "simpleperf/scripts/inferno/svg_renderer.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-12-14T19:28:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "85d3cc61_1b97d563",
+      "range": {
+        "startLine": 30,
+        "startChar": 11,
+        "endLine": 30,
+        "endChar": 15
+      },
+      "revId": "2a24522b5e53c5b682128c97bdd27d3f93ca4c52",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
