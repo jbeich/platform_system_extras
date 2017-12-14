@@ -34,9 +34,7 @@ LLVM_ROOT_PATH := external/llvm
 include $(LLVM_ROOT_PATH)/llvm.mk
 
 simpleperf_static_libraries_target := \
-  libbacktrace_offline \
   libbacktrace \
-  libunwind \
   libunwindstack \
   libziparchive \
   libz \
@@ -76,9 +74,7 @@ simpleperf_static_libraries_host := \
 
 simpleperf_static_libraries_host_linux := \
   libprocinfo \
-  libbacktrace_offline \
   libbacktrace \
-  libunwind \
   libunwindstack \
   libcutils \
   libevent \

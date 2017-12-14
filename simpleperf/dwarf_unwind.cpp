@@ -133,7 +133,6 @@ bool UnwindCallChain(int abi, const ThreadEntry& thread, const RegSet& regs, con
     bt_map.name = map->dso->GetDebugFilePath();
     bt_map.flags = PROT_READ | PROT_EXEC;
   }
-  std::unique_ptr<BacktraceMap> backtrace_map(BacktraceMap::Create(thread.pid, bt_maps));
 
   backtrace_stackinfo_t stack_info;
   stack_info.start = stack_addr;
@@ -141,7 +140,7 @@ bool UnwindCallChain(int abi, const ThreadEntry& thread, const RegSet& regs, con
   stack_info.data = reinterpret_cast<const uint8_t*>(stack);
 
   std::unique_ptr<Backtrace> backtrace(
-      Backtrace::CreateOffline(thread.pid, thread.tid, backtrace_map.get(), stack_info, true));
+      Backtrace::CreateOffline(thread.pid, thread.tid, bt_maps, stack_info));
   ucontext_t ucontext = BuildUContextFromRegs(regs);
   if (backtrace->Unwind(0, &ucontext)) {
     for (auto it = backtrace->begin(); it != backtrace->end(); ++it) {
