@@ -46,6 +46,30 @@
       "revId": "f7c055636fb503569812f86297eb6b8cca4df3cd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c193d6e9_f038d8be",
+        "filename": "simpleperf/scripts/inferno/data_types.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1083168
+      },
+      "writtenOn": "2017-12-14T22:06:37Z",
+      "side": 1,
+      "message": "Thread did not have event_count. It was added by you (https://android.googlesource.com/platform/system/extras/+/d3c40e701e2638596bf8bd2d4f8da746e005e144) and I did not catch it back then but it is not consistent with the rest of the codebase.",
+      "parentUuid": "e8faa411_d4615447",
+      "range": {
+        "startLine": 60,
+        "startChar": 13,
+        "endLine": 60,
+        "endChar": 24
+      },
+      "revId": "f7c055636fb503569812f86297eb6b8cca4df3cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
