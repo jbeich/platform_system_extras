@@ -24,7 +24,6 @@
 #include <android-base/stringprintf.h>
 
 #include "dso.h"
-#include "OfflineUnwinder.h"
 #include "perf_regs.h"
 #include "tracing.h"
 #include "utils.h"

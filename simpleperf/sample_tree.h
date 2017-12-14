@@ -20,7 +20,9 @@
 #include <unordered_map>
 
 #include "callchain.h"
+#if defined(__ANDROID__) || defined(__linux__)
 #include "OfflineUnwinder.h"
+#endif
 #include "perf_regs.h"
 #include "record.h"
 #include "SampleComparator.h"
@@ -77,9 +79,11 @@ class SampleTreeBuilder {
     accumulate_callchain_ = accumulate_callchain;
     build_callchain_ = build_callchain;
     use_caller_as_callchain_root_ = use_caller_as_callchain_root;
+#if defined(__ANDROID__) || defined(__linux__)
     if (accumulate_callchain_) {
       offline_unwinder_.reset(new OfflineUnwinder(strict_unwind_arch_check, false));
     }
+#endif
   }
 
   void ProcessSampleRecord(const SampleRecord& r) {
@@ -98,6 +102,7 @@ class SampleTreeBuilder {
     if (sample == nullptr) {
       return;
     }
+#if defined(__ANDROID__) || defined(__linux__)
     if (accumulate_callchain_) {
       std::vector<uint64_t> ips;
       if (r.sample_type & PERF_SAMPLE_CALLCHAIN) {
@@ -177,6 +182,7 @@ class SampleTreeBuilder {
         }
       }
     }
+#endif
   }
 
   std::vector<EntryT*> GetSamples() const {
@@ -306,7 +312,9 @@ class SampleTreeBuilder {
   bool use_branch_address_;
   bool build_callchain_;
   bool use_caller_as_callchain_root_;
+#if defined(__ANDROID__) || defined(__linux__)
   std::unique_ptr<OfflineUnwinder> offline_unwinder_;
+#endif
 };
 
 template <typename EntryT>
