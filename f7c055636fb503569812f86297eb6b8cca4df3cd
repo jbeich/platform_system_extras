@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6dd93835_7c81a9d4",
+        "filename": "simpleperf/scripts/inferno/data_types.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1083168
+      },
+      "writtenOn": "2017-12-14T19:24:50Z",
+      "side": 1,
+      "message": "be consistent with above field and use num_events. Some documentation about difference events and sample would be welcome here since i you add sample.period to event_count below.",
+      "range": {
+        "startLine": 60,
+        "startChar": 13,
+        "endLine": 60,
+        "endChar": 24
+      },
+      "revId": "f7c055636fb503569812f86297eb6b8cca4df3cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
