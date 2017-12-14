@@ -57,12 +57,19 @@ class Process:
         self.cmd = ""
         self.props = {}
         self.num_samples = 0
+        self.event_count = 0
 
     def get_thread(self, tid, pid):
         thread = self.threads.get(tid)
         if thread is None:
             thread = self.threads[tid] = Thread(tid, pid)
         return thread
+
+    def add_sample(self, sample, symbol, callchain):
+        thread = self.get_thread(sample.tid, sample.pid)
+        thread.add_callchain(callchain, symbol, sample)
+        self.num_samples += 1
+        self.event_count += sample.period
 
 
 class FlameGraphCallSite:
