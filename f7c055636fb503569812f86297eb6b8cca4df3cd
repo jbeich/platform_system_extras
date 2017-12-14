@@ -70,6 +70,30 @@
       "revId": "f7c055636fb503569812f86297eb6b8cca4df3cd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dd9d8079_0a0a43f7",
+        "filename": "simpleperf/scripts/inferno/data_types.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-12-14T22:29:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c193d6e9_f038d8be",
+      "range": {
+        "startLine": 60,
+        "startChar": 13,
+        "endLine": 60,
+        "endChar": 24
+      },
+      "revId": "f7c055636fb503569812f86297eb6b8cca4df3cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
