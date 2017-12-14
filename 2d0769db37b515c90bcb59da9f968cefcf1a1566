@@ -1,0 +1,182 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "888af45d_b37a3f61",
+        "filename": "simpleperf/scripts/unwinding_result_reporter.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2017-12-14T20:01:11Z",
+      "side": 1,
+      "message": "AOSP license lines",
+      "revId": "2d0769db37b515c90bcb59da9f968cefcf1a1566",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "10e1d8c1_41aa123e",
+        "filename": "simpleperf/scripts/unwinding_result_reporter.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2017-12-14T20:01:11Z",
+      "side": 1,
+      "message": "\"new_list \u003d copy.deepcopy(entry_list)\" looks cleaner",
+      "range": {
+        "startLine": 52,
+        "startChar": 8,
+        "endLine": 54,
+        "endChar": 45
+      },
+      "revId": "2d0769db37b515c90bcb59da9f968cefcf1a1566",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4ea197b9_13dbd1ab",
+        "filename": "simpleperf/scripts/unwinding_result_reporter.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2017-12-14T20:01:11Z",
+      "side": 1,
+      "message": "Since entry_list is sorted, we can also check for early termination: \"if addr \u003c entry.start: return None\"\n\nAlso if there\u0027re a lot of data to process, we may consider using bisect to speed up the search since it\u0027s sorted list.",
+      "range": {
+        "startLine": 60,
+        "startChar": 12,
+        "endLine": 60,
+        "endChar": 56
+      },
+      "revId": "2d0769db37b515c90bcb59da9f968cefcf1a1566",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "07d69406_a363a044",
+        "filename": "simpleperf/scripts/unwinding_result_reporter.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2017-12-14T20:01:11Z",
+      "side": 1,
+      "message": "not needed",
+      "range": {
+        "startLine": 65,
+        "startChar": 43,
+        "endLine": 65,
+        "endChar": 50
+      },
+      "revId": "2d0769db37b515c90bcb59da9f968cefcf1a1566",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4ab4aba9_a7858829",
+        "filename": "simpleperf/scripts/unwinding_result_reporter.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2017-12-14T20:01:11Z",
+      "side": 1,
+      "message": "nit: I find it more readable by putting the parentheses around all conditions. That way we have same-level conditions with the same indentation, e.g.\n  if (node.filename.endswith(\u0027libc.so\u0027) and\n      node.function_name in [\u0027__libc_init\u0027, \u0027__start_thread\u0027]):",
+      "range": {
+        "startLine": 203,
+        "startChar": 12,
+        "endLine": 204,
+        "endChar": 76
+      },
+      "revId": "2d0769db37b515c90bcb59da9f968cefcf1a1566",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9e446957_e1d5e35a",
+        "filename": "simpleperf/scripts/unwinding_result_reporter.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2017-12-14T20:01:11Z",
+      "side": 1,
+      "message": "Shall we check map_entry has something other than all None? Or we may use None as the initial value of pid, and check for that instead.",
+      "range": {
+        "startLine": 252,
+        "startChar": 34,
+        "endLine": 252,
+        "endChar": 43
+      },
+      "revId": "2d0769db37b515c90bcb59da9f968cefcf1a1566",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8977e0ce_d3fa49f5",
+        "filename": "simpleperf/scripts/unwinding_result_reporter.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2017-12-14T20:01:11Z",
+      "side": 1,
+      "message": "nit: remove the indentation here?",
+      "range": {
+        "startLine": 321,
+        "startChar": 16,
+        "endLine": 321,
+        "endChar": 20
+      },
+      "revId": "2d0769db37b515c90bcb59da9f968cefcf1a1566",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f0c7c56f_15b8be9f",
+        "filename": "simpleperf/scripts/unwinding_result_reporter.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2017-12-14T20:01:11Z",
+      "side": 1,
+      "message": "Same here. Shall we init pid and ppid to None, and check them before using?",
+      "range": {
+        "startLine": 344,
+        "startChar": 34,
+        "endLine": 344,
+        "endChar": 43
+      },
+      "revId": "2d0769db37b515c90bcb59da9f968cefcf1a1566",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
