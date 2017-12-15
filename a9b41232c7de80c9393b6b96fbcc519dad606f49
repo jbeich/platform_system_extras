@@ -93,6 +93,30 @@
       "revId": "a9b41232c7de80c9393b6b96fbcc519dad606f49",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fb4dee7c_2ea8e7c1",
+        "filename": "simpleperf/scripts/unwinding_result_reporter.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2017-12-15T23:39:46Z",
+      "side": 1,
+      "message": "Oops, didn\u0027t notice the loop.\n\nNow I understand, you are only reporting callchains for which the unwind looks like something went wrong. This is not completely clear, perhaps naming the class UnwindResultErrorReport to be explicit.",
+      "parentUuid": "defeb3ce_5ac7bd55",
+      "range": {
+        "startLine": 221,
+        "startChar": 13,
+        "endLine": 222,
+        "endChar": 18
+      },
+      "revId": "a9b41232c7de80c9393b6b96fbcc519dad606f49",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
