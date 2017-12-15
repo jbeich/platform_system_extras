@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "73149c9e_f091b3dd",
+        "filename": "simpleperf/read_elf.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-12-15T20:42:18Z",
+      "side": 1,
+      "message": "this should actually be a runtime linker error:\n\n  if (symtab_ \u003d\u003d 0) {\n    DL_ERR(\"empty/missing DT_SYMTAB in \\\"%s\\\"\", get_realpath());\n    return false;\n  }",
+      "revId": "e4e13f35eb0b220d159870e662daf59010f3680e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c3160a97_8848049c",
         "filename": "simpleperf/read_elf.cpp",
         "patchSetId": 1
