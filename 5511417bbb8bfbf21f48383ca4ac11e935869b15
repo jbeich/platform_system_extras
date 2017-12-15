@@ -1,0 +1,308 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "85af305b_912117e9",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-12-15T00:23:07Z",
+      "side": 1,
+      "message": "\"Security restrictions mean that only apps with android:debuggable set to true can be profiled. (On a rooted device, all apps can be profiled.)\"",
+      "revId": "5511417bbb8bfbf21f48383ca4ac11e935869b15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f7316123_96c03d02",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-12-15T00:23:07Z",
+      "side": 1,
+      "message": "In Android Studio, that means you need to use the debug build type instead of the release build type.",
+      "revId": "5511417bbb8bfbf21f48383ca4ac11e935869b15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6bbbd0cc_310c8187",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-12-15T00:23:07Z",
+      "side": 1,
+      "message": "remove these two sentences now they\u0027re in the first sentence.",
+      "revId": "5511417bbb8bfbf21f48383ca4ac11e935869b15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a760e45_825b69f1",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-12-15T00:23:07Z",
+      "side": 1,
+      "message": "for the reason given [here]\n\nor better\n\n  for [this reason]\n\nor even just\n\n  [We suggest profiling on an Android \u003e\u003d N device.]",
+      "range": {
+        "startLine": 174,
+        "startChar": 47,
+        "endLine": 174,
+        "endChar": 57
+      },
+      "revId": "5511417bbb8bfbf21f48383ca4ac11e935869b15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "72c70df4_ede3900e",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-12-15T00:23:07Z",
+      "side": 1,
+      "message": "Java",
+      "range": {
+        "startLine": 179,
+        "startChar": 56,
+        "endLine": 179,
+        "endChar": 60
+      },
+      "revId": "5511417bbb8bfbf21f48383ca4ac11e935869b15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9771c3d6_8594c450",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-12-15T00:23:07Z",
+      "side": 1,
+      "message": "This",
+      "range": {
+        "startLine": 214,
+        "startChar": 0,
+        "endLine": 214,
+        "endChar": 27
+      },
+      "revId": "5511417bbb8bfbf21f48383ca4ac11e935869b15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fbce1845_877ffcf2",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-12-15T00:23:07Z",
+      "side": 1,
+      "message": "results",
+      "range": {
+        "startLine": 279,
+        "startChar": 63,
+        "endLine": 279,
+        "endChar": 69
+      },
+      "revId": "5511417bbb8bfbf21f48383ca4ac11e935869b15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c20a510e_60981004",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-12-15T00:23:07Z",
+      "side": 1,
+      "message": "a web browser",
+      "range": {
+        "startLine": 279,
+        "startChar": 73,
+        "endLine": 279,
+        "endChar": 87
+      },
+      "revId": "5511417bbb8bfbf21f48383ca4ac11e935869b15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "09512f2c_346838ae",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-12-15T00:23:07Z",
+      "side": 1,
+      "message": "Flame graphs are",
+      "range": {
+        "startLine": 289,
+        "startChar": 58,
+        "endLine": 289,
+        "endChar": 72
+      },
+      "revId": "5511417bbb8bfbf21f48383ca4ac11e935869b15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "998ed909_05981ee2",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-12-15T00:23:07Z",
+      "side": 1,
+      "message": "a flame graph",
+      "range": {
+        "startLine": 289,
+        "startChar": 8,
+        "endLine": 289,
+        "endChar": 19
+      },
+      "revId": "5511417bbb8bfbf21f48383ca4ac11e935869b15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c14ed2ad_46c0b30a",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-12-15T00:23:07Z",
+      "side": 1,
+      "message": "flame graphs",
+      "range": {
+        "startLine": 291,
+        "startChar": 44,
+        "endLine": 291,
+        "endChar": 55
+      },
+      "revId": "5511417bbb8bfbf21f48383ca4ac11e935869b15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1312a0dc_e85f4285",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-12-15T00:23:07Z",
+      "side": 1,
+      "message": "flame graphs using",
+      "range": {
+        "startLine": 298,
+        "startChar": 18,
+        "endLine": 298,
+        "endChar": 38
+      },
+      "revId": "5511417bbb8bfbf21f48383ca4ac11e935869b15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e772c034_5bc03d36",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 1145,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-12-15T00:23:07Z",
+      "side": 1,
+      "message": "If the native libraries you use on device are stripped, this will result in a lot of unknown symbols in the report\"",
+      "range": {
+        "startLine": 1144,
+        "startChar": 71,
+        "endLine": 1145,
+        "endChar": 94
+      },
+      "revId": "5511417bbb8bfbf21f48383ca4ac11e935869b15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "227c4bea_7169b972",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 1155,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-12-15T00:23:07Z",
+      "side": 1,
+      "message": "for use",
+      "range": {
+        "startLine": 1155,
+        "startChar": 16,
+        "endLine": 1155,
+        "endChar": 36
+      },
+      "revId": "5511417bbb8bfbf21f48383ca4ac11e935869b15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
