@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "23cddd04_30e43101",
+        "filename": "simpleperf/OfflineUnwinder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-12-15T06:15:07Z",
+      "side": 1,
+      "message": "is",
+      "range": {
+        "startLine": 192,
+        "startChar": 78,
+        "endLine": 192,
+        "endChar": 80
+      },
+      "revId": "4ad9d9064a99f5ca6d01bbd7e1077330d0735c3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0a9de388_79cb83d7",
+        "filename": "simpleperf/OfflineUnwinder.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-12-15T06:15:07Z",
+      "side": 1,
+      "message": "UnwindingResult, to match UnwindingResultRecord?",
+      "range": {
+        "startLine": 27,
+        "startChar": 7,
+        "endLine": 27,
+        "endChar": 20
+      },
+      "revId": "4ad9d9064a99f5ca6d01bbd7e1077330d0735c3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
