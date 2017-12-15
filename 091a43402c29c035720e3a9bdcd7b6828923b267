@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "35f4d720_5cc628de",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1079148
+      },
+      "writtenOn": "2017-12-15T00:19:39Z",
+      "side": 1,
+      "message": "flashing an image to test this now",
+      "range": {
+        "startLine": 13,
+        "startChar": 6,
+        "endLine": 13,
+        "endChar": 63
+      },
+      "revId": "091a43402c29c035720e3a9bdcd7b6828923b267",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1c5a74ab_9352d89c",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 422,
+      "author": {
+        "id": 1079148
+      },
+      "writtenOn": "2017-12-15T00:19:39Z",
+      "side": 1,
+      "message": "Should the rest of these check the inherited disposition as well?",
+      "revId": "091a43402c29c035720e3a9bdcd7b6828923b267",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9e507b3e_dd0eee12",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 422,
+      "author": {
+        "id": 1079148
+      },
+      "writtenOn": "2017-12-15T00:19:39Z",
+      "side": 1,
+      "message": "oops, failed to add this hunk via add -p",
+      "range": {
+        "startLine": 422,
+        "startChar": 56,
+        "endLine": 422,
+        "endChar": 62
+      },
+      "revId": "091a43402c29c035720e3a9bdcd7b6828923b267",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
