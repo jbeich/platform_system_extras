@@ -178,4 +178,8 @@ timeval SecondToTimeval(double time_in_sec);
 
 std::string GetSimpleperfVersion();
 
+#if !defined(_WIN32)
+bool SignalIsIgnored(int signo);
+#endif
+
 #endif  // SIMPLE_PERF_UTILS_H_
