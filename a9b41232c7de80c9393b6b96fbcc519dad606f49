@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "25ec970d_70818a74",
+        "filename": "simpleperf/scripts/unwinding_result_reporter.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-12-15T23:03:32Z",
+      "side": 1,
+      "message": "add() is called when handling MmapRecord, and find() is called when handling SampleRecord. \nMmapRecords and SampleRecords don\u0027t have established orders, consider a thread calling execve() or loading libraries. So can\u0027t sort after everything is added.\nUsually, we have at most hundreds of MmapRecords for each process, but can have tens of thousands of SampleRecords, and each SampleRecord can have a callchain with length over 100.\nSo it doesn\u0027t matter to be slow here.",
+      "parentUuid": "ee3387ad_645f4ae0",
+      "range": {
+        "startLine": 50,
+        "startChar": 8,
+        "endLine": 50,
+        "endChar": 33
+      },
+      "revId": "a9b41232c7de80c9393b6b96fbcc519dad606f49",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "fd33a86a_79cbc946",
         "filename": "simpleperf/scripts/unwinding_result_reporter.py",
         "patchSetId": 4
@@ -36,6 +60,30 @@
       "writtenOn": "2017-12-15T22:44:25Z",
       "side": 1,
       "message": "Why? Also, on arm 32, you aren\u0027t guaranteed to end this way, but most of the time you should.\n\nI\u0027m trying to find a way to fix arm so we won\u0027t unwind too far, but I don\u0027t have a good solution yet. If you want to see a frame like this, do a debuggerd -b \u003cmedia.codec\u003e that usually winds up with one or two frames past __libc_init. This should only apply for threads ending in __libc_init, you can\u0027t go beyond __start_thread any more, but you could in the past.\n\nAn alternate solution would be to mark a stack frame where you saw __libc_init or __start_thread, and omit that way. I don\u0027t know if that\u0027s very easy though.",
+      "range": {
+        "startLine": 221,
+        "startChar": 13,
+        "endLine": 222,
+        "endChar": 18
+      },
+      "revId": "a9b41232c7de80c9393b6b96fbcc519dad606f49",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "defeb3ce_5ac7bd55",
+        "filename": "simpleperf/scripts/unwinding_result_reporter.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-12-15T23:03:32Z",
+      "side": 1,
+      "message": "I don\u0027t care _start or _start_main past __libc_init. If a callchain can reach __libc_init or __start_thread, I think it is successfully and no need to report it. Note that the code doesn\u0027t require the callchain ends at __libc_init or __start_thread, because of the loop in L223.",
+      "parentUuid": "fd33a86a_79cbc946",
       "range": {
         "startLine": 221,
         "startChar": 13,
