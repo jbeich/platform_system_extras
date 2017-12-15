@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "78f8d7ce_a8e16411",
+        "filename": "simpleperf/read_elf.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-12-15T21:56:41Z",
+      "side": 1,
+      "message": "The test library I use passes current linker test. It has a DT_SYMTAB:\n 0x00000006 (SYMTAB)                     0x18c\n 0x0000000b (SYMENT)                     16 (bytes)\n 0x00000005 (STRTAB)                     0x135c\n 0x0000000a (STRSZ)                      3687 (bytes)\n\nBut it fails when trying to read symbols in the section with type DYNSYM.",
+      "parentUuid": "73149c9e_f091b3dd",
+      "revId": "e4e13f35eb0b220d159870e662daf59010f3680e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c3160a97_8848049c",
         "filename": "simpleperf/read_elf.cpp",
         "patchSetId": 1
@@ -30,6 +48,30 @@
       "writtenOn": "2017-12-15T20:16:00Z",
       "side": 1,
       "message": "It can actually be worse than this, they might ship them with section headers that point outside of the elf. I don\u0027t know if this catches those cases.",
+      "range": {
+        "startLine": 376,
+        "startChar": 41,
+        "endLine": 376,
+        "endChar": 77
+      },
+      "revId": "e4e13f35eb0b220d159870e662daf59010f3680e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9b2b8796_5cad9058",
+        "filename": "simpleperf/read_elf.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-12-15T21:56:41Z",
+      "side": 1,
+      "message": "There are ways to make segfault in llvm elf reader. It is hard to detect them all unless writing another elf reader. So for now I am fine to just fix the case I met.",
+      "parentUuid": "c3160a97_8848049c",
       "range": {
         "startLine": 376,
         "startChar": 41,
