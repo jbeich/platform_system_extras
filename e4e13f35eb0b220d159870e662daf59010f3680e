@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c3160a97_8848049c",
+        "filename": "simpleperf/read_elf.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2017-12-15T20:16:00Z",
+      "side": 1,
+      "message": "It can actually be worse than this, they might ship them with section headers that point outside of the elf. I don\u0027t know if this catches those cases.",
+      "range": {
+        "startLine": 376,
+        "startChar": 41,
+        "endLine": 376,
+        "endChar": 77
+      },
+      "revId": "e4e13f35eb0b220d159870e662daf59010f3680e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
