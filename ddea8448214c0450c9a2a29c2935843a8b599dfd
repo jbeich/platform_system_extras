@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "909104de_72c3f1f1",
+        "filename": "simpleperf/utils.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-12-15T00:47:43Z",
+      "side": 1,
+      "message": "move this to environment.cpp, and don\u0027t need if defined. environment.cpp is where I put functions only for linux environment.",
+      "range": {
+        "startLine": 350,
+        "startChar": 5,
+        "endLine": 350,
+        "endChar": 20
+      },
+      "revId": "ddea8448214c0450c9a2a29c2935843a8b599dfd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1a77a2c3_a487702f",
+        "filename": "simpleperf/utils.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-12-15T00:47:43Z",
+      "side": 1,
+      "message": "move this to environment.h, and don\u0027t need the if defined.",
+      "range": {
+        "startLine": 182,
+        "startChar": 5,
+        "endLine": 182,
+        "endChar": 20
+      },
+      "revId": "ddea8448214c0450c9a2a29c2935843a8b599dfd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
