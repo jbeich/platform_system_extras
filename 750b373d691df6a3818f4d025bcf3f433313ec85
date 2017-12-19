@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c17fb364_d17e2d4e",
+        "filename": "simpleperf/utils.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2017-12-19T03:03:37Z",
+      "side": 1,
+      "message": "I don\u0027t remember how the log severity works, is it a stack that implies all of the ones below it? For example, specifying verbose means all of debug/info/warning/error/fatal. Specifying, error gets you warning, etc.\n\nIf that\u0027s true, I think this is fine. However, if not, do you think someone might want to get multiple different severity levels? Should it be possible to specify multiple of these?",
+      "range": {
+        "startLine": 260,
+        "startChar": 12,
+        "endLine": 260,
+        "endChar": 30
+      },
+      "revId": "750b373d691df6a3818f4d025bcf3f433313ec85",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
