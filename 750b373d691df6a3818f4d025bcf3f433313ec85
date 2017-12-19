@@ -22,6 +22,30 @@
       "revId": "750b373d691df6a3818f4d025bcf3f433313ec85",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f1bc0364_0f7b5cb4",
+        "filename": "simpleperf/utils.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2017-12-19T04:19:34Z",
+      "side": 1,
+      "message": "it\u0027s just a \u003e\u003d comparison: https://cs.corp.google.com/android/system/core/base/include/android-base/logging.h?type\u003dcs\u0026q\u003dminimumlogsev+file:core/base\u0026sq\u003dpackage:%5Eandroid$\u0026l\u003d190",
+      "parentUuid": "c17fb364_d17e2d4e",
+      "range": {
+        "startLine": 260,
+        "startChar": 12,
+        "endLine": 260,
+        "endChar": 30
+      },
+      "revId": "750b373d691df6a3818f4d025bcf3f433313ec85",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
