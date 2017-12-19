@@ -195,8 +195,12 @@ bool OfflineUnwinder::UnwindCallChain(int abi, const ThreadEntry& thread, const 
       case BACKTRACE_UNWIND_ERROR_EXECUTE_DWARF_INSTRUCTION_FAILED:
         unwinding_result_.stop_reason = UnwindingResult::EXECUTE_DWARF_INSTRUCTION_FAILED;
         break;
+      case BACKTRACE_UNWIND_ERROR_MAP_MISSING:
+        unwinding_result_.stop_reason = UnwindingResult::MAP_MISSING;
+        break;
       default:
         unwinding_result_.stop_reason = UnwindingResult::UNKNOWN_REASON;
+        unwinding_result_.stop_info.addr = error.error_code;
         break;
     }
   }

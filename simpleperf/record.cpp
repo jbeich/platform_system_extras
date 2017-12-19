@@ -1113,12 +1113,14 @@ void UnwindingResultRecord::DumpData(size_t indent) const {
       {UnwindingResult::FIND_PROC_INFO_FAILED, "FIND_PROC_INFO_FAILED"},
       {UnwindingResult::EXECUTE_DWARF_INSTRUCTION_FAILED, "EXECUTE_DWARF_INSTRUCTION_FAILED"},
       {UnwindingResult::DIFFERENT_ARCH, "DIFFERENT_ARCH"},
+      {UnwindingResult::MAP_MISSING, "MAP_MISSING"},
   };
   PrintIndented(indent, "stop_reason %s\n", map[stop_reason].c_str());
   if (stop_reason == UnwindingResult::ACCESS_REG_FAILED) {
     PrintIndented(indent, "regno %" PRIu64 "\n", stop_info);
   } else if (stop_reason == UnwindingResult::ACCESS_STACK_FAILED ||
-             stop_reason == UnwindingResult::ACCESS_MEM_FAILED) {
+             stop_reason == UnwindingResult::ACCESS_MEM_FAILED ||
+             stop_reason == UnwindingResult::UNKNOWN_REASON) {
     PrintIndented(indent, "addr 0x%" PRIx64 "\n", stop_info);
   }
 }
