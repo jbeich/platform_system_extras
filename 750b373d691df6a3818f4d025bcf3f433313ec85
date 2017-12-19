@@ -46,6 +46,30 @@
       "revId": "750b373d691df6a3818f4d025bcf3f433313ec85",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ed1cd359_53d61ff9",
+        "filename": "simpleperf/utils.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2017-12-19T18:23:00Z",
+      "side": 1,
+      "message": "yes, so only one log level is needed and verbose covers all other logs.",
+      "parentUuid": "f1bc0364_0f7b5cb4",
+      "range": {
+        "startLine": 260,
+        "startChar": 12,
+        "endLine": 260,
+        "endChar": 30
+      },
+      "revId": "750b373d691df6a3818f4d025bcf3f433313ec85",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
