@@ -21,6 +21,8 @@
 #include <string>
 #include <map>
 
+#include "config.h"
+
 //
 // This table describes the perfprofd config file syntax in terms of
 // key/value pairs.  Values come in two flavors: strings, or unsigned
@@ -47,6 +49,8 @@ class ConfigReader {
 
   // override a config item (for unit testing purposes)
   void overrideUnsignedEntry(const char *key, unsigned new_value);
+
+  void FillConfig(Config* config);
 
  private:
   void addUnsignedEntry(const char *key,

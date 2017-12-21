@@ -283,3 +283,37 @@ bool ConfigReader::readFile()
 
   return true;
 }
+
+void ConfigReader::FillConfig(Config* config) {
+  config->collection_interval = getUnsignedValue("collection_interval");
+
+  config->use_fixed_seed = getUnsignedValue("use_fixed_seed");
+
+  config->main_loop_iterations = getUnsignedValue("main_loop_iterations");
+
+  config->destination_directory = getStringValue("destination_directory");
+
+  config->config_directory = getStringValue("config_directory");
+
+  config->perf_path = getStringValue("perf_path");
+
+  config->sampling_period = getUnsignedValue("sampling_period");
+
+  config->sample_duration = getUnsignedValue("sample_duration");
+
+  config->only_debug_build = getUnsignedValue("only_debug_build") != 0;
+
+  config->hardwire_cpus = getUnsignedValue("hardwire_cpus") != 0;
+  config->hardwire_cpus_max_duration = getUnsignedValue("hardwire_cpus_max_duration");
+
+  config->max_unprocessed_profiles = getUnsignedValue("max_unprocessed_profiles");
+
+  config->stack_profile = getUnsignedValue("stack_profile") != 0;
+
+  config->trace_config_read = getUnsignedValue("trace_config_read") != 0;
+
+  config->collect_cpu_utilization = getUnsignedValue("collect_cpu_utilization") != 0;
+  config->collect_charging_state = getUnsignedValue("collect_charging_state") != 0;
+  config->collect_booting = getUnsignedValue("collect_booting") != 0;
+  config->collect_camera_active = getUnsignedValue("collect_camera_active") != 0;
+}
