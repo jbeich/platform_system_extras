@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "1afdd688_21f0baff",
+        "filename": "perfprofd/config.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2017-12-22T23:54:12Z",
+      "side": 1,
+      "message": "Copy-pasta from configreader.h :-)",
+      "parentUuid": "dd90becc_b124a04a",
+      "range": {
+        "startLine": 2,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 2
+      },
+      "revId": "68640b2ef32a261876b039eab0e54c626ee97b70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a017609b_8ab989cd",
         "filename": "perfprofd/config.h",
         "patchSetId": 1
@@ -45,6 +69,30 @@
       "revId": "68640b2ef32a261876b039eab0e54c626ee97b70",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8d23b204_a4142db1",
+        "filename": "perfprofd/config.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2017-12-22T23:54:12Z",
+      "side": 1,
+      "message": "Taken from the original code, already there...",
+      "parentUuid": "a017609b_8ab989cd",
+      "range": {
+        "startLine": 44,
+        "startChar": 46,
+        "endLine": 45,
+        "endChar": 75
+      },
+      "revId": "68640b2ef32a261876b039eab0e54c626ee97b70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "eb6104f5_f0fc847f",
+        "filename": "perfprofd/config.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2017-12-22T23:54:12Z",
+      "side": 1,
+      "message": "This is the simpleperf naming scheme. \"Period\" here means a sample is taken every X events. So it\u0027s not a duration, or Hz.\n\nChanged other time-related fields, though.",
+      "parentUuid": "147cd189_7d80bda6",
+      "range": {
+        "startLine": 52,
+        "startChar": 11,
+        "endLine": 52,
+        "endChar": 26
+      },
+      "revId": "68640b2ef32a261876b039eab0e54c626ee97b70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cf8f636b_0ffa6e41",
         "filename": "perfprofd/configreader.cc",
         "patchSetId": 1
@@ -91,6 +163,30 @@
       "revId": "68640b2ef32a261876b039eab0e54c626ee97b70",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "36ef89c4_0632d16c",
+        "filename": "perfprofd/configreader.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2017-12-22T23:54:12Z",
+      "side": 1,
+      "message": "For the time being, it\u0027s easier to not touch this code. At some point, this config-file stuff will be removed.",
+      "parentUuid": "cf8f636b_0ffa6e41",
+      "range": {
+        "startLine": 81,
+        "startChar": 37,
+        "endLine": 81,
+        "endChar": 78
+      },
+      "revId": "68640b2ef32a261876b039eab0e54c626ee97b70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "9c94b208_96dc9039",
+        "filename": "perfprofd/configreader.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2017-12-22T23:54:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4776b2fc_d7a88f89",
+      "range": {
+        "startLine": 311,
+        "startChar": 26,
+        "endLine": 311,
+        "endChar": 65
+      },
+      "revId": "68640b2ef32a261876b039eab0e54c626ee97b70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9cced44e_8f4e8282",
         "filename": "perfprofd/perfprofdcore.cc",
         "patchSetId": 1
@@ -137,6 +257,30 @@
       "revId": "68640b2ef32a261876b039eab0e54c626ee97b70",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "49bf6abd_d9101646",
+        "filename": "perfprofd/perfprofdcore.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 852,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2017-12-22T23:54:12Z",
+      "side": 1,
+      "message": "Nope, copy-pasta from another version.",
+      "parentUuid": "9cced44e_8f4e8282",
+      "range": {
+        "startLine": 852,
+        "startChar": 11,
+        "endLine": 852,
+        "endChar": 33
+      },
+      "revId": "68640b2ef32a261876b039eab0e54c626ee97b70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -163,6 +307,30 @@
     },
     {
       "key": {
+        "uuid": "325ce591_70427161",
+        "filename": "perfprofd/perfprofdcore.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 908,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2017-12-22T23:54:12Z",
+      "side": 1,
+      "message": "It\u0027s close enough for a soon-to-be deprecated codepath, but thanks for pointing out the semantical difference.",
+      "parentUuid": "7357fed8_ab4211c3",
+      "range": {
+        "startLine": 906,
+        "startChar": 28,
+        "endLine": 908,
+        "endChar": 37
+      },
+      "revId": "68640b2ef32a261876b039eab0e54c626ee97b70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "16103cfd_457bc224",
         "filename": "perfprofd/perfprofdmain.cc",
         "patchSetId": 1
@@ -183,6 +351,30 @@
       "revId": "68640b2ef32a261876b039eab0e54c626ee97b70",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5e8afaeb_088ab807",
+        "filename": "perfprofd/perfprofdmain.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2017-12-22T23:54:12Z",
+      "side": 1,
+      "message": "This code is all a bit weirdly separated. The function should not have been called perfprofd_main...",
+      "parentUuid": "16103cfd_457bc224",
+      "range": {
+        "startLine": 20,
+        "startChar": 11,
+        "endLine": 20,
+        "endChar": 25
+      },
+      "revId": "68640b2ef32a261876b039eab0e54c626ee97b70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
