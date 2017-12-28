@@ -164,5 +164,6 @@ cc_binary {
 
 subdirs = [
     "binder_interface",
+    "dropbox",
     "tests",
 ]
