@@ -1,0 +1,50 @@
+perfprofd_dropbox_cflags = [
+    "-Wall",
+    "-Werror",
+]
+
+perfprofd_dropbox_cppflags = [
+    "-Wno-sign-compare",
+    "-Wno-unused-parameter",
+]
+
+//
+// Static library with binder service.
+//
+cc_library_static {
+    name: "libperfprofd_dropbox",
+
+    export_include_dirs: [
+        "include",
+    ],
+    local_include_dirs: [
+        "aidl-include",
+    ],
+    aidl: {
+        local_include_dirs: [
+            "aidl",
+        ],
+    },
+    static_libs: [
+        "libbase",
+        "libbinder",
+        "libcutils",
+        "liblog",
+        "libprotobuf-cpp-lite",
+        "libutils",
+    ],
+    srcs: [
+        "perfprofd_dropbox.cc",
+        ":perfprofd_dropbox_aidl",
+    ],
+
+    cflags: perfprofd_cflags,
+    cppflags: perfprofd_cppflags,
+}
+
+filegroup {
+    name: "perfprofd_dropbox_aidl",
+    srcs: [
+        "aidl/com/android/internal/os/IDropBoxManagerService.aidl",
+    ],
+}

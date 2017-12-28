@@ -163,4 +163,7 @@ filegroup {
     ],
 }
 
-subdirs = ["tests"]
+subdirs = [
+    "dropbox",
+    "tests",
+]
