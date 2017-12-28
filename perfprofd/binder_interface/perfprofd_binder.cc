@@ -44,8 +44,9 @@
 #include "perfprofd_config.pb.h"
 #include "perf_profile.pb.h"
 
+#include <perfprofd_dropbox.h>
+
 #include "config.h"
-#include "configreader.h"
 #include "perfprofdcore.h"
 
 namespace android {
@@ -56,6 +57,8 @@ using Status = ::android::binder::Status;
 
 class BinderConfig : public Config {
  public:
+  bool send_to_dropbox = true;
+
   bool is_profiling = false;
 
   void Sleep(size_t seconds) override {
@@ -80,6 +83,17 @@ class BinderConfig : public Config {
 
   bool IsProfilingEnabled() const override {
     return true;
+  }
+
+  // Operator= to simplify setting the config values. This will retain the
+  // original mutex, condition-variable etc.
+  BinderConfig& operator=(const BinderConfig& rhs) {
+    // Copy base fields.
+    *static_cast<Config*>(this) = static_cast<const Config&>(rhs);
+
+    send_to_dropbox = rhs.send_to_dropbox;
+
+    return *this;
   }
 
  private:
@@ -133,6 +147,15 @@ class PerfProfdNativeService : public BinderService<PerfProfdNativeService>,
 
 bool PerfProfdNativeService::BinderHandler(
     wireless_android_play_playlog::AndroidPerfProfile* encodedProfile, Config* config) {
+  CHECK(config != nullptr);
+  if (static_cast<BinderConfig*>(config)->send_to_dropbox) {
+    size_t size = encodedProfile->ByteSize();
+    std::unique_ptr<uint8_t[]> data(new uint8_t[size]);
+    encodedProfile->SerializeWithCachedSizesToArray(data.get());
+
+    return dropbox::SubmitToDropbox(data.get(), size);
+  }
+
   if (encodedProfile == nullptr) {
     return false;
   }
@@ -177,8 +200,8 @@ status_t PerfProfdNativeService::dump(int fd, const Vector<String16> &args) {
 Status PerfProfdNativeService::startProfiling(int32_t profilingDuration,
                                               int32_t profilingInterval,
                                               int32_t iterations) {
-  auto config_fn = [&](Config& config) {
-    ConfigReader().FillConfig(&config);  // Create a default config.
+  auto config_fn = [&](BinderConfig& config) {
+    config = BinderConfig();  // Reset to a default config.
 
     config.sample_duration_in_s = static_cast<uint32_t>(profilingDuration);
     config.collection_interval_in_s = static_cast<uint32_t>(profilingInterval);
@@ -226,8 +249,8 @@ Status PerfProfdNativeService::StartProfilingProtobuf(ProtoLoaderFn fn) {
   if (!fn(proto_config)) {
     return binder::Status::fromExceptionCode(2);
   }
-  auto config_fn = [&proto_config](Config& config) {
-    ConfigReader().FillConfig(&config);  // Create a default config.
+  auto config_fn = [&proto_config](BinderConfig& config) {
+    config = BinderConfig();  // Reset to a default config.
 
     // Copy proto values.
 #define CHECK_AND_COPY_FROM_PROTO(name)      \
@@ -253,6 +276,7 @@ Status PerfProfdNativeService::StartProfilingProtobuf(ProtoLoaderFn fn) {
     CHECK_AND_COPY_FROM_PROTO(collect_camera_active)
     CHECK_AND_COPY_FROM_PROTO(process)
     CHECK_AND_COPY_FROM_PROTO(use_elf_symbolizer)
+    CHECK_AND_COPY_FROM_PROTO(send_to_dropbox)
 #undef CHECK_AND_COPY_FROM_PROTO
   };
   return StartProfiling(config_fn);

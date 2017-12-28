@@ -1,5 +1,5 @@
 //
-// Copyright (C) 2017 The Android Open Source Project
+// Copyright (C) 2018 The Android Open Source Project
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -18,31 +18,40 @@
 // Static library with binder service.
 //
 cc_library_static {
-    name: "libperfprofd_binder",
+    name: "libperfprofd_dropbox",
     defaults: [
         "perfprofd_defaults",
     ],
 
-    export_include_dirs: ["."],
+    export_include_dirs: [
+        "include",
+    ],
+    local_include_dirs: [
+        "aidl-include",
+    ],
+    aidl: {
+        local_include_dirs: [
+            "aidl",
+        ],
+    },
     static_libs: [
         "libbase",
         "libbinder",
-        "libperfprofdcore",
+        "libcutils",
+        "liblog",
         "libprotobuf-cpp-lite",
-    ],
-    whole_static_libs: [
-        "libperfprofd_dropbox",
+        "libutils",
     ],
     srcs: [
-        "perfprofd_binder.cc",
-        ":perfprofd_aidl",
-        "perfprofd_config.proto",
+        "perfprofd_dropbox.cc",
+        "DropBoxManager.cpp",
+        ":perfprofd_dropbox_aidl",
     ],
 }
 
 filegroup {
-    name: "perfprofd_aidl",
+    name: "perfprofd_dropbox_aidl",
     srcs: [
-        "aidl/android/os/IPerfProfd.aidl",
+        "aidl/com/android/internal/os/IDropBoxManagerService.aidl",
     ],
 }
