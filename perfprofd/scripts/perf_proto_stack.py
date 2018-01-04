@@ -43,36 +43,45 @@ module_list = profile.load_modules
 
 counters = {}
 
-for program in profile.programs:
-    print program.name
-    for module in program.modules:
-        if module.HasField('load_module_id'):
-            module_descr = module_list[module.load_module_id]
-            print ' ', module_descr.name
-            if module_descr.HasField('build_id'):
-                print '   ', module_descr.build_id
-            for addr in module.address_samples:
-                # TODO: Stacks vs single samples.
-                addr_rel = addr.address[0]
-                print '     ', addr.count, addr_rel
-                if module_descr.name != '[kernel.kallsyms]':
-                    addr_rel_hex = "%x" % addr_rel
-                    info = symbol.SymbolInformation(module_descr.name, addr_rel_hex)
-                    # As-is, only info[0] (inner-most inlined function) is recognized.
-                    (source_symbol, source_location, object_symbol_with_offset) = info[0]
-                    if source_symbol is not None:
-                        print source_symbol, source_location, object_symbol_with_offset
-                    counters_key = None
-                    if source_symbol is not None:
-                        counters_key = (module_descr.name, source_symbol)
-                    else:
-                        counters_key = (module_descr.name, addr_rel_hex)
-                    if counters_key in counters:
-                        counters[counters_key] = counters[counters_key] + 1
-                    else:
-                        counters[counters_key] = 1
-        else:
-            print '  Missing module'
+# print 'Samples:'
+# for program in profile.programs:
+#     print program.name
+#     for module in program.modules:
+#         if module.HasField('load_module_id'):
+#             module_descr = module_list[module.load_module_id]
+#             print ' ', module_descr.name
+#             if module_descr.HasField('build_id'):
+#                 print '   ', module_descr.build_id
+#             for addr in module.address_samples:
+#                 # TODO: Stacks vs single samples.
+#                 addr_rel = addr.address[0]
+#                 print '     ', addr.count, addr_rel
+#                 if module_descr.name != '[kernel.kallsyms]':
+#                     addr_rel_hex = "%x" % addr_rel
+#                     info = symbol.SymbolInformation(module_descr.name, addr_rel_hex)
+#                     # As-is, only info[0] (inner-most inlined function) is recognized.
+#                     (source_symbol, source_location, object_symbol_with_offset) = info[0]
+#                     if source_symbol is not None:
+#                         print source_symbol, source_location, object_symbol_with_offset
+#                     counters_key = None
+#                     if source_symbol is not None:
+#                         counters_key = (module_descr.name, source_symbol)
+#                     else:
+#                         counters_key = (module_descr.name, addr_rel_hex)
+#                     if counters_key in counters:
+#                         counters[counters_key] = counters[counters_key] + addr.count
+#                     else:
+#                         counters[counters_key] = addr.count
+#         else:
+#             print '  Missing module'
+
+print 'Modules:'
+for module in module_list:
+    print ' ', module.name
+    if module.HasField('build_id'):
+        print '   ', module.build_id
+    for symbol in module.symbol:
+        print '      ', symbol
 
 # Create a sorted list of top samples.
 counter_list = []
