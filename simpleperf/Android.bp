@@ -1,0 +1,184 @@
+//
+// Copyright (C) 2018 The Android Open Source Project
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+
+cc_defaults {
+    name: "simpleperf_defaults",
+
+    cflags: [
+        "-Wall",
+        "-Werror",
+        "-Wextra",
+        "-Wunused",
+        "-Wno-unknown-pragmas",
+        "-DSIMPLEPERF_REVISION=\"1062d739bf99\"",  // TODO: implemented as gensrc.
+    ],
+
+    static_libs: [
+        "libbase",
+        "libLLVMObject",
+        "libLLVMBitReader",
+        "libLLVMMC",
+        "libLLVMMCParser",
+        "libLLVMCore",
+        "libLLVMSupport",
+        "liblog",
+        "liblzma",
+        "libprotobuf-cpp-lite",
+        "libutils",
+        "libz",
+        "libziparchive",
+    ],
+
+    target: {
+        android: {
+            static_libs: ["libasync_safe"],
+        },
+        linux: {
+            static_libs: [
+                "libprocinfo",
+                "libbacktrace_offline",
+                "libbacktrace",
+                "libunwind",
+                "libunwindstack",
+                "libcutils",
+                "libevent",
+            ],
+            host_ldlibs: [
+                "-lrt",
+            ],
+        },
+        linux_glibc: {
+            host_ldlibs: [
+                "-lncurses",
+            ],
+        },
+        host: {
+            cflags: [
+                "-DUSE_BIONIC_UAPI_HEADERS",
+                "-fvisibility=hidden",
+            ],
+            include_dirs: [
+                "bionic/libc/kernel",
+            ],
+        },
+        darwin: {
+            local_include_dirs: [
+                "nonlinux_support/include",
+            ],
+            host_ldlibs: [
+                "-lncurses",
+            ],
+        },
+        windows: {
+            cflags: [
+                "-Wno-attributes",
+                "-Wno-sign-promo",
+                // Required for LLVM, copied from llvm-host-build.mk. It seems
+                // the other targets have all these, anyways, but mingw doesn't
+                // have at least __STDC_LIMIT_MACROS, so just adding everything
+                // here.
+                // This is the general part.
+                "-D_GNU_SOURCE",
+                "-D__STDC_LIMIT_MACROS",
+                "-fomit-frame-pointer",
+                "-Wno-sign-compare",
+                "-Wno-unused-parameter",
+                "-Wno-maybe-uninitialized",
+                "-Wno-missing-field-initializers",
+                "-Wwrite-strings",
+                "-Werror",
+                "-Dsprintf=sprintf",
+                // This is the mingw part.
+                "-Wno-array-bounds",
+                "-Wno-comment",
+                "-UWIN32_LEAN_AND_MEAN",
+            ],
+            local_include_dirs: [
+                "nonlinux_support/include",
+            ],
+            host_ldlibs: [
+                "-luuid",
+            ],
+        },
+    },
+
+    stl: "libc++_static",
+    group_static_libs: true,
+}
+
+cc_library {
+    name: "libsimpleperf",
+    vendor_available: false,
+    host_supported: true,
+    compile_multilib: "both",
+
+    defaults: [
+        "simpleperf_defaults",
+    ],
+
+    srcs: [
+        "cmd_dumprecord.cpp",
+        "cmd_help.cpp",
+        "cmd_kmem.cpp",
+        "cmd_report.cpp",
+        "cmd_report_sample.cpp",
+        "command.cpp",
+        "dso.cpp",
+        "event_attr.cpp",
+        "event_type.cpp",
+        "perf_regs.cpp",
+        "read_apk.cpp",
+        "read_elf.cpp",
+        "record.cpp",
+        "record_file_reader.cpp",
+        "report_sample.proto",
+        "thread_tree.cpp",
+        "tracing.cpp",
+        "utils.cpp",
+    ],
+
+    target: {
+        linux: {
+            srcs: [
+                "CallChainJoiner.cpp",
+                "cmd_list.cpp",
+                "cmd_record.cpp",
+                "cmd_stat.cpp",
+                "environment.cpp",
+                "event_fd.cpp",
+                "event_selection_set.cpp",
+                "InplaceSamplerClient.cpp",
+                "IOEventLoop.cpp",
+                "OfflineUnwinder.cpp",
+                "perf_clock.cpp",
+                "record_file_writer.cpp",
+                "UnixSocket.cpp",
+                "workload.cpp",
+            ],
+        },
+        darwin: {
+            srcs: [
+                "nonlinux_support/nonlinux_support.cpp",
+            ],
+        },
+        windows: {
+            enabled: true,
+            srcs: [
+                "nonlinux_support/nonlinux_support.cpp",
+            ],
+        },
+    },
+}

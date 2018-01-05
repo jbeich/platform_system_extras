@@ -123,50 +123,6 @@ libsimpleperf_src_files_linux := \
   UnixSocket.cpp \
   workload.cpp \
 
-libsimpleperf_src_files_darwin := \
-  nonlinux_support/nonlinux_support.cpp \
-
-libsimpleperf_src_files_windows := \
-  nonlinux_support/nonlinux_support.cpp \
-
-# libsimpleperf target
-include $(CLEAR_VARS)
-LOCAL_MODULE := libsimpleperf
-LOCAL_MODULE_TAGS := debug
-LOCAL_MODULE_PATH := $(TARGET_OUT_OPTIONAL_EXECUTABLES)
-LOCAL_CFLAGS := $(simpleperf_cflags_target)
-LOCAL_SRC_FILES := \
-  $(libsimpleperf_src_files) \
-  $(libsimpleperf_src_files_linux) \
-
-LOCAL_STATIC_LIBRARIES := $(simpleperf_static_libraries_target)
-LOCAL_MULTILIB := both
-LOCAL_PROTOC_OPTIMIZE_TYPE := lite-static
-include $(LLVM_DEVICE_BUILD_MK)
-include $(BUILD_STATIC_LIBRARY)
-
-# libsimpleperf host
-include $(CLEAR_VARS)
-LOCAL_MODULE := libsimpleperf
-LOCAL_MODULE_HOST_OS := darwin linux windows
-LOCAL_CFLAGS := $(simpleperf_cflags_host)
-LOCAL_CFLAGS_darwin := $(simpleperf_cflags_host_darwin)
-LOCAL_CFLAGS_linux := $(simpleperf_cflags_host_linux)
-LOCAL_CFLAGS_windows := $(simpleperf_cflags_host_windows)
-LOCAL_SRC_FILES := $(libsimpleperf_src_files)
-LOCAL_SRC_FILES_darwin := $(libsimpleperf_src_files_darwin)
-LOCAL_SRC_FILES_linux := $(libsimpleperf_src_files_linux)
-LOCAL_SRC_FILES_windows := $(libsimpleperf_src_files_windows)
-LOCAL_STATIC_LIBRARIES := $(simpleperf_static_libraries_host)
-LOCAL_STATIC_LIBRARIES_linux := $(simpleperf_static_libraries_host_linux)
-LOCAL_LDLIBS_linux := $(simpleperf_ldlibs_host_linux)
-LOCAL_MULTILIB := both
-LOCAL_PROTOC_OPTIMIZE_TYPE := lite-static
-LOCAL_CXX_STL := libc++_static
-include $(LLVM_HOST_BUILD_MK)
-include $(BUILD_HOST_STATIC_LIBRARY)
-
-
 # simpleperf
 # =========================================================
 
