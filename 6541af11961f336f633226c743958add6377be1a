@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fdfe6a75_4fc1b3a5",
+        "filename": "simpleperf/scripts/unwinding_result_reporter.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-01-05T19:39:35Z",
+      "side": 1,
+      "message": "\u0027cache\u0027 in ...",
+      "range": {
+        "startLine": 219,
+        "startChar": 48,
+        "endLine": 219,
+        "endChar": 67
+      },
+      "revId": "6541af11961f336f633226c743958add6377be1a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dbd6e918_3ab07ffd",
+        "filename": "simpleperf/scripts/unwinding_result_reporter.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-01-05T19:39:35Z",
+      "side": 1,
+      "message": "infinite loop?",
+      "range": {
+        "startLine": 277,
+        "startChar": 8,
+        "endLine": 278,
+        "endChar": 20
+      },
+      "revId": "6541af11961f336f633226c743958add6377be1a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f6d2142a_545abf02",
+        "filename": "simpleperf/scripts/unwinding_result_reporter.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 402,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-01-05T19:39:35Z",
+      "side": 1,
+      "message": "\"incomplete\" seems more common",
+      "range": {
+        "startLine": 402,
+        "startChar": 35,
+        "endLine": 402,
+        "endChar": 45
+      },
+      "revId": "6541af11961f336f633226c743958add6377be1a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
