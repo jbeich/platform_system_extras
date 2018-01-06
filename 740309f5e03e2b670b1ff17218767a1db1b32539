@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c735b54d_f8ef5761",
+        "filename": "perfprofd/perf_data_converter.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-01-06T04:47:33Z",
+      "side": 1,
+      "message": "add comment that we want to collect symbols for files not having build_id?",
+      "range": {
+        "startLine": 170,
+        "startChar": 80,
+        "endLine": 170,
+        "endChar": 81
+      },
+      "revId": "740309f5e03e2b670b1ff17218767a1db1b32539",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "01cda000_c5f591ef",
+        "filename": "perfprofd/perf_data_converter.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-01-06T04:47:33Z",
+      "side": 1,
+      "message": "This seems slow, use unordered_map\u003cstring, size_t\u003e instead of vector?",
+      "range": {
+        "startLine": 188,
+        "startChar": 23,
+        "endLine": 188,
+        "endChar": 27
+      },
+      "revId": "740309f5e03e2b670b1ff17218767a1db1b32539",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b8bbf084_e9fc50c7",
+        "filename": "perfprofd/perf_data_converter.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-01-06T04:47:33Z",
+      "side": 1,
+      "message": "I feel it confusing to reuse address entry to store symbol_index? Why not just add an optional symbol_id in the proto?",
+      "range": {
+        "startLine": 203,
+        "startChar": 6,
+        "endLine": 203,
+        "endChar": 59
+      },
+      "revId": "740309f5e03e2b670b1ff17218767a1db1b32539",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
