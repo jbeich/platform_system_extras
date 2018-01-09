@@ -45,6 +45,52 @@
       "revId": "c9cb69a82cee18ca0c69628ec4a0d7b10b6af69a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b5a3f33e_a2e8c7d8",
+        "filename": "perfprofd/symbolizer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-01-09T05:32:39Z",
+      "side": 1,
+      "message": "should be upper_bound(), if addr \u003d\u003d sym.start, it belongs to this sym instead of the previous one.",
+      "range": {
+        "startLine": 53,
+        "startChar": 27,
+        "endLine": 53,
+        "endChar": 38
+      },
+      "revId": "c9cb69a82cee18ca0c69628ec4a0d7b10b6af69a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "76291564_3d7c435c",
+        "filename": "perfprofd/symbolizer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-01-09T05:32:39Z",
+      "side": 1,
+      "message": "handle this by returning \"\"?",
+      "range": {
+        "startLine": 55,
+        "startChar": 26,
+        "endLine": 55,
+        "endChar": 29
+      },
+      "revId": "c9cb69a82cee18ca0c69628ec4a0d7b10b6af69a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
