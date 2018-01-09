@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c4a78527_98235dae",
+        "filename": "perfprofd/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2018-01-09T03:56:30Z",
+      "side": 1,
+      "message": "exported include directories are automatically imported, so this isn\u0027t necessary.",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 6
+      },
+      "revId": "c9cb69a82cee18ca0c69628ec4a0d7b10b6af69a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1678a6a0_a971b06e",
+        "filename": "perfprofd/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2018-01-09T03:56:30Z",
+      "side": 1,
+      "message": "This is a default library on linux.",
+      "range": {
+        "startLine": 49,
+        "startChar": 0,
+        "endLine": 53,
+        "endChar": 10
+      },
+      "revId": "c9cb69a82cee18ca0c69628ec4a0d7b10b6af69a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
