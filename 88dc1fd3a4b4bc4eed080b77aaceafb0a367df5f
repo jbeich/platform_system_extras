@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5bb4e60a_05003901",
+        "filename": "perfprofd/scripts/perf_proto_stack.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1079148
+      },
+      "writtenOn": "2018-01-09T21:19:56Z",
+      "side": 1,
+      "message": "nit: xrange",
+      "revId": "88dc1fd3a4b4bc4eed080b77aaceafb0a367df5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c73a6175_ad6fcffa",
+        "filename": "perfprofd/scripts/perf_proto_stack.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1079148
+      },
+      "writtenOn": "2018-01-09T21:19:56Z",
+      "side": 1,
+      "message": "is this supposed to be indenting by 3 and 6 spaces? maybe switch to \u0027 \u0027 * 3 to be clear that this isn\u0027t just a typo",
+      "range": {
+        "startLine": 101,
+        "startChar": 19,
+        "endLine": 101,
+        "endChar": 22
+      },
+      "revId": "88dc1fd3a4b4bc4eed080b77aaceafb0a367df5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
