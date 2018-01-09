@@ -50,10 +50,8 @@ int squashfs_parse_sb_buffer(const void *buf, struct squashfs_info *info)
     info->block_size = sb->block_size;
     info->inodes = sb->inodes;
     info->bytes_used = sb->bytes_used;
-    // by default mksquashfs pads the filesystem to 4K blocks
-    info->bytes_used_4K_padded =
-        sb->bytes_used + (4096 - (sb->bytes_used & (4096 - 1)));
 
+    info->bytes_used_4K_padded = (sb->bytes_used + 4096 - 1) & -4096;
     return 0;
 }
 
