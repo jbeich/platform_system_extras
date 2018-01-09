@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "899e70e7_68b55c7b",
+        "filename": "perfprofd/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2018-01-09T19:03:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c4a78527_98235dae",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 6
+      },
+      "revId": "c9cb69a82cee18ca0c69628ec4a0d7b10b6af69a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1678a6a0_a971b06e",
         "filename": "perfprofd/Android.bp",
         "patchSetId": 1
@@ -45,6 +69,30 @@
       "revId": "c9cb69a82cee18ca0c69628ec4a0d7b10b6af69a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fceceff2_d551944c",
+        "filename": "perfprofd/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2018-01-09T19:03:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1678a6a0_a971b06e",
+      "range": {
+        "startLine": 49,
+        "startChar": 0,
+        "endLine": 53,
+        "endChar": 10
+      },
+      "revId": "c9cb69a82cee18ca0c69628ec4a0d7b10b6af69a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "0d21f708_db13ff7f",
+        "filename": "perfprofd/symbolizer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2018-01-09T19:03:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b5a3f33e_a2e8c7d8",
+      "range": {
+        "startLine": 53,
+        "startChar": 27,
+        "endLine": 53,
+        "endChar": 38
+      },
+      "revId": "c9cb69a82cee18ca0c69628ec4a0d7b10b6af69a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "76291564_3d7c435c",
         "filename": "perfprofd/symbolizer.cc",
         "patchSetId": 1
@@ -91,6 +163,30 @@
       "revId": "c9cb69a82cee18ca0c69628ec4a0d7b10b6af69a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7405fc81_d6787770",
+        "filename": "perfprofd/symbolizer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2018-01-09T19:03:09Z",
+      "side": 1,
+      "message": "Yeah, that\u0027s just missing the return.",
+      "parentUuid": "76291564_3d7c435c",
+      "range": {
+        "startLine": 55,
+        "startChar": 26,
+        "endLine": 55,
+        "endChar": 29
+      },
+      "revId": "c9cb69a82cee18ca0c69628ec4a0d7b10b6af69a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
