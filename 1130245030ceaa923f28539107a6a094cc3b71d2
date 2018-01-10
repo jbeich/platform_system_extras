@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "02d9971c_b5c4a23d",
+        "filename": "perfprofd/tests/perfprofd_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2018-01-10T22:44:37Z",
+      "side": 1,
+      "message": "Maybe something like this could go into test_utils. The only problem I have is with the global nature, which makes it unsuitable for things like the bionic tests.",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 83,
+        "endChar": 15
+      },
+      "revId": "1130245030ceaa923f28539107a6a094cc3b71d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
