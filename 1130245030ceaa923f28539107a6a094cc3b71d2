@@ -46,6 +46,30 @@
       "revId": "1130245030ceaa923f28539107a6a094cc3b71d2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "494b45a7_d1e240d0",
+        "filename": "perfprofd/tests/perfprofd_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-01-10T23:17:00Z",
+      "side": 1,
+      "message": "why not group these functions in a class? SetLogger() uses std::function, which accepts member function.",
+      "parentUuid": "e7887744_986f08ac",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 83,
+        "endChar": 15
+      },
+      "revId": "1130245030ceaa923f28539107a6a094cc3b71d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
