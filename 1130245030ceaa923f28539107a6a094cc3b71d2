@@ -70,6 +70,30 @@
       "revId": "1130245030ceaa923f28539107a6a094cc3b71d2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a2e39aa9_fa884018",
+        "filename": "perfprofd/tests/perfprofd_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2018-01-11T00:40:43Z",
+      "side": 1,
+      "message": "I could, but I could just as well argue that encapsulation here would only hide the fact that you cannot have two of these at the same time. (Also, Google style is to avoid classes-as-namespaces, which it would be, in a sense.)\n\nIn case this ends up in test_utils, I\u0027m fine to make the transition. But I won\u0027t be the one having to write the big WARNING. :-)",
+      "parentUuid": "494b45a7_d1e240d0",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 83,
+        "endChar": 15
+      },
+      "revId": "1130245030ceaa923f28539107a6a094cc3b71d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
