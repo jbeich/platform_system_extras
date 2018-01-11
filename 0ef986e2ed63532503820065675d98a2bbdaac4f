@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7f11b90b_22064497",
+        "filename": "perfprofd/perfprofdcore.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-01-11T18:38:42Z",
+      "side": 1,
+      "message": "not needed.",
+      "range": {
+        "startLine": 515,
+        "startChar": 2,
+        "endLine": 515,
+        "endChar": 13
+      },
+      "revId": "0ef986e2ed63532503820065675d98a2bbdaac4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "31be9ade_107f13b0",
+        "filename": "perfprofd/perfprofdcore.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 823,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-01-11T18:38:42Z",
+      "side": 1,
+      "message": "remove?",
+      "range": {
+        "startLine": 823,
+        "startChar": 2,
+        "endLine": 823,
+        "endChar": 17
+      },
+      "revId": "0ef986e2ed63532503820065675d98a2bbdaac4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
