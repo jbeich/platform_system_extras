@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "921d4f10_7f078ff2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-01-12T21:52:40Z",
+      "side": 1,
+      "message": "can\u0027t you just build that library with a .bp file, even if you leave the rest as .mk?",
+      "revId": "9009e5c2cdcfb8d2ab5879e5b3294b340261d0a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
