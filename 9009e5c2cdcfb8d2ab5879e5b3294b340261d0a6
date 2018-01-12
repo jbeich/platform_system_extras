@@ -52,6 +52,24 @@
       "revId": "9009e5c2cdcfb8d2ab5879e5b3294b340261d0a6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "65d1af7f_7b56a4ca",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2018-01-12T22:23:00Z",
+      "side": 1,
+      "message": "The ugly part is how frameworks likes to have aidls where the Java sources are. And in a sense frameworks/base is the right point - it\u0027s where the service is running.\n\nI wish Soong would allow conditional includes. Then I\u0027d just make the client conditional, and bind the stuff if it exists...",
+      "parentUuid": "b4a46f1e_97af49e4",
+      "revId": "9009e5c2cdcfb8d2ab5879e5b3294b340261d0a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
