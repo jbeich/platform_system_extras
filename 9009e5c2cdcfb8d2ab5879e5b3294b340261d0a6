@@ -34,6 +34,24 @@
       "revId": "9009e5c2cdcfb8d2ab5879e5b3294b340261d0a6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b4a46f1e_97af49e4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-01-12T22:09:16Z",
+      "side": 1,
+      "message": "yeah, moving the dropbox code makes sense to me. certainly sounds better than having two copies. it can be in system/core/ but still have the same OWNERS it had in frameworks/base/...\n\nperfprofd in frameworks/base/ sounds like both a layering violation *and* making one of our most problematically over-sized git projects even worse!",
+      "parentUuid": "a70181d0_668799fa",
+      "revId": "9009e5c2cdcfb8d2ab5879e5b3294b340261d0a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
