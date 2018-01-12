@@ -16,6 +16,24 @@
       "revId": "9009e5c2cdcfb8d2ab5879e5b3294b340261d0a6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a70181d0_668799fa",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2018-01-12T21:56:35Z",
+      "side": 1,
+      "message": "I could, but that doesn\u0027t solve the problem that frameworks/base isn\u0027t available in all branches.\n\nDan suggested moving the dropbox code. Joe suggested moving perfprofd into frameworks/base. Neither is great.\n\nSo right now I consider this similar to the simpleperf symbolizer CL - just make progress, clean up when it\u0027s clear what the \"right\" (\u003dsomething everyone can agree on) solution is, and hope that things don\u0027t diverge (which is unlikely).",
+      "parentUuid": "921d4f10_7f078ff2",
+      "revId": "9009e5c2cdcfb8d2ab5879e5b3294b340261d0a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
