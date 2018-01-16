@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "556a356d_f2b075b2",
+        "filename": "perfprofd/perf_data_converter.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-01-16T18:46:22Z",
+      "side": 1,
+      "message": "Add ModuleProfileMap\u0026 module_profile_map \u003d name_profile_map[program_id] and use that instead of program_id below?",
+      "range": {
+        "startLine": 157,
+        "startChar": 4,
+        "endLine": 157,
+        "endChar": 5
+      },
+      "revId": "11a5e7d72d508ce646d94802ef6953a3645981f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a927e7db_53a25bc1",
+        "filename": "perfprofd/perf_profile.proto",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-01-16T18:46:22Z",
+      "side": 1,
+      "message": "process_name_id?",
+      "range": {
+        "startLine": 80,
+        "startChar": 18,
+        "endLine": 80,
+        "endChar": 30
+      },
+      "revId": "11a5e7d72d508ce646d94802ef6953a3645981f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
