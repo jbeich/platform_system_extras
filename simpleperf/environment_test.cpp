@@ -39,6 +39,5 @@ TEST(environment, PrepareVdsoFile) {
   std::unique_ptr<Dso> dso = Dso::CreateDso(DSO_ELF_FILE, "[vdso]",
                                             sizeof(size_t) == sizeof(uint64_t));
   ASSERT_TRUE(dso != nullptr);
-  const std::vector<Symbol>& symbols = dso->GetSymbols();
-  ASSERT_FALSE(symbols.empty());
+  ASSERT_NE(dso->GetDebugFilePath(), "[vdso]");
 }
