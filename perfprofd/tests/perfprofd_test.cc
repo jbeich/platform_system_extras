@@ -857,6 +857,8 @@ TEST_F(PerfProfdTest, BasicRunWithLivePerf)
   runner.addToConfig("max_unprocessed_profiles=100");
   runner.addToConfig("collection_interval=9999");
   runner.addToConfig("sample_duration=2");
+  // Avoid the symbolizer for spurious messages.
+  runner.addToConfig("use_elf_symbolizer=0");
 
   // Create semaphore file
   runner.create_semaphore_file();
@@ -908,6 +910,8 @@ TEST_F(PerfProfdTest, MultipleRunWithLivePerf)
   runner.addToConfig("use_fixed_seed=12345678");
   runner.addToConfig("collection_interval=9999");
   runner.addToConfig("sample_duration=2");
+  // Avoid the symbolizer for spurious messages.
+  runner.addToConfig("use_elf_symbolizer=0");
   runner.write_processed_file(1, 2);
 
   // Create semaphore file
@@ -976,6 +980,8 @@ TEST_F(PerfProfdTest, CallChainRunWithLivePerf)
   runner.addToConfig("collection_interval=9999");
   runner.addToConfig("stack_profile=1");
   runner.addToConfig("sample_duration=2");
+  // Avoid the symbolizer for spurious messages.
+  runner.addToConfig("use_elf_symbolizer=0");
 
   // Create semaphore file
   runner.create_semaphore_file();
