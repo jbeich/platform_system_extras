@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "289766bd_c5d0e65e",
+        "filename": "simpleperf/Android.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-01-29T23:59:11Z",
+      "side": 1,
+      "message": "Another reason to not unwind on host.",
+      "range": {
+        "startLine": 39,
+        "startChar": 12,
+        "endLine": 39,
+        "endChar": 14
+      },
+      "revId": "a56e1d1b1723ad37c1d8a59a9c5c58d71688d68c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a3a13019_8d5636ee",
         "filename": "simpleperf/OfflineUnwinder.cpp",
         "patchSetId": 4
@@ -61,6 +84,30 @@
       "side": 1,
       "message": "I moved it to the constructor and found a small problem with the compilation, so I had to make a few changes. Please make sure I didn\u0027t break anything.",
       "parentUuid": "94b950a2_8699a452",
+      "range": {
+        "startLine": 137,
+        "startChar": 2,
+        "endLine": 138,
+        "endChar": 0
+      },
+      "revId": "a56e1d1b1723ad37c1d8a59a9c5c58d71688d68c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8eaa99f6_1d37118e",
+        "filename": "simpleperf/OfflineUnwinder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-01-29T23:59:11Z",
+      "side": 1,
+      "message": "Sorry I didn\u0027t mention the old situation clearly. To make it compile on darwin and windows, simpleperf provides a dummy version of OfflineUnwinder in nonlinux_support/nonlinux_support.cpp. So it\u0027s better to add a dummy OfflineUnwinder constructor to nonlinux_support/nonlinux_support.cpp, then it should be able to compile without changing files including OfflineUnwinder.h.",
+      "parentUuid": "56328400_44dcc385",
       "range": {
         "startLine": 137,
         "startChar": 2,
