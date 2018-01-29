@@ -46,6 +46,30 @@
       "revId": "a56e1d1b1723ad37c1d8a59a9c5c58d71688d68c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "56328400_44dcc385",
+        "filename": "simpleperf/OfflineUnwinder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2018-01-29T22:32:55Z",
+      "side": 1,
+      "message": "I moved it to the constructor and found a small problem with the compilation, so I had to make a few changes. Please make sure I didn\u0027t break anything.",
+      "parentUuid": "94b950a2_8699a452",
+      "range": {
+        "startLine": 137,
+        "startChar": 2,
+        "endLine": 138,
+        "endChar": 0
+      },
+      "revId": "a56e1d1b1723ad37c1d8a59a9c5c58d71688d68c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
