@@ -712,6 +712,24 @@ void SampleRecord::UpdateUserCallChain(const std::vector<uint64_t>& user_ips) {
   UpdateBinary(new_binary);
 }
 
+void SampleRecord::RemoveInvalidStackData() {
+  if (sample_type & PERF_SAMPLE_STACK_USER) {
+    uint64_t valid_stack_size = GetValidStackSize();
+    if (stack_user_data.size > valid_stack_size) {
+      stack_user_data.size = valid_stack_size;
+      char* p = stack_user_data.data - sizeof(stack_user_data.size);
+      MoveToBinaryFormat(stack_user_data.size, p);
+      p += valid_stack_size;
+      if (valid_stack_size != 0u) {
+        MoveToBinaryFormat(stack_user_data.dyn_size, p);
+      }
+      header.size = p - binary_;
+      p = binary_;
+      header.MoveToBinaryFormat(p);
+    }
+  }
+}
+
 void SampleRecord::DumpData(size_t indent) const {
   PrintIndented(indent, "sample_type: 0x%" PRIx64 "\n", sample_type);
   if (sample_type & PERF_SAMPLE_IP) {
