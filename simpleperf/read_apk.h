@@ -24,6 +24,8 @@
 #include <string>
 #include <tuple>
 
+#include <utils/Compat.h>
+
 #include "read_elf.h"
 
 // Container for info an on ELF file embedded into an APK file
