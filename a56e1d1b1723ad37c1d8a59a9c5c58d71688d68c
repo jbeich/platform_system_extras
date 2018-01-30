@@ -117,6 +117,30 @@
       "revId": "a56e1d1b1723ad37c1d8a59a9c5c58d71688d68c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "36d2e742_748d821d",
+        "filename": "simpleperf/OfflineUnwinder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2018-01-30T01:30:13Z",
+      "side": 1,
+      "message": "Fixed the latest update. I added the constructor to the nonlinux_support.cpp file.",
+      "parentUuid": "8eaa99f6_1d37118e",
+      "range": {
+        "startLine": 137,
+        "startChar": 2,
+        "endLine": 138,
+        "endChar": 0
+      },
+      "revId": "a56e1d1b1723ad37c1d8a59a9c5c58d71688d68c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
