@@ -16,6 +16,24 @@
       "revId": "d2f6a0ef7dae34854656a500938d7ec9984dba62",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ad429534_9108f5f8",
+        "filename": "simpleperf/scripts/inferno/inferno.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-01-30T21:33:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c1057bc7_2d43af44",
+      "revId": "d2f6a0ef7dae34854656a500938d7ec9984dba62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
