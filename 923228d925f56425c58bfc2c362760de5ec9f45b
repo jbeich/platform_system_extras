@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "7c810e83_25991c61",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1156,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-01-31T22:29:01Z",
+      "side": 1,
+      "message": "Done. made error when coping it from L1185.",
+      "parentUuid": "2f750000_2fd2ebd3",
+      "range": {
+        "startLine": 1156,
+        "startChar": 72,
+        "endLine": 1156,
+        "endChar": 76
+      },
+      "revId": "923228d925f56425c58bfc2c362760de5ec9f45b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e3ce0c9c_785e9853",
         "filename": "simpleperf/record.cpp",
         "patchSetId": 2
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "a43d4f35_1c227bf2",
+        "filename": "simpleperf/record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 715,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-01-31T22:29:01Z",
+      "side": 1,
+      "message": "comment added. The stack data is shrunken not because it is too big, but because it contains invalid useless data.",
+      "parentUuid": "e3ce0c9c_785e9853",
+      "range": {
+        "startLine": 715,
+        "startChar": 19,
+        "endLine": 715,
+        "endChar": 41
+      },
+      "revId": "923228d925f56425c58bfc2c362760de5ec9f45b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "cc42792b_b0dc6460",
         "filename": "simpleperf/record.cpp",
         "patchSetId": 2
@@ -59,6 +107,30 @@
       "writtenOn": "2018-01-31T19:17:06Z",
       "side": 1,
       "message": "It\u0027s not clear what\u0027s going on here. Is the data pointer preceded by a size?",
+      "range": {
+        "startLine": 720,
+        "startChar": 6,
+        "endLine": 720,
+        "endChar": 68
+      },
+      "revId": "923228d925f56425c58bfc2c362760de5ec9f45b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cc9e6bb8_c5a77c0b",
+        "filename": "simpleperf/record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 720,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-01-31T22:29:01Z",
+      "side": 1,
+      "message": "Yes, it is to find the location of stack_size from the location of stack data in SampleRecord, see https://cs.corp.google.com/android/external/kernel-headers/original/uapi/linux/perf_event.h?type\u003dcs\u0026q\u003dperf_event.h+package:%5Eandroid$+f:external\u0026l\u003d810. comment is added.",
+      "parentUuid": "cc42792b_b0dc6460",
       "range": {
         "startLine": 720,
         "startChar": 6,
