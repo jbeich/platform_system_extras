@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2f750000_2fd2ebd3",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1156,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2018-01-31T19:17:06Z",
+      "side": 1,
+      "message": "Did you mean \"records back to\"?",
+      "range": {
+        "startLine": 1156,
+        "startChar": 72,
+        "endLine": 1156,
+        "endChar": 76
+      },
+      "revId": "923228d925f56425c58bfc2c362760de5ec9f45b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e3ce0c9c_785e9853",
+        "filename": "simpleperf/record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 715,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2018-01-31T19:17:06Z",
+      "side": 1,
+      "message": "It doesn\u0027t seem like you are removing the invalid stack but shrinking the stack if it\u0027s too big. Is that correct? If so, maybe this would be better named ShrinkLargeStackData.",
+      "range": {
+        "startLine": 715,
+        "startChar": 19,
+        "endLine": 715,
+        "endChar": 41
+      },
+      "revId": "923228d925f56425c58bfc2c362760de5ec9f45b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cc42792b_b0dc6460",
+        "filename": "simpleperf/record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 720,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2018-01-31T19:17:06Z",
+      "side": 1,
+      "message": "It\u0027s not clear what\u0027s going on here. Is the data pointer preceded by a size?",
+      "range": {
+        "startLine": 720,
+        "startChar": 6,
+        "endLine": 720,
+        "endChar": 68
+      },
+      "revId": "923228d925f56425c58bfc2c362760de5ec9f45b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
