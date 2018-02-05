@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9b8711f0_80a6fd9e",
+        "filename": "simpleperf/scripts/unwinding_result_reporter.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 463,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-02-05T23:51:17Z",
+      "side": 1,
+      "message": "nit: typo\n\nand i doubt you intend to break the line between sample and record",
+      "range": {
+        "startLine": 463,
+        "startChar": 24,
+        "endLine": 463,
+        "endChar": 30
+      },
+      "revId": "0a23027b7e390938ef5a5d22d5752dbf5e6005e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
