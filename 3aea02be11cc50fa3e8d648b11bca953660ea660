@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "afac0bdd_9dc35e18",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-02-05T23:30:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "54c56459_6af82a60",
+      "range": {
+        "startLine": 19,
+        "startChar": 38,
+        "endLine": 19,
+        "endChar": 47
+      },
+      "revId": "3aea02be11cc50fa3e8d648b11bca953660ea660",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ef64c5ab_d8737385",
         "filename": "simpleperf/cmd_debug_unwind_test.cpp",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2018-02-05T22:53:17Z",
       "side": 1,
       "message": "cross-platform unwinding should work now, is there something else preventing this from working on all arches?",
+      "range": {
+        "startLine": 79,
+        "startChar": 5,
+        "endLine": 79,
+        "endChar": 93
+      },
+      "revId": "3aea02be11cc50fa3e8d648b11bca953660ea660",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "edac624e_66361715",
+        "filename": "simpleperf/cmd_debug_unwind_test.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-02-05T23:30:39Z",
+      "side": 1,
+      "message": "There is still an arch check in OfflineUnwinder.cpp. I plan to remove it and add test in a separate patch.",
+      "parentUuid": "ef64c5ab_d8737385",
       "range": {
         "startLine": 79,
         "startChar": 5,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "1f853309_05096ebe",
+        "filename": "simpleperf/scripts/unwinding_result_reporter.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-02-05T23:30:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "594d48e5_e40026c9",
+      "range": {
+        "startLine": 30,
+        "startChar": 7,
+        "endLine": 30,
+        "endChar": 24
+      },
+      "revId": "3aea02be11cc50fa3e8d648b11bca953660ea660",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "41e124b1_5cfdc01a",
         "filename": "simpleperf/scripts/unwinding_result_reporter.py",
         "patchSetId": 2
@@ -82,6 +154,30 @@
       "writtenOn": "2018-02-05T22:53:17Z",
       "side": 1,
       "message": "These seem to be the same thing, did you mean to repeat, or are these supposed to be different?",
+      "range": {
+        "startLine": 35,
+        "startChar": 4,
+        "endLine": 36,
+        "endChar": 37
+      },
+      "revId": "3aea02be11cc50fa3e8d648b11bca953660ea660",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d0dfbc73_cbd7544f",
+        "filename": "simpleperf/scripts/unwinding_result_reporter.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-02-05T23:30:39Z",
+      "side": 1,
+      "message": "For debug, I mean to show data for debugging unwinding failures. But they can be combined to one item.",
+      "parentUuid": "41e124b1_5cfdc01a",
       "range": {
         "startLine": 35,
         "startChar": 4,
