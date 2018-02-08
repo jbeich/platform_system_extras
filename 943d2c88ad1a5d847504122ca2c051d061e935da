@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "45841895_95859c95",
+        "filename": "simpleperf/cmd_debug_unwind.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2018-02-08T19:02:05Z",
+      "side": 1,
+      "message": "Are you planning on expanding this list? Otherwise it makes it a bit harder to read the code when a copy paste of the check would make it obvious what features are being checked. But this is a minor nit, so feel free to ignore this.",
+      "range": {
+        "startLine": 352,
+        "startChar": 22,
+        "endLine": 352,
+        "endChar": 80
+      },
+      "revId": "943d2c88ad1a5d847504122ca2c051d061e935da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3fb51212_6b86f71c",
+        "filename": "simpleperf/cmd_debug_unwind.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2018-02-08T19:02:05Z",
+      "side": 1,
+      "message": "It seems like the FEAT_FILE and FEAT_META_INFO are always written out. Does this imply that these features are always on? If so, wouldn\u0027t it be easier to always set these two features on, or does that have some other side affect?",
+      "range": {
+        "startLine": 351,
+        "startChar": 1,
+        "endLine": 356,
+        "endChar": 3
+      },
+      "revId": "943d2c88ad1a5d847504122ca2c051d061e935da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e4f755f4_5d375184",
+        "filename": "simpleperf/cmd_debug_unwind.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2018-02-08T19:02:05Z",
+      "side": 1,
+      "message": "This is also not clear, I assume that the reason is that FEAT_FILE and FEAT_META_INFO are at the end of the list of features, and you want to skip those because it requires special handling.\n\nIf that\u0027s true, there should be a comment here and probably in the enum to indicate this requirement.",
+      "range": {
+        "startLine": 362,
+        "startChar": 45,
+        "endLine": 362,
+        "endChar": 71
+      },
+      "revId": "943d2c88ad1a5d847504122ca2c051d061e935da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ac683ad0_c4dff4dc",
+        "filename": "simpleperf/scripts/debug_unwind_reporter.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2018-02-08T19:02:05Z",
+      "side": 1,
+      "message": "was",
+      "range": {
+        "startLine": 383,
+        "startChar": 59,
+        "endLine": 383,
+        "endChar": 61
+      },
+      "revId": "943d2c88ad1a5d847504122ca2c051d061e935da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7c455047_87932db0",
+        "filename": "simpleperf/scripts/debug_unwind_reporter.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2018-02-08T19:02:05Z",
+      "side": 1,
+      "message": "by the",
+      "range": {
+        "startLine": 383,
+        "startChar": 76,
+        "endLine": 383,
+        "endChar": 78
+      },
+      "revId": "943d2c88ad1a5d847504122ca2c051d061e935da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
