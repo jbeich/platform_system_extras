@@ -1,0 +1,10 @@
+Verified+1: Yabin Cui <yabinc@google.com>
+Code-Review+1: Elliott Hughes <enh@google.com>
+Code-Review+2: Ross Yeh <rossyeh@google.com>
+Autosubmit+1: Yabin Cui <yabinc@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-by: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-at: Thu, 08 Feb 2018 22:04:49 +0000
+Reviewed-on: https://android-review.googlesource.com/596135
+Project: platform/system/extras
+Branch: refs/heads/oreo-mr1-cts-dev
