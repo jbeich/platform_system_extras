@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d74afa65_1f0bd516",
+        "filename": "brillo_config/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1079733
+      },
+      "writtenOn": "2018-02-14T21:45:28Z",
+      "side": 1,
+      "message": "Isn\u0027t this just a command not the actual time?\nhttps://android-review.googlesource.com/c/platform/build/+/618250/1/core/version_defaults.mk#260",
+      "range": {
+        "startLine": 87,
+        "startChar": 33,
+        "endLine": 87,
+        "endChar": 37
+      },
+      "revId": "76c780144ba7af1c8b7fe00570ae42695fa698fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
