@@ -22,6 +22,30 @@
       "revId": "76c780144ba7af1c8b7fe00570ae42695fa698fd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "02049dc0_ab795b3a",
+        "filename": "brillo_config/Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1136354
+      },
+      "writtenOn": "2018-02-14T22:44:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d74afa65_1f0bd516",
+      "range": {
+        "startLine": 87,
+        "startChar": 33,
+        "endLine": 87,
+        "endChar": 37
+      },
+      "revId": "76c780144ba7af1c8b7fe00570ae42695fa698fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
