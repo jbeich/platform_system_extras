@@ -51,6 +51,7 @@
 #include "thread_tree.h"
 #include "tracing.h"
 #include "utils.h"
+#include "version.h"
 #include "workload.h"
 
 using namespace simpleperf;

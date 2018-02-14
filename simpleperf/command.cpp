@@ -24,6 +24,7 @@
 #include <android-base/logging.h>
 
 #include "utils.h"
+#include "version.h"
 
 bool Command::NextArgumentOrError(const std::vector<std::string>& args, size_t* pi) {
   if (*pi + 1 == args.size()) {

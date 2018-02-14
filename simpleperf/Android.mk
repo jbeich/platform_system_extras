@@ -15,10 +15,7 @@
 #
 LOCAL_PATH := $(call my-dir)
 
-simpleperf_version :=  $(shell git -C $(LOCAL_PATH) rev-parse --short=12 HEAD 2>/dev/null)
-
-simpleperf_common_cflags := -Wall -Werror -Wextra -Wunused -Wno-unknown-pragmas \
-                              -DSIMPLEPERF_REVISION='"$(simpleperf_version)"'
+simpleperf_common_cflags := -Wall -Werror -Wextra -Wunused -Wno-unknown-pragmas
 
 simpleperf_cflags_target := $(simpleperf_common_cflags)
 
@@ -139,6 +136,7 @@ LOCAL_SRC_FILES := \
   $(libsimpleperf_src_files_linux) \
 
 LOCAL_STATIC_LIBRARIES := $(simpleperf_static_libraries_target)
+LOCAL_WHOLE_STATIC_LIBRARIES := libsimpleperf_version
 LOCAL_MULTILIB := both
 LOCAL_PROTOC_OPTIMIZE_TYPE := lite-static
 include $(LLVM_DEVICE_BUILD_MK)
@@ -158,6 +156,7 @@ LOCAL_SRC_FILES_linux := $(libsimpleperf_src_files_linux)
 LOCAL_SRC_FILES_windows := $(libsimpleperf_src_files_windows)
 LOCAL_STATIC_LIBRARIES := $(simpleperf_static_libraries_host)
 LOCAL_STATIC_LIBRARIES_linux := $(simpleperf_static_libraries_host_linux)
+LOCAL_WHOLE_STATIC_LIBRARIES := libsimpleperf_version
 LOCAL_LDLIBS_linux := $(simpleperf_ldlibs_host_linux)
 LOCAL_MULTILIB := both
 LOCAL_PROTOC_OPTIMIZE_TYPE := lite-static
@@ -453,6 +452,7 @@ LOCAL_MODULE := libsimpleperf_cts_test
 LOCAL_CFLAGS := $(simpleperf_cflags_target) -DRUN_IN_APP_CONTEXT="\"com.android.simpleperf\""
 LOCAL_SRC_FILES := $(libsimpleperf_cts_test_src_files)
 LOCAL_STATIC_LIBRARIES := $(simpleperf_static_libraries_target)
+LOCAL_WHOLE_STATIC_LIBRARIES := libsimpleperf_version
 LOCAL_MULTILIB := both
 LOCAL_FORCE_STATIC_EXECUTABLE := true
 include $(LLVM_DEVICE_BUILD_MK)
@@ -467,6 +467,7 @@ LOCAL_CFLAGS_linux := $(simpleperf_cflags_host_linux)
 LOCAL_SRC_FILES := $(libsimpleperf_cts_test_src_files)
 LOCAL_STATIC_LIBRARIES := $(simpleperf_static_libraries_host)
 LOCAL_STATIC_LIBRARIES_linux := $(simpleperf_static_libraries_host_linux)
+LOCAL_WHOLE_STATIC_LIBRARIES := libsimpleperf_version
 LOCAL_LDLIBS_linux := $(simpleperf_ldlibs_host_linux)
 LOCAL_MULTILIB := both
 include $(LLVM_HOST_BUILD_MK)

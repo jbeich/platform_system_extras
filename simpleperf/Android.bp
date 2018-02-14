@@ -24,7 +24,6 @@ cc_defaults {
 
         // Try some more extreme warnings.
         "-Wpedantic",
-        "-Wunreachable-code-aggressive",
         // And disable some dumb things.
         "-Wno-zero-length-array",
         "-Wno-c99-extensions",
@@ -49,11 +48,6 @@ cc_library_static {
 
     export_include_dirs: [
         ".",
-    ],
-
-    // TODO: fix or workaround this.
-    cflags: [
-        "-DSIMPLEPERF_REVISION=\"dummy\"",
     ],
 
     static_libs: [
@@ -89,4 +83,29 @@ cc_library_static {
     ],
 
     group_static_libs: true,
+}
+
+genrule {
+    name: "simpleperf_version",
+    tool_files: ["gen_simpleperf_version.py"],
+    depfile: true,
+    cmd: "$(location gen_simpleperf_version.py) $(depfile) $(out)",
+    out: ["simpleperf_version.cpp"],
+}
+
+cc_library_static {
+    name: "libsimpleperf_version",
+    host_supported: true,
+    defaults: [
+        "simpleperf_defaults",
+    ],
+
+    generated_sources: [
+        "simpleperf_version",
+    ],
+    target: {
+        windows: {
+            enabled: true,
+        },
+    },
 }
