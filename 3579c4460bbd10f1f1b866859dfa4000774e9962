@@ -70,6 +70,30 @@
       "revId": "3579c4460bbd10f1f1b866859dfa4000774e9962",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "81b7f6db_81229d15",
+        "filename": "brillo_config/Android.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1079733
+      },
+      "writtenOn": "2018-02-15T00:39:55Z",
+      "side": 0,
+      "message": "I see, thanks for the explanation, this time is only used in local build as part of the version string, I guess it\u0027s fine to not update this every time we do `m` if the consequence is having to rebuild system image all the time, I don\u0027t think it\u0027s worth it.\nIf we don\u0027t depend on BUILD_DATETIME_FILE, then when does it gets updated?\nWe can\u0027t just use the system properties ro.build.date.utc instead of this version file because the time here is only needed in a local build and we will use the build number for official builds on the builder. However if there\u0027s a build variable that\u0027s the same value as that property, I think we can use that here.",
+      "parentUuid": "6365a8a0_4be44524",
+      "range": {
+        "startLine": 80,
+        "startChar": 0,
+        "endLine": 81,
+        "endChar": 27
+      },
+      "revId": "3579c4460bbd10f1f1b866859dfa4000774e9962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
