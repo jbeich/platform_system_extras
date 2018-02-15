@@ -46,6 +46,30 @@
       "revId": "3579c4460bbd10f1f1b866859dfa4000774e9962",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6365a8a0_4be44524",
+        "filename": "brillo_config/Android.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2018-02-15T00:19:49Z",
+      "side": 0,
+      "message": "The contents of the file will be different, but the actual command line will be the same, so ninja won\u0027t treat it as dirty.\n\nThat being said, we don\u0027t actually want to regenerate this file every time you run `m`, because that means we have to regenerate any images that use this file.\n\nPreviously this was changing only when we re-read the Android.mk files, so if you didn\u0027t need to re-read the makefiles, two runs of `m` wouldn\u0027t need to do anything.\n\nIf you depend on BUILD_DATETIME_FILE, we\u0027ll update this file every time you run `m`, so you\u0027ll always need to regenerate your system images.\n\nI\u0027d highly recommend just using the existing build dates that are set up in system properties rather than trying to do your own.",
+      "parentUuid": "ca496863_3232a38b",
+      "range": {
+        "startLine": 80,
+        "startChar": 0,
+        "endLine": 81,
+        "endChar": 27
+      },
+      "revId": "3579c4460bbd10f1f1b866859dfa4000774e9962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
