@@ -94,6 +94,30 @@
       "revId": "3579c4460bbd10f1f1b866859dfa4000774e9962",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b7499b65_903179a5",
+        "filename": "brillo_config/Android.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2018-02-15T00:49:54Z",
+      "side": 0,
+      "message": "\u003e If we don\u0027t depend on BUILD_DATETIME_FILE, then when does it gets updated?\n\nIt will get created once, then never again.\n\n\u003e We can\u0027t just use the system properties ro.build.date.utc instead of this version file because the time here is only needed in a local build and we will use the build number for official builds on the builder.\n\nThe build number has a timestamp in it for local builds as well. Could you always do a runtime lookup of ro.build.version.incremental? (Or if you want to keep the format the same, check ro.build.version.incremental then ro.build.date.utc like you\u0027re doing here?)\n\n\u003e However if there\u0027s a build variable that\u0027s the same value as that property, I think we can use that here.\n\nro.build.date.utc is coming from the same information, but we update it more often due to other dependencies (we could update it during image creation so that it happens every time the image is updated as well, though we have use cases that don\u0027t involve image creation now). The file it creates is also cleared upon `m installclean`, so build server incrementals are up to date.",
+      "parentUuid": "81b7f6db_81229d15",
+      "range": {
+        "startLine": 80,
+        "startChar": 0,
+        "endLine": 81,
+        "endChar": 27
+      },
+      "revId": "3579c4460bbd10f1f1b866859dfa4000774e9962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
