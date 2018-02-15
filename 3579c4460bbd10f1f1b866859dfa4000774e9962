@@ -142,6 +142,30 @@
       "revId": "3579c4460bbd10f1f1b866859dfa4000774e9962",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ca09bbef_d66e885a",
+        "filename": "brillo_config/Android.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1076778
+      },
+      "writtenOn": "2018-02-15T01:25:18Z",
+      "side": 0,
+      "message": "I think its likely fine to use BUILD_DATETIME_FROM_FILE here now.  We shouldn\u0027t be relying on local builds for releases, so our official images should always be using the BUILD_NUMBER now, and local builds (outside of us doing any kind of local update tests) shouldn\u0027t care about whether or not this value changes on back-to-back local builds.",
+      "parentUuid": "c9b88319_e16b6a07",
+      "range": {
+        "startLine": 80,
+        "startChar": 0,
+        "endLine": 81,
+        "endChar": 27
+      },
+      "revId": "3579c4460bbd10f1f1b866859dfa4000774e9962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
