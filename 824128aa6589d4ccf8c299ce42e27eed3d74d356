@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "519ae037_12fc0781",
+        "filename": "brillo_config/Android.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2018-02-20T21:35:40Z",
+      "side": 1,
+      "message": "This can be $(file \u003c$(BUILD_NUMBER_FILE))",
+      "range": {
+        "startLine": 85,
+        "startChar": 33,
+        "endLine": 85,
+        "endChar": 43
+      },
+      "revId": "824128aa6589d4ccf8c299ce42e27eed3d74d356",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
