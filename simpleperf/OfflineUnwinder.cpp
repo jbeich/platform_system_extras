@@ -126,29 +126,34 @@ bool OfflineUnwinder::UnwindCallChain(const ThreadEntry& thread, const RegSet& r
   }
   uint64_t stack_addr = sp_reg_value;
 
-  std::vector<backtrace_map_t> bt_maps(thread.maps->size());
-  size_t map_index = 0;
-  for (auto& map : *thread.maps) {
-    backtrace_map_t& bt_map = bt_maps[map_index++];
-    bt_map.start = map->start_addr;
-    bt_map.end = map->start_addr + map->len;
-    bt_map.offset = map->pgoff;
-    bt_map.name = map->dso->GetDebugFilePath();
-    if (bt_map.offset == 0) {
-      size_t apk_pos = bt_map.name.find_last_of('!');
-      if (apk_pos != std::string::npos) {
-        // The unwinder does not understand the ! format, so change back to
-        // the previous format (apk, offset).
-        std::string shared_lib(bt_map.name.substr(apk_pos + 2));
-        bt_map.name = bt_map.name.substr(0, apk_pos);
-        uint64_t offset;
-        uint32_t length;
-        if (ApkInspector::FindOffsetInApkByName(bt_map.name, shared_lib, &offset, &length)) {
-          bt_map.offset = offset;
+  // Create maps for libunwind (only if they changed since last time).
+  if (!map_ || maps_version_ != thread.maps->version()) {
+    std::vector<backtrace_map_t> bt_maps(thread.maps->size());
+    size_t map_index = 0;
+    for (auto& map : *thread.maps) {
+      backtrace_map_t& bt_map = bt_maps[map_index++];
+      bt_map.start = map->start_addr;
+      bt_map.end = map->start_addr + map->len;
+      bt_map.offset = map->pgoff;
+      bt_map.name = map->dso->GetDebugFilePath();
+      if (bt_map.offset == 0) {
+        size_t apk_pos = bt_map.name.find_last_of('!');
+        if (apk_pos != std::string::npos) {
+          // The unwinder does not understand the ! format, so change back to
+          // the previous format (apk, offset).
+          std::string shared_lib(bt_map.name.substr(apk_pos + 2));
+          bt_map.name = bt_map.name.substr(0, apk_pos);
+          uint64_t offset;
+          uint32_t length;
+          if (ApkInspector::FindOffsetInApkByName(bt_map.name, shared_lib, &offset, &length)) {
+            bt_map.offset = offset;
+          }
         }
       }
+      bt_map.flags = PROT_READ | PROT_EXEC;
     }
-    bt_map.flags = PROT_READ | PROT_EXEC;
+    map_.reset(BacktraceMap::Create(thread.pid, bt_maps));
+    maps_version_ = thread.maps->version();
   }
 
   backtrace_stackinfo_t stack_info;
@@ -156,14 +161,14 @@ bool OfflineUnwinder::UnwindCallChain(const ThreadEntry& thread, const RegSet& r
   stack_info.end = stack_addr + stack_size;
   stack_info.data = reinterpret_cast<const uint8_t*>(stack);
 
-  std::unique_ptr<BacktraceMap> map(BacktraceMap::CreateOffline(thread.pid, bt_maps, stack_info));
   std::unique_ptr<unwindstack::Regs> unwind_regs(GetBacktraceRegs(regs));
-  if (!map || !unwind_regs) {
+  if (!map_ || !unwind_regs) {
     return false;
   }
+  map_->SetStack(stack_info);
   std::vector<backtrace_frame_data_t> frames;
   BacktraceUnwindError error;
-  if (Backtrace::Unwind(unwind_regs.get(), map.get(), &frames, 0u, nullptr, &error)) {
+  if (Backtrace::Unwind(unwind_regs.get(), map_.get(), &frames, 0u, nullptr, &error)) {
     for (auto& frame : frames) {
       // Unwinding in arm architecture can return 0 pc address.
       if (frame.pc == 0) {

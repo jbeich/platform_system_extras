@@ -21,6 +21,8 @@
 
 #include "perf_regs.h"
 
+#include <backtrace/Backtrace.h>
+
 namespace simpleperf {
 struct ThreadEntry;
 
@@ -66,6 +68,10 @@ class OfflineUnwinder {
  private:
   bool collect_stat_;
   UnwindingResult unwinding_result_;
+
+  // Cache of the most recently used map.
+  std::unique_ptr<BacktraceMap> map_;
+  uint64_t maps_version_;  // Version of mmaps that we created the map_ from.
 };
 
 } // namespace simpleperf
