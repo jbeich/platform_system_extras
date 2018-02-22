@@ -59,7 +59,37 @@ struct MapComparator {
   bool operator()(const MapEntry* map1, const MapEntry* map2) const;
 };
 
-using MapSet = std::set<MapEntry*, MapComparator>;
+// Wrapper around std::set which has a "version" that increments on every modification.
+// The base class is marked private and we only warp the methods that we actually need.
+class MapSet : private std::set<MapEntry*, MapComparator> {
+  typedef std::set<MapEntry*, MapComparator> Base;
+ public:
+  // Mark some of the private base class methods public.
+  using Base::begin;
+  using Base::end;
+  using Base::size;
+  using Base::lower_bound;
+  using Base::upper_bound;
+
+  void clear() {
+    version_++;
+    Base::clear();
+  }
+
+  std::pair<iterator,bool> insert(const value_type& value) {
+    version_++;
+    return Base::insert(value);
+  }
+
+  iterator erase(const_iterator pos) {
+    version_++;
+    return Base::erase(pos);
+  }
+
+  uint64_t version() { return version_; }
+ private:
+  uint64_t version_ = 0;
+};
 
 struct ThreadEntry {
   int pid;
