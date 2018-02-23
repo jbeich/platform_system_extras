@@ -19,6 +19,7 @@
 
 #include "environment.h"
 #include "OfflineUnwinder.h"
+#include "read_dex_file.h"
 
 namespace simpleperf {
 OfflineUnwinder::OfflineUnwinder(bool collect_stat) : collect_stat_(collect_stat) {
@@ -36,4 +37,9 @@ bool GetKernelBuildId(BuildId*) {
 
 bool CanRecordRawData() {
   return false;
+}
+
+bool ParseSymbolsFromDexFile(const std::string&, uint64_t,
+                             const std::function<void (DexFileSymbol&)>&) {
+  return true;
 }
