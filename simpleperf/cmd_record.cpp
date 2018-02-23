@@ -42,6 +42,7 @@
 #include "event_selection_set.h"
 #include "event_type.h"
 #include "IOEventLoop.h"
+#include "JITDebugReader.h"
 #include "OfflineUnwinder.h"
 #include "perf_clock.h"
 #include "read_apk.h"
@@ -223,7 +224,8 @@ class RecordCommand : public Command {
         trace_offcpu_(false),
         exclude_kernel_callchain_(false),
         allow_callchain_joiner_(true),
-        callchain_joiner_min_matching_nodes_(1u) {
+        callchain_joiner_min_matching_nodes_(1u),
+        timestamp_of_last_record_(0u) {
     // If we run `adb shell simpleperf record xxx` and stop profiling by ctrl-c, adb closes
     // sockets connecting simpleperf. After that, simpleperf will receive SIGPIPE when writing
     // to stdout/stderr, which is a problem when we use '--app' option. So ignore SIGPIPE to
@@ -243,8 +245,7 @@ class RecordCommand : public Command {
   bool TraceOffCpu();
   bool SetEventSelectionFlags();
   bool CreateAndInitRecordFile();
-  std::unique_ptr<RecordFileWriter> CreateRecordFile(
-      const std::string& filename);
+  std::unique_ptr<RecordFileWriter> CreateRecordFile(const std::string& filename);
   bool DumpKernelSymbol();
   bool DumpTracingData();
   bool DumpKernelAndModuleMmaps(const perf_event_attr& attr, uint64_t event_id);
@@ -253,6 +254,7 @@ class RecordCommand : public Command {
   bool SaveRecordForPostUnwinding(Record* record);
   bool SaveRecordAfterUnwinding(Record* record);
   bool SaveRecordWithoutUnwinding(Record* record);
+  bool UpdateJITDebugInfo();
 
   void UpdateRecordForEmbeddedElfPath(Record* record);
   bool UnwindRecord(SampleRecord& r);
@@ -301,6 +303,9 @@ class RecordCommand : public Command {
   bool allow_callchain_joiner_;
   size_t callchain_joiner_min_matching_nodes_;
   std::unique_ptr<CallChainJoiner> callchain_joiner_;
+
+  std::unique_ptr<JITDebugReader> jit_debug_reader_;
+  uint64_t timestamp_of_last_record_;  // Used to insert JIT mmap2 records with proper timestamps.
 };
 
 bool RecordCommand::Run(const std::vector<std::string>& args) {
@@ -314,6 +319,7 @@ bool RecordCommand::Run(const std::vector<std::string>& args) {
   if (!ParseOptions(args, &workload_args)) {
     return false;
   }
+  ScopedTempFiles scoped_temp_files(android::base::Dirname(record_filename_));
   if (!app_package_name_.empty() && !in_app_context_) {
     // Some users want to profile non debuggable apps on rooted devices. If we use run-as,
     // it will be impossible when using --app. So don't switch to app's context when we are
@@ -376,6 +382,7 @@ bool RecordCommand::PrepareRecording(Workload* workload) {
 
   // 4. Add monitored targets.
   bool need_to_check_targets = false;
+  pid_t app_pid = 0;
   if (system_wide_collection_) {
     event_selection_set_.AddMonitoredThreads({-1});
   } else if (!event_selection_set_.HasMonitoredTarget()) {
@@ -393,6 +400,8 @@ bool RecordCommand::PrepareRecording(Workload* workload) {
       // If app process is not created, wait for it. This allows simpleperf starts before
       // app process. In this way, we can have a better support of app start-up time profiling.
       std::set<pid_t> pids = WaitForAppProcesses(app_package_name_);
+      // TODO: support multiple JITDebugReaders.
+      app_pid = *pids.begin();
       event_selection_set_.AddMonitoredProcesses(pids);
       need_to_check_targets = true;
     } else {
@@ -443,6 +452,19 @@ bool RecordCommand::PrepareRecording(Workload* workload) {
   if (duration_in_sec_ != 0) {
     if (!loop->AddPeriodicEvent(SecondToTimeval(duration_in_sec_),
                                 [loop]() { return loop->ExitLoop(); })) {
+      return false;
+    }
+  }
+  if (app_pid != 0) {
+    // symfiles are kept when using -g --no-unwind options, to support unwinding in
+    // debug-unwind cmd.
+    bool keep_symfiles = dwarf_callchain_sampling_ && !unwind_dwarf_callchain_;
+    jit_debug_reader_.reset(new JITDebugReader(app_pid, keep_symfiles));
+    if (!UpdateJITDebugInfo()) {
+      return false;
+    }
+    if (!loop->AddPeriodicEvent(SecondToTimeval(0.1),
+                                [&]() { return UpdateJITDebugInfo(); })) {
       return false;
     }
   }
@@ -803,7 +825,6 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
     non_option_args->push_back(args[i]);
   }
 
-  SetTempDirectoryUsedInRecording(android::base::Dirname(record_filename_));
   return true;
 }
 
@@ -1015,6 +1036,20 @@ bool RecordCommand::DumpThreadCommAndMmaps(const perf_event_attr& attr,
 }
 
 bool RecordCommand::ProcessRecord(Record* record) {
+  timestamp_of_last_record_ = record->Timestamp();
+  // Mmaps for storing JITed code is shown as //anon. We don't want them to override the
+  // mmaps created by JIT symfiles.
+  if (record->type() == PERF_RECORD_MMAP) {
+    if (strcmp(static_cast<MmapRecord*>(record)->filename,
+               DEFAULT_EXECNAME_FOR_THREAD_MMAP) == 0) {
+      return true;
+    }
+  } else if (record->type() == PERF_RECORD_MMAP2) {
+    if (strcmp(static_cast<Mmap2Record*>(record)->filename,
+               DEFAULT_EXECNAME_FOR_THREAD_MMAP) == 0) {
+      return true;
+    }
+  }
   if (unwind_dwarf_callchain_) {
     if (post_unwind_) {
       return SaveRecordForPostUnwinding(record);
@@ -1076,6 +1111,37 @@ bool RecordCommand::SaveRecordWithoutUnwinding(Record* record) {
     lost_record_count_ += static_cast<LostRecord*>(record)->lost;
   }
   return record_file_writer_->WriteRecord(*record);
+}
+
+bool RecordCommand::UpdateJITDebugInfo() {
+  std::vector<JITSymFile> jit_symfiles;
+  std::vector<DexSymFile> dex_symfiles;
+  jit_debug_reader_->ReadUpdate(&jit_symfiles, &dex_symfiles);
+  if (jit_symfiles.empty() && dex_symfiles.empty()) {
+    return true;
+  }
+  // Processing records before dumping symfiles, so new symfiles won't affect old samples.
+  if (!event_selection_set_.ReadMmapEventData()) {
+    return false;
+  }
+  EventAttrWithId attr_id = event_selection_set_.GetEventAttrWithId()[0];
+  for (auto& symfile : jit_symfiles) {
+    Mmap2Record record(*attr_id.attr, false, jit_debug_reader_->Pid(), jit_debug_reader_->Pid(),
+                      symfile.addr, symfile.len, 0, details::PROT_JIT_SYMFILE_MAP,
+                      symfile.file_path, attr_id.ids[0], timestamp_of_last_record_);
+    if (!ProcessRecord(&record)) {
+      return false;
+    }
+  }
+  for (auto& symfile : dex_symfiles) {
+    Mmap2Record record(*attr_id.attr, false, jit_debug_reader_->Pid(), jit_debug_reader_->Pid(),
+                       symfile.addr, symfile.len, symfile.pgoff, details::PROT_DEX_SYMFILE_MAP,
+                       symfile.file_path, attr_id.ids[0], timestamp_of_last_record_);
+    if (!ProcessRecord(&record)) {
+      return false;
+    }
+  }
+  return true;
 }
 
 template <class RecordType>
@@ -1141,8 +1207,8 @@ bool RecordCommand::PostUnwindRecords() {
     return false;
   }
   record_file_writer_.reset();
-  std::unique_ptr<TemporaryFile> tmpfile = CreateTempFileUsedInRecording();
-  if (!Workload::RunCmd({"mv", record_filename_, tmpfile->path})) {
+  std::unique_ptr<TemporaryFile> tmpfile(ScopedTempFiles::CreateTempFile(false));
+  if (!tmpfile || !Workload::RunCmd({"mv", record_filename_, tmpfile->path})) {
     return false;
   }
   std::unique_ptr<RecordFileReader> reader = RecordFileReader::CreateInstance(tmpfile->path);
@@ -1173,8 +1239,8 @@ bool RecordCommand::JoinCallChains() {
     return false;
   }
   record_file_writer_.reset();
-  std::unique_ptr<TemporaryFile> tmpfile = CreateTempFileUsedInRecording();
-  if (!Workload::RunCmd({"mv", record_filename_, tmpfile->path})) {
+  std::unique_ptr<TemporaryFile> tmpfile(ScopedTempFiles::CreateTempFile(false));
+  if (!tmpfile || !Workload::RunCmd({"mv", record_filename_, tmpfile->path})) {
     return false;
   }
 

@@ -25,9 +25,11 @@
 
 #include <android-base/file.h>
 #include <android-base/logging.h>
+#include <android-base/parseint.h>
 
 #include "environment.h"
 #include "read_apk.h"
+#include "read_dex_file.h"
 #include "read_elf.h"
 #include "utils.h"
 
@@ -60,8 +62,8 @@ bool Dso::read_kernel_symbols_from_proc_;
 std::unordered_map<std::string, BuildId> Dso::build_id_map_;
 size_t Dso::dso_count_;
 uint32_t Dso::g_dump_id_;
-std::unique_ptr<TemporaryFile> Dso::vdso_64bit_;
-std::unique_ptr<TemporaryFile> Dso::vdso_32bit_;
+TemporaryFile* Dso::vdso_64bit_;
+TemporaryFile* Dso::vdso_32bit_;
 
 void Dso::SetDemangle(bool demangle) { demangle_ = demangle; }
 
@@ -121,11 +123,11 @@ void Dso::SetBuildIds(
   build_id_map_ = std::move(map);
 }
 
-void Dso::SetVdsoFile(std::unique_ptr<TemporaryFile> vdso_file, bool is_64bit) {
+void Dso::SetVdsoFile(TemporaryFile* vdso_file, bool is_64bit) {
   if (is_64bit) {
-    vdso_64bit_ = std::move(vdso_file);
+    vdso_64bit_ = vdso_file;
   } else {
-    vdso_32bit_ = std::move(vdso_file);
+    vdso_32bit_ = vdso_file;
   }
 }
 
@@ -305,6 +307,10 @@ void Dso::Load() {
       } else {
         result = LoadElfFile();
       }
+      break;
+    }
+    case DSO_DEX_FILE: {
+      result = LoadDexFile();
       break;
     }
   }
@@ -487,6 +493,20 @@ bool Dso::LoadEmbeddedElfFile() {
   return CheckReadSymbolResult(result, GetDebugFilePath());
 }
 
+bool Dso::LoadDexFile() {
+  size_t split_pos = path_.rfind(GetDexFileOffsetSep());
+  std::string filename = path_.substr(0, split_pos);
+  uint64_t offset;
+  if (!android::base::ParseUint(path_.substr(split_pos + strlen(GetDexFileOffsetSep())),
+                                &offset)) {
+    return false;
+  }
+  auto callback = [&](const DexFileSymbol symbol) {
+    symbols_.emplace_back(symbol.name, symbol.offset, symbol.len);
+  };
+  return ParseSymbolsFromDexFile(filename, offset, callback);
+}
+
 void Dso::FixupSymbolLength() {
   Symbol* prev_symbol = nullptr;
   for (auto& symbol : symbols_) {
@@ -508,7 +528,13 @@ const char* DsoTypeToString(DsoType dso_type) {
       return "dso_kernel_module";
     case DSO_ELF_FILE:
       return "dso_elf_file";
+    case DSO_DEX_FILE:
+      return "dso_dex_file";
     default:
       return "unknown";
   }
+}
+
+const char* GetDexFileOffsetSep() {
+  return "_";
 }
