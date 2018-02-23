@@ -17,7 +17,11 @@
 #ifndef SIMPLE_PERF_OFFLINE_UNWINDER_H_
 #define SIMPLE_PERF_OFFLINE_UNWINDER_H_
 
+#include <memory>
 #include <vector>
+#include <unordered_map>
+
+#include <backtrace/BacktraceMap.h>
 
 #include "perf_regs.h"
 
@@ -66,6 +70,14 @@ class OfflineUnwinder {
  private:
   bool collect_stat_;
   UnwindingResult unwinding_result_;
+
+  // Cache of the most recently used map.
+  struct CachedMap {
+    uint64_t version = 0u;
+    std::unique_ptr<BacktraceMap> map;
+  };
+  // use unused attribute to pass mac build.
+  std::unordered_map<pid_t, CachedMap> cached_maps_  __attribute__((unused));
 };
 
 } // namespace simpleperf
