@@ -265,6 +265,22 @@ Mmap2Record::Mmap2Record(const perf_event_attr& attr, char* p) : Record(p) {
   sample_id.ReadFromBinaryFormat(attr, p, end);
 }
 
+Mmap2Record::Mmap2Record(const perf_event_attr& attr, bool in_kernel, uint32_t pid, uint32_t tid,
+                         uint64_t addr, uint64_t len, uint64_t pgoff, uint32_t prot,
+                         const std::string& filename, uint64_t event_id, uint64_t time) {
+  SetTypeAndMisc(PERF_RECORD_MMAP2, in_kernel ? PERF_RECORD_MISC_KERNEL : PERF_RECORD_MISC_USER);
+  sample_id.CreateContent(attr, event_id);
+  sample_id.time_data.time = time;
+  Mmap2RecordDataType data;
+  data.pid = pid;
+  data.tid = tid;
+  data.addr = addr;
+  data.len = len;
+  data.pgoff = pgoff;
+  data.prot = prot;
+  SetDataAndFilename(data, filename);
+}
+
 void Mmap2Record::SetDataAndFilename(const Mmap2RecordDataType& data,
                                      const std::string& filename) {
   SetSize(header_size() + sizeof(data) + Align(filename.size() + 1, 8) +

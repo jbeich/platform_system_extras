@@ -42,6 +42,7 @@
 #include "event_selection_set.h"
 #include "event_type.h"
 #include "IOEventLoop.h"
+#include "JITDebugReader.h"
 #include "OfflineUnwinder.h"
 #include "perf_clock.h"
 #include "read_apk.h"
@@ -243,8 +244,7 @@ class RecordCommand : public Command {
   bool TraceOffCpu();
   bool SetEventSelectionFlags();
   bool CreateAndInitRecordFile();
-  std::unique_ptr<RecordFileWriter> CreateRecordFile(
-      const std::string& filename);
+  std::unique_ptr<RecordFileWriter> CreateRecordFile(const std::string& filename);
   bool DumpKernelSymbol();
   bool DumpTracingData();
   bool DumpKernelAndModuleMmaps(const perf_event_attr& attr, uint64_t event_id);
@@ -253,6 +253,7 @@ class RecordCommand : public Command {
   bool SaveRecordForPostUnwinding(Record* record);
   bool SaveRecordAfterUnwinding(Record* record);
   bool SaveRecordWithoutUnwinding(Record* record);
+  bool UpdateJITDebugInfo();
 
   void UpdateRecordForEmbeddedElfPath(Record* record);
   bool UnwindRecord(SampleRecord& r);
@@ -301,6 +302,8 @@ class RecordCommand : public Command {
   bool allow_callchain_joiner_;
   size_t callchain_joiner_min_matching_nodes_;
   std::unique_ptr<CallChainJoiner> callchain_joiner_;
+
+  std::unique_ptr<JITDebugReader> jit_debug_reader_;
 };
 
 bool RecordCommand::Run(const std::vector<std::string>& args) {
@@ -376,6 +379,7 @@ bool RecordCommand::PrepareRecording(Workload* workload) {
 
   // 4. Add monitored targets.
   bool need_to_check_targets = false;
+  pid_t app_pid = 0;
   if (system_wide_collection_) {
     event_selection_set_.AddMonitoredThreads({-1});
   } else if (!event_selection_set_.HasMonitoredTarget()) {
@@ -393,6 +397,8 @@ bool RecordCommand::PrepareRecording(Workload* workload) {
       // If app process is not created, wait for it. This allows simpleperf starts before
       // app process. In this way, we can have a better support of app start-up time profiling.
       std::set<pid_t> pids = WaitForAppProcesses(app_package_name_);
+      // TODO: support multiple JITDebugReaders.
+      app_pid = *pids.begin();
       event_selection_set_.AddMonitoredProcesses(pids);
       need_to_check_targets = true;
     } else {
@@ -443,6 +449,16 @@ bool RecordCommand::PrepareRecording(Workload* workload) {
   if (duration_in_sec_ != 0) {
     if (!loop->AddPeriodicEvent(SecondToTimeval(duration_in_sec_),
                                 [loop]() { return loop->ExitLoop(); })) {
+      return false;
+    }
+  }
+  if (app_pid != 0) {
+    jit_debug_reader_.reset(new JITDebugReader(app_pid));
+    if (!UpdateJITDebugInfo()) {
+      return false;
+    }
+    if (!loop->AddPeriodicEvent(SecondToTimeval(0.1),
+                                [&]() { return UpdateJITDebugInfo(); })) {
       return false;
     }
   }
@@ -1076,6 +1092,26 @@ bool RecordCommand::SaveRecordWithoutUnwinding(Record* record) {
     lost_record_count_ += static_cast<LostRecord*>(record)->lost;
   }
   return record_file_writer_->WriteRecord(*record);
+}
+
+bool RecordCommand::UpdateJITDebugInfo() {
+  std::vector<JITSymFile> new_symfiles;
+  std::vector<DexFile> new_dexfiles;
+  jit_debug_reader_->ReadUpdate(&new_symfiles, &new_dexfiles);
+  if (new_symfiles.empty()) {
+    return true;
+  }
+  EventAttrWithId attr_id = event_selection_set_.GetEventAttrWithId()[0];
+  for (auto& symfile : new_symfiles) {
+    Mmap2Record record(*attr_id.attr, false, jit_debug_reader_->Pid(), jit_debug_reader_->Pid(),
+                      symfile.addr, symfile.len, 0, PROT_JIT_SYMFILE_MAP, symfile.file_path,
+                      attr_id.ids[0]);
+    if (!ProcessRecord(&record)) {
+      return false;
+    }
+  }
+  // TODO: dump dexfiles as Mmap2Records to support dex file symbolization.
+  return true;
 }
 
 template <class RecordType>

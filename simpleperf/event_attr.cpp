@@ -82,6 +82,8 @@ perf_event_attr CreateDefaultPerfEventAttr(const EventType& event_type) {
   attr.type = event_type.type;
   attr.config = event_type.config;
   attr.mmap = 1;
+  // To dump maps containing dexfiles.
+  attr.mmap_data = 1;
   attr.comm = 1;
   attr.disabled = 0;
   // Changing read_format affects the layout of the data read from perf_event_file, namely
