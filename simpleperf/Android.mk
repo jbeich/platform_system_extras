@@ -20,12 +20,13 @@ simpleperf_version :=  $(shell git -C $(LOCAL_PATH) rev-parse --short=12 HEAD 2>
 simpleperf_common_cflags := -Wall -Werror -Wextra -Wunused -Wno-unknown-pragmas \
                               -DSIMPLEPERF_REVISION='"$(simpleperf_version)"'
 
-simpleperf_cflags_target := $(simpleperf_common_cflags)
+simpleperf_cflags_target := $(simpleperf_common_cflags) -I art/runtime
 
 simpleperf_cflags_host := $(simpleperf_common_cflags) \
                             -DUSE_BIONIC_UAPI_HEADERS -I bionic/libc/kernel \
                             -fvisibility=hidden \
 
+simpleperf_cflags_host_linux := -I art/runtime
 simpleperf_cflags_host_darwin := -I $(LOCAL_PATH)/nonlinux_support/include
 simpleperf_cflags_host_windows := -I $(LOCAL_PATH)/nonlinux_support/include
 
@@ -116,8 +117,10 @@ libsimpleperf_src_files_linux := \
   event_selection_set.cpp \
   InplaceSamplerClient.cpp \
   IOEventLoop.cpp \
+  JITDebugReader.cpp \
   OfflineUnwinder.cpp \
   perf_clock.cpp \
+  read_dex_file.cpp \
   record_file_writer.cpp \
   UnixSocket.cpp \
   workload.cpp \
@@ -142,6 +145,8 @@ LOCAL_STATIC_LIBRARIES := $(simpleperf_static_libraries_target)
 LOCAL_MULTILIB := both
 LOCAL_PROTOC_OPTIMIZE_TYPE := lite-static
 include $(LLVM_DEVICE_BUILD_MK)
+# Remove -std=c++11 flag to compile read_dex_file.cpp.
+LOCAL_CPPFLAGS :=
 include $(BUILD_STATIC_LIBRARY)
 
 # libsimpleperf host
@@ -163,6 +168,8 @@ LOCAL_MULTILIB := both
 LOCAL_PROTOC_OPTIMIZE_TYPE := lite-static
 LOCAL_CXX_STL := libc++_static
 include $(LLVM_HOST_BUILD_MK)
+# Remove -std=c++11 flag to compile read_dex_file.cpp.
+LOCAL_CPPFLAGS :=
 include $(BUILD_HOST_STATIC_LIBRARY)
 
 
@@ -369,6 +376,7 @@ simpleperf_unit_test_src_files_linux := \
   cmd_stat_test.cpp \
   environment_test.cpp \
   IOEventLoop_test.cpp \
+  read_dex_file_test.cpp \
   record_file_test.cpp \
   UnixSocket_test.cpp \
   workload_test.cpp \
@@ -456,6 +464,8 @@ LOCAL_STATIC_LIBRARIES := $(simpleperf_static_libraries_target)
 LOCAL_MULTILIB := both
 LOCAL_FORCE_STATIC_EXECUTABLE := true
 include $(LLVM_DEVICE_BUILD_MK)
+# Remove -std=c++11 flag to compile read_dex_file.cpp.
+LOCAL_CPPFLAGS :=
 include $(BUILD_STATIC_TEST_LIBRARY)
 
 # libsimpleperf_cts_test linux host
@@ -470,6 +480,8 @@ LOCAL_STATIC_LIBRARIES_linux := $(simpleperf_static_libraries_host_linux)
 LOCAL_LDLIBS_linux := $(simpleperf_ldlibs_host_linux)
 LOCAL_MULTILIB := both
 include $(LLVM_HOST_BUILD_MK)
+# Remove -std=c++11 flag to compile read_dex_file.cpp.
+LOCAL_CPPFLAGS :=
 include $(BUILD_HOST_STATIC_TEST_LIBRARY)
 
 # simpleperf_record_test

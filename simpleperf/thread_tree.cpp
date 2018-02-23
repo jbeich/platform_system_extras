@@ -128,22 +128,24 @@ Dso* ThreadTree::FindKernelDsoOrNew(const std::string& filename) {
 
 void ThreadTree::AddThreadMap(int pid, int tid, uint64_t start_addr,
                               uint64_t len, uint64_t pgoff, uint64_t time,
-                              const std::string& filename) {
+                              const std::string& filename, uint32_t prot) {
   ThreadEntry* thread = FindThreadOrNew(pid, tid);
-  Dso* dso = FindUserDsoOrNew(filename, start_addr);
+  DsoType dso_type = (prot & details::PROT_DEX_SYMFILE_MAP) ? DSO_DEX_FILE : DSO_ELF_FILE;
+  Dso* dso = FindUserDsoOrNew(filename, dso_type, start_addr);
   MapEntry* map =
-      AllocateMap(MapEntry(start_addr, len, pgoff, time, dso, false));
+      AllocateMap(MapEntry(start_addr, len, pgoff, time, dso, false, prot));
   FixOverlappedMap(thread->maps, map);
   auto pair = thread->maps->maps.insert(map);
   CHECK(pair.second);
   thread->maps->version++;
 }
 
-Dso* ThreadTree::FindUserDsoOrNew(const std::string& filename, uint64_t start_addr) {
+Dso* ThreadTree::FindUserDsoOrNew(const std::string& filename, DsoType dso_type,
+                                  uint64_t start_addr) {
   auto it = user_dso_tree_.find(filename);
   if (it == user_dso_tree_.end()) {
     bool force_64bit = start_addr > UINT_MAX;
-    user_dso_tree_[filename] = Dso::CreateDso(DSO_ELF_FILE, filename, force_64bit);
+    user_dso_tree_[filename] = Dso::CreateDso(dso_type, filename, force_64bit);
     it = user_dso_tree_.find(filename);
   }
   return it->second.get();
@@ -227,7 +229,13 @@ const Symbol* ThreadTree::FindSymbol(const MapEntry* map, uint64_t ip,
   Dso* dso = map->dso;
   if (!map->in_kernel) {
     // Find symbol in user space shared libraries.
-    vaddr_in_file = ip - map->start_addr + map->dso->MinVirtualAddress();
+    if (map->prot & details::PROT_JIT_SYMFILE_MAP) {
+      vaddr_in_file = ip;
+    } else if (map->prot & details::PROT_DEX_SYMFILE_MAP) {
+      vaddr_in_file = ip - map->pgoff;
+    } else {
+      vaddr_in_file = ip - map->start_addr + map->dso->MinVirtualAddress();
+    }
     symbol = dso->FindSymbol(vaddr_in_file);
   } else {
     if (dso != kernel_dso_.get()) {
@@ -285,7 +293,7 @@ void ThreadTree::AddDsoInfo(const std::string& file_path, uint32_t file_type,
   if (dso_type == DSO_KERNEL || dso_type == DSO_KERNEL_MODULE) {
     dso = FindKernelDsoOrNew(file_path);
   } else {
-    dso = FindUserDsoOrNew(file_path);
+    dso = FindUserDsoOrNew(file_path, static_cast<DsoType>(file_type));
   }
   dso->SetMinVirtualAddress(min_vaddr);
   dso->SetSymbols(symbols);
@@ -307,11 +315,8 @@ void ThreadTree::Update(const Record& record) {
       AddKernelMap(r.data->addr, r.data->len, r.data->pgoff,
                    r.sample_id.time_data.time, r.filename);
     } else {
-      std::string filename = (r.filename == DEFAULT_EXECNAME_FOR_THREAD_MMAP)
-                                 ? "[unknown]"
-                                 : r.filename;
       AddThreadMap(r.data->pid, r.data->tid, r.data->addr, r.data->len,
-                   r.data->pgoff, r.sample_id.time_data.time, filename);
+                   r.data->pgoff, r.sample_id.time_data.time, r.filename, r.data->prot);
     }
   } else if (record.type() == PERF_RECORD_COMM) {
     const CommRecord& r = *static_cast<const CommRecord*>(&record);

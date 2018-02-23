@@ -103,8 +103,17 @@ void SetDefaultAppPackageName(const std::string& package_name);
 const std::string& GetDefaultAppPackageName();
 void AllowMoreOpenedFiles();
 
-void SetTempDirectoryUsedInRecording(const std::string& tmp_dir);
-std::unique_ptr<TemporaryFile> CreateTempFileUsedInRecording();
+class ScopedTempFiles {
+ public:
+  ScopedTempFiles(const std::string& tmp_dir);
+  ~ScopedTempFiles();
+
+  static TemporaryFile* CreateTempFile(bool delete_in_destructor);
+
+ private:
+  static std::string tmp_dir_;
+  static std::vector<TemporaryFile*> tmp_files_;
+};
 
 bool SignalIsIgnored(int signo);
 
