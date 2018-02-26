@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "730703cd_220fb61b",
+        "filename": "simpleperf/JITDebugReader.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1065473
+      },
+      "writtenOn": "2018-02-26T18:46:39Z",
+      "side": 1,
+      "message": "Note that this field has different alignment on x86 and ARM,\nso this works only if simpleperf was compiled for the same arch it is profiling.",
+      "range": {
+        "startLine": 86,
+        "startChar": 11,
+        "endLine": 86,
+        "endChar": 23
+      },
+      "revId": "df1c7ab702a0ed9aa80c7a489d1adca9c05ad9d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d8ad66de_428afe37",
+        "filename": "simpleperf/JITDebugReader.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1065473
+      },
+      "writtenOn": "2018-02-26T18:46:39Z",
+      "side": 1,
+      "message": "I have moved this variable inside the descriptor now.\nSee https://android.googlesource.com/platform/art/+/master/runtime/jit/debugger_interface.cc\n\nI have also added a simple \"counter\" field, which might be used instead.",
+      "range": {
+        "startLine": 230,
+        "startChar": 35,
+        "endLine": 230,
+        "endChar": 67
+      },
+      "revId": "df1c7ab702a0ed9aa80c7a489d1adca9c05ad9d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "98af466d_53ae80a4",
+        "filename": "simpleperf/JITDebugReader.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 1065473
+      },
+      "writtenOn": "2018-02-26T18:46:39Z",
+      "side": 1,
+      "message": "I would feel a little better if you also compared the regsiter_timestamp here of the JITEntry.",
+      "range": {
+        "startLine": 329,
+        "startChar": 4,
+        "endLine": 329,
+        "endChar": 13
+      },
+      "revId": "df1c7ab702a0ed9aa80c7a489d1adca9c05ad9d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
