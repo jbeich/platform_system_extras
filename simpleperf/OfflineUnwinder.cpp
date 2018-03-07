@@ -176,6 +176,7 @@ bool OfflineUnwinder::UnwindCallChain(const ThreadEntry& thread, const RegSet& r
   }
   std::vector<backtrace_frame_data_t> frames;
   BacktraceUnwindError error;
+  CHECK(cached_map.map.get() != nullptr) << "cached_map.version = " << cached_map.version << ", thread.maps->version " << thread.maps->version;
   if (Backtrace::UnwindOffline(unwind_regs.get(), cached_map.map.get(), stack_info, &frames, &error)) {
     for (auto& frame : frames) {
       // Unwinding in arm architecture can return 0 pc address.
