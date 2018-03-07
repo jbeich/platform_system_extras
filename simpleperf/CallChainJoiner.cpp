@@ -259,8 +259,8 @@ static bool ReadCallChainInReverseOrder(FILE* fp, pid_t& pid, pid_t& tid,
 }
 
 static FILE* CreateTempFp() {
-  std::unique_ptr<TemporaryFile> tmpfile = CreateTempFileUsedInRecording();
-  FILE* fp = fdopen(tmpfile->release(), "web+");
+  TemporaryFile* tmpfile = ScopedTempFiles::CreateTempFile();
+  FILE* fp = fdopen(tmpfile->fd, "web+");
   if (fp == nullptr) {
     PLOG(ERROR) << "fdopen";
     return nullptr;

@@ -60,8 +60,8 @@ bool Dso::read_kernel_symbols_from_proc_;
 std::unordered_map<std::string, BuildId> Dso::build_id_map_;
 size_t Dso::dso_count_;
 uint32_t Dso::g_dump_id_;
-std::unique_ptr<TemporaryFile> Dso::vdso_64bit_;
-std::unique_ptr<TemporaryFile> Dso::vdso_32bit_;
+TemporaryFile* Dso::vdso_64bit_;
+TemporaryFile* Dso::vdso_32bit_;
 
 void Dso::SetDemangle(bool demangle) { demangle_ = demangle; }
 
@@ -121,11 +121,11 @@ void Dso::SetBuildIds(
   build_id_map_ = std::move(map);
 }
 
-void Dso::SetVdsoFile(std::unique_ptr<TemporaryFile> vdso_file, bool is_64bit) {
+void Dso::SetVdsoFile(TemporaryFile* vdso_file, bool is_64bit) {
   if (is_64bit) {
-    vdso_64bit_ = std::move(vdso_file);
+    vdso_64bit_ = vdso_file;
   } else {
-    vdso_32bit_ = std::move(vdso_file);
+    vdso_32bit_ = vdso_file;
   }
 }
 
