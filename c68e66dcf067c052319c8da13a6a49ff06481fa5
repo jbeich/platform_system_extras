@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "430061aa_57d2673a",
+        "filename": "simpleperf/environment.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-03-09T02:52:10Z",
+      "side": 1,
+      "message": "i still can\u0027t find the place where you call this with the argument `false`?",
+      "revId": "c68e66dcf067c052319c8da13a6a49ff06481fa5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bb636189_7d69a841",
         "filename": "simpleperf/environment.h",
         "patchSetId": 3
@@ -13,6 +30,30 @@
       "writtenOn": "2018-03-09T02:24:22Z",
       "side": 1,
       "message": "These being static seems a little bit sketchy.  I don\u0027t have a very good solution instead of it though.  I guess the \u0027most correct\u0027 way would be to pass a ScopedTempFiles object to everything that would call CreateTempFile() and have these all be instance functions/variables, but I\u0027m not sure if that would be too much of a hassle.\n\nThe rest of the this looks good to me; I\u0027m glad the TemporaryFiles are back to fully managed pointers.",
+      "range": {
+        "startLine": 115,
+        "startChar": 0,
+        "endLine": 116,
+        "endChar": 51
+      },
+      "revId": "c68e66dcf067c052319c8da13a6a49ff06481fa5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "58585af1_48b09743",
+        "filename": "simpleperf/environment.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-03-09T02:52:10Z",
+      "side": 1,
+      "message": "(i actually wonder if the atexit behavior should be in TemporaryFile, but that can wait until we have another user.)",
+      "parentUuid": "bb636189_7d69a841",
       "range": {
         "startLine": 115,
         "startChar": 0,
