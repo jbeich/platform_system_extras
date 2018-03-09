@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8f546ac2_ca0e854d",
+        "filename": "ext4_utils/mkuserimg_mke2fs.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2018-03-09T15:51:58Z",
+      "side": 1,
+      "message": "Perhaps script should be modified to take an \u0027-I\u0027 argument that lands in MKE2FS_OPTS, as a userimage size of 128MB is _exceedingly_ small and probably needs other care and attention. This should allow the platform options to maintain some control. You probably also want to propagate the -m 0 as well to optimize the space utilization even more.\n\nUsage type should be of the set floppy, small, default, big or huge. $EXT_VARIANT does not supply such. ext4 as supplied via -T $EXT_VARIANT does set inode_size \u003d 256 as a bug and side effect, one should not count on this bug.\n\nThe default size boundaries are 3MB, 512MB, 4TB and 16TB:\n\n        if (fs_blocks_count \u003c 3 * meg)\n                size_type \u003d \"floppy\";\n        else if (fs_blocks_count \u003c 512 * meg)\n                size_type \u003d \"small\";\n        else if (fs_blocks_count \u003c 4 * 1024 * 1024 * meg)\n                size_type \u003d \"default\";\n        else if (fs_blocks_count \u003c 16 * 1024 * 1024 * meg)\n                size_type \u003d \"big\";\n        else\n                size_type \u003d \"huge\";\n\ndefault (\u003c4TB):\n\nblocksize \u003d 4096\ninode_size \u003d 256\ninode_ratio \u003d 16484\n\nsmall (128MB):\n\nblocksize \u003d 1024\ninode_size \u003d 128\ninode_ratio \u003d 4096\n\next4 (because of bug in parsing):\n\nblocksize \u003d 1024\ninode_size \u003d 256\ninode_ratio \u003d 4096\n\nA better and documented approach is to set -I 256 as a supplied option.",
+      "range": {
+        "startLine": 165,
+        "startChar": 56,
+        "endLine": 165,
+        "endChar": 68
+      },
+      "revId": "95ea8e04b51ca62572a6dc009f483236f04b0cc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
