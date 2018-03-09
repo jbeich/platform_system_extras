@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "b9439e2b_d23b663f",
+        "filename": "simpleperf/environment.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-03-09T19:10:39Z",
+      "side": 1,
+      "message": "Will be seen in the next patch.",
+      "parentUuid": "430061aa_57d2673a",
+      "revId": "c68e66dcf067c052319c8da13a6a49ff06481fa5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bb636189_7d69a841",
         "filename": "simpleperf/environment.h",
         "patchSetId": 3
@@ -54,6 +72,30 @@
       "side": 1,
       "message": "(i actually wonder if the atexit behavior should be in TemporaryFile, but that can wait until we have another user.)",
       "parentUuid": "bb636189_7d69a841",
+      "range": {
+        "startLine": 115,
+        "startChar": 0,
+        "endLine": 116,
+        "endChar": 51
+      },
+      "revId": "c68e66dcf067c052319c8da13a6a49ff06481fa5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "352df584_3d96daed",
+        "filename": "simpleperf/environment.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-03-09T19:10:39Z",
+      "side": 1,
+      "message": "I agree it\u0027s better to avoid global variables. But sometimes it did avoid the effort of passing arguments around. Here I feel it is somewhat better to use global variables. Because the way creating temp files is an environment support, not very related to code logic.",
+      "parentUuid": "58585af1_48b09743",
       "range": {
         "startLine": 115,
         "startChar": 0,
