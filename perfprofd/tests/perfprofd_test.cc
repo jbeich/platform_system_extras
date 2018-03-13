@@ -43,8 +43,7 @@
 #include "perfprofdcore.h"
 #include "symbolizer.h"
 
-#include "perf_profile.pb.h"
-#include "google/protobuf/text_format.h"
+#include "perfprofd_record.pb.h"
 
 //
 // Set to argv[0] on startup
@@ -341,7 +340,7 @@ static std::string encoded_file_path(const std::string& dest_dir,
 
 static void readEncodedProfile(const std::string& dest_dir,
                                const char *testpoint,
-                               wireless_android_play_playlog::AndroidPerfProfile &encodedProfile)
+                               android::perfprofd::PerfprofdRecord& encodedProfile)
 {
   struct stat statb;
   int perf_data_stat_result = stat(encoded_file_path(dest_dir, 0).c_str(), &statb);
@@ -360,6 +359,7 @@ static void readEncodedProfile(const std::string& dest_dir,
   encodedProfile.ParseFromString(encoded);
 }
 
+/*
 static std::string encodedLoadModuleToString(const wireless_android_play_playlog::LoadModule &lm)
 {
   std::stringstream ss;
@@ -372,7 +372,9 @@ static std::string encodedLoadModuleToString(const wireless_android_play_playlog
   }
   return ss.str();
 }
+*/
 
+/*
 static std::string encodedModuleSamplesToString(const wireless_android_play_playlog::LoadModuleSamples &mod)
 {
   std::stringstream ss;
@@ -391,6 +393,7 @@ static std::string encodedModuleSamplesToString(const wireless_android_play_play
   }
   return ss.str();
 }
+*/
 
 #define RAW_RESULT(x) #x
 
@@ -625,13 +628,14 @@ TEST_F(PerfProfdTest, BasicRunWithCannedPerf)
   ASSERT_EQ(OK_PROFILE_COLLECTION, result) << test_logger.JoinTestLog(" ");
 
   // Read and decode the resulting perf.data.encoded file
-  wireless_android_play_playlog::AndroidPerfProfile encodedProfile;
+  android::perfprofd::PerfprofdRecord encodedProfile;
   readEncodedProfile(dest_dir,
                      "BasicRunWithCannedPerf",
                      encodedProfile);
 
+  /*
   // Expect 48 programs
-  EXPECT_EQ(48, encodedProfile.programs_size());
+  EXPECT_EQ(48, encodedProfile.perf_data().events_size());
 
   // Check a couple of load modules
   { const auto &lm0 = encodedProfile.load_modules(0);
@@ -676,6 +680,7 @@ TEST_F(PerfProfdTest, BasicRunWithCannedPerf)
     std::string sqexp2 = squeezeWhite(expected_lm2, "expected_lm2");
     EXPECT_STREQ(sqexp2.c_str(), sqact2.c_str());
   }
+  */
 }
 
 TEST_F(PerfProfdTest, BasicRunWithCannedPerfWithSymbolizer)
@@ -713,11 +718,12 @@ TEST_F(PerfProfdTest, BasicRunWithCannedPerfWithSymbolizer)
   ASSERT_EQ(OK_PROFILE_COLLECTION, result);
 
   // Read and decode the resulting perf.data.encoded file
-  wireless_android_play_playlog::AndroidPerfProfile encodedProfile;
+  android::perfprofd::PerfprofdRecord encodedProfile;
   readEncodedProfile(dest_dir,
                      "BasicRunWithCannedPerf",
                      encodedProfile);
 
+  /*
   // Expect 45 programs
   EXPECT_EQ(48, encodedProfile.programs_size());
 
@@ -766,6 +772,7 @@ TEST_F(PerfProfdTest, BasicRunWithCannedPerfWithSymbolizer)
     std::string sqexp2 = squeezeWhite(expected_lm2, "expected_lm2");
     EXPECT_STREQ(sqexp2.c_str(), sqact2.c_str());
   }
+  */
 }
 
 TEST_F(PerfProfdTest, CallchainRunWithCannedPerf)
@@ -790,12 +797,12 @@ TEST_F(PerfProfdTest, CallchainRunWithCannedPerf)
   ASSERT_EQ(OK_PROFILE_COLLECTION, result);
 
   // Read and decode the resulting perf.data.encoded file
-  wireless_android_play_playlog::AndroidPerfProfile encodedProfile;
+  android::perfprofd::PerfprofdRecord encodedProfile;
   readEncodedProfile(dest_dir,
                      "BasicRunWithCannedPerf",
                      encodedProfile);
 
-
+  /*
   // Expect 3 programs 8 load modules
   EXPECT_EQ(3, encodedProfile.programs_size());
   EXPECT_EQ(8, encodedProfile.load_modules_size());
@@ -844,6 +851,7 @@ TEST_F(PerfProfdTest, CallchainRunWithCannedPerf)
     std::string sqexp2 = squeezeWhite(expected_lm2, "expected_lm2");
     EXPECT_STREQ(sqexp2.c_str(), sqact2.c_str());
   }
+  */
 }
 
 TEST_F(PerfProfdTest, BasicRunWithLivePerf)
@@ -876,12 +884,12 @@ TEST_F(PerfProfdTest, BasicRunWithLivePerf)
   ASSERT_EQ(0, daemon_main_return_code);
 
   // Read and decode the resulting perf.data.encoded file
-  wireless_android_play_playlog::AndroidPerfProfile encodedProfile;
+  android::perfprofd::PerfprofdRecord encodedProfile;
   readEncodedProfile(dest_dir, "BasicRunWithLivePerf", encodedProfile);
 
   // Examine what we get back. Since it's a live profile, we can't
   // really do much in terms of verifying the contents.
-  EXPECT_LT(0, encodedProfile.programs_size());
+  EXPECT_LT(0, encodedProfile.perf_data().events_size());
 
   // Verify log contents
   const std::string expected = std::string(
@@ -930,12 +938,12 @@ TEST_F(PerfProfdTest, MultipleRunWithLivePerf)
   ASSERT_EQ(0, daemon_main_return_code);
 
   // Read and decode the resulting perf.data.encoded file
-  wireless_android_play_playlog::AndroidPerfProfile encodedProfile;
+  android::perfprofd::PerfprofdRecord encodedProfile;
   readEncodedProfile(dest_dir, "BasicRunWithLivePerf", encodedProfile);
 
   // Examine what we get back. Since it's a live profile, we can't
   // really do much in terms of verifying the contents.
-  EXPECT_LT(0, encodedProfile.programs_size());
+  EXPECT_LT(0, encodedProfile.perf_data().events_size());
 
   // Examine that encoded.1 file is removed while encoded.{0|2} exists.
   EXPECT_EQ(0, access(encoded_file_path(dest_dir, 0).c_str(), F_OK));
@@ -999,12 +1007,12 @@ TEST_F(PerfProfdTest, CallChainRunWithLivePerf)
   ASSERT_EQ(0, daemon_main_return_code);
 
   // Read and decode the resulting perf.data.encoded file
-  wireless_android_play_playlog::AndroidPerfProfile encodedProfile;
+  android::perfprofd::PerfprofdRecord encodedProfile;
   readEncodedProfile(dest_dir, "CallChainRunWithLivePerf", encodedProfile);
 
   // Examine what we get back. Since it's a live profile, we can't
   // really do much in terms of verifying the contents.
-  EXPECT_LT(0, encodedProfile.programs_size());
+  EXPECT_LT(0, encodedProfile.perf_data().events_size());
 
   // Verify log contents
   const std::string expected = std::string(
