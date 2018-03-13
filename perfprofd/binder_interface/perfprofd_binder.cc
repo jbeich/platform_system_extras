@@ -30,8 +30,10 @@
 #include <inttypes.h>
 #include <unistd.h>
 
+#include <android-base/file.h>
 #include <android-base/logging.h>
 #include <android-base/stringprintf.h>
+#include <android-base/unique_fd.h>
 #include <android/os/DropBoxManager.h>
 #include <binder/BinderService.h>
 #include <binder/IResultReceiver.h>
@@ -43,10 +45,12 @@
 
 #include "android/os/BnPerfProfd.h"
 #include "perfprofd_config.pb.h"
-#include "perf_profile.pb.h"
+#include "perfprofd_record.pb.h"
 
 #include "config.h"
 #include "perfprofdcore.h"
+
+#include <perf_recorder.h>
 
 namespace android {
 namespace perfprofd {
@@ -129,7 +133,7 @@ class PerfProfdNativeService : public BinderService<PerfProfdNativeService>,
 
  private:
   // Handler for ProfilingLoop.
-  bool BinderHandler(wireless_android_play_playlog::AndroidPerfProfile* encodedProfile,
+  bool BinderHandler(android::perfprofd::PerfprofdRecord* encodedProfile,
                      Config* config);
   // Helper for the handler.
   HandlerFn GetBinderHandler();
@@ -148,7 +152,7 @@ class PerfProfdNativeService : public BinderService<PerfProfdNativeService>,
 };
 
 bool PerfProfdNativeService::BinderHandler(
-    wireless_android_play_playlog::AndroidPerfProfile* encodedProfile,
+    android::perfprofd::PerfprofdRecord* encodedProfile,
     Config* config) {
   CHECK(config != nullptr);
   if (static_cast<BinderConfig*>(config)->send_to_dropbox) {
@@ -244,7 +248,30 @@ Status PerfProfdNativeService::StartProfiling(ConfigFn fn) {
 
   HandlerFn handler = GetBinderHandler();
   auto profile_runner = [handler](PerfProfdNativeService* service) {
-    ProfilingLoop(service->cur_config_, handler);
+    quipper::PerfRecorder recorder({ "/system/xbin/simpleperf" });
+    // ProfilingLoop(service->cur_config_, handler);
+    std::string output;
+    if (recorder.RunCommandAndGetSerializedOutput(
+            { "perf",
+              "record",
+              "-g",
+              "-a",
+              "--no-dump-kernel-symbols",
+              "--no-dump-symbols",
+            },
+            service->cur_config_.sample_duration_in_s,
+            &output)) {
+      std::string file_name =
+          service->cur_config_.destination_directory + "/test.pbuf";
+      android::base::unique_fd fd(open(file_name.c_str(),
+                                       O_WRONLY | O_CREAT | O_TRUNC,
+                                       600));
+      if (fd.get() > 0) {
+        android::base::WriteFully(fd.get(), output.data(), output.length());
+      }
+    } else {
+      LOG(ERROR) << "Failed running/serializing";
+    }
 
     // This thread is done.
     std::lock_guard<std::mutex> unset_guard(service->lock_);
