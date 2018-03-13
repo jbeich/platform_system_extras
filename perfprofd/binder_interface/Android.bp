@@ -38,6 +38,13 @@ cc_library_static {
         ":perfprofd_aidl",
         "perfprofd_config.proto",
     ],
+    whole_static_libs: [
+        "libquipper",
+    ],
+    // Temporary.
+    cflags: [
+        "-Wno-gnu-anonymous-struct",
+    ],
 }
 
 filegroup {
