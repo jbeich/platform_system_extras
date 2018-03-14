@@ -50,6 +50,7 @@ cc_library_static {
     defaults: [
         "perfprofd_defaults",
     ],
+    host_supported: true,
 
     // local_include_dirs: ["quipper/kernel-headers"],
     static_libs: [
