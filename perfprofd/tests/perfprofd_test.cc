@@ -31,7 +31,6 @@
 #include <android-base/file.h>
 #include <android-base/logging.h>
 #include <android-base/macros.h>
-#include <android-base/properties.h>
 #include <android-base/stringprintf.h>
 #include <android-base/strings.h>
 #include <android-base/test_utils.h>
@@ -143,6 +142,7 @@ static std::string replaceAll(const std::string &str,
 //
 // Replace occurrences of special variables in the string.
 //
+#ifdef __ANDROID__
 static std::string expandVars(const std::string &str) {
 #ifdef __LP64__
   return replaceAll(str, "$NATIVE_TESTS", "/data/nativetest64");
@@ -150,6 +150,7 @@ static std::string expandVars(const std::string &str) {
   return replaceAll(str, "$NATIVE_TESTS", "/data/nativetest");
 #endif
 }
+#endif
 
 class PerfProfdTest : public testing::Test {
  protected:
@@ -530,7 +531,11 @@ TEST_F(PerfProfdTest, BadPerfRun)
   runner.addToConfig("main_loop_iterations=1");
   runner.addToConfig("use_fixed_seed=1");
   runner.addToConfig("collection_interval=100");
+#ifdef __ANDROID__
   runner.addToConfig("perf_path=/system/bin/false");
+#else
+  runner.addToConfig("perf_path=/bin/false");
+#endif
 
   // Create semaphore file
   runner.create_semaphore_file();
@@ -599,7 +604,9 @@ TEST_F(PerfProfdTest, ProfileCollectionAnnotations)
   // completed booted, will be on charger, and will not have the camera
   // active.
   EXPECT_FALSE(get_booting());
+#ifdef __ANDROID__
   EXPECT_TRUE(get_charging());
+#endif
   EXPECT_FALSE(get_camera_active());
 }
 
@@ -854,6 +861,8 @@ TEST_F(PerfProfdTest, CallchainRunWithCannedPerf)
   */
 }
 
+#ifdef __ANDROID__
+
 TEST_F(PerfProfdTest, BasicRunWithLivePerf)
 {
   //
@@ -1030,6 +1039,8 @@ TEST_F(PerfProfdTest, CallChainRunWithLivePerf)
   // check to make sure log excerpt matches
   CompareLogMessages(expandVars(expected), "CallChainRunWithLivePerf", true);
 }
+
+#endif
 
 int main(int argc, char **argv) {
   // Always log to cerr, so that device failures are visible.
