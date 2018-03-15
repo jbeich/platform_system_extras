@@ -392,7 +392,7 @@ TEST(record_cmd, support_modifier_for_clock_events) {
 TEST(record_cmd, handle_SIGHUP) {
   TemporaryFile tmpfile;
   std::thread thread([]() {
-    sleep(1);
+    sleep(5);
     kill(getpid(), SIGHUP);
   });
   thread.detach();
