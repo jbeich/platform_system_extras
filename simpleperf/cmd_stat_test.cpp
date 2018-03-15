@@ -158,7 +158,7 @@ TEST(stat_cmd, no_modifier_for_clock_events) {
 
 TEST(stat_cmd, handle_SIGHUP) {
   std::thread thread([]() {
-    sleep(1);
+    sleep(5);
     kill(getpid(), SIGHUP);
   });
   thread.detach();
