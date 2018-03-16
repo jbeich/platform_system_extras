@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f77f0abb_79acdf4e",
+        "filename": "perfprofd/Android.bp",
+        "patchSetId": 5
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-03-16T19:41:46Z",
+      "side": 1,
+      "message": "remove this line?",
+      "range": {
+        "startLine": 54,
+        "startChar": 52,
+        "endLine": 54,
+        "endChar": 54
+      },
+      "revId": "2433ffa634d6189f81bce397d483c6ab56e336f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b5074c03_031cdc88",
+        "filename": "perfprofd/binder_interface/perfprofd_binder.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-03-16T19:41:46Z",
+      "side": 1,
+      "message": "These custom options can\u0027t pass the ValidatePerfCommandLine() called in RunCommandAndGetSerializeOutput(), no?",
+      "range": {
+        "startLine": 259,
+        "startChar": 32,
+        "endLine": 259,
+        "endChar": 39
+      },
+      "revId": "2433ffa634d6189f81bce397d483c6ab56e336f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0dc49566_2e648da1",
+        "filename": "perfprofd/binder_interface/perfprofd_binder.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-03-16T19:41:46Z",
+      "side": 1,
+      "message": "The logic looks a little unnecessarily complex. recorder first writes recording data in a temp file, and read it after recording, then we write it to the selected output file. Plus the temp file under an unaccessible directory, https://cs.corp.google.com/android/external/perf_data_converter/src/quipper/scoped_temp_path.cc?type\u003dcs\u0026l\u003d20.",
+      "range": {
+        "startLine": 271,
+        "startChar": 5,
+        "endLine": 271,
+        "endChar": 7
+      },
+      "revId": "2433ffa634d6189f81bce397d483c6ab56e336f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
