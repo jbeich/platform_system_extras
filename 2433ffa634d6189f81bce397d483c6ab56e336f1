@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "9331cd8c_ae0f1fda",
+        "filename": "perfprofd/binder_interface/perfprofd_binder.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2018-03-16T19:46:19Z",
+      "side": 1,
+      "message": "Good that you reminded me. This code was for testing, and I didn\u0027t amend the commit correctly. Not planning to use Quipper\u0027s PerfRecorder...",
+      "parentUuid": "b5074c03_031cdc88",
+      "range": {
+        "startLine": 259,
+        "startChar": 32,
+        "endLine": 259,
+        "endChar": 39
+      },
+      "revId": "2433ffa634d6189f81bce397d483c6ab56e336f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0dc49566_2e648da1",
         "filename": "perfprofd/binder_interface/perfprofd_binder.cc",
         "patchSetId": 5
@@ -68,6 +92,30 @@
       "revId": "2433ffa634d6189f81bce397d483c6ab56e336f1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0488094f_28a445c0",
+        "filename": "perfprofd/binder_interface/perfprofd_binder.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2018-03-16T19:46:19Z",
+      "side": 1,
+      "message": "All known, all testing code. I am not gonna try to make scoped_temp_path more general, not planning to use PerfRecorder going forward.",
+      "parentUuid": "0dc49566_2e648da1",
+      "range": {
+        "startLine": 271,
+        "startChar": 5,
+        "endLine": 271,
+        "endChar": 7
+      },
+      "revId": "2433ffa634d6189f81bce397d483c6ab56e336f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
