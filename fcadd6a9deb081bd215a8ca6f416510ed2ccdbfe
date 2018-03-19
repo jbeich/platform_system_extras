@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "66fa65b5_6f1ed505",
+        "filename": "simpleperf/JITDebugReader.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1065473
+      },
+      "writtenOn": "2018-03-19T14:25:06Z",
+      "side": 1,
+      "message": "Nit:\nI am not sure what the use cases are.  If it might be possible to be loading cross-architecture (e.g. loading arm JITCodeEntry on x86), then just compile time decision is not enough.\nOn the other hand if it is only cross-bitness (e.g. loading arm64 on arm32), then just \"JITCodeEntry\u003cuint32_t\u003e;\" should do, I believe.",
+      "range": {
+        "startLine": 103,
+        "startChar": 23,
+        "endLine": 103,
+        "endChar": 52
+      },
+      "revId": "fcadd6a9deb081bd215a8ca6f416510ed2ccdbfe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fd98593d_801b8889",
+        "filename": "simpleperf/JITDebugReader.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1065473
+      },
+      "writtenOn": "2018-03-19T14:25:06Z",
+      "side": 1,
+      "message": "...in any case those checks should warn us.  Good.",
+      "range": {
+        "startLine": 115,
+        "startChar": 0,
+        "endLine": 115,
+        "endChar": 13
+      },
+      "revId": "fcadd6a9deb081bd215a8ca6f416510ed2ccdbfe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "11e472d1_69d30885",
+        "filename": "simpleperf/JITDebugReader.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1065473
+      },
+      "writtenOn": "2018-03-19T14:25:06Z",
+      "side": 1,
+      "message": "Nit: action_counter might be tiny bit better to use (as they are 32-bit so lower/no chance of them being partially updated).",
+      "range": {
+        "startLine": 139,
+        "startChar": 21,
+        "endLine": 139,
+        "endChar": 37
+      },
+      "revId": "fcadd6a9deb081bd215a8ca6f416510ed2ccdbfe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7e34f888_e6403de3",
+        "filename": "simpleperf/JITDebugReader.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1065473
+      },
+      "writtenOn": "2018-03-19T14:25:06Z",
+      "side": 1,
+      "message": "I feel kind of sad to see so much of copy-pasted code.  Any chance that most of this method could be extracted to a helper and then call the helper twice (once for jit and once for dex).",
+      "range": {
+        "startLine": 151,
+        "startChar": 2,
+        "endLine": 154,
+        "endChar": 3
+      },
+      "revId": "fcadd6a9deb081bd215a8ca6f416510ed2ccdbfe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5b2207c6_79de1e39",
+        "filename": "simpleperf/JITDebugReader.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1065473
+      },
+      "writtenOn": "2018-03-19T14:25:06Z",
+      "side": 1,
+      "message": "Just so that you are aware, there is a possible race:\nIt is possible that the memory of JIT entries have been freed and reused for something else while you were iterating over the linked list above.\n\nIf you care, the way to detect this is as follows (with recent builds from master):\n1) Read action_counter at the start, and if it is odd just bail out and retry later (odd value means the linked is currently being modified)\n2) After the call to ReadJITSymFiles, read the action_counter again, and check it matches the one you read at the start.  If it does not match, bail out and retry later (changed value means something was added or freed).",
+      "range": {
+        "startLine": 187,
+        "startChar": 0,
+        "endLine": 194,
+        "endChar": 5
+      },
+      "revId": "fcadd6a9deb081bd215a8ca6f416510ed2ccdbfe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
