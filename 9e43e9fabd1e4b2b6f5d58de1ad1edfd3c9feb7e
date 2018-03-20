@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e9db008c_7ef43d06",
+        "filename": "simpleperf/JITDebugReader.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1038443
+      },
+      "writtenOn": "2018-03-20T20:50:32Z",
+      "side": 1,
+      "message": "debugger_interface.cc",
+      "range": {
+        "startLine": 79,
+        "startChar": 55,
+        "endLine": 79,
+        "endChar": 73
+      },
+      "revId": "9e43e9fabd1e4b2b6f5d58de1ad1edfd3c9feb7e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ac1e23d3_f011b7d0",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 1038443
+      },
+      "writtenOn": "2018-03-20T20:50:32Z",
+      "side": 1,
+      "message": "nit: maybe ad a kConstant name?",
+      "range": {
+        "startLine": 460,
+        "startChar": 45,
+        "endLine": 460,
+        "endChar": 46
+      },
+      "revId": "9e43e9fabd1e4b2b6f5d58de1ad1edfd3c9feb7e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bb4e1a46_d9913f52",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 1038443
+      },
+      "writtenOn": "2018-03-20T20:50:32Z",
+      "side": 1,
+      "message": "nit: Add a comment that you\u0027re going to update JIT / Dex info every N ms, and how was that N chosen?",
+      "revId": "9e43e9fabd1e4b2b6f5d58de1ad1edfd3c9feb7e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b7c1143e_3988c3db",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1108,
+      "author": {
+        "id": 1038443
+      },
+      "writtenOn": "2018-03-20T20:50:32Z",
+      "side": 1,
+      "message": "In case this isn\u0027t a priority, expand the comment? Is it a TODO to dump it to a file (as described lines 461-463).",
+      "range": {
+        "startLine": 1108,
+        "startChar": 11,
+        "endLine": 1108,
+        "endChar": 35
+      },
+      "revId": "9e43e9fabd1e4b2b6f5d58de1ad1edfd3c9feb7e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0119e861_8a877f7c",
+        "filename": "simpleperf/environment.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 738,
+      "author": {
+        "id": 1038443
+      },
+      "writtenOn": "2018-03-20T20:50:32Z",
+      "side": 1,
+      "message": "Could you add a bit more comments here? That sounds magic :)",
+      "range": {
+        "startLine": 736,
+        "startChar": 0,
+        "endLine": 738,
+        "endChar": 5
+      },
+      "revId": "9e43e9fabd1e4b2b6f5d58de1ad1edfd3c9feb7e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
