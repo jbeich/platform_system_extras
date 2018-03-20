@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "50ce0255_4ad3b798",
+        "filename": "simpleperf/cmd_trace_sched.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-03-20T21:04:27Z",
+      "side": 1,
+      "message": "s/It r/R/",
+      "range": {
+        "startLine": 76,
+        "startChar": 1,
+        "endLine": 76,
+        "endChar": 5
+      },
+      "revId": "97d00870e13655e33a541dab3c1f8f1206bd8100",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c059fce1_b615d254",
+        "filename": "simpleperf/cmd_trace_sched.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-03-20T21:04:27Z",
+      "side": 1,
+      "message": "about",
+      "range": {
+        "startLine": 77,
+        "startChar": 55,
+        "endLine": 77,
+        "endChar": 56
+      },
+      "revId": "97d00870e13655e33a541dab3c1f8f1206bd8100",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4c066f12_1c506b23",
+        "filename": "simpleperf/cmd_trace_sched.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-03-20T21:04:27Z",
+      "side": 1,
+      "message": "be spinning\n\n(any thread \"may\" spin. you\u0027re warning about the ones that you think *are* spinning.)",
+      "range": {
+        "startLine": 83,
+        "startChar": 44,
+        "endLine": 83,
+        "endChar": 59
+      },
+      "revId": "97d00870e13655e33a541dab3c1f8f1206bd8100",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
