@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "40db1604_9a1f1142",
+        "filename": "simpleperf/JITDebugReader.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-03-20T23:02:59Z",
+      "side": 1,
+      "message": "Done in https://android-review.googlesource.com/c/platform/system/extras/+/645203",
+      "parentUuid": "e9db008c_7ef43d06",
+      "range": {
+        "startLine": 79,
+        "startChar": 55,
+        "endLine": 79,
+        "endChar": 73
+      },
+      "revId": "9e43e9fabd1e4b2b6f5d58de1ad1edfd3c9feb7e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ac1e23d3_f011b7d0",
         "filename": "simpleperf/cmd_record.cpp",
         "patchSetId": 3
@@ -36,6 +60,30 @@
       "writtenOn": "2018-03-20T20:50:32Z",
       "side": 1,
       "message": "nit: maybe ad a kConstant name?",
+      "range": {
+        "startLine": 460,
+        "startChar": 45,
+        "endLine": 460,
+        "endChar": 46
+      },
+      "revId": "9e43e9fabd1e4b2b6f5d58de1ad1edfd3c9feb7e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9375c20f_753e3b69",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-03-20T23:02:59Z",
+      "side": 1,
+      "message": "Done in https://android-review.googlesource.com/c/platform/system/extras/+/645203",
+      "parentUuid": "ac1e23d3_f011b7d0",
       "range": {
         "startLine": 460,
         "startChar": 45,
@@ -65,6 +113,24 @@
     },
     {
       "key": {
+        "uuid": "ea9aefc0_0fd41cb0",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-03-20T23:02:59Z",
+      "side": 1,
+      "message": "Done in https://android-review.googlesource.com/c/platform/system/extras/+/645203",
+      "parentUuid": "bb4e1a46_d9913f52",
+      "revId": "9e43e9fabd1e4b2b6f5d58de1ad1edfd3c9feb7e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b7c1143e_3988c3db",
         "filename": "simpleperf/cmd_record.cpp",
         "patchSetId": 3
@@ -88,6 +154,30 @@
     },
     {
       "key": {
+        "uuid": "4295cd26_17ec926a",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1108,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-03-20T23:02:59Z",
+      "side": 1,
+      "message": "This part is left as TODO, just to split big patches, will soon be solved. So no need to comment.",
+      "parentUuid": "b7c1143e_3988c3db",
+      "range": {
+        "startLine": 1108,
+        "startChar": 11,
+        "endLine": 1108,
+        "endChar": 35
+      },
+      "revId": "9e43e9fabd1e4b2b6f5d58de1ad1edfd3c9feb7e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0119e861_8a877f7c",
         "filename": "simpleperf/environment.cpp",
         "patchSetId": 3
@@ -99,6 +189,30 @@
       "writtenOn": "2018-03-20T20:50:32Z",
       "side": 1,
       "message": "Could you add a bit more comments here? That sounds magic :)",
+      "range": {
+        "startLine": 736,
+        "startChar": 0,
+        "endLine": 738,
+        "endChar": 5
+      },
+      "revId": "9e43e9fabd1e4b2b6f5d58de1ad1edfd3c9feb7e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dfd91a9c_8faf382f",
+        "filename": "simpleperf/environment.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 738,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-03-20T23:02:59Z",
+      "side": 1,
+      "message": "Done in https://android-review.googlesource.com/c/platform/system/extras/+/645203.",
+      "parentUuid": "0119e861_8a877f7c",
       "range": {
         "startLine": 736,
         "startChar": 0,
