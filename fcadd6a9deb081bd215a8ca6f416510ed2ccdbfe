@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "55eab207_0440a794",
+        "filename": "simpleperf/JITDebugReader.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-03-20T00:57:09Z",
+      "side": 1,
+      "message": "Comment added. Only cross-bitness is needed.",
+      "parentUuid": "66fa65b5_6f1ed505",
+      "range": {
+        "startLine": 103,
+        "startChar": 23,
+        "endLine": 103,
+        "endChar": 52
+      },
+      "revId": "fcadd6a9deb081bd215a8ca6f416510ed2ccdbfe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fd98593d_801b8889",
         "filename": "simpleperf/JITDebugReader.cpp",
         "patchSetId": 1
@@ -71,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "5545b5ca_4bc17f04",
+        "filename": "simpleperf/JITDebugReader.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-03-20T00:57:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "11e472d1_69d30885",
+      "range": {
+        "startLine": 139,
+        "startChar": 21,
+        "endLine": 139,
+        "endChar": 37
+      },
+      "revId": "fcadd6a9deb081bd215a8ca6f416510ed2ccdbfe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7e34f888_e6403de3",
         "filename": "simpleperf/JITDebugReader.cpp",
         "patchSetId": 1
@@ -94,6 +142,30 @@
     },
     {
       "key": {
+        "uuid": "8d23a8a1_854ae26d",
+        "filename": "simpleperf/JITDebugReader.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-03-20T00:57:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7e34f888_e6403de3",
+      "range": {
+        "startLine": 151,
+        "startChar": 2,
+        "endLine": 154,
+        "endChar": 3
+      },
+      "revId": "fcadd6a9deb081bd215a8ca6f416510ed2ccdbfe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5b2207c6_79de1e39",
         "filename": "simpleperf/JITDebugReader.cpp",
         "patchSetId": 1
@@ -105,6 +177,30 @@
       "writtenOn": "2018-03-19T14:25:06Z",
       "side": 1,
       "message": "Just so that you are aware, there is a possible race:\nIt is possible that the memory of JIT entries have been freed and reused for something else while you were iterating over the linked list above.\n\nIf you care, the way to detect this is as follows (with recent builds from master):\n1) Read action_counter at the start, and if it is odd just bail out and retry later (odd value means the linked is currently being modified)\n2) After the call to ReadJITSymFiles, read the action_counter again, and check it matches the one you read at the start.  If it does not match, bail out and retry later (changed value means something was added or freed).",
+      "range": {
+        "startLine": 187,
+        "startChar": 0,
+        "endLine": 194,
+        "endChar": 5
+      },
+      "revId": "fcadd6a9deb081bd215a8ca6f416510ed2ccdbfe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "68157614_28c41cda",
+        "filename": "simpleperf/JITDebugReader.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-03-20T00:57:09Z",
+      "side": 1,
+      "message": "I simplified the code as you commented. Just one difference, I also read the descriptor again after reading linked list, to avoid reading symfiles specified by broken code entries remotely.\n\nI am kind of worried that if the app keeps changing the jitted methods and we are unlucky, we will never have to a chance to dump symfiles. That\u0027s why I choose to reread instead of throwing away current data when descriptor is changed in the first patch. But maybe that concern is unlikely to happen. So I am fine to change.",
+      "parentUuid": "5b2207c6_79de1e39",
       "range": {
         "startLine": 187,
         "startChar": 0,
