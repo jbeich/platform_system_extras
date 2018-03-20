@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f5dd1b89_1f487c5f",
+        "filename": "perfprofd/binder_interface/perfprofd_binder.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-03-20T17:49:03Z",
+      "side": 1,
+      "message": "Any reason to remove the file now instead of the end of this function? If no, remove these lines?",
+      "range": {
+        "startLine": 157,
+        "startChar": 2,
+        "endLine": 160,
+        "endChar": 3
+      },
+      "revId": "47d99eca33dba64e5303fb7481c7b8950f162111",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1743dc53_3211597f",
+        "filename": "perfprofd/binder_interface/perfprofd_binder.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-03-20T17:49:03Z",
+      "side": 1,
+      "message": "How about read_only(open(tmp_file.path, O_RDONLY | O_CLOEXEC))?",
+      "range": {
+        "startLine": 185,
+        "startChar": 36,
+        "endLine": 185,
+        "endChar": 37
+      },
+      "revId": "47d99eca33dba64e5303fb7481c7b8950f162111",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
