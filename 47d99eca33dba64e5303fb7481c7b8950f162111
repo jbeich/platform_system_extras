@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "2b70961c_38f5eeeb",
+        "filename": "perfprofd/binder_interface/perfprofd_binder.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2018-03-20T18:36:41Z",
+      "side": 1,
+      "message": "Yes, this is intentional. The file is supposed to be hidden.",
+      "parentUuid": "f5dd1b89_1f487c5f",
+      "range": {
+        "startLine": 157,
+        "startChar": 2,
+        "endLine": 160,
+        "endChar": 3
+      },
+      "revId": "47d99eca33dba64e5303fb7481c7b8950f162111",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1743dc53_3211597f",
         "filename": "perfprofd/binder_interface/perfprofd_binder.cc",
         "patchSetId": 3
@@ -45,6 +69,30 @@
       "revId": "47d99eca33dba64e5303fb7481c7b8950f162111",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "24040811_24de51a9",
+        "filename": "perfprofd/binder_interface/perfprofd_binder.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2018-03-20T18:36:41Z",
+      "side": 1,
+      "message": "See above. I guess I could open read-only immediately, but this has slightly better separation of responsibilities.",
+      "parentUuid": "1743dc53_3211597f",
+      "range": {
+        "startLine": 185,
+        "startChar": 36,
+        "endLine": 185,
+        "endChar": 37
+      },
+      "revId": "47d99eca33dba64e5303fb7481c7b8950f162111",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
