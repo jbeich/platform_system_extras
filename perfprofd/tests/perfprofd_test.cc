@@ -40,6 +40,7 @@
 
 #include "config.h"
 #include "configreader.h"
+#include "map_utils.h"
 #include "perfprofdcore.h"
 #include "quipper_helper.h"
 #include "symbolizer.h"
@@ -803,7 +804,7 @@ TEST_F(PerfProfdTest, BasicRunWithCannedPerf)
   }
 }
 
-TEST_F(PerfProfdTest, DISABLED_BasicRunWithCannedPerfWithSymbolizer)
+TEST_F(PerfProfdTest, BasicRunWithCannedPerfWithSymbolizer)
 {
   //
   // Verify the portion of the daemon that reads and encodes
@@ -827,6 +828,10 @@ TEST_F(PerfProfdTest, DISABLED_BasicRunWithCannedPerfWithSymbolizer)
     std::string Decode(const std::string& dso, uint64_t address) override {
       return dso + "@" + std::to_string(address);
     }
+    bool GetMinExecutableVAddr(const std::string& dso, uint64_t* addr) override {
+      *addr = 4096;
+      return true;
+    }
   };
   TestSymbolizer test_symbolizer;
   PROFILE_RESULT result =
@@ -849,7 +854,32 @@ TEST_F(PerfProfdTest, DISABLED_BasicRunWithCannedPerfWithSymbolizer)
   // Expect 21108 events.
   EXPECT_EQ(21108, perf_data.events_size()) << CreateStats(perf_data);
 
-  // TODO: Re-add symbolization.
+  auto find_symbol = [&](const std::string& filename)
+      -> const android::perfprofd::PerfprofdRecord_SymbolInfo* {
+    for (auto& symbol_info : encodedProfile.symbol_info()) {
+      if (symbol_info.filename() == filename) {
+        return &symbol_info;
+      }
+    }
+    return nullptr;
+  };
+  auto all_filenames = [&]() {
+    std::ostringstream oss;
+    for (auto& symbol_info : encodedProfile.symbol_info()) {
+      oss << " " << symbol_info.filename();
+    }
+    return oss.str();
+  };
+
+  EXPECT_TRUE(find_symbol("/data/app/com.google.android.apps.plus-1/lib/arm/libcronet.so")
+                  != nullptr) << all_filenames();
+  EXPECT_TRUE(find_symbol("/data/dalvik-cache/arm/system@framework@wifi-service.jar@classes.dex")
+                  != nullptr) << all_filenames();
+  EXPECT_TRUE(find_symbol("/data/dalvik-cache/arm/data@app@com.google.android.gms-2@base.apk@"
+                          "classes.dex")
+                  != nullptr) << all_filenames();
+  EXPECT_TRUE(find_symbol("/data/dalvik-cache/arm/system@framework@boot.oat") != nullptr)
+      << all_filenames();
 }
 
 TEST_F(PerfProfdTest, CallchainRunWithCannedPerf)
@@ -1116,6 +1146,48 @@ TEST_F(PerfProfdTest, CallChainRunWithLivePerf)
 }
 
 #endif
+
+class RangeMapTest : public testing::Test {
+};
+
+TEST_F(RangeMapTest, TestRangeMap) {
+  using namespace android::perfprofd;
+
+  RangeMap<std::string, uint64_t> map;
+  auto print = [&]() {
+    std::ostringstream oss;
+    for (auto& aggr_sym : map) {
+      oss << aggr_sym.first << "#" << aggr_sym.second.symbol;
+      oss << "[";
+      for (auto& x : aggr_sym.second.offsets) {
+        oss << x << ",";
+      }
+      oss << "]";
+    }
+    return oss.str();
+  };
+
+  EXPECT_STREQ("", print().c_str());
+
+  map.Insert("a", 10);
+  EXPECT_STREQ("10#a[10,]", print().c_str());
+  map.Insert("a", 100);
+  EXPECT_STREQ("10#a[10,100,]", print().c_str());
+  map.Insert("a", 1);
+  EXPECT_STREQ("1#a[1,10,100,]", print().c_str());
+  map.Insert("a", 1);
+  EXPECT_STREQ("1#a[1,10,100,]", print().c_str());
+  map.Insert("a", 2);
+  EXPECT_STREQ("1#a[1,2,10,100,]", print().c_str());
+
+  map.Insert("b", 200);
+  EXPECT_STREQ("1#a[1,2,10,100,]200#b[200,]", print().c_str());
+  map.Insert("b", 199);
+  EXPECT_STREQ("1#a[1,2,10,100,]199#b[199,200,]", print().c_str());
+
+  map.Insert("c", 50);
+  EXPECT_STREQ("1#a[1,2,10,]50#c[50,]100#a[100,]199#b[199,200,]", print().c_str());
+}
 
 int main(int argc, char **argv) {
   // Always log to cerr, so that device failures are visible.
