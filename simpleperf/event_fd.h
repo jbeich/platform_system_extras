@@ -56,6 +56,14 @@ class EventFd {
 
   const perf_event_attr& attr() const { return attr_; }
 
+  perf_event_mmap_page* GetMetaDataPage() {
+    return mmap_metadata_page_;
+  }
+
+  int Fd() const {
+	return perf_event_fd_;
+  }
+
   // It tells the kernel to start counting and recording events specified by
   // this file.
   bool EnableEvent();

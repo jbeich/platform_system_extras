@@ -418,6 +418,17 @@ struct SampleRecord : public Record {
   void DumpData(size_t indent) const override;
 };
 
+struct AuxRecord : public Record {
+  uint64_t aux_offset;
+  uint64_t aux_size;
+  uint64_t flags;
+
+  explicit AuxRecord(const perf_event_attr& attr, char* p);
+
+ protected:
+  void DumpData(size_t indent) const override;
+};
+
 // BuildIdRecord is defined in user-space, stored in BuildId feature section in
 // record file.
 struct BuildIdRecord : public Record {

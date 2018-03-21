@@ -532,4 +532,17 @@ sdk: $(SIMPLEPERF_SCRIPT_PATH)
 
 $(call dist-for-goals,sdk,$(SIMPLEPERF_SCRIPT_PATH))
 
+# etm_test target
+include $(CLEAR_VARS)
+LOCAL_MODULE := etm_test
+LOCAL_MODULE_TAGS := debug
+LOCAL_MODULE_PATH := $(TARGET_OUT_OPTIONAL_EXECUTABLES)
+LOCAL_CFLAGS := $(simpleperf_cflags_target)
+LOCAL_SRC_FILES := etm_test.cpp
+LOCAL_STATIC_LIBRARIES := libsimpleperf $(simpleperf_static_libraries_with_libc_target)
+LOCAL_MULTILIB := first
+LOCAL_FORCE_STATIC_EXECUTABLE := true
+include $(LLVM_DEVICE_BUILD_MK)
+include $(BUILD_EXECUTABLE)
+
 include $(call first-makefiles-under,$(LOCAL_PATH))
