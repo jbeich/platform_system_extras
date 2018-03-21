@@ -803,7 +803,7 @@ TEST_F(PerfProfdTest, BasicRunWithCannedPerf)
   }
 }
 
-TEST_F(PerfProfdTest, DISABLED_BasicRunWithCannedPerfWithSymbolizer)
+TEST_F(PerfProfdTest, BasicRunWithCannedPerfWithSymbolizer)
 {
   //
   // Verify the portion of the daemon that reads and encodes
@@ -827,6 +827,10 @@ TEST_F(PerfProfdTest, DISABLED_BasicRunWithCannedPerfWithSymbolizer)
     std::string Decode(const std::string& dso, uint64_t address) override {
       return dso + "@" + std::to_string(address);
     }
+    bool GetMinExecutableVAddr(const std::string& dso, uint64_t* addr) override {
+      *addr = 4096;
+      return true;
+    }
   };
   TestSymbolizer test_symbolizer;
   PROFILE_RESULT result =
@@ -849,7 +853,32 @@ TEST_F(PerfProfdTest, DISABLED_BasicRunWithCannedPerfWithSymbolizer)
   // Expect 21108 events.
   EXPECT_EQ(21108, perf_data.events_size()) << CreateStats(perf_data);
 
-  // TODO: Re-add symbolization.
+  auto find_symbol = [&](const std::string& filename)
+      -> const android::perfprofd::PerfprofdRecord_SymbolInfo* {
+    for (auto& symbol_info : encodedProfile.symbol_info()) {
+      if (symbol_info.filename() == filename) {
+        return &symbol_info;
+      }
+    }
+    return nullptr;
+  };
+  auto all_filenames = [&]() {
+    std::ostringstream oss;
+    for (auto& symbol_info : encodedProfile.symbol_info()) {
+      oss << " " << symbol_info.filename();
+    }
+    return oss.str();
+  };
+
+  EXPECT_TRUE(find_symbol("/data/app/com.google.android.apps.plus-1/lib/arm/libcronet.so")
+                  != nullptr) << all_filenames();
+  EXPECT_TRUE(find_symbol("/data/dalvik-cache/arm/system@framework@wifi-service.jar@classes.dex")
+                  != nullptr) << all_filenames();
+  EXPECT_TRUE(find_symbol("/data/dalvik-cache/arm/data@app@com.google.android.gms-2@base.apk@"
+                          "classes.dex")
+                  != nullptr) << all_filenames();
+  EXPECT_TRUE(find_symbol("/data/dalvik-cache/arm/system@framework@boot.oat") != nullptr)
+      << all_filenames();
 }
 
 TEST_F(PerfProfdTest, CallchainRunWithCannedPerf)
