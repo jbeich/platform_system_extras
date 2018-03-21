@@ -42,6 +42,7 @@ static std::string RecordTypeToString(int record_type) {
       {PERF_RECORD_FORK, "fork"},
       {PERF_RECORD_READ, "read"},
       {PERF_RECORD_SAMPLE, "sample"},
+      {PERF_RECORD_AUX, "aux"},
       {PERF_RECORD_BUILD_ID, "build_id"},
       {PERF_RECORD_MMAP2, "mmap2"},
       {PERF_RECORD_TRACING_DATA, "tracing_data"},
@@ -844,6 +845,22 @@ void SampleRecord::AdjustCallChainGeneratedByKernel() {
   }
 }
 
+AuxRecord::AuxRecord(const perf_event_attr& attr, char* p) : Record(p) {
+  const char* end = p + size();
+  p += header_size();
+  MoveFromBinaryFormat(aux_offset, p);
+  MoveFromBinaryFormat(aux_size, p);
+  MoveFromBinaryFormat(flags, p);
+  CHECK_LE(p, end);
+  sample_id.ReadFromBinaryFormat(attr, p, end);
+}
+
+void AuxRecord::DumpData(size_t indent) const {
+  PrintIndented(indent, "aux_offset = %" PRIu64 "\n", aux_offset);
+  PrintIndented(indent, "aux_size = %" PRIu64 "\n", aux_size);
+  PrintIndented(indent, "flags = %" PRIu64 "\n", flags);
+}
+
 BuildIdRecord::BuildIdRecord(char* p) : Record(p) {
   const char* end = p + size();
   p += header_size();
@@ -1193,6 +1210,8 @@ std::unique_ptr<Record> ReadRecordFromBuffer(const perf_event_attr& attr, uint32
       return std::unique_ptr<Record>(new CallChainRecord(p));
     case SIMPLE_PERF_RECORD_UNWINDING_RESULT:
       return std::unique_ptr<Record>(new UnwindingResultRecord(p));
+    case PERF_RECORD_AUX:
+      return std::unique_ptr<Record>(new AuxRecord(attr, p));
     default:
       return std::unique_ptr<Record>(new UnknownRecord(p));
   }
