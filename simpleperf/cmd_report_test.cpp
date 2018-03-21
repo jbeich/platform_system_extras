@@ -471,6 +471,11 @@ TEST_F(ReportCommandTest, full_callgraph_option) {
   ASSERT_EQ(content.find("skipped in brief callgraph mode"), std::string::npos);
 }
 
+TEST_F(ReportCommandTest, report_big_trace_data) {
+  Report(PERF_DATA_WITH_BIG_TRACE_DATA);
+  ASSERT_TRUE(success);
+}
+
 #if defined(__linux__)
 #include "event_selection_set.h"
 

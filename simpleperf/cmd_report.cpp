@@ -777,7 +777,8 @@ bool ReportCommand::ProcessRecord(std::unique_ptr<Record> record) {
     size_t attr_id = record_file_reader_->GetAttrIndexOfRecord(record.get());
     sample_tree_builder_[attr_id]->ProcessSampleRecord(
         *static_cast<const SampleRecord*>(record.get()));
-  } else if (record->type() == PERF_RECORD_TRACING_DATA) {
+  } else if (record->type() == PERF_RECORD_TRACING_DATA ||
+             record->type() == SIMPLE_PERF_RECORD_TRACING_DATA) {
     const auto& r = *static_cast<TracingDataRecord*>(record.get());
     if (!ProcessTracingData(std::vector<char>(r.data, r.data + r.data_size))) {
       return false;
