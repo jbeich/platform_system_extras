@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "1d8cddf5_01c4b295",
+        "filename": "perfprofd/perf_data_converter.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2018-03-22T23:42:47Z",
+      "side": 1,
+      "message": "Your points are valid.\n\nI\u0027m trying to avoid having to look at the PerfParser again, like the original code did. It\u0027s not that hard to track the mmap-events, but I guess it\u0027s overhead.",
+      "parentUuid": "88583ce8_0752aea6",
+      "range": {
+        "startLine": 68,
+        "startChar": 52,
+        "endLine": 68,
+        "endChar": 54
+      },
+      "revId": "b78a1c09d87e92a2faa1974e7472a6ab3771a3b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "23c97a94_ad9be5bc",
         "filename": "perfprofd/perf_data_converter.cc",
         "patchSetId": 3
@@ -36,6 +60,30 @@
       "writtenOn": "2018-03-22T23:16:39Z",
       "side": 1,
       "message": "So the reason of using RangeMap is to find the start_addr and size of a symbol, right?\nWhy not let Symbolizer pass it through the Decode() interface?",
+      "range": {
+        "startLine": 134,
+        "startChar": 98,
+        "endLine": 134,
+        "endChar": 99
+      },
+      "revId": "b78a1c09d87e92a2faa1974e7472a6ab3771a3b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d82ee0ce_10bc0b3c",
+        "filename": "perfprofd/perf_data_converter.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2018-03-22T23:42:47Z",
+      "side": 1,
+      "message": "That isn\u0027t correct separation of concerns. The symbolizer\u0027s job is to give symbols, not record (and optimize) the final seen-symbols table. I prefer the range map here.",
+      "parentUuid": "23c97a94_ad9be5bc",
       "range": {
         "startLine": 134,
         "startChar": 98,
