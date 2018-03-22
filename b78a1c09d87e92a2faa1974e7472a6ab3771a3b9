@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "88583ce8_0752aea6",
+        "filename": "perfprofd/perf_data_converter.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-03-22T23:16:39Z",
+      "side": 1,
+      "message": "Here we have two problems:\n1. Since we are recording system wide, we get mmaps from many processes. We need to ensure a sample only uses the mmaps for its process.\n2. The mmaps for one process can be changed overtime. So two samples recorded at different time may use different mmaps. To support this, we need to use a structure to trace the mmap change, and process mmap and sample records in order. So each sample can see all mmap changes before it, and never see mmap changes after it.\n\nMy recommendation is to use quipper::PerfParser.parsed_events(). ParsedEvent has DSO + offset for each sample. And you can check if a DSO has build_id. Maybe you can reuse the parser created in quipper::SerializeFromFileWithOptions.",
+      "range": {
+        "startLine": 68,
+        "startChar": 52,
+        "endLine": 68,
+        "endChar": 54
+      },
+      "revId": "b78a1c09d87e92a2faa1974e7472a6ab3771a3b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "23c97a94_ad9be5bc",
+        "filename": "perfprofd/perf_data_converter.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-03-22T23:16:39Z",
+      "side": 1,
+      "message": "So the reason of using RangeMap is to find the start_addr and size of a symbol, right?\nWhy not let Symbolizer pass it through the Decode() interface?",
+      "range": {
+        "startLine": 134,
+        "startChar": 98,
+        "endLine": 134,
+        "endChar": 99
+      },
+      "revId": "b78a1c09d87e92a2faa1974e7472a6ab3771a3b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b7bc8330_35cf3ef9",
+        "filename": "perfprofd/perfprofd_record.proto",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-03-22T23:16:39Z",
+      "side": 1,
+      "message": "Add comment, like symbol info of a shared library without build id?",
+      "range": {
+        "startLine": 11,
+        "startChar": 21,
+        "endLine": 11,
+        "endChar": 22
+      },
+      "revId": "b78a1c09d87e92a2faa1974e7472a6ab3771a3b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "287830a1_c66008c1",
+        "filename": "perfprofd/perfprofd_record.proto",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-03-22T23:16:39Z",
+      "side": 1,
+      "message": "Since already in Symbol message, change to name and name_md5_prefix?",
+      "range": {
+        "startLine": 13,
+        "startChar": 22,
+        "endLine": 13,
+        "endChar": 33
+      },
+      "revId": "b78a1c09d87e92a2faa1974e7472a6ab3771a3b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
