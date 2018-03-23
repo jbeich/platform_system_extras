@@ -70,6 +70,30 @@
       "revId": "c9a2ab417f54eb43bffd14cf9f542808cdd1d040",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ba367845_86525179",
+        "filename": "perfprofd/binder_interface/perfprofd_binder.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2018-03-23T17:18:21Z",
+      "side": 1,
+      "message": "It is, but at that point the value of TemporaryFile becomes questionable, IMHO. Might as well generate the name fully under my control.",
+      "parentUuid": "f6c2ed1e_46da2806",
+      "range": {
+        "startLine": 163,
+        "startChar": 13,
+        "endLine": 163,
+        "endChar": 30
+      },
+      "revId": "c9a2ab417f54eb43bffd14cf9f542808cdd1d040",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
