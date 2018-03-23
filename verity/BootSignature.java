@@ -209,6 +209,21 @@ public class BootSignature extends ASN1Object
                 + ((ramdskSize + pageSize - 1) / pageSize) * pageSize
                 + ((secondSize + pageSize - 1) / pageSize) * pageSize;
 
+        int headerVersion = image.getInt(); // boot image header version
+        if (headerVersion > 0) {
+            image.getInt(); // os version and patch level
+
+            byte[] tempByteArray = new byte[1024];
+
+            image.get(tempByteArray, 0, 16); // product name
+            image.get(tempByteArray, 0, 512); // cmdline
+            image.get(tempByteArray, 0, 32); // sha
+            image.get(tempByteArray, 0, 1024); //extra cmdline
+
+            int recoveryDtboLength = image.getInt();
+            length += ((recoveryDtboLength + pageSize - 1) / pageSize) * pageSize;
+        }
+
         length = ((length + pageSize - 1) / pageSize) * pageSize;
 
         if (length <= 0) {
