@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e20246cd_19375a81",
+        "filename": "perfprofd/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-03-23T16:00:40Z",
+      "side": 1,
+      "message": "really? i find the assembler unreadably noisy below -O2, constantly shuffling registers around pointlessly.\n\nno -g here?",
+      "revId": "108af0905d50f7b0cab38101d68718443680afee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
