@@ -34,6 +34,24 @@
       "revId": "894b3f9b0d3ed1a082d8c533ac812341c047561c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "364920d5_718859d3",
+        "filename": "perfprofd/perfprofd_io.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-03-23T16:38:20Z",
+      "side": 1,
+      "message": "more than i\u0027m entirely comfortable with, especially given that libcore showed it was quite hard to get it exactly right:\n\nhttps://cs.corp.google.com/search/?q\u003ddeflateInit+file:%5C.c+-file:external/+-file:device/+-file:hardware/bsp/+-file:kernel/+-file:google_experimental+-file:toolchain/\u0026m\u003d100\u0026sort\u003d1\u0026sq\u003dpackage:%5Eandroid$\u0026type\u003dcs\n\n(extra points for the one copy and pasted between bt and nfc.)",
+      "parentUuid": "1efeb8c6_922f2ae2",
+      "revId": "894b3f9b0d3ed1a082d8c533ac812341c047561c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
