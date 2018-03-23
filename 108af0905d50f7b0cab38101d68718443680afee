@@ -16,6 +16,24 @@
       "revId": "108af0905d50f7b0cab38101d68718443680afee",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ebcea50_4ab042df",
+        "filename": "perfprofd/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2018-03-23T16:14:36Z",
+      "side": 1,
+      "message": "If you want to be able to debug it, then yeah, -O0. Clang sux.\n\n(I thought -g is default?)",
+      "parentUuid": "e20246cd_19375a81",
+      "revId": "108af0905d50f7b0cab38101d68718443680afee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
