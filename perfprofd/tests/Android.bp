@@ -8,6 +8,7 @@ cc_defaults {
         "-Werror",
         "-O0",
         "-g",
+        "-UNDEBUG",
     ],
     cppflags: [
         "-Wno-sign-compare",
@@ -32,7 +33,7 @@ cc_test {
 
     stl: "libc++",
     static_libs: [
-        "libperfprofdcore",
+        "libperfprofdcored",
         "libsimpleperf_elf_read",
         "libbase",
         "libutils",
