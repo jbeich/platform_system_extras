@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8d1c5cb1_add032b6",
+        "filename": "perfprofd/perfprofd_io.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-03-23T15:58:49Z",
+      "side": 1,
+      "message": "i wish we had some better abstraction for zlib in libbase.",
+      "revId": "894b3f9b0d3ed1a082d8c533ac812341c047561c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
