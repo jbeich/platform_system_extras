@@ -22,6 +22,30 @@
       "revId": "c9a2ab417f54eb43bffd14cf9f542808cdd1d040",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "63896dc7_550caeb3",
+        "filename": "perfprofd/binder_interface/perfprofd_binder.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2018-03-23T15:54:40Z",
+      "side": 1,
+      "message": "Trying to keep Yabin happy, since I removed TemporaryFile again (this is exactly what TemporaryFile does) :-).\n\nOpen for opinions here - this is necessary as I decided that serialization should clearly take ownership of the fd. If it didn\u0027t, the TemporaryFile could still make sense.",
+      "parentUuid": "3148e387_eb30bc27",
+      "range": {
+        "startLine": 163,
+        "startChar": 13,
+        "endLine": 163,
+        "endChar": 30
+      },
+      "revId": "c9a2ab417f54eb43bffd14cf9f542808cdd1d040",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
