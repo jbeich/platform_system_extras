@@ -87,7 +87,7 @@ int e4crypt_set_directory_policy(const char* dir)
         "system_ce", "system_de",
         "misc_ce", "misc_de",
         "media",
-        "data", "user", "user_de",
+        "user", "user_de",
     };
     std::string prefix = "/data/";
     for (auto d: directories_to_exclude) {
