@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3148e387_eb30bc27",
+        "filename": "perfprofd/binder_interface/perfprofd_binder.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-03-23T15:52:57Z",
+      "side": 1,
+      "message": "running Android on an NT kernel seems like an unlikely worry :-)",
+      "range": {
+        "startLine": 163,
+        "startChar": 13,
+        "endLine": 163,
+        "endChar": 30
+      },
+      "revId": "c9a2ab417f54eb43bffd14cf9f542808cdd1d040",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
