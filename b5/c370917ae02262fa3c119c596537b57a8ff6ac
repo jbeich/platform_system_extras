@@ -1,0 +1,9 @@
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Verified+1: Andreas Gampe <agampe@google.com>
+Code-Review+2: Andreas Gampe <agampe@google.com>
+Autosubmit+1: Andreas Gampe <agampe@google.com>
+Submitted-by: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-at: Sat, 24 Mar 2018 00:51:51 +0000
+Reviewed-on: https://android-review.googlesource.com/647936
+Project: platform/system/extras
+Branch: refs/heads/master
