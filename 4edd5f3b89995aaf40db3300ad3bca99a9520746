@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "717e804d_662ff4a7",
+        "filename": "verity/BootSignature.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1120612
+      },
+      "writtenOn": "2018-03-26T23:26:38Z",
+      "side": 1,
+      "message": "Agree! Fixed in latest PS.",
+      "parentUuid": "95fb1d3f_689e9806",
+      "range": {
+        "startLine": 214,
+        "startChar": 12,
+        "endLine": 221,
+        "endChar": 62
+      },
+      "revId": "4edd5f3b89995aaf40db3300ad3bca99a9520746",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "15238b10_2f28bc2c",
         "filename": "verity/BootSignature.java",
         "patchSetId": 1
@@ -45,6 +69,30 @@
       "revId": "4edd5f3b89995aaf40db3300ad3bca99a9520746",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5abe5555_4d26c6c8",
+        "filename": "verity/BootSignature.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1120612
+      },
+      "writtenOn": "2018-03-26T23:26:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "15238b10_2f28bc2c",
+      "range": {
+        "startLine": 225,
+        "startChar": 8,
+        "endLine": 225,
+        "endChar": 9
+      },
+      "revId": "4edd5f3b89995aaf40db3300ad3bca99a9520746",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
