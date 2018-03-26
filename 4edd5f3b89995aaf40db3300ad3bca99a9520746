@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "95fb1d3f_689e9806",
+        "filename": "verity/BootSignature.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-03-26T21:31:59Z",
+      "side": 1,
+      "message": "Since we\u0027re not using any of these values, we can just seek to the interested field.\n\nimage.position(\u003coffset from the header of the image\u003e);\n\nAlso I think it\u0027s more readable to use named constants, instead of the comments, e.g.,\n\nprivate static int BOOT_IMAGE_HEADER_V0_SIZE \u003d ...;\nprivate static int BOOT_IMAGE_HEADER_V1_RECOVERY_DTBO_SIZE_OFFSET \u003d ... (either in relative to BOOT_IMAGE_HEADER_V0_SIZE or hard-coded value)",
+      "range": {
+        "startLine": 214,
+        "startChar": 12,
+        "endLine": 221,
+        "endChar": 62
+      },
+      "revId": "4edd5f3b89995aaf40db3300ad3bca99a9520746",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "15238b10_2f28bc2c",
+        "filename": "verity/BootSignature.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-03-26T21:31:59Z",
+      "side": 1,
+      "message": "Since we have added header size into v1 struct, we should read that and do a sanity check here.\n\nif (image.position() !\u003d headerSize) throw ...",
+      "range": {
+        "startLine": 225,
+        "startChar": 8,
+        "endLine": 225,
+        "endChar": 9
+      },
+      "revId": "4edd5f3b89995aaf40db3300ad3bca99a9520746",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
