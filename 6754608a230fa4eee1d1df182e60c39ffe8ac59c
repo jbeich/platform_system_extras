@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c60e913c_c935b910",
+        "filename": "verity/BootSignature.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-03-26T23:43:13Z",
+      "side": 1,
+      "message": "nit: \"// recovery_dtbo address\"",
+      "range": {
+        "startLine": 223,
+        "startChar": 28,
+        "endLine": 223,
+        "endChar": 52
+      },
+      "revId": "6754608a230fa4eee1d1df182e60c39ffe8ac59c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "676d7ad3_b1aff452",
+        "filename": "verity/BootSignature.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-03-26T23:43:13Z",
+      "side": 1,
+      "message": "shouldn\u0027t check for \"headerVersion \u003d\u003d 1\". Otherwise need to move the \"headerSize \u003d image.getInt()\" inside the branch.\n\nAlso use explicit braces",
+      "range": {
+        "startLine": 224,
+        "startChar": 12,
+        "endLine": 226,
+        "endChar": 98
+      },
+      "revId": "6754608a230fa4eee1d1df182e60c39ffe8ac59c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
