@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "85336daa_945a8a8b",
+        "filename": "perfprofd/perf_data_converter.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-03-27T18:06:18Z",
+      "side": 1,
+      "message": "min_vaddr isn\u0027t needed if disabling relocation packer (https://android-review.googlesource.com/q/%2522+Disable+relocation_packer+and+migrate+to+SHT_RELR+sections.%2522), don\u0027t know when it will be revert revert.",
+      "range": {
+        "startLine": 109,
+        "startChar": 38,
+        "endLine": 109,
+        "endChar": 43
+      },
+      "revId": "f596bae8b728cb48c27aa11a3f1c7487e14e1ada",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
