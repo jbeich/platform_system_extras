@@ -22,6 +22,30 @@
       "revId": "b6ffdc5413b17ed0191e4e8c7a101617ce03a6a0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0bfb724c_444bd59d",
+        "filename": "verity/BootSignature.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1120612
+      },
+      "writtenOn": "2018-03-27T00:13:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6a21bc0c_b844b2bc",
+      "range": {
+        "startLine": 223,
+        "startChar": 52,
+        "endLine": 223,
+        "endChar": 53
+      },
+      "revId": "b6ffdc5413b17ed0191e4e8c7a101617ce03a6a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
