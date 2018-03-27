@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "2dcd2bf4_87b15742",
+        "filename": "verity/BootSignature.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1120612
+      },
+      "writtenOn": "2018-03-27T00:01:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c60e913c_c935b910",
+      "range": {
+        "startLine": 223,
+        "startChar": 28,
+        "endLine": 223,
+        "endChar": 52
+      },
+      "revId": "6754608a230fa4eee1d1df182e60c39ffe8ac59c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "676d7ad3_b1aff452",
         "filename": "verity/BootSignature.java",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2018-03-26T23:43:13Z",
       "side": 1,
       "message": "shouldn\u0027t check for \"headerVersion \u003d\u003d 1\". Otherwise need to move the \"headerSize \u003d image.getInt()\" inside the branch.\n\nAlso use explicit braces",
+      "range": {
+        "startLine": 224,
+        "startChar": 12,
+        "endLine": 226,
+        "endChar": 98
+      },
+      "revId": "6754608a230fa4eee1d1df182e60c39ffe8ac59c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7dee9c64_89a85523",
+        "filename": "verity/BootSignature.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1120612
+      },
+      "writtenOn": "2018-03-27T00:01:20Z",
+      "side": 1,
+      "message": "I added the check since I thought future versions may add fields after the boot header size field. I will move headerSize inside the branch though since that sounds cleaner.",
+      "parentUuid": "676d7ad3_b1aff452",
       "range": {
         "startLine": 224,
         "startChar": 12,
