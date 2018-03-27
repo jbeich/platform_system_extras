@@ -252,6 +252,7 @@ class RecordCommand : public Command {
   bool DumpKernelAndModuleMmaps(const perf_event_attr& attr, uint64_t event_id);
   bool DumpThreadCommAndMmaps(const perf_event_attr& attr, uint64_t event_id);
   bool ProcessRecord(Record* record);
+  bool ShouldOmitRecord(Record* record);
   bool SaveRecordForPostUnwinding(Record* record);
   bool SaveRecordAfterUnwinding(Record* record);
   bool SaveRecordWithoutUnwinding(Record* record);
@@ -415,6 +416,13 @@ bool RecordCommand::PrepareRecording(Workload* workload) {
   } else {
     need_to_check_targets = true;
   }
+  // Profiling JITed/interpreted Java code is supported starting from Android P.
+  const int kAndroidVersionP = 9;
+  bool profile_java_code = (app_pid != 0 && GetAndroidVersion() >= kAndroidVersionP);
+  if (profile_java_code) {
+    // To profile java code, need to dump maps containing vdex files, which are not executable.
+    event_selection_set_.RecordNoneExecutableMmap(true);
+  }
 
   // 5. Open perf event files and create mapped buffers.
   if (!event_selection_set_.OpenEventFiles(cpus_)) {
@@ -458,9 +466,7 @@ bool RecordCommand::PrepareRecording(Workload* workload) {
       return false;
     }
   }
-  // Profiling JITed/interpreted code is supported starting from Android P.
-  const int kAndroidVersionP = 9;
-  if (app_pid != 0 && GetAndroidVersion() >= kAndroidVersionP) {
+  if (profile_java_code) {
     // JIT symfiles are stored in temporary files, and are deleted after recording. But if
     // `-g --no-unwind` option is used, we want to keep symfiles to support unwinding in
     // the debug-unwind cmd.
@@ -1006,7 +1012,7 @@ bool RecordCommand::DumpThreadCommAndMmaps(const perf_event_attr& attr,
       continue;
     }
     for (const auto& map : thread_mmaps) {
-      if (map.executable == 0) {
+      if (map.executable == 0 && !event_selection_set_.RecordNoneExecutableMmap()) {
         continue;  // No need to dump non-executable mmap info.
       }
       MmapRecord record(attr, false, pid, pid, map.start_addr, map.len,
@@ -1047,6 +1053,9 @@ bool RecordCommand::DumpThreadCommAndMmaps(const perf_event_attr& attr,
 }
 
 bool RecordCommand::ProcessRecord(Record* record) {
+  if (ShouldOmitRecord(record)) {
+    return true;
+  }
   last_record_timestamp_ = record->Timestamp();
   if (unwind_dwarf_callchain_) {
     if (post_unwind_) {
@@ -1055,6 +1064,17 @@ bool RecordCommand::ProcessRecord(Record* record) {
     return SaveRecordAfterUnwinding(record);
   }
   return SaveRecordWithoutUnwinding(record);
+}
+
+bool RecordCommand::ShouldOmitRecord(Record* record) {
+  switch (record->type()) {
+    case PERF_RECORD_MMAP:
+      return !record->InKernel() && !IsRegularFile(static_cast<MmapRecord*>(record)->filename);
+    case PERF_RECORD_MMAP2:
+      return !record->InKernel() && !IsRegularFile(static_cast<Mmap2Record*>(record)->filename);
+    default:
+      return false;
+  }
 }
 
 bool RecordCommand::SaveRecordForPostUnwinding(Record* record) {
@@ -1131,7 +1151,9 @@ bool RecordCommand::UpdateJITDebugInfo() {
       return false;
     }
   }
-  // TODO: Handle dex symfiles.
+  for (auto& symfile : dex_symfiles) {
+    thread_tree_.AddDexFileOffset(symfile.file_path, symfile.dex_file_offset);
+  }
   return true;
 }
 
@@ -1285,11 +1307,8 @@ bool RecordCommand::DumpAdditionalFeatures(
     return false;
   }
 
-  size_t feature_count = 5;
+  size_t feature_count = 6;
   if (branch_sampling_) {
-    feature_count++;
-  }
-  if (dump_symbols_) {
     feature_count++;
   }
   if (!record_file_writer_->BeginWriteFeatures(feature_count)) {
@@ -1298,7 +1317,7 @@ bool RecordCommand::DumpAdditionalFeatures(
   if (!DumpBuildIdFeature()) {
     return false;
   }
-  if (dump_symbols_ && !DumpFileFeature()) {
+  if (!DumpFileFeature()) {
     return false;
   }
   utsname uname_buf;
