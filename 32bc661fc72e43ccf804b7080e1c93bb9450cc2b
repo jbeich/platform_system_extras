@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "49b1a28e_66e6a911",
+        "filename": "perfprofd/perfprofd_cmdline.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-03-29T23:59:10Z",
+      "side": 1,
+      "message": "use the non-mangled header for new files at least? (where did they find this?)",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 2
+      },
+      "revId": "32bc661fc72e43ccf804b7080e1c93bb9450cc2b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bede649f_f85913ab",
+        "filename": "perfprofd/perfprofd_cmdline.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-03-29T23:59:10Z",
+      "side": 1,
+      "message": "#pragma once?",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 52
+      },
+      "revId": "32bc661fc72e43ccf804b7080e1c93bb9450cc2b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
