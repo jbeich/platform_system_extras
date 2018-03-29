@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "9723df5e_38b87cfa",
+        "filename": "simpleperf/Android.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-03-29T00:25:43Z",
+      "side": 1,
+      "message": "Unfortunately, the flag set by LOCAL_CPP_STD comes before LOCAL_CPPFLAGS. So it can\u0027t override the -std\u003dc++11 flag in LOCAL_CPPFLAGS. The good news is, this workaround will be removed after switching to Android.bp, which hopefully will happen soon.",
+      "parentUuid": "a0d26f31_acad1e52",
+      "range": {
+        "startLine": 149,
+        "startChar": 0,
+        "endLine": 149,
+        "endChar": 17
+      },
+      "revId": "410c597be16ab868f3a40e31a7797733463496dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d600acc6_6994f2a9",
         "filename": "simpleperf/cmd_dumprecord.cpp",
         "patchSetId": 2
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "aa94e3a0_acdefe57",
+        "filename": "simpleperf/cmd_dumprecord.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-03-29T00:25:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d600acc6_6994f2a9",
+      "range": {
+        "startLine": 253,
+        "startChar": 28,
+        "endLine": 253,
+        "endChar": 45
+      },
+      "revId": "410c597be16ab868f3a40e31a7797733463496dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "92dce41c_5ac0f421",
         "filename": "simpleperf/cmd_record.cpp",
         "patchSetId": 2
@@ -59,6 +107,30 @@
       "writtenOn": "2018-03-28T20:26:44Z",
       "side": 1,
       "message": "Is this used somewhere else? It seems kind of weird to define it then use it right below and never again.",
+      "range": {
+        "startLine": 420,
+        "startChar": 12,
+        "endLine": 420,
+        "endChar": 28
+      },
+      "revId": "410c597be16ab868f3a40e31a7797733463496dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "63f943c8_47d7791e",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-03-29T00:25:43Z",
+      "side": 1,
+      "message": "It is only used here. But it can also be used by GetAndroidVersion in environment.cpp. So changed it.",
+      "parentUuid": "92dce41c_5ac0f421",
       "range": {
         "startLine": 420,
         "startChar": 12,
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "6b17d381_f9e2b30f",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1016,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-03-29T00:25:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f69570c3_91751c65",
+      "range": {
+        "startLine": 1016,
+        "startChar": 22,
+        "endLine": 1016,
+        "endChar": 63
+      },
+      "revId": "410c597be16ab868f3a40e31a7797733463496dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dbfc9bb7_a6fa6f31",
         "filename": "simpleperf/cmd_record.cpp",
         "patchSetId": 2
@@ -105,6 +201,30 @@
       "writtenOn": "2018-03-28T20:26:44Z",
       "side": 1,
       "message": "It would be good if you have a comment describing why these records are being skipped.",
+      "range": {
+        "startLine": 1069,
+        "startChar": 0,
+        "endLine": 1069,
+        "endChar": 54
+      },
+      "revId": "410c597be16ab868f3a40e31a7797733463496dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "73fd42da_b7766fa5",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1069,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-03-29T00:25:43Z",
+      "side": 1,
+      "message": "Done added comment, also made a few improvements.",
+      "parentUuid": "dbfc9bb7_a6fa6f31",
       "range": {
         "startLine": 1069,
         "startChar": 0,
@@ -140,6 +260,30 @@
     },
     {
       "key": {
+        "uuid": "1a29b9e5_82c6fc4f",
+        "filename": "simpleperf/event_selection_set.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 413,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-03-29T00:25:43Z",
+      "side": 1,
+      "message": "It means recording maps that are not executable. changed to SetRecordNotExecutableMaps. Let me if there are any better names.",
+      "parentUuid": "f8e6e02b_c9d9a364",
+      "range": {
+        "startLine": 413,
+        "startChar": 24,
+        "endLine": 413,
+        "endChar": 48
+      },
+      "revId": "410c597be16ab868f3a40e31a7797733463496dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "851a6ab5_98994fa2",
         "filename": "simpleperf/event_selection_set.h",
         "patchSetId": 2
@@ -160,6 +304,30 @@
       "revId": "410c597be16ab868f3a40e31a7797733463496dd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1effb933_7c08256f",
+        "filename": "simpleperf/event_selection_set.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-03-29T00:25:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "851a6ab5_98994fa2",
+      "range": {
+        "startLine": 106,
+        "startChar": 7,
+        "endLine": 106,
+        "endChar": 31
+      },
+      "revId": "410c597be16ab868f3a40e31a7797733463496dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
