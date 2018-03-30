@@ -104,6 +104,24 @@
       "revId": "0a1dcd59ab7551905df93a1c6fc623065fd46bb7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "340a6b70_24b1b94d",
+        "filename": "perfprofd/perfprofdcore.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 1064128
+      },
+      "writtenOn": "2018-03-30T18:51:50Z",
+      "side": 1,
+      "message": "I don\u0027t actually think there\u0027s a bug filed for it.  We also talked about making exec*() const correct for C++ so people don\u0027t always need to cast, though I don\u0027t see a bug for either.  I filed b/77326399.",
+      "parentUuid": "f02b6c34_9492f598",
+      "revId": "0a1dcd59ab7551905df93a1c6fc623065fd46bb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
