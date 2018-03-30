@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "2f1ee8ac_aed8062e",
+        "filename": "perfprofd/perfprofd_cmdline.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2018-03-30T00:07:18Z",
+      "side": 1,
+      "message": "Will fix, though this is technically not new (that\u0027s why I retained the 2015). :-)",
+      "parentUuid": "49b1a28e_66e6a911",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 2
+      },
+      "revId": "32bc661fc72e43ccf804b7080e1c93bb9450cc2b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bede649f_f85913ab",
         "filename": "perfprofd/perfprofd_cmdline.h",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2018-03-29T23:59:10Z",
       "side": 1,
       "message": "#pragma once?",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 52
+      },
+      "revId": "32bc661fc72e43ccf804b7080e1c93bb9450cc2b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2a0f7d69_f4d5ee09",
+        "filename": "perfprofd/perfprofd_cmdline.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2018-03-30T00:07:18Z",
+      "side": 1,
+      "message": "I\u0027m following ART (and I believe Google) style here, in case I ever get around to clean up all the code and then add a linter step... :-)",
+      "parentUuid": "bede649f_f85913ab",
       "range": {
         "startLine": 18,
         "startChar": 0,
