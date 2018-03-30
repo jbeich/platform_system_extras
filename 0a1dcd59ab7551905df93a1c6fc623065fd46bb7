@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8df2340c_c801d37f",
+        "filename": "perfprofd/binder_interface/perfprofd_binder.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2018-03-30T15:50:18Z",
+      "side": 1,
+      "message": "Copied it from the surfaceflinger shellCommand implementation. :-D",
+      "parentUuid": "6acc1cc5_d2733c9c",
+      "revId": "0a1dcd59ab7551905df93a1c6fc623065fd46bb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4d999513_430d5a58",
         "filename": "perfprofd/binder_interface/perfprofd_binder.cc",
         "patchSetId": 2
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "1d78d085_aef39cef",
+        "filename": "perfprofd/binder_interface/perfprofd_binder.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2018-03-30T15:50:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4d999513_430d5a58",
+      "revId": "0a1dcd59ab7551905df93a1c6fc623065fd46bb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "85558bee_9f25b9c5",
         "filename": "perfprofd/perfprofdcore.cc",
         "patchSetId": 2
@@ -47,6 +83,24 @@
       "writtenOn": "2018-03-30T15:44:13Z",
       "side": 1,
       "message": "we _really_ need to add \"execve with a vector\" to libbase...\n\ni think +tomcherry has the bug for that.",
+      "revId": "0a1dcd59ab7551905df93a1c6fc623065fd46bb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f02b6c34_9492f598",
+        "filename": "perfprofd/perfprofdcore.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2018-03-30T15:50:18Z",
+      "side": 1,
+      "message": "I wouldn\u0027t mind. There\u0027s also installd as a potential customer.",
+      "parentUuid": "85558bee_9f25b9c5",
       "revId": "0a1dcd59ab7551905df93a1c6fc623065fd46bb7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
