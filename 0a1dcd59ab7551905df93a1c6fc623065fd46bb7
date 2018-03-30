@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6acc1cc5_d2733c9c",
+        "filename": "perfprofd/binder_interface/perfprofd_binder.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-03-30T15:44:13Z",
+      "side": 1,
+      "message": "ha! why didn\u0027t i think of that? (i always thought there was no way to turn an fd into a stream.)",
+      "revId": "0a1dcd59ab7551905df93a1c6fc623065fd46bb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4d999513_430d5a58",
+        "filename": "perfprofd/binder_interface/perfprofd_binder.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-03-30T15:44:13Z",
+      "side": 1,
+      "message": "include args[1] to be slightly less unhelpful in the \"it wasn\u0027t -\" case?",
+      "revId": "0a1dcd59ab7551905df93a1c6fc623065fd46bb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "85558bee_9f25b9c5",
+        "filename": "perfprofd/perfprofdcore.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-03-30T15:44:13Z",
+      "side": 1,
+      "message": "we _really_ need to add \"execve with a vector\" to libbase...\n\ni think +tomcherry has the bug for that.",
+      "revId": "0a1dcd59ab7551905df93a1c6fc623065fd46bb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
