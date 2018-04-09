@@ -1,0 +1,211 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ed1a3d3_8a096f6e",
+        "filename": "perfprofd/scripts/perf_proto_stack.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-04-09T18:29:56Z",
+      "side": 1,
+      "message": "The code first add all symbols, then find symbols by addr. So I feel we can simply insert all symbols in a list, then sort the list, without the need to introduce SortedCollection.",
+      "range": {
+        "startLine": 124,
+        "startChar": 67,
+        "endLine": 124,
+        "endChar": 68
+      },
+      "revId": "cdb320c96f79d916e92dedf9ed4fe79d5723c7fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "47b08c99_9404c8e5",
+        "filename": "perfprofd/scripts/perf_proto_stack.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-04-09T18:29:56Z",
+      "side": 1,
+      "message": "fork_event.ppid not in state_map?",
+      "range": {
+        "startLine": 143,
+        "startChar": 31,
+        "endLine": 143,
+        "endChar": 33
+      },
+      "revId": "cdb320c96f79d916e92dedf9ed4fe79d5723c7fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8b1719bb_8424d431",
+        "filename": "perfprofd/scripts/perf_proto_stack.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-04-09T18:29:56Z",
+      "side": 1,
+      "message": "%",
+      "range": {
+        "startLine": 144,
+        "startChar": 51,
+        "endLine": 144,
+        "endChar": 52
+      },
+      "revId": "cdb320c96f79d916e92dedf9ed4fe79d5723c7fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "26beb299_97478090",
+        "filename": "perfprofd/scripts/perf_proto_stack.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-04-09T18:29:56Z",
+      "side": 1,
+      "message": "not line?",
+      "range": {
+        "startLine": 171,
+        "startChar": 19,
+        "endLine": 171,
+        "endChar": 29
+      },
+      "revId": "cdb320c96f79d916e92dedf9ed4fe79d5723c7fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6d050415_4417a9d8",
+        "filename": "perfprofd/scripts/perf_proto_stack.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-04-09T18:29:56Z",
+      "side": 1,
+      "message": "or you can use `readelf -lW`?",
+      "range": {
+        "startLine": 177,
+        "startChar": 43,
+        "endLine": 177,
+        "endChar": 44
+      },
+      "revId": "cdb320c96f79d916e92dedf9ed4fe79d5723c7fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "83bda3e8_ed6148e9",
+        "filename": "perfprofd/scripts/perf_proto_stack.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-04-09T18:29:56Z",
+      "side": 1,
+      "message": "\u0027is not None\u0027 isn\u0027t needed here and in other places, unless you want to exclude None but accept an empty string or empty list. https://google.github.io/styleguide/pyguide.html?showone\u003dTrue/False_evaluations#True/False_evaluations",
+      "range": {
+        "startLine": 243,
+        "startChar": 7,
+        "endLine": 243,
+        "endChar": 44
+      },
+      "revId": "cdb320c96f79d916e92dedf9ed4fe79d5723c7fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dc37278e_39922785",
+        "filename": "perfprofd/scripts/perf_proto_stack.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-04-09T18:29:56Z",
+      "side": 1,
+      "message": "add comment why we need to try both decode_with_symbol_lib and unwind_symbols?",
+      "range": {
+        "startLine": 294,
+        "startChar": 28,
+        "endLine": 294,
+        "endChar": 0
+      },
+      "revId": "cdb320c96f79d916e92dedf9ed4fe79d5723c7fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ee1880ec_847333f3",
+        "filename": "perfprofd/scripts/perf_proto_stack.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-04-09T18:29:56Z",
+      "side": 1,
+      "message": "Or you can use the way simpleperf uses to distinguish kernel ips and user space ips:\n1. if event.misc \u0026 1, all ips are in kernel.\n2. if event.misc \u0026 1 \u003d\u003d 0, all ips below PERF_CONTEXT_USER and \u003cPERF_CONTEXT_MAX are user ips.\nAs in https://cs.corp.google.com/android/system/extras/simpleperf/cmd_report_sample.cpp?type\u003dcs\u0026q\u003dreport_sample.cpp+package:%5Eandroid$+\u0026l\u003d435.",
+      "range": {
+        "startLine": 341,
+        "startChar": 33,
+        "endLine": 341,
+        "endChar": 35
+      },
+      "revId": "cdb320c96f79d916e92dedf9ed4fe79d5723c7fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "07dc6f84_fb1a4584",
+        "filename": "perfprofd/scripts/perf_proto_stack.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-04-09T18:29:56Z",
+      "side": 1,
+      "message": "already reduced to size in L372?",
+      "range": {
+        "startLine": 376,
+        "startChar": 51,
+        "endLine": 376,
+        "endChar": 55
+      },
+      "revId": "cdb320c96f79d916e92dedf9ed4fe79d5723c7fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
