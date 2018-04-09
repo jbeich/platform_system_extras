@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "455dac2d_59505888",
+        "filename": "perfprofd/scripts/perf_proto_stack.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-04-09T22:32:58Z",
+      "side": 1,
+      "message": "Without recording start_address of a symbol in PerfprofdRecord, we can\u0027t report the symbol offset of an address.",
+      "range": {
+        "startLine": 317,
+        "startChar": 37,
+        "endLine": 317,
+        "endChar": 38
+      },
+      "revId": "ec4a891eecfc90cefc7e7d6ed0026ad8e98bf4db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
