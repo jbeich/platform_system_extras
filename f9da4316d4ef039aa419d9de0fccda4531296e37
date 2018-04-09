@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e50d8d73_83e08914",
+        "filename": "simpleperf/report_sample.proto",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1079424
+      },
+      "writtenOn": "2018-04-09T20:34:21Z",
+      "side": 1,
+      "message": "Shouldn\u0027t we specify the Endianness?",
+      "range": {
+        "startLine": 3,
+        "startChar": 3,
+        "endLine": 3,
+        "endChar": 11
+      },
+      "revId": "f9da4316d4ef039aa419d9de0fccda4531296e37",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
