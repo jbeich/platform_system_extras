@@ -143,6 +143,30 @@
     },
     {
       "key": {
+        "uuid": "d974b9ea_92240528",
+        "filename": "perfprofd/scripts/perf_proto_stack.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-04-09T22:13:23Z",
+      "side": 1,
+      "message": "sorry, didn\u0027t know that.",
+      "parentUuid": "48981cf7_899b82f6",
+      "range": {
+        "startLine": 144,
+        "startChar": 51,
+        "endLine": 144,
+        "endChar": 52
+      },
+      "revId": "cdb320c96f79d916e92dedf9ed4fe79d5723c7fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "26beb299_97478090",
         "filename": "perfprofd/scripts/perf_proto_stack.py",
         "patchSetId": 2
@@ -366,6 +390,30 @@
       "side": 1,
       "message": "Mind if I attend to this in a separate CL? I gotta figure out whether quipper maintains the \"normal\" values or remaps them or ...",
       "parentUuid": "ee1880ec_847333f3",
+      "range": {
+        "startLine": 341,
+        "startChar": 33,
+        "endLine": 341,
+        "endChar": 35
+      },
+      "revId": "cdb320c96f79d916e92dedf9ed4fe79d5723c7fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ad1703a2_d35857d7",
+        "filename": "perfprofd/scripts/perf_proto_stack.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-04-09T22:13:23Z",
+      "side": 1,
+      "message": "LGTM",
+      "parentUuid": "e76476fe_a2cc755c",
       "range": {
         "startLine": 341,
         "startChar": 33,
