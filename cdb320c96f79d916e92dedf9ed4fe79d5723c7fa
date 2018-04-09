@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "fdd6127d_17c1372c",
+        "filename": "perfprofd/scripts/perf_proto_stack.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2018-04-09T21:46:57Z",
+      "side": 1,
+      "message": "SortedCollection is a sorted list with binary search helper methods. I\u0027d be reimplementing that functionality, so it seems easier to just take an official Python snippet.",
+      "parentUuid": "4ed1a3d3_8a096f6e",
+      "range": {
+        "startLine": 124,
+        "startChar": 67,
+        "endLine": 124,
+        "endChar": 68
+      },
+      "revId": "cdb320c96f79d916e92dedf9ed4fe79d5723c7fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "47b08c99_9404c8e5",
         "filename": "perfprofd/scripts/perf_proto_stack.py",
         "patchSetId": 2
@@ -45,6 +69,30 @@
       "revId": "cdb320c96f79d916e92dedf9ed4fe79d5723c7fa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ab7a81c6_59584efb",
+        "filename": "perfprofd/scripts/perf_proto_stack.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2018-04-09T21:46:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "47b08c99_9404c8e5",
+      "range": {
+        "startLine": 143,
+        "startChar": 31,
+        "endLine": 143,
+        "endChar": 33
+      },
+      "revId": "cdb320c96f79d916e92dedf9ed4fe79d5723c7fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "48981cf7_899b82f6",
+        "filename": "perfprofd/scripts/perf_proto_stack.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2018-04-09T21:46:57Z",
+      "side": 1,
+      "message": "logging doesn\u0027t work that way, you\u0027re supposed to submit the parameters to formatting as actual arguments (my guess: so that formatted output, e.g., xml, works).",
+      "parentUuid": "8b1719bb_8424d431",
+      "range": {
+        "startLine": 144,
+        "startChar": 51,
+        "endLine": 144,
+        "endChar": 52
+      },
+      "revId": "cdb320c96f79d916e92dedf9ed4fe79d5723c7fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "26beb299_97478090",
         "filename": "perfprofd/scripts/perf_proto_stack.py",
         "patchSetId": 2
@@ -91,6 +163,30 @@
       "revId": "cdb320c96f79d916e92dedf9ed4fe79d5723c7fa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8b30d7ec_9bb171c1",
+        "filename": "perfprofd/scripts/perf_proto_stack.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2018-04-09T21:46:57Z",
+      "side": 1,
+      "message": "I\u0027d rather be explicit here, instead of using implicit conversion to bool.",
+      "parentUuid": "26beb299_97478090",
+      "range": {
+        "startLine": 171,
+        "startChar": 19,
+        "endLine": 171,
+        "endChar": 29
+      },
+      "revId": "cdb320c96f79d916e92dedf9ed4fe79d5723c7fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "451a4ddb_40805c02",
+        "filename": "perfprofd/scripts/perf_proto_stack.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2018-04-09T21:46:57Z",
+      "side": 1,
+      "message": "That\u0027s a good idea.",
+      "parentUuid": "6d050415_4417a9d8",
+      "range": {
+        "startLine": 177,
+        "startChar": 43,
+        "endLine": 177,
+        "endChar": 44
+      },
+      "revId": "cdb320c96f79d916e92dedf9ed4fe79d5723c7fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "83bda3e8_ed6148e9",
         "filename": "perfprofd/scripts/perf_proto_stack.py",
         "patchSetId": 2
@@ -137,6 +257,30 @@
       "revId": "cdb320c96f79d916e92dedf9ed4fe79d5723c7fa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "51fc972f_f6877d54",
+        "filename": "perfprofd/scripts/perf_proto_stack.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2018-04-09T21:46:57Z",
+      "side": 1,
+      "message": "See the point about \"None\" in that context. symbol can return None there, and I\u0027d rather use that explicitly.",
+      "parentUuid": "83bda3e8_ed6148e9",
+      "range": {
+        "startLine": 243,
+        "startChar": 7,
+        "endLine": 243,
+        "endChar": 44
+      },
+      "revId": "cdb320c96f79d916e92dedf9ed4fe79d5723c7fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -163,6 +307,30 @@
     },
     {
       "key": {
+        "uuid": "2a89de4b_161f91bf",
+        "filename": "perfprofd/scripts/perf_proto_stack.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2018-04-09T21:46:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dc37278e_39922785",
+      "range": {
+        "startLine": 294,
+        "startChar": 28,
+        "endLine": 294,
+        "endChar": 0
+      },
+      "revId": "cdb320c96f79d916e92dedf9ed4fe79d5723c7fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee1880ec_847333f3",
         "filename": "perfprofd/scripts/perf_proto_stack.py",
         "patchSetId": 2
@@ -174,6 +342,30 @@
       "writtenOn": "2018-04-09T18:29:56Z",
       "side": 1,
       "message": "Or you can use the way simpleperf uses to distinguish kernel ips and user space ips:\n1. if event.misc \u0026 1, all ips are in kernel.\n2. if event.misc \u0026 1 \u003d\u003d 0, all ips below PERF_CONTEXT_USER and \u003cPERF_CONTEXT_MAX are user ips.\nAs in https://cs.corp.google.com/android/system/extras/simpleperf/cmd_report_sample.cpp?type\u003dcs\u0026q\u003dreport_sample.cpp+package:%5Eandroid$+\u0026l\u003d435.",
+      "range": {
+        "startLine": 341,
+        "startChar": 33,
+        "endLine": 341,
+        "endChar": 35
+      },
+      "revId": "cdb320c96f79d916e92dedf9ed4fe79d5723c7fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e76476fe_a2cc755c",
+        "filename": "perfprofd/scripts/perf_proto_stack.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2018-04-09T21:46:57Z",
+      "side": 1,
+      "message": "Mind if I attend to this in a separate CL? I gotta figure out whether quipper maintains the \"normal\" values or remaps them or ...",
+      "parentUuid": "ee1880ec_847333f3",
       "range": {
         "startLine": 341,
         "startChar": 33,
@@ -206,6 +398,30 @@
       "revId": "cdb320c96f79d916e92dedf9ed4fe79d5723c7fa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7dc7cfda_14d16aad",
+        "filename": "perfprofd/scripts/perf_proto_stack.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2018-04-09T21:46:57Z",
+      "side": 1,
+      "message": "Yeah, that\u0027s from older code...",
+      "parentUuid": "07dc6f84_fb1a4584",
+      "range": {
+        "startLine": 376,
+        "startChar": 51,
+        "endLine": 376,
+        "endChar": 55
+      },
+      "revId": "cdb320c96f79d916e92dedf9ed4fe79d5723c7fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
