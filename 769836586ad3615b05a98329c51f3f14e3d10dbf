@@ -16,6 +16,24 @@
       "revId": "769836586ad3615b05a98329c51f3f14e3d10dbf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "36710864_320c7fa6",
+        "filename": "simpleperf/scripts/run_simpleperf_without_usb_connection.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-04-12T18:24:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5900e5f6_975c9909",
+      "revId": "769836586ad3615b05a98329c51f3f14e3d10dbf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
