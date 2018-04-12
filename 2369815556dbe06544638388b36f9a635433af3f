@@ -1,0 +1,118 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c70df026_2e16dd4b",
+        "filename": "simpleperf/scripts/run_simpleperf_without_usb_connection.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2018-04-12T18:48:40Z",
+      "side": 1,
+      "message": "This still isn\u0027t pylint clean:\n\npylint scripts/run_simpleperf_without_usb_connection.py \nNo config file found, using default configuration\n************* Module scripts.run_simpleperf_without_usb_connection\nW: 35, 0: Relative import \u0027utils\u0027, should be \u0027scripts.utils\u0027 (relative-import)\nC: 37, 0: Missing function docstring (missing-docstring)\nC: 60, 0: Missing function docstring (missing-docstring)\nC: 76, 0: Missing function docstring (missing-docstring)\n\n-----------------------------------\nYour code has been rated at 9.26/10\n\nIf you want to ignore the docstring issues, disable the warning in the pylintrc. The relative-import issue is solved by using `from __future__ import absolute_import` and importing with `from scripts.util import ...`. Alternatively, disable that warning in the pylintrc as well since this project isn\u0027t a real python package and thus doesn\u0027t follow the usual layout for those (not really a problem, just makes import paths weird).\n\nStyle across the various scripts in this directory doesn\u0027t appear to match pep8 or google3, so I\u0027ll just ignore those sorts of issues.",
+      "revId": "2369815556dbe06544638388b36f9a635433af3f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "45dc0115_df653c5a",
+        "filename": "simpleperf/scripts/run_simpleperf_without_usb_connection.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2018-04-12T18:48:40Z",
+      "side": 1,
+      "message": "What for? Why so long?",
+      "revId": "2369815556dbe06544638388b36f9a635433af3f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2cc81d84_f2cdd51c",
+        "filename": "simpleperf/scripts/run_simpleperf_without_usb_connection.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2018-04-12T18:48:40Z",
+      "side": 1,
+      "message": "Can condense these two lines into `if subproc.poll() is None:`",
+      "revId": "2369815556dbe06544638388b36f9a635433af3f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2898a9d4_9c5b182c",
+        "filename": "simpleperf/scripts/run_simpleperf_without_usb_connection.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2018-04-12T18:48:40Z",
+      "side": 1,
+      "message": "Unnecessary docstring.",
+      "range": {
+        "startLine": 64,
+        "startChar": 20,
+        "endLine": 64,
+        "endChar": 23
+      },
+      "revId": "2369815556dbe06544638388b36f9a635433af3f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8849b744_b8cca1d9",
+        "filename": "simpleperf/scripts/run_simpleperf_without_usb_connection.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2018-04-12T18:48:40Z",
+      "side": 1,
+      "message": "`-SIGHUP` instead?",
+      "range": {
+        "startLine": 66,
+        "startChar": 36,
+        "endLine": 66,
+        "endChar": 38
+      },
+      "revId": "2369815556dbe06544638388b36f9a635433af3f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7b7f809f_58e73af2",
+        "filename": "simpleperf/scripts/run_simpleperf_without_usb_connection.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2018-04-12T18:48:40Z",
+      "side": 1,
+      "message": "```\nwhile adb.run([\u0027shell\u0027, \u0027pidof\u0027, \u0027simpleperf\u0027]):\n    time.sleep(1)\n```",
+      "revId": "2369815556dbe06544638388b36f9a635433af3f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
