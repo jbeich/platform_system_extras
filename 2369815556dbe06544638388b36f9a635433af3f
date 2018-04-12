@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "d3f62a99_63a8489c",
+        "filename": "simpleperf/scripts/run_simpleperf_without_usb_connection.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-04-12T19:53:23Z",
+      "side": 1,
+      "message": "If I disable relative import, I will need to run with `python -m scripts.run_simpleperf_without_usb_connection` instead of `python run_simpleperf_without_usb_connection.py`. I feel it is not convenient to users.\nSo disable it in pylintrc. Also disable the warning of missing docstrings. Because for some functions, I think the function name is enough. I will run pylint on all new code.",
+      "parentUuid": "c70df026_2e16dd4b",
+      "revId": "2369815556dbe06544638388b36f9a635433af3f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "45dc0115_df653c5a",
         "filename": "simpleperf/scripts/run_simpleperf_without_usb_connection.py",
         "patchSetId": 4
@@ -30,6 +48,24 @@
       "writtenOn": "2018-04-12T18:48:40Z",
       "side": 1,
       "message": "What for? Why so long?",
+      "revId": "2369815556dbe06544638388b36f9a635433af3f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "28d16058_91b94c6d",
+        "filename": "simpleperf/scripts/run_simpleperf_without_usb_connection.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-04-12T19:53:23Z",
+      "side": 1,
+      "message": "comment added. I tried 1 second, and sometimes it ended before simpleperf failed. So use 2 seconds.",
+      "parentUuid": "45dc0115_df653c5a",
       "revId": "2369815556dbe06544638388b36f9a635433af3f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
@@ -50,6 +86,24 @@
       "revId": "2369815556dbe06544638388b36f9a635433af3f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "78eb58c5_bf89e977",
+        "filename": "simpleperf/scripts/run_simpleperf_without_usb_connection.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-04-12T19:53:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2cc81d84_f2cdd51c",
+      "revId": "2369815556dbe06544638388b36f9a635433af3f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -76,6 +130,30 @@
     },
     {
       "key": {
+        "uuid": "dd4c3345_81870ba0",
+        "filename": "simpleperf/scripts/run_simpleperf_without_usb_connection.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-04-12T19:53:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2898a9d4_9c5b182c",
+      "range": {
+        "startLine": 64,
+        "startChar": 20,
+        "endLine": 64,
+        "endChar": 23
+      },
+      "revId": "2369815556dbe06544638388b36f9a635433af3f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8849b744_b8cca1d9",
         "filename": "simpleperf/scripts/run_simpleperf_without_usb_connection.py",
         "patchSetId": 4
@@ -87,6 +165,30 @@
       "writtenOn": "2018-04-12T18:48:40Z",
       "side": 1,
       "message": "`-SIGHUP` instead?",
+      "range": {
+        "startLine": 66,
+        "startChar": 36,
+        "endLine": 66,
+        "endChar": 38
+      },
+      "revId": "2369815556dbe06544638388b36f9a635433af3f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d725f926_806a93fd",
+        "filename": "simpleperf/scripts/run_simpleperf_without_usb_connection.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-04-12T19:53:23Z",
+      "side": 1,
+      "message": "Because pkill on Android N only supports -l option.\nusage: pkill [-l SIGNAL] [PATTERN]",
+      "parentUuid": "8849b744_b8cca1d9",
       "range": {
         "startLine": 66,
         "startChar": 36,
@@ -113,6 +215,24 @@
       "revId": "2369815556dbe06544638388b36f9a635433af3f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f6409261_84a077af",
+        "filename": "simpleperf/scripts/run_simpleperf_without_usb_connection.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-04-12T19:53:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7b7f809f_58e73af2",
+      "revId": "2369815556dbe06544638388b36f9a635433af3f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
