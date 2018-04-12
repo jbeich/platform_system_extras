@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5054f897_f540d41d",
+        "filename": "simpleperf/scripts/pylintrc",
+        "patchSetId": 5
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2018-04-12T20:12:50Z",
+      "side": 1,
+      "message": "You can actually write this as `disable\u003dmissing-docstring,relative-import`, btw. Optional, just fyi.",
+      "range": {
+        "startLine": 4,
+        "startChar": 8,
+        "endLine": 5,
+        "endChar": 0
+      },
+      "revId": "d5d9c4293b3d8b659905770bb9c501c6fa8e7c6f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}

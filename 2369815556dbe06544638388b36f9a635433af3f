@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "6e4837a0_23ee3936",
+        "filename": "simpleperf/scripts/run_simpleperf_without_usb_connection.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2018-04-12T20:12:50Z",
+      "side": 1,
+      "message": "SGTM",
+      "parentUuid": "d3f62a99_63a8489c",
+      "revId": "2369815556dbe06544638388b36f9a635433af3f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "45dc0115_df653c5a",
         "filename": "simpleperf/scripts/run_simpleperf_without_usb_connection.py",
         "patchSetId": 4
@@ -69,6 +87,24 @@
       "revId": "2369815556dbe06544638388b36f9a635433af3f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b3ee1505_9304eb3e",
+        "filename": "simpleperf/scripts/run_simpleperf_without_usb_connection.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2018-04-12T20:12:50Z",
+      "side": 1,
+      "message": "Gotcha. Thanks for the comment.",
+      "parentUuid": "28d16058_91b94c6d",
+      "revId": "2369815556dbe06544638388b36f9a635433af3f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -198,6 +234,30 @@
       "revId": "2369815556dbe06544638388b36f9a635433af3f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4f5eb559_cffe7042",
+        "filename": "simpleperf/scripts/run_simpleperf_without_usb_connection.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2018-04-12T20:12:50Z",
+      "side": 1,
+      "message": "Ah, okay.",
+      "parentUuid": "d725f926_806a93fd",
+      "range": {
+        "startLine": 66,
+        "startChar": 36,
+        "endLine": 66,
+        "endChar": 38
+      },
+      "revId": "2369815556dbe06544638388b36f9a635433af3f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
