@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d39566c3_29c5b326",
+        "filename": "simpleperf/cmd_report_sample.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1065473
+      },
+      "writtenOn": "2018-04-13T22:42:23Z",
+      "side": 1,
+      "message": "I find the name confusing at first.\n\n - It makes it sound like it disables the dex loading functionality. It will show frames which are interpreted either way.  It is more about showing/hiding the internal methods.\n\n - The implementation is fairly broad.  It will actually filer out almost everything in the libart.so, right?  If that is the intent, the name should reflect that....",
+      "range": {
+        "startLine": 91,
+        "startChar": 3,
+        "endLine": 91,
+        "endChar": 26
+      },
+      "revId": "4e6b3c7abdb72c94eb288b07c78c55143e83fe0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
