@@ -573,6 +573,8 @@ class Objdump(object):
 
         # 2. Get path of objdump.
         arch = self.readelf.get_arch(real_path)
+        if arch == 'unknown':
+            return None
         objdump_path = self.objdump_paths.get(arch)
         if not objdump_path:
             objdump_path = find_tool_path('objdump', self.ndk_path, arch)
