@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "f32f74b9_8e198ea4",
+        "filename": "perfprofd/scripts/perf_proto_json2sqlite.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2018-04-16T18:50:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3e3be3a7_2a9ce8ff",
+      "range": {
+        "startLine": 143,
+        "startChar": 89,
+        "endLine": 143,
+        "endChar": 90
+      },
+      "revId": "97b2c008ea36e5b1ae5918d7aec8b2f1c4c0fa64",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e8a41b8_e1f33501",
         "filename": "perfprofd/scripts/perf_proto_json2sqlite.py",
         "patchSetId": 1
@@ -45,6 +69,30 @@
       "revId": "97b2c008ea36e5b1ae5918d7aec8b2f1c4c0fa64",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "56d67ae4_19392834",
+        "filename": "perfprofd/scripts/perf_proto_json2sqlite.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2018-04-16T18:50:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e8a41b8_e1f33501",
+      "range": {
+        "startLine": 148,
+        "startChar": 79,
+        "endLine": 148,
+        "endChar": 80
+      },
+      "revId": "97b2c008ea36e5b1ae5918d7aec8b2f1c4c0fa64",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "71f6d93e_63d406f6",
+        "filename": "perfprofd/scripts/perf_proto_stack_sqlite_flame.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2018-04-16T18:50:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "13d0b68b_3d2b7cc1",
+      "range": {
+        "startLine": 3,
+        "startChar": 19,
+        "endLine": 3,
+        "endChar": 20
+      },
+      "revId": "97b2c008ea36e5b1ae5918d7aec8b2f1c4c0fa64",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c04689a2_a41a3a69",
         "filename": "perfprofd/scripts/perf_proto_stack_sqlite_flame.py",
         "patchSetId": 1
@@ -91,6 +163,30 @@
       "revId": "97b2c008ea36e5b1ae5918d7aec8b2f1c4c0fa64",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "69735193_bd5200b8",
+        "filename": "perfprofd/scripts/perf_proto_stack_sqlite_flame.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2018-04-16T18:50:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c04689a2_a41a3a69",
+      "range": {
+        "startLine": 39,
+        "startChar": 30,
+        "endLine": 39,
+        "endChar": 40
+      },
+      "revId": "97b2c008ea36e5b1ae5918d7aec8b2f1c4c0fa64",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "fe36ab10_63cc40ff",
+        "filename": "perfprofd/scripts/perf_proto_stack_sqlite_flame.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2018-04-16T18:50:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "12bc21b3_d40325e2",
+      "range": {
+        "startLine": 55,
+        "startChar": 48,
+        "endLine": 55,
+        "endChar": 55
+      },
+      "revId": "97b2c008ea36e5b1ae5918d7aec8b2f1c4c0fa64",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9cadbf49_040b3f3a",
         "filename": "perfprofd/scripts/perf_proto_stack_sqlite_flame.py",
         "patchSetId": 1
@@ -137,6 +257,30 @@
       "revId": "97b2c008ea36e5b1ae5918d7aec8b2f1c4c0fa64",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "82db704a_b45c65f9",
+        "filename": "perfprofd/scripts/perf_proto_stack_sqlite_flame.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2018-04-16T18:50:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9cadbf49_040b3f3a",
+      "range": {
+        "startLine": 56,
+        "startChar": 48,
+        "endLine": 56,
+        "endChar": 55
+      },
+      "revId": "97b2c008ea36e5b1ae5918d7aec8b2f1c4c0fa64",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -163,6 +307,30 @@
     },
     {
       "key": {
+        "uuid": "4dd0976c_298b7056",
+        "filename": "perfprofd/scripts/perf_proto_stack_sqlite_flame.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2018-04-16T18:50:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6b0b7c7f_fb39ac05",
+      "range": {
+        "startLine": 60,
+        "startChar": 55,
+        "endLine": 60,
+        "endChar": 58
+      },
+      "revId": "97b2c008ea36e5b1ae5918d7aec8b2f1c4c0fa64",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8a330a34_f7c14e4d",
         "filename": "perfprofd/scripts/perf_proto_stack_sqlite_flame.py",
         "patchSetId": 1
@@ -183,6 +351,30 @@
       "revId": "97b2c008ea36e5b1ae5918d7aec8b2f1c4c0fa64",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "27b4da26_ecbcad86",
+        "filename": "perfprofd/scripts/perf_proto_stack_sqlite_flame.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2018-04-16T18:50:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8a330a34_f7c14e4d",
+      "range": {
+        "startLine": 74,
+        "startChar": 31,
+        "endLine": 74,
+        "endChar": 34
+      },
+      "revId": "97b2c008ea36e5b1ae5918d7aec8b2f1c4c0fa64",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -209,6 +401,30 @@
     },
     {
       "key": {
+        "uuid": "de2bb6a7_39a519e6",
+        "filename": "perfprofd/scripts/perf_proto_stack_sqlite_flame.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2018-04-16T18:50:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b12607c5_e02eb8d4",
+      "range": {
+        "startLine": 113,
+        "startChar": 19,
+        "endLine": 113,
+        "endChar": 26
+      },
+      "revId": "97b2c008ea36e5b1ae5918d7aec8b2f1c4c0fa64",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eff7d1c3_08644232",
         "filename": "perfprofd/scripts/perf_proto_stack_sqlite_flame.py",
         "patchSetId": 1
@@ -232,6 +448,30 @@
     },
     {
       "key": {
+        "uuid": "b3d96d30_2b475367",
+        "filename": "perfprofd/scripts/perf_proto_stack_sqlite_flame.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2018-04-16T18:50:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eff7d1c3_08644232",
+      "range": {
+        "startLine": 218,
+        "startChar": 56,
+        "endLine": 218,
+        "endChar": 64
+      },
+      "revId": "97b2c008ea36e5b1ae5918d7aec8b2f1c4c0fa64",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ee8aa50a_d85094b2",
         "filename": "perfprofd/scripts/perf_proto_stack_sqlite_flame.py",
         "patchSetId": 1
@@ -243,6 +483,30 @@
       "writtenOn": "2018-04-13T17:50:33Z",
       "side": 1,
       "message": "why having this limit?",
+      "range": {
+        "startLine": 223,
+        "startChar": 92,
+        "endLine": 223,
+        "endChar": 97
+      },
+      "revId": "97b2c008ea36e5b1ae5918d7aec8b2f1c4c0fa64",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f211744b_64b64d7e",
+        "filename": "perfprofd/scripts/perf_proto_stack_sqlite_flame.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2018-04-16T18:50:41Z",
+      "side": 1,
+      "message": "Good for testing / partial parsing of a large database.",
+      "parentUuid": "ee8aa50a_d85094b2",
       "range": {
         "startLine": 223,
         "startChar": 92,
