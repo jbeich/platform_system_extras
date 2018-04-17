@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ccab0319_6e82eb99",
+        "filename": "simpleperf/read_apk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-04-17T22:38:55Z",
+      "side": 1,
+      "message": "do you want to log if you see a valid ELF header but the file has other problems?",
+      "revId": "c36ea8b95aec728b16178d411a7c817f1a0475e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
