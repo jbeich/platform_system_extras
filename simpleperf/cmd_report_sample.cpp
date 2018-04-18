@@ -365,6 +365,9 @@ bool ReportSampleCommand::DumpProtobufReport(const std::string& filename) {
       for (int i = 0; i < file.symbol_size(); ++i) {
         FprintIndented(report_fp_, 1, "symbol: %s\n", file.symbol(i).c_str());
       }
+      for (int i = 0; i < file.raw_symbol_size(); ++i) {
+        FprintIndented(report_fp_, 1, "raw_symbol: %s\n", file.raw_symbol(i).c_str());
+      }
       if (file.id() != files.size()) {
         LOG(ERROR) << "file id doesn't increase orderly, expected "
                    << files.size() << ", really " << file.id();
@@ -627,6 +630,8 @@ bool ReportSampleCommand::PrintFileInfoInProtobuf() {
     for (const auto& sym : dump_symbols) {
       std::string* symbol = file->add_symbol();
       *symbol = sym->DemangledName();
+      std::string* raw_symbol = file->add_raw_symbol();
+      *raw_symbol = sym->Name();
     }
     if (!WriteRecordInProtobuf(proto_record)) {
       return false;

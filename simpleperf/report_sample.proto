@@ -69,6 +69,9 @@ message File {
 
   // symbol table of the file.
   repeated string symbol = 3;
+
+  // symbol table of the file before demangle.
+  repeated string raw_symbol = 4;
 }
 
 message Thread {
