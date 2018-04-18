@@ -19,6 +19,7 @@
 
 #include <functional>
 #include <memory>
+#include <limits>
 #include <string>
 #include <vector>
 
@@ -47,6 +48,12 @@ class Command {
   }
 
   virtual bool Run(const std::vector<std::string>& args) = 0;
+
+  bool GetValueOption(const std::vector<std::string>& args, size_t* pi, uint64_t* value,
+                      uint64_t min = 0, uint64_t max = std::numeric_limits<uint64_t>::max(),
+                      bool allow_suffixes = false);
+  bool GetValueOption(const std::vector<std::string>& args, size_t* pi, double* value,
+                      double min = 0, double max = std::numeric_limits<double>::max());
 
  protected:
   bool NextArgumentOrError(const std::vector<std::string>& args, size_t* pi);

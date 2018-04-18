@@ -26,7 +26,6 @@
 
 #include <android-base/file.h>
 #include <android-base/logging.h>
-#include <android-base/parsedouble.h>
 #include <android-base/parseint.h>
 #include <android-base/stringprintf.h>
 #include <android-base/strings.h>
@@ -561,13 +560,11 @@ bool ReportCommand::ParseOptions(const std::vector<std::string>& args) {
       }
       Dso::SetKallsyms(kallsyms);
     } else if (args[i] == "--max-stack") {
-      if (!NextArgumentOrError(args, &i)) {
+      uint64_t value;
+      if (!GetValueOption(args, &i, &value, 0, UINT32_MAX)) {
         return false;
       }
-      if (!android::base::ParseUint(args[i].c_str(), &callgraph_max_stack_)) {
-        LOG(ERROR) << "invalid arg for --max-stack: " << args[i];
-        return false;
-      }
+      callgraph_max_stack_ = value;
     } else if (args[i] == "-n") {
       print_sample_count = true;
 
@@ -581,12 +578,8 @@ bool ReportCommand::ParseOptions(const std::vector<std::string>& args) {
       }
       report_filename_ = args[i];
     } else if (args[i] == "--percent-limit") {
-      if (!NextArgumentOrError(args, &i)) {
+      if (!GetValueOption(args, &i, &callgraph_percent_limit_)) {
         return false;
-      }
-      if (!android::base::ParseDouble(args[i].c_str(),
-                                      &callgraph_percent_limit_, 0.0)) {
-        LOG(ERROR) << "invalid arg for --percent-limit: " << args[i];
       }
     } else if (args[i] == "--pids" || args[i] == "--tids") {
       const std::string& option = args[i];
