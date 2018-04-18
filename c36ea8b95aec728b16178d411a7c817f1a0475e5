@@ -16,6 +16,24 @@
       "revId": "c36ea8b95aec728b16178d411a7c817f1a0475e5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cdb7adaa_58d583d6",
+        "filename": "simpleperf/read_apk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-04-18T17:20:31Z",
+      "side": 1,
+      "message": "Not here, here only finds the EmbeddedElf. If simpleperf needs to read symbols from the EmbeddedElf and it fails, it will report warnings in dso.cpp.",
+      "parentUuid": "ccab0319_6e82eb99",
+      "revId": "c36ea8b95aec728b16178d411a7c817f1a0475e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
