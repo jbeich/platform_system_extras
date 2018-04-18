@@ -50,6 +50,8 @@ class Command {
 
  protected:
   bool NextArgumentOrError(const std::vector<std::string>& args, size_t* pi);
+  bool GetValueForOption(const std::vector<std::string>& args, size_t* pi, double* value,
+                         double min = 1e-9);
   void ReportUnknownOption(const std::vector<std::string>& args, size_t i);
 
  private:
