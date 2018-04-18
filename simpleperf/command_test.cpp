@@ -43,3 +43,22 @@ TEST(command, GetAllCommands) {
   UnRegisterCommand("mock1");
   ASSERT_EQ(command_count, GetAllCommandNames().size());
 }
+
+TEST(command, GetValueForOption) {
+  MockCommand command;
+  uint64_t value;
+  size_t i;
+  for (bool allow_suffixes : {true, false}) {
+    i = 0;
+    ASSERT_TRUE(command.GetValueForOption({"-s", "156"}, &i, &value, 0, allow_suffixes));
+    ASSERT_EQ(i, 1u);
+    ASSERT_EQ(value, 156u);
+  }
+  i = 0;
+  ASSERT_TRUE(command.GetValueForOption({"-s", "156k"}, &i, &value, 0, true));
+  ASSERT_EQ(value, 156 * (1ULL << 10));
+  i = 0;
+  ASSERT_FALSE(command.GetValueForOption({"-s"}, &i, &value, 0, true));
+  i = 0;
+  ASSERT_FALSE(command.GetValueForOption({"-s", "0"}, &i, &value, 1, true));
+}

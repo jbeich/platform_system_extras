@@ -48,6 +48,9 @@ class Command {
 
   virtual bool Run(const std::vector<std::string>& args) = 0;
 
+  bool GetValueForOption(const std::vector<std::string>& args, size_t* pi, uint64_t* value,
+                         uint64_t min = 0, bool allow_suffixes = false);
+
  protected:
   bool NextArgumentOrError(const std::vector<std::string>& args, size_t* pi);
   void ReportUnknownOption(const std::vector<std::string>& args, size_t i);

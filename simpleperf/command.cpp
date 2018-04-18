@@ -22,6 +22,7 @@
 #include <vector>
 
 #include <android-base/logging.h>
+#include <android-base/parseint.h>
 #include <android-base/quick_exit.h>
 
 #include "utils.h"
@@ -33,6 +34,19 @@ bool Command::NextArgumentOrError(const std::vector<std::string>& args, size_t* 
     return false;
   }
   ++*pi;
+  return true;
+}
+
+bool Command::GetValueForOption(const std::vector<std::string>& args, size_t* pi, uint64_t* value,
+                                uint64_t min, bool allow_suffixes) {
+  if (!NextArgumentOrError(args, pi)) {
+    return false;
+  }
+  if (!android::base::ParseUint(args[*pi].c_str(), value, std::numeric_limits<uint64_t>::max(),
+                                allow_suffixes) || *value < min) {
+    LOG(ERROR) << "Invalid argument for option " << args[*pi - 1] << ": " << args[*pi];
+    return false;
+  }
   return true;
 }
 

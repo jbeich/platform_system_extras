@@ -189,6 +189,7 @@ class RecordCommand : public Command {
 "-o record_file_name    Set record file name, default is perf.data.\n"
 "--exit-with-parent            Stop recording when the process starting\n"
 "                              simpleperf dies.\n"
+"--size-limit SIZE[K|M|G]      Stop recording after SIZE bytes of records.\n"
 "--start_profiling_fd fd_no    After starting profiling, write \"STARTED\" to\n"
 "                              <fd_no>, then close <fd_no>.\n"
 "--symfs <dir>    Look for files with symbols relative to this directory.\n"
@@ -300,6 +301,7 @@ class RecordCommand : public Command {
   bool in_app_context_;
   bool trace_offcpu_;
   bool exclude_kernel_callchain_;
+  uint64_t size_limit_in_bytes_ = 0;
 
   // For CallChainJoiner
   bool allow_callchain_joiner_;
@@ -754,6 +756,10 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
         LOG(ERROR) << "unexpected option " << args[i];
         return false;
       }
+    } else if (args[i] == "--size-limit") {
+      if (!GetValueForOption(args, &i, &size_limit_in_bytes_, 1, true)) {
+        return false;
+      }
     } else if (args[i] == "--start_profiling_fd") {
       if (!NextArgumentOrError(args, &i)) {
         return false;
@@ -1050,6 +1056,11 @@ bool RecordCommand::DumpThreadCommAndMmaps(const perf_event_attr& attr,
 bool RecordCommand::ProcessRecord(Record* record) {
   if (ShouldOmitRecord(record)) {
     return true;
+  }
+  if (size_limit_in_bytes_ > 0u) {
+    if (size_limit_in_bytes_ < record_file_writer_->GetDataSectionSize()) {
+      return event_selection_set_.GetIOEventLoop()->ExitLoop();
+    }
   }
   last_record_timestamp_ = record->Timestamp();
   if (unwind_dwarf_callchain_) {
