@@ -1,0 +1,238 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "087476c8_5d60a586",
+        "filename": "simpleperf/scripts/annotate.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2018-04-18T18:58:04Z",
+      "side": 1,
+      "message": "with",
+      "range": {
+        "startLine": 62,
+        "startChar": 64,
+        "endLine": 62,
+        "endChar": 66
+      },
+      "revId": "b67cfa6a101486d06dcab043790e4f45021215ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "744b286a_e2ecc5fd",
+        "filename": "simpleperf/scripts/app_profiler.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2018-04-18T18:58:04Z",
+      "side": 1,
+      "message": "Nit: maybe make it a warning or phrase as \"isn\u0027t supported...\". \"isn\u0027t tested\" sounds more like \"you\u0027re on your own, but it might work\" to me.",
+      "revId": "b67cfa6a101486d06dcab043790e4f45021215ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "61ca0903_16258f62",
+        "filename": "simpleperf/scripts/app_profiler.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2018-04-18T18:58:04Z",
+      "side": 1,
+      "message": "Is this supposed to be an abstract class, or is it just normal for the base implementation to do nothing here? If you\u0027re trying to make an abstract class, you should use `raise NotImplementedError` for methods that you want to be, in essence, pure virtual.",
+      "revId": "b67cfa6a101486d06dcab043790e4f45021215ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "90b334ac_dd3d8b9a",
+        "filename": "simpleperf/scripts/app_profiler.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2018-04-18T18:58:04Z",
+      "side": 1,
+      "message": "Shouldn\u0027t have spaces padding docstrings",
+      "range": {
+        "startLine": 193,
+        "startChar": 11,
+        "endLine": 193,
+        "endChar": 12
+      },
+      "revId": "b67cfa6a101486d06dcab043790e4f45021215ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "17c13564_5d5d9eb4",
+        "filename": "simpleperf/scripts/app_profiler.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2018-04-18T18:58:04Z",
+      "side": 1,
+      "message": "Should there be an:\n\n    else:\n        raise RuntimeError(\u0027idk what to start\u0027)\n\nor something here?",
+      "revId": "b67cfa6a101486d06dcab043790e4f45021215ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8d6f04fd_1411981c",
+        "filename": "simpleperf/scripts/app_profiler.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2018-04-18T18:58:04Z",
+      "side": 1,
+      "message": "You want:\n\n    some_group_name \u003d parser.add_mutually_exclusive_group(required\u003dTrue)\n    some_group_name.add_argument(\u0027--app\u0027, ...)\n    some_group_name.add_argument(\u0027--native_program\u0027, ...)\n    some_group_name.add_argument(\u0027--cmd\u0027, ...)\n\nThat will enforce this behavior.",
+      "range": {
+        "startLine": 395,
+        "startChar": 0,
+        "endLine": 405,
+        "endChar": 77
+      },
+      "revId": "b67cfa6a101486d06dcab043790e4f45021215ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "061819ce_7f0bc2c1",
+        "filename": "simpleperf/scripts/app_profiler.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2018-04-18T18:58:04Z",
+      "side": 1,
+      "message": "Although if you have this behavior maybe what you actually want is for app, cmd, and native_program to be subparsers and have --activity and --test be mutually exclusive groups of the app subparser.",
+      "revId": "b67cfa6a101486d06dcab043790e4f45021215ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1b0623d1_d987c602",
+        "filename": "simpleperf/scripts/app_profiler.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2018-04-18T18:58:04Z",
+      "side": 1,
+      "message": "Which would also help here",
+      "revId": "b67cfa6a101486d06dcab043790e4f45021215ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8e240c10_17e2d2f2",
+        "filename": "simpleperf/scripts/app_profiler.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2018-04-18T18:58:04Z",
+      "side": 1,
+      "message": "def extant_dir(arg):\n    \"\"\"ArgumentParser type that only accepts extant directories.\n\n    Args:\n        arg: The string argument given on the command line.\n\n    Returns: The argument as a realpath.\n\n    Raises:\n        argparse.ArgumentTypeError: The given path is not a directory.\n    \"\"\"\n    path \u003d os.path.realpath(arg)\n    if not os.path.isdir(path):\n        raise argparse.ArgumentTypeError(\u0027{} is not a directory.\u0027.format(path))\n    return path\n\nparser.add_argument(\u0027--native-lib-dir\u0027, type\u003dextant_dir, ...)",
+      "range": {
+        "startLine": 411,
+        "startChar": 8,
+        "endLine": 412,
+        "endChar": 54
+      },
+      "revId": "b67cfa6a101486d06dcab043790e4f45021215ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a976c12b_8720cacc",
+        "filename": "simpleperf/scripts/app_profiler.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2018-04-18T18:58:04Z",
+      "side": 1,
+      "message": "Ditto",
+      "revId": "b67cfa6a101486d06dcab043790e4f45021215ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4de36295_835157ad",
+        "filename": "simpleperf/scripts/app_profiler.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 419,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2018-04-18T18:58:04Z",
+      "side": 1,
+      "message": "And with the above dealt with you don\u0027t need this any more.",
+      "revId": "b67cfa6a101486d06dcab043790e4f45021215ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "92dc7a05_6b187a20",
+        "filename": "simpleperf/scripts/pylintrc",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2018-04-18T18:58:04Z",
+      "side": 1,
+      "message": "You can say just \"design\" and get this whole group and more similar things that aren\u0027t particularly helpful, btw.",
+      "range": {
+        "startLine": 4,
+        "startChar": 20,
+        "endLine": 4,
+        "endChar": 89
+      },
+      "revId": "b67cfa6a101486d06dcab043790e4f45021215ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
