@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "20a86f7d_6b33911e",
+        "filename": "simpleperf/scripts/annotate.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-04-18T21:22:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "087476c8_5d60a586",
+      "range": {
+        "startLine": 62,
+        "startChar": 64,
+        "endLine": 62,
+        "endChar": 66
+      },
+      "revId": "b67cfa6a101486d06dcab043790e4f45021215ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "744b286a_e2ecc5fd",
         "filename": "simpleperf/scripts/app_profiler.py",
         "patchSetId": 1
@@ -36,6 +60,24 @@
       "writtenOn": "2018-04-18T18:58:04Z",
       "side": 1,
       "message": "Nit: maybe make it a warning or phrase as \"isn\u0027t supported...\". \"isn\u0027t tested\" sounds more like \"you\u0027re on your own, but it might work\" to me.",
+      "revId": "b67cfa6a101486d06dcab043790e4f45021215ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "793603e6_84da0211",
+        "filename": "simpleperf/scripts/app_profiler.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-04-18T21:22:46Z",
+      "side": 1,
+      "message": "Done. changed to \"isn\u0027t supported\".",
+      "parentUuid": "744b286a_e2ecc5fd",
       "revId": "b67cfa6a101486d06dcab043790e4f45021215ad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
@@ -56,6 +98,24 @@
       "revId": "b67cfa6a101486d06dcab043790e4f45021215ad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ada80244_5306c29e",
+        "filename": "simpleperf/scripts/app_profiler.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-04-18T21:22:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "61ca0903_16258f62",
+      "revId": "b67cfa6a101486d06dcab043790e4f45021215ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -82,6 +142,30 @@
     },
     {
       "key": {
+        "uuid": "29f775bd_3ec0bc5e",
+        "filename": "simpleperf/scripts/app_profiler.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-04-18T21:22:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "90b334ac_dd3d8b9a",
+      "range": {
+        "startLine": 193,
+        "startChar": 11,
+        "endLine": 193,
+        "endChar": 12
+      },
+      "revId": "b67cfa6a101486d06dcab043790e4f45021215ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "17c13564_5d5d9eb4",
         "filename": "simpleperf/scripts/app_profiler.py",
         "patchSetId": 1
@@ -96,6 +180,24 @@
       "revId": "b67cfa6a101486d06dcab043790e4f45021215ad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e6e36d61_90cea94b",
+        "filename": "simpleperf/scripts/app_profiler.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-04-18T21:22:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "17c13564_5d5d9eb4",
+      "revId": "b67cfa6a101486d06dcab043790e4f45021215ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -122,6 +224,30 @@
     },
     {
       "key": {
+        "uuid": "61a772af_e844e668",
+        "filename": "simpleperf/scripts/app_profiler.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-04-18T21:22:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8d6f04fd_1411981c",
+      "range": {
+        "startLine": 395,
+        "startChar": 0,
+        "endLine": 405,
+        "endChar": 77
+      },
+      "revId": "b67cfa6a101486d06dcab043790e4f45021215ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "061819ce_7f0bc2c1",
         "filename": "simpleperf/scripts/app_profiler.py",
         "patchSetId": 1
@@ -133,6 +259,24 @@
       "writtenOn": "2018-04-18T18:58:04Z",
       "side": 1,
       "message": "Although if you have this behavior maybe what you actually want is for app, cmd, and native_program to be subparsers and have --activity and --test be mutually exclusive groups of the app subparser.",
+      "revId": "b67cfa6a101486d06dcab043790e4f45021215ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6f857bba_4a09ba7e",
+        "filename": "simpleperf/scripts/app_profiler.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-04-18T21:22:46Z",
+      "side": 1,
+      "message": "Created a mutually exclusive group for activity and test directly in parser. Because I want app, cmd, native_program in another mutually exclusive group.",
+      "parentUuid": "061819ce_7f0bc2c1",
       "revId": "b67cfa6a101486d06dcab043790e4f45021215ad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
@@ -179,6 +323,30 @@
     },
     {
       "key": {
+        "uuid": "b9be1999_6f3ed64b",
+        "filename": "simpleperf/scripts/app_profiler.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-04-18T21:22:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e240c10_17e2d2f2",
+      "range": {
+        "startLine": 411,
+        "startChar": 8,
+        "endLine": 412,
+        "endChar": 54
+      },
+      "revId": "b67cfa6a101486d06dcab043790e4f45021215ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a976c12b_8720cacc",
         "filename": "simpleperf/scripts/app_profiler.py",
         "patchSetId": 1
@@ -193,6 +361,24 @@
       "revId": "b67cfa6a101486d06dcab043790e4f45021215ad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a1167511_143f41aa",
+        "filename": "simpleperf/scripts/app_profiler.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-04-18T21:22:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a976c12b_8720cacc",
+      "revId": "b67cfa6a101486d06dcab043790e4f45021215ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -233,6 +419,30 @@
       "revId": "b67cfa6a101486d06dcab043790e4f45021215ad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "376cada4_783b40f6",
+        "filename": "simpleperf/scripts/pylintrc",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-04-18T21:22:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "92dc7a05_6b187a20",
+      "range": {
+        "startLine": 4,
+        "startChar": 20,
+        "endLine": 4,
+        "endChar": 89
+      },
+      "revId": "b67cfa6a101486d06dcab043790e4f45021215ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
