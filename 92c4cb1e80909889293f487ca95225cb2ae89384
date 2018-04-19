@@ -16,6 +16,24 @@
       "revId": "92c4cb1e80909889293f487ca95225cb2ae89384",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "51baf20b_26c8d4e8",
+        "filename": "simpleperf/dso_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-04-19T17:37:56Z",
+      "side": 1,
+      "message": "This is to read file written by windows python. Changing python code to use open(\u0027wb\u0027) also works.",
+      "parentUuid": "e17f516d_fb35e777",
+      "revId": "92c4cb1e80909889293f487ca95225cb2ae89384",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
