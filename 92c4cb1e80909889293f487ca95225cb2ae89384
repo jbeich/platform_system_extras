@@ -34,6 +34,24 @@
       "revId": "92c4cb1e80909889293f487ca95225cb2ae89384",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9692048d_246f3bcc",
+        "filename": "simpleperf/dso_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-04-19T18:30:13Z",
+      "side": 1,
+      "message": "wouldn\u0027t always using binary mode in Python be the safer choice? (that\u0027s what we do in in libbase.)",
+      "parentUuid": "51baf20b_26c8d4e8",
+      "revId": "92c4cb1e80909889293f487ca95225cb2ae89384",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
