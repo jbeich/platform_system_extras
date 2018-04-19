@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2c2792bc_f1f3196d",
+        "filename": "perfprofd/configreader.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-04-19T23:29:28Z",
+      "side": 1,
+      "message": "is `pid` a better name?",
+      "range": {
+        "startLine": 148,
+        "startChar": 20,
+        "endLine": 148,
+        "endChar": 27
+      },
+      "revId": "abc57274490870903f591140ad3a5cd509a0b372",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
