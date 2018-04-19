@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e17f516d_fb35e777",
+        "filename": "simpleperf/dso_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-04-19T05:14:10Z",
+      "side": 1,
+      "message": "is this so Windows Python can read the file? there isn\u0027t a way to get Python to hide whether line endings are \\n or \\r\\n from us?",
+      "revId": "92c4cb1e80909889293f487ca95225cb2ae89384",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
