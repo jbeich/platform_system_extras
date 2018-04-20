@@ -181,10 +181,13 @@ bool OfflineUnwinder::UnwindCallChain(const ThreadEntry& thread, const RegSet& r
   }
   std::vector<backtrace_frame_data_t> frames;
   BacktraceUnwindError error;
-  if (Backtrace::UnwindOffline(unwind_regs.get(), cached_map.map.get(), stack_info, &frames, &error)) {
+  if (Backtrace::UnwindOffline(unwind_regs.get(), cached_map.map.get(), stack_info, &frames,
+                               &error)) {
     for (auto& frame : frames) {
       // Unwinding in arm architecture can return 0 pc address.
-      if (frame.pc == 0) {
+      // If frame.map.start == 0, this frame shows an instructions only exist in memory, or is a
+      // wrong frame. We want to remove the following callchain in either case.
+      if (frame.pc == 0 || frame.map.start == 0) {
         break;
       }
       ips->push_back(frame.pc);
