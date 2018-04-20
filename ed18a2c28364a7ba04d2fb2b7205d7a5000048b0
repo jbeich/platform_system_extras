@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "1b65b5f2_954a5851",
+        "filename": "simpleperf/OfflineUnwinder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-04-20T18:20:09Z",
+      "side": 1,
+      "message": "yes, but not including maps for JITed code, for which we created fake maps from jit symfile linked list. comment changed.",
+      "parentUuid": "6cd06d9d_ebeb4339",
+      "range": {
+        "startLine": 190,
+        "startChar": 33,
+        "endLine": 190,
+        "endChar": 77
+      },
+      "revId": "ed18a2c28364a7ba04d2fb2b7205d7a5000048b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "24dfc90b_af1f2f8c",
         "filename": "simpleperf/OfflineUnwinder.cpp",
         "patchSetId": 3
@@ -36,6 +60,24 @@
       "writtenOn": "2018-04-20T03:04:16Z",
       "side": 1,
       "message": "\"wrong\" \u003d\u003d \"incorrectly unwound\"?",
+      "revId": "ed18a2c28364a7ba04d2fb2b7205d7a5000048b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ccd39f8f_4b921d96",
+        "filename": "simpleperf/OfflineUnwinder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-04-20T18:20:09Z",
+      "side": 1,
+      "message": "yes, comment changed.",
+      "parentUuid": "24dfc90b_af1f2f8c",
       "revId": "ed18a2c28364a7ba04d2fb2b7205d7a5000048b0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
