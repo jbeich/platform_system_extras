@@ -119,7 +119,7 @@ class NativeLibDownloader(object):
             os.remove(self.build_id_list_file)
         self.adb.run(['pull', self.dir_on_device + self.build_id_list_file])
         if os.path.exists(self.build_id_list_file):
-            with open(self.build_id_list_file) as fh:
+            with open(self.build_id_list_file, 'rb') as fh:
                 for line in fh.readlines():
                     line = line.strip()
                     items = line.split('=')
@@ -138,7 +138,7 @@ class NativeLibDownloader(object):
                 name = self.device_build_id_map[build_id]
                 self.adb.run(['shell', 'rm', self.dir_on_device + name])
         # Push new build_id_list on device.
-        with open(self.build_id_list_file, 'w') as fh:
+        with open(self.build_id_list_file, 'wb') as fh:
             for build_id in self.host_build_id_map:
                 fh.write('%s=%s\n' % (build_id, self.host_build_id_map[build_id].name))
         self.adb.check_run(['push', self.build_id_list_file,
