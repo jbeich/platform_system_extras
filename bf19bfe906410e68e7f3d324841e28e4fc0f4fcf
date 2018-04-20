@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4c18bda2_f9bc224d",
+        "filename": "simpleperf/command.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-04-20T22:50:28Z",
+      "side": 1,
+      "message": "GetByteCountOption?",
+      "range": {
+        "startLine": 40,
+        "startChar": 14,
+        "endLine": 40,
+        "endChar": 31
+      },
+      "revId": "bf19bfe906410e68e7f3d324841e28e4fc0f4fcf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "506d5fcd_0f57c612",
+        "filename": "simpleperf/command.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-04-20T22:50:28Z",
+      "side": 1,
+      "message": "why do you need `allow_suffixes`?",
+      "range": {
+        "startLine": 41,
+        "startChar": 51,
+        "endLine": 41,
+        "endChar": 65
+      },
+      "revId": "bf19bfe906410e68e7f3d324841e28e4fc0f4fcf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d7550ca9_7b097684",
+        "filename": "simpleperf/command.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-04-20T22:50:28Z",
+      "side": 1,
+      "message": "crap, i wish we\u0027d thought of this use of an unsigned min in the beginning... we should probably change ParseUint to support `min` anyway, though it\u0027ll mean fixing a couple of existing callers (or having max and min be the wrong way round, which seems bad).",
+      "range": {
+        "startLine": 41,
+        "startChar": 32,
+        "endLine": 41,
+        "endChar": 44
+      },
+      "revId": "bf19bfe906410e68e7f3d324841e28e4fc0f4fcf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e6103710_ae6bf7e1",
+        "filename": "simpleperf/scripts/run_simpleperf_without_usb_connection.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-04-20T22:50:28Z",
+      "side": 1,
+      "message": "not sure we need to explain this, since this is how other tools work.\n\n\"Default is unlimited.\" seems worth saying?",
+      "range": {
+        "startLine": 89,
+        "startChar": 65,
+        "endLine": 89,
+        "endChar": 87
+      },
+      "revId": "bf19bfe906410e68e7f3d324841e28e4fc0f4fcf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
