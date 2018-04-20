@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e7992ed4_c7a4a13f",
+        "filename": "simpleperf/scripts/app_profiler.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-04-20T06:22:05Z",
+      "side": 1,
+      "message": "is this a deliberate addition or testing code?",
+      "revId": "2969a9e6379e776f1e43b625b7b7387efff2e47c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
