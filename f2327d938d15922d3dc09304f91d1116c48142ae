@@ -22,6 +22,30 @@
       "revId": "f2327d938d15922d3dc09304f91d1116c48142ae",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "692f9505_22cfa7f5",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-04-20T22:23:04Z",
+      "side": 1,
+      "message": "Switched to android::base::ParseUint.",
+      "parentUuid": "5b7474e4_3d68b8db",
+      "range": {
+        "startLine": 192,
+        "startChar": 59,
+        "endLine": 192,
+        "endChar": 60
+      },
+      "revId": "f2327d938d15922d3dc09304f91d1116c48142ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
