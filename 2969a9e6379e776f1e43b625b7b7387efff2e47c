@@ -16,6 +16,24 @@
       "revId": "2969a9e6379e776f1e43b625b7b7387efff2e47c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "17cecc95_6143b3b6",
+        "filename": "simpleperf/scripts/app_profiler.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-04-20T18:36:58Z",
+      "side": 1,
+      "message": "a deliberate addition to avoid leaving garbage files after running app_profiler.py.",
+      "parentUuid": "e7992ed4_c7a4a13f",
+      "revId": "2969a9e6379e776f1e43b625b7b7387efff2e47c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
