@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5b7474e4_3d68b8db",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-04-20T02:53:37Z",
+      "side": 1,
+      "message": "s/M bytes/MiB/\n\nbut is there a reason for this? should we just add something to libbase, like ParseInt but allowing the usual multipliers? similar to https://cs.corp.google.com/android/external/toybox/lib/lib.c?type\u003dcs\u0026q\u003datolx+file:toybox+file:lib/\u0026l\u003d302 ?\n\ni\u0027ve been meaning to do that so i can delete https://cs.corp.google.com/android/system/core/fastboot/fastboot.cpp?q\u003dfile:fastboot+parse\u0026l\u003d1200\n\ni\u0027ve uploaded https://android-review.googlesource.com/#/c/platform/system/core/+/668441/",
+      "range": {
+        "startLine": 192,
+        "startChar": 59,
+        "endLine": 192,
+        "endChar": 60
+      },
+      "revId": "f2327d938d15922d3dc09304f91d1116c48142ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
