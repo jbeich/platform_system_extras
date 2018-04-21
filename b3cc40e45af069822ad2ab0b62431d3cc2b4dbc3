@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "6a39c24c_5643cd40",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 715,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-04-21T01:28:44Z",
+      "side": 1,
+      "message": "Changed GetUintOption into a template member function. Because there are values of different types to fill: uint64_t, size_t, uint32_t, int.",
+      "parentUuid": "75b20da6_e7e085c2",
+      "range": {
+        "startLine": 715,
+        "startChar": 45,
+        "endLine": 715,
+        "endChar": 81
+      },
+      "revId": "b3cc40e45af069822ad2ab0b62431d3cc2b4dbc3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2f3cc52e_3300c0a3",
         "filename": "simpleperf/command.h",
         "patchSetId": 3
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "d311832a_2a54c9a9",
+        "filename": "simpleperf/command.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-04-21T01:28:44Z",
+      "side": 1,
+      "message": "Since default value of allow_suffixes is false, so there is no need to write extra code to disallow it. And there is only once place to set allow_suffixes to true.",
+      "parentUuid": "2f3cc52e_3300c0a3",
+      "range": {
+        "startLine": 54,
+        "startChar": 22,
+        "endLine": 54,
+        "endChar": 49
+      },
+      "revId": "b3cc40e45af069822ad2ab0b62431d3cc2b4dbc3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae5dd8f7_5918f7b4",
         "filename": "simpleperf/command.h",
         "patchSetId": 3
@@ -59,6 +107,30 @@
       "writtenOn": "2018-04-21T00:31:32Z",
       "side": 1,
       "message": "GetUintOption/GetDoubleOption rather than overloading?",
+      "range": {
+        "startLine": 55,
+        "startChar": 7,
+        "endLine": 55,
+        "endChar": 21
+      },
+      "revId": "b3cc40e45af069822ad2ab0b62431d3cc2b4dbc3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "44c25713_0a3494da",
+        "filename": "simpleperf/command.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-04-21T01:28:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae5dd8f7_5918f7b4",
       "range": {
         "startLine": 55,
         "startChar": 7,

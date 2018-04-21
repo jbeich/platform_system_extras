@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "29808856_1ee67a8c",
+        "filename": "simpleperf/command.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-04-21T01:28:44Z",
+      "side": 1,
+      "message": "changed to GetUintOption to parse both uint and byte count.",
+      "parentUuid": "4c18bda2_f9bc224d",
+      "range": {
+        "startLine": 40,
+        "startChar": 14,
+        "endLine": 40,
+        "endChar": 31
+      },
+      "revId": "bf19bfe906410e68e7f3d324841e28e4fc0f4fcf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "506d5fcd_0f57c612",
         "filename": "simpleperf/command.cpp",
         "patchSetId": 2
@@ -71,6 +95,54 @@
     },
     {
       "key": {
+        "uuid": "9458a05e_4394e821",
+        "filename": "simpleperf/command.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-04-21T01:28:44Z",
+      "side": 1,
+      "message": "same reason as L40.",
+      "parentUuid": "506d5fcd_0f57c612",
+      "range": {
+        "startLine": 41,
+        "startChar": 51,
+        "endLine": 41,
+        "endChar": 65
+      },
+      "revId": "bf19bfe906410e68e7f3d324841e28e4fc0f4fcf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7dc8fc29_c2958961",
+        "filename": "simpleperf/command.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-04-21T01:28:44Z",
+      "side": 1,
+      "message": "I am fine with current ParseUint interface, since min check isn\u0027t hard to add. But also fine to add min arg at the end of ParseUint.",
+      "parentUuid": "d7550ca9_7b097684",
+      "range": {
+        "startLine": 41,
+        "startChar": 32,
+        "endLine": 41,
+        "endChar": 44
+      },
+      "revId": "bf19bfe906410e68e7f3d324841e28e4fc0f4fcf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e6103710_ae6bf7e1",
         "filename": "simpleperf/scripts/run_simpleperf_without_usb_connection.py",
         "patchSetId": 2
@@ -82,6 +154,30 @@
       "writtenOn": "2018-04-20T22:50:28Z",
       "side": 1,
       "message": "not sure we need to explain this, since this is how other tools work.\n\n\"Default is unlimited.\" seems worth saying?",
+      "range": {
+        "startLine": 89,
+        "startChar": 65,
+        "endLine": 89,
+        "endChar": 87
+      },
+      "revId": "bf19bfe906410e68e7f3d324841e28e4fc0f4fcf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "00d30357_0fa91c55",
+        "filename": "simpleperf/scripts/run_simpleperf_without_usb_connection.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-04-21T01:28:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e6103710_ae6bf7e1",
       "range": {
         "startLine": 89,
         "startChar": 65,
