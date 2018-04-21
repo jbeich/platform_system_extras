@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "75b20da6_e7e085c2",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 715,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-04-21T00:31:32Z",
+      "side": 1,
+      "message": "just make `value` a size_t instead? (here and elsewhere.)",
+      "range": {
+        "startLine": 715,
+        "startChar": 45,
+        "endLine": 715,
+        "endChar": 81
+      },
+      "revId": "b3cc40e45af069822ad2ab0b62431d3cc2b4dbc3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2f3cc52e_3300c0a3",
+        "filename": "simpleperf/command.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-04-21T00:31:32Z",
+      "side": 1,
+      "message": "should we just have this always be true? that\u0027s how toybox works. sure, it\u0027s not very useful to be able to say --fd 1k, but there\u0027s no real reason to write extra code to disallow it...",
+      "range": {
+        "startLine": 54,
+        "startChar": 22,
+        "endLine": 54,
+        "endChar": 49
+      },
+      "revId": "b3cc40e45af069822ad2ab0b62431d3cc2b4dbc3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae5dd8f7_5918f7b4",
+        "filename": "simpleperf/command.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-04-21T00:31:32Z",
+      "side": 1,
+      "message": "GetUintOption/GetDoubleOption rather than overloading?",
+      "range": {
+        "startLine": 55,
+        "startChar": 7,
+        "endLine": 55,
+        "endChar": 21
+      },
+      "revId": "b3cc40e45af069822ad2ab0b62431d3cc2b4dbc3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
