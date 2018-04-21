@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9231349b_0199ab83",
+        "filename": "simpleperf/command.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-04-21T17:59:52Z",
+      "side": 1,
+      "message": "shouldn\u0027t these `uint64_t`s be `T`s, and lose the `*value` assignment and the `static_cast`?",
+      "range": {
+        "startLine": 55,
+        "startChar": 81,
+        "endLine": 55,
+        "endChar": 89
+      },
+      "revId": "acf04b213d334df8880aa324711a03a8a91ffa07",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
