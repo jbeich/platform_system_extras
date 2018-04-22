@@ -22,6 +22,30 @@
       "revId": "acf04b213d334df8880aa324711a03a8a91ffa07",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "27dbb317_9a3ff087",
+        "filename": "simpleperf/command.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-04-22T23:36:54Z",
+      "side": 1,
+      "message": "I used uint64_t instead of T to allow automatic type conversion of min value.\nFor example, if I use uint64_t, I can write\nuint64_t value;\nGetUintOption(args, \u0026i, \u0026value, 1);\n\nBut if I use T, I need to static cast 1 to uint64_t.\nGetUintOption(args, \u0026i, \u0026value, static_cast\u003cuint64_t\u003e(1));",
+      "parentUuid": "9231349b_0199ab83",
+      "range": {
+        "startLine": 55,
+        "startChar": 81,
+        "endLine": 55,
+        "endChar": 89
+      },
+      "revId": "acf04b213d334df8880aa324711a03a8a91ffa07",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
