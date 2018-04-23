@@ -77,9 +77,9 @@ static void calculate_rounds(uint64_t size, image *ctx)
     ctx->rounds = fec_div_round_up(ctx->blocks, ctx->rs_n);
 }
 
-static int process_chunk(void *priv, const void *data, int len)
+static int process_chunk(void *priv, const void *data, unsigned int len)
 {
-    image *ctx = (image *)priv;
+    image *ctx = static_cast<image *>(priv);
     assert(len % FEC_BLOCKSIZE == 0);
 
     if (data) {
