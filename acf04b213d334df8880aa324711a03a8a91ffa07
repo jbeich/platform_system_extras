@@ -46,6 +46,30 @@
       "revId": "acf04b213d334df8880aa324711a03a8a91ffa07",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0d5d4963_bd606768",
+        "filename": "simpleperf/command.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1064128
+      },
+      "writtenOn": "2018-04-23T15:28:45Z",
+      "side": 1,
+      "message": "Are you sure about that?  It should be able to deduct the type via the \u0027T\u0027 for value.  Your first example should work even with T instead of uint64_t for min.\n\nCheck https://cs.corp.google.com/android/system/core/init/service.cpp?q\u003dparseint\u0026sq\u003dpackage:%5Eandroid$\u0026l\u003d485 for this happening with ParseInt() which uses T for min/max.",
+      "parentUuid": "27dbb317_9a3ff087",
+      "range": {
+        "startLine": 55,
+        "startChar": 81,
+        "endLine": 55,
+        "endChar": 89
+      },
+      "revId": "acf04b213d334df8880aa324711a03a8a91ffa07",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
