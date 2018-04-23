@@ -142,6 +142,30 @@
       "revId": "acf04b213d334df8880aa324711a03a8a91ffa07",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b9a545f2_92a0f362",
+        "filename": "simpleperf/command.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-04-23T21:09:15Z",
+      "side": 1,
+      "message": "but with `1u` the type deduction will work, won\u0027t it, since you are providing the more specific unsigned type for `value` at the call sites?",
+      "parentUuid": "0254fb86_34589163",
+      "range": {
+        "startLine": 55,
+        "startChar": 81,
+        "endLine": 55,
+        "endChar": 89
+      },
+      "revId": "acf04b213d334df8880aa324711a03a8a91ffa07",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
