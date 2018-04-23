@@ -70,6 +70,30 @@
       "revId": "acf04b213d334df8880aa324711a03a8a91ffa07",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a8e01cb_2aa61b4b",
+        "filename": "simpleperf/command.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-04-23T17:47:56Z",
+      "side": 1,
+      "message": "In your example \"if (!ParseInt(args[2], \u0026ioprio_pri_, 0, 7))\", ioprio_pri_ is int, so T can be int. But in my example, value is uint64_t, and 1 is int, so the compiler isn\u0027t bold enough to set T as uint64_t.",
+      "parentUuid": "0d5d4963_bd606768",
+      "range": {
+        "startLine": 55,
+        "startChar": 81,
+        "endLine": 55,
+        "endChar": 89
+      },
+      "revId": "acf04b213d334df8880aa324711a03a8a91ffa07",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
