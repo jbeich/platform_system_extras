@@ -118,6 +118,30 @@
       "revId": "acf04b213d334df8880aa324711a03a8a91ffa07",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0254fb86_34589163",
+        "filename": "simpleperf/command.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-04-23T20:46:57Z",
+      "side": 1,
+      "message": "as in https://cs.corp.google.com/android/bionic/libc/include/stdint.h?type\u003dcs\u0026q\u003duint64_t+f:bionic+p:android+\u0026l\u003d44, uint64_t is unsigned long in 32-bit devices, unsigned long long in 64-bit devices. So none of 1u, 1ul, 1ull can work in all cases.",
+      "parentUuid": "0e76fa41_5f067267",
+      "range": {
+        "startLine": 55,
+        "startChar": 81,
+        "endLine": 55,
+        "endChar": 89
+      },
+      "revId": "acf04b213d334df8880aa324711a03a8a91ffa07",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
