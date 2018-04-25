@@ -46,6 +46,30 @@
       "revId": "1b3ca90fc5fb4ef2cae3857c2171f2e812d12b7f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dea4ed35_0147d969",
+        "filename": "tests/kernel.config/sysvipc_test.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2018-04-25T23:46:09Z",
+      "side": 0,
+      "message": "If you blocked open and getattr access, will it allow F_OK (not that I have a problem with R_OK)",
+      "parentUuid": "b33ce342_3456ee54",
+      "range": {
+        "startLine": 39,
+        "startChar": 2,
+        "endLine": 42,
+        "endChar": 51
+      },
+      "revId": "1b3ca90fc5fb4ef2cae3857c2171f2e812d12b7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
