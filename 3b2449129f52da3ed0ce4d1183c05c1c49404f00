@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "61ae7467_5d4ded3b",
+        "filename": "tests/kernel.config/sysvipc_test.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2018-04-25T15:10:48Z",
+      "side": 1,
+      "message": "These syscalls were introduced in API 26 in commit 7c59f3f6f3b6dbfcf, their failure is not a clear indication that the calls are blocked in the environment:\n\nUse syscall() eg: create a _local_ copy of the msgctl() call (stolen from bionic):\n\nint msgctl(int id, int cmd, msquid_ds* buf) {\n#if !defined(__LP64__) || defined(__mips__)\n  // Annoyingly, the kernel requires this for 32-bit but rejects it for 64-bit.\n  // Mips64 is an exception to this, it requires the flag.\n  cmd |\u003d IPC_64;\n#endif\n#if defined(SYS_msgctl)\n  return syscall(SYS_msgctl, id, cmd, buf);\n#else\n  return syscall(SYS_ipc, MSGCTL, id, cmd, 0, buf, 0);\n#endif\n}",
+      "range": {
+        "startLine": 44,
+        "startChar": 2,
+        "endLine": 51,
+        "endChar": 27
+      },
+      "revId": "3b2449129f52da3ed0ce4d1183c05c1c49404f00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}

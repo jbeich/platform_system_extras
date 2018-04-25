@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "208db652_bc9c6319",
+        "filename": "tests/kernel.config/sysvipc_test.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2018-04-25T15:10:48Z",
+      "side": 0,
+      "message": "Q: Couldn\u0027t the Android Emulation also block access to these nodes (MAC/DAC)? It should do so for security because the nodes contain details about open msg, sem and shm resources.\n\nI would _prefer_ if it were possible to block the access in the Android Emulation, that you keep this (and the new syscall) test.",
+      "range": {
+        "startLine": 39,
+        "startChar": 2,
+        "endLine": 42,
+        "endChar": 51
+      },
+      "revId": "1b3ca90fc5fb4ef2cae3857c2171f2e812d12b7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
