@@ -22,6 +22,30 @@
       "revId": "1b3ca90fc5fb4ef2cae3857c2171f2e812d12b7f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b33ce342_3456ee54",
+        "filename": "tests/kernel.config/sysvipc_test.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1066743
+      },
+      "writtenOn": "2018-04-25T17:59:40Z",
+      "side": 0,
+      "message": "Yes! Sprinkled some SELinux magic and now access for reading is blocked. Had to change the test to R_OK, though.",
+      "parentUuid": "208db652_bc9c6319",
+      "range": {
+        "startLine": 39,
+        "startChar": 2,
+        "endLine": 42,
+        "endChar": 51
+      },
+      "revId": "1b3ca90fc5fb4ef2cae3857c2171f2e812d12b7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }

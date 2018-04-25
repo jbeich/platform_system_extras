@@ -22,6 +22,30 @@
       "revId": "3b2449129f52da3ed0ce4d1183c05c1c49404f00",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fa761082_eb1a8fe2",
+        "filename": "tests/kernel.config/sysvipc_test.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1066743
+      },
+      "writtenOn": "2018-04-25T17:59:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "61ae7467_5d4ded3b",
+      "range": {
+        "startLine": 44,
+        "startChar": 2,
+        "endLine": 51,
+        "endChar": 27
+      },
+      "revId": "3b2449129f52da3ed0ce4d1183c05c1c49404f00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
