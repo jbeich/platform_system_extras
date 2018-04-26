@@ -70,6 +70,30 @@
       "revId": "1b3ca90fc5fb4ef2cae3857c2171f2e812d12b7f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ac084cb_cdd6aeb1",
+        "filename": "tests/kernel.config/sysvipc_test.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1066743
+      },
+      "writtenOn": "2018-04-26T01:33:06Z",
+      "side": 0,
+      "message": "I tried that, but IIUC domain has access to getattr all proc files, so /proc/sysvipc needs to still be changed to R_OK. The rest were kept as F_OK because the directory didn\u0027t have search access, so the individual files are not visible anymore :D",
+      "parentUuid": "dea4ed35_0147d969",
+      "range": {
+        "startLine": 39,
+        "startChar": 2,
+        "endLine": 42,
+        "endChar": 51
+      },
+      "revId": "1b3ca90fc5fb4ef2cae3857c2171f2e812d12b7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
