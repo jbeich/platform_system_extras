@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b13db658_c667aea7",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-05-01T05:38:28Z",
+      "side": 1,
+      "message": "ART",
+      "range": {
+        "startLine": 187,
+        "startChar": 3,
+        "endLine": 187,
+        "endChar": 27
+      },
+      "revId": "462504f05a2a45a5a1d0478b8b49f988d7319aee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5497c7fb_b6b38c87",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-05-01T05:38:28Z",
+      "side": 1,
+      "message": "whether",
+      "range": {
+        "startLine": 228,
+        "startChar": 67,
+        "endLine": 228,
+        "endChar": 68
+      },
+      "revId": "462504f05a2a45a5a1d0478b8b49f988d7319aee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5a03cd22_d4be6859",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-05-01T05:38:28Z",
+      "side": 1,
+      "message": "if it\u0027s not a question, it\u0027s just \"How simpleperf works\"",
+      "range": {
+        "startLine": 411,
+        "startChar": 4,
+        "endLine": 411,
+        "endChar": 28
+      },
+      "revId": "462504f05a2a45a5a1d0478b8b49f988d7319aee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "13e278d8_7f59afd5",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 1011,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-05-01T05:38:28Z",
+      "side": 1,
+      "message": "(search and replace s/usb/USB/?)",
+      "range": {
+        "startLine": 1011,
+        "startChar": 74,
+        "endLine": 1011,
+        "endChar": 77
+      },
+      "revId": "462504f05a2a45a5a1d0478b8b49f988d7319aee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
