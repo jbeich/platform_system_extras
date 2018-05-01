@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "41b71821_c10bff42",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2018-05-01T21:27:51Z",
+      "side": 1,
+      "message": "This sentence is a bit awkward. How about something like:\n\nSimpleperf can only profile a release build under these two circumstances:",
+      "range": {
+        "startLine": 174,
+        "startChar": 54,
+        "endLine": 175,
+        "endChar": 34
+      },
+      "revId": "003b8b3180a512c2c802b0bb15d8251d2358a586",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1592b5c5_9c7f1bb4",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2018-05-01T21:27:51Z",
+      "side": 1,
+      "message": "the script below",
+      "range": {
+        "startLine": 187,
+        "startChar": 72,
+        "endLine": 187,
+        "endChar": 85
+      },
+      "revId": "003b8b3180a512c2c802b0bb15d8251d2358a586",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b0b23af5_1ff530af",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2018-05-01T21:27:51Z",
+      "side": 1,
+      "message": "the interpreter",
+      "range": {
+        "startLine": 229,
+        "startChar": 0,
+        "endLine": 229,
+        "endChar": 11
+      },
+      "revId": "003b8b3180a512c2c802b0bb15d8251d2358a586",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "97de7e1d_98cb7c2b",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 1001,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2018-05-01T21:27:51Z",
+      "side": 1,
+      "message": "the -a",
+      "range": {
+        "startLine": 1001,
+        "startChar": 60,
+        "endLine": 1001,
+        "endChar": 63
+      },
+      "revId": "003b8b3180a512c2c802b0bb15d8251d2358a586",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8ff8e293_ca47c8ff",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 1002,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2018-05-01T21:27:51Z",
+      "side": 1,
+      "message": "recording has started.",
+      "range": {
+        "startLine": 1002,
+        "startChar": 0,
+        "endLine": 1002,
+        "endChar": 18
+      },
+      "revId": "003b8b3180a512c2c802b0bb15d8251d2358a586",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1db9ef60_a8fbd002",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 1035,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2018-05-01T21:27:51Z",
+      "side": 1,
+      "message": "the USB",
+      "range": {
+        "startLine": 1035,
+        "startChar": 15,
+        "endLine": 1035,
+        "endChar": 19
+      },
+      "revId": "003b8b3180a512c2c802b0bb15d8251d2358a586",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
