@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "27c6d8bc_261c3485",
+        "filename": "showmap/Android.bp",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2018-05-04T21:21:26Z",
+      "side": 1,
+      "message": "Why?",
+      "range": {
+        "startLine": 19,
+        "startChar": 4,
+        "endLine": 19,
+        "endChar": 25
+      },
+      "revId": "c942fb466dbf1e9d93eb896d3665e810e900584f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
