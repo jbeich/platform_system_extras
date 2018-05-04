@@ -22,6 +22,30 @@
       "revId": "c942fb466dbf1e9d93eb896d3665e810e900584f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ccb36ad7_97dff5dc",
+        "filename": "showmap/Android.bp",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1015378
+      },
+      "writtenOn": "2018-05-04T21:24:56Z",
+      "side": 1,
+      "message": "In case there are already recorded smaps, you can now use showmap on the host to parse them.",
+      "parentUuid": "27c6d8bc_261c3485",
+      "range": {
+        "startLine": 19,
+        "startChar": 4,
+        "endLine": 19,
+        "endChar": 25
+      },
+      "revId": "c942fb466dbf1e9d93eb896d3665e810e900584f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
