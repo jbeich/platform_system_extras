@@ -46,6 +46,7 @@
 
 $(call add-clean-step, rm -f $(PRODUCT_OUT)/system.img $(PRODUCT_OUT)/userdata.img)
 $(call add-clean-step, rm -rf $(PRODUCT_OUT)/obj/EXECUTABLES/taskstats_intermediates)
+$(call add-clean-step, rm -f $(TARGET_OUT_OPTIONAL_EXECUTABLES)/anrd)
 # ************************************************
 # NEWER CLEAN STEPS MUST BE AT THE END OF THE LIST
 # ************************************************
