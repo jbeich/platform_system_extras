@@ -248,9 +248,8 @@ TEST(record_cmd, post_unwind_option) {
   CreateProcesses(1, &workloads);
   std::string pid = std::to_string(workloads[0]->GetPid());
   ASSERT_TRUE(RunRecordCmd({"-p", pid, "--call-graph", "dwarf", "--post-unwind"}));
-  ASSERT_FALSE(RunRecordCmd({"--post-unwind"}));
-  ASSERT_FALSE(
-      RunRecordCmd({"--call-graph", "dwarf", "--no-unwind", "--post-unwind"}));
+  ASSERT_TRUE(RunRecordCmd({"-p", pid, "--call-graph", "dwarf", "--post-unwind=yes"}));
+  ASSERT_TRUE(RunRecordCmd({"-p", pid, "--call-graph", "dwarf", "--post-unwind=no"}));
 }
 
 TEST(record_cmd, existing_processes) {
@@ -270,7 +269,10 @@ TEST(record_cmd, existing_threads) {
   ASSERT_TRUE(RunRecordCmd({"-t", tid_list}));
 }
 
-TEST(record_cmd, no_monitored_threads) { ASSERT_FALSE(RecordCmd()->Run({""})); }
+TEST(record_cmd, no_monitored_threads) {
+  TemporaryFile tmpfile;
+  ASSERT_FALSE(RecordCmd()->Run({"-o", tmpfile.path}));
+}
 
 TEST(record_cmd, more_than_one_event_types) {
   ASSERT_TRUE(RunRecordCmd({"-e", "cpu-cycles,cpu-clock"}));
@@ -389,9 +391,11 @@ TEST(record_cmd, dump_kernel_symbols) {
   uint32_t file_type;
   uint64_t min_vaddr;
   std::vector<Symbol> symbols;
+  std::vector<uint64_t> dex_file_offsets;
   size_t read_pos = 0;
   bool has_kernel_symbols = false;
-  while (reader->ReadFileFeature(read_pos, &file_path, &file_type, &min_vaddr, &symbols)) {
+  while (reader->ReadFileFeature(read_pos, &file_path, &file_type, &min_vaddr, &symbols,
+                                 &dex_file_offsets)) {
     if (file_type == DSO_KERNEL && !symbols.empty()) {
       has_kernel_symbols = true;
     }
@@ -558,4 +562,28 @@ TEST(record_cmd, generate_samples_by_hw_counters) {
     }));
     ASSERT_TRUE(has_sample);
   }
+}
+
+TEST(record_cmd, callchain_joiner_options) {
+  ASSERT_TRUE(RunRecordCmd({"--no-callchain-joiner"}));
+  ASSERT_TRUE(RunRecordCmd({"--callchain-joiner-min-matching-nodes", "2"}));
+}
+
+TEST(record_cmd, dashdash) {
+  TemporaryFile tmpfile;
+  ASSERT_TRUE(RecordCmd()->Run({"-o", tmpfile.path, "--", "sleep", "1"}));
+}
+
+TEST(record_cmd, size_limit_option) {
+  std::vector<std::unique_ptr<Workload>> workloads;
+  CreateProcesses(1, &workloads);
+  std::string pid = std::to_string(workloads[0]->GetPid());
+  TemporaryFile tmpfile;
+  ASSERT_TRUE(RecordCmd()->Run({"-o", tmpfile.path, "-p", pid, "--size-limit", "1k", "--duration",
+                                "1"}));
+  std::unique_ptr<RecordFileReader> reader = RecordFileReader::CreateInstance(tmpfile.path);
+  ASSERT_TRUE(reader);
+  ASSERT_GT(reader->FileHeader().data.size, 1000u);
+  ASSERT_LT(reader->FileHeader().data.size, 2000u);
+  ASSERT_FALSE(RunRecordCmd({"--size-limit", "0"}));
 }

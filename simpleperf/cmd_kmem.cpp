@@ -545,8 +545,7 @@ bool KmemCommand::PrepareToBuildSampleTree() {
       slab_sample_tree_builder_.reset(
           new SlabSampleTreeBuilder(comparator, &thread_tree_));
       slab_sample_tree_builder_->SetCallChainSampleOptions(
-          accumulate_callchain_, print_callgraph_, !callgraph_show_callee_,
-          false);
+          accumulate_callchain_, print_callgraph_, !callgraph_show_callee_);
       sort_comparator.AddComparator(comparator);
       slab_sample_tree_sorter_.reset(new SlabSampleTreeSorter(sort_comparator));
       slab_sample_tree_displayer_.reset(new SlabSampleTreeDisplayer(displayer));
@@ -612,7 +611,8 @@ bool KmemCommand::ProcessRecord(std::unique_ptr<Record> record) {
       slab_sample_tree_builder_->ProcessSampleRecord(
           *static_cast<const SampleRecord*>(record.get()));
     }
-  } else if (record->type() == PERF_RECORD_TRACING_DATA) {
+  } else if (record->type() == PERF_RECORD_TRACING_DATA ||
+             record->type() == SIMPLE_PERF_RECORD_TRACING_DATA) {
     const auto& r = *static_cast<TracingDataRecord*>(record.get());
     ProcessTracingData(std::vector<char>(r.data, r.data + r.data_size));
   }
