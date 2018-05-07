@@ -1,0 +1,9 @@
+Autosubmit+1: Greg Kaiser <gkaiser@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Code-Review+2: Mathieu Chartier <mathieuc@google.com>
+Verified+1: Greg Kaiser <gkaiser@google.com>
+Submitted-by: android-build-prod (mdb) <android-build-team-robot@google.com>
+Submitted-at: Mon, 07 May 2018 16:39:50 +0000
+Reviewed-on: https://android-review.googlesource.com/679861
+Project: platform/system/extras
+Branch: refs/heads/master
