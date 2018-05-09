@@ -64,6 +64,7 @@ $(call add-clean-step, rm -f $(TARGET_OUT_OPTIONAL_EXECUTABLES)/runconuid)
 $(call add-clean-step, rm -f $(TARGET_OUT_OPTIONAL_EXECUTABLES)/sane_schedstat)
 $(call add-clean-step, rm -f $(TARGET_OUT_OPTIONAL_EXECUTABLES)/showslab)
 $(call add-clean-step, rm -f $(TARGET_OUT_OPTIONAL_EXECUTABLES)/taskstats)
+$(call add-clean-step, rm -f $(TARGET_OUT_OPTIONAL_EXECUTABLES)/ioshark_bench)
 # ************************************************
 # NEWER CLEAN STEPS MUST BE AT THE END OF THE LIST
 # ************************************************
