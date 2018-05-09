@@ -167,6 +167,22 @@ class SqliteReader(object):
     def print_data_ascii(self, depth):
         self.root.print_callsite_ascii(depth, 0, self.dsos, self.syms)
 
+    def find_script_js(self):
+        rel_paths = [
+            # Maybe we're being run packaged.
+            "script.js",
+            # Maybe we're being run directly.
+            "../../simpleperf/scripts/inferno/script.js",
+        ]
+        import os.path
+        import sys
+        for rel_path in rel_paths:
+            script_js = os.path.join(os.path.dirname(__file__), rel_path)
+            if os.path.exists(script_js):
+                return open(script_js, 'r')
+        return None
+
+
     def print_svg(self, filename, depth):
         from svg_renderer import renderSVG
         self.root.svgrenderer_compat(self.dsos, self.syms)
@@ -191,14 +207,11 @@ class SqliteReader(object):
 ''')
 
         # Emit script.js, if we can find it.
-        import os.path
-        import sys
-        script_js_rel = "../../simpleperf/scripts/inferno/script.js"
-        script_js = os.path.join(os.path.dirname(__file__), script_js_rel)
-        if os.path.exists(script_js):
+        script_file = self.find_script_js()
+        if script_file is not None:
             f.write('<script>\n')
-            with open(script_js, 'r') as script_f:
-                f.write(script_f.read())
+            f.write(script_file.read())
+            script_file.close()
             f.write('''
 </script>
 <br/><br/>
