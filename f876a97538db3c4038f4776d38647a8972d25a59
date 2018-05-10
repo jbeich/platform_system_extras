@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "74b00d97_352fdfc4",
+        "filename": "simpleperf/environment.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-05-10T04:23:20Z",
+      "side": 1,
+      "message": "don\u0027t we already have more than one copy of this, some of which are already optimized in this same way? there are at least three just in system/core/:\n\nhttps://cs.corp.google.com/android/system/core/libunwindstack/Maps.cpp?type\u003dcs\u0026sq\u003dpackage:%5Eandroid$\u0026g\u003d0\u0026ssfr\u003d1\u0026l\u003d61\n\nhttps://cs.corp.google.com/android/system/core/libbacktrace/BacktraceMap.cpp?type\u003dcs\u0026q\u003dfile:system/core+%27x%27+%27w%27\u0026sq\u003dpackage:%5Eandroid$\u0026g\u003d0\u0026l\u003d63\n\nhttps://cs.corp.google.com/android/system/core/libmemunreachable/ProcessMappings.cpp?type\u003dcs\u0026q\u003dfile:system/core+%27x%27+%27w%27\u0026sq\u003dpackage:%5Eandroid$\u0026g\u003d0\u0026l\u003d32\n\nsystem/extras seems to have another: https://cs.corp.google.com/android/system/extras/libpagemap/pm_process.c?type\u003dcs\u0026q\u003dfile:system/extras+%27x%27+%27w%27\u0026sq\u003dpackage:%5Eandroid$\u0026g\u003d0\u0026l\u003d245\n\n(on the bright side, art seems to use \u003cbacktrace/BacktraceMap.h\u003e already.)\n\nif \u003cbacktrace/BacktraceMap.h\u003e isn\u0027t conveniently shareable already, and we can\u0027t make it so, there\u0027s always https://cs.corp.google.com/android/system/core/libprocinfo/ (which i misremembered as being yet another maps parser, but actually isn\u0027t [yet]).",
+      "revId": "f876a97538db3c4038f4776d38647a8972d25a59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
