@@ -156,6 +156,22 @@ TEST(record_cmd, tracepoint_event) {
   TEST_IN_ROOT(ASSERT_TRUE(RunRecordCmd({"-a", "-e", "sched:sched_switch"})));
 }
 
+TEST(record_cmd, implementation_defined_event) {
+  if (!IsInNativeAbi() || (GetBuildArch() != ARCH_ARM64 && GetBuildArch() != ARCH_ARM)) {
+    GTEST_LOG_(INFO) << "This test only runs on arm and arm64";
+  } else {
+    TemporaryFile tmpfile;
+    // Config 0x11 is cpu-cycles on arm/arm64.
+    ASSERT_TRUE(RunRecordCmd({"-e", "r11"}, tmpfile.path));
+    std::unique_ptr<RecordFileReader> reader = RecordFileReader::CreateInstance(tmpfile.path);
+    ASSERT_TRUE(reader);
+    std::vector<EventAttrWithId> attrs = reader->AttrSection();
+    ASSERT_EQ(1u, attrs.size());
+    ASSERT_EQ(PERF_TYPE_RAW, attrs[0].attr->type);
+    ASSERT_EQ(0x11u, attrs[0].attr->config);
+  }
+}
+
 TEST(record_cmd, branch_sampling) {
   if (IsBranchSamplingSupported()) {
     ASSERT_TRUE(RunRecordCmd({"-b"}));

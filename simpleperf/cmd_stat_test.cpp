@@ -52,6 +52,15 @@ TEST(stat_cmd, tracepoint_event) {
       StatCmd()->Run({"-a", "-e", "sched:sched_switch", "sleep", "1"})));
 }
 
+TEST(stat_cmd, implementation_defined_event) {
+  if (!IsInNativeAbi() || (GetBuildArch() != ARCH_ARM64 && GetBuildArch() != ARCH_ARM)) {
+    GTEST_LOG_(INFO) << "This test only runs on arm and arm64";
+  } else {
+    // Config 0x11 is cpu-cycles on arm/arm64.
+    ASSERT_TRUE(StatCmd()->Run({"-e", "r11", "sleep", "1"}));
+  }
+}
+
 TEST(stat_cmd, event_modifier) {
   ASSERT_TRUE(
       StatCmd()->Run({"-e", "cpu-cycles:u,cpu-cycles:k", "sleep", "1"}));

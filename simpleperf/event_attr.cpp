@@ -230,7 +230,8 @@ bool IsCpuSupported(const perf_event_attr& attr) {
 }
 
 std::string GetEventNameByAttr(const perf_event_attr& attr) {
-  for (const auto& event_type : GetAllEventTypes()) {
+  for (const auto& pair : GetAllEventTypes()) {
+    const EventType& event_type = pair.second;
     if (event_type.type == attr.type && event_type.config == attr.config) {
       std::string name = event_type.name;
       if (attr.exclude_user && !attr.exclude_kernel) {
