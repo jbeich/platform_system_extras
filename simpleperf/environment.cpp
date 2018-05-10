@@ -257,38 +257,83 @@ std::vector<pid_t> GetAllProcesses() {
   return result;
 }
 
-bool GetThreadMmapsInProcess(pid_t pid, std::vector<ThreadMmap>* thread_mmaps) {
-  std::string map_file = android::base::StringPrintf("/proc/%d/maps", pid);
-  FILE* fp = fopen(map_file.c_str(), "re");
-  if (fp == nullptr) {
-    PLOG(DEBUG) << "can't open file " << map_file;
+bool GetThreadMmapsInProcess(const std::string& map_file, std::vector<ThreadMmap>* thread_mmaps) {
+  std::string content;
+  if (!android::base::ReadFileToString(map_file, &content)) {
     return false;
   }
-  thread_mmaps->clear();
-  LineReader reader(fp);
-  char* line;
-  while ((line = reader.ReadLine()) != nullptr) {
+  thread_mmaps->resize(1u);
+  char* next_line = &content[0];
+  while (next_line != nullptr) {
+    char* p = next_line;
+    next_line = strchr(next_line, '\n');
+    if (next_line != nullptr) {
+      *next_line = '\0';
+      next_line++;
+    }
     // Parse line like: 00400000-00409000 r-xp 00000000 fc:00 426998  /usr/lib/gvfs/gvfsd-http
-    uint64_t start_addr, end_addr, pgoff;
-    char type[reader.MaxLineSize()];
-    char execname[reader.MaxLineSize()];
-    strcpy(execname, "");
-    if (sscanf(line, "%" PRIx64 "-%" PRIx64 " %s %" PRIx64 " %*x:%*x %*u %s\n", &start_addr,
-               &end_addr, type, &pgoff, execname) < 4) {
+    ThreadMmap& thread = thread_mmaps->back();
+    char* end;
+    // start_addr
+    thread.start_addr = strtoull(p, &end, 16);
+    if (end == p || *end != '-') {
       continue;
     }
-    if (strcmp(execname, "") == 0) {
-      strcpy(execname, DEFAULT_EXECNAME_FOR_THREAD_MMAP);
+    p = end + 1;
+    // end_addr
+    uint64_t end_addr = strtoull(p, &end, 16);
+    if (end == p || *end != ' ') {
+      continue;
     }
-    ThreadMmap thread;
-    thread.start_addr = start_addr;
-    thread.len = end_addr - start_addr;
-    thread.pgoff = pgoff;
-    thread.name = execname;
-    thread.executable = (type[2] == 'x');
-    thread_mmaps->push_back(thread);
+    thread.len = end_addr - thread.start_addr;
+    p = end + 1;
+    while (*p == ' ') {
+      p++;
+    }
+    // flags
+    thread.executable = false;
+    while (*p != ' ' && *p != '\0') {
+      if (*p == 'x') {
+        thread.executable = true;
+      }
+      p++;
+    }
+    while (*p == ' ') {
+      p++;
+    }
+    // pgoff
+    thread.pgoff = strtoull(p, &end, 16);
+    if (end == p || *end != ' ') {
+      continue;
+    }
+    p = end + 1;
+    while (*p == ' ') {
+      p++;
+    }
+    // major:minor
+    while (*p != ' ' && *p != '\0') {
+      p++;
+    }
+    while (*p == ' ') {
+      p++;
+    }
+    // inode
+    while (*p != ' ' && *p != '\0') {
+      p++;
+    }
+    while (*p == ' ') {
+      p++;
+    }
+    // filename
+    thread.name = p;
+    thread_mmaps->resize(thread_mmaps->size() + 1);
   }
+  thread_mmaps->resize(thread_mmaps->size() - 1);
   return true;
+}
+
+bool GetThreadMmapsInProcess(pid_t pid, std::vector<ThreadMmap>* thread_mmaps) {
+  return GetThreadMmapsInProcess(android::base::StringPrintf("/proc/%d/maps", pid), thread_mmaps);
 }
 
 bool GetKernelBuildId(BuildId* build_id) {
