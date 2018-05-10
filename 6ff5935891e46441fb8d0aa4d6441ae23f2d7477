@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b0ba2d9e_c72af584",
+        "filename": "micro_bench/micro_bench.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2018-05-10T19:22:26Z",
+      "side": 1,
+      "message": "I think it would be better to just delete this line since it\u0027s not used.",
+      "range": {
+        "startLine": 318,
+        "startChar": 4,
+        "endLine": 318,
+        "endChar": 72
+      },
+      "revId": "6ff5935891e46441fb8d0aa4d6441ae23f2d7477",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
