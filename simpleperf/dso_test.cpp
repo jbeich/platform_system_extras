@@ -23,6 +23,7 @@
 #include <android-base/test_utils.h>
 
 #include "get_test_data.h"
+#include "read_apk.h"
 
 using namespace simpleperf_dso_impl;
 
@@ -80,8 +81,21 @@ TEST(dso, dex_file_dso) {
     ASSERT_STREQ(symbol->DemangledName(),
                  "com.example.simpleperf.simpleperfexamplewithnative.MixActivity$1.run");
     ASSERT_EQ(0u, dso->MinVirtualAddress());
+
   }
 #else
   GTEST_LOG_(INFO) << "This test only runs on linux because of libdexfile";
 #endif  // defined(__linux__)
+}
+
+TEST(dso, embedded_elf) {
+  const std::string file_path = GetUrlInApk(GetTestData(APK_FILE), NATIVELIB_IN_APK);
+  std::unique_ptr<Dso> dso = Dso::CreateDso(DSO_ELF_FILE, file_path);
+  ASSERT_TRUE(dso);
+  ASSERT_EQ(dso->Path(), file_path);
+  ASSERT_EQ(dso->GetDebugFilePath(), file_path);
+  ASSERT_EQ(dso->MinVirtualAddress(), 0u);
+  const Symbol* symbol = dso->FindSymbol(0x9a4);
+  ASSERT_TRUE(symbol != nullptr);
+  ASSERT_STREQ(symbol->Name(), "Java_com_example_hellojni_HelloJni_callFunc1");
 }
