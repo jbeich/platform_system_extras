@@ -16,6 +16,24 @@
       "revId": "5e43f5003cbde3f360557f4860e9028bfa99f99d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7a5f01b4_8cd5c920",
+        "filename": "perfprofd/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2018-05-10T03:09:07Z",
+      "side": 1,
+      "message": "I am honestly not sure why this changed just with the filegroup. It is correct, because the perf_data_converter code includes quipper headers that include the protobuf headers (for type includes). It should have failed before, unless having the explicit proto in the sources actually added something to the include exports.",
+      "parentUuid": "fa1362a2_5a55f18a",
+      "revId": "5e43f5003cbde3f360557f4860e9028bfa99f99d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
