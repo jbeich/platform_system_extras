@@ -56,6 +56,7 @@ struct ThreadMmap {
 };
 
 bool GetThreadMmapsInProcess(pid_t pid, std::vector<ThreadMmap>* thread_mmaps);
+bool GetThreadMmapsInProcess(const std::string& map_file, std::vector<ThreadMmap>* thread_mmaps);
 
 constexpr char DEFAULT_KERNEL_FILENAME_FOR_BUILD_ID[] = "[kernel.kallsyms]";
 
