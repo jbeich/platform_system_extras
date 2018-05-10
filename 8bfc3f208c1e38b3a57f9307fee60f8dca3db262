@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "53b71a58_fab7f9c5",
+        "filename": "micro_bench/micro_bench.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 1052399
+      },
+      "writtenOn": "2018-05-10T17:08:05Z",
+      "side": 1,
+      "message": "this comment can be removed now",
+      "range": {
+        "startLine": 433,
+        "startChar": 58,
+        "endLine": 433,
+        "endChar": 88
+      },
+      "revId": "8bfc3f208c1e38b3a57f9307fee60f8dca3db262",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
