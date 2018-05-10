@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b8557d0e_759bce1f",
+        "filename": "tests/uevents/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-05-10T04:26:32Z",
+      "side": 1,
+      "message": "assuming +tomcherry has never heard of this, we should probably come back and delete it.",
+      "revId": "be906bbfc5fbdfc1168844cb410adbb355b23385",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
