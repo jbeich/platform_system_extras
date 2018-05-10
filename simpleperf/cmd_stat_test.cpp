@@ -52,6 +52,17 @@ TEST(stat_cmd, tracepoint_event) {
       StatCmd()->Run({"-a", "-e", "sched:sched_switch", "sleep", "1"})));
 }
 
+TEST(stat_cmd, rNNN_event) {
+  if (!IsInNativeAbi() || (GetBuildArch() != ARCH_ARM64 && GetBuildArch() != ARCH_ARM)) {
+    GTEST_LOG_(INFO) << "This test only runs on arm and arm64";
+  } else {
+    // As in D5.10.2 of the ARMv8 manual, ARM defines the event number space for PMU. part of the
+    // space is for common event numbers (which will stay the same for all ARM chips), part of the
+    // space is for implementation defined events. Here 0x11 is a common event for cpu-cycles.
+    ASSERT_TRUE(StatCmd()->Run({"-e", "r11", "sleep", "1"}));
+  }
+}
+
 TEST(stat_cmd, event_modifier) {
   ASSERT_TRUE(
       StatCmd()->Run({"-e", "cpu-cycles:u,cpu-cycles:k", "sleep", "1"}));

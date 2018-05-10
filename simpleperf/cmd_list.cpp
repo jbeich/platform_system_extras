@@ -69,13 +69,14 @@ static bool IsEventTypeSupported(const EventType& event_type) {
 }
 
 static void PrintEventTypesOfType(uint32_t type, const std::string& type_name,
-                                  const std::vector<EventType>& event_types) {
+                                  const std::map<std::string, EventType>& event_types) {
   printf("List of %s:\n", type_name.c_str());
   if (type == PERF_TYPE_RAW && (GetBuildArch() == ARCH_ARM || GetBuildArch() == ARCH_ARM64)) {
     printf("  # Please refer to PMU event numbers listed in ARMv8 manual for details.\n");
     printf("  # A possible link is https://developer.arm.com/docs/ddi0487/latest/arm-architecture-reference-manual-armv8-for-armv8-a-architecture-profile.\n");
   }
-  for (auto& event_type : event_types) {
+  for (auto& pair : event_types) {
+    const EventType& event_type = pair.second;
     if (event_type.type == type) {
       if (IsEventTypeSupported(event_type)) {
         printf("  %s", event_type.name.c_str());
