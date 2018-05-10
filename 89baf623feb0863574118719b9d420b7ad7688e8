@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9df363ce_3681738b",
+        "filename": "perfprofd/scripts/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2018-05-10T00:58:03Z",
+      "side": 1,
+      "message": "As far as I know, these should not be true.",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 54
+      },
+      "revId": "89baf623feb0863574118719b9d420b7ad7688e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "403f41fa_5fa73b46",
+        "filename": "perfprofd/scripts/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2018-05-10T00:58:03Z",
+      "side": 1,
+      "message": "__loader__.get_data(os.path.dirname(__file__), \"script.js\") will give it back as a string. We don\u0027t currently have setuptools, but it has pkg_resource which abstracts that a bit more.",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 67
+      },
+      "revId": "89baf623feb0863574118719b9d420b7ad7688e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
