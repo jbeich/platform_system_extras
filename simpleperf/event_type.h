@@ -18,6 +18,7 @@
 #define SIMPLE_PERF_EVENT_H_
 
 #include <stdint.h>
+#include <map>
 #include <memory>
 #include <string>
 #include <vector>
@@ -64,10 +65,10 @@ class ScopedEventTypes {
   ~ScopedEventTypes();
 
  private:
-  std::vector<EventType> saved_event_types_;
+  std::map<std::string, EventType> saved_event_types_;
 };
 
-const std::vector<EventType>& GetAllEventTypes();
+const std::map<std::string, EventType>& GetAllEventTypes();
 const EventType* FindEventTypeByName(const std::string& name, bool report_error = true);
 
 struct EventTypeAndModifier {

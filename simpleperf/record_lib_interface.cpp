@@ -37,7 +37,8 @@ std::vector<std::string> GetAllEvents() {
   if (!CheckPerfEventLimit()) {
     return result;
   }
-  for (auto& type : GetAllEventTypes()) {
+  for (auto& pair : GetAllEventTypes()) {
+    const EventType& type = pair.second;
     perf_event_attr attr = CreateDefaultPerfEventAttr(type);
     if (IsEventAttrSupported(attr)) {
       result.push_back(type.name);
