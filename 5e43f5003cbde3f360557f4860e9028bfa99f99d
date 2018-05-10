@@ -34,6 +34,24 @@
       "revId": "5e43f5003cbde3f360557f4860e9028bfa99f99d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "10b4414f_304c1458",
+        "filename": "perfprofd/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2018-05-10T03:28:12Z",
+      "side": 1,
+      "message": "Yes, having *.proto files in your sources adds this static library dependency automatically. We apparently propagated that across whole_static_libs, but we don\u0027t currently add it if the proto files show up via a filegroup (or even some globs iirc)",
+      "parentUuid": "7a5f01b4_8cd5c920",
+      "revId": "5e43f5003cbde3f360557f4860e9028bfa99f99d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
