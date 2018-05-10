@@ -16,6 +16,24 @@
       "revId": "f876a97538db3c4038f4776d38647a8972d25a59",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3827ab2f_965a6dfe",
+        "filename": "simpleperf/environment.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-05-10T19:46:45Z",
+      "side": 1,
+      "message": "If performance isn\u0027t the first concern, I\u0027d like to reuse other code.\nWhen testing on walleye with reading testdata/maps, using sscanf takes 3.5 ms, libunwindstack::Maps takes 2.0 ms, and using this patch takes 1.2 ms.\n\nI also like having a general map reading function in libprocinfo. I can try it if it you think it\u0027s fine.",
+      "parentUuid": "74b00d97_352fdfc4",
+      "revId": "f876a97538db3c4038f4776d38647a8972d25a59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
