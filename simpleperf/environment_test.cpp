@@ -18,9 +18,11 @@
 
 #include <android-base/file.h>
 #include <android-base/test_utils.h>
+#include <unwindstack/Maps.h>
 
 #include "dso.h"
 #include "environment.h"
+#include "get_test_data.h"
 
 TEST(environment, GetCpusFromString) {
   ASSERT_EQ(GetCpusFromString(""), std::vector<int>());
@@ -43,4 +45,18 @@ TEST(environment, PrepareVdsoFile) {
                                             sizeof(size_t) == sizeof(uint64_t));
   ASSERT_TRUE(dso != nullptr);
   ASSERT_NE(dso->GetDebugFilePath(), "[vdso]");
+}
+
+TEST(environment, GetThreadMmapsInProcess) {
+  std::vector<ThreadMmap> maps;
+  GetThreadMmapsInProcess(GetTestData("maps"), &maps);
+  ASSERT_EQ(2043u, maps.size());
+  ASSERT_EQ(maps[0].start_addr, 0x12c00000u);
+  ASSERT_EQ(maps[0].len, 0x2ac00000u - 0x12c00000u);
+  ASSERT_FALSE(maps[0].executable);
+  ASSERT_EQ(maps[0].pgoff, 0u);
+  ASSERT_EQ(maps[0].name, "/dev/ashmem/dalvik-main space (region space) (deleted)");
+  ASSERT_EQ(maps[1260].name, "/dev/ashmem/dalvik-classes.dex extracted in memory from "
+      "/data/app/com.google.sample.tunnel-HGGRU03Gu1Mwkf_-RnFmvw==/base.apk (deleted)");
+  ASSERT_TRUE(maps[1262].executable);
 }
