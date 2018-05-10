@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "9cd3bfdd_5a61b7c9",
+        "filename": "perfprofd/scripts/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2018-05-10T17:15:49Z",
+      "side": 1,
+      "message": "That is practical experience from having tried with \"true.\" perf_proto_stack fails the google.protobuf import, while perf_proto_flames fails the sqlite3 import.",
+      "parentUuid": "9df363ce_3681738b",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 54
+      },
+      "revId": "89baf623feb0863574118719b9d420b7ad7688e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "403f41fa_5fa73b46",
         "filename": "perfprofd/scripts/Android.bp",
         "patchSetId": 1
@@ -45,6 +69,30 @@
       "revId": "89baf623feb0863574118719b9d420b7ad7688e8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aaa5bbb4_926fb732",
+        "filename": "perfprofd/scripts/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2018-05-10T17:15:49Z",
+      "side": 1,
+      "message": "Yeah, but it\u0027s a lot easier as-is. So I\u0027d rather leave that as-is.",
+      "parentUuid": "403f41fa_5fa73b46",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 67
+      },
+      "revId": "89baf623feb0863574118719b9d420b7ad7688e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
