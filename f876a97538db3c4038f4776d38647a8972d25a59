@@ -52,6 +52,24 @@
       "revId": "f876a97538db3c4038f4776d38647a8972d25a59",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1d685437_f63073fb",
+        "filename": "simpleperf/environment.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1103743
+      },
+      "writtenOn": "2018-05-11T16:55:12Z",
+      "side": 1,
+      "message": "The problem with BacktraceMap in ART at the moment is the fact that libbacktrace introduces cyclic dependencies.  I was bitten by:\nlibdexfile -\u003e libartbase -\u003e libbacktrace -\u003e libunwind -\u003e libdexfile\nI would like to see a library that *just* parses /proc/self/maps, etc., to avoid the cyclic dependency.",
+      "parentUuid": "b2739027_b7fa7526",
+      "revId": "f876a97538db3c4038f4776d38647a8972d25a59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
