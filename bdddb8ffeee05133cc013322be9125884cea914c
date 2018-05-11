@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "940f508b_ac3cd0a7",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-05-11T23:27:53Z",
+      "side": 1,
+      "message": "It is to be compatible with linux perf, as in http://man7.org/linux/man-pages/man1/perf-record.1.html.",
+      "parentUuid": "37213d66_23f5cf56",
+      "range": {
+        "startLine": 113,
+        "startChar": 55,
+        "endLine": 113,
+        "endChar": 58
+      },
+      "revId": "bdddb8ffeee05133cc013322be9125884cea914c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4c8bf477_dda2cc1f",
         "filename": "simpleperf/cmd_stat_test.cpp",
         "patchSetId": 1
@@ -36,6 +60,24 @@
       "writtenOn": "2018-05-11T02:09:19Z",
       "side": 1,
       "message": "so what does \"implementation\" mean in \"implementation-defined\"? is this the same number for *all* ARM chips? so ARM has a central registry of these numbers? it doesn\u0027t differ between ARM and SLSI and HiSilicon? where can someone reading the --help (or your docs) find a list?",
+      "revId": "bdddb8ffeee05133cc013322be9125884cea914c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1faabe8e_109d9d9b",
+        "filename": "simpleperf/cmd_stat_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-05-11T23:27:53Z",
+      "side": 1,
+      "message": "Done adding comments. I agree implementation defined isn\u0027t a very good name, so changed to raw PMU event, as linux tools perf. We already have support for raw events of common event numbers in ARM PMUv3, as in https://cs.corp.google.com/android/system/extras/simpleperf/cmd_list.cpp?type\u003dcs\u0026sq\u003dpackage:%5Eandroid$\u0026q\u003dcmd_list.cpp\u0026g\u003d0\u0026l\u003d103. The rNNN interface is added to support implementation defined event numbers. I think users using rNNN events know what they are doing.",
+      "parentUuid": "4c8bf477_dda2cc1f",
       "revId": "bdddb8ffeee05133cc013322be9125884cea914c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
