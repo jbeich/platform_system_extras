@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "37213d66_23f5cf56",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-05-11T02:09:19Z",
+      "side": 1,
+      "message": "why \u0027r\u0027? why not \u00270x\u0027?\n\nwhy NNN? from the example it doesn\u0027t actually have to be three digits.",
+      "range": {
+        "startLine": 113,
+        "startChar": 55,
+        "endLine": 113,
+        "endChar": 58
+      },
+      "revId": "bdddb8ffeee05133cc013322be9125884cea914c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4c8bf477_dda2cc1f",
+        "filename": "simpleperf/cmd_stat_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-05-11T02:09:19Z",
+      "side": 1,
+      "message": "so what does \"implementation\" mean in \"implementation-defined\"? is this the same number for *all* ARM chips? so ARM has a central registry of these numbers? it doesn\u0027t differ between ARM and SLSI and HiSilicon? where can someone reading the --help (or your docs) find a list?",
+      "revId": "bdddb8ffeee05133cc013322be9125884cea914c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c91ec4ad_a718dd45",
+        "filename": "simpleperf/event_type.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-05-11T02:09:19Z",
+      "side": 1,
+      "message": "not a std::transform one-liner? :-)\n\ni thought there was a better way to get a case-insensitive map? can\u0027t you provide a case-insensitive comparator to the std::map template?",
+      "range": {
+        "startLine": 129,
+        "startChar": 0,
+        "endLine": 134,
+        "endChar": 0
+      },
+      "revId": "bdddb8ffeee05133cc013322be9125884cea914c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
