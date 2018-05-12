@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b2b0e9bb_4c04eea8",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-05-12T15:34:41Z",
+      "side": 1,
+      "message": "i still think we should just say rN --- any number of digits is fine, but NNN implies exactly three (like \\xNN versus \\uNNNN).\n\nmaybe use 2a in your example, or any number that isn\u0027t the same in hex and decimal :-)",
+      "range": {
+        "startLine": 113,
+        "startChar": 38,
+        "endLine": 113,
+        "endChar": 42
+      },
+      "revId": "4b58fc9fb0e46c5ad0f98a6181879d214d5c0bfb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f1cbfcbe_72ab5482",
+        "filename": "simpleperf/cmd_record_test.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-05-12T15:34:41Z",
+      "side": 1,
+      "message": "(not in this change, but do we have an example x86 raw event?)",
+      "revId": "4b58fc9fb0e46c5ad0f98a6181879d214d5c0bfb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eb476b7e_cf56dc82",
+        "filename": "simpleperf/cmd_stat.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-05-12T15:34:41Z",
+      "side": 1,
+      "message": "(not in this change, but should we #define these common help chunks and re-use them?)",
+      "range": {
+        "startLine": 319,
+        "startChar": 0,
+        "endLine": 328,
+        "endChar": 0
+      },
+      "revId": "4b58fc9fb0e46c5ad0f98a6181879d214d5c0bfb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b0519198_33af5f86",
+        "filename": "simpleperf/cmd_stat_test.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-05-12T15:34:41Z",
+      "side": 1,
+      "message": "(same comment as other arm-only test.)",
+      "revId": "4b58fc9fb0e46c5ad0f98a6181879d214d5c0bfb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4cf178dc_91abe480",
+        "filename": "simpleperf/event_type.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-05-12T15:34:41Z",
+      "side": 1,
+      "message": "not a std::transform one-liner? :-)\n\ni thought there was a better way to get a case-insensitive map? can\u0027t you provide a case-insensitive comparator to the std::map template?",
+      "range": {
+        "startLine": 128,
+        "startChar": 0,
+        "endLine": 135,
+        "endChar": 0
+      },
+      "revId": "4b58fc9fb0e46c5ad0f98a6181879d214d5c0bfb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
