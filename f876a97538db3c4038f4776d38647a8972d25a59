@@ -70,6 +70,24 @@
       "revId": "f876a97538db3c4038f4776d38647a8972d25a59",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "af171cd7_ced833ef",
+        "filename": "simpleperf/environment.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-05-12T00:22:24Z",
+      "side": 1,
+      "message": "maybe https://android-review.googlesource.com/c/platform/system/core/+/683441 can help here.",
+      "parentUuid": "1d685437_f63073fb",
+      "revId": "f876a97538db3c4038f4776d38647a8972d25a59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
