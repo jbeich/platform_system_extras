@@ -46,6 +46,30 @@
       "revId": "2a82b1e442926bff50173a28042192eec19e2c22",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cb740715_3a347c03",
+        "filename": "simpleperf/environment.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-05-12T15:40:17Z",
+      "side": 1,
+      "message": "wouldn\u0027t adding the constructor be cleaner? +tomcherry for C++ style.",
+      "parentUuid": "58a881c8_4347c5b6",
+      "range": {
+        "startLine": 265,
+        "startChar": 8,
+        "endLine": 266,
+        "endChar": 47
+      },
+      "revId": "2a82b1e442926bff50173a28042192eec19e2c22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
