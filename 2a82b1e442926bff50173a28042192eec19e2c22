@@ -70,6 +70,30 @@
       "revId": "2a82b1e442926bff50173a28042192eec19e2c22",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8df76e4e_a10ecdb4",
+        "filename": "simpleperf/environment.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-05-14T21:16:10Z",
+      "side": 1,
+      "message": "Done. I think both way are fine:\nusing constructor can save several lines here. But ThreadMmap is a data only structure. So I slightly prefer to not adding constructor unless ThreadMmap is initialized in more than one places.",
+      "parentUuid": "cb740715_3a347c03",
+      "range": {
+        "startLine": 265,
+        "startChar": 8,
+        "endLine": 266,
+        "endChar": 47
+      },
+      "revId": "2a82b1e442926bff50173a28042192eec19e2c22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
