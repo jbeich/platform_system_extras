@@ -194,11 +194,11 @@ bool MkdirWithParents(const std::string& path) {
   return true;
 }
 
-static void* xz_alloc(void*, size_t size) {
+static void* xz_alloc(ISzAllocPtr, size_t size) {
   return malloc(size);
 }
 
-static void xz_free(void*, void* address) {
+static void xz_free(ISzAllocPtr, void* address) {
   free(address);
 }
 
@@ -221,7 +221,7 @@ bool XzDecompress(const std::string& compressed_data, std::string* decompressed_
     size_t dst_remaining = dst.size() - dst_offset;
     int res = XzUnpacker_Code(&state, reinterpret_cast<Byte*>(&dst[dst_offset]), &dst_remaining,
                               reinterpret_cast<const Byte*>(&compressed_data[src_offset]),
-                              &src_remaining, CODER_FINISH_ANY, &status);
+                              &src_remaining, true, CODER_FINISH_ANY, &status);
     if (res != SZ_OK) {
       LOG(ERROR) << "LZMA decompression failed with error " << res;
       XzUnpacker_Free(&state);
@@ -240,21 +240,31 @@ bool XzDecompress(const std::string& compressed_data, std::string* decompressed_
   return true;
 }
 
+static std::map<std::string, android::base::LogSeverity> log_severity_map = {
+    {"verbose", android::base::VERBOSE},
+    {"debug", android::base::DEBUG},
+    {"info", android::base::INFO},
+    {"warning", android::base::WARNING},
+    {"error", android::base::ERROR},
+    {"fatal", android::base::FATAL},
+};
 bool GetLogSeverity(const std::string& name, android::base::LogSeverity* severity) {
-  static std::map<std::string, android::base::LogSeverity> log_severity_map = {
-      {"verbose", android::base::VERBOSE},
-      {"debug", android::base::DEBUG},
-      {"info", android::base::INFO},
-      {"warning", android::base::WARNING},
-      {"error", android::base::ERROR},
-      {"fatal", android::base::FATAL},
-  };
   auto it = log_severity_map.find(name);
   if (it != log_severity_map.end()) {
     *severity = it->second;
     return true;
   }
   return false;
+}
+
+std::string GetLogSeverityName() {
+  android::base::LogSeverity severity = android::base::GetMinimumLogSeverity();
+  for (auto& pair : log_severity_map) {
+    if (severity == pair.second) {
+      return pair.first;
+    }
+  }
+  return "info";
 }
 
 bool IsRoot() {

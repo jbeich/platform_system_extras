@@ -36,6 +36,8 @@
 #include "thread_tree.h"
 
 // RecordFileWriter writes to a perf record file, like perf.data.
+// User should call RecordFileWriter::Close() to finish writing the file, otherwise the file will
+// be removed in RecordFileWriter::~RecordFileWriter().
 class RecordFileWriter {
  public:
   static std::unique_ptr<RecordFileWriter> CreateInstance(const std::string& filename);
@@ -45,6 +47,7 @@ class RecordFileWriter {
   bool WriteAttrSection(const std::vector<EventAttrWithId>& attr_ids);
   bool WriteRecord(const Record& record);
 
+  uint64_t GetDataSectionSize() const { return data_section_size_; }
   bool ReadDataSection(const std::function<void(const Record*)>& callback);
 
   bool BeginWriteFeatures(size_t feature_count);
@@ -52,16 +55,11 @@ class RecordFileWriter {
   bool WriteFeatureString(int feature, const std::string& s);
   bool WriteCmdlineFeature(const std::vector<std::string>& cmdline);
   bool WriteBranchStackFeature();
-  bool WriteFileFeature(const std::string& file_path,
-                        uint32_t file_type,
-                        uint64_t min_vaddr,
-                        const std::vector<const Symbol*>& symbols);
+  bool WriteFileFeatures(const std::vector<Dso*>& files);
   bool WriteMetaInfoFeature(const std::unordered_map<std::string, std::string>& info_map);
+  bool WriteFeature(int feature, const std::vector<char>& data);
   bool EndWriteFeatures();
 
-  // Normally, Close() should be called after writing. But if something
-  // wrong happens and we need to finish in advance, the destructor
-  // will take care of calling Close().
   bool Close();
 
  private:
@@ -75,6 +73,11 @@ class RecordFileWriter {
   bool Read(void* buf, size_t len);
   bool GetFilePos(uint64_t* file_pos);
   bool WriteStringWithLength(const std::string& s);
+  bool WriteFileFeature(const std::string& file_path,
+                        uint32_t file_type,
+                        uint64_t min_vaddr,
+                        const std::vector<const Symbol*>& symbols,
+                        const std::vector<uint64_t>* dex_file_offsets);
   bool WriteFeatureBegin(int feature);
   bool WriteFeatureEnd(int feature);
 
@@ -148,7 +151,7 @@ class RecordFileReader {
   // information.
   bool ReadFileFeature(size_t& read_pos, std::string* file_path,
                        uint32_t* file_type, uint64_t* min_vaddr,
-                       std::vector<Symbol>* symbols);
+                       std::vector<Symbol>* symbols, std::vector<uint64_t>* dex_file_offsets);
   bool ReadMetaInfoFeature(std::unordered_map<std::string, std::string>* info_map);
 
   void LoadBuildIdAndFileFeatures(ThreadTree& thread_tree);
