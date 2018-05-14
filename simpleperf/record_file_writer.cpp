@@ -20,6 +20,7 @@
 #include <string.h>
 #include <sys/mman.h>
 #include <unistd.h>
+#include <algorithm>
 #include <set>
 #include <string>
 #include <unordered_map>
@@ -28,6 +29,7 @@
 #include <android-base/file.h>
 #include <android-base/logging.h>
 
+#include "dso.h"
 #include "event_attr.h"
 #include "perf_event.h"
 #include "record.h"
@@ -64,7 +66,8 @@ RecordFileWriter::RecordFileWriter(const std::string& filename, FILE* fp)
 
 RecordFileWriter::~RecordFileWriter() {
   if (record_fp_ != nullptr) {
-    Close();
+    fclose(record_fp_);
+    unlink(filename_.c_str());
   }
 }
 
@@ -166,7 +169,7 @@ bool RecordFileWriter::WriteData(const void* buf, size_t len) {
 }
 
 bool RecordFileWriter::Write(const void* buf, size_t len) {
-  if (fwrite(buf, len, 1, record_fp_) != 1) {
+  if (len != 0u && fwrite(buf, len, 1, record_fp_) != 1) {
     PLOG(ERROR) << "failed to write to record file '" << filename_ << "'";
     return false;
   }
@@ -294,14 +297,46 @@ bool RecordFileWriter::WriteBranchStackFeature() {
   return WriteFeatureEnd(FEAT_BRANCH_STACK);
 }
 
+bool RecordFileWriter::WriteFileFeatures(const std::vector<Dso*>& files) {
+  for (Dso* dso : files) {
+    // Always want to dump dex file offsets for DSO_DEX_FILE type.
+    if (!dso->HasDumpId() && dso->type() != DSO_DEX_FILE) {
+      continue;
+    }
+    uint32_t dso_type = dso->type();
+    uint64_t min_vaddr = dso->MinVirtualAddress();
+
+    // Dumping all symbols in hit files takes too much space, so only dump
+    // needed symbols.
+    const std::vector<Symbol>& symbols = dso->GetSymbols();
+    std::vector<const Symbol*> dump_symbols;
+    for (const auto& sym : symbols) {
+      if (sym.HasDumpId()) {
+        dump_symbols.push_back(&sym);
+      }
+    }
+    std::sort(dump_symbols.begin(), dump_symbols.end(), Symbol::CompareByAddr);
+
+    const std::vector<uint64_t>* dex_file_offsets = dso->DexFileOffsets();
+    if (!WriteFileFeature(dso->Path(), dso_type, min_vaddr, dump_symbols, dex_file_offsets)) {
+      return false;
+    }
+  }
+  return true;
+}
+
 bool RecordFileWriter::WriteFileFeature(const std::string& file_path,
                                         uint32_t file_type,
                                         uint64_t min_vaddr,
-                                        const std::vector<const Symbol*>& symbols) {
+                                        const std::vector<const Symbol*>& symbols,
+                                        const std::vector<uint64_t>* dex_file_offsets) {
   uint32_t size = file_path.size() + 1 + sizeof(uint32_t) * 2 +
       sizeof(uint64_t) + symbols.size() * (sizeof(uint64_t) + sizeof(uint32_t));
   for (const auto& symbol : symbols) {
     size += strlen(symbol->Name()) + 1;
+  }
+  if (dex_file_offsets != nullptr) {
+    size += sizeof(uint32_t) + sizeof(uint64_t) * dex_file_offsets->size();
   }
   std::vector<char> buf(sizeof(uint32_t) + size);
   char* p = buf.data();
@@ -317,15 +352,14 @@ bool RecordFileWriter::WriteFileFeature(const std::string& file_path,
     MoveToBinaryFormat(len, p);
     MoveToBinaryFormat(symbol->Name(), strlen(symbol->Name()) + 1, p);
   }
+  if (dex_file_offsets != nullptr) {
+    uint32_t offset_count = dex_file_offsets->size();
+    MoveToBinaryFormat(offset_count, p);
+    MoveToBinaryFormat(dex_file_offsets->data(), offset_count, p);
+  }
   CHECK_EQ(buf.size(), static_cast<size_t>(p - buf.data()));
 
-  if (!WriteFeatureBegin(FEAT_FILE)) {
-    return false;
-  }
-  if (!Write(buf.data(), buf.size())) {
-    return false;
-  }
-  return WriteFeatureEnd(FEAT_FILE);
+  return WriteFeature(FEAT_FILE, buf);
 }
 
 bool RecordFileWriter::WriteMetaInfoFeature(
@@ -341,13 +375,11 @@ bool RecordFileWriter::WriteMetaInfoFeature(
     MoveToBinaryFormat(pair.first.c_str(), pair.first.size() + 1, p);
     MoveToBinaryFormat(pair.second.c_str(), pair.second.size() + 1, p);
   }
-  if (!WriteFeatureBegin(FEAT_META_INFO)) {
-    return false;
-  }
-  if (!Write(buf.data(), buf.size())) {
-    return false;
-  }
-  return WriteFeatureEnd(FEAT_META_INFO);
+  return WriteFeature(FEAT_META_INFO, buf);
+}
+
+bool RecordFileWriter::WriteFeature(int feature, const std::vector<char>& data) {
+  return WriteFeatureBegin(feature) && Write(data.data(), data.size()) && WriteFeatureEnd(feature);
 }
 
 bool RecordFileWriter::WriteFeatureBegin(int feature) {
