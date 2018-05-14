@@ -28,7 +28,6 @@
 
 #include <android-base/logging.h>
 #include <android-base/file.h>
-#include <android-base/parsedouble.h>
 #include <android-base/parseint.h>
 #include <android-base/strings.h>
 #include <android-base/test_utils.h>
@@ -36,12 +35,14 @@
 #include <android-base/properties.h>
 #endif
 
+#include "CallChainJoiner.h"
 #include "command.h"
-#include "dwarf_unwind.h"
 #include "environment.h"
 #include "event_selection_set.h"
 #include "event_type.h"
 #include "IOEventLoop.h"
+#include "JITDebugReader.h"
+#include "OfflineUnwinder.h"
 #include "perf_clock.h"
 #include "read_apk.h"
 #include "read_elf.h"
@@ -51,6 +52,8 @@
 #include "tracing.h"
 #include "utils.h"
 #include "workload.h"
+
+using namespace simpleperf;
 
 static std::string default_measured_event_type = "cpu-cycles";
 
@@ -79,13 +82,16 @@ constexpr uint32_t MAX_DUMP_STACK_SIZE = 65528;
 // successfully, the buffer size = 1024 * 4K (page size) = 4M.
 constexpr size_t DESIRED_PAGES_IN_MAPPED_BUFFER = 1024;
 
+// Cache size used by CallChainJoiner to cache call chains in memory.
+constexpr size_t DEFAULT_CALL_CHAIN_JOINER_CACHE_SIZE = 8 * 1024 * 1024;
+
 class RecordCommand : public Command {
  public:
   RecordCommand()
       : Command(
             "record", "record sampling info in perf.data",
             // clang-format off
-"Usage: simpleperf record [options] [command [command-args]]\n"
+"Usage: simpleperf record [options] [--] [command [command-args]]\n"
 "       Gather sampling information of running [command]. And -a/-p/-t option\n"
 "       can be used to change target of sampling information.\n"
 "       The default options are: -e cpu-cycles -f 4000 -o perf.data.\n"
@@ -155,22 +161,35 @@ class RecordCommand : public Command {
 "-m mmap_pages   Set the size of the buffer used to receiving sample data from\n"
 "                the kernel. It should be a power of 2. If not set, the max\n"
 "                possible value <= 1024 will be used.\n"
+"--no-inherit  Don't record created child threads/processes.\n"
+"\n"
+"Dwarf unwinding options:\n"
+"--post-unwind=(yes|no) If `--call-graph dwarf` option is used, then the user's\n"
+"                       stack will be recorded in perf.data and unwound while\n"
+"                       recording by default. Use --post-unwind=yes to switch\n"
+"                       to unwind after recording.\n"
+"--no-unwind   If `--call-graph dwarf` option is used, then the user's stack\n"
+"              will be unwound by default. Use this option to disable the\n"
+"              unwinding of the user's stack.\n"
+"--no-callchain-joiner  If `--call-graph dwarf` option is used, then by default\n"
+"                       callchain joiner is used to break the 64k stack limit\n"
+"                       and build more complete call graphs. However, the built\n"
+"                       call graphs may not be correct in all cases.\n"
+"--callchain-joiner-min-matching-nodes count\n"
+"               When callchain joiner is used, set the matched nodes needed to join\n"
+"               callchains. The count should be >= 1. By default it is 1.\n"
+"\n"
+"Recording file options:\n"
 "--no-dump-kernel-symbols  Don't dump kernel symbols in perf.data. By default\n"
 "                          kernel symbols will be dumped when needed.\n"
 "--no-dump-symbols       Don't dump symbols in perf.data. By default symbols are\n"
 "                        dumped in perf.data, to support reporting in another\n"
 "                        environment.\n"
-"--no-inherit  Don't record created child threads/processes.\n"
-"--no-unwind   If `--call-graph dwarf` option is used, then the user's stack\n"
-"              will be unwound by default. Use this option to disable the\n"
-"              unwinding of the user's stack.\n"
 "-o record_file_name    Set record file name, default is perf.data.\n"
-"--post-unwind  If `--call-graph dwarf` option is used, then the user's stack\n"
-"               will be unwound while recording by default. But it may lose\n"
-"               records as stacking unwinding can be time consuming. Use this\n"
-"               option to unwind the user's stack after recording.\n"
 "--exit-with-parent            Stop recording when the process starting\n"
 "                              simpleperf dies.\n"
+"--size-limit SIZE[K|M|G]      Stop recording after SIZE bytes of records.\n"
+"                              Default is unlimited.\n"
 "--start_profiling_fd fd_no    After starting profiling, write \"STARTED\" to\n"
 "                              <fd_no>, then close <fd_no>.\n"
 "--symfs <dir>    Look for files with symbols relative to this directory.\n"
@@ -204,7 +223,10 @@ class RecordCommand : public Command {
         start_profiling_fd_(-1),
         in_app_context_(false),
         trace_offcpu_(false),
-        exclude_kernel_callchain_(false) {
+        exclude_kernel_callchain_(false),
+        allow_callchain_joiner_(true),
+        callchain_joiner_min_matching_nodes_(1u),
+        last_record_timestamp_(0u) {
     // If we run `adb shell simpleperf record xxx` and stop profiling by ctrl-c, adb closes
     // sockets connecting simpleperf. After that, simpleperf will receive SIGPIPE when writing
     // to stdout/stderr, which is a problem when we use '--app' option. So ignore SIGPIPE to
@@ -218,6 +240,9 @@ class RecordCommand : public Command {
  private:
   bool ParseOptions(const std::vector<std::string>& args,
                     std::vector<std::string>* non_option_args);
+  bool PrepareRecording(Workload* workload);
+  bool DoRecording(Workload* workload);
+  bool PostProcessRecording(const std::vector<std::string>& args);
   bool TraceOffCpu();
   bool SetEventSelectionFlags();
   bool CreateAndInitRecordFile();
@@ -228,13 +253,20 @@ class RecordCommand : public Command {
   bool DumpKernelAndModuleMmaps(const perf_event_attr& attr, uint64_t event_id);
   bool DumpThreadCommAndMmaps(const perf_event_attr& attr, uint64_t event_id);
   bool ProcessRecord(Record* record);
+  bool ShouldOmitRecord(Record* record);
+  bool SaveRecordForPostUnwinding(Record* record);
+  bool SaveRecordAfterUnwinding(Record* record);
+  bool SaveRecordWithoutUnwinding(Record* record);
+  bool UpdateJITDebugInfo();
+
   void UpdateRecordForEmbeddedElfPath(Record* record);
   bool UnwindRecord(SampleRecord& r);
-  bool PostUnwind(const std::vector<std::string>& args);
+  bool PostUnwindRecords();
+  bool JoinCallChains();
   bool DumpAdditionalFeatures(const std::vector<std::string>& args);
   bool DumpBuildIdFeature();
   bool DumpFileFeature();
-  bool DumpMetaInfoFeature();
+  bool DumpMetaInfoFeature(bool kernel_symbols_available);
   void CollectHitFileInfo(const SampleRecord& r);
 
   std::unique_ptr<SampleSpeed> sample_speed_;
@@ -245,6 +277,7 @@ class RecordCommand : public Command {
   uint32_t dump_stack_size_in_dwarf_sampling_;
   bool unwind_dwarf_callchain_;
   bool post_unwind_;
+  std::unique_ptr<OfflineUnwinder> offline_unwinder_;
   bool child_inherit_;
   double duration_in_sec_;
   bool can_dump_kernel_symbols_;
@@ -268,19 +301,29 @@ class RecordCommand : public Command {
   bool in_app_context_;
   bool trace_offcpu_;
   bool exclude_kernel_callchain_;
+  uint64_t size_limit_in_bytes_ = 0;
+
+  // For CallChainJoiner
+  bool allow_callchain_joiner_;
+  size_t callchain_joiner_min_matching_nodes_;
+  std::unique_ptr<CallChainJoiner> callchain_joiner_;
+
+  std::unique_ptr<JITDebugReader> jit_debug_reader_;
+  uint64_t last_record_timestamp_;  // used to insert Mmap2Records for JIT debug info
 };
 
 bool RecordCommand::Run(const std::vector<std::string>& args) {
+  ScopedCurrentArch scoped_arch(GetMachineArch());
   if (!CheckPerfEventLimit()) {
     return false;
   }
   AllowMoreOpenedFiles();
 
-  // 1. Parse options, and use default measured event type if not given.
   std::vector<std::string> workload_args;
   if (!ParseOptions(args, &workload_args)) {
     return false;
   }
+  ScopedTempFiles scoped_temp_files(android::base::Dirname(record_filename_));
   if (!app_package_name_.empty() && !in_app_context_) {
     // Some users want to profile non debuggable apps on rooted devices. If we use run-as,
     // it will be impossible when using --app. So don't switch to app's context when we are
@@ -290,6 +333,30 @@ bool RecordCommand::Run(const std::vector<std::string>& args) {
                              record_filename_, true);
     }
   }
+  std::unique_ptr<Workload> workload;
+  if (!workload_args.empty()) {
+    workload = Workload::CreateWorkload(workload_args);
+    if (workload == nullptr) {
+      return false;
+    }
+  }
+  if (!PrepareRecording(workload.get())) {
+    return false;
+  }
+  if (!DoRecording(workload.get())) {
+    return false;
+  }
+  return PostProcessRecording(args);
+}
+
+bool RecordCommand::PrepareRecording(Workload* workload) {
+  // 1. Prepare in other modules.
+  if (!InitPerfClock()) {
+    return false;
+  }
+  PrepareVdsoFile();
+
+  // 2. Add default event type.
   if (event_selection_set_.empty()) {
     size_t group_id;
     if (!event_selection_set_.AddEventType(default_measured_event_type, &group_id)) {
@@ -299,6 +366,8 @@ bool RecordCommand::Run(const std::vector<std::string>& args) {
       event_selection_set_.SetSampleSpeed(group_id, *sample_speed_);
     }
   }
+
+  // 3. Process options before opening perf event files.
   exclude_kernel_callchain_ = event_selection_set_.ExcludeKernel();
   if (trace_offcpu_ && !TraceOffCpu()) {
     return false;
@@ -306,22 +375,16 @@ bool RecordCommand::Run(const std::vector<std::string>& args) {
   if (!SetEventSelectionFlags()) {
     return false;
   }
-
-  // 2. Do some environment preparation.
-  ScopedCurrentArch scoped_arch(GetMachineArch());
-  if (!InitPerfClock()) {
-    return false;
+  if (unwind_dwarf_callchain_) {
+    offline_unwinder_.reset(new OfflineUnwinder(false));
   }
-  PrepareVdsoFile();
-
-  // 3. Create workload.
-  std::unique_ptr<Workload> workload;
-  if (!workload_args.empty()) {
-    workload = Workload::CreateWorkload(workload_args);
-    if (workload == nullptr) {
-      return false;
-    }
+  if (unwind_dwarf_callchain_ && allow_callchain_joiner_) {
+    callchain_joiner_.reset(new CallChainJoiner(DEFAULT_CALL_CHAIN_JOINER_CACHE_SIZE,
+                                                callchain_joiner_min_matching_nodes_,
+                                                false));
   }
+
+  // 4. Add monitored targets.
   bool need_to_check_targets = false;
   if (system_wide_collection_) {
     event_selection_set_.AddMonitoredThreads({-1});
@@ -341,6 +404,7 @@ bool RecordCommand::Run(const std::vector<std::string>& args) {
       // app process. In this way, we can have a better support of app start-up time profiling.
       std::set<pid_t> pids = WaitForAppProcesses(app_package_name_);
       event_selection_set_.AddMonitoredProcesses(pids);
+      need_to_check_targets = true;
     } else {
       LOG(ERROR)
           << "No threads to monitor. Try `simpleperf help record` for help";
@@ -349,8 +413,27 @@ bool RecordCommand::Run(const std::vector<std::string>& args) {
   } else {
     need_to_check_targets = true;
   }
+  // Profiling JITed/interpreted Java code is supported starting from Android P.
+  if (!system_wide_collection_ && !app_package_name_.empty() &&
+      GetAndroidVersion() >= kAndroidVersionP) {
+    pid_t app_pid = 0;
+    // TODO: support a JITDebugReader for each app process?
+    if (!event_selection_set_.GetMonitoredProcesses().empty()) {
+      app_pid = *event_selection_set_.GetMonitoredProcesses().begin();
+    } else if (!event_selection_set_.GetMonitoredThreads().empty()) {
+      app_pid = *event_selection_set_.GetMonitoredThreads().begin();
+    }
+    CHECK_NE(app_pid, 0);
+    // JIT symfiles are stored in temporary files, and are deleted after recording. But if
+    // `-g --no-unwind` option is used, we want to keep symfiles to support unwinding in
+    // the debug-unwind cmd.
+    bool keep_symfiles = dwarf_callchain_sampling_ && !unwind_dwarf_callchain_;
+    jit_debug_reader_.reset(new JITDebugReader(app_pid, keep_symfiles));
+    // To profile java code, need to dump maps containing vdex files, which are not executable.
+    event_selection_set_.SetRecordNotExecutableMaps(true);
+  }
 
-  // 4. Open perf_event_files, create mapped buffers for perf_event_files.
+  // 5. Open perf event files and create mapped buffers.
   if (!event_selection_set_.OpenEventFiles(cpus_)) {
     return false;
   }
@@ -359,40 +442,61 @@ bool RecordCommand::Run(const std::vector<std::string>& args) {
     return false;
   }
 
-  // 5. Create perf.data.
+  // 6. Create perf.data.
   if (!CreateAndInitRecordFile()) {
     return false;
   }
 
-  // 6. Add read/signal/periodic Events.
+  // 7. Add read/signal/periodic Events.
   auto callback =
       std::bind(&RecordCommand::ProcessRecord, this, std::placeholders::_1);
   if (!event_selection_set_.PrepareToReadMmapEventData(callback)) {
-    return false;
-  }
-  if (!event_selection_set_.HandleCpuHotplugEvents(cpus_)) {
     return false;
   }
   if (need_to_check_targets && !event_selection_set_.StopWhenNoMoreTargets()) {
     return false;
   }
   IOEventLoop* loop = event_selection_set_.GetIOEventLoop();
-  if (!loop->AddSignalEvents({SIGCHLD, SIGINT, SIGTERM, SIGHUP},
-                             [&]() { return loop->ExitLoop(); })) {
+  if (!loop->AddSignalEvents({SIGCHLD, SIGINT, SIGTERM},
+                             [loop]() { return loop->ExitLoop(); })) {
     return false;
   }
-  if (duration_in_sec_ != 0) {
-    if (!loop->AddPeriodicEvent(SecondToTimeval(duration_in_sec_),
-                                [&]() { return loop->ExitLoop(); })) {
+
+  // Only add an event for SIGHUP if we didn't inherit SIG_IGN (e.g. from nohup).
+  if (!SignalIsIgnored(SIGHUP)) {
+    if (!loop->AddSignalEvent(SIGHUP, [loop]() { return loop->ExitLoop(); })) {
       return false;
     }
   }
 
-  // 7. Write records in mapped buffers of perf_event_files to output file while
-  //    workload is running.
+  if (duration_in_sec_ != 0) {
+    if (!loop->AddPeriodicEvent(SecondToTimeval(duration_in_sec_),
+                                [loop]() { return loop->ExitLoop(); })) {
+      return false;
+    }
+  }
+  if (jit_debug_reader_) {
+    // Update JIT info at the beginning of recording.
+    if (!UpdateJITDebugInfo()) {
+      return false;
+    }
+    // It takes about 30us-130us on Pixel (depending on the cpu frequency) to check update when
+    // no update happens (most time spent in process_vm_preadv). We want to know the JIT debug
+    // info change as soon as possible, while not wasting too much time checking updates. So use
+    // a period of 100 ms.
+    const double kUpdateJITDebugInfoPeriodInSecond = 0.1;
+    if (!loop->AddPeriodicEvent(SecondToTimeval(kUpdateJITDebugInfoPeriodInSecond),
+                                [&]() { return UpdateJITDebugInfo(); })) {
+      return false;
+    }
+  }
+  return true;
+}
+
+bool RecordCommand::DoRecording(Workload* workload) {
+  // Write records in mapped buffers of perf_event_files to output file while workload is running.
   start_sampling_time_in_ns_ = GetPerfClock();
-  LOG(VERBOSE) << "start_sampling_time is " << start_sampling_time_in_ns_
-               << " ns";
+  LOG(VERBOSE) << "start_sampling_time is " << start_sampling_time_in_ns_ << " ns";
   if (workload != nullptr && !workload->IsStarted() && !workload->Start()) {
     return false;
   }
@@ -402,14 +506,29 @@ bool RecordCommand::Run(const std::vector<std::string>& args) {
     }
     close(start_profiling_fd_);
   }
-  if (!loop->RunLoop()) {
+  if (!event_selection_set_.GetIOEventLoop()->RunLoop()) {
     return false;
   }
   if (!event_selection_set_.FinishReadMmapEventData()) {
     return false;
   }
+  return true;
+}
 
-  // 8. Dump additional features, and close record file.
+bool RecordCommand::PostProcessRecording(const std::vector<std::string>& args) {
+  // 1. Post unwind dwarf callchain.
+  if (unwind_dwarf_callchain_ && post_unwind_) {
+    if (!PostUnwindRecords()) {
+      return false;
+    }
+  }
+
+  // 2. Optionally join Callchains.
+  if (callchain_joiner_) {
+    JoinCallChains();
+  }
+
+  // 3. Dump additional features, and close record file.
   if (!DumpAdditionalFeatures(args)) {
     return false;
   }
@@ -417,14 +536,7 @@ bool RecordCommand::Run(const std::vector<std::string>& args) {
     return false;
   }
 
-  // 9. Unwind dwarf callchain.
-  if (post_unwind_) {
-    if (!PostUnwind(args)) {
-      return false;
-    }
-  }
-
-  // 10. Show brief record result.
+  // 4. Show brief record result.
   LOG(INFO) << "Samples recorded: " << sample_record_count_
             << ". Samples lost: " << lost_record_count_ << ".";
   if (sample_record_count_ + lost_record_count_ != 0) {
@@ -437,6 +549,9 @@ bool RecordCommand::Run(const std::vector<std::string>& args) {
                    << "or decreasing sample frequency(-f), "
                    << "or increasing sample period(-c).";
     }
+  }
+  if (callchain_joiner_) {
+    callchain_joiner_->DumpStat();
   }
   return true;
 }
@@ -456,13 +571,8 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
     } else if (args[i] == "-b") {
       branch_sampling_ = branch_sampling_type_map["any"];
     } else if (args[i] == "-c" || args[i] == "-f") {
-      if (!NextArgumentOrError(args, &i)) {
-        return false;
-      }
-      char* endptr;
-      uint64_t value = strtoull(args[i].c_str(), &endptr, 0);
-      if (*endptr != '\0' || value == 0) {
-        LOG(ERROR) << "Invalid option for " << args[i-1] << ": '" << args[i] << "'";
+      uint64_t value;
+      if (!GetUintOption(args, &i, &value, 1)) {
         return false;
       }
       if (args[i-1] == "-c") {
@@ -487,11 +597,9 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
         fp_callchain_sampling_ = false;
         dwarf_callchain_sampling_ = true;
         if (strs.size() > 1) {
-          char* endptr;
-          uint64_t size = strtoull(strs[1].c_str(), &endptr, 0);
-          if (*endptr != '\0' || size > UINT_MAX) {
-            LOG(ERROR) << "invalid dump stack size in --call-graph option: "
-                       << strs[1];
+          uint64_t size;
+          if (!android::base::ParseUint(strs[1], &size)) {
+            LOG(ERROR) << "invalid dump stack size in --call-graph option: " << strs[1];
             return false;
           }
           if ((size & 7) != 0) {
@@ -533,12 +641,7 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
       }
       cpus_ = GetCpusFromString(args[i]);
     } else if (args[i] == "--duration") {
-      if (!NextArgumentOrError(args, &i)) {
-        return false;
-      }
-      if (!android::base::ParseDouble(args[i].c_str(), &duration_in_sec_,
-                                      1e-9)) {
-        LOG(ERROR) << "Invalid duration: " << args[i].c_str();
+      if (!GetDoubleOption(args, &i, &duration_in_sec_, 1e-9)) {
         return false;
       }
     } else if (args[i] == "-e") {
@@ -593,12 +696,11 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
         branch_sampling_ |= it->second;
       }
     } else if (args[i] == "-m") {
-      if (!NextArgumentOrError(args, &i)) {
+      uint64_t pages;
+      if (!GetUintOption(args, &i, &pages)) {
         return false;
       }
-      char* endptr;
-      uint64_t pages = strtoull(args[i].c_str(), &endptr, 0);
-      if (*endptr != '\0' || !IsPowerOfTwo(pages)) {
+      if (!IsPowerOfTwo(pages)) {
         LOG(ERROR) << "Invalid mmap_pages: '" << args[i] << "'";
         return false;
       }
@@ -611,6 +713,12 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
       child_inherit_ = false;
     } else if (args[i] == "--no-unwind") {
       unwind_dwarf_callchain_ = false;
+    } else if (args[i] == "--no-callchain-joiner") {
+      allow_callchain_joiner_ = false;
+    } else if (args[i] == "--callchain-joiner-min-matching-nodes") {
+      if (!GetUintOption(args, &i, &callchain_joiner_min_matching_nodes_, 1)) {
+        return false;
+      }
     } else if (args[i] == "-o") {
       if (!NextArgumentOrError(args, &i)) {
         return false;
@@ -625,14 +733,22 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
         return false;
       }
       event_selection_set_.AddMonitoredProcesses(pids);
-    } else if (args[i] == "--post-unwind") {
-      post_unwind_ = true;
-    } else if (args[i] == "--start_profiling_fd") {
-      if (!NextArgumentOrError(args, &i)) {
+    } else if (android::base::StartsWith(args[i], "--post-unwind")) {
+      if (args[i] == "--post-unwind" || args[i] == "--post-unwind=yes") {
+        post_unwind_ = true;
+      } else if (args[i] == "--post-unwind=no") {
+        post_unwind_ = false;
+      } else {
+        LOG(ERROR) << "unexpected option " << args[i];
         return false;
       }
-      if (!android::base::ParseInt(args[i].c_str(), &start_profiling_fd_, 0)) {
-        LOG(ERROR) << "Invalid start_profiling_fd: " << args[i];
+    } else if (args[i] == "--size-limit") {
+      if (!GetUintOption(args, &i, &size_limit_in_bytes_, 1, std::numeric_limits<uint64_t>::max(),
+                         true)) {
+        return false;
+      }
+    } else if (args[i] == "--start_profiling_fd") {
+      if (!GetUintOption(args, &i, &start_profiling_fd_)) {
         return false;
       }
     } else if (args[i] == "--symfs") {
@@ -660,6 +776,9 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
       if (!SetTracepointEventsFilePath(args[i])) {
         return false;
       }
+    } else if (args[i] == "--") {
+      i++;
+      break;
     } else {
       ReportUnknownOption(args, i);
       return false;
@@ -675,14 +794,8 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
     unwind_dwarf_callchain_ = false;
   }
   if (post_unwind_) {
-    if (!dwarf_callchain_sampling_) {
-      LOG(ERROR)
-          << "--post-unwind is only used with `--call-graph dwarf` option.";
-      return false;
-    }
-    if (!unwind_dwarf_callchain_) {
-      LOG(ERROR) << "--post-unwind can't be used with `--no-unwind` option.";
-      return false;
+    if (!dwarf_callchain_sampling_ || !unwind_dwarf_callchain_) {
+      post_unwind_ = false;
     }
   }
 
@@ -713,8 +826,6 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
   for (; i < args.size(); ++i) {
     non_option_args->push_back(args[i]);
   }
-
-  SetTempDirectoryUsedInRecording(android::base::Dirname(record_filename_));
   return true;
 }
 
@@ -813,7 +924,7 @@ bool RecordCommand::DumpKernelSymbol() {
 bool RecordCommand::DumpTracingData() {
   std::vector<const EventType*> tracepoint_event_types =
       event_selection_set_.GetTracepointEvents();
-  if (tracepoint_event_types.empty() || !CanRecordRawData()) {
+  if (tracepoint_event_types.empty() || !CanRecordRawData() || in_app_context_) {
     return true;  // No need to dump tracing data, or can't do it.
   }
   std::vector<char> tracing_data;
@@ -885,8 +996,8 @@ bool RecordCommand::DumpThreadCommAndMmaps(const perf_event_attr& attr,
       continue;
     }
     for (const auto& map : thread_mmaps) {
-      if (map.executable == 0) {
-        continue;  // No need to dump non-executable mmap info.
+      if (map.executable == 0 && !event_selection_set_.RecordNotExecutableMaps()) {
+        continue;
       }
       MmapRecord record(attr, false, pid, pid, map.start_addr, map.len,
                         map.pgoff, map.name, event_id);
@@ -926,21 +1037,69 @@ bool RecordCommand::DumpThreadCommAndMmaps(const perf_event_attr& attr,
 }
 
 bool RecordCommand::ProcessRecord(Record* record) {
-  if (system_wide_collection_ && record->type() == PERF_RECORD_SAMPLE) {
-    auto& r = *static_cast<SampleRecord*>(record);
-    // Omit samples get before start sampling time.
-    if (r.time_data.time < start_sampling_time_in_ns_) {
-      return true;
+  if (ShouldOmitRecord(record)) {
+    return true;
+  }
+  if (size_limit_in_bytes_ > 0u) {
+    if (size_limit_in_bytes_ < record_file_writer_->GetDataSectionSize()) {
+      return event_selection_set_.GetIOEventLoop()->ExitLoop();
     }
   }
-  UpdateRecordForEmbeddedElfPath(record);
+  last_record_timestamp_ = record->Timestamp();
+  if (unwind_dwarf_callchain_) {
+    if (post_unwind_) {
+      return SaveRecordForPostUnwinding(record);
+    }
+    return SaveRecordAfterUnwinding(record);
+  }
+  return SaveRecordWithoutUnwinding(record);
+}
 
-  bool unwind_callchain = unwind_dwarf_callchain_ && !post_unwind_;
+template <typename MmapRecordType>
+bool IsMappingOnlyExistInMemory(MmapRecordType* record) {
+  return !record->InKernel() && !IsRegularFile(record->filename) && record->filename != "[vdso]";
+}
 
+bool RecordCommand::ShouldOmitRecord(Record* record) {
+  if (jit_debug_reader_) {
+    // To profile jitted Java code, we need PROT_JIT_SYMFILE_MAP maps not overlapped by maps for
+    // /dev/ashmem/dalvik-jit-code-cache. To profile interpreted Java code, we record maps that
+    // are not executable. Some non-exec maps (like those for stack, heap) provide misleading map
+    // entries for unwinding, as in http://b/77236599. So it is better to remove
+    // dalvik-jit-code-cache and other maps that only exist in memory.
+    switch (record->type()) {
+      case PERF_RECORD_MMAP:
+        return IsMappingOnlyExistInMemory(static_cast<MmapRecord*>(record));
+      case PERF_RECORD_MMAP2:
+        return IsMappingOnlyExistInMemory(static_cast<Mmap2Record*>(record));
+    }
+  }
+  return false;
+}
+
+bool RecordCommand::SaveRecordForPostUnwinding(Record* record) {
+  if (ShouldOmitRecord(record)) {
+    return true;
+  }
+  if (record->type() == PERF_RECORD_SAMPLE) {
+    static_cast<SampleRecord*>(record)->RemoveInvalidStackData();
+  }
+  if (!record_file_writer_->WriteRecord(*record)) {
+    LOG(ERROR) << "If there isn't enough space for storing profiling data, consider using "
+               << "--no-post-unwind option.";
+    return false;
+  }
+  return true;
+}
+
+bool RecordCommand::SaveRecordAfterUnwinding(Record* record) {
   if (record->type() == PERF_RECORD_SAMPLE) {
     auto& r = *static_cast<SampleRecord*>(record);
-    if (unwind_callchain) {
-      UnwindRecord(r);
+    // AdjustCallChainGeneratedByKernel() should go before UnwindRecord(). Because we don't want
+    // to adjust callchains generated by dwarf unwinder.
+    r.AdjustCallChainGeneratedByKernel();
+    if (!UnwindRecord(r)) {
+      return false;
     }
     // ExcludeKernelCallChain() should go after UnwindRecord() to notice the generated user call
     // chain.
@@ -948,17 +1107,57 @@ bool RecordCommand::ProcessRecord(Record* record) {
       // If current record contains no user callchain, skip it.
       return true;
     }
+    sample_record_count_++;
+  } else if (record->type() == PERF_RECORD_LOST) {
+    lost_record_count_ += static_cast<LostRecord*>(record)->lost;
+  } else {
+    UpdateRecordForEmbeddedElfPath(record);
+    thread_tree_.Update(*record);
+  }
+  return record_file_writer_->WriteRecord(*record);
+}
+
+bool RecordCommand::SaveRecordWithoutUnwinding(Record* record) {
+  if (record->type() == PERF_RECORD_SAMPLE) {
+    auto& r = *static_cast<SampleRecord*>(record);
     if (fp_callchain_sampling_ || dwarf_callchain_sampling_) {
       r.AdjustCallChainGeneratedByKernel();
+    }
+    if (r.InKernel() && exclude_kernel_callchain_ && r.ExcludeKernelCallChain() == 0u) {
+      // If current record contains no user callchain, skip it.
+      return true;
     }
     sample_record_count_++;
   } else if (record->type() == PERF_RECORD_LOST) {
     lost_record_count_ += static_cast<LostRecord*>(record)->lost;
-  } else if (unwind_callchain) {
-    thread_tree_.Update(*record);
   }
-  bool result = record_file_writer_->WriteRecord(*record);
-  return result;
+  return record_file_writer_->WriteRecord(*record);
+}
+
+bool RecordCommand::UpdateJITDebugInfo() {
+  std::vector<JITSymFile> jit_symfiles;
+  std::vector<DexSymFile> dex_symfiles;
+  jit_debug_reader_->ReadUpdate(&jit_symfiles, &dex_symfiles);
+  if (jit_symfiles.empty() && dex_symfiles.empty()) {
+    return true;
+  }
+  // Process records before dumping symfiles, so new symfiles won't affect old samples.
+  if (!event_selection_set_.ReadMmapEventData()) {
+    return false;
+  }
+  EventAttrWithId attr_id = event_selection_set_.GetEventAttrWithId()[0];
+  for (auto& symfile : jit_symfiles) {
+    Mmap2Record record(*attr_id.attr, false, jit_debug_reader_->Pid(), jit_debug_reader_->Pid(),
+                       symfile.addr, symfile.len, 0, map_flags::PROT_JIT_SYMFILE_MAP,
+                       symfile.file_path, attr_id.ids[0], last_record_timestamp_);
+    if (!ProcessRecord(&record)) {
+      return false;
+    }
+  }
+  for (auto& symfile : dex_symfiles) {
+    thread_tree_.AddDexFileOffset(symfile.file_path, symfile.dex_file_offset);
+  }
+  return true;
 }
 
 template <class RecordType>
@@ -1002,72 +1201,106 @@ bool RecordCommand::UnwindRecord(SampleRecord& r) {
       (r.GetValidStackSize() > 0)) {
     ThreadEntry* thread =
         thread_tree_.FindThreadOrNew(r.tid_data.pid, r.tid_data.tid);
-    RegSet regs = CreateRegSet(r.regs_user_data.abi,
-                               r.regs_user_data.reg_mask,
-                               r.regs_user_data.regs);
-    // Normally do strict arch check when unwinding stack. But allow unwinding
-    // 32-bit processes on 64-bit devices for system wide profiling.
-    bool strict_arch_check = !system_wide_collection_;
-    std::vector<uint64_t> unwind_ips =
-        UnwindCallChain(r.regs_user_data.abi, *thread, regs,
-                        r.stack_user_data.data,
-                        r.GetValidStackSize(), strict_arch_check);
-    r.ReplaceRegAndStackWithCallChain(unwind_ips);
+    RegSet regs(r.regs_user_data.abi, r.regs_user_data.reg_mask, r.regs_user_data.regs);
+    std::vector<uint64_t> ips;
+    std::vector<uint64_t> sps;
+    if (!offline_unwinder_->UnwindCallChain(*thread, regs, r.stack_user_data.data,
+                                            r.GetValidStackSize(), &ips, &sps)) {
+      return false;
+    }
+    r.ReplaceRegAndStackWithCallChain(ips);
+    if (callchain_joiner_) {
+      return callchain_joiner_->AddCallChain(r.tid_data.pid, r.tid_data.tid,
+                                             CallChainJoiner::ORIGINAL_OFFLINE, ips, sps);
+    }
   }
   return true;
 }
 
-bool RecordCommand::PostUnwind(const std::vector<std::string>& args) {
-  thread_tree_.ClearThreadAndMap();
-  std::unique_ptr<RecordFileReader> reader =
-      RecordFileReader::CreateInstance(record_filename_);
-  if (reader == nullptr) {
-    return false;
-  }
-  std::string tmp_filename = record_filename_ + ".tmp";
-  record_file_writer_ = CreateRecordFile(tmp_filename);
-  if (record_file_writer_ == nullptr) {
-    return false;
-  }
-  bool result = reader->ReadDataSection(
-      [this](std::unique_ptr<Record> record) {
-        thread_tree_.Update(*record);
-        if (record->type() == PERF_RECORD_SAMPLE) {
-          if (!UnwindRecord(*static_cast<SampleRecord*>(record.get()))) {
-            return false;
-          }
-        }
-        return record_file_writer_->WriteRecord(*record);
-      },
-      false);
-  if (!result) {
-    return false;
-  }
-  if (!DumpAdditionalFeatures(args)) {
-    return false;
-  }
+bool RecordCommand::PostUnwindRecords() {
+  // 1. Move records from record_filename_ to a temporary file.
   if (!record_file_writer_->Close()) {
     return false;
   }
+  record_file_writer_.reset();
+  std::unique_ptr<TemporaryFile> tmp_file = ScopedTempFiles::CreateTempFile();
+  if (!Workload::RunCmd({"mv", record_filename_, tmp_file->path})) {
+    return false;
+  }
+  std::unique_ptr<RecordFileReader> reader = RecordFileReader::CreateInstance(tmp_file->path);
+  if (!reader) {
+    return false;
+  }
 
-  if (unlink(record_filename_.c_str()) != 0) {
-    PLOG(ERROR) << "failed to remove " << record_filename_;
+  // 2. Read records from the temporary file, and write unwound records back to record_filename_.
+  record_file_writer_ = CreateRecordFile(record_filename_);
+  if (!record_file_writer_) {
     return false;
   }
-  if (rename(tmp_filename.c_str(), record_filename_.c_str()) != 0) {
-    PLOG(ERROR) << "failed to rename " << tmp_filename << " to "
-                << record_filename_;
+  sample_record_count_ = 0;
+  lost_record_count_ = 0;
+  auto callback = [this](std::unique_ptr<Record> record) {
+    return SaveRecordAfterUnwinding(record.get());
+  };
+  return reader->ReadDataSection(callback, false);
+}
+
+bool RecordCommand::JoinCallChains() {
+  // 1. Prepare joined callchains.
+  if (!callchain_joiner_->JoinCallChains()) {
     return false;
   }
-  return true;
+  // 2. Move records from record_filename_ to a temporary file.
+  if (!record_file_writer_->Close()) {
+    return false;
+  }
+  record_file_writer_.reset();
+  std::unique_ptr<TemporaryFile> tmp_file = ScopedTempFiles::CreateTempFile();
+  if (!Workload::RunCmd({"mv", record_filename_, tmp_file->path})) {
+    return false;
+  }
+
+  // 3. Read records from the temporary file, and write record with joined call chains back
+  // to record_filename_.
+  std::unique_ptr<RecordFileReader> reader = RecordFileReader::CreateInstance(tmp_file->path);
+  record_file_writer_ = CreateRecordFile(record_filename_);
+  if (!reader || !record_file_writer_) {
+    return false;
+  }
+
+  auto record_callback = [&](std::unique_ptr<Record> r) {
+    if (r->type() != PERF_RECORD_SAMPLE) {
+      return record_file_writer_->WriteRecord(*r);
+    }
+    SampleRecord& sr = *static_cast<SampleRecord*>(r.get());
+    if (!sr.HasUserCallChain()) {
+      return record_file_writer_->WriteRecord(sr);
+    }
+    pid_t pid;
+    pid_t tid;
+    CallChainJoiner::ChainType type;
+    std::vector<uint64_t> ips;
+    std::vector<uint64_t> sps;
+    if (!callchain_joiner_->GetNextCallChain(pid, tid, type, ips, sps)) {
+      return false;
+    }
+    CHECK_EQ(type, CallChainJoiner::JOINED_OFFLINE);
+    CHECK_EQ(pid, static_cast<pid_t>(sr.tid_data.pid));
+    CHECK_EQ(tid, static_cast<pid_t>(sr.tid_data.tid));
+    sr.UpdateUserCallChain(ips);
+    return record_file_writer_->WriteRecord(sr);
+  };
+  return reader->ReadDataSection(record_callback, false);
 }
 
 bool RecordCommand::DumpAdditionalFeatures(
     const std::vector<std::string>& args) {
   // Read data section of perf.data to collect hit file information.
   thread_tree_.ClearThreadAndMap();
+  bool kernel_symbols_available = false;
   if (CheckKernelSymbolAddresses()) {
     Dso::ReadKernelSymbolsFromProc();
+    kernel_symbols_available = true;
   }
   auto callback = [&](const Record* r) {
     thread_tree_.Update(*r);
@@ -1079,11 +1312,8 @@ bool RecordCommand::DumpAdditionalFeatures(
     return false;
   }
 
-  size_t feature_count = 5;
+  size_t feature_count = 6;
   if (branch_sampling_) {
-    feature_count++;
-  }
-  if (dump_symbols_) {
     feature_count++;
   }
   if (!record_file_writer_->BeginWriteFeatures(feature_count)) {
@@ -1092,7 +1322,7 @@ bool RecordCommand::DumpAdditionalFeatures(
   if (!DumpBuildIdFeature()) {
     return false;
   }
-  if (dump_symbols_ && !DumpFileFeature()) {
+  if (!DumpFileFeature()) {
     return false;
   }
   utsname uname_buf;
@@ -1122,7 +1352,7 @@ bool RecordCommand::DumpAdditionalFeatures(
       !record_file_writer_->WriteBranchStackFeature()) {
     return false;
   }
-  if (!DumpMetaInfoFeature()) {
+  if (!DumpMetaInfoFeature(kernel_symbols_available)) {
     return false;
   }
 
@@ -1157,26 +1387,13 @@ bool RecordCommand::DumpBuildIdFeature() {
         continue;
       }
       build_id_records.push_back(BuildIdRecord(true, UINT_MAX, build_id, path));
-    } else {
+    } else if (dso->type() == DSO_ELF_FILE) {
       if (dso->Path() == DEFAULT_EXECNAME_FOR_THREAD_MMAP) {
         continue;
       }
-      auto tuple = SplitUrlInApk(dso->Path());
-      if (std::get<0>(tuple)) {
-        ElfStatus result = GetBuildIdFromApkFile(std::get<1>(tuple),
-                                                 std::get<2>(tuple), &build_id);
-        if (result != ElfStatus::NO_ERROR) {
-          LOG(DEBUG) << "can't read build_id from file " << dso->Path() << ": "
-                     << result;
-          continue;
-        }
-      } else {
-        ElfStatus result = GetBuildIdFromElfFile(dso->Path(), &build_id);
-        if (result != ElfStatus::NO_ERROR) {
-          LOG(DEBUG) << "can't read build_id from file " << dso->Path() << ": "
-                     << result;
-          continue;
-        }
+      if (!GetBuildIdFromDsoPath(dso->Path(), &build_id)) {
+        LOG(DEBUG) << "Can't read build_id from file " << dso->Path();
+        continue;
       }
       build_id_records.push_back(
           BuildIdRecord(false, UINT_MAX, build_id, dso->Path()));
@@ -1190,33 +1407,10 @@ bool RecordCommand::DumpBuildIdFeature() {
 
 bool RecordCommand::DumpFileFeature() {
   std::vector<Dso*> dso_v = thread_tree_.GetAllDsos();
-  for (Dso* dso : dso_v) {
-    if (!dso->HasDumpId()) {
-      continue;
-    }
-    uint32_t dso_type = dso->type();
-    uint64_t min_vaddr = dso->MinVirtualAddress();
-
-    // Dumping all symbols in hit files takes too much space, so only dump
-    // needed symbols.
-    const std::vector<Symbol>& symbols = dso->GetSymbols();
-    std::vector<const Symbol*> dump_symbols;
-    for (const auto& sym : symbols) {
-      if (sym.HasDumpId()) {
-        dump_symbols.push_back(&sym);
-      }
-    }
-    std::sort(dump_symbols.begin(), dump_symbols.end(), Symbol::CompareByAddr);
-
-    if (!record_file_writer_->WriteFileFeature(dso->Path(), dso_type, min_vaddr,
-                                               dump_symbols)) {
-      return false;
-    }
-  }
-  return true;
+  return record_file_writer_->WriteFileFeatures(thread_tree_.GetAllDsos());
 }
 
-bool RecordCommand::DumpMetaInfoFeature() {
+bool RecordCommand::DumpMetaInfoFeature(bool kernel_symbols_available) {
   std::unordered_map<std::string, std::string> info_map;
   info_map["simpleperf_version"] = GetSimpleperfVersion();
   info_map["system_wide_collection"] = system_wide_collection_ ? "true" : "false";
@@ -1230,9 +1424,13 @@ bool RecordCommand::DumpMetaInfoFeature() {
                                   android::base::GetProperty("ro.product.model", "").c_str(),
                                   android::base::GetProperty("ro.product.name", "").c_str());
   info_map["android_version"] = android::base::GetProperty("ro.build.version.release", "");
+  if (!app_package_name_.empty()) {
+    info_map["app_package_name"] = app_package_name_;
+  }
 #endif
   info_map["clockid"] = clockid_;
   info_map["timestamp"] = std::to_string(time(nullptr));
+  info_map["kernel_symbols_available"] = kernel_symbols_available ? "true" : "false";
   return record_file_writer_->WriteMetaInfoFeature(info_map);
 }
 
@@ -1249,7 +1447,7 @@ void RecordCommand::CollectHitFileInfo(const SampleRecord& r) {
       dso->CreateSymbolDumpId(symbol);
     }
   }
-  if (!dso->HasDumpId()) {
+  if (!dso->HasDumpId() && dso->type() != DSO_UNKNOWN_FILE) {
     dso->CreateDumpId();
   }
   if (r.sample_type & PERF_SAMPLE_CALLCHAIN) {
@@ -1285,7 +1483,7 @@ void RecordCommand::CollectHitFileInfo(const SampleRecord& r) {
             dso->CreateSymbolDumpId(symbol);
           }
         }
-        if (!dso->HasDumpId()) {
+        if (!dso->HasDumpId() && dso->type() != DSO_UNKNOWN_FILE) {
           dso->CreateDumpId();
         }
       }

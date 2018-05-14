@@ -103,7 +103,23 @@ void SetDefaultAppPackageName(const std::string& package_name);
 const std::string& GetDefaultAppPackageName();
 void AllowMoreOpenedFiles();
 
-void SetTempDirectoryUsedInRecording(const std::string& tmp_dir);
-std::unique_ptr<TemporaryFile> CreateTempFileUsedInRecording();
+class ScopedTempFiles {
+ public:
+  ScopedTempFiles(const std::string& tmp_dir);
+  ~ScopedTempFiles();
+  // If delete_in_destructor = true, the temp file will be deleted in the destructor of
+  // ScopedTempFile. Otherwise, it should be deleted by the caller.
+  static std::unique_ptr<TemporaryFile> CreateTempFile(bool delete_in_destructor = true);
+
+ private:
+  static std::string tmp_dir_;
+  static std::vector<std::string> files_to_delete_;
+};
+
+bool SignalIsIgnored(int signo);
+// Return 0 if no android version.
+int GetAndroidVersion();
+
+constexpr int kAndroidVersionP = 9;
 
 #endif  // SIMPLE_PERF_ENVIRONMENT_H_
