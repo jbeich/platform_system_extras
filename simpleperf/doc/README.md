@@ -16,15 +16,15 @@ Bugs and feature requests can be submitted at http://github.com/android-ndk/ndk/
 - [Tools in simpleperf](#tools-in-simpleperf)
 - [Android application profiling](#android-application-profiling)
     - [Prepare an Android application](#prepare-an-android-application)
-    - [Record and report profiling data (using command-lines)](#record-and-report-profiling-data-using-commandlines)
-    - [Record and report profiling data (using python scripts)](#record-and-report-profiling-data-using-python-scripts)
-    - [Record and report call graphs](#record-and-report-call-graphs)
-    - [Visualize profiling data](#visualize-profiling-data)
-    - [Annotate source code](#annotate-source-code)
-    - [Trace offcpu time](#trace-offcpu-time)
-    - [Profile from launch of an application](#profile-from-launch-of-an-application)
+    - [Record and report profiling data](#record-and-report-profiling-data)
+    - [Record and report call graph](#record-and-report-call-graph)
+    - [Report in html interface](#report-in-html-interface)
+    - [Show flame graph](#show-flame-graph)
+    - [Record both on CPU time and off CPU time](#record-both-on-cpu-time-and-off-cpu-time)
+    - [Profile from launch](#profile-from-launch)
+    - [Parse profiling data manually](#parse-profiling-data-manually)
 - [Executable commands reference](#executable-commands-reference)
-    - [How does simpleperf work?](#how-does-simpleperf-work)
+    - [How simpleperf works](#how-simpleperf-works)
     - [Commands](#commands)
     - [The list command](#the-list-command)
     - [The stat command](#the-stat-command)
@@ -40,7 +40,7 @@ Bugs and feature requests can be submitted at http://github.com/android-ndk/ndk/
         - [Decide how long to record](#decide-how-long-to-record)
         - [Set the path to store profiling data](#set-the-path-to-store-profiling-data)
         - [Record call graphs](#record-call-graphs-in-record-cmd)
-        - [Record both on CPU time and off CPU time](#record-both-on-cpu-time-and-off-cpu-time)
+        - [Record both on CPU time and off CPU time](#record-both-on-cpu-time-and-off-cpu-time-in-record-cmd)
     - [The report command](#the-report-command)
         - [Set the path to read profiling data](#set-the-path-to-read-profiling-data)
         - [Set the path to find binaries](#set-the-path-to-find-binaries)
@@ -48,8 +48,9 @@ Bugs and feature requests can be submitted at http://github.com/android-ndk/ndk/
         - [Group samples into sample entries](#group-samples-into-sample-entries)
         - [Report call graphs](#report-call-graphs-in-report-cmd)
 - [Scripts reference](#scripts-reference)
-    - [app_profiler py](#app_profiler-py)
+    - [app_profiler.py](#app_profiler-py)
         - [Profile from launch of an application](#profile-from-launch-of-an-application)
+    - [run_simpleperf_without_usb_connection.py](#run_simpleperf_without_usb_connection-py)
     - [binary_cache_builder.py](#binary_cache_builder-py)
     - [run_simpleperf_on_device.py](#run_simpleperf_on_device-py)
     - [report.py](#report-py)
@@ -61,6 +62,7 @@ Bugs and feature requests can be submitted at http://github.com/android-ndk/ndk/
 - [Answers to common issues](#answers-to-common-issues)
     - [Why we suggest profiling on android >= N devices](#why-we-suggest-profiling-on-android-n-devices)
     - [Suggestions about recording call graphs](#suggestions-about-recording-call-graphs)
+    - [How to solve missing symbols in report](#how-to-solve-missing-symbols-in-report)
 
 ## Introduction
 
@@ -77,6 +79,7 @@ the Android profiling environment:
    a. When recording dwarf based call graph, simpleperf unwinds the stack before writing a sample
       to file. This is to save storage space on the device.
    b. Support tracing both on CPU time and off CPU time with --trace-offcpu option.
+   c. Support recording callgraphs of JITed and interpreted Java code on Android >= P.
 
 3. It relates closely to the Android platform.
    a. Is aware of Android environment, like using system properties to enable profiling, using
@@ -99,7 +102,7 @@ Detailed documentation for the simpleperf executable is [here](#executable-comma
 
 Python scripts are split into three parts according to their functions:
 
-1. Scripts used for simplifying recording, like app_profiler.py.
+1. Scripts used for recording, like app_profiler.py, run_simpleperf_without_usb_connection.py.
 
 2. Scripts used for reporting, like report.py, report_html.py, inferno.
 
@@ -122,6 +125,9 @@ bin/${host}/${arch}/libsimpleperf_report.${so/dylib/dll}: report shared librarie
 
 [app_profiler.py](#app_profiler-py): recording profiling data.
 
+[run_simpleperf_without_usb_connection.py](#run_simpleperf_without_usb_connection-py):
+    recording profiling data while the USB cable isn't connected.
+
 [binary_cache_builder.py](#binary_cache_builder-py): building binary cache for profiling data.
 
 [report.py](#report-py): reporting in stdio interface.
@@ -139,433 +145,270 @@ inferno/: implementation of inferno. Used by inferno.sh.
 
 [simpleperf_report_lib.py](#simpleperf_report_lib-py): library for parsing profiling data.
 
+
 ## Android application profiling
 
 This section shows how to profile an Android application.
-[Here](https://android.googlesource.com/platform/system/extras/+/master/simpleperf/demo/README.md) are examples. And we use
-[SimpleperfExamplePureJava](https://android.googlesource.com/platform/system/extras/+/master/simpleperf/demo/SimpleperfExamplePureJava) project to show the profiling results.
-
-Simpleperf only supports profiling native instructions in binaries in ELF
-format. If the Java code is executed by interpreter, or with jit cache, it
-can’t be profiled by simpleperf. As Android supports Ahead-of-time compilation,
-it can compile Java bytecode into native instructions with debug information.
-On devices with Android version <= M, we need root privilege to compile Java
-bytecode with debug information. However, on devices with Android version >= N,
-we don't need root privilege to do so.
+Some examples are [Here](https://android.googlesource.com/platform/system/extras/+/master/simpleperf/demo/README.md).
 
 Profiling an Android application involves three steps:
-1. Prepare the application.
+1. Prepare an Android application.
 2. Record profiling data.
 3. Report profiling data.
 
-To profile, we can use either command lines or python scripts. Below shows both.
-
-
 ### Prepare an Android application
 
-Before profiling, we need to install the application to be profiled on an Android device.
-To get valid profiling results, please check following points:
+Based on the profiling situation, we may need to customize the build script to generate an apk file
+specifically for profiling. Below are some suggestions.
 
-**1. The application should be debuggable.**
-It means [android:debuggable](https://developer.android.com/guide/topics/manifest/application-element.html#debug)
-should be true. So we need to use debug [build type](https://developer.android.com/studio/build/build-variants.html#build-types)
-instead of release build type. It is understandable because we can't profile others' apps.
-However, on a rooted Android device, the application doesn't need to be debuggable.
+1. If you want to profile a debug build of an application:
 
-**2. Run on an Android >= N device.**
-We suggest profiling on an Android >= N device. The reason is [here](#why-we-suggest-profiling-on-android-n-devices).
+For the debug build type, Android studio sets android::debuggable="true" in AndroidManifest.xml,
+enables JNI checks and may not optimize C/C++ code. It can be profiled by simpleperf without any
+change.
+
+2. If you want to profile a release build of an application:
+
+For the release build type, Android studio sets android::debuggable="false" in AndroidManifest.xml,
+disables JNI checks and optimizes C/C++ code. However, security restrictions mean that only apps
+with android::debuggable set to true can be profiled. So simpleperf can only profile a release
+build under these two circumstances:
+If you are on a rooted device, you can profile any app.
+
+If you are on Android >= O, we can use [wrap.sh](#https://developer.android.com/ndk/guides/wrap-script.html)
+to profile a release build:
+Step 1: Add android::debuggable="true" in AndroidManifest.xml to enable profiling.
+```
+<manifest ...>
+    <application android::debuggable="true" ...>
+```
+
+Step 2: Add wrap.sh in lib/`arch` directories. wrap.sh runs the app without passing any debug flags
+to ART, so the app runs as a release app. wrap.sh can be done by adding the script below in
+app/build.gradle.
+```
+android {
+    buildTypes {
+        release {
+            sourceSets {
+                release {
+                    resources {
+                        srcDir {
+                            "wrap_sh_lib_dir"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+task createWrapShLibDir
+    for (String abi : ["armeabi", "armeabi-v7a", "arm64-v8a", "x86", "x86_64"]) {
+        def dir = new File("app/wrap_sh_lib_dir/lib/" + abi)
+        dir.mkdirs()
+        def wrapFile = new File(dir, "wrap.sh")
+        wrapFile.withWriter { writer ->
+            writer.write('#!/system/bin/sh\n\$@\n')
+        }
+    }
+}
+```
+
+3. If you want to profile C/C++ code:
+
+Android studio strips symbol table and debug info of native libraries in the apk. So the profiling
+results may contain unknown symbols or broken callgraphs. To fix this, we can pass app_profiler.py
+a directory containing unstripped native libraries via the -lib option. Usually the directory can
+be the path of your Android Studio project.
 
 
-**3. On Android O, add `wrap.sh` in the apk.**
-To profile Java code, we need ART running in oat mode. But on Android O,
-debuggable applications are forced to run in jit mode. To work around this,
-we need to add a `wrap.sh` in the apk. So if you are running on Android O device,
-Check [here](https://android.googlesource.com/platform/system/extras/+/master/simpleperf/demo/SimpleperfExamplePureJava/app/profiling.gradle)
-for how to add `wrap.sh` in the apk.
+4. If you want to profile Java code:
 
-**4. Make sure C++ code is compiled with optimizing flags.**
-If the application contains C++ code, it can be compiled with -O0 flag in debug build type.
-This makes C++ code slow. Check [here](https://android.googlesource.com/platform/system/extras/+/master/simpleperf/demo/SimpleperfExamplePureJava/app/profiling.gradle)
-for how to avoid that.
+On Android >= P, simpleperf supports profiling Java code, no matter whether it is executed by
+the interpreter, or JITed, or compiled into native instructions. So you don't need to do anything.
 
-**5. Use native libraries with debug info in the apk when possible.**
-If the application contains C++ code or pre-compiled native libraries, try to use
-unstripped libraries in the apk. This helps simpleperf generating better profiling
-results. Check [here](https://android.googlesource.com/platform/system/extras/+/master/simpleperf/demo/SimpleperfExamplePureJava/app/profiling.gradle)
-for how to use unstripped libraries.
+On Android O, simpleperf supports profiling Java code which is compiled into native instructions,
+and it also needs wrap.sh to use the compiled Java code. To compile Java code, we can pass
+app_profiler.py the --compile_java_code option.
 
-Here we use [SimpleperfExamplePureJava](https://android.googlesource.com/platform/system/extras/+/master/simpleperf/demo/SimpleperfExamplePureJava) as an example.
+On Android N, simpleperf supports profiling Java code that is compiled into native instructions.
+To compile java code, we can pass app_profiler.py the --compile_java_code option.
+
+On Android <= M, simpleperf doesn't support profiling Java code.
+
+
+Below I use application [SimpleperfExampleWithNative](https://android.googlesource.com/platform/system/extras/+/master/simpleperf/demo/SimpleperfExampleWithNative).
 It builds an app-profiling.apk for profiling.
 
-    $ git clone https://android.googlesource.com/platform/system/extras
-    $ cd extras/simpleperf/demo
-    # Open SimpleperfExamplesPureJava project with Android studio,
-    # and build this project sucessfully, otherwise the `./gradlew` command below will fail.
-    $ cd SimpleperfExamplePureJava
+```sh
+$ git clone https://android.googlesource.com/platform/system/extras
+$ cd extras/simpleperf/demo
+# Open SimpleperfExamplesWithNative project with Android studio, and build this project
+# successfully, otherwise the `./gradlew` command below will fail.
+$ cd SimpleperfExampleWithNative
+
+# On windows, use "gradlew" instead.
+$ ./gradlew clean assemble
+$ adb install -r app/build/outputs/apk/profiling/app-profiling.apk
+```
+
+### Record and report profiling data
+
+We can use [app-profiler.py](#app_profiler-py) to profile Android applications.
+
+```sh
+# Cd to the directory of simpleperf scripts. Record perf.data.
+# -p option selects the profiled app using its package name.
+# --compile_java_code option compiles Java code into native instructions, which isn't needed on
+# Android >= P.
+# -a option selects the Activity to profile.
+# -lib option gives the directory to find debug native libraries.
+$ python app_profiler.py -p com.example.simpleperf.simpleperfexamplewithnative --compile_java_code \
+    -a .MixActivity -lib path_of_SimpleperfExampleWithNative
+```
+
+This will collect profiling data in perf.data in the current directory, and related native
+binaries in binary_cache/.
+
+Normally we need to use the app when profiling, otherwise we may record no samples. But in this
+case, the MixActivity starts a busy thread. So we don't need to use the app while profiling.
+
+```sh
+# Report perf.data in stdio interface.
+$ python report.py
+Cmdline: /data/data/com.example.simpleperf.simpleperfexamplewithnative/simpleperf record ...
+Arch: arm64
+Event: task-clock:u (type 1, config 1)
+Samples: 10023
+Event count: 10023000000
+
+Overhead  Command     Pid   Tid   Shared Object              Symbol
+27.04%    BusyThread  5703  5729  /system/lib64/libart.so    art::JniMethodStart(art::Thread*)
+25.87%    BusyThread  5703  5729  /system/lib64/libc.so      long StrToI<long, ...
+...
+```
+
+[report.py](#report-py) reports profiling data in stdio interface. If there are a lot of unknown
+symbols in the report, check [here](#how-to-solve-missing-symbols-in-report).
+
+```sh
+# Report perf.data in html interface.
+$ python report_html.py
+
+# Add source code and disassembly. Change the path of source_dirs if it not correct.
+$ python report_html.py --add_source_code --source_dirs path_of_SimpleperfExampleWithNative \
+      --add_disassembly
+```
+
+[report_html.py](#report_html-py) generates report in report.html, and pops up a browser tab to
+show it.
+
+### Record and report call graph
+
+We can record and report [call graphs](#record-call-graphs-in-record-cmd) as below.
+
+```sh
+# Record dwarf based call graphs: add "-g" in the -r option.
+$ python app_profiler.py -p com.example.simpleperf.simpleperfexamplewithnative \
+        -r "-e task-clock:u -f 1000 --duration 10 -g" -lib path_of_SimpleperfExampleWithNative
+
+# Record stack frame based call graphs: add "--call-graph fp" in the -r option.
+$ python app_profiler.py -p com.example.simpleperf.simpleperfexamplewithnative \
+        -r "-e task-clock:u -f 1000 --duration 10 --call-graph fp" \
+        -lib path_of_SimpleperfExampleWithNative
+
+# Report call graphs in stdio interface.
+$ python report.py -g
+
+# Report call graphs in python Tk interface.
+$ python report.py -g --gui
+
+# Report call graphs in html interface.
+$ python report_html.py
+
+# Report call graphs in flame graphs.
+# On Windows, use inferno.bat instead of ./inferno.sh.
+$ ./inferno.sh -sc
+```
+
+### Report in html interface
+
+We can use [report_html.py](#report_html-py) to show profiling results in a web browser.
+report_html.py integrates chart statistics, sample table, flame graphs, source code annotation
+and disassembly annotation. It is the recommended way to show reports.
+
+```sh
+$ python report_html.py
+```
+
+### Show flame graph
 
-    # On windows, use "gradlew" instead.
-    $ ./gradlew clean assemble
-    $ adb install -r app/build/outputs/apk/app-profiling.apk
+To show flame graphs, we need to first record call graphs. Flame graphs are shown by
+report_html.py in the "Flamegraph" tab.
+We can also use [inferno](#inferno) to show flame graphs directly.
 
+```sh
+# On Windows, use inferno.bat instead of ./inferno.sh.
+$ ./inferno.sh -sc
+```
 
-### Record and report profiling data (using command-lines)
+We can also build flame graphs using https://github.com/brendangregg/FlameGraph.
+Please make sure you have perl installed.
 
-We recommend using Python scripts for profiling because they are more convenient.
-But using command-line will give us a better understanding of the profile process
-step by step. So we first show how to use command lines.
+```sh
+$ git clone https://github.com/brendangregg/FlameGraph.git
+$ python report_sample.py --symfs binary_cache >out.perf
+$ FlameGraph/stackcollapse-perf.pl out.perf >out.folded
+$ FlameGraph/flamegraph.pl out.folded >a.svg
+```
 
-**1. Enable profiling**
+### Record both on CPU time and off CPU time
 
-    $ adb shell setprop security.perf_harden 0
+We can [record both on CPU time and off CPU time](#record-both-on-cpu-time-and-off-cpu-time-in-record-cmd).
 
-**2. Fully compile the app**
+First check if trace-offcpu feature is supported on the device.
 
-We need to compile Java bytecode into native instructions to profile Java code
-in the application. This needs different commands on different Android versions.
+```sh
+$ python run_simpleperf_on_device.py list --show-features
+dwarf-based-call-graph
+trace-offcpu
+```
 
-On Android >= N:
+If trace-offcpu is supported, it will be shown in the feature list. Then we can try it.
 
-    $ adb shell setprop debug.generate-debug-info true
-    $ adb shell cmd package compile -f -m speed com.example.simpleperf.simpleperfexamplepurejava
-    # Restart the app to take effect
-    $ adb shell am force-stop com.example.simpleperf.simpleperfexamplepurejava
+```sh
+$ python app_profiler.py -p com.example.simpleperf.simpleperfexamplewithnative -a .SleepActivity \
+    -r "-g -e task-clock:u -f 1000 --duration 10 --trace-offcpu" \
+    -lib path_of_SimpleperfExampleWithNative
+$ python report_html.py --add_disassembly --add_source_code \
+    --source_dirs path_of_SimpleperfExampleWithNative
+```
 
-On Android M devices, we need root privilege to force Android to fully compile
-Java code into native instructions in ELF binaries with debug information. We
-also need root privilege to read compiled native binaries (because installd
-writes them to a directory whose uid/gid is system:install). So profiling Java
-code can only be done on rooted devices.
+### Profile from launch
 
-    $ adb root
-    $ adb shell setprop dalvik.vm.dex2oat-flags -g
+We can [profile from launch of an application](#profile-from-launch-of-an-application).
 
-    # Reinstall the app.
-    $ adb install -r app/build/outputs/apk/app-profiling.apk
+```sh
+# Start simpleperf recording, then start the Activity to profile.
+$ python app_profiler.py -p com.example.simpleperf.simpleperfexamplewithnative -a .MainActivity
 
-On Android L devices, we also need root privilege to compile the app with debug info
-and access the native binaries.
+# We can also start the Activity on the device manually.
+# 1. Make sure the application isn't running or one of the recent apps.
+# 2. Start simpleperf recording.
+$ python app_profiler.py -p com.example.simpleperf.simpleperfexamplewithnative
+# 3. Start the app manually on the device.
+```
 
-    $ adb root
-    $ adb shell setprop dalvik.vm.dex2oat-flags --include-debug-symbols
+### Parse profiling data manually
 
-    # Reinstall the app.
-    $ adb install -r app/build/outputs/apk/app-profiling.apk
-
-
-**3. Start the app if needed**
-
-    $ adb shell am start -n com.example.simpleperf.simpleperfexamplepurejava/.MainActivity
-
-    $ adb shell pidof com.example.simpleperf.simpleperfexamplepurejava
-    6885
-
-So the id of the app process is `6885`. We will use this number in the command lines below,
-please replace this number with what you get by running `pidof` command.
-On Android <= M, pidof may not exist or work well, and you can try
-`ps | grep com.example.simpleperf.simpleperfexamplepurejava` instead.
-
-**4. Download simpleperf to the app's data directory**
-
-    # Find which architecture the app is using. On ARM devices, it must be ARM.
-    # But on ARM64 devices, it can be either ARM or ARM64. If you are not sure,
-    # you can find it out in the app process's map.
-    $ adb shell pidof com.example.simpleperf.simpleperfexamplepurejava
-    6885
-    $ adb shell run-as com.example.simpleperf.simpleperfexamplepurejava cat /proc/6885/maps | grep boot.oat
-    708e6000-70e33000 r--p 00000000 103:09 1214                              /system/framework/arm64/boot.oat
-
-    # The app uses /arm64/boot.oat, so push simpleperf in bin/android/arm64/ to device.
-
-    # Now download the simpleperf for the app's architecture on the device.
-    $ cd ../../scripts/
-    $ adb push bin/android/arm64/simpleperf /data/local/tmp
-    $ adb shell chmod a+x /data/local/tmp/simpleperf
-
-
-**5. Record perf.data**
-
-    $ adb shell /data/local/tmp/simpleperf record \
-      --app com.example.simpleperf.simpleperfexamplepurejava --duration 10 \
-      -o /data/local/tmp/perf.data
-    simpleperf I 04-27 20:41:11  6940  6940 cmd_record.cpp:357] Samples recorded: 40008. Samples lost: 0.
-
-The profiling data is recorded at /data/local/tmp/perf.data.
-
-Normally we need to use the app when profiling, otherwise we may record no samples.
-But in this case, the MainActivity starts a busy thread. So we don't need to use
-the app while profiling.
-
-There are many options to record profiling data, check [record command](#simpleperf-record) for details.
-
-**6. Report perf.data**
-
-    # Pull perf.data on the host.
-    $ adb pull /data/local/tmp/perf.data
-
-    # Report samples using report.py, report.py is a python wrapper of simpleperf report command.
-    $ python report.py
-    ...
-    Overhead  Command   Pid   Tid   Shared Object                                                                     Symbol
-    83.54%    Thread-2  6885  6900  /data/app/com.example.simpleperf.simpleperfexamplepurejava-2/oat/arm64/base.odex  void com.example.simpleperf.simpleperfexamplepurejava.MainActivity$1.run()
-    16.11%    Thread-2  6885  6900  /data/app/com.example.simpleperf.simpleperfexamplepurejava-2/oat/arm64/base.odex  int com.example.simpleperf.simpleperfexamplepurejava.MainActivity$1.callFunction(int)
-
-There are many ways to show reports, check [report command](#simpleperf-report) for details.
-
-
-### Record and report profiling data (using python scripts)
-
-Besides command lines, we can use `app-profiler.py` to profile Android applications.
-It downloads simpleperf on the device, records perf.data, and collects profiling
-results and native binaries on the host.
-
-**1. Record perf.data by running `app-profiler.py`**
-
-    $ python app_profiler.py --app com.example.simpleperf.simpleperfexamplepurejava \
-         --apk ../SimpleperfExamplePureJava/app/build/outputs/apk/app-profiling.apk \
-         -r "-e cpu-cycles:u --duration 10"
-
-
-If running successfully, it will collect profiling data in perf.data in current
-directory, and related native binaries in binary_cache/.
-
-**2. Report perf.data**
-
-We can use `report.py` to report perf.data.
-
-    $ python report.py
-
-We can add any option accepted by `simpleperf report` command to `report.py`.
-
-
-### Record and report call graphs
-
-A call graph is a tree showing function call relations. Below is an example.
-
-    main() {
-        FunctionOne();
-        FunctionTwo();
-    }
-    FunctionOne() {
-        FunctionTwo();
-        FunctionThree();
-    }
-    a call graph:
-        main-> FunctionOne
-           |    |
-           |    |-> FunctionTwo
-           |    |-> FunctionThree
-           |
-           |-> FunctionTwo
-
-
-#### Record dwarf based call graphs
-
-When using command lines, add -g as below:
-
-    $ adb shell /data/local/tmp/simpleperf record -g \
-    --app com.example.simpleperf.simpleperfexamplepurejava --duration 10 \
-    -o /data/local/tmp/perf.data
-
-When using app_profiler.py, add -g as below:
-
-    $ python app_profiler.py --app com.example.simpleperf.simpleperfexamplepurejava \
-        --apk ../SimpleperfExamplePureJava/app/build/outputs/apk/app-profiling.apk \
-        -r "-e cpu-cycles:u --duration 10 -g"
-
-Recording dwarf based call graphs needs support of debug information
-in native binaries. So if using native libraries in the application,
-it is better to contain non-stripped native libraries in the apk.
-
-
-#### Record stack frame based call graphs
-
-When using command lines, add "--call-graph fp" as below:
-
-    $ adb shell /data/local/tmp/simpleperf record --call-graph fp \
-    --app com.example.simpleperf.simpleperfexamplepurejava --duration 10 \
-    -o /data/local/tmp/perf.data
-
-When using app_profiler.py, add "--call-graph fp" as below:
-
-    $ python app_profiler.py --app com.example.simpleperf.simpleperfexamplepurejava \
-        --apk ../SimpleperfExamplePureJava/app/build/outputs/apk/app-profiling.apk \
-        -r "-e cpu-cycles:u --duration 10 --call-graph fp"
-
-Recording stack frame based call graphs needs support of stack frame
-registers. Notice that on ARM, stack frame registers
-are not supported well, even if compiled using "-O0 -g -fno-omit-frame-pointer"
-It is because the kernel can't unwind user stack containing both
-ARM/THUMB code. **So please consider recording dwarf based call graphs on ARM, or profiling
-on ARM64.**
-
-
-#### Report call graphs
-
-To report call graphs using command lines, add -g.
-
-    $ python report.py -g
-    ...
-    Children  Self    Command          Pid    Tid    Shared Object                                                                     Symbol
-    99.97%    0.00%   Thread-2         10859  10876  /system/framework/arm64/boot.oat                                                  java.lang.Thread.run
-       |
-       -- java.lang.Thread.run
-          |
-           -- void com.example.simpleperf.simpleperfexamplepurejava.MainActivity$1.run()
-               |--83.66%-- [hit in function]
-               |
-               |--16.22%-- int com.example.simpleperf.simpleperfexamplepurejava.MainActivity$1.callFunction(int)
-               |    |--99.97%-- [hit in function]
-
-To report call graphs in gui mode, add --gui.
-
-    $ python report.py -g --gui
-    # Double-click an item started with '+' to show its call graph.
-
-### Visualize profiling data
-
-`simpleperf_report_lib.py` provides an interface reading samples from perf.data.
-By using it, You can write python scripts to read perf.data or convert perf.data
-to other formats. Below are two examples.
-
-
-### Show flamegraph
-
-After collecting perf.data, you can use [inferno](./inferno.md) to show
-flamegraphs.
-On non-Windows platforms:
-
-    $ ./inferno.sh -sc --symfs binary_cache
-
-On Windows platform:
-
-    $ inferno.bat -sc --symfs binary_cache
-
-Remove `--symfs binary_cache` if you selected not to collect binaries when
-using `app_profiler.py`.
-
-You can also build flamegraphs based on scripts in
-https://github.com/brendangregg/FlameGraph. Please make sure you have perl
-installed.
-
-    $ git clone https://github.com/brendangregg/FlameGraph.git
-    $ python report_sample.py --symfs binary_cache >out.perf
-    $ FlameGraph/stackcollapse-perf.pl out.perf >out.folded
-    $ FlameGraph/flamegraph.pl out.folded >a.svg
-
-
-### Visualize using pprof
-
-pprof is a tool for visualization and analysis of profiling data. It can
-be got from https://github.com/google/pprof. pprof_proto_generator.py can
-generate profiling data in a format acceptable by pprof.
-
-    $ python pprof_proto_generator.py
-    $ pprof -pdf pprof.profile
-
-
-### Annotate source code
-
-`annotate.py` reads perf.data, binaries in `binary-cache` (collected by `app-profiler.py`)
-and source code, and generates annoated source code in `annotated_files/`.
-
-**1. Run annotate.py**
-
-    $ python annotate.py -s ../SimpleperfExamplePureJava
-
-`addr2line` is need to annotate source code. It can be found in Android ndk
-release, in paths like toolchains/aarch64-linux-android-4.9/prebuilt/linux-x86_64/bin/aarch64-linux-android-addr2line.
-Please use --addr2line to set the path of `addr2line` if annotate.py
-can't find it.
-
-**2. Read annotated code**
-
-The annotated source code is located at `annotated_files/`.
-`annotated_files/summary` shows how each source file is annotated.
-
-One annotated source file is `annotated_files/java/com/example/simpleperf/simpleperfexamplepurejava/MainActivity.java`.
-It's content is similar to below:
-
-    // [file] shows how much time is spent in current file.
-    /* [file] acc_p: 99.966552%, p: 99.837438% */package com.example.simpleperf.simpleperfexamplepurejava;
-    ...
-    // [func] shows how much time is spent in current function.
-    /* [func] acc_p: 16.213395%, p: 16.209250% */            private int callFunction(int a) {
-    ...
-    // This shows how much time is spent in current line.
-    // acc_p field means how much time is spent in current line and functions called by current line.
-    // p field means how much time is spent just in current line.
-    /* acc_p: 99.966552%, p: 83.628188%        */                    i = callFunction(i);
-
-
-### Trace offcpu time
-
-Simpleperf is a cpu profiler, it generates samples for a thread only when it is
-running on a cpu. However, sometimes we want to find out where time of a thread
-is spent, whether it is running on cpu, preempted by other threads, doing I/O
-work, or waiting for some events. To support this, we added the --trace-offcpu
-option in the simpleperf record command. When --trace-offcpu is used, simpleperf
-generates a sample when a running thread is scheduled out, so we know the
-callstack of a thread when it is scheduled out. And when reporting a perf.data
-generated with --trace-offcpu, we use timestamp to the next sample
-(instead of event counts from the previous sample) as the weight of the current
-sample. As a result, we can get a call graph based on timestamp, including both
-on cpu time and off cpu time.
-
-trace-offcpu is implemented using sched:sched_switch tracepoint event, which
-may not work well on old kernels. But it is guaranteed to be supported on
-devices after Android O MR1. We can check whether trace-offcpu is supported as
-below.
-
-    $ python run_simpleperf_on_device.py list --show-features
-    dwarf-based-call-graph
-    trace-offcpu
-
-If trace-offcpu is supported, it will be shown in the feature list.
-Then we can try it. Below is an example without using --trace-offcpu.
-
-    $ python app_profiler.py -p com.example.simpleperf.simpleperfexamplepurejava \
-      -a .SleepActivity -r "-g -e cpu-cycles:u --duration 10"
-    $ ./inferno.sh -sc
-
-![flamegraph sample](./without_trace_offcpu.png)
-
-In the graph, all time is taken by RunFunction(), and sleep time is ignored.
-But if we add --trace-offcpu, the graph is changed as below.
-
-    $ python app_profiler.py -p com.example.simpleperf.simpleperfexamplepurejava \
-      -a .SleepActivity -r "-g -e cpu-cycles:u --trace-offcpu --duration 10"
-    $ ./inferno.sh -sc
-
-![flamegraph sample](./trace_offcpu.png)
-
-As shown in the graph, half time is spent in RunFunction(), and half time is
-spent in SleepFunction(). It includes both on cpu time and off cpu time.
-
-### Profile from launch of an application
-
-Sometimes we want to profile the launch-time of an application. To support this,
-we added the --app option in the simpleperf record command. The --app option
-sets the package name of the Android application to profile. If the app is not
-already running, the simpleperf record command will poll for the app process in
-a loop with an interval of 1ms. So to profile from launch of an application,
-we can first start simpleperf record with --app, then start the app.
-Below is an example.
-
-    $ adb shell /data/local/tmp/simpleperf record -g \
-    --app com.example.simpleperf.simpleperfexamplepurejava --duration 1 \
-    -o /data/local/tmp/perf.data
-    # Start the app manually or using the `am` command.
-
-To make it convenient to use, app_profiler.py combines these in the
---profile_from_launch option. Below is an example.
-
-    $ python app_profiler.py -p com.example.simpleperf.simpleperfexamplepurejava \
-      -a .MainActivity --arch arm64 -r "-g -e cpu-cycles:u --duration 1" \
-      --profile_from_launch
+We can also write python scripts to parse profiling data manually, by using
+[simpleperf_report_lib.py](#simpleperf_report_lib-py). Examples are report_sample.py,
+report_html.py.
 
 ## Executable commands reference
 
-### How does simpleperf work?
+### How simpleperf works
 
 Modern CPUs have a hardware component called the performance monitoring unit (PMU). The PMU has
 several hardware counters, counting events like how many cpu cycles have happened, how many
@@ -599,6 +442,7 @@ and outputs a report showing where the time was spent.
 Simpleperf supports several commands, listed below:
 
 ```
+The debug-unwind command: debug/test dwarf based offline unwinding, used for debugging simpleperf.
 The dump command: dumps content in perf.data, used for debugging simpleperf.
 The help command: prints help information for other commands.
 The kmem command: collects kernel memory allocation information (will be replaced by Python scripts).
@@ -608,6 +452,7 @@ The report command: reports profiling data in perf.data.
 The report-sample command: reports each sample in perf.data, used for supporting integration of
                            simpleperf in Android Studio.
 The stat command: profiles processes and prints counter summary.
+
 ```
 
 Each command supports different options, which can be seen through help message.
@@ -932,8 +777,9 @@ $ simpleperf record -p 11904 -g --duration 10
 $ simpleperf record -p 11904 --call-graph fp --duration 10
 ```
 
-[Here](#suggestions-about-recording-call-graphs) are some suggestions about recording call graphs.
+[Here](#suggestions-about-recording-call-graphs) are some suggestions about recording call graphs
 
+<a name="record-both-on-cpu-time-and-off-cpu-time-in-record-cmd"></a>
 #### Record both on CPU time and off CPU time
 
 Simpleperf is a CPU profiler, it generates samples for a thread only when it is running on a CPU.
@@ -1115,12 +961,10 @@ app_profiler.py is used to record profiling data for Android applications and na
 # Record an Android application.
 $ python app_profiler.py -p com.example.simpleperf.simpleperfexamplewithnative
 
-# Record an Android application without compiling the Java code into native instructions.
-# Used when you only profile the C++ code, or the Java code has already been compiled into native
-# instructions.
-$ python app_profiler.py -p com.example.simpleperf.simpleperfexamplewithnative -nc
+# Record an Android application with Java code compiled into native instructions.
+$ python app_profiler.py -p com.example.simpleperf.simpleperfexamplewithnative --compile_java_code
 
-# Record running a specific activity of an Android application.
+# Record the launch of an Activity of an Android application.
 $ python app_profiler.py -p com.example.simpleperf.simpleperfexamplewithnative -a .SleepActivity
 
 # Record a native process.
@@ -1128,8 +972,7 @@ $ python app_profiler.py -np surfaceflinger
 
 # Record a command.
 $ python app_profiler.py -cmd \
-    "dex2oat --dex-file=/data/local/tmp/app-profiling.apk --oat-file=/data/local/tmp/a.oat" \
-    --arch arm
+    "dex2oat --dex-file=/data/local/tmp/app-profiling.apk --oat-file=/data/local/tmp/a.oat"
 
 # Record an Android application, and use -r to send custom options to the record command.
 $ python app_profiler.py -p com.example.simpleperf.simpleperfexamplewithnative \
@@ -1138,10 +981,6 @@ $ python app_profiler.py -p com.example.simpleperf.simpleperfexamplewithnative \
 # Record both on CPU time and off CPU time.
 $ python app_profiler.py -p com.example.simpleperf.simpleperfexamplewithnative \
     -r "-e task-clock -g -f 1000 --duration 10 --trace-offcpu"
-
-# Profile activity startup time using --profile_from_launch.
-$ python app_profiler.py -p com.example.simpleperf.simpleperfexamplewithnative \
-    --profile_from_launch --arch arm64
 ```
 
 #### Profile from launch of an application
@@ -1159,11 +998,27 @@ $ python run_simpleperf_on_device.py record
 # Start the app manually or using the `am` command.
 ```
 
-To make it convenient to use, app_profiler.py combines these in the --profile_from_launch option.
+To make it convenient to use, app_profiler.py supports using the -a option to start an Activity
+after recording has started.
 
 ```sh
-$ python app_profiler.py -p com.example.simpleperf.simpleperfexamplewithnative -a .MainActivity \
-    --arch arm64 --profile_from_launch
+$ python app_profiler.py -p com.example.simpleperf.simpleperfexamplewithnative -a .MainActivity
+```
+
+<a name="run_simpleperf_without_usb_connection-py"></a>
+### run_simpleperf_without_usb_connection.py
+
+run_simpleperf_without_usb_connection.py records profiling data while the USB cable isn't
+connected. Below is an example.
+
+```sh
+$ python run_simpleperf_without_usb_connection.py start \
+    -p com.example.simpleperf.simpleperfexamplewithnative
+# After the command finishes successfully, unplug the USB cable, run the
+# SimpleperfExampleWithNative app. After a few seconds, plug in the USB cable.
+$ python run_simpleperf_without_usb_connection.py stop
+# It may take a while to stop recording. After that, the profiling data is collected in perf.data
+# on host.
 ```
 
 <a name="binary_cache_builder-py"></a>
@@ -1177,7 +1032,7 @@ report_html.py to generate annotated source code and disassembly.
 By default, app_profiler.py builds the binary_cache directory after recording. But we can also
 build binary_cache for existing profiling data files using binary_cache_builder.py. It is useful
 when you record profiling data using `simpleperf record` directly, to do system wide profiling or
-record without usb cable connected.
+record without the USB cable connected.
 
 binary_cache_builder.py can either pull binaries from an Android device, or find binaries in
 directories on the host (via -lib).
@@ -1186,8 +1041,9 @@ directories on the host (via -lib).
 # Generate binary_cache for perf.data, by pulling binaries from the device.
 $ python binary_cache_builder.py
 
-# Generate binary_cache, by pulling binaries from the device and finding binaries in ../demo.
-$ python binary_cache_builder.py -lib ../demo
+# Generate binary_cache, by pulling binaries from the device and finding binaries in
+# SimpleperfExampleWithNative.
+$ python binary_cache_builder.py -lib path_of_SimpleperfExampleWithNative
 ```
 
 <a name="run_simpleperf_on_device-py"></a>
@@ -1224,7 +1080,7 @@ each function, annotated disassembly for each function.
 $ python report_html.py
 
 # Add source code.
-$ python report_html.py --add_source_code --source_dirs ../demo/SimpleperfExampleWithNative
+$ python report_html.py --add_source_code --source_dirs path_of_SimpleperfExampleWithNative
 
 # Add disassembly.
 $ python report_html.py --add_disassembly
@@ -1234,7 +1090,8 @@ Below is an example of generating html profiling results for SimpleperfExampleWi
 
 ```sh
 $ python app_profiler.py -p com.example.simpleperf.simpleperfexamplewithnative
-$ python report_html.py --add_source_code --source_dirs ../demo --add_disassembly
+$ python report_html.py --add_source_code --source_dirs path_of_SimpleperfExampleWithNative \
+    --add_disassembly
 ```
 
 After opening the generated [report.html](./report_html.html) in a browser, there are several tabs:
@@ -1360,3 +1217,27 @@ graphs. It can be supported in two ways:
 ```sh
 $ python app_profiler.py -lib NATIVE_LIB_DIR
 ```
+
+### How to solve missing symbols in report?
+
+The simpleperf record command collects symbols on device in perf.data. But if the native libraries
+you use on device are stripped, this will result in a lot of unknown symbols in the report. A
+solution is to build binary_cache on host.
+
+```sh
+# Collect binaries needed by perf.data in binary_cache/.
+$ python binary_cache_builder.py -lib NATIVE_LIB_DIR,...
+```
+
+The NATIVE_LIB_DIRs passed in -lib option are the directories containing unstripped native
+libraries on host. After running it, the native libraries containing symbol tables are collected
+in binary_cache/ for use when reporting.
+
+```sh
+$ python report.py --symfs binary_cache
+
+# report_html.py searches binary_cache/ automatically, so you don't need to
+# pass it any argument.
+$ python report_html.py
+```
+
