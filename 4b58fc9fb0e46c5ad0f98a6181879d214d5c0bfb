@@ -102,6 +102,30 @@
       "revId": "4b58fc9fb0e46c5ad0f98a6181879d214d5c0bfb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c2181dfa_7fc7c7b9",
+        "filename": "simpleperf/event_type.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1064128
+      },
+      "writtenOn": "2018-05-14T15:43:05Z",
+      "side": 1,
+      "message": "Yes, that\u0027s possible.  I wonder for this exact use case, if the ToLower() is fine though, since these strings do become user visible, right?  It\u0027s not a bad idea to be consistent on how to present them (all lower case).",
+      "parentUuid": "4cf178dc_91abe480",
+      "range": {
+        "startLine": 128,
+        "startChar": 0,
+        "endLine": 135,
+        "endChar": 0
+      },
+      "revId": "4b58fc9fb0e46c5ad0f98a6181879d214d5c0bfb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
