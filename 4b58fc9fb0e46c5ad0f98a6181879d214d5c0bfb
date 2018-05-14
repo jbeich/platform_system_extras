@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "2ed83e4f_2431e3ca",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-05-14T19:03:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b2b0e9bb_4c04eea8",
+      "range": {
+        "startLine": 113,
+        "startChar": 38,
+        "endLine": 113,
+        "endChar": 42
+      },
+      "revId": "4b58fc9fb0e46c5ad0f98a6181879d214d5c0bfb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f1cbfcbe_72ab5482",
         "filename": "simpleperf/cmd_record_test.cpp",
         "patchSetId": 3
@@ -36,6 +60,24 @@
       "writtenOn": "2018-05-12T15:34:41Z",
       "side": 1,
       "message": "(not in this change, but do we have an example x86 raw event?)",
+      "revId": "4b58fc9fb0e46c5ad0f98a6181879d214d5c0bfb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bb963566_e2601626",
+        "filename": "simpleperf/cmd_record_test.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-05-14T19:03:24Z",
+      "side": 1,
+      "message": "yes. but I can only test on host now.",
+      "parentUuid": "f1cbfcbe_72ab5482",
       "revId": "4b58fc9fb0e46c5ad0f98a6181879d214d5c0bfb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "77c2230f_d8d3caf8",
+        "filename": "simpleperf/cmd_stat.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-05-14T19:03:24Z",
+      "side": 1,
+      "message": "I agree. Will do it in the future.",
+      "parentUuid": "eb476b7e_cf56dc82",
+      "range": {
+        "startLine": 319,
+        "startChar": 0,
+        "endLine": 328,
+        "endChar": 0
+      },
+      "revId": "4b58fc9fb0e46c5ad0f98a6181879d214d5c0bfb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b0519198_33af5f86",
         "filename": "simpleperf/cmd_stat_test.cpp",
         "patchSetId": 3
@@ -79,6 +145,24 @@
       "revId": "4b58fc9fb0e46c5ad0f98a6181879d214d5c0bfb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "88c804aa_cfce5401",
+        "filename": "simpleperf/cmd_stat_test.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-05-14T19:03:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b0519198_33af5f86",
+      "revId": "4b58fc9fb0e46c5ad0f98a6181879d214d5c0bfb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +201,30 @@
       "side": 1,
       "message": "Yes, that\u0027s possible.  I wonder for this exact use case, if the ToLower() is fine though, since these strings do become user visible, right?  It\u0027s not a bad idea to be consistent on how to present them (all lower case).",
       "parentUuid": "4cf178dc_91abe480",
+      "range": {
+        "startLine": 128,
+        "startChar": 0,
+        "endLine": 135,
+        "endChar": 0
+      },
+      "revId": "4b58fc9fb0e46c5ad0f98a6181879d214d5c0bfb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6c6b4b53_dceafc18",
+        "filename": "simpleperf/event_type.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-05-14T19:03:24Z",
+      "side": 1,
+      "message": "Done. switched to std::set\u003cEventType\u003e and used strcasecmp.",
+      "parentUuid": "c2181dfa_7fc7c7b9",
       "range": {
         "startLine": 128,
         "startChar": 0,
