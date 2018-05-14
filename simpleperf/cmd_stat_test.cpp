@@ -18,6 +18,7 @@
 
 #include <android-base/file.h>
 #include <android-base/stringprintf.h>
+#include <android-base/strings.h>
 #include <android-base/test_utils.h>
 
 #include <thread>
@@ -145,7 +146,17 @@ TEST(stat_cmd, interval_option) {
     pos += subs.size();
     ++count ;
   }
-  ASSERT_EQ(count, 3UL);
+  ASSERT_EQ(count, 2UL);
+}
+
+TEST(stat_cmd, interval_option_in_system_wide) {
+  TEST_IN_ROOT(ASSERT_TRUE(StatCmd()->Run({"-a", "--interval", "100", "--duration", "0.3"})));
+}
+
+TEST(stat_cmd, interval_only_values_option) {
+  ASSERT_TRUE(StatCmd()->Run({"--interval", "500", "--interval-only-values", "sleep", "2"}));
+  TEST_IN_ROOT(ASSERT_TRUE(StatCmd()->Run({"-a", "--interval", "100", "--interval-only-values",
+                                           "--duration", "0.3"})));
 }
 
 TEST(stat_cmd, no_modifier_for_clock_events) {
@@ -158,6 +169,11 @@ TEST(stat_cmd, no_modifier_for_clock_events) {
 }
 
 TEST(stat_cmd, handle_SIGHUP) {
+  if (!GetDefaultAppPackageName().empty()) {
+    // See http://b/79495636.
+    GTEST_LOG_(INFO) << "Omit this test in app's context.";
+    return;
+  }
   std::thread thread([]() {
     sleep(1);
     kill(getpid(), SIGHUP);
@@ -189,4 +205,28 @@ TEST(stat_cmd, sample_speed_should_be_zero) {
     ASSERT_EQ(attr.attr->sample_freq, 0u);
     ASSERT_EQ(attr.attr->freq, 0u);
   }
+}
+
+TEST(stat_cmd, calculating_cpu_frequency) {
+  CaptureStdout capture;
+  ASSERT_TRUE(capture.Start());
+  ASSERT_TRUE(StatCmd()->Run({"--csv", "--group", "task-clock,cpu-cycles", "sleep", "1"}));
+  std::string output = capture.Finish();
+  double task_clock_in_ms = 0;
+  uint64_t cpu_cycle_count = 0;
+  double cpu_frequency = 0;
+  for (auto& line : android::base::Split(output, "\n")) {
+    if (line.find("task-clock") != std::string::npos) {
+      ASSERT_EQ(sscanf(line.c_str(), "%lf(ms)", &task_clock_in_ms), 1);
+    } else if (line.find("cpu-cycles") != std::string::npos) {
+      ASSERT_EQ(sscanf(line.c_str(), "%" SCNu64 ",cpu-cycles,%lf", &cpu_cycle_count,
+                       &cpu_frequency), 2);
+    }
+  }
+  ASSERT_NE(task_clock_in_ms, 0.0f);
+  ASSERT_NE(cpu_cycle_count, 0u);
+  ASSERT_NE(cpu_frequency, 0.0f);
+  double calculated_frequency = cpu_cycle_count / task_clock_in_ms / 1e6;
+  // Accept error up to 1e-3. Because the stat cmd print values with precision 1e-6.
+  ASSERT_NEAR(cpu_frequency, calculated_frequency, 1e-3);
 }

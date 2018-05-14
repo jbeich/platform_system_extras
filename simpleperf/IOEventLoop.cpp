@@ -37,7 +37,8 @@ struct IOEvent {
   }
 };
 
-IOEventLoop::IOEventLoop() : ebase_(nullptr), has_error_(false), use_precise_timer_(false) {}
+IOEventLoop::IOEventLoop()
+    : ebase_(nullptr), has_error_(false), use_precise_timer_(false), in_loop_(false) {}
 
 IOEventLoop::~IOEventLoop() {
   events_.clear();
@@ -61,7 +62,24 @@ bool IOEventLoop::EnsureInit() {
       if (use_precise_timer_) {
         event_config_set_flag(cfg, EVENT_BASE_FLAG_PRECISE_TIMER);
       }
+      if (event_config_avoid_method(cfg, "epoll") != 0) {
+        LOG(ERROR) << "event_config_avoid_method";
+        return false;
+      }
       ebase_ = event_base_new_with_config(cfg);
+      // perf event files support reporting available data via poll methods. However, it doesn't
+      // work well with epoll. Because perf_poll() in kernel/events/core.c uses a report and reset
+      // way to report poll events. If perf_poll() is called twice, it may return POLLIN for the
+      // first time, and no events for the second time. And epoll may call perf_poll() more than
+      // once to confirm events. A failed situation is below:
+      // When profiling SimpleperfExampleOfKotlin on Pixel device with `-g --duration 10`, the
+      // kernel fills up the buffer before we call epoll_ctl(EPOLL_CTL_ADD). Then the POLLIN event
+      // is returned when calling epoll_ctl(), while no events are returned when calling
+      // epoll_wait(). As a result, simpleperf doesn't receive any poll wakeup events.
+      if (strcmp(event_base_get_method(ebase_), "poll") != 0) {
+        LOG(ERROR) << "event_base_get_method isn't poll: " << event_base_get_method(ebase_);
+        return false;
+      }
       event_config_free(cfg);
     }
     if (ebase_ == nullptr) {
@@ -146,8 +164,10 @@ IOEventRef IOEventLoop::AddEvent(int fd_or_sig, short events, timeval* timeout,
 }
 
 bool IOEventLoop::RunLoop() {
+  in_loop_ = true;
   if (event_base_dispatch(ebase_) == -1) {
     LOG(ERROR) << "event_base_dispatch() failed";
+    in_loop_ = false;
     return false;
   }
   if (has_error_) {
@@ -157,9 +177,12 @@ bool IOEventLoop::RunLoop() {
 }
 
 bool IOEventLoop::ExitLoop() {
-  if (event_base_loopbreak(ebase_) == -1) {
-    LOG(ERROR) << "event_base_loopbreak() failed";
-    return false;
+  if (in_loop_) {
+    if (event_base_loopbreak(ebase_) == -1) {
+      LOG(ERROR) << "event_base_loopbreak() failed";
+      return false;
+    }
+    in_loop_ = false;
   }
   return true;
 }

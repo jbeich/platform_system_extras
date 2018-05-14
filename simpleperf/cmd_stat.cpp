@@ -28,7 +28,6 @@
 
 #include <android-base/file.h>
 #include <android-base/logging.h>
-#include <android-base/parsedouble.h>
 #include <android-base/strings.h>
 
 #include "command.h"
@@ -47,6 +46,12 @@ static std::vector<std::string> default_measured_event_types{
     "cpu-cycles",   "stalled-cycles-frontend", "stalled-cycles-backend",
     "instructions", "branch-instructions",     "branch-misses",
     "task-clock",   "context-switches",        "page-faults",
+};
+
+struct CounterSum {
+  uint64_t value = 0;
+  uint64_t time_enabled = 0;
+  uint64_t time_running = 0;
 };
 
 struct CounterSummary {
@@ -210,7 +215,11 @@ class CounterSummaries {
       return "";
     }
     if (s.type_name == "cpu-cycles") {
-      double hz = s.count / (duration_in_sec / s.scale);
+      double running_time_in_sec;
+      if (!FindRunningTimeForSummary(s, &running_time_in_sec)) {
+        return "";
+      }
+      double hz = s.count / (running_time_in_sec / s.scale);
       return android::base::StringPrintf("%lf%cGHz", hz / 1e9, sap_mid);
     }
     if (s.type_name == "instructions" && s.count != 0) {
@@ -247,7 +256,11 @@ class CounterSummaries {
         return android::base::StringPrintf("%f%%%cmiss rate", miss_rate * 100, sap_mid);
       }
     }
-    double rate = s.count / (duration_in_sec / s.scale);
+    double running_time_in_sec;
+    if (!FindRunningTimeForSummary(s, &running_time_in_sec)) {
+      return "";
+    }
+    double rate = s.count / (running_time_in_sec / s.scale);
     if (rate > 1e9) {
       return android::base::StringPrintf("%.3lf%cG/sec", rate / 1e9, sap_mid);
     }
@@ -258,6 +271,17 @@ class CounterSummaries {
       return android::base::StringPrintf("%.3lf%cK/sec", rate / 1e3, sap_mid);
     }
     return android::base::StringPrintf("%.3lf%c/sec", rate, sap_mid);
+  }
+
+  bool FindRunningTimeForSummary(const CounterSummary& summary, double* running_time_in_sec) {
+    for (auto& s : summaries_) {
+      if ((s.type_name == "task-clock" || s.type_name == "cpu-clock") &&
+          s.IsMonitoredAtTheSameTime(summary) && s.count != 0u) {
+        *running_time_in_sec = s.count / 1e9;
+        return true;
+      }
+    }
+    return false;
   }
 
  private:
@@ -288,7 +312,10 @@ class StatCommand : public Command {
 "                        floating point number.\n"
 "--interval time_in_ms   Print stat for every time_in_ms milliseconds.\n"
 "                        Here time_in_ms may be any positive floating point\n"
-"                        number.\n"
+"                        number. Simpleperf prints total values from the\n"
+"                        starting point. But this can be changed by\n"
+"                        --interval-only-values.\n"
+"--interval-only-values  Print numbers of events happened in each interval.\n"
 "-e event1[:modifier1],event2[:modifier2],...\n"
 "                 Select the event list to count. Use `simpleperf list` to find\n"
 "                 all possible event names. Modifiers can be added to define\n"
@@ -316,6 +343,7 @@ class StatCommand : public Command {
         child_inherit_(true),
         duration_in_sec_(0),
         interval_in_ms_(0),
+        interval_only_values_(false),
         event_selection_set_(true),
         csv_(false),
         in_app_context_(false) {
@@ -339,6 +367,8 @@ class StatCommand : public Command {
   bool child_inherit_;
   double duration_in_sec_;
   double interval_in_ms_;
+  bool interval_only_values_;
+  std::vector<CounterSum> last_sum_values_;
   std::vector<int> cpus_;
   EventSelectionSet event_selection_set_;
   std::string output_filename_;
@@ -416,6 +446,12 @@ bool StatCommand::Run(const std::vector<std::string>& args) {
   }
 
   // 4. Add signal/periodic Events.
+  IOEventLoop* loop = event_selection_set_.GetIOEventLoop();
+  if (interval_in_ms_ != 0) {
+    if (!loop->UsePreciseTimer()) {
+      return false;
+    }
+  }
   std::chrono::time_point<std::chrono::steady_clock> start_time;
   std::vector<CountersInfo> counters;
   if (system_wide_collection_ || (!cpus_.empty() && cpus_[0] != -1)) {
@@ -425,12 +461,6 @@ bool StatCommand::Run(const std::vector<std::string>& args) {
   }
   if (need_to_check_targets && !event_selection_set_.StopWhenNoMoreTargets()) {
     return false;
-  }
-  IOEventLoop* loop = event_selection_set_.GetIOEventLoop();
-  if (interval_in_ms_ != 0) {
-    if (!loop->UsePreciseTimer()) {
-      return false;
-    }
   }
   if (!loop->AddSignalEvents({SIGCHLD, SIGINT, SIGTERM, SIGHUP},
                              [&]() { return loop->ExitLoop(); })) {
@@ -474,8 +504,10 @@ bool StatCommand::Run(const std::vector<std::string>& args) {
   }
 
   // 6. Read and print counters.
-
-  return print_counters();
+  if (interval_in_ms_ == 0) {
+    return print_counters();
+  }
+  return true;
 }
 
 bool StatCommand::ParseOptions(const std::vector<std::string>& args,
@@ -498,23 +530,15 @@ bool StatCommand::ParseOptions(const std::vector<std::string>& args,
     } else if (args[i] == "--csv") {
       csv_ = true;
     } else if (args[i] == "--duration") {
-      if (!NextArgumentOrError(args, &i)) {
-        return false;
-      }
-      if (!android::base::ParseDouble(args[i].c_str(), &duration_in_sec_,
-                                      1e-9)) {
-        LOG(ERROR) << "Invalid duration: " << args[i].c_str();
+      if (!GetDoubleOption(args, &i, &duration_in_sec_, 1e-9)) {
         return false;
       }
     } else if (args[i] == "--interval") {
-      if (!NextArgumentOrError(args, &i)) {
+      if (!GetDoubleOption(args, &i, &interval_in_ms_, 1e-9)) {
         return false;
       }
-      if (!android::base::ParseDouble(args[i].c_str(), &interval_in_ms_,
-                                      1e-9)) {
-        LOG(ERROR) << "Invalid interval: " << args[i].c_str();
-        return false;
-      }
+    } else if (args[i] == "--interval-only-values") {
+      interval_only_values_ = true;
     } else if (args[i] == "-e") {
       if (!NextArgumentOrError(args, &i)) {
         return false;
@@ -647,22 +671,32 @@ bool StatCommand::ShowCounters(const std::vector<CountersInfo>& counters,
   }
 
   CounterSummaries summaries(csv_);
-  for (auto& counters_info : counters) {
-    uint64_t value_sum = 0;
-    uint64_t time_enabled_sum = 0;
-    uint64_t time_running_sum = 0;
+  for (size_t i = 0; i < counters.size(); ++i) {
+    const CountersInfo& counters_info = counters[i];
+    CounterSum sum;
     for (auto& counter_info : counters_info.counters) {
-      value_sum += counter_info.counter.value;
-      time_enabled_sum += counter_info.counter.time_enabled;
-      time_running_sum += counter_info.counter.time_running;
+      sum.value += counter_info.counter.value;
+      sum.time_enabled += counter_info.counter.time_enabled;
+      sum.time_running += counter_info.counter.time_running;
     }
+    if (interval_only_values_) {
+      if (last_sum_values_.size() < counters.size()) {
+        last_sum_values_.resize(counters.size());
+      }
+      CounterSum tmp = sum;
+      sum.value -= last_sum_values_[i].value;
+      sum.time_enabled -= last_sum_values_[i].time_enabled;
+      sum.time_running -= last_sum_values_[i].time_running;
+      last_sum_values_[i] = tmp;
+    }
+
     double scale = 1.0;
-    if (time_running_sum < time_enabled_sum && time_running_sum != 0) {
-      scale = static_cast<double>(time_enabled_sum) / time_running_sum;
+    if (sum.time_running < sum.time_enabled && sum.time_running != 0) {
+      scale = static_cast<double>(sum.time_enabled) / sum.time_running;
     }
     summaries.AddSummary(
         CounterSummary(counters_info.event_name, counters_info.event_modifier,
-                       counters_info.group_id, value_sum, scale, false, csv_));
+                       counters_info.group_id, sum.value, scale, false, csv_));
   }
   summaries.AutoGenerateSummaries();
   summaries.GenerateComments(duration_in_sec);
