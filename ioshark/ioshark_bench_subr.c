@@ -291,6 +291,7 @@ create_file(char *path, size_t size, struct rw_bytes_s *rw_bytes)
 		rw_bytes->bytes_written += n;
 		size -= n;
 	}
+	free(buf);
 	if (fsync(fd) < 0) {
 		fprintf(stderr, "%s Cannot fsync file %s, error = %d\n",
 			progname, path, errno);
