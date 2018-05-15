@@ -93,6 +93,30 @@
       "revId": "89baf623feb0863574118719b9d420b7ad7688e8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9b6dcf83_9176172a",
+        "filename": "perfprofd/scripts/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2018-05-15T18:42:33Z",
+      "side": 1,
+      "message": "I implemented this and confirmed it works (local changes before the imports).",
+      "parentUuid": "aaa5bbb4_926fb732",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 67
+      },
+      "revId": "89baf623feb0863574118719b9d420b7ad7688e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
