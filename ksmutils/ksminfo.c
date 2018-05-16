@@ -165,7 +165,8 @@ int main(int argc, char *argv[]) {
             goto exit;
         }
 
-        if (read_pages(&kp, maps, num_maps, pr_flags) < 0) {
+        error = read_pages(&kp, maps, num_maps, pr_flags);
+        if (error) {
             free(maps);
             pm_process_destroy(proc);
             rc = EXIT_FAILURE;
