@@ -5,7 +5,7 @@
 function usage() {
 cat<<EOT
 Usage:
-${0##*/} SRC_DIR OUTPUT_FILE [-s] [-m MOUNT_POINT] [-d PRODUCT_OUT] [-C FS_CONFIG ] [-c FILE_CONTEXTS] [-B BLOCK_MAP_FILE] [-b BLOCK_SIZE] [-z COMPRESSOR] [-zo COMPRESSOR_OPT] [-t COMPRESS_THRESHOLD] [-w WHITELIST_FILE] [-a]
+${0##*/} SRC_DIR OUTPUT_FILE [-s] [-m MOUNT_POINT] [-d PRODUCT_OUT] [-C FS_CONFIG ] [-c FILE_CONTEXTS] [-B BLOCK_MAP_FILE] [-b BLOCK_SIZE] [-z COMPRESSOR] [-zo COMPRESSOR_OPT] [-t COMPRESS_THRESHOLD] [-w WHITELIST_FILE] [-a] [-uid-map UID_MAP] [-gid-map GID_MAP]
 EOT
 }
 
@@ -97,6 +97,18 @@ if [[ "$1" == "-a" ]]; then
     shift;
 fi
 
+UID_MAP=
+if [[ "$1" == "-uid-map" ]]; then
+    UID_MAP="$2"
+    shift; shift
+fi
+
+GID_MAP=
+if [[ "$1" == "-gid-map" ]]; then
+    GID_MAP="$2"
+    shift; shift
+fi
+
 OPT=""
 if [ -n "$MOUNT_POINT" ]; then
   OPT="$OPT -mount-point $MOUNT_POINT"
@@ -125,10 +137,17 @@ fi
 if [ -n "$WHITELIST_FILE" ]; then
     OPT="$OPT -whitelist $WHITELIST_FILE"
 fi
+if [ -n "$UID_MAP" ]; then
+    OPT="$OPT -uid-map \"$(echo -n "$UID_MAP" | tr ':' '\n')\""
+fi
+if [ -n "$GID_MAP" ]; then
+    OPT="$OPT -gid-map \"$(echo -n "$GID_MAP" | tr ':' '\n')\""
+fi
 
 MAKE_SQUASHFS_CMD="mksquashfs $SRC_DIR/ $OUTPUT_FILE -no-progress -comp $COMPRESSOR $COMPRESSOR_OPT -no-exports -noappend -no-recovery -no-fragments -no-duplicates -android-fs-config $OPT"
-echo $MAKE_SQUASHFS_CMD
-$MAKE_SQUASHFS_CMD
+echo "$MAKE_SQUASHFS_CMD"
+eval "cmd=($MAKE_SQUASHFS_CMD)"
+"${cmd[@]}"
 
 if [ $? -ne 0 ]; then
     exit 4

@@ -9,7 +9,8 @@ mkuserimg.sh [-s] SRC_DIR OUTPUT_FILE EXT_VARIANT MOUNT_POINT SIZE [-j <journal_
              [-T TIMESTAMP] [-C FS_CONFIG] [-D PRODUCT_OUT] [-B BLOCK_LIST_FILE]
              [-d BASE_ALLOC_FILE_IN ] [-A BASE_ALLOC_FILE_OUT ] [-L LABEL]
              [-i INODES ] [-M RSV_PCT] [-e ERASE_BLOCK_SIZE] [-o FLASH_BLOCK_SIZE]
-             [-U MKE2FS_UUID] [-S MKE2FS_HASH_SEED] [FILE_CONTEXTS]
+             [-U MKE2FS_UUID] [-S MKE2FS_HASH_SEED]
+             [-uid-map UID_MAP] [-gid-map GID_MAP] [FILE_CONTEXTS]
 EOT
 }
 
@@ -129,6 +130,16 @@ if [[ "$1" == "-S" ]]; then
   shift; shift
 fi
 
+if [[ "$1" == "-uid-map" ]]; then
+  E2FSDROID_OPTS+=" -u \"$(echo -n "$2" | tr ':' '\n')\""
+  shift; shift
+fi
+
+if [[ "$1" == "-gid-map" ]]; then
+  E2FSDROID_OPTS+=" -g \"$(echo -n "$2" | tr ':' '\n')\""
+  shift; shift
+fi
+
 if [[ $MKE2FS_EXTENDED_OPTS ]]; then
   MKE2FS_OPTS+=" -E $MKE2FS_EXTENDED_OPTS"
 fi
@@ -179,8 +190,9 @@ if [[ $E2FSPROGS_FAKE_TIME ]]; then
 fi
 
 E2FSDROID_CMD="e2fsdroid $E2FSDROID_OPTS -f $SRC_DIR -a $MOUNT_POINT $OUTPUT_FILE"
-echo $E2FSDROID_ENV $E2FSDROID_CMD
-env $E2FSDROID_ENV $E2FSDROID_CMD
+echo $E2FSDROID_ENV "$E2FSDROID_CMD"
+eval "cmd=($E2FSDROID_CMD)"
+env $E2FSDROID_ENV "${cmd[@]}"
 if [ $? -ne 0 ]; then
   rm -f $OUTPUT_FILE
   exit 4
