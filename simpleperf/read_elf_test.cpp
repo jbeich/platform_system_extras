@@ -153,3 +153,17 @@ TEST(read_elf, check_symbol_for_plt_section) {
                                       std::bind(ParseSymbol, std::placeholders::_1, &symbols)));
   ASSERT_NE(symbols.find("@plt"), symbols.end());
 }
+
+TEST(read_elf, read_elf_with_broken_section_table) {
+  std::string elf_path = GetTestData("libsgmainso-6.4.36.so");
+  std::map<std::string, ElfFileSymbol> symbols;
+  ASSERT_EQ(ElfStatus::NO_SYMBOL_TABLE,
+            ParseSymbolsFromElfFile(elf_path, BuildId(),
+                                    std::bind(ParseSymbol, std::placeholders::_1, &symbols)));
+  BuildId build_id;
+  ASSERT_EQ(ElfStatus::NO_BUILD_ID, GetBuildIdFromElfFile(elf_path, &build_id));
+  uint64_t min_vaddr;
+  ASSERT_EQ(ElfStatus::NO_ERROR, ReadMinExecutableVirtualAddressFromElfFile(elf_path, BuildId(),
+                                                                            &min_vaddr));
+  ASSERT_EQ(min_vaddr, 0u);
+}

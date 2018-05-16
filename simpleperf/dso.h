@@ -28,6 +28,27 @@
 #include "build_id.h"
 #include "read_elf.h"
 
+
+namespace simpleperf_dso_impl {
+
+// Find elf files with symbol table and debug information.
+class DebugElfFileFinder {
+ public:
+  void Reset();
+  bool SetSymFsDir(const std::string& symfs_dir);
+  void SetVdsoFile(const std::string& vdso_file, bool is_64bit);
+  std::string FindDebugFile(const std::string& dso_path, bool force_64bit,
+                            BuildId& build_id);
+
+ private:
+  std::string vdso_64bit_;
+  std::string vdso_32bit_;
+  std::string symfs_dir_;
+  std::unordered_map<std::string, std::string> build_id_to_file_map_;
+};
+
+}  // namespace simpleperf_dso_impl
+
 struct Symbol {
   uint64_t addr;
   // TODO: make len uint32_t.
@@ -78,6 +99,8 @@ enum DsoType {
   DSO_KERNEL,
   DSO_KERNEL_MODULE,
   DSO_ELF_FILE,
+  DSO_DEX_FILE,  // For files containing dex files, like .vdex files.
+  DSO_UNKNOWN_FILE,
 };
 
 struct KernelSymbol;
@@ -100,12 +123,12 @@ class Dso {
   static void SetBuildIds(
       const std::vector<std::pair<std::string, BuildId>>& build_ids);
   static BuildId FindExpectedBuildIdForPath(const std::string& path);
-  static void SetVdsoFile(std::unique_ptr<TemporaryFile> vdso_file, bool is_64bit);
+  static void SetVdsoFile(const std::string& vdso_file, bool is_64bit);
 
   static std::unique_ptr<Dso> CreateDso(DsoType dso_type, const std::string& dso_path,
                                         bool force_64bit = false);
 
-  ~Dso();
+  virtual ~Dso();
 
   DsoType type() const { return type_; }
 
@@ -132,41 +155,37 @@ class Dso {
   uint32_t CreateSymbolDumpId(const Symbol* symbol);
 
   // Return the minimum virtual address in program header.
-  uint64_t MinVirtualAddress();
-  void SetMinVirtualAddress(uint64_t min_vaddr) { min_vaddr_ = min_vaddr; }
+  virtual uint64_t MinVirtualAddress() { return 0; }
+  virtual void SetMinVirtualAddress(uint64_t) {}
+  virtual void AddDexFileOffset(uint64_t) {}
+  virtual const std::vector<uint64_t>* DexFileOffsets() { return nullptr; }
 
   const Symbol* FindSymbol(uint64_t vaddr_in_dso);
 
-  const std::vector<Symbol>& GetSymbols();
+  const std::vector<Symbol>& GetSymbols() { return symbols_; }
   void SetSymbols(std::vector<Symbol>* symbols);
 
   // Create a symbol for a virtual address which can't find a corresponding
   // symbol in symbol table.
   void AddUnknownSymbol(uint64_t vaddr_in_dso, const std::string& name);
 
- private:
+ protected:
   static bool demangle_;
-  static std::string symfs_dir_;
   static std::string vmlinux_;
   static std::string kallsyms_;
   static bool read_kernel_symbols_from_proc_;
   static std::unordered_map<std::string, BuildId> build_id_map_;
   static size_t dso_count_;
   static uint32_t g_dump_id_;
-  static std::unique_ptr<TemporaryFile> vdso_64bit_;
-  static std::unique_ptr<TemporaryFile> vdso_32bit_;
+  static simpleperf_dso_impl::DebugElfFileFinder debug_elf_file_finder_;
 
-  Dso(DsoType type, const std::string& path, bool force_64bit);
-  void Load();
-  bool LoadKernel();
-  bool LoadKernelModule();
-  bool LoadElfFile();
-  bool LoadEmbeddedElfFile();
-  void FixupSymbolLength();
+  Dso(DsoType type, const std::string& path, const std::string& debug_file_path);
   BuildId GetExpectedBuildId();
-  bool CheckReadSymbolResult(ElfStatus result, const std::string& filename);
 
-  const DsoType type_;
+  void Load();
+  virtual std::vector<Symbol> LoadSymbols() = 0;
+
+  DsoType type_;
   // path of the shared library used by the profiled program
   const std::string path_;
   // path of the shared library having symbol table and debug information
@@ -174,7 +193,6 @@ class Dso {
   std::string debug_file_path_;
   // File name of the shared library, got by removing directories in path_.
   std::string file_name_;
-  uint64_t min_vaddr_;
   std::vector<Symbol> symbols_;
   // unknown symbols are like [libc.so+0x1234].
   std::unordered_map<uint64_t, Symbol> unknown_symbols_;
@@ -187,5 +205,6 @@ class Dso {
 };
 
 const char* DsoTypeToString(DsoType dso_type);
+bool GetBuildIdFromDsoPath(const std::string& dso_path, BuildId* build_id);
 
 #endif  // SIMPLE_PERF_DSO_H_

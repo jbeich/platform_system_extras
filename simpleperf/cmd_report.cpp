@@ -26,13 +26,11 @@
 
 #include <android-base/file.h>
 #include <android-base/logging.h>
-#include <android-base/parsedouble.h>
 #include <android-base/parseint.h>
 #include <android-base/stringprintf.h>
 #include <android-base/strings.h>
 
 #include "command.h"
-#include "dwarf_unwind.h"
 #include "event_attr.h"
 #include "event_type.h"
 #include "perf_regs.h"
@@ -321,7 +319,6 @@ struct SampleTreeBuilderOptions {
   bool accumulate_callchain;
   bool build_callchain;
   bool use_caller_as_callchain_root;
-  bool strict_unwind_arch_check;
   bool trace_offcpu;
 
   std::unique_ptr<ReportCmdSampleTreeBuilder> CreateSampleTreeBuilder() {
@@ -334,7 +331,7 @@ struct SampleTreeBuilderOptions {
     builder->SetFilters(pid_filter, tid_filter, comm_filter, dso_filter, symbol_filter);
     builder->SetBranchSampleOption(use_branch_address);
     builder->SetCallChainSampleOptions(accumulate_callchain, build_callchain,
-                                       use_caller_as_callchain_root, strict_unwind_arch_check);
+                                       use_caller_as_callchain_root);
     return builder;
   }
 };
@@ -563,11 +560,7 @@ bool ReportCommand::ParseOptions(const std::vector<std::string>& args) {
       }
       Dso::SetKallsyms(kallsyms);
     } else if (args[i] == "--max-stack") {
-      if (!NextArgumentOrError(args, &i)) {
-        return false;
-      }
-      if (!android::base::ParseUint(args[i].c_str(), &callgraph_max_stack_)) {
-        LOG(ERROR) << "invalid arg for --max-stack: " << args[i];
+      if (!GetUintOption(args, &i, &callgraph_max_stack_)) {
         return false;
       }
     } else if (args[i] == "-n") {
@@ -583,12 +576,8 @@ bool ReportCommand::ParseOptions(const std::vector<std::string>& args) {
       }
       report_filename_ = args[i];
     } else if (args[i] == "--percent-limit") {
-      if (!NextArgumentOrError(args, &i)) {
+      if (!GetDoubleOption(args, &i, &callgraph_percent_limit_)) {
         return false;
-      }
-      if (!android::base::ParseDouble(args[i].c_str(),
-                                      &callgraph_percent_limit_, 0.0)) {
-        LOG(ERROR) << "invalid arg for --percent-limit: " << args[i];
       }
     } else if (args[i] == "--pids" || args[i] == "--tids") {
       const std::string& option = args[i];
@@ -852,9 +841,6 @@ bool ReportCommand::ReadFeaturesFromRecordFile() {
 
 bool ReportCommand::ReadSampleTreeFromRecordFile() {
   sample_tree_builder_options_.use_branch_address = use_branch_address_;
-  // Normally do strict arch check when unwinding stack. But allow unwinding
-  // 32-bit processes on 64-bit devices for system wide profiling.
-  sample_tree_builder_options_.strict_unwind_arch_check = !system_wide_collection_;
   sample_tree_builder_options_.accumulate_callchain = accumulate_callchain_;
   sample_tree_builder_options_.build_callchain = print_callgraph_;
   sample_tree_builder_options_.use_caller_as_callchain_root = !callgraph_show_callee_;
@@ -887,7 +873,8 @@ bool ReportCommand::ProcessRecord(std::unique_ptr<Record> record) {
     } else {
       ProcessSampleRecordInTraceOffCpuMode(std::move(record), attr_id);
     }
-  } else if (record->type() == PERF_RECORD_TRACING_DATA) {
+  } else if (record->type() == PERF_RECORD_TRACING_DATA ||
+             record->type() == SIMPLE_PERF_RECORD_TRACING_DATA) {
     const auto& r = *static_cast<TracingDataRecord*>(record.get());
     if (!ProcessTracingData(std::vector<char>(r.data, r.data + r.data_size))) {
       return false;
