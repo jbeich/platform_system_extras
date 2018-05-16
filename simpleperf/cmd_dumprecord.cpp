@@ -26,6 +26,7 @@
 
 #include "command.h"
 #include "event_attr.h"
+#include "event_type.h"
 #include "perf_regs.h"
 #include "record.h"
 #include "record_file.h"
@@ -48,7 +49,7 @@ class DumpRecordCommand : public Command {
   bool ParseOptions(const std::vector<std::string>& args);
   void DumpFileHeader();
   void DumpAttrSection();
-  void DumpDataSection();
+  bool DumpDataSection();
   bool DumpFeatureSection();
 
   std::string record_filename_;
@@ -72,14 +73,23 @@ bool DumpRecordCommand::Run(const std::vector<std::string>& args) {
     }
   }
   ScopedCurrentArch scoped_arch(record_file_arch_);
+  std::unique_ptr<ScopedEventTypes> scoped_event_types;
+  if (record_file_reader_->HasFeature(PerfFileFormat::FEAT_META_INFO)) {
+    std::unordered_map<std::string, std::string> meta_info;
+    if (!record_file_reader_->ReadMetaInfoFeature(&meta_info)) {
+      return false;
+    }
+    auto it = meta_info.find("event_type_info");
+    if (it != meta_info.end()) {
+      scoped_event_types.reset(new ScopedEventTypes(it->second));
+    }
+  }
   DumpFileHeader();
   DumpAttrSection();
-  DumpDataSection();
-  if (!DumpFeatureSection()) {
+  if (!DumpDataSection()) {
     return false;
   }
-
-  return true;
+  return DumpFeatureSection();
 }
 
 bool DumpRecordCommand::ParseOptions(const std::vector<std::string>& args) {
@@ -134,7 +144,6 @@ void DumpRecordCommand::DumpFileHeader() {
   }
 }
 
-
 void DumpRecordCommand::DumpAttrSection() {
   std::vector<EventAttrWithId> attrs = record_file_reader_->AttrSection();
   for (size_t i = 0; i < attrs.size(); ++i) {
@@ -151,11 +160,62 @@ void DumpRecordCommand::DumpAttrSection() {
   }
 }
 
-void DumpRecordCommand::DumpDataSection() {
-  record_file_reader_->ReadDataSection([](std::unique_ptr<Record> record) {
-    record->Dump();
+bool DumpRecordCommand::DumpDataSection() {
+  ThreadTree thread_tree;
+  thread_tree.ShowIpForUnknownSymbol();
+  record_file_reader_->LoadBuildIdAndFileFeatures(thread_tree);
+
+  auto get_symbol_function = [&](uint32_t pid, uint32_t tid, uint64_t ip, std::string& dso_name,
+                                 std::string& symbol_name, uint64_t& vaddr_in_file,
+                                 bool in_kernel) {
+    ThreadEntry* thread = thread_tree.FindThreadOrNew(pid, tid);
+    const MapEntry* map = thread_tree.FindMap(thread, ip, in_kernel);
+    Dso* dso;
+    const Symbol* symbol = thread_tree.FindSymbol(map, ip, &vaddr_in_file, &dso);
+    dso_name = dso->Path();
+    symbol_name = symbol->DemangledName();
+  };
+
+  auto record_callback = [&](std::unique_ptr<Record> r) {
+    r->Dump();
+    thread_tree.Update(*r);
+    if (r->type() == PERF_RECORD_SAMPLE) {
+      SampleRecord& sr = *static_cast<SampleRecord*>(r.get());
+      bool in_kernel = sr.InKernel();
+      if (sr.sample_type & PERF_SAMPLE_CALLCHAIN) {
+        PrintIndented(1, "callchain:\n");
+        for (size_t i = 0; i < sr.callchain_data.ip_nr; ++i) {
+          if (sr.callchain_data.ips[i] >= PERF_CONTEXT_MAX) {
+            if (sr.callchain_data.ips[i] == PERF_CONTEXT_USER) {
+              in_kernel = false;
+            }
+            continue;
+          }
+          std::string dso_name;
+          std::string symbol_name;
+          uint64_t vaddr_in_file;
+          get_symbol_function(sr.tid_data.pid, sr.tid_data.tid, sr.callchain_data.ips[i],
+                              dso_name, symbol_name, vaddr_in_file, in_kernel);
+          PrintIndented(2, "%s (%s[+%" PRIx64 "])\n", symbol_name.c_str(), dso_name.c_str(),
+                        vaddr_in_file);
+        }
+      }
+    } else if (r->type() == SIMPLE_PERF_RECORD_CALLCHAIN) {
+      CallChainRecord& cr = *static_cast<CallChainRecord*>(r.get());
+      PrintIndented(1, "callchain:\n");
+      for (size_t i = 0; i < cr.ip_nr; ++i) {
+        std::string dso_name;
+        std::string symbol_name;
+        uint64_t vaddr_in_file;
+        get_symbol_function(cr.pid, cr.tid, cr.ips[i], dso_name, symbol_name, vaddr_in_file,
+                            false);
+        PrintIndented(2, "%s (%s[+%" PRIx64 "])\n", symbol_name.c_str(), dso_name.c_str(),
+                      vaddr_in_file);
+      }
+    }
     return true;
-  }, false);
+  };
+  return record_file_reader_->ReadDataSection(record_callback, false);
 }
 
 bool DumpRecordCommand::DumpFeatureSection() {
@@ -184,11 +244,12 @@ bool DumpRecordCommand::DumpFeatureSection() {
       uint32_t file_type;
       uint64_t min_vaddr;
       std::vector<Symbol> symbols;
+      std::vector<uint64_t> dex_file_offsets;
       size_t read_pos = 0;
       PrintIndented(1, "file:\n");
       while (record_file_reader_->ReadFileFeature(read_pos, &file_path,
                                                   &file_type, &min_vaddr,
-                                                  &symbols)) {
+                                                  &symbols, &dex_file_offsets)) {
         PrintIndented(2, "file_path %s\n", file_path.c_str());
         PrintIndented(2, "file_type %s\n", DsoTypeToString(static_cast<DsoType>(file_type)));
         PrintIndented(2, "min_vaddr 0x%" PRIx64 "\n", min_vaddr);
@@ -196,6 +257,12 @@ bool DumpRecordCommand::DumpFeatureSection() {
         for (const auto& symbol : symbols) {
           PrintIndented(3, "%s [0x%" PRIx64 "-0x%" PRIx64 "]\n", symbol.DemangledName(),
                         symbol.addr, symbol.addr + symbol.len);
+        }
+        if (file_type == static_cast<uint32_t>(DSO_DEX_FILE)) {
+          PrintIndented(2, "dex_file_offsets:\n");
+          for (uint64_t offset : dex_file_offsets) {
+            PrintIndented(3, "0x%" PRIx64 "\n", offset);
+          }
         }
       }
     } else if (feature == FEAT_META_INFO) {

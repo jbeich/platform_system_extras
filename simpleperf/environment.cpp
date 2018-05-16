@@ -34,6 +34,7 @@
 #include <android-base/strings.h>
 #include <android-base/stringprintf.h>
 #include <procinfo/process.h>
+#include <procinfo/process_map.h>
 
 #if defined(__ANDROID__)
 #include <android-base/properties.h>
@@ -258,37 +259,11 @@ std::vector<pid_t> GetAllProcesses() {
 }
 
 bool GetThreadMmapsInProcess(pid_t pid, std::vector<ThreadMmap>* thread_mmaps) {
-  std::string map_file = android::base::StringPrintf("/proc/%d/maps", pid);
-  FILE* fp = fopen(map_file.c_str(), "re");
-  if (fp == nullptr) {
-    PLOG(DEBUG) << "can't open file " << map_file;
-    return false;
-  }
   thread_mmaps->clear();
-  LineReader reader(fp);
-  char* line;
-  while ((line = reader.ReadLine()) != nullptr) {
-    // Parse line like: 00400000-00409000 r-xp 00000000 fc:00 426998  /usr/lib/gvfs/gvfsd-http
-    uint64_t start_addr, end_addr, pgoff;
-    char type[reader.MaxLineSize()];
-    char execname[reader.MaxLineSize()];
-    strcpy(execname, "");
-    if (sscanf(line, "%" PRIx64 "-%" PRIx64 " %s %" PRIx64 " %*x:%*x %*u %s\n", &start_addr,
-               &end_addr, type, &pgoff, execname) < 4) {
-      continue;
-    }
-    if (strcmp(execname, "") == 0) {
-      strcpy(execname, DEFAULT_EXECNAME_FOR_THREAD_MMAP);
-    }
-    ThreadMmap thread;
-    thread.start_addr = start_addr;
-    thread.len = end_addr - start_addr;
-    thread.pgoff = pgoff;
-    thread.name = execname;
-    thread.executable = (type[2] == 'x');
-    thread_mmaps->push_back(thread);
-  }
-  return true;
+  return android::procinfo::ReadProcessMaps(pid,
+      [&](uint64_t start, uint64_t end, uint16_t flags, uint64_t pgoff, const char* name) {
+        thread_mmaps->emplace_back(start, end - start, pgoff, name, flags & PROT_EXEC);
+  });
 }
 
 bool GetKernelBuildId(BuildId* build_id) {
@@ -487,11 +462,11 @@ void PrepareVdsoFile() {
   std::string s(vdso_map->len, '\0');
   memcpy(&s[0], reinterpret_cast<void*>(static_cast<uintptr_t>(vdso_map->start_addr)),
          vdso_map->len);
-  std::unique_ptr<TemporaryFile> tmpfile = CreateTempFileUsedInRecording();
-  if (!android::base::WriteStringToFile(s, tmpfile->path)) {
+  std::unique_ptr<TemporaryFile> tmpfile = ScopedTempFiles::CreateTempFile();
+  if (!android::base::WriteStringToFd(s, tmpfile->fd)) {
     return;
   }
-  Dso::SetVdsoFile(std::move(tmpfile), sizeof(size_t) == sizeof(uint64_t));
+  Dso::SetVdsoFile(tmpfile->path, sizeof(size_t) == sizeof(uint64_t));
 }
 
 static bool HasOpenedAppApkFile(int pid) {
@@ -612,7 +587,7 @@ bool RunInAppContext(const std::string& app_package_name, const std::string& cmd
   std::string output_basename = output_filepath.empty() ? "" :
                                     android::base::Basename(output_filepath);
   std::vector<std::string> new_args =
-      {"run-as", app_package_name, "./simpleperf", cmd, "--in-app"};
+      {"run-as", app_package_name, "./simpleperf", cmd, "--in-app", "--log", GetLogSeverityName()};
   if (need_tracepoint_events) {
     new_args.push_back("--tracepoint-events");
     new_args.push_back(tracepoint_file);
@@ -632,7 +607,11 @@ bool RunInAppContext(const std::string& app_package_name, const std::string& cmd
 
   IOEventLoop loop;
   bool need_to_kill_child = false;
-  if (!loop.AddSignalEvents({SIGINT, SIGTERM, SIGHUP},
+  std::vector<int> stop_signals = {SIGINT, SIGTERM};
+  if (!SignalIsIgnored(SIGHUP)) {
+    stop_signals.push_back(SIGHUP);
+  }
+  if (!loop.AddSignalEvents(stop_signals,
                             [&]() { need_to_kill_child = true; return loop.ExitLoop(); })) {
     return false;
   }
@@ -689,12 +668,62 @@ void AllowMoreOpenedFiles() {
   }
 }
 
-static std::string temp_dir_used_in_recording;
-void SetTempDirectoryUsedInRecording(const std::string& tmp_dir) {
-  temp_dir_used_in_recording = tmp_dir;
+std::string ScopedTempFiles::tmp_dir_;
+std::vector<std::string> ScopedTempFiles::files_to_delete_;
+
+ScopedTempFiles::ScopedTempFiles(const std::string& tmp_dir) {
+  CHECK(tmp_dir_.empty());  // No other ScopedTempFiles.
+  tmp_dir_ = tmp_dir;
 }
 
-std::unique_ptr<TemporaryFile> CreateTempFileUsedInRecording() {
-  CHECK(!temp_dir_used_in_recording.empty());
-  return std::unique_ptr<TemporaryFile>(new TemporaryFile(temp_dir_used_in_recording));
+ScopedTempFiles::~ScopedTempFiles() {
+  tmp_dir_.clear();
+  for (auto& file : files_to_delete_) {
+    unlink(file.c_str());
+  }
+  files_to_delete_.clear();
+}
+
+std::unique_ptr<TemporaryFile> ScopedTempFiles::CreateTempFile(bool delete_in_destructor) {
+  CHECK(!tmp_dir_.empty());
+  std::unique_ptr<TemporaryFile> tmp_file(new TemporaryFile(tmp_dir_));
+  CHECK_NE(tmp_file->fd, -1);
+  if (delete_in_destructor) {
+    tmp_file->DoNotRemove();
+    files_to_delete_.push_back(tmp_file->path);
+  }
+  return tmp_file;
+}
+
+bool SignalIsIgnored(int signo) {
+  struct sigaction act;
+  if (sigaction(signo, nullptr, &act) != 0) {
+    PLOG(FATAL) << "failed to query signal handler for signal " << signo;
+  }
+
+  if ((act.sa_flags & SA_SIGINFO)) {
+    return false;
+  }
+
+  return act.sa_handler == SIG_IGN;
+}
+
+int GetAndroidVersion() {
+#if defined(__ANDROID__)
+  std::string s = android::base::GetProperty("ro.build.version.release", "");
+  // The release string can be a list of numbers (like 8.1.0), a character (like Q)
+  // or many characters (like OMR1).
+  if (!s.empty()) {
+    // Each Android version has a version number: L is 5, M is 6, N is 7, O is 8, etc.
+    if (s[0] >= 'A' && s[0] <= 'Z') {
+      return s[0] - 'P' + kAndroidVersionP;
+    }
+    if (isdigit(s[0])) {
+      int result;
+      sscanf(s.c_str(), "%d", &result);
+      return result;
+    }
+  }
+#endif  // defined(__ANDROID__)
+  return 0;
 }
