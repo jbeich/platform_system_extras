@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "2d873294_d6708c1b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2018-05-17T15:15:31Z",
+      "side": 1,
+      "message": "It\u0027s not. The method to verify is a flash-wipe (and check the logcat during boot) - that corresponds to a first-boot situation with system_b used for preopt artifacts.",
+      "parentUuid": "23721991_b3fc15a3",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 35
+      },
+      "revId": "de5faf06d9232cde07451fe4c6bb7d894c63c175",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8e402244_3952a14c",
         "filename": "cppreopts/cppreopts.rc",
         "patchSetId": 1
