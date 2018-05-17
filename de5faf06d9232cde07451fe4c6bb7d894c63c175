@@ -22,6 +22,29 @@
       "revId": "de5faf06d9232cde07451fe4c6bb7d894c63c175",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8e402244_3952a14c",
+        "filename": "cppreopts/cppreopts.rc",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2018-05-17T14:19:26Z",
+      "side": 1,
+      "message": "Need to check if line 36-40 will still execute if line 35 fails.\n\nIf the latter lines still run, might need to use another mount point other than /postinstall.\nOtherwise, there might be race condition because line 19-23 is identical to line 36-40.\nBut only one of them needs to be executed.",
+      "range": {
+        "startLine": 35,
+        "startChar": 3,
+        "endLine": 35,
+        "endChar": 66
+      },
+      "revId": "de5faf06d9232cde07451fe4c6bb7d894c63c175",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
