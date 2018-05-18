@@ -93,6 +93,30 @@
       "revId": "de5faf06d9232cde07451fe4c6bb7d894c63c175",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eeb9fc4d_3188ba59",
+        "filename": "cppreopts/cppreopts.rc",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2018-05-18T08:06:26Z",
+      "side": 1,
+      "message": "+1, I was thinking about the same thing!\n\nI think it should be ok, either mount should succeed.",
+      "parentUuid": "84257cd2_2524dcd6",
+      "range": {
+        "startLine": 35,
+        "startChar": 3,
+        "endLine": 35,
+        "endChar": 66
+      },
+      "revId": "de5faf06d9232cde07451fe4c6bb7d894c63c175",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
