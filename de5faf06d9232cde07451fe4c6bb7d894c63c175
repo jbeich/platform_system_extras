@@ -69,6 +69,30 @@
       "revId": "de5faf06d9232cde07451fe4c6bb7d894c63c175",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "84257cd2_2524dcd6",
+        "filename": "cppreopts/cppreopts.rc",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1061057
+      },
+      "writtenOn": "2018-05-18T08:04:32Z",
+      "side": 1,
+      "message": "Not sure if it\u0027s a good idea. If execution will continue, how about just mount on two symlinks:\non property:sys.cppreopt\u003drequested \u0026\u0026 property:ro.boot.slot_suffix\u003d_a\n    mount ext4 /dev/block/bootdevice/by-name/system_b /postinstall ro nosuid nodev noexec\n    mount ext4 /dev/block/by-name/system_b /postinstall ro nosuid nodev noexec\n    exec - root -- /system/bin/cppreopts.sh /postinstall\n    ...",
+      "parentUuid": "8e402244_3952a14c",
+      "range": {
+        "startLine": 35,
+        "startChar": 3,
+        "endLine": 35,
+        "endChar": 66
+      },
+      "revId": "de5faf06d9232cde07451fe4c6bb7d894c63c175",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
