@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "6e45097c_1da44a86",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2018-05-18T10:28:09Z",
+      "side": 1,
+      "message": "Thanks, verification passed!\n\nDetails: b/78613232#comment14",
+      "parentUuid": "2d873294_d6708c1b",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 35
+      },
+      "revId": "de5faf06d9232cde07451fe4c6bb7d894c63c175",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e402244_3952a14c",
         "filename": "cppreopts/cppreopts.rc",
         "patchSetId": 1
@@ -117,6 +141,30 @@
       "revId": "de5faf06d9232cde07451fe4c6bb7d894c63c175",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "38bf66fc_e57c2d2f",
+        "filename": "cppreopts/cppreopts.rc",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2018-05-18T10:28:09Z",
+      "side": 1,
+      "message": "With the latest change in init, we\u0027ll fallback to use the \u0027boot_device\u0027 (e.g., soc/1da4000.ufshc) value extracted from fstab-dt + /vendor/etc/fstab.{ro.hardware}.\n\nTherefore, we can cleanly switch to /dev/block/by-name/system_[ab] now!\n\nhttps://android-review.googlesource.com/c/platform/system/core/+/674989",
+      "parentUuid": "eeb9fc4d_3188ba59",
+      "range": {
+        "startLine": 35,
+        "startChar": 3,
+        "endLine": 35,
+        "endChar": 66
+      },
+      "revId": "de5faf06d9232cde07451fe4c6bb7d894c63c175",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
