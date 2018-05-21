@@ -34,10 +34,9 @@ LLVM_ROOT_PATH := external/llvm
 include $(LLVM_ROOT_PATH)/llvm.mk
 
 simpleperf_static_libraries_target := \
-  libbacktrace_offline \
   libbacktrace \
-  libunwind \
   libunwindstack \
+  libdexfile \
   libziparchive \
   libz \
   libbase \
@@ -76,10 +75,9 @@ simpleperf_static_libraries_host := \
 
 simpleperf_static_libraries_host_linux := \
   libprocinfo \
-  libbacktrace_offline \
   libbacktrace \
-  libunwind \
   libunwindstack \
+  libdexfile \
   libcutils \
   libevent \
 
@@ -109,16 +107,20 @@ libsimpleperf_src_files := \
 
 libsimpleperf_src_files_linux := \
   CallChainJoiner.cpp \
+  cmd_debug_unwind.cpp \
   cmd_list.cpp \
   cmd_record.cpp \
   cmd_stat.cpp \
-  dwarf_unwind.cpp \
+  cmd_trace_sched.cpp \
   environment.cpp \
   event_fd.cpp \
   event_selection_set.cpp \
   InplaceSamplerClient.cpp \
   IOEventLoop.cpp \
+  JITDebugReader.cpp \
+  OfflineUnwinder.cpp \
   perf_clock.cpp \
+  read_dex_file.cpp \
   record_file_writer.cpp \
   UnixSocket.cpp \
   workload.cpp \
@@ -143,6 +145,8 @@ LOCAL_STATIC_LIBRARIES := $(simpleperf_static_libraries_target)
 LOCAL_MULTILIB := both
 LOCAL_PROTOC_OPTIMIZE_TYPE := lite-static
 include $(LLVM_DEVICE_BUILD_MK)
+# Remove -std=c++11 flag to compile read_dex_file.cpp.
+LOCAL_CPPFLAGS := $(filter-out $(LOCAL_CPPFLAGS),-std=c++11)
 include $(BUILD_STATIC_LIBRARY)
 
 # libsimpleperf host
@@ -164,6 +168,8 @@ LOCAL_MULTILIB := both
 LOCAL_PROTOC_OPTIMIZE_TYPE := lite-static
 LOCAL_CXX_STL := libc++_static
 include $(LLVM_HOST_BUILD_MK)
+# Remove -std=c++11 flag to compile read_dex_file.cpp.
+LOCAL_CPPFLAGS := $(filter-out $(LOCAL_CPPFLAGS),-std=c++11)
 include $(BUILD_HOST_STATIC_LIBRARY)
 
 
@@ -179,9 +185,11 @@ LOCAL_CFLAGS := $(simpleperf_cflags_target)
 LOCAL_SRC_FILES := main.cpp
 LOCAL_STATIC_LIBRARIES := libsimpleperf $(simpleperf_static_libraries_with_libc_target)
 ifdef TARGET_2ND_ARCH
+ifneq ($(TARGET_TRANSLATE_2ND_ARCH),true)
 LOCAL_MULTILIB := both
 LOCAL_MODULE_STEM_32 := simpleperf32
 LOCAL_MODULE_STEM_64 := simpleperf
+endif
 endif
 LOCAL_FORCE_STATIC_EXECUTABLE := true
 include $(LLVM_DEVICE_BUILD_MK)
@@ -354,6 +362,7 @@ simpleperf_unit_test_src_files := \
   cmd_report_test.cpp \
   cmd_report_sample_test.cpp \
   command_test.cpp \
+  dso_test.cpp \
   gtest_main.cpp \
   read_apk_test.cpp \
   read_elf_test.cpp \
@@ -363,12 +372,15 @@ simpleperf_unit_test_src_files := \
 
 simpleperf_unit_test_src_files_linux := \
   CallChainJoiner_test.cpp \
+  cmd_debug_unwind_test.cpp \
   cmd_dumprecord_test.cpp \
   cmd_list_test.cpp \
   cmd_record_test.cpp \
   cmd_stat_test.cpp \
+  cmd_trace_sched_test.cpp \
   environment_test.cpp \
   IOEventLoop_test.cpp \
+  read_dex_file_test.cpp \
   record_file_test.cpp \
   UnixSocket_test.cpp \
   workload_test.cpp \
@@ -456,6 +468,8 @@ LOCAL_STATIC_LIBRARIES := $(simpleperf_static_libraries_target)
 LOCAL_MULTILIB := both
 LOCAL_FORCE_STATIC_EXECUTABLE := true
 include $(LLVM_DEVICE_BUILD_MK)
+# Remove -std=c++11 flag to compile read_dex_file.cpp.
+LOCAL_CPPFLAGS := $(filter-out $(LOCAL_CPPFLAGS),-std=c++11)
 include $(BUILD_STATIC_TEST_LIBRARY)
 
 # libsimpleperf_cts_test linux host
@@ -470,6 +484,8 @@ LOCAL_STATIC_LIBRARIES_linux := $(simpleperf_static_libraries_host_linux)
 LOCAL_LDLIBS_linux := $(simpleperf_ldlibs_host_linux)
 LOCAL_MULTILIB := both
 include $(LLVM_HOST_BUILD_MK)
+# Remove -std=c++11 flag to compile read_dex_file.cpp.
+LOCAL_CPPFLAGS := $(filter-out $(LOCAL_CPPFLAGS),-std=c++11)
 include $(BUILD_HOST_STATIC_TEST_LIBRARY)
 
 # simpleperf_record_test
@@ -514,7 +530,9 @@ SIMPLEPERF_SCRIPT_LIST := \
     $(call all-java-files-under,demo) \
     $(call all-named-files-under,*.kt,demo) \
     testdata/perf_with_symbols.data \
-    testdata/perf_with_trace_offcpu.data
+    testdata/perf_with_trace_offcpu.data \
+    testdata/perf_with_tracepoint_event.data \
+    testdata/perf_with_interpreter_frames.data
 
 SIMPLEPERF_SCRIPT_LIST := $(addprefix -f $(LOCAL_PATH)/,$(SIMPLEPERF_SCRIPT_LIST))
 
