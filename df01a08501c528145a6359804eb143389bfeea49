@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "469b0b75_a44b6638",
+        "filename": "simpleperf/utils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-05-22T02:34:38Z",
+      "side": 1,
+      "message": "why? why not just let the OpenArchiveFd fail?",
+      "range": {
+        "startLine": 79,
+        "startChar": 3,
+        "endLine": 87,
+        "endChar": 3
+      },
+      "revId": "df01a08501c528145a6359804eb143389bfeea49",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
