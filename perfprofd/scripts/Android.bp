@@ -41,12 +41,18 @@ python_binary_host {
     ],
     libs: [
         "python-symbol",
+        "libprotobuf-python",
     ],
     proto: {
         canonical_path_from_root: false,
         include_dirs: ["external/perf_data_converter/src/quipper"],
     },
     required: [ "unwind-symbols" ],
+    version: {
+        py2: {
+            embedded_launcher: true,
+        },
+    },
 }
 
 python_binary_host {
