@@ -46,6 +46,30 @@
       "revId": "df01a08501c528145a6359804eb143389bfeea49",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4c8b79e1_bd57da0d",
+        "filename": "simpleperf/utils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-05-22T18:36:30Z",
+      "side": 1,
+      "message": "interesting. i wonder if we should change libziparchive to do the quick check first (just to make it more generally useful, and because i like to disallow as many weird possibilities as i can, and i can\u0027t think why we\u0027d want liziparchive to allow zip files that didn\u0027t start with the right magic)?",
+      "parentUuid": "23df2ca6_1864d718",
+      "range": {
+        "startLine": 79,
+        "startChar": 3,
+        "endLine": 87,
+        "endChar": 3
+      },
+      "revId": "df01a08501c528145a6359804eb143389bfeea49",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
