@@ -22,6 +22,30 @@
       "revId": "df01a08501c528145a6359804eb143389bfeea49",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "23df2ca6_1864d718",
+        "filename": "simpleperf/utils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-05-22T18:32:17Z",
+      "side": 1,
+      "message": "Added comments. It is because OpenArchiveFd is slow at detecting invalid zip files, the detection usually happens at https://cs.corp.google.com/android/system/core/libziparchive/zip_archive.cc?type\u003dcs\u0026q\u003dkSignature+f:system/core/libziparchive+p:android\u0026g\u003d0\u0026l\u003d195. And simpleperf encounters much more invalid zip files than valid zip files.",
+      "parentUuid": "469b0b75_a44b6638",
+      "range": {
+        "startLine": 79,
+        "startChar": 3,
+        "endLine": 87,
+        "endChar": 3
+      },
+      "revId": "df01a08501c528145a6359804eb143389bfeea49",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
