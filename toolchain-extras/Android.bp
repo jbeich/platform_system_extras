@@ -1,0 +1,25 @@
+cc_library_static {
+    name: "libtoolchain-extras",
+    srcs: [
+        "toolchain-extras.cpp"
+    ],
+    vendor_available: true,
+    vndk: {
+        enabled: true,
+    },
+    shared_libs: ["liblog",],
+}
+
+cc_binary {
+    name: "toolchain-extras-test",
+    srcs: [
+        "toolchain-extras-test.c"
+    ],
+    shared_libs: ["liblog",],
+    static_libs: [
+        "libtoolchain-extras",
+        "libclang_rt.profile-aarch64-android"
+    ],
+    ldflags: ["-u__toolchain_extras"],
+    compile_multilib: "first",
+}
