@@ -15,18 +15,19 @@
 ** limitations under the License.
 */
 
-#include <assert.h>
-#include <stdio.h>
-#include <stdlib.h>
+#include "configreader.h"
 
 #include <algorithm>
+#include <climits>
+#include <cstdlib>
 #include <cstring>
 #include <sstream>
 
 #include <android-base/file.h>
 #include <android-base/logging.h>
+#include <android-base/stringprintf.h>
 
-#include "configreader.h"
+using android::base::StringPrintf;
 
 //
 // Config file path
@@ -217,36 +218,62 @@ void ConfigReader::overrideUnsignedEntry(const char *key, unsigned new_value)
 // warnings or errors to the system logs if the line can't be
 // interpreted properly.
 //
-bool ConfigReader::parseLine(const char *key,
-                             const char *value,
-                             unsigned linecount)
+bool ConfigReader::parseLine(const std::string& key,
+                             const std::string& value,
+                             unsigned linecount,
+                             std::string* error_msg)
 {
-  assert(key);
-  assert(value);
+  if (key.empty()) {
+    *error_msg = StringPrintf("line %u: Key is empty", linecount);
+    return false;
+  }
+  if (value.empty()) {
+    *error_msg = StringPrintf("line %u: Value for %s is empty", linecount, key.c_str());
+    return false;
+  }
 
   auto uit = u_entries.find(key);
   if (uit != u_entries.end()) {
-    unsigned uvalue = 0;
-    if (isdigit(value[0]) == 0 || sscanf(value, "%u", &uvalue) != 1) {
-      LOG(WARNING) << "line " << linecount << ": malformed unsigned value (ignored)";
+    unsigned long long int conv;
+    {
+      const char* start_ptr = value.c_str();
+      char* end_ptr = const_cast<char*>(start_ptr);
+      conv = strtoull(start_ptr, &end_ptr, 10);
+      if (conv == ULLONG_MAX) {
+        *error_msg = StringPrintf("line %u: value %s is out of bounds", linecount, value.c_str());
+        return false;
+      }
+      if (conv == 0 && end_ptr == start_ptr) {
+        // Check whether this was an error.
+        *error_msg = StringPrintf("line %u: value %s is malformed", linecount, value.c_str());
+        return false;
+      }
+      if ((end_ptr - start_ptr) != value.length()) {
+        *error_msg = StringPrintf("line %u: could not consume full value %s",
+                                  linecount,
+                                  value.c_str());
+        return false;
+      }
+    }
+    values vals;
+    auto iit = u_info.find(key);
+    DCHECK(iit != u_info.end());
+    vals = iit->second;
+    if (conv < vals.minv || conv > vals.maxv) {
+      *error_msg = StringPrintf("line %u: "
+                                    "specified value %llu for '%s' "
+                                    "outside permitted range [%u %u]",
+                                linecount,
+                                conv,
+                                key.c_str(),
+                                vals.minv,
+                                vals.maxv);
       return false;
     } else {
-      values vals;
-      auto iit = u_info.find(key);
-      assert(iit != u_info.end());
-      vals = iit->second;
-      if (uvalue < vals.minv || uvalue > vals.maxv) {
-        LOG(WARNING) << "line " << linecount << ": "
-                     << "specified value " << uvalue << " for '" << key << "' "
-                     << "outside permitted range [" << vals.minv << " " << vals.maxv
-                     << "] (ignored)";
-        return false;
-      } else {
-        if (trace_config_read) {
-          LOG(INFO) << "option " << key << " set to " << uvalue;
-        }
-        uit->second = uvalue;
+      if (trace_config_read) {
+        LOG(INFO) << "option " << key << " set to " << conv;
       }
+      uit->second = static_cast<unsigned>(conv);
     }
     trace_config_read = (getUnsignedValue("trace_config_read") != 0);
     return true;
@@ -261,7 +288,7 @@ bool ConfigReader::parseLine(const char *key,
     return true;
   }
 
-  LOG(WARNING) << "line " << linecount << ": unknown option '" << key << "' ignored";
+  *error_msg = StringPrintf("line %u: unknown option '%s'", linecount, key.c_str());
   return false;
 }
 
@@ -279,12 +306,30 @@ bool ConfigReader::readFile()
   if (! android::base::ReadFileToString(config_file_path, &contents)) {
     return false;
   }
-  return Read(contents, /* fail_on_error */ false);
+  std::string error_msg;
+  if (!Read(contents, /* fail_on_error */ false, &error_msg)) {
+    LOG(ERROR) << error_msg;
+    return false;
+  }
+  if (!error_msg.empty()) {
+    LOG(WARNING) << error_msg;
+  }
+  return true;
 }
 
-bool ConfigReader::Read(const std::string& content, bool fail_on_error) {
+bool ConfigReader::Read(const std::string& content, bool fail_on_error, std::string* error_msg) {
   std::stringstream ss(content);
   std::string line;
+
+  auto append_error = [error_msg](const std::string& tmp) {
+    if (!error_msg->empty()) {
+      error_msg->append("\n");
+      error_msg->append(tmp);
+    } else {
+      *error_msg = tmp;
+    }
+  };
+
   for (unsigned linecount = 1;
        std::getline(ss,line,'\n');
        linecount += 1)
@@ -303,7 +348,7 @@ bool ConfigReader::Read(const std::string& content, bool fail_on_error) {
     // look for X=Y assignment
     auto efound = line.find('=');
     if (efound == std::string::npos) {
-      LOG(WARNING) << "line " << linecount << ": line malformed (no '=' found)";
+      append_error(StringPrintf("line %u: line malformed (no '=' found)", linecount));
       if (fail_on_error) {
         return false;
       }
@@ -313,9 +358,13 @@ bool ConfigReader::Read(const std::string& content, bool fail_on_error) {
     std::string key(line.substr(0, efound));
     std::string value(line.substr(efound+1, std::string::npos));
 
-    bool parse_success = parseLine(key.c_str(), value.c_str(), linecount);
-    if (fail_on_error && !parse_success) {
-      return false;
+    std::string local_error_msg;
+    bool parse_success = parseLine(key.c_str(), value.c_str(), linecount, &local_error_msg);
+    if (!parse_success) {
+      append_error(local_error_msg);
+      if (fail_on_error) {
+        return false;
+      }
     }
   }
 
