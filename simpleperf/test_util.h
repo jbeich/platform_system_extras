@@ -61,6 +61,15 @@ bool IsInNativeAbi();
     } \
   } while (0)
 
+bool OnCloudAndroid();
+#define OMIT_TEST_ON_CLOUD_ANDROID() \
+  do { \
+    if (OnCloudAndroid()) { \
+      GTEST_LOG_(INFO) << "Skip this test as hw counters are not supported on cloud Android."; \
+      return; \
+    } \
+  } while (0)
+
 class CaptureStdout {
  public:
   CaptureStdout() : started_(false) {}
