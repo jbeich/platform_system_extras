@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5846688c_cb9fa116",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1163,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2018-05-31T02:02:55Z",
+      "side": 1,
+      "message": "Is there a reason this has to be last? If so, it\u0027s a good reason to add a comment.",
+      "range": {
+        "startLine": 1161,
+        "startChar": 2,
+        "endLine": 1163,
+        "endChar": 3
+      },
+      "revId": "1363618ec03f741b394bd237c3b55659fe583752",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d9450d84_7090b47e",
+        "filename": "simpleperf/sample_tree_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2018-05-31T02:02:55Z",
+      "side": 1,
+      "message": "This is a small nit, but did you mean to make all of the add comments no longer align with the // Hit map X comment?",
+      "range": {
+        "startLine": 217,
+        "startChar": 53,
+        "endLine": 217,
+        "endChar": 66
+      },
+      "revId": "1363618ec03f741b394bd237c3b55659fe583752",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
