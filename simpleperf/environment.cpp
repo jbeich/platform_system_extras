@@ -31,14 +31,12 @@
 #include <android-base/file.h>
 #include <android-base/logging.h>
 #include <android-base/parseint.h>
+#include <android-base/properties.h>
 #include <android-base/strings.h>
 #include <android-base/stringprintf.h>
 #include <procinfo/process.h>
 #include <procinfo/process_map.h>
 
-#if defined(__ANDROID__)
-#include <android-base/properties.h>
-#endif
 
 #include "event_type.h"
 #include "IOEventLoop.h"

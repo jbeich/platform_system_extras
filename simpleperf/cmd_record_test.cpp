@@ -21,7 +21,9 @@
 #include <unistd.h>
 
 #include <android-base/file.h>
+#include <android-base/properties.h>
 #include <android-base/stringprintf.h>
+#include <android-base/strings.h>
 #include <android-base/test_utils.h>
 
 #include <map>
@@ -38,6 +40,18 @@
 #include "thread_tree.h"
 
 using namespace PerfFileFormat;
+
+bool OnCloudAndroid() {
+  static int on_cloud_android = -1;
+  if (on_cloud_android == -1) {
+    on_cloud_android = 0;
+    std::string device = android::base::GetProperty("ro.product.name", "");
+    if (android::base::StartsWith(device, "gce_x86")) {
+      on_cloud_android = 1;
+    }
+  }
+  return on_cloud_android == 1;
+}
 
 static std::unique_ptr<Command> RecordCmd() {
   return CreateCommandInstance("record");
@@ -57,9 +71,13 @@ static bool RunRecordCmd(std::vector<std::string> v,
   return RecordCmd()->Run(v);
 }
 
-TEST(record_cmd, no_options) { ASSERT_TRUE(RunRecordCmd({})); }
+TEST(record_cmd, no_options) {
+  OMIT_TEST_ON_CLOUD_ANDROID();
+  ASSERT_TRUE(RunRecordCmd({}));
+}
 
 TEST(record_cmd, system_wide_option) {
+  OMIT_TEST_ON_CLOUD_ANDROID();
   TEST_IN_ROOT(ASSERT_TRUE(RunRecordCmd({"-a"})));
 }
 
@@ -86,6 +104,7 @@ void CheckEventType(const std::string& record_file, const std::string event_type
 }
 
 TEST(record_cmd, sample_period_option) {
+  OMIT_TEST_ON_CLOUD_ANDROID();
   TemporaryFile tmpfile;
   ASSERT_TRUE(RunRecordCmd({"-c", "100000"}, tmpfile.path));
   CheckEventType(tmpfile.path, "cpu-cycles", 100000u, 0);
@@ -96,6 +115,7 @@ TEST(record_cmd, event_option) {
 }
 
 TEST(record_cmd, freq_option) {
+  OMIT_TEST_ON_CLOUD_ANDROID();
   TemporaryFile tmpfile;
   ASSERT_TRUE(RunRecordCmd({"-f", "99"}, tmpfile.path));
   CheckEventType(tmpfile.path, "cpu-cycles", 0, 99u);
@@ -105,6 +125,7 @@ TEST(record_cmd, freq_option) {
 }
 
 TEST(record_cmd, multiple_freq_or_sample_period_option) {
+  OMIT_TEST_ON_CLOUD_ANDROID();
   TemporaryFile tmpfile;
   ASSERT_TRUE(RunRecordCmd({"-f", "99", "-e", "cpu-cycles", "-c", "1000000", "-e",
                             "cpu-clock"}, tmpfile.path));
@@ -113,11 +134,13 @@ TEST(record_cmd, multiple_freq_or_sample_period_option) {
 }
 
 TEST(record_cmd, output_file_option) {
+  OMIT_TEST_ON_CLOUD_ANDROID();
   TemporaryFile tmpfile;
   ASSERT_TRUE(RecordCmd()->Run({"-o", tmpfile.path, "sleep", SLEEP_SEC}));
 }
 
 TEST(record_cmd, dump_kernel_mmap) {
+  OMIT_TEST_ON_CLOUD_ANDROID();
   TemporaryFile tmpfile;
   ASSERT_TRUE(RunRecordCmd({}, tmpfile.path));
   std::unique_ptr<RecordFileReader> reader =
@@ -141,6 +164,7 @@ TEST(record_cmd, dump_kernel_mmap) {
 }
 
 TEST(record_cmd, dump_build_id_feature) {
+  OMIT_TEST_ON_CLOUD_ANDROID();
   TemporaryFile tmpfile;
   ASSERT_TRUE(RunRecordCmd({}, tmpfile.path));
   std::unique_ptr<RecordFileReader> reader =
@@ -157,6 +181,7 @@ TEST(record_cmd, tracepoint_event) {
 }
 
 TEST(record_cmd, rN_event) {
+  OMIT_TEST_ON_CLOUD_ANDROID();
   OMIT_TEST_ON_NON_NATIVE_ABIS();
   size_t event_number;
   if (GetBuildArch() == ARCH_ARM64 || GetBuildArch() == ARCH_ARM) {
@@ -196,10 +221,12 @@ TEST(record_cmd, branch_sampling) {
 }
 
 TEST(record_cmd, event_modifier) {
+  OMIT_TEST_ON_CLOUD_ANDROID();
   ASSERT_TRUE(RunRecordCmd({"-e", "cpu-cycles:u"}));
 }
 
 TEST(record_cmd, fp_callchain_sampling) {
+  OMIT_TEST_ON_CLOUD_ANDROID();
   ASSERT_TRUE(RunRecordCmd({"--call-graph", "fp"}));
 }
 
@@ -216,6 +243,7 @@ TEST(record_cmd, fp_callchain_sampling_warning_on_arm) {
 }
 
 TEST(record_cmd, system_wide_fp_callchain_sampling) {
+  OMIT_TEST_ON_CLOUD_ANDROID();
   TEST_IN_ROOT(ASSERT_TRUE(RunRecordCmd({"-a", "--call-graph", "fp"})));
 }
 
@@ -243,6 +271,7 @@ bool IsInNativeAbi() {
 }
 
 TEST(record_cmd, dwarf_callchain_sampling) {
+  OMIT_TEST_ON_CLOUD_ANDROID();
   OMIT_TEST_ON_NON_NATIVE_ABIS();
   ASSERT_TRUE(IsDwarfCallChainSamplingSupported());
   std::vector<std::unique_ptr<Workload>> workloads;
@@ -255,12 +284,14 @@ TEST(record_cmd, dwarf_callchain_sampling) {
 }
 
 TEST(record_cmd, system_wide_dwarf_callchain_sampling) {
+  OMIT_TEST_ON_CLOUD_ANDROID();
   OMIT_TEST_ON_NON_NATIVE_ABIS();
   ASSERT_TRUE(IsDwarfCallChainSamplingSupported());
   TEST_IN_ROOT(RunRecordCmd({"-a", "--call-graph", "dwarf"}));
 }
 
 TEST(record_cmd, no_unwind_option) {
+  OMIT_TEST_ON_CLOUD_ANDROID();
   OMIT_TEST_ON_NON_NATIVE_ABIS();
   ASSERT_TRUE(IsDwarfCallChainSamplingSupported());
   ASSERT_TRUE(RunRecordCmd({"--call-graph", "dwarf", "--no-unwind"}));
@@ -268,6 +299,7 @@ TEST(record_cmd, no_unwind_option) {
 }
 
 TEST(record_cmd, post_unwind_option) {
+  OMIT_TEST_ON_CLOUD_ANDROID();
   OMIT_TEST_ON_NON_NATIVE_ABIS();
   ASSERT_TRUE(IsDwarfCallChainSamplingSupported());
   std::vector<std::unique_ptr<Workload>> workloads;
@@ -279,6 +311,7 @@ TEST(record_cmd, post_unwind_option) {
 }
 
 TEST(record_cmd, existing_processes) {
+  OMIT_TEST_ON_CLOUD_ANDROID();
   std::vector<std::unique_ptr<Workload>> workloads;
   CreateProcesses(2, &workloads);
   std::string pid_list = android::base::StringPrintf(
@@ -287,6 +320,7 @@ TEST(record_cmd, existing_processes) {
 }
 
 TEST(record_cmd, existing_threads) {
+  OMIT_TEST_ON_CLOUD_ANDROID();
   std::vector<std::unique_ptr<Workload>> workloads;
   CreateProcesses(2, &workloads);
   // Process id can also be used as thread id in linux.
@@ -303,11 +337,13 @@ TEST(record_cmd, no_monitored_threads) {
 }
 
 TEST(record_cmd, more_than_one_event_types) {
+  OMIT_TEST_ON_CLOUD_ANDROID();
   ASSERT_TRUE(RunRecordCmd({"-e", "cpu-cycles,cpu-clock"}));
   ASSERT_TRUE(RunRecordCmd({"-e", "cpu-cycles", "-e", "cpu-clock"}));
 }
 
 TEST(record_cmd, mmap_page_option) {
+  OMIT_TEST_ON_CLOUD_ANDROID();
   ASSERT_TRUE(RunRecordCmd({"-m", "1"}));
   ASSERT_FALSE(RunRecordCmd({"-m", "0"}));
   ASSERT_FALSE(RunRecordCmd({"-m", "7"}));
@@ -332,6 +368,7 @@ static void CheckKernelSymbol(const std::string& path, bool need_kallsyms,
 }
 
 TEST(record_cmd, kernel_symbol) {
+  OMIT_TEST_ON_CLOUD_ANDROID();
   TemporaryFile tmpfile;
   ASSERT_TRUE(RunRecordCmd({"--no-dump-symbols"}, tmpfile.path));
   bool success;
@@ -383,6 +420,7 @@ static void CheckDsoSymbolRecords(const std::string& path,
 }
 
 TEST(record_cmd, no_dump_symbols) {
+  OMIT_TEST_ON_CLOUD_ANDROID();
   TemporaryFile tmpfile;
   ASSERT_TRUE(RunRecordCmd({}, tmpfile.path));
   bool success;
@@ -405,6 +443,7 @@ TEST(record_cmd, no_dump_symbols) {
 }
 
 TEST(record_cmd, dump_kernel_symbols) {
+  OMIT_TEST_ON_CLOUD_ANDROID();
   if (!IsRoot()) {
     GTEST_LOG_(INFO) << "Test requires root privilege";
     return;
@@ -432,15 +471,20 @@ TEST(record_cmd, dump_kernel_symbols) {
 }
 
 TEST(record_cmd, group_option) {
+  OMIT_TEST_ON_CLOUD_ANDROID();
   ASSERT_TRUE(RunRecordCmd({"--group", "cpu-cycles,cpu-clock", "-m", "16"}));
   ASSERT_TRUE(RunRecordCmd({"--group", "cpu-cycles,cpu-clock", "--group",
                             "cpu-cycles:u,cpu-clock:u", "--group",
                             "cpu-cycles:k,cpu-clock:k", "-m", "16"}));
 }
 
-TEST(record_cmd, symfs_option) { ASSERT_TRUE(RunRecordCmd({"--symfs", "/"})); }
+TEST(record_cmd, symfs_option) {
+  OMIT_TEST_ON_CLOUD_ANDROID();
+  ASSERT_TRUE(RunRecordCmd({"--symfs", "/"}));
+}
 
 TEST(record_cmd, duration_option) {
+  OMIT_TEST_ON_CLOUD_ANDROID();
   TemporaryFile tmpfile;
   ASSERT_TRUE(RecordCmd()->Run({"--duration", "1.2", "-p",
                                 std::to_string(getpid()), "-o", tmpfile.path, "--in-app"}));
@@ -458,6 +502,7 @@ TEST(record_cmd, support_modifier_for_clock_events) {
 }
 
 TEST(record_cmd, handle_SIGHUP) {
+  OMIT_TEST_ON_CLOUD_ANDROID();
   TemporaryFile tmpfile;
   int pipefd[2];
   ASSERT_EQ(0, pipe(pipefd));
@@ -477,6 +522,7 @@ TEST(record_cmd, handle_SIGHUP) {
 }
 
 TEST(record_cmd, stop_when_no_more_targets) {
+  OMIT_TEST_ON_CLOUD_ANDROID();
   TemporaryFile tmpfile;
   std::atomic<int> tid(0);
   std::thread thread([&]() {
@@ -489,6 +535,7 @@ TEST(record_cmd, stop_when_no_more_targets) {
 }
 
 TEST(record_cmd, donot_stop_when_having_targets) {
+  OMIT_TEST_ON_CLOUD_ANDROID();
   std::vector<std::unique_ptr<Workload>> workloads;
   CreateProcesses(1, &workloads);
   std::string pid = std::to_string(workloads[0]->GetPid());
@@ -500,6 +547,7 @@ TEST(record_cmd, donot_stop_when_having_targets) {
 }
 
 TEST(record_cmd, start_profiling_fd_option) {
+  OMIT_TEST_ON_CLOUD_ANDROID();
   int pipefd[2];
   ASSERT_EQ(0, pipe(pipefd));
   int read_fd = pipefd[0];
@@ -518,6 +566,7 @@ TEST(record_cmd, start_profiling_fd_option) {
 }
 
 TEST(record_cmd, record_meta_info_feature) {
+  OMIT_TEST_ON_CLOUD_ANDROID();
   TemporaryFile tmpfile;
   ASSERT_TRUE(RunRecordCmd({}, tmpfile.path));
   std::unique_ptr<RecordFileReader> reader = RecordFileReader::CreateInstance(tmpfile.path);
@@ -534,6 +583,7 @@ TEST(record_cmd, record_meta_info_feature) {
 
 // See http://b/63135835.
 TEST(record_cmd, cpu_clock_for_a_long_time) {
+  OMIT_TEST_ON_CLOUD_ANDROID();
   std::vector<std::unique_ptr<Workload>> workloads;
   CreateProcesses(1, &workloads);
   std::string pid = std::to_string(workloads[0]->GetPid());
@@ -544,6 +594,7 @@ TEST(record_cmd, cpu_clock_for_a_long_time) {
 
 TEST(record_cmd, dump_regs_for_tracepoint_events) {
   TEST_REQUIRE_HOST_ROOT();
+  OMIT_TEST_ON_CLOUD_ANDROID();
   OMIT_TEST_ON_NON_NATIVE_ABIS();
   // Check if the kernel can dump registers for tracepoint events.
   // If not, probably a kernel patch below is missing:
@@ -554,6 +605,7 @@ TEST(record_cmd, dump_regs_for_tracepoint_events) {
 TEST(record_cmd, trace_offcpu_option) {
   // On linux host, we need root privilege to read tracepoint events.
   TEST_REQUIRE_HOST_ROOT();
+  OMIT_TEST_ON_CLOUD_ANDROID();
   OMIT_TEST_ON_NON_NATIVE_ABIS();
   TemporaryFile tmpfile;
   ASSERT_TRUE(RunRecordCmd({"--trace-offcpu", "-f", "1000"}, tmpfile.path));
@@ -566,10 +618,12 @@ TEST(record_cmd, trace_offcpu_option) {
 }
 
 TEST(record_cmd, exit_with_parent_option) {
+  OMIT_TEST_ON_CLOUD_ANDROID();
   ASSERT_TRUE(RunRecordCmd({"--exit-with-parent"}));
 }
 
 TEST(record_cmd, clockid_option) {
+  OMIT_TEST_ON_CLOUD_ANDROID();
   if (!IsSettingClockIdSupported()) {
     ASSERT_FALSE(RunRecordCmd({"--clockid", "monotonic"}));
   } else {
@@ -584,6 +638,7 @@ TEST(record_cmd, clockid_option) {
 }
 
 TEST(record_cmd, generate_samples_by_hw_counters) {
+  OMIT_TEST_ON_CLOUD_ANDROID();
   std::vector<std::string> events = {"cpu-cycles", "instructions"};
   for (auto& event : events) {
     TemporaryFile tmpfile;
@@ -602,16 +657,19 @@ TEST(record_cmd, generate_samples_by_hw_counters) {
 }
 
 TEST(record_cmd, callchain_joiner_options) {
+  OMIT_TEST_ON_CLOUD_ANDROID();
   ASSERT_TRUE(RunRecordCmd({"--no-callchain-joiner"}));
   ASSERT_TRUE(RunRecordCmd({"--callchain-joiner-min-matching-nodes", "2"}));
 }
 
 TEST(record_cmd, dashdash) {
+  OMIT_TEST_ON_CLOUD_ANDROID();
   TemporaryFile tmpfile;
   ASSERT_TRUE(RecordCmd()->Run({"-o", tmpfile.path, "--", "sleep", "1"}));
 }
 
 TEST(record_cmd, size_limit_option) {
+  OMIT_TEST_ON_CLOUD_ANDROID();
   std::vector<std::unique_ptr<Workload>> workloads;
   CreateProcesses(1, &workloads);
   std::string pid = std::to_string(workloads[0]->GetPid());
