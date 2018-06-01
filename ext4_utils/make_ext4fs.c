@@ -98,10 +98,12 @@ const char *blk_file_header_fmt = "Base EXT4 version %d.%d";
    Special files: sockets, devices, fifos
  */
 
+#ifndef _WIN32 // filter_dot is not used for Windows
 static int filter_dot(const struct dirent *d)
 {
 	return (strcmp(d->d_name, "..") && strcmp(d->d_name, "."));
 }
+#endif
 
 static u32 build_default_directory_structure(const char *dir_path,
 						 struct selabel_handle *sehnd)
@@ -560,6 +562,7 @@ static char *canonicalize_rel_slashes(const char *str)
 	return canonicalize_slashes(str, false);
 }
 
+#ifndef _WIN32 // These functions are not used for Windows
 static int compare_chunks(const void* chunk1, const void* chunk2) {
 	struct region* c1 = (struct region*) chunk1;
 	struct region* c2 = (struct region*) chunk2;
@@ -577,6 +580,7 @@ static int get_block_group(u32 block) {
 	}
 	return group;
 }
+#endif
 
 static void extract_base_fs_allocations(const char *directory, const char *mountpoint,
 										FILE* base_alloc_file_in) {
