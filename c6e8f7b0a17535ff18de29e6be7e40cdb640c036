@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "effb4ff5_2481878d",
+        "filename": "simpleperf/thread_tree.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2018-06-01T19:57:26Z",
+      "side": 1,
+      "message": "I think you need a comment somewhere describing what this is supposed to be doing. I think it adds a map, and if it finds any maps that overlap with the map being added, it deletes them?\n\nIt\u0027s also modifying some maps, but it\u0027s not clear exactly why it would do this.",
+      "range": {
+        "startLine": 153,
+        "startChar": 5,
+        "endLine": 153,
+        "endChar": 26
+      },
+      "revId": "c6e8f7b0a17535ff18de29e6be7e40cdb640c036",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
