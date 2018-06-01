@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "95788be7_bf80b4fe",
+        "filename": "simpleperf/cmd_record_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-06-01T00:08:55Z",
+      "side": 1,
+      "message": "i fixed this the other day. you can just include it now.",
+      "revId": "cefe9c6d4a66610481e4805bbd2331404371d055",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "93e90a52_afe4979a",
+        "filename": "simpleperf/cmd_record_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-06-01T00:08:55Z",
+      "side": 1,
+      "message": "(and it\u0027ll return the empty string here.)",
+      "revId": "cefe9c6d4a66610481e4805bbd2331404371d055",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
