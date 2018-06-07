@@ -43,6 +43,7 @@ cc_test {
         // The live tests require simpleperf.
         android: {
             required: [
+                "libservices",
                 "simpleperf",
             ],
             shared_libs: [
