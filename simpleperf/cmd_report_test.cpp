@@ -268,6 +268,7 @@ static std::unique_ptr<Command> RecordCmd() {
 }
 
 TEST_F(ReportCommandTest, dwarf_callgraph) {
+  TEST_REQUIRE_HW_COUNTER();
   if (IsDwarfCallChainSamplingSupported()) {
     TemporaryFile tmp_file;
     ASSERT_TRUE(RecordCmd()->Run({"-g", "-o", tmp_file.path, "sleep", SLEEP_SEC}));

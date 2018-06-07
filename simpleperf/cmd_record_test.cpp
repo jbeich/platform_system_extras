@@ -16,10 +16,12 @@
 
 #include <gtest/gtest.h>
 
+#include <android-base/file.h>
 #include <android-base/stringprintf.h>
 #include <android-base/test_utils.h>
 
 #include <memory>
+#include <regex>
 
 #include "command.h"
 #include "environment.h"
@@ -49,16 +51,19 @@ static bool RunRecordCmd(std::vector<std::string> v, const char* output_file = n
 }
 
 TEST(record_cmd, no_options) {
+  TEST_REQUIRE_HW_COUNTER();
   ASSERT_TRUE(RunRecordCmd({}));
 }
 
 TEST(record_cmd, system_wide_option) {
+  TEST_REQUIRE_HW_COUNTER();
   if (IsRoot()) {
     ASSERT_TRUE(RunRecordCmd({"-a"}));
   }
 }
 
 TEST(record_cmd, sample_period_option) {
+  TEST_REQUIRE_HW_COUNTER();
   ASSERT_TRUE(RunRecordCmd({"-c", "100000"}));
 }
 
@@ -67,16 +72,19 @@ TEST(record_cmd, event_option) {
 }
 
 TEST(record_cmd, freq_option) {
+  TEST_REQUIRE_HW_COUNTER();
   ASSERT_TRUE(RunRecordCmd({"-f", "99"}));
   ASSERT_TRUE(RunRecordCmd({"-F", "99"}));
 }
 
 TEST(record_cmd, output_file_option) {
+  TEST_REQUIRE_HW_COUNTER();
   TemporaryFile tmpfile;
   ASSERT_TRUE(RecordCmd()->Run({"-o", tmpfile.path, "sleep", SLEEP_SEC}));
 }
 
 TEST(record_cmd, dump_kernel_mmap) {
+  TEST_REQUIRE_HW_COUNTER();
   TemporaryFile tmpfile;
   ASSERT_TRUE(RunRecordCmd({}, tmpfile.path));
   std::unique_ptr<RecordFileReader> reader = RecordFileReader::CreateInstance(tmpfile.path);
@@ -97,6 +105,7 @@ TEST(record_cmd, dump_kernel_mmap) {
 }
 
 TEST(record_cmd, dump_build_id_feature) {
+  TEST_REQUIRE_HW_COUNTER();
   TemporaryFile tmpfile;
   ASSERT_TRUE(RunRecordCmd({}, tmpfile.path));
   std::unique_ptr<RecordFileReader> reader = RecordFileReader::CreateInstance(tmpfile.path);
@@ -113,6 +122,7 @@ TEST(record_cmd, tracepoint_event) {
 }
 
 TEST(record_cmd, branch_sampling) {
+  TEST_REQUIRE_HW_COUNTER();
   if (IsBranchSamplingSupported()) {
     ASSERT_TRUE(RunRecordCmd({"-b"}));
     ASSERT_TRUE(RunRecordCmd({"-j", "any,any_call,any_ret,ind_call"}));
@@ -126,14 +136,34 @@ TEST(record_cmd, branch_sampling) {
 }
 
 TEST(record_cmd, event_modifier) {
+  TEST_REQUIRE_HW_COUNTER();
   ASSERT_TRUE(RunRecordCmd({"-e", "cpu-cycles:u"}));
 }
 
 TEST(record_cmd, fp_callchain_sampling) {
+  TEST_REQUIRE_HW_COUNTER();
   ASSERT_TRUE(RunRecordCmd({"--call-graph", "fp"}));
 }
 
+bool HasHardwareCounter() {
+  static int has_hw_counter = -1;
+  if (has_hw_counter == -1) {
+    has_hw_counter = 1;
+#if defined(__arm__)
+    std::string cpu_info;
+    if (android::base::ReadFileToString("/proc/cpuinfo", &cpu_info)) {
+      std::string hardware = GetHardwareFromCpuInfo(cpu_info);
+      if (std::regex_search(hardware, std::regex(R"(i\.MX6.*Quad)"))) {
+        has_hw_counter = 0;
+      }
+    }
+#endif
+  }
+  return has_hw_counter == 1;
+}
+
 TEST(record_cmd, dwarf_callchain_sampling) {
+  TEST_REQUIRE_HW_COUNTER();
   if (IsDwarfCallChainSamplingSupported()) {
     ASSERT_TRUE(RunRecordCmd({"--call-graph", "dwarf"}));
     ASSERT_TRUE(RunRecordCmd({"--call-graph", "dwarf,16384"}));
@@ -145,6 +175,7 @@ TEST(record_cmd, dwarf_callchain_sampling) {
 }
 
 TEST(record_cmd, no_unwind_option) {
+  TEST_REQUIRE_HW_COUNTER();
   if (IsDwarfCallChainSamplingSupported()) {
     ASSERT_TRUE(RunRecordCmd({"--call-graph", "dwarf", "--no-unwind"}));
   } else {
@@ -155,6 +186,7 @@ TEST(record_cmd, no_unwind_option) {
 }
 
 TEST(record_cmd, post_unwind_option) {
+  TEST_REQUIRE_HW_COUNTER();
   if (IsDwarfCallChainSamplingSupported()) {
     ASSERT_TRUE(RunRecordCmd({"--call-graph", "dwarf", "--post-unwind"}));
   } else {
@@ -167,6 +199,7 @@ TEST(record_cmd, post_unwind_option) {
 }
 
 TEST(record_cmd, existing_processes) {
+  TEST_REQUIRE_HW_COUNTER();
   std::vector<std::unique_ptr<Workload>> workloads;
   CreateProcesses(2, &workloads);
   std::string pid_list =
@@ -175,6 +208,7 @@ TEST(record_cmd, existing_processes) {
 }
 
 TEST(record_cmd, existing_threads) {
+  TEST_REQUIRE_HW_COUNTER();
   std::vector<std::unique_ptr<Workload>> workloads;
   CreateProcesses(2, &workloads);
   // Process id can also be used as thread id in linux.
@@ -185,15 +219,18 @@ TEST(record_cmd, existing_threads) {
 }
 
 TEST(record_cmd, no_monitored_threads) {
+  TEST_REQUIRE_HW_COUNTER();
   ASSERT_FALSE(RecordCmd()->Run({""}));
 }
 
 TEST(record_cmd, more_than_one_event_types) {
+  TEST_REQUIRE_HW_COUNTER();
   ASSERT_TRUE(RunRecordCmd({"-e", "cpu-cycles,cpu-clock"}));
   ASSERT_TRUE(RunRecordCmd({"-e", "cpu-cycles", "-e", "cpu-clock"}));
 }
 
 TEST(record_cmd, mmap_page_option) {
+  TEST_REQUIRE_HW_COUNTER();
   ASSERT_TRUE(RunRecordCmd({"-m", "1"}));
   ASSERT_FALSE(RunRecordCmd({"-m", "0"}));
   ASSERT_FALSE(RunRecordCmd({"-m", "7"}));

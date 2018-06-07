@@ -51,6 +51,7 @@ TEST(stat_cmd, tracepoint_event) {
 }
 
 TEST(stat_cmd, event_modifier) {
+  TEST_REQUIRE_HW_COUNTER();
   ASSERT_TRUE(StatCmd()->Run({"-e", "cpu-cycles:u,cpu-cycles:k", "sleep", "1"}));
 }
 
