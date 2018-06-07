@@ -22,6 +22,30 @@
       "revId": "ed3e04255c694b6df3c6514dbebd3677dc536dcd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9b9c65f3_5e82d942",
+        "filename": "perfprofd/tests/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1121894
+      },
+      "writtenOn": "2018-06-07T18:08:32Z",
+      "side": 1,
+      "message": "according to Mika CL in b/80307199 #19. If it\u0027s part of required, it gets shipped inside the continuous_native zip and we can then push it to the device during the tests.\n\nBut yes linking statically would also work.",
+      "parentUuid": "83fbfcdb_181768b5",
+      "range": {
+        "startLine": 46,
+        "startChar": 16,
+        "endLine": 46,
+        "endChar": 30
+      },
+      "revId": "ed3e04255c694b6df3c6514dbebd3677dc536dcd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
