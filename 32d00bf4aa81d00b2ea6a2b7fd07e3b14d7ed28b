@@ -22,6 +22,30 @@
       "revId": "32d00bf4aa81d00b2ea6a2b7fd07e3b14d7ed28b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2a0e6614_915eeb49",
+        "filename": "libpagemap/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2018-06-07T23:16:17Z",
+      "side": 1,
+      "message": "At least for now, you need to describe everything you want packaged with the test. If you can safely assume that both versions of libpagemap will always be installed on the system, you wouldn\u0027t need to declare it in required (you don\u0027t have to declare libc/libc++ since you can assume those will exist).\n\nIt may be possible to be smarter about this, but we often build tests separately from the actual system image, so we don\u0027t necessarily have the correct data.",
+      "parentUuid": "3cb61e47_ee112d63",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 0
+      },
+      "revId": "32d00bf4aa81d00b2ea6a2b7fd07e3b14d7ed28b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
