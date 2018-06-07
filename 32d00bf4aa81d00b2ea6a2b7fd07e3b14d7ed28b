@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3cb61e47_ee112d63",
+        "filename": "libpagemap/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-06-07T22:59:00Z",
+      "side": 1,
+      "message": "i don\u0027t understand why i\u0027d need to do this...\n\n(but on my hikey it seems like i have a 32-bit and a 64-bit *test* but only the 64-bit *library*. is this something that the build system should hide? or does every test need to declare its library dependencies twice? or is the actual cause something else entirely?)",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 0
+      },
+      "revId": "32d00bf4aa81d00b2ea6a2b7fd07e3b14d7ed28b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
