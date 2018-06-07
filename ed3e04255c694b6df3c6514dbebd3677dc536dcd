@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "83fbfcdb_181768b5",
+        "filename": "perfprofd/tests/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2018-06-07T18:05:49Z",
+      "side": 1,
+      "message": "It\u0027s already in shared-libs, so I don\u0027t think this would change anything?\n\nMaybe it should be a static-lib instead? Could be that it\u0027s only installed as 64-bit by default, and building the test wouldn\u0027t update the system image.",
+      "range": {
+        "startLine": 46,
+        "startChar": 16,
+        "endLine": 46,
+        "endChar": 30
+      },
+      "revId": "ed3e04255c694b6df3c6514dbebd3677dc536dcd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
