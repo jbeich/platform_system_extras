@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "94df6e76_a4a801d9",
+        "filename": "simpleperf/cmd_record_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-06-07T23:32:44Z",
+      "side": 1,
+      "message": "i\u0027m a bit uncomfortable with the regex on the Hardware field, but i\u0027m not sure that using (some subset of) the other fields would actually be better...\n\n  CPU implementer\t: 0x41\n  CPU architecture: 8\n  CPU variant\t: 0x0\n  CPU part\t: 0xd09\n  CPU revision\t: 1",
+      "revId": "8faa615e6ab0251c8372eaba32d26a6484ad28b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
