@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "d44ddae1_e6d0ff23",
+        "filename": "simpleperf/IOEventLoop.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-06-08T22:13:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "14698459_a2104e26",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 24
+      },
+      "revId": "5e4fc7047f15838e263a4fb1cbc8ee1f10608657",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c62af0ef_6a9e86a0",
         "filename": "simpleperf/JITDebugReader.cpp",
         "patchSetId": 2
@@ -45,6 +69,30 @@
       "revId": "5e4fc7047f15838e263a4fb1cbc8ee1f10608657",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fc4b0b38_e1b5e85b",
+        "filename": "simpleperf/JITDebugReader.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-06-08T22:13:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c62af0ef_6a9e86a0",
+      "range": {
+        "startLine": 43,
+        "startChar": 81,
+        "endLine": 44,
+        "endChar": 20
+      },
+      "revId": "5e4fc7047f15838e263a4fb1cbc8ee1f10608657",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -94,6 +142,54 @@
     },
     {
       "key": {
+        "uuid": "52bb2591_63f543ff",
+        "filename": "simpleperf/JITDebugReader.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-06-08T22:13:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6b720b01_fabafeba",
+      "range": {
+        "startLine": 45,
+        "startChar": 77,
+        "endLine": 45,
+        "endChar": 84
+      },
+      "revId": "5e4fc7047f15838e263a4fb1cbc8ee1f10608657",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c3ae3d11_0a441dbf",
+        "filename": "simpleperf/JITDebugReader.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-06-08T22:13:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "92fffba7_ac089154",
+      "range": {
+        "startLine": 44,
+        "startChar": 77,
+        "endLine": 45,
+        "endChar": 14
+      },
+      "revId": "5e4fc7047f15838e263a4fb1cbc8ee1f10608657",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dffa1f77_bad0a158",
         "filename": "simpleperf/JITDebugReader.cpp",
         "patchSetId": 2
@@ -105,6 +201,30 @@
       "writtenOn": "2018-06-08T21:23:15Z",
       "side": 1,
       "message": "I think you should delete the switch to. I believe you always wait 100ms between checks, you aren\u0027t switching from no wait to this wait correct?",
+      "range": {
+        "startLine": 48,
+        "startChar": 37,
+        "endLine": 48,
+        "endChar": 51
+      },
+      "revId": "5e4fc7047f15838e263a4fb1cbc8ee1f10608657",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "14c16cb2_b18c7baf",
+        "filename": "simpleperf/JITDebugReader.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-06-08T22:13:15Z",
+      "side": 1,
+      "message": "Only a slight difference. from one check every 100ms, to wait 100ms between any two checks. Because it is not sure how many processes need to check, so having this change makes it less likely to be overwhelmed by checking updates.",
+      "parentUuid": "dffa1f77_bad0a158",
       "range": {
         "startLine": 48,
         "startChar": 37,
@@ -163,6 +283,30 @@
     },
     {
       "key": {
+        "uuid": "48c1f70a_a854e229",
+        "filename": "simpleperf/JITDebugReader.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-06-08T22:13:15Z",
+      "side": 1,
+      "message": "I don\u0027t know whether we should add libartd.so here. Nicolas or David?",
+      "parentUuid": "8c3324a4_c9b9ac8a",
+      "range": {
+        "startLine": 68,
+        "startChar": 43,
+        "endLine": 68,
+        "endChar": 52
+      },
+      "revId": "5e4fc7047f15838e263a4fb1cbc8ee1f10608657",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "01795f84_fd6945ad",
         "filename": "simpleperf/cmd_record.cpp",
         "patchSetId": 2
@@ -183,6 +327,30 @@
       "revId": "5e4fc7047f15838e263a4fb1cbc8ee1f10608657",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b62e24ae_5e6d8914",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1181,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-06-08T22:13:15Z",
+      "side": 1,
+      "message": "Done. Add Nicolas to see if he knows more details.",
+      "parentUuid": "01795f84_fd6945ad",
+      "range": {
+        "startLine": 1181,
+        "startChar": 2,
+        "endLine": 1181,
+        "endChar": 54
+      },
+      "revId": "5e4fc7047f15838e263a4fb1cbc8ee1f10608657",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
