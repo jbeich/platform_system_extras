@@ -16,6 +16,24 @@
       "revId": "8faa615e6ab0251c8372eaba32d26a6484ad28b5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0a6a8e52_4a0ae7fb",
+        "filename": "simpleperf/cmd_record_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-06-08T18:31:49Z",
+      "side": 1,
+      "message": "CPU implementer means arm.\nCPU architecture means arm7 or arm8.\nCPU part means cortex-A9 or others, as https://en.wikipedia.org/wiki/Comparison_of_ARMv7-A_cores\nAnd i.MX6 is one of cortex-A9, as https://en.wikipedia.org/wiki/ARM_Cortex-A9.\nAnd cortex-A9 isn\u0027t said to not support hw counters. So I can only use the hardware name.",
+      "parentUuid": "94df6e76_a4a801d9",
+      "revId": "8faa615e6ab0251c8372eaba32d26a6484ad28b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
