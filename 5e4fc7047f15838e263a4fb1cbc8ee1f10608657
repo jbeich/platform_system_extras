@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "14698459_a2104e26",
+        "filename": "simpleperf/IOEventLoop.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2018-06-08T21:23:15Z",
+      "side": 1,
+      "message": "Can\u0027t you add a , timeout({}) in the initializer list? I don\u0027t know if there is some catch that might cause a problem.",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 24
+      },
+      "revId": "5e4fc7047f15838e263a4fb1cbc8ee1f10608657",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c62af0ef_6a9e86a0",
+        "filename": "simpleperf/JITDebugReader.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2018-06-08T21:23:15Z",
+      "side": 1,
+      "message": "The wording here is a bit ambiguous. I think it might be better as something like:\n\nif the descriptor has been updated",
+      "range": {
+        "startLine": 43,
+        "startChar": 81,
+        "endLine": 44,
+        "endChar": 20
+      },
+      "revId": "5e4fc7047f15838e263a4fb1cbc8ee1f10608657",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "92fffba7_ac089154",
+        "filename": "simpleperf/JITDebugReader.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2018-06-08T21:23:15Z",
+      "side": 1,
+      "message": "if the JIT debug info changed",
+      "range": {
+        "startLine": 44,
+        "startChar": 77,
+        "endLine": 45,
+        "endChar": 14
+      },
+      "revId": "5e4fc7047f15838e263a4fb1cbc8ee1f10608657",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6b720b01_fabafeba",
+        "filename": "simpleperf/JITDebugReader.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2018-06-08T21:23:15Z",
+      "side": 1,
+      "message": "for updates.",
+      "range": {
+        "startLine": 45,
+        "startChar": 77,
+        "endLine": 45,
+        "endChar": 84
+      },
+      "revId": "5e4fc7047f15838e263a4fb1cbc8ee1f10608657",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dffa1f77_bad0a158",
+        "filename": "simpleperf/JITDebugReader.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2018-06-08T21:23:15Z",
+      "side": 1,
+      "message": "I think you should delete the switch to. I believe you always wait 100ms between checks, you aren\u0027t switching from no wait to this wait correct?",
+      "range": {
+        "startLine": 48,
+        "startChar": 37,
+        "endLine": 48,
+        "endChar": 51
+      },
+      "revId": "5e4fc7047f15838e263a4fb1cbc8ee1f10608657",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "69d6693e_7af96ca8",
+        "filename": "simpleperf/JITDebugReader.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2018-06-08T21:23:15Z",
+      "side": 1,
+      "message": "As mentioned above, you might want to check for libartd.so too.",
+      "range": {
+        "startLine": 145,
+        "startChar": 46,
+        "endLine": 145,
+        "endChar": 55
+      },
+      "revId": "5e4fc7047f15838e263a4fb1cbc8ee1f10608657",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8c3324a4_c9b9ac8a",
+        "filename": "simpleperf/JITDebugReader.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2018-06-08T21:23:15Z",
+      "side": 1,
+      "message": "I don\u0027t know if this matters, but I think there is a chance that there is also a process with libartd.so and without libart.so. I don\u0027t know if that\u0027s possible to see this in anything but some kind of debug process though.",
+      "range": {
+        "startLine": 68,
+        "startChar": 43,
+        "endLine": 68,
+        "endChar": 52
+      },
+      "revId": "5e4fc7047f15838e263a4fb1cbc8ee1f10608657",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "01795f84_fd6945ad",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1181,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2018-06-08T21:23:15Z",
+      "side": 1,
+      "message": "I think this requires some explanation. I think I know why, but better to explain it right here.",
+      "range": {
+        "startLine": 1181,
+        "startChar": 2,
+        "endLine": 1181,
+        "endChar": 54
+      },
+      "revId": "5e4fc7047f15838e263a4fb1cbc8ee1f10608657",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
