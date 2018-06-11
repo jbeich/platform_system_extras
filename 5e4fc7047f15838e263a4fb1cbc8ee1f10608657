@@ -307,6 +307,30 @@
     },
     {
       "key": {
+        "uuid": "d5391815_29f8e4e0",
+        "filename": "simpleperf/JITDebugReader.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1038443
+      },
+      "writtenOn": "2018-06-11T12:06:15Z",
+      "side": 1,
+      "message": "Adding libartd may be useful for ART devs.",
+      "parentUuid": "48c1f70a_a854e229",
+      "range": {
+        "startLine": 68,
+        "startChar": 43,
+        "endLine": 68,
+        "endChar": 52
+      },
+      "revId": "5e4fc7047f15838e263a4fb1cbc8ee1f10608657",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "01795f84_fd6945ad",
         "filename": "simpleperf/cmd_record.cpp",
         "patchSetId": 2
