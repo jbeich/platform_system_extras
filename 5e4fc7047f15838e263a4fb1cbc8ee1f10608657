@@ -331,6 +331,30 @@
     },
     {
       "key": {
+        "uuid": "daf61f9f_849b70fe",
+        "filename": "simpleperf/JITDebugReader.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-06-11T18:40:25Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "d5391815_29f8e4e0",
+      "range": {
+        "startLine": 68,
+        "startChar": 43,
+        "endLine": 68,
+        "endChar": 52
+      },
+      "revId": "5e4fc7047f15838e263a4fb1cbc8ee1f10608657",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "01795f84_fd6945ad",
         "filename": "simpleperf/cmd_record.cpp",
         "patchSetId": 2
