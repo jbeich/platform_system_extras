@@ -70,6 +70,30 @@
       "revId": "a752b3c76eb542998546da46b25142c3abec4361",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1766cf71_d5a78c88",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1182,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-06-12T17:52:07Z",
+      "side": 1,
+      "message": "I am kind of on the fence. To be safe, we should ignore replacement files. But I also want to change the unknown symbols to valid names when \"deleted\" mark happens. @Nicolas, how will the vdex file be changed? Will it replace old symbols with new symbols having overlapped locations in the vdex file?",
+      "parentUuid": "13273629_3a0b6ce8",
+      "range": {
+        "startLine": 1181,
+        "startChar": 64,
+        "endLine": 1182,
+        "endChar": 64
+      },
+      "revId": "a752b3c76eb542998546da46b25142c3abec4361",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
