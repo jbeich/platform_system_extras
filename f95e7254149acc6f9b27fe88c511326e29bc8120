@@ -22,6 +22,30 @@
       "revId": "f95e7254149acc6f9b27fe88c511326e29bc8120",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "03531096_4bd851fe",
+        "filename": "perfprofd/scripts/perf_proto_json2sqlite.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2018-06-12T23:45:08Z",
+      "side": 1,
+      "message": "Gah. I did for pep8 testing, but not for autopep8 fixes. Will have to undo some of these.",
+      "parentUuid": "11a871f1_80a8fb63",
+      "range": {
+        "startLine": 124,
+        "startChar": 52,
+        "endLine": 124,
+        "endChar": 53
+      },
+      "revId": "f95e7254149acc6f9b27fe88c511326e29bc8120",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
