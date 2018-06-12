@@ -46,6 +46,30 @@
       "revId": "a752b3c76eb542998546da46b25142c3abec4361",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "13273629_3a0b6ce8",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1182,
+      "author": {
+        "id": 1022077
+      },
+      "writtenOn": "2018-06-12T08:44:00Z",
+      "side": 1,
+      "message": "Still, shouldn\u0027t you keep the \u0027deleted\u0027 mark? The replacement file, if any, would be a different one.",
+      "parentUuid": "024fb70e_4505b0db",
+      "range": {
+        "startLine": 1181,
+        "startChar": 64,
+        "endLine": 1182,
+        "endChar": 64
+      },
+      "revId": "a752b3c76eb542998546da46b25142c3abec4361",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
