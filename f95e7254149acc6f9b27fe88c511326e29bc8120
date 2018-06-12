@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "11a871f1_80a8fb63",
+        "filename": "perfprofd/scripts/perf_proto_json2sqlite.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-06-12T23:40:26Z",
+      "side": 1,
+      "message": "you don\u0027t want to extend the column limit to 100?",
+      "range": {
+        "startLine": 124,
+        "startChar": 52,
+        "endLine": 124,
+        "endChar": 53
+      },
+      "revId": "f95e7254149acc6f9b27fe88c511326e29bc8120",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
