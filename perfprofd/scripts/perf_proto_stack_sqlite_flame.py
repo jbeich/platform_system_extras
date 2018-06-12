@@ -21,6 +21,7 @@ import argparse
 import itertools
 import sqlite3
 
+
 class Callsite(object):
     def __init__(self, dso_id, sym_id):
         self.dso_id = dso_id
@@ -37,7 +38,8 @@ class Callsite(object):
         return new_callsite
 
     def child_count_to_self(self):
-        self.count = reduce(lambda x, y: x + y[1].count, self.child_map.iteritems(), 0)
+        self.count = reduce(
+            lambda x, y: x + y[1].count, self.child_map.iteritems(), 0)
 
     def trim(self, local_threshold_in_percent, global_threshold):
         local_threshold = local_threshold_in_percent * 0.01 * self.count
@@ -56,7 +58,8 @@ class Callsite(object):
     def print_callsite_ascii(self, depth, indent, dsos, syms):
 
         print '  ' * indent + "%s (%s) [%d]" % (self._get_str(self.sym_id, syms),
-                                                self._get_str(self.dso_id, dsos),
+                                                self._get_str(
+                                                    self.dso_id, dsos),
                                                 self.count)
         if depth == 0:
             return
@@ -66,13 +69,15 @@ class Callsite(object):
     # Functions for flamegraph compatibility.
 
     callsite_counter = 0
+
     @classmethod
     def _get_next_callsite_id(cls):
         cls.callsite_counter += 1
         return cls.callsite_counter
 
     def create_children_list(self):
-        self.children = sorted(self.child_map.itervalues(), key=lambda x: x.count, reverse=True)
+        self.children = sorted(self.child_map.itervalues(),
+                               key=lambda x: x.count, reverse=True)
 
     def generate_offset(self, start_offset):
         self.offset = start_offset
@@ -96,6 +101,7 @@ class Callsite(object):
         if self.child_map:
             return max([c.get_max_depth() for c in self.child_map.itervalues()]) + 1
         return 1
+
 
 class SqliteReader(object):
     def __init__(self):
@@ -140,7 +146,8 @@ class SqliteReader(object):
             pid_row = self._c.fetchone()
             if pid_row:
                 skip_query_join = "as st join samples sa on st.sample_id = sa.id "
-                skip_query_str = skip_query_join + "where sa.pid_id != %d" % (pid_row[0])
+                skip_query_str = skip_query_join + \
+                    "where sa.pid_id != %d" % (pid_row[0])
 
         query_prefix = 'select sample_id, depth, dso_id, sym_id from stacks '
         query_suffix = ' order by sample_id asc, depth desc'
@@ -183,7 +190,8 @@ class SqliteReader(object):
         import sys
         if '__loader__' in globals():
             try:
-                js = __loader__.get_data(os.path.join(os.path.dirname(__file__), "script.js"))
+                js = __loader__.get_data(os.path.join(
+                    os.path.dirname(__file__), "script.js"))
                 if js is not None and len(js) > 0:
                     return js
             except:
@@ -202,7 +210,6 @@ class SqliteReader(object):
                     return script_f.read()
         return None
 
-
     def print_svg(self, filename, depth):
         from svg_renderer import renderSVG
         self.root.svgrenderer_compat(self.dsos, self.syms)
@@ -218,7 +225,7 @@ class SqliteReader(object):
 
         class FakeProcess:
             def __init__(self):
-                self.props = { 'trace_offcpu': False }
+                self.props = {'trace_offcpu': False}
         fake_process = FakeProcess()
         renderSVG(fake_process, self.root, f, 'hot')
 
@@ -241,18 +248,24 @@ class SqliteReader(object):
 ''')
         f.close()
 
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='''Translate a perfprofd database into a flame
                                                     representation''')
 
-    parser.add_argument('file', help='the sqlite database to use', metavar='file', type=str)
+    parser.add_argument(
+        'file', help='the sqlite database to use', metavar='file', type=str)
 
-    parser.add_argument('--html-out', help='output file for HTML flame graph', type=str)
-    parser.add_argument('--threshold', help='child threshold in percent', type=float, default=5)
+    parser.add_argument(
+        '--html-out', help='output file for HTML flame graph', type=str)
+    parser.add_argument(
+        '--threshold', help='child threshold in percent', type=float, default=5)
     parser.add_argument('--global-threshold', help='global threshold in percent', type=float,
                         default=.1)
-    parser.add_argument('--depth', help='depth to print to', type=int, default=10)
-    parser.add_argument('--limit', help='limit to given number of stack trace entries', type=int)
+    parser.add_argument('--depth', help='depth to print to',
+                        type=int, default=10)
+    parser.add_argument(
+        '--limit', help='limit to given number of stack trace entries', type=int)
     parser.add_argument('--skip-simpleperf', help='skip simpleperf samples', action='store_const',
                         const=True)
 

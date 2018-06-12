@@ -19,6 +19,7 @@ import itertools
 import json
 import sqlite3
 
+
 class SqliteWriter(object):
     def __init__(self):
         self.sample_count = 0
@@ -53,7 +54,7 @@ class SqliteWriter(object):
                                                     primary key (sample_id, depth))
                                                     ''')
         except sqlite3.OperationalError:
-            pass # ignore
+            pass  # ignore
 
     def close(self):
         self._conn.commit()
@@ -78,7 +79,8 @@ class SqliteWriter(object):
 
     def write_sqlite_index_table(self, table_dict, table_name):
         for key, value in table_dict.iteritems():
-            self._c.execute("insert into {tn} values (?,?)".format(tn=table_name), (value,key))
+            self._c.execute("insert into {tn} values (?,?)".format(
+                tn=table_name), (value, key))
 
     def flush(self):
         self.write_sqlite_index_table(self.pid_tmp_map, 'pids')
@@ -118,21 +120,26 @@ class SqliteWriter(object):
             return "[unknown]"
 
         pid_name = get_name(sample[0], tid_name_map)
-        pid_id = self.insert_into_tmp_or_get(pid_name, self.pid_map, self.pid_tmp_map)
+        pid_id = self.insert_into_tmp_or_get(
+            pid_name, self.pid_map, self.pid_tmp_map)
         tid_name = get_name(sample[1], tid_name_map)
-        tid_id = self.insert_into_tmp_or_get(tid_name, self.tid_map, self.tid_tmp_map)
+        tid_id = self.insert_into_tmp_or_get(
+            tid_name, self.tid_map, self.tid_tmp_map)
 
         self.samples_tmp_list.append((sample_id, pid_id, tid_id))
 
         stack_depth = 0
         for entry in sample[2]:
-            sym_id = self.insert_into_tmp_or_get(entry[0], self.symbol_map, self.symbol_tmp_map)
+            sym_id = self.insert_into_tmp_or_get(
+                entry[0], self.symbol_map, self.symbol_tmp_map)
             dso = entry[2]
             if dso is None:
                 dso = "None"
-            dso_id = self.insert_into_tmp_or_get(dso, self.dso_map, self.dso_tmp_map)
+            dso_id = self.insert_into_tmp_or_get(
+                dso, self.dso_map, self.dso_tmp_map)
 
-            self.stacks_tmp_list.append((sample_id, stack_depth, dso_id, sym_id, entry[1]))
+            self.stacks_tmp_list.append(
+                (sample_id, stack_depth, dso_id, sym_id, entry[1]))
 
             stack_depth = stack_depth + 1
 
@@ -141,7 +148,8 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='''Process a set of perfprofd JSON files produced
                                                     by perf_proto_stack.py into SQLite database''')
 
-    parser.add_argument('file', help='JSON files to parse and combine', metavar='file', nargs='+')
+    parser.add_argument(
+        'file', help='JSON files to parse and combine', metavar='file', nargs='+')
 
     parser.add_argument('--sqlite-out', help='SQLite database output', type=str,
                         default='sqlite.db')
