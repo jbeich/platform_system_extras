@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "b847a94b_6e336cab",
+        "filename": "simpleperf/scripts/annotate.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 636,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2018-06-13T21:30:21Z",
+      "side": 1,
+      "message": "Cool, didn\u0027t know argparse did that internally.",
+      "parentUuid": "3c400bb5_18ea92b5",
+      "revId": "30c77c5fdd381a626cd2551fcb5dfd9a69af30c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "43a99f38_5525a031",
         "filename": "simpleperf/scripts/binary_cache_builder.py",
         "patchSetId": 2
@@ -379,6 +397,24 @@
     },
     {
       "key": {
+        "uuid": "be8931c5_1e0731da",
+        "filename": "simpleperf/scripts/pprof_proto_generator.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2018-06-13T21:30:21Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "fe44222c_80eec763",
+      "revId": "30c77c5fdd381a626cd2551fcb5dfd9a69af30c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9ea7d331_77f644b5",
         "filename": "simpleperf/scripts/report_html.py",
         "patchSetId": 2
@@ -517,6 +553,30 @@
       "revId": "30c77c5fdd381a626cd2551fcb5dfd9a69af30c7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "553fc1bd_a4557309",
+        "filename": "simpleperf/scripts/report_sample.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2018-06-13T21:30:21Z",
+      "side": 1,
+      "message": "I think the `pep8` tool is the one that will catch this for you. Not 100% sure since I just have my editor run a whole bunch of them and I\u0027m not always sure which warnings come from which tool :)",
+      "parentUuid": "f9f6e076_96a10038",
+      "range": {
+        "startLine": 58,
+        "startChar": 0,
+        "endLine": 58,
+        "endChar": 1
+      },
+      "revId": "30c77c5fdd381a626cd2551fcb5dfd9a69af30c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
