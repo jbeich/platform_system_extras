@@ -94,6 +94,30 @@
       "revId": "a752b3c76eb542998546da46b25142c3abec4361",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "11afc012_18c69d53",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1182,
+      "author": {
+        "id": 1038443
+      },
+      "writtenOn": "2018-06-13T07:39:39Z",
+      "side": 1,
+      "message": "I think the vdex should be almost the same, modulo some quickening. Calin, I expect an update to use a new directory, right?",
+      "parentUuid": "1766cf71_d5a78c88",
+      "range": {
+        "startLine": 1181,
+        "startChar": 64,
+        "endLine": 1182,
+        "endChar": 64
+      },
+      "revId": "a752b3c76eb542998546da46b25142c3abec4361",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
