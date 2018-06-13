@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "d030ec00_fa2e8989",
+        "filename": "perfprofd/scripts/perf_proto_json2sqlite.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2018-06-13T15:48:24Z",
+      "side": 1,
+      "message": "I\u0027m not. For running pep8 after autopep8 (cause of course you can\u0027t automagically fix all issues :-( ), I set the line limit to the good old Android-100. :-)",
+      "parentUuid": "d8ee8bc0_1b0dfc0c",
+      "range": {
+        "startLine": 124,
+        "startChar": 52,
+        "endLine": 124,
+        "endChar": 53
+      },
+      "revId": "f95e7254149acc6f9b27fe88c511326e29bc8120",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "dd09c6be_135ed00f",
         "filename": "perfprofd/scripts/perf_proto_stack.py",
         "patchSetId": 1
@@ -84,6 +108,24 @@
       "writtenOn": "2018-06-13T05:48:13Z",
       "side": 1,
       "message": "Did something emit a warning about this? The usual advice is to stick to one type of quotes as long as the string doesn\u0027t contain any quotes that would need to be escaped. Just making sure you know that both the before and after are fine here.",
+      "revId": "f95e7254149acc6f9b27fe88c511326e29bc8120",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "99e84d3d_7aaefa6c",
+        "filename": "perfprofd/scripts/perf_proto_stack.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2018-06-13T15:48:24Z",
+      "side": 1,
+      "message": "This is actually a hodge-podge CL ( :-( ). pylint complains about mixed quotes, and I started converting by hand - until I asked myself why that braindead tool is telling me that the majority of quotes are inconsistent, and not the minority.",
+      "parentUuid": "dd09c6be_135ed00f",
       "revId": "f95e7254149acc6f9b27fe88c511326e29bc8120",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -113,6 +155,30 @@
     },
     {
       "key": {
+        "uuid": "ad9ad6d4_299fa5dc",
+        "filename": "perfprofd/scripts/perf_proto_stack.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2018-06-13T15:48:24Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "c1651124_d61fd005",
+      "range": {
+        "startLine": 88,
+        "startChar": 42,
+        "endLine": 88,
+        "endChar": 56
+      },
+      "revId": "f95e7254149acc6f9b27fe88c511326e29bc8120",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7f081d38_a8c15404",
         "filename": "perfprofd/scripts/perf_proto_stack.py",
         "patchSetId": 1
@@ -130,6 +196,24 @@
     },
     {
       "key": {
+        "uuid": "f93e75b3_9f4760ee",
+        "filename": "perfprofd/scripts/perf_proto_stack.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2018-06-13T15:48:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7f081d38_a8c15404",
+      "revId": "f95e7254149acc6f9b27fe88c511326e29bc8120",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8be4be11_5bb38a2d",
         "filename": "perfprofd/scripts/perf_proto_stack.py",
         "patchSetId": 1
@@ -141,6 +225,24 @@
       "writtenOn": "2018-06-13T05:48:13Z",
       "side": 1,
       "message": "What\u0027s going on here? Every other mention of this that I see is either a function local or a parameter.",
+      "revId": "f95e7254149acc6f9b27fe88c511326e29bc8120",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "96a92a25_1dd645ef",
+        "filename": "perfprofd/scripts/perf_proto_stack.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 458,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2018-06-13T15:48:24Z",
+      "side": 1,
+      "message": "Makes the print_histogram interface easier. Could have used a lambda there to capture the map, I guess.\n\nI should probably go and encapsulate all this crap into a class, anyways.",
+      "parentUuid": "8be4be11_5bb38a2d",
       "revId": "f95e7254149acc6f9b27fe88c511326e29bc8120",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
@@ -167,6 +269,30 @@
       "revId": "f95e7254149acc6f9b27fe88c511326e29bc8120",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4ca47105_4eef7c6a",
+        "filename": "perfprofd/scripts/perf_proto_stack.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2018-06-13T15:48:24Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "e6722769_8c5920fe",
+      "range": {
+        "startLine": 501,
+        "startChar": 29,
+        "endLine": 501,
+        "endChar": 33
+      },
+      "revId": "f95e7254149acc6f9b27fe88c511326e29bc8120",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
