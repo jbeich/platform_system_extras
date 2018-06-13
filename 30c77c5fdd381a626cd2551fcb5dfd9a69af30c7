@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "5127c0dc_3a7afcf4",
+        "filename": "simpleperf/scripts/annotate.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 636,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2018-06-13T06:12:59Z",
+      "side": 1,
+      "message": "This will format funny in the help text (all subsequent lines will be indented). \n\n    parser \u003d argparse.ArgumentParser(description\u003dtextwrap.dedent(\"\"\"\\\n        Annotate...\"\"\"))\n\nIt will automatically remove the common indentation from the string while still letting you keep the expected indentation.",
+      "revId": "30c77c5fdd381a626cd2551fcb5dfd9a69af30c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "43a99f38_5525a031",
         "filename": "simpleperf/scripts/binary_cache_builder.py",
         "patchSetId": 2
@@ -48,6 +65,30 @@
     },
     {
       "key": {
+        "uuid": "b45a94a7_0aca1503",
+        "filename": "simpleperf/scripts/binary_cache_builder.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2018-06-13T06:12:59Z",
+      "side": 1,
+      "message": "Yes, prefer {} to dict().",
+      "parentUuid": "f8861d4a_d75d831f",
+      "range": {
+        "startLine": 53,
+        "startChar": 24,
+        "endLine": 53,
+        "endChar": 30
+      },
+      "revId": "30c77c5fdd381a626cd2551fcb5dfd9a69af30c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b704db40_53babe3a",
         "filename": "simpleperf/scripts/binary_cache_builder.py",
         "patchSetId": 2
@@ -71,6 +112,53 @@
     },
     {
       "key": {
+        "uuid": "265a98fe_30c4005d",
+        "filename": "simpleperf/scripts/binary_cache_builder.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2018-06-13T06:12:59Z",
+      "side": 1,
+      "message": "When conditionals get this long, best to factor out a function IMO.\n\n    def _needs_to_copy(self, target_file, expected_build_id):\n        if os.path.isfile(target_file):\n            return False\n        if self._read_build_id(target_file) \u003d\u003d expected_build_id:\n            return False\n        if self._file_has_symbol_table(target_file):\n            return False\n        return True\n\nThen this becomes simply:\n\n    if not self._needs_to_copy(target_file, expected_build_id):\n        return",
+      "parentUuid": "b704db40_53babe3a",
+      "range": {
+        "startLine": 133,
+        "startChar": 16,
+        "endLine": 133,
+        "endChar": 19
+      },
+      "revId": "30c77c5fdd381a626cd2551fcb5dfd9a69af30c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "30d036d3_845ed508",
+        "filename": "simpleperf/scripts/inferno/inferno.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2018-06-13T06:12:59Z",
+      "side": 1,
+      "message": "`_symbol, _callchain` is preferable imo. Marks them as unused while still being useful as documentation of the function signature.",
+      "range": {
+        "startLine": 316,
+        "startChar": 30,
+        "endLine": 316,
+        "endChar": 32
+      },
+      "revId": "30c77c5fdd381a626cd2551fcb5dfd9a69af30c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "43b7df86_b3fcc8c3",
         "filename": "simpleperf/scripts/pprof_proto_generator.py",
         "patchSetId": 2
@@ -87,6 +175,70 @@
         "startChar": 36,
         "endLine": 179,
         "endChar": 43
+      },
+      "revId": "30c77c5fdd381a626cd2551fcb5dfd9a69af30c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "43ff6e8e_bf7016bc",
+        "filename": "simpleperf/scripts/pprof_proto_generator.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2018-06-13T06:12:59Z",
+      "side": 1,
+      "message": "Better yet:\n\n    for sample_type_id, value in values.items():\n        self.add_value(sample_type_id, value)",
+      "parentUuid": "43b7df86_b3fcc8c3",
+      "range": {
+        "startLine": 179,
+        "startChar": 36,
+        "endLine": 179,
+        "endChar": 43
+      },
+      "revId": "30c77c5fdd381a626cd2551fcb5dfd9a69af30c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e7f8617f_da73fbf0",
+        "filename": "simpleperf/scripts/pprof_proto_generator.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2018-06-13T06:12:59Z",
+      "side": 1,
+      "message": "Is this still necessary after moving all of the member decls into __init__?",
+      "revId": "30c77c5fdd381a626cd2551fcb5dfd9a69af30c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9ea7d331_77f644b5",
+        "filename": "simpleperf/scripts/report_html.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2018-06-13T06:12:59Z",
+      "side": 1,
+      "message": "iterate_libs (or perhaps more simply \"libraries\" with @property). This doesn\u0027t actually enumerate anything.",
+      "range": {
+        "startLine": 88,
+        "startChar": 8,
+        "endLine": 88,
+        "endChar": 21
       },
       "revId": "30c77c5fdd381a626cd2551fcb5dfd9a69af30c7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
@@ -133,6 +285,29 @@
         "startChar": 0,
         "endLine": 58,
         "endChar": 1
+      },
+      "revId": "30c77c5fdd381a626cd2551fcb5dfd9a69af30c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "90687963_29186381",
+        "filename": "simpleperf/scripts/simpleperf_report_lib.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2018-06-13T06:12:59Z",
+      "side": 1,
+      "message": "RuntimeError, or maybe:\n\n    class CheckFailure(RuntimeError):\n        pass",
+      "range": {
+        "startLine": 47,
+        "startChar": 14,
+        "endLine": 47,
+        "endChar": 23
       },
       "revId": "30c77c5fdd381a626cd2551fcb5dfd9a69af30c7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
