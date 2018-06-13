@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "3c400bb5_18ea92b5",
+        "filename": "simpleperf/scripts/annotate.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 636,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-06-13T21:27:34Z",
+      "side": 1,
+      "message": "argparse automatically formats the description and help message, so it doesn\u0027t matter how the string is formatted in source code. So textwrap.dedent doesn\u0027t change the output.",
+      "parentUuid": "5127c0dc_3a7afcf4",
+      "revId": "30c77c5fdd381a626cd2551fcb5dfd9a69af30c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "43a99f38_5525a031",
         "filename": "simpleperf/scripts/binary_cache_builder.py",
         "patchSetId": 2
@@ -39,6 +57,30 @@
       "revId": "30c77c5fdd381a626cd2551fcb5dfd9a69af30c7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c54289d6_3de55982",
+        "filename": "simpleperf/scripts/binary_cache_builder.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-06-13T21:27:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "43a99f38_5525a031",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 54
+      },
+      "revId": "30c77c5fdd381a626cd2551fcb5dfd9a69af30c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -89,6 +131,30 @@
     },
     {
       "key": {
+        "uuid": "1cc6424d_26114e61",
+        "filename": "simpleperf/scripts/binary_cache_builder.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-06-13T21:27:34Z",
+      "side": 1,
+      "message": "Done, also fixed other dict().",
+      "parentUuid": "b45a94a7_0aca1503",
+      "range": {
+        "startLine": 53,
+        "startChar": 24,
+        "endLine": 53,
+        "endChar": 30
+      },
+      "revId": "30c77c5fdd381a626cd2551fcb5dfd9a69af30c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b704db40_53babe3a",
         "filename": "simpleperf/scripts/binary_cache_builder.py",
         "patchSetId": 2
@@ -136,6 +202,30 @@
     },
     {
       "key": {
+        "uuid": "95239d95_c4273ddc",
+        "filename": "simpleperf/scripts/binary_cache_builder.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-06-13T21:27:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "265a98fe_30c4005d",
+      "range": {
+        "startLine": 133,
+        "startChar": 16,
+        "endLine": 133,
+        "endChar": 19
+      },
+      "revId": "30c77c5fdd381a626cd2551fcb5dfd9a69af30c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "30d036d3_845ed508",
         "filename": "simpleperf/scripts/inferno/inferno.py",
         "patchSetId": 2
@@ -156,6 +246,30 @@
       "revId": "30c77c5fdd381a626cd2551fcb5dfd9a69af30c7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ac0bc789_dda88bb5",
+        "filename": "simpleperf/scripts/inferno/inferno.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-06-13T21:27:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "30d036d3_845ed508",
+      "range": {
+        "startLine": 316,
+        "startChar": 30,
+        "endLine": 316,
+        "endChar": 32
+      },
+      "revId": "30c77c5fdd381a626cd2551fcb5dfd9a69af30c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -206,6 +320,30 @@
     },
     {
       "key": {
+        "uuid": "b96c3676_647d0df9",
+        "filename": "simpleperf/scripts/pprof_proto_generator.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-06-13T21:27:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "43ff6e8e_bf7016bc",
+      "range": {
+        "startLine": 179,
+        "startChar": 36,
+        "endLine": 179,
+        "endChar": 43
+      },
+      "revId": "30c77c5fdd381a626cd2551fcb5dfd9a69af30c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e7f8617f_da73fbf0",
         "filename": "simpleperf/scripts/pprof_proto_generator.py",
         "patchSetId": 2
@@ -217,6 +355,24 @@
       "writtenOn": "2018-06-13T06:12:59Z",
       "side": 1,
       "message": "Is this still necessary after moving all of the member decls into __init__?",
+      "revId": "30c77c5fdd381a626cd2551fcb5dfd9a69af30c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fe44222c_80eec763",
+        "filename": "simpleperf/scripts/pprof_proto_generator.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-06-13T21:27:34Z",
+      "side": 1,
+      "message": "yes, because pylint can\u0027t find methods in profile_pb2, which is generated by protobuf.",
+      "parentUuid": "e7f8617f_da73fbf0",
       "revId": "30c77c5fdd381a626cd2551fcb5dfd9a69af30c7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
@@ -246,6 +402,30 @@
     },
     {
       "key": {
+        "uuid": "ae302cdb_9446d8d1",
+        "filename": "simpleperf/scripts/report_html.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-06-13T21:27:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9ea7d331_77f644b5",
+      "range": {
+        "startLine": 88,
+        "startChar": 8,
+        "endLine": 88,
+        "endChar": 21
+      },
+      "revId": "30c77c5fdd381a626cd2551fcb5dfd9a69af30c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "249de03e_390a947b",
         "filename": "simpleperf/scripts/report_html.py",
         "patchSetId": 2
@@ -269,6 +449,30 @@
     },
     {
       "key": {
+        "uuid": "b8765331_4dc5e652",
+        "filename": "simpleperf/scripts/report_html.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-06-13T21:27:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "249de03e_390a947b",
+      "range": {
+        "startLine": 408,
+        "startChar": 7,
+        "endLine": 408,
+        "endChar": 8
+      },
+      "revId": "30c77c5fdd381a626cd2551fcb5dfd9a69af30c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "941b0141_b7187c63",
         "filename": "simpleperf/scripts/report_sample.py",
         "patchSetId": 2
@@ -280,6 +484,30 @@
       "writtenOn": "2018-06-13T04:16:15Z",
       "side": 1,
       "message": "PEP-8 suggests \"Surround top-level function and class definitions with two blank lines.\"",
+      "range": {
+        "startLine": 58,
+        "startChar": 0,
+        "endLine": 58,
+        "endChar": 1
+      },
+      "revId": "30c77c5fdd381a626cd2551fcb5dfd9a69af30c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f9f6e076_96a10038",
+        "filename": "simpleperf/scripts/report_sample.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-06-13T21:27:34Z",
+      "side": 1,
+      "message": "Done. I know, but it is not enforced by pylint, and I feel that\u0027s too much space (may be because I am used to c++ code).",
+      "parentUuid": "941b0141_b7187c63",
       "range": {
         "startLine": 58,
         "startChar": 0,
@@ -312,6 +540,30 @@
       "revId": "30c77c5fdd381a626cd2551fcb5dfd9a69af30c7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e4d04778_8fe984e7",
+        "filename": "simpleperf/scripts/simpleperf_report_lib.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-06-13T21:27:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "90687963_29186381",
+      "range": {
+        "startLine": 47,
+        "startChar": 14,
+        "endLine": 47,
+        "endChar": 23
+      },
+      "revId": "30c77c5fdd381a626cd2551fcb5dfd9a69af30c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
