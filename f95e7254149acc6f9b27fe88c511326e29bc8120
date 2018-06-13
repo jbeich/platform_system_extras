@@ -46,6 +46,127 @@
       "revId": "f95e7254149acc6f9b27fe88c511326e29bc8120",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d8ee8bc0_1b0dfc0c",
+        "filename": "perfprofd/scripts/perf_proto_json2sqlite.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2018-06-13T05:48:13Z",
+      "side": 1,
+      "message": "If you\u0027re trying to follow pep8, it\u0027s technically a 79 column limit (don\u0027t ask me why).",
+      "parentUuid": "03531096_4bd851fe",
+      "range": {
+        "startLine": 124,
+        "startChar": 52,
+        "endLine": 124,
+        "endChar": 53
+      },
+      "revId": "f95e7254149acc6f9b27fe88c511326e29bc8120",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dd09c6be_135ed00f",
+        "filename": "perfprofd/scripts/perf_proto_stack.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2018-06-13T05:48:13Z",
+      "side": 1,
+      "message": "Did something emit a warning about this? The usual advice is to stick to one type of quotes as long as the string doesn\u0027t contain any quotes that would need to be escaped. Just making sure you know that both the before and after are fine here.",
+      "revId": "f95e7254149acc6f9b27fe88c511326e29bc8120",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c1651124_d61fd005",
+        "filename": "perfprofd/scripts/perf_proto_stack.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2018-06-13T05:48:13Z",
+      "side": 1,
+      "message": "If you prefer, `operator.itemgetter(0)`. Either is fine.",
+      "range": {
+        "startLine": 88,
+        "startChar": 42,
+        "endLine": 88,
+        "endChar": 56
+      },
+      "revId": "f95e7254149acc6f9b27fe88c511326e29bc8120",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7f081d38_a8c15404",
+        "filename": "perfprofd/scripts/perf_proto_stack.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2018-06-13T05:48:13Z",
+      "side": 1,
+      "message": "Delete?",
+      "revId": "f95e7254149acc6f9b27fe88c511326e29bc8120",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8be4be11_5bb38a2d",
+        "filename": "perfprofd/scripts/perf_proto_stack.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 458,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2018-06-13T05:48:13Z",
+      "side": 1,
+      "message": "What\u0027s going on here? Every other mention of this that I see is either a function local or a parameter.",
+      "revId": "f95e7254149acc6f9b27fe88c511326e29bc8120",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e6722769_8c5920fe",
+        "filename": "perfprofd/scripts/perf_proto_stack.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2018-06-13T05:48:13Z",
+      "side": 1,
+      "message": "Alternatively `operator.methodcaller(\u0027kill\u0027)`. Either is fine.",
+      "range": {
+        "startLine": 501,
+        "startChar": 29,
+        "endLine": 501,
+        "endChar": 33
+      },
+      "revId": "f95e7254149acc6f9b27fe88c511326e29bc8120",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
