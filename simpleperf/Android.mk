@@ -44,6 +44,7 @@ simpleperf_static_libraries_target := \
   liblog \
   libprocinfo \
   libutils \
+  libfilemap \
   liblzma \
   libLLVMObject \
   libLLVMBitReader \
