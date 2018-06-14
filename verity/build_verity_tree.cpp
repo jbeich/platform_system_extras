@@ -1,4 +1,6 @@
-#include <openssl/bn.h>
+
+#include "build_verity_tree.h"
+
 #include <openssl/evp.h>
 #include <sparse/sparse.h>
 
@@ -6,15 +8,12 @@
 
 #include <assert.h>
 #include <errno.h>
-#include <getopt.h>
 #include <fcntl.h>
-#include <inttypes.h>
 #include <limits.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-#include <vector>
 
 #include <android-base/file.h>
 
@@ -30,24 +29,22 @@ struct sparse_hash_ctx {
 
 #define div_round_up(x,y) (((x) + (y) - 1)/(y))
 
-#define round_up(x,y) (div_round_up(x,y)*(y))
+#define RETURN_FALSE(x...) \
+  {                        \
+    fprintf(stderr, x);    \
+    return false;          \
+  }
 
-#define FATAL(x...) { \
-    fprintf(stderr, x); \
-    exit(1); \
-}
+size_t verity_tree_blocks(uint64_t data_size, size_t block_size,
+                          size_t hash_size, int level) {
+  size_t level_blocks = div_round_up(data_size, block_size);
+  int hashes_per_block = div_round_up(block_size, hash_size);
 
-size_t verity_tree_blocks(uint64_t data_size, size_t block_size, size_t hash_size,
-                          int level)
-{
-    size_t level_blocks = div_round_up(data_size, block_size);
-    int hashes_per_block = div_round_up(block_size, hash_size);
+  do {
+    level_blocks = div_round_up(level_blocks, hashes_per_block);
+  } while (level--);
 
-    do {
-        level_blocks = div_round_up(level_blocks, hashes_per_block);
-    } while (level--);
-
-    return level_blocks;
+  return level_blocks;
 }
 
 int hash_block(const EVP_MD *md,
@@ -109,246 +106,160 @@ int hash_chunk(void *priv, const void *data, size_t len)
     return 0;
 }
 
-void usage(void)
-{
-    printf("usage: build_verity_tree [ <options> ] -s <size> | <data> <verity>\n"
-           "options:\n"
-           "  -a,--salt-str=<string>       set salt to <string>\n"
-           "  -A,--salt-hex=<hex digits>   set salt to <hex digits>\n"
-           "  -h                           show this help\n"
-           "  -s,--verity-size=<data size> print the size of the verity tree\n"
-           "  -v,                          enable verbose logging\n"
-           "  -S                           treat <data image> as a sparse file\n"
-        );
+uint64_t calculate_verity_tree_size(uint64_t calculate_size,
+                                    size_t block_size) {
+  const size_t kSHA256HashSize = 32;
+
+  size_t verity_blocks = 0;
+  size_t level_blocks;
+  int levels = 0;
+  do {
+    level_blocks =
+        verity_tree_blocks(calculate_size, block_size, kSHA256HashSize, levels);
+    levels++;
+    verity_blocks += level_blocks;
+  } while (level_blocks > 1);
+
+  return static_cast<uint64_t>(verity_blocks) * block_size;
 }
 
-int main(int argc, char **argv)
-{
-    char *data_filename;
-    char *verity_filename;
-    std::vector<unsigned char> salt;
-    bool sparse = false;
-    size_t block_size = 4096;
-    uint64_t calculate_size = 0;
-    bool verbose = false;
+bool generate_verity_tree(const std::string &data_filename,
+                          const std::string &verity_filename,
+                          const std::vector<unsigned char> &salt_content,
+                          size_t block_size, bool sparse, bool verbose) {
+  const EVP_MD *md = EVP_sha256();
+  if (!md) {
+    RETURN_FALSE("failed to get digest\n");
+  }
 
-    while (1) {
-        const static struct option long_options[] = {
-            {"salt-str", required_argument, 0, 'a'},
-            {"salt-hex", required_argument, 0, 'A'},
-            {"help", no_argument, 0, 'h'},
-            {"sparse", no_argument, 0, 'S'},
-            {"verity-size", required_argument, 0, 's'},
-            {"verbose", no_argument, 0, 'v'},
-            {NULL, 0, 0, 0}
-        };
-        int c = getopt_long(argc, argv, "a:A:hSs:v", long_options, NULL);
-        if (c < 0) {
-            break;
-        }
+  size_t hash_size = EVP_MD_size(md);
+  assert(hash_size * 2 < block_size);
 
-        switch (c) {
-        case 'a':
-            salt.clear();
-            salt.insert(salt.end(), optarg, &optarg[strlen(optarg)]);
-            break;
-        case 'A': {
-                BIGNUM *bn = NULL;
-                if(!BN_hex2bn(&bn, optarg)) {
-                    FATAL("failed to convert salt from hex\n");
-                }
-                size_t salt_size = BN_num_bytes(bn);
-                salt.resize(salt_size);
-                if (BN_bn2bin(bn, salt.data()) != salt_size) {
-                    FATAL("failed to convert salt to bytes\n");
-                }
-            }
-            break;
-        case 'h':
-            usage();
-            return 1;
-        case 'S':
-            sparse = true;
-            break;
-        case 's': {
-                char* endptr;
-                errno = 0;
-                unsigned long long int inSize = strtoull(optarg, &endptr, 0);
-                if (optarg[0] == '\0' || *endptr != '\0' ||
-                        (errno == ERANGE && inSize == ULLONG_MAX)) {
-                    FATAL("invalid value of verity-size\n");
-                }
-                if (inSize > UINT64_MAX) {
-                    FATAL("invalid value of verity-size\n");
-                }
-                calculate_size = (uint64_t)inSize;
-            }
-            break;
-        case 'v':
-            verbose = true;
-            break;
-        case '?':
-            usage();
-            return 1;
-        default:
-            abort();
-        }
+  std::vector<unsigned char> salt = salt_content;
+  if (salt.empty()) {
+    salt.resize(hash_size);
+
+    int random_fd = open("/dev/urandom", O_RDONLY);
+    if (random_fd < 0) {
+      RETURN_FALSE("failed to open /dev/urandom\n");
     }
 
-    argc -= optind;
-    argv += optind;
-
-    const EVP_MD *md = EVP_sha256();
-    if (!md) {
-        FATAL("failed to get digest\n");
+    ssize_t ret = read(random_fd, salt.data(), salt.size());
+    if (ret != static_cast<ssize_t>(salt.size())) {
+      RETURN_FALSE("failed to read %zu bytes from /dev/urandom: %zd %d\n",
+                   salt.size(), ret, errno);
     }
+    close(random_fd);
+  }
 
-    size_t hash_size = EVP_MD_size(md);
-    assert(hash_size * 2 < block_size);
+  int fd = open(data_filename.c_str(), O_RDONLY);
+  if (fd < 0) {
+    RETURN_FALSE("failed to open %s\n", data_filename.c_str());
+  }
 
-    if (salt.empty()) {
-        salt.resize(hash_size);
+  struct sparse_file *file;
+  if (sparse) {
+    file = sparse_file_import(fd, false, false);
+  } else {
+    file = sparse_file_import_auto(fd, false, verbose);
+  }
 
-        int random_fd = open("/dev/urandom", O_RDONLY);
-        if (random_fd < 0) {
-            FATAL("failed to open /dev/urandom\n");
-        }
+  if (!file) {
+    RETURN_FALSE("failed to read file %s\n", data_filename.c_str());
+  }
 
-        ssize_t ret = read(random_fd, salt.data(), salt.size());
-        if (ret != static_cast<ssize_t>(salt.size())) {
-            FATAL("failed to read %zu bytes from /dev/urandom: %zd %d\n", salt.size(), ret, errno);
-        }
-        close(random_fd);
-    }
+  int64_t len = sparse_file_len(file, false, false);
+  if (len % block_size != 0) {
+    RETURN_FALSE("file size %" PRIu64 " is not a multiple of %zu bytes\n", len,
+                 block_size);
+  }
 
-    if (calculate_size) {
-        if (argc != 0) {
-            usage();
-            return 1;
-        }
-        size_t verity_blocks = 0;
-        size_t level_blocks;
-        int levels = 0;
-        do {
-            level_blocks = verity_tree_blocks(calculate_size, block_size, hash_size, levels);
-            levels++;
-            verity_blocks += level_blocks;
-        } while (level_blocks > 1);
+  int levels = 0;
+  size_t verity_blocks = 0;
+  size_t level_blocks;
 
-        printf("%" PRIu64 "\n", (uint64_t)verity_blocks * block_size);
-        return 0;
-    }
+  do {
+    level_blocks = verity_tree_blocks(len, block_size, hash_size, levels);
+    levels++;
+    verity_blocks += level_blocks;
+  } while (level_blocks > 1);
 
-    if (argc != 2) {
-        usage();
-        return 1;
-    }
+  unsigned char *verity_tree = new unsigned char[verity_blocks * block_size]();
+  unsigned char **verity_tree_levels = new unsigned char *[levels + 1]();
+  size_t *verity_tree_level_blocks = new size_t[levels]();
+  if (verity_tree == NULL || verity_tree_levels == NULL ||
+      verity_tree_level_blocks == NULL) {
+    RETURN_FALSE("failed to allocate memory for verity tree\n");
+  }
 
-    data_filename = argv[0];
-    verity_filename = argv[1];
+  unsigned char *ptr = verity_tree;
+  for (int i = levels - 1; i >= 0; i--) {
+    verity_tree_levels[i] = ptr;
+    verity_tree_level_blocks[i] =
+        verity_tree_blocks(len, block_size, hash_size, i);
+    ptr += verity_tree_level_blocks[i] * block_size;
+  }
+  assert(ptr == verity_tree + verity_blocks * block_size);
+  assert(verity_tree_level_blocks[levels - 1] == 1);
 
-    int fd = open(data_filename, O_RDONLY);
-    if (fd < 0) {
-        FATAL("failed to open %s\n", data_filename);
-    }
+  unsigned char zero_block_hash[hash_size];
+  unsigned char zero_block[block_size];
+  memset(zero_block, 0, block_size);
+  hash_block(md, zero_block, block_size, salt.data(), salt.size(),
+             zero_block_hash, NULL);
 
-    struct sparse_file *file;
-    if (sparse) {
-        file = sparse_file_import(fd, false, false);
+  unsigned char root_hash[hash_size];
+  verity_tree_levels[levels] = root_hash;
+
+  struct sparse_hash_ctx ctx;
+  ctx.hashes = verity_tree_levels[0];
+  ctx.salt = salt.data();
+  ctx.salt_size = salt.size();
+  ctx.hash_size = hash_size;
+  ctx.block_size = block_size;
+  ctx.zero_block_hash = zero_block_hash;
+  ctx.md = md;
+
+  sparse_file_callback(file, false, false, hash_chunk, &ctx);
+
+  sparse_file_destroy(file);
+  close(fd);
+
+  for (int i = 0; i < levels; i++) {
+    size_t out_size;
+    hash_blocks(md, verity_tree_levels[i],
+                verity_tree_level_blocks[i] * block_size,
+                verity_tree_levels[i + 1], &out_size, salt.data(), salt.size(),
+                block_size);
+    if (i < levels - 1) {
+      assert(div_round_up(out_size, block_size) ==
+             verity_tree_level_blocks[i + 1]);
     } else {
-        file = sparse_file_import_auto(fd, false, verbose);
+      assert(out_size == hash_size);
     }
+  }
 
-    if (!file) {
-        FATAL("failed to read file %s\n", data_filename);
-    }
+  for (size_t i = 0; i < hash_size; i++) {
+    printf("%02x", root_hash[i]);
+  }
+  printf(" ");
+  for (size_t i = 0; i < salt.size(); i++) {
+    printf("%02x", salt[i]);
+  }
+  printf("\n");
 
-    int64_t len = sparse_file_len(file, false, false);
-    if (len % block_size != 0) {
-        FATAL("file size %" PRIu64 " is not a multiple of %zu bytes\n",
-                len, block_size);
-    }
+  fd = open(verity_filename.c_str(), O_WRONLY | O_CREAT, 0666);
+  if (fd < 0) {
+    RETURN_FALSE("failed to open output file '%s'\n", verity_filename.c_str());
+  }
+  if (!android::base::WriteFully(fd, verity_tree, verity_blocks * block_size)) {
+    RETURN_FALSE("failed to write '%s'\n", verity_filename.c_str());
+  }
+  close(fd);
 
-    int levels = 0;
-    size_t verity_blocks = 0;
-    size_t level_blocks;
+  delete[] verity_tree_levels;
+  delete[] verity_tree_level_blocks;
+  delete[] verity_tree;
 
-    do {
-        level_blocks = verity_tree_blocks(len, block_size, hash_size, levels);
-        levels++;
-        verity_blocks += level_blocks;
-    } while (level_blocks > 1);
-
-    unsigned char *verity_tree = new unsigned char[verity_blocks * block_size]();
-    unsigned char **verity_tree_levels = new unsigned char *[levels + 1]();
-    size_t *verity_tree_level_blocks = new size_t[levels]();
-    if (verity_tree == NULL || verity_tree_levels == NULL || verity_tree_level_blocks == NULL) {
-        FATAL("failed to allocate memory for verity tree\n");
-    }
-
-    unsigned char *ptr = verity_tree;
-    for (int i = levels - 1; i >= 0; i--) {
-        verity_tree_levels[i] = ptr;
-        verity_tree_level_blocks[i] = verity_tree_blocks(len, block_size, hash_size, i);
-        ptr += verity_tree_level_blocks[i] * block_size;
-    }
-    assert(ptr == verity_tree + verity_blocks * block_size);
-    assert(verity_tree_level_blocks[levels - 1] == 1);
-
-    unsigned char zero_block_hash[hash_size];
-    unsigned char zero_block[block_size];
-    memset(zero_block, 0, block_size);
-    hash_block(md, zero_block, block_size, salt.data(), salt.size(), zero_block_hash, NULL);
-
-    unsigned char root_hash[hash_size];
-    verity_tree_levels[levels] = root_hash;
-
-    struct sparse_hash_ctx ctx;
-    ctx.hashes = verity_tree_levels[0];
-    ctx.salt = salt.data();
-    ctx.salt_size = salt.size();
-    ctx.hash_size = hash_size;
-    ctx.block_size = block_size;
-    ctx.zero_block_hash = zero_block_hash;
-    ctx.md = md;
-
-    sparse_file_callback(file, false, false, hash_chunk, &ctx);
-
-    sparse_file_destroy(file);
-    close(fd);
-
-    for (int i = 0; i < levels; i++) {
-        size_t out_size;
-        hash_blocks(md,
-                verity_tree_levels[i], verity_tree_level_blocks[i] * block_size,
-                verity_tree_levels[i + 1], &out_size,
-                salt.data(), salt.size(), block_size);
-          if (i < levels - 1) {
-              assert(div_round_up(out_size, block_size) == verity_tree_level_blocks[i + 1]);
-          } else {
-              assert(out_size == hash_size);
-          }
-    }
-
-    for (size_t i = 0; i < hash_size; i++) {
-        printf("%02x", root_hash[i]);
-    }
-    printf(" ");
-    for (size_t i = 0; i < salt.size(); i++) {
-        printf("%02x", salt[i]);
-    }
-    printf("\n");
-
-    fd = open(verity_filename, O_WRONLY|O_CREAT, 0666);
-    if (fd < 0) {
-        FATAL("failed to open output file '%s'\n", verity_filename);
-    }
-    if (!android::base::WriteFully(fd, verity_tree, verity_blocks * block_size)) {
-        FATAL("failed to write '%s'\n", verity_filename);
-    }
-    close(fd);
-
-    delete[] verity_tree_levels;
-    delete[] verity_tree_level_blocks;
-    delete[] verity_tree;
+  return true;
 }
