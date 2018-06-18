@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e4db2893_0ebdeb87",
+        "filename": "partition_tools/lpmake.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2018-06-18T20:59:35Z",
+      "side": 1,
+      "message": "-d, --device-size\u003dSIZE\nIt\u0027d be nice to show the short forms in the help message as well so people can be aware of them.",
+      "range": {
+        "startLine": 40,
+        "startChar": 15,
+        "endLine": 40,
+        "endChar": 33
+      },
+      "revId": "8d58d767e9f0215b1ac465cfd51b54da491d9787",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
