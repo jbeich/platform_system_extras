@@ -16,6 +16,24 @@
       "revId": "8b5a352cbfd70935eeeae507e165018812f18991",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dde75bcb_61f90419",
+        "filename": "simpleperf/cmd_report_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 481,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-06-19T19:10:23Z",
+      "side": 1,
+      "message": "It is because the monitored thread was switched from cpu A to cpu B, it has one sample in cpu A and one sample in cpu B, but the sample in cpu B was dumped before the sample in cpu A. The reason is simpleperf reads samples in cpu A before cpu B.\nI think it doesn\u0027t matter, because it rarely happens, and will be less likely to happen after using record reading thread in the future.",
+      "parentUuid": "446919a0_951f6ed6",
+      "revId": "8b5a352cbfd70935eeeae507e165018812f18991",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
