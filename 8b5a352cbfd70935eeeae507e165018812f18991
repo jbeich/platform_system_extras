@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "446919a0_951f6ed6",
+        "filename": "simpleperf/cmd_report_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 481,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-06-19T18:12:16Z",
+      "side": 1,
+      "message": "why did this change?",
+      "revId": "8b5a352cbfd70935eeeae507e165018812f18991",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
