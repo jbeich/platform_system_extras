@@ -32,6 +32,7 @@
 #include "IOEventLoop.h"
 #include "perf_event.h"
 #include "record.h"
+#include "RecordReadThread.h"
 
 constexpr double DEFAULT_PERIOD_TO_DETECT_CPU_HOTPLUG_EVENTS_IN_SEC = 0.5;
 constexpr double DEFAULT_PERIOD_TO_CHECK_MONITORED_TARGETS_IN_SEC = 1;
@@ -81,7 +82,7 @@ struct SampleSpeed {
 class EventSelectionSet {
  public:
   EventSelectionSet(bool for_stat_cmd)
-      : for_stat_cmd_(for_stat_cmd), mmap_pages_(0), loop_(new IOEventLoop) {}
+      : for_stat_cmd_(for_stat_cmd), loop_(new IOEventLoop) {}
 
   bool empty() const { return groups_.empty(); }
 
@@ -128,10 +129,11 @@ class EventSelectionSet {
 
   bool OpenEventFiles(const std::vector<int>& on_cpus);
   bool ReadCounters(std::vector<CountersInfo>* counters);
-  bool MmapEventFiles(size_t min_mmap_pages, size_t max_mmap_pages);
+  bool MmapEventFiles(size_t min_mmap_pages, size_t max_mmap_pages, size_t record_buffer_size);
   bool PrepareToReadMmapEventData(const std::function<bool(Record*)>& callback);
-  bool ReadMmapEventData();
+  bool ReadMmapEventData(bool sync_kernel_buffer);
   bool FinishReadMmapEventData();
+  void GetLostRecords(size_t* lost_samples, size_t* lost_non_samples, size_t* cut_stack_samples);
 
   // If monitored_cpus is empty, monitor all cpus.
   bool HandleCpuHotplugEvents(const std::vector<int>& monitored_cpus,
@@ -162,8 +164,6 @@ class EventSelectionSet {
   bool OpenEventFilesOnGroup(EventSelectionGroup& group, pid_t tid, int cpu,
                              std::string* failed_event_type);
 
-  bool MmapEventFiles(size_t mmap_pages, bool report_error);
-
   bool DetectCpuHotplugEvents();
   bool HandleCpuOnlineEvent(int cpu);
   bool HandleCpuOfflineEvent(int cpu);
@@ -176,7 +176,6 @@ class EventSelectionSet {
   std::vector<EventSelectionGroup> groups_;
   std::set<pid_t> processes_;
   std::set<pid_t> threads_;
-  size_t mmap_pages_;
 
   std::unique_ptr<IOEventLoop> loop_;
   std::function<bool(Record*)> record_callback_;
@@ -184,19 +183,7 @@ class EventSelectionSet {
   std::set<int> monitored_cpus_;
   std::vector<int> online_cpus_;
 
-  // Records from all mapped buffers are stored in record_buffer_, each
-  // RecordBufferHead manages records read from one mapped buffer. Create
-  // record_buffer_heads_ and record_buffer_ here to avoid allocating them
-  // from heap each time calling ReadMmapEventData().
-  struct RecordBufferHead {
-    size_t current_pos;  // current position in record_buffer_
-    size_t end_pos;  // end position in record_buffer_
-    perf_event_attr* attr;
-    uint64_t timestamp;
-    std::unique_ptr<Record> r;
-  };
-  std::vector<RecordBufferHead> record_buffer_heads_;
-  std::vector<char> record_buffer_;
+  std::unique_ptr<simpleperf::RecordReadThread> record_read_thread_;
 
   DISALLOW_COPY_AND_ASSIGN(EventSelectionSet);
 };

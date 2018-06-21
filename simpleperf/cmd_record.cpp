@@ -431,8 +431,14 @@ bool RecordCommand::PrepareRecording(Workload* workload) {
   if (!event_selection_set_.OpenEventFiles(cpus_)) {
     return false;
   }
-  if (!event_selection_set_.MmapEventFiles(mmap_page_range_.first,
-                                           mmap_page_range_.second)) {
+  size_t record_buffer_size = system_wide_collection_ ? 256 * 1024 * 1024 : 64 * 1024 * 1024;
+  if (!event_selection_set_.MmapEventFiles(mmap_page_range_.first, mmap_page_range_.second,
+                                           record_buffer_size)) {
+    return false;
+  }
+  auto callback =
+      std::bind(&RecordCommand::ProcessRecord, this, std::placeholders::_1);
+  if (!event_selection_set_.PrepareToReadMmapEventData(callback)) {
     return false;
   }
 
@@ -442,11 +448,6 @@ bool RecordCommand::PrepareRecording(Workload* workload) {
   }
 
   // 7. Add read/signal/periodic Events.
-  auto callback =
-      std::bind(&RecordCommand::ProcessRecord, this, std::placeholders::_1);
-  if (!event_selection_set_.PrepareToReadMmapEventData(callback)) {
-    return false;
-  }
   if (need_to_check_targets && !event_selection_set_.StopWhenNoMoreTargets()) {
     return false;
   }
@@ -542,8 +543,19 @@ bool RecordCommand::PostProcessRecording(const std::vector<std::string>& args) {
   }
 
   // 4. Show brief record result.
-  LOG(INFO) << "Samples recorded: " << sample_record_count_
+  size_t lost_samples;
+  size_t lost_non_samples;
+  size_t cut_stack_samples;
+  event_selection_set_.GetLostRecords(&lost_samples, &lost_non_samples, &cut_stack_samples);
+  std::string cut_samples;
+  if (cut_stack_samples > 0) {
+    cut_samples = android::base::StringPrintf(" (cut %zu)", cut_stack_samples);
+  }
+  lost_record_count_ += lost_samples + lost_non_samples;
+  LOG(INFO) << "Samples recorded: " << sample_record_count_ << cut_samples
             << ". Samples lost: " << lost_record_count_ << ".";
+  LOG(DEBUG) << "In user space, dropped " << lost_samples << " samples, " << lost_non_samples
+             << " non samples, cut stack of " << cut_stack_samples << " samples.";
   if (sample_record_count_ + lost_record_count_ != 0) {
     double lost_percent = static_cast<double>(lost_record_count_) /
                           (lost_record_count_ + sample_record_count_);
@@ -1164,7 +1176,7 @@ bool RecordCommand::ProcessJITDebugInfo(const std::vector<JITSymFile>& jit_symfi
   // generated after them. So process existing samples each time generating new JIT maps. We prefer
   // to process samples after processing JIT maps. Because some of the samples may hit the new JIT
   // maps, and we want to report them properly.
-  if (sync_kernel_records && !event_selection_set_.ReadMmapEventData()) {
+  if (sync_kernel_records && !event_selection_set_.ReadMmapEventData(true)) {
     return false;
   }
   return true;
