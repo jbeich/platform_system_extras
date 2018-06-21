@@ -16,6 +16,24 @@
       "revId": "17944b3a782cb5937e57e26f61ef34ef7b7be877",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "58f59b72_6c0f8c3c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2018-06-21T05:08:05Z",
+      "side": 1,
+      "message": "That\u0027s odd.  Gerrit adds a new Change-ID in the UI but doesn\u0027t change the commit message.  I added the merged-in in my tree and did a repo upload.  That created another change.  I\u0027ll just edit from the Gerrit UI.",
+      "parentUuid": "cc1b49b8_56f10fb4",
+      "revId": "17944b3a782cb5937e57e26f61ef34ef7b7be877",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
