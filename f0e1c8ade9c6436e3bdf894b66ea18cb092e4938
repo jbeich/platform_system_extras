@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "57b89ec7_373c927f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2018-06-21T05:08:33Z",
+      "side": 1,
+      "message": "This may also get ignored because of the blank line before Test:",
+      "revId": "f0e1c8ade9c6436e3bdf894b66ea18cb092e4938",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
