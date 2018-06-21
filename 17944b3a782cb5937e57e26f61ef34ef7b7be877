@@ -34,6 +34,24 @@
       "revId": "17944b3a782cb5937e57e26f61ef34ef7b7be877",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2f40f4d0_673faf12",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2018-06-21T05:10:00Z",
+      "side": 1,
+      "message": "Gerrit is showing you the change-id it picked since it didn\u0027t recognize the one in the patch.  I\u0027d recommend abandoning this one and reuploading the fixed one so it has the right change-id.",
+      "parentUuid": "58f59b72_6c0f8c3c",
+      "revId": "17944b3a782cb5937e57e26f61ef34ef7b7be877",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
