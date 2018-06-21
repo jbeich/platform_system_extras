@@ -52,6 +52,24 @@
       "revId": "17944b3a782cb5937e57e26f61ef34ef7b7be877",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3b97846c_7b1b3c7f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2018-06-21T05:13:28Z",
+      "side": 1,
+      "message": "That\u0027s the case.  Gerrit does not let me remove the new line before Test because that\u0027d change the Change-ID.  Uploaded https://android-review.googlesource.com/c/platform/system/extras/+/708003, which looks ok to me.",
+      "parentUuid": "2f40f4d0_673faf12",
+      "revId": "17944b3a782cb5937e57e26f61ef34ef7b7be877",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
