@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aa90f944_d69d91a0",
+        "filename": "perfprofd/perfprofd_perf.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-06-22T17:08:25Z",
+      "side": 1,
+      "message": "should be --group here, -g is alias to \u0027--call-graph dwarf\u0027.",
+      "range": {
+        "startLine": 89,
+        "startChar": 32,
+        "endLine": 89,
+        "endChar": 33
+      },
+      "revId": "073c8e91422e9a5808d9ed1db08cd7cfa37d1faa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
