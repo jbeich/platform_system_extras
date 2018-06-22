@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "55781717_2c5e2338",
+        "filename": "perfprofd/scripts/simpleperf_events_to_config_proto.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-06-22T17:05:46Z",
+      "side": 1,
+      "message": "Different device types may support different sets of events. So running this script on marlin and walleye generates different CounterSet protos. Is that fine? use just string array?",
+      "range": {
+        "startLine": 74,
+        "startChar": 65,
+        "endLine": 74,
+        "endChar": 76
+      },
+      "revId": "cd178a39da9345742f048f30aca4b2417e70613b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
