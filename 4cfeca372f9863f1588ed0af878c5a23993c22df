@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3661e42d_490f2562",
+        "filename": "partition_tools/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2018-06-22T17:22:20Z",
+      "side": 1,
+      "message": "The build system may default some of these already, maybe check if you are overdoing this?",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 32
+      },
+      "revId": "4cfeca372f9863f1588ed0af878c5a23993c22df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "53341985_da40d546",
+        "filename": "partition_tools/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2018-06-22T17:22:20Z",
+      "side": 1,
+      "message": "We only like to use this if the scale of supporting them using corrected code is too much. Original and new code should not require this.",
+      "range": {
+        "startLine": 31,
+        "startChar": 8,
+        "endLine": 31,
+        "endChar": 31
+      },
+      "revId": "4cfeca372f9863f1588ed0af878c5a23993c22df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
