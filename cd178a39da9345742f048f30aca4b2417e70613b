@@ -22,6 +22,30 @@
       "revId": "cd178a39da9345742f048f30aca4b2417e70613b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9849e958_c3d8ddc2",
+        "filename": "perfprofd/scripts/simpleperf_events_to_config_proto.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2018-06-22T17:07:45Z",
+      "side": 1,
+      "message": "Goal is for this to be a superset of all supported events, and eventually I should filter by what\u0027s supported (not sure whether an error should occur or just a warning).\n\nRight now it\u0027s a bit painful. I was hoping to maybe get around to reading the existing proto at some point to \"merge\" in new events. But for now this list is simply derived on a sailfish as a start.",
+      "parentUuid": "55781717_2c5e2338",
+      "range": {
+        "startLine": 74,
+        "startChar": 65,
+        "endLine": 74,
+        "endChar": 76
+      },
+      "revId": "cd178a39da9345742f048f30aca4b2417e70613b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
