@@ -18,23 +18,10 @@
 
 #include <string.h>
 
-#include <limits>
-
 #include <android-base/file.h>
 #include <android-base/logging.h>
 
-size_t verity_tree_blocks(uint64_t data_size, size_t block_size,
-                          size_t hash_size, size_t level) {
-  uint64_t level_blocks = div_round_up(data_size, block_size);
-  uint64_t hashes_per_block = div_round_up(block_size, hash_size);
-
-  do {
-    level_blocks = div_round_up(level_blocks, hashes_per_block);
-  } while (level--);
-
-  CHECK_LE(level_blocks, std::numeric_limits<size_t>::max());
-  return level_blocks;
-}
+#include "build_verity_tree.h"
 
 sparseHashCtx::sparseHashCtx(size_t block_size)
     : block_size_(block_size), data_size_(0), md_(EVP_sha256()) {
@@ -42,6 +29,20 @@ sparseHashCtx::sparseHashCtx(size_t block_size)
 
   hash_size_ = EVP_MD_size(md_);
   CHECK_LT(hash_size_ * 2, block_size_);
+}
+
+uint64_t sparseHashCtx::calculate_size(uint64_t input_size) const {
+  size_t verity_blocks = 0;
+  size_t level_blocks;
+  size_t levels = 0;
+  do {
+    level_blocks =
+        verity_tree_blocks(input_size, block_size_, hash_size_, levels);
+    levels++;
+    verity_blocks += level_blocks;
+  } while (level_blocks > 1);
+
+  return verity_blocks * block_size_;
 }
 
 bool sparseHashCtx::initialize(int64_t expected_data_size,
@@ -158,8 +159,13 @@ bool sparseHashCtx::build_hash_tree() {
   return true;
 }
 
-bool sparseHashCtx::write_hash_tree_to_fd(int fd) const {
+bool sparseHashCtx::write_hash_tree_to_fd(int fd, size_t offset) const {
   CHECK(!verity_tree_.empty());
+
+  if (lseek64(fd, offset, SEEK_SET) != offset) {
+    PLOG(ERROR) << "Failed to seek the output fd, offset: " << offset;
+    return false;
+  }
 
   // Reads reversely to output the verity tree top-down.
   for (size_t i = verity_tree_.size(); i > 0; i--) {

@@ -22,16 +22,17 @@
 #include <vector>
 
 #include <openssl/evp.h>
-#include <sparse/sparse.h>
 
-inline uint64_t div_round_up(uint64_t x, uint64_t y) { return (x + y - 1) / y; }
-
-size_t verity_tree_blocks(uint64_t data_size, size_t block_size,
-                          size_t hash_size, size_t level);
-
+// This class builds a verity hash tree based on the input data and a salt with
+// the length of hash size. It also supports the streaming of input data while
+// the total data size should know in advance. Once all the data is ready,
+// appropriate functions can be called to build the upper levels of the hash
+// tree and output the tree to a file.
 class sparseHashCtx {
  public:
   explicit sparseHashCtx(size_t block_size);
+  // Returns the size of the verity tree in bytes given the input data size.
+  uint64_t calculate_size(uint64_t input_size) const;
   // Gets ready for the hash tree computation. We expect |expected_data_size|
   // bytes source data.
   bool initialize(int64_t expected_data_size,
@@ -44,7 +45,7 @@ class sparseHashCtx {
   // Computes the upper levels of the hash tree based on the 0th level.
   bool build_hash_tree();
   // Writes the computed hash tree top-down to |fd|.
-  bool write_hash_tree_to_fd(int fd) const;
+  bool write_hash_tree_to_fd(int fd, size_t offset) const;
 
   // Getter functions.
   size_t hash_size() const { return hash_size_; }
