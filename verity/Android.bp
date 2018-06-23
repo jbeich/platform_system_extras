@@ -109,3 +109,24 @@ cc_binary_host {
         "-Werror",
     ],
 }
+
+cc_test_host {
+    name: "build_verity_tree_test",
+    srcs: [
+        "build_verity_tree_test.cpp",
+    ],
+
+    static_libs: [
+        "libverity_tree",
+        "libsparse",
+        "libz",
+    ],
+    shared_libs: [
+        "libcrypto",
+        "libbase",
+    ],
+    cflags: [
+        "-Wall",
+        "-Werror",
+    ],
+}
