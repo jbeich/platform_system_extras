@@ -1,0 +1,211 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "141fb888_d6f9425f",
+        "filename": "verity/build_verity_tree.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-06-25T17:33:58Z",
+      "side": 1,
+      "message": "putting macros in namespace is no-op",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 9
+      },
+      "revId": "6263ecfc9db8ced927ae2393a376fccba2fb8338",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "afa11595_d46ab4a5",
+        "filename": "verity/build_verity_tree.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-06-25T17:33:58Z",
+      "side": 1,
+      "message": "constexpr",
+      "range": {
+        "startLine": 60,
+        "startChar": 2,
+        "endLine": 60,
+        "endChar": 7
+      },
+      "revId": "6263ecfc9db8ced927ae2393a376fccba2fb8338",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1cddb7cb_6c724c72",
+        "filename": "verity/sparse_hash_ctx.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-06-25T17:33:58Z",
+      "side": 1,
+      "message": "Do we want to expose this function?",
+      "range": {
+        "startLine": 27,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 80
+      },
+      "revId": "6263ecfc9db8ced927ae2393a376fccba2fb8338",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "376cd8ba_ba20fd73",
+        "filename": "verity/sparse_hash_ctx.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-06-25T17:33:58Z",
+      "side": 1,
+      "message": "follow the naming convention, similarly for the member function names",
+      "range": {
+        "startLine": 32,
+        "startChar": 6,
+        "endLine": 32,
+        "endChar": 19
+      },
+      "revId": "6263ecfc9db8ced927ae2393a376fccba2fb8338",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6418da34_8041219f",
+        "filename": "verity/sparse_hash_ctx.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-06-25T17:33:58Z",
+      "side": 1,
+      "message": "Update() to align with functions like SHA1_Update()? Hard to tell the streaming nature from \"hash_input_data\".",
+      "range": {
+        "startLine": 43,
+        "startChar": 7,
+        "endLine": 43,
+        "endChar": 22
+      },
+      "revId": "6263ecfc9db8ced927ae2393a376fccba2fb8338",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "87d90ebb_3dca2ed4",
+        "filename": "verity/sparse_hash_ctx.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-06-25T17:33:58Z",
+      "side": 1,
+      "message": "This one looks like the major functionality provided by this class? Shall we call this class VerityTreeBuilder or HashTreeBuilder instead? \"hash context\" should be the input to or used by a hasher.",
+      "range": {
+        "startLine": 45,
+        "startChar": 7,
+        "endLine": 45,
+        "endChar": 22
+      },
+      "revId": "6263ecfc9db8ced927ae2393a376fccba2fb8338",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6324b841_3d99c032",
+        "filename": "verity/sparse_hash_ctx.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-06-25T17:33:58Z",
+      "side": 1,
+      "message": "Take filename directly?",
+      "range": {
+        "startLine": 47,
+        "startChar": 7,
+        "endLine": 47,
+        "endChar": 36
+      },
+      "revId": "6263ecfc9db8ced927ae2393a376fccba2fb8338",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b73a48b4_26dd5e21",
+        "filename": "verity/sparse_hash_ctx.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-06-25T17:33:58Z",
+      "side": 1,
+      "message": "Such comment barely helps. The function name would say itself, if following the style guide.",
+      "range": {
+        "startLine": 49,
+        "startChar": 2,
+        "endLine": 49,
+        "endChar": 22
+      },
+      "revId": "6263ecfc9db8ced927ae2393a376fccba2fb8338",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e05b671d_625d0c6a",
+        "filename": "verity/sparse_hash_ctx.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-06-25T17:33:58Z",
+      "side": 1,
+      "message": "This looks like impl details local to this class.",
+      "range": {
+        "startLine": 51,
+        "startChar": 36,
+        "endLine": 51,
+        "endChar": 51
+      },
+      "revId": "6263ecfc9db8ced927ae2393a376fccba2fb8338",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
