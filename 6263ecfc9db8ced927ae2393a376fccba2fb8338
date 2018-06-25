@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "c31d8d2c_9126eb17",
+        "filename": "verity/build_verity_tree.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2018-06-25T19:19:49Z",
+      "side": 1,
+      "message": "removed namespace. Will remove the marco in the next cl",
+      "parentUuid": "141fb888_d6f9425f",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 9
+      },
+      "revId": "6263ecfc9db8ced927ae2393a376fccba2fb8338",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "afa11595_d46ab4a5",
         "filename": "verity/build_verity_tree.cpp",
         "patchSetId": 2
@@ -45,6 +69,30 @@
       "revId": "6263ecfc9db8ced927ae2393a376fccba2fb8338",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fb6e9a28_3ac5e225",
+        "filename": "verity/build_verity_tree.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2018-06-25T19:19:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "afa11595_d46ab4a5",
+      "range": {
+        "startLine": 60,
+        "startChar": 2,
+        "endLine": 60,
+        "endChar": 7
+      },
+      "revId": "6263ecfc9db8ced927ae2393a376fccba2fb8338",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "22126038_81584a9e",
+        "filename": "verity/sparse_hash_ctx.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2018-06-25T19:19:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1cddb7cb_6c724c72",
+      "range": {
+        "startLine": 27,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 80
+      },
+      "revId": "6263ecfc9db8ced927ae2393a376fccba2fb8338",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "376cd8ba_ba20fd73",
         "filename": "verity/sparse_hash_ctx.h",
         "patchSetId": 2
@@ -91,6 +163,30 @@
       "revId": "6263ecfc9db8ced927ae2393a376fccba2fb8338",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b02b3c8a_1c6eadc9",
+        "filename": "verity/sparse_hash_ctx.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2018-06-25T19:19:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "376cd8ba_ba20fd73",
+      "range": {
+        "startLine": 32,
+        "startChar": 6,
+        "endLine": 32,
+        "endChar": 19
+      },
+      "revId": "6263ecfc9db8ced927ae2393a376fccba2fb8338",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -140,6 +236,30 @@
     },
     {
       "key": {
+        "uuid": "ea26349f_74445c84",
+        "filename": "verity/sparse_hash_ctx.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2018-06-25T19:19:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "87d90ebb_3dca2ed4",
+      "range": {
+        "startLine": 45,
+        "startChar": 7,
+        "endLine": 45,
+        "endChar": 22
+      },
+      "revId": "6263ecfc9db8ced927ae2393a376fccba2fb8338",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6324b841_3d99c032",
         "filename": "verity/sparse_hash_ctx.h",
         "patchSetId": 2
@@ -151,6 +271,30 @@
       "writtenOn": "2018-06-25T17:33:58Z",
       "side": 1,
       "message": "Take filename directly?",
+      "range": {
+        "startLine": 47,
+        "startChar": 7,
+        "endLine": 47,
+        "endChar": 36
+      },
+      "revId": "6263ecfc9db8ced927ae2393a376fccba2fb8338",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dcfdce98_09d5447e",
+        "filename": "verity/sparse_hash_ctx.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2018-06-25T19:19:49Z",
+      "side": 1,
+      "message": "Add a function to write to file. update engine still needs the one to write to fd.",
+      "parentUuid": "6324b841_3d99c032",
       "range": {
         "startLine": 47,
         "startChar": 7,
@@ -186,6 +330,30 @@
     },
     {
       "key": {
+        "uuid": "7d1ac08f_ce0932e6",
+        "filename": "verity/sparse_hash_ctx.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2018-06-25T19:19:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b73a48b4_26dd5e21",
+      "range": {
+        "startLine": 49,
+        "startChar": 2,
+        "endLine": 49,
+        "endChar": 22
+      },
+      "revId": "6263ecfc9db8ced927ae2393a376fccba2fb8338",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e05b671d_625d0c6a",
         "filename": "verity/sparse_hash_ctx.h",
         "patchSetId": 2
@@ -197,6 +365,30 @@
       "writtenOn": "2018-06-25T17:33:58Z",
       "side": 1,
       "message": "This looks like impl details local to this class.",
+      "range": {
+        "startLine": 51,
+        "startChar": 36,
+        "endLine": 51,
+        "endChar": 51
+      },
+      "revId": "6263ecfc9db8ced927ae2393a376fccba2fb8338",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "99a87ff2_f5a26210",
+        "filename": "verity/sparse_hash_ctx.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2018-06-25T19:19:49Z",
+      "side": 1,
+      "message": "Mostly exposed for unit tests, so we don\u0027t need to add a friend class...",
+      "parentUuid": "e05b671d_625d0c6a",
       "range": {
         "startLine": 51,
         "startChar": 36,
