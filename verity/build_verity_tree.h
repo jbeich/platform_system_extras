@@ -14,18 +14,20 @@
  * limitations under the License.
  */
 
-#ifndef __BUILD_VERITY_TREE_UTILS_H__
-#define __BUILD_VERITY_TREE_UTILS_H__
+#ifndef __BUILD_VERITY_TREE_H__
+#define __BUILD_VERITY_TREE_H__
 
 #include <inttypes.h>
-#include <stddef.h>
 
 #include <string>
 #include <vector>
 
-inline uint64_t div_round_up(uint64_t x, uint64_t y) { return (x + y - 1) / y; }
+#include "hash_tree_builder.h"
 
-size_t verity_tree_blocks(uint64_t data_size, size_t block_size,
-                          size_t hash_size, size_t level);
+bool generate_verity_tree(const std::string& data_filename,
+                          const std::string& verity_filename,
+                          HashTreeBuilder* hasher,
+                          const std::vector<unsigned char>& salt_content,
+                          size_t block_size, bool sparse, bool verbose);
 
-#endif  // __BUILD_VERITY_TREE_UTILS_H__
+#endif  // __BUILD_VERITY_TREE_H__
