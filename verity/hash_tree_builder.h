@@ -54,6 +54,7 @@ class HashTreeBuilder {
   const std::vector<unsigned char>& root_hash() const { return root_hash_; }
 
  private:
+  friend class BuildVerityTreeTest;
   // Calculates the hash of one single block. Write the result to |out|, a
   // buffer allocated by the caller.
   bool HashBlock(const unsigned char* block, unsigned char* out);
