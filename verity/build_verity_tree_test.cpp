@@ -131,3 +131,15 @@ TEST_F(BuildVerityTreeTest, StreamingDataMultipleBlocks) {
   ASSERT_EQ("6e73d59b0b6baf026e921814979a7db02244c95a46b869a17aa1310dad066deb",
             HashTreeBuilder::BytesArrayToString(builder->root_hash()));
 }
+
+TEST_F(BuildVerityTreeTest, SHA1MultipleBlocks) {
+  std::vector<unsigned char> data(128 * 4096, 0xff);
+
+  builder.reset(
+      new HashTreeBuilder(4096, HashTreeBuilder::HashFunction("SHA1")));
+
+  generate_hash_tree(data, salt_hex);
+  ASSERT_EQ(1u, verity_tree().size());
+  ASSERT_EQ("7ea287e6167929988810077abaafbc313b2b8593000000000000000000000000",
+            HashTreeBuilder::BytesArrayToString(builder->root_hash()));
+}
