@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1c8bf9e3_1a0b1f09",
+        "filename": "verity/hash_tree_builder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1079733
+      },
+      "writtenOn": "2018-06-26T00:56:35Z",
+      "side": 1,
+      "message": "Not needed, I think this function already implies the input size and output size.",
+      "range": {
+        "startLine": 62,
+        "startChar": 60,
+        "endLine": 62,
+        "endChar": 70
+      },
+      "revId": "789ea16b64be61cd6429ec1820ce9c7a258ad75b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "48dc4b13_2437fdb8",
+        "filename": "verity/hash_tree_builder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1079733
+      },
+      "writtenOn": "2018-06-26T00:56:35Z",
+      "side": 1,
+      "message": "We are hashing the salt every time.\nWould it be faster if you save the mdctx in this state and reuse it afterwards?",
+      "revId": "789ea16b64be61cd6429ec1820ce9c7a258ad75b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2f83b725_d994b514",
+        "filename": "verity/hash_tree_builder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1079733
+      },
+      "writtenOn": "2018-06-26T00:56:35Z",
+      "side": 1,
+      "message": "block_size_?",
+      "range": {
+        "startLine": 177,
+        "startChar": 36,
+        "endLine": 177,
+        "endChar": 40
+      },
+      "revId": "789ea16b64be61cd6429ec1820ce9c7a258ad75b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "69acbc3c_698cc975",
+        "filename": "verity/hash_tree_builder.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1079733
+      },
+      "writtenOn": "2018-06-26T00:56:35Z",
+      "side": 1,
+      "message": "Do you need to expose this and verity_tree?",
+      "range": {
+        "startLine": 52,
+        "startChar": 36,
+        "endLine": 52,
+        "endChar": 51
+      },
+      "revId": "789ea16b64be61cd6429ec1820ce9c7a258ad75b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
