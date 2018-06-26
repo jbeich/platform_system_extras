@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6076be8a_ae1e88ce",
+        "filename": "simpleperf/RecordReadThread.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2018-06-26T21:40:21Z",
+      "side": 1,
+      "message": "No check necessary that this is kNoCmd?",
+      "range": {
+        "startLine": 273,
+        "startChar": 4,
+        "endLine": 273,
+        "endChar": 8
+      },
+      "revId": "c9c30d8ae77300fa58b5f88485bdbaa082ee5db9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b7318bb4_4745b5b8",
+        "filename": "simpleperf/event_selection_set.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2018-06-26T21:40:21Z",
+      "side": 1,
+      "message": "Could forward-declare instead.",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 29
+      },
+      "revId": "c9c30d8ae77300fa58b5f88485bdbaa082ee5db9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
