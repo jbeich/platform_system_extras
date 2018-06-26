@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "dfeb305e_c7fdd800",
+        "filename": "verity/hash_tree_builder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2018-06-26T19:30:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1c8bf9e3_1a0b1f09",
+      "range": {
+        "startLine": 62,
+        "startChar": 60,
+        "endLine": 62,
+        "endChar": 70
+      },
+      "revId": "789ea16b64be61cd6429ec1820ce9c7a258ad75b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "48dc4b13_2437fdb8",
         "filename": "verity/hash_tree_builder.cpp",
         "patchSetId": 4
@@ -36,6 +60,24 @@
       "writtenOn": "2018-06-26T00:56:35Z",
       "side": 1,
       "message": "We are hashing the salt every time.\nWould it be faster if you save the mdctx in this state and reuse it afterwards?",
+      "revId": "789ea16b64be61cd6429ec1820ce9c7a258ad75b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b2b0c02d_20260e98",
+        "filename": "verity/hash_tree_builder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2018-06-26T19:30:43Z",
+      "side": 1,
+      "message": "Will explore in the future cls..",
+      "parentUuid": "48dc4b13_2437fdb8",
       "revId": "789ea16b64be61cd6429ec1820ce9c7a258ad75b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
@@ -62,6 +104,30 @@
       "revId": "789ea16b64be61cd6429ec1820ce9c7a258ad75b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4b6f9357_834b0784",
+        "filename": "verity/hash_tree_builder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2018-06-26T19:30:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2f83b725_d994b514",
+      "range": {
+        "startLine": 177,
+        "startChar": 36,
+        "endLine": 177,
+        "endChar": 40
+      },
+      "revId": "789ea16b64be61cd6429ec1820ce9c7a258ad75b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
