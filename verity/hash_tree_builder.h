@@ -33,7 +33,9 @@
 // TODO(xunchang) add support of various hash algorithms.
 class HashTreeBuilder {
  public:
+  // The default constructor uses SHA256.
   explicit HashTreeBuilder(size_t block_size);
+  HashTreeBuilder(size_t block_size, const EVP_MD* md);
   // Returns the size of the verity tree in bytes given the input data size.
   uint64_t CalculateSize(uint64_t input_size) const;
   // Gets ready for the hash tree computation. We expect |expected_data_size|
@@ -57,6 +59,10 @@ class HashTreeBuilder {
   static std::string BytesArrayToString(
       const std::vector<unsigned char>& bytes);
 
+  // Returns the hash function given the name of the hash algorithm. Returns
+  // nullptr if the algorithm is unrecongnized or not supported.
+  static const EVP_MD* HashFunction(const std::string& hash_name);
+
  private:
   friend class BuildVerityTreeTest;
   // Calculates the hash of one single block. Write the result to |out|, a
@@ -75,6 +81,9 @@ class HashTreeBuilder {
   uint64_t data_size_;
   std::vector<unsigned char> salt_;
   const EVP_MD* md_;
+  // The raw hash size of the hash algorithm specified by md_.
+  size_t hash_size_raw_;
+  // Hash size rounded up to the next power of 2. (e.g. 20 -> 32)
   size_t hash_size_;
 
   // Pre-calculated hash of a zero block.
