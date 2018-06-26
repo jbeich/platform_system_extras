@@ -85,6 +85,30 @@
       "revId": "789ea16b64be61cd6429ec1820ce9c7a258ad75b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "202cc400_cafaa047",
+        "filename": "verity/hash_tree_builder.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2018-06-26T03:30:35Z",
+      "side": 1,
+      "message": "mostly for test purpose. I can convert to friend class if you think that\u0027s the right way.",
+      "parentUuid": "69acbc3c_698cc975",
+      "range": {
+        "startLine": 52,
+        "startChar": 36,
+        "endLine": 52,
+        "endChar": 51
+      },
+      "revId": "789ea16b64be61cd6429ec1820ce9c7a258ad75b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
