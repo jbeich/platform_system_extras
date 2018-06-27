@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "be163467_4e745080",
+        "filename": "simpleperf/scripts/report_html.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 536,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2018-06-27T19:07:27Z",
+      "side": 1,
+      "message": "Can you pick some more descriptive names? I\u0027ve having trouble figuring out what this is (I could keep digging, but if I have to that\u0027s a sign that it needs a better name).",
+      "range": {
+        "startLine": 536,
+        "startChar": 62,
+        "endLine": 536,
+        "endChar": 63
+      },
+      "revId": "371e698e9680679958aa4b88ba4cfd040ff2909f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "49075f45_3e4bd8fc",
+        "filename": "simpleperf/scripts/report_html.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 636,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2018-06-27T19:07:27Z",
+      "side": 1,
+      "message": "That goes for anything with a single character member/function name.",
+      "range": {
+        "startLine": 636,
+        "startChar": 45,
+        "endLine": 636,
+        "endChar": 46
+      },
+      "revId": "371e698e9680679958aa4b88ba4cfd040ff2909f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "719cf61f_dd20be97",
+        "filename": "simpleperf/scripts/report_html.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2018-06-27T19:07:27Z",
+      "side": 1,
+      "message": "This doesn\u0027t appear to ever get used.",
+      "revId": "371e698e9680679958aa4b88ba4cfd040ff2909f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
