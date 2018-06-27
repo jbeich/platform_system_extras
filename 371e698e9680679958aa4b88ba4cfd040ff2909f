@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "7bffd53d_801ae57d",
+        "filename": "simpleperf/scripts/report_html.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 536,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-06-27T23:48:58Z",
+      "side": 1,
+      "message": "This one character name (and many others in RecordData in report_html.py) is to make the json data size smaller. Instead, I am considering to compress the json data in python, and use some javascript libraries to decompress the json data. Do you have any recommendations?",
+      "parentUuid": "be163467_4e745080",
+      "range": {
+        "startLine": 536,
+        "startChar": 62,
+        "endLine": 536,
+        "endChar": 63
+      },
+      "revId": "371e698e9680679958aa4b88ba4cfd040ff2909f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "49075f45_3e4bd8fc",
         "filename": "simpleperf/scripts/report_html.js",
         "patchSetId": 2
@@ -59,6 +83,24 @@
       "writtenOn": "2018-06-27T19:07:27Z",
       "side": 1,
       "message": "This doesn\u0027t appear to ever get used.",
+      "revId": "371e698e9680679958aa4b88ba4cfd040ff2909f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2aafc467_46c1a46a",
+        "filename": "simpleperf/scripts/report_html.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-06-27T23:48:58Z",
+      "side": 1,
+      "message": "used in L654. self.functions.id_to_func[function.func_id].start_addr",
+      "parentUuid": "719cf61f_dd20be97",
       "revId": "371e698e9680679958aa4b88ba4cfd040ff2909f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
