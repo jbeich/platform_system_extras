@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "622a6ff1_5c227c4d",
+        "filename": "simpleperf/RecordReadThread.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2018-06-27T20:10:38Z",
+      "side": 1,
+      "message": "Not a vector? It avoids the needs for a destructor.",
+      "range": {
+        "startLine": 31,
+        "startChar": 64,
+        "endLine": 31,
+        "endChar": 71
+      },
+      "revId": "74978ef334374ec8c80284ea74ccedb441284084",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4bb06aa9_04d05f08",
+        "filename": "simpleperf/RecordReadThread.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2018-06-27T20:10:38Z",
+      "side": 1,
+      "message": "Should this be an enum defined in the header file?",
+      "range": {
+        "startLine": 207,
+        "startChar": 0,
+        "endLine": 211,
+        "endChar": 40
+      },
+      "revId": "74978ef334374ec8c80284ea74ccedb441284084",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b32c9f4d_910af346",
+        "filename": "simpleperf/RecordReadThread.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2018-06-27T20:10:38Z",
+      "side": 1,
+      "message": "Any reason this isn\u0027t a constant in the header file?",
+      "range": {
+        "startLine": 220,
+        "startChar": 70,
+        "endLine": 220,
+        "endChar": 86
+      },
+      "revId": "74978ef334374ec8c80284ea74ccedb441284084",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "89e468a5_48a0e43b",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2018-06-27T20:10:38Z",
+      "side": 1,
+      "message": "Do these numbers come from experimental data? It might be useful to have a comment describing why these numbers are chosen.",
+      "range": {
+        "startLine": 434,
+        "startChar": 56,
+        "endLine": 434,
+        "endChar": 92
+      },
+      "revId": "74978ef334374ec8c80284ea74ccedb441284084",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ce4d7fe0_d3a42740",
+        "filename": "simpleperf/record.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 647,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2018-06-27T20:10:38Z",
+      "side": 1,
+      "message": "It\u0027s not clear how you guarantee that new_size is big enough to handle all of the data below.",
+      "range": {
+        "startLine": 647,
+        "startChar": 6,
+        "endLine": 647,
+        "endChar": 15
+      },
+      "revId": "74978ef334374ec8c80284ea74ccedb441284084",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0bae87b0_28e028dd",
+        "filename": "simpleperf/record.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 649,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2018-06-27T20:10:38Z",
+      "side": 1,
+      "message": "Is there a reason that binary_ is not a vector? It seems like you are doing a lot of work to replicate a lot of what a vector already does.",
+      "range": {
+        "startLine": 649,
+        "startChar": 23,
+        "endLine": 649,
+        "endChar": 30
+      },
+      "revId": "74978ef334374ec8c80284ea74ccedb441284084",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
