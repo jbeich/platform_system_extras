@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "d99aad5a_aec1344b",
+        "filename": "perfprofd/configreader.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2018-06-29T18:56:11Z",
+      "side": 1,
+      "message": "These structs have always been separated, so it seemed easier to keep it that way.",
+      "parentUuid": "5136bee7_ca92300d",
+      "range": {
+        "startLine": 58,
+        "startChar": 14,
+        "endLine": 58,
+        "endChar": 20
+      },
+      "revId": "550bc932f691198cc92f5d63d37ba731ac960ca0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1c0c2585_c4aa8577",
         "filename": "perfprofd/perfprofd_cmdline.cc",
         "patchSetId": 4
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "bb65f28d_8afd5c79",
+        "filename": "perfprofd/perfprofd_cmdline.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2018-06-29T18:56:11Z",
+      "side": 1,
+      "message": "It is slightly different because of the init() call. I\u0027d have to read the file twice.",
+      "parentUuid": "1c0c2585_c4aa8577",
+      "range": {
+        "startLine": 218,
+        "startChar": 34,
+        "endLine": 218,
+        "endChar": 35
+      },
+      "revId": "550bc932f691198cc92f5d63d37ba731ac960ca0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "41ac19e5_df8b66ed",
         "filename": "perfprofd/tests/perfprofd_test.cc",
         "patchSetId": 4
@@ -68,6 +116,30 @@
       "revId": "550bc932f691198cc92f5d63d37ba731ac960ca0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1bb37422_03b0e50c",
+        "filename": "perfprofd/tests/perfprofd_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 679,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2018-06-29T18:56:11Z",
+      "side": 1,
+      "message": "I thought it was neat to have em all together. Done.",
+      "parentUuid": "41ac19e5_df8b66ed",
+      "range": {
+        "startLine": 679,
+        "startChar": 37,
+        "endLine": 679,
+        "endChar": 43
+      },
+      "revId": "550bc932f691198cc92f5d63d37ba731ac960ca0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
