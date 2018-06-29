@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a08c460_ba0e48d7",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 523,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2018-06-29T22:59:36Z",
+      "side": 0,
+      "message": "It\u0027s not clear why this isn\u0027t necessary any more. Perhaps add something in the description to describe why.",
+      "range": {
+        "startLine": 522,
+        "startChar": 0,
+        "endLine": 523,
+        "endChar": 83
+      },
+      "revId": "90bc7b838c503b32987e881d45c69be699ee41cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8ea11b82_3363f663",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1136,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2018-06-29T22:59:36Z",
+      "side": 0,
+      "message": "It\u0027s not clear why this is being removed.",
+      "range": {
+        "startLine": 1134,
+        "startChar": 0,
+        "endLine": 1136,
+        "endChar": 3
+      },
+      "revId": "90bc7b838c503b32987e881d45c69be699ee41cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}

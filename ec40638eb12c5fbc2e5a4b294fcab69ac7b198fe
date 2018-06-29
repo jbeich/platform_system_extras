@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0b59d085_ddec785a",
+        "filename": "simpleperf/record.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 409,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2018-06-29T22:59:36Z",
+      "side": 1,
+      "message": "the RecordReadThread class.\n\nI thought this was a function at first, so I think it makes it easier to understand this way.",
+      "range": {
+        "startLine": 409,
+        "startChar": 45,
+        "endLine": 409,
+        "endChar": 61
+      },
+      "revId": "ec40638eb12c5fbc2e5a4b294fcab69ac7b198fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
