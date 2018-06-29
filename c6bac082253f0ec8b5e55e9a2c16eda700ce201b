@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "74a9f269_befa9c0f",
+        "filename": "perfprofd/tests/perfprofd_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1195,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-06-29T00:47:51Z",
+      "side": 1,
+      "message": "These two tests shares most lines of code, how about put the common code in a function? I think it also helps to distinguish what we want to test.",
+      "range": {
+        "startLine": 1195,
+        "startChar": 63,
+        "endLine": 1195,
+        "endChar": 64
+      },
+      "revId": "c6bac082253f0ec8b5e55e9a2c16eda700ce201b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
