@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "59feaf80_9b2e44d0",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 523,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-06-29T23:28:11Z",
+      "side": 0,
+      "message": "added in the commit message.",
+      "parentUuid": "9a08c460_ba0e48d7",
+      "range": {
+        "startLine": 522,
+        "startChar": 0,
+        "endLine": 523,
+        "endChar": 83
+      },
+      "revId": "90bc7b838c503b32987e881d45c69be699ee41cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8ea11b82_3363f663",
         "filename": "simpleperf/cmd_record.cpp",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2018-06-29T22:59:36Z",
       "side": 0,
       "message": "It\u0027s not clear why this is being removed.",
+      "range": {
+        "startLine": 1134,
+        "startChar": 0,
+        "endLine": 1136,
+        "endChar": 3
+      },
+      "revId": "90bc7b838c503b32987e881d45c69be699ee41cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5cf7d063_8f7732e6",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1136,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-06-29T23:28:11Z",
+      "side": 0,
+      "message": "This function is only called by ProcessRecord(), and ShouldOmitRecord() has been called in ProcessRecord(). So it is a duplication.",
+      "parentUuid": "8ea11b82_3363f663",
       "range": {
         "startLine": 1134,
         "startChar": 0,
