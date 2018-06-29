@@ -22,6 +22,30 @@
       "revId": "c6bac082253f0ec8b5e55e9a2c16eda700ce201b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c348527b_ac006b21",
+        "filename": "perfprofd/tests/perfprofd_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1195,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2018-06-29T18:55:21Z",
+      "side": 1,
+      "message": "The tests duplicate a lot of code, which I think the original author intended. I\u0027ll put it onto the todo list of cleanups.",
+      "parentUuid": "74a9f269_befa9c0f",
+      "range": {
+        "startLine": 1195,
+        "startChar": 63,
+        "endLine": 1195,
+        "endChar": 64
+      },
+      "revId": "c6bac082253f0ec8b5e55e9a2c16eda700ce201b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
