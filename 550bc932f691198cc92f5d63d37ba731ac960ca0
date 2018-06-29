@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5136bee7_ca92300d",
+        "filename": "perfprofd/configreader.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-06-29T00:57:09Z",
+      "side": 1,
+      "message": "why not also use PerfCounterConfigElem here?",
+      "range": {
+        "startLine": 58,
+        "startChar": 14,
+        "endLine": 58,
+        "endChar": 20
+      },
+      "revId": "550bc932f691198cc92f5d63d37ba731ac960ca0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1c0c2585_c4aa8577",
+        "filename": "perfprofd/perfprofd_cmdline.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-06-29T00:57:09Z",
+      "side": 1,
+      "message": "It looks you can move reread_config function to L197, and call it there.",
+      "range": {
+        "startLine": 218,
+        "startChar": 34,
+        "endLine": 218,
+        "endChar": 35
+      },
+      "revId": "550bc932f691198cc92f5d63d37ba731ac960ca0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "41ac19e5_df8b66ed",
+        "filename": "perfprofd/tests/perfprofd_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 679,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-06-29T00:57:09Z",
+      "side": 1,
+      "message": "Instead of allowing any value like dummy, dummy2, why not moving sample_period to the right of \"\u003d\", like \"-g_foo,bar\u003d2\"?",
+      "range": {
+        "startLine": 679,
+        "startChar": 37,
+        "endLine": 679,
+        "endChar": 43
+      },
+      "revId": "550bc932f691198cc92f5d63d37ba731ac960ca0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
