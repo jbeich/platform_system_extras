@@ -34,7 +34,7 @@ include $(BUILD_PREBUILT)
 
 
 include $(CLEAR_VARS)
-LOCAL_MODULE := mke2fs.conf
+LOCAL_MODULE := mke2fs.conf_recovery
 LOCAL_SRC_FILES := $(LOCAL_MODULE)
 LOCAL_MODULE_CLASS := EXECUTABLES
 LOCAL_MODULE_PATH := $(TARGET_RECOVERY_ROOT_OUT)/etc
@@ -42,17 +42,26 @@ include $(BUILD_PREBUILT)
 
 
 include $(CLEAR_VARS)
-LOCAL_MODULE := mke2fs.conf
+LOCAL_MODULE := mke2fs.conf_system
 LOCAL_SRC_FILES := $(LOCAL_MODULE)
 LOCAL_MODULE_CLASS := ETC
 LOCAL_MODULE_PATH := $(TARGET_OUT_ETC)
 include $(BUILD_PREBUILT)
 
 include $(CLEAR_VARS)
-LOCAL_MODULE := mke2fs.conf
+LOCAL_MODULE := mke2fs.conf_host
 LOCAL_SRC_FILES := $(LOCAL_MODULE)
 LOCAL_MODULE_CLASS := EXECUTABLES
 LOCAL_IS_HOST_MODULE := true
 include $(BUILD_PREBUILT)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := mke2fs.conf
+LOCAL_REQUIRED_MODULES := \
+  mke2fs.conf_recovery \
+  mke2fs.conf_system \
+  mke2fs.conf_host \
+
+include $(BUILD_PHONY_PACKAGE)
 
 endif
