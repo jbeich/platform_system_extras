@@ -42,6 +42,24 @@
     },
     {
       "key": {
+        "uuid": "c350af79_4f491b4a",
+        "filename": "verity/build_verity_tree.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2018-07-03T18:30:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "49e58b0b_aed6566a",
+      "revId": "ce3bcfaf5d57ef4c6c72769a72ade9b5d6202a71",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ceb35b98_f5cfe430",
         "filename": "verity/build_verity_tree_utils.h",
         "patchSetId": 5
@@ -65,6 +83,30 @@
     },
     {
       "key": {
+        "uuid": "93a748c3_e98f43f8",
+        "filename": "verity/build_verity_tree_utils.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2018-07-03T18:30:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ceb35b98_f5cfe430",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 6
+      },
+      "revId": "ce3bcfaf5d57ef4c6c72769a72ade9b5d6202a71",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "51445d64_d84d0b1b",
         "filename": "verity/hash_tree_builder.cpp",
         "patchSetId": 5
@@ -76,6 +118,30 @@
       "writtenOn": "2018-07-03T17:51:41Z",
       "side": 1,
       "message": "#include \u003cstring.h\u003e, or use std::vector?",
+      "range": {
+        "startLine": 55,
+        "startChar": 2,
+        "endLine": 55,
+        "endChar": 8
+      },
+      "revId": "ce3bcfaf5d57ef4c6c72769a72ade9b5d6202a71",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "da17b204_35050b49",
+        "filename": "verity/hash_tree_builder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2018-07-03T18:30:17Z",
+      "side": 1,
+      "message": "The header is there...",
+      "parentUuid": "51445d64_d84d0b1b",
       "range": {
         "startLine": 55,
         "startChar": 2,

@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "2782357b_e263e6af",
+        "filename": "verity/build_verity_tree.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2018-07-03T18:30:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "18a00538_140a3421",
+      "range": {
+        "startLine": 228,
+        "startChar": 2,
+        "endLine": 228,
+        "endChar": 24
+      },
+      "revId": "789ea16b64be61cd6429ec1820ce9c7a258ad75b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f89d96f9_68fa5433",
         "filename": "verity/hash_tree_builder.cpp",
         "patchSetId": 4
@@ -45,6 +69,30 @@
       "revId": "789ea16b64be61cd6429ec1820ce9c7a258ad75b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bbf5bdab_c617c80b",
+        "filename": "verity/hash_tree_builder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2018-07-03T18:30:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f89d96f9_68fa5433",
+      "range": {
+        "startLine": 42,
+        "startChar": 51,
+        "endLine": 42,
+        "endChar": 52
+      },
+      "revId": "789ea16b64be61cd6429ec1820ce9c7a258ad75b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -200,6 +248,30 @@
     },
     {
       "key": {
+        "uuid": "b4bf7d05_83416226",
+        "filename": "verity/hash_tree_builder.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2018-07-03T18:30:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6cd51c1d_aaa690cf",
+      "range": {
+        "startLine": 29,
+        "startChar": 30,
+        "endLine": 29,
+        "endChar": 34
+      },
+      "revId": "789ea16b64be61cd6429ec1820ce9c7a258ad75b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cce44af8_362577a1",
         "filename": "verity/hash_tree_builder.h",
         "patchSetId": 4
@@ -220,6 +292,30 @@
       "revId": "789ea16b64be61cd6429ec1820ce9c7a258ad75b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8fedbbad_c07c70e3",
+        "filename": "verity/hash_tree_builder.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2018-07-03T18:30:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cce44af8_362577a1",
+      "range": {
+        "startLine": 32,
+        "startChar": 3,
+        "endLine": 32,
+        "endChar": 8
+      },
+      "revId": "789ea16b64be61cd6429ec1820ce9c7a258ad75b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
