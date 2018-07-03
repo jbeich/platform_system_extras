@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c637b2a7_eea85ef2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-07-03T17:51:41Z",
+      "side": 1,
+      "message": "nit: this is not in the original code",
+      "range": {
+        "startLine": 7,
+        "startChar": 12,
+        "endLine": 7,
+        "endChar": 25
+      },
+      "revId": "ce3bcfaf5d57ef4c6c72769a72ade9b5d6202a71",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "49e58b0b_aed6566a",
+        "filename": "verity/build_verity_tree.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-07-03T17:51:41Z",
+      "side": 1,
+      "message": "it\u0027s a builder now",
+      "revId": "ce3bcfaf5d57ef4c6c72769a72ade9b5d6202a71",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ceb35b98_f5cfe430",
+        "filename": "verity/build_verity_tree_utils.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-07-03T17:51:41Z",
+      "side": 1,
+      "message": "#include \u003cstddef.h\u003e?",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 6
+      },
+      "revId": "ce3bcfaf5d57ef4c6c72769a72ade9b5d6202a71",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "51445d64_d84d0b1b",
+        "filename": "verity/hash_tree_builder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-07-03T17:51:41Z",
+      "side": 1,
+      "message": "#include \u003cstring.h\u003e, or use std::vector?",
+      "range": {
+        "startLine": 55,
+        "startChar": 2,
+        "endLine": 55,
+        "endChar": 8
+      },
+      "revId": "ce3bcfaf5d57ef4c6c72769a72ade9b5d6202a71",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bdcb859a_da9d1ebe",
+        "filename": "verity/hash_tree_builder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-07-03T17:51:41Z",
+      "side": 1,
+      "message": "PLOG",
+      "range": {
+        "startLine": 151,
+        "startChar": 4,
+        "endLine": 151,
+        "endChar": 7
+      },
+      "revId": "ce3bcfaf5d57ef4c6c72769a72ade9b5d6202a71",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
