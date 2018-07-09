@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "dcb9af8c_57982168",
+        "filename": "simpleperf/scripts/report_html.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 536,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2018-07-09T17:53:21Z",
+      "side": 1,
+      "message": "I don\u0027t. I think doing like you are now is probably preferable over adding the compression/decompression. It\u0027s not too hard to figure out what these are if you have both files open, just annoying for code review, and adding the extra complexity doesn\u0027t seem worth it for that.",
+      "parentUuid": "7bffd53d_801ae57d",
+      "range": {
+        "startLine": 536,
+        "startChar": 62,
+        "endLine": 536,
+        "endChar": 63
+      },
+      "revId": "371e698e9680679958aa4b88ba4cfd040ff2909f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "49075f45_3e4bd8fc",
         "filename": "simpleperf/scripts/report_html.js",
         "patchSetId": 2
@@ -69,6 +93,30 @@
       "revId": "371e698e9680679958aa4b88ba4cfd040ff2909f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "72749834_7e78963a",
+        "filename": "simpleperf/scripts/report_html.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 636,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2018-07-09T17:53:21Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "49075f45_3e4bd8fc",
+      "range": {
+        "startLine": 636,
+        "startChar": 45,
+        "endLine": 636,
+        "endChar": 46
+      },
+      "revId": "371e698e9680679958aa4b88ba4cfd040ff2909f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -151,6 +199,24 @@
       "revId": "371e698e9680679958aa4b88ba4cfd040ff2909f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "73c257ff_caef99d7",
+        "filename": "simpleperf/scripts/report_html.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2018-07-09T17:53:21Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "2aafc467_46c1a46a",
+      "revId": "371e698e9680679958aa4b88ba4cfd040ff2909f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
