@@ -1,0 +1,211 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "338c27c5_57ef838a",
+        "filename": "tests/bpfRace/bpfRace.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2018-07-13T01:46:37Z",
+      "side": 1,
+      "message": "We should consider whether the BPF rule should be modified to allow putting BPF files in a directory that is not \"/system/etc/bpf\". Maybe add an \"output_directory\" parameter to the BPF soong build rule? Or maybe another mode that puts it into /data/nativetest64?",
+      "range": {
+        "startLine": 54,
+        "startChar": 22,
+        "endLine": 54,
+        "endChar": 39
+      },
+      "revId": "566fcf6ee6056491f3b6d3ad74809f6722d02fba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e4472a27_21d633d3",
+        "filename": "tests/bpfRace/bpfRace.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2018-07-13T01:46:37Z",
+      "side": 1,
+      "message": "Nothing fake about this! It\u0027s a real map :-)",
+      "range": {
+        "startLine": 65,
+        "startChar": 34,
+        "endLine": 65,
+        "endChar": 38
+      },
+      "revId": "566fcf6ee6056491f3b6d3ad74809f6722d02fba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2a0f8873_881995f9",
+        "filename": "tests/bpfRace/bpfRace.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2018-07-13T01:46:37Z",
+      "side": 1,
+      "message": "NUM_SOCKETS. As Erik likes to say, EMAGICCONSTANT.",
+      "range": {
+        "startLine": 72,
+        "startChar": 72,
+        "endLine": 72,
+        "endChar": 74
+      },
+      "revId": "566fcf6ee6056491f3b6d3ad74809f6722d02fba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "872560e5_e9974056",
+        "filename": "tests/bpfRace/bpfRace.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2018-07-13T01:46:37Z",
+      "side": 1,
+      "message": "Remove space.",
+      "range": {
+        "startLine": 73,
+        "startChar": 28,
+        "endLine": 73,
+        "endChar": 29
+      },
+      "revId": "566fcf6ee6056491f3b6d3ad74809f6722d02fba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5ff288ee_68b479a3",
+        "filename": "tests/bpfRace/bpfRace.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2018-07-13T01:46:37Z",
+      "side": 1,
+      "message": "activeMapKey?",
+      "range": {
+        "startLine": 92,
+        "startChar": 13,
+        "endLine": 92,
+        "endChar": 25
+      },
+      "revId": "566fcf6ee6056491f3b6d3ad74809f6722d02fba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "60529194_daa42bfd",
+        "filename": "tests/bpfRace/bpfRace.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2018-07-13T01:46:37Z",
+      "side": 1,
+      "message": "Once the test is passing again, consider using std::thread or even just pthread_create.",
+      "range": {
+        "startLine": 96,
+        "startChar": 23,
+        "endLine": 96,
+        "endChar": 34
+      },
+      "revId": "566fcf6ee6056491f3b6d3ad74809f6722d02fba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "714ef3c5_9ed091ae",
+        "filename": "tests/bpfRace/bpfRace.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2018-07-13T01:46:37Z",
+      "side": 1,
+      "message": "Static ports in VTS code are generally not a good idea. Call bind() with a port of 0 and then getsockname(), so the kernel chooses a port for you.",
+      "range": {
+        "startLine": 110,
+        "startChar": 38,
+        "endLine": 110,
+        "endChar": 42
+      },
+      "revId": "566fcf6ee6056491f3b6d3ad74809f6722d02fba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "840411db_6cc2f102",
+        "filename": "tests/bpfRace/bpfRace.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2018-07-13T01:46:37Z",
+      "side": 1,
+      "message": "create",
+      "range": {
+        "startLine": 115,
+        "startChar": 49,
+        "endLine": 115,
+        "endChar": 54
+      },
+      "revId": "566fcf6ee6056491f3b6d3ad74809f6722d02fba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ebe4e1fd_8488d3b7",
+        "filename": "tests/bpfRace/bpfRace.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2018-07-13T01:46:37Z",
+      "side": 1,
+      "message": "Per in-person discussion, we should also add a test that passes (e.g., one with membarrier, or BPF_SYNC_MAP_ACCESS.",
+      "range": {
+        "startLine": 171,
+        "startChar": 0,
+        "endLine": 171,
+        "endChar": 1
+      },
+      "revId": "566fcf6ee6056491f3b6d3ad74809f6722d02fba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
