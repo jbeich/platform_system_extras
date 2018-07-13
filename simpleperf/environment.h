@@ -82,4 +82,6 @@ bool ProcessKernelSymbols(const std::string& symbol_file,
 bool CheckPerfEventLimit();
 bool GetMaxSampleFrequency(uint64_t* max_sample_freq);
 
+std::string GetHardwareFromCpuInfo(const std::string& cpu_info);
+
 #endif  // SIMPLE_PERF_ENVIRONMENT_H_

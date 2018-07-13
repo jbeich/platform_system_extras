@@ -26,3 +26,12 @@ void CreateProcesses(size_t count, std::vector<std::unique_ptr<Workload>>* workl
 
 void ParseSymbol(const ElfFileSymbol& symbol, std::map<std::string, ElfFileSymbol>* symbols);
 void CheckElfFileSymbols(const std::map<std::string, ElfFileSymbol>& symbols);
+
+bool HasHardwareCounter();
+#define TEST_REQUIRE_HW_COUNTER() \
+  do { \
+    if (!HasHardwareCounter()) { \
+      GTEST_LOG_(INFO) << "Skip this test as the machine doesn't have hardware PMU counters."; \
+      return; \
+    } \
+  } while (0)

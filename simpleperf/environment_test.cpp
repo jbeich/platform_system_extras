@@ -72,3 +72,10 @@ TEST(environment, ProcessKernelSymbols) {
   ASSERT_FALSE(ProcessKernelSymbols(
       tempfile.path, std::bind(&KernelSymbolsMatch, std::placeholders::_1, expected_symbol)));
 }
+
+TEST(environment, GetHardwareFromCpuInfo) {
+  std::string cpu_info = "CPU revision : 10\n\n"
+      "Hardware : Symbol i.MX6 Freeport_Plat Quad/DualLite (Device Tree)\n";
+  ASSERT_EQ("Symbol i.MX6 Freeport_Plat Quad/DualLite (Device Tree)",
+            GetHardwareFromCpuInfo(cpu_info));
+}
