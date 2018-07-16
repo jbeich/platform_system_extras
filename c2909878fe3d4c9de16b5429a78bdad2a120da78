@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "02a948c8_2f4126ec",
+        "filename": "verity/build_verity_tree_main.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-07-16T22:23:23Z",
+      "side": 1,
+      "message": "static",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 4
+      },
+      "revId": "c2909878fe3d4c9de16b5429a78bdad2a120da78",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "04b4a0e6_168cf9b8",
+        "filename": "verity/build_verity_tree_main.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-07-16T22:23:23Z",
+      "side": 1,
+      "message": "nit: static const (or constexpr)",
+      "range": {
+        "startLine": 55,
+        "startChar": 4,
+        "endLine": 55,
+        "endChar": 16
+      },
+      "revId": "c2909878fe3d4c9de16b5429a78bdad2a120da78",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c78803db_c08ab79a",
+        "filename": "verity/build_verity_tree_main.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-07-16T22:23:23Z",
+      "side": 1,
+      "message": "include \u003climits\u003e",
+      "range": {
+        "startLine": 94,
+        "startChar": 43,
+        "endLine": 94,
+        "endChar": 57
+      },
+      "revId": "c2909878fe3d4c9de16b5429a78bdad2a120da78",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8f09fbaa_7f067fea",
+        "filename": "verity/build_verity_tree_main.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-07-16T22:23:23Z",
+      "side": 1,
+      "message": "include \u003cstring\u003e",
+      "range": {
+        "startLine": 155,
+        "startChar": 7,
+        "endLine": 155,
+        "endChar": 13
+      },
+      "revId": "c2909878fe3d4c9de16b5429a78bdad2a120da78",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6f6a637e_956238d6",
+        "filename": "verity/hash_tree_builder.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-07-16T22:23:23Z",
+      "side": 1,
+      "message": "Don\u0027t see a caller of this function (other than the trivial case above). But `size_t` may be not sufficiently large on ILP32.",
+      "range": {
+        "startLine": 179,
+        "startChar": 48,
+        "endLine": 179,
+        "endChar": 61
+      },
+      "revId": "c2909878fe3d4c9de16b5429a78bdad2a120da78",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
