@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b5780696_ac652aae",
+        "filename": "partition_tools/lpmake.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1064128
+      },
+      "writtenOn": "2018-07-16T17:17:45Z",
+      "side": 1,
+      "message": "-S,--sparse ? that\u0027s what the options below look like.\n\nI should have noticed the same with the above two and -O/-a too.",
+      "range": {
+        "startLine": 48,
+        "startChar": 15,
+        "endLine": 48,
+        "endChar": 23
+      },
+      "revId": "3aa94b205b1e6eab383ea8216f7a56643073adbb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
