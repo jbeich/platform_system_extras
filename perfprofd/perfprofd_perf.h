@@ -19,6 +19,7 @@
 #define SYSTEM_EXTRAS_PERFPROFD_PERFPROFD_PERF_H_
 
 #include <string>
+#include <vector>
 
 struct Config;
 
@@ -43,6 +44,11 @@ PerfResult InvokePerf(Config& config,
                       unsigned duration,
                       const std::string &data_file_path,
                       const std::string &perf_stderr_path);
+
+// Prepare the internal list of supported perf counters.
+bool FindSupportedPerfCounters(const std::string& perf_path);
+// Get the list of supported perf counters.
+const std::vector<std::string>& GetSupportedPerfCounters();
 
 }  // namespace perfprofd
 }  // namespace android

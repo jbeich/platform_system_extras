@@ -44,6 +44,7 @@
 #include "map_utils.h"
 #include "perfprofdcore.h"
 #include "perfprofd_cmdline.h"
+#include "perfprofd_perf.h"
 #include "perfprofd_threaded_handler.h"
 #include "quipper_helper.h"
 #include "symbolizer.h"
@@ -1131,6 +1132,24 @@ TEST_F(PerfProfdTest, CallchainRunWithCannedPerf)
 }
 
 #ifdef __ANDROID__
+
+TEST_F(PerfProfdTest, GetSupportedPerfCounters)
+{
+  // Check basic perf counters.
+  {
+    struct DummyConfig : public Config {
+      void Sleep(size_t seconds) override {}
+      bool IsProfilingEnabled() const override { return false; }
+    };
+    DummyConfig config;
+    ASSERT_TRUE(android::perfprofd::FindSupportedPerfCounters(config.perf_path));
+  }
+  const std::vector<std::string>& counters = android::perfprofd::GetSupportedPerfCounters();
+  EXPECT_TRUE(std::find(counters.begin(), counters.end(), std::string("cpu-cycles"))
+                  != counters.end()) << android::base::Join(counters, ',');
+  EXPECT_TRUE(std::find(counters.begin(), counters.end(), std::string("page-faults"))
+                  != counters.end()) << android::base::Join(counters, ',');
+}
 
 TEST_F(PerfProfdTest, BasicRunWithLivePerf)
 {
