@@ -262,7 +262,7 @@ bool GetThreadMmapsInProcess(pid_t pid, std::vector<ThreadMmap>* thread_mmaps) {
   thread_mmaps->clear();
   return android::procinfo::ReadProcessMaps(pid,
       [&](uint64_t start, uint64_t end, uint16_t flags, uint64_t pgoff, const char* name) {
-        thread_mmaps->emplace_back(start, end - start, pgoff, name, flags & PROT_EXEC);
+        thread_mmaps->emplace_back(start, end - start, pgoff, name, flags);
   });
 }
 
