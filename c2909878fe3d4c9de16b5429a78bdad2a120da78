@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "1bf73f59_0703e64e",
+        "filename": "verity/build_verity_tree_main.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2018-07-16T23:19:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "02a948c8_2f4126ec",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 4
+      },
+      "revId": "c2909878fe3d4c9de16b5429a78bdad2a120da78",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "04b4a0e6_168cf9b8",
         "filename": "verity/build_verity_tree_main.cpp",
         "patchSetId": 8
@@ -45,6 +69,30 @@
       "revId": "c2909878fe3d4c9de16b5429a78bdad2a120da78",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "defe2fdb_97c437ba",
+        "filename": "verity/build_verity_tree_main.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2018-07-16T23:19:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "04b4a0e6_168cf9b8",
+      "range": {
+        "startLine": 55,
+        "startChar": 4,
+        "endLine": 55,
+        "endChar": 16
+      },
+      "revId": "c2909878fe3d4c9de16b5429a78bdad2a120da78",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "e932ca5b_ceab8cfb",
+        "filename": "verity/build_verity_tree_main.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2018-07-16T23:19:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c78803db_c08ab79a",
+      "range": {
+        "startLine": 94,
+        "startChar": 43,
+        "endLine": 94,
+        "endChar": 57
+      },
+      "revId": "c2909878fe3d4c9de16b5429a78bdad2a120da78",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8f09fbaa_7f067fea",
         "filename": "verity/build_verity_tree_main.cpp",
         "patchSetId": 8
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "52b8bc55_2771e8cb",
+        "filename": "verity/build_verity_tree_main.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2018-07-16T23:19:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8f09fbaa_7f067fea",
+      "range": {
+        "startLine": 155,
+        "startChar": 7,
+        "endLine": 155,
+        "endChar": 13
+      },
+      "revId": "c2909878fe3d4c9de16b5429a78bdad2a120da78",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6f6a637e_956238d6",
         "filename": "verity/hash_tree_builder.cpp",
         "patchSetId": 8
@@ -114,6 +210,30 @@
       "revId": "c2909878fe3d4c9de16b5429a78bdad2a120da78",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3512208a_ec0ffb94",
+        "filename": "verity/hash_tree_builder.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2018-07-16T23:19:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6f6a637e_956238d6",
+      "range": {
+        "startLine": 179,
+        "startChar": 48,
+        "endLine": 179,
+        "endChar": 61
+      },
+      "revId": "c2909878fe3d4c9de16b5429a78bdad2a120da78",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
