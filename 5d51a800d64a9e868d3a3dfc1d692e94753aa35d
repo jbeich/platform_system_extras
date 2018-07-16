@@ -2,6 +2,52 @@
   "comments": [
     {
       "key": {
+        "uuid": "5072d680_d12c84c0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2018-07-16T18:15:41Z",
+      "side": 1,
+      "message": "What does this mean?",
+      "range": {
+        "startLine": 10,
+        "startChar": 16,
+        "endLine": 10,
+        "endChar": 75
+      },
+      "revId": "5d51a800d64a9e868d3a3dfc1d692e94753aa35d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "28100843_b9be5534",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2018-07-16T18:15:41Z",
+      "side": 1,
+      "message": "Irrelevant if the isolation is beneficial.",
+      "range": {
+        "startLine": 11,
+        "startChar": 20,
+        "endLine": 11,
+        "endChar": 51
+      },
+      "revId": "5d51a800d64a9e868d3a3dfc1d692e94753aa35d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ab11aa0c_6f652613",
         "filename": "perfprofd/binder_interface/Android.bp",
         "patchSetId": 1
