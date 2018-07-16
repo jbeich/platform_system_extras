@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ab11aa0c_6f652613",
+        "filename": "perfprofd/binder_interface/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2018-07-16T18:13:05Z",
+      "side": 1,
+      "message": "the build system automatically drops these when the static library is used. This static library is only used in one place, and that is a place where a static library doesn\u0027t needed, so I think this whole library could be switched to being shared. Up to you.",
+      "range": {
+        "startLine": 27,
+        "startChar": 4,
+        "endLine": 27,
+        "endChar": 15
+      },
+      "revId": "5d51a800d64a9e868d3a3dfc1d692e94753aa35d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
