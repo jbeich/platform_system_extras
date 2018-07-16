@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ec1273ed_ff5d0b20",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2018-07-16T21:58:16Z",
+      "side": 1,
+      "message": "It means that prebuilts can trivially statically link the library and cause the way it interacts with itself (the binder wire protocol) to be frozen.",
+      "parentUuid": "5072d680_d12c84c0",
+      "range": {
+        "startLine": 10,
+        "startChar": 16,
+        "endLine": 10,
+        "endChar": 75
+      },
+      "revId": "5d51a800d64a9e868d3a3dfc1d692e94753aa35d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "28100843_b9be5534",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2018-07-16T18:15:41Z",
       "side": 1,
       "message": "Irrelevant if the isolation is beneficial.",
+      "range": {
+        "startLine": 11,
+        "startChar": 20,
+        "endLine": 11,
+        "endChar": 51
+      },
+      "revId": "5d51a800d64a9e868d3a3dfc1d692e94753aa35d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "77633085_7de25e03",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2018-07-16T21:58:16Z",
+      "side": 1,
+      "message": "I\u0027m putting it here because:\n- Everyone has their own goals. Making this type of change would be good even without the former.\n- I like to point out my huge impact!\n- I used the same commit message (template) for many CLs, and not every reviewer is aware of the implications of making a library shared-\u003estatic. For some of them, I moved additional libraries to being shared as well (that were static for no reason). Hopefully, the people with more curiosity will even take it on themselves to think a little harder about this static/shared decision. :(",
+      "parentUuid": "28100843_b9be5534",
       "range": {
         "startLine": 11,
         "startChar": 20,
