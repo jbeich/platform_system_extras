@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "c0aba1d4_093a01f5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2018-07-16T22:23:01Z",
+      "side": 1,
+      "message": "For libbinder, it\u0027s entirely a no-op (since perfprofd is including a shared libbinder and because the android build system just drops the deps).",
+      "parentUuid": "8c6a457b_3e7f18ca",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 51
+      },
+      "revId": "0f571830c22eacdeb8fdd3f662cc85f7829d3680",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f305322a_7a7f64e2",
         "filename": "/COMMIT_MSG",
         "patchSetId": 3
@@ -36,6 +60,30 @@
       "writtenOn": "2018-07-16T22:15:55Z",
       "side": 1,
       "message": "No. Separate change if you really want to, but this isn\u0027t related to this change.",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 27
+      },
+      "revId": "0f571830c22eacdeb8fdd3f662cc85f7829d3680",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8d80a863_23d3e766",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2018-07-16T22:23:01Z",
+      "side": 1,
+      "message": "For the libutils case, this change is a no-op. For the libbase case, it actually changes things. I\u0027ll go ahead and remove both to simplify this.",
+      "parentUuid": "f305322a_7a7f64e2",
       "range": {
         "startLine": 15,
         "startChar": 0,
