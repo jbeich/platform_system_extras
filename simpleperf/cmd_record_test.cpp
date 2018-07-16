@@ -687,3 +687,11 @@ TEST(record_cmd, size_limit_option) {
   ASSERT_LT(reader->FileHeader().data.size, 2000u);
   ASSERT_FALSE(RunRecordCmd({"--size-limit", "0"}));
 }
+
+TEST(record_cmd, support_mmap2) {
+  // mmap2 is supported in kernel >= 3.16. If not supported, please cherry pick below kernel
+  // patches:
+  //   perf: Add attr->mmap2 attribute to an event
+  //   perf: Pass protection and flags bits through mmap2 interface.
+  ASSERT_TRUE(IsMmap2Supported());
+}
