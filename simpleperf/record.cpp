@@ -343,6 +343,27 @@ CommRecord::CommRecord(const perf_event_attr& attr, uint32_t pid, uint32_t tid,
   UpdateBinary(new_binary);
 }
 
+void CommRecord::SetComm(const std::string& name) {
+  if (strcmp(comm, name.c_str()) == 0) {
+    return;
+  }
+  size_t old_name_len = Align(strlen(comm) + 1, 8);
+  size_t new_name_len = Align(name.size() + 1, 8);
+  size_t new_size = size() - old_name_len + new_name_len;
+  char* new_binary = new char[new_size];
+  char* p = new_binary;
+  header.size = new_size;
+  MoveToBinaryFormat(header, p);
+  MoveToBinaryFormat(*data, p);
+  data = reinterpret_cast<CommRecordDataType*>(p - sizeof(CommRecordDataType));
+  comm = p;
+  strcpy(p, name.c_str());
+  p += new_name_len;
+  sample_id.WriteToBinaryFormat(p);
+  CHECK_EQ(p, new_binary + new_size);
+  UpdateBinary(new_binary);
+}
+
 void CommRecord::DumpData(size_t indent) const {
   PrintIndented(indent, "pid %u, tid %u, comm %s\n", data->pid, data->tid,
                 comm);
