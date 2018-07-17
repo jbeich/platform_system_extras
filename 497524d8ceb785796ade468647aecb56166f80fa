@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "06e7a153_8c0d7489",
+        "filename": "verity/build_verity_tree.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1079733
+      },
+      "writtenOn": "2018-07-17T01:09:26Z",
+      "side": 1,
+      "message": "Called twice...",
+      "range": {
+        "startLine": 95,
+        "startChar": 18,
+        "endLine": 95,
+        "endChar": 37
+      },
+      "revId": "497524d8ceb785796ade468647aecb56166f80fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "393acfbd_bd963b4a",
+        "filename": "verity/build_verity_tree.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1079733
+      },
+      "writtenOn": "2018-07-17T01:09:26Z",
+      "side": 1,
+      "message": "Is non-AB going to use this? Otherwise I don\u0027t see why we need to split it out.",
+      "range": {
+        "startLine": 27,
+        "startChar": 5,
+        "endLine": 27,
+        "endChar": 25
+      },
+      "revId": "497524d8ceb785796ade468647aecb56166f80fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "064bbc3a_904e5417",
+        "filename": "verity/hash_tree_builder.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1079733
+      },
+      "writtenOn": "2018-07-17T01:09:26Z",
+      "side": 1,
+      "message": "Move to build_verity_tree_utils?",
+      "range": {
+        "startLine": 57,
+        "startChar": 21,
+        "endLine": 57,
+        "endChar": 39
+      },
+      "revId": "497524d8ceb785796ade468647aecb56166f80fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
