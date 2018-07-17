@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8d5747d4_88ce183d",
+        "filename": "boot_control_copy/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-07-17T17:26:31Z",
+      "side": 1,
+      "message": "what uses this? right now the only reference in cs/ is a file in bootable/recovery that one of the other changes in this topic converts to Android.bp.",
+      "range": {
+        "startLine": 4,
+        "startChar": 11,
+        "endLine": 4,
+        "endChar": 24
+      },
+      "revId": "ad98e11020b8abf38dff961f61fb6cb5941144ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
