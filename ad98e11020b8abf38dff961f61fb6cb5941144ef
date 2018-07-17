@@ -22,6 +22,30 @@
       "revId": "ad98e11020b8abf38dff961f61fb6cb5941144ef",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8ab7ce00_e84983d8",
+        "filename": "boot_control_copy/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1113594
+      },
+      "writtenOn": "2018-07-17T19:13:20Z",
+      "side": 1,
+      "message": "libhardware dynamically loads hal libraries by looking in hw/HALNAME.default. previously the other reference actually symlinked bootctrl.bcb to bootctrl.default so it could be loaded as such. This is probably because you can\u0027t have duplicate library names, and this library was already named bootctrl.default. However, this library has no actual uses and even states in comments that it is not a shipping implementation, while the bootable/recovery/boot_control states that it is a functional default implementation, so it makes sense to name this something else and name the other one .default.",
+      "parentUuid": "8d5747d4_88ce183d",
+      "range": {
+        "startLine": 4,
+        "startChar": 11,
+        "endLine": 4,
+        "endChar": 24
+      },
+      "revId": "ad98e11020b8abf38dff961f61fb6cb5941144ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
