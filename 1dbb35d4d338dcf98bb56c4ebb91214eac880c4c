@@ -94,6 +94,30 @@
       "revId": "1dbb35d4d338dcf98bb56c4ebb91214eac880c4c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "111442c1_50b6fd95",
+        "filename": "verity/hash_tree_builder.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-07-18T23:24:07Z",
+      "side": 1,
+      "message": "That should be a result of using \u003cutils/Compat.h\u003e: https://cs.corp.google.com/aosp-master/system/extras/verity/fec/image.h?l\u003d20",
+      "parentUuid": "62e47741_23257d90",
+      "range": {
+        "startLine": 179,
+        "startChar": 48,
+        "endLine": 179,
+        "endChar": 55
+      },
+      "revId": "1dbb35d4d338dcf98bb56c4ebb91214eac880c4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
