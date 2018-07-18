@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5caa0b9b_765b7d78",
+        "filename": "simpleperf/record.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2018-07-18T00:33:19Z",
+      "side": 1,
+      "message": "This name is confusing. Aren\u0027t you setting the command name, so maybe SetCommandName instead?",
+      "range": {
+        "startLine": 346,
+        "startChar": 17,
+        "endLine": 346,
+        "endChar": 24
+      },
+      "revId": "77910286d3c78c490a0e4badc95c74c78a5d2184",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b0ce605f_8f2af82e",
+        "filename": "simpleperf/record.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2018-07-18T00:33:19Z",
+      "side": 1,
+      "message": "name.compare(comm) \u003d\u003d 0 seems like a better way to write this.",
+      "range": {
+        "startLine": 347,
+        "startChar": 6,
+        "endLine": 347,
+        "endChar": 37
+      },
+      "revId": "77910286d3c78c490a0e4badc95c74c78a5d2184",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ff22f287_8ca6088a",
+        "filename": "simpleperf/record.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2018-07-18T00:33:19Z",
+      "side": 1,
+      "message": "Why does is this required to have this alignment?",
+      "range": {
+        "startLine": 350,
+        "startChar": 1,
+        "endLine": 351,
+        "endChar": 50
+      },
+      "revId": "77910286d3c78c490a0e4badc95c74c78a5d2184",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
