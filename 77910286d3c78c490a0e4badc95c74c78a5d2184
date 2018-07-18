@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "194a7289_fcf1d3fd",
+        "filename": "simpleperf/record.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-07-18T00:50:57Z",
+      "side": 1,
+      "message": "Yes, I am. Done.",
+      "parentUuid": "5caa0b9b_765b7d78",
+      "range": {
+        "startLine": 346,
+        "startChar": 17,
+        "endLine": 346,
+        "endChar": 24
+      },
+      "revId": "77910286d3c78c490a0e4badc95c74c78a5d2184",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b0ce605f_8f2af82e",
         "filename": "simpleperf/record.cpp",
         "patchSetId": 1
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "71ca308c_ee53f097",
+        "filename": "simpleperf/record.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-07-18T00:50:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b0ce605f_8f2af82e",
+      "range": {
+        "startLine": 347,
+        "startChar": 6,
+        "endLine": 347,
+        "endChar": 37
+      },
+      "revId": "77910286d3c78c490a0e4badc95c74c78a5d2184",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ff22f287_8ca6088a",
         "filename": "simpleperf/record.cpp",
         "patchSetId": 1
@@ -59,6 +107,30 @@
       "writtenOn": "2018-07-18T00:33:19Z",
       "side": 1,
       "message": "Why does is this required to have this alignment?",
+      "range": {
+        "startLine": 350,
+        "startChar": 1,
+        "endLine": 351,
+        "endChar": 50
+      },
+      "revId": "77910286d3c78c490a0e4badc95c74c78a5d2184",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e44530ce_511e95ab",
+        "filename": "simpleperf/record.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-07-18T00:50:57Z",
+      "side": 1,
+      "message": "comment added.",
+      "parentUuid": "ff22f287_8ca6088a",
       "range": {
         "startLine": 350,
         "startChar": 1,
