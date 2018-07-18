@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c4a99ffc_27ee9cef",
+        "filename": "verity/hash_tree_builder.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-07-18T18:28:18Z",
+      "side": 1,
+      "message": "Since this file will be built for host, off64_t (and the lseek64 below) will upset macOS. Use -D_FILE_OFFSET_BITS\u003d64 plus off_t.",
+      "range": {
+        "startLine": 179,
+        "startChar": 48,
+        "endLine": 179,
+        "endChar": 55
+      },
+      "revId": "1dbb35d4d338dcf98bb56c4ebb91214eac880c4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
