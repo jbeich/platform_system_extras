@@ -22,6 +22,30 @@
       "revId": "cf0d80a6340c44f4560c44f64d93067228791667",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cadf668f_d55acdf2",
+        "filename": "partition_tools/lpmake.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1290458
+      },
+      "writtenOn": "2018-07-18T21:44:09Z",
+      "side": 1,
+      "message": "I didn\u0027t do that since then I\u0027d have to re-join parts 1..n, if the path contained an \u0027\u003d\u0027 character. But I can do that if you think it\u0027s cleaner.",
+      "parentUuid": "88386410_26d47c5e",
+      "range": {
+        "startLine": 143,
+        "startChar": 16,
+        "endLine": 151,
+        "endChar": 48
+      },
+      "revId": "cf0d80a6340c44f4560c44f64d93067228791667",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
