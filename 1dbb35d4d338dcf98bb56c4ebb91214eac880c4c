@@ -70,6 +70,30 @@
       "revId": "1dbb35d4d338dcf98bb56c4ebb91214eac880c4c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "62e47741_23257d90",
+        "filename": "verity/hash_tree_builder.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2018-07-18T23:05:20Z",
+      "side": 1,
+      "message": "Done. I didn\u0027t realize mac doesn\u0027t have it since the fec code is using lseek64 https://cs.corp.google.com/aosp-master/system/extras/verity/fec/image.cpp?l\u003d220",
+      "parentUuid": "3b7a0535_7ea49202",
+      "range": {
+        "startLine": 179,
+        "startChar": 48,
+        "endLine": 179,
+        "endChar": 55
+      },
+      "revId": "1dbb35d4d338dcf98bb56c4ebb91214eac880c4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
