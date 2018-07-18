@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "fa8f870e_9e6d3576",
+        "filename": "verity/Android.bp",
+        "patchSetId": 11
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2018-07-18T19:40:18Z",
+      "side": 1,
+      "message": "Will do in the next cl where we add unit tests..",
+      "parentUuid": "01e1279f_9e7bb70c",
+      "range": {
+        "startLine": 78,
+        "startChar": 0,
+        "endLine": 90,
+        "endChar": 6
+      },
+      "revId": "c170d16587535f7ff799f6ed9dc9edbe399fa90d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0d99c8eb_612ce728",
         "filename": "verity/build_verity_tree.cpp",
         "patchSetId": 11
@@ -36,6 +60,30 @@
       "writtenOn": "2018-07-18T19:24:37Z",
       "side": 1,
       "message": "Should this still be here? It\u0027s not used in this file anymore and the declaration is in build_verity_tree_utils.h, move to hash_tree_builder or build_verity_tree_utils",
+      "range": {
+        "startLine": 29,
+        "startChar": 7,
+        "endLine": 29,
+        "endChar": 25
+      },
+      "revId": "c170d16587535f7ff799f6ed9dc9edbe399fa90d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a6ca6f6f_da6c16a7",
+        "filename": "verity/build_verity_tree.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2018-07-18T19:40:18Z",
+      "side": 1,
+      "message": "added a new cpp file",
+      "parentUuid": "0d99c8eb_612ce728",
       "range": {
         "startLine": 29,
         "startChar": 7,
