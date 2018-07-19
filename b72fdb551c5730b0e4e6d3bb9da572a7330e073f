@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "35a28c68_fd81c128",
+        "filename": "verity/hash_tree_builder.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-07-19T06:38:04Z",
+      "side": 1,
+      "message": "Just noticed a regression in this change: this is different from the original form of \"(uint64_t)verity_blocks * kBlockSize\".",
+      "range": {
+        "startLine": 54,
+        "startChar": 9,
+        "endLine": 54,
+        "endChar": 36
+      },
+      "revId": "b72fdb551c5730b0e4e6d3bb9da572a7330e073f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
