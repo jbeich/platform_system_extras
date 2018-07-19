@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bbbc57c9_e1e2d78e",
+        "filename": "verity/Android.bp",
+        "patchSetId": 11
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-07-19T16:19:58Z",
+      "side": 1,
+      "message": "indentation\n\n(run bpfmt)",
+      "range": {
+        "startLine": 90,
+        "startChar": 4,
+        "endLine": 90,
+        "endChar": 6
+      },
+      "revId": "9a7a8df47dc8e772e2ddfbfda71060c5f1128bf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "528328c0_5ce260ee",
+        "filename": "verity/build_verity_tree_test.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-07-19T16:19:58Z",
+      "side": 1,
+      "message": "order",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 24
+      },
+      "revId": "9a7a8df47dc8e772e2ddfbfda71060c5f1128bf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3629eb54_e44f24b7",
+        "filename": "verity/build_verity_tree_test.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-07-19T16:19:58Z",
+      "side": 1,
+      "message": "This looks like a const (or static const) semantics to me, since salt_hex doesn\u0027t get used / modified like a member variable.",
+      "range": {
+        "startLine": 33,
+        "startChar": 4,
+        "endLine": 36,
+        "endChar": 64
+      },
+      "revId": "9a7a8df47dc8e772e2ddfbfda71060c5f1128bf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a68e8043_19370e7e",
+        "filename": "verity/build_verity_tree_test.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-07-19T16:19:58Z",
+      "side": 1,
+      "message": "GenerateHashTree",
+      "range": {
+        "startLine": 48,
+        "startChar": 7,
+        "endLine": 48,
+        "endChar": 25
+      },
+      "revId": "9a7a8df47dc8e772e2ddfbfda71060c5f1128bf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cb8fd6b8_592d5958",
+        "filename": "verity/build_verity_tree_test.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-07-19T16:19:58Z",
+      "side": 1,
+      "message": "no op",
+      "range": {
+        "startLine": 56,
+        "startChar": 42,
+        "endLine": 56,
+        "endChar": 51
+      },
+      "revId": "9a7a8df47dc8e772e2ddfbfda71060c5f1128bf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f993de24_5ef68486",
+        "filename": "verity/build_verity_tree_test.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-07-19T16:19:58Z",
+      "side": 1,
+      "message": "Builder",
+      "range": {
+        "startLine": 70,
+        "startChar": 38,
+        "endLine": 70,
+        "endChar": 44
+      },
+      "revId": "9a7a8df47dc8e772e2ddfbfda71060c5f1128bf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ead497d2_266d228d",
+        "filename": "verity/build_verity_tree_test.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-07-19T16:19:58Z",
+      "side": 1,
+      "message": "std::fill_n",
+      "range": {
+        "startLine": 114,
+        "startChar": 4,
+        "endLine": 115,
+        "endChar": 58
+      },
+      "revId": "9a7a8df47dc8e772e2ddfbfda71060c5f1128bf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a31087d2_133f9a46",
+        "filename": "verity/build_verity_tree_test.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-07-19T16:19:58Z",
+      "side": 1,
+      "message": "\u003calgorithm\u003e",
+      "range": {
+        "startLine": 123,
+        "startChar": 8,
+        "endLine": 123,
+        "endChar": 16
+      },
+      "revId": "9a7a8df47dc8e772e2ddfbfda71060c5f1128bf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
