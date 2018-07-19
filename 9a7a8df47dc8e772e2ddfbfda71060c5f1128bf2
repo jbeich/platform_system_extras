@@ -25,6 +25,29 @@
     },
     {
       "key": {
+        "uuid": "1cd3fd17_b1cf079a",
+        "filename": "verity/Android.bp",
+        "patchSetId": 11
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1079733
+      },
+      "writtenOn": "2018-07-19T21:51:06Z",
+      "side": 1,
+      "message": "Can we run the test on device too?",
+      "range": {
+        "startLine": 117,
+        "startChar": 0,
+        "endLine": 117,
+        "endChar": 12
+      },
+      "revId": "9a7a8df47dc8e772e2ddfbfda71060c5f1128bf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "528328c0_5ce260ee",
         "filename": "verity/build_verity_tree_test.cpp",
         "patchSetId": 11
@@ -110,6 +133,29 @@
         "startChar": 42,
         "endLine": 56,
         "endChar": 51
+      },
+      "revId": "9a7a8df47dc8e772e2ddfbfda71060c5f1128bf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5daa86d1_3d87198c",
+        "filename": "verity/build_verity_tree_test.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1079733
+      },
+      "writtenOn": "2018-07-19T21:51:06Z",
+      "side": 1,
+      "message": "Why not just\nHashTreeBuilder builder_{4096};",
+      "range": {
+        "startLine": 56,
+        "startChar": 2,
+        "endLine": 56,
+        "endChar": 52
       },
       "revId": "9a7a8df47dc8e772e2ddfbfda71060c5f1128bf2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
