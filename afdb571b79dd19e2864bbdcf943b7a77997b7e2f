@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0d63b83d_5663e145",
+        "filename": "perfprofd/perfprofd_perf.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-07-20T00:41:57Z",
+      "side": 1,
+      "message": ".get() isn\u0027t needed, because unique_fd can convert to int automatically.",
+      "range": {
+        "startLine": 242,
+        "startChar": 17,
+        "endLine": 242,
+        "endChar": 20
+      },
+      "revId": "afdb571b79dd19e2864bbdcf943b7a77997b7e2f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "827de428_47c0544f",
+        "filename": "perfprofd/perfprofd_perf.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-07-20T00:41:57Z",
+      "side": 1,
+      "message": "android::base::ReadFdToString()?",
+      "range": {
+        "startLine": 260,
+        "startChar": 41,
+        "endLine": 260,
+        "endChar": 45
+      },
+      "revId": "afdb571b79dd19e2864bbdcf943b7a77997b7e2f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
