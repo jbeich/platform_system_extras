@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "9be7116c_4437e705",
+        "filename": "verity/Android.bp",
+        "patchSetId": 11
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2018-07-20T00:20:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bbbc57c9_e1e2d78e",
+      "range": {
+        "startLine": 90,
+        "startChar": 4,
+        "endLine": 90,
+        "endChar": 6
+      },
+      "revId": "9a7a8df47dc8e772e2ddfbfda71060c5f1128bf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1cd3fd17_b1cf079a",
         "filename": "verity/Android.bp",
         "patchSetId": 11
@@ -71,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "77368b4a_96e6a563",
+        "filename": "verity/build_verity_tree_test.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2018-07-20T00:20:18Z",
+      "side": 1,
+      "message": "done. I wrongly thought it should be put at the top.",
+      "parentUuid": "528328c0_5ce260ee",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 24
+      },
+      "revId": "9a7a8df47dc8e772e2ddfbfda71060c5f1128bf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3629eb54_e44f24b7",
         "filename": "verity/build_verity_tree_test.cpp",
         "patchSetId": 11
@@ -94,6 +142,30 @@
     },
     {
       "key": {
+        "uuid": "efc10d73_bb5d9ad6",
+        "filename": "verity/build_verity_tree_test.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2018-07-20T00:20:18Z",
+      "side": 1,
+      "message": "Extract out the constant, the member variable helps to build the function parameter.",
+      "parentUuid": "3629eb54_e44f24b7",
+      "range": {
+        "startLine": 33,
+        "startChar": 4,
+        "endLine": 36,
+        "endChar": 64
+      },
+      "revId": "9a7a8df47dc8e772e2ddfbfda71060c5f1128bf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a68e8043_19370e7e",
         "filename": "verity/build_verity_tree_test.cpp",
         "patchSetId": 11
@@ -114,6 +186,30 @@
       "revId": "9a7a8df47dc8e772e2ddfbfda71060c5f1128bf2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fa78222f_4ea31bd0",
+        "filename": "verity/build_verity_tree_test.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2018-07-20T00:20:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a68e8043_19370e7e",
+      "range": {
+        "startLine": 48,
+        "startChar": 7,
+        "endLine": 48,
+        "endChar": 25
+      },
+      "revId": "9a7a8df47dc8e772e2ddfbfda71060c5f1128bf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -163,6 +259,54 @@
     },
     {
       "key": {
+        "uuid": "aea827ac_6829afc0",
+        "filename": "verity/build_verity_tree_test.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2018-07-20T00:20:18Z",
+      "side": 1,
+      "message": "With the pointer, we have the ability to reset the builder to use SHA1 in the unittests.",
+      "parentUuid": "5daa86d1_3d87198c",
+      "range": {
+        "startLine": 56,
+        "startChar": 2,
+        "endLine": 56,
+        "endChar": 52
+      },
+      "revId": "9a7a8df47dc8e772e2ddfbfda71060c5f1128bf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b8342ffa_6ad1e4b7",
+        "filename": "verity/build_verity_tree_test.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2018-07-20T00:20:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cb8fd6b8_592d5958",
+      "range": {
+        "startLine": 56,
+        "startChar": 42,
+        "endLine": 56,
+        "endChar": 51
+      },
+      "revId": "9a7a8df47dc8e772e2ddfbfda71060c5f1128bf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f993de24_5ef68486",
         "filename": "verity/build_verity_tree_test.cpp",
         "patchSetId": 11
@@ -183,6 +327,30 @@
       "revId": "9a7a8df47dc8e772e2ddfbfda71060c5f1128bf2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5a64cdb2_e3363d41",
+        "filename": "verity/build_verity_tree_test.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2018-07-20T00:20:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f993de24_5ef68486",
+      "range": {
+        "startLine": 70,
+        "startChar": 38,
+        "endLine": 70,
+        "endChar": 44
+      },
+      "revId": "9a7a8df47dc8e772e2ddfbfda71060c5f1128bf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -209,6 +377,30 @@
     },
     {
       "key": {
+        "uuid": "67eb5a22_3fb1cfc9",
+        "filename": "verity/build_verity_tree_test.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2018-07-20T00:20:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ead497d2_266d228d",
+      "range": {
+        "startLine": 114,
+        "startChar": 4,
+        "endLine": 115,
+        "endChar": 58
+      },
+      "revId": "9a7a8df47dc8e772e2ddfbfda71060c5f1128bf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a31087d2_133f9a46",
         "filename": "verity/build_verity_tree_test.cpp",
         "patchSetId": 11
@@ -229,6 +421,30 @@
       "revId": "9a7a8df47dc8e772e2ddfbfda71060c5f1128bf2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "49a6fee8_43715f5b",
+        "filename": "verity/build_verity_tree_test.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2018-07-20T00:20:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a31087d2_133f9a46",
+      "range": {
+        "startLine": 123,
+        "startChar": 8,
+        "endLine": 123,
+        "endChar": 16
+      },
+      "revId": "9a7a8df47dc8e772e2ddfbfda71060c5f1128bf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
