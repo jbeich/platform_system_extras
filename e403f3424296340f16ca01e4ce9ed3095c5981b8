@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c34c431f_0e9bfac2",
+        "filename": "verity/verity_verifier.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-07-23T21:39:37Z",
+      "side": 1,
+      "message": "argv[1]?",
+      "range": {
+        "startLine": 91,
+        "startChar": 17,
+        "endLine": 91,
+        "endChar": 24
+      },
+      "revId": "e403f3424296340f16ca01e4ce9ed3095c5981b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0e85e5dc_15fc1ae6",
+        "filename": "verity/verity_verifier.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-07-23T21:39:37Z",
+      "side": 1,
+      "message": "sparse_file_import_auto is supposed to work with unsparsed image already. Or is this \"verity_fs.img\" generated differently?",
+      "range": {
+        "startLine": 100,
+        "startChar": 31,
+        "endLine": 100,
+        "endChar": 54
+      },
+      "revId": "e403f3424296340f16ca01e4ce9ed3095c5981b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
