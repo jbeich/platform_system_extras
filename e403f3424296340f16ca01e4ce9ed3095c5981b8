@@ -93,6 +93,30 @@
       "revId": "e403f3424296340f16ca01e4ce9ed3095c5981b8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "11d7a6f3_7288be97",
+        "filename": "verity/verity_verifier.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1108565
+      },
+      "writtenOn": "2018-07-23T21:59:57Z",
+      "side": 1,
+      "message": "it did work on the new image without FEC, (I\u0027m sure I missed something in fec image too which I blamed on the sparse image).\"\nWill abandon this now.",
+      "parentUuid": "e146d6a8_2941309f",
+      "range": {
+        "startLine": 100,
+        "startChar": 31,
+        "endLine": 100,
+        "endChar": 54
+      },
+      "revId": "e403f3424296340f16ca01e4ce9ed3095c5981b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
