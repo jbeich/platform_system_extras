@@ -72,35 +72,47 @@ static int verify_table(const char* key_path, const uint8_t* signature, size_t s
 }
 
 int main(int argc, char* argv[]) {
-  if (argc != 4 || strcmp(argv[2], "-mincrypt") != 0) {
-    printf("Usage: %s <image> -mincrypt <verity_key>\n"
+  if (argc < 4 || strcmp(argv[2], "-mincrypt") != 0) {
+    printf("Usage: %s <image> -mincrypt <verity_key> [-u]\n"
            "  image       the image file (raw or sparse image) to be verified\n"
-           "  verity_key  the verity key in mincrypt format (/verity_key on device)\n", argv[0]);
+           "  verity_key  the verity key in mincrypt format (/verity_key on device)\n"
+           "  [-u]        use if the image file is unsparsed\n", argv[0]);
     return 2;
   }
 
-  // Get the raw image.
-  android::base::unique_fd fd(open(argv[1], O_RDONLY));
-  if (!fd) {
-    fprintf(stderr, "failed to open %s: %s\n", argv[1], strerror(errno));
-    return 1;
-  }
-
-  struct sparse_file* file = sparse_file_import_auto(fd, false, false);
-  if (file == nullptr) {
-    fprintf(stderr, "failed to read file %s\n", argv[1]);
-    return 1;
+  bool unsparsed = false;
+  if (argc == 5 && strcmp(argv[4], "-u")) {
+    unsparsed = true;
   }
 
   TemporaryFile tf;
-  if (sparse_file_write(file, tf.fd, false, false, false) < 0) {
-    fprintf(stderr, "failed to write output file\n");
-    return 1;
+  const char* input_file = nullptr;
+  if (unsparsed) {
+    input_file = argv[0];
+  } else {
+    // Get the raw image.
+    android::base::unique_fd fd(open(argv[1], O_RDONLY));
+    if (!fd) {
+      fprintf(stderr, "failed to open %s: %s\n", argv[1], strerror(errno));
+      return 1;
+    }
+
+    struct sparse_file* file = sparse_file_import_auto(fd, false, false);
+    if (file == nullptr) {
+      fprintf(stderr, "failed to read file %s\n", argv[1]);
+      return 1;
+    }
+
+    if (sparse_file_write(file, tf.fd, false, false, false) < 0) {
+      fprintf(stderr, "failed to write output file\n");
+      return 1;
+    }
+    sparse_file_destroy(file);
+    input_file = tf.path;
   }
-  sparse_file_destroy(file);
 
   // Verify.
-  fec::io input(tf.path);
+  fec::io input(input_file);
   if (!input) {
     return 1;
   }
