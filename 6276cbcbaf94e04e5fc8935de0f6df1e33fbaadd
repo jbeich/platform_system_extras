@@ -22,6 +22,30 @@
       "revId": "6276cbcbaf94e04e5fc8935de0f6df1e33fbaadd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "53a6f422_96c81c71",
+        "filename": "simpleperf/dso_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-07-23T17:51:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1043df7e_2690dbaa",
+      "range": {
+        "startLine": 72,
+        "startChar": 2,
+        "endLine": 72,
+        "endChar": 33
+      },
+      "revId": "6276cbcbaf94e04e5fc8935de0f6df1e33fbaadd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
