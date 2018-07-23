@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7edfc644_938175e2",
+        "filename": "squashfs_utils/squashfs_utils.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2018-07-23T20:46:43Z",
+      "side": 1,
+      "message": "Functionally correct. What about replacing it all with KISS:\n\ninfo-\u003ebytes_used_4K_padding \u003d (sb-\u003ebytes_used + 4096 - 1) \u0026 -4096;",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 60,
+        "endChar": 64
+      },
+      "revId": "55eb280f0e1f14b73f4afe9e32cc811b7be345f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
