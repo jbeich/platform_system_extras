@@ -46,6 +46,30 @@
       "revId": "9fdc66fb3c24b2e46fa0cbc16cf64baccb4daadf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5c7112f2_d16e567e",
+        "filename": "verity/hash_tree_builder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-07-24T22:45:22Z",
+      "side": 1,
+      "message": "// BN_hex2bn parses the leading hex number from |in|, which may be proceeded by\n// a \u0027-\u0027 to indicate a negative number and may contain trailing, non-hex data.\n// If |outp| is not NULL, it constructs a BIGNUM equal to the hex number and\n// stores it in |*outp|. If |*outp| is NULL then it allocates a new BIGNUM and\n// updates |*outp|. It returns the number of bytes of |in| processed or zero on\n// error.\nOPENSSL_EXPORT int BN_hex2bn(BIGNUM **outp, const char *in);",
+      "parentUuid": "55ffb63c_e0dfcec9",
+      "range": {
+        "startLine": 78,
+        "startChar": 2,
+        "endLine": 78,
+        "endChar": 12
+      },
+      "revId": "9fdc66fb3c24b2e46fa0cbc16cf64baccb4daadf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
