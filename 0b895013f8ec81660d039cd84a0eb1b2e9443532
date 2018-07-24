@@ -39,6 +39,24 @@
       "revId": "0b895013f8ec81660d039cd84a0eb1b2e9443532",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "96af54f7_e327495f",
+        "filename": "verity/hash_tree_builder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2018-07-24T18:45:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a8dc5ca_7751aeca",
+      "revId": "0b895013f8ec81660d039cd84a0eb1b2e9443532",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
