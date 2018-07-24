@@ -272,4 +272,21 @@ bool OfflineUnwinder::UnwindCallChain(const ThreadEntry& thread, const RegSet& r
   return true;
 }
 
+bool GetGnuDebugdataFromUnwinder(const std::string& filename, uint64_t file_offset,
+                                 char** gnu_debugdata, size_t* gnu_debugdata_size) {
+  if (unwindstack::Elf::CachingEnabled() && !filename.empty()) {
+    unwindstack::MapInfo info(0, 0, file_offset, 0, filename);
+    if (unwindstack::Elf::CacheGet(&info)) {
+      unwindstack::ElfInterface* interface = info.elf->gnu_debugdata_interface();
+      if (interface != nullptr) {
+        auto memory = static_cast<unwindstack::MemoryBuffer*>(interface->memory());
+        *gnu_debugdata = reinterpret_cast<char*>(memory->GetPtr(0));
+        *gnu_debugdata_size = memory->Size();
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
 }  // namespace simpleperf

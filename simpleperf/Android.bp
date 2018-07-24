@@ -54,6 +54,7 @@ cc_library_static {
     // TODO: fix or workaround this.
     cflags: [
         "-DSIMPLEPERF_REVISION=\"dummy\"",
+        "-DREAD_ELF_LIB",
     ],
 
     static_libs: [

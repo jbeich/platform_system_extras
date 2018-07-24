@@ -373,8 +373,36 @@ void CheckSymbolSections(const llvm::object::ELFObjectFile<ELFT>* elf,
   }
 }
 
+namespace simpleperf {
+#if defined(__linux__) && !defined(READ_ELF_LIB)
+bool GetGnuDebugdataFromUnwinder(const std::string& filename, uint64_t file_offset,
+                                 char** gnu_debugdata, size_t* gnu_debugdata_size);
+#else
+static inline bool GetGnuDebugdataFromUnwinder(const std::string&, uint64_t, char**, size_t*) {
+  return false;
+}
+#endif
+}  // namespace simpleperf
+
 template <class ELFT>
-ElfStatus ParseSymbolsFromELFFile(const llvm::object::ELFObjectFile<ELFT>* elf,
+static bool GetGnuDebugdataFromELFFile(const llvm::object::ELFObjectFile<ELFT>* elf,
+                                       char** gnu_debugdata, size_t* gnu_debugdata_size,
+                                       std::string* buffer) {
+  std::string debugdata;
+  ElfStatus result = ReadSectionFromELFFile(elf, ".gnu_debugdata", &debugdata);
+  if (result == ElfStatus::NO_ERROR) {
+    if (XzDecompress(debugdata, buffer)) {
+      *gnu_debugdata = &(*buffer)[0];
+      *gnu_debugdata_size = buffer->size();
+      return true;
+    }
+  }
+  return false;
+}
+
+template <class ELFT>
+ElfStatus ParseSymbolsFromELFFile(const std::string& filename, uint64_t file_offset,
+                                  const llvm::object::ELFObjectFile<ELFT>* elf,
                                   const std::function<void(const ElfFileSymbol&)>& callback) {
   auto machine = elf->getELFFile()->getHeader()->e_machine;
   bool is_arm = (machine == llvm::ELF::EM_ARM || machine == llvm::ELF::EM_AARCH64);
@@ -391,25 +419,23 @@ ElfStatus ParseSymbolsFromELFFile(const llvm::object::ELFObjectFile<ELFT>* elf,
       elf->dynamic_symbol_begin()->getRawDataRefImpl() != llvm::object::DataRefImpl()) {
     ReadSymbolTable(elf->dynamic_symbol_begin(), elf->dynamic_symbol_end(), callback, is_arm);
   }
-  std::string debugdata;
-  ElfStatus result = ReadSectionFromELFFile(elf, ".gnu_debugdata", &debugdata);
-  if (result == ElfStatus::SECTION_NOT_FOUND) {
+  char* gnu_debugdata;
+  size_t gnu_debugdata_size;
+  std::string buffer;
+  if (!simpleperf::GetGnuDebugdataFromUnwinder(filename, file_offset, &gnu_debugdata,
+                                               &gnu_debugdata_size) &&
+      !GetGnuDebugdataFromELFFile(elf, &gnu_debugdata, &gnu_debugdata_size, &buffer)) {
     return ElfStatus::NO_SYMBOL_TABLE;
-  } else if (result == ElfStatus::NO_ERROR) {
-    std::string decompressed_data;
-    if (XzDecompress(debugdata, &decompressed_data)) {
-      BinaryWrapper wrapper;
-      result = OpenObjectFileInMemory(decompressed_data.data(), decompressed_data.size(),
-                                      &wrapper);
-      if (result == ElfStatus::NO_ERROR) {
-        if (auto elf = llvm::dyn_cast<llvm::object::ELF32LEObjectFile>(wrapper.obj)) {
-          return ParseSymbolsFromELFFile(elf, callback);
-        } else if (auto elf = llvm::dyn_cast<llvm::object::ELF64LEObjectFile>(wrapper.obj)) {
-          return ParseSymbolsFromELFFile(elf, callback);
-        } else {
-          return ElfStatus::FILE_MALFORMED;
-        }
-      }
+  }
+  BinaryWrapper wrapper;
+  ElfStatus result = OpenObjectFileInMemory(gnu_debugdata, gnu_debugdata_size, &wrapper);
+  if (result == ElfStatus::NO_ERROR) {
+    if (auto elf = llvm::dyn_cast<llvm::object::ELF32LEObjectFile>(wrapper.obj)) {
+      return ParseSymbolsFromELFFile("", 0, elf, callback);
+    } else if (auto elf = llvm::dyn_cast<llvm::object::ELF64LEObjectFile>(wrapper.obj)) {
+      return ParseSymbolsFromELFFile("", 0, elf, callback);
+    } else {
+      return ElfStatus::FILE_MALFORMED;
     }
   }
   return result;
@@ -453,9 +479,9 @@ ElfStatus ParseSymbolsFromEmbeddedElfFile(const std::string& filename, uint64_t 
     return result;
   }
   if (auto elf = llvm::dyn_cast<llvm::object::ELF32LEObjectFile>(wrapper.obj)) {
-    return ParseSymbolsFromELFFile(elf, callback);
+    return ParseSymbolsFromELFFile(filename, file_offset, elf, callback);
   } else if (auto elf = llvm::dyn_cast<llvm::object::ELF64LEObjectFile>(wrapper.obj)) {
-    return ParseSymbolsFromELFFile(elf, callback);
+    return ParseSymbolsFromELFFile(filename, file_offset, elf, callback);
   }
   return ElfStatus::FILE_MALFORMED;
 }
@@ -468,9 +494,9 @@ ElfStatus ParseSymbolsFromElfFileInMemory(const char* data, size_t size,
     return result;
   }
   if (auto elf = llvm::dyn_cast<llvm::object::ELF32LEObjectFile>(wrapper.obj)) {
-    return ParseSymbolsFromELFFile(elf, callback);
+    return ParseSymbolsFromELFFile("", 0, elf, callback);
   } else if (auto elf = llvm::dyn_cast<llvm::object::ELF64LEObjectFile>(wrapper.obj)) {
-    return ParseSymbolsFromELFFile(elf, callback);
+    return ParseSymbolsFromELFFile("", 0, elf, callback);
   }
   return ElfStatus::FILE_MALFORMED;
 }
