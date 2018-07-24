@@ -118,6 +118,30 @@
       "revId": "9fdc66fb3c24b2e46fa0cbc16cf64baccb4daadf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "71fd088c_ba5091fc",
+        "filename": "verity/hash_tree_builder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1079733
+      },
+      "writtenOn": "2018-07-24T23:59:56Z",
+      "side": 1,
+      "message": "Using BIGNUM for this still seems weird to me, not sure if this can depend on libchrome, but if yes then you can just use base::HexStringToBytes()",
+      "parentUuid": "154e7c42_68dcba21",
+      "range": {
+        "startLine": 78,
+        "startChar": 2,
+        "endLine": 78,
+        "endChar": 12
+      },
+      "revId": "9fdc66fb3c24b2e46fa0cbc16cf64baccb4daadf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
