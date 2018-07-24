@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e39b16f9_081fa8bf",
+        "filename": "simpleperf/scripts/report_html.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 918,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2018-07-24T22:10:33Z",
+      "side": 1,
+      "message": "Do you want to use `fnmatch.fnmatch` for this? It\u0027ll allow the user to do things like `--binary_filter\u003dlib*.so`.",
+      "revId": "b90c178d49805e8218d0a0d4f7304dc1f666d04b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
