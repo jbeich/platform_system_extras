@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b20da29b_d0c5a65c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1079733
+      },
+      "writtenOn": "2018-07-24T18:03:15Z",
+      "side": 1,
+      "message": "If in the future the hash tree switch to another algorithm, then we add support for that here it would be too late, because for A/B the source won\u0027t be supporting this. That\u0027s why I would like as many algorithms supported here as possible, basically anything supported by boringssl and stronger than SHA1.",
+      "range": {
+        "startLine": 11,
+        "startChar": 58,
+        "endLine": 12,
+        "endChar": 46
+      },
+      "revId": "0b895013f8ec81660d039cd84a0eb1b2e9443532",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7a8dc5ca_7751aeca",
+        "filename": "verity/hash_tree_builder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1079733
+      },
+      "writtenOn": "2018-07-24T18:03:15Z",
+      "side": 1,
+      "message": "Also add sha384? Don\u0027t think it\u0027s used anywhere now, but I can\u0027t predict the future.",
+      "revId": "0b895013f8ec81660d039cd84a0eb1b2e9443532",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
