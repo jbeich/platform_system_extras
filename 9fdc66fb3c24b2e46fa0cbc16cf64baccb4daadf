@@ -94,6 +94,30 @@
       "revId": "9fdc66fb3c24b2e46fa0cbc16cf64baccb4daadf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "154e7c42_68dcba21",
+        "filename": "verity/hash_tree_builder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-07-24T23:18:39Z",
+      "side": 1,
+      "message": "Sorry I was misleading. I initially thought managing \u0027bn\u0027 in the caller (i.e. this function) based on that function comment, but realized it needs to be allocated via BN_new(). Putting bn in a std::unique_ptr\u003cBIGNUM\u003e would also look bad, as BN_hex2bn() expects BIGNUM**. Maybe PS4 is the one to go.",
+      "parentUuid": "053bccd0_416da890",
+      "range": {
+        "startLine": 78,
+        "startChar": 2,
+        "endLine": 78,
+        "endChar": 12
+      },
+      "revId": "9fdc66fb3c24b2e46fa0cbc16cf64baccb4daadf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
