@@ -216,7 +216,7 @@ void GetKernelAndModuleMmaps(KernelMmap* kernel_mmap, std::vector<KernelMmap>* m
 
 static bool ReadThreadNameAndPid(pid_t tid, std::string* comm, pid_t* pid) {
   android::procinfo::ProcessInfo procinfo;
-  if (!android::procinfo::GetProcessInfo(tid, &procinfo)) {
+  if (!android::procinfo::GetProcessInfo(tid, &procinfo, false)) {
     return false;
   }
   if (comm != nullptr) {
@@ -230,7 +230,7 @@ static bool ReadThreadNameAndPid(pid_t tid, std::string* comm, pid_t* pid) {
 
 std::vector<pid_t> GetThreadsInProcess(pid_t pid) {
   std::vector<pid_t> result;
-  android::procinfo::GetProcessTids(pid, &result);
+  android::procinfo::GetProcessTids(pid, &result, false);
   return result;
 }
 
