@@ -46,9 +46,11 @@ static bool OpenDexFiles(void* addr, uint64_t size, std::vector<uint64_t> dex_fi
     }
     art::DexFileLoader loader;
     std::string error;
-    std::unique_ptr<const art::DexFile> dex_file = loader.Open(reinterpret_cast<uint8_t*>(header),
-                                                               header->file_size_, "", 0, nullptr,
-                                                               false, false, &error);
+    std::unique_ptr<const art::DexFile> dex_file =
+        loader.Open(
+            std::make_unique<art::NonOwningDexFileContainer>(reinterpret_cast<uint8_t*>(header),
+                                                             header->file_size_),
+            "", 0, nullptr, false, false, &error);
     if (!dex_file) {
       result = false;
       break;
