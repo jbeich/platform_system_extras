@@ -16,6 +16,24 @@
       "revId": "b90c178d49805e8218d0a0d4f7304dc1f666d04b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a0282bf6_7a39444f",
+        "filename": "simpleperf/scripts/report_html.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 918,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-07-25T00:36:17Z",
+      "side": 1,
+      "message": "No. Because I think most times it shouldn\u0027t be more than several libs, so no need to use regex.\nAdditionally, lib_name is a full path, like /system/lib/libc.so. I\u0027d like user to select it by typing libc.so, but it needs to be *libc.so when using regex.",
+      "parentUuid": "e39b16f9_081fa8bf",
+      "revId": "b90c178d49805e8218d0a0d4f7304dc1f666d04b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
