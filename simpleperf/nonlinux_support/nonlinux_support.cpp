@@ -21,22 +21,17 @@
 #include "environment.h"
 #include "OfflineUnwinder.h"
 
-namespace simpleperf {
-OfflineUnwinder::OfflineUnwinder(bool collect_stat) : collect_stat_(collect_stat) {
-}
-
-bool OfflineUnwinder::UnwindCallChain(const ThreadEntry&, const RegSet&, const char*, size_t,
-                     std::vector<uint64_t>*, std::vector<uint64_t>*) {
-  return false;
-}
-}  // namespace simpleperf
-
 bool GetKernelBuildId(BuildId*) {
   return false;
 }
 
 bool CanRecordRawData() {
   return false;
+}
+
+bool ReadSymbolsFromDexFileInMemory(void*, uint64_t, const std::vector<uint64_t>&,
+                                    std::vector<DexFileSymbol>*) {
+  return true;
 }
 
 bool ReadSymbolsFromDexFile(const std::string&, const std::vector<uint64_t>&,

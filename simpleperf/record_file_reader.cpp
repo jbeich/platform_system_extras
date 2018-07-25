@@ -206,9 +206,9 @@ bool RecordFileReader::ReadIdsForAttr(const FileAttr& attr, std::vector<uint64_t
 }
 
 bool RecordFileReader::ReadDataSection(
-    const std::function<bool(std::unique_ptr<Record>)>& callback, bool sorted) {
+    const std::function<bool(std::unique_ptr<Record>)>& callback) {
   std::unique_ptr<Record> record;
-  while (ReadRecord(record, sorted)) {
+  while (ReadRecord(record)) {
     if (record == nullptr) {
       return true;
     }
@@ -219,52 +219,22 @@ bool RecordFileReader::ReadDataSection(
   return false;
 }
 
-bool RecordFileReader::ReadRecord(std::unique_ptr<Record>& record,
-                                  bool sorted) {
+bool RecordFileReader::ReadRecord(std::unique_ptr<Record>& record) {
   if (read_record_size_ == 0) {
     if (fseek(record_fp_, header_.data.offset, SEEK_SET) != 0) {
       PLOG(ERROR) << "fseek() failed";
       return false;
     }
-    bool has_timestamp = true;
-    for (const auto& attr : file_attrs_) {
-      if (!IsTimestampSupported(attr.attr)) {
-        has_timestamp = false;
-        break;
-      }
-    }
-    record_cache_.reset(new RecordCache(has_timestamp));
   }
   record = nullptr;
-  while (read_record_size_ < header_.data.size && record == nullptr) {
+  if (read_record_size_ < header_.data.size) {
     record = ReadRecord(&read_record_size_);
     if (record == nullptr) {
       return false;
     }
     if (record->type() == SIMPLE_PERF_RECORD_EVENT_ID) {
       ProcessEventIdRecord(*static_cast<EventIdRecord*>(record.get()));
-    } else if (record->type() == PERF_RECORD_SAMPLE) {
-      SampleRecord* r = static_cast<SampleRecord*>(record.get());
-      // Although we have removed ip == 0 callchains when recording dwarf based callgraph,
-      // stack frame based callgraph can also generate ip == 0 callchains. Remove them here
-      // to avoid caller's effort.
-      if (r->sample_type & PERF_SAMPLE_CALLCHAIN) {
-        size_t i;
-        for (i = 0; i < r->callchain_data.ip_nr; ++i) {
-          if (r->callchain_data.ips[i] == 0) {
-            break;
-          }
-        }
-        r->callchain_data.ip_nr = i;
-      }
     }
-    if (sorted) {
-      record_cache_->Push(std::move(record));
-      record = record_cache_->Pop();
-    }
-  }
-  if (record == nullptr) {
-    record = record_cache_->ForcedPop();
   }
   return true;
 }

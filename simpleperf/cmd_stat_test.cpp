@@ -52,7 +52,28 @@ TEST(stat_cmd, tracepoint_event) {
       StatCmd()->Run({"-a", "-e", "sched:sched_switch", "sleep", "1"})));
 }
 
+TEST(stat_cmd, rN_event) {
+  TEST_REQUIRE_HW_COUNTER();
+  OMIT_TEST_ON_NON_NATIVE_ABIS();
+  size_t event_number;
+  if (GetBuildArch() == ARCH_ARM64 || GetBuildArch() == ARCH_ARM) {
+    // As in D5.10.2 of the ARMv8 manual, ARM defines the event number space for PMU. part of the
+    // space is for common event numbers (which will stay the same for all ARM chips), part of the
+    // space is for implementation defined events. Here 0x08 is a common event for instructions.
+    event_number = 0x08;
+  } else if (GetBuildArch() == ARCH_X86_32 || GetBuildArch() == ARCH_X86_64) {
+    // As in volume 3 chapter 19 of the Intel manual, 0x00c0 is the event number for instruction.
+    event_number = 0x00c0;
+  } else {
+    GTEST_LOG_(INFO) << "Omit arch " << GetBuildArch();
+    return;
+  }
+  std::string event_name = android::base::StringPrintf("r%zx", event_number);
+  ASSERT_TRUE(StatCmd()->Run({"-e", event_name, "sleep", "1"}));
+}
+
 TEST(stat_cmd, event_modifier) {
+  TEST_REQUIRE_HW_COUNTER();
   ASSERT_TRUE(
       StatCmd()->Run({"-e", "cpu-cycles:u,cpu-cycles:k", "sleep", "1"}));
 }
@@ -101,9 +122,14 @@ TEST(stat_cmd, existing_threads) {
   ASSERT_TRUE(StatCmd()->Run({"-t", tid_list, "sleep", "1"}));
 }
 
-TEST(stat_cmd, no_monitored_threads) { ASSERT_FALSE(StatCmd()->Run({""})); }
+TEST(stat_cmd, no_monitored_threads) {
+  ScopedAppPackageName scoped_package_name("");
+  ASSERT_FALSE(StatCmd()->Run({}));
+  ASSERT_FALSE(StatCmd()->Run({""}));
+}
 
 TEST(stat_cmd, group_option) {
+  TEST_REQUIRE_HW_COUNTER();
   ASSERT_TRUE(
       StatCmd()->Run({"--group", "cpu-clock,page-faults", "sleep", "1"}));
   ASSERT_TRUE(StatCmd()->Run({"--group", "cpu-cycles,instructions", "--group",
@@ -112,6 +138,7 @@ TEST(stat_cmd, group_option) {
 }
 
 TEST(stat_cmd, auto_generated_summary) {
+  TEST_REQUIRE_HW_COUNTER();
   TemporaryFile tmp_file;
   ASSERT_TRUE(StatCmd()->Run({"--group", "instructions:u,instructions:k", "-o",
                               tmp_file.path, "sleep", "1"}));
@@ -169,11 +196,8 @@ TEST(stat_cmd, no_modifier_for_clock_events) {
 }
 
 TEST(stat_cmd, handle_SIGHUP) {
-  if (!GetDefaultAppPackageName().empty()) {
-    // See http://b/79495636.
-    GTEST_LOG_(INFO) << "Omit this test in app's context.";
-    return;
-  }
+  // See http://b/79495636.
+  ScopedAppPackageName scoped_package_name("");
   std::thread thread([]() {
     sleep(1);
     kill(getpid(), SIGHUP);
@@ -194,6 +218,7 @@ TEST(stat_cmd, stop_when_no_more_targets) {
 }
 
 TEST(stat_cmd, sample_speed_should_be_zero) {
+  TEST_REQUIRE_HW_COUNTER();
   EventSelectionSet set(true);
   ASSERT_TRUE(set.AddEventType("cpu-cycles"));
   set.AddMonitoredProcesses({getpid()});
@@ -208,6 +233,7 @@ TEST(stat_cmd, sample_speed_should_be_zero) {
 }
 
 TEST(stat_cmd, calculating_cpu_frequency) {
+  TEST_REQUIRE_HW_COUNTER();
   CaptureStdout capture;
   ASSERT_TRUE(capture.Start());
   ASSERT_TRUE(StatCmd()->Run({"--csv", "--group", "task-clock,cpu-cycles", "sleep", "1"}));

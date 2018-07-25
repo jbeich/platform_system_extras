@@ -67,6 +67,15 @@ TEST(DebugElfFileFinder, use_vdso) {
   ASSERT_EQ(finder.FindDebugFile("[vdso]", true, build_id), fake_vdso64);
 }
 
+TEST(DebugElfFileFinder, add_symbol_dir) {
+  DebugElfFileFinder finder;
+  ASSERT_FALSE(finder.AddSymbolDir(GetTestDataDir() + "dir_not_exist"));
+  ASSERT_EQ(finder.FindDebugFile("elf", false, CHECK_ELF_FILE_BUILD_ID), "elf");
+  ASSERT_TRUE(finder.AddSymbolDir(GetTestDataDir() + CORRECT_SYMFS_FOR_BUILD_ID_CHECK));
+  ASSERT_EQ(finder.FindDebugFile("elf", false, CHECK_ELF_FILE_BUILD_ID),
+            GetTestDataDir() + CORRECT_SYMFS_FOR_BUILD_ID_CHECK + "/elf_for_build_id_check");
+}
+
 TEST(dso, dex_file_dso) {
 #if defined(__linux__)
   for (DsoType dso_type : {DSO_DEX_FILE, DSO_ELF_FILE}) {
@@ -81,10 +90,24 @@ TEST(dso, dex_file_dso) {
     ASSERT_STREQ(symbol->DemangledName(),
                  "com.example.simpleperf.simpleperfexamplewithnative.MixActivity$1.run");
     ASSERT_EQ(0u, dso->MinVirtualAddress());
+
+    // Don't crash on not exist zip entry.
+    dso = Dso::CreateDso(dso_type, GetTestData("base.zip!/not_exist_entry"));
+    ASSERT_TRUE(dso);
+    ASSERT_EQ(nullptr, dso->FindSymbol(0));
   }
 #else
   GTEST_LOG_(INFO) << "This test only runs on linux because of libdexfile";
 #endif  // defined(__linux__)
+}
+
+TEST(dso, dex_file_offsets) {
+  std::unique_ptr<Dso> dso = Dso::CreateDso(DSO_DEX_FILE, "");
+  ASSERT_TRUE(dso);
+  for (uint64_t offset : {0x3, 0x1, 0x5, 0x4, 0x2, 0x4, 0x3}) {
+    dso->AddDexFileOffset(offset);
+  }
+  ASSERT_EQ(*dso->DexFileOffsets(), std::vector<uint64_t>({0x1, 0x2, 0x3, 0x4, 0x5}));
 }
 
 TEST(dso, embedded_elf) {

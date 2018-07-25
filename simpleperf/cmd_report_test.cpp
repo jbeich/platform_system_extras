@@ -478,7 +478,7 @@ TEST_F(ReportCommandTest, report_offcpu_time) {
   bool found = false;
   for (auto& line : lines) {
     if (line.find("SleepFunction") != std::string::npos) {
-      ASSERT_NE(line.find("38.77%"), std::string::npos);
+      ASSERT_NE(line.find("38.76%"), std::string::npos);
       found = true;
       break;
     }
@@ -499,6 +499,7 @@ static std::unique_ptr<Command> RecordCmd() {
 }
 
 TEST_F(ReportCommandTest, dwarf_callgraph) {
+  TEST_REQUIRE_HW_COUNTER();
   OMIT_TEST_ON_NON_NATIVE_ABIS();
   ASSERT_TRUE(IsDwarfCallChainSamplingSupported());
   std::vector<std::unique_ptr<Workload>> workloads;
@@ -521,6 +522,7 @@ TEST_F(ReportCommandTest, report_dwarf_callgraph_of_nativelib_in_apk) {
 }
 
 TEST_F(ReportCommandTest, exclude_kernel_callchain) {
+  TEST_REQUIRE_HW_COUNTER();
   TEST_REQUIRE_HOST_ROOT();
   OMIT_TEST_ON_NON_NATIVE_ABIS();
   std::vector<std::unique_ptr<Workload>> workloads;

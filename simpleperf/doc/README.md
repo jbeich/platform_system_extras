@@ -7,8 +7,6 @@ and above.
 
 Simpleperf is part of the Android Open Source Project. The source code is [here](https://android.googlesource.com/platform/system/extras/+/master/simpleperf/).
 The latest document is [here](https://android.googlesource.com/platform/system/extras/+/master/simpleperf/doc/README.md).
-Bugs and feature requests can be submitted at http://github.com/android-ndk/ndk/issues.
-
 
 ## Table of Contents
 
@@ -63,6 +61,7 @@ Bugs and feature requests can be submitted at http://github.com/android-ndk/ndk/
     - [Why we suggest profiling on android >= N devices](#why-we-suggest-profiling-on-android-n-devices)
     - [Suggestions about recording call graphs](#suggestions-about-recording-call-graphs)
     - [How to solve missing symbols in report](#how-to-solve-missing-symbols-in-report)
+- [Bugs and contribution](#bugs-and-contribution)
 
 ## Introduction
 
@@ -981,6 +980,9 @@ $ python app_profiler.py -p com.example.simpleperf.simpleperfexamplewithnative \
 # Record both on CPU time and off CPU time.
 $ python app_profiler.py -p com.example.simpleperf.simpleperfexamplewithnative \
     -r "-e task-clock -g -f 1000 --duration 10 --trace-offcpu"
+
+# Save profiling data in a custom file (like perf_custom.data) instead of perf.data.
+$ python app_profiler.py -p com.example.simpleperf.simpleperfexamplewithnative -o perf_custom.data
 ```
 
 #### Profile from launch of an application
@@ -1241,3 +1243,20 @@ $ python report.py --symfs binary_cache
 $ python report_html.py
 ```
 
+## Bugs and contribution
+
+Bugs and feature requests can be submitted at http://github.com/android-ndk/ndk/issues.
+Patches can be uploaded to android-review.googlesource.com as [here](https://source.android.com/setup/contribute/),
+or sent to email addresses listed [here](https://android.googlesource.com/platform/system/extras/+/master/simpleperf/OWNERS).
+
+If you want to compile simpleperf C++ source code, follow below steps:
+1. Download AOSP master branch as [here](https://source.android.com/setup/build/requirements).
+2. Build simpleperf.
+```sh
+$ . build/envsetup.sh
+$ lunch aosp_arm64-userdebug
+$ mmma system/extras/simpleperf -j30
+```
+
+If built successfully, out/target/product/generic_arm64/system/xbin/simpleperf is for ARM64, and
+out/target/product/generic_arm64/system/xbin/simpleperf32 is for ARM.

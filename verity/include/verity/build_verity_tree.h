@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010 The Android Open Source Project
+ * Copyright (C) 2018 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,20 @@
  * limitations under the License.
  */
 
-int ext4fixup(char *fsdev);
-int ext4fixup_internal(char *fsdev, int v_flag, int n_flag,
-                       int stop_phase, int stop_loc, int stop_count);
+#ifndef __BUILD_VERITY_TREE_H__
+#define __BUILD_VERITY_TREE_H__
 
+#include <inttypes.h>
+
+#include <string>
+#include <vector>
+
+#include "hash_tree_builder.h"
+
+bool generate_verity_tree(const std::string& data_filename,
+                          const std::string& verity_filename,
+                          HashTreeBuilder* hasher,
+                          const std::vector<unsigned char>& salt_content,
+                          size_t block_size, bool sparse, bool verbose);
+
+#endif  // __BUILD_VERITY_TREE_H__

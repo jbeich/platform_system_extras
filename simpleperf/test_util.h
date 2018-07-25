@@ -22,6 +22,7 @@
 #include <android-base/file.h>
 #include <android-base/test_utils.h>
 
+#include "environment.h"
 #include "read_elf.h"
 #include "workload.h"
 
@@ -56,6 +57,15 @@ bool IsInNativeAbi();
   do { \
     if (!IsInNativeAbi()) { \
       GTEST_LOG_(INFO) << "Skip this test as it only runs on native ABIs."; \
+      return; \
+    } \
+  } while (0)
+
+bool HasHardwareCounter();
+#define TEST_REQUIRE_HW_COUNTER() \
+  do { \
+    if (!HasHardwareCounter()) { \
+      GTEST_LOG_(INFO) << "Skip this test as the machine doesn't have hardware PMU counters."; \
       return; \
     } \
   } while (0)
@@ -100,4 +110,19 @@ class CaptureStdout {
   bool started_;
   int old_stdout_;
   std::unique_ptr<TemporaryFile> tmpfile_;
+};
+
+class ScopedAppPackageName {
+ public:
+  ScopedAppPackageName(const std::string name) {
+    saved_name_ = GetDefaultAppPackageName();
+    SetDefaultAppPackageName(name);
+  }
+
+  ~ScopedAppPackageName() {
+    SetDefaultAppPackageName(saved_name_);
+  }
+
+ private:
+  std::string saved_name_;
 };

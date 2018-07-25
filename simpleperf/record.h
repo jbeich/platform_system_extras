@@ -327,6 +327,8 @@ struct CommRecord : public Record {
   CommRecord(const perf_event_attr& attr, uint32_t pid, uint32_t tid,
              const std::string& comm, uint64_t event_id, uint64_t time);
 
+  void SetCommandName(const std::string& name);
+
  protected:
   void DumpData(size_t indent) const override;
 };
@@ -393,32 +395,30 @@ struct SampleRecord : public Record {
   SampleRecord(const perf_event_attr& attr, char* p);
   SampleRecord(const perf_event_attr& attr, uint64_t id, uint64_t ip,
                uint32_t pid, uint32_t tid, uint64_t time, uint32_t cpu,
-               uint64_t period, const std::vector<uint64_t>& ips);
+               uint64_t period, const std::vector<uint64_t>& ips,
+               const std::vector<char>& stack, uint64_t dyn_stack_size);
 
   void ReplaceRegAndStackWithCallChain(const std::vector<uint64_t>& ips);
-  size_t ExcludeKernelCallChain();
+  // Remove kernel callchain, return true if there is a user space callchain left, otherwise
+  // return false.
+  bool ExcludeKernelCallChain();
   bool HasUserCallChain() const;
   void UpdateUserCallChain(const std::vector<uint64_t>& user_ips);
-  void RemoveInvalidStackData();
 
   uint64_t Timestamp() const override;
   uint32_t Cpu() const override;
   uint64_t Id() const override;
 
   uint64_t GetValidStackSize() const {
-    // If stack_user_data.dyn_size == 0, it may be because the kernel misses
-    // the patch to update dyn_size, like in N9 (See b/22612370). So assume
-    // all stack data is valid if dyn_size == 0.
-    if (stack_user_data.dyn_size == 0) {
-      return stack_user_data.size;
-    }
-    return stack_user_data.dyn_size;
+    // Invaid stack data has been removed by RecordReadThread::PushRecordToRecordBuffer().
+    return stack_user_data.size;
   }
 
   void AdjustCallChainGeneratedByKernel();
   std::vector<uint64_t> GetCallChain(size_t* kernel_ip_count) const;
 
  protected:
+  void BuildBinaryWithNewCallChain(uint32_t new_size, const std::vector<uint64_t>& ips);
   void DumpData(size_t indent) const override;
 };
 
@@ -572,54 +572,5 @@ std::vector<std::unique_ptr<Record>> ReadRecordsFromBuffer(
 // Read one record from the buffer pointed by [p]. But the record doesn't
 // own the buffer.
 std::unique_ptr<Record> ReadRecordFromBuffer(const perf_event_attr& attr, char* p);
-
-// RecordCache is a cache used when receiving records from the kernel.
-// It sorts received records based on type and timestamp, and pops records
-// in sorted order. Records from the kernel need to be sorted because
-// records may come from different cpus at the same time, and it is affected
-// by the order in which we collect records from different cpus.
-// RecordCache pushes records and pops sorted record online. It uses two checks
-// to help ensure that records are popped in order. Each time we pop a record A,
-// it is the earliest record among all records in the cache. In addition, we
-// have checks for min_cache_size and min_time_diff. For min_cache_size check,
-// we check if the cache size >= min_cache_size, which is based on the
-// assumption that if we have received (min_cache_size - 1) records after
-// record A, we are not likely to receive a record earlier than A. For
-// min_time_diff check, we check if record A is generated min_time_diff ns
-// earlier than the latest record, which is based on the assumption that if we
-// have received a record for time t, we are not likely to receive a record for
-// time (t - min_time_diff) or earlier.
-class RecordCache {
- public:
-  explicit RecordCache(bool has_timestamp, size_t min_cache_size = 1000u,
-                       uint64_t min_time_diff_in_ns = 1000000u);
-  ~RecordCache();
-  void Push(std::unique_ptr<Record> record);
-  void Push(std::vector<std::unique_ptr<Record>> records);
-  std::unique_ptr<Record> Pop();
-  std::vector<std::unique_ptr<Record>> PopAll();
-  std::unique_ptr<Record> ForcedPop();
-
- private:
-  struct RecordWithSeq {
-    uint32_t seq;
-    Record* record;
-
-    RecordWithSeq(uint32_t seq, Record* record) : seq(seq), record(record) {}
-    bool IsHappensBefore(const RecordWithSeq& other) const;
-  };
-
-  struct RecordComparator {
-    bool operator()(const RecordWithSeq& r1, const RecordWithSeq& r2);
-  };
-
-  bool has_timestamp_;
-  size_t min_cache_size_;
-  uint64_t min_time_diff_in_ns_;
-  uint64_t last_time_;
-  uint32_t cur_seq_;
-  std::priority_queue<RecordWithSeq, std::vector<RecordWithSeq>,
-                      RecordComparator> queue_;
-};
 
 #endif  // SIMPLE_PERF_RECORD_H_

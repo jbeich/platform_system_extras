@@ -21,6 +21,7 @@ import argparse
 import itertools
 import sqlite3
 
+
 class Callsite(object):
     def __init__(self, dso_id, sym_id):
         self.dso_id = dso_id
@@ -66,6 +67,7 @@ class Callsite(object):
     # Functions for flamegraph compatibility.
 
     callsite_counter = 0
+
     @classmethod
     def _get_next_callsite_id(cls):
         cls.callsite_counter += 1
@@ -97,6 +99,7 @@ class Callsite(object):
             return max([c.get_max_depth() for c in self.child_map.itervalues()]) + 1
         return 1
 
+
 class SqliteReader(object):
     def __init__(self):
         self.root = Callsite("root", "root")
@@ -110,7 +113,8 @@ class SqliteReader(object):
     def close(self):
         self._conn.close()
 
-    def read(self, local_threshold_in_percent, global_threshold_in_percent, limit):
+    def read(self, local_threshold_in_percent, global_threshold_in_percent, limit,
+             skip_simpleperf):
         # Read aux tables first, as we need to find the kernel symbols.
         def read_table(name, dest_table):
             self._c.execute('select id, name from %s' % (name))
@@ -133,9 +137,19 @@ class SqliteReader(object):
                 kernel_sym_id = i
                 break
 
+        skip_query_str = ""
+        if skip_simpleperf:
+            self._c.execute('select id from pids where name = "simpleperf"')
+            pid_row = self._c.fetchone()
+            if pid_row:
+                skip_query_join = "as st join samples sa on st.sample_id = sa.id "
+                skip_query_str = skip_query_join + "where sa.pid_id != %d" % (pid_row[0])
+
+        query_prefix = 'select sample_id, depth, dso_id, sym_id from stacks '
+        query_suffix = ' order by sample_id asc, depth desc'
+
         print 'Reading samples'
-        self._c.execute('''select sample_id, depth, dso_id, sym_id from stacks
-                           order by sample_id asc, depth desc''')
+        self._c.execute(query_prefix + skip_query_str + query_suffix)
 
         last_sample_id = None
         chain = None
@@ -154,7 +168,6 @@ class SqliteReader(object):
                     chain = self.root
                 chain = chain.add(row[2], row[3])
                 chain.count = chain.count + 1
-
             count = count + len(rows)
             if limit is not None and count >= limit:
                 print 'Breaking as limit is reached'
@@ -192,9 +205,8 @@ class SqliteReader(object):
                     return script_f.read()
         return None
 
-
     def print_svg(self, filename, depth):
-        from svg_renderer import renderSVG
+        from svg_renderer import render_svg
         self.root.svgrenderer_compat(self.dsos, self.syms)
         self.root.generate_offset(0)
         f = open(filename, 'w')
@@ -208,9 +220,9 @@ class SqliteReader(object):
 
         class FakeProcess:
             def __init__(self):
-                self.props = { 'trace_offcpu': False }
+                self.props = {'trace_offcpu': False}
         fake_process = FakeProcess()
-        renderSVG(fake_process, self.root, f, 'hot')
+        render_svg(fake_process, self.root, f, 'hot')
 
         f.write('''
 </div>
@@ -231,6 +243,7 @@ class SqliteReader(object):
 ''')
         f.close()
 
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='''Translate a perfprofd database into a flame
                                                     representation''')
@@ -243,12 +256,15 @@ if __name__ == "__main__":
                         default=.1)
     parser.add_argument('--depth', help='depth to print to', type=int, default=10)
     parser.add_argument('--limit', help='limit to given number of stack trace entries', type=int)
+    parser.add_argument('--skip-simpleperf', help='skip simpleperf samples', action='store_const',
+                        const=True)
 
     args = parser.parse_args()
     if args is not None:
         sql_out = SqliteReader()
         sql_out.open(args.file)
-        sql_out.read(args.threshold, args.global_threshold, args.limit)
+        sql_out.read(args.threshold, args.global_threshold, args.limit,
+                     args.skip_simpleperf is not None)
         if args.html_out is None:
             sql_out.print_data_ascii(args.depth)
         else:

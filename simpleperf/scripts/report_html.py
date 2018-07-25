@@ -16,15 +16,14 @@
 #
 
 import argparse
+import collections
 import datetime
 import json
 import os
-import subprocess
-import sys
-import tempfile
 
 from simpleperf_report_lib import ReportLib
-from utils import *
+from utils import log_info, log_exit
+from utils import Addr2Nearestline, get_script_dir, Objdump, open_report_in_browser
 
 
 class HtmlWriter(object):
@@ -80,9 +79,23 @@ class EventScope(object):
         result = {}
         result['eventName'] = self.name
         result['eventCount'] = self.event_count
+        processes = sorted(self.processes.values(), key=lambda a: a.event_count, reverse=True)
         result['processes'] = [process.get_sample_info(gen_addr_hit_map)
-                                  for process in self.processes.values()]
+                               for process in processes]
         return result
+
+    @property
+    def threads(self):
+        for process in self.processes.values():
+            for thread in process.threads.values():
+                yield thread
+
+    @property
+    def libraries(self):
+        for process in self.processes.values():
+            for thread in process.threads.values():
+                for lib in thread.libs.values():
+                    yield lib
 
 
 class ProcessScope(object):
@@ -106,8 +119,9 @@ class ProcessScope(object):
         result = {}
         result['pid'] = self.pid
         result['eventCount'] = self.event_count
+        threads = sorted(self.threads.values(), key=lambda a: a.event_count, reverse=True)
         result['threads'] = [thread.get_sample_info(gen_addr_hit_map)
-                                for thread in self.threads.values()]
+                             for thread in threads]
         return result
 
 
@@ -117,14 +131,16 @@ class ThreadScope(object):
         self.tid = tid
         self.name = ''
         self.event_count = 0
+        self.sample_count = 0
         self.libs = {}  # map from lib_id to LibScope
+        self.call_graph = CallNode(-1)
+        self.reverse_call_graph = CallNode(-1)
 
     def add_callstack(self, event_count, callstack, build_addr_hit_map):
         """ callstack is a list of tuple (lib_id, func_id, addr).
             For each i > 0, callstack[i] calls callstack[i-1]."""
         hit_func_ids = set()
-        for i in range(len(callstack)):
-            lib_id, func_id, addr = callstack[i]
+        for i, (lib_id, func_id, addr) in enumerate(callstack):
             # When a callstack contains recursive function, only add for each function once.
             if func_id in hit_func_ids:
                 continue
@@ -134,30 +150,51 @@ class ThreadScope(object):
             if not lib:
                 lib = self.libs[lib_id] = LibScope(lib_id)
             function = lib.get_function(func_id)
+            function.subtree_event_count += event_count
             if i == 0:
                 lib.event_count += event_count
+                function.event_count += event_count
                 function.sample_count += 1
-            function.add_reverse_callchain(callstack, i + 1, len(callstack), event_count)
-
             if build_addr_hit_map:
                 function.build_addr_hit_map(addr, event_count if i == 0 else 0, event_count)
 
-        hit_func_ids.clear()
-        for i in range(len(callstack) - 1, -1, -1):
-            lib_id, func_id, _ = callstack[i]
-            # When a callstack contains recursive function, only add for each function once.
-            if func_id in hit_func_ids:
-                continue
-            hit_func_ids.add(func_id)
-            lib = self.libs.get(lib_id)
-            lib.get_function(func_id).add_callchain(callstack, i - 1, -1, event_count)
+        # build call graph and reverse call graph
+        node = self.call_graph
+        for item in reversed(callstack):
+            node = node.get_child(item[1])
+        node.event_count += event_count
+        node = self.reverse_call_graph
+        for item in callstack:
+            node = node.get_child(item[1])
+        node.event_count += event_count
+
+    def update_subtree_event_count(self):
+        self.call_graph.update_subtree_event_count()
+        self.reverse_call_graph.update_subtree_event_count()
+
+    def limit_percents(self, min_func_limit, min_callchain_percent, hit_func_ids):
+        for lib in self.libs.values():
+            to_del_funcs = []
+            for function in lib.functions.values():
+                if function.subtree_event_count < min_func_limit:
+                    to_del_funcs.append(function.func_id)
+                else:
+                    hit_func_ids.add(function.func_id)
+            for func_id in to_del_funcs:
+                del lib.functions[func_id]
+        min_limit = min_callchain_percent * 0.01 * self.call_graph.subtree_event_count
+        self.call_graph.cut_edge(min_limit, hit_func_ids)
+        self.reverse_call_graph.cut_edge(min_limit, hit_func_ids)
 
     def get_sample_info(self, gen_addr_hit_map):
         result = {}
         result['tid'] = self.tid
         result['eventCount'] = self.event_count
+        result['sampleCount'] = self.sample_count
         result['libs'] = [lib.gen_sample_info(gen_addr_hit_map)
-                            for lib in self.libs.values()]
+                          for lib in self.libs.values()]
+        result['g'] = self.call_graph.gen_sample_info()
+        result['rg'] = self.reverse_call_graph.gen_sample_info()
         return result
 
 
@@ -179,31 +216,20 @@ class LibScope(object):
         result['libId'] = self.lib_id
         result['eventCount'] = self.event_count
         result['functions'] = [func.gen_sample_info(gen_addr_hit_map)
-                                  for func in self.functions.values()]
+                               for func in self.functions.values()]
         return result
 
 
 class FunctionScope(object):
 
     def __init__(self, func_id):
+        self.func_id = func_id
         self.sample_count = 0
-        self.call_graph = CallNode(func_id)
-        self.reverse_call_graph = CallNode(func_id)
+        self.event_count = 0
+        self.subtree_event_count = 0
         self.addr_hit_map = None  # map from addr to [event_count, subtree_event_count].
         # map from (source_file_id, line) to [event_count, subtree_event_count].
         self.line_hit_map = None
-
-    def add_callchain(self, callchain, start, end, event_count):
-        node = self.call_graph
-        for i in range(start, end, -1):
-            node = node.get_child(callchain[i][1])
-        node.event_count += event_count
-
-    def add_reverse_callchain(self, callchain, start, end, event_count):
-        node = self.reverse_call_graph
-        for i in range(start, end):
-            node = node.get_child(callchain[i][1])
-        node.event_count += event_count
 
     def build_addr_hit_map(self, addr, event_count, subtree_event_count):
         if self.addr_hit_map is None:
@@ -226,21 +252,10 @@ class FunctionScope(object):
             count_info[0] += event_count
             count_info[1] += subtree_event_count
 
-    def update_subtree_event_count(self):
-        a = self.call_graph.update_subtree_event_count()
-        b = self.reverse_call_graph.update_subtree_event_count()
-        return max(a, b)
-
-    def limit_callchain_percent(self, min_callchain_percent, hit_func_ids):
-        min_limit = min_callchain_percent * 0.01 * self.call_graph.subtree_event_count
-        self.call_graph.cut_edge(min_limit, hit_func_ids)
-        self.reverse_call_graph.cut_edge(min_limit, hit_func_ids)
-
     def gen_sample_info(self, gen_addr_hit_map):
         result = {}
-        result['c'] = self.sample_count
-        result['g'] = self.call_graph.gen_sample_info()
-        result['rg'] = self.reverse_call_graph.gen_sample_info()
+        result['f'] = self.func_id
+        result['c'] = [self.sample_count, self.event_count, self.subtree_event_count]
         if self.line_hit_map:
             items = []
             for key in self.line_hit_map:
@@ -263,7 +278,7 @@ class CallNode(object):
         self.event_count = 0
         self.subtree_event_count = 0
         self.func_id = func_id
-        self.children = {}  # map from func_id to CallNode
+        self.children = collections.OrderedDict()  # map from func_id to CallNode
 
     def get_child(self, func_id):
         child = self.children.get(func_id)
@@ -399,17 +414,7 @@ class SourceFileSet(object):
 
 
 class SourceFileSearcher(object):
-
-    SOURCE_FILE_EXTS = {'.h', '.hh', '.H', '.hxx', '.hpp', '.h++',
-                        '.c', '.cc', '.C', '.cxx', '.cpp', '.c++',
-                        '.java', '.kt'}
-
-    @classmethod
-    def is_source_filename(cls, filename):
-        ext = os.path.splitext(filename)[1]
-        return ext in cls.SOURCE_FILE_EXTS
-
-    """" Find source file paths in the file system.
+    """ Find source file paths in the file system.
         The file paths reported by addr2line are the paths stored in debug sections
         of shared libraries. And we need to convert them to file paths in the file
         system. It is done in below steps:
@@ -424,6 +429,16 @@ class SourceFileSearcher(object):
            2.1 Find all real paths with the same file name as the abstract path.
            2.2 Select the real path having the longest common suffix with the abstract path.
     """
+
+    SOURCE_FILE_EXTS = {'.h', '.hh', '.H', '.hxx', '.hpp', '.h++',
+                        '.c', '.cc', '.C', '.cxx', '.cpp', '.c++',
+                        '.java', '.kt'}
+
+    @classmethod
+    def is_source_filename(cls, filename):
+        ext = os.path.splitext(filename)[1]
+        return ext in cls.SOURCE_FILE_EXTS
+
     def __init__(self, source_dirs):
         # Map from filename to a list of reversed directory path containing filename.
         self.filename_to_rparents = {}
@@ -495,7 +510,10 @@ class RecordData(object):
                 threadInfo = {
                     tid
                     eventCount
+                    sampleCount
                     libs: [libInfo],
+                    g: callGraph,
+                    rg: reverseCallgraph
                 }
                 libInfo = {
                     libId,
@@ -503,9 +521,8 @@ class RecordData(object):
                     functions: [funcInfo]
                 }
                 funcInfo = {
-                    c: sampleCount
-                    g: callGraph
-                    rg: reverseCallgraph
+                    f: functionId
+                    c: [sampleCount, eventCount, subTreeEventCount]
                     s: [sourceCodeInfo] [optional]
                     a: [addrInfo] (sorted by addrInfo.addr) [optional]
                 }
@@ -582,6 +599,7 @@ class RecordData(object):
             process.event_count += raw_sample.period
             thread = process.get_thread(raw_sample.tid, raw_sample.thread_comm)
             thread.event_count += raw_sample.period
+            thread.sample_count += 1
 
             lib_id = self.libs.get_lib_id(symbol.dso_name)
             func_id = self.functions.get_func_id(lib_id, symbol)
@@ -594,30 +612,22 @@ class RecordData(object):
             thread.add_callstack(raw_sample.period, callstack, self.build_addr_hit_map)
 
         for event in self.events.values():
-            for process in event.processes.values():
-                for thread in process.threads.values():
-                    for lib in thread.libs.values():
-                        for func_id in lib.functions:
-                            function = lib.functions[func_id]
-                            function.update_subtree_event_count()
+            for thread in event.threads:
+                thread.update_subtree_event_count()
 
     def limit_percents(self, min_func_percent, min_callchain_percent):
         hit_func_ids = set()
         for event in self.events.values():
             min_limit = event.event_count * min_func_percent * 0.01
             for process in event.processes.values():
+                to_del_threads = []
                 for thread in process.threads.values():
-                    for lib in thread.libs.values():
-                        to_del_func_ids = []
-                        for func_id in lib.functions:
-                            function = lib.functions[func_id]
-                            if function.call_graph.subtree_event_count < min_limit:
-                                to_del_func_ids.append(func_id)
-                            else:
-                                function.limit_callchain_percent(min_callchain_percent,
-                                                                 hit_func_ids)
-                        for func_id in to_del_func_ids:
-                            del lib.functions[func_id]
+                    if thread.call_graph.subtree_event_count < min_limit:
+                        to_del_threads.append(thread.tid)
+                    else:
+                        thread.limit_percents(min_limit, min_callchain_percent, hit_func_ids)
+                for thread in to_del_threads:
+                    del process.threads[thread]
         self.functions.trim_functions(hit_func_ids)
 
     def _get_event(self, event_name):
@@ -625,7 +635,7 @@ class RecordData(object):
             self.events[event_name] = EventScope(event_name)
         return self.events[event_name]
 
-    def add_source_code(self, source_dirs):
+    def add_source_code(self, source_dirs, filter_lib):
         """ Collect source code information:
             1. Find line ranges for each function in FunctionSet.
             2. Find line for each addr in FunctionScope.addr_hit_map.
@@ -637,20 +647,19 @@ class RecordData(object):
             if function.func_name == 'unknown':
                 continue
             lib_name = self.libs.get_lib_name(function.lib_id)
-            addr2line.add_addr(lib_name, function.start_addr, function.start_addr)
-            addr2line.add_addr(lib_name, function.start_addr,
-                               function.start_addr + function.addr_len - 1)
+            if filter_lib(lib_name):
+                addr2line.add_addr(lib_name, function.start_addr, function.start_addr)
+                addr2line.add_addr(lib_name, function.start_addr,
+                                   function.start_addr + function.addr_len - 1)
         # Request line for each addr in FunctionScope.addr_hit_map.
         for event in self.events.values():
-            for process in event.processes.values():
-                for thread in process.threads.values():
-                    for lib in thread.libs.values():
-                        lib_name = self.libs.get_lib_name(lib.lib_id)
-                        for function in lib.functions.values():
-                            func_addr = self.functions.id_to_func[
-                                            function.call_graph.func_id].start_addr
-                            for addr in function.addr_hit_map:
-                                addr2line.add_addr(lib_name, func_addr, addr)
+            for lib in event.libraries:
+                lib_name = self.libs.get_lib_name(lib.lib_id)
+                if filter_lib(lib_name):
+                    for function in lib.functions.values():
+                        func_addr = self.functions.id_to_func[function.func_id].start_addr
+                        for addr in function.addr_hit_map:
+                            addr2line.add_addr(lib_name, func_addr, addr)
         addr2line.convert_addrs_to_lines()
 
         # Set line range for each function.
@@ -658,9 +667,10 @@ class RecordData(object):
             if function.func_name == 'unknown':
                 continue
             dso = addr2line.get_dso(self.libs.get_lib_name(function.lib_id))
+            if not dso:
+                continue
             start_source = addr2line.get_addr_source(dso, function.start_addr)
-            end_source = addr2line.get_addr_source(dso,
-                            function.start_addr + function.addr_len - 1)
+            end_source = addr2line.get_addr_source(dso, function.start_addr + function.addr_len - 1)
             if not start_source or not end_source:
                 continue
             start_file_path, start_line = start_source[-1]
@@ -673,38 +683,49 @@ class RecordData(object):
 
         # Build FunctionScope.line_hit_map.
         for event in self.events.values():
-            for process in event.processes.values():
-                for thread in process.threads.values():
-                    for lib in thread.libs.values():
-                        dso = addr2line.get_dso(self.libs.get_lib_name(lib.lib_id))
-                        for function in lib.functions.values():
-                            for addr in function.addr_hit_map:
-                                source = addr2line.get_addr_source(dso, addr)
-                                if not source:
-                                    continue
-                                for file_path, line in source:
-                                    source_file = self.source_files.get_source_file(file_path)
-                                    # Show [line - 5, line + 5] of the line hit by a sample.
-                                    source_file.request_lines(line - 5, line + 5)
-                                    count_info = function.addr_hit_map[addr]
-                                    function.build_line_hit_map(source_file.file_id, line,
-                                                                count_info[0], count_info[1])
+            for lib in event.libraries:
+                dso = addr2line.get_dso(self.libs.get_lib_name(lib.lib_id))
+                if not dso:
+                    continue
+                for function in lib.functions.values():
+                    for addr in function.addr_hit_map:
+                        source = addr2line.get_addr_source(dso, addr)
+                        if not source:
+                            continue
+                        for file_path, line in source:
+                            source_file = self.source_files.get_source_file(file_path)
+                            # Show [line - 5, line + 5] of the line hit by a sample.
+                            source_file.request_lines(line - 5, line + 5)
+                            count_info = function.addr_hit_map[addr]
+                            function.build_line_hit_map(source_file.file_id, line, count_info[0],
+                                                        count_info[1])
 
         # Collect needed source code in SourceFileSet.
         self.source_files.load_source_code(source_dirs)
 
-    def add_disassembly(self):
+    def add_disassembly(self, filter_lib):
         """ Collect disassembly information:
             1. Use objdump to collect disassembly for each function in FunctionSet.
             2. Set flag to dump addr_hit_map when generating record info.
         """
         objdump = Objdump(self.ndk_path, self.binary_cache_path)
-        for function in self.functions.id_to_func.values():
+        cur_lib_name = None
+        dso_info = None
+        for function in sorted(self.functions.id_to_func.values(), key=lambda a: a.lib_id):
             if function.func_name == 'unknown':
                 continue
             lib_name = self.libs.get_lib_name(function.lib_id)
-            code = objdump.disassemble_code(lib_name, function.start_addr, function.addr_len)
-            function.disassembly = code
+            if lib_name != cur_lib_name:
+                cur_lib_name = lib_name
+                if filter_lib(lib_name):
+                    dso_info = objdump.get_dso_info(lib_name)
+                else:
+                    dso_info = None
+                if dso_info:
+                    log_info('Disassemble %s' % dso_info[0])
+            if dso_info:
+                code = objdump.disassemble_code(dso_info, function.start_addr, function.addr_len)
+                function.disassembly = code
 
         self.gen_addr_hit_map_in_record_info = True
 
@@ -771,7 +792,7 @@ class RecordData(object):
 
     def _gen_sample_info(self):
         return [event.get_sample_info(self.gen_addr_hit_map_in_record_info)
-                    for event in self.events.values()]
+                for event in self.events.values()]
 
     def _gen_source_files(self):
         source_files = sorted(self.source_files.path_to_source_files.values(),
@@ -791,6 +812,17 @@ class RecordData(object):
             file_list.append(file_data)
         return file_list
 
+URLS = {
+    'jquery': 'https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js',
+    'bootstrap4-css': 'https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css',
+    'bootstrap4-popper':
+        'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js',
+    'bootstrap4': 'https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js',
+    'dataTable': 'https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js',
+    'dataTable-bootstrap4': 'https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js',
+    'dataTable-css': 'https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css',
+    'gstatic-charts': 'https://www.gstatic.com/charts/loader.js',
+}
 
 class ReportGenerator(object):
 
@@ -798,23 +830,14 @@ class ReportGenerator(object):
         self.hw = HtmlWriter(html_path)
         self.hw.open_tag('html')
         self.hw.open_tag('head')
-        self.hw.open_tag('link', rel='stylesheet', type='text/css',
-            href='https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css'
-                         ).close_tag()
+        for css in ['bootstrap4-css', 'dataTable-css']:
+            self.hw.open_tag('link', rel='stylesheet', type='text/css', href=URLS[css]).close_tag()
+        for js in ['jquery', 'bootstrap4-popper', 'bootstrap4', 'dataTable', 'dataTable-bootstrap4',
+                   'gstatic-charts']:
+            self.hw.open_tag('script', src=URLS[js]).close_tag()
 
-        self.hw.open_tag('link', rel='stylesheet', type='text/css',
-             href='https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css'
-                         ).close_tag()
-        self.hw.open_tag('script', src='https://www.gstatic.com/charts/loader.js').close_tag()
         self.hw.open_tag('script').add(
             "google.charts.load('current', {'packages': ['corechart', 'table']});").close_tag()
-        self.hw.open_tag('script', src='https://code.jquery.com/jquery-3.2.1.js').close_tag()
-        self.hw.open_tag('script', src='https://code.jquery.com/ui/1.12.1/jquery-ui.js'
-                         ).close_tag()
-        self.hw.open_tag('script',
-            src='https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js').close_tag()
-        self.hw.open_tag('script',
-            src='https://cdn.datatables.net/1.10.16/js/dataTables.jqueryui.min.js').close_tag()
         self.hw.open_tag('style', type='text/css').add("""
             .colForLine { width: 50px; }
             .colForCount { width: 100px; }
@@ -833,9 +856,6 @@ class ReportGenerator(object):
         self.hw.add(json.dumps(record_data))
         self.hw.close_tag()
 
-    def write_flamegraph(self, flamegraph):
-        self.hw.add(flamegraph)
-
     def write_script(self):
         self.hw.open_tag('script').add_file('report_html.js').close_tag()
 
@@ -843,21 +863,6 @@ class ReportGenerator(object):
         self.hw.close_tag('body')
         self.hw.close_tag('html')
         self.hw.close()
-
-
-def gen_flamegraph(record_file, show_art_frames):
-    fd, flamegraph_path = tempfile.mkstemp()
-    os.close(fd)
-    inferno_script_path = os.path.join(get_script_dir(), 'inferno', 'inferno.py')
-    args = [sys.executable, inferno_script_path, '-sc', '-o', flamegraph_path,
-            '--record_file', record_file, '--embedded_flamegraph', '--no_browser']
-    if show_art_frames:
-        args.append('--show_art_frames')
-    subprocess.check_call(args)
-    with open(flamegraph_path, 'r') as fh:
-        data = fh.read()
-    remove(flamegraph_path)
-    return data
 
 
 def main():
@@ -878,6 +883,8 @@ def main():
     parser.add_argument('--add_source_code', action='store_true', help='Add source code.')
     parser.add_argument('--source_dirs', nargs='+', help='Source code directories.')
     parser.add_argument('--add_disassembly', action='store_true', help='Add disassembled code.')
+    parser.add_argument('--binary_filter', nargs='+', help="""Annotate source code and disassembly
+                        only for selected binaries.""")
     parser.add_argument('--ndk_path', nargs=1, help='Find tools in the ndk path.')
     parser.add_argument('--no_browser', action='store_true', help="Don't open report in browser.")
     parser.add_argument('--show_art_frames', action='store_true',
@@ -904,21 +911,24 @@ def main():
     for record_file in args.record_file:
         record_data.load_record_file(record_file, args.show_art_frames)
     record_data.limit_percents(args.min_func_percent, args.min_callchain_percent)
+
+    def filter_lib(lib_name):
+        if not args.binary_filter:
+            return True
+        for binary in args.binary_filter:
+            if binary in lib_name:
+                return True
+        return False
     if args.add_source_code:
-        record_data.add_source_code(args.source_dirs)
+        record_data.add_source_code(args.source_dirs, filter_lib)
     if args.add_disassembly:
-        record_data.add_disassembly()
+        record_data.add_disassembly(filter_lib)
 
     # 3. Generate report html.
     report_generator = ReportGenerator(args.report_path)
+    report_generator.write_script()
     report_generator.write_content_div()
     report_generator.write_record_data(record_data.gen_record_info())
-    report_generator.write_script()
-    # TODO: support multiple perf.data in flamegraph.
-    if len(args.record_file) > 1:
-        log_warning('flamegraph will only be shown for %s' % args.record_file[0])
-    flamegraph = gen_flamegraph(args.record_file[0], args.show_art_frames)
-    report_generator.write_flamegraph(flamegraph)
     report_generator.finish()
 
     if not args.no_browser:

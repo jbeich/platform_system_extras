@@ -15,18 +15,27 @@
 ** limitations under the License.
 */
 
-#include <assert.h>
-#include <stdio.h>
-#include <stdlib.h>
+#include "configreader.h"
+
+#include <inttypes.h>
 
 #include <algorithm>
+#include <climits>
+#include <cstdlib>
 #include <cstring>
+#include <map>
 #include <sstream>
+#include <vector>
 
 #include <android-base/file.h>
 #include <android-base/logging.h>
+#include <android-base/parseint.h>
+#include <android-base/stringprintf.h>
+#include <android-base/strings.h>
 
-#include "configreader.h"
+#include "perfprofd_config.pb.h"
+
+using android::base::StringPrintf;
 
 //
 // Config file path
@@ -34,9 +43,27 @@
 static const char *config_file_path =
     "/data/data/com.google.android.gms/files/perfprofd.conf";
 
-ConfigReader::ConfigReader()
-    : trace_config_read(false)
+struct ConfigReader::Data {
+  struct values {
+    unsigned minv;
+    unsigned maxv;
+  };
+  std::map<std::string, values> u_info;
+  std::map<std::string, unsigned> u_entries;
+  std::map<std::string, std::string> s_entries;
+
+  struct events {
+    std::vector<std::string> names;
+    unsigned period;
+    bool group;
+  };
+  std::vector<events> e_entries;
+  bool trace_config_read;
+};
+
+ConfigReader::ConfigReader() : data_(new ConfigReader::Data())
 {
+  data_->trace_config_read = false;
   addDefaultEntries();
 }
 
@@ -135,6 +162,8 @@ void ConfigReader::addDefaultEntries()
 
   // If true, use an ELF symbolizer to on-device symbolize.
   addUnsignedEntry("use_elf_symbolizer", config.use_elf_symbolizer ? 1 : 0, 0, 1);
+  // Whether to symbolize everything. If false, objects with build ID will be skipped.
+  addUnsignedEntry("symbolize_everything", config.symbolize_everything ? 1 : 0, 0, 1);
 
   // If true, use libz to compress the output proto.
   addUnsignedEntry("compress", config.compress ? 1 : 0, 0, 1);
@@ -145,6 +174,9 @@ void ConfigReader::addDefaultEntries()
   // The pid of the process to profile. May be negative, in which case
   // the whole system will be profiled.
   addUnsignedEntry("process", static_cast<uint32_t>(-1), 0, UINT32_MAX);
+
+  // Whether to fail or strip unsupported events.
+  addUnsignedEntry("fail_on_unsupported_events", config.fail_on_unsupported_events ? 1 : 0, 0, 1);
 }
 
 void ConfigReader::addUnsignedEntry(const char *key,
@@ -153,58 +185,58 @@ void ConfigReader::addUnsignedEntry(const char *key,
                                     unsigned max_value)
 {
   std::string ks(key);
-  CHECK(u_entries.find(ks) == u_entries.end() &&
-        s_entries.find(ks) == s_entries.end())
+  CHECK(data_->u_entries.find(ks) == data_->u_entries.end() &&
+        data_->s_entries.find(ks) == data_->s_entries.end())
       << "internal error -- duplicate entry for key " << key;
-  values vals;
+  Data::values vals;
   vals.minv = min_value;
   vals.maxv = max_value;
-  u_info[ks] = vals;
-  u_entries[ks] = default_value;
+  data_->u_info[ks] = vals;
+  data_->u_entries[ks] = default_value;
 }
 
 void ConfigReader::addStringEntry(const char *key, const char *default_value)
 {
   std::string ks(key);
-  CHECK(u_entries.find(ks) == u_entries.end() &&
-        s_entries.find(ks) == s_entries.end())
+  CHECK(data_->u_entries.find(ks) == data_->u_entries.end() &&
+        data_->s_entries.find(ks) == data_->s_entries.end())
       << "internal error -- duplicate entry for key " << key;
   CHECK(default_value != nullptr) << "internal error -- bad default value for key " << key;
-  s_entries[ks] = std::string(default_value);
+  data_->s_entries[ks] = std::string(default_value);
 }
 
 unsigned ConfigReader::getUnsignedValue(const char *key) const
 {
   std::string ks(key);
-  auto it = u_entries.find(ks);
-  CHECK(it != u_entries.end());
+  auto it = data_->u_entries.find(ks);
+  CHECK(it != data_->u_entries.end());
   return it->second;
 }
 
 bool ConfigReader::getBoolValue(const char *key) const
 {
   std::string ks(key);
-  auto it = u_entries.find(ks);
-  CHECK(it != u_entries.end());
+  auto it = data_->u_entries.find(ks);
+  CHECK(it != data_->u_entries.end());
   return it->second != 0;
 }
 
 std::string ConfigReader::getStringValue(const char *key) const
 {
   std::string ks(key);
-  auto it = s_entries.find(ks);
-  CHECK(it != s_entries.end());
+  auto it = data_->s_entries.find(ks);
+  CHECK(it != data_->s_entries.end());
   return it->second;
 }
 
 void ConfigReader::overrideUnsignedEntry(const char *key, unsigned new_value)
 {
   std::string ks(key);
-  auto it = u_entries.find(ks);
-  CHECK(it != u_entries.end());
-  values vals;
-  auto iit = u_info.find(key);
-  CHECK(iit != u_info.end());
+  auto it = data_->u_entries.find(ks);
+  CHECK(it != data_->u_entries.end());
+  Data::values vals;
+  auto iit = data_->u_info.find(key);
+  CHECK(iit != data_->u_info.end());
   vals = iit->second;
   CHECK(new_value >= vals.minv && new_value <= vals.maxv);
   it->second = new_value;
@@ -217,51 +249,87 @@ void ConfigReader::overrideUnsignedEntry(const char *key, unsigned new_value)
 // warnings or errors to the system logs if the line can't be
 // interpreted properly.
 //
-bool ConfigReader::parseLine(const char *key,
-                             const char *value,
-                             unsigned linecount)
+bool ConfigReader::parseLine(const std::string& key,
+                             const std::string& value,
+                             unsigned linecount,
+                             std::string* error_msg)
 {
-  assert(key);
-  assert(value);
+  if (key.empty()) {
+    *error_msg = StringPrintf("line %u: Key is empty", linecount);
+    return false;
+  }
+  if (value.empty()) {
+    *error_msg = StringPrintf("line %u: Value for %s is empty", linecount, key.c_str());
+    return false;
+  }
 
-  auto uit = u_entries.find(key);
-  if (uit != u_entries.end()) {
-    unsigned uvalue = 0;
-    if (isdigit(value[0]) == 0 || sscanf(value, "%u", &uvalue) != 1) {
-      LOG(WARNING) << "line " << linecount << ": malformed unsigned value (ignored)";
+  auto uit = data_->u_entries.find(key);
+  if (uit != data_->u_entries.end()) {
+    uint64_t conv;
+    if (!android::base::ParseUint(value, &conv)) {
+      *error_msg = StringPrintf("line %u: value %s cannot be parsed", linecount, value.c_str());
+    }
+    Data::values vals;
+    auto iit = data_->u_info.find(key);
+    DCHECK(iit != data_->u_info.end());
+    vals = iit->second;
+    if (conv < vals.minv || conv > vals.maxv) {
+      *error_msg = StringPrintf("line %u: "
+                                    "specified value %" PRIu64 " for '%s' "
+                                    "outside permitted range [%u %u]",
+                                linecount,
+                                conv,
+                                key.c_str(),
+                                vals.minv,
+                                vals.maxv);
       return false;
     } else {
-      values vals;
-      auto iit = u_info.find(key);
-      assert(iit != u_info.end());
-      vals = iit->second;
-      if (uvalue < vals.minv || uvalue > vals.maxv) {
-        LOG(WARNING) << "line " << linecount << ": "
-                     << "specified value " << uvalue << " for '" << key << "' "
-                     << "outside permitted range [" << vals.minv << " " << vals.maxv
-                     << "] (ignored)";
-        return false;
-      } else {
-        if (trace_config_read) {
-          LOG(INFO) << "option " << key << " set to " << uvalue;
-        }
-        uit->second = uvalue;
+      if (data_->trace_config_read) {
+        LOG(INFO) << "option " << key << " set to " << conv;
       }
+      uit->second = static_cast<unsigned>(conv);
     }
-    trace_config_read = (getUnsignedValue("trace_config_read") != 0);
+    data_->trace_config_read = (getUnsignedValue("trace_config_read") != 0);
     return true;
   }
 
-  auto sit = s_entries.find(key);
-  if (sit != s_entries.end()) {
-    if (trace_config_read) {
+  auto sit = data_->s_entries.find(key);
+  if (sit != data_->s_entries.end()) {
+    if (data_->trace_config_read) {
       LOG(INFO) << "option " << key << " set to " << value;
     }
     sit->second = std::string(value);
     return true;
   }
 
-  LOG(WARNING) << "line " << linecount << ": unknown option '" << key << "' ignored";
+  // Check whether this follows event syntax, and create an event entry, if necessary.
+  // -e_evtname(,evtname)*=period
+  // -g_evtname(,evtname)*=period
+  {
+    bool event_key = android::base::StartsWith(key, "-e_");
+    bool group_key = android::base::StartsWith(key, "-g_");
+    if (event_key || group_key) {
+      Data::events events;
+      events.group = group_key;
+
+      uint64_t conv;
+      if (!android::base::ParseUint(value, &conv)) {
+        *error_msg = StringPrintf("line %u: key %s cannot be parsed", linecount, key.c_str());
+        return false;
+      }
+      if (conv > std::numeric_limits<unsigned>::max()) {
+        *error_msg = StringPrintf("line %u: key %s: period too large", linecount, key.c_str());
+        return false;
+      }
+      events.period = static_cast<unsigned>(conv);
+
+      events.names = android::base::Split(key.substr(3), ",");
+      data_->e_entries.push_back(events);
+      return true;
+    }
+  }
+
+  *error_msg = StringPrintf("line %u: unknown option '%s'", linecount, key.c_str());
   return false;
 }
 
@@ -279,12 +347,30 @@ bool ConfigReader::readFile()
   if (! android::base::ReadFileToString(config_file_path, &contents)) {
     return false;
   }
-  return Read(contents, /* fail_on_error */ false);
+  std::string error_msg;
+  if (!Read(contents, /* fail_on_error */ false, &error_msg)) {
+    LOG(ERROR) << error_msg;
+    return false;
+  }
+  if (!error_msg.empty()) {
+    LOG(WARNING) << error_msg;
+  }
+  return true;
 }
 
-bool ConfigReader::Read(const std::string& content, bool fail_on_error) {
+bool ConfigReader::Read(const std::string& content, bool fail_on_error, std::string* error_msg) {
   std::stringstream ss(content);
   std::string line;
+
+  auto append_error = [error_msg](const std::string& tmp) {
+    if (!error_msg->empty()) {
+      error_msg->append("\n");
+      error_msg->append(tmp);
+    } else {
+      *error_msg = tmp;
+    }
+  };
+
   for (unsigned linecount = 1;
        std::getline(ss,line,'\n');
        linecount += 1)
@@ -296,14 +382,14 @@ bool ConfigReader::Read(const std::string& content, bool fail_on_error) {
     }
 
     // blank line?
-    if (isblank(line.c_str())) {
+    if (isblank(line)) {
       continue;
     }
 
     // look for X=Y assignment
     auto efound = line.find('=');
     if (efound == std::string::npos) {
-      LOG(WARNING) << "line " << linecount << ": line malformed (no '=' found)";
+      append_error(StringPrintf("line %u: line malformed (no '=' found)", linecount));
       if (fail_on_error) {
         return false;
       }
@@ -313,9 +399,13 @@ bool ConfigReader::Read(const std::string& content, bool fail_on_error) {
     std::string key(line.substr(0, efound));
     std::string value(line.substr(efound+1, std::string::npos));
 
-    bool parse_success = parseLine(key.c_str(), value.c_str(), linecount);
-    if (fail_on_error && !parse_success) {
-      return false;
+    std::string local_error_msg;
+    bool parse_success = parseLine(key, value, linecount, &local_error_msg);
+    if (!parse_success) {
+      append_error(local_error_msg);
+      if (fail_on_error) {
+        return false;
+      }
     }
   }
 
@@ -358,6 +448,69 @@ void ConfigReader::FillConfig(Config* config) {
 
   config->process = static_cast<int32_t>(getUnsignedValue("process"));
   config->use_elf_symbolizer = getBoolValue("use_elf_symbolizer");
+  config->symbolize_everything = getBoolValue("symbolize_everything");
   config->compress = getBoolValue("compress");
   config->send_to_dropbox = getBoolValue("dropbox");
+  config->fail_on_unsupported_events = getBoolValue("fail_on_unsupported_events");
+
+  config->event_config.clear();
+  for (auto event : data_->e_entries) {
+    Config::PerfCounterConfigElem elem;
+    elem.events = event.names;
+    elem.group = event.group;
+    elem.sampling_period = event.period;
+    config->event_config.push_back(std::move(elem));
+  }
+}
+
+void ConfigReader::ProtoToConfig(const android::perfprofd::ProfilingConfig& in, Config* out) {
+  // Copy base proto values.
+#define CHECK_AND_COPY_FROM_PROTO(name)      \
+  if (in.has_ ## name()) {      \
+    out->name = in.name();  \
+  }
+  CHECK_AND_COPY_FROM_PROTO(collection_interval_in_s)
+  CHECK_AND_COPY_FROM_PROTO(use_fixed_seed)
+  CHECK_AND_COPY_FROM_PROTO(main_loop_iterations)
+  CHECK_AND_COPY_FROM_PROTO(destination_directory)
+  CHECK_AND_COPY_FROM_PROTO(config_directory)
+  CHECK_AND_COPY_FROM_PROTO(perf_path)
+  CHECK_AND_COPY_FROM_PROTO(sampling_period)
+  CHECK_AND_COPY_FROM_PROTO(sampling_frequency)
+  CHECK_AND_COPY_FROM_PROTO(sample_duration_in_s)
+  CHECK_AND_COPY_FROM_PROTO(only_debug_build)
+  CHECK_AND_COPY_FROM_PROTO(hardwire_cpus)
+  CHECK_AND_COPY_FROM_PROTO(hardwire_cpus_max_duration_in_s)
+  CHECK_AND_COPY_FROM_PROTO(max_unprocessed_profiles)
+  CHECK_AND_COPY_FROM_PROTO(stack_profile)
+  CHECK_AND_COPY_FROM_PROTO(collect_cpu_utilization)
+  CHECK_AND_COPY_FROM_PROTO(collect_charging_state)
+  CHECK_AND_COPY_FROM_PROTO(collect_booting)
+  CHECK_AND_COPY_FROM_PROTO(collect_camera_active)
+  CHECK_AND_COPY_FROM_PROTO(process)
+  CHECK_AND_COPY_FROM_PROTO(use_elf_symbolizer)
+  CHECK_AND_COPY_FROM_PROTO(symbolize_everything)
+  CHECK_AND_COPY_FROM_PROTO(send_to_dropbox)
+  CHECK_AND_COPY_FROM_PROTO(compress)
+  CHECK_AND_COPY_FROM_PROTO(fail_on_unsupported_events)
+#undef CHECK_AND_COPY_FROM_PROTO
+
+  // Convert counters.
+  for (const auto& event_config : in.event_config()) {
+    Config::PerfCounterConfigElem config_elem;
+
+    if (event_config.counters_size() == 0) {
+      LOG(WARNING) << "Missing counters.";
+      continue;
+    }
+    config_elem.events.reserve(event_config.counters_size());
+    for (const std::string& str : event_config.counters()) {
+      config_elem.events.push_back(str);
+    }
+    config_elem.group = event_config.has_as_group() ? event_config.as_group() : false;
+    config_elem.sampling_period = event_config.has_sampling_period()
+                                      ? event_config.sampling_period()
+                                      : 0;
+    out->event_config.push_back(std::move(config_elem));
+  }
 }
