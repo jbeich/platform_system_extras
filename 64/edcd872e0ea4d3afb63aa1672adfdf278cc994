@@ -1,0 +1,8 @@
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Code-Review+2: Tao Bao <tbao@google.com>
+Verified+1: Tianjie Xu <xunchang@google.com>
+Submitted-by: Tianjie Xu <xunchang@google.com>
+Submitted-at: Wed, 25 Jul 2018 19:53:58 +0000
+Reviewed-on: https://android-review.googlesource.com/720645
+Project: platform/system/extras
+Branch: refs/heads/master
