@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6a7683db_8d5454b8",
+        "filename": "simpleperf/OfflineUnwinder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2018-07-26T23:55:05Z",
+      "side": 1,
+      "message": "This makes me a bit nervous because you are depending on the internal implementation of the memory buffer. There is a good chance this will change in the future since the way the section is being compressed is going to change to compress into blocks so that not all blocks need to be uncompressed.\n\nIs there any way that libunwind could expose some public api that you can use to get the symbol information instead of this method?",
+      "range": {
+        "startLine": 282,
+        "startChar": 7,
+        "endLine": 282,
+        "endChar": 83
+      },
+      "revId": "ed7750b1d91cc60319c3022b638c90b500bca55c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
