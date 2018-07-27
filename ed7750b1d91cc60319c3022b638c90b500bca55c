@@ -22,6 +22,30 @@
       "revId": "ed7750b1d91cc60319c3022b638c90b500bca55c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3ba2e8e9_44c49122",
+        "filename": "simpleperf/OfflineUnwinder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-07-27T00:21:32Z",
+      "side": 1,
+      "message": "Even if using split debug data, simpleperf stills needs support of single .gnu_debugdata in libunwindstack for compatibility reason.\n\nI am fine to change to some public api if it is provided by libunwindstack and the performance is similar. What is needed for each symbol is in ReadSymbolTable() in read_elf.cpp.",
+      "parentUuid": "6a7683db_8d5454b8",
+      "range": {
+        "startLine": 282,
+        "startChar": 7,
+        "endLine": 282,
+        "endChar": 83
+      },
+      "revId": "ed7750b1d91cc60319c3022b638c90b500bca55c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
