@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7553b7a9_0c573265",
+        "filename": "squashfs_utils/squashfs_utils.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2018-07-30T16:28:33Z",
+      "side": 0,
+      "message": "nit: I _liked_ this comment, but can agree that the variable bytes_used_4K_padding is pretty darn clear already ;-}",
+      "range": {
+        "startLine": 53,
+        "startChar": 4,
+        "endLine": 53,
+        "endChar": 61
+      },
+      "revId": "8d81763715bc681243955d831cc36dd2ea2998b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
