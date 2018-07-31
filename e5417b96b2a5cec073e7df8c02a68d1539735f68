@@ -46,6 +46,30 @@
       "revId": "e5417b96b2a5cec073e7df8c02a68d1539735f68",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8f6a1ae2_1a920576",
+        "filename": "libfec/fec_open.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2018-07-31T21:18:16Z",
+      "side": 1,
+      "message": "No, I believe it\u0027s safe to drop support for this format. It hasn\u0027t been used since M.",
+      "parentUuid": "c386ba2c_f713408b",
+      "range": {
+        "startLine": 333,
+        "startChar": 11,
+        "endLine": 333,
+        "endChar": 63
+      },
+      "revId": "e5417b96b2a5cec073e7df8c02a68d1539735f68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
