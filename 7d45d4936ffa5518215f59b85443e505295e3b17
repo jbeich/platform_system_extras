@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c971369d_511d5ba0",
+        "filename": "libfec/fec_read.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-08-02T23:08:19Z",
+      "side": 1,
+      "message": "i think the exact way to translate the comment into code is\n\n  if (((f-\u003emode \u0026 O_ACCMODE) \u003d\u003d O_RDONLY) \u0026\u0026 expect_zeros) {\n\n(since POSIX doesn\u0027t actually make any guarantees about the actual values.)",
+      "range": {
+        "startLine": 322,
+        "startChar": 12,
+        "endLine": 322,
+        "endChar": 31
+      },
+      "revId": "7d45d4936ffa5518215f59b85443e505295e3b17",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
