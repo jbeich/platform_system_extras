@@ -1,0 +1,9 @@
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Verified+1: Elliott Hughes <enh@google.com>
+Autosubmit+1: Elliott Hughes <enh@google.com>
+Code-Review+2: Tom Cherry <tomcherry@google.com>
+Submitted-by: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-at: Fri, 03 Aug 2018 17:52:55 +0000
+Reviewed-on: https://android-review.googlesource.com/725482
+Project: platform/system/extras
+Branch: refs/heads/master
