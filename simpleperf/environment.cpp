@@ -384,18 +384,95 @@ bool CheckPerfEventLimit() {
   return true;
 }
 
-bool GetMaxSampleFrequency(uint64_t* max_sample_freq) {
+#if defined(__ANDROID__)
+bool SetPerfEventLimits(uint64_t sample_freq, size_t cpu_percent, uint64_t mlock_kb) {
+  std::vector<std::vector<std::string>> props = {
+      {"debug.perf_event_max_sample_rate", std::to_string(sample_freq)},
+      {"debug.perf_cpu_time_max_percent", std::to_string(cpu_percent)},
+      {"debug.perf_event_mlock_kb", std::to_string(mlock_kb)},
+      {"security.perf_harden", "0"},
+  };
+  for (auto& prop : props) {
+    if (!android::base::SetProperty(prop[0], prop[1])) {
+      LOG(ERROR) << "Failed to SetProperty " << prop[0] << " to " << prop[1];
+      return false;
+    }
+  }
+  int set_mask = 0;
+  do {
+    usleep(1);
+    if ((set_mask & 1) == 0) {
+      uint64_t freq;
+      if (!GetMaxSampleFrequency(&freq) || freq == sample_freq) {
+        set_mask |= 1;
+      }
+    }
+    if ((set_mask & 2) == 0) {
+      size_t percent;
+      if (!GetCpuTimeMaxPercent(&percent) || percent == cpu_percent) {
+        set_mask |= 2;
+      }
+    }
+    if ((set_mask & 4) == 0) {
+      uint64_t kb;
+      if (!GetPerfEventMlockKb(&kb) || kb == mlock_kb) {
+        set_mask |= 4;
+      }
+    }
+  } while (set_mask != 7);
+  return true;
+}
+#else  // !defined(__ANDROID__)
+bool SetPerfEventLimits(uint64_t, size_t, uint64_t) {
+  return true;
+}
+#endif
+
+template <typename T>
+static bool ReadUintFromProcFile(const std::string& path, T* value) {
   std::string s;
-  if (!android::base::ReadFileToString("/proc/sys/kernel/perf_event_max_sample_rate", &s)) {
-    PLOG(DEBUG) << "failed to read /proc/sys/kernel/perf_event_max_sample_rate";
+  if (!android::base::ReadFileToString(path, &s)) {
+    PLOG(DEBUG) << "failed to read " << path;
     return false;
   }
   s = android::base::Trim(s);
-  if (!android::base::ParseUint(s.c_str(), max_sample_freq)) {
-    LOG(ERROR) << "failed to parse /proc/sys/kernel/perf_event_max_sample_rate: " << s;
+  if (!android::base::ParseUint(s.c_str(), value)) {
+    LOG(ERROR) << "failed to parse " << path << ": " << s;
     return false;
   }
   return true;
+}
+
+template <typename T>
+static bool WriteUintToProcFile(const std::string& path, T value) {
+  if (IsRoot()) {
+    return android::base::WriteStringToFile(std::to_string(value), path);
+  }
+  return false;
+}
+
+bool GetMaxSampleFrequency(uint64_t* max_sample_freq) {
+  return ReadUintFromProcFile("/proc/sys/kernel/perf_event_max_sample_rate", max_sample_freq);
+}
+
+bool SetMaxSampleFrequency(uint64_t max_sample_freq) {
+  return WriteUintToProcFile("/proc/sys/kernel/perf_event_max_sample_rate", max_sample_freq);
+}
+
+bool GetCpuTimeMaxPercent(size_t* percent) {
+  return ReadUintFromProcFile("/proc/sys/kernel/perf_cpu_time_max_percent", percent);
+}
+
+bool SetCpuTimeMaxPercent(size_t percent) {
+  return WriteUintToProcFile("/proc/sys/kernel/perf_cpu_time_max_percent", percent);
+}
+
+bool GetPerfEventMlockKb(uint64_t* mlock_kb) {
+  return ReadUintFromProcFile("/proc/sys/kernel/perf_event_mlock_kb", mlock_kb);
+}
+
+bool SetPerfEventMlockKb(uint64_t mlock_kb) {
+  return WriteUintToProcFile("/proc/sys/kernel/perf_event_mlock_kb", mlock_kb);
 }
 
 bool CheckKernelSymbolAddresses() {
@@ -711,22 +788,25 @@ bool SignalIsIgnored(int signo) {
 
 int GetAndroidVersion() {
 #if defined(__ANDROID__)
-  std::string s = android::base::GetProperty("ro.build.version.release", "");
-  // The release string can be a list of numbers (like 8.1.0), a character (like Q)
-  // or many characters (like OMR1).
-  if (!s.empty()) {
-    // Each Android version has a version number: L is 5, M is 6, N is 7, O is 8, etc.
-    if (s[0] >= 'A' && s[0] <= 'Z') {
-      return s[0] - 'P' + kAndroidVersionP;
-    }
-    if (isdigit(s[0])) {
-      int result;
-      sscanf(s.c_str(), "%d", &result);
-      return result;
+  static int android_version = -1;
+  if (android_version == -1) {
+    android_version = 0;
+    std::string s = android::base::GetProperty("ro.build.version.release", "");
+    // The release string can be a list of numbers (like 8.1.0), a character (like Q)
+    // or many characters (like OMR1).
+    if (!s.empty()) {
+      // Each Android version has a version number: L is 5, M is 6, N is 7, O is 8, etc.
+      if (s[0] >= 'A' && s[0] <= 'Z') {
+        android_version = s[0] - 'P' + kAndroidVersionP;
+      } else if (isdigit(s[0])) {
+        sscanf(s.c_str(), "%d", &android_version);
+      }
     }
   }
-#endif  // defined(__ANDROID__)
+  return android_version;
+#else  // defined(__ANDROID__)
   return 0;
+#endif
 }
 
 std::string GetHardwareFromCpuInfo(const std::string& cpu_info) {
