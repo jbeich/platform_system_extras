@@ -107,7 +107,7 @@ TEST(record_cmd, freq_option) {
   CheckEventType(tmpfile.path, "cpu-cycles", 0, 99u);
   ASSERT_TRUE(RunRecordCmd({"-e", "cpu-clock", "-f", "99"}, tmpfile.path));
   CheckEventType(tmpfile.path, "cpu-clock", 0, 99u);
-  ASSERT_TRUE(RunRecordCmd({"-f", std::to_string(UINT_MAX)}));
+  ASSERT_FALSE(RunRecordCmd({"-f", std::to_string(UINT_MAX)}));
 }
 
 TEST(record_cmd, multiple_freq_or_sample_period_option) {
@@ -692,5 +692,38 @@ TEST(record_cmd, support_mmap2) {
   // patches:
   //   13d7a2410fa637 perf: Add attr->mmap2 attribute to an event
   //   f972eb63b1003f perf: Pass protection and flags bits through mmap2 interface.
+  TEST_REQUIRE_HW_COUNTER();
   ASSERT_TRUE(IsMmap2Supported());
+}
+
+TEST(record_cmd, kernel_bug_making_zero_dyn_size) {
+  // Test a kernel bug that makes zero dyn_size in kernel < 3.13. If it fails, please cherry pick
+  // below kernel patch: 0a196848ca365e perf: Fix arch_perf_out_copy_user default
+  TEST_REQUIRE_HW_COUNTER();
+  std::vector<std::unique_ptr<Workload>> workloads;
+  CreateProcesses(1, &workloads);
+  std::string pid = std::to_string(workloads[0]->GetPid());
+  TemporaryFile tmpfile;
+  ASSERT_TRUE(RecordCmd()->Run({"-o", tmpfile.path, "-p", pid, "--call-graph", "dwarf,8",
+                                "--no-unwind", "--duration", "1"}));
+  std::unique_ptr<RecordFileReader> reader = RecordFileReader::CreateInstance(tmpfile.path);
+  ASSERT_TRUE(reader);
+  bool has_sample = false;
+  ASSERT_TRUE(reader->ReadDataSection([&](std::unique_ptr<Record> r) {
+    if (r->type() == PERF_RECORD_SAMPLE && !r->InKernel()) {
+      SampleRecord* sr = static_cast<SampleRecord*>(r.get());
+      if (sr->stack_user_data.dyn_size == 0) {
+        return false;
+      }
+      has_sample = true;
+    }
+    return true;
+  }));
+}
+
+TEST(record_cmd, cpu_percent_option) {
+  TEST_REQUIRE_HW_COUNTER();
+  ASSERT_TRUE(RunRecordCmd({"--cpu-percent", "50"}));
+  ASSERT_FALSE(RunRecordCmd({"--cpu-percent", "0"}));
+  ASSERT_FALSE(RunRecordCmd({"--cpu-percent", "101"}));
 }
