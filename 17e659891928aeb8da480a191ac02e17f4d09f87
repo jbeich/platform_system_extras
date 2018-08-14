@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "161a2804_3f4dc7d8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1136354
+      },
+      "writtenOn": "2018-08-14T20:06:51Z",
+      "side": 1,
+      "message": "We put bug b/63866463 as reference.",
+      "revId": "17e659891928aeb8da480a191ac02e17f4d09f87",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "67f61464_add14a51",
+        "filename": "ext4_utils/Android.bp",
+        "patchSetId": 6
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1136354
+      },
+      "writtenOn": "2018-08-14T20:06:51Z",
+      "side": 1,
+      "message": "We can remove this main property if name property equals the main file name.",
+      "revId": "17e659891928aeb8da480a191ac02e17f4d09f87",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
