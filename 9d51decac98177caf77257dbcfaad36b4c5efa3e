@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7fa1b73d_0dca4a6d",
+        "filename": "ext4_utils/mkuserimg_mke2fs.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-08-14T03:28:27Z",
+      "side": 1,
+      "message": "nit: do lazy evaluation for logging",
+      "range": {
+        "startLine": 36,
+        "startChar": 23,
+        "endLine": 36,
+        "endChar": 33
+      },
+      "revId": "9d51decac98177caf77257dbcfaad36b4c5efa3e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1c25e791_515443f3",
+        "filename": "ext4_utils/mkuserimg_mke2fs.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-08-14T03:28:27Z",
+      "side": 1,
+      "message": "choices\u003d[\u0027ext2\u0027, \u0027ext4\u0027]",
+      "range": {
+        "startLine": 55,
+        "startChar": 37,
+        "endLine": 55,
+        "endChar": 38
+      },
+      "revId": "9d51decac98177caf77257dbcfaad36b4c5efa3e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "81948683_727b120c",
+        "filename": "ext4_utils/mkuserimg_mke2fs.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-08-14T03:28:27Z",
+      "side": 1,
+      "message": "It sounds like a KI that will be fixed in future release? If so, can you put some details to the comment (bug id, or link, or the version that has the fix).",
+      "range": {
+        "startLine": 96,
+        "startChar": 8,
+        "endLine": 96,
+        "endChar": 15
+      },
+      "revId": "9d51decac98177caf77257dbcfaad36b4c5efa3e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "03577328_fa506dc2",
+        "filename": "ext4_utils/mkuserimg_mke2fs.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-08-14T03:28:27Z",
+      "side": 1,
+      "message": "parenthesis is preferred if possible.\n\n([\"mke2fs\"] + ... +\n [\"-t\", ...])",
+      "range": {
+        "startLine": 171,
+        "startChar": 47,
+        "endLine": 171,
+        "endChar": 48
+      },
+      "revId": "9d51decac98177caf77257dbcfaad36b4c5efa3e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b8c4f975_5335789a",
+        "filename": "ext4_utils/mkuserimg_mke2fs.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-08-14T03:28:27Z",
+      "side": 1,
+      "message": "nit: \"args.ext_variant not in\"",
+      "range": {
+        "startLine": 190,
+        "startChar": 5,
+        "endLine": 190,
+        "endChar": 28
+      },
+      "revId": "9d51decac98177caf77257dbcfaad36b4c5efa3e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "66668db1_d45f36eb",
+        "filename": "ext4_utils/mkuserimg_mke2fs.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-08-14T03:28:27Z",
+      "side": 1,
+      "message": "The comment in .sh looks helpful (\"# truncate output file since mke2fs will keep verity section in existing file\")",
+      "range": {
+        "startLine": 204,
+        "startChar": 2,
+        "endLine": 205,
+        "endChar": 21
+      },
+      "revId": "9d51decac98177caf77257dbcfaad36b4c5efa3e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ffde42f2_ce9ca0a3",
+        "filename": "ext4_utils/mkuserimg_mke2fs.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-08-14T03:28:27Z",
+      "side": 1,
+      "message": "I think it was the legacy name prior to defaulting mke2fs. We can just replace it with mke2fs to avoid confusion?",
+      "range": {
+        "startLine": 208,
+        "startChar": 2,
+        "endLine": 208,
+        "endChar": 13
+      },
+      "revId": "9d51decac98177caf77257dbcfaad36b4c5efa3e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
