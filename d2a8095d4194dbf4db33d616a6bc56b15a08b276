@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fb980063_97372a6f",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 903,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2018-08-14T00:46:43Z",
+      "side": 1,
+      "message": "Are you doing this as a hint to the compiler to try and avoid accessing it directly from the object?\n\nIt seems a bit confusing rather than just use the variable itself.",
+      "range": {
+        "startLine": 903,
+        "startChar": 2,
+        "endLine": 903,
+        "endChar": 45
+      },
+      "revId": "d2a8095d4194dbf4db33d616a6bc56b15a08b276",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4a696fbf_63c520c5",
+        "filename": "simpleperf/environment.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2018-08-14T00:46:43Z",
+      "side": 1,
+      "message": "This is a bit confusing. It might be better to do something like:\n\nbool SetPerfFromProperty(property, uint64_t value) {\n  if (SetProperty(property, std::to_string(value))) {\n     ...\n  }\n}\n\nThen the function would be:\n\nif (!SetPerfFromProperty(\"debug...\", sample_freq) || !SetPerfFromProperty(...)\n  return false;  \n}\n\nIt avoids the need to construct the vector.",
+      "range": {
+        "startLine": 389,
+        "startChar": 0,
+        "endLine": 400,
+        "endChar": 3
+      },
+      "revId": "d2a8095d4194dbf4db33d616a6bc56b15a08b276",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "49a08dab_77dbfe40",
+        "filename": "simpleperf/environment.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 403,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2018-08-14T00:46:43Z",
+      "side": 1,
+      "message": "Probably need a comment explaining this sleep and probably the whole loop.",
+      "range": {
+        "startLine": 403,
+        "startChar": 4,
+        "endLine": 403,
+        "endChar": 14
+      },
+      "revId": "d2a8095d4194dbf4db33d616a6bc56b15a08b276",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8f124006_f9af7e8f",
+        "filename": "simpleperf/environment.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 422,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2018-08-14T00:46:43Z",
+      "side": 1,
+      "message": "Should there be an overall timeout to avoid this spinning forever if you can never get the values?",
+      "range": {
+        "startLine": 422,
+        "startChar": 4,
+        "endLine": 422,
+        "endChar": 26
+      },
+      "revId": "d2a8095d4194dbf4db33d616a6bc56b15a08b276",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
