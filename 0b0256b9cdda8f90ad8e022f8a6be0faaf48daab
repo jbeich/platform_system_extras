@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "94266396_6235b830",
+        "filename": "ext4_utils/mkuserimg_mke2fs.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2018-08-15T23:14:56Z",
+      "side": 1,
+      "message": "https://cs.corp.google.com/aosp-master/build/make/tools/releasetools/build_image.py?l\u003d501",
+      "range": {
+        "startLine": 225,
+        "startChar": 0,
+        "endLine": 226,
+        "endChar": 22
+      },
+      "revId": "0b0256b9cdda8f90ad8e022f8a6be0faaf48daab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
