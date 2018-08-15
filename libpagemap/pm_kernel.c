@@ -51,9 +51,23 @@ int pm_kernel_create(pm_kernel_t **ker_out) {
         return error;
     }
 
+    /* This must be explicitly initialized through pm_kernel_init_page_idle() */
+    ker->pageidle_fd = -1;
+
     ker->pagesize = getpagesize();
 
     *ker_out = ker;
+
+    return 0;
+}
+
+int pm_kernel_init_page_idle(pm_kernel_t *ker) {
+    if (!ker)
+        return -EINVAL;
+
+    ker->pageidle_fd =
+        open("/sys/kernel/mm/page_idle/bitmap", O_RDWR | O_CLOEXEC);
+    if (ker->pageidle_fd < 0) return -errno;
 
     return 0;
 }
@@ -145,12 +159,89 @@ int pm_kernel_flags(pm_kernel_t *ker, uint64_t pfn, uint64_t *flags_out) {
     return 0;
 }
 
+int pm_kernel_has_page_idle(pm_kernel_t *ker) {
+    /* Treat error to be fallback to clear_refs */
+    if (!ker)
+        return 0;
+
+    return !(ker->pageidle_fd < 0);
+}
+
+int pm_kernel_get_page_idle(pm_kernel_t *ker, uint64_t pfn) {
+    uint64_t bits;
+    off_t offset;
+
+    if (!ker)
+        return -1;
+
+    if (ker->pageidle_fd < 0)
+        return -1;
+
+    offset = pfn_to_page_idle_offset(pfn);
+    if (pread(ker->pageidle_fd, &bits, sizeof(uint64_t), offset) < 0)
+        return -errno;
+
+    bits >>= (pfn % 64);
+
+    return bits & 1;
+}
+
+
+int pm_kernel_mark_page_idle(pm_kernel_t *ker, uint64_t *pfn, int n) {
+    int pageidle_fd;
+    uint64_t bits;
+    off_t offset;
+    int i;
+
+    if (!ker)
+        return -1;
+
+    if (ker->pageidle_fd < 0)
+        return -1;
+
+    for (i = 0; i < n; i++) {
+        offset = pfn_to_page_idle_offset(pfn[i]);
+        if (pread(ker->pageidle_fd, &bits, sizeof(uint64_t), offset) < 0)
+            return errno;
+
+        bits |= 1ULL << (pfn[i] % 64);
+
+        if (pwrite(ker->pageidle_fd, &bits, sizeof(uint64_t), offset) < 0)
+            return errno;
+    }
+
+    return 0;
+}
+
+int pm_kernel_page_is_accessed(pm_kernel_t *ker, uint64_t pfn, uint64_t *flags) {
+    int error;
+    uint64_t page_flags;
+
+    if (!ker)
+        return -EINVAL;
+
+    if (pm_kernel_has_page_idle(ker)) {
+        return pm_kernel_get_page_idle(ker, pfn);
+    }
+
+    if (!flags) {
+        flags = &page_flags;
+        error = pm_kernel_flags(ker, pfn, flags);
+        if (error)
+            return error;
+    }
+
+    return !!(*flags & (1 << KPF_REFERENCED));
+}
+
 int pm_kernel_destroy(pm_kernel_t *ker) {
     if (!ker)
         return -1;
 
     close(ker->kpagecount_fd);
     close(ker->kpageflags_fd);
+    if (ker->pageidle_fd >= 0)
+        close(ker->pageidle_fd);
 
     free(ker);
 

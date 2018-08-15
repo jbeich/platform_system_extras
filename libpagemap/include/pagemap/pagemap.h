@@ -81,6 +81,7 @@ typedef struct pm_map      pm_map_t;
 struct pm_kernel {
     int kpagecount_fd;
     int kpageflags_fd;
+    int pageidle_fd;
 
     int pagesize;
 };
@@ -115,6 +116,48 @@ struct pm_map {
 int pm_kernel_create(pm_kernel_t **ker_out);
 
 #define pm_kernel_pagesize(ker) ((ker)->pagesize)
+
+#define pfn_to_page_idle_offset(x) ((x >> 6) << 3)
+
+/* Sets us the interaction with kernel's idle page tracking support
+ * by opening /sys/kernel/mm/page_idle/bitmap
+ * Return:
+ * 0   - If successfull.
+ * < 0 - If an error occured or the interface is not supported by the running
+ *       kernel.
+ */
+int pm_kernel_init_page_idle(pm_kernel_t *ker);
+
+/* Checks if the kernel idle page tracking interface has been initialized.
+ * Return:
+ * 0 - if not initialized or failed to initialize.
+ * 1 - if we are ready to talk to page_idle/bitmap.
+ * < 0 - If there is an error.
+ */
+int pm_kernel_has_page_idle(pm_kernel_t * ker);
+
+/* Get Idle status of given page frame number.
+ * Returns:
+ *  0    if not idle and the page frame was accessed.
+ *  1    if the pfn is idle since the last time Idle flag was set.
+ *  < 0  if there is an error.
+ */
+int pm_kernel_get_page_idle(pm_kernel_t *ker, uint64_t pfn);
+
+/* Mark page frames idle.
+ * Return:
+ * 0   - if successful.
+ * < 0 - if there is an error
+ */
+int pm_kernel_mark_page_idle(pm_kernel_t *ker, uint64_t* pfn, int n);
+
+/* Determines if the page frame has been accessed by user space since
+ * the working set was last reset
+ * 0 - If not accessed.
+ * 1 - If accessed.
+ * < 0 - If there is an error.
+ */
+int pm_kernel_page_is_accessed(pm_kernel_t *ker, uint64_t pfn, uint64_t *flags);
 
 /* Get a list of probably-existing PIDs (returned through *pids_out).
  * Length of the array (in sizeof(pid_t) units) is returned through *len.
@@ -193,6 +236,9 @@ int pm_process_destroy(pm_process_t *proc);
  * Array of PFNs is returned through *pagemap_out, and should be freed by the
  * caller. */
 int pm_map_pagemap(pm_map_t *map, uint64_t **pagemap_out, size_t *len);
+
+/* Mark all the present pages in processe's VM as idle */
+int pm_map_mark_idle(pm_map_t *map);
 
 /* Get the memory usage of this map alone. */
 int pm_map_usage(pm_map_t *map, pm_memusage_t *usage_out);

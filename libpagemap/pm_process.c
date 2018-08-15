@@ -27,6 +27,8 @@
 #include "pm_map.h"
 
 static int read_maps(pm_process_t *proc);
+static int pm_process_clear_refs(pm_process_t *proc);
+static int pm_process_mark_idle(pm_process_t *proc);
 
 #define MAX_FILENAME 64
 
@@ -179,8 +181,6 @@ int pm_process_maps(pm_process_t *proc, pm_map_t ***maps_out, size_t *len) {
 int pm_process_workingset(pm_process_t *proc,
                           pm_memusage_t *ws_out, int reset) {
     pm_memusage_t ws, map_ws;
-    char filename[MAX_FILENAME];
-    int fd;
     int i, j;
     int error;
 
@@ -200,24 +200,14 @@ int pm_process_workingset(pm_process_t *proc,
 
             pm_memusage_add(&ws, &map_ws);
         }
-        
         memcpy(ws_out, &ws, sizeof(ws));
     }
 
     if (reset) {
-        error = snprintf(filename, MAX_FILENAME, "/proc/%d/clear_refs",
-                         proc->pid);
-        if (error < 0 || error >= MAX_FILENAME) {
-            return (error < 0) ? (errno) : (-1);
-        }
-
-        fd = open(filename, O_WRONLY);
-        if (fd < 0)
-            return errno;
-
-        write(fd, "1\n", strlen("1\n"));
-
-        close(fd);
+        if (pm_kernel_has_page_idle(proc->ker))
+            return pm_process_mark_idle(proc);
+        else
+            return pm_process_clear_refs(proc);
     }
 
     return 0;
@@ -326,6 +316,47 @@ static int read_maps(pm_process_t *proc) {
 
     proc->maps = new_maps;
     proc->num_maps = maps_count;
+
+    return 0;
+}
+
+static int pm_process_clear_refs(pm_process_t *proc) {
+    int error;
+    char filename[MAX_FILENAME];
+    int fd;
+
+    if (!proc)
+        return -EINVAL;
+
+    error = snprintf(filename, MAX_FILENAME, "/proc/%d/clear_refs",
+            proc->pid);
+    if (error < 0 || error >= MAX_FILENAME) {
+        return (error < 0) ? (errno) : (-1);
+    }
+
+    fd = open(filename, O_WRONLY);
+    if (fd < 0)
+        return errno;
+
+    write(fd, "1\n", strlen("1\n"));
+
+    close(fd);
+
+    return 0;
+}
+
+static int pm_process_mark_idle(pm_process_t *proc) {
+    int error;
+    uint64_t *pagemap;
+    size_t i;
+
+    if (!proc)
+        return -EINVAL;
+
+    for (i = 0; i < proc->num_maps; i++) {
+        error = pm_map_mark_idle(proc->maps[i]);
+        if (error) return error;
+    }
 
     return 0;
 }
