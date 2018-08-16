@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9e3439e1_9144f43e",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-08-16T15:02:24Z",
+      "side": 1,
+      "message": "remove? seems unlikely that someone would be working on master but not know system/ was a top-level directory.",
+      "range": {
+        "startLine": 415,
+        "startChar": 34,
+        "endLine": 415,
+        "endChar": 47
+      },
+      "revId": "607aa4fa7d605a57319c8e240ea0ec39e970a8ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1becd911_068457d9",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-08-16T15:02:24Z",
+      "side": 1,
+      "message": "maybe change this to \"if you\u0027re not working on the current master branch\" then?",
+      "range": {
+        "startLine": 414,
+        "startChar": 74,
+        "endLine": 415,
+        "endChar": 17
+      },
+      "revId": "607aa4fa7d605a57319c8e240ea0ec39e970a8ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "48ea460b_2994da75",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-08-16T15:02:24Z",
+      "side": 1,
+      "message": "`` around file and directory and script names?",
+      "range": {
+        "startLine": 417,
+        "startChar": 28,
+        "endLine": 417,
+        "endChar": 43
+      },
+      "revId": "607aa4fa7d605a57319c8e240ea0ec39e970a8ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
