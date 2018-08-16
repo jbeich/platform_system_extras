@@ -1,0 +1,222 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f6223519_98cc6b95",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-08-16T00:43:43Z",
+      "side": 1,
+      "message": "flash",
+      "range": {
+        "startLine": 411,
+        "startChar": 66,
+        "endLine": 411,
+        "endChar": 71
+      },
+      "revId": "3a9c1fd3055ee4724e7003e6a2358f2091ab28c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "af00ff0b_1a39ad47",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-08-16T00:43:43Z",
+      "side": 1,
+      "message": "if you\u0027re developing Android, won\u0027t you be using the latest one anyway?",
+      "range": {
+        "startLine": 414,
+        "startChar": 3,
+        "endLine": 415,
+        "endChar": 17
+      },
+      "revId": "3a9c1fd3055ee4724e7003e6a2358f2091ab28c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5ac47d79_09eef2ca",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-08-16T00:43:43Z",
+      "side": 1,
+      "message": "Disassembling",
+      "range": {
+        "startLine": 440,
+        "startChar": 38,
+        "endLine": 440,
+        "endChar": 49
+      },
+      "revId": "3a9c1fd3055ee4724e7003e6a2358f2091ab28c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6fd90c1b_ffb549d3",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 441,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-08-16T00:43:43Z",
+      "side": 1,
+      "message": "disassemble",
+      "range": {
+        "startLine": 441,
+        "startChar": 33,
+        "endLine": 441,
+        "endChar": 44
+      },
+      "revId": "3a9c1fd3055ee4724e7003e6a2358f2091ab28c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d0698c56_1d39db20",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-08-16T00:43:43Z",
+      "side": 1,
+      "message": "$ANDROID_BUILD_TOP?",
+      "revId": "3a9c1fd3055ee4724e7003e6a2358f2091ab28c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "26621a77_868ad741",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 629,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-08-16T00:43:43Z",
+      "side": 1,
+      "message": "# Stat the process of an Android application. This only works for debuggable apps on non-rooted devices.",
+      "revId": "3a9c1fd3055ee4724e7003e6a2358f2091ab28c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b130eee3_19cd5c84",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 728,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-08-16T00:43:43Z",
+      "side": 1,
+      "message": "# Stat the process of an Android application. This only works for debuggable apps on non-rooted devices.",
+      "range": {
+        "startLine": 727,
+        "startChar": 0,
+        "endLine": 728,
+        "endChar": 0
+      },
+      "revId": "3a9c1fd3055ee4724e7003e6a2358f2091ab28c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2cb2d567_15a344c4",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 950,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-08-16T00:43:43Z",
+      "side": 1,
+      "message": "this",
+      "range": {
+        "startLine": 950,
+        "startChar": 61,
+        "endLine": 950,
+        "endChar": 63
+      },
+      "revId": "3a9c1fd3055ee4724e7003e6a2358f2091ab28c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e0147a3d_6ed9a798",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 1026,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-08-16T00:43:43Z",
+      "side": 1,
+      "message": "\"given a pid\" or \"given its pid\"",
+      "range": {
+        "startLine": 1026,
+        "startChar": 26,
+        "endLine": 1026,
+        "endChar": 35
+      },
+      "revId": "3a9c1fd3055ee4724e7003e6a2358f2091ab28c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f909af12_bf03fe13",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 1147,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-08-16T00:43:43Z",
+      "side": 1,
+      "message": "\"can optionally only\"/\"can choose to only\", to make it explicit that this is a choice.",
+      "range": {
+        "startLine": 1147,
+        "startChar": 68,
+        "endLine": 1147,
+        "endChar": 76
+      },
+      "revId": "3a9c1fd3055ee4724e7003e6a2358f2091ab28c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
