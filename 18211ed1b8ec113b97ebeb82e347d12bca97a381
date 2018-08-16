@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a495eb7a_9278c822",
+        "filename": "simpleperf/scripts/binary_cache_builder.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-08-16T00:38:39Z",
+      "side": 1,
+      "message": "might be a bit easier to think about if it was the other way round, with larger numbers meaning more stripped?",
+      "range": {
+        "startLine": 143,
+        "startChar": 8,
+        "endLine": 143,
+        "endChar": 34
+      },
+      "revId": "18211ed1b8ec113b97ebeb82e347d12bca97a381",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3b641555_05a8a128",
+        "filename": "simpleperf/scripts/binary_cache_builder.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-08-16T00:38:39Z",
+      "side": 1,
+      "message": "why is .symtab worth 2 and .debug_line worth 1?",
+      "revId": "18211ed1b8ec113b97ebeb82e347d12bca97a381",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
