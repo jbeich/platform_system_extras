@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "52dec56e_3ccd1d1b",
+        "filename": "simpleperf/scripts/binary_cache_builder.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-08-16T00:53:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a495eb7a_9278c822",
+      "range": {
+        "startLine": 143,
+        "startChar": 8,
+        "endLine": 143,
+        "endChar": 34
+      },
+      "revId": "18211ed1b8ec113b97ebeb82e347d12bca97a381",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3b641555_05a8a128",
         "filename": "simpleperf/scripts/binary_cache_builder.py",
         "patchSetId": 1
@@ -36,6 +60,24 @@
       "writtenOn": "2018-08-16T00:38:39Z",
       "side": 1,
       "message": "why is .symtab worth 2 and .debug_line worth 1?",
+      "revId": "18211ed1b8ec113b97ebeb82e347d12bca97a381",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d1502456_aaba61d9",
+        "filename": "simpleperf/scripts/binary_cache_builder.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-08-16T00:53:31Z",
+      "side": 1,
+      "message": "I thought that a binary with .symtab but without .debug_line was better than a binary with .debug_line but without .symtab. But there shouldn\u0027t be a binary with .debug_line but without .symtab. Changed the code.",
+      "parentUuid": "3b641555_05a8a128",
       "revId": "18211ed1b8ec113b97ebeb82e347d12bca97a381",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
