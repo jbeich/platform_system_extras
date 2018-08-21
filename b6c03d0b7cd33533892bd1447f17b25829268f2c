@@ -1,0 +1,170 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2054d142_eadb1d09",
+        "filename": "libpagemap/include/pagemap/pagemap.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-08-21T18:26:33Z",
+      "side": 1,
+      "message": "up",
+      "range": {
+        "startLine": 122,
+        "startChar": 8,
+        "endLine": 122,
+        "endChar": 10
+      },
+      "revId": "b6c03d0b7cd33533892bd1447f17b25829268f2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4bbc8691_492f7ce0",
+        "filename": "libpagemap/include/pagemap/pagemap.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-08-21T18:26:33Z",
+      "side": 1,
+      "message": "successful\n\n(your editor probably has a spelling checker for comments that you can turn on)",
+      "range": {
+        "startLine": 125,
+        "startChar": 12,
+        "endLine": 125,
+        "endChar": 23
+      },
+      "revId": "b6c03d0b7cd33533892bd1447f17b25829268f2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "211ab5e1_019b2faf",
+        "filename": "libpagemap/include/pagemap/pagemap.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-08-21T18:26:33Z",
+      "side": 1,
+      "message": "occurred\n\n(maybe just the \"Returns 0 on success or -errno on failure\" boilerplate, to explain what the errors are, and to distinguish this from \"-1 and sets errno on failure\"?)",
+      "range": {
+        "startLine": 126,
+        "startChar": 21,
+        "endLine": 126,
+        "endChar": 28
+      },
+      "revId": "b6c03d0b7cd33533892bd1447f17b25829268f2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3fb47e75_09eafcb7",
+        "filename": "libpagemap/pm_kernel.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-08-21T18:26:33Z",
+      "side": 1,
+      "message": "`|| ker-\u003epageidle_fd !\u003d -1`?",
+      "revId": "b6c03d0b7cd33533892bd1447f17b25829268f2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "729844b7_f68e561c",
+        "filename": "libpagemap/pm_kernel.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-08-21T18:26:33Z",
+      "side": 1,
+      "message": "EINVAL",
+      "range": {
+        "startLine": 175,
+        "startChar": 16,
+        "endLine": 175,
+        "endChar": 17
+      },
+      "revId": "b6c03d0b7cd33533892bd1447f17b25829268f2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "18ef60e0_bc0e017a",
+        "filename": "libpagemap/pm_process.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-08-21T18:26:33Z",
+      "side": 1,
+      "message": "`| O_CLOEXEC`",
+      "range": {
+        "startLine": 337,
+        "startChar": 24,
+        "endLine": 337,
+        "endChar": 32
+      },
+      "revId": "b6c03d0b7cd33533892bd1447f17b25829268f2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c2de10e8_4b739711",
+        "filename": "libpagemap/pm_process.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-08-21T18:26:33Z",
+      "side": 1,
+      "message": "unused. are we not building with warnings?",
+      "revId": "b6c03d0b7cd33533892bd1447f17b25829268f2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aa58a2cd_a36116ec",
+        "filename": "libpagemap/pm_process.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-08-21T18:26:33Z",
+      "side": 1,
+      "message": "in general, we have C11, so why not wait to declare until you can actually assign?",
+      "revId": "b6c03d0b7cd33533892bd1447f17b25829268f2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
