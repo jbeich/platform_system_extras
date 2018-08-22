@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "9866495e_05e08d55",
+        "filename": "libpagemap/pm_kernel.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1108565
+      },
+      "writtenOn": "2018-08-22T17:06:38Z",
+      "side": 1,
+      "message": "nice catch. Not ok with 32bit offsets. The pfns themselves can start closer to the 32bit max and this will then roll over and throw errors.\n\nI\u0027ll fix the tabs too, its my punishment for not using the \u0027repo upload\u0027 checks and doing \u0027git push\u0027",
+      "parentUuid": "0ce1be0f_562a2783",
+      "range": {
+        "startLine": 170,
+        "startChar": 4,
+        "endLine": 170,
+        "endChar": 9
+      },
+      "revId": "f80482cfc48a48493530f90bf74cdc219d5f6c2a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "42605a31_120053b8",
         "filename": "libpagemap/pm_process.c",
         "patchSetId": 2
