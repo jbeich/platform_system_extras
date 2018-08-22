@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "fea6621d_cd0b1cea",
+        "filename": "libpagemap/pm_kernel.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1108565
+      },
+      "writtenOn": "2018-08-22T23:07:58Z",
+      "side": 1,
+      "message": "I didn\u0027t change the old code much as part of this except for errnos, but since I\u0027m touching the code anyway, let me fix this and everywhere else.",
+      "parentUuid": "5144cf6a_45e4e2b6",
+      "range": {
+        "startLine": 138,
+        "startChar": 16,
+        "endLine": 138,
+        "endChar": 21
+      },
+      "revId": "376a2c0210e4a1369fcaa5842596a4c725e6f197",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "60d87c38_6f0c5e0e",
         "filename": "libpagemap/pm_kernel.c",
         "patchSetId": 5
