@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "25536bdd_280000e5",
+        "filename": "libpagemap/include/pagemap/pagemap.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1108565
+      },
+      "writtenOn": "2018-08-22T15:41:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2054d142_eadb1d09",
+      "range": {
+        "startLine": 122,
+        "startChar": 8,
+        "endLine": 122,
+        "endChar": 10
+      },
+      "revId": "b6c03d0b7cd33533892bd1447f17b25829268f2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4bbc8691_492f7ce0",
         "filename": "libpagemap/include/pagemap/pagemap.h",
         "patchSetId": 1
@@ -60,6 +84,30 @@
       "side": 1,
       "message": "Ack",
       "parentUuid": "4bbc8691_492f7ce0",
+      "range": {
+        "startLine": 125,
+        "startChar": 12,
+        "endLine": 125,
+        "endChar": 23
+      },
+      "revId": "b6c03d0b7cd33533892bd1447f17b25829268f2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "81ecc1a8_90fd79ce",
+        "filename": "libpagemap/include/pagemap/pagemap.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1108565
+      },
+      "writtenOn": "2018-08-22T15:41:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d9ac8094_2fee2d78",
       "range": {
         "startLine": 125,
         "startChar": 12,
@@ -119,6 +167,30 @@
     },
     {
       "key": {
+        "uuid": "ae472831_28caddb2",
+        "filename": "libpagemap/include/pagemap/pagemap.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1108565
+      },
+      "writtenOn": "2018-08-22T15:41:32Z",
+      "side": 1,
+      "message": "...was indeed missing \u0027set spell\u0027, fixed now including the cryptic return value description.",
+      "parentUuid": "f9e50a8c_7e93998a",
+      "range": {
+        "startLine": 126,
+        "startChar": 21,
+        "endLine": 126,
+        "endChar": 28
+      },
+      "revId": "b6c03d0b7cd33533892bd1447f17b25829268f2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3fb47e75_09eafcb7",
         "filename": "libpagemap/pm_kernel.c",
         "patchSetId": 1
@@ -133,6 +205,24 @@
       "revId": "b6c03d0b7cd33533892bd1447f17b25829268f2c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f569f446_a4bf0a32",
+        "filename": "libpagemap/pm_kernel.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1108565
+      },
+      "writtenOn": "2018-08-22T15:41:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3fb47e75_09eafcb7",
+      "revId": "b6c03d0b7cd33533892bd1447f17b25829268f2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -156,6 +246,30 @@
       "revId": "b6c03d0b7cd33533892bd1447f17b25829268f2c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cb132a1b_a362cfce",
+        "filename": "libpagemap/pm_kernel.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1108565
+      },
+      "writtenOn": "2018-08-22T15:41:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "729844b7_f68e561c",
+      "range": {
+        "startLine": 175,
+        "startChar": 16,
+        "endLine": 175,
+        "endChar": 17
+      },
+      "revId": "b6c03d0b7cd33533892bd1447f17b25829268f2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -206,6 +320,30 @@
     },
     {
       "key": {
+        "uuid": "7b7b3933_55336d00",
+        "filename": "libpagemap/pm_process.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1108565
+      },
+      "writtenOn": "2018-08-22T15:41:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ead3ff44_3bf43063",
+      "range": {
+        "startLine": 337,
+        "startChar": 24,
+        "endLine": 337,
+        "endChar": 32
+      },
+      "revId": "b6c03d0b7cd33533892bd1447f17b25829268f2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c2de10e8_4b739711",
         "filename": "libpagemap/pm_process.c",
         "patchSetId": 1
@@ -241,6 +379,24 @@
     },
     {
       "key": {
+        "uuid": "93ce93c0_4200237a",
+        "filename": "libpagemap/pm_process.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 1108565
+      },
+      "writtenOn": "2018-08-22T15:41:32Z",
+      "side": 1,
+      "message": "I think its because of this - https://cs.corp.google.com/aosp-master/system/extras/Android.bp?q\u003df:system/extras/Android.bp\u0026g\u003d0\u0026l\u003d8\n\nI found another instance of unused variable in pm_kernel_mark_page_idle and fixed that too now. Our of curiosity I\u0027ll try to build system/extras without the Wno-unused-variable and see what goes wrong.",
+      "parentUuid": "09afdf75_fa9a09ea",
+      "revId": "b6c03d0b7cd33533892bd1447f17b25829268f2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "aa58a2cd_a36116ec",
         "filename": "libpagemap/pm_process.c",
         "patchSetId": 1
@@ -270,6 +426,24 @@
       "side": 1,
       "message": "Ack",
       "parentUuid": "aa58a2cd_a36116ec",
+      "revId": "b6c03d0b7cd33533892bd1447f17b25829268f2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2a0aa0c1_b07e4911",
+        "filename": "libpagemap/pm_process.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1108565
+      },
+      "writtenOn": "2018-08-22T15:41:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d719a2f0_99a20ab0",
       "revId": "b6c03d0b7cd33533892bd1447f17b25829268f2c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
