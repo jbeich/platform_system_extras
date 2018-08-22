@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c3d35618_78199732",
+        "filename": "libpagemap/pm_kernel.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-08-22T16:19:48Z",
+      "side": 1,
+      "message": "tabs",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 65,
+        "endChar": 1
+      },
+      "revId": "f80482cfc48a48493530f90bf74cdc219d5f6c2a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0ce1be0f_562a2783",
+        "filename": "libpagemap/pm_kernel.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-08-22T16:19:48Z",
+      "side": 1,
+      "message": "you\u0027re okay with this being 32-bit on LP32?",
+      "range": {
+        "startLine": 170,
+        "startChar": 4,
+        "endLine": 170,
+        "endChar": 9
+      },
+      "revId": "f80482cfc48a48493530f90bf74cdc219d5f6c2a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "42605a31_120053b8",
+        "filename": "libpagemap/pm_process.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-08-22T16:19:48Z",
+      "side": 1,
+      "message": "tabs in this file too",
+      "range": {
+        "startLine": 349,
+        "startChar": 0,
+        "endLine": 349,
+        "endChar": 1
+      },
+      "revId": "f80482cfc48a48493530f90bf74cdc219d5f6c2a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
