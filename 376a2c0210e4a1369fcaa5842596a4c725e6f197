@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5144cf6a_45e4e2b6",
+        "filename": "libpagemap/pm_kernel.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-08-22T22:19:16Z",
+      "side": 1,
+      "message": "off64_t?",
+      "range": {
+        "startLine": 138,
+        "startChar": 16,
+        "endLine": 138,
+        "endChar": 21
+      },
+      "revId": "376a2c0210e4a1369fcaa5842596a4c725e6f197",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "60d87c38_6f0c5e0e",
+        "filename": "libpagemap/pm_kernel.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-08-22T22:19:16Z",
+      "side": 1,
+      "message": "do you care about EINTR and/or short reads?",
+      "range": {
+        "startLine": 139,
+        "startChar": 8,
+        "endLine": 139,
+        "endChar": 12
+      },
+      "revId": "376a2c0210e4a1369fcaa5842596a4c725e6f197",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0308c3b7_e9ca9b24",
+        "filename": "libpagemap/pm_kernel.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-08-22T22:19:16Z",
+      "side": 1,
+      "message": "off64_t?",
+      "range": {
+        "startLine": 153,
+        "startChar": 16,
+        "endLine": 153,
+        "endChar": 21
+      },
+      "revId": "376a2c0210e4a1369fcaa5842596a4c725e6f197",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3c748c92_c79b30b3",
+        "filename": "libpagemap/pm_process.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-08-22T22:19:16Z",
+      "side": 1,
+      "message": "EINTR/short writes?",
+      "range": {
+        "startLine": 341,
+        "startChar": 4,
+        "endLine": 341,
+        "endChar": 9
+      },
+      "revId": "376a2c0210e4a1369fcaa5842596a4c725e6f197",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
