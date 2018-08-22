@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ca1506e9_9bbbc00a",
+        "filename": "libpagemap/.clang-format",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-08-22T22:07:55Z",
+      "side": 1,
+      "message": "symlink to the one in system/core/?\n\n(why isn\u0027t this library in system/core/ anyway? it\u0027s not actually optional, is it?)",
+      "revId": "0bbee00caeb609d5fa36a87d5b18921436af475a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
