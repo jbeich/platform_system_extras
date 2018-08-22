@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "f92a7c12_236ce76e",
+        "filename": "libpagemap/pm_kernel.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1108565
+      },
+      "writtenOn": "2018-08-22T23:25:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fea6621d_cd0b1cea",
+      "range": {
+        "startLine": 138,
+        "startChar": 16,
+        "endLine": 138,
+        "endChar": 21
+      },
+      "revId": "376a2c0210e4a1369fcaa5842596a4c725e6f197",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "60d87c38_6f0c5e0e",
         "filename": "libpagemap/pm_kernel.c",
         "patchSetId": 5
@@ -60,6 +84,30 @@
       "writtenOn": "2018-08-22T22:19:16Z",
       "side": 1,
       "message": "do you care about EINTR and/or short reads?",
+      "range": {
+        "startLine": 139,
+        "startChar": 8,
+        "endLine": 139,
+        "endChar": 12
+      },
+      "revId": "376a2c0210e4a1369fcaa5842596a4c725e6f197",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "690d8192_c9e2b815",
+        "filename": "libpagemap/pm_kernel.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1108565
+      },
+      "writtenOn": "2018-08-22T23:25:55Z",
+      "side": 1,
+      "message": "EINTR yes, short reads are errors propagated up anyway.",
+      "parentUuid": "60d87c38_6f0c5e0e",
       "range": {
         "startLine": 139,
         "startChar": 8,
@@ -95,6 +143,30 @@
     },
     {
       "key": {
+        "uuid": "b9df15e8_abc3867c",
+        "filename": "libpagemap/pm_kernel.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1108565
+      },
+      "writtenOn": "2018-08-22T23:25:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0308c3b7_e9ca9b24",
+      "range": {
+        "startLine": 153,
+        "startChar": 16,
+        "endLine": 153,
+        "endChar": 21
+      },
+      "revId": "376a2c0210e4a1369fcaa5842596a4c725e6f197",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3c748c92_c79b30b3",
         "filename": "libpagemap/pm_process.c",
         "patchSetId": 5
@@ -106,6 +178,30 @@
       "writtenOn": "2018-08-22T22:19:16Z",
       "side": 1,
       "message": "EINTR/short writes?",
+      "range": {
+        "startLine": 341,
+        "startChar": 4,
+        "endLine": 341,
+        "endChar": 9
+      },
+      "revId": "376a2c0210e4a1369fcaa5842596a4c725e6f197",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "08722012_6b3ab4d3",
+        "filename": "libpagemap/pm_process.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1108565
+      },
+      "writtenOn": "2018-08-22T23:25:55Z",
+      "side": 1,
+      "message": "error on short write, will wrap with the retry macro for EINTER",
+      "parentUuid": "3c748c92_c79b30b3",
       "range": {
         "startLine": 341,
         "startChar": 4,
