@@ -16,6 +16,24 @@
       "revId": "0bbee00caeb609d5fa36a87d5b18921436af475a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4b57ee8a_e6be3a01",
+        "filename": "libpagemap/.clang-format",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1108565
+      },
+      "writtenOn": "2018-08-23T00:20:15Z",
+      "side": 1,
+      "message": "I didn\u0027t want to symlink cross-git project, so I didn\u0027t. \n\nCodesearch tells me libmemtrack, art/dexlayout depend on it, so may be its not optional. I can move it later though.",
+      "parentUuid": "ca1506e9_9bbbc00a",
+      "revId": "0bbee00caeb609d5fa36a87d5b18921436af475a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
