@@ -139,10 +139,10 @@ std::tuple<bool, std::string, std::string> SplitUrlInApk(const std::string& path
   return std::make_tuple(true, path.substr(0, pos), path.substr(pos + 2));
 }
 
-// Parse path like "/dev/ashmem/dalvik-classes.dex extracted in memory from /..base.apk (deleted)".
+// Parse path like "[anon:dalvik-classes.dex extracted in memory from /..base.apk (deleted)".
 bool ParseExtractedInMemoryPath(const std::string& path, std::string* zip_path,
                                 std::string* entry_name) {
-  const char* prefix = "/dev/ashmem/dalvik-";
+  const char* prefix = "[anon:dalvik-";
   const char* key = " extracted in memory from ";
   size_t pos = path.find(key);
   if (pos != std::string::npos && android::base::StartsWith(path, prefix)) {

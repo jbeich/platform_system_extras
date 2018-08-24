@@ -209,6 +209,8 @@ class PerfProfdTest : public testing::Test {
      std::string sqexp = squeezeWhite(expected, "expected");
 
      // Strip out JIT errors.
+     // FIXME: This now needs to parse [anon:dalvik-jit-code-cache]
+     // I don't have much background with perfprofd. Could owners fix it?
      std::regex jit_regex("E: Failed to open ELF file: [^ ]*ashmem/dalvik-jit-code-cache.*");
      auto strip_jit = [&](const std::string& str) {
        std::smatch jit_match;
