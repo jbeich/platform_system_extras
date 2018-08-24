@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a8b5a04_3d6091f7",
+        "filename": "perfprofd/tests/perfprofd_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1124848
+      },
+      "writtenOn": "2018-08-24T19:32:37Z",
+      "side": 1,
+      "message": "Yabin, could you help fix this?",
+      "revId": "2eafafa79ca1ce1617bb4938cf1d4f1ec7c2dc93",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8dd638ed_7aa0c022",
+        "filename": "simpleperf/scripts/debug_unwind_reporter.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 1124848
+      },
+      "writtenOn": "2018-08-24T19:32:37Z",
+      "side": 1,
+      "message": "Yabin, could you help fix this?",
+      "revId": "2eafafa79ca1ce1617bb4938cf1d4f1ec7c2dc93",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
