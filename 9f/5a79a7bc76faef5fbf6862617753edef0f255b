@@ -1,0 +1,9 @@
+Code-Review+2: Paul Crowley <paulcrowley@google.com>
+Code-Review+2: Tom Cherry <tomcherry@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Verified+1: Tao Bao <tbao@google.com>
+Submitted-by: Tao Bao <tbao@google.com>
+Submitted-at: Fri, 24 Aug 2018 21:48:40 +0000
+Reviewed-on: https://android-review.googlesource.com/730092
+Project: platform/system/extras
+Branch: refs/heads/master
