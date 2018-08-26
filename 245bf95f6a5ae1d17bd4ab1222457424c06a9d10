@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "58ba5b2d_b22bf84f",
+        "filename": "Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2018-08-26T21:46:58Z",
+      "side": 1,
+      "message": "anything blocking these and the ones below?",
+      "range": {
+        "startLine": 6,
+        "startChar": 9,
+        "endLine": 6,
+        "endChar": 31
+      },
+      "revId": "245bf95f6a5ae1d17bd4ab1222457424c06a9d10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3db4629a_8df0bfeb",
+        "filename": "Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2018-08-26T21:46:58Z",
+      "side": 1,
+      "message": "any reason not to make these part of regular cflags? Now that clang is the default, there isn\u0027t a reason to have separate clang_cflags, I thought. They are just legacy configurations hanging around.",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 6
+      },
+      "revId": "245bf95f6a5ae1d17bd4ab1222457424c06a9d10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
