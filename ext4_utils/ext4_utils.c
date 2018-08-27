@@ -221,19 +221,19 @@ u64 get_block_device_size(int fd)
 	return size;
 }
 
+#ifdef _WIN32
+int is_block_device_fd(int __attribute__((__unused__)) fd) { return 0; }
+#else
 int is_block_device_fd(int fd)
 {
-#ifdef _WIN32
-	return 0;
-#else
 	struct stat st;
 	int ret = fstat(fd, &st);
 	if (ret < 0)
 		return 0;
 
 	return S_ISBLK(st.st_mode);
-#endif
 }
+#endif
 
 u64 get_file_size(int fd)
 {
@@ -307,4 +307,3 @@ int read_ext(int fd, int verbose)
 
 	return 0;
 }
-
