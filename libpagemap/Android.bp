@@ -20,6 +20,7 @@ cc_library {
         enabled: true,
     },
     srcs: [
+        "pm.c",
         "pm_kernel.c",
         "pm_process.c",
         "pm_map.c",

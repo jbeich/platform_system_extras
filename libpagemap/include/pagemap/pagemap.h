@@ -156,11 +156,6 @@ int pm_kernel_mark_page_idle(pm_kernel_t* ker, uint64_t* pfn, int n);
  */
 int pm_kernel_page_is_accessed(pm_kernel_t* ker, uint64_t pfn, uint64_t* flags);
 
-/* Get a list of probably-existing PIDs (returned through *pids_out).
- * Length of the array (in sizeof(pid_t) units) is returned through *len.
- * The array should be freed by the caller. */
-int pm_kernel_pids(pm_kernel_t *ker, pid_t **pids_out, size_t *len);
-
 /* Get the map count (from /proc/kpagecount) of a physical frame.
  * The count is returned through *count_out. */
 int pm_kernel_count(pm_kernel_t *ker, uint64_t pfn, uint64_t *count_out);
@@ -247,6 +242,12 @@ int pm_map_usage_flags(pm_map_t *map, pm_memusage_t *usage_out,
 
 /* Get the working set of this map alone. */
 int pm_map_workingset(pm_map_t *map, pm_memusage_t *ws_out);
+
+/* Get a list of existing PIDs (returned through *pids_out).
+ * Length of the array (in sizeof(pid_t) units) is returned through 'len'.
+ * The array should be freed by the caller.
+ */
+int pm_get_pids(pid_t** pids_out, size_t* len);
 
 __END_DECLS
 

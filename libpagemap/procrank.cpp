@@ -244,7 +244,7 @@ int main(int argc, char *argv[]) {
         exit(EXIT_FAILURE);
     }
 
-    error = pm_kernel_pids(ker, &pids, &num_procs);
+    error = pm_get_pids(&pids, &num_procs);
     if (error) {
         fprintf(stderr, "Error listing processes.\n");
         exit(EXIT_FAILURE);
