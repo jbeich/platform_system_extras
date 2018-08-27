@@ -3,7 +3,7 @@ cc_defaults {
     cflags: [
         "-Wall",
         "-Werror",
-        "-Wno-unused-parameter",
+        "-Wno-unused-result",
     ],
     clang_cflags: [
         "-Wno-incompatible-pointer-types-discards-qualifiers",
