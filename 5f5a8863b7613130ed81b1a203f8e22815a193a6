@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4804eacc_d56abe90",
+        "filename": "ext4_utils/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2018-08-27T22:18:49Z",
+      "side": 1,
+      "message": "is this not the default here yet?",
+      "range": {
+        "startLine": 13,
+        "startChar": 15,
+        "endLine": 13,
+        "endChar": 21
+      },
+      "revId": "5f5a8863b7613130ed81b1a203f8e22815a193a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4aa085c1_e0d157c7",
+        "filename": "ext4_utils/ext4_utils.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2018-08-27T22:18:49Z",
+      "side": 1,
+      "message": "nit: \u0027(void) fd;\u0027 here\n\nIt\u0027s a minor thing, but you still want to get an error if it\u0027s not used in the regular path. tbh, doesn\u0027t matter in practice in this case, but in general, why not do it this way?",
+      "range": {
+        "startLine": 227,
+        "startChar": 1,
+        "endLine": 227,
+        "endChar": 7
+      },
+      "revId": "5f5a8863b7613130ed81b1a203f8e22815a193a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
