@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "7f2a53e8_1ca6ebbd",
+        "filename": "ext4_utils/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-08-27T22:40:45Z",
+      "side": 1,
+      "message": "pirama@ tells me that there\u0027s nowhere that has -Werror by default, but the whole tree has -Werror\u003d for a few select warnings (https://www.google.com/url?q\u003dhttps://android.googlesource.com/platform/build/soong/%2B/master/cc/config/global.go%2368).",
+      "parentUuid": "4804eacc_d56abe90",
+      "range": {
+        "startLine": 13,
+        "startChar": 15,
+        "endLine": 13,
+        "endChar": 21
+      },
+      "revId": "5f5a8863b7613130ed81b1a203f8e22815a193a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4aa085c1_e0d157c7",
         "filename": "ext4_utils/ext4_utils.c",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2018-08-27T22:18:49Z",
       "side": 1,
       "message": "nit: \u0027(void) fd;\u0027 here\n\nIt\u0027s a minor thing, but you still want to get an error if it\u0027s not used in the regular path. tbh, doesn\u0027t matter in practice in this case, but in general, why not do it this way?",
+      "range": {
+        "startLine": 227,
+        "startChar": 1,
+        "endLine": 227,
+        "endChar": 7
+      },
+      "revId": "5f5a8863b7613130ed81b1a203f8e22815a193a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "228aa9c4_18e850c0",
+        "filename": "ext4_utils/ext4_utils.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2018-08-27T22:40:45Z",
+      "side": 1,
+      "message": "because that path leads to other compiler complaints...\n\ni think the right fix is to move all this stuff to C++ and use the libbase UNUSED(), but not today.",
+      "parentUuid": "4aa085c1_e0d157c7",
       "range": {
         "startLine": 227,
         "startChar": 1,
