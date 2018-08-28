@@ -16,6 +16,24 @@
       "revId": "01a5f26c2465a7cd519241e59e0911f69cb64fac",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a752a8f3_99fb2e31",
+        "filename": "libpagemap/include/pagemap/pagemap.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1108565
+      },
+      "writtenOn": "2018-08-28T04:12:44Z",
+      "side": 1,
+      "message": "Yes, I was going to follow up with that, but noticed libpagemap is in vndk and stopped short.\nThe c++ re-write is incoming though, besides I now saw your other CL that cleans this up, so I\u0027ll go +1 that\ninstead of this.",
+      "parentUuid": "82ad1e35_b78f3f0e",
+      "revId": "01a5f26c2465a7cd519241e59e0911f69cb64fac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
