@@ -22,6 +22,30 @@
       "revId": "6c9aa8e118382b1b60cd1176fab7f33c4c2a84ad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5e1bca0e_b644ab59",
+        "filename": "perfprofd/perfprofd_perf.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-08-29T22:38:14Z",
+      "side": 1,
+      "message": "I see. I just want to provide a way to disable paranoid change. Please feel free to change it or just avoid FindSupportedPerfCounters().",
+      "parentUuid": "f2375f90_97710d78",
+      "range": {
+        "startLine": 240,
+        "startChar": 2,
+        "endLine": 242,
+        "endChar": 0
+      },
+      "revId": "6c9aa8e118382b1b60cd1176fab7f33c4c2a84ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
