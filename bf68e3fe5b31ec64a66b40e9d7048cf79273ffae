@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "1bdfe820_9cb9cc9f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-08-29T17:48:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2fd213c4_bd4f0133",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 6
+      },
+      "revId": "bf68e3fe5b31ec64a66b40e9d7048cf79273ffae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d3c50e92_3f3f2a0f",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "e6c49aa9_d3961ac6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-08-29T17:48:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d3c50e92_3f3f2a0f",
+      "range": {
+        "startLine": 28,
+        "startChar": 9,
+        "endLine": 28,
+        "endChar": 15
+      },
+      "revId": "bf68e3fe5b31ec64a66b40e9d7048cf79273ffae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "37adb56a_11634e0d",
         "filename": "simpleperf/JITDebugReader.h",
         "patchSetId": 1
@@ -59,6 +107,30 @@
       "writtenOn": "2018-08-28T17:57:22Z",
       "side": 1,
       "message": "Is there a reason this isn\u0027t three classes/structs? A base struct/class and two derived that implements the jit code versus dex file.",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 9
+      },
+      "revId": "bf68e3fe5b31ec64a66b40e9d7048cf79273ffae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a334172c_42b8c2b4",
+        "filename": "simpleperf/JITDebugReader.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-08-29T17:48:27Z",
+      "side": 1,
+      "message": "Yes, one reason is to make it easier to store the structure in a priority_queue, in L184. Using derived classes probably forces me storing unique_ptr\u003c\u003e instead, which is less convenient and maybe less efficient. Another reason is the data difference between jit code and dex file is small, in L46-L52. And since it is all data structure, I think using derived structs can\u0027t avoid the need to check the type.",
+      "parentUuid": "37adb56a_11634e0d",
       "range": {
         "startLine": 40,
         "startChar": 0,
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "37c84327_c1548e59",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1327,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-08-29T17:48:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "adc0398d_9d462ff6",
+      "range": {
+        "startLine": 1327,
+        "startChar": 30,
+        "endLine": 1327,
+        "endChar": 73
+      },
+      "revId": "bf68e3fe5b31ec64a66b40e9d7048cf79273ffae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e7a650b_2cec4bd4",
         "filename": "simpleperf/event_selection_set.cpp",
         "patchSetId": 1
@@ -105,6 +201,30 @@
       "writtenOn": "2018-08-28T17:57:22Z",
       "side": 1,
       "message": "This is kind of confusing, perhaps a comment describing that this check will only be done once.\n\nIt might also be better to use two bool variables to be more descriptive of what\u0027s going on.",
+      "range": {
+        "startLine": 104,
+        "startChar": 2,
+        "endLine": 104,
+        "endChar": 31
+      },
+      "revId": "bf68e3fe5b31ec64a66b40e9d7048cf79273ffae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "236e342d_c1d56ba5",
+        "filename": "simpleperf/event_selection_set.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-08-29T17:48:27Z",
+      "side": 1,
+      "message": "comment was added.",
+      "parentUuid": "8e7a650b_2cec4bd4",
       "range": {
         "startLine": 104,
         "startChar": 2,
