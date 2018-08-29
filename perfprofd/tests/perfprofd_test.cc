@@ -125,6 +125,29 @@ static bool bothWhiteSpace(char lhs, char rhs)
   return (std::isspace(lhs) && std::isspace(rhs));
 }
 
+#ifdef __ANDROID__
+
+static bool IsPerfSupported() {
+  auto check_perf_supported = []() {
+#if defined(__i386__) || defined(__x86_64__)
+    // Cloud devices may suppress perf. Check for arch_perfmon.
+    std::string cpuinfo;
+    if (!android::base::ReadFileToString("/proc/cpuinfo", &cpuinfo)) {
+      // This is pretty unexpected. Return true to see if we can run tests anyways.
+      return true;
+    }
+    return cpuinfo.find("arch_perfmon") != std::string::npos;
+#else
+    // Expect other architectures to have perf support.
+    return true;
+#endif
+  };
+  static bool perf_supported = check_perf_supported();
+  return perf_supported;
+}
+
+#endif
+
 //
 // Squeeze out repeated whitespace from expected/actual logs.
 //
@@ -1264,6 +1287,10 @@ TEST_F(PerfProfdTest, GetSupportedPerfCounters)
 
 TEST_F(PerfProfdTest, BasicRunWithLivePerf)
 {
+  if (!IsPerfSupported()) {
+    std::cerr << "Test not supported!" << std::endl;
+    return;
+  }
   //
   // Basic test to exercise the main loop of the daemon. It includes
   // a live 'perf' run
@@ -1387,6 +1414,10 @@ class PerfProfdLiveEventsTest : public PerfProfdTest {
 
 TEST_F(PerfProfdLiveEventsTest, BasicRunWithLivePerf_Events)
 {
+  if (!IsPerfSupported()) {
+    std::cerr << "Test not supported!" << std::endl;
+    return;
+  }
   const std::string expected = std::string(
         "I: starting Android Wide Profiling daemon ") +
         "I: config file path set to " + conf_dir + "/perfprofd.conf " +
@@ -1404,6 +1435,10 @@ TEST_F(PerfProfdLiveEventsTest, BasicRunWithLivePerf_Events)
 
 TEST_F(PerfProfdLiveEventsTest, BasicRunWithLivePerf_Events_Strip)
 {
+  if (!IsPerfSupported()) {
+    std::cerr << "Test not supported!" << std::endl;
+    return;
+  }
   const std::string expected = std::string(
         "I: starting Android Wide Profiling daemon ") +
         "I: config file path set to " + conf_dir + "/perfprofd.conf " +
@@ -1426,6 +1461,10 @@ TEST_F(PerfProfdLiveEventsTest, BasicRunWithLivePerf_Events_Strip)
 
 TEST_F(PerfProfdLiveEventsTest, BasicRunWithLivePerf_Events_NoStrip)
 {
+  if (!IsPerfSupported()) {
+    std::cerr << "Test not supported!" << std::endl;
+    return;
+  }
   const std::string expected =
       RAW_RESULT(
       W: Event does:not:exist is unsupported.
@@ -1440,6 +1479,10 @@ TEST_F(PerfProfdLiveEventsTest, BasicRunWithLivePerf_Events_NoStrip)
 
 TEST_F(PerfProfdLiveEventsTest, BasicRunWithLivePerf_EventsGroup)
 {
+  if (!IsPerfSupported()) {
+    std::cerr << "Test not supported!" << std::endl;
+    return;
+  }
   const std::string expected = std::string(
         "I: starting Android Wide Profiling daemon ") +
         "I: config file path set to " + conf_dir + "/perfprofd.conf " +
@@ -1457,6 +1500,10 @@ TEST_F(PerfProfdLiveEventsTest, BasicRunWithLivePerf_EventsGroup)
 
 TEST_F(PerfProfdTest, MultipleRunWithLivePerf)
 {
+  if (!IsPerfSupported()) {
+    std::cerr << "Test not supported!" << std::endl;
+    return;
+  }
   //
   // Basic test to exercise the main loop of the daemon. It includes
   // a live 'perf' run
@@ -1530,6 +1577,10 @@ TEST_F(PerfProfdTest, MultipleRunWithLivePerf)
 
 TEST_F(PerfProfdTest, CallChainRunWithLivePerf)
 {
+  if (!IsPerfSupported()) {
+    std::cerr << "Test not supported!" << std::endl;
+    return;
+  }
   //
   // Collect a callchain profile, so as to exercise the code in
   // perf_data post-processing that digests callchains.
