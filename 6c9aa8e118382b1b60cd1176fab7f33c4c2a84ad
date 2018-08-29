@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f2375f90_97710d78",
+        "filename": "perfprofd/perfprofd_perf.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2018-08-29T22:29:29Z",
+      "side": 1,
+      "message": "Note that this side is enough to pass CTS, as perfprofd itself won\u0027t run, only the greedy collection of counters at startup.",
+      "range": {
+        "startLine": 240,
+        "startChar": 2,
+        "endLine": 242,
+        "endChar": 0
+      },
+      "revId": "6c9aa8e118382b1b60cd1176fab7f33c4c2a84ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
