@@ -30,5 +30,5 @@ cc_binary {
         "-Wall",
         "-Werror",
     ],
-    shared_libs: ["libhardware_legacy"],
+    shared_libs: ["libpower"],
 }
