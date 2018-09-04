@@ -219,6 +219,28 @@ bool HashTreeBuilder::BuildHashTree() {
   return true;
 }
 
+bool HashTreeBuilder::CheckHashTree(
+    const std::vector<unsigned char>& hash_tree) const {
+  // Reads reversely to output the verity tree top-down.
+  for (size_t i = verity_tree_.size(), offset = 0; i > 0; i--) {
+    const auto& level_blocks = verity_tree_[i - 1];
+    if (offset + level_blocks.size() > hash_tree.size()) {
+      LOG(ERROR) << "Hash tree to small: " << hash_tree.size();
+      return false;
+    }
+    auto iter = std::mismatch(level_blocks.begin(), level_blocks.end(),
+                              hash_tree.begin() + offset)
+                    .first;
+    if (iter != level_blocks.end()) {
+      LOG(ERROR) << "Mismatch found at the hash tree level " << i << " offset "
+                 << std::distance(level_blocks.begin(), iter);
+      return false;
+    }
+    offset += level_blocks.size();
+  }
+  return true;
+}
+
 bool HashTreeBuilder::WriteHashTreeToFile(const std::string& output) const {
   android::base::unique_fd output_fd(
       open(output.c_str(), O_WRONLY | O_CREAT | O_TRUNC, 0666));
