@@ -49,14 +49,12 @@ bool NodeLooperThread::Request(const std::vector<NodeAction>& actions,
                 auto now = std::chrono::steady_clock::now();
                 // Overflow protection in case timeout_ms is too big to overflow
                 // time point which is unsigned integer
-                if (std::chrono::duration_cast<std::chrono::milliseconds>(
-                        ReqTime::max() - now) > a.timeout_ms) {
+                if (std::chrono::duration_cast<std::chrono::milliseconds>(ReqTime::max() - now) >
+                    a.timeout_ms) {
                     end_time = now + a.timeout_ms;
                 }
             }
-            ret = nodes_[a.node_index]->AddRequest(a.value_index, hint_type,
-                                                   end_time) &&
-                  ret;
+            ret = nodes_[a.node_index]->AddRequest(a.value_index, hint_type, end_time) && ret;
         }
     }
     wake_cond_.signal();
@@ -114,8 +112,7 @@ bool NodeLooperThread::threadLoop() {
         sleep_timeout_ns = timeout_ms.count() * 1000 * 1000;
     }
     // VERBOSE level won't print by default in user/userdebug build
-    LOG(VERBOSE) << "NodeLooperThread will wait for " << sleep_timeout_ns
-                 << "ns";
+    LOG(VERBOSE) << "NodeLooperThread will wait for " << sleep_timeout_ns << "ns";
     wake_cond_.waitRelative(lock_, sleep_timeout_ns);
     return true;
 }

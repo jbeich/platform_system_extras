@@ -33,9 +33,7 @@ namespace perfmgr {
 struct NodeAction {
     NodeAction(std::size_t node_index, std::size_t value_index,
                std::chrono::milliseconds timeout_ms)
-        : node_index(node_index),
-          value_index(value_index),
-          timeout_ms(timeout_ms) {}
+        : node_index(node_index), value_index(value_index), timeout_ms(timeout_ms) {}
     std::size_t node_index;
     std::size_t value_index;
     std::chrono::milliseconds timeout_ms;  // 0ms for forever
@@ -63,13 +61,11 @@ class NodeLooperThread : public ::android::Thread {
     // Return true when successfully adds request from actions for the hint_type
     // in each individual node. Return false if any of the actions has either
     // invalid node index or value index.
-    bool Request(const std::vector<NodeAction>& actions,
-                 const std::string& hint_type);
+    bool Request(const std::vector<NodeAction>& actions, const std::string& hint_type);
     // Return when successfully cancels request from actions for the hint_type
     // in each individual node. Return false if any of the actions has invalid
     // node index.
-    bool Cancel(const std::vector<NodeAction>& actions,
-                const std::string& hint_type);
+    bool Cancel(const std::vector<NodeAction>& actions, const std::string& hint_type);
 
     // Dump all nodes to fd
     void DumpToFd(int fd);

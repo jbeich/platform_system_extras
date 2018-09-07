@@ -43,15 +43,12 @@ bool HintManager::ValidateHint(const std::string& hint_type) const {
 
 bool HintManager::DoHint(const std::string& hint_type) {
     LOG(VERBOSE) << "Do Powerhint: " << hint_type;
-    return ValidateHint(hint_type)
-               ? nm_->Request(actions_.at(hint_type), hint_type)
-               : false;
+    return ValidateHint(hint_type) ? nm_->Request(actions_.at(hint_type), hint_type) : false;
 }
 
 bool HintManager::DoHint(const std::string& hint_type,
                          std::chrono::milliseconds timeout_ms_override) {
-    LOG(VERBOSE) << "Do Powerhint: " << hint_type << " for "
-                 << timeout_ms_override.count() << "ms";
+    LOG(VERBOSE) << "Do Powerhint: " << hint_type << " for " << timeout_ms_override.count() << "ms";
     if (!ValidateHint(hint_type)) {
         return false;
     }
@@ -64,9 +61,7 @@ bool HintManager::DoHint(const std::string& hint_type,
 
 bool HintManager::EndHint(const std::string& hint_type) {
     LOG(VERBOSE) << "End Powerhint: " << hint_type;
-    return ValidateHint(hint_type)
-               ? nm_->Cancel(actions_.at(hint_type), hint_type)
-               : false;
+    return ValidateHint(hint_type) ? nm_->Cancel(actions_.at(hint_type), hint_type) : false;
 }
 
 bool HintManager::IsRunning() const {
@@ -99,8 +94,7 @@ void HintManager::DumpToFd(int fd) {
     fsync(fd);
 }
 
-std::unique_ptr<HintManager> HintManager::GetFromJSON(
-    const std::string& config_path) {
+std::unique_ptr<HintManager> HintManager::GetFromJSON(const std::string& config_path) {
     std::string json_doc;
 
     if (!android::base::ReadFileToString(config_path, &json_doc)) {
@@ -122,15 +116,13 @@ std::unique_ptr<HintManager> HintManager::GetFromJSON(
     }
 
     sp<NodeLooperThread> nm = new NodeLooperThread(std::move(nodes));
-    std::unique_ptr<HintManager> hm =
-        std::make_unique<HintManager>(std::move(nm), actions);
+    std::unique_ptr<HintManager> hm = std::make_unique<HintManager>(std::move(nm), actions);
 
     LOG(INFO) << "Initialized HintManager from JSON config: " << config_path;
     return hm;
 }
 
-std::vector<std::unique_ptr<Node>> HintManager::ParseNodes(
-    const std::string& json_doc) {
+std::vector<std::unique_ptr<Node>> HintManager::ParseNodes(const std::string& json_doc) {
     // function starts
     std::vector<std::unique_ptr<Node>> nodes_parsed;
     std::set<std::string> nodes_name_parsed;
@@ -183,8 +175,7 @@ std::vector<std::unique_ptr<Node>> HintManager::ParseNodes(
             std::string value = values[j].asString();
             LOG(VERBOSE) << "Node[" << i << "]'s Value[" << j << "]: " << value;
             if (value.empty()) {
-                LOG(ERROR) << "Failed to read Node" << i << "'s Value[" << j
-                           << "]";
+                LOG(ERROR) << "Failed to read Node" << i << "'s Value[" << j << "]";
                 nodes_parsed.clear();
                 return nodes_parsed;
             }
@@ -197,8 +188,7 @@ std::vector<std::unique_ptr<Node>> HintManager::ParseNodes(
         }
 
         Json::UInt64 default_index = values_parsed.size() - 1;
-        if (nodes[i]["DefaultIndex"].empty() ||
-            !nodes[i]["DefaultIndex"].isUInt64()) {
+        if (nodes[i]["DefaultIndex"].empty() || !nodes[i]["DefaultIndex"].isUInt64()) {
             LOG(INFO) << "Failed to read Node" << i
                       << "'s DefaultIndex, set to last index: " << default_index;
         } else {
@@ -207,18 +197,15 @@ std::vector<std::unique_ptr<Node>> HintManager::ParseNodes(
         if (default_index > values_parsed.size() - 1) {
             default_index = values_parsed.size() - 1;
             LOG(ERROR) << "Node" << i
-                       << "'s DefaultIndex out of bound, max value index: "
-                       << default_index;
+                       << "'s DefaultIndex out of bound, max value index: " << default_index;
             nodes_parsed.clear();
             return nodes_parsed;
         }
         LOG(VERBOSE) << "Node[" << i << "]'s DefaultIndex: " << default_index;
 
         bool reset = false;
-        if (nodes[i]["ResetOnInit"].empty() ||
-            !nodes[i]["ResetOnInit"].isBool()) {
-            LOG(INFO) << "Failed to read Node" << i
-                      << "'s ResetOnInit, set to 'false'";
+        if (nodes[i]["ResetOnInit"].empty() || !nodes[i]["ResetOnInit"].isBool()) {
+            LOG(INFO) << "Failed to read Node" << i << "'s ResetOnInit, set to 'false'";
         } else {
             reset = nodes[i]["ResetOnInit"].asBool();
         }
@@ -226,24 +213,21 @@ std::vector<std::unique_ptr<Node>> HintManager::ParseNodes(
 
         bool hold_fd = false;
         if (nodes[i]["HoldFd"].empty() || !nodes[i]["HoldFd"].isBool()) {
-            LOG(INFO) << "Failed to read Node" << i
-                      << "'s HoldFd, set to 'false'";
+            LOG(INFO) << "Failed to read Node" << i << "'s HoldFd, set to 'false'";
         } else {
             hold_fd = nodes[i]["HoldFd"].asBool();
         }
         LOG(VERBOSE) << "Node[" << i << "]'s HoldFd: " << hold_fd;
 
         nodes_parsed.emplace_back(std::make_unique<Node>(
-            name, path, values_parsed, static_cast<std::size_t>(default_index),
-            reset, hold_fd));
+            name, path, values_parsed, static_cast<std::size_t>(default_index), reset, hold_fd));
     }
     LOG(INFO) << nodes_parsed.size() << " Nodes parsed successfully";
     return nodes_parsed;
 }
 
 std::map<std::string, std::vector<NodeAction>> HintManager::ParseActions(
-    const std::string& json_doc,
-    const std::vector<std::unique_ptr<Node>>& nodes) {
+    const std::string& json_doc, const std::vector<std::unique_ptr<Node>>& nodes) {
     // function starts
     std::map<std::string, std::vector<NodeAction>> actions_parsed;
     Json::Value root;
@@ -278,8 +262,7 @@ std::map<std::string, std::vector<NodeAction>> HintManager::ParseActions(
 
         if (nodes_index.find(node_name) == nodes_index.end()) {
             LOG(ERROR) << "Failed to find "
-                       << "Action" << i
-                       << "'s Node from Nodes section: " << node_name;
+                       << "Action" << i << "'s Node from Nodes section: " << node_name;
             actions_parsed.clear();
             return actions_parsed;
         }
@@ -299,8 +282,7 @@ std::map<std::string, std::vector<NodeAction>> HintManager::ParseActions(
         LOG(VERBOSE) << "Action[" << i << "]'s ValueIndex: " << value_index;
 
         Json::UInt64 duration = 0;
-        if (actions[i]["Duration"].empty() ||
-            !actions[i]["Duration"].isUInt64()) {
+        if (actions[i]["Duration"].empty() || !actions[i]["Duration"].isUInt64()) {
             LOG(ERROR) << "Failed to read Action" << i << "'s Duration";
             actions_parsed.clear();
             return actions_parsed;
@@ -315,15 +297,14 @@ std::map<std::string, std::vector<NodeAction>> HintManager::ParseActions(
         } else {
             for (const auto& action : actions_parsed[hint_type]) {
                 if (action.node_index == node_index) {
-                    LOG(ERROR)
-                        << "Action[" << i
-                        << "]'s NodeIndex is duplicated with another Action";
+                    LOG(ERROR) << "Action[" << i
+                               << "]'s NodeIndex is duplicated with another Action";
                     actions_parsed.clear();
                     return actions_parsed;
                 }
             }
-            actions_parsed[hint_type].emplace_back(
-                node_index, value_index, std::chrono::milliseconds(duration));
+            actions_parsed[hint_type].emplace_back(node_index, value_index,
+                                                   std::chrono::milliseconds(duration));
         }
 
         ++total_parsed;
@@ -332,8 +313,8 @@ std::map<std::string, std::vector<NodeAction>> HintManager::ParseActions(
     LOG(INFO) << total_parsed << " Actions parsed successfully";
 
     for (const auto& action : actions_parsed) {
-        LOG(INFO) << "PowerHint " << action.first << " has "
-                  << action.second.size() << " actions parsed";
+        LOG(INFO) << "PowerHint " << action.first << " has " << action.second.size()
+                  << " actions parsed";
     }
 
     return actions_parsed;

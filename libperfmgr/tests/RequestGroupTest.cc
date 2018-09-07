@@ -46,8 +46,7 @@ TEST(RequestGroupTest, AddRequestTest) {
     std::this_thread::sleep_for(sleep_time);
     std::chrono::milliseconds expire_time;
     bool active = req.GetExpireTime(&expire_time);
-    EXPECT_NEAR((duration - sleep_time).count(), expire_time.count(),
-                kTIMING_TOLERANCE_MS);
+    EXPECT_NEAR((duration - sleep_time).count(), expire_time.count(), kTIMING_TOLERANCE_MS);
     EXPECT_EQ(true, active);
 }
 
@@ -122,8 +121,8 @@ TEST(RequestGroupTest, AddRequestTestMutiple) {
     req.AddRequest("LAUNCH", start + duration_launch);
     std::chrono::milliseconds expire_time;
     bool active = req.GetExpireTime(&expire_time);
-    EXPECT_NEAR(std::min(duration_interact, duration_launch).count(),
-                expire_time.count(), kTIMING_TOLERANCE_MS);
+    EXPECT_NEAR(std::min(duration_interact, duration_launch).count(), expire_time.count(),
+                kTIMING_TOLERANCE_MS);
     EXPECT_EQ(true, active);
 }
 
@@ -155,8 +154,7 @@ TEST(RequestGroupTest, RemoveRequestTestMutiple) {
     req.RemoveRequest("INTERACTION");
     std::chrono::milliseconds expire_time;
     bool active = req.GetExpireTime(&expire_time);
-    EXPECT_NEAR(duration_launch.count(), expire_time.count(),
-                kTIMING_TOLERANCE_MS);
+    EXPECT_NEAR(duration_launch.count(), expire_time.count(), kTIMING_TOLERANCE_MS);
     EXPECT_EQ(true, active);
 }
 

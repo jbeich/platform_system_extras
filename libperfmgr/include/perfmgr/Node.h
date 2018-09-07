@@ -46,13 +46,11 @@ namespace perfmgr {
 // protection from caller e.g. NodeLooperThread.
 class Node {
   public:
-    Node(std::string name, std::string node_path,
-         std::vector<RequestGroup> req_sorted, std::size_t default_val_index,
-         bool reset_on_init, bool hold_fd = false);
+    Node(std::string name, std::string node_path, std::vector<RequestGroup> req_sorted,
+         std::size_t default_val_index, bool reset_on_init, bool hold_fd = false);
 
     // Return true if successfully add a request
-    bool AddRequest(std::size_t value_index, const std::string& hint_type,
-                    ReqTime end_time);
+    bool AddRequest(std::size_t value_index, const std::string& hint_type, ReqTime end_time);
 
     // Return true if successfully remove a request
     bool RemoveRequest(const std::string& hint_type);

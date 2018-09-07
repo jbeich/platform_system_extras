@@ -57,8 +57,7 @@ class NodeVerifier : public HintManager {
                                << " with value: " << value;
                     return false;
                 }
-                LOG(VERBOSE) << "Wrote to node: " << node->GetPath()
-                             << " with value: " << value;
+                LOG(VERBOSE) << "Wrote to node: " << node->GetPath() << " with value: " << value;
             }
         }
         return true;
@@ -75,23 +74,22 @@ class NodeVerifier : public HintManager {
 
 static void printUsage(const char* exec_name) {
     std::string usage = exec_name;
-    usage =
-        usage +
-        " is a command-line tool to verify Nodes in Json config are writable.\n"
-        "Usages:\n"
-        "    [su system] " +
-        exec_name +
-        " [options]\n"
-        "\n"
-        "Options:\n"
-        "   --config [PATH], -c\n"
-        "       path to Json config file\n\n"
-        "   --exec_hint, -e\n"
-        "       do hints in Json config\n\n"
-        "   --help, -h\n"
-        "       print this message\n\n"
-        "   --verbose, -v\n"
-        "       print verbose log during execution\n\n";
+    usage = usage +
+            " is a command-line tool to verify Nodes in Json config are writable.\n"
+            "Usages:\n"
+            "    [su system] " +
+            exec_name +
+            " [options]\n"
+            "\n"
+            "Options:\n"
+            "   --config [PATH], -c\n"
+            "       path to Json config file\n\n"
+            "   --exec_hint, -e\n"
+            "       do hints in Json config\n\n"
+            "   --help, -h\n"
+            "       print this message\n\n"
+            "   --verbose, -v\n"
+            "       print verbose log during execution\n\n";
 
     LOG(INFO) << usage;
 }

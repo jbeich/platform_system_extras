@@ -33,8 +33,7 @@ using namespace std::chrono_literals;
 constexpr double kTIMING_TOLERANCE_MS = std::chrono::milliseconds(25).count();
 constexpr auto kSLEEP_TOLERANCE_MS = 2ms;
 
-static inline void _VerifyPathValue(const std::string& path,
-                                    const std::string& value) {
+static inline void _VerifyPathValue(const std::string& path, const std::string& value) {
     std::string s;
     EXPECT_TRUE(android::base::ReadFileToString(path, &s)) << strerror(errno);
     EXPECT_EQ(value, s);
@@ -64,8 +63,7 @@ TEST(NodeTest, DumpToFdTest) {
     TemporaryFile dumptf;
     t.DumpToFd(dumptf.fd);
     fsync(dumptf.fd);
-    std::string buf(
-        android::base::StringPrintf("test_dump\t%s\t1\tvalue1\n", tf.path));
+    std::string buf(android::base::StringPrintf("test_dump\t%s\t1\tvalue1\n", tf.path));
     _VerifyPathValue(dumptf.path, buf);
 }
 
@@ -107,20 +105,17 @@ TEST(NodeTest, GetPropertiesTest) {
 
 // Test add request fail and retry
 TEST(NodeTest, AddRequestTestFail) {
-    Node t("t", "/sys/android/nonexist_node_test",
-           {{"value0"}, {"value1"}, {"value2"}}, 2, true);
+    Node t("t", "/sys/android/nonexist_node_test", {{"value0"}, {"value1"}, {"value2"}}, 2, true);
     auto start = std::chrono::steady_clock::now();
     EXPECT_TRUE(t.AddRequest(1, "INTERACTION", start + 200ms));
     std::chrono::milliseconds expire_time = t.Update();
     // Add request @ value1
-    EXPECT_NEAR(std::chrono::milliseconds(200).count(), expire_time.count(),
-                kTIMING_TOLERANCE_MS);
+    EXPECT_NEAR(std::chrono::milliseconds(200).count(), expire_time.count(), kTIMING_TOLERANCE_MS);
     // Add request @ value0 higher prio than value1
     EXPECT_TRUE(t.AddRequest(0, "LAUNCH", start + 2000ms));
     expire_time = t.Update();
     // Retry in 500 ms
-    EXPECT_NEAR(std::chrono::milliseconds(500).count(), expire_time.count(),
-                kTIMING_TOLERANCE_MS);
+    EXPECT_NEAR(std::chrono::milliseconds(500).count(), expire_time.count(), kTIMING_TOLERANCE_MS);
 }
 
 // Test add request
@@ -132,20 +127,17 @@ TEST(NodeTest, AddRequestTest) {
     std::chrono::milliseconds expire_time = t.Update();
     // Add request @ value1
     _VerifyPathValue(tf.path, "value1");
-    EXPECT_NEAR(std::chrono::milliseconds(500).count(), expire_time.count(),
-                kTIMING_TOLERANCE_MS);
+    EXPECT_NEAR(std::chrono::milliseconds(500).count(), expire_time.count(), kTIMING_TOLERANCE_MS);
     // Add request @ value0 higher prio than value1
     EXPECT_TRUE(t.AddRequest(0, "LAUNCH", start + 200ms));
     expire_time = t.Update();
     _VerifyPathValue(tf.path, "value0");
-    EXPECT_NEAR(std::chrono::milliseconds(200).count(), expire_time.count(),
-                kTIMING_TOLERANCE_MS);
+    EXPECT_NEAR(std::chrono::milliseconds(200).count(), expire_time.count(), kTIMING_TOLERANCE_MS);
     // Let high prio request timeout, now only request @ value1 active
     std::this_thread::sleep_for(expire_time + kSLEEP_TOLERANCE_MS);
     expire_time = t.Update();
     _VerifyPathValue(tf.path, "value1");
-    EXPECT_NEAR(std::chrono::milliseconds(300).count(), expire_time.count(),
-                kTIMING_TOLERANCE_MS);
+    EXPECT_NEAR(std::chrono::milliseconds(300).count(), expire_time.count(), kTIMING_TOLERANCE_MS);
     // Let all requests timeout, now default value2
     std::this_thread::sleep_for(expire_time + kSLEEP_TOLERANCE_MS);
     expire_time = t.Update();
@@ -162,20 +154,17 @@ TEST(NodeTest, RemoveRequestTest) {
     std::chrono::milliseconds expire_time = t.Update();
     // Add request @ value1
     _VerifyPathValue(tf.path, "value1");
-    EXPECT_NEAR(std::chrono::milliseconds(500).count(), expire_time.count(),
-                kTIMING_TOLERANCE_MS);
+    EXPECT_NEAR(std::chrono::milliseconds(500).count(), expire_time.count(), kTIMING_TOLERANCE_MS);
     // Add request @ value0 higher prio than value1
     EXPECT_TRUE(t.AddRequest(0, "LAUNCH", start + 200ms));
     expire_time = t.Update();
     _VerifyPathValue(tf.path, "value0");
-    EXPECT_NEAR(std::chrono::milliseconds(200).count(), expire_time.count(),
-                kTIMING_TOLERANCE_MS);
+    EXPECT_NEAR(std::chrono::milliseconds(200).count(), expire_time.count(), kTIMING_TOLERANCE_MS);
     // Remove high prio request, now only request @ value1 active
     t.RemoveRequest("LAUNCH");
     expire_time = t.Update();
     _VerifyPathValue(tf.path, "value1");
-    EXPECT_NEAR(std::chrono::milliseconds(500).count(), expire_time.count(),
-                kTIMING_TOLERANCE_MS);
+    EXPECT_NEAR(std::chrono::milliseconds(500).count(), expire_time.count(), kTIMING_TOLERANCE_MS);
     // Remove request, now default value2
     t.RemoveRequest("INTERACTION");
     expire_time = t.Update();
@@ -193,32 +182,27 @@ TEST(NodeTest, AddRequestTestHoldFdOverride) {
     std::chrono::milliseconds expire_time = t.Update();
     // Add request @ value1
     _VerifyPathValue(tf.path, "value1");
-    EXPECT_NEAR(std::chrono::milliseconds(500).count(), expire_time.count(),
-                kTIMING_TOLERANCE_MS);
+    EXPECT_NEAR(std::chrono::milliseconds(500).count(), expire_time.count(), kTIMING_TOLERANCE_MS);
     // Add request @ value0 higher prio than value1
     EXPECT_TRUE(t.AddRequest(0, "LAUNCH", start + 200ms));
     expire_time = t.Update();
     _VerifyPathValue(tf.path, "value0");
-    EXPECT_NEAR(std::chrono::milliseconds(200).count(), expire_time.count(),
-                kTIMING_TOLERANCE_MS);
+    EXPECT_NEAR(std::chrono::milliseconds(200).count(), expire_time.count(), kTIMING_TOLERANCE_MS);
     // Add request @ value0 shorter
     EXPECT_TRUE(t.AddRequest(0, "LAUNCH", start + 100ms));
     expire_time = t.Update();
     _VerifyPathValue(tf.path, "value0");
-    EXPECT_NEAR(std::chrono::milliseconds(200).count(), expire_time.count(),
-                kTIMING_TOLERANCE_MS);
+    EXPECT_NEAR(std::chrono::milliseconds(200).count(), expire_time.count(), kTIMING_TOLERANCE_MS);
     // Add request @ value0 longer
     EXPECT_TRUE(t.AddRequest(0, "LAUNCH", start + 300ms));
     expire_time = t.Update();
     _VerifyPathValue(tf.path, "value0");
-    EXPECT_NEAR(std::chrono::milliseconds(300).count(), expire_time.count(),
-                kTIMING_TOLERANCE_MS);
+    EXPECT_NEAR(std::chrono::milliseconds(300).count(), expire_time.count(), kTIMING_TOLERANCE_MS);
     // Remove high prio request, now only request @ value1 active
     t.RemoveRequest("LAUNCH");
     expire_time = t.Update();
     _VerifyPathValue(tf.path, "value1");
-    EXPECT_NEAR(std::chrono::milliseconds(500).count(), expire_time.count(),
-                kTIMING_TOLERANCE_MS);
+    EXPECT_NEAR(std::chrono::milliseconds(500).count(), expire_time.count(), kTIMING_TOLERANCE_MS);
     // Remove request, now default value2
     t.RemoveRequest("INTERACTION");
     expire_time = t.Update();

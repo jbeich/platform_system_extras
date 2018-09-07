@@ -36,13 +36,11 @@ class NodeLooperThreadTest : public ::testing::Test {
     virtual void SetUp() {
         std::unique_ptr<TemporaryFile> tf = std::make_unique<TemporaryFile>();
         nodes_.emplace_back(
-            new Node("n0", tf->path,
-                     {{"n0_value0"}, {"n0_value1"}, {"n0_value2"}}, 2, false));
+            new Node("n0", tf->path, {{"n0_value0"}, {"n0_value1"}, {"n0_value2"}}, 2, false));
         files_.emplace_back(std::move(tf));
         tf = std::make_unique<TemporaryFile>();
         nodes_.emplace_back(
-            new Node("n1", tf->path,
-                     {{"n1_value0"}, {"n1_value1"}, {"n1_value2"}}, 2, true));
+            new Node("n1", tf->path, {{"n1_value0"}, {"n1_value1"}, {"n1_value2"}}, 2, true));
         files_.emplace_back(std::move(tf));
     }
 
@@ -54,8 +52,7 @@ class NodeLooperThreadTest : public ::testing::Test {
     std::vector<std::unique_ptr<TemporaryFile>> files_;
 };
 
-static inline void _VerifyPathValue(const std::string& path,
-                                    const std::string& value) {
+static inline void _VerifyPathValue(const std::string& path, const std::string& value) {
     std::string s;
     EXPECT_TRUE(android::base::ReadFileToString(path, &s)) << strerror(errno);
     EXPECT_EQ(value, s);

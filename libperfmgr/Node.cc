@@ -26,9 +26,8 @@
 namespace android {
 namespace perfmgr {
 
-Node::Node(std::string name, std::string node_path,
-           std::vector<RequestGroup> req_sorted, std::size_t default_val_index,
-           bool reset_on_init, bool hold_fd)
+Node::Node(std::string name, std::string node_path, std::vector<RequestGroup> req_sorted,
+           std::size_t default_val_index, bool reset_on_init, bool hold_fd)
     : name_(name),
       node_path_(node_path),
       req_sorted_(std::move(req_sorted)),
@@ -45,8 +44,7 @@ Node::Node(std::string name, std::string node_path,
     }
 }
 
-bool Node::AddRequest(std::size_t value_index, const std::string& hint_type,
-                      ReqTime end_time) {
+bool Node::AddRequest(std::size_t value_index, const std::string& hint_type, ReqTime end_time) {
     if (value_index >= req_sorted_.size()) {
         LOG(ERROR) << "Value index out of bound: " << value_index
                    << " ,size: " << req_sorted_.size();
@@ -82,8 +80,7 @@ std::chrono::milliseconds Node::Update(bool log_error) {
     if (value_index != current_val_index_) {
         std::string req_value = req_sorted_[value_index].GetRequestValue();
 
-        fd_.reset(TEMP_FAILURE_RETRY(
-            open(node_path_.c_str(), O_WRONLY | O_CLOEXEC | O_TRUNC)));
+        fd_.reset(TEMP_FAILURE_RETRY(open(node_path_.c_str(), O_WRONLY | O_CLOEXEC | O_TRUNC)));
 
         if (fd_ == -1 || !android::base::WriteStringToFd(req_value, fd_)) {
             if (log_error) {
@@ -156,9 +153,9 @@ void Node::DumpToFd(int fd) {
         LOG(ERROR) << "Failed to read node path: " << node_path_;
     }
     node_value = android::base::Trim(node_value);
-    std::string buf(android::base::StringPrintf(
-        "%s\t%s\t%zu\t%s\n", name_.c_str(), node_path_.c_str(),
-        current_val_index_, node_value.c_str()));
+    std::string buf(android::base::StringPrintf("%s\t%s\t%zu\t%s\n", name_.c_str(),
+                                                node_path_.c_str(), current_val_index_,
+                                                node_value.c_str()));
     if (!android::base::WriteStringToFd(buf, fd)) {
         LOG(ERROR) << "Failed to dump fd: " << fd;
     }

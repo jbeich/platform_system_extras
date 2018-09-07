@@ -95,9 +95,7 @@ constexpr char kJSON_RAW[] =
 
 class HintManagerTest : public ::testing::Test, public HintManager {
   protected:
-    HintManagerTest()
-        : HintManager(nullptr,
-                      std::map<std::string, std::vector<NodeAction>>{}) {
+    HintManagerTest() : HintManager(nullptr, std::map<std::string, std::vector<NodeAction>>{}) {
         android::base::SetMinimumLogSeverity(android::base::VERBOSE);
     }
 
@@ -105,13 +103,11 @@ class HintManagerTest : public ::testing::Test, public HintManager {
         // Set up dummy nodes
         std::unique_ptr<TemporaryFile> tf = std::make_unique<TemporaryFile>();
         nodes_.emplace_back(
-            new Node("n0", tf->path,
-                     {{"n0_value0"}, {"n0_value1"}, {"n0_value2"}}, 2, false));
+            new Node("n0", tf->path, {{"n0_value0"}, {"n0_value1"}, {"n0_value2"}}, 2, false));
         files_.emplace_back(std::move(tf));
         tf = std::make_unique<TemporaryFile>();
         nodes_.emplace_back(
-            new Node("n1", tf->path,
-                     {{"n1_value0"}, {"n1_value1"}, {"n1_value2"}}, 2, true));
+            new Node("n1", tf->path, {{"n1_value0"}, {"n1_value1"}, {"n1_value2"}}, 2, true));
         files_.emplace_back(std::move(tf));
         nm_ = new NodeLooperThread(std::move(nodes_));
         // Set up dummy actions
@@ -130,8 +126,7 @@ class HintManagerTest : public ::testing::Test, public HintManager {
         files_.emplace_back(std::make_unique<TemporaryFile>());
         // replace filepath
         json_doc_ = kJSON_RAW;
-        std::string from =
-            "/sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq";
+        std::string from = "/sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq";
         size_t start_pos = json_doc_.find(from);
         json_doc_.replace(start_pos, from.length(), files_[0 + 2]->path);
         from = "/sys/devices/system/cpu/cpu4/cpufreq/scaling_min_freq";
@@ -152,8 +147,7 @@ class HintManagerTest : public ::testing::Test, public HintManager {
     std::string json_doc_;
 };
 
-static inline void _VerifyPathValue(const std::string& path,
-                                    const std::string& value) {
+static inline void _VerifyPathValue(const std::string& path, const std::string& value) {
     std::string s;
     EXPECT_TRUE(android::base::ReadFileToString(path, &s)) << strerror(errno);
     EXPECT_EQ(value, s);
@@ -220,8 +214,7 @@ TEST_F(HintManagerTest, HintTest) {
 
 // Test parsing nodes with duplicate name
 TEST_F(HintManagerTest, ParseNodesTest) {
-    std::vector<std::unique_ptr<Node>> nodes =
-        HintManager::ParseNodes(json_doc_);
+    std::vector<std::unique_ptr<Node>> nodes = HintManager::ParseNodes(json_doc_);
     EXPECT_EQ(2u, nodes.size());
     EXPECT_EQ("CPUCluster0MinFreq", nodes[0]->GetName());
     EXPECT_EQ("CPUCluster1MinFreq", nodes[1]->GetName());
@@ -246,8 +239,7 @@ TEST_F(HintManagerTest, ParseNodesDuplicateNameTest) {
     std::string from = "CPUCluster0MinFreq";
     size_t start_pos = json_doc_.find(from);
     json_doc_.replace(start_pos, from.length(), "CPUCluster1MinFreq");
-    std::vector<std::unique_ptr<Node>> nodes =
-        HintManager::ParseNodes(json_doc_);
+    std::vector<std::unique_ptr<Node>> nodes = HintManager::ParseNodes(json_doc_);
     EXPECT_EQ(0u, nodes.size());
 }
 
@@ -256,15 +248,13 @@ TEST_F(HintManagerTest, ParseNodesDuplicatePathTest) {
     std::string from = files_[0 + 2]->path;
     size_t start_pos = json_doc_.find(from);
     json_doc_.replace(start_pos, from.length(), files_[1 + 2]->path);
-    std::vector<std::unique_ptr<Node>> nodes =
-        HintManager::ParseNodes(json_doc_);
+    std::vector<std::unique_ptr<Node>> nodes = HintManager::ParseNodes(json_doc_);
     EXPECT_EQ(0u, nodes.size());
 }
 
 // Test parsing invalid json for nodes
 TEST_F(HintManagerTest, ParseBadNodesTest) {
-    std::vector<std::unique_ptr<Node>> nodes =
-        HintManager::ParseNodes("invalid json");
+    std::vector<std::unique_ptr<Node>> nodes = HintManager::ParseNodes("invalid json");
     EXPECT_EQ(0u, nodes.size());
     nodes = HintManager::ParseNodes(
         "{\"devices\":{\"15\":[\"armeabi-v7a\"],\"16\":[\"armeabi-v7a\"],"
@@ -274,8 +264,7 @@ TEST_F(HintManagerTest, ParseBadNodesTest) {
 
 // Test parsing actions
 TEST_F(HintManagerTest, ParseActionsTest) {
-    std::vector<std::unique_ptr<Node>> nodes =
-        HintManager::ParseNodes(json_doc_);
+    std::vector<std::unique_ptr<Node>> nodes = HintManager::ParseNodes(json_doc_);
     std::map<std::string, std::vector<NodeAction>> actions =
         HintManager::ParseActions(json_doc_, nodes);
     EXPECT_EQ(2u, actions.size());
@@ -283,30 +272,25 @@ TEST_F(HintManagerTest, ParseActionsTest) {
 
     EXPECT_EQ(1u, actions["INTERACTION"][0].node_index);
     EXPECT_EQ(1u, actions["INTERACTION"][0].value_index);
-    EXPECT_EQ(std::chrono::milliseconds(800).count(),
-              actions["INTERACTION"][0].timeout_ms.count());
+    EXPECT_EQ(std::chrono::milliseconds(800).count(), actions["INTERACTION"][0].timeout_ms.count());
 
     EXPECT_EQ(2u, actions["LAUNCH"].size());
 
     EXPECT_EQ(0u, actions["LAUNCH"][0].node_index);
     EXPECT_EQ(1u, actions["LAUNCH"][0].value_index);
-    EXPECT_EQ(std::chrono::milliseconds(500).count(),
-              actions["LAUNCH"][0].timeout_ms.count());
+    EXPECT_EQ(std::chrono::milliseconds(500).count(), actions["LAUNCH"][0].timeout_ms.count());
 
     EXPECT_EQ(1u, actions["LAUNCH"][1].node_index);
     EXPECT_EQ(0u, actions["LAUNCH"][1].value_index);
-    EXPECT_EQ(std::chrono::milliseconds(2000).count(),
-              actions["LAUNCH"][1].timeout_ms.count());
+    EXPECT_EQ(std::chrono::milliseconds(2000).count(), actions["LAUNCH"][1].timeout_ms.count());
 }
 
 // Test parsing actions with duplicate node
 TEST_F(HintManagerTest, ParseActionDuplicateNodeTest) {
     std::string from = "\"Node\":\"CPUCluster0MinFreq\"";
     size_t start_pos = json_doc_.find(from);
-    json_doc_.replace(start_pos, from.length(),
-                      "\"Node\": \"CPUCluster1MinFreq\"");
-    std::vector<std::unique_ptr<Node>> nodes =
-        HintManager::ParseNodes(json_doc_);
+    json_doc_.replace(start_pos, from.length(), "\"Node\": \"CPUCluster1MinFreq\"");
+    std::vector<std::unique_ptr<Node>> nodes = HintManager::ParseNodes(json_doc_);
     EXPECT_EQ(2u, nodes.size());
     std::map<std::string, std::vector<NodeAction>> actions =
         HintManager::ParseActions(json_doc_, nodes);
@@ -315,8 +299,7 @@ TEST_F(HintManagerTest, ParseActionDuplicateNodeTest) {
 
 // Test parsing invalid json for actions
 TEST_F(HintManagerTest, ParseBadActionsTest) {
-    std::vector<std::unique_ptr<Node>> nodes =
-        HintManager::ParseNodes(json_doc_);
+    std::vector<std::unique_ptr<Node>> nodes = HintManager::ParseNodes(json_doc_);
     std::map<std::string, std::vector<NodeAction>> actions =
         HintManager::ParseActions("invalid json", nodes);
     EXPECT_EQ(0u, actions.size());
@@ -330,8 +313,7 @@ TEST_F(HintManagerTest, ParseBadActionsTest) {
 // Test hint/cancel/expire with json config
 TEST_F(HintManagerTest, GetFromJSONTest) {
     TemporaryFile json_file;
-    ASSERT_TRUE(android::base::WriteStringToFile(json_doc_, json_file.path))
-        << strerror(errno);
+    ASSERT_TRUE(android::base::WriteStringToFile(json_doc_, json_file.path)) << strerror(errno);
     std::unique_ptr<HintManager> hm = HintManager::GetFromJSON(json_file.path);
     EXPECT_NE(nullptr, hm.get());
     std::this_thread::sleep_for(kSLEEP_TOLERANCE_MS);

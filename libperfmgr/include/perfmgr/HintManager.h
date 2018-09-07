@@ -36,7 +36,8 @@ class HintManager {
                 const std::map<std::string, std::vector<NodeAction>>& actions)
         : nm_(std::move(nm)), actions_(actions) {}
     ~HintManager() {
-        if (nm_.get() != nullptr) nm_->Stop();
+        if (nm_.get() != nullptr)
+            nm_->Stop();
     }
 
     // Return true if the sysfs manager thread is running.
@@ -50,16 +51,14 @@ class HintManager {
     // Do hint with the override time for all actions defined for the given
     // hint_type.  Return true with valid hint_type and also
     // NodeLooperThread::Request succeeds; otherwise return false.
-    bool DoHint(const std::string& hint_type,
-                std::chrono::milliseconds timeout_ms_override);
+    bool DoHint(const std::string& hint_type, std::chrono::milliseconds timeout_ms_override);
 
     // End hint early. Return true with valid hint_type and also
     // NodeLooperThread::Cancel succeeds; otherwise return false.
     bool EndHint(const std::string& hint_type);
 
     // Static method to construct HintManager from the JSON config file.
-    static std::unique_ptr<HintManager> GetFromJSON(
-        const std::string& config_path);
+    static std::unique_ptr<HintManager> GetFromJSON(const std::string& config_path);
 
     // Return available hints managed by HintManager
     std::vector<std::string> GetHints() const;
@@ -68,11 +67,9 @@ class HintManager {
     void DumpToFd(int fd);
 
   protected:
-    static std::vector<std::unique_ptr<Node>> ParseNodes(
-        const std::string& json_doc);
+    static std::vector<std::unique_ptr<Node>> ParseNodes(const std::string& json_doc);
     static std::map<std::string, std::vector<NodeAction>> ParseActions(
-        const std::string& json_doc,
-        const std::vector<std::unique_ptr<Node>>& nodes);
+        const std::string& json_doc, const std::vector<std::unique_ptr<Node>>& nodes);
 
   private:
     HintManager(HintManager const&) = delete;
