@@ -41,6 +41,8 @@ public:
   uint64_t delay_sched() const { return cpu_delay_ns_; }
   uint64_t delay_mem() const { return reclaim_delay_ns_; }
   uint64_t delay_total() const { return total_delay_ns_; }
+  uint64_t majflt() const { return majflt_; }
+  uint64_t minflt() const { return minflt_; }
   int threads() const { return threads_; }
 
   void set_pid(pid_t pid) { pid_ = pid; }
@@ -68,6 +70,9 @@ private:
 
   uint64_t cpu_time_real_;
   uint64_t cpu_time_virtual_;
+
+  uint64_t majflt_;
+  uint64_t minflt_;
 
   uint64_t read_bytes_;
   uint64_t write_bytes_;

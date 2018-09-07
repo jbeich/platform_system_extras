@@ -223,18 +223,20 @@ int main(int argc, char* argv[]) {
         printf("\n");
       }
       if (accumulated) {
-        printf("%6s %-16s %20s %34s\n", "", "",
-            "---- IO (KiB) ----", "----------- delayed on ----------");
+        printf("%6s %-16s %20s %14s %34s\n", "", "",
+            "---- IO (KiB) ----", "--- faults ---", "----------- delayed on ----------");
       } else {
-        printf("%6s %-16s %20s %34s\n", "", "",
-            "--- IO (KiB/s) ---", "----------- delayed on ----------");
+        printf("%6s %-16s %20s %14s %34s\n", "", "",
+            "--- IO (KiB/s) ---", "--- faults ---", "----------- delayed on ----------");
       }
-      printf("%6s %-16s %6s %6s %6s  %-5s  %-5s  %-5s  %-5s  %-5s\n",
+      printf("%6s %-16s %6s %6s %6s %6s %6s  %-5s  %-5s  %-5s  %-5s  %-5s\n",
           "PID",
           "Command",
           "read",
           "write",
           "total",
+          "major",
+          "minor",
           "IO",
           "swap",
           "sched",
@@ -245,10 +247,14 @@ int main(int argc, char* argv[]) {
       uint64_t total_read = 0;
       uint64_t total_write = 0;
       uint64_t total_read_write = 0;
+      uint64_t total_minflt = 0;
+      uint64_t total_majflt = 0;
       for (const TaskStatistics& statistics : stats) {
         total_read += statistics.read();
         total_write += statistics.write();
         total_read_write += statistics.read_write();
+        total_minflt += statistics.minflt();
+        total_majflt += statistics.majflt();
 
         if (n == 0) {
           continue;
@@ -256,22 +262,24 @@ int main(int argc, char* argv[]) {
           n--;
         }
 
-        printf("%6d %-16s %6" PRIu64 " %6" PRIu64 " %6" PRIu64 " %5.2f%% %5.2f%% %5.2f%% %5.2f%% %5.2f%%\n",
+        printf("%6d %-16s %6" PRIu64 " %6" PRIu64 " %6" PRIu64 " %6" PRIu64 " %6" PRIu64" %5.2f%% %5.2f%% %5.2f%% %5.2f%% %5.2f%%\n",
             statistics.pid(),
             statistics.comm().c_str(),
             BytesToKB(statistics.read()) / delay_div,
             BytesToKB(statistics.write()) / delay_div,
             BytesToKB(statistics.read_write()) / delay_div,
+            statistics.majflt(), statistics.minflt(),
             TimeToTgidPercent(statistics.delay_io(), delay, statistics),
             TimeToTgidPercent(statistics.delay_swap(), delay, statistics),
             TimeToTgidPercent(statistics.delay_sched(), delay, statistics),
             TimeToTgidPercent(statistics.delay_mem(), delay, statistics),
             TimeToTgidPercent(statistics.delay_total(), delay, statistics));
       }
-      printf("%6s %-16s %6" PRIu64 " %6" PRIu64 " %6" PRIu64 "\n", "", "TOTAL",
+      printf("%6s %-16s %6" PRIu64 " %6" PRIu64 " %6" PRIu64 " %6" PRIu64 " %6" PRIu64"\n", "", "TOTAL",
           BytesToKB(total_read) / delay_div,
           BytesToKB(total_write) / delay_div,
-          BytesToKB(total_read_write) / delay_div);
+          BytesToKB(total_read_write) / delay_div,
+          total_minflt / delay_div, total_majflt / delay_div);
 
       second = false;
 
