@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4adcc80c_81c5f45c",
+        "filename": "tests/binder/libbinder/binderLibTest.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 728,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2018-09-19T21:15:01Z",
+      "side": 1,
+      "message": "I think you can do EXPECT_EQ() \u003c\u003c \"Kernel bug caused a strong reference leak\" to make the comment visible in the test failure.  Maybe with a link to what to do about it.",
+      "revId": "bcae8172c1f2e784f09afa99e536d3bdae7cc315",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
