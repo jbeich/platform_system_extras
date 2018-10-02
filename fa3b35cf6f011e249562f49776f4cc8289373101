@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "62df2a1c_f4c61747",
+        "filename": "verity/hash_tree_builder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2018-10-02T21:47:20Z",
+      "side": 1,
+      "message": "better to move entirely to L184 so that we won\u0027t call HashBlocks at all?",
+      "parentUuid": "6777339a_8656d73c",
+      "range": {
+        "startLine": 188,
+        "startChar": 38,
+        "endLine": 188,
+        "endChar": 42
+      },
+      "revId": "fa3b35cf6f011e249562f49776f4cc8289373101",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3f089e20_e1d7c5cc",
         "filename": "verity/include/verity/hash_tree_builder.h",
         "patchSetId": 1
