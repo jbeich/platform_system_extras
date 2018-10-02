@@ -94,6 +94,9 @@ class HashTreeBuilder {
   // Storage of the verity tree. The base level hash stores in verity_tree_[0]
   // and the top level hash stores in verity_tree_.back().
   std::vector<std::vector<unsigned char>> verity_tree_;
+  // The remaining data passed to the last call to Update() that's less than a
+  // block.
+  std::vector<unsigned char> leftover_;
 };
 
 #endif  // __HASH_TREE_BUILDER_H__
