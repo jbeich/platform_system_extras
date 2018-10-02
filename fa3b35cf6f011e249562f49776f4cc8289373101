@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7fcba01b_21f18bd0",
+        "filename": "verity/hash_tree_builder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-10-02T06:51:55Z",
+      "side": 1,
+      "message": "data could be possibly nullptr (so comes the check at L162):\n\nhttps://android.googlesource.com/platform/system/extras/+/refs/changes/48/774448/1/verity/build_verity_tree.cpp#67\n\nwhere the nullptr data comes from\nhttps://android.googlesource.com/platform/system/core/+/master/libsparse/include/sparse/sparse.h#204\n\nWe shouldn\u0027t have such a code path right now (because of L160), but we could add a CHECK here to avoid a hard crash, in case there\u0027s a change to the libsparse caller.",
+      "range": {
+        "startLine": 188,
+        "startChar": 38,
+        "endLine": 188,
+        "endChar": 42
+      },
+      "revId": "fa3b35cf6f011e249562f49776f4cc8289373101",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3f089e20_e1d7c5cc",
+        "filename": "verity/include/verity/hash_tree_builder.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-10-02T06:51:55Z",
+      "side": 1,
+      "message": "update",
+      "range": {
+        "startLine": 42,
+        "startChar": 66,
+        "endLine": 43,
+        "endChar": 36
+      },
+      "revId": "fa3b35cf6f011e249562f49776f4cc8289373101",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
