@@ -97,6 +97,30 @@
     },
     {
       "key": {
+        "uuid": "dc78b79d_53fe3ba4",
+        "filename": "verity/hash_tree_builder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2018-10-02T22:15:51Z",
+      "side": 1,
+      "message": "ah, I see. we explicitly expect len bytes of 0.",
+      "parentUuid": "6c26e352_cdce88c7",
+      "range": {
+        "startLine": 188,
+        "startChar": 38,
+        "endLine": 188,
+        "endChar": 42
+      },
+      "revId": "fa3b35cf6f011e249562f49776f4cc8289373101",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3f089e20_e1d7c5cc",
         "filename": "verity/include/verity/hash_tree_builder.h",
         "patchSetId": 1
