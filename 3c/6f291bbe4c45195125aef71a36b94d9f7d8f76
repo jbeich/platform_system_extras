@@ -1,0 +1,8 @@
+Code-Review+2: Dario Freni <dariofreni@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Verified+1: Martijn Coenen <maco@google.com>
+Submitted-by: Martijn Coenen <maco@google.com>
+Submitted-at: Thu, 04 Oct 2018 07:08:53 +0000
+Reviewed-on: https://android-review.googlesource.com/776726
+Project: platform/system/extras
+Branch: refs/heads/master
