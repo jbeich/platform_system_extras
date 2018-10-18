@@ -46,6 +46,30 @@
       "revId": "4376423fdab20a969429a97aa4e6c93cd242d20b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "189cd2d8_e5cdc142",
+        "filename": "simpleperf/scripts/report.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-10-18T23:52:55Z",
+      "side": 1,
+      "message": "Changed the help msg to show different usages. The mass is because the script was originally used to show in gui format the text reports generates by report cmd on device. Then it can call report cmd on host.",
+      "parentUuid": "0e3f06df_5c8c2dd3",
+      "range": {
+        "startLine": 328,
+        "startChar": 40,
+        "endLine": 328,
+        "endChar": 42
+      },
+      "revId": "4376423fdab20a969429a97aa4e6c93cd242d20b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
