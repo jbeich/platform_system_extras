@@ -22,6 +22,30 @@
       "revId": "4376423fdab20a969429a97aa4e6c93cd242d20b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0e3f06df_5c8c2dd3",
+        "filename": "simpleperf/scripts/report.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1063563
+      },
+      "writtenOn": "2018-10-18T22:47:20Z",
+      "side": 1,
+      "message": "I\u0027m confused. Can you show (in this comment) the two different usage patterns (i.e., the two different command sequences, one which ends with the \"-i\" and one without).",
+      "parentUuid": "5a4a823c_e55948ba",
+      "range": {
+        "startLine": 328,
+        "startChar": 40,
+        "endLine": 328,
+        "endChar": 42
+      },
+      "revId": "4376423fdab20a969429a97aa4e6c93cd242d20b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
