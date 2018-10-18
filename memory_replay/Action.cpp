@@ -22,6 +22,7 @@
 #include <string.h>
 #include <sys/param.h>
 #include <time.h>
+#include <unistd.h>
 
 #include <new>
 
@@ -34,6 +35,14 @@ static uint64_t nanotime() {
   t.tv_sec = t.tv_nsec = 0;
   clock_gettime(CLOCK_MONOTONIC, &t);
   return static_cast<uint64_t>(t.tv_sec) * 1000000000LL + t.tv_nsec;
+}
+
+static void InitPointer(void* memory, size_t size) {
+  static int pagesize = getpagesize();
+  uint8_t* data = reinterpret_cast<uint8_t*>(memory);
+  for (size_t i = 0; i < size; i += pagesize) {
+    data[i] = 1;
+  }
 }
 
 class EndThreadAction : public Action {
@@ -65,9 +74,9 @@ class MallocAction : public AllocAction {
   uint64_t Execute(Pointers* pointers) override {
     uint64_t time_nsecs = nanotime();
     void* memory = malloc(size_);
+    InitPointer(memory, size_);
     time_nsecs = nanotime() - time_nsecs;
 
-    memset(memory, 1, size_);
     pointers->Add(key_pointer_, memory);
 
     return time_nsecs;
@@ -85,9 +94,9 @@ class CallocAction : public AllocAction {
   uint64_t Execute(Pointers* pointers) override {
     uint64_t time_nsecs = nanotime();
     void* memory = calloc(n_elements_, size_);
+    InitPointer(memory, n_elements_ * size_);
     time_nsecs = nanotime() - time_nsecs;
 
-    memset(memory, 0, n_elements_ * size_);
     pointers->Add(key_pointer_, memory);
 
     return time_nsecs;
@@ -115,9 +124,9 @@ class ReallocAction : public AllocAction {
 
     uint64_t time_nsecs = nanotime();
     void* memory = realloc(old_memory, size_);
+    InitPointer(memory, size_);
     time_nsecs = nanotime() - time_nsecs;
 
-    memset(memory, 1, size_);
     pointers->Add(key_pointer_, memory);
 
     return time_nsecs;
@@ -138,9 +147,9 @@ class MemalignAction : public AllocAction {
   uint64_t Execute(Pointers* pointers) override {
     uint64_t time_nsecs = nanotime();
     void* memory = memalign(align_, size_);
+    InitPointer(memory, size_);
     time_nsecs = nanotime() - time_nsecs;
 
-    memset(memory, 1, size_);
     pointers->Add(key_pointer_, memory);
 
     return time_nsecs;

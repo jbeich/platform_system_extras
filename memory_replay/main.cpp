@@ -18,6 +18,7 @@
 #include <errno.h>
 #include <fcntl.h>
 #include <inttypes.h>
+#include <malloc.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -25,6 +26,8 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <unistd.h>
+
+#include <string>
 
 #include "Action.h"
 #include "LineBuffer.h"
@@ -155,7 +158,23 @@ void ProcessDump(int fd, size_t max_allocs, size_t max_threads) {
 
 constexpr size_t DEFAULT_MAX_THREADS = 512;
 
-int main(int argc, char** argv) {
+int main(int argc, const char** argv) {
+  const char** args = &argv[1];
+  if (argc >= 2 && std::string(args[0]) == "-m") {
+#if defined(__ANDROID__)
+    if (mallopt(M_DECAY_TIME, 1) == 0) {
+      printf("Failed to set decay time to 1\n");
+      return 1;
+    }
+    printf("Setting decay time to 1\n");
+    argc--;
+    args = &argv[2];
+#else
+    printf("-m option is only supported on android.\n");
+    return 1;
+#endif
+  }
+
   if (argc != 2 && argc != 3) {
     if (argc > 3) {
       fprintf(stderr, "Only two arguments are expected.\n");
@@ -168,16 +187,16 @@ int main(int argc, char** argv) {
 
   size_t max_threads = DEFAULT_MAX_THREADS;
   if (argc == 3) {
-    max_threads = atoi(argv[2]);
+    max_threads = atoi(args[1]);
   }
 
-  int dump_fd = open(argv[1], O_RDONLY);
+  int dump_fd = open(args[0], O_RDONLY);
   if (dump_fd == -1) {
-    fprintf(stderr, "Failed to open %s: %s\n", argv[1], strerror(errno));
+    fprintf(stderr, "Failed to open %s: %s\n", args[0], strerror(errno));
     return 1;
   }
 
-  printf("Processing: %s\n", argv[1]);
+  printf("Processing: %s\n", args[0]);
 
   // Do a first pass to get the total number of allocations used at one
   // time to allow a single mmap that can hold the maximum number of
