@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
+#include <ext4_utils/ext4_sb.h>
+#include <libavb/libavb.h>
+#include <squashfs_utils.h>
 #include <stdlib.h>
 #include <sys/ioctl.h>
 #include <sys/stat.h>
-
-#include <ext4_utils/ext4_sb.h>
-#include <squashfs_utils.h>
 
 #if defined(__linux__)
     #include <linux/fs.h>
@@ -191,26 +191,88 @@ static int parse_ecc_header(fec_handle *f, uint64_t offset)
     return 0;
 }
 
+static int parse_avb_ecc(fec_handle *f, uint64_t data_size) {
+  check(data_size > AVB_FOOTER_SIZE);
+  AvbFooter footer_read;
+  if (!raw_pread(f, &footer_read, AVB_FOOTER_SIZE,
+                 data_size - AVB_FOOTER_SIZE)) {
+    error("failed to read footer: %s", strerror(errno));
+    return -1;
+  }
+
+  AvbFooter verified_footer;
+  if (!avb_footer_validate_and_byteswap(&footer_read, &verified_footer)) {
+    error("failed to verify avb footer");
+    return -1;
+  }
+
+  std::vector<uint8_t> vbmeta_data(verified_footer.vbmeta_size, 0);
+  check(verified_footer.vbmeta_offset <
+        data_size - verified_footer.vbmeta_size);
+  if (!raw_pread(f, vbmeta_data.data(), vbmeta_data.size(),
+                 verified_footer.vbmeta_offset)) {
+    error("failed to read vbmeta: %s", strerror(errno));
+    return -1;
+  }
+
+  // Expects exactly one hashtree descriptor
+  auto parse_descriptor = [](const AvbDescriptor *descriptor, void *user_data) {
+    if (descriptor &&
+        avb_be64toh(descriptor->tag) == AVB_DESCRIPTOR_TAG_HASHTREE) {
+      auto desp = static_cast<const AvbDescriptor **>(user_data);
+      *desp = descriptor;
+      return false;
+    }
+    return true;
+  };
+
+  const AvbHashtreeDescriptor *hashtree_descriptor_ptr = nullptr;
+  avb_descriptor_foreach(vbmeta_data.data(), vbmeta_data.size(),
+                         parse_descriptor, &hashtree_descriptor_ptr);
+
+  AvbHashtreeDescriptor verified_hashtree_descriptor;
+  if (!avb_hashtree_descriptor_validate_and_byteswap(
+          hashtree_descriptor_ptr, &verified_hashtree_descriptor)) {
+    error("failed to verify avb hashtree descriptor");
+    return -1;
+  }
+
+  f->data_size = verified_hashtree_descriptor.fec_offset;
+  f->ecc.blocks = fec_div_round_up(f->data_size, FEC_BLOCKSIZE);
+  f->ecc.rounds = fec_div_round_up(f->ecc.blocks, f->ecc.rsn);
+
+  f->ecc.size = verified_hashtree_descriptor.fec_size;
+  f->ecc.start = verified_hashtree_descriptor.fec_offset;
+  // The hashtree descriptor doesn't carry the hash for fec data, verify the
+  // hash of vbmeta instead?
+  f->ecc.valid = true;
+  return 0;
+}
+
 /* attempts to read an ecc header from `offset', and checks for a backup copy
    at the end of the block if the primary header is not valid */
-static int parse_ecc(fec_handle *f, uint64_t offset)
-{
-    check(f);
-    check(offset % FEC_BLOCKSIZE == 0);
-    check(offset < UINT64_MAX - FEC_BLOCKSIZE);
+static int parse_ecc(fec_handle *f, uint64_t data_size) {
+  uint64_t offset = data_size - FEC_BLOCKSIZE;
+  check(f);
+  check(offset % FEC_BLOCKSIZE == 0);
+  check(offset < UINT64_MAX - FEC_BLOCKSIZE);
 
-    /* check the primary header at the beginning of the block */
-    if (parse_ecc_header(f, offset) == 0) {
-        return 0;
-    }
+  /* check the primary header at the beginning of the block */
+  if (parse_ecc_header(f, offset) == 0) {
+    return 0;
+  }
 
-    /* check the backup header at the end of the block */
-    if (parse_ecc_header(f, offset + FEC_BLOCKSIZE - sizeof(fec_header)) == 0) {
-        warn("using backup ecc header");
-        return 0;
-    }
+  /* check the backup header at the end of the block */
+  if (parse_ecc_header(f, offset + FEC_BLOCKSIZE - sizeof(fec_header)) == 0) {
+    warn("using backup ecc header");
+    return 0;
+  }
 
-    return -1;
+  if (parse_avb_ecc(f, data_size) == 0) {
+    debug("parsing ecc from avb");
+    return 0;
+  }
+  return -1;
 }
 
 /* reads the squashfs superblock and returns the size of the file system in
@@ -346,12 +408,9 @@ static int load_ecc(fec_handle *f)
     check(f);
     debug("size = %" PRIu64, f->data_size);
 
-    uint64_t offset = f->data_size - FEC_BLOCKSIZE;
-
-    if (parse_ecc(f, offset) == 0) {
-        debug("found at %" PRIu64 " (start %" PRIu64 ")", offset,
-            f->ecc.start);
-        return 0;
+    if (parse_ecc(f, f->data_size) == 0) {
+      debug("found ecc start at %" PRIu64, f->ecc.start);
+      return 0;
     }
 
     return -1;
