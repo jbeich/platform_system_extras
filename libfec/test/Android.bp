@@ -38,3 +38,24 @@ cc_test_host {
     srcs: ["test_rs.c"],
     static_libs: ["libfec_rs"],
 }
+
+cc_test_host {
+    name: "fec_test_ecc",
+    // defaults: ["fec_test_defaults"],
+    srcs: ["test_ecc.cpp"],
+    cflags: [
+        "-UNDEBUG",
+        "-DFEC_NO_KLOG",
+    ],
+    static_libs: [
+        "libfec",
+        "libfec_rs",
+        "libcrypto_utils",
+        "libext4_utils",
+        "libsquashfs_utils",
+        "libbase",
+        "libcrypto",
+        "libcutils",
+        "liblog",
+    ],
+}

@@ -252,24 +252,28 @@ static int parse_avb_ecc(fec_handle *f, uint64_t data_size) {
 
 /* attempts to read an ecc header from `offset', and checks for a backup copy
    at the end of the block if the primary header is not valid */
-static int parse_ecc(fec_handle *f, uint64_t offset)
-{
-    check(f);
-    check(offset % FEC_BLOCKSIZE == 0);
-    check(offset < UINT64_MAX - FEC_BLOCKSIZE);
+static int parse_ecc(fec_handle *f, uint64_t data_size) {
+  uint64_t offset = data_size - FEC_BLOCKSIZE;
+  check(f);
+  check(offset % FEC_BLOCKSIZE == 0);
+  check(offset < UINT64_MAX - FEC_BLOCKSIZE);
 
-    /* check the primary header at the beginning of the block */
-    if (parse_ecc_header(f, offset) == 0) {
-        return 0;
-    }
+  /* check the primary header at the beginning of the block */
+  if (parse_ecc_header(f, offset) == 0) {
+    return 0;
+  }
 
-    /* check the backup header at the end of the block */
-    if (parse_ecc_header(f, offset + FEC_BLOCKSIZE - sizeof(fec_header)) == 0) {
-        warn("using backup ecc header");
-        return 0;
-    }
+  /* check the backup header at the end of the block */
+  if (parse_ecc_header(f, offset + FEC_BLOCKSIZE - sizeof(fec_header)) == 0) {
+    warn("using backup ecc header");
+    return 0;
+  }
 
-    return -1;
+  if (parse_avb_ecc(f, data_size) == 0) {
+    debug("parsing ecc from avb");
+    return 0;
+  }
+  return -1;
 }
 
 /* reads the squashfs superblock and returns the size of the file system in
@@ -405,12 +409,9 @@ static int load_ecc(fec_handle *f)
     check(f);
     debug("size = %" PRIu64, f->data_size);
 
-    uint64_t offset = f->data_size - FEC_BLOCKSIZE;
-
-    if (parse_ecc(f, offset) == 0) {
-        debug("found at %" PRIu64 " (start %" PRIu64 ")", offset,
-            f->ecc.start);
-        return 0;
+    if (parse_ecc(f, f->data_size) == 0) {
+      debug("found ecc start at %" PRIu64, f->ecc.start);
+      return 0;
     }
 
     return -1;
