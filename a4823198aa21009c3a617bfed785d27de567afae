@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aa35ac31_ba3da3fa",
+        "filename": "libperfmgr/HintManager.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1096713
+      },
+      "writtenOn": "2018-10-22T13:59:43Z",
+      "side": 1,
+      "message": "I don\u0027t believe this is doing what we want.  The \u003c\u003c operator has higher precedence than the ternary ?: operator.  See this example program:\n\n  #include \u003ciostream\u003e\n  using namespace std;\n  int main(int argc, char **argv) {\n    bool my_bool \u003d ((argc % 2) \u003d\u003d 1);\n    cout \u003c\u003c \"val: \" \u003c\u003c my_bool ? \"a\" : \"b\";\n    cout \u003c\u003c endl;\n    return 0;\n  }\n\nThat outputs \"val: 0\" or \"val: 1\", not \"val: a\" or \"val: b\".\n\nI\u0027ve put up a fix at https://android-review.googlesource.com/c/platform/system/extras/+/796538",
+      "range": {
+        "startLine": 228,
+        "startChar": 0,
+        "endLine": 230,
+        "endChar": 0
+      },
+      "revId": "a4823198aa21009c3a617bfed785d27de567afae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
