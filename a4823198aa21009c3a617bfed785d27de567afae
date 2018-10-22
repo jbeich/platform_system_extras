@@ -22,6 +22,30 @@
       "revId": "a4823198aa21009c3a617bfed785d27de567afae",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4edfd27a_0dd477e0",
+        "filename": "libperfmgr/HintManager.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1105075
+      },
+      "writtenOn": "2018-10-22T14:58:30Z",
+      "side": 1,
+      "message": "Yeah, this is just print rest as before.\nI hope we have  std::boolalpha somewhere, maybe in libbase?",
+      "parentUuid": "aa35ac31_ba3da3fa",
+      "range": {
+        "startLine": 228,
+        "startChar": 0,
+        "endLine": 230,
+        "endChar": 0
+      },
+      "revId": "a4823198aa21009c3a617bfed785d27de567afae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
