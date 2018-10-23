@@ -27,3 +27,10 @@ on property:sys.cppreopt=requested && property:ro.boot.slot_suffix=_b
     exec - system system -- /system/bin/preloads_copy.sh /postinstall
     umount /postinstall
     setprop sys.cppreopt finished
+
+# zygote need to be started after otapreopt which will be done on post-fs-data
+on zygote-start
+    # zygote is started in common init.rc
+    # and now we can continue to initialize /data/
+    # create the directory for preload content.
+    mkdir /data/preloads 0775 system system
