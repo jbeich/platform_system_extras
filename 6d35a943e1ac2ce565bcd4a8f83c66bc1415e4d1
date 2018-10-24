@@ -69,6 +69,30 @@
       "revId": "6d35a943e1ac2ce565bcd4a8f83c66bc1415e4d1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "91cf60e4_69f7667d",
+        "filename": "cppreopts/cppreopts.rc",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2018-10-24T14:18:25Z",
+      "side": 1,
+      "message": "here\u0027s the trail:\nadded in post-fs-data: ag/1246379\nfrom post-fs-data to load_persist_props_action: ag/1903624\nfrom load_persist_props_action to zygote-start: ag/1969543",
+      "parentUuid": "3131cadf_cdc70ab7",
+      "range": {
+        "startLine": 31,
+        "startChar": 63,
+        "endLine": 31,
+        "endChar": 78
+      },
+      "revId": "6d35a943e1ac2ce565bcd4a8f83c66bc1415e4d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
