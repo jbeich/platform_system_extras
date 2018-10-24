@@ -1,0 +1,6 @@
+emptynativebinderservice is a bare-bones native Android process with
+binder support. On launch, it will just wait for binder work (which
+will never come :-)).
+
+It can be used to measure and analyze the core memory usage of a
+typical native Android process,.
