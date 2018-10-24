@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "80c7f440_ca06a9c2",
+        "filename": "cppreopts/cppreopts.rc",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1003966
+      },
+      "writtenOn": "2018-10-24T14:06:58Z",
+      "side": 1,
+      "message": "plural: needs",
+      "range": {
+        "startLine": 31,
+        "startChar": 9,
+        "endLine": 31,
+        "endChar": 13
+      },
+      "revId": "6d35a943e1ac2ce565bcd4a8f83c66bc1415e4d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7792c1f4_925c67ef",
+        "filename": "cppreopts/cppreopts.rc",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1003966
+      },
+      "writtenOn": "2018-10-24T14:06:58Z",
+      "side": 1,
+      "message": "I\u0027m confused why you want to tie this to zygote. If it was me, I\u0027d place line 36 with the other mkdir statements in system/core/rootdir/init.rc near line 429. That way we have consistency and avoid spreading out the filesystem initialization code, and avoid tying this to zygote.\n\nhttps://android.googlesource.com/platform/system/core/+/551efd11f7d31399a4a2c22cb19b2523be9c4d18/rootdir/init.rc#429",
+      "range": {
+        "startLine": 31,
+        "startChar": 63,
+        "endLine": 31,
+        "endChar": 78
+      },
+      "revId": "6d35a943e1ac2ce565bcd4a8f83c66bc1415e4d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
