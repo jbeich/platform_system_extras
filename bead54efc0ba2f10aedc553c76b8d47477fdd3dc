@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "32becf63_1d9388d5",
+        "filename": "cppreopts/preloads_copy.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1105075
+      },
+      "writtenOn": "2018-10-24T16:38:37Z",
+      "side": 1,
+      "message": "system_other",
+      "range": {
+        "startLine": 17,
+        "startChar": 44,
+        "endLine": 17,
+        "endChar": 52
+      },
+      "revId": "bead54efc0ba2f10aedc553c76b8d47477fdd3dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9562d9e6_4e8c7b97",
+        "filename": "cppreopts/preloads_copy.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1105075
+      },
+      "writtenOn": "2018-10-24T16:38:37Z",
+      "side": 1,
+      "message": "system_other",
+      "range": {
+        "startLine": 23,
+        "startChar": 14,
+        "endLine": 23,
+        "endChar": 22
+      },
+      "revId": "bead54efc0ba2f10aedc553c76b8d47477fdd3dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
