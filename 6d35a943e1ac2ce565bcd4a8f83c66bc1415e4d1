@@ -93,6 +93,30 @@
       "revId": "6d35a943e1ac2ce565bcd4a8f83c66bc1415e4d1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0949a1f7_2f968579",
+        "filename": "cppreopts/cppreopts.rc",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1003966
+      },
+      "writtenOn": "2018-10-24T14:25:45Z",
+      "side": 1,
+      "message": "ya, I don\u0027t think it matters much that init.rc isn\u0027t optional. I would create this directory in all cases, even if the functionality isn\u0027t used on a particular device. The directory stub is harmless, but it avoids extra logic and code complexity by unconditionally creating it, even if it\u0027s not used.",
+      "parentUuid": "91cf60e4_69f7667d",
+      "range": {
+        "startLine": 31,
+        "startChar": 63,
+        "endLine": 31,
+        "endChar": 78
+      },
+      "revId": "6d35a943e1ac2ce565bcd4a8f83c66bc1415e4d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
