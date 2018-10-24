@@ -117,6 +117,54 @@
       "revId": "6d35a943e1ac2ce565bcd4a8f83c66bc1415e4d1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e1e8ee01_bb0b1f85",
+        "filename": "cppreopts/cppreopts.rc",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2018-10-24T14:33:31Z",
+      "side": 1,
+      "message": "Done (new cl, this file is now reverted)",
+      "parentUuid": "0949a1f7_2f968579",
+      "range": {
+        "startLine": 31,
+        "startChar": 63,
+        "endLine": 31,
+        "endChar": 78
+      },
+      "revId": "6d35a943e1ac2ce565bcd4a8f83c66bc1415e4d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ed38d7be_73ea6bea",
+        "filename": "cppreopts/cppreopts.rc",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2018-10-24T14:33:31Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "80c7f440_ca06a9c2",
+      "range": {
+        "startLine": 31,
+        "startChar": 9,
+        "endLine": 31,
+        "endChar": 13
+      },
+      "revId": "6d35a943e1ac2ce565bcd4a8f83c66bc1415e4d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
