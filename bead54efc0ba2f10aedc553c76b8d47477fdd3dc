@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "8f2d7069_d23a3eaa",
+        "filename": "cppreopts/preloads_copy.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2018-10-24T17:08:50Z",
+      "side": 1,
+      "message": "I\u0027ll fix this in the CL that adds the module",
+      "parentUuid": "32becf63_1d9388d5",
+      "range": {
+        "startLine": 17,
+        "startChar": 44,
+        "endLine": 17,
+        "endChar": 52
+      },
+      "revId": "bead54efc0ba2f10aedc553c76b8d47477fdd3dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9562d9e6_4e8c7b97",
         "filename": "cppreopts/preloads_copy.sh",
         "patchSetId": 2
@@ -45,6 +69,30 @@
       "revId": "bead54efc0ba2f10aedc553c76b8d47477fdd3dc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "50152001_16c4c5d4",
+        "filename": "cppreopts/preloads_copy.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2018-10-24T17:08:50Z",
+      "side": 1,
+      "message": "ditto",
+      "parentUuid": "9562d9e6_4e8c7b97",
+      "range": {
+        "startLine": 23,
+        "startChar": 14,
+        "endLine": 23,
+        "endChar": 22
+      },
+      "revId": "bead54efc0ba2f10aedc553c76b8d47477fdd3dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
