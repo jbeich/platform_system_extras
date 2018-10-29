@@ -23,6 +23,7 @@
 #include <android-base/file.h>
 #include <android-base/logging.h>
 #include <android-base/test_utils.h>
+#include <utils/Compat.h>
 #include <ziparchive/zip_archive.h>
 
 #if defined(__ANDROID__)
@@ -216,8 +217,8 @@ int main(int argc, char** argv) {
     printf("Usage: %s -t <testdata_dir>\n", argv[0]);
     return 1;
   }
-  if (testdata_dir.back() != '/') {
-    testdata_dir.push_back('/');
+  if (testdata_dir.back() != OS_PATH_SEPARATOR) {
+    testdata_dir.push_back(OS_PATH_SEPARATOR);
   }
   LOG(INFO) << "testdata is in " << testdata_dir;
   return RUN_ALL_TESTS();

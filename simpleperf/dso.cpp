@@ -27,6 +27,7 @@
 #include <android-base/file.h>
 #include <android-base/logging.h>
 #include <android-base/strings.h>
+#include <utils/Compat.h>
 
 #include "environment.h"
 #include "read_apk.h"
@@ -44,24 +45,21 @@ void DebugElfFileFinder::Reset() {
 }
 
 bool DebugElfFileFinder::SetSymFsDir(const std::string& symfs_dir) {
-  std::string dirname = symfs_dir;
-  if (!dirname.empty()) {
-    if (dirname.back() != '/') {
-      dirname.push_back('/');
-    }
-    if (!IsDir(symfs_dir)) {
-      LOG(ERROR) << "Invalid symfs_dir '" << symfs_dir << "'";
-      return false;
-    }
+  symfs_dir_ = symfs_dir;
+  if (symfs_dir_.size() > 1u and symfs_dir_.back() == OS_PATH_SEPARATOR) {
+    symfs_dir_.pop_back();
   }
-  symfs_dir_ = dirname;
-  std::string build_id_list_file = symfs_dir_ + "build_id_list";
+  if (!IsDir(symfs_dir_)) {
+    LOG(ERROR) << "Invalid symfs_dir '" << symfs_dir_ << "'";
+    return false;
+  }
+  std::string build_id_list_file = symfs_dir_ + OS_PATH_SEPARATOR + "build_id_list";
   std::string build_id_list;
   if (android::base::ReadFileToString(build_id_list_file, &build_id_list)) {
     for (auto& line : android::base::Split(build_id_list, "\n")) {
       std::vector<std::string> items = android::base::Split(line, "=");
       if (items.size() == 2u) {
-        build_id_to_file_map_[items[0]] = symfs_dir_ + items[1];
+        build_id_to_file_map_[items[0]] = symfs_dir_ + OS_PATH_SEPARATOR + items[1];
       }
     }
   }
@@ -74,7 +72,7 @@ bool DebugElfFileFinder::AddSymbolDir(const std::string& symbol_dir) {
     return false;
   }
   std::string dir = symbol_dir;
-  if (dir.size() > 1 && dir.back() == '/') {
+  if (dir.size() > 1 && dir.back() == OS_PATH_SEPARATOR) {
     dir.pop_back();
   }
   CollectBuildIdInDir(dir);
@@ -83,7 +81,7 @@ bool DebugElfFileFinder::AddSymbolDir(const std::string& symbol_dir) {
 
 void DebugElfFileFinder::CollectBuildIdInDir(const std::string& dir) {
   for (const std::string& entry : GetEntriesInDir(dir)) {
-    std::string path = dir + "/" + entry;
+    std::string path = dir + OS_PATH_SEPARATOR + entry;
     if (IsDir(path)) {
       CollectBuildIdInDir(path);
     } else {
@@ -134,8 +132,11 @@ std::string DebugElfFileFinder::FindDebugFile(const std::string& dso_path, bool 
   };
 
   // 2. Try concatenating symfs_dir and dso_path.
-  if (!symfs_dir_.empty() && check_path(symfs_dir_ + dso_path)) {
-    return symfs_dir_ + dso_path;
+  if (!symfs_dir_.empty()) {
+    std::string path = GetPathInSymFsDir(dso_path);
+    if (check_path(path)) {
+      return path;
+    }
   }
   // 3. Try concatenating /usr/lib/debug and dso_path.
   // Linux host can store debug shared libraries in /usr/lib/debug.
@@ -143,6 +144,30 @@ std::string DebugElfFileFinder::FindDebugFile(const std::string& dso_path, bool 
     return "/usr/lib/debug" + dso_path;
   }
   return dso_path;
+}
+
+std::string DebugElfFileFinder::GetPathInSymFsDir(const std::string& path) {
+  auto add_symfs_prefix = [&](const std::string& path) {
+    if (!path.empty() && path[0] == OS_PATH_SEPARATOR) {
+      return symfs_dir_ + path;
+    }
+    return symfs_dir_ + OS_PATH_SEPARATOR + path;
+  };
+  if (OS_PATH_SEPARATOR == '/') {
+    return add_symfs_prefix(path);
+  }
+  // Paths in recorded perf.data uses '/' as path separator. When reporting on Windows, it needs
+  // to be converted to '\\'.
+  auto tuple = SplitUrlInApk(path);
+  if (std::get<0>(tuple)) {
+    std::string apk_path = std::get<1>(tuple);
+    std::string entry_path = std::get<2>(tuple);
+    std::replace(apk_path.begin(), apk_path.end(), '/', OS_PATH_SEPARATOR);
+    return GetUrlInApk(add_symfs_prefix(apk_path), entry_path);
+  }
+  std::string elf_path = path;
+  std::replace(elf_path.begin(), elf_path.end(), '/', OS_PATH_SEPARATOR);
+  return add_symfs_prefix(elf_path);
 }
 }  // namespace simpleperf_dso_imp
 
