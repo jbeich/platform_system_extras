@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "9b5286bd_4dee9b3b",
+        "filename": "simpleperf/dso.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-10-30T23:08:08Z",
+      "side": 1,
+      "message": "currently gnu14 is default, and filesystem needs c++17. So I added OS_PATH_SEPARATOR to utils.h temporarily.",
+      "parentUuid": "0aba8900_ffb89a57",
+      "revId": "d6e9dd1b021e84902e0334941be50efa25e2e5cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0b6101f8_0b42e8c5",
         "filename": "simpleperf/dso.cpp",
         "patchSetId": 1
@@ -82,6 +100,72 @@
     },
     {
       "key": {
+        "uuid": "3f0d6469_543980e7",
+        "filename": "simpleperf/dso.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-10-30T23:08:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba14776a_c90e5da6",
+      "revId": "d6e9dd1b021e84902e0334941be50efa25e2e5cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d1fa499b_a82678d6",
+        "filename": "simpleperf/dso.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-10-30T23:08:08Z",
+      "side": 1,
+      "message": "I want to exclude root directory \"/\", comment added.",
+      "parentUuid": "0b6101f8_0b42e8c5",
+      "range": {
+        "startLine": 49,
+        "startChar": 6,
+        "endLine": 49,
+        "endChar": 28
+      },
+      "revId": "d6e9dd1b021e84902e0334941be50efa25e2e5cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d830af08_b2504750",
+        "filename": "simpleperf/dso.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-10-30T23:08:08Z",
+      "side": 1,
+      "message": "Quite surprise, \"and\" is part of c++ standard, https://stackoverflow.com/questions/555505/when-were-the-and-and-or-alternative-tokens-introduced-in-c/555517#555517. I guess I still need to change for coding style.",
+      "parentUuid": "b2882dfe_610f4ef3",
+      "range": {
+        "startLine": 49,
+        "startChar": 29,
+        "endLine": 49,
+        "endChar": 32
+      },
+      "revId": "d6e9dd1b021e84902e0334941be50efa25e2e5cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "756ce659_e8fd0978",
         "filename": "simpleperf/dso.cpp",
         "patchSetId": 1
@@ -93,6 +177,24 @@
       "writtenOn": "2018-10-30T03:11:59Z",
       "side": 1,
       "message": "these uses should be fine, right? Windows _accepts_ \u0027/\u0027 as a separator.",
+      "revId": "d6e9dd1b021e84902e0334941be50efa25e2e5cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "86c75908_8b6856a1",
+        "filename": "simpleperf/dso.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-10-30T23:08:08Z",
+      "side": 1,
+      "message": "not sure here, don\u0027t have windows today. But it is clear that windows doesn\u0027t support / as good as linux, like it doesn\u0027t support path separator suffix. to be safe, just use OS_PATH_SEPARATOR.",
+      "parentUuid": "756ce659_e8fd0978",
       "revId": "d6e9dd1b021e84902e0334941be50efa25e2e5cc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
@@ -113,6 +215,24 @@
       "revId": "d6e9dd1b021e84902e0334941be50efa25e2e5cc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "efecc02b_3346592f",
+        "filename": "simpleperf/dso.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2018-10-30T23:08:08Z",
+      "side": 1,
+      "message": "Done. Didn\u0027t use StartsWith because OS_PATH_SEPARATOR is a char and need to be converted to string to use StartsWith. So I want to support char in StartsWith in https://android-review.googlesource.com/c/platform/system/core/+/807740.",
+      "parentUuid": "d3e5aea9_110646d6",
+      "revId": "d6e9dd1b021e84902e0334941be50efa25e2e5cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
