@@ -233,6 +233,29 @@
       "revId": "d6e9dd1b021e84902e0334941be50efa25e2e5cc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c360edc5_66115a32",
+        "filename": "simpleperf/dso.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1079148
+      },
+      "writtenOn": "2018-10-31T19:04:07Z",
+      "side": 1,
+      "message": "Strictly speaking this is broken with UNC paths, which start with \\\\ (or //), which is needed for long paths or network mounts, but handling that properly in cross-platform code is a giant pain in the ass (hopefully std::filesystem will solve that for us), and this probably doesn\u0027t actually matter that much.",
+      "range": {
+        "startLine": 150,
+        "startChar": 56,
+        "endLine": 151,
+        "endChar": 56
+      },
+      "revId": "d6e9dd1b021e84902e0334941be50efa25e2e5cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
