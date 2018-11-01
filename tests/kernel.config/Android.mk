@@ -17,6 +17,7 @@ test_c_flags := \
 cts_src_files := \
     logger_test.cpp \
     multicast_test.cpp \
+    memcg_test.cpp \
     nfs_test.cpp \
     sysvipc_test.cpp \
 
