@@ -88,7 +88,10 @@ int main(int argc, char* argv[]) {
     if (IsBlockDevice(file)) {
         pt = ReadMetadata(file, slot);
     } else {
-        pt = ReadFromImageFile(file);
+        pt = ReadMetadata(file, slot);
+        if (!pt) {
+            pt = ReadFromImageFile(file);
+        }
     }
     if (!pt) {
         fprintf(stderr, "Failed to read metadata.\n");
