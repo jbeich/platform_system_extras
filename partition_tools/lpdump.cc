@@ -24,6 +24,7 @@
 
 #include <string>
 
+#include <android-base/strings.h>
 #include <android-base/parseint.h>
 #include <liblp/liblp.h>
 
@@ -44,7 +45,10 @@ static int usage(int /* argc */, char* argv[]) {
 }
 
 static std::string BuildAttributeString(uint32_t attrs) {
-    return (attrs & LP_PARTITION_ATTR_READONLY) ? "readonly" : "none";
+    std::vector<std::string> strings;
+    if (attrs & LP_PARTITION_ATTR_READONLY) strings.emplace_back("readonly");
+    if (attrs & LP_PARTITION_ATTR_SLOT_SUFFIXED) strings.emplace_back("slot-suffixed");
+    return strings.empty() ? "none" : android::base::Join(strings, ",");
 }
 
 static bool IsBlockDevice(const char* file) {
