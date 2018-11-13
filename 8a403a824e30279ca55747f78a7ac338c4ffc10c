@@ -22,6 +22,30 @@
       "revId": "8a403a824e30279ca55747f78a7ac338c4ffc10c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da57be83_cb2bdfc9",
+        "filename": "partition_tools/lpdump.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1290458
+      },
+      "writtenOn": "2018-11-13T22:50:35Z",
+      "side": 1,
+      "message": "Good idea, I\u0027ll do that as a follow-up. Should be fine to automatically try and unsparse.",
+      "parentUuid": "c9d8014d_486ce260",
+      "range": {
+        "startLine": 64,
+        "startChar": 0,
+        "endLine": 64,
+        "endChar": 63
+      },
+      "revId": "8a403a824e30279ca55747f78a7ac338c4ffc10c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
