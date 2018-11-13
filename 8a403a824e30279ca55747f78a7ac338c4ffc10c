@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c9d8014d_486ce260",
+        "filename": "partition_tools/lpdump.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2018-11-13T22:32:49Z",
+      "side": 1,
+      "message": "As a follow-up, maybe unsparse the file as well? or add a --unsparse option?",
+      "range": {
+        "startLine": 64,
+        "startChar": 0,
+        "endLine": 64,
+        "endChar": 63
+      },
+      "revId": "8a403a824e30279ca55747f78a7ac338c4ffc10c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
