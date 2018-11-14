@@ -19,6 +19,7 @@
 #include <string>
 #include <vector>
 
+#include "environment.h"
 #include "read_elf.h"
 #include "workload.h"
 
@@ -56,3 +57,18 @@ bool IsInNativeAbi();
       return; \
     } \
   } while (0)
+
+class ScopedAppPackageName {
+ public:
+  ScopedAppPackageName(const std::string name) {
+    saved_name_ = GetDefaultAppPackageName();
+    SetDefaultAppPackageName(name);
+  }
+
+  ~ScopedAppPackageName() {
+    SetDefaultAppPackageName(saved_name_);
+  }
+
+ private:
+  std::string saved_name_;
+};
