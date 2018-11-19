@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "92286bb7_23949a26",
+        "filename": "partition_tools/lpdump.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2018-11-19T16:28:15Z",
+      "side": 1,
+      "message": "very minor nit: easier to rationalize the (current) singletons below if this was a helper routine.\n\nstatic std::string BuildFlagString(const std::vector\u003cstd::string\u003e\u0026 strings) {\n    return strings.empty() ? \"none\" : android::base::Join(strings, \",\");\n}",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 72
+      },
+      "revId": "93ddaf9e2a7e1ed1c7f605d13a12b5ec83122c73",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "52f1c7c5_7d9e875e",
+        "filename": "partition_tools/lpdump.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2018-11-19T16:28:15Z",
+      "side": 1,
+      "message": "Did we really want this to be hex, when all sizes above are in decimal",
+      "range": {
+        "startLine": 169,
+        "startChar": 38,
+        "endLine": 169,
+        "endChar": 41
+      },
+      "revId": "93ddaf9e2a7e1ed1c7f605d13a12b5ec83122c73",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
