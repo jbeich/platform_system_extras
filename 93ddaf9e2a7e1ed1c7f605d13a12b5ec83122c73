@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "be985c74_20659c81",
+        "filename": "partition_tools/lpdump.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1290458
+      },
+      "writtenOn": "2018-11-19T19:29:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "92286bb7_23949a26",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 72
+      },
+      "revId": "93ddaf9e2a7e1ed1c7f605d13a12b5ec83122c73",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "52f1c7c5_7d9e875e",
         "filename": "partition_tools/lpdump.cc",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2018-11-19T16:28:15Z",
       "side": 1,
       "message": "Did we really want this to be hex, when all sizes above are in decimal",
+      "range": {
+        "startLine": 169,
+        "startChar": 38,
+        "endLine": 169,
+        "endChar": 41
+      },
+      "revId": "93ddaf9e2a7e1ed1c7f605d13a12b5ec83122c73",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae747fee_9fe1c3a8",
+        "filename": "partition_tools/lpdump.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1290458
+      },
+      "writtenOn": "2018-11-19T19:29:47Z",
+      "side": 1,
+      "message": "Thanks, I think this was a typo.",
+      "parentUuid": "52f1c7c5_7d9e875e",
       "range": {
         "startLine": 169,
         "startChar": 38,
