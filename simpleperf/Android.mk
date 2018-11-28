@@ -18,7 +18,8 @@ LOCAL_PATH := $(call my-dir)
 simpleperf_version :=  $(shell git -C $(LOCAL_PATH) rev-parse --short=12 HEAD 2>/dev/null)
 
 simpleperf_common_cflags := -Wall -Werror -Wextra -Wunused -Wno-unknown-pragmas \
-                              -DSIMPLEPERF_REVISION='"$(simpleperf_version)"'
+                              -DSIMPLEPERF_REVISION='"$(simpleperf_version)"' \
+                              -I art/libdexfile/external/include
 
 simpleperf_cflags_target := $(simpleperf_common_cflags)
 
@@ -33,10 +34,14 @@ simpleperf_cflags_host_windows := -I $(LOCAL_PATH)/nonlinux_support/include
 LLVM_ROOT_PATH := external/llvm
 include $(LLVM_ROOT_PATH)/llvm.mk
 
+# FIXME: Should we really link libdexfile statically here? What is the static linking for?
 simpleperf_static_libraries_target := \
   libbacktrace \
   libunwindstack \
+  libdexfile_support \
+  libdexfile_external \
   libdexfile \
+  libartbase \
   libziparchive \
   libz \
   libbase \
@@ -77,7 +82,10 @@ simpleperf_static_libraries_host_linux := \
   libprocinfo \
   libbacktrace \
   libunwindstack \
+  libdexfile_support \
+  libdexfile_external \
   libdexfile \
+  libartbase \
   libcutils \
   libevent \
 

@@ -15,7 +15,9 @@
  */
 
 // Add fake functions to build successfully on darwin.
+
 #include <android-base/logging.h>
+#include <art_api/dex_file.h>
 
 #include "read_dex_file.h"
 #include "environment.h"

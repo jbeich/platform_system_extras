@@ -22,11 +22,9 @@
 #include <string>
 #include <vector>
 
-struct DexFileSymbol {
-  uint64_t offset;
-  uint64_t len;
-  std::string name;
-};
+#include <art_api/dex_file.h>
+
+typedef art_api::dex::MethodInfo DexFileSymbol;
 
 bool ReadSymbolsFromDexFileInMemory(void* addr, uint64_t size,
                                     const std::vector<uint64_t>& dex_file_offsets,
