@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a1788f8b_919158ef",
+        "filename": "simpleperf/Android.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2018-11-28T15:51:15Z",
+      "side": 1,
+      "message": "There\u0027s not a lot of gain moving to the external libdexfile API due to all the static linking in simpleperf.\n\nShould we keep linking the full libdexfile statically here? What\u0027s the purpose of the static linking in this case and for simpleperf_static_libraries_with_libc_target and simpleperf_static_libraries_host_linux?",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 14
+      },
+      "revId": "8e6a0fe425a682aa8651f1643334ad39dea0cb67",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
