@@ -33,9 +33,15 @@ simpleperf_cflags_host_windows := -I $(LOCAL_PATH)/nonlinux_support/include
 LLVM_ROOT_PATH := external/llvm
 include $(LLVM_ROOT_PATH)/llvm.mk
 
+# When libdexfile_external isn't used, we still need the header.
+simpleperf_header_libraries_nonlinux := \
+  libdexfile_external_headers \
+
 simpleperf_static_libraries_target := \
   libbacktrace \
   libunwindstack \
+  libdexfile_support \
+  libdexfile_external \
   libdexfile \
   libziparchive \
   libz \
@@ -77,6 +83,8 @@ simpleperf_static_libraries_host_linux := \
   libprocinfo \
   libbacktrace \
   libunwindstack \
+  libdexfile_support \
+  libdexfile_external \
   libdexfile \
   libcutils \
   libevent \
@@ -157,6 +165,8 @@ LOCAL_CFLAGS := $(simpleperf_cflags_host)
 LOCAL_CFLAGS_darwin := $(simpleperf_cflags_host_darwin)
 LOCAL_CFLAGS_linux := $(simpleperf_cflags_host_linux)
 LOCAL_CFLAGS_windows := $(simpleperf_cflags_host_windows)
+LOCAL_HEADER_LIBRARIES_darwin := $(simpleperf_header_libraries_nonlinux)
+LOCAL_HEADER_LIBRARIES_windows := $(simpleperf_header_libraries_nonlinux)
 LOCAL_SRC_FILES := $(libsimpleperf_src_files)
 LOCAL_SRC_FILES_darwin := $(libsimpleperf_src_files_darwin)
 LOCAL_SRC_FILES_linux := $(libsimpleperf_src_files_linux)
