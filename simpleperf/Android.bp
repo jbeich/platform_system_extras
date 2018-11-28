@@ -39,6 +39,7 @@ cc_defaults {
         "-Wno-sign-compare",
         "-Wno-unused-parameter",
     ],
+    header_libs: ["libdexfile_external_headers"],
 }
 
 cc_defaults {
@@ -54,6 +55,8 @@ cc_defaults {
         "libz",
         "libziparchive",
     ],
+    header_libs: ["libdexfile_external_headers"],
+    export_header_lib_headers: ["libdexfile_external_headers"],
 }
 
 cc_library_static {
@@ -98,6 +101,10 @@ cc_library_static {
 cc_defaults {
     name: "libsimpleperf_dex_read_static_reqs_defaults",
     defaults: ["libdexfile_static_defaults"],
+    static_libs: [
+        "libdexfile_external",
+        "libdexfile_support",
+    ],
 }
 
 cc_library_static {
