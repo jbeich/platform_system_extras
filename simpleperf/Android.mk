@@ -18,7 +18,8 @@ LOCAL_PATH := $(call my-dir)
 simpleperf_version :=  $(shell git -C $(LOCAL_PATH) rev-parse --short=12 HEAD 2>/dev/null)
 
 simpleperf_common_cflags := -Wall -Werror -Wextra -Wunused -Wno-unknown-pragmas \
-                              -DSIMPLEPERF_REVISION='"$(simpleperf_version)"'
+                              -DSIMPLEPERF_REVISION='"$(simpleperf_version)"' \
+                              -I art/libdexfile/external/include
 
 simpleperf_cflags_target := $(simpleperf_common_cflags)
 
@@ -36,6 +37,8 @@ include $(LLVM_ROOT_PATH)/llvm.mk
 simpleperf_static_libraries_target := \
   libbacktrace \
   libunwindstack \
+  libdexfile_support \
+  libdexfile_external \
   libdexfile \
   libziparchive \
   libz \
@@ -77,6 +80,8 @@ simpleperf_static_libraries_host_linux := \
   libprocinfo \
   libbacktrace \
   libunwindstack \
+  libdexfile_support \
+  libdexfile_external \
   libdexfile \
   libcutils \
   libevent \
