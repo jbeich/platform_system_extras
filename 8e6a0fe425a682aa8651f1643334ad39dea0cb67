@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "0ac20f87_84bcb820",
+        "filename": "simpleperf/Android.bp",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2018-11-28T21:52:24Z",
+      "side": 1,
+      "message": "There\u0027s dex code in dso.cpp which I figured to be common code. But fair enough, this doesn\u0027t make a difference - I needed the ugly -I in Android.mk to make it work.",
+      "parentUuid": "f6d56923_65e6cd83",
+      "range": {
+        "startLine": 42,
+        "startChar": 47,
+        "endLine": 42,
+        "endChar": 49
+      },
+      "revId": "8e6a0fe425a682aa8651f1643334ad39dea0cb67",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "78d50eb0_dbb67ff1",
         "filename": "simpleperf/Android.bp",
         "patchSetId": 4
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "fb62c223_20e74149",
+        "filename": "simpleperf/Android.bp",
+        "patchSetId": 4
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2018-11-28T21:52:24Z",
+      "side": 1,
+      "message": "Of course, thx.",
+      "parentUuid": "78d50eb0_dbb67ff1",
+      "range": {
+        "startLine": 59,
+        "startChar": 62,
+        "endLine": 59,
+        "endChar": 63
+      },
+      "revId": "8e6a0fe425a682aa8651f1643334ad39dea0cb67",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f3098e83_66dd8dbe",
         "filename": "simpleperf/Android.mk",
         "patchSetId": 4
@@ -59,6 +107,30 @@
       "writtenOn": "2018-11-28T18:34:16Z",
       "side": 1,
       "message": "can\u0027t we avoid this? the linked static libraries are expected to export the headers.",
+      "range": {
+        "startLine": 22,
+        "startChar": 30,
+        "endLine": 22,
+        "endChar": 64
+      },
+      "revId": "8e6a0fe425a682aa8651f1643334ad39dea0cb67",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "52f8551d_64c29ee1",
+        "filename": "simpleperf/Android.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2018-11-28T21:52:24Z",
+      "side": 1,
+      "message": "I don\u0027t know much about how the old make system works so I don\u0027t know the proper place to put it. Where should I look? I presume the include paths from Soong packages don\u0027t get incorporated in these make build rules, because then it ought to work.",
+      "parentUuid": "f3098e83_66dd8dbe",
       "range": {
         "startLine": 22,
         "startChar": 30,
@@ -115,6 +187,30 @@
       "revId": "8e6a0fe425a682aa8651f1643334ad39dea0cb67",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fd1a570f_02fa5827",
+        "filename": "simpleperf/Android.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2018-11-28T21:52:24Z",
+      "side": 1,
+      "message": "I see. In theory it could start linking dynamically to these APEX provided libs at some point in the future, but it\u0027s far off.",
+      "parentUuid": "5dbfe520_0688bd84",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 14
+      },
+      "revId": "8e6a0fe425a682aa8651f1643334ad39dea0cb67",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
