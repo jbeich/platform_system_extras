@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "dd60a4e2_1ade115b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2018-11-29T21:45:52Z",
+      "side": 1,
+      "message": "Yes, that worked.",
+      "parentUuid": "b7dd2e50_e87827de",
+      "range": {
+        "startLine": 10,
+        "startChar": 111,
+        "endLine": 10,
+        "endChar": 112
+      },
+      "revId": "8e6a0fe425a682aa8651f1643334ad39dea0cb67",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f6d56923_65e6cd83",
         "filename": "simpleperf/Android.bp",
         "patchSetId": 4
@@ -187,6 +211,30 @@
       "revId": "8e6a0fe425a682aa8651f1643334ad39dea0cb67",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d3c56488_0a06187f",
+        "filename": "simpleperf/Android.mk",
+        "patchSetId": 4
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2018-11-29T21:45:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9b899742_884a01b9",
+      "range": {
+        "startLine": 22,
+        "startChar": 30,
+        "endLine": 22,
+        "endChar": 64
+      },
+      "revId": "8e6a0fe425a682aa8651f1643334ad39dea0cb67",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
