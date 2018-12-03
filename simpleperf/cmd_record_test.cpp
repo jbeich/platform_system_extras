@@ -335,11 +335,16 @@ TEST(record_cmd, existing_threads) {
 }
 
 TEST(record_cmd, no_monitored_threads) {
+<<<<<<< HEAD   (4d1d32 Merge "make_f2fs: use -g android by default")
   TEST_REQUIRE_HW_COUNTER();
   ScopedAppPackageName scoped_package_name("");
   TemporaryFile tmpfile;
   ASSERT_FALSE(RecordCmd()->Run({"-o", tmpfile.path}));
   ASSERT_FALSE(RecordCmd()->Run({"-o", tmpfile.path, ""}));
+=======
+  TemporaryFile tmpfile;
+  ASSERT_FALSE(RecordCmd()->Run({"-o", tmpfile.path}));
+>>>>>>> BRANCH (91d400 Merge pi-qpr1-release PQ1A.181105.017.A1 to pi-platform-rele)
 }
 
 TEST(record_cmd, more_than_one_event_types) {
