@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d39afbf6_903d5ec2",
+        "filename": "simpleperf/read_dex_file.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2018-12-06T23:36:41Z",
+      "side": 1,
+      "message": "This is a bit clunky, but I have a plan to make a null library for libdexfile_external on windows and other targets that doesn\u0027t support the real thing, and then these cpp conditionals will go away again.",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 6
+      },
+      "revId": "f3fde788152b290cec03eee40b4a9c6da7d4c83c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
