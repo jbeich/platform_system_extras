@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4d9a59bc_b259b673",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2018-12-07T19:45:30Z",
+      "side": 1,
+      "message": "If the expectation is for this to be temporary, I\u0027d rather skip the whole effort.",
+      "range": {
+        "startLine": 10,
+        "startChar": 48,
+        "endLine": 10,
+        "endChar": 57
+      },
+      "revId": "e262c4b5d09e07edfc1d2d05bca0ad36f3f5c8c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
