@@ -92,6 +92,8 @@ def ParseArguments(argv):
                       help="The mke2fs hash seed (mke2fs).")
   parser.add_argument("--share_dup_blocks", "-c", action="store_true",
                       help="ext4 share dup blocks (e2fsdroid).")
+  parser.add_argument("--no_fsverity", "-F", action="store_true",
+                      help="disable fsverity (mke2fs).")
 
   args, remainder = parser.parse_known_args(argv)
   # The current argparse doesn't handle intermixed arguments well. Checks
@@ -167,6 +169,8 @@ def ConstructE2fsCommands(args):
     mke2fs_opts += ["-U", args.mke2fs_uuid]
   if mke2fs_extended_opts:
     mke2fs_opts += ["-E", ','.join(mke2fs_extended_opts)]
+  if not args.no_fsverity:
+    mke2fs_opts += ["-O", "verity"]
 
   # Round down the filesystem length to be a multiple of the block size
   blocks = int(args.fs_size) / BLOCKSIZE
