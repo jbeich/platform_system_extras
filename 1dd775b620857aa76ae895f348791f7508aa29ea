@@ -45,6 +45,54 @@
       "revId": "1dd775b620857aa76ae895f348791f7508aa29ea",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "287b5786_cd57ee77",
+        "filename": "partition_tools/lpdump.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1290458
+      },
+      "writtenOn": "2018-12-12T21:58:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7e1ba75b_44be5f51",
+      "range": {
+        "startLine": 43,
+        "startChar": 18,
+        "endLine": 43,
+        "endChar": 29
+      },
+      "revId": "1dd775b620857aa76ae895f348791f7508aa29ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "850e78b8_867d3403",
+        "filename": "partition_tools/lpdump.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1290458
+      },
+      "writtenOn": "2018-12-12T21:58:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fbba5071_a578e9fd",
+      "range": {
+        "startLine": 43,
+        "startChar": 31,
+        "endLine": 43,
+        "endChar": 45
+      },
+      "revId": "1dd775b620857aa76ae895f348791f7508aa29ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
