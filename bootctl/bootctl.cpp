@@ -121,10 +121,10 @@ static int handle_return(const Return<BoolResult> &ret, const char* errStr) {
     } else if (ret == BoolResult::INVALID_SLOT) {
         fprintf(stderr, errStr, "Invalid slot");
         return EX_SOFTWARE;
-    } else if (ret == BoolResult::TRUE) {
+    } else {
+        fprintf(stdout, "%d\n", static_cast<BoolResult>(ret));
         return EX_OK;
     }
-    return EX_SOFTWARE;
 }
 
 static int do_is_slot_bootable(sp<IBootControl> module, Slot slot_number)
