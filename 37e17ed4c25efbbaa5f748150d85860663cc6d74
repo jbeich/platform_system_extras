@@ -22,6 +22,30 @@
       "revId": "37e17ed4c25efbbaa5f748150d85860663cc6d74",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "48c42dba_fd090967",
+        "filename": "ext4_utils/mkuserimg_mke2fs.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1336427
+      },
+      "writtenOn": "2018-12-20T08:13:47Z",
+      "side": 1,
+      "message": "I have fixed it at patch 5.",
+      "parentUuid": "1a438b93_422f8bdd",
+      "range": {
+        "startLine": 95,
+        "startChar": 39,
+        "endLine": 95,
+        "endChar": 43
+      },
+      "revId": "37e17ed4c25efbbaa5f748150d85860663cc6d74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
