@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a438b93_422f8bdd",
+        "filename": "ext4_utils/mkuserimg_mke2fs.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2018-12-20T07:52:10Z",
+      "side": 1,
+      "message": "please remove this short version. it\u0027s nonintuitive and unneeded",
+      "range": {
+        "startLine": 95,
+        "startChar": 39,
+        "endLine": 95,
+        "endChar": 43
+      },
+      "revId": "37e17ed4c25efbbaa5f748150d85860663cc6d74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
