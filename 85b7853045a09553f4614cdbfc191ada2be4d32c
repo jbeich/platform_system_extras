@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "da294daf_354384fe",
+        "filename": "ext4_utils/mkuserimg_mke2fs.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1336427
+      },
+      "writtenOn": "2018-12-20T07:33:14Z",
+      "side": 1,
+      "message": "For sync your new comment, I will change the design.\n\"--no_fsverity\" + action\u003d\"store_true\" + if not args.no_fsverity\n\nif script runs \"./mkuserimg_mke2fs.py -F\"\n\u003d\u003e it will disable fsverity build\nif script runs \"./mkuserimg_mke2fs.py\" (default)\n\u003d\u003e it will enable fsverity build",
+      "parentUuid": "ab368ec1_f975ad0b",
+      "range": {
+        "startLine": 95,
+        "startChar": 25,
+        "endLine": 95,
+        "endChar": 33
+      },
+      "revId": "85b7853045a09553f4614cdbfc191ada2be4d32c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bd84cb56_a0fa69d9",
         "filename": "ext4_utils/mkuserimg_mke2fs.py",
         "patchSetId": 2
