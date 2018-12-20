@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ab368ec1_f975ad0b",
+        "filename": "ext4_utils/mkuserimg_mke2fs.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1336427
+      },
+      "writtenOn": "2018-12-20T02:42:32Z",
+      "side": 1,
+      "message": "Yes, I also think it\u0027s better for \"--no-fsverity\".",
+      "parentUuid": "0834c539_b5cc2352",
+      "range": {
+        "startLine": 95,
+        "startChar": 25,
+        "endLine": 95,
+        "endChar": 33
+      },
+      "revId": "85b7853045a09553f4614cdbfc191ada2be4d32c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bd84cb56_a0fa69d9",
         "filename": "ext4_utils/mkuserimg_mke2fs.py",
         "patchSetId": 2
@@ -45,6 +69,30 @@
       "revId": "85b7853045a09553f4614cdbfc191ada2be4d32c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4c7542dd_043bbad9",
+        "filename": "ext4_utils/mkuserimg_mke2fs.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1336427
+      },
+      "writtenOn": "2018-12-20T02:42:32Z",
+      "side": 1,
+      "message": "Follow the suggestion.",
+      "parentUuid": "bd84cb56_a0fa69d9",
+      "range": {
+        "startLine": 96,
+        "startChar": 28,
+        "endLine": 96,
+        "endChar": 41
+      },
+      "revId": "85b7853045a09553f4614cdbfc191ada2be4d32c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
