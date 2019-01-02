@@ -30,3 +30,8 @@ cc_prebuilt_binary {
         "preloads_copy.sh",
     ],
 }
+
+prebuilt_etc {
+    name: "fstab.postinstall",
+    src: "fstab.postinstall",
+}
