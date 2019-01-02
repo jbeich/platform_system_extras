@@ -27,3 +27,11 @@ on property:sys.cppreopt=requested && property:ro.boot.slot_suffix=_b
     exec - system system -- /system/bin/preloads_copy.sh /postinstall
     umount /postinstall
     setprop sys.cppreopt finished
+
+on property:sys.cppreopt=requested && property:ro.boot.dynamic_partitions=true
+    mount_all /vendor/etc/fstab.postinstall
+    exec - root -- /system/bin/cppreopts.sh /postinstall
+    # Optional script to copy additional preloaded content to data directory
+    exec - system system -- /system/bin/preloads_copy.sh /postinstall
+    umount /postinstall
+    setprop sys.cppreopt finished
