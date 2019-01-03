@@ -216,6 +216,23 @@ bool IsInNativeAbi() {
   return in_native_abi == 1;
 }
 
+bool HasHardwareCounter() {
+  static int has_hw_counter = -1;
+  if (has_hw_counter == -1) {
+    has_hw_counter = 1;
+#if defined(__arm__)
+    std::string cpu_info;
+    if (android::base::ReadFileToString("/proc/cpuinfo", &cpu_info)) {
+      std::string hardware = GetHardwareFromCpuInfo(cpu_info);
+      if (std::regex_search(hardware, std::regex(R"(i\.MX6.*Quad)")) ||
+          std::regex_search(hardware, std::regex(R"(SC7731e)")) ) {
+        has_hw_counter = 0;
+      }
+    }
+#endif
+  }
+  return has_hw_counter == 1;
+}
 TEST(record_cmd, dwarf_callchain_sampling) {
   OMIT_TEST_ON_NON_NATIVE_ABIS();
   ASSERT_TRUE(IsDwarfCallChainSamplingSupported());
@@ -557,6 +574,7 @@ TEST(record_cmd, clockid_option) {
 }
 
 TEST(record_cmd, generate_samples_by_hw_counters) {
+  TEST_REQUIRE_HW_COUNTER();
   std::vector<std::string> events = {"cpu-cycles", "instructions"};
   for (auto& event : events) {
     TemporaryFile tmpfile;

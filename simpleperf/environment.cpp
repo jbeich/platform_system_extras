@@ -727,3 +727,16 @@ bool SignalIsIgnored(int signo) {
 
   return act.sa_handler == SIG_IGN;
 }
+
+std::string GetHardwareFromCpuInfo(const std::string& cpu_info) {
+  for (auto& line : android::base::Split(cpu_info, "\n")) {
+    size_t pos = line.find(':');
+    if (pos != std::string::npos) {
+      std::string key = android::base::Trim(line.substr(0, pos));
+      if (key == "Hardware") {
+        return android::base::Trim(line.substr(pos + 1));
+      }
+    }
+  }
+  return "";
+}
