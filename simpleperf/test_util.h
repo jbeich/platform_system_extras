@@ -58,6 +58,14 @@ bool IsInNativeAbi();
     } \
   } while (0)
 
+bool HasHardwareCounter();
+#define TEST_REQUIRE_HW_COUNTER() \
+  do { \
+    if (!HasHardwareCounter()) { \
+      GTEST_LOG_(INFO) << "Skip this test as the machine doesn't have hardware PMU counters."; \
+      return; \
+    } \
+  } while (0)
 class ScopedAppPackageName {
  public:
   ScopedAppPackageName(const std::string name) {
