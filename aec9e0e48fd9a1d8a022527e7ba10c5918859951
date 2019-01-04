@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2f28f615_f5771798",
+        "filename": "gsi_tool/gsi_tool.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1108565
+      },
+      "writtenOn": "2019-01-04T23:08:16Z",
+      "side": 1,
+      "message": "2019",
+      "range": {
+        "startLine": 2,
+        "startChar": 17,
+        "endLine": 2,
+        "endChar": 21
+      },
+      "revId": "aec9e0e48fd9a1d8a022527e7ba10c5918859951",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "911ada8a_7c5bffa4",
+        "filename": "gsi_tool/gsi_tool.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1108565
+      },
+      "writtenOn": "2019-01-04T23:08:16Z",
+      "side": 1,
+      "message": "stdin?",
+      "range": {
+        "startLine": 90,
+        "startChar": 39,
+        "endLine": 90,
+        "endChar": 40
+      },
+      "revId": "aec9e0e48fd9a1d8a022527e7ba10c5918859951",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
