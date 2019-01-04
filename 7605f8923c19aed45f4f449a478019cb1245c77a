@@ -46,6 +46,30 @@
       "revId": "7605f8923c19aed45f4f449a478019cb1245c77a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9f7f897d_627022c8",
+        "filename": "cppreopts/fstab.postinstall",
+        "patchSetId": 7
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-01-04T18:23:43Z",
+      "side": 1,
+      "message": "I should comment on this better...\n\nfs_mgr scans several consecutive entries with the same mount point, and treat them as alternatives. So it will mount it as logical then as non-logical partition.\n\ninit will ignore the failures in mount_all (it will log failures, but will continue to execute), but then, cppreopts.rc will not find the file \"system-other-odex-marker\", and exit 1. The error will be propagated to PackageManager.",
+      "parentUuid": "d1810809_38143933",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 32
+      },
+      "revId": "7605f8923c19aed45f4f449a478019cb1245c77a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
