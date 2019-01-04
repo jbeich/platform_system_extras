@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8035610b_de4951ad",
+        "filename": "cppreopts/cppreopts.rc",
+        "patchSetId": 7
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2019-01-04T02:44:51Z",
+      "side": 0,
+      "message": "After removing this, will the mount_all also triggered on non-A/B devices? (if yes, will it cause any failure?).",
+      "range": {
+        "startLine": 15,
+        "startChar": 38,
+        "endLine": 15,
+        "endChar": 69
+      },
+      "revId": "8873b8f86596522c7e40570dfb1c317816b1267d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
