@@ -22,6 +22,30 @@
       "revId": "7605f8923c19aed45f4f449a478019cb1245c77a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d1810809_38143933",
+        "filename": "cppreopts/fstab.postinstall",
+        "patchSetId": 7
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1108565
+      },
+      "writtenOn": "2019-01-04T18:19:59Z",
+      "side": 1,
+      "message": ".. are those errors silent?",
+      "parentUuid": "073f9ae5_4d78025f",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 32
+      },
+      "revId": "7605f8923c19aed45f4f449a478019cb1245c77a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }

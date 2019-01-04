@@ -22,6 +22,30 @@
       "revId": "8873b8f86596522c7e40570dfb1c317816b1267d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "03ddceb0_ccd301f1",
+        "filename": "cppreopts/cppreopts.rc",
+        "patchSetId": 7
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1108565
+      },
+      "writtenOn": "2019-01-04T18:19:59Z",
+      "side": 0,
+      "message": "I don\u0027t think it should cause any problem. The \"sys.cppreopt\" is only set to \u0027requested\u0027 by the package manager if \u0027ro.cp_system_other_odex\u0027 is set to 1.\n\nSee: https://cs.corp.google.com/android/frameworks/base/services/core/java/com/android/server/pm/PackageManagerService.java?rcl\u003d5c5513f2c778cc6edf5afa72b7a3e95673adf537\u0026l\u003d2151\nand\nhttps://cs.corp.google.com/android/device/google/wahoo/device.mk?rcl\u003d61d2125575fe200064fc695609e5d11c702a20d0\u0026l\u003d123\n\nThe later is a PROPERTY_OVERRIDE for a/b system only. If non-a/b device configuration is setting that, then I imagine a whole bunch of things will go bad. \n\nEven if this is to be checked, I think it should be done by either \n1. the package manager to make sure the device configuration is indeed a/b AND ro.cp_system_other_odex is set to 1\n2. The build system to make sure \u0027ro.cp_system_other_odex\u0027 can never be set to 1 for non-A/B builds.",
+      "parentUuid": "8035610b_de4951ad",
+      "range": {
+        "startLine": 15,
+        "startChar": 38,
+        "endLine": 15,
+        "endChar": 69
+      },
+      "revId": "8873b8f86596522c7e40570dfb1c317816b1267d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
