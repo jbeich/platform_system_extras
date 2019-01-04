@@ -46,6 +46,30 @@
       "revId": "8873b8f86596522c7e40570dfb1c317816b1267d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b0e5ca1a_fea1e1bd",
+        "filename": "cppreopts/cppreopts.rc",
+        "patchSetId": 7
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-01-04T18:20:22Z",
+      "side": 0,
+      "message": "Good point. But, A/B devices shouldn\u0027t install cppreopts script in the first place, and shouldn\u0027t set ro.cp_system_other_odex\u003d1 (PackageManager won\u0027t set sys.cppreopt\u003drequested if ro.cp_system_other_odex is not set).",
+      "parentUuid": "8035610b_de4951ad",
+      "range": {
+        "startLine": 15,
+        "startChar": 38,
+        "endLine": 15,
+        "endChar": 69
+      },
+      "revId": "8873b8f86596522c7e40570dfb1c317816b1267d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
