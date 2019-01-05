@@ -16,6 +16,7 @@
 
 #include <getopt.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <sysexits.h>
 
 #include <functional>
@@ -38,6 +39,45 @@ static int Wipe(sp<IVold> vold, int argc, char** argv);
 static const std::map<std::string, CommandCallback> kCommandMap = {
     { "install", Install },
     { "wipe", Wipe },
+};
+
+static constexpr char kRedColor[] = "\x1b[31m";
+static constexpr char kGreenColor[] = "\x1b[32m";
+static constexpr char kResetColor[] = "\x1b[0m";
+
+class ProgressBar {
+  public:
+    ProgressBar(uint32_t columns, uint32_t total_units) : columns_(columns), total_(total_units) {
+        units_per_column_ = total_ / columns_;
+    }
+
+    void Show(uint32_t units_done) {
+        if (units_done > total_) {
+            fprintf(stderr, "Invalid progress\n");
+            return;
+        }
+        float percentage = ((1.0 * units_done) / total_) * 100;
+        uint32_t nr_bars = units_done / units_per_column_;
+        uint32_t nr_dashes = columns_ - nr_bars;
+        std::string bars = std::string(nr_bars, '|');
+        std::string dashes = std::string(nr_dashes, '-');
+        printf(kGreenColor);
+        printf("\r%5.1f%%", percentage);
+        printf(" [");
+        printf("%s", bars.c_str());
+        printf(kRedColor);
+        printf("%s", dashes.c_str());
+        printf(kGreenColor);
+        printf("]");
+        fflush(stdout);
+    }
+
+    ~ProgressBar() = default;
+
+  private:
+    uint32_t columns_;
+    uint32_t total_;
+    uint32_t units_per_column_;
 };
 
 static sp<IVold> getService() {
@@ -65,13 +105,13 @@ static int Install([[maybe_unused]] sp<IVold> vold, int argc, char** argv) {
         switch (rv) {
             case 's':
                 if (!android::base::ParseInt(optarg, &gsi_size) || gsi_size <= 0) {
-                    std::cout << "Could not parse image size: " << optarg << std::endl;
+                    fprintf(stderr, "Could not parse image size: %s\n", optarg);
                     return EX_USAGE;
                 }
                 break;
             case 'u':
                 if (!android::base::ParseInt(optarg, &userdata_size) || userdata_size <= 0) {
-                    std::cout << "Could not parse image size: " << optarg << std::endl;
+                    fprintf(stderr, "Could not parse image size: %s\n", optarg);
                     return EX_USAGE;
                 }
                 break;
@@ -79,11 +119,11 @@ static int Install([[maybe_unused]] sp<IVold> vold, int argc, char** argv) {
     }
 
     if (gsi_size <= 0) {
-        std::cout << "Must specify --gsi-size." << std::endl;
+        fprintf(stderr, "Must specify --gsi-size.\n");
         return EX_USAGE;
     }
     if (userdata_size <= 0) {
-        std::cout << "Must specify --userdata-size." << std::endl;
+        fprintf(stderr, "Must specify --userdata-size\n");
         return EX_USAGE;
     }
 
@@ -95,22 +135,28 @@ static int Install([[maybe_unused]] sp<IVold> vold, int argc, char** argv) {
 
     auto status = vold->startGsiInstall(gsi_size, userdata_size);
     if (!status.isOk()) {
-        std::cout << "Could not start live image install: " << status.exceptionMessage().string()
-                  << std::endl;
+        fprintf(stderr, "Could not start live image install: %s\n", status.exceptionMessage().string());
         return EX_SOFTWARE;
     }
 
-    status = vold->commitGsiChunk(input, gsi_size);
-    if (!status.isOk()) {
-        std::cout << "Could not commit live image data: " << status.exceptionMessage().string()
-                  << std::endl;
+    // TODO: Fix this for < 4k blocks
+    uint64_t nr_chunks = gsi_size / getpagesize();
+    ProgressBar bar(80, gsi_size);
+    for (uint64_t chunk = 0; chunk < nr_chunks; chunk++) {
+      status = vold->commitGsiChunk(input, getpagesize());
+      if (!status.isOk()) {
+        fprintf(stderr, "Could not commit live image data: %s\n", status.exceptionMessage().string());
         return EX_SOFTWARE;
+      }
+      bar.Show((chunk + 1) * getpagesize());
     }
+
+    printf(kResetColor);
+    printf("\n");
 
     status = vold->setGsiBootable();
     if (!status.isOk()) {
-        std::cout << "Could not make live image bootable: " << status.exceptionMessage().string()
-                  << std::endl;
+        fprintf(stderr, "Could not make live image bootable: %s\n", status.exceptionMessage().string());
         return EX_SOFTWARE;
     }
     return 0;
@@ -118,34 +164,34 @@ static int Install([[maybe_unused]] sp<IVold> vold, int argc, char** argv) {
 
 static int Wipe(sp<IVold> vold, int argc, char** /* argv */) {
     if (argc > 1) {
-        std::cout << "Unrecognized arguments to wipe." << std::endl;
+        fprintf(stderr, "Unrecognized arguments to wipe.\n");
         return EX_USAGE;
     }
     auto status = vold->removeGsiInstall();
     if (!status.isOk()) {
-        std::cout << status.exceptionMessage().string() << std::endl;
+        fprintf(stderr, "%s\n", status.exceptionMessage().string());
         return EX_SOFTWARE;
     }
-    std::cout << "Live image install successfully removed." << std::endl;
+    printf("Live image install successfully removed.\n");
     return 0;
 }
 
 int main(int argc, char** argv) {
     auto vold = getService();
     if (!vold) {
-        std::cout << "Could not connect to the vold service." << std::endl;
+        fprintf(stderr, "Could not connect to the vold service.\n");
         return EX_NOPERM;
     }
 
     if (1 >= argc) {
-        std::cout << "Expected command." << std::endl;
+        fprintf(stderr, "Expected command.\n");
         return EX_USAGE;
     }
 
     std::string command = argv[1];
     auto iter = kCommandMap.find(command);
     if (iter == kCommandMap.end()) {
-        std::cout << "Unrecognized command: " << command << std::endl;
+        fprintf(stderr, "Unrecognized command: %s\n", command.c_str());
         return EX_USAGE;
     }
     return iter->second(vold, argc - 1, argv + 1);
