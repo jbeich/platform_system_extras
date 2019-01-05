@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "592cf359_28d9179e",
+        "filename": "gsi_tool/gsi_tool.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1108565
+      },
+      "writtenOn": "2019-01-05T23:43:26Z",
+      "side": 1,
+      "message": "This is really messy. This tells me our API needs some help. We should definitely do - \n1. Separate calls for system and userdata images.\n2. We are duplicating the same per-page write from library-\u003evold-\u003egsi_tool. Some where, we need to do the buffering ;0)",
+      "range": {
+        "startLine": 142,
+        "startChar": 1,
+        "endLine": 153,
+        "endChar": 0
+      },
+      "revId": "4f163c36eafb1742fe89ce7b805c5df929f6f467",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
