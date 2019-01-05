@@ -37,8 +37,8 @@ static int Install(sp<IVold> vold, int argc, char** argv);
 static int Wipe(sp<IVold> vold, int argc, char** argv);
 
 static const std::map<std::string, CommandCallback> kCommandMap = {
-    { "install", Install },
-    { "wipe", Wipe },
+        {"install", Install},
+        {"wipe", Wipe},
 };
 
 static constexpr char kRedColor[] = "\x1b[31m";
@@ -92,9 +92,9 @@ static sp<IVold> getService() {
 
 static int Install([[maybe_unused]] sp<IVold> vold, int argc, char** argv) {
     struct option options[] = {
-        { "gsi-size", required_argument, nullptr, 's' },
-        { "userdata-size", required_argument, nullptr, 'u' },
-        { nullptr, 0, nullptr, 0 },
+            {"gsi-size", required_argument, nullptr, 's'},
+            {"userdata-size", required_argument, nullptr, 'u'},
+            {nullptr, 0, nullptr, 0},
     };
 
     int64_t gsi_size = 0;
@@ -135,7 +135,8 @@ static int Install([[maybe_unused]] sp<IVold> vold, int argc, char** argv) {
 
     auto status = vold->startGsiInstall(gsi_size, userdata_size);
     if (!status.isOk()) {
-        fprintf(stderr, "Could not start live image install: %s\n", status.exceptionMessage().string());
+        fprintf(stderr, "Could not start live image install: %s\n",
+                status.exceptionMessage().string());
         return EX_SOFTWARE;
     }
 
@@ -143,12 +144,13 @@ static int Install([[maybe_unused]] sp<IVold> vold, int argc, char** argv) {
     uint64_t nr_chunks = gsi_size / getpagesize();
     ProgressBar bar(80, gsi_size);
     for (uint64_t chunk = 0; chunk < nr_chunks; chunk++) {
-      status = vold->commitGsiChunk(input, getpagesize());
-      if (!status.isOk()) {
-        fprintf(stderr, "Could not commit live image data: %s\n", status.exceptionMessage().string());
-        return EX_SOFTWARE;
-      }
-      bar.Show((chunk + 1) * getpagesize());
+        status = vold->commitGsiChunk(input, getpagesize());
+        if (!status.isOk()) {
+            fprintf(stderr, "Could not commit live image data: %s\n",
+                    status.exceptionMessage().string());
+            return EX_SOFTWARE;
+        }
+        bar.Show((chunk + 1) * getpagesize());
     }
 
     printf(kResetColor);
@@ -156,7 +158,8 @@ static int Install([[maybe_unused]] sp<IVold> vold, int argc, char** argv) {
 
     status = vold->setGsiBootable();
     if (!status.isOk()) {
-        fprintf(stderr, "Could not make live image bootable: %s\n", status.exceptionMessage().string());
+        fprintf(stderr, "Could not make live image bootable: %s\n",
+                status.exceptionMessage().string());
         return EX_SOFTWARE;
     }
     return 0;
