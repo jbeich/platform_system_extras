@@ -45,6 +45,29 @@
       "revId": "aec9e0e48fd9a1d8a022527e7ba10c5918859951",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b5759697_1af5070e",
+        "filename": "gsi_tool/gsi_tool.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1108565
+      },
+      "writtenOn": "2019-01-06T01:07:56Z",
+      "side": 1,
+      "message": "this also results in new device mapper devices getting created on the device. I don\u0027t think that is needed and should probably be avoided.\n\nbasically, see \"dmctl list devices -v\" after finishing gsi install and you will see a system_gsi and userdata_gsi devices created, the are not needed and shouldn\u0027t be created IMO.",
+      "range": {
+        "startLine": 110,
+        "startChar": 19,
+        "endLine": 110,
+        "endChar": 33
+      },
+      "revId": "aec9e0e48fd9a1d8a022527e7ba10c5918859951",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
