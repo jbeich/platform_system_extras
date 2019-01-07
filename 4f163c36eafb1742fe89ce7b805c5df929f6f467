@@ -46,6 +46,30 @@
       "revId": "4f163c36eafb1742fe89ce7b805c5df929f6f467",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ceb9d920_21292fe5",
+        "filename": "gsi_tool/gsi_tool.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1108565
+      },
+      "writtenOn": "2019-01-07T15:40:26Z",
+      "side": 1,
+      "message": "Agreed. The progress bar is important because it does take a few minutes to apply everything. However, I want to re-think about the API a bit. We basically have this exact same code chunk duplicated through out.\n\nI also don\u0027t want a callback here as that will be coming over binder. We\u0027ll figure out a way. Marking this WIP for now.",
+      "parentUuid": "0ce5ddba_a7afabf6",
+      "range": {
+        "startLine": 142,
+        "startChar": 1,
+        "endLine": 153,
+        "endChar": 0
+      },
+      "revId": "4f163c36eafb1742fe89ce7b805c5df929f6f467",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
