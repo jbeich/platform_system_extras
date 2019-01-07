@@ -22,6 +22,30 @@
       "revId": "4f163c36eafb1742fe89ce7b805c5df929f6f467",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0ce5ddba_a7afabf6",
+        "filename": "gsi_tool/gsi_tool.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1064128
+      },
+      "writtenOn": "2019-01-07T02:09:58Z",
+      "side": 1,
+      "message": "I\u0027m a little bit confused here too.  I get wanting to show the progress bar, but that hurts efficiency quite a bit if we\u0027re going to make the call to vold for every chunk instead of just passing the fd and letting vold do all the work.",
+      "parentUuid": "592cf359_28d9179e",
+      "range": {
+        "startLine": 142,
+        "startChar": 1,
+        "endLine": 153,
+        "endChar": 0
+      },
+      "revId": "4f163c36eafb1742fe89ce7b805c5df929f6f467",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
