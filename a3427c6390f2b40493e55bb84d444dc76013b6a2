@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ae3615ae_9aa7eb1a",
+        "filename": "gsi_tool/gsi_tool.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1064128
+      },
+      "writtenOn": "2019-01-07T02:03:00Z",
+      "side": 1,
+      "message": "GetVoldService() ?",
+      "range": {
+        "startLine": 43,
+        "startChar": 17,
+        "endLine": 43,
+        "endChar": 27
+      },
+      "revId": "a3427c6390f2b40493e55bb84d444dc76013b6a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
