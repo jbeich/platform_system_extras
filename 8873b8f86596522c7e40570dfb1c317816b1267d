@@ -70,6 +70,30 @@
       "revId": "8873b8f86596522c7e40570dfb1c317816b1267d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "63c016d4_8889e14a",
+        "filename": "cppreopts/cppreopts.rc",
+        "patchSetId": 7
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2019-01-07T02:58:55Z",
+      "side": 0,
+      "message": "Ack, sounds good to me.",
+      "parentUuid": "b0e5ca1a_fea1e1bd",
+      "range": {
+        "startLine": 15,
+        "startChar": 38,
+        "endLine": 15,
+        "endChar": 69
+      },
+      "revId": "8873b8f86596522c7e40570dfb1c317816b1267d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
