@@ -20,6 +20,7 @@ cc_binary {
         never: true,
     },
 
+    compile_multilib: "32",
     enabled: false,
     arch: {
         arm: {
