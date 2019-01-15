@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "65a0c5a4_c825f4cc",
+        "filename": "libfscrypt/fscrypt_init_extensions.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2019-01-15T22:48:22Z",
+      "side": 1,
+      "message": "It seems this is organized as \"stuff that belongs together is on the same line.\" Should this be on the previous line, then (or do we take staging to be sufficiently different)?",
+      "revId": "83b853c406e2d9f891cd72ba2ed54f3b6277b85c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
