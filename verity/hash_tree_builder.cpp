@@ -182,12 +182,43 @@ bool HashTreeBuilder::HashBlocks(const unsigned char* data, size_t len,
 bool HashTreeBuilder::Update(const unsigned char* data, size_t len) {
   CHECK_GT(data_size_, 0);
 
+  if (!leftover_.empty()) {
+    CHECK_LT(leftover_.size(), block_size_);
+    size_t append_len = std::min(len, block_size_ - leftover_.size());
+    if (data == nullptr) {
+      leftover_.insert(leftover_.end(), append_len, 0);
+    } else {
+      leftover_.insert(leftover_.end(), data, data + append_len);
+    }
+    if (leftover_.size() < block_size_) {
+      return true;
+    }
+    if (!HashBlocks(leftover_.data(), leftover_.size(), &verity_tree_[0])) {
+      return false;
+    }
+    leftover_.clear();
+    data += append_len;
+    len -= append_len;
+  }
+  if (len % block_size_ != 0) {
+    if (data == nullptr) {
+      leftover_.assign(len % block_size_, 0);
+    } else {
+      leftover_.assign(data + len - len % block_size_, data + len);
+    }
+    len -= len % block_size_;
+  }
   return HashBlocks(data, len, &verity_tree_[0]);
 }
 
 bool HashTreeBuilder::BuildHashTree() {
   // Expects only the base level in the verity_tree_.
   CHECK_EQ(1, verity_tree_.size());
+
+  if (!leftover_.empty()) {
+    LOG(ERROR) << leftover_.size() << " bytes data left from last Update().";
+    return false;
+  }
 
   // Expects the base level to have the same size as the total hash size of
   // input data.
@@ -216,6 +247,34 @@ bool HashTreeBuilder::BuildHashTree() {
   CHECK_EQ(block_size_, verity_tree_.back().size());
   HashBlocks(verity_tree_.back().data(), block_size_, &root_hash_);
 
+  return true;
+}
+
+bool HashTreeBuilder::CheckHashTree(
+    const std::vector<unsigned char>& hash_tree) const {
+  size_t offset = 0;
+  // Reads reversely to output the verity tree top-down.
+  for (size_t i = verity_tree_.size(); i > 0; i--) {
+    const auto& level_blocks = verity_tree_[i - 1];
+    if (offset + level_blocks.size() > hash_tree.size()) {
+      LOG(ERROR) << "Hash tree too small: " << hash_tree.size();
+      return false;
+    }
+    auto iter = std::mismatch(level_blocks.begin(), level_blocks.end(),
+                              hash_tree.begin() + offset)
+                    .first;
+    if (iter != level_blocks.end()) {
+      LOG(ERROR) << "Mismatch found at the hash tree level " << i << " offset "
+                 << std::distance(level_blocks.begin(), iter);
+      return false;
+    }
+    offset += level_blocks.size();
+  }
+  if (offset != hash_tree.size()) {
+    LOG(ERROR) << "Hash tree size mismatch: " << hash_tree.size()
+               << " != " << offset;
+    return false;
+  }
   return true;
 }
 

@@ -52,10 +52,27 @@ static int usage(int /* argc */, char* argv[]) {
             "  -i,--image=PARTITION=FILE     If building a sparse image for fastboot, include\n"
             "                                the given file (or sparse file) as initial data for\n"
             "                                the named partition.\n"
+            "  -g,--group=GROUP:SIZE         Define a named partition group with the given\n"
+            "                                maximum size.\n"
+            "  -D,--device=DATA              Add a block device that the super partition\n"
+            "                                spans over. If specified, then -d/--device-size\n"
+            "                                and alignments must not be specified. The format\n"
+            "                                for DATA is listed below.\n"
+            "  -n,--super-name=NAME          Specify the name of the block device that will\n"
+            "                                house the super partition.\n"
+            "  -x,--auto-slot-suffixing      Mark the block device and partition names needing\n"
+            "                                slot suffixes before being used.\n"
             "\n"
             "Partition data format:\n"
-            "  <name>:<guid>:<attributes>:<size>\n"
-            "  Attrs must be 'none' or 'readonly'.\n",
+            "  <name>:<attributes>:<size>[:group]\n"
+            "  Attrs must be 'none' or 'readonly'.\n"
+            "\n"
+            "Device data format:\n"
+            "  <partition_name>:<size>[:<alignment>:<alignment_offset>]\n"
+            "  The partition name is the basename of the /dev/block/by-name/ path of the\n"
+            "  block device. The size is the device size in bytes. The alignment and\n"
+            "  alignment offset parameters are the same as -a/--alignment and \n"
+            "  -O/--alignment-offset.\n",
             argv[0], argv[0]);
     return EX_USAGE;
 }
@@ -73,6 +90,10 @@ int main(int argc, char* argv[]) {
         { "sparse", no_argument, nullptr, 'S' },
         { "block-size", required_argument, nullptr, 'b' },
         { "image", required_argument, nullptr, 'i' },
+        { "group", required_argument, nullptr, 'g' },
+        { "device", required_argument, nullptr, 'D' },
+        { "super-name", required_argument, nullptr, 'n' },
+        { "auto-slot-suffixing", no_argument, nullptr, 'x' },
         { nullptr, 0, nullptr, 0 },
     };
 
@@ -82,10 +103,15 @@ int main(int argc, char* argv[]) {
     uint32_t alignment_offset = 0;
     uint32_t alignment = kDefaultPartitionAlignment;
     uint32_t block_size = 4096;
+    std::string super_name = "super";
     std::string output_path;
     std::vector<std::string> partitions;
+    std::vector<std::string> groups;
+    std::vector<BlockDeviceInfo> block_devices;
     std::map<std::string, std::string> images;
     bool output_sparse = false;
+    bool has_implied_super = false;
+    bool auto_slot_suffixing = false;
 
     int rv;
     int index;
@@ -94,10 +120,11 @@ int main(int argc, char* argv[]) {
             case 'h':
                 return usage(argc, argv);
             case 'd':
-                if (!android::base::ParseUint(optarg, &blockdevice_size)) {
+                if (!android::base::ParseUint(optarg, &blockdevice_size) || !blockdevice_size) {
                     fprintf(stderr, "Invalid argument to --device-size.\n");
                     return EX_USAGE;
                 }
+                has_implied_super = true;
                 break;
             case 'm':
                 if (!android::base::ParseUint(optarg, &metadata_size)) {
@@ -114,6 +141,9 @@ int main(int argc, char* argv[]) {
             case 'p':
                 partitions.push_back(optarg);
                 break;
+            case 'g':
+                groups.push_back(optarg);
+                break;
             case 'o':
                 output_path = optarg;
                 break;
@@ -122,12 +152,14 @@ int main(int argc, char* argv[]) {
                     fprintf(stderr, "Invalid argument to --alignment-offset.\n");
                     return EX_USAGE;
                 }
+                has_implied_super = true;
                 break;
             case 'a':
                 if (!android::base::ParseUint(optarg, &alignment)) {
                     fprintf(stderr, "Invalid argument to --alignment.\n");
                     return EX_USAGE;
                 }
+                has_implied_super = true;
                 break;
             case 'S':
                 output_sparse = true;
@@ -152,6 +184,40 @@ int main(int argc, char* argv[]) {
                 images[partition_name] = file;
                 break;
             }
+            case 'n':
+                super_name = optarg;
+                break;
+            case 'D':
+            {
+                std::vector<std::string> parts = android::base::Split(optarg, ":");
+                if (parts.size() < 2) {
+                    fprintf(stderr, "Block device info has invalid formatting.\n");
+                    return EX_USAGE;
+                }
+
+                BlockDeviceInfo info;
+                info.partition_name = parts[0];
+                if (!android::base::ParseUint(parts[1].c_str(), &info.size) || !info.size) {
+                    fprintf(stderr, "Block device must have a valid size.\n");
+                    return EX_USAGE;
+                }
+                info.alignment = kDefaultPartitionAlignment;
+                if (parts.size() >= 3 &&
+                    !android::base::ParseUint(parts[2].c_str(), &info.alignment)) {
+                    fprintf(stderr, "Block device must have a valid alignment.\n");
+                    return EX_USAGE;
+                }
+                if (parts.size() >= 4 &&
+                    !android::base::ParseUint(parts[3].c_str(), &info.alignment_offset)) {
+                    fprintf(stderr, "Block device must have a valid alignment offset.\n");
+                    return EX_USAGE;
+                }
+                block_devices.emplace_back(info);
+                break;
+            }
+            case 'x':
+                auto_slot_suffixing = true;
+                break;
             default:
                 break;
         }
@@ -163,8 +229,12 @@ int main(int argc, char* argv[]) {
         return usage(argc, argv);
     }
 
-    if (!blockdevice_size) {
-        fprintf(stderr, "--device-size needs more than 0 bytes of disk space.\n");
+    // Must specify a block device via the old method (--device-size etc) or
+    // via --device, but not both.
+    if ((has_implied_super && (!block_devices.empty() || !blockdevice_size)) ||
+        (!has_implied_super && block_devices.empty()) ||
+        (block_devices.empty() && !blockdevice_size)) {
+        fprintf(stderr, "Must specify --device OR --device-size.\n");
         return EX_USAGE;
     }
     if (!metadata_size) {
@@ -190,32 +260,72 @@ int main(int argc, char* argv[]) {
 
     // Note that we take the block_size to mean both the logical block size and
     // the block size for libsparse.
-    BlockDeviceInfo device_info(blockdevice_size, alignment, alignment_offset, block_size);
+    if (has_implied_super) {
+        block_devices.emplace_back(super_name, blockdevice_size, alignment, alignment_offset, block_size);
+    } else {
+        // Apply the block size to each device.
+        for (auto& block_device : block_devices) {
+            block_device.logical_block_size = block_size;
+        }
+    }
 
     std::unique_ptr<MetadataBuilder> builder =
-            MetadataBuilder::New(device_info, metadata_size, metadata_slots);
+            MetadataBuilder::New(block_devices, super_name, metadata_size, metadata_slots);
+    if (!builder) {
+        fprintf(stderr, "Invalid metadata parameters.\n");
+        return EX_USAGE;
+    }
 
-    for (const auto& partition_info : partitions) {
-        std::vector<std::string> parts = android::base::Split(partition_info, ":");
-        if (parts.size() != 4) {
+    if (auto_slot_suffixing) {
+        builder->SetAutoSlotSuffixing();
+    }
+
+    for (const auto& group_info : groups) {
+        std::vector<std::string> parts = android::base::Split(group_info, ":");
+        if (parts.size() != 2) {
             fprintf(stderr, "Partition info has invalid formatting.\n");
             return EX_USAGE;
         }
 
         std::string name = parts[0];
-        if (!name.length()) {
+        if (name.empty()) {
+            fprintf(stderr, "Partition group must have a valid name.\n");
+            return EX_USAGE;
+        }
+
+        uint64_t size;
+        if (!android::base::ParseUint(parts[1].c_str(), &size)) {
+            fprintf(stderr, "Partition group must have a valid maximum size.\n");
+            return EX_USAGE;
+        }
+
+        if (!builder->AddGroup(name, size)) {
+            fprintf(stderr, "Group name %s already exists.\n", name.c_str());
+            return EX_SOFTWARE;
+        }
+    }
+
+    for (const auto& partition_info : partitions) {
+        std::vector<std::string> parts = android::base::Split(partition_info, ":");
+        if (parts.size() > 4) {
+            fprintf(stderr, "Partition info has invalid formatting.\n");
+            return EX_USAGE;
+        }
+
+        std::string name = parts[0];
+        if (name.empty()) {
             fprintf(stderr, "Partition must have a valid name.\n");
             return EX_USAGE;
         }
 
         uint64_t size;
-        if (!android::base::ParseUint(parts[3].c_str(), &size)) {
+        if (!android::base::ParseUint(parts[2].c_str(), &size)) {
             fprintf(stderr, "Partition must have a valid size.\n");
             return EX_USAGE;
         }
 
         uint32_t attribute_flags = 0;
-        std::string attributes = parts[2];
+        std::string attributes = parts[1];
         if (attributes == "readonly") {
             attribute_flags |= LP_PARTITION_ATTR_READONLY;
         } else if (attributes != "none") {
@@ -223,7 +333,16 @@ int main(int argc, char* argv[]) {
             return EX_USAGE;
         }
 
-        Partition* partition = builder->AddPartition(name, parts[1], attribute_flags);
+        std::string group_name = "default";
+        if (parts.size() >= 4) {
+            group_name = parts[3];
+        }
+
+        Partition* partition = builder->AddPartition(name, group_name, attribute_flags);
+        if (!partition) {
+            fprintf(stderr, "Could not add partition: %s\n", name.c_str());
+            return EX_SOFTWARE;
+        }
         if (!builder->ResizePartition(partition, size)) {
             fprintf(stderr, "Not enough space on device for partition %s with size %" PRIu64 "\n",
                     name.c_str(), size);
@@ -233,8 +352,14 @@ int main(int argc, char* argv[]) {
 
     std::unique_ptr<LpMetadata> metadata = builder->Export();
     if (output_sparse) {
-        if (!WriteToSparseFile(output_path.c_str(), *metadata.get(), block_size, images)) {
-            return EX_CANTCREAT;
+        if (block_devices.size() == 1) {
+            if (!WriteToSparseFile(output_path.c_str(), *metadata.get(), block_size, images)) {
+                return EX_CANTCREAT;
+            }
+        } else {
+            if (!WriteSplitSparseFiles(output_path, *metadata.get(), block_size, images)) {
+                return EX_CANTCREAT;
+            }
         }
     } else if (!WriteToImageFile(output_path.c_str(), *metadata.get())) {
         return EX_CANTCREAT;

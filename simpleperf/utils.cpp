@@ -46,7 +46,7 @@ void OneTimeFreeAllocator::Clear() {
   end_ = nullptr;
 }
 
-const char* OneTimeFreeAllocator::AllocateString(const std::string& s) {
+const char* OneTimeFreeAllocator::AllocateString(std::string_view s) {
   size_t size = s.size() + 1;
   if (cur_ + size > end_) {
     size_t alloc_size = std::max(size, unit_size_);
@@ -55,7 +55,7 @@ const char* OneTimeFreeAllocator::AllocateString(const std::string& s) {
     cur_ = p;
     end_ = p + alloc_size;
   }
-  strcpy(cur_, s.c_str());
+  strcpy(cur_, s.data());
   const char* result = cur_;
   cur_ += size;
   return result;
@@ -190,7 +190,7 @@ std::vector<std::string> GetSubDirs(const std::string& dirpath) {
   std::vector<std::string> entries = GetEntriesInDir(dirpath);
   std::vector<std::string> result;
   for (size_t i = 0; i < entries.size(); ++i) {
-    if (IsDir(dirpath + "/" + entries[i])) {
+    if (IsDir(dirpath + OS_PATH_SEPARATOR + entries[i])) {
       result.push_back(std::move(entries[i]));
     }
   }

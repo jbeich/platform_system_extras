@@ -21,7 +21,6 @@
 
 #include <android-base/file.h>
 #include <android-base/strings.h>
-#include <android-base/test_utils.h>
 
 #include "command.h"
 #include "get_test_data.h"
@@ -349,6 +348,11 @@ TEST_F(ReportCommandTest, report_dumped_symbols_with_symfs_dir) {
   Report(PERF_DATA_WITH_SYMBOLS, {"--symfs", GetTestDataDir()});
   ASSERT_TRUE(success);
   ASSERT_NE(content.find("main"), std::string::npos);
+}
+
+TEST_F(ReportCommandTest, report_without_symfs_dir) {
+  TemporaryFile tmpfile;
+  ASSERT_TRUE(ReportCmd()->Run({"-i", GetTestData(PERF_DATA), "-o", tmpfile.path}));
 }
 
 TEST_F(ReportCommandTest, report_sort_vaddr_in_file) {

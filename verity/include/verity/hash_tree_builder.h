@@ -39,13 +39,15 @@ class HashTreeBuilder {
   // bytes source data.
   bool Initialize(int64_t expected_data_size,
                   const std::vector<unsigned char>& salt);
-  // Streams |len| bytes of source data to the hash tree builder, and the |len|
-  // is expected to be block aligned. This function can be called multiple until
-  // we processed all the source data. And the accumulated data_size is expected
-  // to be exactly the |data_size_| when we build the hash tree.
+  // Streams |len| bytes of source data to the hash tree builder. This function
+  // can be called multiple until we processed all the source data. And the
+  // accumulated data_size is expected to be exactly the |data_size_| when we
+  // build the hash tree.
   bool Update(const unsigned char* data, size_t len);
   // Computes the upper levels of the hash tree based on the 0th level.
   bool BuildHashTree();
+  // Check the built hash tree against |hash_tree|, return true if they match.
+  bool CheckHashTree(const std::vector<unsigned char>& hash_tree) const;
   // Writes the computed hash tree top-down to |output|.
   bool WriteHashTreeToFile(const std::string& output) const;
   bool WriteHashTreeToFd(int fd, uint64_t offset) const;
@@ -92,6 +94,9 @@ class HashTreeBuilder {
   // Storage of the verity tree. The base level hash stores in verity_tree_[0]
   // and the top level hash stores in verity_tree_.back().
   std::vector<std::vector<unsigned char>> verity_tree_;
+  // The remaining data passed to the last call to Update() that's less than a
+  // block.
+  std::vector<unsigned char> leftover_;
 };
 
 #endif  // __HASH_TREE_BUILDER_H__

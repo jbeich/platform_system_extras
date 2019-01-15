@@ -12,16 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-on property:sys.cppreopt=requested && property:ro.boot.slot_suffix=_a
-    mount ext4 /dev/block/by-name/system_b /postinstall ro nosuid nodev noexec
-    exec - root -- /system/bin/cppreopts.sh /postinstall
-    # Optional script to copy additional preloaded content to data directory
-    exec - system system -- /system/bin/preloads_copy.sh /postinstall
-    umount /postinstall
-    setprop sys.cppreopt finished
-
-on property:sys.cppreopt=requested && property:ro.boot.slot_suffix=_b
-    mount ext4 /dev/block/by-name/system_a /postinstall ro nosuid nodev noexec
+on property:sys.cppreopt=requested
+    mount_all /system/etc/fstab.postinstall
     exec - root -- /system/bin/cppreopts.sh /postinstall
     # Optional script to copy additional preloaded content to data directory
     exec - system system -- /system/bin/preloads_copy.sh /postinstall

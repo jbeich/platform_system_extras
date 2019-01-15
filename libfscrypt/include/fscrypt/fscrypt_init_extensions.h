@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 The Android Open Source Project
+ * Copyright (C) 2016 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,12 +14,20 @@
  * limitations under the License.
  */
 
-#ifndef __MEMTEST_H__
-#define __MEMTEST_H__
+#ifndef _FSCRYPT_INIT_EXTENSIONS_H_
+#define _FSCRYPT_INIT_EXTENSIONS_H_
 
-typedef long long nsecs_t;
+#include <sys/cdefs.h>
+#include <stdbool.h>
+#include <cutils/multiuser.h>
 
-// Function prototypes.
-nsecs_t system_time();
+__BEGIN_DECLS
 
-#endif // __MEMTEST_H__
+// These functions assume they are being called from init
+// They will not operate properly outside of init
+int fscrypt_install_keyring();
+int fscrypt_set_directory_policy(const char* path);
+
+__END_DECLS
+
+#endif // _FSCRYPT_INIT_EXTENSIONS_H_

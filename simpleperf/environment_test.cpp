@@ -17,7 +17,6 @@
 #include <gtest/gtest.h>
 
 #include <android-base/file.h>
-#include <android-base/test_utils.h>
 
 #include "dso.h"
 #include "environment.h"
@@ -59,6 +58,7 @@ TEST(environment, MappedFileOnlyExistInMemory) {
   ASSERT_FALSE(MappedFileOnlyExistInMemory("[vdso]"));
   ASSERT_TRUE(MappedFileOnlyExistInMemory("/dev/__properties__/u:object_r"));
   ASSERT_TRUE(MappedFileOnlyExistInMemory("//anon"));
+  ASSERT_TRUE(MappedFileOnlyExistInMemory("/memfd:/jit-cache"));
   ASSERT_FALSE(MappedFileOnlyExistInMemory("./TemporaryFile-12345"));
   ASSERT_FALSE(MappedFileOnlyExistInMemory("/system/lib64/libc.so"));
 }
