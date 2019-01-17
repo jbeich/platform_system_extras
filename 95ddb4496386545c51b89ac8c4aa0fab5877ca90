@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e1f4bb6b_a0cb1b8b",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 948,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2019-01-17T20:45:29Z",
+      "side": 1,
+      "message": "\"reasons\"\n\n(unless the security folks have some more specific reason we can give?)",
+      "range": {
+        "startLine": 948,
+        "startChar": 71,
+        "endLine": 948,
+        "endChar": 77
+      },
+      "revId": "95ddb4496386545c51b89ac8c4aa0fab5877ca90",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7e4d6d4a_33fbe8d8",
+        "filename": "simpleperf/cmd_stat.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 454,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2019-01-17T20:45:29Z",
+      "side": 1,
+      "message": "should these be \"we\" or are they actually needed across an exec?",
+      "range": {
+        "startLine": 454,
+        "startChar": 46,
+        "endLine": 454,
+        "endChar": 49
+      },
+      "revId": "95ddb4496386545c51b89ac8c4aa0fab5877ca90",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e1db7f66_7e204bdd",
+        "filename": "simpleperf/cmd_stat.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 652,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2019-01-17T20:45:29Z",
+      "side": 1,
+      "message": "(same)",
+      "range": {
+        "startLine": 652,
+        "startChar": 71,
+        "endLine": 652,
+        "endChar": 77
+      },
+      "revId": "95ddb4496386545c51b89ac8c4aa0fab5877ca90",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "66025b1f_673dc585",
+        "filename": "simpleperf/environment.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 679,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2019-01-17T20:45:29Z",
+      "side": 1,
+      "message": "see also android::base::Pipe in unique_fd.h...",
+      "range": {
+        "startLine": 679,
+        "startChar": 0,
+        "endLine": 679,
+        "endChar": 16
+      },
+      "revId": "95ddb4496386545c51b89ac8c4aa0fab5877ca90",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f2218627_72169c60",
+        "filename": "simpleperf/simpleperf_app_runner/simpleperf_app_runner.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2019-01-17T20:45:29Z",
+      "side": 1,
+      "message": "(nit: usually Unix commands\u0027 errors start with lower case and don\u0027t include trailing punctuation.)",
+      "range": {
+        "startLine": 107,
+        "startChar": 18,
+        "endLine": 107,
+        "endChar": 53
+      },
+      "revId": "95ddb4496386545c51b89ac8c4aa0fab5877ca90",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
