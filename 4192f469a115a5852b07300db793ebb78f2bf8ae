@@ -46,6 +46,30 @@
       "revId": "4192f469a115a5852b07300db793ebb78f2bf8ae",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "340c0dc6_6b937b03",
+        "filename": "simpleperf/utils.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2019-01-18T20:30:40Z",
+      "side": 1,
+      "message": "Ack. Let me know if you have any problems/questions.",
+      "parentUuid": "506f0654_c94fbc4a",
+      "range": {
+        "startLine": 416,
+        "startChar": 0,
+        "endLine": 417,
+        "endChar": 79
+      },
+      "revId": "4192f469a115a5852b07300db793ebb78f2bf8ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
