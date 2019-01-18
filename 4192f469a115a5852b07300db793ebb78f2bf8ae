@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "105e51d0_ed3a27b5",
+        "filename": "simpleperf/utils.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2019-01-18T01:11:29Z",
+      "side": 1,
+      "message": "On device, this gets pulled from the build, but if you want to distribute a device image, adding:\n\n  dist: {\n    targets: [\"sdk\"],\n  },\n\nshould stamp it statically into that distributed file. I had implemented that in https://android-review.googlesource.com/c/platform/build/soong/+/831660",
+      "range": {
+        "startLine": 416,
+        "startChar": 0,
+        "endLine": 417,
+        "endChar": 79
+      },
+      "revId": "4192f469a115a5852b07300db793ebb78f2bf8ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
