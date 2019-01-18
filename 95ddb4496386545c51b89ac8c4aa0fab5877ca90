@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "0a360162_03f3728f",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 948,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2019-01-18T00:17:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e1f4bb6b_a0cb1b8b",
+      "range": {
+        "startLine": 948,
+        "startChar": 71,
+        "endLine": 948,
+        "endChar": 77
+      },
+      "revId": "95ddb4496386545c51b89ac8c4aa0fab5877ca90",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7e4d6d4a_33fbe8d8",
         "filename": "simpleperf/cmd_stat.cpp",
         "patchSetId": 2
@@ -45,6 +69,30 @@
       "revId": "95ddb4496386545c51b89ac8c4aa0fab5877ca90",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9bdda831_6ebf1421",
+        "filename": "simpleperf/cmd_stat.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 454,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2019-01-18T00:17:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7e4d6d4a_33fbe8d8",
+      "range": {
+        "startLine": 454,
+        "startChar": 46,
+        "endLine": 454,
+        "endChar": 49
+      },
+      "revId": "95ddb4496386545c51b89ac8c4aa0fab5877ca90",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "4949e4fd_b15441d5",
+        "filename": "simpleperf/cmd_stat.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 652,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2019-01-18T00:17:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e1db7f66_7e204bdd",
+      "range": {
+        "startLine": 652,
+        "startChar": 71,
+        "endLine": 652,
+        "endChar": 77
+      },
+      "revId": "95ddb4496386545c51b89ac8c4aa0fab5877ca90",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "66025b1f_673dc585",
         "filename": "simpleperf/environment.cpp",
         "patchSetId": 2
@@ -82,6 +154,30 @@
       "writtenOn": "2019-01-17T20:45:29Z",
       "side": 1,
       "message": "see also android::base::Pipe in unique_fd.h...",
+      "range": {
+        "startLine": 679,
+        "startChar": 0,
+        "endLine": 679,
+        "endChar": 16
+      },
+      "revId": "95ddb4496386545c51b89ac8c4aa0fab5877ca90",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7ff8554d_2b34a92b",
+        "filename": "simpleperf/environment.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 679,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2019-01-18T00:17:26Z",
+      "side": 1,
+      "message": "android::base::Pipe uses O_CLOEXEC, but here the read pipe needs to go through exec.",
+      "parentUuid": "66025b1f_673dc585",
       "range": {
         "startLine": 679,
         "startChar": 0,
@@ -114,6 +210,30 @@
       "revId": "95ddb4496386545c51b89ac8c4aa0fab5877ca90",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "22c2f970_092cab65",
+        "filename": "simpleperf/simpleperf_app_runner/simpleperf_app_runner.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2019-01-18T00:17:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f2218627_72169c60",
+      "range": {
+        "startLine": 107,
+        "startChar": 18,
+        "endLine": 107,
+        "endChar": 53
+      },
+      "revId": "95ddb4496386545c51b89ac8c4aa0fab5877ca90",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
