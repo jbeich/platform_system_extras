@@ -118,4 +118,6 @@ class ScopedTempFiles {
 
 bool SignalIsIgnored(int signo);
 
+std::string GetHardwareFromCpuInfo(const std::string& cpu_info);
+
 #endif  // SIMPLE_PERF_ENVIRONMENT_H_
