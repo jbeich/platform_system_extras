@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3fceaa5e_9579b4aa",
+        "filename": "simpleperf/simpleperf_app_runner/simpleperf_app_runner.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1003966
+      },
+      "writtenOn": "2019-01-22T21:31:54Z",
+      "side": 1,
+      "message": "simpleperf_app_runner is a setuid/setgid program which can be passed untrusted command line arguments. This block just blindly passes those arguments to simpleperf without doing any kind of validation. \n\nFor example, someone could attempt to pass along a malformed --out-fd or --stop-signal-fd , causing inadvertent writes to already open files file descriptors within the simpleperf process. Similarly, someone could specify a malformed -o record_file_name, overwriting and destroying a file owned by the application.\n\nIdeally, the command line of the simpleperf program cannot be influenced by the person calling simpleperf_app_runner. If that\u0027s not possible, then there should be a whitelist of arguments and argument values passable to the simpleperf program, which is validated by the simpleperf_app_runner program.",
+      "range": {
+        "startLine": 156,
+        "startChar": 0,
+        "endLine": 158,
+        "endChar": 3
+      },
+      "revId": "cad4abdd17824c6624c89b9bb9673e3e7829812b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
