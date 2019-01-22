@@ -22,6 +22,30 @@
       "revId": "cad4abdd17824c6624c89b9bb9673e3e7829812b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4bcf55f1_ddfbf5c1",
+        "filename": "simpleperf/simpleperf_app_runner/simpleperf_app_runner.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2019-01-22T22:59:46Z",
+      "side": 1,
+      "message": "A whitelist of arguments is added. It doesn\u0027t include -o. For options passing file descriptors (like --out-fd and --stop-signal-fd), check if the file has opened. So it can\u0027t be a random file opened later in simpleperf process.",
+      "parentUuid": "3fceaa5e_9579b4aa",
+      "range": {
+        "startLine": 156,
+        "startChar": 0,
+        "endLine": 158,
+        "endChar": 3
+      },
+      "revId": "cad4abdd17824c6624c89b9bb9673e3e7829812b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
