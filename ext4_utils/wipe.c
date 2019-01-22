@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+#include <unistd.h>
+
 #include "ext4_utils/wipe.h"
 
 #include "ext4_utils/ext4_utils.h"
@@ -54,6 +56,14 @@ int wipe_block_device(int fd, s64 len)
 			warn("Discard failed\n");
 			return 1;
 		} else {
+			char buf[4096] = {0};
+
+			ret = write(fd, buf, 4096);
+			if (ret != 4096) {
+				warn("Writing zeros failed\n");
+				return 1;
+			}
+			fsync(fd);
 			warn("Wipe via secure discard failed, used discard instead\n");
 			return 0;
 		}
