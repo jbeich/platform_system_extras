@@ -14,9 +14,23 @@
  * limitations under the License.
  */
 
+#include <unistd.h>
+
 #include "ext4_utils/wipe.h"
 
 #include "ext4_utils/ext4_utils.h"
+
+static int reset_first_block(int fd)
+{
+	char buf[4096];
+	int ret;
+
+	memset(buf, 0, 4096);
+	ret = write(fd, buf, 4096);
+	fsync(fd);
+
+	return (ret != 4096) ? -1: 0;
+}
 
 #if WIPE_IS_SUPPORTED
 
@@ -40,6 +54,12 @@ int wipe_block_device(int fd, s64 len)
 
 	if (!is_block_device_fd(fd)) {
 		// Wiping only makes sense on a block device.
+		return 0;
+	}
+
+	ret = reset_first_block(fd);
+	if (ret) {
+		warn("Wipe failed\n");
 		return 0;
 	}
 
@@ -70,6 +90,11 @@ int wipe_block_device(int fd, s64 len)
 
 int wipe_block_device(int fd __attribute__((unused)), s64 len __attribute__((unused)))
 {
+	if (reset_first_block(fd)) {
+		warn("Wipe failed\n");
+		return 0;
+	}
+
 	/* Wiping is not supported on this platform. */
 	return 1;
 }
