@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "909a31c8_82839086",
+        "filename": "simpleperf/simpleperf_app_runner/simpleperf_app_runner.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1003966
+      },
+      "writtenOn": "2019-01-23T23:47:04Z",
+      "side": 1,
+      "message": "StartsWith isn\u0027t sufficient, as it\u0027s subject to path traversal attacks.\n\n  /data/local/tmp/../../../home/home/blah/blah\n  /data/local/tmp/../../../dev/urandom",
+      "range": {
+        "startLine": 137,
+        "startChar": 28,
+        "endLine": 137,
+        "endChar": 38
+      },
+      "revId": "93d5de6e9f06f05e8e1a73cc23a37b9c3a330077",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
