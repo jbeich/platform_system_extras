@@ -143,6 +143,54 @@
     },
     {
       "key": {
+        "uuid": "327c57ec_d324fd19",
+        "filename": "simpleperf/simpleperf_app_runner/simpleperf_app_runner.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1003966
+      },
+      "writtenOn": "2019-01-23T21:46:13Z",
+      "side": 1,
+      "message": "Here are a few things I figured out how to do so far:\n\n1) Probe for the existence or non-existence of a file, leaking application metadata (file existence).\n\n  $ simpleperf record --tracepoint-events /dev/null/asdf                                                                                           \n  simpleperf E event_type.cpp:45] Failed to read /dev/null/asdf: Not a directory\n\n  vs\n\n  $ simpleperf record --tracepoint-events /dev/null                                                                                    \n  simpleperf E cmd_record.cpp:435] No threads to monitor. Try `simpleperf help record` for help\n\n2) Crash the device and / or application:\n\n  simpleperf record --tracepoint-events /dev/urandom\n  (device reboot)\n\nYou are correct that it\u0027s hard to find a file which exactly matches the pattern that --tracepoint-events is looking for. However, I\u0027d prefer to be more robust and have a provable guarantee that only files from a whitelist can be supplied to the --tracepoint-events command line. I\u0027m surprised we can\u0027t do this...",
+      "parentUuid": "f533f36c_28dbb6ef",
+      "range": {
+        "startLine": 110,
+        "startChar": 45,
+        "endLine": 110,
+        "endChar": 66
+      },
+      "revId": "cc6e0caae142efbbd73bd9e7b0d178d1b79a5cd9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c727bf3e_6f0265e3",
+        "filename": "simpleperf/simpleperf_app_runner/simpleperf_app_runner.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1003966
+      },
+      "writtenOn": "2019-01-23T21:46:13Z",
+      "side": 1,
+      "message": "When simpleperf_app_runner invokes simpleperf, I wouldn\u0027t expect the symbols to be in the application home directory. What directory is passed here then? I guess I don\u0027t understand the workflow.",
+      "parentUuid": "f51a7f97_5bd978c1",
+      "range": {
+        "startLine": 110,
+        "startChar": 28,
+        "endLine": 110,
+        "endChar": 37
+      },
+      "revId": "cc6e0caae142efbbd73bd9e7b0d178d1b79a5cd9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2e17f473_a91846b9",
         "filename": "simpleperf/simpleperf_app_runner/simpleperf_app_runner.cpp",
         "patchSetId": 5
