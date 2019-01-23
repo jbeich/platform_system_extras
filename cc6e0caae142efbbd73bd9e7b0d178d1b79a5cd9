@@ -191,6 +191,54 @@
     },
     {
       "key": {
+        "uuid": "fe16dc05_b8b54c35",
+        "filename": "simpleperf/simpleperf_app_runner/simpleperf_app_runner.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2019-01-23T23:22:51Z",
+      "side": 1,
+      "message": "The directory is expected to be in /data/local/tmp, with unstripped shared libraries downloaded via adb push. The unstripped shared libraries can provide more debug info and symbol info than stripped versions shipped in apk. The workflow is below:\n1) user or script pushes unstripped shared libraries on device in /data/local/tmp/native_libs directory.\n2) use simpleperf record with --symfs /data/local/tmp/native_libs.\n\nThe first step and --symfs option is optional.\n\nLimit it to come from /data/local/tmp.",
+      "parentUuid": "c727bf3e_6f0265e3",
+      "range": {
+        "startLine": 110,
+        "startChar": 28,
+        "endLine": 110,
+        "endChar": 37
+      },
+      "revId": "cc6e0caae142efbbd73bd9e7b0d178d1b79a5cd9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eff34903_de0addfc",
+        "filename": "simpleperf/simpleperf_app_runner/simpleperf_app_runner.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2019-01-23T23:22:51Z",
+      "side": 1,
+      "message": "yeah, it can show whether a file exists. Limit it to come from /data/local/tmp.",
+      "parentUuid": "327c57ec_d324fd19",
+      "range": {
+        "startLine": 110,
+        "startChar": 45,
+        "endLine": 110,
+        "endChar": 66
+      },
+      "revId": "cc6e0caae142efbbd73bd9e7b0d178d1b79a5cd9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2e17f473_a91846b9",
         "filename": "simpleperf/simpleperf_app_runner/simpleperf_app_runner.cpp",
         "patchSetId": 5
