@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "45e2763e_f3c0e570",
+        "filename": "simpleperf/simpleperf_app_runner/simpleperf_app_runner.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2019-01-23T01:22:10Z",
+      "side": 1,
+      "message": "It is needed by simpleperf to know which app to profile. Changed to let simpleperf_app_runner put the option.",
+      "parentUuid": "4388c228_79ad8774",
+      "range": {
+        "startLine": 108,
+        "startChar": 6,
+        "endLine": 108,
+        "endChar": 13
+      },
+      "revId": "cc6e0caae142efbbd73bd9e7b0d178d1b79a5cd9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "07bdc26e_ca8e7af2",
         "filename": "simpleperf/simpleperf_app_runner/simpleperf_app_runner.cpp",
         "patchSetId": 5
@@ -71,6 +95,54 @@
     },
     {
       "key": {
+        "uuid": "f51a7f97_5bd978c1",
+        "filename": "simpleperf/simpleperf_app_runner/simpleperf_app_runner.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2019-01-23T01:22:10Z",
+      "side": 1,
+      "message": "--symfs gives a directory name to read symbols. If it isn\u0027t a directory or a directory can\u0027t read by simpleperf running in app\u0027s context, the process reports the error and exits.\n\nsimpleperf uses symfs as below:\nFor each sample, the sample ip is mapped to dso_path[+vaddr] by using /proc/pid/maps. Then simpleperf looks for executables under symfs having the same build id as dso_path. If found, it read symbol tables of the executable, and get symbol name of the sample ip.\n\nIf someone passes /proc/self/fd, simpleperf will read all files under it to collect build ids. And read symbol tables of files having the same build ids as hit by samples.",
+      "parentUuid": "07560d0f_9a8cfa31",
+      "range": {
+        "startLine": 110,
+        "startChar": 28,
+        "endLine": 110,
+        "endChar": 37
+      },
+      "revId": "cc6e0caae142efbbd73bd9e7b0d178d1b79a5cd9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f533f36c_28dbb6ef",
+        "filename": "simpleperf/simpleperf_app_runner/simpleperf_app_runner.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2019-01-23T01:22:10Z",
+      "side": 1,
+      "message": "simpleperf runs in app\u0027s context. If it is given a file it can\u0027t read, it reports the error.\ntracepoint-events file is in special format, so if given an app_data_file path, it is unlikely to parse.\nthe content of tracepoint-events file is used as an protocol to communicate with linux kernel. linux kernel with check if it is valid or can be sampled by simpleperf process.\n\nSo I think it will not leak application data. no?",
+      "parentUuid": "07bdc26e_ca8e7af2",
+      "range": {
+        "startLine": 110,
+        "startChar": 45,
+        "endLine": 110,
+        "endChar": 66
+      },
+      "revId": "cc6e0caae142efbbd73bd9e7b0d178d1b79a5cd9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2e17f473_a91846b9",
         "filename": "simpleperf/simpleperf_app_runner/simpleperf_app_runner.cpp",
         "patchSetId": 5
@@ -82,6 +154,24 @@
       "writtenOn": "2019-01-23T00:12:20Z",
       "side": 1,
       "message": "I don\u0027t think this is sufficient. All this says is that the file descriptor is open in the simpleperf_app_runner process, not that it was passed by the entity invoking the the simpleperf_app_runner process. If the simpleperf_app_runner process opens any file descriptors itself (or via one of it\u0027s dependent libraries), then this check could pass.\n\nAdditionally, it\u0027s quicker to use fcntl(fd, F_GETFD) or fcntl(fd, F_GETFL) to determine if the file descriptor is opened. If this function returns -1 with errno\u003dEBADF then the file descriptor isn\u0027t opened.\n\nUnfortunately, I\u0027m struggling with how to fix this concern. I don\u0027t see any way for a program to determine if a file descriptor was passed in via exec() vs created itself. :-(",
+      "revId": "cc6e0caae142efbbd73bd9e7b0d178d1b79a5cd9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "752f13cb_8e185e82",
+        "filename": "simpleperf/simpleperf_app_runner/simpleperf_app_runner.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2019-01-23T01:22:10Z",
+      "side": 1,
+      "message": "changed to fcntl. simpleperf_app_runner is small, and CheckSimpleperfArguments() is called before anything. It only has stdio files and files passed in via exec().",
+      "parentUuid": "2e17f473_a91846b9",
       "revId": "cc6e0caae142efbbd73bd9e7b0d178d1b79a5cd9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
