@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4388c228_79ad8774",
+        "filename": "simpleperf/simpleperf_app_runner/simpleperf_app_runner.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1003966
+      },
+      "writtenOn": "2019-01-23T00:12:20Z",
+      "side": 1,
+      "message": "simpleperf_app_runner knows the app intended to be invoked, no? It\u0027s argv[2] when simpleperf_app_runner is invoked. Does this need to be passed through?",
+      "range": {
+        "startLine": 108,
+        "startChar": 6,
+        "endLine": 108,
+        "endChar": 13
+      },
+      "revId": "cc6e0caae142efbbd73bd9e7b0d178d1b79a5cd9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "07bdc26e_ca8e7af2",
+        "filename": "simpleperf/simpleperf_app_runner/simpleperf_app_runner.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1003966
+      },
+      "writtenOn": "2019-01-23T00:12:20Z",
+      "side": 1,
+      "message": "--tracepoint-events takes a filename and treats that data as events. It seems possible to pass in a malformed --tracepoint-events command line and have simpleperf read a file it wouldn\u0027t normally attempt to read. This could result in leaking out application data from the app.",
+      "range": {
+        "startLine": 110,
+        "startChar": 45,
+        "endLine": 110,
+        "endChar": 66
+      },
+      "revId": "cc6e0caae142efbbd73bd9e7b0d178d1b79a5cd9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "07560d0f_9a8cfa31",
+        "filename": "simpleperf/simpleperf_app_runner/simpleperf_app_runner.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1003966
+      },
+      "writtenOn": "2019-01-23T00:12:20Z",
+      "side": 1,
+      "message": "I\u0027m a bit nervous about this option, as there doesn\u0027t seem to be any sanity checking on the provided directory. This differs from a lot of the other arguments in that it takes a string as opposed to an integer or other constrained value.\n\nWhat happens if someone passes a string like /proc/self/fd as --symfs?",
+      "range": {
+        "startLine": 110,
+        "startChar": 28,
+        "endLine": 110,
+        "endChar": 37
+      },
+      "revId": "cc6e0caae142efbbd73bd9e7b0d178d1b79a5cd9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2e17f473_a91846b9",
+        "filename": "simpleperf/simpleperf_app_runner/simpleperf_app_runner.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1003966
+      },
+      "writtenOn": "2019-01-23T00:12:20Z",
+      "side": 1,
+      "message": "I don\u0027t think this is sufficient. All this says is that the file descriptor is open in the simpleperf_app_runner process, not that it was passed by the entity invoking the the simpleperf_app_runner process. If the simpleperf_app_runner process opens any file descriptors itself (or via one of it\u0027s dependent libraries), then this check could pass.\n\nAdditionally, it\u0027s quicker to use fcntl(fd, F_GETFD) or fcntl(fd, F_GETFL) to determine if the file descriptor is opened. If this function returns -1 with errno\u003dEBADF then the file descriptor isn\u0027t opened.\n\nUnfortunately, I\u0027m struggling with how to fix this concern. I don\u0027t see any way for a program to determine if a file descriptor was passed in via exec() vs created itself. :-(",
+      "revId": "cc6e0caae142efbbd73bd9e7b0d178d1b79a5cd9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
