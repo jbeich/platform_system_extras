@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0d7249e5_9e91f2c5",
+        "filename": "simpleperf/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 627,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2019-01-24T20:58:44Z",
+      "side": 1,
+      "message": "This is something that we still think should largely be in Android.mk still, since it\u0027s not really a static library :)",
+      "range": {
+        "startLine": 591,
+        "startChar": 0,
+        "endLine": 627,
+        "endChar": 1
+      },
+      "revId": "8e4c8e71c2e30389ae7dc646ec46c2cea99a78e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8ffc166c_10ed6259",
+        "filename": "simpleperf/runtest/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2019-01-24T20:58:44Z",
+      "side": 1,
+      "message": "If these are tests, should they be marked with cc_test? Then they\u0027re installed into independent directories without needing this. You can turn off the implicit linking of libgtest with `gtest: false`.\n\nIn cc_test we\u0027ve got `test_per_src: true` which would let you put all these in a single cc_test module, which would generate an executable per source file.\n\nYou\u0027d have to change the runtest python script to find them and push them to the device though, so that\u0027s up to you.",
+      "range": {
+        "startLine": 27,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 6
+      },
+      "revId": "8e4c8e71c2e30389ae7dc646ec46c2cea99a78e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
