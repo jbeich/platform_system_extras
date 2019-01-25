@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "1593d0cd_2411ccc0",
+        "filename": "simpleperf/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 627,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2019-01-25T01:21:59Z",
+      "side": 1,
+      "message": "Thanks!",
+      "parentUuid": "bdba4605_5b5b76ab",
+      "range": {
+        "startLine": 591,
+        "startChar": 0,
+        "endLine": 627,
+        "endChar": 1
+      },
+      "revId": "8e4c8e71c2e30389ae7dc646ec46c2cea99a78e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8ffc166c_10ed6259",
         "filename": "simpleperf/runtest/Android.bp",
         "patchSetId": 1
@@ -93,6 +117,30 @@
       "revId": "8e4c8e71c2e30389ae7dc646ec46c2cea99a78e3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "275a9056_16343d1f",
+        "filename": "simpleperf/runtest/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2019-01-25T01:21:59Z",
+      "side": 1,
+      "message": "Ack. We\u0027re planning on some sort of cc_test_helper definition for that type of use case (mainly so that it\u0027s harder for products to \"accidentally\" always install them), but it\u0027s not around yet. (Soong also does not allow normal cc_binary modules to be installed into test suites currently, so it fills that gap as well)",
+      "parentUuid": "7a47e96c_a987b1cb",
+      "range": {
+        "startLine": 27,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 6
+      },
+      "revId": "8e4c8e71c2e30389ae7dc646ec46c2cea99a78e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
