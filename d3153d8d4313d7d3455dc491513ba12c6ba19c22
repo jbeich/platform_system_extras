@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "066f2e05_cbfa2941",
+        "filename": "boot_control_copy/bootinfo.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2019-01-30T14:07:17Z",
+      "side": 1,
+      "message": "TH throws:\n\nsystem/extras/boot_control_copy/bootinfo.cpp:70:17: error: use of undeclared identifier \u0027GetEntryForMountPoint\u0027\nauto record \u003d GetEntryForMountPoint(\u0026fstab, \"/misc\");\n\nMaybe lacking \u003cfstab/fstab.h\u003e?",
+      "range": {
+        "startLine": 70,
+        "startChar": 16,
+        "endLine": 70,
+        "endChar": 37
+      },
+      "revId": "d3153d8d4313d7d3455dc491513ba12c6ba19c22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "64ae5322_54bc491b",
         "filename": "boot_control_copy/bootinfo.cpp",
         "patchSetId": 1
