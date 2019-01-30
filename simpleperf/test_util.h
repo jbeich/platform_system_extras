@@ -110,18 +110,3 @@ class CaptureStdout {
   int old_stdout_;
   std::unique_ptr<TemporaryFile> tmpfile_;
 };
-
-class ScopedAppPackageName {
- public:
-  ScopedAppPackageName(const std::string name) {
-    saved_name_ = GetDefaultAppPackageName();
-    SetDefaultAppPackageName(name);
-  }
-
-  ~ScopedAppPackageName() {
-    SetDefaultAppPackageName(saved_name_);
-  }
-
- private:
-  std::string saved_name_;
-};
