@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5e56edbd_b7cd88d6",
+        "filename": "simpleperf/cmd_record_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 733,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2019-01-31T17:30:00Z",
+      "side": 1,
+      "message": "Would it be better to have TestRecordingApps always be built (even not in CTS), but just not run in other cases? I just get paranoid about long-scoped ifdefs.",
+      "revId": "01666c27562178dc6d2166a09598b60d5eec43ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e3fd5e65_d4d0d0f1",
+        "filename": "simpleperf/cmd_record_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 766,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2019-01-31T17:30:00Z",
+      "side": 1,
+      "message": "const as well?",
+      "range": {
+        "startLine": 766,
+        "startChar": 9,
+        "endLine": 766,
+        "endChar": 13
+      },
+      "revId": "01666c27562178dc6d2166a09598b60d5eec43ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
