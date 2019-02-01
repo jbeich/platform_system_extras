@@ -1,4 +1,5 @@
-// Copyright (C) 2013 The Android Open Source Project
+//
+// Copyright (C) 2018 The Android Open Source Project
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -11,16 +12,17 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+//
 
 cc_binary {
-    name: "ksminfo",
+    name: "simpleperf_app_runner",
     srcs: [
-        "ksminfo.c",
-        "lookup3.c",
+        "simpleperf_app_runner.cpp",
     ],
-    cflags: [
-        "-Wall",
-        "-Werror",
+    shared_libs: [
+        "libbase",
+        "libselinux",
+        "libpackagelistparser",
+        "libminijail",
     ],
-    shared_libs: ["libpagemap"],
 }

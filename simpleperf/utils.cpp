@@ -32,6 +32,7 @@
 #include <android-base/file.h>
 #include <android-base/logging.h>
 #include <android-base/stringprintf.h>
+#include <build/version.h>
 
 #include <7zCrc.h>
 #include <Xz.h>
@@ -407,5 +408,6 @@ timeval SecondToTimeval(double time_in_sec) {
 constexpr int SIMPLEPERF_VERSION = 1;
 
 std::string GetSimpleperfVersion() {
-  return android::base::StringPrintf("%d.%s", SIMPLEPERF_VERSION, SIMPLEPERF_REVISION);
+  return android::base::StringPrintf("%d.build.%s", SIMPLEPERF_VERSION,
+                                     android::build::GetBuildNumber().c_str());
 }
