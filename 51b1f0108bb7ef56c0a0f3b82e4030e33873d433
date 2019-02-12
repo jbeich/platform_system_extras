@@ -22,6 +22,30 @@
       "revId": "51b1f0108bb7ef56c0a0f3b82e4030e33873d433",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "753273b7_ece732da",
+        "filename": "ext4_utils/wipe.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2019-02-12T17:17:04Z",
+      "side": 1,
+      "message": "I suspect fastboot.exe calls this wipe_block_device(), which means factory doesn\u0027t wipe correctly. If that\u0027s true, we should write 0 here as well. Let me test this a bit.",
+      "parentUuid": "32030420_3f0e866d",
+      "range": {
+        "startLine": 98,
+        "startChar": 1,
+        "endLine": 98,
+        "endChar": 48
+      },
+      "revId": "51b1f0108bb7ef56c0a0f3b82e4030e33873d433",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
