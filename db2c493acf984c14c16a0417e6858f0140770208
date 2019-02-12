@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c9d67448_9e2d04d3",
+        "filename": "simpleperf/dso.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2019-02-12T21:58:39Z",
+      "side": 1,
+      "message": "Is there a reason that you don\u0027t have a different object that overrides this function instead of doing it this way?",
+      "range": {
+        "startLine": 469,
+        "startChar": 4,
+        "endLine": 469,
+        "endChar": 30
+      },
+      "revId": "db2c493acf984c14c16a0417e6858f0140770208",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e2d0b3d8_ef3bc39d",
+        "filename": "simpleperf/dso.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2019-02-12T21:58:39Z",
+      "side": 1,
+      "message": "Should this be \u003d 0? It seems if you instantiate an object that you could create an object that doesn\u0027t really support this functionality.",
+      "range": {
+        "startLine": 168,
+        "startChar": 57,
+        "endLine": 168,
+        "endChar": 59
+      },
+      "revId": "db2c493acf984c14c16a0417e6858f0140770208",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
