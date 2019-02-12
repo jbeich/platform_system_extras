@@ -2,6 +2,52 @@
   "comments": [
     {
       "key": {
+        "uuid": "833376b0_928b19e6",
+        "filename": "ext4_utils/wipe.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1105075
+      },
+      "writtenOn": "2019-02-12T17:22:37Z",
+      "side": 1,
+      "message": "nit: should we dup or import TEMP_FAILURE_RETRY?",
+      "range": {
+        "startLine": 29,
+        "startChar": 7,
+        "endLine": 29,
+        "endChar": 12
+      },
+      "revId": "51b1f0108bb7ef56c0a0f3b82e4030e33873d433",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0d3f0d55_88da9f39",
+        "filename": "ext4_utils/wipe.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1105075
+      },
+      "writtenOn": "2019-02-12T17:22:37Z",
+      "side": 1,
+      "message": "return a non 0 similar to BLKDISCARD/BLKSECDISCARD both failed?",
+      "range": {
+        "startLine": 63,
+        "startChar": 9,
+        "endLine": 63,
+        "endChar": 10
+      },
+      "revId": "51b1f0108bb7ef56c0a0f3b82e4030e33873d433",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "32030420_3f0e866d",
         "filename": "ext4_utils/wipe.c",
         "patchSetId": 5
@@ -36,6 +82,30 @@
       "writtenOn": "2019-02-12T17:17:04Z",
       "side": 1,
       "message": "I suspect fastboot.exe calls this wipe_block_device(), which means factory doesn\u0027t wipe correctly. If that\u0027s true, we should write 0 here as well. Let me test this a bit.",
+      "parentUuid": "32030420_3f0e866d",
+      "range": {
+        "startLine": 98,
+        "startChar": 1,
+        "endLine": 98,
+        "endChar": 48
+      },
+      "revId": "51b1f0108bb7ef56c0a0f3b82e4030e33873d433",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "653b0375_6c63d447",
+        "filename": "ext4_utils/wipe.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1105075
+      },
+      "writtenOn": "2019-02-12T17:22:37Z",
+      "side": 1,
+      "message": "#ifdef __linux__\n#  define WIPE_IS_SUPPORTED 1\n#else\n#  define WIPE_IS_SUPPORTED 0\n#endif\nthis is a host lib, did you check windows targets e.g. fastboot?\n\nand looks like there are many duplication of wipe_block_device\n\nsee:\nhttps://cs.corp.google.com/android/frameworks/base/services/core/jni/com_android_server_PersistentDataBlockService.cpp?rcl\u003d26ebfe8933b55e74be88e3984ee6f06523cad6ab\u0026l\u003d48",
       "parentUuid": "32030420_3f0e866d",
       "range": {
         "startLine": 98,
