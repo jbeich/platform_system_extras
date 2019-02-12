@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e23332a8_a1ef3de1",
+        "filename": "ext4_utils/wipe.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1105075
+      },
+      "writtenOn": "2019-02-12T18:36:44Z",
+      "side": 1,
+      "message": "see previous comments\n\nI think this is aloo called by recovery https://cs.corp.google.com/android/bootable/recovery/roots.cpp?rcl\u003d96a0f6e570f7917a7d2eb9e3d83923b6ac8b004d\u0026l\u003d166\n\nso adding a TEMP_FAILURE_RETRY retry?",
+      "range": {
+        "startLine": 61,
+        "startChar": 3,
+        "endLine": 61,
+        "endChar": 15
+      },
+      "revId": "4846fde475ce5a364a49b459ca5105ab4d09bf55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
