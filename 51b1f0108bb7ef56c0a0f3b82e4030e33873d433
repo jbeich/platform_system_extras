@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "32030420_3f0e866d",
+        "filename": "ext4_utils/wipe.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1236532
+      },
+      "writtenOn": "2019-02-12T16:59:24Z",
+      "side": 1,
+      "message": "The implementation might not be aligned with this comment and WIPE_IS_SUPPORTED configuration. \n\nThe code could be cleaned.",
+      "range": {
+        "startLine": 98,
+        "startChar": 1,
+        "endLine": 98,
+        "endChar": 48
+      },
+      "revId": "51b1f0108bb7ef56c0a0f3b82e4030e33873d433",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
