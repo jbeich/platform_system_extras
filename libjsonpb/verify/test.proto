@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+package android.jsonpb;
+
+// Note: this file explicitly uses names that does NOT follow the Protobuf Style
+// Guide for testing purposes. When writing a .proto file as a JSON schema, you
+// should:
+// - Follow the Protobuf Style Guide for field names / enum value names
+// - If the JSON file is going to have field names that does not conform to the
+// Protobuf
+//   Style Guide (a.k.a lower_snake_case), use json_name option to indicate an
+//   alternative name.
+// - If the JSON file is going to have enum value names that does not conform to
+// the Protobuf
+//   Style Guide (a.k.a CAPITALIZED_SNAKE_CASE), use strings.
+
+message WithJsonName {
+  string foo_bar = 1 [json_name = "FOOBAR"];
+  string barBaz = 2 [json_name = "BarBaz"];
+  string BazQux = 3 [json_name = "baz_qux"];
+  string QUX_QUUX = 4 [json_name = "quxQuux"];
+}
+
+message NoJsonName {
+  string foo_bar = 1;
+  string barBaz = 2;
+  string BazQux = 3;
+  string QUX_QUUX = 4;
+}
+
+message Parent {
+  repeated WithJsonName repeated_with_json_name = 1;
+  WithJsonName with_json_name = 2;
+  repeated NoJsonName repeated_no_json_name = 3;
+  NoJsonName no_json_name = 4;
+}
+
+message Scalar {
+  int32 i32 = 1;
+  sint32 si32 = 2;
+  int64 i64 = 3;
+  sint64 si64 = 4;
+  float f = 5;
+  double d = 6;
+
+  enum Enum {
+    DEFAULT = 0;
+    FOO = 1;
+  }
+  Enum e = 7;
+}
