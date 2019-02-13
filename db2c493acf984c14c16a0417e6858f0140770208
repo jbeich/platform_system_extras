@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "b49c93a6_b1ebfe47",
+        "filename": "simpleperf/dso.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2019-02-13T00:42:30Z",
+      "side": 1,
+      "message": "There is already a DexFileDso. But sometimes simpleperf doesn\u0027t know whether it is a DexFileDso or a ElfDso when creating the object, as comment in L522.",
+      "parentUuid": "c9d67448_9e2d04d3",
+      "range": {
+        "startLine": 469,
+        "startChar": 4,
+        "endLine": 469,
+        "endChar": 30
+      },
+      "revId": "db2c493acf984c14c16a0417e6858f0140770208",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e2d0b3d8_ef3bc39d",
         "filename": "simpleperf/dso.h",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2019-02-12T21:58:39Z",
       "side": 1,
       "message": "Should this be \u003d 0? It seems if you instantiate an object that you could create an object that doesn\u0027t really support this functionality.",
+      "range": {
+        "startLine": 168,
+        "startChar": 57,
+        "endLine": 168,
+        "endChar": 59
+      },
+      "revId": "db2c493acf984c14c16a0417e6858f0140770208",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "31afde16_41a6d530",
+        "filename": "simpleperf/dso.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2019-02-13T00:42:30Z",
+      "side": 1,
+      "message": "Dso has multiple child classes. But only ElfDso uses min_executable_vaddr set by this function. So I use an empty function here to avoid repeating it in many child classes. I also considered exposing ElfDso in dso.h and move this function to ElfDso. But I feel it seems doesn\u0027t deserve to expose ElfDso for just get/set min executable vaddrs.",
+      "parentUuid": "e2d0b3d8_ef3bc39d",
       "range": {
         "startLine": 168,
         "startChar": 57,
