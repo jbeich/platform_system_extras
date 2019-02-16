@@ -1,0 +1,203 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3616eafe_17217715",
+        "filename": "simpleperf/app_api/cpp/simpleperf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2019-02-16T00:09:30Z",
+      "side": 1,
+      "message": "#pragma once",
+      "revId": "bec7e1f38eef4edaf9f94e7eaeab433477d1665f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f5c4d344_db16c9e9",
+        "filename": "simpleperf/app_api/cpp/simpleperf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2019-02-16T00:09:30Z",
+      "side": 1,
+      "message": "document the expected usage with an example in a comment and/or directly refer to the demo?",
+      "revId": "bec7e1f38eef4edaf9f94e7eaeab433477d1665f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5f08c8d0_496ada32",
+        "filename": "simpleperf/app_api/java/com/android/simpleperf/ProfileSession.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2019-02-16T00:09:30Z",
+      "side": 1,
+      "message": "same comment as with C++ API.\n\n(also, use /** javadoc comments in Java */)",
+      "revId": "bec7e1f38eef4edaf9f94e7eaeab433477d1665f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8c0af507_adb92b18",
+        "filename": "simpleperf/app_api/java/com/android/simpleperf/ProfileSession.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2019-02-16T00:09:30Z",
+      "side": 1,
+      "message": "use InputStreamReader and StringBuilder?\n\nsee also https://stackoverflow.com/a/35446009/10897880 which compares a bunch of ways to do this, including one they claim is both better performing and shorter than my suggestion :-)\n\n(i don\u0027t know if Android supports the stream API one-liner.)",
+      "revId": "bec7e1f38eef4edaf9f94e7eaeab433477d1665f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "60a40727_975701d8",
+        "filename": "simpleperf/app_api/java/com/android/simpleperf/ProfileSession.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2019-02-16T00:09:30Z",
+      "side": 1,
+      "message": "BufferedReader?",
+      "revId": "bec7e1f38eef4edaf9f94e7eaeab433477d1665f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a82a46e6_bcbf0b7a",
+        "filename": "simpleperf/app_api/java/com/android/simpleperf/ProfileSession.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2019-02-16T00:09:30Z",
+      "side": 1,
+      "message": "enum? you\u0027ll get better error messages for free that way too.",
+      "range": {
+        "startLine": 225,
+        "startChar": 0,
+        "endLine": 229,
+        "endChar": 0
+      },
+      "revId": "bec7e1f38eef4edaf9f94e7eaeab433477d1665f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0f7d6ec1_50ace702",
+        "filename": "simpleperf/app_api/java/com/android/simpleperf/ProfileSession.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2019-02-16T00:09:30Z",
+      "side": 1,
+      "message": "traditionally these come at the top in Java.",
+      "range": {
+        "startLine": 225,
+        "startChar": 0,
+        "endLine": 234,
+        "endChar": 0
+      },
+      "revId": "bec7e1f38eef4edaf9f94e7eaeab433477d1665f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3e224280_8ac362ce",
+        "filename": "simpleperf/demo/CppApi/.gitignore",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2019-02-16T00:09:30Z",
+      "side": 1,
+      "message": "given all the duplication, should we just have one demo that shows both APIs?\n\n(is there anything else we can do to reduce all this duplicated boilerplate?)",
+      "revId": "bec7e1f38eef4edaf9f94e7eaeab433477d1665f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "37a5d1aa_a2f07862",
+        "filename": "simpleperf/demo/CppApi/app/src/main/cpp/CMakeLists.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2019-02-16T00:09:30Z",
+      "side": 1,
+      "message": "is this the right way to do this?\n\n+danalbert",
+      "revId": "bec7e1f38eef4edaf9f94e7eaeab433477d1665f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a9977554_ea081c16",
+        "filename": "simpleperf/demo/CppApi/app/src/main/cpp/native-lib.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2019-02-16T00:09:30Z",
+      "side": 1,
+      "message": "this is inherently unsafe, and we\u0027ve been telling people not to do it.",
+      "revId": "bec7e1f38eef4edaf9f94e7eaeab433477d1665f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4ecc5ab3_48d81636",
+        "filename": "simpleperf/demo/JavaApi/.idea/codeStyles/Project.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2019-02-16T00:09:30Z",
+      "side": 1,
+      "message": "we don\u0027t need all this .idea stuff, right? remove and add to .gitignore?",
+      "revId": "bec7e1f38eef4edaf9f94e7eaeab433477d1665f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
