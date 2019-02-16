@@ -16,6 +16,24 @@
       "revId": "cb7a7ab24d394d62935fb8397f3c0a964e2bf1a7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e0028c8e_de0dff7c",
+        "filename": "libjsonpb/parse/include/jsonpb/error_or.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-02-16T00:31:11Z",
+      "side": 1,
+      "message": "I totally agree. I have seen StatusOr in apexd, external/protobuf, external/tensorflow already.\n\nHowever, if you look at those versions, StatusOr uses an integer value for error state, which is not enough here.\n\nMaybe add an android::Expected\u003cT,E\u003e class just like UniquePtr? idk...",
+      "parentUuid": "6c444320_ca7724ab",
+      "revId": "cb7a7ab24d394d62935fb8397f3c0a964e2bf1a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
