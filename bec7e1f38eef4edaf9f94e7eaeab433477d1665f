@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "28f1976a_7d1f4aa5",
+        "filename": "simpleperf/app_api/cpp/simpleperf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2019-02-19T21:36:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3616eafe_17217715",
+      "revId": "bec7e1f38eef4edaf9f94e7eaeab433477d1665f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f5c4d344_db16c9e9",
         "filename": "simpleperf/app_api/cpp/simpleperf.h",
         "patchSetId": 2
@@ -33,6 +51,24 @@
       "revId": "bec7e1f38eef4edaf9f94e7eaeab433477d1665f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e5291b91_1554b33f",
+        "filename": "simpleperf/app_api/cpp/simpleperf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2019-02-19T21:36:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f5c4d344_db16c9e9",
+      "revId": "bec7e1f38eef4edaf9f94e7eaeab433477d1665f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "ff1097c1_2ed50cb8",
+        "filename": "simpleperf/app_api/java/com/android/simpleperf/ProfileSession.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2019-02-19T21:36:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5f08c8d0_496ada32",
+      "revId": "bec7e1f38eef4edaf9f94e7eaeab433477d1665f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8c0af507_adb92b18",
         "filename": "simpleperf/app_api/java/com/android/simpleperf/ProfileSession.java",
         "patchSetId": 2
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "c189f692_1e37f0e7",
+        "filename": "simpleperf/app_api/java/com/android/simpleperf/ProfileSession.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2019-02-19T21:36:27Z",
+      "side": 1,
+      "message": "Done. The stream API is available \u003e\u003d 24.",
+      "parentUuid": "8c0af507_adb92b18",
+      "revId": "bec7e1f38eef4edaf9f94e7eaeab433477d1665f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "60a40727_975701d8",
         "filename": "simpleperf/app_api/java/com/android/simpleperf/ProfileSession.java",
         "patchSetId": 2
@@ -81,6 +153,24 @@
       "writtenOn": "2019-02-16T00:09:30Z",
       "side": 1,
       "message": "BufferedReader?",
+      "revId": "bec7e1f38eef4edaf9f94e7eaeab433477d1665f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1f690b3b_79054b66",
+        "filename": "simpleperf/app_api/java/com/android/simpleperf/ProfileSession.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2019-02-19T21:36:27Z",
+      "side": 1,
+      "message": "Can\u0027t use BufferedReader here. Added in comment.",
+      "parentUuid": "60a40727_975701d8",
       "revId": "bec7e1f38eef4edaf9f94e7eaeab433477d1665f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
@@ -110,6 +200,30 @@
     },
     {
       "key": {
+        "uuid": "2f195fff_bc287452",
+        "filename": "simpleperf/app_api/java/com/android/simpleperf/ProfileSession.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2019-02-19T21:36:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a82a46e6_bcbf0b7a",
+      "range": {
+        "startLine": 225,
+        "startChar": 0,
+        "endLine": 229,
+        "endChar": 0
+      },
+      "revId": "bec7e1f38eef4edaf9f94e7eaeab433477d1665f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0f7d6ec1_50ace702",
         "filename": "simpleperf/app_api/java/com/android/simpleperf/ProfileSession.java",
         "patchSetId": 2
@@ -133,6 +247,30 @@
     },
     {
       "key": {
+        "uuid": "0e995897_f166ac84",
+        "filename": "simpleperf/app_api/java/com/android/simpleperf/ProfileSession.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2019-02-19T21:36:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0f7d6ec1_50ace702",
+      "range": {
+        "startLine": 225,
+        "startChar": 0,
+        "endLine": 234,
+        "endChar": 0
+      },
+      "revId": "bec7e1f38eef4edaf9f94e7eaeab433477d1665f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3e224280_8ac362ce",
         "filename": "simpleperf/demo/CppApi/.gitignore",
         "patchSetId": 2
@@ -144,6 +282,24 @@
       "writtenOn": "2019-02-16T00:09:30Z",
       "side": 1,
       "message": "given all the duplication, should we just have one demo that shows both APIs?\n\n(is there anything else we can do to reduce all this duplicated boilerplate?)",
+      "revId": "bec7e1f38eef4edaf9f94e7eaeab433477d1665f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5e9b3d2f_6acdcb89",
+        "filename": "simpleperf/demo/CppApi/.gitignore",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2019-02-19T21:36:27Z",
+      "side": 1,
+      "message": "For a demo project, I want users can open it in Android Studio and run directly. We can put them in one project and show them in different Activities. But it makes a demo project more complex, which I want to avoid. I also assume Java developers don\u0027t want to read or include native code in their project. That\u0027s why I didn\u0027t make the java api depends on the cpp api.",
+      "parentUuid": "3e224280_8ac362ce",
       "revId": "bec7e1f38eef4edaf9f94e7eaeab433477d1665f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
@@ -167,6 +323,24 @@
     },
     {
       "key": {
+        "uuid": "73b7e5f5_b6df52ce",
+        "filename": "simpleperf/demo/CppApi/app/src/main/cpp/CMakeLists.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2019-02-19T21:36:27Z",
+      "side": 1,
+      "message": "I\u0027d like to provide simpleperf as a library like log. But I didn\u0027t figure out how to do it. so postponed it.",
+      "parentUuid": "37a5d1aa_a2f07862",
+      "revId": "bec7e1f38eef4edaf9f94e7eaeab433477d1665f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a9977554_ea081c16",
         "filename": "simpleperf/demo/CppApi/app/src/main/cpp/native-lib.cpp",
         "patchSetId": 2
@@ -184,6 +358,24 @@
     },
     {
       "key": {
+        "uuid": "aa3f7b6c_a28d6338",
+        "filename": "simpleperf/demo/CppApi/app/src/main/cpp/native-lib.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2019-02-19T21:36:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a9977554_ea081c16",
+      "revId": "bec7e1f38eef4edaf9f94e7eaeab433477d1665f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ecc5ab3_48d81636",
         "filename": "simpleperf/demo/JavaApi/.idea/codeStyles/Project.xml",
         "patchSetId": 2
@@ -198,6 +390,24 @@
       "revId": "bec7e1f38eef4edaf9f94e7eaeab433477d1665f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1332b577_d786606c",
+        "filename": "simpleperf/demo/JavaApi/.idea/codeStyles/Project.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2019-02-19T21:36:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ecc5ab3_48d81636",
+      "revId": "bec7e1f38eef4edaf9f94e7eaeab433477d1665f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
