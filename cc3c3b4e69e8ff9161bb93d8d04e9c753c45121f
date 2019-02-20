@@ -1,0 +1,170 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b1feccb5_304f2571",
+        "filename": "simpleperf/demo/CppApi/app/build.gradle",
+        "patchSetId": 3
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2019-02-20T20:30:15Z",
+      "side": 1,
+      "message": "Why not 28?",
+      "range": {
+        "startLine": 4,
+        "startChar": 22,
+        "endLine": 4,
+        "endChar": 24
+      },
+      "revId": "cc3c3b4e69e8ff9161bb93d8d04e9c753c45121f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b2df4c71_294be848",
+        "filename": "simpleperf/demo/CppApi/app/build.gradle",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2019-02-20T20:30:15Z",
+      "side": 1,
+      "message": "This is the lowest OS version for simpleperf? idr the requirements.",
+      "range": {
+        "startLine": 7,
+        "startChar": 22,
+        "endLine": 7,
+        "endChar": 24
+      },
+      "revId": "cc3c3b4e69e8ff9161bb93d8d04e9c753c45121f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dc68707c_bd81ed04",
+        "filename": "simpleperf/demo/CppApi/app/build.gradle",
+        "patchSetId": 3
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2019-02-20T20:30:15Z",
+      "side": 1,
+      "message": "28?",
+      "range": {
+        "startLine": 8,
+        "startChar": 25,
+        "endLine": 8,
+        "endChar": 27
+      },
+      "revId": "cc3c3b4e69e8ff9161bb93d8d04e9c753c45121f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2c95503a_3b01bd93",
+        "filename": "simpleperf/demo/CppApi/app/src/main/cpp/CMakeLists.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2019-02-20T20:30:15Z",
+      "side": 1,
+      "message": "Should have a:\n\n    project(CppApiDemo LANGUAGES CXX)\n\nafter the minimum required.",
+      "revId": "cc3c3b4e69e8ff9161bb93d8d04e9c753c45121f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ca85d0d2_6addf702",
+        "filename": "simpleperf/demo/CppApi/app/src/main/cpp/CMakeLists.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2019-02-20T20:30:15Z",
+      "side": 1,
+      "message": "We can probably ditch all the template comments. They\u0027re not helping here.",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 63
+      },
+      "revId": "cc3c3b4e69e8ff9161bb93d8d04e9c753c45121f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2a85ce68_7b8462d2",
+        "filename": "simpleperf/demo/CppApi/app/src/main/cpp/CMakeLists.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2019-02-20T20:30:15Z",
+      "side": 1,
+      "message": "target_include_directories(native-lib\n  PRIVATE \n    ../../../../../../app_api/cpp/\n)",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 51
+      },
+      "revId": "cc3c3b4e69e8ff9161bb93d8d04e9c753c45121f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "16ed7286_bed3497a",
+        "filename": "simpleperf/demo/CppApi/app/src/main/cpp/CMakeLists.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2019-02-20T20:30:15Z",
+      "side": 1,
+      "message": "target_link_libraries(native-lib\n  PRIVATE\n    ${log-lib}\n)\n\nI think PRIVATE is the default, but might as well be explicit about it.",
+      "revId": "cc3c3b4e69e8ff9161bb93d8d04e9c753c45121f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1a58fdbe_a80cd6b3",
+        "filename": "simpleperf/demo/CppApi/app/src/main/cpp/native-lib.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2019-02-20T20:30:15Z",
+      "side": 1,
+      "message": "Should probably add Android copyright headers to everything.",
+      "revId": "cc3c3b4e69e8ff9161bb93d8d04e9c753c45121f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
