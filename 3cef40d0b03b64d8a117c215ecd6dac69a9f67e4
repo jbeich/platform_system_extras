@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f0215b95_bab5c01f",
+        "filename": "checkpoint_gc/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2019-02-20T00:14:03Z",
+      "side": 1,
+      "message": "I currently feel this makes the most sense, as the fstab currently lives in /vendor, and this script is only relevant to include when /data is f2fs with checkpoint\u003dfs in the vold flags",
+      "range": {
+        "startLine": 5,
+        "startChar": 4,
+        "endLine": 5,
+        "endChar": 16
+      },
+      "revId": "3cef40d0b03b64d8a117c215ecd6dac69a9f67e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
