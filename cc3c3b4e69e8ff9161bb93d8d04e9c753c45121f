@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "185d2c70_59140cfc",
+        "filename": "simpleperf/demo/CppApi/app/build.gradle",
+        "patchSetId": 3
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2019-02-20T22:03:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8aabce1a_9bfb832e",
+      "range": {
+        "startLine": 4,
+        "startChar": 22,
+        "endLine": 4,
+        "endChar": 24
+      },
+      "revId": "cc3c3b4e69e8ff9161bb93d8d04e9c753c45121f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b2df4c71_294be848",
         "filename": "simpleperf/demo/CppApi/app/build.gradle",
         "patchSetId": 3
@@ -93,6 +117,30 @@
       "revId": "cc3c3b4e69e8ff9161bb93d8d04e9c753c45121f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0381ac02_345c51b4",
+        "filename": "simpleperf/demo/CppApi/app/build.gradle",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2019-02-20T22:03:46Z",
+      "side": 1,
+      "message": "If it can run on at least _some_ pre-N devices then minSdkVersion should probably be set lower and defer to a runtime check against the kernel version (I know this gets very messy given that it might be an old kernel with an arbitrary collection of packages, so maybe that\u0027s really not viable).\n\nHowever, since this is just a sample that\u0027s probably not worth doing. This is probably good enough.",
+      "parentUuid": "9bd559d8_ca5348c6",
+      "range": {
+        "startLine": 7,
+        "startChar": 22,
+        "endLine": 7,
+        "endChar": 24
+      },
+      "revId": "cc3c3b4e69e8ff9161bb93d8d04e9c753c45121f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -339,6 +387,24 @@
       "revId": "cc3c3b4e69e8ff9161bb93d8d04e9c753c45121f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2f375f33_1498ec09",
+        "filename": "simpleperf/demo/CppApi/app/src/main/cpp/native-lib.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2019-02-20T22:03:46Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "d348cf8c_0e4886ff",
+      "revId": "cc3c3b4e69e8ff9161bb93d8d04e9c753c45121f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
