@@ -1,0 +1,7 @@
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Code-Review+2: Suren Baghdasaryan <surenb@google.com>
+Submitted-by: Yifan Hong <elsk@google.com>
+Submitted-at: Wed, 20 Feb 2019 20:35:46 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/system/extras/+/906576
+Project: platform/system/extras
+Branch: refs/heads/master
