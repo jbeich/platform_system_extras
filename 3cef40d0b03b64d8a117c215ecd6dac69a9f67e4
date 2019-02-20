@@ -22,6 +22,23 @@
       "revId": "3cef40d0b03b64d8a117c215ecd6dac69a9f67e4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "92daabe2_ce80a3bd",
+        "filename": "checkpoint_gc/checkpoint_gc.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-02-20T01:42:32Z",
+      "side": 1,
+      "message": "nit: maybe log?",
+      "revId": "3cef40d0b03b64d8a117c215ecd6dac69a9f67e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
