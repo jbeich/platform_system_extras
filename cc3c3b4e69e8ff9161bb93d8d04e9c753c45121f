@@ -144,6 +144,30 @@
     },
     {
       "key": {
+        "uuid": "c9c54de6_e9a7226e",
+        "filename": "simpleperf/demo/CppApi/app/build.gradle",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2019-02-20T23:14:43Z",
+      "side": 1,
+      "message": "One reason to suggest android version instead of kernel version, is because we have simpleperf cts tests for android versions. So it is easier to tell if an Android version fulfills the need than a kernel version.",
+      "parentUuid": "0381ac02_345c51b4",
+      "range": {
+        "startLine": 7,
+        "startChar": 22,
+        "endLine": 7,
+        "endChar": 24
+      },
+      "revId": "cc3c3b4e69e8ff9161bb93d8d04e9c753c45121f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dc68707c_bd81ed04",
         "filename": "simpleperf/demo/CppApi/app/build.gradle",
         "patchSetId": 3
