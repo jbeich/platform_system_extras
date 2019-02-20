@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e0a60f50_95ad5b56",
+        "filename": "simpleperf/scripts/api_app_profiler.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2019-02-20T19:59:35Z",
+      "side": 1,
+      "message": "upload_simpleperf_to_device might be a better name, since this is moving files from where this script is running to a remote target.",
+      "range": {
+        "startLine": 58,
+        "startChar": 4,
+        "endLine": 58,
+        "endChar": 33
+      },
+      "revId": "cdcea956ac9935acc64d356f4f9e6589ecbb3ced",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
