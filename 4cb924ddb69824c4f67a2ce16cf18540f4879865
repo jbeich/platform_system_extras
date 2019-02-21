@@ -141,6 +141,30 @@
       "revId": "4cb924ddb69824c4f67a2ce16cf18540f4879865",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0d70ae06_0237617d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2019-02-21T23:33:55Z",
+      "side": 1,
+      "message": "the libLLVM_android.so for 32bit is built, but not shipped on device. And the test runs on device. I switched the test from static llvm libs to shared llvm lib recently, but didn\u0027t test the 32bit version. So switch the test back to static llvm libs will fix the problem. Anyway, it isn\u0027t related to this CL.",
+      "parentUuid": "7d621c33_593b2d35",
+      "range": {
+        "startLine": 14,
+        "startChar": 2,
+        "endLine": 14,
+        "endChar": 76
+      },
+      "revId": "4cb924ddb69824c4f67a2ce16cf18540f4879865",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
