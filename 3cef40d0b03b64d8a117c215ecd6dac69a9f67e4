@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "9d4f1317_db12946d",
+        "filename": "checkpoint_gc/checkpoint_gc.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2019-02-21T00:42:01Z",
+      "side": 1,
+      "message": "I have this one here since those two are the standard things passed to postinstall scripts. Is it better to just skip $1 here, or just have a comment that it isn\u0027t used?",
+      "parentUuid": "d809888e_aa15b502",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 16
+      },
+      "revId": "3cef40d0b03b64d8a117c215ecd6dac69a9f67e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "92daabe2_ce80a3bd",
         "filename": "checkpoint_gc/checkpoint_gc.sh",
         "patchSetId": 1
