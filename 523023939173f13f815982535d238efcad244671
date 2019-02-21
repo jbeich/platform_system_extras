@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ef791248_c54f7627",
+        "filename": "checkpoint_gc/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2019-02-21T16:28:59Z",
+      "side": 1,
+      "message": "nit defacto coding standard, single space following colon.",
+      "range": {
+        "startLine": 5,
+        "startChar": 10,
+        "endLine": 5,
+        "endChar": 11
+      },
+      "revId": "523023939173f13f815982535d238efcad244671",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0572fc88_08e8ecd7",
+        "filename": "checkpoint_gc/checkpoint_gc.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2019-02-21T16:28:59Z",
+      "side": 1,
+      "message": "Wondering if there should be some additional checking, or if it is an impossible corner case? The worry comes because bind mounts will inherit mount point and filesystem type, and land later in /proc/mounts. I do not believe we allow bind mounts to /data currently, but what if?\n\nScript should fail here if more than one f2fs /data partition is found. Or maybe just the first one should be used since the only logical issue could be a bind mount causing this?\n\nSince this is the _only_ place where DEVICE is used, drop it and maybe do:\n\nNAME\u003d`while read dev dir type opt; do\n  if [ /data \u003d ${dir} -a f2fs \u003d ${type} ]; then\n    echo ${dev##*/}\n    break\n  fi\ndone \u003c /proc/mounts`\n\nwhich will return the first name that matches, or nothing.",
+      "range": {
+        "startLine": 31,
+        "startChar": 5,
+        "endLine": 31,
+        "endChar": 18
+      },
+      "revId": "523023939173f13f815982535d238efcad244671",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fc8e57d4_73e08333",
+        "filename": "checkpoint_gc/checkpoint_gc.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2019-02-21T16:28:59Z",
+      "side": 1,
+      "message": "2 minutes is a long time, could we find out if f2fs is _done_ with gc and exit early?",
+      "range": {
+        "startLine": 40,
+        "startChar": 6,
+        "endLine": 40,
+        "endChar": 29
+      },
+      "revId": "523023939173f13f815982535d238efcad244671",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
