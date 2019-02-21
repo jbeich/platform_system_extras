@@ -45,6 +45,54 @@
       "revId": "4cb924ddb69824c4f67a2ce16cf18540f4879865",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a1815a4_0e0a065d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2019-02-21T19:28:02Z",
+      "side": 1,
+      "message": "there is already a AndroidTests.xml in simpleperf dir, and I can run atest simpleperf_unit_test successfully. Don\u0027t know why the difference.",
+      "parentUuid": "9a620dda_13a48bdb",
+      "range": {
+        "startLine": 12,
+        "startChar": 5,
+        "endLine": 14,
+        "endChar": 76
+      },
+      "revId": "4cb924ddb69824c4f67a2ce16cf18540f4879865",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3618d72b_cb46247e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2019-02-21T19:28:02Z",
+      "side": 1,
+      "message": "I guess only 64bit libLLVM_android.so is needed on device. I prefer to switch to static llvm libs for simpleperf_unit_test.",
+      "parentUuid": "66b4868a_f9a0a473",
+      "range": {
+        "startLine": 14,
+        "startChar": 2,
+        "endLine": 14,
+        "endChar": 76
+      },
+      "revId": "4cb924ddb69824c4f67a2ce16cf18540f4879865",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
