@@ -165,7 +165,7 @@ cc_defaults {
         linux: {
             static_libs: [
                 "libunwindstack",
-                "libdexfile_support",
+                "libdexfile_support_static",
                 "libdexfile_external",
                 "libdexfile",
                 "libcutils",
