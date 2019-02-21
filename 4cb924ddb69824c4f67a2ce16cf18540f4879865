@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a620dda_13a48bdb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2019-02-21T19:00:55Z",
+      "side": 1,
+      "message": "It\u0027s a pity atest doesn\u0027t work:\n\n$ atest simpleperf_unit_test\n/.../\nRUNNER ERROR: simpleperf_unit_test did not report any run:\nsimpleperf_unit_test E 02-21 18:50:26  4629  4629 gtest_main.cpp:103] testdata wasn\u0027t found. Use \"/data/local/tmp/simpleperf_unit_test -t \u003ctestdata_dir\u003e\"\n\nMaybe consider adding an AndroidTests.xml that puts the testdata dir in place?",
+      "range": {
+        "startLine": 12,
+        "startChar": 5,
+        "endLine": 14,
+        "endChar": 76
+      },
+      "revId": "4cb924ddb69824c4f67a2ce16cf18540f4879865",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "66b4868a_f9a0a473",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2019-02-21T19:00:55Z",
+      "side": 1,
+      "message": "Note I couldn\u0027t get the 32 bit unit test to work:\n\nCANNOT LINK EXECUTABLE \"/data/nativetest/simpleperf_unit_test/arm/simpleperf_unit_test\": library \"libLLVM_android.so\" not found\n\nlibLLVM_android.so is in out/target/.../system/lib but it doesn\u0027t appear in /system/lib on the device (lib64 works fine). That\u0027s odd, so I\u0027ll follow up on it. However, it\u0027s not a regression in this CL.",
+      "range": {
+        "startLine": 14,
+        "startChar": 2,
+        "endLine": 14,
+        "endChar": 76
+      },
+      "revId": "4cb924ddb69824c4f67a2ce16cf18540f4879865",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
