@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c7825178_8f9eee25",
+        "filename": "simpleperf/Android.bp",
+        "patchSetId": 4
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1038443
+      },
+      "writtenOn": "2019-02-22T08:08:12Z",
+      "side": 1,
+      "message": "Add a comment why you\u0027re using the static version (here and below) ?",
+      "range": {
+        "startLine": 102,
+        "startChar": 0,
+        "endLine": 102,
+        "endChar": 36
+      },
+      "revId": "c92800e2618f6f47fffc676a0ccea1f38a1df284",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
