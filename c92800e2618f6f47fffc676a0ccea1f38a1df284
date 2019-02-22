@@ -22,6 +22,30 @@
       "revId": "c92800e2618f6f47fffc676a0ccea1f38a1df284",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "63d68b17_f63904d6",
+        "filename": "simpleperf/Android.bp",
+        "patchSetId": 4
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2019-02-22T13:11:05Z",
+      "side": 1,
+      "message": "It\u0027s in a defaults rule for static building, as is the other case below - not sure what to add here that isn\u0027t obvious.",
+      "parentUuid": "c7825178_8f9eee25",
+      "range": {
+        "startLine": 102,
+        "startChar": 0,
+        "endLine": 102,
+        "endChar": 36
+      },
+      "revId": "c92800e2618f6f47fffc676a0ccea1f38a1df284",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
