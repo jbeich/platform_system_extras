@@ -72,3 +72,12 @@ class ScopedAppPackageName {
  private:
   std::string saved_name_;
 };
+
+bool HasHardwareCounter();
+#define TEST_REQUIRE_HW_COUNTER() \
+  do { \
+    if (!HasHardwareCounter()) { \
+      GTEST_LOG_(INFO) << "Skip this test as the machine doesn't have hardware PMU counters."; \
+      return; \
+    } \
+  } while (0)
