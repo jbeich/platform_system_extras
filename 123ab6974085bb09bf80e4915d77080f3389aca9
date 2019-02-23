@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "10732d79_26e092a8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2019-02-23T07:08:40Z",
+      "side": 1,
+      "message": "avoid using master because it changes overtime.\nBetter to stick to a git hash.",
+      "range": {
+        "startLine": 14,
+        "startChar": 67,
+        "endLine": 14,
+        "endChar": 73
+      },
+      "revId": "123ab6974085bb09bf80e4915d77080f3389aca9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
