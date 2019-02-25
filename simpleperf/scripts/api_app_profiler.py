@@ -37,15 +37,8 @@ from utils import AdbHelper, get_target_binary_path, log_exit, remove
 def prepare_recording(args):
     adb = AdbHelper()
     enable_profiling_on_device(adb, args)
-    # TODO: support profileable app in Android >= Q.
-    if not is_debuggable_app(adb, args.app[0]):
-        log_exit("The app isn't debuggable: %s" % args.app[0])
-    upload_simpleperf_to_device(adb, args)
-    prepare_tracepoint_events_file(adb)
-
-def is_debuggable_app(adb, app):
-    result, _ = adb.run_and_return_output(["shell", "run-as", app, "echo"], log_output=False)
-    return result
+    upload_simpleperf_to_device(adb)
+    run_simpleperf_prepare_cmd(adb)
 
 def enable_profiling_on_device(adb, args):
     android_version = adb.get_android_version()
@@ -55,30 +48,14 @@ def enable_profiling_on_device(adb, args):
         adb.set_property('debug.perf_event_mlock_kb', str(args.max_memory_in_kb[0]))
     adb.set_property('security.perf_harden', '0')
 
-def upload_simpleperf_to_device(adb, args):
+def upload_simpleperf_to_device(adb):
     device_arch = adb.get_device_arch()
     simpleperf_binary = get_target_binary_path(device_arch, 'simpleperf')
     adb.check_run(['push', simpleperf_binary, '/data/local/tmp'])
     adb.check_run(['shell', 'chmod', 'a+x', '/data/local/tmp/simpleperf'])
-    adb.check_run(['shell', 'run-as', args.app[0], 'cp', '/data/local/tmp/simpleperf', '.'])
 
-def prepare_tracepoint_events_file(adb):
-    tracepoint_event_ids = adb.check_run_and_return_output(
-        ['shell', 'ls', '/sys/kernel/debug/tracing/events/*/*/id'], log_output=False)
-    events_file_path = 'tracepoint_events'
-    with open(events_file_path, 'w') as fh:
-        for i, id_path in enumerate(tracepoint_event_ids.split()):
-            # For id_path like "/sys/kernel/debug/tracing/events/sched/sched_switch/id",
-            # get event_name "sched:sched_switch".
-            items = id_path.split('/')
-            event_name = items[-3] + ':' + items[-2]
-            id_value = adb.check_run_and_return_output(['shell', 'cat', id_path], log_output=False)
-            id_value = id_value.strip()
-            if i > 0:
-                fh.write('\n')
-            fh.write('%s %s' % (event_name, id_value))
-    adb.check_run(['push', events_file_path, '/data/local/tmp/tracepoint_events'])
-    remove(events_file_path)
+def run_simpleperf_prepare_cmd(adb):
+    adb.check_run(['shell', '/data/local/tmp/simpleperf', 'app-api-prepare'])
 
 
 def collect_data(args):
@@ -97,26 +74,9 @@ def collect_data(args):
 
 def move_profiling_data_to_tmp_dir(adb, app):
     """ move /data/data/<app>/simpleperf_data to /data/local/tmp/simpleperf_data."""
-    # TODO: support profileable app in Android >= Q.
-    if not is_debuggable_app(adb, app):
-        log_exit("The app isn't debuggable: %s" % app)
-    result, output = adb.run_and_return_output(['shell', 'run-as', app, 'ls', 'simpleperf_data'])
-    if not result:
-        log_exit("can't find profiling data for app %s" % app)
-    file_list = output.split()
-    shell_script = 'collect_data_shell_script.sh'
-    with open(shell_script, 'w') as fh:
-        fh.write('set -ex\n')
-        fh.write('rm -rf /data/local/tmp/simpleperf_data\n')
-        fh.write('mkdir /data/local/tmp/simpleperf_data\n')
-        for filename in file_list:
-            fh.write('run-as %s cat simpleperf_data/%s >/data/local/tmp/simpleperf_data/%s\n' % (
-                app, filename, filename))
-    adb.check_run(['push', shell_script, '/data/local/tmp'])
-    adb.check_run(['shell', 'sh', '/data/local/tmp/%s' % shell_script])
-    adb.check_run(['shell', 'run-as', app, 'rm', '-rf', 'simpleperf_data'])
-    adb.check_run(['shell', 'rm', '/data/local/tmp/%s' % shell_script])
-    remove(shell_script)
+    upload_simpleperf_to_device(adb)
+    adb.check_run(['shell', '/data/local/tmp/simpleperf', 'app-api-collect', '--app', app,
+                   '--out-dir', '/data/local/tmp/simpleperf_data'])
 
 
 class ArgumentHelpFormatter(argparse.ArgumentDefaultsHelpFormatter,
@@ -129,13 +89,11 @@ def main():
     subparsers = parser.add_subparsers()
     prepare_parser = subparsers.add_parser('prepare', help='Prepare recording on device.',
                                            formatter_class=ArgumentHelpFormatter)
-    prepare_parser.add_argument('-p', '--app', nargs=1, required=True, help="""
-                                The package name of the app to profile.""")
     prepare_parser.add_argument('--max-sample-rate', nargs=1, type=int, default=[100000], help="""
                                 Set max sample rate (only on Android >= Q).""")
     prepare_parser.add_argument('--max-cpu-percent', nargs=1, type=int, default=[25], help="""
                                 Set max cpu percent for recording (only on Android >= Q).""")
-    prepare_parser.add_argument('--max-memory-in-kb', nargs=1, type=int, default=[516], help="""
+    prepare_parser.add_argument('--max-memory-in-kb', nargs=1, type=int, default=[(1024 + 1) * 4 * 8], help="""
                                 Set max kernel buffer size for recording (only on Android >= Q).
                                 """)
     prepare_parser.set_defaults(func=prepare_recording)

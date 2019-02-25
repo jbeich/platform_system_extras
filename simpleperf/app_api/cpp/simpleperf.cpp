@@ -147,6 +147,7 @@ class ProfileSessionImpl {
 
  private:
   std::string FindSimpleperf();
+  std::string FindSimpleperfInTempDir();
   void CheckIfPerfEnabled();
   void CreateSimpleperfDataDir();
   void CreateSimpleperfProcess(const std::string& simpleperf_path,
@@ -251,19 +252,37 @@ static bool IsExecutableFile(const std::string& path) {
 }
 
 std::string ProfileSessionImpl::FindSimpleperf() {
-  std::vector<std::string> candidates = {
-      // For debuggable apps, simpleperf is put to the appDir by api_app_profiler.py.
-      app_data_dir_ + "/simpleperf",
-      // For profileable apps on Android >= Q, use simpleperf in system image.
-      "/system/bin/simpleperf"
-  };
-  for (const auto& path : candidates) {
-    if (IsExecutableFile(path)) {
-      return path;
-    }
+  // 1. Try /data/local/tmp/simpleperf.
+  std::string simpleperf_path = FindSimpleperfInTempDir();
+  if (!simpleperf_path.empty()) {
+    return simpleperf_path;
+  }
+  // 2. Try /system/bin/simpleperf, which is available on Android >= Q.
+  simpleperf_path = "/system/bin/simpleperf";
+  if (IsExecutableFile(simpleperf_path)) {
+    return simpleperf_path;
   }
   Abort("can't find simpleperf on device. Please run api_app_profiler.py.");
   return "";
+}
+
+std::string ProfileSessionImpl::FindSimpleperfInTempDir() {
+  const std::string path = "/data/local/tmp/simpleperf";
+  if (!IsExecutableFile(path)) {
+    return "";
+  }
+  // Copy it to app_dir to execute it.
+  const std::string to_path = app_data_dir_ + "/simpleperf";
+  const std::string copy_cmd = "cp " + path + " " + to_path;
+  if (system(copy_cmd.c_str()) != 0) {
+    return "";
+  }
+  const std::string test_cmd = to_path;
+  // For apps with target sdk >= 29, executing app data file isn't allowed. So test executing it.
+  if (system(test_cmd.c_str()) != 0) {
+    return "";
+  }
+  return to_path;
 }
 
 static std::string ReadFile(FILE* fp) {
