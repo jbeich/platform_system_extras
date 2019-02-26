@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "38a5f801_4f617d12",
+        "filename": "libfscrypt/fscrypt_init_extensions.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2019-02-26T17:04:49Z",
+      "side": 1,
+      "message": "(an apology: I had added one for /data/overlay directory in the past, but abandoned, I should have known better and suggested this to dvander@ long time ago based on that experience; certainly during our discussion yesterday)",
+      "range": {
+        "startLine": 91,
+        "startChar": 8,
+        "endLine": 91,
+        "endChar": 13
+      },
+      "revId": "10b96b149d7c64fa9643f187522e30743d9c1c76",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
