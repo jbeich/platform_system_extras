@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "72380673_86df989d",
+        "filename": "simpleperf/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2019-02-27T21:51:17Z",
+      "side": 1,
+      "message": "Would it be better to drop the \"shared\" from the name here? It is using some shared and some static, so \"libs\" might be more clear.",
+      "range": {
+        "startLine": 238,
+        "startChar": 11,
+        "endLine": 238,
+        "endChar": 43
+      },
+      "revId": "1f55b6fa01ee4ab6b434dd0fbad2301f1c1cf4d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
