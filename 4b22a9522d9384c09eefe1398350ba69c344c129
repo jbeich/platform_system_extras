@@ -34,6 +34,24 @@
       "revId": "4b22a9522d9384c09eefe1398350ba69c344c129",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "26cb378c_ee805b8a",
+        "filename": "simpleperf/cmd_record_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 713,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2019-02-27T23:16:15Z",
+      "side": 1,
+      "message": "Ah I missed it because it was just a bug number and not a link. Doh! I also don\u0027t understand how to get the kernel patch from that SHA below. Is that something that most kernel devs would know how to apply?",
+      "parentUuid": "f8cf02cf_f8d82677",
+      "revId": "4b22a9522d9384c09eefe1398350ba69c344c129",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
