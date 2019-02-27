@@ -150,7 +150,7 @@ void UnwindMaps::UpdateMaps(const MapSet& map_set) {
     } else if (i == old_size || entry->start_addr <= entries_[i]->start_addr) {
       // Add an entry.
       entries_.push_back(entry);
-      maps_.push_back(CreateMapInfo(entry));
+      maps_.emplace_back(CreateMapInfo(entry));
       ++it;
     } else {
       // Remove an entry.
