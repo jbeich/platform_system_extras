@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "61e34a9f_40cfe7e8",
+        "filename": "simpleperf/cmd_record_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 713,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2019-02-27T21:56:22Z",
+      "side": 1,
+      "message": "Is there a buganizer bug or something even more public talking about this? We should link such a thing here, as well as in the commit message if so.",
+      "revId": "4b22a9522d9384c09eefe1398350ba69c344c129",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
