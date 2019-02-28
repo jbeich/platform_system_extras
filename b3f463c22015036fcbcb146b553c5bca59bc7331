@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "a195afaf_bb02dcbc",
+        "filename": "simpleperf/app_api/cpp/simpleperf.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2019-02-28T21:54:10Z",
+      "side": 1,
+      "message": "Yes, /data/local/tmp/simpleperf should be newer than /system/bin one, and may fix possible bugs or support more functions than /system/bin one.",
+      "parentUuid": "b6aa5a21_6ab88928",
+      "revId": "b3f463c22015036fcbcb146b553c5bca59bc7331",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e5e48d7d_1c1a80f5",
         "filename": "simpleperf/app_api/java/com/android/simpleperf/ProfileSession.java",
         "patchSetId": 2
