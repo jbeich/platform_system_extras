@@ -52,6 +52,24 @@
       "revId": "4b22a9522d9384c09eefe1398350ba69c344c129",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8093e567_7e7c9cc6",
+        "filename": "simpleperf/cmd_record_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 713,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2019-02-28T18:45:25Z",
+      "side": 1,
+      "message": "SHA can be used to search the patch in the \u0027git log\u0027 of linux kernel. I was asked to add it by enh@. All kernel devs should know since they use git.",
+      "parentUuid": "26cb378c_ee805b8a",
+      "revId": "4b22a9522d9384c09eefe1398350ba69c344c129",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
