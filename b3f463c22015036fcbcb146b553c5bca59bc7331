@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b6aa5a21_6ab88928",
+        "filename": "simpleperf/app_api/cpp/simpleperf.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2019-02-28T20:08:40Z",
+      "side": 1,
+      "message": "Why wouldn\u0027t we try to find the /system/bin version first? Is there a reason that we would continue pushing this to /data/local/tmp/ even past Q for bug fixes or something?",
+      "revId": "b3f463c22015036fcbcb146b553c5bca59bc7331",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e5e48d7d_1c1a80f5",
+        "filename": "simpleperf/app_api/java/com/android/simpleperf/ProfileSession.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2019-02-28T20:08:40Z",
+      "side": 1,
+      "message": "Same question about ordering the lookup. I realize that most people won\u0027t be on Q, but we will likely not remember to reverse this conditional once the number of people on Q+ is greater than pre-Q.",
+      "revId": "b3f463c22015036fcbcb146b553c5bca59bc7331",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
