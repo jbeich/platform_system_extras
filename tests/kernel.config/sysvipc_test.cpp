@@ -31,6 +31,9 @@ int kcmp(pid_t pid1, pid_t pid2, int type, unsigned long idx1, unsigned long idx
   return syscall(SYS_kcmp, pid1, pid2, type, 0, idx1, idx2);
 }
 #endif
+#if !defined(SYS_ipc) && defined(__NR_ipc)
+# define SYS_ipc __NR_ipc
+#endif
 
 int msgctl(int id, int cmd, msqid_ds* buf) {
 #if !defined(__LP64__) || defined(__mips__)
@@ -40,8 +43,13 @@ int msgctl(int id, int cmd, msqid_ds* buf) {
 #endif
 #if defined(SYS_msgctl)
   return syscall(SYS_msgctl, id, cmd, buf);
-#else
+#elif defined(SYS_ipc)
   return syscall(SYS_ipc, MSGCTL, id, cmd, 0, buf, 0);
+#else
+  id = cmd;
+  buf = nullptr;
+  errno = ENOSYS;
+  return -1;
 #endif
 }
 
@@ -53,8 +61,13 @@ int semctl(int id, int num, int cmd, semid_ds* buf) {
 #endif
 #if defined(SYS_msgctl)
   return syscall(SYS_semctl, id, num, cmd, buf);
-#else
+#elif defined(SYS_ipc)
   return syscall(SYS_ipc, SEMCTL, id, num, cmd, buf, 0);
+#else
+  id = cmd;
+  buf = nullptr;
+  errno = ENOSYS;
+  return -1;
 #endif
 }
 
@@ -66,8 +79,13 @@ int shmctl(int id, int cmd, shmid_ds* buf) {
 #endif
 #if defined(SYS_shmctl)
   return syscall(SYS_shmctl, id, cmd, buf);
-#else
+#elif defined(SYS_ipc)
   return syscall(SYS_ipc, SHMCTL, id, cmd, 0, buf, 0);
+#else
+  id = cmd;
+  buf = nullptr;
+  errno = ENOSYS;
+  return -1;
 #endif
 }
 
