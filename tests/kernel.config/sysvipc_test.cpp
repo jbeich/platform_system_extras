@@ -31,7 +31,11 @@ int kcmp(pid_t pid1, pid_t pid2, int type, unsigned long idx1, unsigned long idx
   return syscall(SYS_kcmp, pid1, pid2, type, 0, idx1, idx2);
 }
 #endif
+#if !defined(SYS_ipc) && defined(__NR_ipc)
+# define SYS_ipc __NR_ipc
+#endif
 
+#if defined(SYS_msgctl) || defined(SYS_ipc)
 int msgctl(int id, int cmd, msqid_ds* buf) {
 #if !defined(__LP64__) || defined(__mips__)
   // Annoyingly, the kernel requires this for 32-bit but rejects it for 64-bit.
@@ -44,20 +48,34 @@ int msgctl(int id, int cmd, msqid_ds* buf) {
   return syscall(SYS_ipc, MSGCTL, id, cmd, 0, buf, 0);
 #endif
 }
+#else
+int msgctl(int, int, msqid_ds*) {
+  errno = ENOSYS;
+  return -1;
+}
+#endif
 
+#if defined(SYS_semctl) || defined(SYS_ipc)
 int semctl(int id, int num, int cmd, semid_ds* buf) {
 #if !defined(__LP64__) || defined(__mips__)
   // Annoyingly, the kernel requires this for 32-bit but rejects it for 64-bit.
   // Mips64 is an exception to this, it requires the flag.
   cmd |= IPC_64;
 #endif
-#if defined(SYS_msgctl)
+#if defined(SYS_semctl)
   return syscall(SYS_semctl, id, num, cmd, buf);
 #else
   return syscall(SYS_ipc, SEMCTL, id, num, cmd, buf, 0);
 #endif
 }
+#else
+int semctl(int, int, int, sem_id_ds*) {
+  errno = ENOSYS;
+  return -1;
+}
+#endif
 
+#if defined(SYS_shmctl) || defined(SYS_ipc)
 int shmctl(int id, int cmd, shmid_ds* buf) {
 #if !defined(__LP64__) || defined(__mips__)
   // Annoyingly, the kernel requires this for 32-bit but rejects it for 64-bit.
@@ -70,6 +88,12 @@ int shmctl(int id, int cmd, shmid_ds* buf) {
   return syscall(SYS_ipc, SHMCTL, id, cmd, 0, buf, 0);
 #endif
 }
+#else
+int shmctl(int, int, shmid_ds*) {
+  errno = ENOSYS;
+  return -1;
+}
+#endif
 
 TEST(kernel_config, NOT_CONFIG_SYSVIPC) {
 #ifdef HAS_KCMP
