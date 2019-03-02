@@ -188,6 +188,7 @@ class ProfileSessionImpl {
   pid_t simpleperf_pid_ = -1;
   int control_fd_ = -1;
   int reply_fd_ = -1;
+  bool trace_offcpu_ = false;
 };
 
 ProfileSessionImpl::~ProfileSessionImpl() {
@@ -204,6 +205,11 @@ void ProfileSessionImpl::StartRecording(const std::vector<std::string> &args) {
   if (state_ != NOT_YET_STARTED) {
     Abort("startRecording: session in wrong state %d", state_);
   }
+  for (const auto& arg : args) {
+    if (arg == "--trace-offcpu") {
+      trace_offcpu_ = true;
+    }
+  }
   std::string simpleperf_path = FindSimpleperf();
   CheckIfPerfEnabled();
   CreateSimpleperfDataDir();
@@ -215,6 +221,9 @@ void ProfileSessionImpl::PauseRecording() {
   std::lock_guard<std::mutex> guard(lock_);
   if (state_ != STARTED) {
     Abort("pauseRecording: session in wrong state %d", state_);
+  }
+  if (trace_offcpu_) {
+    Abort("--trace-offcpu doesn't work well with pause/resume recording");
   }
   SendCmd("pause");
   state_ = PAUSED;
