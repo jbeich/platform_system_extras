@@ -17,6 +17,8 @@
 
 #pragma once
 
+#include <unistd.h>
+
 #include <memory>
 #include <string>
 
@@ -47,6 +49,12 @@ class JsonSchemaTestConfig {
       return "";
     }
     return content;
+  }
+  /**
+   * If it returns true, tests are skipped when the file is not found.
+   */
+  virtual bool optional() const {
+    return false;
   }
 };
 using JsonSchemaTestConfigFactory =
@@ -80,10 +88,18 @@ class JsonSchemaTest
         ::testing::TestWithParam<JsonSchemaTestConfigFactory>::GetParam()();
     file_path_ = config->file_path();
     json_ = config->GetFileContent();
-    ASSERT_FALSE(json_.empty()) << "Cannot read " << config->file_path();
+    if (json_.empty()) {
+      ASSERT_TRUE(config->optional()) << "Cannot read file but it is required to exist: "
+                                      << file_path_;
+      ASSERT_TRUE(access(file_path_.c_str(), F_OK) == -1)
+          << "File exists but is empty: " << file_path_;
+      ASSERT_EQ(ENOENT, errno) << strerror(errno);
+      GTEST_SKIP();
+    }
+
     object_ = config->CreateMessage();
     auto res = internal::JsonStringToMessage(json_, object_.get());
-    ASSERT_TRUE(res.ok()) << "Invalid format of file " << config->file_path()
+    ASSERT_TRUE(res.ok()) << "Invalid format of file " << file_path_
                           << ": " << res.error();
   }
   google::protobuf::Message* message() const {
