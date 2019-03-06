@@ -45,6 +45,29 @@
       "revId": "631d425acf59558d850f3682e311f4db0d159a5b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bd2c46bf_b49ac55d",
+        "filename": "cppreopts/cppreopts.rc",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-03-06T22:35:32Z",
+      "side": 1,
+      "message": "It would be great if we can removed the duplicated code. Suggestion:\n\non property:sys.cppreopt\u003drequested \u0026\u0026 property:ro.fstab.product.mount.system_other\u003d0\n    mount_all /system/etc/fstab.postinstall\n    setprop sys.cppreopt mounted\n\non property:sys.cppreopt\u003drequested \u0026\u0026 property:ro.fstab.product.mount.system_other\u003d1\n    mount_all /product/etc/fstab.postinstall\n    setprop sys.cppreopt mounted\n\non property:sys.cppreopt\u003dmounted\n    exec_start cppreopts\n    # Optional script to copy additional preloaded content to data directory\n    exec - system system -- /system/bin/preloads_copy.sh /postinstall\n    umount /postinstall\n\nIn addition, I feel that using a partition name \"system\" or \"product\" is nicer than a boolean.",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 33
+      },
+      "revId": "631d425acf59558d850f3682e311f4db0d159a5b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
