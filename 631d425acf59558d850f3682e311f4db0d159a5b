@@ -68,6 +68,30 @@
       "revId": "631d425acf59558d850f3682e311f4db0d159a5b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "afd675b9_18416e34",
+        "filename": "cppreopts/cppreopts.rc",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2019-03-07T04:44:09Z",
+      "side": 1,
+      "message": "Agree using partition is better. Thanks for the suggestion!",
+      "parentUuid": "bd2c46bf_b49ac55d",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 33
+      },
+      "revId": "631d425acf59558d850f3682e311f4db0d159a5b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
