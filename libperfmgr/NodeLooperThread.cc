@@ -106,7 +106,11 @@ bool NodeLooperThread::threadLoop() {
         n->Update(false);
     }
     for (auto& n : nodes_) {
+<<<<<<< HEAD   (00b208 Merge "Use unique_ptr for Maps object.")
         timeout_ms = std::min(n->Update(true), timeout_ms);
+=======
+        timeout_ms = std::min(n->Update(), timeout_ms);
+>>>>>>> BRANCH (971f83 Snap for 5180536 from 9ec7ba8443caa905c2ebdf6eadd5e6148a348d)
     }
 
     nsecs_t sleep_timeout_ns = std::numeric_limits<nsecs_t>::max();

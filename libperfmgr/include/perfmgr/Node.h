@@ -59,7 +59,11 @@ class Node {
     // std::chrono::milliseconds::max() if no active request on Node; update
     // node's controlled file node value and the current value index based on
     // active request.
+<<<<<<< HEAD   (00b208 Merge "Use unique_ptr for Maps object.")
     virtual std::chrono::milliseconds Update(bool log_error) = 0;
+=======
+    std::chrono::milliseconds Update(bool log_error = true);
+>>>>>>> BRANCH (971f83 Snap for 5180536 from 9ec7ba8443caa905c2ebdf6eadd5e6148a348d)
 
     const std::string& GetName() const;
     const std::string& GetPath() const;

@@ -60,7 +60,55 @@ bool Node::RemoveRequest(const std::string& hint_type) {
     return ret;
 }
 
+<<<<<<< HEAD   (00b208 Merge "Use unique_ptr for Maps object.")
 const std::string& Node::GetName() const {
+=======
+std::chrono::milliseconds Node::Update(bool log_error) {
+    std::size_t value_index = default_val_index_;
+    std::chrono::milliseconds expire_time = std::chrono::milliseconds::max();
+
+    // Find the highest outstanding request's expire time
+    for (std::size_t i = 0; i < req_sorted_.size(); i++) {
+        if (req_sorted_[i].GetExpireTime(&expire_time)) {
+            value_index = i;
+            break;
+        }
+    }
+
+    // Update node only if request index changes
+    if (value_index != current_val_index_) {
+        std::string req_value = req_sorted_[value_index].GetRequestValue();
+
+        fd_.reset(TEMP_FAILURE_RETRY(
+            open(node_path_.c_str(), O_WRONLY | O_CLOEXEC | O_TRUNC)));
+
+        if (fd_ == -1 || !android::base::WriteStringToFd(req_value, fd_)) {
+            if (log_error) {
+                LOG(WARNING) << "Failed to write to node: " << node_path_
+                             << " with value: " << req_value << ", fd: " << fd_;
+            }
+            // Retry in 500ms or sooner
+            expire_time = std::min(expire_time, std::chrono::milliseconds(500));
+        } else {
+            // For regular file system, we need fsync
+            fsync(fd_);
+            // Some dev node requires file to remain open during the entire hint
+            // duration e.g. /dev/cpu_dma_latency, so fd_ is intentionally kept
+            // open during any requested value other than default one. If
+            // request a default value, node will write the value and then
+            // release the fd.
+            if ((!hold_fd_) || value_index == default_val_index_) {
+                fd_.reset();
+            }
+            // Update current index only when succeed
+            current_val_index_ = value_index;
+        }
+    }
+    return expire_time;
+}
+
+std::string Node::GetName() const {
+>>>>>>> BRANCH (971f83 Snap for 5180536 from 9ec7ba8443caa905c2ebdf6eadd5e6148a348d)
     return name_;
 }
 
