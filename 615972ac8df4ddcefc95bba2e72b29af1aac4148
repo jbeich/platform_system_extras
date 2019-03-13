@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "738cdb32_932e5b5a",
+        "filename": "libjsonpb/verify/include/jsonpb/json_schema_test.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-03-13T23:55:50Z",
+      "side": 1,
+      "message": "It does seem a bit backwards, but:\n\noptional, file exists: run test\noptional, file does not exist: skip\nnot optional, file exists: run test\nnot optional, file does not exist: failure\n\nBy \"file exists\" I also expect it to be non-empty. I\u0027ll try to improve the logic here.",
+      "parentUuid": "40d296c8_3ba9b487",
+      "range": {
+        "startLine": 90,
+        "startChar": 20,
+        "endLine": 90,
+        "endChar": 34
+      },
+      "revId": "615972ac8df4ddcefc95bba2e72b29af1aac4148",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "26590115_e686dfe6",
         "filename": "libjsonpb/verify/include/jsonpb/json_schema_test.h",
         "patchSetId": 1
