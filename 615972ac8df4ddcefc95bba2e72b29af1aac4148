@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "40d296c8_3ba9b487",
+        "filename": "libjsonpb/verify/include/jsonpb/json_schema_test.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2019-03-13T23:34:38Z",
+      "side": 1,
+      "message": "I would not have this function at all and would use ReadFileToString(config-\u003efile_path) directly. Then the logic that follows here would not be so confusing. I mean reading the file and then checking for its existence seems backwards.",
+      "range": {
+        "startLine": 90,
+        "startChar": 20,
+        "endLine": 90,
+        "endChar": 34
+      },
+      "revId": "615972ac8df4ddcefc95bba2e72b29af1aac4148",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "26590115_e686dfe6",
+        "filename": "libjsonpb/verify/include/jsonpb/json_schema_test.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2019-03-13T23:34:38Z",
+      "side": 1,
+      "message": "nit: Cannot read mandatory file?",
+      "range": {
+        "startLine": 92,
+        "startChar": 42,
+        "endLine": 92,
+        "endChar": 87
+      },
+      "revId": "615972ac8df4ddcefc95bba2e72b29af1aac4148",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
