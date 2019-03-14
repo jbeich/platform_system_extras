@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "d1e3bdf5_6d454927",
+        "filename": "libjsonpb/verify/include/jsonpb/json_schema_test.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-03-14T18:23:50Z",
+      "side": 1,
+      "message": "Done, does it look better now?\n\n    if (access() fails) {\n        mandate that the file does not exist (in case this is not tested because of permission denial, for example; although I believe the test will be run as root)\n        mandate that the test should be optional\n        skip the test\n    }",
+      "parentUuid": "738cdb32_932e5b5a",
+      "range": {
+        "startLine": 90,
+        "startChar": 20,
+        "endLine": 90,
+        "endChar": 34
+      },
+      "revId": "615972ac8df4ddcefc95bba2e72b29af1aac4148",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "26590115_e686dfe6",
         "filename": "libjsonpb/verify/include/jsonpb/json_schema_test.h",
         "patchSetId": 1
@@ -69,6 +93,30 @@
       "revId": "615972ac8df4ddcefc95bba2e72b29af1aac4148",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b8508ce5_d5be3854",
+        "filename": "libjsonpb/verify/include/jsonpb/json_schema_test.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-03-14T18:23:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "26590115_e686dfe6",
+      "range": {
+        "startLine": 92,
+        "startChar": 42,
+        "endLine": 92,
+        "endChar": 87
+      },
+      "revId": "615972ac8df4ddcefc95bba2e72b29af1aac4148",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
