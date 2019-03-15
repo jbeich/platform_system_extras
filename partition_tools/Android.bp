@@ -14,6 +14,13 @@
 // limitations under the License.
 //
 
+filegroup {
+    name: "dynamic_partitions_device_info_proto",
+    srcs: [
+        "dynamic_partitions_device_info.proto",
+    ],
+}
+
 cc_defaults {
     name: "lp_defaults",
     cflags: [
@@ -35,10 +42,18 @@ cc_library_shared {
         "libbase",
         "liblog",
         "liblp",
+        "libprotobuf-cpp-full",
+    ],
+    static_libs: [
+        "libjsonpbparse",
     ],
     srcs: [
         "lpdump.cc",
+        ":dynamic_partitions_device_info_proto",
     ],
+    proto: {
+        type: "full",
+    },
     target: {
         android: {
             shared_libs: [
@@ -56,6 +71,9 @@ cc_binary {
         "libbase",
         "liblog",
         "liblp",
+    ],
+    static_libs: [
+        "libjsonpbparse",
     ],
     srcs: [
         "lpdump_main.cc",

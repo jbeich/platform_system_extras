@@ -25,13 +25,17 @@
 #include <string>
 #include <vector>
 
-#include <android-base/strings.h>
 #include <android-base/parseint.h>
+#include <android-base/properties.h>
+#include <android-base/strings.h>
 #ifdef __ANDROID__
 #include <fs_mgr.h>
 #endif
+#include <jsonpb/jsonpb.h>
 #include <liblp/liblp.h>
+#include <liblp/builder.h>
 
+#include "dynamic_partitions_device_info.pb.h"
 using namespace android;
 using namespace android::fs_mgr;
 
@@ -77,6 +81,69 @@ static bool IsBlockDevice(const char* file) {
     return !stat(file, &s) && S_ISBLK(s.st_mode);
 }
 
+static std::string RemoveSuffix(std::string& s, const std::string& suffix) {
+    if (base::EndsWith(s, suffix)) {
+        return s.substr(0, s.length() - suffix.length());
+    }
+    return s;
+}
+
+static int PrintJson(const LpMetadata& metadata, std::ostream& cout, std::ostream& cerr) {
+    auto builder = MetadataBuilder::New(metadata);
+
+    DynamicPartitionsDeviceInfoProto proto;
+
+    if (base::GetBoolProperty("ro.boot.dynamic_partitions", false)) {
+        proto.set_enabled(true);
+    }
+
+    if (base::GetBoolProperty("ro.boot.dynamic_partitions_retrofit", false)) {
+        proto.set_retrofit(true);
+    }
+
+    std::string slot_suffix = base::GetProperty("ro.boot.slot_suffix", "");
+
+    for (const auto& partition : metadata.partitions) {
+        std::string partition_name = GetPartitionName(partition);
+        std::string group_name = GetPartitionGroupName(metadata.groups[partition.group_index]);
+        if (!base::EndsWith(partition_name, slot_suffix) ||
+            !base::EndsWith(group_name, slot_suffix))
+            continue;
+        auto partition_proto = proto.add_partitions();
+        partition_proto->set_is_dynamic(true);
+        partition_proto->set_name(RemoveSuffix(partition_name, slot_suffix));
+        partition_proto->set_group_name(RemoveSuffix(group_name, slot_suffix));
+
+        if (!builder) continue;
+        auto builder_partition = builder->FindPartition(partition_name);
+        if (!builder_partition) continue;
+        partition_proto->set_size(builder_partition->size());
+    }
+
+    for (const auto& group : metadata.groups) {
+        std::string group_name = GetPartitionGroupName(group);
+        if (!base::EndsWith(group_name, slot_suffix)) continue;
+        auto group_proto = proto.add_groups();
+        group_proto->set_name(RemoveSuffix(group_name, slot_suffix));
+        group_proto->set_maximum_size(group.maximum_size);
+    }
+
+    for (const auto& block_device : metadata.block_devices) {
+        std::string name = GetBlockDevicePartitionName(block_device);
+        auto block_device_proto = proto.add_block_devices();
+        block_device_proto->set_name(RemoveSuffix(name, slot_suffix));
+        block_device_proto->set_size(block_device.size);
+    }
+
+    auto error_or_json = jsonpb::MessageToJsonString(proto);
+    if (!error_or_json.ok()) {
+        cerr << error_or_json.error() << "\n";
+        return EX_SOFTWARE;
+    }
+    cout << *error_or_json;
+    return EX_OK;
+}
+
 class FileOrBlockDeviceOpener final : public PartitionOpener {
 public:
     android::base::unique_fd Open(const std::string& path, int flags) const override {
@@ -93,12 +160,14 @@ int LpdumpMain(int argc, char* argv[], std::ostream& cout, std::ostream& cerr) {
     struct option options[] = {
         {"slot", required_argument, nullptr, 's'},
         {"help", no_argument, nullptr, 'h'},
+        {"json", no_argument, nullptr, 'j'},
         {nullptr, 0, nullptr, 0},
     };
 
     int rv;
     int index;
     uint32_t slot = 0;
+    bool json = false;
     while ((rv = getopt_long_only(argc, argv, "s:h", options, &index)) != -1) {
         switch (rv) {
             case 'h':
@@ -107,6 +176,9 @@ int LpdumpMain(int argc, char* argv[], std::ostream& cout, std::ostream& cerr) {
                 if (!android::base::ParseUint(optarg, &slot)) {
                     slot = SlotNumberForSlotSuffix(optarg);
                 }
+                break;
+            case 'j':
+                json = true;
                 break;
         }
     }
@@ -133,6 +205,9 @@ int LpdumpMain(int argc, char* argv[], std::ostream& cout, std::ostream& cerr) {
         return EX_NOINPUT;
     }
 
+    if (json) {
+        return PrintJson(*pt, cout, cerr);
+    }
     cout << "Metadata version: " << pt->header.major_version << "." << pt->header.minor_version
          << "\n";
     cout << "Metadata size: " << (pt->header.header_size + pt->header.tables_size) << " bytes\n";
