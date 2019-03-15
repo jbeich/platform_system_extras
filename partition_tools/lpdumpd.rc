@@ -1,0 +1,12 @@
+service lpdumpd /system/bin/lpdumpd
+    class late_start
+    oneshot
+    disabled
+    user root
+    group root
+
+on property:sys.lpdumpd=start
+    start lpdumpd
+
+on property:sys.lpdumpd=stop
+    stop lpdumpd
