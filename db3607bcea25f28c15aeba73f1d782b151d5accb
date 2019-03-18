@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "445cec6f_e3185385",
+        "filename": "partition_tools/lpdump.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2019-03-18T14:44:24Z",
+      "side": 1,
+      "message": "ditto on file and android_get_control_file ...",
+      "range": {
+        "startLine": 119,
+        "startChar": 13,
+        "endLine": 119,
+        "endChar": 46
+      },
+      "revId": "db3607bcea25f28c15aeba73f1d782b151d5accb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ed9ae1a3_05891b84",
+        "filename": "partition_tools/lpdump.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2019-03-18T14:44:24Z",
+      "side": 1,
+      "message": "Create a dependent set of CLs such that ReadMetadata should recognize if supplied super triggers a return value from android_get_control_file, and if it does, take it instead of doing the open in the context of the current task.",
+      "range": {
+        "startLine": 126,
+        "startChar": 13,
+        "endLine": 126,
+        "endChar": 25
+      },
+      "revId": "db3607bcea25f28c15aeba73f1d782b151d5accb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "31c730e1_759a1e13",
+        "filename": "partition_tools/lpdumpd.rc",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2019-03-18T14:44:24Z",
+      "side": 1,
+      "message": "Switch these off root, alarm bells for _any_ daemon that starts up as root, and add the following line(s) to reference all root-accessible entities:\n\nfile /dev/block/by-name/${ro.boot.super_partition} r\nfile /proc/cmdline r\n\netc\n\nAdjust all libraries that open the file(s) to alternatively use android_get_control_file(filename), either duping the file descriptor returned, or preserving them. You will need to modify android_get_control_file in libcutils to handle symbolic links though, dvander@ added his effort in aosp/890582 but then abandoned it when he found a workaround.",
+      "range": {
+        "startLine": 5,
+        "startChar": 4,
+        "endLine": 6,
+        "endChar": 14
+      },
+      "revId": "db3607bcea25f28c15aeba73f1d782b151d5accb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
