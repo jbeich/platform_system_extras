@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "57125139_a720fbd6",
+        "filename": "partition_tools/lpdump.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-03-20T20:39:19Z",
+      "side": 0,
+      "message": "Also, I don\u0027t want lpdumpd to read kernel command line here. Otherwise I\u0027ll need to put \n\n    dontaudit lpdumpd proc_cmdline:file r_file_perms;",
+      "parentUuid": "94d0cc0d_1a0635f4",
+      "range": {
+        "startLine": 125,
+        "startChar": 51,
+        "endLine": 125,
+        "endChar": 73
+      },
+      "revId": "b48d79fa91f888fbd3fd63465f9d28b682cd74c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d890c303_9cef4a0a",
         "filename": "partition_tools/lpdump.cc",
         "patchSetId": 3
