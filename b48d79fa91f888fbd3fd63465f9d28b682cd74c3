@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "94d0cc0d_1a0635f4",
+        "filename": "partition_tools/lpdump.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-03-20T20:30:55Z",
+      "side": 0,
+      "message": "I think fs_mgr_get_slot_suffix at very early stages of init; is property service running then?\n\nAlso, on non-A/B devices, this will always be empty, so trying the sysprop then reading kernel command line doesn\u0027t really help. \n\nUnless, of course, if you really want me to do this...",
+      "parentUuid": "e5ed1160_bee15f85",
+      "range": {
+        "startLine": 125,
+        "startChar": 51,
+        "endLine": 125,
+        "endChar": 73
+      },
+      "revId": "b48d79fa91f888fbd3fd63465f9d28b682cd74c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "d890c303_9cef4a0a",
         "filename": "partition_tools/lpdump.cc",
         "patchSetId": 3
@@ -36,6 +60,30 @@
       "writtenOn": "2019-03-20T17:57:06Z",
       "side": 0,
       "message": "ditto on ro.boot.super_partition first?",
+      "range": {
+        "startLine": 126,
+        "startChar": 26,
+        "endLine": 126,
+        "endChar": 57
+      },
+      "revId": "b48d79fa91f888fbd3fd63465f9d28b682cd74c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f7973559_0ba3447e",
+        "filename": "partition_tools/lpdump.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-03-20T20:30:55Z",
+      "side": 0,
+      "message": "Same",
+      "parentUuid": "d890c303_9cef4a0a",
       "range": {
         "startLine": 126,
         "startChar": 26,

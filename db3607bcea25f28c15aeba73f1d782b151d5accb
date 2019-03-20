@@ -71,6 +71,30 @@
     },
     {
       "key": {
+        "uuid": "fbc49e96_8d3c971c",
+        "filename": "partition_tools/lpdump_main.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-03-20T20:30:55Z",
+      "side": 1,
+      "message": "smoreland@ told me there isn\u0027t a way (like HIDL) to get service notifications. Steven?",
+      "parentUuid": "a6daed2a_44b8a34b",
+      "range": {
+        "startLine": 40,
+        "startChar": 8,
+        "endLine": 40,
+        "endChar": 17
+      },
+      "revId": "db3607bcea25f28c15aeba73f1d782b151d5accb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "480f2186_43f0608f",
         "filename": "partition_tools/lpdump_main.cc",
         "patchSetId": 1
@@ -94,6 +118,30 @@
     },
     {
       "key": {
+        "uuid": "ce4bf1c8_69bbbebe",
+        "filename": "partition_tools/lpdump_main.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-03-20T20:30:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "480f2186_43f0608f",
+      "range": {
+        "startLine": 46,
+        "startChar": 8,
+        "endLine": 46,
+        "endChar": 17
+      },
+      "revId": "db3607bcea25f28c15aeba73f1d782b151d5accb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3c0d1408_a4c7798f",
         "filename": "partition_tools/lpdump_main.cc",
         "patchSetId": 1
@@ -114,6 +162,30 @@
       "revId": "db3607bcea25f28c15aeba73f1d782b151d5accb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "34874292_7a1299e7",
+        "filename": "partition_tools/lpdump_main.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-03-20T20:30:55Z",
+      "side": 1,
+      "message": "No such fancy things in binder as in hwbinder, unfortunately... Maybe we can do this in R.\n\nBTW, all this logic of having sysprops to control a service is because we don\u0027t have lazy HALs in binder. :(",
+      "parentUuid": "3c0d1408_a4c7798f",
+      "range": {
+        "startLine": 49,
+        "startChar": 4,
+        "endLine": 49,
+        "endChar": 45
+      },
+      "revId": "db3607bcea25f28c15aeba73f1d782b151d5accb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {

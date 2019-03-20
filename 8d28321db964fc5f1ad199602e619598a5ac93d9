@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "8355745c_54131754",
+        "filename": "partition_tools/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-03-20T20:30:55Z",
+      "side": 1,
+      "message": "See L71 :)",
+      "parentUuid": "f9f2bc75_2d0b6561",
+      "range": {
+        "startLine": 83,
+        "startChar": 4,
+        "endLine": 83,
+        "endChar": 5
+      },
+      "revId": "8d28321db964fc5f1ad199602e619598a5ac93d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4c4644c5_e11264a8",
         "filename": "partition_tools/lpdump.cc",
         "patchSetId": 3
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "a7625019_bbffa22b",
+        "filename": "partition_tools/lpdump.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-03-20T20:30:55Z",
+      "side": 1,
+      "message": "No (even with CL 890582). android_get_control_file() runs realpath on path when *doing the sanity check*, not when computing the fd. Which means, android_get_control_file works on symlinks but not relative paths.\n\nIt can be modified to work on relative paths as well, but I want to keep the logic there simple, and rather resolve the local path here.",
+      "parentUuid": "4c4644c5_e11264a8",
+      "range": {
+        "startLine": 101,
+        "startChar": 0,
+        "endLine": 101,
+        "endChar": 99
+      },
+      "revId": "8d28321db964fc5f1ad199602e619598a5ac93d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7dda3dd0_482f17ca",
         "filename": "partition_tools/lpdump_target.cc",
         "patchSetId": 3
@@ -59,6 +107,30 @@
       "writtenOn": "2019-03-20T17:57:06Z",
       "side": 1,
       "message": "Q: do we want to log this too, to help triage?",
+      "range": {
+        "startLine": 62,
+        "startChar": 8,
+        "endLine": 62,
+        "endChar": 85
+      },
+      "revId": "8d28321db964fc5f1ad199602e619598a5ac93d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7e222657_19cb3f4b",
+        "filename": "partition_tools/lpdump_target.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-03-20T20:30:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7dda3dd0_482f17ca",
       "range": {
         "startLine": 62,
         "startChar": 8,
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "9801e8b7_d936086e",
+        "filename": "partition_tools/lpdumpd.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-03-20T20:30:55Z",
+      "side": 1,
+      "message": "Changed to debug.",
+      "parentUuid": "19b1b737_9785d896",
+      "range": {
+        "startLine": 51,
+        "startChar": 12,
+        "endLine": 51,
+        "endChar": 16
+      },
+      "revId": "8d28321db964fc5f1ad199602e619598a5ac93d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "165557b6_c92505ac",
         "filename": "partition_tools/lpdumpd.cc",
         "patchSetId": 3
@@ -105,6 +201,30 @@
       "writtenOn": "2019-03-20T17:57:06Z",
       "side": 1,
       "message": "Be advised you also see this message reported by init, so this is log stutter. It does, however, confirm that lpdumpd _actually_ started, but that is also reported by init ... Maybe make this VERBOSE logging?",
+      "range": {
+        "startLine": 71,
+        "startChar": 4,
+        "endLine": 71,
+        "endChar": 36
+      },
+      "revId": "8d28321db964fc5f1ad199602e619598a5ac93d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4e9cdf7d_2ebc0396",
+        "filename": "partition_tools/lpdumpd.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-03-20T20:30:55Z",
+      "side": 1,
+      "message": "Changed to verbose",
+      "parentUuid": "165557b6_c92505ac",
       "range": {
         "startLine": 71,
         "startChar": 4,
@@ -151,6 +271,54 @@
       "writtenOn": "2019-03-20T17:57:06Z",
       "side": 1,
       "message": "KISS _a?",
+      "range": {
+        "startLine": 28,
+        "startChar": 94,
+        "endLine": 28,
+        "endChar": 108
+      },
+      "revId": "8d28321db964fc5f1ad199602e619598a5ac93d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "922d230f_25506181",
+        "filename": "partition_tools/lpdumpd.rc",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-03-20T20:30:55Z",
+      "side": 1,
+      "message": "See above",
+      "parentUuid": "175f428d_d0641f47",
+      "range": {
+        "startLine": 28,
+        "startChar": 55,
+        "endLine": 28,
+        "endChar": 69
+      },
+      "revId": "8d28321db964fc5f1ad199602e619598a5ac93d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6d68ca2e_0c2898e2",
+        "filename": "partition_tools/lpdumpd.rc",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-03-20T20:30:55Z",
+      "side": 1,
+      "message": "I have thought about it, but _a actually exists! I want it to resolve to something that absolutely won\u0027t exist. This is only to make host_init_verifier happy; I don\u0027t expect the device to rely on this default value.\n\nI could use _X though, but this is much clearer.",
+      "parentUuid": "194a7017_f5dd86db",
       "range": {
         "startLine": 28,
         "startChar": 94,
