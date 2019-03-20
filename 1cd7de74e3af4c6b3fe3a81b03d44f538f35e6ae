@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "be7076c7_df2b3b98",
+        "filename": "partition_tools/lpdump.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-03-20T22:16:32Z",
+      "side": 1,
+      "message": "Oops you are right. Let me fix this.",
+      "parentUuid": "f8171a90_8e7dd121",
+      "range": {
+        "startLine": 171,
+        "startChar": 21,
+        "endLine": 171,
+        "endChar": 36
+      },
+      "revId": "1cd7de74e3af4c6b3fe3a81b03d44f538f35e6ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c0485710_af6e73a5",
         "filename": "partition_tools/lpdump.cc",
         "patchSetId": 4
@@ -36,6 +60,30 @@
       "writtenOn": "2019-03-20T20:42:58Z",
       "side": 1,
       "message": "register being disturbed: would not needed because android_get_control_file.cpp is written to returns -1 in effect on Windows, Linux, MAC or Android not run under an init environment. Alas, someone removed it from non-android library nonetheless :-(",
+      "range": {
+        "startLine": 255,
+        "startChar": 0,
+        "endLine": 255,
+        "endChar": 18
+      },
+      "revId": "1cd7de74e3af4c6b3fe3a81b03d44f538f35e6ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f2be246d_f5221541",
+        "filename": "partition_tools/lpdump.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-03-20T22:16:32Z",
+      "side": 1,
+      "message": "android_get_control_file is declared but not defined on Windows builds (see libcutils/Android.bp). This should really be !defined(_WIN32), but since I need a #ifdef anyways, and I think there is no point of calling android_get_control_file on Linux host / Mac, I filter those out too.",
+      "parentUuid": "c0485710_af6e73a5",
       "range": {
         "startLine": 255,
         "startChar": 0,
