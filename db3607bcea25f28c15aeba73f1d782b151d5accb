@@ -48,6 +48,98 @@
     },
     {
       "key": {
+        "uuid": "a6daed2a_44b8a34b",
+        "filename": "partition_tools/lpdump_main.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2019-03-20T17:57:06Z",
+      "side": 1,
+      "message": "ick,\n\nthere has to be a way to get an epoll on this, we need something better than this. For instance:\n\nWaitForProperty(\"init.svc.lpdumpd\", \"running\", 3s);\n\n(except property gets set before lpdump_service is active).",
+      "range": {
+        "startLine": 40,
+        "startChar": 8,
+        "endLine": 40,
+        "endChar": 17
+      },
+      "revId": "db3607bcea25f28c15aeba73f1d782b151d5accb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "480f2186_43f0608f",
+        "filename": "partition_tools/lpdump_main.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2019-03-20T17:57:06Z",
+      "side": 1,
+      "message": "base::SetProperty(\"sys.lpdumpd\", \"stop\");\n\nor better yet, create a class that starts the service when instantiated, and stops it in the destructor.",
+      "range": {
+        "startLine": 46,
+        "startChar": 8,
+        "endLine": 46,
+        "endChar": 17
+      },
+      "revId": "db3607bcea25f28c15aeba73f1d782b151d5accb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3c0d1408_a4c7798f",
+        "filename": "partition_tools/lpdump_main.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2019-03-20T17:57:06Z",
+      "side": 1,
+      "message": "Could we keep the service around for a few seconds just in case it is called again? Isn\u0027t there some infrastructure to support \u0027lazy HALs\u0027 you can borrow from?",
+      "range": {
+        "startLine": 49,
+        "startChar": 4,
+        "endLine": 49,
+        "endChar": 45
+      },
+      "revId": "db3607bcea25f28c15aeba73f1d782b151d5accb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "31842904_30f7b42c",
+        "filename": "partition_tools/lpdumpd.rc",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2019-03-20T17:57:06Z",
+      "side": 1,
+      "message": "You need an oom_score_adjust (eg -700) so that lmkd can kill this if it starts taking too much memory, otherwise it is unkillable.",
+      "range": {
+        "startLine": 4,
+        "startChar": 11,
+        "endLine": 4,
+        "endChar": 12
+      },
+      "revId": "db3607bcea25f28c15aeba73f1d782b151d5accb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "31c730e1_759a1e13",
         "filename": "partition_tools/lpdumpd.rc",
         "patchSetId": 1

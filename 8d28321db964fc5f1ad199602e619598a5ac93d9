@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f9f2bc75_2d0b6561",
+        "filename": "partition_tools/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2019-03-20T17:57:06Z",
+      "side": 1,
+      "message": "required: [\"lpdumpd\"],",
+      "range": {
+        "startLine": 83,
+        "startChar": 4,
+        "endLine": 83,
+        "endChar": 5
+      },
+      "revId": "8d28321db964fc5f1ad199602e619598a5ac93d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4c4644c5_e11264a8",
+        "filename": "partition_tools/lpdump.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2019-03-20T17:57:06Z",
+      "side": 1,
+      "message": "Do you really need this?\n\nrealpath is (to be) done in android_get_control_file right?",
+      "range": {
+        "startLine": 101,
+        "startChar": 0,
+        "endLine": 101,
+        "endChar": 99
+      },
+      "revId": "8d28321db964fc5f1ad199602e619598a5ac93d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7dda3dd0_482f17ca",
+        "filename": "partition_tools/lpdump_target.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2019-03-20T17:57:06Z",
+      "side": 1,
+      "message": "Q: do we want to log this too, to help triage?",
+      "range": {
+        "startLine": 62,
+        "startChar": 8,
+        "endLine": 62,
+        "endChar": 85
+      },
+      "revId": "8d28321db964fc5f1ad199602e619598a5ac93d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "19b1b737_9785d896",
+        "filename": "partition_tools/lpdumpd.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2019-03-20T17:57:06Z",
+      "side": 1,
+      "message": "nit: always be critical of how much noise you add to logcat. DEBUG or VERBOSE (user builds suppressed). If you feel it is really necessary, then the message could be less verbose in nature (it already references lpdumpd, and the args should be intuitive  so LOG(DEBUG) \u003c\u003c \"lpdump \" \u003c\u003c base::Join(args, \" \"); with or without the \"lpdump \" sutter string).",
+      "range": {
+        "startLine": 51,
+        "startChar": 12,
+        "endLine": 51,
+        "endChar": 16
+      },
+      "revId": "8d28321db964fc5f1ad199602e619598a5ac93d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "165557b6_c92505ac",
+        "filename": "partition_tools/lpdumpd.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2019-03-20T17:57:06Z",
+      "side": 1,
+      "message": "Be advised you also see this message reported by init, so this is log stutter. It does, however, confirm that lpdumpd _actually_ started, but that is also reported by init ... Maybe make this VERBOSE logging?",
+      "range": {
+        "startLine": 71,
+        "startChar": 4,
+        "endLine": 71,
+        "endChar": 36
+      },
+      "revId": "8d28321db964fc5f1ad199602e619598a5ac93d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "175f428d_d0641f47",
+        "filename": "partition_tools/lpdumpd.rc",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2019-03-20T17:57:06Z",
+      "side": 1,
+      "message": "KISS super?",
+      "range": {
+        "startLine": 28,
+        "startChar": 55,
+        "endLine": 28,
+        "endChar": 69
+      },
+      "revId": "8d28321db964fc5f1ad199602e619598a5ac93d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "194a7017_f5dd86db",
+        "filename": "partition_tools/lpdumpd.rc",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2019-03-20T17:57:06Z",
+      "side": 1,
+      "message": "KISS _a?",
+      "range": {
+        "startLine": 28,
+        "startChar": 94,
+        "endLine": 28,
+        "endChar": 108
+      },
+      "revId": "8d28321db964fc5f1ad199602e619598a5ac93d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
