@@ -141,6 +141,30 @@
       "revId": "b48d79fa91f888fbd3fd63465f9d28b682cd74c3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "00995700_a672c221",
+        "filename": "partition_tools/lpdump.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-03-20T22:45:46Z",
+      "side": 0,
+      "message": "(closing this comment)",
+      "parentUuid": "f7973559_0ba3447e",
+      "range": {
+        "startLine": 126,
+        "startChar": 26,
+        "endLine": 126,
+        "endChar": 57
+      },
+      "revId": "b48d79fa91f888fbd3fd63465f9d28b682cd74c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
