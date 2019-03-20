@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1086583a_8dd6804e",
+        "filename": "partition_tools/lpdump.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2019-03-20T18:30:37Z",
+      "side": 1,
+      "message": "We might be interested in /sys/block/dm-x/queue/minimum_io_size too (these two should be the same, but they do not have to be).",
+      "range": {
+        "startLine": 148,
+        "startChar": 8,
+        "endLine": 148,
+        "endChar": 58
+      },
+      "revId": "a55f74ab8841279fde71377a52e1af1d49ce1611",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "014fb802_d37bfe61",
+        "filename": "partition_tools/lpdump.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2019-03-20T18:30:37Z",
+      "side": 1,
+      "message": "Q: There is not much that can not be used on non-android systems here? or are you expecting DOS executables?",
+      "range": {
+        "startLine": 166,
+        "startChar": 0,
+        "endLine": 166,
+        "endChar": 18
+      },
+      "revId": "a55f74ab8841279fde71377a52e1af1d49ce1611",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4c958062_335a1e35",
+        "filename": "partition_tools/lpdump.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2019-03-20T18:30:37Z",
+      "side": 1,
+      "message": "hard coding this set is bad (tm), so many places have to get updated when we add partitions to the known set.\n\nYou are missing \"oem\" for example, and what of the partitions that the partner might add?\n\nMaybe list all \"ro\" partitions found instead? Add heuristics to use alternate algorithms for overlayfs partitions (which can also be \"ro\" before adb remount)?\n\noverlayfs has logic to determine which filesystems, see fs_mgr_wants_overlayfs, and drop fs_mgr_overlayfs_enabled from the checks ...",
+      "range": {
+        "startLine": 172,
+        "startChar": 12,
+        "endLine": 172,
+        "endChar": 68
+      },
+      "revId": "a55f74ab8841279fde71377a52e1af1d49ce1611",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5179e681_88c3ed1d",
+        "filename": "partition_tools/lpdump.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2019-03-20T18:30:37Z",
+      "side": 1,
+      "message": "overlayfs will report /system, but yet you have a / partition (which will give you accurate statvfs info). However the logic is flawed because if / is fstype \u003d\u003d \"rootfs\", then you _better_ look at \"/system\" instead.",
+      "range": {
+        "startLine": 184,
+        "startChar": 0,
+        "endLine": 185,
+        "endChar": 30
+      },
+      "revId": "a55f74ab8841279fde71377a52e1af1d49ce1611",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cee676ad_bed18e31",
+        "filename": "partition_tools/lpdump.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2019-03-20T18:30:37Z",
+      "side": 1,
+      "message": "In that case, it is better to report the size of the liblp partition itself as it is _much_ more accurate (inode, superblock, metadata blocks notwithstanding). overlayfs reports the size of the backing storage which has nothing to do with the actual content.\n\nOr, you could do a \u0027du -kcx | sed -n \u0027s/^\\([0-9][0-9]*\\)[ \\t].*total$/\\1/p\u0027` and get a better result. The result of that multiplied by 95% will be within +/-3% of the correct value (to account for average inode, superblock and metadata block overhead on an Android composed ext4 filesystem).",
+      "range": {
+        "startLine": 195,
+        "startChar": 0,
+        "endLine": 196,
+        "endChar": 91
+      },
+      "revId": "a55f74ab8841279fde71377a52e1af1d49ce1611",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "54759406_f1dce073",
+        "filename": "partition_tools/lpdump.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2019-03-20T18:30:37Z",
+      "side": 1,
+      "message": "FYI: On dynamic partitions, f_bavail is roughly 0.5% +/- 0.3% ish for ext4 and 0% for squashfs and erofs. If vst.f_bavail \u003e vst.f_blocks you could estimate it thusly. I really do not expect this check to be false though ...",
+      "range": {
+        "startLine": 211,
+        "startChar": 12,
+        "endLine": 211,
+        "endChar": 24
+      },
+      "revId": "a55f74ab8841279fde71377a52e1af1d49ce1611",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
