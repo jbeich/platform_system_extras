@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "3a36279d_e8462f7b",
+        "filename": "partition_tools/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2019-03-20T20:55:01Z",
+      "side": 1,
+      "message": "lol",
+      "parentUuid": "8355745c_54131754",
+      "range": {
+        "startLine": 83,
+        "startChar": 4,
+        "endLine": 83,
+        "endChar": 5
+      },
+      "revId": "8d28321db964fc5f1ad199602e619598a5ac93d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4c4644c5_e11264a8",
         "filename": "partition_tools/lpdump.cc",
         "patchSetId": 3
@@ -84,6 +108,30 @@
       "side": 1,
       "message": "No (even with CL 890582). android_get_control_file() runs realpath on path when *doing the sanity check*, not when computing the fd. Which means, android_get_control_file works on symlinks but not relative paths.\n\nIt can be modified to work on relative paths as well, but I want to keep the logic there simple, and rather resolve the local path here.",
       "parentUuid": "4c4644c5_e11264a8",
+      "range": {
+        "startLine": 101,
+        "startChar": 0,
+        "endLine": 101,
+        "endChar": 99
+      },
+      "revId": "8d28321db964fc5f1ad199602e619598a5ac93d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b831e855_77d5841b",
+        "filename": "partition_tools/lpdump.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2019-03-20T20:55:01Z",
+      "side": 1,
+      "message": "Hmmm, one wants android_get_control_file to be resilient, it should probably test both path and realpath for references to the environment ... ideally _all_ possible paths to the same device ... like Linux open would do for us ...",
+      "parentUuid": "a7625019_bbffa22b",
       "range": {
         "startLine": 101,
         "startChar": 0,

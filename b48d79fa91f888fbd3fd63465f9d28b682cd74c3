@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "a40489cb_6a2e4cb8",
+        "filename": "partition_tools/lpdump.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2019-03-20T20:55:01Z",
+      "side": 0,
+      "message": "There are so many places that call this function in first_stage_init and afterwards. Given that the slot_suffix is so optional, I agree, my concept that property would forgo call to open cmdline is wrong minded.\n\nI think the answer should be that we create fs_mgr_get_slot_suffix_property() and use it accordingly everywhere we are guaranteed to be called after property service starts.\n\nOut of band cleanup, file a bug and move on.",
+      "parentUuid": "57125139_a720fbd6",
+      "range": {
+        "startLine": 125,
+        "startChar": 51,
+        "endLine": 125,
+        "endChar": 73
+      },
+      "revId": "b48d79fa91f888fbd3fd63465f9d28b682cd74c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d890c303_9cef4a0a",
         "filename": "partition_tools/lpdump.cc",
         "patchSetId": 3
