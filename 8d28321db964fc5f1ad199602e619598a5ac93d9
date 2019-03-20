@@ -191,6 +191,29 @@
     },
     {
       "key": {
+        "uuid": "69dec530_6368a942",
+        "filename": "partition_tools/lpdump_target.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2019-03-20T21:31:33Z",
+      "side": 1,
+      "message": "This will leak the service start (!)\n\n(read wanted class that destructor would stop service).",
+      "range": {
+        "startLine": 63,
+        "startChar": 15,
+        "endLine": 63,
+        "endChar": 17
+      },
+      "revId": "8d28321db964fc5f1ad199602e619598a5ac93d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "19b1b737_9785d896",
         "filename": "partition_tools/lpdumpd.cc",
         "patchSetId": 3
@@ -282,6 +305,23 @@
       "revId": "8d28321db964fc5f1ad199602e619598a5ac93d9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "efa4ba2c_c28ab88a",
+        "filename": "partition_tools/lpdumpd.rc",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2019-03-20T21:31:33Z",
+      "side": 1,
+      "message": "lmkd can not kill this, it needs an oom_adjust score.\n\nAll non-essential services _must_ have a score.",
+      "revId": "8d28321db964fc5f1ad199602e619598a5ac93d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     },
     {
       "key": {
