@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "4e19584f_550536d1",
+        "filename": "partition_tools/lpdump.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-03-20T18:58:11Z",
+      "side": 1,
+      "message": "I figured that reading /sys/block/dm-x/queue/minimum_io_size needs a bit more logic. Also, each dm-x correspond to one *logical* partition, so it may need to go to \"partitions\" above.\n\nIf they should be the same, I think it\u0027s okay to just read this one; this is for reporting purposes anyways.",
+      "parentUuid": "1086583a_8dd6804e",
+      "range": {
+        "startLine": 148,
+        "startChar": 8,
+        "endLine": 148,
+        "endChar": 58
+      },
+      "revId": "a55f74ab8841279fde71377a52e1af1d49ce1611",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "014fb802_d37bfe61",
         "filename": "partition_tools/lpdump.cc",
         "patchSetId": 3
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "8ff1895b_7bbd705e",
+        "filename": "partition_tools/lpdump.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-03-20T18:58:11Z",
+      "side": 1,
+      "message": "Yeah; this is built on Windows and host Linux, where system / vendor / etc. does not exist.",
+      "parentUuid": "014fb802_d37bfe61",
+      "range": {
+        "startLine": 166,
+        "startChar": 0,
+        "endLine": 166,
+        "endChar": 18
+      },
+      "revId": "a55f74ab8841279fde71377a52e1af1d49ce1611",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4c958062_335a1e35",
         "filename": "partition_tools/lpdump.cc",
         "patchSetId": 3
@@ -59,6 +107,30 @@
       "writtenOn": "2019-03-20T18:30:37Z",
       "side": 1,
       "message": "hard coding this set is bad (tm), so many places have to get updated when we add partitions to the known set.\n\nYou are missing \"oem\" for example, and what of the partitions that the partner might add?\n\nMaybe list all \"ro\" partitions found instead? Add heuristics to use alternate algorithms for overlayfs partitions (which can also be \"ro\" before adb remount)?\n\noverlayfs has logic to determine which filesystems, see fs_mgr_wants_overlayfs, and drop fs_mgr_overlayfs_enabled from the checks ...",
+      "range": {
+        "startLine": 172,
+        "startChar": 12,
+        "endLine": 172,
+        "endChar": 68
+      },
+      "revId": "a55f74ab8841279fde71377a52e1af1d49ce1611",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "62176b4a_4cdef1f1",
+        "filename": "partition_tools/lpdump.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-03-20T18:58:11Z",
+      "side": 1,
+      "message": "OEM is not a dynamic partition. I\u0027ll change this to something smarter.",
+      "parentUuid": "4c958062_335a1e35",
       "range": {
         "startLine": 172,
         "startChar": 12,
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "6c145156_e47a4c71",
+        "filename": "partition_tools/lpdump.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-03-20T18:58:11Z",
+      "side": 1,
+      "message": "This is mostly for CTS reports, where overlayfs is not mounted.",
+      "parentUuid": "5179e681_88c3ed1d",
+      "range": {
+        "startLine": 184,
+        "startChar": 0,
+        "endLine": 185,
+        "endChar": 30
+      },
+      "revId": "a55f74ab8841279fde71377a52e1af1d49ce1611",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cee676ad_bed18e31",
         "filename": "partition_tools/lpdump.cc",
         "patchSetId": 3
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "65449561_e3e8f6e3",
+        "filename": "partition_tools/lpdump.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-03-20T18:58:11Z",
+      "side": 1,
+      "message": "This is mostly for CTS reports, where overlayfs is not mounted.\n\nI can make this work when overlayfs is mounted in a follow-up CL. I\u0027ll just put this warning for now, okay?",
+      "parentUuid": "cee676ad_bed18e31",
+      "range": {
+        "startLine": 195,
+        "startChar": 0,
+        "endLine": 196,
+        "endChar": 91
+      },
+      "revId": "a55f74ab8841279fde71377a52e1af1d49ce1611",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "54759406_f1dce073",
         "filename": "partition_tools/lpdump.cc",
         "patchSetId": 3
@@ -128,6 +248,30 @@
       "writtenOn": "2019-03-20T18:30:37Z",
       "side": 1,
       "message": "FYI: On dynamic partitions, f_bavail is roughly 0.5% +/- 0.3% ish for ext4 and 0% for squashfs and erofs. If vst.f_bavail \u003e vst.f_blocks you could estimate it thusly. I really do not expect this check to be false though ...",
+      "range": {
+        "startLine": 211,
+        "startChar": 12,
+        "endLine": 211,
+        "endChar": 24
+      },
+      "revId": "a55f74ab8841279fde71377a52e1af1d49ce1611",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a1dbab19_ada2f8da",
+        "filename": "partition_tools/lpdump.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-03-20T18:58:11Z",
+      "side": 1,
+      "message": "Me neither. I just don\u0027t want the \"-\" below to undeerflow and report weird data on CTS reports.",
+      "parentUuid": "54759406_f1dce073",
       "range": {
         "startLine": 211,
         "startChar": 12,
