@@ -1,0 +1,4 @@
+sh_binary_host {
+    name: "ioblame.sh",
+    src: "ioblame.sh",
+}
