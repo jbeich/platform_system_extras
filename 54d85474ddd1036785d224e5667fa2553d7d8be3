@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ec329bb6_91c3fa80",
+        "filename": "checkpoint_gc/checkpoint_gc.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-03-25T16:34:38Z",
+      "side": 1,
+      "message": "missing ${PROGRESS}",
+      "range": {
+        "startLine": 52,
+        "startChar": 40,
+        "endLine": 52,
+        "endChar": 41
+      },
+      "revId": "54d85474ddd1036785d224e5667fa2553d7d8be3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
