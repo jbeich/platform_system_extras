@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "8cf8941b_b6866f5f",
+        "filename": "toolchain-extras/profile-extras.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2019-03-25T23:17:33Z",
+      "side": 1,
+      "message": "init_profile_extras() gets installed at load-time (it\u0027s used to initialize the global __profile_extras down below).  Assuming that no other signal handlers get installed at load time, the only other thing this can break is if this library gets dlopen-ed by a process that already has a signal handler for SIGUSR1.",
+      "parentUuid": "eeba9520_83b70e97",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 0
+      },
+      "revId": "86a73c500e376375c3557003f41f8889b3e3d9bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3bcd1856_e7817421",
         "filename": "toolchain-extras/profile-extras.cpp",
         "patchSetId": 3
