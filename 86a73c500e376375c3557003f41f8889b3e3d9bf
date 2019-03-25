@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "eeba9520_83b70e97",
+        "filename": "toolchain-extras/profile-extras.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1079148
+      },
+      "writtenOn": "2019-03-25T21:00:45Z",
+      "side": 1,
+      "message": "You should probably be using sigaction and storing the full struct sigaction, because the existing handler might do so as well. (And properly handling all of the flags is a pain in the ass, see: https://android.googlesource.com/platform/art/+/refs/heads/master/sigchainlib/sigchain.cc#274 for code that attempts to do so)\n\nWho calls init_profile_extras? Do we actually need to delegate to the existing handler, or can we just assume that if you\u0027re calling this function, you know that SIGUSR1 is getting blown away?",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 0
+      },
+      "revId": "86a73c500e376375c3557003f41f8889b3e3d9bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3bcd1856_e7817421",
         "filename": "toolchain-extras/profile-extras.cpp",
         "patchSetId": 3
