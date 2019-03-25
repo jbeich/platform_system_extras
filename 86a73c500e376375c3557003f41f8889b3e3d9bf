@@ -69,6 +69,30 @@
       "revId": "86a73c500e376375c3557003f41f8889b3e3d9bf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7eeba945_cddc3594",
+        "filename": "toolchain-extras/profile-extras.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2019-03-25T23:55:23Z",
+      "side": 1,
+      "message": "\u003e Maybe?  What are the trade-offs?\n\npro: you get a signal reserved just for you, that you know no-one else can use.\ncon: small bionic change to actually reserve that signal.",
+      "parentUuid": "3bcd1856_e7817421",
+      "range": {
+        "startLine": 85,
+        "startChar": 4,
+        "endLine": 85,
+        "endChar": 23
+      },
+      "revId": "86a73c500e376375c3557003f41f8889b3e3d9bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
