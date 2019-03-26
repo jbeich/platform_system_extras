@@ -49,6 +49,29 @@
     },
     {
       "key": {
+        "uuid": "dcf3d6eb_94fd3025",
+        "filename": "toolchain-extras/profile-extras.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2019-03-26T01:04:27Z",
+      "side": 1,
+      "message": "You can just use __unused because of cdefs.h.",
+      "range": {
+        "startLine": 47,
+        "startChar": 26,
+        "endLine": 47,
+        "endChar": 49
+      },
+      "revId": "86a73c500e376375c3557003f41f8889b3e3d9bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3bcd1856_e7817421",
         "filename": "toolchain-extras/profile-extras.cpp",
         "patchSetId": 3
@@ -108,6 +131,30 @@
       "side": 1,
       "message": "Looks like a real-time signal is the best option then - it removes the pain points with handling previously-registered signal handlers.",
       "parentUuid": "7eeba945_cddc3594",
+      "range": {
+        "startLine": 85,
+        "startChar": 4,
+        "endLine": 85,
+        "endChar": 23
+      },
+      "revId": "86a73c500e376375c3557003f41f8889b3e3d9bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5f2d2f10_b1a5d24b",
+        "filename": "toolchain-extras/profile-extras.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2019-03-26T01:04:27Z",
+      "side": 1,
+      "message": "It sounds like an individualized signal would be very useful here. Thanks for the great suggestion.",
+      "parentUuid": "1e148763_fee097ef",
       "range": {
         "startLine": 85,
         "startChar": 4,
