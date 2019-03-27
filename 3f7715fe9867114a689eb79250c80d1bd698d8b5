@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aee929a4_23adbfe8",
+        "filename": "toolchain-extras/profile-extras.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2019-03-27T22:49:47Z",
+      "side": 1,
+      "message": "`errno \u003d error;`? log either of these (very unlikely) failures?\n\ndoes anything read __profile_extras?",
+      "revId": "3f7715fe9867114a689eb79250c80d1bd698d8b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
