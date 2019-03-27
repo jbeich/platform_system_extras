@@ -16,6 +16,24 @@
       "revId": "3f7715fe9867114a689eb79250c80d1bd698d8b5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "30c3ac26_d253981e",
+        "filename": "toolchain-extras/profile-extras.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2019-03-27T22:54:09Z",
+      "side": 1,
+      "message": "Nothing reads __profile_extras.  I don\u0027t think we could check errno after here, either.\n\nI\u0027ve avoided logging here since there are some platform libraries that don\u0027t use liblog and AFAICT, the vendor libraries can\u0027t access them either.",
+      "parentUuid": "aee929a4_23adbfe8",
+      "revId": "3f7715fe9867114a689eb79250c80d1bd698d8b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
