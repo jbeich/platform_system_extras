@@ -35,14 +35,15 @@ lpmake --device-size 10240000000 \
 
 ## lpdump
 
-lpdump displays pretty-printed partition metadata. It accepts a single argument, which can be:
+lpdump displays pretty-printed partition metadata. It accepts an optional path argument, which can be:
 
 * A path to a non-sparse image from lpmake.
 * A path to a filesystem image or block device.
+* Omitted to automatically load from the super partition when running on device.
 
-It also accepts an optional argument `-s,--slot=N` which can dump a specific metadata slot (the default is 0).
+It also accepts an optional argument `-s,--slot=N` which can dump a specific metadata slot (defaults to the current slot otherwise).
 
-Usage: `lpdump [-s,--slot=N] PATH`
+Usage: `lpdump [-s,--slot=N] [PATH]`
 
 ## lpflash
 

@@ -98,6 +98,9 @@ int main(int argc, char* argv[]) {
     int rv;
     int index;
     uint32_t slot = 0;
+#ifdef __ANDROID__
+    slot = SlotNumberForSlotSuffix(fs_mgr_get_slot_suffix());
+#endif
     while ((rv = getopt_long_only(argc, argv, "s:h", options, &index)) != -1) {
         switch (rv) {
             case 'h':
@@ -121,8 +124,7 @@ int main(int argc, char* argv[]) {
         }
     } else {
 #ifdef __ANDROID__
-        auto slot_number = SlotNumberForSlotSuffix(fs_mgr_get_slot_suffix());
-        pt = ReadMetadata(fs_mgr_get_super_partition_name(), slot_number);
+        pt = ReadMetadata(fs_mgr_get_super_partition_name(), slot);
 #else
         return usage(argc, argv);
 #endif
