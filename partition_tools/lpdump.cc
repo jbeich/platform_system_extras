@@ -93,14 +93,14 @@ static std::string GetSlotSuffix() {
     return base::GetProperty("ro.boot.slot_suffix", "");
 }
 
-// Reimplementation of fs_mgr_get_super_partition_name() without reading
-// kernel commandline. Always return the super partition at current slot.
-static std::string GetSuperPartionName() {
+// Reimplementation of fs_mgr_get_super_partition_name() without reading kernel commandline.
+// Returns the super partition at the given slot if applicable.
+static std::string GetSuperPartionName(uint32_t slot) {
     std::string super_partition = base::GetProperty("ro.boot.super_partition", "");
     if (super_partition.empty()) {
         return LP_METADATA_DEFAULT_PARTITION_NAME;
     }
-    return super_partition + GetSlotSuffix();
+    return super_partition + SlotSuffixForSlotNumber(slot);
 }
 
 static std::string RemoveSuffix(const std::string& s, const std::string& suffix) {
@@ -280,6 +280,9 @@ int LpdumpMain(int argc, char* argv[], std::ostream& cout, std::ostream& cerr) {
     int rv;
     int index;
     uint32_t slot = 0;
+#ifdef __ANDROID__
+    slot = SlotNumberForSlotSuffix(GetSlotSuffix());
+#endif
     bool json = false;
     while ((rv = getopt_long_only(argc, argv, "s:jh", options, &index)) != -1) {
         switch (rv) {
@@ -306,8 +309,7 @@ int LpdumpMain(int argc, char* argv[], std::ostream& cout, std::ostream& cerr) {
         }
     } else {
 #ifdef __ANDROID__
-        auto slot_number = SlotNumberForSlotSuffix(GetSlotSuffix());
-        pt = ReadMetadata(GetSuperPartionName(), slot_number);
+        pt = ReadMetadata(GetSuperPartionName(slot), slot);
 #else
         return usage(argc, argv, cerr);
 #endif
