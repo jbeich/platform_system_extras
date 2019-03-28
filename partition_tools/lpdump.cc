@@ -280,6 +280,9 @@ int LpdumpMain(int argc, char* argv[], std::ostream& cout, std::ostream& cerr) {
     int rv;
     int index;
     uint32_t slot = 0;
+#ifdef __ANDROID__
+    slot = SlotNumberForSlotSuffix(GetSlotSuffix());
+#endif
     bool json = false;
     while ((rv = getopt_long_only(argc, argv, "s:jh", options, &index)) != -1) {
         switch (rv) {
@@ -306,8 +309,7 @@ int LpdumpMain(int argc, char* argv[], std::ostream& cout, std::ostream& cerr) {
         }
     } else {
 #ifdef __ANDROID__
-        auto slot_number = SlotNumberForSlotSuffix(GetSlotSuffix());
-        pt = ReadMetadata(GetSuperPartionName(), slot_number);
+        pt = ReadMetadata(GetSuperPartionName(), slot);
 #else
         return usage(argc, argv, cerr);
 #endif
