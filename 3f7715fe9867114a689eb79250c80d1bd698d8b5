@@ -34,6 +34,24 @@
       "revId": "3f7715fe9867114a689eb79250c80d1bd698d8b5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "19fdb8e0_b42eccad",
+        "filename": "toolchain-extras/profile-extras.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2019-03-28T21:12:39Z",
+      "side": 1,
+      "message": "Added comment about how the constructor gets linked in. I also switched to __attribute__((constructor)) and removed the extra global variable.",
+      "parentUuid": "30c3ac26_d253981e",
+      "revId": "3f7715fe9867114a689eb79250c80d1bd698d8b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
