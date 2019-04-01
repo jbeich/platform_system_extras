@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "391e5909_ffef931a",
+        "filename": "cppreopts/cppreopts.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2019-04-01T20:20:06Z",
+      "side": 1,
+      "message": "Can we do sync(2) after all the work being done?",
+      "range": {
+        "startLine": 65,
+        "startChar": 2,
+        "endLine": 65,
+        "endChar": 27
+      },
+      "revId": "a1dced2b52f1fc124ec54f93aee39c2280f0bb56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
