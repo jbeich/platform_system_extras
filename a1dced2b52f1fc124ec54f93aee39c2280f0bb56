@@ -94,6 +94,30 @@
       "revId": "a1dced2b52f1fc124ec54f93aee39c2280f0bb56",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "014fa9c1_98543b19",
+        "filename": "cppreopts/cppreopts.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1105075
+      },
+      "writtenOn": "2019-04-01T23:30:28Z",
+      "side": 1,
+      "message": "let\u0027s sync offline, but I think the directory is created before this point,\nhttps://cs.corp.google.com/android/system/core/rootdir/init.rc?rcl\u003d73a9681319759a978136d9a5dfbc256e56b9cb7b\u0026l\u003d528\nand the worst case we will  lost the folder and run dex2opt on next boot?",
+      "parentUuid": "ab9d7a7d_175d90d5",
+      "range": {
+        "startLine": 65,
+        "startChar": 2,
+        "endLine": 65,
+        "endChar": 27
+      },
+      "revId": "a1dced2b52f1fc124ec54f93aee39c2280f0bb56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
