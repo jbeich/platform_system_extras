@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "19ba367c_e1d832ea",
+        "filename": "preopt2cachename/preopt2cachename.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1038443
+      },
+      "writtenOn": "2019-04-09T17:26:13Z",
+      "side": 1,
+      "message": "How is that accepting 8 ?",
+      "range": {
+        "startLine": 38,
+        "startChar": 13,
+        "endLine": 38,
+        "endChar": 79
+      },
+      "revId": "82c099bbad33647923628879dcf22a00b46f902f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
