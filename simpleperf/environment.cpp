@@ -261,10 +261,11 @@ std::vector<pid_t> GetAllProcesses() {
 
 bool GetThreadMmapsInProcess(pid_t pid, std::vector<ThreadMmap>* thread_mmaps) {
   thread_mmaps->clear();
-  return android::procinfo::ReadProcessMaps(pid,
-      [&](uint64_t start, uint64_t end, uint16_t flags, uint64_t pgoff, const char* name) {
+  return android::procinfo::ReadProcessMaps(
+      pid, [&](uint64_t start, uint64_t end, uint16_t flags, uint64_t pgoff,
+               ino_t, const char* name) {
         thread_mmaps->emplace_back(start, end - start, pgoff, name, flags);
-  });
+      });
 }
 
 bool GetKernelBuildId(BuildId* build_id) {
@@ -622,6 +623,10 @@ std::set<pid_t> WaitForAppProcesses(const std::string& package_name) {
   }
 }
 
+bool IsAppDebuggable(const std::string& package_name) {
+  return Workload::RunCmd({"run-as", package_name, "echo", ">/dev/null", "2>/dev/null"}, false);
+}
+
 namespace {
 
 class InAppRunner {
@@ -766,7 +771,7 @@ class RunAs : public InAppRunner {
 
 bool RunAs::Prepare() {
   // Test if run-as can access the package.
-  if (!Workload::RunCmd({"run-as", package_name_, "echo", ">/dev/null", "2>/dev/null"}, false)) {
+  if (!IsAppDebuggable(package_name_)) {
     return false;
   }
   // run-as can't run /data/local/tmp/simpleperf directly. So copy simpleperf binary if needed.

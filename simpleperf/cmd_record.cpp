@@ -206,19 +206,24 @@ class RecordCommand : public Command {
 "                        dumped in perf.data, to support reporting in another\n"
 "                        environment.\n"
 "-o record_file_name    Set record file name, default is perf.data.\n"
-"--exit-with-parent            Stop recording when the process starting\n"
-"                              simpleperf dies.\n"
 "--size-limit SIZE[K|M|G]      Stop recording after SIZE bytes of records.\n"
 "                              Default is unlimited.\n"
-"--start_profiling_fd fd_no    After starting profiling, write \"STARTED\" to\n"
-"                              <fd_no>, then close <fd_no>.\n"
 "--symfs <dir>    Look for files with symbols relative to this directory.\n"
 "                 This option is used to provide files with symbol table and\n"
 "                 debug information, which are used for unwinding and dumping symbols.\n"
+"\n"
+"Other options:\n"
+"--exit-with-parent            Stop recording when the process starting\n"
+"                              simpleperf dies.\n"
+"--start_profiling_fd fd_no    After starting profiling, write \"STARTED\" to\n"
+"                              <fd_no>, then close <fd_no>.\n"
+"--stdio-controls-profiling    Use stdin/stdout to pause/resume profiling.\n"
+#if defined(__ANDROID__)
+"--in-app                      We are already running in the app's context.\n"
+"--tracepoint-events file_name   Read tracepoint events from [file_name] instead of tracefs.\n"
+#endif
 #if 0
 // Below options are only used internally and shouldn't be visible to the public.
-"--in-app         We are already running in the app's context.\n"
-"--tracepoint-events file_name   Read tracepoint events from [file_name] instead of tracefs.\n"
 "--out-fd <fd>    Write perf.data to a file descriptor.\n"
 "--stop-signal-fd <fd>  Stop recording when fd is readable.\n"
 #endif
@@ -240,7 +245,6 @@ class RecordCommand : public Command {
         record_filename_("perf.data"),
         sample_record_count_(0),
         lost_record_count_(0),
-        start_profiling_fd_(-1),
         in_app_context_(false),
         trace_offcpu_(false),
         exclude_kernel_callchain_(false),
@@ -280,6 +284,7 @@ class RecordCommand : public Command {
   bool SaveRecordAfterUnwinding(Record* record);
   bool SaveRecordWithoutUnwinding(Record* record);
   bool ProcessJITDebugInfo(const std::vector<JITDebugInfo>& debug_info, bool sync_kernel_records);
+  bool ProcessControlCmd(IOEventLoop* loop);
 
   void UpdateRecord(Record* record);
   bool UnwindRecord(SampleRecord& r);
@@ -318,7 +323,9 @@ class RecordCommand : public Command {
 
   uint64_t sample_record_count_;
   uint64_t lost_record_count_;
-  int start_profiling_fd_;
+  android::base::unique_fd start_profiling_fd_;
+  bool stdio_controls_profiling_ = false;
+
   std::string app_package_name_;
   bool in_app_context_;
   bool trace_offcpu_;
@@ -506,6 +513,11 @@ bool RecordCommand::PrepareRecording(Workload* workload) {
       return false;
     }
   }
+  if (stdio_controls_profiling_) {
+    if (!loop->AddReadEvent(0, [&]() { return ProcessControlCmd(loop); })) {
+      return false;
+    }
+  }
   if (jit_debug_reader_) {
     auto callback = [this](const std::vector<JITDebugInfo>& debug_info, bool sync_kernel_records) {
       return ProcessJITDebugInfo(debug_info, sync_kernel_records);
@@ -539,11 +551,15 @@ bool RecordCommand::DoRecording(Workload* workload) {
   if (workload != nullptr && !workload->IsStarted() && !workload->Start()) {
     return false;
   }
-  if (start_profiling_fd_ != -1) {
+  if (start_profiling_fd_.get() != -1) {
     if (!android::base::WriteStringToFd("STARTED", start_profiling_fd_)) {
       PLOG(ERROR) << "failed to write to start_profiling_fd_";
     }
-    close(start_profiling_fd_);
+    start_profiling_fd_.reset();
+  }
+  if (stdio_controls_profiling_) {
+    printf("started\n");
+    fflush(stdout);
   }
   if (!event_selection_set_.GetIOEventLoop()->RunLoop()) {
     return false;
@@ -852,9 +868,13 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
         return false;
       }
     } else if (args[i] == "--start_profiling_fd") {
-      if (!GetUintOption(args, &i, &start_profiling_fd_)) {
+      int fd;
+      if (!GetUintOption(args, &i, &fd)) {
         return false;
       }
+      start_profiling_fd_.reset(fd);
+    } else if (args[i] == "--stdio-controls-profiling") {
+      stdio_controls_profiling_ = true;
     } else if (args[i] == "--stop-signal-fd") {
       int fd;
       if (!GetUintOption(args, &i, &fd)) {
@@ -964,7 +984,7 @@ bool RecordCommand::AdjustPerfEventLimit() {
     set_prop = true;
   }
 
-  if (GetAndroidVersion() >= kAndroidVersionP + 1 && set_prop) {
+  if (GetAndroidVersion() >= kAndroidVersionP + 1 && set_prop && !in_app_context_) {
     return SetPerfEventLimits(std::max(max_sample_freq_, cur_max_freq), cpu_time_max_percent_,
                               std::max(mlock_kb, cur_mlock_kb));
   }
@@ -1295,6 +1315,31 @@ bool RecordCommand::ProcessJITDebugInfo(const std::vector<JITDebugInfo>& debug_i
     return false;
   }
   return true;
+}
+
+bool RecordCommand::ProcessControlCmd(IOEventLoop* loop) {
+  char* line = nullptr;
+  size_t line_length = 0;
+  if (getline(&line, &line_length, stdin) == -1) {
+    free(line);
+    // When the simpleperf Java API destroys the simpleperf process, it also closes the stdin pipe.
+    // So we may see EOF of stdin.
+    return loop->ExitLoop();
+  }
+  std::string cmd = android::base::Trim(line);
+  free(line);
+  LOG(DEBUG) << "process control cmd: " << cmd;
+  bool result = false;
+  if (cmd == "pause") {
+    result = event_selection_set_.SetEnableEvents(false);
+  } else if (cmd == "resume") {
+    result = event_selection_set_.SetEnableEvents(true);
+  } else {
+    LOG(ERROR) << "unknown control cmd: " << cmd;
+  }
+  printf("%s\n", result ? "ok" : "error");
+  fflush(stdout);
+  return result;
 }
 
 template <class RecordType>

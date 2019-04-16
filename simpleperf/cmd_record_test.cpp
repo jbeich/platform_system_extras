@@ -395,12 +395,13 @@ static bool CheckDumpedSymbols(const std::string& path, bool allow_dumped_symbol
   std::string file_path;
   uint32_t file_type;
   uint64_t min_vaddr;
+  uint64_t file_offset_of_min_vaddr;
   std::vector<Symbol> symbols;
   std::vector<uint64_t> dex_file_offsets;
   size_t read_pos = 0;
   bool has_dumped_symbols = false;
-  while (reader->ReadFileFeature(read_pos, &file_path, &file_type, &min_vaddr, &symbols,
-                                 &dex_file_offsets)) {
+  while (reader->ReadFileFeature(read_pos, &file_path, &file_type, &min_vaddr,
+                                 &file_offset_of_min_vaddr, &symbols, &dex_file_offsets)) {
     if (!symbols.empty()) {
       has_dumped_symbols = true;
     }
@@ -447,12 +448,13 @@ TEST(record_cmd, dump_kernel_symbols) {
   std::string file_path;
   uint32_t file_type;
   uint64_t min_vaddr;
+  uint64_t file_offset_of_min_vaddr;
   std::vector<Symbol> symbols;
   std::vector<uint64_t> dex_file_offsets;
   size_t read_pos = 0;
   bool has_kernel_symbols = false;
-  while (reader->ReadFileFeature(read_pos, &file_path, &file_type, &min_vaddr, &symbols,
-                                 &dex_file_offsets)) {
+  while (reader->ReadFileFeature(read_pos, &file_path, &file_type, &min_vaddr,
+                                 &file_offset_of_min_vaddr, &symbols, &dex_file_offsets)) {
     if (file_type == DSO_KERNEL && !symbols.empty()) {
       has_kernel_symbols = true;
     }
@@ -704,6 +706,35 @@ TEST(record_cmd, kernel_bug_making_zero_dyn_size) {
     }
     return true;
   }));
+  ASSERT_TRUE(has_sample);
+}
+
+TEST(record_cmd, kernel_bug_making_zero_dyn_size_for_kernel_samples) {
+  // Test a kernel bug that makes zero dyn_size for syscalls of 32-bit applications in 64-bit
+  // kernels. If it fails, please cherry pick below kernel patch:
+  // 02e184476eff8 perf/core: Force USER_DS when recording user stack data
+  TEST_REQUIRE_HW_COUNTER();
+  TEST_REQUIRE_HOST_ROOT();
+  std::vector<std::unique_ptr<Workload>> workloads;
+  CreateProcesses(1, &workloads);
+  std::string pid = std::to_string(workloads[0]->GetPid());
+  TemporaryFile tmpfile;
+  ASSERT_TRUE(RecordCmd()->Run({"-e", "sched:sched_switch", "-o", tmpfile.path, "-p", pid,
+                                "--call-graph", "dwarf,8", "--no-unwind", "--duration", "1"}));
+  std::unique_ptr<RecordFileReader> reader = RecordFileReader::CreateInstance(tmpfile.path);
+  ASSERT_TRUE(reader);
+  bool has_sample = false;
+  ASSERT_TRUE(reader->ReadDataSection([&](std::unique_ptr<Record> r) {
+    if (r->type() == PERF_RECORD_SAMPLE && r->InKernel()) {
+      SampleRecord* sr = static_cast<SampleRecord*>(r.get());
+      if (sr->stack_user_data.dyn_size == 0) {
+        return false;
+      }
+      has_sample = true;
+    }
+    return true;
+  }));
+  ASSERT_TRUE(has_sample);
 }
 
 TEST(record_cmd, cpu_percent_option) {
@@ -737,13 +768,14 @@ static void TestRecordingApps(const std::string& app_name) {
   std::string file_path;
   uint32_t file_type;
   uint64_t min_vaddr;
+  uint64_t file_offset_of_min_vaddr;
   std::vector<Symbol> symbols;
   std::vector<uint64_t> dex_file_offsets;
   size_t read_pos = 0;
   bool has_java_symbol = false;
   ASSERT_TRUE(reader->HasFeature(FEAT_FILE));
-  while (reader->ReadFileFeature(read_pos, &file_path, &file_type, &min_vaddr, &symbols,
-                                 &dex_file_offsets)) {
+  while (reader->ReadFileFeature(read_pos, &file_path, &file_type, &min_vaddr,
+                                 &file_offset_of_min_vaddr, &symbols, &dex_file_offsets)) {
     for (const auto& symbol : symbols) {
       const char* name = symbol.DemangledName();
       if (strstr(name, expected_class_name.c_str()) != nullptr &&
