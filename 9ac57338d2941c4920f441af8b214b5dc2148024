@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "301f0fe9_cbdea64d",
+        "filename": "partition_tools/lpunpack.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2019-04-25T20:22:09Z",
+      "side": 1,
+      "message": "#include \u003csys/types.h\u003e\n#include \u003cunistd.h\u003e\n\nb/c of lseek\n\n#include \u003cfcntl.h\u003e\n\nb/c of open",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 21
+      },
+      "revId": "9ac57338d2941c4920f441af8b214b5dc2148024",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1d71d063_f0f6cfde",
+        "filename": "partition_tools/lpunpack.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2019-04-25T20:22:09Z",
+      "side": 1,
+      "message": "help should return back without an error (return EX_OK;)",
+      "range": {
+        "startLine": 94,
+        "startChar": 16,
+        "endLine": 94,
+        "endChar": 41
+      },
+      "revId": "9ac57338d2941c4920f441af8b214b5dc2148024",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
