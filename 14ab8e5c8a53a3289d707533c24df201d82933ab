@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e870051f_fa3f9d71",
+        "filename": "simpleperf/app_api/cpp/simpleperf.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2019-05-01T00:05:45Z",
+      "side": 1,
+      "message": "std::vector\u003cchar*\u003e instead? If you used this for the parameter type for args, you don\u0027t need to copy the pointer, or you can keep the std::string and just use .c_str() for accessing the raw char* data there.",
+      "revId": "14ab8e5c8a53a3289d707533c24df201d82933ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
