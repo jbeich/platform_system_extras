@@ -16,6 +16,24 @@
       "revId": "14ab8e5c8a53a3289d707533c24df201d82933ab",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fc2b75ae_ce5654c1",
+        "filename": "simpleperf/app_api/cpp/simpleperf.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2019-05-01T20:54:55Z",
+      "side": 1,
+      "message": "Done. it needs to be std::vector\u003cconst char*\u003e for string literals. But I think it\u0027s fine to use const_cast when using the vector data.",
+      "parentUuid": "e870051f_fa3f9d71",
+      "revId": "14ab8e5c8a53a3289d707533c24df201d82933ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
