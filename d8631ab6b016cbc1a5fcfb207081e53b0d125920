@@ -70,6 +70,30 @@
       "revId": "d8631ab6b016cbc1a5fcfb207081e53b0d125920",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "263799f5_0da4ecd3",
+        "filename": "simpleperf/cmd_report.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2019-05-06T23:35:22Z",
+      "side": 1,
+      "message": "1. It\u0027s posix standard and linux kernel decide to use pid_t(int) to represent a thread id.\n\n2. I don\u0027t know why perf records decide to use u32 instead of int to store thread ids. I guess they also think it shouldn\u0027t be negative. But since the kernel uses int for thread ids internally, it\u0027s always safe to use %d to print a reasonable thread id.\n\n3. If in some error cases, the thread id is negative. It\u0027s better for debugging to print it as a negative number instead of a big positive number.",
+      "parentUuid": "72605d30_a8fcabf6",
+      "range": {
+        "startLine": 65,
+        "startChar": 2,
+        "endLine": 65,
+        "endChar": 5
+      },
+      "revId": "d8631ab6b016cbc1a5fcfb207081e53b0d125920",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
