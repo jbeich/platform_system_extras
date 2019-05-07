@@ -94,6 +94,30 @@
       "revId": "d8631ab6b016cbc1a5fcfb207081e53b0d125920",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "17d7df78_4ea05084",
+        "filename": "simpleperf/cmd_report.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2019-05-07T00:03:59Z",
+      "side": 1,
+      "message": "Perfect. Thanks for clarifying everything here, so that we know it is safe.",
+      "parentUuid": "263799f5_0da4ecd3",
+      "range": {
+        "startLine": 65,
+        "startChar": 2,
+        "endLine": 65,
+        "endChar": 5
+      },
+      "revId": "d8631ab6b016cbc1a5fcfb207081e53b0d125920",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
