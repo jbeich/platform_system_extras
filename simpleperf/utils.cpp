@@ -106,7 +106,7 @@ ArchiveHelper::~ArchiveHelper() {
 bool ArchiveHelper::IterateEntries(
     const std::function<bool(ZipEntry&, const std::string&)>& callback) {
   void* iteration_cookie;
-  if (StartIteration(handle_, &iteration_cookie, nullptr, nullptr) < 0) {
+  if (StartIteration(handle_, &iteration_cookie) < 0) {
     LOG(ERROR) << "Failed to iterate " << filename_;
     return false;
   }
@@ -128,7 +128,7 @@ bool ArchiveHelper::IterateEntries(
 }
 
 bool ArchiveHelper::FindEntry(const std::string& name, ZipEntry* entry) {
-  int result = ::FindEntry(handle_, ZipString(name.c_str()), entry);
+  int result = ::FindEntry(handle_, name, entry);
   if (result != 0) {
     LOG(ERROR) << "Failed to find " << name << " in " << filename_;
     return false;
