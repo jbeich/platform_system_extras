@@ -23,6 +23,7 @@
 #if defined(__linux__)
 #include <sys/syscall.h>
 #include <unistd.h>
+#include <sys/prctl.h>
 #endif
 
 #include <functional>
@@ -34,6 +35,11 @@
 
 #include "build_id.h"
 #include "perf_regs.h"
+
+#if defined(__ANDROID__)
+    #define PR_SET_VMA              0x53564d41
+    #define PR_SET_VMA_ANON_NAME    0
+#endif
 
 std::vector<int> GetOnlineCpus();
 std::vector<int> GetCpusFromString(const std::string& s);
