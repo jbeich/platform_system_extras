@@ -63,6 +63,9 @@ static void ThreadA(ThreadArg* thread_arg) {
     array[i].start_system_time_in_ns = GetSystemClock();
     array[i].mmap_start_addr =
         mmap(NULL, 4096, PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
+#if defined(__ANDROID__)
+    prctl(PR_SET_VMA, PR_SET_VMA_ANON_NAME,  array[i].mmap_start_addr, 4096, "anony_map_region");
+#endif
     if (array[i].mmap_start_addr == MAP_FAILED) {
       PLOG(ERROR) << "mmap() failed";
       thread_arg->has_error = true;
