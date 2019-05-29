@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cf41ef2f_0af11075",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2019-05-29T22:23:07Z",
+      "side": 1,
+      "message": "I see. It mostly depends on whether the mmap grows bottom up or top down. If top down, the merged addr doesn\u0027t change, record addr is the same as mmap returned addr. If bottom up, then record addr doesn\u0027t match mmap returned addr. I never reproduced this because arm/arm64/x86 all use top down mmap by default.\n\nI wonder how you reproduced this problem? If it is when running CtsSimpleperfTestCases without any enviroment changes, then I\u0027d like to have this patch. If when using simpleperf manually, the simpleperf in aosp_master has removed perf_clock.cpp, so no need to change.",
+      "range": {
+        "startLine": 12,
+        "startChar": 13,
+        "endLine": 12,
+        "endChar": 14
+      },
+      "revId": "7e430a8c2434a6e1882abbbc5ae837d17816d8e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b853ea87_ff1ec644",
+        "filename": "simpleperf/perf_clock.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2019-05-29T22:23:07Z",
+      "side": 1,
+      "message": "move to after L75? So it won\u0027t affect array[i].end_system_time_in_ns.",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 68,
+        "endChar": 6
+      },
+      "revId": "7e430a8c2434a6e1882abbbc5ae837d17816d8e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
