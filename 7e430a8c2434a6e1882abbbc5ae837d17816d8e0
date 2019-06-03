@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ba1e15c5_aa344e5f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1506239
+      },
+      "writtenOn": "2019-06-03T02:06:44Z",
+      "side": 1,
+      "message": "Yes,this issue is observed when running the CtsSimpleperfTestCases  with no environment changes.",
+      "parentUuid": "cf41ef2f_0af11075",
+      "range": {
+        "startLine": 12,
+        "startChar": 13,
+        "endLine": 12,
+        "endChar": 14
+      },
+      "revId": "7e430a8c2434a6e1882abbbc5ae837d17816d8e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b853ea87_ff1ec644",
         "filename": "simpleperf/perf_clock.cpp",
         "patchSetId": 1
