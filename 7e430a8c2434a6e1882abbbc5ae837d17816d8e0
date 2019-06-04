@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "a0e5db93_07e2fde9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2019-06-04T17:24:11Z",
+      "side": 1,
+      "message": "Adding prctl() only prevents vma merge between mmap() calls in threadA function, when mmap grows bottom up.\n\nCan you specify if the mmap grows bottom up or top down? If bottom up, why? And the detail of how a vma merge happens that causes the problem? Is the vma merge happens between mmap() calls in threadA function, or between it with always existing maps?",
+      "parentUuid": "ba1e15c5_aa344e5f",
+      "range": {
+        "startLine": 12,
+        "startChar": 13,
+        "endLine": 12,
+        "endChar": 14
+      },
+      "revId": "7e430a8c2434a6e1882abbbc5ae837d17816d8e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b853ea87_ff1ec644",
         "filename": "simpleperf/perf_clock.cpp",
         "patchSetId": 1
