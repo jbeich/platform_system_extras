@@ -198,6 +198,9 @@ class RecordCommand : public Command {
 "--callchain-joiner-min-matching-nodes count\n"
 "               When callchain joiner is used, set the matched nodes needed to join\n"
 "               callchains. The count should be >= 1. By default it is 1.\n"
+"--no-cut-samples       By default, part of the stack data in samples will be dropped\n"
+"                       when the record buffer is near overflow. This option drops\n"
+"                       the whole sample instead of part of its stack data.\n"
 "\n"
 "Recording file options:\n"
 "--no-dump-kernel-symbols  Don't dump kernel symbols in perf.data. By default\n"
@@ -338,6 +341,7 @@ class RecordCommand : public Command {
   bool allow_callchain_joiner_;
   size_t callchain_joiner_min_matching_nodes_;
   std::unique_ptr<CallChainJoiner> callchain_joiner_;
+  bool allow_cutting_samples_ = true;
 
   std::unique_ptr<JITDebugReader> jit_debug_reader_;
   uint64_t last_record_timestamp_;  // used to insert Mmap2Records for JIT debug info
@@ -469,7 +473,7 @@ bool RecordCommand::PrepareRecording(Workload* workload) {
   size_t record_buffer_size = system_wide_collection_ ? kSystemWideRecordBufferSize
                                                       : kRecordBufferSize;
   if (!event_selection_set_.MmapEventFiles(mmap_page_range_.first, mmap_page_range_.second,
-                                           record_buffer_size)) {
+                                           record_buffer_size, allow_cutting_samples_)) {
     return false;
   }
   auto callback =
@@ -833,6 +837,8 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
       if (!GetUintOption(args, &i, &callchain_joiner_min_matching_nodes_, 1)) {
         return false;
       }
+    } else if (args[i] == "--no-cut-samples") {
+      allow_cutting_samples_ = false;
     } else if (args[i] == "-o") {
       if (!NextArgumentOrError(args, &i)) {
         return false;
