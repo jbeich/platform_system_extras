@@ -22,6 +22,30 @@
       "revId": "9eb836b8615c4bc7f088ee1aff6c20cd268e57d0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "358314c7_a9a25c70",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2019-06-04T21:14:14Z",
+      "side": 1,
+      "message": "Added more comments.",
+      "parentUuid": "1feb3363_afe9a4e1",
+      "range": {
+        "startLine": 202,
+        "startChar": 65,
+        "endLine": 203,
+        "endChar": 77
+      },
+      "revId": "9eb836b8615c4bc7f088ee1aff6c20cd268e57d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
