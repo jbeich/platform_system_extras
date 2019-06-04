@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1feb3363_afe9a4e1",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1041833
+      },
+      "writtenOn": "2019-06-04T19:26:26Z",
+      "side": 1,
+      "message": "Technically this isn\u0027t true. The sample may or may not be dropped, depending on the buffer state. I don\u0027t know how to formulate this correctly in one sentence, though. :-)",
+      "range": {
+        "startLine": 202,
+        "startChar": 65,
+        "endLine": 203,
+        "endChar": 77
+      },
+      "revId": "9eb836b8615c4bc7f088ee1aff6c20cd268e57d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
