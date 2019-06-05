@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "a8380f59_fb00a473",
+        "filename": "memory_replay/TraceBenchmark.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2019-06-05T21:56:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e34d8b1_20de40da",
+      "revId": "4465885943f48cee5febe3444a12da38809a599e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2d2c52f1_23ee5c12",
         "filename": "memory_replay/TraceBenchmark.cpp",
         "patchSetId": 5
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "37d1b132_0cd9e449",
+        "filename": "memory_replay/TraceBenchmark.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2019-06-05T21:56:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2d2c52f1_23ee5c12",
+      "revId": "4465885943f48cee5febe3444a12da38809a599e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1b5c43a3_ee6bdbaa",
         "filename": "memory_replay/TraceBenchmark.cpp",
         "patchSetId": 5
@@ -47,6 +83,30 @@
       "writtenOn": "2019-06-05T02:21:23Z",
       "side": 1,
       "message": "(there\u0027s %ms if you\u0027d rather have libc allocate for you.)",
+      "range": {
+        "startLine": 121,
+        "startChar": 14,
+        "endLine": 121,
+        "endChar": 17
+      },
+      "revId": "4465885943f48cee5febe3444a12da38809a599e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "91a7bf96_d955f65a",
+        "filename": "memory_replay/TraceBenchmark.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2019-06-05T21:56:16Z",
+      "side": 1,
+      "message": "I\u0027d prefer not so I don\u0027t have to worry about deallocating. And this will occur many, many times, so avoiding an allocation seems like a good idea.",
+      "parentUuid": "1b5c43a3_ee6bdbaa",
       "range": {
         "startLine": 121,
         "startChar": 14,
