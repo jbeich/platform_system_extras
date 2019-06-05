@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e34d8b1_20de40da",
+        "filename": "memory_replay/TraceBenchmark.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2019-06-05T02:21:23Z",
+      "side": 1,
+      "message": "i think i broke you in the meantime... StartIteration now takes two std::string_view args instead, that default to \"\". so just remove `, nullptr, nullptr` and this should work again?",
+      "revId": "4465885943f48cee5febe3444a12da38809a599e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2d2c52f1_23ee5c12",
+        "filename": "memory_replay/TraceBenchmark.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2019-06-05T02:21:23Z",
+      "side": 1,
+      "message": "this should be std::string now.",
+      "revId": "4465885943f48cee5febe3444a12da38809a599e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1b5c43a3_ee6bdbaa",
+        "filename": "memory_replay/TraceBenchmark.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2019-06-05T02:21:23Z",
+      "side": 1,
+      "message": "(there\u0027s %ms if you\u0027d rather have libc allocate for you.)",
+      "range": {
+        "startLine": 121,
+        "startChar": 14,
+        "endLine": 121,
+        "endChar": 17
+      },
+      "revId": "4465885943f48cee5febe3444a12da38809a599e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
