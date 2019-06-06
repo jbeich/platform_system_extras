@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "57788595_b38a6de4",
+        "filename": "memory_replay/TraceBenchmark.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1096713
+      },
+      "writtenOn": "2019-06-06T13:41:23Z",
+      "side": 1,
+      "message": "While I\u0027m guessing the possibility for this is pretty low, if there\u0027s a corrupt (or intentionally malicious) input file, it could write to stack memory here by overflowing \u0027name\u0027.  Out of paranoia, I\u0027ve put up a follow-up to prevent this: https://android-review.googlesource.com/c/platform/system/extras/+/978390",
+      "revId": "37dca4b03a09f287e7fd0208df92483c4269e093",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
