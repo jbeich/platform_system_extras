@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "af1228d5_4f495e19",
+        "filename": "simpleperf/app_api/java/com/android/simpleperf/ProfileSession.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2019-06-06T00:16:11Z",
+      "side": 1,
+      "message": "I generally don\u0027t like magic numbers because I feel like I have to re-verify them too often. Could we use another static String and .length() with these 2 lines instead?",
+      "revId": "de51ab2185ca0b8bdb501109035f0cee49af5fc3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
