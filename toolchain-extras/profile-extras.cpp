@@ -29,6 +29,15 @@
 
 extern "C" {
 
+// Override the weak symbol lprofDirMode defined in
+// compiler-rt/lib/Profile/InstrProfilingUtil.c.  This is the permission for
+// directories created for the coverage files.  Set it to 0777 (uga+rwx) so
+// coverage can be written when processes run as different users write to the
+// same .gcda file.
+//
+// TODO Add a test so we can detect if this variable's name changes.
+extern unsigned lprofDirMode = 0777;
+
 void __gcov_flush(void);
 
 static void gcov_signal_handler(__unused int signum) {
