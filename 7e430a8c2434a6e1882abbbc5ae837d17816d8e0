@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "4b2d63ef_d302f868",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1506239
+      },
+      "writtenOn": "2019-06-24T03:24:32Z",
+      "side": 1,
+      "message": "\u003e\u003e Can you specify if the mmap grows bottom up or top down? If bottom up, why? \nWe are using a legacy memory layout (botom up) for compatibility. We have been using this layout for a long time. \n\n\n\u003e\u003eIs the vma merge happens between mmap() calls in threadA function, or between it with always existing maps\nPer my observation, the merge happens between mmap calls in threadA. I see most of vma of mmap() calls are merged into the vma that generated at the very first mmap in threadA.\n\n\u003e\u003eAnd the detail of how a vma merge happens that causes the problem? \nGetClockDiff() in perf_clock.cpp tries to find the perf mmap record of the fastest mmap allocation in threadA by comparing the start addr in each perf record against thread_arg-\u003emmap_start_addr. start addr of perf mmap reocrod is vm_start of vma that record by perf_event_mmap(). vma merge happens as long as there is a mergeable gap regardless how mmap growth, but the way of expanding a existing vma is actually causing the problem. If allocation of mmap can be merged into an adjecent vma at lower address space, the vma\u0027s vm_end gets updates instead of vm_start. On contrast, vm_start get update if allocaiton of mmap can be merged into an adjecent vma at higher address space. We don\u0027t see the failure when mmap growt top-down, becase mmap requests tends to merge into vma that at higher address space. The issue arise in bottm-up, becasue mmap requests tend to merge to adjecent vma of lower address space.\n\nIMHO, growth dirction of mmap should be transparent to userspace, we should need to fix this in simpleperf CTS test.",
+      "parentUuid": "a0e5db93_07e2fde9",
+      "range": {
+        "startLine": 12,
+        "startChar": 13,
+        "endLine": 12,
+        "endChar": 14
+      },
+      "revId": "7e430a8c2434a6e1882abbbc5ae837d17816d8e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b853ea87_ff1ec644",
         "filename": "simpleperf/perf_clock.cpp",
         "patchSetId": 1
