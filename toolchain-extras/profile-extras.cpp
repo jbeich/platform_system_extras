@@ -36,6 +36,8 @@ static void gcov_signal_handler(__unused int signum) {
 }
 
 static const char kCoveragePropName[] = "debug.coverage.flush";
+static const char kGcovPrefixEnvVar[] = "GCOV_PREFIX";
+static const char kGcovPrefixFormat[] = "/data/misc/trace/%d";
 
 // In a loop, wait for any change to sysprops and trigger a __gcov_flush when
 // <kCoveragePropName> sysprop transistions to "1" after a transistion to "0".
@@ -100,6 +102,13 @@ __attribute__((constructor)) int init_profile_extras(void) {
   if (init_profile_extras_once)
     return 0;
   init_profile_extras_once = 1;
+
+  // Include the pid in the coverage file path.
+  char* gcovPrefix;
+  if (asprintf(&gcovPrefix, kGcovPrefixFormat, getpid()) != -1) {
+    setenv(kGcovPrefixEnvVar, gcovPrefix, true);
+    free(gcovPrefix);
+  }
 
   sighandler_t ret1 = signal(GCOV_FLUSH_SIGNAL, gcov_signal_handler);
   if (ret1 == SIG_ERR) {
