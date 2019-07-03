@@ -22,6 +22,30 @@
       "revId": "dd015838ad07fa2d13ac44645d45d9a4fa969e49",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0987d529_7b2a1f8c",
+        "filename": "toolchain-extras/profile-globals.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2019-07-03T21:51:18Z",
+      "side": 1,
+      "message": "I was talking with Pirama earlier. PIDs can wrap, and then end up with a different user. It\u0027s probably preferable to use UID in this case.",
+      "parentUuid": "b6c790f0_193b42c8",
+      "range": {
+        "startLine": 40,
+        "startChar": 62,
+        "endLine": 40,
+        "endChar": 68
+      },
+      "revId": "dd015838ad07fa2d13ac44645d45d9a4fa969e49",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
