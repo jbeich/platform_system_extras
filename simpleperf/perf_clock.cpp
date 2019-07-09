@@ -70,6 +70,10 @@ static void ThreadA(ThreadArg* thread_arg) {
     }
 
     array[i].end_system_time_in_ns = GetSystemClock();
+
+#if defined(__ANDROID__)
+    prctl(PR_SET_VMA, PR_SET_VMA_ANON_NAME,  array[i].mmap_start_addr, 4096, "anony_map_region");
+#endif
   }
   size_t best_index = 0;
   uint64_t min_duration_in_ns = UINT64_MAX;
