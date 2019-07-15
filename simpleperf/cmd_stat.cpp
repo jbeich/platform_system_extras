@@ -128,6 +128,43 @@ struct CounterSummary {
   }
 };
 
+static const std::unordered_map<std::string, std::pair<std::string, std::string>>
+    COMMON_EVENT_RATE_MAP = {
+        {"cache-misses", {"cache-references", ""}},
+        {"branch-misses", {"branch-instructions", ""}},
+};
+
+static const std::unordered_map<std::string, std::pair<std::string, std::string>>
+    ARM_EVENT_RATE_MAP = {
+        // Refer to "D6.10.5 Meaningful ratios between common microarchitectural events" in ARMv8
+        // specification.
+        {"raw-l1i-cache-refill", {"raw-l1i-cache", "level 1 instruction cache refill rate"}},
+        {"raw-l1i-tlb-refill", {"raw-l1i-tlb", "level 1 instruction TLB refill rate"}},
+        {"raw-l1d-cache-refill", {"raw-l1d-cache", "level 1 data or unified cache refill rate"}},
+        {"raw-l1d-tlb-refill", {"raw-l1d-tlb", "level 1 data or unified TLB refill rate"}},
+        {"raw-l2d-cache-refill", {"raw-l2d-cache", "level 2 data or unified cache refill rate"}},
+        {"raw-l2i-cache-refill", {"raw-l2i-cache", "level 2 instruction cache refill rate"}},
+        {"raw-l3d-cache-refill", {"raw-l3d-cache", "level 3 data or unified cache refill rate"}},
+        {"raw-l2d-tlb-refill", {"raw-l2d-tlb", "level 2 data or unified TLB refill rate"}},
+        {"raw-l2i-tlb-refill", {"raw-l2i-tlb", "level 2 instruction TLB refill rate"}},
+        {"raw-bus-access", {"raw-bus-cycles", "bus accesses per cycle"}},
+        {"raw-ll-cache-miss", {"raw-ll-cache", "last level data or unified cache refill rate"}},
+        {"raw-dtlb-walk", {"raw-l1d-tlb", "data TLB miss rate"}},
+        {"raw-itlb-walk", {"raw-l1i-tlb", "instruction TLB miss rate"}},
+        {"raw-ll-cache-miss-rd", {"raw-ll-cache-rd", "memory read operation miss rate"}},
+        {"raw-remote-access-rd",
+         {"raw-remote-access", "read accesses to another socket in a multi-socket system"}},
+        // Refer to "Table K3-2 Relationship between REFILL events and associated access events" in
+        // ARMv8 specification.
+        {"raw-l1d-cache-refill-rd", {"raw-l1d-cache-rd", "level 1 cache refill rate, read"}},
+        {"raw-l1d-cache-refill-wr", {"raw-l1d-cache-wr", "level 1 cache refill rate, write"}},
+        {"raw-l1d-tlb-refill-rd", {"raw-l1d-tlb-rd", "level 1 TLB refill rate, read"}},
+        {"raw-l1d-tlb-refill-wr", {"raw-l1d-tlb-wr", "level 1 TLB refill rate, write"}},
+        {"raw-l2d-cache-refill-rd", {"raw-l2d-cache-rd", "level 2 data cache refill rate, read"}},
+        {"raw-l2d-cache-refill-wr", {"raw-l2d-cache-wr", "level 2 data cache refill rate, write"}},
+        {"raw-l2d-tlb-refill-rd", {"raw-l2d-tlb-rd", "level 2 data TLB refill rate, read"}},
+};
+
 class CounterSummaries {
  public:
   explicit CounterSummaries(bool csv) : csv_(csv) {}
@@ -231,31 +268,9 @@ class CounterSummaries {
                                            sap_mid);
       }
     }
-    if (android::base::EndsWith(s.type_name, "-misses")) {
-      std::string other_name;
-      if (s.type_name == "cache-misses") {
-        other_name = "cache-references";
-      } else if (s.type_name == "branch-misses") {
-        other_name = "branch-instructions";
-      } else {
-        other_name =
-            s.type_name.substr(0, s.type_name.size() - strlen("-misses")) + "s";
-      }
-      const CounterSummary* other = FindSummary(other_name, s.modifier);
-      if (other != nullptr && other->IsMonitoredAtTheSameTime(s) &&
-          other->count != 0) {
-        double miss_rate = static_cast<double>(s.count) / other->count;
-        return android::base::StringPrintf("%lf%%%cmiss rate", miss_rate * 100,
-                                           sap_mid);
-      }
-    }
-    if (android::base::EndsWith(s.type_name, "-refill")) {
-      std::string other_name = s.type_name.substr(0, s.type_name.size() - strlen("-refill"));
-      const CounterSummary* other = FindSummary(other_name, s.modifier);
-      if (other != nullptr && other->IsMonitoredAtTheSameTime(s) && other->count != 0) {
-        double miss_rate = static_cast<double>(s.count) / other->count;
-        return android::base::StringPrintf("%f%%%cmiss rate", miss_rate * 100, sap_mid);
-      }
+    std::string rate_comment = GetRateComment(s, sap_mid);
+    if (!rate_comment.empty()) {
+      return rate_comment;
     }
     double running_time_in_sec;
     if (!FindRunningTimeForSummary(s, &running_time_in_sec)) {
@@ -272,6 +287,36 @@ class CounterSummaries {
       return android::base::StringPrintf("%.3lf%cK/sec", rate / 1e3, sap_mid);
     }
     return android::base::StringPrintf("%.3lf%c/sec", rate, sap_mid);
+  }
+
+  std::string GetRateComment(const CounterSummary& s, char sep) {
+    const std::string& miss_event_name = s.type_name;
+    std::string event_name;
+    std::string rate_desc;
+    if (auto it = COMMON_EVENT_RATE_MAP.find(miss_event_name); it != COMMON_EVENT_RATE_MAP.end()) {
+      event_name = it->second.first;
+      rate_desc = it->second.second;
+    }
+    if (event_name.empty() && (GetBuildArch() == ARCH_ARM || GetBuildArch() == ARCH_ARM64)) {
+      if (auto it = ARM_EVENT_RATE_MAP.find(miss_event_name); it != ARM_EVENT_RATE_MAP.end()) {
+        event_name = it->second.first;
+        rate_desc = it->second.second;
+      }
+    }
+    if (event_name.empty() && android::base::EndsWith(miss_event_name, "-misses")) {
+      event_name = miss_event_name.substr(0, miss_event_name.size() - strlen("-misses")) + "s";
+    }
+    if (!event_name.empty()) {
+      const CounterSummary* other = FindSummary(event_name, s.modifier);
+      if (other != nullptr && other->IsMonitoredAtTheSameTime(s) && other->count != 0) {
+        double miss_rate = static_cast<double>(s.count) / other->count;
+        if (rate_desc.empty()) {
+          rate_desc = "miss rate";
+        }
+        return android::base::StringPrintf("%f%%%c%s", miss_rate * 100, sep, rate_desc.c_str());
+      }
+    }
+    return "";
   }
 
   bool FindRunningTimeForSummary(const CounterSummary& summary, double* running_time_in_sec) {
