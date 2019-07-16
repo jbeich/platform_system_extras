@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b7b3180c_f12bc16d",
+        "filename": "simpleperf/event_attr.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2019-07-16T23:01:25Z",
+      "side": 1,
+      "message": "This is the only part of this change that doesn\u0027t make sense - is it because attr.type may change at runtime depending on whether ETM is supported and hence \u0027event_type.type \u003d\u003d attr.type\u0027 maybe false?\n\nThe rest of this CL LGTM.",
+      "revId": "74b4cd4cc90187c9f9ffaf9dc5bfc01726e48b50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
