@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7cb7eb26_4ea3af6e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2019-07-16T23:32:19Z",
+      "side": 1,
+      "message": "The event name fixes are isolated to two files.  If they are not related to the rest of the CL, consider making the fixes in a separate CL.",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 30
+      },
+      "revId": "4732a258bbc4b112417f78860aff055e522e82f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0d1bad02_b1cc8186",
+        "filename": "simpleperf/cmd_stat.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2019-07-16T23:32:19Z",
+      "side": 1,
+      "message": "Consider just putting \"miss-rate\" here and the next line instead of adding a separate check for rate_desc being empty.",
+      "range": {
+        "startLine": 133,
+        "startChar": 46,
+        "endLine": 133,
+        "endChar": 48
+      },
+      "revId": "4732a258bbc4b112417f78860aff055e522e82f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f9ae2af1_b6fc3bac",
+        "filename": "simpleperf/cmd_stat.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2019-07-16T23:32:19Z",
+      "side": 1,
+      "message": "Maybe use android::base::ConsumeSuffix()?  Feel free to ignore though - I\u0027m not familiar with the nuances of string_view.",
+      "range": {
+        "startLine": 306,
+        "startChar": 30,
+        "endLine": 306,
+        "endChar": 53
+      },
+      "revId": "4732a258bbc4b112417f78860aff055e522e82f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
