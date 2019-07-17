@@ -17,7 +17,9 @@
 #include <errno.h>
 #include <pthread.h>
 #include <signal.h>
+#include <stdlib.h>
 #include <string.h>
+#include <libgen.h> // For POSIX basename().
 
 // Use _system_properties.h to use __system_property_wait_any()
 #define _REALLY_INCLUDE_SYS__SYSTEM_PROPERTIES_H_
@@ -65,6 +67,22 @@ void *property_watch_loop(__unused void *arg) {
   }
 }
 
+#if defined(__ANDROID_API__) && __ANDROID_API__ >= __ANDROID_API_L__
+static char prop_watch_disabled_procs[][128] = {
+  "zygote",
+  "zygote32",
+  "app_process",
+  "app_process32",
+  "adbd",
+  "init",
+};
+
+static size_t prop_watch_num_disabled_procs = \
+  sizeof(prop_watch_disabled_procs) / sizeof(prop_watch_disabled_procs[0]);
+#endif
+
+__attribute__((weak)) int init_profile_extras_once = 0;
+
 // Initialize libprofile-extras:
 // - Install a signal handler that triggers __gcov_flush on <GCOV_FLUSH_SIGNAL>.
 // - Create a thread that calls __gcov_flush when <kCoveragePropName> sysprop
@@ -79,10 +97,27 @@ void *property_watch_loop(__unused void *arg) {
 // We force the linker to include init_profile_extras() by passing
 // '-uinit_profile_extras' to the linker (in build/soong).
 __attribute__((constructor)) int init_profile_extras(void) {
+  if (init_profile_extras_once)
+    return 0;
+  init_profile_extras_once = 1;
+
   sighandler_t ret1 = signal(GCOV_FLUSH_SIGNAL, gcov_signal_handler);
   if (ret1 == SIG_ERR) {
     return -1;
   }
+
+  // Do not create thread running property_watch_loop for zygote (it can get
+  // invoked as zygote or app_process).  This check is only needed for the
+  // platform, but can be done on any version after Android L, when
+  // getprogname() was added.
+#if defined(__ANDROID_API__) && __ANDROID_API__ >= __ANDROID_API_L__
+  const char *prog_basename = basename(getprogname());
+  for (size_t i = 0; i < prop_watch_num_disabled_procs; i ++) {
+    if (strcmp(prog_basename, prop_watch_disabled_procs[i]) == 0) {
+      return 0;
+    }
+  }
+#endif
 
   pthread_t thread;
   int error = pthread_create(&thread, nullptr, property_watch_loop, nullptr);

@@ -198,6 +198,11 @@ class RecordCommand : public Command {
 "--callchain-joiner-min-matching-nodes count\n"
 "               When callchain joiner is used, set the matched nodes needed to join\n"
 "               callchains. The count should be >= 1. By default it is 1.\n"
+"--no-cut-samples   Simpleperf uses a record buffer to cache records received from the kernel.\n"
+"                   When the available space in the buffer reaches low level, it cuts part of\n"
+"                   the stack data in samples. When the available space reaches critical level,\n"
+"                   it drops all samples. This option makes simpleperf not cut samples when the\n"
+"                   available space reaches low level.\n"
 "\n"
 "Recording file options:\n"
 "--no-dump-kernel-symbols  Don't dump kernel symbols in perf.data. By default\n"
@@ -338,6 +343,7 @@ class RecordCommand : public Command {
   bool allow_callchain_joiner_;
   size_t callchain_joiner_min_matching_nodes_;
   std::unique_ptr<CallChainJoiner> callchain_joiner_;
+  bool allow_cutting_samples_ = true;
 
   std::unique_ptr<JITDebugReader> jit_debug_reader_;
   uint64_t last_record_timestamp_;  // used to insert Mmap2Records for JIT debug info
@@ -469,7 +475,7 @@ bool RecordCommand::PrepareRecording(Workload* workload) {
   size_t record_buffer_size = system_wide_collection_ ? kSystemWideRecordBufferSize
                                                       : kRecordBufferSize;
   if (!event_selection_set_.MmapEventFiles(mmap_page_range_.first, mmap_page_range_.second,
-                                           record_buffer_size)) {
+                                           record_buffer_size, allow_cutting_samples_)) {
     return false;
   }
   auto callback =
@@ -833,6 +839,8 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
       if (!GetUintOption(args, &i, &callchain_joiner_min_matching_nodes_, 1)) {
         return false;
       }
+    } else if (args[i] == "--no-cut-samples") {
+      allow_cutting_samples_ = false;
     } else if (args[i] == "-o") {
       if (!NextArgumentOrError(args, &i)) {
         return false;
@@ -1304,6 +1312,16 @@ bool RecordCommand::ProcessJITDebugInfo(const std::vector<JITDebugInfo>& debug_i
         return false;
       }
     } else {
+      if (info.extracted_dex_file_map) {
+        ThreadMmap& map = *info.extracted_dex_file_map;
+        uint64_t timestamp = jit_debug_reader_->SyncWithRecords() ? info.timestamp
+                                                                  : last_record_timestamp_;
+        Mmap2Record record(*attr_id.attr, false, info.pid, info.pid, map.start_addr, map.len,
+                           map.pgoff, map.prot, map.name, attr_id.ids[0], timestamp);
+        if (!ProcessRecord(&record)) {
+          return false;
+        }
+      }
       thread_tree_.AddDexFileOffset(info.file_path, info.dex_file_offset);
     }
   }
