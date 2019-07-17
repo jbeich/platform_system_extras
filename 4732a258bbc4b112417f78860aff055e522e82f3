@@ -116,6 +116,30 @@
       "revId": "4732a258bbc4b112417f78860aff055e522e82f3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b1575687_f7a30fea",
+        "filename": "simpleperf/cmd_stat.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2019-07-17T17:52:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f9ae2af1_b6fc3bac",
+      "range": {
+        "startLine": 306,
+        "startChar": 30,
+        "endLine": 306,
+        "endChar": 53
+      },
+      "revId": "4732a258bbc4b112417f78860aff055e522e82f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
