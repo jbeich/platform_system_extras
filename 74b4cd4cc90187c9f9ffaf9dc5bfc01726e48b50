@@ -34,6 +34,24 @@
       "revId": "74b4cd4cc90187c9f9ffaf9dc5bfc01726e48b50",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b54b0ad4_4d786313",
+        "filename": "simpleperf/event_attr.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2019-07-17T19:55:53Z",
+      "side": 1,
+      "message": "The etm event type is allocated at kernel initialization, it doesn\u0027t change during running. So we don\u0027t worry about it changing during recording. And simpleperf keeps event type names and values in perf.data (https://android.googlesource.com/platform/system/extras/+/master/simpleperf/cmd_record.cpp#1660). It ensures we see the same etm event type when reporting.\n\nAlso add some comment for this line\u0027s change.",
+      "parentUuid": "b7b3180c_f12bc16d",
+      "revId": "74b4cd4cc90187c9f9ffaf9dc5bfc01726e48b50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
