@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cf1ba1da_f4d4b383",
+        "filename": "simpleperf/record.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 445,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2019-07-19T18:32:13Z",
+      "side": 1,
+      "message": "Leave a comment on where the constant came from.",
+      "range": {
+        "startLine": 445,
+        "startChar": 2,
+        "endLine": 445,
+        "endChar": 59
+      },
+      "revId": "8529c8b42a5dcb288df68313abaa924c05dbb0dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
