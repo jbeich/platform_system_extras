@@ -143,7 +143,7 @@ def parse_samples(process, args, sample_filter_fn):
 
     for thread in process.threads.values():
         min_event_count = thread.num_events * args.min_callchain_percentage * 0.01
-        thread.flamegraph.trim_callchain(min_event_count)
+        thread.flamegraph.trim_callchain(min_event_count, args.max_callchain_depth)
 
     log_info("Parsed %s callchains." % process.num_samples)
 
@@ -289,6 +289,11 @@ def main():
                               It is used to limit nodes shown in the flamegraph. For example,
                               when set to 0.01, only callchains taking >= 0.01%% of the event
                               count of the owner thread are collected in the report.""")
+    report_group.add_argument('--max_callchain_depth', default=250, type=int, help="""
+                              Set maximum depth of callchains shown in the report. It is used
+                              to limit the nodes shown in the flamegraph and avoid processing
+                              limits. For example, when set to 10, callstacks will be cut after
+                              the tenth frame.""")
     report_group.add_argument('--no_browser', action='store_true', help="""Don't open report
                               in browser.""")
     report_group.add_argument('-o', '--report_path', default='report.html', help="""Set report
