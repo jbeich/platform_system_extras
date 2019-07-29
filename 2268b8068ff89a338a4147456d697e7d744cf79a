@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "540542c1_bad669e7",
+        "filename": "simpleperf/ETMRecorder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2019-07-29T19:25:30Z",
+      "side": 1,
+      "message": "yes, and it is actually formatted by clang-format.",
+      "parentUuid": "8532d1de_0b4d4fae",
+      "range": {
+        "startLine": 48,
+        "startChar": 82,
+        "endLine": 48,
+        "endChar": 85
+      },
+      "revId": "2268b8068ff89a338a4147456d697e7d744cf79a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "523da7ca_8df28dcc",
         "filename": "simpleperf/event_fd.cpp",
         "patchSetId": 2
@@ -36,6 +60,24 @@
       "writtenOn": "2019-07-29T14:49:29Z",
       "side": 1,
       "message": "If simpleperf hasn\u0027t read data yet, but the buffer is full, does the kernel wait or drop the data or overwite the buffer?  If it overwrites, can you point to me how read_head is kept valid?",
+      "revId": "2268b8068ff89a338a4147456d697e7d744cf79a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e615d4ab_797a70ae",
+        "filename": "simpleperf/event_fd.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2019-07-29T19:25:30Z",
+      "side": 1,
+      "message": "User can decide whether to let kernel overwrite the kernel. If don\u0027t allow overwrite, overflow data is dropped. In my understanding, allowing overwrite is more useful to get snapshots rather than continuous data. When getting a snapshot, recording should be stopped or heads need to be rechecked to ensure data is valid. So simpleperf always choose to not overwrite.\n\nTo read valid data in overwrite mode: read_head and write_head are always increasing, and the valid data is [read_head % buffer_size, write_head % buffer_size]. But simpleperf doesn\u0027t use overwrite mode.",
+      "parentUuid": "523da7ca_8df28dcc",
       "revId": "2268b8068ff89a338a4147456d697e7d744cf79a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
@@ -59,6 +101,24 @@
     },
     {
       "key": {
+        "uuid": "d88a2fe6_6d24de41",
+        "filename": "simpleperf/event_fd.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2019-07-29T19:25:30Z",
+      "side": 1,
+      "message": "Done, added in the header. Also moved offset from parameter to return value. Because after adding a comment, return offset seems not too confuse.",
+      "parentUuid": "8887adc3_5acb8bc8",
+      "revId": "2268b8068ff89a338a4147456d697e7d744cf79a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ba68a5c4_6c305ca5",
         "filename": "simpleperf/event_fd.cpp",
         "patchSetId": 2
@@ -70,6 +130,24 @@
       "writtenOn": "2019-07-29T14:49:29Z",
       "side": 1,
       "message": "Do you want to use \u0027data_pos \u003d read_head % aux_buffer_size_\u0027 here?  This seems to assume that aux_buffer_size is a power of 2, whereas mmap can accept multiples of page size.  So this does not handle buffer sizes like 12KB.  This can come in handy when the buffer size is eventually read from the command line.",
+      "revId": "2268b8068ff89a338a4147456d697e7d744cf79a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a6d1c7bb_65e2f4ed",
+        "filename": "simpleperf/event_fd.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2019-07-29T19:25:30Z",
+      "side": 1,
+      "message": "It is enforced by the kernel to be power of 2. Added comment and check in CreateAuxBuffer.",
+      "parentUuid": "ba68a5c4_6c305ca5",
       "revId": "2268b8068ff89a338a4147456d697e7d744cf79a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
