@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8532d1de_0b4d4fae",
+        "filename": "simpleperf/ETMRecorder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2019-07-29T14:49:29Z",
+      "side": 1,
+      "message": "Do you follow this style?  I usually avoid spaces around the \u0027\u003d\u0027 for default arguments.  But I\u0027ll let you make the style decision.",
+      "range": {
+        "startLine": 48,
+        "startChar": 82,
+        "endLine": 48,
+        "endChar": 85
+      },
+      "revId": "2268b8068ff89a338a4147456d697e7d744cf79a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "523da7ca_8df28dcc",
+        "filename": "simpleperf/event_fd.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2019-07-29T14:49:29Z",
+      "side": 1,
+      "message": "If simpleperf hasn\u0027t read data yet, but the buffer is full, does the kernel wait or drop the data or overwite the buffer?  If it overwrites, can you point to me how read_head is kept valid?",
+      "revId": "2268b8068ff89a338a4147456d697e7d744cf79a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8887adc3_5acb8bc8",
+        "filename": "simpleperf/event_fd.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2019-07-29T14:49:29Z",
+      "side": 1,
+      "message": "Please add a description of this method, esp. the parameters either here or in the header.\n\nThe parameter names are not very informative, but I can\u0027t think of better suggestions.",
+      "revId": "2268b8068ff89a338a4147456d697e7d744cf79a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ba68a5c4_6c305ca5",
+        "filename": "simpleperf/event_fd.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2019-07-29T14:49:29Z",
+      "side": 1,
+      "message": "Do you want to use \u0027data_pos \u003d read_head % aux_buffer_size_\u0027 here?  This seems to assume that aux_buffer_size is a power of 2, whereas mmap can accept multiples of page size.  So this does not handle buffer sizes like 12KB.  This can come in handy when the buffer size is eventually read from the command line.",
+      "revId": "2268b8068ff89a338a4147456d697e7d744cf79a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
