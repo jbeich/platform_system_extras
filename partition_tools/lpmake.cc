@@ -67,6 +67,8 @@ static int usage(int /* argc */, char* argv[]) {
             "                                would produce a minimal super_empty.img which\n"
             "                                cannot be flashed; force-full-image will produce\n"
             "                                a flashable image.\n"
+            "   -T,--footer                  Add Footer that records the physical address\n"
+            "                                of every partition's vbmeta\n"
             "\n"
             "Partition data format:\n"
             "  <name>:<attributes>:<size>[:group]\n"
@@ -100,6 +102,7 @@ int main(int argc, char* argv[]) {
         { "super-name", required_argument, nullptr, 'n' },
         { "auto-slot-suffixing", no_argument, nullptr, 'x' },
         { "force-full-image", no_argument, nullptr, 'F' },
+        { "footer", no_argument, nullptr, 'T' },
         { nullptr, 0, nullptr, 0 },
     };
 
@@ -119,6 +122,7 @@ int main(int argc, char* argv[]) {
     bool has_implied_super = false;
     bool auto_slot_suffixing = false;
     bool force_full_image = false;
+    bool footer = false;
 
     int rv;
     int index;
@@ -227,6 +231,9 @@ int main(int argc, char* argv[]) {
                 break;
             case 'F':
                 force_full_image = true;
+                break;
+            case 'T':
+                footer = true;
                 break;
             default:
                 break;
@@ -359,9 +366,16 @@ int main(int argc, char* argv[]) {
     std::unique_ptr<LpMetadata> metadata = builder->Export();
     if (!images.empty() || force_full_image) {
         if (block_devices.size() == 1) {
-            if (!WriteToImageFile(output_path.c_str(), *metadata.get(), block_size, images,
-                                  output_sparse)) {
-                return EX_CANTCREAT;
+            if (footer == true) {
+                if (!WriteToImageFile(output_path.c_str(), *metadata.get(), block_size, images,
+                                      output_sparse, true)) {
+                    return EX_CANTCREAT;
+                }
+            } else {
+                if (!WriteToImageFile(output_path.c_str(), *metadata.get(), block_size, images,
+                                      output_sparse)) {
+                    return EX_CANTCREAT;
+                }
             }
         } else {
             if (!WriteSplitImageFiles(output_path, *metadata.get(), block_size, images,
