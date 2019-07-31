@@ -25,6 +25,7 @@
 #include <android-base/strings.h>
 #include <liblp/builder.h>
 #include <liblp/liblp.h>
+#include <libvbmeta/libvbmeta.h>
 
 using namespace android;
 using namespace android::fs_mgr;
@@ -67,6 +68,8 @@ static int usage(int /* argc */, char* argv[]) {
             "                                would produce a minimal super_empty.img which\n"
             "                                cannot be flashed; force-full-image will produce\n"
             "                                a flashable image.\n"
+            "   -v,--vbmeta=FILE             Create super_vbmeta that records the physical address\n"
+            "                                of every partition's vbmeta\n"
             "\n"
             "Partition data format:\n"
             "  <name>:<attributes>:<size>[:group]\n"
@@ -100,6 +103,7 @@ int main(int argc, char* argv[]) {
         { "super-name", required_argument, nullptr, 'n' },
         { "auto-slot-suffixing", no_argument, nullptr, 'x' },
         { "force-full-image", no_argument, nullptr, 'F' },
+        { "vbmeta", required_argument, nullptr, 'v' },
         { nullptr, 0, nullptr, 0 },
     };
 
@@ -111,6 +115,7 @@ int main(int argc, char* argv[]) {
     uint32_t block_size = 4096;
     std::string super_name = "super";
     std::string output_path;
+    std::string vbmeta_output_path;
     std::vector<std::string> partitions;
     std::vector<std::string> groups;
     std::vector<BlockDeviceInfo> block_devices;
@@ -227,6 +232,9 @@ int main(int argc, char* argv[]) {
                 break;
             case 'F':
                 force_full_image = true;
+                break;
+            case 'v':
+                vbmeta_output_path = optarg;
                 break;
             default:
                 break;
@@ -359,10 +367,13 @@ int main(int argc, char* argv[]) {
     std::unique_ptr<LpMetadata> metadata = builder->Export();
     if (!images.empty() || force_full_image) {
         if (block_devices.size() == 1) {
-            if (!WriteToImageFile(output_path.c_str(), *metadata.get(), block_size, images,
-                                  output_sparse)) {
-                return EX_CANTCREAT;
-            }
+                if (!WriteToImageFile(output_path.c_str(), *metadata.get(), block_size, images,
+                                      output_sparse)) {
+                    return EX_CANTCREAT;
+                }
+                if (!vbmeta_output_path.empty() && !WriteToVBMetaFile(vbmeta_output_path.c_str(), *metadata.get(), images)) {
+                    return EX_CANTCREAT;
+                }
         } else {
             if (!WriteSplitImageFiles(output_path, *metadata.get(), block_size, images,
                                       output_sparse)) {
