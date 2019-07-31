@@ -102,6 +102,7 @@ cc_binary {
         "libbase",
         "liblog",
         "liblp",
+        "libvbmeta",
     ],
     srcs: [
         "lpmake.cc",
