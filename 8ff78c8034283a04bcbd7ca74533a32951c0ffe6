@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "273023a5_55e4e474",
+        "filename": "partition_tools/lpmake.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 1130827
+      },
+      "writtenOn": "2019-08-06T10:46:46Z",
+      "side": 1,
+      "message": "Is it equivalent to adding an argument?\n            if (!WriteToImageFile(output_path.c_str(), *metadata.get(), block_size, images,\n                                  output_sparse, footer)) {\n                return EX_CANTCREAT;\n            }",
+      "range": {
+        "startLine": 369,
+        "startChar": 0,
+        "endLine": 379,
+        "endChar": 13
+      },
+      "revId": "8ff78c8034283a04bcbd7ca74533a32951c0ffe6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
