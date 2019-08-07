@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f0363735_daafd538",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 702,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2019-08-07T23:47:00Z",
+      "side": 1,
+      "message": "What happens if aux_buffer_size_ is zero?  Does tracking work fine (albeit with no aux trace)? \n If not, throw an error when this is zero.",
+      "revId": "e0183b99b6b073c218b5902abbe994be99e3c15c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
