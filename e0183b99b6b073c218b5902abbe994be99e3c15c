@@ -16,6 +16,24 @@
       "revId": "e0183b99b6b073c218b5902abbe994be99e3c15c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "16e3b5e7_27aa198d",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 702,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2019-08-08T14:34:23Z",
+      "side": 1,
+      "message": "Looks like IsPowerOfTwo already discards the zero, as it should.  Never mind this comment.",
+      "parentUuid": "f0363735_daafd538",
+      "revId": "e0183b99b6b073c218b5902abbe994be99e3c15c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
