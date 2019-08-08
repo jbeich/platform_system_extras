@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "759b7648_f316f7e9",
+        "filename": "simpleperf/cmd_dumprecord.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2019-08-08T18:39:40Z",
+      "side": 1,
+      "message": "I see. I figured it could be related to the spelling/naming of it in a different component, but that is hard to tell when I only generally review code on this side.",
+      "parentUuid": "9dcc06f6_787f3240",
+      "range": {
+        "startLine": 278,
+        "startChar": 24,
+        "endLine": 278,
+        "endChar": 32
+      },
+      "revId": "54472bacd3d5a49869cda0d2b54f53743998c403",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cb8b57d0_991ce566",
         "filename": "simpleperf/record_file.h",
         "patchSetId": 2
@@ -81,6 +105,24 @@
       "revId": "54472bacd3d5a49869cda0d2b54f53743998c403",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fb65018f_64b85e74",
+        "filename": "simpleperf/record_file.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2019-08-08T18:39:40Z",
+      "side": 1,
+      "message": "Ah, I see. It is just a single lookup in the map right now, rather than the cache. For some reason, I thought that this might be accelerating other lookups.",
+      "parentUuid": "571bba57_5b730764",
+      "revId": "54472bacd3d5a49869cda0d2b54f53743998c403",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
