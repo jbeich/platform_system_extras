@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6fc1f390_225b47bf",
+        "filename": "simpleperf/cmd_dumprecord.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2019-08-08T00:50:55Z",
+      "side": 1,
+      "message": "Is there a reason to call this \"auxtrace\" instead of \"aux_trace\" to mirror \"aux_data\" above? I know there are a few places it is used, but if this is your chosen designation for this piece of data, it would probably be better to be consistent with the other naming.",
+      "range": {
+        "startLine": 278,
+        "startChar": 24,
+        "endLine": 278,
+        "endChar": 32
+      },
+      "revId": "54472bacd3d5a49869cda0d2b54f53743998c403",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cb8b57d0_991ce566",
+        "filename": "simpleperf/record_file.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2019-08-08T00:50:55Z",
+      "side": 1,
+      "message": "This could probably use a comment or maybe rename name it aux_data_location_cache_. I know we talked about this on Tuesday, but it would make it more clear to other people reading the code to know what this is actually intended to implement.",
+      "revId": "54472bacd3d5a49869cda0d2b54f53743998c403",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
