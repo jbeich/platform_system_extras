@@ -303,3 +303,7 @@ TEST(stat_cmd, app_option_for_profileable_app) {
   TEST_REQUIRE_APPS();
   TestStatingApps("com.android.simpleperf.profileable");
 }
+
+TEST(stat_cmd, use_devfreq_counters_option) {
+  TEST_IN_ROOT(StatCmd()->Run({"--use-devfreq-counters", "sleep", "0.1"}));
+}
