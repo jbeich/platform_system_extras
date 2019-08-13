@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5ce32774_11e81bcc",
+        "filename": "simpleperf/cmd_stat.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 1508323
+      },
+      "writtenOn": "2019-08-13T04:37:05Z",
+      "side": 1,
+      "message": "Hey Yabin, IIUC, you set /sys/class/devfreq/soc:qcom,memlat-cpu4/governor and other */governor virtual files to \"performance\" to free the hardware counters, right?\n\nI think it would be better to reset the value of /sys/class/devfreq/soc:*/governor to it previous value after simpleperf finishes. Otherwise, we probably need to reboot the device to reset it.",
+      "revId": "20ceaa03e1912f429c734f91081cb9a5a4d7fb86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
