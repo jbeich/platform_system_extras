@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ef3d99e_5e8c38c9",
+        "filename": "simpleperf/cmd_stat.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1508323
+      },
+      "writtenOn": "2019-08-13T19:01:51Z",
+      "side": 1,
+      "message": "If we are logging changing governor from its original value to \"performance\", shouldn\u0027t we also log changing the value back in the destructor?",
+      "revId": "ed5316cf4c03dc3af94a30a6c4008bb7b5ac0a95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
