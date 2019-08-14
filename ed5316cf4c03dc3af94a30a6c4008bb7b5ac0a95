@@ -221,6 +221,30 @@
       "revId": "ed5316cf4c03dc3af94a30a6c4008bb7b5ac0a95",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "34a7a872_95aef2fe",
+        "filename": "simpleperf/cmd_stat.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 1105075
+      },
+      "writtenOn": "2019-08-14T22:29:00Z",
+      "side": 1,
+      "message": "hmm, didn\u0027t see the warning for potential wedged power.",
+      "parentUuid": "c5491559_bf4b37fa",
+      "range": {
+        "startLine": 368,
+        "startChar": 3,
+        "endLine": 368,
+        "endChar": 18
+      },
+      "revId": "ed5316cf4c03dc3af94a30a6c4008bb7b5ac0a95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
