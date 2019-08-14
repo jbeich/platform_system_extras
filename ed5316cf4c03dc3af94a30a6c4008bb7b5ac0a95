@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "217c97da_b12f6dba",
+        "filename": "simpleperf/cmd_stat.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2019-08-14T20:46:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "316d0701_cbddebe8",
+      "range": {
+        "startLine": 336,
+        "startChar": 3,
+        "endLine": 336,
+        "endChar": 12
+      },
+      "revId": "ed5316cf4c03dc3af94a30a6c4008bb7b5ac0a95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3efcce24_104411c8",
         "filename": "simpleperf/cmd_stat.cpp",
         "patchSetId": 3
@@ -94,6 +118,30 @@
     },
     {
       "key": {
+        "uuid": "671426e6_5dfcbf08",
+        "filename": "simpleperf/cmd_stat.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2019-08-14T20:46:11Z",
+      "side": 1,
+      "message": "It has been shown in the help msg.",
+      "parentUuid": "73981d8a_efbf7b09",
+      "range": {
+        "startLine": 355,
+        "startChar": 49,
+        "endLine": 355,
+        "endChar": 60
+      },
+      "revId": "ed5316cf4c03dc3af94a30a6c4008bb7b5ac0a95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ef3d99e_5e8c38c9",
         "filename": "simpleperf/cmd_stat.cpp",
         "patchSetId": 3
@@ -111,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "1da88afa_c02796a1",
+        "filename": "simpleperf/cmd_stat.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2019-08-14T20:46:11Z",
+      "side": 1,
+      "message": "It\u0027s only for debugging, so I don\u0027t mind if it is symmetric. But remove it since you care. And I feel the log msg isn\u0027t that useful.",
+      "parentUuid": "0ef3d99e_5e8c38c9",
+      "revId": "ed5316cf4c03dc3af94a30a6c4008bb7b5ac0a95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "59acff86_79c4c87e",
         "filename": "simpleperf/cmd_stat.cpp",
         "patchSetId": 3
@@ -122,6 +188,30 @@
       "writtenOn": "2019-08-14T18:19:38Z",
       "side": 1,
       "message": "what if user killed simpleperf in middle. this will give power regression.",
+      "range": {
+        "startLine": 368,
+        "startChar": 3,
+        "endLine": 368,
+        "endChar": 18
+      },
+      "revId": "ed5316cf4c03dc3af94a30a6c4008bb7b5ac0a95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c5491559_bf4b37fa",
+        "filename": "simpleperf/cmd_stat.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2019-08-14T20:46:11Z",
+      "side": 1,
+      "message": "yes. It has been shown in the help msg.",
+      "parentUuid": "59acff86_79c4c87e",
       "range": {
         "startLine": 368,
         "startChar": 3,
