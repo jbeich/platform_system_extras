@@ -71,6 +71,29 @@
     },
     {
       "key": {
+        "uuid": "73981d8a_efbf7b09",
+        "filename": "simpleperf/cmd_stat.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 1105075
+      },
+      "writtenOn": "2019-08-14T18:19:38Z",
+      "side": 1,
+      "message": "just a note, this will change runtime behavior also.",
+      "range": {
+        "startLine": 355,
+        "startChar": 49,
+        "endLine": 355,
+        "endChar": 60
+      },
+      "revId": "ed5316cf4c03dc3af94a30a6c4008bb7b5ac0a95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ef3d99e_5e8c38c9",
         "filename": "simpleperf/cmd_stat.cpp",
         "patchSetId": 3
@@ -82,6 +105,29 @@
       "writtenOn": "2019-08-13T19:01:51Z",
       "side": 1,
       "message": "If we are logging changing governor from its original value to \"performance\", shouldn\u0027t we also log changing the value back in the destructor?",
+      "revId": "ed5316cf4c03dc3af94a30a6c4008bb7b5ac0a95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "59acff86_79c4c87e",
+        "filename": "simpleperf/cmd_stat.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 1105075
+      },
+      "writtenOn": "2019-08-14T18:19:38Z",
+      "side": 1,
+      "message": "what if user killed simpleperf in middle. this will give power regression.",
+      "range": {
+        "startLine": 368,
+        "startChar": 3,
+        "endLine": 368,
+        "endChar": 18
+      },
       "revId": "ed5316cf4c03dc3af94a30a6c4008bb7b5ac0a95",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
