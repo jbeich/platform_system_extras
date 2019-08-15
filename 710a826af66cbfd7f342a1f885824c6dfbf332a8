@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8a0bb39b_ec58bf57",
+        "filename": "memory_replay/traces/TRACES",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2019-08-15T00:31:25Z",
+      "side": 1,
+      "message": "... to what? taking a photo?",
+      "revId": "710a826af66cbfd7f342a1f885824c6dfbf332a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
