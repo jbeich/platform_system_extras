@@ -16,6 +16,24 @@
       "revId": "710a826af66cbfd7f342a1f885824c6dfbf332a8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "93c56683_29d4281a",
+        "filename": "memory_replay/traces/TRACES",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2019-08-15T00:34:47Z",
+      "side": 1,
+      "message": "I don\u0027t really remember what I did, so I didn\u0027t want to lie about the trace. I think I took a picture in hdr mode, but it\u0027s all fuzzy. I do want to do another camera trace where I actually record what I did.",
+      "parentUuid": "8a0bb39b_ec58bf57",
+      "revId": "710a826af66cbfd7f342a1f885824c6dfbf332a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
