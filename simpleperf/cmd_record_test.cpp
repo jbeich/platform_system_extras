@@ -31,6 +31,7 @@
 
 #include "command.h"
 #include "environment.h"
+#include "ETMRecorder.h"
 #include "event_selection_set.h"
 #include "get_test_data.h"
 #include "record.h"
@@ -38,6 +39,7 @@
 #include "test_util.h"
 #include "thread_tree.h"
 
+using namespace simpleperf;
 using namespace PerfFileFormat;
 
 static std::unique_ptr<Command> RecordCmd() {
@@ -563,8 +565,7 @@ TEST(record_cmd, record_meta_info_feature) {
   ASSERT_TRUE(RunRecordCmd({}, tmpfile.path));
   std::unique_ptr<RecordFileReader> reader = RecordFileReader::CreateInstance(tmpfile.path);
   ASSERT_TRUE(reader);
-  std::unordered_map<std::string, std::string> info_map;
-  ASSERT_TRUE(reader->ReadMetaInfoFeature(&info_map));
+  auto& info_map = reader->GetMetaInfoFeature();
   ASSERT_NE(info_map.find("simpleperf_version"), info_map.end());
   ASSERT_NE(info_map.find("timestamp"), info_map.end());
 #if defined(__ANDROID__)
@@ -602,8 +603,7 @@ TEST(record_cmd, trace_offcpu_option) {
   ASSERT_TRUE(RunRecordCmd({"--trace-offcpu", "-f", "1000"}, tmpfile.path));
   std::unique_ptr<RecordFileReader> reader = RecordFileReader::CreateInstance(tmpfile.path);
   ASSERT_TRUE(reader);
-  std::unordered_map<std::string, std::string> info_map;
-  ASSERT_TRUE(reader->ReadMetaInfoFeature(&info_map));
+  auto info_map = reader->GetMetaInfoFeature();
   ASSERT_EQ(info_map["trace_offcpu"], "true");
   CheckEventType(tmpfile.path, "sched:sched_switch", 1u, 0u);
 }
@@ -622,8 +622,7 @@ TEST(record_cmd, clockid_option) {
     ASSERT_TRUE(RunRecordCmd({"--clockid", "monotonic"}, tmpfile.path));
     std::unique_ptr<RecordFileReader> reader = RecordFileReader::CreateInstance(tmpfile.path);
     ASSERT_TRUE(reader);
-    std::unordered_map<std::string, std::string> info_map;
-    ASSERT_TRUE(reader->ReadMetaInfoFeature(&info_map));
+    auto info_map = reader->GetMetaInfoFeature();
     ASSERT_EQ(info_map["clockid"], "monotonic");
   }
 }
@@ -797,4 +796,48 @@ TEST(record_cmd, app_option_for_profileable_app) {
   TEST_REQUIRE_HW_COUNTER();
   TEST_REQUIRE_APPS();
   TestRecordingApps("com.android.simpleperf.profileable");
+}
+
+TEST(record_cmd, no_cut_samples_option) {
+  TEST_REQUIRE_HW_COUNTER();
+  ASSERT_TRUE(RunRecordCmd({"--no-cut-samples"}));
+}
+
+TEST(record_cmd, cs_etm_event) {
+  if (!ETMRecorder::GetInstance().CheckEtmSupport()) {
+    GTEST_LOG_(INFO) << "Omit this test since etm isn't supported on this device";
+    return;
+  }
+  TemporaryFile tmpfile;
+  ASSERT_TRUE(RunRecordCmd({"-e", "cs-etm"}, tmpfile.path));
+  std::unique_ptr<RecordFileReader> reader = RecordFileReader::CreateInstance(tmpfile.path);
+  ASSERT_TRUE(reader);
+  bool has_auxtrace_info = false;
+  bool has_auxtrace = false;
+  bool has_aux = false;
+  ASSERT_TRUE(reader->ReadDataSection([&](std::unique_ptr<Record> r) {
+    if (r->type() == PERF_RECORD_AUXTRACE_INFO) {
+      has_auxtrace_info = true;
+    } else if (r->type() == PERF_RECORD_AUXTRACE) {
+      has_auxtrace = true;
+    } else if (r->type() == PERF_RECORD_AUX) {
+      has_aux = true;
+    }
+    return true;
+  }));
+  ASSERT_TRUE(has_auxtrace_info);
+  ASSERT_TRUE(has_auxtrace);
+  ASSERT_TRUE(has_aux);
+}
+
+TEST(record_cmd, aux_buffer_size_option) {
+  if (!ETMRecorder::GetInstance().CheckEtmSupport()) {
+    GTEST_LOG_(INFO) << "Omit this test since etm isn't supported on this device";
+    return;
+  }
+  ASSERT_TRUE(RunRecordCmd({"-e", "cs-etm", "--aux-buffer-size", "1m"}));
+  // not page size aligned
+  ASSERT_FALSE(RunRecordCmd({"-e", "cs-etm", "--aux-buffer-size", "1024"}));
+  // not power of two
+  ASSERT_FALSE(RunRecordCmd({"-e", "cs-etm", "--aux-buffer-size", "12k"}));
 }

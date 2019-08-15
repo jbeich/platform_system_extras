@@ -40,7 +40,7 @@ class DumpRecordCommand : public Command {
       : Command("dump", "dump perf record file",
                 "Usage: simpleperf dumprecord [options] [perf_record_file]\n"
                 "    Dump different parts of a perf record file. Default file is perf.data.\n"),
-        record_filename_("perf.data"), record_file_arch_(GetBuildArch()) {
+        record_filename_("perf.data") {
   }
 
   bool Run(const std::vector<std::string>& args);
@@ -50,11 +50,11 @@ class DumpRecordCommand : public Command {
   void DumpFileHeader();
   void DumpAttrSection();
   bool DumpDataSection();
+  bool DumpAuxData(const AuxRecord& aux);
   bool DumpFeatureSection();
 
   std::string record_filename_;
   std::unique_ptr<RecordFileReader> record_file_reader_;
-  ArchType record_file_arch_;
 };
 
 bool DumpRecordCommand::Run(const std::vector<std::string>& args) {
@@ -64,25 +64,6 @@ bool DumpRecordCommand::Run(const std::vector<std::string>& args) {
   record_file_reader_ = RecordFileReader::CreateInstance(record_filename_);
   if (record_file_reader_ == nullptr) {
     return false;
-  }
-  std::string arch = record_file_reader_->ReadFeatureString(FEAT_ARCH);
-  if (!arch.empty()) {
-    record_file_arch_ = GetArchType(arch);
-    if (record_file_arch_ == ARCH_UNSUPPORTED) {
-      return false;
-    }
-  }
-  ScopedCurrentArch scoped_arch(record_file_arch_);
-  std::unique_ptr<ScopedEventTypes> scoped_event_types;
-  if (record_file_reader_->HasFeature(PerfFileFormat::FEAT_META_INFO)) {
-    std::unordered_map<std::string, std::string> meta_info;
-    if (!record_file_reader_->ReadMetaInfoFeature(&meta_info)) {
-      return false;
-    }
-    auto it = meta_info.find("event_type_info");
-    if (it != meta_info.end()) {
-      scoped_event_types.reset(new ScopedEventTypes(it->second));
-    }
   }
   DumpFileHeader();
   DumpAttrSection();
@@ -212,10 +193,31 @@ bool DumpRecordCommand::DumpDataSection() {
         PrintIndented(2, "%s (%s[+%" PRIx64 "])\n", symbol_name.c_str(), dso_name.c_str(),
                       vaddr_in_file);
       }
+    } else if (r->type() == PERF_RECORD_AUX) {
+      return DumpAuxData(*static_cast<AuxRecord*>(r.get()));
     }
     return true;
   };
   return record_file_reader_->ReadDataSection(record_callback);
+}
+
+bool DumpRecordCommand::DumpAuxData(const AuxRecord& aux) {
+  size_t size = aux.data->aux_size;
+  if (size > 0) {
+    std::unique_ptr<uint8_t[]> data(new uint8_t[size]);
+    if (!record_file_reader_->ReadAuxData(aux.Cpu(), aux.data->aux_offset, data.get(), size)) {
+      return false;
+    }
+    PrintIndented(1, "aux_data:\n");
+    for (size_t i = 0; i < size; i += 16) {
+      PrintIndented(2, "");
+      for (size_t j = i; j < std::min(i + 16, size); j++) {
+        printf("%02x", data[j]);
+      }
+      printf("\n");
+    }
+  }
+  return true;
 }
 
 bool DumpRecordCommand::DumpFeatureSection() {
@@ -268,13 +270,14 @@ bool DumpRecordCommand::DumpFeatureSection() {
         }
       }
     } else if (feature == FEAT_META_INFO) {
-      std::unordered_map<std::string, std::string> info_map;
-      if (!record_file_reader_->ReadMetaInfoFeature(&info_map)) {
-        return false;
-      }
       PrintIndented(1, "meta_info:\n");
-      for (auto& pair : info_map) {
+      for (auto& pair : record_file_reader_->GetMetaInfoFeature()) {
         PrintIndented(2, "%s = %s\n", pair.first.c_str(), pair.second.c_str());
+      }
+    } else if (feature == FEAT_AUXTRACE) {
+      PrintIndented(1, "file_offsets_of_auxtrace_records:\n");
+      for (auto offset : record_file_reader_->ReadAuxTraceFeature()) {
+        PrintIndented(2, "%" PRIu64 "\n", offset);
       }
     }
   }

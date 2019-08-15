@@ -32,10 +32,7 @@
 #include "IOEventLoop.h"
 #include "perf_event.h"
 #include "record.h"
-
-namespace simpleperf {
-  class RecordReadThread;
-}
+#include "RecordReadThread.h"
 
 constexpr double DEFAULT_PERIOD_TO_DETECT_CPU_HOTPLUG_EVENTS_IN_SEC = 0.5;
 constexpr double DEFAULT_PERIOD_TO_CHECK_MONITORED_TARGETS_IN_SEC = 1;
@@ -96,6 +93,7 @@ class EventSelectionSet {
   std::vector<const EventType*> GetEvents() const;
   std::vector<const EventType*> GetTracepointEvents() const;
   bool ExcludeKernel() const;
+  bool HasAuxTrace() const { return has_aux_trace_; }
   bool HasInplaceSampler() const;
   std::vector<EventAttrWithId> GetEventAttrWithId() const;
 
@@ -134,11 +132,15 @@ class EventSelectionSet {
 
   bool OpenEventFiles(const std::vector<int>& on_cpus);
   bool ReadCounters(std::vector<CountersInfo>* counters);
-  bool MmapEventFiles(size_t min_mmap_pages, size_t max_mmap_pages, size_t record_buffer_size);
+  bool MmapEventFiles(size_t min_mmap_pages, size_t max_mmap_pages, size_t aux_buffer_size,
+                      size_t record_buffer_size, bool allow_cutting_samples);
   bool PrepareToReadMmapEventData(const std::function<bool(Record*)>& callback);
   bool SyncKernelBuffer();
   bool FinishReadMmapEventData();
-  void GetLostRecords(size_t* lost_samples, size_t* lost_non_samples, size_t* cut_stack_samples);
+
+  const simpleperf::RecordStat& GetRecordStat() {
+    return record_read_thread_->GetStat();
+  }
 
   // If monitored_cpus is empty, monitor all cpus.
   bool HandleCpuHotplugEvents(const std::vector<int>& monitored_cpus,
@@ -192,6 +194,8 @@ class EventSelectionSet {
   std::vector<int> online_cpus_;
 
   std::unique_ptr<simpleperf::RecordReadThread> record_read_thread_;
+
+  bool has_aux_trace_ = false;
 
   DISALLOW_COPY_AND_ASSIGN(EventSelectionSet);
 };

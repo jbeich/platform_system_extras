@@ -50,6 +50,7 @@ class RecordBuffer {
 
   // Get data of the current record. Return nullptr if there is no records in the buffer.
   char* GetCurrentRecord();
+  void AddCurrentRecordSize(size_t size) { cur_read_record_size_ += size; }
   // Called after reading a record, the space of the record will be writable.
   void MoveToNextRecord();
 
@@ -80,6 +81,14 @@ class RecordParser {
   size_t time_pos_in_sample_records_ = 0;
   size_t time_rpos_in_non_sample_records_ = 0;
   size_t callchain_pos_in_sample_records_ = 0;
+};
+
+struct RecordStat {
+  size_t lost_samples = 0;
+  size_t lost_non_samples = 0;
+  size_t cut_stack_samples = 0;
+  uint64_t aux_data_size = 0;
+  uint64_t lost_aux_data_size = 0;
 };
 
 // Read records from the kernel buffer belong to an event_fd.
@@ -115,7 +124,8 @@ class KernelRecordReader {
 class RecordReadThread {
  public:
   RecordReadThread(size_t record_buffer_size, const perf_event_attr& attr, size_t min_mmap_pages,
-                   size_t max_mmap_pages);
+                   size_t max_mmap_pages, size_t aux_buffer_size,
+                   bool allow_cutting_samples = true);
   ~RecordReadThread();
   void SetBufferLevels(size_t record_buffer_low_level, size_t record_buffer_critical_level) {
     record_buffer_low_level_ = record_buffer_low_level;
@@ -137,11 +147,8 @@ class RecordReadThread {
 
   // If available, return the next record in the RecordBuffer, otherwise return nullptr.
   std::unique_ptr<Record> GetRecord();
-  void GetLostRecords(size_t* lost_samples, size_t* lost_non_samples, size_t* cut_stack_samples) {
-    *lost_samples = lost_samples_;
-    *lost_non_samples = lost_non_samples_;
-    *cut_stack_samples = cut_stack_samples_;
-  }
+
+  const RecordStat& GetStat() const { return stat_; }
 
  private:
   enum Cmd {
@@ -164,6 +171,7 @@ class RecordReadThread {
   bool HandleRemoveEventFds(const std::vector<EventFd*>& event_fds);
   bool ReadRecordsFromKernelBuffer();
   void PushRecordToRecordBuffer(KernelRecordReader* kernel_record_reader);
+  void ReadAuxDataFromKernelBuffer(bool* has_data);
   bool SendDataNotificationToMainThread();
 
   RecordBuffer record_buffer_;
@@ -177,6 +185,7 @@ class RecordReadThread {
   size_t stack_size_in_sample_record_ = 0;
   size_t min_mmap_pages_;
   size_t max_mmap_pages_;
+  size_t aux_buffer_size_;
 
   // Used to pass command notification from the main thread to the read thread.
   android::base::unique_fd write_cmd_fd_;
@@ -195,9 +204,7 @@ class RecordReadThread {
   std::unique_ptr<std::thread> read_thread_;
   std::vector<KernelRecordReader> kernel_record_readers_;
 
-  size_t lost_samples_ = 0;
-  size_t lost_non_samples_ = 0;
-  size_t cut_stack_samples_ = 0;
+  RecordStat stat_;
 };
 
 }  // namespace simpleperf

@@ -23,12 +23,15 @@
 #include <android-base/logging.h>
 
 #include "environment.h"
+#include "ETMRecorder.h"
 #include "event_attr.h"
 #include "event_type.h"
 #include "IOEventLoop.h"
 #include "perf_regs.h"
 #include "utils.h"
 #include "RecordReadThread.h"
+
+using namespace simpleperf;
 
 bool IsBranchSamplingSupported() {
   const EventType* type = FindEventTypeByName("cpu-cycles");
@@ -159,6 +162,13 @@ bool EventSelectionSet::BuildAndCheckEventSelection(const std::string& event_nam
   selection->event_attr.exclude_host = event_type->exclude_host;
   selection->event_attr.exclude_guest = event_type->exclude_guest;
   selection->event_attr.precise_ip = event_type->precise_ip;
+  if (IsEtmEventType(event_type->event_type.type)) {
+    auto& etm_recorder = ETMRecorder::GetInstance();
+    if (!etm_recorder.CheckEtmSupport()) {
+      return false;
+    }
+    ETMRecorder::GetInstance().SetEtmPerfEventAttr(&selection->event_attr);
+  }
   bool set_default_sample_freq = false;
   if (!for_stat_cmd_) {
     if (event_type->event_type.type == PERF_TYPE_TRACEPOINT) {
@@ -217,6 +227,9 @@ bool EventSelectionSet::AddEventGroup(
     EventSelection selection;
     if (!BuildAndCheckEventSelection(event_name, first_event, &selection)) {
       return false;
+    }
+    if (IsEtmEventType(selection.event_attr.type)) {
+      has_aux_trace_ = true;
     }
     first_event = false;
     group.push_back(std::move(selection));
@@ -610,9 +623,11 @@ bool EventSelectionSet::ReadCounters(std::vector<CountersInfo>* counters) {
 }
 
 bool EventSelectionSet::MmapEventFiles(size_t min_mmap_pages, size_t max_mmap_pages,
-                                       size_t record_buffer_size) {
-  record_read_thread_.reset(new simpleperf::RecordReadThread(
-      record_buffer_size, groups_[0][0].event_attr, min_mmap_pages, max_mmap_pages));
+                                       size_t aux_buffer_size, size_t record_buffer_size,
+                                       bool allow_cutting_samples) {
+  record_read_thread_.reset(
+      new simpleperf::RecordReadThread(record_buffer_size, groups_[0][0].event_attr, min_mmap_pages,
+                                       max_mmap_pages, aux_buffer_size, allow_cutting_samples));
   return true;
 }
 
@@ -702,11 +717,6 @@ bool EventSelectionSet::FinishReadMmapEventData() {
     return false;
   }
   return loop_->RunLoop();
-}
-
-void EventSelectionSet::GetLostRecords(size_t* lost_samples, size_t* lost_non_samples,
-                                       size_t* cut_stack_samples) {
-  record_read_thread_->GetLostRecords(lost_samples, lost_non_samples, cut_stack_samples);
 }
 
 bool EventSelectionSet::HandleCpuHotplugEvents(const std::vector<int>& monitored_cpus,
