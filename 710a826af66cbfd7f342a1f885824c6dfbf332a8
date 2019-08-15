@@ -34,6 +34,24 @@
       "revId": "710a826af66cbfd7f342a1f885824c6dfbf332a8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "befafc5c_dd3e2e19",
+        "filename": "memory_replay/traces/TRACES",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2019-08-15T00:39:18Z",
+      "side": 1,
+      "message": "ah, sgtm.",
+      "parentUuid": "93c56683_29d4281a",
+      "revId": "710a826af66cbfd7f342a1f885824c6dfbf332a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
