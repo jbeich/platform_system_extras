@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dbd7475e_db6f7e06",
+        "filename": "partition_tools/lpmake.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2019-08-18T08:56:28Z",
+      "side": 1,
+      "message": "too lone?\n\nif (!vbmeta_output_path.empty() \u0026\u0026\n    !WriteToVBMetaFile(vbmeta_output_path.c_str(), *metadata.get(), images)) {\n  ...\n}",
+      "range": {
+        "startLine": 374,
+        "startChar": 16,
+        "endLine": 374,
+        "endChar": 125
+      },
+      "revId": "d889ce32ae9d9949eade69c0482498c568f67d2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
