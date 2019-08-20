@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4b87ab2e_0e46a564",
+        "filename": "simpleperf/ETMDecoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2019-08-20T20:56:02Z",
+      "side": 1,
+      "message": "Do you want to update this emplace/use as well?",
+      "revId": "fc9da9b291525ce321c9c012fb687654268e39ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
