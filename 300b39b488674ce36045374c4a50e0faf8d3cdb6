@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "09042c21_4efda5b2",
+        "filename": "simpleperf/cmd_stat.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 423,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2019-08-20T21:36:39Z",
+      "side": 1,
+      "message": "fewer",
+      "range": {
+        "startLine": 423,
+        "startChar": 34,
+        "endLine": 423,
+        "endChar": 38
+      },
+      "revId": "300b39b488674ce36045374c4a50e0faf8d3cdb6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
