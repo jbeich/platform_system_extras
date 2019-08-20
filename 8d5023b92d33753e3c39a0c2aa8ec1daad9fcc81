@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bb9a4681_12765d2e",
+        "filename": "simpleperf/ETMDecoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2019-08-20T20:23:36Z",
+      "side": 1,
+      "message": "Invalidate",
+      "range": {
+        "startLine": 139,
+        "startChar": 11,
+        "endLine": 139,
+        "endChar": 18
+      },
+      "revId": "8d5023b92d33753e3c39a0c2aa8ec1daad9fcc81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fc5d6a29_6a99f871",
+        "filename": "simpleperf/ETMDecoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2019-08-20T20:23:36Z",
+      "side": 1,
+      "message": "Why \"at()\" instead of [] like above since there is no issue with the key not existing? I would pick a style and stick with it. I had experimented with using the return value of emplace() as well, but I didn\u0027t find a version that looked any cleaner than just doing the emplace(), and then immediately reading the result back out like this.",
+      "revId": "8d5023b92d33753e3c39a0c2aa8ec1daad9fcc81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ae7c2ebf_464c9bc9",
+        "filename": "simpleperf/ETMDecoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2019-08-20T20:23:36Z",
+      "side": 1,
+      "message": "the following",
+      "range": {
+        "startLine": 322,
+        "startChar": 66,
+        "endLine": 322,
+        "endChar": 71
+      },
+      "revId": "8d5023b92d33753e3c39a0c2aa8ec1daad9fcc81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "97877254_0b2962c1",
+        "filename": "simpleperf/ETMDecoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2019-08-20T20:23:36Z",
+      "side": 1,
+      "message": "s",
+      "range": {
+        "startLine": 324,
+        "startChar": 76,
+        "endLine": 324,
+        "endChar": 77
+      },
+      "revId": "8d5023b92d33753e3c39a0c2aa8ec1daad9fcc81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6d20f3ce_66cbc420",
+        "filename": "simpleperf/ETMDecoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2019-08-20T20:23:36Z",
+      "side": 1,
+      "message": "at vs. [] again (since we know that trace_id exists in the map).",
+      "range": {
+        "startLine": 347,
+        "startChar": 60,
+        "endLine": 347,
+        "endChar": 62
+      },
+      "revId": "8d5023b92d33753e3c39a0c2aa8ec1daad9fcc81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
