@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "c228a907_476218cd",
+        "filename": "simpleperf/ETMDecoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2019-08-20T20:50:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bb9a4681_12765d2e",
+      "range": {
+        "startLine": 139,
+        "startChar": 11,
+        "endLine": 139,
+        "endChar": 18
+      },
+      "revId": "8d5023b92d33753e3c39a0c2aa8ec1daad9fcc81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fc5d6a29_6a99f871",
         "filename": "simpleperf/ETMDecoder.cpp",
         "patchSetId": 1
@@ -36,6 +60,24 @@
       "writtenOn": "2019-08-20T20:23:36Z",
       "side": 1,
       "message": "Why \"at()\" instead of [] like above since there is no issue with the key not existing? I would pick a style and stick with it. I had experimented with using the return value of emplace() as well, but I didn\u0027t find a version that looked any cleaner than just doing the emplace(), and then immediately reading the result back out like this.",
+      "revId": "8d5023b92d33753e3c39a0c2aa8ec1daad9fcc81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "41b80bc1_759c4eaf",
+        "filename": "simpleperf/ETMDecoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2019-08-20T20:50:11Z",
+      "side": 1,
+      "message": "Used at() because [] creates an object if not exist, which needs default constructor. But PacketPrinter doesn\u0027t have a default constructor. Changed to use result of emplace().",
+      "parentUuid": "fc5d6a29_6a99f871",
       "revId": "8d5023b92d33753e3c39a0c2aa8ec1daad9fcc81",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "7ae3bbc1_10f4ff0b",
+        "filename": "simpleperf/ETMDecoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2019-08-20T20:50:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae7c2ebf_464c9bc9",
+      "range": {
+        "startLine": 322,
+        "startChar": 66,
+        "endLine": 322,
+        "endChar": 71
+      },
+      "revId": "8d5023b92d33753e3c39a0c2aa8ec1daad9fcc81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "97877254_0b2962c1",
         "filename": "simpleperf/ETMDecoder.cpp",
         "patchSetId": 1
@@ -88,6 +154,30 @@
     },
     {
       "key": {
+        "uuid": "1656d997_f96cf852",
+        "filename": "simpleperf/ETMDecoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2019-08-20T20:50:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "97877254_0b2962c1",
+      "range": {
+        "startLine": 324,
+        "startChar": 76,
+        "endLine": 324,
+        "endChar": 77
+      },
+      "revId": "8d5023b92d33753e3c39a0c2aa8ec1daad9fcc81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6d20f3ce_66cbc420",
         "filename": "simpleperf/ETMDecoder.cpp",
         "patchSetId": 1
@@ -99,6 +189,30 @@
       "writtenOn": "2019-08-20T20:23:36Z",
       "side": 1,
       "message": "at vs. [] again (since we know that trace_id exists in the map).",
+      "range": {
+        "startLine": 347,
+        "startChar": 60,
+        "endLine": 347,
+        "endChar": 62
+      },
+      "revId": "8d5023b92d33753e3c39a0c2aa8ec1daad9fcc81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ee549a55_4d004c72",
+        "filename": "simpleperf/ETMDecoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2019-08-20T20:50:11Z",
+      "side": 1,
+      "message": "same as above",
+      "parentUuid": "6d20f3ce_66cbc420",
       "range": {
         "startLine": 347,
         "startChar": 60,
