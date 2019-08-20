@@ -16,6 +16,24 @@
       "revId": "fc9da9b291525ce321c9c012fb687654268e39ad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "68531680_eafc5ffb",
+        "filename": "simpleperf/ETMDecoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2019-08-20T23:46:02Z",
+      "side": 1,
+      "message": "No, since speed isn\u0027t a concern, and this code looks more clear.",
+      "parentUuid": "4b87ab2e_0e46a564",
+      "revId": "fc9da9b291525ce321c9c012fb687654268e39ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
