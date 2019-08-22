@@ -375,8 +375,7 @@ def is_elf_file(path):
     if os.path.isfile(path):
         with open(path, 'rb') as fh:
             data = fh.read(4)
-            if len(data) == 4 and bytes_to_str(data) == '\x7fELF':
-                return True
+            return len(data) == 4 and data == b'\x7fELF'
     return False
 
 def find_real_dso_path(dso_path_in_record_file, binary_cache_path):
