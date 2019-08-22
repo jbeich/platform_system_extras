@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fdb0dc9b_1ff3df1c",
+        "filename": "simpleperf/ETMDecoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2019-08-22T17:33:02Z",
+      "side": 1,
+      "message": "Should the identifiers of these members be suffixed with an underscore, to match InstrRangeParser and Google3 style? Or is the convention not to do so for POD/structs?",
+      "revId": "c573eaaea45529370a15151d5a4e7ee7e6ff1b6b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
