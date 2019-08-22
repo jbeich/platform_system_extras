@@ -16,6 +16,24 @@
       "revId": "c573eaaea45529370a15151d5a4e7ee7e6ff1b6b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "29778da6_80896bc5",
+        "filename": "simpleperf/ETMDecoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2019-08-22T18:03:29Z",
+      "side": 1,
+      "message": "I think this struct as POD, just with same helper functions. So I don\u0027t use underscore.",
+      "parentUuid": "fdb0dc9b_1ff3df1c",
+      "revId": "c573eaaea45529370a15151d5a4e7ee7e6ff1b6b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
