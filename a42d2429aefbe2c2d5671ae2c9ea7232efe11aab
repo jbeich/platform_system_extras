@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "038840f8_dec1b065",
+        "filename": "simpleperf/ETMDecoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2019-08-22T17:28:10Z",
+      "side": 1,
+      "message": "Changed to a meaningful name.",
+      "parentUuid": "94c26a01_55408b13",
+      "revId": "a42d2429aefbe2c2d5671ae2c9ea7232efe11aab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "00935e27_eb8e48bd",
         "filename": "simpleperf/ETMDecoder.h",
         "patchSetId": 1
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "7ef88bb4_232d8a07",
+        "filename": "simpleperf/ETMDecoder.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2019-08-22T17:28:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "00935e27_eb8e48bd",
+      "revId": "a42d2429aefbe2c2d5671ae2c9ea7232efe11aab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "de12cf02_a4108d6c",
         "filename": "simpleperf/cmd_inject.cpp",
         "patchSetId": 1
@@ -50,6 +86,24 @@
       "revId": "a42d2429aefbe2c2d5671ae2c9ea7232efe11aab",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "841b6b3a_8e7b9cef",
+        "filename": "simpleperf/cmd_inject.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2019-08-22T17:28:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "de12cf02_a4108d6c",
+      "revId": "a42d2429aefbe2c2d5671ae2c9ea7232efe11aab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
