@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "94c26a01_55408b13",
+        "filename": "simpleperf/ETMDecoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2019-08-22T01:39:52Z",
+      "side": 1,
+      "message": "What does Hit mean here?",
+      "revId": "a42d2429aefbe2c2d5671ae2c9ea7232efe11aab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "00935e27_eb8e48bd",
+        "filename": "simpleperf/ETMDecoder.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2019-08-22T01:39:52Z",
+      "side": 1,
+      "message": "yeah if the callbacks are being added in this CL, and no callbacks return anything meaningful, consider making them return `void`.  You can always modify the callback signature later, if you need it.",
+      "revId": "a42d2429aefbe2c2d5671ae2c9ea7232efe11aab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "de12cf02_a4108d6c",
+        "filename": "simpleperf/cmd_inject.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2019-08-22T01:39:52Z",
+      "side": 1,
+      "message": "should just return void?",
+      "revId": "a42d2429aefbe2c2d5671ae2c9ea7232efe11aab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "99cac331_7aaa16a8",
+        "filename": "simpleperf/cmd_inject.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2019-08-22T01:39:52Z",
+      "side": 1,
+      "message": "This is a cool trick!",
+      "revId": "a42d2429aefbe2c2d5671ae2c9ea7232efe11aab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
