@@ -17,17 +17,11 @@
 #ifndef _FSCRYPT_INIT_EXTENSIONS_H_
 #define _FSCRYPT_INIT_EXTENSIONS_H_
 
-#include <sys/cdefs.h>
-#include <stdbool.h>
-#include <cutils/multiuser.h>
-
-__BEGIN_DECLS
+#include <string>
 
 // These functions assume they are being called from init
 // They will not operate properly outside of init
 int fscrypt_install_keyring();
-int fscrypt_set_directory_policy(const char* path);
-
-__END_DECLS
+int fscrypt_set_directory_policy(const std::string& dir);
 
 #endif // _FSCRYPT_INIT_EXTENSIONS_H_

@@ -38,7 +38,7 @@
 
 #define TAG "fscrypt"
 
-static int set_system_de_policy_on(char const* dir);
+static int set_system_de_policy_on(const std::string& dir);
 
 int fscrypt_install_keyring()
 {
@@ -56,8 +56,8 @@ int fscrypt_install_keyring()
 }
 
 // TODO(b/139378601): use a single central implementation of this.
-static void delete_dir_contents(const char* dir) {
-    char* const paths[2] = {const_cast<char*>(dir), nullptr};
+static void delete_dir_contents(const std::string& dir) {
+    char* const paths[2] = {const_cast<char*>(dir.c_str()), nullptr};
     FTS* fts = fts_open(paths, FTS_PHYSICAL | FTS_NOCHDIR | FTS_XDEV, nullptr);
     FTSENT* cur;
     while ((cur = fts_read(fts)) != nullptr) {
@@ -65,7 +65,7 @@ static void delete_dir_contents(const char* dir) {
             PLOG(ERROR) << "fts_read";
             break;
         }
-        if (strcmp(dir, cur->fts_path) == 0) {
+        if (dir == cur->fts_path) {
             continue;
         }
         switch (cur->fts_info) {
@@ -96,16 +96,15 @@ static void delete_dir_contents(const char* dir) {
     }
 }
 
-int fscrypt_set_directory_policy(const char* dir)
-{
+int fscrypt_set_directory_policy(const std::string& dir) {
     const std::string prefix = "/data/";
 
-    if (!dir || strncmp(dir, prefix.c_str(), prefix.size())) {
+    if (dir.rfind(prefix, 0) != 0) {
         return 0;
     }
 
     // Special-case /data/media/obb per b/64566063
-    if (strcmp(dir, "/data/media/obb") == 0) {
+    if (dir == "/data/media/obb") {
         // Try to set policy on this directory, but if it is non-empty this may fail.
         set_system_de_policy_on(dir);
         return 0;
@@ -115,7 +114,7 @@ int fscrypt_set_directory_policy(const char* dir)
     // To make this less restrictive, consider using a policy file.
     // However this is overkill for as long as the policy is simply
     // to apply a global policy to all /data folders created via makedir
-    if (strchr(dir + prefix.size(), '/')) {
+    if (dir.find_first_of('/', prefix.size()) != std::string::npos) {
         return 0;
     }
 
@@ -157,7 +156,7 @@ int fscrypt_set_directory_policy(const char* dir)
     return err;
 }
 
-static int set_system_de_policy_on(char const* dir) {
+static int set_system_de_policy_on(const std::string& dir) {
     std::string ref_filename = std::string("/data") + fscrypt_key_ref;
     std::string policy;
     if (!android::base::ReadFileToString(ref_filename, &policy)) {
@@ -179,14 +178,14 @@ static int set_system_de_policy_on(char const* dir) {
     }
 
     LOG(INFO) << "Setting policy on " << dir;
-    int result = fscrypt_policy_ensure(dir, policy.c_str(), policy.length(),
+    int result = fscrypt_policy_ensure(dir.c_str(), policy.c_str(), policy.length(),
                                        modes[0].c_str(),
                                        modes.size() >= 2 ?
                                             modes[1].c_str() : "aes-256-cts");
     if (result) {
         LOG(ERROR) << android::base::StringPrintf(
             "Setting %02x%02x%02x%02x policy on %s failed!",
-            policy[0], policy[1], policy[2], policy[3], dir);
+            policy[0], policy[1], policy[2], policy[3], dir.c_str());
         return -1;
     }
 
