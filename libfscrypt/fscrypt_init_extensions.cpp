@@ -96,17 +96,20 @@ static void delete_dir_contents(const std::string& dir) {
     }
 }
 
-int fscrypt_set_directory_policy(const std::string& dir) {
+int fscrypt_set_directory_policy(
+    const std::string& dirname,
+    const std::string& dirpath)
+{
     const std::string prefix = "/data/";
 
-    if (dir.rfind(prefix, 0) != 0) {
+    if (dirname.rfind(prefix, 0) != 0) {
         return 0;
     }
 
     // Special-case /data/media/obb per b/64566063
-    if (dir == "/data/media/obb") {
+    if (dirname == "/data/media/obb") {
         // Try to set policy on this directory, but if it is non-empty this may fail.
-        set_system_de_policy_on(dir);
+        set_system_de_policy_on(dirpath);
         return 0;
     }
 
@@ -114,7 +117,7 @@ int fscrypt_set_directory_policy(const std::string& dir) {
     // To make this less restrictive, consider using a policy file.
     // However this is overkill for as long as the policy is simply
     // to apply a global policy to all /data folders created via makedir
-    if (dir.find_first_of('/', prefix.size()) != std::string::npos) {
+    if (dirname.find_first_of('/', prefix.size()) != std::string::npos) {
         return 0;
     }
 
@@ -132,12 +135,12 @@ int fscrypt_set_directory_policy(const std::string& dir) {
         "gsi",
     };
     for (const auto& d: directories_to_exclude) {
-        if ((prefix + d) == dir) {
-            LOG(INFO) << "Not setting policy on " << dir;
+        if ((prefix + d) == dirname) {
+            LOG(INFO) << "Not setting policy on " << dirname;
             return 0;
         }
     }
-    int err = set_system_de_policy_on(dir);
+    int err = set_system_de_policy_on(dirpath);
     if (err == 0) {
         return 0;
     }
@@ -146,10 +149,10 @@ int fscrypt_set_directory_policy(const std::string& dir) {
         "rollback", "rollback-observer",  // b/139193659
     };
     for (const auto& d : wipe_on_failure) {
-        if ((prefix + d) == dir) {
-            LOG(ERROR) << "Setting policy failed, deleting: " << dir;
-            delete_dir_contents(dir);
-            err = set_system_de_policy_on(dir);
+        if ((prefix + d) == dirname) {
+            LOG(ERROR) << "Setting policy failed, deleting: " << dirpath;
+            delete_dir_contents(dirpath);
+            err = set_system_de_policy_on(dirpath);
             break;
         }
     }

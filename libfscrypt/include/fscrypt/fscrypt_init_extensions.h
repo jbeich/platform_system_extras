@@ -22,6 +22,8 @@
 // These functions assume they are being called from init
 // They will not operate properly outside of init
 int fscrypt_install_keyring();
-int fscrypt_set_directory_policy(const std::string& dir);
+int fscrypt_set_directory_policy(
+    const std::string& dirname, // Name of the directory for policy decisions
+    const std::string& dirpath); // Actual path to the directory as it currently exists
 
 #endif // _FSCRYPT_INIT_EXTENSIONS_H_
