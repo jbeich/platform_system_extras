@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4cadad16_9540e1f6",
+        "filename": "libfscrypt/fscrypt_init_extensions.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1064128
+      },
+      "writtenOn": "2019-08-26T17:14:59Z",
+      "side": 1,
+      "message": "Did clang-format do this to you?  I thought I fixed it...  It shouldn\u0027t mix the C headers and other project headers.  The left side is correct, except for your move of \"fscrypt.h\" to the bottom.",
+      "revId": "4c350ec37ef76d2de0cfbf1d5da95efafd1e4906",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
