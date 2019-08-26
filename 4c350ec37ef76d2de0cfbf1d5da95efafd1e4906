@@ -16,6 +16,24 @@
       "revId": "4c350ec37ef76d2de0cfbf1d5da95efafd1e4906",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "960fc29b_41bbee0b",
+        "filename": "libfscrypt/fscrypt_init_extensions.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1060907
+      },
+      "writtenOn": "2019-08-26T17:50:32Z",
+      "side": 1,
+      "message": "Yep, clang-format. I\u0027ll fix it back in one of my later changes. Where is the right clang-format config file to be found?",
+      "parentUuid": "4cadad16_9540e1f6",
+      "revId": "4c350ec37ef76d2de0cfbf1d5da95efafd1e4906",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
