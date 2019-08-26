@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e4a549cc_ba555b69",
+        "filename": "libfscrypt/fscrypt_init_extensions.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1064128
+      },
+      "writtenOn": "2019-08-26T17:10:34Z",
+      "side": 1,
+      "message": "You don\u0027t really need rfind() here, since that\u0027ll check the string at every position, not just the beginning.\n\nMaybe best to bring in libbase and use android::base::StartsWith().  That\u0027s become the common pattern in lots of system/.",
+      "revId": "db10e7d6d26b3c993248bda5c56ea2f056356bce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ccdbf8e8_6daa7aa1",
+        "filename": "libfscrypt/include/fscrypt/fscrypt_init_extensions.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1064128
+      },
+      "writtenOn": "2019-08-26T17:10:34Z",
+      "side": 1,
+      "message": "#pragma once\n\ntoo while you\u0027re here?  I\u0027ve been slowly making that change to headers that I touch.",
+      "revId": "db10e7d6d26b3c993248bda5c56ea2f056356bce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
