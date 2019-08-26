@@ -34,6 +34,24 @@
       "revId": "4c350ec37ef76d2de0cfbf1d5da95efafd1e4906",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3234d3ba_5e76b437",
+        "filename": "libfscrypt/fscrypt_init_extensions.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1064128
+      },
+      "writtenOn": "2019-08-26T18:19:45Z",
+      "side": 1,
+      "message": "Everything should symlink to /build/soong/scripts/system-clang-format (4 space indent) or /build/soong/scripts/system-clang-format-2 (2 space indent).\n\nIt was a change in the clang format tool itself that caused the problem, so non-updated clang-format files would get the bad behavior.",
+      "parentUuid": "960fc29b_41bbee0b",
+      "revId": "4c350ec37ef76d2de0cfbf1d5da95efafd1e4906",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
