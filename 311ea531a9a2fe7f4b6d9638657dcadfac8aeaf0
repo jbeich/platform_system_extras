@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c7e74ae6_21c136d8",
+        "filename": "simpleperf/cmd_record_test.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 858,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2019-08-29T20:41:08Z",
+      "side": 1,
+      "message": "Probably could do this check sooner, to avoid popen calls when etm isn\u0027t even supported?",
+      "revId": "311ea531a9a2fe7f4b6d9638657dcadfac8aeaf0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dc9023ef_a7f96ea9",
+        "filename": "simpleperf/event_fd.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2019-08-29T20:41:08Z",
+      "side": 1,
+      "message": "You could store `bool success \u003d ioctl(...) \u003e 0`, which might simplify the below.",
+      "revId": "311ea531a9a2fe7f4b6d9638657dcadfac8aeaf0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
