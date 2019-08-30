@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "1542833f_66feafa7",
+        "filename": "memory_replay/Alloc.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2019-08-30T15:55:50Z",
+      "side": 1,
+      "message": "Without changing the format, I can\u0027t do this because I made the second number after the realloc be a hexadecimal, but it\u0027s a decimal in all other places.\n\nI could treat the second always as a hexadecimal that convert it, but that seems like as much of a pain as leaving it like this.",
+      "parentUuid": "966cf694_ea20eeff",
+      "revId": "c29583dd65a2f9cdfdad7afac90999cbd03642d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0bf699af_c5ad78e4",
         "filename": "memory_replay/Utils.h",
         "patchSetId": 2
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "1d540189_7759132c",
+        "filename": "memory_replay/Utils.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2019-08-30T15:55:50Z",
+      "side": 1,
+      "message": "Yep, this is old code so using the better way to initialize.\n\nDone.",
+      "parentUuid": "0bf699af_c5ad78e4",
+      "revId": "c29583dd65a2f9cdfdad7afac90999cbd03642d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "aa31c5aa_913a14e7",
         "filename": "memory_replay/Zip.cpp",
         "patchSetId": 2
@@ -47,6 +83,24 @@
       "writtenOn": "2019-08-30T00:16:37Z",
       "side": 1,
       "message": "_exit? (and all the following ones.)",
+      "revId": "c29583dd65a2f9cdfdad7afac90999cbd03642d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c3b8b59a_636489dc",
+        "filename": "memory_replay/Zip.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2019-08-30T15:55:50Z",
+      "side": 1,
+      "message": "Fixed, and replaced a couple of exit(1) with errx(1, ...) that I missed before.",
+      "parentUuid": "aa31c5aa_913a14e7",
       "revId": "c29583dd65a2f9cdfdad7afac90999cbd03642d0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
