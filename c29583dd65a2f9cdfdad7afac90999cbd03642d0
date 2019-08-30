@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "966cf694_ea20eeff",
+        "filename": "memory_replay/Alloc.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2019-08-30T00:16:37Z",
+      "side": 1,
+      "message": "if your formats just had 0 to 3 SCNx64s (rather than varying numeric types), you could replace all this code with one line and just say \u003c 3 here, and then compare the type like you already do.",
+      "revId": "c29583dd65a2f9cdfdad7afac90999cbd03642d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0bf699af_c5ad78e4",
+        "filename": "memory_replay/Utils.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2019-08-30T00:16:37Z",
+      "side": 1,
+      "message": "or just `\u003d {}` on the line above. (or just ignore this, since you overwrite it on the next line anyway.)",
+      "revId": "c29583dd65a2f9cdfdad7afac90999cbd03642d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aa31c5aa_913a14e7",
+        "filename": "memory_replay/Zip.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2019-08-30T00:16:37Z",
+      "side": 1,
+      "message": "_exit? (and all the following ones.)",
+      "revId": "c29583dd65a2f9cdfdad7afac90999cbd03642d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
