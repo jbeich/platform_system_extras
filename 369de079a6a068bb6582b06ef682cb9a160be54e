@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "e943780a_4b013f3f",
+        "filename": "fsverity_init/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2019-09-03T21:23:03Z",
+      "side": 1,
+      "message": "Removed (need it later as I need to load certificate from keystore additionally).",
+      "parentUuid": "4efa16a7_66665cdc",
+      "revId": "369de079a6a068bb6582b06ef682cb9a160be54e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "886a9fb9_f4b08bf6",
         "filename": "fsverity_init/Android.bp",
         "patchSetId": 2
@@ -53,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "26950213_0f8084df",
+        "filename": "fsverity_init/fsverity_init.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2019-09-03T21:23:03Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "c4e3d7b4_cff5e2e1",
+      "revId": "369de079a6a068bb6582b06ef682cb9a160be54e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "11f6cb9a_6bfa03e0",
         "filename": "fsverity_init/fsverity_init.cpp",
         "patchSetId": 2
@@ -64,6 +100,24 @@
       "writtenOn": "2019-09-03T20:57:30Z",
       "side": 1,
       "message": "what if this fails?",
+      "revId": "369de079a6a068bb6582b06ef682cb9a160be54e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f457f6af_1867eb24",
+        "filename": "fsverity_init/fsverity_init.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2019-09-03T21:23:03Z",
+      "side": 1,
+      "message": "Hmm.. What\u0027s your suggestion to handle error during early boot phase, since we probably can\u0027t recover?",
+      "parentUuid": "11f6cb9a_6bfa03e0",
       "revId": "369de079a6a068bb6582b06ef682cb9a160be54e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
@@ -84,6 +138,24 @@
       "revId": "369de079a6a068bb6582b06ef682cb9a160be54e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4d720e5a_b72ddfb7",
+        "filename": "fsverity_init/fsverity_init.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2019-09-03T21:23:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "80252c23_695e8745",
+      "revId": "369de079a6a068bb6582b06ef682cb9a160be54e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
