@@ -16,6 +16,74 @@
       "revId": "369de079a6a068bb6582b06ef682cb9a160be54e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "886a9fb9_f4b08bf6",
+        "filename": "fsverity_init/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2019-09-03T20:57:30Z",
+      "side": 1,
+      "message": "dwillemsen: is there an official way to turn on exceptions?",
+      "revId": "369de079a6a068bb6582b06ef682cb9a160be54e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c4e3d7b4_cff5e2e1",
+        "filename": "fsverity_init/fsverity_init.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2019-09-03T20:57:30Z",
+      "side": 1,
+      "message": "if a function\u0027s only called once, just inline it.",
+      "revId": "369de079a6a068bb6582b06ef682cb9a160be54e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "11f6cb9a_6bfa03e0",
+        "filename": "fsverity_init/fsverity_init.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2019-09-03T20:57:30Z",
+      "side": 1,
+      "message": "what if this fails?",
+      "revId": "369de079a6a068bb6582b06ef682cb9a160be54e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "80252c23_695e8745",
+        "filename": "fsverity_init/fsverity_init.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2019-09-03T20:57:30Z",
+      "side": 1,
+      "message": "std::unique_ptr with pclose.",
+      "revId": "369de079a6a068bb6582b06ef682cb9a160be54e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
