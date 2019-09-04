@@ -113,6 +113,24 @@
     },
     {
       "key": {
+        "uuid": "5303c14e_93ea61fc",
+        "filename": "fsverity_init/fsverity_init.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2019-09-04T20:07:31Z",
+      "side": 1,
+      "message": "When we implemented mini-keyctl, we\u0027ve tried to use standard keyctl_* syscalls (and extend libkeyutils) when possible.  Padd (of both keyctl(1) and mini-keyctl) seems to both involve parsing /proc/keys, which doesn\u0027t seem to have corresponding standard library.\n\nInstead of adding Padd to libkeyutils, it probably makes a little more sense to add GetKeyringIdOrDie instead.  But then it\u0027s not a standard function, so I\u0027m not sure if we want that.  Alternatively, we\u0027d have to duplicate the code here... My current implementation is *just* to avoid the code duplication.  Any suggestions?",
+      "parentUuid": "e235bdd1_8c8f714d",
+      "revId": "a95eba18f8b737edad024fbb6b663961b221a12d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "11ed6db3_8cd324fc",
         "filename": "fsverity_init/fsverity_init.cpp",
         "patchSetId": 3
