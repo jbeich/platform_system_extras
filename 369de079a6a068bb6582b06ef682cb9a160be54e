@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "8b2cbfe9_5e114642",
+        "filename": "fsverity_init/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2019-09-04T18:00:53Z",
+      "side": 1,
+      "message": "No",
+      "parentUuid": "886a9fb9_f4b08bf6",
+      "revId": "369de079a6a068bb6582b06ef682cb9a160be54e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c4e3d7b4_cff5e2e1",
         "filename": "fsverity_init/fsverity_init.cpp",
         "patchSetId": 2
