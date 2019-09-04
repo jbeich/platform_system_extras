@@ -42,6 +42,24 @@
     },
     {
       "key": {
+        "uuid": "f9db10b1_ba552525",
+        "filename": "fsverity_init/fsverity_init.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2019-09-04T17:56:53Z",
+      "side": 1,
+      "message": "Removed.  Doesn\u0027t seem to need this any more.",
+      "parentUuid": "e7518510_685ac72c",
+      "revId": "a95eba18f8b737edad024fbb6b663961b221a12d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1caa5400_bd8007e4",
         "filename": "fsverity_init/fsverity_init.cpp",
         "patchSetId": 3
@@ -59,6 +77,24 @@
     },
     {
       "key": {
+        "uuid": "464954bc_252fa0a8",
+        "filename": "fsverity_init/fsverity_init.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2019-09-04T17:56:53Z",
+      "side": 1,
+      "message": "The thing is the only way to get .fs-verity keyring ID right now is to parse /proc/keys (and is what keyctl(1) does per manpage).  I can probably copy the code (GetKeyringIdOrDie) from mini-keyctl to here, if preferred.  Once we have ID, other operation can be easily done.",
+      "parentUuid": "1caa5400_bd8007e4",
+      "revId": "a95eba18f8b737edad024fbb6b663961b221a12d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "11ed6db3_8cd324fc",
         "filename": "fsverity_init/fsverity_init.cpp",
         "patchSetId": 3
@@ -70,6 +106,30 @@
       "writtenOn": "2019-09-03T22:58:01Z",
       "side": 1,
       "message": "auto\u0026\n\nDo you have a .clang-format for this project?  You should if not and it should symlink to build/soong/scripts/system-clang-format(-2)",
+      "range": {
+        "startLine": 60,
+        "startChar": 13,
+        "endLine": 60,
+        "endChar": 19
+      },
+      "revId": "a95eba18f8b737edad024fbb6b663961b221a12d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "54ada866_7e713364",
+        "filename": "fsverity_init/fsverity_init.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2019-09-04T17:56:53Z",
+      "side": 1,
+      "message": "Good idea, though I\u0027m not sure why it doesn\u0027t run with both .clang-format and PREUPLOAD.cfg in place :(",
+      "parentUuid": "11ed6db3_8cd324fc",
       "range": {
         "startLine": 60,
         "startChar": 13,
@@ -119,6 +179,30 @@
       "revId": "a95eba18f8b737edad024fbb6b663961b221a12d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f689b618_49302067",
+        "filename": "fsverity_init/fsverity_init.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2019-09-04T17:56:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f4a00ba2_97fd837e",
+      "range": {
+        "startLine": 84,
+        "startChar": 7,
+        "endLine": 84,
+        "endChar": 24
+      },
+      "revId": "a95eba18f8b737edad024fbb6b663961b221a12d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
