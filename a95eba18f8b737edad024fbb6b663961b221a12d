@@ -95,6 +95,24 @@
     },
     {
       "key": {
+        "uuid": "e235bdd1_8c8f714d",
+        "filename": "fsverity_init/fsverity_init.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1064128
+      },
+      "writtenOn": "2019-09-04T19:55:08Z",
+      "side": 1,
+      "message": "Got it; I was assuming all of those functions were already in libkeyutils.\n\nI still think that is the better approach though.  Could we expose Padd(), RestrictKeyring(), etc from libkeyutils?  If not, we should probably have some other library that exposes these if you want to use them like this.  It\u0027s going to be a lot more simple and more efficient than using popen() here and logwrapper below.",
+      "parentUuid": "464954bc_252fa0a8",
+      "revId": "a95eba18f8b737edad024fbb6b663961b221a12d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "11ed6db3_8cd324fc",
         "filename": "fsverity_init/fsverity_init.cpp",
         "patchSetId": 3
