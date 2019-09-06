@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2f00fc7e_cf3d570d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2019-09-06T15:01:48Z",
+      "side": 1,
+      "message": "this is not optional, though, right, so system/extras/ is the wrong place for it? is there no existing verity or keystore project for this?",
+      "revId": "2f4ac350f43a9b3d1522a2ac963c90ae96d02159",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "627e6a2e_eb3b1760",
+        "filename": "fsverity_keystore_init/fsverity_keystore_init.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2019-09-06T15:01:48Z",
+      "side": 1,
+      "message": "only used once; inline?",
+      "revId": "2f4ac350f43a9b3d1522a2ac963c90ae96d02159",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6e678fe3_ffec83f5",
+        "filename": "fsverity_keystore_init/fsverity_keystore_init.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2019-09-06T15:01:48Z",
+      "side": 1,
+      "message": "since you\u0027re using libbase, did you mean to use PLOG(ERROR) instead?",
+      "revId": "2f4ac350f43a9b3d1522a2ac963c90ae96d02159",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1d7eea11_a73fda1d",
+        "filename": "fsverity_keystore_init/fsverity_keystore_init.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2019-09-06T15:01:48Z",
+      "side": 1,
+      "message": "this is still weird to me. if there was only one, i\u0027d say that this should just output the key and you pipe it into keyctl in the shell script, but given that there are multiple...\n\nthis feels wrong, but i don\u0027t have a better suggestion right now.",
+      "range": {
+        "startLine": 40,
+        "startChar": 2,
+        "endLine": 51,
+        "endChar": 14
+      },
+      "revId": "2f4ac350f43a9b3d1522a2ac963c90ae96d02159",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
