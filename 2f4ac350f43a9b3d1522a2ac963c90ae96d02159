@@ -73,6 +73,30 @@
       "revId": "2f4ac350f43a9b3d1522a2ac963c90ae96d02159",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a1792831_1a9952ec",
+        "filename": "fsverity_keystore_init/fsverity_keystore_init.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1064128
+      },
+      "writtenOn": "2019-09-06T16:08:46Z",
+      "side": 1,
+      "message": "I honestly still think it\u0027s fine to do this all in native code; as long as we can figure out a way to expose the \u0027padd\u0027 and \u0027restrict-keyring\u0027 functions well.  This is going to be directly in the boot path, and we already know that process start up time isn\u0027t ideal.  Having to call mini-key n times for n keys is going to slow us down.",
+      "parentUuid": "1d7eea11_a73fda1d",
+      "range": {
+        "startLine": 40,
+        "startChar": 2,
+        "endLine": 51,
+        "endChar": 14
+      },
+      "revId": "2f4ac350f43a9b3d1522a2ac963c90ae96d02159",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
