@@ -121,6 +121,30 @@
       "revId": "2f4ac350f43a9b3d1522a2ac963c90ae96d02159",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "70aada75_38639366",
+        "filename": "fsverity_keystore_init/fsverity_keystore_init.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1064128
+      },
+      "writtenOn": "2019-09-06T17:43:18Z",
+      "side": 1,
+      "message": "I\u0027m pretty indifferent to the two.  Seems like the cleanest is to have static libmini-keyctl since the functions wouldn\u0027t be expected in the libkeyctl.\n\nenh@ ?",
+      "parentUuid": "73a5f30c_794c2120",
+      "range": {
+        "startLine": 40,
+        "startChar": 2,
+        "endLine": 51,
+        "endChar": 14
+      },
+      "revId": "2f4ac350f43a9b3d1522a2ac963c90ae96d02159",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
