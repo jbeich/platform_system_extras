@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3f49bcb1_ab607c74",
+        "filename": "partition_tools/lpdump.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-09-09T17:33:37Z",
+      "side": 1,
+      "message": "nit: is this related?",
+      "range": {
+        "startLine": 404,
+        "startChar": 0,
+        "endLine": 405,
+        "endChar": 17
+      },
+      "revId": "43ccb469e8489615f752a0e52f198f386ca98693",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
