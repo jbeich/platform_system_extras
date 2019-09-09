@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "80c4ba92_439ea018",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-09-09T17:30:46Z",
+      "side": 1,
+      "message": "nit: can you note this in the help message? Or even better, check for the retrofit DAP sysprop before dumping?",
+      "revId": "a35b80dd18c011c3235a5ab06b100880c3c1c3c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
