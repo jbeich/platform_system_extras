@@ -212,7 +212,8 @@ def main(argv):
     output.truncate()
 
   # run mke2fs
-  mke2fs_env = {"MKE2FS_CONFIG" : "./system/extras/ext4_utils/mke2fs.conf"}
+  mke2fs_env = {"MKE2FS_CONFIG" : os.path.join(os.path.dirname(__file__),
+                                               "mke2fs.conf")}
   if args.timestamp:
     mke2fs_env["E2FSPROGS_FAKE_TIME"] = args.timestamp
 
