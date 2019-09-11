@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9992c31c_52e6da4d",
+        "filename": "ext4_utils/mkuserimg_mke2fs.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1056365
+      },
+      "writtenOn": "2019-09-11T23:44:58Z",
+      "side": 1,
+      "message": "I think we should package \u0027mke2fs.conf\u0027 into mkuserimg_mke2fs (as python_binary_host), instead of relying on the path from __file__ or sys.argv[0].\n- Add `data` to Android.bp, to include \"mke2fs.conf\" into the built PAR file.\n- Use pkgutil.get_data to read the file from the package (this is needed as we\u0027re using embedded_launcher. See Dan\u0027s comment in b/135639220 for a similar case). I imagine something like:\n\nwith NamedTemporaryFile(...) as conf_file:\n  conf_data \u003d pkgutil.get_data(\u0027mkuserimg_mke2fs\u0027, \u0027mke2fs.conf\u0027)\n  conf_file.write(...)\n  mke2fs_env[\"MKE2FS_CONFIG\"] \u003d conf_file\n  RunCommand(mke2fs_cmd, mke2fs_env)\n\n- Then we can remove mke2fs.conf out of otatools: https://cs.corp.google.com/android/build/make/core/Makefile?l\u003d3658",
+      "range": {
+        "startLine": 215,
+        "startChar": 34,
+        "endLine": 216,
+        "endChar": 61
+      },
+      "revId": "d27ad18b9416d8b9fa04bf98384c68069d4e2257",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
