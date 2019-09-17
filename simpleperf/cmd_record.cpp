@@ -103,6 +103,11 @@ struct TimeStat {
   uint64_t post_process_time = 0;
 };
 
+struct AuxStat {
+  uint64_t aux_record_count = 0;
+  uint64_t aux_overflow_count = 0;
+};
+
 class RecordCommand : public Command {
  public:
   RecordCommand()
@@ -306,7 +311,7 @@ class RecordCommand : public Command {
   bool UnwindRecord(SampleRecord& r);
   bool PostUnwindRecords();
   bool JoinCallChains();
-  bool DumpAdditionalFeatures(const std::vector<std::string>& args);
+  bool DumpAdditionalFeatures(const std::vector<std::string>& args, AuxStat* aux_stat);
   bool DumpBuildIdFeature();
   bool DumpFileFeature();
   bool DumpMetaInfoFeature(bool kernel_symbols_available);
@@ -631,7 +636,8 @@ bool RecordCommand::PostProcessRecording(const std::vector<std::string>& args) {
   }
 
   // 3. Dump additional features, and close record file.
-  if (!DumpAdditionalFeatures(args)) {
+  AuxStat aux_stat;
+  if (!DumpAdditionalFeatures(args, &aux_stat)) {
     return false;
   }
   if (!record_file_writer_->Close()) {
@@ -648,6 +654,14 @@ bool RecordCommand::PostProcessRecording(const std::vector<std::string>& args) {
     LOG(INFO) << "Aux data traced: " << record_stat.aux_data_size;
     if (record_stat.lost_aux_data_size != 0) {
       LOG(INFO) << "Aux data lost in user space: " << record_stat.lost_aux_data_size;
+    }
+    LOG(DEBUG) << "Aux record count in kernel: " << aux_stat.aux_record_count;
+    LOG(DEBUG) << "Aux overflow count in kernel: " << aux_stat.aux_overflow_count;
+    constexpr double OVERFLOW_WARNING_BAR = 0.1;
+    if (aux_stat.aux_overflow_count > OVERFLOW_WARNING_BAR * aux_stat.aux_record_count) {
+      LOG(WARNING) << "Aux data overflow rate in kernel: "
+                   << (aux_stat.aux_overflow_count * 100.0 / aux_stat.aux_record_count)
+                   << "%. Consider using --aux-buffer-size to increase aux buffer size.";
     }
   } else {
     std::string cut_samples;
@@ -1579,8 +1593,8 @@ bool RecordCommand::JoinCallChains() {
   return reader->ReadDataSection(record_callback);
 }
 
-bool RecordCommand::DumpAdditionalFeatures(
-    const std::vector<std::string>& args) {
+bool RecordCommand::DumpAdditionalFeatures(const std::vector<std::string>& args,
+                                           AuxStat* aux_stat) {
   // Read data section of perf.data to collect hit file information.
   thread_tree_.ClearThreadAndMap();
   bool kernel_symbols_available = false;
@@ -1596,6 +1610,14 @@ bool RecordCommand::DumpAdditionalFeatures(
     } else if (r->type() == PERF_RECORD_AUXTRACE) {
       auto auxtrace = static_cast<const AuxTraceRecord*>(r);
       auxtrace_offset.emplace_back(auxtrace->location.file_offset - auxtrace->size());
+    } else if (r->type() == PERF_RECORD_AUX) {
+      auto aux = static_cast<const AuxRecord*>(r);
+      if (aux->data->aux_size > 0) {
+        aux_stat->aux_record_count++;
+        if (aux->data->flags & PERF_AUX_FLAG_TRUNCATED) {
+          aux_stat->aux_overflow_count++;
+        }
+      }
     }
   };
   if (!record_file_writer_->ReadDataSection(callback)) {
