@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "37162437_d58fa250",
+        "filename": "simpleperf/scripts/pprof_proto_generator.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2019-09-17T21:55:14Z",
+      "side": 1,
+      "message": "Yes, it is not uncommon to see trailing zeros in build ids.",
+      "parentUuid": "c8119c17_e49029a5",
+      "revId": "56f4031060c0371d8425b7b27a6ceceec417bda9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "74b60269_bc615fc5",
         "filename": "simpleperf/scripts/utils.py",
         "patchSetId": 1
