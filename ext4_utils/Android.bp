@@ -3,6 +3,7 @@
 cc_library {
     name: "libext4_utils",
     host_supported: true,
+    vendor_available: true,
     recovery_available: true,
     srcs: [
         "ext4_utils.cpp",

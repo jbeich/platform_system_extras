@@ -3,6 +3,7 @@
 cc_library {
     name: "libfec",
     host_supported: true,
+    vendor_available: true,
     recovery_available: true,
     srcs: [
         "fec_open.cpp",
@@ -14,6 +15,10 @@ cc_library {
     export_include_dirs: ["include"],
     // Exported header include/fec/io.h includes crypto_utils headers.
     export_shared_lib_headers: ["libcrypto_utils"],
+
+    header_libs: [
+        "libutils_headers",
+    ],
 
     shared_libs: [
         "libbase",
