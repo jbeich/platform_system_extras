@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "423a3357_42d3b6b6",
+        "filename": "simpleperf/scripts/pprof_proto_generator.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2019-09-17T21:08:12Z",
+      "side": 1,
+      "message": "Is padding always only in multiples of 8 zeroes? A comment would be helpful if that is the case.",
+      "revId": "56f4031060c0371d8425b7b27a6ceceec417bda9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "74b60269_bc615fc5",
+        "filename": "simpleperf/scripts/utils.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 777,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2019-09-17T21:08:12Z",
+      "side": 1,
+      "message": "Are these \"40\"s actually supposed to be \"20\"s?",
+      "range": {
+        "startLine": 777,
+        "startChar": 27,
+        "endLine": 777,
+        "endChar": 29
+      },
+      "revId": "56f4031060c0371d8425b7b27a6ceceec417bda9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
