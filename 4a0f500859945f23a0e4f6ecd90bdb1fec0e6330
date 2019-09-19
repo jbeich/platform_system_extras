@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bdfea779_3fd2119e",
+        "filename": "simpleperf/scripts/test.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1596,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2019-09-19T17:40:19Z",
+      "side": 1,
+      "message": "This is curious to me; `results` is an array of Bool? Then we sum the array of Bool and compare to the len?  This is detecting if there\u0027s a single \"failure\" or not?  Can we stop iterating and simply return False if one result is not True?  Or must we continue executing all iterations?",
+      "revId": "4a0f500859945f23a0e4f6ecd90bdb1fec0e6330",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
