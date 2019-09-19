@@ -16,6 +16,24 @@
       "revId": "4a0f500859945f23a0e4f6ecd90bdb1fec0e6330",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a59e0156_06b8713c",
+        "filename": "simpleperf/scripts/test.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1596,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2019-09-19T17:42:55Z",
+      "side": 1,
+      "message": "If we simply need to know if any test failed, but still execute all tests, then a simple boolean flag would be better:\n\nhas_failed \u003d False\nfor ... :\n  test_failed \u003d ...\n  if test_failed:\n    has_failed \u003d True\nreturn has_failed",
+      "parentUuid": "bdfea779_3fd2119e",
+      "revId": "4a0f500859945f23a0e4f6ecd90bdb1fec0e6330",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
