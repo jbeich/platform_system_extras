@@ -34,6 +34,24 @@
       "revId": "4a0f500859945f23a0e4f6ecd90bdb1fec0e6330",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d20498a1_33d7c2cf",
+        "filename": "simpleperf/scripts/test.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1596,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2019-09-19T19:25:08Z",
+      "side": 1,
+      "message": "Yeah, I want to run all tests even when some tests fail. Added comment in commit msg.\nOriginally I kept results list to show test results at the end. So test result for python 2 won\u0027t be forgotten. But I was not sure if it\u0027s worth doing. So I left a half done results.\n\nNow I am more for showing test results at the end.\nThe idea of sum(results) comes from numpy, which is not very readable. Changed to .count(False)",
+      "parentUuid": "a59e0156_06b8713c",
+      "revId": "4a0f500859945f23a0e4f6ecd90bdb1fec0e6330",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
