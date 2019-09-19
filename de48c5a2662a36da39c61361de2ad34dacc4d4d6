@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "72f17010_7a1231ad",
+        "filename": "simpleperf/cmd_inject.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2019-09-19T17:51:18Z",
+      "side": 1,
+      "message": "Would it be better to make use of `std::hash` here?",
+      "revId": "de48c5a2662a36da39c61361de2ad34dacc4d4d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6334cd5a_dfac40ff",
+        "filename": "simpleperf/cmd_inject.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2019-09-19T17:51:18Z",
+      "side": 1,
+      "message": "When working with a std::{unordered_}map, consider giving the iteration variable a descriptive name like `pair`, then in the body grabbing a reference to the key and value (using descriptive variable names) as `p.first` and `p.second` aren\u0027t very descriptive and require knowing the type of the variable that `p` was created from.",
+      "revId": "de48c5a2662a36da39c61361de2ad34dacc4d4d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
