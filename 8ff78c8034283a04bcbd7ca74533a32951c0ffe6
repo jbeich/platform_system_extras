@@ -46,6 +46,30 @@
       "revId": "8ff78c8034283a04bcbd7ca74533a32951c0ffe6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6767cb5f_c29251e5",
+        "filename": "partition_tools/lpmake.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2019-09-19T10:12:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1070128e_6125279a",
+      "range": {
+        "startLine": 369,
+        "startChar": 0,
+        "endLine": 379,
+        "endChar": 13
+      },
+      "revId": "8ff78c8034283a04bcbd7ca74533a32951c0ffe6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
