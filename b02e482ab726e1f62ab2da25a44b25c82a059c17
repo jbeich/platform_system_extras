@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5472e302_6fda88d9",
+        "filename": "simpleperf/scripts/test.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 1608,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2019-09-19T19:33:44Z",
+      "side": 1,
+      "message": "since this statement matches L1601, why not guard the for loop on L1603 with the inverted condition from L1600?",
+      "revId": "b02e482ab726e1f62ab2da25a44b25c82a059c17",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
