@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "5a4bc7cb_cf2ca2a0",
+        "filename": "simpleperf/cmd_record_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 782,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2019-10-01T18:41:45Z",
+      "side": 1,
+      "message": "I worried about having `am instrument` running after `pm uninstall`. But turns out it ends immediately after `pm uninstall`.",
+      "parentUuid": "02d0127c_fe792872",
+      "revId": "7b0a4f40632bd80c60e315e3eb6804ff033e57b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b5a95037_0e749b73",
         "filename": "simpleperf/gtest_main.cpp",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2019-10-01T02:48:45Z",
       "side": 1,
       "message": "return !RunSimpleperfCmd;",
+      "revId": "7b0a4f40632bd80c60e315e3eb6804ff033e57b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "64c7caf5_88720ad5",
+        "filename": "simpleperf/gtest_main.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2019-10-01T18:41:45Z",
+      "side": 1,
+      "message": "I prefer to be more obvious here",
+      "parentUuid": "b5a95037_0e749b73",
       "revId": "7b0a4f40632bd80c60e315e3eb6804ff033e57b1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
