@@ -76,7 +76,10 @@ class TestLogger(object):
     """ Write test progress in sys.stderr and keep verbose log in log file. """
     def __init__(self):
         self.log_file = self.get_log_file(3 if is_python3() else 2)
-        self.log_fh = open(self.log_file, 'w')
+        if os.path.isfile(self.log_file):
+            remove(self.log_file)
+        # Logs can come from multiple processes. So use append mode to avoid overwrite.
+        self.log_fh = open(self.log_file, 'a')
         logging.basicConfig(filename=self.log_file)
 
     @staticmethod
@@ -122,16 +125,12 @@ def build_testdata():
     if (not os.path.isdir(from_testdata_path) or not os.path.isdir(from_demo_path) or
             not from_script_testdata_path):
         return
-    copy_testdata_list = ['perf_with_symbols.data', 'perf_with_trace_offcpu.data',
-                          'perf_with_tracepoint_event.data', 'perf_with_interpreter_frames.data']
     copy_demo_list = ['SimpleperfExamplePureJava', 'SimpleperfExampleWithNative',
                       'SimpleperfExampleOfKotlin']
 
     testdata_path = "testdata"
     remove(testdata_path)
-    os.mkdir(testdata_path)
-    for testdata in copy_testdata_list:
-        shutil.copy(os.path.join(from_testdata_path, testdata), testdata_path)
+    shutil.copytree(from_testdata_path, testdata_path)
     for demo in copy_demo_list:
         shutil.copytree(os.path.join(from_demo_path, demo), os.path.join(testdata_path, demo))
     for f in os.listdir(from_script_testdata_path):
@@ -1543,6 +1542,44 @@ class TestPprofProtoGenerator(TestBase):
             mapping = profile.mapping[location.mapping_id - 1]
             self.assertLessEqual(mapping.memory_start, location.address)
             self.assertGreaterEqual(mapping.memory_limit, location.address)
+
+
+class TestRecordingRealApps(TestBase):
+    def setUp(self):
+        self.adb = AdbHelper(False)
+        self.installed_packages = []
+
+    def tearDown(self):
+        for package in self.installed_packages:
+            self.adb.run(['shell', 'pm', 'uninstall', package])
+
+    def install_apk(self, apk_path, package_name):
+        self.adb.run(['install', '-t', apk_path])
+        self.installed_packages.append(package_name)
+
+    def start_app(self, start_cmd):
+        subprocess.Popen(self.adb.adb_path + ' ' + start_cmd, shell=True,
+                         stdout=TEST_LOGGER.log_fh, stderr=TEST_LOGGER.log_fh)
+
+    def record_data(self, package_name, record_arg):
+        self.run_cmd(['app_profiler.py', '--app', package_name, '-r', record_arg])
+
+    def test_recording_displaybitmaps(self):
+        self.install_apk(os.path.join('testdata', 'DisplayBitmaps.apk'),
+                         'com.example.android.displayingbitmaps')
+        self.install_apk(os.path.join('testdata', 'DisplayBitmapsTest.apk'),
+                         'com.example.android.displayingbitmaps.test')
+        self.start_app('shell am instrument -w -r -e debug false -e class ' +
+                       'com.example.android.displayingbitmaps.tests.GridViewTest ' +
+                       'com.example.android.displayingbitmaps.test/' +
+                       'androidx.test.runner.AndroidJUnitRunner')
+        self.record_data('com.example.android.displayingbitmaps', '-e cpu-clock -g --duration 10')
+
+    def test_recording_endless_tunnel(self):
+        self.install_apk(os.path.join('testdata', 'EndlessTunnel.apk'), 'com.google.sample.tunnel')
+        self.start_app('shell am start -n com.google.sample.tunnel/android.app.NativeActivity -a ' +
+                       'android.intent.action.MAIN -c android.intent.category.LAUNCHER')
+        self.record_data('com.google.sample.tunnel', '-e cpu-clock -g --duration 10')
 
 
 def get_all_tests():
