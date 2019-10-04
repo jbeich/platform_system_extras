@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "53add820_ab77f07f",
+        "filename": "libfscrypt/include/fscrypt/fscrypt.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1060907
+      },
+      "writtenOn": "2019-10-04T21:56:47Z",
+      "side": 1,
+      "message": "This is growing out of hand... after this lands, I\u0027ll try a refactor that switches this to C++ and passes around PolicyKeyRef everywhere.",
+      "revId": "17115c7725f56b68f5117d6f4cd6eb68a99ad406",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
