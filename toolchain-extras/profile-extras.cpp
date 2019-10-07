@@ -119,11 +119,13 @@ __attribute__((constructor)) int init_profile_extras(void) {
   }
 #endif
 
+  /*
   pthread_t thread;
   int error = pthread_create(&thread, nullptr, property_watch_loop, nullptr);
   if (error != 0) {
     return -1;
   }
+  */
   return 0;
 }
 }
