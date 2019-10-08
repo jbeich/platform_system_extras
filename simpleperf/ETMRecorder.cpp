@@ -44,6 +44,11 @@ static constexpr int ETM4_CFG_BIT_TS = 11;
 
 static const std::string ETM_DIR = "/sys/bus/event_source/devices/cs_etm/";
 
+// from coresight_get_trace_id(int cpu) in include/linux/coresight-pmu.h
+static int GetTraceId(int cpu) {
+  return 0x10 + cpu * 2;
+}
+
 template <typename T>
 static bool ReadValueInEtmDir(const std::string& file, T* value, bool report_error = true) {
   std::string s;
@@ -135,9 +140,9 @@ bool ETMRecorder::ReadEtmInfo() {
           ReadValueInEtmDir(name + "/trcidr/trcidr0", &cpu_info.trcidr0) &&
           ReadValueInEtmDir(name + "/trcidr/trcidr1", &cpu_info.trcidr1) &&
           ReadValueInEtmDir(name + "/trcidr/trcidr2", &cpu_info.trcidr2) &&
+          ReadValueInEtmDir(name + "/trcidr/trcidr4", &cpu_info.trcidr4) &&
           ReadValueInEtmDir(name + "/trcidr/trcidr8", &cpu_info.trcidr8) &&
-          ReadValueInEtmDir(name + "/mgmt/trcauthstatus", &cpu_info.trcauthstatus) &&
-          ReadValueInEtmDir(name + "/mgmt/trctraceid", &cpu_info.trctraceid);
+          ReadValueInEtmDir(name + "/mgmt/trcauthstatus", &cpu_info.trcauthstatus);
       if (!success) {
         return false;
       }
@@ -195,7 +200,7 @@ AuxTraceInfoRecord ETMRecorder::CreateAuxTraceInfoRecord() {
     e.magic = AuxTraceInfoRecord::MAGIC_ETM4;
     e.cpu = p.first;
     e.trcconfigr = etm_config_reg_;
-    e.trctraceidr = p.second.trctraceid;
+    e.trctraceidr = GetTraceId(p.first);
     e.trcidr0 = p.second.trcidr0;
     e.trcidr1 = p.second.trcidr1;
     e.trcidr2 = p.second.trcidr2;
@@ -203,6 +208,18 @@ AuxTraceInfoRecord ETMRecorder::CreateAuxTraceInfoRecord() {
     e.trcauthstatus = p.second.trcauthstatus;
   }
   return AuxTraceInfoRecord(data, etm4_v);
+}
+
+size_t ETMRecorder::GetAddrFilterPairs() {
+  CHECK(etm_supported_);
+  size_t min_pairs = std::numeric_limits<size_t>::max();
+  for (auto& p : etm_info_) {
+    min_pairs = std::min<size_t>(min_pairs, GetBits(p.second.trcidr4, 0, 3));
+  }
+  if (min_pairs > 0) {
+    --min_pairs;  // One pair is used by the kernel to set default addr filter.
+  }
+  return min_pairs;
 }
 
 }  // namespace simpleperf
