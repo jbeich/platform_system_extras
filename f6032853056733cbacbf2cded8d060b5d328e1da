@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "68ccfada_a1dadff6",
+        "filename": "simpleperf/JITDebugReader.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2019-10-09T20:41:09Z",
+      "side": 1,
+      "message": "debugger_interface\n\nAnd fix the references down below too.",
+      "range": {
+        "startLine": 73,
+        "startChar": 55,
+        "endLine": 73,
+        "endChar": 73
+      },
+      "revId": "f6032853056733cbacbf2cded8d060b5d328e1da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
