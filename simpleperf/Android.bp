@@ -97,7 +97,6 @@ cc_library_static {
 
 cc_defaults {
     name: "libsimpleperf_dex_read_static_reqs_defaults",
-    defaults: ["libdexfile_static_defaults"],
     static_libs: [
         "libdexfile_support_static",
     ],
