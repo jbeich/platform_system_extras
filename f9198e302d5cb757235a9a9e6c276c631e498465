@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9cda4205_9af32482",
+        "filename": "simpleperf/JITDebugReader.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2019-10-10T21:41:06Z",
+      "side": 1,
+      "message": "This might be better as AndroidVersion since you already have a version variable and it can be confusing about the difference.",
+      "range": {
+        "startLine": 68,
+        "startChar": 6,
+        "endLine": 68,
+        "endChar": 13
+      },
+      "revId": "f9198e302d5cb757235a9a9e6c276c631e498465",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
