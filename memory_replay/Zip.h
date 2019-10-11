@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 The Android Open Source Project
+ * Copyright (C) 2019 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,23 +14,17 @@
  * limitations under the License.
  */
 
-#ifndef _MEMORY_REPLAY_LINE_BUFFER_H
-#define _MEMORY_REPLAY_LINE_BUFFER_H
+#pragma once
 
 #include <stdint.h>
 
-class LineBuffer {
- public:
-  LineBuffer(int fd, char* buffer, size_t buffer_len);
+#include <string>
 
-  bool GetLine(char** line, size_t* line_len);
+// Forward Declarations.
+struct AllocEntry;
 
- private:
-  int fd_;
-  char* buffer_ = nullptr;
-  size_t buffer_len_ = 0;
-  size_t start_ = 0;
-  size_t bytes_ = 0;
-};
+std::string ZipGetContents(const char* filename);
 
-#endif // _MEMORY_REPLAY_LINE_BUFFER_H
+void ZipGetUnwindInfo(const char* filename, AllocEntry** entries, size_t* num_entries);
+
+void ZipFreeEntries(AllocEntry* entries, size_t num_entries);

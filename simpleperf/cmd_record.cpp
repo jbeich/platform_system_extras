@@ -189,6 +189,9 @@ class RecordCommand : public Command {
 "--no-inherit  Don't record created child threads/processes.\n"
 "--cpu-percent <percent>  Set the max percent of cpu time used for recording.\n"
 "                         percent is in range [1-100], default is 25.\n"
+"--include-filter binary1,binary2,...\n"
+"                Trace only selected binaries in cs-etm instruction tracing.\n"
+"                Each entry is a binary path.\n"
 "\n"
 "Dwarf unwinding options:\n"
 "--post-unwind=(yes|no) If `--call-graph dwarf` option is used, then the user's\n"
@@ -466,7 +469,8 @@ bool RecordCommand::PrepareRecording(Workload* workload) {
     need_to_check_targets = true;
   }
   // Profiling JITed/interpreted Java code is supported starting from Android P.
-  if (GetAndroidVersion() >= kAndroidVersionP) {
+  // Also support profiling art interpreter on host.
+  if (GetAndroidVersion() >= kAndroidVersionP || GetAndroidVersion() == 0) {
     // JIT symfiles are stored in temporary files, and are deleted after recording. But if
     // `-g --no-unwind` option is used, we want to keep symfiles to support unwinding in
     // the debug-unwind cmd.
@@ -541,7 +545,7 @@ bool RecordCommand::PrepareRecording(Workload* workload) {
     if (!jit_debug_reader_->RegisterDebugInfoCallback(loop, callback)) {
       return false;
     }
-    if (!app_package_name_.empty()) {
+    if (!system_wide_collection_) {
       std::set<pid_t> pids = event_selection_set_.GetMonitoredProcesses();
       for (pid_t tid : event_selection_set_.GetMonitoredThreads()) {
         pid_t pid;
@@ -825,6 +829,11 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
       }
     } else if (args[i] == "--in-app") {
       in_app_context_ = true;
+    } else if (args[i] == "--include-filter") {
+      if (!NextArgumentOrError(args, &i)) {
+        return false;
+      }
+      event_selection_set_.SetIncludeFilters(android::base::Split(args[i], ","));
     } else if (args[i] == "-j") {
       if (!NextArgumentOrError(args, &i)) {
         return false;

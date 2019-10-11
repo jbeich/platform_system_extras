@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 The Android Open Source Project
+ * Copyright (C) 2019 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,20 +14,20 @@
  * limitations under the License.
  */
 
-#ifndef _FSCRYPT_INIT_EXTENSIONS_H_
-#define _FSCRYPT_INIT_EXTENSIONS_H_
+#pragma once
 
-#include <sys/cdefs.h>
-#include <stdbool.h>
-#include <cutils/multiuser.h>
+#include <stdint.h>
+#include <time.h>
 
-__BEGIN_DECLS
+static __always_inline uint64_t Nanotime() {
+  struct timespec t = {};
+  clock_gettime(CLOCK_MONOTONIC, &t);
+  return static_cast<uint64_t>(t.tv_sec) * 1000000000LL + t.tv_nsec;
+}
 
-// These functions assume they are being called from init
-// They will not operate properly outside of init
-int fscrypt_install_keyring();
-int fscrypt_set_directory_policy(const char* path);
-
-__END_DECLS
-
-#endif // _FSCRYPT_INIT_EXTENSIONS_H_
+static __always_inline void MakeAllocationResident(void* ptr, size_t nbytes, int pagesize) {
+  uint8_t* data = reinterpret_cast<uint8_t*>(ptr);
+  for (size_t i = 0; i < nbytes; i += pagesize) {
+    data[i] = 1;
+  }
+}
