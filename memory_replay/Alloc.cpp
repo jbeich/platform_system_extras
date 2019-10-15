@@ -155,9 +155,14 @@ static uint64_t FreeExecute(const AllocEntry& entry, Pointers* pointers) {
   }
 
   void* memory = pointers->Remove(entry.ptr);
+  bool purge = malloc_usable_size(memory) > 3000000;
   uint64_t time_nsecs = Nanotime();
   free(memory);
-  return Nanotime() - time_nsecs;
+  time_nsecs =  Nanotime() - time_nsecs;
+  if (purge) {
+    mallopt(M_PURGE, 0);
+  }
+  return time_nsecs;
 }
 
 uint64_t AllocExecute(const AllocEntry& entry, Pointers* pointers) {
