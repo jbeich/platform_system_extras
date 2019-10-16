@@ -8,7 +8,7 @@ Usage:
 ${0##*/} OUTPUT_FILE SIZE
          [-C FS_CONFIG] [-f SRC_DIR] [-D PRODUCT_OUT]
          [-s FILE_CONTEXTS] [-t MOUNT_POINT] [-T TIMESTAMP]
-         [-L LABEL]
+         [-L LABEL] [-S]
 EOT
 }
 
@@ -68,19 +68,25 @@ if [[ "$1" == "-L" ]]; then
   shift; shift
 fi
 
+if [[ "$1" == "-S" ]]; then
+  MKFS_OPTS+=" -S"
+  SLOAD_OPTS+=" -S"
+  shift
+fi
+
 if [ -z $SIZE ]; then
   echo "Need size of filesystem"
   exit 2
 fi
 
-MAKE_F2FS_CMD="make_f2fs -S $SIZE -g android $MKFS_OPTS $OUTPUT_FILE"
+MAKE_F2FS_CMD="make_f2fs $SIZE -g android $MKFS_OPTS $OUTPUT_FILE"
 echo $MAKE_F2FS_CMD
 $MAKE_F2FS_CMD
 if [ $? -ne 0 ]; then
   exit 4
 fi
 
-SLOAD_F2FS_CMD="sload_f2fs -S $SLOAD_OPTS $OUTPUT_FILE"
+SLOAD_F2FS_CMD="sload_f2fs $SLOAD_OPTS $OUTPUT_FILE"
 echo $SLOAD_F2FS_CMD
 $SLOAD_F2FS_CMD
 if [ $? -ne 0 ]; then
