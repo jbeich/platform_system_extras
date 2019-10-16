@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9970d8aa_65e2bcf6",
+        "filename": "f2fs_utils/mkf2fsuserimg.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2019-10-16T20:52:40Z",
+      "side": 1,
+      "message": "\"-S $SIZE\"",
+      "range": {
+        "startLine": 72,
+        "startChar": 2,
+        "endLine": 72,
+        "endChar": 18
+      },
+      "revId": "a820c9f50134398eaf631a8983ff38727025941a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0b9f49a8_7e93f2bb",
+        "filename": "f2fs_utils/mkf2fsuserimg.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2019-10-16T20:52:40Z",
+      "side": 1,
+      "message": "make_f2fs -g android $MKFS_OPTS $OUTPUT_FILE $SIZE",
+      "range": {
+        "startLine": 82,
+        "startChar": 16,
+        "endLine": 82,
+        "endChar": 66
+      },
+      "revId": "a820c9f50134398eaf631a8983ff38727025941a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
