@@ -22,6 +22,30 @@
       "revId": "c18bfa3000fa03d12a7e2a40268810323c8d5abf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "06431107_beb2e981",
+        "filename": "simpleperf/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2019-10-17T23:12:41Z",
+      "side": 1,
+      "message": "Sure, if you say so. I did notice there aren\u0027t any hits on libsimpleperf_dex_read around, but I didn\u0027t check the backstory on that.",
+      "parentUuid": "62d7a708_1acdf129",
+      "range": {
+        "startLine": 98,
+        "startChar": 0,
+        "endLine": 126,
+        "endChar": 1
+      },
+      "revId": "c18bfa3000fa03d12a7e2a40268810323c8d5abf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
