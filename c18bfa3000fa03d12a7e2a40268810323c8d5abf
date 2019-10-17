@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "62d7a708_1acdf129",
+        "filename": "simpleperf/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2019-10-17T23:02:31Z",
+      "side": 1,
+      "message": "remove them since no longer needed?",
+      "range": {
+        "startLine": 98,
+        "startChar": 0,
+        "endLine": 126,
+        "endChar": 1
+      },
+      "revId": "c18bfa3000fa03d12a7e2a40268810323c8d5abf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
