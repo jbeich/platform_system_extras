@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "e8a2a713_1012b00e",
+        "filename": "f2fs_utils/mkf2fsuserimg.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-10-17T07:30:38Z",
+      "side": 1,
+      "message": "Processing the -S option needs to be done earlier, right after SIZE is processed (so at line 28), to match the order in which the build_command is constructed in build_image.py. Otherwise, build will fail when we don\u0027t specify TARGET_USERIMAGES_SPARSE_F2FS_DISABLED :\u003d true.\n\nAlso, it looks like when make_f2fs is run without the -S option, it expects userdata.img to already exist and have the correct size - so we\u0027ll have to create the file somehow only when -S isn\u0027t specified. I think the following works (also incorporating Jaegeuk\u0027s existing suggestions):\n\nSPARSE_IMG\u003d\"false\"\nif [[ \"$1\" \u003d\u003d \"-S\" ]]; then\n  MKFS_OPTS+\u003d\" -S $SIZE\"\n  SLOAD_OPTS+\u003d\" -S\"\n  SPARSE_IMG\u003d\"true\"\n  shift\nfi",
+      "revId": "a820c9f50134398eaf631a8983ff38727025941a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9970d8aa_65e2bcf6",
         "filename": "f2fs_utils/mkf2fsuserimg.sh",
         "patchSetId": 2
@@ -25,6 +42,23 @@
     },
     {
       "key": {
+        "uuid": "160126ea_de97ea78",
+        "filename": "f2fs_utils/mkf2fsuserimg.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-10-17T07:30:38Z",
+      "side": 1,
+      "message": "Continuing from above - the actual allocation of the file.\n\nif [ \"$SPARSE_IMG\" \u003d \"false\" ]; then\n  FALLOCATE_CMD\u003d\"fallocate -l $SIZE $OUTPUT_FILE\"\n  echo $FALLOCATE_CMD\n  $FALLOCATE_CMD\n  if [ $? -ne 0 ]; then\n    exit 3\n  fi\nfi\n\nThe disadvantage of using fallocate is we\u0027ll need to add fallocate to the allowed commands list in build/soong/ui/build/paths/config.go (add fallocate to the the \"var Configuration\" map as \"Allowed\"), but the advantage is fallocate should be faster than using dd.",
+      "revId": "a820c9f50134398eaf631a8983ff38727025941a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0b9f49a8_7e93f2bb",
         "filename": "f2fs_utils/mkf2fsuserimg.sh",
         "patchSetId": 2
@@ -36,6 +70,30 @@
       "writtenOn": "2019-10-16T20:52:40Z",
       "side": 1,
       "message": "make_f2fs -g android $MKFS_OPTS $OUTPUT_FILE $SIZE",
+      "range": {
+        "startLine": 82,
+        "startChar": 16,
+        "endLine": 82,
+        "endChar": 66
+      },
+      "revId": "a820c9f50134398eaf631a8983ff38727025941a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fba234ca_ea121503",
+        "filename": "f2fs_utils/mkf2fsuserimg.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-10-17T07:30:38Z",
+      "side": 1,
+      "message": "It looks like make_f2fs takes the number of sectors as the last argument, rather than the size in bytes, so I don\u0027t think the last argument should just be $SIZE - in any case, do we actually still need the $SIZE argument at the end if we\u0027re going to fallocate the file ahead of time when we don\u0027t have the -S option?",
+      "parentUuid": "0b9f49a8_7e93f2bb",
       "range": {
         "startLine": 82,
         "startChar": 16,
