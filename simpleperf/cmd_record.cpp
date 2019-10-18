@@ -94,6 +94,7 @@ static constexpr size_t kRecordBufferSize = 64 * 1024 * 1024;
 static constexpr size_t kSystemWideRecordBufferSize = 256 * 1024 * 1024;
 
 static constexpr size_t kDefaultAuxBufferSize = 4 * 1024 * 1024;
+static constexpr double kDefaultEtmDataFlushPeriodInSec = 0.1;
 
 struct TimeStat {
   uint64_t prepare_recording_time = 0;
@@ -561,6 +562,18 @@ bool RecordCommand::PrepareRecording(Workload* workload) {
       if (!jit_debug_reader_->ReadAllProcesses()) {
         return false;
       }
+    }
+  }
+  if (event_selection_set_.HasAuxTrace()) {
+    // ETM data is dumped to kernel buffer only when all monitored targets are scheduled off cpu.
+    // This makes less than expected data, especially in system wide recording. So add a periodic
+    // event to flush etm data.
+    auto etm_flush = [this]() {
+      return event_selection_set_.SetEnableEvents(false) &&
+             event_selection_set_.SetEnableEvents(true);
+    };
+    if (!loop->AddPeriodicEvent(SecondToTimeval(kDefaultEtmDataFlushPeriodInSec), etm_flush)) {
+      return false;
     }
   }
   return true;
