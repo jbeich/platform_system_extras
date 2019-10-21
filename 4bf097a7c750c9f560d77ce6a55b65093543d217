@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5512e5bf_d08983e3",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 570,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2019-10-21T17:35:44Z",
+      "side": 1,
+      "message": "Nit: It\u0027s not clear in here or the documentation of SetEnableEvents that setting to false and back to true triggers a flush.  Consider expanding/explaining.",
+      "revId": "4bf097a7c750c9f560d77ce6a55b65093543d217",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
