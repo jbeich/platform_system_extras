@@ -166,15 +166,10 @@ cc_defaults {
         linux: {
             static_libs: [
                 "libunwindstack",
-                "libdexfile_support_static",
+                "libdexfile_support",
                 "libcutils",
                 "libprocinfo",
                 "libevent",
-            ],
-        },
-        android: {
-            static_libs: [
-                "libc",
             ],
         },
         host: {
@@ -375,9 +370,6 @@ cc_binary {
     },
 
     target: {
-        android: {
-            static_executable: true,
-        },
         android_arm: {
             dist: {
                 dir: "simpleperf/android/arm",
