@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "71ce5dd5_a1def58d",
+        "filename": "libfscrypt/include/fscrypt/fscrypt.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1060907
+      },
+      "writtenOn": "2019-10-24T23:38:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d7e3784e_b3ee19a1",
+      "revId": "24622fc4895dfa3a0823facfca611cbdaed13bd2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b5f1aa40_7d1c8da1",
         "filename": "libfscrypt/include/fscrypt/fscrypt.h",
         "patchSetId": 1
@@ -39,6 +57,30 @@
       "revId": "24622fc4895dfa3a0823facfca611cbdaed13bd2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a90866b5_f17323cb",
+        "filename": "libfscrypt/include/fscrypt/fscrypt.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1060907
+      },
+      "writtenOn": "2019-10-24T23:38:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b5f1aa40_7d1c8da1",
+      "range": {
+        "startLine": 42,
+        "startChar": 5,
+        "endLine": 42,
+        "endChar": 13
+      },
+      "revId": "24622fc4895dfa3a0823facfca611cbdaed13bd2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
