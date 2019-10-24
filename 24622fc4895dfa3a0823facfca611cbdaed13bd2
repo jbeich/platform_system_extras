@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b5f1aa40_7d1c8da1",
+        "filename": "libfscrypt/include/fscrypt/fscrypt.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2019-10-24T22:23:46Z",
+      "side": 1,
+      "message": "might be worth clarifying that this *appends*? google3 stuff that takes a std::string* usually calls clear().\n\n(also: since you\u0027re not in a namespace, probably worth keeping the prefix to avoid global namespace pollution for such a generic name. or adding a namespace of course.)\n\n(also: `Str` and `str` are a bit misleading in this context too. it\u0027s really bytes that just happen to be stored in a std::string, right?)",
+      "range": {
+        "startLine": 42,
+        "startChar": 5,
+        "endLine": 42,
+        "endChar": 13
+      },
+      "revId": "24622fc4895dfa3a0823facfca611cbdaed13bd2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
