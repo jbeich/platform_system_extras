@@ -17,23 +17,47 @@
 #ifndef _FSCRYPT_H_
 #define _FSCRYPT_H_
 
-#include <sys/cdefs.h>
-#include <stdbool.h>
-#include <cutils/multiuser.h>
-
-__BEGIN_DECLS
+#include <string>
 
 bool fscrypt_is_native();
-
-int fscrypt_policy_ensure(const char* directory, const char* key_raw_ref, size_t key_raw_ref_length,
-                          const char* contents_encryption_mode,
-                          const char* filenames_encryption_mode, int policy_version);
 
 static const char* fscrypt_unencrypted_folder = "/unencrypted";
 static const char* fscrypt_key_ref = "/unencrypted/ref";
 static const char* fscrypt_key_per_boot_ref = "/unencrypted/per_boot_ref";
 static const char* fscrypt_key_mode = "/unencrypted/mode";
 
-__END_DECLS
+namespace android {
+namespace fscrypt {
+
+struct Policy {
+    int version;
+    int contents_mode;
+    int filenames_mode;
+
+    Policy() : version(0) {}
+};
+
+struct PolicyKeyRef {
+    Policy policy;
+    std::string key_raw_ref;
+};
+
+void BytesToHex(const std::string& bytes, std::string* hex);
+
+bool PolicyString(const Policy& policy, std::string* policy_string);
+
+// Note that right now this parses only the output from FscryptPolicyString, not the
+// more general format that appears in fstabs.
+bool ParsePolicy(const std::string& policy_string, Policy* policy);
+
+bool ParsePolicyParts(const std::string& contents_mode, const std::string& filenames_mode,
+                      const std::string& flags, Policy* policy);
+
+bool ParsePolicyParts(const std::string& contents_mode, const std::string& filenames_mode,
+                      int policy_version, Policy* policy);
+bool EnsurePolicy(const PolicyKeyRef& policy_key_ref, const std::string& directory);
+
+}  // namespace fscrypt
+}  // namespace android
 
 #endif // _FSCRYPT_H_
