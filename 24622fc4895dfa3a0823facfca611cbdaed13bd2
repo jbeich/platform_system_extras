@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "d7e3784e_b3ee19a1",
+        "filename": "libfscrypt/include/fscrypt/fscrypt.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-10-24T22:53:13Z",
+      "side": 1,
+      "message": "On the kernel side, a \"policy\" includes both these fields and the key reference.  Maybe Policy here should be renamed to EncryptionOptions, and PolicyKeyRef should be renamed to Policy?  That would make some of the code more logical, and it\u0027s also the naming that the userspace tool https://github.com/google/fscrypt (for \"regular\" Linux distros) uses.",
+      "revId": "24622fc4895dfa3a0823facfca611cbdaed13bd2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b5f1aa40_7d1c8da1",
         "filename": "libfscrypt/include/fscrypt/fscrypt.h",
         "patchSetId": 1
