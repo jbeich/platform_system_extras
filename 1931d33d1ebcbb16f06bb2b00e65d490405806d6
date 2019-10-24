@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "18bcf93f_32df40ec",
+        "filename": "libfscrypt/fscrypt.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-10-24T23:53:48Z",
+      "side": 1,
+      "message": "\"v1 policy\", not \"v1 options\".  The policy is versioned, not the options per se.  Maybe calling the variable \u0027policy_version\u0027 instead of just \u0027verison\u0027 would make it clearer?",
+      "range": {
+        "startLine": 248,
+        "startChar": 58,
+        "endLine": 248,
+        "endChar": 68
+      },
+      "revId": "1931d33d1ebcbb16f06bb2b00e65d490405806d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cb79db6a_3611c9b3",
+        "filename": "libfscrypt/fscrypt.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-10-24T23:53:48Z",
+      "side": 1,
+      "message": "\"v2 policy\", not \"v2 options\".",
+      "range": {
+        "startLine": 263,
+        "startChar": 58,
+        "endLine": 263,
+        "endChar": 68
+      },
+      "revId": "1931d33d1ebcbb16f06bb2b00e65d490405806d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "43cfc15e_6cceebd6",
+        "filename": "libfscrypt/fscrypt.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-10-24T23:53:48Z",
+      "side": 1,
+      "message": "\"policy version\", not \"options version\".",
+      "range": {
+        "startLine": 275,
+        "startChar": 46,
+        "endLine": 275,
+        "endChar": 53
+      },
+      "revId": "1931d33d1ebcbb16f06bb2b00e65d490405806d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7248f5b9_d16ff80b",
+        "filename": "libfscrypt/fscrypt.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-10-24T23:53:48Z",
+      "side": 1,
+      "message": "Since this string now describes the whole policy, not just the key reference, maybe it should be called something like \"policy_str\"?",
+      "range": {
+        "startLine": 279,
+        "startChar": 16,
+        "endLine": 279,
+        "endChar": 19
+      },
+      "revId": "1931d33d1ebcbb16f06bb2b00e65d490405806d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ee498b36_ce07f5d5",
+        "filename": "libfscrypt/include/fscrypt/fscrypt.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-10-24T23:53:48Z",
+      "side": 1,
+      "message": "policy, not options",
+      "range": {
+        "startLine": 58,
+        "startChar": 42,
+        "endLine": 58,
+        "endChar": 49
+      },
+      "revId": "1931d33d1ebcbb16f06bb2b00e65d490405806d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
