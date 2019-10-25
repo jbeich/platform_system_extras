@@ -72,8 +72,6 @@ struct fscrypt_policy_v2 {
 
 #define HEX_LOOKUP "0123456789abcdef"
 
-#define MAX_KEY_REF_SIZE_HEX (2 * FSCRYPT_KEY_IDENTIFIER_SIZE + 1)
-
 struct ModeLookupEntry {
     std::string name;
     int id;
@@ -200,8 +198,19 @@ bool OptionsToString(const EncryptionOptions& options, std::string* options_stri
 
 bool ParseOptions(const std::string& options_string, EncryptionOptions* options) {
     auto parts = android::base::Split(options_string, ":");
-
-    if (parts.size() != 3) return false;
+    if (parts.size() < 1 || parts.size() > 3) {
+        return false;
+    }
+    if (parts.size() < 2) {
+        if (parts[0] == "adiantum") {
+            parts.emplace_back("adiantum");
+        } else {
+            parts.emplace_back("aes-256-cts");
+        }
+    }
+    if (parts.size() < 3) {
+        parts.emplace_back("v1");
+    }
 
     return ParseOptionsParts(parts[0], parts[1], parts[2], options);
 }
