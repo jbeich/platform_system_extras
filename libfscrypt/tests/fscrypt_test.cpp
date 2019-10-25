@@ -92,5 +92,4 @@ TEST(fscrypt, ParseOptions) {
     EXPECT_EQ(false, ParseOptions("aes-256-xts:aes-256-cts:v2:foo", &options));
     EXPECT_EQ(false, ParseOptions("aes-256-xts:aes-256-cts:blah", &options));
     EXPECT_EQ(false, ParseOptions("aes-256-xts:aes-256-cts:vblah", &options));
-    EXPECT_EQ(false, ParseOptions("aes-356-xts", &options));
 }
