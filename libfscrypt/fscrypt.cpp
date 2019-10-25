@@ -72,8 +72,6 @@ struct fscrypt_policy_v2 {
 
 #define HEX_LOOKUP "0123456789abcdef"
 
-#define MAX_KEY_REF_SIZE_HEX (2 * FSCRYPT_KEY_IDENTIFIER_SIZE + 1)
-
 struct ModeLookupEntry {
     std::string name;
     int id;
@@ -235,6 +233,16 @@ bool ParseOptionsParts(const std::string& contents_mode, const std::string& file
     return true;
 }
 
+static std::string PolicyDescriptor(const EncryptionPolicy& policy) {
+    std::stringstream ss;
+    std::string ref_hex;
+    BytesToHex(policy.key_raw_ref, &ref_hex);
+    ss << ref_hex;
+    ss << " v" << policy.options.version;
+    ss << " modes " << policy.options.contents_mode << "/" << policy.options.filenames_mode;
+    return ss.str();
+}
+
 bool EnsurePolicy(const EncryptionPolicy& policy, const std::string& directory) {
     union {
         fscrypt_policy_v1 v1;
@@ -276,10 +284,7 @@ bool EnsurePolicy(const EncryptionPolicy& policy, const std::string& directory) 
             return false;
     }
 
-    std::string policy_descr;
-    BytesToHex(policy.key_raw_ref, &policy_descr);
-    policy_descr += " modes "s + std::to_string(policy.options.contents_mode) + "/" +
-                    std::to_string(policy.options.filenames_mode);
+    auto policy_descr = PolicyDescriptor(policy);
 
     android::base::unique_fd fd(open(directory.c_str(), O_DIRECTORY | O_NOFOLLOW | O_CLOEXEC));
     if (fd == -1) {
