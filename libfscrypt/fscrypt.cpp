@@ -278,7 +278,8 @@ bool EnsurePolicy(const EncryptionPolicy& policy, const std::string& directory) 
 
     std::string policy_descr;
     BytesToHex(policy.key_raw_ref, &policy_descr);
-    policy_descr += " modes "s + std::to_string(policy.options.contents_mode) + "/" +
+    policy_descr += " v" + std::to_string(policy.options.version) + " modes "s +
+                    std::to_string(policy.options.contents_mode) + "/" +
                     std::to_string(policy.options.filenames_mode);
 
     android::base::unique_fd fd(open(directory.c_str(), O_DIRECTORY | O_NOFOLLOW | O_CLOEXEC));
