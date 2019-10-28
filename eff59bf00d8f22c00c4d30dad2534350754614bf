@@ -22,6 +22,30 @@
       "revId": "eff59bf00d8f22c00c4d30dad2534350754614bf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b6ad2d81_75dcafcd",
+        "filename": "libfscrypt/tests/fscrypt_test.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1060907
+      },
+      "writtenOn": "2019-10-28T21:44:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c31f9151_ddc6bb24",
+      "range": {
+        "startLine": 105,
+        "startChar": 37,
+        "endLine": 105,
+        "endChar": 50
+      },
+      "revId": "eff59bf00d8f22c00c4d30dad2534350754614bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
