@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "901ac7b1_cf25d301",
+        "filename": "libfscrypt/fscrypt.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-10-28T22:30:01Z",
+      "side": 1,
+      "message": "This actually doesn\u0027t work as expected because policy.options.flags is a uint8_t.  So it prints something like \"v2 modes 1/4 flags 0x^B\".  Changing \u0027flags\u0027 to be an int (as I suggested elsewhere) would fix this.",
+      "range": {
+        "startLine": 246,
+        "startChar": 37,
+        "endLine": 246,
+        "endChar": 58
+      },
+      "revId": "5f43744c0dc415efe7eabd4e5699294665725c39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2a0efac2_415229fb",
         "filename": "libfscrypt/include/fscrypt/fscrypt.h",
         "patchSetId": 3
