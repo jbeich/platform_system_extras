@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a1ba4508_a4f88234",
+        "filename": "libfscrypt/fscrypt.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-10-28T17:54:37Z",
+      "side": 1,
+      "message": "Did you consider calling it \"inlinecrypt_optimized\", to make it clearer that this is an on-disk format optimized for inline encryption, as opposed to enabling the implementation of inline encryption?  The latter will be done through the inlinecrypt mount option.",
+      "range": {
+        "startLine": 175,
+        "startChar": 27,
+        "endLine": 175,
+        "endChar": 37
+      },
+      "revId": "472c9d70073235a4807c1a9b5c4d45187aacbb8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
