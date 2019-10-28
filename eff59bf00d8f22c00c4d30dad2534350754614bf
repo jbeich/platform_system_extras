@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c31f9151_ddc6bb24",
+        "filename": "libfscrypt/tests/fscrypt_test.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-10-28T21:07:18Z",
+      "side": 1,
+      "message": "options.flags doesn\u0027t exist in this patch.  It\u0027s not added until \"libfscrypt: Infer flags at parse time and include in options struct\".",
+      "range": {
+        "startLine": 105,
+        "startChar": 37,
+        "endLine": 105,
+        "endChar": 50
+      },
+      "revId": "eff59bf00d8f22c00c4d30dad2534350754614bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
