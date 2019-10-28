@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "07bd1d80_dbfae277",
+        "filename": "libfscrypt/fscrypt.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-10-28T21:02:38Z",
+      "side": 1,
+      "message": "This is fine, but something like PolicyToString() would be a better name, since PolicyDescriptor can be confused with the key descriptor.  It\u0027s extra confusing for people who have worked with the https://github.com/google/fscrypt userspace tool because it uses the key descriptor to identify the policy (as it always uses a new key for every policy) and also calls it the \"policy descriptor\".",
+      "range": {
+        "startLine": 236,
+        "startChar": 19,
+        "endLine": 236,
+        "endChar": 35
+      },
+      "revId": "d21c752b0a73fd882e4569c5e5c76fd24c5b7e9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
