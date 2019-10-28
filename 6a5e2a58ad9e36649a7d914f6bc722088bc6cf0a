@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "57f92779_cf353267",
+        "filename": "libfscrypt/fscrypt.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-10-28T21:12:20Z",
+      "side": 1,
+      "message": "How about prefixing the flags with 0x so that it\u0027s clear they\u0027re in hex?\n\nss \u003c\u003c std::hex \u003c\u003c \" flags 0x\" \u003c\u003c policy.options.flags;",
+      "range": {
+        "startLine": 246,
+        "startChar": 4,
+        "endLine": 246,
+        "endChar": 56
+      },
+      "revId": "6a5e2a58ad9e36649a7d914f6bc722088bc6cf0a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
