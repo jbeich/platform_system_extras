@@ -46,6 +46,30 @@
       "revId": "472c9d70073235a4807c1a9b5c4d45187aacbb8b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fba06892_1c9ead08",
+        "filename": "libfscrypt/fscrypt.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-10-28T18:14:45Z",
+      "side": 1,
+      "message": "fstab format in Android is:\n\n  \u003csrc\u003e \u003cmnt_point\u003e \u003ctype\u003e \u003cmnt_flags and options\u003e \u003cfs_mgr_flags\u003e\n\nMount options (like inlinecrypt) go in the 4th field whereas fileencryption is a fs_mgr_flag so it goes in the 5th field.",
+      "parentUuid": "66e83af3_6862b1e5",
+      "range": {
+        "startLine": 175,
+        "startChar": 27,
+        "endLine": 175,
+        "endChar": 37
+      },
+      "revId": "472c9d70073235a4807c1a9b5c4d45187aacbb8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
