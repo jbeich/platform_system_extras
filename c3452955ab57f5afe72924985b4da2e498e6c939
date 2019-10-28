@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bbee3f54_17bf3143",
+        "filename": "libfscrypt/tests/fscrypt_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-10-28T17:46:20Z",
+      "side": 0,
+      "message": "Why was this test deleted?  Shouldn\u0027t it still pass?",
+      "revId": "c3452955ab57f5afe72924985b4da2e498e6c939",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
