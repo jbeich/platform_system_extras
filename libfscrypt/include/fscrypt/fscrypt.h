@@ -21,6 +21,7 @@
 
 // TODO: switch to <linux/fscrypt.h> once it's in Bionic
 #define FSCRYPT_POLICY_FLAG_IV_INO_LBLK_64 0x08
+#define FSCRYPT_POLICY_FLAG_WRAPPED_KEY 0x10
 
 bool fscrypt_is_native();
 
