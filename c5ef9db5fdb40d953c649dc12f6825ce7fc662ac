@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e0fbaf4e_e12dffc6",
+        "filename": "simpleperf/cmd_record_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 800,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2019-11-01T18:04:08Z",
+      "side": 1,
+      "message": "how about\n\n#else\n#error \"unrecognized ABI\"\n\nthen you can remove the above nullptr check?",
+      "revId": "c5ef9db5fdb40d953c649dc12f6825ce7fc662ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
