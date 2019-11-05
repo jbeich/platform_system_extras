@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e8d8dd2_ae62d0a9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2019-11-05T22:46:52Z",
+      "side": 1,
+      "message": "s/appending .. to the front of the list/prepending/",
+      "revId": "92d3e9e562837b3ac96b7969c7b07bef4a119c38",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a4ba6ad6_20bff7b3",
+        "filename": "simpleperf/JITDebugReader.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 595,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2019-11-05T22:46:52Z",
+      "side": 1,
+      "message": "why do you hardcode this and not use `read_entry_limit` as per v1?",
+      "revId": "92d3e9e562837b3ac96b7969c7b07bef4a119c38",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "97f1d06f_010afb6d",
+        "filename": "simpleperf/JITDebugReader.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 610,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2019-11-05T22:46:52Z",
+      "side": 1,
+      "message": "If the last_action_timestamp comparison is the only difference, consider reusing code from v1 and passing a lambda with different conditionals checks. Though if this is planned to be removed ASAP, feel free to disregard.",
+      "revId": "92d3e9e562837b3ac96b7969c7b07bef4a119c38",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
