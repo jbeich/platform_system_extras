@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "626f83ec_f066e537",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2019-11-08T21:40:03Z",
+      "side": 1,
+      "message": "For book keeping, you could also the build number here, in case you want to refer to it in the future.\n\nOptionally, you can also put the manifest_\u003cbuild\u003e.xml for easy reproduction.\n\nWe do both of these in the prebuilts our team maintains (clang, mingw) and have found it useful on occasion.",
+      "revId": "9c380e2d55aca394c874105ded72fea57923f2a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
