@@ -16,6 +16,24 @@
       "revId": "9c380e2d55aca394c874105ded72fea57923f2a7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aa9dde6e_677a7d10",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2019-11-08T21:57:24Z",
+      "side": 1,
+      "message": "prebuilts/simpleperf has manifest, but not in system/extras/simpleperf/scripts, maybe I should merge the two.",
+      "parentUuid": "626f83ec_f066e537",
+      "revId": "9c380e2d55aca394c874105ded72fea57923f2a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
