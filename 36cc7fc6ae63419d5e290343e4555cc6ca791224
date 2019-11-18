@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1d45f20c_57ef042c",
+        "filename": "libfec/fec_open.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 621,
+      "author": {
+        "id": 1547808
+      },
+      "writtenOn": "2019-11-18T08:28:00Z",
+      "side": 1,
+      "message": "with avb, load_verity fails.",
+      "revId": "36cc7fc6ae63419d5e290343e4555cc6ca791224",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
