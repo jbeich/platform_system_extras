@@ -16,6 +16,24 @@
       "revId": "2af98ec66da2707655cffc04618766a0f7b5294e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "176f7378_b1e23cd3",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2019-11-19T18:24:36Z",
+      "side": 1,
+      "message": "yes, to show it\u0027s in adb shell on android device. Improved it a little in ps2.",
+      "parentUuid": "97bc36be_9ba775dd",
+      "revId": "2af98ec66da2707655cffc04618766a0f7b5294e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
