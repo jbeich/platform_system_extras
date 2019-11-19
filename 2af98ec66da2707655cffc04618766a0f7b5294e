@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "97bc36be_9ba775dd",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2019-11-19T01:55:38Z",
+      "side": 1,
+      "message": "`device` looks misplaced on this line. Intentional?",
+      "revId": "2af98ec66da2707655cffc04618766a0f7b5294e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
