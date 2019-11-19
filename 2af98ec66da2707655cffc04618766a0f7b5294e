@@ -34,6 +34,24 @@
       "revId": "2af98ec66da2707655cffc04618766a0f7b5294e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "edb00711_88d3a5d8",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2019-11-19T18:27:28Z",
+      "side": 1,
+      "message": "oh, I see. In that case, you could just make it:\n\n$ adb shell simpleperf record xxx --symfs /data/local/tmp/native_libs\n\nwhich will execute the one command, then return control to the host\u0027s shell.  That\u0027s a little less ambiguous.",
+      "parentUuid": "176f7378_b1e23cd3",
+      "revId": "2af98ec66da2707655cffc04618766a0f7b5294e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
