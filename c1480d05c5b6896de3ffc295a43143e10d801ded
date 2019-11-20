@@ -22,6 +22,30 @@
       "revId": "c1480d05c5b6896de3ffc295a43143e10d801ded",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "127cb75b_65ac0633",
+        "filename": "partition_tools/lpadd.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1290458
+      },
+      "writtenOn": "2019-11-20T20:11:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "69a04649_b2c46db7",
+      "range": {
+        "startLine": 1,
+        "startChar": 17,
+        "endLine": 1,
+        "endChar": 21
+      },
+      "revId": "c1480d05c5b6896de3ffc295a43143e10d801ded",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
