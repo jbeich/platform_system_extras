@@ -79,27 +79,28 @@ static inline bool is_erasure(fec_handle *f, uint64_t offset,
 
     uint64_t n = offset / FEC_BLOCKSIZE;
 
-    return !verity_check_block(f, &f->verity.hash[n * SHA256_DIGEST_LENGTH],
-                data);
+    return !verity_check_block(&f->hashtree().hash[n * SHA256_DIGEST_LENGTH],
+                               data, f->hashtree().salt);
 }
 
 /* check if `offset' is within a block expected to contain zeros */
 static inline bool is_zero(fec_handle *f, uint64_t offset)
 {
-    verity_info *v = &f->verity;
+  auto hashtree = f->hashtree();
 
-    if (!v->hash || unlikely(offset >= f->data_size)) {
-        return false;
-    }
+  if (hashtree.hash.empty() || unlikely(offset >= f->data_size)) {
+    return false;
+  }
 
     uint64_t hash_offset = (offset / FEC_BLOCKSIZE) * SHA256_DIGEST_LENGTH;
 
-    if (unlikely(hash_offset >
-            v->hash_data_blocks * FEC_BLOCKSIZE - SHA256_DIGEST_LENGTH)) {
-        return false;
+    if (unlikely(hash_offset > hashtree.hash_data_blocks * FEC_BLOCKSIZE -
+                                   SHA256_DIGEST_LENGTH)) {
+      return false;
     }
 
-    return !memcmp(v->zero_hash, &v->hash[hash_offset], SHA256_DIGEST_LENGTH);
+    return !memcmp(hashtree.zero_hash.data(), &hashtree.hash[hash_offset],
+                   SHA256_DIGEST_LENGTH);
 }
 
 /* reads and decodes a single block starting from `offset', returns the number
@@ -119,7 +120,7 @@ static int __ecc_read(fec_handle *f, void *rs, uint8_t *dest, uint64_t offset,
     int neras = 0;
 
     /* verity is required to check for erasures */
-    check(!use_erasures || f->verity.hash);
+    check(!use_erasures || !f->hashtree().hash.empty());
 
     for (int i = 0; i < e->rsn; ++i) {
         uint64_t interleaved = fec_ecc_interleave(rsb * e->rsn + i, e->rsn,
@@ -135,16 +136,16 @@ static int __ecc_read(fec_handle *f, void *rs, uint8_t *dest, uint64_t offset,
 
         if (likely(interleaved < e->start) && !is_zero(f, interleaved)) {
             /* copy raw data to reconstruct the RS block */
-            if (!raw_pread(f, bbuf, FEC_BLOCKSIZE, interleaved)) {
-                warn("failed to read: %s", strerror(errno));
+            if (!raw_pread(f->fd, bbuf, FEC_BLOCKSIZE, interleaved)) {
+              warn("failed to read: %s", strerror(errno));
 
-                /* treat errors as corruption */
-                if (use_erasures && neras <= e->roots) {
-                    erasures[neras++] = i;
-                }
-            } else if (use_erasures && neras <= e->roots &&
-                            is_erasure(f, interleaved, bbuf)) {
+              /* treat errors as corruption */
+              if (use_erasures && neras <= e->roots) {
                 erasures[neras++] = i;
+              }
+            } else if (use_erasures && neras <= e->roots &&
+                       is_erasure(f, interleaved, bbuf)) {
+              erasures[neras++] = i;
             }
         }
 
@@ -160,10 +161,10 @@ static int __ecc_read(fec_handle *f, void *rs, uint8_t *dest, uint64_t offset,
 
     for (int i = 0; i < FEC_BLOCKSIZE; ++i) {
         /* copy parity data */
-        if (!raw_pread(f, &ecc_data[i * FEC_RSM + e->rsn], e->roots,
-                e->start + (i + rsb) * e->roots)) {
-            error("failed to read ecc data: %s", strerror(errno));
-            return -1;
+        if (!raw_pread(f->fd, &ecc_data[i * FEC_RSM + e->rsn], e->roots,
+                       e->start + (i + rsb) * e->roots)) {
+          error("failed to read ecc data: %s", strerror(errno));
+          return -1;
         }
 
         /* for debugging decoding failures, because decode_rs_char can mangle
@@ -180,10 +181,10 @@ static int __ecc_read(fec_handle *f, void *rs, uint8_t *dest, uint64_t offset,
                 error("RS block %" PRIu64 ": decoding failed (%d erasures)",
                     rsb, neras);
                 dump("raw RS block", rsb, copy, FEC_RSM);
-            } else if (!f->verity.hash) {
-                warn("RS block %" PRIu64 ": decoding failed", rsb);
+            } else if (f->hashtree().hash.empty()) {
+              warn("RS block %" PRIu64 ": decoding failed", rsb);
             } else {
-                debug("RS block %" PRIu64 ": decoding failed", rsb);
+              debug("RS block %" PRIu64 ": decoding failed", rsb);
             }
 
             errno = EIO;
@@ -289,7 +290,7 @@ static ssize_t verity_read(fec_handle *f, uint8_t *dest, size_t count,
     check(dest);
     check(offset < f->data_size);
     check(offset + count <= f->data_size);
-    check(f->verity.hash);
+    check(!f->hashtree().hash.empty());
     check(errors);
 
     debug("[%" PRIu64 ", %" PRIu64 ")", offset, offset + count);
@@ -306,13 +307,14 @@ static ssize_t verity_read(fec_handle *f, uint8_t *dest, size_t count,
     size_t left = count;
     uint8_t data[FEC_BLOCKSIZE];
 
-    uint64_t max_hash_block = (f->verity.hash_data_blocks * FEC_BLOCKSIZE -
-                                SHA256_DIGEST_LENGTH) / SHA256_DIGEST_LENGTH;
+    uint64_t max_hash_block = (f->hashtree().hash_data_blocks * FEC_BLOCKSIZE -
+                               SHA256_DIGEST_LENGTH) /
+                              SHA256_DIGEST_LENGTH;
 
     while (left > 0) {
         check(curr <= max_hash_block);
 
-        uint8_t *hash = &f->verity.hash[curr * SHA256_DIGEST_LENGTH];
+        uint8_t *hash = &f->hashtree().hash[curr * SHA256_DIGEST_LENGTH];
         uint64_t curr_offset = curr * FEC_BLOCKSIZE;
 
         bool expect_zeros = is_zero(f, curr_offset);
@@ -325,13 +327,13 @@ static ssize_t verity_read(fec_handle *f, uint8_t *dest, size_t count,
         }
 
         /* copy raw data without error correction */
-        if (!raw_pread(f, data, FEC_BLOCKSIZE, curr_offset)) {
-            error("failed to read: %s", strerror(errno));
-            return -1;
+        if (!raw_pread(f->fd, data, FEC_BLOCKSIZE, curr_offset)) {
+          error("failed to read: %s", strerror(errno));
+          return -1;
         }
 
-        if (likely(verity_check_block(f, hash, data))) {
-            goto valid;
+        if (likely(verity_check_block(hash, data, f->hashtree().salt))) {
+          goto valid;
         }
 
         /* we know the block is supposed to contain zeros, so return zeros
@@ -354,16 +356,16 @@ static ssize_t verity_read(fec_handle *f, uint8_t *dest, size_t count,
         /* try to correct without erasures first, because checking for
            erasure locations is slower */
         if (__ecc_read(f, rs.get(), data, curr_offset, false, ecc_data.get(),
-                errors) == FEC_BLOCKSIZE &&
-            verity_check_block(f, hash, data)) {
-            goto corrected;
+                       errors) == FEC_BLOCKSIZE &&
+            verity_check_block(hash, data, f->hashtree().salt)) {
+          goto corrected;
         }
 
         /* try to correct with erasures */
         if (__ecc_read(f, rs.get(), data, curr_offset, true, ecc_data.get(),
-                errors) == FEC_BLOCKSIZE &&
-            verity_check_block(f, hash, data)) {
-            goto corrected;
+                       errors) == FEC_BLOCKSIZE &&
+            verity_check_block(hash, data, f->hashtree().salt)) {
+          goto corrected;
         }
 
         error("[%" PRIu64 ", %" PRIu64 "): corrupted block %" PRIu64
@@ -377,9 +379,9 @@ static ssize_t verity_read(fec_handle *f, uint8_t *dest, size_t count,
 corrected:
         /* update the corrected block to the file if we are in r/w mode */
         if (f->mode & O_RDWR &&
-                !raw_pwrite(f, data, FEC_BLOCKSIZE, curr_offset)) {
-            error("failed to write: %s", strerror(errno));
-            return -1;
+            !raw_pwrite(f->fd, data, FEC_BLOCKSIZE, curr_offset)) {
+          error("failed to write: %s", strerror(errno));
+          return -1;
         }
 
 valid:
@@ -469,51 +471,47 @@ static inline size_t get_max_count(uint64_t offset, size_t count, uint64_t max)
 
 /* reads `count' bytes from `f->fd' starting from `offset', and copies the
    data to `buf' */
-bool raw_pread(fec_handle *f, void *buf, size_t count, uint64_t offset)
-{
-    check(f);
-    check(buf);
+bool raw_pread(int fd, void *buf, size_t count, uint64_t offset) {
+  check(buf);
 
-    uint8_t *p = (uint8_t *)buf;
-    size_t remaining = count;
+  uint8_t *p = (uint8_t *)buf;
+  size_t remaining = count;
 
-    while (remaining > 0) {
-        ssize_t n = TEMP_FAILURE_RETRY(pread64(f->fd, p, remaining, offset));
+  while (remaining > 0) {
+    ssize_t n = TEMP_FAILURE_RETRY(pread64(fd, p, remaining, offset));
 
-        if (n <= 0) {
-            return false;
-        }
-
-        p += n;
-        remaining -= n;
-        offset += n;
+    if (n <= 0) {
+      return false;
     }
 
-    return true;
+    p += n;
+    remaining -= n;
+    offset += n;
+  }
+
+  return true;
 }
 
 /* writes `count' bytes from `buf' to `f->fd' to a file position `offset' */
-bool raw_pwrite(fec_handle *f, const void *buf, size_t count, uint64_t offset)
-{
-    check(f);
-    check(buf);
+bool raw_pwrite(int fd, const void *buf, size_t count, uint64_t offset) {
+  check(buf);
 
-    const uint8_t *p = (const uint8_t *)buf;
-    size_t remaining = count;
+  const uint8_t *p = (const uint8_t *)buf;
+  size_t remaining = count;
 
-    while (remaining > 0) {
-        ssize_t n = TEMP_FAILURE_RETRY(pwrite64(f->fd, p, remaining, offset));
+  while (remaining > 0) {
+    ssize_t n = TEMP_FAILURE_RETRY(pwrite64(fd, p, remaining, offset));
 
-        if (n <= 0) {
-            return false;
-        }
-
-        p += n;
-        remaining -= n;
-        offset += n;
+    if (n <= 0) {
+      return false;
     }
 
-    return true;
+    p += n;
+    remaining -= n;
+    offset += n;
+  }
+
+  return true;
 }
 
 /* reads up to `count' bytes starting from `offset' using error correction and
@@ -529,28 +527,28 @@ ssize_t fec_pread(struct fec_handle *f, void *buf, size_t count,
         return -1;
     }
 
-    if (f->verity.hash) {
-        return process(f, (uint8_t *)buf,
-                    get_max_count(offset, count, f->data_size), offset,
-                    verity_read);
+    if (!f->hashtree().hash.empty()) {
+      return process(f, (uint8_t *)buf,
+                     get_max_count(offset, count, f->data_size), offset,
+                     verity_read);
     } else if (f->ecc.start) {
-        check(f->ecc.start < f->size);
+      check(f->ecc.start < f->size);
 
-        count = get_max_count(offset, count, f->data_size);
-        ssize_t rc = process(f, (uint8_t *)buf, count, offset, ecc_read);
+      count = get_max_count(offset, count, f->data_size);
+      ssize_t rc = process(f, (uint8_t *)buf, count, offset, ecc_read);
 
-        if (rc >= 0) {
-            return rc;
-        }
+      if (rc >= 0) {
+        return rc;
+      }
 
-        /* return raw data if pure ecc read fails; due to interleaving
-           the specific blocks the caller wants may still be fine */
+      /* return raw data if pure ecc read fails; due to interleaving
+         the specific blocks the caller wants may still be fine */
     } else {
-        count = get_max_count(offset, count, f->size);
+      count = get_max_count(offset, count, f->size);
     }
 
-    if (raw_pread(f, buf, count, offset)) {
-        return count;
+    if (raw_pread(f->fd, buf, count, offset)) {
+      return count;
     }
 
     return -1;

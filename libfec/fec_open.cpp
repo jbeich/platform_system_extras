@@ -19,6 +19,7 @@
 #include <sys/stat.h>
 
 #include <ext4_utils/ext4_sb.h>
+#include <libavb/libavb.h>
 #include <squashfs_utils.h>
 
 #if defined(__linux__)
@@ -110,9 +111,9 @@ static int parse_ecc_header(fec_handle *f, uint64_t offset)
 
     /* there's obviously no ecc data at this point, so there is no need to
        call fec_pread to access this data */
-    if (!raw_pread(f, &header, sizeof(fec_header), offset)) {
-        error("failed to read: %s", strerror(errno));
-        return -1;
+    if (!raw_pread(f->fd, &header, sizeof(fec_header), offset)) {
+      error("failed to read: %s", strerror(errno));
+      return -1;
     }
 
     /* move offset back to the beginning of the block for validating header */
@@ -170,9 +171,9 @@ static int parse_ecc_header(fec_handle *f, uint64_t offset)
             len = f->ecc.size - n;
         }
 
-        if (!raw_pread(f, buf, len, f->ecc.start + n)) {
-            error("failed to read ecc: %s", strerror(errno));
-            return -1;
+        if (!raw_pread(f->fd, buf, len, f->ecc.start + n)) {
+          error("failed to read ecc: %s", strerror(errno));
+          return -1;
         }
 
         SHA256_Update(&ctx, buf, len);
@@ -189,6 +190,64 @@ static int parse_ecc_header(fec_handle *f, uint64_t offset)
     }
 
     return 0;
+}
+
+static int parse_avb_ecc(fec_handle *f, uint64_t data_size) {
+  check(data_size > AVB_FOOTER_SIZE);
+  AvbFooter footer_read;
+  if (!raw_pread(f->fd, &footer_read, AVB_FOOTER_SIZE,
+                 data_size - AVB_FOOTER_SIZE)) {
+    error("failed to read footer: %s", strerror(errno));
+    return -1;
+  }
+
+  AvbFooter verified_footer;
+  if (!avb_footer_validate_and_byteswap(&footer_read, &verified_footer)) {
+    error("failed to verify avb footer");
+    return -1;
+  }
+
+  std::vector<uint8_t> vbmeta_data(verified_footer.vbmeta_size, 0);
+  check(verified_footer.vbmeta_offset <
+        data_size - verified_footer.vbmeta_size);
+  if (!raw_pread(f->fd, vbmeta_data.data(), vbmeta_data.size(),
+                 verified_footer.vbmeta_offset)) {
+    error("failed to read vbmeta: %s", strerror(errno));
+    return -1;
+  }
+
+  // Expects exactly one hashtree descriptor
+  auto parse_descriptor = [](const AvbDescriptor *descriptor, void *user_data) {
+    if (descriptor &&
+        avb_be64toh(descriptor->tag) == AVB_DESCRIPTOR_TAG_HASHTREE) {
+      auto desp = static_cast<const AvbDescriptor **>(user_data);
+      *desp = descriptor;
+      return false;
+    }
+    return true;
+  };
+
+  const AvbHashtreeDescriptor *hashtree_descriptor_ptr = nullptr;
+  avb_descriptor_foreach(vbmeta_data.data(), vbmeta_data.size(),
+                         parse_descriptor, &hashtree_descriptor_ptr);
+
+  AvbHashtreeDescriptor verified_hashtree_descriptor;
+  if (!avb_hashtree_descriptor_validate_and_byteswap(
+          hashtree_descriptor_ptr, &verified_hashtree_descriptor)) {
+    error("failed to verify avb hashtree descriptor");
+    return -1;
+  }
+
+  f->data_size = verified_hashtree_descriptor.fec_offset;
+  f->ecc.blocks = fec_div_round_up(f->data_size, FEC_BLOCKSIZE);
+  f->ecc.rounds = fec_div_round_up(f->ecc.blocks, f->ecc.rsn);
+
+  f->ecc.size = verified_hashtree_descriptor.fec_size;
+  f->ecc.start = verified_hashtree_descriptor.fec_offset;
+  // The hashtree descriptor doesn't carry the hash for fec data, verify the
+  // hash of vbmeta instead?
+  f->ecc.valid = true;
+  return 0;
 }
 
 /* attempts to read an ecc header from `offset', and checks for a backup copy
@@ -308,9 +367,9 @@ static int load_verity(fec_handle *f)
 
     /* verity header is at the end of the data area */
     if (verity_parse_header(f, offset) == 0) {
-        debug("found at %" PRIu64 " (start %" PRIu64 ")", offset,
-            f->verity.hash_start);
-        return 0;
+      debug("found at %" PRIu64 " (start %" PRIu64 ")", offset,
+            f->hashtree().hash_start);
+      return 0;
     }
 
     debug("trying legacy formats");
@@ -318,9 +377,9 @@ static int load_verity(fec_handle *f)
     /* legacy format at the end of the partition */
     if (find_verity_offset(f, &offset) == 0 &&
             verity_parse_header(f, offset) == 0) {
-        debug("found at %" PRIu64 " (start %" PRIu64 ")", offset,
-            f->verity.hash_start);
-        return 0;
+      debug("found at %" PRIu64 " (start %" PRIu64 ")", offset,
+            f->hashtree().hash_start);
+      return 0;
     }
 
     /* legacy format after the file system, but not at the end */
@@ -332,8 +391,8 @@ static int load_verity(fec_handle *f)
         rc = verity_parse_header(f, offset);
 
         if (rc == 0) {
-            debug("found at %" PRIu64 " (start %" PRIu64 ")", offset,
-                f->verity.hash_start);
+          debug("found at %" PRIu64 " (start %" PRIu64 ")", offset,
+                f->hashtree().hash_start);
         }
     }
 
@@ -399,8 +458,8 @@ static void reset_handle(fec_handle *f)
     f->pos = 0;
     f->size = 0;
 
-    memset(&f->ecc, 0, sizeof(f->ecc));
-    memset(&f->verity, 0, sizeof(f->verity));
+    f->ecc = {};
+    f->verity = {};
 }
 
 /* closes and flushes `f->fd' and releases any memory allocated for `f' */
@@ -414,16 +473,6 @@ int fec_close(struct fec_handle *f)
         }
 
         close(f->fd);
-    }
-
-    if (f->verity.hash) {
-        delete[] f->verity.hash;
-    }
-    if (f->verity.salt) {
-        delete[] f->verity.salt;
-    }
-    if (f->verity.table) {
-        delete[] f->verity.table;
     }
 
     pthread_mutex_destroy(&f->mutex);
@@ -446,9 +495,9 @@ int fec_verity_get_metadata(struct fec_handle *f, struct fec_verity_metadata *da
     }
 
     check(f->data_size < f->size);
-    check(f->data_size <= f->verity.hash_start);
+    check(f->data_size <= f->verity.hashtree.hash_start);
     check(f->data_size <= f->verity.metadata_start);
-    check(f->verity.table);
+    check(!f->verity.table.empty());
 
     data->disabled = f->verity.disabled;
     data->data_size = f->data_size;
@@ -456,7 +505,7 @@ int fec_verity_get_metadata(struct fec_handle *f, struct fec_verity_metadata *da
         sizeof(data->signature));
     memcpy(data->ecc_signature, f->verity.ecc_header.signature,
         sizeof(data->ecc_signature));
-    data->table = f->verity.table;
+    data->table = f->verity.table.c_str();
     data->table_length = f->verity.header.length;
 
     return 0;
