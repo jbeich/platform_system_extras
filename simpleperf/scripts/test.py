@@ -115,6 +115,7 @@ class TestHelper(object):
         self.adb = AdbHelper(enable_switch_to_root=True)
         self.android_version = self.adb.get_android_version()
         self.device_features = None
+        self.browser_option = []
 
     def get_test_base_dir(self, python_version):
         """ Return the dir of generated data for a python version. """
@@ -172,6 +173,9 @@ class TestHelper(object):
                 elif os.path.isdir(source):
                     shutil.copytree(source, target)
 
+    def get_32bit_abi(self):
+        return self.adb.get_property('ro.product.cpu.abilist32').strip().split(',')[0]
+
 
 TEST_HELPER = TestHelper()
 
@@ -185,6 +189,8 @@ class TestBase(unittest.TestCase):
         os.chdir(self.test_dir)
 
     def run_cmd(self, args, return_output=False):
+        if args[0] == 'report_html.py' or args[0] == INFERNO_SCRIPT:
+            args += TEST_HELPER.browser_option
         if args[0].endswith('.py'):
             args = [sys.executable, TEST_HELPER.script_path(args[0])] + args[1:]
         use_shell = args[0].endswith('.bat')
@@ -589,7 +595,7 @@ class TestExamplePureJavaTraceOffCpu(TestExampleBase):
                 ("run", 80, 0),
                 ("RunFunction", 20, 20),
                 ("SleepFunction", 20, 0),
-                ("line 24", 20, 0),
+                ("line 24", 1, 0),
                 ("line 32", 20, 0)])
         self.run_cmd([INFERNO_SCRIPT, "-sc"])
         self.check_inferno_report_html(
@@ -731,32 +737,32 @@ class TestExampleWithNativeJniCall(TestExampleBase):
         self.run_cmd([INFERNO_SCRIPT, "-sc"])
 
 
-class TestExampleWithNativeForceArm(TestExampleWithNative):
+class TestExampleWithNativeForce32Bit(TestExampleWithNative):
     @classmethod
     def setUpClass(cls):
         cls.prepare("SimpleperfExampleWithNative",
                     "com.example.simpleperf.simpleperfexamplewithnative",
                     ".MainActivity",
-                    abi="armeabi-v7a")
+                    abi=TEST_HELPER.get_32bit_abi())
 
 
-class TestExampleWithNativeForceArmRoot(TestExampleWithNativeRoot):
+class TestExampleWithNativeRootForce32Bit(TestExampleWithNativeRoot):
     @classmethod
     def setUpClass(cls):
         cls.prepare("SimpleperfExampleWithNative",
                     "com.example.simpleperf.simpleperfexamplewithnative",
                     ".MainActivity",
-                    abi="armeabi-v7a",
+                    abi=TEST_HELPER.get_32bit_abi(),
                     adb_root=False)
 
 
-class TestExampleWithNativeTraceOffCpuForceArm(TestExampleWithNativeTraceOffCpu):
+class TestExampleWithNativeTraceOffCpuForce32Bit(TestExampleWithNativeTraceOffCpu):
     @classmethod
     def setUpClass(cls):
         cls.prepare("SimpleperfExampleWithNative",
                     "com.example.simpleperf.simpleperfexamplewithnative",
                     ".SleepActivity",
-                    abi="armeabi-v7a")
+                    abi=TEST_HELPER.get_32bit_abi())
 
 
 class TestExampleOfKotlin(TestExampleBase):
@@ -1105,7 +1111,7 @@ class TestTools(TestBase):
                 {
                     'func_addr': 0x840,
                     'addr': 0x840,
-                    'source': 'system/extras/simpleperf/runtest/two_functions.cpp:6',
+                    'source': 'system/extras/simpleperf/runtest/two_functions.cpp:7',
                     'function': 'Function1()',
                 },
                 {
@@ -1300,10 +1306,12 @@ class TestNativeLibDownloader(TestBase):
         self.adb.check_run(['shell', 'rm', '-rf', '/data/local/tmp/native_libs'])
         super(TestNativeLibDownloader, self).tearDown()
 
-    def test_smoke(self):
-        def is_lib_on_device(path):
-            return self.adb.run(['shell', 'ls', path])
+    def list_lib_on_device(self, path):
+        result, output = self.adb.run_and_return_output(
+            ['shell', 'ls', '-llc', path], log_output=False)
+        return output if result else ''
 
+    def test_smoke(self):
         # Sync all native libs on device.
         downloader = NativeLibDownloader(None, 'arm64', self.adb)
         downloader.collect_native_libs_on_host(TEST_HELPER.testdata_path(
@@ -1320,7 +1328,7 @@ class TestNativeLibDownloader(TestBase):
             for i in range(sync_count):
                 build_id_map[lib_list[i][0]] = lib_list[i][1]
             downloader.host_build_id_map = build_id_map
-            downloader.sync_natives_libs_on_device()
+            downloader.sync_native_libs_on_device()
             downloader.collect_native_libs_on_device()
             self.assertEqual(len(downloader.device_build_id_map), sync_count)
             for i, item in enumerate(lib_list):
@@ -1329,10 +1337,10 @@ class TestNativeLibDownloader(TestBase):
                 if i < sync_count:
                     self.assertTrue(build_id in downloader.device_build_id_map)
                     self.assertEqual(name, downloader.device_build_id_map[build_id])
-                    self.assertTrue(is_lib_on_device(downloader.dir_on_device + name))
+                    self.assertTrue(self.list_lib_on_device(downloader.dir_on_device + name))
                 else:
                     self.assertTrue(build_id not in downloader.device_build_id_map)
-                    self.assertFalse(is_lib_on_device(downloader.dir_on_device + name))
+                    self.assertFalse(self.list_lib_on_device(downloader.dir_on_device + name))
             if sync_count == 1:
                 self.adb.run(['pull', '/data/local/tmp/native_libs/build_id_list',
                               'build_id_list'])
@@ -1350,6 +1358,29 @@ class TestNativeLibDownloader(TestBase):
         downloader = NativeLibDownloader(None, 'arm64', self.adb)
         downloader.collect_native_libs_on_device()
         self.assertEqual(len(downloader.device_build_id_map), 0)
+
+    def test_download_file_without_build_id(self):
+        downloader = NativeLibDownloader(None, 'x86_64', self.adb)
+        name = 'elf.so'
+        shutil.copyfile(TEST_HELPER.testdata_path('data/symfs_without_build_id/elf'), name)
+        downloader.collect_native_libs_on_host('.')
+        downloader.collect_native_libs_on_device()
+        self.assertIn(name, downloader.no_build_id_file_map)
+        # Check if file wihtout build id can be downloaded.
+        downloader.sync_native_libs_on_device()
+        target_file = downloader.dir_on_device + name
+        target_file_stat = self.list_lib_on_device(target_file)
+        self.assertTrue(target_file_stat)
+
+        # No need to re-download if file size doesn't change.
+        downloader.sync_native_libs_on_device()
+        self.assertEqual(target_file_stat, self.list_lib_on_device(target_file))
+
+        # Need to re-download if file size changes.
+        self.adb.check_run(['shell', 'truncate', '-s', '0', target_file])
+        target_file_stat = self.list_lib_on_device(target_file)
+        downloader.sync_native_libs_on_device()
+        self.assertNotEqual(target_file_stat, self.list_lib_on_device(target_file))
 
 
 class TestReportHtml(TestBase):
@@ -1448,6 +1479,17 @@ class TestBinaryCacheBuilder(TestBase):
         # Copy binary if target file doesn't have .debug_line and source_files has .debug_line.
         shutil.copy(origin_file, source_file)
         binary_cache_builder.copy_binaries_from_symfs_dirs([symfs_dir])
+        self.assertTrue(filecmp.cmp(target_file, source_file))
+
+    def test_copy_elf_without_build_id_from_symfs_dir(self):
+        binary_cache_builder = BinaryCacheBuilder(None, False)
+        binary_cache_builder.binaries['elf'] = ''
+        symfs_dir = TEST_HELPER.testdata_path('data/symfs_without_build_id')
+        source_file = os.path.join(symfs_dir, 'elf')
+        target_file = os.path.join('binary_cache', 'elf')
+        binary_cache_builder.copy_binaries_from_symfs_dirs([symfs_dir])
+        self.assertTrue(filecmp.cmp(target_file, source_file))
+        binary_cache_builder.pull_binaries_from_device()
         self.assertTrue(filecmp.cmp(target_file, source_file))
 
 
@@ -1682,6 +1724,7 @@ def main():
     parser.add_argument('--repeat', type=int, nargs=1, default=[1], help='run test multiple times')
     parser.add_argument('--no-test-result', dest='report_test_result',
                         action='store_false', help="Don't report test result.")
+    parser.add_argument('--browser', action='store_true', help='pop report html file in browser.')
     parser.add_argument('pattern', nargs='*', help='Run tests matching the selected pattern.')
     args = parser.parse_args()
     tests = get_all_tests()
@@ -1696,12 +1739,8 @@ def main():
             log_exit("Can't find test %s" % args.test_from[0])
         tests = tests[start_pos:]
     if args.pattern:
-        pattern = re.compile(fnmatch.translate(args.pattern[0]))
-        new_tests = []
-        for test in tests:
-            if pattern.match(test):
-                new_tests.append(test)
-        tests = new_tests
+        patterns = [re.compile(fnmatch.translate(x)) for x in args.pattern]
+        tests = [t for t in tests if any(pattern.match(t) for pattern in patterns)]
         if not tests:
             log_exit('No tests are matched.')
 
@@ -1716,6 +1755,9 @@ def main():
 
     for python_version in python_versions:
         remove(TEST_HELPER.get_test_base_dir(python_version))
+
+    if not args.browser:
+        TEST_HELPER.browser_option = ['--no_browser']
 
     test_results = []
     for version in python_versions:
