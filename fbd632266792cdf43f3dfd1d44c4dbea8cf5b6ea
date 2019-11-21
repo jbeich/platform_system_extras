@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e524140e_9d0c02b9",
+        "filename": "partition_tools/lpadd.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 423,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-11-21T15:07:13Z",
+      "side": 1,
+      "message": "nit: use libgflags",
+      "range": {
+        "startLine": 423,
+        "startChar": 0,
+        "endLine": 423,
+        "endChar": 31
+      },
+      "revId": "fbd632266792cdf43f3dfd1d44c4dbea8cf5b6ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
