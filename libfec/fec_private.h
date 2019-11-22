@@ -19,14 +19,15 @@
 
 #include <errno.h>
 #include <fcntl.h>
-#include <memory>
-#include <new>
 #include <pthread.h>
 #include <stdio.h>
 #include <string.h>
-#include <string>
 #include <sys/syscall.h>
 #include <unistd.h>
+
+#include <memory>
+#include <new>
+#include <string>
 #include <vector>
 
 #include <crypto_utils/android_pubkey.h>
@@ -94,6 +95,14 @@ struct verity_info {
     verity_header ecc_header;
 };
 
+struct avb_info {
+    bool valid = false;
+    bool hashtree_valid;
+    uint64_t vbmeta_offset;
+    uint64_t vbmeta_size;
+    hashtree_info hashtree;
+};
+
 struct fec_handle {
     ecc_info ecc;
     int fd;
@@ -104,9 +113,15 @@ struct fec_handle {
     uint64_t data_size;
     uint64_t pos;
     uint64_t size;
+    // TODO(xunchang) switch to std::optional
     verity_info verity;
+    avb_info avb;
 
     hashtree_info hashtree() const {
+        if (avb.valid) {
+            return avb.hashtree_valid ? avb.hashtree : hashtree_info{};
+        }
+
         return verity.hashtree;
     }
 };
@@ -128,8 +143,28 @@ extern uint64_t verity_get_size(uint64_t file_size, uint32_t *verity_levels,
 
 extern int verity_parse_header(fec_handle *f, uint64_t offset);
 
-extern bool check_block_hash(const uint8_t *expected, const uint8_t *block,
-                             const std::vector<uint8_t> &salt);
+// hash related functions.
+
+// Computes a SHA-256 salted with 'salt' from a FEC_BLOCKSIZE byte buffer
+// 'block', and copies the hash to 'hash'.
+int get_hash(const uint8_t *block, uint8_t *hash,
+             const std::vector<uint8_t> &salt);
+
+// Computes the hash for FEC_BLOCKSIZE bytes from buffer 'block' and compares
+// it to the expected value in 'expected'.
+bool check_block_hash(const uint8_t *expected, const uint8_t *block,
+                      const std::vector<uint8_t> &salt);
+
+// Reads the hash and the corresponding data block using error correction, if
+// available.
+bool ecc_read_hashes(fec_handle *f, uint64_t hash_offset, uint8_t *hash,
+                     uint64_t data_offset, uint8_t *data);
+
+// Reads the verity hash tree, validates it against the root hash in `root',
+// corrects errors if necessary, and copies valid data blocks for later use
+// to 'hashtree'.
+int verify_tree(hashtree_info *hashtree, const fec_handle *f,
+                const uint8_t *root);
 
 /* helper macros */
 #ifndef unlikely
