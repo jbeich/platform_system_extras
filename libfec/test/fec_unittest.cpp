@@ -47,16 +47,17 @@ class FecUnitTest : public ::testing::Test {
         ASSERT_TRUE(builder.BuildHashTree());
         root_hash_ = builder.root_hash();
 
-        // Append the hashtree to the end of image.
         TemporaryFile temp_file;
         ASSERT_TRUE(builder.WriteHashTreeToFd(temp_file.fd, 0));
         android::base::ReadFileToString(temp_file.path, &hashtree_content_);
-        image_.insert(image_.end(), hashtree_content_.begin(),
-                      hashtree_content_.end());
     }
 
     // Builds the verity metadata and appends the bytes to the image.
     void BuildAndAppendsVerityMetadata() {
+        // Append the hashtree to the end of image.
+        image_.insert(image_.end(), hashtree_content_.begin(),
+                      hashtree_content_.end());
+
         // The metadata table has the format: "1 block_device, block_device,
         // BLOCK_SIZE, BLOCK_SIZE, data_blocks, data_blocks, 'sha256',
         // root_hash, salt".
@@ -96,6 +97,17 @@ class FecUnitTest : public ::testing::Test {
                                         const std::string &fec_name) {
         std::vector<std::string> cmd = { "fec", "--encode", "--roots",
                                          "2",   image_name, fec_name };
+        ASSERT_EQ(0, std::system(android::base::Join(cmd, ' ').c_str()));
+    }
+
+    void AddAvbHashtreeFooter(const std::string &image_name) {
+        salt_ = std::vector<uint8_t>(64, 10);
+        std::vector<std::string> cmd = {
+            "avbtool",          "add_hashtree_footer",
+            "--salt",           HashTreeBuilder::BytesArrayToString(salt_),
+            "--hash_algorithm", "sha256",
+            "--image",          image_name,
+        };
         ASSERT_EQ(0, std::system(android::base::Join(cmd, ' ').c_str()));
     }
 
@@ -166,4 +178,79 @@ TEST_F(FecUnitTest, LoadVerityImage_ParseEcc) {
     ASSERT_EQ(2, ecc_metadata.roots);
     // 256 (data) + 3 (hashtree) + 8 (verity meta)
     ASSERT_EQ(267, ecc_metadata.blocks);
+}
+
+TEST_F(FecUnitTest, LoadAvbImage_HashtreeFooter) {
+    TemporaryFile avb_image;
+    ASSERT_TRUE(
+        android::base::WriteFully(avb_image.fd, image_.data(), image_.size()));
+    AddAvbHashtreeFooter(avb_image.path);
+
+    struct fec_handle *handle = nullptr;
+    ASSERT_EQ(0, fec_open(&handle, avb_image.path, O_RDWR, FEC_FS_EXT4, 2));
+    std::unique_ptr<fec_handle> guard(handle);
+
+    ASSERT_EQ(1024 * 1024, handle->data_size);  // filesystem size
+
+    ASSERT_TRUE(handle->avb.valid);
+
+    // check the hashtree.
+    ASSERT_EQ(salt_, handle->hashtree().salt);
+    ASSERT_EQ(1024 * 1024, handle->hashtree().hash_start);
+    // the fec hashtree only stores the hash of the lowest level.
+    ASSERT_EQ(std::vector<uint8_t>(hashtree_content_.begin() + 4096,
+                                   hashtree_content_.end()),
+              handle->hashtree().hash);
+    ASSERT_EQ(hashtree_content_.size(), handle->hashtree().hash_size);
+
+    fec_ecc_metadata ecc_metadata{};
+    ASSERT_EQ(0, fec_ecc_get_metadata(handle, &ecc_metadata));
+    ASSERT_TRUE(ecc_metadata.valid);
+    ASSERT_EQ(1024 * 1024 + handle->hashtree().hash_size, ecc_metadata.start);
+    ASSERT_EQ(259, ecc_metadata.blocks);
+    ASSERT_EQ(handle->ecc.start + handle->ecc.size, handle->avb.vbmeta_offset);
+}
+
+TEST_F(FecUnitTest, LoadAvbImage_CorrectHashtree) {
+    TemporaryFile avb_image;
+    ASSERT_TRUE(
+        android::base::WriteFully(avb_image.fd, image_.data(), image_.size()));
+    AddAvbHashtreeFooter(avb_image.path);
+
+    uint64_t corrupt_offset = 1024 * 1024 + 2 * 4096 + 50;
+    ASSERT_EQ(corrupt_offset, lseek64(avb_image.fd, corrupt_offset, 0));
+    std::vector<uint8_t> corruption(20, 5);
+    ASSERT_TRUE(android::base::WriteFully(avb_image.fd, corruption.data(),
+                                          corruption.size()));
+
+    struct fec_handle *handle = nullptr;
+    ASSERT_EQ(0, fec_open(&handle, avb_image.path, O_RDWR, FEC_FS_EXT4, 2));
+    std::unique_ptr<fec_handle> guard(handle);
+
+    ASSERT_EQ(1024 * 1024, handle->data_size);  // filesystem size
+    ASSERT_EQ(hashtree_content_.size(), handle->hashtree().hash_size);
+    fec_ecc_metadata ecc_metadata{};
+    ASSERT_EQ(0, fec_ecc_get_metadata(handle, &ecc_metadata));
+    ASSERT_TRUE(ecc_metadata.valid);
+}
+
+TEST_F(FecUnitTest, AvbImage_FecRead) {
+    TemporaryFile avb_image;
+    ASSERT_TRUE(
+        android::base::WriteFully(avb_image.fd, image_.data(), image_.size()));
+    AddAvbHashtreeFooter(avb_image.path);
+
+    uint64_t corrupt_offset = 4096 * 10;
+    ASSERT_EQ(corrupt_offset, lseek64(avb_image.fd, corrupt_offset, 0));
+    std::vector<uint8_t> corruption(50, 99);
+    ASSERT_TRUE(android::base::WriteFully(avb_image.fd, corruption.data(),
+                                          corruption.size()));
+
+    std::vector<uint8_t> read_data(1024, 0);
+    struct fec_handle *handle = nullptr;
+    ASSERT_EQ(0, fec_open(&handle, avb_image.path, O_RDWR, FEC_FS_EXT4, 2));
+    std::unique_ptr<fec_handle> guard(handle);
+
+    ASSERT_EQ(1024, fec_pread(handle, read_data.data(), 1024, corrupt_offset));
+    ASSERT_EQ(std::vector<uint8_t>(1024, 10), read_data);
 }
