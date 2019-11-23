@@ -33,6 +33,7 @@
 #include <crypto_utils/android_pubkey.h>
 #include <fec/ecc.h>
 #include <fec/io.h>
+#include <openssl/obj_mac.h>
 #include <openssl/sha.h>
 #include <utils/Compat.h>
 
@@ -144,27 +145,16 @@ extern uint64_t verity_get_size(uint64_t file_size, uint32_t *verity_levels,
 extern int verity_parse_header(fec_handle *f, uint64_t offset);
 
 // hash related functions.
-
-// Computes a SHA-256 salted with 'salt' from a FEC_BLOCKSIZE byte buffer
-// 'block', and copies the hash to 'hash'.
-int get_hash(const uint8_t *block, uint8_t *hash,
-             const std::vector<uint8_t> &salt);
-
 // Computes the hash for FEC_BLOCKSIZE bytes from buffer 'block' and compares
 // it to the expected value in 'expected'.
 bool check_block_hash(const uint8_t *expected, const uint8_t *block,
-                      const std::vector<uint8_t> &salt);
-
-// Reads the hash and the corresponding data block using error correction, if
-// available.
-bool ecc_read_hashes(fec_handle *f, uint64_t hash_offset, uint8_t *hash,
-                     uint64_t data_offset, uint8_t *data);
+                      const std::vector<uint8_t> &salt, int nid = NID_sha256);
 
 // Reads the verity hash tree, validates it against the root hash in `root',
 // corrects errors if necessary, and copies valid data blocks for later use
 // to 'hashtree'.
 int verify_tree(hashtree_info *hashtree, const fec_handle *f,
-                const uint8_t *root);
+                const uint8_t *root, int nid);
 
 /* helper macros */
 #ifndef unlikely

@@ -38,8 +38,12 @@ class FecUnitTest : public ::testing::Test {
             image_.insert(image_.end(), tmp_vec.begin(), tmp_vec.end());
         }
 
+        BuildHashtree("sha256");
+    }
+
+    void BuildHashtree(const std::string& hash_name) {
         // Build the hashtree.
-        HashTreeBuilder builder(4096, HashTreeBuilder::HashFunction("sha256"));
+        HashTreeBuilder builder(4096, HashTreeBuilder::HashFunction(hash_name));
         // Use a random salt.
         salt_ = std::vector<uint8_t>(64, 10);
         ASSERT_TRUE(builder.Initialize(image_.size(), salt_));
@@ -100,14 +104,20 @@ class FecUnitTest : public ::testing::Test {
         ASSERT_EQ(0, std::system(android::base::Join(cmd, ' ').c_str()));
     }
 
-    void AddAvbHashtreeFooter(const std::string &image_name) {
+    void AddAvbHashtreeFooter(const std::string &image_name, bool sha1 = false) {
         salt_ = std::vector<uint8_t>(64, 10);
         std::vector<std::string> cmd = {
-            "avbtool",          "add_hashtree_footer",
-            "--salt",           HashTreeBuilder::BytesArrayToString(salt_),
-            "--hash_algorithm", "sha256",
+            "avbtool", "add_hashtree_footer",
+            "--salt", HashTreeBuilder::BytesArrayToString(salt_),
             "--image",          image_name,
+            "--hash_algorithm",
         };
+        if (sha1) {
+          cmd.emplace_back("sha1");
+        } else {
+          cmd.emplace_back("sha256");
+        };
+
         ASSERT_EQ(0, std::system(android::base::Join(cmd, ' ').c_str()));
     }
 
@@ -184,7 +194,7 @@ TEST_F(FecUnitTest, LoadAvbImage_HashtreeFooter) {
     TemporaryFile avb_image;
     ASSERT_TRUE(
         android::base::WriteFully(avb_image.fd, image_.data(), image_.size()));
-    AddAvbHashtreeFooter(avb_image.path);
+    AddAvbHashtreeFooter(avb_image.path, true);
 
     struct fec_handle *handle = nullptr;
     ASSERT_EQ(0, fec_open(&handle, avb_image.path, O_RDWR, FEC_FS_EXT4, 2));
@@ -198,6 +208,7 @@ TEST_F(FecUnitTest, LoadAvbImage_HashtreeFooter) {
     ASSERT_EQ(salt_, handle->hashtree().salt);
     ASSERT_EQ(1024 * 1024, handle->hashtree().hash_start);
     // the fec hashtree only stores the hash of the lowest level.
+    BuildHashtree("sha1");
     ASSERT_EQ(std::vector<uint8_t>(hashtree_content_.begin() + 4096,
                                    hashtree_content_.end()),
               handle->hashtree().hash);

@@ -24,6 +24,7 @@
 
 #if defined(__linux__)
     #include <linux/fs.h>
+#include <android-base/strings.h>
 #elif defined(__APPLE__)
     #include <sys/disk.h>
     #define BLKGETSIZE64 DKIOCGETBLOCKCOUNT
@@ -579,12 +580,25 @@ static int parse_avb_image(fec_handle *f, const AvbFooter &footer) {
     // TODO(xunchang) find a way to verify the ecc.
     f->ecc.valid = true;
 
+
+    std::string hash_algorithm(hashtree_descriptor.hash_algorithm,
+        hashtree_descriptor.hash_algorithm + sizeof(hashtree_descriptor.hash_algorithm));
+    error("algorithm %s", hash_algorithm.c_str());
+    int nid = NID_sha256;
+    if (android::base::StartsWithIgnoreCase(hash_algorithm, "sha1")) {
+      nid = NID_sha1;
+    } else if (!android::base::StartsWithIgnoreCase(hash_algorithm, "sha256")) {
+      error("unsupported hash algorithm %s", hash_algorithm.c_str());
+      return -1;
+    }
+
     hashtree_info hashtree;
     hashtree.hash_start = hashtree_descriptor.tree_offset;
     hashtree.data_blocks = hashtree.hash_start / FEC_BLOCKSIZE;
     hashtree.salt = std::move(salt);
 
-    if (verify_tree(&hashtree, f, root_hash.data()) != 0) {
+
+    if (verify_tree(&hashtree, f, root_hash.data(), nid) != 0) {
         error("failed to verity hashtree");
         return -1;
     }

@@ -206,7 +206,7 @@ static int parse_table(fec_handle *f, uint64_t offset, uint32_t size, bool useec
     v->table = std::move(table);
 
     if (!(f->flags & FEC_VERITY_DISABLE)) {
-        if (verify_tree(&v->hashtree, f, root) == -1) {
+        if (verify_tree(&v->hashtree, f, root, NID_sha256) == -1) {
             return -1;
         }
 
