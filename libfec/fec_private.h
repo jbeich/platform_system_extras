@@ -19,19 +19,21 @@
 
 #include <errno.h>
 #include <fcntl.h>
-#include <memory>
-#include <new>
 #include <pthread.h>
 #include <stdio.h>
 #include <string.h>
-#include <string>
 #include <sys/syscall.h>
 #include <unistd.h>
+
+#include <memory>
+#include <new>
+#include <string>
 #include <vector>
 
 #include <crypto_utils/android_pubkey.h>
 #include <fec/ecc.h>
 #include <fec/io.h>
+#include <openssl/obj_mac.h>
 #include <openssl/sha.h>
 #include <utils/Compat.h>
 
@@ -76,13 +78,35 @@ struct ecc_info {
 
 struct hashtree_info {
     uint64_t data_blocks;
-    uint32_t hash_data_blocks;
-    uint32_t hash_size;
-    uint64_t hash_data_offset;
     uint64_t hash_start;
-    std::vector<uint8_t> hash;
+    uint32_t hash_data_blocks;
+    std::vector<uint8_t> hash_data;
     std::vector<uint8_t> salt;
     std::vector<uint8_t> zero_hash;
+
+    int initialize(uint64_t hash_start, uint64_t data_blocks,
+                   const std::vector<uint8_t> &salt, int nid);
+
+    bool check_block_hash_with_index(uint64_t index, const uint8_t *block);
+
+    // Reads the verity hash tree, validates it against the root hash in `root',
+    // corrects errors if necessary, and copies valid data blocks for later use
+    // to 'hashtree'.
+    int verify_tree(const fec_handle *f, const uint8_t *root);
+
+   private:
+    bool ecc_read_hashes(fec_handle *f, uint64_t hash_offset, uint8_t *hash,
+                         uint64_t data_offset, uint8_t *data);
+
+    // Computes the hash for FEC_BLOCKSIZE bytes from buffer 'block' and
+    // compares it to the expected value in 'expected'.
+    bool check_block_hash(const uint8_t *expected, const uint8_t *block);
+
+    int get_hash(const uint8_t *block, uint8_t *hash);
+
+    int nid;
+    uint32_t digest_length_;
+    uint32_t padded_digest_length_;
 };
 
 struct verity_info {
@@ -127,9 +151,6 @@ extern uint64_t verity_get_size(uint64_t file_size, uint32_t *verity_levels,
         uint32_t *level_hashes);
 
 extern int verity_parse_header(fec_handle *f, uint64_t offset);
-
-extern bool check_block_hash(const uint8_t *expected, const uint8_t *block,
-                             const std::vector<uint8_t> &salt);
 
 /* helper macros */
 #ifndef unlikely
