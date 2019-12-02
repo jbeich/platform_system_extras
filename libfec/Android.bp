@@ -5,6 +5,7 @@ cc_library {
     host_supported: true,
     recovery_available: true,
     srcs: [
+        "fec_hash.cpp",
         "fec_open.cpp",
         "fec_read.cpp",
         "fec_verity.cpp",

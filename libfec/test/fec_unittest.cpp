@@ -37,9 +37,11 @@ class FecUnitTest : public ::testing::Test {
             std::vector<uint8_t> tmp_vec(4096, i);
             image_.insert(image_.end(), tmp_vec.begin(), tmp_vec.end());
         }
-
+        BuildHashtree("sha256");
+    }
+    void BuildHashtree(const std::string &hash_name) {
         // Build the hashtree.
-        HashTreeBuilder builder(4096, HashTreeBuilder::HashFunction("sha256"));
+        HashTreeBuilder builder(4096, HashTreeBuilder::HashFunction(hash_name));
         // Use a random salt.
         salt_ = std::vector<uint8_t>(64, 10);
         ASSERT_TRUE(builder.Initialize(image_.size(), salt_));
@@ -47,16 +49,17 @@ class FecUnitTest : public ::testing::Test {
         ASSERT_TRUE(builder.BuildHashTree());
         root_hash_ = builder.root_hash();
 
-        // Append the hashtree to the end of image.
         TemporaryFile temp_file;
         ASSERT_TRUE(builder.WriteHashTreeToFd(temp_file.fd, 0));
         android::base::ReadFileToString(temp_file.path, &hashtree_content_);
-        image_.insert(image_.end(), hashtree_content_.begin(),
-                      hashtree_content_.end());
     }
 
     // Builds the verity metadata and appends the bytes to the image.
     void BuildAndAppendsVerityMetadata() {
+        // Append the hashtree to the end of image.
+        image_.insert(image_.end(), hashtree_content_.begin(),
+                      hashtree_content_.end());
+
         // The metadata table has the format: "1 block_device, block_device,
         // BLOCK_SIZE, BLOCK_SIZE, data_blocks, data_blocks, 'sha256',
         // root_hash, salt".
@@ -99,10 +102,22 @@ class FecUnitTest : public ::testing::Test {
         ASSERT_EQ(0, std::system(android::base::Join(cmd, ' ').c_str()));
     }
 
+    void AddAvbHashtreeFooter(const std::string &image_name) {
+        salt_ = std::vector<uint8_t>(64, 10);
+        std::vector<std::string> cmd = {
+            "avbtool",          "add_hashtree_footer",
+            "--salt",           HashTreeBuilder::BytesArrayToString(salt_),
+            "--hash_algorithm", "sha256",
+            "--image",          image_name,
+        };
+        ASSERT_EQ(0, std::system(android::base::Join(cmd, ' ').c_str()));
+    }
+
     std::vector<uint8_t> image_;
     std::vector<uint8_t> salt_;
     std::vector<uint8_t> root_hash_;
     std::string hashtree_content_;
+
     verity_header verity_header_;
     std::string verity_table_;
 };
@@ -131,8 +146,11 @@ TEST_F(FecUnitTest, LoadVerityImage_ParseVerity) {
     // the fec hashtree only stores the hash of the lowest level.
     ASSERT_EQ(std::vector<uint8_t>(hashtree_content_.begin() + 4096,
                                    hashtree_content_.end()),
-              handle->hashtree().hash);
-    ASSERT_EQ(hashtree_content_.size(), handle->hashtree().hash_size);
+              handle->hashtree().hash_data);
+
+    uint64_t hash_size = verity_get_size(
+        handle->hashtree().data_blocks * FEC_BLOCKSIZE, nullptr, nullptr);
+    ASSERT_EQ(hashtree_content_.size(), hash_size);
 }
 
 TEST_F(FecUnitTest, LoadVerityImage_ParseEcc) {
