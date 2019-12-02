@@ -85,7 +85,7 @@ struct hashtree_info {
     std::vector<uint8_t> zero_hash;
 
     int initialize(uint64_t hash_start, uint64_t data_blocks,
-                   const std::vector<uint8_t> &salt, int nid);
+                  const std::vector<uint8_t> &salt, int nid);
 
     bool check_block_hash_with_index(uint64_t index, const uint8_t *block);
 
@@ -118,6 +118,13 @@ struct verity_info {
     verity_header ecc_header;
 };
 
+struct avb_info {
+    bool valid = false;
+    uint64_t vbmeta_offset;
+    uint64_t vbmeta_size;
+    hashtree_info hashtree;
+};
+
 struct fec_handle {
     ecc_info ecc;
     int fd;
@@ -128,10 +135,12 @@ struct fec_handle {
     uint64_t data_size;
     uint64_t pos;
     uint64_t size;
+    // TODO(xunchang) switch to std::optional
     verity_info verity;
+    avb_info avb;
 
     hashtree_info hashtree() const {
-        return verity.hashtree;
+        return avb.valid ? avb.hashtree : verity.hashtree;
     }
 };
 
