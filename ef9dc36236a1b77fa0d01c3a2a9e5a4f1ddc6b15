@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4fe24e80_79b48fe3",
+        "filename": "libfec/fec_verity.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2019-12-04T20:38:54Z",
+      "side": 1,
+      "message": "Note that resize can throw an exception, while the previous code returned an error. Are the users of the library fine with this?",
+      "range": {
+        "startLine": 404,
+        "startChar": 17,
+        "endLine": 404,
+        "endChar": 23
+      },
+      "revId": "ef9dc36236a1b77fa0d01c3a2a9e5a4f1ddc6b15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
