@@ -22,6 +22,30 @@
       "revId": "ef9dc36236a1b77fa0d01c3a2a9e5a4f1ddc6b15",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9fbc458a_f40fc3b3",
+        "filename": "libfec/fec_verity.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2019-12-04T20:54:35Z",
+      "side": 1,
+      "message": "yeah, it has been used everywhere in update_engine and recovery. Plus it\u0027s just the salt, so I don\u0027t worry too much about it.",
+      "parentUuid": "4fe24e80_79b48fe3",
+      "range": {
+        "startLine": 404,
+        "startChar": 17,
+        "endLine": 404,
+        "endChar": 23
+      },
+      "revId": "ef9dc36236a1b77fa0d01c3a2a9e5a4f1ddc6b15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
