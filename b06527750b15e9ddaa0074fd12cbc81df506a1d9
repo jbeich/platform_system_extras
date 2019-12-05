@@ -22,6 +22,30 @@
       "revId": "b06527750b15e9ddaa0074fd12cbc81df506a1d9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "92c1ad6f_48f44c4a",
+        "filename": "libfec/test/fec_unittest.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2019-12-05T01:06:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "46336ce1_818bfcd6",
+      "range": {
+        "startLine": 117,
+        "startChar": 54,
+        "endLine": 117,
+        "endChar": 60
+      },
+      "revId": "b06527750b15e9ddaa0074fd12cbc81df506a1d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
