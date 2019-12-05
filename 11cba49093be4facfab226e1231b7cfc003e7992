@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "56a5db4e_a40a5af3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1079733
+      },
+      "writtenOn": "2019-12-05T00:20:56Z",
+      "side": 1,
+      "message": "the hashtree is for verified boot, so it need to defend against malicious attacker, not random corruption",
+      "parentUuid": "4ec378a6_65affafe",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 42
+      },
+      "revId": "11cba49093be4facfab226e1231b7cfc003e7992",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c88007cc_47420fa4",
         "filename": "libfec/fec_private.h",
         "patchSetId": 4
