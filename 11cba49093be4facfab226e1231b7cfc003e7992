@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "3fabbfe9_7bc53496",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2019-12-05T00:25:39Z",
+      "side": 1,
+      "message": "Right. And sha256 won\u0027t actually increase the space usage since we need to pad sha1 anyway. I am not sure if there\u0027s a side effect for the switch. Will take a look later.",
+      "parentUuid": "56a5db4e_a40a5af3",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 42
+      },
+      "revId": "11cba49093be4facfab226e1231b7cfc003e7992",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c88007cc_47420fa4",
         "filename": "libfec/fec_private.h",
         "patchSetId": 4
