@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2d052f2f_c1ec455b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1079733
+      },
+      "writtenOn": "2019-12-05T00:00:38Z",
+      "side": 1,
+      "message": "Maybe it\u0027s time to switch to SHA256 for AVB, SHA1 collision has existed for a while now.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 42
+      },
+      "revId": "11cba49093be4facfab226e1231b7cfc003e7992",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c88007cc_47420fa4",
+        "filename": "libfec/fec_private.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1079733
+      },
+      "writtenOn": "2019-12-05T00:00:38Z",
+      "side": 1,
+      "message": "I don\u0027t think this is used",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 14
+      },
+      "revId": "11cba49093be4facfab226e1231b7cfc003e7992",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3f5ec471_3dd39a29",
+        "filename": "libfec/fec_verity.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1079733
+      },
+      "writtenOn": "2019-12-05T00:00:38Z",
+      "side": 1,
+      "message": "I think this only works because SHA1 is padded to the same length as SHA256, should use padded_digest_length_",
+      "range": {
+        "startLine": 111,
+        "startChar": 43,
+        "endLine": 111,
+        "endChar": 63
+      },
+      "revId": "11cba49093be4facfab226e1231b7cfc003e7992",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "26704dae_752b6767",
+        "filename": "libfec/fec_verity.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1079733
+      },
+      "writtenOn": "2019-12-05T00:00:38Z",
+      "side": 1,
+      "message": "Generalize it with EVP_ functions?",
+      "range": {
+        "startLine": 144,
+        "startChar": 11,
+        "endLine": 144,
+        "endChar": 24
+      },
+      "revId": "11cba49093be4facfab226e1231b7cfc003e7992",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
