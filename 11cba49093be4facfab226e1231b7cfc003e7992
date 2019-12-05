@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "4ec378a6_65affafe",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2019-12-05T00:18:20Z",
+      "side": 1,
+      "message": "probably not a priority since it\u0027s only for the hashtree. It\u0027s less likely for the corruption pattern to cause a collision.",
+      "parentUuid": "2d052f2f_c1ec455b",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 42
+      },
+      "revId": "11cba49093be4facfab226e1231b7cfc003e7992",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c88007cc_47420fa4",
         "filename": "libfec/fec_private.h",
         "patchSetId": 4
