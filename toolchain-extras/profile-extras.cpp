@@ -68,7 +68,7 @@ void *property_watch_loop(__unused void *arg) {
 }
 
 // Initialize libprofile-extras:
-// - Install a signal handler that triggers __gcov_flush on <GCOV_FLUSH_SIGNAL>.
+// - Install a signal handler that triggers __gcov_flush on <COVERAGE_FLUSH_SIGNAL>.
 // - Create a thread that calls __gcov_flush when <kCoveragePropName> sysprop
 // transistions to "1" after a transistion to "0".
 //
@@ -81,7 +81,19 @@ void *property_watch_loop(__unused void *arg) {
 // We force the linker to include init_profile_extras() by passing
 // '-uinit_profile_extras' to the linker (in build/soong).
 __attribute__((constructor)) int init_profile_extras(void) {
+<<<<<<< HEAD   (4444ea Merge "Merge branch android10-qpr1-release" into android10-g)
   sighandler_t ret1 = signal(GCOV_FLUSH_SIGNAL, gcov_signal_handler);
+=======
+  if (init_profile_extras_once)
+    return 0;
+  init_profile_extras_once = 1;
+
+  // is this instance already registered?
+  if (chained_gcov_signal_handler != SIG_ERR) {
+    return -1;
+  }
+  sighandler_t ret1 = signal(COVERAGE_FLUSH_SIGNAL, gcov_signal_handler);
+>>>>>>> CHANGE (a0d4f0 Add cross-process coverage flushing for the LLVM toolchain.)
   if (ret1 == SIG_ERR) {
     return -1;
   }
