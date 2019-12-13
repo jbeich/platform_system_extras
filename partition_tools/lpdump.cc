@@ -68,6 +68,11 @@ static std::string BuildFlagString(const std::vector<std::string>& strings) {
     return strings.empty() ? "none" : android::base::Join(strings, ",");
 }
 
+static std::string BuildHeaderFlagString([[maybe_unused]] uint32_t flags) {
+    std::vector<std::string> strings;
+    return BuildFlagString(strings);
+}
+
 static std::string BuildAttributeString(uint32_t attrs) {
     std::vector<std::string> strings;
     if (attrs & LP_PARTITION_ATTR_READONLY) strings.emplace_back("readonly");
@@ -291,6 +296,7 @@ static void PrintMetadata(const LpMetadata& pt, std::ostream& cout) {
     cout << "Metadata size: " << (pt.header.header_size + pt.header.tables_size) << " bytes\n";
     cout << "Metadata max size: " << pt.geometry.metadata_max_size << " bytes\n";
     cout << "Metadata slot count: " << pt.geometry.metadata_slot_count << "\n";
+    cout << "Header flags: " << BuildHeaderFlagString(pt.header.flags) << "\n";
     cout << "Partition table:\n";
     cout << "------------------------\n";
 
