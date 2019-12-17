@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b4b1fc6b_61b27528",
+        "filename": "partition_tools/lpdump.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1096713
+      },
+      "writtenOn": "2019-12-17T13:48:18Z",
+      "side": 1,
+      "message": "Technically, when \u0027i\u0027 is 31, and on systems where a bare int literal is a 32-bit signed value, the result of this shift is implementation-defined behavior.  While our toolchains are almost certainly doing the expected thing here, out of paranoia I\u0027ve put up a follow-up CL to use an unsigned value: https://android-review.googlesource.com/c/platform/system/extras/+/1191515",
+      "revId": "ab1b095bc93918ee721b1b6002a394d5b195bdec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
