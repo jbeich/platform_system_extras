@@ -190,6 +190,30 @@
     },
     {
       "key": {
+        "uuid": "8b0a1527_1d88faff",
+        "filename": "libfec/fec_verity.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1079733
+      },
+      "writtenOn": "2019-12-18T21:57:04Z",
+      "side": 1,
+      "message": "Use EVP_MD_CTX_free instead of EVP_MD_CTX_destroy",
+      "parentUuid": "b0477c08_f8f41ddd",
+      "range": {
+        "startLine": 135,
+        "startChar": 39,
+        "endLine": 135,
+        "endChar": 57
+      },
+      "revId": "60e0c47f3b2ff7687df7b9a9fadbb682caefcef3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3713b2e6_8e21d85a",
         "filename": "libfec/fec_verity.cpp",
         "patchSetId": 6
