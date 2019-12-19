@@ -141,6 +141,10 @@ struct fec_handle {
     }
 };
 
+extern uint64_t hashtree_get_size(uint64_t file_size, uint32_t *verity_levels,
+                                  uint32_t *level_hashes,
+                                  uint32_t padded_digest_size);
+
 /* I/O helpers */
 extern bool raw_pread(int fd, void *buf, size_t count, uint64_t offset);
 extern bool raw_pwrite(int fd, const void *buf, size_t count, uint64_t offset);
@@ -153,10 +157,6 @@ extern ssize_t process(fec_handle *f, uint8_t *buf, size_t count,
         uint64_t offset, read_func func);
 
 /* verity functions */
-extern uint64_t verity_get_size(uint64_t file_size, uint32_t *verity_levels,
-                                uint32_t *level_hashes,
-                                uint32_t padded_digest_size);
-
 extern int verity_parse_header(fec_handle *f, uint64_t offset);
 
 /* helper macros */

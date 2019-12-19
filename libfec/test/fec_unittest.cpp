@@ -137,8 +137,8 @@ TEST_F(FecUnitTest, LoadVerityImage_ParseVerity) {
               handle->hashtree().hash_data);
 
     uint64_t hash_size =
-        verity_get_size(handle->hashtree().data_blocks * FEC_BLOCKSIZE, nullptr,
-                        nullptr, SHA256_DIGEST_LENGTH);
+        hashtree_get_size(handle->hashtree().data_blocks * FEC_BLOCKSIZE,
+                          nullptr, nullptr, SHA256_DIGEST_LENGTH);
     ASSERT_EQ(hashtree_content_.size(), hash_size);
 }
 
