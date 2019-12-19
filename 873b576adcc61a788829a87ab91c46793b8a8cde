@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "df4289c9_37239835",
+        "filename": "bootctl/bootctl.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-12-19T17:01:28Z",
+      "side": 1,
+      "message": "Why not just get-snapshot-merge-status (same as the HAL API)?",
+      "range": {
+        "startLine": 56,
+        "startChar": 15,
+        "endLine": 56,
+        "endChar": 34
+      },
+      "revId": "873b576adcc61a788829a87ab91c46793b8a8cde",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0af211c7_af7d8aa7",
+        "filename": "bootctl/bootctl.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-12-19T17:01:28Z",
+      "side": 1,
+      "message": "nit: use lower case",
+      "range": {
+        "startLine": 153,
+        "startChar": 19,
+        "endLine": 153,
+        "endChar": 28
+      },
+      "revId": "873b576adcc61a788829a87ab91c46793b8a8cde",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3bf03e90_b672e6e1",
+        "filename": "bootctl/bootctl.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2019-12-19T17:01:28Z",
+      "side": 1,
+      "message": "if it is \"get-snapshot-merge-status\" you may drop this and always return EX_OK",
+      "range": {
+        "startLine": 203,
+        "startChar": 0,
+        "endLine": 206,
+        "endChar": 23
+      },
+      "revId": "873b576adcc61a788829a87ab91c46793b8a8cde",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
