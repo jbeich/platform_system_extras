@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5c7140fb_11957db5",
+        "filename": "libfec/fec_open.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 1076971
+      },
+      "writtenOn": "2019-12-20T20:58:21Z",
+      "side": 1,
+      "message": "So one oddity about AVB is that because (good) reasons the hashtree descriptor can live in either vbmeta.img or in a chained partition .. and it doesn\u0027t even need to be the same partition as where the content + hashtree lives. So it\u0027s a little bit more complicated than this.\n\nThe way to do this is to use avb_slot_verify() and give it an AvbOps for implementing the I/O (you may use the AvbOps from libavb_user for this). This will start by reading vbmeta.img and then read other chained partitions as specified by what is in vbmeta.img. Once avb_slot_verify() successfully completes, you get a AvbSlotVerifyData back and this has a list of AvbVBMetaData. For each of those you can iterate of the descriptors to find the hashtree descriptor in question.",
+      "revId": "09e1115968d486964a2cf0744f330136ad07c568",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
