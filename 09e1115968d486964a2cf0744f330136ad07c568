@@ -34,6 +34,24 @@
       "revId": "09e1115968d486964a2cf0744f330136ad07c568",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "50a073fb_5cf7137a",
+        "filename": "libfec/fec_open.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 1076971
+      },
+      "writtenOn": "2019-12-20T21:59:32Z",
+      "side": 1,
+      "message": "It\u0027s entirely possible to use avbtool to craft both a vbmeta.img and system.img with the descriptor living in either of the images... look at the AVB unit tests, they do things like this all the time.",
+      "parentUuid": "65221c7d_096fe5f3",
+      "revId": "09e1115968d486964a2cf0744f330136ad07c568",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
