@@ -16,6 +16,24 @@
       "revId": "09e1115968d486964a2cf0744f330136ad07c568",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "65221c7d_096fe5f3",
+        "filename": "libfec/fec_open.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2019-12-20T21:43:56Z",
+      "side": 1,
+      "message": "ahh.. thanks for the explanation. It will be hard to unittest without a real device then... as the vbmeta may be somewhere else.",
+      "parentUuid": "5c7140fb_11957db5",
+      "revId": "09e1115968d486964a2cf0744f330136ad07c568",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
