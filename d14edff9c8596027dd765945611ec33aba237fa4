@@ -22,6 +22,30 @@
       "revId": "d14edff9c8596027dd765945611ec33aba237fa4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ab8ba82a_acc5898d",
+        "filename": "simpleperf/cmd_list.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2019-12-21T00:21:59Z",
+      "side": 1,
+      "message": "fixed in https://android-review.googlesource.com/c/platform/system/extras/+/1197120. Please also cherry pick that patch when cherry-pick this patch. Otherwise, vts test probably will fail.",
+      "parentUuid": "e5e33fe9_14604285",
+      "range": {
+        "startLine": 158,
+        "startChar": 43,
+        "endLine": 158,
+        "endChar": 47
+      },
+      "revId": "d14edff9c8596027dd765945611ec33aba237fa4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
