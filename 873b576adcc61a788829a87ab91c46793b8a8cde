@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "20933739_17677474",
+        "filename": "bootctl/bootctl.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1409599
+      },
+      "writtenOn": "2019-12-27T17:27:58Z",
+      "side": 1,
+      "message": "I like it! Done",
+      "parentUuid": "df4289c9_37239835",
+      "range": {
+        "startLine": 56,
+        "startChar": 15,
+        "endLine": 56,
+        "endChar": 34
+      },
+      "revId": "873b576adcc61a788829a87ab91c46793b8a8cde",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0af211c7_af7d8aa7",
         "filename": "bootctl/bootctl.cpp",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2019-12-19T17:01:28Z",
       "side": 1,
       "message": "nit: use lower case",
+      "range": {
+        "startLine": 153,
+        "startChar": 19,
+        "endLine": 153,
+        "endChar": 28
+      },
+      "revId": "873b576adcc61a788829a87ab91c46793b8a8cde",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7d518a8c_419263a5",
+        "filename": "bootctl/bootctl.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1409599
+      },
+      "writtenOn": "2019-12-27T17:27:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0af211c7_af7d8aa7",
       "range": {
         "startLine": 153,
         "startChar": 19,
@@ -68,6 +116,30 @@
       "revId": "873b576adcc61a788829a87ab91c46793b8a8cde",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e50c6684_5ed38f72",
+        "filename": "bootctl/bootctl.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1409599
+      },
+      "writtenOn": "2019-12-27T17:27:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3bf03e90_b672e6e1",
+      "range": {
+        "startLine": 203,
+        "startChar": 0,
+        "endLine": 206,
+        "endChar": 23
+      },
+      "revId": "873b576adcc61a788829a87ab91c46793b8a8cde",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
