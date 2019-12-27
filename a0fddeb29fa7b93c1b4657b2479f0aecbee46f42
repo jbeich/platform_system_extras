@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9e01639f_d7065cf1",
+        "filename": "bootctl/bootctl.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1290458
+      },
+      "writtenOn": "2019-12-27T18:15:20Z",
+      "side": 1,
+      "message": "uber-nit: cancel state can happen before the merge (ie unverified state), it\u0027s really just \"cancelled\"",
+      "revId": "a0fddeb29fa7b93c1b4657b2479f0aecbee46f42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
