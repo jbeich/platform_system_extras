@@ -16,6 +16,24 @@
       "revId": "a0fddeb29fa7b93c1b4657b2479f0aecbee46f42",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f4ee4b7a_bfc832d8",
+        "filename": "bootctl/bootctl.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1409599
+      },
+      "writtenOn": "2020-01-02T09:46:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9e01639f_d7065cf1",
+      "revId": "a0fddeb29fa7b93c1b4657b2479f0aecbee46f42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
