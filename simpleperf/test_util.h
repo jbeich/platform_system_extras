@@ -88,6 +88,14 @@ bool HasPmuCounter();
   } while (0)
 #endif
 
+#define TEST_REQUIRE_TRACEPOINT_EVENTS() \
+  do { \
+    if (!IsDir("/sys/kernel/debug/tracing/events")) { \
+      GTEST_LOG_(INFO) << "Skip this test as tracepoint events aren't available."; \
+      return; \
+    } \
+  } while (0)
+
 class CaptureStdout {
  public:
   CaptureStdout() : started_(false) {}

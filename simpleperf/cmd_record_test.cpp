@@ -603,6 +603,7 @@ TEST(record_cmd, cpu_clock_for_a_long_time) {
 TEST(record_cmd, dump_regs_for_tracepoint_events) {
   TEST_REQUIRE_HW_COUNTER();
   TEST_REQUIRE_HOST_ROOT();
+  TEST_REQUIRE_TRACEPOINT_EVENTS();
   OMIT_TEST_ON_NON_NATIVE_ABIS();
   // Check if the kernel can dump registers for tracepoint events.
   // If not, probably a kernel patch below is missing:
@@ -614,6 +615,7 @@ TEST(record_cmd, trace_offcpu_option) {
   TEST_REQUIRE_HW_COUNTER();
   // On linux host, we need root privilege to read tracepoint events.
   TEST_REQUIRE_HOST_ROOT();
+  TEST_REQUIRE_TRACEPOINT_EVENTS();
   OMIT_TEST_ON_NON_NATIVE_ABIS();
   TemporaryFile tmpfile;
   ASSERT_TRUE(RunRecordCmd({"--trace-offcpu", "-f", "1000"}, tmpfile.path));
@@ -730,6 +732,7 @@ TEST(record_cmd, kernel_bug_making_zero_dyn_size_for_kernel_samples) {
   // 02e184476eff8 perf/core: Force USER_DS when recording user stack data
   TEST_REQUIRE_HW_COUNTER();
   TEST_REQUIRE_HOST_ROOT();
+  TEST_REQUIRE_TRACEPOINT_EVENTS();
   std::vector<std::unique_ptr<Workload>> workloads;
   CreateProcesses(1, &workloads);
   std::string pid = std::to_string(workloads[0]->GetPid());

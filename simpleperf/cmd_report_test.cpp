@@ -528,6 +528,7 @@ TEST_F(ReportCommandTest, report_dwarf_callgraph_of_nativelib_in_apk) {
 TEST_F(ReportCommandTest, exclude_kernel_callchain) {
   TEST_REQUIRE_HW_COUNTER();
   TEST_REQUIRE_HOST_ROOT();
+  TEST_REQUIRE_TRACEPOINT_EVENTS();
   OMIT_TEST_ON_NON_NATIVE_ABIS();
   std::vector<std::unique_ptr<Workload>> workloads;
   CreateProcesses(1, &workloads);
