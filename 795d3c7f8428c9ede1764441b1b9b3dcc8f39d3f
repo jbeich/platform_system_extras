@@ -22,6 +22,30 @@
       "revId": "795d3c7f8428c9ede1764441b1b9b3dcc8f39d3f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aefd2b32_efd74c28",
+        "filename": "verity/fec/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1060959
+      },
+      "writtenOn": "2020-01-10T08:48:28Z",
+      "side": 1,
+      "message": "ah doh, it\u0027s a cc_binary_host. Ignore me. There is also an on-device library called fec which made me confused",
+      "parentUuid": "f1c86b6b_2722ba98",
+      "range": {
+        "startLine": 17,
+        "startChar": 18,
+        "endLine": 18,
+        "endChar": 18
+      },
+      "revId": "795d3c7f8428c9ede1764441b1b9b3dcc8f39d3f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
