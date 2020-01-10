@@ -231,6 +231,15 @@ std::vector<pid_t> GetAllProcesses() {
   return result;
 }
 
+std::set<pid_t> GetAllThreads() {
+  std::set<pid_t> result;
+  for (auto pid : GetAllProcesses()) {
+    std::vector<pid_t> tids = GetThreadsInProcess(pid);
+    result.insert(tids.begin(), tids.end());
+  }
+  return result;
+}
+
 bool GetThreadMmapsInProcess(pid_t pid, std::vector<ThreadMmap>* thread_mmaps) {
   thread_mmaps->clear();
   return android::procinfo::ReadProcessMaps(
