@@ -1,0 +1,12 @@
+Open-Source-Licensing+1: Lint 🤖 <android-build-prod-ayeaye@system.gserviceaccount.com>
+Code-Review+1: Ray Essick <essick@google.com>
+Code-Review+2: Pirama Arumuga Nainar <pirama@google.com>
+Code-Review+1: Oliver Nguyen <olivernguyen@google.com>
+Autosubmit+1: Ray Essick <essick@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Lint+1: Lint 🤖 <android-build-prod-ayeaye@system.gserviceaccount.com>
+Submitted-by: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-at: Sat, 11 Jan 2020 00:05:33 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/system/extras/+/1205989
+Project: platform/system/extras
+Branch: refs/heads/master
