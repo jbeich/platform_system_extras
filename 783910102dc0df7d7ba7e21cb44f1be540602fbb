@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "548f30e9_38f3cb37",
+        "filename": "simpleperf/cmd_inject.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-01-13T18:49:10Z",
+      "side": 1,
+      "message": "maybe use a cache, unordered_map\u003cDso*, bool\u003e, bool value shows whether a Dso is requested. Checking a hash table should be faster than regex match?",
+      "range": {
+        "startLine": 150,
+        "startChar": 49,
+        "endLine": 150,
+        "endChar": 68
+      },
+      "revId": "783910102dc0df7d7ba7e21cb44f1be540602fbb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
