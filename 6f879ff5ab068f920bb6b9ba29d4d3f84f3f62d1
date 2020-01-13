@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "246dc455_75ee9f52",
+        "filename": "toolchain-extras/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-01-13T21:54:38Z",
+      "side": 1,
+      "message": "Should we also set clang_coverage to false?",
+      "revId": "6f879ff5ab068f920bb6b9ba29d4d3f84f3f62d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4f87c46f_a74a28d3",
+        "filename": "toolchain-extras/profile-clang-extras-test.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-01-13T21:54:38Z",
+      "side": 1,
+      "message": "2020",
+      "range": {
+        "startLine": 2,
+        "startChar": 17,
+        "endLine": 2,
+        "endChar": 21
+      },
+      "revId": "6f879ff5ab068f920bb6b9ba29d4d3f84f3f62d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4590fed0_1ce7b521",
+        "filename": "toolchain-extras/profile-clang-extras-test.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-01-13T21:54:38Z",
+      "side": 1,
+      "message": "This is not necessary.  I suppose we can now remove the coverage-property trigger from libprofile-extras as well.  Can you do that in a follow-up CL?",
+      "revId": "6f879ff5ab068f920bb6b9ba29d4d3f84f3f62d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8d25f0be_aa9c56dd",
+        "filename": "toolchain-extras/profile-clang-extras.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-01-13T21:54:38Z",
+      "side": 1,
+      "message": "This should be 2020 - the first year the file is added to AOSP.",
+      "range": {
+        "startLine": 2,
+        "startChar": 17,
+        "endLine": 2,
+        "endChar": 21
+      },
+      "revId": "6f879ff5ab068f920bb6b9ba29d4d3f84f3f62d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3a191eb1_755c24a6",
+        "filename": "toolchain-extras/profile-clang-extras.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-01-13T21:54:38Z",
+      "side": 1,
+      "message": "Let\u0027s rename this to COVERAGE_FLUSH_SIGNAL since it\u0027s no longer GCOV specific.",
+      "range": {
+        "startLine": 60,
+        "startChar": 29,
+        "endLine": 60,
+        "endChar": 46
+      },
+      "revId": "6f879ff5ab068f920bb6b9ba29d4d3f84f3f62d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
