@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "61441b02_0566d5ff",
+        "filename": "toolchain-extras/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-01-13T21:55:28Z",
+      "side": 1,
+      "message": "Ignore this.  I\u0027d thought we also have a new blueprint property for clang coverage.",
+      "parentUuid": "246dc455_75ee9f52",
+      "revId": "6f879ff5ab068f920bb6b9ba29d4d3f84f3f62d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4f87c46f_a74a28d3",
         "filename": "toolchain-extras/profile-clang-extras-test.cpp",
         "patchSetId": 2
