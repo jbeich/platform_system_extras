@@ -22,6 +22,53 @@
       "revId": "8edf548109439dad8a68a92b7f1cfe7c731e2ac8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e474d771_71a9171e",
+        "filename": "simpleperf/main.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1128769
+      },
+      "writtenOn": "2020-01-14T13:28:54Z",
+      "side": 1,
+      "message": "nit: typo \"property\"",
+      "range": {
+        "startLine": 43,
+        "startChar": 24,
+        "endLine": 43,
+        "endChar": 32
+      },
+      "revId": "8edf548109439dad8a68a92b7f1cfe7c731e2ac8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e504393c_b5f0b46c",
+        "filename": "simpleperf/main.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1128769
+      },
+      "writtenOn": "2020-01-14T13:28:54Z",
+      "side": 1,
+      "message": "\"0\" seems intentional here (before the tool runs). Setting security.perf_harden to 0 has two meanings: \n(1) on current platforms - it\u0027ll lower the perf_event_paranoid to 1\n(2) on all platforms - it proves that the shell user is in the loop (either by running the tool from shell, or having manually set the property in the case an app is trying to exec simpleperf).",
+      "parentUuid": "0a5c91f9_e82fe5b0",
+      "range": {
+        "startLine": 43,
+        "startChar": 70,
+        "endLine": 43,
+        "endChar": 71
+      },
+      "revId": "8edf548109439dad8a68a92b7f1cfe7c731e2ac8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
