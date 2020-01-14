@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0a5c91f9_e82fe5b0",
+        "filename": "simpleperf/main.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1054468
+      },
+      "writtenOn": "2020-01-14T08:25:00Z",
+      "side": 1,
+      "message": "1",
+      "range": {
+        "startLine": 43,
+        "startChar": 70,
+        "endLine": 43,
+        "endChar": 71
+      },
+      "revId": "8edf548109439dad8a68a92b7f1cfe7c731e2ac8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
