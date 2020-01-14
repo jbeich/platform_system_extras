@@ -69,6 +69,30 @@
       "revId": "8edf548109439dad8a68a92b7f1cfe7c731e2ac8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "78342a52_aefbe51c",
+        "filename": "simpleperf/main.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1054468
+      },
+      "writtenOn": "2020-01-14T13:42:32Z",
+      "side": 1,
+      "message": "How about \"failed to set system property security.perf_harden to 0\"? The current message says it \"can\u0027t be set to 0\" followed immediately by an instructions to set it to 0. That could be confusing.",
+      "parentUuid": "e504393c_b5f0b46c",
+      "range": {
+        "startLine": 43,
+        "startChar": 70,
+        "endLine": 43,
+        "endChar": 71
+      },
+      "revId": "8edf548109439dad8a68a92b7f1cfe7c731e2ac8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
