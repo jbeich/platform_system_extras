@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "67ea8c03_5a64ecc7",
+        "filename": "simpleperf/cmd_inject.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-01-14T00:01:44Z",
+      "side": 1,
+      "message": "we have unit tests, which may run inject_cmd for many times. To avoid interact, it\u0027s better to make dso_filter_cache a member variable of InjectCommand. Also may be more clear to make it a separate function.",
+      "range": {
+        "startLine": 151,
+        "startChar": 4,
+        "endLine": 151,
+        "endChar": 10
+      },
+      "revId": "c48fc496c6da627c2951fc3578ef72ca70f95d3d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
