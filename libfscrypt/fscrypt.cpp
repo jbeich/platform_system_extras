@@ -143,6 +143,9 @@ bool OptionsToString(const EncryptionOptions& options, std::string* options_stri
     if ((options.flags & FSCRYPT_POLICY_FLAG_IV_INO_LBLK_64)) {
         *options_string += "+inlinecrypt_optimized";
     }
+    if ((options.flags & FSCRYPT_POLICY_FLAG_WRAPPED_KEY)) {
+        *options_string += "+wrapped_key";
+    }
     EncryptionOptions options_check;
     if (!ParseOptions(*options_string, &options_check)) {
         LOG(ERROR) << "Internal error serializing options as string: " << *options_string;
@@ -187,6 +190,8 @@ bool ParseOptions(const std::string& options_string, EncryptionOptions* options)
                 options->version = 2;
             } else if (flag == "inlinecrypt_optimized") {
                 options->flags |= FSCRYPT_POLICY_FLAG_IV_INO_LBLK_64;
+            } else if (flag == "wrapped_key") {
+                options->flags |= FSCRYPT_POLICY_FLAG_WRAPPED_KEY;
             } else {
                 LOG(ERROR) << "Unknown flag: " << flag;
                 return false;
