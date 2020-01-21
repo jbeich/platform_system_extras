@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7615b509_76da7355",
+        "filename": "simpleperf/cmd_stat.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 874,
+      "author": {
+        "id": 1105075
+      },
+      "writtenOn": "2020-01-21T19:26:46Z",
+      "side": 1,
+      "message": "can we also print its pid if known, so data can better organized by process.",
+      "range": {
+        "startLine": 874,
+        "startChar": 28,
+        "endLine": 874,
+        "endChar": 47
+      },
+      "revId": "0276cd9e611b51832ffe8b2e3a1f653dd2fae17d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
