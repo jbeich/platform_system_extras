@@ -18,9 +18,11 @@
 #include <sys/ioctl.h>
 #include <sys/stat.h>
 
+#include <android-base/properties.h>
 #include <android-base/strings.h>
 #include <ext4_utils/ext4_sb.h>
 #include <libavb/libavb.h>
+#include <libavb_user/avb_ops_user.h>
 #include <squashfs_utils.h>
 
 #if defined(__linux__)
@@ -495,6 +497,29 @@ int fec_get_status(struct fec_handle *f, struct fec_status *s)
     return 0;
 }
 
+static int parse_vbmeta_with_slot_verify(std::vector<uint8_t> *vbmeta) {
+    const char *requested_partitions[] = { nullptr };
+    AvbSlotVerifyData *avb_slot_data;
+    auto suffix = android::base::GetProperty("ro.boot.slot_suffix", "");
+    auto avb_ops = avb_ops_user_new();
+    /*auto verify_result =*/
+    avb_slot_verify(avb_ops, requested_partitions, suffix.c_str(),
+                    AVB_SLOT_VERIFY_FLAGS_NONE, AVB_HASHTREE_ERROR_MODE_EIO,
+                    &avb_slot_data);
+
+    if (!avb_slot_data) return -1;
+    for (size_t i = 0; i < avb_slot_data->num_vbmeta_images; i++) {
+        if (std::string(avb_slot_data->vbmeta_images[i].partition_name) ==
+            "system") {
+            vbmeta->assign(avb_slot_data->vbmeta_images[i].vbmeta_data,
+                           avb_slot_data->vbmeta_images[i].vbmeta_data +
+                               avb_slot_data->vbmeta_images[i].vbmeta_size);
+            return 0;
+        }
+    }
+    return -1;
+}
+
 static int parse_vbmeta_from_footer(fec_handle *f,
                                     std::vector<uint8_t> *vbmeta) {
     if (f->size <= AVB_FOOTER_SIZE) {
@@ -688,7 +713,8 @@ int fec_open(struct fec_handle **handle, const char *path, int mode, int flags,
     f->data_size = f->size; /* until ecc and/or verity are loaded */
 
     std::vector<uint8_t> vbmeta;
-    if (parse_vbmeta_from_footer(f.get(), &vbmeta) == 0) {
+    parse_vbmeta_from_footer(f.get(), &vbmeta);
+    if (parse_vbmeta_with_slot_verify(&vbmeta) == 0) {
         if (parse_avb_image(f.get(), vbmeta) != 0) {
             error("failed to parse avb image.");
             return -1;
