@@ -46,6 +46,30 @@
       "revId": "0276cd9e611b51832ffe8b2e3a1f653dd2fae17d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5104cfc8_649ddcf0",
+        "filename": "simpleperf/cmd_stat.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 874,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-01-22T01:44:46Z",
+      "side": 1,
+      "message": "Done. Use the same format as report cmd: tid refers to pid, pid refers to tgid.",
+      "parentUuid": "f2927edc_aff65851",
+      "range": {
+        "startLine": 874,
+        "startChar": 28,
+        "endLine": 874,
+        "endChar": 47
+      },
+      "revId": "0276cd9e611b51832ffe8b2e3a1f653dd2fae17d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
