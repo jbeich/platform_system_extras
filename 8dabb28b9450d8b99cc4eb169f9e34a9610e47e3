@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "612f116f_d2f208c4",
+        "filename": "libfec/fec_open.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 522,
+      "author": {
+        "id": 1076971
+      },
+      "writtenOn": "2020-01-22T00:24:39Z",
+      "side": 1,
+      "message": "Will this work on a sparse image?",
+      "range": {
+        "startLine": 522,
+        "startChar": 9,
+        "endLine": 522,
+        "endChar": 18
+      },
+      "revId": "8dabb28b9450d8b99cc4eb169f9e34a9610e47e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "934c5d5c_92cec13d",
+        "filename": "libfec/fec_open.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 544,
+      "author": {
+        "id": 1076971
+      },
+      "writtenOn": "2020-01-22T00:24:39Z",
+      "side": 1,
+      "message": "Seems like the caller is already doing this.",
+      "range": {
+        "startLine": 544,
+        "startChar": 4,
+        "endLine": 544,
+        "endChar": 49
+      },
+      "revId": "8dabb28b9450d8b99cc4eb169f9e34a9610e47e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6f21a751_be409ee4",
+        "filename": "libfec/fec_open.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 603,
+      "author": {
+        "id": 1076971
+      },
+      "writtenOn": "2020-01-22T00:24:39Z",
+      "side": 1,
+      "message": "I don\u0027t understand the comment... is there a hash for the ECC data? If so, why is it important to point out it\u0027s not in the hashtree descriptor. As for the way to verify if the ECC in the image is correct, I guess you would need to calculate it and see if it\u0027s the same as is in the file...\n\n(Also, typo: eec -\u003e ecc?)",
+      "range": {
+        "startLine": 602,
+        "startChar": 0,
+        "endLine": 603,
+        "endChar": 51
+      },
+      "revId": "8dabb28b9450d8b99cc4eb169f9e34a9610e47e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b5fca72c_c1e8d3b6",
+        "filename": "libfec/fec_open.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 701,
+      "author": {
+        "id": 1076971
+      },
+      "writtenOn": "2020-01-22T00:24:39Z",
+      "side": 1,
+      "message": "I think this would be easier... you\u0027re already implementing parts of what avb_slot_verify() is already doing.",
+      "range": {
+        "startLine": 701,
+        "startChar": 14,
+        "endLine": 701,
+        "endChar": 44
+      },
+      "revId": "8dabb28b9450d8b99cc4eb169f9e34a9610e47e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
