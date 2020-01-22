@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "7142b653_64e2d617",
+        "filename": "libfec/fec_open.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 522,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2020-01-22T00:34:48Z",
+      "side": 1,
+      "message": "No it doesn\u0027t. I guess the image should be mounted on the device. Do we have a use case for the sparse images?",
+      "parentUuid": "612f116f_d2f208c4",
+      "range": {
+        "startLine": 522,
+        "startChar": 9,
+        "endLine": 522,
+        "endChar": 18
+      },
+      "revId": "8dabb28b9450d8b99cc4eb169f9e34a9610e47e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "934c5d5c_92cec13d",
         "filename": "libfec/fec_open.cpp",
         "patchSetId": 13
@@ -45,6 +69,30 @@
       "revId": "8dabb28b9450d8b99cc4eb169f9e34a9610e47e3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "73a93a07_20f1a6c6",
+        "filename": "libfec/fec_open.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 544,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2020-01-22T00:34:48Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "934c5d5c_92cec13d",
+      "range": {
+        "startLine": 544,
+        "startChar": 4,
+        "endLine": 544,
+        "endChar": 49
+      },
+      "revId": "8dabb28b9450d8b99cc4eb169f9e34a9610e47e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "84d09d4c_3ccbf295",
+        "filename": "libfec/fec_open.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 603,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2020-01-22T00:34:48Z",
+      "side": 1,
+      "message": "It\u0027s a particular problem because we seem to truncate the fec footer (including the magic and hash) in the avbtool. And I don\u0027t find the hash available elsewhere.. https://cs.corp.google.com/aosp-master/external/avb/avbtool?l\u003d3875\n\nCould it be better if we adds it back...",
+      "parentUuid": "6f21a751_be409ee4",
+      "range": {
+        "startLine": 602,
+        "startChar": 0,
+        "endLine": 603,
+        "endChar": 51
+      },
+      "revId": "8dabb28b9450d8b99cc4eb169f9e34a9610e47e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b5fca72c_c1e8d3b6",
         "filename": "libfec/fec_open.cpp",
         "patchSetId": 13
@@ -82,6 +154,30 @@
       "writtenOn": "2020-01-22T00:24:39Z",
       "side": 1,
       "message": "I think this would be easier... you\u0027re already implementing parts of what avb_slot_verify() is already doing.",
+      "range": {
+        "startLine": 701,
+        "startChar": 14,
+        "endLine": 701,
+        "endChar": 44
+      },
+      "revId": "8dabb28b9450d8b99cc4eb169f9e34a9610e47e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "13a9d1de_29c229bb",
+        "filename": "libfec/fec_open.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 701,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2020-01-22T00:34:48Z",
+      "side": 1,
+      "message": "Right, I had a WIP cl on top of this one. Though libavb_user only has a device version. And I haven\u0027t thought clearly how to sort out the code, and make fec work on host. The last resort is to implement my own AvbOps (though I don\u0027t want to do that..)",
+      "parentUuid": "b5fca72c_c1e8d3b6",
       "range": {
         "startLine": 701,
         "startChar": 14,
