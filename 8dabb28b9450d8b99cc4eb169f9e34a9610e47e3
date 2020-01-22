@@ -120,6 +120,30 @@
     },
     {
       "key": {
+        "uuid": "14f3ad2b_75224098",
+        "filename": "libfec/fec_open.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 544,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2020-01-22T05:02:20Z",
+      "side": 1,
+      "message": "I try to say AvbHashDescriptor, make the comment cleaner.",
+      "parentUuid": "73a93a07_20f1a6c6",
+      "range": {
+        "startLine": 544,
+        "startChar": 4,
+        "endLine": 544,
+        "endChar": 49
+      },
+      "revId": "8dabb28b9450d8b99cc4eb169f9e34a9610e47e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6f21a751_be409ee4",
         "filename": "libfec/fec_open.cpp",
         "patchSetId": 13
@@ -179,6 +203,30 @@
       "side": 1,
       "message": "Why do you need the hash? And what it is a hash over? If it\u0027s just a hash over the ECC data you can just compute it here...\n\nThe reason the hash isn\u0027t in the AVB data is because it\u0027s not needed at runtime to correct errors.",
       "parentUuid": "84d09d4c_3ccbf295",
+      "range": {
+        "startLine": 602,
+        "startChar": 0,
+        "endLine": 603,
+        "endChar": 51
+      },
+      "revId": "8dabb28b9450d8b99cc4eb169f9e34a9610e47e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0dc886a9_44c086e9",
+        "filename": "libfec/fec_open.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 603,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2020-01-22T05:02:20Z",
+      "side": 1,
+      "message": "Right, I want to check if the hash of the ecc data is the same as the stored value. If I compute the hash of the ecc here, there isn\u0027t a stored value to compare against. Because the hashtree doesn\u0027t include the ecc data.\n\nOn the other hand, the hash of ecc is computed and compared against the one in the verity footer (for VB1.0) in line 188. At any rate, I rewrite the comment.",
+      "parentUuid": "88df1adc_d0917878",
       "range": {
         "startLine": 602,
         "startChar": 0,
