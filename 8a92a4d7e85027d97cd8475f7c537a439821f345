@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8893503d_3553e495",
+        "filename": "libfscrypt/fscrypt.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-01-23T23:00:29Z",
+      "side": 1,
+      "message": "Can you please call it \"wrappedkey_v0\"?  We\u0027ll eventually have to distinguish between this version and the upstream version, and it would be nice to call the upstream version simply \"wrappedkey\".",
+      "range": {
+        "startLine": 193,
+        "startChar": 32,
+        "endLine": 193,
+        "endChar": 42
+      },
+      "revId": "8a92a4d7e85027d97cd8475f7c537a439821f345",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
