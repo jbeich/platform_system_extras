@@ -45,7 +45,7 @@ bool IsBranchSamplingSupported() {
 }
 
 bool IsDwarfCallChainSamplingSupported() {
-  const EventType* type = FindEventTypeByName("cpu-cycles");
+  const EventType* type = FindEventTypeByName("cpu-clock");
   if (type == nullptr) {
     return false;
   }
@@ -107,7 +107,7 @@ bool IsSettingClockIdSupported() {
   // Do the real check only once and keep the result in a static variable.
   static int is_supported = -1;
   if (is_supported == -1) {
-    const EventType* type = FindEventTypeByName("cpu-cycles");
+    const EventType* type = FindEventTypeByName("cpu-clock");
     if (type == nullptr) {
       is_supported = 0;
     } else {
@@ -123,7 +123,7 @@ bool IsSettingClockIdSupported() {
 }
 
 bool IsMmap2Supported() {
-  const EventType* type = FindEventTypeByName("cpu-cycles");
+  const EventType* type = FindEventTypeByName("cpu-clock");
   if (type == nullptr) {
     return false;
   }
