@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ad034c17_5f33bae8",
+        "filename": "simpleperf/cmd_record_test.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2020-01-28T02:17:41Z",
+      "side": 1,
+      "message": "(you can include this on all platforms. there\u0027s a dummy implementation that lets you get/set from a hash.)",
+      "revId": "538fb5374333a6c4dbf3bf73d6a119621f67f802",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
