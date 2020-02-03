@@ -122,11 +122,11 @@ class CommandRegister {
 
 CommandRegister command_register;
 
-static void StderrLogger(android::base::LogId, android::base::LogSeverity severity,
-                         const char*, const char* file, unsigned int line, const char* message) {
-  static const char log_characters[] = "VDIWEFF";
-  char severity_char = log_characters[severity];
-  fprintf(stderr, "simpleperf %c %s:%u] %s\n", severity_char, file, line, message);
+static void StderrLogger(const android::base::LoggerData& logger_data, const char* message) {
+  static const char log_characters[] = "XXVDIWEF";
+  char severity_char = log_characters[logger_data.priority];
+  fprintf(stderr, "simpleperf %c %s:%u] %s\n", severity_char, logger_data.file,
+          logger_data.line, message);
 }
 
 bool RunSimpleperfCmd(int argc, char** argv) {
