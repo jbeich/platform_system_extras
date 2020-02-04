@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b398ec05_fc5a8b1d",
+        "filename": "memory_replay/TraceBenchmark.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1096713
+      },
+      "writtenOn": "2020-02-04T14:45:36Z",
+      "side": 1,
+      "message": "This is reading through \u0027idx_entry\u0027 after we\u0027ve already called erase() on it.  I think we need to swap these two lines.  I\u0027ve put up a follow-up to do that: https://android-review.googlesource.com/c/platform/system/extras/+/1225032",
+      "revId": "b846e6e2013dec36f1bf37ceaa0aa333fbbf5f64",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
