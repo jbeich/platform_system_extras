@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "a78472a2_6ab4e5cf",
+        "filename": "bootctl/bootctl.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1409599
+      },
+      "writtenOn": "2020-02-07T22:23:06Z",
+      "side": 1,
+      "message": "Why don\u0027t we drop the else branch?",
+      "range": {
+        "startLine": 124,
+        "startChar": 6,
+        "endLine": 124,
+        "endChar": 12
+      },
+      "revId": "7415201c36e98b07794957bf75f3002a1c8337e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "412db227_f468c4af",
         "filename": "bootctl/bootctl.cpp",
         "patchSetId": 1
