@@ -36,7 +36,7 @@ void* ProfileThreadFunc(void*) {
   simpleperf::ProfileSession session;
   log("start recording");
   session.StartRecording(options);
-  for (int i = 0; i < 3; i++) {
+  for (int i = 0; i < 1; i++) {
     sleep(1);
     log("pause recording");
     session.PauseRecording();
@@ -72,6 +72,7 @@ void* BusyThreadFunc(void*) {
     nanosleep(&ts, nullptr);
     count++;
   }
+  exit(0);
   return nullptr;
 }
 
