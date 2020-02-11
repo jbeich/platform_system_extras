@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "e61a1ab8_1c91ac15",
+        "filename": "simpleperf/demo/CppApi/app/src/main/cpp/native-lib.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-02-11T22:49:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fabed4df_575e1e74",
+      "revId": "4d495fbc56468fcea8da3b30e2fad3d891c1e4ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "40979cde_cea0396d",
         "filename": "simpleperf/demo/JavaApi/app/src/main/java/simpleperf/demo/java_api/MainActivity.java",
         "patchSetId": 2
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "2d0f1624_caa28e5a",
+        "filename": "simpleperf/demo/JavaApi/app/src/main/java/simpleperf/demo/java_api/MainActivity.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-02-11T22:49:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "40979cde_cea0396d",
+      "revId": "4d495fbc56468fcea8da3b30e2fad3d891c1e4ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "68ac8adf_01c55413",
         "filename": "simpleperf/test_util.h",
         "patchSetId": 2
@@ -47,6 +83,24 @@
       "writtenOn": "2020-02-11T22:02:18Z",
       "side": 1,
       "message": "Does this work even if the app somehow remains installed (or got installed via something other than this function previously)?",
+      "revId": "4d495fbc56468fcea8da3b30e2fad3d891c1e4ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "18ac0e00_736c6db8",
+        "filename": "simpleperf/test_util.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-02-11T22:49:05Z",
+      "side": 1,
+      "message": "Yes, pm install will replace old app with new app.",
+      "parentUuid": "68ac8adf_01c55413",
       "revId": "4d495fbc56468fcea8da3b30e2fad3d891c1e4ec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
