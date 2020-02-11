@@ -22,6 +22,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/mman.h>
 #include <unistd.h>
 
 #include <algorithm>
@@ -35,22 +36,14 @@
 #include <benchmark/benchmark.h>
 
 #include "Alloc.h"
+#include "File.h"
 #include "Utils.h"
-#include "Zip.h"
 
-struct TraceAllocEntry {
-  TraceAllocEntry(AllocEnum type, size_t idx, size_t size, size_t last_arg)
-      : type(type), idx(idx), size(size) {
-    u.old_idx = last_arg;
-  }
-  AllocEnum type;
-  size_t idx;
-  size_t size;
-  union {
-    size_t old_idx = 0;
-    size_t align;
-    size_t n_elements;
-  } u;
+struct TraceDataType {
+  AllocEntry* entries = nullptr;
+  size_t num_entries = 0;
+  void** ptrs = nullptr;
+  size_t num_ptrs = 0;
 };
 
 static size_t GetIndex(std::stack<size_t>& free_indices, size_t* max_index) {
@@ -62,103 +55,108 @@ static size_t GetIndex(std::stack<size_t>& free_indices, size_t* max_index) {
   return index;
 }
 
-static std::vector<TraceAllocEntry>* GetTraceData(const char* filename, size_t* max_ptrs) {
+static void FreePtrs(TraceDataType* trace_data) {
+  for (size_t i = 0; i < trace_data->num_ptrs; i++) {
+    void* ptr = trace_data->ptrs[i];
+    if (ptr != nullptr) {
+      free(ptr);
+      trace_data->ptrs[i] = nullptr;
+    }
+  }
+}
+
+static void FreeTraceData(TraceDataType* trace_data) {
+  if (trace_data->ptrs == nullptr) {
+    return;
+  }
+
+  munmap(trace_data->ptrs, sizeof(void*) * trace_data->num_ptrs);
+  FreeEntries(trace_data->entries, trace_data->num_entries);
+}
+
+static void GetTraceData(const std::string& filename, TraceDataType* trace_data) {
   // Only keep last trace encountered cached.
   static std::string cached_filename;
-  static std::vector<TraceAllocEntry> cached_entries;
-  static size_t cached_max_ptrs;
-
+  static TraceDataType cached_trace_data;
   if (cached_filename == filename) {
-    *max_ptrs = cached_max_ptrs;
-    return &cached_entries;
+    *trace_data = cached_trace_data;
+    return;
+  } else {
+    FreeTraceData(&cached_trace_data);
   }
 
-  cached_entries.clear();
-  cached_max_ptrs = 0;
   cached_filename = filename;
+  GetUnwindInfo(filename.c_str(), &trace_data->entries, &trace_data->num_entries);
 
-  std::string content(ZipGetContents(filename));
-  if (content.empty()) {
-    errx(1, "Internal Error: Empty zip file %s", filename);
-  }
-  std::vector<std::string> lines(android::base::Split(content, "\n"));
-
-  *max_ptrs = 0;
+  // This loop will convert the ptr field into an index into the ptrs array.
+  // Creating this index allows the trace run to quickly store or retrieve the
+  // allocation.
+  // For free, the ptr field will be index + one, where a zero represents
+  // a free(nullptr) call.
+  // For realloc, the old_pointer field will be index + one, where a zero
+  // represents a realloc(nullptr, XX).
+  trace_data->num_ptrs = 0;
   std::stack<size_t> free_indices;
   std::unordered_map<uint64_t, size_t> ptr_to_index;
-  std::vector<TraceAllocEntry>* entries = &cached_entries;
-  for (const std::string& line : lines) {
-    if (line.empty()) {
-      continue;
-    }
-    AllocEntry entry;
-    AllocGetData(line, &entry);
-
-    switch (entry.type) {
-      case MALLOC: {
-        size_t idx = GetIndex(free_indices, max_ptrs);
-        ptr_to_index[entry.ptr] = idx;
-        entries->emplace_back(MALLOC, idx, entry.size, 0);
-        break;
-      }
-      case CALLOC: {
-        size_t idx = GetIndex(free_indices, max_ptrs);
-        ptr_to_index[entry.ptr] = idx;
-        entries->emplace_back(CALLOC, idx, entry.u.n_elements, entry.size);
-        break;
-      }
+  for (size_t i = 0; i < trace_data->num_entries; i++) {
+    AllocEntry* entry = &trace_data->entries[i];
+    switch (entry->type) {
+      case MALLOC:
+      case CALLOC:
       case MEMALIGN: {
-        size_t idx = GetIndex(free_indices, max_ptrs);
-        ptr_to_index[entry.ptr] = idx;
-        entries->emplace_back(MEMALIGN, idx, entry.size, entry.u.align);
+        size_t idx = GetIndex(free_indices, &trace_data->num_ptrs);
+        ptr_to_index[entry->ptr] = idx;
+        entry->ptr = idx;
         break;
       }
       case REALLOC: {
-        size_t old_pointer_idx = 0;
-        if (entry.u.old_ptr != 0) {
-          auto idx_entry = ptr_to_index.find(entry.u.old_ptr);
+        if (entry->u.old_ptr != 0) {
+          auto idx_entry = ptr_to_index.find(entry->u.old_ptr);
           if (idx_entry == ptr_to_index.end()) {
-            errx(1, "File Error: Failed to find realloc pointer %" PRIu64, entry.u.old_ptr);
+            errx(1, "File Error: Failed to find realloc pointer %" PRIx64, entry->u.old_ptr);
           }
-          old_pointer_idx = idx_entry->second;
+          size_t old_pointer_idx = idx_entry->second;
           free_indices.push(old_pointer_idx);
+          ptr_to_index.erase(idx_entry);
+          entry->u.old_ptr = old_pointer_idx + 1;
         }
-        size_t idx = GetIndex(free_indices, max_ptrs);
-        ptr_to_index[entry.ptr] = idx;
-        entries->emplace_back(REALLOC, idx, entry.size, old_pointer_idx + 1);
+        size_t idx = GetIndex(free_indices, &trace_data->num_ptrs);
+        ptr_to_index[entry->ptr] = idx;
+        entry->ptr = idx;
         break;
       }
       case FREE:
-        if (entry.ptr != 0) {
-          auto idx_entry = ptr_to_index.find(entry.ptr);
+        if (entry->ptr != 0) {
+          auto idx_entry = ptr_to_index.find(entry->ptr);
           if (idx_entry == ptr_to_index.end()) {
-            errx(1, "File Error: Unable to find free pointer %" PRIu64, entry.ptr);
+            errx(1, "File Error: Unable to find free pointer %" PRIx64, entry->ptr);
           }
           free_indices.push(idx_entry->second);
-          entries->emplace_back(FREE, idx_entry->second + 1, 0, 0);
-        } else {
-          entries->emplace_back(FREE, 0, 0, 0);
+          entry->ptr = idx_entry->second + 1;
+          ptr_to_index.erase(idx_entry);
         }
         break;
       case THREAD_DONE:
-        // Ignore these.
         break;
     }
   }
+  void* map = mmap(nullptr, sizeof(void*) * trace_data->num_ptrs, PROT_READ | PROT_WRITE, MAP_ANON | MAP_PRIVATE, -1, 0);
+  if (map == MAP_FAILED) {
+    err(1, "mmap failed\n");
+  }
+  trace_data->ptrs = reinterpret_cast<void**>(map);
 
-  cached_max_ptrs = *max_ptrs;
-  return entries;
+  cached_trace_data = *trace_data;
 }
 
-static void RunTrace(benchmark::State& state, std::vector<TraceAllocEntry>& entries,
-                     size_t max_ptrs) {
-  std::vector<void*> ptrs(max_ptrs, nullptr);
-
+static void RunTrace(benchmark::State& state, TraceDataType* trace_data) {
   int pagesize = getpagesize();
-  void* ptr;
   uint64_t total_ns = 0;
   uint64_t start_ns;
-  for (auto& entry : entries) {
+  void** ptrs = trace_data->ptrs;
+  for (size_t i = 0; i < trace_data->num_entries; i++) {
+    void* ptr;
+    const AllocEntry& entry = trace_data->entries[i];
     switch (entry.type) {
       case MALLOC:
         start_ns = Nanotime();
@@ -169,10 +167,10 @@ static void RunTrace(benchmark::State& state, std::vector<TraceAllocEntry>& entr
         MakeAllocationResident(ptr, entry.size, pagesize);
         total_ns += Nanotime() - start_ns;
 
-        if (ptrs[entry.idx] != nullptr) {
+        if (ptrs[entry.ptr] != nullptr) {
           errx(1, "Internal Error: malloc pointer being replaced is not nullptr");
         }
-        ptrs[entry.idx] = ptr;
+        ptrs[entry.ptr] = ptr;
         break;
 
       case CALLOC:
@@ -184,10 +182,10 @@ static void RunTrace(benchmark::State& state, std::vector<TraceAllocEntry>& entr
         MakeAllocationResident(ptr, entry.size, pagesize);
         total_ns += Nanotime() - start_ns;
 
-        if (ptrs[entry.idx] != nullptr) {
+        if (ptrs[entry.ptr] != nullptr) {
           errx(1, "Internal Error: calloc pointer being replaced is not nullptr");
         }
-        ptrs[entry.idx] = ptr;
+        ptrs[entry.ptr] = ptr;
         break;
 
       case MEMALIGN:
@@ -199,19 +197,19 @@ static void RunTrace(benchmark::State& state, std::vector<TraceAllocEntry>& entr
         MakeAllocationResident(ptr, entry.size, pagesize);
         total_ns += Nanotime() - start_ns;
 
-        if (ptrs[entry.idx] != nullptr) {
+        if (ptrs[entry.ptr] != nullptr) {
           errx(1, "Internal Error: memalign pointer being replaced is not nullptr");
         }
-        ptrs[entry.idx] = ptr;
+        ptrs[entry.ptr] = ptr;
         break;
 
       case REALLOC:
         start_ns = Nanotime();
-        if (entry.u.old_idx == 0) {
+        if (entry.u.old_ptr == 0) {
           ptr = realloc(nullptr, entry.size);
         } else {
-          ptr = realloc(ptrs[entry.u.old_idx - 1], entry.size);
-          ptrs[entry.u.old_idx - 1] = nullptr;
+          ptr = realloc(ptrs[entry.u.old_ptr - 1], entry.size);
+          ptrs[entry.u.old_ptr - 1] = nullptr;
         }
         if (entry.size > 0) {
           if (ptr == nullptr) {
@@ -221,16 +219,16 @@ static void RunTrace(benchmark::State& state, std::vector<TraceAllocEntry>& entr
         }
         total_ns += Nanotime() - start_ns;
 
-        if (ptrs[entry.idx] != nullptr) {
+        if (ptrs[entry.ptr] != nullptr) {
           errx(1, "Internal Error: realloc pointer being replaced is not nullptr");
         }
-        ptrs[entry.idx] = ptr;
+        ptrs[entry.ptr] = ptr;
         break;
 
       case FREE:
-        if (entry.idx != 0) {
-          ptr = ptrs[entry.idx - 1];
-          ptrs[entry.idx - 1] = nullptr;
+        if (entry.ptr != 0) {
+          ptr = ptrs[entry.ptr - 1];
+          ptrs[entry.ptr - 1] = nullptr;
         } else {
           ptr = nullptr;
         }
@@ -245,28 +243,31 @@ static void RunTrace(benchmark::State& state, std::vector<TraceAllocEntry>& entr
   }
   state.SetIterationTime(total_ns / double(1000000000.0));
 
-  std::for_each(ptrs.begin(), ptrs.end(), [](void* ptr) { free(ptr); });
+  FreePtrs(trace_data);
 }
 
 // Run a trace as if all of the allocations occurred in a single thread.
 // This is not completely realistic, but it is a possible worst case that
 // could happen in an app.
-static void BenchmarkTrace(benchmark::State& state, const char* filename) {
-  std::string full_filename(android::base::GetExecutableDirectory() + "/traces/" + filename);
-  size_t max_ptrs;
-  std::vector<TraceAllocEntry>* entries = GetTraceData(full_filename.c_str(), &max_ptrs);
-  if (entries == nullptr) {
-    errx(1, "ERROR: Failed to get trace data for %s.", full_filename.c_str());
-  }
-
+static void BenchmarkTrace(benchmark::State& state, const char* filename, bool enable_decay_time) {
 #if defined(__BIONIC__)
-  // Need to set the decay time the same as how an app would operate.
-  mallopt(M_DECAY_TIME, 1);
+  if (enable_decay_time) {
+    mallopt(M_DECAY_TIME, 1);
+  } else {
+    mallopt(M_DECAY_TIME, 0);
+  }
 #endif
+  std::string full_filename(android::base::GetExecutableDirectory() + "/traces/" + filename);
+
+  TraceDataType trace_data;
+  GetTraceData(full_filename, &trace_data);
 
   for (auto _ : state) {
-    RunTrace(state, *entries, max_ptrs);
+    RunTrace(state, &trace_data);
   }
+
+  // Don't free the trace_data, it is cached. The last set of trace data
+  // will be leaked away.
 }
 
 #define BENCH_OPTIONS                 \
@@ -277,59 +278,136 @@ static void BenchmarkTrace(benchmark::State& state, const char* filename) {
       ->ReportAggregatesOnly(true)
 
 static void BM_angry_birds2(benchmark::State& state) {
-  BenchmarkTrace(state, "angry_birds2.zip");
+  BenchmarkTrace(state, "angry_birds2.zip", true);
 }
 BENCHMARK(BM_angry_birds2)->BENCH_OPTIONS;
 
+#if defined(__BIONIC__)
+static void BM_angry_birds2_no_decay(benchmark::State& state) {
+  BenchmarkTrace(state, "angry_birds2.zip", false);
+}
+BENCHMARK(BM_angry_birds2_no_decay)->BENCH_OPTIONS;
+#endif
+
 static void BM_camera(benchmark::State& state) {
-  BenchmarkTrace(state, "camera.zip");
+  BenchmarkTrace(state, "camera.zip", true);
 }
 BENCHMARK(BM_camera)->BENCH_OPTIONS;
 
+#if defined(__BIONIC__)
+static void BM_camera_no_decay(benchmark::State& state) {
+  BenchmarkTrace(state, "camera.zip", false);
+}
+BENCHMARK(BM_camera_no_decay)->BENCH_OPTIONS;
+#endif
+
 static void BM_candy_crush_saga(benchmark::State& state) {
-  BenchmarkTrace(state, "candy_crush_saga.zip");
+  BenchmarkTrace(state, "candy_crush_saga.zip", true);
 }
 BENCHMARK(BM_candy_crush_saga)->BENCH_OPTIONS;
 
+#if defined(__BIONIC__)
+static void BM_candy_crush_saga_no_decay(benchmark::State& state) {
+  BenchmarkTrace(state, "candy_crush_saga.zip", false);
+}
+BENCHMARK(BM_candy_crush_saga_no_decay)->BENCH_OPTIONS;
+#endif
+
 void BM_gmail(benchmark::State& state) {
-  BenchmarkTrace(state, "gmail.zip");
+  BenchmarkTrace(state, "gmail.zip", true);
 }
 BENCHMARK(BM_gmail)->BENCH_OPTIONS;
 
+#if defined(__BIONIC__)
+void BM_gmail_no_decay(benchmark::State& state) {
+  BenchmarkTrace(state, "gmail.zip", false);
+}
+BENCHMARK(BM_gmail_no_decay)->BENCH_OPTIONS;
+#endif
+
 void BM_maps(benchmark::State& state) {
-  BenchmarkTrace(state, "maps.zip");
+  BenchmarkTrace(state, "maps.zip", true);
 }
 BENCHMARK(BM_maps)->BENCH_OPTIONS;
 
+#if defined(__BIONIC__)
+void BM_maps_no_decay(benchmark::State& state) {
+  BenchmarkTrace(state, "maps.zip", false);
+}
+BENCHMARK(BM_maps_no_decay)->BENCH_OPTIONS;
+#endif
+
 void BM_photos(benchmark::State& state) {
-  BenchmarkTrace(state, "photos.zip");
+  BenchmarkTrace(state, "photos.zip", true);
 }
 BENCHMARK(BM_photos)->BENCH_OPTIONS;
 
+#if defined(__BIONIC__)
+void BM_photos_no_decay(benchmark::State& state) {
+  BenchmarkTrace(state, "photos.zip", false);
+}
+BENCHMARK(BM_photos_no_decay)->BENCH_OPTIONS;
+#endif
+
 void BM_pubg(benchmark::State& state) {
-  BenchmarkTrace(state, "pubg.zip");
+  BenchmarkTrace(state, "pubg.zip", true);
 }
 BENCHMARK(BM_pubg)->BENCH_OPTIONS;
 
+#if defined(__BIONIC__)
+void BM_pubg_no_decay(benchmark::State& state) {
+  BenchmarkTrace(state, "pubg.zip", false);
+}
+BENCHMARK(BM_pubg_no_decay)->BENCH_OPTIONS;
+#endif
+
 void BM_surfaceflinger(benchmark::State& state) {
-  BenchmarkTrace(state, "surfaceflinger.zip");
+  BenchmarkTrace(state, "surfaceflinger.zip", true);
 }
 BENCHMARK(BM_surfaceflinger)->BENCH_OPTIONS;
 
+#if defined(__BIONIC__)
+void BM_surfaceflinger_no_decay(benchmark::State& state) {
+  BenchmarkTrace(state, "surfaceflinger.zip", false);
+}
+BENCHMARK(BM_surfaceflinger_no_decay)->BENCH_OPTIONS;
+#endif
+
 void BM_system_server(benchmark::State& state) {
-  BenchmarkTrace(state, "system_server.zip");
+  BenchmarkTrace(state, "system_server.zip", true);
 }
 BENCHMARK(BM_system_server)->BENCH_OPTIONS;
 
+#if defined(__BIONIC__)
+void BM_system_server_no_decay(benchmark::State& state) {
+  BenchmarkTrace(state, "system_server.zip", false);
+}
+BENCHMARK(BM_system_server_no_decay)->BENCH_OPTIONS;
+#endif
+
 void BM_systemui(benchmark::State& state) {
-  BenchmarkTrace(state, "systemui.zip");
+  BenchmarkTrace(state, "systemui.zip", true);
 }
 BENCHMARK(BM_systemui)->BENCH_OPTIONS;
 
+#if defined(__BIONIC__)
+void BM_systemui_no_decay(benchmark::State& state) {
+  BenchmarkTrace(state, "systemui.zip", false);
+}
+BENCHMARK(BM_systemui_no_decay)->BENCH_OPTIONS;
+#endif
+
 void BM_youtube(benchmark::State& state) {
-  BenchmarkTrace(state, "youtube.zip");
+  BenchmarkTrace(state, "youtube.zip", true);
 }
 BENCHMARK(BM_youtube)->BENCH_OPTIONS;
+
+#if defined(__BIONIC__)
+void BM_youtube_no_decay(benchmark::State& state) {
+  BenchmarkTrace(state, "youtube.zip", false);
+}
+BENCHMARK(BM_youtube_no_decay)->BENCH_OPTIONS;
+#endif
 
 int main(int argc, char** argv) {
   std::vector<char*> args;

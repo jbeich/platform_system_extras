@@ -28,13 +28,11 @@
 #include "event_attr.h"
 #include "event_fd.h"
 #include "event_type.h"
-#include "InplaceSamplerClient.h"
 #include "IOEventLoop.h"
 #include "perf_event.h"
 #include "record.h"
 #include "RecordReadThread.h"
 
-constexpr double DEFAULT_PERIOD_TO_DETECT_CPU_HOTPLUG_EVENTS_IN_SEC = 0.5;
 constexpr double DEFAULT_PERIOD_TO_CHECK_MONITORED_TARGETS_IN_SEC = 1;
 constexpr uint64_t DEFAULT_SAMPLE_FREQ_FOR_NONTRACEPOINT_EVENT = 4000;
 constexpr uint64_t DEFAULT_SAMPLE_PERIOD_FOR_TRACEPOINT_EVENT = 1;
@@ -94,7 +92,6 @@ class EventSelectionSet {
   std::vector<const EventType*> GetTracepointEvents() const;
   bool ExcludeKernel() const;
   bool HasAuxTrace() const { return has_aux_trace_; }
-  bool HasInplaceSampler() const;
   std::vector<EventAttrWithId> GetEventAttrWithId() const;
 
   void SetEnableOnExec(bool enable);
@@ -113,17 +110,24 @@ class EventSelectionSet {
     include_filters_ = std::move(filters);
   }
 
-  void AddMonitoredProcesses(const std::set<pid_t>& processes) {
+  template <typename Collection = std::vector<pid_t>>
+  void AddMonitoredProcesses(const Collection& processes) {
     processes_.insert(processes.begin(), processes.end());
   }
 
-  void AddMonitoredThreads(const std::set<pid_t>& threads) {
+  template <typename Collection = std::vector<pid_t>>
+  void AddMonitoredThreads(const Collection& threads) {
     threads_.insert(threads.begin(), threads.end());
   }
 
   const std::set<pid_t>& GetMonitoredProcesses() const { return processes_; }
 
   const std::set<pid_t>& GetMonitoredThreads() const { return threads_; }
+
+  void ClearMonitoredTargets() {
+    processes_.clear();
+    threads_.clear();
+  }
 
   bool HasMonitoredTarget() const {
     return !processes_.empty() || !threads_.empty();
@@ -133,10 +137,13 @@ class EventSelectionSet {
     return loop_.get();
   }
 
-  bool OpenEventFiles(const std::vector<int>& on_cpus);
+  // If cpus = {}, monitor on all cpus, with a perf event file for each cpu.
+  // If cpus = {-1}, monitor on all cpus, with a perf event file shared by all cpus.
+  // Otherwise, monitor on selected cpus, with a perf event file for each cpu.
+  bool OpenEventFiles(const std::vector<int>& cpus);
   bool ReadCounters(std::vector<CountersInfo>* counters);
   bool MmapEventFiles(size_t min_mmap_pages, size_t max_mmap_pages, size_t aux_buffer_size,
-                      size_t record_buffer_size, bool allow_cutting_samples);
+                      size_t record_buffer_size, bool allow_cutting_samples, bool exclude_perf);
   bool PrepareToReadMmapEventData(const std::function<bool(Record*)>& callback);
   bool SyncKernelBuffer();
   bool FinishReadMmapEventData();
@@ -144,11 +151,6 @@ class EventSelectionSet {
   const simpleperf::RecordStat& GetRecordStat() {
     return record_read_thread_->GetStat();
   }
-
-  // If monitored_cpus is empty, monitor all cpus.
-  bool HandleCpuHotplugEvents(const std::vector<int>& monitored_cpus,
-                              double check_interval_in_sec =
-                                  DEFAULT_PERIOD_TO_DETECT_CPU_HOTPLUG_EVENTS_IN_SEC);
 
   // Stop profiling if all monitored processes/threads don't exist.
   bool StopWhenNoMoreTargets(double check_interval_in_sec =
@@ -161,27 +163,20 @@ class EventSelectionSet {
     EventTypeAndModifier event_type_modifier;
     perf_event_attr event_attr;
     std::vector<std::unique_ptr<EventFd>> event_fds;
-    std::vector<std::unique_ptr<InplaceSamplerClient>> inplace_samplers;
     // counters for event files closed for cpu hotplug events
     std::vector<CounterInfo> hotplugged_counters;
+    std::vector<int> allowed_cpus;
   };
   typedef std::vector<EventSelection> EventSelectionGroup;
 
   bool BuildAndCheckEventSelection(const std::string& event_name, bool first_event,
                                    EventSelection* selection);
   void UnionSampleType();
-  bool IsUserSpaceSamplerGroup(EventSelectionGroup& group);
-  bool OpenUserSpaceSamplersOnGroup(EventSelectionGroup& group,
-                                    const std::map<pid_t, std::set<pid_t>>& process_map);
   bool OpenEventFilesOnGroup(EventSelectionGroup& group, pid_t tid, int cpu,
                              std::string* failed_event_type);
   bool ApplyFilters();
   bool ReadMmapEventData(bool with_time_limit);
 
-  bool DetectCpuHotplugEvents();
-  bool HandleCpuOnlineEvent(int cpu);
-  bool HandleCpuOfflineEvent(int cpu);
-  bool CreateMappedBufferForCpu(int cpu);
   bool CheckMonitoredTargets();
   bool HasSampler();
 
@@ -193,9 +188,6 @@ class EventSelectionSet {
 
   std::unique_ptr<IOEventLoop> loop_;
   std::function<bool(Record*)> record_callback_;
-
-  std::set<int> monitored_cpus_;
-  std::vector<int> online_cpus_;
 
   std::unique_ptr<simpleperf::RecordReadThread> record_read_thread_;
 

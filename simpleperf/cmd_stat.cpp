@@ -56,22 +56,32 @@ struct CounterSum {
   uint64_t time_running = 0;
 };
 
+struct ThreadInfo {
+  pid_t tid;
+  pid_t pid;
+  std::string name;
+};
+
 struct CounterSummary {
   std::string type_name;
   std::string modifier;
   uint32_t group_id;
+  const ThreadInfo* thread;
+  int cpu;  // -1 represents all cpus
   uint64_t count;
   double scale;
   std::string readable_count;
   std::string comment;
   bool auto_generated;
 
-  CounterSummary(const std::string& type_name, const std::string& modifier,
-                 uint32_t group_id, uint64_t count, double scale,
+  CounterSummary(const std::string& type_name, const std::string& modifier, uint32_t group_id,
+                 const ThreadInfo* thread, int cpu, uint64_t count, double scale,
                  bool auto_generated, bool csv)
       : type_name(type_name),
         modifier(modifier),
         group_id(group_id),
+        thread(thread),
+        cpu(cpu),
         count(count),
         scale(scale),
         auto_generated(auto_generated) {
@@ -171,10 +181,11 @@ class CounterSummaries {
   explicit CounterSummaries(bool csv) : csv_(csv) {}
   std::vector<CounterSummary>& Summaries() { return summaries_; }
 
-  const CounterSummary* FindSummary(const std::string& type_name,
-                                    const std::string& modifier) {
+  const CounterSummary* FindSummary(const std::string& type_name, const std::string& modifier,
+                                    const ThreadInfo* thread, int cpu) {
     for (const auto& s : summaries_) {
-      if (s.type_name == type_name && s.modifier == modifier) {
+      if (s.type_name == type_name && s.modifier == modifier && s.thread == thread &&
+          s.cpu == cpu) {
         return &s;
       }
     }
@@ -190,11 +201,11 @@ class CounterSummaries {
     for (size_t i = 0; i < summaries_.size(); ++i) {
       const CounterSummary& s = summaries_[i];
       if (s.modifier == "u") {
-        const CounterSummary* other = FindSummary(s.type_name, "k");
+        const CounterSummary* other = FindSummary(s.type_name, "k", s.thread, s.cpu);
         if (other != nullptr && other->IsMonitoredAtTheSameTime(s)) {
-          if (FindSummary(s.type_name, "") == nullptr) {
-            Summaries().emplace_back(s.type_name, "", s.group_id, s.count + other->count, s.scale,
-                                     true, csv_);
+          if (FindSummary(s.type_name, "", s.thread, s.cpu) == nullptr) {
+            Summaries().emplace_back(s.type_name, "", s.group_id, s.thread, s.cpu,
+                                     s.count + other->count, s.scale, true, csv_);
           }
         }
       }
@@ -208,28 +219,91 @@ class CounterSummaries {
   }
 
   void Show(FILE* fp) {
-    size_t count_column_width = 0;
-    size_t name_column_width = 0;
-    size_t comment_column_width = 0;
+    if (csv_) {
+      ShowCSV(fp);
+    } else {
+      ShowText(fp);
+    }
+  }
+
+  void ShowCSV(FILE* fp) {
     for (auto& s : summaries_) {
-      count_column_width =
-          std::max(count_column_width, s.readable_count.size());
-      name_column_width = std::max(name_column_width, s.Name().size());
-      comment_column_width = std::max(comment_column_width, s.comment.size());
+      if (s.thread != nullptr) {
+        fprintf(fp, "%s,%d,%d,", s.thread->name.c_str(), s.thread->pid, s.thread->tid);
+      }
+      fprintf(fp, "%s,%s,%s,(%.0lf%%)%s\n", s.readable_count.c_str(), s.Name().c_str(),
+              s.comment.c_str(), 1.0 / s.scale * 100, (s.auto_generated ? " (generated)," : ","));
+    }
+  }
+
+  void ShowText(FILE* fp) {
+    bool show_thread = !summaries_.empty() && summaries_[0].thread != nullptr;
+    bool show_cpu = !summaries_.empty() && summaries_[0].cpu != -1;
+    std::vector<std::string> titles;
+
+    if (show_thread) {
+      titles = {"thread_name", "pid", "tid"};
+    }
+    if (show_cpu) {
+      titles.emplace_back("cpu");
+    }
+    titles.emplace_back("count");
+    titles.emplace_back("event_name");
+    titles.emplace_back(" # percentage = event_run_time / enabled_time");
+
+    std::vector<size_t> width(titles.size(), 0);
+
+    auto adjust_width = [](size_t& w, size_t size) {
+      w = std::max(w, size);
+    };
+
+    for (size_t i = 0; i < titles.size(); i++) {
+      adjust_width(width[i], titles[i].size());
     }
 
     for (auto& s : summaries_) {
-      if (csv_) {
-        fprintf(fp, "%s,%s,%s,(%.0lf%%)%s\n", s.readable_count.c_str(),
-                s.Name().c_str(), s.comment.c_str(), 1.0 / s.scale * 100,
-                (s.auto_generated ? " (generated)," : ","));
-      } else {
-        fprintf(fp, "  %*s  %-*s   # %-*s  (%.0lf%%)%s\n",
-                static_cast<int>(count_column_width), s.readable_count.c_str(),
-                static_cast<int>(name_column_width), s.Name().c_str(),
-                static_cast<int>(comment_column_width), s.comment.c_str(),
-                1.0 / s.scale * 100, (s.auto_generated ? " (generated)" : ""));
+      size_t i = 0;
+      if (show_thread) {
+        adjust_width(width[i++], s.thread->name.size());
+        adjust_width(width[i++], std::to_string(s.thread->pid).size());
+        adjust_width(width[i++], std::to_string(s.thread->tid).size());
       }
+      if (show_cpu) {
+        adjust_width(width[i++], std::to_string(s.cpu).size());
+      }
+      adjust_width(width[i++], s.readable_count.size());
+      adjust_width(width[i++], s.Name().size());
+      adjust_width(width[i++], s.comment.size());
+    }
+
+    fprintf(fp, "# ");
+    for (size_t i = 0; i < titles.size(); i++) {
+      if (titles[i] == "count") {
+        fprintf(fp, "%*s", static_cast<int>(width[i]), titles[i].c_str());
+      } else {
+        fprintf(fp, "%-*s", static_cast<int>(width[i]), titles[i].c_str());
+      }
+      if (i + 1 < titles.size()) {
+        fprintf(fp, "  ");
+      }
+    }
+    fprintf(fp, "\n");
+
+    for (auto& s : summaries_) {
+      size_t i = 0;
+      if (show_thread) {
+        fprintf(fp, "  %-*s", static_cast<int>(width[i++]), s.thread->name.c_str());
+        fprintf(fp, "  %-*d", static_cast<int>(width[i++]), s.thread->pid);
+        fprintf(fp, "  %-*d", static_cast<int>(width[i++]), s.thread->tid);
+      }
+      if (show_cpu) {
+        fprintf(fp, "  %-*d", static_cast<int>(width[i++]), s.cpu);
+      }
+      fprintf(fp, "  %*s  %-*s   # %-*s  (%.0lf%%)%s\n",
+              static_cast<int>(width[i]), s.readable_count.c_str(),
+              static_cast<int>(width[i+1]), s.Name().c_str(),
+              static_cast<int>(width[i+2]), s.comment.c_str(),
+              1.0 / s.scale * 100, (s.auto_generated ? " (generated)" : ""));
     }
   }
 
@@ -259,7 +333,7 @@ class CounterSummaries {
       return android::base::StringPrintf("%lf%cGHz", hz / 1e9, sap_mid);
     }
     if (s.type_name == "instructions" && s.count != 0) {
-      const CounterSummary* other = FindSummary("cpu-cycles", s.modifier);
+      const CounterSummary* other = FindSummary("cpu-cycles", s.modifier, s.thread, s.cpu);
       if (other != nullptr && other->IsMonitoredAtTheSameTime(s)) {
         double cpi = static_cast<double>(other->count) / s.count;
         return android::base::StringPrintf("%lf%ccycles per instruction", cpi,
@@ -306,7 +380,7 @@ class CounterSummaries {
       rate_desc = "miss rate";
     }
     if (!event_name.empty()) {
-      const CounterSummary* other = FindSummary(event_name, s.modifier);
+      const CounterSummary* other = FindSummary(event_name, s.modifier, s.thread, s.cpu);
       if (other != nullptr && other->IsMonitoredAtTheSameTime(s) && other->count != 0) {
         double miss_rate = static_cast<double>(s.count) / other->count;
         return android::base::StringPrintf("%f%%%c%s", miss_rate * 100, sep, rate_desc.c_str());
@@ -415,6 +489,8 @@ class StatCommand : public Command {
 "             same time.\n"
 "--no-inherit     Don't stat created child threads/processes.\n"
 "-o output_filename  Write report to output_filename instead of standard output.\n"
+"--per-core       Print counters for each cpu core.\n"
+"--per-thread     Print counters for each thread.\n"
 "-p pid1,pid2,... Stat events on existing processes. Mutually exclusive with -a.\n"
 "-t tid1,tid2,... Stat events on existing threads. Mutually exclusive with -a.\n"
 #if defined(__ANDROID__)
@@ -455,6 +531,8 @@ class StatCommand : public Command {
                     std::vector<std::string>* non_option_args);
   bool AddDefaultMeasuredEventTypes();
   void SetEventSelectionFlags();
+  void MonitorEachThread();
+  void AdjustToIntervalOnlyValues(std::vector<CountersInfo>& counters);
   bool ShowCounters(const std::vector<CountersInfo>& counters,
                     double duration_in_sec, FILE* fp);
 
@@ -464,7 +542,7 @@ class StatCommand : public Command {
   double duration_in_sec_;
   double interval_in_ms_;
   bool interval_only_values_;
-  std::vector<CounterSum> last_sum_values_;
+  std::vector<std::vector<CounterSum>> last_sum_values_;
   std::vector<int> cpus_;
   EventSelectionSet event_selection_set_;
   std::string output_filename_;
@@ -474,12 +552,18 @@ class StatCommand : public Command {
   bool in_app_context_;
   android::base::unique_fd stop_signal_fd_;
   bool use_devfreq_counters_ = false;
+
+  bool report_per_core_ = false;
+  bool report_per_thread_ = false;
+  // used to report event count for each thread
+  std::unordered_map<pid_t, ThreadInfo> thread_info_;
 };
 
 bool StatCommand::Run(const std::vector<std::string>& args) {
   if (!CheckPerfEventLimit()) {
     return false;
   }
+  AllowMoreOpenedFiles();
 
   // 1. Parse options, and use default measured event types if not given.
   std::vector<std::string> workload_args;
@@ -515,7 +599,11 @@ bool StatCommand::Run(const std::vector<std::string>& args) {
   }
   bool need_to_check_targets = false;
   if (system_wide_collection_) {
-    event_selection_set_.AddMonitoredThreads({-1});
+    if (report_per_thread_) {
+      event_selection_set_.AddMonitoredProcesses(GetAllProcesses());
+    } else {
+      event_selection_set_.AddMonitoredThreads({-1});
+    }
   } else if (!event_selection_set_.HasMonitoredTarget()) {
     if (workload != nullptr) {
       event_selection_set_.AddMonitoredProcesses({workload->GetPid()});
@@ -532,9 +620,13 @@ bool StatCommand::Run(const std::vector<std::string>& args) {
     need_to_check_targets = true;
   }
 
+  if (report_per_thread_) {
+    MonitorEachThread();
+  }
+
   // 3. Open perf_event_files and output file if defined.
-  if (!system_wide_collection_ && cpus_.empty()) {
-    cpus_.push_back(-1);  // Monitor on all cpus.
+  if (cpus_.empty() && !report_per_core_ && (report_per_thread_ || !system_wide_collection_)) {
+    cpus_.push_back(-1);  // Get event count for each thread on all cpus.
   }
   if (!event_selection_set_.OpenEventFiles(cpus_)) {
     return false;
@@ -564,11 +656,6 @@ bool StatCommand::Run(const std::vector<std::string>& args) {
   }
   std::chrono::time_point<std::chrono::steady_clock> start_time;
   std::vector<CountersInfo> counters;
-  if (system_wide_collection_ || (!cpus_.empty() && cpus_[0] != -1)) {
-    if (!event_selection_set_.HandleCpuHotplugEvents(cpus_)) {
-      return false;
-    }
-  }
   if (need_to_check_targets && !event_selection_set_.StopWhenNoMoreTargets()) {
     return false;
   }
@@ -597,6 +684,9 @@ bool StatCommand::Run(const std::vector<std::string>& args) {
       std::chrono::duration_cast<std::chrono::duration<double>>(end_time -
                                                                 start_time)
       .count();
+      if (interval_only_values_) {
+        AdjustToIntervalOnlyValues(counters);
+      }
       if (!ShowCounters(counters, duration_in_sec, fp)) {
         return false;
       }
@@ -688,6 +778,10 @@ bool StatCommand::ParseOptions(const std::vector<std::string>& args,
         return false;
       }
       out_fd_.reset(fd);
+    } else if (args[i] == "--per-core") {
+      report_per_core_ = true;
+    } else if (args[i] == "--per-thread") {
+      report_per_thread_ = true;
     } else if (args[i] == "-p") {
       if (!NextArgumentOrError(args, &i)) {
         return false;
@@ -754,7 +848,7 @@ bool StatCommand::AddDefaultMeasuredEventTypes() {
     // supported by the kernel.
     const EventType* type = FindEventTypeByName(name);
     if (type != nullptr &&
-        IsEventAttrSupported(CreateDefaultPerfEventAttr(*type))) {
+        IsEventAttrSupported(CreateDefaultPerfEventAttr(*type), name)) {
       if (!event_selection_set_.AddEventType(name)) {
         return false;
       }
@@ -769,6 +863,58 @@ bool StatCommand::AddDefaultMeasuredEventTypes() {
 
 void StatCommand::SetEventSelectionFlags() {
   event_selection_set_.SetInherit(child_inherit_);
+}
+
+void StatCommand::MonitorEachThread() {
+  std::vector<pid_t> threads;
+  for (auto pid : event_selection_set_.GetMonitoredProcesses()) {
+    for (auto tid : GetThreadsInProcess(pid)) {
+      ThreadInfo info;
+      if (GetThreadName(tid, &info.name)) {
+        info.tid = tid;
+        info.pid = pid;
+        thread_info_[tid] = std::move(info);
+        threads.push_back(tid);
+      }
+    }
+  }
+  for (auto tid : event_selection_set_.GetMonitoredThreads()) {
+    ThreadInfo info;
+    if (ReadThreadNameAndPid(tid, &info.name, &info.pid)) {
+      info.tid = tid;
+      thread_info_[tid] = std::move(info);
+      threads.push_back(tid);
+    }
+  }
+  event_selection_set_.ClearMonitoredTargets();
+  event_selection_set_.AddMonitoredThreads(threads);
+}
+
+void StatCommand::AdjustToIntervalOnlyValues(std::vector<CountersInfo>& counters) {
+  if (last_sum_values_.size() < counters.size()) {
+    last_sum_values_.resize(counters.size());
+  }
+  for (size_t i = 0; i < counters.size(); i++) {
+    std::vector<CounterInfo>& counters_per_event = counters[i].counters;
+    std::vector<CounterSum>& last_sum = last_sum_values_[i];
+
+    if (last_sum.size() < counters_per_event.size()) {
+      last_sum.resize(counters_per_event.size());
+    }
+    for (size_t j = 0; j < counters_per_event.size(); j++) {
+      PerfCounter& counter = counters_per_event[j].counter;
+      CounterSum& sum = last_sum[j];
+      uint64_t tmp = counter.value;
+      counter.value -= sum.value;
+      sum.value = tmp;
+      tmp = counter.time_enabled;
+      counter.time_enabled -= sum.time_enabled;
+      sum.time_enabled = tmp;
+      tmp = counter.time_running;
+      counter.time_running -= sum.time_running;
+      sum.time_running = tmp;
+    }
+  }
 }
 
 bool StatCommand::ShowCounters(const std::vector<CountersInfo>& counters,
@@ -804,32 +950,78 @@ bool StatCommand::ShowCounters(const std::vector<CountersInfo>& counters,
 
   bool counters_always_available = true;
   CounterSummaries summaries(csv_);
-  for (size_t i = 0; i < counters.size(); ++i) {
-    const CountersInfo& counters_info = counters[i];
-    CounterSum sum;
-    for (auto& counter_info : counters_info.counters) {
-      sum.value += counter_info.counter.value;
-      sum.time_enabled += counter_info.counter.time_enabled;
-      sum.time_running += counter_info.counter.time_running;
-    }
-    if (interval_only_values_) {
-      if (last_sum_values_.size() < counters.size()) {
-        last_sum_values_.resize(counters.size());
-      }
-      CounterSum tmp = sum;
-      sum.value -= last_sum_values_[i].value;
-      sum.time_enabled -= last_sum_values_[i].time_enabled;
-      sum.time_running -= last_sum_values_[i].time_running;
-      last_sum_values_[i] = tmp;
-    }
 
+  auto add_summary = [&](const CountersInfo& info, pid_t tid, int cpu, const CounterSum& sum) {
     double scale = 1.0;
     if (sum.time_running < sum.time_enabled && sum.time_running != 0) {
       scale = static_cast<double>(sum.time_enabled) / sum.time_running;
     }
-    summaries.Summaries().emplace_back(counters_info.event_name, counters_info.event_modifier,
-                                       counters_info.group_id, sum.value, scale, false, csv_);
+    if (system_wide_collection_ && report_per_thread_ && sum.time_running == 0) {
+      // No need to report threads not running in system wide per thread report.
+      return;
+    }
+    ThreadInfo* thread = nullptr;
+    if (report_per_thread_) {
+      auto it = thread_info_.find(tid);
+      CHECK(it != thread_info_.end());
+      thread = &it->second;
+    }
+    summaries.Summaries().emplace_back(info.event_name, info.event_modifier, info.group_id,
+                                       thread, cpu, sum.value, scale, false, csv_);
     counters_always_available &= summaries.Summaries().back().IsMonitoredAllTheTime();
+  };
+
+  auto sort_summaries = [&](std::vector<CounterSummary>::iterator begin,
+                            std::vector<CounterSummary>::iterator end) {
+    if (report_per_thread_ && report_per_core_) {
+      // First sort by event count for all cpus in a thread, then sort by event count of each cpu.
+      std::unordered_map<pid_t, uint64_t> count_per_thread;
+      for (auto it = begin; it != end; ++it) {
+        count_per_thread[it->thread->tid] += it->count;
+      }
+      std::sort(begin, end, [&](const CounterSummary& s1, const CounterSummary& s2) {
+        pid_t tid1 = s1.thread->tid;
+        pid_t tid2 = s2.thread->tid;
+        if (tid1 != tid2) {
+          if (count_per_thread[tid1] != count_per_thread[tid2]) {
+            return count_per_thread[tid1] > count_per_thread[tid2];
+          }
+          return tid1 < tid2;
+        }
+        return s1.count > s2.count;
+      });
+    } else {
+      std::sort(begin, end, [](const CounterSummary& s1, const CounterSummary& s2) {
+        return s1.count > s2.count;
+      });
+    }
+  };
+
+  for (const auto& info : counters) {
+    std::unordered_map<uint64_t, CounterSum> sum_map;
+    for (auto& counter : info.counters) {
+      uint64_t key = 0;
+      if (report_per_thread_) {
+        key |= counter.tid;
+      }
+      if (report_per_core_) {
+        key |= static_cast<uint64_t>(counter.cpu) << 32;
+      }
+      CounterSum& sum = sum_map[key];
+      sum.value += counter.counter.value;
+      sum.time_enabled = counter.counter.time_enabled;
+      sum.time_running = counter.counter.time_running;
+    }
+    size_t pre_sum_count = summaries.Summaries().size();
+    for (const auto& pair : sum_map) {
+      pid_t tid = report_per_thread_ ? static_cast<pid_t>(pair.first & UINT32_MAX) : 0;
+      int cpu = report_per_core_ ? static_cast<int>(pair.first >> 32) : -1;
+      const CounterSum& sum = pair.second;
+      add_summary(info, tid, cpu, sum);
+    }
+    if (report_per_thread_ || report_per_core_) {
+      sort_summaries(summaries.Summaries().begin() + pre_sum_count, summaries.Summaries().end());
+    }
   }
   summaries.AutoGenerateSummaries();
   summaries.GenerateComments(duration_in_sec);
@@ -840,9 +1032,26 @@ bool StatCommand::ShowCounters(const std::vector<CountersInfo>& counters,
   else
     fprintf(fp, "\nTotal test time: %lf seconds.\n", duration_in_sec);
 
-  if (!counters_always_available) {
-    LOG(WARNING) << "Some hardware counters are not always available (scale < 100%). "
-                 << "Try --use-devfreq-counters if on a rooted device.";
+  if (cpus_ == std::vector<int>(1, -1) ||
+      event_selection_set_.GetMonitoredThreads() == std::set<pid_t>({-1})) {
+    // We either monitor a thread on all cpus, or monitor all threads on a cpu. In both cases,
+    // if percentages < 100%, probably it is caused by hardware counter multiplexing.
+    if (!counters_always_available) {
+      LOG(WARNING) << "Percentages < 100% means some events only run a subset of enabled time.\n"
+                   << "Probably because there are less hardware counters available than events.\n"
+                   << "Try --use-devfreq-counters if on a rooted device.";
+    }
+  } else {
+    // We monitor a thread on a cpu. A percentage represents
+    // runtime_of_a_thread_on_a_cpu / runtime_of_a_thread_on_all_cpus. If percentage sum of a
+    // thread < 100%, or total event count for a running thread is 0, probably it is caused by
+    // hardware counter multiplexing. It is hard to detect the second case, so always print below
+    // info.
+    LOG(INFO) << "A percentage represents runtime_of_a_thread_on_a_cpu / "
+                 "runtime_of_a_thread_on_all_cpus.\n"
+              << "If percentage sum of a thread < 100%, or total event count for a running\n"
+              << "thread is 0, probably because there are less hardware counters available than\n"
+              << "events. Try --use-devfreq-counters if on a rooted device.";
   }
   return true;
 }

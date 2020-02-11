@@ -80,7 +80,8 @@ static int find_offset(uint64_t file_size, int roots, uint64_t *offset,
 /* returns verity metadata size for a `size' byte file */
 static uint64_t get_verity_size(uint64_t size, int)
 {
-    return VERITY_METADATA_SIZE + verity_get_size(size, NULL, NULL);
+    return VERITY_METADATA_SIZE +
+           verity_get_size(size, NULL, NULL, SHA256_DIGEST_LENGTH);
 }
 
 /* computes the verity metadata offset for a file with size `f->size' */
@@ -110,7 +111,7 @@ static int parse_ecc_header(fec_handle *f, uint64_t offset)
 
     /* there's obviously no ecc data at this point, so there is no need to
        call fec_pread to access this data */
-    if (!raw_pread(f, &header, sizeof(fec_header), offset)) {
+    if (!raw_pread(f->fd, &header, sizeof(fec_header), offset)) {
         error("failed to read: %s", strerror(errno));
         return -1;
     }
@@ -170,7 +171,7 @@ static int parse_ecc_header(fec_handle *f, uint64_t offset)
             len = f->ecc.size - n;
         }
 
-        if (!raw_pread(f, buf, len, f->ecc.start + n)) {
+        if (!raw_pread(f->fd, buf, len, f->ecc.start + n)) {
             error("failed to read ecc: %s", strerror(errno));
             return -1;
         }
@@ -309,7 +310,7 @@ static int load_verity(fec_handle *f)
     /* verity header is at the end of the data area */
     if (verity_parse_header(f, offset) == 0) {
         debug("found at %" PRIu64 " (start %" PRIu64 ")", offset,
-            f->verity.hash_start);
+              f->verity.hashtree.hash_start);
         return 0;
     }
 
@@ -319,7 +320,7 @@ static int load_verity(fec_handle *f)
     if (find_verity_offset(f, &offset) == 0 &&
             verity_parse_header(f, offset) == 0) {
         debug("found at %" PRIu64 " (start %" PRIu64 ")", offset,
-            f->verity.hash_start);
+              f->verity.hashtree.hash_start);
         return 0;
     }
 
@@ -328,12 +329,12 @@ static int load_verity(fec_handle *f)
     if (rc == 0) {
         debug("file system size = %" PRIu64, offset);
         /* Jump over the verity tree appended to the filesystem */
-        offset += verity_get_size(offset, NULL, NULL);
+        offset += verity_get_size(offset, NULL, NULL, SHA256_DIGEST_LENGTH);
         rc = verity_parse_header(f, offset);
 
         if (rc == 0) {
             debug("found at %" PRIu64 " (start %" PRIu64 ")", offset,
-                f->verity.hash_start);
+                  f->verity.hashtree.hash_start);
         }
     }
 
@@ -399,8 +400,8 @@ static void reset_handle(fec_handle *f)
     f->pos = 0;
     f->size = 0;
 
-    memset(&f->ecc, 0, sizeof(f->ecc));
-    memset(&f->verity, 0, sizeof(f->verity));
+    f->ecc = {};
+    f->verity = {};
 }
 
 /* closes and flushes `f->fd' and releases any memory allocated for `f' */
@@ -414,16 +415,6 @@ int fec_close(struct fec_handle *f)
         }
 
         close(f->fd);
-    }
-
-    if (f->verity.hash) {
-        delete[] f->verity.hash;
-    }
-    if (f->verity.salt) {
-        delete[] f->verity.salt;
-    }
-    if (f->verity.table) {
-        delete[] f->verity.table;
     }
 
     pthread_mutex_destroy(&f->mutex);
@@ -446,9 +437,9 @@ int fec_verity_get_metadata(struct fec_handle *f, struct fec_verity_metadata *da
     }
 
     check(f->data_size < f->size);
-    check(f->data_size <= f->verity.hash_start);
+    check(f->data_size <= f->verity.hashtree.hash_start);
     check(f->data_size <= f->verity.metadata_start);
-    check(f->verity.table);
+    check(!f->verity.table.empty());
 
     data->disabled = f->verity.disabled;
     data->data_size = f->data_size;
@@ -456,7 +447,7 @@ int fec_verity_get_metadata(struct fec_handle *f, struct fec_verity_metadata *da
         sizeof(data->signature));
     memcpy(data->ecc_signature, f->verity.ecc_header.signature,
         sizeof(data->ecc_signature));
-    data->table = f->verity.table;
+    data->table = f->verity.table.c_str();
     data->table_length = f->verity.header.length;
 
     return 0;

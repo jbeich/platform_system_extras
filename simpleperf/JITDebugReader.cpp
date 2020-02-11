@@ -19,6 +19,7 @@
 #include <inttypes.h>
 #include <sys/mman.h>
 #include <sys/uio.h>
+#include <sys/user.h>
 
 #include <algorithm>
 #include <unordered_map>
@@ -432,6 +433,9 @@ const JITDebugReader::DescriptorsLocation* JITDebugReader::GetDescriptorsLocatio
     LOG(ERROR) << "ReadMinExecutableVirtualAddress failed, status = " << status;
     return nullptr;
   }
+  // min_vaddr_in_file is the min vaddr of executable segments. It may not be page aligned.
+  // And dynamic linker will create map mapping to (segment.p_vaddr & PAGE_MASK).
+  uint64_t aligned_segment_vaddr = min_vaddr_in_file & PAGE_MASK;
   const char* jit_str = "__jit_debug_descriptor";
   const char* dex_str = "__dex_debug_descriptor";
   uint64_t jit_addr = 0u;
@@ -439,9 +443,9 @@ const JITDebugReader::DescriptorsLocation* JITDebugReader::GetDescriptorsLocatio
 
   auto callback = [&](const ElfFileSymbol& symbol) {
     if (symbol.name == jit_str) {
-      jit_addr = symbol.vaddr - min_vaddr_in_file;
+      jit_addr = symbol.vaddr - aligned_segment_vaddr;
     } else if (symbol.name == dex_str) {
-      dex_addr = symbol.vaddr - min_vaddr_in_file;
+      dex_addr = symbol.vaddr - aligned_segment_vaddr;
     }
   };
   if (ParseDynamicSymbolsFromElfFile(art_lib_path, callback) != ElfStatus::NO_ERROR) {
@@ -531,10 +535,10 @@ bool JITDebugReader::ReadNewCodeEntries(Process& process, const Descriptor& desc
   }
   if (descriptor.version == 2) {
     if (process.is_64bit) {
-      return ReadNewCodeEntriesImpl<JITCodeEntry64V2>(
+      return ReadNewCodeEntriesImplV2<JITCodeEntry64V2>(
           process, descriptor, last_action_timestamp, read_entry_limit, new_code_entries);
     }
-    return ReadNewCodeEntriesImpl<JITCodeEntry32V2>(
+    return ReadNewCodeEntriesImplV2<JITCodeEntry32V2>(
         process, descriptor, last_action_timestamp, read_entry_limit, new_code_entries);
   }
   return false;
@@ -548,6 +552,7 @@ bool JITDebugReader::ReadNewCodeEntriesImpl(Process& process, const Descriptor& 
   uint64_t current_entry_addr = descriptor.first_entry_addr;
   uint64_t prev_entry_addr = 0u;
   std::unordered_set<uint64_t> entry_addr_set;
+
   for (size_t i = 0u; i < read_entry_limit && current_entry_addr != 0u; ++i) {
     if (entry_addr_set.find(current_entry_addr) != entry_addr_set.end()) {
       // We enter a loop, which means a broken linked list.
@@ -566,15 +571,54 @@ bool JITDebugReader::ReadNewCodeEntriesImpl(Process& process, const Descriptor& 
       // once we hit an entry with timestamp <= last_action_timestmap.
       break;
     }
-    if (entry.symfile_size == 0) {
-      continue;
+    if (entry.symfile_size > 0) {
+      CodeEntry code_entry;
+      code_entry.addr = current_entry_addr;
+      code_entry.symfile_addr = entry.symfile_addr;
+      code_entry.symfile_size = entry.symfile_size;
+      code_entry.timestamp = entry.register_timestamp;
+      new_code_entries->push_back(code_entry);
     }
-    CodeEntry code_entry;
-    code_entry.addr = current_entry_addr;
-    code_entry.symfile_addr = entry.symfile_addr;
-    code_entry.symfile_size = entry.symfile_size;
-    code_entry.timestamp = entry.register_timestamp;
-    new_code_entries->push_back(code_entry);
+    entry_addr_set.insert(current_entry_addr);
+    prev_entry_addr = current_entry_addr;
+    current_entry_addr = entry.next_addr;
+  }
+  return true;
+}
+
+// Temporary work around for patch "JIT mini-debug-info: Append packed entries towards end.", which
+// adds new entries at the end of the list and forces simpleperf to read the whole list.
+template <typename CodeEntryT>
+bool JITDebugReader::ReadNewCodeEntriesImplV2(Process& process, const Descriptor& descriptor,
+                                              uint64_t last_action_timestamp,
+                                              uint32_t /* read_entry_limit */,
+                                              std::vector<CodeEntry>* new_code_entries) {
+  uint64_t current_entry_addr = descriptor.first_entry_addr;
+  uint64_t prev_entry_addr = 0u;
+  std::unordered_set<uint64_t> entry_addr_set;
+  const size_t READ_ENTRY_LIMIT = 10000;  // to avoid endless loop
+
+  for (size_t i = 0u; i < READ_ENTRY_LIMIT && current_entry_addr != 0u; ++i) {
+    if (entry_addr_set.find(current_entry_addr) != entry_addr_set.end()) {
+      // We enter a loop, which means a broken linked list.
+      return false;
+    }
+    CodeEntryT entry;
+    if (!ReadRemoteMem(process, current_entry_addr, sizeof(entry), &entry)) {
+      return false;
+    }
+    if (entry.prev_addr != prev_entry_addr || !entry.Valid()) {
+      // A broken linked list
+      return false;
+    }
+    if (entry.symfile_size > 0 && entry.register_timestamp > last_action_timestamp) {
+      CodeEntry code_entry;
+      code_entry.addr = current_entry_addr;
+      code_entry.symfile_addr = entry.symfile_addr;
+      code_entry.symfile_size = entry.symfile_size;
+      code_entry.timestamp = entry.register_timestamp;
+      new_code_entries->push_back(code_entry);
+    }
     entry_addr_set.insert(current_entry_addr);
     prev_entry_addr = current_entry_addr;
     current_entry_addr = entry.next_addr;
@@ -608,6 +652,9 @@ void JITDebugReader::ReadJITCodeDebugInfo(Process& process,
       tmp_file->DoNotRemove();
     }
     auto callback = [&](const ElfFileSymbol& symbol) {
+      if (symbol.len == 0) {  // Some arm labels can have zero length.
+        return;
+      }
       LOG(VERBOSE) << "JITSymbol " << symbol.name << " at [" << std::hex << symbol.vaddr
                    << " - " << (symbol.vaddr + symbol.len) << " with size " << symbol.len;
       debug_info->emplace_back(process.pid, jit_entry.timestamp, symbol.vaddr, symbol.len,

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 The Android Open Source Project
+ * Copyright (C) 2020 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,15 +16,19 @@
 
 #pragma once
 
-#include <stdint.h>
+#include <unwindstack/Maps.h>
 
-#include <string>
+#include "thread_tree.h"
 
-// Forward Declarations.
-struct AllocEntry;
+namespace simpleperf {
 
-std::string ZipGetContents(const char* filename);
+class UnwindMaps : public unwindstack::Maps {
+ public:
+  void UpdateMaps(const MapSet& map_set);
 
-void ZipGetUnwindInfo(const char* filename, AllocEntry** entries, size_t* num_entries);
+ private:
+  uint64_t version_ = 0u;
+  std::vector<const MapEntry*> entries_;
+};
 
-void ZipFreeEntries(AllocEntry* entries, size_t num_entries);
+}  // namespace simpleperf
