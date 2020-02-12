@@ -122,6 +122,24 @@
       "revId": "4d495fbc56468fcea8da3b30e2fad3d891c1e4ec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "81d5e7c5_781f0273",
+        "filename": "simpleperf/test_util.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-02-12T19:02:42Z",
+      "side": 1,
+      "message": "no. adb uses -r to reinstall, but pm doesn\u0027t have -r flag.",
+      "parentUuid": "e36d2714_ad9b160d",
+      "revId": "4d495fbc56468fcea8da3b30e2fad3d891c1e4ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
