@@ -1,0 +1,13 @@
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Lint+1: Lint 🤖 <android-build-prod-ayeaye@system.gserviceaccount.com>
+Qualcomm-Review+1: David Ng <dave@codeaurora.org>
+Open-Source-Licensing+1: Lint 🤖 <android-build-prod-ayeaye@system.gserviceaccount.com>
+Verified+1: Barani Muthukumaran <quic_bmuthuku@quicinc.com>
+Code-Review+2: Paul Crowley <paulcrowley@google.com>
+Code-Review+1: Eric Biggers <ebiggers@google.com>
+Autosubmit+1: Paul Crowley <paulcrowley@google.com>
+Submitted-by: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-at: Wed, 12 Feb 2020 23:32:25 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/system/extras/+/1156833
+Project: platform/system/extras
+Branch: refs/heads/master
