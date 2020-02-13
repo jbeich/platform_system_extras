@@ -1,0 +1,10 @@
+Open-Source-Licensing+1: Lint 🤖 <android-build-prod-ayeaye@system.gserviceaccount.com>
+Code-Review+1: Mark Salyzyn <salyzyn@google.com>
+Code-Review+2: Alessio Balsini <balsini@google.com>
+Lint+1: Lint 🤖 <android-build-prod-ayeaye@system.gserviceaccount.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Submitted-by: David Anderson <dvander@google.com>
+Submitted-at: Thu, 13 Feb 2020 21:27:46 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/system/extras/+/1234247
+Project: platform/system/extras
+Branch: refs/heads/master
