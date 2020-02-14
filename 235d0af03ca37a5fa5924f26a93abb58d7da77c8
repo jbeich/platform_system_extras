@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "da025433_d7fcc07e",
+        "filename": "simpleperf/demo/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-02-14T18:53:57Z",
+      "side": 1,
+      "message": "I used a vscode remarkable extension.",
+      "parentUuid": "c003186f_15fb3289",
+      "revId": "235d0af03ca37a5fa5924f26a93abb58d7da77c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1d970749_b98b8ed9",
         "filename": "simpleperf/demo/README.md",
         "patchSetId": 1
@@ -42,6 +60,30 @@
     },
     {
       "key": {
+        "uuid": "47346c7c_8ec780ab",
+        "filename": "simpleperf/demo/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-02-14T18:53:57Z",
+      "side": 1,
+      "message": "In each Android Studio project, gradlew is a shell script for starting Gradle on UN*X, gradlew.bat is a bat script for starting Gradle on Windows. I feel the order isn\u0027t important, so prefer not to change unless you insist.",
+      "parentUuid": "1d970749_b98b8ed9",
+      "range": {
+        "startLine": 153,
+        "startChar": 4,
+        "endLine": 153,
+        "endChar": 11
+      },
+      "revId": "235d0af03ca37a5fa5924f26a93abb58d7da77c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b6657257_8ec5788c",
         "filename": "simpleperf/doc/android_application_profiling.md",
         "patchSetId": 1
@@ -53,6 +95,30 @@
       "writtenOn": "2020-02-13T16:49:14Z",
       "side": 1,
       "message": "Should this and profileableFromShell be `` monospaced keywords? It might also help to hyperlink them to the official docs like https://developer.android.com/studio/debug/index.html#enable-debug.",
+      "range": {
+        "startLine": 278,
+        "startChar": 72,
+        "endLine": 278,
+        "endChar": 82
+      },
+      "revId": "235d0af03ca37a5fa5924f26a93abb58d7da77c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b88b6327_d03c0a28",
+        "filename": "simpleperf/doc/android_application_profiling.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-02-14T18:53:57Z",
+      "side": 1,
+      "message": "Thanks for reminding! I forgot to mention it in the doc. Currently I can\u0027t find any outside doc  describing how to add profileableFromShell flag, so I link to the app preparation section above.",
+      "parentUuid": "b6657257_8ec5788c",
       "range": {
         "startLine": 278,
         "startChar": 72,
