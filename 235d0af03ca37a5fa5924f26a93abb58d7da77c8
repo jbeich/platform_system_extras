@@ -84,6 +84,30 @@
     },
     {
       "key": {
+        "uuid": "68b17026_b2e2662c",
+        "filename": "simpleperf/demo/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-02-14T18:55:53Z",
+      "side": 1,
+      "message": "That\u0027s fine. I just was pointing out that the comment above mentions Windows users using gradlew instead. Perhaps that should be changed to say, \u0027\u0027\u0027# On Linux/Mac, use \"gradle\" instead\u0027\u0027\u0027.",
+      "parentUuid": "47346c7c_8ec780ab",
+      "range": {
+        "startLine": 153,
+        "startChar": 4,
+        "endLine": 153,
+        "endChar": 11
+      },
+      "revId": "235d0af03ca37a5fa5924f26a93abb58d7da77c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b6657257_8ec5788c",
         "filename": "simpleperf/doc/android_application_profiling.md",
         "patchSetId": 1
