@@ -132,6 +132,30 @@
     },
     {
       "key": {
+        "uuid": "7a8d9bb3_4ef250a3",
+        "filename": "simpleperf/demo/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-02-14T19:46:34Z",
+      "side": 1,
+      "message": "On linux/mac, unless user add . to $PATH, we need ./gradlew to run gradlew in current dir. But On windows, ./gradlew can\u0027t be recognize, instead we should use gradlew, which really means to run gradlew.bat.\nSo the difference is not in \"w\", but in \"./\", which is a secret can\u0027t be found unless really run them.",
+      "parentUuid": "03f84b5c_06faca16",
+      "range": {
+        "startLine": 153,
+        "startChar": 4,
+        "endLine": 153,
+        "endChar": 11
+      },
+      "revId": "235d0af03ca37a5fa5924f26a93abb58d7da77c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b6657257_8ec5788c",
         "filename": "simpleperf/doc/android_application_profiling.md",
         "patchSetId": 1
