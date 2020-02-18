@@ -132,6 +132,7 @@ cc_library_static {
         "-Wno-switch",
         "-Wno-unused-private-field",
         "-Wno-implicit-fallthrough",
+        "-Wno-tautological-overlap-compare", // warning in OPenCSD pkt_printer_t.h
         "-fexceptions",
     ],
     rtti: true,
