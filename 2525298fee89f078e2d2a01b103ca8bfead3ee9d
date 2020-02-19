@@ -22,6 +22,30 @@
       "revId": "2525298fee89f078e2d2a01b103ca8bfead3ee9d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f5a73eaa_d276eed0",
+        "filename": "libfscrypt/tests/fscrypt_test.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1060907
+      },
+      "writtenOn": "2020-02-19T20:22:36Z",
+      "side": 1,
+      "message": "I agree, I hate this, but that won\u0027t work; if we put SCOPED_TRACE in braces it\u0027ll limit its scope to just the inside of the braces (and it didn\u0027t compile anyway). I also tried using parentheses and separating with a comma, but that also didn\u0027t work:\n\nhttps://paste.googleplex.com/6215280810262528\n\nHave tried something that makes this dirty trick a smidge less dirty.",
+      "parentUuid": "88d45640_2a54247c",
+      "range": {
+        "startLine": 42,
+        "startChar": 4,
+        "endLine": 42,
+        "endChar": 63
+      },
+      "revId": "2525298fee89f078e2d2a01b103ca8bfead3ee9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
