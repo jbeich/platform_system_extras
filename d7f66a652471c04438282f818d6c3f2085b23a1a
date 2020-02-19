@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d92ce046_4f08536a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-02-19T18:51:04Z",
+      "side": 1,
+      "message": "It\u0027s actually just the policy_version default that\u0027s being changed, right?  The DIRECT_KEY change doesn\u0027t actually make a difference, as per my other comment.",
+      "range": {
+        "startLine": 10,
+        "startChar": 43,
+        "endLine": 10,
+        "endChar": 61
+      },
+      "revId": "d7f66a652471c04438282f818d6c3f2085b23a1a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "86ea545b_bd09e21d",
+        "filename": "libfscrypt/fscrypt.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-02-19T18:51:04Z",
+      "side": 1,
+      "message": "This doesn\u0027t actually matter because the kernel only allows contents_mode\u003dAdiantum in combination with filenames_mode\u003dAdiantum and vice versa.  So we could just change it to check contents_mode, or both contents_mode and filenames_mode if you think that would be more logical, without breaking anyone.  No need to check the API level for it.",
+      "range": {
+        "startLine": 251,
+        "startChar": 0,
+        "endLine": 252,
+        "endChar": 82
+      },
+      "revId": "d7f66a652471c04438282f818d6c3f2085b23a1a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
