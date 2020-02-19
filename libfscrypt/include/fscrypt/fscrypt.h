@@ -49,7 +49,13 @@ void BytesToHex(const std::string& bytes, std::string* hex);
 
 bool OptionsToString(const EncryptionOptions& options, std::string* options_string);
 
+bool OptionsToStringForApiLevel(unsigned int first_api_level, const EncryptionOptions& options,
+                                std::string* options_string);
+
 bool ParseOptions(const std::string& options_string, EncryptionOptions* options);
+
+bool ParseOptionsForApiLevel(unsigned int first_api_level, const std::string& options_string,
+                             EncryptionOptions* options);
 
 bool EnsurePolicy(const EncryptionPolicy& policy, const std::string& directory);
 
