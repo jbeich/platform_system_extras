@@ -45,6 +45,30 @@
       "revId": "d7f66a652471c04438282f818d6c3f2085b23a1a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "97a76146_1cfde99c",
+        "filename": "libfscrypt/fscrypt.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-02-19T19:00:46Z",
+      "side": 1,
+      "message": "Note that the DIRECT_KEY flag affects IV generation for both contents and filenames; it isn\u0027t associated with one or the other.  So a symmetric check like contents\u003dAdiantum || filenames\u003dAdiantum, or contents\u003dAdiantum \u0026\u0026 filenames\u003dAdiantum would make sense.  Or, we could enforce in the code here too that Adiantum can only be used with Adiantum, rather than relying on the kernel check only.",
+      "parentUuid": "86ea545b_bd09e21d",
+      "range": {
+        "startLine": 251,
+        "startChar": 0,
+        "endLine": 252,
+        "endChar": 82
+      },
+      "revId": "d7f66a652471c04438282f818d6c3f2085b23a1a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
