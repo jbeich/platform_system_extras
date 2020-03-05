@@ -46,6 +46,30 @@
       "revId": "21cc32a4309c9999b180c7a24148b06ef2e61c5e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "16095757_fcb06bd2",
+        "filename": "simpleperf/read_elf_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-03-05T18:49:19Z",
+      "side": 1,
+      "message": "What the test does is to use llvm library to read elf file, which should have the same result no matter on which platform it runs. Can you share the detail of why it doesn\u0027t work on non-native abi?",
+      "parentUuid": "d3f64c93_1d00ed14",
+      "range": {
+        "startLine": 99,
+        "startChar": 2,
+        "endLine": 99,
+        "endChar": 33
+      },
+      "revId": "21cc32a4309c9999b180c7a24148b06ef2e61c5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
