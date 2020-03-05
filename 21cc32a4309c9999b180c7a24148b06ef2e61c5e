@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "de04fca6_875dd37a",
+        "filename": "simpleperf/read_elf_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-03-05T18:19:17Z",
+      "side": 1,
+      "message": "The read_elf tests shouldn\u0027t be related to abi. Are you bothered by http://b/149838687?",
+      "range": {
+        "startLine": 99,
+        "startChar": 2,
+        "endLine": 99,
+        "endChar": 33
+      },
+      "revId": "21cc32a4309c9999b180c7a24148b06ef2e61c5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
