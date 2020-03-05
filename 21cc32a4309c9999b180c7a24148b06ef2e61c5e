@@ -22,6 +22,30 @@
       "revId": "21cc32a4309c9999b180c7a24148b06ef2e61c5e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d3f64c93_1d00ed14",
+        "filename": "simpleperf/read_elf_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1278660
+      },
+      "writtenOn": "2020-03-05T18:29:35Z",
+      "side": 1,
+      "message": "This is related to b/149313881:\n\nsimpleperf W dso.cpp:392] /apex/com.android.runtime/lib/bionic/libdl.so doesn\u0027t contain symbol table\nsimpleperf W dso.cpp:392] /data/app/~~MxdcJJb-T_DHW_sIbH5k0w\u003d\u003d/com.google.sample.tunnel-jN4zhLHI1SgePrCqzcs46w\u003d\u003d/lib/x86/libgame.so doesn\u0027t contain symbol table\nsystem/extras/simpleperf/cmd_record_test.cpp:899: Failure\nValue of: helper.CheckData(process_symbol)\nActual: false\nExpected: true",
+      "parentUuid": "de04fca6_875dd37a",
+      "range": {
+        "startLine": 99,
+        "startChar": 2,
+        "endLine": 99,
+        "endChar": 33
+      },
+      "revId": "21cc32a4309c9999b180c7a24148b06ef2e61c5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
