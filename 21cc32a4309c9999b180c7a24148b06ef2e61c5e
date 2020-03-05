@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "678168b1_d8c5073c",
+        "filename": "simpleperf/cmd_record_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 876,
+      "author": {
+        "id": 1069898
+      },
+      "writtenOn": "2020-03-05T23:19:33Z",
+      "side": 1,
+      "message": "How about this test? Per error message, with non-native ABI, it fails to find symbol table in shared library. Theoretically, if you use llvm elf-reader, it should also work for non-native ABI. Or is this analyzer different from read_elf and we indeed should disable it?\n\nyubinc@, wdyt?",
+      "revId": "21cc32a4309c9999b180c7a24148b06ef2e61c5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "de04fca6_875dd37a",
         "filename": "simpleperf/read_elf_test.cpp",
         "patchSetId": 1
@@ -61,6 +78,30 @@
       "side": 1,
       "message": "What the test does is to use llvm library to read elf file, which should have the same result no matter on which platform it runs. Can you share the detail of why it doesn\u0027t work on non-native abi?",
       "parentUuid": "d3f64c93_1d00ed14",
+      "range": {
+        "startLine": 99,
+        "startChar": 2,
+        "endLine": 99,
+        "endChar": 33
+      },
+      "revId": "21cc32a4309c9999b180c7a24148b06ef2e61c5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "81c6a441_f28d9ddf",
+        "filename": "simpleperf/read_elf_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1069898
+      },
+      "writtenOn": "2020-03-05T23:19:33Z",
+      "side": 1,
+      "message": "Good catch! Yes, the failures look like http://b/149838687. So it\u0027s not translation specific. I\u0027ll remove it from this CL.",
+      "parentUuid": "16095757_fcb06bd2",
       "range": {
         "startLine": 99,
         "startChar": 2,
