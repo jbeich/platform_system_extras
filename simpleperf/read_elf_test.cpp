@@ -95,6 +95,8 @@ void CheckElfFileSymbols(const std::map<std::string, ElfFileSymbol>& symbols) {
 }
 
 TEST(read_elf, parse_symbols_from_elf_file_with_correct_build_id) {
+  // Simpleperf cannot read symbols from non-native shared libraries.
+  OMIT_TEST_ON_NON_NATIVE_ABIS();
   std::map<std::string, ElfFileSymbol> symbols;
   ASSERT_EQ(ElfStatus::NO_ERROR, ParseSymbolsFromElfFile(GetTestData(ELF_FILE), elf_file_build_id,
                                       std::bind(ParseSymbol, std::placeholders::_1, &symbols)));
@@ -102,6 +104,8 @@ TEST(read_elf, parse_symbols_from_elf_file_with_correct_build_id) {
 }
 
 TEST(read_elf, parse_symbols_from_elf_file_without_build_id) {
+  // Simpleperf cannot read symbols from non-native shared libraries.
+  OMIT_TEST_ON_NON_NATIVE_ABIS();
   std::map<std::string, ElfFileSymbol> symbols;
   ASSERT_EQ(ElfStatus::NO_ERROR, ParseSymbolsFromElfFile(GetTestData(ELF_FILE), BuildId(),
                                       std::bind(ParseSymbol, std::placeholders::_1, &symbols)));
@@ -116,6 +120,8 @@ TEST(read_elf, parse_symbols_from_elf_file_with_wrong_build_id) {
 }
 
 TEST(read_elf, ParseSymbolsFromEmbeddedElfFile) {
+  // Simpleperf cannot read symbols from non-native shared libraries.
+  OMIT_TEST_ON_NON_NATIVE_ABIS();
   std::map<std::string, ElfFileSymbol> symbols;
   ASSERT_EQ(ElfStatus::NO_SYMBOL_TABLE, ParseSymbolsFromEmbeddedElfFile(GetTestData(APK_FILE), NATIVELIB_OFFSET_IN_APK,
                                               NATIVELIB_SIZE_IN_APK, native_lib_build_id,

@@ -872,6 +872,9 @@ TEST(record_cmd, record_java_app) {
 
 TEST(record_cmd, record_native_app) {
 #if defined(__ANDROID__)
+  // Simpleperf doesn't know how to process non-native shared libraries.
+  OMIT_TEST_ON_NON_NATIVE_ABIS();
+
   RecordingAppHelper helper;
   // 1. Install apk.
   ASSERT_TRUE(helper.InstallApk(GetTestData("EndlessTunnel.apk"), "com.google.sample.tunnel"));
