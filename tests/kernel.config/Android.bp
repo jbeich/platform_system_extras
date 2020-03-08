@@ -1,0 +1,70 @@
+// Copyright 2016 The Android Open Source Project
+
+// -----------------------------------------------------------------------------
+// Unit tests.
+// -----------------------------------------------------------------------------
+
+cc_defaults {
+    name: "kernel-config-test-defaults",
+    cflags: [
+        "-fstack-protector-all",
+        "-g",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-fno-builtin",
+
+        "-DHAS_KCMP",
+    ],
+    shared_libs: ["libbase"],
+
+    // Required Tests
+    srcs: [
+        "logger_test.cpp",
+        "multicast_test.cpp",
+        "nfs_test.cpp",
+        "sysvipc_test.cpp",
+    ],
+}
+
+cc_test {
+    name: "kernel-config-unit-tests",
+    defaults: ["kernel-config-test-defaults"],
+
+    // Recommended Tests
+    srcs: [
+        // TODO: move aslr_test.cpp back to kernel-config-test-defaults b/36888825
+        "aslr_test.cpp",
+        "aslr_rec_test.cpp",
+        "mmc_max_speed_test.cpp",
+        "pstore_test.cpp",
+    ],
+}
+
+cc_test {
+    name: "CtsKernelConfigTestCases",
+    defaults: ["kernel-config-test-defaults"],
+    multilib: {
+        lib32: {
+            suffix: "32",
+        },
+        lib64: {
+            suffix: "64",
+        },
+    },
+
+    test_suites: [
+        "cts",
+        "vts",
+    ],
+}
+
+cc_test {
+    name: "scrape_mmap_addr",
+    srcs: ["scrape_mmap_addr.cpp"],
+
+    cflags: [
+        "-Wall",
+        "-Werror",
+    ],
+}
