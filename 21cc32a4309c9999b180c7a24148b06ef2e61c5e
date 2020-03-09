@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "8e2a434d_c739c7a9",
+        "filename": "simpleperf/cmd_record_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 876,
+      "author": {
+        "id": 1069898
+      },
+      "writtenOn": "2020-03-09T18:16:56Z",
+      "side": 1,
+      "message": "I figured this fails because the expected native symbol is never executed, which is not surprising since with the binary translation guest code is never directly executed, instead we execute the code translated at runtime (from anonymous memory mappings).",
+      "parentUuid": "39caec41_b02d4548",
+      "revId": "21cc32a4309c9999b180c7a24148b06ef2e61c5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "de04fca6_875dd37a",
         "filename": "simpleperf/read_elf_test.cpp",
         "patchSetId": 1
@@ -153,6 +171,30 @@
       "revId": "21cc32a4309c9999b180c7a24148b06ef2e61c5e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "edd2c113_c07549f3",
+        "filename": "simpleperf/read_elf_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1069898
+      },
+      "writtenOn": "2020-03-09T18:16:56Z",
+      "side": 1,
+      "message": "Applying new compiler indeed fixes read_elf tests, but not record_cmd#record_native_app.",
+      "parentUuid": "5039d936_25f04b5e",
+      "range": {
+        "startLine": 99,
+        "startChar": 2,
+        "endLine": 99,
+        "endChar": 33
+      },
+      "revId": "21cc32a4309c9999b180c7a24148b06ef2e61c5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
