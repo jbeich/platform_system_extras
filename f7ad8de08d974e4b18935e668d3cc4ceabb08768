@@ -118,6 +118,30 @@
       "revId": "f7ad8de08d974e4b18935e668d3cc4ceabb08768",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "58ae231f_d83c7a34",
+        "filename": "verity/fec/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2020-03-09T19:54:29Z",
+      "side": 1,
+      "message": "I was told we are only doing cross build for windows. So I specify the libavb in the build target and removed libfec_no_avb. Also I think a stub file might be cleaner than the preprocessor. Please re-test the change.",
+      "parentUuid": "a8b4e05b_14bd9e5c",
+      "range": {
+        "startLine": 23,
+        "startChar": 9,
+        "endLine": 23,
+        "endChar": 22
+      },
+      "revId": "f7ad8de08d974e4b18935e668d3cc4ceabb08768",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
