@@ -22,6 +22,30 @@
       "revId": "f7ad8de08d974e4b18935e668d3cc4ceabb08768",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "891ed3ff_61046905",
+        "filename": "verity/fec/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2020-03-09T08:07:35Z",
+      "side": 1,
+      "message": "correct. Because the fec is not using libavb in practice, I believe it\u0027s fine. The fec binary is only used to generate verity \u0026 ecc data for verified boot 1.0. And we use the avbtool to do the work for VB2.0\n\nI also find the bp option \"exclude_static_libs\" isn\u0027t available for darwin. Otherwise I would go that way.",
+      "parentUuid": "dc175149_add5f4f7",
+      "range": {
+        "startLine": 23,
+        "startChar": 9,
+        "endLine": 23,
+        "endChar": 22
+      },
+      "revId": "f7ad8de08d974e4b18935e668d3cc4ceabb08768",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
