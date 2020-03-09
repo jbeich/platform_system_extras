@@ -94,6 +94,30 @@
       "revId": "f7ad8de08d974e4b18935e668d3cc4ceabb08768",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a8b4e05b_14bd9e5c",
+        "filename": "verity/fec/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2020-03-09T18:07:54Z",
+      "side": 1,
+      "message": "Yeah, I was think about adding the logic in libfec\u0027s bp file. Probably need windows as well.\n  name: libfec\n  .....\n  target: {\n      linux: {\n          static_libs: [\"libavb\"],\n      },\n  },\n\nAnd then warp the logic with  \"if defined(__APPLE__)\" like ps1 does. I don\u0027t have a strong opinion on which option to make the fix.",
+      "parentUuid": "80959ecf_dcdc7bf9",
+      "range": {
+        "startLine": 23,
+        "startChar": 9,
+        "endLine": 23,
+        "endChar": 22
+      },
+      "revId": "f7ad8de08d974e4b18935e668d3cc4ceabb08768",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
