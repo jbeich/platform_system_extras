@@ -124,12 +124,6 @@ struct verity_info {
     verity_header ecc_header;
 };
 
-struct avb_info {
-    bool valid = false;
-    std::vector<uint8_t> vbmeta;
-    hashtree_info hashtree;
-};
-
 struct fec_handle {
     ecc_info ecc;
     int fd;
@@ -140,12 +134,10 @@ struct fec_handle {
     uint64_t data_size;
     uint64_t pos;
     uint64_t size;
-    // TODO(xunchang) switch to std::optional
     verity_info verity;
-    avb_info avb;
 
     hashtree_info hashtree() const {
-        return avb.valid ? avb.hashtree : verity.hashtree;
+        return verity.hashtree;
     }
 };
 
