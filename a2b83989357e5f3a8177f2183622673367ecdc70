@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "59ee2dda_c5e2368f",
+        "filename": "libfec/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2020-03-09T22:22:45Z",
+      "side": 1,
+      "message": "remove misleading comment?",
+      "revId": "a2b83989357e5f3a8177f2183622673367ecdc70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
