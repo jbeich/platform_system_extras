@@ -1227,16 +1227,20 @@ bool RecordCommand::DumpProcessMaps(pid_t pid, const std::unordered_set<pid_t>& 
     }
   }
   // Dump process name.
-  std::string name = GetCompleteProcessName(pid);
-  if (!name.empty()) {
-    CommRecord record(attr, pid, pid, name, event_id, last_record_timestamp_);
+  std::string process_name = GetCompleteProcessName(pid);
+  if (!process_name.empty()) {
+    CommRecord record(attr, pid, pid, process_name, event_id, last_record_timestamp_);
     if (!ProcessRecord(&record)) {
       return false;
     }
   }
   // Dump thread info.
   for (const auto& tid : tids) {
+    std::string name;
     if (tid != pid && GetThreadName(tid, &name)) {
+      if (android::base::EndsWith(process_name, name)) {
+        name = process_name;
+      }
       CommRecord comm_record(attr, pid, tid, name, event_id, last_record_timestamp_);
       if (!ProcessRecord(&comm_record)) {
         return false;
