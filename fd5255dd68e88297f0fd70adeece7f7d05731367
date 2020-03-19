@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4540a2bb_e450e4d3",
+        "filename": "simpleperf/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 496,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-03-19T01:20:11Z",
+      "side": 1,
+      "message": "Since we also ship libsimpleperf_report.so in ndk, also use static library here? Probably doesn\u0027t matter much, because we only use it on host.",
+      "range": {
+        "startLine": 496,
+        "startChar": 27,
+        "endLine": 496,
+        "endChar": 45
+      },
+      "revId": "fd5255dd68e88297f0fd70adeece7f7d05731367",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
