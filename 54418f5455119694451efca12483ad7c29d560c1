@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5c519f06_42ac7889",
+        "filename": "simpleperf/Android.bp",
+        "patchSetId": 4
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2020-03-19T19:09:27Z",
+      "side": 1,
+      "message": "PTAL. The previous patchset mistakenly linked with DEX support on more OS\u0027s than the original.",
+      "range": {
+        "startLine": 415,
+        "startChar": 8,
+        "endLine": 415,
+        "endChar": 13
+      },
+      "revId": "54418f5455119694451efca12483ad7c29d560c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
