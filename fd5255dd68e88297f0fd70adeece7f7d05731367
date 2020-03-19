@@ -46,6 +46,30 @@
       "revId": "fd5255dd68e88297f0fd70adeece7f7d05731367",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fd2dc96f_78666dbf",
+        "filename": "simpleperf/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 496,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-03-19T01:55:15Z",
+      "side": 1,
+      "message": "As far as I know, dex symbols are only read on device. But the report library is only used on host. So probably doesn\u0027t matter. But I can\u0027t guarantee no one will read dex symbols on host via the report library, so it\u0027s safer to keep using static libraries.\n\nNo need to worry about breaking simpleperf dist in NDK. I will test before updating it. In case you are interested, I update simpleperf prebuilts in scripts/bin, then run scripts/test.py to test, which takes a long time.",
+      "parentUuid": "a0ea9eac_83f1e1e3",
+      "range": {
+        "startLine": 496,
+        "startChar": 27,
+        "endLine": 496,
+        "endChar": 45
+      },
+      "revId": "fd5255dd68e88297f0fd70adeece7f7d05731367",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
