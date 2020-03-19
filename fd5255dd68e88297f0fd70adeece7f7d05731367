@@ -22,6 +22,30 @@
       "revId": "fd5255dd68e88297f0fd70adeece7f7d05731367",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a0ea9eac_83f1e1e3",
+        "filename": "simpleperf/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 496,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2020-03-19T01:42:40Z",
+      "side": 1,
+      "message": "Done. It might matter, because otherwise we\u0027d have to include libdexfile_external.so and other ART libs in the NDK host dist. But maybe they already are? That bit is completely opaque to me.\n\nSpeaking of which, how would I test that I don\u0027t do something here that breaks stuff in the NDK dist? Is there a CI somewhere?",
+      "parentUuid": "4540a2bb_e450e4d3",
+      "range": {
+        "startLine": 496,
+        "startChar": 27,
+        "endLine": 496,
+        "endChar": 45
+      },
+      "revId": "fd5255dd68e88297f0fd70adeece7f7d05731367",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
