@@ -118,7 +118,8 @@ class RecordCommand : public Command {
 "       can be used to change target of sampling information.\n"
 "       The default options are: -e cpu-cycles -f 4000 -o perf.data.\n"
 "Select monitored threads:\n"
-"-a     System-wide collection.\n"
+"-a     System-wide collection. Use with --exclude-perf to exclude samples for\n"
+"       simpleperf process.\n"
 #if defined(__ANDROID__)
 "--app package_name    Profile the process of an Android application.\n"
 "                      On non-rooted devices, the app must be debuggable,\n"
@@ -127,6 +128,7 @@ class RecordCommand : public Command {
 "-p pid1,pid2,...       Record events on existing processes. Mutually exclusive\n"
 "                       with -a.\n"
 "-t tid1,tid2,... Record events on existing threads. Mutually exclusive with -a.\n"
+"--exclude-perf   Exclude samples for simpleperf process.\n"
 "\n"
 "Select monitored event types:\n"
 "-e event1[:modifier1],event2[:modifier2],...\n"
@@ -367,6 +369,7 @@ class RecordCommand : public Command {
   EventAttrWithId dumping_attr_id_;
   // In system wide recording, record if we have dumped map info for a process.
   std::unordered_set<pid_t> dumped_processes_;
+  bool exclude_perf_ = false;
 };
 
 bool RecordCommand::Run(const std::vector<std::string>& args) {
@@ -451,13 +454,6 @@ bool RecordCommand::PrepareRecording(Workload* workload) {
     if (workload != nullptr) {
       event_selection_set_.AddMonitoredProcesses({workload->GetPid()});
       event_selection_set_.SetEnableOnExec(true);
-      if (event_selection_set_.HasInplaceSampler()) {
-        // Start worker early, because the worker process has to setup inplace-sampler server
-        // before we try to connect it.
-        if (!workload->Start()) {
-          return false;
-        }
-      }
     } else if (!app_package_name_.empty()) {
       // If app process is not created, wait for it. This allows simpleperf starts before
       // app process. In this way, we can have a better support of app start-up time profiling.
@@ -493,7 +489,7 @@ bool RecordCommand::PrepareRecording(Workload* workload) {
                                                       : kRecordBufferSize;
   if (!event_selection_set_.MmapEventFiles(mmap_page_range_.first, mmap_page_range_.second,
                                            aux_buffer_size_, record_buffer_size,
-                                           allow_cutting_samples_)) {
+                                           allow_cutting_samples_, exclude_perf_)) {
     return false;
   }
   auto callback =
@@ -827,6 +823,8 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
           wait_setting_speed_event_groups_.push_back(group_id);
         }
       }
+    } else if (args[i] == "--exclude-perf") {
+      exclude_perf_ = true;
     } else if (args[i] == "--exit-with-parent") {
       prctl(PR_SET_PDEATHSIG, SIGHUP, 0, 0, 0);
     } else if (args[i] == "-g") {
@@ -1174,21 +1172,29 @@ bool RecordCommand::DumpKernelMaps() {
 }
 
 bool RecordCommand::DumpUserSpaceMaps() {
-  // For system_wide profiling, maps of a process is dumped when needed (first time a sample hits
-  // that process).
-  if (system_wide_collection_) {
+  // For system_wide profiling:
+  //   If no aux tracing, maps of a process is dumped when needed (first time a sample hits
+  //     that process).
+  //   If aux tracing, we don't know which maps will be needed, so dump all process maps.
+  if (system_wide_collection_ && !event_selection_set_.HasAuxTrace()) {
     return true;
   }
   // Map from process id to a set of thread ids in that process.
   std::unordered_map<pid_t, std::unordered_set<pid_t>> process_map;
-  for (pid_t pid : event_selection_set_.GetMonitoredProcesses()) {
-    std::vector<pid_t> tids = GetThreadsInProcess(pid);
-    process_map[pid].insert(tids.begin(), tids.end());
-  }
-  for (pid_t tid : event_selection_set_.GetMonitoredThreads()) {
-    pid_t pid;
-    if (GetProcessForThread(tid, &pid)) {
-      process_map[pid].insert(tid);
+  if (system_wide_collection_) {
+    for (auto pid : GetAllProcesses()) {
+      process_map[pid] = std::unordered_set<pid_t>();
+    }
+  } else {
+    for (pid_t pid : event_selection_set_.GetMonitoredProcesses()) {
+      std::vector<pid_t> tids = GetThreadsInProcess(pid);
+      process_map[pid].insert(tids.begin(), tids.end());
+    }
+    for (pid_t tid : event_selection_set_.GetMonitoredThreads()) {
+      pid_t pid;
+      if (GetProcessForThread(tid, &pid)) {
+        process_map[pid].insert(tid);
+      }
     }
   }
 
@@ -1221,16 +1227,22 @@ bool RecordCommand::DumpProcessMaps(pid_t pid, const std::unordered_set<pid_t>& 
     }
   }
   // Dump process name.
-  std::string name = GetCompleteProcessName(pid);
-  if (!name.empty()) {
-    CommRecord record(attr, pid, pid, name, event_id, last_record_timestamp_);
+  std::string process_name = GetCompleteProcessName(pid);
+  if (!process_name.empty()) {
+    CommRecord record(attr, pid, pid, process_name, event_id, last_record_timestamp_);
     if (!ProcessRecord(&record)) {
       return false;
     }
   }
   // Dump thread info.
   for (const auto& tid : tids) {
+    std::string name;
     if (tid != pid && GetThreadName(tid, &name)) {
+      // If a thread name matches the suffix of its process name, probably the thread name
+      // is stripped by TASK_COMM_LEN.
+      if (android::base::EndsWith(process_name, name)) {
+        name = process_name;
+      }
       CommRecord comm_record(attr, pid, tid, name, event_id, last_record_timestamp_);
       if (!ProcessRecord(&comm_record)) {
         return false;

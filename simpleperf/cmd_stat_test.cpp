@@ -71,6 +71,22 @@ TEST(stat_cmd, rN_event) {
   ASSERT_TRUE(StatCmd()->Run({"-e", event_name, "sleep", "1"}));
 }
 
+TEST(stat_cmd, pmu_event) {
+  TEST_REQUIRE_PMU_COUNTER();
+  TEST_REQUIRE_HW_COUNTER();
+  std::string event_string;
+  if (GetBuildArch() == ARCH_X86_64) {
+    event_string = "cpu/instructions/";
+  } else if (GetBuildArch() == ARCH_ARM64) {
+    event_string = "armv8_pmuv3/inst_retired/";
+  } else {
+    GTEST_LOG_(INFO) << "Omit arch " << GetBuildArch();
+    return;
+  }
+  TEST_IN_ROOT(ASSERT_TRUE(
+      StatCmd()->Run({"-a", "-e", event_string, "sleep", "1"})));
+}
+
 TEST(stat_cmd, event_modifier) {
   TEST_REQUIRE_HW_COUNTER();
   ASSERT_TRUE(
@@ -296,11 +312,15 @@ static void TestStatingApps(const std::string& app_name) {
 
 TEST(stat_cmd, app_option_for_debuggable_app) {
   TEST_REQUIRE_APPS();
+  SetRunInAppToolForTesting(true, false);
+  TestStatingApps("com.android.simpleperf.debuggable");
+  SetRunInAppToolForTesting(false, true);
   TestStatingApps("com.android.simpleperf.debuggable");
 }
 
 TEST(stat_cmd, app_option_for_profileable_app) {
   TEST_REQUIRE_APPS();
+  SetRunInAppToolForTesting(false, true);
   TestStatingApps("com.android.simpleperf.profileable");
 }
 
@@ -310,4 +330,14 @@ TEST(stat_cmd, use_devfreq_counters_option) {
 #else
   GTEST_LOG_(INFO) << "This test tests an option only available on Android.";
 #endif
+}
+
+TEST(stat_cmd, per_thread_option) {
+  ASSERT_TRUE(StatCmd()->Run({"--per-thread", "sleep", "0.1"}));
+  TEST_IN_ROOT(StatCmd()->Run({"--per-thread", "-a", "--duration", "0.1"}));
+}
+
+TEST(stat_cmd, per_core_option) {
+  ASSERT_TRUE(StatCmd()->Run({"--per-core", "sleep", "0.1"}));
+  TEST_IN_ROOT(StatCmd()->Run({"--per-core", "-a", "--duration", "0.1"}));
 }

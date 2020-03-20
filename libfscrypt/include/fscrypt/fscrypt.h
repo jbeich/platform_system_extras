@@ -34,6 +34,7 @@ struct EncryptionOptions {
     int contents_mode;
     int filenames_mode;
     int flags;
+    bool use_hw_wrapped_key;
 
     // Ensure that "version" is not valid on creation and so must be explicitly set
     EncryptionOptions() : version(0) {}
@@ -46,11 +47,37 @@ struct EncryptionPolicy {
 
 void BytesToHex(const std::string& bytes, std::string* hex);
 
+unsigned int GetFirstApiLevel();
+
 bool OptionsToString(const EncryptionOptions& options, std::string* options_string);
+
+bool OptionsToStringForApiLevel(unsigned int first_api_level, const EncryptionOptions& options,
+                                std::string* options_string);
 
 bool ParseOptions(const std::string& options_string, EncryptionOptions* options);
 
+bool ParseOptionsForApiLevel(unsigned int first_api_level, const std::string& options_string,
+                             EncryptionOptions* options);
+
 bool EnsurePolicy(const EncryptionPolicy& policy, const std::string& directory);
+
+inline bool operator==(const EncryptionOptions& lhs, const EncryptionOptions& rhs) {
+    return (lhs.version == rhs.version) && (lhs.contents_mode == rhs.contents_mode) &&
+             (lhs.filenames_mode == rhs.filenames_mode) && (lhs.flags == rhs.flags) &&
+             (lhs.use_hw_wrapped_key == rhs.use_hw_wrapped_key);
+}
+
+inline bool operator!=(const EncryptionOptions& lhs, const EncryptionOptions& rhs) {
+    return !(lhs == rhs);
+}
+
+inline bool operator==(const EncryptionPolicy& lhs, const EncryptionPolicy& rhs) {
+    return lhs.key_raw_ref == rhs.key_raw_ref && lhs.options == rhs.options;
+}
+
+inline bool operator!=(const EncryptionPolicy& lhs, const EncryptionPolicy& rhs) {
+    return !(lhs == rhs);
+}
 
 }  // namespace fscrypt
 }  // namespace android
