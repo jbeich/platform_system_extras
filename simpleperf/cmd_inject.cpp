@@ -80,6 +80,9 @@ class InjectCommand : public Command {
     if (!record_file_reader_->ReadDataSection([this](auto r) { return ProcessRecord(r.get()); })) {
       return false;
     }
+    if (etm_decoder_ && !etm_decoder_->FinishData()) {
+      return false;
+    }
     PostProcess();
     output_fp_.reset(nullptr);
     return true;
@@ -174,13 +177,21 @@ class InjectCommand : public Command {
   }
 
   void PostProcess() {
-    for (const auto& pair : binary_map_) {
-      const std::string& binary_path = pair.first;
-      const BinaryInfo& binary = pair.second;
+    // Use sorted binary paths and addrs to create a stable output.
+    std::vector<std::string> sorted_binaries;
+    sorted_binaries.reserve(binary_map_.size());
+    for (auto& p : binary_map_) {
+      sorted_binaries.emplace_back(p.first);
+    }
+    std::sort(sorted_binaries.begin(), sorted_binaries.end());
+    for (const auto& binary_path : sorted_binaries) {
+      const BinaryInfo& binary = binary_map_[binary_path];
 
       // Write range_count_map.
-      fprintf(output_fp_.get(), "%zu\n", binary.range_count_map.size());
-      for (const auto& pair2 : binary.range_count_map) {
+      std::map<AddrPair, uint64_t> range_count_map(binary.range_count_map.begin(),
+                                                   binary.range_count_map.end());
+      fprintf(output_fp_.get(), "%zu\n", range_count_map.size());
+      for (const auto& pair2 : range_count_map) {
         const AddrPair& addr_range = pair2.first;
         uint64_t count = pair2.second;
 
@@ -192,8 +203,10 @@ class InjectCommand : public Command {
       fprintf(output_fp_.get(), "0\n");
 
       // Write branch_count_map.
-      fprintf(output_fp_.get(), "%zu\n", binary.branch_count_map.size());
-      for (const auto& pair2 : binary.branch_count_map) {
+      std::map<AddrPair, uint64_t> branch_count_map(binary.branch_count_map.begin(),
+                                                    binary.branch_count_map.end());
+      fprintf(output_fp_.get(), "%zu\n", branch_count_map.size());
+      for (const auto& pair2 : branch_count_map) {
         const AddrPair& branch = pair2.first;
         uint64_t count = pair2.second;
 
