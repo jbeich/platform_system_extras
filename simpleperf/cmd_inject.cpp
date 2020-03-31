@@ -80,6 +80,9 @@ class InjectCommand : public Command {
     if (!record_file_reader_->ReadDataSection([this](auto r) { return ProcessRecord(r.get()); })) {
       return false;
     }
+    if (etm_decoder_ && !etm_decoder_->FinishData()) {
+      return false;
+    }
     PostProcess();
     output_fp_.reset(nullptr);
     return true;
