@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "f3f988b3_dacff515",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-04-01T08:00:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "70be48bc_35290129",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 4
+      },
+      "revId": "4a75b413fc0de666321acdc2f21f4c796bf3593e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "99759864_e87db646",
         "filename": "/COMMIT_MSG",
         "patchSetId": 4
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "d9bfade5_b02b77f2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-04-01T08:00:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "99759864_e87db646",
+      "range": {
+        "startLine": 21,
+        "startChar": 30,
+        "endLine": 21,
+        "endChar": 34
+      },
+      "revId": "4a75b413fc0de666321acdc2f21f4c796bf3593e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6f7c36dc_080d5ccd",
         "filename": "simpleperf/cmd_inject.cpp",
         "patchSetId": 4
@@ -65,6 +113,24 @@
     },
     {
       "key": {
+        "uuid": "4588db12_672e61e3",
+        "filename": "simpleperf/cmd_inject.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-04-01T08:00:30Z",
+      "side": 1,
+      "message": "Added comment. The data size depends the record situation, but can be 18M in my experiment, so I think the access time is more important than the extra code added here.",
+      "parentUuid": "6f7c36dc_080d5ccd",
+      "revId": "4a75b413fc0de666321acdc2f21f4c796bf3593e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2ccb001e_4cbc62b7",
         "filename": "simpleperf/cmd_inject.cpp",
         "patchSetId": 4
@@ -76,6 +142,24 @@
       "writtenOn": "2020-04-01T06:54:35Z",
       "side": 1,
       "message": "Same question about range_count_map and branch_count_map. I am pretty sure that these get hit a lot, but want confirmation.",
+      "revId": "4a75b413fc0de666321acdc2f21f4c796bf3593e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9af28238_9ed0d272",
+        "filename": "simpleperf/cmd_inject.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-04-01T08:00:30Z",
+      "side": 1,
+      "message": "Added comment in the same place as the above question.",
+      "parentUuid": "2ccb001e_4cbc62b7",
       "revId": "4a75b413fc0de666321acdc2f21f4c796bf3593e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
