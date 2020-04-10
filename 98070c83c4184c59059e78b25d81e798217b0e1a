@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1e16c992_89f60d88",
+        "filename": "simpleperf/doc/executable_commands_reference.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 489,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-04-10T07:28:44Z",
+      "side": 1,
+      "message": "Remove \u0027Because\u0027 and just start with \"Using\".",
+      "range": {
+        "startLine": 489,
+        "startChar": 89,
+        "endLine": 489,
+        "endChar": 96
+      },
+      "revId": "98070c83c4184c59059e78b25d81e798217b0e1a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "972ad9ad_f116c263",
+        "filename": "simpleperf/doc/executable_commands_reference.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 490,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-04-10T07:28:44Z",
+      "side": 1,
+      "message": "\"the\" report",
+      "range": {
+        "startLine": 490,
+        "startChar": 80,
+        "endLine": 490,
+        "endChar": 86
+      },
+      "revId": "98070c83c4184c59059e78b25d81e798217b0e1a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
