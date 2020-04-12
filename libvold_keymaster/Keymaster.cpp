@@ -138,6 +138,32 @@ bool Keymaster::generateKey(const km::AuthorizationSet& inParams, std::string* k
     return true;
 }
 
+bool Keymaster::importKey(const km::AuthorizationSet& inParams, km::KeyFormat format,
+                          const KeyBuffer& key, std::string* outKeyBlob) {
+    km::ErrorCode km_error;
+    auto hidlCb = [&](km::ErrorCode ret, const hidl_vec<uint8_t>& keyBlob,
+                      const km::KeyCharacteristics& /*ignored*/) {
+        km_error = ret;
+        if (km_error != km::ErrorCode::OK) return;
+        if (outKeyBlob)
+            outKeyBlob->assign(reinterpret_cast<const char*>(&keyBlob[0]), keyBlob.size());
+    };
+    hidl_vec<uint8_t> hidlKey;
+    hidlKey.setToExternal(const_cast<uint8_t*>(reinterpret_cast<const uint8_t*>(key.data())),
+                          static_cast<size_t>(key.size()));
+
+    auto error = mDevice->importKey(inParams.hidl_data(), format, hidlKey, hidlCb);
+    if (!error.isOk()) {
+        LOG(ERROR) << "importKey failed: " << error.description();
+        return false;
+    }
+    if (km_error != km::ErrorCode::OK) {
+        LOG(ERROR) << "importKey failed, code " << int32_t(km_error);
+        return false;
+    }
+    return true;
+}
+
 bool Keymaster::exportKey(const KeyBuffer& kmKey, std::string* key) {
     auto kmKeyBlob = km::support::blob2hidlVec(std::string(kmKey.data(), kmKey.size()));
     km::ErrorCode km_error;

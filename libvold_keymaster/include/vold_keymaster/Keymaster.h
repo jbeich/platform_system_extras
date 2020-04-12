@@ -113,6 +113,9 @@ class Keymaster {
     explicit operator bool() { return mDevice.get() != nullptr; }
     // Generate a key in the keymaster from the given params.
     bool generateKey(const km::AuthorizationSet& inParams, std::string* key);
+    // Import a key into the keymaster
+    bool importKey(const km::AuthorizationSet& inParams, km::KeyFormat format, const KeyBuffer& key,
+                   std::string* outKeyBlob);
     // Exports a keymaster key with STORAGE_KEY tag wrapped with a per-boot ephemeral key
     bool exportKey(const KeyBuffer& kmKey, std::string* key);
     // If the keymaster supports it, permanently delete a key.
