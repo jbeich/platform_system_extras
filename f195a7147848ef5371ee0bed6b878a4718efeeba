@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a089c02_840c2e06",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-04-13T18:05:13Z",
+      "side": 1,
+      "message": "How much easier does it make it, i.e. how much code saved in the test?\n\nThis adds complexity, so we should make sure it\u0027s worth it.\n\nThe test actually just needs importKey and exportKey, right?  And it doesn\u0027t have to worry about zeroing buffers after use.  How hard would directly using keymaster be?",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 18
+      },
+      "revId": "f195a7147848ef5371ee0bed6b878a4718efeeba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
