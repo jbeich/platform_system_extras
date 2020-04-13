@@ -22,6 +22,29 @@
       "revId": "f195a7147848ef5371ee0bed6b878a4718efeeba",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2b91d628_5f4d37ab",
+        "filename": "libvold_keymaster/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-04-13T18:37:57Z",
+      "side": 1,
+      "message": "Seems that a lot of these libraries aren\u0027t actually used.",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 16
+      },
+      "revId": "f195a7147848ef5371ee0bed6b878a4718efeeba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
