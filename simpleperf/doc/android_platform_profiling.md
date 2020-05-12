@@ -1,5 +1,13 @@
 # Android platform profiling
 
+## Table of Contents
+- [Android platform profiling](#android-platform-profiling)
+  - [Table of Contents](#table-of-contents)
+  - [General Tips](#general-tips)
+  - [Start simpleperf from system_server process](#start-simpleperf-from-systemserver-process)
+
+## General Tips
+
 Here are some tips for Android platform developers, who build and flash system images on rooted
 devices:
 1. After running `adb root`, simpleperf can be used to profile any process or system wide.
@@ -33,4 +41,23 @@ $ python binary_cache_builder.py -lib $ANDROID_PRODUCT_OUT/symbols
 # --binary_filter option to only disassemble selected binaries.
 $ python report_html.py --add_source_code --source_dirs $ANDROID_BUILD_TOP --add_disassembly \
   --binary_filter surfaceflinger.so
+```
+
+## Start simpleperf from system_server process
+
+1. disable selinux by `adb shell setenforce 0`.
+
+2. Add below code:
+
+```java
+    try {
+        // for capability check
+        Os.prctl(OsConstants.PR_CAP_AMBIENT, OsConstants.PR_CAP_AMBIENT_RAISE, OsConstants.CAP_SYS_PTRACE, 0, 0);
+        // Write to /data instead of /data/local/tmp, because /data can be written by system user.
+        Runtime.getRuntime().exec("/system/bin/simpleperf record -g -p " + String.valueOf(Process.myPid()) +
+            " -o /data/perf.data --duration 30 --log-to-android-buffer --log verbose");
+    } catch (Exception e) {
+        Slog.e(TAG, "error while running simpleperf");
+        e.printStackTrace();
+    }
 ```
