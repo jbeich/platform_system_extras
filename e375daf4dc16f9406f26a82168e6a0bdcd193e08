@@ -25,6 +25,29 @@
     },
     {
       "key": {
+        "uuid": "f38042bc_ceff704c",
+        "filename": "simpleperf/doc/android_platform_profiling.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-05-14T20:40:00Z",
+      "side": 1,
+      "message": "number of",
+      "range": {
+        "startLine": 74,
+        "startChar": 21,
+        "endLine": 74,
+        "endChar": 22
+      },
+      "revId": "e375daf4dc16f9406f26a82168e6a0bdcd193e08",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "778420f4_62fca399",
         "filename": "simpleperf/doc/android_platform_profiling.md",
         "patchSetId": 1
@@ -48,6 +71,30 @@
     },
     {
       "key": {
+        "uuid": "405d1d37_149e9790",
+        "filename": "simpleperf/doc/android_platform_profiling.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-05-14T20:40:00Z",
+      "side": 1,
+      "message": "I\u0027m pretty sure this is a typo for \"up to\"",
+      "parentUuid": "778420f4_62fca399",
+      "range": {
+        "startLine": 75,
+        "startChar": 82,
+        "endLine": 75,
+        "endChar": 84
+      },
+      "revId": "e375daf4dc16f9406f26a82168e6a0bdcd193e08",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "799d3e2b_c7ca93d7",
         "filename": "simpleperf/doc/android_platform_profiling.md",
         "patchSetId": 1
@@ -59,6 +106,30 @@
       "writtenOn": "2020-05-14T20:37:08Z",
       "side": 1,
       "message": ".. at the same time.  To monitor more than 3 events, the --use-devfreq-counters option can be used to borrow from the counters used by the kernel.",
+      "range": {
+        "startLine": 76,
+        "startChar": 7,
+        "endLine": 77,
+        "endChar": 30
+      },
+      "revId": "e375daf4dc16f9406f26a82168e6a0bdcd193e08",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "091c26e9_9ef649b5",
+        "filename": "simpleperf/doc/android_platform_profiling.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-05-14T20:40:00Z",
+      "side": 1,
+      "message": "Do we use backticks for code notation in these .md files? If so, the option should be noted like that.",
+      "parentUuid": "799d3e2b_c7ca93d7",
       "range": {
         "startLine": 76,
         "startChar": 7,
