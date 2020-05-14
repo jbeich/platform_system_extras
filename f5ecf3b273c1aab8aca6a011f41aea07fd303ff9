@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "60eab7a7_2572bd29",
+        "filename": "simpleperf/doc/android_platform_profiling.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-05-14T20:38:59Z",
+      "side": 1,
+      "message": "Could provide some context on why this would be of interest.",
+      "revId": "f5ecf3b273c1aab8aca6a011f41aea07fd303ff9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "30f79ef5_16b59bd8",
+        "filename": "simpleperf/doc/android_platform_profiling.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-05-14T20:38:59Z",
+      "side": 1,
+      "message": "Also mention where this should be added.",
+      "range": {
+        "startLine": 50,
+        "startChar": 13,
+        "endLine": 50,
+        "endChar": 17
+      },
+      "revId": "f5ecf3b273c1aab8aca6a011f41aea07fd303ff9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
