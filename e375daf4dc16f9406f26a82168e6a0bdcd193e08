@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0f9023eb_114ffc4f",
+        "filename": "simpleperf/doc/android_platform_profiling.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-05-14T20:37:08Z",
+      "side": 1,
+      "message": "s/but/of which/",
+      "range": {
+        "startLine": 74,
+        "startChar": 62,
+        "endLine": 74,
+        "endChar": 65
+      },
+      "revId": "e375daf4dc16f9406f26a82168e6a0bdcd193e08",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "778420f4_62fca399",
+        "filename": "simpleperf/doc/android_platform_profiling.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-05-14T20:37:08Z",
+      "side": 1,
+      "message": "upto",
+      "range": {
+        "startLine": 75,
+        "startChar": 82,
+        "endLine": 75,
+        "endChar": 84
+      },
+      "revId": "e375daf4dc16f9406f26a82168e6a0bdcd193e08",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "799d3e2b_c7ca93d7",
+        "filename": "simpleperf/doc/android_platform_profiling.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-05-14T20:37:08Z",
+      "side": 1,
+      "message": ".. at the same time.  To monitor more than 3 events, the --use-devfreq-counters option can be used to borrow from the counters used by the kernel.",
+      "range": {
+        "startLine": 76,
+        "startChar": 7,
+        "endLine": 77,
+        "endChar": 30
+      },
+      "revId": "e375daf4dc16f9406f26a82168e6a0bdcd193e08",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
