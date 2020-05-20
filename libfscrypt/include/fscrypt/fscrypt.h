@@ -19,6 +19,14 @@
 
 #include <string>
 
+#if defined(FSCRYPT_POLICY_FLAG_IV_INO_LBLK_32)
+// When FSCRYPT_POLICY_FLAG_IV_INO_LBLK_32 is added to Bionic's linux/fscrypt.h
+// then this whole stanza should be removed.
+#warning "FSCRYPT_POLICY_FLAG_IV_INO_LBLK_32 definition below can be removed"
+#else
+#define FSCRYPT_POLICY_FLAG_IV_INO_LBLK_32 0x10
+#endif
+
 bool fscrypt_is_native();
 
 static const char* fscrypt_unencrypted_folder = "/unencrypted";

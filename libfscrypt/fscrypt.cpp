@@ -153,6 +153,9 @@ bool OptionsToStringForApiLevel(unsigned int first_api_level, const EncryptionOp
     if ((options.flags & FSCRYPT_POLICY_FLAG_IV_INO_LBLK_64)) {
         *options_string += "+inlinecrypt_optimized";
     }
+    if ((options.flags & FSCRYPT_POLICY_FLAG_IV_INO_LBLK_32)) {
+        *options_string += "+emmc_optimized";
+    }
     if (options.use_hw_wrapped_key) {
         *options_string += "+wrappedkey_v0";
     }
@@ -214,6 +217,8 @@ bool ParseOptionsForApiLevel(unsigned int first_api_level, const std::string& op
                 options->version = 2;
             } else if (flag == "inlinecrypt_optimized") {
                 options->flags |= FSCRYPT_POLICY_FLAG_IV_INO_LBLK_64;
+            } else if (flag == "emmc_optimized") {
+                options->flags |= FSCRYPT_POLICY_FLAG_IV_INO_LBLK_32;
             } else if (flag == "wrappedkey_v0") {
                 options->use_hw_wrapped_key = true;
             } else {
@@ -248,6 +253,16 @@ bool ParseOptionsForApiLevel(unsigned int first_api_level, const std::string& op
         LOG(ERROR) << "Adiantum must be both contents and filenames mode or neither, invalid options: " << options_string;
         return false;
     }
+
+    // You can't set both inlinecrypt_optimized and emmc_optimized
+    if ((options->flags & FSCRYPT_POLICY_FLAG_IV_INO_LBLK_64) &&
+        (options->flags & FSCRYPT_POLICY_FLAG_IV_INO_LBLK_32)) {
+        LOG(ERROR) << "At most one of inlinecrypt_optimized and emmc_optimized can be set, invalid "
+                      "options: "
+                   << options_string;
+        return false;
+    }
+
     return true;
 }
 
