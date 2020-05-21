@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8bd13891_a39f62cc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-05-21T16:27:54Z",
+      "side": 1,
+      "message": "I tested this on Cuttlefish with changing inlinecrypt_optimized to emmc_optimized in the fstab, and using an android-mainline kernel with the kernel patches applied.  It seems to work fine, and I verified that the directories actually have the IV_INO_LBLK_32 flag set.",
+      "range": {
+        "startLine": 10,
+        "startChar": 6,
+        "endLine": 10,
+        "endChar": 32
+      },
+      "revId": "6f1bb2fcd0b795aedde8d7f7b35b113560b15bc8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ba412e01_46548ace",
+        "filename": "libfscrypt/fscrypt.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-05-21T16:27:54Z",
+      "side": 1,
+      "message": "Note that DIRECT_KEY is mutually exclusive with these too.  The kernel will check all three: https://android-review.googlesource.com/c/kernel/common/+/1315439/2/fs/crypto/policy.c@139.  Maybe the same should be checked here?\n\n(Note, it\u0027s not strictly necessary to check this at all, since setting an encryption policy will mutually exclusive flags will fail anyway.)",
+      "range": {
+        "startLine": 258,
+        "startChar": 0,
+        "endLine": 259,
+        "endChar": 64
+      },
+      "revId": "6f1bb2fcd0b795aedde8d7f7b35b113560b15bc8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "905a38f6_d552845e",
+        "filename": "libfscrypt/include/fscrypt/fscrypt.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-05-21T16:27:54Z",
+      "side": 1,
+      "message": "This actually fails the build, and isn\u0027t just a \"warning\" (see below).  I\u0027m not sure we want to annoy people like this.  It might be better to leave this warning out, and then we can remove this ourselves later, along with the other fscrypt UAPI definitions in vold and VtsKernelEncryptionTest that are also waiting for a \u003clinux/fscrypt.h\u003e update.\n\n In file included from system/extras/libfscrypt/tests/fscrypt_test.cpp:19:\n system/extras/libfscrypt/include/fscrypt/fscrypt.h:22:2: error: \n \"FSCRYPT_POLICY_FLAG_IV_INO_LBLK_32 definition below can be rem\n oved\" [-Werror,-W#warnings]\n #warning \"FSCRYPT_POLICY_FLAG_IV_INO_LBLK_32 definition below can be removed\"\n  ^\n 1 error generated.",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 77
+      },
+      "revId": "6f1bb2fcd0b795aedde8d7f7b35b113560b15bc8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
