@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f825d054_1ecb9e04",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-05-29T19:19:34Z",
+      "side": 1,
+      "message": "I don\u0027t understand this at all.  mke2fs creates a journal that\u0027s compatible with the filesystem.  So what is the issue exactly?  And what does it have to do with encryption?",
+      "range": {
+        "startLine": 10,
+        "startChar": 19,
+        "endLine": 10,
+        "endChar": 66
+      },
+      "revId": "a43ffffcfe7e2cb6f3a5c9a78671985a8974268f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6940922a_c94f9c26",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-05-29T19:19:34Z",
+      "side": 1,
+      "message": "So is the goal of this patch to disable the 64bit feature in cases where it was previously enabled, or to enable it in cases where it was previously disabled?  The explanation is ambiguous.",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 60
+      },
+      "revId": "a43ffffcfe7e2cb6f3a5c9a78671985a8974268f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
