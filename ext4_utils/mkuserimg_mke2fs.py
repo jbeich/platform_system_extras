@@ -18,6 +18,7 @@ import argparse
 import logging
 import os
 import pkgutil
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -242,6 +243,17 @@ def main(argv):
     logging.error("Failed to run e2fsdroid_cmd: " + output)
     os.remove(args.output_file)
     sys.exit(4)
+
+  # run rechunksimg
+  if args.android_sparse:
+    with tempfile.NamedTemporaryFile() as old_out_file:
+      shutil.move(args.output_file, old_out_file.name)
+      rechunk_command = ["rechunksimg", old_out_file.name, args.output_file,
+                         str(64 << 20)]
+      output, ret = RunCommand(rechunk_command, {})
+      if ret != 0:
+        logging.error("Failed to run rechunksimg: " + output)
+        sys.exit(4)
 
 
 if __name__ == '__main__':

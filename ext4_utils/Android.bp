@@ -66,6 +66,7 @@ python_binary_host {
     required: [
         "mke2fs",
         "e2fsdroid",
+        "rechunksimg",
     ],
 }
 
