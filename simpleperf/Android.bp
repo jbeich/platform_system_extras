@@ -54,19 +54,6 @@ cc_defaults {
         "libz",
         "libziparchive",
     ],
-    target: {
-        // Required for LLVM.
-        darwin: {
-            host_ldlibs: [
-                "-lncurses",
-            ],
-        },
-        linux_glibc: {
-            host_ldlibs: [
-                "-lncurses",
-            ],
-        },
-    },
 }
 
 cc_library_static {
@@ -212,16 +199,6 @@ cc_defaults {
                 "libunwindstack",
             ],
         },
-        darwin: {
-            host_ldlibs: [
-                "-lncurses",
-            ],
-        },
-        linux_glibc: {
-            host_ldlibs: [
-                "-lncurses",
-            ],
-        },
         host: {
             static_libs: [
                 "libLLVMObject",
@@ -354,6 +331,19 @@ cc_binary {
             ],
         },
     },
+}
+
+cc_library {
+    name: "libsimpleperf_profcollect",
+    defaults: [
+        "simpleperf_shared_libs",
+    ],
+    host_supported: false,
+    srcs: ["profcollect.cpp"],
+    export_include_dirs: ["include"],
+    static_libs: ["libsimpleperf",],
+    shared_libs: ["libLLVM_android",],
+    visibility: ["//system/extras/profcollectd:__subpackages__"],
 }
 
 // simpleperf released in ndk
