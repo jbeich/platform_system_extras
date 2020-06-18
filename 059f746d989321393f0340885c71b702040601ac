@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aba8f59e_a7a966ab",
+        "filename": "profcollectd/libprofcollectd/hwtrace_provider.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-06-18T18:00:01Z",
+      "side": 1,
+      "message": "The comment isn\u0027t accurate. The generated profile is simpleperf/etm_branch_list.proto.",
+      "range": {
+        "startLine": 40,
+        "startChar": 44,
+        "endLine": 40,
+        "endChar": 71
+      },
+      "revId": "059f746d989321393f0340885c71b702040601ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ab178980_2647a078",
+        "filename": "profcollectd/libprofcollectd/scheduler.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-06-18T18:00:01Z",
+      "side": 1,
+      "message": "INTERVAL_SEC?",
+      "range": {
+        "startLine": 32,
+        "startChar": 46,
+        "endLine": 32,
+        "endChar": 54
+      },
+      "revId": "059f746d989321393f0340885c71b702040601ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9213ef4e_16f77811",
+        "filename": "profcollectd/libprofcollectd/scheduler.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-06-18T18:00:01Z",
+      "side": 1,
+      "message": "removed unused return value?",
+      "range": {
+        "startLine": 50,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 9
+      },
+      "revId": "059f746d989321393f0340885c71b702040601ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7e7d6010_9a198470",
+        "filename": "profcollectd/libprofcollectd/scheduler.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-06-18T18:00:01Z",
+      "side": 1,
+      "message": "Do we consider readability of the config? If yes, maybe better to output \"key \u003d value\" pairs.",
+      "range": {
+        "startLine": 176,
+        "startChar": 88,
+        "endLine": 176,
+        "endChar": 89
+      },
+      "revId": "059f746d989321393f0340885c71b702040601ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
