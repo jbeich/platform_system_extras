@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "3b3eb2c6_cb2f7ae9",
+        "filename": "simpleperf/cmd_stat.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-06-19T23:07:58Z",
+      "side": 1,
+      "message": "This are the default sort keys instead of a full list. Added comment.",
+      "parentUuid": "f69ec29b_1078f38d",
+      "revId": "ae43fdf91b73c83819f677f54bd89667943b92b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "7528ee69_0fb92934",
         "filename": "simpleperf/cmd_stat.cpp",
         "patchSetId": 1
@@ -33,6 +51,24 @@
       "revId": "ae43fdf91b73c83819f677f54bd89667943b92b1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4ee7bfef_a09e9be4",
+        "filename": "simpleperf/cmd_stat.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-06-19T23:07:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7528ee69_0fb92934",
+      "revId": "ae43fdf91b73c83819f677f54bd89667943b92b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "bda1653b_3901858b",
+        "filename": "simpleperf/cmd_stat_impl.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-06-19T23:07:58Z",
+      "side": 1,
+      "message": "That code won\u0027t be executed. Because BuildSummaryComparator is only called when one of them is true in cmd_stat.cpp.",
+      "parentUuid": "89aed54b_c3bf27f3",
+      "revId": "ae43fdf91b73c83819f677f54bd89667943b92b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f94d9ed7_32ad024d",
         "filename": "simpleperf/cmd_stat_test.cpp",
         "patchSetId": 1
@@ -64,6 +118,24 @@
       "writtenOn": "2020-06-19T22:41:52Z",
       "side": 1,
       "message": "\"comm\"?",
+      "revId": "ae43fdf91b73c83819f677f54bd89667943b92b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f7832187_ba5eb3c7",
+        "filename": "simpleperf/cmd_stat_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 388,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-06-19T23:07:58Z",
+      "side": 1,
+      "message": "comm isn\u0027t in default sort keys, show in help msg of --sort option.",
+      "parentUuid": "f94d9ed7_32ad024d",
       "revId": "ae43fdf91b73c83819f677f54bd89667943b92b1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
