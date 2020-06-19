@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f69ec29b_1078f38d",
+        "filename": "simpleperf/cmd_stat.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2020-06-19T22:41:52Z",
+      "side": 1,
+      "message": "Is `\"comm\"` an option for a key?  The documentation above alludes to that.",
+      "revId": "ae43fdf91b73c83819f677f54bd89667943b92b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7528ee69_0fb92934",
+        "filename": "simpleperf/cmd_stat.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2020-06-19T22:41:52Z",
+      "side": 1,
+      "message": "You should include optional",
+      "revId": "ae43fdf91b73c83819f677f54bd89667943b92b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "89aed54b_c3bf27f3",
+        "filename": "simpleperf/cmd_stat_impl.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2020-06-19T22:41:52Z",
+      "side": 1,
+      "message": "if neither `report_per_thread` or `report_per_core` are true, we might as well return `comparator` early?",
+      "revId": "ae43fdf91b73c83819f677f54bd89667943b92b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f94d9ed7_32ad024d",
+        "filename": "simpleperf/cmd_stat_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 388,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2020-06-19T22:41:52Z",
+      "side": 1,
+      "message": "\"comm\"?",
+      "revId": "ae43fdf91b73c83819f677f54bd89667943b92b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
