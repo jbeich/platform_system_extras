@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "bd13fcc0_31340272",
+        "filename": "profcollectd/libprofcollectd/hwtrace_provider.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1087625
+      },
+      "writtenOn": "2020-06-22T18:20:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aba8f59e_a7a966ab",
+      "range": {
+        "startLine": 40,
+        "startChar": 44,
+        "endLine": 40,
+        "endChar": 71
+      },
+      "revId": "059f746d989321393f0340885c71b702040601ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ab178980_2647a078",
         "filename": "profcollectd/libprofcollectd/scheduler.cpp",
         "patchSetId": 1
@@ -45,6 +69,30 @@
       "revId": "059f746d989321393f0340885c71b702040601ac",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "49b336dd_e983908d",
+        "filename": "profcollectd/libprofcollectd/scheduler.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1087625
+      },
+      "writtenOn": "2020-06-22T18:20:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ab178980_2647a078",
+      "range": {
+        "startLine": 32,
+        "startChar": 46,
+        "endLine": 32,
+        "endChar": 54
+      },
+      "revId": "059f746d989321393f0340885c71b702040601ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "655a3980_ab359658",
+        "filename": "profcollectd/libprofcollectd/scheduler.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1087625
+      },
+      "writtenOn": "2020-06-22T18:20:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9213ef4e_16f77811",
+      "range": {
+        "startLine": 50,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 9
+      },
+      "revId": "059f746d989321393f0340885c71b702040601ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7e7d6010_9a198470",
         "filename": "profcollectd/libprofcollectd/scheduler.cpp",
         "patchSetId": 1
@@ -82,6 +154,30 @@
       "writtenOn": "2020-06-18T18:00:01Z",
       "side": 1,
       "message": "Do we consider readability of the config? If yes, maybe better to output \"key \u003d value\" pairs.",
+      "range": {
+        "startLine": 176,
+        "startChar": 88,
+        "endLine": 176,
+        "endChar": 89
+      },
+      "revId": "059f746d989321393f0340885c71b702040601ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c4155524_039acad6",
+        "filename": "profcollectd/libprofcollectd/scheduler.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1087625
+      },
+      "writtenOn": "2020-06-22T18:20:59Z",
+      "side": 1,
+      "message": "Good point. Changed to a JSON output.",
+      "parentUuid": "7e7d6010_9a198470",
       "range": {
         "startLine": 176,
         "startChar": 88,
