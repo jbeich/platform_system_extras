@@ -1,0 +1,130 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bd268b13_ec552e78",
+        "filename": "simpleperf/cmd_record_test.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1046,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-06-30T08:35:03Z",
+      "side": 1,
+      "message": "are",
+      "range": {
+        "startLine": 1046,
+        "startChar": 48,
+        "endLine": 1046,
+        "endChar": 50
+      },
+      "revId": "207f710d7ac556a9c3caefba9f9d9013c05caea5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "daca0723_e90b966c",
+        "filename": "simpleperf/cmd_record_test.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1047,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-06-30T08:35:03Z",
+      "side": 1,
+      "message": "Delete \"Because\" or join it to the prior sentence with a comma instead. If you join the sentences, it might need a bit more rewording since there is some redundancy.",
+      "range": {
+        "startLine": 1047,
+        "startChar": 53,
+        "endLine": 1047,
+        "endChar": 60
+      },
+      "revId": "207f710d7ac556a9c3caefba9f9d9013c05caea5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8790ee53_0eabc79f",
+        "filename": "simpleperf/event_selection_set.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 494,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-06-30T08:35:03Z",
+      "side": 1,
+      "message": "`const auto\u0026`?",
+      "revId": "207f710d7ac556a9c3caefba9f9d9013c05caea5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c2bb9fe4_0cf44a0a",
+        "filename": "simpleperf/tracing.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-06-30T08:35:03Z",
+      "side": 1,
+      "message": "Consider using init-statement syntax for more clarity for code like this:\n\n```\nif (size_t pos \u003d s.find(\"name:\"); pos !\u003d std::string::npos) {\n...\n```\n\nLines get a bit longer, but I find increased clarity when the variable is declared in the if statement such that you know it isn\u0027t going to be reused further down in a dense code block.",
+      "range": {
+        "startLine": 336,
+        "startChar": 0,
+        "endLine": 337,
+        "endChar": 37
+      },
+      "revId": "207f710d7ac556a9c3caefba9f9d9013c05caea5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "27edbda0_32a33ef6",
+        "filename": "simpleperf/tracing.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 547,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-06-30T08:35:03Z",
+      "side": 1,
+      "message": "Weirdly enough, I think you have a failed test case for \"--5\", which would still work with `strtoull`, but probably ultimately be rejected by the kernel. Perhaps you shouldn\u0027t skip the \u0027-\u0027, although I didn\u0027t read through the kernel docs in detail.",
+      "revId": "207f710d7ac556a9c3caefba9f9d9013c05caea5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d8743077_3fae4a81",
+        "filename": "simpleperf/tracing.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-06-30T08:35:03Z",
+      "side": 1,
+      "message": "Seeing that this type gets used in a few places, does a typedef like `FieldNameSet`, `FieldSet`, or some similar name make sense here?",
+      "range": {
+        "startLine": 110,
+        "startChar": 14,
+        "endLine": 110,
+        "endChar": 35
+      },
+      "revId": "207f710d7ac556a9c3caefba9f9d9013c05caea5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
