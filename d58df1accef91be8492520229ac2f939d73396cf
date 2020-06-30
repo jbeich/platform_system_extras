@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5be710f4_e59d8175",
+        "filename": "simpleperf/cmd_record_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-06-30T00:44:58Z",
+      "side": 1,
+      "message": "why not just change this to .*?",
+      "range": {
+        "startLine": 305,
+        "startChar": 79,
+        "endLine": 305,
+        "endChar": 82
+      },
+      "revId": "d58df1accef91be8492520229ac2f939d73396cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
