@@ -46,6 +46,30 @@
       "revId": "d58df1accef91be8492520229ac2f939d73396cf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1c9d70eb_b31a2c4c",
+        "filename": "simpleperf/cmd_record_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1110113
+      },
+      "writtenOn": "2020-06-30T02:17:15Z",
+      "side": 1,
+      "message": "The main concern is we are uncertain if this test should be skipped for all QCOM SoC. My suggestion is to apply the fix to the SoCs that we have confirmed with QCOM which the test should be skipped.",
+      "parentUuid": "6275b6cc_3524d375",
+      "range": {
+        "startLine": 305,
+        "startChar": 79,
+        "endLine": 305,
+        "endChar": 82
+      },
+      "revId": "d58df1accef91be8492520229ac2f939d73396cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
