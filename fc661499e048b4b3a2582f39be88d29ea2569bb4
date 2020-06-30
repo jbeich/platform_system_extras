@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "c2eb1fd9_3f656570",
+        "filename": "simpleperf/cmd_dumprecord.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-06-30T18:53:55Z",
+      "side": 1,
+      "message": "Done. Changed to ExtractStringField.\n\nMy first draft was to call printf() inside these function, so used Dump*. Then I found returning a string seems better, so changed implemented. But forgot to change function name.",
+      "parentUuid": "eed5b0ba_a3c6daf1",
+      "revId": "fc661499e048b4b3a2582f39be88d29ea2569bb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "06c1e28b_11779890",
         "filename": "simpleperf/cmd_dumprecord.cpp",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2020-06-30T08:07:32Z",
       "side": 1,
       "message": "You can use http://www.cplusplus.com/reference/string/string/assign/ instead of looping here. The max size to copy would be `field.elem_count`.",
+      "revId": "fc661499e048b4b3a2582f39be88d29ea2569bb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "614b9f9f_389993f3",
+        "filename": "simpleperf/cmd_dumprecord.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-06-30T18:53:55Z",
+      "side": 1,
+      "message": "What I need here is strncpy() for std::string. assign seems doesn\u0027t support it.",
+      "parentUuid": "06c1e28b_11779890",
       "revId": "fc661499e048b4b3a2582f39be88d29ea2569bb4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
@@ -50,6 +86,24 @@
       "revId": "fc661499e048b4b3a2582f39be88d29ea2569bb4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f6990639_25c98b7d",
+        "filename": "simpleperf/cmd_dumprecord.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-06-30T18:53:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "da484a53_11db729c",
+      "revId": "fc661499e048b4b3a2582f39be88d29ea2569bb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
