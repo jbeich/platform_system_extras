@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "3256112d_8adc02ee",
+        "filename": "simpleperf/cmd_dumprecord.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-07-01T01:31:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c2eb1fd9_3f656570",
+      "revId": "fc661499e048b4b3a2582f39be88d29ea2569bb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "06c1e28b_11779890",
         "filename": "simpleperf/cmd_dumprecord.cpp",
         "patchSetId": 1
@@ -105,6 +123,24 @@
       "revId": "fc661499e048b4b3a2582f39be88d29ea2569bb4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f1389ffb_937ef602",
+        "filename": "simpleperf/cmd_dumprecord.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-07-01T01:31:35Z",
+      "side": 1,
+      "message": "Ah, I missed that the second one I mentioned was `std::string`, and expected it to also have a `char *` variant, but it doesn\u0027t. I\u0027m ok with it as written, but you could also just use `std::strncpy` too.",
+      "parentUuid": "286a932c_90d2112b",
+      "revId": "fc661499e048b4b3a2582f39be88d29ea2569bb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
