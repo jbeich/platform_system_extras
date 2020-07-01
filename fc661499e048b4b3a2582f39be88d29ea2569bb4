@@ -90,6 +90,24 @@
     },
     {
       "key": {
+        "uuid": "286a932c_90d2112b",
+        "filename": "simpleperf/cmd_dumprecord.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-07-01T01:24:59Z",
+      "side": 1,
+      "message": "Added comment for the data arg, explaining why need to copy like strncpy.\n\nstring\u0026 assign (const char* s, size_t n) doesn\u0027t behave like strncpy, it uses char_traits::move(dest, src, n) internally (as in https://source.corp.google.com/aosp-android10/external/libcxx/include/string;l\u003d2214). And char_traits::move() explicitly don\u0027t regard null-character, as in http://www.cplusplus.com/reference/string/char_traits/move/.\n\nstring\u0026 assign (const string\u0026 str, size_t subpos, size_t sublen \u003d npos)` also doesn\u0027t work. Because it needs a std::string. But I have a special const char* data, which needs special care to convert to std::string.",
+      "parentUuid": "f3e32157_a0193135",
+      "revId": "fc661499e048b4b3a2582f39be88d29ea2569bb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "da484a53_11db729c",
         "filename": "simpleperf/cmd_dumprecord.cpp",
         "patchSetId": 1
