@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "354aa17e_f9484104",
+        "filename": "simpleperf/cmd_record_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-07-01T07:43:46Z",
+      "side": 1,
+      "message": "This needs to be taken into consideration below. Perhaps below should be `has_hw_counter \u0026\u003d ...`?",
+      "revId": "294acb3066c0372b86c4528815438e1923c4c2bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
