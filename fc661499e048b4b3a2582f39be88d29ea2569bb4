@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "f3e32157_a0193135",
+        "filename": "simpleperf/cmd_dumprecord.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-07-01T00:55:20Z",
+      "side": 1,
+      "message": "`string\u0026 assign (const char* s, size_t n)` exists. That should work, shouldn\u0027t it? If for some reason that isn\u0027t `strncpy` (the docs I see are a bit ambiguous), then certainly the `string\u0026 assign (const string\u0026 str, size_t subpos, size_t sublen \u003d npos)` variant does what you want with a `subpos` of 0.",
+      "parentUuid": "614b9f9f_389993f3",
+      "revId": "fc661499e048b4b3a2582f39be88d29ea2569bb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "da484a53_11db729c",
         "filename": "simpleperf/cmd_dumprecord.cpp",
         "patchSetId": 1
