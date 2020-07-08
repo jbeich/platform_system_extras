@@ -34,6 +34,8 @@
 #include "read_elf.h"
 #include "utils.h"
 
+using namespace simpleperf;
+
 namespace simpleperf_dso_impl {
 
 std::string RemovePathSeparatorSuffix(const std::string& path) {
@@ -87,7 +89,9 @@ void DebugElfFileFinder::CollectBuildIdInDir(const std::string& dir) {
       CollectBuildIdInDir(path);
     } else {
       BuildId build_id;
-      if (GetBuildIdFromElfFile(path, &build_id) == ElfStatus::NO_ERROR) {
+      ElfStatus status;
+      auto elf = ElfFile::Open(path, &status);
+      if (status == ElfStatus::NO_ERROR && elf->GetBuildId(&build_id) == ElfStatus::NO_ERROR) {
         build_id_to_file_map_[build_id.ToString()] = path;
       }
     }
@@ -480,29 +484,14 @@ class ElfDso : public Dso {
     if (min_vaddr_ == uninitialized_value) {
       min_vaddr_ = 0;
       BuildId build_id = GetExpectedBuildId();
-      uint64_t addr;
-      uint64_t offset;
-      ElfStatus result;
-      auto tuple = SplitUrlInApk(debug_file_path_);
-      if (std::get<0>(tuple)) {
-        EmbeddedElf* elf = ApkInspector::FindElfInApkByName(std::get<1>(tuple),
-                                                            std::get<2>(tuple));
-        if (elf == nullptr) {
-          result = ElfStatus::FILE_NOT_FOUND;
-        } else {
-          result = ReadMinExecutableVirtualAddressFromEmbeddedElfFile(
-              elf->filepath(), elf->entry_offset(), elf->entry_size(), build_id, &addr, &offset);
-        }
+
+      ElfStatus status;
+      auto elf = ElfFile::Open(debug_file_path_, &build_id, &status);
+      if (elf) {
+        min_vaddr_ = elf->ReadMinExecutableVaddr(&file_offset_of_min_vaddr_);
       } else {
-        result = ReadMinExecutableVirtualAddressFromElfFile(debug_file_path_, build_id, &addr,
-                                                            &offset);
-      }
-      if (result != ElfStatus::NO_ERROR) {
-        LOG(WARNING) << "failed to read min virtual address of "
-                     << GetDebugFilePath() << ": " << result;
-      } else {
-        min_vaddr_ = addr;
-        file_offset_of_min_vaddr_ = offset;
+        LOG(WARNING) << "failed to read min virtual address of " << debug_file_path_ << ": "
+                     << status;
       }
     }
     *min_vaddr = min_vaddr_;
@@ -555,17 +544,9 @@ class ElfDso : public Dso {
       }
     };
     ElfStatus status;
-    std::tuple<bool, std::string, std::string> tuple = SplitUrlInApk(debug_file_path_);
-    if (std::get<0>(tuple)) {
-      EmbeddedElf* elf = ApkInspector::FindElfInApkByName(std::get<1>(tuple), std::get<2>(tuple));
-      if (elf == nullptr) {
-        status = ElfStatus::FILE_NOT_FOUND;
-      } else {
-        status = ParseSymbolsFromEmbeddedElfFile(elf->filepath(), elf->entry_offset(),
-                                                 elf->entry_size(), build_id, symbol_callback);
-      }
-    } else {
-      status = ParseSymbolsFromElfFile(debug_file_path_, build_id, symbol_callback);
+    auto elf = ElfFile::Open(debug_file_path_, &build_id, &status);
+    if (elf) {
+      status = elf->ParseSymbols(symbol_callback);
     }
     ReportReadElfSymbolResult(status, path_, debug_file_path_,
                               symbols_.empty() ? android::base::WARNING : android::base::DEBUG);
@@ -600,7 +581,11 @@ class KernelDso : public Dso {
           symbols.emplace_back(symbol.name, symbol.vaddr, symbol.len);
         }
       };
-      ElfStatus status = ParseSymbolsFromElfFile(vmlinux_, build_id, symbol_callback);
+      ElfStatus status;
+      auto elf = ElfFile::Open(vmlinux_, &build_id, &status);
+      if (elf) {
+        status = elf->ParseSymbols(symbol_callback);
+      }
       ReportReadElfSymbolResult(status, path_, vmlinux_);
     } else if (!kallsyms_.empty()) {
       symbols = ReadSymbolsFromKallsyms(kallsyms_);
@@ -667,7 +652,11 @@ class KernelModuleDso : public Dso {
         symbols.emplace_back(symbol.name, symbol.vaddr, symbol.len);
       }
     };
-    ElfStatus status = ParseSymbolsFromElfFile(debug_file_path_, build_id, symbol_callback);
+    ElfStatus status;
+    auto elf = ElfFile::Open(debug_file_path_, &build_id, &status);
+    if (elf) {
+      status = elf->ParseSymbols(symbol_callback);
+    }
     ReportReadElfSymbolResult(status, path_, debug_file_path_,
                               symbols_.empty() ? android::base::WARNING : android::base::DEBUG);
     SortAndFixSymbols(symbols);
@@ -732,18 +721,10 @@ const char* DsoTypeToString(DsoType dso_type) {
 }
 
 bool GetBuildIdFromDsoPath(const std::string& dso_path, BuildId* build_id) {
-  auto tuple = SplitUrlInApk(dso_path);
-  ElfStatus result;
-  if (std::get<0>(tuple)) {
-    EmbeddedElf* elf = ApkInspector::FindElfInApkByName(std::get<1>(tuple), std::get<2>(tuple));
-    if (elf == nullptr) {
-      result = ElfStatus::FILE_NOT_FOUND;
-    } else {
-      result = GetBuildIdFromEmbeddedElfFile(elf->filepath(), elf->entry_offset(),
-                                             elf->entry_size(), build_id);
-    }
-  } else {
-    result = GetBuildIdFromElfFile(dso_path, build_id);
+  ElfStatus status;
+  auto elf = ElfFile::Open(dso_path, &status);
+  if (status == ElfStatus::NO_ERROR && elf->GetBuildId(build_id) == ElfStatus::NO_ERROR) {
+    return true;
   }
-  return result == ElfStatus::NO_ERROR;
+  return false;
 }
