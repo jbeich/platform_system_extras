@@ -2,6 +2,46 @@
   "comments": [
     {
       "key": {
+        "uuid": "0bb0f255_352080df",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-07-09T21:04:42Z",
+      "side": 1,
+      "message": "\"We won\u0027t lose\"",
+      "range": {
+        "startLine": 14,
+        "startChar": 5,
+        "endLine": 14,
+        "endChar": 21
+      },
+      "revId": "3b318cb20f6b0c41a56a3a7a8f3b394b6211804f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cf155996_57037a0b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-07-09T21:04:42Z",
+      "side": 1,
+      "message": "This line is confusing to me, so should be reworded (and should also have a newline after it).",
+      "revId": "3b318cb20f6b0c41a56a3a7a8f3b394b6211804f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1f099b91_fc3599c5",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
