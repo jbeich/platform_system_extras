@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fedf47a4_82d55c8a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-07-15T20:54:22Z",
+      "side": 1,
+      "message": "ps2: fix format.",
+      "revId": "3569f41e3e70420dff1ca20a37bf94c8579f2dce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
