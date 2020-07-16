@@ -17,6 +17,7 @@
 #include <include/simpleperf_profcollect.h>
 
 #include "command.h"
+#include "ETMRecorder.h"
 #include "event_attr.h"
 #include "event_fd.h"
 #include "event_type.h"
@@ -25,7 +26,13 @@ namespace simpleperf {
 namespace etm {
 
 bool HasSupport() {
-  const EventType* type = FindEventTypeByName("cs-etm");
+  if (!ETMRecorder::GetInstance().CheckEtmSupport()) {
+    return false;
+  }
+  const EventType* type = FindEventTypeByName("cs-etm", false);
+  if (type == nullptr) {
+    return false;
+  }
   return IsEventAttrSupported(CreateDefaultPerfEventAttr(*type), type->name);
 }
 
