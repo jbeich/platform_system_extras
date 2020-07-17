@@ -16,6 +16,23 @@
       "revId": "3569f41e3e70420dff1ca20a37bf94c8579f2dce",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe232c80_00743f1f",
+        "filename": "simpleperf/cmd_record_test.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1039,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-07-17T19:11:04Z",
+      "side": 1,
+      "message": "Rather than commenting out future/broken code, you can keep it from bit-rotting as much by wrapping it in an `if (false)` or using a constexpr flag to control whether or not to actually execute this block.",
+      "revId": "3569f41e3e70420dff1ca20a37bf94c8579f2dce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
