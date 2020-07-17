@@ -33,6 +33,24 @@
       "revId": "3569f41e3e70420dff1ca20a37bf94c8579f2dce",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5de87e86_8ca70c33",
+        "filename": "simpleperf/cmd_record_test.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1039,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-07-17T20:21:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe232c80_00743f1f",
+      "revId": "3569f41e3e70420dff1ca20a37bf94c8579f2dce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
