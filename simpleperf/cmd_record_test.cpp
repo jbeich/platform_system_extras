@@ -244,7 +244,8 @@ bool HasHardwareCounter() {
           std::regex_search(hardware, std::regex(R"(Qualcomm Technologies, Inc MSM8909)")) ||
           std::regex_search(hardware, std::regex(R"(Qualcomm Technologies, Inc MSM8909W)")) ||
           std::regex_search(hardware, std::regex(R"(Qualcomm Technologies, Inc APQ8009W)")) ||
-          std::regex_search(hardware, std::regex(R"(Broadcom STB \(Flattened Device Tree\))"))) {
+          std::regex_search(hardware, std::regex(R"(Broadcom STB \(Flattened Device Tree\))")) ||
+          std::regex_search(hardware, std::regex(R"(Qualcomm MSM8974PRO)"))) {
         has_hw_counter = 0;
       }
     }
