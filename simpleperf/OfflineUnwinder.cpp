@@ -124,6 +124,7 @@ unwindstack::Regs* OfflineUnwinderImpl::GetBacktraceRegs(const RegSet& regs) {
 }
 
 static unwindstack::MapInfo* CreateMapInfo(const MapEntry* entry) {
+  std::string name_holder;
   const char* name = entry->dso->GetDebugFilePath().c_str();
   uint64_t pgoff = entry->pgoff;
   auto tuple = SplitUrlInApk(entry->dso->GetDebugFilePath());
@@ -134,6 +135,13 @@ static unwindstack::MapInfo* CreateMapInfo(const MapEntry* entry) {
     if (elf != nullptr) {
       name = elf->filepath().c_str();
       pgoff += elf->entry_offset();
+    }
+  } else if (entry->flags & map_flags::PROT_JIT_SYMFILE_MAP) {
+    // Remove location_in_file suffix, which isn't recognized by libunwindstack.
+    if (size_t colon_pos = entry->dso->GetDebugFilePath().find(':');
+        colon_pos != std::string::npos) {
+      name_holder = entry->dso->GetDebugFilePath().substr(0, colon_pos);
+      name = name_holder.c_str();
     }
   }
   return new unwindstack::MapInfo(nullptr, nullptr, entry->start_addr, entry->get_end_addr(), pgoff,

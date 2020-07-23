@@ -496,7 +496,7 @@ bool RecordCommand::PrepareRecording(Workload* workload) {
     // the debug-unwind cmd.
     bool keep_symfiles = dwarf_callchain_sampling_ && !unwind_dwarf_callchain_;
     bool sync_with_records = clockid_ == "monotonic";
-    jit_debug_reader_.reset(new JITDebugReader(keep_symfiles, sync_with_records));
+    jit_debug_reader_.reset(new JITDebugReader(record_filename_, keep_symfiles, sync_with_records));
     // To profile java code, need to dump maps containing vdex files, which are not executable.
     event_selection_set_.SetRecordNotExecutableMaps(true);
   }
@@ -1445,8 +1445,8 @@ bool RecordCommand::ProcessJITDebugInfo(const std::vector<JITDebugInfo>& debug_i
     if (info.type == JITDebugInfo::JIT_DEBUG_JIT_CODE) {
       uint64_t timestamp = jit_debug_reader_->SyncWithRecords() ? info.timestamp
                                                                 : last_record_timestamp_;
-      Mmap2Record record(*attr_id.attr, false, info.pid, info.pid,
-                         info.jit_code_addr, info.jit_code_len, 0, map_flags::PROT_JIT_SYMFILE_MAP,
+      Mmap2Record record(*attr_id.attr, false, info.pid, info.pid, info.jit_code_addr,
+                         info.jit_code_len, info.file_offset, map_flags::PROT_JIT_SYMFILE_MAP,
                          info.file_path, attr_id.ids[0], timestamp);
       if (!ProcessRecord(&record)) {
         return false;
@@ -1780,7 +1780,7 @@ bool RecordCommand::DumpBuildIdFeature() {
       }
       build_id_records.push_back(BuildIdRecord(true, UINT_MAX, build_id, path));
     } else if (dso->type() == DSO_ELF_FILE) {
-      if (dso->Path() == DEFAULT_EXECNAME_FOR_THREAD_MMAP) {
+      if (dso->Path() == DEFAULT_EXECNAME_FOR_THREAD_MMAP || dso->IsForJavaMethod()) {
         continue;
       }
       if (!GetBuildIdFromDsoPath(dso->Path(), &build_id)) {
