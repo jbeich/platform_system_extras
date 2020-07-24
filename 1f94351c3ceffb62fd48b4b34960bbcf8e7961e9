@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "002431e7_245f801d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-07-24T01:36:51Z",
+      "side": 1,
+      "message": "ps3: fix removing jit_app_cache file.",
+      "revId": "1f94351c3ceffb62fd48b4b34960bbcf8e7961e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
