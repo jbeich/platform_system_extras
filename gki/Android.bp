@@ -1,0 +1,4 @@
+makefile_goal {
+    name: "bootimage_soong",
+    product_out_path: "boot.img",
+}
