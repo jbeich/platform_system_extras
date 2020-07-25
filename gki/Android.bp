@@ -19,3 +19,53 @@ makefile_goal {
     // TODO(elsk): Work with multiple boot images by checking BOARD_KERNEL_BINARIES
     product_out_path: "boot.img",
 }
+
+python_binary_host {
+    name: "ota_from_raw_image",
+    srcs: ["ota_from_raw_image.py",],
+    version: {
+        py2: {
+            enabled: false,
+        },
+        py3: {
+            enabled: true,
+        },
+    },
+    required: [
+        "brillo_update_payload",
+    ],
+}
+
+// boot.img -> payload.bin
+genrule {
+    name: "bootimage_only_ota_payload_gen",
+    tools: ["ota_from_raw_image", "brillo_update_payload", "delta_generator"],
+    srcs: [":bootimage_soong"],
+    out: ["payload.bin"],
+    cmd: "$(location ota_from_raw_image) $(location brillo_update_payload) $(location delta_generator) $(in) $(out)",
+}
+
+// copy payload.bin to <apex>/etc/ota
+prebuilt_etc {
+    name: "bootimage_only_ota_payload",
+    src: ":bootimage_only_ota_payload_gen",
+    filename_from_src: true,
+    relative_install_path: "ota",
+}
+
+// payload.bin -> payload_properties.txt
+genrule {
+    name: "bootimage_only_ota_payload_properties_gen",
+    tools: ["brillo_update_payload", "delta_generator"],
+    srcs: [":bootimage_only_ota_payload_gen"],
+    out: ["payload_properties.txt"],
+    cmd: "GENERATOR=$(location delta_generator) $(location brillo_update_payload) properties --payload $(in) --properties $(out)",
+}
+
+// copy payload_properties.txt to <apex>/etc/ota
+prebuilt_etc {
+    name: "bootimage_only_ota_payload_properties",
+    src: ":bootimage_only_ota_payload_properties_gen",
+    filename_from_src: true,
+    relative_install_path: "ota",
+}
