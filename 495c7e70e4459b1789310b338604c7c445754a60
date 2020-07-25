@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a6feddb_b8f11554",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2020-07-25T01:42:16Z",
+      "side": 1,
+      "message": "WDYT? I think this is much easier than converting all the dependencies of boot image into Soong. This could be overly board, though...",
+      "revId": "495c7e70e4459b1789310b338604c7c445754a60",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
