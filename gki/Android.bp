@@ -73,3 +73,38 @@ prebuilt_etc {
     filename_from_src: true,
     relative_install_path: "ota",
 }
+
+apex_key {
+    name: "com.android.gki.key",
+    public_key: "com.android.gki.avbpubkey",
+    private_key: "com.android.gki.pem",
+}
+
+sh_binary {
+    name: "com.android.gki.preinstall",
+    src: "preinstall.sh",
+}
+
+sh_binary {
+    name: "com.android.gki.postinstall",
+    src: "postinstall.sh",
+}
+
+apex {
+    name: "com.android.gki",
+    manifest: "apex_manifest.json",
+    binaries: [
+        "update_engine_stable_client",
+        "com.android.gki.preinstall",
+        "com.android.gki.postinstall",
+    ],
+    prebuilts: [
+        "bootimage_only_ota_payload",
+        "bootimage_only_ota_payload_properties",
+    ],
+
+    // Key to sign image
+    key: "com.android.gki.key",
+    // Key to sign APEX. Left empty to use defaults.
+    // certificate: "",
+}
