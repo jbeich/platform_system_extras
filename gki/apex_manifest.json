@@ -1,0 +1,6 @@
+{
+  "name": "com.android.gki",
+  "version": 1,
+  "preInstallHook": "bin/com.android.gki.preinstall",
+  "postInstallHook": "bin/com.android.gki.postinstall"
+}
