@@ -92,3 +92,20 @@ genrule_defaults {
          "-v postInstallHook bin/com.android.gki.postinstall " +
          "> $(out)",
 }
+
+// Map $(PRODUCT_OUT)/boot.img to 5.4-android12-0.
+// This can only be installed if BOARD_KERNEL_BINARIES is not set, or "kernel"
+// is in BOARD_KERNEL_BINARIES.
+gki_apex {
+	name: "boot_5.4-android12-0",
+	product_out_path: "boot.img",
+	kmi_version: "5.4-android12-0",
+}
+
+// Map $(PRODUCT_OUT)/boot-5.4.img to 5.4-android12-0.
+// This can only be installed if "kernel-5.4" is in BOARD_KERNEL_BINARIES.
+gki_apex {
+	name: "boot-5.4_5.4-android12-0",
+	product_out_path: "boot-5.4.img",
+	kmi_version: "5.4-android12-0",
+}
