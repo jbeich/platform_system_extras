@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ff48d55_b9ad9e0a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2020-07-27T17:57:27Z",
+      "side": 1,
+      "message": "Mostly LGTM, but I think it should go in build/soong, and have an allow list in build/soong/android/neverallow.go to restrict its usage to only this use case.",
+      "revId": "b94f99e88dded7e276a117971f51015063e4c3ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b11ba742_efcfc0f4",
+        "filename": "gki/build/makefile_goal.go",
+        "patchSetId": 5
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2020-07-27T17:57:27Z",
+      "side": 1,
+      "message": "Remove this?  Or put a blank line after it, otherwise it will show up in the documentation at go/Android.bp.",
+      "revId": "b94f99e88dded7e276a117971f51015063e4c3ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0414ef44_0f9da7ba",
+        "filename": "gki/build/makefile_goal.go",
+        "patchSetId": 5
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2020-07-27T17:57:27Z",
+      "side": 1,
+      "message": "Put a comment here that will show up as the module type documentation at go/Android.bp.",
+      "revId": "b94f99e88dded7e276a117971f51015063e4c3ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
