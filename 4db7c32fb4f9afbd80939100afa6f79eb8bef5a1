@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "59c9b151_39b38e1c",
+        "filename": "gki/Android.bp",
+        "patchSetId": 5
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2020-07-27T17:58:35Z",
+      "side": 1,
+      "message": "IIRC, this is the default.",
+      "range": {
+        "startLine": 26,
+        "startChar": 4,
+        "endLine": 33,
+        "endChar": 6
+      },
+      "revId": "4db7c32fb4f9afbd80939100afa6f79eb8bef5a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
