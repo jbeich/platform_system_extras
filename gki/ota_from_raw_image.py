@@ -73,6 +73,10 @@ def CreateOtaFromRawImages(args):
       zip.write(img_path, arcname=os.path.join("IMAGES", name + ".img"))
       names.append(name)
     zip.writestr("META/ab_partitions.txt", "\n".join(names) + "\n")
+    zip.writestr("META/dynamic_partitions_info.txt", """
+virtual_ab=true
+super_partition_groups=
+    """)
 
   payload = Payload()
   additional_args = ["--is_partial_update", "true"]
