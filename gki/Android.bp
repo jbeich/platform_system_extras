@@ -78,6 +78,8 @@ sh_binary {
 // Common defaults for all GKI APEXes.
 apex_defaults {
     name: "com.android.gki_defaults",
+    // TODO(b/162973356): move APEX to the correct partition.
+    system_ext_specific: true,
     binaries: [
         "update_engine_stable_client",
         "com.android.gki.preinstall",
@@ -88,4 +90,25 @@ apex_defaults {
     key: "com.android.gki.key",
     // Key to sign APEX. Left empty to use defaults.
     certificate: "",
+}
+
+// Build factory GKI APEX for 5.4-android12-0.
+gki_apex {
+    name: "com.android.gki.kmi_5_4_android12_0",
+    kmi_version: "5.4-android12-0",
+    factory: true,
+}
+
+// Build GKI APEX 5.4-android12-0 from $(PRODUCT_OUT)/boot.img
+gki_apex {
+    name: "com.android.gki.kmi_5_4_android12_0_boot",
+    kmi_version: "5.4-android12-0",
+    product_out_path: "boot.img",
+}
+
+// Build GKI APEX 5.4-android12-0 from $(PRODUCT_OUT)/boot-5.4.img
+gki_apex {
+    name: "com.android.gki.kmi_5_4_android12_0_boot-5.4",
+    kmi_version: "5.4-android12-0",
+    product_out_path: "boot-5.4.img",
 }
