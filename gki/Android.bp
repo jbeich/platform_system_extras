@@ -89,3 +89,19 @@ apex_defaults {
     // Key to sign APEX. Left empty to use defaults.
     certificate: "",
 }
+
+// Build GKI APEX 5.4-android12-0 from $(PRODUCT_OUT)/boot.img
+// Module is only created if "kernel-5.4" is in BOARD_KERNEL_BINARIES.
+gki_apex {
+    name: "com.android.gki.boot.img_5.4-android12-0",
+    product_out_path: "boot.img",
+    kmi_version: "5.4-android12-0",
+}
+
+// Build GKI APEX 5.4-android12-0 from $(PRODUCT_OUT)/boot-5.4.img
+// Module is only created if "kernel-5.4" is in BOARD_KERNEL_BINARIES.
+gki_apex {
+    name: "com.android.gki.boot-5.4.img_5.4-android12-0",
+    product_out_path: "boot-5.4.img",
+    kmi_version: "5.4-android12-0",
+}
