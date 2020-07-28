@@ -16,6 +16,190 @@
       "revId": "1f94351c3ceffb62fd48b4b34960bbcf8e7961e9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1cfebcd0_5f7c0c4e",
+        "filename": "simpleperf/JITDebugReader.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-07-28T18:59:06Z",
+      "side": 1,
+      "message": "data",
+      "range": {
+        "startLine": 217,
+        "startChar": 26,
+        "endLine": 217,
+        "endChar": 31
+      },
+      "revId": "1f94351c3ceffb62fd48b4b34960bbcf8e7961e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "74f5b3fb_29c8c3a3",
+        "filename": "simpleperf/JITDebugReader.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-07-28T18:59:06Z",
+      "side": 1,
+      "message": "Two bools in one constructor also makes me want to suggest using enums instead for clarity.",
+      "range": {
+        "startLine": 257,
+        "startChar": 66,
+        "endLine": 258,
+        "endChar": 53
+      },
+      "revId": "1f94351c3ceffb62fd48b4b34960bbcf8e7961e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cf794f93_33446427",
+        "filename": "simpleperf/JITDebugReader.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 388,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-07-28T18:59:06Z",
+      "side": 1,
+      "message": "Can we use meaningful constants instead of true/false? This goes with my enum suggestions above.",
+      "range": {
+        "startLine": 388,
+        "startChar": 48,
+        "endLine": 388,
+        "endChar": 52
+      },
+      "revId": "1f94351c3ceffb62fd48b4b34960bbcf8e7961e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4997d8cb_7ef7b134",
+        "filename": "simpleperf/JITDebugReader.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-07-28T18:59:06Z",
+      "side": 1,
+      "message": "Note that this will still work fine with a 2 item enum if you define them such that `kJITDebug` is 1, and the default case is 0.",
+      "range": {
+        "startLine": 398,
+        "startChar": 17,
+        "endLine": 398,
+        "endChar": 23
+      },
+      "revId": "1f94351c3ceffb62fd48b4b34960bbcf8e7961e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e5155150_3cfbdd44",
+        "filename": "simpleperf/JITDebugReader.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-07-28T18:59:06Z",
+      "side": 1,
+      "message": "Make this an enum instead of a bool. Use meaningful names like `kJITDebug` so that callers know what is being used here (go/cstyle#Enumerator_Names and go/cstyle#Function_Argument_Comments). Do the same for `IsDescriptorChanged()` below.",
+      "range": {
+        "startLine": 172,
+        "startChar": 67,
+        "endLine": 172,
+        "endChar": 78
+      },
+      "revId": "1f94351c3ceffb62fd48b4b34960bbcf8e7961e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a7a3fdf8_745fbe46",
+        "filename": "simpleperf/OfflineUnwinder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-07-28T18:59:06Z",
+      "side": 1,
+      "message": "data\n\nThere are other `c_str()` calls in the is function that should also probably be changed to `data()`.",
+      "range": {
+        "startLine": 144,
+        "startChar": 25,
+        "endLine": 144,
+        "endChar": 30
+      },
+      "revId": "1f94351c3ceffb62fd48b4b34960bbcf8e7961e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6b6a960e_c08628ce",
+        "filename": "simpleperf/cmd_report_sample.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 664,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-07-28T18:59:06Z",
+      "side": 1,
+      "message": "data ?",
+      "range": {
+        "startLine": 664,
+        "startChar": 77,
+        "endLine": 664,
+        "endChar": 82
+      },
+      "revId": "1f94351c3ceffb62fd48b4b34960bbcf8e7961e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fe047b48_6d44d707",
+        "filename": "simpleperf/read_elf.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-07-28T18:59:06Z",
+      "side": 1,
+      "message": "data",
+      "range": {
+        "startLine": 501,
+        "startChar": 24,
+        "endLine": 501,
+        "endChar": 29
+      },
+      "revId": "1f94351c3ceffb62fd48b4b34960bbcf8e7961e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
