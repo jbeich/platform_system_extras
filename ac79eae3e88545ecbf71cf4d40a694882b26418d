@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "9e832311_5be0badb",
+        "filename": "simpleperf/demo/CppApi/app/build.gradle",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-07-29T01:40:31Z",
+      "side": 1,
+      "message": "Yeah, these kinds of links should probably not change until we have this updated in gerrit.",
+      "revId": "ac79eae3e88545ecbf71cf4d40a694882b26418d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "92c760d6_1726580e",
         "filename": "simpleperf/doc/android_application_profiling.md",
         "patchSetId": 1
@@ -22,6 +39,52 @@
       "revId": "ac79eae3e88545ecbf71cf4d40a694882b26418d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3d0543aa_ff9e8447",
+        "filename": "simpleperf/environment.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-07-29T01:40:31Z",
+      "side": 1,
+      "message": "This is ok, but I don\u0027t think the expectation is to just dodge the ayeaye checker. This can probably be condensed back into a single string. If anything, we should see if we can get a more inclusive alias added to `/proc/sys/kernel/` for this. I\u0027m not sure I have a great suggestion for that though, nor do I know how well the kernel community might receive such a patch.",
+      "range": {
+        "startLine": 285,
+        "startChar": 43,
+        "endLine": 285,
+        "endChar": 84
+      },
+      "revId": "ac79eae3e88545ecbf71cf4d40a694882b26418d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c0d6bb8f_411af51d",
+        "filename": "simpleperf/nonlinux_support/nonlinux_support.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-07-29T01:40:31Z",
+      "side": 1,
+      "message": "Another good synonym for this that I\u0027ve been suggesting is \"Basic\". I\u0027m not sure if that is better than NoOp, but I figured I should share that suggestion.",
+      "range": {
+        "startLine": 48,
+        "startChar": 6,
+        "endLine": 48,
+        "endChar": 10
+      },
+      "revId": "ac79eae3e88545ecbf71cf4d40a694882b26418d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
