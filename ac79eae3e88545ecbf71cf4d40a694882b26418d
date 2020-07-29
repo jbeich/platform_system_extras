@@ -1,0 +1,58 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004078400",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1375151?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "4a54bcc2_5680ae17",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-07-29T00:17:19Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027machine code\u0027 or \u0027C/C++ code\u0027; see https://developers.google.com/style/word-list#native for more details.",
+      "range": {
+        "startLine": 159,
+        "startChar": 18,
+        "endLine": 159,
+        "endChar": 24
+      },
+      "revId": "ac79eae3e88545ecbf71cf4d40a694882b26418d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004078400",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1375151?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "87d89989_c99bfc4f",
+        "filename": "simpleperf/doc/android_application_profiling.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-07-29T00:17:19Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027machine code\u0027 or \u0027C/C++ code\u0027; see https://developers.google.com/style/word-list#native for more details.",
+      "range": {
+        "startLine": 122,
+        "startChar": 46,
+        "endLine": 122,
+        "endChar": 52
+      },
+      "revId": "ac79eae3e88545ecbf71cf4d40a694882b26418d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
