@@ -8,13 +8,13 @@
   - [Profile a Java application](#profile-a-java-application)
   - [Profile a Java/C++ application](#profile-a-javac-application)
   - [Profile a Kotlin application](#profile-a-kotlin-application)
-- [Profile via app_api](#profile-via-appapi)
+- [Profile via app_api](#profile-via-app_api)
 
 ## Introduction
 
 Simpleperf is a native profiler used on Android platform. It can be used to profile Android
-applications. Its documentation is [here](https://android.googlesource.com/platform/system/extras/+/master/simpleperf/doc/README.md).
-Instructions of preparing your Android application for profiling are [here](https://android.googlesource.com/platform/system/extras/+/master/simpleperf/doc/README.md#Android-application-profiling).
+applications. Its documentation is [here](https://android.googlesource.com/platform/system/extras/+/main/simpleperf/doc/README.md).
+Instructions of preparing your Android application for profiling are [here](https://android.googlesource.com/platform/system/extras/+/main/simpleperf/doc/README.md#Android-application-profiling).
 This directory is to show examples of using simpleperf to profile Android applications. The
 meaning of each directory is as below:
 

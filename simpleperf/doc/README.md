@@ -6,8 +6,8 @@ profile both Java and C++ code on Android. The simpleperf executable can run on 
 and Python scripts can be used on Android >= N.
 
 Simpleperf is part of the Android Open Source Project.
-The source code is [here](https://android.googlesource.com/platform/system/extras/+/master/simpleperf/).
-The latest document is [here](https://android.googlesource.com/platform/system/extras/+/master/simpleperf/doc/README.md).
+The source code is [here](https://android.googlesource.com/platform/system/extras/+/main/simpleperf/).
+The latest document is [here](https://android.googlesource.com/platform/system/extras/+/main/simpleperf/doc/README.md).
 
 ## Table of Contents
 
@@ -20,7 +20,7 @@ The latest document is [here](https://android.googlesource.com/platform/system/e
   - [Executable commands reference](#executable-commands-reference)
   - [Scripts reference](#scripts-reference)
   - [Answers to common issues](#answers-to-common-issues)
-    - [Why we suggest profiling on Android &gt;= N devices?](#why-we-suggest-profiling-on-android-gt-n-devices)
+    - [Why we suggest profiling on Android >= N devices?](#why-we-suggest-profiling-on-android--n-devices)
     - [Suggestions about recording call graphs](#suggestions-about-recording-call-graphs)
     - [How to solve missing symbols in report?](#how-to-solve-missing-symbols-in-report)
     - [Fix broken callchain stopped at C functions](#fix-broken-callchain-stopped-at-c-functions)
@@ -156,7 +156,7 @@ try stack frame based call graphs instead.
 
 Simpleperf may need unstripped native binaries on the device to generate good dwarf based call
 graphs. It can be supported in two ways:
-1. Use unstripped native binaries when building the apk, as [here](https://android.googlesource.com/platform/system/extras/+/master/simpleperf/demo/SimpleperfExampleWithNative/app/profiling.gradle).
+1. Use unstripped native binaries when building the apk, as [here](https://android.googlesource.com/platform/system/extras/+/main/simpleperf/demo/SimpleperfExampleWithNative/app/profiling.gradle).
 2. Download unstripped native libraries on device, as [here](#fix-broken-callchain-stopped-at-c-functions).
 
 ### How to solve missing symbols in report?
@@ -218,22 +218,22 @@ disassembly for C++ code and fully compiled Java code. Simpleperf supports two w
      libs with debug info. Do it with
      `binary_cache_builder.py -i perf.data -lib <dir_of_lib_with_debug_info>`.
   c. Use report_html.py to generate report.html with annotated source code and disassembly,
-     as described [here](https://android.googlesource.com/platform/system/extras/+/master/simpleperf/doc/scripts_reference.md#report_html_py).
+     as described [here](https://android.googlesource.com/platform/system/extras/+/main/simpleperf/doc/scripts_reference.md#report_html_py).
 
 2. Through pprof.
 
   a. Generate perf.data and binary_cache as above.
   b. Use pprof_proto_generator.py to generate pprof proto file. `pprof_proto_generator.py`.
-  c. Use pprof to report a function with annotated source code, as described [here](https://android.googlesource.com/platform/system/extras/+/master/simpleperf/doc/scripts_reference.md#pprof_proto_generator_py).
+  c. Use pprof to report a function with annotated source code, as described [here](https://android.googlesource.com/platform/system/extras/+/main/simpleperf/doc/scripts_reference.md#pprof_proto_generator_py).
 
 ## Bugs and contribution
 
 Bugs and feature requests can be submitted at http://github.com/android-ndk/ndk/issues.
 Patches can be uploaded to android-review.googlesource.com as [here](https://source.android.com/setup/contribute/),
-or sent to email addresses listed [here](https://android.googlesource.com/platform/system/extras/+/master/simpleperf/OWNERS).
+or sent to email addresses listed [here](https://android.googlesource.com/platform/system/extras/+/main/simpleperf/OWNERS).
 
 If you want to compile simpleperf C++ source code, follow below steps:
-1. Download AOSP master branch as [here](https://source.android.com/setup/build/requirements).
+1. Download AOSP main branch as [here](https://source.android.com/setup/build/requirements).
 2. Build simpleperf.
 ```sh
 $ . build/envsetup.sh
