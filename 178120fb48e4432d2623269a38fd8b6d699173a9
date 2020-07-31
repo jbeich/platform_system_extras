@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "37633f6a_6a7fe70d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2020-07-31T00:24:51Z",
+      "side": 1,
+      "message": "Tianjie, can I keep the script here, or do you prefer me to move it to releasetools?",
+      "revId": "178120fb48e4432d2623269a38fd8b6d699173a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
