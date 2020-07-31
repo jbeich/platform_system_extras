@@ -80,6 +80,8 @@ super_partition_groups=
 
   payload = Payload()
   additional_args = ["--is_partial_update", "true"]
+  # TODO(b/162554855) Generate timestmamps correctly
+  additional_args += ["--max_timestamp", str(0x7FFFFFFFFFFFFFFF)]
   payload.Generate(tf, None, additional_args)
 
   if args.key:
