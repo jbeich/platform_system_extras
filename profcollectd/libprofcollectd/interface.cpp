@@ -24,10 +24,10 @@
 
 #include "binder_service.h"
 
-namespace android {
-namespace profcollectd {
+using com::android::server::profcollect::IProfCollectd;
+using android::profcollectd::ProfcollectdBinder;
 
-using ::com::android::server::profcollect::IProfCollectd;
+using namespace android;
 
 namespace {
 
@@ -81,6 +81,3 @@ void Process() {
 void ReadConfig() {
   GetIProfcollectdService()->ReadConfig();
 }
-
-}  // namespace profcollectd
-}  // namespace android
