@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dd79c6a9_c297fe93",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-08-04T18:05:39Z",
+      "side": 1,
+      "message": "This commit message is confusing.  How about:\n\n    ext4_utils: add declaration for ext4_bg_has_super_block()\n\n    Add a declaration for ext4_bg_has_super_block() so that the \n    encrypt-in-place code in vold can use it to determine whether a backup\n    superblock is present in a block group.",
+      "revId": "45a5b4f3a6c86c75d71af160c0d11c4155d1d85e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "be82a49c_cdfa31a4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-08-04T18:05:39Z",
+      "side": 1,
+      "message": "As on the system/vold change, please add  \"Bug: 161871210\" too.",
+      "revId": "45a5b4f3a6c86c75d71af160c0d11c4155d1d85e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
