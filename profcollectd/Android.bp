@@ -16,7 +16,7 @@
 
 cc_defaults {
     name: "libprofcollectd_defaults",
-    
+
     // We are only doing this for C++20. Can be removed after it becomes default.
     cpp_std: "experimental",
 
@@ -29,22 +29,22 @@ cc_defaults {
     ],
 }
 
-cc_binary {
+rust_binary {
     name: "profcollectctl",
 
-    defaults: ["libprofcollectd_defaults"],
+    srcs: ["profcollectctl.rs"],
 
-    srcs: ["profcollectctl.cpp"],
+    rustlibs: ["libprofcollectd_bindings"],
 
     shared_libs: ["libprofcollectd"],
 }
 
-cc_binary {
+rust_binary {
     name: "profcollectd",
 
-    defaults: ["libprofcollectd_defaults"],
+    srcs: ["profcollectd.rs"],
 
-    srcs: ["profcollectd.cpp"],
+    rustlibs: ["libprofcollectd_bindings"],
 
     shared_libs: ["libprofcollectd"],
 

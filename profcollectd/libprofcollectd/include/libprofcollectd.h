@@ -16,8 +16,11 @@
 
 #pragma once
 
-namespace android {
-namespace profcollectd {
+#include <stdbool.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 // Daemon side operations.
 void InitService(bool start);
@@ -29,5 +32,6 @@ void TraceOnce();
 void Process();
 void ReadConfig();
 
-}  // namespace profcollectd
-}  // namespace android
+#ifdef __cplusplus
+}
+#endif
