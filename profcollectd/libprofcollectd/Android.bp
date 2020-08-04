@@ -44,3 +44,12 @@ cc_library {
 
     export_include_dirs: ["include"],
 }
+
+rust_bindgen {
+    name: "libprofcollectd_bindings",
+    crate_name: "profcollectd",
+    source_stem: "libprofcollectd",
+    host_supported: true,
+    wrapper_src: "include/libprofcollectd.h",
+    cflags: ["--std=c99"],
+}
