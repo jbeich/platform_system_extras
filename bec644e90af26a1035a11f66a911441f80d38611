@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eb5321de_92a40a1c",
+        "filename": "profcollectd/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2020-08-05T17:37:49Z",
+      "side": 1,
+      "message": "Sorry, this likely landed after you wrote this, but you can now depend on this via a crate dependency rather than as included source, and we\u0027d prefer you do that for platform code.\n\nCheck https://docs.google.com/document/d/1u35hIQd-6FbuL00Qyh0baS_J1C21VWPF_GYesjr6U7g/edit#heading\u003dh.i8q749tpjcr7 as it\u0027s likely been updated since you read it.",
+      "revId": "bec644e90af26a1035a11f66a911441f80d38611",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "842f10a8_8dd9c67a",
+        "filename": "profcollectd/profcollectctl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2020-08-05T17:37:49Z",
+      "side": 1,
+      "message": "This indentation is inconsistent. Did you not run `rustfmt`?\n\nAlso legitimately, since this could be a bug in our tooling - are you using repo to upload patches? If so, did you not get a repo hook failure about this? (You should have, so if you didn\u0027t we need to figure out what\u0027s broken.)",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 2
+      },
+      "revId": "bec644e90af26a1035a11f66a911441f80d38611",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
