@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "8f328138_034cb33b",
+        "filename": "profcollectd/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1087625
+      },
+      "writtenOn": "2020-08-06T17:49:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eb5321de_92a40a1c",
+      "revId": "bec644e90af26a1035a11f66a911441f80d38611",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "842f10a8_8dd9c67a",
         "filename": "profcollectd/profcollectctl.rs",
         "patchSetId": 1
@@ -30,6 +48,30 @@
       "writtenOn": "2020-08-05T17:37:49Z",
       "side": 1,
       "message": "This indentation is inconsistent. Did you not run `rustfmt`?\n\nAlso legitimately, since this could be a bug in our tooling - are you using repo to upload patches? If so, did you not get a repo hook failure about this? (You should have, so if you didn\u0027t we need to figure out what\u0027s broken.)",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 2
+      },
+      "revId": "bec644e90af26a1035a11f66a911441f80d38611",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dc39b08e_0da9cfd0",
+        "filename": "profcollectd/profcollectctl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1087625
+      },
+      "writtenOn": "2020-08-06T17:49:29Z",
+      "side": 1,
+      "message": "Fixed.\n\n\u003e Did you not run `rustfmt`?\nNo. I can\u0027t find a rustfmt package on my glinux system.\n\n\u003e are you using repo to upload patches? If so, did you not get a repo hook failure about this?\nYes, I used repo, but the repo hook did not find this error.",
+      "parentUuid": "842f10a8_8dd9c67a",
       "range": {
         "startLine": 24,
         "startChar": 0,
