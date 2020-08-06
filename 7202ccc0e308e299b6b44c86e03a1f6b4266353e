@@ -42,6 +42,30 @@
     },
     {
       "key": {
+        "uuid": "24450f6f_e1df8407",
+        "filename": "simpleperf/JITDebugReader.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-08-06T17:58:50Z",
+      "side": 1,
+      "message": "No, it\u0027s also used in dso.cpp, so share it in this header file.",
+      "parentUuid": "8f227b45_b39bc123",
+      "range": {
+        "startLine": 39,
+        "startChar": 29,
+        "endLine": 39,
+        "endChar": 45
+      },
+      "revId": "7202ccc0e308e299b6b44c86e03a1f6b4266353e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "8e59cae9_f22039ac",
         "filename": "simpleperf/dso.cpp",
         "patchSetId": 1
@@ -53,6 +77,30 @@
       "writtenOn": "2020-08-06T17:22:54Z",
       "side": 1,
       "message": "Avoid adding symbols to the global namespace by using \u0027android::base::Endswith\u0027?  Line 45 of this file does this.",
+      "range": {
+        "startLine": 492,
+        "startChar": 10,
+        "endLine": 492,
+        "endChar": 18
+      },
+      "revId": "7202ccc0e308e299b6b44c86e03a1f6b4266353e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "292b985f_4e9c0a7b",
+        "filename": "simpleperf/dso.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 492,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-08-06T17:58:50Z",
+      "side": 1,
+      "message": "I feel it doesn\u0027t matter? It is limited only to a cpp file. And if there is a conflict, the compiler can detect it in compile time.",
+      "parentUuid": "8e59cae9_f22039ac",
       "range": {
         "startLine": 492,
         "startChar": 10,
