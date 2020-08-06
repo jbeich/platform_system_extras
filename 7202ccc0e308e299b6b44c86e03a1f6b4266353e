@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cbaa0bda_4324c241",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-08-06T17:22:54Z",
+      "side": 1,
+      "message": "LGTM except for nits.",
+      "revId": "7202ccc0e308e299b6b44c86e03a1f6b4266353e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8f227b45_b39bc123",
+        "filename": "simpleperf/JITDebugReader.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-08-06T17:22:54Z",
+      "side": 1,
+      "message": "Did you create these in preparation of a future refactor?  There\u0027s only one use of this in JITDebugReader.cpp so it is simpler to leave it as is.",
+      "range": {
+        "startLine": 39,
+        "startChar": 29,
+        "endLine": 39,
+        "endChar": 45
+      },
+      "revId": "7202ccc0e308e299b6b44c86e03a1f6b4266353e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8e59cae9_f22039ac",
+        "filename": "simpleperf/dso.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 492,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-08-06T17:22:54Z",
+      "side": 1,
+      "message": "Avoid adding symbols to the global namespace by using \u0027android::base::Endswith\u0027?  Line 45 of this file does this.",
+      "range": {
+        "startLine": 492,
+        "startChar": 10,
+        "endLine": 492,
+        "endChar": 18
+      },
+      "revId": "7202ccc0e308e299b6b44c86e03a1f6b4266353e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
