@@ -81,6 +81,30 @@
       "revId": "bec644e90af26a1035a11f66a911441f80d38611",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1bd45271_b0642e1c",
+        "filename": "profcollectd/profcollectctl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2020-08-06T18:32:06Z",
+      "side": 1,
+      "message": "rustfmt is present at prebuilts/rust/linux-x86/stable/rustfmt in your Android checkout.\n\nIt turns out that we don\u0027t have it on globally, it gets turned on per repo. It\u0027ll get turned on for system/extras soon, sorry about that.",
+      "parentUuid": "dc39b08e_0da9cfd0",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 2
+      },
+      "revId": "bec644e90af26a1035a11f66a911441f80d38611",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
