@@ -66,6 +66,30 @@
     },
     {
       "key": {
+        "uuid": "a1f4c2a0_a60a2325",
+        "filename": "simpleperf/JITDebugReader.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-08-06T18:43:20Z",
+      "side": 1,
+      "message": "Aah, sorry I missed that use.",
+      "parentUuid": "24450f6f_e1df8407",
+      "range": {
+        "startLine": 39,
+        "startChar": 29,
+        "endLine": 39,
+        "endChar": 45
+      },
+      "revId": "7202ccc0e308e299b6b44c86e03a1f6b4266353e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8e59cae9_f22039ac",
         "filename": "simpleperf/dso.cpp",
         "patchSetId": 1
@@ -101,6 +125,30 @@
       "side": 1,
       "message": "I feel it doesn\u0027t matter? It is limited only to a cpp file. And if there is a conflict, the compiler can detect it in compile time.",
       "parentUuid": "8e59cae9_f22039ac",
+      "range": {
+        "startLine": 492,
+        "startChar": 10,
+        "endLine": 492,
+        "endChar": 18
+      },
+      "revId": "7202ccc0e308e299b6b44c86e03a1f6b4266353e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c1f2c5c3_629131f1",
+        "filename": "simpleperf/dso.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 492,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-08-06T18:43:20Z",
+      "side": 1,
+      "message": "Sure either choice is fine.  But maybe have it consistent with line 45?",
+      "parentUuid": "292b985f_4e9c0a7b",
       "range": {
         "startLine": 492,
         "startChar": 10,
