@@ -158,6 +158,30 @@
       "revId": "7202ccc0e308e299b6b44c86e03a1f6b4266353e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "50ae172a_562b8ff6",
+        "filename": "simpleperf/dso.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 492,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-08-06T18:49:43Z",
+      "side": 1,
+      "message": "Sure, Done.",
+      "parentUuid": "c1f2c5c3_629131f1",
+      "range": {
+        "startLine": 492,
+        "startChar": 10,
+        "endLine": 492,
+        "endChar": 18
+      },
+      "revId": "7202ccc0e308e299b6b44c86e03a1f6b4266353e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
