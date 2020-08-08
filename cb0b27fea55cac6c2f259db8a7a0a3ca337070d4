@@ -81,6 +81,30 @@
       "revId": "cb0b27fea55cac6c2f259db8a7a0a3ca337070d4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "580dfe3c_85d16244",
+        "filename": "profcollectd/libprofcollectd/Android.bp",
+        "patchSetId": 5
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1052399
+      },
+      "writtenOn": "2020-08-08T23:13:40Z",
+      "side": 1,
+      "message": "Rust crate name, Android.bp module name, and final linked binary/library name are three different names. They could be confusing and difficult to control. When it is difficult to make all 3 natural, I would rather keep crate name right, as it is used most in Rust source code and  usually should be matching the module system file naming convention.\n\nWe probably can add more bindgen tests in some other place. Right now as I tried it, its limitations seem to cause more trouble than a manually written wrapper module. Please take a look of my modified CL at aosp/1394103, which does not depend on bindgen. I wish bindgen can generate at least the FFI declarations and wrappers as I used in libprofcollectd/mod.rs.",
+      "parentUuid": "81c44b4c_aa11c0bc",
+      "range": {
+        "startLine": 65,
+        "startChar": 17,
+        "endLine": 65,
+        "endChar": 29
+      },
+      "revId": "cb0b27fea55cac6c2f259db8a7a0a3ca337070d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
