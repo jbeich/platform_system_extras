@@ -105,6 +105,30 @@
       "revId": "bec644e90af26a1035a11f66a911441f80d38611",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5a7374bb_065dd626",
+        "filename": "profcollectd/profcollectctl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1087625
+      },
+      "writtenOn": "2020-08-08T03:01:50Z",
+      "side": 1,
+      "message": "Tried to repo upload again, now the rustfmt hook is correctly producing warnings.",
+      "parentUuid": "1bd45271_b0642e1c",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 2
+      },
+      "revId": "bec644e90af26a1035a11f66a911441f80d38611",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
