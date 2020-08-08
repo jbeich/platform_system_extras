@@ -34,6 +34,29 @@
       "revId": "cb0b27fea55cac6c2f259db8a7a0a3ca337070d4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6d238ecd_2b4f8e8b",
+        "filename": "profcollectd/libprofcollectd/Android.bp",
+        "patchSetId": 5
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1052399
+      },
+      "writtenOn": "2020-08-08T05:42:05Z",
+      "side": 1,
+      "message": "profcollectd has multiple meanings in this project. It\u0027s confusing. For example, in profcollectd.rs there is an unusual and confusing \"extern crate profcollectd\" statement.\nIf you use bindgen, I think this rust FFI binding crate could be named \u0027libprofcollectd\u0027 or \"libprofcollectd_rust\" and you can keep \u0027profcollectd\u0027 for the main binary.\n\nAn alternative is not to use bindgen. I see that only 5 functions in libprofcollectd.h are used in Rust. They don\u0027t take argument or return value. They are perfect external C FFI functions. It\u0027s simpler just to define 5 Rust wrapper functions for them in a libprofcollectd.rs module and wrap the unsafe calls inside. Your 2 other .rs files will call these wrappers and be much simpler. Keeping libprofcollectd.{h,rs} in sync should not be too challenging when they are small. You can move to bindgen later when the .h file grows big.",
+      "range": {
+        "startLine": 65,
+        "startChar": 17,
+        "endLine": 65,
+        "endChar": 29
+      },
+      "revId": "cb0b27fea55cac6c2f259db8a7a0a3ca337070d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
