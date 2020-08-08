@@ -16,6 +16,23 @@
       "revId": "0ed9d100411f30d813759c61f714bbf588334bc1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eb0ca977_fc5d8f73",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2020-08-08T00:51:56Z",
+      "side": 1,
+      "message": "Are you planning to enable darwin build on presubmit to prevent people from submitting offending changes in the future?",
+      "revId": "0ed9d100411f30d813759c61f714bbf588334bc1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
