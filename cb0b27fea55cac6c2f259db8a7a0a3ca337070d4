@@ -57,6 +57,30 @@
       "revId": "cb0b27fea55cac6c2f259db8a7a0a3ca337070d4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "81c44b4c_aa11c0bc",
+        "filename": "profcollectd/libprofcollectd/Android.bp",
+        "patchSetId": 5
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1087625
+      },
+      "writtenOn": "2020-08-08T06:07:34Z",
+      "side": 1,
+      "message": "\u003e there is an unusual and confusing \"extern crate profcollectd\" statement.\nIf you use bindgen, I think this rust FFI binding crate could be named \u0027libprofcollectd\u0027 or \"libprofcollectd_rust\" and you can keep \u0027profcollectd\u0027 for the main binary.\n\nThis was my original naming (see PS1). But the new bindgen rule now requires: \" library filenames must start with lib\u003ccrate_name\u003e\"\n\nIf I name the crate name as libprofcollectd, the library filename becomes \"liblibprofcollectd\". This seems super weird.\n\n\n\u003e An alternative is not to use bindgen.\nThis is indeed possible, however as the pilot program, I think we should exercise the rust bindgen as much as possible.",
+      "parentUuid": "6d238ecd_2b4f8e8b",
+      "range": {
+        "startLine": 65,
+        "startChar": 17,
+        "endLine": 65,
+        "endChar": 29
+      },
+      "revId": "cb0b27fea55cac6c2f259db8a7a0a3ca337070d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
