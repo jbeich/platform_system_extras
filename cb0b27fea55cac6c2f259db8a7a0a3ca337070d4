@@ -16,6 +16,24 @@
       "revId": "cb0b27fea55cac6c2f259db8a7a0a3ca337070d4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6c0c7efd_483efb06",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1087625
+      },
+      "writtenOn": "2020-08-08T05:03:34Z",
+      "side": 1,
+      "message": "I moved that change out of the topic as it\u0027s already +2\u0027ed... https://r.android.com/1388696",
+      "parentUuid": "c8f8a55a_7abcbb73",
+      "revId": "cb0b27fea55cac6c2f259db8a7a0a3ca337070d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
