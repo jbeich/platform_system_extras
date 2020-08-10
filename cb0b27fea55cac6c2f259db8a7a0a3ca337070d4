@@ -105,6 +105,30 @@
       "revId": "cb0b27fea55cac6c2f259db8a7a0a3ca337070d4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0a52700b_e2614187",
+        "filename": "profcollectd/libprofcollectd/Android.bp",
+        "patchSetId": 5
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1052399
+      },
+      "writtenOn": "2020-08-10T05:47:58Z",
+      "side": 1,
+      "message": "Please also take a look of aosp/1394503, which uses bindgen to generate FFI declarations for a C++ header file. The C++ bool type has less trouble than C99\u0027s. Rust safe wrappers are added for FFI extern \"C\" functions just like aosp/1394103. The bindgen is called through bindgen.sh in a genrule module to have more controls of the output file and flags. Maybe it can be simplified further with rust_bindgen module or something else.",
+      "parentUuid": "580dfe3c_85d16244",
+      "range": {
+        "startLine": 65,
+        "startChar": 17,
+        "endLine": 65,
+        "endChar": 29
+      },
+      "revId": "cb0b27fea55cac6c2f259db8a7a0a3ca337070d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
