@@ -145,6 +145,53 @@
       "revId": "b1a3d97351b497130d7ba4fa0f9b151b4b4aec3c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2d8a12a6_ec7f5320",
+        "filename": "profcollectd/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1115178
+      },
+      "writtenOn": "2020-08-10T20:11:36Z",
+      "side": 1,
+      "message": "The original CL used it correctly, with the additional cflags:\n\n rust_bindgen {\n    name: \"libprofcollectd_bindings\",\n    crate_name: \"profcollectd_bindings\",\n    source_stem: \"libprofcollectd_bindings\",\n    host_supported: true,                       // Is host support necessary?\n    wrapper_src: \"include/libprofcollectd.hpp\",\n    cflags: [\"--std\u003dc++17\"],\n }\n\nThis should probably go in profcollectd/libprofcollectd/Android.bp",
+      "parentUuid": "f5a95b02_a3cdc8ce",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 7
+      },
+      "revId": "b1a3d97351b497130d7ba4fa0f9b151b4b4aec3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d20e8a0d_0c43d82a",
+        "filename": "profcollectd/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1115178
+      },
+      "writtenOn": "2020-08-10T20:11:36Z",
+      "side": 1,
+      "message": "With rust_bindgen, this is no longer necessary and should be used as a rust library dependency.\n\n rustlibs:[\"libprofcollectd_bindings\"],",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 35
+      },
+      "revId": "b1a3d97351b497130d7ba4fa0f9b151b4b4aec3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
