@@ -36,6 +36,23 @@
     },
     {
       "key": {
+        "uuid": "3a8bc4dd_9313c1de",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2020-08-10T20:10:21Z",
+      "side": 1,
+      "message": "Why was this patch reworked at all? The previous version seemed to work fine to me. This one is much more complicated and introduces a set of manual wrapper functions that need to be maintained.\n\nWere you worried about bindgen operating on namespaced C++ functions? That is supported both as underscored names (how they were previously being used) and via `--enable-cxx-namespaces`, which outputs nested modules.",
+      "revId": "b1a3d97351b497130d7ba4fa0f9b151b4b4aec3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1f2715fa_f9b839b1",
         "filename": "profcollectd/Android.bp",
         "patchSetId": 3
