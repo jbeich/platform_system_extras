@@ -80,6 +80,30 @@
       "revId": "b1a3d97351b497130d7ba4fa0f9b151b4b4aec3c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f145e2b2_ded4cd2e",
+        "filename": "profcollectd/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1115178
+      },
+      "writtenOn": "2020-08-10T16:15:22Z",
+      "side": 1,
+      "message": "Yi and I spoke offline a bit but just to add a comment here, it\u0027s still unclear why this was changed from rust_bindgen.\n\nIn general we should be using rust_bindgen to generate bindings now, and use those bindings as crates.",
+      "parentUuid": "2e193c65_e2497a28",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 7
+      },
+      "revId": "b1a3d97351b497130d7ba4fa0f9b151b4b4aec3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
