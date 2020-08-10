@@ -45,6 +45,23 @@
       "revId": "a43ffffcfe7e2cb6f3a5c9a78671985a8974268f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7fda23a6_44e47a71",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-08-10T23:54:13Z",
+      "side": 1,
+      "message": "Is this still being worked on?  If not, I\u0027m going to abandon this.  Also see my previous comments -- I still don\u0027t understand what problem this change is supposedly fixing.  If this change is still needed, please explain it properly.",
+      "revId": "a43ffffcfe7e2cb6f3a5c9a78671985a8974268f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
