@@ -33,6 +33,29 @@
       "revId": "b1a3d97351b497130d7ba4fa0f9b151b4b4aec3c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1f2715fa_f9b839b1",
+        "filename": "profcollectd/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1115178
+      },
+      "writtenOn": "2020-08-10T15:29:07Z",
+      "side": 1,
+      "message": "Is there a reason we can\u0027t use rust_bindgen here? This looks like it just calls bindgen with a particular clang flag, which could be accomplished via\n\n rust_bindgen {\n   [...]\n   cflags: [\"--std\u003dc++17\"],\n   [...]\n }",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 7
+      },
+      "revId": "b1a3d97351b497130d7ba4fa0f9b151b4b4aec3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
