@@ -56,6 +56,30 @@
       "revId": "b1a3d97351b497130d7ba4fa0f9b151b4b4aec3c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2e193c65_e2497a28",
+        "filename": "profcollectd/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1087625
+      },
+      "writtenOn": "2020-08-10T15:31:33Z",
+      "side": 1,
+      "message": "Please see the review comments of the original cl, aosp/1390937",
+      "parentUuid": "1f2715fa_f9b839b1",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 7
+      },
+      "revId": "b1a3d97351b497130d7ba4fa0f9b151b4b4aec3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
