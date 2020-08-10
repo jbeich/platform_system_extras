@@ -53,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "4d2ecf4e_727589db",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1052399
+      },
+      "writtenOn": "2020-08-10T21:04:18Z",
+      "side": 1,
+      "message": "I tried --enable-cxx-namespaces but it seems to make things more complicated, with an additional \u0027root\u0027 mod layer. That doesn\u0027t seem right to me.\n\nC++ namespace is not an issue here. Yi\u0027s original design already abandoned namespace.\n\nPlease see my previous comments in Yi\u0027s CL. This is mostly based on Yi\u0027s design, with addition of safe Rust abstraction over unsafe code in a module. I wish core bindgen or some other tool can generate that, but we should design better Rust API, not limited by bindgen or rust_bindgen\u0027s capability.",
+      "parentUuid": "3a8bc4dd_9313c1de",
+      "revId": "b1a3d97351b497130d7ba4fa0f9b151b4b4aec3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1f2715fa_f9b839b1",
         "filename": "profcollectd/Android.bp",
         "patchSetId": 3
@@ -183,6 +201,30 @@
       "writtenOn": "2020-08-10T20:11:36Z",
       "side": 1,
       "message": "With rust_bindgen, this is no longer necessary and should be used as a rust library dependency.\n\n rustlibs:[\"libprofcollectd_bindings\"],",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 35
+      },
+      "revId": "b1a3d97351b497130d7ba4fa0f9b151b4b4aec3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b45844fe_2f620c7f",
+        "filename": "profcollectd/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1052399
+      },
+      "writtenOn": "2020-08-10T21:04:18Z",
+      "side": 1,
+      "message": "Is there a way to use rust_bindgen to generate a file to include, like what is used in mod.rs? Does the rust_bindgen library contain only the FFI declarations from bindgen?",
+      "parentUuid": "d20e8a0d_0c43d82a",
       "range": {
         "startLine": 35,
         "startChar": 0,
