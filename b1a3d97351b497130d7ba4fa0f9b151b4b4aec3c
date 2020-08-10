@@ -16,6 +16,23 @@
       "revId": "b1a3d97351b497130d7ba4fa0f9b151b4b4aec3c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2662940f_06f1d88a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1208973
+      },
+      "writtenOn": "2020-08-10T14:25:14Z",
+      "side": 1,
+      "message": "This looks very similar to the original CL.  Was it moved out just to add the bindgen code?\n\n+mmaurer, who I believe reviewed the original CL, in case he wants to follow up on anything.",
+      "revId": "b1a3d97351b497130d7ba4fa0f9b151b4b4aec3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
