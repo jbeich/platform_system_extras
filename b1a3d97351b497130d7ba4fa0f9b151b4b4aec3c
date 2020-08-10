@@ -104,6 +104,30 @@
       "revId": "b1a3d97351b497130d7ba4fa0f9b151b4b4aec3c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f5a95b02_a3cdc8ce",
+        "filename": "profcollectd/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1052399
+      },
+      "writtenOn": "2020-08-10T19:46:13Z",
+      "side": 1,
+      "message": "Ivan, Yi and I are not that familiar with the rust_bindgen syntax. Could you help translate the genrule module into rust_bindgen, if that\u0027s possible?\nI care more about using conventional Rust module structure and abstraction over C++ library. So I prefer the .hpp file and abstraction module in the mod.rs file.",
+      "parentUuid": "f145e2b2_ded4cd2e",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 7
+      },
+      "revId": "b1a3d97351b497130d7ba4fa0f9b151b4b4aec3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
