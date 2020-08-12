@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f5b65ce9_874f9a9e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1052399
+      },
+      "writtenOn": "2020-08-12T19:00:48Z",
+      "side": 1,
+      "message": "Ivan, thanks for the new .bp rules. They look great.\nI have only 2 more suggestions for Yi.\n",
+      "revId": "fcb3129bf9176cb657e420c9babf7137f0c047c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d3c88d82_78ab6de0",
+        "filename": "profcollectd/libprofcollectd/mod.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1052399
+      },
+      "writtenOn": "2020-08-12T19:00:48Z",
+      "side": 1,
+      "message": "Yi, please check if any of these Rust wrappers should be declared as unsafe and let the callers to use them in an unsafe block. It\u0027s your design choice.",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 6,
+        "endChar": 53
+      },
+      "revId": "fcb3129bf9176cb657e420c9babf7137f0c047c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e426496e_f8f96571",
+        "filename": "profcollectd/profcollectctl.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1052399
+      },
+      "writtenOn": "2020-08-12T19:00:48Z",
+      "side": 1,
+      "message": "Yi, this imports module libprofcollectd directly into this binary crate.\nIf you consider this binary program as a client of libprofcollectd,\nyou can make libprofcollectd module into a Rust library.\nIt may be named libprofcollectd_rust to avoid name collision with existing C++ version,\nbut it can still use libprofcollectd as crate name in Rust.\nYou will replace this mod import statement with\n  extern crate libprofcollectd;\n\nand define a libprofcollectd_rust module in .bp file,\nand link with that library instead of libprofcollectd_bindgen.\n\nOn the other hand, you have already another binary crate named libprofcollectd.\nCould the binary crate be named profcollectd or profcollectd_rust?",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 20
+      },
+      "revId": "fcb3129bf9176cb657e420c9babf7137f0c047c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
