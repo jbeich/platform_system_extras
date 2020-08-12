@@ -190,6 +190,30 @@
     },
     {
       "key": {
+        "uuid": "6d1305fb_e1690193",
+        "filename": "profcollectd/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1115178
+      },
+      "writtenOn": "2020-08-12T13:44:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2d8a12a6_ec7f5320",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 7
+      },
+      "revId": "b1a3d97351b497130d7ba4fa0f9b151b4b4aec3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d20e8a0d_0c43d82a",
         "filename": "profcollectd/Android.bp",
         "patchSetId": 3
@@ -234,6 +258,30 @@
       "revId": "b1a3d97351b497130d7ba4fa0f9b151b4b4aec3c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5f390f61_ac990b60",
+        "filename": "profcollectd/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1115178
+      },
+      "writtenOn": "2020-08-12T13:44:07Z",
+      "side": 1,
+      "message": "From offline discussions, see new patchset that uses the bindings as a crate.",
+      "parentUuid": "b45844fe_2f620c7f",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 35
+      },
+      "revId": "b1a3d97351b497130d7ba4fa0f9b151b4b4aec3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
