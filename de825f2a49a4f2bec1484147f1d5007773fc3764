@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da2f9c84_5ef4164a",
+        "filename": "simpleperf/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 662,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-08-13T16:51:52Z",
+      "side": 1,
+      "message": "change it to false if not used? I prefer to not add more python2 promise.",
+      "range": {
+        "startLine": 662,
+        "startChar": 21,
+        "endLine": 662,
+        "endChar": 25
+      },
+      "revId": "de825f2a49a4f2bec1484147f1d5007773fc3764",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
