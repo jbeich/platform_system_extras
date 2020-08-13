@@ -22,6 +22,30 @@
       "revId": "de825f2a49a4f2bec1484147f1d5007773fc3764",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "db88aca2_258b3833",
+        "filename": "simpleperf/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 662,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2020-08-13T23:32:54Z",
+      "side": 1,
+      "message": "In that case I believe the whole version clause can be dropped: https://cs.android.com/android/platform/superproject/+/master:build/soong/python/python.go;l\u003d233-240;drc\u003ddd849a81f30d38db789499e1e404def6d3f71783",
+      "parentUuid": "da2f9c84_5ef4164a",
+      "range": {
+        "startLine": 662,
+        "startChar": 21,
+        "endLine": 662,
+        "endChar": 25
+      },
+      "revId": "de825f2a49a4f2bec1484147f1d5007773fc3764",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
