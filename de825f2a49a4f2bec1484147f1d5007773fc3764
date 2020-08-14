@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "89466272_aac4089f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1724960
+      },
+      "writtenOn": "2020-08-14T08:16:13Z",
+      "side": 1,
+      "message": "Thank you both for the review!",
+      "revId": "de825f2a49a4f2bec1484147f1d5007773fc3764",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "da2f9c84_5ef4164a",
         "filename": "simpleperf/Android.bp",
         "patchSetId": 1
@@ -46,6 +63,30 @@
       "revId": "de825f2a49a4f2bec1484147f1d5007773fc3764",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6120e336_65fdd3f7",
+        "filename": "simpleperf/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 662,
+      "author": {
+        "id": 1724960
+      },
+      "writtenOn": "2020-08-14T08:16:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "db88aca2_258b3833",
+      "range": {
+        "startLine": 662,
+        "startChar": 21,
+        "endLine": 662,
+        "endChar": 25
+      },
+      "revId": "de825f2a49a4f2bec1484147f1d5007773fc3764",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
