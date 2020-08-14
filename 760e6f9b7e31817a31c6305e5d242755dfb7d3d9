@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "08ce17ad_91bfbbed",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1115178
+      },
+      "writtenOn": "2020-08-14T17:47:01Z",
+      "side": 1,
+      "message": "LGTM from the Android.bp side of things.",
+      "revId": "760e6f9b7e31817a31c6305e5d242755dfb7d3d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
