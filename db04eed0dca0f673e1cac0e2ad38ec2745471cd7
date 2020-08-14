@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6fdde3b0_e3c6804e",
+        "filename": "profcollectd/profcollectd.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1208973
+      },
+      "writtenOn": "2020-08-14T18:31:28Z",
+      "side": 1,
+      "message": "Per the style guidelines, please don\u0027t use block comments.",
+      "revId": "db04eed0dca0f673e1cac0e2ad38ec2745471cd7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3a71467b_d1b34ad7",
+        "filename": "profcollectd/profcollectd.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1208973
+      },
+      "writtenOn": "2020-08-14T18:31:28Z",
+      "side": 1,
+      "message": "Same as above.",
+      "revId": "db04eed0dca0f673e1cac0e2ad38ec2745471cd7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}

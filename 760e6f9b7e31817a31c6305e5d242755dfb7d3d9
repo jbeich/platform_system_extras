@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "c5c344ed_00323a8a",
+        "filename": "profcollectd/libprofcollectd/mod.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1208973
+      },
+      "writtenOn": "2020-08-14T18:31:28Z",
+      "side": 1,
+      "message": "Ah, what\u0027s happening here is that you have two different binaries, each of which does not use all of these functions.\n\nIn this case, this file is defining a module that re-exports the bindgen result as safe functions.  It makes sense to define it as its own crate (e.g., the crate representing the safe wrappers around libprofcollectd), then, especially since multiple binaries use it.  With that, you should also be able to remove this line.",
+      "parentUuid": "8e988211_a1ae7630",
+      "revId": "760e6f9b7e31817a31c6305e5d242755dfb7d3d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b20e8cdd_bd8e1b37",
         "filename": "profcollectd/profcollectd.rs",
         "patchSetId": 5

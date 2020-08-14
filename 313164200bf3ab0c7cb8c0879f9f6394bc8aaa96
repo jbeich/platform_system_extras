@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9efa2f96_ebf912bf",
+        "filename": "profcollectd/libprofcollectd/mod.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1208973
+      },
+      "writtenOn": "2020-08-14T18:31:28Z",
+      "side": 0,
+      "message": "Per the style guidelines, please annotate the unsafe blocks with why they\u0027re always safe to call (hence these safe wrappers).\n\nIn this case, if they\u0027re all safe for the same reason, you can just annotate the file.",
+      "revId": "313164200bf3ab0c7cb8c0879f9f6394bc8aaa96",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
