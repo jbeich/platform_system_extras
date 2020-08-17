@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d43b5574_f4788c03",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1208973
+      },
+      "writtenOn": "2020-08-17T15:34:11Z",
+      "side": 1,
+      "message": "This doesn\u0027t compile for me: I get a linker error.  Is that not true for you?",
+      "revId": "86a35eabb6a9f9e3ff9963f84be03e7a5117cc98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fb809512_11846907",
+        "filename": "profcollectd/libprofcollectd/Android.bp",
+        "patchSetId": 7
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1208973
+      },
+      "writtenOn": "2020-08-17T15:34:11Z",
+      "side": 1,
+      "message": "You shouldn\u0027t have to name this \"mod.rs\" anymore (although you can of course still call it that if you want).",
+      "range": {
+        "startLine": 28,
+        "startChar": 12,
+        "endLine": 28,
+        "endChar": 18
+      },
+      "revId": "86a35eabb6a9f9e3ff9963f84be03e7a5117cc98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "50c68078_04b9adde",
+        "filename": "profcollectd/libprofcollectd/mod.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1208973
+      },
+      "writtenOn": "2020-08-17T15:34:11Z",
+      "side": 1,
+      "message": "Nit: typo: a",
+      "range": {
+        "startLine": 47,
+        "startChar": 25,
+        "endLine": 47,
+        "endChar": 27
+      },
+      "revId": "86a35eabb6a9f9e3ff9963f84be03e7a5117cc98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "965cd2fb_77a5ca20",
+        "filename": "profcollectd/profcollectctl.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1208973
+      },
+      "writtenOn": "2020-08-17T15:34:11Z",
+      "side": 1,
+      "message": "Do you need this now that you don\u0027t need the mod anymore?  Same for profcollectd.rs.",
+      "revId": "86a35eabb6a9f9e3ff9963f84be03e7a5117cc98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
