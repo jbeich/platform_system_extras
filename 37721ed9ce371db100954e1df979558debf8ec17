@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6bd51fbe_93e28ce9",
+        "filename": "profcollectd/libprofcollectd/include/libprofcollectd.rs",
+        "patchSetId": 8
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1087625
+      },
+      "writtenOn": "2020-08-17T16:56:28Z",
+      "side": 1,
+      "message": "This statement is also unneeded.",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 34
+      },
+      "revId": "37721ed9ce371db100954e1df979558debf8ec17",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
