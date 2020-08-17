@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ffe579a_e29b6912",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1724960
+      },
+      "writtenOn": "2020-08-17T08:05:14Z",
+      "side": 1,
+      "message": "Reupload of 1380117 and 1398730.",
+      "revId": "d6d355ae5f9f67d3f3f30ea9e9c8448f65bb395d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
