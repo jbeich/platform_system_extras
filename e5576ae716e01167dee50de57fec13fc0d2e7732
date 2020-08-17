@@ -63,6 +63,30 @@
       "revId": "e5576ae716e01167dee50de57fec13fc0d2e7732",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5c23e7a2_1a0073d0",
+        "filename": "profcollectd/libprofcollectd/Android.bp",
+        "patchSetId": 9
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1052399
+      },
+      "writtenOn": "2020-08-17T20:50:09Z",
+      "side": 1,
+      "message": "Since it\u0027s now compiled into a rust library, it\u0027s the implementation file of a library, no longer \"included\" into the other rust binaries. Rust compiler only uses libprofcollectd_rust in compilation and linkage of the other binaries.",
+      "parentUuid": "bb1aba6b_468fec67",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 41
+      },
+      "revId": "e5576ae716e01167dee50de57fec13fc0d2e7732",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
