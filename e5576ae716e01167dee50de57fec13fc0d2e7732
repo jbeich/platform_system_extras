@@ -39,6 +39,30 @@
       "revId": "e5576ae716e01167dee50de57fec13fc0d2e7732",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bb1aba6b_468fec67",
+        "filename": "profcollectd/libprofcollectd/Android.bp",
+        "patchSetId": 9
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1087625
+      },
+      "writtenOn": "2020-08-17T19:05:17Z",
+      "side": 1,
+      "message": "I think this functionally works similar to a header file, thus I placed it in the include directory.",
+      "parentUuid": "ecf01d0e_b17a56dd",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 41
+      },
+      "revId": "e5576ae716e01167dee50de57fec13fc0d2e7732",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
