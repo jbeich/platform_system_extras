@@ -16,6 +16,29 @@
       "revId": "e5576ae716e01167dee50de57fec13fc0d2e7732",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ecf01d0e_b17a56dd",
+        "filename": "profcollectd/libprofcollectd/Android.bp",
+        "patchSetId": 9
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1052399
+      },
+      "writtenOn": "2020-08-17T18:56:41Z",
+      "side": 1,
+      "message": "It\u0027s unusual to see rust library main source (implementation) file in the \"include\" directory.\nDoesn\u0027t it work in ./src/lib.rs, ./lib.rs, ./profcollectd_rust.rs or some source directory?",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 41
+      },
+      "revId": "e5576ae716e01167dee50de57fec13fc0d2e7732",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
