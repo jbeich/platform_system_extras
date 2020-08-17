@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "6bedc88a_2d7b219e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1208973
+      },
+      "writtenOn": "2020-08-17T16:15:04Z",
+      "side": 1,
+      "message": "I get link errors about undefined symbols for all of the C++ functions called over FFI.  Patchset 6 compiled fine for me, though.",
+      "parentUuid": "30a1558f_6d57af4b",
+      "revId": "86a35eabb6a9f9e3ff9963f84be03e7a5117cc98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "fb809512_11846907",
         "filename": "profcollectd/libprofcollectd/Android.bp",
         "patchSetId": 7
