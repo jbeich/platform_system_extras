@@ -20,6 +20,10 @@ rust_binary {
     srcs: ["profcollectctl.rs"],
 
     rustlibs: ["libprofcollectd_rust"],
+
+    // Explicitly declare dependency on libprofcollectd since otherwise soong won't automatically
+    // the library on system partition.
+    shared_libs: ["libprofcollectd"],
 }
 
 rust_binary {
@@ -30,6 +34,10 @@ rust_binary {
     rustlibs: ["libprofcollectd_rust"],
 
     init_rc: ["profcollectd.rc"],
+
+    // Explicitly declare dependency on libprofcollectd since otherwise soong won't automatically
+    // the library on system partition.
+    shared_libs: ["libprofcollectd"],
 }
 
 filegroup {
