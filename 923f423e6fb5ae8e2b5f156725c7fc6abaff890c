@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "45d487fe_69bfa08e",
+        "filename": "profcollectd/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1208973
+      },
+      "writtenOn": "2020-08-18T14:04:23Z",
+      "side": 1,
+      "message": "Nit: You\u0027re missing a word here.",
+      "range": {
+        "startLine": 24,
+        "startChar": 84,
+        "endLine": 25,
+        "endChar": 10
+      },
+      "revId": "923f423e6fb5ae8e2b5f156725c7fc6abaff890c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "399ff6a1_45315261",
+        "filename": "profcollectd/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1208973
+      },
+      "writtenOn": "2020-08-18T14:04:23Z",
+      "side": 1,
+      "message": "Same as above.",
+      "revId": "923f423e6fb5ae8e2b5f156725c7fc6abaff890c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
