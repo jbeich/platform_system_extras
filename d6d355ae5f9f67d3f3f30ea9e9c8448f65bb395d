@@ -33,6 +33,24 @@
       "revId": "d6d355ae5f9f67d3f3f30ea9e9c8448f65bb395d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "581484ac_b818f990",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1724960
+      },
+      "writtenOn": "2020-08-18T12:44:17Z",
+      "side": 1,
+      "message": "Thank you Martin! I\u0027ve added the file.",
+      "parentUuid": "f5792ccb_5e699db6",
+      "revId": "d6d355ae5f9f67d3f3f30ea9e9c8448f65bb395d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
