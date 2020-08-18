@@ -16,6 +16,23 @@
       "revId": "d6d355ae5f9f67d3f3f30ea9e9c8448f65bb395d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f5792ccb_5e699db6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2020-08-18T11:57:25Z",
+      "side": 1,
+      "message": "The new directory should have an OWNERS file with some ART team members in it. I suggest those on the review list here: vmarko, ngeoffray, rpl, skvadrik, and myself.\n\nOtherwise I think this is fine from a code perspective, but I\u0027ll leave to ngeoffray to have the final say to take it in.",
+      "revId": "d6d355ae5f9f67d3f3f30ea9e9c8448f65bb395d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
