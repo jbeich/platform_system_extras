@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "37916370_88e7fbee",
+        "filename": "f2fs_utils/mkf2fsuserimg.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1651802
+      },
+      "writtenOn": "2020-08-19T06:37:25Z",
+      "side": 1,
+      "message": "Where is ret from? Do I miss something?",
+      "range": {
+        "startLine": 116,
+        "startChar": 6,
+        "endLine": 116,
+        "endChar": 9
+      },
+      "revId": "ae2c06f468a2d2b97103169aec3b8a05568f095b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
