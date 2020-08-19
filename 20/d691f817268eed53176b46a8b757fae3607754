@@ -1,0 +1,9 @@
+Open-Source-Licensing+1: Lint 🤖 <android-build-prod-ayeaye@system.gserviceaccount.com>
+Code-Review+2: Ivan Lozano <ivanlozano@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Lint+1: Lint 🤖 <android-build-prod-ayeaye@system.gserviceaccount.com>
+Submitted-by: Yi Kong <yikong@google.com>
+Submitted-at: Wed, 19 Aug 2020 04:22:29 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/system/extras/+/1403327
+Project: platform/system/extras
+Branch: refs/heads/master
