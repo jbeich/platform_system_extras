@@ -68,6 +68,24 @@
       "revId": "ba6d08b331fa307d4e4aae9bc9fe1716a2352464",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e3c9af2d_c5162699",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-08-21T20:14:23Z",
+      "side": 1,
+      "message": "Right, currently we format the filesystem without the encrypt feature and add it using tune2fs at first boot.  It works, *however* it would still be faster and simpler to simply enable the encrypt feature from the beginning, using \u0027mke2fs -O encrypt\u0027.  I rejected this approach originally because I was worried that some devices with very old kernels (which don\u0027t know about the \u0027encrypt\u0027 feature, so would refuse to mount a filesystem with it set) would be upgraded to the latest version of Android.  But maybe now enough time has elapsed that we can now assume that any device that will run the next version of Android will have a kernel that knows about ext4 encryption.",
+      "parentUuid": "c28deaa6_807e086f",
+      "revId": "ba6d08b331fa307d4e4aae9bc9fe1716a2352464",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
