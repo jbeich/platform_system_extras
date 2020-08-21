@@ -16,6 +16,23 @@
       "revId": "ba6d08b331fa307d4e4aae9bc9fe1716a2352464",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "52c7ba8e_83f0d07c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010465
+      },
+      "writtenOn": "2020-08-21T19:50:42Z",
+      "side": 1,
+      "message": "I didn\u0027t see FEATURE_INCOMPAT_ENCRYPT flag in make_ext4fs code, so I wanted to check if we need to add it or not.",
+      "revId": "ba6d08b331fa307d4e4aae9bc9fe1716a2352464",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
