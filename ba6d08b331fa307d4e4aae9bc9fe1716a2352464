@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6c8fb848_1cabb734",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-08-21T19:29:40Z",
+      "side": 1,
+      "message": "keunyoung@ and jaegeuk@, this is a very old change.  Are you thinking it\u0027s time to revive it, now that ext4 encryption has been around for a long time?  If so, the change will need to be rebased on the latest AOSP master branch.  Also, will other places need to be updated to add the encrypt feature too?",
+      "revId": "ba6d08b331fa307d4e4aae9bc9fe1716a2352464",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
