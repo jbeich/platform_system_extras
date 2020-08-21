@@ -33,6 +33,24 @@
       "revId": "ba6d08b331fa307d4e4aae9bc9fe1716a2352464",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b49ac4e9_9dce5dbd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-08-21T19:58:08Z",
+      "side": 1,
+      "message": "make_ext4fs was deleted 2 years ago, as it was replaced by mke2fs: https://android-review.googlesource.com/c/platform/system/extras/+/708003\n\nBut adding the encrypt feature to new filesystems is still something that could make sense.  That would mean passing \u0027-O encrypt\u0027 to mke2fs.\n\nHence why I said that this change would need to be rebased onto AOSP master if it\u0027s still relevant.",
+      "parentUuid": "52c7ba8e_83f0d07c",
+      "revId": "ba6d08b331fa307d4e4aae9bc9fe1716a2352464",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
