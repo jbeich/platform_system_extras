@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aadd5947_b5637416",
+        "filename": "simpleperf/read_symbol_map.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-08-26T17:17:57Z",
+      "side": 1,
+      "message": "do you want to check ERANGE errno like https://android.googlesource.com/platform/system/core/+/c0e6e40/base/include/android-base/parseint.h#35?",
+      "range": {
+        "startLine": 58,
+        "startChar": 2,
+        "endLine": 58,
+        "endChar": 4
+      },
+      "revId": "3b2b5808e1da963c65f5dbfd3dc73abbbc15a1e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
