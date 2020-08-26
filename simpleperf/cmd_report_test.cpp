@@ -28,6 +28,8 @@
 #include "read_apk.h"
 #include "test_util.h"
 
+using namespace simpleperf;
+
 static std::unique_ptr<Command> ReportCmd() {
   return CreateCommandInstance("report");
 }
@@ -503,6 +505,17 @@ TEST_F(ReportCommandTest, csv_option) {
   Report(CALLGRAPH_FP_PERF_DATA, {"--children", "--csv"});
   ASSERT_TRUE(success);
   ASSERT_NE(content.find("AccEventCount,SelfEventCount,EventName"), std::string::npos);
+}
+
+TEST_F(ReportCommandTest, dso_path_for_jit_cache) {
+  Report("perf_with_jit_symbol.data", {"--sort", "dso"});
+  ASSERT_TRUE(success);
+  ASSERT_NE(content.find("[JIT app cache]"), std::string::npos);
+
+  // Check if we can filter dso by "[JIT app cache]".
+  Report("perf_with_jit_symbol.data", {"--dsos", "[JIT app cache]"});
+  ASSERT_TRUE(success);
+  ASSERT_NE(content.find("[JIT app cache]"), std::string::npos);
 }
 
 #if defined(__linux__)

@@ -235,7 +235,7 @@ class ReportCmdSampleTreeBuilder : public SampleTreeBuilder<SampleEntry, uint64_
       return false;
     }
     if (!dso_filter_.empty() &&
-        dso_filter_.find(sample->map->dso->Path()) == dso_filter_.end()) {
+        dso_filter_.find(sample->map->dso->GetReportPath().data()) == dso_filter_.end()) {
       return false;
     }
     if (!symbol_filter_.empty() &&
@@ -860,6 +860,10 @@ bool ReportCommand::ReadSampleTreeFromRecordFile() {
   for (size_t i = 0; i < event_attrs_.size(); ++i) {
     sample_tree_builder_.push_back(sample_tree_builder_options_.CreateSampleTreeBuilder());
     sample_tree_builder_.back()->SetEventName(event_attrs_[i].name);
+    OfflineUnwinder* unwinder = sample_tree_builder_.back()->GetUnwinder();
+    if (unwinder != nullptr) {
+      unwinder->LoadMetaInfo(record_file_reader_->GetMetaInfoFeature());
+    }
   }
 
   if (!record_file_reader_->ReadDataSection(
@@ -974,7 +978,11 @@ void ReportCommand::PrintReportContext(FILE* report_fp) {
 
 }  // namespace
 
+namespace simpleperf {
+
 void RegisterReportCommand() {
   RegisterCommand("report",
                   [] { return std::unique_ptr<Command>(new ReportCommand()); });
 }
+
+}  // namespace simpleperf

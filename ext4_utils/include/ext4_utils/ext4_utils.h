@@ -49,12 +49,6 @@ extern "C" {
 
 extern int force;
 
-#define warn(fmt, args...) do { fprintf(stderr, "warning: %s: " fmt "\n", __func__, ## args); } while (0)
-#define error(fmt, args...) do { fprintf(stderr, "error: %s: " fmt "\n", __func__, ## args); if (!force) longjmp(setjmp_env, EXIT_FAILURE); } while (0)
-#define error_errno(s, args...) error(s ": %s", ##args, strerror(errno))
-#define critical_error(fmt, args...) do { fprintf(stderr, "critical error: %s: " fmt "\n", __func__, ## args); longjmp(setjmp_env, EXIT_FAILURE); } while (0)
-#define critical_error_errno(s, args...) critical_error(s ": %s", ##args, strerror(errno))
-
 #define EXT4_JNL_BACKUP_BLOCKS 1
 
 #ifndef __cplusplus
@@ -131,7 +125,7 @@ int bitmap_get_bit(u8 *bitmap, u32 bit);	// vold
 u64 get_block_device_size(int fd);		// recovery
 int is_block_device_fd(int fd);			// wipe.c
 u64 get_file_size(int fd);			// fs_mgr
-
+int ext4_bg_has_super_block(int bg);
 int read_ext(int fd, int verbose);		// vold
 
 #ifdef __cplusplus

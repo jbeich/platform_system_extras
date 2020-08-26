@@ -34,6 +34,7 @@
 #include <regex>
 #include <thread>
 
+#include "cmd_record_impl.h"
 #include "command.h"
 #include "environment.h"
 #include "ETMRecorder.h"
@@ -44,6 +45,8 @@
 #include "test_util.h"
 #include "thread_tree.h"
 
+using android::base::Realpath;
+using android::base::StringPrintf;
 using namespace simpleperf;
 using namespace PerfFileFormat;
 
@@ -274,7 +277,9 @@ static bool InCloudAndroid() {
 #if defined(__ANDROID__)
   std::string prop_value = android::base::GetProperty("ro.build.flavor", "");
   if (android::base::StartsWith(prop_value, "cf_x86_phone") ||
-      android::base::StartsWith(prop_value, "aosp_cf_x86_phone")) {
+      android::base::StartsWith(prop_value, "aosp_cf_x86_phone") ||
+      android::base::StartsWith(prop_value, "cf_x86_64_phone") ||
+      android::base::StartsWith(prop_value, "aosp_cf_x86_64_phone")) {
     return true;
   }
 #endif
@@ -291,22 +296,40 @@ bool HasTracepointEvents() {
   return has_tracepoint_events == 1;
 }
 
+#if defined(__arm__)
+// Check if we can get a non-zero instruction event count by monitoring current thread.
+static bool HasNonZeroInstructionEventCount() {
+  const EventType* type = FindEventTypeByName("instructions", false);
+  if (type == nullptr) {
+    return false;
+  }
+  perf_event_attr attr = CreateDefaultPerfEventAttr(*type);
+  std::unique_ptr<EventFd> event_fd =
+      EventFd::OpenEventFile(attr, gettid(), -1, nullptr, type->name, false);
+  if (!event_fd) {
+    return false;
+  }
+  // do some cpu work.
+  for (volatile int i = 0; i < 100000; ++i) {
+  }
+  PerfCounter counter;
+  if (event_fd->ReadCounter(&counter)) {
+    return counter.value != 0;
+  }
+  return false;
+}
+#endif  // defined(__arm__)
+
 bool HasHardwareCounter() {
   static int has_hw_counter = -1;
   if (has_hw_counter == -1) {
     // Cloud Android doesn't have hardware counters.
     has_hw_counter = InCloudAndroid() ? 0 : 1;
 #if defined(__arm__)
-    std::string cpu_info;
-    if (android::base::ReadFileToString("/proc/cpuinfo", &cpu_info)) {
-      std::string hardware = GetHardwareFromCpuInfo(cpu_info);
-      if (std::regex_search(hardware, std::regex(R"(i\.MX6.*Quad)")) ||
-          std::regex_search(hardware, std::regex(R"(SC7731e)")) ||
-          std::regex_search(hardware, std::regex(R"(Qualcomm Technologies, Inc MSM8909)")) ||
-          std::regex_search(hardware, std::regex(R"(Broadcom STB \(Flattened Device Tree\))"))) {
-        has_hw_counter = 0;
-      }
-    }
+    // For arm32 devices, external non-invasive debug signal controls PMU counters. Once it is
+    // disabled for security reason, we always get zero values for PMU counters. And we want to
+    // skip hardware counter tests once we detect it.
+    has_hw_counter &= HasNonZeroInstructionEventCount() ? 1 : 0;
 #endif
   }
   return has_hw_counter == 1;
@@ -966,7 +989,7 @@ TEST(record_cmd, aux_buffer_size_option) {
   ASSERT_FALSE(RunRecordCmd({"-e", "cs-etm", "--aux-buffer-size", "12k"}));
 }
 
-TEST(record_cmd, include_filter_option) {
+TEST(record_cmd, addr_filter_option) {
   TEST_REQUIRE_HW_COUNTER();
   if (!ETMRecorder::GetInstance().CheckEtmSupport()) {
     GTEST_LOG_(INFO) << "Omit this test since etm isn't supported on this device";
@@ -979,12 +1002,12 @@ TEST(record_cmd, include_filter_option) {
   pclose(fp);
   path = android::base::Trim(path);
   std::string sleep_exec_path;
-  ASSERT_TRUE(android::base::Realpath(path, &sleep_exec_path));
-  // --include-filter doesn't apply to cpu-cycles.
-  ASSERT_FALSE(RunRecordCmd({"--include-filter", sleep_exec_path}));
+  ASSERT_TRUE(Realpath(path, &sleep_exec_path));
+  // --addr-filter doesn't apply to cpu-cycles.
+  ASSERT_FALSE(RunRecordCmd({"--addr-filter", "filter " + sleep_exec_path}));
   TemporaryFile record_file;
-  ASSERT_TRUE(
-      RunRecordCmd({"-e", "cs-etm", "--include-filter", sleep_exec_path}, record_file.path));
+  ASSERT_TRUE(RunRecordCmd({"-e", "cs-etm", "--addr-filter", "filter " + sleep_exec_path},
+                           record_file.path));
   TemporaryFile inject_file;
   ASSERT_TRUE(
       CreateCommandInstance("inject")->Run({"-i", record_file.path, "-o", inject_file.path}));
@@ -997,6 +1020,33 @@ TEST(record_cmd, include_filter_option) {
       ASSERT_EQ(dso, sleep_exec_path);
     }
   }
+
+  // Test if different filter types are accepted by the kernel.
+  auto elf = ElfFile::Open(sleep_exec_path);
+  uint64_t off;
+  uint64_t addr = elf->ReadMinExecutableVaddr(&off);
+  // file start
+  std::string filter = StringPrintf("start 0x%" PRIx64 "@%s", addr, sleep_exec_path.c_str());
+  ASSERT_TRUE(RunRecordCmd({"-e", "cs-etm", "--addr-filter", filter}));
+  // file stop
+  filter = StringPrintf("stop 0x%" PRIx64 "@%s", addr, sleep_exec_path.c_str());
+  ASSERT_TRUE(RunRecordCmd({"-e", "cs-etm", "--addr-filter", filter}));
+  // file range
+  filter = StringPrintf("filter 0x%" PRIx64 "-0x%" PRIx64 "@%s", addr, addr + 4,
+                        sleep_exec_path.c_str());
+  ASSERT_TRUE(RunRecordCmd({"-e", "cs-etm", "--addr-filter", filter}));
+  // If kernel panic, try backporting "perf/core: Fix crash when using HW tracing kernel
+  // filters".
+  // kernel start
+  uint64_t fake_kernel_addr = (1ULL << 63);
+  filter = StringPrintf("start 0x%" PRIx64, fake_kernel_addr);
+  ASSERT_TRUE(RunRecordCmd({"-e", "cs-etm", "--addr-filter", filter}));
+  // kernel stop
+  filter = StringPrintf("stop 0x%" PRIx64, fake_kernel_addr);
+  ASSERT_TRUE(RunRecordCmd({"-e", "cs-etm", "--addr-filter", filter}));
+  // kernel range
+  filter = StringPrintf("filter 0x%" PRIx64 "-0x%" PRIx64, fake_kernel_addr, fake_kernel_addr + 4);
+  ASSERT_TRUE(RunRecordCmd({"-e", "cs-etm", "--addr-filter", filter}));
 }
 
 TEST(record_cmd, pmu_event_option) {
@@ -1032,4 +1082,50 @@ TEST(record_cmd, exclude_perf_option) {
       return true;
     }));
   }
+}
+
+TEST(record_cmd, tp_filter_option) {
+  TEST_REQUIRE_TRACEPOINT_EVENTS();
+  // Test string operands both with quotes and without quotes.
+  for (const auto& filter :
+       std::vector<std::string>({"prev_comm != 'sleep'", "prev_comm != sleep"})) {
+    TemporaryFile tmpfile;
+    ASSERT_TRUE(RunRecordCmd({"-e", "sched:sched_switch", "--tp-filter", filter}, tmpfile.path))
+        << filter;
+    CaptureStdout capture;
+    ASSERT_TRUE(capture.Start());
+    ASSERT_TRUE(CreateCommandInstance("dump")->Run({tmpfile.path}));
+    std::string data = capture.Finish();
+    // Check that samples with prev_comm == sleep are filtered out. Although we do the check all the
+    // time, it only makes sense when running as root. Tracepoint event fields are not allowed
+    // to record unless running as root.
+    ASSERT_EQ(data.find("prev_comm: sleep"), std::string::npos) << filter;
+  }
+}
+
+TEST(record_cmd, ParseAddrFilterOption) {
+  auto option_to_str = [](const std::string& option) {
+    auto filters = ParseAddrFilterOption(option);
+    std::string s;
+    for (auto& filter : filters) {
+      if (!s.empty()) {
+        s += ',';
+      }
+      s += filter.ToString();
+    }
+    return s;
+  };
+  std::string path;
+  ASSERT_TRUE(Realpath(GetTestData(ELF_FILE), &path));
+
+
+  // Test file filters.
+  ASSERT_EQ(option_to_str("filter " + path), "filter 0x0/0x73c@" + path);
+  ASSERT_EQ(option_to_str("filter 0x400502-0x400527@" + path), "filter 0x502/0x25@" + path);
+  ASSERT_EQ(option_to_str("start 0x400502@" + path + ",stop 0x400527@" + path),
+            "start 0x502@" + path + ",stop 0x527@" + path);
+
+  // Test kernel filters.
+  ASSERT_EQ(option_to_str("filter 0x12345678-0x1234567a"), "filter 0x12345678/0x2");
+  ASSERT_EQ(option_to_str("start 0x12345678,stop 0x1234567a"), "start 0x12345678,stop 0x1234567a");
 }

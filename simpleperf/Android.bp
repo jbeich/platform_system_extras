@@ -26,7 +26,6 @@ cc_defaults {
         // Try some more extreme warnings.
         "-Wpedantic",
         "-Wunreachable-code-aggressive",
-        // And disable some dumb things.
         "-Wno-zero-length-array",
         "-Wno-c99-extensions",
         "-Wno-language-extension-token",
@@ -156,6 +155,7 @@ cc_defaults {
                 "libcutils",
                 "libprocinfo",
                 "libevent",
+                "libc++fs",
             ],
         },
         android: {
@@ -197,6 +197,9 @@ cc_defaults {
                 "libevent",
                 "libprocinfo",
                 "libunwindstack",
+            ],
+            static_libs: [
+                "libc++fs",
             ],
         },
         host: {
@@ -534,6 +537,7 @@ cc_defaults {
         "record_test.cpp",
         "sample_tree_test.cpp",
         "thread_tree_test.cpp",
+        "tracing_test.cpp",
         "utils_test.cpp",
     ],
     target: {

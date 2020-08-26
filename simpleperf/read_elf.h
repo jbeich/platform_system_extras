@@ -26,7 +26,7 @@
 // decide whether to report error or not. So read ELF functions don't report
 // error when something wrong happens, instead they return ElfStatus, which
 // identifies different errors met while reading elf file.
-enum ElfStatus {
+enum class ElfStatus {
   NO_ERROR,
   FILE_NOT_FOUND,
   READ_FAILED,
@@ -40,9 +40,6 @@ enum ElfStatus {
 std::ostream& operator<<(std::ostream& os, const ElfStatus& status);
 
 ElfStatus GetBuildIdFromNoteFile(const std::string& filename, BuildId* build_id);
-ElfStatus GetBuildIdFromElfFile(const std::string& filename, BuildId* build_id);
-ElfStatus GetBuildIdFromEmbeddedElfFile(const std::string& filename, uint64_t file_offset,
-                                        uint32_t file_size, BuildId* build_id);
 
 // The symbol prefix used to indicate that the symbol belongs to android linker.
 static const std::string linker_prefix = "__dl_";
@@ -59,31 +56,6 @@ struct ElfFileSymbol {
   }
 };
 
-ElfStatus ParseSymbolsFromElfFile(const std::string& filename,
-                                  const BuildId& expected_build_id,
-                                  const std::function<void(const ElfFileSymbol&)>& callback);
-ElfStatus ParseSymbolsFromEmbeddedElfFile(const std::string& filename, uint64_t file_offset,
-                                          uint32_t file_size, const BuildId& expected_build_id,
-                                          const std::function<void(const ElfFileSymbol&)>& callback);
-ElfStatus ParseSymbolsFromElfFileInMemory(const char* data, size_t size,
-                                          const std::function<void(const ElfFileSymbol&)>& callback);
-ElfStatus ParseDynamicSymbolsFromElfFile(const std::string& filename,
-                                         const std::function<void(const ElfFileSymbol&)>& callback);
-
-ElfStatus ReadMinExecutableVirtualAddressFromElfFile(const std::string& filename,
-                                                     const BuildId& expected_build_id,
-                                                     uint64_t* min_addr,
-                                                     uint64_t* file_offset_of_min_vaddr);
-ElfStatus ReadMinExecutableVirtualAddressFromEmbeddedElfFile(const std::string& filename,
-                                                             uint64_t file_offset,
-                                                             uint32_t file_size,
-                                                             const BuildId& expected_build_id,
-                                                             uint64_t* min_vaddr,
-                                                             uint64_t* file_offset_of_min_vaddr);
-
-ElfStatus ReadSectionFromElfFile(const std::string& filename, const std::string& section_name,
-                                 std::string* content);
-
 namespace llvm {
 class MemoryBuffer;
 }
@@ -99,12 +71,29 @@ struct ElfSegment {
 
 class ElfFile {
  public:
-  static std::unique_ptr<ElfFile> Open(const std::string& filename, ElfStatus* status);
+  // Report error instead of returning status.
+  static std::unique_ptr<ElfFile> Open(const std::string& filename);
+  static std::unique_ptr<ElfFile> Open(const std::string& filename, ElfStatus* status) {
+    return Open(filename, nullptr, status);
+  }
+
+  static std::unique_ptr<ElfFile> Open(const std::string& filename,
+                                       const BuildId* expected_build_id, ElfStatus* status);
+  static std::unique_ptr<ElfFile> Open(const char* data, size_t size, ElfStatus* status);
   virtual ~ElfFile() {}
 
   virtual bool Is64Bit() = 0;
   virtual llvm::MemoryBuffer* GetMemoryBuffer() = 0;
   virtual std::vector<ElfSegment> GetProgramHeader() = 0;
+  virtual ElfStatus GetBuildId(BuildId* build_id) = 0;
+
+  using ParseSymbolCallback = std::function<void(const ElfFileSymbol&)>;
+  virtual ElfStatus ParseSymbols(const ParseSymbolCallback& callback) = 0;
+  virtual void ParseDynamicSymbols(const ParseSymbolCallback& callback) = 0;
+
+  virtual ElfStatus ReadSection(const std::string& section_name, std::string* content) = 0;
+  virtual uint64_t ReadMinExecutableVaddr(uint64_t* file_offset_of_min_vaddr) = 0;
+  virtual bool VaddrToOff(uint64_t vaddr, uint64_t* file_offset) = 0;
 
  protected:
   ElfFile() {}

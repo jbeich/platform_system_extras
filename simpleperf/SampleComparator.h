@@ -54,10 +54,10 @@ BUILD_COMPARE_VALUE_FUNCTION(ComparePid, pid);
 BUILD_COMPARE_VALUE_FUNCTION(CompareTid, tid);
 BUILD_COMPARE_VALUE_FUNCTION_REVERSE(CompareSampleCount, sample_count);
 BUILD_COMPARE_STRING_FUNCTION(CompareComm, thread_comm);
-BUILD_COMPARE_STRING_FUNCTION(CompareDso, map->dso->Path().c_str());
+BUILD_COMPARE_STRING_FUNCTION(CompareDso, map->dso->GetReportPath().data());
 BUILD_COMPARE_STRING_FUNCTION(CompareSymbol, symbol->DemangledName());
 BUILD_COMPARE_STRING_FUNCTION(CompareDsoFrom,
-                              branch_from.map->dso->Path().c_str());
+                              branch_from.map->dso->GetReportPath().data());
 BUILD_COMPARE_STRING_FUNCTION(CompareSymbolFrom,
                               branch_from.symbol->DemangledName());
 BUILD_COMPARE_VALUE_FUNCTION(CompareCallGraphDuplicated, callchain.duplicated);
@@ -94,6 +94,16 @@ class SampleComparator {
   bool operator()(const EntryT* sample1, const EntryT* sample2) const {
     for (const auto& func : compare_v_) {
       int ret = func(sample1, sample2);
+      if (ret != 0) {
+        return ret < 0;
+      }
+    }
+    return false;
+  }
+
+  bool operator()(const EntryT& sample1, const EntryT& sample2) const {
+    for (const auto& func : compare_v_) {
+      int ret = func(&sample1, &sample2);
       if (ret != 0) {
         return ret < 0;
       }

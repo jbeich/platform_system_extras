@@ -33,6 +33,7 @@
 #include "thread_tree.h"
 #include "utils.h"
 
+using namespace simpleperf;
 namespace proto = simpleperf_report_proto;
 
 namespace {
@@ -616,7 +617,7 @@ bool ReportSampleCommand::PrintFileInfoInProtobuf() {
     proto::Record proto_record;
     proto::File* file = proto_record.mutable_file();
     file->set_id(file_id);
-    file->set_path(dso->Path());
+    file->set_path(std::string{dso->GetReportPath()});
     const std::vector<Symbol>& symbols = dso->GetSymbols();
     std::vector<const Symbol*> dump_symbols;
     for (const auto& sym : symbols) {
@@ -660,7 +661,7 @@ bool ReportSampleCommand::PrintSampleRecord(const SampleRecord& r,
                                             const std::vector<CallEntry>& entries) {
   FprintIndented(report_fp_, 0, "sample:\n");
   FprintIndented(report_fp_, 1, "event_type: %s\n",
-                 event_types_[record_file_reader_->GetAttrIndexOfRecord(&r)].c_str());
+                 event_types_[record_file_reader_->GetAttrIndexOfRecord(&r)].data());
   FprintIndented(report_fp_, 1, "time: %" PRIu64 "\n", r.time_data.time);
   FprintIndented(report_fp_, 1, "event_count: %" PRIu64 "\n", r.period_data.period);
   FprintIndented(report_fp_, 1, "thread_id: %d\n", r.tid_data.tid);
@@ -668,14 +669,14 @@ bool ReportSampleCommand::PrintSampleRecord(const SampleRecord& r,
   FprintIndented(report_fp_, 1, "thread_name: %s\n", thread_name);
   CHECK(!entries.empty());
   FprintIndented(report_fp_, 1, "vaddr_in_file: %" PRIx64 "\n", entries[0].vaddr_in_file);
-  FprintIndented(report_fp_, 1, "file: %s\n", entries[0].dso->Path().c_str());
+  FprintIndented(report_fp_, 1, "file: %s\n", entries[0].dso->GetReportPath().data());
   FprintIndented(report_fp_, 1, "symbol: %s\n", entries[0].symbol->DemangledName());
 
   if (entries.size() > 1u) {
     FprintIndented(report_fp_, 1, "callchain:\n");
     for (size_t i = 1u; i < entries.size(); ++i) {
       FprintIndented(report_fp_, 2, "vaddr_in_file: %" PRIx64 "\n", entries[i].vaddr_in_file);
-      FprintIndented(report_fp_, 2, "file: %s\n", entries[i].dso->Path().c_str());
+      FprintIndented(report_fp_, 2, "file: %s\n", entries[i].dso->GetReportPath().data());
       FprintIndented(report_fp_, 2, "symbol: %s\n", entries[i].symbol->DemangledName());
     }
   }
@@ -690,8 +691,12 @@ void ReportSampleCommand::PrintLostSituation() {
 
 }  // namespace
 
+namespace simpleperf {
+
 void RegisterReportSampleCommand() {
   RegisterCommand("report-sample", [] {
     return std::unique_ptr<Command>(new ReportSampleCommand());
   });
 }
+
+}  // namespace simpleperf

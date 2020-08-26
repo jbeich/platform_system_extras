@@ -22,6 +22,7 @@
 
 #include <algorithm>
 #include <chrono>
+#include <optional>
 #include <set>
 #include <string>
 #include <string_view>
@@ -43,6 +44,7 @@
 #include "utils.h"
 #include "workload.h"
 
+using android::base::Split;
 using namespace simpleperf;
 
 namespace simpleperf {
@@ -123,26 +125,29 @@ void CounterSummaries::GenerateComments(double duration_in_sec) {
 }
 
 void CounterSummaries::Show(FILE* fp) {
+  bool show_thread = !summaries_.empty() && summaries_[0].thread != nullptr;
+  bool show_cpu = !summaries_.empty() && summaries_[0].cpu != -1;
   if (csv_) {
-    ShowCSV(fp);
+    ShowCSV(fp, show_thread, show_cpu);
   } else {
-    ShowText(fp);
+    ShowText(fp, show_thread, show_cpu);
   }
 }
 
-void CounterSummaries::ShowCSV(FILE* fp) {
+void CounterSummaries::ShowCSV(FILE* fp, bool show_thread, bool show_cpu) {
   for (auto& s : summaries_) {
-    if (s.thread != nullptr) {
+    if (show_thread) {
       fprintf(fp, "%s,%d,%d,", s.thread->name.c_str(), s.thread->pid, s.thread->tid);
+    }
+    if (show_cpu) {
+      fprintf(fp, "%d,", s.cpu);
     }
     fprintf(fp, "%s,%s,%s,(%.0f%%)%s\n", s.readable_count.c_str(), s.Name().c_str(),
             s.comment.c_str(), 1.0 / s.scale * 100, (s.auto_generated ? " (generated)," : ","));
   }
 }
 
-void CounterSummaries::ShowText(FILE* fp) {
-  bool show_thread = !summaries_.empty() && summaries_[0].thread != nullptr;
-  bool show_cpu = !summaries_.empty() && summaries_[0].cpu != -1;
+void CounterSummaries::ShowText(FILE* fp, bool show_thread, bool show_cpu) {
   std::vector<std::string> titles;
 
   if (show_thread) {
@@ -380,6 +385,18 @@ class StatCommand : public Command {
 "--per-thread     Print counters for each thread.\n"
 "-p pid1,pid2,... Stat events on existing processes. Mutually exclusive with -a.\n"
 "-t tid1,tid2,... Stat events on existing threads. Mutually exclusive with -a.\n"
+"--sort key1,key2,...  Select keys used to sort the report, used when --per-thread\n"
+"                      or --per-core appears. The appearance order of keys decides\n"
+"                      the order of keys used to sort the report.\n"
+"                      Possible keys include:\n"
+"                        count             -- event count for each entry\n"
+"                        count_per_thread  -- event count for a thread on all cpus\n"
+"                        cpu               -- cpu id\n"
+"                        pid               -- process id\n"
+"                        tid               -- thread id\n"
+"                        comm              -- thread name\n"
+"                      The default sort keys are:\n"
+"                        count_per_thread,tid,cpu,count\n"
 #if defined(__ANDROID__)
 "--use-devfreq-counters    On devices with Qualcomm SOCs, some hardware counters may be used\n"
 "                          to monitor memory latency (in drivers/devfreq/arm-memlat-mon.c),\n"
@@ -409,6 +426,8 @@ class StatCommand : public Command {
         in_app_context_(false) {
     // Die if parent exits.
     prctl(PR_SET_PDEATHSIG, SIGHUP, 0, 0, 0);
+    // Set default sort keys. Full key list is in BuildSummaryComparator().
+    sort_keys_ = {"count_per_thread", "tid", "cpu", "count"};
   }
 
   bool Run(const std::vector<std::string>& args);
@@ -444,6 +463,9 @@ class StatCommand : public Command {
   bool report_per_thread_ = false;
   // used to report event count for each thread
   std::unordered_map<pid_t, ThreadInfo> thread_info_;
+  // used to sort report
+  std::vector<std::string> sort_keys_;
+  std::optional<SummaryComparator> summary_comparator_;
 };
 
 bool StatCommand::Run(const std::vector<std::string>& args) {
@@ -605,112 +627,104 @@ bool StatCommand::Run(const std::vector<std::string>& args) {
 
 bool StatCommand::ParseOptions(const std::vector<std::string>& args,
                                std::vector<std::string>* non_option_args) {
-  std::set<pid_t> tid_set;
-  size_t i;
-  for (i = 0; i < args.size() && args[i].size() > 0 && args[i][0] == '-'; ++i) {
-    if (args[i] == "-a") {
-      system_wide_collection_ = true;
-    } else if (args[i] == "--app") {
-      if (!NextArgumentOrError(args, &i)) {
-        return false;
-      }
-      app_package_name_ = args[i];
-    } else if (args[i] == "--cpu") {
-      if (!NextArgumentOrError(args, &i)) {
-        return false;
-      }
-      cpus_ = GetCpusFromString(args[i]);
-    } else if (args[i] == "--csv") {
-      csv_ = true;
-    } else if (args[i] == "--duration") {
-      if (!GetDoubleOption(args, &i, &duration_in_sec_, 1e-9)) {
-        return false;
-      }
-    } else if (args[i] == "--interval") {
-      if (!GetDoubleOption(args, &i, &interval_in_ms_, 1e-9)) {
-        return false;
-      }
-    } else if (args[i] == "--interval-only-values") {
-      interval_only_values_ = true;
-    } else if (args[i] == "-e") {
-      if (!NextArgumentOrError(args, &i)) {
-        return false;
-      }
-      std::vector<std::string> event_types = android::base::Split(args[i], ",");
-      for (auto& event_type : event_types) {
+  OptionValueMap options;
+  std::vector<std::pair<OptionName, OptionValue>> ordered_options;
+
+  if (!PreprocessOptions(args, GetStatCmdOptionFormats(), &options, &ordered_options,
+                         non_option_args)) {
+    return false;
+  }
+
+  // Process options.
+  system_wide_collection_ = options.PullBoolValue("-a");
+
+  if (auto value = options.PullValue("--app"); value) {
+    app_package_name_ = *value->str_value;
+  }
+  if (auto value = options.PullValue("--cpu"); value) {
+    cpus_ = GetCpusFromString(*value->str_value);
+  }
+
+  csv_ = options.PullBoolValue("--csv");
+
+  if (!options.PullDoubleValue("--duration", &duration_in_sec_, 1e-9)) {
+    return false;
+  }
+  if (!options.PullDoubleValue("--interval", &interval_in_ms_, 1e-9)) {
+    return false;
+  }
+  interval_only_values_ = options.PullBoolValue("--interval-only-values");
+
+  if (auto values = options.PullValues("-e"); values) {
+    for (const auto& value : values.value()) {
+      for (const auto& event_type : Split(*value.str_value, ",")) {
         if (!event_selection_set_.AddEventType(event_type)) {
           return false;
         }
       }
-    } else if (args[i] == "--group") {
-      if (!NextArgumentOrError(args, &i)) {
+    }
+  }
+
+  if (auto values = options.PullValues("--group"); values) {
+    for (const auto& value : values.value()) {
+      if (!event_selection_set_.AddEventGroup(Split(*value.str_value, ","))) {
         return false;
       }
-      std::vector<std::string> event_types = android::base::Split(args[i], ",");
-      if (!event_selection_set_.AddEventGroup(event_types)) {
-        return false;
-      }
-    } else if (args[i] == "--in-app") {
-      in_app_context_ = true;
-    } else if (args[i] == "--no-inherit") {
-      child_inherit_ = false;
-    } else if (args[i] == "-o") {
-      if (!NextArgumentOrError(args, &i)) {
-        return false;
-      }
-      output_filename_ = args[i];
-    } else if (args[i] == "--out-fd") {
-      int fd;
-      if (!GetUintOption(args, &i, &fd)) {
-        return false;
-      }
-      out_fd_.reset(fd);
-    } else if (args[i] == "--per-core") {
-      report_per_core_ = true;
-    } else if (args[i] == "--per-thread") {
-      report_per_thread_ = true;
-    } else if (args[i] == "-p") {
-      if (!NextArgumentOrError(args, &i)) {
-        return false;
-      }
+    }
+  }
+
+  in_app_context_ = options.PullBoolValue("--in-app");
+  child_inherit_ = !options.PullBoolValue("--no-inherit");
+
+  if (auto value = options.PullValue("-o"); value) {
+    output_filename_ = *value->str_value;
+  }
+  if (auto value = options.PullValue("--out-fd"); value) {
+    out_fd_.reset(static_cast<int>(value->uint_value));
+  }
+
+  report_per_core_ = options.PullBoolValue("--per-core");
+  report_per_thread_ = options.PullBoolValue("--per-thread");
+
+  if (auto values = options.PullValues("-p"); values) {
+    for (const auto& value : values.value()) {
       std::set<pid_t> pids;
-      if (!GetValidThreadsFromThreadString(args[i], &pids)) {
+      if (!GetValidThreadsFromThreadString(*value.str_value, &pids)) {
         return false;
       }
       event_selection_set_.AddMonitoredProcesses(pids);
-    } else if (args[i] == "--stop-signal-fd") {
-      int fd;
-      if (!GetUintOption(args, &i, &fd)) {
-        return false;
-      }
-      stop_signal_fd_.reset(fd);
-    } else if (args[i] == "-t") {
-      if (!NextArgumentOrError(args, &i)) {
-        return false;
-      }
+    }
+  }
+
+  if (auto value = options.PullValue("--sort"); value) {
+    sort_keys_ = Split(*value->str_value, ",");
+  }
+
+  if (auto value = options.PullValue("--stop-signal-fd"); value) {
+    stop_signal_fd_.reset(static_cast<int>(value->uint_value));
+  }
+
+  if (auto values = options.PullValues("-t"); values) {
+    for (const auto& value : values.value()) {
       std::set<pid_t> tids;
-      if (!GetValidThreadsFromThreadString(args[i], &tids)) {
+      if (!GetValidThreadsFromThreadString(*value.str_value, &tids)) {
         return false;
       }
       event_selection_set_.AddMonitoredThreads(tids);
-    } else if (args[i] == "--tracepoint-events") {
-      if (!NextArgumentOrError(args, &i)) {
-        return false;
-      }
-      if (!SetTracepointEventsFilePath(args[i])) {
-        return false;
-      }
-#if defined(__ANDROID__)
-    } else if (args[i] == "--use-devfreq-counters") {
-      use_devfreq_counters_ = true;
-#endif
-    } else if (args[i] == "--verbose") {
-      verbose_mode_ = true;
-    } else {
-      ReportUnknownOption(args, i);
+    }
+  }
+
+  if (auto value = options.PullValue("--tracepoint-events"); value) {
+    if (!SetTracepointEventsFilePath(*value->str_value)) {
       return false;
     }
   }
+
+  use_devfreq_counters_ = options.PullBoolValue("--use-devfreq-counters");
+  verbose_mode_ = options.PullBoolValue("--verbose");
+
+  CHECK(options.values.empty());
+  CHECK(ordered_options.empty());
 
   if (system_wide_collection_ && event_selection_set_.HasMonitoredTarget()) {
     LOG(ERROR) << "Stat system wide and existing processes/threads can't be "
@@ -722,9 +736,11 @@ bool StatCommand::ParseOptions(const std::vector<std::string>& args,
     return false;
   }
 
-  non_option_args->clear();
-  for (; i < args.size(); ++i) {
-    non_option_args->push_back(args[i]);
+  if (report_per_core_ || report_per_thread_) {
+    summary_comparator_ = BuildSummaryComparator(sort_keys_, report_per_thread_, report_per_core_);
+    if (!summary_comparator_) {
+      return false;
+    }
   }
   return true;
 }
@@ -830,7 +846,8 @@ bool StatCommand::ShowCounters(const std::vector<CountersInfo>& counters,
     }
   }
 
-  CounterSummaryBuilder builder(report_per_thread_, report_per_core_, csv_, thread_info_);
+  CounterSummaryBuilder builder(report_per_thread_, report_per_core_, csv_, thread_info_,
+                                summary_comparator_);
   for (const auto& info : counters) {
     builder.AddCountersForOneEventType(info);
   }
@@ -879,7 +896,11 @@ bool StatCommand::ShowCounters(const std::vector<CountersInfo>& counters,
 
 }  // namespace
 
+namespace simpleperf {
+
 void RegisterStatCommand() {
   RegisterCommand("stat",
                   [] { return std::unique_ptr<Command>(new StatCommand); });
 }
+
+}  // namespace simpleperf

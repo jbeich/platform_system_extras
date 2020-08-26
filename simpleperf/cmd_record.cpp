@@ -38,6 +38,7 @@
 #endif
 
 #include "CallChainJoiner.h"
+#include "cmd_record_impl.h"
 #include "command.h"
 #include "environment.h"
 #include "ETMRecorder.h"
@@ -55,6 +56,8 @@
 #include "utils.h"
 #include "workload.h"
 
+using android::base::ParseUint;
+using android::base::Realpath;
 using namespace simpleperf;
 
 static std::string default_measured_event_type = "cpu-cycles";
@@ -195,9 +198,26 @@ class RecordCommand : public Command {
 "--no-inherit  Don't record created child threads/processes.\n"
 "--cpu-percent <percent>  Set the max percent of cpu time used for recording.\n"
 "                         percent is in range [1-100], default is 25.\n"
-"--include-filter binary1,binary2,...\n"
-"                Trace only selected binaries in cs-etm instruction tracing.\n"
-"                Each entry is a binary path.\n"
+"--addr-filter filter_str1,filter_str2,...\n"
+"                Provide address filters for cs-etm instruction tracing.\n"
+"                filter_str accepts below formats:\n"
+"                  'filter  <addr-range>'  -- trace instructions in a range\n"
+"                  'start <addr>'          -- start tracing when ip is <addr>\n"
+"                  'stop <addr>'           -- stop tracing when ip is <addr>\n"
+"                <addr-range> accepts below formats:\n"
+"                  <file_path>                            -- code sections in a binary file\n"
+"                  <vaddr_start>-<vaddr_end>@<file_path>  -- part of a binary file\n"
+"                  <kernel_addr_start>-<kernel_addr_end>  -- part of kernel space\n"
+"                <addr> accepts below formats:\n"
+"                  <vaddr>@<file_path>      -- virtual addr in a binary file\n"
+"                  <kernel_addr>            -- a kernel address\n"
+"                Examples:\n"
+"                  'filter 0x456-0x480@/system/lib/libc.so'\n"
+"                  'start 0x456@/system/lib/libc.so,stop 0x480@/system/lib/libc.so'\n"
+"\n"
+"--tp-filter filter_string    Set filter_string for the previous tracepoint event.\n"
+"                             Format is in Documentation/trace/events.rst in the kernel.\n"
+"                             An example: 'prev_comm != \"simpleperf\" && (prev_pid > 1)'.\n"
 "\n"
 "Dwarf unwinding options:\n"
 "--post-unwind=(yes|no) If `--call-graph dwarf` option is used, then the user's\n"
@@ -474,9 +494,12 @@ bool RecordCommand::PrepareRecording(Workload* workload) {
     // JIT symfiles are stored in temporary files, and are deleted after recording. But if
     // `-g --no-unwind` option is used, we want to keep symfiles to support unwinding in
     // the debug-unwind cmd.
-    bool keep_symfiles = dwarf_callchain_sampling_ && !unwind_dwarf_callchain_;
-    bool sync_with_records = clockid_ == "monotonic";
-    jit_debug_reader_.reset(new JITDebugReader(keep_symfiles, sync_with_records));
+    auto symfile_option = (dwarf_callchain_sampling_ && !unwind_dwarf_callchain_)
+                              ? JITDebugReader::SymFileOption::kKeepSymFiles
+                              : JITDebugReader::SymFileOption::kDropSymFiles;
+    auto sync_option = (clockid_ == "monotonic") ? JITDebugReader::SyncOption::kSyncWithRecords
+                                                 : JITDebugReader::SyncOption::kNoSync;
+    jit_debug_reader_.reset(new JITDebugReader(record_filename_, symfile_option, sync_option));
     // To profile java code, need to dump maps containing vdex files, which are not executable.
     event_selection_set_.SetRecordNotExecutableMaps(true);
   }
@@ -703,160 +726,84 @@ bool RecordCommand::PostProcessRecording(const std::vector<std::string>& args) {
 
 bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
                                  std::vector<std::string>* non_option_args) {
-  std::vector<size_t> wait_setting_speed_event_groups_;
-  size_t i;
-  for (i = 0; i < args.size() && !args[i].empty() && args[i][0] == '-'; ++i) {
-    if (args[i] == "-a") {
-      system_wide_collection_ = true;
-    } else if (args[i] == "--app") {
-      if (!NextArgumentOrError(args, &i)) {
-        return false;
-      }
-      app_package_name_ = args[i];
-    } else if (args[i] == "--aux-buffer-size") {
-      if (!GetUintOption(args, &i, &aux_buffer_size_, 0, std::numeric_limits<size_t>::max(),
-                         true)) {
-        return false;
-      }
-      if (!IsPowerOfTwo(aux_buffer_size_) || aux_buffer_size_ % sysconf(_SC_PAGE_SIZE)) {
-        LOG(ERROR) << "invalid aux buffer size: " << args[i];
-        return false;
-      }
-    } else if (args[i] == "-b") {
-      branch_sampling_ = branch_sampling_type_map["any"];
-    } else if (args[i] == "-c" || args[i] == "-f") {
-      uint64_t value;
-      if (!GetUintOption(args, &i, &value, 1)) {
-        return false;
-      }
-      if (args[i-1] == "-c") {
-        sample_speed_.reset(new SampleSpeed(0, value));
-      } else {
-        if (value >= INT_MAX) {
-          LOG(ERROR) << "sample freq can't be bigger than INT_MAX.";
-          return false;
-        }
-        sample_speed_.reset(new SampleSpeed(value, 0));
-        max_sample_freq_ = std::max(max_sample_freq_, value);
-      }
-      for (auto group_id : wait_setting_speed_event_groups_) {
-        event_selection_set_.SetSampleSpeed(group_id, *sample_speed_);
-      }
-      wait_setting_speed_event_groups_.clear();
+  OptionValueMap options;
+  std::vector<std::pair<OptionName, OptionValue>> ordered_options;
 
-    } else if (args[i] == "--call-graph") {
-      if (!NextArgumentOrError(args, &i)) {
+  if (!PreprocessOptions(args, GetRecordCmdOptionFormats(), &options, &ordered_options,
+                         non_option_args)) {
+    return false;
+  }
+
+  // Process options.
+  system_wide_collection_ = options.PullBoolValue("-a");
+
+  if (auto value = options.PullValue("--addr-filter"); value) {
+    auto filters = ParseAddrFilterOption(*value->str_value);
+    if (filters.empty()) {
+      return false;
+    }
+    event_selection_set_.SetAddrFilters(std::move(filters));
+  }
+
+  if (auto value = options.PullValue("--app"); value) {
+    app_package_name_ = *value->str_value;
+  }
+
+  if (auto value = options.PullValue("--aux-buffer-size"); value) {
+    uint64_t v = value->uint_value;
+    if (v > std::numeric_limits<size_t>::max() || !IsPowerOfTwo(v) || v % sysconf(_SC_PAGE_SIZE)) {
+      LOG(ERROR) << "invalid aux buffer size: " << v;
+      return false;
+    }
+    aux_buffer_size_ = static_cast<size_t>(v);
+  }
+
+  if (options.PullValue("-b")) {
+    branch_sampling_ = branch_sampling_type_map["any"];
+  }
+
+  if (!options.PullUintValue("--callchain-joiner-min-matching-nodes",
+                             &callchain_joiner_min_matching_nodes_, 1)) {
+    return false;
+  }
+
+  if (auto value = options.PullValue("--clockid"); value) {
+    clockid_ = *value->str_value;
+    if (clockid_ != "perf") {
+      if (!IsSettingClockIdSupported()) {
+        LOG(ERROR) << "Setting clockid is not supported by the kernel.";
         return false;
       }
-      std::vector<std::string> strs = android::base::Split(args[i], ",");
-      if (strs[0] == "fp") {
-        fp_callchain_sampling_ = true;
-        dwarf_callchain_sampling_ = false;
-      } else if (strs[0] == "dwarf") {
-        fp_callchain_sampling_ = false;
-        dwarf_callchain_sampling_ = true;
-        if (strs.size() > 1) {
-          uint64_t size;
-          if (!android::base::ParseUint(strs[1], &size)) {
-            LOG(ERROR) << "invalid dump stack size in --call-graph option: " << strs[1];
-            return false;
-          }
-          if ((size & 7) != 0) {
-            LOG(ERROR) << "dump stack size " << size
-                       << " is not 8-byte aligned.";
-            return false;
-          }
-          if (size >= MAX_DUMP_STACK_SIZE) {
-            LOG(ERROR) << "dump stack size " << size
-                       << " is bigger than max allowed size "
-                       << MAX_DUMP_STACK_SIZE << ".";
-            return false;
-          }
-          dump_stack_size_in_dwarf_sampling_ = static_cast<uint32_t>(size);
-        }
-      } else {
-        LOG(ERROR) << "unexpected argument for --call-graph option: "
-                   << args[i];
+      if (clockid_map.find(clockid_) == clockid_map.end()) {
+        LOG(ERROR) << "Invalid clockid: " << clockid_;
         return false;
       }
-    } else if (args[i] == "--clockid") {
-      if (!NextArgumentOrError(args, &i)) {
-        return false;
-      }
-      if (args[i] != "perf") {
-        if (!IsSettingClockIdSupported()) {
-          LOG(ERROR) << "Setting clockid is not supported by the kernel.";
-          return false;
-        }
-        if (clockid_map.find(args[i]) == clockid_map.end()) {
-          LOG(ERROR) << "Invalid clockid: " << args[i];
-          return false;
-        }
-      }
-      clockid_ = args[i];
-    } else if (args[i] == "--cpu") {
-      if (!NextArgumentOrError(args, &i)) {
-        return false;
-      }
-      cpus_ = GetCpusFromString(args[i]);
-    } else if (args[i] == "--cpu-percent") {
-      if (!GetUintOption(args, &i, &cpu_time_max_percent_, 1, 100)) {
-        return false;
-      }
-    } else if (args[i] == "--duration") {
-      if (!GetDoubleOption(args, &i, &duration_in_sec_, 1e-9)) {
-        return false;
-      }
-    } else if (args[i] == "-e") {
-      if (!NextArgumentOrError(args, &i)) {
-        return false;
-      }
-      std::vector<std::string> event_types = android::base::Split(args[i], ",");
-      for (auto& event_type : event_types) {
-        size_t group_id;
-        if (!event_selection_set_.AddEventType(event_type, &group_id)) {
-          return false;
-        }
-        if (sample_speed_) {
-          event_selection_set_.SetSampleSpeed(group_id, *sample_speed_);
-        } else {
-          wait_setting_speed_event_groups_.push_back(group_id);
-        }
-      }
-    } else if (args[i] == "--exclude-perf") {
-      exclude_perf_ = true;
-    } else if (args[i] == "--exit-with-parent") {
-      prctl(PR_SET_PDEATHSIG, SIGHUP, 0, 0, 0);
-    } else if (args[i] == "-g") {
-      fp_callchain_sampling_ = false;
-      dwarf_callchain_sampling_ = true;
-    } else if (args[i] == "--group") {
-      if (!NextArgumentOrError(args, &i)) {
-        return false;
-      }
-      std::vector<std::string> event_types = android::base::Split(args[i], ",");
-      size_t group_id;
-      if (!event_selection_set_.AddEventGroup(event_types, &group_id)) {
-        return false;
-      }
-      if (sample_speed_) {
-        event_selection_set_.SetSampleSpeed(group_id, *sample_speed_);
-      } else {
-        wait_setting_speed_event_groups_.push_back(group_id);
-      }
-    } else if (args[i] == "--in-app") {
-      in_app_context_ = true;
-    } else if (args[i] == "--include-filter") {
-      if (!NextArgumentOrError(args, &i)) {
-        return false;
-      }
-      event_selection_set_.SetIncludeFilters(android::base::Split(args[i], ","));
-    } else if (args[i] == "-j") {
-      if (!NextArgumentOrError(args, &i)) {
-        return false;
-      }
-      std::vector<std::string> branch_sampling_types =
-          android::base::Split(args[i], ",");
+    }
+  }
+
+  if (auto value = options.PullValue("--cpu"); value) {
+    cpus_ = GetCpusFromString(*value->str_value);
+  }
+
+  if (!options.PullUintValue("--cpu-percent", &cpu_time_max_percent_, 1, 100)) {
+    return false;
+  }
+
+  if (!options.PullDoubleValue("--duration", &duration_in_sec_, 1e-9)) {
+    return false;
+  }
+
+  exclude_perf_ = options.PullBoolValue("--exclude-perf");
+
+  if (options.PullValue("--exit-with-parent")) {
+    prctl(PR_SET_PDEATHSIG, SIGHUP, 0, 0, 0);
+  }
+
+  in_app_context_ = options.PullBoolValue("--in-app");
+
+  if (auto values = options.PullValues("-j"); values) {
+    for (const auto& value : values.value()) {
+      std::vector<std::string> branch_sampling_types = android::base::Split(*value.str_value, ",");
       for (auto& type : branch_sampling_types) {
         auto it = branch_sampling_type_map.find(type);
         if (it == branch_sampling_type_map.end()) {
@@ -865,118 +812,189 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
         }
         branch_sampling_ |= it->second;
       }
-    } else if (args[i] == "-m") {
-      uint64_t pages;
-      if (!GetUintOption(args, &i, &pages)) {
-        return false;
-      }
-      if (!IsPowerOfTwo(pages)) {
-        LOG(ERROR) << "Invalid mmap_pages: '" << args[i] << "'";
-        return false;
-      }
-      mmap_page_range_.first = mmap_page_range_.second = pages;
-    } else if (args[i] == "--no-dump-kernel-symbols") {
-      can_dump_kernel_symbols_ = false;
-    } else if (args[i] == "--no-dump-symbols") {
-      dump_symbols_ = false;
-    } else if (args[i] == "--no-inherit") {
-      child_inherit_ = false;
-    } else if (args[i] == "--no-unwind") {
-      unwind_dwarf_callchain_ = false;
-    } else if (args[i] == "--no-callchain-joiner") {
-      allow_callchain_joiner_ = false;
-    } else if (args[i] == "--callchain-joiner-min-matching-nodes") {
-      if (!GetUintOption(args, &i, &callchain_joiner_min_matching_nodes_, 1)) {
-        return false;
-      }
-    } else if (args[i] == "--no-cut-samples") {
-      allow_cutting_samples_ = false;
-    } else if (args[i] == "-o") {
-      if (!NextArgumentOrError(args, &i)) {
-        return false;
-      }
-      record_filename_ = args[i];
-    } else if (args[i] == "--out-fd") {
-      int fd;
-      if (!GetUintOption(args, &i, &fd)) {
-        return false;
-      }
-      out_fd_.reset(fd);
-    } else if (args[i] == "-p") {
-      if (!NextArgumentOrError(args, &i)) {
-        return false;
-      }
+    }
+  }
+
+  if (auto value = options.PullValue("-m"); value) {
+    if (!IsPowerOfTwo(value->uint_value) ||
+        value->uint_value > std::numeric_limits<size_t>::max()) {
+      LOG(ERROR) << "Invalid mmap_pages: '" << value->uint_value << "'";
+      return false;
+    }
+    mmap_page_range_.first = mmap_page_range_.second = value->uint_value;
+  }
+
+  allow_callchain_joiner_ = !options.PullBoolValue("--no-callchain-joiner");
+  allow_cutting_samples_ = !options.PullBoolValue("--no-cut-samples");
+  can_dump_kernel_symbols_ = !options.PullBoolValue("--no-dump-kernel-symbols");
+  dump_symbols_ = !options.PullBoolValue("--no-dump-symbols");
+  child_inherit_ = !options.PullBoolValue("--no-inherit");
+  unwind_dwarf_callchain_ = !options.PullBoolValue("--no-unwind");
+
+  if (auto value = options.PullValue("-o"); value) {
+    record_filename_ = *value->str_value;
+  }
+
+  if (auto value = options.PullValue("--out-fd"); value) {
+    out_fd_.reset(static_cast<int>(value->uint_value));
+  }
+
+  if (auto values = options.PullValues("-p"); values) {
+    for (const auto& value : values.value()) {
       std::set<pid_t> pids;
-      if (!GetValidThreadsFromThreadString(args[i], &pids)) {
+      if (!GetValidThreadsFromThreadString(*value.str_value, &pids)) {
         return false;
       }
       event_selection_set_.AddMonitoredProcesses(pids);
-    } else if (android::base::StartsWith(args[i], "--post-unwind")) {
-      if (args[i] == "--post-unwind" || args[i] == "--post-unwind=yes") {
-        post_unwind_ = true;
-      } else if (args[i] == "--post-unwind=no") {
-        post_unwind_ = false;
-      } else {
-        LOG(ERROR) << "unexpected option " << args[i];
-        return false;
-      }
-    } else if (args[i] == "--size-limit") {
-      if (!GetUintOption(args, &i, &size_limit_in_bytes_, 1, std::numeric_limits<uint64_t>::max(),
-                         true)) {
-        return false;
-      }
-    } else if (args[i] == "--start_profiling_fd") {
-      int fd;
-      if (!GetUintOption(args, &i, &fd)) {
-        return false;
-      }
-      start_profiling_fd_.reset(fd);
-    } else if (args[i] == "--stdio-controls-profiling") {
-      stdio_controls_profiling_ = true;
-    } else if (args[i] == "--stop-signal-fd") {
-      int fd;
-      if (!GetUintOption(args, &i, &fd)) {
-        return false;
-      }
-      stop_signal_fd_.reset(fd);
-    } else if (args[i] == "--symfs") {
-      if (!NextArgumentOrError(args, &i)) {
-        return false;
-      }
-      if (!Dso::SetSymFsDir(args[i])) {
-        return false;
-      }
-    } else if (args[i] == "-t") {
-      if (!NextArgumentOrError(args, &i)) {
-        return false;
-      }
+    }
+  }
+
+  // Use explicit if statements instead of logical operators to avoid short-circuit.
+  if (options.PullValue("--post-unwind")) {
+    post_unwind_ = true;
+  }
+  if (options.PullValue("--post-unwind=yes")) {
+    post_unwind_ = true;
+  }
+  if (options.PullValue("--post-unwind=no")) {
+    post_unwind_ = false;
+  }
+
+  if (!options.PullUintValue("--size-limit", &size_limit_in_bytes_, 1)) {
+    return false;
+  }
+
+  if (auto value = options.PullValue("--start_profiling_fd"); value) {
+    start_profiling_fd_.reset(static_cast<int>(value->uint_value));
+  }
+
+  stdio_controls_profiling_ = options.PullBoolValue("--stdio-controls-profiling");
+
+  if (auto value = options.PullValue("--stop-signal-fd"); value) {
+    stop_signal_fd_.reset(static_cast<int>(value->uint_value));
+  }
+
+  if (auto value = options.PullValue("--symfs"); value) {
+    if (!Dso::SetSymFsDir(*value->str_value)) {
+      return false;
+    }
+  }
+
+  if (auto values = options.PullValues("-t"); values) {
+    for (const auto& value : values.value()) {
       std::set<pid_t> tids;
-      if (!GetValidThreadsFromThreadString(args[i], &tids)) {
+      if (!GetValidThreadsFromThreadString(*value.str_value, &tids)) {
         return false;
       }
       event_selection_set_.AddMonitoredThreads(tids);
-    } else if (args[i] == "--trace-offcpu") {
-      trace_offcpu_ = true;
-    } else if (args[i] == "--tracepoint-events") {
-      if (!NextArgumentOrError(args, &i)) {
-        return false;
-      }
-      if (!SetTracepointEventsFilePath(args[i])) {
-        return false;
-      }
-    } else if (args[i] == "--") {
-      i++;
-      break;
-    } else {
-      ReportUnknownOption(args, i);
+    }
+  }
+
+  trace_offcpu_ = options.PullBoolValue("--trace-offcpu");
+
+  if (auto value = options.PullValue("--tracepoint-events"); value) {
+    if (!SetTracepointEventsFilePath(*value->str_value)) {
       return false;
+    }
+  }
+
+  CHECK(options.values.empty());
+
+  // Process ordered options.
+  std::vector<size_t> wait_setting_speed_event_groups;
+
+  for (const auto& pair : ordered_options) {
+    const OptionName& name = pair.first;
+    const OptionValue& value = pair.second;
+
+    if (name == "-c" || name == "-f") {
+      if (value.uint_value < 1) {
+        LOG(ERROR) << "invalid " << name << ": " << value.uint_value;
+        return false;
+      }
+      if (name == "-c") {
+        sample_speed_.reset(new SampleSpeed(0, value.uint_value));
+      } else {
+        if (value.uint_value >= INT_MAX) {
+          LOG(ERROR) << "sample freq can't be bigger than INT_MAX: " << value.uint_value;
+          return false;
+        }
+        sample_speed_.reset(new SampleSpeed(value.uint_value, 0));
+      }
+
+      for (auto groud_id : wait_setting_speed_event_groups) {
+        event_selection_set_.SetSampleSpeed(groud_id, *sample_speed_);
+      }
+      wait_setting_speed_event_groups.clear();
+
+    } else if (name == "--call-graph") {
+      std::vector<std::string> strs = android::base::Split(*value.str_value, ",");
+      if (strs[0] == "fp") {
+        fp_callchain_sampling_ = true;
+        dwarf_callchain_sampling_ = false;
+      } else if (strs[0] == "dwarf") {
+        fp_callchain_sampling_ = false;
+        dwarf_callchain_sampling_ = true;
+        if (strs.size() > 1) {
+          uint64_t size;
+          if (!ParseUint(strs[1], &size)) {
+            LOG(ERROR) << "invalid dump stack size in --call-graph option: " << strs[1];
+            return false;
+          }
+          if ((size & 7) != 0) {
+            LOG(ERROR) << "dump stack size " << size << " is not 8-byte aligned.";
+            return false;
+          }
+          if (size >= MAX_DUMP_STACK_SIZE) {
+            LOG(ERROR) << "dump stack size " << size << " is bigger than max allowed size "
+                       << MAX_DUMP_STACK_SIZE << ".";
+            return false;
+          }
+          dump_stack_size_in_dwarf_sampling_ = static_cast<uint32_t>(size);
+        }
+      }
+
+    } else if (name == "-e") {
+      std::vector<std::string> event_types = android::base::Split(*value.str_value, ",");
+      for (auto& event_type : event_types) {
+        size_t group_id;
+        if (!event_selection_set_.AddEventType(event_type, &group_id)) {
+          return false;
+        }
+        if (sample_speed_) {
+          event_selection_set_.SetSampleSpeed(group_id, *sample_speed_);
+        } else {
+          wait_setting_speed_event_groups.push_back(group_id);
+        }
+      }
+
+    } else if (name == "-g") {
+      fp_callchain_sampling_ = false;
+      dwarf_callchain_sampling_ = true;
+    } else if (name == "--group") {
+      std::vector<std::string> event_types = android::base::Split(*value.str_value, ",");
+      size_t group_id;
+      if (!event_selection_set_.AddEventGroup(event_types, &group_id)) {
+        return false;
+      }
+      if (sample_speed_) {
+        event_selection_set_.SetSampleSpeed(group_id, *sample_speed_);
+      } else {
+        wait_setting_speed_event_groups.push_back(group_id);
+      }
+
+    } else if (name == "--tp-filter") {
+      if (!event_selection_set_.SetTracepointFilter(*value.str_value)) {
+        return false;
+      }
+    } else {
+      CHECK(false) << "unprocessed option: " << name;
     }
   }
 
   if (!dwarf_callchain_sampling_) {
     if (!unwind_dwarf_callchain_) {
-      LOG(ERROR)
-          << "--no-unwind is only used with `--call-graph dwarf` option.";
+      LOG(ERROR) << "--no-unwind is only used with `--call-graph dwarf` option.";
       return false;
     }
     unwind_dwarf_callchain_ = false;
@@ -1013,10 +1031,6 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
     clockid_ = IsSettingClockIdSupported() ? "monotonic" : "perf";
   }
 
-  non_option_args->clear();
-  for (; i < args.size(); ++i) {
-    non_option_args->push_back(args[i]);
-  }
   return true;
 }
 
@@ -1390,8 +1404,8 @@ bool RecordCommand::ProcessJITDebugInfo(const std::vector<JITDebugInfo>& debug_i
     if (info.type == JITDebugInfo::JIT_DEBUG_JIT_CODE) {
       uint64_t timestamp = jit_debug_reader_->SyncWithRecords() ? info.timestamp
                                                                 : last_record_timestamp_;
-      Mmap2Record record(*attr_id.attr, false, info.pid, info.pid,
-                         info.jit_code_addr, info.jit_code_len, 0, map_flags::PROT_JIT_SYMFILE_MAP,
+      Mmap2Record record(*attr_id.attr, false, info.pid, info.pid, info.jit_code_addr,
+                         info.jit_code_len, info.file_offset, map_flags::PROT_JIT_SYMFILE_MAP,
                          info.file_path, attr_id.ids[0], timestamp);
       if (!ProcessRecord(&record)) {
         return false;
@@ -1725,7 +1739,7 @@ bool RecordCommand::DumpBuildIdFeature() {
       }
       build_id_records.push_back(BuildIdRecord(true, UINT_MAX, build_id, path));
     } else if (dso->type() == DSO_ELF_FILE) {
-      if (dso->Path() == DEFAULT_EXECNAME_FOR_THREAD_MMAP) {
+      if (dso->Path() == DEFAULT_EXECNAME_FOR_THREAD_MMAP || dso->IsForJavaMethod()) {
         continue;
       }
       if (!GetBuildIdFromDsoPath(dso->Path(), &build_id)) {
@@ -1768,6 +1782,9 @@ bool RecordCommand::DumpMetaInfoFeature(bool kernel_symbols_available) {
   info_map["clockid"] = clockid_;
   info_map["timestamp"] = std::to_string(time(nullptr));
   info_map["kernel_symbols_available"] = kernel_symbols_available ? "true" : "false";
+  if (dwarf_callchain_sampling_ && !unwind_dwarf_callchain_) {
+    OfflineUnwinder::CollectMetaInfo(&info_map);
+  }
   return record_file_writer_->WriteMetaInfoFeature(info_map);
 }
 
@@ -1828,7 +1845,78 @@ void RecordCommand::CollectHitFileInfo(const SampleRecord& r) {
   }
 }
 
+namespace simpleperf {
+
+// To reduce function length, not all format errors are checked.
+static bool ParseOneAddrFilter(const std::string& s, std::vector<AddrFilter>* filters) {
+  std::vector<std::string> args = android::base::Split(s, " -@");
+  std::unique_ptr<ElfFile> elf;
+  uint64_t addr1;
+  uint64_t addr2;
+  uint64_t off1;
+  uint64_t off2;
+  std::string path;
+
+  if (args[0] == "start" || args[0] == "stop") {
+    if (args.size() >= 2 && ParseUint(args[1], &addr1)) {
+      if (args.size() == 2) {
+        // start <kernel_addr>  || stop <kernel_addr>
+        filters->emplace_back(
+            args[0] == "start" ? AddrFilter::KERNEL_START : AddrFilter::KERNEL_STOP, addr1, 0, "");
+        return true;
+      }
+      if (auto elf = ElfFile::Open(args[2]);
+          elf && elf->VaddrToOff(addr1, &off1) && Realpath(args[2], &path)) {
+        // start <vaddr>@<file_path> || stop <vaddr>@<file_path>
+        filters->emplace_back(args[0] == "start" ? AddrFilter::FILE_START : AddrFilter::FILE_STOP,
+                              off1, 0, path);
+        return true;
+      }
+    }
+  } else if (args[0] == "filter") {
+    if (args.size() == 2) {
+      // filter <file_path>
+      if (auto elf = ElfFile::Open(args[1]); elf) {
+        for (const ElfSegment& seg : elf->GetProgramHeader()) {
+          if (seg.is_executable) {
+            filters->emplace_back(AddrFilter::FILE_RANGE, seg.file_offset, seg.file_size, args[1]);
+          }
+        }
+        return true;
+      }
+    } else if (args.size() >= 3 && ParseUint(args[1], &addr1) && ParseUint(args[2], &addr2) &&
+               addr1 < addr2) {
+      if (args.size() == 3) {
+        // filter <kernel_addr_start>-<kernel_addr_end>
+        filters->emplace_back(AddrFilter::KERNEL_RANGE, addr1, addr2 - addr1, "");
+        return true;
+      }
+      if (auto elf = ElfFile::Open(args[3]); elf && elf->VaddrToOff(addr1, &off1) &&
+                                             elf->VaddrToOff(addr2, &off2) &&
+                                             Realpath(args[3], &path)) {
+        // filter <vaddr_start>-<vaddr_end>@<file_path>
+        filters->emplace_back(AddrFilter::FILE_RANGE, off1, off2 - off1, path);
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
+std::vector<AddrFilter> ParseAddrFilterOption(const std::string& s) {
+  std::vector<AddrFilter> filters;
+  for (const auto& str : android::base::Split(s, ",")) {
+    if (!ParseOneAddrFilter(str, &filters)) {
+      LOG(ERROR) << "failed to parse addr filter: " << str;
+      return {};
+    }
+  }
+  return filters;
+}
+
 void RegisterRecordCommand() {
   RegisterCommand("record",
                   [] { return std::unique_ptr<Command>(new RecordCommand()); });
 }
+
+}  // namespace simpleperf

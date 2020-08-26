@@ -64,6 +64,25 @@ struct SampleSpeed {
   }
 };
 
+struct AddrFilter {
+  enum Type {
+    FILE_RANGE,
+    FILE_START,
+    FILE_STOP,
+    KERNEL_RANGE,
+    KERNEL_START,
+    KERNEL_STOP,
+  } type;
+  uint64_t addr;
+  uint64_t size;
+  std::string file_path;
+
+  AddrFilter(AddrFilter::Type type, uint64_t addr, uint64_t size, const std::string& file_path)
+      : type(type), addr(addr), size(size), file_path(file_path) {}
+
+  std::string ToString() const;
+};
+
 // EventSelectionSet helps to monitor events. It is used in following steps:
 // 1. Create an EventSelectionSet, and add event types to monitor by calling
 //    AddEventType() or AddEventGroup().
@@ -106,9 +125,10 @@ class EventSelectionSet {
   bool NeedKernelSymbol() const;
   void SetRecordNotExecutableMaps(bool record);
   bool RecordNotExecutableMaps() const;
-  void SetIncludeFilters(std::vector<std::string>&& filters) {
-    include_filters_ = std::move(filters);
+  void SetAddrFilters(std::vector<AddrFilter>&& filters) {
+    addr_filters_ = std::move(filters);
   }
+  bool SetTracepointFilter(const std::string& filter);
 
   template <typename Collection = std::vector<pid_t>>
   void AddMonitoredProcesses(const Collection& processes) {
@@ -166,6 +186,7 @@ class EventSelectionSet {
     // counters for event files closed for cpu hotplug events
     std::vector<CounterInfo> hotplugged_counters;
     std::vector<int> allowed_cpus;
+    std::string tracepoint_filter;
   };
   typedef std::vector<EventSelection> EventSelectionGroup;
 
@@ -175,6 +196,8 @@ class EventSelectionSet {
   bool OpenEventFilesOnGroup(EventSelectionGroup& group, pid_t tid, int cpu,
                              std::string* failed_event_type);
   bool ApplyFilters();
+  bool ApplyAddrFilters();
+  bool ApplyTracepointFilters();
   bool ReadMmapEventData(bool with_time_limit);
 
   bool CheckMonitoredTargets();
@@ -192,7 +215,7 @@ class EventSelectionSet {
   std::unique_ptr<simpleperf::RecordReadThread> record_read_thread_;
 
   bool has_aux_trace_ = false;
-  std::vector<std::string> include_filters_;
+  std::vector<AddrFilter> addr_filters_;
 
   DISALLOW_COPY_AND_ASSIGN(EventSelectionSet);
 };
