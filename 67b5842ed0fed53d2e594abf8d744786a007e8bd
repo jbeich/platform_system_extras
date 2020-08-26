@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "c2f34c30_730e8eab",
+        "filename": "gki/.clang-format",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2020-08-26T22:05:58Z",
+      "side": 1,
+      "message": "Will do!\n\nI personally like build/soong/scripts/system-clang-format-2 more though",
+      "parentUuid": "a508b6ff_d7e4aaa2",
+      "revId": "67b5842ed0fed53d2e594abf8d744786a007e8bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "34ef6f75_30e61ba2",
         "filename": "gki/libkver/test.cpp",
         "patchSetId": 4
@@ -47,6 +65,30 @@
       "writtenOn": "2020-08-26T17:56:12Z",
       "side": 1,
       "message": "Curious, why doesn\u0027t this work? I would\u0027ve expected the null to give you a version of 5.4-android12-1, which is valid, but I guess C++ handles strings differently?",
+      "range": {
+        "startLine": 62,
+        "startChar": 32,
+        "endLine": 62,
+        "endChar": 47
+      },
+      "revId": "67b5842ed0fed53d2e594abf8d744786a007e8bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "88b41963_b3c248ef",
+        "filename": "gki/libkver/test.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2020-08-26T22:05:58Z",
+      "side": 1,
+      "message": "AFAIK, std::string{\"5.4-android12-1\\0-something\"} is equivalent to std::string{\"5.4-android12-1\\0\"}. But \"5.4-android12-1\\0-something\"s (with operator\"\"s) is equivalent to std::string(\"5.4-android12-1\\0-something\", \u003ccorrect-length\u003e).\n\nSee example at the bottom of this page: https://en.cppreference.com/w/cpp/string/basic_string/operator%22%22s",
+      "parentUuid": "34ef6f75_30e61ba2",
       "range": {
         "startLine": 62,
         "startChar": 32,
