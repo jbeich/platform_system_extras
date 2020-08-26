@@ -22,6 +22,30 @@
       "revId": "3b2b5808e1da963c65f5dbfd3dc73abbbc15a1e2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "24f97283_5a92e926",
+        "filename": "simpleperf/read_symbol_map.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1074438
+      },
+      "writtenOn": "2020-08-26T21:35:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aadd5947_b5637416",
+      "range": {
+        "startLine": 58,
+        "startChar": 2,
+        "endLine": 58,
+        "endChar": 4
+      },
+      "revId": "3b2b5808e1da963c65f5dbfd3dc73abbbc15a1e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
