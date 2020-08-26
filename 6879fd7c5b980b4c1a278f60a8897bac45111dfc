@@ -1,0 +1,85 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004623123",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1411908?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "4361a2ac_7ed85482",
+        "filename": "simpleperf/read_symbol_map.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-08-26T13:08:59Z",
+      "side": 1,
+      "message": "Third-party license (BSD) disallowed in repository platform/system/extras:\nRedistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:...Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and or other materials provided with the distribution.\n",
+      "range": {
+        "startLine": 5,
+        "startChar": 4,
+        "endLine": 13,
+        "endChar": 20
+      },
+      "revId": "6879fd7c5b980b4c1a278f60a8897bac45111dfc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004623123",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1411908?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "98ccfa7b_65887596",
+        "filename": "simpleperf/read_symbol_map.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-08-26T13:08:59Z",
+      "side": 1,
+      "message": "Third-party license (BSD) disallowed in repository platform/system/extras:\nRedistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:...Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and or other materials provided with the distribution.\n",
+      "range": {
+        "startLine": 5,
+        "startChar": 4,
+        "endLine": 13,
+        "endChar": 20
+      },
+      "revId": "6879fd7c5b980b4c1a278f60a8897bac45111dfc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000004623123",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1411908?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "99bd5b90_a6c93a10",
+        "filename": "simpleperf/read_symbol_map_test.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1550585
+      },
+      "writtenOn": "2020-08-26T13:08:59Z",
+      "side": 1,
+      "message": "Third-party license (BSD) disallowed in repository platform/system/extras:\nRedistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:...Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and or other materials provided with the distribution.\n",
+      "range": {
+        "startLine": 5,
+        "startChar": 4,
+        "endLine": 13,
+        "endChar": 20
+      },
+      "revId": "6879fd7c5b980b4c1a278f60a8897bac45111dfc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
