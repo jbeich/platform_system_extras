@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "deaba2f0_2b740a23",
+        "filename": "gki/.clang-format",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2020-08-26T22:40:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c2f34c30_730e8eab",
+      "revId": "67b5842ed0fed53d2e594abf8d744786a007e8bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "34ef6f75_30e61ba2",
         "filename": "gki/libkver/test.cpp",
         "patchSetId": 4
