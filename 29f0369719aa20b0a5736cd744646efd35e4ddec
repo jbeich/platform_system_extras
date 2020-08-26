@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "616f66e1_f87aaaef",
+        "filename": "simpleperf/utils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1074438
+      },
+      "writtenOn": "2020-08-26T13:06:23Z",
+      "side": 0,
+      "message": "string_view::data() is not a c-style string, so copy by size and add \u0027\\0\u0027 explicitly.",
+      "revId": "29f0369719aa20b0a5736cd744646efd35e4ddec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
