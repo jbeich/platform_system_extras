@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "36db6f80_ef5af759",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-08-27T17:39:45Z",
+      "side": 1,
+      "message": "LGTM except two comment suggestions.",
+      "revId": "232974d444bdcd2ac7de812301de96c68813d0ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "242e5e0d_ac477b3d",
         "filename": "simpleperf/thread_tree.cpp",
         "patchSetId": 1
