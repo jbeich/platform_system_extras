@@ -22,6 +22,7 @@
 #include <string>
 #include <string_view>
 
+#include <android-base/result.h>
 #include <kver/kmi_version.h>
 
 namespace android::kver {
@@ -35,6 +36,10 @@ class KernelRelease {
   // Suffix is discarded and not stored in this object.
   // Return nullopt if any error.
   static std::optional<KernelRelease> Parse(const std::string& s, bool allow_suffix = false);
+
+  // Parse from uname(). nullopt if it is not in a valid format.
+  // e.g. it does not contain a KMI version string,
+  static std::optional<KernelRelease> FromUname();
 
   // Return string representation of the kernel release object, excluding the suffix.
   // e.g. "5.4.42-android12-0".
@@ -51,10 +56,21 @@ class KernelRelease {
   uint64_t android_release() const { return kmi_version().android_release(); }
   uint64_t generation() const { return kmi_version().generation(); }
 
+  // Let a kernel release be w.x.y-androidz-k.
+  // Returns (w, x, y)
+  std::tuple<uint64_t, uint64_t, uint64_t> kernel_version_tuple() const;
+
  private:
   KernelRelease() = default;
   KmiVersion kmi_version_;
   uint64_t sub_level_ = 0;
 };
+
+// Check if new_version is a valid update against uname().
+bool IsKernelUpdateValid(const std::string& new_release);
+
+// Exposed for testing.
+// Check if new_release is a valid update against old_release.
+bool IsKernelUpdateValid(const std::string& old_release, const std::string& new_release);
 
 }  // namespace android::kver
