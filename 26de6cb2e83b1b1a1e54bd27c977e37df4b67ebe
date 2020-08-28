@@ -16,6 +16,23 @@
       "revId": "26de6cb2e83b1b1a1e54bd27c977e37df4b67ebe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae7b213b_fdc532ca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2020-08-28T23:13:08Z",
+      "side": 1,
+      "message": "Waiting on CL:1377700 to be in internal branches.",
+      "revId": "26de6cb2e83b1b1a1e54bd27c977e37df4b67ebe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
