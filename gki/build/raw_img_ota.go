@@ -37,10 +37,10 @@ var (
 	pctx = android.NewPackageContext("android/gki")
 
 	otaFromRawImageRule = pctx.AndroidStaticRule("ota_from_raw_image", blueprint.RuleParams{
-		Command:     `${ota_from_raw_image} --tools ${brillo_update_payload} ${delta_generator} ${keyArg} --out ${outDir} ${inputArg}`,
+		Command:     `${ota_from_raw_image} --tools ${brillo_update_payload} ${delta_generator} ${kwargs} --out ${outDir} ${inputArg}`,
 		CommandDeps: []string{"${ota_from_raw_image}", "${brillo_update_payload}", "${delta_generator}"},
 		Description: "ota_from_raw_image ${outDir}",
-	}, "keyArg", "outDir", "inputArg")
+	}, "kwargs", "outDir", "inputArg")
 
 	// Tags to OutputFiles
 	payloadTag           = "payload"
@@ -64,6 +64,10 @@ type rawImageOtaProperties struct {
 	// IMAGE_NAME:MODULE, where IMAGE_NAME is an image name like "boot", and
 	// MODULE is the name of a makefile_goal.
 	Image_goals []string
+
+	// A file (or ":" + module_name) that contains the kernel release string of the boot image
+	// specified in image_goals.
+	Kernel_release *string `android:"path"`
 }
 
 type rawImageOta struct {
@@ -75,8 +79,6 @@ type rawImageOta struct {
 
 	outPayload    android.WritablePath
 	outProperties android.WritablePath
-
-	foo string
 }
 
 // Declare a rule that generates a signed OTA payload from a raw image. This
@@ -140,6 +142,7 @@ func (r *rawImageOta) DepsMutator(ctx android.BottomUpMutatorContext) {
 
 func (r *rawImageOta) GenerateAndroidBuildActions(ctx android.ModuleContext) {
 	inputArg := []string{}
+	kwargs := []string{}
 	implicits := android.Paths{}
 
 	// Handle image_goals
@@ -171,6 +174,14 @@ func (r *rawImageOta) GenerateAndroidBuildActions(ctx android.ModuleContext) {
 		ctx.ModuleErrorf("Cannot get certificate to sign the OTA payload binary: " + keyError.Error())
 	}
 	implicits = append(implicits, r.pem, r.key)
+	kwargs = append(kwargs, "--key "+proptools.String(keyName))
+
+	// Handle kernel_release
+	if r.properties.Kernel_release != nil {
+		kernel_release := android.PathForModuleSrc(ctx, proptools.String(r.properties.Kernel_release))
+		implicits = append(implicits, kernel_release)
+		kwargs = append(kwargs, " --kernel-release-file "+kernel_release.String())
+	}
 
 	// Set outputs
 	outDir := android.PathForModuleGen(ctx, "payload_files")
@@ -183,7 +194,7 @@ func (r *rawImageOta) GenerateAndroidBuildActions(ctx android.ModuleContext) {
 		Implicits:   implicits,
 		Outputs:     android.WritablePaths{r.outPayload, r.outProperties},
 		Args: map[string]string{
-			"keyArg":   "--key " + proptools.String(keyName),
+			"kwargs":   strings.Join(kwargs, " "),
 			"outDir":   outDir.String(),
 			"inputArg": strings.Join(inputArg, " "),
 		},

@@ -83,14 +83,24 @@ func gkiApexMutator(mctx android.LoadHookContext, g *gkiApex) {
 	}, &makefileGoalProperties{
 		Product_out_path: g.properties.Product_out_path,
 	})
-	// boot.img -> payload.bin and payload_properties.txt
+	// boot.img -> kernel_release.txt
+	kernelReleaseFile := g.apexModuleName() + "_bootimage_kernel_release_file"
+	mctx.CreateModule(genrule.GenRuleFactory, &moduleCommonProperties{
+		Name:    proptools.StringPtr(kernelReleaseFile),
+		Enabled: proptools.BoolPtr(enabled),
+	}, &genRuleProperties{
+		Defaults: []string{"extract_kernel_release_defaults"},
+		Srcs:     []string{":" + bootImage},
+	})
+	// boot.img + kernel_release.txt -> payload.bin and payload_properties.txt
 	otaPayloadGen := g.apexModuleName() + "_ota_payload_gen"
 	mctx.CreateModule(rawImageOtaFactory, &moduleCommonProperties{
 		Name:    proptools.StringPtr(otaPayloadGen),
 		Enabled: proptools.BoolPtr(enabled),
 	}, &rawImageOtaProperties{
-		Certificate: g.properties.Ota_payload_certificate,
-		Image_goals: []string{"boot:" + bootImage},
+		Certificate:    g.properties.Ota_payload_certificate,
+		Image_goals:    []string{"boot:" + bootImage},
+		Kernel_release: proptools.StringPtr(":" + kernelReleaseFile),
 	})
 	// copy payload.bin to <apex>/etc/ota
 	otaPayload := g.apexModuleName() + "_ota_payload"
@@ -113,15 +123,6 @@ func gkiApexMutator(mctx android.LoadHookContext, g *gkiApex) {
 		Filename_from_src:     proptools.BoolPtr(true),
 		Relative_install_path: proptools.StringPtr("ota"),
 		Installable:           proptools.BoolPtr(false),
-	})
-	// boot.img -> kernel_release.txt
-	kernelReleaseFile := g.apexModuleName() + "_bootimage_kernel_release_file"
-	mctx.CreateModule(genrule.GenRuleFactory, &moduleCommonProperties{
-		Name:    proptools.StringPtr(kernelReleaseFile),
-		Enabled: proptools.BoolPtr(enabled),
-	}, &genRuleProperties{
-		Defaults: []string{"extract_kernel_release_defaults"},
-		Srcs:     []string{":" + bootImage},
 	})
 	// kernel_release.txt -> apex_manifest.json
 	apexManifest := g.apexModuleName() + "_apex_manifest"
