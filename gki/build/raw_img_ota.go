@@ -180,6 +180,7 @@ func (r *rawImageOta) GenerateAndroidBuildActions(ctx android.ModuleContext) {
 	if r.properties.Kernel_release != nil {
 		kernel_release := android.PathForModuleSrc(ctx, proptools.String(r.properties.Kernel_release))
 		implicits = append(implicits, kernel_release)
+		kwargs = append(kwargs, " --kernel-release-file "+kernel_release.String())
 	}
 
 	// Set outputs
