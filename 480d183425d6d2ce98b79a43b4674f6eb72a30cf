@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "18d68713_c65be1f6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2020-09-01T21:29:51Z",
+      "side": 1,
+      "message": "done fixing TH, PTAL again. Thanks!",
+      "revId": "480d183425d6d2ce98b79a43b4674f6eb72a30cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
