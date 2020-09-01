@@ -36,7 +36,7 @@
 #include "tracing.h"
 #include "utils.h"
 
-using namespace PerfFileFormat;
+using namespace simpleperf::PerfFileFormat;
 using namespace simpleperf;
 
 namespace {
