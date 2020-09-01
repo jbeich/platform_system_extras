@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f255c1ef_885ade31",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2020-09-01T03:16:23Z",
+      "side": 1,
+      "message": "seems the parser couldn\u0027t find the test result correctly\n\nhttps://g3c.corp.google.com/results/invocations/27ada520-4f65-4aa1-b2af-93bf4e4a588c/artifacts\n\n08-31 19:44:21 D/ProtoResultParser: Test module started proto: x86_64 ota_from_raw_image_test\n08-31 19:44:22 D/ProtoResultParser: Test run started proto: x86_64 ota_from_raw_image_test. Expected tests: 3. Attempt: 0\n08-31 19:44:22 D/ProtoResultParser: Test run failure proto: Module x86_64 ota_from_raw_image_test only ran 0 out of 3 expected tests.\n08-31 19:44:22 D/ProtoResultParser: Test run ended proto: x86_64 ota_from_raw_image_test",
+      "revId": "7fc23caa0842ecd9777ed73ed8d9936e90a03a2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
