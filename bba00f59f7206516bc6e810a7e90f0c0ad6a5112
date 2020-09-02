@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cc932659_20f0ec19",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-09-02T00:27:48Z",
+      "side": 1,
+      "message": "ps2: fix brace position. detected when running test with python3.",
+      "revId": "bba00f59f7206516bc6e810a7e90f0c0ad6a5112",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
