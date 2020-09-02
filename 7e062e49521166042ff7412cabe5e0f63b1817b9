@@ -56,6 +56,24 @@
       "revId": "7e062e49521166042ff7412cabe5e0f63b1817b9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8c99c2df_918e336f",
+        "filename": "gki/libkver/utils.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2020-09-02T23:36:48Z",
+      "side": 1,
+      "message": "You are understanding is correct.\n\nI am only comparing the KMI version here. So to you example, when comparing 5.4.42-android13-1 and 5.4.42-android12-7, I am comparing\n\n  (5, 4, 13, 1) \u003e (5, 4, 12, 7)\n\nand when comparing 5.10.56-android11-6, and 5.4.42-android12-7, then I am comparing\n\n  (5, 10, 11, 6) \u003e (5, 4, 12, 7)\n\nTuple comparisons are in lexicographical order. See https://en.cppreference.com/w/cpp/utility/tuple/operator_cmp .",
+      "parentUuid": "48b30c07_05c0ae00",
+      "revId": "7e062e49521166042ff7412cabe5e0f63b1817b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
