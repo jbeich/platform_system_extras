@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b336d4d1_c8835115",
+        "filename": "perf2cfg/perf2cfg_test.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2020-09-07T19:28:48Z",
+      "side": 0,
+      "message": "I couldn\u0027t get this to find any tests in the subdir, so I added a load_tests function as per https://docs.python.org/3/library/unittest.html#load-tests-protocol. I don\u0027t think tests/__init__.py is necessary with this, but it doesn\u0027t hurt either.",
+      "range": {
+        "startLine": 19,
+        "startChar": 4,
+        "endLine": 19,
+        "endChar": 51
+      },
+      "revId": "0eb7c66f6e47f21983b3c5a8a46f95e9ec9a13aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}

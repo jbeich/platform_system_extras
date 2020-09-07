@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8339ea67_274d7e93",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2020-09-07T19:28:48Z",
+      "side": 1,
+      "message": "https://android-build.googleplex.com/builds/tests/view?invocationId\u003dI19700005844674162",
+      "range": {
+        "startLine": 12,
+        "startChar": 42,
+        "endLine": 12,
+        "endChar": 61
+      },
+      "revId": "c9310f88972578ae14b7f140470c0660eb1ff511",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
