@@ -21,7 +21,7 @@ class TestParse(unittest.TestCase):
 
     def test_build_flags_without_arguments(self):
         got = parse.build_flags([])
-        self.assertEqual(got.strip(), 'flags')
+        self.assertEqual(got.strip(), 'bug')
 
     def test_build_flags_with_arguments(self):
         got = parse.build_flags(['catch_block', 'critical'])
