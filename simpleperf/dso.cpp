@@ -375,10 +375,13 @@ bool Dso::IsForJavaMethod() {
     return true;
   }
   if (type_ == DSO_ELF_FILE) {
-    // JITDebugReader generates jit symfiles in "jit_app_cache:<file_start>-<file_end>" format.
-    if (path_.find(':') != std::string::npos) {
+    if (JITDebugReader::IsPathInJITSymFile(path_)) {
       return true;
     }
+    // JITDebugReader in old versions generates symfiles in 'TemporaryFile-XXXXXX'.
+    size_t pos = path_.rfind('/');
+    pos = (pos == std::string::npos) ? 0 : pos + 1;
+    return strncmp(&path_[pos], "TemporaryFile", strlen("TemporaryFile")) == 0;
   }
   return false;
 }
@@ -487,14 +490,11 @@ class ElfDso : public Dso {
       : Dso(DSO_ELF_FILE, path, debug_file_path) {}
 
   std::string_view GetReportPath() const override {
-    if (size_t colon_pos = path_.find(':'); colon_pos != std::string::npos) {
-      std::string file_path = path_.substr(0, colon_pos);
-      if (EndsWith(file_path, kJITAppCacheFile)) {
+    if (JITDebugReader::IsPathInJITSymFile(path_)) {
+      if (path_.find(kJITAppCacheFile) != path_.npos) {
         return "[JIT app cache]";
       }
-      if (EndsWith(file_path, kJITZygoteCacheFile)) {
-        return "[JIT zygote cache]";
-      }
+      return "[JIT zygote cache]";
     }
     return path_;
   }
