@@ -71,6 +71,24 @@
     },
     {
       "key": {
+        "uuid": "aa000a0a_b021d2df",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-09-09T19:55:27Z",
+      "side": 1,
+      "message": "But your change is claiming that the directory can\u0027t even be opened.  The Android Q code returned an error if the directory can\u0027t be opened too.  (opendir() in is_dir_empty() would fail, is_dir_empty() would return false, and fscrypt_policy_ensure() would return -1.)  So that isn\u0027t something that changed.",
+      "parentUuid": "a2cb4629_63d3ebbc",
+      "revId": "0214752953818da39b5cd03dd7e524810551eb37",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "cbf10622_ab0c572a",
         "filename": "libfscrypt/fscrypt.cpp",
         "patchSetId": 2
