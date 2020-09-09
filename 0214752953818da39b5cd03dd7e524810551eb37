@@ -16,6 +16,23 @@
       "revId": "0214752953818da39b5cd03dd7e524810551eb37",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6121aa97_6ff79edc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1081223
+      },
+      "writtenOn": "2020-09-09T10:55:21Z",
+      "side": 1,
+      "message": "Jeff: if we allow vendor to do that we\u0027d have to add something like that\nallow vendor_init system_data_file:dir { open getattr ioctl };\n",
+      "revId": "0214752953818da39b5cd03dd7e524810551eb37",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
