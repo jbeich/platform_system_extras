@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a68d5001_e42cb20f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1081223
+      },
+      "writtenOn": "2020-09-09T10:52:59Z",
+      "side": 1,
+      "message": "Most ( if not every ) QCOM device is affected by this issue and can\u0027t boot R with Q vendor.\nI know it\u0027s not an elegant solution, but I it\u0027s breaking init.\nEric: Any input on what to do?",
+      "revId": "0214752953818da39b5cd03dd7e524810551eb37",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
