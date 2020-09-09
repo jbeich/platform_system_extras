@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ab070284_1eab9a9f",
+        "filename": "simpleperf/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-09-09T17:18:16Z",
+      "side": 1,
+      "message": "Yes, it\u0027s related. This patch adds JITDebugReader.h to read_elf.cpp, which triggers compile errors for the flags in simpleperf_defaults. Instead of adjusting flags, I think it\u0027s better to just remove it. Because there is no user of libsimpleperf_elf_read.",
+      "parentUuid": "397ee74c_d76ae13d",
+      "revId": "4d8ebe03e8c245f9b6f96c2409a1dc4dfd252307",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4bdcdbab_b2e7fa64",
         "filename": "simpleperf/dso.cpp",
         "patchSetId": 1
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "323bc8ac_cbd5450f",
+        "filename": "simpleperf/dso.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-09-09T17:18:16Z",
+      "side": 1,
+      "message": "Changed to android::base::StartsWith to avoid strncmp.\n\nIt restores what is removed in https://android-review.googlesource.com/c/platform/system/extras/+/1371340/5/simpleperf/dso.cpp.\n\nI want to match both \"TemporaryFile...\" and \"some_path/TemporaryFile...\" here. path_ is a path recorded on linux, so should always use \u0027/\u0027 as path separator, thus filesystem doesn\u0027t help.",
+      "parentUuid": "4bdcdbab_b2e7fa64",
+      "revId": "4d8ebe03e8c245f9b6f96c2409a1dc4dfd252307",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "facf6870_fc490e8e",
         "filename": "simpleperf/report_lib_interface.cpp",
         "patchSetId": 1
@@ -47,6 +83,30 @@
       "writtenOn": "2020-09-09T08:26:10Z",
       "side": 1,
       "message": "You use \"JIT app cache\" for the modern cases. In this one, is \"JIT legacy cache\" more descriptive?",
+      "range": {
+        "startLine": 363,
+        "startChar": 34,
+        "endLine": 363,
+        "endChar": 43
+      },
+      "revId": "4d8ebe03e8c245f9b6f96c2409a1dc4dfd252307",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b57079f2_7c2a56d9",
+        "filename": "simpleperf/report_lib_interface.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-09-09T17:18:16Z",
+      "side": 1,
+      "message": "It restores lines removed in https://android-review.googlesource.com/c/platform/system/extras/+/1371340/5/simpleperf/report_lib_interface.cpp.\n\nSince the name change is caused by simpleperf, not ART, I feel it\u0027s not proper to call the old one legacy.",
+      "parentUuid": "facf6870_fc490e8e",
       "range": {
         "startLine": 363,
         "startChar": 34,
