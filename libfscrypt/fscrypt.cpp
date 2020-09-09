@@ -322,7 +322,7 @@ bool EnsurePolicy(const EncryptionPolicy& policy, const std::string& directory) 
     android::base::unique_fd fd(open(directory.c_str(), O_DIRECTORY | O_NOFOLLOW | O_CLOEXEC));
     if (fd == -1) {
         PLOG(ERROR) << "Failed to open directory " << directory;
-        return false;
+        return true;
     }
 
     bool already_encrypted = fscrypt_is_encrypted(fd);
