@@ -53,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "a2cb4629_63d3ebbc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1081223
+      },
+      "writtenOn": "2020-09-09T19:36:36Z",
+      "side": 1,
+      "message": "It indeed failed in Q as well, but wasn\u0027t fatal.\nNow that we use fscrypt ioctl mechanism to load/check the policy on directory, while still failing, it\u0027s now also fatal.\nThe old init attempted to do the same ( probably an actual error in the code that was accidentally fixed in https://android-review.googlesource.com/c/platform/system/extras/+/1114962 ).",
+      "parentUuid": "c892911d_12530011",
+      "revId": "0214752953818da39b5cd03dd7e524810551eb37",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "cbf10622_ab0c572a",
         "filename": "libfscrypt/fscrypt.cpp",
         "patchSetId": 2
@@ -64,6 +82,30 @@
       "writtenOn": "2020-09-09T19:17:20Z",
       "side": 1,
       "message": "We can\u0027t just ignore errors here.  It could result in directories silently not being encrypted.",
+      "range": {
+        "startLine": 325,
+        "startChar": 15,
+        "endLine": 325,
+        "endChar": 19
+      },
+      "revId": "0214752953818da39b5cd03dd7e524810551eb37",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "045562a0_bb4e757b",
+        "filename": "libfscrypt/fscrypt.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1081223
+      },
+      "writtenOn": "2020-09-09T19:36:36Z",
+      "side": 1,
+      "message": "I know it\u0027s wrong.",
+      "parentUuid": "cbf10622_ab0c572a",
       "range": {
         "startLine": 325,
         "startChar": 15,
