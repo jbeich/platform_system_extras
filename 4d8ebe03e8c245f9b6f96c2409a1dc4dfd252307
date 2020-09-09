@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "397ee74c_d76ae13d",
+        "filename": "simpleperf/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-09-09T08:26:10Z",
+      "side": 1,
+      "message": "Did you mean to do all this Android.bp change as part of this same CL? It seems very different.",
+      "revId": "4d8ebe03e8c245f9b6f96c2409a1dc4dfd252307",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4bdcdbab_b2e7fa64",
+        "filename": "simpleperf/dso.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-09-09T08:26:10Z",
+      "side": 1,
+      "message": "How much do we have to guard against \"TemporaryFile\" showing up elsewhere in path_? Could we just do `return path_.rfind(\"TemporaryFile\") !\u003d std::string::npos;` for this block? Do we think that the efficiency is that problematic for this? I was looking for a string_view approach (to get rid of the `strncmp`), but they all require C++20 and seem more complex.",
+      "revId": "4d8ebe03e8c245f9b6f96c2409a1dc4dfd252307",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "facf6870_fc490e8e",
+        "filename": "simpleperf/report_lib_interface.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-09-09T08:26:10Z",
+      "side": 1,
+      "message": "You use \"JIT app cache\" for the modern cases. In this one, is \"JIT legacy cache\" more descriptive?",
+      "range": {
+        "startLine": 363,
+        "startChar": 34,
+        "endLine": 363,
+        "endChar": 43
+      },
+      "revId": "4d8ebe03e8c245f9b6f96c2409a1dc4dfd252307",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
