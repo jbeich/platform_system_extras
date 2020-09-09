@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3ff290da_1bb62d25",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 28
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1018026
+      },
+      "writtenOn": "2020-09-09T23:32:03Z",
+      "side": 1,
+      "message": "General comment - we are looking to move modules under packages/modules/\u003cmodulename\u003e.  May be we should start from there, so not requiring shuffling afterwards.",
+      "revId": "ade4220d7fee9306d59168b79aad34307fa14d3d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
