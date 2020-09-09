@@ -33,6 +33,46 @@
       "revId": "0214752953818da39b5cd03dd7e524810551eb37",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c892911d_12530011",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-09-09T19:17:20Z",
+      "side": 1,
+      "message": "I don\u0027t understand this problem.  If the mkdir is failing, wouldn\u0027t it have failed in Android Q too, for the same reason?  What changed?",
+      "revId": "0214752953818da39b5cd03dd7e524810551eb37",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cbf10622_ab0c572a",
+        "filename": "libfscrypt/fscrypt.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-09-09T19:17:20Z",
+      "side": 1,
+      "message": "We can\u0027t just ignore errors here.  It could result in directories silently not being encrypted.",
+      "range": {
+        "startLine": 325,
+        "startChar": 15,
+        "endLine": 325,
+        "endChar": 19
+      },
+      "revId": "0214752953818da39b5cd03dd7e524810551eb37",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
