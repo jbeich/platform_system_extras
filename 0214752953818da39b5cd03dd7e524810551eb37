@@ -107,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "d5d83bf3_0cdb1f80",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1081223
+      },
+      "writtenOn": "2020-09-09T20:50:03Z",
+      "side": 1,
+      "message": "allow vendor_init system_data_file:dir { read open ioctl setattr };\nIs required to boot.\nNow, why wasn\u0027t this needed on Q I don\u0027t know, maybe some rules were relaxed?",
+      "parentUuid": "8f736d20_c8b03591",
+      "revId": "0214752953818da39b5cd03dd7e524810551eb37",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "cbf10622_ab0c572a",
         "filename": "libfscrypt/fscrypt.cpp",
         "patchSetId": 2
