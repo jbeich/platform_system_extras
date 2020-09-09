@@ -1,0 +1,10 @@
+Open-Source-Licensing+1: Lint 🤖 <android-build-prod-ayeaye@system.gserviceaccount.com>
+Verified+1: Yabin Cui <yabinc@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Lint+1: Lint 🤖 <android-build-ayeaye@system.gserviceaccount.com>
+Code-Review+2: Stephen Hines <srhines@google.com>
+Submitted-by: Yabin Cui <yabinc@google.com>
+Submitted-at: Wed, 09 Sep 2020 23:32:52 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/system/extras/+/1422229
+Project: platform/system/extras
+Branch: refs/heads/master
