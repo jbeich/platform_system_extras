@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9cf849c5_3221c9fc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1074438
+      },
+      "writtenOn": "2020-09-10T15:31:20Z",
+      "side": 1,
+      "message": "Hi Yabin,\n\nPlease suggest if I need to add a link to this new doc file from any top-level files.\n\nThanks!\n",
+      "revId": "f60168f98d421e40795b0706180d26e0e4acf6f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
