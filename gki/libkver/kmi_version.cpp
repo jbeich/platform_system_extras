@@ -24,6 +24,7 @@ namespace android::kver {
 #define KMI_VERSION_PRINT_FORMAT "%" PRIu64 ".%" PRIu64 "-android%" PRIu64 "-%" PRIu64
 #define KMI_VERSION_SCAN_FORMAT KMI_VERSION_PRINT_FORMAT "%n"
 
+
 // Not taking a string_view because sscanf requires null-termination.
 std::optional<KmiVersion> KmiVersion::Parse(const std::string& s) {
   if (s.size() > std::numeric_limits<int>::max()) return std::nullopt;
