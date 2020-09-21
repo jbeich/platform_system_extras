@@ -1,0 +1,8 @@
+service selinux_debug /system/bin/selinux_debug.sh
+  oneshot
+  stdio_to_kmsg
+  disabled
+
+on post-fs-data
+  mkdir /data/misc/selinux_debug 0770 root root
+  start selinux_debug

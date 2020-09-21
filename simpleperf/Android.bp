@@ -608,3 +608,9 @@ python_library_host {
         "scripts/bin/windows/**/*.dll",
     ],
 }
+
+sh_binary {
+    name: "selinux_debug.sh",
+    src: "scripts/selinux/selinux_debug.sh",
+    init_rc: ["scripts/selinux/selinux_debug.rc"],
+}
