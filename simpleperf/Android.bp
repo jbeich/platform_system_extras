@@ -361,7 +361,9 @@ cc_binary {
             // in other libraries we must use libdexfile_support, which dlopen's
             // libdexfile_external.so from the ART APEX, to avoid getting ART
             // internals in the system image.
-            static_libs: ["libdexfile_support_static"],
+            static_libs: [
+                "libdexfile_support_static",
+            ],
         },
         linux_glibc_x86: {
             dist: {
