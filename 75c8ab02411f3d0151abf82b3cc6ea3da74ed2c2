@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "44ddd8f1_72612cb8",
+        "filename": "verity/hash_tree_builder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2020-09-28T18:20:43Z",
+      "side": 1,
+      "message": "note this will not always give you a meaningful error no",
+      "range": {
+        "startLine": 309,
+        "startChar": 6,
+        "endLine": 309,
+        "endChar": 10
+      },
+      "revId": "75c8ab02411f3d0151abf82b3cc6ea3da74ed2c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
