@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3a56daf0_cbeec753",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1039338
+      },
+      "writtenOn": "2020-09-30T17:45:50Z",
+      "side": 1,
+      "message": "FTR - this change prevents us from building platform against ART prebuilts because we cannot export cc_defaults (or any defaults for that matter).",
+      "revId": "d8759e71520d03846413e1242eccb0b61252f307",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
