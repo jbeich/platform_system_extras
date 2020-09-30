@@ -34,6 +34,24 @@
       "revId": "d8759e71520d03846413e1242eccb0b61252f307",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6f9af4ff_2df69bc6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1039338
+      },
+      "writtenOn": "2020-09-30T18:32:53Z",
+      "side": 1,
+      "message": "Thanks for that. I wasn\u0027t sure how difficult that would be.\n\nI must admit that I was very confused when I found out that static libraries did not automatically propagate transitive dependencies. While I can see that there may be cases where that might not be necessary on the whole it seems as though they should be propagated. The only case when I can see that they would not be necessary is if only part of the static library was being used. To me that is an argument to split the static library not to ignore transitive dependencies.",
+      "parentUuid": "e864579b_d90a7d1d",
+      "revId": "d8759e71520d03846413e1242eccb0b61252f307",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
