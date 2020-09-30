@@ -16,6 +16,24 @@
       "revId": "d8759e71520d03846413e1242eccb0b61252f307",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e864579b_d90a7d1d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2020-09-30T17:52:54Z",
+      "side": 1,
+      "message": "Right, true. Then I think we just have to take the extra maintenance of duplicating it here. I can prepare CLs for that.\n\nThis is another argument for fixing Soong to propagate transitive dependencies in static libs, so that we don\u0027t need to hack around it with defaults.",
+      "parentUuid": "3a56daf0_cbeec753",
+      "revId": "d8759e71520d03846413e1242eccb0b61252f307",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
