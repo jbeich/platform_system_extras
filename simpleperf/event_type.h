@@ -58,9 +58,6 @@ struct EventType {
   std::string limited_arch;
 };
 
-bool SetTracepointEventsFilePath(const std::string& filepath);
-std::string GetTracepointEvents();
-
 // Used to temporarily change event types returned by GetAllEventTypes().
 class ScopedEventTypes {
  public:
@@ -68,14 +65,7 @@ class ScopedEventTypes {
 
   ScopedEventTypes(const std::string& event_type_str);
   ~ScopedEventTypes();
-
- private:
-  std::set<EventType> saved_event_types_;
-  uint32_t saved_etm_event_type_;
 };
-
-const std::set<EventType>& GetAllEventTypes();
-const EventType* FindEventTypeByName(const std::string& name, bool report_error = true);
 
 struct EventTypeAndModifier {
   std::string name;
@@ -98,6 +88,33 @@ struct EventTypeAndModifier {
   }
 };
 
+class EventTypeFinder;
+
+class EventTypeManager {
+ public:
+  static EventTypeManager& Instance() { return instance_; }
+  ~EventTypeManager();
+
+  bool ReadTracepointsFromFile(const std::string& filepath);
+  bool WriteTracepointsToFile(const std::string& filepath);
+
+  bool ForEachType(const std::function<bool (const EventType&)>& callback);
+  const EventType* FindType(const std::string& name);
+
+  const EventType* AddRawType(const std::string& name);
+  const EventTypeFinder* GetScopedFinder() { return scoped_finder_.get(); }
+  void SetScopedFinder(std::unique_ptr<EventTypeFinder>&& finder);
+
+ private:
+  EventTypeManager();
+
+  static EventTypeManager instance_;
+
+  std::vector<std::unique_ptr<EventTypeFinder>> type_finders_;
+  std::unique_ptr<EventTypeFinder> scoped_finder_;
+};
+
+const EventType* FindEventTypeByName(const std::string& name, bool report_error = true);
 std::unique_ptr<EventTypeAndModifier> ParseEventType(const std::string& event_type_str);
 bool IsEtmEventType(uint32_t type);
 
