@@ -25,8 +25,20 @@
 
 #include "perf_event.h"
 #include "record.h"
+#include "utils.h"
 
 namespace simpleperf {
+
+namespace {
+
+// Real map file path depends on where the process can create files.
+// For example, app can create files only in its data directory.
+// Use normalized name inherited from pid instead.
+std::string GetSymbolMapDsoName(int pid) {
+  return android::base::StringPrintf("perf-%d.map", pid);
+}
+
+}  // namespace
 
 void ThreadTree::SetThreadName(int pid, int tid, const std::string& comm) {
   ThreadEntry* thread = FindThreadOrNew(pid, tid);
@@ -91,6 +103,14 @@ ThreadEntry* ThreadTree::CreateThread(int pid, int tid) {
   };
   auto pair = thread_tree_.insert(std::make_pair(tid, std::unique_ptr<ThreadEntry>(thread)));
   CHECK(pair.second);
+  if (pid == tid) {
+    // If there is a symbol map dso for the process, add maps for the symbols.
+    auto name = GetSymbolMapDsoName(pid);
+    auto it = user_dso_tree_.find(name);
+    if (it != user_dso_tree_.end()) {
+      AddThreadMapsForDsoSymbols(thread, it->second.get());
+    }
+  }
   return thread;
 }
 
@@ -131,6 +151,35 @@ void ThreadTree::AddThreadMap(int pid, int tid, uint64_t start_addr, uint64_t le
   InsertMap(*thread->maps, MapEntry(start_addr, len, pgoff, dso, false, flags));
 }
 
+void ThreadTree::AddThreadMapsForDsoSymbols(ThreadEntry* thread, Dso* dso) {
+  const uint64_t page_size = GetPageSize();
+
+  auto maps = thread->maps;
+
+  uint64_t map_start = 0;
+  uint64_t map_end = 0;
+
+  // Dso symbols are sorted by address. Walk and calculate containing pages.
+  for (const auto& sym : dso->GetSymbols()) {
+    uint64_t sym_map_start = AlignDown(sym.addr, page_size);
+    uint64_t sym_map_end = Align(sym.addr + sym.len, page_size);
+
+    if (map_end < sym_map_start) {
+      if (map_start < map_end) {
+        InsertMap(*maps, MapEntry(map_start, map_end - map_start, map_start, dso, false, 0));
+      }
+      map_start = sym_map_start;
+    }
+    if (map_end < sym_map_end) {
+      map_end = sym_map_end;
+    }
+  }
+
+  if (map_start < map_end) {
+    InsertMap(*maps, MapEntry(map_start, map_end - map_start, map_start, dso, false, 0));
+  }
+}
+
 Dso* ThreadTree::FindUserDsoOrNew(const std::string& filename, uint64_t start_addr,
                                   DsoType dso_type) {
   auto it = user_dso_tree_.find(filename);
@@ -142,6 +191,16 @@ Dso* ThreadTree::FindUserDsoOrNew(const std::string& filename, uint64_t start_ad
     it = pair.first;
   }
   return it->second.get();
+}
+
+void ThreadTree::AddSymbolsForProcess(int pid, std::vector<Symbol>* symbols) {
+  auto name = GetSymbolMapDsoName(pid);
+
+  auto dso = FindUserDsoOrNew(name, 0, DSO_SYMBOL_MAP_FILE);
+  dso->SetSymbols(symbols);
+
+  auto thread = FindThreadOrNew(pid, pid);
+  AddThreadMapsForDsoSymbols(thread, dso);
 }
 
 const MapEntry* ThreadTree::AllocateMap(const MapEntry& entry) {

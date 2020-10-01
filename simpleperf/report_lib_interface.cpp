@@ -24,10 +24,13 @@
 #include "dso.h"
 #include "event_attr.h"
 #include "event_type.h"
+#include "JITDebugReader.h"
 #include "record_file.h"
 #include "thread_tree.h"
 #include "tracing.h"
 #include "utils.h"
+
+using namespace simpleperf;
 
 class ReportLib;
 
@@ -52,6 +55,7 @@ struct TracingFieldFormat {
   uint32_t elem_size;
   uint32_t elem_count;
   uint32_t is_signed;
+  uint32_t is_dynamic;
 };
 
 struct TracingDataFormat {
@@ -336,7 +340,7 @@ void ReportLib::SetCurrentSample() {
     const Symbol* symbol = thread_tree_.FindSymbol(map, ip, &vaddr_in_file);
     CallChainEntry entry;
     entry.ip = ip;
-    entry.symbol.dso_name = map->dso->Path().c_str();
+    entry.symbol.dso_name = map->dso->GetReportPath().data();
     entry.symbol.vaddr_in_file = vaddr_in_file;
     entry.symbol.symbol_name = symbol->DemangledName();
     entry.symbol.symbol_addr = symbol->addr;
@@ -354,7 +358,8 @@ void ReportLib::SetCurrentSample() {
         // Not enough info to map an offset in a jitted method to an offset in a dex file. So just
         // use the symbol_addr.
         entry.symbol.vaddr_in_file = entry.symbol.symbol_addr;
-      } else {
+      } else if (!JITDebugReader::IsPathInJITSymFile(map->dso->Path())) {
+        // Old JITSymFiles use names like "TemporaryFile-XXXXXX". So give them a better name.
         entry.symbol.dso_name = "[JIT cache]";
       }
     }
@@ -409,6 +414,7 @@ void ReportLib::CreateEvents() {
         field.elem_size = format.fields[i].elem_size;
         field.elem_count = format.fields[i].elem_count;
         field.is_signed = format.fields[i].is_signed;
+        field.is_dynamic = format.fields[i].is_dynamic;
       }
       if (tracing_info.fields.empty()) {
         tracing_info.data_format.size = 0;

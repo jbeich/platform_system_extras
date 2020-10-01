@@ -19,6 +19,7 @@
 
 #include <memory>
 #include <string>
+#include <string_view>
 #include <unordered_map>
 #include <vector>
 
@@ -105,6 +106,7 @@ enum DsoType {
   DSO_KERNEL_MODULE,
   DSO_ELF_FILE,
   DSO_DEX_FILE,  // For files containing dex files, like .vdex files.
+  DSO_SYMBOL_MAP_FILE,
   DSO_UNKNOWN_FILE,
 };
 
@@ -148,6 +150,8 @@ class Dso {
   const std::string& Path() const { return path_; }
   // Return the path containing symbol table and debug information.
   const std::string& GetDebugFilePath() const { return debug_file_path_; }
+  // Return the path beautified for reporting.
+  virtual std::string_view GetReportPath() const { return Path(); }
   // Return the file name without directory info.
   const std::string& FileName() const { return file_name_; }
 

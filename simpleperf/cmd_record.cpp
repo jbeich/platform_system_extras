@@ -31,6 +31,7 @@
 #include <android-base/logging.h>
 #include <android-base/file.h>
 #include <android-base/parseint.h>
+#include <android-base/stringprintf.h>
 #include <android-base/strings.h>
 #include <android-base/unique_fd.h>
 #if defined(__ANDROID__)
@@ -38,6 +39,7 @@
 #endif
 
 #include "CallChainJoiner.h"
+#include "cmd_record_impl.h"
 #include "command.h"
 #include "environment.h"
 #include "ETMRecorder.h"
@@ -48,6 +50,7 @@
 #include "OfflineUnwinder.h"
 #include "read_apk.h"
 #include "read_elf.h"
+#include "read_symbol_map.h"
 #include "record.h"
 #include "record_file.h"
 #include "thread_tree.h"
@@ -55,6 +58,8 @@
 #include "utils.h"
 #include "workload.h"
 
+using android::base::ParseUint;
+using android::base::Realpath;
 using namespace simpleperf;
 
 static std::string default_measured_event_type = "cpu-cycles";
@@ -195,9 +200,23 @@ class RecordCommand : public Command {
 "--no-inherit  Don't record created child threads/processes.\n"
 "--cpu-percent <percent>  Set the max percent of cpu time used for recording.\n"
 "                         percent is in range [1-100], default is 25.\n"
-"--include-filter binary1,binary2,...\n"
-"                Trace only selected binaries in cs-etm instruction tracing.\n"
-"                Each entry is a binary path.\n"
+"--addr-filter filter_str1,filter_str2,...\n"
+"                Provide address filters for cs-etm instruction tracing.\n"
+"                filter_str accepts below formats:\n"
+"                  'filter  <addr-range>'  -- trace instructions in a range\n"
+"                  'start <addr>'          -- start tracing when ip is <addr>\n"
+"                  'stop <addr>'           -- stop tracing when ip is <addr>\n"
+"                <addr-range> accepts below formats:\n"
+"                  <file_path>                            -- code sections in a binary file\n"
+"                  <vaddr_start>-<vaddr_end>@<file_path>  -- part of a binary file\n"
+"                  <kernel_addr_start>-<kernel_addr_end>  -- part of kernel space\n"
+"                <addr> accepts below formats:\n"
+"                  <vaddr>@<file_path>      -- virtual addr in a binary file\n"
+"                  <kernel_addr>            -- a kernel address\n"
+"                Examples:\n"
+"                  'filter 0x456-0x480@/system/lib/libc.so'\n"
+"                  'start 0x456@/system/lib/libc.so,stop 0x480@/system/lib/libc.so'\n"
+"\n"
 "--tp-filter filter_string    Set filter_string for the previous tracepoint event.\n"
 "                             Format is in Documentation/trace/events.rst in the kernel.\n"
 "                             An example: 'prev_comm != \"simpleperf\" && (prev_pid > 1)'.\n"
@@ -477,9 +496,12 @@ bool RecordCommand::PrepareRecording(Workload* workload) {
     // JIT symfiles are stored in temporary files, and are deleted after recording. But if
     // `-g --no-unwind` option is used, we want to keep symfiles to support unwinding in
     // the debug-unwind cmd.
-    bool keep_symfiles = dwarf_callchain_sampling_ && !unwind_dwarf_callchain_;
-    bool sync_with_records = clockid_ == "monotonic";
-    jit_debug_reader_.reset(new JITDebugReader(keep_symfiles, sync_with_records));
+    auto symfile_option = (dwarf_callchain_sampling_ && !unwind_dwarf_callchain_)
+                              ? JITDebugReader::SymFileOption::kKeepSymFiles
+                              : JITDebugReader::SymFileOption::kDropSymFiles;
+    auto sync_option = (clockid_ == "monotonic") ? JITDebugReader::SyncOption::kSyncWithRecords
+                                                 : JITDebugReader::SyncOption::kNoSync;
+    jit_debug_reader_.reset(new JITDebugReader(record_filename_, symfile_option, sync_option));
     // To profile java code, need to dump maps containing vdex files, which are not executable.
     event_selection_set_.SetRecordNotExecutableMaps(true);
   }
@@ -706,60 +728,24 @@ bool RecordCommand::PostProcessRecording(const std::vector<std::string>& args) {
 
 bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
                                  std::vector<std::string>* non_option_args) {
-  static const std::unordered_map<OptionName, OptionFormat> option_formats = {
-      {"-a", {OptionValueType::NONE, OptionType::SINGLE}},
-      {"--app", {OptionValueType::STRING, OptionType::SINGLE}},
-      {"--aux-buffer-size", {OptionValueType::UINT, OptionType::SINGLE}},
-      {"-b", {OptionValueType::NONE, OptionType::SINGLE}},
-      {"-c", {OptionValueType::UINT, OptionType::ORDERED}},
-      {"--call-graph", {OptionValueType::STRING, OptionType::ORDERED}},
-      {"--callchain-joiner-min-matching-nodes", {OptionValueType::UINT, OptionType::SINGLE}},
-      {"--clockid", {OptionValueType::STRING, OptionType::SINGLE}},
-      {"--cpu", {OptionValueType::STRING, OptionType::SINGLE}},
-      {"--cpu-percent", {OptionValueType::UINT, OptionType::SINGLE}},
-      {"--duration", {OptionValueType::DOUBLE, OptionType::SINGLE}},
-      {"-e", {OptionValueType::STRING, OptionType::ORDERED}},
-      {"--exclude-perf", {OptionValueType::NONE, OptionType::SINGLE}},
-      {"--exit-with-parent", {OptionValueType::NONE, OptionType::SINGLE}},
-      {"-f", {OptionValueType::UINT, OptionType::ORDERED}},
-      {"-g", {OptionValueType::NONE, OptionType::ORDERED}},
-      {"--group", {OptionValueType::STRING, OptionType::ORDERED}},
-      {"--in-app", {OptionValueType::NONE, OptionType::SINGLE}},
-      {"--include-filter", {OptionValueType::STRING, OptionType::SINGLE}},
-      {"-j", {OptionValueType::STRING, OptionType::MULTIPLE}},
-      {"-m", {OptionValueType::UINT, OptionType::SINGLE}},
-      {"--no-callchain-joiner", {OptionValueType::NONE, OptionType::SINGLE}},
-      {"--no-cut-samples", {OptionValueType::NONE, OptionType::SINGLE}},
-      {"--no-dump-kernel-symbols", {OptionValueType::NONE, OptionType::SINGLE}},
-      {"--no-dump-symbols", {OptionValueType::NONE, OptionType::SINGLE}},
-      {"--no-inherit", {OptionValueType::NONE, OptionType::SINGLE}},
-      {"--no-unwind", {OptionValueType::NONE, OptionType::SINGLE}},
-      {"-o", {OptionValueType::STRING, OptionType::SINGLE}},
-      {"--out-fd", {OptionValueType::UINT, OptionType::SINGLE}},
-      {"-p", {OptionValueType::STRING, OptionType::MULTIPLE}},
-      {"--post-unwind", {OptionValueType::NONE, OptionType::SINGLE}},
-      {"--post-unwind=no", {OptionValueType::NONE, OptionType::SINGLE}},
-      {"--post-unwind=yes", {OptionValueType::NONE, OptionType::SINGLE}},
-      {"--size-limit", {OptionValueType::UINT, OptionType::SINGLE}},
-      {"--start_profiling_fd", {OptionValueType::UINT, OptionType::SINGLE}},
-      {"--stdio-controls-profiling", {OptionValueType::NONE, OptionType::SINGLE}},
-      {"--stop-signal-fd", {OptionValueType::UINT, OptionType::SINGLE}},
-      {"--symfs", {OptionValueType::STRING, OptionType::SINGLE}},
-      {"-t", {OptionValueType::STRING, OptionType::MULTIPLE}},
-      {"--tp-filter", {OptionValueType::STRING, OptionType::ORDERED}},
-      {"--trace-offcpu", {OptionValueType::NONE, OptionType::SINGLE}},
-      {"--tracepoint-events", {OptionValueType::STRING, OptionType::SINGLE}},
-  };
-
   OptionValueMap options;
   std::vector<std::pair<OptionName, OptionValue>> ordered_options;
 
-  if (!PreprocessOptions(args, option_formats, &options, &ordered_options, non_option_args)) {
+  if (!PreprocessOptions(args, GetRecordCmdOptionFormats(), &options, &ordered_options,
+                         non_option_args)) {
     return false;
   }
 
   // Process options.
   system_wide_collection_ = options.PullBoolValue("-a");
+
+  if (auto value = options.PullValue("--addr-filter"); value) {
+    auto filters = ParseAddrFilterOption(*value->str_value);
+    if (filters.empty()) {
+      return false;
+    }
+    event_selection_set_.SetAddrFilters(std::move(filters));
+  }
 
   if (auto value = options.PullValue("--app"); value) {
     app_package_name_ = *value->str_value;
@@ -816,10 +802,6 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
   }
 
   in_app_context_ = options.PullBoolValue("--in-app");
-
-  if (auto value = options.PullValue("--include-filter"); value) {
-    event_selection_set_.SetIncludeFilters(android::base::Split(*value->str_value, ","));
-  }
 
   if (auto values = options.PullValues("-j"); values) {
     for (const auto& value : values.value()) {
@@ -957,7 +939,7 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
         dwarf_callchain_sampling_ = true;
         if (strs.size() > 1) {
           uint64_t size;
-          if (!android::base::ParseUint(strs[1], &size)) {
+          if (!ParseUint(strs[1], &size)) {
             LOG(ERROR) << "invalid dump stack size in --call-graph option: " << strs[1];
             return false;
           }
@@ -1424,8 +1406,8 @@ bool RecordCommand::ProcessJITDebugInfo(const std::vector<JITDebugInfo>& debug_i
     if (info.type == JITDebugInfo::JIT_DEBUG_JIT_CODE) {
       uint64_t timestamp = jit_debug_reader_->SyncWithRecords() ? info.timestamp
                                                                 : last_record_timestamp_;
-      Mmap2Record record(*attr_id.attr, false, info.pid, info.pid,
-                         info.jit_code_addr, info.jit_code_len, 0, map_flags::PROT_JIT_SYMFILE_MAP,
+      Mmap2Record record(*attr_id.attr, false, info.pid, info.pid, info.jit_code_addr,
+                         info.jit_code_len, info.file_offset, map_flags::PROT_JIT_SYMFILE_MAP,
                          info.file_path, attr_id.ids[0], timestamp);
       if (!ProcessRecord(&record)) {
         return false;
@@ -1652,6 +1634,25 @@ bool RecordCommand::JoinCallChains() {
   return reader->ReadDataSection(record_callback);
 }
 
+namespace {
+
+void LoadSymbolMapFile(int pid, const std::string& package, ThreadTree* thread_tree) {
+  // On Linux, symbol map files usually go to /tmp/perf-<pid>.map
+  // On Android, there is no directory where any process can create files.
+  // For now, use /data/local/tmp/perf-<pid>.map, which works for standalone programs,
+  // and /data/data/<package>/perf-<pid>.map, which works for apps.
+  auto path = package.empty()
+      ? android::base::StringPrintf("/data/local/tmp/perf-%d.map", pid)
+      : android::base::StringPrintf("/data/data/%s/perf-%d.map", package.c_str(), pid);
+
+  auto symbols = ReadSymbolMapFromFile(path);
+  if (!symbols.empty()) {
+    thread_tree->AddSymbolsForProcess(pid, &symbols);
+  }
+}
+
+}  // namespace
+
 bool RecordCommand::DumpAdditionalFeatures(
     const std::vector<std::string>& args) {
   // Read data section of perf.data to collect hit file information.
@@ -1661,11 +1662,17 @@ bool RecordCommand::DumpAdditionalFeatures(
     Dso::ReadKernelSymbolsFromProc();
     kernel_symbols_available = true;
   }
+  std::unordered_set<int> loaded_symbol_maps;
   std::vector<uint64_t> auxtrace_offset;
   auto callback = [&](const Record* r) {
     thread_tree_.Update(*r);
     if (r->type() == PERF_RECORD_SAMPLE) {
-      CollectHitFileInfo(*reinterpret_cast<const SampleRecord*>(r));
+      auto sample = reinterpret_cast<const SampleRecord*>(r);
+      // Symbol map files are available after recording. Load one for the process.
+      if (loaded_symbol_maps.insert(sample->tid_data.pid).second) {
+        LoadSymbolMapFile(sample->tid_data.pid, app_package_name_, &thread_tree_);
+      }
+      CollectHitFileInfo(*sample);
     } else if (r->type() == PERF_RECORD_AUXTRACE) {
       auto auxtrace = static_cast<const AuxTraceRecord*>(r);
       auxtrace_offset.emplace_back(auxtrace->location.file_offset - auxtrace->size());
@@ -1759,7 +1766,7 @@ bool RecordCommand::DumpBuildIdFeature() {
       }
       build_id_records.push_back(BuildIdRecord(true, UINT_MAX, build_id, path));
     } else if (dso->type() == DSO_ELF_FILE) {
-      if (dso->Path() == DEFAULT_EXECNAME_FOR_THREAD_MMAP) {
+      if (dso->Path() == DEFAULT_EXECNAME_FOR_THREAD_MMAP || dso->IsForJavaMethod()) {
         continue;
       }
       if (!GetBuildIdFromDsoPath(dso->Path(), &build_id)) {
@@ -1802,6 +1809,9 @@ bool RecordCommand::DumpMetaInfoFeature(bool kernel_symbols_available) {
   info_map["clockid"] = clockid_;
   info_map["timestamp"] = std::to_string(time(nullptr));
   info_map["kernel_symbols_available"] = kernel_symbols_available ? "true" : "false";
+  if (dwarf_callchain_sampling_ && !unwind_dwarf_callchain_) {
+    OfflineUnwinder::CollectMetaInfo(&info_map);
+  }
   return record_file_writer_->WriteMetaInfoFeature(info_map);
 }
 
@@ -1863,6 +1873,73 @@ void RecordCommand::CollectHitFileInfo(const SampleRecord& r) {
 }
 
 namespace simpleperf {
+
+// To reduce function length, not all format errors are checked.
+static bool ParseOneAddrFilter(const std::string& s, std::vector<AddrFilter>* filters) {
+  std::vector<std::string> args = android::base::Split(s, " -@");
+  std::unique_ptr<ElfFile> elf;
+  uint64_t addr1;
+  uint64_t addr2;
+  uint64_t off1;
+  uint64_t off2;
+  std::string path;
+
+  if (args[0] == "start" || args[0] == "stop") {
+    if (args.size() >= 2 && ParseUint(args[1], &addr1)) {
+      if (args.size() == 2) {
+        // start <kernel_addr>  || stop <kernel_addr>
+        filters->emplace_back(
+            args[0] == "start" ? AddrFilter::KERNEL_START : AddrFilter::KERNEL_STOP, addr1, 0, "");
+        return true;
+      }
+      if (auto elf = ElfFile::Open(args[2]);
+          elf && elf->VaddrToOff(addr1, &off1) && Realpath(args[2], &path)) {
+        // start <vaddr>@<file_path> || stop <vaddr>@<file_path>
+        filters->emplace_back(args[0] == "start" ? AddrFilter::FILE_START : AddrFilter::FILE_STOP,
+                              off1, 0, path);
+        return true;
+      }
+    }
+  } else if (args[0] == "filter") {
+    if (args.size() == 2) {
+      // filter <file_path>
+      if (auto elf = ElfFile::Open(args[1]); elf) {
+        for (const ElfSegment& seg : elf->GetProgramHeader()) {
+          if (seg.is_executable) {
+            filters->emplace_back(AddrFilter::FILE_RANGE, seg.file_offset, seg.file_size, args[1]);
+          }
+        }
+        return true;
+      }
+    } else if (args.size() >= 3 && ParseUint(args[1], &addr1) && ParseUint(args[2], &addr2) &&
+               addr1 < addr2) {
+      if (args.size() == 3) {
+        // filter <kernel_addr_start>-<kernel_addr_end>
+        filters->emplace_back(AddrFilter::KERNEL_RANGE, addr1, addr2 - addr1, "");
+        return true;
+      }
+      if (auto elf = ElfFile::Open(args[3]); elf && elf->VaddrToOff(addr1, &off1) &&
+                                             elf->VaddrToOff(addr2, &off2) &&
+                                             Realpath(args[3], &path)) {
+        // filter <vaddr_start>-<vaddr_end>@<file_path>
+        filters->emplace_back(AddrFilter::FILE_RANGE, off1, off2 - off1, path);
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
+std::vector<AddrFilter> ParseAddrFilterOption(const std::string& s) {
+  std::vector<AddrFilter> filters;
+  for (const auto& str : android::base::Split(s, ",")) {
+    if (!ParseOneAddrFilter(str, &filters)) {
+      LOG(ERROR) << "failed to parse addr filter: " << str;
+      return {};
+    }
+  }
+  return filters;
+}
 
 void RegisterRecordCommand() {
   RegisterCommand("record",

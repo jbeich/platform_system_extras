@@ -16,7 +16,7 @@
 
 #define LOG_TAG "profcollectd"
 
-#include "libprofcollectd.h"
+#include "libprofcollectd.hpp"
 
 #include <android-base/logging.h>
 
@@ -24,10 +24,10 @@
 
 #include "binder_service.h"
 
-namespace android {
-namespace profcollectd {
+using com::android::server::profcollect::IProfCollectd;
+using android::profcollectd::ProfcollectdBinder;
 
-using ::com::android::server::profcollect::IProfCollectd;
+using namespace android;
 
 namespace {
 
@@ -78,9 +78,10 @@ void Process() {
   GetIProfcollectdService()->ProcessProfile();
 }
 
+void CreateProfileReport() {
+  GetIProfcollectdService()->CreateProfileReport();
+}
+
 void ReadConfig() {
   GetIProfcollectdService()->ReadConfig();
 }
-
-}  // namespace profcollectd
-}  // namespace android

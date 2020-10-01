@@ -62,7 +62,8 @@ bool GetThreadMmapsInProcess(pid_t pid, std::vector<ThreadMmap>* thread_mmaps);
 constexpr char DEFAULT_KERNEL_FILENAME_FOR_BUILD_ID[] = "[kernel.kallsyms]";
 
 bool GetKernelBuildId(BuildId* build_id);
-bool GetModuleBuildId(const std::string& module_name, BuildId* build_id);
+bool GetModuleBuildId(const std::string& module_name, BuildId* build_id,
+                      const std::string& sysfs_dir = "/sys");
 
 bool IsThreadAlive(pid_t tid);
 std::vector<pid_t> GetAllProcesses();
@@ -118,6 +119,7 @@ class ScopedTempFiles {
   // If delete_in_destructor = true, the temp file will be deleted in the destructor of
   // ScopedTempFile. Otherwise, it should be deleted by the caller.
   static std::unique_ptr<TemporaryFile> CreateTempFile(bool delete_in_destructor = true);
+  static void RegisterTempFile(const std::string& path);
 
  private:
   static std::string tmp_dir_;

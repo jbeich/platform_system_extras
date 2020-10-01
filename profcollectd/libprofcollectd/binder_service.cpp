@@ -67,5 +67,13 @@ Status ProfcollectdBinder::ProcessProfile() {
   return HandleIfError([=]() { return Scheduler->ProcessProfile(); });
 }
 
+Status ProfcollectdBinder::CreateProfileReport() {
+  return HandleIfError([=]() { return Scheduler->CreateProfileReport(); });
+}
+
+Status ProfcollectdBinder::GetSupportedProvider(std::string* provider) {
+  return HandleIfError([=]() { return Scheduler->GetSupportedProvider(*provider); });
+}
+
 }  // namespace profcollectd
 }  // namespace android

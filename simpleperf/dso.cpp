@@ -22,6 +22,7 @@
 #include <algorithm>
 #include <limits>
 #include <memory>
+#include <string_view>
 #include <vector>
 
 #include <android-base/file.h>
@@ -29,18 +30,21 @@
 #include <android-base/strings.h>
 
 #include "environment.h"
+#include "JITDebugReader.h"
 #include "read_apk.h"
 #include "read_dex_file.h"
 #include "read_elf.h"
 #include "utils.h"
 
+using android::base::EndsWith;
+using android::base::StartsWith;
 using namespace simpleperf;
 
 namespace simpleperf_dso_impl {
 
 std::string RemovePathSeparatorSuffix(const std::string& path) {
   // Don't remove path separator suffix for '/'.
-  if (android::base::EndsWith(path, OS_PATH_SEPARATOR) && path.size() > 1u) {
+  if (EndsWith(path, OS_PATH_SEPARATOR) && path.size() > 1u) {
     return path.substr(0, path.size() - 1);
   }
   return path;
@@ -106,6 +110,29 @@ void DebugElfFileFinder::SetVdsoFile(const std::string& vdso_file, bool is_64bit
   }
 }
 
+static bool CheckDebugFilePath(const std::string& path, BuildId& build_id,
+                               bool report_build_id_mismatch) {
+  ElfStatus status;
+  auto elf = ElfFile::Open(path, &status);
+  if (!elf) {
+    return false;
+  }
+  BuildId debug_build_id;
+  status = elf->GetBuildId(&debug_build_id);
+  if (status != ElfStatus::NO_ERROR && status != ElfStatus::NO_BUILD_ID) {
+    return false;
+  }
+
+  // Native libraries in apks and kernel modules may not have build ids.
+  // So build_id and debug_build_id can either be empty, or have the same value.
+  bool match = build_id == debug_build_id;
+  if (!match && report_build_id_mismatch) {
+    LOG(WARNING) << path << " isn't used because of build id mismatch: expected " << build_id
+                 << ", real " << debug_build_id;
+  }
+  return match;
+}
+
 std::string DebugElfFileFinder::FindDebugFile(const std::string& dso_path, bool force_64bit,
                                               BuildId& build_id) {
   if (dso_path == "[vdso]") {
@@ -119,22 +146,12 @@ std::string DebugElfFileFinder::FindDebugFile(const std::string& dso_path, bool 
     // Try reading build id from file if we don't already have one.
     GetBuildIdFromDsoPath(dso_path, &build_id);
   }
-  auto check_path = [&](const std::string& path) {
-    BuildId debug_build_id;
-    GetBuildIdFromDsoPath(path, &debug_build_id);
-    if (build_id.IsEmpty()) {
-      // Native libraries in apks may not have build ids. When looking for a debug elf file without
-      // build id (build id is empty), the debug file should exist and also not have build id.
-      return IsRegularFile(path) && debug_build_id.IsEmpty();
-    }
-    return build_id == debug_build_id;
-  };
 
   // 1. Try build_id_to_file_map.
   if (!build_id_to_file_map_.empty()) {
     if (!build_id.IsEmpty() || GetBuildIdFromDsoPath(dso_path, &build_id)) {
       auto it = build_id_to_file_map_.find(build_id.ToString());
-      if (it != build_id_to_file_map_.end() && check_path(it->second)) {
+      if (it != build_id_to_file_map_.end() && CheckDebugFilePath(it->second, build_id, false)) {
         return it->second;
       }
     }
@@ -142,18 +159,18 @@ std::string DebugElfFileFinder::FindDebugFile(const std::string& dso_path, bool 
   if (!symfs_dir_.empty()) {
     // 2. Try concatenating symfs_dir and dso_path.
     std::string path = GetPathInSymFsDir(dso_path);
-    if (check_path(path)) {
+    if (CheckDebugFilePath(path, build_id, true)) {
       return path;
     }
     // 3. Try concatenating symfs_dir and basename of dso_path.
     path = symfs_dir_ + OS_PATH_SEPARATOR + android::base::Basename(dso_path);
-    if (check_path(path)) {
+    if (CheckDebugFilePath(path, build_id, false)) {
       return path;
     }
   }
   // 4. Try concatenating /usr/lib/debug and dso_path.
   // Linux host can store debug shared libraries in /usr/lib/debug.
-  if (check_path("/usr/lib/debug" + dso_path)) {
+  if (CheckDebugFilePath("/usr/lib/debug" + dso_path, build_id, false)) {
     return "/usr/lib/debug" + dso_path;
   }
   return dso_path;
@@ -161,7 +178,7 @@ std::string DebugElfFileFinder::FindDebugFile(const std::string& dso_path, bool 
 
 std::string DebugElfFileFinder::GetPathInSymFsDir(const std::string& path) {
   auto add_symfs_prefix = [&](const std::string& path) {
-    if (android::base::StartsWith(path, OS_PATH_SEPARATOR)) {
+    if (StartsWith(path, OS_PATH_SEPARATOR)) {
       return symfs_dir_ + path;
     }
     return symfs_dir_ + OS_PATH_SEPARATOR + path;
@@ -360,11 +377,13 @@ bool Dso::IsForJavaMethod() {
     return true;
   }
   if (type_ == DSO_ELF_FILE) {
-    // JIT symfiles for JITed Java methods are dumped as temporary files, whose name are in format
-    // "TemporaryFile-XXXXXX".
+    if (JITDebugReader::IsPathInJITSymFile(path_)) {
+      return true;
+    }
+    // JITDebugReader in old versions generates symfiles in 'TemporaryFile-XXXXXX'.
     size_t pos = path_.rfind('/');
     pos = (pos == std::string::npos) ? 0 : pos + 1;
-    return strncmp(&path_[pos], "TemporaryFile", strlen("TemporaryFile")) == 0;
+    return StartsWith(std::string_view(&path_[pos], path_.size() - pos), "TemporaryFile");
   }
   return false;
 }
@@ -471,6 +490,16 @@ class ElfDso : public Dso {
  public:
   ElfDso(const std::string& path, const std::string& debug_file_path)
       : Dso(DSO_ELF_FILE, path, debug_file_path) {}
+
+  std::string_view GetReportPath() const override {
+    if (JITDebugReader::IsPathInJITSymFile(path_)) {
+      if (path_.find(kJITAppCacheFile) != path_.npos) {
+        return "[JIT app cache]";
+      }
+      return "[JIT zygote cache]";
+    }
+    return path_;
+  }
 
   void SetMinExecutableVaddr(uint64_t min_vaddr, uint64_t file_offset) override {
     min_vaddr_ = min_vaddr;
@@ -664,6 +693,16 @@ class KernelModuleDso : public Dso {
   }
 };
 
+class SymbolMapFileDso : public Dso {
+ public:
+  SymbolMapFileDso(const std::string& path) : Dso(DSO_SYMBOL_MAP_FILE, path, path) {}
+
+  uint64_t IpToVaddrInFile(uint64_t ip, uint64_t, uint64_t) override { return ip; }
+
+ protected:
+  std::vector<Symbol> LoadSymbols() override { return {}; }
+};
+
 class UnknownDso : public Dso {
  public:
   UnknownDso(const std::string& path) : Dso(DSO_UNKNOWN_FILE, path, path) {}
@@ -688,10 +727,15 @@ std::unique_ptr<Dso> Dso::CreateDso(DsoType dso_type, const std::string& dso_pat
     }
     case DSO_KERNEL:
       return std::unique_ptr<Dso>(new KernelDso(dso_path, dso_path));
-    case DSO_KERNEL_MODULE:
-      return std::unique_ptr<Dso>(new KernelModuleDso(dso_path, dso_path));
+    case DSO_KERNEL_MODULE: {
+      BuildId build_id = FindExpectedBuildIdForPath(dso_path);
+      return std::unique_ptr<Dso>(new KernelModuleDso(
+          dso_path, debug_elf_file_finder_.FindDebugFile(dso_path, force_64bit, build_id)));
+    }
     case DSO_DEX_FILE:
       return std::unique_ptr<Dso>(new DexFileDso(dso_path, dso_path));
+    case DSO_SYMBOL_MAP_FILE:
+      return std::unique_ptr<Dso>(new SymbolMapFileDso(dso_path));
     case DSO_UNKNOWN_FILE:
       return std::unique_ptr<Dso>(new UnknownDso(dso_path));
     default:
@@ -715,6 +759,8 @@ const char* DsoTypeToString(DsoType dso_type) {
       return "dso_elf_file";
     case DSO_DEX_FILE:
       return "dso_dex_file";
+    case DSO_SYMBOL_MAP_FILE:
+      return "dso_symbol_map_file";
     default:
       return "unknown";
   }
