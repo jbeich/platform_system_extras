@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b9cf30e0_b308fba9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2020-10-01T21:48:57Z",
+      "side": 1,
+      "message": "As Paul pointed out on https://r.android.com/1435496 we won\u0027t be able to use cc_defaults later, so this largely reverts that CL. Sorry for the churn.\n\nIf you have concerns about the code duplication then let\u0027s discuss, but I think it may be hard to avoid.",
+      "revId": "4d88810b13e1bcee873f89f782641297813cd494",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
