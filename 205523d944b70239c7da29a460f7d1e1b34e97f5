@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f505f2d_a32bf14b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2020-10-06T20:26:22Z",
+      "side": 1,
+      "message": "[Carry over comment from https://r.android.com/1450135:]\n\nFollowing discussion on http://b/164126569#comment24 ff. I just invented a location in system/extras for this, but I\u0027ve no strong opinions on where this should go.\n\nI\u0027m moving it here from system/core though, for the very pragmatic reason that it has a PREUPLOAD.cfg that imposes a clang-format upload check, which I\u0027d rather avoid for these files that should be copies of the ones in the ART tree (there doesn\u0027t seem to be a convenient way to disable that check in a subtree).\n\nI regard this as a short-term solution, where the long-term goal is to improve the tooling so that the NDK API can be vetted upstream in the unbundled ART branches and the ndk_{library,headers} modules reference them from prebuilt drops of ART (cf. http://b/164126569#comment16).",
+      "revId": "205523d944b70239c7da29a460f7d1e1b34e97f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
