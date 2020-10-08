@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4eeb6226_93c4d47b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003966
+      },
+      "writtenOn": "2020-10-08T16:07:28Z",
+      "side": 1,
+      "message": "looks generally good to me.\n\nSome comments;\n\n1) This should be restricted to debuggable builds (userdebug or eng), and not enabled on user builds.\n\n2) Logging to a separate file is problematic from someone who isn\u0027t familiar with this functionality. At a minimum, when an SELinux denial is generated, it would be good to say \"Please see /path/to/file for more information on this error\" in logcat to point people to this file, or include the stack trace directly into logcat.",
+      "revId": "1a2c2a60a1a76ac83cb84ba1deb8d0640cfeaf89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
