@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f00f6eef_cefd679b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-10-13T20:47:45Z",
+      "side": 1,
+      "message": "Nice improvement!",
+      "revId": "f61376c60e999afb9d888bd1b96b0c5246e8a6ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b33d5f07_39a36343",
+        "filename": "simpleperf/event_attr.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-10-13T20:47:45Z",
+      "side": 1,
+      "message": "I see why you dropped the helper method, but almost wish there was a non-initializing check for this to keep the logic in one place rather than 2 very separate spots.",
+      "range": {
+        "startLine": 239,
+        "startChar": 45,
+        "endLine": 239,
+        "endChar": 72
+      },
+      "revId": "f61376c60e999afb9d888bd1b96b0c5246e8a6ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed473356_1bd8686c",
+        "filename": "simpleperf/event_type.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-10-13T20:47:45Z",
+      "side": 1,
+      "message": "Does it make sense to abstract this loop/lookup with a helper function that just returns the first one (if it exists)? It\u0027s used above in line 363-364 as well.",
+      "range": {
+        "startLine": 374,
+        "startChar": 0,
+        "endLine": 375,
+        "endChar": 84
+      },
+      "revId": "f61376c60e999afb9d888bd1b96b0c5246e8a6ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b91cf92_6e639f64",
+        "filename": "simpleperf/event_type.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-10-13T20:47:45Z",
+      "side": 1,
+      "message": "Similar question about abstracting this loop out to reduce complexity in these functions. It even can return the proper pointer type, moving the `static_cast` to that getter, rather than keeping it with the actual more important logic.",
+      "range": {
+        "startLine": 431,
+        "startChar": 0,
+        "endLine": 432,
+        "endChar": 70
+      },
+      "revId": "f61376c60e999afb9d888bd1b96b0c5246e8a6ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd96ddac_f10bcac6",
+        "filename": "simpleperf/event_type.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-10-13T20:47:45Z",
+      "side": 1,
+      "message": "It might be worth a comment to describe that this halts further execution if `callback()` returns false.",
+      "revId": "f61376c60e999afb9d888bd1b96b0c5246e8a6ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
