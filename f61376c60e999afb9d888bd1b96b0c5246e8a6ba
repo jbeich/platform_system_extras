@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe13d1cb_66a2efb6",
+        "filename": "simpleperf/event_attr.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-10-13T22:06:12Z",
+      "side": 1,
+      "message": "The reason to not use IsEtmEventType() is because checking name is more efficient. Improve it by encapsulating it in the EventType class.",
+      "parentUuid": "b33d5f07_39a36343",
+      "range": {
+        "startLine": 239,
+        "startChar": 45,
+        "endLine": 239,
+        "endChar": 72
+      },
+      "revId": "f61376c60e999afb9d888bd1b96b0c5246e8a6ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ed473356_1bd8686c",
@@ -54,6 +78,30 @@
       "writtenOn": "2020-10-13T20:47:45Z",
       "side": 1,
       "message": "Does it make sense to abstract this loop/lookup with a helper function that just returns the first one (if it exists)? It\u0027s used above in line 363-364 as well.",
+      "range": {
+        "startLine": 374,
+        "startChar": 0,
+        "endLine": 375,
+        "endChar": 84
+      },
+      "revId": "f61376c60e999afb9d888bd1b96b0c5246e8a6ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9e9b7a9_b0afa777",
+        "filename": "simpleperf/event_type.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-10-13T22:06:12Z",
+      "side": 1,
+      "message": "Done. Thanks for reminding the duplication.",
+      "parentUuid": "ed473356_1bd8686c",
       "range": {
         "startLine": 374,
         "startChar": 0,
@@ -89,6 +137,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e22cbfa5_abf6f4a1",
+        "filename": "simpleperf/event_type.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-10-13T22:06:12Z",
+      "side": 1,
+      "message": "Done removing the duplication. But if moving static_cast, need to use generic return type. But ReadTracepointsFromFile() wants to return the unique_ptr\u003c\u003e\u0026 to replace its content. So I didn\u0027t move static_cast.",
+      "parentUuid": "0b91cf92_6e639f64",
+      "range": {
+        "startLine": 431,
+        "startChar": 0,
+        "endLine": 432,
+        "endChar": 70
+      },
+      "revId": "f61376c60e999afb9d888bd1b96b0c5246e8a6ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dd96ddac_f10bcac6",
         "filename": "simpleperf/event_type.h",
         "patchSetId": 1
@@ -100,6 +172,24 @@
       "writtenOn": "2020-10-13T20:47:45Z",
       "side": 1,
       "message": "It might be worth a comment to describe that this halts further execution if `callback()` returns false.",
+      "revId": "f61376c60e999afb9d888bd1b96b0c5246e8a6ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f298c542_aa08532e",
+        "filename": "simpleperf/event_type.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-10-13T22:06:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dd96ddac_f10bcac6",
       "revId": "f61376c60e999afb9d888bd1b96b0c5246e8a6ba",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
