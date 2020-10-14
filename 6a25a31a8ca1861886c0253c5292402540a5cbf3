@@ -22,6 +22,30 @@
       },
       "revId": "6a25a31a8ca1861886c0253c5292402540a5cbf3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69f18b5c_75ea78b3",
+        "filename": "simpleperf/event_type.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-10-14T04:24:16Z",
+      "side": 1,
+      "message": "This function is to replace system_tracepoint_finder with string_tracepoint_finder. So use SYSTEM here. Added comment.",
+      "parentUuid": "41987fe4_90bc8751",
+      "range": {
+        "startLine": 373,
+        "startChar": 55,
+        "endLine": 373,
+        "endChar": 61
+      },
+      "revId": "6a25a31a8ca1861886c0253c5292402540a5cbf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

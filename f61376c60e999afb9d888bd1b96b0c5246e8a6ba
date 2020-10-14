@@ -183,6 +183,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d38d3039_7f9e5ca4",
+        "filename": "simpleperf/event_type.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-10-14T04:24:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8f136f8b_9ab511de",
+      "range": {
+        "startLine": 431,
+        "startChar": 0,
+        "endLine": 432,
+        "endChar": 70
+      },
+      "revId": "f61376c60e999afb9d888bd1b96b0c5246e8a6ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dd96ddac_f10bcac6",
