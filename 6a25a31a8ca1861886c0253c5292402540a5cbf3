@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41987fe4_90bc8751",
+        "filename": "simpleperf/event_type.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-10-14T03:22:12Z",
+      "side": 1,
+      "message": "STRING",
+      "range": {
+        "startLine": 373,
+        "startChar": 55,
+        "endLine": 373,
+        "endChar": 61
+      },
+      "revId": "6a25a31a8ca1861886c0253c5292402540a5cbf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

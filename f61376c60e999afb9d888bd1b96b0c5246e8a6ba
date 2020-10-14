@@ -161,6 +161,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8f136f8b_9ab511de",
+        "filename": "simpleperf/event_type.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-10-14T03:22:12Z",
+      "side": 1,
+      "message": "So it\u0027s up to you, but you could create multiple functions (that call this base getter) instead with slightly different names, and then cast/return the appropriate type directly using the getter:\n\n```\nGetRawEventFinder()\nGetTracepointSystemFinder()\n...\n```\n\nI\u0027m not sure that it ultimately matters, because there aren\u0027t multiple callers for any of these functions yet, but if you think you would use it in multiple places, that could be beneficial. Thinking about this also caused me to catch the typo\u0027ed `SYSTEM` instead of `STRING` in my other comment. You wouldn\u0027t be able to accidentally use or cast it to the wrong type. I\u0027d only add the 3 getters you\u0027re using so far (not one per `EventFinderType` yet).",
+      "parentUuid": "e22cbfa5_abf6f4a1",
+      "range": {
+        "startLine": 431,
+        "startChar": 0,
+        "endLine": 432,
+        "endChar": 70
+      },
+      "revId": "f61376c60e999afb9d888bd1b96b0c5246e8a6ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dd96ddac_f10bcac6",
         "filename": "simpleperf/event_type.h",
         "patchSetId": 1
