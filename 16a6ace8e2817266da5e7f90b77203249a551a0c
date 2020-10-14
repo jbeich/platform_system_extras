@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "afe71e7f_e77bca89",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-10-14T04:48:03Z",
+      "side": 1,
+      "message": "Awesome. Thanks for the explanations and sorry I missed the transformation aspect.",
+      "revId": "16a6ace8e2817266da5e7f90b77203249a551a0c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
