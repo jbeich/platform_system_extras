@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3a675db_5cf93ae2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-10-15T03:39:42Z",
+      "side": 1,
+      "message": "ps2: fix an error in event_type.cpp.",
+      "revId": "f5c3eb77c2e4ef7fade9afb3691dfd7c0490cc5b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
