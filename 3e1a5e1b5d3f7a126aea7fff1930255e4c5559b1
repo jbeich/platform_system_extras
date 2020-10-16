@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "4de5f830_1659f5d7",
+        "filename": "simpleperf/app_api/cpp/simpleperf.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 485,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-10-16T20:41:38Z",
+      "side": 1,
+      "message": "app_api is code planed to used in apks, for which cutils isn\u0027t available.",
+      "parentUuid": "53c3d05b_6d27d9d4",
+      "revId": "3e1a5e1b5d3f7a126aea7fff1930255e4c5559b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "355ca96e_5683a2d2",
         "filename": "simpleperf/simpleperf_app_runner/simpleperf_app_runner.cpp",
         "patchSetId": 1
@@ -31,6 +49,24 @@
       "writtenOn": "2020-10-16T19:02:51Z",
       "side": 1,
       "message": "Looking at this code, it seems like using multiuser.h may be cleaner.  But I\u0027ll leave this up to you.",
+      "revId": "3e1a5e1b5d3f7a126aea7fff1930255e4c5559b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9873056c_bee9c24d",
+        "filename": "simpleperf/simpleperf_app_runner/simpleperf_app_runner.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-10-16T20:41:38Z",
+      "side": 1,
+      "message": "Good to know. But even if using multiuser.h, we still need to manually check user_id in L205. So I feel current code is slightly better.",
+      "parentUuid": "355ca96e_5683a2d2",
       "revId": "3e1a5e1b5d3f7a126aea7fff1930255e4c5559b1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
