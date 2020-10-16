@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0b26670_e9eb2637",
+        "filename": "simpleperf/ProbeEvents.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-10-16T17:36:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a696551d_8cb7c30a",
+      "range": {
+        "startLine": 39,
+        "startChar": 16,
+        "endLine": 39,
+        "endChar": 17
+      },
+      "revId": "f5c3eb77c2e4ef7fade9afb3691dfd7c0490cc5b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5ce7296b_4ffaca80",
@@ -54,6 +78,24 @@
       "writtenOn": "2020-10-16T03:57:34Z",
       "side": 1,
       "message": "Does it make sense to have any negative tests or do we really not expect that to be a problem?",
+      "revId": "f5c3eb77c2e4ef7fade9afb3691dfd7c0490cc5b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "329ddd7f_4f2e30de",
+        "filename": "simpleperf/ProbeEvents_test.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-10-16T17:36:12Z",
+      "side": 1,
+      "message": "I think it\u0027s not a problem. Because the kprobe cmd will be passed to the kernel to add a kprobe event. The kernel will do sanity check. So we only need to make sure we support all cases supported by the kernel.\n\nProbably we will change ParseKprobeEventName() into a userspace check of the kprobe cmd. I will add negative tests at that time.",
+      "parentUuid": "5ce7296b_4ffaca80",
       "revId": "f5c3eb77c2e4ef7fade9afb3691dfd7c0490cc5b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
