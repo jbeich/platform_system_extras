@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53c3d05b_6d27d9d4",
+        "filename": "simpleperf/app_api/cpp/simpleperf.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 485,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-10-16T19:02:51Z",
+      "side": 1,
+      "message": "This code is good as it is but in case you hadn\u0027t seen it, there\u0027s multiuser.h in cutils as well.",
+      "revId": "3e1a5e1b5d3f7a126aea7fff1930255e4c5559b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "355ca96e_5683a2d2",
+        "filename": "simpleperf/simpleperf_app_runner/simpleperf_app_runner.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-10-16T19:02:51Z",
+      "side": 1,
+      "message": "Looking at this code, it seems like using multiuser.h may be cleaner.  But I\u0027ll leave this up to you.",
+      "revId": "3e1a5e1b5d3f7a126aea7fff1930255e4c5559b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
