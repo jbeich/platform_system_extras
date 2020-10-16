@@ -69,6 +69,29 @@
       "parentUuid": "355ca96e_5683a2d2",
       "revId": "3e1a5e1b5d3f7a126aea7fff1930255e4c5559b1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "481e9d9e_fea1c4ef",
+        "filename": "simpleperf/simpleperf_app_runner/simpleperf_app_runner.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-10-16T20:54:09Z",
+      "side": 1,
+      "message": "Actually, looking at this code again, I cannot understand the test here.  Can you add a comment?\n\nMy guess is: user_id is the multi-user\u0027s user id and info-\u003euid is the app\u0027s uid.  Then we\u0027d want something like:\n  user_id \u003c info-\u003euid \u003c (user_id + AID_USER_OFFSET).",
+      "range": {
+        "startLine": 205,
+        "startChar": 0,
+        "endLine": 205,
+        "endChar": 80
+      },
+      "revId": "3e1a5e1b5d3f7a126aea7fff1930255e4c5559b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
