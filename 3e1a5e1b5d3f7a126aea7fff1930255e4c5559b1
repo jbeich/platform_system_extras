@@ -92,6 +92,30 @@
       },
       "revId": "3e1a5e1b5d3f7a126aea7fff1930255e4c5559b1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1bc2ed8_797e60df",
+        "filename": "simpleperf/simpleperf_app_runner/simpleperf_app_runner.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-10-16T22:15:18Z",
+      "side": 1,
+      "message": "Done adding comments. Remove static cast to make the code clearer.\nThe purpose is to avoid creating an overflowed user_app_id. So L205 is matched with L208.",
+      "parentUuid": "481e9d9e_fea1c4ef",
+      "range": {
+        "startLine": 205,
+        "startChar": 0,
+        "endLine": 205,
+        "endChar": 80
+      },
+      "revId": "3e1a5e1b5d3f7a126aea7fff1930255e4c5559b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
