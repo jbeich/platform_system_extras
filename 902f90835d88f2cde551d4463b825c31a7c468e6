@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "27b00bd5_9b4bc90d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-10-17T00:21:51Z",
+      "side": 1,
+      "message": "I have reported the lint issue in http://b/171058789. ",
+      "revId": "902f90835d88f2cde551d4463b825c31a7c468e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
