@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "905f6dda_d0921224",
+        "filename": "simpleperf/cmd_monitor.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 581,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-10-19T17:24:31Z",
+      "side": 1,
+      "message": "The order should be r.AdjustCallChainGeneratedByKernel() -\u003e UnwindRecord() -\u003e ProcessSampleRecord(). Because UnwindRecord() changes stack data and registers into ip addresses. If we don\u0027t do it, ProcessSampleRecord() only contains kernel callchains, but no userspace callchain.",
+      "range": {
+        "startLine": 581,
+        "startChar": 9,
+        "endLine": 581,
+        "endChar": 21
+      },
+      "revId": "4eb3641178f9e20d5ca898d66545c9d45fbd903e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
