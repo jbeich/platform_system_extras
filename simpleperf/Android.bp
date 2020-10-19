@@ -218,6 +218,7 @@ cc_defaults {
                 "cmd_debug_unwind.cpp",
                 "cmd_list.cpp",
                 "cmd_record.cpp",
+                "cmd_monitor.cpp",
                 "cmd_stat.cpp",
                 "cmd_trace_sched.cpp",
                 "environment.cpp",
