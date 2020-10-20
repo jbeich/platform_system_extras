@@ -831,6 +831,7 @@ TEST(record_cmd, app_option_for_profileable_app) {
   TEST_REQUIRE_APPS();
   SetRunInAppToolForTesting(false, true);
   TestRecordingApps("com.android.simpleperf.profileable");
+<<<<<<< TARGET BRANCH (bac211 Merge "Merge "simpleperf: add Broadcom STB into whitelist, o)
 }
 
 TEST(record_cmd, record_java_app) {
@@ -1023,3 +1024,6 @@ TEST(record_cmd, exclude_perf_option) {
     }));
   }
 }
+=======
+}
+>>>>>>> SOURCE BRANCH (1b0881 Merge "simpleperf: force testing run-as and app_runner separ)
