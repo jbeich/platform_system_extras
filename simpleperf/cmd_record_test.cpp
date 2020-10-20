@@ -302,8 +302,12 @@ bool HasHardwareCounter() {
       std::string hardware = GetHardwareFromCpuInfo(cpu_info);
       if (std::regex_search(hardware, std::regex(R"(i\.MX6.*Quad)")) ||
           std::regex_search(hardware, std::regex(R"(SC7731e)")) ||
+<<<<<<< TARGET BRANCH (6cbcea Make bootctl work on devices that does not have v1.1 API)
           std::regex_search(hardware, std::regex(R"(Qualcomm Technologies, Inc MSM8909)")) ||
           std::regex_search(hardware, std::regex(R"(Broadcom STB \(Flattened Device Tree\))"))) {
+=======
+          std::regex_search(hardware, std::regex(R"(Qualcomm Technologies, Inc MSM8909)"))) {
+>>>>>>> SOURCE BRANCH (aa57fd Merge "simpleperf:add MSM8909 into whitelist, omit tests req)
         has_hw_counter = 0;
       }
     }
