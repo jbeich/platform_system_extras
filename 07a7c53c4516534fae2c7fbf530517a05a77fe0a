@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4849bd8_2ba5c446",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-10-20T17:16:21Z",
+      "side": 1,
+      "message": "Note, another solution would be to never use the 64bit feature on Android.  It looks like the metadata_csum changes enabled 64bit intentionally, though.\n\nBTW, this bug might have been what the change https://android-review.googlesource.com/c/platform/system/extras/+/1318781 (which I couldn\u0027t understand) was trying to work around.",
+      "revId": "07a7c53c4516534fae2c7fbf530517a05a77fe0a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
