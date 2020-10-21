@@ -60,6 +60,10 @@ class RecordFileWriter {
   bool WriteBranchStackFeature();
   bool WriteAuxTraceFeature(const std::vector<uint64_t>& auxtrace_offset);
   bool WriteFileFeatures(const std::vector<Dso*>& files);
+  bool WriteFileFeature(const std::string& file_path, uint32_t file_type, uint64_t min_vaddr,
+                        uint64_t file_offset_of_min_vaddr,
+                        const std::vector<const Symbol*>& symbols,
+                        const std::vector<uint64_t>* dex_file_offsets);
   bool WriteMetaInfoFeature(const std::unordered_map<std::string, std::string>& info_map);
   bool WriteFeature(int feature, const std::vector<char>& data);
   bool EndWriteFeatures();
@@ -77,10 +81,6 @@ class RecordFileWriter {
   bool Read(void* buf, size_t len);
   bool GetFilePos(uint64_t* file_pos);
   bool WriteStringWithLength(const std::string& s);
-  bool WriteFileFeature(const std::string& file_path, uint32_t file_type, uint64_t min_vaddr,
-                        uint64_t file_offset_of_min_vaddr,
-                        const std::vector<const Symbol*>& symbols,
-                        const std::vector<uint64_t>* dex_file_offsets);
   bool WriteFeatureBegin(int feature);
   bool WriteFeatureEnd(int feature);
 
@@ -117,6 +117,8 @@ class RecordFileReader {
     }
     return result;
   }
+
+  const std::unordered_map<uint64_t, size_t>& EventIdMap() const { return event_id_to_attr_map_; }
 
   const std::map<int, PerfFileFormat::SectionDesc>& FeatureSectionDescriptors() const {
     return feature_section_descriptors_;
