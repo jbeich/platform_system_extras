@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f7b6bc4_7f5fefe5",
+        "filename": "simpleperf/cmd_report.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 529,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-10-21T18:54:15Z",
+      "side": 1,
+      "message": "I wish that the argument parsing part of this refactoring was split out, but it\u0027s fine now that I read through it.",
+      "revId": "e3ca9985c53ccc356d5de50bee3d384104d3c851",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df5722d9_bae1d1b9",
+        "filename": "simpleperf/cmd_stat.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 689,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-10-21T18:54:15Z",
+      "side": 1,
+      "message": "Many/most of these could be `auto` instead. This is true of other files in this CL as well.",
+      "range": {
+        "startLine": 689,
+        "startChar": 13,
+        "endLine": 689,
+        "endChar": 24
+      },
+      "revId": "e3ca9985c53ccc356d5de50bee3d384104d3c851",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
