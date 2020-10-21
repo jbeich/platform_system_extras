@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a5c94bd_120e4551",
+        "filename": "simpleperf/cmd_report.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 529,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-10-21T20:29:54Z",
+      "side": 1,
+      "message": "Thanks for reminding. I will split similar patches in the future.",
+      "parentUuid": "8f7b6bc4_7f5fefe5",
+      "revId": "e3ca9985c53ccc356d5de50bee3d384104d3c851",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "df5722d9_bae1d1b9",
@@ -31,6 +49,30 @@
       "writtenOn": "2020-10-21T18:54:15Z",
       "side": 1,
       "message": "Many/most of these could be `auto` instead. This is true of other files in this CL as well.",
+      "range": {
+        "startLine": 689,
+        "startChar": 13,
+        "endLine": 689,
+        "endChar": 24
+      },
+      "revId": "e3ca9985c53ccc356d5de50bee3d384104d3c851",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "455d729d_2ac19cb7",
+        "filename": "simpleperf/cmd_stat.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 689,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-10-21T20:29:54Z",
+      "side": 1,
+      "message": "Since the code here contains both function return and container iteration, I feel using explicit type here is a little clearer.",
+      "parentUuid": "df5722d9_bae1d1b9",
       "range": {
         "startLine": 689,
         "startChar": 13,
