@@ -218,7 +218,9 @@ void RecordFileReader::UseRecordingEnvironment() {
   }
   auto& meta_info = GetMetaInfoFeature();
   if (auto it = meta_info.find("event_type_info"); it != meta_info.end()) {
-    scoped_event_types_.reset(new ScopedEventTypes(it->second));
+    if (EventTypeManager::Instance().GetScopedFinder() == nullptr) {
+      scoped_event_types_.reset(new ScopedEventTypes(it->second));
+    }
   }
 }
 
@@ -516,7 +518,8 @@ bool RecordFileReader::ReadFileFeature(size_t& read_pos, std::string* file_path,
   if (*file_type == DSO_ELF_FILE && static_cast<size_t>(p - buf.data()) < size) {
     MoveFromBinaryFormat(*file_offset_of_min_vaddr, p);
   }
-  CHECK_EQ(size, static_cast<size_t>(p - buf.data()));
+  CHECK_EQ(size, static_cast<size_t>(p - buf.data()))
+      << "file " << *file_path << ", type " << *file_type;
   return true;
 }
 

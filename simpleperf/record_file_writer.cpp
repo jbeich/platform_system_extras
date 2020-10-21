@@ -18,8 +18,8 @@
 
 #include <fcntl.h>
 #include <string.h>
-#include <sys/mman.h>
 #include <unistd.h>
+
 #include <algorithm>
 #include <set>
 #include <string>
