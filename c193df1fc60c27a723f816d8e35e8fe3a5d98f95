@@ -1,0 +1,326 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4649576_3142d558",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-10-22T18:43:24Z",
+      "side": 1,
+      "message": "Yeah. I feel some functions can be moved to environment.cpp and common argument processing can be extracted. record and stat cmd already have some duplication. But we can delay this after the monitor cmd change is finished and all duplications are identified.",
+      "range": {
+        "startLine": 13,
+        "startChar": 19,
+        "endLine": 14,
+        "endChar": 35
+      },
+      "revId": "c193df1fc60c27a723f816d8e35e8fe3a5d98f95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c9aa0ac_22ccb459",
+        "filename": "simpleperf/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-10-22T18:43:24Z",
+      "side": 1,
+      "message": "sort the name?",
+      "range": {
+        "startLine": 221,
+        "startChar": 17,
+        "endLine": 221,
+        "endChar": 28
+      },
+      "revId": "c193df1fc60c27a723f816d8e35e8fe3a5d98f95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73972f55_33197463",
+        "filename": "simpleperf/cmd_monitor.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-10-22T18:43:24Z",
+      "side": 1,
+      "message": "extend the anonymous namespace to MonitorCommand class?",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 15
+      },
+      "revId": "c193df1fc60c27a723f816d8e35e8fe3a5d98f95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "921aaf16_d9eb7737",
+        "filename": "simpleperf/cmd_monitor.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-10-22T18:43:24Z",
+      "side": 1,
+      "message": "no need to support trace events. remove it?",
+      "range": {
+        "startLine": 84,
+        "startChar": 24,
+        "endLine": 84,
+        "endChar": 45
+      },
+      "revId": "c193df1fc60c27a723f816d8e35e8fe3a5d98f95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a93b7a00_822628fb",
+        "filename": "simpleperf/cmd_monitor.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-10-22T18:43:24Z",
+      "side": 1,
+      "message": "we need to add a test file testing each option, like what we did for other commands. And I prefer to remove options you don\u0027t need. I don\u0027t expect the monitor cmd to be as flexible as the record cmd.",
+      "range": {
+        "startLine": 99,
+        "startChar": 1,
+        "endLine": 99,
+        "endChar": 3
+      },
+      "revId": "c193df1fc60c27a723f816d8e35e8fe3a5d98f95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12390d9b_787e747b",
+        "filename": "simpleperf/cmd_monitor.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-10-22T18:43:24Z",
+      "side": 1,
+      "message": "remove fields never used?",
+      "range": {
+        "startLine": 198,
+        "startChar": 2,
+        "endLine": 200,
+        "endChar": 25
+      },
+      "revId": "c193df1fc60c27a723f816d8e35e8fe3a5d98f95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64e0af12_c5308d6a",
+        "filename": "simpleperf/cmd_monitor.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-10-22T18:43:24Z",
+      "side": 1,
+      "message": "We will not support trace events like etm in monitor cmd (because they don\u0027t have a callchain to report while recording). So it\u0027s better to remove it.",
+      "range": {
+        "startLine": 203,
+        "startChar": 9,
+        "endLine": 203,
+        "endChar": 25
+      },
+      "revId": "c193df1fc60c27a723f816d8e35e8fe3a5d98f95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7399c73_5be5e2b4",
+        "filename": "simpleperf/cmd_monitor.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-10-22T18:43:24Z",
+      "side": 1,
+      "message": "simpleperf uses 100 column limit.",
+      "range": {
+        "startLine": 207,
+        "startChar": 2,
+        "endLine": 208,
+        "endChar": 29
+      },
+      "revId": "c193df1fc60c27a723f816d8e35e8fe3a5d98f95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44eb3a87_7f13469b",
+        "filename": "simpleperf/cmd_monitor.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-10-22T18:43:24Z",
+      "side": 1,
+      "message": "use 0 here?",
+      "range": {
+        "startLine": 262,
+        "startChar": 59,
+        "endLine": 262,
+        "endChar": 75
+      },
+      "revId": "c193df1fc60c27a723f816d8e35e8fe3a5d98f95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "287b265c_bac3cd36",
+        "filename": "simpleperf/cmd_monitor.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-10-22T18:43:24Z",
+      "side": 1,
+      "message": "--tracepoint-events isn\u0027t described in the help msg.",
+      "range": {
+        "startLine": 345,
+        "startChar": 0,
+        "endLine": 350,
+        "endChar": 3
+      },
+      "revId": "c193df1fc60c27a723f816d8e35e8fe3a5d98f95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0cf6a62_6fbaa797",
+        "filename": "simpleperf/cmd_monitor.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 615,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-10-22T18:43:24Z",
+      "side": 1,
+      "message": "I think the checks of sample_type can be removed. Since we are doing reporting while recording, we already know that these fields are recorded. If you want to make sure, you can use CHECK() instead.",
+      "range": {
+        "startLine": 615,
+        "startChar": 2,
+        "endLine": 615,
+        "endChar": 67
+      },
+      "revId": "c193df1fc60c27a723f816d8e35e8fe3a5d98f95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a24464b_0da92be1",
+        "filename": "simpleperf/cmd_monitor.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 619,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-10-22T18:43:24Z",
+      "side": 1,
+      "message": "Also output symbol name here. the ip address here isn\u0027t included in the callchain in DumpSampleCallchain().",
+      "range": {
+        "startLine": 619,
+        "startChar": 75,
+        "endLine": 619,
+        "endChar": 77
+      },
+      "revId": "c193df1fc60c27a723f816d8e35e8fe3a5d98f95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "444f85a7_a4d862ba",
+        "filename": "simpleperf/cmd_monitor.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 643,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-10-22T18:43:24Z",
+      "side": 1,
+      "message": "check of sample_type can be removed here. ID/IDENTIFIER is always recorded.",
+      "range": {
+        "startLine": 643,
+        "startChar": 6,
+        "endLine": 643,
+        "endChar": 8
+      },
+      "revId": "c193df1fc60c27a723f816d8e35e8fe3a5d98f95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0abf1a6_9ac5314c",
+        "filename": "simpleperf/cmd_monitor_impl.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-10-22T18:43:24Z",
+      "side": 1,
+      "message": "If only cmd_monitor.cpp uses it, then we can move it to cmd_monitor.cpp.",
+      "range": {
+        "startLine": 26,
+        "startChar": 30,
+        "endLine": 26,
+        "endChar": 55
+      },
+      "revId": "c193df1fc60c27a723f816d8e35e8fe3a5d98f95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
