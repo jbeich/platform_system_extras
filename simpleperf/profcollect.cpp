@@ -37,12 +37,17 @@ bool HasSupport() {
 }
 
 bool Record(const std::filesystem::path& output,
+            const std::string& filter,
             const std::chrono::duration<float>& duration) {
   auto recordCmd = CreateCommandInstance("record");
   std::vector<std::string> args;
-  args.push_back("-a");
   args.insert(args.end(), {"-e", "cs-etm:u"});
   args.insert(args.end(), {"--duration", std::to_string(duration.count())});
+  if (!filter.empty()) {
+    args.push_back("-a");
+  } else {
+    args.push_back(filter);
+  }
   args.insert(args.end(), {"-o", output});
   return recordCmd->Run(args);
 }

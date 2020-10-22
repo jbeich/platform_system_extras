@@ -89,7 +89,7 @@ bool ClearOnConfigChange(const ProfcollectdScheduler::Config& config) {
 void PeriodicCollectionWorker(std::future<void> terminationSignal, ProfcollectdScheduler& scheduler,
                               std::chrono::seconds& interval) {
   do {
-    scheduler.TraceOnce("periodic");
+    scheduler.TraceOnce("periodic", "");
   } while ((terminationSignal.wait_for(interval)) == std::future_status::timeout);
 }
 
@@ -154,13 +154,13 @@ OptError ProfcollectdScheduler::TerminateCollection() {
   return std::nullopt;
 }
 
-OptError ProfcollectdScheduler::TraceOnce(const std::string& tag) {
+OptError ProfcollectdScheduler::TraceOnce(const std::string& tag, const std::string& filter) {
   if(!hwtracer) {
     return "No trace provider registered.";
   }
 
   const std::lock_guard<std::mutex> lock(mu);
-  bool success = hwtracer->Trace(TRACE_DIR, tag, config.samplingPeriod);
+  bool success = hwtracer->Trace(TRACE_DIR, tag, filter, config.samplingPeriod);
   if (!success) {
     static std::string errmsg = "Trace failed";
     return errmsg;

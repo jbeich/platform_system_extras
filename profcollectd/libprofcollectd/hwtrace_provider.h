@@ -39,7 +39,7 @@ class HwtraceProvider {
    * @return True if successful.
    */
   virtual bool Trace(const std::filesystem::path& outputPath, const std::string& tag,
-                     std::chrono::duration<float> samplingPeriod) = 0;
+                     const std::string& filter, std::chrono::duration<float> samplingPeriod) = 0;
 
   /**
    * Process the hardware trace to generate simpleperf intermediate profile.

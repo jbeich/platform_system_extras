@@ -71,7 +71,7 @@ void TerminateCollection() {
 }
 
 void TraceOnce() {
-  GetIProfcollectdService()->TraceOnce("manual");
+  GetIProfcollectdService()->TraceOnce("manual", "");
 }
 
 void Process() {

@@ -51,7 +51,7 @@ class SimpleperfETMProvider : public HwtraceProvider {
   static bool IsSupported();
   std::string GetName();
   bool Trace(const fs::path& outputPath, const std::string& tag,
-             std::chrono::duration<float> samplingPeriod) override;
+             const std::string& filter, std::chrono::duration<float> samplingPeriod) override;
   bool Process(const fs::path& inputPath, const fs::path& outputPath,
                const std::string& binaryFilter) override;
 };
@@ -66,10 +66,10 @@ std::string SimpleperfETMProvider::GetName() {
 }
 
 bool SimpleperfETMProvider::Trace(const fs::path& outputPath, const std::string& tag,
-                                  std::chrono::duration<float> samplingPeriod) {
+                                  const std::string& filter, std::chrono::duration<float> samplingPeriod) {
   const std::string timestamp = GetTimestamp();
   auto outputFile = outputPath / (timestamp + "_" + tag + ETM_TRACEFILE_EXTENSION);
-  return simpleperf::etm::Record(outputFile, samplingPeriod);
+  return simpleperf::etm::Record(outputFile, filter, samplingPeriod);
 }
 
 bool SimpleperfETMProvider::Process(const fs::path& inputPath, const fs::path& outputPath,
