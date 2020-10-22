@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38367597_9e2c4f22",
+        "filename": "profcollectd/libprofcollectd/simpleperf_etm_provider.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-10-22T18:51:32Z",
+      "side": 1,
+      "message": "100 column limit?",
+      "range": {
+        "startLine": 69,
+        "startChar": 90,
+        "endLine": 69,
+        "endChar": 107
+      },
+      "revId": "5a796cb3577d861f6348e3e35cc1f782f8e51417",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17e62efc_8bfff5ea",
+        "filename": "simpleperf/profcollect.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-10-22T18:51:32Z",
+      "side": 1,
+      "message": "Don\u0027t understand what filter do you mean. It probably will not work as you expected.\nIf you want to do system wide recording, but only for selected binaries, you can keep -a option and add --addr-filter option.\nIf you want to record only selected processes, you can use -p/-t/--app options.",
+      "range": {
+        "startLine": 49,
+        "startChar": 19,
+        "endLine": 49,
+        "endChar": 27
+      },
+      "revId": "5a796cb3577d861f6348e3e35cc1f782f8e51417",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
