@@ -45,6 +45,30 @@
       },
       "revId": "5a796cb3577d861f6348e3e35cc1f782f8e51417",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f15ac86_02d567e1",
+        "filename": "simpleperf/profcollect.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-10-22T18:54:25Z",
+      "side": 1,
+      "message": "From another CL, I think you mean the former. And we need an absolute path to libart.so here.",
+      "parentUuid": "17e62efc_8bfff5ea",
+      "range": {
+        "startLine": 49,
+        "startChar": 19,
+        "endLine": 49,
+        "endChar": 27
+      },
+      "revId": "5a796cb3577d861f6348e3e35cc1f782f8e51417",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
