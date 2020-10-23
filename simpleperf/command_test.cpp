@@ -22,12 +22,9 @@ using namespace simpleperf;
 
 class MockCommand : public Command {
  public:
-  MockCommand() : Command("mock", "mock_short_help", "mock_long_help") {
-  }
+  MockCommand() : Command("mock", "mock_short_help", "mock_long_help") {}
 
-  bool Run(const std::vector<std::string>&) override {
-    return true;
-  }
+  bool Run(const std::vector<std::string>&) override { return true; }
 };
 
 TEST(command, CreateCommandInstance) {
