@@ -67,6 +67,24 @@
       "message": "Do we need to cherry pick this to R?",
       "revId": "07a7c53c4516534fae2c7fbf530517a05a77fe0a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb040580_9424edb8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-10-24T01:02:53Z",
+      "side": 1,
+      "message": "I\u0027m not sure.  It depends on whether anyone is using (or will use) ext4 with metadata encryption in combination with metadata_csum on userdata.  That\u0027s the \"real\" way that this bug could cause a problem.  I didn\u0027t actually notice this bug from that; I actually noticed it due to the weird Cuttlefish-specific image formatting code, which happened to run into this bug too.\n\nJaegeuk, you had added the metadata_csum support for b/149039306; any idea here?",
+      "parentUuid": "dde493f4_5cc5a116",
+      "revId": "07a7c53c4516534fae2c7fbf530517a05a77fe0a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
