@@ -85,6 +85,24 @@
       "parentUuid": "dde493f4_5cc5a116",
       "revId": "07a7c53c4516534fae2c7fbf530517a05a77fe0a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f11b1de_72e2419e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2020-10-24T01:09:50Z",
+      "side": 1,
+      "message": "I used to enable metadata_csum for small-sized partitions which needs to avoid data corruption importantly. So, I don\u0027t think it\u0027d be good for /data.",
+      "parentUuid": "eb040580_9424edb8",
+      "revId": "07a7c53c4516534fae2c7fbf530517a05a77fe0a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
