@@ -14,17 +14,16 @@
  * limitations under the License.
  */
 
-#include <new>
-#include <memory>
+#include <fec/io.h>
 #include <fstream>
 #include <iostream>
-#include <fec/io.h>
+#include <memory>
+#include <new>
 
 using namespace std;
 const unsigned bufsize = 2 * 1024 * FEC_BLOCKSIZE;
 
-int main(int argc, char **argv)
-{
+int main(int argc, char** argv) {
     if (argc != 3) {
         cerr << "usage: " << argv[0] << " input output" << endl;
         return 1;
@@ -58,7 +57,7 @@ int main(int argc, char **argv)
         if (count == -1) {
             return 1;
         } else if (count > 0) {
-            output.write(reinterpret_cast<const char *>(buffer.get()), count);
+            output.write(reinterpret_cast<const char*>(buffer.get()), count);
 
             if (!output) {
                 cerr << "write" << endl;

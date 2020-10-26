@@ -16,12 +16,10 @@
 
 #include "avb_utils.h"
 
-int parse_vbmeta_from_footer(fec_handle* /* f */,
-                             std::vector<uint8_t> * /* vbmeta */) {
+int parse_vbmeta_from_footer(fec_handle* /* f */, std::vector<uint8_t>* /* vbmeta */) {
     return -1;
 }
 
-int parse_avb_image(fec_handle* /* f */,
-                    const std::vector<uint8_t>& /* vbmeta */) {
+int parse_avb_image(fec_handle* /* f */, const std::vector<uint8_t>& /* vbmeta */) {
     return -1;
 }

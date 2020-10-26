@@ -46,7 +46,7 @@
 
 /* verity definitions */
 #define VERITY_METADATA_SIZE (8 * FEC_BLOCKSIZE)
-#define VERITY_TABLE_ARGS 10 /* mandatory arguments */
+#define VERITY_TABLE_ARGS 10                          /* mandatory arguments */
 #define VERITY_MIN_TABLE_SIZE (VERITY_TABLE_ARGS * 2) /* for quick validation */
 #define VERITY_MAX_TABLE_SIZE (VERITY_METADATA_SIZE - sizeof(verity_header))
 
@@ -87,28 +87,28 @@ struct hashtree_info {
     std::vector<uint8_t> zero_hash;
 
     // Initialize the hashtree offsets and properties with the input parameters.
-    int initialize(uint64_t hash_start, uint64_t data_blocks,
-                   const std::vector<uint8_t> &salt, int nid);
+    int initialize(uint64_t hash_start, uint64_t data_blocks, const std::vector<uint8_t>& salt,
+                   int nid);
 
     // Checks if the bytes in 'block' has the expected hash. And the 'index' is
     // the block number of is the input block in the filesystem.
-    bool check_block_hash_with_index(uint64_t index, const uint8_t *block);
+    bool check_block_hash_with_index(uint64_t index, const uint8_t* block);
 
     // Reads the verity hash tree, validates it against the root hash in `root',
     // corrects errors if necessary, and copies valid data blocks for later use
     // to 'hashtree'.
-    int verify_tree(const fec_handle *f, const uint8_t *root);
+    int verify_tree(const fec_handle* f, const uint8_t* root);
 
-   private:
-    bool ecc_read_hashes(fec_handle *f, uint64_t hash_offset, uint8_t *hash,
-                         uint64_t data_offset, uint8_t *data);
+  private:
+    bool ecc_read_hashes(fec_handle* f, uint64_t hash_offset, uint8_t* hash, uint64_t data_offset,
+                         uint8_t* data);
 
     // Computes the hash for FEC_BLOCKSIZE bytes from buffer 'block' and
     // compares it to the expected value in 'expected'.
-    bool check_block_hash(const uint8_t *expected, const uint8_t *block);
+    bool check_block_hash(const uint8_t* expected, const uint8_t* block);
 
     // Computes the hash of 'block' and put the result in 'hash'.
-    int get_hash(const uint8_t *block, uint8_t *hash);
+    int get_hash(const uint8_t* block, uint8_t* hash);
 
     int nid_;  // NID for the hash algorithm.
     uint32_t digest_length_;
@@ -134,7 +134,7 @@ struct fec_handle {
     ecc_info ecc;
     int fd;
     int flags; /* additional flags passed to fec_open */
-    int mode; /* mode for open(2) */
+    int mode;  /* mode for open(2) */
     pthread_mutex_t mutex;
     uint64_t errors;
     uint64_t data_size;
@@ -144,67 +144,63 @@ struct fec_handle {
     verity_info verity;
     avb_info avb;
 
-    hashtree_info hashtree() const {
-        return avb.valid ? avb.hashtree : verity.hashtree;
-    }
+    hashtree_info hashtree() const { return avb.valid ? avb.hashtree : verity.hashtree; }
 };
 
 /* I/O helpers */
-extern bool raw_pread(int fd, void *buf, size_t count, uint64_t offset);
-extern bool raw_pwrite(int fd, const void *buf, size_t count, uint64_t offset);
+extern bool raw_pread(int fd, void* buf, size_t count, uint64_t offset);
+extern bool raw_pwrite(int fd, const void* buf, size_t count, uint64_t offset);
 
 /* processing functions */
-typedef ssize_t (*read_func)(fec_handle *f, uint8_t *dest, size_t count,
-        uint64_t offset, size_t *errors);
+typedef ssize_t (*read_func)(fec_handle* f, uint8_t* dest, size_t count, uint64_t offset,
+                             size_t* errors);
 
-extern ssize_t process(fec_handle *f, uint8_t *buf, size_t count,
-        uint64_t offset, read_func func);
+extern ssize_t process(fec_handle* f, uint8_t* buf, size_t count, uint64_t offset, read_func func);
 
 /* verity functions */
-extern uint64_t verity_get_size(uint64_t file_size, uint32_t *verity_levels,
-                                uint32_t *level_hashes,
+extern uint64_t verity_get_size(uint64_t file_size, uint32_t* verity_levels, uint32_t* level_hashes,
                                 uint32_t padded_digest_size);
 
-extern int verity_parse_header(fec_handle *f, uint64_t offset);
+extern int verity_parse_header(fec_handle* f, uint64_t offset);
 
 /* helper macros */
 #ifndef unlikely
-    #define unlikely(x) __builtin_expect(!!(x), 0)
-    #define likely(x)   __builtin_expect(!!(x), 1)
+#define unlikely(x) __builtin_expect(!!(x), 0)
+#define likely(x) __builtin_expect(!!(x), 1)
 #endif
 
 #ifndef stringify
-    #define __stringify(x) #x
-    #define stringify(x) __stringify(x)
+#define __stringify(x) #x
+#define stringify(x) __stringify(x)
 #endif
 
 /*  warnings, errors, debug output */
 #ifdef FEC_NO_KLOG
-    #define __log(func, type, format, args...) \
-        fprintf(stderr, "fec: <%d> " type ": %s: " format "\n", \
-            (int)syscall(SYS_gettid), __FUNCTION__,  ##args)
+#define __log(func, type, format, args...)                                            \
+    fprintf(stderr, "fec: <%d> " type ": %s: " format "\n", (int)syscall(SYS_gettid), \
+            __FUNCTION__, ##args)
 #else
-    #include <cutils/klog.h>
+#include <cutils/klog.h>
 
-    #define __log(func, type, format, args...) \
-        KLOG_##func("fec", "<%d> " type ": %s: " format "\n", \
-            (int)syscall(SYS_gettid), __FUNCTION__, ##args)
+#define __log(func, type, format, args...)                                                        \
+    KLOG_##func("fec", "<%d> " type ": %s: " format "\n", (int)syscall(SYS_gettid), __FUNCTION__, \
+                ##args)
 #endif
 
 #ifdef NDEBUG
-    #define debug(format, args...)
+#define debug(format, args...)
 #else
-    #define debug(format, args...) __log(DEBUG, "debug", format, ##args)
+#define debug(format, args...) __log(DEBUG, "debug", format, ##args)
 #endif
 
 #define warn(format, args...) __log(WARNING, "warning", format, ##args)
 #define error(format, args...) __log(ERROR, "error", format, ##args)
 
-#define check(p) \
-    if (unlikely(!(p))) { \
+#define check(p)                  \
+    if (unlikely(!(p))) {         \
         error("`%s' failed", #p); \
-        errno = EFAULT; \
-        return -1; \
+        errno = EFAULT;           \
+        return -1;                \
     }
 
 #endif /* __FEC_PRIVATE_H__ */

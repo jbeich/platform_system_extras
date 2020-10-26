@@ -24,7 +24,7 @@ struct fec_handle;
 // Checks if there is a valid AVB footer in the end of the image. If so, parses
 // the contents of vbmeta struct from the given AVB footer. Returns 0 on
 // success.
-int parse_vbmeta_from_footer(fec_handle *f, std::vector<uint8_t> *vbmeta);
+int parse_vbmeta_from_footer(fec_handle* f, std::vector<uint8_t>* vbmeta);
 
 // Parses the AVB vbmeta for the information of hashtree and fec data.
-int parse_avb_image(fec_handle *f, const std::vector<uint8_t> &vbmeta);
+int parse_avb_image(fec_handle* f, const std::vector<uint8_t>& vbmeta);

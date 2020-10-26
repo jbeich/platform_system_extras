@@ -22,11 +22,11 @@
 #include <squashfs_utils.h>
 
 #if defined(__linux__)
-    #include <linux/fs.h>
+#include <linux/fs.h>
 #elif defined(__APPLE__)
-    #include <sys/disk.h>
-    #define BLKGETSIZE64 DKIOCGETBLOCKCOUNT
-    #define fdatasync(fd) fcntl((fd), F_FULLFSYNC)
+#include <sys/disk.h>
+#define BLKGETSIZE64 DKIOCGETBLOCKCOUNT
+#define fdatasync(fd) fcntl((fd), F_FULLFSYNC)
 #endif
 
 #include "avb_utils.h"
@@ -39,9 +39,8 @@ using size_func = uint64_t (*)(uint64_t size, int roots);
 /* performs a binary search to find a metadata offset from a file so that
    the metadata size matches function `get_real_size(size, roots)', using
    the approximate size returned by `get_appr_size' as a starting point */
-static int find_offset(uint64_t file_size, int roots, uint64_t *offset,
-        size_func get_appr_size, size_func get_real_size)
-{
+static int find_offset(uint64_t file_size, int roots, uint64_t* offset, size_func get_appr_size,
+                       size_func get_real_size) {
     check(offset);
     check(get_appr_size);
     check(get_real_size);
@@ -67,8 +66,7 @@ static int find_offset(uint64_t file_size, int roots, uint64_t *offset,
             hi = mi;
         } else {
             *offset = mi;
-            debug("file_size = %" PRIu64 " -> offset = %" PRIu64, file_size,
-                mi);
+            debug("file_size = %" PRIu64 " -> offset = %" PRIu64, file_size, mi);
             return 0;
         }
     }
@@ -79,25 +77,20 @@ static int find_offset(uint64_t file_size, int roots, uint64_t *offset,
 }
 
 /* returns verity metadata size for a `size' byte file */
-static uint64_t get_verity_size(uint64_t size, int)
-{
-    return VERITY_METADATA_SIZE +
-           verity_get_size(size, NULL, NULL, SHA256_DIGEST_LENGTH);
+static uint64_t get_verity_size(uint64_t size, int) {
+    return VERITY_METADATA_SIZE + verity_get_size(size, NULL, NULL, SHA256_DIGEST_LENGTH);
 }
 
 /* computes the verity metadata offset for a file with size `f->size' */
-static int find_verity_offset(fec_handle *f, uint64_t *offset)
-{
+static int find_verity_offset(fec_handle* f, uint64_t* offset) {
     check(f);
     check(offset);
 
-    return find_offset(f->data_size, 0, offset, get_verity_size,
-                get_verity_size);
+    return find_offset(f->data_size, 0, offset, get_verity_size, get_verity_size);
 }
 
 /* attempts to read and validate an ecc header from file position `offset' */
-static int parse_ecc_header(fec_handle *f, uint64_t offset)
-{
+static int parse_ecc_header(fec_handle* f, uint64_t offset) {
     check(f);
     check(f->ecc.rsn > 0 && f->ecc.rsn < FEC_RSM);
     check(f->size > sizeof(fec_header));
@@ -136,12 +129,10 @@ static int parse_ecc_header(fec_handle *f, uint64_t offset)
         return -1;
     }
     if (f->ecc.roots != (int)header.roots) {
-        error("unexpected number of roots: %d vs %u", f->ecc.roots,
-            header.roots);
+        error("unexpected number of roots: %d vs %u", f->ecc.roots, header.roots);
         return -1;
     }
-    if (header.fec_size % header.roots ||
-            header.fec_size % FEC_BLOCKSIZE) {
+    if (header.fec_size % header.roots || header.fec_size % FEC_BLOCKSIZE) {
         error("inconsistent ecc size %u", header.fec_size);
         return -1;
     }
@@ -150,8 +141,7 @@ static int parse_ecc_header(fec_handle *f, uint64_t offset)
     f->ecc.blocks = fec_div_round_up(f->data_size, FEC_BLOCKSIZE);
     f->ecc.rounds = fec_div_round_up(f->ecc.blocks, f->ecc.rsn);
 
-    if (header.fec_size !=
-            (uint32_t)f->ecc.rounds * f->ecc.roots * FEC_BLOCKSIZE) {
+    if (header.fec_size != (uint32_t)f->ecc.rounds * f->ecc.roots * FEC_BLOCKSIZE) {
         error("inconsistent ecc size %u", header.fec_size);
         return -1;
     }
@@ -195,8 +185,7 @@ static int parse_ecc_header(fec_handle *f, uint64_t offset)
 
 /* attempts to read an ecc header from `offset', and checks for a backup copy
    at the end of the block if the primary header is not valid */
-static int parse_ecc(fec_handle *f, uint64_t offset)
-{
+static int parse_ecc(fec_handle* f, uint64_t offset) {
     check(f);
     check(offset % FEC_BLOCKSIZE == 0);
     check(offset < UINT64_MAX - FEC_BLOCKSIZE);
@@ -217,8 +206,7 @@ static int parse_ecc(fec_handle *f, uint64_t offset)
 
 /* reads the squashfs superblock and returns the size of the file system in
    `offset' */
-static int get_squashfs_size(fec_handle *f, uint64_t *offset)
-{
+static int get_squashfs_size(fec_handle* f, uint64_t* offset) {
     check(f);
     check(offset);
 
@@ -245,8 +233,7 @@ static int get_squashfs_size(fec_handle *f, uint64_t *offset)
 
 /* reads the ext4 superblock and returns the size of the file system in
    `offset' */
-static int get_ext4_size(fec_handle *f, uint64_t *offset)
-{
+static int get_ext4_size(fec_handle* f, uint64_t* offset) {
     check(f);
     check(f->size > 1024 + sizeof(ext4_super_block));
     check(offset);
@@ -259,7 +246,7 @@ static int get_ext4_size(fec_handle *f, uint64_t *offset)
     }
 
     fs_info info;
-    info.len = 0;  /* only len is set to 0 to ask the device for real size. */
+    info.len = 0; /* only len is set to 0 to ask the device for real size. */
 
     if (ext4_parse_sb(&sb, &info) != 0) {
         errno = EINVAL;
@@ -272,8 +259,7 @@ static int get_ext4_size(fec_handle *f, uint64_t *offset)
 
 /* attempts to determine file system size, if no fs type is specified in
    `f->flags', tries all supported types, and returns the size in `offset' */
-static int get_fs_size(fec_handle *f, uint64_t *offset)
-{
+static int get_fs_size(fec_handle* f, uint64_t* offset) {
     check(f);
     check(offset);
 
@@ -301,8 +287,7 @@ static int get_fs_size(fec_handle *f, uint64_t *offset)
 }
 
 /* locates, validates, and loads verity metadata from `f->fd' */
-static int load_verity(fec_handle *f)
-{
+static int load_verity(fec_handle* f) {
     check(f);
     debug("size = %" PRIu64 ", flags = %d", f->data_size, f->flags);
 
@@ -310,18 +295,15 @@ static int load_verity(fec_handle *f)
 
     /* verity header is at the end of the data area */
     if (verity_parse_header(f, offset) == 0) {
-        debug("found at %" PRIu64 " (start %" PRIu64 ")", offset,
-              f->verity.hashtree.hash_start);
+        debug("found at %" PRIu64 " (start %" PRIu64 ")", offset, f->verity.hashtree.hash_start);
         return 0;
     }
 
     debug("trying legacy formats");
 
     /* legacy format at the end of the partition */
-    if (find_verity_offset(f, &offset) == 0 &&
-            verity_parse_header(f, offset) == 0) {
-        debug("found at %" PRIu64 " (start %" PRIu64 ")", offset,
-              f->verity.hashtree.hash_start);
+    if (find_verity_offset(f, &offset) == 0 && verity_parse_header(f, offset) == 0) {
+        debug("found at %" PRIu64 " (start %" PRIu64 ")", offset, f->verity.hashtree.hash_start);
         return 0;
     }
 
@@ -343,16 +325,14 @@ static int load_verity(fec_handle *f)
 }
 
 /* locates, validates, and loads ecc data from `f->fd' */
-static int load_ecc(fec_handle *f)
-{
+static int load_ecc(fec_handle* f) {
     check(f);
     debug("size = %" PRIu64, f->data_size);
 
     uint64_t offset = f->data_size - FEC_BLOCKSIZE;
 
     if (parse_ecc(f, offset) == 0) {
-        debug("found at %" PRIu64 " (start %" PRIu64 ")", offset,
-            f->ecc.start);
+        debug("found at %" PRIu64 " (start %" PRIu64 ")", offset, f->ecc.start);
         return 0;
     }
 
@@ -360,8 +340,7 @@ static int load_ecc(fec_handle *f)
 }
 
 /* sets `f->size' to the size of the file or block device */
-static int get_size(fec_handle *f)
-{
+static int get_size(fec_handle* f) {
     check(f);
 
     struct stat st;
@@ -391,8 +370,7 @@ static int get_size(fec_handle *f)
 }
 
 /* clears fec_handle fiels to safe values */
-static void reset_handle(fec_handle *f)
-{
+static void reset_handle(fec_handle* f) {
     f->fd = -1;
     f->flags = 0;
     f->mode = 0;
@@ -406,8 +384,7 @@ static void reset_handle(fec_handle *f)
 }
 
 /* closes and flushes `f->fd' and releases any memory allocated for `f' */
-int fec_close(struct fec_handle *f)
-{
+int fec_close(struct fec_handle* f) {
     check(f);
 
     if (f->fd != -1) {
@@ -428,8 +405,7 @@ int fec_close(struct fec_handle *f)
 
 /* populates `data' from the internal data in `f', returns a value <0 if verity
    metadata is not available in `f->fd' */
-int fec_verity_get_metadata(struct fec_handle *f, struct fec_verity_metadata *data)
-{
+int fec_verity_get_metadata(struct fec_handle* f, struct fec_verity_metadata* data) {
     check(f);
     check(data);
 
@@ -444,10 +420,8 @@ int fec_verity_get_metadata(struct fec_handle *f, struct fec_verity_metadata *da
 
     data->disabled = f->verity.disabled;
     data->data_size = f->data_size;
-    memcpy(data->signature, f->verity.header.signature,
-        sizeof(data->signature));
-    memcpy(data->ecc_signature, f->verity.ecc_header.signature,
-        sizeof(data->ecc_signature));
+    memcpy(data->signature, f->verity.header.signature, sizeof(data->signature));
+    memcpy(data->ecc_signature, f->verity.ecc_header.signature, sizeof(data->ecc_signature));
     data->table = f->verity.table.c_str();
     data->table_length = f->verity.header.length;
 
@@ -456,8 +430,7 @@ int fec_verity_get_metadata(struct fec_handle *f, struct fec_verity_metadata *da
 
 /* populates `data' from the internal data in `f', returns a value <0 if ecc
    metadata is not available in `f->fd' */
-int fec_ecc_get_metadata(struct fec_handle *f, struct fec_ecc_metadata *data)
-{
+int fec_ecc_get_metadata(struct fec_handle* f, struct fec_ecc_metadata* data) {
     check(f);
     check(data);
 
@@ -480,8 +453,7 @@ int fec_ecc_get_metadata(struct fec_handle *f, struct fec_ecc_metadata *data)
 }
 
 /* populates `data' from the internal status in `f' */
-int fec_get_status(struct fec_handle *f, struct fec_status *s)
-{
+int fec_get_status(struct fec_handle* f, struct fec_status* s) {
     check(f);
     check(s);
 
@@ -496,15 +468,12 @@ int fec_get_status(struct fec_handle *f, struct fec_status *s)
 
 /* opens `path' using given options and returns a fec_handle in `handle' if
    successful */
-int fec_open(struct fec_handle **handle, const char *path, int mode, int flags,
-        int roots)
-{
+int fec_open(struct fec_handle** handle, const char* path, int mode, int flags, int roots) {
     check(path);
     check(handle);
     check(roots > 0 && roots < FEC_RSM);
 
-    debug("path = %s, mode = %d, flags = %d, roots = %d", path, mode, flags,
-        roots);
+    debug("path = %s, mode = %d, flags = %d, roots = %d", path, mode, flags, roots);
 
     if (mode & (O_CREAT | O_TRUNC | O_EXCL | O_WRONLY)) {
         /* only reading and updating existing files is supported */

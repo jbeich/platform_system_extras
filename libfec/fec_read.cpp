@@ -19,7 +19,7 @@
 #include <sys/mman.h>
 
 extern "C" {
-    #include <fec.h>
+#include <fec.h>
 }
 
 #include "fec_private.h"
@@ -27,9 +27,7 @@ extern "C" {
 using rs_unique_ptr = std::unique_ptr<void, decltype(&free_rs_char)>;
 
 /* prints a hexdump of `data' using warn(...) */
-static void dump(const char *name, uint64_t value, const uint8_t *data,
-        size_t size)
-{
+static void dump(const char* name, uint64_t value, const uint8_t* data, size_t size) {
     const int bytes_per_line = 16;
     char hex[bytes_per_line * 3 + 1];
     char prn[bytes_per_line + 1];
@@ -48,8 +46,7 @@ static void dump(const char *name, uint64_t value, const uint8_t *data,
         for (size_t m = 0; m < bytes_per_line; ++m) {
             if (n + m < size) {
                 ptrdiff_t offset = &hex[m * 3] - hex;
-                snprintf(hex + offset, sizeof(hex) - offset, "%02x ",
-                         data[n + m]);
+                snprintf(hex + offset, sizeof(hex) - offset, "%02x ", data[n + m]);
 
                 if (isprint(data[n + m])) {
                     prn[m] = data[n + m];
@@ -66,9 +63,7 @@ static void dump(const char *name, uint64_t value, const uint8_t *data,
 }
 
 /* checks if `offset' is within a corrupted block */
-static inline bool is_erasure(fec_handle *f, uint64_t offset,
-        const uint8_t *data)
-{
+static inline bool is_erasure(fec_handle* f, uint64_t offset, const uint8_t* data) {
     if (unlikely(offset >= f->data_size)) {
         return false;
     }
@@ -83,8 +78,7 @@ static inline bool is_erasure(fec_handle *f, uint64_t offset,
 }
 
 /* check if `offset' is within a block expected to contain zeros */
-static inline bool is_zero(fec_handle *f, uint64_t offset)
-{
+static inline bool is_zero(fec_handle* f, uint64_t offset) {
     auto hashtree = f->hashtree();
 
     if (hashtree.hash_data.empty() || unlikely(offset >= f->data_size)) {
@@ -93,8 +87,7 @@ static inline bool is_zero(fec_handle *f, uint64_t offset)
 
     uint64_t hash_offset = (offset / FEC_BLOCKSIZE) * SHA256_DIGEST_LENGTH;
 
-    if (unlikely(hash_offset >
-                 hashtree.hash_data.size() - SHA256_DIGEST_LENGTH)) {
+    if (unlikely(hash_offset > hashtree.hash_data.size() - SHA256_DIGEST_LENGTH)) {
         return false;
     }
 
@@ -104,16 +97,14 @@ static inline bool is_zero(fec_handle *f, uint64_t offset)
 
 /* reads and decodes a single block starting from `offset', returns the number
    of bytes corrected in `errors' */
-static int __ecc_read(fec_handle *f, void *rs, uint8_t *dest, uint64_t offset,
-        bool use_erasures, uint8_t *ecc_data, size_t *errors)
-{
+static int __ecc_read(fec_handle* f, void* rs, uint8_t* dest, uint64_t offset, bool use_erasures,
+                      uint8_t* ecc_data, size_t* errors) {
     check(offset % FEC_BLOCKSIZE == 0);
-    ecc_info *e = &f->ecc;
+    ecc_info* e = &f->ecc;
 
     /* reverse interleaving: calculate the RS block that includes the requested
        offset */
-    uint64_t rsb = offset - (offset / (e->rounds * FEC_BLOCKSIZE)) *
-                        e->rounds * FEC_BLOCKSIZE;
+    uint64_t rsb = offset - (offset / (e->rounds * FEC_BLOCKSIZE)) * e->rounds * FEC_BLOCKSIZE;
     int data_index = -1;
     int erasures[e->rsn];
     int neras = 0;
@@ -122,8 +113,7 @@ static int __ecc_read(fec_handle *f, void *rs, uint8_t *dest, uint64_t offset,
     check(!use_erasures || !f->hashtree().hash_data.empty());
 
     for (int i = 0; i < e->rsn; ++i) {
-        uint64_t interleaved = fec_ecc_interleave(rsb * e->rsn + i, e->rsn,
-                                    e->rounds);
+        uint64_t interleaved = fec_ecc_interleave(rsb * e->rsn + i, e->rsn, e->rounds);
 
         if (interleaved == offset) {
             data_index = i;
@@ -142,8 +132,7 @@ static int __ecc_read(fec_handle *f, void *rs, uint8_t *dest, uint64_t offset,
                 if (use_erasures && neras <= e->roots) {
                     erasures[neras++] = i;
                 }
-            } else if (use_erasures && neras <= e->roots &&
-                       is_erasure(f, interleaved, bbuf)) {
+            } else if (use_erasures && neras <= e->roots && is_erasure(f, interleaved, bbuf)) {
                 erasures[neras++] = i;
             }
         }
@@ -177,8 +166,7 @@ static int __ecc_read(fec_handle *f, void *rs, uint8_t *dest, uint64_t offset,
 
         if (unlikely(rc < 0)) {
             if (use_erasures) {
-                error("RS block %" PRIu64 ": decoding failed (%d erasures)",
-                    rsb, neras);
+                error("RS block %" PRIu64 ": decoding failed (%d erasures)", rsb, neras);
                 dump("raw RS block", rsb, copy, FEC_RSM);
             } else if (f->hashtree().hash_data.empty()) {
                 warn("RS block %" PRIu64 ": decoding failed", rsb);
@@ -205,9 +193,7 @@ static int __ecc_read(fec_handle *f, void *rs, uint8_t *dest, uint64_t offset,
 }
 
 /* initializes RS decoder and allocates memory for interleaving */
-static int ecc_init(fec_handle *f, rs_unique_ptr& rs,
-        std::unique_ptr<uint8_t[]>& ecc_data)
-{
+static int ecc_init(fec_handle* f, rs_unique_ptr& rs, std::unique_ptr<uint8_t[]>& ecc_data) {
     check(f);
 
     rs.reset(init_rs_char(FEC_PARAMS(f->ecc.roots)));
@@ -231,9 +217,8 @@ static int ecc_init(fec_handle *f, rs_unique_ptr& rs,
 
 /* reads `count' bytes from `offset' and corrects possible errors without
    erasure detection, returning the number of corrected bytes in `errors' */
-static ssize_t ecc_read(fec_handle *f, uint8_t *dest, size_t count,
-        uint64_t offset, size_t *errors)
-{
+static ssize_t ecc_read(fec_handle* f, uint8_t* dest, size_t count, uint64_t offset,
+                        size_t* errors) {
     check(f);
     check(dest);
     check(offset < f->data_size);
@@ -257,8 +242,8 @@ static ssize_t ecc_read(fec_handle *f, uint8_t *dest, size_t count,
 
     while (left > 0) {
         /* there's no erasure detection without verity metadata */
-        if (__ecc_read(f, rs.get(), data, curr * FEC_BLOCKSIZE, false,
-                ecc_data.get(), errors) == -1) {
+        if (__ecc_read(f, rs.get(), data, curr * FEC_BLOCKSIZE, false, ecc_data.get(), errors) ==
+            -1) {
             return -1;
         }
 
@@ -282,9 +267,8 @@ static ssize_t ecc_read(fec_handle *f, uint8_t *dest, size_t count,
 /* reads `count' bytes from `offset', corrects possible errors with
    erasure detection, and verifies the integrity of read data using
    verity hash tree; returns the number of corrections in `errors' */
-static ssize_t verity_read(fec_handle *f, uint8_t *dest, size_t count,
-        uint64_t offset, size_t *errors)
-{
+static ssize_t verity_read(fec_handle* f, uint8_t* dest, size_t count, uint64_t offset,
+                           size_t* errors) {
     check(f);
     check(dest);
     check(offset < f->data_size);
@@ -307,8 +291,7 @@ static ssize_t verity_read(fec_handle *f, uint8_t *dest, size_t count,
     uint8_t data[FEC_BLOCKSIZE];
 
     uint64_t max_hash_block =
-        (f->hashtree().hash_data.size() - SHA256_DIGEST_LENGTH) /
-        SHA256_DIGEST_LENGTH;
+            (f->hashtree().hash_data.size() - SHA256_DIGEST_LENGTH) / SHA256_DIGEST_LENGTH;
 
     while (left > 0) {
         check(curr <= max_hash_block);
@@ -342,46 +325,45 @@ static ssize_t verity_read(fec_handle *f, uint8_t *dest, size_t count,
 
         if (!f->ecc.start) {
             /* fatal error without ecc */
-            error("[%" PRIu64 ", %" PRIu64 "): corrupted block %" PRIu64,
-                offset, offset + count, curr);
+            error("[%" PRIu64 ", %" PRIu64 "): corrupted block %" PRIu64, offset, offset + count,
+                  curr);
             return -1;
         } else {
-            debug("[%" PRIu64 ", %" PRIu64 "): corrupted block %" PRIu64,
-                offset, offset + count, curr);
+            debug("[%" PRIu64 ", %" PRIu64 "): corrupted block %" PRIu64, offset, offset + count,
+                  curr);
         }
 
         /* try to correct without erasures first, because checking for
            erasure locations is slower */
-        if (__ecc_read(f, rs.get(), data, curr_offset, false, ecc_data.get(),
-                       errors) == FEC_BLOCKSIZE &&
+        if (__ecc_read(f, rs.get(), data, curr_offset, false, ecc_data.get(), errors) ==
+                    FEC_BLOCKSIZE &&
             f->hashtree().check_block_hash_with_index(curr, data)) {
             goto corrected;
         }
 
         /* try to correct with erasures */
-        if (__ecc_read(f, rs.get(), data, curr_offset, true, ecc_data.get(),
-                       errors) == FEC_BLOCKSIZE &&
+        if (__ecc_read(f, rs.get(), data, curr_offset, true, ecc_data.get(), errors) ==
+                    FEC_BLOCKSIZE &&
             f->hashtree().check_block_hash_with_index(curr, data)) {
             goto corrected;
         }
 
-        error("[%" PRIu64 ", %" PRIu64 "): corrupted block %" PRIu64
-            " (offset %" PRIu64 ") cannot be recovered",
-            offset, offset + count, curr, curr_offset);
+        error("[%" PRIu64 ", %" PRIu64 "): corrupted block %" PRIu64 " (offset %" PRIu64
+              ") cannot be recovered",
+              offset, offset + count, curr, curr_offset);
         dump("decoded block", curr, data, FEC_BLOCKSIZE);
 
         errno = EIO;
         return -1;
 
-corrected:
+    corrected:
         /* update the corrected block to the file if we are in r/w mode */
-        if (f->mode & O_RDWR &&
-            !raw_pwrite(f->fd, data, FEC_BLOCKSIZE, curr_offset)) {
+        if (f->mode & O_RDWR && !raw_pwrite(f->fd, data, FEC_BLOCKSIZE, curr_offset)) {
             error("failed to write: %s", strerror(errno));
             return -1;
         }
 
-valid:
+    valid:
         size_t copy = FEC_BLOCKSIZE - coff;
 
         if (copy > left) {
@@ -400,8 +382,7 @@ valid:
 }
 
 /* sets the internal file position to `offset' relative to `whence' */
-int fec_seek(struct fec_handle *f, int64_t offset, int whence)
-{
+int fec_seek(struct fec_handle* f, int64_t offset, int whence) {
     check(f);
 
     if (whence == SEEK_SET) {
@@ -441,8 +422,7 @@ int fec_seek(struct fec_handle *f, int64_t offset, int whence)
 
 /* reads up to `count' bytes starting from the internal file position using
    error correction and integrity validation, if available */
-ssize_t fec_read(struct fec_handle *f, void *buf, size_t count)
-{
+ssize_t fec_read(struct fec_handle* f, void* buf, size_t count) {
     ssize_t rc = fec_pread(f, buf, count, f->pos);
 
     if (rc > 0) {
@@ -455,8 +435,7 @@ ssize_t fec_read(struct fec_handle *f, void *buf, size_t count)
 
 /* for a file with size `max', returns the number of bytes we can read starting
    from `offset', up to `count' bytes */
-static inline size_t get_max_count(uint64_t offset, size_t count, uint64_t max)
-{
+static inline size_t get_max_count(uint64_t offset, size_t count, uint64_t max) {
     if (offset >= max) {
         return 0;
     } else if (offset > max - count) {
@@ -468,10 +447,10 @@ static inline size_t get_max_count(uint64_t offset, size_t count, uint64_t max)
 
 /* reads `count' bytes from `f->fd' starting from `offset', and copies the
    data to `buf' */
-bool raw_pread(int fd, void *buf, size_t count, uint64_t offset) {
+bool raw_pread(int fd, void* buf, size_t count, uint64_t offset) {
     check(buf);
 
-    uint8_t *p = (uint8_t *)buf;
+    uint8_t* p = (uint8_t*)buf;
     size_t remaining = count;
 
     while (remaining > 0) {
@@ -490,10 +469,10 @@ bool raw_pread(int fd, void *buf, size_t count, uint64_t offset) {
 }
 
 /* writes `count' bytes from `buf' to `f->fd' to a file position `offset' */
-bool raw_pwrite(int fd, const void *buf, size_t count, uint64_t offset) {
+bool raw_pwrite(int fd, const void* buf, size_t count, uint64_t offset) {
     check(buf);
 
-    const uint8_t *p = (const uint8_t *)buf;
+    const uint8_t* p = (const uint8_t*)buf;
     size_t remaining = count;
 
     while (remaining > 0) {
@@ -513,9 +492,7 @@ bool raw_pwrite(int fd, const void *buf, size_t count, uint64_t offset) {
 
 /* reads up to `count' bytes starting from `offset' using error correction and
    integrity validation, if available */
-ssize_t fec_pread(struct fec_handle *f, void *buf, size_t count,
-        uint64_t offset)
-{
+ssize_t fec_pread(struct fec_handle* f, void* buf, size_t count, uint64_t offset) {
     check(f);
     check(buf);
 
@@ -525,14 +502,13 @@ ssize_t fec_pread(struct fec_handle *f, void *buf, size_t count,
     }
 
     if (!f->hashtree().hash_data.empty()) {
-        return process(f, (uint8_t *)buf,
-                       get_max_count(offset, count, f->data_size), offset,
+        return process(f, (uint8_t*)buf, get_max_count(offset, count, f->data_size), offset,
                        verity_read);
     } else if (f->ecc.start) {
         check(f->ecc.start < f->size);
 
         count = get_max_count(offset, count, f->data_size);
-        ssize_t rc = process(f, (uint8_t *)buf, count, offset, ecc_read);
+        ssize_t rc = process(f, (uint8_t*)buf, count, offset, ecc_read);
 
         if (rc >= 0) {
             return rc;
