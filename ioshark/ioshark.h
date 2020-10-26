@@ -14,6 +14,9 @@
  * limitations under the License.
  */
 
+#ifndef IOSHARK_IOSHARK_H_
+#define IOSHARK_IOSHARK_H_
+
 /*
  * Format of the parsed workload files.
  * 1) Header
@@ -127,3 +130,5 @@ struct ioshark_filename_struct
 };
 
 #pragma pack(pop)
+
+#endif  // IOSHARK_IOSHARK_H_
