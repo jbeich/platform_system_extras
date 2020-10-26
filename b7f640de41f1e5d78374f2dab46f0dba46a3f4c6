@@ -1,0 +1,47 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000005740150",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1473322?revision\u003d1",
+      "fixSuggestions": [
+        {
+          "fixId": "efdb8bc0_1eeb017e",
+          "description": "Change to \"simpleperf/cmd_merge_test.cpp\"",
+          "replacements": [
+            {
+              "path": "simpleperf/cmd_merge_test.cpp",
+              "range": {
+                "startLine": 83,
+                "startChar": 12,
+                "endLine": 83,
+                "endChar": 17
+              },
+              "replacement": "sample"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "8671a195_f254a72f",
+        "filename": "simpleperf/cmd_merge_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2020-10-26T18:31:52Z",
+      "side": 1,
+      "message": "Common typo found: \"samle\" -- should it be \"sample\"?\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line or include \u0027NO_TYPO_CHECK\u003d\u003creason\u003e\u0027in the commit message.",
+      "range": {
+        "startLine": 83,
+        "startChar": 12,
+        "endLine": 83,
+        "endChar": 17
+      },
+      "revId": "b7f640de41f1e5d78374f2dab46f0dba46a3f4c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
