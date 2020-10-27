@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4cdc75e6_a893b4fd",
+        "filename": "ioshark/ioshark.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2020-10-27T15:21:09Z",
+      "side": 1,
+      "message": "`#pragma once` in new code",
+      "revId": "90bcac43ff4bcec8fb64cf349b561a547ea37d5d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
