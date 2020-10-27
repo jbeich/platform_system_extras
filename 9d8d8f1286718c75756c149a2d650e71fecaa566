@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14ef7832_b8cb6dd5",
+        "filename": "libfec/include/fec/ecc.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2020-10-27T18:46:36Z",
+      "side": 1,
+      "message": "wrong intent",
+      "range": {
+        "startLine": 31,
+        "startChar": 3,
+        "endLine": 31,
+        "endChar": 7
+      },
+      "revId": "9d8d8f1286718c75756c149a2d650e71fecaa566",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b1a37cf_6721f73f",
+        "filename": "libfec/include/fec/ecc.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2020-10-27T18:46:36Z",
+      "side": 1,
+      "message": "merge with last line? is it automatically done by clangformat. I thought the line width was 80 chars.",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 25
+      },
+      "revId": "9d8d8f1286718c75756c149a2d650e71fecaa566",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
