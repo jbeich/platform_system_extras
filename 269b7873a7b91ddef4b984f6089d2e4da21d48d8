@@ -16,6 +16,24 @@
       "message": "I think this project prefers clang-format-2.",
       "revId": "269b7873a7b91ddef4b984f6089d2e4da21d48d8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "93bdf44f_9af26767",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1561651
+      },
+      "writtenOn": "2020-10-27T10:54:06Z",
+      "side": 1,
+      "message": "Agreed. Done.",
+      "parentUuid": "29c56b2a_14614df5",
+      "revId": "269b7873a7b91ddef4b984f6089d2e4da21d48d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
