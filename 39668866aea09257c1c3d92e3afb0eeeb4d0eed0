@@ -140,6 +140,30 @@
       },
       "revId": "39668866aea09257c1c3d92e3afb0eeeb4d0eed0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "27ae1742_79a89f6b",
+        "filename": "profcollectd/libprofcollectd/scheduler.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-10-27T18:35:56Z",
+      "side": 1,
+      "message": "I see. I hope we can put this msg in the help info of profcollctctrl.",
+      "parentUuid": "6bb69fe2_1a0a12f8",
+      "range": {
+        "startLine": 115,
+        "startChar": 24,
+        "endLine": 115,
+        "endChar": 37
+      },
+      "revId": "39668866aea09257c1c3d92e3afb0eeeb4d0eed0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
