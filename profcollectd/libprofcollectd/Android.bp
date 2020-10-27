@@ -58,6 +58,7 @@ cc_library {
         "libsimpleperf_profcollect",
         "libutils",
         "libziparchive",
+        "server_configurable_flags",
     ],
 
     static_libs: [
@@ -66,6 +67,7 @@ cc_library {
 
     srcs: [
         "binder_service.cpp",
+        "config_utils.cpp",
         "compress.cpp",
         "interface.cpp",
         "scheduler.cpp",
