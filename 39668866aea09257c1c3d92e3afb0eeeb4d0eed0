@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a9400fd_1e1955ae",
+        "filename": "profcollectd/libprofcollectd/scheduler.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1087625
+      },
+      "writtenOn": "2020-10-27T17:45:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8297fb71_4f2a2fa7",
+      "range": {
+        "startLine": 38,
+        "startChar": 7,
+        "endLine": 38,
+        "endChar": 22
+      },
+      "revId": "39668866aea09257c1c3d92e3afb0eeeb4d0eed0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7ca56166_75ad72ac",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd325a8c_df6fb0c2",
+        "filename": "profcollectd/libprofcollectd/scheduler.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1087625
+      },
+      "writtenOn": "2020-10-27T17:45:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7ca56166_75ad72ac",
+      "range": {
+        "startLine": 114,
+        "startChar": 101,
+        "endLine": 114,
+        "endChar": 107
+      },
+      "revId": "39668866aea09257c1c3d92e3afb0eeeb4d0eed0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "52a0ff8d_ee48fb1a",
@@ -60,6 +108,30 @@
       "writtenOn": "2020-10-27T17:40:20Z",
       "side": 1,
       "message": "It seems to remove the ability of changing configs locally. Do we think local config is no longer needed?",
+      "range": {
+        "startLine": 115,
+        "startChar": 24,
+        "endLine": 115,
+        "endChar": 37
+      },
+      "revId": "39668866aea09257c1c3d92e3afb0eeeb4d0eed0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6bb69fe2_1a0a12f8",
+        "filename": "profcollectd/libprofcollectd/scheduler.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1087625
+      },
+      "writtenOn": "2020-10-27T17:45:54Z",
+      "side": 1,
+      "message": "This can be overridden using \u0027adb shell device_config put profcollect_native_boot KEY VALUE\u0027 command.",
+      "parentUuid": "52a0ff8d_ee48fb1a",
       "range": {
         "startLine": 115,
         "startChar": 24,
