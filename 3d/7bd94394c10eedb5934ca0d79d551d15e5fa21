@@ -1,0 +1,9 @@
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Lint+1: Lint 🤖 <ayeaye-gerrit@google.com>
+Code-Review+2: Yabin Cui <yabinc@google.com>
+Open-Source-Licensing+1: Lint 🤖 <ayeaye-gerrit@google.com>
+Submitted-by: Thiébaud Weksteen <tweek@google.com>
+Submitted-at: Tue, 27 Oct 2020 07:46:50 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/system/extras/+/1471769
+Project: platform/system/extras
+Branch: refs/heads/master
