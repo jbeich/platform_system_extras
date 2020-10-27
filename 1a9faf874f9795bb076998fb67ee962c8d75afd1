@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "45a6582b_15fc9f53",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-10-27T22:12:20Z",
+      "side": 1,
+      "message": "Maybe add this as a test to prevent regressions?",
+      "range": {
+        "startLine": 10,
+        "startChar": 6,
+        "endLine": 10,
+        "endChar": 58
+      },
+      "revId": "1a9faf874f9795bb076998fb67ee962c8d75afd1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
