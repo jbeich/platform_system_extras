@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29179fdf_f959ba93",
+        "filename": "simpleperf/cmd_monitor.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-10-28T22:44:42Z",
+      "side": 1,
+      "message": "to?",
+      "range": {
+        "startLine": 87,
+        "startChar": 79,
+        "endLine": 87,
+        "endChar": 81
+      },
+      "revId": "68a1f7f96a7aff69d49ba0a359e143a1fd5d18db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7619f90_f4e50d18",
+        "filename": "simpleperf/cmd_monitor.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-10-28T22:44:42Z",
+      "side": 1,
+      "message": "remove it, never used anywhere?",
+      "range": {
+        "startLine": 147,
+        "startChar": 8,
+        "endLine": 147,
+        "endChar": 33
+      },
+      "revId": "68a1f7f96a7aff69d49ba0a359e143a1fd5d18db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d55ee2fd_be67b476",
+        "filename": "simpleperf/cmd_monitor.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-10-28T22:44:42Z",
+      "side": 1,
+      "message": "remove them?",
+      "range": {
+        "startLine": 171,
+        "startChar": 0,
+        "endLine": 173,
+        "endChar": 50
+      },
+      "revId": "68a1f7f96a7aff69d49ba0a359e143a1fd5d18db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fcc60c8c_a9355be5",
+        "filename": "simpleperf/cmd_monitor.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-10-28T22:44:42Z",
+      "side": 1,
+      "message": "remove it?",
+      "range": {
+        "startLine": 177,
+        "startChar": 0,
+        "endLine": 177,
+        "endChar": 49
+      },
+      "revId": "68a1f7f96a7aff69d49ba0a359e143a1fd5d18db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f965973b_ef4d6b08",
+        "filename": "simpleperf/cmd_monitor.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 566,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-10-28T22:44:42Z",
+      "side": 1,
+      "message": "This function can\u0027t be called unless a callchain is recorded. Do the check like in https://android.googlesource.com/platform/system/extras/+/master/simpleperf/cmd_record.cpp#1415? This is caught by running cmd_monitor_test.cpp.",
+      "range": {
+        "startLine": 566,
+        "startChar": 6,
+        "endLine": 566,
+        "endChar": 38
+      },
+      "revId": "68a1f7f96a7aff69d49ba0a359e143a1fd5d18db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f6bc712_10fa7570",
+        "filename": "simpleperf/cmd_monitor_test.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-10-28T22:44:42Z",
+      "side": 1,
+      "message": "It fails in non-root, and succeeds in root. And simpleperf tests need to pass in both root and non-root.",
+      "range": {
+        "startLine": 69,
+        "startChar": 2,
+        "endLine": 69,
+        "endChar": 45
+      },
+      "revId": "68a1f7f96a7aff69d49ba0a359e143a1fd5d18db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58d17ef3_bca6bbb8",
+        "filename": "simpleperf/cmd_monitor_test.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-10-28T22:44:42Z",
+      "side": 1,
+      "message": "This test is flaky:\nsimpleperf_unit_test E 10-28 15:27:36 11165 11165 cmd_monitor.cpp:296] Processed samples: 1\nsystem/extras/simpleperf/cmd_monitor_test.cpp:93: Failure\nExpected: (small_sample_size) \u003c (1), actual: 1 vs 1",
+      "range": {
+        "startLine": 93,
+        "startChar": 2,
+        "endLine": 93,
+        "endChar": 34
+      },
+      "revId": "68a1f7f96a7aff69d49ba0a359e143a1fd5d18db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4fc2bbff_04e91af2",
+        "filename": "simpleperf/cmd_monitor_test.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-10-28T22:44:42Z",
+      "side": 1,
+      "message": "I think this is also flaky. I feel it\u0027s better to not do the comparison or let it monitor for a longer time, like 1 second.",
+      "range": {
+        "startLine": 98,
+        "startChar": 2,
+        "endLine": 99,
+        "endChar": 50
+      },
+      "revId": "68a1f7f96a7aff69d49ba0a359e143a1fd5d18db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

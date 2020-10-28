@@ -214,6 +214,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6dfb480a_5bc3dbcf",
+        "filename": "simpleperf/cmd_monitor.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-10-28T22:44:42Z",
+      "side": 1,
+      "message": "I think we can keep or add options as long as they are useful and there is a test for each option. cmd_monitor_test.cpp covers some options, but we need to add more to cover all.",
+      "parentUuid": "13fb4b6a_b234c49b",
+      "range": {
+        "startLine": 99,
+        "startChar": 1,
+        "endLine": 99,
+        "endChar": 3
+      },
+      "revId": "c193df1fc60c27a723f816d8e35e8fe3a5d98f95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "12390d9b_787e747b",
         "filename": "simpleperf/cmd_monitor.cpp",
         "patchSetId": 2
@@ -496,6 +520,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dcb8b98f_063f7d4a",
+        "filename": "simpleperf/cmd_monitor.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 615,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-10-28T22:44:42Z",
+      "side": 1,
+      "message": "Yes, the sample type is built in https://android.googlesource.com/platform/system/extras/+/master/simpleperf/event_attr.cpp#91, And event_selection_set.cpp doesn\u0027t remove them.",
+      "parentUuid": "6329c1a8_ddfcbc5d",
+      "range": {
+        "startLine": 615,
+        "startChar": 2,
+        "endLine": 615,
+        "endChar": 67
+      },
+      "revId": "c193df1fc60c27a723f816d8e35e8fe3a5d98f95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1a24464b_0da92be1",
         "filename": "simpleperf/cmd_monitor.cpp",
         "patchSetId": 2
@@ -531,6 +579,30 @@
       "side": 1,
       "message": "I am not sure what you mean. Do you mean calling GetSymbolInfo here as well?",
       "parentUuid": "1a24464b_0da92be1",
+      "range": {
+        "startLine": 619,
+        "startChar": 75,
+        "endLine": 619,
+        "endChar": 77
+      },
+      "revId": "c193df1fc60c27a723f816d8e35e8fe3a5d98f95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f8c4911_f5bcfc3a",
+        "filename": "simpleperf/cmd_monitor.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 619,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-10-28T22:44:42Z",
+      "side": 1,
+      "message": "Yes. If a sample is generated when a process is running: funcA() -\u003e funcB() -\u003e funcC(), then ip_data.ip stores an address in funcC(), and callchain_data.ips stores call addresses in funcB() and funcC(). So if we don\u0027t print symbol info for ip_data.ip, we will lose funcC() and only show funcB() and funcA().",
+      "parentUuid": "e882d328_3fbd2257",
       "range": {
         "startLine": 619,
         "startChar": 75,
