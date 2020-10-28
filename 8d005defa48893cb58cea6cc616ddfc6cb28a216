@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d790aa15_1cfcf01a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-10-28T21:21:42Z",
+      "side": 1,
+      "message": "ps3, 4: Add a struct FileFeature to hold parameters in ReadFileFeature/WriteFileFeature.",
+      "revId": "8d005defa48893cb58cea6cc616ddfc6cb28a216",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "79a7184d_30bf5b4c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-10-28T21:21:42Z",
+      "side": 1,
+      "message": "Thanks for the reminding. It\u0027s better than letting the code rot.",
+      "parentUuid": "2decea94_1984611f",
+      "revId": "0e9aa21367cf7b979fe0f3ec313a5c4dcbd6059e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6afcbc5d_c1224016",
@@ -41,6 +59,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5e92f9e_7d66a02e",
+        "filename": "simpleperf/cmd_merge.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-10-28T21:21:42Z",
+      "side": 1,
+      "message": "Done. I had the same feeling. But got distracted.",
+      "parentUuid": "6afcbc5d_c1224016",
+      "range": {
+        "startLine": 372,
+        "startChar": 21,
+        "endLine": 373,
+        "endChar": 92
+      },
+      "revId": "0e9aa21367cf7b979fe0f3ec313a5c4dcbd6059e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aebba926_d6127abb",
@@ -54,6 +96,24 @@
       "writtenOn": "2020-10-28T07:50:21Z",
       "side": 1,
       "message": "This could be written as a comparator-like function for `FileFeature` assuming you encapsulate the above `ReadFileFeature()` into passing back a `FileFeature` object reference now instead of separate pieces.",
+      "revId": "0e9aa21367cf7b979fe0f3ec313a5c4dcbd6059e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2e68f30_c3a66ae2",
+        "filename": "simpleperf/cmd_merge.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-10-28T21:21:42Z",
+      "side": 1,
+      "message": "Done. Hard to give the comparator function a name, so put it in the Merge function.",
+      "parentUuid": "aebba926_d6127abb",
       "revId": "0e9aa21367cf7b979fe0f3ec313a5c4dcbd6059e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
