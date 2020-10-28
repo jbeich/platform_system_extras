@@ -47,6 +47,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "af5a3b55_3c8cffb6",
+        "filename": "simpleperf/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1561651
+      },
+      "writtenOn": "2020-10-28T13:31:01Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "1c9aa0ac_22ccb459",
+      "range": {
+        "startLine": 221,
+        "startChar": 17,
+        "endLine": 221,
+        "endChar": 28
+      },
+      "revId": "c193df1fc60c27a723f816d8e35e8fe3a5d98f95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "73972f55_33197463",
@@ -70,6 +94,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9678ae63_3beaf18b",
+        "filename": "simpleperf/cmd_monitor.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1561651
+      },
+      "writtenOn": "2020-10-28T13:31:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "73972f55_33197463",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 15
+      },
+      "revId": "c193df1fc60c27a723f816d8e35e8fe3a5d98f95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "921aaf16_d9eb7737",
@@ -83,6 +131,30 @@
       "writtenOn": "2020-10-22T18:43:24Z",
       "side": 1,
       "message": "no need to support trace events. remove it?",
+      "range": {
+        "startLine": 84,
+        "startChar": 24,
+        "endLine": 84,
+        "endChar": 45
+      },
+      "revId": "c193df1fc60c27a723f816d8e35e8fe3a5d98f95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aaae43cc_b4b06366",
+        "filename": "simpleperf/cmd_monitor.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1561651
+      },
+      "writtenOn": "2020-10-28T13:31:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "921aaf16_d9eb7737",
       "range": {
         "startLine": 84,
         "startChar": 24,
@@ -118,6 +190,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "13fb4b6a_b234c49b",
+        "filename": "simpleperf/cmd_monitor.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1561651
+      },
+      "writtenOn": "2020-10-28T13:31:01Z",
+      "side": 1,
+      "message": "Added some tests. I think all the remaining options are relevant for our current use case. What do you think?",
+      "parentUuid": "a93b7a00_822628fb",
+      "range": {
+        "startLine": 99,
+        "startChar": 1,
+        "endLine": 99,
+        "endChar": 3
+      },
+      "revId": "c193df1fc60c27a723f816d8e35e8fe3a5d98f95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "12390d9b_787e747b",
         "filename": "simpleperf/cmd_monitor.cpp",
         "patchSetId": 2
@@ -129,6 +225,30 @@
       "writtenOn": "2020-10-22T18:43:24Z",
       "side": 1,
       "message": "remove fields never used?",
+      "range": {
+        "startLine": 198,
+        "startChar": 2,
+        "endLine": 200,
+        "endChar": 25
+      },
+      "revId": "c193df1fc60c27a723f816d8e35e8fe3a5d98f95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad288512_e5e54f00",
+        "filename": "simpleperf/cmd_monitor.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1561651
+      },
+      "writtenOn": "2020-10-28T13:31:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "12390d9b_787e747b",
       "range": {
         "startLine": 198,
         "startChar": 2,
@@ -162,6 +282,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d492899c_537e79e2",
+        "filename": "simpleperf/cmd_monitor.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1561651
+      },
+      "writtenOn": "2020-10-28T13:31:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "64e0af12_c5308d6a",
+      "range": {
+        "startLine": 203,
+        "startChar": 9,
+        "endLine": 203,
+        "endChar": 25
+      },
+      "revId": "c193df1fc60c27a723f816d8e35e8fe3a5d98f95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c7399c73_5be5e2b4",
@@ -175,6 +319,30 @@
       "writtenOn": "2020-10-22T18:43:24Z",
       "side": 1,
       "message": "simpleperf uses 100 column limit.",
+      "range": {
+        "startLine": 207,
+        "startChar": 2,
+        "endLine": 208,
+        "endChar": 29
+      },
+      "revId": "c193df1fc60c27a723f816d8e35e8fe3a5d98f95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "95144759_958d611e",
+        "filename": "simpleperf/cmd_monitor.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1561651
+      },
+      "writtenOn": "2020-10-28T13:31:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c7399c73_5be5e2b4",
       "range": {
         "startLine": 207,
         "startChar": 2,
@@ -208,6 +376,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "80c59c79_09cdf862",
+        "filename": "simpleperf/cmd_monitor.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1561651
+      },
+      "writtenOn": "2020-10-28T13:31:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "44eb3a87_7f13469b",
+      "range": {
+        "startLine": 262,
+        "startChar": 59,
+        "endLine": 262,
+        "endChar": 75
+      },
+      "revId": "c193df1fc60c27a723f816d8e35e8fe3a5d98f95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "287b265c_bac3cd36",
@@ -221,6 +413,30 @@
       "writtenOn": "2020-10-22T18:43:24Z",
       "side": 1,
       "message": "--tracepoint-events isn\u0027t described in the help msg.",
+      "range": {
+        "startLine": 345,
+        "startChar": 0,
+        "endLine": 350,
+        "endChar": 3
+      },
+      "revId": "c193df1fc60c27a723f816d8e35e8fe3a5d98f95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac88bee4_ff1296ac",
+        "filename": "simpleperf/cmd_monitor.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 1561651
+      },
+      "writtenOn": "2020-10-28T13:31:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "287b265c_bac3cd36",
       "range": {
         "startLine": 345,
         "startChar": 0,
@@ -256,6 +472,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6329c1a8_ddfcbc5d",
+        "filename": "simpleperf/cmd_monitor.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 615,
+      "author": {
+        "id": 1561651
+      },
+      "writtenOn": "2020-10-28T13:31:01Z",
+      "side": 1,
+      "message": "Ok for ID, but it\u0027s not clear if all the other fields will be present. Is that always the case?",
+      "parentUuid": "a0cf6a62_6fbaa797",
+      "range": {
+        "startLine": 615,
+        "startChar": 2,
+        "endLine": 615,
+        "endChar": 67
+      },
+      "revId": "c193df1fc60c27a723f816d8e35e8fe3a5d98f95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1a24464b_0da92be1",
         "filename": "simpleperf/cmd_monitor.cpp",
         "patchSetId": 2
@@ -267,6 +507,30 @@
       "writtenOn": "2020-10-22T18:43:24Z",
       "side": 1,
       "message": "Also output symbol name here. the ip address here isn\u0027t included in the callchain in DumpSampleCallchain().",
+      "range": {
+        "startLine": 619,
+        "startChar": 75,
+        "endLine": 619,
+        "endChar": 77
+      },
+      "revId": "c193df1fc60c27a723f816d8e35e8fe3a5d98f95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e882d328_3fbd2257",
+        "filename": "simpleperf/cmd_monitor.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 619,
+      "author": {
+        "id": 1561651
+      },
+      "writtenOn": "2020-10-28T13:31:01Z",
+      "side": 1,
+      "message": "I am not sure what you mean. Do you mean calling GetSymbolInfo here as well?",
+      "parentUuid": "1a24464b_0da92be1",
       "range": {
         "startLine": 619,
         "startChar": 75,
@@ -300,6 +564,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "728135ea_ebae03a9",
+        "filename": "simpleperf/cmd_monitor.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 643,
+      "author": {
+        "id": 1561651
+      },
+      "writtenOn": "2020-10-28T13:31:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "444f85a7_a4d862ba",
+      "range": {
+        "startLine": 643,
+        "startChar": 6,
+        "endLine": 643,
+        "endChar": 8
+      },
+      "revId": "c193df1fc60c27a723f816d8e35e8fe3a5d98f95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d0abf1a6_9ac5314c",
@@ -313,6 +601,30 @@
       "writtenOn": "2020-10-22T18:43:24Z",
       "side": 1,
       "message": "If only cmd_monitor.cpp uses it, then we can move it to cmd_monitor.cpp.",
+      "range": {
+        "startLine": 26,
+        "startChar": 30,
+        "endLine": 26,
+        "endChar": 55
+      },
+      "revId": "c193df1fc60c27a723f816d8e35e8fe3a5d98f95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d72dfa99_746d4b05",
+        "filename": "simpleperf/cmd_monitor_impl.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1561651
+      },
+      "writtenOn": "2020-10-28T13:31:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d0abf1a6_9ac5314c",
       "range": {
         "startLine": 26,
         "startChar": 30,
