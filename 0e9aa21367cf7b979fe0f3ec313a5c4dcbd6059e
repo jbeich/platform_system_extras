@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2decea94_1984611f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-10-28T07:50:21Z",
+      "side": 1,
+      "message": "Feel free to ignore my nitpicky comments, since I think it\u0027s probably ok (those multi-argument APIs are already in use elsewhere, and I might be overcomplicating things).",
+      "revId": "0e9aa21367cf7b979fe0f3ec313a5c4dcbd6059e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6afcbc5d_c1224016",
+        "filename": "simpleperf/cmd_merge.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-10-28T07:50:21Z",
+      "side": 1,
+      "message": "That\u0027s a lot of arguments. Perhaps refactor to use a struct/class to encapsulate so much in the future.",
+      "range": {
+        "startLine": 372,
+        "startChar": 21,
+        "endLine": 373,
+        "endChar": 92
+      },
+      "revId": "0e9aa21367cf7b979fe0f3ec313a5c4dcbd6059e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aebba926_d6127abb",
+        "filename": "simpleperf/cmd_merge.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-10-28T07:50:21Z",
+      "side": 1,
+      "message": "This could be written as a comparator-like function for `FileFeature` assuming you encapsulate the above `ReadFileFeature()` into passing back a `FileFeature` object reference now instead of separate pieces.",
+      "revId": "0e9aa21367cf7b979fe0f3ec313a5c4dcbd6059e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
