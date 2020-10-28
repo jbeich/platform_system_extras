@@ -20,6 +20,7 @@
 
 #include <android-base/logging.h>
 
+#include "config_utils.h"
 #include "hwtrace_provider.h"
 #include "scheduler.h"
 
@@ -31,7 +32,11 @@ using ::com::android::server::profcollect::IProfCollectd;
 
 namespace {
 
-Status HandleIfError(const std::function<OptError()>& action) {
+Status ForwardScheduler(const std::function<OptError()>& action) {
+  if (Scheduler == nullptr) {
+    return Status::fromExceptionCode(1, "profcollectd is not enabled through device config.");
+  }
+
   auto errmsg = action();
   if (errmsg) {
     LOG(ERROR) << errmsg.value();
@@ -42,37 +47,45 @@ Status HandleIfError(const std::function<OptError()>& action) {
 
 }  // namespace
 
+static constexpr config_t CONFIG_ENABLED = {"enabled", "0"};  // Disabled by default.
+
 ProfcollectdBinder::ProfcollectdBinder() {
-  ProfcollectdBinder::Scheduler = std::make_unique<ProfcollectdScheduler>();
-  LOG(INFO) << "Binder service started";
+  static bool enabled = getConfigFlagBool(CONFIG_ENABLED);
+
+  if (enabled) {
+    ProfcollectdBinder::Scheduler = std::make_unique<ProfcollectdScheduler>();
+    LOG(INFO) << "Binder service started";
+  } else {
+    LOG(INFO) << "profcollectd is not enabled through device config.";
+  }
 }
 
 Status ProfcollectdBinder::ReadConfig() {
-  return HandleIfError([=]() { return Scheduler->ReadConfig(); });
+  return ForwardScheduler([=]() { return Scheduler->ReadConfig(); });
 }
 
 Status ProfcollectdBinder::ScheduleCollection() {
-  return HandleIfError([=]() { return Scheduler->ScheduleCollection(); });
+  return ForwardScheduler([=]() { return Scheduler->ScheduleCollection(); });
 }
 
 Status ProfcollectdBinder::TerminateCollection() {
-  return HandleIfError([=]() { return Scheduler->TerminateCollection(); });
+  return ForwardScheduler([=]() { return Scheduler->TerminateCollection(); });
 }
 
 Status ProfcollectdBinder::TraceOnce(const std::string& tag) {
-  return HandleIfError([=]() { return Scheduler->TraceOnce(tag); });
+  return ForwardScheduler([=]() { return Scheduler->TraceOnce(tag); });
 }
 
 Status ProfcollectdBinder::ProcessProfile() {
-  return HandleIfError([=]() { return Scheduler->ProcessProfile(); });
+  return ForwardScheduler([=]() { return Scheduler->ProcessProfile(); });
 }
 
 Status ProfcollectdBinder::CreateProfileReport() {
-  return HandleIfError([=]() { return Scheduler->CreateProfileReport(); });
+  return ForwardScheduler([=]() { return Scheduler->CreateProfileReport(); });
 }
 
 Status ProfcollectdBinder::GetSupportedProvider(std::string* provider) {
-  return HandleIfError([=]() { return Scheduler->GetSupportedProvider(*provider); });
+  return ForwardScheduler([=]() { return Scheduler->GetSupportedProvider(*provider); });
 }
 
 }  // namespace profcollectd
