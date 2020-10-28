@@ -18,6 +18,8 @@
 
 #include "binder_service.h"
 
+#include <functional>
+
 #include <android-base/logging.h>
 
 #include "config_utils.h"
@@ -29,23 +31,7 @@ namespace profcollectd {
 
 using ::android::binder::Status;
 using ::com::android::server::profcollect::IProfCollectd;
-
-namespace {
-
-Status ForwardScheduler(const std::function<OptError()>& action) {
-  if (Scheduler == nullptr) {
-    return Status::fromExceptionCode(1, "profcollectd is not enabled through device config.");
-  }
-
-  auto errmsg = action();
-  if (errmsg) {
-    LOG(ERROR) << errmsg.value();
-    return Status::fromExceptionCode(1, errmsg.value().c_str());
-  }
-  return Status::ok();
-}
-
-}  // namespace
+using std::placeholders::_1;
 
 static constexpr config_t CONFIG_ENABLED = {"enabled", "0"};  // Disabled by default.
 
@@ -61,31 +47,45 @@ ProfcollectdBinder::ProfcollectdBinder() {
 }
 
 Status ProfcollectdBinder::ReadConfig() {
-  return ForwardScheduler([=]() { return Scheduler->ReadConfig(); });
+  return ForwardScheduler(&ProfcollectdScheduler::ReadConfig);
 }
 
 Status ProfcollectdBinder::ScheduleCollection() {
-  return ForwardScheduler([=]() { return Scheduler->ScheduleCollection(); });
+  return ForwardScheduler(&ProfcollectdScheduler::ScheduleCollection);
 }
 
 Status ProfcollectdBinder::TerminateCollection() {
-  return ForwardScheduler([=]() { return Scheduler->TerminateCollection(); });
+  return ForwardScheduler(&ProfcollectdScheduler::TerminateCollection);
 }
 
 Status ProfcollectdBinder::TraceOnce(const std::string& tag) {
-  return ForwardScheduler([=]() { return Scheduler->TraceOnce(tag); });
+  return ForwardScheduler(std::bind(&ProfcollectdScheduler::TraceOnce, _1, tag));
 }
 
 Status ProfcollectdBinder::ProcessProfile() {
-  return ForwardScheduler([=]() { return Scheduler->ProcessProfile(); });
+  return ForwardScheduler(&ProfcollectdScheduler::ProcessProfile);
 }
 
 Status ProfcollectdBinder::CreateProfileReport() {
-  return ForwardScheduler([=]() { return Scheduler->CreateProfileReport(); });
+  return ForwardScheduler(&ProfcollectdScheduler::CreateProfileReport);
 }
 
 Status ProfcollectdBinder::GetSupportedProvider(std::string* provider) {
-  return ForwardScheduler([=]() { return Scheduler->GetSupportedProvider(*provider); });
+  return ForwardScheduler(std::bind(&ProfcollectdScheduler::GetSupportedProvider, _1, *provider));
+}
+
+Status ProfcollectdBinder::ForwardScheduler(
+    const std::function<OptError(ProfcollectdScheduler*)>& action) {
+  if (Scheduler == nullptr) {
+    return Status::fromExceptionCode(1, "profcollectd is not enabled through device config.");
+  }
+
+  auto errmsg = action(&*Scheduler);
+  if (errmsg) {
+    LOG(ERROR) << errmsg.value();
+    return Status::fromExceptionCode(1, errmsg.value().c_str());
+  }
+  return Status::ok();
 }
 
 }  // namespace profcollectd
