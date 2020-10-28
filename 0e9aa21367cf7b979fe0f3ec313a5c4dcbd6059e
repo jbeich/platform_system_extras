@@ -116,6 +116,24 @@
       "parentUuid": "aebba926_d6127abb",
       "revId": "0e9aa21367cf7b979fe0f3ec313a5c4dcbd6059e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e457462_a5b68954",
+        "filename": "simpleperf/cmd_merge.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-10-28T22:55:13Z",
+      "side": 1,
+      "message": "That\u0027s probably the best thing to do, since we aren\u0027t really doing other independent comparisons anyways.",
+      "parentUuid": "c2e68f30_c3a66ae2",
+      "revId": "0e9aa21367cf7b979fe0f3ec313a5c4dcbd6059e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

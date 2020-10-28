@@ -16,6 +16,23 @@
       "message": "ps3, 4: Add a struct FileFeature to hold parameters in ReadFileFeature/WriteFileFeature.",
       "revId": "8d005defa48893cb58cea6cc616ddfc6cb28a216",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b75b3412_2b080b5e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-10-28T22:55:13Z",
+      "side": 1,
+      "message": "I could see a future where we unify `MergedFileFeature` and `FileFeature`, but that isn\u0027t needed right now, nor do I know whether it would be bad to use bulkier maps instead of vectors for some of the operations. In any case, the refactoring from PS2-\u003ePS4 greatly simplified the interesting parts of the CL, so thanks for cleaning it up.",
+      "revId": "8d005defa48893cb58cea6cc616ddfc6cb28a216",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
