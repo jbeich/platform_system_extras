@@ -16,6 +16,24 @@
       "message": "don\u0027t reformat files en masse, just let them be reformatted as they\u0027re edited.\n\n(in this case, i\u0027d use a .clang-format that uses tabs too!)",
       "revId": "51aeca4d2c6a00bfdea0bc79787ddcbf572aa2eb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b4b4fc3_6ed96d77",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1561651
+      },
+      "writtenOn": "2020-10-28T07:42:27Z",
+      "side": 1,
+      "message": "Ack, thanks.",
+      "parentUuid": "e49e1136_741ad5e5",
+      "revId": "51aeca4d2c6a00bfdea0bc79787ddcbf572aa2eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
