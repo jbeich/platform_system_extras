@@ -16,6 +16,23 @@
       "message": "reason for forward fix - developer says \u0027locally verified\u0027",
       "revId": "8c516d044782883392b54dbde7c3c3adadf25d74",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53987e1a_8915f345",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-10-29T22:30:16Z",
+      "side": 1,
+      "message": "+2 (it doesn\u0027t show the labels now with BCO, but please don\u0027t remove that either).",
+      "revId": "8c516d044782883392b54dbde7c3c3adadf25d74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
