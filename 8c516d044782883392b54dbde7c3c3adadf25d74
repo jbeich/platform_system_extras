@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d90632fd_8b977e93",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2020-10-29T22:28:40Z",
+      "side": 1,
+      "message": "reason for forward fix - developer says \u0027locally verified\u0027",
+      "revId": "8c516d044782883392b54dbde7c3c3adadf25d74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
