@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c416c72d_5260ad9a",
+        "filename": "simpleperf/cmd_monitor.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-11-02T19:15:01Z",
+      "side": 1,
+      "message": "cmd_monitor.cpp doesn\u0027t use default events. If user doesn\u0027t give a -e option, then there is no event added to event_selection_set, and calling MmapEventFiles() will raise a segfault (For example, try `simpleperf monitor -a --duration 1`). I think either we add a default event like cpu-cycles in cmd_record.cpp, or enforce a -e option in ParseOptions().",
+      "range": {
+        "startLine": 232,
+        "startChar": 28,
+        "endLine": 232,
+        "endChar": 42
+      },
+      "revId": "779ac16dd36c41bc74772fa99ed62699ea49f5df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e9bb255_26cf9674",
+        "filename": "simpleperf/cmd_monitor.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-11-02T19:15:01Z",
+      "side": 1,
+      "message": "Even if we don\u0027t record callchain, we can have kernel ip addresses (like `monitor -a -e cpu-cycles\u0027). So I suggest we remove the callchain conditions.\nAnd I prefer to always DumpKernelMaps(), otherwise the kernel ip addresses will be mapped to unknown dso instead of kernel dso (when kernel symbol addresses are not available).",
+      "range": {
+        "startLine": 245,
+        "startChar": 2,
+        "endLine": 248,
+        "endChar": 3
+      },
+      "revId": "779ac16dd36c41bc74772fa99ed62699ea49f5df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8bf24676_f1bddf7d",
+        "filename": "simpleperf/cmd_monitor.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 560,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-11-02T19:15:01Z",
+      "side": 1,
+      "message": "Why you want to dump id field? It is actually the perf_event_open file descriptor id. So it has no use after monitoring. If you want to show which event a sample belongs to, isn\u0027t event_type_name a better choice (like by adding a member function similar to EventSelectionSet::GetEventAttrWithId())?",
+      "range": {
+        "startLine": 560,
+        "startChar": 41,
+        "endLine": 560,
+        "endChar": 54
+      },
+      "revId": "779ac16dd36c41bc74772fa99ed62699ea49f5df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aaba59a9_c2df244f",
+        "filename": "simpleperf/cmd_monitor.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 567,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-11-02T19:15:01Z",
+      "side": 1,
+      "message": "Remove this field. It is only a reserved field, always has value 0. https://github.com/torvalds/linux/blob/master/kernel/events/core.c#L6639",
+      "range": {
+        "startLine": 567,
+        "startChar": 60,
+        "endLine": 567,
+        "endChar": 75
+      },
+      "revId": "779ac16dd36c41bc74772fa99ed62699ea49f5df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31633e50_69ff2d09",
+        "filename": "simpleperf/cmd_monitor_test.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-11-02T19:15:01Z",
+      "side": 1,
+      "message": "not cpu_frequency, but cpu_percent.",
+      "range": {
+        "startLine": 114,
+        "startChar": 18,
+        "endLine": 114,
+        "endChar": 31
+      },
+      "revId": "779ac16dd36c41bc74772fa99ed62699ea49f5df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
