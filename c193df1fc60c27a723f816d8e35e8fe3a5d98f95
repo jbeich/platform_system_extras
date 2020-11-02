@@ -236,6 +236,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e2f0cb3_8251986d",
+        "filename": "simpleperf/cmd_monitor.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1561651
+      },
+      "writtenOn": "2020-11-02T13:20:08Z",
+      "side": 1,
+      "message": "Ack. I removed untested options.",
+      "parentUuid": "6dfb480a_5bc3dbcf",
+      "range": {
+        "startLine": 99,
+        "startChar": 1,
+        "endLine": 99,
+        "endChar": 3
+      },
+      "revId": "c193df1fc60c27a723f816d8e35e8fe3a5d98f95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "12390d9b_787e747b",
@@ -542,6 +566,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6fca0bf_08cb9fb5",
+        "filename": "simpleperf/cmd_monitor.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 615,
+      "author": {
+        "id": 1561651
+      },
+      "writtenOn": "2020-11-02T13:20:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dcb8b98f_063f7d4a",
+      "range": {
+        "startLine": 615,
+        "startChar": 2,
+        "endLine": 615,
+        "endChar": 67
+      },
+      "revId": "c193df1fc60c27a723f816d8e35e8fe3a5d98f95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1a24464b_0da92be1",
@@ -603,6 +651,30 @@
       "side": 1,
       "message": "Yes. If a sample is generated when a process is running: funcA() -\u003e funcB() -\u003e funcC(), then ip_data.ip stores an address in funcC(), and callchain_data.ips stores call addresses in funcB() and funcC(). So if we don\u0027t print symbol info for ip_data.ip, we will lose funcC() and only show funcB() and funcA().",
       "parentUuid": "e882d328_3fbd2257",
+      "range": {
+        "startLine": 619,
+        "startChar": 75,
+        "endLine": 619,
+        "endChar": 77
+      },
+      "revId": "c193df1fc60c27a723f816d8e35e8fe3a5d98f95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ed027c8_17e57c7e",
+        "filename": "simpleperf/cmd_monitor.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 619,
+      "author": {
+        "id": 1561651
+      },
+      "writtenOn": "2020-11-02T13:20:08Z",
+      "side": 1,
+      "message": "I understand but I have found that in all my tests, these were duplicates. For instance,\n\nsample id\u003d34733 ip\u003d0xffffff9093862f3c symbol\u003dsmp_call_function_single.cfi ([kernel.kallsyms][+ffffff9093862f3c]) pid\u003d2535 tid\u003d2535 cpu\u003d1 res\u003d0\nsample callchain id\u003d34733 smp_call_function_single.cfi ([kernel.kallsyms][+ffffff9093862f3c])\n\nor \n\nsample id\u003d34732 ip\u003d0xffffff9093923af4 symbol\u003dget_page_from_freelist ([kernel.kallsyms][+ffffff9093923af4]) pid\u003d10937 tid\u003d10947 cpu\u003d0 res\u003d0\nsample callchain id\u003d34732 get_page_from_freelist ([kernel.kallsyms][+ffffff9093923af4])\n\nIt might be because these are all generated from within the kernel.",
+      "parentUuid": "1f8c4911_f5bcfc3a",
       "range": {
         "startLine": 619,
         "startChar": 75,
