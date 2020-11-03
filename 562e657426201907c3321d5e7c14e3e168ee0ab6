@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b2dd8c79_182d4d13",
+        "filename": "profcollectd/libprofcollectd/scheduler.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-11-03T18:49:45Z",
+      "side": 1,
+      "message": "Add comment in code or commit msg?",
+      "parentUuid": "cb06a1ff_7baaea4e",
+      "range": {
+        "startLine": 171,
+        "startChar": 12,
+        "endLine": 171,
+        "endChar": 13
+      },
+      "revId": "562e657426201907c3321d5e7c14e3e168ee0ab6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d1244ece_ba9985f6",
         "filename": "profcollectd/profcollectctl.rs",
         "patchSetId": 1
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "We can print something to logcat? Blocking profcollectctl needs some major refactoring...",
       "parentUuid": "d1244ece_ba9985f6",
+      "range": {
+        "startLine": 66,
+        "startChar": 49,
+        "endLine": 66,
+        "endChar": 59
+      },
+      "revId": "562e657426201907c3321d5e7c14e3e168ee0ab6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a961a667_fd05eb5c",
+        "filename": "profcollectd/profcollectctl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-11-03T18:49:45Z",
+      "side": 1,
+      "message": "In my understanding, profcollectctl is a command line tool, it can sleep and wait until profcollectd is done. So why blocking it needs major refactoring? If we don\u0027t want to add a new method to query profcollectd status, we can check timestamp of report.zip, and wait until it is updated.",
+      "parentUuid": "c8cb86dc_c4fb0002",
       "range": {
         "startLine": 66,
         "startChar": 49,
