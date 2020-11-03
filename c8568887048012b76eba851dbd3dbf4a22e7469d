@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf7acfdb_2d9ac77e",
+        "filename": "simpleperf/MapRecordReader.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-11-03T20:40:56Z",
+      "side": 1,
+      "message": "const auto?",
+      "range": {
+        "startLine": 41,
+        "startChar": 7,
+        "endLine": 41,
+        "endChar": 11
+      },
+      "revId": "c8568887048012b76eba851dbd3dbf4a22e7469d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
