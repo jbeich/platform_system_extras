@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7dc7320b_c561c3e7",
+        "filename": "profcollectd/libprofcollectd/scheduler.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-11-03T17:42:37Z",
+      "side": 1,
+      "message": "explain why changing them into asynchronous?",
+      "range": {
+        "startLine": 171,
+        "startChar": 12,
+        "endLine": 171,
+        "endChar": 13
+      },
+      "revId": "562e657426201907c3321d5e7c14e3e168ee0ab6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1244ece_ba9985f6",
+        "filename": "profcollectd/profcollectctl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-11-03T17:42:37Z",
+      "side": 1,
+      "message": "How do we know when reporting is finished or failed? Should we change profcollectctl to query status of profcollectd (maybe in another CL)?",
+      "range": {
+        "startLine": 66,
+        "startChar": 49,
+        "endLine": 66,
+        "endChar": 59
+      },
+      "revId": "562e657426201907c3321d5e7c14e3e168ee0ab6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
