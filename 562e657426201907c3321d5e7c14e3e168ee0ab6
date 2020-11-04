@@ -189,6 +189,30 @@
       },
       "revId": "562e657426201907c3321d5e7c14e3e168ee0ab6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3efb4e9_63736388",
+        "filename": "profcollectd/profcollectctl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1087625
+      },
+      "writtenOn": "2020-11-04T18:10:41Z",
+      "side": 1,
+      "message": "The profile upload service (still WIP right now) cannot run under root, and it will need to invoke profcollectctl.",
+      "parentUuid": "fb2d5676_0a770acb",
+      "range": {
+        "startLine": 66,
+        "startChar": 49,
+        "endLine": 66,
+        "endChar": 59
+      },
+      "revId": "562e657426201907c3321d5e7c14e3e168ee0ab6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
