@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c619ee2_a8680451",
+        "filename": "simpleperf/cmd_monitor.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 528,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-11-04T18:42:54Z",
+      "side": 1,
+      "message": "can you help refactor this code to use MapRecordReader? MapRecordReader was added in https://android-review.googlesource.com/c/platform/system/extras/+/1483702.",
+      "range": {
+        "startLine": 465,
+        "startChar": 0,
+        "endLine": 528,
+        "endChar": 1
+      },
+      "revId": "7d619ce17848ec8dc76a8709722f25c32fe68983",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d1e076d_218c9822",
+        "filename": "simpleperf/cmd_monitor_test.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-11-04T18:42:54Z",
+      "side": 1,
+      "message": "remove it?",
+      "range": {
+        "startLine": 68,
+        "startChar": 2,
+        "endLine": 68,
+        "endChar": 21
+      },
+      "revId": "7d619ce17848ec8dc76a8709722f25c32fe68983",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

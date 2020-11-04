@@ -144,6 +144,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b4dff8a6_1256c89e",
+        "filename": "simpleperf/cmd_monitor.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 560,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-11-04T18:42:54Z",
+      "side": 1,
+      "message": "Yeah, no risk of interleaving.\n\nYes. And to speed things up, we can build an unordered_map mapping from event_id to event_type_name, and keep the map in MonitorCommand class. In case you didn\u0027t notice, the event_type_name can be found in event_selection_set.groups_[][].event_type_modifier.name.",
+      "parentUuid": "34dd5e57_9b742225",
+      "range": {
+        "startLine": 560,
+        "startChar": 41,
+        "endLine": 560,
+        "endChar": 54
+      },
+      "revId": "779ac16dd36c41bc74772fa99ed62699ea49f5df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "aaba59a9_c2df244f",
         "filename": "simpleperf/cmd_monitor.cpp",
         "patchSetId": 7
