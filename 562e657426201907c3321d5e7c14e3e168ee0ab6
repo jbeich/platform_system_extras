@@ -141,6 +141,30 @@
       },
       "revId": "562e657426201907c3321d5e7c14e3e168ee0ab6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47f3c49a_7b66625d",
+        "filename": "profcollectd/profcollectctl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1087625
+      },
+      "writtenOn": "2020-11-04T06:50:58Z",
+      "side": 1,
+      "message": "\u003e we can check timestamp of report.zip, and wait until it is updated\nThe issue here is that profcollectctl runs without root permission, it has no permission to check the status of report.zip.\n\nI think the only way to implement this is a callback...",
+      "parentUuid": "a961a667_fd05eb5c",
+      "range": {
+        "startLine": 66,
+        "startChar": 49,
+        "endLine": 66,
+        "endChar": 59
+      },
+      "revId": "562e657426201907c3321d5e7c14e3e168ee0ab6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
