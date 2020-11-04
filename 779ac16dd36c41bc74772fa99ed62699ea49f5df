@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "85075734_102ecabf",
+        "filename": "simpleperf/cmd_monitor.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1561651
+      },
+      "writtenOn": "2020-11-04T13:33:16Z",
+      "side": 1,
+      "message": "Done. I went for the error in ParseOptions() and added the testcase. Thanks.",
+      "parentUuid": "c416c72d_5260ad9a",
+      "range": {
+        "startLine": 232,
+        "startChar": 28,
+        "endLine": 232,
+        "endChar": 42
+      },
+      "revId": "779ac16dd36c41bc74772fa99ed62699ea49f5df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7e9bb255_26cf9674",
@@ -37,6 +61,30 @@
       "writtenOn": "2020-11-02T19:15:01Z",
       "side": 1,
       "message": "Even if we don\u0027t record callchain, we can have kernel ip addresses (like `monitor -a -e cpu-cycles\u0027). So I suggest we remove the callchain conditions.\nAnd I prefer to always DumpKernelMaps(), otherwise the kernel ip addresses will be mapped to unknown dso instead of kernel dso (when kernel symbol addresses are not available).",
+      "range": {
+        "startLine": 245,
+        "startChar": 2,
+        "endLine": 248,
+        "endChar": 3
+      },
+      "revId": "779ac16dd36c41bc74772fa99ed62699ea49f5df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8ddbfd6_7ff002f9",
+        "filename": "simpleperf/cmd_monitor.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1561651
+      },
+      "writtenOn": "2020-11-04T13:33:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7e9bb255_26cf9674",
       "range": {
         "startLine": 245,
         "startChar": 2,
@@ -72,6 +120,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "34dd5e57_9b742225",
+        "filename": "simpleperf/cmd_monitor.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 560,
+      "author": {
+        "id": 1561651
+      },
+      "writtenOn": "2020-11-04T13:33:16Z",
+      "side": 1,
+      "message": "My main motivation was to be able to correlate this line with the lines about the callchain (although from my understanding, there is no risk of interleaving, so this should not be necessary).\n\nI agree, having the event_type_name would be useful. Just to be clear, do you mean adding something like `std::string EventSelectionSet::GetEventNameById(uint64_t id)` ?",
+      "parentUuid": "8bf24676_f1bddf7d",
+      "range": {
+        "startLine": 560,
+        "startChar": 41,
+        "endLine": 560,
+        "endChar": 54
+      },
+      "revId": "779ac16dd36c41bc74772fa99ed62699ea49f5df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "aaba59a9_c2df244f",
         "filename": "simpleperf/cmd_monitor.cpp",
         "patchSetId": 7
@@ -83,6 +155,30 @@
       "writtenOn": "2020-11-02T19:15:01Z",
       "side": 1,
       "message": "Remove this field. It is only a reserved field, always has value 0. https://github.com/torvalds/linux/blob/master/kernel/events/core.c#L6639",
+      "range": {
+        "startLine": 567,
+        "startChar": 60,
+        "endLine": 567,
+        "endChar": 75
+      },
+      "revId": "779ac16dd36c41bc74772fa99ed62699ea49f5df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5cb52571_95378794",
+        "filename": "simpleperf/cmd_monitor.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 567,
+      "author": {
+        "id": 1561651
+      },
+      "writtenOn": "2020-11-04T13:33:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aaba59a9_c2df244f",
       "range": {
         "startLine": 567,
         "startChar": 60,
@@ -106,6 +202,30 @@
       "writtenOn": "2020-11-02T19:15:01Z",
       "side": 1,
       "message": "not cpu_frequency, but cpu_percent.",
+      "range": {
+        "startLine": 114,
+        "startChar": 18,
+        "endLine": 114,
+        "endChar": 31
+      },
+      "revId": "779ac16dd36c41bc74772fa99ed62699ea49f5df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "97d40498_c82ec16d",
+        "filename": "simpleperf/cmd_monitor_test.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1561651
+      },
+      "writtenOn": "2020-11-04T13:33:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "31633e50_69ff2d09",
       "range": {
         "startLine": 114,
         "startChar": 18,
