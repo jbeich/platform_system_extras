@@ -41,43 +41,56 @@ int main(int argc, const char* argv[]) {
     };
     struct addrinfo *result = nullptr;
 
-    std::cout << "# " << args.arg1
-              << " (via nethandle " << args.nethandle << "):"
-              << std::endl;
+    time_t t;
+    time(&t);
+    srand((unsigned long)time);
 
-    switch (args.api_mode) {
-        case ApiMode::EXPLICIT:
-            rval = android_getaddrinfofornetwork(args.nethandle,
-                    args.arg1, nullptr, &hints, &result);
-            break;
-        case ApiMode::PROCESS:
-            if (args.nethandle != NETWORK_UNSPECIFIED) {
-                rval = android_setprocnetwork(args.nethandle);
-                if (rval != 0) {
-                    std::cerr << "android_setprocnetwork returned " << rval
-                              << std::endl;
-                    return rval;
+    for (int i = 0; i < args.attempts; i++) {
+        char* name;
+
+        if (args.random_name) {
+            asprintf(&name, "%d-%d-ds.metric.gstatic.com", rand(), rand());
+        } else {
+            name = strdup(args.arg1);
+        }
+
+        std::cout << "# " << name << " (via nethandle " << args.nethandle << "):" << std::endl;
+
+        switch (args.api_mode) {
+            case ApiMode::EXPLICIT:
+                rval = android_getaddrinfofornetwork(args.nethandle, name, nullptr, &hints,
+                                                     &result);
+                break;
+            case ApiMode::PROCESS:
+                if (args.nethandle != NETWORK_UNSPECIFIED) {
+                    rval = android_setprocnetwork(args.nethandle);
+                    if (rval != 0) {
+                        std::cerr << "android_setprocnetwork returned " << rval << std::endl;
+                        return rval;
+                    }
                 }
-            }
-            rval = getaddrinfo(args.arg1, nullptr, &hints, &result);
-            break;
-        default:
-            // Unreachable.
-            std::cerr << "Unknown api mode." << std::endl;
-            return -1;
+                rval = getaddrinfo(name, nullptr, &hints, &result);
+                break;
+            default:
+                // Unreachable.
+                std::cerr << "Unknown api mode." << std::endl;
+                return -1;
+        }
+
+        free(name);
+
+        if (rval != 0) {
+            std::cerr << "DNS resolution failure; gaierror=" << rval << " [" << gai_strerror(rval)
+                      << "]" << std::endl;
+            return rval;
+        }
+
+        for (struct addrinfo* rp = result; rp != nullptr; rp = rp->ai_next) {
+            std::cout << inetSockaddrToString(rp->ai_addr) << std::endl;
+        }
+
+        freeaddrinfo(result);
     }
 
-    if (rval != 0) {
-        std::cerr << "DNS resolution failure; gaierror=" << rval
-                  << " [" << gai_strerror(rval) << "]"
-                  << std::endl;
-        return rval;
-    }
-
-    for (struct addrinfo* rp = result; rp != nullptr; rp = rp->ai_next) {
-        std::cout << inetSockaddrToString(rp->ai_addr) << std::endl;
-    }
-
-    freeaddrinfo(result);
     return 0;
 }
