@@ -34,6 +34,7 @@ struct Arguments {
     Arguments() : nethandle(NETWORK_UNSPECIFIED),
                   api_mode(ApiMode::EXPLICIT),
                   family(AF_UNSPEC),
+                  attempts(1),
                   arg1(nullptr) {}
     ~Arguments();
 
@@ -42,6 +43,8 @@ struct Arguments {
     net_handle_t nethandle;
     ApiMode api_mode;
     sa_family_t family;
+    unsigned attempts;
+    bool random_name;
     const char* arg1;
 };
 
