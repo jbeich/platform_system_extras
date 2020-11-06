@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2eb06146_fe31d084",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1594173
+      },
+      "writtenOn": "2020-11-06T23:38:04Z",
+      "side": 1,
+      "message": "Are you updating the boot_analyze script to use the new configs in a separate CL?",
+      "revId": "07d9da008ac6f3889242336bdc475dc32bc3bf09",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
