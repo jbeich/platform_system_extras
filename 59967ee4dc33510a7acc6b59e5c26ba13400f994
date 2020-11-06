@@ -22,6 +22,30 @@
       },
       "revId": "59967ee4dc33510a7acc6b59e5c26ba13400f994",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "147ce87d_7117387a",
+        "filename": "boottime_tools/bootanalyze/config.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1010465
+      },
+      "writtenOn": "2020-11-06T23:34:03Z",
+      "side": 1,
+      "message": "we do not need Async, so it was enough. some space may be useful.",
+      "parentUuid": "5d26f849_bd60e3a3",
+      "range": {
+        "startLine": 5,
+        "startChar": 40,
+        "endLine": 5,
+        "endChar": 44
+      },
+      "revId": "59967ee4dc33510a7acc6b59e5c26ba13400f994",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
