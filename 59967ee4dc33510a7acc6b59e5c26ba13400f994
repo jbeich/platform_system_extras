@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d26f849_bd60e3a3",
+        "filename": "boottime_tools/bootanalyze/config.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1594173
+      },
+      "writtenOn": "2020-11-06T23:15:47Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be similar to other timings regex in this file, like \"?\\s*:\\s*\" ?",
+      "range": {
+        "startLine": 5,
+        "startChar": 40,
+        "endLine": 5,
+        "endChar": 44
+      },
+      "revId": "59967ee4dc33510a7acc6b59e5c26ba13400f994",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

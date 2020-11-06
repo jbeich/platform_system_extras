@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ba80643_741549d4",
+        "filename": "boottime_tools/bootanalyze/config.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1594173
+      },
+      "writtenOn": "2020-11-06T23:15:47Z",
+      "side": 0,
+      "message": "Is this change intended?",
+      "range": {
+        "startLine": 60,
+        "startChar": 86,
+        "endLine": 60,
+        "endChar": 105
+      },
+      "revId": "0bc01362cf9f881ec31ce04b21c817e49802c669",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
