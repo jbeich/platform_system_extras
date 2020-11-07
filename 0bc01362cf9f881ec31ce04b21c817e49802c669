@@ -46,6 +46,29 @@
       },
       "revId": "0bc01362cf9f881ec31ce04b21c817e49802c669",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "109aa731_893e6eaf",
+        "filename": "boottime_tools/bootanalyze/config.yaml",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1581796
+      },
+      "writtenOn": "2020-11-07T00:25:08Z",
+      "side": 0,
+      "message": "why `activity` removed?",
+      "range": {
+        "startLine": 60,
+        "startChar": 97,
+        "endLine": 60,
+        "endChar": 105
+      },
+      "revId": "0bc01362cf9f881ec31ce04b21c817e49802c669",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
