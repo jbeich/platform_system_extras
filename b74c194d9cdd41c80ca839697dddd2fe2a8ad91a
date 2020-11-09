@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e6144ba_b1fbe906",
+        "filename": "simpleperf/cmd_monitor.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-11-09T18:13:47Z",
+      "side": 1,
+      "message": "map_record_thread_ is never used, remove it?",
+      "range": {
+        "startLine": 190,
+        "startChar": 33,
+        "endLine": 190,
+        "endChar": 52
+      },
+      "revId": "b74c194d9cdd41c80ca839697dddd2fe2a8ad91a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "849fa16c_c051995e",
+        "filename": "simpleperf/cmd_monitor.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-11-09T18:13:47Z",
+      "side": 1,
+      "message": "remove it?",
+      "range": {
+        "startLine": 290,
+        "startChar": 0,
+        "endLine": 292,
+        "endChar": 3
+      },
+      "revId": "b74c194d9cdd41c80ca839697dddd2fe2a8ad91a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e94381ab_b80f2a32",
+        "filename": "simpleperf/cmd_monitor.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 481,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-11-09T18:13:47Z",
+      "side": 1,
+      "message": "kernel maps are needed when reporting symbols in the kernel. So monitoring a process may also need kernel maps (to report callchains in the kernel). So I prefer to remove the condition.",
+      "range": {
+        "startLine": 481,
+        "startChar": 6,
+        "endLine": 481,
+        "endChar": 29
+      },
+      "revId": "b74c194d9cdd41c80ca839697dddd2fe2a8ad91a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
