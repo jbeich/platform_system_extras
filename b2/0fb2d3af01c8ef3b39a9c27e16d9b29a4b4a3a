@@ -1,0 +1,10 @@
+Open-Source-Licensing+1: Lint 🤖 <ayeaye-gerrit@google.com>
+Presubmit-Verified+1: Treehugger Robot <treehugger-gerrit@google.com>
+Lint+1: Lint 🤖 <ayeaye-gerrit@google.com>
+Code-Review+2: Jaegeuk Kim <jaegeuk@google.com>
+Code-Review+2: Paul Crowley <paulcrowley@google.com>
+Submitted-by: Eric Biggers <ebiggers@google.com>
+Submitted-at: Tue, 10 Nov 2020 00:33:57 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/system/extras/+/1490156
+Project: platform/system/extras
+Branch: refs/heads/master
