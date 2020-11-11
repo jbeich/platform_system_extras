@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "47035e1c_f225eb34",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1561651
+      },
+      "writtenOn": "2020-11-11T06:50:07Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "b4649576_3142d558",
+      "range": {
+        "startLine": 13,
+        "startChar": 19,
+        "endLine": 14,
+        "endChar": 35
+      },
+      "revId": "c193df1fc60c27a723f816d8e35e8fe3a5d98f95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1c9aa0ac_22ccb459",
@@ -675,6 +699,30 @@
       "side": 1,
       "message": "I understand but I have found that in all my tests, these were duplicates. For instance,\n\nsample id\u003d34733 ip\u003d0xffffff9093862f3c symbol\u003dsmp_call_function_single.cfi ([kernel.kallsyms][+ffffff9093862f3c]) pid\u003d2535 tid\u003d2535 cpu\u003d1 res\u003d0\nsample callchain id\u003d34733 smp_call_function_single.cfi ([kernel.kallsyms][+ffffff9093862f3c])\n\nor \n\nsample id\u003d34732 ip\u003d0xffffff9093923af4 symbol\u003dget_page_from_freelist ([kernel.kallsyms][+ffffff9093923af4]) pid\u003d10937 tid\u003d10947 cpu\u003d0 res\u003d0\nsample callchain id\u003d34732 get_page_from_freelist ([kernel.kallsyms][+ffffff9093923af4])\n\nIt might be because these are all generated from within the kernel.",
       "parentUuid": "1f8c4911_f5bcfc3a",
+      "range": {
+        "startLine": 619,
+        "startChar": 75,
+        "endLine": 619,
+        "endChar": 77
+      },
+      "revId": "c193df1fc60c27a723f816d8e35e8fe3a5d98f95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c77812ec_2226b893",
+        "filename": "simpleperf/cmd_monitor.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 619,
+      "author": {
+        "id": 1561651
+      },
+      "writtenOn": "2020-11-11T06:50:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3ed027c8_17e57c7e",
       "range": {
         "startLine": 619,
         "startChar": 75,
