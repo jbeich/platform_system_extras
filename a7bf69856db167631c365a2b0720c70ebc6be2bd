@@ -1,0 +1,205 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b2d8802_75885527",
+        "filename": "multinetwork/common.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1273909
+      },
+      "writtenOn": "2020-11-11T15:46:13Z",
+      "side": 1,
+      "message": "I think this should be: \"--randomname | \u003cname\u003e\"",
+      "range": {
+        "startLine": 61,
+        "startChar": 19,
+        "endLine": 61,
+        "endChar": 38
+      },
+      "revId": "a7bf69856db167631c365a2b0720c70ebc6be2bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "830e1c66_8867c566",
+        "filename": "multinetwork/common.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1273909
+      },
+      "writtenOn": "2020-11-11T15:46:13Z",
+      "side": 1,
+      "message": "nit-picking: this could be a single write to std::cerr.\n\nAnd also, std::endl is unnecessary this context: it\u0027s equivalent to printing \\n and then flushing the stream. But there\u0027s no need to flush the stream in this context.",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 65,
+        "endChar": 27
+      },
+      "revId": "a7bf69856db167631c365a2b0720c70ebc6be2bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ba76103_11d24c62",
+        "filename": "multinetwork/common.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1273909
+      },
+      "writtenOn": "2020-11-11T15:46:13Z",
+      "side": 1,
+      "message": "This entire function would be a good candidate for a rewrite using getopt_long().\n(not asking for it, just saying...)",
+      "revId": "a7bf69856db167631c365a2b0720c70ebc6be2bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1374518_397886f0",
+        "filename": "multinetwork/common.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1273909
+      },
+      "writtenOn": "2020-11-11T15:46:13Z",
+      "side": 1,
+      "message": "Alternatively, this could also be initialized in the class definition.",
+      "range": {
+        "startLine": 71,
+        "startChar": 3,
+        "endLine": 71,
+        "endChar": 17
+      },
+      "revId": "a7bf69856db167631c365a2b0720c70ebc6be2bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81671256_20132428",
+        "filename": "multinetwork/common.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1273909
+      },
+      "writtenOn": "2020-11-11T15:46:13Z",
+      "side": 1,
+      "message": "std::stoi(argv[i])",
+      "range": {
+        "startLine": 110,
+        "startChar": 23,
+        "endLine": 110,
+        "endChar": 53
+      },
+      "revId": "a7bf69856db167631c365a2b0720c70ebc6be2bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0240705b_2d546af5",
+        "filename": "multinetwork/dnschk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1273909
+      },
+      "writtenOn": "2020-11-11T15:46:13Z",
+      "side": 1,
+      "message": "Since we already use andrid-base, we could use StringPrintf here.\nPrints into an std::string, so you don\u0027t need to free() it manually down below.\n\nAn even nicer alernative ould be\n\n#include \u003candroid-base/format.h\u003e\nstd::string name \u003d fmt::format(\"{}-{}-ds.metric.gstatic.com\", rand(), rand());",
+      "range": {
+        "startLine": 52,
+        "startChar": 12,
+        "endLine": 52,
+        "endChar": 75
+      },
+      "revId": "a7bf69856db167631c365a2b0720c70ebc6be2bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78167e2e_1998c6a1",
+        "filename": "multinetwork/httpurl.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1273909
+      },
+      "writtenOn": "2020-11-11T15:46:13Z",
+      "side": 1,
+      "message": "shouldn\u0027t this be httpurl or something like that?",
+      "range": {
+        "startLine": 50,
+        "startChar": 47,
+        "endLine": 50,
+        "endChar": 55
+      },
+      "revId": "a7bf69856db167631c365a2b0720c70ebc6be2bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a46cd44_485a68fc",
+        "filename": "multinetwork/httpurl.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1273909
+      },
+      "writtenOn": "2020-11-11T15:46:13Z",
+      "side": 1,
+      "message": "shouldn\u0027t this be a dash? or it doesn\u0027t matter?",
+      "range": {
+        "startLine": 50,
+        "startChar": 55,
+        "endLine": 50,
+        "endChar": 56
+      },
+      "revId": "a7bf69856db167631c365a2b0720c70ebc6be2bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73f26670_090da092",
+        "filename": "multinetwork/httpurl.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1273909
+      },
+      "writtenOn": "2020-11-11T15:46:13Z",
+      "side": 1,
+      "message": "these days we\u0027d use unique_fd for this (android-base/unique_fd.h)",
+      "range": {
+        "startLine": 252,
+        "startChar": 8,
+        "endLine": 252,
+        "endChar": 27
+      },
+      "revId": "a7bf69856db167631c365a2b0720c70ebc6be2bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
