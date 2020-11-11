@@ -16,6 +16,23 @@
       "message": "ps2: tiny fix.",
       "revId": "7d8f3b238959d1eaf80cf2835a916cc27e0dac08",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9fd05b18_037c4c18",
+        "filename": "simpleperf/environment_test.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2020-11-11T09:23:02Z",
+      "side": 1,
+      "message": "Couldn\u0027t this just test for `__linux__` on the host too (although perhaps some of these other setup steps are harder to translate into reasonable host versions)?",
+      "revId": "7d8f3b238959d1eaf80cf2835a916cc27e0dac08",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
