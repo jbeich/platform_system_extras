@@ -33,6 +33,24 @@
       "message": "Couldn\u0027t this just test for `__linux__` on the host too (although perhaps some of these other setup steps are harder to translate into reasonable host versions)?",
       "revId": "7d8f3b238959d1eaf80cf2835a916cc27e0dac08",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0a2267a_a0ef2d12",
+        "filename": "simpleperf/environment_test.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-11-11T18:41:37Z",
+      "side": 1,
+      "message": "Done. Removed #if condition since this file only builds on linux. I was worried that root permission may not be enough to get kernel symbols on some host in the future. But we can change test when it really matters, so no need to worry.",
+      "parentUuid": "9fd05b18_037c4c18",
+      "revId": "7d8f3b238959d1eaf80cf2835a916cc27e0dac08",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
