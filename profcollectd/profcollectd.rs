@@ -20,25 +20,25 @@ use std::env;
 
 fn print_help() {
     println!(
-        r#"(
+        r#"
+profcollectd background daemon.
 usage: profcollectd [command]
-    boot      Start daemon and schedule profile collection after a short delay.
-    run       Start daemon but do not schedule profile collection.
-)"#
+    nostart       Start daemon but do not schedule profile collection.
+"#
     );
 }
 
 fn main() {
+    libprofcollectd::init_logging();
+
     let args: Vec<String> = env::args().collect();
     if args.len() != 2 {
-        print_help();
-        std::process::exit(1);
+        libprofcollectd::init_service(true);
     }
 
     let action = &args[1];
     match action.as_str() {
-        "boot" => libprofcollectd::init_service(true),
-        "run" => libprofcollectd::init_service(false),
+        "nostart" => libprofcollectd::init_service(false),
         "help" => print_help(),
         _ => {
             print_help();
