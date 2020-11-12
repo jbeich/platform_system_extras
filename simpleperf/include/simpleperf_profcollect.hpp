@@ -14,14 +14,10 @@
  * limitations under the License.
  */
 
-package com.android.server.profcollect;
+extern "C" {
 
-/** {@hide} */
-interface IProfCollectd {
-    void schedule();
-    void terminate();
-    void trace_once(@utf8InCpp String tag);
-    void process(boolean blocking);
-    void report();
-    @utf8InCpp String get_supported_provider();
+bool HasSupport();
+bool Record(const char* output, float duration);
+bool Inject(const char* traceInput, const char* profileOutput);
+
 }

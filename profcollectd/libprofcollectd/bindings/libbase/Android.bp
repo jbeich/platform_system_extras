@@ -1,5 +1,5 @@
 //
-// Copyright (C) 2020 The Android Open Source Project
+// Copyright (C) 2021 The Android Open Source Project
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,28 +14,26 @@
 // limitations under the License.
 //
 
-rust_binary {
-    name: "profcollectctl",
-
-    srcs: ["profcollectctl.rs"],
-
-    rustlibs: ["libprofcollectd"],
+cc_library_static {
+    name: "libprofcollect_libbase",
+    srcs: ["properties.cpp"],
 }
 
-rust_binary {
-    name: "profcollectd",
-
-    srcs: ["profcollectd.rs"],
-
-    rustlibs: ["libprofcollectd"],
-
-    init_rc: ["profcollectd.rc"],
+rust_bindgen {
+    name: "libprofcollect_libbase_bindgen",
+    wrapper_src: "properties.hpp",
+    crate_name: "profcollect_libbase_bindgen",
+    source_stem: "bindings",
 }
 
-filegroup {
-    name: "profcollectd_aidl",
-    srcs: [
-        "binder/com/android/server/profcollect/IProfCollectd.aidl",
+rust_library {
+    name: "libprofcollect_libbase_rust",
+    crate_name: "profcollect_libbase_rust",
+    srcs: ["lib.rs"],
+    rlibs: ["libprofcollect_libbase_bindgen"],
+    static_libs: ["libprofcollect_libbase"],
+    shared_libs: [
+        "libc++",
+        "libbase",
     ],
-    path: "binder",
 }
