@@ -301,6 +301,22 @@ cc_library {
     export_include_dirs: ["include"],
     static_libs: ["libsimpleperf"],
     shared_libs: ["libLLVM_android"],
+}
+
+rust_bindgen {
+    name: "libsimpleperf_profcollect_bindgen",
+    wrapper_src: "include/simpleperf_profcollect.hpp",
+    crate_name: "simpleperf_profcollect_bindgen",
+    source_stem: "bindings",
+    shared_libs: ["libsimpleperf_profcollect"],
+}
+
+rust_library {
+    name: "libsimpleperf_profcollect_rust",
+    crate_name: "simpleperf_profcollect",
+    srcs: ["rust/lib.rs"],
+    rustlibs: ["libsimpleperf_profcollect_bindgen"],
+    shared_libs: ["libsimpleperf_profcollect"],
     visibility: ["//system/extras/profcollectd:__subpackages__"],
 }
 
