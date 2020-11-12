@@ -1,4 +1,4 @@
-service profcollectd /system/bin/profcollectd boot
+service profcollectd /system/bin/profcollectd
     class late_start
     disabled
     oneshot

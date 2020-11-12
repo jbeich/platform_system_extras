@@ -38,6 +38,8 @@ command:
 }
 
 fn main() {
+    libprofcollectd::init_logging();
+
     let args: Vec<String> = env::args().collect();
     if args.len() != 2 {
         print_help();
@@ -48,15 +50,15 @@ fn main() {
     match action.as_str() {
         "start" => {
             println!("Scheduling profile collection");
-            libprofcollectd::schedule_collection();
+            libprofcollectd::schedule();
         }
         "stop" => {
             println!("Terminating profile collection");
-            libprofcollectd::terminate_collection();
+            libprofcollectd::terminate();
         }
         "once" => {
             println!("Trace once");
-            libprofcollectd::trace_once();
+            libprofcollectd::trace_once("manual");
         }
         "process" => {
             println!("Processing traces");
@@ -64,7 +66,7 @@ fn main() {
         }
         "report" => {
             println!("Creating profile report");
-            libprofcollectd::create_profile_report();
+            libprofcollectd::report();
         }
         "reconfig" => {
             println!("Refreshing configuration");
