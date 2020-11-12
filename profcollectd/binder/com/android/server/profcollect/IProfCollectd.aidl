@@ -18,11 +18,11 @@ package com.android.server.profcollect;
 
 /** {@hide} */
 interface IProfCollectd {
-    void ReadConfig();
-    void ScheduleCollection();
-    void TerminateCollection();
-    void TraceOnce(@utf8InCpp String tag);
-    void ProcessProfile();
-    void CreateProfileReport();
-    @utf8InCpp String GetSupportedProvider();
+    void read_config();
+    void schedule();
+    void terminate();
+    void trace_once(@utf8InCpp String tag);
+    void process();
+    void report();
+    @utf8InCpp String get_supported_provider();
 }
