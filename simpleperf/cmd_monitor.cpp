@@ -462,6 +462,7 @@ bool MonitorCommand::AdjustPerfEventLimit() {
 
 bool MonitorCommand::SetEventSelectionFlags() {
   event_selection_set_.SampleIdAll();
+  event_selection_set_.WakeupPerSample();
   if (fp_callchain_sampling_) {
     event_selection_set_.EnableFpCallChainSampling();
   } else if (dwarf_callchain_sampling_) {
