@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30bca91f_d5cde443",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1197,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-11-19T19:18:02Z",
+      "side": 1,
+      "message": "move the definition inside the if statement below?",
+      "range": {
+        "startLine": 1197,
+        "startChar": 4,
+        "endLine": 1197,
+        "endChar": 25
+      },
+      "revId": "de083356973c4e23abd9f64c48afc1c4b205ec06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49210677_0e894fc8",
+        "filename": "simpleperf/dso.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-11-19T19:18:02Z",
+      "side": 1,
+      "message": "this declaration seems also not needed, help remove it?",
+      "range": {
+        "startLine": 109,
+        "startChar": 7,
+        "endLine": 109,
+        "endChar": 20
+      },
+      "revId": "de083356973c4e23abd9f64c48afc1c4b205ec06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79627a7f_13275a20",
+        "filename": "simpleperf/dso.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-11-19T19:18:02Z",
+      "side": 1,
+      "message": "Remove this unused function and the corresponding member variable.",
+      "range": {
+        "startLine": 128,
+        "startChar": 14,
+        "endLine": 128,
+        "endChar": 39
+      },
+      "revId": "de083356973c4e23abd9f64c48afc1c4b205ec06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "581620f1_a620801c",
+        "filename": "simpleperf/kallsyms.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-11-19T19:18:02Z",
+      "side": 1,
+      "message": "I suggest using LineReader, similar to in GetKernelStartAddress(). So we can give up early if we read for example ten all zero addresses.",
+      "range": {
+        "startLine": 38,
+        "startChar": 5,
+        "endLine": 38,
+        "endChar": 9
+      },
+      "revId": "de083356973c4e23abd9f64c48afc1c4b205ec06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a2a3642_986d179f",
+        "filename": "simpleperf/kallsyms.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-11-19T19:18:02Z",
+      "side": 1,
+      "message": "check the return address of SetProperty? So we can notice permission problem early and not waste time waiting.\nAnd I am wondering if we can always try setting the property, instead of relying on input parameter. We can only try it in android version \u003e\u003d S, using GetAndroidVersion() in environment.cpp.",
+      "range": {
+        "startLine": 79,
+        "startChar": 19,
+        "endLine": 79,
+        "endChar": 30
+      },
+      "revId": "de083356973c4e23abd9f64c48afc1c4b205ec06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33b24d5f_52f72191",
+        "filename": "simpleperf/kallsyms.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-11-19T19:18:02Z",
+      "side": 1,
+      "message": "All ndk users don\u0027t have root permission to write to kptr_restrict. So we\u0027d better not make it an error. Instead we can post a warning like in CheckKernelSymbolAddresses().",
+      "range": {
+        "startLine": 118,
+        "startChar": 4,
+        "endLine": 118,
+        "endChar": 14
+      },
+      "revId": "de083356973c4e23abd9f64c48afc1c4b205ec06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13cb1e06_482162c0",
+        "filename": "simpleperf/kallsyms.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-11-19T19:18:02Z",
+      "side": 1,
+      "message": "If we have all zero symbols, then it is useless to read them. I am wondering if we can distinguish between (there is some error when reading kernel symbols) and (sorry, we don\u0027t have permission to read kernel symbols). The former is an error that can stop simpleperf processing (to expose the error), while the latter is only a warning, and we will go on without having kernel symbols.",
+      "range": {
+        "startLine": 167,
+        "startChar": 24,
+        "endLine": 167,
+        "endChar": 40
+      },
+      "revId": "de083356973c4e23abd9f64c48afc1c4b205ec06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2750f4c_2a71f0ee",
+        "filename": "simpleperf/kallsyms.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-11-19T19:18:02Z",
+      "side": 1,
+      "message": "Could you also help move GetKernelStartAddress() in environment.cpp? It\u0027s also reading from /proc/kallsyms. It probably also needs to move LineReader class to utils.h.",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 2
+      },
+      "revId": "de083356973c4e23abd9f64c48afc1c4b205ec06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
