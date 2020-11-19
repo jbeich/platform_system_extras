@@ -32,6 +32,7 @@
 
 #include "JITDebugReader.h"
 #include "environment.h"
+#include "kallsyms.h"
 #include "read_apk.h"
 #include "read_dex_file.h"
 #include "read_elf.h"
@@ -700,9 +701,7 @@ class KernelDso : public Dso {
       }
       if (can_read_kallsyms) {
         std::string kallsyms;
-        if (!android::base::ReadFileToString("/proc/kallsyms", &kallsyms)) {
-          LOG(DEBUG) << "failed to read /proc/kallsyms";
-        } else {
+        if (LoadKernelSymbols(&kallsyms)) {
           ReadSymbolsFromKallsyms(kallsyms, symbols);
         }
       }

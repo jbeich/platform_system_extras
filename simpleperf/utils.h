@@ -148,16 +148,6 @@ std::string GetLogSeverityName();
 
 bool IsRoot();
 
-struct KernelSymbol {
-  uint64_t addr;
-  char type;
-  const char* name;
-  const char* module;  // If nullptr, the symbol is not in a kernel module.
-};
-
-bool ProcessKernelSymbols(std::string& symbol_data,
-                          const std::function<bool(const KernelSymbol&)>& callback);
-
 size_t GetPageSize();
 
 uint64_t ConvertBytesToValue(const char* bytes, uint32_t size);

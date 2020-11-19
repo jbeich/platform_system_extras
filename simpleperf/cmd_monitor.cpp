@@ -251,7 +251,11 @@ bool MonitorCommand::PrepareMonitoring() {
   map_record_reader_->SetCallback([this](Record* r) { return ProcessRecord(r); });
 
   // 4. Load kallsyms
-  Dso::ReadKernelSymbolsFromProc();
+  std::string kallsyms;
+  if (!LoadKernelSymbols(&kallsyms)) {
+    return false;
+  }
+  Dso::SetKallsyms(std::move(kallsyms));
   map_record_reader_->ReadKernelMaps();
 
   // 5. Add read/signal/periodic Events.
