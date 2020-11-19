@@ -28,6 +28,7 @@
 #include <android-base/logging.h>
 
 #include "build_id.h"
+#include "kallsyms.h"
 #include "read_elf.h"
 
 namespace simpleperf_dso_impl {
@@ -105,7 +106,6 @@ enum DsoType {
   // may cause compatibility issue. So put new DsoTypes below.
 };
 
-struct KernelSymbol;
 struct ElfFileSymbol;
 
 class Dso {

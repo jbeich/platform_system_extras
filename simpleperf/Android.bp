@@ -200,6 +200,7 @@ cc_defaults {
         "etm_branch_list.proto",
         "event_attr.cpp",
         "event_type.cpp",
+        "kallsyms.cpp",
         "perf_regs.cpp",
         "read_apk.cpp",
         "read_elf.cpp",

@@ -481,37 +481,6 @@ bool SetPerfEventMlockKb(uint64_t mlock_kb) {
   return WriteUintToProcFile("/proc/sys/kernel/perf_event_mlock_kb", mlock_kb);
 }
 
-bool CheckKernelSymbolAddresses() {
-  const std::string kptr_restrict_file = "/proc/sys/kernel/kptr_restrict";
-  std::string s;
-  if (!android::base::ReadFileToString(kptr_restrict_file, &s)) {
-    PLOG(DEBUG) << "failed to read " << kptr_restrict_file;
-    return false;
-  }
-  s = android::base::Trim(s);
-  int value;
-  if (!android::base::ParseInt(s.c_str(), &value)) {
-    LOG(ERROR) << "failed to parse " << kptr_restrict_file << ": " << s;
-    return false;
-  }
-  // Accessible to everyone?
-  if (value == 0) {
-    return true;
-  }
-  // Accessible to root?
-  if (value == 1 && IsRoot()) {
-    return true;
-  }
-  // Can we make it accessible to us?
-  if (IsRoot() && android::base::WriteStringToFile("1", kptr_restrict_file)) {
-    return true;
-  }
-  LOG(WARNING) << "Access to kernel symbol addresses is restricted. If "
-               << "possible, please do `echo 0 >/proc/sys/kernel/kptr_restrict` "
-               << "to fix this.";
-  return false;
-}
-
 ArchType GetMachineArch() {
   utsname uname_buf;
   if (TEMP_FAILURE_RETRY(uname(&uname_buf)) != 0) {
