@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48591dca_e89e93a5",
+        "filename": "simpleperf/kallsyms.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-11-25T19:12:41Z",
+      "side": 1,
+      "message": "a return here, Or you want to try Line 116? If you want to try Line 116, then why return in Line 105? And the destructor only restores property when use_property_.\n\nI\u0027d like to have LOG(ERROR)s in this function replaced by LOG(WARNING). Because LOG(ERROR) usually means something is wrong, can\u0027t proceed. But we can proceed without kernel symbols.",
+      "range": {
+        "startLine": 90,
+        "startChar": 10,
+        "endLine": 90,
+        "endChar": 15
+      },
+      "revId": "45004d84a292df89e839624eecfef73d56ee28c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b58719c4_302ed993",
+        "filename": "simpleperf/kallsyms.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-11-25T19:12:41Z",
+      "side": 1,
+      "message": "Also need ScopedKptrUnrestrict here, otherwise environment.GetKernelAndModuleMmaps test will fail when testing as root.",
+      "range": {
+        "startLine": 196,
+        "startChar": 9,
+        "endLine": 196,
+        "endChar": 30
+      },
+      "revId": "45004d84a292df89e839624eecfef73d56ee28c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

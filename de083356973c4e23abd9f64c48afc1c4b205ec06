@@ -236,6 +236,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7b19c89_25da236a",
+        "filename": "simpleperf/kallsyms.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-11-25T19:12:41Z",
+      "side": 1,
+      "message": "I see.",
+      "parentUuid": "40d91740_88a950ea",
+      "range": {
+        "startLine": 79,
+        "startChar": 19,
+        "endLine": 79,
+        "endChar": 30
+      },
+      "revId": "de083356973c4e23abd9f64c48afc1c4b205ec06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "33b24d5f_52f72191",
@@ -320,6 +344,30 @@
       "side": 1,
       "message": "I have changed the logic to avoid reading the file if we do not have access.\n\nI think that all the errors returned by these functions are somewhat because of a permissions issue. I am not sure there is an error for which we should for sure stop the execution.",
       "parentUuid": "13cb1e06_482162c0",
+      "range": {
+        "startLine": 167,
+        "startChar": 24,
+        "endLine": 167,
+        "endChar": 40
+      },
+      "revId": "de083356973c4e23abd9f64c48afc1c4b205ec06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "06ed1eea_b71b7d77",
+        "filename": "simpleperf/kallsyms.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-11-25T19:12:41Z",
+      "side": 1,
+      "message": "We don\u0027t need to accept all permission issues. Some are for security reason, others we can fix. But I am fine if you don\u0027t want to bother distinguish the two here.",
+      "parentUuid": "0bbb7494_08c113f5",
       "range": {
         "startLine": 167,
         "startChar": 24,
