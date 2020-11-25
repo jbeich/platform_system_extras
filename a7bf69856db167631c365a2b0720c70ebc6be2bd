@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "850aa936_2780390a",
+        "filename": "multinetwork/common.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2020-11-25T15:02:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9b2d8802_75885527",
+      "range": {
+        "startLine": 61,
+        "startChar": 19,
+        "endLine": 61,
+        "endChar": 38
+      },
+      "revId": "a7bf69856db167631c365a2b0720c70ebc6be2bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "830e1c66_8867c566",
@@ -37,6 +61,30 @@
       "writtenOn": "2020-11-11T15:46:13Z",
       "side": 1,
       "message": "nit-picking: this could be a single write to std::cerr.\n\nAnd also, std::endl is unnecessary this context: it\u0027s equivalent to printing \\n and then flushing the stream. But there\u0027s no need to flush the stream in this context.",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 65,
+        "endChar": 27
+      },
+      "revId": "a7bf69856db167631c365a2b0720c70ebc6be2bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "add34e8f_510dc23e",
+        "filename": "multinetwork/common.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2020-11-25T15:02:45Z",
+      "side": 1,
+      "message": "Done. AFAICS there still needs to be a std::endl at the end, otherwise the shell prompt appears immediately after \"diag\u0027\" with no newline after the usage text.",
+      "parentUuid": "830e1c66_8867c566",
       "range": {
         "startLine": 57,
         "startChar": 0,
@@ -87,6 +135,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "772f6ed7_b36618c1",
+        "filename": "multinetwork/common.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2020-11-25T15:02:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e1374518_397886f0",
+      "range": {
+        "startLine": 71,
+        "startChar": 3,
+        "endLine": 71,
+        "endChar": 17
+      },
+      "revId": "a7bf69856db167631c365a2b0720c70ebc6be2bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "81671256_20132428",
@@ -112,6 +184,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5029f3bb_4b4fadc3",
+        "filename": "multinetwork/common.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2020-11-25T15:02:45Z",
+      "side": 1,
+      "message": "Won\u0027t that just crash the program with an exception if the user passes in an invalid argument? If so, I think strtoul is better so we can at least print a reasonable error message.",
+      "parentUuid": "81671256_20132428",
+      "range": {
+        "startLine": 110,
+        "startChar": 23,
+        "endLine": 110,
+        "endChar": 53
+      },
+      "revId": "a7bf69856db167631c365a2b0720c70ebc6be2bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0240705b_2d546af5",
         "filename": "multinetwork/dnschk.cpp",
         "patchSetId": 1
@@ -123,6 +219,30 @@
       "writtenOn": "2020-11-11T15:46:13Z",
       "side": 1,
       "message": "Since we already use andrid-base, we could use StringPrintf here.\nPrints into an std::string, so you don\u0027t need to free() it manually down below.\n\nAn even nicer alernative ould be\n\n#include \u003candroid-base/format.h\u003e\nstd::string name \u003d fmt::format(\"{}-{}-ds.metric.gstatic.com\", rand(), rand());",
+      "range": {
+        "startLine": 52,
+        "startChar": 12,
+        "endLine": 52,
+        "endChar": 75
+      },
+      "revId": "a7bf69856db167631c365a2b0720c70ebc6be2bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "219f8cf6_6253fcdd",
+        "filename": "multinetwork/dnschk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2020-11-25T15:02:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0240705b_2d546af5",
       "range": {
         "startLine": 52,
         "startChar": 12,
@@ -174,6 +294,54 @@
         "startChar": 55,
         "endLine": 50,
         "endChar": 56
+      },
+      "revId": "a7bf69856db167631c365a2b0720c70ebc6be2bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a7c79c6_390b963e",
+        "filename": "multinetwork/httpurl.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2020-11-25T15:02:45Z",
+      "side": 1,
+      "message": "It must be a . or the URL will return a 404.",
+      "parentUuid": "2a46cd44_485a68fc",
+      "range": {
+        "startLine": 50,
+        "startChar": 55,
+        "endLine": 50,
+        "endChar": 56
+      },
+      "revId": "a7bf69856db167631c365a2b0720c70ebc6be2bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4071619b_54817e73",
+        "filename": "multinetwork/httpurl.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2020-11-25T15:02:45Z",
+      "side": 1,
+      "message": "\"xxx-yyy-ipv6test.ds.metric.gstatic.com\" is an existing wildcard hostname that is useful for this purpose. It hits a an appengine app that I set up that returns the client IP address:\n\n$ adb shell /data/httpurl --randomname\nResolving hostname\u003d1566383935-222950031-ipv6test.ds.metric.gstatic.com, port\u003d80\nConnecting to: [2404:6800:4004:812::2012]:80\nHTTP/1.1 200 OK\nCache-Control: no-cache\nContent-Type: text/plain\nX-Cloud-Trace-Context: c9a69f3755ae3326b39443af07308a15\nDate: Wed, 25 Nov 2020 14:57:49 GMT\nServer: Google Frontend\nContent-Length: 39\nConnection: close\n\nxxxx:xxxx:xxxx:xxxx:7459:80ff:feca:ada9",
+      "parentUuid": "78167e2e_1998c6a1",
+      "range": {
+        "startLine": 50,
+        "startChar": 47,
+        "endLine": 50,
+        "endChar": 55
       },
       "revId": "a7bf69856db167631c365a2b0720c70ebc6be2bd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
