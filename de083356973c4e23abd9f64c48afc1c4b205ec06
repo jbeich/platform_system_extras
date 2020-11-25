@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d78750c2_8c059165",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1197,
+      "author": {
+        "id": 1561651
+      },
+      "writtenOn": "2020-11-25T12:26:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "30bca91f_d5cde443",
+      "range": {
+        "startLine": 1197,
+        "startChar": 4,
+        "endLine": 1197,
+        "endChar": 25
+      },
+      "revId": "de083356973c4e23abd9f64c48afc1c4b205ec06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "49210677_0e894fc8",
@@ -37,6 +61,30 @@
       "writtenOn": "2020-11-19T19:18:02Z",
       "side": 1,
       "message": "this declaration seems also not needed, help remove it?",
+      "range": {
+        "startLine": 109,
+        "startChar": 7,
+        "endLine": 109,
+        "endChar": 20
+      },
+      "revId": "de083356973c4e23abd9f64c48afc1c4b205ec06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d4698fe_027b8083",
+        "filename": "simpleperf/dso.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1561651
+      },
+      "writtenOn": "2020-11-25T12:26:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "49210677_0e894fc8",
       "range": {
         "startLine": 109,
         "startChar": 7,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9224460f_c49856fa",
+        "filename": "simpleperf/dso.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1561651
+      },
+      "writtenOn": "2020-11-25T12:26:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "79627a7f_13275a20",
+      "range": {
+        "startLine": 128,
+        "startChar": 14,
+        "endLine": 128,
+        "endChar": 39
+      },
+      "revId": "de083356973c4e23abd9f64c48afc1c4b205ec06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "581620f1_a620801c",
@@ -83,6 +155,30 @@
       "writtenOn": "2020-11-19T19:18:02Z",
       "side": 1,
       "message": "I suggest using LineReader, similar to in GetKernelStartAddress(). So we can give up early if we read for example ten all zero addresses.",
+      "range": {
+        "startLine": 38,
+        "startChar": 5,
+        "endLine": 38,
+        "endChar": 9
+      },
+      "revId": "de083356973c4e23abd9f64c48afc1c4b205ec06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "40e1b7f0_c0314925",
+        "filename": "simpleperf/kallsyms.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1561651
+      },
+      "writtenOn": "2020-11-25T12:26:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "581620f1_a620801c",
       "range": {
         "startLine": 38,
         "startChar": 5,
@@ -118,6 +214,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "40d91740_88a950ea",
+        "filename": "simpleperf/kallsyms.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1561651
+      },
+      "writtenOn": "2020-11-25T12:26:14Z",
+      "side": 1,
+      "message": "Done for the check. I\u0027d like to give the user the option to enable this path via an option to avoid having noisy SELinux denials. In general, this option is expected to be used by a minuscule set of user.",
+      "parentUuid": "1a2a3642_986d179f",
+      "range": {
+        "startLine": 79,
+        "startChar": 19,
+        "endLine": 79,
+        "endChar": 30
+      },
+      "revId": "de083356973c4e23abd9f64c48afc1c4b205ec06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "33b24d5f_52f72191",
         "filename": "simpleperf/kallsyms.cpp",
         "patchSetId": 2
@@ -129,6 +249,30 @@
       "writtenOn": "2020-11-19T19:18:02Z",
       "side": 1,
       "message": "All ndk users don\u0027t have root permission to write to kptr_restrict. So we\u0027d better not make it an error. Instead we can post a warning like in CheckKernelSymbolAddresses().",
+      "range": {
+        "startLine": 118,
+        "startChar": 4,
+        "endLine": 118,
+        "endChar": 14
+      },
+      "revId": "de083356973c4e23abd9f64c48afc1c4b205ec06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0dd24d8_9cf4b343",
+        "filename": "simpleperf/kallsyms.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1561651
+      },
+      "writtenOn": "2020-11-25T12:26:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "33b24d5f_52f72191",
       "range": {
         "startLine": 118,
         "startChar": 4,
@@ -164,6 +308,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0bbb7494_08c113f5",
+        "filename": "simpleperf/kallsyms.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1561651
+      },
+      "writtenOn": "2020-11-25T12:26:14Z",
+      "side": 1,
+      "message": "I have changed the logic to avoid reading the file if we do not have access.\n\nI think that all the errors returned by these functions are somewhat because of a permissions issue. I am not sure there is an error for which we should for sure stop the execution.",
+      "parentUuid": "13cb1e06_482162c0",
+      "range": {
+        "startLine": 167,
+        "startChar": 24,
+        "endLine": 167,
+        "endChar": 40
+      },
+      "revId": "de083356973c4e23abd9f64c48afc1c4b205ec06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a2750f4c_2a71f0ee",
         "filename": "simpleperf/kallsyms.h",
         "patchSetId": 2
@@ -175,6 +343,30 @@
       "writtenOn": "2020-11-19T19:18:02Z",
       "side": 1,
       "message": "Could you also help move GetKernelStartAddress() in environment.cpp? It\u0027s also reading from /proc/kallsyms. It probably also needs to move LineReader class to utils.h.",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 2
+      },
+      "revId": "de083356973c4e23abd9f64c48afc1c4b205ec06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9fd6645f_c1407fa7",
+        "filename": "simpleperf/kallsyms.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1561651
+      },
+      "writtenOn": "2020-11-25T12:26:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a2750f4c_2a71f0ee",
       "range": {
         "startLine": 45,
         "startChar": 0,
