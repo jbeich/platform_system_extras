@@ -206,6 +206,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0840ed01_91bdcb23",
+        "filename": "multinetwork/common.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1273909
+      },
+      "writtenOn": "2020-11-26T15:39:18Z",
+      "side": 1,
+      "message": "Oh yes! The new coolness in C++17 is std::from_chars()... but for some reason they made it two pointers for the input string instead of std::string_view, so it\u0027s not as ergonomic as strtoul().\n\nIn the end, we\u0027re better off with the old C API.",
+      "parentUuid": "5029f3bb_4b4fadc3",
+      "range": {
+        "startLine": 110,
+        "startChar": 23,
+        "endLine": 110,
+        "endChar": 53
+      },
+      "revId": "a7bf69856db167631c365a2b0720c70ebc6be2bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0240705b_2d546af5",
