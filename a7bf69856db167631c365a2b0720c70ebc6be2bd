@@ -373,6 +373,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "30a1b71e_ccae73b2",
+        "filename": "multinetwork/httpurl.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1273909
+      },
+      "writtenOn": "2020-11-26T15:43:36Z",
+      "side": 1,
+      "message": "Then, the other one on multinetwork/dnschk.cpp:53 is wrong:\n\n  name \u003d fmt::format(\"{}-{}-ds.metric.gstatic.com\", rand(), rand());",
+      "parentUuid": "0a7c79c6_390b963e",
+      "range": {
+        "startLine": 50,
+        "startChar": 55,
+        "endLine": 50,
+        "endChar": 56
+      },
+      "revId": "a7bf69856db167631c365a2b0720c70ebc6be2bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "73f26670_090da092",
         "filename": "multinetwork/httpurl.cpp",
         "patchSetId": 1
