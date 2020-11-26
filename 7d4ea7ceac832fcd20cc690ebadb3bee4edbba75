@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ea6442d_bedd50d0",
+        "filename": "multinetwork/common.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1337176
+      },
+      "writtenOn": "2020-11-26T18:05:05Z",
+      "side": 1,
+      "message": "Isn\u0027t it a indeterminate value? (From standard.)\nMaybe our compiler set it to false.\nIf so, you probably should initialize it.",
+      "range": {
+        "startLine": 48,
+        "startChar": 9,
+        "endLine": 48,
+        "endChar": 20
+      },
+      "revId": "7d4ea7ceac832fcd20cc690ebadb3bee4edbba75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
