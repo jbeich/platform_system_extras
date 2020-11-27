@@ -395,6 +395,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2916327_e73406ed",
+        "filename": "multinetwork/httpurl.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2020-11-27T10:31:49Z",
+      "side": 1,
+      "message": "No, that\u0027s a different URL. :-)\n\n$ adb shell dnschk --randomname\n# 1918572797-961784479-ds.metric.gstatic.com (via nethandle 0):\n2404:6800:4004:81d::2003\n172.217.175.35\n$ adb shell httpurl --randomname\nResolving hostname\u003d561844397-687074760-ipv6test.ds.metric.gstatic.com, port\u003d80\nConnecting to: [2404:6800:4004:81e::2012]:80\nHTTP/1.1 200 OK\nCache-Control: no-cache\nContent-Type: text/plain\nX-Cloud-Trace-Context: e36a8d746d10ddc684c03f35485b34b0\nDate: Fri, 27 Nov 2020 10:28:37 GMT\nServer: Google Frontend\nContent-Length: 39\nConnection: close\n\n2400:2410:20c0:4400:e1d9:5c10:805d:7413",
+      "parentUuid": "30a1b71e_ccae73b2",
+      "range": {
+        "startLine": 50,
+        "startChar": 55,
+        "endLine": 50,
+        "endChar": 56
+      },
+      "revId": "a7bf69856db167631c365a2b0720c70ebc6be2bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "73f26670_090da092",
