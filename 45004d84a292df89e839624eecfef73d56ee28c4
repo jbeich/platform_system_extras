@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8a0df4c3_1c198971",
+        "filename": "simpleperf/kallsyms.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-11-30T18:31:06Z",
+      "side": 1,
+      "message": "Thanks for the fix! It makes sense.\nNit: else in L92 isn\u0027t needed, since we always return in the if statement.",
+      "parentUuid": "c65f42b2_b959b8c1",
+      "range": {
+        "startLine": 90,
+        "startChar": 10,
+        "endLine": 90,
+        "endChar": 15
+      },
+      "revId": "45004d84a292df89e839624eecfef73d56ee28c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b58719c4_302ed993",
         "filename": "simpleperf/kallsyms.cpp",
         "patchSetId": 3
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "Added. There will be a follow up change to use the `use_property` argument (here and in LoadKernelSymbols).",
       "parentUuid": "b58719c4_302ed993",
+      "range": {
+        "startLine": 196,
+        "startChar": 9,
+        "endLine": 196,
+        "endChar": 30
+      },
+      "revId": "45004d84a292df89e839624eecfef73d56ee28c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "11e12fb1_ff324d51",
+        "filename": "simpleperf/kallsyms.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-11-30T18:31:06Z",
+      "side": 1,
+      "message": "Thanks for the fix. Please also help move GetLoadedModules() in environment.cpp and add ScopedKptrUnrestrict?",
+      "parentUuid": "45c8a5bd_eaa2fab9",
       "range": {
         "startLine": 196,
         "startChar": 9,

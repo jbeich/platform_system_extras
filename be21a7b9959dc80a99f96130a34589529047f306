@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9be0b561_760cd608",
+        "filename": "simpleperf/environment.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-11-30T18:31:06Z",
+      "side": 1,
+      "message": "I realized that GetLoadedModules() also relies on kptr_restric, in https://android-review.googlesource.com/c/platform/system/extras/+/1511230/2/simpleperf/environment.cpp#97. So please also help move this function to kallsyms.cpp.",
+      "range": {
+        "startLine": 73,
+        "startChar": 31,
+        "endLine": 73,
+        "endChar": 47
+      },
+      "revId": "be21a7b9959dc80a99f96130a34589529047f306",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
