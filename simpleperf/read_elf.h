@@ -52,8 +52,7 @@ struct ElfFileSymbol {
   bool is_in_text_section;
   std::string name;
 
-  ElfFileSymbol() : vaddr(0), len(0), is_func(false), is_label(false), is_in_text_section(false) {
-  }
+  ElfFileSymbol() : vaddr(0), len(0), is_func(false), is_label(false), is_in_text_section(false) {}
 };
 
 namespace llvm {
@@ -67,6 +66,12 @@ struct ElfSegment {
   uint64_t file_offset = 0;
   uint64_t file_size = 0;
   bool is_executable = false;
+};
+
+struct ElfSection {
+  std::string name;
+  uint64_t vaddr = 0;
+  uint64_t file_offset = 0;
 };
 
 class ElfFile {
@@ -85,6 +90,7 @@ class ElfFile {
   virtual bool Is64Bit() = 0;
   virtual llvm::MemoryBuffer* GetMemoryBuffer() = 0;
   virtual std::vector<ElfSegment> GetProgramHeader() = 0;
+  virtual std::vector<ElfSection> GetSectionHeader() = 0;
   virtual ElfStatus GetBuildId(BuildId* build_id) = 0;
 
   using ParseSymbolCallback = std::function<void(const ElfFileSymbol&)>;

@@ -35,9 +35,9 @@ namespace simpleperf {
 using OptionName = std::string;
 
 enum class OptionType {
-  SINGLE,  // this option has a single value (use the last one in the arg list)
+  SINGLE,    // this option has a single value (use the last one in the arg list)
   MULTIPLE,  // this option can have multiple values (keep all values appeared in the arg list)
-  ORDERED,  // keep the order of this option in the arg list
+  ORDERED,   // keep the order of this option in the arg list
 };
 
 enum class OptionValueType {
@@ -59,7 +59,7 @@ enum class AppRunnerType {
 struct OptionFormat {
   OptionValueType value_type;
   OptionType type;
-  AppRunnerType app_runner_type;
+  AppRunnerType app_runner_type = AppRunnerType::NOT_ALLOWED;
 };
 
 using OptionFormatMap = std::unordered_map<OptionName, OptionFormat>;
@@ -73,9 +73,7 @@ union OptionValue {
 struct OptionValueMap {
   std::multimap<OptionName, OptionValue> values;
 
-  bool PullBoolValue(const OptionName& name) {
-    return PullValue(name).has_value();
-  }
+  bool PullBoolValue(const OptionName& name) { return PullValue(name).has_value(); }
 
   template <typename T>
   bool PullUintValue(const OptionName& name, T* value, uint64_t min = 0,
@@ -103,6 +101,13 @@ struct OptionValueMap {
     return true;
   }
 
+  void PullStringValue(const OptionName& name, std::string* value) {
+    if (auto option_value = PullValue(name); option_value) {
+      CHECK(option_value->str_value != nullptr);
+      *value = *option_value->str_value;
+    }
+  }
+
   std::optional<OptionValue> PullValue(const OptionName& name) {
     std::optional<OptionValue> res;
     if (auto it = values.find(name); it != values.end()) {
@@ -112,7 +117,7 @@ struct OptionValueMap {
     return res;
   }
 
-  std::optional<std::vector<OptionValue>> PullValues(const OptionName& name) {
+  std::vector<OptionValue> PullValues(const OptionName& name) {
     auto pair = values.equal_range(name);
     if (pair.first != pair.second) {
       std::vector<OptionValue> res;
@@ -142,23 +147,15 @@ class Command {
  public:
   Command(const std::string& name, const std::string& short_help_string,
           const std::string& long_help_string)
-      : name_(name), short_help_string_(short_help_string), long_help_string_(long_help_string) {
-  }
+      : name_(name), short_help_string_(short_help_string), long_help_string_(long_help_string) {}
 
-  virtual ~Command() {
-  }
+  virtual ~Command() {}
 
-  const std::string& Name() const {
-    return name_;
-  }
+  const std::string& Name() const { return name_; }
 
-  const std::string& ShortHelpString() const {
-    return short_help_string_;
-  }
+  const std::string& ShortHelpString() const { return short_help_string_; }
 
-  const std::string LongHelpString() const {
-    return long_help_string_;
-  }
+  const std::string LongHelpString() const { return long_help_string_; }
 
   virtual bool Run(const std::vector<std::string>& args) = 0;
 

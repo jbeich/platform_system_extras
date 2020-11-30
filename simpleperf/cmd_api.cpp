@@ -30,8 +30,8 @@
 
 #include "cmd_api_impl.h"
 #include "command.h"
-#include "event_type.h"
 #include "environment.h"
+#include "event_type.h"
 #include "utils.h"
 #include "workload.h"
 
@@ -43,9 +43,8 @@ const std::string SIMPLEPERF_DATA_DIR = "simpleperf_data";
 class PrepareCommand : public Command {
  public:
   PrepareCommand()
-      : Command("api-prepare", "Prepare recording via app api",
-                "Usage: simpleperf api-prepare\n"
-                ) {}
+      : Command("api-prepare", "Prepare recording via app api", "Usage: simpleperf api-prepare\n") {
+  }
   bool Run(const std::vector<std::string>& args);
 };
 
@@ -55,12 +54,7 @@ bool PrepareCommand::Run(const std::vector<std::string>&) {
     return false;
   }
   // Create tracepoint_events file.
-  if (!android::base::WriteStringToFile(GetTracepointEvents(),
-                                        "/data/local/tmp/tracepoint_events")) {
-    PLOG(ERROR) << "failed to write tracepoint_events file";
-    return false;
-  }
-  return true;
+  return EventTypeManager::Instance().WriteTracepointsToFile("/data/local/tmp/tracepoint_events");
 }
 
 class CollectCommand : public Command {
@@ -79,7 +73,8 @@ class CollectCommand : public Command {
 "--stop-signal-fd <fd>  Stop recording when fd is readable.\n"
 #endif
                 // clang-format on
-                ) {}
+        ) {
+  }
   bool Run(const std::vector<std::string>& args);
 
  private:
@@ -109,10 +104,8 @@ bool CollectCommand::Run(const std::vector<std::string>& args) {
 bool CollectCommand::ParseOptions(const std::vector<std::string>& args) {
   OptionValueMap options;
   std::vector<std::pair<OptionName, OptionValue>> ordered_options;
-  std::vector<std::string> non_option_args;
-
   if (!PreprocessOptions(args, GetApiCollectCmdOptionFormats(), &options, &ordered_options,
-                         &non_option_args)) {
+                         nullptr)) {
     return false;
   }
 
@@ -133,11 +126,6 @@ bool CollectCommand::ParseOptions(const std::vector<std::string>& args) {
 
   CHECK(options.values.empty());
   CHECK(ordered_options.empty());
-  if (!non_option_args.empty()) {
-    LOG(ERROR) << "unexpected non_option_args: " << non_option_args[0];
-    return false;
-  }
-
   if (!in_app_context_) {
     if (app_name_.empty()) {
       LOG(ERROR) << "--app is missing";
@@ -158,8 +146,8 @@ void CollectCommand::HandleStopSignal() {
 }
 
 bool CollectCommand::CollectRecordingData() {
-  std::unique_ptr<FILE, decltype(&fclose)>  fp(android::base::Fdopen(std::move(out_fd_), "w"),
-                                               fclose);
+  std::unique_ptr<FILE, decltype(&fclose)> fp(android::base::Fdopen(std::move(out_fd_), "w"),
+                                              fclose);
   if (fp == nullptr) {
     PLOG(ERROR) << "failed to call fdopen";
     return false;
@@ -222,10 +210,8 @@ bool CollectCommand::RemoveRecordingData() {
 namespace simpleperf {
 
 void RegisterAPICommands() {
-  RegisterCommand("api-prepare",
-                  []{ return std::unique_ptr<Command>(new PrepareCommand()); });
-  RegisterCommand("api-collect",
-                  []{ return std::unique_ptr<Command>(new CollectCommand()); });
+  RegisterCommand("api-prepare", [] { return std::unique_ptr<Command>(new PrepareCommand()); });
+  RegisterCommand("api-collect", [] { return std::unique_ptr<Command>(new CollectCommand()); });
 }
 
 }  // namespace simpleperf

@@ -53,7 +53,9 @@ class DecodeErrorLogger : public ocsdDefaultErrorLogger {
   ocsdMsgLogger msg_logger_;
 };
 
-static bool IsRespError(ocsd_datapath_resp_t resp) { return resp >= OCSD_RESP_ERR_CONT; }
+static bool IsRespError(ocsd_datapath_resp_t resp) {
+  return resp >= OCSD_RESP_ERR_CONT;
+}
 
 // Used instead of DecodeTree in OpenCSD to avoid linking decoders not for ETMV4 instruction tracing
 // in OpenCSD.
@@ -172,9 +174,7 @@ class MapLocator : public PacketCallback {
   ThreadTree& GetThreadTree() { return thread_tree_; }
 
   // Return current thread id of a trace_id. If not available, return -1.
-  pid_t GetTid(uint8_t trace_id) const {
-    return trace_data_[trace_id].tid;
-  }
+  pid_t GetTid(uint8_t trace_id) const { return trace_data_[trace_id].tid; }
 
   ocsd_datapath_resp_t ProcessPacket(uint8_t trace_id, ocsd_datapath_op_t op,
                                      ocsd_trc_index_t index_sop,
@@ -256,18 +256,25 @@ class MemAccess : public ITargetMemAccess {
     if (map != nullptr) {
       llvm::MemoryBuffer* memory = GetMemoryBuffer(map->dso);
       if (memory != nullptr) {
-        uint64_t offset = address - map->start_addr + map->pgoff;
-        size_t file_size = memory->getBufferSize();
-        copy_size = file_size > offset ? std::min<size_t>(file_size - offset, *num_bytes) : 0;
-        if (copy_size > 0) {
-          memcpy(p_buffer, memory->getBufferStart() + offset, copy_size);
+        if (auto opt_offset = map->dso->IpToFileOffset(address, map->start_addr, map->pgoff);
+            opt_offset) {
+          uint64_t offset = opt_offset.value();
+          size_t file_size = memory->getBufferSize();
+          copy_size = file_size > offset ? std::min<size_t>(file_size - offset, *num_bytes) : 0;
+          if (copy_size > 0) {
+            memcpy(p_buffer, memory->getBufferStart() + offset, copy_size);
+          }
         }
       }
       // Update the last buffer cache.
-      data.buffer_map = map;
-      data.buffer = memory == nullptr ? nullptr : (memory->getBufferStart() + map->pgoff);
-      data.buffer_start = map->start_addr;
-      data.buffer_end = map->get_end_addr();
+      // Don't cache for the kernel map. Because simpleperf doesn't record an accurate kernel end
+      // addr.
+      if (!map->in_kernel) {
+        data.buffer_map = map;
+        data.buffer = memory == nullptr ? nullptr : (memory->getBufferStart() + map->pgoff);
+        data.buffer_start = map->start_addr;
+        data.buffer_end = map->get_end_addr();
+      }
     }
     *num_bytes = copy_size;
     return OCSD_OK;
@@ -660,7 +667,7 @@ class ETMDecoderImpl : public ETMDecoder {
     InstallElementCallback(instr_range_parser_.get());
   }
 
-  void RegisterCallback(const BranchListCallbackFn& callback ){
+  void RegisterCallback(const BranchListCallbackFn& callback) {
     InstallMapLocator();
     branch_list_parser_.reset(new BranchListParser(*map_locator_, callback));
     branch_list_parser_->CheckConfigs(configs_);

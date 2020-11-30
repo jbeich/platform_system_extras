@@ -21,6 +21,7 @@
 #include <time.h>
 
 #include <functional>
+#include <optional>
 #include <set>
 #include <string>
 #include <vector>
@@ -51,12 +52,9 @@ static inline uint64_t Align(uint64_t value, uint64_t alignment) {
 class OneTimeFreeAllocator {
  public:
   explicit OneTimeFreeAllocator(size_t unit_size = 8192u)
-      : unit_size_(unit_size), cur_(nullptr), end_(nullptr) {
-  }
+      : unit_size_(unit_size), cur_(nullptr), end_(nullptr) {}
 
-  ~OneTimeFreeAllocator() {
-    Clear();
-  }
+  ~OneTimeFreeAllocator() { Clear(); }
 
   void Clear();
   const char* AllocateString(std::string_view s);
@@ -168,7 +166,8 @@ timeval SecondToTimeval(double time_in_sec);
 
 std::string GetSimpleperfVersion();
 
-std::vector<int> GetCpusFromString(const std::string& s);
+std::optional<std::set<int>> GetCpusFromString(const std::string& s);
+std::optional<std::set<pid_t>> GetTidsFromString(const std::string& s, bool check_if_exists);
 
 namespace {
 

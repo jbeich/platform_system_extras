@@ -23,6 +23,8 @@
 #include "dso.h"
 #include "environment.h"
 #include "get_test_data.h"
+#include "test_util.h"
+#include "thread_tree.h"
 
 namespace fs = std::filesystem;
 
@@ -36,14 +38,15 @@ TEST(environment, PrepareVdsoFile) {
   TemporaryDir tmpdir;
   ScopedTempFiles scoped_temp_files(tmpdir.path);
   PrepareVdsoFile();
-  std::unique_ptr<Dso> dso = Dso::CreateDso(DSO_ELF_FILE, "[vdso]",
-                                            sizeof(size_t) == sizeof(uint64_t));
+  std::unique_ptr<Dso> dso =
+      Dso::CreateDso(DSO_ELF_FILE, "[vdso]", sizeof(size_t) == sizeof(uint64_t));
   ASSERT_TRUE(dso != nullptr);
   ASSERT_NE(dso->GetDebugFilePath(), "[vdso]");
 }
 
 TEST(environment, GetHardwareFromCpuInfo) {
-  std::string cpu_info = "CPU revision : 10\n\n"
+  std::string cpu_info =
+      "CPU revision : 10\n\n"
       "Hardware : Symbol i.MX6 Freeport_Plat Quad/DualLite (Device Tree)\n";
   ASSERT_EQ("Symbol i.MX6 Freeport_Plat Quad/DualLite (Device Tree)",
             GetHardwareFromCpuInfo(cpu_info));
@@ -109,4 +112,14 @@ TEST(environment, GetModuleBuildId) {
                             fs::copy_options::overwrite_existing));
   ASSERT_TRUE(GetModuleBuildId("fake_kernel_module", &build_id, GetTestData("sysfs")));
   ASSERT_EQ(build_id, BuildId("3e0ba155286f3454"));
+}
+
+TEST(environment, GetKernelAndModuleMmaps) {
+  TEST_REQUIRE_ROOT();
+  KernelMmap kernel_mmap;
+  std::vector<KernelMmap> module_mmaps;
+  GetKernelAndModuleMmaps(&kernel_mmap, &module_mmaps);
+  // The kernel map should contain the kernel start address.
+  ASSERT_EQ(kernel_mmap.name, std::string(DEFAULT_KERNEL_MMAP_NAME) + "_stext");
+  ASSERT_GT(kernel_mmap.start_addr, 0);
 }
