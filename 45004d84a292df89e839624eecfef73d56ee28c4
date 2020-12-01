@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "65f69a81_ad391bab",
+        "filename": "simpleperf/kallsyms.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1561651
+      },
+      "writtenOn": "2020-12-01T14:24:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8a0df4c3_1c198971",
+      "range": {
+        "startLine": 90,
+        "startChar": 10,
+        "endLine": 90,
+        "endChar": 15
+      },
+      "revId": "45004d84a292df89e839624eecfef73d56ee28c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b58719c4_302ed993",
@@ -133,6 +157,30 @@
       "side": 1,
       "message": "Thanks for the fix. Please also help move GetLoadedModules() in environment.cpp and add ScopedKptrUnrestrict?",
       "parentUuid": "45c8a5bd_eaa2fab9",
+      "range": {
+        "startLine": 196,
+        "startChar": 9,
+        "endLine": 196,
+        "endChar": 30
+      },
+      "revId": "45004d84a292df89e839624eecfef73d56ee28c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "18ec2a73_114b0870",
+        "filename": "simpleperf/kallsyms.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1561651
+      },
+      "writtenOn": "2020-12-01T14:24:17Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "11e12fb1_ff324d51",
       "range": {
         "startLine": 196,
         "startChar": 9,
