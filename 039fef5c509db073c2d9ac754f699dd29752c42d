@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6b66320_52310340",
+        "filename": "simpleperf/report_utils.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-12-11T19:22:56Z",
+      "side": 1,
+      "message": "true",
+      "range": {
+        "startLine": 40,
+        "startChar": 8,
+        "endLine": 40,
+        "endChar": 12
+      },
+      "revId": "039fef5c509db073c2d9ac754f699dd29752c42d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d239f5f_49b16032",
+        "filename": "simpleperf/report_utils.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-12-11T19:22:56Z",
+      "side": 1,
+      "message": "true",
+      "range": {
+        "startLine": 43,
+        "startChar": 8,
+        "endLine": 43,
+        "endChar": 12
+      },
+      "revId": "039fef5c509db073c2d9ac754f699dd29752c42d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cdcfcabd_75751012",
+        "filename": "simpleperf/report_utils_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-12-11T19:22:56Z",
+      "side": 1,
+      "message": "Can you add a comment describe the setup done here?  E.g. the layout assumed for the three different fake_*_paths.",
+      "revId": "039fef5c509db073c2d9ac754f699dd29752c42d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c160732_ec55fb5b",
+        "filename": "simpleperf/report_utils_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2020-12-11T19:22:56Z",
+      "side": 1,
+      "message": "Explanations on what\u0027s being tested could also help readability.\n\nE.g:\n\n```\n// Check that ART functions are removed and file names for JIT frames\n// are converted for java_method1 and java_method2.\n```\n\nSame applies for other tests as well.",
+      "revId": "039fef5c509db073c2d9ac754f699dd29752c42d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
