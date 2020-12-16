@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75844b00_80df3050",
+        "filename": "simpleperf/cmd_report_sample.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1079424
+      },
+      "writtenOn": "2020-12-16T02:47:47Z",
+      "side": 1,
+      "message": "Nit: Do you need this CHECK(false)? The switch has listed every possible enum value.",
+      "range": {
+        "startLine": 79,
+        "startChar": 2,
+        "endLine": 79,
+        "endChar": 7
+      },
+      "revId": "42c944b3773350f615d4f434e58ebd14ffbf3657",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "94d752e0_cf541b28",
+        "filename": "simpleperf/report_sample.proto",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1079424
+      },
+      "writtenOn": "2020-12-16T02:47:47Z",
+      "side": 1,
+      "message": "Question: What\u0027s the type for AOT compiled Java code, native?",
+      "range": {
+        "startLine": 37,
+        "startChar": 9,
+        "endLine": 37,
+        "endChar": 22
+      },
+      "revId": "42c944b3773350f615d4f434e58ebd14ffbf3657",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec854161_5ea93a3d",
+        "filename": "simpleperf/report_sample.proto",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1079424
+      },
+      "writtenOn": "2020-12-16T02:47:47Z",
+      "side": 1,
+      "message": "report_utils.cpp seems to say ART_METHOD are also native. So, NATIVE_METHOD really means \"non-ART native method\". I don\u0027t think we need to change the enum names, but can you document NATIVE_METHOD are excluding ART ones?",
+      "range": {
+        "startLine": 39,
+        "startChar": 6,
+        "endLine": 39,
+        "endChar": 16
+      },
+      "revId": "42c944b3773350f615d4f434e58ebd14ffbf3657",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffff79fc_f6349abb",
+        "filename": "simpleperf/report_sample.proto",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1079424
+      },
+      "writtenOn": "2020-12-16T02:47:47Z",
+      "side": 1,
+      "message": "s/JAVA/JVM/ especially as Android is advocating for Kotlin.",
+      "range": {
+        "startLine": 40,
+        "startChar": 6,
+        "endLine": 40,
+        "endChar": 29
+      },
+      "revId": "42c944b3773350f615d4f434e58ebd14ffbf3657",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
