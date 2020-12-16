@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7aafcf5_265bd158",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-12-16T20:54:27Z",
+      "side": 1,
+      "message": "ps2, 3: move ART_METHOD to the last of the enum. And only show ART_METHOD when --show-art-frames is used.",
+      "revId": "3988a40acee990fb505b77bd65fee46265ea640a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

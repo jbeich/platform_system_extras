@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "d8a5d6cc_38eca597",
+        "filename": "simpleperf/cmd_report_sample.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-12-16T20:54:27Z",
+      "side": 1,
+      "message": "Just in case the type is changed in the future.",
+      "parentUuid": "75844b00_80df3050",
+      "range": {
+        "startLine": 79,
+        "startChar": 2,
+        "endLine": 79,
+        "endChar": 7
+      },
+      "revId": "42c944b3773350f615d4f434e58ebd14ffbf3657",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "94d752e0_cf541b28",
         "filename": "simpleperf/report_sample.proto",
         "patchSetId": 1
@@ -37,6 +61,30 @@
       "writtenOn": "2020-12-16T02:47:47Z",
       "side": 1,
       "message": "Question: What\u0027s the type for AOT compiled Java code, native?",
+      "range": {
+        "startLine": 37,
+        "startChar": 9,
+        "endLine": 37,
+        "endChar": 22
+      },
+      "revId": "42c944b3773350f615d4f434e58ebd14ffbf3657",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d97211a_537525b2",
+        "filename": "simpleperf/report_sample.proto",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-12-16T20:54:27Z",
+      "side": 1,
+      "message": "Yes, added comment.",
+      "parentUuid": "94d752e0_cf541b28",
       "range": {
         "startLine": 37,
         "startChar": 9,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba0f2c15_5ef0f086",
+        "filename": "simpleperf/report_sample.proto",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-12-16T20:54:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ec854161_5ea93a3d",
+      "range": {
+        "startLine": 39,
+        "startChar": 6,
+        "endLine": 39,
+        "endChar": 16
+      },
+      "revId": "42c944b3773350f615d4f434e58ebd14ffbf3657",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ffff79fc_f6349abb",
@@ -83,6 +155,30 @@
       "writtenOn": "2020-12-16T02:47:47Z",
       "side": 1,
       "message": "s/JAVA/JVM/ especially as Android is advocating for Kotlin.",
+      "range": {
+        "startLine": 40,
+        "startChar": 6,
+        "endLine": 40,
+        "endChar": 29
+      },
+      "revId": "42c944b3773350f615d4f434e58ebd14ffbf3657",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "610155a8_d57747a9",
+        "filename": "simpleperf/report_sample.proto",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2020-12-16T20:54:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ffff79fc_f6349abb",
       "range": {
         "startLine": 40,
         "startChar": 6,
