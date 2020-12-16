@@ -22,7 +22,7 @@
 
 namespace simpleperf {
 
-static bool IsInterpreterDso(const Dso* dso) {
+static bool IsArtDso(const Dso* dso) {
   return android::base::EndsWith(dso->Path(), "/libart.so") ||
          android::base::EndsWith(dso->Path(), "/libartd.so");
 };
@@ -36,14 +36,27 @@ std::vector<CallChainReportEntry> CallChainReportBuilder::Build(const ThreadEntr
   for (size_t i = 0; i < ips.size(); i++) {
     const MapEntry* map = thread_tree_.FindMap(thread, ips[i], i < kernel_ip_count);
     Dso* dso = map->dso;
+    CallChainExecutionType execution_type = CallChainExecutionType::NATIVE_METHOD;
+    if (dso->IsForJavaMethod()) {
+      if (dso->type() == DSO_DEX_FILE) {
+        execution_type = CallChainExecutionType::INTERPRETED_JAVA_METHOD;
+      } else {
+        execution_type = CallChainExecutionType::JIT_JAVA_METHOD;
+      }
+    } else if (IsArtDso(dso)) {
+      execution_type = CallChainExecutionType::ART_METHOD;
+    }
+
     if (remove_art_frame_) {
       // Remove interpreter frames both before and after a Java frame.
-      if (dso->IsForJavaMethod()) {
+      if (execution_type == CallChainExecutionType::INTERPRETED_JAVA_METHOD ||
+          execution_type == CallChainExecutionType::JIT_JAVA_METHOD) {
         near_java_method = true;
-        while (!result.empty() && IsInterpreterDso(result.back().dso)) {
+        while (!result.empty() &&
+               result.back().execution_type == CallChainExecutionType::ART_METHOD) {
           result.pop_back();
         }
-      } else if (IsInterpreterDso(dso)) {
+      } else if (execution_type == CallChainExecutionType::ART_METHOD) {
         if (near_java_method) {
           continue;
         }
@@ -60,6 +73,7 @@ std::vector<CallChainReportEntry> CallChainReportBuilder::Build(const ThreadEntr
     entry.dso = dso;
     entry.vaddr_in_file = vaddr_in_file;
     entry.map = map;
+    entry.execution_type = execution_type;
   }
   if (convert_jit_frame_) {
     ConvertJITFrame(result);

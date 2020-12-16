@@ -25,6 +25,13 @@
 
 namespace simpleperf {
 
+enum class CallChainExecutionType {
+  NATIVE_METHOD,
+  ART_METHOD,
+  INTERPRETED_JAVA_METHOD,
+  JIT_JAVA_METHOD,
+};
+
 struct CallChainReportEntry {
   uint64_t ip = 0;
   const Symbol* symbol = nullptr;
@@ -32,6 +39,7 @@ struct CallChainReportEntry {
   const char* dso_name = nullptr;
   uint64_t vaddr_in_file = 0;
   const MapEntry* map = nullptr;
+  CallChainExecutionType execution_type = CallChainExecutionType::NATIVE_METHOD;
 };
 
 class CallChainReportBuilder {
