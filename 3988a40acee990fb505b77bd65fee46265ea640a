@@ -16,6 +16,23 @@
       "message": "ps2, 3: move ART_METHOD to the last of the enum. And only show ART_METHOD when --show-art-frames is used.",
       "revId": "3988a40acee990fb505b77bd65fee46265ea640a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a59187d2_5c5bec32",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1079424
+      },
+      "writtenOn": "2020-12-17T01:26:29Z",
+      "side": 1,
+      "message": "Yabin, I\u0027m leaving +2 to someone from the NDK team. Happy to +2 if you want me to.",
+      "revId": "3988a40acee990fb505b77bd65fee46265ea640a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
