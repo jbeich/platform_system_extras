@@ -27,6 +27,7 @@
 #include "event_type.h"
 #include "record.h"
 #include "record_file.h"
+#include "utils.h"
 
 #include "record_equal_test.h"
 
@@ -35,6 +36,10 @@ using namespace simpleperf::PerfFileFormat;
 
 class RecordFileTest : public ::testing::Test {
  protected:
+  void SetUp() override {
+    tmpfile_path_ = std::string(tmpdir_.path) + OS_PATH_SEPARATOR + "tmpfile";
+  }
+
   void AddEventType(const std::string& event_type_str) {
     std::unique_ptr<EventTypeAndModifier> event_type_modifier = ParseEventType(event_type_str);
     ASSERT_TRUE(event_type_modifier != nullptr);
@@ -47,14 +52,15 @@ class RecordFileTest : public ::testing::Test {
     attr_ids_.push_back(attr_id);
   }
 
-  TemporaryFile tmpfile_;
+  TemporaryDir tmpdir_;
+  std::string tmpfile_path_;
   std::vector<std::unique_ptr<perf_event_attr>> attrs_;
   std::vector<EventAttrWithId> attr_ids_;
 };
 
 TEST_F(RecordFileTest, smoke) {
   // Write to a record file.
-  std::unique_ptr<RecordFileWriter> writer = RecordFileWriter::CreateInstance(tmpfile_.path);
+  std::unique_ptr<RecordFileWriter> writer = RecordFileWriter::CreateInstance(tmpfile_path_);
   ASSERT_TRUE(writer != nullptr);
 
   // Write attr section.
@@ -80,7 +86,7 @@ TEST_F(RecordFileTest, smoke) {
   ASSERT_TRUE(writer->Close());
 
   // Read from a record file.
-  std::unique_ptr<RecordFileReader> reader = RecordFileReader::CreateInstance(tmpfile_.path);
+  std::unique_ptr<RecordFileReader> reader = RecordFileReader::CreateInstance(tmpfile_path_);
   ASSERT_TRUE(reader != nullptr);
   std::vector<EventAttrWithId> attrs = reader->AttrSection();
   ASSERT_EQ(1u, attrs.size());
@@ -102,7 +108,7 @@ TEST_F(RecordFileTest, smoke) {
 
 TEST_F(RecordFileTest, record_more_than_one_attr) {
   // Write to a record file.
-  std::unique_ptr<RecordFileWriter> writer = RecordFileWriter::CreateInstance(tmpfile_.path);
+  std::unique_ptr<RecordFileWriter> writer = RecordFileWriter::CreateInstance(tmpfile_path_);
   ASSERT_TRUE(writer != nullptr);
 
   // Write attr section.
@@ -114,7 +120,7 @@ TEST_F(RecordFileTest, record_more_than_one_attr) {
   ASSERT_TRUE(writer->Close());
 
   // Read from a record file.
-  std::unique_ptr<RecordFileReader> reader = RecordFileReader::CreateInstance(tmpfile_.path);
+  std::unique_ptr<RecordFileReader> reader = RecordFileReader::CreateInstance(tmpfile_path_);
   ASSERT_TRUE(reader != nullptr);
   std::vector<EventAttrWithId> attrs = reader->AttrSection();
   ASSERT_EQ(3u, attrs.size());
@@ -126,7 +132,7 @@ TEST_F(RecordFileTest, record_more_than_one_attr) {
 
 TEST_F(RecordFileTest, write_meta_info_feature_section) {
   // Write to a record file.
-  std::unique_ptr<RecordFileWriter> writer = RecordFileWriter::CreateInstance(tmpfile_.path);
+  std::unique_ptr<RecordFileWriter> writer = RecordFileWriter::CreateInstance(tmpfile_path_);
   ASSERT_TRUE(writer != nullptr);
   AddEventType("cpu-cycles");
   ASSERT_TRUE(writer->WriteAttrSection(attr_ids_));
@@ -143,7 +149,7 @@ TEST_F(RecordFileTest, write_meta_info_feature_section) {
   ASSERT_TRUE(writer->Close());
 
   // Read from a record file.
-  std::unique_ptr<RecordFileReader> reader = RecordFileReader::CreateInstance(tmpfile_.path);
+  std::unique_ptr<RecordFileReader> reader = RecordFileReader::CreateInstance(tmpfile_path_);
   ASSERT_TRUE(reader != nullptr);
   ASSERT_EQ(reader->GetMetaInfoFeature(), info_map);
 }
