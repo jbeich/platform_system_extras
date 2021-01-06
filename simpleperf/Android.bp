@@ -494,6 +494,7 @@ cc_defaults {
         "record_file_test.cpp",
         "record_test.cpp",
         "report_utils_test.cpp",
+        "perf_regs_test.cpp",
         "sample_tree_test.cpp",
         "thread_tree_test.cpp",
         "test_util.cpp",
