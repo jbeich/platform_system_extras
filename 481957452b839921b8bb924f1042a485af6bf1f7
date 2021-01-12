@@ -1,0 +1,30 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000007205650",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1536081?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "de85a577_588417e6",
+        "filename": "simpleperf/environment.cpp.orig",
+        "patchSetId": 2
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-01-12T01:58:39Z",
+      "side": 1,
+      "message": "This file contains a set of conflict markers.If this is a false alarm, add IGNORE_MERGE_CONFLICT_CHECK\u003d\u003d\u003creason\u003e to your commit message.",
+      "range": {
+        "startLine": 184,
+        "startChar": 1,
+        "endLine": 184,
+        "endChar": 7
+      },
+      "revId": "481957452b839921b8bb924f1042a485af6bf1f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
