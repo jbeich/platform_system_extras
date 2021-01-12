@@ -38,6 +38,8 @@
 using android::base::Split;
 using android::base::StartsWith;
 
+namespace simpleperf {
+
 template <>
 void MoveFromBinaryFormat(std::string& data, const char*& p) {
   data.clear();
@@ -46,8 +48,6 @@ void MoveFromBinaryFormat(std::string& data, const char*& p) {
   }
   p++;
 }
-
-namespace simpleperf {
 
 const char TRACING_INFO_MAGIC[10] = {23, 8, 68, 't', 'r', 'a', 'c', 'i', 'n', 'g'};
 
@@ -147,7 +147,7 @@ TracingFile::TracingFile() {
   version = "0.5";
   endian = 0;
   size_of_long = static_cast<int>(sizeof(long));  // NOLINT(google-runtime-int)
-  page_size = static_cast<uint32_t>(::GetPageSize());
+  page_size = static_cast<uint32_t>(simpleperf::GetPageSize());
 }
 
 bool TracingFile::RecordHeaderFiles() {
@@ -446,8 +446,6 @@ bool GetTracingData(const std::vector<const EventType*>& event_types, std::vecto
   return true;
 }
 
-namespace {
-
 // Briefly check if the filter format is acceptable by the kernel, which is described in
 // Documentation/trace/events.rst in the kernel. Also adjust quotes in string operands.
 //
@@ -605,8 +603,6 @@ struct FilterFormatAdjuster {
   std::string adjusted_filter;
   FieldNameSet used_fields;
 };
-
-}  // namespace
 
 std::optional<std::string> AdjustTracepointFilter(const std::string& filter, bool use_quote,
                                                   FieldNameSet* used_fields) {

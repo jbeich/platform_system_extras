@@ -31,16 +31,12 @@
 
 namespace simpleperf {
 
-namespace {
-
 // Real map file path depends on where the process can create files.
 // For example, app can create files only in its data directory.
 // Use normalized name inherited from pid instead.
-std::string GetSymbolMapDsoName(int pid) {
+static std::string GetSymbolMapDsoName(int pid) {
   return android::base::StringPrintf("perf-%d.map", pid);
 }
-
-}  // namespace
 
 void ThreadTree::SetThreadName(int pid, int tid, const std::string& comm) {
   ThreadEntry* thread = FindThreadOrNew(pid, tid);
