@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8059ed90_f0a41a4d",
+        "filename": "simpleperf/generate_art_jni_method_table.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1038443
+      },
+      "writtenOn": "2021-01-15T10:00:04Z",
+      "side": 1,
+      "message": "This isn\u0027t going to work / scale in the long run. The ART sources are planned to be removed from platform trees.\n\nIt\u0027s also scary to me to see all ART native methods being listed in some other places, when those methods are a moving target.",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 63
+      },
+      "revId": "6af247f88c3d03190c955db192fb56ba7f6739c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
