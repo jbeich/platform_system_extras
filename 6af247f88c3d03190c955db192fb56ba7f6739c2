@@ -22,6 +22,29 @@
       },
       "revId": "6af247f88c3d03190c955db192fb56ba7f6739c2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e76828e7_3ccf0589",
+        "filename": "simpleperf/generate_art_jni_method_table.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1038443
+      },
+      "writtenOn": "2021-01-15T12:28:24Z",
+      "side": 1,
+      "message": "This is also likely a problem, as native methods don\u0027t necessarily need to to through this registration - which means some methods may be missed.",
+      "range": {
+        "startLine": 51,
+        "startChar": 45,
+        "endLine": 51,
+        "endChar": 70
+      },
+      "revId": "6af247f88c3d03190c955db192fb56ba7f6739c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
