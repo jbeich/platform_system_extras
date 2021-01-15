@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "11b12220_18c21ea2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1088076
+      },
+      "writtenOn": "2021-01-15T17:52:33Z",
+      "side": 1,
+      "message": "system/extras/libfec/test/Android.bp:44:1: module \"fec_unittest\" variant \"linux_glibc_x86_64\": module source path \"system/extras/libfec/test/fec\" does not exist\n\"\u0015out/soong/build.ninja*\u0013exited with code: 1\n\nIt failed some build.seems build dependency and package rule are not exactly exchangeable.",
+      "revId": "69eafa83c34b92cfe0ad02c1bc6dfd1b2a78e9f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
