@@ -47,7 +47,7 @@ cc_test_host {
     srcs: ["fec_unittest.cpp"],
 
     gtest: true,
-    required: [
+    data: [
         "avbtool",
         "fec",
     ],
