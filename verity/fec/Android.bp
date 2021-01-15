@@ -1,6 +1,7 @@
 cc_binary_host {
     name: "fec",
 
+    compile_multilib: "both",
     target: {
         linux_glibc: {
             sanitize: {
