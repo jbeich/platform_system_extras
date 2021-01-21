@@ -1,3 +1,13 @@
+package {
+    default_applicable_licenses: ["system_extras_app-launcher_license"],
+}
+
+license {
+    name: "system_extras_app-launcher_license",
+    visibility: [":__subpackages__"],
+    license_kinds: ["legacy_notice"],
+}
+
 cc_defaults {
     name: "computestats-defaults",
 

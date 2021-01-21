@@ -12,6 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+package {
+    default_applicable_licenses: ["system_extras_tests_license"],
+}
+
 cc_test {
     name: "recovery_test",
     srcs: ["recovery_test.cpp"],

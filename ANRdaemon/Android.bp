@@ -1,3 +1,13 @@
+package {
+    default_applicable_licenses: ["system_extras_ANRdaemon_license"],
+}
+
+license {
+    name: "system_extras_ANRdaemon_license",
+    visibility: [":__subpackages__"],
+    license_kinds: ["SPDX-license-identifier-BSD"],
+}
+
 cc_binary {
     name: "anrd",
     srcs: ["ANRdaemon.cpp"],

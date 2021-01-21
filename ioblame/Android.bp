@@ -1,3 +1,13 @@
+package {
+    default_applicable_licenses: ["system_extras_ioblame_license"],
+}
+
+license {
+    name: "system_extras_ioblame_license",
+    visibility: [":__subpackages__"],
+    license_kinds: ["legacy_notice"],
+}
+
 sh_binary_host {
     name: "ioblame",
     src: "ioblame.sh",

@@ -1,3 +1,13 @@
+package {
+    default_applicable_licenses: ["system_extras_zram-perf_license"],
+}
+
+license {
+    name: "system_extras_zram-perf_license",
+    visibility: [":__subpackages__"],
+    license_kinds: ["legacy_notice"],
+}
+
 cc_binary {
     name: "zram-perf",
     cflags: [
