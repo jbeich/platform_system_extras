@@ -17,10 +17,16 @@
 cc_binary {
     name: "vbmake",
     host_supported: true,
-    shared_libs: [
+    static_libs: [
         "libvbmeta",
     ],
     srcs: [
         "vbmake.cc",
     ],
+    compile_multilib: "both",
+    multilib: {
+        lib32: {
+            suffix: "32",
+        },
+    },
 }

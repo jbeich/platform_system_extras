@@ -6,9 +6,6 @@ cc_binary_host {
         lib32: {
             suffix: "32",
         },
-        lib64: {
-            suffix: "",
-        },
     },
     target: {
         linux_glibc: {
