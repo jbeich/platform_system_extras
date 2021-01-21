@@ -23,4 +23,10 @@ cc_binary {
     srcs: [
         "vbmake.cc",
     ],
+    compile_multilib: "both",
+    multilib: {
+        lib32: {
+            suffix: "32",
+        },
+    },
 }
