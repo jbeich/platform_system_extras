@@ -1801,17 +1801,6 @@ class TestRecordingRealApps(TestBase):
         self.check_symbol_in_record_file('PlayScene::DoFrame')
 
 
-class TestArtJniMethods(unittest.TestCase):
-    def test_generate_art_jni_methods(self):
-        generate_script_path = Path(__file__).absolute(
-        ).parents[1] / 'generate_art_jni_method_table.py'
-        if not generate_script_path.exists():
-            print('skip this test because %s is missing' % generate_script_path)
-            return
-        proc = subprocess.run([generate_script_path, '--check-only'])
-        self.assertEqual(proc.returncode, 0)
-
-
 def get_all_tests():
     tests = []
     for name, value in globals().items():
