@@ -45,7 +45,7 @@ struct CallChainReportEntry {
 
 class CallChainReportBuilder {
  public:
-  CallChainReportBuilder(ThreadTree& thread_tree) : thread_tree_(thread_tree) {}
+  CallChainReportBuilder(ThreadTree& thread_tree);
   // If true, remove interpreter frames both before and after a Java frame.
   // Default is true.
   void SetRemoveArtFrame(bool enable) { remove_art_frame_ = enable; }
