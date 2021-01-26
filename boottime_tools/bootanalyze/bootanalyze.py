@@ -20,13 +20,13 @@ bootanalyze read logcat and dmesg loga and determines key points for boot.
 """
 
 import argparse
+import asyncio
 import collections
 import datetime
 import math
 import operator
 import os
 import re
-import select
 import subprocess
 import sys
 import time
@@ -319,15 +319,16 @@ def iterate(args, search_events_pattern, timings_pattern, shutdown_events_patter
                                                       ' shell su root dmesg -w', timings_pattern,\
                                                       [KERNEL_BOOT_COMPLETE], True)
 
-  logcat_stop_events = [LOGCAT_BOOT_COMPLETE, KERNEL_BOOT_COMPLETE, LAUNCHER_START]
+  # logcat_stop_events = [LOGCAT_BOOT_COMPLETE, KERNEL_BOOT_COMPLETE, LAUNCHER_START]
+  logcat_stop_events = [LOGCAT_BOOT_COMPLETE, KERNEL_BOOT_COMPLETE]
   if args.fs_check:
     logcat_stop_events.append("FsStat")
   logcat_events, logcat_timing_events = collect_events(
     search_events_pattern, ADB_CMD + ' logcat -b all -v epoch', timings_pattern,\
     logcat_stop_events, False)
   logcat_event_time = extract_time(logcat_events, TIME_LOGCAT, float)
-  logcat_original_time = extract_time(logcat_events, TIME_LOGCAT, str);
-  dmesg_event_time = extract_time(dmesg_events, TIME_DMESG, float);
+  logcat_original_time = extract_time(logcat_events, TIME_LOGCAT, str)
+  dmesg_event_time = extract_time(dmesg_events, TIME_DMESG, float)
   boottime_events = fetch_boottime_property()
   events = {}
   events_to_correct = []
@@ -633,28 +634,42 @@ def collect_logcat_for_shutdown(capture_log_on_error, shutdown_events_pattern,\
 
 
 def collect_events(search_events, command, timings, stop_events, disable_timing_after_zygote):
+  if sys.platform == "win32":
+    loop = asyncio.ProactorEventLoop()
+    asyncio.set_event_loop(loop)
+  loop = asyncio.new_event_loop()
+
+  result = loop.run_until_complete(collect_events_async(search_events, command, timings,\
+                                                        stop_events,\
+                                                        disable_timing_after_zygote))
+
+  loop.close()
+  return result
+
+async def collect_events_async(search_events, command, timings, stop_events,\
+                               disable_timing_after_zygote):
   events = collections.OrderedDict()
   timing_events = {}
-  process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
+  process = await asyncio.create_subprocess_exec(*command.split(' '), stdout=asyncio.subprocess.PIPE)
   data_available = stop_events is None
   zygote_pids = []
   start_time = time.time()
   zygote_found = False
 
   line = None
-  read_poll = select.poll()
-  read_poll.register(process.stdout, select.POLLIN)
   while True:
     time_left = start_time + max_wait_time - time.time()
     if time_left <= 0:
       print("timeout waiting for event, continue", time_left)
       break
-    read_r = read_poll.poll(time_left * 1000.0)
-    if len(read_r) > 0 and read_r[0][1] == select.POLLIN:
-      line = process.stdout.readline().decode('utf-8', 'ignore')
-    else:
+    try:
+      line = await asyncio.wait_for(process.stdout.readline(), time_left)
+    except asyncio.TimeoutError:
       print("poll timeout waiting for event, continue", time_left)
       break
+    if not line:
+      break
+    line = line.decode('utf-8', 'ignore')
     if not data_available:
       print("Collecting data samples from '%s'. Please wait...\n" % command)
       data_available = True
@@ -682,7 +697,8 @@ def collect_events(search_events, command, timings, stop_events, disable_timing_
       timing_events[timing_event].append(line)
       debug("timing_event[{0}] captured: {1}".format(timing_event, line))
 
-  process.terminate()
+  process.kill()
+  await process.wait()
   return events, timing_events
 
 def fetch_boottime_property():
@@ -742,8 +758,19 @@ def extract_time(events, pattern, date_transform_function):
   return result
 
 
+### Return all connected devices that are online and authorized.
+def get_connected_devices():
+  DEVICE_REGEX = r"^(\S+)\s+(\w+)\r*$"
+  result = subprocess.check_output("adb devices", shell=True).decode('utf-8', 'ignore')
+  matches = re.findall(DEVICE_REGEX, result, re.MULTILINE)
+  devices = []
+  for match in matches:
+    if match[1] == 'device':
+      devices.append(match[0])
+  return devices
+
 def do_reboot(serial, use_adb_reboot):
-  original_devices = subprocess.check_output("adb devices", shell=True)
+  original_devices = get_connected_devices()
   if use_adb_reboot:
     print('Rebooting the device using adb reboot')
     run_adb_cmd('reboot')
@@ -753,9 +780,9 @@ def do_reboot(serial, use_adb_reboot):
   # Wait for the device to go away
   retry = 0
   while retry < 20:
-    current_devices = subprocess.check_output("adb devices", shell=True).decode('utf-8', 'ignore')
+    current_devices = get_connected_devices()
     if original_devices != current_devices:
-      if not serial or (serial and current_devices.find(serial) < 0):
+      if not serial or (serial and serial not in current_devices):
         return True
     time.sleep(1)
     retry += 1
