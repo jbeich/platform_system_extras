@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4260de2f_37632395",
+        "filename": "simpleperf/art_jni_method_table.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1038443
+      },
+      "writtenOn": "2021-01-26T22:17:19Z",
+      "side": 0,
+      "message": "For simpler review, maybe do a clean revert the change that introduced this?",
+      "revId": "4ea80587d98b8de4f87702cf8724d06f57b31aac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
