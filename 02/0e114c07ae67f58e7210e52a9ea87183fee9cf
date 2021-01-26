@@ -1,0 +1,10 @@
+Code-Review+2: Elliott Hughes <enh@google.com>
+Code-Review+1: Suren Baghdasaryan <surenb@google.com>
+Presubmit-Verified+2: Treehugger Robot <treehugger-gerrit@google.com>
+Open-Source-Licensing+1: Lint 🤖 <ayeaye-gerrit@google.com>
+Lint+1: Lint 🤖 <ayeaye-gerrit@google.com>
+Submitted-by: Edgar Arriaga <edgararriaga@google.com>
+Submitted-at: Tue, 26 Jan 2021 19:29:34 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/system/extras/+/1536081
+Project: platform/system/extras
+Branch: refs/heads/master
