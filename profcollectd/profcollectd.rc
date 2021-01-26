@@ -3,6 +3,7 @@ service profcollectd /system/bin/profcollectd boot
     disabled
     user root
     group root wakelock
+    oneshot
     writepid /dev/cpuset/system-background/tasks
 
 on property:persist.device_config.profcollect_native_boot.enabled=true
