@@ -28,20 +28,19 @@ static std::unique_ptr<Command> ReportSampleCmd() {
 }
 
 TEST(cmd_report_sample, text) {
-  ASSERT_TRUE(
-      ReportSampleCmd()->Run({"-i", GetTestData(PERF_DATA_WITH_SYMBOLS)}));
+  ASSERT_TRUE(ReportSampleCmd()->Run({"-i", GetTestData(PERF_DATA_WITH_SYMBOLS)}));
 }
 
 TEST(cmd_report_sample, output_option) {
   TemporaryFile tmpfile;
-  ASSERT_TRUE(ReportSampleCmd()->Run(
-      {"-i", GetTestData(PERF_DATA_WITH_SYMBOLS), "-o", tmpfile.path}));
+  ASSERT_TRUE(
+      ReportSampleCmd()->Run({"-i", GetTestData(PERF_DATA_WITH_SYMBOLS), "-o", tmpfile.path}));
 }
 
 TEST(cmd_report_sample, show_callchain_option) {
   TemporaryFile tmpfile;
-  ASSERT_TRUE(ReportSampleCmd()->Run({"-i", GetTestData(CALLGRAPH_FP_PERF_DATA),
-                                      "-o", tmpfile.path, "--show-callchain"}));
+  ASSERT_TRUE(ReportSampleCmd()->Run(
+      {"-i", GetTestData(CALLGRAPH_FP_PERF_DATA), "-o", tmpfile.path, "--show-callchain"}));
 }
 
 static void GetProtobufReport(const std::string& test_data_file, std::string* protobuf_report,
@@ -52,8 +51,8 @@ static void GetProtobufReport(const std::string& test_data_file, std::string* pr
                                    "--protobuf"};
   args.insert(args.end(), extra_args.begin(), extra_args.end());
   ASSERT_TRUE(ReportSampleCmd()->Run(args));
-  ASSERT_TRUE(ReportSampleCmd()->Run({"--dump-protobuf-report", tmpfile.path,
-                                      "-o", tmpfile2.path}));
+  ASSERT_TRUE(
+      ReportSampleCmd()->Run({"--dump-protobuf-report", tmpfile.path, "-o", tmpfile2.path}));
   ASSERT_TRUE(android::base::ReadFileToString(tmpfile2.path, protobuf_report));
 }
 
@@ -107,8 +106,7 @@ TEST(cmd_report_sample, app_package_name_in_meta_info) {
 TEST(cmd_report_sample, remove_unknown_kernel_symbols) {
   std::string data;
   // Test --remove-unknown-kernel-symbols on perf.data with kernel_symbols_available=false.
-  GetProtobufReport(PERF_DATA_WITH_KERNEL_SYMBOLS_AVAILABLE_FALSE, &data,
-                    {"--show-callchain"});
+  GetProtobufReport(PERF_DATA_WITH_KERNEL_SYMBOLS_AVAILABLE_FALSE, &data, {"--show-callchain"});
   ASSERT_NE(data.find("time: 1368182962424044"), std::string::npos);
   ASSERT_NE(data.find("path: [kernel.kallsyms]"), std::string::npos);
   ASSERT_NE(data.find("path: /system/lib64/libc.so"), std::string::npos);
@@ -123,8 +121,7 @@ TEST(cmd_report_sample, remove_unknown_kernel_symbols) {
   ASSERT_NE(data.find("path: /system/lib64/libc.so"), std::string::npos);
 
   // Test --remove-unknown-kernel-symbols on perf.data with kernel_symbols_available=true.
-  GetProtobufReport(PERF_DATA_WITH_KERNEL_SYMBOLS_AVAILABLE_TRUE, &data,
-                    {"--show-callchain"});
+  GetProtobufReport(PERF_DATA_WITH_KERNEL_SYMBOLS_AVAILABLE_TRUE, &data, {"--show-callchain"});
   ASSERT_NE(data.find("time: 1368297633794862"), std::string::npos);
   ASSERT_NE(data.find("path: [kernel.kallsyms]"), std::string::npos);
   ASSERT_NE(data.find("symbol: binder_ioctl_write_read"), std::string::npos);
@@ -146,6 +143,23 @@ TEST(cmd_report_sample, show_art_frames_option) {
   ASSERT_NE(data.find("artMterpAsmInstructionStart"), std::string::npos);
 }
 
+TEST(cmd_report_sample, show_execution_type_option) {
+  std::string data;
+  GetProtobufReport("perf_display_bitmaps.data", &data,
+                    {"--show-callchain", "--show-execution-type"});
+  ASSERT_NE(data.find("execution_type: interpreted_jvm_method"), std::string::npos);
+  // We convert JIT frames to map to dex files. So there is no file named jit_app_cache in the
+  // report. But the execution type of a JIT frame isn't changed.
+  ASSERT_EQ(data.find("jit_app_cache"), std::string::npos);
+  ASSERT_NE(data.find("execution_type: jit_jvm_method"), std::string::npos);
+  // art_method is shown only when --show-art-frames is used.
+  ASSERT_EQ(data.find("execution_type: art_method"), std::string::npos);
+
+  GetProtobufReport("perf_display_bitmaps.data", &data,
+                    {"--show-callchain", "--show-execution-type", "--show-art-frames"});
+  ASSERT_NE(data.find("execution_type: art_method"), std::string::npos);
+}
+
 TEST(cmd_report_sample, show_symbols_before_and_after_demangle) {
   std::string data;
   GetProtobufReport(PERF_DATA_WITH_INTERPRETER_FRAMES, &data, {"--show-callchain"});
@@ -162,4 +176,12 @@ TEST(cmd_report_sample, symdir_option) {
   GetProtobufReport(PERF_DATA_FOR_BUILD_ID_CHECK, &data,
                     {"--symdir", GetTestDataDir() + CORRECT_SYMFS_FOR_BUILD_ID_CHECK});
   ASSERT_NE(data.find("symbol: main"), std::string::npos);
+}
+
+TEST(cmd_report_sample, show_art_jni_methods) {
+  std::string data;
+  GetProtobufReport("perf_display_bitmaps.data", &data, {"--show-callchain"});
+  ASSERT_NE(data.find("art::Method_invoke"), std::string::npos);
+  // Don't show art_jni_trampoline.
+  ASSERT_EQ(data.find("art_jni_trampoline"), std::string::npos);
 }

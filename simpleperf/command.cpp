@@ -177,6 +177,7 @@ extern void RegisterHelpCommand();
 extern void RegisterInjectCommand();
 extern void RegisterListCommand();
 extern void RegisterKmemCommand();
+extern void RegisterMergeCommand();
 extern void RegisterRecordCommand();
 extern void RegisterReportCommand();
 extern void RegisterReportSampleCommand();
@@ -184,6 +185,7 @@ extern void RegisterStatCommand();
 extern void RegisterDebugUnwindCommand();
 extern void RegisterTraceSchedCommand();
 extern void RegisterAPICommands();
+extern void RegisterMonitorCommand();
 
 class CommandRegister {
  public:
@@ -192,6 +194,7 @@ class CommandRegister {
     RegisterHelpCommand();
     RegisterInjectCommand();
     RegisterKmemCommand();
+    RegisterMergeCommand();
     RegisterReportCommand();
     RegisterReportSampleCommand();
 #if defined(__linux__)
@@ -200,6 +203,7 @@ class CommandRegister {
     RegisterStatCommand();
     RegisterDebugUnwindCommand();
     RegisterTraceSchedCommand();
+    RegisterMonitorCommand();
 #if defined(__ANDROID__)
     RegisterAPICommands();
 #endif
@@ -209,8 +213,8 @@ class CommandRegister {
 
 CommandRegister command_register;
 
-static void StderrLogger(android::base::LogId, android::base::LogSeverity severity,
-                         const char*, const char* file, unsigned int line, const char* message) {
+static void StderrLogger(android::base::LogId, android::base::LogSeverity severity, const char*,
+                         const char* file, unsigned int line, const char* message) {
   static const char log_characters[] = "VDIWEFF";
   char severity_char = log_characters[severity];
   fprintf(stderr, "simpleperf %c %s:%u] %s\n", severity_char, file, line, message);
@@ -240,8 +244,8 @@ bool RunSimpleperfCmd(int argc, char** argv) {
     if (option_name == "-h" || option_name == "--help") {
       args.insert(args.begin(), "help");
     } else if (option_name == "--log") {
-      if (!GetLogSeverity(argv[i+1], &log_severity)) {
-        LOG(ERROR) << "Unknown log severity: " << argv[i+1];
+      if (!GetLogSeverity(argv[i + 1], &log_severity)) {
+        LOG(ERROR) << "Unknown log severity: " << argv[i + 1];
       }
       ++i;
 #if defined(__ANDROID__)

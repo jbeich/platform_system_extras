@@ -18,9 +18,11 @@
 #define SIMPLE_PERF_UTILS_H_
 
 #include <stddef.h>
+#include <stdio.h>
 #include <time.h>
 
 #include <functional>
+#include <optional>
 #include <set>
 #include <string>
 #include <vector>
@@ -29,6 +31,8 @@
 #include <android-base/macros.h>
 #include <android-base/unique_fd.h>
 #include <ziparchive/zip_archive.h>
+
+namespace simpleperf {
 
 static inline uint64_t AlignDown(uint64_t value, uint64_t alignment) {
   return value & ~(alignment - 1);
@@ -51,12 +55,9 @@ static inline uint64_t Align(uint64_t value, uint64_t alignment) {
 class OneTimeFreeAllocator {
  public:
   explicit OneTimeFreeAllocator(size_t unit_size = 8192u)
-      : unit_size_(unit_size), cur_(nullptr), end_(nullptr) {
-  }
+      : unit_size_(unit_size), cur_(nullptr), end_(nullptr) {}
 
-  ~OneTimeFreeAllocator() {
-    Clear();
-  }
+  ~OneTimeFreeAllocator() { Clear(); }
 
   void Clear();
   const char* AllocateString(std::string_view s);
@@ -66,6 +67,24 @@ class OneTimeFreeAllocator {
   std::vector<char*> v_;
   char* cur_;
   char* end_;
+};
+
+class LineReader {
+ public:
+  explicit LineReader(FILE* fp) : fp_(fp), buf_(nullptr), bufsize_(0) {}
+
+  ~LineReader() {
+    free(buf_);
+    fclose(fp_);
+  }
+
+  char* ReadLine();
+  size_t MaxLineSize() { return bufsize_; }
+
+ private:
+  FILE* fp_;
+  char* buf_;
+  size_t bufsize_;
 };
 
 class FileHelper {
@@ -150,16 +169,6 @@ std::string GetLogSeverityName();
 
 bool IsRoot();
 
-struct KernelSymbol {
-  uint64_t addr;
-  char type;
-  const char* name;
-  const char* module;  // If nullptr, the symbol is not in a kernel module.
-};
-
-bool ProcessKernelSymbols(std::string& symbol_data,
-                          const std::function<bool(const KernelSymbol&)>& callback);
-
 size_t GetPageSize();
 
 uint64_t ConvertBytesToValue(const char* bytes, uint32_t size);
@@ -168,16 +177,15 @@ timeval SecondToTimeval(double time_in_sec);
 
 std::string GetSimpleperfVersion();
 
-std::vector<int> GetCpusFromString(const std::string& s);
-
-namespace {
+std::optional<std::set<int>> GetCpusFromString(const std::string& s);
+std::optional<std::set<pid_t>> GetTidsFromString(const std::string& s, bool check_if_exists);
 
 // from boost::hash_combine
 template <typename T>
-void HashCombine(size_t& seed, const T& val) {
+static inline void HashCombine(size_t& seed, const T& val) {
   seed ^= std::hash<T>()(val) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-}  // namespace
+}  // namespace simpleperf
 
 #endif  // SIMPLE_PERF_UTILS_H_

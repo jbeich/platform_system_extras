@@ -29,8 +29,9 @@ import subprocess
 import sys
 import time
 
-from utils import AdbHelper, bytes_to_str, extant_dir, get_script_dir, get_target_binary_path
-from utils import log_debug, log_info, log_exit, ReadElf, remove, set_log_level, str_to_bytes
+from simpleperf_utils import (
+    AdbHelper, bytes_to_str, extant_dir, get_script_dir, get_target_binary_path, log_debug,
+    log_info, log_exit, ReadElf, remove, set_log_level, str_to_bytes)
 
 NATIVE_LIBS_DIR_ON_DEVICE = '/data/local/tmp/native_libs/'
 
@@ -351,9 +352,16 @@ class AppProfiler(ProfilerBase):
 class NativeProgramProfiler(ProfilerBase):
     """Profile a native program."""
     def start(self):
-        pid = int(self.adb.check_run_and_return_output(['shell', 'pidof',
-                                                        self.args.native_program]))
-        self.start_profiling(['-p', str(pid)])
+      log_info('Waiting for native process %s' % self.args.native_program)
+      while True:
+        (result, pid) = self.adb.run_and_return_output(['shell', 'pidof',
+                                                      self.args.native_program])
+        if not result:
+          # Wait for 1 millisecond.
+          time.sleep(0.001)
+        else:
+          self.start_profiling(['-p', str(int(pid))])
+          break
 
 
 class NativeCommandProfiler(ProfilerBase):

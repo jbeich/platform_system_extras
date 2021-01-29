@@ -17,9 +17,11 @@
 // Add fake functions to build successfully on darwin.
 #include <android-base/logging.h>
 
-#include "read_dex_file.h"
-#include "environment.h"
 #include "OfflineUnwinder.h"
+#include "environment.h"
+#include "read_dex_file.h"
+
+namespace simpleperf {
 
 bool GetKernelBuildId(BuildId*) {
   return false;
@@ -42,8 +44,6 @@ bool ReadSymbolsFromDexFile(const std::string&, const std::vector<uint64_t>&,
 const char* GetTraceFsDir() {
   return nullptr;
 }
-
-namespace simpleperf {
 
 class NoOpOfflineUnwinder : public OfflineUnwinder {
  public:

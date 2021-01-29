@@ -27,6 +27,7 @@
 #include "event_type.h"
 #include "record.h"
 #include "record_file.h"
+#include "utils.h"
 
 #include "record_equal_test.h"
 
@@ -35,6 +36,8 @@ using namespace simpleperf::PerfFileFormat;
 
 class RecordFileTest : public ::testing::Test {
  protected:
+  void SetUp() override { close(tmpfile_.release()); }
+
   void AddEventType(const std::string& event_type_str) {
     std::unique_ptr<EventTypeAndModifier> event_type_modifier = ParseEventType(event_type_str);
     ASSERT_TRUE(event_type_modifier != nullptr);
@@ -62,8 +65,8 @@ TEST_F(RecordFileTest, smoke) {
   ASSERT_TRUE(writer->WriteAttrSection(attr_ids_));
 
   // Write data section.
-  MmapRecord mmap_record(*(attr_ids_[0].attr), true, 1, 1, 0x1000, 0x2000,
-                         0x3000, "mmap_record_example", attr_ids_[0].ids[0]);
+  MmapRecord mmap_record(*(attr_ids_[0].attr), true, 1, 1, 0x1000, 0x2000, 0x3000,
+                         "mmap_record_example", attr_ids_[0].ids[0]);
   ASSERT_TRUE(writer->WriteRecord(mmap_record));
 
   // Write feature section.

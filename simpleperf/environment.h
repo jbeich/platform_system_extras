@@ -26,14 +26,18 @@
 #endif
 
 #include <functional>
+#include <optional>
 #include <set>
 #include <string>
+#include <utility>
 #include <vector>
 
 #include <android-base/file.h>
 
 #include "build_id.h"
 #include "perf_regs.h"
+
+namespace simpleperf {
 
 std::vector<int> GetOnlineCpus();
 
@@ -71,9 +75,6 @@ std::vector<pid_t> GetThreadsInProcess(pid_t pid);
 bool ReadThreadNameAndPid(pid_t tid, std::string* comm, pid_t* pid);
 bool GetProcessForThread(pid_t tid, pid_t* pid);
 bool GetThreadName(pid_t tid, std::string* name);
-
-bool GetValidThreadsFromThreadString(const std::string& tid_str, std::set<pid_t>* tid_set);
-
 bool CheckPerfEventLimit();
 bool SetPerfEventLimits(uint64_t sample_freq, size_t cpu_percent, uint64_t mlock_kb);
 bool GetMaxSampleFrequency(uint64_t* max_sample_freq);
@@ -82,7 +83,6 @@ bool GetCpuTimeMaxPercent(size_t* percent);
 bool SetCpuTimeMaxPercent(size_t percent);
 bool GetPerfEventMlockKb(uint64_t* mlock_kb);
 bool SetPerfEventMlockKb(uint64_t mlock_kb);
-bool CheckKernelSymbolAddresses();
 bool CanRecordRawData();
 
 #if defined(__linux__)
@@ -104,7 +104,6 @@ ArchType GetMachineArch();
 void PrepareVdsoFile();
 
 std::set<pid_t> WaitForAppProcesses(const std::string& package_name);
-bool IsAppDebuggable(const std::string& package_name);
 void SetRunInAppToolForTesting(bool run_as, bool simpleperf_app_runner);  // for testing only
 bool RunInAppContext(const std::string& app_package_name, const std::string& cmd,
                      const std::vector<std::string>& args, size_t workload_args_size,
@@ -129,7 +128,7 @@ class ScopedTempFiles {
 bool SignalIsIgnored(int signo);
 // Return 0 if no android version.
 int GetAndroidVersion();
-bool GetKernelVersion(int* major, int* minor);
+std::optional<std::pair<int, int>> GetKernelVersion();
 
 constexpr int kAndroidVersionP = 9;
 
@@ -140,5 +139,7 @@ bool MappedFileOnlyExistInMemory(const char* filename);
 std::string GetCompleteProcessName(pid_t pid);
 
 const char* GetTraceFsDir();
+
+}  // namespace simpleperf
 
 #endif  // SIMPLE_PERF_ENVIRONMENT_H_

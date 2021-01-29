@@ -33,6 +33,7 @@
 #include <android-base/strings.h>
 #include <android-base/unique_fd.h>
 
+#include "IOEventLoop.h"
 #include "cmd_stat_impl.h"
 #include "command.h"
 #include "environment.h"
@@ -40,14 +41,12 @@
 #include "event_fd.h"
 #include "event_selection_set.h"
 #include "event_type.h"
-#include "IOEventLoop.h"
 #include "utils.h"
 #include "workload.h"
 
-using android::base::Split;
-using namespace simpleperf;
-
 namespace simpleperf {
+
+using android::base::Split;
 
 static std::vector<std::string> default_measured_event_types{
     "cpu-cycles",   "stalled-cycles-frontend", "stalled-cycles-backend",
@@ -293,8 +292,6 @@ std::string CounterSummaries::GetRateComment(const CounterSummary& s, char sep) 
   return "";
 }
 
-}  // namespace simpleperf
-
 namespace {
 
 // devfreq may use performance counters to calculate memory latency (as in
@@ -342,8 +339,9 @@ class DevfreqCounters {
 class StatCommand : public Command {
  public:
   StatCommand()
-      : Command("stat", "gather performance counter information",
-                // clang-format off
+      : Command(
+            "stat", "gather performance counter information",
+            // clang-format off
 "Usage: simpleperf stat [options] [command [command-args]]\n"
 "       Gather performance counter information of running [command].\n"
 "       And -a/-p/-t option can be used to change target of counter information.\n"
@@ -413,8 +411,8 @@ class StatCommand : public Command {
 "--out-fd <fd>    Write output to a file descriptor.\n"
 "--stop-signal-fd <fd>   Stop stating when fd is readable.\n"
 #endif
-                // clang-format on
-                ),
+            // clang-format on
+            ),
         verbose_mode_(false),
         system_wide_collection_(false),
         child_inherit_(true),
@@ -439,8 +437,7 @@ class StatCommand : public Command {
   void SetEventSelectionFlags();
   void MonitorEachThread();
   void AdjustToIntervalOnlyValues(std::vector<CountersInfo>& counters);
-  bool ShowCounters(const std::vector<CountersInfo>& counters,
-                    double duration_in_sec, FILE* fp);
+  bool ShowCounters(const std::vector<CountersInfo>& counters, double duration_in_sec, FILE* fp);
 
   bool verbose_mode_;
   bool system_wide_collection_;
@@ -521,8 +518,7 @@ bool StatCommand::Run(const std::vector<std::string>& args) {
       std::set<pid_t> pids = WaitForAppProcesses(app_package_name_);
       event_selection_set_.AddMonitoredProcesses(pids);
     } else {
-      LOG(ERROR)
-          << "No threads to monitor. Try `simpleperf help stat` for help\n";
+      LOG(ERROR) << "No threads to monitor. Try `simpleperf help stat` for help\n";
       return false;
     }
   } else {
@@ -568,9 +564,7 @@ bool StatCommand::Run(const std::vector<std::string>& args) {
   if (need_to_check_targets && !event_selection_set_.StopWhenNoMoreTargets()) {
     return false;
   }
-  auto exit_loop_callback = [loop]() {
-    return loop->ExitLoop();
-  };
+  auto exit_loop_callback = [loop]() { return loop->ExitLoop(); };
   if (!loop->AddSignalEvents({SIGCHLD, SIGINT, SIGTERM, SIGHUP}, exit_loop_callback)) {
     return false;
   }
@@ -585,26 +579,23 @@ bool StatCommand::Run(const std::vector<std::string>& args) {
     }
   }
   auto print_counters = [&]() {
-      auto end_time = std::chrono::steady_clock::now();
-      if (!event_selection_set_.ReadCounters(&counters)) {
-        return false;
-      }
-      double duration_in_sec =
-      std::chrono::duration_cast<std::chrono::duration<double>>(end_time -
-                                                                start_time)
-      .count();
-      if (interval_only_values_) {
-        AdjustToIntervalOnlyValues(counters);
-      }
-      if (!ShowCounters(counters, duration_in_sec, fp)) {
-        return false;
-      }
-      return true;
+    auto end_time = std::chrono::steady_clock::now();
+    if (!event_selection_set_.ReadCounters(&counters)) {
+      return false;
+    }
+    double duration_in_sec =
+        std::chrono::duration_cast<std::chrono::duration<double>>(end_time - start_time).count();
+    if (interval_only_values_) {
+      AdjustToIntervalOnlyValues(counters);
+    }
+    if (!ShowCounters(counters, duration_in_sec, fp)) {
+      return false;
+    }
+    return true;
   };
 
   if (interval_in_ms_ != 0) {
-    if (!loop->AddPeriodicEvent(SecondToTimeval(interval_in_ms_ / 1000.0),
-                                print_counters)) {
+    if (!loop->AddPeriodicEvent(SecondToTimeval(interval_in_ms_ / 1000.0), print_counters)) {
       return false;
     }
   }
@@ -642,7 +633,11 @@ bool StatCommand::ParseOptions(const std::vector<std::string>& args,
     app_package_name_ = *value->str_value;
   }
   if (auto value = options.PullValue("--cpu"); value) {
-    cpus_ = GetCpusFromString(*value->str_value);
+    if (auto cpus = GetCpusFromString(*value->str_value); cpus) {
+      cpus_.assign(cpus->begin(), cpus->end());
+    } else {
+      return false;
+    }
   }
 
   csv_ = options.PullBoolValue("--csv");
@@ -655,21 +650,17 @@ bool StatCommand::ParseOptions(const std::vector<std::string>& args,
   }
   interval_only_values_ = options.PullBoolValue("--interval-only-values");
 
-  if (auto values = options.PullValues("-e"); values) {
-    for (const auto& value : values.value()) {
-      for (const auto& event_type : Split(*value.str_value, ",")) {
-        if (!event_selection_set_.AddEventType(event_type)) {
-          return false;
-        }
+  for (const OptionValue& value : options.PullValues("-e")) {
+    for (const auto& event_type : Split(*value.str_value, ",")) {
+      if (!event_selection_set_.AddEventType(event_type)) {
+        return false;
       }
     }
   }
 
-  if (auto values = options.PullValues("--group"); values) {
-    for (const auto& value : values.value()) {
-      if (!event_selection_set_.AddEventGroup(Split(*value.str_value, ","))) {
-        return false;
-      }
+  for (const OptionValue& value : options.PullValues("--group")) {
+    if (!event_selection_set_.AddEventGroup(Split(*value.str_value, ","))) {
+      return false;
     }
   }
 
@@ -686,13 +677,11 @@ bool StatCommand::ParseOptions(const std::vector<std::string>& args,
   report_per_core_ = options.PullBoolValue("--per-core");
   report_per_thread_ = options.PullBoolValue("--per-thread");
 
-  if (auto values = options.PullValues("-p"); values) {
-    for (const auto& value : values.value()) {
-      std::set<pid_t> pids;
-      if (!GetValidThreadsFromThreadString(*value.str_value, &pids)) {
-        return false;
-      }
-      event_selection_set_.AddMonitoredProcesses(pids);
+  for (const OptionValue& value : options.PullValues("-p")) {
+    if (auto pids = GetTidsFromString(*value.str_value, true); pids) {
+      event_selection_set_.AddMonitoredProcesses(pids.value());
+    } else {
+      return false;
     }
   }
 
@@ -704,18 +693,16 @@ bool StatCommand::ParseOptions(const std::vector<std::string>& args,
     stop_signal_fd_.reset(static_cast<int>(value->uint_value));
   }
 
-  if (auto values = options.PullValues("-t"); values) {
-    for (const auto& value : values.value()) {
-      std::set<pid_t> tids;
-      if (!GetValidThreadsFromThreadString(*value.str_value, &tids)) {
-        return false;
-      }
-      event_selection_set_.AddMonitoredThreads(tids);
+  for (const OptionValue& value : options.PullValues("-t")) {
+    if (auto tids = GetTidsFromString(*value.str_value, true); tids) {
+      event_selection_set_.AddMonitoredThreads(tids.value());
+    } else {
+      return false;
     }
   }
 
   if (auto value = options.PullValue("--tracepoint-events"); value) {
-    if (!SetTracepointEventsFilePath(*value->str_value)) {
+    if (!EventTypeManager::Instance().ReadTracepointsFromFile(*value->str_value)) {
       return false;
     }
   }
@@ -750,8 +737,7 @@ bool StatCommand::AddDefaultMeasuredEventTypes() {
     // It is not an error when some event types in the default list are not
     // supported by the kernel.
     const EventType* type = FindEventTypeByName(name);
-    if (type != nullptr &&
-        IsEventAttrSupported(CreateDefaultPerfEventAttr(*type), name)) {
+    if (type != nullptr && IsEventAttrSupported(CreateDefaultPerfEventAttr(*type), name)) {
       if (!event_selection_set_.AddEventType(name)) {
         return false;
       }
@@ -815,8 +801,8 @@ void StatCommand::AdjustToIntervalOnlyValues(std::vector<CountersInfo>& counters
   }
 }
 
-bool StatCommand::ShowCounters(const std::vector<CountersInfo>& counters,
-                               double duration_in_sec, FILE* fp) {
+bool StatCommand::ShowCounters(const std::vector<CountersInfo>& counters, double duration_in_sec,
+                               FILE* fp) {
   if (csv_) {
     fprintf(fp, "Performance counter statistics,\n");
   } else {
@@ -827,19 +813,18 @@ bool StatCommand::ShowCounters(const std::vector<CountersInfo>& counters,
     for (auto& counters_info : counters) {
       for (auto& counter_info : counters_info.counters) {
         if (csv_) {
-          fprintf(fp, "%s,tid,%d,cpu,%d,count,%" PRIu64 ",time_enabled,%" PRIu64
-                      ",time running,%" PRIu64 ",id,%" PRIu64 ",\n",
-                  counters_info.event_name.c_str(), counter_info.tid,
-                  counter_info.cpu, counter_info.counter.value,
-                  counter_info.counter.time_enabled,
+          fprintf(fp,
+                  "%s,tid,%d,cpu,%d,count,%" PRIu64 ",time_enabled,%" PRIu64
+                  ",time running,%" PRIu64 ",id,%" PRIu64 ",\n",
+                  counters_info.event_name.c_str(), counter_info.tid, counter_info.cpu,
+                  counter_info.counter.value, counter_info.counter.time_enabled,
                   counter_info.counter.time_running, counter_info.counter.id);
         } else {
           fprintf(fp,
                   "%s(tid %d, cpu %d): count %" PRIu64 ", time_enabled %" PRIu64
                   ", time running %" PRIu64 ", id %" PRIu64 "\n",
-                  counters_info.event_name.c_str(), counter_info.tid,
-                  counter_info.cpu, counter_info.counter.value,
-                  counter_info.counter.time_enabled,
+                  counters_info.event_name.c_str(), counter_info.tid, counter_info.cpu,
+                  counter_info.counter.value, counter_info.counter.time_enabled,
                   counter_info.counter.time_running, counter_info.counter.id);
         }
       }
@@ -896,11 +881,8 @@ bool StatCommand::ShowCounters(const std::vector<CountersInfo>& counters,
 
 }  // namespace
 
-namespace simpleperf {
-
 void RegisterStatCommand() {
-  RegisterCommand("stat",
-                  [] { return std::unique_ptr<Command>(new StatCommand); });
+  RegisterCommand("stat", [] { return std::unique_ptr<Command>(new StatCommand); });
 }
 
 }  // namespace simpleperf

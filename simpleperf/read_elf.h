@@ -22,6 +22,12 @@
 #include <string>
 #include "build_id.h"
 
+namespace llvm {
+class MemoryBuffer;
+}
+
+namespace simpleperf {
+
 // Read ELF functions are called in different situations, so it is hard to
 // decide whether to report error or not. So read ELF functions don't report
 // error when something wrong happens, instead they return ElfStatus, which
@@ -52,21 +58,21 @@ struct ElfFileSymbol {
   bool is_in_text_section;
   std::string name;
 
-  ElfFileSymbol() : vaddr(0), len(0), is_func(false), is_label(false), is_in_text_section(false) {
-  }
+  ElfFileSymbol() : vaddr(0), len(0), is_func(false), is_label(false), is_in_text_section(false) {}
 };
-
-namespace llvm {
-class MemoryBuffer;
-}
-
-namespace simpleperf {
 
 struct ElfSegment {
   uint64_t vaddr = 0;
   uint64_t file_offset = 0;
   uint64_t file_size = 0;
   bool is_executable = false;
+  bool is_load = false;
+};
+
+struct ElfSection {
+  std::string name;
+  uint64_t vaddr = 0;
+  uint64_t file_offset = 0;
 };
 
 class ElfFile {
@@ -85,6 +91,7 @@ class ElfFile {
   virtual bool Is64Bit() = 0;
   virtual llvm::MemoryBuffer* GetMemoryBuffer() = 0;
   virtual std::vector<ElfSegment> GetProgramHeader() = 0;
+  virtual std::vector<ElfSection> GetSectionHeader() = 0;
   virtual ElfStatus GetBuildId(BuildId* build_id) = 0;
 
   using ParseSymbolCallback = std::function<void(const ElfFileSymbol&)>;
@@ -99,11 +106,11 @@ class ElfFile {
   ElfFile() {}
 };
 
-}  // namespace simpleperf
-
 bool IsArmMappingSymbol(const char* name);
 ElfStatus IsValidElfFile(int fd, uint64_t file_offset = 0);
 bool IsValidElfFileMagic(const char* buf, size_t buf_size);
 bool GetBuildIdFromNoteSection(const char* section, size_t section_size, BuildId* build_id);
+
+}  // namespace simpleperf
 
 #endif  // SIMPLE_PERF_READ_ELF_H_

@@ -41,10 +41,10 @@
 #include "JITDebugReader.h"
 #include "utils.h"
 
-#define ELF_NOTE_GNU "GNU"
-#define NT_GNU_BUILD_ID 3
+namespace simpleperf {
 
-using namespace simpleperf;
+const static char* ELF_NOTE_GNU = "GNU";
+const static int NT_GNU_BUILD_ID = 3;
 
 std::ostream& operator<<(std::ostream& os, const ElfStatus& status) {
   switch (status) {
@@ -130,6 +130,16 @@ ElfStatus GetBuildIdFromNoteFile(const std::string& filename, BuildId* build_id)
   return ElfStatus::NO_ERROR;
 }
 
+bool IsArmMappingSymbol(const char* name) {
+  // Mapping symbols in arm, which are described in "ELF for ARM Architecture" and
+  // "ELF for ARM 64-bit Architecture". The regular expression to match mapping symbol
+  // is ^\$(a|d|t|x)(\..*)?$
+  return name[0] == '$' && strchr("adtx", name[1]) != nullptr &&
+         (name[2] == '\0' || name[2] == '.');
+}
+
+namespace {
+
 struct BinaryWrapper {
   std::unique_ptr<llvm::MemoryBuffer> buffer;
   std::unique_ptr<llvm::object::Binary> binary;
@@ -187,17 +197,8 @@ static ElfStatus OpenObjectFileInMemory(const char* data, size_t size, BinaryWra
   return ElfStatus::NO_ERROR;
 }
 
-bool IsArmMappingSymbol(const char* name) {
-  // Mapping symbols in arm, which are described in "ELF for ARM Architecture" and
-  // "ELF for ARM 64-bit Architecture". The regular expression to match mapping symbol
-  // is ^\$(a|d|t|x)(\..*)?$
-  return name[0] == '$' && strchr("adtx", name[1]) != nullptr && (name[2] == '\0' || name[2] == '.');
-}
-
-void ReadSymbolTable(llvm::object::symbol_iterator sym_begin,
-                     llvm::object::symbol_iterator sym_end,
-                     const std::function<void(const ElfFileSymbol&)>& callback,
-                     bool is_arm,
+void ReadSymbolTable(llvm::object::symbol_iterator sym_begin, llvm::object::symbol_iterator sym_end,
+                     const std::function<void(const ElfFileSymbol&)>& callback, bool is_arm,
                      const llvm::object::section_iterator& section_end) {
   for (; sym_begin != sym_end; ++sym_begin) {
     ElfFileSymbol symbol;
@@ -288,8 +289,8 @@ void AddSymbolForPltSection(const llvm::object::ELFObjectFile<ELFT>* elf,
 }
 
 template <class ELFT>
-void CheckSymbolSections(const llvm::object::ELFObjectFile<ELFT>* elf,
-                         bool* has_symtab, bool* has_dynsym) {
+void CheckSymbolSections(const llvm::object::ELFObjectFile<ELFT>* elf, bool* has_symtab,
+                         bool* has_dynsym) {
   *has_symtab = false;
   *has_dynsym = false;
   for (auto it = elf->section_begin(); it != elf->section_end(); ++it) {
@@ -307,8 +308,6 @@ void CheckSymbolSections(const llvm::object::ELFObjectFile<ELFT>* elf,
   }
 }
 
-namespace {
-
 template <typename T>
 class ElfFileImpl {};
 
@@ -318,26 +317,41 @@ class ElfFileImpl<llvm::object::ELFObjectFile<ELFT>> : public ElfFile {
   ElfFileImpl(BinaryWrapper&& wrapper, const llvm::object::ELFObjectFile<ELFT>* elf_obj)
       : wrapper_(std::move(wrapper)), elf_obj_(elf_obj), elf_(elf_obj->getELFFile()) {}
 
-  bool Is64Bit() override {
-    return elf_->getHeader()->getFileClass() == llvm::ELF::ELFCLASS64;
-  }
+  bool Is64Bit() override { return elf_->getHeader()->getFileClass() == llvm::ELF::ELFCLASS64; }
 
-  llvm::MemoryBuffer* GetMemoryBuffer() override {
-    return wrapper_.buffer.get();
-  }
+  llvm::MemoryBuffer* GetMemoryBuffer() override { return wrapper_.buffer.get(); }
 
   std::vector<ElfSegment> GetProgramHeader() override {
     auto program_headers = elf_->program_headers();
     std::vector<ElfSegment> segments(program_headers.size());
     for (size_t i = 0; i < program_headers.size(); i++) {
-      auto& phdr = program_headers[i];
+      const auto& phdr = program_headers[i];
       segments[i].vaddr = phdr.p_vaddr;
       segments[i].file_offset = phdr.p_offset;
       segments[i].file_size = phdr.p_filesz;
       segments[i].is_executable =
           (phdr.p_type == llvm::ELF::PT_LOAD) && (phdr.p_flags & llvm::ELF::PF_X);
+      segments[i].is_load = (phdr.p_type == llvm::ELF::PT_LOAD);
     }
     return segments;
+  }
+
+  std::vector<ElfSection> GetSectionHeader() override {
+    auto section_headers_or_err = elf_->sections();
+    if (!section_headers_or_err) {
+      return {};
+    }
+    const auto& section_headers = section_headers_or_err.get();
+    std::vector<ElfSection> sections(section_headers.size());
+    for (size_t i = 0; i < section_headers.size(); i++) {
+      const auto& shdr = section_headers[i];
+      if (auto name = elf_->getSectionName(&shdr); name) {
+        sections[i].name = name.get();
+      }
+      sections[i].vaddr = shdr.sh_addr;
+      sections[i].file_offset = shdr.sh_offset;
+    }
+    return sections;
   }
 
   ElfStatus GetBuildId(BuildId* build_id) override {
@@ -473,8 +487,6 @@ std::unique_ptr<ElfFile> CreateElfFileImpl(BinaryWrapper&& wrapper, ElfStatus* s
 
 }  // namespace
 
-namespace simpleperf {
-
 std::unique_ptr<ElfFile> ElfFile::Open(const std::string& filename) {
   ElfStatus status;
   auto elf = Open(filename, &status);
@@ -539,21 +551,20 @@ std::unique_ptr<ElfFile> ElfFile::Open(const char* data, size_t size, ElfStatus*
 
 }  // namespace simpleperf
 
-
 // LLVM libraries uses ncurses library, but that isn't needed by simpleperf.
 // So support a naive implementation to avoid depending on ncurses.
-__attribute__((weak)) extern "C" int setupterm(char *, int, int *) {
+__attribute__((weak)) extern "C" int setupterm(char*, int, int*) {
   return -1;
 }
 
-__attribute__((weak)) extern "C" struct term *set_curterm(struct term *) {
+__attribute__((weak)) extern "C" struct term* set_curterm(struct term*) {
   return nullptr;
 }
 
-__attribute__((weak)) extern "C" int del_curterm(struct term *) {
+__attribute__((weak)) extern "C" int del_curterm(struct term*) {
   return -1;
 }
 
-__attribute__((weak)) extern "C" int tigetnum(char *) {
+__attribute__((weak)) extern "C" int tigetnum(char*) {
   return -1;
 }

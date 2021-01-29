@@ -17,19 +17,19 @@
 #include <stdio.h>
 
 #include <memory>
+#include <optional>
 #include <regex>
 #include <string>
 
+#include <android-base/parseint.h>
+
+#include "ETMDecoder.h"
 #include "cmd_inject_impl.h"
 #include "command.h"
-#include "ETMDecoder.h"
 #include "record_file.h"
 #include "system/extras/simpleperf/etm_branch_list.pb.h"
 #include "thread_tree.h"
 #include "utils.h"
-
-
-using namespace simpleperf;
 
 namespace simpleperf {
 
@@ -53,8 +53,6 @@ std::vector<bool> ProtoStringToBranch(const std::string& s, size_t bit_size) {
   }
   return branch;
 }
-
-}  // namespace simpleperf
 
 namespace {
 
@@ -82,6 +80,22 @@ struct AutoFDOBinaryInfo {
 using BranchListBinaryInfo =
     std::unordered_map<uint64_t, std::unordered_map<std::vector<bool>, uint64_t>>;
 
+class ThreadTreeWithFilter : public ThreadTree {
+ public:
+  void ExcludePid(pid_t pid) { exclude_pid_ = pid; }
+
+  ThreadEntry* FindThread(int tid) override {
+    ThreadEntry* thread = ThreadTree::FindThread(tid);
+    if (thread != nullptr && exclude_pid_ && thread->pid == exclude_pid_) {
+      return nullptr;
+    }
+    return thread;
+  }
+
+ private:
+  std::optional<pid_t> exclude_pid_;
+};
+
 constexpr const char* ETM_BRANCH_LIST_PROTO_MAGIC = "simpleperf:EtmBranchList";
 
 class InjectCommand : public Command {
@@ -101,6 +115,7 @@ class InjectCommand : public Command {
 "                               branch-list  -- protobuf file in etm_branch_list.proto\n"
 "                             Default is autofdo.\n"
 "--dump-etm type1,type2,...   Dump etm data. A type is one of raw, packet and element.\n"
+"--exclude-perf               Exclude trace data for the recording process.\n"
 "--symdir <dir>               Look for binaries in a directory recursively.\n"
 "\n"
 "Examples:\n"
@@ -144,47 +159,49 @@ class InjectCommand : public Command {
 
  private:
   bool ParseOptions(const std::vector<std::string>& args) {
-    for (size_t i = 0; i < args.size(); i++) {
-      if (args[i] == "--binary") {
-        if (!NextArgumentOrError(args, &i)) {
-          return false;
-        }
-        binary_name_regex_ = args[i];
-      } else if (args[i] == "-i") {
-        if (!NextArgumentOrError(args, &i)) {
-          return false;
-        }
-        input_filename_ = args[i];
-      } else if (args[i] == "-o") {
-        if (!NextArgumentOrError(args, &i)) {
-          return false;
-        }
-        output_filename_ = args[i];
-      } else if (args[i] == "--output") {
-        if (!NextArgumentOrError(args, &i)) {
-          return false;
-        }
-        if (args[i] == "autofdo") {
-          output_format_ = OutputFormat::AutoFDO;
-        } else if (args[i] == "branch-list") {
-          output_format_ = OutputFormat::BranchList;
-        } else {
-          LOG(ERROR) << "unknown format in --output option: " << args[i];
-          return false;
-        }
-      } else if (args[i] == "--dump-etm") {
-        if (!NextArgumentOrError(args, &i) || !ParseEtmDumpOption(args[i], &etm_dump_option_)) {
-          return false;
-        }
-      } else if (args[i] == "--symdir") {
-        if (!NextArgumentOrError(args, &i) || !Dso::AddSymbolDir(args[i])) {
-          return false;
-        }
-      } else {
-        ReportUnknownOption(args, i);
+    const OptionFormatMap option_formats = {
+        {"--binary", {OptionValueType::STRING, OptionType::SINGLE}},
+        {"--dump-etm", {OptionValueType::STRING, OptionType::SINGLE}},
+        {"--exclude-perf", {OptionValueType::NONE, OptionType::SINGLE}},
+        {"-i", {OptionValueType::STRING, OptionType::SINGLE}},
+        {"-o", {OptionValueType::STRING, OptionType::SINGLE}},
+        {"--output", {OptionValueType::STRING, OptionType::SINGLE}},
+        {"--symdir", {OptionValueType::STRING, OptionType::MULTIPLE}},
+    };
+    OptionValueMap options;
+    std::vector<std::pair<OptionName, OptionValue>> ordered_options;
+    if (!PreprocessOptions(args, option_formats, &options, &ordered_options, nullptr)) {
+      return false;
+    }
+
+    if (auto value = options.PullValue("--binary"); value) {
+      binary_name_regex_ = *value->str_value;
+    }
+    if (auto value = options.PullValue("--dump-etm"); value) {
+      if (!ParseEtmDumpOption(*value->str_value, &etm_dump_option_)) {
         return false;
       }
     }
+    exclude_perf_ = options.PullBoolValue("--exclude-perf");
+    options.PullStringValue("-i", &input_filename_);
+    options.PullStringValue("-o", &output_filename_);
+    if (auto value = options.PullValue("--output"); value) {
+      const std::string& output = *value->str_value;
+      if (output == "autofdo") {
+        output_format_ = OutputFormat::AutoFDO;
+      } else if (output == "branch-list") {
+        output_format_ = OutputFormat::BranchList;
+      } else {
+        LOG(ERROR) << "unknown format in --output option: " << output;
+        return false;
+      }
+    }
+    if (auto value = options.PullValue("--symdir"); value) {
+      if (!Dso::AddSymbolDir(*value->str_value)) {
+        return false;
+      }
+    }
+    CHECK(options.values.empty());
     return true;
   }
 
@@ -193,6 +210,20 @@ class InjectCommand : public Command {
       record_file_reader_ = RecordFileReader::CreateInstance(input_filename_);
       if (!record_file_reader_) {
         return false;
+      }
+      if (exclude_perf_) {
+        const auto& info_map = record_file_reader_->GetMetaInfoFeature();
+        if (auto it = info_map.find("recording_process"); it == info_map.end()) {
+          LOG(ERROR) << input_filename_ << " doesn't support --exclude-perf";
+          return false;
+        } else {
+          int pid;
+          if (!android::base::ParseInt(it->second, &pid, 0)) {
+            LOG(ERROR) << "invalid recording_process " << it->second;
+            return false;
+          }
+          thread_tree_.ExcludePid(pid);
+        }
       }
       record_file_reader_->LoadBuildIdAndFileFeatures(thread_tree_);
       if (!record_file_reader_->ReadDataSection(
@@ -295,9 +326,7 @@ class InjectCommand : public Command {
     }
 
     // 2. Build branch map for each binary, convert them to instr ranges.
-    auto callback = [this](const ETMInstrRange& range) {
-      ProcessInstrRange(range);
-    };
+    auto callback = [this](const ETMInstrRange& range) { ProcessInstrRange(range); };
     auto check_build_id = [](Dso* dso, const BuildId& expected_build_id) {
       if (expected_build_id.IsEmpty()) {
         return true;
@@ -360,8 +389,23 @@ class InjectCommand : public Command {
       dso_v.emplace_back(p.first);
     }
     std::sort(dso_v.begin(), dso_v.end(), [](Dso* d1, Dso* d2) { return d1->Path() < d2->Path(); });
+    if (dso_v.size() > 1) {
+      fprintf(output_fp_.get(),
+              "// Please split this file. AutoFDO only accepts profile for one binary.\n");
+    }
     for (auto dso : dso_v) {
       const AutoFDOBinaryInfo& binary = autofdo_binary_map_[dso];
+      // AutoFDO text format needs file_offsets instead of virtual addrs in a binary. And it uses
+      // below formula: vaddr = file_offset + GetFirstLoadSegmentVaddr().
+      uint64_t first_load_segment_addr = GetFirstLoadSegmentVaddr(dso);
+
+      auto to_offset = [&](uint64_t vaddr) -> uint64_t {
+        if (vaddr == 0) {
+          return 0;
+        }
+        CHECK_GE(vaddr, first_load_segment_addr);
+        return vaddr - first_load_segment_addr;
+      };
 
       // Write range_count_map.
       std::map<AddrPair, uint64_t> range_count_map(binary.range_count_map.begin(),
@@ -371,8 +415,8 @@ class InjectCommand : public Command {
         const AddrPair& addr_range = pair2.first;
         uint64_t count = pair2.second;
 
-        fprintf(output_fp_.get(), "%" PRIx64 "-%" PRIx64 ":%" PRIu64 "\n", addr_range.first,
-                addr_range.second, count);
+        fprintf(output_fp_.get(), "%" PRIx64 "-%" PRIx64 ":%" PRIu64 "\n",
+                to_offset(addr_range.first), to_offset(addr_range.second), count);
       }
 
       // Write addr_count_map.
@@ -386,13 +430,25 @@ class InjectCommand : public Command {
         const AddrPair& branch = pair2.first;
         uint64_t count = pair2.second;
 
-        fprintf(output_fp_.get(), "%" PRIx64 "->%" PRIx64 ":%" PRIu64 "\n", branch.first,
-                branch.second, count);
+        fprintf(output_fp_.get(), "%" PRIx64 "->%" PRIx64 ":%" PRIu64 "\n", to_offset(branch.first),
+                to_offset(branch.second), count);
       }
 
       // Write the binary path in comment.
       fprintf(output_fp_.get(), "// %s\n\n", dso->Path().c_str());
     }
+  }
+
+  uint64_t GetFirstLoadSegmentVaddr(Dso* dso) {
+    ElfStatus status;
+    if (auto elf = ElfFile::Open(dso->GetDebugFilePath(), &status); elf) {
+      for (const auto& segment : elf->GetProgramHeader()) {
+        if (segment.is_load) {
+          return segment.vaddr;
+        }
+      }
+    }
+    return 0;
   }
 
   bool PostProcessBranchList() {
@@ -432,10 +488,11 @@ class InjectCommand : public Command {
   }
 
   std::regex binary_name_regex_{""};  // Default to match everything.
+  bool exclude_perf_ = false;
   std::string input_filename_ = "perf.data";
   std::string output_filename_ = "perf_inject.data";
   OutputFormat output_format_ = OutputFormat::AutoFDO;
-  ThreadTree thread_tree_;
+  ThreadTreeWithFilter thread_tree_;
   std::unique_ptr<RecordFileReader> record_file_reader_;
   ETMDumpOption etm_dump_option_;
   std::unique_ptr<ETMDecoder> etm_decoder_;
@@ -450,8 +507,6 @@ class InjectCommand : public Command {
 };
 
 }  // namespace
-
-namespace simpleperf {
 
 void RegisterInjectCommand() {
   return RegisterCommand("inject", [] { return std::unique_ptr<Command>(new InjectCommand); });

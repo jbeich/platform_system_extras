@@ -38,6 +38,20 @@
 
 namespace simpleperf {
 
+struct FileFeature {
+  std::string path;
+  DsoType type;
+  uint64_t min_vaddr;
+  uint64_t file_offset_of_min_vaddr;
+  std::vector<Symbol> symbols;             // used for reading symbols
+  std::vector<const Symbol*> symbol_ptrs;  // used for writing symbols
+  std::vector<uint64_t> dex_file_offsets;
+
+  FileFeature() {}
+
+  DISALLOW_COPY_AND_ASSIGN(FileFeature);
+};
+
 // RecordFileWriter writes to a perf record file, like perf.data.
 // User should call RecordFileWriter::Close() to finish writing the file, otherwise the file will
 // be removed in RecordFileWriter::~RecordFileWriter().
@@ -49,6 +63,7 @@ class RecordFileWriter {
 
   bool WriteAttrSection(const std::vector<EventAttrWithId>& attr_ids);
   bool WriteRecord(const Record& record);
+  bool WriteData(const void* buf, size_t len);
 
   uint64_t GetDataSectionSize() const { return data_section_size_; }
   bool ReadDataSection(const std::function<void(const Record*)>& callback);
@@ -59,7 +74,8 @@ class RecordFileWriter {
   bool WriteCmdlineFeature(const std::vector<std::string>& cmdline);
   bool WriteBranchStackFeature();
   bool WriteAuxTraceFeature(const std::vector<uint64_t>& auxtrace_offset);
-  bool WriteFileFeatures(const std::vector<Dso*>& files);
+  bool WriteFileFeatures(const std::vector<Dso*>& dsos);
+  bool WriteFileFeature(const FileFeature& file);
   bool WriteMetaInfoFeature(const std::unordered_map<std::string, std::string>& info_map);
   bool WriteFeature(int feature, const std::vector<char>& data);
   bool EndWriteFeatures();
@@ -72,17 +88,10 @@ class RecordFileWriter {
                              std::vector<std::string>* hit_kernel_modules,
                              std::vector<std::string>* hit_user_files);
   bool WriteFileHeader();
-  bool WriteData(const void* buf, size_t len);
   bool Write(const void* buf, size_t len);
   bool Read(void* buf, size_t len);
   bool GetFilePos(uint64_t* file_pos);
   bool WriteStringWithLength(const std::string& s);
-  bool WriteFileFeature(const std::string& file_path,
-                        uint32_t file_type,
-                        uint64_t min_vaddr,
-                        uint64_t file_offset_of_min_vaddr,
-                        const std::vector<const Symbol*>& symbols,
-                        const std::vector<uint64_t>* dex_file_offsets);
   bool WriteFeatureBegin(int feature);
   bool WriteFeatureEnd(int feature);
 
@@ -109,9 +118,7 @@ class RecordFileReader {
 
   ~RecordFileReader();
 
-  const PerfFileFormat::FileHeader& FileHeader() const {
-    return header_;
-  }
+  const PerfFileFormat::FileHeader& FileHeader() const { return header_; }
 
   std::vector<EventAttrWithId> AttrSection() const {
     std::vector<EventAttrWithId> result(file_attrs_.size());
@@ -121,6 +128,8 @@ class RecordFileReader {
     }
     return result;
   }
+
+  const std::unordered_map<uint64_t, size_t>& EventIdMap() const { return event_id_to_attr_map_; }
 
   const std::map<int, PerfFileFormat::SectionDesc>& FeatureSectionDescriptors() const {
     return feature_section_descriptors_;
@@ -136,6 +145,7 @@ class RecordFileReader {
 
   // If sorted is true, sort records before passing them to callback function.
   bool ReadDataSection(const std::function<bool(std::unique_ptr<Record>)>& callback);
+  bool ReadAtOffset(uint64_t offset, void* buf, size_t len);
 
   // Read next record. If read successfully, set [record] and return true.
   // If there is no more records, set [record] to nullptr and return true.
@@ -154,9 +164,7 @@ class RecordFileReader {
   // call, and is updated to point to the next file information. Return true
   // if read successfully, and return false if there is no more file
   // information.
-  bool ReadFileFeature(size_t& read_pos, std::string* file_path, uint32_t* file_type,
-                       uint64_t* min_vaddr, uint64_t* file_offset_of_min_vaddr,
-                       std::vector<Symbol>* symbols, std::vector<uint64_t>* dex_file_offsets);
+  bool ReadFileFeature(size_t& read_pos, FileFeature* file);
 
   const std::unordered_map<std::string, std::string>& GetMetaInfoFeature() { return meta_info_; }
 
@@ -179,7 +187,6 @@ class RecordFileReader {
   void UseRecordingEnvironment();
   std::unique_ptr<Record> ReadRecord();
   bool Read(void* buf, size_t len);
-  bool ReadAtOffset(uint64_t offset, void* buf, size_t len);
   void ProcessEventIdRecord(const EventIdRecord& r);
   bool BuildAuxDataLocation();
 

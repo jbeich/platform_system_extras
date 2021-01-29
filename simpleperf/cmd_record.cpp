@@ -22,15 +22,18 @@
 #include <sys/utsname.h>
 #include <time.h>
 #include <unistd.h>
+#include <filesystem>
+#include <optional>
 #include <set>
 #include <string>
 #include <unordered_map>
 #include <unordered_set>
 #include <vector>
 
-#include <android-base/logging.h>
 #include <android-base/file.h>
+#include <android-base/logging.h>
 #include <android-base/parseint.h>
+#include <android-base/scopeguard.h>
 #include <android-base/stringprintf.h>
 #include <android-base/strings.h>
 #include <android-base/unique_fd.h>
@@ -39,15 +42,18 @@
 #endif
 
 #include "CallChainJoiner.h"
+#include "ETMRecorder.h"
+#include "IOEventLoop.h"
+#include "JITDebugReader.h"
+#include "MapRecordReader.h"
+#include "OfflineUnwinder.h"
+#include "ProbeEvents.h"
 #include "cmd_record_impl.h"
 #include "command.h"
 #include "environment.h"
-#include "ETMRecorder.h"
 #include "event_selection_set.h"
 #include "event_type.h"
-#include "IOEventLoop.h"
-#include "JITDebugReader.h"
-#include "OfflineUnwinder.h"
+#include "kallsyms.h"
 #include "read_apk.h"
 #include "read_elf.h"
 #include "read_symbol_map.h"
@@ -58,9 +64,11 @@
 #include "utils.h"
 #include "workload.h"
 
+namespace simpleperf {
+namespace {
+
 using android::base::ParseUint;
 using android::base::Realpath;
-using namespace simpleperf;
 
 static std::string default_measured_event_type = "cpu-cycles";
 
@@ -141,6 +149,7 @@ class RecordCommand : public Command {
 "               1) an event name listed in `simpleperf list`;\n"
 "               2) a raw PMU event in rN format. N is a hex number.\n"
 "                  For example, r1b selects event number 0x1b.\n"
+"               3) a kprobe event added by --kprobe option.\n"
 "             Modifiers can be added to define how the event should be\n"
 "             monitored. Possible modifiers are:\n"
 "                u - monitor user space events only\n"
@@ -151,6 +160,11 @@ class RecordCommand : public Command {
 "             same time.\n"
 "--trace-offcpu   Generate samples when threads are scheduled off cpu.\n"
 "                 Similar to \"-c 1 -e sched:sched_switch\".\n"
+"--kprobe kprobe_event1,kprobe_event2,...\n"
+"             Add kprobe events during recording. The kprobe_event format is in\n"
+"             Documentation/trace/kprobetrace.rst in the kernel. Examples:\n"
+"               'p:myprobe do_sys_open $arg2:string'   - add event kprobes:myprobe\n"
+"               'r:myretprobe do_sys_open $retval:s64' - add event kprobes:myretprobe\n"
 "\n"
 "Select monitoring options:\n"
 "-f freq      Set event sample frequency. It means recording at most [freq]\n"
@@ -304,23 +318,23 @@ class RecordCommand : public Command {
   bool Run(const std::vector<std::string>& args);
 
  private:
-  bool ParseOptions(const std::vector<std::string>& args,
-                    std::vector<std::string>* non_option_args);
+  bool ParseOptions(const std::vector<std::string>& args, std::vector<std::string>* non_option_args,
+                    ProbeEvents* probe_events);
   bool AdjustPerfEventLimit();
   bool PrepareRecording(Workload* workload);
   bool DoRecording(Workload* workload);
   bool PostProcessRecording(const std::vector<std::string>& args);
+  // pre recording functions
   bool TraceOffCpu();
   bool SetEventSelectionFlags();
   bool CreateAndInitRecordFile();
-  std::unique_ptr<RecordFileWriter> CreateRecordFile(
-      const std::string& filename);
+  std::unique_ptr<RecordFileWriter> CreateRecordFile(const std::string& filename);
   bool DumpKernelSymbol();
   bool DumpTracingData();
-  bool DumpKernelMaps();
-  bool DumpUserSpaceMaps();
-  bool DumpProcessMaps(pid_t pid, const std::unordered_set<pid_t>& tids);
+  bool DumpMaps();
   bool DumpAuxTraceInfo();
+
+  // recording functions
   bool ProcessRecord(Record* record);
   bool ShouldOmitRecord(Record* record);
   bool DumpMapsForRecord(Record* record);
@@ -329,9 +343,12 @@ class RecordCommand : public Command {
   bool SaveRecordWithoutUnwinding(Record* record);
   bool ProcessJITDebugInfo(const std::vector<JITDebugInfo>& debug_info, bool sync_kernel_records);
   bool ProcessControlCmd(IOEventLoop* loop);
-
   void UpdateRecord(Record* record);
   bool UnwindRecord(SampleRecord& r);
+
+  // post recording functions
+  std::unique_ptr<RecordFileReader> MoveRecordFile(const std::string& old_filename);
+  bool MergeMapRecords();
   bool PostUnwindRecords();
   bool JoinCallChains();
   bool DumpAdditionalFeatures(const std::vector<std::string>& args);
@@ -392,17 +409,30 @@ class RecordCommand : public Command {
   // In system wide recording, record if we have dumped map info for a process.
   std::unordered_set<pid_t> dumped_processes_;
   bool exclude_perf_ = false;
+
+  std::optional<MapRecordReader> map_record_reader_;
+  std::optional<MapRecordThread> map_record_thread_;
 };
 
 bool RecordCommand::Run(const std::vector<std::string>& args) {
+  time_stat_.prepare_recording_time = GetSystemClock();
   ScopedCurrentArch scoped_arch(GetMachineArch());
+
   if (!CheckPerfEventLimit()) {
     return false;
   }
   AllowMoreOpenedFiles();
 
   std::vector<std::string> workload_args;
-  if (!ParseOptions(args, &workload_args)) {
+  ProbeEvents probe_events;
+  auto clear_probe_events_guard = android::base::make_scope_guard([this, &probe_events] {
+    if (!probe_events.IsEmpty()) {
+      // probe events can be deleted only when no perf event file is using them.
+      event_selection_set_.CloseEventFiles();
+      probe_events.Clear();
+    }
+  });
+  if (!ParseOptions(args, &workload_args, &probe_events)) {
     return false;
   }
   if (!AdjustPerfEventLimit()) {
@@ -425,7 +455,6 @@ bool RecordCommand::Run(const std::vector<std::string>& args) {
       return false;
     }
   }
-  time_stat_.prepare_recording_time = GetSystemClock();
   if (!PrepareRecording(workload.get())) {
     return false;
   }
@@ -464,8 +493,7 @@ bool RecordCommand::PrepareRecording(Workload* workload) {
   }
   if (unwind_dwarf_callchain_ && allow_callchain_joiner_) {
     callchain_joiner_.reset(new CallChainJoiner(DEFAULT_CALL_CHAIN_JOINER_CACHE_SIZE,
-                                                callchain_joiner_min_matching_nodes_,
-                                                false));
+                                                callchain_joiner_min_matching_nodes_, false));
   }
 
   // 4. Add monitored targets.
@@ -483,8 +511,7 @@ bool RecordCommand::PrepareRecording(Workload* workload) {
       event_selection_set_.AddMonitoredProcesses(pids);
       need_to_check_targets = true;
     } else {
-      LOG(ERROR)
-          << "No threads to monitor. Try `simpleperf help record` for help";
+      LOG(ERROR) << "No threads to monitor. Try `simpleperf help record` for help";
       return false;
     }
   } else {
@@ -510,15 +537,14 @@ bool RecordCommand::PrepareRecording(Workload* workload) {
   if (!event_selection_set_.OpenEventFiles(cpus_)) {
     return false;
   }
-  size_t record_buffer_size = system_wide_collection_ ? kSystemWideRecordBufferSize
-                                                      : kRecordBufferSize;
+  size_t record_buffer_size =
+      system_wide_collection_ ? kSystemWideRecordBufferSize : kRecordBufferSize;
   if (!event_selection_set_.MmapEventFiles(mmap_page_range_.first, mmap_page_range_.second,
                                            aux_buffer_size_, record_buffer_size,
                                            allow_cutting_samples_, exclude_perf_)) {
     return false;
   }
-  auto callback =
-      std::bind(&RecordCommand::ProcessRecord, this, std::placeholders::_1);
+  auto callback = std::bind(&RecordCommand::ProcessRecord, this, std::placeholders::_1);
   if (!event_selection_set_.PrepareToReadMmapEventData(callback)) {
     return false;
   }
@@ -533,9 +559,7 @@ bool RecordCommand::PrepareRecording(Workload* workload) {
     return false;
   }
   IOEventLoop* loop = event_selection_set_.GetIOEventLoop();
-  auto exit_loop_callback = [loop]() {
-    return loop->ExitLoop();
-  };
+  auto exit_loop_callback = [loop]() { return loop->ExitLoop(); };
   if (!loop->AddSignalEvents({SIGCHLD, SIGINT, SIGTERM}, exit_loop_callback)) {
     return false;
   }
@@ -632,7 +656,8 @@ bool RecordCommand::DoRecording(Workload* workload) {
   return true;
 }
 
-static bool WriteRecordDataToOutFd(const std::string& in_filename, android::base::unique_fd out_fd) {
+static bool WriteRecordDataToOutFd(const std::string& in_filename,
+                                   android::base::unique_fd out_fd) {
   android::base::unique_fd in_fd(FileHelper::OpenReadOnly(in_filename));
   if (in_fd == -1) {
     PLOG(ERROR) << "Failed to open " << in_filename;
@@ -658,19 +683,26 @@ static bool WriteRecordDataToOutFd(const std::string& in_filename, android::base
 }
 
 bool RecordCommand::PostProcessRecording(const std::vector<std::string>& args) {
-  // 1. Post unwind dwarf callchain.
+  // 1. Merge map records dumped while recording by map record thread.
+  if (map_record_thread_) {
+    if (!map_record_thread_->Join() || !MergeMapRecords()) {
+      return false;
+    }
+  }
+
+  // 2. Post unwind dwarf callchain.
   if (unwind_dwarf_callchain_ && post_unwind_) {
     if (!PostUnwindRecords()) {
       return false;
     }
   }
 
-  // 2. Optionally join Callchains.
+  // 3. Optionally join Callchains.
   if (callchain_joiner_) {
     JoinCallChains();
   }
 
-  // 3. Dump additional features, and close record file.
+  // 4. Dump additional features, and close record file.
   if (!DumpAdditionalFeatures(args)) {
     return false;
   }
@@ -716,18 +748,19 @@ bool RecordCommand::PostProcessRecording(const std::vector<std::string>& args) {
     }
   }
   LOG(DEBUG) << "Prepare recording time "
-      << (time_stat_.start_recording_time - time_stat_.prepare_recording_time) / 1e6
-      << " ms, recording time "
-      << (time_stat_.stop_recording_time - time_stat_.start_recording_time) / 1e6
-      << " ms, stop recording time "
-      << (time_stat_.finish_recording_time - time_stat_.stop_recording_time) / 1e6
-      << " ms, post process time "
-      << (time_stat_.post_process_time - time_stat_.finish_recording_time) / 1e6 << " ms.";
+             << (time_stat_.start_recording_time - time_stat_.prepare_recording_time) / 1e6
+             << " ms, recording time "
+             << (time_stat_.stop_recording_time - time_stat_.start_recording_time) / 1e6
+             << " ms, stop recording time "
+             << (time_stat_.finish_recording_time - time_stat_.stop_recording_time) / 1e6
+             << " ms, post process time "
+             << (time_stat_.post_process_time - time_stat_.finish_recording_time) / 1e6 << " ms.";
   return true;
 }
 
 bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
-                                 std::vector<std::string>* non_option_args) {
+                                 std::vector<std::string>* non_option_args,
+                                 ProbeEvents* probe_events) {
   OptionValueMap options;
   std::vector<std::pair<OptionName, OptionValue>> ordered_options;
 
@@ -784,7 +817,11 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
   }
 
   if (auto value = options.PullValue("--cpu"); value) {
-    cpus_ = GetCpusFromString(*value->str_value);
+    if (auto cpus = GetCpusFromString(*value->str_value); cpus) {
+      cpus_.assign(cpus->begin(), cpus->end());
+    } else {
+      return false;
+    }
   }
 
   if (!options.PullUintValue("--cpu-percent", &cpu_time_max_percent_, 1, 100)) {
@@ -803,16 +840,23 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
 
   in_app_context_ = options.PullBoolValue("--in-app");
 
-  if (auto values = options.PullValues("-j"); values) {
-    for (const auto& value : values.value()) {
-      std::vector<std::string> branch_sampling_types = android::base::Split(*value.str_value, ",");
-      for (auto& type : branch_sampling_types) {
-        auto it = branch_sampling_type_map.find(type);
-        if (it == branch_sampling_type_map.end()) {
-          LOG(ERROR) << "unrecognized branch sampling filter: " << type;
-          return false;
-        }
-        branch_sampling_ |= it->second;
+  for (const OptionValue& value : options.PullValues("-j")) {
+    std::vector<std::string> branch_sampling_types = android::base::Split(*value.str_value, ",");
+    for (auto& type : branch_sampling_types) {
+      auto it = branch_sampling_type_map.find(type);
+      if (it == branch_sampling_type_map.end()) {
+        LOG(ERROR) << "unrecognized branch sampling filter: " << type;
+        return false;
+      }
+      branch_sampling_ |= it->second;
+    }
+  }
+
+  for (const OptionValue& value : options.PullValues("--kprobe")) {
+    std::vector<std::string> cmds = android::base::Split(*value.str_value, ",");
+    for (const auto& cmd : cmds) {
+      if (!probe_events->AddKprobe(cmd)) {
+        return false;
       }
     }
   }
@@ -841,13 +885,11 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
     out_fd_.reset(static_cast<int>(value->uint_value));
   }
 
-  if (auto values = options.PullValues("-p"); values) {
-    for (const auto& value : values.value()) {
-      std::set<pid_t> pids;
-      if (!GetValidThreadsFromThreadString(*value.str_value, &pids)) {
-        return false;
-      }
-      event_selection_set_.AddMonitoredProcesses(pids);
+  for (const OptionValue& value : options.PullValues("-p")) {
+    if (auto pids = GetTidsFromString(*value.str_value, true); pids) {
+      event_selection_set_.AddMonitoredProcesses(pids.value());
+    } else {
+      return false;
     }
   }
 
@@ -882,20 +924,18 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
     }
   }
 
-  if (auto values = options.PullValues("-t"); values) {
-    for (const auto& value : values.value()) {
-      std::set<pid_t> tids;
-      if (!GetValidThreadsFromThreadString(*value.str_value, &tids)) {
-        return false;
-      }
-      event_selection_set_.AddMonitoredThreads(tids);
+  for (const OptionValue& value : options.PullValues("-t")) {
+    if (auto tids = GetTidsFromString(*value.str_value, true); tids) {
+      event_selection_set_.AddMonitoredThreads(tids.value());
+    } else {
+      return false;
     }
   }
 
   trace_offcpu_ = options.PullBoolValue("--trace-offcpu");
 
   if (auto value = options.PullValue("--tracepoint-events"); value) {
-    if (!SetTracepointEventsFilePath(*value->str_value)) {
+    if (!EventTypeManager::Instance().ReadTracepointsFromFile(*value->str_value)) {
       return false;
     }
   }
@@ -959,6 +999,11 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
     } else if (name == "-e") {
       std::vector<std::string> event_types = android::base::Split(*value.str_value, ",");
       for (auto& event_type : event_types) {
+        if (probe_events->IsProbeEvent(event_type)) {
+          if (!probe_events->CreateProbeEventIfNotExist(event_type)) {
+            return false;
+          }
+        }
         size_t group_id;
         if (!event_selection_set_.AddEventType(event_type, &group_id)) {
           return false;
@@ -975,6 +1020,13 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
       dwarf_callchain_sampling_ = true;
     } else if (name == "--group") {
       std::vector<std::string> event_types = android::base::Split(*value.str_value, ",");
+      for (const auto& event_type : event_types) {
+        if (probe_events->IsProbeEvent(event_type)) {
+          if (!probe_events->CreateProbeEventIfNotExist(event_type)) {
+            return false;
+          }
+        }
+      }
       size_t group_id;
       if (!event_selection_set_.AddEventGroup(event_types, &group_id)) {
         return false;
@@ -1103,8 +1155,7 @@ bool RecordCommand::SetEventSelectionFlags() {
   if (fp_callchain_sampling_) {
     event_selection_set_.EnableFpCallChainSampling();
   } else if (dwarf_callchain_sampling_) {
-    if (!event_selection_set_.EnableDwarfCallChainSampling(
-            dump_stack_size_in_dwarf_sampling_)) {
+    if (!event_selection_set_.EnableDwarfCallChainSampling(dump_stack_size_in_dwarf_sampling_)) {
       return false;
     }
   }
@@ -1121,15 +1172,16 @@ bool RecordCommand::CreateAndInitRecordFile() {
     return false;
   }
   // Use first perf_event_attr and first event id to dump mmap and comm records.
-  dumping_attr_id_ = event_selection_set_.GetEventAttrWithId()[0];
-  return DumpKernelSymbol() && DumpTracingData() && DumpKernelMaps() && DumpUserSpaceMaps() &&
-         DumpAuxTraceInfo();
+  EventAttrWithId dumping_attr_id = event_selection_set_.GetEventAttrWithId()[0];
+  map_record_reader_.emplace(*dumping_attr_id.attr, dumping_attr_id.ids[0],
+                             event_selection_set_.RecordNotExecutableMaps());
+  map_record_reader_->SetCallback([this](Record* r) { return ProcessRecord(r); });
+
+  return DumpKernelSymbol() && DumpTracingData() && DumpMaps() && DumpAuxTraceInfo();
 }
 
-std::unique_ptr<RecordFileWriter> RecordCommand::CreateRecordFile(
-    const std::string& filename) {
-  std::unique_ptr<RecordFileWriter> writer =
-      RecordFileWriter::CreateInstance(filename);
+std::unique_ptr<RecordFileWriter> RecordCommand::CreateRecordFile(const std::string& filename) {
+  std::unique_ptr<RecordFileWriter> writer = RecordFileWriter::CreateInstance(filename);
   if (writer == nullptr) {
     return nullptr;
   }
@@ -1142,12 +1194,12 @@ std::unique_ptr<RecordFileWriter> RecordCommand::CreateRecordFile(
 
 bool RecordCommand::DumpKernelSymbol() {
   if (can_dump_kernel_symbols_) {
-    std::string kallsyms;
-    if (event_selection_set_.NeedKernelSymbol() &&
-        CheckKernelSymbolAddresses()) {
-      if (!android::base::ReadFileToString("/proc/kallsyms", &kallsyms)) {
-        PLOG(ERROR) << "failed to read /proc/kallsyms";
-        return false;
+    if (event_selection_set_.NeedKernelSymbol()) {
+      std::string kallsyms;
+      if (!LoadKernelSymbols(&kallsyms)) {
+        // Symbol loading may have failed due to the lack of permissions. This
+        // is not fatal, the symbols will appear as "unknown".
+        return true;
       }
       KernelSymbolRecord r(kallsyms);
       if (!ProcessRecord(&r)) {
@@ -1159,8 +1211,7 @@ bool RecordCommand::DumpKernelSymbol() {
 }
 
 bool RecordCommand::DumpTracingData() {
-  std::vector<const EventType*> tracepoint_event_types =
-      event_selection_set_.GetTracepointEvents();
+  std::vector<const EventType*> tracepoint_event_types = event_selection_set_.GetTracepointEvents();
   if (tracepoint_event_types.empty() || !CanRecordRawData() || in_app_context_) {
     return true;  // No need to dump tracing data, or can't do it.
   }
@@ -1175,102 +1226,39 @@ bool RecordCommand::DumpTracingData() {
   return true;
 }
 
-bool RecordCommand::DumpKernelMaps() {
-  KernelMmap kernel_mmap;
-  std::vector<KernelMmap> module_mmaps;
-  GetKernelAndModuleMmaps(&kernel_mmap, &module_mmaps);
-
-  MmapRecord mmap_record(*dumping_attr_id_.attr, true, UINT_MAX, 0, kernel_mmap.start_addr,
-                         kernel_mmap.len, 0, kernel_mmap.filepath, dumping_attr_id_.ids[0]);
-  if (!ProcessRecord(&mmap_record)) {
-    return false;
-  }
-  for (auto& module_mmap : module_mmaps) {
-    MmapRecord mmap_record(*dumping_attr_id_.attr, true, UINT_MAX, 0, module_mmap.start_addr,
-                           module_mmap.len, 0, module_mmap.filepath, dumping_attr_id_.ids[0]);
-    if (!ProcessRecord(&mmap_record)) {
-      return false;
+bool RecordCommand::DumpMaps() {
+  if (system_wide_collection_) {
+    // For system wide recording:
+    //   If not aux tracing, only dump kernel maps. Maps of a process is dumped when needed (the
+    //   first time a sample hits that process).
+    //   If aux tracing, we don't know which maps will be needed, so dump all process maps. To
+    //   reduce pre recording time, we dump process maps in map record thread while recording.
+    if (event_selection_set_.HasAuxTrace()) {
+      map_record_thread_.emplace(*map_record_reader_);
+      return true;
     }
+    return map_record_reader_->ReadKernelMaps();
   }
-  return true;
-}
-
-bool RecordCommand::DumpUserSpaceMaps() {
-  // For system_wide profiling:
-  //   If no aux tracing, maps of a process is dumped when needed (first time a sample hits
-  //     that process).
-  //   If aux tracing, we don't know which maps will be needed, so dump all process maps.
-  if (system_wide_collection_ && !event_selection_set_.HasAuxTrace()) {
-    return true;
+  if (!map_record_reader_->ReadKernelMaps()) {
+    return false;
   }
   // Map from process id to a set of thread ids in that process.
   std::unordered_map<pid_t, std::unordered_set<pid_t>> process_map;
-  if (system_wide_collection_) {
-    for (auto pid : GetAllProcesses()) {
-      process_map[pid] = std::unordered_set<pid_t>();
-    }
-  } else {
-    for (pid_t pid : event_selection_set_.GetMonitoredProcesses()) {
-      std::vector<pid_t> tids = GetThreadsInProcess(pid);
-      process_map[pid].insert(tids.begin(), tids.end());
-    }
-    for (pid_t tid : event_selection_set_.GetMonitoredThreads()) {
-      pid_t pid;
-      if (GetProcessForThread(tid, &pid)) {
-        process_map[pid].insert(tid);
-      }
+  for (pid_t pid : event_selection_set_.GetMonitoredProcesses()) {
+    std::vector<pid_t> tids = GetThreadsInProcess(pid);
+    process_map[pid].insert(tids.begin(), tids.end());
+  }
+  for (pid_t tid : event_selection_set_.GetMonitoredThreads()) {
+    pid_t pid;
+    if (GetProcessForThread(tid, &pid)) {
+      process_map[pid].insert(tid);
     }
   }
 
   // Dump each process.
-  for (auto& pair : process_map) {
-    if (!DumpProcessMaps(pair.first, pair.second)) {
+  for (const auto& [pid, tids] : process_map) {
+    if (!map_record_reader_->ReadProcessMaps(pid, tids, 0)) {
       return false;
-    }
-  }
-  return true;
-}
-
-bool RecordCommand::DumpProcessMaps(pid_t pid, const std::unordered_set<pid_t>& tids) {
-  // Dump mmap records.
-  std::vector<ThreadMmap> thread_mmaps;
-  if (!GetThreadMmapsInProcess(pid, &thread_mmaps)) {
-    // The process may exit before we get its info.
-    return true;
-  }
-  const perf_event_attr& attr = *dumping_attr_id_.attr;
-  uint64_t event_id = dumping_attr_id_.ids[0];
-  for (const auto& map : thread_mmaps) {
-    if (!(map.prot & PROT_EXEC) && !event_selection_set_.RecordNotExecutableMaps()) {
-      continue;
-    }
-    Mmap2Record record(attr, false, pid, pid, map.start_addr, map.len,
-                      map.pgoff, map.prot, map.name, event_id, last_record_timestamp_);
-    if (!ProcessRecord(&record)) {
-      return false;
-    }
-  }
-  // Dump process name.
-  std::string process_name = GetCompleteProcessName(pid);
-  if (!process_name.empty()) {
-    CommRecord record(attr, pid, pid, process_name, event_id, last_record_timestamp_);
-    if (!ProcessRecord(&record)) {
-      return false;
-    }
-  }
-  // Dump thread info.
-  for (const auto& tid : tids) {
-    std::string name;
-    if (tid != pid && GetThreadName(tid, &name)) {
-      // If a thread name matches the suffix of its process name, probably the thread name
-      // is stripped by TASK_COMM_LEN.
-      if (android::base::EndsWith(process_name, name)) {
-        name = process_name;
-      }
-      CommRecord comm_record(attr, pid, tid, name, event_id, last_record_timestamp_);
-      if (!ProcessRecord(&comm_record)) {
-        return false;
-      }
     }
   }
   return true;
@@ -1338,9 +1326,7 @@ bool RecordCommand::DumpMapsForRecord(Record* record) {
     pid_t pid = static_cast<SampleRecord*>(record)->tid_data.pid;
     if (dumped_processes_.find(pid) == dumped_processes_.end()) {
       // Dump map info and all thread names for that process.
-      std::vector<pid_t> tids = GetThreadsInProcess(pid);
-      if (!tids.empty() &&
-          !DumpProcessMaps(pid, std::unordered_set<pid_t>(tids.begin(), tids.end()))) {
+      if (!map_record_reader_->ReadProcessMaps(pid, last_record_timestamp_)) {
         return false;
       }
       dumped_processes_.insert(pid);
@@ -1404,8 +1390,8 @@ bool RecordCommand::ProcessJITDebugInfo(const std::vector<JITDebugInfo>& debug_i
   EventAttrWithId attr_id = event_selection_set_.GetEventAttrWithId()[0];
   for (auto& info : debug_info) {
     if (info.type == JITDebugInfo::JIT_DEBUG_JIT_CODE) {
-      uint64_t timestamp = jit_debug_reader_->SyncWithRecords() ? info.timestamp
-                                                                : last_record_timestamp_;
+      uint64_t timestamp =
+          jit_debug_reader_->SyncWithRecords() ? info.timestamp : last_record_timestamp_;
       Mmap2Record record(*attr_id.attr, false, info.pid, info.pid, info.jit_code_addr,
                          info.jit_code_len, info.file_offset, map_flags::PROT_JIT_SYMFILE_MAP,
                          info.file_path, attr_id.ids[0], timestamp);
@@ -1415,8 +1401,8 @@ bool RecordCommand::ProcessJITDebugInfo(const std::vector<JITDebugInfo>& debug_i
     } else {
       if (info.extracted_dex_file_map) {
         ThreadMmap& map = *info.extracted_dex_file_map;
-        uint64_t timestamp = jit_debug_reader_->SyncWithRecords() ? info.timestamp
-                                                                  : last_record_timestamp_;
+        uint64_t timestamp =
+            jit_debug_reader_->SyncWithRecords() ? info.timestamp : last_record_timestamp_;
         Mmap2Record record(*attr_id.attr, false, info.pid, info.pid, map.start_addr, map.len,
                            map.pgoff, map.prot, map.name, attr_id.ids[0], timestamp);
         if (!ProcessRecord(&record)) {
@@ -1524,13 +1510,10 @@ void RecordCommand::UpdateRecord(Record* record) {
 }
 
 bool RecordCommand::UnwindRecord(SampleRecord& r) {
-  if ((r.sample_type & PERF_SAMPLE_CALLCHAIN) &&
-      (r.sample_type & PERF_SAMPLE_REGS_USER) &&
-      (r.regs_user_data.reg_mask != 0) &&
-      (r.sample_type & PERF_SAMPLE_STACK_USER) &&
+  if ((r.sample_type & PERF_SAMPLE_CALLCHAIN) && (r.sample_type & PERF_SAMPLE_REGS_USER) &&
+      (r.regs_user_data.reg_mask != 0) && (r.sample_type & PERF_SAMPLE_STACK_USER) &&
       (r.GetValidStackSize() > 0)) {
-    ThreadEntry* thread =
-        thread_tree_.FindThreadOrNew(r.tid_data.pid, r.tid_data.tid);
+    ThreadEntry* thread = thread_tree_.FindThreadOrNew(r.tid_data.pid, r.tid_data.tid);
     RegSet regs(r.regs_user_data.abi, r.regs_user_data.reg_mask, r.regs_user_data.regs);
     std::vector<uint64_t> ips;
     std::vector<uint64_t> sps;
@@ -1558,24 +1541,66 @@ bool RecordCommand::UnwindRecord(SampleRecord& r) {
   return true;
 }
 
-bool RecordCommand::PostUnwindRecords() {
-  // 1. Move records from record_filename_ to a temporary file.
+std::unique_ptr<RecordFileReader> RecordCommand::MoveRecordFile(const std::string& old_filename) {
   if (!record_file_writer_->Close()) {
-    return false;
+    return nullptr;
   }
   record_file_writer_.reset();
-  std::unique_ptr<TemporaryFile> tmp_file = ScopedTempFiles::CreateTempFile();
-  if (!Workload::RunCmd({"mv", record_filename_, tmp_file->path})) {
-    return false;
+  {
+    std::error_code ec;
+    std::filesystem::rename(record_filename_, old_filename, ec);
+    if (ec) {
+      LOG(ERROR) << "Failed to rename: " << ec.message();
+      return nullptr;
+    }
   }
-  std::unique_ptr<RecordFileReader> reader = RecordFileReader::CreateInstance(tmp_file->path);
+  record_file_writer_ = CreateRecordFile(record_filename_);
+  if (!record_file_writer_) {
+    return nullptr;
+  }
+  return RecordFileReader::CreateInstance(old_filename);
+}
+
+bool RecordCommand::MergeMapRecords() {
+  // 1. Move records from record_filename_ to a temporary file.
+  auto tmp_file = ScopedTempFiles::CreateTempFile();
+  auto reader = MoveRecordFile(tmp_file->path);
   if (!reader) {
     return false;
   }
 
-  // 2. Read records from the temporary file, and write unwound records back to record_filename_.
-  record_file_writer_ = CreateRecordFile(record_filename_);
-  if (!record_file_writer_) {
+  // 2. Copy map records from map record thread.
+  auto callback = [this](Record* r) {
+    UpdateRecord(r);
+    if (ShouldOmitRecord(r)) {
+      return true;
+    }
+    return record_file_writer_->WriteRecord(*r);
+  };
+  if (!map_record_thread_->ReadMapRecords(callback)) {
+    return false;
+  }
+
+  // 3. Copy data section from the old recording file.
+  std::vector<char> buf(64 * 1024);
+  uint64_t offset = reader->FileHeader().data.offset;
+  uint64_t left_size = reader->FileHeader().data.size;
+  while (left_size > 0) {
+    size_t nread = std::min<size_t>(left_size, buf.size());
+    if (!reader->ReadAtOffset(offset, buf.data(), nread) ||
+        !record_file_writer_->WriteData(buf.data(), nread)) {
+      return false;
+    }
+    offset += nread;
+    left_size -= nread;
+  }
+  return true;
+}
+
+bool RecordCommand::PostUnwindRecords() {
+  auto tmp_file = ScopedTempFiles::CreateTempFile();
+  auto reader = MoveRecordFile(tmp_file->path);
+  if (!reader) {
     return false;
   }
   sample_record_count_ = 0;
@@ -1592,23 +1617,14 @@ bool RecordCommand::JoinCallChains() {
     return false;
   }
   // 2. Move records from record_filename_ to a temporary file.
-  if (!record_file_writer_->Close()) {
-    return false;
-  }
-  record_file_writer_.reset();
-  std::unique_ptr<TemporaryFile> tmp_file = ScopedTempFiles::CreateTempFile();
-  if (!Workload::RunCmd({"mv", record_filename_, tmp_file->path})) {
+  auto tmp_file = ScopedTempFiles::CreateTempFile();
+  auto reader = MoveRecordFile(tmp_file->path);
+  if (!reader) {
     return false;
   }
 
   // 3. Read records from the temporary file, and write record with joined call chains back
   // to record_filename_.
-  std::unique_ptr<RecordFileReader> reader = RecordFileReader::CreateInstance(tmp_file->path);
-  record_file_writer_ = CreateRecordFile(record_filename_);
-  if (!reader || !record_file_writer_) {
-    return false;
-  }
-
   auto record_callback = [&](std::unique_ptr<Record> r) {
     if (r->type() != PERF_RECORD_SAMPLE) {
       return record_file_writer_->WriteRecord(*r);
@@ -1642,8 +1658,8 @@ void LoadSymbolMapFile(int pid, const std::string& package, ThreadTree* thread_t
   // For now, use /data/local/tmp/perf-<pid>.map, which works for standalone programs,
   // and /data/data/<package>/perf-<pid>.map, which works for apps.
   auto path = package.empty()
-      ? android::base::StringPrintf("/data/local/tmp/perf-%d.map", pid)
-      : android::base::StringPrintf("/data/data/%s/perf-%d.map", package.c_str(), pid);
+                  ? android::base::StringPrintf("/data/local/tmp/perf-%d.map", pid)
+                  : android::base::StringPrintf("/data/data/%s/perf-%d.map", package.c_str(), pid);
 
   auto symbols = ReadSymbolMapFromFile(path);
   if (!symbols.empty()) {
@@ -1653,13 +1669,13 @@ void LoadSymbolMapFile(int pid, const std::string& package, ThreadTree* thread_t
 
 }  // namespace
 
-bool RecordCommand::DumpAdditionalFeatures(
-    const std::vector<std::string>& args) {
+bool RecordCommand::DumpAdditionalFeatures(const std::vector<std::string>& args) {
   // Read data section of perf.data to collect hit file information.
   thread_tree_.ClearThreadAndMap();
   bool kernel_symbols_available = false;
-  if (CheckKernelSymbolAddresses()) {
-    Dso::ReadKernelSymbolsFromProc();
+  std::string kallsyms;
+  if (LoadKernelSymbols(&kallsyms)) {
+    Dso::SetKallsyms(kallsyms);
     kernel_symbols_available = true;
   }
   std::unordered_set<int> loaded_symbol_maps;
@@ -1703,12 +1719,10 @@ bool RecordCommand::DumpAdditionalFeatures(
     PLOG(ERROR) << "uname() failed";
     return false;
   }
-  if (!record_file_writer_->WriteFeatureString(PerfFileFormat::FEAT_OSRELEASE,
-                                               uname_buf.release)) {
+  if (!record_file_writer_->WriteFeatureString(PerfFileFormat::FEAT_OSRELEASE, uname_buf.release)) {
     return false;
   }
-  if (!record_file_writer_->WriteFeatureString(PerfFileFormat::FEAT_ARCH,
-                                               uname_buf.machine)) {
+  if (!record_file_writer_->WriteFeatureString(PerfFileFormat::FEAT_ARCH, uname_buf.machine)) {
     return false;
   }
 
@@ -1721,8 +1735,7 @@ bool RecordCommand::DumpAdditionalFeatures(
   if (!record_file_writer_->WriteCmdlineFeature(cmdline)) {
     return false;
   }
-  if (branch_sampling_ != 0 &&
-      !record_file_writer_->WriteBranchStackFeature()) {
+  if (branch_sampling_ != 0 && !record_file_writer_->WriteBranchStackFeature()) {
     return false;
   }
   if (!DumpMetaInfoFeature(kernel_symbols_available)) {
@@ -1752,8 +1765,7 @@ bool RecordCommand::DumpBuildIdFeature() {
       if (!GetKernelBuildId(&build_id)) {
         continue;
       }
-      build_id_records.push_back(
-          BuildIdRecord(true, UINT_MAX, build_id, dso->Path()));
+      build_id_records.push_back(BuildIdRecord(true, UINT_MAX, build_id, dso->Path()));
     } else if (dso->type() == DSO_KERNEL_MODULE) {
       std::string path = dso->Path();
       std::string module_name = basename(&path[0]);
@@ -1773,8 +1785,7 @@ bool RecordCommand::DumpBuildIdFeature() {
         LOG(DEBUG) << "Can't read build_id from file " << dso->Path();
         continue;
       }
-      build_id_records.push_back(
-          BuildIdRecord(false, UINT_MAX, build_id, dso->Path()));
+      build_id_records.push_back(BuildIdRecord(false, UINT_MAX, build_id, dso->Path()));
     }
   }
   if (!record_file_writer_->WriteBuildIdFeature(build_id_records)) {
@@ -1784,7 +1795,6 @@ bool RecordCommand::DumpBuildIdFeature() {
 }
 
 bool RecordCommand::DumpFileFeature() {
-  std::vector<Dso*> dso_v = thread_tree_.GetAllDsos();
   return record_file_writer_->WriteFileFeatures(thread_tree_.GetAllDsos());
 }
 
@@ -1797,13 +1807,17 @@ bool RecordCommand::DumpMetaInfoFeature(bool kernel_symbols_available) {
   // understanding of event types, even if they are on another machine.
   info_map["event_type_info"] = ScopedEventTypes::BuildString(event_selection_set_.GetEvents());
 #if defined(__ANDROID__)
-  info_map["product_props"] = android::base::StringPrintf("%s:%s:%s",
-                                  android::base::GetProperty("ro.product.manufacturer", "").c_str(),
-                                  android::base::GetProperty("ro.product.model", "").c_str(),
-                                  android::base::GetProperty("ro.product.name", "").c_str());
+  info_map["product_props"] = android::base::StringPrintf(
+      "%s:%s:%s", android::base::GetProperty("ro.product.manufacturer", "").c_str(),
+      android::base::GetProperty("ro.product.model", "").c_str(),
+      android::base::GetProperty("ro.product.name", "").c_str());
   info_map["android_version"] = android::base::GetProperty("ro.build.version.release", "");
   if (!app_package_name_.empty()) {
     info_map["app_package_name"] = app_package_name_;
+  }
+  if (event_selection_set_.HasAuxTrace()) {
+    // used by --exclude-perf in cmd_inject.cpp
+    info_map["recording_process"] = std::to_string(getpid());
   }
 #endif
   info_map["clockid"] = clockid_;
@@ -1816,10 +1830,8 @@ bool RecordCommand::DumpMetaInfoFeature(bool kernel_symbols_available) {
 }
 
 void RecordCommand::CollectHitFileInfo(const SampleRecord& r) {
-  const ThreadEntry* thread =
-      thread_tree_.FindThreadOrNew(r.tid_data.pid, r.tid_data.tid);
-  const MapEntry* map =
-      thread_tree_.FindMap(thread, r.ip_data.ip, r.InKernel());
+  const ThreadEntry* thread = thread_tree_.FindThreadOrNew(r.tid_data.pid, r.tid_data.tid);
+  const MapEntry* map = thread_tree_.FindMap(thread, r.ip_data.ip, r.InKernel());
   Dso* dso = map->dso;
   const Symbol* symbol;
   if (dump_symbols_) {
@@ -1845,8 +1857,7 @@ void RecordCommand::CollectHitFileInfo(const SampleRecord& r) {
             in_kernel = false;
             break;
           default:
-            LOG(DEBUG) << "Unexpected perf_context in callchain: " << std::hex
-                       << ip;
+            LOG(DEBUG) << "Unexpected perf_context in callchain: " << std::hex << ip;
         }
       } else {
         if (first_ip) {
@@ -1872,59 +1883,94 @@ void RecordCommand::CollectHitFileInfo(const SampleRecord& r) {
   }
 }
 
-namespace simpleperf {
+}  // namespace
+
+static bool ConsumeStr(const char*& p, const char* s) {
+  if (strncmp(p, s, strlen(s)) == 0) {
+    p += strlen(s);
+    return true;
+  }
+  return false;
+}
+
+static bool ConsumeAddr(const char*& p, uint64_t* addr) {
+  errno = 0;
+  char* end;
+  *addr = strtoull(p, &end, 0);
+  if (errno == 0 && p != end) {
+    p = end;
+    return true;
+  }
+  return false;
+}
 
 // To reduce function length, not all format errors are checked.
 static bool ParseOneAddrFilter(const std::string& s, std::vector<AddrFilter>* filters) {
-  std::vector<std::string> args = android::base::Split(s, " -@");
-  std::unique_ptr<ElfFile> elf;
+  std::vector<std::string> args = android::base::Split(s, " ");
+  if (args.size() != 2) {
+    return false;
+  }
+
   uint64_t addr1;
   uint64_t addr2;
   uint64_t off1;
   uint64_t off2;
   std::string path;
 
-  if (args[0] == "start" || args[0] == "stop") {
-    if (args.size() >= 2 && ParseUint(args[1], &addr1)) {
-      if (args.size() == 2) {
-        // start <kernel_addr>  || stop <kernel_addr>
-        filters->emplace_back(
-            args[0] == "start" ? AddrFilter::KERNEL_START : AddrFilter::KERNEL_STOP, addr1, 0, "");
-        return true;
-      }
-      if (auto elf = ElfFile::Open(args[2]);
-          elf && elf->VaddrToOff(addr1, &off1) && Realpath(args[2], &path)) {
-        // start <vaddr>@<file_path> || stop <vaddr>@<file_path>
-        filters->emplace_back(args[0] == "start" ? AddrFilter::FILE_START : AddrFilter::FILE_STOP,
-                              off1, 0, path);
+  if (auto p = s.data(); ConsumeStr(p, "start") && ConsumeAddr(p, &addr1)) {
+    if (*p == '\0') {
+      // start <kernel_addr>
+      filters->emplace_back(AddrFilter::KERNEL_START, addr1, 0, "");
+      return true;
+    }
+    if (ConsumeStr(p, "@") && *p != '\0') {
+      // start <vaddr>@<file_path>
+      if (auto elf = ElfFile::Open(p); elf && elf->VaddrToOff(addr1, &off1) && Realpath(p, &path)) {
+        filters->emplace_back(AddrFilter::FILE_START, off1, 0, path);
         return true;
       }
     }
-  } else if (args[0] == "filter") {
-    if (args.size() == 2) {
-      // filter <file_path>
-      if (auto elf = ElfFile::Open(args[1]); elf) {
-        for (const ElfSegment& seg : elf->GetProgramHeader()) {
-          if (seg.is_executable) {
-            filters->emplace_back(AddrFilter::FILE_RANGE, seg.file_offset, seg.file_size, args[1]);
-          }
-        }
+  }
+  if (auto p = s.data(); ConsumeStr(p, "stop") && ConsumeAddr(p, &addr1)) {
+    if (*p == '\0') {
+      // stop <kernel_addr>
+      filters->emplace_back(AddrFilter::KERNEL_STOP, addr1, 0, "");
+      return true;
+    }
+    if (ConsumeStr(p, "@") && *p != '\0') {
+      // stop <vaddr>@<file_path>
+      if (auto elf = ElfFile::Open(p); elf && elf->VaddrToOff(addr1, &off1) && Realpath(p, &path)) {
+        filters->emplace_back(AddrFilter::FILE_STOP, off1, 0, path);
         return true;
       }
-    } else if (args.size() >= 3 && ParseUint(args[1], &addr1) && ParseUint(args[2], &addr2) &&
-               addr1 < addr2) {
-      if (args.size() == 3) {
-        // filter <kernel_addr_start>-<kernel_addr_end>
-        filters->emplace_back(AddrFilter::KERNEL_RANGE, addr1, addr2 - addr1, "");
-        return true;
-      }
-      if (auto elf = ElfFile::Open(args[3]); elf && elf->VaddrToOff(addr1, &off1) &&
-                                             elf->VaddrToOff(addr2, &off2) &&
-                                             Realpath(args[3], &path)) {
-        // filter <vaddr_start>-<vaddr_end>@<file_path>
+    }
+  }
+  if (auto p = s.data(); ConsumeStr(p, "filter") && ConsumeAddr(p, &addr1) && ConsumeStr(p, "-") &&
+                         ConsumeAddr(p, &addr2)) {
+    if (*p == '\0') {
+      // filter <kernel_addr_start>-<kernel_addr_end>
+      filters->emplace_back(AddrFilter::KERNEL_RANGE, addr1, addr2 - addr1, "");
+      return true;
+    }
+    if (ConsumeStr(p, "@") && *p != '\0') {
+      // filter <vaddr_start>-<vaddr_end>@<file_path>
+      if (auto elf = ElfFile::Open(p); elf && elf->VaddrToOff(addr1, &off1) &&
+                                       elf->VaddrToOff(addr2, &off2) && Realpath(p, &path)) {
         filters->emplace_back(AddrFilter::FILE_RANGE, off1, off2 - off1, path);
         return true;
       }
+    }
+  }
+  if (auto p = s.data(); ConsumeStr(p, "filter") && *p != '\0') {
+    // filter <file_path>
+    path = android::base::Trim(p);
+    if (auto elf = ElfFile::Open(path); elf) {
+      for (const ElfSegment& seg : elf->GetProgramHeader()) {
+        if (seg.is_executable) {
+          filters->emplace_back(AddrFilter::FILE_RANGE, seg.file_offset, seg.file_size, path);
+        }
+      }
+      return true;
     }
   }
   return false;
@@ -1942,8 +1988,7 @@ std::vector<AddrFilter> ParseAddrFilterOption(const std::string& s) {
 }
 
 void RegisterRecordCommand() {
-  RegisterCommand("record",
-                  [] { return std::unique_ptr<Command>(new RecordCommand()); });
+  RegisterCommand("record", [] { return std::unique_ptr<Command>(new RecordCommand()); });
 }
 
 }  // namespace simpleperf

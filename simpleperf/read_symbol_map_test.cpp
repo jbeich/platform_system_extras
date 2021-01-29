@@ -23,21 +23,20 @@
 
 #include "dso.h"
 
-namespace simpleperf {
-
-namespace {
+using namespace simpleperf;
 
 TEST(read_symbol_map, smoke) {
-  std::string content("\n"                     // skip
-                      "   0x2000 0x20 two \n"
-                      "0x4000\n"               // skip
-                      "       0x40 four\n"     // skip
-                      "0x1000 0x10 one\n"
-                      "     \n"                // skip
-                      "0x5000 0x50five\n"      // skip
-                      " skip this line\n"      // skip
-                      "0x6000 0x60 six six\n"  // skip
-                      "0x3000 48   three   \n");
+  std::string content(
+      "\n"  // skip
+      "   0x2000 0x20 two \n"
+      "0x4000\n"            // skip
+      "       0x40 four\n"  // skip
+      "0x1000 0x10 one\n"
+      "     \n"                // skip
+      "0x5000 0x50five\n"      // skip
+      " skip this line\n"      // skip
+      "0x6000 0x60 six six\n"  // skip
+      "0x3000 48   three   \n");
 
   auto symbols = ReadSymbolMapFromString(content);
 
@@ -55,7 +54,3 @@ TEST(read_symbol_map, smoke) {
   ASSERT_EQ(0x30, symbols[2].len);
   ASSERT_STREQ("three", symbols[2].Name());
 }
-
-}  // namespace
-
-}  // namespace simpleperf
