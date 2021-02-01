@@ -30,13 +30,14 @@
 #include "event_attr.h"
 #include "event_type.h"
 #include "record_file.h"
+#include "report_utils.h"
 #include "thread_tree.h"
 #include "utils.h"
 
-using namespace simpleperf;
-namespace proto = simpleperf_report_proto;
-
+namespace simpleperf {
 namespace {
+
+namespace proto = simpleperf_report_proto;
 
 static const char PROT_FILE_MAGIC[] = "SIMPLEPERF";
 static const uint16_t PROT_FILE_VERSION = 1u;
@@ -63,11 +64,36 @@ class ProtobufFileReader : public google::protobuf::io::CopyingInputStream {
   FILE* in_fp_;
 };
 
-struct CallEntry {
-  Dso* dso;
-  const Symbol* symbol;
-  uint64_t vaddr_in_file;
-};
+static proto::Sample_CallChainEntry_ExecutionType ToProtoExecutionType(
+    CallChainExecutionType type) {
+  switch (type) {
+    case CallChainExecutionType::NATIVE_METHOD:
+      return proto::Sample_CallChainEntry_ExecutionType_NATIVE_METHOD;
+    case CallChainExecutionType::INTERPRETED_JVM_METHOD:
+      return proto::Sample_CallChainEntry_ExecutionType_INTERPRETED_JVM_METHOD;
+    case CallChainExecutionType::JIT_JVM_METHOD:
+      return proto::Sample_CallChainEntry_ExecutionType_JIT_JVM_METHOD;
+    case CallChainExecutionType::ART_METHOD:
+      return proto::Sample_CallChainEntry_ExecutionType_ART_METHOD;
+  }
+  CHECK(false) << "unexpected execution type";
+  return proto::Sample_CallChainEntry_ExecutionType_NATIVE_METHOD;
+}
+
+static const char* ProtoExecutionTypeToString(proto::Sample_CallChainEntry_ExecutionType type) {
+  switch (type) {
+    case proto::Sample_CallChainEntry_ExecutionType_NATIVE_METHOD:
+      return "native_method";
+    case proto::Sample_CallChainEntry_ExecutionType_INTERPRETED_JVM_METHOD:
+      return "interpreted_jvm_method";
+    case proto::Sample_CallChainEntry_ExecutionType_JIT_JVM_METHOD:
+      return "jit_jvm_method";
+    case proto::Sample_CallChainEntry_ExecutionType_ART_METHOD:
+      return "art_method";
+  }
+  CHECK(false) << "unexpected execution type: " << type;
+  return "";
+}
 
 class ReportSampleCommand : public Command {
  public:
@@ -88,6 +114,7 @@ class ReportSampleCommand : public Command {
 "--remove-unknown-kernel-symbols  Remove kernel callchains when kernel symbols\n"
 "                                 are not available in perf.data.\n"
 "--show-art-frames  Show frames of internal methods in the ART Java interpreter.\n"
+"--show-execution-type  Show execution type of a method\n"
 "--symdir <dir>     Look for files with symbols in a directory recursively.\n"
                 // clang-format on
                 ),
@@ -101,7 +128,7 @@ class ReportSampleCommand : public Command {
         trace_offcpu_(false),
         remove_unknown_kernel_symbols_(false),
         kernel_symbols_available_(false),
-        show_art_frames_(false) {}
+        callchain_report_builder_(thread_tree_) {}
 
   bool Run(const std::vector<std::string>& args) override;
 
@@ -114,14 +141,13 @@ class ReportSampleCommand : public Command {
   void UpdateThreadName(uint32_t pid, uint32_t tid);
   bool ProcessSampleRecord(const SampleRecord& r);
   bool PrintSampleRecordInProtobuf(const SampleRecord& record,
-                                   const std::vector<CallEntry>& entries);
-  bool GetCallEntry(const ThreadEntry* thread, bool in_kernel, uint64_t ip, bool omit_unknown_dso,
-                    CallEntry* entry);
+                                   const std::vector<CallChainReportEntry>& entries);
   bool WriteRecordInProtobuf(proto::Record& proto_record);
   bool PrintLostSituationInProtobuf();
   bool PrintFileInfoInProtobuf();
   bool PrintThreadInfoInProtobuf();
-  bool PrintSampleRecord(const SampleRecord& record, const std::vector<CallEntry>& entries);
+  bool PrintSampleRecord(const SampleRecord& record,
+                         const std::vector<CallChainReportEntry>& entries);
   void PrintLostSituation();
 
   std::string record_filename_;
@@ -139,7 +165,8 @@ class ReportSampleCommand : public Command {
   std::vector<std::string> event_types_;
   bool remove_unknown_kernel_symbols_;
   bool kernel_symbols_available_;
-  bool show_art_frames_;
+  bool show_execution_type_ = false;
+  CallChainReportBuilder callchain_report_builder_;
   // map from <pid, tid> to thread name
   std::map<uint64_t, const char*> thread_names_;
 };
@@ -254,7 +281,9 @@ bool ReportSampleCommand::ParseOptions(const std::vector<std::string>& args) {
     } else if (args[i] == "--remove-unknown-kernel-symbols") {
       remove_unknown_kernel_symbols_ = true;
     } else if (args[i] == "--show-art-frames") {
-      show_art_frames_ = true;
+      callchain_report_builder_.SetRemoveArtFrame(false);
+    } else if (args[i] == "--show-execution-type") {
+      show_execution_type_ = true;
     } else if (args[i] == "--symdir") {
       if (!NextArgumentOrError(args, &i)) {
         return false;
@@ -347,6 +376,10 @@ bool ReportSampleCommand::DumpProtobufReport(const std::string& filename) {
         if (symbol_id != -1) {
           max_symbol_id_map[callchain.file_id()] =
               std::max(max_symbol_id_map[callchain.file_id()], symbol_id);
+        }
+        if (callchain.has_execution_type()) {
+          FprintIndented(report_fp_, 2, "execution_type: %s\n",
+                         ProtoExecutionTypeToString(callchain.execution_type()));
         }
       }
     } else if (proto_record.has_lost()) {
@@ -477,34 +510,15 @@ bool ReportSampleCommand::ProcessSampleRecord(const SampleRecord& r) {
     kernel_ip_count = std::min(kernel_ip_count, static_cast<size_t>(1u));
   }
   sample_count_++;
-  std::vector<CallEntry> entries;
-  bool near_java_method = false;
-  auto is_entry_for_interpreter = [](const CallEntry& entry) {
-    return android::base::EndsWith(entry.dso->Path(), "/libart.so");
-  };
   const ThreadEntry* thread = thread_tree_.FindThreadOrNew(r.tid_data.pid, r.tid_data.tid);
-  for (size_t i = 0; i < ips.size(); ++i) {
-    bool omit_unknown_dso = i > 0u;
-    CallEntry entry;
-    if (!GetCallEntry(thread, i < kernel_ip_count, ips[i], omit_unknown_dso, &entry)) {
+  std::vector<CallChainReportEntry> entries =
+      callchain_report_builder_.Build(thread, ips, kernel_ip_count);
+
+  for (size_t i = 1; i < entries.size(); i++) {
+    if (thread_tree_.IsUnknownDso(entries[i].dso)) {
+      entries.resize(i);
       break;
     }
-    if (!show_art_frames_) {
-      // Remove interpreter frames both before and after the Java frame.
-      if (entry.dso->IsForJavaMethod()) {
-        near_java_method = true;
-        while (!entries.empty() && is_entry_for_interpreter(entries.back())) {
-          entries.pop_back();
-        }
-      } else if (is_entry_for_interpreter(entry)) {
-        if (near_java_method) {
-          continue;
-        }
-      } else {
-        near_java_method = false;
-      }
-    }
-    entries.push_back(entry);
   }
   if (use_protobuf_) {
     uint64_t key = (static_cast<uint64_t>(r.tid_data.pid) << 32) | r.tid_data.tid;
@@ -514,8 +528,8 @@ bool ReportSampleCommand::ProcessSampleRecord(const SampleRecord& r) {
   return PrintSampleRecord(r, entries);
 }
 
-bool ReportSampleCommand::PrintSampleRecordInProtobuf(const SampleRecord& r,
-                                                      const std::vector<CallEntry>& entries) {
+bool ReportSampleCommand::PrintSampleRecordInProtobuf(
+    const SampleRecord& r, const std::vector<CallChainReportEntry>& entries) {
   proto::Record proto_record;
   proto::Sample* sample = proto_record.mutable_sample();
   sample->set_time(r.time_data.time);
@@ -523,7 +537,7 @@ bool ReportSampleCommand::PrintSampleRecordInProtobuf(const SampleRecord& r,
   sample->set_thread_id(r.tid_data.tid);
   sample->set_event_type_id(record_file_reader_->GetAttrIndexOfRecord(&r));
 
-  for (const CallEntry& node : entries) {
+  for (const auto& node : entries) {
     proto::Sample_CallChainEntry* callchain = sample->add_callchain();
     uint32_t file_id;
     if (!node.dso->GetDumpId(&file_id)) {
@@ -538,6 +552,9 @@ bool ReportSampleCommand::PrintSampleRecordInProtobuf(const SampleRecord& r,
     callchain->set_vaddr_in_file(node.vaddr_in_file);
     callchain->set_file_id(file_id);
     callchain->set_symbol_id(symbol_id);
+    if (show_execution_type_) {
+      callchain->set_execution_type(ToProtoExecutionType(node.execution_type));
+    }
 
     // Android studio wants a clear call chain end to notify whether a call chain is complete.
     // For the main thread, the call chain ends at __libc_init in libc.so. For other threads,
@@ -557,20 +574,6 @@ bool ReportSampleCommand::WriteRecordInProtobuf(proto::Record& proto_record) {
   if (!proto_record.SerializeToCodedStream(coded_os_)) {
     LOG(ERROR) << "failed to write record to protobuf";
     return false;
-  }
-  return true;
-}
-
-bool ReportSampleCommand::GetCallEntry(const ThreadEntry* thread, bool in_kernel, uint64_t ip,
-                                       bool omit_unknown_dso, CallEntry* entry) {
-  const MapEntry* map = thread_tree_.FindMap(thread, ip, in_kernel);
-  if (omit_unknown_dso && thread_tree_.IsUnknownDso(map->dso)) {
-    return false;
-  }
-  entry->symbol = thread_tree_.FindSymbol(map, ip, &(entry->vaddr_in_file), &(entry->dso));
-  // If we can't find symbol, use the dso shown in the map.
-  if (entry->symbol == thread_tree_.UnknownSymbol()) {
-    entry->dso = map->dso;
   }
   return true;
 }
@@ -613,10 +616,8 @@ bool ReportSampleCommand::PrintFileInfoInProtobuf() {
     std::sort(dump_symbols.begin(), dump_symbols.end(), Symbol::CompareByDumpId);
 
     for (const auto& sym : dump_symbols) {
-      std::string* symbol = file->add_symbol();
-      *symbol = sym->DemangledName();
-      std::string* mangled_symbol = file->add_mangled_symbol();
-      *mangled_symbol = sym->Name();
+      file->add_symbol(sym->DemangledName());
+      file->add_mangled_symbol(sym->Name());
     }
     if (!WriteRecordInProtobuf(proto_record)) {
       return false;
@@ -642,7 +643,7 @@ bool ReportSampleCommand::PrintThreadInfoInProtobuf() {
 }
 
 bool ReportSampleCommand::PrintSampleRecord(const SampleRecord& r,
-                                            const std::vector<CallEntry>& entries) {
+                                            const std::vector<CallChainReportEntry>& entries) {
   FprintIndented(report_fp_, 0, "sample:\n");
   FprintIndented(report_fp_, 1, "event_type: %s\n",
                  event_types_[record_file_reader_->GetAttrIndexOfRecord(&r)].data());
@@ -655,6 +656,10 @@ bool ReportSampleCommand::PrintSampleRecord(const SampleRecord& r,
   FprintIndented(report_fp_, 1, "vaddr_in_file: %" PRIx64 "\n", entries[0].vaddr_in_file);
   FprintIndented(report_fp_, 1, "file: %s\n", entries[0].dso->GetReportPath().data());
   FprintIndented(report_fp_, 1, "symbol: %s\n", entries[0].symbol->DemangledName());
+  if (show_execution_type_) {
+    FprintIndented(report_fp_, 1, "execution_type: %s\n",
+                   ProtoExecutionTypeToString(ToProtoExecutionType(entries[0].execution_type)));
+  }
 
   if (entries.size() > 1u) {
     FprintIndented(report_fp_, 1, "callchain:\n");
@@ -662,6 +667,10 @@ bool ReportSampleCommand::PrintSampleRecord(const SampleRecord& r,
       FprintIndented(report_fp_, 2, "vaddr_in_file: %" PRIx64 "\n", entries[i].vaddr_in_file);
       FprintIndented(report_fp_, 2, "file: %s\n", entries[i].dso->GetReportPath().data());
       FprintIndented(report_fp_, 2, "symbol: %s\n", entries[i].symbol->DemangledName());
+      if (show_execution_type_) {
+        FprintIndented(report_fp_, 1, "execution_type: %s\n",
+                       ProtoExecutionTypeToString(ToProtoExecutionType(entries[i].execution_type)));
+      }
     }
   }
   return true;
@@ -674,8 +683,6 @@ void ReportSampleCommand::PrintLostSituation() {
 }
 
 }  // namespace
-
-namespace simpleperf {
 
 void RegisterReportSampleCommand() {
   RegisterCommand("report-sample",

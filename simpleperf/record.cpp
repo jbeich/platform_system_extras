@@ -29,7 +29,7 @@
 #include "tracing.h"
 #include "utils.h"
 
-using namespace simpleperf;
+namespace simpleperf {
 
 static std::string RecordTypeToString(int record_type) {
   static std::unordered_map<int, std::string> record_type_names = {
@@ -900,16 +900,17 @@ void BuildIdRecord::DumpData(size_t indent) const {
   PrintIndented(indent, "filename %s\n", filename);
 }
 
-BuildIdRecord::BuildIdRecord(bool in_kernel, pid_t pid, const BuildId& build_id,
+BuildIdRecord::BuildIdRecord(bool in_kernel, uint32_t pid, const BuildId& build_id,
                              const std::string& filename) {
   SetTypeAndMisc(PERF_RECORD_BUILD_ID, in_kernel ? PERF_RECORD_MISC_KERNEL : PERF_RECORD_MISC_USER);
   this->pid = pid;
   this->build_id = build_id;
-  SetSize(header_size() + sizeof(pid) + Align(build_id.Size(), 8) + Align(filename.size() + 1, 64));
+  SetSize(header_size() + sizeof(this->pid) + Align(build_id.Size(), 8) +
+          Align(filename.size() + 1, 64));
   char* new_binary = new char[size()];
   char* p = new_binary;
   MoveToBinaryFormat(header, p);
-  MoveToBinaryFormat(pid, p);
+  MoveToBinaryFormat(this->pid, p);
   memcpy(p, build_id.Data(), build_id.Size());
   p += Align(build_id.Size(), 8);
   this->filename = p;
@@ -1361,3 +1362,5 @@ std::unique_ptr<Record> ReadRecordFromBuffer(const perf_event_attr& attr, char* 
   auto header = reinterpret_cast<const perf_event_header*>(p);
   return ReadRecordFromBuffer(attr, header->type, p);
 }
+
+}  // namespace simpleperf

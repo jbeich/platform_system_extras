@@ -50,7 +50,7 @@
 #include "utils.h"
 #include "workload.h"
 
-using namespace simpleperf;
+namespace simpleperf {
 
 std::vector<int> GetOnlineCpus() {
   std::vector<int> result;
@@ -181,10 +181,11 @@ std::vector<pid_t> GetAllProcesses() {
 
 bool GetThreadMmapsInProcess(pid_t pid, std::vector<ThreadMmap>* thread_mmaps) {
   thread_mmaps->clear();
-  return android::procinfo::ReadProcessMaps(pid, [&](uint64_t start, uint64_t end, uint16_t flags,
-                                                     uint64_t pgoff, ino_t, const char* name) {
-    thread_mmaps->emplace_back(start, end - start, pgoff, name, flags);
-  });
+  return android::procinfo::ReadProcessMaps(
+      pid, [&](const android::procinfo::MapInfo& mapinfo) {
+        thread_mmaps->emplace_back(mapinfo.start, mapinfo.end - mapinfo.start, mapinfo.pgoff,
+                                   mapinfo.name.c_str(), mapinfo.flags);
+      });
 }
 
 bool GetKernelBuildId(BuildId* build_id) {
@@ -405,12 +406,24 @@ bool SetPerfEventMlockKb(uint64_t mlock_kb) {
 }
 
 ArchType GetMachineArch() {
+#if defined(__i386__)
+  // For 32 bit x86 build, we can't get machine arch by uname().
+  ArchType arch = ARCH_UNSUPPORTED;
+  std::unique_ptr<FILE, decltype(&pclose)> fp(popen("uname -m", "re"), pclose);
+  if (fp) {
+    char machine[40];
+    if (fgets(machine, sizeof(machine), fp.get()) == machine) {
+      arch = GetArchType(android::base::Trim(machine));
+    }
+  }
+#else
   utsname uname_buf;
   if (TEMP_FAILURE_RETRY(uname(&uname_buf)) != 0) {
     PLOG(WARNING) << "uname() failed";
     return GetBuildArch();
   }
   ArchType arch = GetArchType(uname_buf.machine);
+#endif
   if (arch != ARCH_UNSUPPORTED) {
     return arch;
   }
@@ -893,10 +906,15 @@ const char* GetTraceFsDir() {
   return tracefs_dir;
 }
 
-bool GetKernelVersion(int* major, int* minor) {
+std::optional<std::pair<int, int>> GetKernelVersion() {
   utsname uname_buf;
-  if (TEMP_FAILURE_RETRY(uname(&uname_buf)) != 0) {
-    return false;
+  int major;
+  int minor;
+  if (TEMP_FAILURE_RETRY(uname(&uname_buf)) != 0 ||
+      sscanf(uname_buf.release, "%d.%d", &major, &minor) != 2) {
+    return std::nullopt;
   }
-  return sscanf(uname_buf.release, "%d.%d", major, minor) == 2;
+  return std::make_pair(major, minor);
 }
+
+}  // namespace simpleperf

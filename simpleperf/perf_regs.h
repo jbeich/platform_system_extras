@@ -35,6 +35,8 @@
 
 #include "perf_event.h"
 
+namespace simpleperf {
+
 enum ArchType {
   ARCH_X86_32,
   ARCH_X86_64,
@@ -67,19 +69,15 @@ class ScopedCurrentArch {
  public:
   explicit ScopedCurrentArch(ArchType arch) : saved_arch(current_arch) {
     current_arch = arch;
-    current_arch32 = GetArchForAbi(arch, PERF_SAMPLE_REGS_ABI_32);
   }
   ~ScopedCurrentArch() {
     current_arch = saved_arch;
-    current_arch32 = GetArchForAbi(saved_arch, PERF_SAMPLE_REGS_ABI_32);
   }
   static ArchType GetCurrentArch() { return current_arch; }
-  static ArchType GetCurrentArch32() { return current_arch32; }
 
  private:
   ArchType saved_arch;
   static ArchType current_arch;
-  static ArchType current_arch32;
 };
 
 struct RegSet {
@@ -95,5 +93,7 @@ struct RegSet {
   bool GetSpRegValue(uint64_t* value) const;
   bool GetIpRegValue(uint64_t* value) const;
 };
+
+}  // namespace simpleperf
 
 #endif  // SIMPLE_PERF_PERF_REGS_H_

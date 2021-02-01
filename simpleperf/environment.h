@@ -26,14 +26,18 @@
 #endif
 
 #include <functional>
+#include <optional>
 #include <set>
 #include <string>
+#include <utility>
 #include <vector>
 
 #include <android-base/file.h>
 
 #include "build_id.h"
 #include "perf_regs.h"
+
+namespace simpleperf {
 
 std::vector<int> GetOnlineCpus();
 
@@ -124,7 +128,7 @@ class ScopedTempFiles {
 bool SignalIsIgnored(int signo);
 // Return 0 if no android version.
 int GetAndroidVersion();
-bool GetKernelVersion(int* major, int* minor);
+std::optional<std::pair<int, int>> GetKernelVersion();
 
 constexpr int kAndroidVersionP = 9;
 
@@ -135,5 +139,7 @@ bool MappedFileOnlyExistInMemory(const char* filename);
 std::string GetCompleteProcessName(pid_t pid);
 
 const char* GetTraceFsDir();
+
+}  // namespace simpleperf
 
 #endif  // SIMPLE_PERF_ENVIRONMENT_H_

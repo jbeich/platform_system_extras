@@ -38,9 +38,10 @@
 #include "read_elf.h"
 #include "utils.h"
 
+namespace simpleperf {
+
 using android::base::EndsWith;
 using android::base::StartsWith;
-using namespace simpleperf;
 
 namespace simpleperf_dso_impl {
 
@@ -382,7 +383,7 @@ void Dso::AddUnknownSymbol(uint64_t vaddr_in_dso, const std::string& name) {
   unknown_symbols_.insert(std::make_pair(vaddr_in_dso, Symbol(name, vaddr_in_dso, 1)));
 }
 
-bool Dso::IsForJavaMethod() {
+bool Dso::IsForJavaMethod() const {
   if (type_ == DSO_DEX_FILE) {
     return true;
   }
@@ -642,10 +643,10 @@ class KernelDso : public Dso {
       ReadSymbolsFromDebugFile(&symbols);
     }
 
-#if defined(__linux__)
     if (symbols.empty() && !kallsyms_.empty()) {
       ReadSymbolsFromKallsyms(kallsyms_, &symbols);
     }
+#if defined(__linux__)
     if (symbols.empty()) {
       ReadSymbolsFromProc(&symbols);
     }
@@ -682,7 +683,6 @@ class KernelDso : public Dso {
     ReportReadElfSymbolResult(status, path_, debug_file_path_);
   }
 
-#if defined(__linux__)
   void ReadSymbolsFromKallsyms(std::string& kallsyms, std::vector<Symbol>* symbols) {
     auto symbol_callback = [&](const KernelSymbol& symbol) {
       if (strchr("TtWw", symbol.type) && symbol.addr != 0u) {
@@ -702,6 +702,7 @@ class KernelDso : public Dso {
     }
   }
 
+#if defined(__linux__)
   void ReadSymbolsFromProc(std::vector<Symbol>* symbols) {
     BuildId build_id = GetExpectedBuildId();
     if (!build_id.IsEmpty()) {
@@ -947,3 +948,5 @@ bool GetBuildIdFromDsoPath(const std::string& dso_path, BuildId* build_id) {
   }
   return false;
 }
+
+}  // namespace simpleperf

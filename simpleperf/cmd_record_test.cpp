@@ -29,6 +29,7 @@
 #include <android-base/properties.h>
 #endif
 
+#include <filesystem>
 #include <map>
 #include <memory>
 #include <regex>
@@ -51,6 +52,7 @@ using android::base::Realpath;
 using android::base::StringPrintf;
 using namespace simpleperf;
 using namespace PerfFileFormat;
+namespace fs = std::filesystem;
 
 static std::unique_ptr<Command> RecordCmd() {
   return CreateCommandInstance("record");
@@ -713,6 +715,8 @@ class RecordingAppHelper {
     return success;
   }
 
+  std::string GetDataPath() const { return perf_data_file_.path; }
+
  private:
   AppHelper app_helper_;
   TemporaryFile perf_data_file_;
@@ -750,9 +754,8 @@ TEST(record_cmd, app_option_for_profileable_app) {
   TestRecordingApps("com.android.simpleperf.profileable");
 }
 
-TEST(record_cmd, record_java_app) {
 #if defined(__ANDROID__)
-  RecordingAppHelper helper;
+static void RecordJavaApp(RecordingAppHelper& helper) {
   // 1. Install apk.
   ASSERT_TRUE(helper.InstallApk(GetTestData("DisplayBitmaps.apk"),
                                 "com.example.android.displayingbitmaps"));
@@ -770,8 +773,19 @@ TEST(record_cmd, record_java_app) {
   SetRunInAppToolForTesting(true, true);
   ASSERT_TRUE(helper.RecordData(
       "-e cpu-clock --app com.example.android.displayingbitmaps -g --duration 10"));
+}
+#endif  // defined(__ANDROID__)
 
-  // 4. Check perf.data.
+TEST(record_cmd, record_java_app) {
+#if defined(__ANDROID__)
+  RecordingAppHelper helper;
+
+  RecordJavaApp(helper);
+  if (HasFailure()) {
+    return;
+  }
+
+  // Check perf.data by looking for java symbols.
   auto process_symbol = [&](const char* name) {
 #if !defined(IN_CTS_TEST)
     const char* expected_name_with_keyguard = "androidx.test.runner";  // when screen is locked
@@ -818,6 +832,55 @@ TEST(record_cmd, record_native_app) {
     return strstr(name, expected_name) != nullptr;
   };
   ASSERT_TRUE(helper.CheckData(process_symbol));
+#else
+  GTEST_LOG_(INFO) << "This test tests a function only available on Android.";
+#endif
+}
+
+TEST(record_cmd, check_trampoline_after_art_jni_methods) {
+  // Test if art jni methods are called by art_jni_trampoline.
+#if defined(__ANDROID__)
+  RecordingAppHelper helper;
+
+  RecordJavaApp(helper);
+  if (HasFailure()) {
+    return;
+  }
+
+  // Check if art::Method_invoke() is called by art_jni_trampoline.
+  auto reader = RecordFileReader::CreateInstance(helper.GetDataPath());
+  ASSERT_TRUE(reader);
+  ThreadTree thread_tree;
+
+  auto get_symbol_name = [&](ThreadEntry* thread, uint64_t ip) -> std::string {
+    const MapEntry* map = thread_tree.FindMap(thread, ip, false);
+    const Symbol* symbol = thread_tree.FindSymbol(map, ip, nullptr, nullptr);
+    return symbol->DemangledName();
+  };
+
+  bool has_check = false;
+
+  auto process_record = [&](std::unique_ptr<Record> r) {
+    thread_tree.Update(*r);
+    if (r->type() == PERF_RECORD_SAMPLE) {
+      auto sample = static_cast<SampleRecord*>(r.get());
+      ThreadEntry* thread = thread_tree.FindThreadOrNew(sample->tid_data.pid, sample->tid_data.tid);
+      size_t kernel_ip_count;
+      std::vector<uint64_t> ips = sample->GetCallChain(&kernel_ip_count);
+      for (size_t i = kernel_ip_count; i < ips.size(); i++) {
+        std::string sym_name = get_symbol_name(thread, ips[i]);
+        if (android::base::StartsWith(sym_name, "art::Method_invoke") && i + 1 < ips.size()) {
+          has_check = true;
+          if (get_symbol_name(thread, ips[i + 1]) != "art_jni_trampoline") {
+            return false;
+          }
+        }
+      }
+    }
+    return true;
+  };
+  ASSERT_TRUE(reader->ReadDataSection(process_record));
+  ASSERT_TRUE(has_check);
 #else
   GTEST_LOG_(INFO) << "This test tests a function only available on Android.";
 #endif
@@ -969,6 +1032,7 @@ TEST(record_cmd, exclude_perf_option) {
 }
 
 TEST(record_cmd, tp_filter_option) {
+  TEST_REQUIRE_HOST_ROOT();
   TEST_REQUIRE_TRACEPOINT_EVENTS();
   // Test string operands both with quotes and without quotes.
   for (const auto& filter :
@@ -1007,6 +1071,12 @@ TEST(record_cmd, ParseAddrFilterOption) {
   ASSERT_EQ(option_to_str("filter 0x400502-0x400527@" + path), "filter 0x502/0x25@" + path);
   ASSERT_EQ(option_to_str("start 0x400502@" + path + ",stop 0x400527@" + path),
             "start 0x502@" + path + ",stop 0x527@" + path);
+
+  // Test '-' in file path. Create a temporary file with '-' in name.
+  TemporaryDir tmpdir;
+  fs::path tmpfile = fs::path(tmpdir.path) / "elf-with-hyphen";
+  ASSERT_TRUE(fs::copy_file(path, tmpfile));
+  ASSERT_EQ(option_to_str("filter " + tmpfile.string()), "filter 0x0/0x73c@" + tmpfile.string());
 
   // Test kernel filters.
   ASSERT_EQ(option_to_str("filter 0x12345678-0x1234567a"), "filter 0x12345678/0x2");

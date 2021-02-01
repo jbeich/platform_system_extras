@@ -27,6 +27,7 @@
 #include "thread_tree.h"
 
 namespace fs = std::filesystem;
+using namespace simpleperf;
 
 TEST(environment, PrepareVdsoFile) {
   std::string content;
@@ -100,9 +101,7 @@ TEST(environment, SetPerfEventLimits) {
 }
 
 TEST(environment, GetKernelVersion) {
-  int major;
-  int minor;
-  ASSERT_TRUE(GetKernelVersion(&major, &minor));
+  ASSERT_TRUE(GetKernelVersion());
 }
 
 TEST(environment, GetModuleBuildId) {

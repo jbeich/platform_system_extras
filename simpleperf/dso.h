@@ -31,6 +31,7 @@
 #include "kallsyms.h"
 #include "read_elf.h"
 
+namespace simpleperf {
 namespace simpleperf_dso_impl {
 
 // Find elf files with symbol table and debug information.
@@ -174,13 +175,13 @@ class Dso {
 
   const Symbol* FindSymbol(uint64_t vaddr_in_dso);
   void LoadSymbols();
-  const std::vector<Symbol>& GetSymbols() { return symbols_; }
+  const std::vector<Symbol>& GetSymbols() const { return symbols_; }
   void SetSymbols(std::vector<Symbol>* symbols);
 
   // Create a symbol for a virtual address which can't find a corresponding
   // symbol in symbol table.
   void AddUnknownSymbol(uint64_t vaddr_in_dso, const std::string& name);
-  bool IsForJavaMethod();
+  bool IsForJavaMethod() const;
 
  protected:
   static bool demangle_;
@@ -217,5 +218,7 @@ class Dso {
 
 const char* DsoTypeToString(DsoType dso_type);
 bool GetBuildIdFromDsoPath(const std::string& dso_path, BuildId* build_id);
+
+}  // namespace simpleperf
 
 #endif  // SIMPLE_PERF_DSO_H_

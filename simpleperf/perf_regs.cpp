@@ -25,8 +25,9 @@
 
 #include "perf_event.h"
 
+namespace simpleperf {
+
 ArchType ScopedCurrentArch::current_arch = ARCH_UNSUPPORTED;
-ArchType ScopedCurrentArch::current_arch32 = ARCH_UNSUPPORTED;
 
 ArchType GetArchType(const std::string& arch) {
   if (arch == "x86" || arch == "i686") {
@@ -58,6 +59,13 @@ ArchType GetArchForAbi(ArchType machine_arch, int abi) {
     }
     if (machine_arch == ARCH_ARM64) {
       return ARCH_ARM;
+    }
+  } else if (abi == PERF_SAMPLE_REGS_ABI_64) {
+    if (machine_arch == ARCH_X86_32) {
+      return ARCH_X86_64;
+    }
+    if (machine_arch == ARCH_ARM) {
+      return ARCH_ARM64;
     }
   }
   return machine_arch;
@@ -154,8 +162,7 @@ std::string GetRegName(size_t regno, ArchType arch) {
 }
 
 RegSet::RegSet(int abi, uint64_t valid_mask, const uint64_t* valid_regs) : valid_mask(valid_mask) {
-  arch = (abi == PERF_SAMPLE_REGS_ABI_32) ? ScopedCurrentArch::GetCurrentArch32()
-                                          : ScopedCurrentArch::GetCurrentArch();
+  arch = GetArchForAbi(ScopedCurrentArch::GetCurrentArch(), abi);
   memset(data, 0, sizeof(data));
   for (int i = 0, j = 0; i < 64; ++i) {
     if ((valid_mask >> i) & 1) {
@@ -216,3 +223,5 @@ bool RegSet::GetIpRegValue(uint64_t* value) const {
   }
   return GetRegValue(regno, value);
 }
+
+}  // namespace simpleperf
