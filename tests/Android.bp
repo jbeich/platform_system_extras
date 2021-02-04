@@ -1,4 +1,5 @@
-// Copyright (C) 2008 The Android Open Source Project
+//
+// Copyright (C) 2021 The Android Open Source Project
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -13,30 +14,18 @@
 // limitations under the License.
 
 package {
-    default_applicable_licenses: ["system_extras_latencytop_license"],
+    default_applicable_licenses: ["system_extras_tests_license"],
 }
 
 // Added automatically by a large-scale-change
 // http://go/android-license-faq
 license {
-    name: "system_extras_latencytop_license",
+    name: "system_extras_tests_license",
     visibility: [":__subpackages__"],
     license_kinds: [
         "SPDX-license-identifier-Apache-2.0",
     ],
     license_text: [
         "NOTICE",
-    ],
-}
-
-cc_binary {
-    name: "latencytop",
-
-    srcs: ["latencytop.c"],
-
-    cflags: [
-        "-Wall",
-        "-Werror",
-        "-Wno-unused-parameter",
     ],
 }
