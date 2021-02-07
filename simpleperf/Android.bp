@@ -277,7 +277,7 @@ cc_binary {
     defaults: [
         "simpleperf_shared_libs",
     ],
-    host_supported: false,
+    host_supported: true,
     srcs: [
         "main.cpp",
     ],
@@ -542,8 +542,12 @@ cc_test {
         },
     },
     data: [
+        ":simpleperf",
         "testdata/**/*",
     ],
+    test_options: {
+        unit_test: true,
+    },
 }
 
 cc_test {
@@ -565,6 +569,9 @@ cc_test {
         windows: {
             enabled: false,
         },
+    },
+    test_options: {
+        unit_test: true,
     },
 }
 
