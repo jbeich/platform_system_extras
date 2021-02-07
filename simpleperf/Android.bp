@@ -544,6 +544,9 @@ cc_test {
     data: [
         "testdata/**/*",
     ],
+    test_options: {
+        unit_test: true,
+    },
 }
 
 cc_test {
@@ -565,6 +568,9 @@ cc_test {
         windows: {
             enabled: false,
         },
+    },
+    test_options: {
+        unit_test: true,
     },
 }
 
