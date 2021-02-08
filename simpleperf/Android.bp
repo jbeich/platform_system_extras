@@ -544,6 +544,9 @@ cc_test {
     data: [
         "testdata/**/*",
     ],
+    test_options: {
+        unit_test: true,
+    },
 }
 
 cc_test {
@@ -595,7 +598,11 @@ cc_test {
     srcs: [
         "record_lib_test.cpp",
     ],
+    test_options: {
+        unit_test: true,
+    },
     shared_libs: ["libsimpleperf_record"],
+    data: [":libsimpleperf_record"],
     target: {
         android: {
             test_suites: ["device-tests"],
