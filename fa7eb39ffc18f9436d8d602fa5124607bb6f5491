@@ -16,6 +16,24 @@
       "message": "Note that this #if check isn\u0027t in the upstream source: https://cs.android.com/android/platform/superproject/+/master:libnativehelper/include/android/file_descriptor_jni.h",
       "revId": "fa7eb39ffc18f9436d8d602fa5124607bb6f5491",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0aa2878c_ccab3656",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2021-02-08T18:15:21Z",
+      "side": 1,
+      "message": "yes, i\u0027m trying to delete these throughout the tree, and did that first. i\u0027ve no idea why there\u0027s a copy here, but removing duplicates isn\u0027t what i\u0027m worried about today :-)",
+      "parentUuid": "5d817197_c8f0dc98",
+      "revId": "fa7eb39ffc18f9436d8d602fa5124607bb6f5491",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
