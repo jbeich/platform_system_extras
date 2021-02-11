@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea7a74cf_4f00d533",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-02-11T21:20:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fb20cf7e_396d690d",
+      "range": {
+        "startLine": 7,
+        "startChar": 39,
+        "endLine": 7,
+        "endChar": 50
+      },
+      "revId": "3713f9e765064383aea8ca7780aa0c83a10d44bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c5002bd1_f27aedb8",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-02-11T03:04:38Z",
       "side": 1,
       "message": "DWARF-based",
+      "range": {
+        "startLine": 25,
+        "startChar": 40,
+        "endLine": 25,
+        "endChar": 51
+      },
+      "revId": "3713f9e765064383aea8ca7780aa0c83a10d44bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f7e7676_2e9f2c85",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-02-11T21:20:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c5002bd1_f27aedb8",
       "range": {
         "startLine": 25,
         "startChar": 40,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d512a3c9_438f789c",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-02-11T21:20:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bda39c73_38e2256e",
+      "range": {
+        "startLine": 163,
+        "startChar": 37,
+        "endLine": 163,
+        "endChar": 48
+      },
+      "revId": "3713f9e765064383aea8ca7780aa0c83a10d44bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c30dfbb5_93e7713f",
@@ -83,6 +155,30 @@
       "writtenOn": "2021-02-11T03:04:38Z",
       "side": 1,
       "message": "DWARF-based",
+      "range": {
+        "startLine": 165,
+        "startChar": 0,
+        "endLine": 165,
+        "endChar": 11
+      },
+      "revId": "3713f9e765064383aea8ca7780aa0c83a10d44bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1bf4ec5c_328e22e1",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-02-11T21:20:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c30dfbb5_93e7713f",
       "range": {
         "startLine": 165,
         "startChar": 0,
@@ -116,6 +212,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "46fb8a30_6c6742a3",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-02-11T21:20:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "62486f07_950e2502",
+      "range": {
+        "startLine": 166,
+        "startChar": 0,
+        "endLine": 166,
+        "endChar": 3
+      },
+      "revId": "3713f9e765064383aea8ca7780aa0c83a10d44bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "27657b0c_f40c9e99",
@@ -129,6 +249,30 @@
       "writtenOn": "2021-02-11T03:04:38Z",
       "side": 1,
       "message": "after recording them",
+      "range": {
+        "startLine": 170,
+        "startChar": 54,
+        "endLine": 170,
+        "endChar": 76
+      },
+      "revId": "3713f9e765064383aea8ca7780aa0c83a10d44bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "86721f3d_e1f4e290",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-02-11T21:20:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "27657b0c_f40c9e99",
       "range": {
         "startLine": 170,
         "startChar": 54,
@@ -162,6 +306,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab0ca2e1_0aef7303",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-02-11T21:20:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "63bc37e6_efb57885",
+      "range": {
+        "startLine": 172,
+        "startChar": 84,
+        "endLine": 172,
+        "endChar": 85
+      },
+      "revId": "3713f9e765064383aea8ca7780aa0c83a10d44bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7625f4d6_4adfc9a3",
@@ -175,6 +343,30 @@
       "writtenOn": "2021-02-11T03:04:38Z",
       "side": 1,
       "message": "\"This makes it more likely to get complete callchains, but it\u0027s still ...\"",
+      "range": {
+        "startLine": 172,
+        "startChar": 86,
+        "endLine": 173,
+        "endChar": 93
+      },
+      "revId": "3713f9e765064383aea8ca7780aa0c83a10d44bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f738d46c_9578dc2e",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-02-11T21:20:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7625f4d6_4adfc9a3",
       "range": {
         "startLine": 172,
         "startChar": 86,
