@@ -29,6 +29,8 @@
 
 #include <android-base/logging.h>
 #include <android-base/macros.h>
+#include <android-base/parseint.h>
+#include <android-base/strings.h>
 #include <android-base/unique_fd.h>
 #include <ziparchive/zip_archive.h>
 
@@ -179,6 +181,20 @@ std::string GetSimpleperfVersion();
 
 std::optional<std::set<int>> GetCpusFromString(const std::string& s);
 std::optional<std::set<pid_t>> GetTidsFromString(const std::string& s, bool check_if_exists);
+
+template <typename T>
+std::optional<std::set<T>> ParseNonNegativeIntVector(const std::string& s) {
+  std::set<T> result;
+  for (const auto& p : android::base::Split(s, ",")) {
+    uint64_t value;
+    if (!android::base::ParseUint<uint64_t>(p.c_str(), &value, std::numeric_limits<T>::max())) {
+      LOG(ERROR) << "Invalid integer '" << p << "' in " << s;
+      return std::nullopt;
+    }
+    result.insert(static_cast<T>(value));
+  }
+  return result;
+}
 
 // from boost::hash_combine
 template <typename T>
