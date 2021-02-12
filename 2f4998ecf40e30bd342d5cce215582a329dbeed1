@@ -16,6 +16,24 @@
       "message": "The lint is unhelpful. These are testing APKs.",
       "revId": "2f4998ecf40e30bd342d5cce215582a329dbeed1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d06d0898_d8fadd8e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-02-12T01:13:19Z",
+      "side": 1,
+      "message": "I have reported the problem before, in http://b/171058789. Not fixed yet.",
+      "parentUuid": "89edc8e6_6899e897",
+      "revId": "2f4998ecf40e30bd342d5cce215582a329dbeed1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
