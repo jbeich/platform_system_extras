@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "89edc8e6_6899e897",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-02-12T01:05:22Z",
+      "side": 1,
+      "message": "The lint is unhelpful. These are testing APKs.",
+      "revId": "2f4998ecf40e30bd342d5cce215582a329dbeed1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
