@@ -34,6 +34,24 @@
       "parentUuid": "1059b362_e530d559",
       "revId": "a38153cc5d030c1a26fc0d023005b6cfc7f13b78",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5967ab52_4ed1990e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1620010
+      },
+      "writtenOn": "2021-02-17T17:53:49Z",
+      "side": 1,
+      "message": "I believe either of these are options for the return type:\n\nString\nUniquePtr\u003cCxxString\u003e\n\nbut not\n\nCxxString",
+      "parentUuid": "c2b681ad_275bfa03",
+      "revId": "a38153cc5d030c1a26fc0d023005b6cfc7f13b78",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
