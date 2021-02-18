@@ -53,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0537aebf_8c66654e",
+        "filename": "profcollectd/libprofcollectd/config.rs",
+        "patchSetId": 15
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1087625
+      },
+      "writtenOn": "2021-02-18T17:45:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "95b7edd9_0c355ae4",
+      "revId": "6559d02cb25c3da06e0c96e23268934272f4e986",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f0277827_f65b19db",
@@ -89,6 +107,24 @@
       "writtenOn": "2021-02-18T16:42:07Z",
       "side": 1,
       "message": "It seems a bit cleaner to me to declare this inside the for_each and avoid the clear, not that it matters much.",
+      "revId": "6559d02cb25c3da06e0c96e23268934272f4e986",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d99c2d1b_c41f264c",
+        "filename": "profcollectd/libprofcollectd/report.rs",
+        "patchSetId": 15
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1087625
+      },
+      "writtenOn": "2021-02-18T17:45:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bee8b79c_144b5c71",
       "revId": "6559d02cb25c3da06e0c96e23268934272f4e986",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
