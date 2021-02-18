@@ -52,6 +52,24 @@
       "parentUuid": "c2b681ad_275bfa03",
       "revId": "a38153cc5d030c1a26fc0d023005b6cfc7f13b78",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1db6cba4_07e0bb28",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1054468
+      },
+      "writtenOn": "2021-02-18T08:01:02Z",
+      "side": 1,
+      "message": "Yes, please convert to cxx. Do we need to update our cxx version before you can do that? If so, I can +2 this change so that you\u0027re not blocked waiting for us. Then you can update all your usage once it\u0027s available.",
+      "parentUuid": "5967ab52_4ed1990e",
+      "revId": "a38153cc5d030c1a26fc0d023005b6cfc7f13b78",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
