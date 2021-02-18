@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3c9bdeed_d6891c0d",
+        "filename": "profcollectd/libprofcollectd/Android.bp",
+        "patchSetId": 15
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1087625
+      },
+      "writtenOn": "2021-02-18T17:20:09Z",
+      "side": 1,
+      "message": "These are just thin ffi translation libraries, static linkage should reduce overall binary size?\n\nAlso I don\u0027t want to pollute `/system/lib64/` with too many libs...",
+      "parentUuid": "cef297ab_59432bc2",
+      "revId": "6559d02cb25c3da06e0c96e23268934272f4e986",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "95b7edd9_0c355ae4",
         "filename": "profcollectd/libprofcollectd/config.rs",
         "patchSetId": 15
