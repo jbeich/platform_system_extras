@@ -70,6 +70,23 @@
       "parentUuid": "5967ab52_4ed1990e",
       "revId": "a38153cc5d030c1a26fc0d023005b6cfc7f13b78",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3976319a_81a88d5b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1054468
+      },
+      "writtenOn": "2021-02-18T08:08:52Z",
+      "side": 1,
+      "message": "Spoke with Yi about this. He\u0027ll properly convert to cxx in a follow up change.",
+      "revId": "a38153cc5d030c1a26fc0d023005b6cfc7f13b78",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
