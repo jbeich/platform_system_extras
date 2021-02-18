@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cef297ab_59432bc2",
+        "filename": "profcollectd/libprofcollectd/Android.bp",
+        "patchSetId": 15
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1208973
+      },
+      "writtenOn": "2021-02-18T16:42:07Z",
+      "side": 1,
+      "message": "Why rlibs instead of rustlibs?\n\nAnd the similar question for other places below.",
+      "revId": "6559d02cb25c3da06e0c96e23268934272f4e986",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95b7edd9_0c355ae4",
+        "filename": "profcollectd/libprofcollectd/config.rs",
+        "patchSetId": 15
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1208973
+      },
+      "writtenOn": "2021-02-18T16:42:07Z",
+      "side": 1,
+      "message": "Consider documenting at least public things.",
+      "revId": "6559d02cb25c3da06e0c96e23268934272f4e986",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0277827_f65b19db",
+        "filename": "profcollectd/libprofcollectd/config.rs",
+        "patchSetId": 15
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1208973
+      },
+      "writtenOn": "2021-02-18T16:42:07Z",
+      "side": 1,
+      "message": "Use expect here instead of unwrap to be safe.\n\nAnd the same comment for all uses of unwrap in this and other files.",
+      "range": {
+        "startLine": 58,
+        "startChar": 36,
+        "endLine": 58,
+        "endChar": 42
+      },
+      "revId": "6559d02cb25c3da06e0c96e23268934272f4e986",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bee8b79c_144b5c71",
+        "filename": "profcollectd/libprofcollectd/report.rs",
+        "patchSetId": 15
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1208973
+      },
+      "writtenOn": "2021-02-18T16:42:07Z",
+      "side": 1,
+      "message": "It seems a bit cleaner to me to declare this inside the for_each and avoid the clear, not that it matters much.",
+      "revId": "6559d02cb25c3da06e0c96e23268934272f4e986",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
