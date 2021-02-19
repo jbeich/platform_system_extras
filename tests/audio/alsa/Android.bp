@@ -28,4 +28,5 @@ cc_test {
         "libtinyalsa",
     ],
     static_libs: ["libtestUtil"],
+    vendor: true,
 }

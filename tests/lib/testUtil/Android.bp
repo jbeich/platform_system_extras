@@ -26,4 +26,8 @@ cc_library_static {
         "libcutils",
         "libutils",
     ],
+    vendor_available: true,
+    vndk: {
+        enabled: true,
+    },
 }
