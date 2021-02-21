@@ -1,0 +1,15 @@
+Open-Source-Licensing+1: Lint 🤖 <ayeaye-gerrit@google.com>
+Open-Source-Licensing+2: Bob Badour <bbadour@google.com>
+Presubmit-Verified-1: Treehugger Robot <treehugger-gerrit@google.com>
+Lint+1: Lint 🤖 <ayeaye-gerrit@google.com>
+Code-Review+2: Bob Badour <bbadour@google.com>
+Code-Review+2: Elliott Hughes <enh@google.com>
+Global-Approval+1: Bob Badour <bbadour@google.com>
+Autosubmit+1: Bob Badour <bbadour@google.com>
+Bypass-Presubmit+1: Bob Badour <bbadour@google.com>
+Build-Cop-Override+1: Bob Badour <bbadour@google.com>
+Submitted-by: Bob Badour <bbadour@google.com>
+Submitted-at: Sun, 21 Feb 2021 15:24:29 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/system/extras/+/1590980
+Project: platform/system/extras
+Branch: refs/heads/master
