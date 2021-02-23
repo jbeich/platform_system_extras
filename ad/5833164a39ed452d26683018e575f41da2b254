@@ -1,0 +1,11 @@
+Open-Source-Licensing+1: Lint 🤖 <ayeaye-gerrit@google.com>
+Verified+1: Yabin Cui <yabinc@google.com>
+Presubmit-Verified+2: Treehugger Robot <treehugger-gerrit@google.com>
+Lint+1: Lint 🤖 <ayeaye-gerrit@google.com>
+Code-Review+1: Marco Ballesio <balejs@google.com>
+Code-Review+2: Stephen Hines <srhines@google.com>
+Submitted-by: Yabin Cui <yabinc@google.com>
+Submitted-at: Tue, 23 Feb 2021 18:23:08 +0000
+Reviewed-on: https://android-review.googlesource.com/c/platform/system/extras/+/1600556
+Project: platform/system/extras
+Branch: refs/heads/master
