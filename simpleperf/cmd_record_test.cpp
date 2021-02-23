@@ -772,7 +772,7 @@ static void RecordJavaApp(RecordingAppHelper& helper) {
   // 3. Record perf.data.
   SetRunInAppToolForTesting(true, true);
   ASSERT_TRUE(helper.RecordData(
-      "-e cpu-clock --app com.example.android.displayingbitmaps -g --duration 10"));
+      "-e cpu-clock --app com.example.android.displayingbitmaps -g --duration 15"));
 }
 #endif  // defined(__ANDROID__)
 
@@ -1094,4 +1094,13 @@ TEST(record_cmd, kprobe_option) {
   // A default kprobe event is created if not given an explicit --kprobe option.
   ASSERT_TRUE(RunRecordCmd({"-e", "kprobes:do_sys_open"}));
   ASSERT_TRUE(RunRecordCmd({"--group", "kprobes:do_sys_open"}));
+}
+
+TEST(record_cmd, record_filter_options) {
+  ASSERT_TRUE(
+      RunRecordCmd({"--exclude-pid", "1,2", "--exclude-tid", "3,4", "--exclude-process-name",
+                    "processA", "--exclude-thread-name", "threadA", "--exclude-uid", "5,6"}));
+  ASSERT_TRUE(
+      RunRecordCmd({"--include-pid", "1,2", "--include-tid", "3,4", "--include-process-name",
+                    "processB", "--include-thread-name", "threadB", "--include-uid", "5,6"}));
 }
