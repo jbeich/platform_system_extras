@@ -16,6 +16,24 @@
       "message": "Looks good to me, maybe you just want to have add an @author section in the README and mention me in the list?",
       "revId": "ad5833164a39ed452d26683018e575f41da2b254",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9cba5be2_c3787606",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-02-23T18:23:00Z",
+      "side": 1,
+      "message": "For contact in doc, we prefer to use team name instead of personal email. Because that\u0027s more stable. For author credit, Your email is shown in git history and purgatorio/README.md. So I prefer not to maintain an author list.",
+      "parentUuid": "109bd35f_f0399464",
+      "revId": "ad5833164a39ed452d26683018e575f41da2b254",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
