@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef6bf901_36ea7222",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2021-02-24T19:54:20Z",
+      "side": 1,
+      "message": "We can forbid blake2b when updating from old builds in the ota\u0027s delta generator. \n\nSeems an overkill to bump the update_engine\u0027s minor version, I guess we can reuse the version of partial update (added in S)",
+      "revId": "78ac4474a1f319ca523cc01acbec86c0baeea214",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
