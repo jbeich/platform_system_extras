@@ -264,7 +264,14 @@ bool CheckPerfEventLimit() {
   // enough permission to create inherited tracepoint events, write -1 to perf_event_allow_path.
   // See http://b/62230699.
   if (IsRoot()) {
-    return android::base::WriteStringToFile("-1", perf_event_allow_path);
+    if (android::base::WriteStringToFile("-1", perf_event_allow_path)) {
+      return true;
+    }
+    // On host, we may not be able to write to perf_event_allow_path (like when running in docker).
+#if defined(__ANDROID__)
+    PLOG(ERROR) << "failed to write -1 to " << perf_event_allow_path;
+    return false;
+#endif
   }
   int limit_level;
   bool can_read_allow_file = ReadPerfEventAllowStatus(&limit_level);
@@ -915,6 +922,26 @@ std::optional<std::pair<int, int>> GetKernelVersion() {
     return std::nullopt;
   }
   return std::make_pair(major, minor);
+}
+
+std::optional<uid_t> GetProcessUid(pid_t pid) {
+  std::string status_file = "/proc/" + std::to_string(pid) + "/status";
+  FILE* fp = fopen(status_file.c_str(), "re");
+  if (fp == nullptr) {
+    return std::nullopt;
+  }
+
+  LineReader reader(fp);
+  char* line;
+  while ((line = reader.ReadLine()) != nullptr) {
+    if (android::base::StartsWith(line, "Uid:")) {
+      uid_t uid;
+      if (sscanf(line + strlen("Uid:"), "%u", &uid) == 1) {
+        return uid;
+      }
+    }
+  }
+  return std::nullopt;
 }
 
 }  // namespace simpleperf
