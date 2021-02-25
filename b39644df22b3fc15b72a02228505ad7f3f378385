@@ -33,6 +33,24 @@
       "message": "Is this because of mixed ARM/Thumb code possibly? I\u0027m just trying to see what it would take to get this switched over eventually (and if we should ask ARM or someone else to look at why this is insufficient today).",
       "revId": "b39644df22b3fc15b72a02228505ad7f3f378385",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "82f06831_5f7d8bdf",
+        "filename": "simpleperf/scripts/simpleperf_utils.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 758,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-02-25T21:55:51Z",
+      "side": 1,
+      "message": "I guess no. I created bug http://b/181259646 for investigation.",
+      "parentUuid": "49081283_972e6a3c",
+      "revId": "b39644df22b3fc15b72a02228505ad7f3f378385",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
