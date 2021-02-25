@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d2c2192_e1a1135b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-02-25T21:22:44Z",
+      "side": 1,
+      "message": "This reads funny because it sounds like we\u0027re defaulting to it being on, when it is default off, but could be enabled cheaply.",
+      "range": {
+        "startLine": 13,
+        "startChar": 36,
+        "endLine": 13,
+        "endChar": 52
+      },
+      "revId": "13025837544ad03d354932f0d8ea668850f0755b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dbe41e45_44ab8146",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-02-25T21:22:44Z",
+      "side": 1,
+      "message": "Feel free to ignore my nitpicks, but I do think maybe the commit message sentence could get reworded to make it more obvious that this is still optional (even if low-cost).",
+      "revId": "13025837544ad03d354932f0d8ea668850f0755b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c099faa_c1834e3e",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-02-25T21:22:44Z",
+      "side": 1,
+      "message": "Spacing?",
+      "range": {
+        "startLine": 259,
+        "startChar": 33,
+        "endLine": 259,
+        "endChar": 34
+      },
+      "revId": "13025837544ad03d354932f0d8ea668850f0755b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
