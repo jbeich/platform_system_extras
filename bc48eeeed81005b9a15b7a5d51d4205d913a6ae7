@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6a43a5d_3aa2e3fa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-02-26T05:20:24Z",
+      "side": 1,
+      "message": "This is only temporary to eliminate the timeouts/crashes, and will be replaced by https://android-review.googlesource.com/q/topic:profcollect-rust.",
+      "revId": "bc48eeeed81005b9a15b7a5d51d4205d913a6ae7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
