@@ -20,7 +20,7 @@ use std::env;
 
 fn print_help() {
     println!(
-        r#"(
+        r#"
 usage: profcollectctl [command]
 
 Command to control profcollectd behaviour.
@@ -33,11 +33,13 @@ command:
     report      Create a report containing all profiles.
     reconfig    Refresh configuration.
     help        Print this message.
-)"#
+"#
     );
 }
 
 fn main() {
+    libprofcollectd::init_logging();
+
     let args: Vec<String> = env::args().collect();
     if args.len() != 2 {
         print_help();
@@ -48,15 +50,15 @@ fn main() {
     match action.as_str() {
         "start" => {
             println!("Scheduling profile collection");
-            libprofcollectd::schedule_collection();
+            libprofcollectd::schedule();
         }
         "stop" => {
             println!("Terminating profile collection");
-            libprofcollectd::terminate_collection();
+            libprofcollectd::terminate();
         }
         "once" => {
             println!("Trace once");
-            libprofcollectd::trace_once();
+            libprofcollectd::trace_once("manual");
         }
         "process" => {
             println!("Processing traces in background");
@@ -64,11 +66,7 @@ fn main() {
         }
         "report" => {
             println!("Creating profile report in background");
-            libprofcollectd::create_profile_report();
-        }
-        "reconfig" => {
-            println!("Refreshing configuration");
-            libprofcollectd::read_config();
+            libprofcollectd::report();
         }
         "help" => print_help(),
         _ => {
