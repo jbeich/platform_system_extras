@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc9b930d_55f55a5f",
+        "filename": "profcollectd/libprofcollectd/scheduler.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1087625
+      },
+      "writtenOn": "2021-02-26T05:19:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b2dd8c79_182d4d13",
+      "range": {
+        "startLine": 171,
+        "startChar": 12,
+        "endLine": 171,
+        "endChar": 13
+      },
+      "revId": "562e657426201907c3321d5e7c14e3e168ee0ab6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d1244ece_ba9985f6",
@@ -205,6 +229,30 @@
       "side": 1,
       "message": "The profile upload service (still WIP right now) cannot run under root, and it will need to invoke profcollectctl.",
       "parentUuid": "fb2d5676_0a770acb",
+      "range": {
+        "startLine": 66,
+        "startChar": 49,
+        "endLine": 66,
+        "endChar": 59
+      },
+      "revId": "562e657426201907c3321d5e7c14e3e168ee0ab6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b85bf91_1542d153",
+        "filename": "profcollectd/profcollectctl.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1087625
+      },
+      "writtenOn": "2021-02-26T05:19:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f3efb4e9_63736388",
       "range": {
         "startLine": 66,
         "startChar": 49,
