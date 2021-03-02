@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "163bf8f2_bd7c41d5",
+        "filename": "libjsonpb/verify/verify.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2021-03-02T23:47:51Z",
+      "side": 1,
+      "message": "This could technically be Json::CharReaderBuilder().newCharReader() right?",
+      "range": {
+        "startLine": 139,
+        "startChar": 43,
+        "endLine": 139,
+        "endChar": 50
+      },
+      "revId": "c9cf7abc78472a386b3e09893fca8431a5f03618",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
