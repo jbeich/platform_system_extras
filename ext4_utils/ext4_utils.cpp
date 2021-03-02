@@ -248,7 +248,7 @@ static void read_block_group_descriptors(int fd) {
         free(buf);
         critical_error_errno("failed to read block group descriptors");
     }
-    if (ret != size) {
+    if (static_cast<size_t>(ret) != size) {
         free(buf);
         critical_error("failed to read all the block group descriptors");
     }

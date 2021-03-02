@@ -337,7 +337,7 @@ class InjectCommand : public Command {
              build_id == expected_build_id;
     };
 
-    for (size_t i = 0; i < branch_list_proto.binaries_size(); i++) {
+    for (int i = 0; i < branch_list_proto.binaries_size(); i++) {
       const auto& binary_proto = branch_list_proto.binaries(i);
       BuildId build_id(binary_proto.build_id());
       std::unique_ptr<Dso> dso = Dso::CreateElfDsoWithBuildId(binary_proto.path(), build_id);
@@ -358,10 +358,10 @@ class InjectCommand : public Command {
   std::map<uint64_t, std::map<std::vector<bool>, uint64_t>> BuildBranchMap(
       const proto::ETMBranchList_Binary& binary_proto) {
     std::map<uint64_t, std::map<std::vector<bool>, uint64_t>> branch_map;
-    for (size_t i = 0; i < binary_proto.addrs_size(); i++) {
+    for (int i = 0; i < binary_proto.addrs_size(); i++) {
       const auto& addr_proto = binary_proto.addrs(i);
       auto& b_map = branch_map[addr_proto.addr()];
-      for (size_t j = 0; j < addr_proto.branches_size(); j++) {
+      for (int j = 0; j < addr_proto.branches_size(); j++) {
         const auto& branch_proto = addr_proto.branches(j);
         std::vector<bool> branch =
             ProtoStringToBranch(branch_proto.branch(), branch_proto.branch_size());

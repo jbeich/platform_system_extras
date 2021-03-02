@@ -923,7 +923,7 @@ AuxTraceInfoRecord::AuxTraceInfoRecord(char* p) : Record(p) {
   p += header_size();
   data = reinterpret_cast<DataType*>(p);
   CHECK_EQ(data->aux_type, AUX_TYPE_ETM);
-  CHECK_EQ(data->version, 0);
+  CHECK_EQ(data->version, 0U);
   for (uint32_t i = 0; i < data->nr_cpu; ++i) {
     CHECK_EQ(data->etm4_info[i].magic, MAGIC_ETM4);
   }
@@ -953,7 +953,7 @@ void AuxTraceInfoRecord::DumpData(size_t indent) const {
   PrintIndented(indent, "pmu_type %u\n", data->pmu_type);
   PrintIndented(indent, "snapshot %" PRIu64 "\n", data->snapshot);
   indent++;
-  for (int i = 0; i < data->nr_cpu; i++) {
+  for (uint32_t i = 0; i < data->nr_cpu; i++) {
     const ETM4Info& e = data->etm4_info[i];
     PrintIndented(indent, "magic 0x%" PRIx64 "\n", e.magic);
     PrintIndented(indent, "cpu %" PRIu64 "\n", e.cpu);

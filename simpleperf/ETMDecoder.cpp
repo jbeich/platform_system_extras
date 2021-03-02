@@ -625,7 +625,7 @@ class ETMDecoderImpl : public ETMDecoder {
   ETMDecoderImpl(ThreadTree& thread_tree) : thread_tree_(thread_tree) {}
 
   void CreateDecodeTree(const AuxTraceInfoRecord& auxtrace_info) {
-    for (int i = 0; i < auxtrace_info.data->nr_cpu; i++) {
+    for (std::size_t i = 0; i < auxtrace_info.data->nr_cpu; i++) {
       auto& etm4 = auxtrace_info.data->etm4_info[i];
       ocsd_etmv4_cfg cfg;
       memset(&cfg, 0, sizeof(cfg));

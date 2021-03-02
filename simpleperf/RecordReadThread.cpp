@@ -500,7 +500,7 @@ void RecordReadThread::PushRecordToRecordBuffer(KernelRecordReader* kernel_recor
   if (header.type == PERF_RECORD_SAMPLE && exclude_pid_ != -1) {
     uint32_t pid;
     kernel_record_reader->ReadRecord(record_parser_.GetPidPosInSampleRecord(), sizeof(pid), &pid);
-    if (pid == exclude_pid_) {
+    if (static_cast<int64_t>(pid) == exclude_pid_) {
       return;
     }
   }

@@ -56,7 +56,8 @@ std::optional<uint64_t> ConsumeUInt(std::string_view& content_ref) {
   const char* start = word.value().data();
   char* stop;
   auto res = strtoull(start, &stop, 0);
-  if (errno != 0 || stop - start != word.value().size()) {
+  if (errno != 0 ||
+      stop - start != static_cast<std::string::difference_type>(word.value().size())) {
     return {};
   }
 

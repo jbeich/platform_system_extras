@@ -155,12 +155,12 @@ bool ETMRecorder::ReadEtmInfo() {
       }
     }
   }
-  return (etm_info_.size() == cpu_count);
+  return (etm_info_.size() == static_cast<std::size_t>(cpu_count));
 }
 
 bool ETMRecorder::FindSinkConfig() {
   for (const auto& name : GetEntriesInDir(ETM_DIR + "sinks")) {
-    if (name.find("etr") != -1) {
+    if (name.find("etr") != std::string::npos) {
       if (ReadValueInEtmDir("sinks/" + name, &sink_config_)) {
         return true;
       }

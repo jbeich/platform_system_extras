@@ -184,7 +184,7 @@ bool hashtree_info::ecc_read_hashes(fec_handle *f, uint64_t hash_offset,
     check(f);
 
     if (hash &&
-        fec_pread(f, hash, digest_length_, hash_offset) != digest_length_) {
+        fec_pread(f, hash, digest_length_, hash_offset) != static_cast<int64_t>(digest_length_)) {
         error("failed to read hash tree: offset %" PRIu64 ": %s", hash_offset,
               strerror(errno));
         return false;

@@ -168,7 +168,9 @@ bool ListCommand::Run(const std::vector<std::string>& args) {
 #if defined(__arm__) || defined(__aarch64__)
     {"cs-etm",
      {"coresight etm events",
-      [](const EventType& e) { return e.type == ETMRecorder::GetInstance().GetEtmEventType(); }}},
+      [](const EventType& e) {
+        return static_cast<std::int64_t>(e.type) == ETMRecorder::GetInstance().GetEtmEventType();
+      }}},
 #endif
     {"pmu", {"pmu events", [](const EventType& e) { return e.IsPmuEvent(); }}},
   };
