@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8254324d_d7bd61b3",
+        "filename": "profcollectd/libprofcollectd/service.rs",
+        "patchSetId": 20
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1087625
+      },
+      "writtenOn": "2021-03-02T09:32:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6653226a_a62017b1",
+      "range": {
+        "startLine": 35,
+        "startChar": 44,
+        "endLine": 35,
+        "endChar": 50
+      },
+      "revId": "b8f89b307ba8a724486457327311b633df388797",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9c774355_b0e64d53",
@@ -54,6 +78,24 @@
       "writtenOn": "2021-03-01T17:08:58Z",
       "side": 1,
       "message": "Rather than doing and_then, then, and unwrap_or_else, it seems simpler to just get the Config and compare it to new_config (maybe in a match).",
+      "revId": "b8f89b307ba8a724486457327311b633df388797",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93b97f0b_7404ca1d",
+        "filename": "profcollectd/libprofcollectd/service.rs",
+        "patchSetId": 20
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1087625
+      },
+      "writtenOn": "2021-03-02T09:32:40Z",
+      "side": 1,
+      "message": "Any of these steps are allowed to fail, thus I think a chain of and_then is the best solution.",
+      "parentUuid": "9c774355_b0e64d53",
       "revId": "b8f89b307ba8a724486457327311b633df388797",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -94,6 +136,30 @@
       "writtenOn": "2021-03-01T17:08:58Z",
       "side": 1,
       "message": "More expects/errs here as well.",
+      "range": {
+        "startLine": 52,
+        "startChar": 47,
+        "endLine": 52,
+        "endChar": 53
+      },
+      "revId": "b8f89b307ba8a724486457327311b633df388797",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0321aaa_caf7152b",
+        "filename": "profcollectd/libprofcollectd/simpleperf_etm_trace_provider.rs",
+        "patchSetId": 20
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1087625
+      },
+      "writtenOn": "2021-03-02T09:32:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "21db5c7e_5ff09747",
       "range": {
         "startLine": 52,
         "startChar": 47,
