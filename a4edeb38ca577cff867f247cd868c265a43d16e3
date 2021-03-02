@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "736c1443_89625851",
+        "filename": "simpleperf/ETMDecoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 628,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-03-02T21:52:27Z",
+      "side": 1,
+      "message": "size_t? Since they are the same.",
+      "range": {
+        "startLine": 628,
+        "startChar": 9,
+        "endLine": 628,
+        "endChar": 20
+      },
+      "revId": "a4edeb38ca577cff867f247cd868c265a43d16e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5f2c679_f6790d73",
+        "filename": "simpleperf/ETMRecorder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-03-02T21:52:27Z",
+      "side": 1,
+      "message": "size_t?",
+      "range": {
+        "startLine": 158,
+        "startChar": 42,
+        "endLine": 158,
+        "endChar": 53
+      },
+      "revId": "a4edeb38ca577cff867f247cd868c265a43d16e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ac80aa9_4f79e3f5",
+        "filename": "simpleperf/read_symbol_map.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-03-02T21:52:27Z",
+      "side": 1,
+      "message": "start and stop are raw pointers instead of iterators of std::string.\nSo use std::ptrdiff_t or stop !\u003d start + word.value().size()?",
+      "range": {
+        "startLine": 60,
+        "startChar": 34,
+        "endLine": 60,
+        "endChar": 62
+      },
+      "revId": "a4edeb38ca577cff867f247cd868c265a43d16e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
