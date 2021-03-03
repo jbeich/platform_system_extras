@@ -14,6 +14,23 @@
 // limitations under the License.
 //
 
+package {
+    default_applicable_licenses: ["system_extras_simpleperf_license"],
+}
+
+// Added automatically by a large-scale-change
+// See: http://go/android-license-faq
+license {
+    name: "system_extras_simpleperf_license",
+    visibility: [":__subpackages__"],
+    license_kinds: [
+        "SPDX-license-identifier-Apache-2.0",
+    ],
+    license_text: [
+        "NOTICE",
+    ],
+}
+
 cc_defaults {
     name: "libsimpleperf_elf_read_static_reqs_defaults",
     static_libs: [
@@ -206,6 +223,7 @@ cc_defaults {
         "read_elf.cpp",
         "read_symbol_map.cpp",
         "record.cpp",
+        "record_file.proto",
         "record_file_reader.cpp",
         "record_file_writer.cpp",
         "report_sample.proto",
@@ -235,6 +253,7 @@ cc_defaults {
                 "OfflineUnwinder.cpp",
                 "ProbeEvents.cpp",
                 "read_dex_file.cpp",
+                "RecordFilter.cpp",
                 "RecordReadThread.cpp",
                 "workload.cpp",
             ],
@@ -293,14 +312,26 @@ cc_binary {
 
 cc_library {
     name: "libsimpleperf_profcollect",
-    defaults: [
-        "simpleperf_shared_libs",
-    ],
-    host_supported: false,
+    defaults: ["simpleperf_shared_libs"],
     srcs: ["profcollect.cpp"],
-    export_include_dirs: ["include"],
+    host_supported: false,
     static_libs: ["libsimpleperf"],
     shared_libs: ["libLLVM_android"],
+}
+
+rust_bindgen {
+    name: "libsimpleperf_profcollect_bindgen",
+    wrapper_src: "include/simpleperf_profcollect.hpp",
+    crate_name: "simpleperf_profcollect_bindgen",
+    source_stem: "bindings",
+}
+
+rust_library {
+    name: "libsimpleperf_profcollect_rust",
+    crate_name: "simpleperf_profcollect",
+    srcs: ["rust/lib.rs"],
+    rlibs: ["libsimpleperf_profcollect_bindgen"],
+    shared_libs: ["libsimpleperf_profcollect"],
     visibility: ["//system/extras/profcollectd:__subpackages__"],
 }
 
@@ -519,6 +550,7 @@ cc_defaults {
                 "OfflineUnwinder_test.cpp",
                 "ProbeEvents_test.cpp",
                 "read_dex_file_test.cpp",
+                "RecordFilter_test.cpp",
                 "RecordReadThread_test.cpp",
                 "workload_test.cpp",
             ],
@@ -551,6 +583,9 @@ cc_test {
     defaults: [
         "simpleperf_libs_for_tests",
     ],
+    test_options: {
+        unit_test: true,
+    },
     srcs: [
         "cpu_hotplug_test.cpp",
     ],
