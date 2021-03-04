@@ -15,6 +15,7 @@
  */
 
 #include <stdio.h>
+#include <unistd.h>
 
 #include <memory>
 #include <optional>
@@ -84,7 +85,7 @@ class ThreadTreeWithFilter : public ThreadTree {
  public:
   void ExcludePid(pid_t pid) { exclude_pid_ = pid; }
 
-  ThreadEntry* FindThread(int tid) override {
+  ThreadEntry* FindThread(int tid) const override {
     ThreadEntry* thread = ThreadTree::FindThread(tid);
     if (thread != nullptr && exclude_pid_ && thread->pid == exclude_pid_) {
       return nullptr;
@@ -452,6 +453,14 @@ class InjectCommand : public Command {
   }
 
   bool PostProcessBranchList() {
+    // Don't produce empty output file.
+    if (branch_list_binary_map_.empty()) {
+      LOG(INFO) << "Skip empty output file.";
+      output_fp_.reset(nullptr);
+      unlink(output_filename_.c_str());
+      return true;
+    }
+
     proto::ETMBranchList branch_list_proto;
     branch_list_proto.set_magic(ETM_BRANCH_LIST_PROTO_MAGIC);
     std::vector<char> branch_buf;
