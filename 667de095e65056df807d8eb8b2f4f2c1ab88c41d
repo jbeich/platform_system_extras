@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1971383f_3331ea82",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-03-05T09:56:37Z",
+      "side": 1,
+      "message": "easier",
+      "range": {
+        "startLine": 15,
+        "startChar": 57,
+        "endLine": 15,
+        "endChar": 63
+      },
+      "revId": "667de095e65056df807d8eb8b2f4f2c1ab88c41d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02c82f3a_298b2da3",
+        "filename": "simpleperf/cmd_debug_unwind.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-03-05T09:56:37Z",
+      "side": 1,
+      "message": "I have some concerns around `out_fp_` ending up as a dangling reference at the end of `Process()`. It\u0027s a tricky pattern because `Process()` can early exit in a variety of ways, so we can\u0027t just clear it before line 212. Any thoughts or am I just being overly paranoid about reusing invalid pointers? Perhaps switch the deleter to be a lambda that calls `fclose(fp)` and also does `out_fp_ \u003d nullptr;` (which is also ok for resetting the `stdout` case)?",
+      "revId": "667de095e65056df807d8eb8b2f4f2c1ab88c41d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62476a8a_7709e4bd",
+        "filename": "simpleperf/cmd_debug_unwind.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-03-05T09:56:37Z",
+      "side": 1,
+      "message": "Dod you mean to drop the message about the default here?",
+      "revId": "667de095e65056df807d8eb8b2f4f2c1ab88c41d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
