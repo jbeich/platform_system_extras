@@ -16,6 +16,24 @@
       "message": "Do we need to do `last_unwinding_result_.reset()` here as well?",
       "revId": "93b54e70bc36f285e979aa8831e73130eaa435f5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f177ea9d_b5d24703",
+        "filename": "simpleperf/cmd_debug_unwind.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-03-05T19:15:26Z",
+      "side": 1,
+      "message": "No need. Because if ProcessRecord() returns false, reader_-\u003eReadDataSection() will return false without further processing records.",
+      "parentUuid": "a9555996_3de66136",
+      "revId": "93b54e70bc36f285e979aa8831e73130eaa435f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
