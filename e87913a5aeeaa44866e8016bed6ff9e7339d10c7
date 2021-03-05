@@ -16,6 +16,24 @@
       "message": "`break;` is more defensive for long loop bodies like this (in case somebody eventually puts something after this long `if/else if` block).",
       "revId": "e87913a5aeeaa44866e8016bed6ff9e7339d10c7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "13eb6215_e504d336",
+        "filename": "simpleperf/cmd_debug_unwind.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-03-05T19:15:39Z",
+      "side": 1,
+      "message": "I was intended to skip these two feature sections and copy others in the else statement. But it isn\u0027t clear. So I switched to be explicit about feature types I want to copy.",
+      "parentUuid": "dd627a0d_b43d63d1",
+      "revId": "e87913a5aeeaa44866e8016bed6ff9e7339d10c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
