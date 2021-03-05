@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3618194a_eda31d09",
+        "filename": "module_ndk_libs/libnativehelper/libnativehelper.map.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2021-03-05T11:17:31Z",
+      "side": 1,
+      "message": "+enh for NDK-API approval. This should be a NOP change since it\u0027s not part of the NDK API. The reason it\u0027s done is to keep this a verbatim copy of the upstream file in libnativehelper/, but I think we could alternatively remove all the \"# apex\" entries here to avoid NDK-API approval for this kind of changes. WDYT?\n\n(b/170644498 tracks getting rid of this manual sync altogether.)",
+      "revId": "9ca8b94e11a7cb97602e916a635bab6e9b1ba5f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
