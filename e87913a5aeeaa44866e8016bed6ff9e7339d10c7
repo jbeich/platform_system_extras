@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd627a0d_b43d63d1",
+        "filename": "simpleperf/cmd_debug_unwind.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-03-05T10:22:34Z",
+      "side": 1,
+      "message": "`break;` is more defensive for long loop bodies like this (in case somebody eventually puts something after this long `if/else if` block).",
+      "revId": "e87913a5aeeaa44866e8016bed6ff9e7339d10c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
