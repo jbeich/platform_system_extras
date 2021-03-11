@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c583eaf_1203a118",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1829185
+      },
+      "writtenOn": "2021-03-11T06:58:50Z",
+      "side": 1,
+      "message": "Issue id is 182349135\nhttps://partnerissuetracker.corp.google.com/u/1/issues/182349135",
+      "revId": "d0dac7c50e216ec8761b82eb5a9dc0504974bd74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
