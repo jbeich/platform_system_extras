@@ -33,6 +33,7 @@
 #include "event_attr.h"
 #include "perf_event.h"
 #include "record.h"
+#include "system/extras/simpleperf/record_file.pb.h"
 #include "utils.h"
 
 namespace simpleperf {
@@ -52,12 +53,13 @@ std::unique_ptr<RecordFileWriter> RecordFileWriter::CreateInstance(const std::st
     return nullptr;
   }
 
-  return std::unique_ptr<RecordFileWriter>(new RecordFileWriter(filename, fp));
+  return std::unique_ptr<RecordFileWriter>(new RecordFileWriter(filename, fp, true));
 }
 
-RecordFileWriter::RecordFileWriter(const std::string& filename, FILE* fp)
+RecordFileWriter::RecordFileWriter(const std::string& filename, FILE* fp, bool own_fp)
     : filename_(filename),
       record_fp_(fp),
+      own_fp_(own_fp),
       attr_section_offset_(0),
       attr_section_size_(0),
       data_section_offset_(0),
@@ -66,7 +68,7 @@ RecordFileWriter::RecordFileWriter(const std::string& filename, FILE* fp)
       feature_count_(0) {}
 
 RecordFileWriter::~RecordFileWriter() {
-  if (record_fp_ != nullptr) {
+  if (record_fp_ != nullptr && own_fp_) {
     fclose(record_fp_);
     unlink(filename_.c_str());
   }
@@ -317,8 +319,8 @@ bool RecordFileWriter::WriteAuxTraceFeature(const std::vector<uint64_t>& auxtrac
     data.push_back(offset);
     data.push_back(AuxTraceRecord::Size());
   }
-  return WriteFeatureBegin(FEAT_AUXTRACE) && Write(data.data(), data.size() * sizeof(uint64_t)) &&
-         WriteFeatureEnd(FEAT_AUXTRACE);
+  return WriteFeature(FEAT_AUXTRACE, reinterpret_cast<char*>(data.data()),
+                      data.size() * sizeof(uint64_t));
 }
 
 bool RecordFileWriter::WriteFileFeatures(const std::vector<Dso*>& dsos) {
@@ -353,11 +355,12 @@ bool RecordFileWriter::WriteFileFeatures(const std::vector<Dso*>& dsos) {
 }
 
 bool RecordFileWriter::WriteFileFeature(const FileFeature& file) {
-  // Symbols written to the file feature section are only accepted in the symbol_ptrs field.
-  CHECK(file.symbols.empty());
-  uint32_t symbol_count = file.symbol_ptrs.size();
+  uint32_t symbol_count = file.symbols.size() + file.symbol_ptrs.size();
   uint32_t size = file.path.size() + 1 + sizeof(uint32_t) * 2 + sizeof(uint64_t) +
                   symbol_count * (sizeof(uint64_t) + sizeof(uint32_t));
+  for (const auto& symbol : file.symbols) {
+    size += strlen(symbol.Name()) + 1;
+  }
   for (const auto& symbol : file.symbol_ptrs) {
     size += strlen(symbol->Name()) + 1;
   }
@@ -374,11 +377,18 @@ bool RecordFileWriter::WriteFileFeature(const FileFeature& file) {
   MoveToBinaryFormat(static_cast<uint32_t>(file.type), p);
   MoveToBinaryFormat(file.min_vaddr, p);
   MoveToBinaryFormat(symbol_count, p);
-  for (const auto& symbol : file.symbol_ptrs) {
+
+  auto write_symbol = [&](const Symbol* symbol) {
     MoveToBinaryFormat(symbol->addr, p);
     uint32_t len = symbol->len;
     MoveToBinaryFormat(len, p);
     MoveToBinaryFormat(symbol->Name(), strlen(symbol->Name()) + 1, p);
+  };
+  for (const auto& symbol : file.symbols) {
+    write_symbol(&symbol);
+  }
+  for (const auto& symbol : file.symbol_ptrs) {
+    write_symbol(symbol);
   }
   if (file.type == DSO_DEX_FILE) {
     uint32_t offset_count = file.dex_file_offsets.size();
@@ -390,7 +400,7 @@ bool RecordFileWriter::WriteFileFeature(const FileFeature& file) {
   }
   CHECK_EQ(buf.size(), static_cast<size_t>(p - buf.data()));
 
-  return WriteFeature(FEAT_FILE, buf);
+  return WriteFeature(FEAT_FILE, buf.data(), buf.size());
 }
 
 bool RecordFileWriter::WriteMetaInfoFeature(
@@ -406,11 +416,27 @@ bool RecordFileWriter::WriteMetaInfoFeature(
     MoveToBinaryFormat(pair.first.c_str(), pair.first.size() + 1, p);
     MoveToBinaryFormat(pair.second.c_str(), pair.second.size() + 1, p);
   }
-  return WriteFeature(FEAT_META_INFO, buf);
+  return WriteFeature(FEAT_META_INFO, buf.data(), buf.size());
 }
 
-bool RecordFileWriter::WriteFeature(int feature, const std::vector<char>& data) {
-  return WriteFeatureBegin(feature) && Write(data.data(), data.size()) && WriteFeatureEnd(feature);
+bool RecordFileWriter::WriteDebugUnwindFeature(const DebugUnwindFeature& debug_unwind) {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+  proto::DebugUnwindFeature proto_debug_unwind;
+  for (auto& file : debug_unwind) {
+    auto proto_file = proto_debug_unwind.add_file();
+    proto_file->set_path(file.path);
+    proto_file->set_size(file.size);
+  }
+  std::string s;
+  if (!proto_debug_unwind.SerializeToString(&s)) {
+    LOG(ERROR) << "SerializeToString() failed";
+    return false;
+  }
+  return WriteFeature(FEAT_DEBUG_UNWIND, s.data(), s.size());
+}
+
+bool RecordFileWriter::WriteFeature(int feature, const char* data, size_t size) {
+  return WriteFeatureBegin(feature) && Write(data, size) && WriteFeatureEnd(feature);
 }
 
 bool RecordFileWriter::WriteFeatureBegin(int feature) {
@@ -489,7 +515,7 @@ bool RecordFileWriter::Close() {
     result = false;
   }
 
-  if (fclose(record_fp_) != 0) {
+  if (own_fp_ && fclose(record_fp_) != 0) {
     PLOG(ERROR) << "failed to close record file '" << filename_ << "'";
     result = false;
   }
