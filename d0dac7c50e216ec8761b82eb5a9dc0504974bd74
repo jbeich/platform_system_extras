@@ -16,6 +16,23 @@
       "message": "Issue id is 182349135\nhttps://partnerissuetracker.corp.google.com/u/1/issues/182349135",
       "revId": "d0dac7c50e216ec8761b82eb5a9dc0504974bd74",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b1b0b64_89a9c76c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1290458
+      },
+      "writtenOn": "2021-03-11T20:15:02Z",
+      "side": 1,
+      "message": "We explicitly removed this from mke2fs.conf last year:\n\nhttps://android-review.googlesource.com/c/platform/system/extras/+/1234247/\n\nCan you explain more about what partition you\u0027re resizing such that you need this?",
+      "revId": "d0dac7c50e216ec8761b82eb5a9dc0504974bd74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
