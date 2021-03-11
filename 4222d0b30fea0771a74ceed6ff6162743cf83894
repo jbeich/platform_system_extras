@@ -1,0 +1,47 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000008909809",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1630161?revision\u003d1",
+      "fixSuggestions": [
+        {
+          "fixId": "987d1ff7_4f1c0fb5",
+          "description": "Change to \"simpleperf/scripts/test/app_profiler_test.py\"",
+          "replacements": [
+            {
+              "path": "simpleperf/scripts/test/app_profiler_test.py",
+              "range": {
+                "startLine": 127,
+                "startChar": 24,
+                "endLine": 127,
+                "endChar": 31
+              },
+              "replacement": "without"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "6242bacf_a97667d1",
+        "filename": "simpleperf/scripts/test/app_profiler_test.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-03-11T23:08:40Z",
+      "side": 1,
+      "message": "Common typo found: \"wihtout\" -- should it be \"without\"?\nNote: a line containing \"common_typos_disable\" or \"common_typos_enable\" will turn off or on (respectively) the linter for subsequent lines in the file. Alternatively include the token \"NOTYPO\" within a line to skip typo linting that line or include \u0027No-Typo-Check: \u003creason\u003e\u0027in the commit message.",
+      "range": {
+        "startLine": 127,
+        "startChar": 24,
+        "endLine": 127,
+        "endChar": 31
+      },
+      "revId": "4222d0b30fea0771a74ceed6ff6162743cf83894",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
