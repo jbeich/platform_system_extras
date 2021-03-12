@@ -51,6 +51,24 @@
       "parentUuid": "5b1b0b64_89a9c76c",
       "revId": "d0dac7c50e216ec8761b82eb5a9dc0504974bd74",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "97e6fca5_52b58f0e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1290458
+      },
+      "writtenOn": "2021-03-12T21:27:28Z",
+      "side": 1,
+      "message": "system is a readonly partition, though. When would the filesystem need resizing?",
+      "parentUuid": "f5fdab86_1c8dd405",
+      "revId": "d0dac7c50e216ec8761b82eb5a9dc0504974bd74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
