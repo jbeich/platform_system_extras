@@ -33,6 +33,24 @@
       "message": "We explicitly removed this from mke2fs.conf last year:\n\nhttps://android-review.googlesource.com/c/platform/system/extras/+/1234247/\n\nCan you explain more about what partition you\u0027re resizing such that you need this?",
       "revId": "d0dac7c50e216ec8761b82eb5a9dc0504974bd74",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5fdab86_1c8dd405",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1829185
+      },
+      "writtenOn": "2021-03-12T03:34:33Z",
+      "side": 1,
+      "message": "python ./mkuserimg_mke2fs.py -s out/soong/.temp/tmpon7sBO ./system.img ext4 / 4481409024 -j 0 -T 1230768000 -L / -i 5914 -M 0 -U 8122e4c7-ad19-5c52-b714-23bce2c9fe24 -S 8b75793c-e4ab-5a67-8d3a-f37f3aab975d -c --inode_size 256\n\nThe size of system source dir \"/home/work/star-r-dev-build/out/soong/.temp/tmpon7sBO\" is about 4.2G. Then I checked output system.img, its size is only 11MB, unsparse it and mount, its content is empty. \n\nI have below test to further debug:\n\ntest1. rm some content to shrink the source dir /home/work/star-r-dev-build/out/soong/.temp/tmpon7sBO, then system.img is normal now and its size is about 4.1GB.\n\ntest2. add 200+ inode number(from 5914 to 6114) as -i params passed to mkuserimg_mke2fs.py, the system.img will also be normal with 4.2GB size.\n\nSo I conclude it\u0027s because the inode num is a limitation for ext4 image generation.",
+      "parentUuid": "5b1b0b64_89a9c76c",
+      "revId": "d0dac7c50e216ec8761b82eb5a9dc0504974bd74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
