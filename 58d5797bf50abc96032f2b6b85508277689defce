@@ -33,6 +33,75 @@
       "message": "ps2: tiny fix. Add Shukang and Yi to review the protobuf change.",
       "revId": "58d5797bf50abc96032f2b6b85508277689defce",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e7fa860_3326c641",
+        "filename": "simpleperf/OfflineUnwinder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1079424
+      },
+      "writtenOn": "2021-03-17T18:14:14Z",
+      "side": 1,
+      "message": "Is there a way to remind us to update UnwindStackErrorCode when unwindstack adds a new enum value?",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 16
+      },
+      "revId": "58d5797bf50abc96032f2b6b85508277689defce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a18986f1_8eb33854",
+        "filename": "simpleperf/cmd_report_sample.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 636,
+      "author": {
+        "id": 1079424
+      },
+      "writtenOn": "2021-03-17T18:14:14Z",
+      "side": 1,
+      "message": "Can you add a brief explanation on why 128k is selected?",
+      "range": {
+        "startLine": 636,
+        "startChar": 77,
+        "endLine": 636,
+        "endChar": 81
+      },
+      "revId": "58d5797bf50abc96032f2b6b85508277689defce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc34197a_c640c73f",
+        "filename": "simpleperf/cmd_report_sample.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 661,
+      "author": {
+        "id": 1079424
+      },
+      "writtenOn": "2021-03-17T18:14:14Z",
+      "side": 1,
+      "message": "[Optional] I\u0027d suggest listing those values here to ensure a compiler error when a new enum value is added.",
+      "range": {
+        "startLine": 661,
+        "startChar": 4,
+        "endLine": 661,
+        "endChar": 11
+      },
+      "revId": "58d5797bf50abc96032f2b6b85508277689defce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
