@@ -58,6 +58,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "43a467c5_953cdabd",
+        "filename": "simpleperf/OfflineUnwinder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-03-17T19:30:26Z",
+      "side": 1,
+      "message": "Done. Added ERROR_MAX in both enum.",
+      "parentUuid": "9e7fa860_3326c641",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 16
+      },
+      "revId": "58d5797bf50abc96032f2b6b85508277689defce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9fe5e413_bbb31e8b",
@@ -71,6 +95,30 @@
       "writtenOn": "2021-03-17T18:59:36Z",
       "side": 1,
       "message": "This list seems different from the proto enum. Am I missing something?",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 36
+      },
+      "revId": "58d5797bf50abc96032f2b6b85508277689defce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6607d12d_9d8f31e9",
+        "filename": "simpleperf/OfflineUnwinder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-03-17T19:30:26Z",
+      "side": 1,
+      "message": "This list is error_code from libunwindstack. And the proto error code is interpreted by simpleperf (in cmd_report_sample.cpp). Some error code are added, some are removed.",
+      "parentUuid": "9fe5e413_bbb31e8b",
       "range": {
         "startLine": 57,
         "startChar": 0,
@@ -106,6 +154,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "e28408b3_12940bbd",
+        "filename": "simpleperf/cmd_report_sample.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 636,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-03-17T19:30:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a18986f1_8eb33854",
+      "range": {
+        "startLine": 636,
+        "startChar": 77,
+        "endLine": 636,
+        "endChar": 81
+      },
+      "revId": "58d5797bf50abc96032f2b6b85508277689defce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "bc34197a_c640c73f",
         "filename": "simpleperf/cmd_report_sample.cpp",
         "patchSetId": 2
@@ -117,6 +189,30 @@
       "writtenOn": "2021-03-17T18:14:14Z",
       "side": 1,
       "message": "[Optional] I\u0027d suggest listing those values here to ensure a compiler error when a new enum value is added.",
+      "range": {
+        "startLine": 661,
+        "startChar": 4,
+        "endLine": 661,
+        "endChar": 11
+      },
+      "revId": "58d5797bf50abc96032f2b6b85508277689defce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "40b0fcf6_a69f5899",
+        "filename": "simpleperf/cmd_report_sample.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 661,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-03-17T19:30:26Z",
+      "side": 1,
+      "message": "Good suggestion! Done",
+      "parentUuid": "bc34197a_c640c73f",
       "range": {
         "startLine": 661,
         "startChar": 4,
