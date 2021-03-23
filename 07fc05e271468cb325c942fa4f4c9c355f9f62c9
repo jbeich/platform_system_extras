@@ -46,6 +46,30 @@
       },
       "revId": "07fc05e271468cb325c942fa4f4c9c355f9f62c9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c71dfc1_0db20039",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-03-23T19:04:48Z",
+      "side": 1,
+      "message": "Sorry, you are right. I thought it was UnwindStackErrorCode.",
+      "parentUuid": "be046e5d_42a3cb9b",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 57
+      },
+      "revId": "07fc05e271468cb325c942fa4f4c9c355f9f62c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
