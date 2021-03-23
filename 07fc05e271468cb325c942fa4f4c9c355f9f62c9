@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7518fadb_926a93e9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-03-23T17:41:30Z",
+      "side": 1,
+      "message": "How can it happen? unwinding_result.error_code is of type enum UnwindStackErrorCode in https://cs.android.com/android/platform/superproject/+/master:system/extras/simpleperf/OfflineUnwinder.h;l\u003d29;drc\u003dmaster. And the switch has covered all 11 possible values.",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 57
+      },
+      "revId": "07fc05e271468cb325c942fa4f4c9c355f9f62c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
