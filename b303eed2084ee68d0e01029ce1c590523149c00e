@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9ee3a71_7777ea31",
+        "filename": "profcollectd/libprofcollectd/config.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-03-23T07:22:34Z",
+      "side": 1,
+      "message": "Getting used to reading Rust more every day. It\u0027s weird to see `default` as an identifier here though. Could I suggest `default_property_value` instead so it\u0027s more descriptive?",
+      "range": {
+        "startLine": 115,
+        "startChar": 30,
+        "endLine": 115,
+        "endChar": 37
+      },
+      "revId": "b303eed2084ee68d0e01029ce1c590523149c00e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b46c666f_7818e9e2",
+        "filename": "profcollectd/libprofcollectd/config.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-03-23T07:22:34Z",
+      "side": 1,
+      "message": "If we\u0027re using `value` below for `set_property`, I think that\u0027s more natural here too.",
+      "range": {
+        "startLine": 121,
+        "startChar": 8,
+        "endLine": 121,
+        "endChar": 12
+      },
+      "revId": "b303eed2084ee68d0e01029ce1c590523149c00e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
