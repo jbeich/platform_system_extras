@@ -17,7 +17,11 @@
 extern "C" {
 
 bool HasSupport();
-bool Record(const char* output, float duration);
+enum RecordScope {
+  USERSPACE = 0,
+  KERNEL = 1,
+  BOTH = 2,
+};
+bool Record(const char* event_name, const char* output, float duration);
 bool Inject(const char* traceInput, const char* profileOutput);
-
 }
