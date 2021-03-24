@@ -29,21 +29,23 @@
 namespace simpleperf {
 
 #ifndef NO_LIBDEXFILE_SUPPORT
-using DexFileSymbol = art_api::dex::MethodInfo;
+using DexFileSymbol = ExtDexFileMethodInfo;
 #else
 struct DexFileSymbol {
-  uint64_t offset;
-  uint64_t len;
-  std::string name;
+  size_t sizeof_struct;
+  uint32_t addr;
+  uint32_t size;
+  const char* name;
+  size_t name_size;
 };
 #endif
 
 bool ReadSymbolsFromDexFileInMemory(void* addr, uint64_t size,
                                     const std::vector<uint64_t>& dex_file_offsets,
-                                    std::vector<DexFileSymbol>* symbols);
+                                    const std::function<void(DexFileSymbol*)>& symbol_callback);
 bool ReadSymbolsFromDexFile(const std::string& file_path,
                             const std::vector<uint64_t>& dex_file_offsets,
-                            std::vector<DexFileSymbol>* symbols);
+                            const std::function<void(DexFileSymbol*)>& symbol_callback);
 
 }  // namespace simpleperf
 
