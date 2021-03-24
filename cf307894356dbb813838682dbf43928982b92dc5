@@ -39,6 +39,30 @@
       },
       "revId": "cf307894356dbb813838682dbf43928982b92dc5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "225ad3ab_9328b3d6",
+        "filename": "simpleperf/read_dex_file.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-03-24T17:25:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5738b70e_3ae7399b",
+      "range": {
+        "startLine": 47,
+        "startChar": 40,
+        "endLine": 47,
+        "endChar": 47
+      },
+      "revId": "cf307894356dbb813838682dbf43928982b92dc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
