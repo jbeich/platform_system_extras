@@ -16,6 +16,29 @@
       "message": "ps2: remove unused code.",
       "revId": "366d12db1722375332876a968468ec35d52e9887",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff668c28_f77ca566",
+        "filename": "simpleperf/rust/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1087625
+      },
+      "writtenOn": "2021-03-25T10:47:50Z",
+      "side": 1,
+      "message": "You can also do this using associated constants, IMO that is cleaner.\n\n```\nstruct RecordScope;\n\nimpl RecordScope {\n    /// Record etm data only for userspace.\n    pub const USERSPACE: \u0026str \u003d \"cs-etm:u\";\n    ...\n}\n```",
+      "range": {
+        "startLine": 45,
+        "startChar": 4,
+        "endLine": 49,
+        "endChar": 6
+      },
+      "revId": "366d12db1722375332876a968468ec35d52e9887",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
