@@ -87,6 +87,11 @@ pub fn report() -> Result<String> {
     Ok(get_profcollectd_service().report()?)
 }
 
+/// Copy report to BetterBug storage.
+pub fn copy_report_to_bb(report_name: &str) -> Result<()> {
+    Ok(get_profcollectd_service().copy_report_to_bb(report_name)?)
+}
+
 /// Inits logging for Android
 pub fn init_logging() {
     android_logger::init_once(
