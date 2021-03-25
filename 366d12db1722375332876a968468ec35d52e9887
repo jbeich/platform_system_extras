@@ -39,6 +39,30 @@
       },
       "revId": "366d12db1722375332876a968468ec35d52e9887",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1588a42_9b9165d5",
+        "filename": "simpleperf/rust/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-03-25T21:20:35Z",
+      "side": 1,
+      "message": "Yeah. But that would need to rename RecordScope. Because cs-etm:u contains not only record scope, but also event name. I prefer to not introduce the extra interface of event_name to profcollectd.",
+      "parentUuid": "ff668c28_f77ca566",
+      "range": {
+        "startLine": 45,
+        "startChar": 4,
+        "endLine": 49,
+        "endChar": 6
+      },
+      "revId": "366d12db1722375332876a968468ec35d52e9887",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
