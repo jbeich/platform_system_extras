@@ -16,25 +16,26 @@
 
 //! ProfCollect Binder service implementation.
 
-use anyhow::{bail, Context, Error, Result};
+use anyhow::{anyhow, bail, Context, Error, Result};
 use binder::public_api::Result as BinderResult;
 use binder::Status;
 use profcollectd_aidl_interface::aidl::com::android::server::profcollect::IProfCollectd::IProfCollectd;
 use std::ffi::CString;
-use std::fs::{create_dir, read_to_string, remove_dir_all, remove_file, write};
+use std::fs::{copy, create_dir, read_to_string, remove_dir_all, remove_file, write};
 use std::path::PathBuf;
 use std::str::FromStr;
 use std::sync::{Mutex, MutexGuard};
 
 use crate::config::{
-    Config, CONFIG_FILE, OLD_REPORT_OUTPUT_FILE, PROFILE_OUTPUT_DIR, REPORT_OUTPUT_DIR,
-    TRACE_OUTPUT_DIR,
+    Config, BETTERBUG_CACHE_DIR_PREFIX, BETTERBUG_CACHE_DIR_SUFFIX, CONFIG_FILE,
+    OLD_REPORT_OUTPUT_FILE, PROFILE_OUTPUT_DIR, REPORT_OUTPUT_DIR, TRACE_OUTPUT_DIR,
 };
 use crate::report::pack_report;
 use crate::scheduler::Scheduler;
 
 fn err_to_binder_status(msg: Error) -> Status {
-    let msg = CString::new(msg.to_string()).expect("Failed to convert to CString");
+    let msg = format!("{:#?}", msg);
+    let msg = CString::new(msg).expect("Failed to convert to CString");
     Status::new_service_specific_error(1, Some(&msg))
 }
 
@@ -95,6 +96,30 @@ impl IProfCollectd for ProfcollectdBinderService {
         remove_file(&report).ok();
         Ok(())
     }
+    fn copy_report_to_bb(&self, bb_profile_id: i32, report_name: &str) -> BinderResult<()> {
+        if bb_profile_id < 0 {
+            return Err(err_to_binder_status(anyhow!("Invalid profile ID")));
+        }
+        verify_report_name(&report_name).map_err(err_to_binder_status)?;
+
+        let mut report = PathBuf::from(&*REPORT_OUTPUT_DIR);
+        report.push(report_name);
+        report.set_extension("zip");
+
+        let mut dest = PathBuf::from(&*BETTERBUG_CACHE_DIR_PREFIX);
+        dest.push(bb_profile_id.to_string());
+        dest.push(&*BETTERBUG_CACHE_DIR_SUFFIX);
+        if !dest.is_dir() {
+            return Err(err_to_binder_status(anyhow!("Cannot open BetterBug cache dir")));
+        }
+        dest.push(report_name);
+        dest.set_extension("zip");
+
+        copy(report, dest)
+            .map(|_| ())
+            .context("Failed to copy report to bb storage.")
+            .map_err(err_to_binder_status)
+    }
     fn get_supported_provider(&self) -> BinderResult<String> {
         Ok(self.lock().scheduler.get_trace_provider_name().to_string())
     }
@@ -105,7 +130,7 @@ impl IProfCollectd for ProfcollectdBinderService {
 fn verify_report_name(report_name: &str) -> Result<()> {
     match report_name.chars().all(|c| c.is_ascii_hexdigit() || c == '-') {
         true => Ok(()),
-        false => bail!("Not a report name: {}", report_name),
+        false => bail!("Invalid report name: {}", report_name),
     }
 }
 
