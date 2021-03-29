@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "484f7e1b_588f8e2a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-03-29T17:54:04Z",
+      "side": 1,
+      "message": "through",
+      "range": {
+        "startLine": 9,
+        "startChar": 39,
+        "endLine": 9,
+        "endChar": 46
+      },
+      "revId": "79f13160b7b9f5b5adad49eec58064f8727b8179",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "72d16f6f_08d42a81",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-03-29T17:54:04Z",
+      "side": 1,
+      "message": "I had to look it up to see how `:#?` works (https://doc.rust-lang.org/std/fmt/#sign0 and https://doc.rust-lang.org/std/fmt/trait.Debug.html).",
+      "revId": "79f13160b7b9f5b5adad49eec58064f8727b8179",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
