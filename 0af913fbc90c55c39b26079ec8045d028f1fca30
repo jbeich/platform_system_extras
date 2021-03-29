@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "74c5d0ef_5ccb6257",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1620010
+      },
+      "writtenOn": "2021-03-29T15:26:46Z",
+      "side": 1,
+      "message": "LGTM from Rust readability point of view",
+      "revId": "0af913fbc90c55c39b26079ec8045d028f1fca30",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
