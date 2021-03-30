@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8857c3b_bfebca7f",
+        "filename": "simpleperf/ETMDecoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 797,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-03-30T18:34:59Z",
+      "side": 1,
+      "message": "create",
+      "range": {
+        "startLine": 797,
+        "startChar": 55,
+        "endLine": 797,
+        "endChar": 60
+      },
+      "revId": "ea5cb14c4d2ee7dbc01572dd68f4d6ad5f4078ef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
