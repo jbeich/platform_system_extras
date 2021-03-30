@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0119582_c4e40470",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2021-03-30T12:18:41Z",
+      "side": 1,
+      "message": "The TH failures are just due to automerger delays.",
+      "revId": "04fdf4326f407d2d969898ac8d62eb7406001a31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
