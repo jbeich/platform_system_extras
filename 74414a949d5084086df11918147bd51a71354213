@@ -16,6 +16,23 @@
       "message": "+2 from my side, but I think David would want to take a look.",
       "revId": "74414a949d5084086df11918147bd51a71354213",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff4bb901_87970aa0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1290458
+      },
+      "writtenOn": "2021-04-01T18:26:57Z",
+      "side": 1,
+      "message": "Thanks for factoring out that parsing code.",
+      "revId": "74414a949d5084086df11918147bd51a71354213",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
