@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5cb55a65_02e70dd9",
+        "filename": "partition_tools/lpmake.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-04-01T05:03:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "555e5e59_7b9fa99a",
+      "range": {
+        "startLine": 46,
+        "startChar": 32,
+        "endLine": 46,
+        "endChar": 36
+      },
+      "revId": "e22b7393c9ebb3edf3a0cde4d40423a26ffcc7cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "40f32925_527e006b",
@@ -54,6 +78,30 @@
       "writtenOn": "2021-04-01T04:39:30Z",
       "side": 1,
       "message": "Can we make this as a function?",
+      "range": {
+        "startLine": 329,
+        "startChar": 0,
+        "endLine": 337,
+        "endChar": 5
+      },
+      "revId": "e22b7393c9ebb3edf3a0cde4d40423a26ffcc7cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "73f59fd0_5b331a0b",
+        "filename": "partition_tools/lpmake.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2021-04-01T05:03:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "40f32925_527e006b",
       "range": {
         "startLine": 329,
         "startChar": 0,
