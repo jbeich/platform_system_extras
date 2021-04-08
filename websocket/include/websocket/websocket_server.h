@@ -34,6 +34,7 @@ class WebSocketServer {
     void RegisterHandlerFactory(const std::string& path,
                                 std::unique_ptr<WebSocketHandlerFactory> handler_factory_p);
     void Serve();
+    bool ServeOnce();
 
   private:
     static std::unordered_map<struct lws*, std::shared_ptr<WebSocketHandler>> handlers_;
