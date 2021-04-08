@@ -108,6 +108,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4ddaec28_8abaa24a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1087625
+      },
+      "writtenOn": "2021-04-08T08:29:09Z",
+      "side": 1,
+      "message": "Thanks for point this out. This is a stop-gap solution, http://b/182498247 is going to move this to a public Rust API for libbase properties.",
+      "parentUuid": "5449b7f0_36c64092",
+      "revId": "a38153cc5d030c1a26fc0d023005b6cfc7f13b78",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1938d835_005c9362",
         "filename": "profcollectd/libprofcollectd/bindings/libbase/lib.rs",
         "patchSetId": 1
