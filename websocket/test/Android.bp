@@ -1,0 +1,27 @@
+cc_test {
+    name: "websocket_wrapper_test_server",
+    host_supported: true,
+    shared_libs: [
+        "libbase",
+        "libcrypto",
+        "libssl",
+    ],
+    static_libs: [
+        "libcap",
+        "libgflags",
+        "libwebsockets",
+        "libwebsocket_wrapper",
+    ],
+    srcs: [
+        "test_server.cpp",
+    ],
+    data: [
+        "root/index.html",
+        "certs/server.crt",
+        "certs/server.key",
+    ],
+    test_options: {
+        unit_test: false,
+    },
+    gtest: false,
+}
