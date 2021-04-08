@@ -88,10 +88,12 @@ void WebSocketServer::RegisterHandlerFactory(
 }
 
 void WebSocketServer::Serve() {
-    int n = 0;
-    while (n >= 0) {
-        n = lws_service(context_, 0);
-    }
+    while (ServeOnce())
+        ;
+}
+
+bool WebSocketServer::ServeOnce() {
+    return lws_service(context_, 0) >= 0;
 }
 
 WebSocketServer::~WebSocketServer() {
