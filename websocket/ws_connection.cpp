@@ -90,7 +90,7 @@ class WsConnectionImpl : public WsConnection,
 class WsConnectionContextImpl : public WsConnectionContext,
                                 public std::enable_shared_from_this<WsConnectionContextImpl> {
   public:
-    WsConnectionContextImpl(struct lws_context* lws_ctx);
+    WsConnectionContextImpl(struct lws_context* lws_ctx, bool start);
     ~WsConnectionContextImpl() override;
 
     std::shared_ptr<WsConnection> CreateConnection(
@@ -98,6 +98,8 @@ class WsConnectionContextImpl : public WsConnectionContext,
             WsConnection::Security secure, const std::string& protocol,
             std::weak_ptr<WsConnectionObserver> observer,
             const std::vector<std::pair<std::string, std::string>>& headers) override;
+
+    bool ServeOnce() override;
 
     void RememberConnection(void*, std::weak_ptr<WsConnectionImpl>);
     void ForgetConnection(void*);
@@ -144,7 +146,7 @@ const struct lws_protocols kProtocols[2] = {
 
 }  // namespace
 
-std::shared_ptr<WsConnectionContext> WsConnectionContext::Create() {
+std::shared_ptr<WsConnectionContext> WsConnectionContext::Create(bool start) {
     struct lws_context_creation_info context_info = {};
     context_info.port = CONTEXT_PORT_NO_LISTEN;
     context_info.options = LWS_SERVER_OPTION_DO_SSL_GLOBAL_INIT;
@@ -153,12 +155,12 @@ std::shared_ptr<WsConnectionContext> WsConnectionContext::Create() {
     if (!lws_ctx) {
         return nullptr;
     }
-    return std::shared_ptr<WsConnectionContext>(new WsConnectionContextImpl(lws_ctx));
+    return std::shared_ptr<WsConnectionContext>(new WsConnectionContextImpl(lws_ctx, start));
 }
 
-WsConnectionContextImpl::WsConnectionContextImpl(struct lws_context* lws_ctx)
+WsConnectionContextImpl::WsConnectionContextImpl(struct lws_context* lws_ctx, bool start)
     : lws_context_(lws_ctx) {
-    Start();
+    if (start) Start();
 }
 
 WsConnectionContextImpl::~WsConnectionContextImpl() {
@@ -170,12 +172,13 @@ WsConnectionContextImpl::~WsConnectionContextImpl() {
 
 void WsConnectionContextImpl::Start() {
     message_loop_ = std::thread([this]() {
-        for (;;) {
-            if (lws_service(lws_context_, 0) < 0) {
-                break;
-            }
-        }
+        while (ServeOnce())
+            ;
     });
+}
+
+bool WsConnectionContextImpl::ServeOnce() {
+    return lws_service(lws_context_, 0) >= 0;
 }
 
 std::shared_ptr<WsConnection> WsConnectionContextImpl::CreateConnection(
