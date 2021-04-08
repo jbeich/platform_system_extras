@@ -92,6 +92,9 @@ void WebSocketServer::Serve() {
     while (n >= 0) {
         n = lws_service(context_, 0);
     }
+}
+
+WebSocketServer::~WebSocketServer() {
     lws_context_destroy(context_);
 }
 
