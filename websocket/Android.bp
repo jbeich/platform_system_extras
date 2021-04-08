@@ -21,6 +21,7 @@ cc_library_static {
     srcs: [
         "websocket_handler.cpp",
         "websocket_server.cpp",
+        "ws_connection.cpp",
     ],
     shared_libs: [
         "libbase",
