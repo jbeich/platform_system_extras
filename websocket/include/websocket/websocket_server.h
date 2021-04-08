@@ -29,7 +29,7 @@ class WebSocketServer {
   public:
     WebSocketServer(const char* protocol_name, const std::string& certs_dir,
                     const std::string& assets_dir, int port);
-    ~WebSocketServer() = default;
+    ~WebSocketServer();
 
     void RegisterHandlerFactory(const std::string& path,
                                 std::unique_ptr<WebSocketHandlerFactory> handler_factory_p);
