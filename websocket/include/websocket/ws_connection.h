@@ -59,7 +59,9 @@ class WsConnection {
 
 class WsConnectionContext {
   public:
-    static std::shared_ptr<WsConnectionContext> Create();
+    // If |start|, start the loop in a background thread immediately. Otherwise,
+    // caller should call `while(ServeOnce()) {}`.
+    static std::shared_ptr<WsConnectionContext> Create(bool start = true);
 
     virtual ~WsConnectionContext() = default;
 
@@ -68,6 +70,8 @@ class WsConnectionContext {
             WsConnection::Security secure, const std::string& protocol,
             std::weak_ptr<WsConnectionObserver> observer,
             const std::vector<std::pair<std::string, std::string>>& headers = {}) = 0;
+
+    virtual bool ServeOnce() = 0;
 
   protected:
     WsConnectionContext() = default;
