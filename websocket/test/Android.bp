@@ -50,3 +50,26 @@ cc_test {
     },
     gtest: false,
 }
+
+cc_test {
+    name: "websocket_wrapper_test_client",
+    host_supported: true,
+    shared_libs: [
+        "libbase",
+        "libcrypto",
+        "libssl",
+    ],
+    static_libs: [
+        "libcap",
+        "libgflags",
+        "libwebsockets",
+        "libwebsocket_wrapper",
+    ],
+    srcs: [
+        "test_client.cpp",
+    ],
+    test_options: {
+        unit_test: false,
+    },
+    gtest: false,
+}
