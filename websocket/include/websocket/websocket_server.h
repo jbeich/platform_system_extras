@@ -28,7 +28,7 @@ namespace android::ws {
 class WebSocketServer {
   public:
     WebSocketServer(const char* protocol_name, const std::string& certs_dir,
-                    const std::string& assets_dir, int port);
+                    const std::string& assets_dir, int port, bool enable_ssl = true);
     ~WebSocketServer();
 
     void RegisterHandlerFactory(const std::string& path,
