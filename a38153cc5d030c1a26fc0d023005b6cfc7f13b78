@@ -87,6 +87,40 @@
       "message": "Spoke with Yi about this. He\u0027ll properly convert to cxx in a follow up change.",
       "revId": "a38153cc5d030c1a26fc0d023005b6cfc7f13b78",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5449b7f0_36c64092",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1423874
+      },
+      "writtenOn": "2021-04-08T06:01:02Z",
+      "side": 1,
+      "message": "I came across this CL because my username is mentioned in the discussion.\n\nAdmittedly a biased drive-by reviewer, but strong +1 in favor of the cxx crate over bindgen for this type of thing. My work codebase used to have tens of thousands of lines of bindgen-based FFI that looked pretty much like this CL. Practically every binding I looked at had at least one memory leak, data race, or error codepath with double frees, including bindings written and reviewed by Rust experts. Bindings based on cxx have been close to foolproof in comparison, more concise/intuitive, and more approachable for contributors without already expertise in both Rust and C++.",
+      "revId": "a38153cc5d030c1a26fc0d023005b6cfc7f13b78",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1938d835_005c9362",
+        "filename": "profcollectd/libprofcollectd/bindings/libbase/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1423874
+      },
+      "writtenOn": "2021-04-08T06:01:02Z",
+      "side": 1,
+      "message": "This function leaks an allocation on every call, which seems unintentional. The strdup inside GetProperty allocates using malloc. On the Rust side that allocated char* is being cast to \u0026str, but nothing ends up free-ing the original char* when the caller is done with the \u0026str they got.",
+      "revId": "a38153cc5d030c1a26fc0d023005b6cfc7f13b78",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
