@@ -31,6 +31,7 @@ class WsConnectionImpl : public WsConnection,
     };
 
     WsConnectionImpl(int port, const std::string& addr, const std::string& path, Security secure,
+                     const std::string& protocol,
                      const std::vector<std::pair<std::string, std::string>>& headers,
                      std::weak_ptr<WsConnectionObserver> observer,
                      std::shared_ptr<WsConnectionContextImpl> context);
@@ -74,6 +75,7 @@ class WsConnectionImpl : public WsConnection,
     const std::string path_;
     const Security security_;
     const std::vector<std::pair<std::string, std::string>> headers_;
+    const std::string protocol_;
 
     std::weak_ptr<WsConnectionObserver> observer_;
 
@@ -93,7 +95,8 @@ class WsConnectionContextImpl : public WsConnectionContext,
 
     std::shared_ptr<WsConnection> CreateConnection(
             int port, const std::string& addr, const std::string& path,
-            WsConnection::Security secure, std::weak_ptr<WsConnectionObserver> observer,
+            WsConnection::Security secure, const std::string& protocol,
+            std::weak_ptr<WsConnectionObserver> observer,
             const std::vector<std::pair<std::string, std::string>>& headers) override;
 
     void RememberConnection(void*, std::weak_ptr<WsConnectionImpl>);
@@ -119,7 +122,7 @@ void CreateConnectionCallback(lws_sorted_usec_list_t* sul);
 
 namespace {
 
-constexpr char kProtocolName[] = "cf-webrtc-device";
+constexpr char kLocalProtocolName[] = "local-protocol";
 constexpr int kBufferSize = 65536;
 
 const uint32_t backoff_ms[] = {1000, 2000, 3000, 4000, 5000};
@@ -136,7 +139,8 @@ const lws_retry_bo_t kRetry = {
 };
 
 const struct lws_protocols kProtocols[2] = {
-        {kProtocolName, LwsCallback, 0, kBufferSize, 0, NULL, 0}, {NULL, NULL, 0, 0, 0, NULL, 0}};
+        {kLocalProtocolName, LwsCallback, 0, kBufferSize, 0, NULL, 0},
+        {NULL, NULL, 0, 0, 0, NULL, 0}};
 
 }  // namespace
 
@@ -176,10 +180,10 @@ void WsConnectionContextImpl::Start() {
 
 std::shared_ptr<WsConnection> WsConnectionContextImpl::CreateConnection(
         int port, const std::string& addr, const std::string& path, WsConnection::Security security,
-        std::weak_ptr<WsConnectionObserver> observer,
+        const std::string& protocol, std::weak_ptr<WsConnectionObserver> observer,
         const std::vector<std::pair<std::string, std::string>>& headers) {
-    return std::shared_ptr<WsConnection>(new WsConnectionImpl(port, addr, path, security, headers,
-                                                              observer, shared_from_this()));
+    return std::shared_ptr<WsConnection>(new WsConnectionImpl(
+            port, addr, path, security, protocol, headers, observer, shared_from_this()));
 }
 
 std::shared_ptr<WsConnectionImpl> WsConnectionContextImpl::GetConnection(void* raw) {
@@ -208,7 +212,7 @@ void WsConnectionContextImpl::ForgetConnection(void* raw) {
 }
 
 WsConnectionImpl::WsConnectionImpl(int port, const std::string& addr, const std::string& path,
-                                   Security security,
+                                   Security security, const std::string& protocol,
                                    const std::vector<std::pair<std::string, std::string>>& headers,
                                    std::weak_ptr<WsConnectionObserver> observer,
                                    std::shared_ptr<WsConnectionContextImpl> context)
@@ -217,6 +221,7 @@ WsConnectionImpl::WsConnectionImpl(int port, const std::string& addr, const std:
       path_(path),
       security_(security),
       headers_(headers),
+      protocol_(protocol),
       observer_(observer),
       context_(context) {}
 
@@ -403,8 +408,8 @@ void WsConnectionImpl::ConnectInner() {
             connect_info.ssl_connection = 0;
             break;
     }
-    connect_info.protocol = "webrtc-operator";
-    connect_info.local_protocol_name = kProtocolName;
+    connect_info.protocol = protocol_.c_str();
+    connect_info.local_protocol_name = kLocalProtocolName;
     connect_info.pwsi = &wsi_;
     connect_info.retry_and_idle_policy = &kRetry;
     // There is no guarantee the connection object still exists when the callback
