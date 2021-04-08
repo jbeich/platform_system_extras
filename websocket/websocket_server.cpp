@@ -26,10 +26,9 @@
 
 namespace android::ws {
 WebSocketServer::WebSocketServer(const char* protocol_name, const std::string& certs_dir,
-                                 const std::string& assets_dir, int server_port) {
+                                 const std::string& assets_dir, int server_port, bool enable_ssl) {
     std::string cert_file = certs_dir + "/server.crt";
     std::string key_file = certs_dir + "/server.key";
-
     retry_ = {
             .secs_since_valid_ping = 3,
             .secs_since_valid_hangup = 10,
@@ -71,9 +70,11 @@ WebSocketServer::WebSocketServer(const char* protocol_name, const std::string& c
     info.vhost_name = "localhost";
     info.ws_ping_pong_interval = 10;
     info.headers = &headers_;
-    info.options |= LWS_SERVER_OPTION_DO_SSL_GLOBAL_INIT;
-    info.ssl_cert_filepath = cert_file.c_str();
-    info.ssl_private_key_filepath = key_file.c_str();
+    if (enable_ssl) {
+        info.options |= LWS_SERVER_OPTION_DO_SSL_GLOBAL_INIT;
+        info.ssl_cert_filepath = cert_file.c_str();
+        info.ssl_private_key_filepath = key_file.c_str();
+    }
     info.retry_and_idle_policy = &retry_;
 
     context_ = lws_create_context(&info);
