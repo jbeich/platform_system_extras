@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b5a2b5b_b06c31c1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1244622
+      },
+      "writtenOn": "2021-04-09T18:32:50Z",
+      "side": 1,
+      "message": "Pls fix the lint warnings.",
+      "revId": "753493ad3feba1857359c9e9b11d0a7331482c28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
