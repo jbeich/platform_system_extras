@@ -51,6 +51,24 @@
       "message": "+2, but did you forget to upload a source change?",
       "revId": "14291ea6772e64de2aae375a736033b2e7890284",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a06d8da2_e85aaf4e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-04-09T03:36:56Z",
+      "side": 1,
+      "message": "The source code isn\u0027t pushed in AOSP, but in https://github.com/yabinc/simpleperf_demo/tree/master/test_apps/android-DisplayingBitmaps",
+      "parentUuid": "9a94a210_0548f1ad",
+      "revId": "14291ea6772e64de2aae375a736033b2e7890284",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
