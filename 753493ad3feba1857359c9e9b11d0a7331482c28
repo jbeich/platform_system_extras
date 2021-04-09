@@ -16,6 +16,24 @@
       "message": "Pls fix the lint warnings.",
       "revId": "753493ad3feba1857359c9e9b11d0a7331482c28",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ed23243_c1130857",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-04-09T18:48:01Z",
+      "side": 1,
+      "message": "The lint warning warns for submitting debuggable APKs as prebuilts. But here the apks are used as testdata instead of prebuilts. Unfortunately, lint can\u0027t distinguish between the two. I have filed a bug to lint in http://b/171058789, but not fixed yet.",
+      "parentUuid": "9b5a2b5b_b06c31c1",
+      "revId": "753493ad3feba1857359c9e9b11d0a7331482c28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
