@@ -224,7 +224,7 @@ WsConnectionImpl::~WsConnectionImpl() {
     context_->ForgetConnection(this);
     // This will cause the callback to be called which will drop the connection
     // after seeing the context doesn't remember this object
-    lws_callback_on_writable(wsi_);
+    if (wsi_) lws_callback_on_writable(wsi_);
 }
 
 void WsConnectionImpl::Connect() {
