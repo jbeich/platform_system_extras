@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "70f3522d_fbcdb55e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1550939
+      },
+      "writtenOn": "2021-04-09T15:58:20Z",
+      "side": 1,
+      "message": "BCP override the reland because I have tested both the revert fix for b/184929782 and the forward fix aosp/1671709, and I merged the revert only in the interest of time because it passed the checks first, but I have confidence that the reland also works.",
+      "revId": "23935bad012b690f30f9c5221c97d253fa56ab9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
