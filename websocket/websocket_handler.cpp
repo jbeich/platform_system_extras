@@ -71,4 +71,8 @@ void WebSocketHandler::Close() {
     lws_callback_on_writable(wsi_);
 }
 
+bool WebSocketHandler::Empty() const {
+    return buffer_queue_.empty();
+}
+
 }  // namespace android::ws

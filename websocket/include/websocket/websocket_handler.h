@@ -37,6 +37,7 @@ class WebSocketHandler {
     }
     void Close();
     bool OnWritable();
+    bool Empty() const;
 
   private:
     struct WsBuffer {
