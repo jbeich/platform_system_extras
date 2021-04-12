@@ -16,6 +16,24 @@
       "message": "Global approval for just reland.",
       "revId": "8a61351dc36701ca9b9c0c5effd6498ed12d329a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b61f0c8_219d5a7b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2021-04-12T13:17:41Z",
+      "side": 1,
+      "message": "Thanks, I need CR+2 as well, but I\u0027ll just self-approve - main CL https://r.android.com/1671711 got CR+2 from dsrbecky.",
+      "parentUuid": "87aa1ce3_22956af7",
+      "revId": "8a61351dc36701ca9b9c0c5effd6498ed12d329a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
