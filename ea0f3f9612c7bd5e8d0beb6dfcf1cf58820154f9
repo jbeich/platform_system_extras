@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb98aedf_46577c38",
+        "filename": "simpleperf/scripts/test/do_test.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-04-12T19:15:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5fefc168_e8cdc833",
+      "revId": "ea0f3f9612c7bd5e8d0beb6dfcf1cf58820154f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a4d07572_b55cc3f0",
@@ -31,6 +49,30 @@
       "writtenOn": "2021-04-12T18:19:59Z",
       "side": 1,
       "message": "\"open report html file in browser\"?",
+      "range": {
+        "startLine": 58,
+        "startChar": 64,
+        "endLine": 58,
+        "endChar": 67
+      },
+      "revId": "ea0f3f9612c7bd5e8d0beb6dfcf1cf58820154f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a65ee1cc_0a53493d",
+        "filename": "simpleperf/scripts/test/do_test.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-04-12T19:15:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a4d07572_b55cc3f0",
       "range": {
         "startLine": 58,
         "startChar": 64,
@@ -64,6 +106,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca26bcea_108a8eb0",
+        "filename": "simpleperf/scripts/test/do_test.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-04-12T19:15:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a62682a_c2be5f83",
+      "range": {
+        "startLine": 63,
+        "startChar": 49,
+        "endLine": 63,
+        "endChar": 59
+      },
+      "revId": "ea0f3f9612c7bd5e8d0beb6dfcf1cf58820154f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f70a64e9_c59c5b16",
@@ -77,6 +143,30 @@
       "writtenOn": "2021-04-12T18:19:59Z",
       "side": 1,
       "message": "Would tests.find(test_from) work here?",
+      "range": {
+        "startLine": 82,
+        "startChar": 8,
+        "endLine": 82,
+        "endChar": 39
+      },
+      "revId": "ea0f3f9612c7bd5e8d0beb6dfcf1cf58820154f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "228af4f7_428fd1d8",
+        "filename": "simpleperf/scripts/test/do_test.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-04-12T19:15:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f70a64e9_c59c5b16",
       "range": {
         "startLine": 82,
         "startChar": 8,
