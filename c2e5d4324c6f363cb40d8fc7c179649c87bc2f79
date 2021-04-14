@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "35713dd0_1ce8e40a",
+        "filename": "simpleperf/report_utils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-04-14T19:00:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d2420540_795c5beb",
+      "range": {
+        "startLine": 78,
+        "startChar": 10,
+        "endLine": 80,
+        "endChar": 11
+      },
+      "revId": "c2e5d4324c6f363cb40d8fc7c179649c87bc2f79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a7c553c8_0a24f76f",
@@ -64,6 +88,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "58176cb5_ba3c9ec1",
+        "filename": "simpleperf/report_utils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-04-14T19:00:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a7c553c8_0a24f76f",
+      "range": {
+        "startLine": 219,
+        "startChar": 4,
+        "endLine": 220,
+        "endChar": 73
+      },
+      "revId": "c2e5d4324c6f363cb40d8fc7c179649c87bc2f79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8192e2dd_3191be95",
@@ -77,6 +125,30 @@
       "writtenOn": "2021-04-14T04:56:34Z",
       "side": 1,
       "message": "ASSERT_NE(line, nullptr)\n\nSame for line 88, line 90 below.",
+      "range": {
+        "startLine": 85,
+        "startChar": 2,
+        "endLine": 85,
+        "endChar": 13
+      },
+      "revId": "c2e5d4324c6f363cb40d8fc7c179649c87bc2f79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd6efb8a_ac417c40",
+        "filename": "simpleperf/utils_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-04-14T19:00:06Z",
+      "side": 1,
+      "message": "Unfortunately, gtest doesn\u0027t know how to print std::string pointer. And probably gtest also has problem comparing value with nullptr.",
+      "parentUuid": "8192e2dd_3191be95",
       "range": {
         "startLine": 85,
         "startChar": 2,
