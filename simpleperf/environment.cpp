@@ -54,16 +54,15 @@ namespace simpleperf {
 
 std::vector<int> GetOnlineCpus() {
   std::vector<int> result;
-  FILE* fp = fopen("/sys/devices/system/cpu/online", "re");
-  if (fp == nullptr) {
+  LineReader reader("/sys/devices/system/cpu/online");
+  if (!reader.Ok()) {
     PLOG(ERROR) << "can't open online cpu information";
     return result;
   }
 
-  LineReader reader(fp);
-  char* line;
+  std::string* line;
   if ((line = reader.ReadLine()) != nullptr) {
-    if (auto cpus = GetCpusFromString(line); cpus) {
+    if (auto cpus = GetCpusFromString(*line); cpus) {
       result.assign(cpus->begin(), cpus->end());
     }
   }
@@ -181,11 +180,10 @@ std::vector<pid_t> GetAllProcesses() {
 
 bool GetThreadMmapsInProcess(pid_t pid, std::vector<ThreadMmap>* thread_mmaps) {
   thread_mmaps->clear();
-  return android::procinfo::ReadProcessMaps(
-      pid, [&](const android::procinfo::MapInfo& mapinfo) {
-        thread_mmaps->emplace_back(mapinfo.start, mapinfo.end - mapinfo.start, mapinfo.pgoff,
-                                   mapinfo.name.c_str(), mapinfo.flags);
-      });
+  return android::procinfo::ReadProcessMaps(pid, [&](const android::procinfo::MapInfo& mapinfo) {
+    thread_mmaps->emplace_back(mapinfo.start, mapinfo.end - mapinfo.start, mapinfo.pgoff,
+                               mapinfo.name.c_str(), mapinfo.flags);
+  });
 }
 
 bool GetKernelBuildId(BuildId* build_id) {
@@ -841,7 +839,10 @@ int GetAndroidVersion() {
   static int android_version = -1;
   if (android_version == -1) {
     android_version = 0;
-    std::string s = android::base::GetProperty("ro.build.version.release", "");
+    std::string s = android::base::GetProperty("ro.build.version.codename", "REL");
+    if (s == "REL") {
+      s = android::base::GetProperty("ro.build.version.release", "");
+    }
     // The release string can be a list of numbers (like 8.1.0), a character (like Q)
     // or many characters (like OMR1).
     if (!s.empty()) {
@@ -926,17 +927,16 @@ std::optional<std::pair<int, int>> GetKernelVersion() {
 
 std::optional<uid_t> GetProcessUid(pid_t pid) {
   std::string status_file = "/proc/" + std::to_string(pid) + "/status";
-  FILE* fp = fopen(status_file.c_str(), "re");
-  if (fp == nullptr) {
+  LineReader reader(status_file);
+  if (!reader.Ok()) {
     return std::nullopt;
   }
 
-  LineReader reader(fp);
-  char* line;
+  std::string* line;
   while ((line = reader.ReadLine()) != nullptr) {
-    if (android::base::StartsWith(line, "Uid:")) {
+    if (android::base::StartsWith(*line, "Uid:")) {
       uid_t uid;
-      if (sscanf(line + strlen("Uid:"), "%u", &uid) == 1) {
+      if (sscanf(line->data() + strlen("Uid:"), "%u", &uid) == 1) {
         return uid;
       }
     }

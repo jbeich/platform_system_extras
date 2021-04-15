@@ -41,20 +41,18 @@ const unsigned int kMinLineTestNonNullSymbols = 10;
 // Tries to read the kernel symbol file and ensure that at least some symbol
 // addresses are non-null.
 bool CanReadKernelSymbolAddresses() {
-  FILE* fp = fopen(kKallsymsPath, "re");
-  if (fp == nullptr) {
+  LineReader reader(kKallsymsPath);
+  if (!reader.Ok()) {
     LOG(DEBUG) << "Failed to read " << kKallsymsPath;
     return false;
   }
-  LineReader reader(fp);
   auto symbol_callback = [&](const KernelSymbol& symbol) { return (symbol.addr != 0u); };
   for (unsigned int i = 0; i < kMinLineTestNonNullSymbols; i++) {
-    char* line = reader.ReadLine();
+    std::string* line = reader.ReadLine();
     if (line == nullptr) {
       return false;
     }
-    std::string l = std::string(line);
-    if (ProcessKernelSymbols(l, symbol_callback)) {
+    if (ProcessKernelSymbols(*line, symbol_callback)) {
       return true;
     }
   }
@@ -65,8 +63,8 @@ bool CanReadKernelSymbolAddresses() {
 // This is based on the Perfetto implementation.
 class ScopedKptrUnrestrict {
  public:
-  ScopedKptrUnrestrict(bool use_property = false);  // Lowers kptr_restrict if necessary.
-  ~ScopedKptrUnrestrict();                          // Restores the initial kptr_restrict.
+  ScopedKptrUnrestrict();   // Lowers kptr_restrict if necessary.
+  ~ScopedKptrUnrestrict();  // Restores the initial kptr_restrict.
 
   bool KallsymsAvailable();  // Indicates if access to kallsyms should be successful.
 
@@ -79,7 +77,8 @@ class ScopedKptrUnrestrict {
   bool kallsyms_available_ = false;
 };
 
-ScopedKptrUnrestrict::ScopedKptrUnrestrict(bool use_property) : use_property_(use_property) {
+ScopedKptrUnrestrict::ScopedKptrUnrestrict() {
+  use_property_ = GetAndroidVersion() >= 12;
   if (CanReadKernelSymbolAddresses()) {
     // Everything seems to work (e.g., we are running as root and kptr_restrict
     // is < 2). Don't touching anything.
@@ -160,20 +159,21 @@ std::vector<KernelMmap> GetLoadedModules() {
   ScopedKptrUnrestrict kptr_unrestrict;
   if (!kptr_unrestrict.KallsymsAvailable()) return {};
   std::vector<KernelMmap> result;
-  FILE* fp = fopen(kProcModulesPath, "re");
-  if (fp == nullptr) {
+  LineReader reader(kProcModulesPath);
+  if (!reader.Ok()) {
     // There is no /proc/modules on Android devices, so we don't print error if failed to open it.
     PLOG(DEBUG) << "failed to open file /proc/modules";
     return result;
   }
-  LineReader reader(fp);
-  char* line;
+  std::string* line;
+  std::string name_buf;
   while ((line = reader.ReadLine()) != nullptr) {
     // Parse line like: nf_defrag_ipv6 34768 1 nf_conntrack_ipv6, Live 0xffffffffa0fe5000
-    char name[reader.MaxLineSize()];
+    name_buf.resize(line->size());
+    char* name = name_buf.data();
     uint64_t addr;
     uint64_t len;
-    if (sscanf(line, "%s%" PRIu64 "%*u%*s%*s 0x%" PRIx64, name, &len, &addr) == 3) {
+    if (sscanf(line->data(), "%s%" PRIu64 "%*u%*s%*s 0x%" PRIx64, name, &len, &addr) == 3) {
       KernelMmap map;
       map.name = name;
       map.start_addr = addr;
@@ -197,16 +197,15 @@ std::vector<KernelMmap> GetLoadedModules() {
 uint64_t GetKernelStartAddress() {
   ScopedKptrUnrestrict kptr_unrestrict;
   if (!kptr_unrestrict.KallsymsAvailable()) return 0;
-  FILE* fp = fopen(kKallsymsPath, "re");
-  if (fp == nullptr) {
+  LineReader reader(kKallsymsPath);
+  if (!reader.Ok()) {
     return 0;
   }
-  LineReader reader(fp);
-  char* line;
+  std::string* line;
   while ((line = reader.ReadLine()) != nullptr) {
-    if (strstr(line, "_stext") != nullptr) {
+    if (strstr(line->data(), "_stext") != nullptr) {
       uint64_t addr;
-      if (sscanf(line, "%" PRIx64, &addr) == 1) {
+      if (sscanf(line->data(), "%" PRIx64, &addr) == 1) {
         return addr;
       }
     }
@@ -214,8 +213,8 @@ uint64_t GetKernelStartAddress() {
   return 0;
 }
 
-bool LoadKernelSymbols(std::string* kallsyms, bool use_property /* = false */) {
-  ScopedKptrUnrestrict kptr_unrestrict(use_property);
+bool LoadKernelSymbols(std::string* kallsyms) {
+  ScopedKptrUnrestrict kptr_unrestrict;
   if (kptr_unrestrict.KallsymsAvailable()) {
     return android::base::ReadFileToString(kKallsymsPath, kallsyms);
   }

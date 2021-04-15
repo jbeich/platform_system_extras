@@ -65,6 +65,7 @@ struct Symbol {
   const char* Name() const { return name_; }
 
   const char* DemangledName() const;
+  void SetDemangledName(std::string_view name) const;
 
   bool HasDumpId() const { return dump_id_ != UINT_MAX; }
 
@@ -130,8 +131,8 @@ class Dso {
 
   static std::unique_ptr<Dso> CreateDso(DsoType dso_type, const std::string& dso_path,
                                         bool force_64bit = false);
-  static std::unique_ptr<Dso> CreateElfDsoWithBuildId(const std::string& dso_path,
-                                                      BuildId& build_id);
+  static std::unique_ptr<Dso> CreateDsoWithBuildId(DsoType dso_type, const std::string& dso_path,
+                                                   BuildId& build_id);
   static std::unique_ptr<Dso> CreateKernelModuleDso(const std::string& dso_path,
                                                     uint64_t memory_start, uint64_t memory_end,
                                                     Dso* kernel_dso);
