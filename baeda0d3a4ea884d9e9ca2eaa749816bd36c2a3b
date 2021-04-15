@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a85a7a9_3ad385b6",
+        "filename": "simpleperf/read_dex_file.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-04-15T20:53:45Z",
+      "side": 1,
+      "message": "\"utils.h\"",
+      "range": {
+        "startLine": 32,
+        "startChar": 9,
+        "endLine": 32,
+        "endChar": 18
+      },
+      "revId": "baeda0d3a4ea884d9e9ca2eaa749816bd36c2a3b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5cfa8c44_58f9e663",
+        "filename": "simpleperf/read_dex_file.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-04-15T20:53:45Z",
+      "side": 1,
+      "message": "Call ReadSymbolsFromDexFileInMemory() instead? The file path in warning isn\u0027t important. The caller in dso.cpp already logs the file path.",
+      "range": {
+        "startLine": 98,
+        "startChar": 0,
+        "endLine": 116,
+        "endChar": 23
+      },
+      "revId": "baeda0d3a4ea884d9e9ca2eaa749816bd36c2a3b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
