@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aceb5c00_89b60d8a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-04-16T00:40:48Z",
+      "side": 1,
+      "message": "Do we need to mention in any NDK/Studio-related release notes that people need to have python3 installed in the future?",
+      "revId": "deb7b5fe22126621f2b596aa841978d2db9bca87",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
