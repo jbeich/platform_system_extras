@@ -34,6 +34,24 @@
       "parentUuid": "4b8021fc_02a34935",
       "revId": "7950bb1d2f388d17d358fc42eceeb390fb1d0192",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "78f8b172_af47513b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-04-20T00:59:06Z",
+      "side": 1,
+      "message": "Yeah, simpleperf looks for binutils from $PATH and default Android sdk location. It\u0027s a good suggestion to try prebuilts directory, which should have latest binutils. I will upload a patch for it.",
+      "parentUuid": "b1981c8e_c61d7cc7",
+      "revId": "7950bb1d2f388d17d358fc42eceeb390fb1d0192",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
