@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b8021fc_02a34935",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-04-20T00:44:35Z",
+      "side": 1,
+      "message": "Which llvm-objdump version are you using? I tested with llvm-objdump in ndk r21 and r23, both support joined arguments.\n",
+      "revId": "7950bb1d2f388d17d358fc42eceeb390fb1d0192",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
