@@ -774,7 +774,7 @@ class Objdump(object):
             self.objdump_paths[arch] = objdump_path
 
         # 3. Run objdump.
-        args = [objdump_path, '-dlC', '--no-show-raw-insn',
+        args = [objdump_path, '-d', '-l', '-C', '--no-show-raw-insn',
                 '--start-address=0x%x' % start_addr,
                 '--stop-address=0x%x' % (start_addr + addr_len),
                 real_path]
