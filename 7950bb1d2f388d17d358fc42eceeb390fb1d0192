@@ -16,6 +16,24 @@
       "message": "Which llvm-objdump version are you using? I tested with llvm-objdump in ndk r21 and r23, both support joined arguments.\n",
       "revId": "7950bb1d2f388d17d358fc42eceeb390fb1d0192",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1981c8e_c61d7cc7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1067098
+      },
+      "writtenOn": "2021-04-20T00:52:11Z",
+      "side": 1,
+      "message": "Yeah, it looks like newer versions accept this. It turned out that I was using the version bundled with NDK r19 (at some point I had installed it via the Android SDK under ~/Android/Sdk/ndk-bundle, I guess simpleperf found it somehow). \n\nMaybe it should be using one of the binaries under prebuilts/clang when we\u0027re not running as part of the NDK? Then we can rely on having a specific version of the tool available.",
+      "parentUuid": "4b8021fc_02a34935",
+      "revId": "7950bb1d2f388d17d358fc42eceeb390fb1d0192",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
