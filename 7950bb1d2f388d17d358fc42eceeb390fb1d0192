@@ -69,6 +69,24 @@
       "message": "Do we need this any more since your other change landed?",
       "revId": "7950bb1d2f388d17d358fc42eceeb390fb1d0192",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb7c1be2_560576a1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-04-23T16:57:03Z",
+      "side": 1,
+      "message": "No. I had needless worry about ndk users.",
+      "parentUuid": "33ab7fb2_b76e10c4",
+      "revId": "7950bb1d2f388d17d358fc42eceeb390fb1d0192",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
