@@ -54,6 +54,10 @@ int wipe_block_device(int fd, s64 len) {
         range[1] = len;
         ret = ioctl(fd, BLKDISCARD, &range);
         if (ret < 0) {
+            if (errno == EOPNOTSUPP) {
+                /*On devices that does not support BLKDISCARD, ignore the error*/
+                return 0;
+            }
             warn("Discard failed\n");
             return 1;
         } else {
