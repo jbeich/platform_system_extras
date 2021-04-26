@@ -45,6 +45,30 @@
       },
       "revId": "20a9ce629e0fb9a68815ff89ead6608148c5da53",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63876e5e_7b34f531",
+        "filename": "ext4_utils/wipe.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1608690
+      },
+      "writtenOn": "2021-04-26T20:37:36Z",
+      "side": 1,
+      "message": "sorry for typo. \"We don\u0027t need the device to be wiped in some cases.\" -\u003e We DO need the device to be wiped in some cases.",
+      "parentUuid": "4422fc2f_b7da0b58",
+      "range": {
+        "startLine": 57,
+        "startChar": 12,
+        "endLine": 60,
+        "endChar": 13
+      },
+      "revId": "20a9ce629e0fb9a68815ff89ead6608148c5da53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
