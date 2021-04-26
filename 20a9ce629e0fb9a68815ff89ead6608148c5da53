@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "936d4796_b2a5e97d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1608690
+      },
+      "writtenOn": "2021-04-26T16:36:44Z",
+      "side": 1,
+      "message": "\"ioctl\", isn\u0027t it?",
+      "range": {
+        "startLine": 7,
+        "startChar": 13,
+        "endLine": 7,
+        "endChar": 18
+      },
+      "revId": "20a9ce629e0fb9a68815ff89ead6608148c5da53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4422fc2f_b7da0b58",
+        "filename": "ext4_utils/wipe.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1608690
+      },
+      "writtenOn": "2021-04-26T16:36:44Z",
+      "side": 1,
+      "message": "One concern, if we allow this error too, how the device will be erased if it doesn\u0027t support both \"BLKSECDISCARD\" and \"BLKDISCARD\". We don\u0027t need the device to be wiped in some cases.",
+      "range": {
+        "startLine": 57,
+        "startChar": 12,
+        "endLine": 60,
+        "endChar": 13
+      },
+      "revId": "20a9ce629e0fb9a68815ff89ead6608148c5da53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
