@@ -26,6 +26,8 @@
 
 #include <openssl/evp.h>
 
+#include "build_verity_tree_utils.h"
+
 // This class builds a verity hash tree based on the input data and a salt with
 // the length of hash size. It also supports the streaming of input data while
 // the total data size should be know in advance. Once all the data is ready,
@@ -35,7 +37,22 @@ class HashTreeBuilder {
  public:
   HashTreeBuilder(size_t block_size, const EVP_MD* md);
   // Returns the size of the verity tree in bytes given the input data size.
+  static constexpr uint64_t CalculateSize(uint64_t input_size, size_t block_size,
+                                          size_t hash_size) noexcept {
+      uint64_t verity_blocks = 0;
+      size_t level_blocks = 0;
+      size_t levels = 0;
+      do {
+          level_blocks = verity_tree_blocks(input_size, block_size, hash_size, levels);
+          levels++;
+          verity_blocks += level_blocks;
+      } while (level_blocks > 1);
+
+      return verity_blocks * block_size;
+  }
+
   uint64_t CalculateSize(uint64_t input_size) const;
+
   // Gets ready for the hash tree computation. We expect |expected_data_size|
   // bytes source data.
   bool Initialize(int64_t expected_data_size,
