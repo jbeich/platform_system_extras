@@ -20,9 +20,20 @@
 #include <inttypes.h>
 #include <stddef.h>
 
-inline uint64_t div_round_up(uint64_t x, uint64_t y) { return (x + y - 1) / y; }
+constexpr uint64_t div_round_up(uint64_t x, uint64_t y) {
+    return (x + y - 1) / y;
+}
 
-size_t verity_tree_blocks(uint64_t data_size, size_t block_size,
-                          size_t hash_size, size_t level);
+constexpr size_t verity_tree_blocks(uint64_t data_size, size_t block_size, size_t hash_size,
+                                    size_t level) noexcept {
+    uint64_t level_blocks = div_round_up(data_size, block_size);
+    uint64_t hashes_per_block = div_round_up(block_size, hash_size);
+
+    do {
+        level_blocks = div_round_up(level_blocks, hashes_per_block);
+    } while (level--);
+
+    return level_blocks;
+}
 
 #endif  // __BUILD_VERITY_TREE_UTILS_H__

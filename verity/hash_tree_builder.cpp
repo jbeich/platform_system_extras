@@ -27,8 +27,6 @@
 #include <android-base/unique_fd.h>
 #include <openssl/bn.h>
 
-#include "build_verity_tree_utils.h"
-
 const EVP_MD* HashTreeBuilder::HashFunction(const std::string& hash_name) {
   if (android::base::EqualsIgnoreCase(hash_name, "sha1")) {
     return EVP_sha1();
@@ -97,17 +95,7 @@ bool HashTreeBuilder::ParseBytesArrayFromString(
 }
 
 uint64_t HashTreeBuilder::CalculateSize(uint64_t input_size) const {
-  uint64_t verity_blocks = 0;
-  size_t level_blocks;
-  size_t levels = 0;
-  do {
-    level_blocks =
-        verity_tree_blocks(input_size, block_size_, hash_size_, levels);
-    levels++;
-    verity_blocks += level_blocks;
-  } while (level_blocks > 1);
-
-  return verity_blocks * block_size_;
+    return HashTreeBuilder::CalculateSize(input_size, block_size_, hash_size_);
 }
 
 bool HashTreeBuilder::Initialize(int64_t expected_data_size,
