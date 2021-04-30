@@ -24,7 +24,7 @@
 #include <gtest/gtest.h>
 #include <openssl/evp.h>
 
-#include "build_verity_tree_utils.h"
+#include "verity/build_verity_tree_utils.h"
 #include "verity/hash_tree_builder.h"
 
 // The hex string we are using in build_image.py
