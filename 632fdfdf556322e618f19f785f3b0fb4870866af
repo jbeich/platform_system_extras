@@ -16,6 +16,23 @@
       "message": "Please review when you have time, thanks!",
       "revId": "632fdfdf556322e618f19f785f3b0fb4870866af",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c183b236_8409e74c",
+        "filename": "su/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1344584
+      },
+      "writtenOn": "2021-04-30T17:08:50Z",
+      "side": 1,
+      "message": "I think these are set by default.",
+      "revId": "632fdfdf556322e618f19f785f3b0fb4870866af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
