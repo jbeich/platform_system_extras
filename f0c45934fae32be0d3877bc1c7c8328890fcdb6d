@@ -16,6 +16,29 @@
       "message": "ptal if you have time, there\u0027s going to be a lot of these and most will need NDK review. We\u0027ve been blocked on build issues with the ART prebuilts script for a couple of weeks. thanks.",
       "revId": "f0c45934fae32be0d3877bc1c7c8328890fcdb6d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d519853a_3841e3cd",
+        "filename": "module_ndk_libs/libnativehelper/libnativehelper.map.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2021-05-03T19:59:00Z",
+      "side": 1,
+      "message": "#",
+      "range": {
+        "startLine": 7,
+        "startChar": 28,
+        "endLine": 7,
+        "endChar": 30
+      },
+      "revId": "f0c45934fae32be0d3877bc1c7c8328890fcdb6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
