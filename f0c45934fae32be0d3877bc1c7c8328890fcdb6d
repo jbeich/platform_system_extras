@@ -39,6 +39,30 @@
       },
       "revId": "f0c45934fae32be0d3877bc1c7c8328890fcdb6d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "919157fc_5cd2cc6e",
+        "filename": "module_ndk_libs/libnativehelper/libnativehelper.map.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1043845
+      },
+      "writtenOn": "2021-05-03T20:02:32Z",
+      "side": 1,
+      "message": "(and put it on its own line to be safe https://cs.android.com/android/platform/superproject/+/master:build/soong/docs/map_files.md)",
+      "parentUuid": "d519853a_3841e3cd",
+      "range": {
+        "startLine": 7,
+        "startChar": 28,
+        "endLine": 7,
+        "endChar": 30
+      },
+      "revId": "f0c45934fae32be0d3877bc1c7c8328890fcdb6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
