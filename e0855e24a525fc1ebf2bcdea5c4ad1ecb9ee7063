@@ -33,6 +33,24 @@
       "message": "I think these are set by default.",
       "revId": "e0855e24a525fc1ebf2bcdea5c4ad1ecb9ee7063",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "932950d2_44bdbbf5",
+        "filename": "tests/memeater/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1863140
+      },
+      "writtenOn": "2021-05-03T16:44:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b4a26d6a_ba48e04f",
+      "revId": "e0855e24a525fc1ebf2bcdea5c4ad1ecb9ee7063",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
