@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "adc745c4_1f58c3a7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1071150
+      },
+      "writtenOn": "2021-05-04T20:47:44Z",
+      "side": 1,
+      "message": "Thanks, apologies for the extra RTT from the mistake here.",
+      "revId": "b32c074a30209122c50139fc319dc536470a32ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
