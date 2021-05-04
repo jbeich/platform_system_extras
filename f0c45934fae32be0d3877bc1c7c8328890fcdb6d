@@ -63,6 +63,30 @@
       },
       "revId": "f0c45934fae32be0d3877bc1c7c8328890fcdb6d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1aad7421_2f6e9373",
+        "filename": "module_ndk_libs/libnativehelper/libnativehelper.map.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1071150
+      },
+      "writtenOn": "2021-05-04T09:58:42Z",
+      "side": 1,
+      "message": "Thanks, done here and at source.",
+      "parentUuid": "919157fc_5cd2cc6e",
+      "range": {
+        "startLine": 7,
+        "startChar": 28,
+        "endLine": 7,
+        "endChar": 30
+      },
+      "revId": "f0c45934fae32be0d3877bc1c7c8328890fcdb6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
