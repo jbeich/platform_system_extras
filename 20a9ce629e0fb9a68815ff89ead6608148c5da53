@@ -24,6 +24,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "22db8b98_469b43e0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1818720
+      },
+      "writtenOn": "2021-05-06T02:26:23Z",
+      "side": 1,
+      "message": "Our driver engineers will see if they can support these ioctl later. Or we don\u0027t need to support erase logical partitions.",
+      "revId": "20a9ce629e0fb9a68815ff89ead6608148c5da53",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4422fc2f_b7da0b58",
