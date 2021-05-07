@@ -310,7 +310,7 @@ class FunctionScope(object):
             items = []
             for addr in sorted(self.addr_hit_map):
                 count_info = self.addr_hit_map[addr]
-                items.append({'a': addr, 'e': count_info[0], 's': count_info[1]})
+                items.append({'a': ('0x%x' % addr), 'e': count_info[0], 's': count_info[1]})
             result['a'] = items
         return result
 
@@ -841,7 +841,7 @@ class RecordData(object):
             if function.disassembly:
                 disassembly_list = []
                 for code, addr in function.disassembly:
-                    disassembly_list.append([modify_text_for_html(code), addr])
+                    disassembly_list.append([modify_text_for_html(code), '0x%x' % addr])
                 func_data['d'] = disassembly_list
             func_map[func_id] = func_data
         return func_map
