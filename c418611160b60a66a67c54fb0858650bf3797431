@@ -16,6 +16,46 @@
       "message": "ps2: format code.",
       "revId": "c418611160b60a66a67c54fb0858650bf3797431",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0148e58_d06fdd29",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-05-07T08:42:19Z",
+      "side": 1,
+      "message": "Only 1 minor comment to fix up. I would prefer that the NFC (no functional change) aspects of this CL get broken out in the future. Adding types is a nice refactoring effort, but it tends to make the rest of the CL harder to review. Similarly, the additional testing could have been a separate CL too.",
+      "revId": "c418611160b60a66a67c54fb0858650bf3797431",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62bd1070_857190ee",
+        "filename": "simpleperf/scripts/pprof_proto_generator.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 488,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-05-07T08:42:19Z",
+      "side": 1,
+      "message": "This is now a stale comment with the inclusion of `binary_finder`.",
+      "range": {
+        "startLine": 487,
+        "startChar": 0,
+        "endLine": 488,
+        "endChar": 45
+      },
+      "revId": "c418611160b60a66a67c54fb0858650bf3797431",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
