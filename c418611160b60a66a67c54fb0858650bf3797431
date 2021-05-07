@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "116e4600_b1aff7a6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-05-07T17:47:18Z",
+      "side": 1,
+      "message": "Ack. I will break up future CLs to separate them.",
+      "parentUuid": "b0148e58_d06fdd29",
+      "revId": "c418611160b60a66a67c54fb0858650bf3797431",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "62bd1070_857190ee",
@@ -48,6 +66,30 @@
       "writtenOn": "2021-05-07T08:42:19Z",
       "side": 1,
       "message": "This is now a stale comment with the inclusion of `binary_finder`.",
+      "range": {
+        "startLine": 487,
+        "startChar": 0,
+        "endLine": 488,
+        "endChar": 45
+      },
+      "revId": "c418611160b60a66a67c54fb0858650bf3797431",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "029d2e41_ccd46e70",
+        "filename": "simpleperf/scripts/pprof_proto_generator.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 488,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-05-07T17:47:18Z",
+      "side": 1,
+      "message": "Modified to BinaryFinder.",
+      "parentUuid": "62bd1070_857190ee",
       "range": {
         "startLine": 487,
         "startChar": 0,
