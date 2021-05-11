@@ -18,7 +18,6 @@
 """utils.py: export utility functions.
 """
 
-from __future__ import annotations
 import argparse
 import logging
 import os
@@ -29,7 +28,6 @@ import shutil
 import subprocess
 import sys
 import time
-from typing import Dict, List, Optional, Union
 
 
 def get_script_dir():
@@ -317,12 +315,6 @@ class AdbHelper(object):
         self.enable_switch_to_root = enable_switch_to_root
         self.serial_number = None
 
-    def is_device_available(self) -> bool:
-        result, _ = self.run_and_return_output(
-            ['shell', 'whoami'],
-            log_output=False, log_stderr=False)
-        return result == True
-
     def run(self, adb_args):
         return self.run_and_return_output(adb_args)[0]
 
@@ -405,7 +397,7 @@ class AdbHelper(object):
         log_fatal('unsupported architecture: %s' % output.strip())
         return ''
 
-    def get_android_version(self) -> int:
+    def get_android_version(self):
         """ Get Android version on device, like 7 is for Android N, 8 is for Android O."""
         build_version = self.get_property('ro.build.version.release')
         android_version = 0
@@ -454,53 +446,22 @@ def open_report_in_browser(report_path):
         webbrowser.open_new_tab(report_path)
 
 
-class BinaryFinder:
-    def __init__(self, binary_cache_dir: Optional[Union[Path, str]], readelf: ReadElf):
-        if isinstance(binary_cache_dir, str):
-            binary_cache_dir = Path(binary_cache_dir)
-        self.binary_cache_dir = binary_cache_dir
-        self.readelf = readelf
-        self.build_id_map = self._load_build_id_map()
+def is_elf_file(path):
+    if os.path.isfile(path):
+        with open(path, 'rb') as fh:
+            return fh.read(4) == b'\x7fELF'
+    return False
 
-    def _load_build_id_map(self) -> Dict[str, Path]:
-        build_id_map: Dict[str, Path] = {}
-        if self.binary_cache_dir:
-            build_id_list_file = self.binary_cache_dir / 'build_id_list'
-            if build_id_list_file.is_file():
-                with open(self.binary_cache_dir / 'build_id_list', 'rb') as fh:
-                    for line in fh.readlines():
-                        # lines are in format "<build_id>=<path_in_binary_cache>".
-                        items = bytes_to_str(line).strip().split('=')
-                        if len(items) == 2:
-                            build_id_map[items[0]] = self.binary_cache_dir / items[1]
-        return build_id_map
 
-    def find_binary(self, dso_path_in_record_file: str,
-                    expected_build_id: Optional[str]) -> Optional[Path]:
-        """ If expected_build_id is None, don't check build id.
-            Otherwise, the build id of the found binary should match the expected one."""
-        # Find binary from build id map.
-        if expected_build_id:
-            path = self.build_id_map.get(expected_build_id)
-            if path and self._check_path(path, expected_build_id):
-                return path
-        # Find binary by path in binary cache.
-        if self.binary_cache_dir:
-            path = self.binary_cache_dir / dso_path_in_record_file[1:]
-            if self._check_path(path, expected_build_id):
-                return path
-        # Find binary by its absolute path.
-        path = Path(dso_path_in_record_file)
-        if self._check_path(path, expected_build_id):
-            return path
-        return None
-
-    def _check_path(self, path: Path, expected_build_id: Optional[str]) -> bool:
-        if not self.readelf.is_elf_file(path):
-            return False
-        if expected_build_id is not None:
-            return self.readelf.get_build_id(path) == expected_build_id
-        return True
+def find_real_dso_path(dso_path_in_record_file, binary_cache_path):
+    """ Given the path of a shared library in perf.data, find its real path in the file system. """
+    if binary_cache_path:
+        tmp_path = os.path.join(binary_cache_path, dso_path_in_record_file[1:])
+        if is_elf_file(tmp_path):
+            return tmp_path
+    if is_elf_file(dso_path_in_record_file):
+        return dso_path_in_record_file
+    return None
 
 
 class Addr2Nearestline(object):
@@ -535,8 +496,7 @@ class Addr2Nearestline(object):
             addrs: a map from address to Addr object in this dso.
         """
 
-        def __init__(self, build_id: str):
-            self.build_id = build_id
+        def __init__(self):
             self.addrs = {}
 
     class Addr(object):
@@ -550,15 +510,13 @@ class Addr2Nearestline(object):
             self.func_addr = func_addr
             self.source_lines = None
 
-    def __init__(
-            self, ndk_path: Optional[str],
-            binary_finder: BinaryFinder, with_function_name: bool):
+    def __init__(self, ndk_path, binary_cache_path, with_function_name):
         self.symbolizer_path = find_tool_path('llvm-symbolizer', ndk_path)
         if not self.symbolizer_path:
             log_exit("Can't find llvm-symbolizer. Please set ndk path with --ndk_path option.")
         self.readelf = ReadElf(ndk_path)
         self.dso_map = {}  # map from dso_path to Dso.
-        self.binary_finder = binary_finder
+        self.binary_cache_path = binary_cache_path
         self.with_function_name = with_function_name
         # Saving file names for each addr takes a lot of memory. So we store file ids in Addr,
         # and provide data structures connecting file id and file name here.
@@ -567,19 +525,19 @@ class Addr2Nearestline(object):
         self.func_name_to_id = {}
         self.func_id_to_name = []
 
-    def add_addr(self, dso_path: str, build_id: str, func_addr: int, addr: int):
+    def add_addr(self, dso_path, func_addr, addr):
         dso = self.dso_map.get(dso_path)
         if dso is None:
-            dso = self.dso_map[dso_path] = self.Dso(build_id)
+            dso = self.dso_map[dso_path] = self.Dso()
         if addr not in dso.addrs:
             dso.addrs[addr] = self.Addr(func_addr)
 
     def convert_addrs_to_lines(self):
-        for dso_path, dso in self.dso_map.items():
-            self._convert_addrs_in_one_dso(dso_path, dso)
+        for dso_path in self.dso_map:
+            self._convert_addrs_in_one_dso(dso_path, self.dso_map[dso_path])
 
-    def _convert_addrs_in_one_dso(self, dso_path: str, dso: Addr2Nearestline.Dso):
-        real_path = self.binary_finder.find_binary(dso_path, dso.build_id)
+    def _convert_addrs_in_one_dso(self, dso_path, dso):
+        real_path = find_real_dso_path(dso_path, self.binary_cache_path)
         if not real_path:
             if dso_path not in ['//anon', 'unknown', '[kernel.kallsyms]']:
                 log_debug("Can't find dso %s" % dso_path)
@@ -595,10 +553,10 @@ class Addr2Nearestline(object):
         self._collect_line_info(dso, real_path,
                                 range(-addr_step * 5, -addr_step * 128 - 1, -addr_step))
 
-    def _check_debug_line_section(self, real_path: Path):
+    def _check_debug_line_section(self, real_path):
         return '.debug_line' in self.readelf.get_sections(real_path)
 
-    def _get_addr_step(self, real_path: Path):
+    def _get_addr_step(self, real_path):
         arch = self.readelf.get_arch(real_path)
         if arch == 'arm64':
             return 4
@@ -606,8 +564,7 @@ class Addr2Nearestline(object):
             return 2
         return 1
 
-    def _collect_line_info(
-            self, dso: Addr2Nearestline.Dso, real_path: Path, addr_shifts: List[int]):
+    def _collect_line_info(self, dso, real_path, addr_shifts):
         """ Use addr2line to get line info in a dso, with given addr shifts. """
         # 1. Collect addrs to send to addr2line.
         addr_set = set()
@@ -680,7 +637,7 @@ class Addr2Nearestline(object):
                 if shifted_addr == addr_obj.func_addr:
                     break
 
-    def _build_symbolizer_args(self, binary_path: Path) -> List[str]:
+    def _build_symbolizer_args(self, binary_path):
         args = [self.symbolizer_path, '--print-address', '--inlining', '--obj=%s' % binary_path]
         if self.with_function_name:
             args += ['--functions=linkage', '--demangle']
@@ -796,21 +753,20 @@ class SourceFileSearcher(object):
 class Objdump(object):
     """ A wrapper of objdump to disassemble code. """
 
-    def __init__(self, ndk_path: Optional[str], binary_finder: BinaryFinder):
+    def __init__(self, ndk_path, binary_cache_path):
         self.ndk_path = ndk_path
-        self.binary_finder = binary_finder
+        self.binary_cache_path = binary_cache_path
         self.readelf = ReadElf(ndk_path)
         self.objdump_paths = {}
 
-    def get_dso_info(self, dso_path: str, expected_build_id: Optional[str]
-                     ) -> Optional[Tuple[str, str]]:
-        real_path = self.binary_finder.find_binary(dso_path, expected_build_id)
+    def get_dso_info(self, dso_path):
+        real_path = find_real_dso_path(dso_path, self.binary_cache_path)
         if not real_path:
             return None
         arch = self.readelf.get_arch(real_path)
         if arch == 'unknown':
             return None
-        return (str(real_path), arch)
+        return (real_path, arch)
 
     def disassemble_code(self, dso_info, start_addr, addr_len):
         """ Disassemble [start_addr, start_addr + addr_len] of dso_path.
@@ -865,18 +821,11 @@ class ReadElf(object):
         if not self.readelf_path:
             log_exit("Can't find llvm-readelf. Please set ndk path with --ndk_path option.")
 
-    @staticmethod
-    def is_elf_file(path: Union[Path, str]):
-        if os.path.isfile(path):
-            with open(path, 'rb') as fh:
-                return fh.read(4) == b'\x7fELF'
-        return False
-
-    def get_arch(self, elf_file_path: Union[Path, str]):
+    def get_arch(self, elf_file_path):
         """ Get arch of an elf file. """
-        if self.is_elf_file(elf_file_path):
+        if is_elf_file(elf_file_path):
             try:
-                output = subprocess.check_output([self.readelf_path, '-h', str(elf_file_path)])
+                output = subprocess.check_output([self.readelf_path, '-h', elf_file_path])
                 output = bytes_to_str(output)
                 if output.find('AArch64') != -1:
                     return 'arm64'
@@ -890,11 +839,11 @@ class ReadElf(object):
                 pass
         return 'unknown'
 
-    def get_build_id(self, elf_file_path: Union[Path, str], with_padding=True) -> str:
+    def get_build_id(self, elf_file_path, with_padding=True):
         """ Get build id of an elf file. """
-        if self.is_elf_file(elf_file_path):
+        if is_elf_file(elf_file_path):
             try:
-                output = subprocess.check_output([self.readelf_path, '-n', str(elf_file_path)])
+                output = subprocess.check_output([self.readelf_path, '-n', elf_file_path])
                 output = bytes_to_str(output)
                 result = re.search(r'Build ID:\s*(\S+)', output)
                 if result:
@@ -915,12 +864,12 @@ class ReadElf(object):
             build_id = build_id[:40]
         return '0x' + build_id
 
-    def get_sections(self, elf_file_path: Union[Path, str]) -> List[str]:
+    def get_sections(self, elf_file_path):
         """ Get sections of an elf file. """
-        section_names: List[str] = []
-        if self.is_elf_file(elf_file_path):
+        section_names = []
+        if is_elf_file(elf_file_path):
             try:
-                output = subprocess.check_output([self.readelf_path, '-SW', str(elf_file_path)])
+                output = subprocess.check_output([self.readelf_path, '-SW', elf_file_path])
                 output = bytes_to_str(output)
                 for line in output.split('\n'):
                     # Parse line like:" [ 1] .note.android.ident NOTE  0000000000400190 ...".

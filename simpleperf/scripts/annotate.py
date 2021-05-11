@@ -25,9 +25,8 @@ import os.path
 import shutil
 
 from simpleperf_report_lib import ReportLib
-from simpleperf_utils import (
-    Addr2Nearestline, BinaryFinder, extant_dir, flatten_arg_list, is_windows, log_exit, log_info,
-    log_warning, ReadElf, SourceFileSearcher)
+from simpleperf_utils import (Addr2Nearestline, extant_dir, flatten_arg_list, is_windows,
+                              log_exit, log_info, log_warning, SourceFileSearcher)
 
 
 class SourceLine(object):
@@ -54,11 +53,10 @@ class Addr2Line(object):
     """
 
     def __init__(self, ndk_path, binary_cache_path, source_dirs):
-        binary_finder = BinaryFinder(binary_cache_path, ReadElf(ndk_path))
-        self.addr2line = Addr2Nearestline(ndk_path, binary_finder, True)
+        self.addr2line = Addr2Nearestline(ndk_path, binary_cache_path, True)
         self.source_searcher = SourceFileSearcher(source_dirs)
 
-    def add_addr(self, dso_path: str, build_id: str, func_addr: int, addr: int):
+    def add_addr(self, dso_path, func_addr, addr):
         self.addr2line.add_addr(dso_path, func_addr, addr)
 
     def convert_addrs_to_lines(self):
@@ -215,10 +213,9 @@ class SourceFileAnnotator(object):
                     symbols.append(callchain.entries[i].symbol)
                 for symbol in symbols:
                     if self._filter_symbol(symbol):
-                        build_id = lib.GetBuildIdForPath(symbol.dso_name)
-                        self.addr2line.add_addr(symbol.dso_name, build_id, symbol.symbol_addr,
+                        self.addr2line.add_addr(symbol.dso_name, symbol.symbol_addr,
                                                 symbol.vaddr_in_file)
-                        self.addr2line.add_addr(symbol.dso_name, build_id, symbol.symbol_addr,
+                        self.addr2line.add_addr(symbol.dso_name, symbol.symbol_addr,
                                                 symbol.symbol_addr)
 
     def _filter_sample(self, sample):
