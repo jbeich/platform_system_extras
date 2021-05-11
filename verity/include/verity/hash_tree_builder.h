@@ -36,6 +36,7 @@ class HashTreeBuilder {
   HashTreeBuilder(size_t block_size, const EVP_MD* md);
   // Returns the size of the verity tree in bytes given the input data size.
   uint64_t CalculateSize(uint64_t input_size) const;
+  static uint64_t CalculateSize(uint64_t input_size, size_t block_size, size_t hash_size);
   // Gets ready for the hash tree computation. We expect |expected_data_size|
   // bytes source data.
   bool Initialize(int64_t expected_data_size,
