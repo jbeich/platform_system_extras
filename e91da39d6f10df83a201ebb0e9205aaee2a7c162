@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "68554858_20e31742",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-05-11T19:44:18Z",
+      "side": 1,
+      "message": "Thanks for taking the suggestion. It looks great.",
+      "revId": "e91da39d6f10df83a201ebb0e9205aaee2a7c162",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ff7833e_8ae58b39",
+        "filename": "simpleperf/scripts/report_html.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 790,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-05-11T19:44:18Z",
+      "side": 1,
+      "message": "`wait\u003dTrue` is the default, but it\u0027s probably best to be explicit here for everyone else\u0027s understanding.",
+      "revId": "e91da39d6f10df83a201ebb0e9205aaee2a7c162",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
