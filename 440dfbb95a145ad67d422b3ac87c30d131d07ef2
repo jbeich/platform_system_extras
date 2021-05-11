@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ae073d8_564fad69",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1307979
+      },
+      "writtenOn": "2021-05-11T02:15:32Z",
+      "side": 1,
+      "message": "This breaks the script pprof_proto_generator script - example crash:\n\nTraceback (most recent call last):\n  File \"/mnt/big/src/android/sc-dev/system/extras/simpleperf/scripts/pprof_proto_generator.py\", line 643, in \u003cmodule\u003e\n    main()\n  File \"/mnt/big/src/android/sc-dev/system/extras/simpleperf/scripts/pprof_proto_generator.py\", line 637, in main\n    generator.load_record_file(record_file)\n  File \"/mnt/big/src/android/sc-dev/system/extras/simpleperf/scripts/pprof_proto_generator.py\", line 320, in load_record_file\n    location_id \u003d self.get_location_id(entry.ip, entry.symbol)\n  File \"/mnt/big/src/android/sc-dev/system/extras/simpleperf/scripts/pprof_proto_generator.py\", line 388, in get_location_id\n    binary_path, build_id \u003d self.get_binary(symbol.dso_name)\n  File \"/mnt/big/src/android/sc-dev/system/extras/simpleperf/scripts/pprof_proto_generator.py\", line 438, in get_binary\n    build_id \u003d elf_build_id\nNameError: name \u0027elf_build_id\u0027 is not defined\n\n",
+      "revId": "440dfbb95a145ad67d422b3ac87c30d131d07ef2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
