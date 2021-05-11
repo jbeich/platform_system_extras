@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77dfbe17_74b922b7",
+        "filename": "simpleperf/scripts/report_html.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-05-11T18:32:31Z",
+      "side": 1,
+      "message": "Is it worth abstracting this as a helper function (something like `hex_address(addr)` or `printable_address(addr)`)? It appears twice and would get rid of the need for parentheses.",
+      "range": {
+        "startLine": 313,
+        "startChar": 36,
+        "endLine": 313,
+        "endChar": 49
+      },
+      "revId": "12653c2e41633682480c0de4d2f09ba88ca2558f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
