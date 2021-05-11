@@ -16,6 +16,23 @@
       "message": "+2 assuming that the revert works cleanly, but I also offered a fix-forward that I think is sufficient on the original CL.",
       "revId": "61c424f0b5e1abdbaea6e416576e4669d35545f1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "deb94338_e12fd90e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-05-11T03:26:05Z",
+      "side": 1,
+      "message": "Fix CL in https://android-review.googlesource.com/c/platform/system/extras/+/1701936.",
+      "revId": "61c424f0b5e1abdbaea6e416576e4669d35545f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
