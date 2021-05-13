@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a7d615c_682f003b",
+        "filename": "simpleperf/environment.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 778,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-05-13T18:44:21Z",
+      "side": 1,
+      "message": "Yes, it\u0027s a not exist app (wrong app_package_name). So we don\u0027t need to try profiling it. Change return value to make it explicit.",
+      "parentUuid": "5c04b912_6c207da2",
+      "revId": "75b9bbfae6e408ac1c96a24b41775dc517c6be7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1a402939_bdf2d9c8",
@@ -31,6 +49,30 @@
       "writtenOn": "2021-05-13T03:36:01Z",
       "side": 1,
       "message": "\"released\" or \"release\"?",
+      "range": {
+        "startLine": 197,
+        "startChar": 14,
+        "endLine": 197,
+        "endChar": 22
+      },
+      "revId": "75b9bbfae6e408ac1c96a24b41775dc517c6be7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd8e0357_ed5d4a10",
+        "filename": "simpleperf/simpleperf_app_runner/simpleperf_app_runner.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-05-13T18:44:21Z",
+      "side": 1,
+      "message": "I prefer to use adjective here to be compatible with debuggable and profileable. Now I realize profileable apps also use release build. So changed released to non_profileable.",
+      "parentUuid": "1a402939_bdf2d9c8",
       "range": {
         "startLine": 197,
         "startChar": 14,
