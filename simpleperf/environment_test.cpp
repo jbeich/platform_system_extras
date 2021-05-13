@@ -129,3 +129,9 @@ TEST(environment, GetProcessUid) {
   ASSERT_TRUE(uid.has_value());
   ASSERT_EQ(uid.value(), getuid());
 }
+
+TEST(environment, GetAppType) {
+  TEST_REQUIRE_APPS();
+  ASSERT_EQ(GetAppType("com.android.simpleperf.debuggable"), "debuggable");
+  ASSERT_EQ(GetAppType("com.android.simpleperf.profileable"), "profileable");
+}
