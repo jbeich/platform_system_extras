@@ -745,7 +745,7 @@ static void TestRecordingApps(const std::string& app_name, const std::string& ap
   ASSERT_NE(it, meta_info.end());
   ASSERT_EQ(it->second, app_name);
   it = meta_info.find("app_type");
-  ASSERT_NE(it, meta_info.end());
+  ASSERT_NE(it, meta_info.end()) << app_type;
   ASSERT_EQ(it->second, app_type);
 }
 
