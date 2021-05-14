@@ -745,7 +745,7 @@ static void TestRecordingApps(const std::string& app_name, const std::string& ap
   ASSERT_NE(it, meta_info.end());
   ASSERT_EQ(it->second, app_name);
   it = meta_info.find("app_type");
-  ASSERT_NE(it, meta_info.end());
+  ASSERT_NE(it, meta_info.end()) << app_type;
   ASSERT_EQ(it->second, app_type);
 }
 
@@ -756,6 +756,7 @@ TEST(record_cmd, app_option_for_debuggable_app) {
   SetRunInAppToolForTesting(false, true);
   // Although the app is actually debuggable, we profile the app using simpleperf_app_runner.
   TestRecordingApps("com.android.simpleperf.debuggable", "profileable");
+  ASSERT_TRUE(false);
 }
 
 TEST(record_cmd, app_option_for_profileable_app) {
