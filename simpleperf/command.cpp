@@ -229,6 +229,9 @@ bool RunSimpleperfCmd(int argc, char** argv) {
   log_to_android_buffer = false;
   const OptionFormatMap& common_option_formats = GetCommonOptionFormatMap();
 
+  android::base::SetLogger(android::base::LogdLogger());
+  log_to_android_buffer = true;
+
   int i;
   for (i = 1; i < argc && strcmp(argv[i], "--") != 0; ++i) {
     std::string option_name = argv[i];

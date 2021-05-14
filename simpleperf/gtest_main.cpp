@@ -77,6 +77,7 @@ int main(int argc, char** argv) {
   }
 
   android::base::InitLogging(argv, android::base::StderrLogger);
+  android::base::SetLogger(android::base::LogdLogger());
   android::base::LogSeverity log_severity = android::base::WARNING;
   testdata_dir = std::string(dirname(argv[0])) + "/testdata";
   for (int i = 1; i < argc; ++i) {

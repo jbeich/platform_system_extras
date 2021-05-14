@@ -612,6 +612,8 @@ bool InAppRunner::RunCmdInApp(const std::string& cmd, const std::vector<std::str
     }
     args.push_back(cmd_args[i]);
   }
+  printf("RunCmdInApp: %s\n", android::base::Join(args, " ").c_str());
+  fflush(stdout);
   char* argv[args.size() + 1];
   for (size_t i = 0; i < args.size(); ++i) {
     argv[i] = &args[i][0];
@@ -689,6 +691,10 @@ class RunAs : public InAppRunner {
         args.emplace_back("app_type=debuggable");
       }
     }
+    printf(
+        "RunAs::GetPrefixArgs, cmd=%s, simpleperf_copied_in_app_ = %d, GetAndroidVersion() = %d\n",
+        cmd.c_str(), simpleperf_copied_in_app_, GetAndroidVersion());
+    fflush(stdout);
     return args;
   }
 
@@ -739,6 +745,9 @@ class SimpleperfAppRunner : public InAppRunner {
       args.emplace_back("--add-meta-info");
       args.emplace_back("app_type=" + app_type_);
     }
+    printf("SimpleperfAppRunner::GetPrefixArgs, cmd=%s, GetAndroidVersion() = %d\n", cmd.c_str(),
+           GetAndroidVersion());
+    fflush(stdout);
     return args;
   }
 
