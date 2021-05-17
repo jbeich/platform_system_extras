@@ -16,6 +16,23 @@
       "message": "ps3: add sepolicy CL to fix presubmit test failure. Also fix tests when running as root.",
       "revId": "db19d6d5d093c652ecf79f82bf3826f09e9ce21f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c98e3ac_48a535c3",
+        "filename": "simpleperf/environment.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 722,
+      "author": {
+        "id": 1096713
+      },
+      "writtenOn": "2021-05-17T19:56:52Z",
+      "side": 1,
+      "message": "We can take take the \"app_type\" argument by const reference and potentially avoid a string copy here.\n\nI\u0027ve put up a follow-up: https://android-review.googlesource.com/c/platform/system/extras/+/1709848",
+      "revId": "db19d6d5d093c652ecf79f82bf3826f09e9ce21f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
