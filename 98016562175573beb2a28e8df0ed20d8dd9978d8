@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7ae82b5_07d96ffb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-05-19T20:59:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0c7cf415_00769176",
+      "range": {
+        "startLine": 10,
+        "startChar": 45,
+        "endLine": 10,
+        "endChar": 52
+      },
+      "revId": "98016562175573beb2a28e8df0ed20d8dd9978d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bbf2a295_e3959306",
@@ -37,6 +61,24 @@
       "writtenOn": "2021-05-19T20:47:45Z",
       "side": 1,
       "message": "You may want to note in the commit message that you switched from displaying ms to s.",
+      "revId": "98016562175573beb2a28e8df0ed20d8dd9978d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6df0c65a_f333ef33",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 783,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-05-19T20:59:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bbf2a295_e3959306",
       "revId": "98016562175573beb2a28e8df0ed20d8dd9978d8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
