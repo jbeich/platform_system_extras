@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c7cf415_00769176",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-05-19T20:47:45Z",
+      "side": 1,
+      "message": "\"confused\" or replace the first part with \"This can cause confusion about ...\".",
+      "range": {
+        "startLine": 10,
+        "startChar": 45,
+        "endLine": 10,
+        "endChar": 52
+      },
+      "revId": "98016562175573beb2a28e8df0ed20d8dd9978d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bbf2a295_e3959306",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 783,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-05-19T20:47:45Z",
+      "side": 1,
+      "message": "You may want to note in the commit message that you switched from displaying ms to s.",
+      "revId": "98016562175573beb2a28e8df0ed20d8dd9978d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
