@@ -15,7 +15,9 @@
 # limitations under the License.
 
 import google.protobuf
+from typing import List, Optional
 
+from binary_cache_builder import BinaryCacheBuilder
 from pprof_proto_generator import load_pprof_profile
 from . test_utils import TestBase, TestHelper
 
@@ -27,7 +29,7 @@ class TestPprofProtoGenerator(TestBase):
         self.run_cmd(['pprof_proto_generator.py', '-i', testdata_path] + options)
         return self.run_cmd(['pprof_proto_generator.py', '--show'], return_output=True)
 
-    def generate_profile(self, options, testdata_files):
+    def generate_profile(self, options: Optional[List[str]], testdata_files: List[str]):
         testdata_paths = [TestHelper.testdata_path(f) for f in testdata_files]
         options = options or []
         self.run_cmd(['pprof_proto_generator.py', '-i'] + testdata_paths + options)
@@ -99,3 +101,26 @@ class TestPprofProtoGenerator(TestBase):
         # pylint: disable=no-member
         self.assertGreater(len(profile_both.sample), len(profile1.sample))
         self.assertGreater(len(profile_both.sample), len(profile2.sample))
+
+    def test_proguard_mapping_file(self):
+        """ Test --proguard-mapping-file option. """
+        testdata_file = 'perf_need_proguard_mapping.data'
+        proguard_mapping_file = TestHelper.testdata_path('proguard_mapping.txt')
+        original_methodname = 'androidx.fragment.app.FragmentActivity.startActivityForResult'
+        # Can't show original method name without proguard mapping file.
+        self.assertNotIn(original_methodname, self.run_generator(testdata_file=testdata_file))
+        # Show original method name with proguard mapping file.
+        self.assertIn(original_methodname, self.run_generator(
+            ['--proguard-mapping-file', proguard_mapping_file], testdata_file))
+
+    def test_use_binary_cache(self):
+        testdata_file = TestHelper.testdata_path('runtest_two_functions_arm64_perf.data')
+
+        # Build binary_cache.
+        binary_cache_builder = BinaryCacheBuilder(TestHelper.ndk_path, False)
+        binary_cache_builder.build_binary_cache(testdata_file, [TestHelper.testdata_dir])
+
+        # Generate profile.
+        output = self.run_generator(testdata_file=testdata_file)
+        self.assertIn('simpleperf_runtest_two_functions_arm64', output)
+        self.assertIn('two_functions.cpp', output)
