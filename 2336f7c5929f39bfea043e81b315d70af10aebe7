@@ -93,6 +93,30 @@
       },
       "revId": "2336f7c5929f39bfea043e81b315d70af10aebe7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4816bd7f_ff9aa9ae",
+        "filename": "f2fs_utils/mkf2fsuserimg.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2021-05-26T23:46:46Z",
+      "side": 1,
+      "message": "urg.. I added this back. we need to truncate to new decreased size.",
+      "parentUuid": "bfbe7a62_7b73d7f4",
+      "range": {
+        "startLine": 177,
+        "startChar": 0,
+        "endLine": 178,
+        "endChar": 8
+      },
+      "revId": "2336f7c5929f39bfea043e81b315d70af10aebe7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
