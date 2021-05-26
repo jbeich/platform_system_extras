@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3acf5d4f_ab6cb082",
+        "filename": "f2fs_utils/mkf2fsuserimg.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2021-05-26T20:02:56Z",
+      "side": 1,
+      "message": "3 segments: 1 for superblock alignment, 2 for hot data/node segments.",
+      "parentUuid": "364f508b_524855bf",
+      "range": {
+        "startLine": 165,
+        "startChar": 18,
+        "endLine": 165,
+        "endChar": 22
+      },
+      "revId": "2336f7c5929f39bfea043e81b315d70af10aebe7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e959c720_4528b2d6",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-05-26T16:40:02Z",
       "side": 1,
       "message": "In case of \"$SPARSE_IMG\" \u003d false\", Do we just execute _truncate and _build again without any changes?",
+      "range": {
+        "startLine": 177,
+        "startChar": 0,
+        "endLine": 178,
+        "endChar": 8
+      },
+      "revId": "2336f7c5929f39bfea043e81b315d70af10aebe7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bfbe7a62_7b73d7f4",
+        "filename": "f2fs_utils/mkf2fsuserimg.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2021-05-26T20:02:56Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "e959c720_4528b2d6",
       "range": {
         "startLine": 177,
         "startChar": 0,
