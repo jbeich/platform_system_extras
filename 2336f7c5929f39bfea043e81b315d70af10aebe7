@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "364f508b_524855bf",
+        "filename": "f2fs_utils/mkf2fsuserimg.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1651802
+      },
+      "writtenOn": "2021-05-26T16:40:02Z",
+      "side": 1,
+      "message": "Could you explain more about \" + 6 \" here?",
+      "range": {
+        "startLine": 165,
+        "startChar": 18,
+        "endLine": 165,
+        "endChar": 22
+      },
+      "revId": "2336f7c5929f39bfea043e81b315d70af10aebe7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e959c720_4528b2d6",
+        "filename": "f2fs_utils/mkf2fsuserimg.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1651802
+      },
+      "writtenOn": "2021-05-26T16:40:02Z",
+      "side": 1,
+      "message": "In case of \"$SPARSE_IMG\" \u003d false\", Do we just execute _truncate and _build again without any changes?",
+      "range": {
+        "startLine": 177,
+        "startChar": 0,
+        "endLine": 178,
+        "endChar": 8
+      },
+      "revId": "2336f7c5929f39bfea043e81b315d70af10aebe7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
