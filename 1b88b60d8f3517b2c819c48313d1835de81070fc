@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "2ee54154_a7c19ad6",
+        "filename": "simpleperf/scripts/test/annotate_test.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-05-27T20:51:59Z",
+      "side": 1,
+      "message": "As in https://cs.android.com/android/platform/superproject/+/master:system/extras/simpleperf/scripts/test/test_utils.py;l\u003d144, each test runs in a specific dir, if it succeeds, the test dir is removed, otherwise the dir is kept for debugging.",
+      "parentUuid": "94f71f1e_2441d45e",
+      "range": {
+        "startLine": 36,
+        "startChar": 8,
+        "endLine": 36,
+        "endChar": 20
+      },
+      "revId": "1b88b60d8f3517b2c819c48313d1835de81070fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "7407651c_1646c9e3",
         "filename": "simpleperf/scripts/test/do_test.py",
         "patchSetId": 1
@@ -37,6 +61,24 @@
       "writtenOn": "2021-05-27T19:17:43Z",
       "side": 1,
       "message": "As a future cleanup, we could consider adding a \"registry\" of sorts into which each test can register its type.  This would avoid adding/updating test names inside this function.",
+      "revId": "1b88b60d8f3517b2c819c48313d1835de81070fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bca4597a_9372da14",
+        "filename": "simpleperf/scripts/test/do_test.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-05-27T20:51:59Z",
+      "side": 1,
+      "message": "Yeah, will consider it.",
+      "parentUuid": "7407651c_1646c9e3",
       "revId": "1b88b60d8f3517b2c819c48313d1835de81070fc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
