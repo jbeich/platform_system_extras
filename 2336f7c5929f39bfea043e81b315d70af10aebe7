@@ -117,6 +117,30 @@
       },
       "revId": "2336f7c5929f39bfea043e81b315d70af10aebe7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "43afb70d_0d136f38",
+        "filename": "f2fs_utils/mkf2fsuserimg.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1651802
+      },
+      "writtenOn": "2021-05-27T14:46:52Z",
+      "side": 1,
+      "message": "I meant like this?\n\nif [ \"$READONLY\" ] \u0026\u0026 [ \"$COMPRESS_SUPPORT\" ]; then\n  if [ \"$SPARSE_IMG\" \u003d \"true\" ]; then\n    MKFS_OPTS+\u003d\" -S $SIZE\"\n    rm -f $OUTPUT_FILE \u0026\u0026 touch $OUTPUT_FILE\n    _truncate\n    _build\n  fi\nfi",
+      "parentUuid": "4816bd7f_ff9aa9ae",
+      "range": {
+        "startLine": 177,
+        "startChar": 0,
+        "endLine": 178,
+        "endChar": 8
+      },
+      "revId": "2336f7c5929f39bfea043e81b315d70af10aebe7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
