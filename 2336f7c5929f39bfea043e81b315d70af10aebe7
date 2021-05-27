@@ -141,6 +141,30 @@
       },
       "revId": "2336f7c5929f39bfea043e81b315d70af10aebe7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff979734_9a24fba6",
+        "filename": "f2fs_utils/mkf2fsuserimg.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2021-05-27T15:31:54Z",
+      "side": 1,
+      "message": "If it doesn\u0027t come by sparse mode, we need to truncate the plain image to the smaller size.",
+      "parentUuid": "43afb70d_0d136f38",
+      "range": {
+        "startLine": 177,
+        "startChar": 0,
+        "endLine": 178,
+        "endChar": 8
+      },
+      "revId": "2336f7c5929f39bfea043e81b315d70af10aebe7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
