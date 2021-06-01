@@ -804,9 +804,26 @@ class RecordingAppHelper {
 static void TestRecordingApps(const std::string& app_name) {
   RecordingAppHelper helper;
   // Bring the app to foreground to avoid no samples.
+<<<<<<< HEAD   (f9cef3 Merge "simpleperf: update test apk to run on wear devices." )
   ASSERT_TRUE(helper.StartApp("am start " + app_name + "/.MainActivity"));
 
   ASSERT_TRUE(helper.RecordData("--app " + app_name + " -g --duration 3 -e " + GetDefaultEvent()));
+=======
+  ASSERT_TRUE(Workload::RunCmd({"am", "start", app_name + "/.MainActivity"}));
+  TemporaryFile tmpfile;
+  ASSERT_TRUE(RecordCmd()->Run({"-o", tmpfile.path, "--app", app_name, "-g", "--duration", "10"}));
+  std::unique_ptr<RecordFileReader> reader = RecordFileReader::CreateInstance(tmpfile.path);
+  ASSERT_TRUE(reader);
+  // Check if having samples.
+  bool has_sample = false;
+  ASSERT_TRUE(reader->ReadDataSection([&](std::unique_ptr<Record> r) {
+    if (r->type() == PERF_RECORD_SAMPLE) {
+      has_sample = true;
+    }
+    return true;
+  }));
+  ASSERT_TRUE(has_sample);
+>>>>>>> BRANCH (f33a79 Merge "simpleperf: increase record duration" into android10-)
 
   // Check if we can profile Java code by looking for a Java method name in dumped symbols, which
   // is app_name + ".MainActivity$1.run".
