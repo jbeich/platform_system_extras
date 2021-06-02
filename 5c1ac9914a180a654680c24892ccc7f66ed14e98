@@ -33,6 +33,23 @@
       "message": "Please CP this fix to sc-dev, thanks",
       "revId": "5c1ac9914a180a654680c24892ccc7f66ed14e98",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3fed048_a9627195",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1222074
+      },
+      "writtenOn": "2021-06-02T17:42:51Z",
+      "side": 1,
+      "message": "Please set Autosubmit vote to +1",
+      "revId": "5c1ac9914a180a654680c24892ccc7f66ed14e98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
