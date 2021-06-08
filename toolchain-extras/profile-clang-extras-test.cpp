@@ -20,24 +20,7 @@
 
 #include "profile-extras.h"
 
-static int flush_count = 0;
-
 extern "C" {
-int __llvm_profile_write_file() {
-  flush_count++;
-  return 0;
-}
-}
-
-TEST(profile_extras, smoke) {
-  flush_count = 0;
-
-  ASSERT_EQ(0, flush_count);
-  kill(getpid(), COVERAGE_FLUSH_SIGNAL);
-  sleep(2);
-  ASSERT_EQ(1, flush_count);
-}
-
 static const char* OPEN_AT_TEST_FNAME = "/data/misc/trace/test.profraw";
 TEST(profile_extras, openat) {
   mode_t old_umask = umask(0077);
@@ -52,4 +35,5 @@ TEST(profile_extras, openat) {
   ASSERT_EQ(stat(OPEN_AT_TEST_FNAME, &stat_buf), 0);
   ASSERT_EQ(stat_buf.st_mode & 0777, 0666);
   unlink(OPEN_AT_TEST_FNAME);
+}
 }
