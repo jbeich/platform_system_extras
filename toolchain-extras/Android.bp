@@ -46,8 +46,8 @@ cc_library_static {
 cc_defaults {
     name: "libprofile-clang-defaults",
     srcs: [
-        "profile-clang-extras.cpp",
         "profile-clang-openat.cpp",
+        "profile-clang-sections.c",
     ],
     native_coverage: false,
     sanitize: {
