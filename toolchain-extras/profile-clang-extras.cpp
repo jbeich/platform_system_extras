@@ -15,6 +15,7 @@
  */
 
 #include <errno.h>
+#include <log/log.h>
 #include <signal.h>
 #include <stdlib.h>
 
@@ -27,6 +28,8 @@ static sighandler_t chained_signal_handler = SIG_ERR;
 int __llvm_profile_write_file(void);
 
 static void llvm_signal_handler(__unused int signum) {
+  __android_log_print(ANDROID_LOG_DEBUG, "libprofile", "Writing Clang coverage for pid %i.",
+                      getpid());
   __llvm_profile_write_file();
 
   if (chained_signal_handler != SIG_ERR &&

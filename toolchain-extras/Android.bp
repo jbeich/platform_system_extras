@@ -71,7 +71,11 @@ cc_library_static {
 
     stl: "none",
     system_shared_libs: [],
-    header_libs: ["libc_headers"],
+    shared_libs: ["liblog"],
+    header_libs: [
+        "libc_headers",
+        "liblog_headers",
+    ],
 }
 
 cc_library_static {
