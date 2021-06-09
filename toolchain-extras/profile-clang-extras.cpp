@@ -17,6 +17,7 @@
 #include <errno.h>
 #include <signal.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 #include "profile-extras.h"
 
@@ -25,8 +26,12 @@ extern "C" {
 static sighandler_t chained_signal_handler = SIG_ERR;
 
 int __llvm_profile_write_file(void);
+void __llvm_profile_set_filename(const char*);
 
 static void llvm_signal_handler(__unused int signum) {
+  char buffer[128];
+  sprintf(buffer, "/data/misc/trace/dump-%i.profraw", getpid());
+  __llvm_profile_set_filename(buffer);
   __llvm_profile_write_file();
 
   if (chained_signal_handler != SIG_ERR &&
