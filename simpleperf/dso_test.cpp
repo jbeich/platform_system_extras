@@ -150,7 +150,9 @@ TEST(DebugElfFileFinder, build_id_mismatch) {
 }
 
 TEST(dso, dex_file_dso) {
-#if defined(__linux__)
+#if 1
+  GTEST_LOG_(INFO) << "Test disabled due to b/191480616";
+#elif defined(__linux__)
   for (DsoType dso_type : {DSO_DEX_FILE, DSO_ELF_FILE}) {
     std::unique_ptr<Dso> dso = Dso::CreateDso(dso_type, GetTestData("base.vdex"));
     ASSERT_TRUE(dso);
