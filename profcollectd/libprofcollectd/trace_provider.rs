@@ -22,6 +22,9 @@ use std::path::Path;
 use std::sync::{Arc, Mutex};
 use std::time::Duration;
 
+#[cfg(feature = "test")]
+use crate::dummy_trace_provider::DummyTraceProvider;
+
 use crate::simpleperf_etm_trace_provider::SimpleperfEtmTraceProvider;
 
 pub trait TraceProvider {
@@ -34,6 +37,12 @@ pub fn get_trace_provider() -> Result<Arc<Mutex<dyn TraceProvider + Send>>> {
     if SimpleperfEtmTraceProvider::supported() {
         log::info!("simpleperf_etm trace provider registered.");
         return Ok(Arc::new(Mutex::new(SimpleperfEtmTraceProvider {})));
+    }
+
+    #[cfg(feature = "test")]
+    if DummyTraceProvider::supported() {
+        log::info!("dummy trace provider registered.");
+        return Ok(Arc::new(Mutex::new(DummyTraceProvider {})));
     }
 
     Err(anyhow!("No trace provider found for this device."))
