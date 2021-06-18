@@ -33,6 +33,23 @@
       "message": "LGTM since libdexfile doesn\u0027t want to keep backward compatibility for reading cdex file.",
       "revId": "bd85f4882792bf3e16c038b5c24e6eda8ffed073",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58176e63_950dcc67",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-06-18T18:48:11Z",
+      "side": 1,
+      "message": "Also need to fix system/extras/simpleperf/read_dex_file_test.cpp:35: Failure\nI will upload another CL to update base.vdex to fix both tests.",
+      "revId": "bd85f4882792bf3e16c038b5c24e6eda8ffed073",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
