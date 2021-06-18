@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0154b52e_6af5a98a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-06-18T17:27:44Z",
+      "side": 1,
+      "message": "I prefer not to disable the test. Because of https://b.corp.google.com/issues/191480616#comment13.",
+      "revId": "bd85f4882792bf3e16c038b5c24e6eda8ffed073",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
