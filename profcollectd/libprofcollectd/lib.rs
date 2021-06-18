@@ -20,8 +20,12 @@ mod config;
 mod report;
 mod scheduler;
 mod service;
-mod simpleperf_etm_trace_provider;
 mod trace_provider;
+
+#[cfg(feature = "test")]
+mod dummy_trace_provider;
+
+mod simpleperf_etm_trace_provider;
 
 use anyhow::{Context, Result};
 use profcollectd_aidl_interface::aidl::com::android::server::profcollect::IProfCollectd::{
@@ -90,9 +94,8 @@ pub fn report() -> Result<String> {
 
 /// Inits logging for Android
 pub fn init_logging() {
+    let min_log_level = if cfg!(feature = "test") { log::Level::Info } else { log::Level::Error };
     android_logger::init_once(
-        android_logger::Config::default()
-            .with_tag("profcollectd")
-            .with_min_level(log::Level::Error),
+        android_logger::Config::default().with_tag("profcollectd").with_min_level(min_log_level),
     );
 }
