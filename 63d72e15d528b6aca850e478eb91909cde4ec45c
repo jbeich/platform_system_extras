@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9566f3c4_9044c6c9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-06-21T22:21:27Z",
+      "side": 1,
+      "message": "Suggested some edits but they may be wrong because I misunderstood the concepts.",
+      "revId": "63d72e15d528b6aca850e478eb91909cde4ec45c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5120955f_16344822",
+        "filename": "simpleperf/doc/debug_dwarf_unwinding.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-06-21T22:21:27Z",
+      "side": 1,
+      "message": "Backtick around this text, like, `simpleperf record`?",
+      "range": {
+        "startLine": 9,
+        "startChar": 53,
+        "endLine": 9,
+        "endChar": 70
+      },
+      "revId": "63d72e15d528b6aca850e478eb91909cde4ec45c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c01f3eaa_c92a0d67",
+        "filename": "simpleperf/doc/debug_dwarf_unwinding.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-06-21T22:21:27Z",
+      "side": 1,
+      "message": "These options are useful to reduce space consumed by stack data.",
+      "range": {
+        "startLine": 10,
+        "startChar": 19,
+        "endLine": 10,
+        "endChar": 34
+      },
+      "revId": "63d72e15d528b6aca850e478eb91909cde4ec45c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab43290c_b33401b5",
+        "filename": "simpleperf/doc/debug_dwarf_unwinding.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-06-21T22:21:27Z",
+      "side": 1,
+      "message": "But the options also make it ...",
+      "range": {
+        "startLine": 10,
+        "startChar": 83,
+        "endLine": 10,
+        "endChar": 92
+      },
+      "revId": "63d72e15d528b6aca850e478eb91909cde4ec45c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
