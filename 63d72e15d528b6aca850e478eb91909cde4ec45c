@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c89e94d_dd6de622",
+        "filename": "simpleperf/doc/debug_dwarf_unwinding.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-06-22T01:47:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5120955f_16344822",
+      "range": {
+        "startLine": 9,
+        "startChar": 53,
+        "endLine": 9,
+        "endChar": 70
+      },
+      "revId": "63d72e15d528b6aca850e478eb91909cde4ec45c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c01f3eaa_c92a0d67",
@@ -82,6 +106,54 @@
         "startChar": 83,
         "endLine": 10,
         "endChar": 92
+      },
+      "revId": "63d72e15d528b6aca850e478eb91909cde4ec45c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d622e4d8_4b2cc860",
+        "filename": "simpleperf/doc/debug_dwarf_unwinding.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-06-22T01:47:43Z",
+      "side": 1,
+      "message": "Done. Also removed \"Unless `--post-unwind\u003dyes` or `--no-unwind` is used\" to avoid confusion.",
+      "parentUuid": "ab43290c_b33401b5",
+      "range": {
+        "startLine": 10,
+        "startChar": 83,
+        "endLine": 10,
+        "endChar": 92
+      },
+      "revId": "63d72e15d528b6aca850e478eb91909cde4ec45c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d6497d7_a176d07a",
+        "filename": "simpleperf/doc/debug_dwarf_unwinding.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-06-22T01:47:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c01f3eaa_c92a0d67",
+      "range": {
+        "startLine": 10,
+        "startChar": 19,
+        "endLine": 10,
+        "endChar": 34
       },
       "revId": "63d72e15d528b6aca850e478eb91909cde4ec45c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
