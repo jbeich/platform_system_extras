@@ -1,0 +1,56 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000012067531",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1743618?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "84fd6310_b49fec21",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-06-22T23:12:39Z",
+      "side": 1,
+      "message": "Third-party license (BSD) disallowed in repository platform/system/extras:\nBSD license\n",
+      "range": {
+        "startLine": 7,
+        "startChar": 38,
+        "endLine": 7,
+        "endChar": 49
+      },
+      "revId": "09ae07b6ba188bcc50f9ce6fe443f5117dbeacb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000012067531",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1743618?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "f8ecb962_2bfd56a7",
+        "filename": "ANRdaemon/LICENSE",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-06-22T23:12:39Z",
+      "side": 1,
+      "message": "Third-party license (BSD) disallowed in repository platform/system/extras:\nRedistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:...Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and or other materials provided with the distribution....may be used to endorse or promote products derived from this software without specific prior written permission.\n",
+      "range": {
+        "startLine": 4,
+        "startChar": 1,
+        "endLine": 15,
+        "endChar": 56
+      },
+      "revId": "09ae07b6ba188bcc50f9ce6fe443f5117dbeacb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
