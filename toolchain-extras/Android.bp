@@ -84,3 +84,20 @@ cc_test {
     ldflags: ["-uinit_profile_extras"],
     native_coverage: false,
 }
+<<<<<<< HEAD   (397634 Merge "Snap for 6948038 from e5fb8f461bcc7e1e38bd002cd22b7be)
+=======
+
+cc_test {
+    name: "libprofile-clang-extras-test",
+    srcs: [
+        "profile-clang-extras-test.cpp",
+    ],
+    whole_static_libs: [
+        "libprofile-clang-extras",
+    ],
+    ldflags: [
+        "-Wl,--wrap,open",
+    ],
+    native_coverage: false,
+}
+>>>>>>> CHANGE (134fe2 Mark constructor as static)
