@@ -84,3 +84,17 @@ cc_test {
     ldflags: ["-uinit_profile_extras"],
     native_coverage: false,
 }
+
+cc_test {
+    name: "libprofile-clang-extras-test",
+    srcs: [
+        "profile-clang-extras-test.cpp",
+    ],
+    whole_static_libs: [
+        "libprofile-clang-extras",
+    ],
+    ldflags: [
+        "-Wl,--wrap,open",
+    ],
+    native_coverage: false,
+}
