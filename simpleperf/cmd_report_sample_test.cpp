@@ -97,10 +97,13 @@ TEST(cmd_report_sample, have_clear_callchain_end_in_protobuf_output) {
   ASSERT_EQ(data.find("_start_main"), std::string::npos);
 }
 
-TEST(cmd_report_sample, app_package_name_in_meta_info) {
+TEST(cmd_report_sample, app_device_info_in_meta_info) {
   std::string data;
-  GetProtobufReport(PERF_DATA_WITH_APP_PACKAGE_NAME, &data);
+  GetProtobufReport("perf_with_meta_info.data", &data);
   ASSERT_NE(data.find("app_package_name: com.google.sample.tunnel"), std::string::npos);
+  ASSERT_NE(data.find("app_type: debuggable"), std::string::npos);
+  ASSERT_NE(data.find("android_sdk_version: 30"), std::string::npos);
+  ASSERT_NE(data.find("android_build_type: userdebug"), std::string::npos);
 }
 
 TEST(cmd_report_sample, remove_unknown_kernel_symbols) {
@@ -190,4 +193,22 @@ TEST(cmd_report_sample, show_unwinding_result) {
   std::string data;
   GetProtobufReport("perf_with_failed_unwinding_debug_info.data", &data, {"--show-callchain"});
   ASSERT_NE(data.find("error_code: ERROR_INVALID_MAP"), std::string::npos);
+}
+
+TEST(cmd_report_sample, proguard_mapping_file_option) {
+  std::string data;
+  // Symbols aren't de-obfuscated without proguard mapping file.
+  GetProtobufReport("perf_need_proguard_mapping.data", &data, {"--show-callchain"});
+  ASSERT_EQ(data.find("androidx.fragment.app.FragmentActivity.startActivityForResult"),
+            std::string::npos);
+  ASSERT_EQ(data.find("com.example.android.displayingbitmaps.ui.ImageGridFragment.onItemClick"),
+            std::string::npos);
+  // Symbols are de-obfuscated with proguard mapping file.
+  GetProtobufReport(
+      "perf_need_proguard_mapping.data", &data,
+      {"--show-callchain", "--proguard-mapping-file", GetTestData("proguard_mapping.txt")});
+  ASSERT_NE(data.find("androidx.fragment.app.FragmentActivity.startActivityForResult"),
+            std::string::npos);
+  ASSERT_NE(data.find("com.example.android.displayingbitmaps.ui.ImageGridFragment.onItemClick"),
+            std::string::npos);
 }

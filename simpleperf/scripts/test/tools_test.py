@@ -15,9 +15,12 @@
 # limitations under the License.
 
 import os
-from simpleperf_utils import (is_elf_file, Addr2Nearestline, Objdump, ReadElf,
+from pathlib import Path
+
+from binary_cache_builder import BinaryCacheBuilder
+from simpleperf_utils import (Addr2Nearestline, BinaryFinder, Objdump, ReadElf,
                               SourceFileSearcher, is_windows, remove)
-from . test_utils import TestBase, TEST_HELPER
+from . test_utils import TestBase, TestHelper
 
 
 class TestTools(TestBase):
@@ -26,22 +29,19 @@ class TestTools(TestBase):
         self.run_addr2nearestline_test(False)
 
     def run_addr2nearestline_test(self, with_function_name):
-        binary_cache_path = TEST_HELPER.testdata_dir
         test_map = {
             '/simpleperf_runtest_two_functions_arm64': [
                 {
-                    'func_addr': 0x668,
-                    'addr': 0x668,
+                    'func_addr': 0x112c,
+                    'addr': 0x112c,
                     'source': 'system/extras/simpleperf/runtest/two_functions.cpp:20',
                     'function': 'main',
                 },
                 {
-                    'func_addr': 0x668,
-                    'addr': 0x6a4,
-                    'source': """system/extras/simpleperf/runtest/two_functions.cpp:7
-                                 system/extras/simpleperf/runtest/two_functions.cpp:22""",
-                    'function': """Function1()
-                                   main""",
+                    'func_addr': 0x104c,
+                    'addr': 0x105c,
+                    'source': "system/extras/simpleperf/runtest/two_functions.cpp:7",
+                    'function': "Function1()",
                 },
             ],
             '/simpleperf_runtest_two_functions_arm': [
@@ -95,12 +95,13 @@ class TestTools(TestBase):
                 }
             ],
         }
-        addr2line = Addr2Nearestline(TEST_HELPER.ndk_path, binary_cache_path, with_function_name)
+        binary_finder = BinaryFinder(TestHelper.testdata_dir, ReadElf(TestHelper.ndk_path))
+        addr2line = Addr2Nearestline(TestHelper.ndk_path, binary_finder, with_function_name)
         for dso_path in test_map:
             test_addrs = test_map[dso_path]
             for test_addr in test_addrs:
-                addr2line.add_addr(dso_path, test_addr['func_addr'], test_addr['addr'])
-        addr2line.convert_addrs_to_lines()
+                addr2line.add_addr(dso_path, None, test_addr['func_addr'], test_addr['addr'])
+        addr2line.convert_addrs_to_lines(4)
         for dso_path in test_map:
             dso = addr2line.get_dso(dso_path)
             self.assertIsNotNone(dso, dso_path)
@@ -136,23 +137,22 @@ class TestTools(TestBase):
                                  (dso_path, test_addr['addr'], expected_source, actual_source))
 
     def test_objdump(self):
-        binary_cache_path = TEST_HELPER.testdata_dir
         test_map = {
             '/simpleperf_runtest_two_functions_arm64': {
-                'start_addr': 0x668,
-                'len': 116,
+                'start_addr': 0x112c,
+                'len': 28,
                 'expected_items': [
-                    ('main():', 0),
-                    ('system/extras/simpleperf/runtest/two_functions.cpp:20', 0),
-                    ('694:      	add	x20, x20, #1758', 0x694),
+                    ('main', 0),
+                    ('two_functions.cpp:20', 0),
+                    ('1134:      	add	x29, sp, #16', 0x1134),
                 ],
             },
             '/simpleperf_runtest_two_functions_arm': {
                 'start_addr': 0x784,
                 'len': 80,
                 'expected_items': [
-                    ('main():', 0),
-                    ('system/extras/simpleperf/runtest/two_functions.cpp:20', 0),
+                    ('main', 0),
+                    ('two_functions.cpp:20', 0),
                     ('7ae:	bne.n	7a6 <main+0x22>', 0x7ae),
                 ],
             },
@@ -160,8 +160,8 @@ class TestTools(TestBase):
                 'start_addr': 0x920,
                 'len': 201,
                 'expected_items': [
-                    ('main():', 0),
-                    ('system/extras/simpleperf/runtest/two_functions.cpp:20', 0),
+                    ('main', 0),
+                    ('two_functions.cpp:20', 0),
                     ('96e:      	movl	%edx, (%rbx,%rax,4)', 0x96e),
                 ],
             },
@@ -169,16 +169,17 @@ class TestTools(TestBase):
                 'start_addr': 0x710,
                 'len': 98,
                 'expected_items': [
-                    ('main():', 0),
-                    ('system/extras/simpleperf/runtest/two_functions.cpp:20', 0),
+                    ('main', 0),
+                    ('two_functions.cpp:20', 0),
                     ('748:      	cmpl	$100000000, %ebp', 0x748),
                 ],
             },
         }
-        objdump = Objdump(TEST_HELPER.ndk_path, binary_cache_path)
+        binary_finder = BinaryFinder(TestHelper.testdata_dir, ReadElf(TestHelper.ndk_path))
+        objdump = Objdump(TestHelper.ndk_path, binary_finder)
         for dso_path in test_map:
             dso = test_map[dso_path]
-            dso_info = objdump.get_dso_info(dso_path)
+            dso_info = objdump.get_dso_info(dso_path, None)
             self.assertIsNotNone(dso_info, dso_path)
             disassemble_code = objdump.disassemble_code(dso_info, dso['start_addr'], dso['len'])
             self.assertTrue(disassemble_code, dso_path)
@@ -201,15 +202,9 @@ class TestTools(TestBase):
         test_map = {
             'simpleperf_runtest_two_functions_arm64': {
                 'arch': 'arm64',
-                'build_id': '0xe8ecb3916d989dbdc068345c30f0c24300000000',
-                'sections': ['.interp', '.note.android.ident', '.note.gnu.build-id', '.dynsym',
-                             '.dynstr', '.gnu.hash', '.gnu.version', '.gnu.version_r', '.rela.dyn',
-                             '.rela.plt', '.plt', '.text', '.rodata', '.eh_frame', '.eh_frame_hdr',
-                             '.preinit_array', '.init_array', '.fini_array', '.dynamic', '.got',
-                             '.got.plt', '.data', '.bss', '.comment', '.debug_str', '.debug_loc',
-                             '.debug_abbrev', '.debug_info', '.debug_ranges', '.debug_macinfo',
-                             '.debug_pubnames', '.debug_pubtypes', '.debug_line',
-                             '.note.gnu.gold-version', '.symtab', '.strtab', '.shstrtab'],
+                'build_id': '0xb4f1b49b0fe9e34e78fb14e5374c930c00000000',
+                'sections': ['.note.gnu.build-id', '.dynsym', '.text', '.rodata', '.eh_frame',
+                             '.eh_frame_hdr', '.debug_info',  '.debug_line', '.symtab'],
             },
             'simpleperf_runtest_two_functions_arm': {
                 'arch': 'arm',
@@ -222,26 +217,28 @@ class TestTools(TestBase):
                 'arch': 'x86',
             }
         }
-        readelf = ReadElf(TEST_HELPER.ndk_path)
+        readelf = ReadElf(TestHelper.ndk_path)
         for dso_path in test_map:
             dso_info = test_map[dso_path]
-            path = os.path.join(TEST_HELPER.testdata_dir, dso_path)
+            path = os.path.join(TestHelper.testdata_dir, dso_path)
             self.assertEqual(dso_info['arch'], readelf.get_arch(path))
             if 'build_id' in dso_info:
                 self.assertEqual(dso_info['build_id'], readelf.get_build_id(path), dso_path)
             if 'sections' in dso_info:
-                self.assertEqual(dso_info['sections'], readelf.get_sections(path), dso_path)
+                sections = readelf.get_sections(path)
+                for section in dso_info['sections']:
+                    self.assertIn(section, sections)
         self.assertEqual(readelf.get_arch('not_exist_file'), 'unknown')
         self.assertEqual(readelf.get_build_id('not_exist_file'), '')
         self.assertEqual(readelf.get_sections('not_exist_file'), [])
 
     def test_source_file_searcher(self):
         searcher = SourceFileSearcher(
-            [TEST_HELPER.testdata_path('SimpleperfExampleWithNative'),
-             TEST_HELPER.testdata_path('SimpleperfExampleOfKotlin')])
+            [TestHelper.testdata_path('SimpleperfExampleWithNative'),
+             TestHelper.testdata_path('SimpleperfExampleOfKotlin')])
 
         def format_path(path):
-            return os.path.join(TEST_HELPER.testdata_dir, path.replace('/', os.sep))
+            return os.path.join(TestHelper.testdata_dir, path.replace('/', os.sep))
         # Find a C++ file with pure file name.
         self.assertEqual(
             format_path('SimpleperfExampleWithNative/app/src/main/cpp/native-lib.cpp'),
@@ -262,11 +259,40 @@ class TestTools(TestBase):
             searcher.get_real_path('MainActivity.kt'))
 
     def test_is_elf_file(self):
-        self.assertTrue(is_elf_file(TEST_HELPER.testdata_path(
+        self.assertTrue(ReadElf.is_elf_file(TestHelper.testdata_path(
             'simpleperf_runtest_two_functions_arm')))
         with open('not_elf', 'wb') as fh:
             fh.write(b'\x90123')
         try:
-            self.assertFalse(is_elf_file('not_elf'))
+            self.assertFalse(ReadElf.is_elf_file('not_elf'))
         finally:
             remove('not_elf')
+
+    def test_binary_finder(self):
+        # Create binary_cache.
+        binary_cache_builder = BinaryCacheBuilder(TestHelper.ndk_path, False)
+        elf_name = 'simpleperf_runtest_two_functions_arm'
+        elf_path = TestHelper.testdata_path(elf_name)
+        readelf = ReadElf(TestHelper.ndk_path)
+        build_id = readelf.get_build_id(elf_path)
+        self.assertGreater(len(build_id), 0)
+        binary_cache_builder.binaries[elf_name] = build_id
+        binary_cache_builder.copy_binaries_from_symfs_dirs([TestHelper.testdata_dir])
+        binary_cache_builder.create_build_id_list()
+
+        # Test BinaryFinder.
+        path_in_binary_cache = Path(binary_cache_builder.binary_cache_dir, elf_name)
+        binary_finder = BinaryFinder(binary_cache_builder.binary_cache_dir, readelf)
+        # Find binary using build id.
+        path = binary_finder.find_binary('[not_exist_file]', build_id)
+        self.assertEqual(path, path_in_binary_cache)
+        # Find binary using path.
+        path = binary_finder.find_binary('/' + elf_name, None)
+        self.assertEqual(path, path_in_binary_cache)
+        # Find binary using absolute path.
+        path = binary_finder.find_binary(str(path_in_binary_cache), None)
+        self.assertEqual(path, path_in_binary_cache)
+
+        # The binary should has a matched build id.
+        path = binary_finder.find_binary('/' + elf_name, 'wrong_build_id')
+        self.assertIsNone(path)

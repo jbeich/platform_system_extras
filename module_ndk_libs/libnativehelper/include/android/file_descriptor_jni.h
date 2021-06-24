@@ -29,6 +29,10 @@
 
 #include <jni.h>
 
+#if !defined(__BIONIC__) && !defined(__INTRODUCED_IN)
+#define __INTRODUCED_IN(x)
+#endif
+
 __BEGIN_DECLS
 
 /**
@@ -60,7 +64,7 @@ jobject AFileDescriptor_create(JNIEnv* env) __INTRODUCED_IN(31);
  * \param fileDescriptor a java.io.FileDescriptor instance.
  * \return the Unix file descriptor wrapped by \a fileDescriptor.
  */
-int AFileDescriptor_getFD(JNIEnv* env, jobject fileDescriptor) __INTRODUCED_IN(31);
+int AFileDescriptor_getFd(JNIEnv* env, jobject fileDescriptor) __INTRODUCED_IN(31);
 
 /**
  * Sets the Unix file descriptor represented by the given java.io.FileDescriptor.
@@ -77,7 +81,7 @@ int AFileDescriptor_getFD(JNIEnv* env, jobject fileDescriptor) __INTRODUCED_IN(3
  * \param fileDescriptor a java.io.FileDescriptor instance.
  * \param fd a Unix file descriptor that \a fileDescriptor will subsequently represent.
  */
-void AFileDescriptor_setFD(JNIEnv* env, jobject fileDescriptor, int fd) __INTRODUCED_IN(31);
+void AFileDescriptor_setFd(JNIEnv* env, jobject fileDescriptor, int fd) __INTRODUCED_IN(31);
 
 __END_DECLS
 

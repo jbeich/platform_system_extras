@@ -37,7 +37,8 @@ TEST(environment, PrepareVdsoFile) {
     return;
   }
   TemporaryDir tmpdir;
-  ScopedTempFiles scoped_temp_files(tmpdir.path);
+  auto scoped_temp_files = ScopedTempFiles::Create(tmpdir.path);
+  ASSERT_TRUE(scoped_temp_files);
   PrepareVdsoFile();
   std::unique_ptr<Dso> dso =
       Dso::CreateDso(DSO_ELF_FILE, "[vdso]", sizeof(size_t) == sizeof(uint64_t));
@@ -127,4 +128,11 @@ TEST(environment, GetProcessUid) {
   std::optional<uid_t> uid = GetProcessUid(getpid());
   ASSERT_TRUE(uid.has_value());
   ASSERT_EQ(uid.value(), getuid());
+}
+
+TEST(environment, GetAppType) {
+  TEST_REQUIRE_APPS();
+  ASSERT_EQ(GetAppType("com.android.simpleperf.debuggable"), "debuggable");
+  ASSERT_EQ(GetAppType("com.android.simpleperf.profileable"), "profileable");
+  ASSERT_EQ(GetAppType("com.android.simpleperf.app_not_exist"), "not_exist");
 }

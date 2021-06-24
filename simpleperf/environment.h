@@ -26,6 +26,7 @@
 #endif
 
 #include <functional>
+#include <memory>
 #include <optional>
 #include <set>
 #include <string>
@@ -93,12 +94,13 @@ void SetRunInAppToolForTesting(bool run_as, bool simpleperf_app_runner);  // for
 bool RunInAppContext(const std::string& app_package_name, const std::string& cmd,
                      const std::vector<std::string>& args, size_t workload_args_size,
                      const std::string& output_filepath, bool need_tracepoint_events);
+std::string GetAppType(const std::string& app_package_name);
 
 void AllowMoreOpenedFiles();
 
 class ScopedTempFiles {
  public:
-  ScopedTempFiles(const std::string& tmp_dir);
+  static std::unique_ptr<ScopedTempFiles> Create(const std::string& tmp_dir);
   ~ScopedTempFiles();
   // If delete_in_destructor = true, the temp file will be deleted in the destructor of
   // ScopedTempFile. Otherwise, it should be deleted by the caller.
@@ -106,16 +108,24 @@ class ScopedTempFiles {
   static void RegisterTempFile(const std::string& path);
 
  private:
+  ScopedTempFiles(const std::string& tmp_dir);
+
   static std::string tmp_dir_;
   static std::vector<std::string> files_to_delete_;
 };
 
 bool SignalIsIgnored(int signo);
+
+enum {
+  kAndroidVersionP = 9,
+  kAndroidVersionQ = 10,
+  kAndroidVersionR = 11,
+  kAndroidVersionS = 12,
+};
+
 // Return 0 if no android version.
 int GetAndroidVersion();
 std::optional<std::pair<int, int>> GetKernelVersion();
-
-constexpr int kAndroidVersionP = 9;
 
 std::string GetHardwareFromCpuInfo(const std::string& cpu_info);
 

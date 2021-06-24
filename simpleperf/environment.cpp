@@ -23,6 +23,7 @@
 #include <string.h>
 #include <sys/resource.h>
 #include <sys/utsname.h>
+#include <unistd.h>
 
 #include <limits>
 #include <set>
@@ -54,16 +55,15 @@ namespace simpleperf {
 
 std::vector<int> GetOnlineCpus() {
   std::vector<int> result;
-  FILE* fp = fopen("/sys/devices/system/cpu/online", "re");
-  if (fp == nullptr) {
+  LineReader reader("/sys/devices/system/cpu/online");
+  if (!reader.Ok()) {
     PLOG(ERROR) << "can't open online cpu information";
     return result;
   }
 
-  LineReader reader(fp);
-  char* line;
+  std::string* line;
   if ((line = reader.ReadLine()) != nullptr) {
-    if (auto cpus = GetCpusFromString(line); cpus) {
+    if (auto cpus = GetCpusFromString(*line); cpus) {
       result.assign(cpus->begin(), cpus->end());
     }
   }
@@ -530,9 +530,10 @@ std::set<pid_t> WaitForAppProcesses(const std::string& package_name) {
 
 namespace {
 
-bool IsAppDebuggable(const std::string& user_id, const std::string& package_name) {
-  return Workload::RunCmd(
-      {"run-as", package_name, "--user", user_id, "echo", ">/dev/null", "2>/dev/null"}, false);
+bool IsAppDebuggable(int user_id, const std::string& package_name) {
+  return Workload::RunCmd({"run-as", package_name, "--user", std::to_string(user_id), "echo",
+                           ">/dev/null", "2>/dev/null"},
+                          false);
 }
 
 class InAppRunner {
@@ -674,14 +675,21 @@ class RunAs : public InAppRunner {
 
  protected:
   std::vector<std::string> GetPrefixArgs(const std::string& cmd) {
-    return {"run-as",
-            package_name_,
-            "--user",
-            user_id_,
-            simpleperf_copied_in_app_ ? "./simpleperf" : simpleperf_path_,
-            cmd,
-            "--app",
-            package_name_};
+    std::vector<std::string> args = {"run-as",
+                                     package_name_,
+                                     "--user",
+                                     user_id_,
+                                     simpleperf_copied_in_app_ ? "./simpleperf" : simpleperf_path_,
+                                     cmd,
+                                     "--app",
+                                     package_name_};
+    if (cmd == "record") {
+      if (simpleperf_copied_in_app_ || GetAndroidVersion() >= kAndroidVersionS) {
+        args.emplace_back("--add-meta-info");
+        args.emplace_back("app_type=debuggable");
+      }
+    }
+    return args;
   }
 
   bool simpleperf_copied_in_app_ = false;
@@ -689,10 +697,6 @@ class RunAs : public InAppRunner {
 };
 
 bool RunAs::Prepare() {
-  // Test if run-as can access the package.
-  if (!IsAppDebuggable(user_id_, package_name_)) {
-    return false;
-  }
   // run-as can't run /data/local/tmp/simpleperf directly. So copy simpleperf binary if needed.
   if (!android::base::Readlink("/proc/self/exe", &simpleperf_path_)) {
     PLOG(ERROR) << "ReadLink failed";
@@ -715,9 +719,13 @@ bool RunAs::Prepare() {
 
 class SimpleperfAppRunner : public InAppRunner {
  public:
-  SimpleperfAppRunner(int user_id, const std::string& package_name)
-      : InAppRunner(user_id, package_name) {}
-  bool Prepare() override { return GetAndroidVersion() >= kAndroidVersionP + 1; }
+  SimpleperfAppRunner(int user_id, const std::string& package_name, const std::string& app_type)
+      : InAppRunner(user_id, package_name) {
+    // On Android < S, the app type is unknown before running simpleperf_app_runner. Assume it's
+    // profileable.
+    app_type_ = app_type == "unknown" ? "profileable" : app_type;
+  }
+  bool Prepare() override { return GetAndroidVersion() >= kAndroidVersionQ; }
 
  protected:
   std::vector<std::string> GetPrefixArgs(const std::string& cmd) {
@@ -727,8 +735,14 @@ class SimpleperfAppRunner : public InAppRunner {
       args.emplace_back(user_id_);
     }
     args.emplace_back(cmd);
+    if (cmd == "record" && GetAndroidVersion() >= kAndroidVersionS) {
+      args.emplace_back("--add-meta-info");
+      args.emplace_back("app_type=" + app_type_);
+    }
     return args;
   }
+
+  std::string app_type_;
 };
 
 }  // namespace
@@ -755,21 +769,45 @@ static int GetCurrentUserId() {
   return 0;
 }
 
+std::string GetAppType(const std::string& app_package_name) {
+  if (GetAndroidVersion() < kAndroidVersionS) {
+    return "unknown";
+  }
+  std::string cmd = "simpleperf_app_runner " + app_package_name + " --show-app-type";
+  std::unique_ptr<FILE, decltype(&pclose)> fp(popen(cmd.c_str(), "re"), pclose);
+  if (fp) {
+    char buf[128];
+    if (fgets(buf, sizeof(buf), fp.get()) != nullptr) {
+      return android::base::Trim(buf);
+    }
+  }
+  // Can't get app_type. It means the app doesn't exist.
+  return "not_exist";
+}
+
 bool RunInAppContext(const std::string& app_package_name, const std::string& cmd,
                      const std::vector<std::string>& args, size_t workload_args_size,
                      const std::string& output_filepath, bool need_tracepoint_events) {
   int user_id = GetCurrentUserId();
   std::unique_ptr<InAppRunner> in_app_runner;
-  if (allow_run_as) {
+
+  std::string app_type = GetAppType(app_package_name);
+  if (app_type == "unknown" && IsAppDebuggable(user_id, app_package_name)) {
+    app_type = "debuggable";
+  }
+
+  if (allow_run_as && app_type == "debuggable") {
     in_app_runner.reset(new RunAs(user_id, app_package_name));
     if (!in_app_runner->Prepare()) {
       in_app_runner = nullptr;
     }
   }
   if (!in_app_runner && allow_simpleperf_app_runner) {
-    in_app_runner.reset(new SimpleperfAppRunner(user_id, app_package_name));
-    if (!in_app_runner->Prepare()) {
-      in_app_runner = nullptr;
+    if (app_type == "debuggable" || app_type == "profileable" || app_type == "unknown") {
+      in_app_runner.reset(new SimpleperfAppRunner(user_id, app_package_name, app_type));
+      if (!in_app_runner->Prepare()) {
+        in_app_runner = nullptr;
+      }
     }
   }
   if (!in_app_runner) {
@@ -793,6 +831,13 @@ void AllowMoreOpenedFiles() {
 
 std::string ScopedTempFiles::tmp_dir_;
 std::vector<std::string> ScopedTempFiles::files_to_delete_;
+
+std::unique_ptr<ScopedTempFiles> ScopedTempFiles::Create(const std::string& tmp_dir) {
+  if (access(tmp_dir.c_str(), W_OK | X_OK) != 0) {
+    return nullptr;
+  }
+  return std::unique_ptr<ScopedTempFiles>(new ScopedTempFiles(tmp_dir));
+}
 
 ScopedTempFiles::ScopedTempFiles(const std::string& tmp_dir) {
   CHECK(tmp_dir_.empty());  // No other ScopedTempFiles.
@@ -928,17 +973,16 @@ std::optional<std::pair<int, int>> GetKernelVersion() {
 
 std::optional<uid_t> GetProcessUid(pid_t pid) {
   std::string status_file = "/proc/" + std::to_string(pid) + "/status";
-  FILE* fp = fopen(status_file.c_str(), "re");
-  if (fp == nullptr) {
+  LineReader reader(status_file);
+  if (!reader.Ok()) {
     return std::nullopt;
   }
 
-  LineReader reader(fp);
-  char* line;
+  std::string* line;
   while ((line = reader.ReadLine()) != nullptr) {
-    if (android::base::StartsWith(line, "Uid:")) {
+    if (android::base::StartsWith(*line, "Uid:")) {
       uid_t uid;
-      if (sscanf(line + strlen("Uid:"), "%u", &uid) == 1) {
+      if (sscanf(line->data() + strlen("Uid:"), "%u", &uid) == 1) {
         return uid;
       }
     }

@@ -28,19 +28,13 @@
 #include <android-base/parseint.h>
 #include <android-base/strings.h>
 
+#include "ETMConstants.h"
+#include "environment.h"
 #include "utils.h"
 
 namespace simpleperf {
 
 static constexpr bool ETM_RECORD_TIMESTAMP = false;
-
-// Config bits from include/linux/coresight-pmu.h in the kernel
-// For etm_event_config:
-static constexpr int ETM_OPT_CTXTID = 14;
-static constexpr int ETM_OPT_TS = 28;
-// For etm_config_reg:
-static constexpr int ETM4_CFG_BIT_CTXTID = 6;
-static constexpr int ETM4_CFG_BIT_TS = 11;
 
 static const std::string ETM_DIR = "/sys/bus/event_source/devices/cs_etm/";
 
@@ -50,11 +44,13 @@ static int GetTraceId(int cpu) {
 }
 
 template <typename T>
-static bool ReadValueInEtmDir(const std::string& file, T* value, bool report_error = true) {
+static bool ReadValueInEtmDir(const std::string& file, T* value, bool report_error = true,
+                              const std::string& prefix = "") {
   std::string s;
   uint64_t v;
   if (!android::base::ReadFileToString(ETM_DIR + file, &s) ||
-      !android::base::ParseUint(android::base::Trim(s), &v)) {
+      !android::base::StartsWith(s, prefix) ||
+      !android::base::ParseUint(&android::base::Trim(s)[prefix.size()], &v)) {
     if (report_error) {
       LOG(ERROR) << "failed to read " << ETM_DIR << file;
     }
@@ -139,10 +135,18 @@ bool ETMRecorder::CheckEtmSupport() {
 }
 
 bool ETMRecorder::ReadEtmInfo() {
-  int cpu_count = get_nprocs_conf();
+  int contextid_value;
+  use_contextid2_ = ReadValueInEtmDir("/format/contextid", &contextid_value, false, "config:") &&
+                    contextid_value == ETM_OPT_CTXTID2;
+
+  std::vector<int> online_cpus = GetOnlineCpus();
   for (const auto& name : GetEntriesInDir(ETM_DIR)) {
     int cpu;
     if (sscanf(name.c_str(), "cpu%d", &cpu) == 1) {
+      // We can't read ETM registers for offline cpus. So skip them.
+      if (std::find(online_cpus.begin(), online_cpus.end(), cpu) == online_cpus.end()) {
+        continue;
+      }
       ETMPerCpu& cpu_info = etm_info_[cpu];
       bool success = ReadValueInEtmDir(name + "/trcidr/trcidr0", &cpu_info.trcidr0) &&
                      ReadValueInEtmDir(name + "/trcidr/trcidr1", &cpu_info.trcidr1) &&
@@ -155,18 +159,29 @@ bool ETMRecorder::ReadEtmInfo() {
       }
     }
   }
-  return (etm_info_.size() == cpu_count);
+  return (etm_info_.size() == online_cpus.size());
 }
 
 bool ETMRecorder::FindSinkConfig() {
+  bool has_etr = false;
+  bool has_trbe = false;
   for (const auto& name : GetEntriesInDir(ETM_DIR + "sinks")) {
-    if (name.find("etr") != -1) {
+    if (!has_etr && name.find("etr") != -1) {
       if (ReadValueInEtmDir("sinks/" + name, &sink_config_)) {
-        return true;
+        has_etr = true;
       }
     }
+    if (name.find("trbe") != -1) {
+      has_trbe = true;
+      break;
+    }
   }
-  return false;
+  if (has_trbe) {
+    // When TRBE is present, let the driver choose the most suitable
+    // configuration.
+    sink_config_ = 0;
+  }
+  return has_trbe || has_etr;
 }
 
 void ETMRecorder::SetEtmPerfEventAttr(perf_event_attr* attr) {
@@ -178,8 +193,14 @@ void ETMRecorder::SetEtmPerfEventAttr(perf_event_attr* attr) {
 
 void ETMRecorder::BuildEtmConfig() {
   if (etm_event_config_ == 0) {
-    etm_event_config_ |= 1ULL << ETM_OPT_CTXTID;
-    etm_config_reg_ |= 1U << ETM4_CFG_BIT_CTXTID;
+    if (use_contextid2_) {
+      etm_event_config_ |= 1ULL << ETM_OPT_CTXTID2;
+      etm_config_reg_ |= 1U << ETM4_CFG_BIT_VMID;
+      etm_config_reg_ |= 1U << ETM4_CFG_BIT_VMID_OPT;
+    } else {
+      etm_event_config_ |= 1ULL << ETM_OPT_CTXTID;
+      etm_config_reg_ |= 1U << ETM4_CFG_BIT_CTXTID;
+    }
 
     if (ETM_RECORD_TIMESTAMP) {
       bool ts_supported = true;
