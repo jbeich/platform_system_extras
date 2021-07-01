@@ -58,6 +58,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d917bdf0_a6460c23",
+        "filename": "simpleperf/doc/collect_etm_data_for_autofdo.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-07-01T18:49:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "da40b5c8_5496a2b2",
+      "range": {
+        "startLine": 3,
+        "startChar": 9,
+        "endLine": 3,
+        "endChar": 17
+      },
+      "revId": "a2af28e1e1700fe9607d1593fbfc143d25c585b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "62944057_934e0c93",
@@ -104,6 +128,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5b80932_c36fbda6",
+        "filename": "simpleperf/doc/collect_etm_data_for_autofdo.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-07-01T18:49:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0f534d56_a1255dd7",
+      "range": {
+        "startLine": 6,
+        "startChar": 22,
+        "endLine": 6,
+        "endChar": 36
+      },
+      "revId": "a2af28e1e1700fe9607d1593fbfc143d25c585b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "17311d02_c08b5300",
+        "filename": "simpleperf/doc/collect_etm_data_for_autofdo.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-07-01T18:49:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "62944057_934e0c93",
+      "range": {
+        "startLine": 6,
+        "startChar": 51,
+        "endLine": 6,
+        "endChar": 53
+      },
+      "revId": "a2af28e1e1700fe9607d1593fbfc143d25c585b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "99e40a49_ef259dc7",
@@ -117,6 +189,30 @@
       "writtenOn": "2021-07-01T16:35:16Z",
       "side": 1,
       "message": "the",
+      "range": {
+        "startLine": 9,
+        "startChar": 2,
+        "endLine": 9,
+        "endChar": 3
+      },
+      "revId": "a2af28e1e1700fe9607d1593fbfc143d25c585b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a0031d9_e9880287",
+        "filename": "simpleperf/doc/collect_etm_data_for_autofdo.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-07-01T18:49:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "99e40a49_ef259dc7",
       "range": {
         "startLine": 9,
         "startChar": 2,
@@ -150,6 +246,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5e447e5_c0dd7263",
+        "filename": "simpleperf/doc/collect_etm_data_for_autofdo.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-07-01T18:49:16Z",
+      "side": 1,
+      "message": "Done. Also keep the list for people who want to know workable devices.",
+      "parentUuid": "636078be_9a915519",
+      "range": {
+        "startLine": 10,
+        "startChar": 12,
+        "endLine": 10,
+        "endChar": 40
+      },
+      "revId": "a2af28e1e1700fe9607d1593fbfc143d25c585b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ee07924f_cc37545c",
@@ -173,6 +293,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a67a4ec_89fae1cc",
+        "filename": "simpleperf/doc/collect_etm_data_for_autofdo.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-07-01T18:49:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee07924f_cc37545c",
+      "range": {
+        "startLine": 12,
+        "startChar": 30,
+        "endLine": 12,
+        "endChar": 33
+      },
+      "revId": "a2af28e1e1700fe9607d1593fbfc143d25c585b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bfee72f9_3628b262",
@@ -186,6 +330,30 @@
       "writtenOn": "2021-07-01T16:35:16Z",
       "side": 1,
       "message": "\"aosp-top\" instead?",
+      "range": {
+        "startLine": 51,
+        "startChar": 25,
+        "endLine": 51,
+        "endChar": 36
+      },
+      "revId": "a2af28e1e1700fe9607d1593fbfc143d25c585b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "66010bec_9d5426a3",
+        "filename": "simpleperf/doc/collect_etm_data_for_autofdo.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-07-01T18:49:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bfee72f9_3628b262",
       "range": {
         "startLine": 51,
         "startChar": 25,
