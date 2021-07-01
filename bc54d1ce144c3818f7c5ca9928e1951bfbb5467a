@@ -16,6 +16,125 @@
       "message": "ps3, 4: also add section for profcollectd.",
       "revId": "bc54d1ce144c3818f7c5ca9928e1951bfbb5467a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e55079a_cfa4097c",
+        "filename": "simpleperf/doc/collect_etm_data_for_autofdo.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2021-07-01T18:59:13Z",
+      "side": 1,
+      "message": "It collects the instruction ...",
+      "revId": "bc54d1ce144c3818f7c5ca9928e1951bfbb5467a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65353f9b_a9d77742",
+        "filename": "simpleperf/doc/collect_etm_data_for_autofdo.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2021-07-01T18:59:13Z",
+      "side": 1,
+      "message": "s/Android/ARM/",
+      "revId": "bc54d1ce144c3818f7c5ca9928e1951bfbb5467a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21507034_72060f8b",
+        "filename": "simpleperf/doc/collect_etm_data_for_autofdo.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2021-07-01T18:59:13Z",
+      "side": 1,
+      "message": "s/etm/ETM/\n\ns/convert/converting/",
+      "revId": "bc54d1ce144c3818f7c5ca9928e1951bfbb5467a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0efb7995_e2c817d6",
+        "filename": "simpleperf/doc/collect_etm_data_for_autofdo.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2021-07-01T18:59:13Z",
+      "side": 1,
+      "message": "s/etm/ETM/\n\nWhat is \"injection time?\"",
+      "revId": "bc54d1ce144c3818f7c5ca9928e1951bfbb5467a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6f9f0cf_4a36343f",
+        "filename": "simpleperf/doc/collect_etm_data_for_autofdo.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2021-07-01T18:59:13Z",
+      "side": 1,
+      "message": "Is this necessary for the kernel, and/or kernel modules?",
+      "revId": "bc54d1ce144c3818f7c5ca9928e1951bfbb5467a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01fb0c69_bc288f0d",
+        "filename": "simpleperf/doc/collect_etm_data_for_autofdo.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2021-07-01T18:59:13Z",
+      "side": 1,
+      "message": "Consider linking to https://github.com/google/autofdo.",
+      "revId": "bc54d1ce144c3818f7c5ca9928e1951bfbb5467a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "880713a4_dc1adc03",
+        "filename": "simpleperf/doc/collect_etm_data_for_autofdo.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2021-07-01T18:59:13Z",
+      "side": 1,
+      "message": "Maybe include a following paragraph that `a.prof` from `create_llvm_prof` should be fed back into clang via: -fprofile-sample-use\u003da.prof.\n\nConsider linking to: https://clang.llvm.org/docs/UsersManual.html#using-sampling-profilers",
+      "revId": "bc54d1ce144c3818f7c5ca9928e1951bfbb5467a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
