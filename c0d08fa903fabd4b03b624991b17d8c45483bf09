@@ -56,6 +56,30 @@
       },
       "revId": "c0d08fa903fabd4b03b624991b17d8c45483bf09",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff3543da_4066c590",
+        "filename": "simpleperf/doc/collect_etm_data_for_autofdo.md",
+        "patchSetId": 6
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-07-02T16:53:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aeac7511_f13cbffe",
+      "range": {
+        "startLine": 35,
+        "startChar": 9,
+        "endLine": 35,
+        "endChar": 27
+      },
+      "revId": "c0d08fa903fabd4b03b624991b17d8c45483bf09",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
