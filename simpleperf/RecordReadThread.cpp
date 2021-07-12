@@ -487,6 +487,12 @@ bool RecordReadThread::ReadRecordsFromKernelBuffer() {
     if (!has_data) {
       break;
     }
+    // Having collected everything available, this is a good time to
+    // try to re-enabled any events that might have been disabled by
+    // the kernel.
+    for (auto& reader : kernel_record_readers_) {
+      reader.SetDisabled(false);
+    }
     if (!SendDataNotificationToMainThread()) {
       return false;
     }
@@ -568,6 +574,13 @@ void RecordReadThread::PushRecordToRecordBuffer(KernelRecordReader* kernel_recor
   char* p = record_buffer_.AllocWriteSpace(header.size);
   if (p != nullptr) {
     kernel_record_reader->ReadRecord(0, header.size, p);
+    if (header.type == PERF_RECORD_AUX) {
+      AuxRecord r{attr_, p};
+      if (r.data->flags & PERF_AUX_FLAG_TRUNCATED) {
+        // The kernel disables the perf event on truncated records.
+        kernel_record_reader->SetDisabled(true);
+      }
+    }
     record_buffer_.FinishWrite();
   } else {
     if (header.type == PERF_RECORD_SAMPLE) {

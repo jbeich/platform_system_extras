@@ -110,6 +110,12 @@ class KernelRecordReader {
   void ReadRecord(size_t pos, size_t size, void* dest);
   // Move to the next record, return false if there is no more records.
   bool MoveToNextRecord(const RecordParser& parser);
+  void SetDisabled(bool disabled) {
+    if (!disabled && disabled_) {
+      event_fd_->SetEnableEvent(true);
+    }
+    disabled_ = disabled;
+  }
 
  private:
   EventFd* event_fd_;
@@ -120,6 +126,7 @@ class KernelRecordReader {
   size_t init_data_size_ = 0;
   perf_event_header record_header_ = {};
   uint64_t record_time_ = 0;
+  bool disabled_ = false;
 };
 
 // To reduce sample lost rate when recording dwarf based call graph, RecordReadThread uses a
