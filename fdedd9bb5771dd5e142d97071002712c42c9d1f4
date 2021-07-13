@@ -1,0 +1,160 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000013145119",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1764365?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "17fb5c39_4aabb7c5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-07-13T09:23:14Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027complex\u0027, \u0027unexpected\u0027, or \u0027placeholder\u0027; see https://developers.google.com/style/inclusive-documentation#ableist-language for more details. In the case of a false positive add BYPASS_INCLUSIVE_LANGUAGE_REASON\u003dmy_reason_here to your commit message to disable this check.",
+      "range": {
+        "startLine": 7,
+        "startChar": 14,
+        "endLine": 7,
+        "endChar": 19
+      },
+      "revId": "fdedd9bb5771dd5e142d97071002712c42c9d1f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000013145119",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1764365?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "b5c58ad8_5af4bad0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-07-13T09:23:14Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027complex\u0027, \u0027unexpected\u0027, or \u0027placeholder\u0027; see https://developers.google.com/style/inclusive-documentation#ableist-language for more details. In the case of a false positive add BYPASS_INCLUSIVE_LANGUAGE_REASON\u003dmy_reason_here to your commit message to disable this check.",
+      "range": {
+        "startLine": 9,
+        "startChar": 10,
+        "endLine": 9,
+        "endChar": 15
+      },
+      "revId": "fdedd9bb5771dd5e142d97071002712c42c9d1f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000013145119",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1764365?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "42ba1b3a_39e08aff",
+        "filename": "profcollectd/libprofcollectd/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-07-13T09:23:14Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027complex\u0027, \u0027unexpected\u0027, or \u0027placeholder\u0027; see https://developers.google.com/style/inclusive-documentation#ableist-language for more details. In the case of a false positive add BYPASS_INCLUSIVE_LANGUAGE_REASON\u003dmy_reason_here to your commit message to disable this check.",
+      "range": {
+        "startLine": 64,
+        "startChar": 62,
+        "endLine": 64,
+        "endChar": 67
+      },
+      "revId": "fdedd9bb5771dd5e142d97071002712c42c9d1f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000013145119",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1764365?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "98b4811b_8038d364",
+        "filename": "profcollectd/libprofcollectd/dummy_trace_provider.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-07-13T09:23:14Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027complex\u0027, \u0027unexpected\u0027, or \u0027placeholder\u0027; see https://developers.google.com/style/inclusive-documentation#ableist-language for more details. In the case of a false positive add BYPASS_INCLUSIVE_LANGUAGE_REASON\u003dmy_reason_here to your commit message to disable this check.",
+      "range": {
+        "startLine": 17,
+        "startChar": 4,
+        "endLine": 17,
+        "endChar": 9
+      },
+      "revId": "fdedd9bb5771dd5e142d97071002712c42c9d1f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000013145119",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1764365?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "ee9665d0_6f053f12",
+        "filename": "profcollectd/libprofcollectd/dummy_trace_provider.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-07-13T09:23:14Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027complex\u0027, \u0027unexpected\u0027, or \u0027placeholder\u0027; see https://developers.google.com/style/inclusive-documentation#ableist-language for more details. In the case of a false positive add BYPASS_INCLUSIVE_LANGUAGE_REASON\u003dmy_reason_here to your commit message to disable this check.",
+      "range": {
+        "startLine": 32,
+        "startChar": 9,
+        "endLine": 32,
+        "endChar": 14
+      },
+      "revId": "fdedd9bb5771dd5e142d97071002712c42c9d1f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000013145119",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/1764365?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "0c1ab69d_7f6b49bd",
+        "filename": "profcollectd/libprofcollectd/trace_provider.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2021-07-13T09:23:14Z",
+      "side": 1,
+      "message": "Prefer to use inclusive terms like \u0027complex\u0027, \u0027unexpected\u0027, or \u0027placeholder\u0027; see https://developers.google.com/style/inclusive-documentation#ableist-language for more details. In the case of a false positive add BYPASS_INCLUSIVE_LANGUAGE_REASON\u003dmy_reason_here to your commit message to disable this check.",
+      "range": {
+        "startLine": 44,
+        "startChar": 20,
+        "endLine": 44,
+        "endChar": 25
+      },
+      "revId": "fdedd9bb5771dd5e142d97071002712c42c9d1f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
