@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9825f7af_8b684316",
+        "filename": "profcollectd/libprofcollectd/bindings/libbase/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1087625
+      },
+      "writtenOn": "2021-07-14T06:32:45Z",
+      "side": 1,
+      "message": "GetProperty and SetProperty.",
+      "range": {
+        "startLine": 21,
+        "startChar": 4,
+        "endLine": 21,
+        "endChar": 54
+      },
+      "revId": "d04fd4a791f465abd7d62c94455a490322facf88",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
