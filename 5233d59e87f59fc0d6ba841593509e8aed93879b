@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92b809c5_56f6dba7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-07-14T17:21:53Z",
+      "side": 1,
+      "message": "What\u0027s the related kernel patch? It\u0027s somewhat unexpected to me that kernel disables perf event when aux buffer is full.",
+      "revId": "5233d59e87f59fc0d6ba841593509e8aed93879b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
