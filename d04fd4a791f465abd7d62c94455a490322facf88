@@ -46,6 +46,30 @@
       },
       "revId": "d04fd4a791f465abd7d62c94455a490322facf88",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5926afd_dcd4e8c4",
+        "filename": "profcollectd/libprofcollectd/bindings/libbase/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1087625
+      },
+      "writtenOn": "2021-07-14T15:39:08Z",
+      "side": 1,
+      "message": "Thanks!",
+      "parentUuid": "b5a87c02_4e5ac78c",
+      "range": {
+        "startLine": 21,
+        "startChar": 4,
+        "endLine": 21,
+        "endChar": 54
+      },
+      "revId": "d04fd4a791f465abd7d62c94455a490322facf88",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
