@@ -16,6 +16,24 @@
       "message": "What\u0027s the related kernel patch? It\u0027s somewhat unexpected to me that kernel disables perf event when aux buffer is full.",
       "revId": "5233d59e87f59fc0d6ba841593509e8aed93879b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53bf814e_3ce6167b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1626440
+      },
+      "writtenOn": "2021-07-14T18:38:20Z",
+      "side": 1,
+      "message": "There\u0027s no direct patch that I know of. When the kernel sees aux output flagged with PERF_AUX_FLAG_TRUNCATED, it sets a pending disable on the event: https://elixir.bootlin.com/linux/v5.13/source/kernel/events/ring_buffer.c#L517\n\nThe truncated flag is set by the Coresight driver when some trace was lost, which can be caused by a full buffer. There are other cases too, but afaik userspace does not need to do anything about those. (Other than re-enabling the event.)\n\nThis is interesting for TRBE because it gets an interrupt when the buffer is full. simpleperf then can collect the trace. But after that nothing happens until the periodic \u0027etm_flush\u0027 re-enables the event. With this patch it gets a nice steady flow of trace.",
+      "parentUuid": "92b809c5_56f6dba7",
+      "revId": "5233d59e87f59fc0d6ba841593509e8aed93879b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
