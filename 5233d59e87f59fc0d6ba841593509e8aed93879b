@@ -54,6 +54,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b65078d_5b449ad6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1626440
+      },
+      "writtenOn": "2021-07-15T13:06:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9de4a743_181a2203",
+      "revId": "5233d59e87f59fc0d6ba841593509e8aed93879b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "912a61d4_a6bd30d9",
@@ -67,6 +85,30 @@
       "writtenOn": "2021-07-14T22:30:18Z",
       "side": 1,
       "message": "The SetDisabled() function isn\u0027t very related to KernelRecordReader class. So I feel it\u0027s better to operate event_fd-\u003eSetEnabledEvent() directly. How about we store event_fds needing reenable in RecordReadThread, like std::unordered_set\u003cEventFd*\u003e event_fds_disabled_by_truncated_events_?",
+      "range": {
+        "startLine": 581,
+        "startChar": 30,
+        "endLine": 581,
+        "endChar": 41
+      },
+      "revId": "5233d59e87f59fc0d6ba841593509e8aed93879b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "27cf3e11_1f26a465",
+        "filename": "simpleperf/RecordReadThread.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 581,
+      "author": {
+        "id": 1626440
+      },
+      "writtenOn": "2021-07-15T13:06:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "912a61d4_a6bd30d9",
       "range": {
         "startLine": 581,
         "startChar": 30,
