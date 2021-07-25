@@ -22,6 +22,7 @@ cc_library {
     host_supported: true,
     ramdisk_available: true,
     recovery_available: true,
+    vendor_ramdisk_available: true,
     srcs: [
         "ext4_utils.cpp",
         "wipe.cpp",
