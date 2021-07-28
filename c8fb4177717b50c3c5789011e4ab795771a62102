@@ -16,6 +16,24 @@
       "message": "Yi, can you test this as well?",
       "revId": "c8fb4177717b50c3c5789011e4ab795771a62102",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c379fd6f_aa7576fa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1087625
+      },
+      "writtenOn": "2021-07-28T16:53:12Z",
+      "side": 1,
+      "message": "Sorry I missed this CL. Verified this works as intended.",
+      "parentUuid": "386a4a40_7e1d787f",
+      "revId": "c8fb4177717b50c3c5789011e4ab795771a62102",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
