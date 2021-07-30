@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "33cb5f6e_f744a197",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2021-07-30T16:53:27Z",
+      "side": 1,
+      "message": "did this ever work correctly? 2012 me thought it was something different even when it wasn\u0027t deprecated: http://elliotth.blogspot.com/2012/04/gettid-on-mac-os.html",
+      "revId": "acb1c17e31effdb77d4b18b98150538abca51a2b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
