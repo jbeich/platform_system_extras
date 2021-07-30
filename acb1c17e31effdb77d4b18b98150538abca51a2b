@@ -16,6 +16,24 @@
       "message": "did this ever work correctly? 2012 me thought it was something different even when it wasn\u0027t deprecated: http://elliotth.blogspot.com/2012/04/gettid-on-mac-os.html",
       "revId": "acb1c17e31effdb77d4b18b98150538abca51a2b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5359837_99282e5c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2021-07-30T17:22:30Z",
+      "side": 1,
+      "message": "Yeah... not sure. I had found that, but that was the only reference I could find either way, and I didn\u0027t feel like digging into the code to verify the current state.",
+      "parentUuid": "33cb5f6e_f744a197",
+      "revId": "acb1c17e31effdb77d4b18b98150538abca51a2b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
