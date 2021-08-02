@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8406fbe8_5ce13244",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-08-02T20:57:11Z",
+      "side": 1,
+      "message": "seems duplicate with duplicate with https://android-review.googlesource.com/c/platform/system/extras/+/1774788? I prefer to that one if both work.",
+      "revId": "2aa4ae0a72b9518d3fd771487e5adb27d03ff79d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
