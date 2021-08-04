@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9399de27_ca0a494e",
+        "filename": "simpleperf/doc/collect_etm_data_for_autofdo.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-08-04T18:19:19Z",
+      "side": 1,
+      "message": "Can you link to https://github.com/android/ndk/issues as well?",
+      "parentUuid": "ce3a8e1f_088df82d",
+      "range": {
+        "startLine": 115,
+        "startChar": 22,
+        "endLine": 115,
+        "endChar": 78
+      },
+      "revId": "33ca302f065f9dcb1ed602f601ce004e2b839513",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3b23bcd1_c1d876b9",
         "filename": "simpleperf/doc/collect_etm_data_for_autofdo.md",
         "patchSetId": 1
