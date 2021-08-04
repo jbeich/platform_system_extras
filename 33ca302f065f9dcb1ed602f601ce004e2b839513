@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9933ea52_ac4c3a86",
+        "filename": "simpleperf/doc/collect_etm_data_for_autofdo.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-08-04T16:20:09Z",
+      "side": 1,
+      "message": "Change this to: `Please email \u003calias\u003e if you need...`",
+      "range": {
+        "startLine": 115,
+        "startChar": 22,
+        "endLine": 115,
+        "endChar": 78
+      },
+      "revId": "33ca302f065f9dcb1ed602f601ce004e2b839513",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b23bcd1_c1d876b9",
+        "filename": "simpleperf/doc/collect_etm_data_for_autofdo.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-08-04T16:20:09Z",
+      "side": 1,
+      "message": "`Coresight driver`?",
+      "range": {
+        "startLine": 117,
+        "startChar": 8,
+        "endLine": 117,
+        "endChar": 18
+      },
+      "revId": "33ca302f065f9dcb1ed602f601ce004e2b839513",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7eddf39c_820f84ec",
+        "filename": "simpleperf/doc/collect_etm_data_for_autofdo.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-08-04T16:20:09Z",
+      "side": 1,
+      "message": "Link to https://android.googlesource.com/kernel/msm/+/android-7.1.0_r0.2/arch/arm64/boot/dts/arm/juno-base.dtsi or a better link.",
+      "range": {
+        "startLine": 118,
+        "startChar": 0,
+        "endLine": 118,
+        "endChar": 54
+      },
+      "revId": "33ca302f065f9dcb1ed602f601ce004e2b839513",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9c719da_8ffb5311",
+        "filename": "simpleperf/doc/collect_etm_data_for_autofdo.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-08-04T16:20:09Z",
+      "side": 1,
+      "message": "Looking at juno-base.dtsi, the steps here sort of make sense but there are lots of details involved.  If this is not common knowledge for the target audience, consider linking to additional public documentation.",
+      "range": {
+        "startLine": 118,
+        "startChar": 75,
+        "endLine": 118,
+        "endChar": 87
+      },
+      "revId": "33ca302f065f9dcb1ed602f601ce004e2b839513",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe1c2d6b_84dd57b7",
+        "filename": "simpleperf/doc/collect_etm_data_for_autofdo.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-08-04T16:20:09Z",
+      "side": 1,
+      "message": "Can we provide a link with instructions for doing this?",
+      "range": {
+        "startLine": 130,
+        "startChar": 7,
+        "endLine": 130,
+        "endChar": 47
+      },
+      "revId": "33ca302f065f9dcb1ed602f601ce004e2b839513",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
