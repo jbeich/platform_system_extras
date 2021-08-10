@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b8edb8e_f91fe6df",
+        "filename": "ext4_utils/mke2fs.conf",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1794349
+      },
+      "writtenOn": "2021-08-10T02:04:30Z",
+      "side": 0,
+      "message": "This change removes resize_inode configuration, which causes android-R compilation errors when system.img \u003e 4GB。 The error message is:\"ExternalError: Failed to run command \u0027[\u0027e2fsck\u0027, \u0027-f\u0027, \u0027-n\u0027, \u0027/home/work/data/miui_codes/build_home_rom/out/target/product/ares/obj/PACKAGING/target_files_intermediates/ares-target_files-0.0.0/IMAGES/unsparse_system.img\u0027]\u0027 (exit code 12):e2fsck 1.45.4 (23-Sep-2019)\"，How should I deal with this situation。",
+      "range": {
+        "startLine": 2,
+        "startChar": 53,
+        "endLine": 2,
+        "endChar": 65
+      },
+      "revId": "2658a27ac27defed751ebffed305cdfef0cffdb3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
