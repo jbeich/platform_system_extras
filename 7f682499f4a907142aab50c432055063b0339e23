@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5bcca19e_9b468cf8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1272573
+      },
+      "writtenOn": "2021-08-12T03:59:45Z",
+      "side": 1,
+      "message": "Hi Yabin. I\u0027m not usually an Android person, but I\u0027ve been getting into simpleperf and I\u0027d like to contribute to the docs. This is my first change, a simple change as a test for how to get through the Android workflow. Thanks!",
+      "revId": "7f682499f4a907142aab50c432055063b0339e23",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
