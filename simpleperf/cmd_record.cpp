@@ -500,8 +500,17 @@ bool RecordCommand::PrepareRecording(Workload* workload) {
 
   // 2. Add default event type.
   if (event_selection_set_.empty()) {
+    std::string event_type = default_measured_event_type;
+    if (GetBuildArch() == ARCH_X86_32 || GetBuildArch() == ARCH_X86_64) {
+      // Emulators may not support hardware events. So switch to cpu-clock when cpu-cycles isn't
+      // available.
+      if (!IsHardwareEventSupported()) {
+        event_type = "cpu-clock";
+        LOG(INFO) << "Hardware events are not available, switch to cpu-clock.";
+      }
+    }
     size_t group_id;
-    if (!event_selection_set_.AddEventType(default_measured_event_type, &group_id)) {
+    if (!event_selection_set_.AddEventType(event_type, &group_id)) {
       return false;
     }
     if (sample_speed_) {

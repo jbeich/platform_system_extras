@@ -145,6 +145,15 @@ bool IsMmap2Supported() {
   return IsEventAttrSupported(attr, type->name);
 }
 
+bool IsHardwareEventSupported() {
+  const EventType* type = FindEventTypeByName("cpu-cycles");
+  if (type == nullptr) {
+    return false;
+  }
+  perf_event_attr attr = CreateDefaultPerfEventAttr(*type);
+  return IsEventAttrSupported(attr, type->name);
+}
+
 std::string AddrFilter::ToString() const {
   switch (type) {
     case FILE_RANGE:
