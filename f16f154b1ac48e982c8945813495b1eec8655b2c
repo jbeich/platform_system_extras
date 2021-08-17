@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c151a00_9bcfe3d4",
+        "filename": "profcollectd/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-08-17T07:31:54Z",
+      "side": 1,
+      "message": "needs",
+      "range": {
+        "startLine": 42,
+        "startChar": 21,
+        "endLine": 42,
+        "endChar": 25
+      },
+      "revId": "f16f154b1ac48e982c8945813495b1eec8655b2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "667d6d36_1767a294",
+        "filename": "profcollectd/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-08-17T07:31:54Z",
+      "side": 1,
+      "message": "done separately from",
+      "range": {
+        "startLine": 43,
+        "startChar": 37,
+        "endLine": 43,
+        "endChar": 56
+      },
+      "revId": "f16f154b1ac48e982c8945813495b1eec8655b2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ceb1bc61_4ca89248",
+        "filename": "profcollectd/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-08-17T07:31:54Z",
+      "side": 1,
+      "message": "a",
+      "range": {
+        "startLine": 44,
+        "startChar": 75,
+        "endLine": 44,
+        "endChar": 76
+      },
+      "revId": "f16f154b1ac48e982c8945813495b1eec8655b2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36563228_7303e90f",
+        "filename": "profcollectd/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-08-17T07:31:54Z",
+      "side": 1,
+      "message": "generates",
+      "range": {
+        "startLine": 108,
+        "startChar": 26,
+        "endLine": 108,
+        "endChar": 34
+      },
+      "revId": "f16f154b1ac48e982c8945813495b1eec8655b2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
