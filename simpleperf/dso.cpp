@@ -30,6 +30,10 @@
 #include <android-base/logging.h>
 #include <android-base/strings.h>
 
+#ifdef RUST_DEMANGLING
+#include <rustc_demangle.h>
+#endif
+
 #include "JITDebugReader.h"
 #include "environment.h"
 #include "kallsyms.h"
@@ -277,6 +281,13 @@ std::string Dso::Demangle(const std::string& name) {
   }
   std::string result = name;
   char* demangled_name = __cxa_demangle(mangled_str, nullptr, nullptr, &status);
+
+#ifdef RUST_DEMANGLING
+  if (status != 0) {
+    demangled_name = rustc_demangle(mangled_str, nullptr, nullptr, &status);
+  }
+#endif
+
   if (status == 0) {
     if (is_linker_symbol) {
       result = std::string("[linker]") + demangled_name;

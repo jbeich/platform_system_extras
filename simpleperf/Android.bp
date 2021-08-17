@@ -114,6 +114,14 @@ cc_defaults {
         "libopencsd_decoder",
     ],
     target: {
+        not_windows: {
+            static_libs: [
+                "librustc_demangle_static",
+            ],
+            cflags: [
+                "-DRUST_DEMANGLING",
+            ],
+        },
         linux: {
             static_libs: [
                 "libunwindstack",
