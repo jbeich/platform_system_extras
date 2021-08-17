@@ -63,6 +63,30 @@
       },
       "revId": "1e16b20c973bf8ac7fa5207bab3cfff3fc1249c3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "858c02be_a84ff9c6",
+        "filename": "simpleperf/report_utils.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-08-17T01:12:01Z",
+      "side": 1,
+      "message": "True that this level of refactor is probably better left until we need it. I\u0027m satisfied keeping it like this too.",
+      "parentUuid": "c102fb44_252b00c2",
+      "range": {
+        "startLine": 226,
+        "startChar": 27,
+        "endLine": 226,
+        "endChar": 51
+      },
+      "revId": "1e16b20c973bf8ac7fa5207bab3cfff3fc1249c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
