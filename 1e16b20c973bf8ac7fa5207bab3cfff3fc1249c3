@@ -16,6 +16,29 @@
       "message": "ps2: add comment",
       "revId": "1e16b20c973bf8ac7fa5207bab3cfff3fc1249c3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe1c2577_3fcbce0f",
+        "filename": "simpleperf/report_utils.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-08-17T00:05:45Z",
+      "side": 1,
+      "message": "Do we ever want the original name with the parentheses? Should this functionality just move into DemangledName() instead? Subclass as JITSymbol?",
+      "range": {
+        "startLine": 226,
+        "startChar": 27,
+        "endLine": 226,
+        "endChar": 51
+      },
+      "revId": "1e16b20c973bf8ac7fa5207bab3cfff3fc1249c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
