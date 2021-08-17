@@ -39,6 +39,30 @@
       },
       "revId": "1e16b20c973bf8ac7fa5207bab3cfff3fc1249c3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c102fb44_252b00c2",
+        "filename": "simpleperf/report_utils.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-08-17T00:58:18Z",
+      "side": 1,
+      "message": "Simpleperf shows signature for C++ symbols, but only shows method names for JVM symbols. For JIT method, I think it\u0027s fine to be either, maybe the signature one is slightly better for providing more info.\n\nDemangledName() is to show demangled c++ name. But unfortunately it is used to set deobfuscated java name here. Currently I feel it\u0027s better not to hide more logic in it. In the future, maybe we can rename the functions of struct Symbol: Name() -\u003e RawName(), DemangledName() -\u003e Name(). And add some flags in struct Symbol. But currently I feel the refactor is a little overkill.",
+      "parentUuid": "fe1c2577_3fcbce0f",
+      "range": {
+        "startLine": 226,
+        "startChar": 27,
+        "endLine": 226,
+        "endChar": 51
+      },
+      "revId": "1e16b20c973bf8ac7fa5207bab3cfff3fc1249c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
