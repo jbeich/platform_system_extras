@@ -16,6 +16,46 @@
       "message": "ping?",
       "revId": "1e8b3d6740e46fa8cd0c367478f92e9614ca177d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf32d3c6_42bb04bb",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 504,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-08-19T17:44:13Z",
+      "side": 1,
+      "message": "The `Build` part of this name forced me to go look up whether this had to do with the machine it was \"built\" on or what it is targeting. A future renaming might be helpful here. `GetTargetArch()` would be one suggestion that is more obvious for reviewers like me.",
+      "range": {
+        "startLine": 504,
+        "startChar": 8,
+        "endLine": 504,
+        "endChar": 20
+      },
+      "revId": "1e8b3d6740e46fa8cd0c367478f92e9614ca177d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a459297c_af5631d7",
+        "filename": "simpleperf/event_selection_set.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-08-19T17:44:13Z",
+      "side": 1,
+      "message": "Do you want to cache the result of this operation? Does it happen frequently enough to justify that?",
+      "revId": "1e8b3d6740e46fa8cd0c367478f92e9614ca177d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
