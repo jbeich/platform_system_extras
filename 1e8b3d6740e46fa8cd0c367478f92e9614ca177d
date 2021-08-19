@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "693efdb3_c684d6ee",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 504,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-08-19T18:00:20Z",
+      "side": 1,
+      "message": "Done. Renamed GetBuildArch to GetTargetArch.",
+      "parentUuid": "cf32d3c6_42bb04bb",
+      "range": {
+        "startLine": 504,
+        "startChar": 8,
+        "endLine": 504,
+        "endChar": 20
+      },
+      "revId": "1e8b3d6740e46fa8cd0c367478f92e9614ca177d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a459297c_af5631d7",
@@ -54,6 +78,24 @@
       "writtenOn": "2021-08-19T17:44:13Z",
       "side": 1,
       "message": "Do you want to cache the result of this operation? Does it happen frequently enough to justify that?",
+      "revId": "1e8b3d6740e46fa8cd0c367478f92e9614ca177d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "789a5f86_06842486",
+        "filename": "simpleperf/event_selection_set.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-08-19T18:00:20Z",
+      "side": 1,
+      "message": "I think no need. called \u003c\u003d1 time when running record cmd.",
+      "parentUuid": "a459297c_af5631d7",
       "revId": "1e8b3d6740e46fa8cd0c367478f92e9614ca177d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
