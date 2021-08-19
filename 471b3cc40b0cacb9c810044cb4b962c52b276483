@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd48e26a_d085a3cd",
+        "filename": "simpleperf/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-08-19T21:08:30Z",
+      "side": 1,
+      "message": "The below strings don\u0027t mention `N`. Should it be in all the places?",
+      "range": {
+        "startLine": 55,
+        "startChar": 79,
+        "endLine": 55,
+        "endChar": 81
+      },
+      "revId": "471b3cc40b0cacb9c810044cb4b962c52b276483",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed3eefff_f26f4386",
+        "filename": "simpleperf/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-08-19T21:08:30Z",
+      "side": 1,
+      "message": "a",
+      "range": {
+        "startLine": 61,
+        "startChar": 25,
+        "endLine": 61,
+        "endChar": 26
+      },
+      "revId": "471b3cc40b0cacb9c810044cb4b962c52b276483",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "645a99d5_45d4acc0",
+        "filename": "simpleperf/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-08-19T21:08:30Z",
+      "side": 1,
+      "message": "It\u0027s usually more obvious if you put the trailing `/` here too, so `out/` would be more obvious for people reading along.",
+      "range": {
+        "startLine": 87,
+        "startChar": 36,
+        "endLine": 87,
+        "endChar": 37
+      },
+      "revId": "471b3cc40b0cacb9c810044cb4b962c52b276483",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
