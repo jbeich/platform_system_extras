@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "975dca7d_c05bd756",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-08-20T20:03:24Z",
+      "side": 1,
+      "message": "+1 but please wait for Yabin\u0027s approval.",
+      "revId": "16344025cef323c4ebe21af724ad9135353a1ced",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
