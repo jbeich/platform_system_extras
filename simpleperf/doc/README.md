@@ -22,7 +22,7 @@ The latest document is [here](https://android.googlesource.com/platform/system/e
   - [Answers to common issues](#answers-to-common-issues)
     - [Why we suggest profiling on Android >= N devices?](#why-we-suggest-profiling-on-android--n-devices)
     - [Suggestions about recording call graphs](#suggestions-about-recording-call-graphs)
-    - [Why we can't always get complete DWARF-based call graphs](#why-we-cant-always-get-complete-dwarf-based-call-graphs)
+    - [Why we can't always get complete DWARF-based call graphs?](#why-we-cant-always-get-complete-dwarf-based-call-graphs)
     - [How to solve missing symbols in report?](#how-to-solve-missing-symbols-in-report)
     - [Fix broken callchain stopped at C functions](#fix-broken-callchain-stopped-at-c-functions)
     - [Show annotated source code and disassembly](#show-annotated-source-code-and-disassembly)
@@ -180,7 +180,7 @@ solution is to build binary_cache on host.
 
 ```sh
 # Collect binaries needed by perf.data in binary_cache/.
-$ python binary_cache_builder.py -lib NATIVE_LIB_DIR,...
+$ ./binary_cache_builder.py -lib NATIVE_LIB_DIR,...
 ```
 
 The NATIVE_LIB_DIRs passed in -lib option are the directories containing unstripped native
@@ -188,11 +188,11 @@ libraries on host. After running it, the native libraries containing symbol tabl
 in binary_cache/ for use when reporting.
 
 ```sh
-$ python report.py --symfs binary_cache
+$ ./report.py --symfs binary_cache
 
 # report_html.py searches binary_cache/ automatically, so you don't need to
 # pass it any argument.
-$ python report_html.py
+$ ./report_html.py
 ```
 
 ### Fix broken callchain stopped at C functions
@@ -215,7 +215,7 @@ $ adb shell simpleperf record xxx --symfs /data/local/tmp/native_libs
 To use app_profiler.py:
 
 ```sh
-$ python app_profiler.py -lib <unstripped_dir>
+$ ./app_profiler.py -lib <unstripped_dir>
 ```
 
 ### Show annotated source code and disassembly
@@ -241,7 +241,7 @@ disassembly for C++ code and fully compiled Java code. Simpleperf supports two w
 
 ## Bugs and contribution
 
-Bugs and feature requests can be submitted at http://github.com/android-ndk/ndk/issues.
+Bugs and feature requests can be submitted at https://github.com/android/ndk/issues.
 Patches can be uploaded to android-review.googlesource.com as [here](https://source.android.com/setup/contribute/),
 or sent to email addresses listed [here](https://android.googlesource.com/platform/system/extras/+/master/simpleperf/OWNERS).
 

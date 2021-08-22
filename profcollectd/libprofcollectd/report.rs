@@ -19,14 +19,15 @@
 use anyhow::{anyhow, Result};
 use lazy_static::lazy_static;
 use macaddr::MacAddr6;
-use std::fs::{self, File};
+use std::fs::{self, File, Permissions};
 use std::io::{Read, Write};
-use std::os::unix::fs::OpenOptionsExt;
+use std::os::unix::fs::PermissionsExt;
 use std::path::{Path, PathBuf};
-use std::time::SystemTime;
+use std::time::{Duration, SystemTime};
 use uuid::v1::{Context, Timestamp};
 use uuid::Uuid;
 use zip::write::FileOptions;
+use zip::CompressionMethod::Deflated;
 use zip::ZipWriter;
 
 use crate::config::Config;
@@ -44,11 +45,14 @@ pub fn pack_report(profile: &Path, report: &Path, config: &Config) -> Result<Str
     // Remove the current report file if exists.
     fs::remove_file(&report).ok();
 
+    let report_file = fs::OpenOptions::new().create_new(true).write(true).open(&report)?;
+
     // Set report file ACL bits to 644, so that this can be shared to uploaders.
     // Who has permission to actually read the file is protected by SELinux policy.
-    let report = fs::OpenOptions::new().create_new(true).write(true).mode(0o644).open(&report)?;
-    let options = FileOptions::default();
-    let mut zip = ZipWriter::new(report);
+    fs::set_permissions(&report, Permissions::from_mode(0o644))?;
+
+    let options = FileOptions::default().compression_method(Deflated);
+    let mut zip = ZipWriter::new(report_file);
 
     fs::read_dir(profile)?
         .filter_map(|e| e.ok())
@@ -75,6 +79,15 @@ fn get_report_filename(node_id: &MacAddr6) -> Result<String> {
     let since_epoch = SystemTime::now().duration_since(SystemTime::UNIX_EPOCH)?;
     let ts =
         Timestamp::from_unix(&*UUID_CONTEXT, since_epoch.as_secs(), since_epoch.subsec_nanos());
-    let uuid = Uuid::new_v1(ts, &node_id.as_bytes())?;
+    let uuid = Uuid::new_v1(ts, node_id.as_bytes())?;
     Ok(uuid.to_string())
+}
+
+/// Get report creation timestamp through its filename (version 1 UUID).
+pub fn get_report_ts(filename: &str) -> Result<SystemTime> {
+    let uuid_ts = Uuid::parse_str(filename)?
+        .to_timestamp()
+        .ok_or_else(|| anyhow!("filename is not a valid V1 UUID."))?
+        .to_unix();
+    Ok(SystemTime::UNIX_EPOCH + Duration::new(uuid_ts.0, uuid_ts.1))
 }

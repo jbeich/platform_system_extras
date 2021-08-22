@@ -500,8 +500,17 @@ bool RecordCommand::PrepareRecording(Workload* workload) {
 
   // 2. Add default event type.
   if (event_selection_set_.empty()) {
+    std::string event_type = default_measured_event_type;
+    if (GetTargetArch() == ARCH_X86_32 || GetTargetArch() == ARCH_X86_64) {
+      // Emulators may not support hardware events. So switch to cpu-clock when cpu-cycles isn't
+      // available.
+      if (!IsHardwareEventSupported()) {
+        event_type = "cpu-clock";
+        LOG(INFO) << "Hardware events are not available, switch to cpu-clock.";
+      }
+    }
     size_t group_id;
-    if (!event_selection_set_.AddEventType(default_measured_event_type, &group_id)) {
+    if (!event_selection_set_.AddEventType(event_type, &group_id)) {
       return false;
     }
     if (sample_speed_) {
@@ -683,6 +692,8 @@ bool RecordCommand::DoRecording(Workload* workload) {
     return false;
   }
   time_stat_.finish_recording_time = GetSystemClock();
+  uint64_t recording_time = time_stat_.finish_recording_time - time_stat_.start_recording_time;
+  LOG(INFO) << "Recorded for " << recording_time / 1e9 << " seconds. Start post processing.";
   return true;
 }
 
@@ -778,13 +789,13 @@ bool RecordCommand::PostProcessRecording(const std::vector<std::string>& args) {
     }
   }
   LOG(DEBUG) << "Prepare recording time "
-             << (time_stat_.start_recording_time - time_stat_.prepare_recording_time) / 1e6
-             << " ms, recording time "
-             << (time_stat_.stop_recording_time - time_stat_.start_recording_time) / 1e6
-             << " ms, stop recording time "
-             << (time_stat_.finish_recording_time - time_stat_.stop_recording_time) / 1e6
-             << " ms, post process time "
-             << (time_stat_.post_process_time - time_stat_.finish_recording_time) / 1e6 << " ms.";
+             << (time_stat_.start_recording_time - time_stat_.prepare_recording_time) / 1e9
+             << " s, recording time "
+             << (time_stat_.stop_recording_time - time_stat_.start_recording_time) / 1e9
+             << " s, stop recording time "
+             << (time_stat_.finish_recording_time - time_stat_.stop_recording_time) / 1e9
+             << " s, post process time "
+             << (time_stat_.post_process_time - time_stat_.finish_recording_time) / 1e9 << " s.";
   return true;
 }
 
@@ -1108,7 +1119,7 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
   }
 
   if (fp_callchain_sampling_) {
-    if (GetBuildArch() == ARCH_ARM) {
+    if (GetTargetArch() == ARCH_ARM) {
       LOG(WARNING) << "`--callgraph fp` option doesn't work well on arm architecture, "
                    << "consider using `-g` option or profiling on aarch64 architecture.";
     }
@@ -1914,8 +1925,18 @@ bool RecordCommand::DumpMetaInfoFeature(bool kernel_symbols_available) {
       android::base::GetProperty("ro.product.model", "").c_str(),
       android::base::GetProperty("ro.product.name", "").c_str());
   info_map["android_version"] = android::base::GetProperty("ro.build.version.release", "");
+  info_map["android_sdk_version"] = android::base::GetProperty("ro.build.version.sdk", "");
+  info_map["android_build_type"] = android::base::GetProperty("ro.build.type", "");
+  info_map["android_build_fingerprint"] = android::base::GetProperty("ro.build.fingerprint", "");
+  utsname un;
+  if (uname(&un) == 0) {
+    info_map["kernel_version"] = un.release;
+  }
   if (!app_package_name_.empty()) {
     info_map["app_package_name"] = app_package_name_;
+    if (IsRoot()) {
+      info_map["app_type"] = GetAppType(app_package_name_);
+    }
   }
   if (event_selection_set_.HasAuxTrace()) {
     // used by --exclude-perf in cmd_inject.cpp

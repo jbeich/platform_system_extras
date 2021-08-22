@@ -229,6 +229,20 @@ void Symbol::SetDemangledName(std::string_view name) const {
   }
 }
 
+std::string_view Symbol::FunctionName() const {
+  // Name with signature is like "void ctep.v(cteo, ctgc, ctbn)".
+  std::string_view name = DemangledName();
+  auto brace_pos = name.find('(');
+  if (brace_pos != name.npos) {
+    name = name.substr(0, brace_pos);
+    auto space_pos = name.rfind(' ');
+    if (space_pos != name.npos) {
+      name = name.substr(space_pos + 1);
+    }
+  }
+  return name;
+}
+
 static bool CompareSymbolToAddr(const Symbol& s, uint64_t addr) {
   return s.addr < addr;
 }
@@ -478,8 +492,8 @@ class DexFileDso : public Dso {
       std::vector<uint8_t> data;
       if (ahelper && ahelper->FindEntry(std::get<2>(tuple), &entry) &&
           ahelper->GetEntryData(entry, &data)) {
-        status = ReadSymbolsFromDexFileInMemory(data.data(), data.size(), dex_file_offsets_,
-                                                symbol_callback);
+        status = ReadSymbolsFromDexFileInMemory(data.data(), data.size(), debug_file_path_,
+                                                dex_file_offsets_, symbol_callback);
       }
     } else {
       status = ReadSymbolsFromDexFile(debug_file_path_, dex_file_offsets_, symbol_callback);
@@ -487,10 +501,10 @@ class DexFileDso : public Dso {
     if (!status) {
       android::base::LogSeverity level =
           symbols_.empty() ? android::base::WARNING : android::base::DEBUG;
-      LOG(level) << "Failed to read symbols from " << debug_file_path_;
+      LOG(level) << "Failed to read symbols from dex_file " << debug_file_path_;
       return symbols;
     }
-    LOG(VERBOSE) << "Read symbols from " << debug_file_path_ << " successfully";
+    LOG(VERBOSE) << "Read symbols from dex_file " << debug_file_path_ << " successfully";
     SortAndFixSymbols(symbols);
     return symbols;
   }

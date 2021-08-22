@@ -184,16 +184,16 @@ TEST(record_cmd, rN_event) {
   TEST_REQUIRE_HW_COUNTER();
   OMIT_TEST_ON_NON_NATIVE_ABIS();
   size_t event_number;
-  if (GetBuildArch() == ARCH_ARM64 || GetBuildArch() == ARCH_ARM) {
+  if (GetTargetArch() == ARCH_ARM64 || GetTargetArch() == ARCH_ARM) {
     // As in D5.10.2 of the ARMv8 manual, ARM defines the event number space for PMU. part of the
     // space is for common event numbers (which will stay the same for all ARM chips), part of the
     // space is for implementation defined events. Here 0x08 is a common event for instructions.
     event_number = 0x08;
-  } else if (GetBuildArch() == ARCH_X86_32 || GetBuildArch() == ARCH_X86_64) {
+  } else if (GetTargetArch() == ARCH_X86_32 || GetTargetArch() == ARCH_X86_64) {
     // As in volume 3 chapter 19 of the Intel manual, 0x00c0 is the event number for instruction.
     event_number = 0x00c0;
   } else {
-    GTEST_LOG_(INFO) << "Omit arch " << GetBuildArch();
+    GTEST_LOG_(INFO) << "Omit arch " << GetTargetArch();
     return;
   }
   std::string event_name = android::base::StringPrintf("r%zx", event_number);
@@ -230,7 +230,7 @@ TEST(record_cmd, fp_callchain_sampling) {
 }
 
 TEST(record_cmd, fp_callchain_sampling_warning_on_arm) {
-  if (GetBuildArch() != ARCH_ARM) {
+  if (GetTargetArch() != ARCH_ARM) {
     GTEST_LOG_(INFO) << "This test does nothing as it only tests on arm arch.";
     return;
   }
@@ -725,7 +725,7 @@ static void TestRecordingApps(const std::string& app_name, const std::string& ap
   // Bring the app to foreground to avoid no samples.
   ASSERT_TRUE(helper.StartApp("am start " + app_name + "/.MainActivity"));
 
-  ASSERT_TRUE(helper.RecordData("--app " + app_name + " -g --duration 3 -e " + GetDefaultEvent()));
+  ASSERT_TRUE(helper.RecordData("--app " + app_name + " -g --duration 10 -e " + GetDefaultEvent()));
 
   // Check if we can profile Java code by looking for a Java method name in dumped symbols, which
   // is app_name + ".MainActivity$1.run".
@@ -754,8 +754,7 @@ TEST(record_cmd, app_option_for_debuggable_app) {
   SetRunInAppToolForTesting(true, false);
   TestRecordingApps("com.android.simpleperf.debuggable", "debuggable");
   SetRunInAppToolForTesting(false, true);
-  // Although the app is actually debuggable, we profile the app using simpleperf_app_runner.
-  TestRecordingApps("com.android.simpleperf.debuggable", "profileable");
+  TestRecordingApps("com.android.simpleperf.debuggable", "debuggable");
 }
 
 TEST(record_cmd, app_option_for_profileable_app) {
@@ -1019,12 +1018,12 @@ TEST(record_cmd, pmu_event_option) {
   TEST_REQUIRE_PMU_COUNTER();
   TEST_REQUIRE_HW_COUNTER();
   std::string event_string;
-  if (GetBuildArch() == ARCH_X86_64) {
+  if (GetTargetArch() == ARCH_X86_64) {
     event_string = "cpu/cpu-cycles/";
-  } else if (GetBuildArch() == ARCH_ARM64) {
+  } else if (GetTargetArch() == ARCH_ARM64) {
     event_string = "armv8_pmuv3/cpu_cycles/";
   } else {
-    GTEST_LOG_(INFO) << "Omit arch " << GetBuildArch();
+    GTEST_LOG_(INFO) << "Omit arch " << GetTargetArch();
     return;
   }
   TEST_IN_ROOT(ASSERT_TRUE(RunRecordCmd({"-e", event_string})));
@@ -1176,4 +1175,19 @@ TEST(record_cmd, add_meta_info_option) {
   ASSERT_FALSE(RunRecordCmd({"--add-meta-info", "key1"}, tmpfile.path));
   ASSERT_FALSE(RunRecordCmd({"--add-meta-info", "key1="}, tmpfile.path));
   ASSERT_FALSE(RunRecordCmd({"--add-meta-info", "=value1"}, tmpfile.path));
+}
+
+TEST(record_cmd, device_meta_info) {
+  TemporaryFile tmpfile;
+  ASSERT_TRUE(RunRecordCmd({}, tmpfile.path));
+  auto reader = RecordFileReader::CreateInstance(tmpfile.path);
+  ASSERT_TRUE(reader);
+
+  const std::unordered_map<std::string, std::string>& meta_info = reader->GetMetaInfoFeature();
+  auto it = meta_info.find("android_sdk_version");
+  ASSERT_NE(it, meta_info.end());
+  ASSERT_FALSE(it->second.empty());
+  it = meta_info.find("android_build_type");
+  ASSERT_NE(it, meta_info.end());
+  ASSERT_FALSE(it->second.empty());
 }

@@ -101,7 +101,7 @@ class TestTools(TestBase):
             test_addrs = test_map[dso_path]
             for test_addr in test_addrs:
                 addr2line.add_addr(dso_path, None, test_addr['func_addr'], test_addr['addr'])
-        addr2line.convert_addrs_to_lines()
+        addr2line.convert_addrs_to_lines(4)
         for dso_path in test_map:
             dso = addr2line.get_dso(dso_path)
             self.assertIsNotNone(dso, dso_path)
@@ -142,8 +142,8 @@ class TestTools(TestBase):
                 'start_addr': 0x112c,
                 'len': 28,
                 'expected_items': [
-                    ('main():', 0),
-                    ('system/extras/simpleperf/runtest/two_functions.cpp:20', 0),
+                    ('main', 0),
+                    ('two_functions.cpp:20', 0),
                     ('1134:      	add	x29, sp, #16', 0x1134),
                 ],
             },
@@ -151,8 +151,8 @@ class TestTools(TestBase):
                 'start_addr': 0x784,
                 'len': 80,
                 'expected_items': [
-                    ('main():', 0),
-                    ('system/extras/simpleperf/runtest/two_functions.cpp:20', 0),
+                    ('main', 0),
+                    ('two_functions.cpp:20', 0),
                     ('7ae:	bne.n	7a6 <main+0x22>', 0x7ae),
                 ],
             },
@@ -160,8 +160,8 @@ class TestTools(TestBase):
                 'start_addr': 0x920,
                 'len': 201,
                 'expected_items': [
-                    ('main():', 0),
-                    ('system/extras/simpleperf/runtest/two_functions.cpp:20', 0),
+                    ('main', 0),
+                    ('two_functions.cpp:20', 0),
                     ('96e:      	movl	%edx, (%rbx,%rax,4)', 0x96e),
                 ],
             },
@@ -169,8 +169,8 @@ class TestTools(TestBase):
                 'start_addr': 0x710,
                 'len': 98,
                 'expected_items': [
-                    ('main():', 0),
-                    ('system/extras/simpleperf/runtest/two_functions.cpp:20', 0),
+                    ('main', 0),
+                    ('two_functions.cpp:20', 0),
                     ('748:      	cmpl	$100000000, %ebp', 0x748),
                 ],
             },

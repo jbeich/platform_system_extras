@@ -14,14 +14,17 @@
  * limitations under the License.
  */
 
-#include "../../../../../libbase/include/android-base/properties.h"
-#include "properties.hpp"
+#pragma once
 
-const char* GetProperty(const char* key, const char* default_value) {
-  auto v = android::base::GetProperty(std::string(key), std::string(default_value));
-  return strdup(v.c_str());
-}
-
-void SetProperty(const char* key, const char* value) {
-  android::base::SetProperty(std::string(key), std::string(value));
-}
+namespace simpleperf {
+// Config bits from include/linux/coresight-pmu.h in the kernel
+// For etm_event_config:
+static constexpr int ETM_OPT_CTXTID = 14;
+static constexpr int ETM_OPT_CTXTID2 = 15;
+static constexpr int ETM_OPT_TS = 28;
+// For etm_config_reg:
+static constexpr int ETM4_CFG_BIT_CTXTID = 6;
+static constexpr int ETM4_CFG_BIT_VMID = 7;
+static constexpr int ETM4_CFG_BIT_TS = 11;
+static constexpr int ETM4_CFG_BIT_VMID_OPT = 15;
+}  // namespace simpleperf
