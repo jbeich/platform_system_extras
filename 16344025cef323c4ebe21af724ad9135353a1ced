@@ -51,6 +51,46 @@
       "parentUuid": "975dca7d_c05bd756",
       "revId": "16344025cef323c4ebe21af724ad9135353a1ced",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d393d235_596e21b6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-08-23T16:18:09Z",
+      "side": 1,
+      "message": "It would be great if we can have some tests like TEST(dso, FunctionName) in https://cs.android.com/android/platform/superproject/+/master:system/extras/simpleperf/dso_test.cpp;l\u003d305?q\u003ddso_test.cpp\u0026ss\u003dandroid.",
+      "revId": "16344025cef323c4ebe21af724ad9135353a1ced",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "214a1ddb_32e1e9ed",
+        "filename": "simpleperf/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-08-23T16:18:09Z",
+      "side": 1,
+      "message": "Also add librustc_demangle_static here? This one builds simpleperf shipped on device.",
+      "range": {
+        "startLine": 165,
+        "startChar": 4,
+        "endLine": 165,
+        "endChar": 10
+      },
+      "revId": "16344025cef323c4ebe21af724ad9135353a1ced",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
