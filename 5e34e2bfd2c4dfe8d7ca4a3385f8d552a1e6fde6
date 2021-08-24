@@ -34,6 +34,24 @@
       "parentUuid": "cdd900d8_759054d0",
       "revId": "5e34e2bfd2c4dfe8d7ca4a3385f8d552a1e6fde6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eaeb3423_66161815",
+        "filename": "libfec/fec_open.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1088085
+      },
+      "writtenOn": "2021-08-24T20:18:23Z",
+      "side": 1,
+      "message": "I can confirm verified boot 2.0 (AVB) won\u0027t call load_verity at all. But verified boot 1.0 (if we still care about it) seems to have both verity tree and fec appended to the filesystem.",
+      "parentUuid": "ae17f809_f0a08842",
+      "revId": "5e34e2bfd2c4dfe8d7ca4a3385f8d552a1e6fde6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
