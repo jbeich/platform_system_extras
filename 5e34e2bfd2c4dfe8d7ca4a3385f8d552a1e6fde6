@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cdd900d8_759054d0",
+        "filename": "libfec/fec_open.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2021-08-24T17:38:38Z",
+      "side": 1,
+      "message": "huh... so this isn\u0027t supported on erofs etc?\n\nis that deliberate or an oversight?",
+      "revId": "5e34e2bfd2c4dfe8d7ca4a3385f8d552a1e6fde6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
