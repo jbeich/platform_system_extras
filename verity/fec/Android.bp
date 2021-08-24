@@ -47,7 +47,6 @@ cc_binary_host {
         "libfec_rs",
         "libext4_utils",
         "liblog",
-        "libsquashfs_utils",
     ],
     cflags: [
         "-Wall",

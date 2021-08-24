@@ -74,7 +74,6 @@ cc_binary_host {
         "libext4_utils",
         "liblog",
         "libsparse",
-        "libsquashfs_utils",
         "libbase",
         "libz",
     ],

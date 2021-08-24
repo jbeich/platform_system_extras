@@ -37,7 +37,6 @@ cc_test_host {
         "libcrypto_utils",
         "libcrypto",
         "libext4_utils",
-        "libsquashfs_utils",
         "libbase",
     ],
 }
@@ -71,7 +70,6 @@ cc_test_host {
         "libavb",
         "libcrypto_utils",
         "libext4_utils",
-        "libsquashfs_utils",
         "libcrypto",
         "libcutils",
         "liblog",
