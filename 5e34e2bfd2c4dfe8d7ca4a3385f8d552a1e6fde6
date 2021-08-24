@@ -16,6 +16,24 @@
       "message": "huh... so this isn\u0027t supported on erofs etc?\n\nis that deliberate or an oversight?",
       "revId": "5e34e2bfd2c4dfe8d7ca4a3385f8d552a1e6fde6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae17f809_f0a08842",
+        "filename": "libfec/fec_open.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1290458
+      },
+      "writtenOn": "2021-08-24T19:44:09Z",
+      "side": 1,
+      "message": "It looks like this is a legacy way of finding the FEC data, and the preferred way is using AVB metadata. So I think we don\u0027t need to add EROFS support here. CC\u0027ing Tianjie to CMIIW.",
+      "parentUuid": "cdd900d8_759054d0",
+      "revId": "5e34e2bfd2c4dfe8d7ca4a3385f8d552a1e6fde6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
