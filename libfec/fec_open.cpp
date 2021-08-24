@@ -19,7 +19,6 @@
 #include <sys/stat.h>
 
 #include <ext4_utils/ext4_sb.h>
-#include <squashfs_utils.h>
 
 #if defined(__linux__)
     #include <linux/fs.h>
@@ -215,34 +214,6 @@ static int parse_ecc(fec_handle *f, uint64_t offset)
     return -1;
 }
 
-/* reads the squashfs superblock and returns the size of the file system in
-   `offset' */
-static int get_squashfs_size(fec_handle *f, uint64_t *offset)
-{
-    check(f);
-    check(offset);
-
-    size_t sb_size = squashfs_get_sb_size();
-    check(sb_size <= SSIZE_MAX);
-
-    uint8_t buffer[sb_size];
-
-    if (fec_pread(f, buffer, sizeof(buffer), 0) != (ssize_t)sb_size) {
-        error("failed to read superblock: %s", strerror(errno));
-        return -1;
-    }
-
-    squashfs_info sq;
-
-    if (squashfs_parse_sb_buffer(buffer, &sq) < 0) {
-        error("failed to parse superblock: %s", strerror(errno));
-        return -1;
-    }
-
-    *offset = sq.bytes_used_4K_padded;
-    return 0;
-}
-
 /* reads the ext4 superblock and returns the size of the file system in
    `offset' */
 static int get_ext4_size(fec_handle *f, uint64_t *offset)
@@ -279,8 +250,6 @@ static int get_fs_size(fec_handle *f, uint64_t *offset)
 
     if (f->flags & FEC_FS_EXT4) {
         return get_ext4_size(f, offset);
-    } else if (f->flags & FEC_FS_SQUASH) {
-        return get_squashfs_size(f, offset);
     } else {
         /* try all alternatives */
         int rc = get_ext4_size(f, offset);
@@ -288,12 +257,6 @@ static int get_fs_size(fec_handle *f, uint64_t *offset)
         if (rc == 0) {
             debug("found ext4fs");
             return rc;
-        }
-
-        rc = get_squashfs_size(f, offset);
-
-        if (rc == 0) {
-            debug("found squashfs");
         }
 
         return rc;

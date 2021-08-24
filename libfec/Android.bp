@@ -44,7 +44,6 @@ cc_defaults {
         "libcrypto_utils",
         "libcutils",
         "libext4_utils",
-        "libsquashfs_utils",
     ],
 
     static_libs: [
