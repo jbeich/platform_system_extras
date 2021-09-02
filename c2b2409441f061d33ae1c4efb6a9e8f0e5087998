@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c73617d6_9627204a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2021-09-02T15:29:14Z",
+      "side": 1,
+      "message": "Relanding https://r.android.com/1810722.",
+      "revId": "c2b2409441f061d33ae1c4efb6a9e8f0e5087998",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
