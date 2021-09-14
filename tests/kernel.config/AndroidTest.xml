@@ -21,11 +21,11 @@
     <option name="config-descriptor:metadata" key="parameter" value="not_secondary_user" />
     <target_preparer class="com.android.compatibility.common.tradefed.targetprep.FilePusher">
         <option name="cleanup" value="true" />
-        <option name="push" value="CtsKernelConfigTestCases->/data/local/tmp/CtsKernelConfigTestCases" />
+        <option name="push" value="CtsKernelConfigTestCases->/data/local/tests/unrestricted/CtsKernelConfigTestCases" />
         <option name="append-bitness" value="true" />
     </target_preparer>
     <test class="com.android.tradefed.testtype.GTest" >
-        <option name="native-test-device-path" value="/data/local/tmp" />
+        <option name="native-test-device-path" value="/data/local/tests/unrestricted" />
         <option name="module-name" value="CtsKernelConfigTestCases" />
         <!-- Make sure there is some data in the pstore -->
         <option name="before-test-cmd" value="echo HELLOWORLD >/dev/pmsg0" />

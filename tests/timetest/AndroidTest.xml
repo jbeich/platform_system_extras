@@ -16,11 +16,11 @@
 <configuration description="Config for time-unit-tests">
     <target_preparer class="com.android.tradefed.targetprep.PushFilePreparer">
         <option name="cleanup" value="true" />
-        <option name="push" value="time-unit-tests->/data/local/tmp/time-unit-tests" />
+        <option name="push" value="time-unit-tests->/data/local/tests/unrestricted/time-unit-tests" />
     </target_preparer>
     <option name="test-suite-tag" value="apct" />
     <test class="com.android.tradefed.testtype.GTest" >
-        <option name="native-test-device-path" value="/data/local/tmp" />
+        <option name="native-test-device-path" value="/data/local/tests/unrestricted" />
         <option name="module-name" value="time-unit-tests" />
     </test>
 </configuration>

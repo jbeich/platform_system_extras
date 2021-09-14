@@ -16,11 +16,11 @@
 <configuration description="Config for memory_replay_tests">
     <target_preparer class="com.android.tradefed.targetprep.PushFilePreparer">
         <option name="cleanup" value="true" />
-        <option name="push" value="memory_replay_tests->/data/local/tmp/memory_replay_tests" />
+        <option name="push" value="memory_replay_tests->/data/local/tests/unrestricted/memory_replay_tests" />
     </target_preparer>
     <option name="test-suite-tag" value="apct" />
     <test class="com.android.tradefed.testtype.GTest" >
-        <option name="native-test-device-path" value="/data/local/tmp" />
+        <option name="native-test-device-path" value="/data/local/tests/unrestricted" />
         <option name="module-name" value="memory_replay_tests" />
     </test>
 </configuration>
