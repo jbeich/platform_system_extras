@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04df64fb_d10aad95",
+        "filename": "simpleperf/scripts/gecko_profile_generator.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1242319
+      },
+      "writtenOn": "2021-09-21T05:49:44Z",
+      "side": 1,
+      "message": "These and the other \"intern\" methods could be marked as private with an underscore prefix as they aren\u0027t used outside the class.",
+      "range": {
+        "startLine": 87,
+        "startChar": 0,
+        "endLine": 87,
+        "endChar": 73
+      },
+      "revId": "3d26af8ff35243e7b02fe973e6e636c3cfbe4150",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "133eee27_68f38017",
+        "filename": "simpleperf/scripts/gecko_profile_generator.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1242319
+      },
+      "writtenOn": "2021-09-21T05:49:44Z",
+      "side": 1,
+      "message": "The type annotation for this should be `-\u003e None`:",
+      "range": {
+        "startLine": 142,
+        "startChar": 66,
+        "endLine": 142,
+        "endChar": 68
+      },
+      "revId": "3d26af8ff35243e7b02fe973e6e636c3cfbe4150",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bade8a24_ac1f5fbf",
+        "filename": "simpleperf/scripts/gecko_profile_generator.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1242319
+      },
+      "writtenOn": "2021-09-21T05:49:44Z",
+      "side": 1,
+      "message": "Can this tuple be a namedtuple? This would make the `self.samples.sort(...)` call below more readable and robust, and preserve the behavior desired in `to_json_dict()`",
+      "range": {
+        "startLine": 162,
+        "startChar": 24,
+        "endLine": 162,
+        "endChar": 59
+      },
+      "revId": "3d26af8ff35243e7b02fe973e6e636c3cfbe4150",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e3afba8_f7d73f24",
+        "filename": "simpleperf/scripts/gecko_profile_generator.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 1242319
+      },
+      "writtenOn": "2021-09-21T05:49:44Z",
+      "side": 1,
+      "message": "The return type annotation for main() probably should be `-\u003e None` (or maybe `Optional[int]`)",
+      "range": {
+        "startLine": 346,
+        "startChar": 10,
+        "endLine": 346,
+        "endChar": 11
+      },
+      "revId": "3d26af8ff35243e7b02fe973e6e636c3cfbe4150",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
