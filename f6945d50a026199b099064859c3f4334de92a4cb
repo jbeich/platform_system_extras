@@ -1,0 +1,159 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "037a1c07_a8a5682b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-09-21T18:12:28Z",
+      "side": 1,
+      "message": "Can you also help add doc in doc/scripts_reference.md?",
+      "revId": "f6945d50a026199b099064859c3f4334de92a4cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3db5e890_6d8f8dcc",
+        "filename": "simpleperf/scripts/gecko_profile_generator.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-09-21T18:12:28Z",
+      "side": 1,
+      "message": "If from kernel module, it may be in a .ko file instead.",
+      "range": {
+        "startLine": 184,
+        "startChar": 6,
+        "endLine": 184,
+        "endChar": 15
+      },
+      "revId": "f6945d50a026199b099064859c3f4334de92a4cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55fb7505_f4a5d9ca",
+        "filename": "simpleperf/scripts/gecko_profile_generator.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-09-21T18:12:28Z",
+      "side": 1,
+      "message": "the sample time here is absolute time. But the doc seems to say it wants \"milliseconds since since profile.meta.startTime\" (https://github.com/firefox-devtools/profiler/blob/main/docs-developer/gecko-profile-format.md)?",
+      "range": {
+        "startLine": 226,
+        "startChar": 39,
+        "endLine": 226,
+        "endChar": 46
+      },
+      "revId": "f6945d50a026199b099064859c3f4334de92a4cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50ecd2e0_6173ed60",
+        "filename": "simpleperf/scripts/gecko_profile_generator.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-09-21T18:12:28Z",
+      "side": 1,
+      "message": "Optional[str]?",
+      "range": {
+        "startLine": 297,
+        "startChar": 15,
+        "endLine": 297,
+        "endChar": 18
+      },
+      "revId": "f6945d50a026199b099064859c3f4334de92a4cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d317ea0a_4e3fd519",
+        "filename": "simpleperf/scripts/gecko_profile_generator.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-09-21T18:12:28Z",
+      "side": 1,
+      "message": "Optional[str]?",
+      "range": {
+        "startLine": 298,
+        "startChar": 19,
+        "endLine": 298,
+        "endChar": 22
+      },
+      "revId": "f6945d50a026199b099064859c3f4334de92a4cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d50f5ef6_4cddc5a0",
+        "filename": "simpleperf/scripts/gecko_profile_generator.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-09-21T18:12:28Z",
+      "side": 1,
+      "message": "it can\u0027t be None, because default is perf.data.",
+      "range": {
+        "startLine": 309,
+        "startChar": 2,
+        "endLine": 309,
+        "endChar": 29
+      },
+      "revId": "f6945d50a026199b099064859c3f4334de92a4cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1aceaf4a_83f56e02",
+        "filename": "simpleperf/scripts/gecko_profile_generator.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-09-21T18:12:28Z",
+      "side": 1,
+      "message": "you can use __doc__, so no need to repeat them.",
+      "range": {
+        "startLine": 390,
+        "startChar": 18,
+        "endLine": 391,
+        "endChar": 69
+      },
+      "revId": "f6945d50a026199b099064859c3f4334de92a4cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
