@@ -190,6 +190,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cbac429f_34e239da",
+        "filename": "simpleperf/scripts/gecko_profile_generator.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1272573
+      },
+      "writtenOn": "2021-09-22T21:46:21Z",
+      "side": 1,
+      "message": "Thanks. I added some comments, maybe I\u0027ll fix these at some point, maybe not, they don\u0027t seem to impact the UI.\n\nThanks for the tip about --clockid.\n\nI\u0027ll just note the discrepancy between times and leave a detailed comment where I\u0027m being fast and loose.",
+      "parentUuid": "83b5c039_f47f7e45",
+      "range": {
+        "startLine": 226,
+        "startChar": 39,
+        "endLine": 226,
+        "endChar": 46
+      },
+      "revId": "f6945d50a026199b099064859c3f4334de92a4cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "50ecd2e0_6173ed60",
@@ -416,6 +440,30 @@
       "side": 1,
       "message": "you can use BaseArgumentParser in simpleperf_utils.py if you want, which adds RawDescriptionHelpFormatter and --log option.",
       "parentUuid": "a73ab59c_fa33bf64",
+      "range": {
+        "startLine": 390,
+        "startChar": 18,
+        "endLine": 391,
+        "endChar": 69
+      },
+      "revId": "f6945d50a026199b099064859c3f4334de92a4cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "623980a2_9d50edea",
+        "filename": "simpleperf/scripts/gecko_profile_generator.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 1272573
+      },
+      "writtenOn": "2021-09-22T21:46:21Z",
+      "side": 1,
+      "message": "good idea; done",
+      "parentUuid": "4d4aacea_30094576",
       "range": {
         "startLine": 390,
         "startChar": 18,
