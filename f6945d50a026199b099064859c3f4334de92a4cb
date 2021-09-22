@@ -54,6 +54,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed2e78e9_030df89f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-09-22T17:15:46Z",
+      "side": 1,
+      "message": "Thanks!",
+      "parentUuid": "c55f4111_a45f73a3",
+      "revId": "f6945d50a026199b099064859c3f4334de92a4cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3db5e890_6d8f8dcc",
@@ -138,6 +156,30 @@
       "side": 1,
       "message": "You\u0027re right, but I don\u0027t know how to fix this reasonably. The absolute time on the samples isn\u0027t a unix time, I think it might be uptime or something?\n\nI could read through the whole file and try to find the minimum time and treat that as sample start time, but I\u0027m not sure it\u0027s worth it, as the profiler UI seems to normalise them all to start at second 0 anyway.",
       "parentUuid": "55fb7505_f4a5d9ca",
+      "range": {
+        "startLine": 226,
+        "startChar": 39,
+        "endLine": 226,
+        "endChar": 46
+      },
+      "revId": "f6945d50a026199b099064859c3f4334de92a4cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "83b5c039_f47f7e45",
+        "filename": "simpleperf/scripts/gecko_profile_generator.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-09-22T17:15:46Z",
+      "side": 1,
+      "message": "By default, the timestamp is CLOCK_MONOTONIC. But it can be adjusted by --clockid.\nIf it doesn\u0027t affect UI, then of course no need to change.\nIf really need to change, we can\u0027t use meta_info(\"timestamp\"), because I found it was generated at the end of recording instead of at the start, as in https://cs.android.com/android/platform/superproject/+/master:system/extras/simpleperf/cmd_record.cpp;l\u003d1947?q\u003dcmd_record.cpp\u0026ss\u003dandroid%2Fplatform%2Fsuperproject. But we can use the timestamp of the first sample. Because samples are guaranteed to be sorted in timestamp order.",
+      "parentUuid": "7796cd8e_56e62952",
       "range": {
         "startLine": 226,
         "startChar": 39,
@@ -350,6 +392,30 @@
       "side": 1,
       "message": "Neat trick. Done. Had to use https://stackoverflow.com/a/3853776/171898 so the newlines would be preserved.",
       "parentUuid": "1aceaf4a_83f56e02",
+      "range": {
+        "startLine": 390,
+        "startChar": 18,
+        "endLine": 391,
+        "endChar": 69
+      },
+      "revId": "f6945d50a026199b099064859c3f4334de92a4cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d4aacea_30094576",
+        "filename": "simpleperf/scripts/gecko_profile_generator.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-09-22T17:15:46Z",
+      "side": 1,
+      "message": "you can use BaseArgumentParser in simpleperf_utils.py if you want, which adds RawDescriptionHelpFormatter and --log option.",
+      "parentUuid": "a73ab59c_fa33bf64",
       "range": {
         "startLine": 390,
         "startChar": 18,
