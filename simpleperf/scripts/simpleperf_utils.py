@@ -30,7 +30,10 @@ import shutil
 import subprocess
 import sys
 import time
-from typing import Dict, Iterator, List, Optional, Set, Union
+from typing import Dict, Iterator, List, Optional, Set, Tuple, Union
+
+
+NDK_ERROR_MESSAGE = "Please install the Android NDK (https://developer.android.com/studio/projects/install-ndk), then set NDK path with --ndk_path option."
 
 
 def get_script_dir() -> str:
@@ -53,13 +56,7 @@ def get_platform() -> str:
     return 'linux'
 
 
-def is_python3() -> str:
-    return sys.version_info >= (3, 0)
-
-
 def str_to_bytes(str_value: str) -> bytes:
-    if not is_python3():
-        return str_value
     # In python 3, str are wide strings whereas the C api expects 8 bit strings,
     # hence we have to convert. For now using utf-8 as the encoding.
     return str_value.encode('utf-8')
@@ -68,8 +65,6 @@ def str_to_bytes(str_value: str) -> bytes:
 def bytes_to_str(bytes_value: Optional[bytes]) -> str:
     if not bytes_value:
         return ''
-    if not is_python3():
-        return bytes_value
     return bytes_value.decode('utf-8')
 
 
@@ -538,7 +533,7 @@ class Addr2Nearestline(object):
             binary_finder: BinaryFinder, with_function_name: bool):
         self.symbolizer_path = ToolFinder.find_tool_path('llvm-symbolizer', ndk_path)
         if not self.symbolizer_path:
-            log_exit("Can't find llvm-symbolizer. Please set ndk path with --ndk_path option.")
+            log_exit("Can't find llvm-symbolizer. " + NDK_ERROR_MESSAGE)
         self.readelf = ReadElf(ndk_path)
         self.dso_map: Dict[str, Addr2Nearestline.Dso] = {}  # map from dso_path to Dso.
         self.binary_finder = binary_finder
@@ -794,7 +789,7 @@ class Objdump(object):
             if not objdump_path:
                 objdump_path = ToolFinder.find_tool_path('llvm-objdump', self.ndk_path, arch)
             if not objdump_path:
-                log_exit("Can't find llvm-objdump. Please set ndk path with --ndk_path option.")
+                log_exit("Can't find llvm-objdump." + NDK_ERROR_MESSAGE)
             self.objdump_paths[arch] = objdump_path
 
         # 3. Run objdump.
@@ -831,7 +826,7 @@ class ReadElf(object):
     def __init__(self, ndk_path: Optional[str]):
         self.readelf_path = ToolFinder.find_tool_path('llvm-readelf', ndk_path)
         if not self.readelf_path:
-            log_exit("Can't find llvm-readelf. Please set ndk path with --ndk_path option.")
+            log_exit("Can't find llvm-readelf. " + NDK_ERROR_MESSAGE)
 
     @staticmethod
     def is_elf_file(path: Union[Path, str]) -> bool:
