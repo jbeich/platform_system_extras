@@ -101,6 +101,12 @@ class TestPprofProtoGenerator(TestBase):
             self.assertLessEqual(mapping.memory_start, location.address)
             self.assertGreaterEqual(mapping.memory_limit, location.address)
 
+    def test_sample_type(self):
+        """Test sample types have the right units."""
+        output = self.run_generator(testdata_file=testdata_file)
+        self.assertIn('simpleperf_runtest_two_functions_arm64', output)
+        self.assertIn('two_functions.cpp', output)
+
     def test_multiple_perf_data(self):
         """ Test reporting multiple recording file. """
         profile1 = self.generate_profile(None, ['aggregatable_perf1.data'])
@@ -130,9 +136,9 @@ class TestPprofProtoGenerator(TestBase):
         binary_cache_builder.build_binary_cache(testdata_file, [TestHelper.testdata_dir])
 
         # Generate profile.
-        output = self.run_generator(testdata_file=testdata_file)
-        self.assertIn('simpleperf_runtest_two_functions_arm64', output)
-        self.assertIn('two_functions.cpp', output)
+        output = self.run_generator()
+        self.assertIn('sample_type[0] = ValueType(typeID=1, unitID=2, type=event_cpu-cycles_samples, unit=samples)', output)
+        self.assertIn('sample_type[1] = ValueType(typeID=3, unitID=4, type=event_cpu-cycles_count, unit=cpu-cycles)', output)
 
     def test_line_info(self):
         """ Check line numbers generated in profile. """
