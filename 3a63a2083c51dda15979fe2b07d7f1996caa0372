@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb774955_6659e786",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1272573
+      },
+      "writtenOn": "2021-09-28T06:20:35Z",
+      "side": 1,
+      "message": "I don\u0027t really know how to do chains of commits in Gerrit so please bear with me here :-)",
+      "revId": "3a63a2083c51dda15979fe2b07d7f1996caa0372",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
