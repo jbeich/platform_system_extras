@@ -50,6 +50,16 @@ class TestPprofProtoGenerator(TestBase):
         self.assertIn(key, self.run_generator(['--pid', '10419', '10416']))
         self.assertNotIn(key, self.run_generator(['--pid', '10416']))
 
+    def test_thread_labels(self):
+        output = self.run_generator()
+        self.assertIn('label[0] = thread:Binder:10419_1', output)
+        self.assertIn('label[0] = thread:Binder:10419_2', output)
+        self.assertIn('label[0] = thread:Binder:10419_3', output)
+        self.assertIn('label[0] = thread:Binder:10419_4', output)
+        self.assertIn('label[1] = threadpool:Binder:%d_%d', output)
+        self.assertIn('label[2] = pid:10419', output)
+        self.assertIn('label[3] = tid:10459', output)
+
     def test_tid_filter(self):
         key1 = 'art::ProfileSaver::Run()'  # function in thread 10459
         key2 = 'PlayScene::DoFrame()'  # function in thread 10463
@@ -92,6 +102,12 @@ class TestPprofProtoGenerator(TestBase):
             mapping = profile.mapping[location.mapping_id - 1]
             self.assertLessEqual(mapping.memory_start, location.address)
             self.assertGreaterEqual(mapping.memory_limit, location.address)
+
+    def test_sample_type(self):
+        """Test sample types have the right units."""
+        output = self.run_generator()
+        self.assertIn('type=cpu-cycles_samples, unit=samples', output)
+        self.assertIn('type=cpu-cycles, unit=cpu-cycles', output)
 
     def test_multiple_perf_data(self):
         """ Test reporting multiple recording file. """
