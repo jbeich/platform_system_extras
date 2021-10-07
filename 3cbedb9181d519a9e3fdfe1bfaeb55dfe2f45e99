@@ -177,6 +177,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4978253e_91f3ed3c",
+        "filename": "simpleperf/scripts/stackcollapse.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-10-07T22:21:46Z",
+      "side": 1,
+      "message": "Thanks!",
+      "parentUuid": "b354ea5f_ad926e03",
+      "range": {
+        "startLine": 49,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 5
+      },
+      "revId": "3cbedb9181d519a9e3fdfe1bfaeb55dfe2f45e99",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "83ef56ff_99cb7bac",

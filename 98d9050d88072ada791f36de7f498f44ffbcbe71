@@ -52,6 +52,24 @@
       "parentUuid": "43796015_c8985a14",
       "revId": "98d9050d88072ada791f36de7f498f44ffbcbe71",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e266ba6e_e274dd46",
+        "filename": "simpleperf/scripts/stackcollapse.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-10-07T22:21:46Z",
+      "side": 1,
+      "message": "Your understanding is correct. The instruction pointer isn\u0027t normalized to the start of the function.\n\nThe address itself isn\u0027t useful. But it prevent the users from thinking all the unknown symbols are from one function. And it has the binary path info. In the test examples, the binary path of all unknown symbols are from kernel. It tell users that the unknown symbols are from the kernel, and probably we don\u0027t need to care about them. Maybe a better choice is to use [binary_path](unknown)?\n\nAnyway, I am fine to not use ShowIpForUnknownSymbol() unless someone complains.",
+      "parentUuid": "0a29f1a2_64bf29cc",
+      "revId": "98d9050d88072ada791f36de7f498f44ffbcbe71",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
