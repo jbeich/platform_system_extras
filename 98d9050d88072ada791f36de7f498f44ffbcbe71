@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "914a9d29_1d96f811",
+        "filename": "simpleperf/scripts/stackcollapse.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1272573
+      },
+      "writtenOn": "2021-10-07T04:45:33Z",
+      "side": 1,
+      "message": "Maybe I shouldn\u0027t do this, WDYT?",
+      "revId": "98d9050d88072ada791f36de7f498f44ffbcbe71",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
