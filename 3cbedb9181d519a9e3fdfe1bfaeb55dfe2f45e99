@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "46bdc2e6_650bdb1d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1272573
+      },
+      "writtenOn": "2021-10-07T21:47:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "285c9cdf_a3c422e3",
+      "revId": "3cbedb9181d519a9e3fdfe1bfaeb55dfe2f45e99",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9cf169ff_6a5fe7a4",
@@ -31,6 +49,30 @@
       "writtenOn": "2021-10-07T18:09:47Z",
       "side": 1,
       "message": "2021?",
+      "range": {
+        "startLine": 3,
+        "startChar": 16,
+        "endLine": 3,
+        "endChar": 20
+      },
+      "revId": "3cbedb9181d519a9e3fdfe1bfaeb55dfe2f45e99",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8dad243d_9d338eea",
+        "filename": "simpleperf/scripts/stackcollapse.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1272573
+      },
+      "writtenOn": "2021-10-07T21:47:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9cf169ff_6a5fe7a4",
       "range": {
         "startLine": 3,
         "startChar": 16,
@@ -64,6 +106,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ebeea93_d1e79c11",
+        "filename": "simpleperf/scripts/stackcollapse.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1272573
+      },
+      "writtenOn": "2021-10-07T21:47:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "56bd3e86_54223a14",
+      "range": {
+        "startLine": 27,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 37
+      },
+      "revId": "3cbedb9181d519a9e3fdfe1bfaeb55dfe2f45e99",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "56465b51_642fb3e5",
@@ -77,6 +143,30 @@
       "writtenOn": "2021-10-07T18:09:47Z",
       "side": 1,
       "message": "simpleperf scripts use 4 space for indentation, so be consistent?\nYou can use `autopep8 --max-line-length 100` to format the script if you want.",
+      "range": {
+        "startLine": 49,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 5
+      },
+      "revId": "3cbedb9181d519a9e3fdfe1bfaeb55dfe2f45e99",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b354ea5f_ad926e03",
+        "filename": "simpleperf/scripts/stackcollapse.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1272573
+      },
+      "writtenOn": "2021-10-07T21:47:51Z",
+      "side": 1,
+      "message": "Thanks for the tip, done. Popped it in a CONTRIBUTING.md.",
+      "parentUuid": "56465b51_642fb3e5",
       "range": {
         "startLine": 49,
         "startChar": 0,
@@ -110,6 +200,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae39674a_e32c319d",
+        "filename": "simpleperf/scripts/test/stackcollapse_test.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1272573
+      },
+      "writtenOn": "2021-10-07T21:47:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "83ef56ff_99cb7bac",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 3
+      },
+      "revId": "3cbedb9181d519a9e3fdfe1bfaeb55dfe2f45e99",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "940352a1_1e1063b7",
+        "filename": "simpleperf/scripts/test/stackcollapse_test.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1272573
+      },
+      "writtenOn": "2021-10-07T21:47:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "83ef56ff_99cb7bac",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 3
+      },
+      "revId": "3cbedb9181d519a9e3fdfe1bfaeb55dfe2f45e99",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dc3dab1f_29e881ab",
@@ -123,6 +261,30 @@
       "writtenOn": "2021-10-07T18:09:47Z",
       "side": 1,
       "message": "How about compressing it and checks below, like using\"self.assertEqual(Path(golden_path).read_text(), got)\"?",
+      "range": {
+        "startLine": 30,
+        "startChar": 4,
+        "endLine": 32,
+        "endChar": 31
+      },
+      "revId": "3cbedb9181d519a9e3fdfe1bfaeb55dfe2f45e99",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "72a2eab4_ae5d0005",
+        "filename": "simpleperf/scripts/test/stackcollapse_test.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1272573
+      },
+      "writtenOn": "2021-10-07T21:47:51Z",
+      "side": 1,
+      "message": "thanks for the tip, hadn\u0027t seen read_text before. done.",
+      "parentUuid": "dc3dab1f_29e881ab",
       "range": {
         "startLine": 30,
         "startChar": 4,

@@ -34,6 +34,24 @@
       "parentUuid": "914a9d29_1d96f811",
       "revId": "98d9050d88072ada791f36de7f498f44ffbcbe71",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a29f1a2_64bf29cc",
+        "filename": "simpleperf/scripts/stackcollapse.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1272573
+      },
+      "writtenOn": "2021-10-07T21:47:51Z",
+      "side": 1,
+      "message": "I don\u0027t think I understand this well. Here\u0027s my mental model, it\u0027s probably wrong:\n\n- this is the instruction pointer\n- the instruction pointer varies a lot during execution within a function as it points to different instructions\n- so a long function might have many instruction pointers\n- FlameGraph is an aggregated format that throws away small functions sometimes, to save memory. so we want to aggregate at least to the function level and maybe aggregating at the raw-instruction level might hurt.\n- So this should maybe default to \u0027off\u0027 -- combining these as \u0027unknown\u0027 is probably better than using the raw instruction pointer?\n\nBut I\u0027m not sure if maybe the instruction pointer is normalised somehow to the start of the function somewhere?\n\nIn the meantime, I\u0027ve gone for consistency with stackcollapse-perf and made it a flag that defaults off.",
+      "parentUuid": "43796015_c8985a14",
+      "revId": "98d9050d88072ada791f36de7f498f44ffbcbe71",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
