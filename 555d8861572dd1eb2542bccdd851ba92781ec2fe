@@ -16,6 +16,29 @@
       "message": "upload change for etm_test_loop and \"cmd_inject.unformatted_trace\" test?",
       "revId": "555d8861572dd1eb2542bccdd851ba92781ec2fe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a688ba1_2f507aad",
+        "filename": "simpleperf/ETMRecorder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-10-12T22:26:54Z",
+      "side": 1,
+      "message": "set report_error \u003d false? Otherwise we will always get error messages on etmv4.",
+      "range": {
+        "startLine": 158,
+        "startChar": 11,
+        "endLine": 158,
+        "endChar": 28
+      },
+      "revId": "555d8861572dd1eb2542bccdd851ba92781ec2fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
