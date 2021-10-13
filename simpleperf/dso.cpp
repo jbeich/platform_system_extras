@@ -170,6 +170,12 @@ std::string DebugElfFileFinder::FindDebugFile(const std::string& dso_path, bool 
     if (CheckDebugFilePath(path, build_id, false)) {
       return path;
     }
+    // 4. If this is an apk, then check if the file exists and use that path.
+    struct stat st;
+    path = symfs_dir_ + dso_path;
+    if (EndsWith(dso_path, ".apk") && stat(path.c_str(), &st) == 0) {
+      return path;
+    }
   }
   // 4. Try concatenating /usr/lib/debug and dso_path.
   // Linux host can store debug shared libraries in /usr/lib/debug.
