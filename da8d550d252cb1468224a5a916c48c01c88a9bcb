@@ -16,6 +16,24 @@
       "message": "for this case, usually we would use the full `relative path` as the generated license name, to avoid possible name collision. In this case, it could be `system_extras_su_license`.",
       "revId": "da8d550d252cb1468224a5a916c48c01c88a9bcb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "64125c00_1660b1ce",
+        "filename": "su/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1076723
+      },
+      "writtenOn": "2021-10-18T16:23:42Z",
+      "side": 1,
+      "message": "I actually had already made that change but forgot to upload it lol.",
+      "parentUuid": "518043f1_6ab74044",
+      "revId": "da8d550d252cb1468224a5a916c48c01c88a9bcb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
