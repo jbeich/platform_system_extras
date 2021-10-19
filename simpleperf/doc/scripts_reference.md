@@ -76,10 +76,9 @@ connected. Maybe `api_profiler.py` is more suitable, which also don't need USB c
 Below is an example.
 
 ```sh
-$ ./run_simpleperf_without_usb_connection.py start \
-    -p com.example.simpleperf.simpleperfexamplewithnative
+$ ./run_simpleperf_without_usb_connection.py start -p simpleperf.example.cpp
 # After the command finishes successfully, unplug the USB cable, run the
-# SimpleperfExampleWithNative app. After a few seconds, plug in the USB cable.
+# SimpleperfExampleCpp app. After a few seconds, plug in the USB cable.
 $ ./run_simpleperf_without_usb_connection.py stop
 # It may take a while to stop recording. After that, the profiling data is collected in perf.data
 # on host.
@@ -105,8 +104,8 @@ directories on the host (via `-lib`).
 $ ./binary_cache_builder.py
 
 # Generate binary_cache, by pulling binaries from the device and finding binaries in
-# SimpleperfExampleWithNative.
-$ ./binary_cache_builder.py -lib path_of_SimpleperfExampleWithNative
+# SimpleperfExampleCpp.
+$ ./binary_cache_builder.py -lib path_of_SimpleperfExampleCpp
 ```
 
 ### run_simpleperf_on_device.py
@@ -142,7 +141,7 @@ each function, annotated disassembly for each function.
 $ ./report_html.py
 
 # Add source code.
-$ ./report_html.py --add_source_code --source_dirs path_of_SimpleperfExampleWithNative
+$ ./report_html.py --add_source_code --source_dirs path_of_SimpleperfExampleCpp
 
 # Add disassembly.
 $ ./report_html.py --add_disassembly
@@ -155,11 +154,11 @@ $ ./report_html.py --add_disassembly --binary_filter libgame.so
 $ ./report_html.py -i perf1.data perf2.data
 ```
 
-Below is an example of generating html profiling results for SimpleperfExampleWithNative.
+Below is an example of generating html profiling results for SimpleperfExampleCpp.
 
 ```sh
-$ ./app_profiler.py -p com.example.simpleperf.simpleperfexamplewithnative
-$ ./report_html.py --add_source_code --source_dirs path_of_SimpleperfExampleWithNative \
+$ ./app_profiler.py -p simpleperf.example.cpp
+$ ./report_html.py --add_source_code --source_dirs path_of_SimpleperfExampleCpp \
     --add_disassembly
 ```
 
