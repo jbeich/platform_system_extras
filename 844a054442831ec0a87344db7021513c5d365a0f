@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ada9807d_59dcb245",
+        "filename": "simpleperf/demo/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-10-20T16:58:04Z",
+      "side": 1,
+      "message": "The profiling name here is not profileable app, but a build type I added for adding wrap.sh to profile released app before Android Q (as in https://android.googlesource.com/platform/system/extras/+/master/simpleperf/doc/android_application_profiling.md#prepare-an-android-application). But the gradle file I used to create the profiling build type no longer works. So I didn\u0027t use it in ExampleCpp. Probably I also need to update the doc.\n\nI didn\u0027t use profileable app because that only works on Android \u003e\u003d Q, and I want to test Android \u003e\u003d N.",
+      "parentUuid": "1d008e7d_c70d12b8",
+      "range": {
+        "startLine": 90,
+        "startChar": 39,
+        "endLine": 90,
+        "endChar": 44
+      },
+      "revId": "844a054442831ec0a87344db7021513c5d365a0f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bf86c81a_12112d49",
@@ -54,6 +78,30 @@
       "writtenOn": "2021-10-20T09:00:48Z",
       "side": 1,
       "message": "I assume this \u0027s\u0027 has been a typo before too. ;)",
+      "range": {
+        "startLine": 113,
+        "startChar": 24,
+        "endLine": 113,
+        "endChar": 25
+      },
+      "revId": "844a054442831ec0a87344db7021513c5d365a0f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b20103e_262b8d1a",
+        "filename": "simpleperf/doc/android_application_profiling.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-10-20T16:58:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bf86c81a_12112d49",
       "range": {
         "startLine": 113,
         "startChar": 24,
