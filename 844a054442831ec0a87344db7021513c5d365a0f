@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3eb1f699_90b1d936",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-10-20T09:00:48Z",
+      "side": 1,
+      "message": "Looks great. Just some minor comments about naming and profile/debug naming.",
+      "revId": "844a054442831ec0a87344db7021513c5d365a0f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d008e7d_c70d12b8",
+        "filename": "simpleperf/demo/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-10-20T09:00:48Z",
+      "side": 1,
+      "message": "Any reason for the name change from `profiling` -\u003e `debug`? I always thought we tended to focus on profileable apps as opposed to debuggable.",
+      "range": {
+        "startLine": 90,
+        "startChar": 39,
+        "endLine": 90,
+        "endChar": 44
+      },
+      "revId": "844a054442831ec0a87344db7021513c5d365a0f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf86c81a_12112d49",
+        "filename": "simpleperf/doc/android_application_profiling.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-10-20T09:00:48Z",
+      "side": 1,
+      "message": "I assume this \u0027s\u0027 has been a typo before too. ;)",
+      "range": {
+        "startLine": 113,
+        "startChar": 24,
+        "endLine": 113,
+        "endChar": 25
+      },
+      "revId": "844a054442831ec0a87344db7021513c5d365a0f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
