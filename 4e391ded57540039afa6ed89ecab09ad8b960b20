@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d5476f2_03a9a8bb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-11-02T20:55:23Z",
+      "side": 1,
+      "message": "ps2,3: add commit msg, fix comment.",
+      "revId": "4e391ded57540039afa6ed89ecab09ad8b960b20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
