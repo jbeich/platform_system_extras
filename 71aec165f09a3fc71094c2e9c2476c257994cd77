@@ -33,6 +33,24 @@
       "message": "does `\u003e\u003d` work as expected here for std::pair\u003cint, int\u003e? If so, that\u0027s...magical.",
       "revId": "71aec165f09a3fc71094c2e9c2476c257994cd77",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c360b906_3538b297",
+        "filename": "simpleperf/event_selection_set.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-11-03T23:22:34Z",
+      "side": 1,
+      "message": "Yes, it\u0027s defined in utility header, https://en.cppreference.com/w/cpp/utility/pair/operator_cmp.",
+      "parentUuid": "ae4d54f8_f9aeeb0c",
+      "revId": "71aec165f09a3fc71094c2e9c2476c257994cd77",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
