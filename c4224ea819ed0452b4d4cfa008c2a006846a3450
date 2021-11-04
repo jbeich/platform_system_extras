@@ -39,6 +39,30 @@
       },
       "revId": "c4224ea819ed0452b4d4cfa008c2a006846a3450",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee5bafcc_06091e2e",
+        "filename": "simpleperf/dso.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2021-11-04T22:38:22Z",
+      "side": 1,
+      "message": "I am removing the initialization of prev_real_map when the map is created and moving it to be on demand. Unfortunately, the current code in simpleperf modifies the map name to point to the testdata location. This means that for one particular test, there is a read-only map for an apk, then a read-execute map for the same apk. The simpleperf code changes the name of the read-execute map so when the call to GetPrevRealMap occurs, the name of the read-only map and the read-execute map are different, so the libunwindstack code fails to find the elf data properly. So this change modifies the read-only map to have the same name as the modified read-execute map.\n\nThis really only applies to apks because there is a fall through for regular elf files that works if the read-only and read-execute map are different.\n\nI modified the commit message to be more explicit about this change.",
+      "parentUuid": "c1e519ab_1471190a",
+      "range": {
+        "startLine": 178,
+        "startChar": 4,
+        "endLine": 178,
+        "endChar": 5
+      },
+      "revId": "c4224ea819ed0452b4d4cfa008c2a006846a3450",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

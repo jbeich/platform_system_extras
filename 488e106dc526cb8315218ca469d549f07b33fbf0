@@ -22,6 +22,30 @@
       },
       "revId": "488e106dc526cb8315218ca469d549f07b33fbf0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "635b0728_6d0cc270",
+        "filename": "simpleperf/OfflineUnwinder_test.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2021-11-04T22:38:22Z",
+      "side": 0,
+      "message": "I\u0027ve added this back, but added a change so that it matches the slight behavioral change that I added to GetPrevRealMap().",
+      "parentUuid": "c4c09e83_91db03ae",
+      "range": {
+        "startLine": 36,
+        "startChar": 14,
+        "endLine": 36,
+        "endChar": 27
+      },
+      "revId": "488e106dc526cb8315218ca469d549f07b33fbf0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
