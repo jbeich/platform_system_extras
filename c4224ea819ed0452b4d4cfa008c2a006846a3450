@@ -16,6 +16,29 @@
       "message": "There was a bug in libunwindstack that was too permissive about split maps (read-only and read-execute map). The libunwindstack cl has fixed this problem, so I had to also fix a problem where the read-only map and the read-execute map had a different name. Let me know if there is some other way I should do this, or I did it incorrectly.",
       "revId": "c4224ea819ed0452b4d4cfa008c2a006846a3450",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1e519ab_1471190a",
+        "filename": "simpleperf/dso.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-11-04T17:11:14Z",
+      "side": 1,
+      "message": "what is it trying to fix? I read the commit message, but still don\u0027t have enough clue. And simpleperf_unit_test still pass without it.",
+      "range": {
+        "startLine": 178,
+        "startChar": 4,
+        "endLine": 178,
+        "endChar": 5
+      },
+      "revId": "c4224ea819ed0452b4d4cfa008c2a006846a3450",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

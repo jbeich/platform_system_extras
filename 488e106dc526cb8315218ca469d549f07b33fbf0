@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4c09e83_91db03ae",
+        "filename": "simpleperf/OfflineUnwinder_test.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-11-04T17:11:14Z",
+      "side": 0,
+      "message": "It helps to check if simpleperf remembers to call unwindstack::Maps::Sort() to link maps. So can we use info-\u003eGetPrevRealMap() instead of removing the check?",
+      "range": {
+        "startLine": 36,
+        "startChar": 14,
+        "endLine": 36,
+        "endChar": 27
+      },
+      "revId": "488e106dc526cb8315218ca469d549f07b33fbf0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
