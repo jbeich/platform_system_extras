@@ -63,6 +63,30 @@
       },
       "revId": "c4224ea819ed0452b4d4cfa008c2a006846a3450",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3dcf62a8_dd6a5e65",
+        "filename": "simpleperf/dso.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-11-04T23:52:00Z",
+      "side": 1,
+      "message": "I see. I found the broken test cmd_debug_unwind.unwind_embedded_lib_in_apk.\nI am fine with the change, with a few small suggestions:\ncombine it with item 2 check, because the path is built more properly there.\nAnd you can use IsRegularFile(). like below:\n\n// 2. Try concatenating symfs_dir and dso_path.\nstd::string path \u003d GetPathInSymFsDir(dso_path);\nif (CheckDebugFilePath(path, build_id, true)) {\n  return path;\n}\nif (EndsWith(path, \".apk\") \u0026\u0026 IsRegularFile(path)) {\n   return path;\n}\n\nPlease also add comment to show that this is needed by libunwindstack.",
+      "parentUuid": "ee5bafcc_06091e2e",
+      "range": {
+        "startLine": 178,
+        "startChar": 4,
+        "endLine": 178,
+        "endChar": 5
+      },
+      "revId": "c4224ea819ed0452b4d4cfa008c2a006846a3450",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

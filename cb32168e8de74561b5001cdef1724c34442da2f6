@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f89c03b_7695741f",
+        "filename": "simpleperf/OfflineUnwinder_test.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-11-04T23:52:00Z",
+      "side": 1,
+      "message": "reverse the two if statements, so info \u003d\u003d nullptr is checked before it\u0027s used? (info can be set to null in UnwindMaps::UpdateMaps(), so I want to check it).",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 5
+      },
+      "revId": "cb32168e8de74561b5001cdef1724c34442da2f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
