@@ -87,6 +87,30 @@
       },
       "revId": "c4224ea819ed0452b4d4cfa008c2a006846a3450",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd4c1ac9_07bc64f5",
+        "filename": "simpleperf/dso.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2021-11-05T00:36:38Z",
+      "side": 1,
+      "message": "Fixed now.",
+      "parentUuid": "3dcf62a8_dd6a5e65",
+      "range": {
+        "startLine": 178,
+        "startChar": 4,
+        "endLine": 178,
+        "endChar": 5
+      },
+      "revId": "c4224ea819ed0452b4d4cfa008c2a006846a3450",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
