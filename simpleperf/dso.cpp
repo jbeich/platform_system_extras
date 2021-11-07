@@ -165,6 +165,9 @@ std::string DebugElfFileFinder::FindDebugFile(const std::string& dso_path, bool 
     if (CheckDebugFilePath(path, build_id, true)) {
       return path;
     }
+    if (EndsWith(dso_path, ".apk") && IsRegularFile(path)) {
+      return path;
+    }
     // 3. Try concatenating symfs_dir and basename of dso_path.
     path = symfs_dir_ + OS_PATH_SEPARATOR + android::base::Basename(dso_path);
     if (CheckDebugFilePath(path, build_id, false)) {
@@ -482,6 +485,12 @@ class DexFileDso : public Dso {
   std::vector<Symbol> LoadSymbolsImpl() override {
     std::vector<Symbol> symbols;
     auto tuple = SplitUrlInApk(debug_file_path_);
+    // Symbols of dex files are collected on device. If the dex file doesn't exist, probably
+    // we are reporting on host, and there is no need to report warning of missing dex files.
+    if (!IsRegularFile(std::get<0>(tuple) ? std::get<1>(tuple) : debug_file_path_)) {
+      LOG(DEBUG) << "skip reading symbols from non-exist dex_file " << debug_file_path_;
+      return symbols;
+    }
     bool status = false;
     auto symbol_callback = [&](DexFileSymbol* symbol) {
       symbols.emplace_back(symbol->name, symbol->addr, symbol->size);
