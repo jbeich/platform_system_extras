@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0be9f89a_45d81675",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1559553
+      },
+      "writtenOn": "2021-11-10T18:22:02Z",
+      "side": 1,
+      "message": "You probably want to remove the \u0027fuzz_on_haiku_*\u0027 lines from the build file as well.",
+      "revId": "29f83a5c371dbccb62ba2a8653e775f949bddcd9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
