@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "82df3a78_138f3b25",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-11-12T05:18:54Z",
+      "side": 1,
+      "message": "ps2: fix check of attr.ids, which is stored before header_.attrs.offset.",
+      "revId": "952c564fa8f35330e23f88925198df83b5579589",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
