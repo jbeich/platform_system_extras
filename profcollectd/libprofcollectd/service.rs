@@ -73,10 +73,10 @@ impl IProfCollectd for ProfcollectdBinderService {
             .context("Failed to initiate an one-off trace.")
             .map_err(err_to_binder_status)
     }
-    fn process(&self, blocking: bool) -> BinderResult<()> {
+    fn process(&self) -> BinderResult<()> {
         let lock = &mut *self.lock();
         lock.scheduler
-            .process(blocking)
+            .process()
             .context("Failed to process profiles.")
             .map_err(err_to_binder_status)
     }
