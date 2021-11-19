@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7a06d61_9b5f98d9",
+        "filename": "simpleperf/cmd_report_sample.proto",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-11-19T21:12:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "90a95ef6_6669428b",
+      "range": {
+        "startLine": 126,
+        "startChar": 16,
+        "endLine": 126,
+        "endChar": 28
+      },
+      "revId": "6c43c8c7e80f9e986a621f956095977e0d254248",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0eea20e4_fa99b9ad",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-11-19T20:03:54Z",
       "side": 1,
       "message": "Can you document the clock type, similar to Sample.time above",
+      "range": {
+        "startLine": 133,
+        "startChar": 18,
+        "endLine": 133,
+        "endChar": 22
+      },
+      "revId": "6c43c8c7e80f9e986a621f956095977e0d254248",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1c850b2_5df00243",
+        "filename": "simpleperf/cmd_report_sample.proto",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-11-19T21:12:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0eea20e4_fa99b9ad",
       "range": {
         "startLine": 133,
         "startChar": 18,
