@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0b364f8_08f29c3d",
+        "filename": "simpleperf/record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-11-20T01:10:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "91f6f362_bae67b5f",
+      "range": {
+        "startLine": 244,
+        "startChar": 28,
+        "endLine": 244,
+        "endChar": 46
+      },
+      "revId": "2894c2d6d6fa1f2819f2e2104a40c9ac23aeadf7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4c3a124b_4380d9a5",
@@ -54,6 +78,30 @@
       "writtenOn": "2021-11-20T00:36:22Z",
       "side": 1,
       "message": "`*data` and move up next line.",
+      "range": {
+        "startLine": 293,
+        "startChar": 28,
+        "endLine": 293,
+        "endChar": 47
+      },
+      "revId": "2894c2d6d6fa1f2819f2e2104a40c9ac23aeadf7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "837cef89_20729d2a",
+        "filename": "simpleperf/record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-11-20T01:10:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4c3a124b_4380d9a5",
       "range": {
         "startLine": 293,
         "startChar": 28,
@@ -81,6 +129,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3a3a542_dd3c79b3",
+        "filename": "simpleperf/record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-11-20T01:10:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "041e8c48_865c6300",
+      "revId": "2894c2d6d6fa1f2819f2e2104a40c9ac23aeadf7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "042b3c88_6e01f45c",
@@ -94,6 +160,30 @@
       "writtenOn": "2021-11-20T00:36:22Z",
       "side": 1,
       "message": "`*data` and move next line up.",
+      "range": {
+        "startLine": 407,
+        "startChar": 28,
+        "endLine": 407,
+        "endChar": 52
+      },
+      "revId": "2894c2d6d6fa1f2819f2e2104a40c9ac23aeadf7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "93e3fe5b_8469ef89",
+        "filename": "simpleperf/record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-11-20T01:10:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "042b3c88_6e01f45c",
       "range": {
         "startLine": 407,
         "startChar": 28,
@@ -127,6 +217,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f2a0d56_d0e2f654",
+        "filename": "simpleperf/record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 540,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-11-20T01:10:58Z",
+      "side": 1,
+      "message": "There are still missing PERF_SAMPLE_* kinds that are not used by simpleperf. When it happens, it may or may not matter. So I didn\u0027t use it to detect errors, but used it as a debugging msg when something wrong happens.",
+      "parentUuid": "cb93ff19_8da38589",
+      "range": {
+        "startLine": 540,
+        "startChar": 8,
+        "endLine": 540,
+        "endChar": 13
+      },
+      "revId": "2894c2d6d6fa1f2819f2e2104a40c9ac23aeadf7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "39907d5e_f01d3828",
@@ -140,6 +254,30 @@
       "writtenOn": "2021-11-20T00:36:22Z",
       "side": 1,
       "message": "`*data` and move next line up.",
+      "range": {
+        "startLine": 929,
+        "startChar": 28,
+        "endLine": 929,
+        "endChar": 36
+      },
+      "revId": "2894c2d6d6fa1f2819f2e2104a40c9ac23aeadf7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "498b9dad_7febf61a",
+        "filename": "simpleperf/record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 929,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-11-20T01:10:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "39907d5e_f01d3828",
       "range": {
         "startLine": 929,
         "startChar": 28,
@@ -173,6 +311,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e865b0e_c833a088",
+        "filename": "simpleperf/record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1009,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-11-20T01:10:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e8dc1eb_846331cc",
+      "range": {
+        "startLine": 1009,
+        "startChar": 28,
+        "endLine": 1009,
+        "endChar": 36
+      },
+      "revId": "2894c2d6d6fa1f2819f2e2104a40c9ac23aeadf7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5e7ed148_21065c6f",
@@ -196,6 +358,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "01dc8c32_bca5697c",
+        "filename": "simpleperf/record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1102,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-11-20T01:10:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5e7ed148_21065c6f",
+      "range": {
+        "startLine": 1102,
+        "startChar": 28,
+        "endLine": 1102,
+        "endChar": 36
+      },
+      "revId": "2894c2d6d6fa1f2819f2e2104a40c9ac23aeadf7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "64677336_6f668701",
@@ -209,6 +395,30 @@
       "writtenOn": "2021-11-20T00:36:22Z",
       "side": 1,
       "message": "Maybe `data`, but that also seems to happen in a lot of places, so perhaps this is something that can get refactored separately.",
+      "range": {
+        "startLine": 1104,
+        "startChar": 14,
+        "endLine": 1104,
+        "endChar": 22
+      },
+      "revId": "2894c2d6d6fa1f2819f2e2104a40c9ac23aeadf7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9970c12b_6670a398",
+        "filename": "simpleperf/record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1104,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-11-20T01:10:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "64677336_6f668701",
       "range": {
         "startLine": 1104,
         "startChar": 14,
