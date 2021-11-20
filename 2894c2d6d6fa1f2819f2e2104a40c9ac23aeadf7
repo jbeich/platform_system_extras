@@ -16,6 +16,207 @@
       "message": "ps2: enforce nonull end parameter.",
       "revId": "2894c2d6d6fa1f2819f2e2104a40c9ac23aeadf7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91f6f362_bae67b5f",
+        "filename": "simpleperf/record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-11-20T00:36:22Z",
+      "side": 1,
+      "message": "`*data` instead and move up the following line in front for readability purposes? Using types directly in sizeof operations tends to be harder to maintain than the data member that is being read/written.",
+      "range": {
+        "startLine": 244,
+        "startChar": 28,
+        "endLine": 244,
+        "endChar": 46
+      },
+      "revId": "2894c2d6d6fa1f2819f2e2104a40c9ac23aeadf7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c3a124b_4380d9a5",
+        "filename": "simpleperf/record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-11-20T00:36:22Z",
+      "side": 1,
+      "message": "`*data` and move up next line.",
+      "range": {
+        "startLine": 293,
+        "startChar": 28,
+        "endLine": 293,
+        "endChar": 47
+      },
+      "revId": "2894c2d6d6fa1f2819f2e2104a40c9ac23aeadf7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "041e8c48_865c6300",
+        "filename": "simpleperf/record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-11-20T00:36:22Z",
+      "side": 1,
+      "message": "I think this is missing a CHECK_SIZE(p, end, sizeof(*data)) here.",
+      "revId": "2894c2d6d6fa1f2819f2e2104a40c9ac23aeadf7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "042b3c88_6e01f45c",
+        "filename": "simpleperf/record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-11-20T00:36:22Z",
+      "side": 1,
+      "message": "`*data` and move next line up.",
+      "range": {
+        "startLine": 407,
+        "startChar": 28,
+        "endLine": 407,
+        "endChar": 52
+      },
+      "revId": "2894c2d6d6fa1f2819f2e2104a40c9ac23aeadf7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb93ff19_8da38589",
+        "filename": "simpleperf/record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 540,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-11-20T00:36:22Z",
+      "side": 1,
+      "message": "Is DEBUG really the right categorization here? Does this happen often (i.e. are we still missing other PERF_SAMPLE_* kinds)? I\u0027m only asking because you removed the `CHECK_LE` from the original code here, and that might be exiting differently.",
+      "range": {
+        "startLine": 540,
+        "startChar": 8,
+        "endLine": 540,
+        "endChar": 13
+      },
+      "revId": "2894c2d6d6fa1f2819f2e2104a40c9ac23aeadf7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39907d5e_f01d3828",
+        "filename": "simpleperf/record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 929,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-11-20T00:36:22Z",
+      "side": 1,
+      "message": "`*data` and move next line up.",
+      "range": {
+        "startLine": 929,
+        "startChar": 28,
+        "endLine": 929,
+        "endChar": 36
+      },
+      "revId": "2894c2d6d6fa1f2819f2e2104a40c9ac23aeadf7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e8dc1eb_846331cc",
+        "filename": "simpleperf/record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1009,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-11-20T00:36:22Z",
+      "side": 1,
+      "message": "`*data` and move next line up.",
+      "range": {
+        "startLine": 1009,
+        "startChar": 28,
+        "endLine": 1009,
+        "endChar": 36
+      },
+      "revId": "2894c2d6d6fa1f2819f2e2104a40c9ac23aeadf7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e7ed148_21065c6f",
+        "filename": "simpleperf/record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1102,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-11-20T00:36:22Z",
+      "side": 1,
+      "message": "`*data` and move next line up.",
+      "range": {
+        "startLine": 1102,
+        "startChar": 28,
+        "endLine": 1102,
+        "endChar": 36
+      },
+      "revId": "2894c2d6d6fa1f2819f2e2104a40c9ac23aeadf7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64677336_6f668701",
+        "filename": "simpleperf/record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1104,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-11-20T00:36:22Z",
+      "side": 1,
+      "message": "Maybe `data`, but that also seems to happen in a lot of places, so perhaps this is something that can get refactored separately.",
+      "range": {
+        "startLine": 1104,
+        "startChar": 14,
+        "endLine": 1104,
+        "endChar": 22
+      },
+      "revId": "2894c2d6d6fa1f2819f2e2104a40c9ac23aeadf7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
