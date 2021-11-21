@@ -539,7 +539,7 @@ TEST(record_cmd, trace_offcpu_option) {
   TEST_REQUIRE_TRACEPOINT_EVENTS();
   OMIT_TEST_ON_NON_NATIVE_ABIS();
   TemporaryFile tmpfile;
-  ASSERT_TRUE(RunRecordCmd({"--trace-offcpu", "-f", "1000"}, tmpfile.path));
+  ASSERT_TRUE(RunRecordCmd({"--trace-offcpu", "-e", "cpu-clock", "-f", "1000"}, tmpfile.path));
   CheckEventType(tmpfile.path, "sched:sched_switch", 1u, 0u);
   std::unique_ptr<RecordFileReader> reader = RecordFileReader::CreateInstance(tmpfile.path);
   ASSERT_TRUE(reader);
@@ -551,9 +551,7 @@ TEST(record_cmd, trace_offcpu_option) {
   // Release recording environment in perf.data, to avoid affecting tests below.
   reader.reset();
 
-  // --trace-offcpu only works with cpu-clock, task-clock and cpu-cycles. cpu-cycles has been
-  // tested above.
-  ASSERT_TRUE(RunRecordCmd({"--trace-offcpu", "-e", "cpu-clock"}));
+  // --trace-offcpu only works with cpu-clock and task-clock. cpu-clock has been tested above.
   ASSERT_TRUE(RunRecordCmd({"--trace-offcpu", "-e", "task-clock"}));
   ASSERT_FALSE(RunRecordCmd({"--trace-offcpu", "-e", "page-faults"}));
   // --trace-offcpu doesn't work with more than one event.
@@ -887,7 +885,9 @@ TEST(record_cmd, check_trampoline_after_art_jni_methods) {
         std::string sym_name = get_symbol_name(thread, ips[i]);
         if (android::base::StartsWith(sym_name, "art::Method_invoke") && i + 1 < ips.size()) {
           has_check = true;
-          if (get_symbol_name(thread, ips[i + 1]) != "art_jni_trampoline") {
+          std::string name = get_symbol_name(thread, ips[i + 1]);
+          if (!android::base::EndsWith(name, "jni_trampoline")) {
+            GTEST_LOG_(ERROR) << "unexpected symbol after art::Method_invoke: " << name;
             return false;
           }
         }
