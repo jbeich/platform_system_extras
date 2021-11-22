@@ -1196,14 +1196,20 @@ bool RecordCommand::TraceOffCpu() {
     return false;
   }
   // --trace-offcpu option only works with one of the selected event types.
-  std::set<std::string> accepted_events = {"cpu-cycles", "cpu-clock", "task-clock"};
+  std::set<std::string> accepted_events = {"cpu-clock", "task-clock"};
   std::vector<const EventType*> events = event_selection_set_.GetEvents();
   if (events.size() != 1 || accepted_events.find(events[0]->name) == accepted_events.end()) {
     LOG(ERROR) << "--trace-offcpu option only works with one of events "
                << android::base::Join(accepted_events, ' ');
     return false;
   }
-  return event_selection_set_.AddEventType("sched:sched_switch");
+  if (!event_selection_set_.AddEventType("sched:sched_switch")) {
+    return false;
+  }
+  if (IsSwitchRecordSupported()) {
+    event_selection_set_.EnableSwitchRecord();
+  }
+  return true;
 }
 
 bool RecordCommand::SetEventSelectionFlags() {
