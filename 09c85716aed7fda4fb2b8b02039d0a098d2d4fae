@@ -22,6 +22,30 @@
       },
       "revId": "09c85716aed7fda4fb2b8b02039d0a098d2d4fae",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5574b610_61873c01",
+        "filename": "simpleperf/cmd_report_sample.proto",
+        "patchSetId": 2
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-11-23T17:59:18Z",
+      "side": 1,
+      "message": "No difference, unless you need to sync samples with other events using monotonic timestamps. And it seems Android \u003e\u003d 9 requires at least kernel 4.4, according to https://source.android.com/devices/architecture/kernel/core-kernel-reqs.",
+      "parentUuid": "d0ca75ce_ca0516fb",
+      "range": {
+        "startLine": 135,
+        "startChar": 42,
+        "endLine": 135,
+        "endChar": 82
+      },
+      "revId": "09c85716aed7fda4fb2b8b02039d0a098d2d4fae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
