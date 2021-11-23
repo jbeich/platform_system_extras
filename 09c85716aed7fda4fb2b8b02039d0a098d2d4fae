@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0ca75ce_ca0516fb",
+        "filename": "simpleperf/cmd_report_sample.proto",
+        "patchSetId": 2
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1079424
+      },
+      "writtenOn": "2021-11-23T01:52:39Z",
+      "side": 1,
+      "message": "Sorry for leaving a late question.\n\nIs there any practical difference for the kernel to be \u003c and \u003e\u003d 4.1 in the context of monotonic clock and perf clock? We just interpret it as the \"wall clock\" time, or shall we do something differently for the two kinds of clocks? If the latter, we probably need a boolean to tell whether it\u0027s \u003e\u003d 4.1.",
+      "range": {
+        "startLine": 135,
+        "startChar": 42,
+        "endLine": 135,
+        "endChar": 82
+      },
+      "revId": "09c85716aed7fda4fb2b8b02039d0a098d2d4fae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
