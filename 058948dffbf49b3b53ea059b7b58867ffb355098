@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f91678ef_ea011125",
+        "filename": "simpleperf/doc/executable_commands_reference.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 447,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-11-29T23:38:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c1276ea5_d85a44e3",
+      "range": {
+        "startLine": 447,
+        "startChar": 80,
+        "endLine": 447,
+        "endChar": 85
+      },
+      "revId": "058948dffbf49b3b53ea059b7b58867ffb355098",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dc661da9_57018a82",
@@ -70,6 +94,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "83e7cde8_8aeae571",
+        "filename": "simpleperf/doc/executable_commands_reference.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 448,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-11-29T23:38:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dc661da9_57018a82",
+      "range": {
+        "startLine": 448,
+        "startChar": 86,
+        "endLine": 448,
+        "endChar": 91
+      },
+      "revId": "058948dffbf49b3b53ea059b7b58867ffb355098",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "597cf34b_033f59a3",
+        "filename": "simpleperf/doc/executable_commands_reference.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 448,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-11-29T23:38:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2a917403_efc84177",
+      "range": {
+        "startLine": 448,
+        "startChar": 22,
+        "endLine": 448,
+        "endChar": 24
+      },
+      "revId": "058948dffbf49b3b53ea059b7b58867ffb355098",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "425a7636_00846823",
@@ -95,6 +167,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "42edc136_e5610fda",
+        "filename": "simpleperf/doc/executable_commands_reference.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-11-29T23:38:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "425a7636_00846823",
+      "range": {
+        "startLine": 450,
+        "startChar": 78,
+        "endLine": 450,
+        "endChar": 82
+      },
+      "revId": "058948dffbf49b3b53ea059b7b58867ffb355098",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "2bdfe42f_05c6e009",
         "filename": "simpleperf/doc/executable_commands_reference.md",
         "patchSetId": 1
@@ -106,6 +202,30 @@
       "writtenOn": "2021-11-29T23:20:16Z",
       "side": 1,
       "message": "I always debate whether to use the word \"minus\" for subtraction of two phrases written in English or to use the \"-\" symbol itself, which might look more like punctuation. This happens again on line 471, but I\u0027m not sure which reads better.",
+      "range": {
+        "startLine": 465,
+        "startChar": 57,
+        "endLine": 465,
+        "endChar": 58
+      },
+      "revId": "058948dffbf49b3b53ea059b7b58867ffb355098",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "51271489_3a88bb05",
+        "filename": "simpleperf/doc/executable_commands_reference.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-11-29T23:38:32Z",
+      "side": 1,
+      "message": "I was worried using minus will make the multi-word nouns not clear here. But I realize I can mark them.",
+      "parentUuid": "2bdfe42f_05c6e009",
       "range": {
         "startLine": 465,
         "startChar": 57,
