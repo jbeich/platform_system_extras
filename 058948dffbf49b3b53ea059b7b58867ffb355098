@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1276ea5_d85a44e3",
+        "filename": "simpleperf/doc/executable_commands_reference.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 447,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-11-29T23:20:16Z",
+      "side": 1,
+      "message": "\"added a\"",
+      "range": {
+        "startLine": 447,
+        "startChar": 80,
+        "endLine": 447,
+        "endChar": 85
+      },
+      "revId": "058948dffbf49b3b53ea059b7b58867ffb355098",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc661da9_57018a82",
+        "filename": "simpleperf/doc/executable_commands_reference.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 448,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-11-29T23:20:16Z",
+      "side": 1,
+      "message": "the following",
+      "range": {
+        "startLine": 448,
+        "startChar": 86,
+        "endLine": 448,
+        "endChar": 91
+      },
+      "revId": "058948dffbf49b3b53ea059b7b58867ffb355098",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a917403_efc84177",
+        "filename": "simpleperf/doc/executable_commands_reference.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 448,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-11-29T23:20:16Z",
+      "side": 1,
+      "message": "to the",
+      "range": {
+        "startLine": 448,
+        "startChar": 22,
+        "endLine": 448,
+        "endChar": 24
+      },
+      "revId": "058948dffbf49b3b53ea059b7b58867ffb355098",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "425a7636_00846823",
+        "filename": "simpleperf/doc/executable_commands_reference.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-11-29T23:20:16Z",
+      "side": 1,
+      "message": "It would be better not to start a sentence with \"And\".",
+      "range": {
+        "startLine": 450,
+        "startChar": 78,
+        "endLine": 450,
+        "endChar": 82
+      },
+      "revId": "058948dffbf49b3b53ea059b7b58867ffb355098",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2bdfe42f_05c6e009",
+        "filename": "simpleperf/doc/executable_commands_reference.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-11-29T23:20:16Z",
+      "side": 1,
+      "message": "I always debate whether to use the word \"minus\" for subtraction of two phrases written in English or to use the \"-\" symbol itself, which might look more like punctuation. This happens again on line 471, but I\u0027m not sure which reads better.",
+      "range": {
+        "startLine": 465,
+        "startChar": 57,
+        "endLine": 465,
+        "endChar": 58
+      },
+      "revId": "058948dffbf49b3b53ea059b7b58867ffb355098",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
