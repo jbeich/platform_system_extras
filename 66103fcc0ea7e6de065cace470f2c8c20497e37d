@@ -16,6 +16,29 @@
       "message": "Thanks for putting together some great new docs about how on/off-cpu profiling and reporting works.",
       "revId": "66103fcc0ea7e6de065cace470f2c8c20497e37d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd6956a2_ca427d10",
+        "filename": "simpleperf/doc/executable_commands_reference.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 472,
+      "author": {
+        "id": 1272573
+      },
+      "writtenOn": "2021-11-30T05:42:58Z",
+      "side": 1,
+      "message": "looks like this got formatted as bullet points inadvertently",
+      "range": {
+        "startLine": 469,
+        "startChar": 0,
+        "endLine": 472,
+        "endChar": 44
+      },
+      "revId": "66103fcc0ea7e6de065cace470f2c8c20497e37d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
