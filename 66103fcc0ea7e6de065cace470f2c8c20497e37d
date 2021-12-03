@@ -39,6 +39,30 @@
       },
       "revId": "66103fcc0ea7e6de065cace470f2c8c20497e37d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "94d0fd85_ffafe723",
+        "filename": "simpleperf/doc/executable_commands_reference.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 472,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-12-03T19:36:00Z",
+      "side": 1,
+      "message": "Thanks for pointing it out! Fix was uploaded in https://android-review.googlesource.com/c/platform/system/extras/+/1910311",
+      "parentUuid": "dd6956a2_ca427d10",
+      "range": {
+        "startLine": 469,
+        "startChar": 0,
+        "endLine": 472,
+        "endChar": 44
+      },
+      "revId": "66103fcc0ea7e6de065cace470f2c8c20497e37d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
