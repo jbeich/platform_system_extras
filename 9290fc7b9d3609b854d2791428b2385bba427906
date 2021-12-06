@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58dd4b6e_772f9209",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-12-06T23:58:54Z",
+      "side": 1,
+      "message": "The presubmit test is broken due to http://b/208712503.",
+      "revId": "9290fc7b9d3609b854d2791428b2385bba427906",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
