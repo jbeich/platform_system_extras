@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db6c06a8_f3acbacd",
+        "filename": "simpleperf/scripts/simpleperf_utils.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 910,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-12-08T19:38:37Z",
+      "side": 1,
+      "message": "There doesn\u0027t seem to be a fallback path here.  Is this comment still relevant?",
+      "range": {
+        "startLine": 910,
+        "startChar": 0,
+        "endLine": 910,
+        "endChar": 83
+      },
+      "revId": "d913f3df186a64964baf12b35ce57e405f0c4d86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
