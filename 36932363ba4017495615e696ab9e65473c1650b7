@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb157f53_ba208c3f",
+        "filename": "simpleperf/cmd_inject.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-12-09T00:18:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7ed300e7_0b69f25e",
+      "range": {
+        "startLine": 113,
+        "startChar": 72,
+        "endLine": 113,
+        "endChar": 73
+      },
+      "revId": "36932363ba4017495615e696ab9e65473c1650b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1608774a_c1d3b7d7",
@@ -37,6 +61,24 @@
       "writtenOn": "2021-12-09T00:07:27Z",
       "side": 1,
       "message": "Have a LOG_ERROR here to report the problematic filename.",
+      "revId": "36932363ba4017495615e696ab9e65473c1650b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4fe02e61_32ffde2e",
+        "filename": "simpleperf/cmd_inject.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-12-09T00:18:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1608774a_c1d3b7d7",
       "revId": "36932363ba4017495615e696ab9e65473c1650b7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
