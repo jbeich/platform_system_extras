@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e9a808a_69af3d1a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-12-10T20:14:44Z",
+      "side": 1,
+      "message": "ps2: adjust location to call GetFirstLoadSegmentVaddr.",
+      "revId": "a020822961a2c8def0d126c7cf16567721e6f2f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
