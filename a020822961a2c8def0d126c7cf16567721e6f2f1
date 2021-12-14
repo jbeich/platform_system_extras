@@ -16,6 +16,23 @@
       "message": "ps2: adjust location to call GetFirstLoadSegmentVaddr.",
       "revId": "a020822961a2c8def0d126c7cf16567721e6f2f1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "793706d8_f2add05d",
+        "filename": "simpleperf/cmd_inject.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-12-14T00:29:04Z",
+      "side": 1,
+      "message": "Is it also worth a `PLOG` here to note this as well?",
+      "revId": "a020822961a2c8def0d126c7cf16567721e6f2f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
