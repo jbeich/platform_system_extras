@@ -475,6 +475,79 @@ class BranchListReader {
   BranchListBinaryCallback callback_;
 };
 
+// Convert BranchListBinaryInfo into AutoFDOBinaryInfo.
+class BranchListToAutoFDOConverter {
+ public:
+  std::unique_ptr<AutoFDOBinaryInfo> Convert(const BinaryKey& key, BranchListBinaryInfo& binary) {
+    BuildId build_id = key.build_id;
+    std::unique_ptr<Dso> dso = Dso::CreateDsoWithBuildId(binary.dso_type, key.path, build_id);
+    if (!dso || !CheckBuildId(dso.get(), key.build_id)) {
+      return nullptr;
+    }
+    // Dso is used in ETMInstrRange in post process, so need to extend its lifetime.
+    dso_ = dso.get();
+    autofdo_binary_.reset(new AutoFDOBinaryInfo);
+    autofdo_binary_->first_load_segment_addr = GetFirstLoadSegmentVaddr(dso_);
+
+    if (dso_->type() == DSO_KERNEL) {
+      ModifyBranchMapForKernel(key.kernel_start_addr, binary);
+    }
+
+    auto process_instr_callback = [this](const ETMInstrRange& range) { ProcessInstrRange(range); };
+    auto result =
+        ConvertBranchMapToInstrRanges(dso_, binary.GetOrderedBranchMap(), process_instr_callback);
+    if (!result.ok()) {
+      LOG(WARNING) << "failed to build instr ranges for binary " << dso_->Path() << ": "
+                   << result.error();
+      return nullptr;
+    }
+    dso_ = nullptr;
+    return std::move(autofdo_binary_);
+  }
+
+ private:
+  bool CheckBuildId(Dso* dso, const BuildId& expected_build_id) {
+    if (expected_build_id.IsEmpty()) {
+      return true;
+    }
+    BuildId build_id;
+    return GetBuildIdFromDsoPath(dso->GetDebugFilePath(), &build_id) &&
+           build_id == expected_build_id;
+  }
+
+  void ModifyBranchMapForKernel(uint64_t kernel_start_addr, BranchListBinaryInfo& binary) {
+    if (kernel_start_addr == 0) {
+      // vmlinux has been provided when generating branch lists. Addresses in branch lists are
+      // already vaddrs in vmlinux.
+      return;
+    }
+    // Addresses are still kernel ip addrs in memory. Need to convert them to vaddrs in vmlinux.
+    UnorderedBranchMap new_branch_map;
+    for (auto& p : binary.branch_map) {
+      uint64_t vaddr_in_file = dso_->IpToVaddrInFile(p.first, kernel_start_addr, 0);
+      new_branch_map[vaddr_in_file] = std::move(p.second);
+    }
+    binary.branch_map = std::move(new_branch_map);
+  }
+
+  void ProcessInstrRange(const ETMInstrRange& instr_range) {
+    CHECK_EQ(instr_range.dso, dso_);
+    auto& binary = *autofdo_binary_;
+    uint64_t total_count = instr_range.branch_taken_count;
+    OverflowSafeAdd(total_count, instr_range.branch_not_taken_count);
+    OverflowSafeAdd(binary.range_count_map[AddrPair(instr_range.start_addr, instr_range.end_addr)],
+                    total_count);
+    if (instr_range.branch_taken_count > 0) {
+      OverflowSafeAdd(
+          binary.branch_count_map[AddrPair(instr_range.end_addr, instr_range.branch_to_addr)],
+          instr_range.branch_taken_count);
+    }
+  }
+
+  Dso* dso_ = nullptr;
+  std::unique_ptr<AutoFDOBinaryInfo> autofdo_binary_;
+};
+
 // Write instruction ranges to a file in AutoFDO text format.
 class AutoFDOWriter {
  public:
@@ -783,31 +856,7 @@ class InjectCommand : public Command {
       }
       return reader.Read();
     }
-    if (!ProcessBranchListFile(input_filename)) {
-      return false;
-    }
-    CHECK(output_format_ == OutputFormat::AutoFDO);
-    for (auto& p : autofdo_binary_map_) {
-      Dso* dso = p.first;
-      AutoFDOBinaryInfo& binary = p.second;
-      binary.first_load_segment_addr = GetFirstLoadSegmentVaddr(dso);
-      autofdo_writer_.AddAutoFDOBinary(BinaryKey(dso, 0), binary);
-    }
-    autofdo_binary_map_.clear();
-    return true;
-  }
-
-  void ProcessInstrRange(const ETMInstrRange& instr_range) {
-    auto& binary = autofdo_binary_map_[instr_range.dso];
-    uint64_t total_count = instr_range.branch_taken_count;
-    OverflowSafeAdd(total_count, instr_range.branch_not_taken_count);
-    OverflowSafeAdd(binary.range_count_map[AddrPair(instr_range.start_addr, instr_range.end_addr)],
-                    total_count);
-    if (instr_range.branch_taken_count > 0) {
-      OverflowSafeAdd(
-          binary.branch_count_map[AddrPair(instr_range.end_addr, instr_range.branch_to_addr)],
-          instr_range.branch_taken_count);
-    }
+    return ProcessBranchListFile(input_filename);
   }
 
   bool ProcessBranchListFile(const std::string& input_filename) {
@@ -815,58 +864,19 @@ class InjectCommand : public Command {
       LOG(ERROR) << "Only support autofdo output when given a branch list file.";
       return false;
     }
-    auto check_build_id = [](Dso* dso, const BuildId& expected_build_id) {
-      if (expected_build_id.IsEmpty()) {
-        return true;
-      }
-      BuildId build_id;
-      return GetBuildIdFromDsoPath(dso->GetDebugFilePath(), &build_id) &&
-             build_id == expected_build_id;
-    };
-
-    auto process_instr_callback = [this](const ETMInstrRange& range) { ProcessInstrRange(range); };
-
+    BranchListToAutoFDOConverter converter;
     auto callback = [&](const BinaryKey& key, BranchListBinaryInfo& binary) {
-      BuildId build_id = key.build_id;
-      std::unique_ptr<Dso> dso = Dso::CreateDsoWithBuildId(binary.dso_type, key.path, build_id);
-      if (!dso || !check_build_id(dso.get(), key.build_id)) {
-        return;
-      }
-      // Dso is used in ETMInstrRange in post process, so need to extend its lifetime.
-      Dso* dso_p = dso.get();
-      branch_list_dso_v_.emplace_back(dso.release());
-
-      if (dso_p->type() == DSO_KERNEL) {
-        ModifyBranchMapForKernel(dso_p, key.kernel_start_addr, binary);
-      }
-
-      auto result = ConvertBranchMapToInstrRanges(dso_p, binary.GetOrderedBranchMap(),
-                                                  process_instr_callback);
-      if (!result.ok()) {
-        LOG(WARNING) << "failed to build instr ranges for binary " << dso_p->Path() << ": "
-                     << result.error();
+      std::unique_ptr<AutoFDOBinaryInfo> autofdo_binary = converter.Convert(key, binary);
+      if (autofdo_binary) {
+        // Create new BinaryKey with kernel_start_addr = 0. Because AutoFDO output doesn't care
+        // kernel_start_addr.
+        autofdo_writer_.AddAutoFDOBinary(BinaryKey(key.path, key.build_id), *autofdo_binary);
       }
     };
 
     BranchListReader reader(input_filename, binary_name_regex_);
     reader.SetCallback(callback);
     return reader.Read();
-  }
-
-  void ModifyBranchMapForKernel(Dso* dso, uint64_t kernel_start_addr,
-                                BranchListBinaryInfo& binary) {
-    if (kernel_start_addr == 0) {
-      // vmlinux has been provided when generating branch lists. Addresses in branch lists are
-      // already vaddrs in vmlinux.
-      return;
-    }
-    // Addresses are still kernel ip addrs in memory. Need to convert them to vaddrs in vmlinux.
-    UnorderedBranchMap new_branch_map;
-    for (auto& p : binary.branch_map) {
-      uint64_t vaddr_in_file = dso->IpToVaddrInFile(p.first, kernel_start_addr, 0);
-      new_branch_map[vaddr_in_file] = std::move(p.second);
-    }
-    binary.branch_map = std::move(new_branch_map);
   }
 
   bool WriteOutput() {
@@ -886,12 +896,8 @@ class InjectCommand : public Command {
   ETMDumpOption etm_dump_option_;
 
   std::unique_ptr<Dso> placeholder_dso_;
-  // Store results for AutoFDO.
-  std::unordered_map<Dso*, AutoFDOBinaryInfo> autofdo_binary_map_;
   AutoFDOWriter autofdo_writer_;
-  // Store results for BranchList.
   BranchListWriter branch_list_writer_;
-  std::vector<std::unique_ptr<Dso>> branch_list_dso_v_;
 };
 
 }  // namespace
