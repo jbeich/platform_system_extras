@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76e98fbc_264b3e6b",
+        "filename": "simpleperf/cmd_inject.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-12-14T23:24:15Z",
+      "side": 1,
+      "message": "Should these additions be done separately, or do we know that this operation won\u0027t overflow?",
+      "range": {
+        "startLine": 316,
+        "startChar": 20,
+        "endLine": 316,
+        "endChar": 87
+      },
+      "revId": "55199ff1f151c4942a80a0f02a6de3f07b2a902f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
