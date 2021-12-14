@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bff5180c_00922646",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-12-14T23:49:03Z",
+      "side": 1,
+      "message": "ps2: remove two unused member variables. Added placeholder_dso_ to keep symdir info.",
+      "revId": "f2fe9f0436b1b35acbf317bb69843fdc194d353c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

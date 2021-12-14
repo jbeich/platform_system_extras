@@ -22,6 +22,30 @@
       },
       "revId": "55199ff1f151c4942a80a0f02a6de3f07b2a902f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f7859c7_0ae6d999",
+        "filename": "simpleperf/cmd_inject.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-12-14T23:49:03Z",
+      "side": 1,
+      "message": "They won\u0027t overflow. Because one of them is zero. But the interface makes it look can overflow. So added one more OverflowSafeAdd.",
+      "parentUuid": "76e98fbc_264b3e6b",
+      "range": {
+        "startLine": 316,
+        "startChar": 20,
+        "endLine": 316,
+        "endChar": 87
+      },
+      "revId": "55199ff1f151c4942a80a0f02a6de3f07b2a902f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
