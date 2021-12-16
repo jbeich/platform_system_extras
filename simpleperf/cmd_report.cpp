@@ -391,6 +391,7 @@ class ReportCommand : public Command {
 "-o report_file_name   Set report file name, default is stdout.\n"
 "--percent-limit <percent>  Set min percentage in report entries and call graphs.\n"
 "--pids pid1,pid2,...  Report only for selected pids.\n"
+"--print-input-filename    Add input filename as a column.\n"
 "--raw-period          Report period count instead of period percentage.\n"
 "--sort key1,key2,...  Select keys used to group samples into report entries. Samples having\n"
 "                      the same key values are aggregated into one report entry. Each report\n"
@@ -472,6 +473,7 @@ class ReportCommand : public Command {
   bool trace_offcpu_;
   size_t sched_switch_attr_id_;
   bool report_csv_ = false;
+  bool print_input_filename_ = false;
 
   std::string report_filename_;
 };
@@ -527,6 +529,7 @@ bool ReportCommand::ParseOptions(const std::vector<std::string>& args) {
       {"-o", {OptionValueType::STRING, OptionType::SINGLE}},
       {"--percent-limit", {OptionValueType::DOUBLE, OptionType::SINGLE}},
       {"--pids", {OptionValueType::STRING, OptionType::MULTIPLE}},
+      {"--print-input-filename", {OptionValueType::NONE, OptionType::SINGLE}},
       {"--tids", {OptionValueType::STRING, OptionType::MULTIPLE}},
       {"--raw-period", {OptionValueType::NONE, OptionType::SINGLE}},
       {"--sort", {OptionValueType::STRING, OptionType::SINGLE}},
@@ -608,6 +611,8 @@ bool ReportCommand::ParseOptions(const std::vector<std::string>& args) {
       return false;
     }
   }
+  print_input_filename_ = options.PullBoolValue("--print-input-filename");
+
   for (const OptionValue& value : options.PullValues("--tids")) {
     if (auto tids = GetTidsFromString(*value.str_value, false); tids) {
       sample_tree_builder_options_.tid_filter.insert(tids->begin(), tids->end());
@@ -713,6 +718,16 @@ bool ReportCommand::BuildSampleComparatorAndDisplayer(bool print_sample_count,
       displayer.AddDisplayFunction("EventCount", DisplaySelfPeriod);
     }
     displayer.AddDisplayFunction("EventName", DisplayEventName);
+  }
+  if (print_input_filename_) {
+    std::string input_filename;
+    if (auto pos = record_filename_.rfind(OS_PATH_SEPARATOR); pos != std::string::npos) {
+      input_filename = record_filename_.substr(pos + 1);
+    } else {
+      input_filename = record_filename_;
+    }
+    displayer.AddDisplayFunctionWrapper(
+        "InputFileName", [input_filename](const SampleEntry*) { return input_filename; });
   }
 
   if (print_callgraph_) {

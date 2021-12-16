@@ -557,6 +557,12 @@ TEST_F(ReportCommandTest, cpu_option) {
   ASSERT_FALSE(ReportCmd()->Run({"-i", GetTestData("perf.data"), "--cpu", "-2"}));
 }
 
+TEST_F(ReportCommandTest, print_input_filename_option) {
+  Report("perf.data", {"--print-input-filename"});
+  ASSERT_TRUE(success);
+  ASSERT_NE(std::string::npos, content.find("perf.data"));
+}
+
 #if defined(__linux__)
 #include "event_selection_set.h"
 
