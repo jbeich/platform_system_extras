@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0aef2919_f7c0fca0",
+        "filename": "simpleperf/doc/android_application_profiling.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-12-16T22:03:45Z",
+      "side": 1,
+      "message": "the original symbols in a",
+      "range": {
+        "startLine": 244,
+        "startChar": 55,
+        "endLine": 244,
+        "endChar": 74
+      },
+      "revId": "26265fa20a2704fbc9f3766b6c769bda672d088e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd877490_4b60850d",
+        "filename": "simpleperf/doc/android_application_profiling.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-12-16T22:03:45Z",
+      "side": 1,
+      "message": "a Proguard mapping file to the",
+      "range": {
+        "startLine": 245,
+        "startChar": 0,
+        "endLine": 245,
+        "endChar": 22
+      },
+      "revId": "26265fa20a2704fbc9f3766b6c769bda672d088e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
