@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "3f3b2b1c_237f6472",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-12-16T23:33:28Z",
+      "side": 1,
+      "message": "simpleperf exits 1 if simpleperf has some error. Otherwise, it uses workload-\u003eWaitChildProcess() at the end of Run(), to get the process\u0027s exit code as its exit code.",
+      "parentUuid": "7d2d5d6e_7d98892a",
+      "range": {
+        "startLine": 9,
+        "startChar": 35,
+        "endLine": 9,
+        "endChar": 49
+      },
+      "revId": "4ec719b25aa3cc886c931c6652349b47ef0fd62b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "6593ebc8_3bd6e4b7",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
