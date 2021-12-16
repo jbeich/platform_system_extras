@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d2d5d6e_7d98892a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-12-16T23:29:03Z",
+      "side": 1,
+      "message": "As implemented this looks like it only exits with 0 if the process exited with a 0 exit code or 1 if the process exited with a non-zero exit code. Shouldn\u0027t we return the actual non-zero exit code?",
+      "range": {
+        "startLine": 9,
+        "startChar": 35,
+        "endLine": 9,
+        "endChar": 49
+      },
+      "revId": "4ec719b25aa3cc886c931c6652349b47ef0fd62b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "6593ebc8_3bd6e4b7",
