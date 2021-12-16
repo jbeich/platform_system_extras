@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ccfb508_2f1dea5c",
+        "filename": "simpleperf/cmd_inject.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-12-16T01:32:11Z",
+      "side": 1,
+      "message": "`happened` or `occurred` might sound better here.",
+      "range": {
+        "startLine": 121,
+        "startChar": 43,
+        "endLine": 121,
+        "endChar": 50
+      },
+      "revId": "b5c559b411e36b6af94e96e54c325acc26aea600",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
