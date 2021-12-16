@@ -98,6 +98,24 @@
       "parentUuid": "44b800e4_0cab8b18",
       "revId": "4ec719b25aa3cc886c931c6652349b47ef0fd62b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "01f3ceb7_cb471d6e",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 486,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-12-16T23:49:37Z",
+      "side": 1,
+      "message": "Thanks. I figured that something was different in this case, but wanted to make sure that it was going to return the precise result.",
+      "parentUuid": "ec93c372_9d723edd",
+      "revId": "4ec719b25aa3cc886c931c6652349b47ef0fd62b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
