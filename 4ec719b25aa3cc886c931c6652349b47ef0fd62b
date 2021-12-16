@@ -63,6 +63,23 @@
       "message": "ps2: adjust test name.",
       "revId": "4ec719b25aa3cc886c931c6652349b47ef0fd62b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44b800e4_0cab8b18",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 486,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2021-12-16T23:36:47Z",
+      "side": 1,
+      "message": "What about here for non-zero returns?",
+      "revId": "4ec719b25aa3cc886c931c6652349b47ef0fd62b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
