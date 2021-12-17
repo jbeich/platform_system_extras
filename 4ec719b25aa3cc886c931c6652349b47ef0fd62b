@@ -116,6 +116,24 @@
       "parentUuid": "ec93c372_9d723edd",
       "revId": "4ec719b25aa3cc886c931c6652349b47ef0fd62b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a404be2a_09fe6a51",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 486,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-12-17T00:16:09Z",
+      "side": 1,
+      "message": "Thanks for reminding it! The idea of adding comment occurred to me, but slipped away.",
+      "parentUuid": "01f3ceb7_cb471d6e",
+      "revId": "4ec719b25aa3cc886c931c6652349b47ef0fd62b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
