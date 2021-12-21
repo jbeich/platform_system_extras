@@ -53,6 +53,18 @@ static void CheckSampleRecordDataEqual(const SampleRecord& r1, const SampleRecor
   if (r1.sample_type & PERF_SAMPLE_PERIOD) {
     EXPECT_EQ(r1.period_data.period, r2.period_data.period);
   }
+  if (r1.sample_type & PERF_SAMPLE_READ) {
+    EXPECT_EQ(r1.read_data.time_enabled, r2.read_data.time_enabled);
+    EXPECT_EQ(r1.read_data.time_running, r2.read_data.time_running);
+    EXPECT_EQ(r1.read_data.counts.size(), r2.read_data.counts.size());
+    for (size_t i = 0; i < r1.read_data.counts.size(); i++) {
+      EXPECT_EQ(r1.read_data.counts[i], r2.read_data.counts[i]);
+    }
+    EXPECT_EQ(r1.read_data.ids.size(), r2.read_data.ids.size());
+    for (size_t i = 0; i < r1.read_data.ids.size(); i++) {
+      EXPECT_EQ(r1.read_data.ids[i], r2.read_data.ids[i]);
+    }
+  }
   if (r1.sample_type & PERF_SAMPLE_CALLCHAIN) {
     ASSERT_EQ(r1.callchain_data.ip_nr, r2.callchain_data.ip_nr);
     for (size_t i = 0; i < r1.callchain_data.ip_nr; ++i) {
