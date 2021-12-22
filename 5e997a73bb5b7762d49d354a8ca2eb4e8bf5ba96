@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd9fec21_63df897a",
+        "filename": "simpleperf/cmd_stat.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 786,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2021-12-22T23:14:35Z",
+      "side": 1,
+      "message": "Should we also print a description or names of the counters?",
+      "revId": "5e997a73bb5b7762d49d354a8ca2eb4e8bf5ba96",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
