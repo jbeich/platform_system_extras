@@ -16,6 +16,24 @@
       "message": "Should we also print a description or names of the counters?",
       "revId": "5e997a73bb5b7762d49d354a8ca2eb4e8bf5ba96",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc37dae3_75b29df4",
+        "filename": "simpleperf/cmd_stat.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 786,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2021-12-22T23:26:40Z",
+      "side": 1,
+      "message": "Done. added more descriptions.",
+      "parentUuid": "dd9fec21_63df897a",
+      "revId": "5e997a73bb5b7762d49d354a8ca2eb4e8bf5ba96",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
