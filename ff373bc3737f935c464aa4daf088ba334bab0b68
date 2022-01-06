@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f4698b3_d7f23ade",
+        "filename": "simpleperf/doc/sample_filter.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2022-01-06T23:52:10Z",
+      "side": 1,
+      "message": "Do you want to surround these clock names with backticks to denote they are \"code\"?",
+      "range": {
+        "startLine": 24,
+        "startChar": 84,
+        "endLine": 24,
+        "endChar": 93
+      },
+      "revId": "ff373bc3737f935c464aa4daf088ba334bab0b68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47a8a1c0_159ae417",
+        "filename": "simpleperf/doc/sample_filter.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2022-01-06T23:52:10Z",
+      "side": 1,
+      "message": "Does the description of timestamps really belong with the next block instead? Otherwise, those time ranges look a bit confusing.",
+      "revId": "ff373bc3737f935c464aa4daf088ba334bab0b68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
