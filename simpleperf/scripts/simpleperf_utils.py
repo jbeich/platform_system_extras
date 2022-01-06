@@ -30,7 +30,7 @@ import shutil
 import subprocess
 import sys
 import time
-from typing import Dict, Iterator, List, Optional, Set, Tuple, Union
+from typing import Any, Dict, Iterator, List, Optional, Set, Tuple, Union
 
 
 NDK_ERROR_MESSAGE = "Please install the Android NDK (https://developer.android.com/studio/projects/install-ndk), then set NDK path with --ndk_path option."
@@ -369,14 +369,15 @@ class AdbHelper(object):
             build_version = self.get_property('ro.build.version.release')
         android_version = 0
         if build_version:
-            if not build_version[0].isdigit():
+            if build_version[0].isdigit():
+                i = 1
+                while i < len(build_version) and build_version[i].isdigit():
+                    i += 1
+                android_version = int(build_version[:i])
+            else:
                 c = build_version[0].upper()
                 if c.isupper() and c >= 'L':
                     android_version = ord(c) - ord('L') + 5
-            else:
-                strs = build_version.split('.')
-                if strs:
-                    android_version = int(strs[0])
         return android_version
 
 
@@ -902,6 +903,16 @@ class ReadElf(object):
             build_id = build_id[:40]
         return '0x' + build_id
 
+    @staticmethod
+    def unpad_build_id(build_id: str) -> str:
+        if build_id.startswith('0x'):
+            build_id = build_id[2:]
+            # Unpad build id as TrimZeroesFromBuildIDString() in quipper.
+            padding = '0' * 8
+            while build_id.endswith(padding):
+                build_id = build_id[:-len(padding)]
+        return build_id
+
     def get_sections(self, elf_file_path: Union[Path, str]) -> List[str]:
         """ Get sections of an elf file. """
         section_names: List[str] = []
@@ -991,6 +1002,17 @@ class ArgParseFormatter(
 class BaseArgumentParser(argparse.ArgumentParser):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs, formatter_class=ArgParseFormatter)
+
+    def add_trace_offcpu_option(self, subparser: Optional[Any] = None):
+        parser = subparser if subparser else self
+        parser.add_argument(
+            '--trace-offcpu', choices=['on-cpu', 'off-cpu', 'on-off-cpu', 'mixed-on-off-cpu'],
+            help="""Set report mode for profiles recorded with --trace-offcpu option. All possible
+                    modes are: on-cpu (only on-cpu samples), off-cpu (only off-cpu samples),
+                    on-off-cpu (both on-cpu and off-cpu samples, can be split by event name),
+                    mixed-on-off-cpu (on-cpu and off-cpu samples using the same event name).
+                    If not set, mixed-on-off-cpu mode is used.
+                """)
 
     def parse_known_args(self, *args, **kwargs):
         self.add_argument(
