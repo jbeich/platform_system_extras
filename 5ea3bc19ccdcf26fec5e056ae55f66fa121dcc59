@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f241848_7587e732",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2022-01-06T00:00:33Z",
+      "side": 1,
+      "message": "ps2: remove parsing unsupported option. ",
+      "revId": "5ea3bc19ccdcf26fec5e056ae55f66fa121dcc59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
