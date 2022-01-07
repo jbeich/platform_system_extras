@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2bbbf6e9_2629416d",
+        "filename": "simpleperf/doc/sample_filter.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2022-01-07T00:15:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8f4698b3_d7f23ade",
+      "range": {
+        "startLine": 24,
+        "startChar": 84,
+        "endLine": 24,
+        "endChar": 93
+      },
+      "revId": "ff373bc3737f935c464aa4daf088ba334bab0b68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "47a8a1c0_159ae417",
@@ -37,6 +61,24 @@
       "writtenOn": "2022-01-06T23:52:10Z",
       "side": 1,
       "message": "Does the description of timestamps really belong with the next block instead? Otherwise, those time ranges look a bit confusing.",
+      "revId": "ff373bc3737f935c464aa4daf088ba334bab0b68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8ea872f_7495f6c6",
+        "filename": "simpleperf/doc/sample_filter.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2022-01-07T00:15:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "47a8a1c0_159ae417",
       "revId": "ff373bc3737f935c464aa4daf088ba334bab0b68",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
