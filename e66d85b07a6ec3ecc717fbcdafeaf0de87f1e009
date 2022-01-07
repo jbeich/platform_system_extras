@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8758abc1_30b2251c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2022-01-07T00:17:01Z",
+      "side": 1,
+      "message": "ps3,4: move get clock id code to RecordFileReader, to avoid duplicating code in the future.",
+      "revId": "e66d85b07a6ec3ecc717fbcdafeaf0de87f1e009",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
