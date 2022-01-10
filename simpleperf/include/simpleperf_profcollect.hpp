@@ -14,9 +14,11 @@
  * limitations under the License.
  */
 
+#include <inttypes.h>
+
 extern "C" {
 
-bool HasSupport();
+bool HasSupport(uint64_t timeout_ms, uint64_t check_period_ms);
 bool Record(const char* event_name, const char* output, float duration);
 bool Inject(const char* traceInput, const char* profileOutput, const char* binary_filter);
 }

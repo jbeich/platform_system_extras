@@ -24,9 +24,18 @@
 
 using namespace simpleperf;
 
-bool HasSupport() {
-  if (!ETMRecorder::GetInstance().CheckEtmSupport()) {
-    return false;
+bool HasSupport(uint64_t timeout_ms, uint64_t check_period_ms) {
+  auto result = ETMRecorder::GetInstance().CheckEtmSupport();
+  if (!result.ok()) {
+    while (timeout_ms > 0 && !result.ok()) {
+      usleep(check_period_ms * 1000);
+      timeout_ms -= std::min(timeout_ms, check_period_ms);
+      result = ETMRecorder::GetInstance().CheckEtmSupport();
+    }
+    if (!result.ok()) {
+      LOG(ERROR) << result.error();
+      return false;
+    }
   }
   const EventType* type = FindEventTypeByName("cs-etm", false);
   if (type == nullptr) {

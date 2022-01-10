@@ -26,8 +26,12 @@ fn path_to_cstr(path: &Path) -> CString {
 }
 
 /// Returns whether the system has support for simpleperf etm.
-pub fn has_support() -> bool {
-    unsafe { simpleperf_profcollect_bindgen::HasSupport() }
+/// The support may not be immediately available after boot. So add timeout to wait until the
+/// support is ready.
+/// timeout_ms: If the support isn't available, wait for timeout milliseconds.
+/// check_period_ms: When waiting, check the support every check_period milliseconds.
+pub fn has_support(timeout_ms: u64, check_period_ms: u64) -> bool {
+    unsafe { simpleperf_profcollect_bindgen::HasSupport(timeout_ms, check_period_ms) }
 }
 
 /// ETM recording scope

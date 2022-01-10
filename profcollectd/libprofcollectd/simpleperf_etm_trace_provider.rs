@@ -76,6 +76,12 @@ impl TraceProvider for SimpleperfEtmTraceProvider {
 
 impl SimpleperfEtmTraceProvider {
     pub fn supported() -> bool {
-        simpleperf_profcollect::has_support()
+        const WAIT_ETM_SUPPORT_TIMEOUT_MS: u64 = 10 * 1000; // 10 secs
+        const WAIT_ETM_SUPPORT_CHECK_PERIOD_MS: u64 = 100; // 100 ms
+
+        simpleperf_profcollect::has_support(
+            WAIT_ETM_SUPPORT_TIMEOUT_MS,
+            WAIT_ETM_SUPPORT_CHECK_PERIOD_MS,
+        )
     }
 }
