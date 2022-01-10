@@ -30,10 +30,23 @@ use anyhow::{Context, Result};
 use profcollectd_aidl_interface::aidl::com::android::server::profcollect::IProfCollectd::{
     self, BnProfCollectd,
 };
+use profcollectd_aidl_interface::aidl::com::android::server::profcollect::IProviderStatusCallback::{IProviderStatusCallback, BnProviderStatusCallback};
 use profcollectd_aidl_interface::binder::{self, BinderFeatures};
 use service::ProfcollectdBinderService;
 
 const PROFCOLLECTD_SERVICE_NAME: &str = "profcollectd";
+
+struct ProviderStatusCallback {}
+
+impl binder::Interface for ProviderStatusCallback {}
+
+impl IProviderStatusCallback for ProviderStatusCallback {
+    fn onProviderReady(&self) -> binder::Result<()> {
+        trace_once("boot").unwrap();
+        schedule().unwrap();
+        Ok(())
+    }
+}
 
 /// Initialise profcollectd service.
 /// * `schedule_now` - Immediately schedule collection after service is initialised.
@@ -49,8 +62,11 @@ pub fn init_service(schedule_now: bool) -> Result<()> {
     .context("Failed to register service.")?;
 
     if schedule_now {
-        trace_once("boot")?;
-        schedule()?;
+        let cb = BnProviderStatusCallback::new_binder(
+            ProviderStatusCallback {},
+            BinderFeatures::default(),
+        );
+        get_profcollectd_service()?.registerProviderStatusCallback(&cb)?;
     }
 
     binder::ProcessState::join_thread_pool();
