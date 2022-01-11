@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "771952bd_d83efdfe",
+        "filename": "profcollectd/libprofcollectd/simpleperf_etm_trace_provider.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1087625
+      },
+      "writtenOn": "2022-01-11T14:36:53Z",
+      "side": 1,
+      "message": "Both the native service and the framework forwarding services queries this. We should make this method a singleton and cache the result.",
+      "range": {
+        "startLine": 78,
+        "startChar": 11,
+        "endLine": 78,
+        "endChar": 20
+      },
+      "revId": "23c20a69388dbe2fe9a21d22cd5d20467ead1bf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
