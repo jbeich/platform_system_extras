@@ -22,6 +22,30 @@
       },
       "revId": "23c20a69388dbe2fe9a21d22cd5d20467ead1bf2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e638116_7b148762",
+        "filename": "profcollectd/libprofcollectd/simpleperf_etm_trace_provider.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2022-01-11T18:36:45Z",
+      "side": 1,
+      "message": "I see supported() only called in:\ninit_services() -\u003e ProfcollectdBinderService::new() -\u003e Scheduler::new() -\u003e trace_provider::get_trace_provider().\nHow is it queried by services?",
+      "parentUuid": "771952bd_d83efdfe",
+      "range": {
+        "startLine": 78,
+        "startChar": 11,
+        "endLine": 78,
+        "endChar": 20
+      },
+      "revId": "23c20a69388dbe2fe9a21d22cd5d20467ead1bf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
