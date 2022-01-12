@@ -46,6 +46,30 @@
       },
       "revId": "23c20a69388dbe2fe9a21d22cd5d20467ead1bf2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e415ff96_516f846c",
+        "filename": "profcollectd/libprofcollectd/simpleperf_etm_trace_provider.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1087625
+      },
+      "writtenOn": "2022-01-12T16:42:13Z",
+      "side": 1,
+      "message": "Okay, after double checking how the service is implemented, it works a bit differently than I imagined: \n\nhttps://cs.android.com/android/platform/superproject/+/master:frameworks/base/services/profcollect/src/com/android/server/profcollect/ProfcollectForwardingService.java;drc\u003dda9d0e669b90e5d5f0ef9be2effb4856386c99fb;l\u003d108\n\nSo when the service is started (which happens right after boot phase), it issues binder call to profcollectd checking for active trace provider, which might not have started due to the delay introduced in this CL.",
+      "parentUuid": "5e638116_7b148762",
+      "range": {
+        "startLine": 78,
+        "startChar": 11,
+        "endLine": 78,
+        "endChar": 20
+      },
+      "revId": "23c20a69388dbe2fe9a21d22cd5d20467ead1bf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
