@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "34236ffa_5a30870b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2022-01-24T22:05:54Z",
+      "side": 1,
+      "message": "The rest of the code looks great, but I had 2 suggestions for testing.",
+      "revId": "2f19d3ef566fff2bb7a0988673c6727871ce77dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "299f8a4d_ca7e5921",
+        "filename": "simpleperf/cmd_boot_record_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2022-01-24T22:05:54Z",
+      "side": 1,
+      "message": "You might want a comment for this particular part of the test that it is using an undocumented API because the other one would require support across boots.",
+      "revId": "2f19d3ef566fff2bb7a0988673c6727871ce77dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d03ccd2e_915dcaad",
+        "filename": "simpleperf/cmd_boot_record_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2022-01-24T22:05:54Z",
+      "side": 1,
+      "message": "In addition to testing this here, should there be a cleanup step when running tests like this to ensure that the property doesn\u0027t persist? I\u0027m just perhaps concerned that one of the earlier lines in this test fails, and thus we never even get this far to test/reset things.",
+      "revId": "2f19d3ef566fff2bb7a0988673c6727871ce77dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
