@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae3f037e_39ff2b2b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2022-01-25T23:51:24Z",
+      "side": 1,
+      "message": "ps3: also fix TestReportLib.test_set_sample_filter.",
+      "revId": "1fa046aeb95c6b7e7256636f7ed1df996fa14c86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
