@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "baedbcc3_5a549be6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2022-01-25T22:41:49Z",
+      "side": 1,
+      "message": "Unlike the parent CL, the reason is obvious here 😄",
+      "revId": "9ccdc127ad8ccaa6378ff908020b153eb9ef6227",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
