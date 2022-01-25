@@ -16,6 +16,24 @@
       "message": "Out of curiosity, why did the old code not work on Windows?  It\u0027d be good to add it in the commit message as well.",
       "revId": "5f0676873dca4a96899e48178254eb937de86218",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ee51df2_ae8584a1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2022-01-25T22:51:15Z",
+      "side": 1,
+      "message": "Added reason in commit message.",
+      "parentUuid": "3073241a_bcece49a",
+      "revId": "5f0676873dca4a96899e48178254eb937de86218",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
