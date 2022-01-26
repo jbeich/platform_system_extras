@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eec6bf80_378e9524",
+        "filename": "simpleperf/doc/android_platform_profiling.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2022-01-26T22:07:16Z",
+      "side": 1,
+      "message": "Since the timing can be variable (e.g. based on the device), is it possible to get the \"stage\" of boot where the recording would start?  E.g.: right [before|after] system_server is started?",
+      "range": {
+        "startLine": 106,
+        "startChar": 0,
+        "endLine": 106,
+        "endChar": 4
+      },
+      "revId": "387abd0253f4e76d322363655dcb3f974833809e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
