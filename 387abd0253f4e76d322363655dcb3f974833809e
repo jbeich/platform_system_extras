@@ -46,6 +46,30 @@
       },
       "revId": "387abd0253f4e76d322363655dcb3f974833809e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ce5a89e_ccec9339",
+        "filename": "simpleperf/doc/android_platform_profiling.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2022-01-26T23:19:51Z",
+      "side": 1,
+      "message": "+1.  I just wanted a better description on when collection starts than just \"after 4.5s\".  It\u0027s all the much better if that prompted you to start logging earlier.",
+      "parentUuid": "500691f0_e35ad4be",
+      "range": {
+        "startLine": 106,
+        "startChar": 0,
+        "endLine": 106,
+        "endChar": 4
+      },
+      "revId": "387abd0253f4e76d322363655dcb3f974833809e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
