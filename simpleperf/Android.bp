@@ -128,11 +128,12 @@ cc_defaults {
                 "libc",
             ],
         },
-        host: {
+        linux_glibc_x86_64: {
             stl: "libc++_static",
         },
         windows: {
             enabled: true,
+            stl: "libc++_static",
         },
     },
     use_version_lib: true,
@@ -238,6 +239,11 @@ cc_defaults {
         "utils.cpp",
     ],
     target: {
+        android: {
+            srcs: [
+                "cmd_boot_record.cpp",
+            ],
+        },
         linux: {
             srcs: [
                 "CallChainJoiner.cpp",
@@ -313,6 +319,7 @@ cc_binary {
             ],
         },
     },
+    init_rc: ["simpleperf.rc"],
 }
 
 cc_library {
@@ -548,6 +555,11 @@ cc_defaults {
         "utils_test.cpp",
     ],
     target: {
+        android: {
+            srcs: [
+                "cmd_boot_record_test.cpp",
+            ],
+        },
         linux: {
             srcs: [
                 "CallChainJoiner_test.cpp",
@@ -561,6 +573,7 @@ cc_defaults {
                 "cmd_trace_sched_test.cpp",
                 "environment_test.cpp",
                 "IOEventLoop_test.cpp",
+                "JITDebugReader_test.cpp",
                 "MapRecordReader_test.cpp",
                 "OfflineUnwinder_test.cpp",
                 "ProbeEvents_test.cpp",
