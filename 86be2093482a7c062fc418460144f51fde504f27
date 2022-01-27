@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5e2db60_ccdfb95c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2022-01-27T21:32:46Z",
+      "side": 1,
+      "message": "Hi Raman,\n\nCan you +2 this change? The OWNER can only +1.\n\nThanks!",
+      "revId": "86be2093482a7c062fc418460144f51fde504f27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
