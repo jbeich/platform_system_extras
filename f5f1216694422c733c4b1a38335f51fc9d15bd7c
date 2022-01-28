@@ -33,6 +33,24 @@
       "message": "Hi, Please set Autosubmit vote. Thanks",
       "revId": "f5f1216694422c733c4b1a38335f51fc9d15bd7c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e79ffd2c_8a755462",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1727487
+      },
+      "writtenOn": "2022-01-28T22:42:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "52f17aab_615250c7",
+      "revId": "f5f1216694422c733c4b1a38335f51fc9d15bd7c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
