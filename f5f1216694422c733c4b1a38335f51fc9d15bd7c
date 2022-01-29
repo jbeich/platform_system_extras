@@ -68,6 +68,24 @@
       "message": "Please resolve CL comments",
       "revId": "f5f1216694422c733c4b1a38335f51fc9d15bd7c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6cac807_6a4e6c00",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1727487
+      },
+      "writtenOn": "2022-01-29T00:26:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "51b8c58e_1a8bd84a",
+      "revId": "f5f1216694422c733c4b1a38335f51fc9d15bd7c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
