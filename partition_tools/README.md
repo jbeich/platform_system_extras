@@ -44,6 +44,25 @@ It also accepts an optional argument `-s,--slot=N` which can dump a specific met
 
 Usage: `lpdump [-s,--slot=N] PATH`
 
+## lpremove
+
+lpremove is a command-line tool for removing images from a super.img file. This is useful for mixed builds involving dynamic partitions. The syntax is:
+
+```
+lpremove [options] SUPER_FILE PART_NAME GROUP_NAME
+```
+
+The parameters are:
+* `SUPER_FILE` - The `super.img`file. If the image is sparsed, it will be temporarily unsparsed, and re-sparsed at the end.
+* `PART_NAME` - The partition name. It must already exist.
+* `GROUP_NAME` - The updateable group name for the partition.
+
+Note that when interacting with sparsed images, `lpremove` can consume a great deal of space in `TMPDIR`. If `TMPDIR` does not have enough free space, it can be set in the environment, eg:
+
+```
+TMPDIR=/path/to/temp lpremove...
+```
+
 ## lpadd
 
 lpadd is a command-line tool for adding images to a super.img file, or a partition to a super\_empty.img file. This is useful for mixed or split builds involving dynamic partitions. The syntax is:

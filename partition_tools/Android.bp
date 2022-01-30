@@ -131,6 +131,20 @@ cc_binary_host {
     ],
 }
 
+cc_binary_host {
+    name: "lpremove",
+    defaults: ["lp_defaults"],
+    shared_libs: [
+        "libbase",
+        "liblog",
+        "liblp",
+        "libsparse",
+    ],
+    srcs: [
+        "lpremove.cc",
+    ],
+}
+
 cc_binary {
     name: "lpflash",
     defaults: ["lp_defaults"],
