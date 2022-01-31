@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51a36f31_28097daa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1466604
+      },
+      "writtenOn": "2022-01-31T19:53:12Z",
+      "side": 1,
+      "message": "Chatted with David and Alistair offline. Both would prefer if this functionality was folded into lpadd with a -r flag used to replace the partition in question with the one being added.\n\nWill overwrite this patch with that change in the next day or so.",
+      "revId": "65c87c877e907859b922c2d37fa586fe5e1a0f7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
