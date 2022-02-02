@@ -25,6 +25,9 @@ cc_binary {
         "libhardware",
         "libcutils",
     ],
+    static_libs: [
+        "liblmkd_utils",
+    ],
     cppflags: [
         "-g",
         "-Wall",
