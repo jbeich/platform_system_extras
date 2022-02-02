@@ -14,6 +14,8 @@
 #include <tuple>
 #include <vector>
 
+#include <liblmkd_utils.h>
+
 //#define TRACE_CHILD_LIFETIME
 
 #ifdef TRACE_CHILD_LIFETIME
@@ -157,36 +159,6 @@ static void write_oomadj_to_lmkd(int oomadj) {
     cout << "Wrote " << written << " bytes to lmkd control socket." << endl;
 }
 
-static void create_memcg() {
-    char buf[256];
-    uid_t uid = getuid();
-    pid_t pid = getpid();
-
-    snprintf(buf, sizeof(buf), "/dev/memcg/apps/uid_%u", uid);
-    int tasks = mkdir(buf, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
-    if (tasks < 0 && errno != EEXIST) {
-        cerr << "Failed to create memory cgroup under " << buf << endl;
-        return;
-    }
-
-    snprintf(buf, sizeof(buf), "/dev/memcg/apps/uid_%u/pid_%u", uid, pid);
-    tasks = mkdir(buf, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
-    if (tasks < 0) {
-        cerr << "Failed to create memory cgroup under " << buf << endl;
-        return;
-    }
-
-    snprintf(buf, sizeof(buf), "/dev/memcg/apps/uid_%u/pid_%u/tasks", uid, pid);
-    tasks = open(buf, O_WRONLY);
-    if (tasks < 0) {
-        cerr << "Unable to add process to memory cgroup" << endl;
-        return;
-    }
-    snprintf(buf, sizeof(buf), "%u", pid);
-    write(tasks, buf, strlen(buf));
-    close(tasks);
-}
-
 void usage() {
     cout << "Application allocates memory until it's killed." << endl
          << "It starts at max oom_score_adj and gradually "
@@ -201,8 +173,8 @@ int main(int argc, char* argv[]) {
     bool use_memcg = false;
 
     if ((argc > 1) && (std::string(argv[1]) == "--worker")) {
-        if (std::string(argv[5]) == "1") {
-            create_memcg();
+        if (std::string(argv[5]) == "1" && create_memcg(getuid(), getpid()) < 0) {
+            cerr << "Unable to add process to memory cgroup" << endl;
         }
 
         write_oomadj_to_lmkd(atoi(argv[2]));
