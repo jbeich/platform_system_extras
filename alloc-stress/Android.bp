@@ -24,6 +24,13 @@ cc_binary {
     shared_libs: [
         "libhardware",
         "libcutils",
+        "libprocessgroup",
+        "libcgrouprc",
+        "libbase",
+        "liblog",
+    ],
+    static_libs: [
+        "liblmkd_utils",
     ],
     cppflags: [
         "-g",
