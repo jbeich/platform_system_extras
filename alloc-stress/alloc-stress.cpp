@@ -162,21 +162,21 @@ static void create_memcg() {
     uid_t uid = getuid();
     pid_t pid = getpid();
 
-    snprintf(buf, sizeof(buf), "/dev/memcg/apps/uid_%u", uid);
+    snprintf(buf, sizeof(buf), "/sys/fs/cgroup/uid_%u", uid);
     int tasks = mkdir(buf, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
     if (tasks < 0 && errno != EEXIST) {
         cerr << "Failed to create memory cgroup under " << buf << endl;
         return;
     }
 
-    snprintf(buf, sizeof(buf), "/dev/memcg/apps/uid_%u/pid_%u", uid, pid);
+    snprintf(buf, sizeof(buf), "/sys/fs/cgroup/uid_%u/pid_%u", uid, pid);
     tasks = mkdir(buf, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
     if (tasks < 0) {
         cerr << "Failed to create memory cgroup under " << buf << endl;
         return;
     }
 
-    snprintf(buf, sizeof(buf), "/dev/memcg/apps/uid_%u/pid_%u/tasks", uid, pid);
+    snprintf(buf, sizeof(buf), "/sys/fs/cgroup/uid_%u/pid_%u/tasks", uid, pid);
     tasks = open(buf, O_WRONLY);
     if (tasks < 0) {
         cerr << "Unable to add process to memory cgroup" << endl;
