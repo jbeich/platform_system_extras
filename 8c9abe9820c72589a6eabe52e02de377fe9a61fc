@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8200dfba_a88a300b",
+        "filename": "alloc-stress/alloc-stress.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-02-04T01:50:25Z",
+      "side": 1,
+      "message": "Looks like the same code as in https://android-review.googlesource.com/c/platform/system/memory/lmkd/+/1972106/2/liblmkd_utils.cpp#80\nSame comments apply and we probably could consolidate this code.",
+      "range": {
+        "startLine": 160,
+        "startChar": 12,
+        "endLine": 160,
+        "endChar": 24
+      },
+      "revId": "8c9abe9820c72589a6eabe52e02de377fe9a61fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
