@@ -22,6 +22,30 @@
       },
       "revId": "8c9abe9820c72589a6eabe52e02de377fe9a61fc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58af582f_0935f9cb",
+        "filename": "alloc-stress/alloc-stress.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2022-02-04T18:55:31Z",
+      "side": 1,
+      "message": "Thanks for the feedback. This suggestion has been implemented. Please take another look.",
+      "parentUuid": "8200dfba_a88a300b",
+      "range": {
+        "startLine": 160,
+        "startChar": 12,
+        "endLine": 160,
+        "endChar": 24
+      },
+      "revId": "8c9abe9820c72589a6eabe52e02de377fe9a61fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
