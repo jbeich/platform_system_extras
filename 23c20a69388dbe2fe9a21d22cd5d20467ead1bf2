@@ -70,6 +70,30 @@
       },
       "revId": "23c20a69388dbe2fe9a21d22cd5d20467ead1bf2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f858c0c1_c07e497f",
+        "filename": "profcollectd/libprofcollectd/simpleperf_etm_trace_provider.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2022-02-05T21:09:08Z",
+      "side": 1,
+      "message": "changed to not add delay in getting trace provider.",
+      "parentUuid": "e415ff96_516f846c",
+      "range": {
+        "startLine": 78,
+        "startChar": 11,
+        "endLine": 78,
+        "endChar": 20
+      },
+      "revId": "23c20a69388dbe2fe9a21d22cd5d20467ead1bf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

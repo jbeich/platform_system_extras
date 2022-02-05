@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3dd96153_391c9d45",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2022-02-05T21:09:08Z",
+      "side": 1,
+      "message": "ps2: changed to register callback to ProfcollectdBinderService, which are called when ETM is ready.",
+      "revId": "23e4223e14f638d561beadcc8ede937549e479fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
