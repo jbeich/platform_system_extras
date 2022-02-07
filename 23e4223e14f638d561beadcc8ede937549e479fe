@@ -16,6 +16,29 @@
       "message": "ps2: changed to register callback to ProfcollectdBinderService, which are called when ETM is ready.",
       "revId": "23e4223e14f638d561beadcc8ede937549e479fe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da82e0b0_3ab7ed42",
+        "filename": "profcollectd/libprofcollectd/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1087625
+      },
+      "writtenOn": "2022-02-07T07:25:12Z",
+      "side": 1,
+      "message": "Turn this into binder::Result, see https://cs.android.com/android/platform/superproject/+/master:system/extras/profcollectd/libprofcollectd/service.rs;l\u003d58;drc\u003d23e8e5319b72ea818f0259d4da08e7a9cb32770a",
+      "range": {
+        "startLine": 45,
+        "startChar": 26,
+        "endLine": 45,
+        "endChar": 35
+      },
+      "revId": "23e4223e14f638d561beadcc8ede937549e479fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
