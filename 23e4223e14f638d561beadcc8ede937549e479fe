@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "2374eddc_55d73736",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1087625
+      },
+      "writtenOn": "2022-02-07T08:55:36Z",
+      "side": 1,
+      "message": "We shouldn\u0027t capture a boot profile here since the callback may be long past the boot sequence. This should only be captured if ETM is ready when profcollectd starts.\n\nThe difference between a boot profile and a normal profile is significant since we put a higher weight to boot profiles during combination.",
+      "range": {
+        "startLine": 18,
+        "startChar": 3,
+        "endLine": 18,
+        "endChar": 27
+      },
+      "revId": "23e4223e14f638d561beadcc8ede937549e479fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "3dd96153_391c9d45",
