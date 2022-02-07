@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "90b0e33a_9972f8ae",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2022-02-07T21:21:24Z",
+      "side": 1,
+      "message": "Done. Changed to record boot profile only when ETM is ready within 3seconds registering the callback.\nI feel a better way is to check elapsed time since boot time. But no support crates are available. So we can defer it to the future.",
+      "parentUuid": "2374eddc_55d73736",
+      "range": {
+        "startLine": 18,
+        "startChar": 3,
+        "endLine": 18,
+        "endChar": 27
+      },
+      "revId": "23e4223e14f638d561beadcc8ede937549e479fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "3dd96153_391c9d45",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
@@ -54,6 +78,30 @@
       "writtenOn": "2022-02-07T07:25:12Z",
       "side": 1,
       "message": "Turn this into binder::Result, see https://cs.android.com/android/platform/superproject/+/master:system/extras/profcollectd/libprofcollectd/service.rs;l\u003d58;drc\u003d23e8e5319b72ea818f0259d4da08e7a9cb32770a",
+      "range": {
+        "startLine": 45,
+        "startChar": 26,
+        "endLine": 45,
+        "endChar": 35
+      },
+      "revId": "23e4223e14f638d561beadcc8ede937549e479fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc5849a9_b848b988",
+        "filename": "profcollectd/libprofcollectd/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2022-02-07T21:21:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "da82e0b0_3ab7ed42",
       "range": {
         "startLine": 45,
         "startChar": 26,
