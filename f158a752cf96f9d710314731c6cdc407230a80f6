@@ -39,6 +39,30 @@
       },
       "revId": "f158a752cf96f9d710314731c6cdc407230a80f6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "21841a58_6afe0554",
+        "filename": "profcollectd/libprofcollectd/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2022-02-09T17:54:29Z",
+      "side": 1,
+      "message": "I feel it\u0027s better we keep the duration calculation here, Because\n1. Here is the only place to need waited duration.\n2. Different callbacks may be registered at different times. It makes service code more complex to keep a start time for each callback.\n3. I feel we may want to check boot time instead in the future.",
+      "parentUuid": "6115101a_e47c9f4d",
+      "range": {
+        "startLine": 47,
+        "startChar": 7,
+        "endLine": 47,
+        "endChar": 22
+      },
+      "revId": "f158a752cf96f9d710314731c6cdc407230a80f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
