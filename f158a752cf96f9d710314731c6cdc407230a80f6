@@ -16,6 +16,29 @@
       "message": "ps3: Moved provider ready check shortcut from scheduler.rs to service.rs. Because calling callback in scheduler.rs may trigger further call to trace_once() or schedule(), which causes a deadlock in BinderService.lock.\n",
       "revId": "f158a752cf96f9d710314731c6cdc407230a80f6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6115101a_e47c9f4d",
+        "filename": "profcollectd/libprofcollectd/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1087625
+      },
+      "writtenOn": "2022-02-09T17:23:18Z",
+      "side": 1,
+      "message": "Or just pass the duration waited since start as a argument of onProviderReady()?",
+      "range": {
+        "startLine": 47,
+        "startChar": 7,
+        "endLine": 47,
+        "endChar": 22
+      },
+      "revId": "f158a752cf96f9d710314731c6cdc407230a80f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
