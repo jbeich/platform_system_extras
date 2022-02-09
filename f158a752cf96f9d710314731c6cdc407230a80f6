@@ -63,6 +63,30 @@
       },
       "revId": "f158a752cf96f9d710314731c6cdc407230a80f6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "79626f09_6c693624",
+        "filename": "profcollectd/libprofcollectd/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1087625
+      },
+      "writtenOn": "2022-02-09T18:09:50Z",
+      "side": 1,
+      "message": "Got it. sgtm.",
+      "parentUuid": "21841a58_6afe0554",
+      "range": {
+        "startLine": 47,
+        "startChar": 7,
+        "endLine": 47,
+        "endChar": 22
+      },
+      "revId": "f158a752cf96f9d710314731c6cdc407230a80f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
