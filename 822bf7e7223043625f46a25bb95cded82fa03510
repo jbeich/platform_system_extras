@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a5c4d8a_09b9ab9a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1827146
+      },
+      "writtenOn": "2022-02-16T20:19:37Z",
+      "side": 1,
+      "message": "Hello, could you please take a look into this small improvement at your convenience? This comes very helpful for profiling statsd service and alike on disconnected device\n\nThank you",
+      "revId": "822bf7e7223043625f46a25bb95cded82fa03510",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
