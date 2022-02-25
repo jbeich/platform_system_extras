@@ -22,6 +22,30 @@
       },
       "revId": "21f835d742bed0f9416d50791c7454ccc65fa428",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "86721a84_20c162c7",
+        "filename": "profcollectd/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2022-02-25T19:30:58Z",
+      "side": 1,
+      "message": "It hasn\u0027t changed on my device for several days. And profcollectd only read device config when starting. So it doesn\u0027t matter if the device config changes or not after profcollectd is started (at least before the next device reboot).",
+      "parentUuid": "d3dc3a36_33961289",
+      "range": {
+        "startLine": 40,
+        "startChar": 5,
+        "endLine": 40,
+        "endChar": 25
+      },
+      "revId": "21f835d742bed0f9416d50791c7454ccc65fa428",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
