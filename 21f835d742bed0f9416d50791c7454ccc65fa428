@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3dc3a36_33961289",
+        "filename": "profcollectd/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1087625
+      },
+      "writtenOn": "2022-02-25T19:15:56Z",
+      "side": 1,
+      "message": "device_config settings may be overwritten by gservices at any time. These are not guaranteed to work.",
+      "range": {
+        "startLine": 40,
+        "startChar": 5,
+        "endLine": 40,
+        "endChar": 25
+      },
+      "revId": "21f835d742bed0f9416d50791c7454ccc65fa428",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
