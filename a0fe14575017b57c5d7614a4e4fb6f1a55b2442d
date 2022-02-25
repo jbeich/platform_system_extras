@@ -338,6 +338,24 @@
       "parentUuid": "2ebfc6e1_88b76a6c",
       "revId": "a0fe14575017b57c5d7614a4e4fb6f1a55b2442d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "39c2df7b_de096b28",
+        "filename": "simpleperf/doc/view_the_profile.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2022-02-25T00:59:19Z",
+      "side": 1,
+      "message": "oh, nice! is there a reason why they\u0027ve made that public but not the other ui?",
+      "parentUuid": "4ad3af48_ea37b37d",
+      "revId": "a0fe14575017b57c5d7614a4e4fb6f1a55b2442d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
