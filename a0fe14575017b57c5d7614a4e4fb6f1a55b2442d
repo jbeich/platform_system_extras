@@ -356,6 +356,24 @@
       "parentUuid": "4ad3af48_ea37b37d",
       "revId": "a0fe14575017b57c5d7614a4e4fb6f1a55b2442d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "140897cf_907e8ad5",
+        "filename": "simpleperf/doc/view_the_profile.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2022-02-25T17:59:19Z",
+      "side": 1,
+      "message": "I only know they have no intention to make it public, but don\u0027t know why. I guess part of the reason is pprof cmdline only involves client side, but continuous pprof UI involves server side. And it\u0027s harder to make a server publicly available.",
+      "parentUuid": "39c2df7b_de096b28",
+      "revId": "a0fe14575017b57c5d7614a4e4fb6f1a55b2442d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
