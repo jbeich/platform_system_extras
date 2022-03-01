@@ -133,7 +133,7 @@ static bool fscrypt_is_encrypted(int fd) {
 }
 
 unsigned int GetFirstApiLevel() {
-    return android::base::GetUintProperty<unsigned int>("ro.product.first_api_level", 0);
+    return android::base::GetUintProperty<unsigned int>("ro.product.build.version.sdk", 0);
 }
 
 bool OptionsToString(const EncryptionOptions& options, std::string* options_string) {
