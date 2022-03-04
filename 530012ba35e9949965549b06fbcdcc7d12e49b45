@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d8df4f6_46ea2f5b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2022-03-04T22:41:15Z",
+      "side": 1,
+      "message": "This change would break many devices, as it would change the default encryption settings on existing devices.  That\u0027s a problem, first because it would force everyone to factory reset their devices, and second because many older devices don\u0027t have kernel support for the newer default settings.\n\nI believe this code is working as intended.  Can you elaborate on why this change appears to fix something for you?  What encryption settings is your device using in its fstab file?",
+      "revId": "530012ba35e9949965549b06fbcdcc7d12e49b45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
