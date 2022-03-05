@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68006e52_d9dad20e",
+        "filename": "toolchain-extras/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2022-03-05T02:49:46Z",
+      "side": 1,
+      "message": "Can these really have spaces in them? I get that `profile-extras` is already a hyphenated term, but I thought maybe at least there would be underscores. It\u0027s fine if this is intended though.",
+      "range": {
+        "startLine": 112,
+        "startChar": 25,
+        "endLine": 112,
+        "endChar": 41
+      },
+      "revId": "870fe06dbaed5c7cc5167db6e15e8b47896ddc4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
