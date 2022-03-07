@@ -22,6 +22,30 @@
       },
       "revId": "870fe06dbaed5c7cc5167db6e15e8b47896ddc4e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6222eefe_ffef8068",
+        "filename": "toolchain-extras/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2022-03-07T17:31:41Z",
+      "side": 1,
+      "message": "Done.  Spaces are allowed in here but switched to hyphenation in the latest patch for consistency.",
+      "parentUuid": "68006e52_d9dad20e",
+      "range": {
+        "startLine": 112,
+        "startChar": 25,
+        "endLine": 112,
+        "endChar": 41
+      },
+      "revId": "870fe06dbaed5c7cc5167db6e15e8b47896ddc4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
