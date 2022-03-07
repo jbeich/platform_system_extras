@@ -16,6 +16,23 @@
       "message": "ps2: add comment",
       "revId": "930b6a838b59e1d5472ad29b1a479a43e581b2be",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "db38c5f3_ab6e4fe0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2022-03-07T23:03:50Z",
+      "side": 1,
+      "message": "Thanks for fixing this quickly.",
+      "revId": "930b6a838b59e1d5472ad29b1a479a43e581b2be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
