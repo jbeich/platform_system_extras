@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "edcb3eff_3ebf0bdb",
+        "filename": "simpleperf/dso.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 485,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2022-03-14T22:06:05Z",
+      "side": 1,
+      "message": "Considering that `path` and `path_` are used in several related locations (including the constructor and base class), can I suggest `debug_file_path` here (similar to the original, but without the trailing underscore)?",
+      "range": {
+        "startLine": 485,
+        "startChar": 23,
+        "endLine": 485,
+        "endChar": 27
+      },
+      "revId": "2f903fdfce03be5f0cf39248976d9a653ca8d684",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
