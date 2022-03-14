@@ -22,6 +22,30 @@
       },
       "revId": "2f903fdfce03be5f0cf39248976d9a653ca8d684",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9d9c421_ef9dc5fc",
+        "filename": "simpleperf/dso.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 485,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2022-03-14T22:33:45Z",
+      "side": 1,
+      "message": "Done. I wanted to use shorter name. But I agree it may cause confusion.",
+      "parentUuid": "edcb3eff_3ebf0bdb",
+      "range": {
+        "startLine": 485,
+        "startChar": 23,
+        "endLine": 485,
+        "endChar": 27
+      },
+      "revId": "2f903fdfce03be5f0cf39248976d9a653ca8d684",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
