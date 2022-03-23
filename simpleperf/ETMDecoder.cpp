@@ -31,7 +31,7 @@ namespace {
 
 class DecoderLogStr : public ocsdMsgLogStrOutI {
  public:
-  void printOutStr(const std::string& out_str) override { LOG(INFO) << out_str; }
+  void printOutStr(const std::string& out_str) override { LOG(DEBUG) << out_str; }
 };
 
 class DecodeErrorLogger : public ocsdDefaultErrorLogger {
@@ -730,12 +730,19 @@ class ETMDecoderImpl : public ETMDecoder {
       return false;
     }
     size_t left_size = size;
+    const size_t MAX_RESET_RETRY_COUNT = 3;
+    size_t reset_retry_count = 0;
     while (left_size > 0) {
       uint32_t processed;
       auto resp = decoder.TraceDataIn(OCSD_OP_DATA, data_index_, left_size, data, &processed);
       if (IsRespError(resp)) {
         // A decoding error shouldn't ruin all data. Reset decoders to recover from it.
-        LOG(INFO) << "reset etm decoders for seeing a decode failure, resp " << resp;
+        // But some errors may not be recoverable by resetting decoders. So use a max retry limit.
+        if (++reset_retry_count > MAX_RESET_RETRY_COUNT) {
+          break;
+        }
+        LOG(DEBUG) << "reset etm decoders for seeing a decode failure, resp " << resp
+                   << ", reset_retry_count is " << reset_retry_count;
         decoder.TraceDataIn(OCSD_OP_RESET, data_index_ + processed, 0, nullptr, nullptr);
       }
       data += processed;
@@ -761,9 +768,8 @@ class ETMDecoderImpl : public ETMDecoder {
       map_locator_.reset(new MapLocator(thread_tree_));
       for (auto& cfg : configs_) {
         int64_t configr = (*(const ocsd_etmv4_cfg*)*cfg.second).reg_configr;
-        map_locator_->SetUseVmid(
-            cfg.first,
-            configr & (1U << ETM4_CFG_BIT_VMID | 1U << ETM4_CFG_BIT_VMID_OPT));
+        map_locator_->SetUseVmid(cfg.first,
+                                 configr & (1U << ETM4_CFG_BIT_VMID | 1U << ETM4_CFG_BIT_VMID_OPT));
       }
 
       InstallPacketCallback(map_locator_.get());

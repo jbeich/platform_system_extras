@@ -565,10 +565,12 @@ TEST(record_cmd, exit_with_parent_option) {
 TEST(record_cmd, use_cmd_exit_code_option) {
   TemporaryFile tmpfile;
   int exit_code;
-  RecordCmd()->Run({"--use-cmd-exit-code", "-o", tmpfile.path, "ls", "."}, &exit_code);
-  ASSERT_EQ(exit_code, 0);
-  RecordCmd()->Run({"--use-cmd-exit-code", "-o", tmpfile.path, "ls", "/not_exist_path"},
+  RecordCmd()->Run({"-e", GetDefaultEvent(), "--use-cmd-exit-code", "-o", tmpfile.path, "ls", "."},
                    &exit_code);
+  ASSERT_EQ(exit_code, 0);
+  RecordCmd()->Run(
+      {"-e", GetDefaultEvent(), "--use-cmd-exit-code", "-o", tmpfile.path, "ls", "/not_exist_path"},
+      &exit_code);
   ASSERT_NE(exit_code, 0);
 }
 
@@ -917,7 +919,7 @@ TEST(record_cmd, no_cut_samples_option) {
 }
 
 TEST(record_cmd, cs_etm_event) {
-  if (!ETMRecorder::GetInstance().CheckEtmSupport()) {
+  if (!ETMRecorder::GetInstance().CheckEtmSupport().ok()) {
     GTEST_LOG_(INFO) << "Omit this test since etm isn't supported on this device";
     return;
   }
@@ -952,7 +954,7 @@ TEST(record_cmd, cs_etm_event) {
 
 TEST(record_cmd, cs_etm_system_wide) {
   TEST_REQUIRE_ROOT();
-  if (!ETMRecorder::GetInstance().CheckEtmSupport()) {
+  if (!ETMRecorder::GetInstance().CheckEtmSupport().ok()) {
     GTEST_LOG_(INFO) << "Omit this test since etm isn't supported on this device";
     return;
   }
@@ -960,7 +962,7 @@ TEST(record_cmd, cs_etm_system_wide) {
 }
 
 TEST(record_cmd, aux_buffer_size_option) {
-  if (!ETMRecorder::GetInstance().CheckEtmSupport()) {
+  if (!ETMRecorder::GetInstance().CheckEtmSupport().ok()) {
     GTEST_LOG_(INFO) << "Omit this test since etm isn't supported on this device";
     return;
   }
@@ -973,7 +975,7 @@ TEST(record_cmd, aux_buffer_size_option) {
 
 TEST(record_cmd, addr_filter_option) {
   TEST_REQUIRE_HW_COUNTER();
-  if (!ETMRecorder::GetInstance().CheckEtmSupport()) {
+  if (!ETMRecorder::GetInstance().CheckEtmSupport().ok()) {
     GTEST_LOG_(INFO) << "Omit this test since etm isn't supported on this device";
     return;
   }

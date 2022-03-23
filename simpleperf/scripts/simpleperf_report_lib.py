@@ -26,7 +26,8 @@ from pathlib import Path
 import struct
 from typing import Any, Dict, List, Optional, Union
 
-from simpleperf_utils import bytes_to_str, get_host_binary_path, is_windows, str_to_bytes
+from simpleperf_utils import (bytes_to_str, get_host_binary_path, is_windows, str_to_bytes,
+                              ReportLibOptions)
 
 
 def _is_null(p: Optional[ct._Pointer]) -> bool:
@@ -296,6 +297,16 @@ class ReportLib(object):
         if self._instance:
             self._DestroyReportLibFunc(self._instance)
             self._instance = None
+
+    def SetReportOptions(self, options: ReportLibOptions):
+        """ Set report options in one call. """
+        if options.proguard_mapping_files:
+            for file_path in options.proguard_mapping_files:
+                self.AddProguardMappingFile(file_path)
+        if options.show_art_frames:
+            self.ShowArtFrames(True)
+        if options.trace_offcpu:
+            self.SetTraceOffCpuMode(options.trace_offcpu)
 
     def SetLogSeverity(self, log_level: str = 'info'):
         """ Set log severity of native lib, can be verbose,debug,info,error,fatal."""
