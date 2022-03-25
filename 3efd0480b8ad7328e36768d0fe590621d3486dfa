@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1528d18_08353967",
+        "filename": "simpleperf/scripts/test/do_test.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 525,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2022-03-25T23:52:49Z",
+      "side": 1,
+      "message": "Is this actually required? We\u0027ve been creating universal binaries on x86 Macs, but it seems weird that they couldn\u0027t be signed except on M1 machines.",
+      "range": {
+        "startLine": 525,
+        "startChar": 26,
+        "endLine": 525,
+        "endChar": 55
+      },
+      "revId": "3efd0480b8ad7328e36768d0fe590621d3486dfa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
