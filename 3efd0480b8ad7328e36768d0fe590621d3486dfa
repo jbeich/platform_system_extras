@@ -22,6 +22,30 @@
       },
       "revId": "3efd0480b8ad7328e36768d0fe590621d3486dfa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc565eb0_ae1fdbdb",
+        "filename": "simpleperf/scripts/test/do_test.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 525,
+      "author": {
+        "id": 1087625
+      },
+      "writtenOn": "2022-03-28T08:43:47Z",
+      "side": 1,
+      "message": "X86 systems do not enforce this rule, it is not required. However I think we should sign them anyways to maintain the same behaviour on both platforms.",
+      "parentUuid": "b1528d18_08353967",
+      "range": {
+        "startLine": 525,
+        "startChar": 26,
+        "endLine": 525,
+        "endChar": 55
+      },
+      "revId": "3efd0480b8ad7328e36768d0fe590621d3486dfa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
