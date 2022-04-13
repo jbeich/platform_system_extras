@@ -16,6 +16,24 @@
       "message": "Hi, Cole\n\nThis change caused one build problem like reported here, could you please help check and fix it?\n\nhttps://ci.linaro.org/job/lkft-aosp/262/console\n\n21:16:37 common.ExternalError: Failed to run command \u0027[\u0027build_verity_metadata\u0027, \u0027build\u0027, \u0027266301440\u0027, \u0027/home/buildslave/srv/aosp-public/build/aosp/out/soong/.temp/tmp6db8i4ee_verity_images/verity_metadata.img\u0027, \u0027ee33592b7df76eacd83568a5b36968b5f3de29da171226f4e5ec6643cf3cfef4\u0027, \u0027aee087a5be3b982978c923f566a94613496b417f2af592639bc80d141e34dfe7\u0027, \u0027/dev/block/platform/soc/f723d000.dwmmc0/by-name/vendor\u0027, \u0027verity_signer\u0027, \u0027build/make/target/product/security/verity.pk8\u0027]\u0027 (exit code 1):\n21:16:37 Traceback (most recent call last):\n21:16:37   File \"/home/buildslave/srv/aosp-public/build/aosp/out/host/linux-x86/bin/build_verity_metadata/internal/stdlib/runpy.py\", line 196, in _run_module_as_main\n21:16:37   File \"/home/buildslave/srv/aosp-public/build/aosp/out/host/linux-x86/bin/build_verity_metadata/internal/stdlib/runpy.py\", line 86, in _run_code\n21:16:37   File \"/home/buildslave/srv/aosp-public/build/aosp/out/host/linux-x86/bin/build_verity_metadata/__main__.py\", line 12, in \u003cmodule\u003e\n21:16:37   File \"/home/buildslave/srv/aosp-public/build/aosp/out/host/linux-x86/bin/build_verity_metadata/internal/stdlib/runpy.py\", line 196, in _run_module_as_main\n21:16:37   File \"/home/buildslave/srv/aosp-public/build/aosp/out/host/linux-x86/bin/build_verity_metadata/internal/stdlib/runpy.py\", line 86, in _run_code\n21:16:37   File \"/home/buildslave/srv/aosp-public/build/aosp/out/host/linux-x86/bin/build_verity_metadata/build_verity_metadata.py\", line 114, in \u003cmodule\u003e\n21:16:37   File \"/home/buildslave/srv/aosp-public/build/aosp/out/host/linux-x86/bin/build_verity_metadata/build_verity_metadata.py\", line 81, in build_verity_metadata\n21:16:37   File \"/home/buildslave/srv/aosp-public/build/aosp/out/host/linux-x86/bin/build_verity_metadata/build_verity_metadata.py\", line 52, in sign_verity_table\n21:16:37   File \"/home/buildslave/srv/aosp-public/build/aosp/out/host/linux-x86/bin/build_verity_metadata/internal/stdlib/tempfile.py\", line 483, in func_wrapper\n21:16:37 TypeError: a bytes-like object is required, not \u0027str\u0027\n",
       "revId": "518046b34681849d44d8937aa739e11c01dc2313",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de48c4e4_6b3a669e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-04-13T17:04:46Z",
+      "side": 1,
+      "message": "Should be fixed with aosp/2063014. Do you know some good reproduction steps for testing? As build_verity_metadata doesn\u0027t seem to be directly used in the android build.",
+      "parentUuid": "ac9bbcbb_0b28c7e6",
+      "revId": "518046b34681849d44d8937aa739e11c01dc2313",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
