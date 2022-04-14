@@ -70,6 +70,24 @@
       "parentUuid": "68aef80c_770a372a",
       "revId": "518046b34681849d44d8937aa739e11c01dc2313",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2efa84b_b0ce5b72",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-04-14T18:54:19Z",
+      "side": 1,
+      "message": "Ah, thanks, knowing that it\u0027s the hikey product was what I needed. Fix at aosp/2064888\n\nSorry for the churn.",
+      "parentUuid": "dc187605_150cd0c2",
+      "revId": "518046b34681849d44d8937aa739e11c01dc2313",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
