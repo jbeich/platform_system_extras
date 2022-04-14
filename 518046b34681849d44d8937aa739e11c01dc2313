@@ -52,6 +52,24 @@
       "parentUuid": "de48c4e4_6b3a669e",
       "revId": "518046b34681849d44d8937aa739e11c01dc2313",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc187605_150cd0c2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2022-04-14T15:11:22Z",
+      "side": 1,
+      "message": "Cole, maybe we should open files in binary mode",
+      "parentUuid": "68aef80c_770a372a",
+      "revId": "518046b34681849d44d8937aa739e11c01dc2313",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
