@@ -34,6 +34,24 @@
       "parentUuid": "ac9bbcbb_0b28c7e6",
       "revId": "518046b34681849d44d8937aa739e11c01dc2313",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "68aef80c_770a372a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1041813
+      },
+      "writtenOn": "2022-04-14T07:41:58Z",
+      "side": 1,
+      "message": "Hi, Cole\nit\u0027s not fully fixed with that aosp/2063014, \nhere is the error after that fix:\n\n common.ExternalError: Failed to run command \u0027[\u0027build_verity_metadata\u0027, \u0027build\u0027, \u0027266301440\u0027, \u0027/home/liuyq/data/android/master/out/soong/.temp/tmplgj1l6m2_verity_images/verity_metadata.img\u0027, \u0027e13cb3400d05c67b1d1347fd3ef184c7d1f02ee5bddf5cc65f53fdec6096c289\u0027, \u0027aee087a5be3b982978c923f566a94613496b417f2af592639bc80d141e34dfe7\u0027, \u0027/dev/block/platform/soc/f723d000.dwmmc0/by-name/vendor\u0027, \u0027verity_signer\u0027, \u0027build/make/target/product/security/verity.pk8\u0027]\u0027 (exit code 1):\nTraceback (most recent call last):\n  File \"/home/liuyq/data/android/master/out/host/linux-x86/bin/build_verity_metadata/internal/stdlib/runpy.py\", line 196, in _run_module_as_main\n  File \"/home/liuyq/data/android/master/out/host/linux-x86/bin/build_verity_metadata/internal/stdlib/runpy.py\", line 86, in _run_code\n  File \"/home/liuyq/data/android/master/out/host/linux-x86/bin/build_verity_metadata/__main__.py\", line 12, in \u003cmodule\u003e\n  File \"/home/liuyq/data/android/master/out/host/linux-x86/bin/build_verity_metadata/internal/stdlib/runpy.py\", line 196, in _run_module_as_main\n  File \"/home/liuyq/data/android/master/out/host/linux-x86/bin/build_verity_metadata/internal/stdlib/runpy.py\", line 86, in _run_code\n  File \"/home/liuyq/data/android/master/out/host/linux-x86/bin/build_verity_metadata/build_verity_metadata.py\", line 114, in \u003cmodule\u003e\n  File \"/home/liuyq/data/android/master/out/host/linux-x86/bin/build_verity_metadata/build_verity_metadata.py\", line 81, in build_verity_metadata\n  File \"/home/liuyq/data/android/master/out/host/linux-x86/bin/build_verity_metadata/build_verity_metadata.py\", line 61, in sign_verity_table\n  File \"/home/liuyq/data/android/master/out/host/linux-x86/bin/build_verity_metadata/internal/stdlib/tempfile.py\", line 483, in func_wrapper\n  File \"/home/liuyq/data/android/master/out/host/linux-x86/bin/build_verity_metadata/internal/stdlib/codecs.py\", line 322, in decode\nUnicodeDecodeError: \u0027utf-8\u0027 codec can\u0027t decode byte 0x95 in position 0: invalid start byte\n[\u0027verity_signer\u0027, \u0027/home/liuyq/data/android/master/out/soong/.temp/tmp_8p6l2h8.table\u0027, \u0027build/make/target/product/security/verity.pk8\u0027, \u0027/home/liuyq/data/android/master/out/soong/.temp/tmpjlix1wqm.sig\u0027]\n\nI am not sure what you meant by \"good reproduction steps\", what I did is to build the images for hikey board with steps like this:\n source build/envsetup.sh\n lunch hikey-userdebug\n make -j$(nproc) droidcore",
+      "parentUuid": "de48c4e4_6b3a669e",
+      "revId": "518046b34681849d44d8937aa739e11c01dc2313",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
