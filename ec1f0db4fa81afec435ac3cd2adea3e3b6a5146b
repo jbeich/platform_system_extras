@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "385a81fd_50db5dbf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1041813
+      },
+      "writtenOn": "2022-04-15T02:29:05Z",
+      "side": 1,
+      "message": "Thanks for the fix! I could build and boot the hikey board to the home screen now.",
+      "revId": "ec1f0db4fa81afec435ac3cd2adea3e3b6a5146b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
