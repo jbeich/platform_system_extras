@@ -34,6 +34,24 @@
       "parentUuid": "2d49ad84_e8e6ebed",
       "revId": "e617e49167323ca7b02ead5dba436e5d108f5f6a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d70e7b5_fc3b6107",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2022-04-20T22:56:20Z",
+      "side": 1,
+      "message": "I swear when I added Stephen originally, you were not listed as an owner. And the code-owners was not green even though you had already +2\u0027d. I don\u0027t know if I\u0027m misremembering or something was broken then fixed recently.\n\nI checked now, and you are listed as an owner. Maybe I got confused because you were not in the small list and only in the list after clicking the show all owners checkbox. But I could swear you weren\u0027t in that list either.",
+      "parentUuid": "4ee373d4_f4f8c008",
+      "revId": "e617e49167323ca7b02ead5dba436e5d108f5f6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
