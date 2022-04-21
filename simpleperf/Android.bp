@@ -626,6 +626,7 @@ cc_test {
         "simpleperf_test_srcs",
         "simpleperf_libs_for_tests",
     ],
+    isolated: false,
     static_libs: [
         "libgmock",
         "libsimpleperf",
