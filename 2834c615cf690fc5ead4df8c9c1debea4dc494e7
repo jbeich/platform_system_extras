@@ -16,6 +16,24 @@
       "message": "how does this work today on P22 devices given that we mandate erofs for T launch ? Is /system getting mounted as ext4 during postinstall ?",
       "revId": "2834c615cf690fc5ead4df8c9c1debea4dc494e7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8103c4a7_c7c81760",
+        "filename": "cppreopts/fstab.postinstall",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2022-05-06T15:50:29Z",
+      "side": 1,
+      "message": "Mount type is determined by update manifest, we just need an fstab entry to be here so that kernel permits mounting. https://cs.android.com/android/platform/superproject/+/master:device/google/cuttlefish/shared/config/fstab.ext4 cuttlefish also does this, where they put two entries of the same directory in fstab, one for ext4 and one for erofs.",
+      "parentUuid": "ed8bd150_d0d8cbaa",
+      "revId": "2834c615cf690fc5ead4df8c9c1debea4dc494e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
