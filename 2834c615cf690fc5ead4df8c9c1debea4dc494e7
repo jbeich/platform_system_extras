@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed8bd150_d0d8cbaa",
+        "filename": "cppreopts/fstab.postinstall",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2022-05-06T00:04:54Z",
+      "side": 1,
+      "message": "how does this work today on P22 devices given that we mandate erofs for T launch ? Is /system getting mounted as ext4 during postinstall ?",
+      "revId": "2834c615cf690fc5ead4df8c9c1debea4dc494e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
