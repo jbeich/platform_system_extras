@@ -26,7 +26,8 @@ from pathlib import Path
 import struct
 from typing import Any, Dict, List, Optional, Union
 
-from simpleperf_utils import bytes_to_str, get_host_binary_path, is_windows, str_to_bytes
+from simpleperf_utils import (bytes_to_str, get_host_binary_path, is_windows, str_to_bytes,
+                              ReportLibOptions)
 
 
 def _is_null(p: Optional[ct._Pointer]) -> bool:
@@ -297,6 +298,18 @@ class ReportLib(object):
             self._DestroyReportLibFunc(self._instance)
             self._instance = None
 
+    def SetReportOptions(self, options: ReportLibOptions):
+        """ Set report options in one call. """
+        if options.proguard_mapping_files:
+            for file_path in options.proguard_mapping_files:
+                self.AddProguardMappingFile(file_path)
+        if options.show_art_frames:
+            self.ShowArtFrames(True)
+        if options.trace_offcpu:
+            self.SetTraceOffCpuMode(options.trace_offcpu)
+        if options.sample_filters:
+            self.SetSampleFilter(options.sample_filters)
+
     def SetLogSeverity(self, log_level: str = 'info'):
         """ Set log severity of native lib, can be verbose,debug,info,error,fatal."""
         cond: bool = self._SetLogSeverityFunc(self.getInstance(), _char_pt(log_level))
@@ -362,7 +375,7 @@ class ReportLib(object):
         res: bool = self._SetTraceOffCpuModeFunc(self.getInstance(), _char_pt(mode))
         _check(res, f'Failed to call SetTraceOffCpuMode({mode})')
 
-    def SetSampleFilter(self, filter: str):
+    def SetSampleFilter(self, filters: List[str]):
         """ Set options used to filter samples. Available options are:
             --exclude-pid pid1,pid2,...   Exclude samples for selected processes.
             --exclude-tid tid1,tid2,...   Exclude samples for selected threads.
@@ -381,8 +394,10 @@ class ReportLib(object):
 
             The filter argument should be a concatenation of options.
         """
-        res: bool = self._SetSampleFilterFunc(self.getInstance(), _char_pt(filter))
-        _check(res, f'Failed to call SetSampleFilter({filter})')
+        filter_array = (ct.c_char_p * len(filters))()
+        filter_array[:] = [_char_pt(f) for f in filters]
+        res: bool = self._SetSampleFilterFunc(self.getInstance(), filter_array, len(filters))
+        _check(res, f'Failed to call SetSampleFilter({filters})')
 
     def GetNextSample(self) -> Optional[SampleStruct]:
         """ Return the next sample. If no more samples, return None. """

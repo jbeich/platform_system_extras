@@ -270,7 +270,6 @@ class PprofProfileGenerator(object):
         config['binary_cache_dir'] = 'binary_cache'
         if not os.path.isdir(config['binary_cache_dir']):
             config['binary_cache_dir'] = None
-        self.comm_filter = set(config['comm_filters']) if config.get('comm_filters') else None
         self.dso_filter = set(config['dso_filters']) if config.get('dso_filters') else None
         self.max_chain_length = config['max_chain_length']
         self.profile = profile_pb2.Profile()
@@ -303,10 +302,7 @@ class PprofProfileGenerator(object):
 
         if self.config.get('show_art_frames'):
             self.lib.ShowArtFrames()
-        for file_path in self.config['proguard_mapping_file'] or []:
-            self.lib.AddProguardMappingFile(file_path)
-        if self.config.get('sample_filter'):
-            self.lib.SetSampleFilter(self.config['sample_filter'])
+        self.lib.SetReportOptions(self.config['report_lib_options'])
 
         comments = [
             "Simpleperf Record Command:\n" + self.lib.GetRecordCmd(),
@@ -328,9 +324,6 @@ class PprofProfileGenerator(object):
             event = self.lib.GetEventOfCurrentSample()
             symbol = self.lib.GetSymbolOfCurrentSample()
             callchain = self.lib.GetCallChainOfCurrentSample()
-
-            if not self._filter_report_sample(report_sample):
-                continue
 
             sample_type_id = self.get_sample_type_id(event.name)
             sample = Sample()
@@ -378,13 +371,6 @@ class PprofProfileGenerator(object):
             self.gen_profile_function(function)
 
         return self.profile
-
-    def _filter_report_sample(self, sample):
-        """Return true if the sample can be used."""
-        if self.comm_filter:
-            if sample.thread_comm not in self.comm_filter:
-                return False
-        return True
 
     def _filter_symbol(self, symbol):
         if not self.dso_filter or symbol.dso_name in self.dso_filter:
@@ -633,20 +619,13 @@ def main():
     parser.add_argument('--max_chain_length', type=int, default=1000000000, help="""
         Maximum depth of samples to be converted.""")  # Large value as infinity standin.
     parser.add_argument('--ndk_path', type=extant_dir, help='Set the path of a ndk release.')
-    parser.add_argument('--show_art_frames', action='store_true',
-                        help='Show frames of internal methods in the ART Java interpreter.')
-    parser.add_argument(
-        '--proguard-mapping-file', nargs='+',
-        help='Add proguard mapping file to de-obfuscate symbols')
     parser.add_argument(
         '-j', '--jobs', type=int, default=os.cpu_count(),
         help='Use multithreading to speed up source code annotation.')
     sample_filter_group = parser.add_argument_group('Sample filter options')
-    parser.add_sample_filter_options(sample_filter_group)
-    sample_filter_group.add_argument('--comm', nargs='+', action='append', help="""
-        Use samples only in threads with selected names.""")
     sample_filter_group.add_argument('--dso', nargs='+', action='append', help="""
         Use samples only in selected binaries.""")
+    parser.add_report_lib_options(sample_filter_group=sample_filter_group)
 
     args = parser.parse_args()
     if args.show:
@@ -658,18 +637,16 @@ def main():
 
     config = {}
     config['output_file'] = args.output_file
-    config['comm_filters'] = flatten_arg_list(args.comm)
     config['dso_filters'] = flatten_arg_list(args.dso)
     config['ndk_path'] = args.ndk_path
-    config['show_art_frames'] = args.show_art_frames
     config['max_chain_length'] = args.max_chain_length
-    config['proguard_mapping_file'] = args.proguard_mapping_file
-    config['sample_filter'] = args.sample_filter
+    config['report_lib_options'] = args.report_lib_options
     generator = PprofProfileGenerator(config)
     for record_file in args.record_file:
         generator.load_record_file(record_file)
     profile = generator.gen(args.jobs)
     store_pprof_profile(config['output_file'], profile)
+    logging.info("Report is generated at '%s' successfully." % config['output_file'])
 
 
 if __name__ == '__main__':
