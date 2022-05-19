@@ -16,6 +16,24 @@
       "message": "I don\u0027t think this makes any difference. But sure.",
       "revId": "61ff6bdf14a1311994743b55581bb39c99899361",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b272cda3_fc240b9c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2022-05-19T18:24:21Z",
+      "side": 1,
+      "message": "We don\u0027t support device-side sh_binary?\n\nBut of course, if TH passes, then we are probably not using the device-side variant, so this is okay.",
+      "parentUuid": "013b02d1_8fe206e7",
+      "revId": "61ff6bdf14a1311994743b55581bb39c99899361",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
