@@ -1,0 +1,20 @@
+// Copyright 2021 The Android Open Source Project
+
+package {
+	default_applicable_licenses: ["Android-Apache-2.0"],
+}
+
+cc_binary {
+    name: "fanotifyd",
+    srcs: [
+        "fanotifyd.c",
+    ],
+    local_include_dirs: [
+    ],
+    cflags: [
+        "-Werror",
+        "-Wno-unused-parameter",
+    ],
+    shared_libs: [
+    ],
+}
