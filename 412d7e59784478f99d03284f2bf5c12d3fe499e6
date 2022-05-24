@@ -131,7 +131,7 @@
       },
       "applicabilityExpressionResult": {},
       "submittabilityExpressionResult": {
-        "value": {"expression":{"expressionString":"-label:Code-Review=MIN AND (label:Code-Review=MAX,user=non_uploader OR (label:Code-Review=MAX AND (label:Exempt=+1 OR (uploader:1474732 AND (project:platform/developers/docs OR project:platform/frameworks/support)))))"},"status":"FAIL","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":["label:Code-Review=MIN","label:Code-Review=MAX,user=non_uploader","label:Code-Review=MAX","label:Exempt=+1","uploader:1474732","project:platform/developers/docs","project:platform/frameworks/support"]}
+        "value": {"expression":{"expressionString":"-label:Code-Review=MIN AND (label:Code-Review=MAX,user=non_uploader OR (label:Code-Review=MAX AND (label:Exempt=+1 OR (uploader:1474732 AND (project:platform/developers/docs OR project:platform/frameworks/support)))))"},"status":"PASS","errorMessage":{"value":null},"passingAtoms":["label:Code-Review=MAX,user=non_uploader","label:Code-Review=MAX"],"failingAtoms":["label:Code-Review=MIN","label:Exempt=+1","uploader:1474732","project:platform/developers/docs","project:platform/frameworks/support"]}
       },
       "overrideExpressionResult": {
         "value": {"expression":{"expressionString":"is:android_exemptedusers OR uploader:1587862 OR (branch:\"^refs/heads/cherrypick-temp-.*\" AND is:android-cherry-pick_exemptedusers)"},"status":"FAIL","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":["is:android_exemptedusers","uploader:1587862","branch:\"^refs/heads/cherrypick-temp-.*\"","is:android-cherry-pick_exemptedusers"]}
@@ -377,10 +377,10 @@
         "allowOverrideInChildProjects": false
       },
       "applicabilityExpressionResult": {
-        "value": {"expression":{"expressionString":"is:review-enforced_gerrit"},"status":"FAIL","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":["is:review-enforced_gerrit"]}
+        "value": {"expression":{"expressionString":"is:review-enforced_gerrit"},"status":"PASS","errorMessage":{"value":null},"passingAtoms":["is:review-enforced_gerrit"],"failingAtoms":[]}
       },
       "submittabilityExpressionResult": {
-        "value": {"expression":{"expressionString":"is:review-enforcement-satisfied_gerrit"},"status":"NOT_EVALUATED","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":[]}
+        "value": {"expression":{"expressionString":"is:review-enforced_gerrit"},"status":"PASS","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":["is:review-enforcement-satisfied_gerrit"]}
       },
       "overrideExpressionResult": {},
       "patchSetCommitId": "412d7e59784478f99d03284f2bf5c12d3fe499e6",
@@ -388,7 +388,9 @@
         "value": false
       },
       "forced": {},
-      "hidden": {}
+      "hidden": {
+        "value": true
+      }
     }
   ]
 }
