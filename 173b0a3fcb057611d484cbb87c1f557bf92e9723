@@ -16,6 +16,23 @@
       "message": "Any progress needed after \"Presubmit-Verified +2, Autosubmit +1\" have been done? Thanks very much!",
       "revId": "173b0a3fcb057611d484cbb87c1f557bf92e9723",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "610fb2f1_dab4cd9c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2022-05-27T00:23:37Z",
+      "side": 1,
+      "message": "Daniel, can you stamp this one?",
+      "revId": "173b0a3fcb057611d484cbb87c1f557bf92e9723",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
