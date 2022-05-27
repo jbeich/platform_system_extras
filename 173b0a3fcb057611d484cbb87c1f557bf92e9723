@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6398c03_2088531e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1399011
+      },
+      "writtenOn": "2022-05-27T00:20:37Z",
+      "side": 1,
+      "message": "Any progress needed after \"Presubmit-Verified +2, Autosubmit +1\" have been done? Thanks very much!",
+      "revId": "173b0a3fcb057611d484cbb87c1f557bf92e9723",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
