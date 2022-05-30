@@ -68,6 +68,23 @@
       "parentUuid": "b28bae09_84d52109",
       "revId": "173b0a3fcb057611d484cbb87c1f557bf92e9723",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0cb4ecbe_07741afb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1399011
+      },
+      "writtenOn": "2022-05-30T01:36:42Z",
+      "side": 1,
+      "message": "Hi, Daniel\n\nWould you please help to review this patch, just to clean this line?\n\nThanks!\n",
+      "revId": "173b0a3fcb057611d484cbb87c1f557bf92e9723",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
