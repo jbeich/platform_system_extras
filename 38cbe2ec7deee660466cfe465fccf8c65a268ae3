@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1cad3e0_4d0692ae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2022-05-31T17:39:39Z",
+      "side": 1,
+      "message": "have you thought about sending this to toybox instead? there\u0027s already an inotifyd (https://github.com/landley/toybox/blob/master/toys/other/inotifyd.c), and there\u0027s already a log command (https://github.com/landley/toybox/blob/master/toys/android/log.c) you could use as the subprocess...",
+      "revId": "38cbe2ec7deee660466cfe465fccf8c65a268ae3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "043e1a3e_6092ba70",
+        "filename": "fanotifyd/README",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2022-05-31T17:39:39Z",
+      "side": 1,
+      "message": "are these all true for GKI?",
+      "range": {
+        "startLine": 86,
+        "startChar": 0,
+        "endLine": 88,
+        "endChar": 16
+      },
+      "revId": "38cbe2ec7deee660466cfe465fccf8c65a268ae3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
