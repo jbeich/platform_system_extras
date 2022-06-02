@@ -16,6 +16,24 @@
       "message": "Thanks again Stephen! I am new so please let me know if you intended for me to add to a different aosp branch. Also upon re-reviewing, I got rid of the `override_attrs` with default in favor of both call sites passing all `attrs` (a bit cleaner). Retested and everything looks good still.",
       "revId": "62fe04581f910f5a847ad0653908a3e57b6ed8a2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba459435_0924635f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2022-06-02T01:53:29Z",
+      "side": 1,
+      "message": "Yep, looks great. Thank you for fixing this.",
+      "parentUuid": "72c993fb_b61d3b4e",
+      "revId": "62fe04581f910f5a847ad0653908a3e57b6ed8a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
