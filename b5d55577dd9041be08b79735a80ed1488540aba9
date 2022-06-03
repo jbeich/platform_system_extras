@@ -16,6 +16,23 @@
       "message": "Presubmits pass, but I\u0027m unsure if some postsubmit CI or manual process will need mke2fs.conf to be in the the host executable folder. Do you think it\u0027s ok to remove this Colin?",
       "revId": "b5d55577dd9041be08b79735a80ed1488540aba9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d031cd49_d93a4ea4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-06-03T23:21:17Z",
+      "side": 1,
+      "message": "There\u0027s some history at aosp/c/platform/system/extras/+/735475/1#message-012bc70bcf89159cceb93c33009638734efcdae2, but I think the host module is obsolete now, mkuserimg_mke2fs.sh is gone and mkuserimg_mke2fs.py packages mke2fs.conf in the par file.",
+      "revId": "b5d55577dd9041be08b79735a80ed1488540aba9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
