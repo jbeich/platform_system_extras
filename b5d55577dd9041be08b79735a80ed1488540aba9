@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f496440_d679e712",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2022-06-03T19:18:02Z",
+      "side": 1,
+      "message": "Presubmits pass, but I\u0027m unsure if some postsubmit CI or manual process will need mke2fs.conf to be in the the host executable folder. Do you think it\u0027s ok to remove this Colin?",
+      "revId": "b5d55577dd9041be08b79735a80ed1488540aba9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
