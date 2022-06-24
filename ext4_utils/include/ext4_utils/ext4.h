@@ -64,6 +64,8 @@ typedef unsigned int ext4_group_t;
 
 #define EXT4_MB_STREAM_ALLOC 0x0800
 
+#define EXT4_FEATURE_COMPAT_STABLE_INODES 0x0800
+
 struct ext4_allocation_request {
     struct inode* inode;
 
