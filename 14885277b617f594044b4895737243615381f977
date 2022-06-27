@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40370fd8_07b1e665",
+        "filename": "ext4_utils/include/ext4_utils/ext4.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2022-06-27T17:32:23Z",
+      "side": 1,
+      "message": "If this comment is correct, then this file should be regenerated instead of manually updating it.",
+      "range": {
+        "startLine": 4,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 45
+      },
+      "revId": "14885277b617f594044b4895737243615381f977",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "020bf48b_2d7b33cb",
+        "filename": "ext4_utils/include/ext4_utils/ext4.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2022-06-27T17:32:23Z",
+      "side": 1,
+      "message": "This should go by the other EXT4_FEATURE_COMPAT_* flags.",
+      "revId": "14885277b617f594044b4895737243615381f977",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
