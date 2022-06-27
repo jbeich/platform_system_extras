@@ -81,6 +81,24 @@
       "parentUuid": "020bf48b_2d7b33cb",
       "revId": "14885277b617f594044b4895737243615381f977",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22c6378c_fdd74bb9",
+        "filename": "ext4_utils/include/ext4_utils/ext4.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2022-06-27T23:57:55Z",
+      "side": 1,
+      "message": "I mean that you should add this line in the logical location alongside the other EXT4_FEATURE_COMPAT_* constants that are already defined in this file.  Around line 529.",
+      "parentUuid": "deaafb36_2d9fc213",
+      "revId": "14885277b617f594044b4895737243615381f977",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
