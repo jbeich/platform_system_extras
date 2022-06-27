@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f40f90c7_f41bf8ec",
+        "filename": "ext4_utils/include/ext4_utils/ext4.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1399011
+      },
+      "writtenOn": "2022-06-27T23:44:18Z",
+      "side": 1,
+      "message": "I did not noticed if this comment is correct or not. \nBut Checked \"git log ext4_utils/include/ext4_utils/ext4.h\" and almost all the recent feature flags are added by manually, for example:\nhttps://android-review.googlesource.com/c/platform/system/extras/+/1233535/1/ext4_utils/include/ext4_utils/ext4.h\nhttps://android-review.googlesource.com/c/platform/system/extras/+/1204086/1/ext4_utils/include/ext4_utils/ext4.h\nhttps://android-review.googlesource.com/c/platform/system/extras/+/871833/7/ext4_utils/include/ext4_utils/ext4.h",
+      "parentUuid": "40370fd8_07b1e665",
+      "range": {
+        "startLine": 4,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 45
+      },
+      "revId": "14885277b617f594044b4895737243615381f977",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "020bf48b_2d7b33cb",
