@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f6b470f_617379da",
+        "filename": "bootctl/bootctl.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2022-07-13T23:11:53Z",
+      "side": 1,
+      "message": "redundant ; ?",
+      "revId": "9f6cb7806977b654c147fcb8c407e49cba2df770",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7c6c0c2_d4a7a7a7",
+        "filename": "bootctl/bootctl.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2022-07-13T23:11:53Z",
+      "side": 1,
+      "message": "why print if this is true ? Will this flood the logs as previous patch doesn\u0027t print in success path",
+      "revId": "9f6cb7806977b654c147fcb8c407e49cba2df770",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
