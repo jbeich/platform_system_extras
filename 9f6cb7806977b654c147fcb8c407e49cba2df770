@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "26d4c4d2_7d7a90f6",
+        "filename": "bootctl/bootctl.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2022-07-13T23:17:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6f6b470f_617379da",
+      "revId": "9f6cb7806977b654c147fcb8c407e49cba2df770",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c7c6c0c2_d4a7a7a7",
@@ -31,6 +49,24 @@
       "writtenOn": "2022-07-13T23:11:53Z",
       "side": 1,
       "message": "why print if this is true ? Will this flood the logs as previous patch doesn\u0027t print in success path",
+      "revId": "9f6cb7806977b654c147fcb8c407e49cba2df770",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "348abe38_356efd6d",
+        "filename": "bootctl/bootctl.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2022-07-13T23:17:09Z",
+      "side": 1,
+      "message": "Otherwise we won\u0027t see the return value of `do_is_slot_bootable` , original code doesn\u0027t print these return values, I added the printf statement for usability.",
+      "parentUuid": "c7c6c0c2_d4a7a7a7",
       "revId": "9f6cb7806977b654c147fcb8c407e49cba2df770",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
