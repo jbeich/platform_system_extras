@@ -21,10 +21,10 @@
 #include <iostream>
 
 int main(int argc, char** argv) {
-  if (argc != 2) {
-    std::cerr
-        << "Usage: " << argv[0]
-        << " none|memtag|memtag-once|memtag-kernel|memtag-kernel-once[,...]\n";
+  if (argc != 2 && argc != 3) {
+    std::cerr << "Usage: " << argv[0]
+              << " none|memtag|memtag-once|memtag-kernel|memtag-kernel-once[,.."
+                 ".] [default|force_off]\n";
     return 1;
   }
   std::string value = argv[1];
@@ -45,6 +45,21 @@ int main(int argc, char** argv) {
       LOG(ERROR) << "Unknown value for arm64.memtag.bootctl: " << field;
       return 1;
     }
+  }
+  std::string override_value;
+  if (argc == 3) {
+    override_value = argv[2];
+  }
+  if (override_value == "force_off") {
+    // If the force_off override is active, only allow MEMTAG_MODE_MEMTAG_ONCE.
+    m.memtag_mode |= MISC_MEMTAG_MODE_MEMTAG_OFF;
+    m.memtag_mode &= ~MISC_MEMTAG_MODE_MEMTAG;
+  } else if (!override_value.empty() && override_value != "default") {
+    LOG(ERROR)
+        << "Unknown value for "
+           "persist.device_config.memory_safety_native.bootloader_override: "
+        << override_value;
+    return 1;
   }
   std::string err;
   if (!WriteMiscMemtagMessage(m, &err)) {
