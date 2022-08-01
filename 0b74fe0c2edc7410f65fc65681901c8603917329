@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c53d6b48_62267f1b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1005967
+      },
+      "writtenOn": "2022-08-01T22:37:02Z",
+      "side": 1,
+      "message": "How about reading and printing the current bootloader message when run w/o arguments? Will that work on userdebug devices at least when run from console? Otherwise there is no easy way to tell the current state.",
+      "revId": "0b74fe0c2edc7410f65fc65681901c8603917329",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41f4cff8_95e18e2d",
+        "filename": "mtectrl/mtectrl.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1005967
+      },
+      "writtenOn": "2022-08-01T22:37:02Z",
+      "side": 1,
+      "message": "|force_on",
+      "revId": "0b74fe0c2edc7410f65fc65681901c8603917329",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d34e647b_a8f3d2e3",
+        "filename": "mtectrl/mtectrl.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1005967
+      },
+      "writtenOn": "2022-08-01T22:37:02Z",
+      "side": 1,
+      "message": "These do not necessarily come from sysprops. Just refer to them as \"mode\" and \"override\"?",
+      "revId": "0b74fe0c2edc7410f65fc65681901c8603917329",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
