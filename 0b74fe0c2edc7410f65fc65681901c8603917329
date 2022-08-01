@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e62d0416_0538cdb4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1005967
+      },
+      "writtenOn": "2022-08-01T22:51:27Z",
+      "side": 1,
+      "message": "yes certainly",
+      "parentUuid": "0258f8d5_05fc55c2",
+      "revId": "0b74fe0c2edc7410f65fc65681901c8603917329",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "41f4cff8_95e18e2d",
@@ -102,6 +120,24 @@
       "side": 1,
       "message": "yes. makes sense. though preferably people should really use the sysprops. that this works from root is kind of by accident.\n\nmaybe this program shouldn\u0027t take any arguments and just read the sysprops itself? but that would also be part of a follow up",
       "parentUuid": "d34e647b_a8f3d2e3",
+      "revId": "0b74fe0c2edc7410f65fc65681901c8603917329",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b86e25e2_5efcf722",
+        "filename": "mtectrl/mtectrl.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1005967
+      },
+      "writtenOn": "2022-08-01T22:51:27Z",
+      "side": 1,
+      "message": "hmm maybe.",
+      "parentUuid": "dda8d4bd_d3b3e62d",
       "revId": "0b74fe0c2edc7410f65fc65681901c8603917329",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
