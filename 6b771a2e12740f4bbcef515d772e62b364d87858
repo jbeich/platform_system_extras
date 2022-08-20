@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "97a5be2e_e25abfb9",
+        "filename": "simpleperf/cmd_stat.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 790,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2022-08-20T00:24:34Z",
+      "side": 1,
+      "message": "I suppose that we can\u0027t really do much for the case where CPUs get turned on/off dynamically.",
+      "range": {
+        "startLine": 790,
+        "startChar": 17,
+        "endLine": 790,
+        "endChar": 30
+      },
+      "revId": "6b771a2e12740f4bbcef515d772e62b364d87858",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
