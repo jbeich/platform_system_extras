@@ -22,6 +22,30 @@
       },
       "revId": "6b771a2e12740f4bbcef515d772e62b364d87858",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0bbd5497_8dc0b19c",
+        "filename": "simpleperf/cmd_stat.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 790,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2022-08-22T17:41:00Z",
+      "side": 1,
+      "message": "Yeah, unless we forces all cpu online (which requires root and we can\u0027t test it in CTS). And I remember that all cpus are requested to be online when adb is in use (although not sure if it is device specific).",
+      "parentUuid": "97a5be2e_e25abfb9",
+      "range": {
+        "startLine": 790,
+        "startChar": 17,
+        "endLine": 790,
+        "endChar": 30
+      },
+      "revId": "6b771a2e12740f4bbcef515d772e62b364d87858",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
