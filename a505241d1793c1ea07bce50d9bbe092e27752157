@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e5926a3_b38cd157",
+        "filename": "libfscrypt/fscrypt.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2022-08-24T21:21:47Z",
+      "side": 1,
+      "message": "The comment doesn\u0027t apply to FSCRYPT_MODE_AES_256_HCTR2, so define FSCRYPT_MODE_AES_256_HCTR2 above separately.",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 73
+      },
+      "revId": "a505241d1793c1ea07bce50d9bbe092e27752157",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
