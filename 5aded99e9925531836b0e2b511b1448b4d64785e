@@ -34,6 +34,24 @@
       "parentUuid": "20d0aa9c_b90777eb",
       "revId": "5aded99e9925531836b0e2b511b1448b4d64785e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e2e32de_a22aa333",
+        "filename": "simpleperf/cmd_stat.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 801,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2022-08-25T20:00:26Z",
+      "side": 1,
+      "message": "Got it - SGTM.  Thanks Yabin!",
+      "parentUuid": "85ad7391_0d46a681",
+      "revId": "5aded99e9925531836b0e2b511b1448b4d64785e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
