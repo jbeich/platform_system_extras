@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20d0aa9c_b90777eb",
+        "filename": "simpleperf/cmd_stat.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 801,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2022-08-25T18:51:53Z",
+      "side": 1,
+      "message": "Is this still useful as an error for 64-bit?  If so, we could make this a warning under `#ifdef __ILP32__` and continue to produce an error for 64-bit.",
+      "revId": "5aded99e9925531836b0e2b511b1448b4d64785e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
