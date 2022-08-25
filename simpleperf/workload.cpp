@@ -160,6 +160,21 @@ void Workload::ChildProcessFn(int start_signal_fd, int exec_child_fd) {
   }
 }
 
+<<<<<<< HEAD   (df1428 populate attributes when re-writing perf data)
+=======
+bool Workload::SetCpuAffinity(int cpu) {
+  CHECK_EQ(work_state_, NotYetStartNewProcess);
+  cpu_set_t mask;
+  CPU_ZERO(&mask);
+  CPU_SET(cpu, &mask);
+  if (sched_setaffinity(GetPid(), sizeof(mask), &mask) != 0) {
+    PLOG(WARNING) << "sched_setaffinity failed";
+    return false;
+  }
+  return true;
+}
+
+>>>>>>> CHANGE (5aded9 simpleperf: accept failures when getting hw counters on a cp)
 bool Workload::Start() {
   CHECK_EQ(work_state_, NotYetStartNewProcess);
   char start_signal = 1;
