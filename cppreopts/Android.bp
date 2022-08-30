@@ -25,18 +25,18 @@ sh_binary {
 }
 
 sh_binary {
-    name: "cppreopts.sh",
+    name: "cppreopts.sh_lib",
 
     init_rc: ["cppreopts.rc"],
     src: "cppreopts.sh",
     required: [
         "preopt2cachename",
         "preloads_copy.sh",
-        "fstab.postinstall",
+        "fstab.postinstall_lib",
     ],
 }
 
 prebuilt_etc {
-    name: "fstab.postinstall",
+    name: "fstab.postinstall_lib",
     src: "fstab.postinstall",
 }

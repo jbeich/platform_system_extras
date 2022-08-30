@@ -88,6 +88,7 @@ prebuilt_etc {
     name: "mke2fs.conf",
     recovery_available: true,
     src: "mke2fs.conf",
+    filename: "mke2fs.conf",
 }
 
 // TODO(b/157625953): Can't embedded into the other package because of missing variant
