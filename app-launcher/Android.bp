@@ -30,7 +30,7 @@ cc_binary_host {
 }
 
 sh_binary_host {
-    name: "app-launcher",
+    name: "app-launcher_lib",
     src: "app-launcher",
     required: [
         "computestats",
