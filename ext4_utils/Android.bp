@@ -85,9 +85,10 @@ python_binary_host {
 }
 
 prebuilt_etc {
-    name: "mke2fs.conf",
+    name: "mke2fs.conf_lib",
     recovery_available: true,
     src: "mke2fs.conf",
+    stem: "mke2fs.conf",
 }
 
 // TODO(b/157625953): Can't embedded into the other package because of missing variant
