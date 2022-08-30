@@ -57,7 +57,7 @@ cc_test_host {
 
     gtest: true,
     data: [
-        ":avbtool",
+        ":avbtool_lib",
         ":fec",
     ],
     compile_multilib: "first",
