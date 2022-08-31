@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a0ac21f_a8a32139",
+        "filename": "simpleperf/doc/collect_etm_data_for_autofdo.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2022-08-31T21:33:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0839a469_a73482de",
+      "range": {
+        "startLine": 90,
+        "startChar": 16,
+        "endLine": 90,
+        "endChar": 32
+      },
+      "revId": "96c53af76301bf55be48cfd757b8c9e47665e4dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0a2adae0_17bda333",
@@ -54,6 +78,30 @@
       "writtenOn": "2022-08-31T21:19:57Z",
       "side": 1,
       "message": "backticks",
+      "range": {
+        "startLine": 105,
+        "startChar": 0,
+        "endLine": 105,
+        "endChar": 17
+      },
+      "revId": "96c53af76301bf55be48cfd757b8c9e47665e4dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "55a05b16_aa8adbf1",
+        "filename": "simpleperf/doc/collect_etm_data_for_autofdo.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2022-08-31T21:33:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0a2adae0_17bda333",
       "range": {
         "startLine": 105,
         "startChar": 0,
@@ -87,6 +135,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9fc4f42_82e44581",
+        "filename": "simpleperf/doc/collect_etm_data_for_autofdo.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2022-08-31T21:33:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f660799c_53df66a4",
+      "range": {
+        "startLine": 117,
+        "startChar": 12,
+        "endLine": 117,
+        "endChar": 25
+      },
+      "revId": "96c53af76301bf55be48cfd757b8c9e47665e4dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d8e5c934_5aab7f45",
@@ -110,6 +182,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ade84718_007abf93",
+        "filename": "simpleperf/doc/collect_etm_data_for_autofdo.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2022-08-31T21:33:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d8e5c934_5aab7f45",
+      "range": {
+        "startLine": 169,
+        "startChar": 32,
+        "endLine": 169,
+        "endChar": 97
+      },
+      "revId": "96c53af76301bf55be48cfd757b8c9e47665e4dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4a124dc2_3b9dd504",
@@ -123,6 +219,30 @@
       "writtenOn": "2022-08-31T21:19:57Z",
       "side": 1,
       "message": "Use backticks since this should be counted as \"code\".",
+      "range": {
+        "startLine": 224,
+        "startChar": 16,
+        "endLine": 224,
+        "endChar": 41
+      },
+      "revId": "96c53af76301bf55be48cfd757b8c9e47665e4dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a61d5c3_7340618b",
+        "filename": "simpleperf/doc/collect_etm_data_for_autofdo.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2022-08-31T21:33:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4a124dc2_3b9dd504",
       "range": {
         "startLine": 224,
         "startChar": 16,
