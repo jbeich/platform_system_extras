@@ -1,0 +1,136 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee348f19_a0a2b1cb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2022-08-31T21:19:57Z",
+      "side": 1,
+      "message": "Just some minor suggestions re: formatting.",
+      "revId": "96c53af76301bf55be48cfd757b8c9e47665e4dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0839a469_a73482de",
+        "filename": "simpleperf/doc/collect_etm_data_for_autofdo.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2022-08-31T21:19:57Z",
+      "side": 1,
+      "message": "backticks",
+      "range": {
+        "startLine": 90,
+        "startChar": 16,
+        "endLine": 90,
+        "endChar": 32
+      },
+      "revId": "96c53af76301bf55be48cfd757b8c9e47665e4dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a2adae0_17bda333",
+        "filename": "simpleperf/doc/collect_etm_data_for_autofdo.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2022-08-31T21:19:57Z",
+      "side": 1,
+      "message": "backticks",
+      "range": {
+        "startLine": 105,
+        "startChar": 0,
+        "endLine": 105,
+        "endChar": 17
+      },
+      "revId": "96c53af76301bf55be48cfd757b8c9e47665e4dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f660799c_53df66a4",
+        "filename": "simpleperf/doc/collect_etm_data_for_autofdo.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2022-08-31T21:19:57Z",
+      "side": 1,
+      "message": "backticks",
+      "range": {
+        "startLine": 117,
+        "startChar": 12,
+        "endLine": 117,
+        "endChar": 25
+      },
+      "revId": "96c53af76301bf55be48cfd757b8c9e47665e4dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8e5c934_5aab7f45",
+        "filename": "simpleperf/doc/collect_etm_data_for_autofdo.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2022-08-31T21:19:57Z",
+      "side": 1,
+      "message": "backticks?",
+      "range": {
+        "startLine": 169,
+        "startChar": 32,
+        "endLine": 169,
+        "endChar": 97
+      },
+      "revId": "96c53af76301bf55be48cfd757b8c9e47665e4dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a124dc2_3b9dd504",
+        "filename": "simpleperf/doc/collect_etm_data_for_autofdo.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2022-08-31T21:19:57Z",
+      "side": 1,
+      "message": "Use backticks since this should be counted as \"code\".",
+      "range": {
+        "startLine": 224,
+        "startChar": 16,
+        "endLine": 224,
+        "endChar": 41
+      },
+      "revId": "96c53af76301bf55be48cfd757b8c9e47665e4dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
