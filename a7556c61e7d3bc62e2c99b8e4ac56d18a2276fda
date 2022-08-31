@@ -16,6 +16,24 @@
       "message": "Feels like this should have a comment - we want to remove this once it\u0027s in fscrypt.h",
       "revId": "a7556c61e7d3bc62e2c99b8e4ac56d18a2276fda",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3adb219b_4a1344e2",
+        "filename": "libfscrypt/fscrypt.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1730345
+      },
+      "writtenOn": "2022-08-31T21:26:38Z",
+      "side": 1,
+      "message": "Fixed in both CLs.",
+      "parentUuid": "cba81f81_b707e201",
+      "revId": "a7556c61e7d3bc62e2c99b8e4ac56d18a2276fda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
