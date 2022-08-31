@@ -34,6 +34,24 @@
       "parentUuid": "cba81f81_b707e201",
       "revId": "a7556c61e7d3bc62e2c99b8e4ac56d18a2276fda",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ebd065f0_364e6162",
+        "filename": "libfscrypt/fscrypt.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1060907
+      },
+      "writtenOn": "2022-08-31T22:57:59Z",
+      "side": 1,
+      "message": "great - thanks, lgtm!",
+      "parentUuid": "3adb219b_4a1344e2",
+      "revId": "a7556c61e7d3bc62e2c99b8e4ac56d18a2276fda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
