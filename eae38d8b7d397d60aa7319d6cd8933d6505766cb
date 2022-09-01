@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b062b9db_4719c4fa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1229339
+      },
+      "writtenOn": "2022-09-01T02:21:34Z",
+      "side": 1,
+      "message": "At the moment, my WIP libc++ upgrade removes the \"libc++abi\" module and adds two prebuilts, \"libc++abi_shared\" and \"libc++abi_static\". Rather than rename the \"libc++abi\" dependency here, just remove it, because it looks unnecessary.\n",
+      "revId": "eae38d8b7d397d60aa7319d6cd8933d6505766cb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
