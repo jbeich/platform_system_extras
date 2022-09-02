@@ -32,6 +32,7 @@ import multiprocessing as mp
 import os
 from pathlib import Path
 import re
+import subprocess
 import sys
 import time
 from tqdm import tqdm
@@ -39,7 +40,7 @@ import types
 from typing import List, Optional
 import unittest
 
-from simpleperf_utils import BaseArgumentParser, extant_dir, log_exit, remove
+from simpleperf_utils import BaseArgumentParser, extant_dir, log_exit, remove, is_darwin
 
 from . api_profiler_test import *
 from . annotate_test import *

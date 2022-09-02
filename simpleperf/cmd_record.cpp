@@ -352,7 +352,8 @@ RECORD_FILTER_OPTION_HELP_MSG_FOR_RECORDING
   bool TraceOffCpu();
   bool SetEventSelectionFlags();
   bool CreateAndInitRecordFile();
-  std::unique_ptr<RecordFileWriter> CreateRecordFile(const std::string& filename);
+  std::unique_ptr<RecordFileWriter> CreateRecordFile(
+      const std::string& filename, const std::vector<EventAttrWithId>& override_attrs);
   bool DumpKernelSymbol();
   bool DumpTracingData();
   bool DumpMaps();
@@ -629,25 +630,26 @@ bool RecordCommand::PrepareRecording(Workload* workload) {
   }
   IOEventLoop* loop = event_selection_set_.GetIOEventLoop();
   auto exit_loop_callback = [loop]() { return loop->ExitLoop(); };
-  if (!loop->AddSignalEvents({SIGCHLD, SIGINT, SIGTERM}, exit_loop_callback)) {
+  if (!loop->AddSignalEvents({SIGCHLD, SIGINT, SIGTERM}, exit_loop_callback, IOEventHighPriority)) {
     return false;
   }
 
   // Only add an event for SIGHUP if we didn't inherit SIG_IGN (e.g. from nohup).
   if (!SignalIsIgnored(SIGHUP)) {
-    if (!loop->AddSignalEvent(SIGHUP, exit_loop_callback)) {
+    if (!loop->AddSignalEvent(SIGHUP, exit_loop_callback, IOEventHighPriority)) {
       return false;
     }
   }
   if (stop_signal_fd_ != -1) {
-    if (!loop->AddReadEvent(stop_signal_fd_, exit_loop_callback)) {
+    if (!loop->AddReadEvent(stop_signal_fd_, exit_loop_callback, IOEventHighPriority)) {
       return false;
     }
   }
 
   if (duration_in_sec_ != 0) {
-    if (!loop->AddPeriodicEvent(SecondToTimeval(duration_in_sec_),
-                                [loop]() { return loop->ExitLoop(); })) {
+    if (!loop->AddPeriodicEvent(
+            SecondToTimeval(duration_in_sec_), [loop]() { return loop->ExitLoop(); },
+            IOEventHighPriority)) {
       return false;
     }
   }
@@ -718,9 +720,10 @@ bool RecordCommand::DoRecording(Workload* workload) {
     return false;
   }
   time_stat_.stop_recording_time = GetSystemClock();
-  if (!event_selection_set_.FinishReadMmapEventData()) {
+  if (!event_selection_set_.SyncKernelBuffer()) {
     return false;
   }
+  event_selection_set_.CloseEventFiles();
   time_stat_.finish_recording_time = GetSystemClock();
   uint64_t recording_time = time_stat_.finish_recording_time - time_stat_.start_recording_time;
   LOG(INFO) << "Recorded for " << recording_time / 1e9 << " seconds. Start post processing.";
@@ -754,26 +757,31 @@ static bool WriteRecordDataToOutFd(const std::string& in_filename,
 }
 
 bool RecordCommand::PostProcessRecording(const std::vector<std::string>& args) {
-  // 1. Merge map records dumped while recording by map record thread.
+  // 1. Read records left in the buffer.
+  if (!event_selection_set_.FinishReadMmapEventData()) {
+    return false;
+  }
+
+  // 2. Merge map records dumped while recording by map record thread.
   if (map_record_thread_) {
     if (!map_record_thread_->Join() || !MergeMapRecords()) {
       return false;
     }
   }
 
-  // 2. Post unwind dwarf callchain.
+  // 3. Post unwind dwarf callchain.
   if (unwind_dwarf_callchain_ && post_unwind_) {
     if (!PostUnwindRecords()) {
       return false;
     }
   }
 
-  // 3. Optionally join Callchains.
+  // 4. Optionally join Callchains.
   if (callchain_joiner_) {
     JoinCallChains();
   }
 
-  // 4. Dump additional features, and close record file.
+  // 5. Dump additional features, and close record file.
   if (!DumpAdditionalFeatures(args)) {
     return false;
   }
@@ -785,7 +793,7 @@ bool RecordCommand::PostProcessRecording(const std::vector<std::string>& args) {
   }
   time_stat_.post_process_time = GetSystemClock();
 
-  // 4. Show brief record result.
+  // 6. Show brief record result.
   auto record_stat = event_selection_set_.GetRecordStat();
   if (event_selection_set_.HasAuxTrace()) {
     LOG(INFO) << "Aux data traced: " << record_stat.aux_data_size;
@@ -1273,26 +1281,29 @@ bool RecordCommand::SetEventSelectionFlags() {
 }
 
 bool RecordCommand::CreateAndInitRecordFile() {
-  record_file_writer_ = CreateRecordFile(record_filename_);
+  record_file_writer_ =
+      CreateRecordFile(record_filename_, event_selection_set_.GetEventAttrWithId());
   if (record_file_writer_ == nullptr) {
     return false;
   }
   // Use first perf_event_attr and first event id to dump mmap and comm records.
-  EventAttrWithId dumping_attr_id = event_selection_set_.GetEventAttrWithId()[0];
-  map_record_reader_.emplace(*dumping_attr_id.attr, dumping_attr_id.ids[0],
+  dumping_attr_id_ = event_selection_set_.GetEventAttrWithId()[0];
+  CHECK(!dumping_attr_id_.ids.empty());
+  map_record_reader_.emplace(*dumping_attr_id_.attr, dumping_attr_id_.ids[0],
                              event_selection_set_.RecordNotExecutableMaps());
   map_record_reader_->SetCallback([this](Record* r) { return ProcessRecord(r); });
 
   return DumpKernelSymbol() && DumpTracingData() && DumpMaps() && DumpAuxTraceInfo();
 }
 
-std::unique_ptr<RecordFileWriter> RecordCommand::CreateRecordFile(const std::string& filename) {
+std::unique_ptr<RecordFileWriter> RecordCommand::CreateRecordFile(
+    const std::string& filename, const std::vector<EventAttrWithId>& attrs) {
   std::unique_ptr<RecordFileWriter> writer = RecordFileWriter::CreateInstance(filename);
   if (writer == nullptr) {
     return nullptr;
   }
 
-  if (!writer->WriteAttrSection(event_selection_set_.GetEventAttrWithId())) {
+  if (!writer->WriteAttrSection(attrs)) {
     return nullptr;
   }
   return writer;
@@ -1503,14 +1514,13 @@ bool RecordCommand::SaveRecordWithoutUnwinding(Record* record) {
 
 bool RecordCommand::ProcessJITDebugInfo(const std::vector<JITDebugInfo>& debug_info,
                                         bool sync_kernel_records) {
-  EventAttrWithId attr_id = event_selection_set_.GetEventAttrWithId()[0];
   for (auto& info : debug_info) {
     if (info.type == JITDebugInfo::JIT_DEBUG_JIT_CODE) {
       uint64_t timestamp =
           jit_debug_reader_->SyncWithRecords() ? info.timestamp : last_record_timestamp_;
-      Mmap2Record record(*attr_id.attr, false, info.pid, info.pid, info.jit_code_addr,
+      Mmap2Record record(*dumping_attr_id_.attr, false, info.pid, info.pid, info.jit_code_addr,
                          info.jit_code_len, info.file_offset, map_flags::PROT_JIT_SYMFILE_MAP,
-                         info.file_path, attr_id.ids[0], timestamp);
+                         info.file_path, dumping_attr_id_.ids[0], timestamp);
       if (!ProcessRecord(&record)) {
         return false;
       }
@@ -1519,8 +1529,9 @@ bool RecordCommand::ProcessJITDebugInfo(const std::vector<JITDebugInfo>& debug_i
         ThreadMmap& map = *info.extracted_dex_file_map;
         uint64_t timestamp =
             jit_debug_reader_->SyncWithRecords() ? info.timestamp : last_record_timestamp_;
-        Mmap2Record record(*attr_id.attr, false, info.pid, info.pid, map.start_addr, map.len,
-                           map.pgoff, map.prot, map.name, attr_id.ids[0], timestamp);
+        Mmap2Record record(*dumping_attr_id_.attr, false, info.pid, info.pid, map.start_addr,
+                           map.len, map.pgoff, map.prot, map.name, dumping_attr_id_.ids[0],
+                           timestamp);
         if (!ProcessRecord(&record)) {
           return false;
         }
@@ -1689,11 +1700,17 @@ std::unique_ptr<RecordFileReader> RecordCommand::MoveRecordFile(const std::strin
       return nullptr;
     }
   }
-  record_file_writer_ = CreateRecordFile(record_filename_);
+
+  auto reader = RecordFileReader::CreateInstance(old_filename);
+  if (!reader) {
+    return nullptr;
+  }
+
+  record_file_writer_ = CreateRecordFile(record_filename_, reader->AttrSection());
   if (!record_file_writer_) {
     return nullptr;
   }
-  return RecordFileReader::CreateInstance(old_filename);
+  return reader;
 }
 
 bool RecordCommand::MergeMapRecords() {
