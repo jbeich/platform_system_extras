@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d20b001_b5e88f74",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2022-09-07T23:40:23Z",
+      "side": 1,
+      "message": "ps2: fix java_app_test.py",
+      "revId": "4fa8f911ea8bf5a28b5214c8ee48d7c691880331",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
