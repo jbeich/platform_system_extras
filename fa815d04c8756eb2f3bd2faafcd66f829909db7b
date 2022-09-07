@@ -16,6 +16,23 @@
       "message": "srhines@ - could you take a look at the CL? This is similar to aosp/1871747 but for sdk_gpc_... emulator targets.\n",
       "revId": "fa815d04c8756eb2f3bd2faafcd66f829909db7b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cec7924a_dc545be7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1091002
+      },
+      "writtenOn": "2022-09-07T23:54:17Z",
+      "side": 1,
+      "message": "Thank you for reviewing!",
+      "revId": "fa815d04c8756eb2f3bd2faafcd66f829909db7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
