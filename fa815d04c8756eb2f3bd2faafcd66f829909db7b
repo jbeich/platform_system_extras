@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "671d0aae_2ec5cc4a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1091002
+      },
+      "writtenOn": "2022-09-07T07:28:51Z",
+      "side": 1,
+      "message": "srhines@ - could you take a look at the CL? This is similar to aosp/1871747 but for sdk_gpc_... emulator targets.\n",
+      "revId": "fa815d04c8756eb2f3bd2faafcd66f829909db7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
