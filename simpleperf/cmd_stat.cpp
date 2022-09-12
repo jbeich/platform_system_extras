@@ -440,7 +440,10 @@ class StatCommand : public Command {
   void AdjustToIntervalOnlyValues(std::vector<CountersInfo>& counters);
   bool ShowCounters(const std::vector<CountersInfo>& counters, double duration_in_sec, FILE* fp);
   void CheckHardwareCounterMultiplexing();
+<<<<<<< TARGET BRANCH (db8623 Merge "[automerger skipped] Merge "simpleperf: update --prin)
   void PrintWarningForInaccurateEvents();
+=======
+>>>>>>> SOURCE BRANCH (1c0dfa Merge changes I0eb2841e,I0eb6acbd into android13-tests-dev)
 
   bool verbose_mode_;
   bool system_wide_collection_;
@@ -621,10 +624,16 @@ bool StatCommand::Run(const std::vector<std::string>& args) {
     }
   }
 
+<<<<<<< TARGET BRANCH (db8623 Merge "[automerger skipped] Merge "simpleperf: update --prin)
   // 7. Print warnings when needed.
   event_selection_set_.CloseEventFiles();
   CheckHardwareCounterMultiplexing();
   PrintWarningForInaccurateEvents();
+=======
+  // 7. Print hardware counter multiplexing warning when needed.
+  event_selection_set_.CloseEventFiles();
+  CheckHardwareCounterMultiplexing();
+>>>>>>> SOURCE BRANCH (1c0dfa Merge changes I0eb2841e,I0eb6acbd into android13-tests-dev)
 
   return true;
 }
@@ -957,6 +966,7 @@ void StatCommand::CheckHardwareCounterMultiplexing() {
   }
 }
 
+<<<<<<< TARGET BRANCH (db8623 Merge "[automerger skipped] Merge "simpleperf: update --prin)
 void StatCommand::PrintWarningForInaccurateEvents() {
   for (const EventType* event : event_selection_set_.GetEvents()) {
     if (event->name == "raw-l3d-cache-lmiss-rd") {
@@ -967,6 +977,8 @@ void StatCommand::PrintWarningForInaccurateEvents() {
   }
 }
 
+=======
+>>>>>>> SOURCE BRANCH (1c0dfa Merge changes I0eb2841e,I0eb6acbd into android13-tests-dev)
 }  // namespace
 
 void RegisterStatCommand() {
