@@ -167,7 +167,11 @@ bool Workload::SetCpuAffinity(int cpu) {
   CPU_ZERO(&mask);
   CPU_SET(cpu, &mask);
   if (sched_setaffinity(GetPid(), sizeof(mask), &mask) != 0) {
+<<<<<<< TARGET BRANCH (38fc4c Merge "Merge "simpleperf: stat: remove percentage in csv out)
     PLOG(WARNING) << "sched_setaffinity failed";
+=======
+    PLOG(ERROR) << "sched_setaffinity failed";
+>>>>>>> SOURCE BRANCH (035545 Merge "simpleperf: update --print-hw-counter to check each c)
     return false;
   }
   return true;
