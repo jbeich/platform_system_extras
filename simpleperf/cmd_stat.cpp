@@ -746,7 +746,12 @@ bool StatCommand::ParseOptions(const std::vector<std::string>& args,
   return true;
 }
 
+<<<<<<< HEAD   (38fc4c Merge "Merge "simpleperf: stat: remove percentage in csv out)
 std::optional<bool> CheckHardwareCountersOnCpu(int cpu, size_t counters) {
+=======
+std::optional<size_t> GetHardwareCountersOnCpu(int cpu) {
+  size_t available_counters = 0;
+>>>>>>> BRANCH (035545 Merge "simpleperf: update --print-hw-counter to check each c)
   const EventType* event = FindEventTypeByName("cpu-cycles", true);
   if (event == nullptr) {
     return std::nullopt;
@@ -784,11 +789,47 @@ std::optional<bool> CheckHardwareCountersOnCpu(int cpu, size_t counters) {
 std::optional<size_t> GetHardwareCountersOnCpu(int cpu) {
   size_t available_counters = 0;
   while (true) {
+<<<<<<< HEAD   (38fc4c Merge "Merge "simpleperf: stat: remove percentage in csv out)
     std::optional<bool> result = CheckHardwareCountersOnCpu(cpu, available_counters + 1);
     if (!result.has_value()) {
+=======
+    auto workload = Workload::CreateWorkload({"sleep", "0.1"});
+    if (!workload || !workload->SetCpuAffinity(cpu)) {
+>>>>>>> BRANCH (035545 Merge "simpleperf: update --print-hw-counter to check each c)
       return std::nullopt;
     }
+<<<<<<< HEAD   (38fc4c Merge "Merge "simpleperf: stat: remove percentage in csv out)
     if (!result.value()) {
+=======
+    std::vector<std::unique_ptr<EventFd>> event_fds;
+    for (size_t i = 0; i <= available_counters; i++) {
+      EventFd* group_event_fd = event_fds.empty() ? nullptr : event_fds[0].get();
+      auto event_fd = EventFd::OpenEventFile(attr, workload->GetPid(), cpu, group_event_fd,
+                                             "cpu-cycles", false);
+      if (!event_fd) {
+        break;
+      }
+      event_fds.emplace_back(std::move(event_fd));
+    }
+    if (event_fds.size() != available_counters + 1) {
+      break;
+    }
+    if (!workload->Start() || !workload->WaitChildProcess(true, nullptr)) {
+      return false;
+    }
+    bool always_running = true;
+    for (auto& event_fd : event_fds) {
+      PerfCounter counter;
+      if (!event_fd->ReadCounter(&counter)) {
+        return std::nullopt;
+      }
+      if (counter.time_enabled == 0 || counter.time_enabled > counter.time_running) {
+        always_running = false;
+        break;
+      }
+    }
+    if (!always_running) {
+>>>>>>> BRANCH (035545 Merge "simpleperf: update --print-hw-counter to check each c)
       break;
     }
     available_counters++;
@@ -796,6 +837,7 @@ std::optional<size_t> GetHardwareCountersOnCpu(int cpu) {
   return available_counters;
 }
 
+<<<<<<< HEAD   (38fc4c Merge "Merge "simpleperf: stat: remove percentage in csv out)
 void StatCommand::PrintHardwareCounters() {
   for (int cpu : GetOnlineCpus()) {
     std::optional<size_t> counters = GetHardwareCountersOnCpu(cpu);
@@ -807,6 +849,18 @@ void StatCommand::PrintHardwareCounters() {
     }
     printf("There are %zu CPU PMU hardware counters available on cpu %d.\n", counters.value(), cpu);
   }
+=======
+bool StatCommand::PrintHardwareCounters() {
+  for (int cpu : GetOnlineCpus()) {
+    std::optional<size_t> counters = GetHardwareCountersOnCpu(cpu);
+    if (!counters) {
+      LOG(ERROR) << "failed to get CPU PMU hardware counters on cpu " << cpu;
+      return false;
+    }
+    printf("There are %zu CPU PMU hardware counters available on cpu %d.\n", counters.value(), cpu);
+  }
+  return true;
+>>>>>>> BRANCH (035545 Merge "simpleperf: update --print-hw-counter to check each c)
 }
 
 bool StatCommand::AddDefaultMeasuredEventTypes() {
