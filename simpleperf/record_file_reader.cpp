@@ -490,14 +490,23 @@ std::vector<BuildIdRecord> RecordFileReader::ReadBuildIdFeature() {
 std::string RecordFileReader::ReadFeatureString(int feature) {
   std::vector<char> buf;
   if (!ReadFeatureSection(feature, &buf)) {
-    return std::string();
+    return "";
   }
   const char* p = buf.data();
   const char* end = buf.data() + buf.size();
+  if (buf.size() <= sizeof(uint32_t)) {
+    return "";
+  }
   uint32_t len;
   MoveFromBinaryFormat(len, p);
-  CHECK_LE(p + len, end);
-  return p;
+  if (len > buf.size() - sizeof(uint32_t)) {
+    return "";
+  }
+  std::string result(p, len);
+  while (!result.empty() && result.back() == '\0') {
+    result.pop_back();
+  }
+  return result;
 }
 
 std::vector<uint64_t> RecordFileReader::ReadAuxTraceFeature() {
