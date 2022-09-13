@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2dc1a44d_d17c6999",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2022-09-13T23:21:40Z",
+      "side": 1,
+      "message": "ps2,3: use BinaryReader.",
+      "revId": "61592da8d2ad6092fbabd00f068c0b1a2dcbfce4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
