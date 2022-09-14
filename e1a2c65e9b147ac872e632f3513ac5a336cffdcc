@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f6a38f1_f9bcaa03",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1091002
+      },
+      "writtenOn": "2022-09-14T05:17:41Z",
+      "side": 1,
+      "message": "PTAL, cherry-pick to android12L-tests-dev",
+      "revId": "e1a2c65e9b147ac872e632f3513ac5a336cffdcc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
