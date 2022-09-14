@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "26ec203a_9bfc19a0",
+        "filename": "simpleperf/record_file_reader.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 580,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2022-09-14T23:55:55Z",
+      "side": 1,
+      "message": "The tidy warning fires because symbol_count is uninitialized in case of error.  It\u0027s ok to ignore because stack variables are zero-initialized anyway.  Just need to be careful if we ever read to the heap.  We may read uninitialized values in that case.\n\nIf we want to be safe, the code should check for error after every Read().",
+      "range": {
+        "startLine": 580,
+        "startChar": 6,
+        "endLine": 580,
+        "endChar": 18
+      },
+      "revId": "7887c298e6b2c731e0b6c489e914645df031b41e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
