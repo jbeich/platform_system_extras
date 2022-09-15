@@ -46,6 +46,30 @@
       },
       "revId": "7887c298e6b2c731e0b6c489e914645df031b41e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5391991e_58b1f322",
+        "filename": "simpleperf/record_file_reader.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 580,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2022-09-15T06:11:46Z",
+      "side": 1,
+      "message": "SG.  The initialization will at least appease the tidy checker.  But feel free to ignore such warnings in the future since we use `-fauto-var-init\u003dzero` to zero-initialize stack variables.\n\n\u003e to avoid the need of checking error after every Read(). Because that\u0027s too tedious.\n\nAgreed.  https://doc.rust-lang.org/book/ch09-02-recoverable-errors-with-result.html#a-shortcut-for-propagating-errors-the--operator is a carrot to entice you into switching to rust 😊",
+      "parentUuid": "4a961303_f3cfbc14",
+      "range": {
+        "startLine": 580,
+        "startChar": 6,
+        "endLine": 580,
+        "endChar": 18
+      },
+      "revId": "7887c298e6b2c731e0b6c489e914645df031b41e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
