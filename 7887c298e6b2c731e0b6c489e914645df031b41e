@@ -22,6 +22,30 @@
       },
       "revId": "7887c298e6b2c731e0b6c489e914645df031b41e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a961303_f3cfbc14",
+        "filename": "simpleperf/record_file_reader.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 580,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2022-09-15T02:41:20Z",
+      "side": 1,
+      "message": "Done. Initialized to 0. I want to use BinaryReader to avoid the need of checking error after every Read(). Because that\u0027s too tedious.",
+      "parentUuid": "26ec203a_9bfc19a0",
+      "range": {
+        "startLine": 580,
+        "startChar": 6,
+        "endLine": 580,
+        "endChar": 18
+      },
+      "revId": "7887c298e6b2c731e0b6c489e914645df031b41e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
