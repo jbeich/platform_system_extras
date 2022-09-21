@@ -15,19 +15,54 @@
  */
 
 #include <android-base/logging.h>
+#include <android-base/properties.h>
 #include <android-base/strings.h>
 #include <bootloader_message/bootloader_message.h>
 
 #include <iostream>
 
+void AddItem(std::string* s, const char* item) {
+  if (!s->empty()) {
+    *s += ",";
+  }
+  *s += item;
+}
+
 int main(int argc, char** argv) {
-    if (argc != 2 && argc != 3) {
-        std::cerr << "Usage: " << argv[0]
-                  << " none|memtag|memtag-once|memtag-kernel|memtag-kernel-once[,.."
-                     ".] [default|force_on|force_off]\n";
-        return 1;
-    }
+  if (argc != 2 && argc != 3) {
+    std::cerr << "Usage: " << argv[0]
+              << " none|memtag|memtag-once|memtag-kernel|memtag-kernel-once[,.."
+                 ".] [default|force_on|force_off]\n"
+              << "       " << argv[0] << " set-prop PROPERTY_NAME\n";
+    return 1;
+  }
   std::string value = argv[1];
+  if (value == "set-prop") {
+    if (argc != 3) {
+      LOG(ERROR) << "Wrong number of arguments to set-prop";
+      return 1;
+    }
+    std::string err;
+    misc_memtag_message m = {};
+    if (!ReadMiscMemtagMessage(&m, &err)) {
+      LOG(ERROR) << "Failed to read memtag message: " << err;
+      return 1;
+    }
+    if (m.magic != MISC_MEMTAG_MAGIC_HEADER || m.version != MISC_MEMTAG_MESSAGE_VERSION) {
+      LOG(ERROR) << "Invalid memtag message: magic: " << m.magic << " version: " << m.version;
+      return 1;
+    }
+    std::string prop_str;
+    if (m.memtag_mode & MISC_MEMTAG_MODE_MEMTAG) AddItem(&prop_str, "memtag");
+    if (m.memtag_mode & MISC_MEMTAG_MODE_MEMTAG_ONCE) AddItem(&prop_str, "memtag-once");
+    if (m.memtag_mode & MISC_MEMTAG_MODE_MEMTAG_KERNEL) AddItem(&prop_str, "memtag-kernel");
+    if (m.memtag_mode & MISC_MEMTAG_MODE_MEMTAG_KERNEL_ONCE)
+      AddItem(&prop_str, "memtag-kernel-once");
+    if (m.memtag_mode & MISC_MEMTAG_MODE_MEMTAG_OFF) AddItem(&prop_str, "memtag-off");
+    if (android::base::GetProperty(argv[2], "") != prop_str)
+      android::base::SetProperty(argv[2], prop_str);
+    return 0;
+  }
   misc_memtag_message m = {.version = MISC_MEMTAG_MESSAGE_VERSION,
                            .magic = MISC_MEMTAG_MAGIC_HEADER};
   bool valid_value = true;
