@@ -16,6 +16,24 @@
       "message": "I\u0027m a little concerned that changing the mode with an override will de-sync the system property and the bootloader message until the next reboot. Should we always re-read the final message into the property (i.e. run the set-prop logic at the end)?",
       "revId": "bdf2fbe417cf55b28ecbaf84e3507d2587e048e3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f65c093f_bf26c1bd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1268571
+      },
+      "writtenOn": "2022-09-23T00:33:40Z",
+      "side": 1,
+      "message": "good catch",
+      "parentUuid": "0cbffbd8_39274dad",
+      "revId": "bdf2fbe417cf55b28ecbaf84e3507d2587e048e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
