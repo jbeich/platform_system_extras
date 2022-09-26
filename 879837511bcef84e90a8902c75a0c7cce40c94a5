@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1434517e_9dcc1e6d",
+        "filename": "mtectrl/mtectrl.rc",
+        "patchSetId": 7
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1060831
+      },
+      "writtenOn": "2022-09-26T10:08:27Z",
+      "side": 1,
+      "message": "Do we need 2 execs of the same binary, or could this be handled by the previous one?",
+      "range": {
+        "startLine": 17,
+        "startChar": 2,
+        "endLine": 17,
+        "endChar": 59
+      },
+      "revId": "879837511bcef84e90a8902c75a0c7cce40c94a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
