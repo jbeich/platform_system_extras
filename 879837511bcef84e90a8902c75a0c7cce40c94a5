@@ -46,6 +46,30 @@
       },
       "revId": "879837511bcef84e90a8902c75a0c7cce40c94a5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f20fb13_c5fdef3c",
+        "filename": "mtectrl/mtectrl.rc",
+        "patchSetId": 7
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1005967
+      },
+      "writtenOn": "2022-09-26T20:47:55Z",
+      "side": 1,
+      "message": "It does seem cleaner for the binary to always read the current state into the property in addition to updating it from the command line args. In that case you\u0027d call it with empty args \"on init\".\n\nAlso, what prevents it from running an infinite loop where setting the property triggers another property update?",
+      "parentUuid": "d08e99e3_7f598125",
+      "range": {
+        "startLine": 17,
+        "startChar": 2,
+        "endLine": 17,
+        "endChar": 59
+      },
+      "revId": "879837511bcef84e90a8902c75a0c7cce40c94a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
