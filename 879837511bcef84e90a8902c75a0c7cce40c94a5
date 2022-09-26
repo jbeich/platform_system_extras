@@ -94,6 +94,30 @@
       },
       "revId": "879837511bcef84e90a8902c75a0c7cce40c94a5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3b4258d_a05e8c55",
+        "filename": "mtectrl/mtectrl.rc",
+        "patchSetId": 7
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1005967
+      },
+      "writtenOn": "2022-09-26T21:01:52Z",
+      "side": 1,
+      "message": "\u003e That ties the property logic stronger into the binary. I thought it was neat that the binding between the property and the binary happened only in the rc file. But I don\u0027t really care, I can upload my other version.\n\nThis also kind of makes sense. I\u0027m fine either way.",
+      "parentUuid": "9824ee57_fbdff8c9",
+      "range": {
+        "startLine": 17,
+        "startChar": 2,
+        "endLine": 17,
+        "endChar": 59
+      },
+      "revId": "879837511bcef84e90a8902c75a0c7cce40c94a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
