@@ -70,6 +70,30 @@
       },
       "revId": "879837511bcef84e90a8902c75a0c7cce40c94a5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9824ee57_fbdff8c9",
+        "filename": "mtectrl/mtectrl.rc",
+        "patchSetId": 7
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1268571
+      },
+      "writtenOn": "2022-09-26T20:50:33Z",
+      "side": 1,
+      "message": "\u003e It does seem cleaner for the binary to always read the current state into the property in addition to updating it from the command line args. In that case you\u0027d call it with empty args \"on init\".\n\nThat ties the property logic stronger into the binary. I thought it was neat that the binding between the property and the binary happened only in the rc file. But I don\u0027t really care, I can upload my other version.\n\n\u003e Also, what prevents it from running an infinite loop where setting the property triggers another property update?\n\n\nThe check that it only sets the property if it changed.",
+      "parentUuid": "5f20fb13_c5fdef3c",
+      "range": {
+        "startLine": 17,
+        "startChar": 2,
+        "endLine": 17,
+        "endChar": 59
+      },
+      "revId": "879837511bcef84e90a8902c75a0c7cce40c94a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
