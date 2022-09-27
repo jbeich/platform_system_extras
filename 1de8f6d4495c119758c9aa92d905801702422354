@@ -16,6 +16,24 @@
       "message": "This would always happen on the first boot. Should we set the prop to empty string and not complain in the log?",
       "revId": "1de8f6d4495c119758c9aa92d905801702422354",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f6bc59c_c74e28d1",
+        "filename": "mtectrl/mtectrl.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1268571
+      },
+      "writtenOn": "2022-09-27T23:43:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a0b27ce_0c41a860",
+      "revId": "1de8f6d4495c119758c9aa92d905801702422354",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
