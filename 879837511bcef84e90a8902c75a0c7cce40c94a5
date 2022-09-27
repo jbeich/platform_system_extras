@@ -118,6 +118,30 @@
       },
       "revId": "879837511bcef84e90a8902c75a0c7cce40c94a5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "292e612d_9b58645a",
+        "filename": "mtectrl/mtectrl.rc",
+        "patchSetId": 7
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1268571
+      },
+      "writtenOn": "2022-09-27T00:38:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e3b4258d_a05e8c55",
+      "range": {
+        "startLine": 17,
+        "startChar": 2,
+        "endLine": 17,
+        "endChar": 59
+      },
+      "revId": "879837511bcef84e90a8902c75a0c7cce40c94a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
