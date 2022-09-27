@@ -25,3 +25,10 @@ cc_binary {
   ],
   init_rc: ["mtectrl.rc"],
 }
+
+sh_test {
+  name: "mtectrl_test",
+  src: "mtectrl_test.sh",
+  test_suites: ["device-tests"],
+  required: ["mtectrl"],
+}
