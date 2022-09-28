@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52550ddf_b67e3d47",
+        "filename": "mtectrl/mtectrl.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1005967
+      },
+      "writtenOn": "2022-09-28T17:28:38Z",
+      "side": 1,
+      "message": "use UpdateProp here to avoid triggering another update",
+      "revId": "306df216093ea461981ab8fab5a31e707190f778",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
