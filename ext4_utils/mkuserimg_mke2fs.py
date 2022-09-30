@@ -194,9 +194,14 @@ def ConstructE2fsCommands(args):
     mke2fs_opts += ["-E", ','.join(mke2fs_extended_opts)]
 
   # Round down the filesystem length to be a multiple of the block size
-  blocks = int(args.fs_size) // BLOCKSIZE
+  block_size = BLOCKSIZE
+  if 'data' in args.mount_point:
+    block_size = 16384
+    mke2fs_opts += ["-F"]
+
+  blocks = int(args.fs_size) // block_size
   mke2fs_cmd = (["mke2fs"] + mke2fs_opts +
-                ["-t", args.ext_variant, "-b", str(BLOCKSIZE), args.output_file,
+                ["-t", args.ext_variant, "-b", str(block_size), args.output_file,
                  str(blocks)])
 
   e2fsdroid_cmd = (["e2fsdroid"] + e2fsdroid_opts +
