@@ -16,6 +16,14 @@
 
 #include <processgroup/processgroup.h>
 
+#include <linux/ashmem.h>
+#include <sys/ioctl.h>
+#include <fcntl.h>
+#include <sys/mman.h>
+#include <fcntl.h>           /* Definition of AT_* constants */
+#include <sys/stat.h>
+
+#if 0
 //#define TRACE_CHILD_LIFETIME
 
 #ifdef TRACE_CHILD_LIFETIME
@@ -169,6 +177,92 @@ void usage() {
 
 size_t s = 4 * (1 << 20);
 void* gptr;
+#endif
+
+#if 1
+
+
+#define ERROROUT(_errno, _str)  do {                                                            \
+    fprintf(stderr, "Error %d while %s\n", _errno, _str);                                       \
+    exit(1);                                                                                    \
+} while (0)
+
+#define ASHMEM_GET_FILE_ID		_IOR(__ASHMEMIOC, 11, unsigned long)
+int main(int argc, char* argv[])
+{
+    int fd, ret;
+    const char *device_path;
+    struct stat st;
+    const char *name = "mfasheh";
+    unsigned long size = 1 << 20;//try for 1mb
+    void *region;
+    unsigned long prot = PROT_READ | PROT_WRITE;
+    unsigned long long unique_fd;
+
+    if (argc <= 1)
+    {
+        perror("Need at least one filename argument");
+        return 1;
+    }
+    device_path = argv[1];
+
+    printf("Open ashmem char device at %s\n", device_path);
+
+    fd = open(device_path, O_RDWR | O_CLOEXEC);
+    if (fd < 0) {
+        ret = errno;
+        ERROROUT(ret, "trying to open ashmem device");
+    }
+
+    printf("\tfd is %d\n", fd);
+
+    ret = fstat(fd, &st);
+    if (ret < 0) {
+        ret = errno;
+        ERROROUT(ret, "trying to stat ashmem device fd");
+    }
+
+    if (!S_ISCHR(st.st_mode) || !st.st_rdev) {
+        ERROROUT(ENOTTY, "checking if ashmemfd is a character device");
+    }
+
+    ret = ioctl(fd, ASHMEM_SET_NAME, name);
+    if (ret < 0)
+    {
+        ret = errno;
+        ERROROUT(ret, "trying to ASHMEM_SET_NAME ioctl()");
+    }
+
+    ret = ioctl(fd, ASHMEM_SET_SIZE, size);
+    if (ret < 0) {
+        ret = errno;
+        ERROROUT(ret, "trying to ASHMEM_SET_SIZE ioctl()");
+    }
+
+    ret = ioctl(fd, ASHMEM_SET_PROT_MASK, prot);
+    if (ret < 0) {
+        ret = errno;
+        ERROROUT(ret, "trying to ASHMEM_SET_SIZE ioctl()");
+    }
+
+    region = mmap(nullptr, size, prot, MAP_SHARED, fd, 0);
+    if (!region) {
+        ret = errno;
+        ERROROUT(ret, "trying to mmap ashmem fd");
+    }
+
+    printf("MMAP complete, try to get a unique id now\n");
+
+    ret = ioctl(fd, ASHMEM_GET_FILE_ID, &unique_fd);
+    if (ret < 0) {
+        ret = errno;
+        ERROROUT(ret, "trying to get a unique fd");
+    }
+
+    printf("Ashmem returns %llu for a unique identifier\n", unique_fd);
+    return 0;
+}
+#else
 int main(int argc, char* argv[]) {
     bool use_memcg = false;
 
@@ -243,3 +337,4 @@ int main(int argc, char* argv[]) {
     }
     return 0;
 }
+#endif
