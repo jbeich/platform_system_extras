@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9810b2ac_21fec968",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2022-10-10T21:06:55Z",
+      "side": 1,
+      "message": "As per security guidelines, if BLKSECDISCARD is implemented by block-device then it must be used. \n\nhttps://source.android.com/docs/security/overview/implement\n\nPreference from high to low is\nBLKSECDISCARD \u003e BLKDISCARD \u003e Write Zeroes \n\nI don\u0027t think trying BLKDISCARD first is a good idea when BLKSECDISCARD is implemented for secure erase. \n\nCurious, what was the before and after for performance with this patch?",
+      "revId": "6c63621ae82747652432739a7199dce7ec5899a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
