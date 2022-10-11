@@ -86,6 +86,24 @@
       "parentUuid": "0fd6e2b0_7bf9fb9c",
       "revId": "6c63621ae82747652432739a7199dce7ec5899a5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da459cc2_cac93d6d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060907
+      },
+      "writtenOn": "2022-10-11T21:30:16Z",
+      "side": 1,
+      "message": "I would allow it if I saw a way to meet user security guarantees, but I\u0027m afraid I don\u0027t :(",
+      "parentUuid": "89573f70_23114bbb",
+      "revId": "6c63621ae82747652432739a7199dce7ec5899a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
