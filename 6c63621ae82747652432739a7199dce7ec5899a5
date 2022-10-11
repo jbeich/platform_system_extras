@@ -16,6 +16,24 @@
       "message": "As per security guidelines, if BLKSECDISCARD is implemented by block-device then it must be used. \n\nhttps://source.android.com/docs/security/overview/implement\n\nPreference from high to low is\nBLKSECDISCARD \u003e BLKDISCARD \u003e Write Zeroes \n\nI don\u0027t think trying BLKDISCARD first is a good idea when BLKSECDISCARD is implemented for secure erase. \n\nCurious, what was the before and after for performance with this patch?",
       "revId": "6c63621ae82747652432739a7199dce7ec5899a5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42be46e5_ec0977f1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1480345
+      },
+      "writtenOn": "2022-10-11T11:44:52Z",
+      "side": 1,
+      "message": "Tried on two of our devices, with different userdata partition sizes, the time consumed when wipe the userdata partition is noted down as below.\n\nOne device\n----userdata partition 8818MB\n--------before this patch: 795s\n--------after this patch: 22s\n----userdata partition 24178MB\n--------before this patch: 4544s\n--------after this patch: 59s\n \n Another device, which does not have such issue on BLKSECDISCARD\n----userdata partition 8818MB\n--------before this patch: 9.5s\n--------after this patch: 1.7s\n----userdata partition 24178MB\n--------before this patch: 44s\n--------after this patch: 4.5s",
+      "parentUuid": "9810b2ac_21fec968",
+      "revId": "6c63621ae82747652432739a7199dce7ec5899a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
