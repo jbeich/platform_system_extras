@@ -51,6 +51,23 @@
       "message": "+ Paul Crowley for input from the security viewpoint.",
       "revId": "6c63621ae82747652432739a7199dce7ec5899a5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fd6e2b0_7bf9fb9c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1060907
+      },
+      "writtenOn": "2022-10-11T20:34:30Z",
+      "side": 1,
+      "message": "An hour and 15 minutes to erase? I\u0027m sorry, that\u0027s a terrible user experience :(\n\nIn theory encryption should make this unnecessary on the data partition; if the metadata partition is securely wiped, then that should suffice. But I can\u0027t see a way to guarantee that happens if we make this change, and I think we do have to keep our promise to users that if they factory reset, their data is securely destroyed.\n\nAre you aware of any prior discussion of this issue? This code has used BLKSECDISCARD for over a decade.",
+      "revId": "6c63621ae82747652432739a7199dce7ec5899a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
