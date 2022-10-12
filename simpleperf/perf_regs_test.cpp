@@ -21,12 +21,13 @@
 using namespace simpleperf;
 
 TEST(RegSet, arch) {
-  ArchType arch_pairs[2][2] = {
+  ArchType arch_pairs[3][2] = {
       {ARCH_X86_32, ARCH_X86_64},
       {ARCH_ARM, ARCH_ARM64},
+      {ARCH_RISCV64, ARCH_RISCV64},
   };
   for (ArchType* arch_pair : arch_pairs) {
-    for (size_t i = 0; i < 2; i++) {
+    for (size_t i = 0; i < 3; i++) {
       ScopedCurrentArch scoped_arch(arch_pair[i]);
       RegSet reg32(PERF_SAMPLE_REGS_ABI_32, 0, nullptr);
       ASSERT_EQ(reg32.arch, arch_pair[0]) << i;
