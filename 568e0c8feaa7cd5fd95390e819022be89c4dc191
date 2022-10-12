@@ -16,6 +16,52 @@
       "message": "+yabinc...",
       "revId": "568e0c8feaa7cd5fd95390e819022be89c4dc191",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62499cff_70eafecc",
+        "filename": "simpleperf/perf_regs.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2022-10-12T20:29:50Z",
+      "side": 1,
+      "message": "no need to add L65-L67 and L75-L77?",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 5
+      },
+      "revId": "568e0c8feaa7cd5fd95390e819022be89c4dc191",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c80ddc1d_46b1d0a2",
+        "filename": "simpleperf/perf_regs_test.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2022-10-12T20:29:50Z",
+      "side": 1,
+      "message": "This should still be 2.",
+      "range": {
+        "startLine": 30,
+        "startChar": 27,
+        "endLine": 30,
+        "endChar": 28
+      },
+      "revId": "568e0c8feaa7cd5fd95390e819022be89c4dc191",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
