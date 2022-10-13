@@ -134,6 +134,30 @@
       },
       "revId": "568e0c8feaa7cd5fd95390e819022be89c4dc191",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "557f25c9_a57f16bf",
+        "filename": "simpleperf/perf_regs_test.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2022-10-13T15:58:31Z",
+      "side": 1,
+      "message": "The test tests if we can find the right arch of registers for (arch, abi) pair. It is fine to set both to risc64, if we are sure that we don\u0027t need to support riscv32 userspace in riscv64.",
+      "parentUuid": "780a18f5_7dd42575",
+      "range": {
+        "startLine": 30,
+        "startChar": 27,
+        "endLine": 30,
+        "endChar": 28
+      },
+      "revId": "568e0c8feaa7cd5fd95390e819022be89c4dc191",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
