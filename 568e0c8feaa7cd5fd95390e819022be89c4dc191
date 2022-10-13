@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a49592a1_cd733d68",
+        "filename": "simpleperf/perf_regs.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1950590
+      },
+      "writtenOn": "2022-10-13T13:40:38Z",
+      "side": 1,
+      "message": "it seems will not change anything, removed",
+      "parentUuid": "62499cff_70eafecc",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 5
+      },
+      "revId": "568e0c8feaa7cd5fd95390e819022be89c4dc191",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c80ddc1d_46b1d0a2",
