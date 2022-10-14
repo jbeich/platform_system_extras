@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "adfe4392_00a6b965",
+        "filename": "checkpoint_gc/checkpoint_gc.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1246512
+      },
+      "writtenOn": "2022-10-14T05:41:17Z",
+      "side": 1,
+      "message": "in cases where script exits with status 1, should the logging prio be warning instead?\nlog -pw",
+      "range": {
+        "startLine": 61,
+        "startChar": 8,
+        "endLine": 61,
+        "endChar": 12
+      },
+      "revId": "e79438bc521f2c6f267b9107565b9d5cb44c7e6b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6220fa0d_242a2537",
         "filename": "checkpoint_gc/checkpoint_gc.sh",
         "patchSetId": 1
