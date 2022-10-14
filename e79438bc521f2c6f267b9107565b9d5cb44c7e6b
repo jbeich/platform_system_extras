@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6220fa0d_242a2537",
+        "filename": "checkpoint_gc/checkpoint_gc.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1246512
+      },
+      "writtenOn": "2022-10-14T05:35:34Z",
+      "side": 1,
+      "message": "missing { here",
+      "revId": "e79438bc521f2c6f267b9107565b9d5cb44c7e6b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
