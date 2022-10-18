@@ -1,0 +1,182 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f675b121_59e96804",
+        "filename": "jacocolcov/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1060646
+      },
+      "writtenOn": "2022-10-18T18:24:13Z",
+      "side": 1,
+      "message": "Should this be java_binary_host { ... } instead?\n\nAlso should you write some tests for this as well?",
+      "range": {
+        "startLine": 5,
+        "startChar": 0,
+        "endLine": 5,
+        "endChar": 19
+      },
+      "revId": "54240876ed51f76f2a0278c096c3a29da8701893",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a3e998d_11a701e7",
+        "filename": "jacocolcov/MANIFEST.MF",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1060646
+      },
+      "writtenOn": "2022-10-18T18:24:13Z",
+      "side": 1,
+      "message": "I think if you use java_binary_host { .. } then you don\u0027t need to write your own MANIFEST.MF file.",
+      "revId": "54240876ed51f76f2a0278c096c3a29da8701893",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd56aec5_5a34e8b5",
+        "filename": "jacocolcov/com/android/jacocolcov/JacocoLcovReporter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1060646
+      },
+      "writtenOn": "2022-10-18T18:24:13Z",
+      "side": 1,
+      "message": "Just curious - why is this the only option that\u0027s required? What happens if the other arguments aren\u0027t specified?",
+      "range": {
+        "startLine": 61,
+        "startChar": 30,
+        "endLine": 61,
+        "endChar": 42
+      },
+      "revId": "54240876ed51f76f2a0278c096c3a29da8701893",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6871b46_a706e7f3",
+        "filename": "jacocolcov/com/android/jacocolcov/JacocoLcovReporter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1060646
+      },
+      "writtenOn": "2022-10-18T18:24:13Z",
+      "side": 1,
+      "message": "I only see this being called from the constructor - does it need to be a separate method?",
+      "range": {
+        "startLine": 135,
+        "startChar": 0,
+        "endLine": 142,
+        "endChar": 5
+      },
+      "revId": "54240876ed51f76f2a0278c096c3a29da8701893",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9360253_2a08a107",
+        "filename": "jacocolcov/com/android/jacocolcov/JacocoLcovReporter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1060646
+      },
+      "writtenOn": "2022-10-18T18:24:13Z",
+      "side": 1,
+      "message": "Is this class intended to be used as a library (called from Java code) or is it always run through the command line?\n\nI\u0027m wondering if these methods really need to be public or not.\n\nSee http://go/java-practices/visibility#minimize",
+      "range": {
+        "startLine": 149,
+        "startChar": 4,
+        "endLine": 149,
+        "endChar": 10
+      },
+      "revId": "54240876ed51f76f2a0278c096c3a29da8701893",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afbd27cc_aedb4ce0",
+        "filename": "jacocolcov/com/android/jacocolcov/JacocoLcovReporter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1060646
+      },
+      "writtenOn": "2022-10-18T18:24:13Z",
+      "side": 1,
+      "message": "Can you use the nio classes (e.g. Path) instead?\n\n\u003e java.io, and java.io.File in particular, are very popular because they have been around for a long time and are used by many other core libraries, but **should be avoided where possible**. The java.nio classes are generally more flexible and powerful. \n\nFrom go/java-practices/libraries#io",
+      "range": {
+        "startLine": 152,
+        "startChar": 13,
+        "endLine": 152,
+        "endChar": 17
+      },
+      "revId": "54240876ed51f76f2a0278c096c3a29da8701893",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c0ddb16_ebcda152",
+        "filename": "jacocolcov/com/android/jacocolcov/JacocoLcovReporter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1060646
+      },
+      "writtenOn": "2022-10-18T18:24:13Z",
+      "side": 1,
+      "message": "Is it possible to avoid the state where the analyzer is null? Are there any problems with initializing the Analyzer in the constructor (or reset() method) instead?",
+      "range": {
+        "startLine": 204,
+        "startChar": 0,
+        "endLine": 204,
+        "endChar": 31
+      },
+      "revId": "54240876ed51f76f2a0278c096c3a29da8701893",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6143e0ba_33eb2df0",
+        "filename": "jacocolcov/com/android/jacocolcov/JacocoLcovReporter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1060646
+      },
+      "writtenOn": "2022-10-18T18:24:13Z",
+      "side": 1,
+      "message": "What sort of errors do you expect to see here, and why do we need to skip over them?",
+      "range": {
+        "startLine": 216,
+        "startChar": 0,
+        "endLine": 218,
+        "endChar": 13
+      },
+      "revId": "54240876ed51f76f2a0278c096c3a29da8701893",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
