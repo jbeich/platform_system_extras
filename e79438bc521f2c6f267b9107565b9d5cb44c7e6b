@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6adc3dc4_a94d1878",
+        "filename": "checkpoint_gc/checkpoint_gc.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2022-10-19T00:48:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "adfe4392_00a6b965",
+      "range": {
+        "startLine": 61,
+        "startChar": 8,
+        "endLine": 61,
+        "endChar": 12
+      },
+      "revId": "e79438bc521f2c6f267b9107565b9d5cb44c7e6b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6220fa0d_242a2537",
@@ -37,6 +61,24 @@
       "writtenOn": "2022-10-14T05:35:34Z",
       "side": 1,
       "message": "missing { here",
+      "revId": "e79438bc521f2c6f267b9107565b9d5cb44c7e6b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "07285272_92acfe74",
+        "filename": "checkpoint_gc/checkpoint_gc.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2022-10-19T00:48:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6220fa0d_242a2537",
       "revId": "e79438bc521f2c6f267b9107565b9d5cb44c7e6b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }

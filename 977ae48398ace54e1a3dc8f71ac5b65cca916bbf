@@ -16,6 +16,24 @@
       "message": "The scripts exist upon error without restoring gc_urgent_sleep_time to initial value here.\n\nMy gut feeling is that it would be unlikely to fail here and not on any of the above line, but you never know.",
       "revId": "977ae48398ace54e1a3dc8f71ac5b65cca916bbf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "19daeb2a_b07c205c",
+        "filename": "checkpoint_gc/checkpoint_gc.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2022-10-19T00:48:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "624a4b1a_6caca8d0",
+      "revId": "977ae48398ace54e1a3dc8f71ac5b65cca916bbf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
