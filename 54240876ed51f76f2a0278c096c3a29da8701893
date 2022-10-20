@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4df84ee1_6ba67e3b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2022-10-20T21:16:58Z",
+      "side": 1,
+      "message": "A nit really but adding some structure would make this easier to read:\n\n```\nAdd a tool to convert JaCoCo files to LCOV format\n\nThis tool converts JaCoCo exec and class files to LCOV format which is more suitable for generating coverage reports using `genhtml`.\n\nThis facilitates merging Java coverage reports where modules contain different versions of the same class which JaCoCo cannot handle.\n\nThis will only generate coverage for .java and .kt files under any of the -sourcepath options.\n\nUsage:\n\njava -jar $(PRODUCT_OUT)/jacocolcov.jar [\u003cexecfiles\u003e]\n[-classfiles \u003cclassfile\u003e] [-sourcepath \u003csourcepath\u003e] -o \u003cdestination\u003e\n```\n\nI also don\u0027t quite understand the part about different versions of the same class which you could elaborate.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 69
+      },
+      "revId": "54240876ed51f76f2a0278c096c3a29da8701893",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f675b121_59e96804",
         "filename": "jacocolcov/Android.bp",
         "patchSetId": 2
@@ -43,6 +66,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "179c2e45_a80f3606",
+        "filename": "jacocolcov/com/android/jacocolcov/JacocoLcovReporter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2022-10-20T21:16:58Z",
+      "side": 1,
+      "message": "Based on your description wouldn\u0027t `JacocoToLcovConverter` be a better name?",
+      "range": {
+        "startLine": 43,
+        "startChar": 12,
+        "endLine": 43,
+        "endChar": 30
+      },
+      "revId": "54240876ed51f76f2a0278c096c3a29da8701893",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52d31c0a_a324bcf8",
+        "filename": "jacocolcov/com/android/jacocolcov/JacocoLcovReporter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2022-10-20T21:16:58Z",
+      "side": 1,
+      "message": "Add \u0027final\u0027.",
+      "range": {
+        "startLine": 43,
+        "startChar": 6,
+        "endLine": 43,
+        "endChar": 11
+      },
+      "revId": "54240876ed51f76f2a0278c096c3a29da8701893",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cd56aec5_5a34e8b5",
         "filename": "jacocolcov/com/android/jacocolcov/JacocoLcovReporter.java",
         "patchSetId": 2
@@ -59,6 +128,75 @@
         "startChar": 30,
         "endLine": 61,
         "endChar": 42
+      },
+      "revId": "54240876ed51f76f2a0278c096c3a29da8701893",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91438750_a0dd3b08",
+        "filename": "jacocolcov/com/android/jacocolcov/JacocoLcovReporter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2022-10-20T21:16:58Z",
+      "side": 1,
+      "message": "Either inline the option variables or use them to access the value:\n\n```\ncmd.getOptionValue(verboseOption)\n```\n\n\nIMO the latter is better since it\u0027s typed compared to free-form strings.",
+      "range": {
+        "startLine": 72,
+        "startChar": 26,
+        "endLine": 72,
+        "endChar": 42
+      },
+      "revId": "54240876ed51f76f2a0278c096c3a29da8701893",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "549b0129_a82160a0",
+        "filename": "jacocolcov/com/android/jacocolcov/JacocoLcovReporter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2022-10-20T21:16:58Z",
+      "side": 1,
+      "message": "Prefer using `Path` over `File`.",
+      "range": {
+        "startLine": 98,
+        "startChar": 39,
+        "endLine": 98,
+        "endChar": 43
+      },
+      "revId": "54240876ed51f76f2a0278c096c3a29da8701893",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce0c96b9_b194d2b4",
+        "filename": "jacocolcov/com/android/jacocolcov/JacocoLcovReporter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2022-10-20T21:16:58Z",
+      "side": 1,
+      "message": "Why are you catching Exception? Isn\u0027t there a narrower type to catch?",
+      "range": {
+        "startLine": 111,
+        "startChar": 17,
+        "endLine": 111,
+        "endChar": 26
       },
       "revId": "54240876ed51f76f2a0278c096c3a29da8701893",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
@@ -135,6 +273,99 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "00900e1d_7b530e79",
+        "filename": "jacocolcov/com/android/jacocolcov/JacocoLcovReporter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2022-10-20T21:16:58Z",
+      "side": 1,
+      "message": "Argh, you beat me to this comment!",
+      "parentUuid": "afbd27cc_aedb4ce0",
+      "range": {
+        "startLine": 152,
+        "startChar": 13,
+        "endLine": 152,
+        "endChar": 17
+      },
+      "revId": "54240876ed51f76f2a0278c096c3a29da8701893",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50447082_909706ba",
+        "filename": "jacocolcov/com/android/jacocolcov/JacocoLcovReporter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2022-10-20T21:16:58Z",
+      "side": 1,
+      "message": "Consider using a `SetMultiMap`.",
+      "range": {
+        "startLine": 161,
+        "startChar": 0,
+        "endLine": 162,
+        "endChar": 70
+      },
+      "revId": "54240876ed51f76f2a0278c096c3a29da8701893",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ab4fa5b_791b9952",
+        "filename": "jacocolcov/com/android/jacocolcov/JacocoLcovReporter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2022-10-20T21:16:58Z",
+      "side": 1,
+      "message": "Consider replacing this entire block with a more standard way to recurse a directory tree:\n\n```\ntry (Stream\u003cPath\u003e stream \u003d Files.walk(path.toPath())) {\n    stream.filter(Files::isRegularFile)\n          .filter(isJavaOrKotlinFile)\n          .forEach(p -\u003e System.out::println(\"...\"))\n          .collect(...)\n}\n```",
+      "range": {
+        "startLine": 152,
+        "startChar": 0,
+        "endLine": 165,
+        "endChar": 9
+      },
+      "revId": "54240876ed51f76f2a0278c096c3a29da8701893",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d30f58ad_6a7cfe8f",
+        "filename": "jacocolcov/com/android/jacocolcov/JacocoLcovReporter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2022-10-20T21:16:58Z",
+      "side": 1,
+      "message": "Any reason we wouldn\u0027t want strict?",
+      "range": {
+        "startLine": 186,
+        "startChar": 16,
+        "endLine": 186,
+        "endChar": 22
+      },
+      "revId": "54240876ed51f76f2a0278c096c3a29da8701893",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4c0ddb16_ebcda152",
         "filename": "jacocolcov/com/android/jacocolcov/JacocoLcovReporter.java",
         "patchSetId": 2
@@ -158,6 +389,53 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3c923943_1b7685e2",
+        "filename": "jacocolcov/com/android/jacocolcov/JacocoLcovReporter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2022-10-20T21:16:58Z",
+      "side": 1,
+      "message": "+1 I would just initialize in the constructor and make the fields final. I don\u0027t see anything else using or needing `reset`. Worst case you can just create a new object.",
+      "parentUuid": "4c0ddb16_ebcda152",
+      "range": {
+        "startLine": 204,
+        "startChar": 0,
+        "endLine": 204,
+        "endChar": 31
+      },
+      "revId": "54240876ed51f76f2a0278c096c3a29da8701893",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a562929f_7e7c8c11",
+        "filename": "jacocolcov/com/android/jacocolcov/JacocoLcovReporter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2022-10-20T21:16:58Z",
+      "side": 1,
+      "message": "Move this out of the try to minimize the catch block and reduce nesting.",
+      "range": {
+        "startLine": 209,
+        "startChar": 0,
+        "endLine": 211,
+        "endChar": 13
+      },
+      "revId": "54240876ed51f76f2a0278c096c3a29da8701893",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6143e0ba_33eb2df0",
         "filename": "jacocolcov/com/android/jacocolcov/JacocoLcovReporter.java",
         "patchSetId": 2
@@ -174,6 +452,98 @@
         "startChar": 0,
         "endLine": 218,
         "endChar": 13
+      },
+      "revId": "54240876ed51f76f2a0278c096c3a29da8701893",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2723149_d38c0bd7",
+        "filename": "jacocolcov/com/android/jacocolcov/JacocoLcovReporter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2022-10-20T21:16:58Z",
+      "side": 1,
+      "message": "Consider a `verbose` function. It simplifies the call site and you no longer have to check the boolean.",
+      "range": {
+        "startLine": 230,
+        "startChar": 0,
+        "endLine": 236,
+        "endChar": 9
+      },
+      "revId": "54240876ed51f76f2a0278c096c3a29da8701893",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07ffc943_f4950297",
+        "filename": "jacocolcov/com/android/jacocolcov/JacocoLcovReporter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2022-10-20T21:16:58Z",
+      "side": 1,
+      "message": "Any reason why we can\u0027t just let this bubble up? Doesn\u0027t seem we\u0027re adding much additional information.",
+      "range": {
+        "startLine": 325,
+        "startChar": 0,
+        "endLine": 327,
+        "endChar": 20
+      },
+      "revId": "54240876ed51f76f2a0278c096c3a29da8701893",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "488ecd58_78c520c4",
+        "filename": "jacocolcov/com/android/jacocolcov/JacocoLcovReporter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2022-10-20T21:16:58Z",
+      "side": 1,
+      "message": "I\u0027m having trouble understanding what `filename` is. Is it the entire path, the file name with/without the extension?",
+      "range": {
+        "startLine": 342,
+        "startChar": 49,
+        "endLine": 342,
+        "endChar": 57
+      },
+      "revId": "54240876ed51f76f2a0278c096c3a29da8701893",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93b118a9_9a08bb9a",
+        "filename": "jacocolcov/com/android/jacocolcov/JacocoLcovReporter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2022-10-20T21:16:58Z",
+      "side": 1,
+      "message": "Make these two helpers static.",
+      "range": {
+        "startLine": 359,
+        "startChar": 19,
+        "endLine": 359,
+        "endChar": 29
       },
       "revId": "54240876ed51f76f2a0278c096c3a29da8701893",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
