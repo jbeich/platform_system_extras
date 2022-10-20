@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aab3feb2_9c676172",
+        "filename": "partition_tools/lpadd.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1290458
+      },
+      "writtenOn": "2022-10-20T16:51:57Z",
+      "side": 1,
+      "message": "Can you include \u003cstring.h\u003e in the previous block instead?",
+      "revId": "8cb11d4bd4688daef40b1136e9f264e77ca9898d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
