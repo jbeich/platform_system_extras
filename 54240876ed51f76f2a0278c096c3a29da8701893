@@ -24,6 +24,47 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b0c8285_06bdffe2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1345967
+      },
+      "writtenOn": "2022-10-25T20:48:50Z",
+      "side": 1,
+      "message": "The same class may be included in multiple build modules (e.g. in the Mainline module and in the test), and JaCoCo will reject and throw errors when the class is loaded for the second time since it requires each class to be loaded only once. This tool will convert the results to lcov format for each build module, and then the lcov results can be merged together by method and line to generate a single report for all Java code.",
+      "parentUuid": "4df84ee1_6ba67e3b",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 69
+      },
+      "revId": "54240876ed51f76f2a0278c096c3a29da8701893",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "06dbb962_a0d463a9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1345967
+      },
+      "writtenOn": "2022-10-25T20:48:50Z",
+      "side": 1,
+      "message": "Is there a better location for this? Currently `system/extras` is where we keep other coverage-related tools but those are installed on the device whereas this is not. Should this go under `tools` instead?",
+      "revId": "54240876ed51f76f2a0278c096c3a29da8701893",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f675b121_59e96804",
@@ -47,6 +88,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "89ebd895_11878c88",
+        "filename": "jacocolcov/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1345967
+      },
+      "writtenOn": "2022-10-25T20:48:50Z",
+      "side": 1,
+      "message": "Changed to `java_binary_host`. Tests will be added in a follow-up CL.",
+      "parentUuid": "f675b121_59e96804",
+      "range": {
+        "startLine": 5,
+        "startChar": 0,
+        "endLine": 5,
+        "endChar": 19
+      },
+      "revId": "54240876ed51f76f2a0278c096c3a29da8701893",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0a3e998d_11a701e7",
@@ -60,6 +125,24 @@
       "writtenOn": "2022-10-18T18:24:13Z",
       "side": 1,
       "message": "I think if you use java_binary_host { .. } then you don\u0027t need to write your own MANIFEST.MF file.",
+      "revId": "54240876ed51f76f2a0278c096c3a29da8701893",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "648bfdd7_436ff77b",
+        "filename": "jacocolcov/MANIFEST.MF",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1345967
+      },
+      "writtenOn": "2022-10-25T20:48:50Z",
+      "side": 1,
+      "message": "Removed. This is set with the `main_class` attribute for `java_binary_host`.",
+      "parentUuid": "0a3e998d_11a701e7",
       "revId": "54240876ed51f76f2a0278c096c3a29da8701893",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -110,6 +193,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "955cfe6a_564a72db",
+        "filename": "jacocolcov/com/android/jacocolcov/JacocoLcovReporter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1345967
+      },
+      "writtenOn": "2022-10-25T20:48:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "179c2e45_a80f3606",
+      "range": {
+        "startLine": 43,
+        "startChar": 12,
+        "endLine": 43,
+        "endChar": 30
+      },
+      "revId": "54240876ed51f76f2a0278c096c3a29da8701893",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2753ce0c_e3f6742f",
+        "filename": "jacocolcov/com/android/jacocolcov/JacocoLcovReporter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1345967
+      },
+      "writtenOn": "2022-10-25T20:48:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "52d31c0a_a324bcf8",
+      "range": {
+        "startLine": 43,
+        "startChar": 6,
+        "endLine": 43,
+        "endChar": 11
+      },
+      "revId": "54240876ed51f76f2a0278c096c3a29da8701893",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cd56aec5_5a34e8b5",
@@ -123,6 +254,30 @@
       "writtenOn": "2022-10-18T18:24:13Z",
       "side": 1,
       "message": "Just curious - why is this the only option that\u0027s required? What happens if the other arguments aren\u0027t specified?",
+      "range": {
+        "startLine": 61,
+        "startChar": 30,
+        "endLine": 61,
+        "endChar": 42
+      },
+      "revId": "54240876ed51f76f2a0278c096c3a29da8701893",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce9e0e80_67b27d0c",
+        "filename": "jacocolcov/com/android/jacocolcov/JacocoLcovReporter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1345967
+      },
+      "writtenOn": "2022-10-25T20:48:50Z",
+      "side": 1,
+      "message": "This is the only one that\u0027s required since it needs a file to write the lcov data to. If the other params aren\u0027t set, it will generate an empty report with just the header information in the lcov file.",
+      "parentUuid": "cd56aec5_5a34e8b5",
       "range": {
         "startLine": 61,
         "startChar": 30,
@@ -156,6 +311,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9876e7a_24d7755b",
+        "filename": "jacocolcov/com/android/jacocolcov/JacocoLcovReporter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1345967
+      },
+      "writtenOn": "2022-10-25T20:48:50Z",
+      "side": 1,
+      "message": "I\u0027ll move the option string into a static variable. The version of apache-cli used in Android (1.2) doesn\u0027t support `CommandLine.getOptionValue(Option)` and only supports `CommandLine.getOptionValue(String)`.",
+      "parentUuid": "91438750_a0dd3b08",
+      "range": {
+        "startLine": 72,
+        "startChar": 26,
+        "endLine": 72,
+        "endChar": 42
+      },
+      "revId": "54240876ed51f76f2a0278c096c3a29da8701893",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "549b0129_a82160a0",
@@ -169,6 +348,30 @@
       "writtenOn": "2022-10-20T21:16:58Z",
       "side": 1,
       "message": "Prefer using `Path` over `File`.",
+      "range": {
+        "startLine": 98,
+        "startChar": 39,
+        "endLine": 98,
+        "endChar": 43
+      },
+      "revId": "54240876ed51f76f2a0278c096c3a29da8701893",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "811691b8_b8087a14",
+        "filename": "jacocolcov/com/android/jacocolcov/JacocoLcovReporter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1345967
+      },
+      "writtenOn": "2022-10-25T20:48:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "549b0129_a82160a0",
       "range": {
         "startLine": 98,
         "startChar": 39,
@@ -202,6 +405,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b18be73_729f0392",
+        "filename": "jacocolcov/com/android/jacocolcov/JacocoLcovReporter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1345967
+      },
+      "writtenOn": "2022-10-25T20:48:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce0c96b9_b194d2b4",
+      "range": {
+        "startLine": 111,
+        "startChar": 17,
+        "endLine": 111,
+        "endChar": 26
+      },
+      "revId": "54240876ed51f76f2a0278c096c3a29da8701893",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c6871b46_a706e7f3",
@@ -225,6 +452,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8856ee5_655ebf8f",
+        "filename": "jacocolcov/com/android/jacocolcov/JacocoLcovReporter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1345967
+      },
+      "writtenOn": "2022-10-25T20:48:50Z",
+      "side": 1,
+      "message": "Merged this into the constructor.",
+      "parentUuid": "c6871b46_a706e7f3",
+      "range": {
+        "startLine": 135,
+        "startChar": 0,
+        "endLine": 142,
+        "endChar": 5
+      },
+      "revId": "54240876ed51f76f2a0278c096c3a29da8701893",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e9360253_2a08a107",
@@ -238,6 +489,30 @@
       "writtenOn": "2022-10-18T18:24:13Z",
       "side": 1,
       "message": "Is this class intended to be used as a library (called from Java code) or is it always run through the command line?\n\nI\u0027m wondering if these methods really need to be public or not.\n\nSee http://go/java-practices/visibility#minimize",
+      "range": {
+        "startLine": 149,
+        "startChar": 4,
+        "endLine": 149,
+        "endChar": 10
+      },
+      "revId": "54240876ed51f76f2a0278c096c3a29da8701893",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a86939b3_e823d50b",
+        "filename": "jacocolcov/com/android/jacocolcov/JacocoLcovReporter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1345967
+      },
+      "writtenOn": "2022-10-25T20:48:50Z",
+      "side": 1,
+      "message": "This was intended to be a library that can also be called from the command line, similar to how jacoco-cli is set up.",
+      "parentUuid": "e9360253_2a08a107",
       "range": {
         "startLine": 149,
         "startChar": 4,
@@ -295,6 +570,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "939c71e8_50ecaab5",
+        "filename": "jacocolcov/com/android/jacocolcov/JacocoLcovReporter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1345967
+      },
+      "writtenOn": "2022-10-25T20:48:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "00900e1d_7b530e79",
+      "range": {
+        "startLine": 152,
+        "startChar": 13,
+        "endLine": 152,
+        "endChar": 17
+      },
+      "revId": "54240876ed51f76f2a0278c096c3a29da8701893",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "50447082_909706ba",
@@ -308,6 +607,30 @@
       "writtenOn": "2022-10-20T21:16:58Z",
       "side": 1,
       "message": "Consider using a `SetMultiMap`.",
+      "range": {
+        "startLine": 161,
+        "startChar": 0,
+        "endLine": 162,
+        "endChar": 70
+      },
+      "revId": "54240876ed51f76f2a0278c096c3a29da8701893",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "238604ac_5b2fa535",
+        "filename": "jacocolcov/com/android/jacocolcov/JacocoLcovReporter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1345967
+      },
+      "writtenOn": "2022-10-25T20:48:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "50447082_909706ba",
       "range": {
         "startLine": 161,
         "startChar": 0,
@@ -341,6 +664,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8b5a70e_9906457c",
+        "filename": "jacocolcov/com/android/jacocolcov/JacocoLcovReporter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1345967
+      },
+      "writtenOn": "2022-10-25T20:48:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ab4fa5b_791b9952",
+      "range": {
+        "startLine": 152,
+        "startChar": 0,
+        "endLine": 165,
+        "endChar": 9
+      },
+      "revId": "54240876ed51f76f2a0278c096c3a29da8701893",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d30f58ad_6a7cfe8f",
@@ -354,6 +701,30 @@
       "writtenOn": "2022-10-20T21:16:58Z",
       "side": 1,
       "message": "Any reason we wouldn\u0027t want strict?",
+      "range": {
+        "startLine": 186,
+        "startChar": 16,
+        "endLine": 186,
+        "endChar": 22
+      },
+      "revId": "54240876ed51f76f2a0278c096c3a29da8701893",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d39e2d8_4dd8f4c6",
+        "filename": "jacocolcov/com/android/jacocolcov/JacocoLcovReporter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1345967
+      },
+      "writtenOn": "2022-10-25T20:48:50Z",
+      "side": 1,
+      "message": "In strict mode, any failure will cause the entire report generation to fail. We have seen several instances where some of the coverage measurements from the device appear to be invalid, and non-strict mode allows these files to be skipped and still generate coverage from the valid files.",
+      "parentUuid": "d30f58ad_6a7cfe8f",
       "range": {
         "startLine": 186,
         "startChar": 16,
@@ -411,6 +782,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd332078_f423bff8",
+        "filename": "jacocolcov/com/android/jacocolcov/JacocoLcovReporter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1345967
+      },
+      "writtenOn": "2022-10-25T20:48:50Z",
+      "side": 1,
+      "message": "From the JaCoCo API it is not clear whether the Analyzer needs the execution data before the classes are loaded, or if it updates the coverage data returned if the execution counts change after the classes are loaded.",
+      "parentUuid": "3c923943_1b7685e2",
+      "range": {
+        "startLine": 204,
+        "startChar": 0,
+        "endLine": 204,
+        "endChar": 31
+      },
+      "revId": "54240876ed51f76f2a0278c096c3a29da8701893",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a562929f_7e7c8c11",
@@ -424,6 +819,30 @@
       "writtenOn": "2022-10-20T21:16:58Z",
       "side": 1,
       "message": "Move this out of the try to minimize the catch block and reduce nesting.",
+      "range": {
+        "startLine": 209,
+        "startChar": 0,
+        "endLine": 211,
+        "endChar": 13
+      },
+      "revId": "54240876ed51f76f2a0278c096c3a29da8701893",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1c2c863_e0c35451",
+        "filename": "jacocolcov/com/android/jacocolcov/JacocoLcovReporter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1345967
+      },
+      "writtenOn": "2022-10-25T20:48:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a562929f_7e7c8c11",
       "range": {
         "startLine": 209,
         "startChar": 0,
@@ -457,6 +876,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "429bff09_4f5d91ce",
+        "filename": "jacocolcov/com/android/jacocolcov/JacocoLcovReporter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1345967
+      },
+      "writtenOn": "2022-10-25T20:48:50Z",
+      "side": 1,
+      "message": "I don\u0027t expect to see any errors in the classfile loading part, but I\u0027ve kept the structure similar to the exefile loading for consistency.",
+      "parentUuid": "6143e0ba_33eb2df0",
+      "range": {
+        "startLine": 216,
+        "startChar": 0,
+        "endLine": 218,
+        "endChar": 13
+      },
+      "revId": "54240876ed51f76f2a0278c096c3a29da8701893",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f2723149_d38c0bd7",
@@ -470,6 +913,30 @@
       "writtenOn": "2022-10-20T21:16:58Z",
       "side": 1,
       "message": "Consider a `verbose` function. It simplifies the call site and you no longer have to check the boolean.",
+      "range": {
+        "startLine": 230,
+        "startChar": 0,
+        "endLine": 236,
+        "endChar": 9
+      },
+      "revId": "54240876ed51f76f2a0278c096c3a29da8701893",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "331009d2_20e5acc5",
+        "filename": "jacocolcov/com/android/jacocolcov/JacocoLcovReporter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1345967
+      },
+      "writtenOn": "2022-10-25T20:48:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f2723149_d38c0bd7",
       "range": {
         "startLine": 230,
         "startChar": 0,
@@ -503,6 +970,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4957db6c_7de677ec",
+        "filename": "jacocolcov/com/android/jacocolcov/JacocoLcovReporter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 1345967
+      },
+      "writtenOn": "2022-10-25T20:48:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "07ffc943_f4950297",
+      "range": {
+        "startLine": 325,
+        "startChar": 0,
+        "endLine": 327,
+        "endChar": 20
+      },
+      "revId": "54240876ed51f76f2a0278c096c3a29da8701893",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "488ecd58_78c520c4",
@@ -526,6 +1017,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4cb0682e_44ede6e4",
+        "filename": "jacocolcov/com/android/jacocolcov/JacocoLcovReporter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1345967
+      },
+      "writtenOn": "2022-10-25T20:48:50Z",
+      "side": 1,
+      "message": "`filename` here is the path including the Java package name and .java extension, e.g. `com/android/z/Example.java`. This is matched to an absolute path found in one of the files under `-sourcepath`.",
+      "parentUuid": "488ecd58_78c520c4",
+      "range": {
+        "startLine": 342,
+        "startChar": 49,
+        "endLine": 342,
+        "endChar": 57
+      },
+      "revId": "54240876ed51f76f2a0278c096c3a29da8701893",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "93b118a9_9a08bb9a",
@@ -539,6 +1054,30 @@
       "writtenOn": "2022-10-20T21:16:58Z",
       "side": 1,
       "message": "Make these two helpers static.",
+      "range": {
+        "startLine": 359,
+        "startChar": 19,
+        "endLine": 359,
+        "endChar": 29
+      },
+      "revId": "54240876ed51f76f2a0278c096c3a29da8701893",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd34279c_e705fc2f",
+        "filename": "jacocolcov/com/android/jacocolcov/JacocoLcovReporter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 1345967
+      },
+      "writtenOn": "2022-10-25T20:48:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "93b118a9_9a08bb9a",
       "range": {
         "startLine": 359,
         "startChar": 19,
