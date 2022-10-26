@@ -1,0 +1,205 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e90e7051_54d98154",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2022-10-26T04:52:20Z",
+      "side": 1,
+      "message": "```\nAdd a tool to convert JaCoCo files to LCOV format\n\nThis tool converts JaCoCo execfiles and classfiles to lcov format,\nsuitable for generating coverage reports using `genhtml`.\n\nThis facilitates merging Java coverage reports where modules contain\ndifferent versions of the same class, which JaCoCo cannot handle.\n\nThis will only generate coverage for .java and .kt files under any of\nthe -sourcepath options.\n\nUsage:\njava -jar $(PRODUCT_OUT)/jacocolcov.jar [\u003cexecfiles\u003e]\n[-classfiles \u003cclassfile\u003e] [-sourcepath \u003csourcepath\u003e] -o \u003cdestination\u003e\n```",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 69
+      },
+      "revId": "49a4049477f9d05b719790e20558cae16e36cb74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "42f11817_99c59d05",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2022-10-26T04:52:20Z",
+      "side": 1,
+      "message": "Last round.",
+      "revId": "49a4049477f9d05b719790e20558cae16e36cb74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10c959a1_3bd03347",
+        "filename": "jacocolcov/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2022-10-26T04:52:20Z",
+      "side": 1,
+      "message": "`jacoco_to_lcov_converter`?",
+      "range": {
+        "startLine": 6,
+        "startChar": 11,
+        "endLine": 6,
+        "endChar": 21
+      },
+      "revId": "49a4049477f9d05b719790e20558cae16e36cb74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "646dc2fb_e086933c",
+        "filename": "jacocolcov/com/android/jacocolcov/JacocoToLcovConverter.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2022-10-26T04:52:20Z",
+      "side": 1,
+      "message": "Optional:\n\n```\nconverter.indexSourcePaths(toPathSet(sourcepaths));\nconverter.loadExecFiles(toPathSet(execfiles));\nconverter.loadClassFiles(toPathSet(classfiles));\n\nSet\u003cPath\u003e toPathSet(Iterable\u003cString\u003e paths) {\n  return paths.stream().map(Paths::get).collect(toSet());\n}\n```\n\nNote that I avoided `addSourcePaths` since `addXXX` implies it\u0027s a simple innocuous add operation when you\u0027re actually indexing the source path.",
+      "range": {
+        "startLine": 104,
+        "startChar": 16,
+        "endLine": 104,
+        "endChar": 63
+      },
+      "revId": "49a4049477f9d05b719790e20558cae16e36cb74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed76db1a_4b017e84",
+        "filename": "jacocolcov/com/android/jacocolcov/JacocoToLcovConverter.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2022-10-26T04:52:20Z",
+      "side": 1,
+      "message": "Why not `Path`?",
+      "range": {
+        "startLine": 128,
+        "startChar": 32,
+        "endLine": 128,
+        "endChar": 38
+      },
+      "revId": "49a4049477f9d05b719790e20558cae16e36cb74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c00748b5_9514c13c",
+        "filename": "jacocolcov/com/android/jacocolcov/JacocoToLcovConverter.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2022-10-26T04:52:20Z",
+      "side": 1,
+      "message": "nit: Put all finals together and mutable fields after that.",
+      "range": {
+        "startLine": 130,
+        "startChar": 12,
+        "endLine": 130,
+        "endChar": 17
+      },
+      "revId": "49a4049477f9d05b719790e20558cae16e36cb74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0b60d52_cc367655",
+        "filename": "jacocolcov/com/android/jacocolcov/JacocoToLcovConverter.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2022-10-26T04:52:20Z",
+      "side": 1,
+      "message": "Is this redundant with the preceding log line?",
+      "range": {
+        "startLine": 180,
+        "startChar": 0,
+        "endLine": 180,
+        "endChar": 37
+      },
+      "revId": "49a4049477f9d05b719790e20558cae16e36cb74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f21e253_7a97f0ea",
+        "filename": "jacocolcov/com/android/jacocolcov/JacocoToLcovConverter.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2022-10-26T04:52:20Z",
+      "side": 1,
+      "message": "nit.\n\nI personally find classFile/ClassFile/etc easier to read. Searching in google3 they also seem to prefer that casing over classfile/Classfile/etc. The JDK also seems to use that casing.\n\nApplies to execfile as well.",
+      "range": {
+        "startLine": 194,
+        "startChar": 34,
+        "endLine": 194,
+        "endChar": 43
+      },
+      "revId": "49a4049477f9d05b719790e20558cae16e36cb74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "433075f5_e53c6635",
+        "filename": "jacocolcov/com/android/jacocolcov/JacocoToLcovConverter.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2022-10-26T04:52:20Z",
+      "side": 1,
+      "message": "Optional: You could move this to a `LcovFileWriter` and further decompose into methods for better readability.",
+      "range": {
+        "startLine": 225,
+        "startChar": 12,
+        "endLine": 225,
+        "endChar": 21
+      },
+      "revId": "49a4049477f9d05b719790e20558cae16e36cb74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

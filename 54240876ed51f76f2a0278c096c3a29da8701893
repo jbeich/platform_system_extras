@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "6cd44c26_4c09e494",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2022-10-26T04:52:20Z",
+      "side": 1,
+      "message": "Got it so use this wording and mention why we care about \u0027genhtml\u0027. You might also want to add this description somewhere in the code:\n\n```\nAdd a tool to convert JaCoCo files to LCOV format\n\nThis tool converts JaCoCo exec and class files to LCOV format which is more suitable for generating coverage reports using `genhtml`.\n\nThis tool also handles a JaCoCo limitation when processing classes that are included in multiple build modules. For example, a class X that\u0027s included in both product and test code. JaCoCo will reject and throw errors when the class is loaded more than once.\n\nConverting results to LCOV format for each build module and then merging the results allows us to generate a single report for all Java code.\n\nNote that this tool will only generate coverage for Java and Kotlin files in any of the provided source paths.\n\nUsage:\n\njava -jar $(PRODUCT_OUT)/jacocolcov.jar \\\n  -o \u003cdestination\u003e \\\n  [\u003cexecfiles\u003e] \\\n  [-classfiles \u003cclassfile\u003e] \\\n  [-sourcepath \u003csourcepath\u003e] \\\n```",
+      "parentUuid": "4b0c8285_06bdffe2",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 69
+      },
+      "revId": "54240876ed51f76f2a0278c096c3a29da8701893",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "06dbb962_a0d463a9",
@@ -61,6 +85,24 @@
       "writtenOn": "2022-10-25T20:48:50Z",
       "side": 1,
       "message": "Is there a better location for this? Currently `system/extras` is where we keep other coverage-related tools but those are installed on the device whereas this is not. Should this go under `tools` instead?",
+      "revId": "54240876ed51f76f2a0278c096c3a29da8701893",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82631ccd_4e815323",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2022-10-26T04:52:20Z",
+      "side": 1,
+      "message": "Is this primarily going to be used with Atest? If so, I\u0027d go for putting it in there or close.\n\nSee for example how we put TF related Java code in the bazel/ subdirectory of Atest.\n\nYou already seem to have a coverage/ sub-directory in Atest so I\u0027d put it there. Remember that things that change together should live together.",
+      "parentUuid": "06dbb962_a0d463a9",
       "revId": "54240876ed51f76f2a0278c096c3a29da8701893",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -1031,6 +1073,30 @@
       "side": 1,
       "message": "`filename` here is the path including the Java package name and .java extension, e.g. `com/android/z/Example.java`. This is matched to an absolute path found in one of the files under `-sourcepath`.",
       "parentUuid": "488ecd58_78c520c4",
+      "range": {
+        "startLine": 342,
+        "startChar": 49,
+        "endLine": 342,
+        "endChar": 57
+      },
+      "revId": "54240876ed51f76f2a0278c096c3a29da8701893",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d978ccaf_e120ce6c",
+        "filename": "jacocolcov/com/android/jacocolcov/JacocoLcovReporter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2022-10-26T04:52:20Z",
+      "side": 1,
+      "message": "Got it. Try to make that clear in the code.",
+      "parentUuid": "4cb0682e_44ede6e4",
       "range": {
         "startLine": 342,
         "startChar": 49,
