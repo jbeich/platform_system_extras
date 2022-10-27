@@ -779,6 +779,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e5670439_0274630b",
+        "filename": "jacocolcov/com/android/jacocolcov/JacocoLcovReporter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1060646
+      },
+      "writtenOn": "2022-10-27T23:11:25Z",
+      "side": 1,
+      "message": "Gotcha - could you add a comment that explains this a bit then?\n\nIs this something that only applies to execution data (sounds like corrupted measurements is a known issue)? If that\u0027s the case, maybe we should still surface errors when loading the class files since we don\u0027t expect that part to fail.",
+      "parentUuid": "0d39e2d8_4dd8f4c6",
+      "range": {
+        "startLine": 186,
+        "startChar": 16,
+        "endLine": 186,
+        "endChar": 22
+      },
+      "revId": "54240876ed51f76f2a0278c096c3a29da8701893",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4c0ddb16_ebcda152",
         "filename": "jacocolcov/com/android/jacocolcov/JacocoLcovReporter.java",
         "patchSetId": 2
