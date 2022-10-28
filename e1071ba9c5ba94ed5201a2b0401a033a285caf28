@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "33883aec_87e83e89",
+        "filename": "mtectrl/mtectrl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1453063
+      },
+      "writtenOn": "2022-10-28T18:40:09Z",
+      "side": 1,
+      "message": "To me the error reads as \"hey, I don\u0027t understand what you\u0027re trying to do, and so I\u0027ve stopped it\". I understand that unknown bits here are being filtered out - but this still seems odd to me that we\u0027d continue with potentially unexpected operations if they weren\u0027t explicitly specified.",
+      "parentUuid": "61158a95_cc9aa5bc",
+      "range": {
+        "startLine": 51,
+        "startChar": 2,
+        "endLine": 51,
+        "endChar": 70
+      },
+      "revId": "e1071ba9c5ba94ed5201a2b0401a033a285caf28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4e14bf58_42e39333",
         "filename": "mtectrl/mtectrl.cc",
         "patchSetId": 3
