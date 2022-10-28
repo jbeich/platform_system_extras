@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "bd243126_cc42774d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1345967
+      },
+      "writtenOn": "2022-10-28T22:07:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e90e7051_54d98154",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 69
+      },
+      "revId": "49a4049477f9d05b719790e20558cae16e36cb74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "42f11817_99c59d05",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 3
@@ -58,6 +82,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f86ca2d2_1be80199",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1345967
+      },
+      "writtenOn": "2022-10-28T22:07:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ddc02ac_970dd200",
+      "revId": "49a4049477f9d05b719790e20558cae16e36cb74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "10c959a1_3bd03347",
@@ -71,6 +113,30 @@
       "writtenOn": "2022-10-26T04:52:20Z",
       "side": 1,
       "message": "`jacoco_to_lcov_converter`?",
+      "range": {
+        "startLine": 6,
+        "startChar": 11,
+        "endLine": 6,
+        "endChar": 21
+      },
+      "revId": "49a4049477f9d05b719790e20558cae16e36cb74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "98939b9b_c2e37084",
+        "filename": "jacocolcov/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1345967
+      },
+      "writtenOn": "2022-10-28T22:07:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "10c959a1_3bd03347",
       "range": {
         "startLine": 6,
         "startChar": 11,
@@ -104,6 +170,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1fab002f_dbc6dad6",
+        "filename": "jacocolcov/com/android/jacocolcov/JacocoToLcovConverter.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1345967
+      },
+      "writtenOn": "2022-10-28T22:07:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "646dc2fb_e086933c",
+      "range": {
+        "startLine": 104,
+        "startChar": 16,
+        "endLine": 104,
+        "endChar": 63
+      },
+      "revId": "49a4049477f9d05b719790e20558cae16e36cb74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ed76db1a_4b017e84",
@@ -127,6 +217,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e42c9ba_4de7dca1",
+        "filename": "jacocolcov/com/android/jacocolcov/JacocoToLcovConverter.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1345967
+      },
+      "writtenOn": "2022-10-28T22:07:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ed76db1a_4b017e84",
+      "range": {
+        "startLine": 128,
+        "startChar": 32,
+        "endLine": 128,
+        "endChar": 38
+      },
+      "revId": "49a4049477f9d05b719790e20558cae16e36cb74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c00748b5_9514c13c",
@@ -140,6 +254,30 @@
       "writtenOn": "2022-10-26T04:52:20Z",
       "side": 1,
       "message": "nit: Put all finals together and mutable fields after that.",
+      "range": {
+        "startLine": 130,
+        "startChar": 12,
+        "endLine": 130,
+        "endChar": 17
+      },
+      "revId": "49a4049477f9d05b719790e20558cae16e36cb74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "132edd17_8e0659d6",
+        "filename": "jacocolcov/com/android/jacocolcov/JacocoToLcovConverter.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1345967
+      },
+      "writtenOn": "2022-10-28T22:07:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c00748b5_9514c13c",
       "range": {
         "startLine": 130,
         "startChar": 12,
@@ -186,6 +324,30 @@
       "writtenOn": "2022-10-26T04:52:20Z",
       "side": 1,
       "message": "nit.\n\nI personally find classFile/ClassFile/etc easier to read. Searching in google3 they also seem to prefer that casing over classfile/Classfile/etc. The JDK also seems to use that casing.\n\nApplies to execfile as well.",
+      "range": {
+        "startLine": 194,
+        "startChar": 34,
+        "endLine": 194,
+        "endChar": 43
+      },
+      "revId": "49a4049477f9d05b719790e20558cae16e36cb74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0540538_5afbd4bc",
+        "filename": "jacocolcov/com/android/jacocolcov/JacocoToLcovConverter.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1345967
+      },
+      "writtenOn": "2022-10-28T22:07:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3f21e253_7a97f0ea",
       "range": {
         "startLine": 194,
         "startChar": 34,

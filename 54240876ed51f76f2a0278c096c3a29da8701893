@@ -74,6 +74,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "f87bde0c_d4e5a041",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1345967
+      },
+      "writtenOn": "2022-10-28T22:07:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6cd44c26_4c09e494",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 69
+      },
+      "revId": "54240876ed51f76f2a0278c096c3a29da8701893",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "06dbb962_a0d463a9",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
@@ -103,6 +127,24 @@
       "side": 1,
       "message": "Is this primarily going to be used with Atest? If so, I\u0027d go for putting it in there or close.\n\nSee for example how we put TF related Java code in the bazel/ subdirectory of Atest.\n\nYou already seem to have a coverage/ sub-directory in Atest so I\u0027d put it there. Remember that things that change together should live together.",
       "parentUuid": "06dbb962_a0d463a9",
+      "revId": "54240876ed51f76f2a0278c096c3a29da8701893",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0cf747a_81cc1f86",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1345967
+      },
+      "writtenOn": "2022-10-28T22:07:32Z",
+      "side": 1,
+      "message": "Moved to `tools/asuite/atest/coverage`.",
+      "parentUuid": "82631ccd_4e815323",
       "revId": "54240876ed51f76f2a0278c096c3a29da8701893",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -801,6 +843,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba8ac4ef_00c401f7",
+        "filename": "jacocolcov/com/android/jacocolcov/JacocoLcovReporter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1345967
+      },
+      "writtenOn": "2022-10-28T22:07:32Z",
+      "side": 1,
+      "message": "Done. Loading classFiles will always be treated as strict, whereas execfiles depends on the flag. Documentation on loadExecFile has been updated to reflect this.",
+      "parentUuid": "e5670439_0274630b",
+      "range": {
+        "startLine": 186,
+        "startChar": 16,
+        "endLine": 186,
+        "endChar": 22
+      },
+      "revId": "54240876ed51f76f2a0278c096c3a29da8701893",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4c0ddb16_ebcda152",
@@ -1121,6 +1187,30 @@
       "side": 1,
       "message": "Got it. Try to make that clear in the code.",
       "parentUuid": "4cb0682e_44ede6e4",
+      "range": {
+        "startLine": 342,
+        "startChar": 49,
+        "endLine": 342,
+        "endChar": 57
+      },
+      "revId": "54240876ed51f76f2a0278c096c3a29da8701893",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be82f375_6df73739",
+        "filename": "jacocolcov/com/android/jacocolcov/JacocoLcovReporter.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1345967
+      },
+      "writtenOn": "2022-10-28T22:07:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d978ccaf_e120ce6c",
       "range": {
         "startLine": 342,
         "startChar": 49,
