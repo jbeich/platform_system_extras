@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "61158a95_cc9aa5bc",
+        "filename": "mtectrl/mtectrl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1268571
+      },
+      "writtenOn": "2022-10-28T18:21:47Z",
+      "side": 1,
+      "message": "I like to reserve CHECK for assertions that must be true by construction _of this program_.  This error is an assumption about what the bootloader does.",
+      "parentUuid": "0e28e9df_5bab424f",
+      "range": {
+        "startLine": 51,
+        "startChar": 2,
+        "endLine": 51,
+        "endChar": 70
+      },
+      "revId": "e1071ba9c5ba94ed5201a2b0401a033a285caf28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4e14bf58_42e39333",
         "filename": "mtectrl/mtectrl.cc",
         "patchSetId": 3
@@ -37,6 +61,30 @@
       "writtenOn": "2022-10-28T18:10:50Z",
       "side": 1,
       "message": "message",
+      "range": {
+        "startLine": 152,
+        "startChar": 54,
+        "endLine": 152,
+        "endChar": 60
+      },
+      "revId": "e1071ba9c5ba94ed5201a2b0401a033a285caf28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e5161bb_b3516f97",
+        "filename": "mtectrl/mtectrl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1268571
+      },
+      "writtenOn": "2022-10-28T18:21:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e14bf58_42e39333",
       "range": {
         "startLine": 152,
         "startChar": 54,
