@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4d096ad_61e601d2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1005967
+      },
+      "writtenOn": "2022-10-28T21:32:46Z",
+      "side": 1,
+      "message": "This is getting complicated. Would it be easier to decouple reading into a separate property? I.e. one that reflects the current contents of the partition, and the other to trigger updates.",
+      "revId": "fdbc75a15af5d09964235c119fed3650e76db376",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
