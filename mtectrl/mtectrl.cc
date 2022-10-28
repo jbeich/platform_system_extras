@@ -87,14 +87,18 @@ bool HandleOverride(const std::string& override_value, misc_memtag_message* m) {
 int main(int argc, char** argv) {
   const char* set_prop = nullptr;
   int opt;
+  bool init = false;
   std::function<bool(misc_memtag_message*, std::string*)> read_memtag_message =
       ReadMiscMemtagMessage;
   std::function<bool(const misc_memtag_message&, std::string*)> write_memtag_message =
       WriteMiscMemtagMessage;
-  while ((opt = getopt(argc, argv, "s:t:")) != -1) {
+  while ((opt = getopt(argc, argv, "s:t:i")) != -1) {
     switch (opt) {
       case 's':
         set_prop = optarg;
+        break;
+      case 'i':
+        init = true;
         break;
       case 't': {
         // Use different fake misc partition for testing.
@@ -132,6 +136,11 @@ int main(int argc, char** argv) {
     if (!read_memtag_message(&m, &err)) {
       LOG(ERROR) << "Failed to read memtag message: " << err;
       return 1;
+    }
+    if (init && !android::base::GetProperty("arm64.memtag.bootctl", "").empty()) {
+      // Someone else set this before we inited this.
+      // This does not need to be atomic because init serializes access to properties.
+      return 0;
     }
     if (m.magic != MISC_MEMTAG_MAGIC_HEADER || m.version != MISC_MEMTAG_MESSAGE_VERSION) {
       UpdateProp(set_prop, {});
