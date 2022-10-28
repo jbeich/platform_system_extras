@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "24006fa9_ff3a6aa4",
+        "filename": "mtectrl/mtectrl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1268571
+      },
+      "writtenOn": "2022-10-28T22:56:47Z",
+      "side": 1,
+      "message": "Ack. Discussed offline.",
+      "parentUuid": "33883aec_87e83e89",
+      "range": {
+        "startLine": 51,
+        "startChar": 2,
+        "endLine": 51,
+        "endChar": 70
+      },
+      "revId": "e1071ba9c5ba94ed5201a2b0401a033a285caf28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4e14bf58_42e39333",
