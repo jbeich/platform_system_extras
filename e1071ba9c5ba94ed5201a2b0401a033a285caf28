@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e28e9df_5bab424f",
+        "filename": "mtectrl/mtectrl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1453063
+      },
+      "writtenOn": "2022-10-28T18:10:50Z",
+      "side": 1,
+      "message": "Why not CHECK(mode) here instead? Nicer to tie the check-fail to the \"unknown bits set in memtag_mode:\" message.\n\nThen, you also get programatic assertion of your \"as a messag with a valid header should not have an invalid memtag_mode.\" statement.",
+      "range": {
+        "startLine": 51,
+        "startChar": 2,
+        "endLine": 51,
+        "endChar": 70
+      },
+      "revId": "e1071ba9c5ba94ed5201a2b0401a033a285caf28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e14bf58_42e39333",
+        "filename": "mtectrl/mtectrl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1453063
+      },
+      "writtenOn": "2022-10-28T18:10:50Z",
+      "side": 1,
+      "message": "message",
+      "range": {
+        "startLine": 152,
+        "startChar": 54,
+        "endLine": 152,
+        "endChar": 60
+      },
+      "revId": "e1071ba9c5ba94ed5201a2b0401a033a285caf28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
