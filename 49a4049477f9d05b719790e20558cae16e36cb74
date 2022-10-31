@@ -102,6 +102,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3db6c4f2_620a0074",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1480888
+      },
+      "writtenOn": "2022-10-31T16:58:07Z",
+      "side": 1,
+      "message": "Do you want to abandon this change? It still appears in my TODO list :)",
+      "revId": "49a4049477f9d05b719790e20558cae16e36cb74",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "10c959a1_3bd03347",
         "filename": "jacocolcov/Android.bp",
         "patchSetId": 3
