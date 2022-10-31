@@ -107,6 +107,12 @@ int main(int argc, char** argv) {
   while ((opt = getopt(argc, argv, "s:t:")) != -1) {
     switch (opt) {
       case 's':
+        // Set property in argument to state of misc partition. If given by
+        // itself, sets the property to the current state. We do this on device
+        // boot,
+        //
+        // Otherwise, applies new state and then sets property to newly applied
+        // state.
         set_prop = optarg;
         break;
       case 't': {
@@ -140,6 +146,8 @@ int main(int argc, char** argv) {
   }
 
   if (!value && set_prop) {
+    // -s <property> is given on its own. This means we want to read the state
+    // of the misc partition into the property.
     std::string err;
     misc_memtag_message m = {};
     if (!read_memtag_message(&m, &err)) {
@@ -152,8 +160,8 @@ int main(int argc, char** argv) {
       // This is an expected case, as the partition gets initialized to all zero.
       return 0;
     }
-    // UpdateProp failing is an unexpected case, as a message with a valid
-    // header should not have an invalid memtag_mode.
+    // Usually this gets called on boot up. Something (e.g. the bootloader)
+    // might have modified the misc partition in an incorrect way.
     return UpdateProp(set_prop, m) ? 0 : 1;
   }
 
