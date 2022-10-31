@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a4f8988_ff6afd9b",
+        "filename": "mtectrl/mtectrl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1453063
+      },
+      "writtenOn": "2022-10-31T23:57:29Z",
+      "side": 1,
+      "message": "maybe a better way to do this is to update PrintUsage().\n\nSomething like:\n\n    void PrintUsage(const char* progname) {\n      std::cerr\n          \u003c\u003c \"USAGE: \" \u003c\u003c progname \u003c\u003c \"\\n\"\n            \"      [-s PROPERTY_NAME]\\n\"\n            \"      [none,][memtag,][memtag-once,][memtag-kernel,][memtag-kernel-once,][memtag-off,]\\n\"\n            \"      [default|force_on|force_off]\\n\"\n            \"      [-t PATH_TO_FAKE_MISC_PARTITION]\\n\"\n            \"\\n\"\n            \"OPTIONS:\\n\"\n            \"  -s PROPERTY_NAME\\n\"\n            \"      Sets the system property \u0027PROPERTY_NAME\u0027 to the new MTE mode (if provided), or to\\n\"\n            \"      the current value from the /misc partition.\\n\"\n            \"  [none,][memtag,][memtag-once,][memtag-kernel,][memtag-kernel-once,][memtag-off,]\\n\"\n            \"      A set of MTE options to be applied, if provided. Multiple options may be\\n\"\n            \"      specified by concatenating them using the \u0027,\u0027 delimiter, like \\n\"\n            \"      \u0027memtag,memtag-kernel\u0027. The options are described below:\\n\"\n            \"        - none: MTE is not enabled in userspace or the kernel for the next reboot \\n\"\n            \"                (after which it reverts to the default setting).\\n\"\n            \"        - memtag: MTE is persistently enabled in userspace upon the next reboot.\\n\"\n            \"        - memtag-once: MTE is enabled in userspace, only for the next reboot.\\n\"\n            \"        - memtag-kernel: MTE is persistently enabled in the kernel upon the next \\n\"\n            \"                         reboot.\\n\"\n            \"        - memtag-kernel-once: MTE is enabled in the kernel, only for the next reboot.\\n\"\n            \"        - memtag-off: MTE is persistently disabled in both userspace and kernel upon \\n\"\n            \"                      the next reboot.\\n\"\n            \"  [default|force_on|force_off]\\n\"\n            \"      An alternative method of configuring the MTE options to be applied, if provided.\\n\"\n            \"      This control is generally to be used by the bootloader only, and it overwrites\\n\"\n            \"      the previously described settings that are expected to be utilised by userspace. \\n\"\n            \"      The options are described below:\\n\"\n            \"        - default: The bootloader is not overwriting the MTE mode, and so the setting\\n\"\n            \"                   should be inherited from the userspace controls (if present), or the\\n\"\n            \"                   default value from the bootloader\u0027s ROM.\\n\"\n            \"        - force_on: MTE is persistently enabled in userspace, overwriting the userspace\\n\"\n            \"                    setting.\\n\"\n            \"        - force_on: MTE is persistently disabled in userspace and the kernel, \\n\"\n            \"                    overwriting the userspace setting.\\n\"\n            \"  [-t PATH_TO_FAKE_MISC_PARTITION]\\n\"\n            \"      Uses the provided path as a fake misc partition, used in testing this binary.\\n\";\n    }\n\n    \nAlso this is a litmus test to make sure I understand properly :). Then this code is quite a bit more self-documenting.",
+      "range": {
+        "startLine": 110,
+        "startChar": 8,
+        "endLine": 115,
+        "endChar": 17
+      },
+      "revId": "30d04269a18379469c541913162d61a7f0d08241",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e90f0591_bf1b63ad",
+        "filename": "mtectrl/mtectrl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1453063
+      },
+      "writtenOn": "2022-10-31T23:57:29Z",
+      "side": 1,
+      "message": "Unlike above, setting the system property here can fail if the misc partition was corrupted or read incorrectly.",
+      "range": {
+        "startLine": 163,
+        "startChar": 4,
+        "endLine": 164,
+        "endChar": 66
+      },
+      "revId": "30d04269a18379469c541913162d61a7f0d08241",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
