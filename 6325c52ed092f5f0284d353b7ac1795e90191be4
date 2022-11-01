@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a84b15b2_7d5f8c3e",
+        "filename": "mtectrl/mtectrl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1268571
+      },
+      "writtenOn": "2022-11-01T22:30:17Z",
+      "side": 1,
+      "message": "too subtle?",
+      "range": {
+        "startLine": 61,
+        "startChar": 0,
+        "endLine": 61,
+        "endChar": 76
+      },
+      "revId": "6325c52ed092f5f0284d353b7ac1795e90191be4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

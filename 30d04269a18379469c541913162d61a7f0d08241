@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "abc42f05_30defc8f",
+        "filename": "mtectrl/mtectrl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1268571
+      },
+      "writtenOn": "2022-11-01T22:30:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "26126d9c_9ce9189c",
+      "range": {
+        "startLine": 110,
+        "startChar": 8,
+        "endLine": 115,
+        "endChar": 17
+      },
+      "revId": "30d04269a18379469c541913162d61a7f0d08241",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e90f0591_bf1b63ad",
@@ -85,6 +109,30 @@
       "writtenOn": "2022-10-31T23:57:29Z",
       "side": 1,
       "message": "Unlike above, setting the system property here can fail if the misc partition was corrupted or read incorrectly.",
+      "range": {
+        "startLine": 163,
+        "startChar": 4,
+        "endLine": 164,
+        "endChar": 66
+      },
+      "revId": "30d04269a18379469c541913162d61a7f0d08241",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be1a33e1_18955371",
+        "filename": "mtectrl/mtectrl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1268571
+      },
+      "writtenOn": "2022-11-01T22:30:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e90f0591_bf1b63ad",
       "range": {
         "startLine": 163,
         "startChar": 4,
