@@ -22,6 +22,30 @@
       },
       "revId": "6325c52ed092f5f0284d353b7ac1795e90191be4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8de81aba_84023a44",
+        "filename": "mtectrl/mtectrl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1453063
+      },
+      "writtenOn": "2022-11-01T22:31:44Z",
+      "side": 1,
+      "message": "as subtle as a sledgehammer, i like it",
+      "parentUuid": "a84b15b2_7d5f8c3e",
+      "range": {
+        "startLine": 61,
+        "startChar": 0,
+        "endLine": 61,
+        "endChar": 76
+      },
+      "revId": "6325c52ed092f5f0284d353b7ac1795e90191be4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
