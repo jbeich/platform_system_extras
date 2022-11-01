@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "26126d9c_9ce9189c",
+        "filename": "mtectrl/mtectrl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1453063
+      },
+      "writtenOn": "2022-11-01T00:06:26Z",
+      "side": 1,
+      "message": "Yeah, no strong opinion whether -t should be documented. Helpful to self-describe, but I agree, shouldn\u0027t be used by users.",
+      "parentUuid": "dc478a76_e82047cb",
+      "range": {
+        "startLine": 110,
+        "startChar": 8,
+        "endLine": 115,
+        "endChar": 17
+      },
+      "revId": "30d04269a18379469c541913162d61a7f0d08241",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e90f0591_bf1b63ad",
         "filename": "mtectrl/mtectrl.cc",
         "patchSetId": 1
