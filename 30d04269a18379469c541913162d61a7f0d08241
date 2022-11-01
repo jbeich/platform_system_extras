@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dc478a76_e82047cb",
+        "filename": "mtectrl/mtectrl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1268571
+      },
+      "writtenOn": "2022-11-01T00:05:26Z",
+      "side": 1,
+      "message": "Nice, but FWIW `        \"  [-t PATH_TO_FAKE_MISC_PARTITION]\\n\"` was undocumented in the help string on purpose, because no one should use that.",
+      "parentUuid": "9a4f8988_ff6afd9b",
+      "range": {
+        "startLine": 110,
+        "startChar": 8,
+        "endLine": 115,
+        "endChar": 17
+      },
+      "revId": "30d04269a18379469c541913162d61a7f0d08241",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e90f0591_bf1b63ad",
         "filename": "mtectrl/mtectrl.cc",
         "patchSetId": 1
