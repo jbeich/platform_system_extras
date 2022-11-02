@@ -16,6 +16,24 @@
       "message": "This is getting complicated. Would it be easier to decouple reading into a separate property? I.e. one that reflects the current contents of the partition, and the other to trigger updates.",
       "revId": "fdbc75a15af5d09964235c119fed3650e76db376",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2073bee6_f03bdfec",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1268571
+      },
+      "writtenOn": "2022-11-02T18:14:04Z",
+      "side": 1,
+      "message": "I would prefer not to read into a separate property. The latency between writing the property and it being applied is an implementation detail that should be hidden as much as possible from the user. force_on / force_off are still a bit awkward in that regard, but it can be seen by the user as something external (the override) changing the property.\n\nThe property being written that early in bootup is quite an edge case (probably mostly exercised by the test).",
+      "parentUuid": "c4d096ad_61e601d2",
+      "revId": "fdbc75a15af5d09964235c119fed3650e76db376",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
