@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "59f845d4_46a7bd8d",
+        "filename": "simpleperf/test_util.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2022-11-02T18:37:31Z",
+      "side": 1,
+      "message": "GetTargetArch?",
+      "range": {
+        "startLine": 46,
+        "startChar": 15,
+        "endLine": 46,
+        "endChar": 27
+      },
+      "revId": "ba28319bccc429bea5fe807f9ca57d84eafc50da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
