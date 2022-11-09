@@ -16,6 +16,23 @@
       "message": "ps2: tiny fix",
       "revId": "1714fe6e3d5fc24f4f7407054a5e10362f72118c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b524c75_21949869",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2022-11-09T23:29:44Z",
+      "side": 1,
+      "message": "bypass lint: the apks are added for testing.",
+      "revId": "1714fe6e3d5fc24f4f7407054a5e10362f72118c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
