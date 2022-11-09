@@ -205,13 +205,12 @@ class Device:
 @dataclass
 class TestResult:
     try_time: int
-    ok: bool
+    status: str
     duration: str
 
     def __str__(self) -> str:
-        if self.ok:
-            s = 'OK'
-        else:
+        s = self.status
+        if s == 'FAILED':
             s = f'FAILED (at try_time {self.try_time})'
         s += f' {self.duration}'
         return s
@@ -289,7 +288,6 @@ class TestProcess:
 
     def _process_msg(self, msg: str):
         test_name, test_success, test_duration = msg.split()
-        test_success = test_success == 'OK'
         self.test_results[test_name] = TestResult(self.try_time, test_success, test_duration)
 
     def join(self):
@@ -366,7 +364,7 @@ class TestSummary:
     def failed_test_count(self) -> int:
         count = 0
         for result in self.results.values():
-            if result is None or not result.ok:
+            if result is None or result.status == 'FAILED':
                 count += 1
         return count
 
@@ -392,7 +390,7 @@ class TestSummary:
                 result = self.results[key]
                 message = f'{test_name}    {test_env}    {result}'
                 print(message, file=fh)
-                if not result or not result.ok:
+                if not result or result.status == 'FAILED':
                     print(message, file=failed_fh)
 
 
