@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "42257b75_1a212818",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2022-11-10T20:42:23Z",
+      "side": 1,
+      "message": "bypass lint: uploaded apks are for testing.",
+      "revId": "e414b59e7b9396daf4ad0b3c904bc750329888d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
