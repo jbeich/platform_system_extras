@@ -33,6 +33,29 @@
       "message": "ping?",
       "revId": "e2dfd6f80017c1a9931c4e7abba273cb20b89f2c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d0bebe2_4d29dd4f",
+        "filename": "simpleperf/dso.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 623,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2022-11-15T21:21:15Z",
+      "side": 1,
+      "message": "Should this be `android::base::WARNING`?  If not both branches set log level to DEBUG.\n\n(I wouldn\u0027t have found  it if not for the tidy lint).",
+      "range": {
+        "startLine": 623,
+        "startChar": 0,
+        "endLine": 623,
+        "endChar": 39
+      },
+      "revId": "e2dfd6f80017c1a9931c4e7abba273cb20b89f2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
