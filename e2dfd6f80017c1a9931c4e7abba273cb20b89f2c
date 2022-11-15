@@ -56,6 +56,30 @@
       },
       "revId": "e2dfd6f80017c1a9931c4e7abba273cb20b89f2c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e293ea76_ab33f64e",
+        "filename": "simpleperf/dso.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 623,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2022-11-15T21:43:03Z",
+      "side": 1,
+      "message": "Thanks! I didn\u0027t notice the tidy lint. I want to not give warning in two cases. But the condition will be too complex if I combine the two cases. So switched to two if statements.",
+      "parentUuid": "2d0bebe2_4d29dd4f",
+      "range": {
+        "startLine": 623,
+        "startChar": 0,
+        "endLine": 623,
+        "endChar": 39
+      },
+      "revId": "e2dfd6f80017c1a9931c4e7abba273cb20b89f2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
