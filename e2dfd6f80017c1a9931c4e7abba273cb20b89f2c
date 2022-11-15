@@ -80,6 +80,30 @@
       },
       "revId": "e2dfd6f80017c1a9931c4e7abba273cb20b89f2c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ea593ad_8ecdc199",
+        "filename": "simpleperf/dso.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 623,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2022-11-15T21:45:51Z",
+      "side": 1,
+      "message": "It\u0027s cleaner with two `if`-s than an `if {} else if {}`.  Didn\u0027t realize that was your intent.",
+      "parentUuid": "e293ea76_ab33f64e",
+      "range": {
+        "startLine": 623,
+        "startChar": 0,
+        "endLine": 623,
+        "endChar": 39
+      },
+      "revId": "e2dfd6f80017c1a9931c4e7abba273cb20b89f2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
