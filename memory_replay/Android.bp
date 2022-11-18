@@ -44,6 +44,17 @@ cc_defaults {
     compile_multilib: "both",
 }
 
+cc_library {
+    name: "liballoc_parser",
+    host_supported: true,
+    defaults: ["memory_flag_defaults"],
+
+    export_include_dirs: ["."],
+    srcs: [
+        "AllocParser.cpp",
+    ],
+}
+
 cc_defaults {
     name: "memory_replay_defaults",
     defaults: ["memory_flag_defaults"],
@@ -58,6 +69,7 @@ cc_defaults {
     ],
 
     shared_libs: [
+        "liballoc_parser",
         "libbase",
         "libziparchive",
     ],
