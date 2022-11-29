@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b57870c0_5f95552c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2022-11-29T18:08:42Z",
+      "side": 1,
+      "message": "ps4: fix unit test failure caused by use after destructor of temporary std::string.",
+      "revId": "794655a39ba4deb9e96e6a66d22e2b2dd947c936",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
