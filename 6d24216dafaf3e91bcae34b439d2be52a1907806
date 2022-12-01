@@ -16,6 +16,69 @@
       "message": "ps5: use more string_view and add RegEx::Replace().",
       "revId": "6d24216dafaf3e91bcae34b439d2be52a1907806",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9313fd74_1b0eb7d6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2022-12-01T06:05:01Z",
+      "side": 1,
+      "message": "LGTM modulo two comments.",
+      "revId": "6d24216dafaf3e91bcae34b439d2be52a1907806",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c15ac3f0_87fd076a",
+        "filename": "simpleperf/RegEx.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2022-12-01T06:05:01Z",
+      "side": 1,
+      "message": "According to https://en.cppreference.com/w/cpp/regex/regex_replace, regex_replace can throw an exception.  Handle that as well?\n\nHowever, looking at external/libcxx/include/regex, I cannot find where this function throws.\n\n(regex_search and regex_match don\u0027t throw, according to cppreference.com).",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 46
+      },
+      "revId": "6d24216dafaf3e91bcae34b439d2be52a1907806",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bce7d62d_149e2879",
+        "filename": "simpleperf/RegEx.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2022-12-01T06:05:01Z",
+      "side": 1,
+      "message": "Should we catch by reference, as suggested by the lint?",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 30
+      },
+      "revId": "6d24216dafaf3e91bcae34b439d2be52a1907806",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
