@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5709ca6_6ed9b168",
+        "filename": "memory_replay/Alloc.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2022-12-01T02:30:03Z",
+      "side": 1,
+      "message": "Even though it\u0027s not completely needed, I would still add an #include \"AllocParser.h\"",
+      "revId": "ec531cf16e2555f7bc9426f4a4d98f229490f6dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c366ea8f_7b6184eb",
+        "filename": "memory_replay/Alloc.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2022-12-01T02:30:03Z",
+      "side": 1,
+      "message": "Is it better to add a forward delcaration of AllocEntry and skip the include of AllocParser.h?\n\nI don\u0027t know which is better though.",
+      "revId": "ec531cf16e2555f7bc9426f4a4d98f229490f6dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24be1077_b9d658cc",
+        "filename": "memory_replay/Android.bp",
+        "patchSetId": 4
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2022-12-01T02:30:03Z",
+      "side": 1,
+      "message": "Instead of a shared library, it would probably be better to make it a static library. It\u0027s relatively small and it will only be included in a few places.\n\nIt also means that an executable using the parsing doesn\u0027t need to include the parser shared library.",
+      "range": {
+        "startLine": 72,
+        "startChar": 9,
+        "endLine": 72,
+        "endChar": 24
+      },
+      "revId": "ec531cf16e2555f7bc9426f4a4d98f229490f6dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
