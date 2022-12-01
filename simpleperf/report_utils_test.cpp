@@ -42,6 +42,7 @@ class CallChainReportBuilderTest : public testing::Test {
                });
 
     // Add symbol info for the interpreter library.
+<<<<<<< HEAD   (dd4402 Merge "Merge "simpleperf: assume gpc targets as emulator" in)
     SetSymbols(
         fake_interpreter_path, DSO_ELF_FILE,
         {
@@ -50,6 +51,18 @@ class CallChainReportBuilderTest : public testing::Test {
             Symbol("_ZN3artL13Method_invokeEP7_JNIEnvP8_jobjectS3_P13_jobjectArray", 0x200, 0x100),
             Symbol("art_quick_generic_jni_trampoline", 0x300, 0x100),
         });
+=======
+    file.path = fake_interpreter_path;
+    file.type = DSO_ELF_FILE;
+    file.min_vaddr = file.file_offset_of_min_vaddr = 0;
+    file.symbols = {
+        Symbol("art_func1", 0x0, 0x100),
+        Symbol("art_func2", 0x100, 0x100),
+        Symbol("_ZN3artL13Method_invokeEP7_JNIEnvP8_jobjectS3_P13_jobjectArray", 0x200, 0x100),
+        Symbol("art_quick_generic_jni_trampoline", 0x300, 0x100),
+    };
+    thread_tree.AddDsoInfo(file);
+>>>>>>> BRANCH (b2dee2 Merge "Merge "simpleperf: fix check_trampoline_after_art_jni)
 
     // Add symbol info for the dex file.
     SetSymbols(fake_dex_file_path, DSO_DEX_FILE,
