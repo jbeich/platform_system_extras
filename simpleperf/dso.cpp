@@ -617,8 +617,17 @@ class ElfDso : public Dso {
     if (elf) {
       status = elf->ParseSymbols(symbol_callback);
     }
-    ReportReadElfSymbolResult(status, path_, GetDebugFilePath(),
-                              symbols_.empty() ? android::base::WARNING : android::base::DEBUG);
+    android::base::LogSeverity log_level = android::base::WARNING;
+    if (!symbols_.empty()) {
+      // We already have some symbols when recording.
+      log_level = android::base::DEBUG;
+    }
+    if ((status == ElfStatus::FILE_NOT_FOUND || status == ElfStatus::FILE_MALFORMED) &&
+        build_id.IsEmpty()) {
+      // This is likely to be a file wongly thought of as an ELF file, maybe due to stack unwinding.
+      log_level = android::base::DEBUG;
+    }
+    ReportReadElfSymbolResult(status, path_, GetDebugFilePath(), log_level);
     SortAndFixSymbols(symbols);
     return symbols;
   }
@@ -642,10 +651,7 @@ class KernelDso : public Dso {
       ElfStatus status;
       if (ElfFile::Open(vmlinux_, &build_id, &status)) {
         debug_file_path_ = vmlinux_;
-        has_debug_file_ = true;
       }
-    } else if (IsRegularFile(GetDebugFilePath())) {
-      has_debug_file_ = true;
     }
   }
 
@@ -675,9 +681,7 @@ class KernelDso : public Dso {
 
   std::vector<Symbol> LoadSymbolsImpl() override {
     std::vector<Symbol> symbols;
-    if (has_debug_file_) {
-      ReadSymbolsFromDebugFile(&symbols);
-    }
+    ReadSymbolsFromDebugFile(&symbols);
 
     if (symbols.empty() && !kallsyms_.empty()) {
       ReadSymbolsFromKallsyms(kallsyms_, &symbols);
@@ -696,6 +700,12 @@ class KernelDso : public Dso {
 
  private:
   void ReadSymbolsFromDebugFile(std::vector<Symbol>* symbols) {
+    ElfStatus status;
+    auto elf = ElfFile::Open(GetDebugFilePath(), &status);
+    if (!elf) {
+      return;
+    }
+
     if (!fix_kernel_address_randomization_) {
       LOG(WARNING) << "Don't know how to fix addresses changed by kernel address randomization. So "
                       "symbols in "
@@ -712,10 +722,7 @@ class KernelDso : public Dso {
         symbols->emplace_back(symbol.name, symbol.vaddr, symbol.len);
       }
     };
-    ElfStatus status;
-    if (auto elf = ElfFile::Open(GetDebugFilePath(), &status); elf) {
-      status = elf->ParseSymbols(symbol_callback);
-    }
+    status = elf->ParseSymbols(symbol_callback);
     ReportReadElfSymbolResult(status, path_, GetDebugFilePath());
   }
 
@@ -779,21 +786,18 @@ class KernelDso : public Dso {
   void ParseKernelStartAddr() {
     kernel_start_addr_ = 0;
     kernel_start_file_offset_ = 0;
-    if (has_debug_file_) {
-      ElfStatus status;
-      if (auto elf = ElfFile::Open(GetDebugFilePath(), &status); elf) {
-        for (const auto& section : elf->GetSectionHeader()) {
-          if (section.name == ".text") {
-            kernel_start_addr_ = section.vaddr;
-            kernel_start_file_offset_ = section.file_offset;
-            break;
-          }
+    ElfStatus status;
+    if (auto elf = ElfFile::Open(GetDebugFilePath(), &status); elf) {
+      for (const auto& section : elf->GetSectionHeader()) {
+        if (section.name == ".text") {
+          kernel_start_addr_ = section.vaddr;
+          kernel_start_file_offset_ = section.file_offset;
+          break;
         }
       }
     }
   }
 
-  bool has_debug_file_ = false;
   bool fix_kernel_address_randomization_ = false;
   std::optional<uint64_t> kernel_start_addr_;
   std::optional<uint64_t> kernel_start_file_offset_;

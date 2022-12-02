@@ -159,7 +159,7 @@ TEST(cmd_inject, unformatted_trace) {
 
 TEST(cmd_inject, multiple_input_files) {
   std::string data;
-  std::string perf_data = GetTestData(std::string("etm") + OS_PATH_SEPARATOR + "perf.data");
+  std::string perf_data = GetTestData(PERF_DATA_ETM_TEST_LOOP);
   std::string perf_with_unformatted_trace =
       GetTestData(std::string("etm") + OS_PATH_SEPARATOR + "perf_with_unformatted_trace.data");
 
@@ -195,7 +195,6 @@ TEST(cmd_inject, merge_branch_list_files) {
 
 TEST(cmd_inject, report_warning_when_overflow) {
   CapturedStderr capture;
-  capture.Start();
   std::vector<std::unique_ptr<TemporaryFile>> branch_list_files;
   std::vector<std::unique_ptr<TemporaryFile>> input_files;
 

@@ -1084,6 +1084,7 @@ bool AuxTraceInfoRecord::Parse(const perf_event_attr&, char* p, char* end) {
     return false;
   }
   for (uint32_t i = 0; i < data->nr_cpu; ++i) {
+    CHECK_SIZE(p, end, sizeof(uint64_t));
     uint64_t magic = *reinterpret_cast<uint64_t*>(p);
     if (magic == MAGIC_ETM4) {
       CHECK_SIZE(p, end, sizeof(ETM4Info));
@@ -1338,8 +1339,10 @@ TracingDataRecord::TracingDataRecord(const std::vector<char>& tracing_data) {
 }
 
 void TracingDataRecord::DumpData(size_t indent) const {
-  Tracing tracing(std::vector<char>(data, data + data_size));
-  tracing.Dump(indent);
+  auto tracing = Tracing::Create(std::vector<char>(data, data + data_size));
+  if (tracing) {
+    tracing->Dump(indent);
+  }
 }
 
 bool EventIdRecord::Parse(const perf_event_attr&, char* p, char* end) {
