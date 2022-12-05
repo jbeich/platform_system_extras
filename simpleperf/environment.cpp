@@ -492,11 +492,17 @@ std::set<pid_t> WaitForAppProcesses(const std::string& package_name) {
         // Maybe we don't have permission to read it.
         continue;
       }
+<<<<<<< PATCH SET (498daf Properly call Basename() on argv[0] only)
+      // The /proc/pid/cmdline file contains all the argv[] strings separated with NULL characters,
+      // but we only need the process name from argv[0] here.
+      std::string process_name = android::base::Basename(cmdline.c_str());
+=======
       size_t pos = argv0.find('\0');
       if (pos != std::string::npos) {
         argv0.resize(pos);
       }
       std::string process_name = android::base::Basename(argv0);
+>>>>>>> BASE      (f96ce5 Merge changes Iaa7ae673,Ifb5da849,Ic4c735b1)
       // The app may have multiple processes, with process name like
       // com.google.android.googlequicksearchbox:search.
       size_t split_pos = process_name.find(':');
