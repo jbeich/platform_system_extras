@@ -16,6 +16,24 @@
       "message": "Why only EIO ? How was this tested.",
       "revId": "66ca49d58e69ad700943c5058f69b9c11db757cc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5da51d19_2a68628e",
+        "filename": "libfec/fec_read.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2022-12-06T23:49:08Z",
+      "side": 1,
+      "message": "When the underlying storage is corrupted, OS usually returns EIO. For other errors(such as EINVAL, EISDIR), if they do not signal data corruption, there\u0027s no point in trying to repair using FEC.",
+      "parentUuid": "cf9f5c66_d90819e0",
+      "revId": "66ca49d58e69ad700943c5058f69b9c11db757cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
