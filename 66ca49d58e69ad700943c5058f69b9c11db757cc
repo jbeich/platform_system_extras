@@ -34,6 +34,24 @@
       "parentUuid": "cf9f5c66_d90819e0",
       "revId": "66ca49d58e69ad700943c5058f69b9c11db757cc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83cb7c3d_e81346db",
+        "filename": "libfec/fec_read.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2022-12-06T23:59:05Z",
+      "side": 1,
+      "message": "I don\u0027t think this is in sync with dm-verity.. I have to look at how verity handles fec correction. This should be in sync with that logic not just some assumption.",
+      "parentUuid": "5da51d19_2a68628e",
+      "revId": "66ca49d58e69ad700943c5058f69b9c11db757cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
