@@ -1,0 +1,349 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39b22a07_3641972a",
+        "filename": "memory_stats/MemoryStats.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2022-12-15T01:25:55Z",
+      "side": 1,
+      "message": "emplace_back?",
+      "range": {
+        "startLine": 40,
+        "startChar": 17,
+        "endLine": 40,
+        "endChar": 26
+      },
+      "revId": "f841cb2a9bcdf6de284bea9916bbfa88ad2088fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "781e8d22_7a45a3c8",
+        "filename": "memory_stats/MemoryStats.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2022-12-15T01:25:55Z",
+      "side": 1,
+      "message": "Easier to understand as RecordsType. The Ty is a bit confusing.",
+      "range": {
+        "startLine": 33,
+        "startChar": 10,
+        "endLine": 33,
+        "endChar": 19
+      },
+      "revId": "f841cb2a9bcdf6de284bea9916bbfa88ad2088fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "933ca0db_763f1e9e",
+        "filename": "memory_stats/MemoryStats.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2022-12-15T01:25:55Z",
+      "side": 1,
+      "message": "Should this be const std::string_view\u0026? I think the string view objects should all not me modified, but I know it can get tricky sometimes.",
+      "range": {
+        "startLine": 36,
+        "startChar": 22,
+        "endLine": 36,
+        "endChar": 39
+      },
+      "revId": "f841cb2a9bcdf6de284bea9916bbfa88ad2088fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e28df640_82b91e54",
+        "filename": "memory_stats/MemoryStats.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2022-12-15T01:25:55Z",
+      "side": 1,
+      "message": "I think the style guid says this should be RunAnalysis(). Should all function names start with a capital letter (other than accessors)?",
+      "range": {
+        "startLine": 47,
+        "startChar": 9,
+        "endLine": 47,
+        "endChar": 20
+      },
+      "revId": "f841cb2a9bcdf6de284bea9916bbfa88ad2088fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3cd18360_48fde1cd",
+        "filename": "memory_stats/MemoryStats.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2022-12-15T01:25:55Z",
+      "side": 1,
+      "message": "Another case for const std::stringstream\u0026?",
+      "range": {
+        "startLine": 61,
+        "startChar": 21,
+        "endLine": 61,
+        "endChar": 38
+      },
+      "revId": "f841cb2a9bcdf6de284bea9916bbfa88ad2088fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a64c569f_2c317f33",
+        "filename": "memory_stats/MemoryStats.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2022-12-15T01:25:55Z",
+      "side": 1,
+      "message": "Capitalize the first letter?",
+      "range": {
+        "startLine": 68,
+        "startChar": 17,
+        "endLine": 68,
+        "endChar": 24
+      },
+      "revId": "f841cb2a9bcdf6de284bea9916bbfa88ad2088fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66edd0be_722c6518",
+        "filename": "memory_stats/OpGenStats.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2022-12-15T01:25:55Z",
+      "side": 1,
+      "message": "Should this be uint64_t too?",
+      "range": {
+        "startLine": 56,
+        "startChar": 54,
+        "endLine": 56,
+        "endChar": 62
+      },
+      "revId": "f841cb2a9bcdf6de284bea9916bbfa88ad2088fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "733f2060_0ca65e4a",
+        "filename": "memory_stats/OpOverlap.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2022-12-15T01:25:55Z",
+      "side": 1,
+      "message": "contains two malloc calls that overlap by 51 nanoseconds.",
+      "range": {
+        "startLine": 29,
+        "startChar": 26,
+        "endLine": 29,
+        "endChar": 79
+      },
+      "revId": "f841cb2a9bcdf6de284bea9916bbfa88ad2088fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f04c677b_7218c160",
+        "filename": "memory_stats/OpOverlap.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2022-12-15T01:25:55Z",
+      "side": 1,
+      "message": "write the value of the overlapping intervals to the stream.\n\nI think that\u0027s a more accurate representation of what the code is doing.",
+      "range": {
+        "startLine": 30,
+        "startChar": 17,
+        "endLine": 30,
+        "endChar": 75
+      },
+      "revId": "f841cb2a9bcdf6de284bea9916bbfa88ad2088fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "785f0f35_9f760d05",
+        "filename": "memory_stats/OpOverlap.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2022-12-15T01:25:55Z",
+      "side": 1,
+      "message": "Really helps to use a longer name, such as start and end. And even better if the units is incorporated into the name (start_ns, end_ns).",
+      "range": {
+        "startLine": 39,
+        "startChar": 53,
+        "endLine": 39,
+        "endChar": 55
+      },
+      "revId": "f841cb2a9bcdf6de284bea9916bbfa88ad2088fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a629dd4_b35b3325",
+        "filename": "memory_stats/main.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2022-12-15T01:25:55Z",
+      "side": 1,
+      "message": "Who owns these pointers and is responsible for releasing the objects?",
+      "range": {
+        "startLine": 46,
+        "startChar": 16,
+        "endLine": 46,
+        "endChar": 26
+      },
+      "revId": "f841cb2a9bcdf6de284bea9916bbfa88ad2088fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a499403_14744a5f",
+        "filename": "memory_stats/main.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2022-12-15T01:25:55Z",
+      "side": 1,
+      "message": "I think the C++ style guide says this should be name since it\u0027s just an accessor. Either that or be GetName. Same for the function below.",
+      "range": {
+        "startLine": 56,
+        "startChar": 21,
+        "endLine": 56,
+        "endChar": 28
+      },
+      "revId": "f841cb2a9bcdf6de284bea9916bbfa88ad2088fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58888413_1e0d88f8",
+        "filename": "memory_stats/main.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2022-12-15T01:25:55Z",
+      "side": 1,
+      "message": "Would it be better to make this a std::shared_ptr\u003cAnalysis\u003e and make analyses_ the same?\n\nThis only matters if you need to worry about the lifetime of the OptionsBase. Will it disappear before the GetAnalyses() calls are used.\n\nMostly this just makes me nervous about potential lifetime bugs.",
+      "range": {
+        "startLine": 59,
+        "startChar": 33,
+        "endLine": 59,
+        "endChar": 41
+      },
+      "revId": "f841cb2a9bcdf6de284bea9916bbfa88ad2088fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a46e0a84_54c84ece",
+        "filename": "memory_stats/main.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2022-12-15T01:25:55Z",
+      "side": 1,
+      "message": "Can you replace with emplace_back? I think you can remove the std::move if you do the emplace_back call instead.",
+      "range": {
+        "startLine": 72,
+        "startChar": 18,
+        "endLine": 72,
+        "endChar": 27
+      },
+      "revId": "f841cb2a9bcdf6de284bea9916bbfa88ad2088fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2802075f_768afdd9",
+        "filename": "memory_stats/main.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2022-12-15T01:25:55Z",
+      "side": 1,
+      "message": "Did you mean to add this? It\u0027s kind of odd to see a $ in the name of a parameter in a usage statement.",
+      "range": {
+        "startLine": 119,
+        "startChar": 42,
+        "endLine": 119,
+        "endChar": 43
+      },
+      "revId": "f841cb2a9bcdf6de284bea9916bbfa88ad2088fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
