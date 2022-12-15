@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "85911da5_601d7c04",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2022-12-15T01:33:52Z",
+      "side": 1,
+      "message": "I forgot to mention, you might want to create a symbolink link to get the clang format to run automatically.\n\nI believe if you do:\n\nln -s ../../../build/soong/scripts/system-clang-format-2 .\n\n\nIt will give you the two space format. I notice it\u0027s defaulting to four, and if you want that one change the format-2 to format.",
+      "revId": "f841cb2a9bcdf6de284bea9916bbfa88ad2088fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "39b22a07_3641972a",
