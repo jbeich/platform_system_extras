@@ -52,6 +52,24 @@
       "parentUuid": "5da51d19_2a68628e",
       "revId": "66ca49d58e69ad700943c5058f69b9c11db757cc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e08c7051_8cfe4d80",
+        "filename": "libfec/fec_read.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2023-01-10T20:51:19Z",
+      "side": 1,
+      "message": "Partner already verified that this patch works for them. friendly ping",
+      "parentUuid": "83cb7c3d_e81346db",
+      "revId": "66ca49d58e69ad700943c5058f69b9c11db757cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
