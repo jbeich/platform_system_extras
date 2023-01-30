@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b2b7e92_fd269c10",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2023-01-30T22:44:37Z",
+      "side": 1,
+      "message": "Put the whole link (https://github.com/android/ndk/issues/1836) since the tracker is not obvious.\n\nShould we also refer to https://partnerissuetracker.corp.google.com/issues/263549058 that is mentioned there?",
+      "range": {
+        "startLine": 9,
+        "startChar": 25,
+        "endLine": 9,
+        "endChar": 29
+      },
+      "revId": "1a8a28a59e8952070321d2c6e293bc5a26252832",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
