@@ -299,15 +299,16 @@ bool CheckPerfEventLimit() {
     }
   }
   if (can_read_allow_file) {
-    LOG(WARNING) << perf_event_allow_path << " is " << limit_level << ", "
-                 << GetLimitLevelDescription(limit_level) << ".";
+    LOG(ERROR) << perf_event_allow_path << " is " << limit_level << ", "
+               << GetLimitLevelDescription(limit_level) << ".";
   }
-  LOG(WARNING) << "Try using `adb shell setprop security.perf_harden 0` to allow profiling.";
+  LOG(ERROR) << "Try using `adb shell setprop security.perf_harden 0` to allow profiling.";
   return false;
 #else
   if (can_read_allow_file) {
-    LOG(WARNING) << perf_event_allow_path << " is " << limit_level << ", "
-                 << GetLimitLevelDescription(limit_level) << ".";
+    LOG(ERROR) << perf_event_allow_path << " is " << limit_level << ", "
+               << GetLimitLevelDescription(limit_level) << ". Try using `echo -1 >"
+               << perf_event_allow_path << "` to enable profiling.";
     return false;
   }
 #endif
@@ -486,12 +487,16 @@ std::set<pid_t> WaitForAppProcesses(const std::string& package_name) {
   while (true) {
     std::vector<pid_t> pids = GetAllProcesses();
     for (pid_t pid : pids) {
-      std::string cmdline;
-      if (!android::base::ReadFileToString("/proc/" + std::to_string(pid) + "/cmdline", &cmdline)) {
+      std::string argv0;
+      if (!android::base::ReadFileToString("/proc/" + std::to_string(pid) + "/cmdline", &argv0)) {
         // Maybe we don't have permission to read it.
         continue;
       }
-      std::string process_name = android::base::Basename(cmdline);
+      size_t pos = argv0.find('\0');
+      if (pos != std::string::npos) {
+        argv0.resize(pos);
+      }
+      std::string process_name = android::base::Basename(argv0);
       // The app may have multiple processes, with process name like
       // com.google.android.googlequicksearchbox:search.
       size_t split_pos = process_name.find(':');

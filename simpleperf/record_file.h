@@ -192,7 +192,7 @@ class RecordFileReader {
   std::string GetClockId();
   std::optional<DebugUnwindFeature> ReadDebugUnwindFeature();
 
-  void LoadBuildIdAndFileFeatures(ThreadTree& thread_tree);
+  bool LoadBuildIdAndFileFeatures(ThreadTree& thread_tree);
 
   bool ReadAuxData(uint32_t cpu, uint64_t aux_offset, void* buf, size_t size);
 
@@ -204,7 +204,8 @@ class RecordFileReader {
  private:
   RecordFileReader(const std::string& filename, FILE* fp);
   bool ReadHeader();
-  bool CheckSectionDesc(const PerfFileFormat::SectionDesc& desc, uint64_t min_offset);
+  bool CheckSectionDesc(const PerfFileFormat::SectionDesc& desc, uint64_t min_offset,
+                        uint64_t alignment = 1);
   bool ReadAttrSection();
   bool ReadIdsForAttr(const PerfFileFormat::FileAttr& attr, std::vector<uint64_t>* ids);
   bool ReadFeatureSectionDescriptors();

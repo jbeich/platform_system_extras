@@ -39,7 +39,12 @@ namespace simpleperf {
     }                                     \
   } while (0)
 
-#define CHECK_SIZE_U64(p, end, u64_count) CHECK_SIZE(p, end, (u64_count) * sizeof(uint64_t))
+#define CHECK_SIZE_U64(p, end, u64_count)                           \
+  do {                                                              \
+    if (UNLIKELY(((end) - (p)) / sizeof(uint64_t) < (u64_count))) { \
+      return false;                                                 \
+    }                                                               \
+  } while (0)
 
 static std::string RecordTypeToString(int record_type) {
   static std::unordered_map<int, std::string> record_type_names = {
@@ -205,7 +210,9 @@ bool Record::ParseHeader(char*& p, char*& end) {
   binary_ = p;
   CHECK(end != nullptr);
   CHECK_SIZE(p, end, sizeof(perf_event_header));
-  header = RecordHeader(p);
+  if (!header.Parse(p)) {
+    return false;
+  }
   CHECK_SIZE(p, end, header.size);
   end = p + header.size;
   p += sizeof(perf_event_header);
@@ -1084,6 +1091,7 @@ bool AuxTraceInfoRecord::Parse(const perf_event_attr&, char* p, char* end) {
     return false;
   }
   for (uint32_t i = 0; i < data->nr_cpu; ++i) {
+    CHECK_SIZE(p, end, sizeof(uint64_t));
     uint64_t magic = *reinterpret_cast<uint64_t*>(p);
     if (magic == MAGIC_ETM4) {
       CHECK_SIZE(p, end, sizeof(ETM4Info));
@@ -1338,8 +1346,10 @@ TracingDataRecord::TracingDataRecord(const std::vector<char>& tracing_data) {
 }
 
 void TracingDataRecord::DumpData(size_t indent) const {
-  Tracing tracing(std::vector<char>(data, data + data_size));
-  tracing.Dump(indent);
+  auto tracing = Tracing::Create(std::vector<char>(data, data + data_size));
+  if (tracing) {
+    tracing->Dump(indent);
+  }
 }
 
 bool EventIdRecord::Parse(const perf_event_attr&, char* p, char* end) {
