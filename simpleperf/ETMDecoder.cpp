@@ -67,7 +67,10 @@ class ETMV4IDecodeTree {
  public:
   ETMV4IDecodeTree()
       : error_logger_(std::bind(&ETMV4IDecodeTree::ProcessError, this, std::placeholders::_1)) {
-    frame_decoder_.Configure(OCSD_DFRMTR_FRAME_MEM_ALIGN);
+    ocsd_err_t err = frame_decoder_.Init();
+    CHECK_EQ(err, OCSD_OK);
+    err = frame_decoder_.Configure(OCSD_DFRMTR_FRAME_MEM_ALIGN);
+    CHECK_EQ(err, OCSD_OK);
     frame_decoder_.getErrLogAttachPt()->attach(&error_logger_);
   }
 
@@ -286,14 +289,21 @@ class MemAccess : public ITargetMemAccess {
       // addr.
       if (!map->in_kernel) {
         data.buffer_map = map;
-        data.buffer = memory == nullptr ? nullptr : (memory->getBufferStart() + map->pgoff);
         data.buffer_start = map->start_addr;
         data.buffer_end = map->get_end_addr();
+        if (memory != nullptr && memory->getBufferSize() > map->pgoff &&
+            (memory->getBufferSize() - map->pgoff >= map->len)) {
+          data.buffer = memory->getBufferStart() + map->pgoff;
+        } else {
+          data.buffer = nullptr;
+        }
       }
     }
     *num_bytes = copy_size;
     return OCSD_OK;
   }
+
+  void InvalidateMemAccCache(const uint8_t cs_trace_id) override {}
 
  private:
   llvm::MemoryBuffer* GetMemoryBuffer(Dso* dso) {
