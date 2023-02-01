@@ -895,7 +895,9 @@ bool ReportCommand::ReadEventAttrFromRecordFile() {
 }
 
 bool ReportCommand::ReadFeaturesFromRecordFile() {
-  record_file_reader_->LoadBuildIdAndFileFeatures(thread_tree_);
+  if (!record_file_reader_->LoadBuildIdAndFileFeatures(thread_tree_)) {
+    return false;
+  }
 
   std::string arch = record_file_reader_->ReadFeatureString(PerfFileFormat::FEAT_ARCH);
   if (!arch.empty()) {
@@ -991,11 +993,14 @@ void ReportCommand::ProcessSampleRecordInTraceOffCpuMode(std::unique_ptr<Record>
 }
 
 bool ReportCommand::ProcessTracingData(const std::vector<char>& data) {
-  Tracing tracing(data);
+  auto tracing = Tracing::Create(data);
+  if (!tracing) {
+    return false;
+  }
   for (size_t i = 0; i < event_attrs_.size(); i++) {
     if (event_attrs_[i].type == PERF_TYPE_TRACEPOINT) {
       uint64_t trace_event_id = event_attrs_[i].config;
-      attr_names_[i] = tracing.GetTracingEventNameHavingId(trace_event_id);
+      attr_names_[i] = tracing->GetTracingEventNameHavingId(trace_event_id);
     }
   }
   return true;

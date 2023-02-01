@@ -201,7 +201,7 @@ class DumpRecordCommand : public Command {
   void ProcessSampleRecord(const SampleRecord& r);
   void ProcessCallChainRecord(const CallChainRecord& r);
   SymbolInfo GetSymbolInfo(uint32_t pid, uint32_t tid, uint64_t ip, bool in_kernel);
-  void ProcessTracingData(const TracingDataRecord& r);
+  bool ProcessTracingData(const TracingDataRecord& r);
   bool DumpAuxData(const AuxRecord& aux);
   bool DumpFeatureSection();
 
@@ -322,7 +322,9 @@ void DumpRecordCommand::DumpAttrSection() {
 
 bool DumpRecordCommand::DumpDataSection() {
   thread_tree_.ShowIpForUnknownSymbol();
-  record_file_reader_->LoadBuildIdAndFileFeatures(thread_tree_);
+  if (!record_file_reader_->LoadBuildIdAndFileFeatures(thread_tree_)) {
+    return false;
+  }
 
   auto record_callback = [&](std::unique_ptr<Record> r) { return ProcessRecord(r.get()); };
   return record_file_reader_->ReadDataSection(record_callback);
@@ -355,7 +357,7 @@ bool DumpRecordCommand::ProcessRecord(Record* r) {
     }
     case PERF_RECORD_TRACING_DATA:
     case SIMPLE_PERF_RECORD_TRACING_DATA: {
-      ProcessTracingData(*static_cast<TracingDataRecord*>(r));
+      res = ProcessTracingData(*static_cast<TracingDataRecord*>(r));
       break;
     }
   }
@@ -419,13 +421,20 @@ bool DumpRecordCommand::DumpAuxData(const AuxRecord& aux) {
     if (!record_file_reader_->ReadAuxData(aux.Cpu(), aux.data->aux_offset, data.get(), size)) {
       return false;
     }
+    if (!etm_decoder_) {
+      LOG(ERROR) << "ETMDecoder isn't created";
+      return false;
+    }
     return etm_decoder_->ProcessData(data.get(), size, !aux.Unformatted(), aux.Cpu());
   }
   return true;
 }
 
-void DumpRecordCommand::ProcessTracingData(const TracingDataRecord& r) {
-  Tracing tracing(std::vector<char>(r.data, r.data + r.data_size));
+bool DumpRecordCommand::ProcessTracingData(const TracingDataRecord& r) {
+  auto tracing = Tracing::Create(std::vector<char>(r.data, r.data + r.data_size));
+  if (!tracing) {
+    return false;
+  }
   std::vector<EventAttrWithId> attrs = record_file_reader_->AttrSection();
   events_.resize(attrs.size());
   for (size_t i = 0; i < attrs.size(); i++) {
@@ -435,7 +444,7 @@ void DumpRecordCommand::ProcessTracingData(const TracingDataRecord& r) {
     if (attr->type != PERF_TYPE_TRACEPOINT) {
       continue;
     }
-    TracingFormat format = tracing.GetTracingFormatHavingId(attr->config);
+    TracingFormat format = tracing->GetTracingFormatHavingId(attr->config);
     event.tp_fields = format.fields;
     // Decide dump function for each field.
     for (size_t j = 0; j < event.tp_fields.size(); j++) {
@@ -444,6 +453,7 @@ void DumpRecordCommand::ProcessTracingData(const TracingDataRecord& r) {
       event.tp_data_size += field.elem_count * field.elem_size;
     }
   }
+  return true;
 }
 
 bool DumpRecordCommand::DumpFeatureSection() {
