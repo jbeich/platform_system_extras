@@ -515,7 +515,9 @@ bool ReportSampleCommand::OpenRecordFile() {
   if (record_file_reader_ == nullptr) {
     return false;
   }
-  record_file_reader_->LoadBuildIdAndFileFeatures(thread_tree_);
+  if (!record_file_reader_->LoadBuildIdAndFileFeatures(thread_tree_)) {
+    return false;
+  }
   auto& meta_info = record_file_reader_->GetMetaInfoFeature();
   if (auto it = meta_info.find("trace_offcpu"); it != meta_info.end()) {
     trace_offcpu_ = it->second == "true";
@@ -781,7 +783,7 @@ bool ReportSampleCommand::ProcessSwitchRecord(Record* r) {
 }
 
 bool ReportSampleCommand::WriteRecordInProtobuf(proto::Record& proto_record) {
-  coded_os_->WriteLittleEndian32(proto_record.ByteSize());
+  coded_os_->WriteLittleEndian32(static_cast<uint32_t>(proto_record.ByteSizeLong()));
   if (!proto_record.SerializeToCodedStream(coded_os_)) {
     LOG(ERROR) << "failed to write record to protobuf";
     return false;

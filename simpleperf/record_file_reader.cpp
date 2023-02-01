@@ -18,7 +18,9 @@
 
 #include <fcntl.h>
 #include <string.h>
+
 #include <set>
+#include <string_view>
 #include <vector>
 
 #include <android-base/logging.h>
@@ -133,10 +135,14 @@ bool RecordFileReader::ReadHeader() {
   return true;
 }
 
-bool RecordFileReader::CheckSectionDesc(const SectionDesc& desc, uint64_t min_offset) {
+bool RecordFileReader::CheckSectionDesc(const SectionDesc& desc, uint64_t min_offset,
+                                        uint64_t alignment) {
   uint64_t desc_end;
   if (desc.offset < min_offset || __builtin_add_overflow(desc.offset, desc.size, &desc_end) ||
       desc_end > file_size_) {
+    return false;
+  }
+  if (desc.size % alignment != 0) {
     return false;
   }
   return true;
@@ -145,6 +151,10 @@ bool RecordFileReader::CheckSectionDesc(const SectionDesc& desc, uint64_t min_of
 bool RecordFileReader::ReadAttrSection() {
   size_t attr_count = header_.attrs.size / header_.attr_size;
   if (header_.attr_size != sizeof(FileAttr)) {
+    if (header_.attr_size <= sizeof(SectionDesc)) {
+      LOG(ERROR) << "invalid attr section in " << filename_;
+      return false;
+    }
     LOG(DEBUG) << "attr size (" << header_.attr_size << ") in " << filename_
                << " doesn't match expected size (" << sizeof(FileAttr) << ")";
   }
@@ -169,7 +179,7 @@ bool RecordFileReader::ReadAttrSection() {
     size_t perf_event_attr_size = header_.attr_size - section_desc_size;
     memcpy(&attr.attr, &buf[0], std::min(sizeof(attr.attr), perf_event_attr_size));
     memcpy(&attr.ids, &buf[perf_event_attr_size], section_desc_size);
-    if (!CheckSectionDesc(attr.ids, 0)) {
+    if (!CheckSectionDesc(attr.ids, 0, sizeof(uint64_t))) {
       LOG(ERROR) << "invalid attr section in " << filename_;
       return false;
     }
@@ -289,36 +299,37 @@ bool RecordFileReader::ReadRecord(std::unique_ptr<Record>& record) {
 
 std::unique_ptr<Record> RecordFileReader::ReadRecord() {
   char header_buf[Record::header_size()];
-  if (!Read(header_buf, Record::header_size())) {
+  RecordHeader header;
+  if (!Read(header_buf, Record::header_size()) || !header.Parse(header_buf)) {
     return nullptr;
   }
-  RecordHeader header(header_buf);
   std::unique_ptr<char[]> p;
   if (header.type == SIMPLE_PERF_RECORD_SPLIT) {
     // Read until meeting a RECORD_SPLIT_END record.
     std::vector<char> buf;
-    size_t cur_size = 0;
-    char header_buf[Record::header_size()];
     while (header.type == SIMPLE_PERF_RECORD_SPLIT) {
-      size_t bytes_to_read = header.size - Record::header_size();
-      buf.resize(cur_size + bytes_to_read);
-      if (!Read(&buf[cur_size], bytes_to_read)) {
+      size_t add_size = header.size - Record::header_size();
+      size_t old_size = buf.size();
+      buf.resize(old_size + add_size);
+      if (!Read(&buf[old_size], add_size)) {
         return nullptr;
       }
-      cur_size += bytes_to_read;
       read_record_size_ += header.size;
-      if (!Read(header_buf, Record::header_size())) {
+      if (!Read(header_buf, Record::header_size()) || !header.Parse(header_buf)) {
         return nullptr;
       }
-      header = RecordHeader(header_buf);
     }
     if (header.type != SIMPLE_PERF_RECORD_SPLIT_END) {
       LOG(ERROR) << "SPLIT records are not followed by a SPLIT_END record.";
       return nullptr;
     }
     read_record_size_ += header.size;
-    header = RecordHeader(buf.data());
-    p.reset(new char[header.size]);
+    if (buf.size() < Record::header_size() || !header.Parse(buf.data()) ||
+        header.size != buf.size()) {
+      LOG(ERROR) << "invalid record merged from SPLIT records";
+      return nullptr;
+    }
+    p.reset(new char[buf.size()]);
     memcpy(p.get(), buf.data(), buf.size());
   } else {
     p.reset(new char[header.size]);
@@ -440,22 +451,25 @@ bool RecordFileReader::ReadFeatureSection(int feature, std::string* data) {
 std::vector<std::string> RecordFileReader::ReadCmdlineFeature() {
   std::vector<char> buf;
   if (!ReadFeatureSection(FEAT_CMDLINE, &buf)) {
-    return std::vector<std::string>();
+    return {};
   }
-  const char* p = buf.data();
-  const char* end = buf.data() + buf.size();
+  BinaryReader reader(buf.data(), buf.size());
   std::vector<std::string> cmdline;
-  uint32_t arg_count;
-  MoveFromBinaryFormat(arg_count, p);
-  CHECK_LE(p, end);
-  for (size_t i = 0; i < arg_count; ++i) {
-    uint32_t len;
-    MoveFromBinaryFormat(len, p);
-    CHECK_LE(p + len, end);
-    cmdline.push_back(p);
-    p += len;
+
+  uint32_t arg_count = 0;
+  reader.Read(arg_count);
+  for (size_t i = 0; i < arg_count && !reader.error; ++i) {
+    uint32_t aligned_len;
+    reader.Read(aligned_len);
+    cmdline.emplace_back(reader.ReadString());
+    uint32_t len = cmdline.back().size() + 1;
+    if (aligned_len != Align(len, 64)) {
+      reader.error = true;
+      break;
+    }
+    reader.Move(aligned_len - len);
   }
-  return cmdline;
+  return reader.error ? std::vector<std::string>() : cmdline;
 }
 
 std::vector<BuildIdRecord> RecordFileReader::ReadBuildIdFeature() {
@@ -466,9 +480,9 @@ std::vector<BuildIdRecord> RecordFileReader::ReadBuildIdFeature() {
   const char* p = buf.data();
   const char* end = buf.data() + buf.size();
   std::vector<BuildIdRecord> result;
-  while (p < end) {
+  while (p + sizeof(perf_event_header) < end) {
     auto header = reinterpret_cast<const perf_event_header*>(p);
-    if (p + header->size > end) {
+    if ((header->size <= sizeof(perf_event_header)) || (header->size > end - p)) {
       return {};
     }
     std::unique_ptr<char[]> binary(new char[header->size]);
@@ -492,12 +506,11 @@ std::string RecordFileReader::ReadFeatureString(int feature) {
   if (!ReadFeatureSection(feature, &buf)) {
     return std::string();
   }
-  const char* p = buf.data();
-  const char* end = buf.data() + buf.size();
-  uint32_t len;
-  MoveFromBinaryFormat(len, p);
-  CHECK_LE(p + len, end);
-  return p;
+  BinaryReader reader(buf.data(), buf.size());
+  uint32_t len = 0;
+  reader.Read(len);
+  std::string s = reader.ReadString();
+  return reader.error ? "" : s;
 }
 
 std::vector<uint64_t> RecordFileReader::ReadAuxTraceFeature() {
@@ -505,33 +518,41 @@ std::vector<uint64_t> RecordFileReader::ReadAuxTraceFeature() {
   if (!ReadFeatureSection(FEAT_AUXTRACE, &buf)) {
     return {};
   }
-  std::vector<uint64_t> auxtrace_offset;
-  const char* p = buf.data();
-  const char* end = buf.data() + buf.size();
-  if (buf.size() / sizeof(uint64_t) % 2 == 1) {
-    // Recording files generated by linux perf contain an extra uint64 field. Skip it here.
-    p += sizeof(uint64_t);
+  BinaryReader reader(buf.data(), buf.size());
+  if (reader.LeftSize() % sizeof(uint64_t) != 0) {
+    return {};
   }
-  while (p < end) {
+  if (reader.LeftSize() / sizeof(uint64_t) % 2 == 1) {
+    // Recording files generated by linux perf contain an extra uint64 field. Skip it here.
+    reader.Move(sizeof(uint64_t));
+  }
+
+  std::vector<uint64_t> auxtrace_offset;
+  while (!reader.error && reader.LeftSize() > 0u) {
     uint64_t offset;
     uint64_t size;
-    MoveFromBinaryFormat(offset, p);
+    reader.Read(offset);
+    reader.Read(size);
     auxtrace_offset.push_back(offset);
-    MoveFromBinaryFormat(size, p);
-    CHECK_EQ(size, AuxTraceRecord::Size());
+    if (size != AuxTraceRecord::Size()) {
+      reader.error = true;
+    }
   }
-  return auxtrace_offset;
+  return reader.error ? std::vector<uint64_t>() : auxtrace_offset;
 }
 
 bool RecordFileReader::ReadFileFeature(size_t& read_pos, FileFeature* file) {
   file->Clear();
+  bool result = false;
   if (HasFeature(FEAT_FILE)) {
-    return ReadFileV1Feature(read_pos, file);
+    result = ReadFileV1Feature(read_pos, file);
+  } else if (HasFeature(FEAT_FILE2)) {
+    result = ReadFileV2Feature(read_pos, file);
   }
-  if (HasFeature(FEAT_FILE2)) {
-    return ReadFileV2Feature(read_pos, file);
+  if (!result) {
+    LOG(ERROR) << "failed to read file feature section";
   }
-  return false;
+  return result;
 }
 
 bool RecordFileReader::ReadFileV1Feature(size_t& read_pos, FileFeature* file) {
@@ -548,8 +569,8 @@ bool RecordFileReader::ReadFileV1Feature(size_t& read_pos, FileFeature* file) {
       return false;
     }
   }
-  uint32_t size;
-  if (!Read(&size, 4)) {
+  uint32_t size = 0;
+  if (!Read(&size, 4) || size > it->second.size) {
     return false;
   }
   std::vector<char> buf(size);
@@ -557,44 +578,46 @@ bool RecordFileReader::ReadFileV1Feature(size_t& read_pos, FileFeature* file) {
     return false;
   }
   read_pos += 4 + size;
-  const char* p = buf.data();
-  file->path = p;
-  p += file->path.size() + 1;
-  uint32_t file_type;
-  MoveFromBinaryFormat(file_type, p);
+  BinaryReader reader(buf.data(), buf.size());
+  file->path = reader.ReadString();
+  uint32_t file_type = 0;
+  reader.Read(file_type);
   if (file_type > DSO_UNKNOWN_FILE) {
     LOG(ERROR) << "unknown file type for " << file->path
                << " in file feature section: " << file_type;
     return false;
   }
   file->type = static_cast<DsoType>(file_type);
-  MoveFromBinaryFormat(file->min_vaddr, p);
-  uint32_t symbol_count;
-  MoveFromBinaryFormat(symbol_count, p);
+  reader.Read(file->min_vaddr);
+  uint32_t symbol_count = 0;
+  reader.Read(symbol_count);
+  if (symbol_count > size) {
+    return false;
+  }
   file->symbols.reserve(symbol_count);
-  for (uint32_t i = 0; i < symbol_count; ++i) {
-    uint64_t start_vaddr;
-    uint32_t len;
-    MoveFromBinaryFormat(start_vaddr, p);
-    MoveFromBinaryFormat(len, p);
-    std::string name = p;
-    p += name.size() + 1;
+  while (symbol_count-- > 0) {
+    uint64_t start_vaddr = 0;
+    uint32_t len = 0;
+    reader.Read(start_vaddr);
+    reader.Read(len);
+    std::string name = reader.ReadString();
     file->symbols.emplace_back(name, start_vaddr, len);
   }
   if (file->type == DSO_DEX_FILE) {
-    uint32_t offset_count;
-    MoveFromBinaryFormat(offset_count, p);
+    uint32_t offset_count = 0;
+    reader.Read(offset_count);
+    if (offset_count > size) {
+      return false;
+    }
     file->dex_file_offsets.resize(offset_count);
-    MoveFromBinaryFormat(file->dex_file_offsets.data(), offset_count, p);
+    reader.Read(file->dex_file_offsets.data(), offset_count);
   }
   file->file_offset_of_min_vaddr = std::numeric_limits<uint64_t>::max();
-  if ((file->type == DSO_ELF_FILE || file->type == DSO_KERNEL_MODULE) &&
-      static_cast<size_t>(p - buf.data()) < size) {
-    MoveFromBinaryFormat(file->file_offset_of_min_vaddr, p);
+  if ((file->type == DSO_ELF_FILE || file->type == DSO_KERNEL_MODULE) && !reader.error &&
+      reader.LeftSize() > 0) {
+    reader.Read(file->file_offset_of_min_vaddr);
   }
-  CHECK_EQ(size, static_cast<size_t>(p - buf.data()))
-      << "file " << file->path << ", type " << file->type;
-  return true;
+  return !reader.error && reader.LeftSize() == 0;
 }
 
 bool RecordFileReader::ReadFileV2Feature(size_t& read_pos, FileFeature* file) {
@@ -615,11 +638,15 @@ bool RecordFileReader::ReadFileV2Feature(size_t& read_pos, FileFeature* file) {
   if (!Read(&size, 4)) {
     return false;
   }
-  read_pos += 4 + size;
+  read_pos += 4;
+  if (read_pos > it->second.size || size > it->second.size - read_pos) {
+    return false;
+  }
   std::string s(size, '\0');
   if (!Read(s.data(), size)) {
     return false;
   }
+  read_pos += size;
   proto::FileFeature proto_file;
   if (!proto_file.ParseFromString(s)) {
     return false;
@@ -633,15 +660,21 @@ bool RecordFileReader::ReadFileV2Feature(size_t& read_pos, FileFeature* file) {
     file->symbols.emplace_back(proto_symbol.name(), proto_symbol.vaddr(), proto_symbol.len());
   }
   if (file->type == DSO_DEX_FILE) {
-    CHECK(proto_file.has_dex_file());
+    if (!proto_file.has_dex_file()) {
+      return false;
+    }
     const auto& dex_file_offsets = proto_file.dex_file().dex_file_offset();
     file->dex_file_offsets.insert(file->dex_file_offsets.end(), dex_file_offsets.begin(),
                                   dex_file_offsets.end());
   } else if (file->type == DSO_ELF_FILE) {
-    CHECK(proto_file.has_elf_file());
+    if (!proto_file.has_elf_file()) {
+      return false;
+    }
     file->file_offset_of_min_vaddr = proto_file.elf_file().file_offset_of_min_vaddr();
   } else if (file->type == DSO_KERNEL_MODULE) {
-    CHECK(proto_file.has_kernel_module());
+    if (!proto_file.has_kernel_module()) {
+      return false;
+    }
     file->file_offset_of_min_vaddr = proto_file.kernel_module().memory_offset_of_min_vaddr();
   }
   return true;
@@ -653,14 +686,24 @@ bool RecordFileReader::ReadMetaInfoFeature() {
     if (!ReadFeatureSection(FEAT_META_INFO, &buf)) {
       return false;
     }
-    const char* p = buf.data();
-    const char* end = buf.data() + buf.size();
-    while (p < end) {
-      const char* key = p;
-      const char* value = key + strlen(key) + 1;
-      CHECK(value < end);
-      meta_info_[p] = value;
-      p = value + strlen(value) + 1;
+    std::string_view s(buf.data(), buf.size());
+    size_t key_start = 0;
+    while (key_start < s.size()) {
+      // Parse a C-string for key.
+      size_t key_end = s.find('\0', key_start);
+      if (key_end == key_start || key_end == s.npos) {
+        LOG(ERROR) << "invalid meta info in " << filename_;
+        return false;
+      }
+      // Parse a C-string for value.
+      size_t value_start = key_end + 1;
+      size_t value_end = s.find('\0', value_start);
+      if (value_end == value_start || value_end == s.npos) {
+        LOG(ERROR) << "invalid meta info in " << filename_;
+        return false;
+      }
+      meta_info_[&s[key_start]] = &s[value_start];
+      key_start = value_end + 1;
     }
   }
   return true;
@@ -691,7 +734,7 @@ std::optional<DebugUnwindFeature> RecordFileReader::ReadDebugUnwindFeature() {
   return std::nullopt;
 }
 
-void RecordFileReader::LoadBuildIdAndFileFeatures(ThreadTree& thread_tree) {
+bool RecordFileReader::LoadBuildIdAndFileFeatures(ThreadTree& thread_tree) {
   std::vector<BuildIdRecord> records = ReadBuildIdFeature();
   std::vector<std::pair<std::string, BuildId>> build_ids;
   for (auto& r : records) {
@@ -703,9 +746,12 @@ void RecordFileReader::LoadBuildIdAndFileFeatures(ThreadTree& thread_tree) {
     FileFeature file_feature;
     size_t read_pos = 0;
     while (ReadFileFeature(read_pos, &file_feature)) {
-      thread_tree.AddDsoInfo(file_feature);
+      if (!thread_tree.AddDsoInfo(file_feature)) {
+        return false;
+      }
     }
   }
+  return true;
 }
 
 bool RecordFileReader::ReadAuxData(uint32_t cpu, uint64_t aux_offset, void* buf, size_t size) {
