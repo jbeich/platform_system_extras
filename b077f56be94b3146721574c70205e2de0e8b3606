@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7962e15_60e5ac7c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1978766
+      },
+      "writtenOn": "2023-02-02T18:04:50Z",
+      "side": 1,
+      "message": "\u003e The synthesized methods are not useful to be shown to developers. So remove them from call frames.\n\nIs it possible that some developers want to see those methods? maybe enable that by passing a command line flag.",
+      "revId": "b077f56be94b3146721574c70205e2de0e8b3606",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
