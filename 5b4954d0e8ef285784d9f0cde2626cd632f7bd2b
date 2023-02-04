@@ -16,6 +16,24 @@
       "message": "Will having a larger data type fix the issue of overflow?",
       "revId": "5b4954d0e8ef285784d9f0cde2626cd632f7bd2b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d70fa323_4a7ffa76",
+        "filename": "simpleperf/record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2023-02-04T00:36:31Z",
+      "side": 1,
+      "message": "Do you mean int128? I feel that\u0027s overkill here. Because we don\u0027t need to do calculation over 64bit. Once detecting it, it\u0027s an error.",
+      "parentUuid": "5e333480_21ee448d",
+      "revId": "5b4954d0e8ef285784d9f0cde2626cd632f7bd2b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
