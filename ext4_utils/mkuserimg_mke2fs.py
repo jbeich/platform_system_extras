@@ -195,7 +195,14 @@ def ConstructE2fsCommands(args):
 
   # Round down the filesystem length to be a multiple of the block size
   block_size = BLOCKSIZE
-  if 'data' in args.mount_point:
+
+  target="TARGET_PRODUCT"
+  if target in os.environ and '_16k' in os.environ[target].lower():
+    target_has_16k=True
+  else:
+    target_has_16k=False
+
+  if 'data' in args.mount_point and target_has_16k:
     block_size = 16384
     mke2fs_opts += ["-F"]
 
