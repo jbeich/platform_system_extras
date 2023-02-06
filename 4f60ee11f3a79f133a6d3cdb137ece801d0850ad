@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0df25d3f_3ccfc552",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2023-02-06T22:31:57Z",
+      "side": 1,
+      "message": "It\u0027s better to add a test in test/report_sample_test.py. It can ensure your case is never broken. You can run the test with test/test.py -p TestReportSample*.",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 47
+      },
+      "revId": "4f60ee11f3a79f133a6d3cdb137ece801d0850ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c155927_0b7bdb64",
+        "filename": "simpleperf/scripts/report_sample.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2023-02-06T22:31:57Z",
+      "side": 1,
+      "message": "remove pprof, and add \"Default is stdout\"?",
+      "range": {
+        "startLine": 93,
+        "startChar": 30,
+        "endLine": 93,
+        "endChar": 43
+      },
+      "revId": "4f60ee11f3a79f133a6d3cdb137ece801d0850ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
