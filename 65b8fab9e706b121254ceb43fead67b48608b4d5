@@ -16,6 +16,23 @@
       "message": "ping?",
       "revId": "65b8fab9e706b121254ceb43fead67b48608b4d5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f8fe243_201c653b",
+        "filename": "simpleperf/cmd_dumprecord.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 419,
+      "author": {
+        "id": 1978766
+      },
+      "writtenOn": "2023-02-06T22:55:48Z",
+      "side": 1,
+      "message": "I\u0027m not familiar with the context here, but size_max and unit64_max can be same. https://coliru.stacked-crooked.com/a/165341a75f82a9f2",
+      "revId": "65b8fab9e706b121254ceb43fead67b48608b4d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
