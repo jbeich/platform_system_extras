@@ -1,5 +1,29 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "efb880f9_fe6ee3f0",
+        "filename": "ext4_utils/mkuserimg_mke2fs.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2023-02-07T20:54:39Z",
+      "side": 1,
+      "message": "we could get rid of the else statement:\n\n  target_has_16k\u003dFalse\n  if target in os.environ and \u0027_16k\u0027 in os.environ[target].lower():\n    target_has_16k\u003dTrue",
+      "range": {
+        "startLine": 200,
+        "startChar": 1,
+        "endLine": 204,
+        "endChar": 0
+      },
+      "revId": "5dda6b547be01c7a6d7cfb44c31cf881471a012c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
