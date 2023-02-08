@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21cd0287_65607d3f",
+        "filename": "simpleperf/doc/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1978766
+      },
+      "writtenOn": "2023-02-08T19:46:16Z",
+      "side": 1,
+      "message": "nit: does simpleperf depend on a specific version of python?",
+      "revId": "76ecebed8175371b491fba496937df53ac33fc16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
