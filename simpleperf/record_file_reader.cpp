@@ -541,43 +541,58 @@ std::vector<uint64_t> RecordFileReader::ReadAuxTraceFeature() {
   return reader.error ? std::vector<uint64_t>() : auxtrace_offset;
 }
 
-bool RecordFileReader::ReadFileFeature(size_t& read_pos, FileFeature* file) {
+bool RecordFileReader::ReadFileFeature(uint64_t& read_pos, FileFeature* file, bool* error) {
   file->Clear();
+  *error = false;
+
+  bool use_v1 = false;
+  PerfFileFormat::SectionDesc desc;
+  if (auto it = feature_section_descriptors_.find(FEAT_FILE);
+      it != feature_section_descriptors_.end()) {
+    use_v1 = true;
+    desc = it->second;
+  } else if (auto it = feature_section_descriptors_.find(FEAT_FILE2);
+             it != feature_section_descriptors_.end()) {
+    desc = it->second;
+  } else {
+    return false;
+  }
+
+  if (read_pos >= desc.size) {
+    return false;
+  }
+  if (read_pos == 0) {
+    if (fseek(record_fp_, desc.offset, SEEK_SET) != 0) {
+      PLOG(ERROR) << "fseek() failed";
+      *error = true;
+      return false;
+    }
+  }
+
   bool result = false;
-  if (HasFeature(FEAT_FILE)) {
-    result = ReadFileV1Feature(read_pos, file);
-  } else if (HasFeature(FEAT_FILE2)) {
-    result = ReadFileV2Feature(read_pos, file);
+  if (use_v1) {
+    result = ReadFileV1Feature(read_pos, desc.size - read_pos, file);
+  } else {
+    result = ReadFileV2Feature(read_pos, desc.size - read_pos, file);
   }
   if (!result) {
     LOG(ERROR) << "failed to read file feature section";
+    *error = true;
   }
   return result;
 }
 
-bool RecordFileReader::ReadFileV1Feature(size_t& read_pos, FileFeature* file) {
-  auto it = feature_section_descriptors_.find(FEAT_FILE);
-  if (it == feature_section_descriptors_.end()) {
-    return false;
-  }
-  if (read_pos >= it->second.size) {
-    return false;
-  }
-  if (read_pos == 0) {
-    if (fseek(record_fp_, it->second.offset, SEEK_SET) != 0) {
-      PLOG(ERROR) << "fseek() failed";
-      return false;
-    }
-  }
+bool RecordFileReader::ReadFileV1Feature(uint64_t& read_pos, uint64_t max_size, FileFeature* file) {
   uint32_t size = 0;
-  if (!Read(&size, 4) || size > it->second.size) {
+  if (max_size < 4 || !Read(&size, 4) || max_size - 4 < size) {
     return false;
   }
+  read_pos += 4;
   std::vector<char> buf(size);
   if (!Read(buf.data(), size)) {
     return false;
   }
-  read_pos += 4 + size;
+  read_pos += size;
   BinaryReader reader(buf.data(), buf.size());
   file->path = reader.ReadString();
   uint32_t file_type = 0;
@@ -620,28 +635,12 @@ bool RecordFileReader::ReadFileV1Feature(size_t& read_pos, FileFeature* file) {
   return !reader.error && reader.LeftSize() == 0;
 }
 
-bool RecordFileReader::ReadFileV2Feature(size_t& read_pos, FileFeature* file) {
-  auto it = feature_section_descriptors_.find(FEAT_FILE2);
-  if (it == feature_section_descriptors_.end()) {
-    return false;
-  }
-  if (read_pos >= it->second.size) {
-    return false;
-  }
-  if (read_pos == 0) {
-    if (fseek(record_fp_, it->second.offset, SEEK_SET) != 0) {
-      PLOG(ERROR) << "fseek() failed";
-      return false;
-    }
-  }
+bool RecordFileReader::ReadFileV2Feature(uint64_t& read_pos, uint64_t max_size, FileFeature* file) {
   uint32_t size;
-  if (!Read(&size, 4)) {
+  if (max_size < 4 || !Read(&size, 4) || max_size - 4 < size) {
     return false;
   }
   read_pos += 4;
-  if (read_pos > it->second.size || size > it->second.size - read_pos) {
-    return false;
-  }
   std::string s(size, '\0');
   if (!Read(s.data(), size)) {
     return false;
@@ -742,16 +741,15 @@ bool RecordFileReader::LoadBuildIdAndFileFeatures(ThreadTree& thread_tree) {
   }
   Dso::SetBuildIds(build_ids);
 
-  if (HasFeature(PerfFileFormat::FEAT_FILE) || HasFeature(PerfFileFormat::FEAT_FILE2)) {
-    FileFeature file_feature;
-    size_t read_pos = 0;
-    while (ReadFileFeature(read_pos, &file_feature)) {
-      if (!thread_tree.AddDsoInfo(file_feature)) {
-        return false;
-      }
+  FileFeature file_feature;
+  uint64_t read_pos = 0;
+  bool error = false;
+  while (ReadFileFeature(read_pos, &file_feature, &error)) {
+    if (!thread_tree.AddDsoInfo(file_feature)) {
+      return false;
     }
   }
-  return true;
+  return !error;
 }
 
 bool RecordFileReader::ReadAuxData(uint32_t cpu, uint64_t aux_offset, size_t size,
