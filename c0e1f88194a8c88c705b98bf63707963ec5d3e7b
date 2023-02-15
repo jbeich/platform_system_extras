@@ -16,6 +16,24 @@
       "message": "is `/proc/sys/fs/nr_open` always the same for all android?",
       "revId": "c0e1f88194a8c88c705b98bf63707963ec5d3e7b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ecc4a93_3a28dd48",
+        "filename": "simpleperf/environment.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 838,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2023-02-15T23:12:14Z",
+      "side": 1,
+      "message": "Yes, it\u0027s hard-coded in linux kernel, as in https://docs.kernel.org/admin-guide/sysctl/fs.html#nr-open.",
+      "parentUuid": "9221b036_d9480be5",
+      "revId": "c0e1f88194a8c88c705b98bf63707963ec5d3e7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
