@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9221b036_d9480be5",
+        "filename": "simpleperf/environment.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 838,
+      "author": {
+        "id": 1978766
+      },
+      "writtenOn": "2023-02-15T22:40:26Z",
+      "side": 1,
+      "message": "is `/proc/sys/fs/nr_open` always the same for all android?",
+      "revId": "c0e1f88194a8c88c705b98bf63707963ec5d3e7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
