@@ -16,6 +16,8 @@
 
 #include "report_utils.h"
 
+#include <stdlib.h>
+
 #include <android-base/scopeguard.h>
 #include <android-base/strings.h>
 
@@ -186,6 +188,15 @@ static bool IsArtEntry(const CallChainReportEntry& entry, bool* is_jni_trampolin
   return false;
 };
 
+CallChainReportBuilder::CallChainReportBuilder(ThreadTree& thread_tree)
+    : thread_tree_(thread_tree) {
+  const char* s = getenv("REMOVE_R8_SYNTHESIZED_FRAME");
+  if (s != nullptr && strcmp(s, "1") == 0) {
+    remove_r8_synthesized_frame_ = true;
+    LOG(WARNING) << "R8 synthesized frames will be removed.";
+  }
+}
+
 bool CallChainReportBuilder::AddProguardMappingFile(std::string_view mapping_file) {
   if (!retrace_) {
     retrace_.reset(new ProguardMappingRetrace);
@@ -349,7 +360,7 @@ void CallChainReportBuilder::DeObfuscateJavaMethods(std::vector<CallChainReportE
     std::string original_name;
     bool synthesized;
     if (retrace_->DeObfuscateJavaMethods(name, &original_name, &synthesized)) {
-      if (synthesized) {
+      if (synthesized && remove_r8_synthesized_frame_) {
         callchain.erase(callchain.begin() + i);
         continue;
       }
