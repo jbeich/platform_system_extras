@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "20c71523_efc20b51",
+        "filename": "simpleperf/report_utils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2023-02-23T19:41:43Z",
+      "side": 1,
+      "message": "Done. Whether it is useful is in debate in the bug. Currently we just provide a way to try it. I guess the env variable will stay here, unless someone is sure that it is useful in some cases. Then we can remove the env variable and control it via command line options.",
+      "parentUuid": "db83d12a_a7f6424a",
+      "revId": "d628fe4a31da3f1deafb6fedb6353ca3e4fdfc0b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b4678356_67b83f6f",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-02-23T19:10:00Z",
       "side": 1,
       "message": "is `!defined(_WIN32)` clearer?\n\ni thought we had environment variables there anyway?",
+      "revId": "d628fe4a31da3f1deafb6fedb6353ca3e4fdfc0b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "35b7b396_2b6ecf40",
+        "filename": "simpleperf/report_utils_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2023-02-23T19:41:43Z",
+      "side": 1,
+      "message": "Done. I didn\u0027t find _WIN32. setenv and unsetenv isn\u0027t available on windows. I don\u0027t bother to give much effort in looking for their equivalents.",
+      "parentUuid": "b4678356_67b83f6f",
       "revId": "d628fe4a31da3f1deafb6fedb6353ca3e4fdfc0b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
