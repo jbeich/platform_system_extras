@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0068083b_47271c58",
+        "filename": "simpleperf/report_utils_test.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2023-02-23T19:47:15Z",
+      "side": 1,
+      "message": "yeah, oddly it seems to only have getenv() and putenv()\n\nhttps://source.corp.google.com/android/prebuilts/gcc/linux-x86/host/x86_64-w64-mingw32-4.8/x86_64-w64-mingw32/include/stdlib.h;l\u003d579?q\u003dfile:mingw%20putenv\u0026sq\u003dpackage:%5Eandroid$%20-file:prebuilts%2Fvndk%2F%20-file:prebuilts%2Fruntime%2F\n\nbut i agree it\u0027s not worth the trouble!",
+      "revId": "e4193ad6f070c3c5ab884e0f9bf4aa6ff71d4cfc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
