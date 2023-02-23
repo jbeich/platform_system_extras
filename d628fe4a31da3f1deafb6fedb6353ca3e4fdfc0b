@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db83d12a_a7f6424a",
+        "filename": "simpleperf/report_utils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2023-02-23T19:10:00Z",
+      "side": 1,
+      "message": "do you plan to keep this environment variable long term, or is this just for initial testing? if you do plan to keep it, i\u0027d (a) suggest using ParseBool() and (b) suggest explicitly reporting an error and exiting if you get an _invalid_ value.\n\nbut if it\u0027s just for your own initial testing, meh, who cares? :-)",
+      "revId": "d628fe4a31da3f1deafb6fedb6353ca3e4fdfc0b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4678356_67b83f6f",
+        "filename": "simpleperf/report_utils_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2023-02-23T19:10:00Z",
+      "side": 1,
+      "message": "is `!defined(_WIN32)` clearer?\n\ni thought we had environment variables there anyway?",
+      "revId": "d628fe4a31da3f1deafb6fedb6353ca3e4fdfc0b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
