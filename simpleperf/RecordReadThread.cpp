@@ -236,6 +236,9 @@ RecordReadThread::RecordReadThread(size_t record_buffer_size, const perf_event_a
   }
   record_buffer_low_level_ = std::min(record_buffer_size / 4, kDefaultLowBufferLevel);
   record_buffer_critical_level_ = std::min(record_buffer_size / 6, kDefaultCriticalBufferLevel);
+  LOG(VERBOSE) << "user buffer size = " << record_buffer_size
+               << ", low_level size = " << record_buffer_low_level_
+               << ", critical_level size = " << record_buffer_critical_level_;
   if (!allow_cutting_samples) {
     record_buffer_low_level_ = record_buffer_critical_level_;
   }
@@ -625,10 +628,11 @@ void RecordReadThread::ReadAuxDataFromKernelBuffer(bool* has_data) {
       *has_data = true;
       AuxTraceRecord auxtrace(Align(aux_size, 8), offset, event_fd->Cpu(), 0, event_fd->Cpu());
       size_t alloc_size = auxtrace.size() + auxtrace.data->aux_size;
-      if (record_buffer_.GetFreeSize() < alloc_size + record_buffer_critical_level_) {
+      char* p = nullptr;
+      if ((record_buffer_.GetFreeSize() < alloc_size + record_buffer_critical_level_) ||
+          (p = record_buffer_.AllocWriteSpace(alloc_size)) == nullptr) {
         stat_.lost_aux_data_size += aux_size;
       } else {
-        char* p = record_buffer_.AllocWriteSpace(alloc_size);
         CHECK(p != nullptr);
         MoveToBinaryFormat(auxtrace.Binary(), auxtrace.size(), p);
         MoveToBinaryFormat(buf[0], size[0], p);

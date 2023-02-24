@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+#include <stdint.h>
 #include <stdio.h>
 #include <unistd.h>
 
@@ -275,7 +276,9 @@ class PerfDataReader {
         thread_tree_.ExcludePid(pid);
       }
     }
-    record_file_reader_->LoadBuildIdAndFileFeatures(thread_tree_);
+    if (!record_file_reader_->LoadBuildIdAndFileFeatures(thread_tree_)) {
+      return false;
+    }
     if (!record_file_reader_->ReadDataSection([this](auto r) { return ProcessRecord(r.get()); })) {
       return false;
     }
@@ -308,14 +311,19 @@ class PerfDataReader {
       }
     } else if (r->type() == PERF_RECORD_AUX) {
       AuxRecord* aux = static_cast<AuxRecord*>(r);
-      uint64_t aux_size = aux->data->aux_size;
+      if (aux->data->aux_size > SIZE_MAX) {
+        LOG(ERROR) << "invalid aux size";
+        return false;
+      }
+      size_t aux_size = aux->data->aux_size;
       if (aux_size > 0) {
-        if (aux_data_buffer_.size() < aux_size) {
-          aux_data_buffer_.resize(aux_size);
-        }
-        if (!record_file_reader_->ReadAuxData(aux->Cpu(), aux->data->aux_offset,
-                                              aux_data_buffer_.data(), aux_size)) {
+        if (!record_file_reader_->ReadAuxData(aux->Cpu(), aux->data->aux_offset, aux_size,
+                                              &aux_data_buffer_)) {
           LOG(ERROR) << "failed to read aux data in " << filename_;
+          return false;
+        }
+        if (!etm_decoder_) {
+          LOG(ERROR) << "ETMDecoder isn't created";
           return false;
         }
         return etm_decoder_->ProcessData(aux_data_buffer_.data(), aux_size, !aux->Unformatted(),

@@ -166,6 +166,12 @@ struct BinaryReader {
     return true;
   }
 
+  void Move(size_t size) {
+    if (CheckLeftSize(size)) {
+      head += size;
+    }
+  }
+
   template <class T>
   void Read(T& data) {
     static_assert(std::is_standard_layout<T>::value, "not standard layout");
@@ -268,6 +274,13 @@ static inline void HashCombine(size_t& seed, const T& val) {
 }
 
 size_t SafeStrlen(const char* s, const char* end);
+
+struct OverflowResult {
+  bool overflow = false;
+  uint64_t value = 0;
+};
+
+OverflowResult SafeAdd(uint64_t a, uint64_t b);
 
 }  // namespace simpleperf
 

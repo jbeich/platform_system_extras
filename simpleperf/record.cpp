@@ -39,7 +39,12 @@ namespace simpleperf {
     }                                     \
   } while (0)
 
-#define CHECK_SIZE_U64(p, end, u64_count) CHECK_SIZE(p, end, (u64_count) * sizeof(uint64_t))
+#define CHECK_SIZE_U64(p, end, u64_count)                           \
+  do {                                                              \
+    if (UNLIKELY(((end) - (p)) / sizeof(uint64_t) < (u64_count))) { \
+      return false;                                                 \
+    }                                                               \
+  } while (0)
 
 static std::string RecordTypeToString(int record_type) {
   static std::unordered_map<int, std::string> record_type_names = {
@@ -205,7 +210,9 @@ bool Record::ParseHeader(char*& p, char*& end) {
   binary_ = p;
   CHECK(end != nullptr);
   CHECK_SIZE(p, end, sizeof(perf_event_header));
-  header = RecordHeader(p);
+  if (!header.Parse(p)) {
+    return false;
+  }
   CHECK_SIZE(p, end, header.size);
   end = p + header.size;
   p += sizeof(perf_event_header);
@@ -496,9 +503,16 @@ bool SampleRecord::Parse(const perf_event_attr& attr, char* p, char* end) {
       CHECK_SIZE_U64(p, end, 1);
       MoveFromBinaryFormat(nr, p);
     }
-    size_t u64_count = (read_format & PERF_FORMAT_TOTAL_TIME_ENABLED) ? 1 : 0;
+    uint64_t u64_count = (read_format & PERF_FORMAT_TOTAL_TIME_ENABLED) ? 1 : 0;
     u64_count += (read_format & PERF_FORMAT_TOTAL_TIME_RUNNING) ? 1 : 0;
-    u64_count += ((read_format & PERF_FORMAT_ID) ? 2 : 1) * nr;
+    if (__builtin_add_overflow(u64_count, nr, &u64_count)) {
+      return false;
+    }
+    if (read_format & PERF_FORMAT_ID) {
+      if (__builtin_add_overflow(u64_count, nr, &u64_count)) {
+        return false;
+      }
+    }
     CHECK_SIZE_U64(p, end, u64_count);
     if (read_format & PERF_FORMAT_TOTAL_TIME_ENABLED) {
       MoveFromBinaryFormat(read_data.time_enabled, p);
