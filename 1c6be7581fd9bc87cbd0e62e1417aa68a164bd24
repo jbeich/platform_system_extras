@@ -16,6 +16,24 @@
       "message": "Does this need an error message as well?",
       "revId": "1c6be7581fd9bc87cbd0e62e1417aa68a164bd24",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7cf5007_6126ac27",
+        "filename": "simpleperf/utils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 447,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2023-02-28T22:37:58Z",
+      "side": 1,
+      "message": "No need. RegEx::Create() will report the error.",
+      "parentUuid": "3f038aa4_4d02cb6e",
+      "revId": "1c6be7581fd9bc87cbd0e62e1417aa68a164bd24",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
