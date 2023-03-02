@@ -15,6 +15,7 @@
  */
 
 #include <inttypes.h>
+#include <stdint.h>
 
 #include <map>
 #include <string>
@@ -415,17 +416,21 @@ SymbolInfo DumpRecordCommand::GetSymbolInfo(uint32_t pid, uint32_t tid, uint64_t
 }
 
 bool DumpRecordCommand::DumpAuxData(const AuxRecord& aux) {
+  if (aux.data->aux_size > SIZE_MAX) {
+    LOG(ERROR) << "invalid aux size";
+    return false;
+  }
   size_t size = aux.data->aux_size;
   if (size > 0) {
-    std::unique_ptr<uint8_t[]> data(new uint8_t[size]);
-    if (!record_file_reader_->ReadAuxData(aux.Cpu(), aux.data->aux_offset, data.get(), size)) {
+    std::vector<uint8_t> data;
+    if (!record_file_reader_->ReadAuxData(aux.Cpu(), aux.data->aux_offset, size, &data)) {
       return false;
     }
     if (!etm_decoder_) {
       LOG(ERROR) << "ETMDecoder isn't created";
       return false;
     }
-    return etm_decoder_->ProcessData(data.get(), size, !aux.Unformatted(), aux.Cpu());
+    return etm_decoder_->ProcessData(data.data(), size, !aux.Unformatted(), aux.Cpu());
   }
   return true;
 }
@@ -479,9 +484,10 @@ bool DumpRecordCommand::DumpFeatureSection() {
       PrintIndented(1, "cmdline: %s\n", android::base::Join(cmdline, ' ').c_str());
     } else if (feature == FEAT_FILE || feature == FEAT_FILE2) {
       FileFeature file;
-      size_t read_pos = 0;
+      uint64_t read_pos = 0;
+      bool error = false;
       PrintIndented(1, "file:\n");
-      while (record_file_reader_->ReadFileFeature(read_pos, &file)) {
+      while (record_file_reader_->ReadFileFeature(read_pos, file, error)) {
         PrintIndented(2, "file_path %s\n", file.path.c_str());
         PrintIndented(2, "file_type %s\n", DsoTypeToString(file.type));
         PrintIndented(2, "min_vaddr 0x%" PRIx64 "\n", file.min_vaddr);
@@ -497,6 +503,9 @@ bool DumpRecordCommand::DumpFeatureSection() {
             PrintIndented(3, "0x%" PRIx64 "\n", offset);
           }
         }
+      }
+      if (error) {
+        return false;
       }
     } else if (feature == FEAT_META_INFO) {
       PrintIndented(1, "meta_info:\n");
