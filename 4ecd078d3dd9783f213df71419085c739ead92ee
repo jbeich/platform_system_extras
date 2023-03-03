@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f9159ce_00a814fa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2023-03-03T17:11:01Z",
+      "side": 1,
+      "message": "+yabinc\u0027s the real owner here, but this seems fine (if unfortunate) to me...\n\ni\u0027m assuming you already looked, and there\u0027s no way to tell in gtest whether a custom logger has already been set?",
+      "revId": "4ecd078d3dd9783f213df71419085c739ead92ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
