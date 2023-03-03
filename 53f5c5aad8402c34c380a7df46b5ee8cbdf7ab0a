@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "388afcc5_45d1f97d",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2023-03-03T21:47:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "69bbdfaf_af8d2697",
+      "range": {
+        "startLine": 131,
+        "startChar": 60,
+        "endLine": 131,
+        "endChar": 71
+      },
+      "revId": "53f5c5aad8402c34c380a7df46b5ee8cbdf7ab0a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "70744093_3ce33ba3",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-03-03T20:02:17Z",
       "side": 1,
       "message": "Do you actually mean to use 3GB here? I know memory is usually not going to be ~3.5GB or something silly like that, but I also hate when magic constant numbers are not easy to interpret. Can we use `4ull` here and change the comparison below to `\u003e\u003d kHighMemoryLimit` to make this more clear?",
+      "range": {
+        "startLine": 134,
+        "startChar": 47,
+        "endLine": 134,
+        "endChar": 51
+      },
+      "revId": "53f5c5aad8402c34c380a7df46b5ee8cbdf7ab0a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "82b8a97a_e9c3be47",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2023-03-03T21:47:49Z",
+      "side": 1,
+      "message": "I don\u0027t know why, but /proc/meminfo usually reports totally memory slightly smaller than the declared device ram configuration. So if we use 4G here, I think the effect is this is only enabled on devices with \u003e\u003d 5G ram. And I kind of want to enable this on Pixel 1, which has 4G ram. Added comment to explain this. Also renamed the variable to make it a little better.",
+      "parentUuid": "70744093_3ce33ba3",
       "range": {
         "startLine": 134,
         "startChar": 47,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0dc69437_02d3e991",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 477,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2023-03-03T21:47:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e5cd928f_f1236ae4",
+      "range": {
+        "startLine": 477,
+        "startChar": 41,
+        "endLine": 477,
+        "endChar": 52
+      },
+      "revId": "53f5c5aad8402c34c380a7df46b5ee8cbdf7ab0a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c4ddab80_db5ed9cb",
@@ -83,6 +155,30 @@
       "writtenOn": "2023-03-03T20:02:17Z",
       "side": 1,
       "message": "maybe we want `kKilobyte` too?",
+      "range": {
+        "startLine": 248,
+        "startChar": 17,
+        "endLine": 248,
+        "endChar": 22
+      },
+      "revId": "53f5c5aad8402c34c380a7df46b5ee8cbdf7ab0a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7fcc43a_ee7f8969",
+        "filename": "simpleperf/environment.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2023-03-03T21:47:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c4ddab80_db5ed9cb",
       "range": {
         "startLine": 248,
         "startChar": 17,
