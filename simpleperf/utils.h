@@ -252,6 +252,9 @@ std::string GetSimpleperfVersion();
 
 std::optional<std::set<int>> GetCpusFromString(const std::string& s);
 std::optional<std::set<pid_t>> GetTidsFromString(const std::string& s, bool check_if_exists);
+std::optional<std::set<pid_t>> GetPidsFromStrings(const std::vector<std::string>& strs,
+                                                  bool check_if_exists,
+                                                  bool support_progress_name_regex);
 
 template <typename T>
 std::optional<std::set<T>> ParseUintVector(const std::string& s) {
@@ -274,6 +277,13 @@ static inline void HashCombine(size_t& seed, const T& val) {
 }
 
 size_t SafeStrlen(const char* s, const char* end);
+
+struct OverflowResult {
+  bool overflow = false;
+  uint64_t value = 0;
+};
+
+OverflowResult SafeAdd(uint64_t a, uint64_t b);
 
 }  // namespace simpleperf
 

@@ -487,16 +487,10 @@ std::set<pid_t> WaitForAppProcesses(const std::string& package_name) {
   while (true) {
     std::vector<pid_t> pids = GetAllProcesses();
     for (pid_t pid : pids) {
-      std::string argv0;
-      if (!android::base::ReadFileToString("/proc/" + std::to_string(pid) + "/cmdline", &argv0)) {
-        // Maybe we don't have permission to read it.
+      std::string process_name = GetCompleteProcessName(pid);
+      if (process_name.empty()) {
         continue;
       }
-      size_t pos = argv0.find('\0');
-      if (pos != std::string::npos) {
-        argv0.resize(pos);
-      }
-      std::string process_name = android::base::Basename(argv0);
       // The app may have multiple processes, with process name like
       // com.google.android.googlequicksearchbox:search.
       size_t split_pos = process_name.find(':');
@@ -829,9 +823,22 @@ void AllowMoreOpenedFiles() {
   // On Android <= O, the hard limit is 4096, and the soft limit is 1024.
   // On Android >= P, both the hard and soft limit are 32768.
   rlimit limit;
-  if (getrlimit(RLIMIT_NOFILE, &limit) == 0) {
-    limit.rlim_cur = limit.rlim_max;
-    setrlimit(RLIMIT_NOFILE, &limit);
+  if (getrlimit(RLIMIT_NOFILE, &limit) != 0) {
+    return;
+  }
+  rlim_t new_limit = limit.rlim_max;
+  if (IsRoot()) {
+    rlim_t sysctl_nr_open = 0;
+    if (ReadUintFromProcFile("/proc/sys/fs/nr_open", &sysctl_nr_open) &&
+        sysctl_nr_open > new_limit) {
+      new_limit = sysctl_nr_open;
+    }
+  }
+  if (limit.rlim_cur < new_limit) {
+    limit.rlim_cur = limit.rlim_max = new_limit;
+    if (setrlimit(RLIMIT_NOFILE, &limit) == 0) {
+      LOG(DEBUG) << "increased open file limit to " << new_limit;
+    }
   }
 }
 
@@ -939,18 +946,16 @@ bool MappedFileOnlyExistInMemory(const char* filename) {
 }
 
 std::string GetCompleteProcessName(pid_t pid) {
-  std::string s;
-  if (!android::base::ReadFileToString(android::base::StringPrintf("/proc/%d/cmdline", pid), &s)) {
-    s.clear();
+  std::string argv0;
+  if (!android::base::ReadFileToString("/proc/" + std::to_string(pid) + "/cmdline", &argv0)) {
+    // Maybe we don't have permission to read it.
+    return std::string();
   }
-  for (size_t i = 0; i < s.size(); ++i) {
-    // /proc/pid/cmdline uses 0 to separate arguments.
-    if (isspace(s[i]) || s[i] == 0) {
-      s.resize(i);
-      break;
-    }
+  size_t pos = argv0.find('\0');
+  if (pos != std::string::npos) {
+    argv0.resize(pos);
   }
-  return s;
+  return android::base::Basename(argv0);
 }
 
 const char* GetTraceFsDir() {
