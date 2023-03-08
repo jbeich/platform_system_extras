@@ -37,6 +37,10 @@
 
 namespace simpleperf {
 
+static constexpr size_t kKilobyte = 1024;
+static constexpr size_t kMegabyte = 1024 * kKilobyte;
+static constexpr uint64_t kGigabyte = 1024 * kMegabyte;
+
 static inline uint64_t AlignDown(uint64_t value, uint64_t alignment) {
   return value & ~(alignment - 1);
 }
@@ -252,6 +256,9 @@ std::string GetSimpleperfVersion();
 
 std::optional<std::set<int>> GetCpusFromString(const std::string& s);
 std::optional<std::set<pid_t>> GetTidsFromString(const std::string& s, bool check_if_exists);
+std::optional<std::set<pid_t>> GetPidsFromStrings(const std::vector<std::string>& strs,
+                                                  bool check_if_exists,
+                                                  bool support_progress_name_regex);
 
 template <typename T>
 std::optional<std::set<T>> ParseUintVector(const std::string& s) {
