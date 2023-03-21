@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "729ed2fe_69a2f93b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1978766
+      },
+      "writtenOn": "2023-03-21T23:02:57Z",
+      "side": 1,
+      "message": "i wonder if it is possible to know ahead of time if `rename` isn\u0027t implemented.",
+      "revId": "1fa6678273aacb98cc9d217f7af1249edec4d809",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
