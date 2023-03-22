@@ -16,6 +16,24 @@
       "message": "i wonder if it is possible to know ahead of time if `rename` isn\u0027t implemented.",
       "revId": "1fa6678273aacb98cc9d217f7af1249edec4d809",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c0af658_e383dc71",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2023-03-22T19:16:03Z",
+      "side": 1,
+      "message": "I don\u0027t know the details why rename() doesn\u0027t work here. It works on the previous simpleperf prebuilts (with the same related code) on Android N emulator. A detail check probably need to debug in the kernel, which I feel doesn\u0027t worth. The mv command works. Because it has a fallback to copy when rename() fails, as in https://android.googlesource.com/platform/external/toybox/+/master/toys/posix/cp.c#452.",
+      "parentUuid": "729ed2fe_69a2f93b",
+      "revId": "1fa6678273aacb98cc9d217f7af1249edec4d809",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
