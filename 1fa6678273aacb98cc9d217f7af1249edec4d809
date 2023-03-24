@@ -69,6 +69,24 @@
       "parentUuid": "3d668eb8_143cac6d",
       "revId": "1fa6678273aacb98cc9d217f7af1249edec4d809",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8808413_387c42f8",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1771,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2023-03-24T17:52:15Z",
+      "side": 1,
+      "message": "ah, fair enough. (that would probably be a better code comment though :-) )",
+      "parentUuid": "41b89445_63fa63ef",
+      "revId": "1fa6678273aacb98cc9d217f7af1249edec4d809",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
