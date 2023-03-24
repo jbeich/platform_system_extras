@@ -1,5 +1,29 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4dd12327_d608f14f",
+        "filename": "mtectrl/mtectrl.rc",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1038443
+      },
+      "writtenOn": "2023-03-24T11:54:52Z",
+      "side": 1,
+      "message": "Move this to a variable and share it with other uses, and reference the bug as a comment?",
+      "range": {
+        "startLine": 16,
+        "startChar": 84,
+        "endLine": 16,
+        "endChar": 103
+      },
+      "revId": "c43870f49e87bdfbe913070f5b1a6ed3863290ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
