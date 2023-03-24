@@ -22,6 +22,30 @@
       },
       "revId": "c43870f49e87bdfbe913070f5b1a6ed3863290ac",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d97c231b_a4d3163d",
+        "filename": "mtectrl/mtectrl.rc",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1268571
+      },
+      "writtenOn": "2023-03-24T16:35:58Z",
+      "side": 1,
+      "message": "I don\u0027t think we can share a variable between an RC file and java.",
+      "parentUuid": "4dd12327_d608f14f",
+      "range": {
+        "startLine": 16,
+        "startChar": 84,
+        "endLine": 16,
+        "endChar": 103
+      },
+      "revId": "c43870f49e87bdfbe913070f5b1a6ed3863290ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
