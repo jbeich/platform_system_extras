@@ -70,6 +70,30 @@
       },
       "revId": "c43870f49e87bdfbe913070f5b1a6ed3863290ac",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a146f65a_e3a9d857",
+        "filename": "mtectrl/mtectrl.rc",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1268571
+      },
+      "writtenOn": "2023-03-24T17:54:35Z",
+      "side": 1,
+      "message": "I am also not aware of any way to do that.",
+      "parentUuid": "845d5edf_590890e2",
+      "range": {
+        "startLine": 16,
+        "startChar": 84,
+        "endLine": 16,
+        "endChar": 103
+      },
+      "revId": "c43870f49e87bdfbe913070f5b1a6ed3863290ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
