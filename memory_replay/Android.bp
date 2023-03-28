@@ -55,8 +55,9 @@ cc_library_static {
     ],
 }
 
-cc_defaults {
-    name: "memory_replay_defaults",
+cc_library_static {
+    name: "libmemory_replay",
+    host_supported: true,
     defaults: ["memory_flag_defaults"],
 
     srcs: [
@@ -73,10 +74,33 @@ cc_defaults {
         "libziparchive",
     ],
 
+    static_libs: ["liballoc_parser"],
+
+    target: {
+        android: {
+            static_libs: ["libasync_safe"],
+        },
+    },
+}
+
+cc_defaults {
+    name: "memory_replay_defaults",
+
+    shared_libs: [
+        "libbase",
+        "libziparchive",
+    ],
+
     static_libs: [
         "liballoc_parser",
-        "libasync_safe",
+        "libmemory_replay",
     ],
+
+    target: {
+        android: {
+            static_libs: ["libasync_safe"],
+        },
+    },
 }
 
 cc_binary {
