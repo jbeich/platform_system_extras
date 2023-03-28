@@ -28,4 +28,6 @@ std::string ZipGetContents(const char* filename);
 // If filename ends with .zip, treat as a zip file to decompress.
 void GetUnwindInfo(const char* filename, AllocEntry** entries, size_t* num_entries);
 
+void ProcessDump(const AllocEntry* entries, size_t num_entries, size_t max_threads, bool free_all);
+
 void FreeEntries(AllocEntry* entries, size_t num_entries);
