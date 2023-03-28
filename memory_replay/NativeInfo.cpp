@@ -27,7 +27,10 @@
 #include <unistd.h>
 
 #include <android-base/unique_fd.h>
+
+#ifdef __ANDROID__
 #include <async_safe/log.h>
+#endif
 
 #include "NativeInfo.h"
 
@@ -35,7 +38,11 @@ void NativePrintf(const char* fmt, ...) {
   va_list args;
   va_start(args, fmt);
   char buffer[512];
+#ifdef __ANDROID__
   int buffer_len = async_safe_format_buffer_va_list(buffer, sizeof(buffer), fmt, args);
+#else
+  int buffer_len = vsnprintf(buffer, sizeof(buffer), fmt, args);
+#endif
   va_end(args);
 
   (void)write(STDOUT_FILENO, buffer, buffer_len);
@@ -43,7 +50,11 @@ void NativePrintf(const char* fmt, ...) {
 
 void NativeFormatFloat(char* buffer, size_t buffer_len, uint64_t value, uint64_t divisor) {
   uint64_t hundreds = ((((value % divisor) * 1000) / divisor) + 5) / 10;
+#ifdef __ANDROID__
   async_safe_format_buffer(buffer, buffer_len, "%" PRIu64 ".%02" PRIu64, value / divisor, hundreds);
+#else
+  snprintf(buffer, buffer_len, "%" PRIu64 ".%02" PRIu64, value / divisor, hundreds);
+#endif
 }
 
 // This function is not re-entrant since it uses a static buffer for

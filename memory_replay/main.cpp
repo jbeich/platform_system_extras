@@ -36,112 +36,6 @@
 
 constexpr size_t kDefaultMaxThreads = 512;
 
-static size_t GetMaxAllocs(const AllocEntry* entries, size_t num_entries) {
-  size_t max_allocs = 0;
-  size_t num_allocs = 0;
-  for (size_t i = 0; i < num_entries; i++) {
-    switch (entries[i].type) {
-      case THREAD_DONE:
-        break;
-      case MALLOC:
-      case CALLOC:
-      case MEMALIGN:
-        if (entries[i].ptr != 0) {
-          num_allocs++;
-        }
-        break;
-      case REALLOC:
-        if (entries[i].ptr == 0 && entries[i].u.old_ptr != 0) {
-          num_allocs--;
-        } else if (entries[i].ptr != 0 && entries[i].u.old_ptr == 0) {
-          num_allocs++;
-        }
-        break;
-      case FREE:
-        if (entries[i].ptr != 0) {
-          num_allocs--;
-        }
-        break;
-    }
-    if (num_allocs > max_allocs) {
-      max_allocs = num_allocs;
-    }
-  }
-  return max_allocs;
-}
-
-static void ProcessDump(const AllocEntry* entries, size_t num_entries, size_t max_threads) {
-  // Do a pass to get the maximum number of allocations used at one
-  // time to allow a single mmap that can hold the maximum number of
-  // pointers needed at once.
-  size_t max_allocs = GetMaxAllocs(entries, num_entries);
-  Pointers pointers(max_allocs);
-  Threads threads(&pointers, max_threads);
-
-  NativePrintf("Maximum threads available:   %zu\n", threads.max_threads());
-  NativePrintf("Maximum allocations in dump: %zu\n", max_allocs);
-  NativePrintf("Total pointers available:    %zu\n\n", pointers.max_pointers());
-
-  NativePrintInfo("Initial ");
-
-  for (size_t i = 0; i < num_entries; i++) {
-    if (((i + 1) % 100000) == 0) {
-      NativePrintf("  At line %zu:\n", i + 1);
-      NativePrintInfo("    ");
-    }
-    const AllocEntry& entry = entries[i];
-    Thread* thread = threads.FindThread(entry.tid);
-    if (thread == nullptr) {
-      thread = threads.CreateThread(entry.tid);
-    }
-
-    // Wait for the thread to complete any previous actions before handling
-    // the next action.
-    thread->WaitForReady();
-
-    thread->SetAllocEntry(&entry);
-
-    bool does_free = AllocDoesFree(entry);
-    if (does_free) {
-      // Make sure that any other threads doing allocations are complete
-      // before triggering the action. Otherwise, another thread could
-      // be creating the allocation we are going to free.
-      threads.WaitForAllToQuiesce();
-    }
-
-    // Tell the thread to execute the action.
-    thread->SetPending();
-
-    if (entries[i].type == THREAD_DONE) {
-      // Wait for the thread to finish and clear the thread entry.
-      threads.Finish(thread);
-    }
-
-    // Wait for this action to complete. This avoids a race where
-    // another thread could be creating the same allocation where are
-    // trying to free.
-    if (does_free) {
-      thread->WaitForReady();
-    }
-  }
-  // Wait for all threads to stop processing actions.
-  threads.WaitForAllToQuiesce();
-
-  NativePrintInfo("Final ");
-
-  // Free any outstanding pointers.
-  // This allows us to run a tool like valgrind to verify that no memory
-  // is leaked and everything is accounted for during a run.
-  threads.FinishAll();
-  pointers.FreeAll();
-
-  // Print out the total time making all allocation calls.
-  char buffer[256];
-  uint64_t total_nsecs = threads.total_time_nsecs();
-  NativeFormatFloat(buffer, sizeof(buffer), total_nsecs, 1000000000);
-  NativePrintf("Total Allocation/Free Time: %" PRIu64 "ns %ss\n", total_nsecs, buffer);
-}
-
 int main(int argc, char** argv) {
   if (argc != 2 && argc != 3) {
     if (argc > 3) {
@@ -182,7 +76,7 @@ int main(int argc, char** argv) {
 
   NativePrintf("Processing: %s\n", argv[1]);
 
-  ProcessDump(entries, num_entries, max_threads);
+  ProcessDump(entries, num_entries, max_threads, /*free_all=*/true);
 
   FreeEntries(entries, num_entries);
 
