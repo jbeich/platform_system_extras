@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a28680f_0cd507af",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2023-03-30T19:22:19Z",
+      "side": 1,
+      "message": "maybe add something like \"...and i\u0027m doing this work because i want to switch the whole tree over to `_FILE_OFFSET_BITS\u003d64` anyway, so this won\u0027t cause trouble in future if we add such an API.\"?",
+      "range": {
+        "startLine": 16,
+        "startChar": 34,
+        "endLine": 16,
+        "endChar": 39
+      },
+      "revId": "8a39d9a588a182833d7eebc5176269906b615f2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7edf9da_5916c5ba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2023-03-30T19:22:19Z",
+      "side": 1,
+      "message": "+drosen since dvander\u0027s ooo for a while...",
+      "revId": "8a39d9a588a182833d7eebc5176269906b615f2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "257fa685_a6976ad4",
+        "filename": "ext4_utils/ext4_utils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2023-03-30T19:22:19Z",
+      "side": 1,
+      "message": "just inline rather than use ret here...",
+      "revId": "8a39d9a588a182833d7eebc5176269906b615f2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3662abef_cbf9fe2e",
+        "filename": "ext4_utils/ext4_utils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2023-03-30T19:22:19Z",
+      "side": 1,
+      "message": "...so we can fix ret to be the ssize_t it should be here?",
+      "revId": "8a39d9a588a182833d7eebc5176269906b615f2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

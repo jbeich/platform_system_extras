@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69949cad_990a38d3",
+        "filename": "ext4_utils/include/ext4_utils/ext4_utils.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2023-03-30T19:22:19Z",
+      "side": 0,
+      "message": "(yeah, cs/ agrees that these were unused.)",
+      "range": {
+        "startLine": 43,
+        "startChar": 8,
+        "endLine": 44,
+        "endChar": 19
+      },
+      "revId": "c0766c1ceade3488565a421bacbb8f30026f6928",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
