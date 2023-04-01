@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a803dc51_719ad68b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2000430
+      },
+      "writtenOn": "2023-04-01T04:17:50Z",
+      "side": 1,
+      "message": "Works well for me to extract the latest Fairphone FP3 firmware images from 3 split super partitions. Thx @dk1978!",
+      "revId": "a2dabffdf76857afdc4dbaa7523fab9c32f4a7c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
