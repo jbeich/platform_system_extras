@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3fb54626_352bf313",
+        "filename": "simpleperf/doc/collect_etm_data_for_autofdo.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1687194
+      },
+      "writtenOn": "2023-04-03T17:51:21Z",
+      "side": 1,
+      "message": "perhaps add context that this is to support fdo_profile modules with the same name",
+      "range": {
+        "startLine": 162,
+        "startChar": 24,
+        "endLine": 162,
+        "endChar": 53
+      },
+      "revId": "5e1130d72ada360f53ac0286bce61109b8253e3f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27c0ebc3_d9d58ff9",
+        "filename": "simpleperf/doc/collect_etm_data_for_autofdo.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1687194
+      },
+      "writtenOn": "2023-04-03T17:51:21Z",
+      "side": 1,
+      "message": "nit: can you add a blank line between code blocks?",
+      "range": {
+        "startLine": 169,
+        "startChar": 0,
+        "endLine": 169,
+        "endChar": 64
+      },
+      "revId": "5e1130d72ada360f53ac0286bce61109b8253e3f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
