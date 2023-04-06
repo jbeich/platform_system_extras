@@ -374,8 +374,9 @@ RECORD_FILTER_OPTION_HELP_MSG_FOR_RECORDING
   bool TraceOffCpu();
   bool SetEventSelectionFlags();
   bool CreateAndInitRecordFile();
-  std::unique_ptr<RecordFileWriter> CreateRecordFile(
-      const std::string& filename, const std::vector<EventAttrWithId>& override_attrs);
+  std::unique_ptr<RecordFileWriter> CreateRecordFile(const std::string& filename,
+                                                     const std::vector<EventAttrWithId>& attrs,
+                                                     bool remove_regs_and_stacks);
   bool DumpKernelSymbol();
   bool DumpTracingData();
   bool DumpMaps();
@@ -396,7 +397,8 @@ RECORD_FILTER_OPTION_HELP_MSG_FOR_RECORDING
                                  const std::vector<uint64_t>& sps);
 
   // post recording functions
-  std::unique_ptr<RecordFileReader> MoveRecordFile(const std::string& old_filename);
+  std::unique_ptr<RecordFileReader> MoveRecordFile(const std::string& old_filename,
+                                                   bool remove_regs_and_stacks);
   bool MergeMapRecords();
   bool PostUnwindRecords();
   bool JoinCallChains();
@@ -1353,8 +1355,9 @@ bool RecordCommand::SetEventSelectionFlags() {
 }
 
 bool RecordCommand::CreateAndInitRecordFile() {
-  record_file_writer_ =
-      CreateRecordFile(record_filename_, event_selection_set_.GetEventAttrWithId());
+  bool remove_regs_and_stacks = unwind_dwarf_callchain_ && !post_unwind_;
+  record_file_writer_ = CreateRecordFile(
+      record_filename_, event_selection_set_.GetEventAttrWithId(), remove_regs_and_stacks);
   if (record_file_writer_ == nullptr) {
     return false;
   }
@@ -1369,14 +1372,30 @@ bool RecordCommand::CreateAndInitRecordFile() {
 }
 
 std::unique_ptr<RecordFileWriter> RecordCommand::CreateRecordFile(
-    const std::string& filename, const std::vector<EventAttrWithId>& attrs) {
+    const std::string& filename, const std::vector<EventAttrWithId>& attrs,
+    bool remove_regs_and_stacks) {
   std::unique_ptr<RecordFileWriter> writer = RecordFileWriter::CreateInstance(filename);
   if (writer == nullptr) {
     return nullptr;
   }
-
-  if (!writer->WriteAttrSection(attrs)) {
-    return nullptr;
+  if (remove_regs_and_stacks) {
+    std::vector<EventAttrWithId> new_attrs = attrs;
+    std::vector<perf_event_attr> modified_perf_attrs(new_attrs.size());
+    for (size_t i = 0; i < new_attrs.size(); ++i) {
+      modified_perf_attrs[i] = *new_attrs[i].attr;
+      modified_perf_attrs[i].sample_type &= ~(PERF_SAMPLE_REGS_USER | PERF_SAMPLE_STACK_USER);
+      modified_perf_attrs[i].exclude_callchain_user = 0;
+      modified_perf_attrs[i].sample_regs_user = 0;
+      modified_perf_attrs[i].sample_stack_user = 0;
+      new_attrs[i].attr = &modified_perf_attrs[i];
+    }
+    if (!writer->WriteAttrSection(new_attrs)) {
+      return nullptr;
+    }
+  } else {
+    if (!writer->WriteAttrSection(attrs)) {
+      return nullptr;
+    }
   }
   return writer;
 }
@@ -1759,7 +1778,8 @@ bool RecordCommand::KeepFailedUnwindingResult(const SampleRecord& r,
   return true;
 }
 
-std::unique_ptr<RecordFileReader> RecordCommand::MoveRecordFile(const std::string& old_filename) {
+std::unique_ptr<RecordFileReader> RecordCommand::MoveRecordFile(const std::string& old_filename,
+                                                                bool remove_regs_and_stacks) {
   if (!record_file_writer_->Close()) {
     return nullptr;
   }
@@ -1779,7 +1799,8 @@ std::unique_ptr<RecordFileReader> RecordCommand::MoveRecordFile(const std::strin
     return nullptr;
   }
 
-  record_file_writer_ = CreateRecordFile(record_filename_, reader->AttrSection());
+  record_file_writer_ =
+      CreateRecordFile(record_filename_, reader->AttrSection(), remove_regs_and_stacks);
   if (!record_file_writer_) {
     return nullptr;
   }
@@ -1789,7 +1810,7 @@ std::unique_ptr<RecordFileReader> RecordCommand::MoveRecordFile(const std::strin
 bool RecordCommand::MergeMapRecords() {
   // 1. Move records from record_filename_ to a temporary file.
   auto tmp_file = ScopedTempFiles::CreateTempFile();
-  auto reader = MoveRecordFile(tmp_file->path);
+  auto reader = MoveRecordFile(tmp_file->path, false);
   if (!reader) {
     return false;
   }
@@ -1824,7 +1845,7 @@ bool RecordCommand::MergeMapRecords() {
 
 bool RecordCommand::PostUnwindRecords() {
   auto tmp_file = ScopedTempFiles::CreateTempFile();
-  auto reader = MoveRecordFile(tmp_file->path);
+  auto reader = MoveRecordFile(tmp_file->path, true);
   if (!reader) {
     return false;
   }
@@ -1843,7 +1864,7 @@ bool RecordCommand::JoinCallChains() {
   }
   // 2. Move records from record_filename_ to a temporary file.
   auto tmp_file = ScopedTempFiles::CreateTempFile();
-  auto reader = MoveRecordFile(tmp_file->path);
+  auto reader = MoveRecordFile(tmp_file->path, false);
   if (!reader) {
     return false;
   }
