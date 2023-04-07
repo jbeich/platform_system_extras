@@ -29,15 +29,17 @@ namespace simpleperf {
 struct EventType;
 
 struct EventAttrWithId {
-  const perf_event_attr* attr;
+  perf_event_attr attr;
   std::vector<uint64_t> ids;
 };
+
+using EventAttrIds = std::vector<EventAttrWithId>;
 
 inline constexpr uint64_t INFINITE_SAMPLE_PERIOD = 1ULL << 62;
 
 perf_event_attr CreateDefaultPerfEventAttr(const EventType& event_type);
 void DumpPerfEventAttr(const perf_event_attr& attr, size_t indent = 0);
-bool GetCommonEventIdPositionsForAttrs(std::vector<perf_event_attr>& attrs,
+bool GetCommonEventIdPositionsForAttrs(const EventAttrIds& attrs,
                                        size_t* event_id_pos_in_sample_records,
                                        size_t* event_id_reverse_pos_in_non_sample_records);
 bool IsTimestampSupported(const perf_event_attr& attr);
