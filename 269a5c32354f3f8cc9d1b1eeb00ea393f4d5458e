@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "adeff863_25a963da",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1382,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2023-04-07T08:25:59Z",
+      "side": 1,
+      "message": "nit: It took me a minute to realize that you have to do this copy so as to not alter the `\u0026attrs` passed into the function by reference. Maybe it\u0027s worth a comment here, so that somebody doesn\u0027t accidentally \"clean this up\" in the future.",
+      "revId": "269a5c32354f3f8cc9d1b1eeb00ea393f4d5458e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9221b515_63bb0685",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1813,
+      "author": {
+        "id": 1010056
+      },
+      "writtenOn": "2023-04-07T08:25:59Z",
+      "side": 1,
+      "message": "Perhaps this would be more clear with a constant `kRetainRegsAndStacks` that is just `false`? You can use a `kRemoveRegsAndStacks` for the `true` cases.",
+      "range": {
+        "startLine": 1813,
+        "startChar": 47,
+        "endLine": 1813,
+        "endChar": 52
+      },
+      "revId": "269a5c32354f3f8cc9d1b1eeb00ea393f4d5458e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
