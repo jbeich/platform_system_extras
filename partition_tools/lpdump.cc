@@ -229,6 +229,7 @@ static bool MergeFsUsage(DynamicPartitionsDeviceInfoProto* proto,
             partition_proto->set_is_dynamic(false);
         }
         partition_proto->set_fs_size((uint64_t)vst.f_blocks * vst.f_frsize);
+        partition_proto->set_fs_type(entry.fs_type);
         if (vst.f_bavail <= vst.f_blocks) {
             partition_proto->set_fs_used((uint64_t)(vst.f_blocks - vst.f_bavail) * vst.f_frsize);
         }
