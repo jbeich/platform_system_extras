@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "87a78e47_6dde1580",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1382,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2023-04-07T21:22:43Z",
+      "side": 1,
+      "message": "It\u0027s because EventAttrWithId wasn\u0027t designed to change its perf_event_attr field. To improve it, I created a base CL in https://android-review.git.corp.google.com/c/platform/system/extras/+/2528964/1.",
+      "parentUuid": "adeff863_25a963da",
+      "revId": "269a5c32354f3f8cc9d1b1eeb00ea393f4d5458e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9221b515_63bb0685",
@@ -31,6 +49,30 @@
       "writtenOn": "2023-04-07T08:25:59Z",
       "side": 1,
       "message": "Perhaps this would be more clear with a constant `kRetainRegsAndStacks` that is just `false`? You can use a `kRemoveRegsAndStacks` for the `true` cases.",
+      "range": {
+        "startLine": 1813,
+        "startChar": 47,
+        "endLine": 1813,
+        "endChar": 52
+      },
+      "revId": "269a5c32354f3f8cc9d1b1eeb00ea393f4d5458e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3a057c1_c989d854",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1813,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2023-04-07T21:22:43Z",
+      "side": 1,
+      "message": "I found we could avoid passing the flag, by doing an extra write to AttrSection in PostUnwindRecords(). The AttrSection() is small. So I think it doesn\u0027t matter to write AttrSection twice.",
+      "parentUuid": "9221b515_63bb0685",
       "range": {
         "startLine": 1813,
         "startChar": 47,
