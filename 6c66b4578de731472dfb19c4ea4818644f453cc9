@@ -22,6 +22,30 @@
       },
       "revId": "6c66b4578de731472dfb19c4ea4818644f453cc9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e74477d_96507ae0",
+        "filename": "partition_tools/lpdump.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2023-04-10T19:16:24Z",
+      "side": 1,
+      "message": "There is a test case which expects every proto field to be set. That test uses lpdump\u0027s output. That\u0027s why I explicitly set it.",
+      "parentUuid": "0a7b8159_061e7571",
+      "range": {
+        "startLine": 236,
+        "startChar": 12,
+        "endLine": 236,
+        "endChar": 52
+      },
+      "revId": "6c66b4578de731472dfb19c4ea4818644f453cc9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
