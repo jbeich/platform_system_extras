@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a7b8159_061e7571",
+        "filename": "partition_tools/lpdump.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2023-04-10T19:13:55Z",
+      "side": 1,
+      "message": "probably better to not set this field at all, and let reader interpret a missing value as \"UNKNOWN\". This saves little bit of disk space.",
+      "range": {
+        "startLine": 236,
+        "startChar": 12,
+        "endLine": 236,
+        "endChar": 52
+      },
+      "revId": "6c66b4578de731472dfb19c4ea4818644f453cc9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
