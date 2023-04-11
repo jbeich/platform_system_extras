@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b062478_72fe44a7",
+        "filename": "simpleperf/cmd_merge.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1978766
+      },
+      "writtenOn": "2023-04-11T22:03:34Z",
+      "side": 1,
+      "message": "Will it be okay to define `operator\u003d\u003d` for `perf_event_attr`?",
+      "revId": "8e169b810b6ace735e51aa0a2f4294cd3a2fc21b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7032e7f_8797f1ce",
+        "filename": "simpleperf/record_file_reader.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1978766
+      },
+      "writtenOn": "2023-04-11T22:03:34Z",
+      "side": 1,
+      "message": "Doesn\u0027t the default constructor of `event_attrs_[i].attr`, after resize above would initialize this?",
+      "revId": "8e169b810b6ace735e51aa0a2f4294cd3a2fc21b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a78e44bc_4378c661",
+        "filename": "simpleperf/record_file_reader.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1978766
+      },
+      "writtenOn": "2023-04-11T22:03:34Z",
+      "side": 1,
+      "message": "Assuming we do memset above because the sizeof(perf_event_attr) !\u003d attr_size_in_file. When `attr_size_in_file \u003c sizeof(perf_event_attr)`, does the `event_attrs_[i].attr` initialize correctly?",
+      "revId": "8e169b810b6ace735e51aa0a2f4294cd3a2fc21b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
