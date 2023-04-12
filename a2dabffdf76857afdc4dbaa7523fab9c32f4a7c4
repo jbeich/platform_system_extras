@@ -16,6 +16,91 @@
       "message": "Works well for me to extract the latest Fairphone FP3 firmware images from 3 split super partitions. Thx @dk1978!",
       "revId": "a2dabffdf76857afdc4dbaa7523fab9c32f4a7c4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7657ea6_b5e2e6ee",
+        "filename": "partition_tools/lpunpack.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1290458
+      },
+      "writtenOn": "2023-04-12T22:46:21Z",
+      "side": 1,
+      "message": "For new methods, prefer android::base::borrowed_fd instead of raw int (you can put a \"using\" line to avoid the long name).",
+      "revId": "a2dabffdf76857afdc4dbaa7523fab9c32f4a7c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "129a3aca_8ee0dfb1",
+        "filename": "partition_tools/lpunpack.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1290458
+      },
+      "writtenOn": "2023-04-12T22:46:21Z",
+      "side": 1,
+      "message": "drop \"split\" from here, since split super is still one conceptual image.",
+      "revId": "a2dabffdf76857afdc4dbaa7523fab9c32f4a7c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7de8478_d9b17fc7",
+        "filename": "partition_tools/lpunpack.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1290458
+      },
+      "writtenOn": "2023-04-12T22:46:21Z",
+      "side": 1,
+      "message": "Instead of using \"image_files(1)\" above, you can do:\n\n    image_files.emplace(image_files.begin(), argv[optind++]);",
+      "revId": "a2dabffdf76857afdc4dbaa7523fab9c32f4a7c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31fb61c8_06dfce1c",
+        "filename": "partition_tools/lpunpack.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1290458
+      },
+      "writtenOn": "2023-04-12T22:46:21Z",
+      "side": 1,
+      "message": "nit: \"for (\" (did clang-format run?)",
+      "revId": "a2dabffdf76857afdc4dbaa7523fab9c32f4a7c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4603ab0e_ee306eed",
+        "filename": "partition_tools/lpunpack.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1290458
+      },
+      "writtenOn": "2023-04-12T22:46:21Z",
+      "side": 1,
+      "message": "\"if (!metadata) {\" is a bit more readable.",
+      "revId": "a2dabffdf76857afdc4dbaa7523fab9c32f4a7c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
