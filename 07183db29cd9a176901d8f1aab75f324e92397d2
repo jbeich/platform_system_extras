@@ -33,6 +33,24 @@
       "message": "Assumedly, Soong won\u0027t guarantee that consumers of the library included _FILE_OFFSET_BITS\u003d64? Should there be an #if ... #error check in the header?",
       "revId": "07183db29cd9a176901d8f1aab75f324e92397d2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9f081df_a7e1d927",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2023-04-12T22:25:09Z",
+      "side": 1,
+      "message": "Consumers shouldn\u0027t care, off_t is not part of the API of libext4_utils, it is only used internally.",
+      "parentUuid": "bcb60d53_95cb5f19",
+      "revId": "07183db29cd9a176901d8f1aab75f324e92397d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
