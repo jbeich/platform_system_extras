@@ -191,6 +191,24 @@
       "parentUuid": "4603ab0e_ee306eed",
       "revId": "a2dabffdf76857afdc4dbaa7523fab9c32f4a7c4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cbb028e0_b6482bc8",
+        "filename": "partition_tools/lpunpack.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1290458
+      },
+      "writtenOn": "2023-04-17T17:33:25Z",
+      "side": 1,
+      "message": "Check \"!metadata\" instead of \"index \u003d\u003d 0\". It\u0027s effectively the same thing, but makes it clearer that metadata will never be null after the loop terminates.",
+      "parentUuid": "511a37a6_2dc2034c",
+      "revId": "a2dabffdf76857afdc4dbaa7523fab9c32f4a7c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
