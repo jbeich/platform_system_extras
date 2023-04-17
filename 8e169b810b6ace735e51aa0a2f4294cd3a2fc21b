@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "52cedd16_fd42fa8d",
+        "filename": "simpleperf/cmd_merge.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2023-04-17T18:27:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6b062478_72fe44a7",
+      "revId": "8e169b810b6ace735e51aa0a2f4294cd3a2fc21b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f7032e7f_8797f1ce",
@@ -35,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef9ff7d4_cc87bf5c",
+        "filename": "simpleperf/record_file_reader.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2023-04-17T18:27:28Z",
+      "side": 1,
+      "message": "I think no. \"struct perf_event_attr\" is defined in a C header file, and doesn\u0027t have a constructor.",
+      "parentUuid": "f7032e7f_8797f1ce",
+      "revId": "8e169b810b6ace735e51aa0a2f4294cd3a2fc21b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a78e44bc_4378c661",
@@ -48,6 +84,24 @@
       "writtenOn": "2023-04-11T22:03:34Z",
       "side": 1,
       "message": "Assuming we do memset above because the sizeof(perf_event_attr) !\u003d attr_size_in_file. When `attr_size_in_file \u003c sizeof(perf_event_attr)`, does the `event_attrs_[i].attr` initialize correctly?",
+      "revId": "8e169b810b6ace735e51aa0a2f4294cd3a2fc21b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8d5b09c_b243b1b4",
+        "filename": "simpleperf/record_file_reader.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2023-04-17T18:27:28Z",
+      "side": 1,
+      "message": "Yes, extra fields in memory can be disabled by memset. Updated comment and code to better reflect that.",
+      "parentUuid": "a78e44bc_4378c661",
       "revId": "8e169b810b6ace735e51aa0a2f4294cd3a2fc21b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
