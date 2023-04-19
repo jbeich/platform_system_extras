@@ -16,6 +16,24 @@
       "message": "nit: typo.",
       "revId": "99e00ea9df9838e15d5d03f6520e9c6100578d11",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b529ff74_e1dea461",
+        "filename": "simpleperf/dso.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 576,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2023-04-19T17:20:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b995153c_f395383e",
+      "revId": "99e00ea9df9838e15d5d03f6520e9c6100578d11",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
