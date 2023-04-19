@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b995153c_f395383e",
+        "filename": "simpleperf/dso.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 576,
+      "author": {
+        "id": 1978766
+      },
+      "writtenOn": "2023-04-19T03:28:06Z",
+      "side": 1,
+      "message": "nit: typo.",
+      "revId": "99e00ea9df9838e15d5d03f6520e9c6100578d11",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
