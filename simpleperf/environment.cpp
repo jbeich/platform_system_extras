@@ -241,6 +241,16 @@ bool CanRecordRawData() {
 #endif
 }
 
+std::optional<uint64_t> GetMemorySize() {
+  std::unique_ptr<FILE, decltype(&fclose)> fp(fopen("/proc/meminfo", "r"), fclose);
+  uint64_t size;
+  if (fp && fscanf(fp.get(), "MemTotal:%" PRIu64 " k", &size) == 1) {
+    return size * kKilobyte;
+  }
+  PLOG(ERROR) << "failed to get memory size";
+  return std::nullopt;
+}
+
 static const char* GetLimitLevelDescription(int limit_level) {
   switch (limit_level) {
     case -1:
@@ -955,7 +965,9 @@ std::string GetCompleteProcessName(pid_t pid) {
   if (pos != std::string::npos) {
     argv0.resize(pos);
   }
-  return android::base::Basename(argv0);
+  // argv0 can be empty if the process is in zombie state. In that case, we don't want to pass argv0
+  // to Basename(), which returns ".".
+  return argv0.empty() ? std::string() : android::base::Basename(argv0);
 }
 
 const char* GetTraceFsDir() {

@@ -98,23 +98,17 @@ static std::unordered_map<std::string, int> clockid_map = {
 
 // The max size of records dumped by kernel is 65535, and dump stack size
 // should be a multiply of 8, so MAX_DUMP_STACK_SIZE is 65528.
-constexpr uint32_t MAX_DUMP_STACK_SIZE = 65528;
+static constexpr uint32_t MAX_DUMP_STACK_SIZE = 65528;
 
 // The max allowed pages in mapped buffer is decided by rlimit(RLIMIT_MEMLOCK).
 // Here 1024 is a desired value for pages in mapped buffer. If mapped
 // successfully, the buffer size = 1024 * 4K (page size) = 4M.
-constexpr size_t DESIRED_PAGES_IN_MAPPED_BUFFER = 1024;
+static constexpr size_t DESIRED_PAGES_IN_MAPPED_BUFFER = 1024;
 
 // Cache size used by CallChainJoiner to cache call chains in memory.
-constexpr size_t DEFAULT_CALL_CHAIN_JOINER_CACHE_SIZE = 8 * 1024 * 1024;
+static constexpr size_t DEFAULT_CALL_CHAIN_JOINER_CACHE_SIZE = 8 * kMegabyte;
 
-// Currently, the record buffer size in user-space is set to match the kernel buffer size on a
-// 8 core system. For system-wide recording, it is 8K pages * 4K page_size * 8 cores = 256MB.
-// For non system-wide recording, it is 1K pages * 4K page_size * 8 cores = 64MB.
-static constexpr size_t kDefaultRecordBufferSize = 64 * 1024 * 1024;
-static constexpr size_t kDefaultSystemWideRecordBufferSize = 256 * 1024 * 1024;
-
-static constexpr size_t kDefaultAuxBufferSize = 4 * 1024 * 1024;
+static constexpr size_t kDefaultAuxBufferSize = 4 * kMegabyte;
 
 // On Pixel 3, it takes about 1ms to enable ETM, and 16-40ms to disable ETM and copy 4M ETM data.
 // So make default period to 100ms.
@@ -127,6 +121,30 @@ struct TimeStat {
   uint64_t finish_recording_time = 0;
   uint64_t post_process_time = 0;
 };
+
+std::optional<size_t> GetDefaultRecordBufferSize(bool system_wide_recording) {
+  // Currently, the record buffer size in user-space is set to match the kernel buffer size on a
+  // 8 core system. For system-wide recording, it is 8K pages * 4K page_size * 8 cores = 256MB.
+  // For non system-wide recording, it is 1K pages * 4K page_size * 8 cores = 64MB.
+  // But on devices with memory >= 4GB, we increase buffer size to 256MB. This reduces the chance
+  // of cutting samples, which can cause broken callchains.
+  static constexpr size_t kLowMemoryRecordBufferSize = 64 * kMegabyte;
+  static constexpr size_t kHighMemoryRecordBufferSize = 256 * kMegabyte;
+  static constexpr size_t kSystemWideRecordBufferSize = 256 * kMegabyte;
+  // Ideally we can use >= 4GB here. But the memory size shown in /proc/meminfo is like to be 3.x GB
+  // on a device with 4GB memory. So we have to use <= 3GB.
+  static constexpr uint64_t kLowMemoryLimit = 3 * kGigabyte;
+
+  if (system_wide_recording) {
+    return kSystemWideRecordBufferSize;
+  }
+  auto device_memory = GetMemorySize();
+  if (!device_memory.has_value()) {
+    return std::nullopt;
+  }
+  return device_memory.value() <= kLowMemoryLimit ? kLowMemoryRecordBufferSize
+                                                  : kHighMemoryRecordBufferSize;
+}
 
 class RecordCommand : public Command {
  public:
@@ -220,8 +238,7 @@ class RecordCommand : public Command {
 "                It should be a power of 2. If not set, the max possible value <= 1024\n"
 "                will be used.\n"
 "--user-buffer-size <buffer_size> Set buffer size in userspace to cache sample data.\n"
-"                                 By default, it is 64M for process recording and 256M\n"
-"                                 for system wide recording.\n"
+"                                 By default, it is %s.\n"
 "--aux-buffer-size <buffer_size>  Set aux buffer size, only used in cs-etm event type.\n"
 "                                 Need to be power of 2 and page size aligned.\n"
 "                                 Used memory size is (buffer_size * (cpu_count + 1).\n"
@@ -323,7 +340,6 @@ RECORD_FILTER_OPTION_HELP_MSG_FOR_RECORDING
         mmap_page_range_(std::make_pair(1, DESIRED_PAGES_IN_MAPPED_BUFFER)),
         record_filename_("perf.data"),
         sample_record_count_(0),
-        lost_record_count_(0),
         in_app_context_(false),
         trace_offcpu_(false),
         exclude_kernel_callchain_(false),
@@ -338,6 +354,7 @@ RECORD_FILTER_OPTION_HELP_MSG_FOR_RECORDING
     signal(SIGPIPE, SIG_IGN);
   }
 
+  std::string LongHelpString() const override;
   void Run(const std::vector<std::string>& args, int* exit_code) override;
   bool Run(const std::vector<std::string>& args) override {
     int exit_code;
@@ -356,8 +373,8 @@ RECORD_FILTER_OPTION_HELP_MSG_FOR_RECORDING
   bool TraceOffCpu();
   bool SetEventSelectionFlags();
   bool CreateAndInitRecordFile();
-  std::unique_ptr<RecordFileWriter> CreateRecordFile(
-      const std::string& filename, const std::vector<EventAttrWithId>& override_attrs);
+  std::unique_ptr<RecordFileWriter> CreateRecordFile(const std::string& filename,
+                                                     const EventAttrIds& attrs);
   bool DumpKernelSymbol();
   bool DumpTracingData();
   bool DumpMaps();
@@ -419,7 +436,6 @@ RECORD_FILTER_OPTION_HELP_MSG_FOR_RECORDING
   android::base::unique_fd stop_signal_fd_;
 
   uint64_t sample_record_count_;
-  uint64_t lost_record_count_;
   android::base::unique_fd start_profiling_fd_;
   bool stdio_controls_profiling_ = false;
 
@@ -453,6 +469,27 @@ RECORD_FILTER_OPTION_HELP_MSG_FOR_RECORDING
   bool use_cmd_exit_code_ = false;
   std::vector<std::string> add_counters_;
 };
+
+std::string RecordCommand::LongHelpString() const {
+  uint64_t process_buffer_size = 0;
+  uint64_t system_wide_buffer_size = 0;
+  if (auto size = GetDefaultRecordBufferSize(false); size) {
+    process_buffer_size = size.value() / kMegabyte;
+  }
+  if (auto size = GetDefaultRecordBufferSize(true); size) {
+    system_wide_buffer_size = size.value() / kMegabyte;
+  }
+  std::string buffer_size_str;
+  if (process_buffer_size == system_wide_buffer_size) {
+    buffer_size_str = android::base::StringPrintf("%" PRIu64 "M", process_buffer_size);
+  } else {
+    buffer_size_str =
+        android::base::StringPrintf("%" PRIu64 "M for process recording and %" PRIu64
+                                    "M\n                                 for system wide recording",
+                                    process_buffer_size, system_wide_buffer_size);
+  }
+  return android::base::StringPrintf(long_help_string_.c_str(), buffer_size_str.c_str());
+}
 
 void RecordCommand::Run(const std::vector<std::string>& args, int* exit_code) {
   *exit_code = 1;
@@ -616,8 +653,11 @@ bool RecordCommand::PrepareRecording(Workload* workload) {
   if (user_buffer_size_.has_value()) {
     record_buffer_size = user_buffer_size_.value();
   } else {
-    record_buffer_size =
-        system_wide_collection_ ? kDefaultSystemWideRecordBufferSize : kDefaultRecordBufferSize;
+    auto default_size = GetDefaultRecordBufferSize(system_wide_collection_);
+    if (!default_size.has_value()) {
+      return false;
+    }
+    record_buffer_size = default_size.value();
   }
   if (!event_selection_set_.MmapEventFiles(mmap_page_range_.first, mmap_page_range_.second,
                                            aux_buffer_size_, record_buffer_size,
@@ -811,23 +851,55 @@ bool RecordCommand::PostProcessRecording(const std::vector<std::string>& args) {
       LOG(INFO) << "Aux data lost in user space: " << record_stat.lost_aux_data_size;
     }
   } else {
-    std::string cut_samples;
-    if (record_stat.cut_stack_samples > 0) {
-      cut_samples = android::base::StringPrintf(" (cut %zu)", record_stat.cut_stack_samples);
+    // Here we report all lost records as samples. This isn't accurate. Because records like
+    // MmapRecords are not samples. But It's easier for users to understand.
+    size_t userspace_lost_samples =
+        record_stat.userspace_lost_samples + record_stat.userspace_lost_non_samples;
+    size_t lost_samples = record_stat.kernelspace_lost_records + userspace_lost_samples;
+
+    std::stringstream os;
+    os << "Samples recorded: " << sample_record_count_;
+    if (record_stat.userspace_cut_stack_samples > 0) {
+      os << " (cut " << record_stat.userspace_cut_stack_samples << ")";
     }
-    lost_record_count_ += record_stat.lost_samples + record_stat.lost_non_samples;
-    LOG(INFO) << "Samples recorded: " << sample_record_count_ << cut_samples
-              << ". Samples lost: " << lost_record_count_ << ".";
-    LOG(DEBUG) << "In user space, dropped " << record_stat.lost_samples << " samples, "
-               << record_stat.lost_non_samples << " non samples, cut stack of "
-               << record_stat.cut_stack_samples << " samples.";
-    if (sample_record_count_ + lost_record_count_ != 0) {
-      double lost_percent =
-          static_cast<double>(lost_record_count_) / (lost_record_count_ + sample_record_count_);
-      constexpr double LOST_PERCENT_WARNING_BAR = 0.1;
-      if (lost_percent >= LOST_PERCENT_WARNING_BAR) {
-        LOG(WARNING) << "Lost " << (lost_percent * 100) << "% of samples, "
-                     << "consider increasing mmap_pages(-m), "
+    os << ". Samples lost: " << lost_samples;
+    if (lost_samples != 0) {
+      os << " (kernelspace: " << record_stat.kernelspace_lost_records
+         << ", userspace: " << userspace_lost_samples << ")";
+    }
+    os << ".";
+    LOG(INFO) << os.str();
+
+    LOG(DEBUG) << "Record stat: kernelspace_lost_records=" << record_stat.kernelspace_lost_records
+               << ", userspace_lost_samples=" << record_stat.userspace_lost_samples
+               << ", userspace_lost_non_samples=" << record_stat.userspace_lost_non_samples
+               << ", userspace_cut_stack_samples=" << record_stat.userspace_cut_stack_samples;
+
+    if (sample_record_count_ + record_stat.kernelspace_lost_records != 0) {
+      double kernelspace_lost_percent =
+          static_cast<double>(record_stat.kernelspace_lost_records) /
+          (record_stat.kernelspace_lost_records + sample_record_count_);
+      constexpr double KERNELSPACE_LOST_PERCENT_WARNING_BAR = 0.1;
+      if (kernelspace_lost_percent >= KERNELSPACE_LOST_PERCENT_WARNING_BAR) {
+        LOG(WARNING) << "Lost " << (kernelspace_lost_percent * 100)
+                     << "% of samples in kernel space, "
+                     << "consider increasing kernel buffer size(-m), "
+                     << "or decreasing sample frequency(-f), "
+                     << "or increasing sample period(-c).";
+      }
+    }
+    size_t userspace_lost_cut_samples =
+        userspace_lost_samples + record_stat.userspace_cut_stack_samples;
+    size_t userspace_complete_samples =
+        sample_record_count_ - record_stat.userspace_cut_stack_samples;
+    if (userspace_complete_samples + userspace_lost_cut_samples != 0) {
+      double userspace_lost_percent = static_cast<double>(userspace_lost_cut_samples) /
+                                      (userspace_complete_samples + userspace_lost_cut_samples);
+      constexpr double USERSPACE_LOST_PERCENT_WARNING_BAR = 0.1;
+      if (userspace_lost_percent >= USERSPACE_LOST_PERCENT_WARNING_BAR) {
+        LOG(WARNING) << "Lost/Cut " << (userspace_lost_percent * 100)
+                     << "% of samples in user space, "
+                     << "consider increasing userspace buffer size(--user-buffer-size), "
                      << "or decreasing sample frequency(-f), "
                      << "or increasing sample period(-c).";
       }
@@ -1300,32 +1372,35 @@ bool RecordCommand::SetEventSelectionFlags() {
 }
 
 bool RecordCommand::CreateAndInitRecordFile() {
-  record_file_writer_ =
-      CreateRecordFile(record_filename_, event_selection_set_.GetEventAttrWithId());
+  EventAttrIds attrs = event_selection_set_.GetEventAttrWithId();
+  bool remove_regs_and_stacks = unwind_dwarf_callchain_ && !post_unwind_;
+  if (remove_regs_and_stacks) {
+    for (auto& attr : attrs) {
+      ReplaceRegAndStackWithCallChain(attr.attr);
+    }
+  }
+  record_file_writer_ = CreateRecordFile(record_filename_, attrs);
   if (record_file_writer_ == nullptr) {
     return false;
   }
   // Use first perf_event_attr and first event id to dump mmap and comm records.
-  dumping_attr_id_ = event_selection_set_.GetEventAttrWithId()[0];
+  CHECK(!attrs.empty());
+  dumping_attr_id_ = attrs[0];
   CHECK(!dumping_attr_id_.ids.empty());
-  map_record_reader_.emplace(*dumping_attr_id_.attr, dumping_attr_id_.ids[0],
+  map_record_reader_.emplace(dumping_attr_id_.attr, dumping_attr_id_.ids[0],
                              event_selection_set_.RecordNotExecutableMaps());
   map_record_reader_->SetCallback([this](Record* r) { return ProcessRecord(r); });
 
   return DumpKernelSymbol() && DumpTracingData() && DumpMaps() && DumpAuxTraceInfo();
 }
 
-std::unique_ptr<RecordFileWriter> RecordCommand::CreateRecordFile(
-    const std::string& filename, const std::vector<EventAttrWithId>& attrs) {
+std::unique_ptr<RecordFileWriter> RecordCommand::CreateRecordFile(const std::string& filename,
+                                                                  const EventAttrIds& attrs) {
   std::unique_ptr<RecordFileWriter> writer = RecordFileWriter::CreateInstance(filename);
-  if (writer == nullptr) {
-    return nullptr;
+  if (writer != nullptr && writer->WriteAttrSection(attrs)) {
+    return writer;
   }
-
-  if (!writer->WriteAttrSection(attrs)) {
-    return nullptr;
-  }
-  return writer;
+  return nullptr;
 }
 
 bool RecordCommand::DumpKernelSymbol() {
@@ -1506,8 +1581,6 @@ bool RecordCommand::SaveRecordAfterUnwinding(Record* record) {
       return true;
     }
     sample_record_count_++;
-  } else if (record->type() == PERF_RECORD_LOST) {
-    lost_record_count_ += static_cast<LostRecord*>(record)->lost;
   } else {
     thread_tree_.Update(*record);
   }
@@ -1525,8 +1598,6 @@ bool RecordCommand::SaveRecordWithoutUnwinding(Record* record) {
       return true;
     }
     sample_record_count_++;
-  } else if (record->type() == PERF_RECORD_LOST) {
-    lost_record_count_ += static_cast<LostRecord*>(record)->lost;
   }
   return record_file_writer_->WriteRecord(*record);
 }
@@ -1537,7 +1608,7 @@ bool RecordCommand::ProcessJITDebugInfo(const std::vector<JITDebugInfo>& debug_i
     if (info.type == JITDebugInfo::JIT_DEBUG_JIT_CODE) {
       uint64_t timestamp =
           jit_debug_reader_->SyncWithRecords() ? info.timestamp : last_record_timestamp_;
-      Mmap2Record record(*dumping_attr_id_.attr, false, info.pid, info.pid, info.jit_code_addr,
+      Mmap2Record record(dumping_attr_id_.attr, false, info.pid, info.pid, info.jit_code_addr,
                          info.jit_code_len, info.file_offset, map_flags::PROT_JIT_SYMFILE_MAP,
                          info.file_path, dumping_attr_id_.ids[0], timestamp);
       if (!ProcessRecord(&record)) {
@@ -1548,7 +1619,7 @@ bool RecordCommand::ProcessJITDebugInfo(const std::vector<JITDebugInfo>& debug_i
         ThreadMmap& map = *info.extracted_dex_file_map;
         uint64_t timestamp =
             jit_debug_reader_->SyncWithRecords() ? info.timestamp : last_record_timestamp_;
-        Mmap2Record record(*dumping_attr_id_.attr, false, info.pid, info.pid, map.start_addr,
+        Mmap2Record record(dumping_attr_id_.attr, false, info.pid, info.pid, map.start_addr,
                            map.len, map.pgoff, map.prot, map.name, dumping_attr_id_.ids[0],
                            timestamp);
         if (!ProcessRecord(&record)) {
@@ -1711,11 +1782,15 @@ std::unique_ptr<RecordFileReader> RecordCommand::MoveRecordFile(const std::strin
     return nullptr;
   }
   record_file_writer_.reset();
-  {
-    std::error_code ec;
-    std::filesystem::rename(record_filename_, old_filename, ec);
-    if (ec) {
-      LOG(ERROR) << "Failed to rename: " << ec.message();
+  std::error_code ec;
+  std::filesystem::rename(record_filename_, old_filename, ec);
+  if (ec) {
+    LOG(DEBUG) << "Failed to rename: " << ec.message();
+    // rename() fails on Android N x86 emulator, which uses kernel 3.10. Because rename() in bionic
+    // uses renameat2 syscall, which isn't support on kernel < 3.15. So add a fallback to mv
+    // command. The mv command can also work with other situations when rename() doesn't work.
+    // So we'd like to keep it as a fallback to rename().
+    if (!Workload::RunCmd({"mv", record_filename_, old_filename})) {
       return nullptr;
     }
   }
@@ -1774,8 +1849,16 @@ bool RecordCommand::PostUnwindRecords() {
   if (!reader) {
     return false;
   }
+  // Write new event attrs without regs and stacks fields.
+  EventAttrIds attrs = reader->AttrSection();
+  for (auto& attr : attrs) {
+    ReplaceRegAndStackWithCallChain(attr.attr);
+  }
+  if (!record_file_writer_->WriteAttrSection(attrs)) {
+    return false;
+  }
+
   sample_record_count_ = 0;
-  lost_record_count_ = 0;
   auto callback = [this](std::unique_ptr<Record> record) {
     return SaveRecordAfterUnwinding(record.get());
   };
@@ -2032,6 +2115,15 @@ bool RecordCommand::DumpMetaInfoFeature(bool kernel_symbols_available) {
   if (dwarf_callchain_sampling_ && !unwind_dwarf_callchain_) {
     OfflineUnwinder::CollectMetaInfo(&info_map);
   }
+  auto record_stat = event_selection_set_.GetRecordStat();
+  info_map["record_stat"] = android::base::StringPrintf(
+      "sample_record_count=%" PRIu64
+      ",kernelspace_lost_records=%zu,userspace_lost_samples=%zu,"
+      "userspace_lost_non_samples=%zu,userspace_cut_stack_samples=%zu",
+      sample_record_count_, record_stat.kernelspace_lost_records,
+      record_stat.userspace_lost_samples, record_stat.userspace_lost_non_samples,
+      record_stat.userspace_cut_stack_samples);
+
   return record_file_writer_->WriteMetaInfoFeature(info_map);
 }
 
