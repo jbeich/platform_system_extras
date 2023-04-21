@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af904f32_ed0765c1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1272573
+      },
+      "writtenOn": "2023-04-21T03:16:20Z",
+      "side": 1,
+      "message": "Hi, Friendly ping @Yabin, I think you were OOO when I mailed this out, pinging to top of your inbox :-)",
+      "revId": "bb14562548442ceeb2abf433b79090440fb269eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
