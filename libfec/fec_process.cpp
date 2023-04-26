@@ -107,12 +107,10 @@ ssize_t process(fec_handle *f, uint8_t *buf, size_t count, uint64_t offset,
         }
 
         pos = end;
-        end  += count_per_thread;
+        end += count_per_thread;
         left -= info[i].count;
     }
-
-    check(left == 0);
-
+    
     ssize_t nread = 0;
 
     /* wait for all threads to complete */
