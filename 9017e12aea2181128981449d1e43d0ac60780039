@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb908c87_8b101410",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1964171
+      },
+      "writtenOn": "2023-04-26T21:27:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9838b7a7_5f4c4fc4",
+      "revId": "9017e12aea2181128981449d1e43d0ac60780039",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fe47e985_dc6b4a4d",
@@ -48,6 +66,30 @@
       "writtenOn": "2023-04-26T21:14:17Z",
       "side": 1,
       "message": "buf is owned by caller, `process` didn\u0027t allocate it, so no need to free `buf`.",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 43
+      },
+      "revId": "9017e12aea2181128981449d1e43d0ac60780039",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9f0950e_0d3f27f3",
+        "filename": "libfec/fec_process.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1964171
+      },
+      "writtenOn": "2023-04-26T21:27:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe47e985_dc6b4a4d",
       "range": {
         "startLine": 43,
         "startChar": 0,
