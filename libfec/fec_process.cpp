@@ -18,31 +18,31 @@
 
 struct process_info {
     int id;
-    fec_handle *f;
-    uint8_t *buf;
+    fec_handle* f;
+    uint8_t* buf;
     size_t count;
     uint64_t offset;
     read_func func;
     ssize_t rc;
     size_t errors;
+    ~process_info() {
+        delete f;
+        delete buf;
+    }
 };
 
 /* thread function  */
-static void * __process(void *cookie)
-{
-    process_info *p = static_cast<process_info *>(cookie);
+static void* __process(void* cookie) {
+    process_info* p = static_cast<process_info*>(cookie);
 
-    debug("thread %d: [%" PRIu64 ", %" PRIu64 ")", p->id, p->offset,
-        p->offset + p->count);
+    debug("thread %d: [%" PRIu64 ", %" PRIu64 ")", p->id, p->offset, p->offset + p->count);
 
     p->rc = p->func(p->f, p->buf, p->count, p->offset, &p->errors);
     return p;
 }
 
 /* launches a maximum number of threads to process a read */
-ssize_t process(fec_handle *f, uint8_t *buf, size_t count, uint64_t offset,
-        read_func func)
-{
+ssize_t process(fec_handle* f, uint8_t* buf, size_t count, uint64_t offset, read_func func) {
     check(f);
     check(buf);
     check(func);
@@ -73,8 +73,7 @@ ssize_t process(fec_handle *f, uint8_t *buf, size_t count, uint64_t offset,
     uint64_t pos = offset;
     uint64_t end = start + count_per_thread;
 
-    debug("%d threads, %zu bytes per thread (total %zu)", threads,
-        count_per_thread, count);
+    debug("%d threads, %zu bytes per thread (total %zu)", threads, count_per_thread, count);
 
     std::vector<pthread_t> handles;
     process_info info[threads];
@@ -107,7 +106,7 @@ ssize_t process(fec_handle *f, uint8_t *buf, size_t count, uint64_t offset,
         }
 
         pos = end;
-        end  += count_per_thread;
+        end += count_per_thread;
         left -= info[i].count;
     }
 
@@ -117,9 +116,9 @@ ssize_t process(fec_handle *f, uint8_t *buf, size_t count, uint64_t offset,
 
     /* wait for all threads to complete */
     for (auto thread : handles) {
-        process_info *p = NULL;
+        process_info* p = NULL;
 
-        if (pthread_join(thread, (void **)&p) != 0) {
+        if (pthread_join(thread, (void**)&p) != 0) {
             error("failed to join thread: %s", strerror(errno));
             rc = -1;
         } else if (!p || p->rc == -1) {
