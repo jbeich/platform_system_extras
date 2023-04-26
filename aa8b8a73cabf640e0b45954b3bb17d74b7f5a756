@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1fe2ae04_84b144dd",
+        "filename": "libfec/fec_process.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2023-04-26T21:37:37Z",
+      "side": 1,
+      "message": "Come to think of it, maybe it would be a good idea to figure out why `left` isn\u0027t zero. We\u0027re not leaving the loop until we try to start all the threads, right? Is there some other issue at play here?",
+      "parentUuid": "68ad68ac_690c04eb",
+      "range": {
+        "startLine": 116,
+        "startChar": 0,
+        "endLine": 119,
+        "endChar": 9
+      },
+      "revId": "aa8b8a73cabf640e0b45954b3bb17d74b7f5a756",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c408db79_06e80f83",
         "filename": "libfec/fec_process.cpp",
         "patchSetId": 6
