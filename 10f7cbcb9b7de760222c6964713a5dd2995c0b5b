@@ -22,6 +22,30 @@
       },
       "revId": "10f7cbcb9b7de760222c6964713a5dd2995c0b5b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3e36c3b_4c552c06",
+        "filename": "libfec/fec_process.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2023-04-26T20:12:23Z",
+      "side": 1,
+      "message": "actually, `process` function receives the `buf` from caller, so `buf `is unmanaged. We don\u0027t need to free it. We just need to call pthread_join on all the threads.",
+      "parentUuid": "b6dfe285_aba22245",
+      "range": {
+        "startLine": 88,
+        "startChar": 0,
+        "endLine": 88,
+        "endChar": 41
+      },
+      "revId": "10f7cbcb9b7de760222c6964713a5dd2995c0b5b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
