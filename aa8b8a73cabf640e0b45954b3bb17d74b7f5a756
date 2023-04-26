@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "68ad68ac_690c04eb",
+        "filename": "libfec/fec_process.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2023-04-26T21:35:51Z",
+      "side": 1,
+      "message": "Reading the bug, the problem is that `check` returns if the condition isn\u0027t met. Just drop the `check(left \u003d\u003d 0)` line to fix the issue. `rc` should already be negative if this happens, but maybe you can double check that we\u0027re returning an error in that case.",
+      "parentUuid": "5b07f9c9_adac6c85",
+      "range": {
+        "startLine": 116,
+        "startChar": 0,
+        "endLine": 119,
+        "endChar": 9
+      },
+      "revId": "aa8b8a73cabf640e0b45954b3bb17d74b7f5a756",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c408db79_06e80f83",
         "filename": "libfec/fec_process.cpp",
         "patchSetId": 6
