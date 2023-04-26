@@ -73,8 +73,8 @@ ssize_t process(fec_handle *f, uint8_t *buf, size_t count, uint64_t offset,
     uint64_t pos = offset;
     uint64_t end = start + count_per_thread;
 
-    debug("%d threads, %zu bytes per thread (total %zu)", threads,
-        count_per_thread, count);
+    debug("%d threads, %zu bytes per thread (total %zu)", threads, count_per_thread, count);
+
 
     std::vector<pthread_t> handles;
     process_info info[threads];
@@ -107,11 +107,17 @@ ssize_t process(fec_handle *f, uint8_t *buf, size_t count, uint64_t offset,
         }
 
         pos = end;
-        end  += count_per_thread;
+        end += count_per_thread;
         left -= info[i].count;
     }
 
-    check(left == 0);
+    if (left != 0) {
+        for (auto thread : handles) {
+            process_info *p = NULL;
+            pthread_join(thread, (void**)&p);
+        }
+        return -1;
+    }
 
     ssize_t nread = 0;
 
