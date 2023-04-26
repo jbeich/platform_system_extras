@@ -98,6 +98,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "caea44ce_debf6b7b",
+        "filename": "libfec/fec_process.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1964171
+      },
+      "writtenOn": "2023-04-26T21:58:33Z",
+      "side": 1,
+      "message": "If the logic works out, then it does look like left \u003d\u003d 0 should always be the case. I can ask the folks who filed the bug to find out more details as to why this check is failing before adding to this CL.",
+      "parentUuid": "1fe2ae04_84b144dd",
+      "range": {
+        "startLine": 116,
+        "startChar": 0,
+        "endLine": 119,
+        "endChar": 9
+      },
+      "revId": "aa8b8a73cabf640e0b45954b3bb17d74b7f5a756",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c408db79_06e80f83",
         "filename": "libfec/fec_process.cpp",
         "patchSetId": 6
