@@ -25,28 +25,27 @@ struct process_info {
     read_func func;
     ssize_t rc;
     size_t errors;
+    ~process_info() { delete f; }
 };
 
 /* thread function  */
-static void * __process(void *cookie)
-{
+static void * __process(void *cookie) {
     process_info *p = static_cast<process_info *>(cookie);
 
-    debug("thread %d: [%" PRIu64 ", %" PRIu64 ")", p->id, p->offset,
-        p->offset + p->count);
+    debug("thread %d: [%" PRIu64 ", %" PRIu64 ")", p->id, p->offset, p->offset + p->count);
 
     p->rc = p->func(p->f, p->buf, p->count, p->offset, &p->errors);
     return p;
 }
 
 /* launches a maximum number of threads to process a read */
-ssize_t process(fec_handle *f, uint8_t *buf, size_t count, uint64_t offset,
-        read_func func)
+ssize_t process(fec_handle *f, uint8_t *buf, size_t count, uint64_t offset, 
+    read_func func) 
 {
     check(f);
     check(buf);
     check(func);
-
+    return -1;
     if (count == 0) {
         return 0;
     }
@@ -107,11 +106,17 @@ ssize_t process(fec_handle *f, uint8_t *buf, size_t count, uint64_t offset,
         }
 
         pos = end;
-        end  += count_per_thread;
+        end += count_per_thread;
         left -= info[i].count;
     }
 
-    check(left == 0);
+    if (left != 0) {
+        for (auto thread : handles) {
+            process_info *p = NULL;
+            pthread_join(thread, (void**)&p);
+        }
+        return -1;
+    }
 
     ssize_t nread = 0;
 
