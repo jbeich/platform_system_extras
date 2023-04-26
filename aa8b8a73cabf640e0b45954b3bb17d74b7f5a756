@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c408db79_06e80f83",
+        "filename": "libfec/fec_process.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2023-04-26T21:26:35Z",
+      "side": 1,
+      "message": "Create a vector of unique_ptr for pthread handles, and let RAII do the destruction for us.",
+      "range": {
+        "startLine": 115,
+        "startChar": 0,
+        "endLine": 121,
+        "endChar": 5
+      },
+      "revId": "aa8b8a73cabf640e0b45954b3bb17d74b7f5a756",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
