@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9838b7a7_5f4c4fc4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2023-04-26T21:11:27Z",
+      "side": 1,
+      "message": "Please don\u0027t make unrelated whitespace changes, i.e. don\u0027t change `type *p` to `type* p` for no reason.",
+      "revId": "9017e12aea2181128981449d1e43d0ac60780039",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
