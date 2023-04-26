@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6dfe285_aba22245",
+        "filename": "libfec/fec_process.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2023-04-26T19:59:42Z",
+      "side": 1,
+      "message": "`process_info` doesn\u0027t actually own its `buf` field, as that `buf` field is just a slice of a larger buffer. Therefore, `process` function should be the one freeing up memory, not destructor of `process_info`",
+      "range": {
+        "startLine": 88,
+        "startChar": 0,
+        "endLine": 88,
+        "endChar": 41
+      },
+      "revId": "10f7cbcb9b7de760222c6964713a5dd2995c0b5b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
