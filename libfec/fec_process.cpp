@@ -25,6 +25,7 @@ struct process_info {
     read_func func;
     ssize_t rc;
     size_t errors;
+    ~process_info() { delete f; }
 };
 
 /* thread function  */
@@ -107,11 +108,17 @@ ssize_t process(fec_handle *f, uint8_t *buf, size_t count, uint64_t offset,
         }
 
         pos = end;
-        end  += count_per_thread;
+        end += count_per_thread;
         left -= info[i].count;
     }
 
-    check(left == 0);
+    if (left != 0) {
+        for (auto thread : handles) {
+            process_info *p = NULL;
+            pthread_join(thread, (void**)&p);
+        }
+        return -1;
+    }
 
     ssize_t nread = 0;
 
