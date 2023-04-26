@@ -18,6 +18,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7846e448_075e5b95",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2023-04-26T21:14:56Z",
+      "side": 1,
+      "message": "As Kelvin points out, this change isn\u0027t correct. The handle and the buffer are both owned by the caller of `fec_pread`.",
+      "revId": "9017e12aea2181128981449d1e43d0ac60780039",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fe47e985_dc6b4a4d",
