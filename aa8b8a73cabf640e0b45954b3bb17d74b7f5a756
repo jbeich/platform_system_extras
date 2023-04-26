@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "66bf5969_3aac5dbd",
+        "filename": "libfec/fec_process.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2023-04-26T21:29:18Z",
+      "side": 1,
+      "message": "Doesn\u0027t the existing loop below already join all the threads before returning?",
+      "range": {
+        "startLine": 116,
+        "startChar": 0,
+        "endLine": 119,
+        "endChar": 9
+      },
+      "revId": "aa8b8a73cabf640e0b45954b3bb17d74b7f5a756",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c408db79_06e80f83",
         "filename": "libfec/fec_process.cpp",
         "patchSetId": 6
