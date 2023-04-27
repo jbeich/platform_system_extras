@@ -60,13 +60,11 @@ ssize_t process(fec_handle *f, uint8_t *buf, size_t count, uint64_t offset,
     }
 
     uint64_t start = (offset / FEC_BLOCKSIZE) * FEC_BLOCKSIZE;
-    size_t blocks = fec_div_round_up(count, FEC_BLOCKSIZE);
-
+    size_t blocks = fec_div_round_up(offset + count - start, FEC_BLOCKSIZE);
     size_t count_per_thread = fec_div_round_up(blocks, threads) * FEC_BLOCKSIZE;
-    size_t max_threads = fec_div_round_up(count, count_per_thread);
 
-    if ((size_t)threads > max_threads) {
-        threads = (int)max_threads;
+    if ((size_t)threads > blocks) {
+        threads = (int)blocks;
     }
 
     size_t left = count;
@@ -111,8 +109,6 @@ ssize_t process(fec_handle *f, uint8_t *buf, size_t count, uint64_t offset,
         left -= info[i].count;
     }
 
-    check(left == 0);
-
     ssize_t nread = 0;
 
     /* wait for all threads to complete */
@@ -130,7 +126,7 @@ ssize_t process(fec_handle *f, uint8_t *buf, size_t count, uint64_t offset,
         }
     }
 
-    if (rc == -1) {
+    if (left > 0 || rc == -1) {
         errno = EIO;
         return -1;
     }
