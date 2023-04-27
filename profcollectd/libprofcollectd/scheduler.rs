@@ -25,7 +25,7 @@ use std::sync::Mutex;
 use std::thread;
 use std::time::{Duration, Instant};
 
-use crate::config::{Config, PROFILE_OUTPUT_DIR, TRACE_OUTPUT_DIR};
+use crate::config::{Config, LOG_FILE, PROFILE_OUTPUT_DIR, TRACE_OUTPUT_DIR};
 use crate::trace_provider::{self, TraceProvider};
 use anyhow::{anyhow, ensure, Context, Result};
 
@@ -41,6 +41,7 @@ pub struct Scheduler {
 impl Scheduler {
     pub fn new() -> Result<Self> {
         let p = trace_provider::get_trace_provider()?;
+        p.lock().unwrap().set_log_file(&LOG_FILE);
         Ok(Scheduler {
             termination_ch: None,
             trace_provider: p,
@@ -157,6 +158,15 @@ impl Scheduler {
                 cb();
             }
         });
+    }
+
+    pub fn clear_trace_log(&self) {
+        let provider = self.trace_provider.lock().unwrap();
+        provider.reset_log_file();
+        if LOG_FILE.exists() {
+            fs::remove_file(*LOG_FILE).unwrap();
+        }
+        provider.set_log_file(&LOG_FILE);
     }
 }
 
