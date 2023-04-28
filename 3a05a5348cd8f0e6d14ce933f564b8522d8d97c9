@@ -70,6 +70,30 @@
       },
       "revId": "3a05a5348cd8f0e6d14ce933f564b8522d8d97c9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eca8976a_b69e7c45",
+        "filename": "libfec/fec_process.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2023-04-28T19:40:06Z",
+      "side": 1,
+      "message": "\u003e It\u0027s why we had the bug initially, and it\u0027s also why we run into the same bug when trying to fix it.\n\nI\u0027m not sure I quite agree with that. We had the bug in both cases because we were miscalculating the number of blocks to access, or the number of threads to spawn, which broke the assumptions in the code. We would have had the same bug with RAII too, but probably it would have been harder to detect since it wouldn\u0027t result in a segfault, but just incomplete data to be returned.\n\nAnyway, I think adding RAII would add a fair amount of complexity here, and I would rather not refactor this code any more than necessary. Checking that there are no returns in the 20 lines of code is probably easier than making sure C++ containers don\u0027t end up accidentally copying data and prematurely joining threads, for example. How would you propose implementing RAII cleanly here?",
+      "parentUuid": "cd1df868_8738cc0f",
+      "range": {
+        "startLine": 118,
+        "startChar": 0,
+        "endLine": 118,
+        "endChar": 53
+      },
+      "revId": "3a05a5348cd8f0e6d14ce933f564b8522d8d97c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
