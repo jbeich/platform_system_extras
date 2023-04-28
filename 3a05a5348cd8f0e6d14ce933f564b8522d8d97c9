@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb057636_7bc19829",
+        "filename": "libfec/fec_process.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1710792
+      },
+      "writtenOn": "2023-04-28T16:09:42Z",
+      "side": 1,
+      "message": "let\u0027s use RAII to free up resources. It\u0027s easy to make mistakes this way.",
+      "range": {
+        "startLine": 118,
+        "startChar": 0,
+        "endLine": 118,
+        "endChar": 53
+      },
+      "revId": "3a05a5348cd8f0e6d14ce933f564b8522d8d97c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
