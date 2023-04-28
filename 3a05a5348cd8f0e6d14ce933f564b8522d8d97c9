@@ -22,6 +22,30 @@
       },
       "revId": "3a05a5348cd8f0e6d14ce933f564b8522d8d97c9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "583813b1_dbcdb575",
+        "filename": "libfec/fec_process.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2023-04-28T18:06:56Z",
+      "side": 1,
+      "message": "Which resources would you like to free up here? We need to explicitly call `pthread_join` to wait for the threads to finish and determine if they succeeded.",
+      "parentUuid": "bb057636_7bc19829",
+      "range": {
+        "startLine": 118,
+        "startChar": 0,
+        "endLine": 118,
+        "endChar": 53
+      },
+      "revId": "3a05a5348cd8f0e6d14ce933f564b8522d8d97c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
