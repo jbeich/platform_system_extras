@@ -16,6 +16,24 @@
       "message": "so when `remove_file` fails, the `set_log_file` will still be called. is this a good idea?",
       "revId": "f1d91d222eb77a04bfe7449816da6ee417365edd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "532bbe9a_b29e960e",
+        "filename": "profcollectd/libprofcollectd/scheduler.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2023-05-01T22:08:03Z",
+      "side": 1,
+      "message": "The log file is in a directory just for profcollectd. I can\u0027t think up a case when profcollectd suddenly loses permission and fails to delete the file. And if it really fails, this function returns Error, which I think will make profcollectd daemon exit. So whether to recover log file setting or not here probably doesn\u0027t matter. I prefer to recover it, mainly caused by a habit to clean up when something fails.",
+      "parentUuid": "b904d0f0_d7635b16",
+      "revId": "f1d91d222eb77a04bfe7449816da6ee417365edd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
