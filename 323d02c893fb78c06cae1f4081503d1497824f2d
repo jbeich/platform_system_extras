@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1b8863e_4d7311c7",
+        "filename": "profcollectd/libprofcollectd/scheduler.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2023-05-01T18:35:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "867d76ca_4a1d2240",
+      "range": {
+        "startLine": 44,
+        "startChar": 16,
+        "endLine": 44,
+        "endChar": 25
+      },
+      "revId": "323d02c893fb78c06cae1f4081503d1497824f2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "43cbb04c_5cd88c3e",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-04-30T04:41:16Z",
       "side": 1,
       "message": "Better to return a `Result` and change the following `unwrap()` to `?`.",
+      "range": {
+        "startLine": 163,
+        "startChar": 11,
+        "endLine": 163,
+        "endChar": 26
+      },
+      "revId": "323d02c893fb78c06cae1f4081503d1497824f2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d11147c_e17a0695",
+        "filename": "profcollectd/libprofcollectd/scheduler.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2023-05-01T18:35:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "43cbb04c_5cd88c3e",
       "range": {
         "startLine": 163,
         "startChar": 11,
