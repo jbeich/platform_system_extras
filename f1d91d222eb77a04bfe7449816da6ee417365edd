@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b904d0f0_d7635b16",
+        "filename": "profcollectd/libprofcollectd/scheduler.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1978766
+      },
+      "writtenOn": "2023-05-01T21:45:50Z",
+      "side": 1,
+      "message": "so when `remove_file` fails, the `set_log_file` will still be called. is this a good idea?",
+      "revId": "f1d91d222eb77a04bfe7449816da6ee417365edd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
