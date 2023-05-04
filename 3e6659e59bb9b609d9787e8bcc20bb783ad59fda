@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7186e170_83a0b36d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2023-05-04T00:52:40Z",
+      "side": 1,
+      "message": "The fix of this flaky test is blocked by another flaky test. I will fix that first.",
+      "revId": "3e6659e59bb9b609d9787e8bcc20bb783ad59fda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
