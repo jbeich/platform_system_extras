@@ -292,7 +292,10 @@ class PprofProfileGenerator(object):
         self.binary_finder = BinaryFinder(config['binary_cache_dir'], self.read_elf)
 
     def load_record_file(self, record_file):
-        self.lib = ReportLib()
+        if self.config['native_lib_path']:
+            self.lib = ReportLib(self.config['native_lib_path'])
+        else:
+            self.lib = ReportLib()
         self.lib.SetRecordFile(record_file)
 
         if self.config['binary_cache_dir']:
@@ -619,6 +622,7 @@ def main():
         The path of generated pprof profile data.""")
     parser.add_argument('--max_chain_length', type=int, default=1000000000, help="""
         Maximum depth of samples to be converted.""")  # Large value as infinity standin.
+    parser.add_argument('--native_lib_path', type=str, help='Set the path to simpleperf dynamic library.')
     parser.add_argument('--ndk_path', type=extant_dir, help='Set the path of a ndk release.')
     parser.add_argument(
         '-j', '--jobs', type=int, default=os.cpu_count(),
@@ -639,6 +643,7 @@ def main():
     config = {}
     config['output_file'] = args.output_file
     config['dso_filters'] = flatten_arg_list(args.dso)
+    config['native_lib_path'] = args.native_lib_path
     config['ndk_path'] = args.ndk_path
     config['max_chain_length'] = args.max_chain_length
     config['report_lib_options'] = args.report_lib_options
