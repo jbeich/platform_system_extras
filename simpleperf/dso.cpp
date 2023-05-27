@@ -573,8 +573,10 @@ class ElfDso : public Dso {
       if (elf) {
         min_vaddr_ = elf->ReadMinExecutableVaddr(&file_offset_of_min_vaddr_);
       } else {
-        LOG(WARNING) << "failed to read min virtual address of " << GetDebugFilePath() << ": "
-                     << status;
+        // This is likely to be a file wrongly thought of as an ELF file, due to stack unwinding.
+        // No need to report it by default.
+        LOG(DEBUG) << "failed to read min virtual address of " << GetDebugFilePath() << ": "
+                   << status;
       }
     }
     *min_vaddr = min_vaddr_;
@@ -637,14 +639,13 @@ class ElfDso : public Dso {
       status = elf->ParseSymbols(symbol_callback);
     }
     android::base::LogSeverity log_level = android::base::WARNING;
-    if (!symbols_.empty()) {
+    if (!symbols_.empty() || !symbols.empty()) {
       // We already have some symbols when recording.
       log_level = android::base::DEBUG;
     }
     if ((status == ElfStatus::FILE_NOT_FOUND || status == ElfStatus::FILE_MALFORMED) &&
         build_id.IsEmpty()) {
-      // This is likely to be a file wongly thought of as an ELF file, maybe due to stack
-      // unwinding.
+      // This is likely to be a file wrongly thought of as an ELF file, due to stack unwinding.
       log_level = android::base::DEBUG;
     }
     ReportReadElfSymbolResult(status, path_, GetDebugFilePath(), log_level);
@@ -1020,6 +1021,32 @@ bool GetBuildIdFromDsoPath(const std::string& dso_path, BuildId* build_id) {
   auto elf = ElfFile::Open(dso_path, &status);
   if (status == ElfStatus::NO_ERROR && elf->GetBuildId(build_id) == ElfStatus::NO_ERROR) {
     return true;
+  }
+  return false;
+}
+
+bool GetBuildId(const Dso& dso, BuildId& build_id) {
+  if (dso.type() == DSO_KERNEL) {
+    if (GetKernelBuildId(&build_id)) {
+      return true;
+    }
+  } else if (dso.type() == DSO_KERNEL_MODULE) {
+    bool has_build_id = false;
+    if (android::base::EndsWith(dso.Path(), ".ko")) {
+      return GetBuildIdFromDsoPath(dso.Path(), &build_id);
+    }
+    if (const std::string& path = dso.Path();
+        path.size() > 2 && path[0] == '[' && path.back() == ']') {
+      // For kernel modules that we can't find the corresponding file, read build id from /sysfs.
+      return GetModuleBuildId(path.substr(1, path.size() - 2), &build_id);
+    }
+  } else if (dso.type() == DSO_ELF_FILE) {
+    if (dso.Path() == DEFAULT_EXECNAME_FOR_THREAD_MMAP || dso.IsForJavaMethod()) {
+      return false;
+    }
+    if (GetBuildIdFromDsoPath(dso.Path(), &build_id)) {
+      return true;
+    }
   }
   return false;
 }
