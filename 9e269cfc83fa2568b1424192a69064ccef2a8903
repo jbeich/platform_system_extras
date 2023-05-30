@@ -50,6 +50,29 @@
       "message": "Maria, could you PTAL from DrNo-Review perspective?\nTY",
       "revId": "9e269cfc83fa2568b1424192a69064ccef2a8903",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa6e937a_6d6a4c9c",
+        "filename": "simpleperf/environment.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 1973455
+      },
+      "writtenOn": "2023-05-30T22:22:59Z",
+      "side": 1,
+      "message": "1 us to 1 ms will be a jump of 1000 times. Please consider an interval of 1 ms? \nWe are trying to keep the execution times under check for quality bar criteria [30 sec max total test time]",
+      "range": {
+        "startLine": 391,
+        "startChar": 2,
+        "endLine": 391,
+        "endChar": 34
+      },
+      "revId": "9e269cfc83fa2568b1424192a69064ccef2a8903",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
