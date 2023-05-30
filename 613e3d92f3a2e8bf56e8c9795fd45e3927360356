@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "42392fd7_523afc60",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1958325
+      },
+      "writtenOn": "2023-05-30T16:26:53Z",
+      "side": 1,
+      "message": "Hi there!\n\nI\u0027ve been trying to use simpleperf on Android to profile Chromium and specifically the V8 JS engine. And, coming from linux, I was missing symbolization of jitted functions. I realized that V8\u0027s `--perf-basic-prof` option which generates `perf-\u003cpid\u003e.map` files didn\u0027t quite work, and I couldn\u0027t fix it without changing simpleperf itself. \n\nEssentially, this is about allowing spaces in symbols, which may sound surprising, but is actually done a lot in V8. It also brings simpleperf\u0027s behaviour closer to that of linux\u0027s perf.\n\nYou can find more details here: https://bugs.chromium.org/p/v8/issues/detail?id\u003d13987\n\nWDYT? \n\nThis is my first contribution to Android, hopefully I have the process right!\n\nThanks,\nPierre",
+      "revId": "613e3d92f3a2e8bf56e8c9795fd45e3927360356",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
