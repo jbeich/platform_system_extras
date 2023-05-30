@@ -33,6 +33,23 @@
       "message": "Who could provide DrNo-Review for this branch?",
       "revId": "9e269cfc83fa2568b1424192a69064ccef2a8903",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b8878a1_163ea2c7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1092278
+      },
+      "writtenOn": "2023-05-30T20:08:18Z",
+      "side": 1,
+      "message": "Maria, could you PTAL from DrNo-Review perspective?\nTY",
+      "revId": "9e269cfc83fa2568b1424192a69064ccef2a8903",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
