@@ -34,6 +34,24 @@
       "parentUuid": "42392fd7_523afc60",
       "revId": "613e3d92f3a2e8bf56e8c9795fd45e3927360356",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d0786c4_b683f177",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2023-05-30T17:44:07Z",
+      "side": 1,
+      "message": "By the way, you can add the bug info in the commit message if you want, like \"Bug: https://...\".",
+      "parentUuid": "14a2f1e3_f814b6fe",
+      "revId": "613e3d92f3a2e8bf56e8c9795fd45e3927360356",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
