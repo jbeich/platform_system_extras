@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e56032f5_ec97c05f",
+        "filename": "simpleperf/scripts/binary_cache_builder.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2023-05-30T23:24:11Z",
+      "side": 1,
+      "message": "We need to support windows. Use something like \"self.binary_dir / build_id[2:] / filename\" instead?",
+      "range": {
+        "startLine": 51,
+        "startChar": 45,
+        "endLine": 51,
+        "endChar": 48
+      },
+      "revId": "4671f7d01f3e94494f85ea1095b3a7d4e6eb6de0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
