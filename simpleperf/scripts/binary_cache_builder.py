@@ -48,7 +48,7 @@ class BinaryCache:
         if build_id:
             filename = device_path.split('/')[-1]
             # Add build id to make the filename unique.
-            unique_filename = build_id[2:] + '-' + filename
+            unique_filename = build_id[2:] + '/' + filename
             return self.binary_dir / unique_filename
 
         # For elf file without build id, we can only follow its path on device. Otherwise,
