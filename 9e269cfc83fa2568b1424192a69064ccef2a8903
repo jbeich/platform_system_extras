@@ -16,6 +16,23 @@
       "message": "PTAL TY",
       "revId": "9e269cfc83fa2568b1424192a69064ccef2a8903",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc6b9fa5_acef3129",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1092278
+      },
+      "writtenOn": "2023-05-30T19:30:41Z",
+      "side": 1,
+      "message": "Who could provide DrNo-Review for this branch?",
+      "revId": "9e269cfc83fa2568b1424192a69064ccef2a8903",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
