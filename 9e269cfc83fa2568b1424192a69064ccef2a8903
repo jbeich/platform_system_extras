@@ -73,6 +73,30 @@
       },
       "revId": "9e269cfc83fa2568b1424192a69064ccef2a8903",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2a8eafc_337c5b81",
+        "filename": "simpleperf/environment.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 1092278
+      },
+      "writtenOn": "2023-05-31T18:49:30Z",
+      "side": 1,
+      "message": "max waiting time should be the same. Before it was ++ increment, now +\u003d interval_us",
+      "parentUuid": "aa6e937a_6d6a4c9c",
+      "range": {
+        "startLine": 391,
+        "startChar": 2,
+        "endLine": 391,
+        "endChar": 34
+      },
+      "revId": "9e269cfc83fa2568b1424192a69064ccef2a8903",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
