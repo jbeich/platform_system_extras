@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5b9e9f4_d9d43074",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2023-06-02T17:58:50Z",
+      "side": 1,
+      "message": "ps2: remove debug print.",
+      "revId": "1bc8ecbb9b94634f8e0f5960e79c3c21c941fa58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
