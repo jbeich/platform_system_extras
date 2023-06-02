@@ -16,6 +16,29 @@
       "message": "ps2: remove debug print.",
       "revId": "1bc8ecbb9b94634f8e0f5960e79c3c21c941fa58",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f6e0c42_449ed311",
+        "filename": "simpleperf/cmd_record_test.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2023-06-02T18:07:22Z",
+      "side": 1,
+      "message": "Note that we also have emulated ARM64 targets (eg. aosp_cf_arm64_phone).  Do you want to defensively do the checks on all platforms?  Or, it might be just something to watch out for the future.",
+      "range": {
+        "startLine": 284,
+        "startChar": 0,
+        "endLine": 284,
+        "endChar": 43
+      },
+      "revId": "1bc8ecbb9b94634f8e0f5960e79c3c21c941fa58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
