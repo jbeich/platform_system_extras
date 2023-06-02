@@ -39,6 +39,30 @@
       },
       "revId": "1bc8ecbb9b94634f8e0f5960e79c3c21c941fa58",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aba9d826_1c7992c0",
+        "filename": "simpleperf/cmd_record_test.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2023-06-02T18:16:40Z",
+      "side": 1,
+      "message": "That\u0027s handled in AOSP, in CLs like https://android-review.git.corp.google.com/c/platform/system/extras/+/2209195/2/simpleperf/test_util.cpp. We can backport them when needed. But this bug doesn\u0027t need them.",
+      "parentUuid": "8f6e0c42_449ed311",
+      "range": {
+        "startLine": 284,
+        "startChar": 0,
+        "endLine": 284,
+        "endChar": 43
+      },
+      "revId": "1bc8ecbb9b94634f8e0f5960e79c3c21c941fa58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
