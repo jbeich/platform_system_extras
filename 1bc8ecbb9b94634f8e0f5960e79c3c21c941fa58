@@ -63,6 +63,30 @@
       },
       "revId": "1bc8ecbb9b94634f8e0f5960e79c3c21c941fa58",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "45fcf6b9_f9124d39",
+        "filename": "simpleperf/cmd_record_test.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2023-06-02T18:26:28Z",
+      "side": 1,
+      "message": "Ack.  I also forgot to noice that this is a cherry-pick.",
+      "parentUuid": "aba9d826_1c7992c0",
+      "range": {
+        "startLine": 284,
+        "startChar": 0,
+        "endLine": 284,
+        "endChar": 43
+      },
+      "revId": "1bc8ecbb9b94634f8e0f5960e79c3c21c941fa58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
