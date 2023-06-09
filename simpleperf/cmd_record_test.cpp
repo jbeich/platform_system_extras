@@ -245,6 +245,83 @@ TEST(record_cmd, system_wide_fp_callchain_sampling) {
   TEST_IN_ROOT(ASSERT_TRUE(RunRecordCmd({"-a", "--call-graph", "fp"})));
 }
 
+<<<<<<< TARGET BRANCH (74954d Merge "[automerger skipped] Merge "simpleperf: replace InClo)
+=======
+bool IsInNativeAbi() {
+  static int in_native_abi = -1;
+  if (in_native_abi == -1) {
+    FILE* fp = popen("uname -m", "re");
+    char buf[40];
+    memset(buf, '\0', sizeof(buf));
+    CHECK_EQ(fgets(buf, sizeof(buf), fp), buf);
+    pclose(fp);
+    std::string s = buf;
+    in_native_abi = 1;
+    if (GetBuildArch() == ARCH_X86_32 || GetBuildArch() == ARCH_X86_64) {
+      if (s.find("86") == std::string::npos) {
+        in_native_abi = 0;
+      }
+    } else if (GetBuildArch() == ARCH_ARM || GetBuildArch() == ARCH_ARM64) {
+      if (s.find("arm") == std::string::npos && s.find("aarch64") == std::string::npos) {
+        in_native_abi = 0;
+      }
+    }
+  }
+  return in_native_abi == 1;
+}
+
+bool HasTracepointEvents() {
+  static int has_tracepoint_events = -1;
+  if (has_tracepoint_events == -1) {
+    has_tracepoint_events = (GetTraceFsDir() != nullptr) ? 1 : 0;
+  }
+  return has_tracepoint_events == 1;
+}
+
+bool HasHardwareCounter() {
+  static int has_hw_counter = -1;
+  if (has_hw_counter == -1) {
+    has_hw_counter = 1;
+    auto arch = GetBuildArch();
+    if (arch == ARCH_X86_64 || arch == ARCH_X86_32 || !IsInNativeAbi()) {
+      // On x86 and x86_64, or when we are not in native abi, it's likely to run on an emulator or
+      // vm without hardware perf counters. It's hard to enumerate them all. So check the support
+      // at runtime.
+      const EventType* type = FindEventTypeByName("cpu-cycles", false);
+      CHECK(type != nullptr);
+      perf_event_attr attr = CreateDefaultPerfEventAttr(*type);
+      has_hw_counter = IsEventAttrSupported(attr, "cpu-cycles") ? 1 : 0;
+    } else if (arch == ARCH_ARM) {
+      std::string cpu_info;
+      if (android::base::ReadFileToString("/proc/cpuinfo", &cpu_info)) {
+        std::string hardware = GetHardwareFromCpuInfo(cpu_info);
+        if (std::regex_search(hardware, std::regex(R"(i\.MX6.*Quad)")) ||
+            std::regex_search(hardware, std::regex(R"(SC7731e)")) ||
+            std::regex_search(hardware, std::regex(R"(Qualcomm Technologies, Inc MSM8909)")) ||
+            std::regex_search(hardware, std::regex(R"(Broadcom STB \(Flattened Device Tree\))"))) {
+          has_hw_counter = 0;
+        }
+      }
+    }
+  }
+  return has_hw_counter == 1;
+}
+
+bool HasPmuCounter() {
+  static int has_pmu_counter = -1;
+  if (has_pmu_counter == -1) {
+    has_pmu_counter = 0;
+    for (auto& event_type : GetAllEventTypes()) {
+      if (event_type.IsPmuEvent()) {
+        has_pmu_counter = 1;
+        break;
+      }
+    }
+  }
+  return has_pmu_counter == 1;
+}
+
+>>>>>>> SOURCE BRANCH (86f866 Merge "simpleperf: Check hardware counter dynamically in non)
 TEST(record_cmd, dwarf_callchain_sampling) {
   OMIT_TEST_ON_NON_NATIVE_ABIS();
   ASSERT_TRUE(IsDwarfCallChainSamplingSupported());
