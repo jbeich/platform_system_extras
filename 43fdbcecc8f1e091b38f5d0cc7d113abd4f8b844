@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "31f42c3e_5a9a73ba",
+        "filename": "tests/iptables/qtaguid/socketTag.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2023-06-10T23:15:58Z",
+      "side": 0,
+      "message": "this assert in SetUp() fails\n\nx86 socketTag\n-------------\nsocketTag (15 Tests)\n[1/15] SocketTaggingTest#TagData: FAILED (0ms)\n\nSTACKTRACE:\n* start: pid\u003d6199 uid\u003d2000 uid1\u003d0x4b93cbd6/1267977174 uid2\u003d0xdeb8c910/3736652048 tag1\u003d0xf8b7625c00000000/17921901389420691456 tag2\u003d0xdcff200000000000/15924481991777452032\nkernel has qtaguid\nsystem/extras/tests/iptables/qtaguid/socketTag.cpp:209: Failure\nExpected: (ctrl_fd) \u003e\u003d (0), actual: -1 vs 0\nqtaguid ctrl open failed\n[2/15] SocketTaggingTest#InsufficientArgsFails: FAILED (0ms)",
+      "range": {
+        "startLine": 209,
+        "startChar": 0,
+        "endLine": 209,
+        "endChar": 60
+      },
+      "revId": "43fdbcecc8f1e091b38f5d0cc7d113abd4f8b844",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
