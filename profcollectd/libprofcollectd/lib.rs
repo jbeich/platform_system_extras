@@ -79,8 +79,7 @@ pub fn init_service(schedule_now: bool) -> Result<()> {
         get_profcollectd_service()?.registerProviderStatusCallback(&cb)?;
     }
 
-    binder::ProcessState::join_thread_pool();
-    Ok(())
+    binder::ProcessState::join_thread_pool()
 }
 
 fn get_profcollectd_service() -> Result<binder::Strong<dyn IProfCollectd::IProfCollectd>> {
