@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1108089_93db3089",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2023-06-26T20:26:35Z",
+      "side": 1,
+      "message": "LGTM except a format comment.",
+      "revId": "24d2cce427094d34acc9cece537693050d0da474",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28972ce3_b219d519",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 579,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2023-06-26T20:26:35Z",
+      "side": 1,
+      "message": "format the code? You should be able to see clang-format warning/error when running repo upload. If not, you can run `clang-format cmd_record.cpp`.",
+      "range": {
+        "startLine": 579,
+        "startChar": 4,
+        "endLine": 579,
+        "endChar": 6
+      },
+      "revId": "24d2cce427094d34acc9cece537693050d0da474",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
