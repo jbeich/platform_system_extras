@@ -576,7 +576,7 @@ bool RecordCommand::PrepareRecording(Workload* workload) {
   if (event_selection_set_.empty()) {
     std::string event_type = default_measured_event_type;
     if (GetTargetArch() == ARCH_X86_32 || GetTargetArch() == ARCH_X86_64) {
-      // Emulators may not support hardware events. So switch to cpu-clock when cpu-cycles isn't
+      // Emulators may not support hardware events, So switch to cpu-clock when cpu-cycles isn't
       // available.
       if (!IsHardwareEventSupported()) {
         event_type = "cpu-clock";
