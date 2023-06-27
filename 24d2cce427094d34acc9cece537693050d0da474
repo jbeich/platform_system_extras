@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "66f79eee_bb5b5ede",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2023-06-27T17:18:50Z",
+      "side": 1,
+      "message": "I feel the test message is useful to have?",
+      "range": {
+        "startLine": 16,
+        "startChar": 10,
+        "endLine": 16,
+        "endChar": 14
+      },
+      "revId": "24d2cce427094d34acc9cece537693050d0da474",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "e1108089_93db3089",
@@ -55,6 +78,30 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "28972ce3_b219d519",
+      "range": {
+        "startLine": 579,
+        "startChar": 4,
+        "endLine": 579,
+        "endChar": 6
+      },
+      "revId": "24d2cce427094d34acc9cece537693050d0da474",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c145f0e8_22f125c3",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 579,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2023-06-27T17:18:50Z",
+      "side": 1,
+      "message": "The code wasn\u0027t changed. Did you forget \u0027git add cmd_record.cpp\u0027?",
+      "parentUuid": "b0852926_93fb2399",
       "range": {
         "startLine": 579,
         "startChar": 4,
