@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49e0845d_21c848c7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1994451
+      },
+      "writtenOn": "2023-06-28T03:05:17Z",
+      "side": 1,
+      "message": "When this patch is added, this test case can pass.",
+      "revId": "aec31f83f65ac7c58e67c9605d9cc438545f5c94",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

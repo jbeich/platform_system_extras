@@ -110,6 +110,30 @@
       },
       "revId": "24d2cce427094d34acc9cece537693050d0da474",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "121389c3_41105a90",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 579,
+      "author": {
+        "id": 1994451
+      },
+      "writtenOn": "2023-06-28T03:05:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c145f0e8_22f125c3",
+      "range": {
+        "startLine": 579,
+        "startChar": 4,
+        "endLine": 579,
+        "endChar": 6
+      },
+      "revId": "24d2cce427094d34acc9cece537693050d0da474",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
