@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3952543b_92f8c0d9",
+        "filename": "mtectrl/mtectrl.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1005967
+      },
+      "writtenOn": "2023-06-29T23:09:54Z",
+      "side": 1,
+      "message": "it\u0027s hard to tell what is the combined condition for this branch. Could you move all usage checks up?",
+      "revId": "a9f1fa27128200898e8996e689393004f12e702f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
