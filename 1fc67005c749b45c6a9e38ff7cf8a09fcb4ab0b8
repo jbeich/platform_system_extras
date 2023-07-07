@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "6b099ab4_802086c9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2023-07-07T15:58:58Z",
+      "side": 1,
+      "message": "i copy \u0026 paste the full links just as SOP --- it\u0027s not useful for _these_ ones that only googlers can see, but for _public_ buganizer bugs it\u0027s the difference between a usable link and a useless one. (plus a decent number of _my_ bugs are github bugs :-) )",
+      "parentUuid": "9228baa2_4863b218",
+      "range": {
+        "startLine": 11,
+        "startChar": 5,
+        "endLine": 11,
+        "endChar": 23
+      },
+      "revId": "1fc67005c749b45c6a9e38ff7cf8a09fcb4ab0b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "03cbce74_73c1b6a1",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -37,6 +61,24 @@
       "writtenOn": "2023-07-07T15:43:40Z",
       "side": 1,
       "message": "FYI, I have no +2 rights in this repo",
+      "revId": "1fc67005c749b45c6a9e38ff7cf8a09fcb4ab0b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3d1fdb6_a31b2476",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2023-07-07T15:58:58Z",
+      "side": 1,
+      "message": "ah, shit ... gerrit hasn\u0027t moved \"master\" changes over to \"main\"? that\u0027s annoying...",
+      "parentUuid": "03cbce74_73c1b6a1",
       "revId": "1fc67005c749b45c6a9e38ff7cf8a09fcb4ab0b8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
