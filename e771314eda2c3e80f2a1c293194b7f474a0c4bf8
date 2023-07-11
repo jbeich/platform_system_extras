@@ -16,6 +16,24 @@
       "message": "Should we do this in a follow up patch? Seems like rest of changes are unrelated to this one?",
       "revId": "e771314eda2c3e80f2a1c293194b7f474a0c4bf8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac362e77_17e8d5c3",
+        "filename": "simpleperf/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2023-07-11T21:46:55Z",
+      "side": 0,
+      "message": "I mentioned it in the commit message. But I agree that putting it in a separate CL is better.",
+      "parentUuid": "64e2c092_b2a6abc4",
+      "revId": "e771314eda2c3e80f2a1c293194b7f474a0c4bf8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
