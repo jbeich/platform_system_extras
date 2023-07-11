@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "203934ba_6b53e496",
+        "filename": "simpleperf/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2023-07-11T00:19:53Z",
+      "side": 1,
+      "message": "Silly question: why do we need both 32- and 64- bit for the device?  Since simpleperf is standalone, can\u0027t we use the 64-bit version to profile 32-bit processes as well?",
+      "range": {
+        "startLine": 68,
+        "startChar": 8,
+        "endLine": 70,
+        "endChar": 10
+      },
+      "revId": "e771314eda2c3e80f2a1c293194b7f474a0c4bf8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
