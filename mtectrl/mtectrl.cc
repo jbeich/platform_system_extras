@@ -47,6 +47,7 @@ bool UpdateProp(const char* prop_name, const misc_memtag_message& m) {
   if (CheckAndUnset(mode, MISC_MEMTAG_MODE_MEMTAG_KERNEL_ONCE))
     AddItem(&prop_str, "memtag-kernel-once");
   if (CheckAndUnset(mode, MISC_MEMTAG_MODE_MEMTAG_OFF)) AddItem(&prop_str, "memtag-off");
+  if (CheckAndUnset(mode, MISC_MEMTAG_MODE_FORCED)) AddItem(&prop_str, "forced");
   if (prop_str.empty()) prop_str = "none";
   if (android::base::GetProperty(prop_name, "") != prop_str)
     android::base::SetProperty(prop_name, prop_str);
@@ -121,6 +122,8 @@ int StringToMode(const char* value) {
       memtag_mode |= MISC_MEMTAG_MODE_MEMTAG_KERNEL_ONCE;
     } else if (field == "memtag-off") {
       memtag_mode |= MISC_MEMTAG_MODE_MEMTAG_OFF;
+    } else if (field == "forced") {
+      memtag_mode |= MISC_MEMTAG_MODE_FORCED;
     } else if (field != "none") {
       LOG(ERROR) << "Unknown value for mode: " << field;
       return -1;
@@ -132,12 +135,26 @@ int StringToMode(const char* value) {
 bool HandleOverride(const std::string& override_value, misc_memtag_message* m) {
   if (override_value == "force_off") {
     // If the force_off override is active, only allow MEMTAG_MODE_MEMTAG_ONCE.
+    if ((m->memtag_mode & MISC_MEMTAG_MODE_MEMTAG_OFF) == 0) {
+      m->memtag_mode |= MISC_MEMTAG_MODE_FORCED;
+    }
     m->memtag_mode |= MISC_MEMTAG_MODE_MEMTAG_OFF;
     m->memtag_mode &= ~MISC_MEMTAG_MODE_MEMTAG;
   } else if (override_value == "force_on") {
+    if ((m->memtag_mode & MISC_MEMTAG_MODE_MEMTAG) == 0) {
+      m->memtag_mode |= MISC_MEMTAG_MODE_FORCED;
+    }
     m->memtag_mode |= MISC_MEMTAG_MODE_MEMTAG;
     m->memtag_mode &= ~MISC_MEMTAG_MODE_MEMTAG_OFF;
-  } else if (!override_value.empty() && override_value != "default") {
+  } else if (override_value.empty() || override_value == "default") {
+    // The mode changed from forced_on or forced_off to default, which means we
+    // restore the normal state.
+    if (m->memtag_mode & MISC_MEMTAG_MODE_FORCED) {
+      m->memtag_mode &= ~MISC_MEMTAG_MODE_MEMTAG;
+      m->memtag_mode &= ~MISC_MEMTAG_MODE_MEMTAG_OFF;
+      m->memtag_mode &= ~MISC_MEMTAG_MODE_FORCED;
+    }
+  } else {
     return false;
   }
   return true;
