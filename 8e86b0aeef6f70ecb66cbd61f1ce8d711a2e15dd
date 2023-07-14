@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "32aba1ea_5dd7cd9a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1038033
+      },
+      "writtenOn": "2023-07-14T02:41:21Z",
+      "side": 1,
+      "message": "This is a 2018 commit --- my questions from 2018 are still outstanding.   Are we sure anything in AOSP is using mke2fs -t ext4dev?    If so, I\u0027d really like to know ***why***?",
+      "revId": "8e86b0aeef6f70ecb66cbd61f1ce8d711a2e15dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
