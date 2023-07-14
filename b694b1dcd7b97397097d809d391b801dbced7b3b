@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2328df6_800a0905",
+        "filename": "partition_tools/lpdumpd.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1964171
+      },
+      "writtenOn": "2023-07-14T16:56:42Z",
+      "side": 1,
+      "message": "don\u0027t know the code too well, but is it a valid case to have an error_str() \u0026\u0026 not still return Status::ok()?",
+      "revId": "b694b1dcd7b97397097d809d391b801dbced7b3b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
