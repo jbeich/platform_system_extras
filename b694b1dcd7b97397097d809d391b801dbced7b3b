@@ -16,6 +16,24 @@
       "message": "don\u0027t know the code too well, but is it a valid case to have an error_str() \u0026\u0026 not still return Status::ok()?",
       "revId": "b694b1dcd7b97397097d809d391b801dbced7b3b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "465d2972_ff71226a",
+        "filename": "partition_tools/lpdumpd.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1290458
+      },
+      "writtenOn": "2023-07-14T19:40:09Z",
+      "side": 1,
+      "message": "I think the idea is just to make sure anything in stderr didn\u0027t get lost. It\u0027d be pretty unusual for this to error or fail in any way though.",
+      "parentUuid": "b2328df6_800a0905",
+      "revId": "b694b1dcd7b97397097d809d391b801dbced7b3b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
