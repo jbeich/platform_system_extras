@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9661ad6a_84a49ad0",
+        "filename": "libatrace_rust/bindgen/cutils_trace_wrap.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2023-07-14T18:04:07Z",
+      "side": 1,
+      "message": "Why do we have these passthrough functions? Why didn\u0027t we just bind `atrace_begin` and `atrace_end` directly from `cutils/trace.h`?",
+      "revId": "a962f8acc79af23f9ba0268933b7cd784f49024b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
