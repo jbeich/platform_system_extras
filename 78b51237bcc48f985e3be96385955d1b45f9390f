@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07d06388_085e8cc8",
+        "filename": "libatrace_rust/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1986660
+      },
+      "writtenOn": "2023-07-14T11:55:48Z",
+      "side": 1,
+      "message": "Should we also make this `vendor_available`/`product_available`, so that it can be used from vendor/product partitions?",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 12
+      },
+      "revId": "78b51237bcc48f985e3be96385955d1b45f9390f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d3b897d_5fb9a4d0",
+        "filename": "libatrace_rust/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1986660
+      },
+      "writtenOn": "2023-07-14T11:55:48Z",
+      "side": 1,
+      "message": "Don\u0027t we need `apex_available` on this as well to make `libatrace_rust` usable from APEXes?",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 12
+      },
+      "revId": "78b51237bcc48f985e3be96385955d1b45f9390f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "396beb05_d2601e27",
+        "filename": "libatrace_rust/src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1986660
+      },
+      "writtenOn": "2023-07-14T11:55:48Z",
+      "side": 1,
+      "message": "Nit: does this need to be `pub`? It\u0027s not accessed from outside the `mod`, is it?",
+      "range": {
+        "startLine": 144,
+        "startChar": 22,
+        "endLine": 144,
+        "endChar": 25
+      },
+      "revId": "78b51237bcc48f985e3be96385955d1b45f9390f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f8a7bcc_a93187e3",
+        "filename": "libatrace_rust/src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1986660
+      },
+      "writtenOn": "2023-07-14T11:55:48Z",
+      "side": 1,
+      "message": "Nit: it\u0027s unlikely to be an expected use so I don\u0027t know how much we care about it, but it\u0027s possible to get a possibly surprising behavior with:\n\n```\nlet guard1 \u003d set_scoped_mocker(Box::new(MyMocker1));\n// MOCKER \u003d\u003d MyMocker1\n{\n  let guard2 \u003d set_scoped_mocker(Box::new(MyMocker2));\n  // MOCKER \u003d MyMocker2\n}\n// MOCKER \u003d\u003d DefaultMocker instead of MyMocker1, even though guard1 is still in scope\n```\n\nHow about making `MockerGuard` restore the previously set mocker instead of DefaultMocker? WDYT?",
+      "range": {
+        "startLine": 185,
+        "startChar": 0,
+        "endLine": 188,
+        "endChar": 9
+      },
+      "revId": "78b51237bcc48f985e3be96385955d1b45f9390f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1396292_765b36e5",
+        "filename": "libatrace_rust/src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1986660
+      },
+      "writtenOn": "2023-07-14T11:55:48Z",
+      "side": 1,
+      "message": "Can we leave a comment saying why we\u0027re sure this is safe?",
+      "range": {
+        "startLine": 211,
+        "startChar": 16,
+        "endLine": 211,
+        "endChar": 24
+      },
+      "revId": "78b51237bcc48f985e3be96385955d1b45f9390f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
