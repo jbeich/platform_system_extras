@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ecd3ae6b_34b51065",
+        "filename": "libatrace_rust/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 2009465
+      },
+      "writtenOn": "2023-07-14T12:27:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "07d06388_085e8cc8",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 12
+      },
+      "revId": "78b51237bcc48f985e3be96385955d1b45f9390f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5d3b897d_5fb9a4d0",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-07-14T11:55:48Z",
       "side": 1,
       "message": "Don\u0027t we need `apex_available` on this as well to make `libatrace_rust` usable from APEXes?",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 12
+      },
+      "revId": "78b51237bcc48f985e3be96385955d1b45f9390f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d439e16_b7c8af53",
+        "filename": "libatrace_rust/Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 2009465
+      },
+      "writtenOn": "2023-07-14T12:27:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5d3b897d_5fb9a4d0",
       "range": {
         "startLine": 35,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fffaadc_262c8baa",
+        "filename": "libatrace_rust/src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 2009465
+      },
+      "writtenOn": "2023-07-14T12:27:37Z",
+      "side": 1,
+      "message": "Done, thanks. This was left over from using it directly.",
+      "parentUuid": "396beb05_d2601e27",
+      "range": {
+        "startLine": 144,
+        "startChar": 22,
+        "endLine": 144,
+        "endChar": 25
+      },
+      "revId": "78b51237bcc48f985e3be96385955d1b45f9390f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0f8a7bcc_a93187e3",
@@ -93,6 +165,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "18e06e2f_8675bda8",
+        "filename": "libatrace_rust/src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 2009465
+      },
+      "writtenOn": "2023-07-14T12:27:37Z",
+      "side": 1,
+      "message": "Yes but YAGNI",
+      "parentUuid": "0f8a7bcc_a93187e3",
+      "range": {
+        "startLine": 185,
+        "startChar": 0,
+        "endLine": 188,
+        "endChar": 9
+      },
+      "revId": "78b51237bcc48f985e3be96385955d1b45f9390f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d1396292_765b36e5",
@@ -106,6 +202,30 @@
       "writtenOn": "2023-07-14T11:55:48Z",
       "side": 1,
       "message": "Can we leave a comment saying why we\u0027re sure this is safe?",
+      "range": {
+        "startLine": 211,
+        "startChar": 16,
+        "endLine": 211,
+        "endChar": 24
+      },
+      "revId": "78b51237bcc48f985e3be96385955d1b45f9390f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "133f38db_b3deb4ee",
+        "filename": "libatrace_rust/src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 2009465
+      },
+      "writtenOn": "2023-07-14T12:27:37Z",
+      "side": 1,
+      "message": "Added comments to unsafe sections. This section in particular is only guaranteed to be safe if the code calling it produces a valid pointer.",
+      "parentUuid": "d1396292_765b36e5",
       "range": {
         "startLine": 211,
         "startChar": 16,
