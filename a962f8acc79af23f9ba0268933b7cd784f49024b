@@ -16,6 +16,24 @@
       "message": "Why do we have these passthrough functions? Why didn\u0027t we just bind `atrace_begin` and `atrace_end` directly from `cutils/trace.h`?",
       "revId": "a962f8acc79af23f9ba0268933b7cd784f49024b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dfea1332_4aa8b3b0",
+        "filename": "libatrace_rust/bindgen/cutils_trace_wrap.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 2009465
+      },
+      "writtenOn": "2023-07-14T21:19:38Z",
+      "side": 1,
+      "message": "These are `static inline` functions so they don\u0027t get bindings unless bindgen is called with  `--wrap-static-fns`, which is not well supported by Soong yet (b/290347127). This wrapper is pretty much the same thing bindgen would produce.\n\nAdded a comment to the header.",
+      "parentUuid": "9661ad6a_84a49ad0",
+      "revId": "a962f8acc79af23f9ba0268933b7cd784f49024b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
