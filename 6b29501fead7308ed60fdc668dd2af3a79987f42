@@ -16,6 +16,24 @@
       "message": "I think this is more broken than not, but it probably works in the case that matters, i.e. removing the override would probably disable mte.\n\nPlease document the meaning of the \"FORCED\" bit.",
       "revId": "6b29501fead7308ed60fdc668dd2af3a79987f42",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "98bc5a67_cb505595",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1268571
+      },
+      "writtenOn": "2023-07-14T18:17:52Z",
+      "side": 1,
+      "message": "Added documentation and state machine diagrams.\n\nFor the record, I disagree with \"more broken than not\". This provides reasonable semantics in a (given the constraints) relatively simple implementation. IMO falling back to default if the user choice had been overridden for a potentially long time is reasonable, and is easier to represent in a UI. Otherwise, the UI would have to distinguish between \"OFF\" and \"OFF but you asked for ON\".",
+      "parentUuid": "283dae3a_80d09cc0",
+      "revId": "6b29501fead7308ed60fdc668dd2af3a79987f42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
