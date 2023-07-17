@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c189201e_196ab3ff",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1992436
+      },
+      "writtenOn": "2023-07-17T07:09:27Z",
+      "side": 1,
+      "message": "Nice!",
+      "revId": "6e53e647e723f8137ba67ffb31fdf591977c6dd1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f262ecb_461d328c",
+        "filename": "libatrace_rust/bindgen/cutils_trace_wrap.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1992436
+      },
+      "writtenOn": "2023-07-17T07:09:27Z",
+      "side": 1,
+      "message": "Super nit: I think the style guide is: todo(link): description",
+      "revId": "6e53e647e723f8137ba67ffb31fdf591977c6dd1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
