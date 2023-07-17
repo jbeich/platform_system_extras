@@ -33,6 +33,24 @@
       "message": "Super nit: I think the style guide is: todo(link): description",
       "revId": "6e53e647e723f8137ba67ffb31fdf591977c6dd1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3cdd5b0_db740d31",
+        "filename": "libatrace_rust/bindgen/cutils_trace_wrap.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 2009465
+      },
+      "writtenOn": "2023-07-17T09:15:49Z",
+      "side": 1,
+      "message": "Fun fact - TODO style was updated this year: go/todo-style\n\nNow it\u0027s `TODO: $LINK - $DETAILS`, like `// TODO: b/123456 - Remove the hack.`",
+      "parentUuid": "1f262ecb_461d328c",
+      "revId": "6e53e647e723f8137ba67ffb31fdf591977c6dd1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
