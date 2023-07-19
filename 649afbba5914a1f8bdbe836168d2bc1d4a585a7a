@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5dc69d4_d58dbaea",
+        "filename": "libatrace_rust/benchmark/README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1986660
+      },
+      "writtenOn": "2023-07-19T13:32:06Z",
+      "side": 1,
+      "message": "Nit: `s/_cc/.cc`?\n```suggestion\n* `libatrace_rust_benchmark_cc` (`atrace_benchmark.cc`) for C++.\n```",
+      "range": {
+        "startLine": 9,
+        "startChar": 50,
+        "endLine": 9,
+        "endChar": 51
+      },
+      "revId": "649afbba5914a1f8bdbe836168d2bc1d4a585a7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b0ed979_f43d1e60",
+        "filename": "libatrace_rust/benchmark/README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1986660
+      },
+      "writtenOn": "2023-07-19T13:32:06Z",
+      "side": 1,
+      "message": "Nit: `s/2\u003e1/2\u003e\u00261/`?\n```suggestion\nRust results from `libatrace_rust_benchmark 2\u003e\u00261 | grep time`:\n```",
+      "range": {
+        "startLine": 36,
+        "startChar": 46,
+        "endLine": 36,
+        "endChar": 47
+      },
+      "revId": "649afbba5914a1f8bdbe836168d2bc1d4a585a7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0baff1ca_4ea3b355",
+        "filename": "libatrace_rust/benchmark/src/atrace_benchmark.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1986660
+      },
+      "writtenOn": "2023-07-19T13:32:06Z",
+      "side": 1,
+      "message": "Super nit: this is safe",
+      "range": {
+        "startLine": 33,
+        "startChar": 8,
+        "endLine": 34,
+        "endChar": 99
+      },
+      "revId": "649afbba5914a1f8bdbe836168d2bc1d4a585a7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "176c1171_9d4d1af0",
+        "filename": "libatrace_rust/benchmark/src/atrace_benchmark.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1986660
+      },
+      "writtenOn": "2023-07-19T13:32:06Z",
+      "side": 1,
+      "message": "Nit: could we use [`std::fs::create_dir_all`](https://doc.rust-lang.org/std/fs/fn.create_dir_all.html)?\n- it creates all intermediate path components if needed\n- IIUC it doesn\u0027t fail when the directory already exists, so we can `.expect()` instead of ignoring *all* the errors",
+      "range": {
+        "startLine": 41,
+        "startChar": 4,
+        "endLine": 41,
+        "endChar": 9
+      },
+      "revId": "649afbba5914a1f8bdbe836168d2bc1d4a585a7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "592ba737_c81ee826",
+        "filename": "libatrace_rust/benchmark/src/trace_enabler.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1986660
+      },
+      "writtenOn": "2023-07-19T13:32:06Z",
+      "side": 1,
+      "message": "I didn\u0027t know this one, nice!",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 13
+      },
+      "revId": "649afbba5914a1f8bdbe836168d2bc1d4a585a7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
