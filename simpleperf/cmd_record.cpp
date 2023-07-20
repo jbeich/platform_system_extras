@@ -210,7 +210,7 @@ class RecordCommand : public Command {
 "--call-graph fp | dwarf[,<dump_stack_size>]\n"
 "             Enable call graph recording. Use frame pointer or dwarf debug\n"
 "             frame as the method to parse call graph in stack.\n"
-"             Default is dwarf,65528.\n"
+"             Default is no call graph. Default dump_stack_size with -g is 65528.\n"
 "-g           Same as '--call-graph dwarf'.\n"
 "--clockid clock_id      Generate timestamps of samples using selected clock.\n"
 "                        Possible values are: realtime, monotonic,\n"
@@ -575,7 +575,8 @@ bool RecordCommand::PrepareRecording(Workload* workload) {
   // 2. Add default event type.
   if (event_selection_set_.empty()) {
     std::string event_type = default_measured_event_type;
-    if (GetTargetArch() == ARCH_X86_32 || GetTargetArch() == ARCH_X86_64) {
+    if (GetTargetArch() == ARCH_X86_32 || GetTargetArch() == ARCH_X86_64 ||
+        GetTargetArch() == ARCH_RISCV64) {
       // Emulators may not support hardware events. So switch to cpu-clock when cpu-cycles isn't
       // available.
       if (!IsHardwareEventSupported()) {
