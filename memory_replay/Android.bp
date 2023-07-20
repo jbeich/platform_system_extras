@@ -94,6 +94,14 @@ cc_binary {
     },
 }
 
+cc_binary_host {
+    name: "trim_trace",
+    defaults: ["memory_replay_defaults"],
+
+    compile_multilib: "64",
+    srcs: ["TrimTrace.cpp"],
+}
+
 cc_test {
     name: "memory_replay_tests",
     defaults: ["memory_replay_defaults"],

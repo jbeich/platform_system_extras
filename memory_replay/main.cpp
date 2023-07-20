@@ -184,6 +184,8 @@ int main(int argc, char** argv) {
 
   ProcessDump(entries, num_entries, max_threads);
 
+  mallopt(M_LOG_STATS, 0);
+
   FreeEntries(entries, num_entries);
 
   return 0;
