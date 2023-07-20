@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d4c8f8f_2374deed",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2023-07-20T03:24:19Z",
+      "side": 1,
+      "message": "Here is a quick tool I wrote that can remove all but the secondary allocations from a trace so it runs faster.\n\nIn addition, I modified the memory replayer so it dumps the log stats after it finishes processing the file.\n\nSee the description for how to run it.",
+      "revId": "a661053d424c3421d15d80078357d2a810af5f35",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
