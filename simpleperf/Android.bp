@@ -33,28 +33,9 @@ license {
 
 cc_defaults {
     name: "libsimpleperf_readelf_defaults",
-    target: {
-        android: {
-            static_libs: [
-                "libsimpleperf_readelf",
-            ],
-        },
-        host: {
-            // libsimpleperf_readelf on host depends on prebuilt libc++. So use old llvm
-            // libraries until we switch to prebuilt libc++.
-            cflags: [
-                "-DUSE_OLD_LLVM",
-            ],
-            static_libs: [
-                "libLLVMObject",
-                "libLLVMBitReader",
-                "libLLVMMC",
-                "libLLVMMCParser",
-                "libLLVMCore",
-                "libLLVMSupport",
-            ],
-        },
-    },
+    static_libs: [
+        "libsimpleperf_readelf",
+    ],
 }
 
 cc_defaults {
