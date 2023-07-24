@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ea1ebad_24c594fc",
+        "filename": "libatrace_rust/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1986660
+      },
+      "writtenOn": "2023-07-24T12:19:53Z",
+      "side": 1,
+      "message": "It\u0027s OK to call this concurrently from multiple threads, right?",
+      "range": {
+        "startLine": 104,
+        "startChar": 8,
+        "endLine": 104,
+        "endChar": 34
+      },
+      "revId": "1cb9d435e866ee2b9e7c06e85c5dc51df202afdb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
