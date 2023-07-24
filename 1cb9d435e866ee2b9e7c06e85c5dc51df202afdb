@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b98afb45_b866d066",
+        "filename": "libatrace_rust/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 2009465
+      },
+      "writtenOn": "2023-07-24T14:12:05Z",
+      "side": 0,
+      "message": "Deleted line on purpose - didn\u0027t want to disturb presubmit result on the previous change",
+      "revId": "1cb9d435e866ee2b9e7c06e85c5dc51df202afdb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
