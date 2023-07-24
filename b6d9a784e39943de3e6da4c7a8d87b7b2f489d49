@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46bb6322_0833397e",
+        "filename": "libatrace_rust/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1986660
+      },
+      "writtenOn": "2023-07-24T15:51:09Z",
+      "side": 1,
+      "message": "Super nit: we may consider returning the result of CString::new from those functions instead of panicking if someone feels adventurous enough to give us a `name` with nullbytes.\n\nIf you decide this is worthwhile, I\u0027m totally OK with doing it in a separate CL.",
+      "range": {
+        "startLine": 157,
+        "startChar": 7,
+        "endLine": 157,
+        "endChar": 25
+      },
+      "revId": "b6d9a784e39943de3e6da4c7a8d87b7b2f489d49",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
