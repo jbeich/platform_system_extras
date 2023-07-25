@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9be3b97_5f2c92b1",
+        "filename": "libatrace_rust/example/src/main.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1986660
+      },
+      "writtenOn": "2023-07-25T15:43:08Z",
+      "side": 1,
+      "message": "```suggestion\n    // Unlike normal events, async events don\u0027t need to be nested.\n```\n\nTypo",
+      "range": {
+        "startLine": 22,
+        "startChar": 7,
+        "endLine": 22,
+        "endChar": 13
+      },
+      "revId": "daff1615a98730a1978790c7f07c75c0a742e77b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
