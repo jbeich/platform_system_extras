@@ -43,6 +43,12 @@ bool IsInNativeAbi() {
       if (s.find("arm") == std::string::npos && s.find("aarch64") == std::string::npos) {
         in_native_abi = 0;
       }
+      if (GetTargetArch() == ARCH_ARM) {
+        // If the property is set, we are running with a 32-bit translator on a 64-bit only CPU.
+        if (android::base::GetProperty("ro.vendor.mtk.app32_boost_support", "") == "1") {
+          in_native_abi = 0;
+        }
+      }
     } else if (GetTargetArch() == ARCH_RISCV64) {
       if (s.find("riscv") == std::string::npos) {
         in_native_abi = 0;
