@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3e05315_a373e778",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1992436
+      },
+      "writtenOn": "2023-07-26T08:00:15Z",
+      "side": 1,
+      "message": "Nice!",
+      "revId": "df504f5900813df13b1184b0e046d6ffb2a5935a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10230c04_56eb812d",
+        "filename": "libatrace_rust/example/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1992436
+      },
+      "writtenOn": "2023-07-26T08:00:15Z",
+      "side": 1,
+      "message": "(nit)Pull it into a constant, which would avoid that you need to call out which argument is the cookie, and show that it is the same value everywhere in the sample?",
+      "range": {
+        "startLine": 25,
+        "startChar": 61,
+        "endLine": 25,
+        "endChar": 66
+      },
+      "revId": "df504f5900813df13b1184b0e046d6ffb2a5935a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
