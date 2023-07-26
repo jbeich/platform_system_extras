@@ -39,6 +39,30 @@
       },
       "revId": "df504f5900813df13b1184b0e046d6ffb2a5935a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "03362d3a_a7b9accb",
+        "filename": "libatrace_rust/example/src/main.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 2009465
+      },
+      "writtenOn": "2023-07-26T09:21:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "10230c04_56eb812d",
+      "range": {
+        "startLine": 25,
+        "startChar": 61,
+        "endLine": 25,
+        "endChar": 66
+      },
+      "revId": "df504f5900813df13b1184b0e046d6ffb2a5935a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
