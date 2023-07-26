@@ -34,6 +34,24 @@
       "parentUuid": "07e19b81_7fb0054b",
       "revId": "4dcdb684b6f271df2d6ee99efd57673858fb37d5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8c381f8_28d7e66d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2023-07-26T18:21:55Z",
+      "side": 1,
+      "message": "That CL was just submitted. Once we use prebuilt libc++ on both host and device, we can remove the custom __libcpp_verbose_abort() implementation in simpleperf, in https://cs.android.com/android/platform/superproject/main/+/main:system/extras/simpleperf/read_elf.cpp;l\u003d623?q\u003dread_elf.cpp\u0026ss\u003dandroid. Maybe you want to make that change here? Otherwise, feel free to drop this CL.",
+      "parentUuid": "b784143b_86cc06f0",
+      "revId": "4dcdb684b6f271df2d6ee99efd57673858fb37d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
