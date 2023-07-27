@@ -39,6 +39,30 @@
       },
       "revId": "00994674030d627d88b4818bb204973f88fcc3f4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b82bdd8_1dd3fa62",
+        "filename": "simpleperf/test_util.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2023-07-27T17:27:25Z",
+      "side": 1,
+      "message": "IsInNativeAbi() is used in many tests. So I want to cache the result, similar to other functions in this file.",
+      "parentUuid": "745c00bb_e2bf6e0f",
+      "range": {
+        "startLine": 83,
+        "startChar": 0,
+        "endLine": 83,
+        "endChar": 28
+      },
+      "revId": "00994674030d627d88b4818bb204973f88fcc3f4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
