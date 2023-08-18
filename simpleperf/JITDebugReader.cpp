@@ -40,6 +40,9 @@
 #include "read_elf.h"
 #include "utils.h"
 
+static const size_t kPageSize = getpagesize();
+static const size_t kPageMask = ~(kPageSize - 1);
+
 namespace simpleperf {
 
 using android::base::StartsWith;
@@ -449,8 +452,8 @@ const JITDebugReader::DescriptorsLocation* JITDebugReader::GetDescriptorsLocatio
   uint64_t file_offset;
   uint64_t min_vaddr_in_file = elf->ReadMinExecutableVaddr(&file_offset);
   // min_vaddr_in_file is the min vaddr of executable segments. It may not be page aligned.
-  // And dynamic linker will create map mapping to (segment.p_vaddr & PAGE_MASK).
-  uint64_t aligned_segment_vaddr = min_vaddr_in_file & PAGE_MASK;
+  // And dynamic linker will create map mapping to (segment.p_vaddr & kPageMask).
+  uint64_t aligned_segment_vaddr = min_vaddr_in_file & kPageMask;
   const char* jit_str = "__jit_debug_descriptor";
   const char* dex_str = "__dex_debug_descriptor";
   uint64_t jit_addr = 0u;
