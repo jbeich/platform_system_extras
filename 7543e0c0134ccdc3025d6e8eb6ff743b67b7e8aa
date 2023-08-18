@@ -16,6 +16,24 @@
       "message": "why aren\u0027t these just in the single function that uses them?",
       "revId": "7543e0c0134ccdc3025d6e8eb6ff743b67b7e8aa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e20d0cd_161c9864",
+        "filename": "simpleperf/JITDebugReader.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2023-08-18T15:12:31Z",
+      "side": 1,
+      "message": "Moved to a single function.",
+      "parentUuid": "d3286eef_e04c3546",
+      "revId": "7543e0c0134ccdc3025d6e8eb6ff743b67b7e8aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
