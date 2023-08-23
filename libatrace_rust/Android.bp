@@ -2,6 +2,23 @@ package {
     default_applicable_licenses: ["Android-Apache-2.0"],
 }
 
+rust_library {
+    name: "libatrace_tracing_subscriber",
+    crate_name: "atrace_tracing_subscriber",
+    srcs: ["src/tracing_subscriber.rs"],
+    product_available: true,
+    vendor_available: true,
+    apex_available: [
+        "//apex_available:platform",
+        "//apex_available:anyapex",
+    ],
+    rustlibs: [
+        "libatrace_rust",
+        "libtracing",
+        "libtracing_subscriber",
+    ],
+}
+
 rust_defaults {
     name: "libatrace_rust_defaults",
     srcs: ["src/lib.rs"],
