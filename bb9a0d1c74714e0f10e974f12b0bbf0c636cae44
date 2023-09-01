@@ -16,6 +16,23 @@
       "message": "ps2: Add test for ReadableCount",
       "revId": "bb9a0d1c74714e0f10e974f12b0bbf0c636cae44",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e16f73e_7b83befa",
+        "filename": "simpleperf/utils.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 503,
+      "author": {
+        "id": 1978766
+      },
+      "writtenOn": "2023-09-01T18:14:42Z",
+      "side": 1,
+      "message": "nit: numpunct can be used for the formatting. e.g.,\n\nhttps://coliru.stacked-crooked.com/view?id\u003db417e50e8d2055d0",
+      "revId": "bb9a0d1c74714e0f10e974f12b0bbf0c636cae44",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
