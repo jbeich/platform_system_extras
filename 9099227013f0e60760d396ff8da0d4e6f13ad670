@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d67c1079_77eafad1",
+        "filename": "libatrace_rust/src/tracing_subscriber.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 2009465
+      },
+      "writtenOn": "2023-09-11T09:32:45Z",
+      "side": 1,
+      "message": "I\u0027ll significantly change the implementation in the follow up CL to make it faster",
+      "parentUuid": "257dcac0_1cc00394",
+      "range": {
+        "startLine": 75,
+        "startChar": 0,
+        "endLine": 82,
+        "endChar": 9
+      },
+      "revId": "9099227013f0e60760d396ff8da0d4e6f13ad670",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "836d3e9b_12d3ef80",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-09-11T08:05:59Z",
       "side": 1,
       "message": "Tiny nit: would `*event_str \u003d format!()` also work?",
+      "range": {
+        "startLine": 145,
+        "startChar": 12,
+        "endLine": 145,
+        "endChar": 88
+      },
+      "revId": "9099227013f0e60760d396ff8da0d4e6f13ad670",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f234ead_6edbade0",
+        "filename": "libatrace_rust/src/tracing_subscriber.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 2009465
+      },
+      "writtenOn": "2023-09-11T09:32:45Z",
+      "side": 1,
+      "message": "Done, without the `*`. Thanks for the tip, I\u0027m not sure why it didn\u0027t work the first time I tried it",
+      "parentUuid": "836d3e9b_12d3ef80",
       "range": {
         "startLine": 145,
         "startChar": 12,
