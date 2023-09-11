@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ceeb766_2a5aa70a",
+        "filename": "libatrace_rust/benchmark/src/atrace_benchmark_common.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 2009465
+      },
+      "writtenOn": "2023-09-11T12:32:38Z",
+      "side": 1,
+      "message": "We don\u0027t expect changes to the signatures, so it\u0027s simpler to just put them here manually and avoid having an intermeidate target and wrapper header. Added a comment about it.",
+      "parentUuid": "9f360d3c_9ac2da93",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 1
+      },
+      "revId": "5102110a07d124179024b1ba623994afd2e73e19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "25e6ac98_3afdada3",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-09-11T11:12:21Z",
       "side": 1,
       "message": "Nit: did you consider [`std::env::current_exe()`](https://doc.rust-lang.org/std/env/fn.current_exe.html)?",
+      "range": {
+        "startLine": 34,
+        "startChar": 4,
+        "endLine": 34,
+        "endChar": 85
+      },
+      "revId": "5102110a07d124179024b1ba623994afd2e73e19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ebc2547_7500bb11",
+        "filename": "libatrace_rust/benchmark/src/atrace_benchmark_common.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 2009465
+      },
+      "writtenOn": "2023-09-11T12:32:38Z",
+      "side": 1,
+      "message": "ATrace matches against cmdline, so the full exe path won\u0027t work. Added a clarifying comment.",
+      "parentUuid": "25e6ac98_3afdada3",
       "range": {
         "startLine": 34,
         "startChar": 4,
