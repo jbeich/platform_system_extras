@@ -16,6 +16,24 @@
       "message": "Seems like you run every action only once. This may overpresent initial overhead, e.g. lazy initializations. Is is worth having some of those tests with a loop doing the same operation multiple times?",
       "revId": "5102110a07d124179024b1ba623994afd2e73e19",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e92953bf_6df05ae2",
+        "filename": "libatrace_rust/benchmark/src/tracing_subscriber_benchmark.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 2009465
+      },
+      "writtenOn": "2023-09-11T09:52:46Z",
+      "side": 1,
+      "message": "The loop is built into the criterion calls (line 28):\n```\nc.bench_function(name, |b| b.iter(\u0026mut f))\n```\n\nBy default it includes a 3 sec warmup and 5 sec of measurement:\nhttps://bheisler.github.io/criterion.rs/book/getting_started.html#step-2---add-benchmark\n\nSo the init is actually not represented here at all",
+      "parentUuid": "153004fb_b35d94b3",
+      "revId": "5102110a07d124179024b1ba623994afd2e73e19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
