@@ -20,6 +20,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9f360d3c_9ac2da93",
+        "filename": "libatrace_rust/benchmark/src/atrace_benchmark_common.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1986660
+      },
+      "writtenOn": "2023-09-11T11:12:21Z",
+      "side": 1,
+      "message": "Nit: did you consider generating those from an .h file using e.g. `rust_bindgen {}`? (e.g. here: https://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:system/librustutils/Android.bp).\n\nThat way we wouldn\u0027t have 2 places to manually keep in sync to avoid UB.",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 1
+      },
+      "revId": "5102110a07d124179024b1ba623994afd2e73e19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25e6ac98_3afdada3",
+        "filename": "libatrace_rust/benchmark/src/atrace_benchmark_common.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1986660
+      },
+      "writtenOn": "2023-09-11T11:12:21Z",
+      "side": 1,
+      "message": "Nit: did you consider [`std::env::current_exe()`](https://doc.rust-lang.org/std/env/fn.current_exe.html)?",
+      "range": {
+        "startLine": 34,
+        "startChar": 4,
+        "endLine": 34,
+        "endChar": 85
+      },
+      "revId": "5102110a07d124179024b1ba623994afd2e73e19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "153004fb_b35d94b3",
         "filename": "libatrace_rust/benchmark/src/tracing_subscriber_benchmark.rs",
         "patchSetId": 2
