@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "153004fb_b35d94b3",
+        "filename": "libatrace_rust/benchmark/src/tracing_subscriber_benchmark.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1992436
+      },
+      "writtenOn": "2023-09-11T09:46:49Z",
+      "side": 1,
+      "message": "Seems like you run every action only once. This may overpresent initial overhead, e.g. lazy initializations. Is is worth having some of those tests with a loop doing the same operation multiple times?",
+      "revId": "5102110a07d124179024b1ba623994afd2e73e19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
