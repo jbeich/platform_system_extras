@@ -93,6 +93,30 @@
       },
       "revId": "e46dee40bcfdfbf8292529f8031dac3088a7a070",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da797c84_22489bfc",
+        "filename": "libatrace_rust/src/tracing_subscriber.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1986660
+      },
+      "writtenOn": "2023-09-15T12:26:18Z",
+      "side": 1,
+      "message": "Awesome, thank you very much! 😄",
+      "parentUuid": "7cd898fc_aa46495f",
+      "range": {
+        "startLine": 56,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 22
+      },
+      "revId": "e46dee40bcfdfbf8292529f8031dac3088a7a070",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
