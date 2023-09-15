@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e70b15b_2ad61051",
+        "filename": "libatrace_rust/src/tracing_subscriber.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1986660
+      },
+      "writtenOn": "2023-09-15T09:29:30Z",
+      "side": 1,
+      "message": "Is there some documentation we could link that explains what filtering means in this context? One could expect this is something like filter by some condition, but the function takes no arguments.\n\nAlso, maybe it\u0027s worth noting *why* should it only be enabled if it\u0027s the only layer? Is that because if the layer decides the span is filtered out, it will get filtered out for all layers?",
+      "range": {
+        "startLine": 45,
+        "startChar": 78,
+        "endLine": 45,
+        "endChar": 101
+      },
+      "revId": "e46dee40bcfdfbf8292529f8031dac3088a7a070",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59727902_15fd2d89",
+        "filename": "libatrace_rust/src/tracing_subscriber.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1986660
+      },
+      "writtenOn": "2023-09-15T09:29:30Z",
+      "side": 1,
+      "message": "What is \"the filter\" we\u0027re referring to here? Is it the `enabled()` call?\n\nTiny nit: is there some piece of documentation we could link to that explains the order of the filter checks? There\u0027s `register_callsite`, `enabled`, and we also add `tag_enabled_inner`, and to me it\u0027s not obvious how those interoperate.",
+      "range": {
+        "startLine": 56,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 22
+      },
+      "revId": "e46dee40bcfdfbf8292529f8031dac3088a7a070",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
