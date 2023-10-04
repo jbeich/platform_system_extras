@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c48af564_f81c89de",
+        "filename": "simpleperf/cmd_record_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 936,
+      "author": {
+        "id": 1978766
+      },
+      "writtenOn": "2023-10-04T22:58:35Z",
+      "side": 1,
+      "message": "what if FindMap doesn\u0027t find anything?",
+      "revId": "78e56769d0ac218d6314ed3f02d78f7019d2035f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e0c566c_b4d23a3e",
+        "filename": "simpleperf/cmd_record_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 937,
+      "author": {
+        "id": 1978766
+      },
+      "writtenOn": "2023-10-04T22:58:35Z",
+      "side": 1,
+      "message": "can we check `name \u003d\u003d \"unknown\" before calling FindMap?",
+      "revId": "78e56769d0ac218d6314ed3f02d78f7019d2035f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
