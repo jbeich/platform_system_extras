@@ -34,6 +34,7 @@
 #include <android-base/test_utils.h>
 
 #include "ETMRecorder.h"
+#include "JITDebugReader.h"
 #include "ProbeEvents.h"
 #include "cmd_record_impl.h"
 #include "command.h"
@@ -930,6 +931,13 @@ TEST(record_cmd, check_trampoline_after_art_jni_methods) {
           has_check = true;
           std::string name = get_symbol_name(thread, ips[i + 1]);
           if (!android::base::EndsWith(name, "jni_trampoline")) {
+            // When the jni_trampoline function is from JIT cache, we may not get map info in time.
+            // To avoid test flakiness, we accept this.
+            const MapEntry* map = thread_tree.FindMap(thread, ips[i + 1], false);
+            if (name == "unknown" || JITDebugReader::IsPathInJITSymFile(map->dso->Path())) {
+              continue;
+            }
+
             GTEST_LOG_(ERROR) << "unexpected symbol after art::Method_invoke: " << name;
             return false;
           }
