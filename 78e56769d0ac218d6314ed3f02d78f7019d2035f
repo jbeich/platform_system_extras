@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d6bd06d_9d674384",
+        "filename": "simpleperf/cmd_record_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 936,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2023-10-04T23:52:21Z",
+      "side": 1,
+      "message": "Instead of nullptr, it returns a map containing an unknown symbol, as in https://source.corp.google.com/h/android/platform/superproject/main/+/main:system/extras/simpleperf/thread_tree.cpp;drc\u003dd286a71b60f7ffd2b481b6d04d2ecae6c0c47ae1;l\u003d299. I should change the return type to reference. Filed a bug in b/303515897.",
+      "parentUuid": "c48af564_f81c89de",
+      "revId": "78e56769d0ac218d6314ed3f02d78f7019d2035f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0e0c566c_b4d23a3e",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-10-04T22:58:35Z",
       "side": 1,
       "message": "can we check `name \u003d\u003d \"unknown\" before calling FindMap?",
+      "revId": "78e56769d0ac218d6314ed3f02d78f7019d2035f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "db3a487c_e9f32bc0",
+        "filename": "simpleperf/cmd_record_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 937,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2023-10-04T23:52:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e0c566c_b4d23a3e",
       "revId": "78e56769d0ac218d6314ed3f02d78f7019d2035f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
