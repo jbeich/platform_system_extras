@@ -16,6 +16,24 @@
       "message": "I think this can before `if (!android::base::EndsWith(name, \"jni_trampoline\"))`?\nBecause if `if (android::base::EndsWith(name, \"jni_trampoline\"))`, the result is still to be `continue`.",
       "revId": "6ab3a853b39c75856f3ad16aca9b092981986a11",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3488ab73_14419f2e",
+        "filename": "simpleperf/cmd_record_test.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 937,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2023-10-05T17:31:34Z",
+      "side": 1,
+      "message": "Done. Changed to avoid the nested if statements.",
+      "parentUuid": "ce03d972_1afa7fca",
+      "revId": "6ab3a853b39c75856f3ad16aca9b092981986a11",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
