@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce03d972_1afa7fca",
+        "filename": "simpleperf/cmd_record_test.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 937,
+      "author": {
+        "id": 1890456
+      },
+      "writtenOn": "2023-10-05T00:11:42Z",
+      "side": 1,
+      "message": "I think this can before `if (!android::base::EndsWith(name, \"jni_trampoline\"))`?\nBecause if `if (android::base::EndsWith(name, \"jni_trampoline\"))`, the result is still to be `continue`.",
+      "revId": "6ab3a853b39c75856f3ad16aca9b092981986a11",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
