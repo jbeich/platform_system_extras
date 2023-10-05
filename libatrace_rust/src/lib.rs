@@ -75,6 +75,7 @@ pub mod tags {
             const Nnapi           = cutils_trace_bindgen::ATRACE_TAG_NNAPI as u64;
             const Rro             = cutils_trace_bindgen::ATRACE_TAG_RRO as u64;
             const Thermal         = cutils_trace_bindgen::ATRACE_TAG_THERMAL as u64;
+            const GPURenderStage  = cutils_trace_bindgen::ATRACE_TAG_GPU_RENDERSTAGE as u64;
             const Last            = cutils_trace_bindgen::ATRACE_TAG_LAST as u64;
             const NotReady        = cutils_trace_bindgen::ATRACE_TAG_NOT_READY as u64;
             const ValidMask       = cutils_trace_bindgen::ATRACE_TAG_VALID_MASK as u64;
@@ -83,7 +84,10 @@ pub mod tags {
 
     // Assertion to keep tags in sync. If it fails, it means there are new tags added to
     // cutils/trace.h. Add them to the tags above and update the assertion.
-    const_assert_eq!(AtraceTag::Thermal.bits(), cutils_trace_bindgen::ATRACE_TAG_LAST as u64);
+    const_assert_eq!(
+        AtraceTag::GPURenderStage.bits(),
+        cutils_trace_bindgen::ATRACE_TAG_LAST as u64
+    );
 }
 
 /// RAII guard to close an event with tag.
