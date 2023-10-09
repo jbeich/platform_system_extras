@@ -16,6 +16,24 @@
       "message": "I believe the AOSP formatting is not putting every parameter in a separate line. The last one not fitting goes to the next. Please check with the surrounding code if that is the case",
       "revId": "05db1265f1539689f006dd739751e1cae858e318",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "969a7e37_9d2372f5",
+        "filename": "libatrace_rust/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 2034140
+      },
+      "writtenOn": "2023-10-09T08:06:12Z",
+      "side": 1,
+      "message": "rustfmt,clang_format hook is automatically formatting this code.",
+      "parentUuid": "f5c4bca5_5ed6fec9",
+      "revId": "05db1265f1539689f006dd739751e1cae858e318",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
