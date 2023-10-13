@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5647b9e_a003f154",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2023-10-13T21:46:42Z",
+      "side": 1,
+      "message": "ps2,3: remove unneeded code.",
+      "revId": "c518471b47259424a7ef9f84ed2e40b8a920093d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
