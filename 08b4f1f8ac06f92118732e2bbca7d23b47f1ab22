@@ -22,6 +22,30 @@
       },
       "revId": "08b4f1f8ac06f92118732e2bbca7d23b47f1ab22",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "14afe0ff_7233dfdc",
+        "filename": "simpleperf/environment.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2023-10-16T18:52:16Z",
+      "side": 1,
+      "message": "For the checks in L316 and L323, they are do the checks to report old_level.value(), so checking old_level.has_value() is more appropriate. For the check in L308, can_read_allow_file is better. But probably we can remove the check. Because in reality, I have never seen failures reading allow status. And even when it fails, it doesn\u0027t matter trying to read it again. So I replaced the check with a comment.",
+      "parentUuid": "805511f0_8858fe22",
+      "range": {
+        "startLine": 308,
+        "startChar": 8,
+        "endLine": 308,
+        "endChar": 29
+      },
+      "revId": "08b4f1f8ac06f92118732e2bbca7d23b47f1ab22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
