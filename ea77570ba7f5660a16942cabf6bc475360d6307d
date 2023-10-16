@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee1e759f_bfe1315f",
+        "filename": "verity/build_verity_tree.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1535516
+      },
+      "writtenOn": "2023-10-16T18:22:54Z",
+      "side": 1,
+      "message": "This is simpler:\n```\nstd::unique_ptr\u003csparse_file, decltype(\u0026sparse_file_destroy)\u003e file(nullptr, sparse_file_destroy);\nif (sparse) {\n  file.reset(sparse_file_import(data_fd, false, false));\n} else {\n  file.reset(sparse_file_import_auto(data_fd, false, verbose));\n}\n```",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 3
+      },
+      "revId": "ea77570ba7f5660a16942cabf6bc475360d6307d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
