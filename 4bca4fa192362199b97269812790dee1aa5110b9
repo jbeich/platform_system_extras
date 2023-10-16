@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9428a59_679f0829",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2023-10-16T21:04:02Z",
+      "side": 1,
+      "message": "ps2: fix for test record_cmd#trace_offcpu_option",
+      "revId": "4bca4fa192362199b97269812790dee1aa5110b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
