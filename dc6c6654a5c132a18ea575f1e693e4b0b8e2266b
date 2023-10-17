@@ -16,6 +16,24 @@
       "message": "LGTM.  Yabin, we should also add RISC-V prebuilts .  Is there a bug to track this?\n\n(PS: since we need a new target and script updates, let\u0027s not hold up this CL as we wait for it.)",
       "revId": "dc6c6654a5c132a18ea575f1e693e4b0b8e2266b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "22ea08b2_d3ad9a63",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2023-10-17T17:05:35Z",
+      "side": 1,
+      "message": "Yes, https://b.corp.google.com/issues/293319499",
+      "parentUuid": "aa1052a5_1a3b59d9",
+      "revId": "dc6c6654a5c132a18ea575f1e693e4b0b8e2266b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
