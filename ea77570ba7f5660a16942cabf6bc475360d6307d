@@ -22,6 +22,30 @@
       },
       "revId": "ea77570ba7f5660a16942cabf6bc475360d6307d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "29a845ab_8d687c6d",
+        "filename": "verity/build_verity_tree.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1362121
+      },
+      "writtenOn": "2023-10-17T01:07:51Z",
+      "side": 1,
+      "message": "Hi Cole, Thank you for your comment. simplify it in patchset 2.",
+      "parentUuid": "ee1e759f_bfe1315f",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 3
+      },
+      "revId": "ea77570ba7f5660a16942cabf6bc475360d6307d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
