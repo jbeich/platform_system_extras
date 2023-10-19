@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6bc51f3d_df26d66f",
+        "filename": "memory_replay/FilterTrace.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2023-10-19T22:09:03Z",
+      "side": 1,
+      "message": "Okay, okay, I\u0027ve modified it to use getopt_long.",
+      "parentUuid": "fb148b6e_91b42a3e",
+      "revId": "16f90b861c25a491c6b8a7bf41d33013b5c8b1b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fefccd40_a263f4ac",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-10-19T18:01:44Z",
       "side": 1,
       "message": "show an error because this shouldn\u0027t happen?",
+      "revId": "16f90b861c25a491c6b8a7bf41d33013b5c8b1b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6f7105b_57210b08",
+        "filename": "memory_replay/FilterTrace.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2023-10-19T22:09:03Z",
+      "side": 1,
+      "message": "Yeah, adding an error here.",
+      "parentUuid": "fefccd40_a263f4ac",
       "revId": "16f90b861c25a491c6b8a7bf41d33013b5c8b1b0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -58,6 +94,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "734e57ed_bd0daa56",
+        "filename": "memory_replay/FilterTrace.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2023-10-19T22:09:03Z",
+      "side": 1,
+      "message": "I did change this slightly since it\u0027s a bit confusing. I used the between but only if max_size is set. Now there are three outputs:\n\nScanning for allocations between XX and YY\n\nScanning for allocations \u003e\u003d XX\n\nScanning for all allocations\n\nPrinting out the max of a size_t is it a bit hard to understand.",
+      "parentUuid": "7711e8eb_7ef55fb5",
+      "range": {
+        "startLine": 125,
+        "startChar": 4,
+        "endLine": 133,
+        "endChar": 17
+      },
+      "revId": "16f90b861c25a491c6b8a7bf41d33013b5c8b1b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "89c4b2be_ac425219",
@@ -71,6 +131,30 @@
       "writtenOn": "2023-10-19T18:01:44Z",
       "side": 1,
       "message": "(again, just \"invalid --min_size: %s\" seems good enough?)",
+      "range": {
+        "startLine": 191,
+        "startChar": 22,
+        "endLine": 193,
+        "endChar": 34
+      },
+      "revId": "16f90b861c25a491c6b8a7bf41d33013b5c8b1b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "35b8cc0b_1e55c3e0",
+        "filename": "memory_replay/FilterTrace.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1019050
+      },
+      "writtenOn": "2023-10-19T22:09:03Z",
+      "side": 1,
+      "message": "Yeah, it doesn\u0027t really matter, so I\u0027ve changed this to your number is invalid.",
+      "parentUuid": "89c4b2be_ac425219",
       "range": {
         "startLine": 191,
         "startChar": 22,
