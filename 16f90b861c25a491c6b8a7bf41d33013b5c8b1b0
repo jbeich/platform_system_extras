@@ -118,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a60a4b3b_a2aadce4",
+        "filename": "memory_replay/FilterTrace.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2023-10-19T22:24:44Z",
+      "side": 1,
+      "message": "(yeah, unfortunately although toybox and ART [https://source.corp.google.com/h/android/platform/superproject/main/+/main:art/libartbase/base/utils.cc;l\u003d219?q\u003dfile:%5Eart%2F%20PrettySize\u0026sq\u003drepo:android%2Fplatform%2Fsuperproject%2Fmain%20b:main%20-file:prebuilts%2Fvndk%2F%20-file:prebuilts%2Fruntime%2F] both have \"print this number in a human-readable way\", libbase doesn\u0027t... not sure why i never pulled that stuff out of ART.)",
+      "parentUuid": "734e57ed_bd0daa56",
+      "range": {
+        "startLine": 125,
+        "startChar": 4,
+        "endLine": 133,
+        "endChar": 17
+      },
+      "revId": "16f90b861c25a491c6b8a7bf41d33013b5c8b1b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "89c4b2be_ac425219",
