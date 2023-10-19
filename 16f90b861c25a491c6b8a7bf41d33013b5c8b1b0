@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb148b6e_91b42a3e",
+        "filename": "memory_replay/FilterTrace.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2023-10-19T18:01:44Z",
+      "side": 1,
+      "message": "y u hate getopt_long()?",
+      "revId": "16f90b861c25a491c6b8a7bf41d33013b5c8b1b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fefccd40_a263f4ac",
+        "filename": "memory_replay/FilterTrace.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2023-10-19T18:01:44Z",
+      "side": 1,
+      "message": "show an error because this shouldn\u0027t happen?",
+      "revId": "16f90b861c25a491c6b8a7bf41d33013b5c8b1b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7711e8eb_7ef55fb5",
+        "filename": "memory_replay/FilterTrace.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2023-10-19T18:01:44Z",
+      "side": 1,
+      "message": "as a lazy man, i\u0027d have just done \"Scanning for alloations (between %d and %d)\" :-)",
+      "range": {
+        "startLine": 125,
+        "startChar": 4,
+        "endLine": 133,
+        "endChar": 17
+      },
+      "revId": "16f90b861c25a491c6b8a7bf41d33013b5c8b1b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89c4b2be_ac425219",
+        "filename": "memory_replay/FilterTrace.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2023-10-19T18:01:44Z",
+      "side": 1,
+      "message": "(again, just \"invalid --min_size: %s\" seems good enough?)",
+      "range": {
+        "startLine": 191,
+        "startChar": 22,
+        "endLine": 193,
+        "endChar": 34
+      },
+      "revId": "16f90b861c25a491c6b8a7bf41d33013b5c8b1b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
