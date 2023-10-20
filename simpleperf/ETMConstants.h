@@ -23,6 +23,7 @@ static constexpr int ETM_OPT_CYCACC = 12;
 static constexpr int ETM_OPT_CTXTID = 14;
 static constexpr int ETM_OPT_CTXTID2 = 15;
 static constexpr int ETM_OPT_TS = 28;
+static constexpr int ETM_OPT_CYC_THRESHOLD_SHIFT = 52;
 // For etm_config_reg:
 static constexpr int ETM4_CFG_BIT_CTXTID = 6;
 static constexpr int ETM4_CFG_BIT_VMID = 7;
