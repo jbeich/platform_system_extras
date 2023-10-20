@@ -65,6 +65,7 @@ class ETMRecorder {
   size_t GetAddrFilterPairs();
   void SetRecordTimestamp(bool record);
   void SetRecordCycles(bool record);
+  void SetCycleThreshold(size_t threshold);
 
  private:
   bool ReadEtmInfo();
@@ -85,6 +86,7 @@ class ETMRecorder {
 
   bool record_timestamp_ = false;
   bool record_cycles_ = false;
+  uint64_t cycle_threshold_ = 0;
 };
 
 }  // namespace simpleperf
