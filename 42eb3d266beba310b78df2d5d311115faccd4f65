@@ -16,6 +16,24 @@
       "message": "nit: Not sure how memory intensive it is but having members with largest size to smallest has better packing. https://www.joshcaratelli.com/blog/struct-packing",
       "revId": "42eb3d266beba310b78df2d5d311115faccd4f65",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5ba6ed3_48877c09",
+        "filename": "simpleperf/JITDebugReader.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2023-10-25T20:41:13Z",
+      "side": 1,
+      "message": "Thanks for reminding me! The Process struct isn\u0027t memory intensive. So the fields are ordered to be more readable. But I will consider the packing when creating other structs.",
+      "parentUuid": "30183e94_d5e11c50",
+      "revId": "42eb3d266beba310b78df2d5d311115faccd4f65",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
