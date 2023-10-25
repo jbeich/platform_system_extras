@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "39ca9e4a_a993309a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2023-10-25T19:06:57Z",
+      "side": 1,
+      "message": "ps2: fix comments.",
+      "revId": "8b8ed0fbd305b3bc28f06561fe648a58c1d5d71d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
