@@ -202,7 +202,7 @@ class RecordCommand : public Command {
 "             samples every second. For non-tracepoint events, the default\n"
 "             option is -f 4000. A -f/-c option affects all event types\n"
 "             following it until meeting another -f/-c option. For example,\n"
-"             for \"-f 1000 cpu-cycles -c 1 -e sched:sched_switch\", cpu-cycles\n"
+"             for \"-f 1000 -e cpu-cycles -c 1 -e sched:sched_switch\", cpu-cycles\n"
 "             has sample freq 1000, sched:sched_switch event has sample period 1.\n"
 "-c count     Set event sample period. It means recording one sample when\n"
 "             [count] events happen. For tracepoint events, the default option\n"
@@ -216,9 +216,9 @@ class RecordCommand : public Command {
 "                        Possible values are: realtime, monotonic,\n"
 "                        monotonic_raw, boottime, perf. If supported, default\n"
 "                        is monotonic, otherwise is perf.\n"
-"--cpu cpu_item1,cpu_item2,...\n"
-"             Collect samples only on the selected cpus. cpu_item can be cpu\n"
-"             number like 1, or cpu range like 0-3.\n"
+"--cpu cpu_item1,cpu_item2,...  Monitor events on selected cpus. cpu_item can be a number like\n"
+"                               1, or a range like 0-3. A --cpu option affects all event types\n"
+"                               following it until meeting another --cpu option.\n"
 "--duration time_in_sec  Monitor for time_in_sec seconds instead of running\n"
 "                        [command]. Here time_in_sec may be any positive\n"
 "                        floating point number.\n"
@@ -313,6 +313,8 @@ RECORD_FILTER_OPTION_HELP_MSG_FOR_RECORDING
 "--decode-etm                     Convert ETM data into branch lists while recording.\n"
 "--binary binary_name             Used with --decode-etm to only generate data for binaries\n"
 "                                 matching binary_name regex.\n"
+"--record-timestamp               Generate timestamp packets in ETM stream.\n"
+"--record-cycles                  Generate cycle count packets in ETM stream.\n"
 "\n"
 "Other options:\n"
 "--exit-with-parent            Stop recording when the thread starting simpleperf dies.\n"
@@ -393,7 +395,7 @@ RECORD_FILTER_OPTION_HELP_MSG_FOR_RECORDING
   bool SaveRecordForPostUnwinding(Record* record);
   bool SaveRecordAfterUnwinding(Record* record);
   bool SaveRecordWithoutUnwinding(Record* record);
-  bool ProcessJITDebugInfo(const std::vector<JITDebugInfo>& debug_info, bool sync_kernel_records);
+  bool ProcessJITDebugInfo(std::vector<JITDebugInfo> debug_info, bool sync_kernel_records);
   bool ProcessControlCmd(IOEventLoop* loop);
   void UpdateRecord(Record* record);
   bool UnwindRecord(SampleRecord& r);
@@ -413,7 +415,6 @@ RECORD_FILTER_OPTION_HELP_MSG_FOR_RECORDING
   void CollectHitFileInfo(const SampleRecord& r, std::unordered_set<Dso*>* dso_set);
   bool DumpETMBranchListFeature();
 
-  std::unique_ptr<SampleSpeed> sample_speed_;
   bool system_wide_collection_;
   uint64_t branch_sampling_;
   bool fp_callchain_sampling_;
@@ -429,7 +430,6 @@ RECORD_FILTER_OPTION_HELP_MSG_FOR_RECORDING
   bool can_dump_kernel_symbols_;
   bool dump_symbols_;
   std::string clockid_;
-  std::vector<int> cpus_;
   EventSelectionSet event_selection_set_;
 
   std::pair<size_t, size_t> mmap_page_range_;
@@ -584,12 +584,8 @@ bool RecordCommand::PrepareRecording(Workload* workload) {
         LOG(INFO) << "Hardware events are not available, switch to cpu-clock.";
       }
     }
-    size_t group_id;
-    if (!event_selection_set_.AddEventType(event_type, &group_id)) {
+    if (!event_selection_set_.AddEventType(event_type)) {
       return false;
-    }
-    if (sample_speed_) {
-      event_selection_set_.SetSampleSpeed(group_id, *sample_speed_);
     }
   }
 
@@ -657,7 +653,7 @@ bool RecordCommand::PrepareRecording(Workload* workload) {
   }
 
   // 5. Open perf event files and create mapped buffers.
-  if (!event_selection_set_.OpenEventFiles(cpus_)) {
+  if (!event_selection_set_.OpenEventFiles()) {
     return false;
   }
   size_t record_buffer_size = 0;
@@ -720,8 +716,8 @@ bool RecordCommand::PrepareRecording(Workload* workload) {
     }
   }
   if (jit_debug_reader_) {
-    auto callback = [this](const std::vector<JITDebugInfo>& debug_info, bool sync_kernel_records) {
-      return ProcessJITDebugInfo(debug_info, sync_kernel_records);
+    auto callback = [this](std::vector<JITDebugInfo> debug_info, bool sync_kernel_records) {
+      return ProcessJITDebugInfo(std::move(debug_info), sync_kernel_records);
     };
     if (!jit_debug_reader_->RegisterDebugInfoCallback(loop, callback)) {
       return false;
@@ -1024,20 +1020,22 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
     }
   }
 
-  if (auto value = options.PullValue("--cpu"); value) {
-    if (auto cpus = GetCpusFromString(*value->str_value); cpus) {
-      cpus_.assign(cpus->begin(), cpus->end());
-    } else {
-      return false;
-    }
-  }
-
   if (!options.PullUintValue("--cpu-percent", &cpu_time_max_percent_, 1, 100)) {
     return false;
   }
 
   if (options.PullBoolValue("--decode-etm")) {
     etm_branch_list_generator_ = ETMBranchListGenerator::Create(system_wide_collection_);
+  }
+
+  if (options.PullBoolValue("--record-timestamp")) {
+    ETMRecorder& recorder = ETMRecorder::GetInstance();
+    recorder.SetRecordTimestamp(true);
+  }
+
+  if (options.PullBoolValue("--record-cycles")) {
+    ETMRecorder& recorder = ETMRecorder::GetInstance();
+    recorder.SetRecordCycles(true);
   }
 
   if (!options.PullDoubleValue("--duration", &duration_in_sec_, 1e-9)) {
@@ -1179,8 +1177,6 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
   CHECK(options.values.empty());
 
   // Process ordered options.
-  std::vector<size_t> wait_setting_speed_event_groups;
-
   for (const auto& pair : ordered_options) {
     const OptionName& name = pair.first;
     const OptionValue& value = pair.second;
@@ -1190,20 +1186,17 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
         LOG(ERROR) << "invalid " << name << ": " << value.uint_value;
         return false;
       }
+      SampleRate rate;
       if (name == "-c") {
-        sample_speed_.reset(new SampleSpeed(0, value.uint_value));
+        rate.sample_period = value.uint_value;
       } else {
         if (value.uint_value >= INT_MAX) {
           LOG(ERROR) << "sample freq can't be bigger than INT_MAX: " << value.uint_value;
           return false;
         }
-        sample_speed_.reset(new SampleSpeed(value.uint_value, 0));
+        rate.sample_freq = value.uint_value;
       }
-
-      for (auto groud_id : wait_setting_speed_event_groups) {
-        event_selection_set_.SetSampleSpeed(groud_id, *sample_speed_);
-      }
-      wait_setting_speed_event_groups.clear();
+      event_selection_set_.SetSampleRateForNewEvents(rate);
 
     } else if (name == "--call-graph") {
       std::vector<std::string> strs = android::base::Split(*value.str_value, ",");
@@ -1232,6 +1225,13 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
         }
       }
 
+    } else if (name == "--cpu") {
+      if (auto cpus = GetCpusFromString(*value.str_value); cpus) {
+        event_selection_set_.SetCpusForNewEvents(
+            std::vector<int>(cpus.value().begin(), cpus.value().end()));
+      } else {
+        return false;
+      }
     } else if (name == "-e") {
       std::vector<std::string> event_types = android::base::Split(*value.str_value, ",");
       for (auto& event_type : event_types) {
@@ -1240,17 +1240,10 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
             return false;
           }
         }
-        size_t group_id;
-        if (!event_selection_set_.AddEventType(event_type, &group_id)) {
+        if (!event_selection_set_.AddEventType(event_type)) {
           return false;
         }
-        if (sample_speed_) {
-          event_selection_set_.SetSampleSpeed(group_id, *sample_speed_);
-        } else {
-          wait_setting_speed_event_groups.push_back(group_id);
-        }
       }
-
     } else if (name == "-g") {
       fp_callchain_sampling_ = false;
       dwarf_callchain_sampling_ = true;
@@ -1263,16 +1256,9 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
           }
         }
       }
-      size_t group_id;
-      if (!event_selection_set_.AddEventGroup(event_types, &group_id)) {
+      if (!event_selection_set_.AddEventGroup(event_types)) {
         return false;
       }
-      if (sample_speed_) {
-        event_selection_set_.SetSampleSpeed(group_id, *sample_speed_);
-      } else {
-        wait_setting_speed_event_groups.push_back(group_id);
-      }
-
     } else if (name == "--tp-filter") {
       if (!event_selection_set_.SetTracepointFilter(*value.str_value)) {
         return false;
@@ -1380,7 +1366,7 @@ bool RecordCommand::TraceOffCpu() {
                << android::base::Join(accepted_events, ' ');
     return false;
   }
-  if (!event_selection_set_.AddEventType("sched:sched_switch")) {
+  if (!event_selection_set_.AddEventType("sched:sched_switch", SampleRate(0, 1))) {
     return false;
   }
   if (IsSwitchRecordSupported()) {
@@ -1538,7 +1524,7 @@ bool RecordCommand::ProcessRecord(Record* record) {
   // Record filter check should go after DumpMapsForRecord(). Otherwise, process/thread name
   // filters don't work in system wide collection.
   if (record->type() == PERF_RECORD_SAMPLE) {
-    if (!record_filter_.Check(static_cast<SampleRecord*>(record))) {
+    if (!record_filter_.Check(static_cast<SampleRecord&>(*record))) {
       return true;
     }
   }
@@ -1650,7 +1636,7 @@ bool RecordCommand::SaveRecordWithoutUnwinding(Record* record) {
   return record_file_writer_->WriteRecord(*record);
 }
 
-bool RecordCommand::ProcessJITDebugInfo(const std::vector<JITDebugInfo>& debug_info,
+bool RecordCommand::ProcessJITDebugInfo(std::vector<JITDebugInfo> debug_info,
                                         bool sync_kernel_records) {
   for (auto& info : debug_info) {
     if (info.type == JITDebugInfo::JIT_DEBUG_JIT_CODE) {
@@ -1663,8 +1649,12 @@ bool RecordCommand::ProcessJITDebugInfo(const std::vector<JITDebugInfo>& debug_i
         return false;
       }
     } else {
-      if (info.extracted_dex_file_map) {
-        ThreadMmap& map = *info.extracted_dex_file_map;
+      if (!info.symbols.empty()) {
+        Dso* dso = thread_tree_.FindUserDsoOrNew(info.file_path, 0, DSO_DEX_FILE);
+        dso->SetSymbols(&info.symbols);
+      }
+      if (info.dex_file_map) {
+        ThreadMmap& map = *info.dex_file_map;
         uint64_t timestamp =
             jit_debug_reader_->SyncWithRecords() ? info.timestamp : last_record_timestamp_;
         Mmap2Record record(dumping_attr_id_.attr, false, info.pid, info.pid, map.start_addr,
