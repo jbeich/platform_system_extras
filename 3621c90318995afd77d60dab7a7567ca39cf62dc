@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "593729a2_40e501ae",
+        "filename": "simpleperf/cmd_record_test.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 939,
+      "author": {
+        "id": 1978766
+      },
+      "writtenOn": "2023-11-09T04:52:28Z",
+      "side": 1,
+      "message": "nit: is \"unknown\" us always in lowercase?",
+      "revId": "3621c90318995afd77d60dab7a7567ca39cf62dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
