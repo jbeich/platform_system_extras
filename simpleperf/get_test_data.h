@@ -53,7 +53,7 @@ static BuildId elf_file_build_id("0b12a384a9f4a3f3659b7171ca615dbec3a81f71");
 // To generate apk supporting execution on shared libraries in apk:
 // 1. Add android:extractNativeLibs=false in AndroidManifest.xml.
 // 2. Use `zip -0` to store native libraries in apk without compression.
-// 3. Use `zipalign -p 4096` to make native libraries in apk start at page boundaries.
+// 3. Use `zipalign -P 16` to make native libraries in apk start at page boundaries.
 //
 // The logical in libhello-jni.so is as below:
 //  volatile int GlobalVar;
