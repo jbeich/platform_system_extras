@@ -109,6 +109,8 @@ static void CheckRecordEqual(const Record& r1, const Record& r2) {
   } else if (r1.type() == PERF_RECORD_BUILD_ID) {
     CheckBuildIdRecordDataEqual(static_cast<const BuildIdRecord&>(r1),
                                 static_cast<const BuildIdRecord&>(r2));
+  } else if (r1.type() == SIMPLE_PERF_RECORD_DEBUG) {
+    ASSERT_STREQ(static_cast<const DebugRecord&>(r1).s, static_cast<const DebugRecord&>(r2).s);
   }
 }
 
