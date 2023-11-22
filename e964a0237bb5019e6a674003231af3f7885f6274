@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a3d5b9f_39353c47",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1978766
+      },
+      "writtenOn": "2023-11-22T22:49:34Z",
+      "side": 1,
+      "message": "nice feature. maybe we can put this in the next release notes",
+      "revId": "e964a0237bb5019e6a674003231af3f7885f6274",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
