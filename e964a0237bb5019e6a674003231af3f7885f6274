@@ -51,6 +51,24 @@
       "message": "Do we want to consider removing this field from this class now?  I don\u0027t know if there\u0027s a need to keep this the same size or binary compatible, but if not, this looks like it\u0027s unused now.",
       "revId": "e964a0237bb5019e6a674003231af3f7885f6274",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e55e959d_d5f9a395",
+        "filename": "simpleperf/IOEventLoop.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2023-11-27T20:26:15Z",
+      "side": 1,
+      "message": "Thanks for reminding me! Uploaded https://android-review.git.corp.google.com/c/platform/system/extras/+/2847994 to remove it.",
+      "parentUuid": "7fdce6f9_51000800",
+      "revId": "e964a0237bb5019e6a674003231af3f7885f6274",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
