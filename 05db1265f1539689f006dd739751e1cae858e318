@@ -52,6 +52,24 @@
       "parentUuid": "969a7e37_9d2372f5",
       "revId": "05db1265f1539689f006dd739751e1cae858e318",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bcfeb480_6ec0fb60",
+        "filename": "libatrace_rust/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 2009465
+      },
+      "writtenOn": "2023-11-30T13:12:25Z",
+      "side": 1,
+      "message": "I can confirm that this formatting is ok",
+      "parentUuid": "04c76006_f5fc7dec",
+      "revId": "05db1265f1539689f006dd739751e1cae858e318",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
