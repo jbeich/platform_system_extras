@@ -34,6 +34,24 @@
       "parentUuid": "f5c4bca5_5ed6fec9",
       "revId": "05db1265f1539689f006dd739751e1cae858e318",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04c76006_f5fc7dec",
+        "filename": "libatrace_rust/src/lib.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1992436
+      },
+      "writtenOn": "2023-11-30T09:21:07Z",
+      "side": 1,
+      "message": "If you want to doublecheck the formatting, you can run it manually with this:\n\nrustfmt --config-path\u003dREPO_ROOT/build/soong/scripts/rustfmt.toml",
+      "parentUuid": "969a7e37_9d2372f5",
+      "revId": "05db1265f1539689f006dd739751e1cae858e318",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
