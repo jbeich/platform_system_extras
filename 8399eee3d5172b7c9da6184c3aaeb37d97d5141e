@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f80763a8_160530d9",
+        "filename": "simpleperf/ETMRecorder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2023-12-01T21:50:01Z",
+      "side": 1,
+      "message": "Do we really need two variables here? If not, I feel using only one variable more readable.",
+      "range": {
+        "startLine": 84,
+        "startChar": 2,
+        "endLine": 84,
+        "endChar": 10
+      },
+      "revId": "8399eee3d5172b7c9da6184c3aaeb37d97d5141e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0959f75b_20c6b401",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2023-12-01T21:50:01Z",
+      "side": 1,
+      "message": "Shall we make it more explicit that this is for ETM data, like \"threshold for cycle count packets in ETM stream\"?",
+      "range": {
+        "startLine": 318,
+        "startChar": 63,
+        "endLine": 318,
+        "endChar": 64
+      },
+      "revId": "8399eee3d5172b7c9da6184c3aaeb37d97d5141e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cdd3dfb7_3aa86ec5",
+        "filename": "simpleperf/cmd_record_impl.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2023-12-01T21:50:01Z",
+      "side": 1,
+      "message": "options are sorted by name",
+      "range": {
+        "startLine": 55,
+        "startChar": 7,
+        "endLine": 55,
+        "endChar": 9
+      },
+      "revId": "8399eee3d5172b7c9da6184c3aaeb37d97d5141e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
