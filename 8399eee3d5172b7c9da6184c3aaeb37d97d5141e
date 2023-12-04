@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "723888ba_cbaae711",
+        "filename": "simpleperf/ETMRecorder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1077495
+      },
+      "writtenOn": "2023-12-04T02:27:47Z",
+      "side": 1,
+      "message": "I\u0027m thinking about actually naming this variable to `config3_` and rename `sink_config_` to `config2_`, since there are other bitfields in both config2 and config3 that can be used for other configurations. If that is the case, I think we should keep these two variable separated.",
+      "parentUuid": "f80763a8_160530d9",
+      "range": {
+        "startLine": 84,
+        "startChar": 2,
+        "endLine": 84,
+        "endChar": 10
+      },
+      "revId": "8399eee3d5172b7c9da6184c3aaeb37d97d5141e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0959f75b_20c6b401",
         "filename": "simpleperf/cmd_record.cpp",
         "patchSetId": 3
@@ -37,6 +61,30 @@
       "writtenOn": "2023-12-01T21:50:01Z",
       "side": 1,
       "message": "Shall we make it more explicit that this is for ETM data, like \"threshold for cycle count packets in ETM stream\"?",
+      "range": {
+        "startLine": 318,
+        "startChar": 63,
+        "endLine": 318,
+        "endChar": 64
+      },
+      "revId": "8399eee3d5172b7c9da6184c3aaeb37d97d5141e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c866d4a5_9f7b415b",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 1077495
+      },
+      "writtenOn": "2023-12-04T02:27:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0959f75b_20c6b401",
       "range": {
         "startLine": 318,
         "startChar": 63,
@@ -60,6 +108,30 @@
       "writtenOn": "2023-12-01T21:50:01Z",
       "side": 1,
       "message": "options are sorted by name",
+      "range": {
+        "startLine": 55,
+        "startChar": 7,
+        "endLine": 55,
+        "endChar": 9
+      },
+      "revId": "8399eee3d5172b7c9da6184c3aaeb37d97d5141e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b03df568_739d49b8",
+        "filename": "simpleperf/cmd_record_impl.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1077495
+      },
+      "writtenOn": "2023-12-04T02:27:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cdd3dfb7_3aa86ec5",
       "range": {
         "startLine": 55,
         "startChar": 7,
