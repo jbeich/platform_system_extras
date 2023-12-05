@@ -51,6 +51,24 @@
       "parentUuid": "6ebd61eb_d7d14812",
       "revId": "f6e4fdc4f2c896ac7c585fcce186b22ed5d26404",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f07cc9d_8fcbddfb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2023-12-05T22:31:55Z",
+      "side": 1,
+      "message": "Discussed in chat -- this is unrelated to \"EH\".",
+      "parentUuid": "024ca987_b41d024b",
+      "revId": "f6e4fdc4f2c896ac7c585fcce186b22ed5d26404",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
