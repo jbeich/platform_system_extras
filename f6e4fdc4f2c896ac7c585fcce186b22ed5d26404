@@ -16,6 +16,23 @@
       "message": "Feedback from the people working on 16K page support would be appreciated...",
       "revId": "f6e4fdc4f2c896ac7c585fcce186b22ed5d26404",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ebd61eb_d7d14812",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2023-12-05T19:51:08Z",
+      "side": 1,
+      "message": "After this cl, will be able to use EH hardware in 16k page size kernels? or do we need to do some more work?",
+      "revId": "f6e4fdc4f2c896ac7c585fcce186b22ed5d26404",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
