@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7980376_a9ba7a3e",
+        "filename": "simpleperf/ETMRecorder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2023-12-07T18:31:56Z",
+      "side": 1,
+      "message": "I see. Renaming is fine, but not necessary. The comments for variables already help explain their use.",
+      "parentUuid": "723888ba_cbaae711",
+      "range": {
+        "startLine": 84,
+        "startChar": 2,
+        "endLine": 84,
+        "endChar": 10
+      },
+      "revId": "8399eee3d5172b7c9da6184c3aaeb37d97d5141e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0959f75b_20c6b401",
