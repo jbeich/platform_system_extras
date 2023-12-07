@@ -33,6 +33,24 @@
       "message": "TKS",
       "revId": "01ff49da9a2acd57a5d01f0229b623ab8b25bd1d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa158912_5ed48e28",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2023-12-07T22:05:58Z",
+      "side": 1,
+      "message": "I think the configuration will be silently ignored if not supported. If anyone cares, we can check /sys/bus/event_source/devices/cs_etm/format to find available configurations for etm.",
+      "parentUuid": "dcf44e6e_fb317c14",
+      "revId": "01ff49da9a2acd57a5d01f0229b623ab8b25bd1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
