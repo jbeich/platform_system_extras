@@ -16,6 +16,23 @@
       "message": "What happens if underlying kernel does not support it? Would user see error for that?",
       "revId": "01ff49da9a2acd57a5d01f0229b623ab8b25bd1d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8bdb56f1_5566a555",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2046410
+      },
+      "writtenOn": "2023-12-07T20:39:59Z",
+      "side": 1,
+      "message": "TKS",
+      "revId": "01ff49da9a2acd57a5d01f0229b623ab8b25bd1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
