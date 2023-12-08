@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "34ca1e01_cb167588",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2023-12-08T00:22:54Z",
+      "side": 1,
+      "message": "ps2: minor improvements.",
+      "revId": "3024a60a0648ae31b5ed4a5e5d517b3db1a6f1b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
