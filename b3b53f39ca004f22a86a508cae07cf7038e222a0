@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f3e5f87_7dc5692f",
+        "filename": "simpleperf/scripts/ipc.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2023-12-11T22:52:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fc3082cc_d15b2364",
+      "range": {
+        "startLine": 85,
+        "startChar": 7,
+        "endLine": 85,
+        "endChar": 53
+      },
+      "revId": "b3b53f39ca004f22a86a508cae07cf7038e222a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "64fa44ea_f86d44dd",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-12-07T19:02:00Z",
       "side": 1,
       "message": "I prefer to skip this step and use /system/bin/simpleperf on device instead. Because the simpleperf stat options used in this script have been stable and supported on older Android versions.",
+      "range": {
+        "startLine": 114,
+        "startChar": 4,
+        "endLine": 114,
+        "endChar": 23
+      },
+      "revId": "b3b53f39ca004f22a86a508cae07cf7038e222a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c8891a8_412538b4",
+        "filename": "simpleperf/scripts/ipc.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2023-12-11T22:52:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "64fa44ea_f86d44dd",
       "range": {
         "startLine": 114,
         "startChar": 4,
