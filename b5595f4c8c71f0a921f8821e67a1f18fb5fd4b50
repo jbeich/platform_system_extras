@@ -16,6 +16,52 @@
       "message": "ps2: removed unused code",
       "revId": "b5595f4c8c71f0a921f8821e67a1f18fb5fd4b50",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c571a1c1_66cdfd8f",
+        "filename": "profcollectd/libprofcollectd/simpleperf_lbr_trace_provider.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1087625
+      },
+      "writtenOn": "2023-12-13T23:18:16Z",
+      "side": 1,
+      "message": "Should be LBR here.",
+      "range": {
+        "startLine": 65,
+        "startChar": 12,
+        "endLine": 65,
+        "endChar": 28
+      },
+      "revId": "b5595f4c8c71f0a921f8821e67a1f18fb5fd4b50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3aea5a27_e8463e0c",
+        "filename": "profcollectd/libprofcollectd/simpleperf_lbr_trace_provider.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1087625
+      },
+      "writtenOn": "2023-12-13T23:18:16Z",
+      "side": 1,
+      "message": "we can hoist the common logic in both providers to a shared parent. this can be done in a follow-up cl.",
+      "range": {
+        "startLine": 104,
+        "startChar": 7,
+        "endLine": 104,
+        "endChar": 19
+      },
+      "revId": "b5595f4c8c71f0a921f8821e67a1f18fb5fd4b50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
