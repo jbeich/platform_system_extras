@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "21681cfc_d3cd0866",
+        "filename": "profcollectd/libprofcollectd/simpleperf_lbr_trace_provider.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2023-12-14T00:56:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c571a1c1_66cdfd8f",
+      "range": {
+        "startLine": 65,
+        "startChar": 12,
+        "endLine": 65,
+        "endChar": 28
+      },
+      "revId": "b5595f4c8c71f0a921f8821e67a1f18fb5fd4b50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3aea5a27_e8463e0c",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-12-13T23:18:16Z",
       "side": 1,
       "message": "we can hoist the common logic in both providers to a shared parent. this can be done in a follow-up cl.",
+      "range": {
+        "startLine": 104,
+        "startChar": 7,
+        "endLine": 104,
+        "endChar": 19
+      },
+      "revId": "b5595f4c8c71f0a921f8821e67a1f18fb5fd4b50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46b85346_1186b429",
+        "filename": "profcollectd/libprofcollectd/simpleperf_lbr_trace_provider.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2023-12-14T00:56:54Z",
+      "side": 1,
+      "message": "Probably that\u0027s not easily supported in rust. I considered https://github.com/rust-lang/rfcs/issues/1024 and https://users.rust-lang.org/t/how-to-model-inheritance-hierarchy/33380/8. But there isn\u0027t a better solution than the current one, considering the code in the duplicated methods is only one line.",
+      "parentUuid": "3aea5a27_e8463e0c",
       "range": {
         "startLine": 104,
         "startChar": 7,
