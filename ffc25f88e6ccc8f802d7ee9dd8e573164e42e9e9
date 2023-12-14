@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff2b65ef_a24a7bf3",
+        "filename": "simpleperf/rust/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2023-12-14T17:40:32Z",
+      "side": 1,
+      "message": "Yes. If the arguments are not valid, it will return false.",
+      "parentUuid": "1f30e73b_d6b05804",
+      "revId": "ffc25f88e6ccc8f802d7ee9dd8e573164e42e9e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "15209c11_60fb2aec",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-12-14T11:13:23Z",
       "side": 1,
       "message": "Ditto.",
+      "revId": "ffc25f88e6ccc8f802d7ee9dd8e573164e42e9e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8888abc9_a9cfa2ac",
+        "filename": "simpleperf/rust/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2023-12-14T17:40:32Z",
+      "side": 1,
+      "message": "Same as above.",
+      "parentUuid": "15209c11_60fb2aec",
       "revId": "ffc25f88e6ccc8f802d7ee9dd8e573164e42e9e9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
