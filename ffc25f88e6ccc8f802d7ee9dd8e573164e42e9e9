@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cf59811a_80b62790",
+        "filename": "simpleperf/rust/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2023-12-18T15:50:14Z",
+      "side": 1,
+      "message": "How does `RunRecordCmd` know whether the pointer points to valid, initialised memory, and doesn\u0027t alias anything else? How does it know whether `arg_count` is within the allocated bounds of the array?\n\nI very much suspect that it has expectations on its parameters; the point of the safety comment is to explain how these are met.",
+      "parentUuid": "ff2b65ef_a24a7bf3",
+      "revId": "ffc25f88e6ccc8f802d7ee9dd8e573164e42e9e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "15209c11_60fb2aec",
         "filename": "simpleperf/rust/lib.rs",
         "patchSetId": 3
