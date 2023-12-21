@@ -51,6 +51,24 @@
       "parentUuid": "dcf44e6e_fb317c14",
       "revId": "01ff49da9a2acd57a5d01f0229b623ab8b25bd1d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c3ea21d_720535da",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1077495
+      },
+      "writtenOn": "2023-12-21T03:35:09Z",
+      "side": 1,
+      "message": "Yes, the configuration will be ignored by the kernel.",
+      "parentUuid": "aa158912_5ed48e28",
+      "revId": "01ff49da9a2acd57a5d01f0229b623ab8b25bd1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
