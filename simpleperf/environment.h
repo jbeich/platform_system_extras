@@ -129,6 +129,8 @@ int GetAndroidVersion();
 std::optional<std::pair<int, int>> GetKernelVersion();
 
 std::string GetHardwareFromCpuInfo(const std::string& cpu_info);
+std::vector<std::string> GetCPUpartFromCpuInfo(const std::string& cpu_info);
+std::string GetCpuInfo();
 
 bool MappedFileOnlyExistInMemory(const char* filename);
 

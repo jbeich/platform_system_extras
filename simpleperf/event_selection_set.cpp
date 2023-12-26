@@ -262,7 +262,8 @@ bool EventSelectionSet::BuildAndCheckEventSelection(const std::string& event_nam
   }
 
   selection->event_fds.clear();
-
+  printf("Hi\n");
+  printf("%s\n", selection->event_type_modifier.event_type.name.c_str());
   for (const auto& group : groups_) {
     for (const auto& sel : group.selections) {
       if (sel.event_type_modifier.name == selection->event_type_modifier.name) {
@@ -313,8 +314,41 @@ bool EventSelectionSet::AddEventGroup(const std::vector<std::string>& event_name
   }
   if (cpus_) {
     group.cpus = cpus_.value();
+  } else {
+    // 1. Check Unsupported cpus
+    std::string cpuInfo = GetCpuInfo();
+    std::vector<std::string> cpu_parts_ = GetCPUpartFromCpuInfo(cpuInfo);
+    for (const auto& sel : group.selections) {
+      // Check cpu status
+      if (std::find(cpu_parts_.begin(), cpu_parts_.end(), "0xd46") != cpu_parts_.end() &&
+          sel.event_type_modifier.event_type.name == "armv8_pmuv3/l3d_cache_refill/") {
+        std::vector<int> replaced_cpus;
+        std::vector<int> remaining_cpus;
+        for (int i = 0; i < cpu_parts_.size(); i++) {
+          if (cpu_parts_[i] == "0xd46") {
+            replaced_cpus.push_back(i);
+            LOG(WARNING) << "armv8_pmuv3/l3d_cache_refill/ is replaced to "
+                            "raw-l3d-cache-refill-rd for cpu "
+                         << i;
+          } else {
+            remaining_cpus.push_back(i);
+          }
+        }
+        group.cpus = remaining_cpus;
+        // Replace this selection
+
+        EventSelectionGroup replaced_group;
+        replaced_group.selections = group.selections;
+        replaced_group.set_sample_rate = group.set_sample_rate;
+        replaced_group.cpus = replaced_cpus;
+        groups_.emplace_back(std::move(replaced_group));
+      }
+    }
+
+    // 2. Re-do addEventGroup with new cpus and new event
   }
   groups_.emplace_back(std::move(group));
+
   UnionSampleType();
   return true;
 }
@@ -403,6 +437,10 @@ std::unordered_map<uint64_t, std::string> EventSelectionSet::GetEventNamesById()
     }
   }
   return result;
+}
+
+bool EventSelectionSet::IsCurrentCpusEmpty() {
+  return !cpus_;
 }
 
 std::unordered_map<uint64_t, int> EventSelectionSet::GetCpusById() const {
