@@ -506,6 +506,23 @@ const EventType* FindEventTypeByName(const std::string& name, bool report_error)
   return nullptr;
 }
 
+const EventType* FindEventTypeByName(const std::string& name, bool report_error) {
+  const EventType* event_type = EventTypeManager::Instance().FindType(name);
+  if (event_type != nullptr) {
+    return event_type;
+  }
+  event_type = EventTypeManager::Instance().AddRawType(name);
+  if (event_type != nullptr) {
+    return event_type;
+  }
+  if (report_error) {
+    LOG(ERROR) << "Unknown event_type '" << name
+               << "', try `simpleperf list` to list all possible event type names";
+  }
+  return nullptr;
+}
+// We might need Parse Event by arch
+
 std::unique_ptr<EventTypeAndModifier> ParseEventType(const std::string& event_type_str) {
   static std::string modifier_characters = "ukhGHp";
   std::unique_ptr<EventTypeAndModifier> event_type_modifier(new EventTypeAndModifier);

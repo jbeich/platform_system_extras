@@ -127,6 +127,7 @@ class EventSelectionSet {
   void SetSampleRateForNewEvents(const SampleRate& rate);
   // Set on which cpus to monitor events. Only set cpus for events that haven't set before.
   void SetCpusForNewEvents(const std::vector<int>& cpus);
+  bool IsCurrentCpusEmpty();
   bool SetBranchSampling(uint64_t branch_sample_type);
   void EnableFpCallChainSampling();
   bool EnableDwarfCallChainSampling(uint32_t dump_stack_size);

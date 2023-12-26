@@ -948,6 +948,29 @@ std::string GetHardwareFromCpuInfo(const std::string& cpu_info) {
   return "";
 }
 
+std::vector<std::string> GetCPUpartFromCpuInfo(const std::string& cpu_info) {
+  std::vector<std::string> cpuParts;
+  for (auto& line : android::base::Split(cpu_info, "\n")) {
+    size_t pos = line.find(":");
+    if (pos != std::string::npos) {
+      std::string key = android::base::Trim(line.substr(0, pos));
+      if (key == "CPU part") {
+        cpuParts.push_back(android::base::Trim(line.substr(pos + 1)));
+      }
+    }
+  }
+  return cpuParts;
+}
+
+std::string GetCpuInfo() {
+  std::string argv0;
+  if (!android::base::ReadFileToString("/proc/cpuinfo", &argv0)) {
+    // Maybe we don't have permission to read it.
+    return std::string();
+  }
+  return argv0;
+}
+
 bool MappedFileOnlyExistInMemory(const char* filename) {
   // Mapped files only existing in memory:
   //   empty name

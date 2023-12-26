@@ -489,6 +489,7 @@ class StatCommand : public Command {
   std::vector<std::string> sort_keys_;
   std::optional<SummaryComparator> summary_comparator_;
   bool print_hw_counter_ = false;
+  std::vector<std::string> cpu_parts_;
 };
 
 bool StatCommand::Run(const std::vector<std::string>& args) {
@@ -497,6 +498,8 @@ bool StatCommand::Run(const std::vector<std::string>& args) {
   }
   AllowMoreOpenedFiles();
 
+  std::string cpuInfo = GetCpuInfo();
+  cpu_parts_ = GetCPUpartFromCpuInfo(cpuInfo);
   // 1. Parse options, and use default measured event types if not given.
   std::vector<std::string> workload_args;
   ProbeEvents probe_events(event_selection_set_);
@@ -747,8 +750,37 @@ bool StatCommand::ParseOptions(const std::vector<std::string>& args,
         if (!probe_events.CreateProbeEventIfNotExist(event_type)) {
           return false;
         }
-        if (!event_selection_set_.AddEventType(event_type)) {
-          return false;
+        printf("%s", event_type.c_str());
+        if (event_type == "armv8_pmuv3/l3d_cache_refill/" &&
+            event_selection_set_.IsCurrentCpusEmpty() &&
+            std::find(cpu_parts_.begin(), cpu_parts_.end(), "0xd46") != cpu_parts_.end()) {
+          std::vector<int> replaced_cpus;
+          std::vector<int> remaining_cpus;
+          for (int i = 0; i < cpu_parts_.size(); i++) {
+            if (cpu_parts_[i] == "0xd46") {
+              replaced_cpus.push_back(i);
+              LOG(WARNING) << "armv8_pmuv3/l3d_cache_refill/ is replaced to "
+                              "raw-l3d-cache-refill-rd for cpu "
+                           << i;
+            } else {
+              remaining_cpus.push_back(i);
+            }
+          }
+          event_selection_set_.SetCpusForNewEvents(replaced_cpus);
+          // Create duplicate group of profile for selected set of CPUs
+          std::string replaced_event_type = "raw-l3d-cache-refill-rd";
+          if (!event_selection_set_.AddEventType(replaced_event_type)) {
+            return false;
+          }
+          event_selection_set_.SetCpusForNewEvents(remaining_cpus);
+          if (!event_selection_set_.AddEventType(event_type)) {
+            return false;
+          }
+          event_selection_set_.SetCpusForNewEvents(std::vector<int>());
+        } else {
+          if (!event_selection_set_.AddEventType(event_type)) {
+            return false;
+          }
         }
       }
     } else if (name == "--group") {
@@ -757,9 +789,9 @@ bool StatCommand::ParseOptions(const std::vector<std::string>& args,
         if (!probe_events.CreateProbeEventIfNotExist(event_type)) {
           return false;
         }
-      }
-      if (!event_selection_set_.AddEventGroup(event_types)) {
-        return false;
+        if (!event_selection_set_.AddEventType(event_type)) {
+          return false;
+        }
       }
     } else if (name == "--tp-filter") {
       if (!event_selection_set_.SetTracepointFilter(*value.str_value)) {

@@ -54,6 +54,16 @@ TEST(environment, GetHardwareFromCpuInfo) {
             GetHardwareFromCpuInfo(cpu_info));
 }
 
+TEST(environment, GetCPUpartFromCpuInfo) {
+  std::string cpu_info =
+      "CPU variant     : 0x1\n\n"
+      "CPU part        : 0xd4d\n"
+      "CPU variant     : 0x1\n\n"
+      "CPU part        : 0xd4e\n";
+  ASSERT_EQ("0xd4d", GetCPUpartFromCpuInfo(cpu_info)[0]);
+  ASSERT_EQ("0xd4e", GetCPUpartFromCpuInfo(cpu_info)[1]);
+}
+
 TEST(environment, MappedFileOnlyExistInMemory) {
   ASSERT_TRUE(MappedFileOnlyExistInMemory(""));
   ASSERT_TRUE(MappedFileOnlyExistInMemory("[stack]"));
