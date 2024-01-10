@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "04d15af5_03e8c00f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2024-01-10T00:14:59Z",
+      "side": 1,
+      "message": "ps2: small adjustment",
+      "revId": "3d304abc38702ce5ce25f6dff5e104ef7b42a5c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
