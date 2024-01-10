@@ -16,6 +16,23 @@
       "message": "ps2: small adjustment",
       "revId": "3d304abc38702ce5ce25f6dff5e104ef7b42a5c9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e829e7d_a3af6c58",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1978766
+      },
+      "writtenOn": "2024-01-10T01:28:55Z",
+      "side": 1,
+      "message": "\u003e  # Branch Instruction architecturally executed, immediate\n\nFrom the output, it is not super clear that \u0027immediate\u0027 is referring to branch instruction type.",
+      "revId": "3d304abc38702ce5ce25f6dff5e104ef7b42a5c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
