@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "ac02e919_4796659d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-01-17T23:22:54Z",
+      "side": 1,
+      "message": "btw confirmed to work even after a full sync, so we know the images are really different\n\nList of devices attached\n0.0.0.0:6520    device\n0.0.0.0:6521    device\n0.0.0.0:6522    device\n\nboo ya",
+      "parentUuid": "21103f79_1f9be1d6",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 0
+      },
+      "revId": "46cd9d1b58bfe6fba99064a90033887055d1c529",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "0d3c64ee_a4a5e086",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -78,6 +102,30 @@
       "side": 1,
       "message": "if you want to be super rigorous, you can use android::base::RemoveFileIfExists() and LOG() the returned error string on failure.",
       "parentUuid": "abbadeb2_c8286e0c",
+      "range": {
+        "startLine": 492,
+        "startChar": 0,
+        "endLine": 494,
+        "endChar": 32
+      },
+      "revId": "46cd9d1b58bfe6fba99064a90033887055d1c529",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e780ee0_1b0ccc37",
+        "filename": "partition_tools/lpmake.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 494,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-01-17T23:22:54Z",
+      "side": 1,
+      "message": "I agree it\u0027s better. Though, limited time 😞 I saved a note to follow-up. Will do in a separate patch at some point in the future, perhaps there is a chance it could break something",
+      "parentUuid": "53c232bd_a7e1829a",
       "range": {
         "startLine": 492,
         "startChar": 0,
