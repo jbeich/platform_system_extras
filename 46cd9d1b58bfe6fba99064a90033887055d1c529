@@ -62,6 +62,30 @@
       },
       "revId": "46cd9d1b58bfe6fba99064a90033887055d1c529",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53c232bd_a7e1829a",
+        "filename": "partition_tools/lpmake.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 494,
+      "author": {
+        "id": 1290458
+      },
+      "writtenOn": "2024-01-17T22:41:45Z",
+      "side": 1,
+      "message": "if you want to be super rigorous, you can use android::base::RemoveFileIfExists() and LOG() the returned error string on failure.",
+      "parentUuid": "abbadeb2_c8286e0c",
+      "range": {
+        "startLine": 492,
+        "startChar": 0,
+        "endLine": 494,
+        "endChar": 32
+      },
+      "revId": "46cd9d1b58bfe6fba99064a90033887055d1c529",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
