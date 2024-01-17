@@ -61,6 +61,15 @@ rust_library {
     ],
     shared_libs: ["libsimpleperf_profcollect"],
 
+    arch: {
+        arm64: {
+            features: ["etm"],
+        },
+        x86_64: {
+            features: ["lbr"],
+        },
+    },
+
     // Enable 'test' feature for more verbose logging and the logging trace provider.
     // features: ["test"],
 }
