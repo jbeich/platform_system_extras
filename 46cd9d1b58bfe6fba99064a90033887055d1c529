@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21103f79_1f9be1d6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-01-17T22:29:11Z",
+      "side": 1,
+      "message": "I believe this is the issue, but I realized that there may not have been enough changes on my system image to confirm, so I\u0027m syncing, building, and starting a new instance to confirm again",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 0
+      },
+      "revId": "46cd9d1b58bfe6fba99064a90033887055d1c529",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "abbadeb2_c8286e0c",
+        "filename": "partition_tools/lpmake.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 494,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-01-17T22:29:11Z",
+      "side": 1,
+      "message": "this will also save space in some cases, I believe, since the files aren\u0027t truncated",
+      "range": {
+        "startLine": 492,
+        "startChar": 0,
+        "endLine": 494,
+        "endChar": 32
+      },
+      "revId": "46cd9d1b58bfe6fba99064a90033887055d1c529",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
