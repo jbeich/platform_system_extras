@@ -20,9 +20,13 @@ mod config;
 mod report;
 mod scheduler;
 mod service;
-mod simpleperf_etm_trace_provider;
-mod simpleperf_lbr_trace_provider;
 mod trace_provider;
+
+#[cfg(feature = "etm")]
+mod simpleperf_etm_trace_provider;
+
+#[cfg(feature = "lbr")]
+mod simpleperf_lbr_trace_provider;
 
 #[cfg(feature = "test")]
 mod logging_trace_provider;

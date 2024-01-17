@@ -22,7 +22,10 @@ use std::path::{Path, PathBuf};
 use std::sync::{Arc, Mutex};
 use std::time::Duration;
 
+#[cfg(feature = "etm")]
 use crate::simpleperf_etm_trace_provider::SimpleperfEtmTraceProvider;
+
+#[cfg(feature = "lbr")]
 use crate::simpleperf_lbr_trace_provider::SimpleperfLbrTraceProvider;
 
 #[cfg(feature = "test")]
@@ -38,10 +41,13 @@ pub trait TraceProvider {
 }
 
 pub fn get_trace_provider() -> Result<Arc<Mutex<dyn TraceProvider + Send>>> {
+    #[cfg(feature = "etm")]
     if SimpleperfEtmTraceProvider::supported() {
         log::info!("simpleperf_etm trace provider registered.");
         return Ok(Arc::new(Mutex::new(SimpleperfEtmTraceProvider {})));
     }
+
+    #[cfg(feature = "lbr")]
     if SimpleperfLbrTraceProvider::supported() {
         log::info!("simpleperf_lbr trace provider registered.");
         return Ok(Arc::new(Mutex::new(SimpleperfLbrTraceProvider {})));
