@@ -1,5 +1,40 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5f537a8_58c5337f",
+        "filename": "f2fs_utils/mkf2fsuserimg.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1656502
+      },
+      "writtenOn": "2024-01-18T06:59:37Z",
+      "side": 1,
+      "message": "Blanks are forbidden around \"+\u003d\" operator, please remove them, thanks.",
+      "revId": "cd9b3698a14aa71b8a295a39f5d1490b1204f2a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "362929ef_10c31996",
+        "filename": "f2fs_utils/mkf2fsuserimg.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1656502
+      },
+      "writtenOn": "2024-01-18T06:59:37Z",
+      "side": 1,
+      "message": "Same as above.",
+      "revId": "cd9b3698a14aa71b8a295a39f5d1490b1204f2a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
