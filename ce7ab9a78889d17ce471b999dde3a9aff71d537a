@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a86c917d_d4d39abc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1081223
+      },
+      "writtenOn": "2024-01-22T18:33:23Z",
+      "side": 1,
+      "message": "Matthew: with those changes aosp_arm64 doesn\u0027t install liblazy_static anymore, so I think I got them all :)",
+      "revId": "ce7ab9a78889d17ce471b999dde3a9aff71d537a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
