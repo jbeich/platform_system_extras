@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb671b38_58a1476b",
+        "filename": "simpleperf/scripts/gecko_profile_generator.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 1978766
+      },
+      "writtenOn": "2024-02-03T00:40:52Z",
+      "side": 1,
+      "message": "nit: this is getting bigger. probably a good time to factor the code out into separate functions?",
+      "revId": "4c3c2781888094c59ef553cee8fed5e5d8173424",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
