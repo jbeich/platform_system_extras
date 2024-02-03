@@ -292,8 +292,13 @@ class MemAccess : public ITargetMemAccess {
         if (memory != nullptr && memory->getBufferSize() > map->pgoff &&
             (memory->getBufferSize() - map->pgoff >= map->len)) {
           data.buffer = memory->getBufferStart() + map->pgoff;
-        } else {
+        } else if (memory == nullptr) {
           data.buffer = nullptr;
+        } else {
+          // Memory was found, but the buffer is not good enough to be
+          // cached. "Invalidate" the cache by setting the map to
+          // null.
+          data.buffer_map = nullptr;
         }
       }
     }
@@ -930,8 +935,8 @@ class BranchDecoder {
   InstructionDecoder instruction_decoder_;
 };
 
-android::base::expected<void, std::string> ConvertBranchMapToInstrRanges(
-    Dso* dso, const BranchMap& branch_map, const ETMDecoder::InstrRangeCallbackFn& callback) {
+android::base::expected<void, std::string> ConvertETMBranchMapToInstrRanges(
+    Dso* dso, const ETMBranchMap& branch_map, const ETMDecoder::InstrRangeCallbackFn& callback) {
   ETMInstrRange instr_range;
   instr_range.dso = dso;
 
