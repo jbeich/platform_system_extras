@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2b71312_82a81b68",
+        "filename": "simpleperf/scripts/gecko_profile_generator.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 414,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2024-02-03T01:23:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "769dea88_a227c611",
+      "revId": "4c3c2781888094c59ef553cee8fed5e5d8173424",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bb671b38_58a1476b",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-02-03T00:40:52Z",
       "side": 1,
       "message": "nit: this is getting bigger. probably a good time to factor the code out into separate functions?",
+      "revId": "4c3c2781888094c59ef553cee8fed5e5d8173424",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bedb0f96_d7d32516",
+        "filename": "simpleperf/scripts/gecko_profile_generator.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2024-02-03T01:23:54Z",
+      "side": 1,
+      "message": "Will do it next time. Probably refactor it into a class.",
+      "parentUuid": "bb671b38_58a1476b",
       "revId": "4c3c2781888094c59ef553cee8fed5e5d8173424",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
