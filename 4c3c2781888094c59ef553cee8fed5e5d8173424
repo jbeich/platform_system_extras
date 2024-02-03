@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "769dea88_a227c611",
+        "filename": "simpleperf/scripts/gecko_profile_generator.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 414,
+      "author": {
+        "id": 1890456
+      },
+      "writtenOn": "2024-02-03T00:45:19Z",
+      "side": 1,
+      "message": "nit: rename it as `thread_map` according to PEP8?",
+      "revId": "4c3c2781888094c59ef553cee8fed5e5d8173424",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bb671b38_58a1476b",
         "filename": "simpleperf/scripts/gecko_profile_generator.py",
         "patchSetId": 1
