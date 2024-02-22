@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "15bbe512_f8dc4003",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2024-02-22T22:58:50Z",
+      "side": 1,
+      "message": "ps2: update commit msg.",
+      "revId": "dd7557cb7102c73c4ea2cb7cff705be4fe9fee6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
