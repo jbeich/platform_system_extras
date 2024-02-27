@@ -257,6 +257,8 @@ class ReportLib(object):
         self._SetKallsymsFileFunc = self._lib.SetKallsymsFile
         self._ShowIpForUnknownSymbolFunc = self._lib.ShowIpForUnknownSymbol
         self._ShowArtFramesFunc = self._lib.ShowArtFrames
+        self._RemoveMethodFunc = self._lib.RemoveMethod
+        self._RemoveMethodFunc.restype = ct.c_bool
         self._MergeJavaMethodsFunc = self._lib.MergeJavaMethods
         self._AddProguardMappingFileFunc = self._lib.AddProguardMappingFile
         self._AddProguardMappingFileFunc.restype = ct.c_bool
@@ -309,6 +311,9 @@ class ReportLib(object):
                 self.AddProguardMappingFile(file_path)
         if options.show_art_frames:
             self.ShowArtFrames(True)
+        if options.remove_method:
+            for name in options.remove_method:
+                self.RemoveMethod(name)
         if options.trace_offcpu:
             self.SetTraceOffCpuMode(options.trace_offcpu)
         if options.sample_filters:
@@ -337,6 +342,11 @@ class ReportLib(object):
     def ShowArtFrames(self, show: bool = True):
         """ Show frames of internal methods of the Java interpreter. """
         self._ShowArtFramesFunc(self.getInstance(), show)
+
+    def RemoveMethod(self, method_name_regex: str):
+        """ Remove methods with name containing method_name_regex. """
+        res = self._RemoveMethodFunc(self.getInstance(), _char_pt(method_name_regex))
+        _check(res, f'failed to call RemoveMethod({method_name_regex})')
 
     def MergeJavaMethods(self, merge: bool = True):
         """ This option merges jitted java methods with the same name but in different jit
@@ -588,6 +598,9 @@ class ProtoFileReportLib:
                 self.AddProguardMappingFile(file_path)
         if options.show_art_frames:
             self.ShowArtFrames(True)
+        if options.remove_method:
+            for name in options.remove_method:
+                self.RemoveMethod(name)
         if options.trace_offcpu:
             self.SetTraceOffCpuMode(options.trace_offcpu)
         if options.sample_filters:
@@ -645,6 +658,10 @@ class ProtoFileReportLib:
     def ShowArtFrames(self, show: bool = True):
         raise NotImplementedError(
             'Showing art frames are not implemented for report_sample profiles')
+
+    def RemoveMethod(self, method_name_regex: str):
+        """ Remove methods with name containing method_name_regex. """
+        raise NotImplementedError("Removing method isn't implemented for report_sample profiles")
 
     def SetSampleFilter(self, filters: List[str]):
         raise NotImplementedError('sample filters are not implemented for report_sample profiles')
