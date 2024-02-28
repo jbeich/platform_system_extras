@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "64f08e0f_8858f668",
+        "filename": "perf2cfg/perf2cfg_test.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1373864
+      },
+      "writtenOn": "2024-02-28T21:43:23Z",
+      "side": 1,
+      "message": "This is simpler, thanks. I presume you checked that all the tests still get discovered and run this way.",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 30
+      },
+      "revId": "05acbb693fb091ca43a19c00e1219fe435a6d11e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
