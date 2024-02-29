@@ -118,6 +118,7 @@ class EventSelectionSet {
   bool HasAuxTrace() const { return has_aux_trace_; }
   EventAttrIds GetEventAttrWithId() const;
   std::unordered_map<uint64_t, std::string> GetEventNamesById() const;
+  bool IsCurrentCpusEmpty() const;
   std::unordered_map<uint64_t, int> GetCpusById() const;
   std::map<int, size_t> GetHardwareCountersForCpus() const;
 
@@ -127,6 +128,9 @@ class EventSelectionSet {
   void SetSampleRateForNewEvents(const SampleRate& rate);
   // Set on which cpus to monitor events. Only set cpus for events that haven't set before.
   void SetCpusForNewEvents(const std::vector<int>& cpus);
+  // Set on which cpus to monitor events. Only set cpus for events that haven't added.
+  void SetCpusForFutrueEvents(const std::vector<int>& cpus);
+  void ResetCpus();
   bool SetBranchSampling(uint64_t branch_sample_type);
   void EnableFpCallChainSampling();
   bool EnableDwarfCallChainSampling(uint32_t dump_stack_size);
