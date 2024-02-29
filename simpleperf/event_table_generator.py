@@ -123,6 +123,7 @@ class CpuModel:
     implementer: int
     partnum: int
     supported_raw_events: list[int] = dataclasses.field(default_factory=list)
+    replace_events: list[list[int]] = dataclasses.field(default_factory=list)
 
 
 class ArchData:
@@ -160,6 +161,13 @@ class ArchData:
                     self.events.append(RawEvent(number, name, desc, limited_arch))
                     cpu_model.supported_raw_events.append(number)
 
+            # Load cpu specific events should be replaced in this cpu model.
+            if 'replace_events' in cpu:
+                for event in cpu['replace_events']:
+                    src = int(event[0], 16)
+                    dst = event[1]
+                    cpu_model.replace_events.append((src, dst))
+
     def get_event(self, event_number: int) -> RawEvent:
         for event in self.events:
             if event.number == event_number:
@@ -191,6 +199,22 @@ class RawEventGenerator:
         for cpu in self.arm64_data.cpus:
             event_list = ', '.join('0x%x' % number for number in cpu.supported_raw_events)
             lines.append('{"%s", {%s}},' % (cpu.name, event_list))
+        text += self.add_arm_guard('\n'.join(lines))
+        text += '};\n'
+        return text
+
+    def generate_cpu_replace_event(self) -> str:
+        text = """
+        // Map from cpu model to event replace pair [not_supported_event, replace_event].',
+        std::unordered_map<std::string, std::unordered_map<int, std::string>> cpu_replace_events = {
+        """
+
+        lines = []
+        for cpu in self.arm64_data.cpus:
+            if len(cpu.replace_events) == 0:
+                continue
+            replace_event_list = ', '.join('{0x%x, "%s"}' % (pair[0], pair[1]) for pair in cpu.replace_events)
+            lines.append('{"%s", {%s}},' % (cpu.name, replace_event_list))
         text += self.add_arm_guard('\n'.join(lines))
         text += '};\n'
         return text
@@ -234,6 +258,7 @@ def gen_events(event_table_file: str):
     """
     generated_str += raw_event_generator.generate_cpu_support_events()
     generated_str += raw_event_generator.generate_cpu_models()
+    generated_str += raw_event_generator.generate_cpu_replace_event()
 
     generated_str += """
         }  // namespace simpleperf
