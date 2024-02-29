@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "223933a0_376c04b2",
+        "filename": "simpleperf/cmd_stat.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2024-02-29T22:33:25Z",
+      "side": 1,
+      "message": "To make sure we don\u0027t happen to replace other event types having the same type-\u003econfig.\n```suggestion\n    const EventType* type \u003d FindEventTypeByName(event_type_name);\n    if (type-\u003etype !\u003d PERF_TYPE_RAW) {\n      return false;\n    }\n```",
+      "range": {
+        "startLine": 393,
+        "startChar": 64,
+        "endLine": 393,
+        "endChar": 65
+      },
+      "revId": "b5e3eaf99edf70575355fc66c99f75196f9f547c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12317f62_426776c8",
+        "filename": "simpleperf/event_selection_set.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2024-02-29T22:33:25Z",
+      "side": 1,
+      "message": "Instead of adding three functions modifying cpus, I feel it\u0027s easier to pass below data structure to EventSelectionSet:\n\nstd::map\u003cint, std::map\u003cuint64_t, uint64_t\u003e\u003e raw_event_replace_cpu_map\n\nIt maps from cpu number to how we want to replace raw events on that cpu.\nSay we want to replace 0x2A to 0xA2 on cpu 0. we can let raw_event_replace_cpu_map[0][0x2A] \u003d 0xA2.\n\nThen we can use this map in EventSelectionSet::OpenEventFilesOnGroup() to modify selection.event_attr.",
+      "range": {
+        "startLine": 133,
+        "startChar": 7,
+        "endLine": 133,
+        "endChar": 16
+      },
+      "revId": "b5e3eaf99edf70575355fc66c99f75196f9f547c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
