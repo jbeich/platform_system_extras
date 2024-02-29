@@ -49,6 +49,12 @@ namespace simpleperf {
 
 using android::base::Split;
 
+#if defined(__aarch64__) || defined(__arm__)
+extern std::unordered_map<uint64_t, std::string> arm64_cpuid_to_name;
+#endif  // defined(__aarch64__) || defined(__arm__)
+
+extern std::unordered_map<std::string, std::unordered_map<int, std::string>> cpu_replace_events;
+
 static std::vector<std::string> default_measured_event_types{
     "cpu-cycles",   "stalled-cycles-frontend", "stalled-cycles-backend",
     "instructions", "branch-instructions",     "branch-misses",
@@ -346,6 +352,74 @@ class DevfreqCounters {
 
  private:
   std::vector<std::string> mem_latency_governor_paths_;
+};
+
+class ReplaceEventChecker {
+ public:
+  bool Init() {
+#if defined(__aarch64__) || defined(__arm__)
+    cpu_models_ = GetARMCpuModels();
+    if (cpu_models_.empty()) {
+      LOG(ERROR) << "can't get device cpu info";
+      return false;
+    }
+    for (const auto& model : cpu_models_) {
+      uint64_t cpu_id = (static_cast<uint64_t>(model.implementer) << 32) | model.partnum;
+      if (auto it = arm64_cpuid_to_name.find(cpu_id); it != arm64_cpuid_to_name.end()) {
+        cpu_model_names_.push_back(it->second);
+      } else {
+        cpu_model_names_.push_back("");
+      }
+    }
+#endif  // defined(__aarch64__) || defined(__arm__)
+    return true;
+  }
+  std::vector<int> replace_cpus;
+  std::vector<int> remaining_cpus;
+  std::string replace_event;
+  std::string replace_event_str;
+
+  bool CheckReplaceEvent(const std::string& event_str) {
+    replace_cpus = {};
+    remaining_cpus = {};
+    size_t comm_pos = event_str.rfind(':');
+    std::string event_type_name = event_str;
+    std::string modifier = "";
+
+    if (comm_pos != std::string::npos) {
+      event_type_name = event_str.substr(0, comm_pos);
+      modifier = event_str.substr(comm_pos + 1);
+    }
+    const EventType* type = FindEventTypeByName(event_type_name);
+
+    for (size_t i = 0; i < cpu_models_.size(); ++i) {
+      const ARMCpuModel& model = cpu_models_[i];
+      const std::string& model_name = cpu_model_names_[i];
+      auto it = cpu_replace_events.find(model_name);
+
+      if (it != cpu_replace_events.end()) {
+        if (it->second.find(type->config) != it->second.end()) {
+          replace_cpus.insert(replace_cpus.end(), model.cpus.begin(), model.cpus.end());
+          // Assume only one target event to replace
+
+          replace_event = it->second[type->config];
+          replace_event_str = replace_event + ":" + modifier;
+          LOG(WARNING) << event_type_name << " is replaced to " << replace_event << " for cpu "
+                       << model_name;
+        }
+      } else {
+        remaining_cpus.insert(remaining_cpus.end(), model.cpus.begin(), model.cpus.end());
+      }
+    }
+    if (!replace_cpus.empty()) {
+      return true;
+    }
+    return false;
+  }
+
+ private:
+  std::vector<ARMCpuModel> cpu_models_;
+  std::vector<std::string> cpu_model_names_;
 };
 
 class StatCommand : public Command {
@@ -652,6 +726,8 @@ bool StatCommand::ParseOptions(const std::vector<std::string>& args,
                                ProbeEvents& probe_events) {
   OptionValueMap options;
   std::vector<std::pair<OptionName, OptionValue>> ordered_options;
+  ReplaceEventChecker replace_event_checker;
+  replace_event_checker.Init();
 
   if (!PreprocessOptions(args, GetStatCmdOptionFormats(), &options, &ordered_options,
                          non_option_args)) {
@@ -747,7 +823,22 @@ bool StatCommand::ParseOptions(const std::vector<std::string>& args,
         if (!probe_events.CreateProbeEventIfNotExist(event_type)) {
           return false;
         }
-        if (!event_selection_set_.AddEventType(event_type)) {
+        // We replace defined in cpu replace_event in event_table.json
+        // For convenience, we only support user did not set any cpus.
+        if (event_selection_set_.IsCurrentCpusEmpty() &&
+            replace_event_checker.CheckReplaceEvent(event_type)) {
+          event_selection_set_.SetCpusForFutrueEvents(replace_event_checker.replace_cpus);
+          if (!event_selection_set_.AddEventType(replace_event_checker.replace_event_str)) {
+            return false;
+          }
+          if (!replace_event_checker.remaining_cpus.empty()) {
+            event_selection_set_.SetCpusForFutrueEvents(replace_event_checker.remaining_cpus);
+            if (!event_selection_set_.AddEventType(event_type)) {
+              return false;
+            }
+          }
+          event_selection_set_.ResetCpus();
+        } else if (!event_selection_set_.AddEventType(event_type)) {
           return false;
         }
       }

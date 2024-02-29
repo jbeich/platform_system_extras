@@ -869,6 +869,9 @@
           ["0x00EC", "STALL_BACKEND_ST_TLB", "No operation issued due to the backend, store, TLB miss"],
           ["0x00ED", "STALL_BACKEND_VPU_HAZARD", "No operation issued due to the backend, VPU hazard"],
           ["0x00EE", "STALL_SLOT_BACKEND_ILOCK", "Issue slot not issued due to interlock"]
+        ],
+        "replace_events": [
+          [ "0x002A", "raw-l3d-cache-refill-rd"]
         ]
       },
       {

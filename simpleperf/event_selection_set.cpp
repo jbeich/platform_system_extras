@@ -405,6 +405,10 @@ std::unordered_map<uint64_t, std::string> EventSelectionSet::GetEventNamesById()
   return result;
 }
 
+bool EventSelectionSet::IsCurrentCpusEmpty() const {
+  return !cpus_;
+}
+
 std::unordered_map<uint64_t, int> EventSelectionSet::GetCpusById() const {
   std::unordered_map<uint64_t, int> result;
   for (const auto& group : groups_) {
@@ -485,6 +489,14 @@ void EventSelectionSet::SetCpusForNewEvents(const std::vector<int>& cpus) {
       group.cpus = cpus_.value();
     }
   }
+}
+
+void EventSelectionSet::SetCpusForFutrueEvents(const std::vector<int>& cpus) {
+  cpus_ = cpus;
+}
+
+void EventSelectionSet::ResetCpus() {
+  cpus_ = {};
 }
 
 void EventSelectionSet::SetSampleRateForGroup(EventSelectionSet::EventSelectionGroup& group,
