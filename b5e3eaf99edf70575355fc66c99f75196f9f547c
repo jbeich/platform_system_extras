@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "df5ecb7c_e346e131",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1347762
+      },
+      "writtenOn": "2024-03-01T17:16:51Z",
+      "side": 1,
+      "message": "Thanks Paulsu.\n\nJust one quick question: \nWhat is the user interface to use this new features? Does the user need to know which PMU event has HW errata and which PMU event does not, if yes, can we not require the user to know such detailed information? I am flexible with any UI design, but reluctant to have bugs coming for inquiry on replaced events user should use.",
+      "revId": "b5e3eaf99edf70575355fc66c99f75196f9f547c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "223933a0_376c04b2",
