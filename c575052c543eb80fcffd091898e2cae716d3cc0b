@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bdfe1b3f_e0226a44",
+        "filename": "simpleperf/scripts/simpleperf_report_lib.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1890456
+      },
+      "writtenOn": "2024-03-04T22:47:32Z",
+      "side": 1,
+      "message": "LGTM. I have a question: Is it possible to create a base class when refactoring in the future? `ReportLib` and `ProtoFileReportLib` can inherit from it. This might help reduce code duplication.",
+      "revId": "c575052c543eb80fcffd091898e2cae716d3cc0b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
