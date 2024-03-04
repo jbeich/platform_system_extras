@@ -16,6 +16,24 @@
       "message": "LGTM. I have a question: Is it possible to create a base class when refactoring in the future? `ReportLib` and `ProtoFileReportLib` can inherit from it. This might help reduce code duplication.",
       "revId": "c575052c543eb80fcffd091898e2cae716d3cc0b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "987c0e3c_91f78dd6",
+        "filename": "simpleperf/scripts/simpleperf_report_lib.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2024-03-04T23:36:11Z",
+      "side": 1,
+      "message": "Done creating a shared method to remove duplication.\nThe two classes only share method interface. This method is the only one also sharing implementation. So currently I feel the overhead of creating a base class outweighs its benefit. But if things change, sure we can create a base class.",
+      "parentUuid": "bdfe1b3f_e0226a44",
+      "revId": "c575052c543eb80fcffd091898e2cae716d3cc0b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
