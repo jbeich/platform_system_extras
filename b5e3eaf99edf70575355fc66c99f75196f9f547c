@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fbea3500_4d3c2f9e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1964597
+      },
+      "writtenOn": "2024-03-04T17:03:18Z",
+      "side": 1,
+      "message": "The user do not need to know which PMU has errata. Simpleperf will replace PMU has errta with event defined in simpleperf/event_table.json.\nFor output, user will see a warning and result of replaced events.\n\n\nCommand:\nsimpleperf stat --csv -a -e armv8_pmuv3/l3d_cache_refill/ --duration  5 --per-core\n\nOutput:\nraw-l3d-cache-refill is replaced to raw-l3d-cache-refill-rd for cpu Cortex-A510 because the event is not supported for the core.\n The replace use extra counter for core. You can use --cpu cpu_ids to bypass auto replace.\nPerformance counter statistics,\n0,16449,raw-l3d-cache-refill-rd,16.377,K/sec,\n1,25244,raw-l3d-cache-refill-rd,25.107,K/sec,\n2,20875,raw-l3d-cache-refill-rd,20.751,K/sec,\n3,18608,raw-l3d-cache-refill-rd,18.489,K/sec,\n4,1946,raw-l3d-cache-refill,1.931,K/sec,\n5,1831,raw-l3d-cache-refill,1.816,K/sec,\n6,676,raw-l3d-cache-refill,670.165,/sec,\n7,5347,raw-l3d-cache-refill,5.299,K/sec,\n8,10093,raw-l3d-cache-refill,10.003,K/sec,",
+      "parentUuid": "df5ecb7c_e346e131",
+      "revId": "b5e3eaf99edf70575355fc66c99f75196f9f547c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "223933a0_376c04b2",
@@ -31,6 +49,30 @@
       "writtenOn": "2024-02-29T22:33:25Z",
       "side": 1,
       "message": "To make sure we don\u0027t happen to replace other event types having the same type-\u003econfig.\n```suggestion\n    const EventType* type \u003d FindEventTypeByName(event_type_name);\n    if (type-\u003etype !\u003d PERF_TYPE_RAW) {\n      return false;\n    }\n```",
+      "range": {
+        "startLine": 393,
+        "startChar": 64,
+        "endLine": 393,
+        "endChar": 65
+      },
+      "revId": "b5e3eaf99edf70575355fc66c99f75196f9f547c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d0dde62_140ec40a",
+        "filename": "simpleperf/cmd_stat.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 1964597
+      },
+      "writtenOn": "2024-03-04T17:03:18Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "223933a0_376c04b2",
       "range": {
         "startLine": 393,
         "startChar": 64,
