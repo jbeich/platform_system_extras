@@ -34,6 +34,24 @@
       "parentUuid": "6fa95143_90f47abe",
       "revId": "5f1409322735b62387c011927d0046c5de73af73",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6638079f_ce9495c5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1038443
+      },
+      "writtenOn": "2024-03-05T16:22:15Z",
+      "side": 1,
+      "message": "Heh, I actually wanted to delete this comment after reading the history of the file. But forgot :)",
+      "parentUuid": "dfab0140_ea7ae7cf",
+      "revId": "5f1409322735b62387c011927d0046c5de73af73",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
