@@ -16,6 +16,24 @@
       "message": "Not sure how the ART team became owners of perf2cfg.",
       "revId": "5f1409322735b62387c011927d0046c5de73af73",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dfab0140_ea7ae7cf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2024-03-05T15:13:47Z",
+      "side": 1,
+      "message": "\u003e Not sure how the ART team became owners of perf2cfg.\n\nyou +2ed the cl that _added_ this tool[1], with the OWNERS file in its current state. if you didn\u0027t want to own it, you shouldn\u0027t have +2ed it :-)\n\nyou can always delete it if you\u0027re not using it...\n\n___\n1. https://android-review.git.corp.google.com/c/platform/system/extras/+/1402528",
+      "parentUuid": "6fa95143_90f47abe",
+      "revId": "5f1409322735b62387c011927d0046c5de73af73",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
