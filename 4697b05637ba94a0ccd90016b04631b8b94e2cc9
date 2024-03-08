@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8c38c31_e9ece98e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-03-08T10:04:47Z",
+      "side": 1,
+      "message": "Please use a different bug, e.g. b/326222756 or create a new one. (Or don\u0027t list any bug.)",
+      "revId": "4697b05637ba94a0ccd90016b04631b8b94e2cc9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
