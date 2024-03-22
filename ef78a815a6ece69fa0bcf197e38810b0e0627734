@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53252b98_c9fb59f2",
+        "filename": "simpleperf/cmd_report.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 452,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2024-03-22T18:57:07Z",
+      "side": 1,
+      "message": "use --symdir to stay the same as https://cs.android.com/android/platform/superproject/main/+/main:system/extras/simpleperf/cmd_report_sample.cpp;l\u003d181?q\u003dcmd_report_sample.cpp\u0026ss\u003dandroid%2Fplatform%2Fsuperproject%2Fmain?",
+      "range": {
+        "startLine": 452,
+        "startChar": 3,
+        "endLine": 452,
+        "endChar": 6
+      },
+      "revId": "ef78a815a6ece69fa0bcf197e38810b0e0627734",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
