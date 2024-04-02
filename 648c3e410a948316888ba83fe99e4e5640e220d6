@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "897b13e9_0f75e9cd",
+        "filename": "simpleperf/cmd_api_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2024-04-02T20:52:34Z",
+      "side": 1,
+      "message": "I used a script to make this change. Since most source files have a newline at the end, the script follows this rule when modifying a file:\n  filename.write_text(\u0027\\n\u0027.join(new_lines) + \u0027\\n\u0027)\n\nSo I think it\u0027s a good side effect 😊",
+      "parentUuid": "0a1a8f01_3566a29d",
+      "revId": "648c3e410a948316888ba83fe99e4e5640e220d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d6a8c32e_27164d9e",
