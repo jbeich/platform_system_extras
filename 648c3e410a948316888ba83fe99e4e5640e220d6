@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba985259_e30c47f5",
+        "filename": "simpleperf/RecordReadThread_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 586,
+      "author": {
+        "id": 1890456
+      },
+      "writtenOn": "2024-04-02T20:44:11Z",
+      "side": 1,
+      "message": "Same here.",
+      "revId": "648c3e410a948316888ba83fe99e4e5640e220d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a1a8f01_3566a29d",
+        "filename": "simpleperf/cmd_api_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1890456
+      },
+      "writtenOn": "2024-04-02T20:44:11Z",
+      "side": 1,
+      "message": "nit: is the newline removed accidentally or intentionally? If the latter, ignore me and all LGTM :)",
+      "revId": "648c3e410a948316888ba83fe99e4e5640e220d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6a8c32e_27164d9e",
+        "filename": "simpleperf/record_file_test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1890456
+      },
+      "writtenOn": "2024-04-02T20:44:11Z",
+      "side": 1,
+      "message": "Same here.",
+      "revId": "648c3e410a948316888ba83fe99e4e5640e220d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
