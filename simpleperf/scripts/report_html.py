@@ -1027,7 +1027,10 @@ def get_args() -> argparse.Namespace:
     parser.add_argument('--disassemble-job-size', type=int, default=1024*1024,
                         help='address range for one disassemble job')
     parser.add_argument('--binary_filter', nargs='+', help="""Annotate source code and disassembly
-                        only for selected binaries.""")
+                        only for selected binaries, whose recorded paths contains a specified
+                        substring. For example, we can use /system/lib64 to select all libraries
+                        in /system/lib64 on device.
+                        """)
     parser.add_argument(
         '-j', '--jobs', type=int, default=os.cpu_count(),
         help='Use multithreading to speed up disassembly and source code annotation.')
