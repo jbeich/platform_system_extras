@@ -16,6 +16,23 @@
       "message": "ps2: added an app example in doc and help message.",
       "revId": "2d7af967d951e5a60bc69c62af557db219112840",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3f3e40f_146660e4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1272573
+      },
+      "writtenOn": "2024-04-04T00:17:09Z",
+      "side": 1,
+      "message": "thanks, looks good",
+      "revId": "2d7af967d951e5a60bc69c62af557db219112840",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
