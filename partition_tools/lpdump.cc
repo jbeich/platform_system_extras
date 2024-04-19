@@ -173,6 +173,13 @@ static bool MergeMetadata(const LpMetadata* metadata,
         block_device_proto->set_alignment(info.alignment);
         block_device_proto->set_alignment_offset(info.alignment_offset);
     }
+
+    auto super_device_proto = proto->add_supers();
+    super_device_proto->set_name(GetSuperPartitionName());
+    super_device_proto->set_total_size(GetTotalSuperPartitionSize(*metadata));
+    super_device_proto->set_used_size(builder->UsedSpace());
+    super_device_proto->set_allocatable_size(builder->AllocatableSpace());
+
     return true;
 }
 
