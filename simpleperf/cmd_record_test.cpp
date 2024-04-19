@@ -908,7 +908,11 @@ TEST(record_cmd, check_trampoline_after_art_jni_methods) {
   auto reader = RecordFileReader::CreateInstance(helper.GetDataPath());
   ASSERT_TRUE(reader);
   ThreadTree thread_tree;
+<<<<<<< HEAD   (0c62c5 Merge "simpleperf: Fix flaky test check_trampoline_after_art)
   ASSERT_TRUE(reader->LoadBuildIdAndFileFeatures(thread_tree));
+=======
+  reader->LoadBuildIdAndFileFeatures(thread_tree);
+>>>>>>> BRANCH (049870 Merge "Merge "simpleperf: Fix record_cmd#check_trampoline te)
 
   auto get_symbol_name = [&](ThreadEntry* thread, uint64_t ip) -> std::string {
     const MapEntry* map = thread_tree.FindMap(thread, ip, false);
