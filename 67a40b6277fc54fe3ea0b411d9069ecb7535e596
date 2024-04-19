@@ -34,6 +34,24 @@
       "parentUuid": "bd7850ba_e7cf3a93",
       "revId": "67a40b6277fc54fe3ea0b411d9069ecb7535e596",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c033fdea_e5a7180c",
+        "filename": "partition_tools/dynamic_partitions_device_info.proto",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1290458
+      },
+      "writtenOn": "2024-04-19T22:13:13Z",
+      "side": 1,
+      "message": "Pixel 3 *technically* had two supers, but... it\u0027s not getting any recent builds, so I think we can set it to 1.",
+      "parentUuid": "82a0eb68_a1bea428",
+      "revId": "67a40b6277fc54fe3ea0b411d9069ecb7535e596",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
