@@ -57,4 +57,14 @@ message DynamicPartitionsDeviceInfoProto {
         uint64 alignment_offset = 5 [json_name = "alignment_offset"];
     }
     repeated BlockDevice block_devices = 5 [json_name = "block_devices"];
+
+    // Next: 4
+    message Super {
+        string name = 1;
+        /** Used space in bytes */
+        uint64 used_size = 2 [json_name = "used_size"];
+        /** Total size of the super in bytes */
+        uint64 total_size = 3 [json_name = "total_size"];
+    }
+    repeated Super supers = 6 [json_name = "supers"];
 }
