@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2e34ef2e_4102c369",
+        "filename": "tools/check_elf_alignment.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2024-04-29T20:27:21Z",
+      "side": 1,
+      "message": "Well we already check all shared libraries under `${dir}`. I don\u0027t really want to over complicate this script. I can actually drop the loop since I check for ${#} -ne 1 above.",
+      "parentUuid": "64519d2b_e3791faa",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 16
+      },
+      "revId": "c18f4314dd5dc16c31f1d124bb3c0f5bde5ac231",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "33615735_d15e4a66",
         "filename": "tools/check_elf_alignment.sh",
         "patchSetId": 1
@@ -37,6 +61,30 @@
       "writtenOn": "2024-04-29T19:41:01Z",
       "side": 1,
       "message": "we may want to extract all of lib/ for viz?",
+      "range": {
+        "startLine": 45,
+        "startChar": 13,
+        "endLine": 45,
+        "endChar": 41
+      },
+      "revId": "c18f4314dd5dc16c31f1d124bb3c0f5bde5ac231",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f04b34ae_6c7c4fc9",
+        "filename": "tools/check_elf_alignment.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2024-04-29T20:27:21Z",
+      "side": 1,
+      "message": "Well we don\u0027t care about unaligned 32-bit libraries -- x86 and armeabi-v7a. I\u0027m not sure what else is under `lib/`, but I was thinking that I didn\u0027t want to confuse anyone by reporting unaligned 32-bit libs.",
+      "parentUuid": "33615735_d15e4a66",
       "range": {
         "startLine": 45,
         "startChar": 13,
