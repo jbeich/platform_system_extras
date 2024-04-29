@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d2a5947_804affdc",
+        "filename": "tools/check_elf_alignment.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2024-04-29T20:39:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e34ef2e_4102c369",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 16
+      },
+      "revId": "c18f4314dd5dc16c31f1d124bb3c0f5bde5ac231",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "33615735_d15e4a66",
