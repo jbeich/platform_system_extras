@@ -57,7 +57,7 @@ if [[ ${dir} == *.apk ]]; then
 
   dir_filename=$(basename ${dir})
   tmp=$(mktemp -d -t ${dir_filename%.apk}_out_XXXXX)
-  unzip ${dir} lib/arm64-v8a/* lib/x86_64/* -d ${tmp} >/dev/null 2>&1
+  unzip ${dir} lib/* -d ${tmp} >/dev/null 2>&1
   dir=${tmp}
 fi
 
