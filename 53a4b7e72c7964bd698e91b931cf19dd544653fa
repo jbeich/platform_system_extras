@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "caffbc61_71e2422c",
+        "filename": "tools/check_elf_alignment.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2024-05-02T22:09:10Z",
+      "side": 1,
+      "message": "If you extract the 32-bit libs, then we will report that the APK is not fully ELF aligned when it is (since we don\u0027t care about the 32-bit libs being unaligned).",
+      "range": {
+        "startLine": 86,
+        "startChar": 0,
+        "endLine": 86,
+        "endChar": 71
+      },
+      "revId": "53a4b7e72c7964bd698e91b931cf19dd544653fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
