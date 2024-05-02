@@ -22,6 +22,30 @@
       },
       "revId": "14be9dd102f0128c2fce8068e8bd350d05e5e26e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c3dad25_18c8a2fb",
+        "filename": "tools/check_elf_alignment.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-02T23:43:11Z",
+      "side": 0,
+      "message": "I care more about viz. Did a small change? If you think more is needed, I could read the architecture around L81",
+      "parentUuid": "a5dbc04c_db4ab228",
+      "range": {
+        "startLine": 60,
+        "startChar": 19,
+        "endLine": 60,
+        "endChar": 42
+      },
+      "revId": "14be9dd102f0128c2fce8068e8bd350d05e5e26e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
