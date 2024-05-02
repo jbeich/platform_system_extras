@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5dbc04c_db4ab228",
+        "filename": "tools/check_elf_alignment.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2024-05-02T22:10:16Z",
+      "side": 0,
+      "message": "I don\u0027t think everyone knows that the 32-bit libs don\u0027t need to be ELF aligned. If we\u0027re going to extract all the libs, then we should add additional logic to say that you can ignore the alignment of the 32-bit libraries.",
+      "range": {
+        "startLine": 60,
+        "startChar": 19,
+        "endLine": 60,
+        "endChar": 42
+      },
+      "revId": "14be9dd102f0128c2fce8068e8bd350d05e5e26e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
