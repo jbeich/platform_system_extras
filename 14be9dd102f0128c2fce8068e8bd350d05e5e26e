@@ -46,6 +46,30 @@
       },
       "revId": "14be9dd102f0128c2fce8068e8bd350d05e5e26e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fea44dc4_47981506",
+        "filename": "tools/check_elf_alignment.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2024-05-02T23:48:48Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "9c3dad25_18c8a2fb",
+      "range": {
+        "startLine": 60,
+        "startChar": 19,
+        "endLine": 60,
+        "endChar": 42
+      },
+      "revId": "14be9dd102f0128c2fce8068e8bd350d05e5e26e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
