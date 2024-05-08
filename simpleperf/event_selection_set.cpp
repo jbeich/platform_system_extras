@@ -974,9 +974,34 @@ bool EventSelectionSet::DisableETMEvents() {
       if (!sel.event_type_modifier.event_type.IsEtmEvent()) {
         continue;
       }
+      // When using ETR, ETM data is flushed to the aux buffer of the last cpu disabling ETM events.
+      // To avoid overflowing the aux buffer for one cpu, rotate the last cpu disabling ETM events.
+      if (etm_event_cpus_.empty()) {
+        for (const auto& fd : sel.event_fds) {
+          etm_event_cpus_.insert(fd->Cpu());
+        }
+        if (etm_event_cpus_.empty()) {
+          continue;
+        }
+        disable_etm_event_cpu_it_ = etm_event_cpus_.begin();
+      }
+      int last_disable_cpu = *disable_etm_event_cpu_it_;
+      if (++disable_etm_event_cpu_it_ == etm_event_cpus_.end()) {
+        disable_etm_event_cpu_it_ = etm_event_cpus_.begin();
+      }
+
       for (auto& fd : sel.event_fds) {
-        if (!fd->SetEnableEvent(false)) {
-          return false;
+        if (fd->Cpu() != last_disable_cpu) {
+          if (!fd->SetEnableEvent(false)) {
+            return false;
+          }
+        }
+      }
+      for (auto& fd : sel.event_fds) {
+        if (fd->Cpu() == last_disable_cpu) {
+          if (!fd->SetEnableEvent(false)) {
+            return false;
+          }
         }
       }
     }
