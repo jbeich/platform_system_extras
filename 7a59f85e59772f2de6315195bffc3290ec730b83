@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6ec030d_5f96f74f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2024-05-08T18:29:43Z",
+      "side": 1,
+      "message": "ps2: make the reason of change more explicit in commit message",
+      "revId": "7a59f85e59772f2de6315195bffc3290ec730b83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
