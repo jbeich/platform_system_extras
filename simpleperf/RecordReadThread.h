@@ -90,9 +90,10 @@ class RecordParser {
 };
 
 struct RecordStat {
-  size_t lost_samples = 0;
-  size_t lost_non_samples = 0;
-  size_t cut_stack_samples = 0;
+  size_t kernelspace_lost_records = 0;
+  size_t userspace_lost_samples = 0;
+  size_t userspace_lost_non_samples = 0;
+  size_t userspace_truncated_stack_samples = 0;
   uint64_t aux_data_size = 0;
   uint64_t lost_aux_data_size = 0;
 };
@@ -130,8 +131,8 @@ class KernelRecordReader {
 class RecordReadThread {
  public:
   RecordReadThread(size_t record_buffer_size, const perf_event_attr& attr, size_t min_mmap_pages,
-                   size_t max_mmap_pages, size_t aux_buffer_size, bool allow_cutting_samples = true,
-                   bool exclude_perf = false);
+                   size_t max_mmap_pages, size_t aux_buffer_size,
+                   bool allow_truncating_samples = true, bool exclude_perf = false);
   ~RecordReadThread();
   void SetBufferLevels(size_t record_buffer_low_level, size_t record_buffer_critical_level) {
     record_buffer_low_level_ = record_buffer_low_level;
@@ -210,6 +211,7 @@ class RecordReadThread {
   std::unique_ptr<std::thread> read_thread_;
   std::vector<KernelRecordReader> kernel_record_readers_;
   pid_t exclude_pid_ = -1;
+  bool has_etm_events_ = false;
 
   std::unordered_set<EventFd*> event_fds_disabled_by_kernel_;
 

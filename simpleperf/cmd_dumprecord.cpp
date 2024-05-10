@@ -26,6 +26,7 @@
 #include <android-base/stringprintf.h>
 #include <android-base/strings.h>
 
+#include "BranchListFile.h"
 #include "ETMDecoder.h"
 #include "command.h"
 #include "dso.h"
@@ -178,6 +179,18 @@ ExtractFieldFn GetExtractFieldFunction(const TracingField& field) {
   return ExtractUnknownField;
 }
 
+class ETMThreadTreeForDumpCmd : public ETMThreadTree {
+ public:
+  ETMThreadTreeForDumpCmd(ThreadTree& thread_tree) : thread_tree_(thread_tree) {}
+
+  void DisableThreadExitRecords() override { thread_tree_.DisableThreadExitRecords(); }
+  const ThreadEntry* FindThread(int tid) override { return thread_tree_.FindThread(tid); }
+  const MapSet& GetKernelMaps() override { return thread_tree_.GetKernelMaps(); }
+
+ private:
+  ThreadTree& thread_tree_;
+};
+
 class DumpRecordCommand : public Command {
  public:
   DumpRecordCommand()
@@ -201,7 +214,8 @@ class DumpRecordCommand : public Command {
   bool ProcessRecord(Record* r);
   void ProcessSampleRecord(const SampleRecord& r);
   void ProcessCallChainRecord(const CallChainRecord& r);
-  SymbolInfo GetSymbolInfo(uint32_t pid, uint32_t tid, uint64_t ip, bool in_kernel);
+  SymbolInfo GetSymbolInfo(uint32_t pid, uint32_t tid, uint64_t ip,
+                           std::optional<bool> in_kernel = std::nullopt);
   bool ProcessTracingData(const TracingDataRecord& r);
   bool DumpAuxData(const AuxRecord& aux);
   bool DumpFeatureSection();
@@ -212,6 +226,7 @@ class DumpRecordCommand : public Command {
 
   std::unique_ptr<RecordFileReader> record_file_reader_;
   std::unique_ptr<ETMDecoder> etm_decoder_;
+  std::unique_ptr<ETMThreadTree> etm_thread_tree_;
   ThreadTree thread_tree_;
 
   std::vector<EventInfo> events_;
@@ -306,11 +321,11 @@ void DumpRecordCommand::DumpFileHeader() {
 }
 
 void DumpRecordCommand::DumpAttrSection() {
-  std::vector<EventAttrWithId> attrs = record_file_reader_->AttrSection();
+  const EventAttrIds& attrs = record_file_reader_->AttrSection();
   for (size_t i = 0; i < attrs.size(); ++i) {
     const auto& attr = attrs[i];
     printf("attr %zu:\n", i + 1);
-    DumpPerfEventAttr(*attr.attr, 1);
+    DumpPerfEventAttr(attr.attr, 1);
     if (!attr.ids.empty()) {
       printf("  ids:");
       for (const auto& id : attr.ids) {
@@ -344,7 +359,8 @@ bool DumpRecordCommand::ProcessRecord(Record* r) {
       ProcessCallChainRecord(*static_cast<CallChainRecord*>(r));
       break;
     case PERF_RECORD_AUXTRACE_INFO: {
-      etm_decoder_ = ETMDecoder::Create(*static_cast<AuxTraceInfoRecord*>(r), thread_tree_);
+      etm_thread_tree_.reset(new ETMThreadTreeForDumpCmd(thread_tree_));
+      etm_decoder_ = ETMDecoder::Create(*static_cast<AuxTraceInfoRecord*>(r), *etm_thread_tree_);
       if (etm_decoder_) {
         etm_decoder_->EnableDump(etm_dump_option_);
       } else {
@@ -382,6 +398,19 @@ void DumpRecordCommand::ProcessSampleRecord(const SampleRecord& sr) {
                     s.vaddr_in_file);
     }
   }
+  if (sr.sample_type & PERF_SAMPLE_BRANCH_STACK) {
+    PrintIndented(1, "branch_stack:\n");
+    for (size_t i = 0; i < sr.branch_stack_data.stack_nr; ++i) {
+      uint64_t from_ip = sr.branch_stack_data.stack[i].from;
+      uint64_t to_ip = sr.branch_stack_data.stack[i].to;
+      SymbolInfo from_symbol = GetSymbolInfo(sr.tid_data.pid, sr.tid_data.tid, from_ip);
+      SymbolInfo to_symbol = GetSymbolInfo(sr.tid_data.pid, sr.tid_data.tid, to_ip);
+      PrintIndented(2, "%s (%s[+%" PRIx64 "]) -> %s (%s[+%" PRIx64 "])\n",
+                    from_symbol.symbol->DemangledName(), from_symbol.dso->Path().c_str(),
+                    from_symbol.vaddr_in_file, to_symbol.symbol->DemangledName(),
+                    to_symbol.dso->Path().c_str(), to_symbol.vaddr_in_file);
+    }
+  }
   // Dump tracepoint fields.
   if (!events_.empty()) {
     size_t attr_index = record_file_reader_->GetAttrIndexOfRecord(&sr);
@@ -407,9 +436,14 @@ void DumpRecordCommand::ProcessCallChainRecord(const CallChainRecord& cr) {
 }
 
 SymbolInfo DumpRecordCommand::GetSymbolInfo(uint32_t pid, uint32_t tid, uint64_t ip,
-                                            bool in_kernel) {
+                                            std::optional<bool> in_kernel) {
   ThreadEntry* thread = thread_tree_.FindThreadOrNew(pid, tid);
-  const MapEntry* map = thread_tree_.FindMap(thread, ip, in_kernel);
+  const MapEntry* map;
+  if (in_kernel.has_value()) {
+    map = thread_tree_.FindMap(thread, ip, in_kernel.value());
+  } else {
+    map = thread_tree_.FindMap(thread, ip);
+  }
   SymbolInfo info;
   info.symbol = thread_tree_.FindSymbol(map, ip, &info.vaddr_in_file, &info.dso);
   return info;
@@ -423,8 +457,9 @@ bool DumpRecordCommand::DumpAuxData(const AuxRecord& aux) {
   size_t size = aux.data->aux_size;
   if (size > 0) {
     std::vector<uint8_t> data;
-    if (!record_file_reader_->ReadAuxData(aux.Cpu(), aux.data->aux_offset, size, &data)) {
-      return false;
+    bool error = false;
+    if (!record_file_reader_->ReadAuxData(aux.Cpu(), aux.data->aux_offset, size, data, error)) {
+      return !error;
     }
     if (!etm_decoder_) {
       LOG(ERROR) << "ETMDecoder isn't created";
@@ -440,17 +475,21 @@ bool DumpRecordCommand::ProcessTracingData(const TracingDataRecord& r) {
   if (!tracing) {
     return false;
   }
-  std::vector<EventAttrWithId> attrs = record_file_reader_->AttrSection();
+  const EventAttrIds& attrs = record_file_reader_->AttrSection();
   events_.resize(attrs.size());
   for (size_t i = 0; i < attrs.size(); i++) {
     auto& attr = attrs[i].attr;
     auto& event = events_[i];
 
-    if (attr->type != PERF_TYPE_TRACEPOINT) {
+    if (attr.type != PERF_TYPE_TRACEPOINT) {
       continue;
     }
-    TracingFormat format = tracing->GetTracingFormatHavingId(attr->config);
-    event.tp_fields = format.fields;
+    std::optional<TracingFormat> format = tracing->GetTracingFormatHavingId(attr.config);
+    if (!format.has_value()) {
+      LOG(ERROR) << "failed to get tracing format";
+      return false;
+    }
+    event.tp_fields = format.value().fields;
     // Decide dump function for each field.
     for (size_t j = 0; j < event.tp_fields.size(); j++) {
       auto& field = event.tp_fields[j];
@@ -523,6 +562,35 @@ bool DumpRecordCommand::DumpFeatureSection() {
         for (const DebugUnwindFile& file : opt_debug_unwind.value()) {
           PrintIndented(2, "path: %s\n", file.path.c_str());
           PrintIndented(2, "size: %" PRIu64 "\n", file.size);
+        }
+      }
+    } else if (feature == FEAT_ETM_BRANCH_LIST) {
+      std::string data;
+      if (!record_file_reader_->ReadFeatureSection(FEAT_ETM_BRANCH_LIST, &data)) {
+        return false;
+      }
+      ETMBinaryMap binary_map;
+      if (!StringToETMBinaryMap(data, binary_map)) {
+        return false;
+      }
+      PrintIndented(1, "etm_branch_list:\n");
+      for (const auto& [key, binary] : binary_map) {
+        PrintIndented(2, "path: %s\n", key.path.c_str());
+        PrintIndented(2, "build_id: %s\n", key.build_id.ToString().c_str());
+        PrintIndented(2, "binary_type: %s\n", DsoTypeToString(binary.dso_type));
+        if (binary.dso_type == DSO_KERNEL) {
+          PrintIndented(2, "kernel_start_addr: 0x%" PRIx64 "\n", key.kernel_start_addr);
+        }
+        for (const auto& [addr, branches] : binary.GetOrderedBranchMap()) {
+          PrintIndented(3, "addr: 0x%" PRIx64 "\n", addr);
+          for (const auto& [branch, count] : branches) {
+            std::string s = "0b";
+            for (auto it = branch.rbegin(); it != branch.rend(); ++it) {
+              s.push_back(*it ? '1' : '0');
+            }
+            PrintIndented(3, "branch: %s\n", s.c_str());
+            PrintIndented(3, "count: %" PRIu64 "\n", count);
+          }
         }
       }
     }

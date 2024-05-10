@@ -173,6 +173,12 @@ static bool MergeMetadata(const LpMetadata* metadata,
         block_device_proto->set_alignment(info.alignment);
         block_device_proto->set_alignment_offset(info.alignment_offset);
     }
+
+    auto super_device_proto = proto->mutable_super_device();
+    super_device_proto->set_name(GetSuperPartitionName());
+    super_device_proto->set_used_size(builder->UsedSpace());
+    super_device_proto->set_total_size(GetTotalSuperPartitionSize(*metadata));
+
     return true;
 }
 
@@ -229,6 +235,13 @@ static bool MergeFsUsage(DynamicPartitionsDeviceInfoProto* proto,
             partition_proto->set_is_dynamic(false);
         }
         partition_proto->set_fs_size((uint64_t)vst.f_blocks * vst.f_frsize);
+
+        if (!entry.fs_type.empty()) {
+            partition_proto->set_fs_type(entry.fs_type);
+        } else {
+            partition_proto->set_fs_type("UNKNOWN");
+        }
+
         if (vst.f_bavail <= vst.f_blocks) {
             partition_proto->set_fs_used((uint64_t)(vst.f_blocks - vst.f_bavail) * vst.f_frsize);
         }

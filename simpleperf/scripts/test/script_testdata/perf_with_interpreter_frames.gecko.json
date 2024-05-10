@@ -2,6 +2,7 @@
   "libs": [],
   "meta": {
     "abi": "aarch64",
+    "appBuildID": null,
     "asyncstack": 1,
     "categories": [
       {
@@ -40,8 +41,22 @@
         ]
       },
       {
+        "color": "blue",
+        "name": "Off-CPU",
+        "subcategories": [
+          "Other"
+        ]
+      },
+      {
         "color": "grey",
         "name": "Other",
+        "subcategories": [
+          "Other"
+        ]
+      },
+      {
+        "color": "green",
+        "name": "JIT",
         "subcategories": [
           "Other"
         ]

@@ -45,9 +45,9 @@ rust_library {
         "libanyhow",
         "libbinder_rs", // Remove once b/179041241 is fixed.
         "libchrono",
-        "liblazy_static",
         "liblog_rust",
         "libmacaddr",
+        "libonce_cell",
         "librand",
         "librustutils",
         "libserde", // Remove once b/179041241 is fixed.
@@ -56,7 +56,7 @@ rust_library {
         "libzip",
     ],
     rlibs: [
-        "libprofcollect_libflags_rust",
+        "libflags_rust",
         "libsimpleperf_profcollect_rust",
     ],
     shared_libs: ["libsimpleperf_profcollect"],

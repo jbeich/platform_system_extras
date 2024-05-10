@@ -32,6 +32,7 @@ using ::testing::Truly;
 
 using namespace simpleperf;
 
+// @CddTest = 6.1/C-0-2
 class RecordBufferTest : public ::testing::Test {
  protected:
   void PushRecord(uint32_t type, size_t size) {
@@ -57,6 +58,7 @@ class RecordBufferTest : public ::testing::Test {
   std::unique_ptr<RecordBuffer> buffer_;
 };
 
+// @CddTest = 6.1/C-0-2
 TEST_F(RecordBufferTest, fifo) {
   for (size_t loop = 0; loop < 10; ++loop) {
     buffer_.reset(new RecordBuffer(sizeof(perf_event_header) * 10));
@@ -73,11 +75,12 @@ TEST_F(RecordBufferTest, fifo) {
   }
 }
 
+// @CddTest = 6.1/C-0-2
 TEST(RecordParser, smoke) {
   std::unique_ptr<RecordFileReader> reader =
       RecordFileReader::CreateInstance(GetTestData(PERF_DATA_NO_UNWIND));
   ASSERT_TRUE(reader);
-  RecordParser parser(*reader->AttrSection()[0].attr);
+  RecordParser parser(reader->AttrSection()[0].attr);
   auto process_record = [&](std::unique_ptr<Record> record) {
     if (record->type() == PERF_RECORD_MMAP || record->type() == PERF_RECORD_COMM ||
         record->type() == PERF_RECORD_FORK || record->type() == PERF_RECORD_SAMPLE) {
@@ -113,6 +116,7 @@ TEST(RecordParser, smoke) {
   }));
 }
 
+// @CddTest = 6.1/C-0-2
 TEST(RecordParser, GetStackSizePos_with_PerfSampleReadType) {
   const EventType* type = FindEventTypeByName("cpu-clock");
   ASSERT_TRUE(type != nullptr);
@@ -190,6 +194,7 @@ static inline std::function<bool(size_t&)> SetArg(size_t value) {
   };
 }
 
+// @CddTest = 6.1/C-0-2
 TEST(KernelRecordReader, smoke) {
   // 1. Create fake records.
   perf_event_attr attr = CreateFakeEventAttr();
@@ -229,6 +234,7 @@ TEST(KernelRecordReader, smoke) {
   ASSERT_FALSE(reader.MoveToNextRecord(parser));
 }
 
+// @CddTest = 6.1/C-0-2
 class RecordReadThreadTest : public ::testing::Test {
  protected:
   std::vector<EventFd*> CreateFakeEventFds(const perf_event_attr& attr, size_t event_fd_count) {
@@ -270,6 +276,7 @@ class RecordReadThreadTest : public ::testing::Test {
   std::vector<std::unique_ptr<MockEventFd>> event_fds_;
 };
 
+// @CddTest = 6.1/C-0-2
 TEST_F(RecordReadThreadTest, handle_cmds) {
   perf_event_attr attr = CreateFakeEventAttr();
   records_ = CreateFakeRecords(attr, 2, 0, 0);
@@ -291,6 +298,7 @@ TEST_F(RecordReadThreadTest, handle_cmds) {
   ASSERT_TRUE(thread.StopReadThread());
 }
 
+// @CddTest = 6.1/C-0-2
 TEST_F(RecordReadThreadTest, read_records) {
   perf_event_attr attr = CreateFakeEventAttr();
   RecordReadThread thread(128 * 1024, attr, 1, 1, 0);
@@ -323,6 +331,7 @@ TEST_F(RecordReadThreadTest, read_records) {
   }
 }
 
+// @CddTest = 6.1/C-0-2
 TEST_F(RecordReadThreadTest, process_sample_record) {
   perf_event_attr attr = CreateFakeEventAttr();
   attr.sample_type |= PERF_SAMPLE_STACK_USER;
@@ -370,13 +379,14 @@ TEST_F(RecordReadThreadTest, process_sample_record) {
   thread.SetBufferLevels(record_buffer_size, record_buffer_size);
   read_record(r);
   ASSERT_FALSE(r);
-  ASSERT_EQ(thread.GetStat().lost_samples, 1u);
-  ASSERT_EQ(thread.GetStat().lost_non_samples, 0u);
-  ASSERT_EQ(thread.GetStat().cut_stack_samples, 1u);
+  ASSERT_EQ(thread.GetStat().userspace_lost_samples, 1u);
+  ASSERT_EQ(thread.GetStat().userspace_lost_non_samples, 0u);
+  ASSERT_EQ(thread.GetStat().userspace_truncated_stack_samples, 1u);
 }
 
 // Test that the data notification exists until the RecordBuffer is empty. So we can read all
 // records even if reading one record at a time.
+// @CddTest = 6.1/C-0-2
 TEST_F(RecordReadThreadTest, has_data_notification_until_buffer_empty) {
   perf_event_attr attr = CreateFakeEventAttr();
   RecordReadThread thread(128 * 1024, attr, 1, 1, 0);
@@ -403,7 +413,8 @@ TEST_F(RecordReadThreadTest, has_data_notification_until_buffer_empty) {
   ASSERT_TRUE(thread.RemoveEventFds(event_fds));
 }
 
-TEST_F(RecordReadThreadTest, no_cut_samples) {
+// @CddTest = 6.1/C-0-2
+TEST_F(RecordReadThreadTest, no_truncated_samples) {
   perf_event_attr attr = CreateFakeEventAttr();
   attr.sample_type |= PERF_SAMPLE_STACK_USER;
   attr.sample_stack_user = 64 * 1024;
@@ -421,11 +432,12 @@ TEST_F(RecordReadThreadTest, no_cut_samples) {
     received_samples++;
   }
   ASSERT_GT(received_samples, 0u);
-  ASSERT_GT(thread.GetStat().lost_samples, 0u);
-  ASSERT_EQ(thread.GetStat().lost_samples, total_samples - received_samples);
-  ASSERT_EQ(thread.GetStat().cut_stack_samples, 0u);
+  ASSERT_GT(thread.GetStat().userspace_lost_samples, 0u);
+  ASSERT_EQ(thread.GetStat().userspace_lost_samples, total_samples - received_samples);
+  ASSERT_EQ(thread.GetStat().userspace_truncated_stack_samples, 0u);
 }
 
+// @CddTest = 6.1/C-0-2
 TEST_F(RecordReadThreadTest, exclude_perf) {
   perf_event_attr attr = CreateFakeEventAttr();
   attr.sample_type |= PERF_SAMPLE_STACK_USER;
@@ -475,6 +487,7 @@ struct FakeAuxData {
       : buf1(buf1_size, c), buf2(buf2_size, c), pad(pad_size, 0), lost(lost) {}
 };
 
+// @CddTest = 6.1/C-0-2
 TEST_F(RecordReadThreadTest, read_aux_data) {
   ScopedEventTypes scoped_types("cs-etm,0,0");
   const EventType* type = FindEventTypeByName("cs-etm");

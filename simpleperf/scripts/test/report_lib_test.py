@@ -15,10 +15,14 @@
 # limitations under the License.
 
 import os
+from pathlib import Path
+import shutil
+import subprocess
 import tempfile
 from typing import Dict, List, Optional, Set
 
-from simpleperf_report_lib import ReportLib
+from simpleperf_report_lib import ReportLib, ProtoFileReportLib
+from simpleperf_utils import get_host_binary_path, ReadElf
 from . test_utils import TestBase, TestHelper
 
 
@@ -132,6 +136,28 @@ class TestReportLib(TestBase):
         report_lib = ReportLib()
         report_lib.ShowArtFrames(True)
         self.assertTrue(has_art_frame(report_lib))
+
+    def test_remove_method(self):
+        def get_methods(report_lib) -> Set[str]:
+            methods = set()
+            report_lib.SetRecordFile(TestHelper.testdata_path('perf_display_bitmaps.data'))
+            while True:
+                sample = report_lib.GetNextSample()
+                if not sample:
+                    break
+                methods.add(report_lib.GetSymbolOfCurrentSample().symbol_name)
+                callchain = report_lib.GetCallChainOfCurrentSample()
+                for i in range(callchain.nr):
+                    methods.add(callchain.entries[i].symbol.symbol_name)
+            report_lib.Close()
+            return methods
+
+        report_lib = ReportLib()
+        report_lib.RemoveMethod('android.view')
+        methods = get_methods(report_lib)
+        self.assertFalse(any('android.view' in method for method in methods))
+        self.assertTrue(any('android.widget' in method for method in methods))
+
 
     def test_merge_java_methods(self):
         def parse_dso_names(report_lib):
@@ -312,6 +338,25 @@ class TestReportLib(TestBase):
             self.assertNotIn(31850, threads)
         os.unlink(filter_file.name)
 
+    def test_set_sample_filter_for_cpu(self):
+        """ Test --cpu in ReportLib.SetSampleFilter(). """
+        def get_cpus_for_filter(filters: List[str]) -> Set[int]:
+            self.report_lib.Close()
+            self.report_lib = ReportLib()
+            self.report_lib.SetRecordFile(TestHelper.testdata_path('perf_display_bitmaps.data'))
+            self.report_lib.SetSampleFilter(filters)
+            cpus = set()
+            while self.report_lib.GetNextSample():
+                sample = self.report_lib.GetCurrentSample()
+                cpus.add(sample.cpu)
+            return cpus
+
+        cpus = get_cpus_for_filter(['--cpu', '0,1-2'])
+        self.assertIn(0, cpus)
+        self.assertIn(1, cpus)
+        self.assertIn(2, cpus)
+        self.assertNotIn(3, cpus)
+
     def test_aggregate_threads(self):
         """ Test using ReportLib.AggregateThreads(). """
         def get_thread_names(aggregate_regex_list: Optional[List[str]]) -> Dict[str, int]:
@@ -332,3 +377,113 @@ class TestReportLib(TestBase):
         self.assertEqual(thread_names['AsyncTask.*'], 19)
         self.assertNotIn('AsyncTask #3', thread_names)
         self.assertNotIn('AsyncTask #4', thread_names)
+
+    def test_use_vmlinux(self):
+        """ Test if we can use vmlinux in symfs_dir. """
+        record_file = TestHelper.testdata_path('perf_test_vmlinux.data')
+        # Create a symfs_dir.
+        symfs_dir = Path('symfs_dir')
+        symfs_dir.mkdir()
+        shutil.copy(TestHelper.testdata_path('vmlinux'), symfs_dir)
+        kernel_build_id = ReadElf(TestHelper.ndk_path).get_build_id(symfs_dir / 'vmlinux')
+        (symfs_dir / 'build_id_list').write_text('%s=vmlinux' % kernel_build_id)
+
+        # Check if vmlinux in symfs_dir is used, when we set record file before setting symfs_dir.
+        self.report_lib.SetRecordFile(record_file)
+        self.report_lib.SetSymfs(str(symfs_dir))
+        sample = self.report_lib.GetNextSample()
+        self.assertIsNotNone(sample)
+        symbol = self.report_lib.GetSymbolOfCurrentSample()
+        self.assertEqual(symbol.dso_name, "[kernel.kallsyms]")
+        # vaddr_in_file and symbol_addr are adjusted after using vmlinux.
+        self.assertEqual(symbol.vaddr_in_file, 0xffffffc008fb3e28)
+        self.assertEqual(symbol.symbol_name, "_raw_spin_unlock_irq")
+        self.assertEqual(symbol.symbol_addr, 0xffffffc008fb3e0c)
+        self.assertEqual(symbol.symbol_len, 0x4c)
+
+
+class TestProtoFileReportLib(TestBase):
+    def test_smoke(self):
+        report_lib = ProtoFileReportLib()
+        report_lib.SetRecordFile(TestHelper.testdata_path('display_bitmaps.proto_data'))
+        sample_count = 0
+        while True:
+            sample = report_lib.GetNextSample()
+            if sample is None:
+                report_lib.Close()
+                break
+            sample_count += 1
+            event = report_lib.GetEventOfCurrentSample()
+            self.assertEqual(event.name, 'cpu-clock')
+            report_lib.GetSymbolOfCurrentSample()
+            report_lib.GetCallChainOfCurrentSample()
+        self.assertEqual(sample_count, 525)
+
+    def convert_perf_data_to_proto_file(self, perf_data_path: str) -> str:
+        simpleperf_path = get_host_binary_path('simpleperf')
+        proto_file_path = 'perf.trace'
+        subprocess.check_call([simpleperf_path, 'report-sample', '--show-callchain', '--protobuf',
+                               '--remove-gaps', '0', '-i', perf_data_path, '-o', proto_file_path])
+        return proto_file_path
+
+    def test_set_trace_offcpu_mode(self):
+        report_lib = ProtoFileReportLib()
+        # GetSupportedTraceOffCpuModes() before SetRecordFile() triggers RuntimeError.
+        with self.assertRaises(RuntimeError):
+            report_lib.GetSupportedTraceOffCpuModes()
+
+        mode_dict = {
+            'on-cpu': {
+                'cpu-clock:u': (208, 52000000),
+                'sched:sched_switch': (0, 0),
+            },
+            'off-cpu': {
+                'cpu-clock:u': (0, 0),
+                'sched:sched_switch': (91, 344124304),
+            },
+            'on-off-cpu': {
+                'cpu-clock:u': (208, 52000000),
+                'sched:sched_switch': (91, 344124304),
+            },
+            'mixed-on-off-cpu': {
+                'cpu-clock:u': (299, 396124304),
+                'sched:sched_switch': (0, 0),
+            },
+        }
+
+        proto_file_path = self.convert_perf_data_to_proto_file(
+                                TestHelper.testdata_path('perf_with_trace_offcpu_v2.data'))
+        report_lib.SetRecordFile(proto_file_path)
+        self.assertEqual(set(report_lib.GetSupportedTraceOffCpuModes()), set(mode_dict.keys()))
+        for mode, expected_values in mode_dict.items():
+            report_lib.Close()
+            report_lib = ProtoFileReportLib()
+            report_lib.SetRecordFile(proto_file_path)
+            report_lib.SetTraceOffCpuMode(mode)
+
+            cpu_clock_period = 0
+            cpu_clock_samples = 0
+            sched_switch_period = 0
+            sched_switch_samples = 0
+            while report_lib.GetNextSample():
+                sample = report_lib.GetCurrentSample()
+                event = report_lib.GetEventOfCurrentSample()
+                if event.name == 'cpu-clock:u':
+                    cpu_clock_period += sample.period
+                    cpu_clock_samples += 1
+                else:
+                    self.assertEqual(event.name, 'sched:sched_switch')
+                    sched_switch_period += sample.period
+                    sched_switch_samples += 1
+            self.assertEqual(cpu_clock_samples, expected_values['cpu-clock:u'][0])
+            self.assertEqual(cpu_clock_period, expected_values['cpu-clock:u'][1])
+            self.assertEqual(sched_switch_samples, expected_values['sched:sched_switch'][0])
+            self.assertEqual(sched_switch_period, expected_values['sched:sched_switch'][1])
+
+        # Check trace-offcpu modes on a profile not recorded with --trace-offcpu.
+        report_lib.Close()
+        report_lib = ProtoFileReportLib()
+        proto_file_path = self.convert_perf_data_to_proto_file(
+                                TestHelper.testdata_path('perf.data'))
+        report_lib.SetRecordFile(proto_file_path)
+        self.assertEqual(report_lib.GetSupportedTraceOffCpuModes(), [])

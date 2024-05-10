@@ -15,6 +15,7 @@
 //
 
 package {
+    default_team: "trendy_team_native_tools_libraries",
     default_applicable_licenses: ["system_extras_memory_replay_license"],
 }
 
@@ -75,7 +76,6 @@ cc_defaults {
 
     static_libs: [
         "liballoc_parser",
-        "libasync_safe",
     ],
 }
 
@@ -85,6 +85,8 @@ cc_binary {
 
     srcs: ["main.cpp"],
 
+    static_libs: ["liblog"],
+
     multilib: {
         lib32: {
             suffix: "32",
@@ -93,6 +95,33 @@ cc_binary {
             suffix: "64",
         },
     },
+}
+
+cc_binary_host {
+    name: "filter_trace",
+
+    cflags: [
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+    ],
+
+    shared_libs: [
+        "libziparchive",
+    ],
+
+    static_libs: [
+        "liballoc_parser",
+        "libbase",
+        "liblog",
+    ],
+
+    srcs: [
+        "Alloc.cpp",
+        "File.cpp",
+        "FilterTrace.cpp",
+        "Pointers.cpp",
+    ],
 }
 
 cc_test {

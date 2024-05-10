@@ -32,7 +32,7 @@ import logging
 import sys
 from typing import List, Dict, Optional, NamedTuple, Tuple
 
-from simpleperf_report_lib import ReportLib
+from simpleperf_report_lib import GetReportLib
 from simpleperf_utils import BaseArgumentParser, ReportLibOptions
 
 
@@ -114,12 +114,26 @@ CATEGORIES = [
         "color": 'green',
         "subcategories": ['Other']
     },
+    {
+        "name": 'Off-CPU',
+        # Follow Brendan Gregg's Flamegraph convention: blue for off-CPU
+        # https://github.com/brendangregg/FlameGraph/blob/810687f180f3c4929b5d965f54817a5218c9d89b/flamegraph.pl#L470
+        "color": 'blue',
+        "subcategories": ['Other']
+    },
     # Not used by this exporter yet, but some Firefox Profiler code assumes
     # there is an 'Other' category by searching for a category with
     # color=grey, so include this.
     {
         "name": 'Other',
         "color": 'grey',
+        "subcategories": ['Other']
+    },
+    {
+        "name": 'JIT',
+        # Follow Brendan Gregg's Flamegraph convention: green for Java/JIT
+        # https://github.com/brendangregg/FlameGraph/blob/810687f180f3c4929b5d965f54817a5218c9d89b/flamegraph.pl#L411
+        "color": 'green',
         "subcategories": ['Other']
     },
 ]
@@ -197,12 +211,23 @@ class Thread:
         # Heuristic: kernel code contains "kallsyms" as the library name.
         if "kallsyms" in frame_str or ".ko" in frame_str:
             category = 1
+            # Heuristic: empirically, off-CPU profiles mostly measure off-CPU
+            # time accounted to the linux kernel __schedule function, which
+            # handles blocking. This only works if we have kernel symbol
+            # (kallsyms) access though.  __schedule defined here:
+            # https://cs.android.com/android/kernel/superproject/+/common-android-mainline:common/kernel/sched/core.c;l=6593;drc=0c99414a07ddaa18d8eb4be90b551d2687cbde2f
+            if frame_str.startswith("__schedule "):
+                category = 5
         elif ".so" in frame_str:
             category = 2
         elif ".vdex" in frame_str:
             category = 3
         elif ".oat" in frame_str:
             category = 4
+        # "[JIT app cache]" is returned for JIT code here:
+        # https://cs.android.com/android/platform/superproject/+/master:system/extras/simpleperf/dso.cpp;l=551;drc=4d8137f55782cc1e8cc93e4694ba3a7159d9a2bc
+        elif "[JIT app cache]" in frame_str:
+            category = 7
 
         self.frameTable.append(Frame(
             string_id=string_id,
@@ -365,16 +390,20 @@ def _gecko_profile(
         symfs_dir: Optional[str],
         kallsyms_file: Optional[str],
         report_lib_options: ReportLibOptions,
-        max_remove_gap_length: int) -> GeckoProfile:
+        max_remove_gap_length: int,
+        percpu_samples: bool) -> GeckoProfile:
     """convert a simpleperf profile to gecko format"""
-    lib = ReportLib()
+    lib = GetReportLib(record_file)
 
     lib.ShowIpForUnknownSymbol()
     if symfs_dir is not None:
         lib.SetSymfs(symfs_dir)
-    lib.SetRecordFile(record_file)
     if kallsyms_file is not None:
         lib.SetKallsymsFile(kallsyms_file)
+    if percpu_samples:
+        # Grouping samples by cpus doesn't support off cpu samples.
+        if lib.GetSupportedTraceOffCpuModes():
+            report_lib_options.trace_offcpu = 'on-cpu'
     lib.SetReportOptions(report_lib_options)
 
     arch = lib.GetArch()
@@ -382,7 +411,9 @@ def _gecko_profile(
     record_cmd = lib.GetRecordCmd()
 
     # Map from tid to Thread
-    threadMap: Dict[int, Thread] = {}
+    thread_map: Dict[int, Thread] = {}
+    # Map from pid to process name
+    process_names: Dict[int, str] = {}
 
     while True:
         sample = lib.GetNextSample()
@@ -400,28 +431,44 @@ def _gecko_profile(
         # We want root first, leaf last.
         stack.reverse()
 
-        # add thread sample
-        thread = threadMap.get(sample.tid)
-        if thread is None:
-            thread = Thread(comm=sample.thread_comm, pid=sample.pid, tid=sample.tid)
-            threadMap[sample.tid] = thread
-        thread.add_sample(
-            comm=sample.thread_comm,
-            stack=stack,
-            # We are being a bit fast and loose here with time here.  simpleperf
-            # uses CLOCK_MONOTONIC by default, which doesn't use the normal unix
-            # epoch, but rather some arbitrary time. In practice, this doesn't
-            # matter, the Firefox Profiler normalises all the timestamps to begin at
-            # the minimum time.  Consider fixing this in future, if needed, by
-            # setting `simpleperf record --clockid realtime`.
-            time_ms=sample_time_ms)
+        if percpu_samples:
+            if sample.tid == sample.pid:
+                process_names[sample.pid] = sample.thread_comm
+            process_name = process_names.get(sample.pid)
+            stack = [
+                '%s tid %d (in %s pid %d)' %
+                (sample.thread_comm, sample.tid, process_name, sample.pid)] + stack
+            thread = thread_map.get(sample.cpu)
+            if thread is None:
+                thread = Thread(comm=f'Cpu {sample.cpu}', pid=sample.cpu, tid=sample.cpu)
+                thread_map[sample.cpu] = thread
+            thread.add_sample(
+                comm=f'Cpu {sample.cpu}',
+                stack=stack,
+                time_ms=sample_time_ms)
+        else:
+            # add thread sample
+            thread = thread_map.get(sample.tid)
+            if thread is None:
+                thread = Thread(comm=sample.thread_comm, pid=sample.pid, tid=sample.tid)
+                thread_map[sample.tid] = thread
+            thread.add_sample(
+                comm=sample.thread_comm,
+                stack=stack,
+                # We are being a bit fast and loose here with time here.  simpleperf
+                # uses CLOCK_MONOTONIC by default, which doesn't use the normal unix
+                # epoch, but rather some arbitrary time. In practice, this doesn't
+                # matter, the Firefox Profiler normalises all the timestamps to begin at
+                # the minimum time.  Consider fixing this in future, if needed, by
+                # setting `simpleperf record --clockid realtime`.
+                time_ms=sample_time_ms)
 
-    for thread in threadMap.values():
+    for thread in thread_map.values():
         thread.sort_samples()
 
-    remove_stack_gaps(max_remove_gap_length, threadMap)
+    remove_stack_gaps(max_remove_gap_length, thread_map)
 
-    threads = [thread.to_json_dict() for thread in threadMap.values()]
+    threads = [thread.to_json_dict() for thread in thread_map.values()]
 
     profile_timestamp = meta_info.get('timestamp')
     end_time_ms = (int(profile_timestamp) * 1000) if profile_timestamp else 0
@@ -450,6 +497,7 @@ def _gecko_profile(
         "markerSchema": [],
         "abi": arch,
         "oscpu": meta_info.get("android_build_fingerprint"),
+        "appBuildID": meta_info.get("app_versioncode"),
     }
 
     # Schema:
@@ -479,6 +527,9 @@ def main() -> None:
                         broken-stack samples we want to remove.
                         """
                         )
+    parser.add_argument(
+        '--percpu-samples', action='store_true',
+        help='show samples based on cpus instead of threads')
     parser.add_report_lib_options()
     args = parser.parse_args()
     profile = _gecko_profile(
@@ -486,7 +537,9 @@ def main() -> None:
         symfs_dir=args.symfs,
         kallsyms_file=args.kallsyms,
         report_lib_options=args.report_lib_options,
-        max_remove_gap_length=args.max_remove_gap_length)
+        max_remove_gap_length=args.max_remove_gap_length,
+        percpu_samples=args.percpu_samples,
+    )
 
     json.dump(profile, sys.stdout, sort_keys=True)
 

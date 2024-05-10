@@ -41,6 +41,7 @@ struct ETMPerCpu {
   int GetMajorVersion() const;
   bool IsContextIDSupported() const;
   bool IsTimestampSupported() const;
+  bool IsCycAccSupported() const;
   bool IsEnabled() const;
 };
 
@@ -62,6 +63,9 @@ class ETMRecorder {
   void SetEtmPerfEventAttr(perf_event_attr* attr);
   AuxTraceInfoRecord CreateAuxTraceInfoRecord();
   size_t GetAddrFilterPairs();
+  void SetRecordTimestamp(bool record);
+  void SetRecordCycles(bool record);
+  void SetCycleThreshold(size_t threshold);
 
  private:
   bool ReadEtmInfo();
@@ -76,9 +80,15 @@ class ETMRecorder {
   bool use_contextid2_ = false;
   // select etm options (timestamp, context_id, ...), setting in perf_event_attr->config
   uint64_t etm_event_config_ = 0;
+  // set cycle count threshold using perf_event_attr->config3
+  uint64_t cc_threshold_config_ = 0;
   // record etm options in AuxTraceInfoRecord
   uint32_t etm_config_reg_ = 0;
   std::map<int, ETMPerCpu> etm_info_;
+
+  bool record_timestamp_ = false;
+  bool record_cycles_ = false;
+  uint64_t cycle_threshold_ = 0;
 };
 
 }  // namespace simpleperf

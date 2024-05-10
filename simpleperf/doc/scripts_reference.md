@@ -151,6 +151,9 @@ $ ./report_html.py --add_disassembly
 # Adding disassembly for all binaries can cost a lot of time. So we can choose to only add
 # disassembly for selected binaries.
 $ ./report_html.py --add_disassembly --binary_filter libgame.so
+# Add disassembly and source code for binaries belonging to an app with package name
+# com.example.myapp.
+$ ./report_html.py --add_source_code --add_disassembly --binary_filter com.example.myapp
 
 # report_html.py accepts more than one recording data file.
 $ ./report_html.py -i perf1.data perf2.data
@@ -320,3 +323,38 @@ Then we can read all samples through GetNextSample(). For each sample, we can re
 
 Examples of using `simpleperf_report_lib.py` are in `report_sample.py`, `report_html.py`,
 `pprof_proto_generator.py` and `inferno/inferno.py`.
+
+## ipc.py
+`ipc.py`captures the instructions per cycle (IPC) of the system during a specified duration.
+
+Example:
+```sh
+./ipc.py
+./ipc.py 2 20          # Set interval to 2 secs and total duration to 20 secs
+./ipc.py -p 284 -C 4   # Only profile the PID 284 while running on core 4
+./ipc.py -c 'sleep 5'  # Only profile the command to run
+```
+
+The results look like:
+```
+K_CYCLES   K_INSTR      IPC
+36840      14138       0.38
+70701      27743       0.39
+104562     41350       0.40
+138264     54916       0.40
+```
+
+## sample_filter.py
+
+`sample_filter.py` generates sample filter files as documented in [sample_filter.md](https://android.googlesource.com/platform/system/extras/+/refs/heads/main/simpleperf/doc/sample_filter.md).
+A filter file can be passed in `--filter-file` when running report scripts.
+
+For example, it can be used to split a large recording file into several report files.
+
+```sh
+$ sample_filter.py -i perf.data --split-time-range 2 -o sample_filter
+$ gecko_profile_generator.py -i perf.data --filter-file sample_filter_part1 \
+    | gzip >profile-part1.json.gz
+$ gecko_profile_generator.py -i perf.data --filter-file sample_filter_part2 \
+    | gzip >profile-part2.json.gz
+```

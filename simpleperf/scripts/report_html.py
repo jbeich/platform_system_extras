@@ -28,10 +28,10 @@ from pathlib import Path
 import sys
 from typing import Any, Callable, Dict, Iterator, List, Optional, Set, Tuple, Union
 
-from simpleperf_report_lib import ReportLib, SymbolStruct
+from simpleperf_report_lib import GetReportLib, SymbolStruct
 from simpleperf_utils import (
-    Addr2Nearestline, BaseArgumentParser, BinaryFinder, get_script_dir, log_exit, Objdump,
-    open_report_in_browser, ReadElf, ReportLibOptions, SourceFileSearcher)
+    Addr2Nearestline, AddrRange, BaseArgumentParser, BinaryFinder, Disassembly, get_script_dir,
+    log_exit, Objdump, open_report_in_browser, ReadElf, ReportLibOptions, SourceFileSearcher)
 
 MAX_CALLSTACK_LENGTH = 750
 
@@ -246,6 +246,10 @@ class ThreadScope(object):
         self.call_graph.merge(thread.call_graph)
         self.reverse_call_graph.merge(thread.reverse_call_graph)
 
+    def sort_call_graph_by_function_name(self, get_func_name: Callable[[int], str]) -> None:
+        self.call_graph.sort_by_function_name(get_func_name)
+        self.reverse_call_graph.sort_by_function_name(get_func_name)
+
 
 class LibScope(object):
 
@@ -408,6 +412,17 @@ class CallNode(object):
             else:
                 cur_child.merge(child)
 
+    def sort_by_function_name(self, get_func_name: Callable[[int], str]) -> None:
+        if self.children:
+            child_func_ids = list(self.children.keys())
+            child_func_ids.sort(key=get_func_name)
+            new_children = collections.OrderedDict()
+            for func_id in child_func_ids:
+                new_children[func_id] = self.children[func_id]
+            self.children = new_children
+            for child in self.children.values():
+                child.sort_by_function_name(get_func_name)
+
 
 @dataclass
 class LibInfo:
@@ -466,6 +481,9 @@ class FunctionSet(object):
             self.name_to_func[key] = function
             self.id_to_func[func_id] = function
         return function.func_id
+
+    def get_func_name(self, func_id: int) -> str:
+        return self.id_to_func[func_id].func_name
 
     def trim_functions(self, left_func_ids: Set[int]):
         """ Remove functions excepts those in left_func_ids. """
@@ -621,8 +639,7 @@ class RecordData(object):
         self.binary_finder = BinaryFinder(binary_cache_path, ReadElf(ndk_path))
 
     def load_record_file(self, record_file: str, report_lib_options: ReportLibOptions):
-        lib = ReportLib()
-        lib.SetRecordFile(record_file)
+        lib = GetReportLib(record_file)
         # If not showing ip for unknown symbols, the percent of the unknown symbol may be
         # accumulated to very big, and ranks first in the sample table.
         lib.ShowIpForUnknownSymbol()
@@ -704,6 +721,12 @@ class RecordData(object):
                 del event.processes[process]
         self.functions.trim_functions(hit_func_ids)
 
+    def sort_call_graph_by_function_name(self) -> None:
+        for event in self.events.values():
+            for process in event.processes.values():
+                for thread in process.threads.values():
+                    thread.sort_call_graph_by_function_name(self.functions.get_func_name)
+
     def _get_event(self, event_name: str) -> EventScope:
         if event_name not in self.events:
             self.events[event_name] = EventScope(event_name)
@@ -778,7 +801,8 @@ class RecordData(object):
         # Collect needed source code in SourceFileSet.
         self.source_files.load_source_code(source_dirs)
 
-    def add_disassembly(self, filter_lib: Callable[[str], bool], jobs: int):
+    def add_disassembly(self, filter_lib: Callable[[str], bool],
+                        jobs: int, disassemble_job_size: int):
         """ Collect disassembly information:
             1. Use objdump to collect disassembly for each function in FunctionSet.
             2. Set flag to dump addr_hit_map when generating record info.
@@ -792,6 +816,8 @@ class RecordData(object):
             lib_functions[function.lib_id].append(function)
 
         with ThreadPoolExecutor(jobs) as executor:
+            futures: List[Future] = []
+            all_tasks = []
             for lib_id, functions in lib_functions.items():
                 lib = self.libs.get_lib(lib_id)
                 if not filter_lib(lib.name):
@@ -799,16 +825,45 @@ class RecordData(object):
                 dso_info = objdump.get_dso_info(lib.name, lib.build_id)
                 if not dso_info:
                     continue
-                logging.info('Disassemble %s' % dso_info[0])
-                futures: List[Future] = []
-                for function in functions:
-                    futures.append(
-                        executor.submit(objdump.disassemble_code, dso_info,
-                                        function.start_addr, function.addr_len))
-                for i in range(len(functions)):
-                    # Call future.result() to report exceptions raised in the executor.
-                    functions[i].disassembly = futures[i].result()
+
+                tasks = self.split_disassembly_jobs(functions, disassemble_job_size)
+                logging.debug('create %d jobs to disassemble %d functions in %s',
+                              len(tasks), len(functions), lib.name)
+                for task in tasks:
+                    futures.append(executor.submit(
+                        self._disassemble_functions, objdump, dso_info, task))
+                    all_tasks.append(task)
+
+            for task, future in zip(all_tasks, futures):
+                result = future.result()
+                if result and len(result) == len(task):
+                    for function, disassembly in zip(task, result):
+                        function.disassembly = disassembly.lines
+
+        logging.debug('finished all disassemble jobs')
         self.gen_addr_hit_map_in_record_info = True
+
+    def split_disassembly_jobs(self, functions: List[Function],
+                               disassemble_job_size: int) -> List[List[Function]]:
+        """ Decide how to split the task of dissassembly functions in one library. """
+        if not functions:
+            return []
+        functions.sort(key=lambda f: f.start_addr)
+        result = []
+        job_start_addr = None
+        for function in functions:
+            if (job_start_addr is None or
+                    function.start_addr - job_start_addr > disassemble_job_size):
+                job_start_addr = function.start_addr
+                result.append([function])
+            else:
+                result[-1].append(function)
+        return result
+
+    def _disassemble_functions(self, objdump: Objdump, dso_info,
+                               functions: List[Function]) -> Optional[List[Disassembly]]:
+        addr_ranges = [AddrRange(f.start_addr, f.addr_len) for f in functions]
+        return objdump.disassemble_functions(dso_info, addr_ranges)
 
     def gen_record_info(self) -> Dict[str, Any]:
         """ Return json data which will be used by report_html.js. """
@@ -927,10 +982,11 @@ class ReportGenerator(object):
         self.hw.open_tag('script').add(
             "google.charts.load('current', {'packages': ['corechart', 'table']});").close_tag()
         self.hw.open_tag('style', type='text/css').add("""
-            .colForLine { width: 50px; }
-            .colForCount { width: 100px; }
+            .colForLine { width: 50px; text-align: right; }
+            .colForCount { width: 100px; text-align: right; }
             .tableCell { font-size: 17px; }
             .boldTableCell { font-weight: bold; font-size: 17px; }
+            .textRight { text-align: right; }
             """).close_tag()
         self.hw.close_tag('head')
         self.hw.open_tag('body')
@@ -969,8 +1025,13 @@ def get_args() -> argparse.Namespace:
     parser.add_argument('--add_source_code', action='store_true', help='Add source code.')
     parser.add_argument('--source_dirs', nargs='+', help='Source code directories.')
     parser.add_argument('--add_disassembly', action='store_true', help='Add disassembled code.')
+    parser.add_argument('--disassemble-job-size', type=int, default=1024*1024,
+                        help='address range for one disassemble job')
     parser.add_argument('--binary_filter', nargs='+', help="""Annotate source code and disassembly
-                        only for selected binaries.""")
+                        only for selected binaries, whose recorded paths contains [BINARY_FILTER] as
+                        a substring. Example: to select binaries belonging to an app with package
+                        name 'com.example.myapp', use `--binary_filter com.example.myapp`.
+                        """)
     parser.add_argument(
         '-j', '--jobs', type=int, default=os.cpu_count(),
         help='Use multithreading to speed up disassembly and source code annotation.')
@@ -1011,6 +1072,7 @@ def main():
     if args.aggregate_by_thread_name:
         record_data.aggregate_by_thread_name()
     record_data.limit_percents(args.min_func_percent, args.min_callchain_percent)
+    record_data.sort_call_graph_by_function_name()
 
     def filter_lib(lib_name: str) -> bool:
         if not args.binary_filter:
@@ -1022,7 +1084,7 @@ def main():
     if args.add_source_code:
         record_data.add_source_code(args.source_dirs, filter_lib, args.jobs)
     if args.add_disassembly:
-        record_data.add_disassembly(filter_lib, args.jobs)
+        record_data.add_disassembly(filter_lib, args.jobs, args.disassemble_job_size)
 
     # 3. Generate report html.
     report_generator = ReportGenerator(args.report_path)

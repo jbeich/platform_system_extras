@@ -44,12 +44,7 @@ struct EventFormat {
   int shift;
 };
 
-#define EVENT_TYPE_TABLE_ENTRY(name, type, config, description, limited_arch) \
-  {name, type, config, description, limited_arch},
-
-static const std::set<EventType> builtin_event_types = {
-#include "event_type_table.h"
-};
+extern std::set<EventType> builtin_event_types;
 
 enum class EventFinderType {
   BUILTIN,
@@ -109,7 +104,11 @@ class TracepointStringFinder : public EventTypeFinder {
  protected:
   void LoadTypes() override {
     for (const auto& line : android::base::Split(s_, "\n")) {
-      std::vector<std::string> items = android::base::Split(line, " ");
+      std::string str = android::base::Trim(line);
+      if (str.empty()) {
+        continue;
+      }
+      std::vector<std::string> items = android::base::Split(str, " ");
       CHECK_EQ(items.size(), 2u);
       std::string event_name = items[0];
       uint64_t id;

@@ -9,7 +9,7 @@ ${0##*/} OUTPUT_FILE SIZE
          [-S] [-C FS_CONFIG] [-f SRC_DIR] [-D PRODUCT_OUT]
          [-s FILE_CONTEXTS] [-t MOUNT_POINT] [-T TIMESTAMP] [-B block_map]
          [-L LABEL] [--prjquota] [--casefold] [--compression] [--readonly]
-         [--sldc <num> [sload compression sub-options]]
+         [--sldc <num> [sload compression sub-options]] [-b <block_size>]
 <num>: number of the sload compression args, e.g.  -a LZ4 counts as 2
        when sload compression args are not given, <num> must be 0,
        and the default flags will be used.
@@ -130,6 +130,19 @@ if [[ "$1" == "--sldc" ]]; then
   done
 fi
 
+if [[ "$1" == "-b" ]]; then
+  shift
+  BLOCKSIZE=$1
+  case $BLOCKSIZE in
+    ''|*[!0-9]*)
+      echo "-b needs a number"
+      exit 3 ;;
+  esac
+  shift
+  MKFS_OPTS+=" -b $BLOCKSIZE"
+  MKFS_OPTS+=" -w $BLOCKSIZE"
+fi
+
 if [ -z $SIZE ]; then
   echo "Need size of filesystem"
   exit 2
@@ -163,13 +176,14 @@ function _build()
 
   SLOAD_F2FS_CMD="sload_f2fs $SLOAD_OPTS $OUTPUT_FILE"
   echo $SLOAD_F2FS_CMD
-  MB_SIZE=`$SLOAD_F2FS_CMD | grep "Max image size" | awk '{print $5}'`
+  SLOAD_LOG=`$SLOAD_F2FS_CMD`
   # allow 1: Filesystem errors corrected
   ret=$?
   if [ $ret -ne 0 ] && [ $ret -ne 1 ]; then
     rm -f $OUTPUT_FILE
     exit 4
   fi
+  MB_SIZE=`echo "$SLOAD_LOG" | grep "Max image size" | awk '{print $5}'`
   SIZE=$(((MB_SIZE + 6) * 1024 * 1024))
 }
 

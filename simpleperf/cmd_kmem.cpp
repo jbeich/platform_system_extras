@@ -532,10 +532,9 @@ bool KmemCommand::PrepareToBuildSampleTree() {
 }
 
 void KmemCommand::ReadEventAttrsFromRecordFile() {
-  std::vector<EventAttrWithId> attrs = record_file_reader_->AttrSection();
-  for (const auto& attr_with_id : attrs) {
+  for (const EventAttrWithId& attr_with_id : record_file_reader_->AttrSection()) {
     EventAttrWithName attr;
-    attr.attr = *attr_with_id.attr;
+    attr.attr = attr_with_id.attr;
     attr.event_ids = attr_with_id.ids;
     attr.name = GetEventNameByAttr(attr.attr);
     event_attrs_.push_back(attr);
@@ -606,7 +605,11 @@ bool KmemCommand::ProcessTracingData(const std::vector<char>& data) {
     if (attr.attr.type == PERF_TYPE_TRACEPOINT) {
       uint64_t trace_event_id = attr.attr.config;
       attr.name = tracing->GetTracingEventNameHavingId(trace_event_id);
-      TracingFormat format = tracing->GetTracingFormatHavingId(trace_event_id);
+      std::optional<TracingFormat> opt_format = tracing->GetTracingFormatHavingId(trace_event_id);
+      if (!opt_format.has_value()) {
+        return false;
+      }
+      const TracingFormat& format = opt_format.value();
       if (use_slab_) {
         if (format.name == "kmalloc" || format.name == "kmem_cache_alloc" ||
             format.name == "kmalloc_node" || format.name == "kmem_cache_alloc_node") {

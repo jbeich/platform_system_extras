@@ -26,6 +26,7 @@
 #include <unistd.h>
 
 #include <limits>
+#include <optional>
 #include <set>
 #include <unordered_map>
 #include <vector>
@@ -74,6 +75,9 @@ std::vector<int> GetOnlineCpus() {
 
 static void GetAllModuleFiles(const std::string& path,
                               std::unordered_map<std::string, std::string>* module_file_map) {
+  if (!IsDir(path)) {
+    return;
+  }
   for (const auto& name : GetEntriesInDir(path)) {
     std::string entry_path = path + "/" + name;
     if (IsRegularFile(entry_path) && android::base::EndsWith(name, ".ko")) {
@@ -93,9 +97,13 @@ static std::vector<KernelMmap> GetModulesInUse() {
   }
   std::unordered_map<std::string, std::string> module_file_map;
 #if defined(__ANDROID__)
-  // Search directories listed in "File locations" section in
-  // https://source.android.com/devices/architecture/kernel/modular-kernels.
-  for (const auto& path : {"/vendor/lib/modules", "/odm/lib/modules", "/lib/modules"}) {
+  // On Android, kernel modules are stored in /system/lib/modules, /vendor/lib/modules,
+  // /odm/lib/modules.
+  // See https://source.android.com/docs/core/architecture/partitions/gki-partitions and
+  // https://source.android.com/docs/core/architecture/partitions/vendor-odm-dlkm-partition.
+  // They can also be stored in vendor_kernel_ramdisk.img, which isn't accessible from userspace.
+  // See https://source.android.com/docs/core/architecture/kernel/kernel-module-support.
+  for (const auto& path : {"/system/lib/modules", "/vendor/lib/modules", "/odm/lib/modules"}) {
     GetAllModuleFiles(path, &module_file_map);
   }
 #else
@@ -212,18 +220,19 @@ bool GetModuleBuildId(const std::string& module_name, BuildId* build_id,
  */
 static const char* perf_event_allow_path = "/proc/sys/kernel/perf_event_paranoid";
 
-static bool ReadPerfEventAllowStatus(int* value) {
+static std::optional<int> ReadPerfEventAllowStatus() {
   std::string s;
   if (!android::base::ReadFileToString(perf_event_allow_path, &s)) {
     PLOG(DEBUG) << "failed to read " << perf_event_allow_path;
-    return false;
+    return std::nullopt;
   }
   s = android::base::Trim(s);
-  if (!android::base::ParseInt(s.c_str(), value)) {
+  int value;
+  if (!android::base::ParseInt(s.c_str(), &value)) {
     PLOG(ERROR) << "failed to parse " << perf_event_allow_path << ": " << s;
-    return false;
+    return std::nullopt;
   }
-  return true;
+  return value;
 }
 
 bool CanRecordRawData() {
@@ -236,9 +245,18 @@ bool CanRecordRawData() {
   // users.
   return false;
 #else
-  int value;
-  return ReadPerfEventAllowStatus(&value) && value == -1;
+  return ReadPerfEventAllowStatus() == -1;
 #endif
+}
+
+std::optional<uint64_t> GetMemorySize() {
+  std::unique_ptr<FILE, decltype(&fclose)> fp(fopen("/proc/meminfo", "r"), fclose);
+  uint64_t size;
+  if (fp && fscanf(fp.get(), "MemTotal:%" PRIu64 " k", &size) == 1) {
+    return size * kKilobyte;
+  }
+  PLOG(ERROR) << "failed to get memory size";
+  return std::nullopt;
 }
 
 static const char* GetLimitLevelDescription(int limit_level) {
@@ -259,11 +277,16 @@ static const char* GetLimitLevelDescription(int limit_level) {
 }
 
 bool CheckPerfEventLimit() {
+  std::optional<int> old_level = ReadPerfEventAllowStatus();
+
   // Root is not limited by perf_event_allow_path. However, the monitored threads
   // may create child processes not running as root. To make sure the child processes have
   // enough permission to create inherited tracepoint events, write -1 to perf_event_allow_path.
   // See http://b/62230699.
   if (IsRoot()) {
+    if (old_level == -1) {
+      return true;
+    }
     if (android::base::WriteStringToFile("-1", perf_event_allow_path)) {
       return true;
     }
@@ -273,9 +296,7 @@ bool CheckPerfEventLimit() {
     return false;
 #endif
   }
-  int limit_level;
-  bool can_read_allow_file = ReadPerfEventAllowStatus(&limit_level);
-  if (can_read_allow_file && limit_level <= 1) {
+  if (old_level.has_value() && old_level <= 1) {
     return true;
   }
 #if defined(__ANDROID__)
@@ -291,23 +312,24 @@ bool CheckPerfEventLimit() {
   // Try to enable perf events by setprop security.perf_harden=0.
   if (android::base::SetProperty(prop_name, "0")) {
     sleep(1);
-    if (can_read_allow_file && ReadPerfEventAllowStatus(&limit_level) && limit_level <= 1) {
+    // Check the result of setprop, by reading allow status or the property value.
+    if (auto level = ReadPerfEventAllowStatus(); level.has_value() && level <= 1) {
       return true;
     }
     if (android::base::GetProperty(prop_name, "") == "0") {
       return true;
     }
   }
-  if (can_read_allow_file) {
-    LOG(ERROR) << perf_event_allow_path << " is " << limit_level << ", "
-               << GetLimitLevelDescription(limit_level) << ".";
+  if (old_level.has_value()) {
+    LOG(ERROR) << perf_event_allow_path << " is " << old_level.value() << ", "
+               << GetLimitLevelDescription(old_level.value()) << ".";
   }
   LOG(ERROR) << "Try using `adb shell setprop security.perf_harden 0` to allow profiling.";
   return false;
 #else
-  if (can_read_allow_file) {
-    LOG(ERROR) << perf_event_allow_path << " is " << limit_level << ", "
-               << GetLimitLevelDescription(limit_level) << ". Try using `echo -1 >"
+  if (old_level.has_value()) {
+    LOG(ERROR) << perf_event_allow_path << " is " << old_level.value() << ", "
+               << GetLimitLevelDescription(old_level.value()) << ". Try using `echo -1 >"
                << perf_event_allow_path << "` to enable profiling.";
     return false;
   }
@@ -333,9 +355,10 @@ bool SetPerfEventLimits(uint64_t sample_freq, size_t cpu_percent, uint64_t mlock
   }
   // Wait for init process to change perf event limits based on properties.
   const size_t max_wait_us = 3 * 1000000;
+  const size_t interval_us = 10000;
   int finish_mask = 0;
-  for (size_t i = 0; i < max_wait_us && finish_mask != 7; ++i) {
-    usleep(1);  // Wait 1us to avoid busy loop.
+  for (size_t i = 0; i < max_wait_us && finish_mask != 7; i += interval_us) {
+    usleep(interval_us);  // Wait 10ms to avoid busy loop.
     if ((finish_mask & 1) == 0) {
       uint64_t freq;
       if (!GetMaxSampleFrequency(&freq) || freq == sample_freq) {
@@ -955,7 +978,9 @@ std::string GetCompleteProcessName(pid_t pid) {
   if (pos != std::string::npos) {
     argv0.resize(pos);
   }
-  return android::base::Basename(argv0);
+  // argv0 can be empty if the process is in zombie state. In that case, we don't want to pass argv0
+  // to Basename(), which returns ".".
+  return argv0.empty() ? std::string() : android::base::Basename(argv0);
 }
 
 const char* GetTraceFsDir() {
@@ -1009,6 +1034,56 @@ std::optional<uid_t> GetProcessUid(pid_t pid) {
     }
   }
   return std::nullopt;
+}
+
+std::vector<ARMCpuModel> GetARMCpuModels() {
+  std::vector<ARMCpuModel> cpu_models;
+  LineReader reader("/proc/cpuinfo");
+  if (!reader.Ok()) {
+    return cpu_models;
+  }
+  auto add_cpu = [&](uint32_t processor, uint32_t implementer, uint32_t partnum) {
+    for (auto& model : cpu_models) {
+      if (model.implementer == implementer && model.partnum == partnum) {
+        model.cpus.push_back(processor);
+        return;
+      }
+    }
+    cpu_models.resize(cpu_models.size() + 1);
+    ARMCpuModel& model = cpu_models.back();
+    model.implementer = implementer;
+    model.partnum = partnum;
+    model.cpus.push_back(processor);
+  };
+
+  uint32_t processor = 0;
+  uint32_t implementer = 0;
+  uint32_t partnum = 0;
+  int parsed = 0;
+  std::string* line;
+  while ((line = reader.ReadLine()) != nullptr) {
+    std::vector<std::string> strs = android::base::Split(*line, ":");
+    if (strs.size() != 2) {
+      continue;
+    }
+    std::string name = android::base::Trim(strs[0]);
+    std::string value = android::base::Trim(strs[1]);
+    if (name == "processor") {
+      if (android::base::ParseUint(value, &processor)) {
+        parsed |= 1;
+      }
+    } else if (name == "CPU implementer") {
+      if (android::base::ParseUint(value, &implementer)) {
+        parsed |= 2;
+      }
+    } else if (name == "CPU part") {
+      if (android::base::ParseUint(value, &partnum) && parsed == 0x3) {
+        add_cpu(processor, implementer, partnum);
+      }
+      parsed = 0;
+    }
+  }
+  return cpu_models;
 }
 
 }  // namespace simpleperf

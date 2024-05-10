@@ -35,27 +35,27 @@
 using namespace simpleperf;
 using namespace simpleperf::PerfFileFormat;
 
+// @CddTest = 6.1/C-0-2
 class RecordFileTest : public ::testing::Test {
  protected:
   void SetUp() override { close(tmpfile_.release()); }
 
   void AddEventType(const std::string& event_type_str) {
+    uint64_t fake_id = attr_ids_.size();
+    attr_ids_.resize(attr_ids_.size() + 1);
+    EventAttrWithId& attr_id = attr_ids_.back();
     std::unique_ptr<EventTypeAndModifier> event_type_modifier = ParseEventType(event_type_str);
     ASSERT_TRUE(event_type_modifier != nullptr);
-    perf_event_attr attr = CreateDefaultPerfEventAttr(event_type_modifier->event_type);
-    attr.sample_id_all = 1;
-    attrs_.push_back(std::unique_ptr<perf_event_attr>(new perf_event_attr(attr)));
-    EventAttrWithId attr_id;
-    attr_id.attr = attrs_.back().get();
-    attr_id.ids.push_back(attrs_.size());  // Fake id.
-    attr_ids_.push_back(attr_id);
+    attr_id.attr = CreateDefaultPerfEventAttr(event_type_modifier->event_type);
+    attr_id.attr.sample_id_all = 1;
+    attr_id.ids.push_back(fake_id);
   }
 
   TemporaryFile tmpfile_;
-  std::vector<std::unique_ptr<perf_event_attr>> attrs_;
-  std::vector<EventAttrWithId> attr_ids_;
+  EventAttrIds attr_ids_;
 };
 
+// @CddTest = 6.1/C-0-2
 TEST_F(RecordFileTest, smoke) {
   // Write to a record file.
   std::unique_ptr<RecordFileWriter> writer = RecordFileWriter::CreateInstance(tmpfile_.path);
@@ -66,7 +66,7 @@ TEST_F(RecordFileTest, smoke) {
   ASSERT_TRUE(writer->WriteAttrSection(attr_ids_));
 
   // Write data section.
-  MmapRecord mmap_record(*(attr_ids_[0].attr), true, 1, 1, 0x1000, 0x2000, 0x3000,
+  MmapRecord mmap_record(attr_ids_[0].attr, true, 1, 1, 0x1000, 0x2000, 0x3000,
                          "mmap_record_example", attr_ids_[0].ids[0]);
   ASSERT_TRUE(writer->WriteRecord(mmap_record));
 
@@ -86,9 +86,9 @@ TEST_F(RecordFileTest, smoke) {
   // Read from a record file.
   std::unique_ptr<RecordFileReader> reader = RecordFileReader::CreateInstance(tmpfile_.path);
   ASSERT_TRUE(reader != nullptr);
-  std::vector<EventAttrWithId> attrs = reader->AttrSection();
+  const EventAttrIds& attrs = reader->AttrSection();
   ASSERT_EQ(1u, attrs.size());
-  ASSERT_EQ(0, memcmp(attrs[0].attr, attr_ids_[0].attr, sizeof(perf_event_attr)));
+  ASSERT_EQ(0, memcmp(&attrs[0].attr, &attr_ids_[0].attr, sizeof(perf_event_attr)));
   ASSERT_EQ(attrs[0].ids, attr_ids_[0].ids);
 
   // Read and check data section.
@@ -104,6 +104,7 @@ TEST_F(RecordFileTest, smoke) {
   ASSERT_TRUE(reader->Close());
 }
 
+// @CddTest = 6.1/C-0-2
 TEST_F(RecordFileTest, record_more_than_one_attr) {
   // Write to a record file.
   std::unique_ptr<RecordFileWriter> writer = RecordFileWriter::CreateInstance(tmpfile_.path);
@@ -120,14 +121,15 @@ TEST_F(RecordFileTest, record_more_than_one_attr) {
   // Read from a record file.
   std::unique_ptr<RecordFileReader> reader = RecordFileReader::CreateInstance(tmpfile_.path);
   ASSERT_TRUE(reader != nullptr);
-  std::vector<EventAttrWithId> attrs = reader->AttrSection();
+  const EventAttrIds& attrs = reader->AttrSection();
   ASSERT_EQ(3u, attrs.size());
   for (size_t i = 0; i < attrs.size(); ++i) {
-    ASSERT_EQ(0, memcmp(attrs[i].attr, attr_ids_[i].attr, sizeof(perf_event_attr)));
+    ASSERT_EQ(0, memcmp(&attrs[i].attr, &attr_ids_[i].attr, sizeof(perf_event_attr)));
     ASSERT_EQ(attrs[i].ids, attr_ids_[i].ids);
   }
 }
 
+// @CddTest = 6.1/C-0-2
 TEST_F(RecordFileTest, write_meta_info_feature_section) {
   // Write to a record file.
   std::unique_ptr<RecordFileWriter> writer = RecordFileWriter::CreateInstance(tmpfile_.path);
@@ -152,6 +154,7 @@ TEST_F(RecordFileTest, write_meta_info_feature_section) {
   ASSERT_EQ(reader->GetMetaInfoFeature(), info_map);
 }
 
+// @CddTest = 6.1/C-0-2
 TEST_F(RecordFileTest, write_debug_unwind_feature_section) {
   // Write to a record file.
   std::unique_ptr<RecordFileWriter> writer = RecordFileWriter::CreateInstance(tmpfile_.path);
@@ -182,6 +185,7 @@ TEST_F(RecordFileTest, write_debug_unwind_feature_section) {
   }
 }
 
+// @CddTest = 6.1/C-0-2
 TEST_F(RecordFileTest, write_file2_feature_section) {
   // Write to a record file.
   std::unique_ptr<RecordFileWriter> writer = RecordFileWriter::CreateInstance(tmpfile_.path);

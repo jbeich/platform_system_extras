@@ -17,7 +17,6 @@
 //! Pack profiles into reports.
 
 use anyhow::{anyhow, Result};
-use lazy_static::lazy_static;
 use macaddr::MacAddr6;
 use std::fs::{self, File, Permissions};
 use std::io::{Read, Write};
@@ -30,13 +29,18 @@ use zip::write::FileOptions;
 use zip::CompressionMethod::Deflated;
 use zip::ZipWriter;
 
-use crate::config::Config;
+use crate::config::{clear_processed_files, Config};
 
-lazy_static! {
-    pub static ref UUID_CONTEXT: Context = Context::new(0);
-}
+pub const NO_USAGE_SETTING: i32 = -1;
 
-pub fn pack_report(profile: &Path, report: &Path, config: &Config) -> Result<String> {
+pub static UUID_CONTEXT: Context = Context::new(0);
+
+pub fn pack_report(
+    profile: &Path,
+    report: &Path,
+    config: &Config,
+    usage_setting: i32,
+) -> Result<String> {
     let mut report = PathBuf::from(report);
     let report_filename = get_report_filename(&config.node_id)?;
     report.push(&report_filename);
@@ -70,23 +74,31 @@ pub fn pack_report(profile: &Path, report: &Path, config: &Config) -> Result<Str
             zip.write_all(&buffer)?;
             Ok(())
         })?;
+
+    if usage_setting != NO_USAGE_SETTING {
+        zip.start_file("usage_setting", options)?;
+        zip.write_all(usage_setting.to_string().as_bytes())?;
+    }
     zip.finish()?;
+    clear_processed_files()?;
 
     Ok(report_filename)
 }
 
 fn get_report_filename(node_id: &MacAddr6) -> Result<String> {
     let since_epoch = SystemTime::now().duration_since(SystemTime::UNIX_EPOCH)?;
-    let ts =
-        Timestamp::from_unix(&*UUID_CONTEXT, since_epoch.as_secs(), since_epoch.subsec_nanos());
-    let uuid = Uuid::new_v1(ts, node_id.as_bytes())?;
+    let ts = Timestamp::from_unix(&UUID_CONTEXT, since_epoch.as_secs(), since_epoch.subsec_nanos());
+    let uuid = Uuid::new_v1(
+        ts,
+        node_id.as_bytes().try_into().expect("Invalid number of bytes in V1 UUID"),
+    );
     Ok(uuid.to_string())
 }
 
 /// Get report creation timestamp through its filename (version 1 UUID).
 pub fn get_report_ts(filename: &str) -> Result<SystemTime> {
     let uuid_ts = Uuid::parse_str(filename)?
-        .to_timestamp()
+        .get_timestamp()
         .ok_or_else(|| anyhow!("filename is not a valid V1 UUID."))?
         .to_unix();
     Ok(SystemTime::UNIX_EPOCH + Duration::new(uuid_ts.0, uuid_ts.1))

@@ -56,6 +56,7 @@ enum user_record_type {
   SIMPLE_PERF_RECORD_CALLCHAIN,
   SIMPLE_PERF_RECORD_UNWINDING_RESULT,
   SIMPLE_PERF_RECORD_TRACING_DATA,
+  SIMPLE_PERF_RECORD_DEBUG,
 };
 
 // perf_event_header uses u16 to store record size. However, that is not
@@ -550,6 +551,7 @@ struct AuxTraceRecord : public Record {
   AuxTraceRecord(uint64_t aux_size, uint64_t offset, uint32_t idx, uint32_t tid, uint32_t cpu);
 
   bool Parse(const perf_event_attr& attr, char* p, char* end) override;
+  uint32_t Cpu() const override { return data->cpu; }
   static size_t Size() { return sizeof(perf_event_header) + sizeof(DataType); }
 
  protected:
@@ -662,6 +664,22 @@ struct UnwindingResultRecord : public Record {
                         const PerfSampleRegsUserType& regs_user_data,
                         const PerfSampleStackUserType& stack_user_data,
                         const std::vector<uint64_t>& ips, const std::vector<uint64_t>& sps);
+
+  bool Parse(const perf_event_attr& attr, char* p, char* end) override;
+  uint64_t Timestamp() const override { return time; }
+
+ protected:
+  void DumpData(size_t indent) const override;
+};
+
+// Add a debug string in the recording file.
+struct DebugRecord : public Record {
+  uint64_t time = 0;
+  char* s = nullptr;
+
+  DebugRecord() {}
+
+  DebugRecord(uint64_t time, const std::string& s);
 
   bool Parse(const perf_event_attr& attr, char* p, char* end) override;
   uint64_t Timestamp() const override { return time; }

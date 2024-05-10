@@ -22,6 +22,7 @@
 
 #include <thread>
 
+#include "ProbeEvents.h"
 #include "cmd_stat_impl.h"
 #include "command.h"
 #include "environment.h"
@@ -35,26 +36,32 @@ static std::unique_ptr<Command> StatCmd() {
   return CreateCommandInstance("stat");
 }
 
+// @CddTest = 6.1/C-0-2
 TEST(stat_cmd, no_options) {
   ASSERT_TRUE(StatCmd()->Run({"sleep", "1"}));
 }
 
+// @CddTest = 6.1/C-0-2
 TEST(stat_cmd, event_option) {
   ASSERT_TRUE(StatCmd()->Run({"-e", "cpu-clock,task-clock", "sleep", "1"}));
 }
 
+// @CddTest = 6.1/C-0-2
 TEST(stat_cmd, system_wide_option) {
   TEST_IN_ROOT(ASSERT_TRUE(StatCmd()->Run({"-a", "sleep", "1"})));
 }
 
+// @CddTest = 6.1/C-0-2
 TEST(stat_cmd, verbose_option) {
   ASSERT_TRUE(StatCmd()->Run({"--verbose", "sleep", "1"}));
 }
 
+// @CddTest = 6.1/C-0-2
 TEST(stat_cmd, tracepoint_event) {
   TEST_IN_ROOT(ASSERT_TRUE(StatCmd()->Run({"-a", "-e", "sched:sched_switch", "sleep", "1"})));
 }
 
+// @CddTest = 6.1/C-0-2
 TEST(stat_cmd, rN_event) {
   TEST_REQUIRE_HW_COUNTER();
   OMIT_TEST_ON_NON_NATIVE_ABIS();
@@ -78,6 +85,7 @@ TEST(stat_cmd, rN_event) {
   ASSERT_TRUE(StatCmd()->Run({"-e", event_name, "sleep", "1"}));
 }
 
+// @CddTest = 6.1/C-0-2
 TEST(stat_cmd, pmu_event) {
   TEST_REQUIRE_PMU_COUNTER();
   TEST_REQUIRE_HW_COUNTER();
@@ -95,6 +103,7 @@ TEST(stat_cmd, pmu_event) {
   TEST_IN_ROOT(ASSERT_TRUE(StatCmd()->Run({"-a", "-e", event_string, "sleep", "1"})));
 }
 
+// @CddTest = 6.1/C-0-2
 TEST(stat_cmd, event_modifier) {
   TEST_REQUIRE_HW_COUNTER();
   ASSERT_TRUE(StatCmd()->Run({"-e", "cpu-cycles:u,cpu-cycles:k", "sleep", "1"}));
@@ -120,6 +129,7 @@ void CreateProcesses(size_t count, std::vector<std::unique_ptr<Workload>>* workl
   }
 }
 
+// @CddTest = 6.1/C-0-2
 TEST(stat_cmd, existing_processes) {
   std::vector<std::unique_ptr<Workload>> workloads;
   CreateProcesses(2, &workloads);
@@ -128,6 +138,7 @@ TEST(stat_cmd, existing_processes) {
   ASSERT_TRUE(StatCmd()->Run({"-p", pid_list, "sleep", "1"}));
 }
 
+// @CddTest = 6.1/C-0-2
 TEST(stat_cmd, existing_threads) {
   std::vector<std::unique_ptr<Workload>> workloads;
   CreateProcesses(2, &workloads);
@@ -137,11 +148,13 @@ TEST(stat_cmd, existing_threads) {
   ASSERT_TRUE(StatCmd()->Run({"-t", tid_list, "sleep", "1"}));
 }
 
+// @CddTest = 6.1/C-0-2
 TEST(stat_cmd, no_monitored_threads) {
   ASSERT_FALSE(StatCmd()->Run({}));
   ASSERT_FALSE(StatCmd()->Run({""}));
 }
 
+// @CddTest = 6.1/C-0-2
 TEST(stat_cmd, group_option) {
   TEST_REQUIRE_HW_COUNTER();
   ASSERT_TRUE(StatCmd()->Run({"--group", "cpu-clock,page-faults", "sleep", "1"}));
@@ -150,6 +163,7 @@ TEST(stat_cmd, group_option) {
                               "cpu-cycles:k,instructions:k", "sleep", "1"}));
 }
 
+// @CddTest = 6.1/C-0-2
 TEST(stat_cmd, auto_generated_summary) {
   TEST_REQUIRE_HW_COUNTER();
   TemporaryFile tmp_file;
@@ -166,11 +180,13 @@ TEST(stat_cmd, auto_generated_summary) {
   ASSERT_NE(s.npos, s.find("instructions", pos));
 }
 
+// @CddTest = 6.1/C-0-2
 TEST(stat_cmd, duration_option) {
   ASSERT_TRUE(StatCmd()->Run({"--duration", "1.2", "-p", std::to_string(getpid()), "--in-app"}));
   ASSERT_TRUE(StatCmd()->Run({"--duration", "1", "sleep", "2"}));
 }
 
+// @CddTest = 6.1/C-0-2
 TEST(stat_cmd, interval_option) {
   TemporaryFile tmp_file;
   ASSERT_TRUE(StatCmd()->Run(
@@ -187,16 +203,19 @@ TEST(stat_cmd, interval_option) {
   ASSERT_EQ(count, 2UL);
 }
 
+// @CddTest = 6.1/C-0-2
 TEST(stat_cmd, interval_option_in_system_wide) {
   TEST_IN_ROOT(ASSERT_TRUE(StatCmd()->Run({"-a", "--interval", "100", "--duration", "0.3"})));
 }
 
+// @CddTest = 6.1/C-0-2
 TEST(stat_cmd, interval_only_values_option) {
   ASSERT_TRUE(StatCmd()->Run({"--interval", "500", "--interval-only-values", "sleep", "2"}));
   TEST_IN_ROOT(ASSERT_TRUE(
       StatCmd()->Run({"-a", "--interval", "100", "--interval-only-values", "--duration", "0.3"})));
 }
 
+// @CddTest = 6.1/C-0-2
 TEST(stat_cmd, no_modifier_for_clock_events) {
   for (const std::string& e : {"cpu-clock", "task-clock"}) {
     for (const std::string& m : {"u", "k"}) {
@@ -206,6 +225,7 @@ TEST(stat_cmd, no_modifier_for_clock_events) {
   }
 }
 
+// @CddTest = 6.1/C-0-2
 TEST(stat_cmd, handle_SIGHUP) {
   std::thread thread([]() {
     sleep(1);
@@ -215,6 +235,7 @@ TEST(stat_cmd, handle_SIGHUP) {
   ASSERT_TRUE(StatCmd()->Run({"sleep", "1000000"}));
 }
 
+// @CddTest = 6.1/C-0-2
 TEST(stat_cmd, stop_when_no_more_targets) {
   std::atomic<int> tid(0);
   std::thread thread([&]() {
@@ -227,21 +248,24 @@ TEST(stat_cmd, stop_when_no_more_targets) {
   ASSERT_TRUE(StatCmd()->Run({"-t", std::to_string(tid), "--in-app"}));
 }
 
-TEST(stat_cmd, sample_speed_should_be_zero) {
+// @CddTest = 6.1/C-0-2
+TEST(stat_cmd, sample_rate_should_be_zero) {
   TEST_REQUIRE_HW_COUNTER();
   EventSelectionSet set(true);
   ASSERT_TRUE(set.AddEventType("cpu-cycles"));
   set.AddMonitoredProcesses({getpid()});
-  ASSERT_TRUE(set.OpenEventFiles({-1}));
-  std::vector<EventAttrWithId> attrs = set.GetEventAttrWithId();
+  set.SetCpusForNewEvents({-1});
+  ASSERT_TRUE(set.OpenEventFiles());
+  const EventAttrIds& attrs = set.GetEventAttrWithId();
   ASSERT_GT(attrs.size(), 0u);
   for (auto& attr : attrs) {
-    ASSERT_EQ(attr.attr->sample_period, 0u);
-    ASSERT_EQ(attr.attr->sample_freq, 0u);
-    ASSERT_EQ(attr.attr->freq, 0u);
+    ASSERT_EQ(attr.attr.sample_period, 0u);
+    ASSERT_EQ(attr.attr.sample_freq, 0u);
+    ASSERT_EQ(attr.attr.freq, 0u);
   }
 }
 
+// @CddTest = 6.1/C-0-2
 TEST(stat_cmd, calculating_cpu_frequency) {
   TEST_REQUIRE_HW_COUNTER();
   CaptureStdout capture;
@@ -267,6 +291,7 @@ TEST(stat_cmd, calculating_cpu_frequency) {
   ASSERT_NEAR(cpu_frequency, calculated_frequency, 1e-3);
 }
 
+// @CddTest = 6.1/C-0-2
 TEST(stat_cmd, set_comm_in_another_thread) {
   // Test a kernel bug which was fixed in 3.15. If kernel panic happens, please cherry pick kernel
   // patch: e041e328c4b41e perf: Fix perf_event_comm() vs. exec() assumption
@@ -289,12 +314,14 @@ TEST(stat_cmd, set_comm_in_another_thread) {
       EventSelectionSet set(true);
       ASSERT_TRUE(set.AddEventType("cpu-cycles"));
       set.AddMonitoredThreads({child_tid});
-      ASSERT_TRUE(set.OpenEventFiles({-1}));
+      set.SetCpusForNewEvents({-1});
+      ASSERT_TRUE(set.OpenEventFiles());
 
       EventSelectionSet set2(true);
       ASSERT_TRUE(set2.AddEventType("instructions"));
       set2.AddMonitoredThreads({gettid()});
-      ASSERT_TRUE(set2.OpenEventFiles({-1}));
+      set2.SetCpusForNewEvents({-1});
+      ASSERT_TRUE(set2.OpenEventFiles());
 
       // For kernels with the bug, setting comm will make the monitored events of the child thread
       // on the cpu of the current thread.
@@ -317,6 +344,7 @@ static void TestStatingApps(const std::string& app_name) {
   ASSERT_TRUE(StatCmd()->Run({"--app", app_name, "--duration", "3"}));
 }
 
+// @CddTest = 6.1/C-0-2
 TEST(stat_cmd, app_option_for_debuggable_app) {
   TEST_REQUIRE_APPS();
   SetRunInAppToolForTesting(true, false);
@@ -325,12 +353,14 @@ TEST(stat_cmd, app_option_for_debuggable_app) {
   TestStatingApps("com.android.simpleperf.debuggable");
 }
 
+// @CddTest = 6.1/C-0-2
 TEST(stat_cmd, app_option_for_profileable_app) {
   TEST_REQUIRE_APPS();
   SetRunInAppToolForTesting(false, true);
   TestStatingApps("com.android.simpleperf.profileable");
 }
 
+// @CddTest = 6.1/C-0-2
 TEST(stat_cmd, use_devfreq_counters_option) {
 #if defined(__ANDROID__)
   TEST_IN_ROOT(StatCmd()->Run({"--use-devfreq-counters", "sleep", "0.1"}));
@@ -339,21 +369,25 @@ TEST(stat_cmd, use_devfreq_counters_option) {
 #endif
 }
 
+// @CddTest = 6.1/C-0-2
 TEST(stat_cmd, per_thread_option) {
   ASSERT_TRUE(StatCmd()->Run({"--per-thread", "sleep", "0.1"}));
   TEST_IN_ROOT(StatCmd()->Run({"--per-thread", "-a", "--duration", "0.1"}));
 }
 
+// @CddTest = 6.1/C-0-2
 TEST(stat_cmd, per_core_option) {
   ASSERT_TRUE(StatCmd()->Run({"--per-core", "sleep", "0.1"}));
   TEST_IN_ROOT(StatCmd()->Run({"--per-core", "-a", "--duration", "0.1"}));
 }
 
+// @CddTest = 6.1/C-0-2
 TEST(stat_cmd, sort_option) {
   ASSERT_TRUE(
       StatCmd()->Run({"--per-thread", "--per-core", "--sort", "cpu,count", "sleep", "0.1"}));
 }
 
+// @CddTest = 6.1/C-0-2
 TEST(stat_cmd, counter_sum) {
   PerfCounter counter;
   counter.value = 1;
@@ -378,10 +412,63 @@ TEST(stat_cmd, counter_sum) {
   ASSERT_EQ(counter.time_running, 6);
 }
 
+// @CddTest = 6.1/C-0-2
 TEST(stat_cmd, print_hw_counter_option) {
   ASSERT_TRUE(StatCmd()->Run({"--print-hw-counter"}));
 }
 
+// @CddTest = 6.1/C-0-2
+TEST(stat_cmd, record_different_counters_for_different_cpus) {
+  std::vector<int> online_cpus = GetOnlineCpus();
+  ASSERT_FALSE(online_cpus.empty());
+  std::string cpu0 = std::to_string(online_cpus[0]);
+  std::string cpu1 = std::to_string(online_cpus.back());
+
+  CaptureStdout capture;
+  ASSERT_TRUE(capture.Start());
+  ASSERT_TRUE(StatCmd()->Run({"--csv", "--cpu", cpu0, "-e", "cpu-clock", "--cpu", cpu1, "-e",
+                              "task-clock", "--verbose", "sleep", SLEEP_SEC}));
+  std::string output = capture.Finish();
+  bool has_cpu_clock = false;
+  bool has_task_clock = false;
+  for (auto& line : android::base::Split(output, "\n")) {
+    if (android::base::StartsWith(line, "cpu-clock,")) {
+      ASSERT_NE(line.find("cpu," + cpu0 + ","), line.npos) << output;
+      has_cpu_clock = true;
+    } else if (android::base::StartsWith(line, "task-clock,")) {
+      ASSERT_NE(line.find("cpu," + cpu1 + ","), line.npos) << output;
+      has_task_clock = true;
+    }
+  }
+  ASSERT_TRUE(has_cpu_clock) << output;
+  ASSERT_TRUE(has_task_clock) << output;
+}
+
+// @CddTest = 6.1/C-0-2
+TEST(stat_cmd, kprobe_option) {
+  TEST_REQUIRE_ROOT();
+  EventSelectionSet event_selection_set(false);
+  ProbeEvents probe_events(event_selection_set);
+  if (!probe_events.IsKprobeSupported()) {
+    GTEST_LOG_(INFO) << "Skip this test as kprobe isn't supported by the kernel.";
+    return;
+  }
+  ASSERT_TRUE(StatCmd()->Run({"-e", "kprobes:myprobe", "--kprobe", "p:myprobe do_sys_openat2", "-a",
+                              "--duration", SLEEP_SEC}));
+  // A default kprobe event is created if not given an explicit --kprobe option.
+  ASSERT_TRUE(StatCmd()->Run({"-e", "kprobes:do_sys_openat2", "-a", "--duration", SLEEP_SEC}));
+  ASSERT_TRUE(StatCmd()->Run({"--group", "kprobes:do_sys_openat2", "-a", "--duration", SLEEP_SEC}));
+}
+
+// @CddTest = 6.1/C-0-2
+TEST(stat_cmd, tp_filter_option) {
+  TEST_REQUIRE_HOST_ROOT();
+  TEST_REQUIRE_TRACEPOINT_EVENTS();
+  ASSERT_TRUE(StatCmd()->Run(
+      {"-e", "sched:sched_switch", "--tp-filter", "prev_comm != sleep", "sleep", SLEEP_SEC}));
+}
+
+// @CddTest = 6.1/C-0-2
 class StatCmdSummaryBuilderTest : public ::testing::Test {
  protected:
   struct CounterArg {
@@ -433,6 +520,7 @@ class StatCmdSummaryBuilderTest : public ::testing::Test {
   std::vector<std::string> sort_keys_;
 };
 
+// @CddTest = 6.1/C-0-2
 TEST_F(StatCmdSummaryBuilderTest, multiple_events) {
   AddCounter({.event_id = 0, .value = 1, .time_enabled = 1, .time_running = 1});
   AddCounter({.event_id = 1, .value = 2, .time_enabled = 2, .time_running = 2});
@@ -446,6 +534,7 @@ TEST_F(StatCmdSummaryBuilderTest, multiple_events) {
   ASSERT_NEAR(summaries[1].scale, 1.0, 1e-5);
 }
 
+// @CddTest = 6.1/C-0-2
 TEST_F(StatCmdSummaryBuilderTest, default_aggregate) {
   AddCounter({.tid = 0, .cpu = 0, .value = 1, .time_enabled = 1, .time_running = 1});
   AddCounter({.tid = 0, .cpu = 1, .value = 1, .time_enabled = 1, .time_running = 1});
@@ -457,6 +546,7 @@ TEST_F(StatCmdSummaryBuilderTest, default_aggregate) {
   ASSERT_NEAR(summaries[0].scale, 1.25, 1e-5);
 }
 
+// @CddTest = 6.1/C-0-2
 TEST_F(StatCmdSummaryBuilderTest, per_thread_aggregate) {
   AddCounter({.tid = 0, .cpu = 0, .value = 1, .time_enabled = 1, .time_running = 1});
   AddCounter({.tid = 0, .cpu = 1, .value = 1, .time_enabled = 1, .time_running = 1});
@@ -474,6 +564,7 @@ TEST_F(StatCmdSummaryBuilderTest, per_thread_aggregate) {
   ASSERT_NEAR(summaries[1].scale, 1.0, 1e-5);
 }
 
+// @CddTest = 6.1/C-0-2
 TEST_F(StatCmdSummaryBuilderTest, per_core_aggregate) {
   AddCounter({.tid = 0, .cpu = 0, .value = 1, .time_enabled = 1, .time_running = 1});
   AddCounter({.tid = 0, .cpu = 1, .value = 1, .time_enabled = 1, .time_running = 1});
@@ -491,6 +582,7 @@ TEST_F(StatCmdSummaryBuilderTest, per_core_aggregate) {
   ASSERT_NEAR(summaries[1].scale, 1.5, 1e-5);
 }
 
+// @CddTest = 6.1/C-0-2
 TEST_F(StatCmdSummaryBuilderTest, per_thread_core_aggregate) {
   AddCounter({.tid = 0, .cpu = 0, .value = 1, .time_enabled = 1, .time_running = 1});
   AddCounter({.tid = 0, .cpu = 1, .value = 2, .time_enabled = 1, .time_running = 1});
@@ -516,6 +608,7 @@ TEST_F(StatCmdSummaryBuilderTest, per_thread_core_aggregate) {
   ASSERT_NEAR(summaries[3].scale, 1.0, 1e-5);
 }
 
+// @CddTest = 6.1/C-0-2
 TEST_F(StatCmdSummaryBuilderTest, sort_key_count) {
   sort_keys_ = {"count"};
   AddCounter({.tid = 0, .cpu = 0, .value = 1});
@@ -525,6 +618,7 @@ TEST_F(StatCmdSummaryBuilderTest, sort_key_count) {
   ASSERT_EQ(summaries[1].count, 1);
 }
 
+// @CddTest = 6.1/C-0-2
 TEST_F(StatCmdSummaryBuilderTest, sort_key_count_per_thread) {
   sort_keys_ = {"count_per_thread", "count"};
   AddCounter({.tid = 0, .cpu = 0, .value = 1});
@@ -536,6 +630,7 @@ TEST_F(StatCmdSummaryBuilderTest, sort_key_count_per_thread) {
   ASSERT_EQ(summaries[2].count, 3);
 }
 
+// @CddTest = 6.1/C-0-2
 TEST_F(StatCmdSummaryBuilderTest, sort_key_cpu) {
   sort_keys_ = {"cpu"};
   AddCounter({.tid = 0, .cpu = 1, .value = 2});
@@ -545,6 +640,7 @@ TEST_F(StatCmdSummaryBuilderTest, sort_key_cpu) {
   ASSERT_EQ(summaries[1].cpu, 1);
 }
 
+// @CddTest = 6.1/C-0-2
 TEST_F(StatCmdSummaryBuilderTest, sort_key_pid_tid_name) {
   AddCounter({.tid = 0, .cpu = 0, .value = 1});
   AddCounter({.tid = 1, .cpu = 0, .value = 2});
@@ -557,6 +653,7 @@ TEST_F(StatCmdSummaryBuilderTest, sort_key_pid_tid_name) {
   }
 }
 
+// @CddTest = 6.1/C-0-2
 class StatCmdSummariesTest : public ::testing::Test {
  protected:
   void AddSummary(const std::string event_name, pid_t tid, int cpu, uint64_t count,
@@ -585,6 +682,7 @@ class StatCmdSummariesTest : public ::testing::Test {
   std::unique_ptr<CounterSummaries> summaries_;
 };
 
+// @CddTest = 6.1/C-0-2
 TEST_F(StatCmdSummariesTest, task_clock_comment) {
   AddSummary("task-clock", -1, -1, 1e9, 0);
   AddSummary("task-clock", 0, -1, 2e9, 0);
@@ -596,6 +694,7 @@ TEST_F(StatCmdSummariesTest, task_clock_comment) {
   ASSERT_EQ(*GetComment(3), "3.000000 cpus used");
 }
 
+// @CddTest = 6.1/C-0-2
 TEST_F(StatCmdSummariesTest, cpu_cycles_comment) {
   AddSummary("cpu-cycles", -1, -1, 100, 100);
   AddSummary("cpu-cycles", 0, -1, 200, 100);
@@ -607,6 +706,7 @@ TEST_F(StatCmdSummariesTest, cpu_cycles_comment) {
   ASSERT_EQ(*GetComment(3), "3.000000 GHz");
 }
 
+// @CddTest = 6.1/C-0-2
 TEST_F(StatCmdSummariesTest, rate_comment) {
   AddSummary("branch-misses", -1, -1, 1e9, 1e9);
   AddSummary("branch-misses", 0, -1, 1e6, 1e9);

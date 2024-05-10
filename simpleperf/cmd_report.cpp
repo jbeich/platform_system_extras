@@ -449,12 +449,11 @@ class ReportCommand : public Command {
 "                      The default sort keys are:\n"
 "                        comm,pid,tid,dso,symbol\n"
 "--symfs <dir>         Look for files with symbols relative to this directory.\n"
+"--symdir <dir>        Look for files with symbols in a directory recursively.\n"
 "--vmlinux <file>      Parse kernel symbols from <file>.\n"
 "\n"
 "Sample filter options:\n"
 "--comms comm1,comm2,...          Report only for threads with selected names.\n"
-"--cpu   cpu_item1,cpu_item2,...  Report samples on the selected cpus. cpu_item can be cpu\n"
-"                                 number like 1, or cpu range like 0-3.\n"
 "--dsos dso1,dso2,...             Report only for selected dsos.\n"
 "--pids pid1,pid2,...             Same as '--include-pid'.\n"
 "--symbols symbol1;symbol2;...    Report only for selected symbols.\n"
@@ -587,6 +586,7 @@ bool ReportCommand::ParseOptions(const std::vector<std::string>& args) {
       {"--sort", {OptionValueType::STRING, OptionType::SINGLE}},
       {"--symbols", {OptionValueType::STRING, OptionType::MULTIPLE}},
       {"--symfs", {OptionValueType::STRING, OptionType::SINGLE}},
+      {"--symdir", {OptionValueType::STRING, OptionType::SINGLE}},
       {"--vmlinux", {OptionValueType::STRING, OptionType::SINGLE}},
   };
   OptionFormatMap record_filter_options = GetRecordFilterOptionFormats(false);
@@ -691,6 +691,11 @@ bool ReportCommand::ParseOptions(const std::vector<std::string>& args) {
 
   if (auto value = options.PullValue("--symfs"); value) {
     if (!Dso::SetSymFsDir(*value->str_value)) {
+      return false;
+    }
+  }
+  if (auto value = options.PullValue("--symdir"); value) {
+    if (!Dso::AddSymbolDir(*value->str_value)) {
       return false;
     }
   }
@@ -856,9 +861,8 @@ bool ReportCommand::ReadMetaInfoFromRecordFile() {
 }
 
 bool ReportCommand::ReadEventAttrFromRecordFile() {
-  std::vector<EventAttrWithId> attrs = record_file_reader_->AttrSection();
-  for (const auto& attr_with_id : attrs) {
-    const perf_event_attr& attr = *attr_with_id.attr;
+  for (const EventAttrWithId& attr_with_id : record_file_reader_->AttrSection()) {
+    const perf_event_attr& attr = attr_with_id.attr;
     attr_names_.emplace_back(GetEventNameByAttr(attr));
 
     // There are no samples for events added by --add-counter. So skip them.
@@ -955,7 +959,7 @@ bool ReportCommand::ReadSampleTreeFromRecordFile() {
 bool ReportCommand::ProcessRecord(std::unique_ptr<Record> record) {
   thread_tree_.Update(*record);
   if (record->type() == PERF_RECORD_SAMPLE) {
-    if (!record_filter_.Check(static_cast<SampleRecord*>(record.get()))) {
+    if (!record_filter_.Check(static_cast<SampleRecord&>(*record))) {
       return true;
     }
     size_t attr_id = record_file_reader_->GetAttrIndexOfRecord(record.get());

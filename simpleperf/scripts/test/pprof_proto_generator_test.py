@@ -96,6 +96,10 @@ class TestPprofProtoGenerator(TestBase):
         """ Test the build ids generated are not padded with zeros. """
         self.assertIn('build_id: e3e938cc9e40de2cfe1a5ac7595897de(', self.run_generator())
 
+    def test_time_nanos(self):
+        """ Test the timestamp is adjusted to be nanoseconds. """
+        self.assertIn('time_nanos: 1516268753000000000\n', self.run_generator())
+
     def test_build_id_with_binary_cache(self):
         """ Test the build ids for elf files in binary_cache are not padded with zero. """
         # Test with binary_cache.
@@ -218,7 +222,7 @@ class TestPprofProtoGenerator(TestBase):
 
         # Read recording file.
         config = {'ndk_path': TestHelper.ndk_path, 'max_chain_length': 1000000,
-                  'report_lib_options': ReportLibOptions(False, '', None, None, None)}
+                  'report_lib_options': ReportLibOptions(False, None, '', None, None, None)}
         generator = PprofProfileGenerator(config)
         generator.load_record_file(testdata_file)
 
@@ -291,3 +295,6 @@ class TestPprofProtoGenerator(TestBase):
             self.assertIn(31881, threads)
             self.assertNotIn(31850, threads)
         os.unlink(filter_file.name)
+
+    def test_report_sample_proto_file(self):
+        self.run_generator('', testdata_file='display_bitmaps.proto_data')

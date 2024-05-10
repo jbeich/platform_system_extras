@@ -23,6 +23,7 @@ use std::sync::{Arc, Mutex};
 use std::time::Duration;
 
 use crate::simpleperf_etm_trace_provider::SimpleperfEtmTraceProvider;
+use crate::simpleperf_lbr_trace_provider::SimpleperfLbrTraceProvider;
 
 #[cfg(feature = "test")]
 use crate::logging_trace_provider::LoggingTraceProvider;
@@ -30,14 +31,20 @@ use crate::logging_trace_provider::LoggingTraceProvider;
 pub trait TraceProvider {
     fn get_name(&self) -> &'static str;
     fn is_ready(&self) -> bool;
-    fn trace(&self, trace_dir: &Path, tag: &str, sampling_period: &Duration);
+    fn trace(&self, trace_dir: &Path, tag: &str, sampling_period: &Duration, binary_filter: &str);
     fn process(&self, trace_dir: &Path, profile_dir: &Path, binary_filter: &str) -> Result<()>;
+    fn set_log_file(&self, filename: &Path);
+    fn reset_log_file(&self);
 }
 
 pub fn get_trace_provider() -> Result<Arc<Mutex<dyn TraceProvider + Send>>> {
     if SimpleperfEtmTraceProvider::supported() {
         log::info!("simpleperf_etm trace provider registered.");
         return Ok(Arc::new(Mutex::new(SimpleperfEtmTraceProvider {})));
+    }
+    if SimpleperfLbrTraceProvider::supported() {
+        log::info!("simpleperf_lbr trace provider registered.");
+        return Ok(Arc::new(Mutex::new(SimpleperfLbrTraceProvider {})));
     }
 
     #[cfg(feature = "test")]

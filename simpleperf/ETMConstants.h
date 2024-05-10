@@ -19,10 +19,12 @@
 namespace simpleperf {
 // Config bits from include/linux/coresight-pmu.h in the kernel
 // For etm_event_config:
+static constexpr int ETM_OPT_CYCACC = 12;
 static constexpr int ETM_OPT_CTXTID = 14;
 static constexpr int ETM_OPT_CTXTID2 = 15;
 static constexpr int ETM_OPT_TS = 28;
 // For etm_config_reg:
+static constexpr int ETM4_CFG_BIT_CCI = 4;
 static constexpr int ETM4_CFG_BIT_CTXTID = 6;
 static constexpr int ETM4_CFG_BIT_VMID = 7;
 static constexpr int ETM4_CFG_BIT_TS = 11;

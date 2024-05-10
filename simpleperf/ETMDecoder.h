@@ -61,10 +61,19 @@ struct ETMBranchList {
   std::vector<bool> branch;
 };
 
+// ThreadTree interface used by ETMDecoder
+class ETMThreadTree {
+ public:
+  virtual ~ETMThreadTree() {}
+  virtual void DisableThreadExitRecords() = 0;
+  virtual const ThreadEntry* FindThread(int tid) = 0;
+  virtual const MapSet& GetKernelMaps() = 0;
+};
+
 class ETMDecoder {
  public:
   static std::unique_ptr<ETMDecoder> Create(const AuxTraceInfoRecord& auxtrace_info,
-                                            ThreadTree& thread_tree);
+                                            ETMThreadTree& thread_tree);
   virtual ~ETMDecoder() {}
   virtual void EnableDump(const ETMDumpOption& option) = 0;
 
@@ -81,9 +90,9 @@ class ETMDecoder {
 // Map from addrs to a map of (branch_list, count).
 // Use maps instead of unordered_maps. Because it helps locality by decoding instructions for sorted
 // addresses.
-using BranchMap = std::map<uint64_t, std::map<std::vector<bool>, uint64_t>>;
+using ETMBranchMap = std::map<uint64_t, std::map<std::vector<bool>, uint64_t>>;
 
-android::base::expected<void, std::string> ConvertBranchMapToInstrRanges(
-    Dso* dso, const BranchMap& branch_map, const ETMDecoder::InstrRangeCallbackFn& callback);
+android::base::expected<void, std::string> ConvertETMBranchMapToInstrRanges(
+    Dso* dso, const ETMBranchMap& branch_map, const ETMDecoder::InstrRangeCallbackFn& callback);
 
 }  // namespace simpleperf

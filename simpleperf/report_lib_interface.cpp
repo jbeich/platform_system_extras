@@ -193,6 +193,9 @@ class ReportLib {
     bool remove_art_frame = !show;
     callchain_report_builder_.SetRemoveArtFrame(remove_art_frame);
   }
+  bool RemoveMethod(const char* method_name_regex) {
+    return callchain_report_builder_.RemoveMethod(method_name_regex);
+  }
   void MergeJavaMethods(bool merge) { callchain_report_builder_.SetConvertJITFrame(merge); }
   bool AddProguardMappingFile(const char* mapping_file) {
     return callchain_report_builder_.AddProguardMappingFile(mapping_file);
@@ -212,11 +215,12 @@ class ReportLib {
   FeatureSection* GetFeatureSection(const char* feature_name);
 
  private:
+  std::unique_ptr<SampleRecord> GetNextSampleRecord();
   void ProcessSampleRecord(std::unique_ptr<Record> r);
   void ProcessSwitchRecord(std::unique_ptr<Record> r);
   void AddSampleRecordToQueue(SampleRecord* r);
-  void SetCurrentSample(const SampleRecord& r);
-  const EventInfo* FindEventOfCurrentSample();
+  bool SetCurrentSample(std::unique_ptr<SampleRecord> sample_record);
+  const EventInfo& FindEvent(const SampleRecord& r);
   void CreateEvents();
 
   bool OpenRecordFileIfNecessary();
@@ -332,7 +336,7 @@ bool ReportLib::OpenRecordFileIfNecessary() {
     auto& meta_info = record_file_reader_->GetMetaInfoFeature();
     if (auto it = meta_info.find("trace_offcpu"); it != meta_info.end() && it->second == "true") {
       // If recorded with --trace-offcpu, default is to report on-off-cpu samples.
-      std::string event_name = GetEventNameByAttr(*record_file_reader_->AttrSection()[0].attr);
+      std::string event_name = GetEventNameByAttr(record_file_reader_->AttrSection()[0].attr);
       if (!android::base::StartsWith(event_name, "cpu-clock") &&
           !android::base::StartsWith(event_name, "task-clock")) {
         LOG(ERROR) << "Recording file " << record_filename_ << " is no longer supported. "
@@ -357,9 +361,20 @@ Sample* ReportLib::GetNextSample() {
   if (!OpenRecordFileIfNecessary()) {
     return nullptr;
   }
-  if (!sample_record_queue_.empty()) {
-    sample_record_queue_.pop();
+
+  while (true) {
+    std::unique_ptr<SampleRecord> r = GetNextSampleRecord();
+    if (!r) {
+      break;
+    }
+    if (SetCurrentSample(std::move(r))) {
+      return &current_sample_;
+    }
   }
+  return nullptr;
+}
+
+std::unique_ptr<SampleRecord> ReportLib::GetNextSampleRecord() {
   while (sample_record_queue_.empty()) {
     std::unique_ptr<Record> record;
     if (!record_file_reader_->ReadRecord(record) || record == nullptr) {
@@ -380,8 +395,9 @@ Sample* ReportLib::GetNextSample() {
       }
     }
   }
-  SetCurrentSample(*sample_record_queue_.front());
-  return &current_sample_;
+  std::unique_ptr<SampleRecord> result = std::move(sample_record_queue_.front());
+  sample_record_queue_.pop();
+  return result;
 }
 
 void ReportLib::ProcessSampleRecord(std::unique_ptr<Record> r) {
@@ -448,12 +464,13 @@ void ReportLib::ProcessSwitchRecord(std::unique_ptr<Record> r) {
 }
 
 void ReportLib::AddSampleRecordToQueue(SampleRecord* r) {
-  if (record_filter_.Check(r)) {
+  if (record_filter_.Check(*r)) {
     sample_record_queue_.emplace(r);
   }
 }
 
-void ReportLib::SetCurrentSample(const SampleRecord& r) {
+bool ReportLib::SetCurrentSample(std::unique_ptr<SampleRecord> sample_record) {
+  const SampleRecord& r = *sample_record;
   current_mappings_.clear();
   callchain_entries_.clear();
   current_sample_.ip = r.ip_data.ip;
@@ -471,6 +488,10 @@ void ReportLib::SetCurrentSample(const SampleRecord& r) {
   std::vector<uint64_t> ips = r.GetCallChain(&kernel_ip_count);
   std::vector<CallChainReportEntry> report_entries =
       callchain_report_builder_.Build(current_thread_, ips, kernel_ip_count);
+  if (report_entries.empty()) {
+    // Skip samples with callchain fully removed by RemoveMethod().
+    return false;
+  }
 
   for (const auto& report_entry : report_entries) {
     callchain_entries_.resize(callchain_entries_.size() + 1);
@@ -491,40 +512,49 @@ void ReportLib::SetCurrentSample(const SampleRecord& r) {
   current_symbol_ = &(callchain_entries_[0].symbol);
   current_callchain_.nr = callchain_entries_.size() - 1;
   current_callchain_.entries = &callchain_entries_[1];
-  const EventInfo* event = FindEventOfCurrentSample();
-  current_event_.name = event->name.c_str();
-  current_event_.tracing_data_format = event->tracing_info.data_format;
+  const EventInfo& event = FindEvent(r);
+  current_event_.name = event.name.c_str();
+  current_event_.tracing_data_format = event.tracing_info.data_format;
   if (current_event_.tracing_data_format.size > 0u && (r.sample_type & PERF_SAMPLE_RAW)) {
     CHECK_GE(r.raw_data.size, current_event_.tracing_data_format.size);
     current_tracing_data_ = r.raw_data.data;
   } else {
     current_tracing_data_ = nullptr;
   }
+  return true;
 }
 
-const EventInfo* ReportLib::FindEventOfCurrentSample() {
+const EventInfo& ReportLib::FindEvent(const SampleRecord& r) {
   if (events_.empty()) {
     CreateEvents();
   }
   if (trace_offcpu_.mode == TraceOffCpuMode::MIXED_ON_OFF_CPU) {
     // To mix on-cpu and off-cpu samples, pretend they are from the same event type.
     // Otherwise, some report scripts may split them.
-    return &events_[0];
+    return events_[0];
   }
-  SampleRecord* r = sample_record_queue_.front().get();
-  size_t attr_index = record_file_reader_->GetAttrIndexOfRecord(r);
-  return &events_[attr_index];
+  size_t attr_index = record_file_reader_->GetAttrIndexOfRecord(&r);
+  return events_[attr_index];
 }
 
 void ReportLib::CreateEvents() {
-  std::vector<EventAttrWithId> attrs = record_file_reader_->AttrSection();
+  const EventAttrIds& attrs = record_file_reader_->AttrSection();
   events_.resize(attrs.size());
   for (size_t i = 0; i < attrs.size(); ++i) {
-    events_[i].attr = *attrs[i].attr;
+    events_[i].attr = attrs[i].attr;
     events_[i].name = GetEventNameByAttr(events_[i].attr);
     EventInfo::TracingInfo& tracing_info = events_[i].tracing_info;
+    tracing_info.data_format.size = 0;
+    tracing_info.data_format.field_count = 0;
+    tracing_info.data_format.fields = nullptr;
+
     if (events_[i].attr.type == PERF_TYPE_TRACEPOINT && tracing_) {
-      TracingFormat format = tracing_->GetTracingFormatHavingId(events_[i].attr.config);
+      std::optional<TracingFormat> opt_format =
+          tracing_->GetTracingFormatHavingId(events_[i].attr.config);
+      if (!opt_format.has_value() || opt_format.value().fields.empty()) {
+        continue;
+      }
+      const TracingFormat& format = opt_format.value();
       tracing_info.field_names.resize(format.fields.size());
       tracing_info.fields.resize(format.fields.size());
       for (size_t i = 0; i < format.fields.size(); ++i) {
@@ -537,18 +567,10 @@ void ReportLib::CreateEvents() {
         field.is_signed = format.fields[i].is_signed;
         field.is_dynamic = format.fields[i].is_dynamic;
       }
-      if (tracing_info.fields.empty()) {
-        tracing_info.data_format.size = 0;
-      } else {
-        TracingFieldFormat& field = tracing_info.fields.back();
-        tracing_info.data_format.size = field.offset + field.elem_size * field.elem_count;
-      }
+      TracingFieldFormat& field = tracing_info.fields.back();
+      tracing_info.data_format.size = field.offset + field.elem_size * field.elem_count;
       tracing_info.data_format.field_count = tracing_info.fields.size();
       tracing_info.data_format.fields = &tracing_info.fields[0];
-    } else {
-      tracing_info.data_format.size = 0;
-      tracing_info.data_format.field_count = 0;
-      tracing_info.data_format.fields = nullptr;
     }
   }
 }
@@ -610,6 +632,7 @@ bool SetRecordFile(ReportLib* report_lib, const char* record_file) EXPORT;
 bool SetKallsymsFile(ReportLib* report_lib, const char* kallsyms_file) EXPORT;
 void ShowIpForUnknownSymbol(ReportLib* report_lib) EXPORT;
 void ShowArtFrames(ReportLib* report_lib, bool show) EXPORT;
+bool RemoveMethod(ReportLib* report_lib, const char* method_name_regex) EXPORT;
 void MergeJavaMethods(ReportLib* report_lib, bool merge) EXPORT;
 bool AddProguardMappingFile(ReportLib* report_lib, const char* mapping_file) EXPORT;
 const char* GetSupportedTraceOffCpuModes(ReportLib* report_lib) EXPORT;
@@ -655,6 +678,10 @@ void ShowIpForUnknownSymbol(ReportLib* report_lib) {
 
 void ShowArtFrames(ReportLib* report_lib, bool show) {
   return report_lib->ShowArtFrames(show);
+}
+
+bool RemoveMethod(ReportLib* report_lib, const char* method_name_regex) {
+  return report_lib->RemoveMethod(method_name_regex);
 }
 
 void MergeJavaMethods(ReportLib* report_lib, bool merge) {

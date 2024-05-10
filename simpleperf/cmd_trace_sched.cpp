@@ -192,9 +192,9 @@ bool TraceSchedCommand::ParseSchedEvents(const std::string& record_file_path) {
     return false;
   }
   const EventType* event = FindEventTypeByName("sched:sched_stat_runtime");
-  std::vector<EventAttrWithId> attrs = reader->AttrSection();
-  if (attrs.size() != 1u || attrs[0].attr->type != event->type ||
-      attrs[0].attr->config != event->config) {
+  const EventAttrIds& attrs = reader->AttrSection();
+  if (attrs.size() != 1u || attrs[0].attr.type != event->type ||
+      attrs[0].attr.config != event->config) {
     LOG(ERROR) << "sched:sched_stat_runtime isn't recorded in " << record_file_path;
     return false;
   }
@@ -237,9 +237,12 @@ bool TraceSchedCommand::ProcessRecord(Record& record) {
       }
       const EventType* event = FindEventTypeByName("sched:sched_stat_runtime");
       CHECK(event != nullptr);
-      TracingFormat format = tracing->GetTracingFormatHavingId(event->config);
-      format.GetField("comm", tracing_field_comm_);
-      format.GetField("runtime", tracing_field_runtime_);
+      std::optional<TracingFormat> format = tracing->GetTracingFormatHavingId(event->config);
+      if (!format.has_value()) {
+        return false;
+      }
+      format.value().GetField("comm", tracing_field_comm_);
+      format.value().GetField("runtime", tracing_field_runtime_);
       break;
     }
   }

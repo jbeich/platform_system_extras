@@ -22,6 +22,7 @@
 #include <sys/utsname.h>
 #include <time.h>
 #include <unistd.h>
+#include <chrono>
 #include <filesystem>
 #include <optional>
 #include <set>
@@ -33,7 +34,6 @@
 #include <android-base/file.h>
 #include <android-base/logging.h>
 #include <android-base/parseint.h>
-#include <android-base/scopeguard.h>
 #include <android-base/stringprintf.h>
 #include <android-base/strings.h>
 #include <android-base/unique_fd.h>
@@ -48,6 +48,7 @@
 #endif
 #include <unwindstack/Error.h>
 
+#include "BranchListFile.h"
 #include "CallChainJoiner.h"
 #include "ETMRecorder.h"
 #include "IOEventLoop.h"
@@ -98,27 +99,21 @@ static std::unordered_map<std::string, int> clockid_map = {
 
 // The max size of records dumped by kernel is 65535, and dump stack size
 // should be a multiply of 8, so MAX_DUMP_STACK_SIZE is 65528.
-constexpr uint32_t MAX_DUMP_STACK_SIZE = 65528;
+static constexpr uint32_t MAX_DUMP_STACK_SIZE = 65528;
 
 // The max allowed pages in mapped buffer is decided by rlimit(RLIMIT_MEMLOCK).
 // Here 1024 is a desired value for pages in mapped buffer. If mapped
 // successfully, the buffer size = 1024 * 4K (page size) = 4M.
-constexpr size_t DESIRED_PAGES_IN_MAPPED_BUFFER = 1024;
+static constexpr size_t DESIRED_PAGES_IN_MAPPED_BUFFER = 1024;
 
 // Cache size used by CallChainJoiner to cache call chains in memory.
-constexpr size_t DEFAULT_CALL_CHAIN_JOINER_CACHE_SIZE = 8 * 1024 * 1024;
+static constexpr size_t DEFAULT_CALL_CHAIN_JOINER_CACHE_SIZE = 8 * kMegabyte;
 
-// Currently, the record buffer size in user-space is set to match the kernel buffer size on a
-// 8 core system. For system-wide recording, it is 8K pages * 4K page_size * 8 cores = 256MB.
-// For non system-wide recording, it is 1K pages * 4K page_size * 8 cores = 64MB.
-static constexpr size_t kDefaultRecordBufferSize = 64 * 1024 * 1024;
-static constexpr size_t kDefaultSystemWideRecordBufferSize = 256 * 1024 * 1024;
-
-static constexpr size_t kDefaultAuxBufferSize = 4 * 1024 * 1024;
+static constexpr size_t kDefaultAuxBufferSize = 4 * kMegabyte;
 
 // On Pixel 3, it takes about 1ms to enable ETM, and 16-40ms to disable ETM and copy 4M ETM data.
-// So make default period to 100ms.
-static constexpr double kDefaultEtmDataFlushPeriodInSec = 0.1;
+// So make default interval to 100ms.
+static constexpr uint32_t kDefaultEtmDataFlushIntervalInMs = 100;
 
 struct TimeStat {
   uint64_t prepare_recording_time = 0;
@@ -127,6 +122,30 @@ struct TimeStat {
   uint64_t finish_recording_time = 0;
   uint64_t post_process_time = 0;
 };
+
+std::optional<size_t> GetDefaultRecordBufferSize(bool system_wide_recording) {
+  // Currently, the record buffer size in user-space is set to match the kernel buffer size on a
+  // 8 core system. For system-wide recording, it is 8K pages * 4K page_size * 8 cores = 256MB.
+  // For non system-wide recording, it is 1K pages * 4K page_size * 8 cores = 64MB.
+  // But on devices with memory >= 4GB, we increase buffer size to 256MB. This reduces the chance
+  // of cutting samples, which can cause broken callchains.
+  static constexpr size_t kLowMemoryRecordBufferSize = 64 * kMegabyte;
+  static constexpr size_t kHighMemoryRecordBufferSize = 256 * kMegabyte;
+  static constexpr size_t kSystemWideRecordBufferSize = 256 * kMegabyte;
+  // Ideally we can use >= 4GB here. But the memory size shown in /proc/meminfo is like to be 3.x GB
+  // on a device with 4GB memory. So we have to use <= 3GB.
+  static constexpr uint64_t kLowMemoryLimit = 3 * kGigabyte;
+
+  if (system_wide_recording) {
+    return kSystemWideRecordBufferSize;
+  }
+  auto device_memory = GetMemorySize();
+  if (!device_memory.has_value()) {
+    return std::nullopt;
+  }
+  return device_memory.value() <= kLowMemoryLimit ? kLowMemoryRecordBufferSize
+                                                  : kHighMemoryRecordBufferSize;
+}
 
 class RecordCommand : public Command {
  public:
@@ -171,8 +190,8 @@ class RecordCommand : public Command {
 "--kprobe kprobe_event1,kprobe_event2,...\n"
 "             Add kprobe events during recording. The kprobe_event format is in\n"
 "             Documentation/trace/kprobetrace.rst in the kernel. Examples:\n"
-"               'p:myprobe do_sys_open $arg2:string'   - add event kprobes:myprobe\n"
-"               'r:myretprobe do_sys_open $retval:s64' - add event kprobes:myretprobe\n"
+"               'p:myprobe do_sys_openat2 $arg2:string'   - add event kprobes:myprobe\n"
+"               'r:myretprobe do_sys_openat2 $retval:s64' - add event kprobes:myretprobe\n"
 "--add-counter event1,event2,...     Add additional event counts in record samples. For example,\n"
 "                                    we can use `-e cpu-cycles --add-counter instructions` to\n"
 "                                    get samples for cpu-cycles event, while having instructions\n"
@@ -183,7 +202,7 @@ class RecordCommand : public Command {
 "             samples every second. For non-tracepoint events, the default\n"
 "             option is -f 4000. A -f/-c option affects all event types\n"
 "             following it until meeting another -f/-c option. For example,\n"
-"             for \"-f 1000 cpu-cycles -c 1 -e sched:sched_switch\", cpu-cycles\n"
+"             for \"-f 1000 -e cpu-cycles -c 1 -e sched:sched_switch\", cpu-cycles\n"
 "             has sample freq 1000, sched:sched_switch event has sample period 1.\n"
 "-c count     Set event sample period. It means recording one sample when\n"
 "             [count] events happen. For tracepoint events, the default option\n"
@@ -191,15 +210,16 @@ class RecordCommand : public Command {
 "--call-graph fp | dwarf[,<dump_stack_size>]\n"
 "             Enable call graph recording. Use frame pointer or dwarf debug\n"
 "             frame as the method to parse call graph in stack.\n"
-"             Default is dwarf,65528.\n"
+"             Default is no call graph. Default dump_stack_size with -g is 65528.\n"
 "-g           Same as '--call-graph dwarf'.\n"
 "--clockid clock_id      Generate timestamps of samples using selected clock.\n"
 "                        Possible values are: realtime, monotonic,\n"
 "                        monotonic_raw, boottime, perf. If supported, default\n"
 "                        is monotonic, otherwise is perf.\n"
-"--cpu cpu_item1,cpu_item2,...\n"
-"             Collect samples only on the selected cpus. cpu_item can be cpu\n"
-"             number like 1, or cpu range like 0-3.\n"
+"--cpu cpu_item1,cpu_item2,...  Monitor events on selected cpus. cpu_item can be a number like\n"
+"                               1, or a range like 0-3. A --cpu option affects all event types\n"
+"                               following it until meeting another --cpu option.\n"
+"--delay    time_in_ms   Wait time_in_ms milliseconds before recording samples.\n"
 "--duration time_in_sec  Monitor for time_in_sec seconds instead of running\n"
 "                        [command]. Here time_in_sec may be any positive\n"
 "                        floating point number.\n"
@@ -220,31 +240,10 @@ class RecordCommand : public Command {
 "                It should be a power of 2. If not set, the max possible value <= 1024\n"
 "                will be used.\n"
 "--user-buffer-size <buffer_size> Set buffer size in userspace to cache sample data.\n"
-"                                 By default, it is 64M for process recording and 256M\n"
-"                                 for system wide recording.\n"
-"--aux-buffer-size <buffer_size>  Set aux buffer size, only used in cs-etm event type.\n"
-"                                 Need to be power of 2 and page size aligned.\n"
-"                                 Used memory size is (buffer_size * (cpu_count + 1).\n"
-"                                 Default is 4M.\n"
+"                                 By default, it is %s.\n"
 "--no-inherit  Don't record created child threads/processes.\n"
 "--cpu-percent <percent>  Set the max percent of cpu time used for recording.\n"
 "                         percent is in range [1-100], default is 25.\n"
-"--addr-filter filter_str1,filter_str2,...\n"
-"                Provide address filters for cs-etm instruction tracing.\n"
-"                filter_str accepts below formats:\n"
-"                  'filter  <addr-range>'  -- trace instructions in a range\n"
-"                  'start <addr>'          -- start tracing when ip is <addr>\n"
-"                  'stop <addr>'           -- stop tracing when ip is <addr>\n"
-"                <addr-range> accepts below formats:\n"
-"                  <file_path>                            -- code sections in a binary file\n"
-"                  <vaddr_start>-<vaddr_end>@<file_path>  -- part of a binary file\n"
-"                  <kernel_addr_start>-<kernel_addr_end>  -- part of kernel space\n"
-"                <addr> accepts below formats:\n"
-"                  <vaddr>@<file_path>      -- virtual addr in a binary file\n"
-"                  <kernel_addr>            -- a kernel address\n"
-"                Examples:\n"
-"                  'filter 0x456-0x480@/system/lib/libc.so'\n"
-"                  'start 0x456@/system/lib/libc.so,stop 0x480@/system/lib/libc.so'\n"
 "\n"
 "--tp-filter filter_string    Set filter_string for the previous tracepoint event.\n"
 "                             Format is in Documentation/trace/events.rst in the kernel.\n"
@@ -266,10 +265,10 @@ class RecordCommand : public Command {
 "               When callchain joiner is used, set the matched nodes needed to join\n"
 "               callchains. The count should be >= 1. By default it is 1.\n"
 "--no-cut-samples   Simpleperf uses a record buffer to cache records received from the kernel.\n"
-"                   When the available space in the buffer reaches low level, it cuts part of\n"
-"                   the stack data in samples. When the available space reaches critical level,\n"
-"                   it drops all samples. This option makes simpleperf not cut samples when the\n"
-"                   available space reaches low level.\n"
+"                   When the available space in the buffer reaches low level, the stack data in\n"
+"                   samples is truncated to 1KB. When the available space reaches critical level,\n"
+"                   it drops all samples. This option makes simpleperf not truncate stack data\n"
+"                   when the available space reaches low level.\n"
 "--keep-failed-unwinding-result        Keep reasons for failed unwinding cases\n"
 "--keep-failed-unwinding-debug-info    Keep debug info for failed unwinding cases\n"
 "\n"
@@ -290,6 +289,36 @@ RECORD_FILTER_OPTION_HELP_MSG_FOR_RECORDING
 "                 This option is used to provide files with symbol table and\n"
 "                 debug information, which are used for unwinding and dumping symbols.\n"
 "--add-meta-info key=value     Add extra meta info, which will be stored in the recording file.\n"
+"\n"
+"ETM recording options:\n"
+"--addr-filter filter_str1,filter_str2,...\n"
+"                Provide address filters for cs-etm instruction tracing.\n"
+"                filter_str accepts below formats:\n"
+"                  'filter  <addr-range>'  -- trace instructions in a range\n"
+"                  'start <addr>'          -- start tracing when ip is <addr>\n"
+"                  'stop <addr>'           -- stop tracing when ip is <addr>\n"
+"                <addr-range> accepts below formats:\n"
+"                  <file_path>                            -- code sections in a binary file\n"
+"                  <vaddr_start>-<vaddr_end>@<file_path>  -- part of a binary file\n"
+"                  <kernel_addr_start>-<kernel_addr_end>  -- part of kernel space\n"
+"                <addr> accepts below formats:\n"
+"                  <vaddr>@<file_path>      -- virtual addr in a binary file\n"
+"                  <kernel_addr>            -- a kernel address\n"
+"                Examples:\n"
+"                  'filter 0x456-0x480@/system/lib/libc.so'\n"
+"                  'start 0x456@/system/lib/libc.so,stop 0x480@/system/lib/libc.so'\n"
+"--aux-buffer-size <buffer_size>  Set aux buffer size, only used in cs-etm event type.\n"
+"                                 Need to be power of 2 and page size aligned.\n"
+"                                 Used memory size is (buffer_size * (cpu_count + 1).\n"
+"                                 Default is 4M.\n"
+"--decode-etm                     Convert ETM data into branch lists while recording.\n"
+"--binary binary_name             Used with --decode-etm to only generate data for binaries\n"
+"                                 matching binary_name regex.\n"
+"--record-timestamp               Generate timestamp packets in ETM stream.\n"
+"--record-cycles                  Generate cycle count packets in ETM stream.\n"
+"--cycle-threshold <threshold>    Set cycle count counter threshold for ETM cycle count packets.\n"
+"--etm-flush-interval <interval>  Set the interval between ETM data flushes from the ETR buffer\n"
+"                                 to the perf event buffer (in milliseconds). Default is 100 ms.\n"
 "\n"
 "Other options:\n"
 "--exit-with-parent            Stop recording when the thread starting simpleperf dies.\n"
@@ -323,7 +352,6 @@ RECORD_FILTER_OPTION_HELP_MSG_FOR_RECORDING
         mmap_page_range_(std::make_pair(1, DESIRED_PAGES_IN_MAPPED_BUFFER)),
         record_filename_("perf.data"),
         sample_record_count_(0),
-        lost_record_count_(0),
         in_app_context_(false),
         trace_offcpu_(false),
         exclude_kernel_callchain_(false),
@@ -338,6 +366,7 @@ RECORD_FILTER_OPTION_HELP_MSG_FOR_RECORDING
     signal(SIGPIPE, SIG_IGN);
   }
 
+  std::string LongHelpString() const override;
   void Run(const std::vector<std::string>& args, int* exit_code) override;
   bool Run(const std::vector<std::string>& args) override {
     int exit_code;
@@ -347,7 +376,7 @@ RECORD_FILTER_OPTION_HELP_MSG_FOR_RECORDING
 
  private:
   bool ParseOptions(const std::vector<std::string>& args, std::vector<std::string>* non_option_args,
-                    ProbeEvents* probe_events);
+                    ProbeEvents& probe_events);
   bool AdjustPerfEventLimit();
   bool PrepareRecording(Workload* workload);
   bool DoRecording(Workload* workload);
@@ -356,8 +385,8 @@ RECORD_FILTER_OPTION_HELP_MSG_FOR_RECORDING
   bool TraceOffCpu();
   bool SetEventSelectionFlags();
   bool CreateAndInitRecordFile();
-  std::unique_ptr<RecordFileWriter> CreateRecordFile(
-      const std::string& filename, const std::vector<EventAttrWithId>& override_attrs);
+  std::unique_ptr<RecordFileWriter> CreateRecordFile(const std::string& filename,
+                                                     const EventAttrIds& attrs);
   bool DumpKernelSymbol();
   bool DumpTracingData();
   bool DumpMaps();
@@ -370,7 +399,7 @@ RECORD_FILTER_OPTION_HELP_MSG_FOR_RECORDING
   bool SaveRecordForPostUnwinding(Record* record);
   bool SaveRecordAfterUnwinding(Record* record);
   bool SaveRecordWithoutUnwinding(Record* record);
-  bool ProcessJITDebugInfo(const std::vector<JITDebugInfo>& debug_info, bool sync_kernel_records);
+  bool ProcessJITDebugInfo(std::vector<JITDebugInfo> debug_info, bool sync_kernel_records);
   bool ProcessControlCmd(IOEventLoop* loop);
   void UpdateRecord(Record* record);
   bool UnwindRecord(SampleRecord& r);
@@ -388,8 +417,8 @@ RECORD_FILTER_OPTION_HELP_MSG_FOR_RECORDING
   bool DumpMetaInfoFeature(bool kernel_symbols_available);
   bool DumpDebugUnwindFeature(const std::unordered_set<Dso*>& dso_set);
   void CollectHitFileInfo(const SampleRecord& r, std::unordered_set<Dso*>* dso_set);
+  bool DumpETMBranchListFeature();
 
-  std::unique_ptr<SampleSpeed> sample_speed_;
   bool system_wide_collection_;
   uint64_t branch_sampling_;
   bool fp_callchain_sampling_;
@@ -401,11 +430,11 @@ RECORD_FILTER_OPTION_HELP_MSG_FOR_RECORDING
   bool keep_failed_unwinding_debug_info_ = false;
   std::unique_ptr<OfflineUnwinder> offline_unwinder_;
   bool child_inherit_;
+  uint64_t delay_in_ms_ = 0;
   double duration_in_sec_;
   bool can_dump_kernel_symbols_;
   bool dump_symbols_;
   std::string clockid_;
-  std::vector<int> cpus_;
   EventSelectionSet event_selection_set_;
 
   std::pair<size_t, size_t> mmap_page_range_;
@@ -419,7 +448,6 @@ RECORD_FILTER_OPTION_HELP_MSG_FOR_RECORDING
   android::base::unique_fd stop_signal_fd_;
 
   uint64_t sample_record_count_;
-  uint64_t lost_record_count_;
   android::base::unique_fd start_profiling_fd_;
   bool stdio_controls_profiling_ = false;
 
@@ -435,7 +463,7 @@ RECORD_FILTER_OPTION_HELP_MSG_FOR_RECORDING
   bool allow_callchain_joiner_;
   size_t callchain_joiner_min_matching_nodes_;
   std::unique_ptr<CallChainJoiner> callchain_joiner_;
-  bool allow_cutting_samples_ = true;
+  bool allow_truncating_samples_ = true;
 
   std::unique_ptr<JITDebugReader> jit_debug_reader_;
   uint64_t last_record_timestamp_;  // used to insert Mmap2Records for JIT debug info
@@ -452,7 +480,32 @@ RECORD_FILTER_OPTION_HELP_MSG_FOR_RECORDING
   std::unordered_map<std::string, std::string> extra_meta_info_;
   bool use_cmd_exit_code_ = false;
   std::vector<std::string> add_counters_;
+
+  std::unique_ptr<ETMBranchListGenerator> etm_branch_list_generator_;
+  std::unique_ptr<RegEx> binary_name_regex_;
+  std::chrono::milliseconds etm_flush_interval_{kDefaultEtmDataFlushIntervalInMs};
 };
+
+std::string RecordCommand::LongHelpString() const {
+  uint64_t process_buffer_size = 0;
+  uint64_t system_wide_buffer_size = 0;
+  if (auto size = GetDefaultRecordBufferSize(false); size) {
+    process_buffer_size = size.value() / kMegabyte;
+  }
+  if (auto size = GetDefaultRecordBufferSize(true); size) {
+    system_wide_buffer_size = size.value() / kMegabyte;
+  }
+  std::string buffer_size_str;
+  if (process_buffer_size == system_wide_buffer_size) {
+    buffer_size_str = android::base::StringPrintf("%" PRIu64 "M", process_buffer_size);
+  } else {
+    buffer_size_str =
+        android::base::StringPrintf("%" PRIu64 "M for process recording and %" PRIu64
+                                    "M\n                                 for system wide recording",
+                                    process_buffer_size, system_wide_buffer_size);
+  }
+  return android::base::StringPrintf(long_help_string_.c_str(), buffer_size_str.c_str());
+}
 
 void RecordCommand::Run(const std::vector<std::string>& args, int* exit_code) {
   *exit_code = 1;
@@ -465,15 +518,8 @@ void RecordCommand::Run(const std::vector<std::string>& args, int* exit_code) {
   AllowMoreOpenedFiles();
 
   std::vector<std::string> workload_args;
-  ProbeEvents probe_events;
-  auto clear_probe_events_guard = android::base::make_scope_guard([this, &probe_events] {
-    if (!probe_events.IsEmpty()) {
-      // probe events can be deleted only when no perf event file is using them.
-      event_selection_set_.CloseEventFiles();
-      probe_events.Clear();
-    }
-  });
-  if (!ParseOptions(args, &workload_args, &probe_events)) {
+  ProbeEvents probe_events(event_selection_set_);
+  if (!ParseOptions(args, &workload_args, probe_events)) {
     return;
   }
   if (!AdjustPerfEventLimit()) {
@@ -528,7 +574,8 @@ bool RecordCommand::PrepareRecording(Workload* workload) {
   // 2. Add default event type.
   if (event_selection_set_.empty()) {
     std::string event_type = default_measured_event_type;
-    if (GetTargetArch() == ARCH_X86_32 || GetTargetArch() == ARCH_X86_64) {
+    if (GetTargetArch() == ARCH_X86_32 || GetTargetArch() == ARCH_X86_64 ||
+        GetTargetArch() == ARCH_RISCV64) {
       // Emulators may not support hardware events. So switch to cpu-clock when cpu-cycles isn't
       // available.
       if (!IsHardwareEventSupported()) {
@@ -536,12 +583,8 @@ bool RecordCommand::PrepareRecording(Workload* workload) {
         LOG(INFO) << "Hardware events are not available, switch to cpu-clock.";
       }
     }
-    size_t group_id;
-    if (!event_selection_set_.AddEventType(event_type, &group_id)) {
+    if (!event_selection_set_.AddEventType(event_type)) {
       return false;
-    }
-    if (sample_speed_) {
-      event_selection_set_.SetSampleSpeed(group_id, *sample_speed_);
     }
   }
 
@@ -578,7 +621,7 @@ bool RecordCommand::PrepareRecording(Workload* workload) {
   } else if (!event_selection_set_.HasMonitoredTarget()) {
     if (workload != nullptr) {
       event_selection_set_.AddMonitoredProcesses({workload->GetPid()});
-      event_selection_set_.SetEnableOnExec(true);
+      event_selection_set_.SetEnableCondition(false, true);
     } else if (!app_package_name_.empty()) {
       // If app process is not created, wait for it. This allows simpleperf starts before
       // app process. In this way, we can have a better support of app start-up time profiling.
@@ -592,6 +635,10 @@ bool RecordCommand::PrepareRecording(Workload* workload) {
   } else {
     need_to_check_targets = true;
   }
+  if (delay_in_ms_ != 0 || event_selection_set_.HasAuxTrace()) {
+    event_selection_set_.SetEnableCondition(false, false);
+  }
+
   // Profiling JITed/interpreted Java code is supported starting from Android P.
   // Also support profiling art interpreter on host.
   if (GetAndroidVersion() >= kAndroidVersionP || GetAndroidVersion() == 0) {
@@ -609,19 +656,22 @@ bool RecordCommand::PrepareRecording(Workload* workload) {
   }
 
   // 5. Open perf event files and create mapped buffers.
-  if (!event_selection_set_.OpenEventFiles(cpus_)) {
+  if (!event_selection_set_.OpenEventFiles()) {
     return false;
   }
   size_t record_buffer_size = 0;
   if (user_buffer_size_.has_value()) {
     record_buffer_size = user_buffer_size_.value();
   } else {
-    record_buffer_size =
-        system_wide_collection_ ? kDefaultSystemWideRecordBufferSize : kDefaultRecordBufferSize;
+    auto default_size = GetDefaultRecordBufferSize(system_wide_collection_);
+    if (!default_size.has_value()) {
+      return false;
+    }
+    record_buffer_size = default_size.value();
   }
   if (!event_selection_set_.MmapEventFiles(mmap_page_range_.first, mmap_page_range_.second,
                                            aux_buffer_size_, record_buffer_size,
-                                           allow_cutting_samples_, exclude_perf_)) {
+                                           allow_truncating_samples_, exclude_perf_)) {
     return false;
   }
   auto callback = std::bind(&RecordCommand::ProcessRecord, this, std::placeholders::_1);
@@ -656,6 +706,21 @@ bool RecordCommand::PrepareRecording(Workload* workload) {
     }
   }
 
+  if (delay_in_ms_ != 0) {
+    auto delay_callback = [this]() {
+      if (!event_selection_set_.SetEnableEvents(true)) {
+        return false;
+      }
+      if (!system_wide_collection_) {
+        // Dump maps in case there are new maps created while delaying.
+        return DumpMaps();
+      }
+      return true;
+    };
+    if (!loop->AddOneTimeEvent(SecondToTimeval(delay_in_ms_ / 1000), delay_callback)) {
+      return false;
+    }
+  }
   if (duration_in_sec_ != 0) {
     if (!loop->AddPeriodicEvent(
             SecondToTimeval(duration_in_sec_), [loop]() { return loop->ExitLoop(); },
@@ -669,8 +734,8 @@ bool RecordCommand::PrepareRecording(Workload* workload) {
     }
   }
   if (jit_debug_reader_) {
-    auto callback = [this](const std::vector<JITDebugInfo>& debug_info, bool sync_kernel_records) {
-      return ProcessJITDebugInfo(debug_info, sync_kernel_records);
+    auto callback = [this](std::vector<JITDebugInfo> debug_info, bool sync_kernel_records) {
+      return ProcessJITDebugInfo(std::move(debug_info), sync_kernel_records);
     };
     if (!jit_debug_reader_->RegisterDebugInfoCallback(loop, callback)) {
       return false;
@@ -694,6 +759,12 @@ bool RecordCommand::PrepareRecording(Workload* workload) {
     }
   }
   if (event_selection_set_.HasAuxTrace()) {
+    // ETM events can only be enabled successfully after MmapEventFiles().
+    if (delay_in_ms_ == 0 && !event_selection_set_.IsEnabledOnExec()) {
+      if (!event_selection_set_.EnableETMEvents()) {
+        return false;
+      }
+    }
     // ETM data is dumped to kernel buffer only when there is no thread traced by ETM. It happens
     // either when all monitored threads are scheduled off cpu, or when all etm perf events are
     // disabled.
@@ -701,11 +772,19 @@ bool RecordCommand::PrepareRecording(Workload* workload) {
     // makes less than expected data, especially in system wide recording. So add a periodic event
     // to flush etm data by temporarily disable all perf events.
     auto etm_flush = [this]() {
-      return event_selection_set_.SetEnableEvents(false) &&
-             event_selection_set_.SetEnableEvents(true);
+      return event_selection_set_.DisableETMEvents() && event_selection_set_.EnableETMEvents();
     };
-    if (!loop->AddPeriodicEvent(SecondToTimeval(kDefaultEtmDataFlushPeriodInSec), etm_flush)) {
+    if (!loop->AddPeriodicEvent(SecondToTimeval(etm_flush_interval_.count() / 1000.0), etm_flush)) {
       return false;
+    }
+
+    if (etm_branch_list_generator_) {
+      if (exclude_perf_) {
+        etm_branch_list_generator_->SetExcludePid(getpid());
+      }
+      if (binary_name_regex_) {
+        etm_branch_list_generator_->SetBinaryFilter(binary_name_regex_.get());
+      }
     }
   }
   return true;
@@ -730,6 +809,12 @@ bool RecordCommand::DoRecording(Workload* workload) {
     return false;
   }
   time_stat_.stop_recording_time = GetSystemClock();
+  if (event_selection_set_.HasAuxTrace()) {
+    // Disable ETM events to flush the last ETM data.
+    if (!event_selection_set_.DisableETMEvents()) {
+      return false;
+    }
+  }
   if (!event_selection_set_.SyncKernelBuffer()) {
     return false;
   }
@@ -806,28 +891,66 @@ bool RecordCommand::PostProcessRecording(const std::vector<std::string>& args) {
   // 6. Show brief record result.
   auto record_stat = event_selection_set_.GetRecordStat();
   if (event_selection_set_.HasAuxTrace()) {
-    LOG(INFO) << "Aux data traced: " << record_stat.aux_data_size;
+    LOG(INFO) << "Aux data traced: " << ReadableCount(record_stat.aux_data_size);
     if (record_stat.lost_aux_data_size != 0) {
-      LOG(INFO) << "Aux data lost in user space: " << record_stat.lost_aux_data_size;
+      LOG(INFO) << "Aux data lost in user space: " << ReadableCount(record_stat.lost_aux_data_size)
+                << ", consider increasing userspace buffer size(--user-buffer-size).";
     }
   } else {
-    std::string cut_samples;
-    if (record_stat.cut_stack_samples > 0) {
-      cut_samples = android::base::StringPrintf(" (cut %zu)", record_stat.cut_stack_samples);
+    // Here we report all lost records as samples. This isn't accurate. Because records like
+    // MmapRecords are not samples. But It's easier for users to understand.
+    size_t userspace_lost_samples =
+        record_stat.userspace_lost_samples + record_stat.userspace_lost_non_samples;
+    size_t lost_samples = record_stat.kernelspace_lost_records + userspace_lost_samples;
+
+    std::stringstream os;
+    os << "Samples recorded: " << ReadableCount(sample_record_count_);
+    if (record_stat.userspace_truncated_stack_samples > 0) {
+      os << " (" << ReadableCount(record_stat.userspace_truncated_stack_samples)
+         << " with truncated stacks)";
     }
-    lost_record_count_ += record_stat.lost_samples + record_stat.lost_non_samples;
-    LOG(INFO) << "Samples recorded: " << sample_record_count_ << cut_samples
-              << ". Samples lost: " << lost_record_count_ << ".";
-    LOG(DEBUG) << "In user space, dropped " << record_stat.lost_samples << " samples, "
-               << record_stat.lost_non_samples << " non samples, cut stack of "
-               << record_stat.cut_stack_samples << " samples.";
-    if (sample_record_count_ + lost_record_count_ != 0) {
-      double lost_percent =
-          static_cast<double>(lost_record_count_) / (lost_record_count_ + sample_record_count_);
-      constexpr double LOST_PERCENT_WARNING_BAR = 0.1;
-      if (lost_percent >= LOST_PERCENT_WARNING_BAR) {
-        LOG(WARNING) << "Lost " << (lost_percent * 100) << "% of samples, "
-                     << "consider increasing mmap_pages(-m), "
+    os << ". Samples lost: " << ReadableCount(lost_samples);
+    if (lost_samples != 0) {
+      os << " (kernelspace: " << ReadableCount(record_stat.kernelspace_lost_records)
+         << ", userspace: " << ReadableCount(userspace_lost_samples) << ")";
+    }
+    os << ".";
+    LOG(INFO) << os.str();
+
+    LOG(DEBUG) << "Record stat: kernelspace_lost_records="
+               << ReadableCount(record_stat.kernelspace_lost_records)
+               << ", userspace_lost_samples=" << ReadableCount(record_stat.userspace_lost_samples)
+               << ", userspace_lost_non_samples="
+               << ReadableCount(record_stat.userspace_lost_non_samples)
+               << ", userspace_truncated_stack_samples="
+               << ReadableCount(record_stat.userspace_truncated_stack_samples);
+
+    if (sample_record_count_ + record_stat.kernelspace_lost_records != 0) {
+      double kernelspace_lost_percent =
+          static_cast<double>(record_stat.kernelspace_lost_records) /
+          (record_stat.kernelspace_lost_records + sample_record_count_);
+      constexpr double KERNELSPACE_LOST_PERCENT_WARNING_BAR = 0.1;
+      if (kernelspace_lost_percent >= KERNELSPACE_LOST_PERCENT_WARNING_BAR) {
+        LOG(WARNING) << "Lost " << (kernelspace_lost_percent * 100)
+                     << "% of samples in kernel space, "
+                     << "consider increasing kernel buffer size(-m), "
+                     << "or decreasing sample frequency(-f), "
+                     << "or increasing sample period(-c).";
+      }
+    }
+    size_t userspace_lost_truncated_samples =
+        userspace_lost_samples + record_stat.userspace_truncated_stack_samples;
+    size_t userspace_complete_samples =
+        sample_record_count_ - record_stat.userspace_truncated_stack_samples;
+    if (userspace_complete_samples + userspace_lost_truncated_samples != 0) {
+      double userspace_lost_percent =
+          static_cast<double>(userspace_lost_truncated_samples) /
+          (userspace_complete_samples + userspace_lost_truncated_samples);
+      constexpr double USERSPACE_LOST_PERCENT_WARNING_BAR = 0.1;
+      if (userspace_lost_percent >= USERSPACE_LOST_PERCENT_WARNING_BAR) {
+        LOG(WARNING) << "Lost/Truncated " << (userspace_lost_percent * 100)
+                     << "% of samples in user space, "
+                     << "consider increasing userspace buffer size(--user-buffer-size), "
                      << "or decreasing sample frequency(-f), "
                      << "or increasing sample period(-c).";
       }
@@ -849,7 +972,7 @@ bool RecordCommand::PostProcessRecording(const std::vector<std::string>& args) {
 
 bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
                                  std::vector<std::string>* non_option_args,
-                                 ProbeEvents* probe_events) {
+                                 ProbeEvents& probe_events) {
   OptionValueMap options;
   std::vector<std::pair<OptionName, OptionValue>> ordered_options;
 
@@ -900,6 +1023,13 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
     branch_sampling_ = branch_sampling_type_map["any"];
   }
 
+  if (auto value = options.PullValue("--binary"); value) {
+    binary_name_regex_ = RegEx::Create(*value->str_value);
+    if (binary_name_regex_ == nullptr) {
+      return false;
+    }
+  }
+
   if (!options.PullUintValue("--callchain-joiner-min-matching-nodes",
                              &callchain_joiner_min_matching_nodes_, 1)) {
     return false;
@@ -919,16 +1049,36 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
     }
   }
 
-  if (auto value = options.PullValue("--cpu"); value) {
-    if (auto cpus = GetCpusFromString(*value->str_value); cpus) {
-      cpus_.assign(cpus->begin(), cpus->end());
-    } else {
-      return false;
-    }
-  }
-
   if (!options.PullUintValue("--cpu-percent", &cpu_time_max_percent_, 1, 100)) {
     return false;
+  }
+
+  if (options.PullBoolValue("--decode-etm")) {
+    etm_branch_list_generator_ = ETMBranchListGenerator::Create(system_wide_collection_);
+  }
+  uint32_t interval = 0;
+  if (options.PullUintValue("--etm-flush-interval", &interval)) {
+    etm_flush_interval_ = std::chrono::milliseconds(interval);
+  }
+
+  if (options.PullBoolValue("--record-timestamp")) {
+    ETMRecorder& recorder = ETMRecorder::GetInstance();
+    recorder.SetRecordTimestamp(true);
+  }
+
+  if (options.PullBoolValue("--record-cycles")) {
+    ETMRecorder& recorder = ETMRecorder::GetInstance();
+    recorder.SetRecordCycles(true);
+  }
+
+  if (!options.PullUintValue("--delay", &delay_in_ms_)) {
+    return false;
+  }
+
+  size_t cyc_threshold;
+  if (options.PullUintValue("--cycle-threshold", &cyc_threshold)) {
+    ETMRecorder& recorder = ETMRecorder::GetInstance();
+    recorder.SetCycleThreshold(cyc_threshold);
   }
 
   if (!options.PullDoubleValue("--duration", &duration_in_sec_, 1e-9)) {
@@ -966,7 +1116,7 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
   for (const OptionValue& value : options.PullValues("--kprobe")) {
     std::vector<std::string> cmds = android::base::Split(*value.str_value, ",");
     for (const auto& cmd : cmds) {
-      if (!probe_events->AddKprobe(cmd)) {
+      if (!probe_events.AddKprobe(cmd)) {
         return false;
       }
     }
@@ -982,7 +1132,7 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
   }
 
   allow_callchain_joiner_ = !options.PullBoolValue("--no-callchain-joiner");
-  allow_cutting_samples_ = !options.PullBoolValue("--no-cut-samples");
+  allow_truncating_samples_ = !options.PullBoolValue("--no-cut-samples");
   can_dump_kernel_symbols_ = !options.PullBoolValue("--no-dump-kernel-symbols");
   dump_symbols_ = !options.PullBoolValue("--no-dump-symbols");
   if (auto value = options.PullValue("--no-inherit"); value) {
@@ -1070,8 +1220,6 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
   CHECK(options.values.empty());
 
   // Process ordered options.
-  std::vector<size_t> wait_setting_speed_event_groups;
-
   for (const auto& pair : ordered_options) {
     const OptionName& name = pair.first;
     const OptionValue& value = pair.second;
@@ -1081,20 +1229,17 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
         LOG(ERROR) << "invalid " << name << ": " << value.uint_value;
         return false;
       }
+      SampleRate rate;
       if (name == "-c") {
-        sample_speed_.reset(new SampleSpeed(0, value.uint_value));
+        rate.sample_period = value.uint_value;
       } else {
         if (value.uint_value >= INT_MAX) {
           LOG(ERROR) << "sample freq can't be bigger than INT_MAX: " << value.uint_value;
           return false;
         }
-        sample_speed_.reset(new SampleSpeed(value.uint_value, 0));
+        rate.sample_freq = value.uint_value;
       }
-
-      for (auto groud_id : wait_setting_speed_event_groups) {
-        event_selection_set_.SetSampleSpeed(groud_id, *sample_speed_);
-      }
-      wait_setting_speed_event_groups.clear();
+      event_selection_set_.SetSampleRateForNewEvents(rate);
 
     } else if (name == "--call-graph") {
       std::vector<std::string> strs = android::base::Split(*value.str_value, ",");
@@ -1123,53 +1268,43 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
         }
       }
 
+    } else if (name == "--cpu") {
+      if (auto cpus = GetCpusFromString(*value.str_value); cpus) {
+        event_selection_set_.SetCpusForNewEvents(
+            std::vector<int>(cpus.value().begin(), cpus.value().end()));
+      } else {
+        return false;
+      }
     } else if (name == "-e") {
       std::vector<std::string> event_types = android::base::Split(*value.str_value, ",");
       for (auto& event_type : event_types) {
-        if (probe_events->IsProbeEvent(event_type)) {
-          if (!probe_events->CreateProbeEventIfNotExist(event_type)) {
-            return false;
-          }
-        }
-        size_t group_id;
-        if (!event_selection_set_.AddEventType(event_type, &group_id)) {
+        if (!probe_events.CreateProbeEventIfNotExist(event_type)) {
           return false;
         }
-        if (sample_speed_) {
-          event_selection_set_.SetSampleSpeed(group_id, *sample_speed_);
-        } else {
-          wait_setting_speed_event_groups.push_back(group_id);
+        if (!event_selection_set_.AddEventType(event_type)) {
+          return false;
         }
       }
-
     } else if (name == "-g") {
       fp_callchain_sampling_ = false;
       dwarf_callchain_sampling_ = true;
     } else if (name == "--group") {
       std::vector<std::string> event_types = android::base::Split(*value.str_value, ",");
       for (const auto& event_type : event_types) {
-        if (probe_events->IsProbeEvent(event_type)) {
-          if (!probe_events->CreateProbeEventIfNotExist(event_type)) {
-            return false;
-          }
+        if (!probe_events.CreateProbeEventIfNotExist(event_type)) {
+          return false;
         }
       }
-      size_t group_id;
-      if (!event_selection_set_.AddEventGroup(event_types, &group_id)) {
+      if (!event_selection_set_.AddEventGroup(event_types)) {
         return false;
       }
-      if (sample_speed_) {
-        event_selection_set_.SetSampleSpeed(group_id, *sample_speed_);
-      } else {
-        wait_setting_speed_event_groups.push_back(group_id);
-      }
-
     } else if (name == "--tp-filter") {
       if (!event_selection_set_.SetTracepointFilter(*value.str_value)) {
         return false;
       }
     } else {
-      CHECK(false) << "unprocessed option: " << name;
+      LOG(ERROR) << "unprocessed option: " << name;
+      return false;
     }
   }
 
@@ -1271,7 +1406,7 @@ bool RecordCommand::TraceOffCpu() {
                << android::base::Join(accepted_events, ' ');
     return false;
   }
-  if (!event_selection_set_.AddEventType("sched:sched_switch")) {
+  if (!event_selection_set_.AddEventType("sched:sched_switch", SampleRate(0, 1))) {
     return false;
   }
   if (IsSwitchRecordSupported()) {
@@ -1300,32 +1435,35 @@ bool RecordCommand::SetEventSelectionFlags() {
 }
 
 bool RecordCommand::CreateAndInitRecordFile() {
-  record_file_writer_ =
-      CreateRecordFile(record_filename_, event_selection_set_.GetEventAttrWithId());
+  EventAttrIds attrs = event_selection_set_.GetEventAttrWithId();
+  bool remove_regs_and_stacks = unwind_dwarf_callchain_ && !post_unwind_;
+  if (remove_regs_and_stacks) {
+    for (auto& attr : attrs) {
+      ReplaceRegAndStackWithCallChain(attr.attr);
+    }
+  }
+  record_file_writer_ = CreateRecordFile(record_filename_, attrs);
   if (record_file_writer_ == nullptr) {
     return false;
   }
   // Use first perf_event_attr and first event id to dump mmap and comm records.
-  dumping_attr_id_ = event_selection_set_.GetEventAttrWithId()[0];
+  CHECK(!attrs.empty());
+  dumping_attr_id_ = attrs[0];
   CHECK(!dumping_attr_id_.ids.empty());
-  map_record_reader_.emplace(*dumping_attr_id_.attr, dumping_attr_id_.ids[0],
+  map_record_reader_.emplace(dumping_attr_id_.attr, dumping_attr_id_.ids[0],
                              event_selection_set_.RecordNotExecutableMaps());
   map_record_reader_->SetCallback([this](Record* r) { return ProcessRecord(r); });
 
   return DumpKernelSymbol() && DumpTracingData() && DumpMaps() && DumpAuxTraceInfo();
 }
 
-std::unique_ptr<RecordFileWriter> RecordCommand::CreateRecordFile(
-    const std::string& filename, const std::vector<EventAttrWithId>& attrs) {
+std::unique_ptr<RecordFileWriter> RecordCommand::CreateRecordFile(const std::string& filename,
+                                                                  const EventAttrIds& attrs) {
   std::unique_ptr<RecordFileWriter> writer = RecordFileWriter::CreateInstance(filename);
-  if (writer == nullptr) {
-    return nullptr;
+  if (writer != nullptr && writer->WriteAttrSection(attrs)) {
+    return writer;
   }
-
-  if (!writer->WriteAttrSection(attrs)) {
-    return nullptr;
-  }
-  return writer;
+  return nullptr;
 }
 
 bool RecordCommand::DumpKernelSymbol() {
@@ -1367,9 +1505,11 @@ bool RecordCommand::DumpMaps() {
     // For system wide recording:
     //   If not aux tracing, only dump kernel maps. Maps of a process is dumped when needed (the
     //   first time a sample hits that process).
-    //   If aux tracing, we don't know which maps will be needed, so dump all process maps. To
-    //   reduce pre recording time, we dump process maps in map record thread while recording.
-    if (event_selection_set_.HasAuxTrace()) {
+    //   If aux tracing with decoding etm data, the maps are dumped by etm_branch_list_generator.
+    //   If aux tracing without decoding etm data, we don't know which maps will be needed, so dump
+    //   all process maps. To reduce pre recording time, we dump process maps in map record thread
+    //   while recording.
+    if (event_selection_set_.HasAuxTrace() && !etm_branch_list_generator_) {
       map_record_thread_.emplace(*map_record_reader_);
       return true;
     }
@@ -1424,7 +1564,16 @@ bool RecordCommand::ProcessRecord(Record* record) {
   // Record filter check should go after DumpMapsForRecord(). Otherwise, process/thread name
   // filters don't work in system wide collection.
   if (record->type() == PERF_RECORD_SAMPLE) {
-    if (!record_filter_.Check(static_cast<SampleRecord*>(record))) {
+    if (!record_filter_.Check(static_cast<SampleRecord&>(*record))) {
+      return true;
+    }
+  }
+  if (etm_branch_list_generator_) {
+    bool consumed = false;
+    if (!etm_branch_list_generator_->ProcessRecord(*record, consumed)) {
+      return false;
+    }
+    if (consumed) {
       return true;
     }
   }
@@ -1506,8 +1655,6 @@ bool RecordCommand::SaveRecordAfterUnwinding(Record* record) {
       return true;
     }
     sample_record_count_++;
-  } else if (record->type() == PERF_RECORD_LOST) {
-    lost_record_count_ += static_cast<LostRecord*>(record)->lost;
   } else {
     thread_tree_.Update(*record);
   }
@@ -1525,30 +1672,32 @@ bool RecordCommand::SaveRecordWithoutUnwinding(Record* record) {
       return true;
     }
     sample_record_count_++;
-  } else if (record->type() == PERF_RECORD_LOST) {
-    lost_record_count_ += static_cast<LostRecord*>(record)->lost;
   }
   return record_file_writer_->WriteRecord(*record);
 }
 
-bool RecordCommand::ProcessJITDebugInfo(const std::vector<JITDebugInfo>& debug_info,
+bool RecordCommand::ProcessJITDebugInfo(std::vector<JITDebugInfo> debug_info,
                                         bool sync_kernel_records) {
   for (auto& info : debug_info) {
     if (info.type == JITDebugInfo::JIT_DEBUG_JIT_CODE) {
       uint64_t timestamp =
           jit_debug_reader_->SyncWithRecords() ? info.timestamp : last_record_timestamp_;
-      Mmap2Record record(*dumping_attr_id_.attr, false, info.pid, info.pid, info.jit_code_addr,
+      Mmap2Record record(dumping_attr_id_.attr, false, info.pid, info.pid, info.jit_code_addr,
                          info.jit_code_len, info.file_offset, map_flags::PROT_JIT_SYMFILE_MAP,
                          info.file_path, dumping_attr_id_.ids[0], timestamp);
       if (!ProcessRecord(&record)) {
         return false;
       }
     } else {
-      if (info.extracted_dex_file_map) {
-        ThreadMmap& map = *info.extracted_dex_file_map;
+      if (!info.symbols.empty()) {
+        Dso* dso = thread_tree_.FindUserDsoOrNew(info.file_path, 0, DSO_DEX_FILE);
+        dso->SetSymbols(&info.symbols);
+      }
+      if (info.dex_file_map) {
+        ThreadMmap& map = *info.dex_file_map;
         uint64_t timestamp =
             jit_debug_reader_->SyncWithRecords() ? info.timestamp : last_record_timestamp_;
-        Mmap2Record record(*dumping_attr_id_.attr, false, info.pid, info.pid, map.start_addr,
+        Mmap2Record record(dumping_attr_id_.attr, false, info.pid, info.pid, map.start_addr,
                            map.len, map.pgoff, map.prot, map.name, dumping_attr_id_.ids[0],
                            timestamp);
         if (!ProcessRecord(&record)) {
@@ -1656,9 +1805,11 @@ void RecordCommand::UpdateRecord(Record* record) {
 }
 
 bool RecordCommand::UnwindRecord(SampleRecord& r) {
-  if ((r.sample_type & PERF_SAMPLE_CALLCHAIN) && (r.sample_type & PERF_SAMPLE_REGS_USER) &&
-      (r.regs_user_data.reg_mask != 0) && (r.sample_type & PERF_SAMPLE_STACK_USER) &&
-      (r.GetValidStackSize() > 0)) {
+  if (!(r.sample_type & PERF_SAMPLE_CALLCHAIN) && (r.sample_type & PERF_SAMPLE_REGS_USER) &&
+      (r.regs_user_data.reg_mask != 0) && (r.sample_type & PERF_SAMPLE_STACK_USER)) {
+    return true;
+  }
+  if (r.GetValidStackSize() > 0) {
     ThreadEntry* thread = thread_tree_.FindThreadOrNew(r.tid_data.pid, r.tid_data.tid);
     RegSet regs(r.regs_user_data.abi, r.regs_user_data.reg_mask, r.regs_user_data.regs);
     std::vector<uint64_t> ips;
@@ -1687,6 +1838,9 @@ bool RecordCommand::UnwindRecord(SampleRecord& r) {
                                          CallChainJoiner::ORIGINAL_OFFLINE, ips, sps)) {
       return false;
     }
+  } else {
+    // For kernel samples, we still need to remove user stack and register fields.
+    r.ReplaceRegAndStackWithCallChain({});
   }
   return true;
 }
@@ -1711,11 +1865,15 @@ std::unique_ptr<RecordFileReader> RecordCommand::MoveRecordFile(const std::strin
     return nullptr;
   }
   record_file_writer_.reset();
-  {
-    std::error_code ec;
-    std::filesystem::rename(record_filename_, old_filename, ec);
-    if (ec) {
-      LOG(ERROR) << "Failed to rename: " << ec.message();
+  std::error_code ec;
+  std::filesystem::rename(record_filename_, old_filename, ec);
+  if (ec) {
+    LOG(DEBUG) << "Failed to rename: " << ec.message();
+    // rename() fails on Android N x86 emulator, which uses kernel 3.10. Because rename() in bionic
+    // uses renameat2 syscall, which isn't support on kernel < 3.15. So add a fallback to mv
+    // command. The mv command can also work with other situations when rename() doesn't work.
+    // So we'd like to keep it as a fallback to rename().
+    if (!Workload::RunCmd({"mv", record_filename_, old_filename})) {
       return nullptr;
     }
   }
@@ -1774,8 +1932,16 @@ bool RecordCommand::PostUnwindRecords() {
   if (!reader) {
     return false;
   }
+  // Write new event attrs without regs and stacks fields.
+  EventAttrIds attrs = reader->AttrSection();
+  for (auto& attr : attrs) {
+    ReplaceRegAndStackWithCallChain(attr.attr);
+  }
+  if (!record_file_writer_->WriteAttrSection(attrs)) {
+    return false;
+  }
+
   sample_record_count_ = 0;
-  lost_record_count_ = 0;
   auto callback = [this](std::unique_ptr<Record> record) {
     return SaveRecordAfterUnwinding(record.get());
   };
@@ -1886,6 +2052,9 @@ bool RecordCommand::DumpAdditionalFeatures(const std::vector<std::string>& args)
   if (keep_failed_unwinding_debug_info_) {
     feature_count += 2;
   }
+  if (etm_branch_list_generator_) {
+    feature_count++;
+  }
   if (!record_file_writer_->BeginWriteFeatures(feature_count)) {
     return false;
   }
@@ -1928,6 +2097,9 @@ bool RecordCommand::DumpAdditionalFeatures(const std::vector<std::string>& args)
   if (keep_failed_unwinding_debug_info_ && !DumpDebugUnwindFeature(debug_unwinding_files)) {
     return false;
   }
+  if (etm_branch_list_generator_ && !DumpETMBranchListFeature()) {
+    return false;
+  }
 
   if (!record_file_writer_->EndWriteFeatures()) {
     return false;
@@ -1945,34 +2117,9 @@ bool RecordCommand::DumpBuildIdFeature() {
     if (!dso->HasDumpId() && !event_selection_set_.HasAuxTrace()) {
       continue;
     }
-    if (dso->type() == DSO_KERNEL) {
-      if (!GetKernelBuildId(&build_id)) {
-        continue;
-      }
-      build_id_records.push_back(BuildIdRecord(true, UINT_MAX, build_id, dso->Path()));
-    } else if (dso->type() == DSO_KERNEL_MODULE) {
-      bool has_build_id = false;
-      if (android::base::EndsWith(dso->Path(), ".ko")) {
-        has_build_id = GetBuildIdFromDsoPath(dso->Path(), &build_id);
-      } else if (const std::string& path = dso->Path();
-                 path.size() > 2 && path[0] == '[' && path.back() == ']') {
-        // For kernel modules that we can't find the corresponding file, read build id from /sysfs.
-        has_build_id = GetModuleBuildId(path.substr(1, path.size() - 2), &build_id);
-      }
-      if (has_build_id) {
-        build_id_records.push_back(BuildIdRecord(true, UINT_MAX, build_id, dso->Path()));
-      } else {
-        LOG(DEBUG) << "Can't read build_id for module " << dso->Path();
-      }
-    } else if (dso->type() == DSO_ELF_FILE) {
-      if (dso->Path() == DEFAULT_EXECNAME_FOR_THREAD_MMAP || dso->IsForJavaMethod()) {
-        continue;
-      }
-      if (!GetBuildIdFromDsoPath(dso->Path(), &build_id)) {
-        LOG(DEBUG) << "Can't read build_id from file " << dso->Path();
-        continue;
-      }
-      build_id_records.push_back(BuildIdRecord(false, UINT_MAX, build_id, dso->Path()));
+    if (GetBuildId(*dso, build_id)) {
+      bool in_kernel = dso->type() == DSO_KERNEL || dso->type() == DSO_KERNEL_MODULE;
+      build_id_records.emplace_back(in_kernel, UINT_MAX, build_id, dso->Path());
     }
   }
   if (!record_file_writer_->WriteBuildIdFeature(build_id_records)) {
@@ -2032,6 +2179,15 @@ bool RecordCommand::DumpMetaInfoFeature(bool kernel_symbols_available) {
   if (dwarf_callchain_sampling_ && !unwind_dwarf_callchain_) {
     OfflineUnwinder::CollectMetaInfo(&info_map);
   }
+  auto record_stat = event_selection_set_.GetRecordStat();
+  info_map["record_stat"] = android::base::StringPrintf(
+      "sample_record_count=%" PRIu64
+      ",kernelspace_lost_records=%zu,userspace_lost_samples=%zu,"
+      "userspace_lost_non_samples=%zu,userspace_truncated_stack_samples=%zu",
+      sample_record_count_, record_stat.kernelspace_lost_records,
+      record_stat.userspace_lost_samples, record_stat.userspace_lost_non_samples,
+      record_stat.userspace_truncated_stack_samples);
+
   return record_file_writer_->WriteMetaInfoFeature(info_map);
 }
 
@@ -2065,6 +2221,13 @@ void RecordCommand::CollectHitFileInfo(const SampleRecord& r, std::unordered_set
   const ThreadEntry* thread = thread_tree_.FindThreadOrNew(r.tid_data.pid, r.tid_data.tid);
   size_t kernel_ip_count;
   std::vector<uint64_t> ips = r.GetCallChain(&kernel_ip_count);
+  if ((r.sample_type & PERF_SAMPLE_BRANCH_STACK) != 0) {
+    for (uint64_t i = 0; i < r.branch_stack_data.stack_nr; ++i) {
+      const auto& item = r.branch_stack_data.stack[i];
+      ips.push_back(item.from);
+      ips.push_back(item.to);
+    }
+  }
   for (size_t i = 0; i < ips.size(); i++) {
     const MapEntry* map = thread_tree_.FindMap(thread, ips[i], i < kernel_ip_count);
     Dso* dso = map->dso;
@@ -2081,6 +2244,16 @@ void RecordCommand::CollectHitFileInfo(const SampleRecord& r, std::unordered_set
       dso_set->insert(dso);
     }
   }
+}
+
+bool RecordCommand::DumpETMBranchListFeature() {
+  ETMBinaryMap binary_map = etm_branch_list_generator_->GetETMBinaryMap();
+  std::string s;
+  if (!ETMBinaryMapToString(binary_map, s)) {
+    return false;
+  }
+  return record_file_writer_->WriteFeature(PerfFileFormat::FEAT_ETM_BRANCH_LIST, s.data(),
+                                           s.size());
 }
 
 }  // namespace

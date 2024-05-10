@@ -85,6 +85,7 @@ bool SetCpuTimeMaxPercent(size_t percent);
 bool GetPerfEventMlockKb(uint64_t* mlock_kb);
 bool SetPerfEventMlockKb(uint64_t mlock_kb);
 bool CanRecordRawData();
+std::optional<uint64_t> GetMemorySize();
 
 ArchType GetMachineArch();
 void PrepareVdsoFile();
@@ -150,6 +151,14 @@ static inline int gettid() {
   return syscall(__NR_gettid);
 }
 #endif
+
+struct ARMCpuModel {
+  uint32_t implementer = 0;
+  uint32_t partnum = 0;
+  std::vector<int> cpus;
+};
+
+std::vector<ARMCpuModel> GetARMCpuModels();
 
 #endif  // defined(__linux__)
 

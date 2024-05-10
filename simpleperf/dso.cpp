@@ -501,6 +501,11 @@ class DexFileDso : public Dso {
 
   std::vector<Symbol> LoadSymbolsImpl() override {
     std::vector<Symbol> symbols;
+    if (StartsWith(path_, kDexFileInMemoryPrefix)) {
+      // For dex file in memory, the symbols should already be set via SetSymbols().
+      return symbols;
+    }
+
     const std::string& debug_file_path = GetDebugFilePath();
     auto tuple = SplitUrlInApk(debug_file_path);
     // Symbols of dex files are collected on device. If the dex file doesn't exist, probably
@@ -573,8 +578,10 @@ class ElfDso : public Dso {
       if (elf) {
         min_vaddr_ = elf->ReadMinExecutableVaddr(&file_offset_of_min_vaddr_);
       } else {
-        LOG(WARNING) << "failed to read min virtual address of " << GetDebugFilePath() << ": "
-                     << status;
+        // This is likely to be a file wrongly thought of as an ELF file, due to stack unwinding.
+        // No need to report it by default.
+        LOG(DEBUG) << "failed to read min virtual address of " << GetDebugFilePath() << ": "
+                   << status;
       }
     }
     *min_vaddr = min_vaddr_;
@@ -637,14 +644,13 @@ class ElfDso : public Dso {
       status = elf->ParseSymbols(symbol_callback);
     }
     android::base::LogSeverity log_level = android::base::WARNING;
-    if (!symbols_.empty()) {
+    if (!symbols_.empty() || !symbols.empty()) {
       // We already have some symbols when recording.
       log_level = android::base::DEBUG;
     }
     if ((status == ElfStatus::FILE_NOT_FOUND || status == ElfStatus::FILE_MALFORMED) &&
         build_id.IsEmpty()) {
-      // This is likely to be a file wongly thought of as an ELF file, maybe due to stack
-      // unwinding.
+      // This is likely to be a file wrongly thought of as an ELF file, due to stack unwinding.
       log_level = android::base::DEBUG;
     }
     ReportReadElfSymbolResult(status, path_, GetDebugFilePath(), log_level);
@@ -663,17 +669,7 @@ class ElfDso : public Dso {
 
 class KernelDso : public Dso {
  public:
-  KernelDso(const std::string& path) : Dso(DSO_KERNEL, path) {
-    debug_file_path_ = FindDebugFilePath();
-    if (!vmlinux_.empty()) {
-      // Use vmlinux as the kernel debug file.
-      BuildId build_id = GetExpectedBuildId();
-      ElfStatus status;
-      if (ElfFile::Open(vmlinux_, &build_id, &status)) {
-        debug_file_path_ = vmlinux_;
-      }
-    }
-  }
+  KernelDso(const std::string& path) : Dso(DSO_KERNEL, path) {}
 
   // IpToVaddrInFile() and LoadSymbols() must be consistent in fixing addresses changed by kernel
   // address space layout randomization.
@@ -696,6 +692,13 @@ class KernelDso : public Dso {
  protected:
   std::string FindDebugFilePath() const override {
     BuildId build_id = GetExpectedBuildId();
+    if (!vmlinux_.empty()) {
+      // Use vmlinux as the kernel debug file.
+      ElfStatus status;
+      if (ElfFile::Open(vmlinux_, &build_id, &status)) {
+        return vmlinux_;
+      }
+    }
     return debug_elf_file_finder_.FindDebugFile(path_, false, build_id);
   }
 
@@ -712,7 +715,7 @@ class KernelDso : public Dso {
     }
 #endif  // defined(__linux__)
     SortAndFixSymbols(symbols);
-    if (!symbols.empty()) {
+    if (!symbols.empty() && symbols.back().len == 0) {
       symbols.back().len = std::numeric_limits<uint64_t>::max() - symbols.back().addr;
     }
     return symbols;
@@ -872,8 +875,8 @@ class KernelModuleDso : public Dso {
     if (elf) {
       status = elf->ParseSymbols(symbol_callback);
     }
-    ReportReadElfSymbolResult(status, path_, GetDebugFilePath(),
-                              symbols_.empty() ? android::base::WARNING : android::base::DEBUG);
+    // Don't warn when a kernel module is missing. As a backup, we read symbols from /proc/kallsyms.
+    ReportReadElfSymbolResult(status, path_, GetDebugFilePath(), android::base::DEBUG);
     SortAndFixSymbols(symbols);
     return symbols;
   }
@@ -893,6 +896,10 @@ class KernelModuleDso : public Dso {
     // 2. Find a module symbol in .text section, get its address in memory from /proc/kallsyms,
     // and its vaddr_in_file from the kernel module file. Then other symbols in .text section can
     // be mapped in the same way. Below we use the second method.
+
+    if (!IsRegularFile(GetDebugFilePath())) {
+      return;
+    }
 
     // 1. Select a module symbol in /proc/kallsyms.
     kernel_dso_->LoadSymbols();
@@ -1020,6 +1027,32 @@ bool GetBuildIdFromDsoPath(const std::string& dso_path, BuildId* build_id) {
   auto elf = ElfFile::Open(dso_path, &status);
   if (status == ElfStatus::NO_ERROR && elf->GetBuildId(build_id) == ElfStatus::NO_ERROR) {
     return true;
+  }
+  return false;
+}
+
+bool GetBuildId(const Dso& dso, BuildId& build_id) {
+  if (dso.type() == DSO_KERNEL) {
+    if (GetKernelBuildId(&build_id)) {
+      return true;
+    }
+  } else if (dso.type() == DSO_KERNEL_MODULE) {
+    bool has_build_id = false;
+    if (android::base::EndsWith(dso.Path(), ".ko")) {
+      return GetBuildIdFromDsoPath(dso.Path(), &build_id);
+    }
+    if (const std::string& path = dso.Path();
+        path.size() > 2 && path[0] == '[' && path.back() == ']') {
+      // For kernel modules that we can't find the corresponding file, read build id from /sysfs.
+      return GetModuleBuildId(path.substr(1, path.size() - 2), &build_id);
+    }
+  } else if (dso.type() == DSO_ELF_FILE) {
+    if (dso.Path() == DEFAULT_EXECNAME_FOR_THREAD_MMAP || dso.IsForJavaMethod()) {
+      return false;
+    }
+    if (GetBuildIdFromDsoPath(dso.Path(), &build_id)) {
+      return true;
+    }
   }
   return false;
 }

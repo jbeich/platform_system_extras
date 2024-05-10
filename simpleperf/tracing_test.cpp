@@ -32,6 +32,7 @@ static void CheckAdjustFilter(const std::string& filter, bool use_quote,
   ASSERT_EQ(android::base::Join(used_fields, ","), used_field_str);
 }
 
+// @CddTest = 6.1/C-0-2
 TEST(tracing, adjust_tracepoint_filter) {
   std::string filter = "((sig >= 1 && sig < 20) || sig == 32) && comm != \"bash\"";
   CheckAdjustFilter(filter, true, filter, "comm,sig");
@@ -67,6 +68,7 @@ std::ostream& operator<<(std::ostream& os, const TracingField& field) {
 }
 }  // namespace simpleperf
 
+// @CddTest = 6.1/C-0-2
 TEST(tracing, ParseTracingFormat) {
   std::string data =
       "name: sched_wakeup_new\n"
@@ -79,7 +81,9 @@ TEST(tracing, ParseTracingFormat) {
       "\n"
       "\tfield:char comm[16];	offset:8;	size:16;	signed:1;\n"
       "\tfield:__data_loc char[] name;	offset:24;	size:4;	signed:1;\n";
-  TracingFormat format = ParseTracingFormat(data);
+  std::optional<TracingFormat> opt_format = ParseTracingFormat(data);
+  ASSERT_TRUE(opt_format.has_value());
+  const TracingFormat& format = opt_format.value();
   ASSERT_EQ(format.name, "sched_wakeup_new");
   ASSERT_EQ(format.id, 94);
   ASSERT_EQ(format.fields.size(), 6);

@@ -403,12 +403,13 @@ class TestFileGenerator : public RecordFileProcessor {
   bool WriteMapsForSample(const SampleRecord& r) {
     ThreadEntry* thread = thread_tree_.FindThread(r.tid_data.tid);
     if (thread != nullptr && thread->maps) {
-      auto attr = reader_->AttrSection()[0].attr;
-      auto event_id = reader_->AttrSection()[0].ids[0];
+      const EventAttrIds& attrs = reader_->AttrSection();
+      const perf_event_attr& attr = attrs[0].attr;
+      uint64_t event_id = attrs[0].ids[0];
 
       for (const auto& p : thread->maps->maps) {
         const MapEntry* map = p.second;
-        Mmap2Record map_record(*attr, false, r.tid_data.pid, r.tid_data.tid, map->start_addr,
+        Mmap2Record map_record(attr, false, r.tid_data.pid, r.tid_data.tid, map->start_addr,
                                map->len, map->pgoff, map->flags, map->dso->Path(), event_id,
                                r.Timestamp());
         if (!writer_->WriteRecord(map_record)) {
@@ -425,7 +426,7 @@ class TestFileGenerator : public RecordFileProcessor {
     }
     std::unordered_set<int> feature_types_to_copy = {
         PerfFileFormat::FEAT_ARCH, PerfFileFormat::FEAT_CMDLINE, PerfFileFormat::FEAT_META_INFO};
-    const size_t BUFFER_SIZE = 64 * 1024;
+    const size_t BUFFER_SIZE = 64 * kKilobyte;
     std::string buffer(BUFFER_SIZE, '\0');
     for (const auto& p : reader_->FeatureSectionDescriptors()) {
       auto feat_type = p.first;
