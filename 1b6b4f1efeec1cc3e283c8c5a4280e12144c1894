@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "227811fc_8c2da93d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1978766
+      },
+      "writtenOn": "2024-05-15T16:58:33Z",
+      "side": 1,
+      "message": "ah i didn\u0027t realize we needed a sorted sequence. if we need the list to be sorted, then std::map is also fine. vector+sort is good as well.",
+      "revId": "1b6b4f1efeec1cc3e283c8c5a4280e12144c1894",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
