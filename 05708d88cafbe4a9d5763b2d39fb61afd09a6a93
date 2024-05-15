@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "498e7c1a_775feaee",
+        "filename": "simpleperf/cmd_inject.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 705,
+      "author": {
+        "id": 1978766
+      },
+      "writtenOn": "2024-05-15T00:39:40Z",
+      "side": 1,
+      "message": "What is the reason for using std::map when we are iterating on it sequentially? seems like we can just use std::vector",
+      "revId": "05708d88cafbe4a9d5763b2d39fb61afd09a6a93",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
