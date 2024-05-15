@@ -683,46 +683,52 @@ class AutoFDOWriter {
       const AutoFDOBinaryInfo& binary = binary_map_[key];
       // AutoFDO text format needs file_offsets instead of virtual addrs in a binary. And it uses
       // below formula: vaddr = file_offset + GetFirstLoadSegmentVaddr().
-      uint64_t first_load_segment_addr = binary.first_load_segment_addr;
+      uint64_t base_addr = binary.first_load_segment_addr;
 
-      auto to_offset = [&](uint64_t vaddr) -> uint64_t {
-        if (vaddr == 0) {
-          return 0;
+      // Write range_count_map. Use std::map to generate a sorted output.
+      std::map<AddrPair, uint64_t> range_count_map;
+      for (const auto& p : binary.range_count_map) {
+        AddrPair addrs = p.first;
+        if (addrs.first >= base_addr && addrs.second >= base_addr) {
+          addrs.first -= base_addr;
+          addrs.second -= base_addr;
+          range_count_map.emplace(addrs, p.second);
         }
-        CHECK_GE(vaddr, first_load_segment_addr);
-        return vaddr - first_load_segment_addr;
-      };
-
-      // Write range_count_map.
-      std::map<AddrPair, uint64_t> range_count_map(binary.range_count_map.begin(),
-                                                   binary.range_count_map.end());
+      }
       fprintf(output_fp.get(), "%zu\n", range_count_map.size());
-      for (const auto& pair2 : range_count_map) {
-        const AddrPair& addr_range = pair2.first;
-        uint64_t count = pair2.second;
-
-        fprintf(output_fp.get(), "%" PRIx64 "-%" PRIx64 ":%" PRIu64 "\n",
-                to_offset(addr_range.first), to_offset(addr_range.second), count);
+      for (const auto& p : range_count_map) {
+        fprintf(output_fp.get(), "%" PRIx64 "-%" PRIx64 ":%" PRIu64 "\n", p.first.first,
+                p.first.second, p.second);
       }
 
-      // Write addr_count_map.
-      std::map<uint64_t, uint64_t> address_count_map(binary.address_count_map.begin(),
-                                                     binary.address_count_map.end());
+      // Write addr_count_map. Use std::map to generate a sorted output.
+      std::map<uint64_t, uint64_t> address_count_map;
+      for (const auto& p : binary.address_count_map) {
+        uint64_t addr = p.first;
+        if (addr >= base_addr) {
+          addr -= base_addr;
+          address_count_map.emplace(addr, p.second);
+        }
+      }
       fprintf(output_fp.get(), "%zu\n", address_count_map.size());
       for (const auto& [addr, count] : address_count_map) {
-        fprintf(output_fp.get(), "%" PRIx64 ":%" PRIu64 "\n", to_offset(addr), count);
+        fprintf(output_fp.get(), "%" PRIx64 ":%" PRIu64 "\n", addr, count);
       }
 
-      // Write branch_count_map.
-      std::map<AddrPair, uint64_t> branch_count_map(binary.branch_count_map.begin(),
-                                                    binary.branch_count_map.end());
+      // Write branch_count_map. Use std::map to generated a sorted output.
+      std::map<AddrPair, uint64_t> branch_count_map;
+      for (const auto& p : binary.branch_count_map) {
+        AddrPair addrs = p.first;
+        if (addrs.first >= base_addr) {
+          addrs.first -= base_addr;
+          addrs.second = (addrs.second >= base_addr) ? (addrs.second - base_addr) : 0;
+          branch_count_map.emplace(addrs, p.second);
+        }
+      }
       fprintf(output_fp.get(), "%zu\n", branch_count_map.size());
-      for (const auto& pair2 : branch_count_map) {
-        const AddrPair& branch = pair2.first;
-        uint64_t count = pair2.second;
-
-        fprintf(output_fp.get(), "%" PRIx64 "->%" PRIx64 ":%" PRIu64 "\n", to_offset(branch.first),
-                to_offset(branch.second), count);
+      for (const auto& p : branch_count_map) {
+        fprintf(output_fp.get(), "%" PRIx64 "->%" PRIx64 ":%" PRIu64 "\n", p.first.first,
+                p.first.second, p.second);
       }
 
       // Write the binary path in comment.
