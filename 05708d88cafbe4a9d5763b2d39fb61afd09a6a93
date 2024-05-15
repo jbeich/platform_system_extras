@@ -16,6 +16,24 @@
       "message": "What is the reason for using std::map when we are iterating on it sequentially? seems like we can just use std::vector",
       "revId": "05708d88cafbe4a9d5763b2d39fb61afd09a6a93",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bcb01fb0_1da1aa54",
+        "filename": "simpleperf/cmd_inject.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 705,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2024-05-15T16:55:51Z",
+      "side": 1,
+      "message": "std::map was used to sort the keys when iterating. But maybe it\u0027s more efficient to use std::vector + sort. So changed to that.",
+      "parentUuid": "498e7c1a_775feaee",
+      "revId": "05708d88cafbe4a9d5763b2d39fb61afd09a6a93",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
