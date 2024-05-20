@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ceec06a_9701e5df",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2024-05-20T16:09:36Z",
+      "side": 1,
+      "message": "Good catch, some .so are THPs aligned 2MB (libart and libhwui ...)",
+      "revId": "3c784e9fd9f4e3f8e363a023939567c41c19d634",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
