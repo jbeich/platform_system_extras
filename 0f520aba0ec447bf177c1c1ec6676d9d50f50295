@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b85b1a70_a673cf5d",
+        "filename": "profcollectd/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2024-05-20T16:09:37Z",
+      "side": 0,
+      "message": "I am not sure, so double checking - do we no longer need this line?",
+      "range": {
+        "startLine": 56,
+        "startChar": 0,
+        "endLine": 56,
+        "endChar": 77
+      },
+      "revId": "0f520aba0ec447bf177c1c1ec6676d9d50f50295",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
