@@ -56,6 +56,7 @@ if [[ "${dir}" == *.apk ]]; then
   fi
 
   dir_filename=$(basename "${dir}")
+  dir_filename=${dir_filename// /_}
   tmp=$(mktemp -d -t "${dir_filename%.apk}_out_XXXXX")
   unzip "${dir}" lib/* -d "${tmp}" >/dev/null 2>&1
   dir="${tmp}"
@@ -65,6 +66,7 @@ if [[ "${dir}" == *.apex ]]; then
   trap 'cleanup_trap' EXIT
 
   dir_filename=$(basename "${dir}")
+  dir_filename=${dir_filename// /_}
   tmp=$(mktemp -d -t "${dir_filename%.apex}_out_XXXXX")
   deapexer extract "${dir}" "${tmp}" >/dev/null 2>&1
   dir="${tmp}"
@@ -79,11 +81,11 @@ unaligned_libs=()
 echo
 echo "=== ELF alignment ==="
 
-matches="$(find "${dir}" -type f \( -name "*.so" -or -executable \))"
+matches="$(find ${dir} -type f \( -name '*.so' -or -executable \))"
 IFS=$'\n'
 for match in $matches; do
   [[ $(file "${match}") == *"ELF"* ]] || continue
-  res="$(objdump -p "${match}" | grep LOAD | awk '{ print $NF }' | head -1)"
+  res="$(objdump -p ${match} | grep LOAD | awk '{ print $NF }' | head -1)"
   if [[ $res =~ 2**(1[4-9]|[2-9][0-9]|[1-9][0-9]{2,}) ]]; then
     echo -e "${match}: ${GREEN}ALIGNED${ENDCOLOR} ($res)"
   else
