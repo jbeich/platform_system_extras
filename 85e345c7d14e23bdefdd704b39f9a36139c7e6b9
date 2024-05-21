@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "532383ec_d23b7a48",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-21T20:35:15Z",
+      "side": 1,
+      "message": "It\u0027s fine to nest double-quotes inside of subprocesses:\n\n    :) b\u003douter; echo \"$(b\u003dinner; echo \"${b}\")\"\n    inner\n    :) b\u003douter; a\u003d\"$(b\u003dinner; echo \"${b}\")\"; echo $a\n    inner\n\nWhat was the issue you were seeing?",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 0
+      },
+      "revId": "85e345c7d14e23bdefdd704b39f9a36139c7e6b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83d7ab80_dacd2b81",
+        "filename": "tools/check_elf_alignment.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-21T20:35:15Z",
+      "side": 1,
+      "message": "these don\u0027t cover it for non-apk, non-apex cases",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 35
+      },
+      "revId": "85e345c7d14e23bdefdd704b39f9a36139c7e6b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f74834bb_070e9830",
+        "filename": "tools/check_elf_alignment.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1120458
+      },
+      "writtenOn": "2024-05-21T20:35:15Z",
+      "side": 1,
+      "message": "if it wasn\u0027t working, it\u0027s probably this one that needed to be fixed?",
+      "range": {
+        "startLine": 86,
+        "startChar": 13,
+        "endLine": 86,
+        "endChar": 21
+      },
+      "revId": "85e345c7d14e23bdefdd704b39f9a36139c7e6b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
