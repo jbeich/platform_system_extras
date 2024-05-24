@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35677d82_03896558",
+        "filename": "simpleperf/libsimpleperf_report_fuzzer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2024-05-24T17:01:25Z",
+      "side": 0,
+      "message": "Shall we add the new test without removing the existing two? They cover some code that can\u0027t be covered by testing at RecordFileReader level.",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 44,
+        "endChar": 28
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "2a6b8935_ef388e36",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "simpleperf/libsimpleperf_report_fuzzer.cpp",
+              "range": {
+                "startLine": 18,
+                "startChar": 0,
+                "endLine": 18,
+                "endChar": 0
+              },
+              "replacement": "#include \u003crecord_file.h\u003e\n"
+            },
+            {
+              "path": "simpleperf/libsimpleperf_report_fuzzer.cpp",
+              "range": {
+                "startLine": 70,
+                "startChar": 0,
+                "endLine": 70,
+                "endChar": 0
+              },
+              "replacement": "\nclass SimplePerfReportFuzzer2 {\n public:\n  SimplePerfReportFuzzer2(const uint8_t* data, size_t size) : mFdp(data, size) {\n    /**\n     * Use maximum of 80% of buffer to write in FD and save at least 20% for fuzzing other APIs\n     */\n    const int32_t dataSize \u003d mFdp.ConsumeIntegralInRange\u003cint32_t\u003e(0, (size * 80) / 100);\n    std::vector\u003cuint8_t\u003e dataPointer \u003d mFdp.ConsumeBytes\u003cuint8_t\u003e(dataSize);\n    android::base::WriteFully(mTempfile.fd, dataPointer.data(), dataPointer.size());\n  }\n  void process();\n\n private:\n  FuzzedDataProvider mFdp;\n  TemporaryFile mTempfile;\n};\n\nvoid SimplePerfReportFuzzer2::process() {\n  std::unique_ptr\u003cRecordFileReader\u003e reader \u003d RecordFileReader::CreateInstance(mTempfile.path);\n  if (!reader.get()) {\n    return;\n  }\n  while (mFdp.remaining_bytes()) {\n    auto InvokeReader \u003d mFdp.PickValueInArray\u003cconst std::function\u003cvoid()\u003e\u003e({\n        [\u0026]() { reader-\u003eReadCmdlineFeature(); },\n        [\u0026]() { reader-\u003eReadBuildIdFeature(); },\n        [\u0026]() { reader-\u003eReadFeatureString(mFdp.ConsumeIntegral\u003cint32_t\u003e() /* feature */); },\n        [\u0026]() {\n          vector\u003cuint8_t\u003e buf;\n          bool error;\n          reader-\u003eReadAuxData(mFdp.ConsumeIntegral\u003cuint32_t\u003e() /* cpu */,\n                              mFdp.ConsumeIntegral\u003cuint64_t\u003e() /* aux_offset */,\n                              mFdp.ConsumeIntegral\u003csize_t\u003e() /* size */, buf, error);\n        },\n        [\u0026]() { reader-\u003eReadDebugUnwindFeature(); },\n        [\u0026]() { reader-\u003eDataSection(); },\n        [\u0026]() {\n          ThreadTree thread_tree;\n          reader-\u003eLoadBuildIdAndFileFeatures(thread_tree);\n        },\n    });\n    InvokeReader();\n  }\n  reader-\u003eClose();\n}\n"
+            }
+          ]
+        }
+      ],
+      "revId": "e589fe4031bb4ab39e74cbc38897c4af60250eaf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
