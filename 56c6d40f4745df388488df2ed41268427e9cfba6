@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1215a02f_423f2cfa",
+        "filename": "simpleperf/simpleperf_writer_fuzzer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2024-05-24T17:01:53Z",
+      "side": 1,
+      "message": "no need to include dso.cpp? You may include dso.h and use Dso::CreateDso().",
+      "range": {
+        "startLine": 19,
+        "startChar": 9,
+        "endLine": 19,
+        "endChar": 18
+      },
+      "revId": "56c6d40f4745df388488df2ed41268427e9cfba6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
