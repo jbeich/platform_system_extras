@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d9b9911_e592a121",
+        "filename": "simpleperf/utils.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2024-05-24T17:09:23Z",
+      "side": 1,
+      "message": "const std::string\u0026?",
+      "range": {
+        "startLine": 81,
+        "startChar": 22,
+        "endLine": 81,
+        "endChar": 33
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "5dadf993_54809142",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "simpleperf/utils.h",
+              "range": {
+                "startLine": 81,
+                "startChar": 0,
+                "endLine": 82,
+                "endChar": 0
+              },
+              "replacement": "  explicit LineReader(const std::string\u0026 file_path) : ifs_(file_path) {}\n"
+            }
+          ]
+        }
+      ],
+      "revId": "26dc19fb16898191e734feb83afafbb72527b02f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
