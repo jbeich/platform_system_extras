@@ -40,6 +40,30 @@
       ],
       "revId": "26dc19fb16898191e734feb83afafbb72527b02f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb86c0fd_bab7cde1",
+        "filename": "simpleperf/utils.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1087625
+      },
+      "writtenOn": "2024-05-25T15:29:38Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "9d9b9911_e592a121",
+      "range": {
+        "startLine": 81,
+        "startChar": 22,
+        "endLine": 81,
+        "endChar": 33
+      },
+      "revId": "26dc19fb16898191e734feb83afafbb72527b02f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
