@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9fff3e05_bc034c84",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1097570
+      },
+      "writtenOn": "2024-05-28T19:20:30Z",
+      "side": 1,
+      "message": "Sorry for the noise. I upgraded my machine from Ubuntu 20 to 22 and had to make one more change to the script: Thread.isAlive() was deprecated in favor of Thread.is_alive().\n\nI hope I\u0027m allowed to reuse the same bug number for this small additional change.",
+      "revId": "ce29c9f10174c6aaff0205f0a5b74e15cfe051d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
