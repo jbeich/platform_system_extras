@@ -312,7 +312,7 @@ def read_and_parse_trace_data_live(stdout, stderr, pagecache_stats, app_name):
     pagecache_pad = curses.newpad(used_height - 2, used_width)
 
     stdscr.addstr(used_height - 1, 0, 'KEY SHORTCUTS: (r)eset stats, CTRL-c to quit')
-    while (stdout_thread.isAlive() or stderr_thread.isAlive() or
+    while (stdout_thread.is_alive() or stderr_thread.is_alive() or
            not stdout_queue.empty() or not stderr_queue.empty()):
       while not stderr_queue.empty():
         # Pass along errors from adb.
