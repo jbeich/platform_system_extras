@@ -50,6 +50,30 @@
       ],
       "revId": "e589fe4031bb4ab39e74cbc38897c4af60250eaf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "08664fc4_48f1f7df",
+        "filename": "simpleperf/libsimpleperf_report_fuzzer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 2046576
+      },
+      "writtenOn": "2024-05-28T03:52:13Z",
+      "side": 0,
+      "message": "Added TestDumpCmd().",
+      "parentUuid": "35677d82_03896558",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 44,
+        "endChar": 28
+      },
+      "revId": "e589fe4031bb4ab39e74cbc38897c4af60250eaf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
