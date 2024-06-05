@@ -300,7 +300,7 @@ static int GetFilesystemBlockSize(const std::string& path) {
     return getpagesize();
 }
 
-bool EnsurePolicy(const EncryptionPolicy& policy, const std::string& directory) {
+bool EnsurePolicy(const EncryptionPolicy& policy, const std::string& directory, bool verbose) {
     union {
         fscrypt_policy_v1 v1;
         fscrypt_policy_v2 v2;
@@ -380,12 +380,14 @@ bool EnsurePolicy(const EncryptionPolicy& policy, const std::string& directory) 
         return false;
     }
 
-    if (already_encrypted) {
-        LOG(INFO) << "Verified that " << directory << " has the encryption policy "
-                  << PolicyDebugString(policy);
-    } else {
-        LOG(INFO) << "Encryption policy of " << directory << " set to "
-                  << PolicyDebugString(policy);
+    if (verbose) {
+        if (already_encrypted) {
+            LOG(INFO) << "Verified that " << directory << " has the encryption policy "
+                      << PolicyDebugString(policy);
+        } else {
+            LOG(INFO) << "Encryption policy of " << directory << " set to "
+                      << PolicyDebugString(policy);
+        }
     }
     return true;
 }

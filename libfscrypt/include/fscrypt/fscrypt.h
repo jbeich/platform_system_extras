@@ -60,7 +60,8 @@ bool ParseOptions(const std::string& options_string, EncryptionOptions* options)
 bool ParseOptionsForApiLevel(unsigned int first_api_level, const std::string& options_string,
                              EncryptionOptions* options);
 
-bool EnsurePolicy(const EncryptionPolicy& policy, const std::string& directory);
+bool EnsurePolicy(const EncryptionPolicy& policy, const std::string& directory,
+                  bool verbose = true);
 
 inline bool operator==(const EncryptionOptions& lhs, const EncryptionOptions& rhs) {
     return (lhs.version == rhs.version) && (lhs.contents_mode == rhs.contents_mode) &&
