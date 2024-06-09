@@ -31,8 +31,8 @@ use std::time::Duration;
 const PROFCOLLECT_CONFIG_NAMESPACE: &str = "aconfig_flags.profcollect_native_boot";
 const PROFCOLLECT_NODE_ID_PROPERTY: &str = "persist.profcollectd.node_id";
 
-const DEFAULT_BINARY_FILTER: &str =
-    "(^/(system|apex/.+|vendor)/(bin|lib|lib64)/.+)|kernel.kallsyms";
+const DEFAULT_BINARY_FILTER: &str = "(^/(system|apex/.+|vendor)/(bin|lib64)/.+)|\
+    (^/data/app/.+\\.so$)|kernel.kallsyms";
 pub const REPORT_RETENTION_SECS: u64 = 14 * 24 * 60 * 60; // 14 days.
 
 // Static configs that cannot be changed.
@@ -61,7 +61,7 @@ pub struct Config {
     /// An optional filter to limit which binaries to or not to profile.
     pub binary_filter: String,
     /// Maximum size of the trace directory.
-    pub max_trace_limit: u64,
+    pub max_trace_limit_mb: u64,
     /// The kernel release version
     pub kernel_release: String,
 }
@@ -77,10 +77,7 @@ impl Config {
                 600,
             )?),
             binary_filter: get_device_config("binary_filter", DEFAULT_BINARY_FILTER.to_string())?,
-            max_trace_limit: get_device_config(
-                "max_trace_limit",
-                /* 512MB */ 512 * 1024 * 1024,
-            )?,
+            max_trace_limit_mb: get_device_config("max_trace_limit_mb", 768)?,
             kernel_release: get_kernel_release(),
         })
     }
