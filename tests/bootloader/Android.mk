@@ -1,4 +1,3 @@
-# TODO: Remove this file, bootloader_unit_test is still referenced on old branches
 
 LOCAL_PATH := $(call my-dir)
 
@@ -10,4 +9,18 @@ LOCAL_LICENSE_CONDITIONS := notice
 LOCAL_NOTICE_FILE := $(LOCAL_PATH)/../NOTICE
 LOCAL_MODULE_TAGS := tests
 
-include $(BUILD_PHONY_PACKAGE)
+#include $(BUILD_PHONY_PACKAGE)
+$(call record-module-type,PHONY_PACKAGE)
+#ifneq ($(strip $(LOCAL_SRC_FILES)),)
+#$(error LOCAL_SRC_FILES are not allowed for phony packages)
+#endif
+
+LOCAL_MODULE_CLASS := FAKE
+LOCAL_MODULE_SUFFIX := -timestamp
+
+include $(BUILD_SYSTEM)/base_rules.mk
+
+$(LOCAL_BUILT_MODULE): $(LOCAL_ADDITIONAL_DEPENDENCIES)
+	$(hide) echo "Fake: $@"
+	$(hide) mkdir -p $(dir $@)
+	$(hide) touch $@

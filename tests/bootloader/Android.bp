@@ -1,0 +1,19 @@
+
+
+//include $(BUILD_PHONY_PACKAGE)
+// ANDROIDMK TRANSLATION ERROR: unsupported line
+// $(call record-module-type,PHONY_PACKAGE)
+
+//ifneq ($(strip $(LOCAL_SRC_FILES)),)
+//$(error LOCAL_SRC_FILES are not allowed for phony packages)
+//endif
+
+// ANDROIDMK TRANSLATION ERROR: unsupported include
+// include $(BUILD_SYSTEM)/base_rules.mk
+
+// ANDROIDMK TRANSLATION ERROR: unsupported line
+// rule:       $(LOCAL_BUILT_MODULE): $(LOCAL_ADDITIONAL_DEPENDENCIES)
+// $(hide) echo "Fake: $@"
+// $(hide) mkdir -p $(dir $@)
+// $(hide) touch $@
+//
