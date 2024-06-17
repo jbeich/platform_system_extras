@@ -780,3 +780,34 @@ cc_fuzz {
         },
     },
 }
+
+SIMPLEPERF_SCRIPT_FILE_LIST = ["<func:'all-named-files-under' unset>"]
+
+SIMPLEPERF_SCRIPT_DIR_LIST = [
+    "app_api",
+    "doc",
+    "demo",
+    "runtest",
+    "scripts",
+    "testdata",
+]
+
+// ANDROIDMK TRANSLATION ERROR: cannot assign a variable multiple times: "SIMPLEPERF_SCRIPT_FILE_LIST"
+// SIMPLEPERF_SCRIPT_FILE_LIST := $(addprefix -f $(LOCAL_PATH)/,$(SIMPLEPERF_SCRIPT_FILE_LIST))
+
+// ANDROIDMK TRANSLATION ERROR: cannot assign a variable multiple times: "SIMPLEPERF_SCRIPT_DIR_LIST"
+// SIMPLEPERF_SCRIPT_DIR_LIST := $(addprefix -D $(LOCAL_PATH)/,$(SIMPLEPERF_SCRIPT_DIR_LIST))
+
+SIMPLEPERF_SCRIPT_PATH = ["<func:'intermediates-dir-for' unset>" + "/simpleperf_script.zip"]
+
+// ANDROIDMK TRANSLATION ERROR: unsupported line
+// rule:       $(SIMPLEPERF_SCRIPT_PATH) : $(SOONG_ZIP)
+// $(hide) $(SOONG_ZIP) -d -o $@ -C system/extras/simpleperf $(SIMPLEPERF_SCRIPT_FILE_LIST)
+//     $(SIMPLEPERF_SCRIPT_DIR_LIST)
+//
+
+// ANDROIDMK TRANSLATION ERROR: unsupported line
+// $(call declare-1p-target,$(SIMPLEPERF_SCRIPT_PATH),system/extras)
+
+// ANDROIDMK TRANSLATION ERROR: unsupported line
+// $(call dist-for-goals,simpleperf,$(SIMPLEPERF_SCRIPT_PATH):simpleperf/simpleperf_script.zip)
