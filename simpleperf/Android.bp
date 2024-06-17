@@ -780,3 +780,27 @@ cc_fuzz {
         },
     },
 }
+
+genrule {
+    name: "simpleperf_script.zip",
+    tools: [
+        "soong_zip",
+    ],
+    srcs: [
+        "**/*.proto",
+        "app_api/**/*",
+        "doc/**/*",
+        "demo/**/*",
+        "runtest/**/*",
+        "scripts/**/*",
+        "testdata/**/*",
+    ],
+    cmd: "$(location soong_zip) -o $(out) -C system/extras/simpleperf " +
+        "-D system/extras/simpleperf ",
+    out: [
+        "simpleperf/simpleperf_script.zip",
+    ],
+    dist: {
+        targets: ["simpleperf"],
+    },
+}
