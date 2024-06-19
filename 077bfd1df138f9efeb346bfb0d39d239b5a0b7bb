@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19aefb0c_ab7b1c6f",
+        "filename": "simpleperf/Android.bp",
+        "patchSetId": 4
+      },
+      "lineNbr": 798,
+      "author": {
+        "id": 1307893
+      },
+      "writtenOn": "2024-06-19T06:59:18Z",
+      "side": 1,
+      "message": "Is there a missing section? \n\"`+ -f $(in)`\"",
+      "range": {
+        "startLine": 798,
+        "startChar": 72,
+        "endLine": 798,
+        "endChar": 73
+      },
+      "revId": "077bfd1df138f9efeb346bfb0d39d239b5a0b7bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
