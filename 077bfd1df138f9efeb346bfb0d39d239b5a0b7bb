@@ -92,6 +92,30 @@
       },
       "revId": "077bfd1df138f9efeb346bfb0d39d239b5a0b7bb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d35efb8f_f6940493",
+        "filename": "simpleperf/Android.bp",
+        "patchSetId": 4
+      },
+      "lineNbr": 798,
+      "author": {
+        "id": 1307893
+      },
+      "writtenOn": "2024-06-19T08:12:38Z",
+      "side": 1,
+      "message": "Oh, I know the reason now.\nThe original command was:\n```\nout/host/linux-x86/bin/soong_zip -d \n-o out/host/linux-x86/obj/PACKAGING/simplerperf_script_intermediates/simpleperf_script.zip \n-C system/extras/simpleperf \n-f system/extras/simpleperf/branch_list.proto \n-f system/extras/simpleperf/cmd_report_sample.proto \n-f system/extras/simpleperf/record_file.proto  \n-D system/extras/simpleperf/app_api \n-D system/extras/simpleperf/doc \n-D system/extras/simpleperf/demo \n-D system/extras/simpleperf/runtest \n-D system/extras/simpleperf/scripts \n-D system/extras/simpleperf/testdata\n```\nThe `-f` options were unnecessary because\n```\n-f system/extras/simpleperf/branch_list.proto \n-f system/extras/simpleperf/cmd_report_sample.proto \n-f system/extras/simpleperf/record_file.proto  \n```\nare all under `system/extras/simpleperf/`.\n\nThen, `genrule` would only create the filtered environment in the `sandbox` with the specified `srcs`.\n\nSo, you only need `-C system/extras/simpleperf -D system/extras/simpleperf`.",
+      "parentUuid": "19aefb0c_ab7b1c6f",
+      "range": {
+        "startLine": 798,
+        "startChar": 72,
+        "endLine": 798,
+        "endChar": 73
+      },
+      "revId": "077bfd1df138f9efeb346bfb0d39d239b5a0b7bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
