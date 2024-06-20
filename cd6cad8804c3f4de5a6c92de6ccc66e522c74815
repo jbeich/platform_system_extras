@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c980a100_5f1cb177",
+        "filename": "tests/kernel.config/Android.bp",
+        "patchSetId": 10
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1308036
+      },
+      "writtenOn": "2024-06-20T08:44:01Z",
+      "side": 1,
+      "message": "I\u0027ve change to use a cc_defaults. PTAL.\nThanks.",
+      "parentUuid": "cfc62e2f_0cae88b6",
+      "range": {
+        "startLine": 51,
+        "startChar": 4,
+        "endLine": 51,
+        "endChar": 42
+      },
+      "revId": "cd6cad8804c3f4de5a6c92de6ccc66e522c74815",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d69069d0_943ce0eb",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-06-20T06:15:38Z",
       "side": 1,
       "message": "ditto",
+      "range": {
+        "startLine": 58,
+        "startChar": 12,
+        "endLine": 58,
+        "endChar": 41
+      },
+      "revId": "cd6cad8804c3f4de5a6c92de6ccc66e522c74815",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aac62d94_9903cf9a",
+        "filename": "tests/kernel.config/Android.bp",
+        "patchSetId": 10
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1308036
+      },
+      "writtenOn": "2024-06-20T08:44:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d69069d0_943ce0eb",
       "range": {
         "startLine": 58,
         "startChar": 12,
