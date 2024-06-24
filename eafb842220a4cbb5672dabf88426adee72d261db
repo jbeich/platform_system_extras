@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "341af01a_eca0c3b8",
+        "filename": "tests/ext4/Android.bp",
+        "patchSetId": 13
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1308036
+      },
+      "writtenOn": "2024-06-24T05:54:38Z",
+      "side": 1,
+      "message": "Removed relative_install_path in this bp, and added 2 CL to change the using path. Thanks Wei.",
+      "parentUuid": "3125523f_c8448d31",
+      "revId": "eafb842220a4cbb5672dabf88426adee72d261db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "622f3c65_4695091e",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-06-20T22:19:09Z",
       "side": 1,
       "message": "Android.mk build output:\n/data/local/tmp/pagingtest \n/data/local/tmp/pagingtest64\n\nAndroid.bp build output:\n/data/nativetest/local/tmp/pagingtest/pagingtest\n/data/nativetest64/local/tmp/pagingtest/pagingtest64\n\nIt doesn\u0027t look like the test cases depend on the directory structure in source code, so keeping the relative_install_path doesn\u0027t looks necessary.",
+      "revId": "eafb842220a4cbb5672dabf88426adee72d261db",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea3e2f66_948e198b",
+        "filename": "tests/pagingtest/Android.bp",
+        "patchSetId": 13
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1308036
+      },
+      "writtenOn": "2024-06-24T05:54:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "622f3c65_4695091e",
       "revId": "eafb842220a4cbb5672dabf88426adee72d261db",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
