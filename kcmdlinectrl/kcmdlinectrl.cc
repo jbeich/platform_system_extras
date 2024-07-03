@@ -34,6 +34,7 @@ void PrintUsage(const char* progname) {
 }
 
 int UpdateProps() {
+  int retry = 0;
   misc_kcmdline_message m = {.version = MISC_KCMDLINE_MESSAGE_VERSION,
                              .magic = MISC_KCMDLINE_MAGIC_HEADER};
   std::string err;
@@ -52,7 +53,13 @@ int UpdateProps() {
   bool use_rust_binder = (m.kcmdline_flags & MISC_KCMDLINE_BINDER_RUST) != 0;
   android::base::SetProperty("kcmdline.binder", use_rust_binder ? "rust" : "c");
 
-  android::base::SetProperty("kcmdline.loaded", "1");
+  while (android::base::SetProperty("kcmdline.loaded", "1")==0 && retry < 5) {
+    usleep(10000);
+    retry++;
+  }
+  if (retry >= 1)
+    LOG(INFO) << "kcmdline loaded failed: " << retry << " times";
+
   return 0;
 }
 
