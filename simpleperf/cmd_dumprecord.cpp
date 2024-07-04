@@ -593,6 +593,12 @@ bool DumpRecordCommand::DumpFeatureSection() {
           }
         }
       }
+    } else if (feature == FEAT_INIT_MAP) {
+      PrintIndented(1, "init_map:\n");
+      auto callback = [&](std::unique_ptr<Record> r) { return ProcessRecord(r.get()); };
+      if (!record_file_reader_->ReadInitMapFeature(callback)) {
+        return false;
+      }
     }
   }
   return true;

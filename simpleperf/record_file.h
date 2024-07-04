@@ -98,6 +98,7 @@ class RecordFileWriter {
   bool WriteFileFeature(const FileFeature& file);
   bool WriteMetaInfoFeature(const std::unordered_map<std::string, std::string>& info_map);
   bool WriteDebugUnwindFeature(const DebugUnwindFeature& debug_unwind);
+  bool WriteInitMapFeature(const char* data, size_t size);
   bool WriteFeature(int feature, const char* data, size_t size);
   bool EndWriteFeatures();
 
@@ -186,6 +187,7 @@ class RecordFileReader {
   const std::unordered_map<std::string, std::string>& GetMetaInfoFeature() { return meta_info_; }
   std::string GetClockId();
   std::optional<DebugUnwindFeature> ReadDebugUnwindFeature();
+  bool ReadInitMapFeature(const std::function<bool(std::unique_ptr<Record>)>& callback);
 
   bool LoadBuildIdAndFileFeatures(ThreadTree& thread_tree);
 
@@ -213,7 +215,7 @@ class RecordFileReader {
   bool ReadFileV2Feature(uint64_t& read_pos, uint64_t max_size, FileFeature& file);
   bool ReadMetaInfoFeature();
   void UseRecordingEnvironment();
-  std::unique_ptr<Record> ReadRecord();
+  std::unique_ptr<Record> ReadRecord(uint64_t& read_record_size);
   bool Read(void* buf, size_t len);
   void ProcessEventIdRecord(const EventIdRecord& r);
   bool BuildAuxDataLocation();

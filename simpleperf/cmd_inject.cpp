@@ -169,6 +169,11 @@ class PerfDataReader {
     if (!reader_->LoadBuildIdAndFileFeatures(thread_tree_)) {
       return false;
     }
+    if (reader_->HasFeature(PerfFileFormat::FEAT_INIT_MAP)) {
+      if (!reader_->ReadInitMapFeature([this](auto r) { return ProcessRecord(*r); })) {
+        return false;
+      }
+    }
     if (!reader_->ReadDataSection([this](auto r) { return ProcessRecord(*r); })) {
       return false;
     }
