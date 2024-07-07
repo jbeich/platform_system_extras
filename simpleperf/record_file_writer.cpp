@@ -435,6 +435,10 @@ bool RecordFileWriter::WriteDebugUnwindFeature(const DebugUnwindFeature& debug_u
   return WriteFeature(FEAT_DEBUG_UNWIND, s.data(), s.size());
 }
 
+bool RecordFileWriter::WriteInitMapFeature(const char* data, size_t size) {
+  return WriteFeatureBegin(FEAT_INIT_MAP) && Write(data, size) && WriteFeatureEnd(FEAT_INIT_MAP);
+}
+
 bool RecordFileWriter::WriteFeature(int feature, const char* data, size_t size) {
   return WriteFeatureBegin(feature) && Write(data, size) && WriteFeatureEnd(feature);
 }
@@ -446,6 +450,16 @@ bool RecordFileWriter::WriteFeatureBegin(int feature) {
     auto& sec = features_[feature];
     if (!GetFilePos(&sec.offset)) {
       return false;
+    }
+    // Ensure each feature section starts at a 8-byte aligned location.
+    // This is not needed for the current RecordFileReader implementation, but is helpful if we
+    // switch to a mapped file reader. So it's nice to have. But it's nice to have.
+    if (sec.offset & 7) {
+      std::vector<char> zero_data(8 - (sec.offset & 7), '\0');
+      if (!Write(zero_data.data(), zero_data.size())) {
+        return false;
+      }
+      sec.offset += zero_data.size();
     }
     sec.size = 0;
   }

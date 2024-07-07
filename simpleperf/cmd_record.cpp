@@ -408,7 +408,6 @@ RECORD_FILTER_OPTION_HELP_MSG_FOR_RECORDING
 
   // post recording functions
   std::unique_ptr<RecordFileReader> MoveRecordFile(const std::string& old_filename);
-  bool MergeMapRecords();
   bool PostUnwindRecords();
   bool JoinCallChains();
   bool DumpAdditionalFeatures(const std::vector<std::string>& args);
@@ -418,6 +417,7 @@ RECORD_FILTER_OPTION_HELP_MSG_FOR_RECORDING
   bool DumpDebugUnwindFeature(const std::unordered_set<Dso*>& dso_set);
   void CollectHitFileInfo(const SampleRecord& r, std::unordered_set<Dso*>* dso_set);
   bool DumpETMBranchListFeature();
+  bool DumpInitMapFeature();
 
   bool system_wide_collection_;
   uint64_t branch_sampling_;
@@ -857,26 +857,19 @@ bool RecordCommand::PostProcessRecording(const std::vector<std::string>& args) {
     return false;
   }
 
-  // 2. Merge map records dumped while recording by map record thread.
-  if (map_record_thread_) {
-    if (!map_record_thread_->Join() || !MergeMapRecords()) {
-      return false;
-    }
-  }
-
-  // 3. Post unwind dwarf callchain.
+  // 2. Post unwind dwarf callchain.
   if (unwind_dwarf_callchain_ && post_unwind_) {
     if (!PostUnwindRecords()) {
       return false;
     }
   }
 
-  // 4. Optionally join Callchains.
+  // 3. Optionally join Callchains.
   if (callchain_joiner_) {
     JoinCallChains();
   }
 
-  // 5. Dump additional features, and close record file.
+  // 4. Dump additional features, and close record file.
   if (!DumpAdditionalFeatures(args)) {
     return false;
   }
@@ -888,7 +881,7 @@ bool RecordCommand::PostProcessRecording(const std::vector<std::string>& args) {
   }
   time_stat_.post_process_time = GetSystemClock();
 
-  // 6. Show brief record result.
+  // 5. Show brief record result.
   auto record_stat = event_selection_set_.GetRecordStat();
   if (event_selection_set_.HasAuxTrace()) {
     LOG(INFO) << "Aux data traced: " << ReadableCount(record_stat.aux_data_size);
@@ -1890,42 +1883,6 @@ std::unique_ptr<RecordFileReader> RecordCommand::MoveRecordFile(const std::strin
   return reader;
 }
 
-bool RecordCommand::MergeMapRecords() {
-  // 1. Move records from record_filename_ to a temporary file.
-  auto tmp_file = ScopedTempFiles::CreateTempFile();
-  auto reader = MoveRecordFile(tmp_file->path);
-  if (!reader) {
-    return false;
-  }
-
-  // 2. Copy map records from map record thread.
-  auto callback = [this](Record* r) {
-    UpdateRecord(r);
-    if (ShouldOmitRecord(r)) {
-      return true;
-    }
-    return record_file_writer_->WriteRecord(*r);
-  };
-  if (!map_record_thread_->ReadMapRecords(callback)) {
-    return false;
-  }
-
-  // 3. Copy data section from the old recording file.
-  std::vector<char> buf(64 * 1024);
-  uint64_t offset = reader->FileHeader().data.offset;
-  uint64_t left_size = reader->FileHeader().data.size;
-  while (left_size > 0) {
-    size_t nread = std::min<size_t>(left_size, buf.size());
-    if (!reader->ReadAtOffset(offset, buf.data(), nread) ||
-        !record_file_writer_->WriteData(buf.data(), nread)) {
-      return false;
-    }
-    offset += nread;
-    left_size -= nread;
-  }
-  return true;
-}
-
 bool RecordCommand::PostUnwindRecords() {
   auto tmp_file = ScopedTempFiles::CreateTempFile();
   auto reader = MoveRecordFile(tmp_file->path);
@@ -2055,6 +2012,9 @@ bool RecordCommand::DumpAdditionalFeatures(const std::vector<std::string>& args)
   if (etm_branch_list_generator_) {
     feature_count++;
   }
+  if (map_record_thread_) {
+    feature_count++;
+  }
   if (!record_file_writer_->BeginWriteFeatures(feature_count)) {
     return false;
   }
@@ -2098,6 +2058,9 @@ bool RecordCommand::DumpAdditionalFeatures(const std::vector<std::string>& args)
     return false;
   }
   if (etm_branch_list_generator_ && !DumpETMBranchListFeature()) {
+    return false;
+  }
+  if (map_record_thread_ && !DumpInitMapFeature()) {
     return false;
   }
 
@@ -2254,6 +2217,16 @@ bool RecordCommand::DumpETMBranchListFeature() {
   }
   return record_file_writer_->WriteFeature(PerfFileFormat::FEAT_ETM_BRANCH_LIST, s.data(),
                                            s.size());
+}
+
+bool RecordCommand::DumpInitMapFeature() {
+  if (!map_record_thread_->Join()) {
+    return false;
+  }
+  auto callback = [&](const char* data, size_t size) {
+    return record_file_writer_->WriteFeature(PerfFileFormat::FEAT_INIT_MAP, data, size);
+  };
+  return map_record_thread_->ReadMapRecordData(callback);
 }
 
 }  // namespace

@@ -61,6 +61,7 @@ static const std::map<int, std::string> feature_name_map = {
     {FEAT_DEBUG_UNWIND_FILE, "debug_unwind_file"},
     {FEAT_FILE2, "file2"},
     {FEAT_ETM_BRANCH_LIST, "etm_branch_list"},
+    {FEAT_INIT_MAP, "init_map"},
 };
 
 std::string GetFeatureName(int feature_id) {
@@ -287,7 +288,7 @@ bool RecordFileReader::ReadRecord(std::unique_ptr<Record>& record) {
   }
   record = nullptr;
   if (read_record_size_ < header_.data.size) {
-    record = ReadRecord();
+    record = ReadRecord(read_record_size_);
     if (record == nullptr) {
       return false;
     }
@@ -298,7 +299,7 @@ bool RecordFileReader::ReadRecord(std::unique_ptr<Record>& record) {
   return true;
 }
 
-std::unique_ptr<Record> RecordFileReader::ReadRecord() {
+std::unique_ptr<Record> RecordFileReader::ReadRecord(uint64_t& read_record_size) {
   char header_buf[Record::header_size()];
   RecordHeader header;
   if (!Read(header_buf, Record::header_size()) || !header.Parse(header_buf)) {
@@ -315,7 +316,7 @@ std::unique_ptr<Record> RecordFileReader::ReadRecord() {
       if (!Read(&buf[old_size], add_size)) {
         return nullptr;
       }
-      read_record_size_ += header.size;
+      read_record_size += header.size;
       if (!Read(header_buf, Record::header_size()) || !header.Parse(header_buf)) {
         return nullptr;
       }
@@ -324,7 +325,7 @@ std::unique_ptr<Record> RecordFileReader::ReadRecord() {
       LOG(ERROR) << "SPLIT records are not followed by a SPLIT_END record.";
       return nullptr;
     }
-    read_record_size_ += header.size;
+    read_record_size += header.size;
     if (buf.size() < Record::header_size() || !header.Parse(buf.data()) ||
         header.size != buf.size()) {
       LOG(ERROR) << "invalid record merged from SPLIT records";
@@ -340,7 +341,7 @@ std::unique_ptr<Record> RecordFileReader::ReadRecord() {
         return nullptr;
       }
     }
-    read_record_size_ += header.size;
+    read_record_size += header.size;
   }
 
   const perf_event_attr* attr = &event_attrs_[0].attr;
@@ -374,8 +375,8 @@ std::unique_ptr<Record> RecordFileReader::ReadRecord() {
   r->OwnBinary();
   if (r->type() == PERF_RECORD_AUXTRACE) {
     auto auxtrace = static_cast<AuxTraceRecord*>(r.get());
-    auxtrace->location.file_offset = header_.data.offset + read_record_size_;
-    read_record_size_ += auxtrace->data->aux_size;
+    auxtrace->location.file_offset = header_.data.offset + read_record_size;
+    read_record_size += auxtrace->data->aux_size;
     if (fseek(record_fp_, auxtrace->data->aux_size, SEEK_CUR) != 0) {
       PLOG(ERROR) << "fseek() failed";
       return nullptr;
@@ -733,6 +734,30 @@ std::optional<DebugUnwindFeature> RecordFileReader::ReadDebugUnwindFeature() {
     return debug_unwind;
   }
   return std::nullopt;
+}
+
+bool RecordFileReader::ReadInitMapFeature(
+    const std::function<bool(std::unique_ptr<Record>)>& callback) {
+  auto it = feature_section_descriptors_.find(FEAT_INIT_MAP);
+  if (it == feature_section_descriptors_.end()) {
+    return false;
+  }
+  if (fseek(record_fp_, it->second.offset, SEEK_SET) != 0) {
+    PLOG(ERROR) << "fseek() failed";
+    return false;
+  }
+  uint64_t section_size = it->second.size;
+  uint64_t read_record_size = 0;
+  while (read_record_size < section_size) {
+    auto r = ReadRecord(read_record_size);
+    if (!r) {
+      return false;
+    }
+    if (!callback(std::move(r))) {
+      return false;
+    }
+  }
+  return true;
 }
 
 bool RecordFileReader::LoadBuildIdAndFileFeatures(ThreadTree& thread_tree) {
