@@ -139,12 +139,8 @@ std::optional<size_t> GetDefaultRecordBufferSize(bool system_wide_recording) {
   if (system_wide_recording) {
     return kSystemWideRecordBufferSize;
   }
-  auto device_memory = GetMemorySize();
-  if (!device_memory.has_value()) {
-    return std::nullopt;
-  }
-  return device_memory.value() <= kLowMemoryLimit ? kLowMemoryRecordBufferSize
-                                                  : kHighMemoryRecordBufferSize;
+  return GetMemorySize() <= kLowMemoryLimit ? kLowMemoryRecordBufferSize
+                                            : kHighMemoryRecordBufferSize;
 }
 
 class RecordCommand : public Command {
