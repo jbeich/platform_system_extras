@@ -43,6 +43,57 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "14aaa465_c4709306",
+        "filename": "torq/command.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-07-11T22:52:17Z",
+      "side": 1,
+      "message": "Can we raise `NotImplementedError` if these are abstract.",
+      "range": {
+        "startLine": 13,
+        "startChar": 4,
+        "endLine": 13,
+        "endChar": 8
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "f0cdb506_9e7318f7",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/command.py",
+              "range": {
+                "startLine": 13,
+                "startChar": 0,
+                "endLine": 14,
+                "endChar": 0
+              },
+              "replacement": "    raise NotImplementedError\n"
+            },
+            {
+              "path": "torq/command.py",
+              "range": {
+                "startLine": 16,
+                "startChar": 0,
+                "endLine": 17,
+                "endChar": 0
+              },
+              "replacement": "    raise NotImplementedError\n"
+            }
+          ]
+        }
+      ],
+      "revId": "c4c4bd437eaf6aab113a4c42ce260979e867db8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9ae6536a_f816352a",
         "filename": "torq/command_executor.py",
         "patchSetId": 1
