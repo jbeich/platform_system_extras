@@ -1,0 +1,536 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d23e7dde_f2ea9277",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-07-11T22:48:46Z",
+      "side": 1,
+      "message": "Looks good so far, just some minor linting + formatting work.",
+      "revId": "c4c4bd437eaf6aab113a4c42ce260979e867db8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95577643_6f5ba522",
+        "filename": "torq/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-07-11T22:48:46Z",
+      "side": 1,
+      "message": "Nit: Change to 2024",
+      "range": {
+        "startLine": 1,
+        "startChar": 17,
+        "endLine": 1,
+        "endChar": 21
+      },
+      "revId": "c4c4bd437eaf6aab113a4c42ce260979e867db8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ae6536a_f816352a",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-07-11T22:48:46Z",
+      "side": 1,
+      "message": "There\u0027s some repetitive code here. Could we create a parent CommandExecutor class?\n\nAlternatively, are we planning on adding different functionality for each CommandExecutor? It seems like we could just use a generic CommandExecutor to validate and execute.",
+      "range": {
+        "startLine": 1,
+        "startChar": 6,
+        "endLine": 1,
+        "endChar": 29
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "a9e6ddac_90fc6a06",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/command_executor.py",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 2,
+                "endChar": 0
+              },
+              "replacement": "class CommandExecutor:\n"
+            },
+            {
+              "path": "torq/command_executor.py",
+              "range": {
+                "startLine": 5,
+                "startChar": 0,
+                "endLine": 7,
+                "endChar": 0
+              },
+              "replacement": "  def execute(self, command):\n    error \u003d command.validate()\n"
+            },
+            {
+              "path": "torq/command_executor.py",
+              "range": {
+                "startLine": 9,
+                "startChar": 0,
+                "endLine": 34,
+                "endChar": 0
+              },
+              "replacement": "    print(\"executing command\")\n"
+            }
+          ]
+        }
+      ],
+      "revId": "c4c4bd437eaf6aab113a4c42ce260979e867db8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ac1fda0_c293676a",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-07-11T22:48:46Z",
+      "side": 1,
+      "message": "For function parameters and local variables, let\u0027s just stick with snake_case per https://peps.python.org/pep-0008/#function-and-variable-names",
+      "range": {
+        "startLine": 18,
+        "startChar": 12,
+        "endLine": 18,
+        "endChar": 21
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "595c27af_2bc84a6d",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/command_executor.py",
+              "range": {
+                "startLine": 5,
+                "startChar": 0,
+                "endLine": 7,
+                "endChar": 0
+              },
+              "replacement": "  def execute(self, profiler_command):\n    error \u003d profiler_command.validate()\n"
+            },
+            {
+              "path": "torq/command_executor.py",
+              "range": {
+                "startLine": 17,
+                "startChar": 0,
+                "endLine": 19,
+                "endChar": 0
+              },
+              "replacement": "  def execute(self, hw_command):\n    error \u003d hw_command.validate()\n"
+            },
+            {
+              "path": "torq/command_executor.py",
+              "range": {
+                "startLine": 29,
+                "startChar": 0,
+                "endLine": 31,
+                "endChar": 0
+              },
+              "replacement": "  def execute(self, config_command):\n    error \u003d config_command.validate()\n"
+            }
+          ]
+        }
+      ],
+      "revId": "c4c4bd437eaf6aab113a4c42ce260979e867db8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2500099_3ae6bcef",
+        "filename": "torq/tests/torq_unit_test.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-07-11T22:48:46Z",
+      "side": 1,
+      "message": "Please create a bug for this TODO.",
+      "range": {
+        "startLine": 7,
+        "startChar": 4,
+        "endLine": 7,
+        "endChar": 27
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "a8f63ebe_18cb929b",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/tests/torq_unit_test.py",
+              "range": {
+                "startLine": 7,
+                "startChar": 0,
+                "endLine": 8,
+                "endChar": 0
+              },
+              "replacement": "    # TODO(b/111311111): Implement tests\n"
+            }
+          ]
+        }
+      ],
+      "revId": "c4c4bd437eaf6aab113a4c42ce260979e867db8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a93eed8d_977b62d7",
+        "filename": "torq/torq.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-07-11T22:48:46Z",
+      "side": 1,
+      "message": "Don\u0027t need this extraneous comment.",
+      "range": {
+        "startLine": 7,
+        "startChar": 2,
+        "endLine": 7,
+        "endChar": 24
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "01531644_3ddb6cfb",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 7,
+                "startChar": 0,
+                "endLine": 8,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "c4c4bd437eaf6aab113a4c42ce260979e867db8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b46ea3d_c33811ba",
+        "filename": "torq/torq.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-07-11T22:48:46Z",
+      "side": 1,
+      "message": "Nit: Reduce the white space between methods.",
+      "range": {
+        "startLine": 118,
+        "startChar": 0,
+        "endLine": 118,
+        "endChar": 0
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "935f44d4_984e7a34",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 120,
+                "startChar": 0,
+                "endLine": 121,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "c4c4bd437eaf6aab113a4c42ce260979e867db8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d80c015_fb8ff459",
+        "filename": "torq/torq.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-07-11T22:48:46Z",
+      "side": 1,
+      "message": "Nit: Remove extraneous comments.",
+      "range": {
+        "startLine": 122,
+        "startChar": 2,
+        "endLine": 122,
+        "endChar": 11
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "07a4d347_d540e449",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 122,
+                "startChar": 0,
+                "endLine": 124,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 191,
+                "startChar": 0,
+                "endLine": 193,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 212,
+                "startChar": 0,
+                "endLine": 214,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 289,
+                "startChar": 0,
+                "endLine": 291,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "c4c4bd437eaf6aab113a4c42ce260979e867db8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6cb7a5c_cb599efb",
+        "filename": "torq/torq.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-07-11T22:48:46Z",
+      "side": 1,
+      "message": "Can you extract this into a variable like `DEFAULT_BETWEEN_DUR_MS`.",
+      "range": {
+        "startLine": 216,
+        "startChar": 28,
+        "endLine": 216,
+        "endChar": 33
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "7a63ee46_ca2d38db",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 5,
+                "startChar": 0,
+                "endLine": 5,
+                "endChar": 0
+              },
+              "replacement": "DEFAULT_BETWEEN_DUR_MS \u003d 10000\n\n"
+            },
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 35,
+                "startChar": 0,
+                "endLine": 36,
+                "endChar": 0
+              },
+              "replacement": "  parser.add_argument(\u0027--between-dur-ms\u0027, type\u003dint,\n                      default\u003dDEFAULT_BETWEEN_DUR_MS,\n"
+            },
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 133,
+                "startChar": 0,
+                "endLine": 134,
+                "endChar": 0
+              },
+              "replacement": "                                       args.between_dur_ms !\u003d\n                                       DEFAULT_BETWEEN_DUR_MS or\n"
+            },
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 216,
+                "startChar": 0,
+                "endLine": 217,
+                "endChar": 0
+              },
+              "replacement": "  if args.between_dur_ms !\u003d DEFAULT_BETWEEN_DUR_MS and args.runs \u003d\u003d 1:\n"
+            }
+          ]
+        }
+      ],
+      "revId": "c4c4bd437eaf6aab113a4c42ce260979e867db8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9cfcf2b8_d123a254",
+        "filename": "torq/torq.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-07-11T22:48:46Z",
+      "side": 1,
+      "message": "Also what happens if we exceed the memory of the system?",
+      "range": {
+        "startLine": 309,
+        "startChar": 4,
+        "endLine": 309,
+        "endChar": 29
+      },
+      "revId": "c4c4bd437eaf6aab113a4c42ce260979e867db8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43b1dfb5_fc141666",
+        "filename": "torq/torq.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-07-11T22:48:46Z",
+      "side": 1,
+      "message": "Is it possible for this value to be negative. If so, let\u0027s use `\u003c 1`.",
+      "range": {
+        "startLine": 309,
+        "startChar": 4,
+        "endLine": 309,
+        "endChar": 29
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "b258dc31_c32601ca",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 309,
+                "startChar": 0,
+                "endLine": 310,
+                "endChar": 0
+              },
+              "replacement": "    if args.memory[0] \u003c \"1\":\n"
+            }
+          ]
+        }
+      ],
+      "revId": "c4c4bd437eaf6aab113a4c42ce260979e867db8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39b663b1_e6d47cfb",
+        "filename": "torq/torq.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-07-11T22:48:46Z",
+      "side": 1,
+      "message": "Nit: Don\u0027t need these extraneous comments.",
+      "range": {
+        "startLine": 377,
+        "startChar": 2,
+        "endLine": 377,
+        "endChar": 25
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "6bf7822a_2c1635fd",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 377,
+                "startChar": 0,
+                "endLine": 378,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "c4c4bd437eaf6aab113a4c42ce260979e867db8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
