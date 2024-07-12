@@ -1,0 +1,584 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "448cf7f3_4eb5b94d",
+        "filename": "torq/torq.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-12T22:08:47Z",
+      "side": 1,
+      "message": "We had agreed that we should have a default value for duration. Let\u0027s make it 10000 ms.",
+      "range": {
+        "startLine": 18,
+        "startChar": 2,
+        "endLine": 20,
+        "endChar": 69
+      },
+      "revId": "4ac7bc6fcc545c886e1fa36714a0de8737ebc035",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90529b5f_faf40817",
+        "filename": "torq/torq.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-12T22:08:47Z",
+      "side": 1,
+      "message": "So simpleperf-events could be many different events. Adding choices in this case would be inconvenient because we would need to add all of the simpleperf events into this list. \n\nFor this case, we should allow users to pass a string and similar to what we will do with the --exclude-ftrace-event and --include-ftrace-event, we will check if the value is valid in the command executor phase.",
+      "range": {
+        "startLine": 27,
+        "startChar": 22,
+        "endLine": 27,
+        "endChar": 60
+      },
+      "revId": "4ac7bc6fcc545c886e1fa36714a0de8737ebc035",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91da69cb_426d2b12",
+        "filename": "torq/torq.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-12T22:08:47Z",
+      "side": 1,
+      "message": "Type should be boolean here. I think that would avoid the need of using choices.",
+      "range": {
+        "startLine": 35,
+        "startChar": 1,
+        "endLine": 37,
+        "endChar": 61
+      },
+      "revId": "4ac7bc6fcc545c886e1fa36714a0de8737ebc035",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "981e894f_a586c543",
+        "filename": "torq/torq.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-12T22:08:47Z",
+      "side": 1,
+      "message": "Let\u0027s use this suggestion:\n\n```\nRemove the \u0027hw\u0027 or \u0027config\u0027 subcommand to profile the device instead.\n```",
+      "range": {
+        "startLine": 126,
+        "startChar": 8,
+        "endLine": 126,
+        "endChar": 77
+      },
+      "revId": "4ac7bc6fcc545c886e1fa36714a0de8737ebc035",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a33b5a4f_4a41cebf",
+        "filename": "torq/torq.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-12T22:08:47Z",
+      "side": 1,
+      "message": "This comment is not needed since the validation error message is already documenting this case.",
+      "range": {
+        "startLine": 133,
+        "startChar": 2,
+        "endLine": 134,
+        "endChar": 51
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "9da9769c_1cec3ad5",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 133,
+                "startChar": 0,
+                "endLine": 135,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "4ac7bc6fcc545c886e1fa36714a0de8737ebc035",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67da10c5_d6b78066",
+        "filename": "torq/torq.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-12T22:08:47Z",
+      "side": 1,
+      "message": "So lets avoid the use of magic numbers (https://go/tott/538, https://en.wikipedia.org/wiki/Magic_number_(programming)).\n\nLet\u0027s define a `MIN_DURATION_MS` constant and use it here.",
+      "range": {
+        "startLine": 135,
+        "startChar": 47,
+        "endLine": 135,
+        "endChar": 51
+      },
+      "revId": "4ac7bc6fcc545c886e1fa36714a0de8737ebc035",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "461b3b25_86cfd637",
+        "filename": "torq/torq.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-12T22:08:47Z",
+      "side": 1,
+      "message": "Remove this comment. We don\u0027t comment things that are quite explicit by reading the code. Comments should be left for cases where it is hard to directly inferr the logic from the code.",
+      "range": {
+        "startLine": 136,
+        "startChar": 4,
+        "endLine": 136,
+        "endChar": 45
+      },
+      "revId": "4ac7bc6fcc545c886e1fa36714a0de8737ebc035",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84d591af_162cc67a",
+        "filename": "torq/torq.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-12T22:08:47Z",
+      "side": 1,
+      "message": "`to a value smaller than %d`.\n\nUse string formatting to get the value from `MIN_DURATION_MS`.",
+      "range": {
+        "startLine": 138,
+        "startChar": 57,
+        "endLine": 138,
+        "endChar": 78
+      },
+      "revId": "4ac7bc6fcc545c886e1fa36714a0de8737ebc035",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79e69372_70cbb357",
+        "filename": "torq/torq.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-12T22:08:47Z",
+      "side": 1,
+      "message": "So lets do all the validation checks first and then lets add the required defaults. So all check that return an error should go first and then add the checks that add the default values.",
+      "range": {
+        "startLine": 128,
+        "startChar": 2,
+        "endLine": 139,
+        "endChar": 74
+      },
+      "revId": "4ac7bc6fcc545c886e1fa36714a0de8737ebc035",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d74724b_b5f4440f",
+        "filename": "torq/torq.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-12T22:08:47Z",
+      "side": 1,
+      "message": "Remove the `For instance` from all the suggestions. We should avoid copy/pasting code since it is easy add errors.",
+      "range": {
+        "startLine": 146,
+        "startChar": 10,
+        "endLine": 146,
+        "endChar": 23
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "31d6dfe1_798a582c",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 146,
+                "startChar": 0,
+                "endLine": 148,
+                "endChar": 0
+              },
+              "replacement": "        \"Set --event app-startup to perform a test for an app-startup.\")\n"
+            }
+          ]
+        }
+      ],
+      "revId": "4ac7bc6fcc545c886e1fa36714a0de8737ebc035",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8390048e_33c8d637",
+        "filename": "torq/torq.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-12T22:08:47Z",
+      "side": 1,
+      "message": "We can use the following suggestion:\n\n`To profile an app startup run: torq --event app-startup --app \u003cpackage-name\u003e`",
+      "range": {
+        "startLine": 146,
+        "startChar": 24,
+        "endLine": 147,
+        "endChar": 23
+      },
+      "revId": "4ac7bc6fcc545c886e1fa36714a0de8737ebc035",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d19fddd9_ba81042d",
+        "filename": "torq/torq.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-12T22:08:47Z",
+      "side": 1,
+      "message": "Don\u0027t need the comment. Please go through the other comments and verify if they are necessary or if they can be easily understood from the code or the error message.",
+      "range": {
+        "startLine": 149,
+        "startChar": 1,
+        "endLine": 149,
+        "endChar": 71
+      },
+      "revId": "4ac7bc6fcc545c886e1fa36714a0de8737ebc035",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8724e48c_059696a7",
+        "filename": "torq/torq.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-12T22:08:47Z",
+      "side": 1,
+      "message": "We don\u0027t need a suggestion for this case. The error is already self explanatory.",
+      "range": {
+        "startLine": 153,
+        "startChar": 6,
+        "endLine": 153,
+        "endChar": 49
+      },
+      "revId": "4ac7bc6fcc545c886e1fa36714a0de8737ebc035",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "548d4c97_ce154371",
+        "filename": "torq/torq.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-12T22:08:47Z",
+      "side": 1,
+      "message": "Use this suggestion:\n```\nTo capture the simpleperf event run: torq --profiler simpleperf --simpleperf-event \u003cevent-name1\u003e --simpleperf-event \u003cevent-name2\u003e\n```\n\nFor this case, lets dynamically create the suggestion to include the simpleperf events already provided.",
+      "range": {
+        "startLine": 161,
+        "startChar": 9,
+        "endLine": 162,
+        "endChar": 28
+      },
+      "revId": "4ac7bc6fcc545c886e1fa36714a0de8737ebc035",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9cba1fa_c7b03c31",
+        "filename": "torq/torq.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-12T22:08:47Z",
+      "side": 1,
+      "message": "Remember to remove the `For instance`.",
+      "range": {
+        "startLine": 171,
+        "startChar": 10,
+        "endLine": 171,
+        "endChar": 23
+      },
+      "revId": "4ac7bc6fcc545c886e1fa36714a0de8737ebc035",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8acc287_8f698b2f",
+        "filename": "torq/torq.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-12T22:08:47Z",
+      "side": 1,
+      "message": "Lets use the constant variable already defined for this. And lets follow the same approach as `dur-ms`.",
+      "range": {
+        "startLine": 186,
+        "startChar": 27,
+        "endLine": 186,
+        "endChar": 31
+      },
+      "revId": "4ac7bc6fcc545c886e1fa36714a0de8737ebc035",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5fca7744_c5c89c9d",
+        "filename": "torq/torq.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-12T22:08:47Z",
+      "side": 1,
+      "message": "```suggestion\n         \" if --runs is not greater than 1.\"),\n```",
+      "range": {
+        "startLine": 200,
+        "startChar": 11,
+        "endLine": 200,
+        "endChar": 47
+      },
+      "revId": "4ac7bc6fcc545c886e1fa36714a0de8737ebc035",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65ded8f4_7f410b83",
+        "filename": "torq/torq.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-12T22:08:47Z",
+      "side": 1,
+      "message": "This logic can be simplified to:\n\n```suggestion\n  if args.ui is None:\n    args.ui \u003d args.runs \u003d\u003d 1\n```",
+      "range": {
+        "startLine": 205,
+        "startChar": 2,
+        "endLine": 211,
+        "endChar": 19
+      },
+      "revId": "4ac7bc6fcc545c886e1fa36714a0de8737ebc035",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be3b081e_1bf52dd1",
+        "filename": "torq/torq.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-12T22:08:47Z",
+      "side": 1,
+      "message": "Let use this suggestion instead:\n```\nUse one of the following subcommands:\\n\ntorq hw set \u003cconfig-name\u003e\\n\ntorq hw get\\n\ntorq hw list\n```",
+      "range": {
+        "startLine": 236,
+        "startChar": 24,
+        "endLine": 237,
+        "endChar": 76
+      },
+      "revId": "4ac7bc6fcc545c886e1fa36714a0de8737ebc035",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b02efa4_e23db36e",
+        "filename": "torq/torq.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-12T22:08:47Z",
+      "side": 1,
+      "message": "We don\u0027t use parentheses for if statements in python. Check other if statements.",
+      "range": {
+        "startLine": 241,
+        "startChar": 2,
+        "endLine": 242,
+        "endChar": 61
+      },
+      "revId": "4ac7bc6fcc545c886e1fa36714a0de8737ebc035",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "136788f6_234f4365",
+        "filename": "torq/torq.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-12T22:08:47Z",
+      "side": 1,
+      "message": "I don\u0027t think this is the correct argument to check here. `args.config` is for the config subcommand? Shouldn\u0027t it be something like `args.hw_subcommand.config`?",
+      "range": {
+        "startLine": 242,
+        "startChar": 6,
+        "endLine": 242,
+        "endChar": 17
+      },
+      "revId": "4ac7bc6fcc545c886e1fa36714a0de8737ebc035",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12221d7c_9efd0bc5",
+        "filename": "torq/torq.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-12T22:08:47Z",
+      "side": 1,
+      "message": "Same question here as mention in previous comment. args.config is correct?",
+      "range": {
+        "startLine": 252,
+        "startChar": 7,
+        "endLine": 252,
+        "endChar": 17
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "c560c16f_a185fe3a",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 242,
+                "startChar": 0,
+                "endLine": 243,
+                "endChar": 0
+              },
+              "replacement": "      args.num_cpus is not None):\n"
+            },
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 252,
+                "startChar": 0,
+                "endLine": 253,
+                "endChar": 0
+              },
+              "replacement": "      args.memory is not None):\n"
+            },
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 296,
+                "startChar": 0,
+                "endLine": 297,
+                "endChar": 0
+              },
+              "replacement": "      args.num_cpus is None and args.memory is None):\n"
+            }
+          ]
+        }
+      ],
+      "revId": "4ac7bc6fcc545c886e1fa36714a0de8737ebc035",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
