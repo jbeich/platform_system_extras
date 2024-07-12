@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9bf8b078_4588466d",
+        "filename": "torq/Android.bp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-12T23:58:37Z",
+      "side": 1,
+      "message": "Changed this, thank you.",
+      "parentUuid": "023e906f_ce3c7760",
+      "range": {
+        "startLine": 1,
+        "startChar": 17,
+        "endLine": 1,
+        "endChar": 21
+      },
+      "revId": "0314bc839abcb4955f57b0831094c89ce16f58ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "37362089_6d6a839e",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-07-12T22:08:47Z",
       "side": 1,
       "message": "All the files need to have the copyright notice at the top of the file.\n\n```\n#\n# Copyright (C) 2024 The Android Open Source Project\n#\n# Licensed under the Apache License, Version 2.0 (the \"License\");\n# you may not use this file except in compliance with the License.\n# You may obtain a copy of the License at\n#\n#      http://www.apache.org/licenses/LICENSE-2.0\n#\n# Unless required by applicable law or agreed to in writing, software\n# distributed under the License is distributed on an \"AS IS\" BASIS,\n# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n# See the License for the specific language governing permissions and\n# limitations under the License.\n#\n```",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 73
+      },
+      "revId": "0314bc839abcb4955f57b0831094c89ce16f58ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8c19bc1_14de4622",
+        "filename": "torq/command.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-12T23:58:37Z",
+      "side": 1,
+      "message": "Added this, thank you.",
+      "parentUuid": "37362089_6d6a839e",
       "range": {
         "startLine": 1,
         "startChar": 0,
