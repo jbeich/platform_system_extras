@@ -227,6 +227,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "357d67c4_8522fd5a",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-07-12T17:18:31Z",
+      "side": 1,
+      "message": "In that case, I think we should consider having a base class. Right now they share a common functionality.",
+      "parentUuid": "1ee05d0e_28bb2271",
+      "range": {
+        "startLine": 1,
+        "startChar": 6,
+        "endLine": 1,
+        "endChar": 29
+      },
+      "revId": "c4c4bd437eaf6aab113a4c42ce260979e867db8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3ac1fda0_c293676a",
         "filename": "torq/command_executor.py",
         "patchSetId": 1
@@ -797,6 +821,54 @@
       "side": 1,
       "message": "Because its passed \u003cint\u003eG format for memory, e.g. 4G, if it\u0027s passed as --memory -1G, the \"-\" and \"G\" confuses the command, as it thinks it passes in 2 options instead of 1. So if it\u0027s negative, it will recognize it as passing too many arguments and raise an error before we can check if it\u0027s negative here. However, 0G, -4, 4G are examples that pass this initial check because they are perceived as only 1 option, so in this code, I verified with this logic that we will only accept the 4G option.",
       "parentUuid": "43b1dfb5_fc141666",
+      "range": {
+        "startLine": 309,
+        "startChar": 4,
+        "endLine": 309,
+        "endChar": 29
+      },
+      "revId": "c4c4bd437eaf6aab113a4c42ce260979e867db8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4bac461e_748b5896",
+        "filename": "torq/torq.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-07-12T17:18:31Z",
+      "side": 1,
+      "message": "Sounds good, thanks for checking.",
+      "parentUuid": "b444a8dc_f1b76c91",
+      "range": {
+        "startLine": 309,
+        "startChar": 4,
+        "endLine": 309,
+        "endChar": 29
+      },
+      "revId": "c4c4bd437eaf6aab113a4c42ce260979e867db8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ec8c363_16075102",
+        "filename": "torq/torq.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-07-12T17:18:31Z",
+      "side": 1,
+      "message": "Sounds good if there is a plan to have a later check for this.",
+      "parentUuid": "4d0131fb_9c71934f",
       "range": {
         "startLine": 309,
         "startChar": 4,
