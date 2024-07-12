@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b90004aa_df131c1c",
+        "filename": "torq/torq.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-12T20:39:26Z",
+      "side": 1,
+      "message": "Changed it back, thank you.",
+      "parentUuid": "74ec68af_4c41db52",
+      "range": {
+        "startLine": 347,
+        "startChar": 2,
+        "endLine": 354,
+        "endChar": 42
+      },
+      "revId": "82b241e607a6d4da4b02ba08cfbfad96860d8144",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c327f449_9d15bb89",
@@ -109,6 +133,30 @@
           ]
         }
       ],
+      "revId": "82b241e607a6d4da4b02ba08cfbfad96860d8144",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1143662f_88050c28",
+        "filename": "torq/torq.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-12T20:39:26Z",
+      "side": 1,
+      "message": "Changed it back, thank you.",
+      "parentUuid": "c327f449_9d15bb89",
+      "range": {
+        "startLine": 358,
+        "startChar": 2,
+        "endLine": 363,
+        "endChar": 38
+      },
       "revId": "82b241e607a6d4da4b02ba08cfbfad96860d8144",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
