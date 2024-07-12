@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0d040e3_c71df17e",
+        "filename": "torq/Android.bp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-12T16:42:23Z",
+      "side": 1,
+      "message": "Added, thank you.",
+      "parentUuid": "95577643_6f5ba522",
+      "range": {
+        "startLine": 1,
+        "startChar": 17,
+        "endLine": 1,
+        "endChar": 21
+      },
+      "revId": "c4c4bd437eaf6aab113a4c42ce260979e867db8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "14aaa465_c4709306",
@@ -88,6 +112,30 @@
           ]
         }
       ],
+      "revId": "c4c4bd437eaf6aab113a4c42ce260979e867db8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "38b5ba49_735d14c5",
+        "filename": "torq/command.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-12T16:42:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "14aaa465_c4709306",
+      "range": {
+        "startLine": 13,
+        "startChar": 4,
+        "endLine": 13,
+        "endChar": 8
+      },
       "revId": "c4c4bd437eaf6aab113a4c42ce260979e867db8a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -155,6 +203,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1ee05d0e_28bb2271",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-12T16:42:23Z",
+      "side": 1,
+      "message": "The code right now is mostly for testing that the program is currently worked. For instance, if I run a configCommand, it will print to me that I have validated the args of and executed a config command. Eventually, these execute functions will be extremely different and interact with the device very differently.",
+      "parentUuid": "9ae6536a_f816352a",
+      "range": {
+        "startLine": 1,
+        "startChar": 6,
+        "endLine": 1,
+        "endChar": 29
+      },
+      "revId": "c4c4bd437eaf6aab113a4c42ce260979e867db8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3ac1fda0_c293676a",
         "filename": "torq/command_executor.py",
         "patchSetId": 1
@@ -214,6 +286,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a20d21a8_ae1a4478",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-12T16:42:23Z",
+      "side": 1,
+      "message": "Thank you, fixed.",
+      "parentUuid": "3ac1fda0_c293676a",
+      "range": {
+        "startLine": 18,
+        "startChar": 12,
+        "endLine": 18,
+        "endChar": 21
+      },
+      "revId": "c4c4bd437eaf6aab113a4c42ce260979e867db8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c2500099_3ae6bcef",
@@ -251,6 +347,30 @@
           ]
         }
       ],
+      "revId": "c4c4bd437eaf6aab113a4c42ce260979e867db8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "611011e6_54060d08",
+        "filename": "torq/tests/torq_unit_test.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-12T16:42:23Z",
+      "side": 1,
+      "message": "Thank you, added.",
+      "parentUuid": "c2500099_3ae6bcef",
+      "range": {
+        "startLine": 7,
+        "startChar": 4,
+        "endLine": 7,
+        "endChar": 27
+      },
       "revId": "c4c4bd437eaf6aab113a4c42ce260979e867db8a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -296,6 +416,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5102409_97bcb432",
+        "filename": "torq/torq.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-12T16:42:23Z",
+      "side": 1,
+      "message": "Thank you, removed the comment.",
+      "parentUuid": "a93eed8d_977b62d7",
+      "range": {
+        "startLine": 7,
+        "startChar": 2,
+        "endLine": 7,
+        "endChar": 24
+      },
+      "revId": "c4c4bd437eaf6aab113a4c42ce260979e867db8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9b46ea3d_c33811ba",
@@ -333,6 +477,30 @@
           ]
         }
       ],
+      "revId": "c4c4bd437eaf6aab113a4c42ce260979e867db8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "faabd75f_54bf2253",
+        "filename": "torq/torq.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-12T16:42:23Z",
+      "side": 1,
+      "message": "Thank you, fixed it.",
+      "parentUuid": "9b46ea3d_c33811ba",
+      "range": {
+        "startLine": 118,
+        "startChar": 0,
+        "endLine": 118,
+        "endChar": 0
+      },
       "revId": "c4c4bd437eaf6aab113a4c42ce260979e867db8a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -408,6 +576,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ed77104_993972c7",
+        "filename": "torq/torq.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-12T16:42:23Z",
+      "side": 1,
+      "message": "Removed them, thank you.",
+      "parentUuid": "7d80c015_fb8ff459",
+      "range": {
+        "startLine": 122,
+        "startChar": 2,
+        "endLine": 122,
+        "endChar": 11
+      },
+      "revId": "c4c4bd437eaf6aab113a4c42ce260979e867db8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f6cb7a5c_cb599efb",
@@ -479,6 +671,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef563d87_f1f20fba",
+        "filename": "torq/torq.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-12T16:42:23Z",
+      "side": 1,
+      "message": "Changed this, thank you.",
+      "parentUuid": "f6cb7a5c_cb599efb",
+      "range": {
+        "startLine": 216,
+        "startChar": 28,
+        "endLine": 216,
+        "endChar": 33
+      },
+      "revId": "c4c4bd437eaf6aab113a4c42ce260979e867db8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9cfcf2b8_d123a254",
@@ -545,6 +761,54 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4d0131fb_9c71934f",
+        "filename": "torq/torq.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-12T16:42:23Z",
+      "side": 1,
+      "message": "In the next step of the project, when we are implementing the execution of commands, we will begin to interact with the device and we will do further validation specific to the device for some cases. In this case, we will be validating that once the HWCommand.validate() method is implemented.",
+      "parentUuid": "9cfcf2b8_d123a254",
+      "range": {
+        "startLine": 309,
+        "startChar": 4,
+        "endLine": 309,
+        "endChar": 29
+      },
+      "revId": "c4c4bd437eaf6aab113a4c42ce260979e867db8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b444a8dc_f1b76c91",
+        "filename": "torq/torq.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-12T16:42:23Z",
+      "side": 1,
+      "message": "Because its passed \u003cint\u003eG format for memory, e.g. 4G, if it\u0027s passed as --memory -1G, the \"-\" and \"G\" confuses the command, as it thinks it passes in 2 options instead of 1. So if it\u0027s negative, it will recognize it as passing too many arguments and raise an error before we can check if it\u0027s negative here. However, 0G, -4, 4G are examples that pass this initial check because they are perceived as only 1 option, so in this code, I verified with this logic that we will only accept the 4G option.",
+      "parentUuid": "43b1dfb5_fc141666",
+      "range": {
+        "startLine": 309,
+        "startChar": 4,
+        "endLine": 309,
+        "endChar": 29
+      },
+      "revId": "c4c4bd437eaf6aab113a4c42ce260979e867db8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "39b663b1_e6d47cfb",
         "filename": "torq/torq.py",
         "patchSetId": 1
@@ -580,6 +844,30 @@
           ]
         }
       ],
+      "revId": "c4c4bd437eaf6aab113a4c42ce260979e867db8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6d9f7a9_6d641a42",
+        "filename": "torq/torq.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-12T16:42:23Z",
+      "side": 1,
+      "message": "Removed this, thank you.",
+      "parentUuid": "39b663b1_e6d47cfb",
+      "range": {
+        "startLine": 377,
+        "startChar": 2,
+        "endLine": 377,
+        "endChar": 25
+      },
       "revId": "c4c4bd437eaf6aab113a4c42ce260979e867db8a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
