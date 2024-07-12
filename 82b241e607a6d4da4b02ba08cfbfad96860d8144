@@ -1,0 +1,116 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74ec68af_4c41db52",
+        "filename": "torq/torq.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-07-12T19:59:46Z",
+      "side": 1,
+      "message": "I think for this function we can revert back to the trailing return that you had before.\n\nIn this current state, there is no default return if the previous 3 if statements are not true.",
+      "range": {
+        "startLine": 347,
+        "startChar": 2,
+        "endLine": 354,
+        "endChar": 42
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "abd3f066_8f1bea45",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 347,
+                "startChar": 0,
+                "endLine": 348,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 349,
+                "startChar": 0,
+                "endLine": 350,
+                "endChar": 0
+              },
+              "replacement": "    return ConfigCommand(\"config pull\", args.config_name,\n"
+            },
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 352,
+                "startChar": 0,
+                "endLine": 353,
+                "endChar": 0
+              },
+              "replacement": "    return ConfigCommand(\"config show\", args.config_name, None)\n"
+            },
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 354,
+                "startChar": 0,
+                "endLine": 355,
+                "endChar": 0
+              },
+              "replacement": "    return ConfigCommand(\"config list\", None, None)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "82b241e607a6d4da4b02ba08cfbfad96860d8144",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c327f449_9d15bb89",
+        "filename": "torq/torq.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-07-12T19:59:46Z",
+      "side": 1,
+      "message": "Same here.",
+      "range": {
+        "startLine": 358,
+        "startChar": 2,
+        "endLine": 363,
+        "endChar": 38
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "fbfad75b_5a14aaa5",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 358,
+                "startChar": 0,
+                "endLine": 359,
+                "endChar": 0
+              },
+              "replacement": "  if args.subcommands \u003d\u003d None:\n"
+            }
+          ]
+        }
+      ],
+      "revId": "82b241e607a6d4da4b02ba08cfbfad96860d8144",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
