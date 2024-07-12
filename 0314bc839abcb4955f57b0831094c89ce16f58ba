@@ -1,0 +1,499 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2d9a9f6_d914800d",
+        "filename": "torq/torq.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-07-12T19:02:18Z",
+      "side": 1,
+      "message": "Nit: Remove whitespace here.",
+      "fixSuggestions": [
+        {
+          "fixId": "3a1ba12b_fc523ec1",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 7,
+                "startChar": 0,
+                "endLine": 8,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "0314bc839abcb4955f57b0831094c89ce16f58ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6cff853_133b924e",
+        "filename": "torq/torq.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-07-12T19:02:18Z",
+      "side": 1,
+      "message": "Filepath of the predefined perfetto config to use.",
+      "range": {
+        "startLine": 34,
+        "startChar": 29,
+        "endLine": 35,
+        "endChar": 49
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "80ac6627_ed7644c4",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 34,
+                "startChar": 0,
+                "endLine": 36,
+                "endChar": 0
+              },
+              "replacement": "                      help\u003d(\u0027Filepath of the predefined perfetto config to use.\u0027\n                            ))\n"
+            }
+          ]
+        }
+      ],
+      "revId": "0314bc839abcb4955f57b0831094c89ce16f58ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa187f12_c81f994a",
+        "filename": "torq/torq.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-07-12T19:02:18Z",
+      "side": 1,
+      "message": "events.",
+      "range": {
+        "startLine": 46,
+        "startChar": 37,
+        "endLine": 46,
+        "endChar": 42
+      },
+      "revId": "0314bc839abcb4955f57b0831094c89ce16f58ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9514b394_ede62ca1",
+        "filename": "torq/torq.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-07-12T19:02:18Z",
+      "side": 1,
+      "message": "the perfetto",
+      "range": {
+        "startLine": 48,
+        "startChar": 59,
+        "endLine": 48,
+        "endChar": 67
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "a9afe3e8_fd11b3bb",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 48,
+                "startChar": 0,
+                "endLine": 49,
+                "endChar": 0
+              },
+              "replacement": "                      help\u003d\u0027Includes the ftrace event from the perfetto\u0027\n                      \u0027 config.\u0027)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "0314bc839abcb4955f57b0831094c89ce16f58ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4fc4a9df_59f7ad89",
+        "filename": "torq/torq.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-07-12T19:02:18Z",
+      "side": 1,
+      "message": "Nit: So here and elsewhere in the file there are some comments that could be considered extraneous. Please read this resource - go/comments-codelab#dont-comment-the-obvious. \"Unnecessary comments slow readers down and take up space on their monitor.\"",
+      "range": {
+        "startLine": 77,
+        "startChar": 2,
+        "endLine": 77,
+        "endChar": 10
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "78c3a5fe_9b1833f1",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 42,
+                "startChar": 0,
+                "endLine": 44,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 53,
+                "startChar": 0,
+                "endLine": 55,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 56,
+                "startChar": 0,
+                "endLine": 57,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 61,
+                "startChar": 0,
+                "endLine": 62,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 64,
+                "startChar": 0,
+                "endLine": 66,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 77,
+                "startChar": 0,
+                "endLine": 78,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 82,
+                "startChar": 0,
+                "endLine": 83,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 86,
+                "startChar": 0,
+                "endLine": 87,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 94,
+                "startChar": 0,
+                "endLine": 95,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 98,
+                "startChar": 0,
+                "endLine": 99,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 108,
+                "startChar": 0,
+                "endLine": 109,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "0314bc839abcb4955f57b0831094c89ce16f58ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c9a3f8b_a2cae05c",
+        "filename": "torq/torq.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-07-12T19:02:18Z",
+      "side": 1,
+      "message": "perfetto",
+      "range": {
+        "startLine": 106,
+        "startChar": 64,
+        "endLine": 106,
+        "endChar": 72
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "997962a1_309a5e09",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 106,
+                "startChar": 0,
+                "endLine": 107,
+                "endChar": 0
+              },
+              "replacement": "                                  help\u003d(\u0027Name of the predefined perfetto\u0027\n"
+            }
+          ]
+        }
+      ],
+      "revId": "0314bc839abcb4955f57b0831094c89ce16f58ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41923aa0_0ca3d87e",
+        "filename": "torq/torq.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-07-12T19:02:18Z",
+      "side": 1,
+      "message": "config to.",
+      "range": {
+        "startLine": 118,
+        "startChar": 73,
+        "endLine": 118,
+        "endChar": 75
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "bc26ce2c_31096d87",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 118,
+                "startChar": 0,
+                "endLine": 119,
+                "endChar": 0
+              },
+              "replacement": "                                  help\u003d\u0027File path to copy the predefined config to\u0027)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "0314bc839abcb4955f57b0831094c89ce16f58ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75f89a1f_9d76e76e",
+        "filename": "torq/torq.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-07-12T19:02:18Z",
+      "side": 1,
+      "message": "Nit: Ensure that the args print out is formatted.",
+      "range": {
+        "startLine": 339,
+        "startChar": 2,
+        "endLine": 339,
+        "endChar": 13
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "b16846fd_cefb7df3",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 339,
+                "startChar": 0,
+                "endLine": 340,
+                "endChar": 0
+              },
+              "replacement": "  print(args.__dict__)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "0314bc839abcb4955f57b0831094c89ce16f58ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b12a37aa_a197f00a",
+        "filename": "torq/torq.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-07-12T19:02:18Z",
+      "side": 1,
+      "message": "Simplify this by just returning the command after each if/else clause. go/tott/680",
+      "range": {
+        "startLine": 357,
+        "startChar": 2,
+        "endLine": 363,
+        "endChar": 16
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "781c4c81_ae8b8bcd",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 357,
+                "startChar": 0,
+                "endLine": 358,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 359,
+                "startChar": 0,
+                "endLine": 364,
+                "endChar": 0
+              },
+              "replacement": "    return HWCommand(args.hw_subcommand, args.config, args.num_cpus,\n                     args.memory)\n  return HWCommand(args.hw_subcommand, None, None, None)\n"
+            },
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 367,
+                "startChar": 0,
+                "endLine": 368,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 369,
+                "startChar": 0,
+                "endLine": 376,
+                "endChar": 0
+              },
+              "replacement": "    return ConfigCommand(args.config_subcommand, args.config_name,\n                         args.file_path)\n  elif args.config_subcommand \u003d\u003d \"show\":\n    return ConfigCommand(args.config_subcommand, args.config_name, None)\n  elif args.config_subcommand \u003d\u003d \"list\":\n    return ConfigCommand(args.config_subcommand, None, None)\n"
+            },
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 379,
+                "startChar": 0,
+                "endLine": 380,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 381,
+                "startChar": 0,
+                "endLine": 387,
+                "endChar": 0
+              },
+              "replacement": "    return create_profiler_command(args)\n  elif args.subcommands \u003d\u003d \"hw\":\n    return create_hw_command(args)\n  elif args.subcommands \u003d\u003d \"config\":\n    return create_config_command(args)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "0314bc839abcb4955f57b0831094c89ce16f58ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
