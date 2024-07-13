@@ -144,6 +144,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b56fc128_9bc928a0",
+        "filename": "torq/torq.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-13T22:29:10Z",
+      "side": 1,
+      "message": "Maybe we can allow for choices, true, True, False, or False initially, and then into real bools in the validate_args function. I think this would still be less code then if used the Bool type.",
+      "parentUuid": "6a91c411_1da20363",
+      "range": {
+        "startLine": 35,
+        "startChar": 1,
+        "endLine": 37,
+        "endChar": 61
+      },
+      "revId": "4ac7bc6fcc545c886e1fa36714a0de8737ebc035",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "981e894f_a586c543",
         "filename": "torq/torq.py",
         "patchSetId": 6
