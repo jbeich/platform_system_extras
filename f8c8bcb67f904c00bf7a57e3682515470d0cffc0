@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e1b8a79_bbfb22cd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2024-07-13T00:09:35Z",
+      "side": 1,
+      "message": "Right, that\u0027s because simpleperf read symbols after recording.\nOne way to do it may be: when processing records while recording, if a sample points to a bpf map, read the symbol it points to. But we don\u0027t need to do it unless really needed.",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 59
+      },
+      "revId": "f8c8bcb67f904c00bf7a57e3682515470d0cffc0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
