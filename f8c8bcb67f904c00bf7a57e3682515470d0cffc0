@@ -22,6 +22,30 @@
       },
       "revId": "f8c8bcb67f904c00bf7a57e3682515470d0cffc0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b38b507_ee680220",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 2005646
+      },
+      "writtenOn": "2024-07-13T00:31:08Z",
+      "side": 1,
+      "message": "\u003e when processing records while recording, if a sample points to a bpf map, read the symbol it points to.\n\nHm, I think this might be racy: by the time we process the sample and read from `kallsyms`, the program could\u0027ve gotten unloaded and replaced with another.\n\n\u003e But we don\u0027t need to do it unless really needed.\n\nYeah, given that Android\u0027s BPF programs are only loaded (and JITed) on boot, the extra complexity needed to handle loading/unloading at runtime seemed unjustified.",
+      "parentUuid": "4e1b8a79_bbfb22cd",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 59
+      },
+      "revId": "f8c8bcb67f904c00bf7a57e3682515470d0cffc0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
