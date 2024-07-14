@@ -168,6 +168,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9af93d16_a8f288e2",
+        "filename": "torq/torq.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-14T00:41:14Z",
+      "side": 1,
+      "message": "I added the approach with the 4 different options. I tried type\u003dbool but it broke some of the other command functionality. Let me know what you think, thank you.",
+      "parentUuid": "b56fc128_9bc928a0",
+      "range": {
+        "startLine": 35,
+        "startChar": 1,
+        "endLine": 37,
+        "endChar": 61
+      },
+      "revId": "4ac7bc6fcc545c886e1fa36714a0de8737ebc035",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "981e894f_a586c543",
         "filename": "torq/torq.py",
         "patchSetId": 6
