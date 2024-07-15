@@ -192,6 +192,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "41708d49_d0c37e60",
+        "filename": "torq/torq.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-15T23:54:40Z",
+      "side": 1,
+      "message": "Let\u0027s use `argparse.BooleanOptionalAction`, this should cover our case fine: https://docs.python.org/3/library/argparse.html#action\n\nRemember to update the code for this usage.",
+      "parentUuid": "9af93d16_a8f288e2",
+      "range": {
+        "startLine": 35,
+        "startChar": 1,
+        "endLine": 37,
+        "endChar": 61
+      },
+      "revId": "4ac7bc6fcc545c886e1fa36714a0de8737ebc035",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "981e894f_a586c543",
         "filename": "torq/torq.py",
         "patchSetId": 6
@@ -433,6 +457,30 @@
       "side": 1,
       "message": "Changed this, thank you.",
       "parentUuid": "84d591af_162cc67a",
+      "range": {
+        "startLine": 138,
+        "startChar": 57,
+        "endLine": 138,
+        "endChar": 78
+      },
+      "revId": "4ac7bc6fcc545c886e1fa36714a0de8737ebc035",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a08b6ed4_678c2f0d",
+        "filename": "torq/torq.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-15T23:54:40Z",
+      "side": 1,
+      "message": "You missed the `to a value smaller` part in the suggestion.",
+      "parentUuid": "4dc402a5_42d4cd0c",
       "range": {
         "startLine": 138,
         "startChar": 57,
@@ -1067,6 +1115,54 @@
         "startChar": 2,
         "endLine": 242,
         "endChar": 61
+      },
+      "revId": "4ac7bc6fcc545c886e1fa36714a0de8737ebc035",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6a75d8a_f2db904d",
+        "filename": "torq/torq.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-15T23:54:40Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "ca391b63_37facfbb",
+      "range": {
+        "startLine": 241,
+        "startChar": 2,
+        "endLine": 242,
+        "endChar": 61
+      },
+      "revId": "4ac7bc6fcc545c886e1fa36714a0de8737ebc035",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e4b95ed_149934b2",
+        "filename": "torq/torq.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-15T23:54:40Z",
+      "side": 1,
+      "message": "We have two config values, the hw set argument and the config subcommand. Let\u0027s rename this one to something that is more descriptive (e.g `hw_set_config`).",
+      "parentUuid": "2415ffa2_42d2841f",
+      "range": {
+        "startLine": 242,
+        "startChar": 6,
+        "endLine": 242,
+        "endChar": 17
       },
       "revId": "4ac7bc6fcc545c886e1fa36714a0de8737ebc035",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
