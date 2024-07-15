@@ -1,5 +1,52 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a64ed75_405f8370",
+        "filename": "simpleperf/command.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1096713
+      },
+      "writtenOn": "2024-07-15T15:13:38Z",
+      "side": 1,
+      "message": "...this pre-existing `memset` of an `OptionValue` isn\u0027t safe anymore.  The internal implementation of `std::string` isn\u0027t defined by the standard, so zeroing it out could cause issues.\n\nWe might want to introduce a `clear()` method or something similar on the `struct`, and use that to safely set values to 0 and `str_value` to an empty string.",
+      "range": {
+        "startLine": 71,
+        "startChar": 0,
+        "endLine": 73,
+        "endChar": 0
+      },
+      "revId": "f5d7a3b28b8709b1c0fb8db75941fb2152613e81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c8d2b1a_c12faade",
+        "filename": "simpleperf/command.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1096713
+      },
+      "writtenOn": "2024-07-15T15:13:38Z",
+      "side": 1,
+      "message": "Note that now that `OptionValue` is a `struct` with a `std::string` member...",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 24
+      },
+      "revId": "f5d7a3b28b8709b1c0fb8db75941fb2152613e81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
