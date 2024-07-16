@@ -29,6 +29,7 @@
 
 #include <android-base/macros.h>
 
+#include "ZstdUtil.h"
 #include "dso.h"
 #include "event_attr.h"
 #include "event_type.h"
@@ -81,9 +82,10 @@ class RecordFileWriter {
   RecordFileWriter(const std::string& filename, FILE* fp, bool own_fp);
   ~RecordFileWriter();
 
+  bool SetCompressionLevel(size_t compression_level);
   bool WriteAttrSection(const EventAttrIds& attr_ids);
   bool WriteRecord(const Record& record);
-  bool WriteData(const void* buf, size_t len);
+  bool FinishWritingDataSection();
 
   uint64_t GetDataSectionSize() const { return data_section_size_; }
   bool ReadDataSection(const std::function<void(const Record*)>& callback);
@@ -103,13 +105,20 @@ class RecordFileWriter {
   bool EndWriteFeatures();
 
   bool Close();
+  Compressor* GetCompressor() { return compressor_.get(); }
 
  private:
   void GetHitModulesInBuffer(const char* p, const char* end,
                              std::vector<std::string>* hit_kernel_modules,
                              std::vector<std::string>* hit_user_files);
   bool WriteFileHeader();
+  // If flush=true, the previous data can be decompressed without any following data.
+  bool WriteCompressorOutput(bool flush, bool data_section);
+  bool WriteCompressRecord(const char* data, size_t size, bool data_section);
+  bool WriteData(const void* buf, size_t len);
   bool Write(const void* buf, size_t len);
+  bool ReadFromDecompressor(Decompressor& decompressor,
+                            const std::function<void(const Record*)>& callback);
   bool Read(void* buf, size_t len);
   bool GetFilePos(uint64_t* file_pos);
   bool WriteStringWithLength(const std::string& s);
@@ -129,6 +138,8 @@ class RecordFileWriter {
 
   std::map<int, PerfFileFormat::SectionDesc> features_;
   size_t feature_count_;
+
+  std::unique_ptr<Compressor> compressor_;
 
   DISALLOW_COPY_AND_ASSIGN(RecordFileWriter);
 };
@@ -204,6 +215,11 @@ class RecordFileReader {
   std::vector<std::unique_ptr<Record>> DataSection();
 
  private:
+  struct ReadPos {
+    uint64_t pos = 0;
+    uint64_t end = 0;
+  };
+
   RecordFileReader(const std::string& filename, FILE* fp);
   bool ReadHeader();
   bool CheckSectionDesc(const PerfFileFormat::SectionDesc& desc, uint64_t min_offset,
@@ -215,7 +231,8 @@ class RecordFileReader {
   bool ReadFileV2Feature(uint64_t& read_pos, uint64_t max_size, FileFeature& file);
   bool ReadMetaInfoFeature();
   void UseRecordingEnvironment();
-  std::unique_ptr<Record> ReadRecord(uint64_t& read_record_size);
+  std::unique_ptr<Record> ReadRecord(ReadPos& pos);
+  std::unique_ptr<char[]> ReadRecordWithDecompression(ReadPos& pos);
   bool Read(void* buf, size_t len);
   void ProcessEventIdRecord(const EventIdRecord& r);
   bool BuildAuxDataLocation();
@@ -232,7 +249,7 @@ class RecordFileReader {
   size_t event_id_pos_in_sample_records_;
   size_t event_id_reverse_pos_in_non_sample_records_;
 
-  uint64_t read_record_size_;
+  ReadPos read_record_pos_;
 
   std::unordered_map<std::string, std::string> meta_info_;
   std::unique_ptr<ScopedCurrentArch> scoped_arch_;
@@ -249,6 +266,7 @@ class RecordFileReader {
   // It maps from a cpu id to the locations (file offsets in perf.data) of aux data received from
   // that cpu's aux buffer. It is used to locate aux data in perf.data.
   std::unordered_map<uint32_t, std::vector<AuxDataLocation>> aux_data_location_;
+  std::unique_ptr<Decompressor> decompressor_;
 
   DISALLOW_COPY_AND_ASSIGN(RecordFileReader);
 };

@@ -285,6 +285,8 @@ RECORD_FILTER_OPTION_HELP_MSG_FOR_RECORDING
 "                 This option is used to provide files with symbol table and\n"
 "                 debug information, which are used for unwinding and dumping symbols.\n"
 "--add-meta-info key=value     Add extra meta info, which will be stored in the recording file.\n"
+"-z[=<compression_level>]      Compress records using zstd. compression level: 1 is the fastest,\n"
+"                              22 is the greatest, 3 is the default.\n"
 "\n"
 "ETM recording options:\n"
 "--addr-filter filter_str1,filter_str2,...\n"
@@ -480,6 +482,8 @@ RECORD_FILTER_OPTION_HELP_MSG_FOR_RECORDING
   std::unique_ptr<ETMBranchListGenerator> etm_branch_list_generator_;
   std::unique_ptr<RegEx> binary_name_regex_;
   std::chrono::milliseconds etm_flush_interval_{kDefaultEtmDataFlushIntervalInMs};
+
+  size_t compression_level_ = 0;
 };
 
 std::string RecordCommand::LongHelpString() const {
@@ -866,6 +870,9 @@ bool RecordCommand::PostProcessRecording(const std::vector<std::string>& args) {
   }
 
   // 4. Dump additional features, and close record file.
+  if (!record_file_writer_->FinishWritingDataSection()) {
+    return false;
+  }
   if (!DumpAdditionalFeatures(args)) {
     return false;
   }
@@ -905,6 +912,14 @@ bool RecordCommand::PostProcessRecording(const std::vector<std::string>& args) {
     }
     os << ".";
     LOG(INFO) << os.str();
+
+    if (auto compressor = record_file_writer_->GetCompressor(); compressor != nullptr) {
+      uint64_t original_size = compressor->TotalInputSize();
+      uint64_t compressed_size = compressor->TotalOutputSize();
+      LOG(INFO) << "Record compressed: " << ReadableBytes(compressed_size) << " (original "
+                << ReadableBytes(original_size) << ", ratio " << (original_size / compressed_size)
+                << ")";
+    }
 
     LOG(DEBUG) << "Record stat: kernelspace_lost_records="
                << ReadableCount(record_stat.kernelspace_lost_records)
@@ -1206,6 +1221,20 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
   }
   use_cmd_exit_code_ = options.PullBoolValue("--use-cmd-exit-code");
 
+  if (auto value = options.PullValue("-z"); value) {
+    if (value->str_value.empty()) {
+      // 3 is the default compression level of zstd library, in ZSTD_defaultCLevel().
+      constexpr size_t DEFAULT_COMPRESSION_LEVEL = 3;
+      compression_level_ = DEFAULT_COMPRESSION_LEVEL;
+    } else {
+      if (!android::base::ParseUint(value->str_value, &compression_level_) ||
+          compression_level_ < 1 || compression_level_ > 22) {
+        LOG(ERROR) << "invalid compression level for -z: " << value->str_value;
+        return false;
+      }
+    }
+  }
+
   CHECK(options.values.empty());
 
   // Process ordered options.
@@ -1336,6 +1365,11 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
     clockid_ = IsSettingClockIdSupported() ? "monotonic" : "perf";
   }
 
+  if (event_selection_set_.HasAuxTrace() && compression_level_ != 0) {
+    LOG(ERROR) << "etm data compression not supported yet";
+    return false;
+  }
+
   return true;
 }
 
@@ -1449,10 +1483,16 @@ bool RecordCommand::CreateAndInitRecordFile() {
 std::unique_ptr<RecordFileWriter> RecordCommand::CreateRecordFile(const std::string& filename,
                                                                   const EventAttrIds& attrs) {
   std::unique_ptr<RecordFileWriter> writer = RecordFileWriter::CreateInstance(filename);
-  if (writer != nullptr && writer->WriteAttrSection(attrs)) {
-    return writer;
+  if (!writer) {
+    return nullptr;
   }
-  return nullptr;
+  if (compression_level_ != 0 && !writer->SetCompressionLevel(compression_level_)) {
+    return nullptr;
+  }
+  if (!writer->WriteAttrSection(attrs)) {
+    return nullptr;
+  }
+  return writer;
 }
 
 bool RecordCommand::DumpKernelSymbol() {
@@ -1850,7 +1890,7 @@ bool RecordCommand::KeepFailedUnwindingResult(const SampleRecord& r,
 }
 
 std::unique_ptr<RecordFileReader> RecordCommand::MoveRecordFile(const std::string& old_filename) {
-  if (!record_file_writer_->Close()) {
+  if (!record_file_writer_->FinishWritingDataSection() || !record_file_writer_->Close()) {
     return nullptr;
   }
   record_file_writer_.reset();
