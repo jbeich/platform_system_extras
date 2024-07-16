@@ -897,20 +897,20 @@ class InjectCommand : public Command {
     }
 
     if (auto value = options.PullValue("--binary"); value) {
-      binary_name_regex_ = RegEx::Create(*value->str_value);
+      binary_name_regex_ = RegEx::Create(value->str_value);
       if (binary_name_regex_ == nullptr) {
         return false;
       }
     }
     if (auto value = options.PullValue("--dump-etm"); value) {
-      if (!ParseEtmDumpOption(*value->str_value, &etm_dump_option_)) {
+      if (!ParseEtmDumpOption(value->str_value, &etm_dump_option_)) {
         return false;
       }
     }
     exclude_perf_ = options.PullBoolValue("--exclude-perf");
 
     for (const OptionValue& value : options.PullValues("-i")) {
-      std::vector<std::string> files = android::base::Split(*value.str_value, ",");
+      std::vector<std::string> files = android::base::Split(value.str_value, ",");
       for (std::string& file : files) {
         if (android::base::StartsWith(file, "@")) {
           if (!ReadFileList(file.substr(1), &input_filenames_)) {
@@ -926,7 +926,7 @@ class InjectCommand : public Command {
     }
     options.PullStringValue("-o", &output_filename_);
     if (auto value = options.PullValue("--output"); value) {
-      const std::string& output = *value->str_value;
+      const std::string& output = value->str_value;
       if (output == "autofdo") {
         output_format_ = OutputFormat::AutoFDO;
       } else if (output == "branch-list") {
@@ -937,7 +937,7 @@ class InjectCommand : public Command {
       }
     }
     if (auto value = options.PullValue("--symdir"); value) {
-      if (!Dso::AddSymbolDir(*value->str_value)) {
+      if (!Dso::AddSymbolDir(value->str_value)) {
         return false;
       }
       // Symbol dirs are cleaned when Dso count is decreased to zero, which can happen between

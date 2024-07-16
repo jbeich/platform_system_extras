@@ -974,11 +974,11 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
   system_wide_collection_ = options.PullBoolValue("-a");
 
   if (auto value = options.PullValue("--add-counter"); value) {
-    add_counters_ = android::base::Split(*value->str_value, ",");
+    add_counters_ = android::base::Split(value->str_value, ",");
   }
 
   for (const OptionValue& value : options.PullValues("--add-meta-info")) {
-    const std::string& s = *value.str_value;
+    const std::string& s = value.str_value;
     auto split_pos = s.find('=');
     if (split_pos == std::string::npos || split_pos == 0 || split_pos + 1 == s.size()) {
       LOG(ERROR) << "invalid meta-info: " << s;
@@ -988,7 +988,7 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
   }
 
   if (auto value = options.PullValue("--addr-filter"); value) {
-    auto filters = ParseAddrFilterOption(*value->str_value);
+    auto filters = ParseAddrFilterOption(value->str_value);
     if (filters.empty()) {
       return false;
     }
@@ -996,7 +996,7 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
   }
 
   if (auto value = options.PullValue("--app"); value) {
-    app_package_name_ = *value->str_value;
+    app_package_name_ = value->str_value;
   }
 
   if (auto value = options.PullValue("--aux-buffer-size"); value) {
@@ -1013,7 +1013,7 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
   }
 
   if (auto value = options.PullValue("--binary"); value) {
-    binary_name_regex_ = RegEx::Create(*value->str_value);
+    binary_name_regex_ = RegEx::Create(value->str_value);
     if (binary_name_regex_ == nullptr) {
       return false;
     }
@@ -1025,7 +1025,7 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
   }
 
   if (auto value = options.PullValue("--clockid"); value) {
-    clockid_ = *value->str_value;
+    clockid_ = value->str_value;
     if (clockid_ != "perf") {
       if (!IsSettingClockIdSupported()) {
         LOG(ERROR) << "Setting clockid is not supported by the kernel.";
@@ -1086,7 +1086,7 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
   in_app_context_ = options.PullBoolValue("--in-app");
 
   for (const OptionValue& value : options.PullValues("-j")) {
-    std::vector<std::string> branch_sampling_types = android::base::Split(*value.str_value, ",");
+    std::vector<std::string> branch_sampling_types = android::base::Split(value.str_value, ",");
     for (auto& type : branch_sampling_types) {
       auto it = branch_sampling_type_map.find(type);
       if (it == branch_sampling_type_map.end()) {
@@ -1103,7 +1103,7 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
   }
 
   for (const OptionValue& value : options.PullValues("--kprobe")) {
-    std::vector<std::string> cmds = android::base::Split(*value.str_value, ",");
+    std::vector<std::string> cmds = android::base::Split(value.str_value, ",");
     for (const auto& cmd : cmds) {
       if (!probe_events.AddKprobe(cmd)) {
         return false;
@@ -1134,7 +1134,7 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
   unwind_dwarf_callchain_ = !options.PullBoolValue("--no-unwind");
 
   if (auto value = options.PullValue("-o"); value) {
-    record_filename_ = *value->str_value;
+    record_filename_ = value->str_value;
   }
 
   if (auto value = options.PullValue("--out-fd"); value) {
@@ -1184,13 +1184,13 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
   }
 
   if (auto value = options.PullValue("--symfs"); value) {
-    if (!Dso::SetSymFsDir(*value->str_value)) {
+    if (!Dso::SetSymFsDir(value->str_value)) {
       return false;
     }
   }
 
   for (const OptionValue& value : options.PullValues("-t")) {
-    if (auto tids = GetTidsFromString(*value.str_value, true); tids) {
+    if (auto tids = GetTidsFromString(value.str_value, true); tids) {
       event_selection_set_.AddMonitoredThreads(tids.value());
     } else {
       return false;
@@ -1200,7 +1200,7 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
   trace_offcpu_ = options.PullBoolValue("--trace-offcpu");
 
   if (auto value = options.PullValue("--tracepoint-events"); value) {
-    if (!EventTypeManager::Instance().ReadTracepointsFromFile(*value->str_value)) {
+    if (!EventTypeManager::Instance().ReadTracepointsFromFile(value->str_value)) {
       return false;
     }
   }
@@ -1231,7 +1231,7 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
       event_selection_set_.SetSampleRateForNewEvents(rate);
 
     } else if (name == "--call-graph") {
-      std::vector<std::string> strs = android::base::Split(*value.str_value, ",");
+      std::vector<std::string> strs = android::base::Split(value.str_value, ",");
       if (strs[0] == "fp") {
         fp_callchain_sampling_ = true;
         dwarf_callchain_sampling_ = false;
@@ -1258,14 +1258,14 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
       }
 
     } else if (name == "--cpu") {
-      if (auto cpus = GetCpusFromString(*value.str_value); cpus) {
+      if (auto cpus = GetCpusFromString(value.str_value); cpus) {
         event_selection_set_.SetCpusForNewEvents(
             std::vector<int>(cpus.value().begin(), cpus.value().end()));
       } else {
         return false;
       }
     } else if (name == "-e") {
-      std::vector<std::string> event_types = android::base::Split(*value.str_value, ",");
+      std::vector<std::string> event_types = android::base::Split(value.str_value, ",");
       for (auto& event_type : event_types) {
         if (!probe_events.CreateProbeEventIfNotExist(event_type)) {
           return false;
@@ -1278,7 +1278,7 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
       fp_callchain_sampling_ = false;
       dwarf_callchain_sampling_ = true;
     } else if (name == "--group") {
-      std::vector<std::string> event_types = android::base::Split(*value.str_value, ",");
+      std::vector<std::string> event_types = android::base::Split(value.str_value, ",");
       for (const auto& event_type : event_types) {
         if (!probe_events.CreateProbeEventIfNotExist(event_type)) {
           return false;
@@ -1288,7 +1288,7 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
         return false;
       }
     } else if (name == "--tp-filter") {
-      if (!event_selection_set_.SetTracepointFilter(*value.str_value)) {
+      if (!event_selection_set_.SetTracepointFilter(value.str_value)) {
         return false;
       }
     } else {

@@ -48,16 +48,23 @@ bool ConvertArgsToOptions(const std::vector<std::string>& args,
                           std::vector<std::string>* non_option_args) {
   options->values.clear();
   ordered_options->clear();
+  std::string value_after_equal;
   size_t i;
   for (i = 0; i < args.size() && !args[i].empty() && args[i][0] == '-'; i++) {
     auto it = option_formats.find(args[i]);
     if (it == option_formats.end()) {
-      if (args[i] == "--") {
-        i++;
-        break;
+      if (auto pos = args[i].find("="); pos != std::string::npos) {
+        value_after_equal = args[i].substr(pos + 1);
+        it = option_formats.find(args[i].substr(0, pos));
       }
-      LOG(ERROR) << "Unknown option " << args[i] << "." << help_msg;
-      return false;
+      if (it == option_formats.end()) {
+        if (args[i] == "--") {
+          i++;
+          break;
+        }
+        LOG(ERROR) << "Unknown option " << args[i] << "." << help_msg;
+        return false;
+      }
     }
     const OptionName& name = it->first;
     const OptionFormat& format = it->second;
@@ -75,12 +82,15 @@ bool ConvertArgsToOptions(const std::vector<std::string>& args,
         case OptionValueType::NONE:
           break;
         case OptionValueType::STRING:
-          value.str_value = &args[++i];
+          value.str_value = args[++i];
           break;
         case OptionValueType::OPT_STRING:
           if (!args[i + 1].empty() && args[i + 1][0] != '-') {
-            value.str_value = &args[++i];
+            value.str_value = args[++i];
           }
+          break;
+        case OptionValueType::OPT_STRING_AFTER_EQUAL:
+          value.str_value = value_after_equal;
           break;
         case OptionValueType::UINT:
           if (!android::base::ParseUint(args[++i], &value.uint_value,
@@ -192,15 +202,15 @@ void RegisterAllCommands() {
   RegisterReportCommand();
   RegisterReportSampleCommand();
 #if defined(__linux__)
-    RegisterListCommand();
-    RegisterRecordCommand();
-    RegisterStatCommand();
-    RegisterDebugUnwindCommand();
-    RegisterTraceSchedCommand();
-    RegisterMonitorCommand();
+  RegisterListCommand();
+  RegisterRecordCommand();
+  RegisterStatCommand();
+  RegisterDebugUnwindCommand();
+  RegisterTraceSchedCommand();
+  RegisterMonitorCommand();
 #if defined(__ANDROID__)
-    RegisterAPICommands();
-    RegisterBootRecordCommand();
+  RegisterAPICommands();
+  RegisterBootRecordCommand();
 #endif
 #endif
 }
