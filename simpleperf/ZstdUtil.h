@@ -43,6 +43,8 @@ class Decompressor {
   virtual bool AddInputData(const char* data, size_t size) = 0;
   virtual std::string_view GetOutputData() = 0;
   virtual void ConsumeOutputData(size_t size) = 0;
+
+  bool HasOutputData() { return !GetOutputData().empty(); }
 };
 
 std::unique_ptr<Compressor> CreateZstdCompressor(size_t compression_level = 3);

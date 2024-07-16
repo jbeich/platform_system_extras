@@ -100,8 +100,7 @@ RecordFileReader::RecordFileReader(const std::string& filename, FILE* fp)
     : filename_(filename),
       record_fp_(fp),
       event_id_pos_in_sample_records_(0),
-      event_id_reverse_pos_in_non_sample_records_(0),
-      read_record_size_(0) {
+      event_id_reverse_pos_in_non_sample_records_(0) {
   file_size_ = GetFileSize(filename_);
 }
 
@@ -280,15 +279,17 @@ bool RecordFileReader::ReadDataSection(
 }
 
 bool RecordFileReader::ReadRecord(std::unique_ptr<Record>& record) {
-  if (read_record_size_ == 0) {
+  if (read_record_pos_.end == 0) {
     if (fseek(record_fp_, header_.data.offset, SEEK_SET) != 0) {
       PLOG(ERROR) << "fseek() failed";
       return false;
     }
+    read_record_pos_.end = header_.data.size;
   }
   record = nullptr;
-  if (read_record_size_ < header_.data.size) {
-    record = ReadRecord(read_record_size_);
+  if (read_record_pos_.pos < read_record_pos_.end ||
+      (decompressor_ && decompressor_->HasOutputData())) {
+    record = ReadRecord(read_record_pos_);
     if (record == nullptr) {
       return false;
     }
@@ -299,25 +300,23 @@ bool RecordFileReader::ReadRecord(std::unique_ptr<Record>& record) {
   return true;
 }
 
-std::unique_ptr<Record> RecordFileReader::ReadRecord(uint64_t& read_record_size) {
-  char header_buf[Record::header_size()];
-  RecordHeader header;
-  if (!Read(header_buf, Record::header_size()) || !header.Parse(header_buf)) {
+std::unique_ptr<Record> RecordFileReader::ReadRecord(ReadPos& pos) {
+  std::unique_ptr<char[]> p = ReadRecordWithDecompression(pos);
+  if (!p) {
     return nullptr;
   }
-  std::unique_ptr<char[]> p;
+  RecordHeader header;
+  if (!header.Parse(p.get())) {
+    return nullptr;
+  }
+
   if (header.type == SIMPLE_PERF_RECORD_SPLIT) {
     // Read until meeting a RECORD_SPLIT_END record.
     std::vector<char> buf;
     while (header.type == SIMPLE_PERF_RECORD_SPLIT) {
-      size_t add_size = header.size - Record::header_size();
-      size_t old_size = buf.size();
-      buf.resize(old_size + add_size);
-      if (!Read(&buf[old_size], add_size)) {
-        return nullptr;
-      }
-      read_record_size += header.size;
-      if (!Read(header_buf, Record::header_size()) || !header.Parse(header_buf)) {
+      buf.insert(buf.end(), p.get() + Record::header_size(), p.get() + header.size);
+      p = ReadRecordWithDecompression(pos);
+      if (!p || !header.Parse(p.get())) {
         return nullptr;
       }
     }
@@ -325,7 +324,6 @@ std::unique_ptr<Record> RecordFileReader::ReadRecord(uint64_t& read_record_size)
       LOG(ERROR) << "SPLIT records are not followed by a SPLIT_END record.";
       return nullptr;
     }
-    read_record_size += header.size;
     if (buf.size() < Record::header_size() || !header.Parse(buf.data()) ||
         header.size != buf.size()) {
       LOG(ERROR) << "invalid record merged from SPLIT records";
@@ -333,15 +331,6 @@ std::unique_ptr<Record> RecordFileReader::ReadRecord(uint64_t& read_record_size)
     }
     p.reset(new char[buf.size()]);
     memcpy(p.get(), buf.data(), buf.size());
-  } else {
-    p.reset(new char[header.size]);
-    memcpy(p.get(), header_buf, Record::header_size());
-    if (header.size > Record::header_size()) {
-      if (!Read(p.get() + Record::header_size(), header.size - Record::header_size())) {
-        return nullptr;
-      }
-    }
-    read_record_size += header.size;
   }
 
   const perf_event_attr* attr = &event_attrs_[0].attr;
@@ -375,14 +364,62 @@ std::unique_ptr<Record> RecordFileReader::ReadRecord(uint64_t& read_record_size)
   r->OwnBinary();
   if (r->type() == PERF_RECORD_AUXTRACE) {
     auto auxtrace = static_cast<AuxTraceRecord*>(r.get());
-    auxtrace->location.file_offset = header_.data.offset + read_record_size;
-    read_record_size += auxtrace->data->aux_size;
+    auxtrace->location.file_offset = header_.data.offset + read_record_pos_.pos;
+    read_record_pos_.pos += auxtrace->data->aux_size;
     if (fseek(record_fp_, auxtrace->data->aux_size, SEEK_CUR) != 0) {
       PLOG(ERROR) << "fseek() failed";
       return nullptr;
     }
   }
   return r;
+}
+
+std::unique_ptr<char[]> RecordFileReader::ReadRecordWithDecompression(ReadPos& pos) {
+  while (true) {
+    if (decompressor_) {
+      std::string_view output = decompressor_->GetOutputData();
+      if (output.size() >= sizeof(perf_event_header)) {
+        auto header = reinterpret_cast<const perf_event_header*>(output.data());
+        if (header->size <= output.size()) {
+          std::unique_ptr<char[]> p(new char[header->size]);
+          memcpy(p.get(), output.data(), header->size);
+          decompressor_->ConsumeOutputData(header->size);
+          return p;
+        }
+      }
+    }
+    if (pos.pos == pos.end) {
+      break;
+    }
+    perf_event_header header;
+    if (!Read(&header, sizeof(header))) {
+      return nullptr;
+    }
+    pos.pos += header.size;
+    if (header.type == PERF_RECORD_COMPRESS) {
+      if (!decompressor_) {
+        decompressor_ = CreateZstdDecompressor();
+        if (!decompressor_) {
+          return nullptr;
+        }
+      }
+      std::vector<char> buf(header.size - sizeof(header));
+      if (!Read(buf.data(), buf.size())) {
+        return nullptr;
+      }
+      if (!decompressor_->AddInputData(buf.data(), buf.size())) {
+        return nullptr;
+      }
+    } else {
+      std::unique_ptr<char[]> p(new char[header.size]);
+      memcpy(p.get(), &header, sizeof(header));
+      if (!Read(p.get() + sizeof(header), header.size - sizeof(header))) {
+        return nullptr;
+      }
+      return p;
+    }
+  }
+  return nullptr;
 }
 
 bool RecordFileReader::Read(void* buf, size_t len) {
@@ -746,10 +783,9 @@ bool RecordFileReader::ReadInitMapFeature(
     PLOG(ERROR) << "fseek() failed";
     return false;
   }
-  uint64_t section_size = it->second.size;
-  uint64_t read_record_size = 0;
-  while (read_record_size < section_size) {
-    auto r = ReadRecord(read_record_size);
+  ReadPos pos = {0, it->second.size};
+  while (pos.pos < pos.end || (decompressor_ && decompressor_->HasOutputData())) {
+    auto r = ReadRecord(pos);
     if (!r) {
       return false;
     }
