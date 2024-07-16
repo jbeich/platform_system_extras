@@ -214,6 +214,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6aedbc3_8f14f82e",
+        "filename": "torq/torq.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-16T23:20:27Z",
+      "side": 1,
+      "message": "Added this, thank you.",
+      "parentUuid": "41708d49_d0c37e60",
+      "range": {
+        "startLine": 35,
+        "startChar": 1,
+        "endLine": 37,
+        "endChar": 61
+      },
+      "revId": "4ac7bc6fcc545c886e1fa36714a0de8737ebc035",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "981e894f_a586c543",
@@ -481,6 +505,30 @@
       "side": 1,
       "message": "You missed the `to a value smaller` part in the suggestion.",
       "parentUuid": "4dc402a5_42d4cd0c",
+      "range": {
+        "startLine": 138,
+        "startChar": 57,
+        "endLine": 138,
+        "endChar": 78
+      },
+      "revId": "4ac7bc6fcc545c886e1fa36714a0de8737ebc035",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c39874b4_e0ad64c3",
+        "filename": "torq/torq.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-16T23:20:27Z",
+      "side": 1,
+      "message": "Sdded, thank you.",
+      "parentUuid": "a08b6ed4_678c2f0d",
       "range": {
         "startLine": 138,
         "startChar": 57,
@@ -1168,6 +1216,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ce429d2_6eae8f0f",
+        "filename": "torq/torq.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-16T23:20:27Z",
+      "side": 1,
+      "message": "Changed this, thank you.",
+      "parentUuid": "0e4b95ed_149934b2",
+      "range": {
+        "startLine": 242,
+        "startChar": 6,
+        "endLine": 242,
+        "endChar": 17
+      },
+      "revId": "4ac7bc6fcc545c886e1fa36714a0de8737ebc035",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "12221d7c_9efd0bc5",
@@ -1243,6 +1315,30 @@
       "side": 1,
       "message": "Yes, as explained in comment #242, thank you.",
       "parentUuid": "12221d7c_9efd0bc5",
+      "range": {
+        "startLine": 252,
+        "startChar": 7,
+        "endLine": 252,
+        "endChar": 17
+      },
+      "revId": "4ac7bc6fcc545c886e1fa36714a0de8737ebc035",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd26a6f7_ef1aeb9d",
+        "filename": "torq/torq.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-16T23:20:27Z",
+      "side": 1,
+      "message": "Changed to hw_set_config, thank you.",
+      "parentUuid": "5b660943_2ab465e5",
       "range": {
         "startLine": 252,
         "startChar": 7,
