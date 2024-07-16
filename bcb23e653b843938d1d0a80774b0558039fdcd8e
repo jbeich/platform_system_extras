@@ -16,6 +16,29 @@
       "message": "ps2: adjust commit message",
       "revId": "bcb23e653b843938d1d0a80774b0558039fdcd8e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5bef5f66_57cab3cf",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1368,
+      "author": {
+        "id": 1890456
+      },
+      "writtenOn": "2024-07-16T19:58:53Z",
+      "side": 1,
+      "message": "I don\u0027t think this is necessary? In line 1231 (else case), when `compression_level_` is 0, error raises. And in `if` case, `compression_level_` is 3.",
+      "range": {
+        "startLine": 1368,
+        "startChar": 44,
+        "endLine": 1368,
+        "endChar": 67
+      },
+      "revId": "bcb23e653b843938d1d0a80774b0558039fdcd8e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
