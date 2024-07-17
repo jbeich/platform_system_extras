@@ -3,6 +3,77 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c19128a7_12cd58fd",
+        "filename": "torq/torq.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-07-17T22:02:44Z",
+      "side": 1,
+      "message": "Can we extract this default out_dir to a constant. This will improve readability and indicate that the out_dir is not the default.",
+      "range": {
+        "startLine": 143,
+        "startChar": 5,
+        "endLine": 143,
+        "endChar": 24
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "c4575180_8c10481f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 24,
+                "startChar": 0,
+                "endLine": 24,
+                "endChar": 0
+              },
+              "replacement": "DEFAULT_OUT_DIR \u003d \".\"\n"
+            },
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 35,
+                "startChar": 0,
+                "endLine": 36,
+                "endChar": 0
+              },
+              "replacement": "  parser.add_argument(\u0027-o\u0027, \u0027--out-dir\u0027, default\u003dDEFAULT_OUT_DIR,\n"
+            },
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 126,
+                "startChar": 0,
+                "endLine": 127,
+                "endChar": 0
+              },
+              "replacement": "                                       args.out_dir !\u003d DEFAULT_OUT_DIR or\n"
+            },
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 143,
+                "startChar": 0,
+                "endLine": 144,
+                "endChar": 0
+              },
+              "replacement": "  if args.out_dir !\u003d DEFAULT_OUT_DIR and not os.path.isdir(args.out_dir):\n"
+            }
+          ]
+        }
+      ],
+      "revId": "524791dc78988d4dae114fb620158fc580942ef2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "da45da8d_02eda89c",
         "filename": "torq/torq.py",
         "patchSetId": 1
@@ -91,6 +162,29 @@
           ]
         }
       ],
+      "revId": "524791dc78988d4dae114fb620158fc580942ef2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f28cdaff_be33c606",
+        "filename": "torq/torq.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-07-17T22:02:44Z",
+      "side": 1,
+      "message": "Nit: need a new line at end of the file.",
+      "range": {
+        "startLine": 380,
+        "startChar": 0,
+        "endLine": 380,
+        "endChar": 8
+      },
       "revId": "524791dc78988d4dae114fb620158fc580942ef2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
