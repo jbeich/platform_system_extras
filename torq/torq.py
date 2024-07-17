@@ -15,6 +15,7 @@
 #
 
 import argparse
+import os
 from command import ProfilerCommand, HWCommand, ConfigCommand
 from validation_error import ValidationError
 
@@ -139,6 +140,11 @@ def verify_args_valid(args):
          " or config command."),
         "Remove the 'hw' or 'config' subcommand to profile the device instead.")
 
+  if args.out_dir != "." and not os.path.isdir(args.out_dir):
+    return None, ValidationError(
+        ("Command is invalid because --out-dir %s is not a valid directory"
+         " path." % args.out_dir), None)
+
   if args.dur_ms < MIN_DURATION_MS:
     return None, ValidationError(
         ("Command is invalid because --dur-ms cannot be set to a value smaller"
@@ -156,8 +162,7 @@ def verify_args_valid(args):
   if args.runs < 1:
     return None, ValidationError(
         ("Command is invalid because --runs cannot be set to a value smaller"
-         " than 1."),
-        None)
+         " than 1."), None)
 
   if args.simpleperf_event is not None and args.profiler != "simpleperf":
     return None, ValidationError(
@@ -175,12 +180,19 @@ def verify_args_valid(args):
         ("Only set --simpleperf-event cpu-cycles once if you want"
          " to collect cpu-cycles."))
 
-  if args.perfetto_config != "default" and args.profiler != "perfetto":
-    return None, ValidationError(
-        ("Command is invalid because --perfetto-config cannot be passed"
-         " if --profiler is not set to perfetto."),
-        ("Set --profiler perfetto to choose a perfetto-config"
-         " to use."))
+  if args.perfetto_config != "default":
+    if args.profiler != "perfetto":
+      return None, ValidationError(
+          ("Command is invalid because --perfetto-config cannot be passed"
+           " if --profiler is not set to perfetto."),
+          ("Set --profiler perfetto to choose a perfetto-config"
+           " to use."))
+    if (args.perfetto_config != "lightweight" and
+        args.perfetto_config != "memory" and
+        not os.path.isfile(args.perfetto_config)):
+      return None, ValidationError(
+          ("Command is invalid because --perfetto-config %s is not a valid"
+           " file path." % args.perfetto_config), None)
 
   if args.between_dur_ms < MIN_DURATION_MS:
     return None, ValidationError(
