@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9692864d_783e2073",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2024-07-17T00:11:57Z",
+      "side": 1,
+      "message": "ps3: fix calculating compressed data size.",
+      "revId": "0913622c9a290a262934ebb188e70d5d5ec13a77",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
