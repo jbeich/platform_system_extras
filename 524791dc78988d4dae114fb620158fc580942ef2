@@ -1,0 +1,98 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da45da8d_02eda89c",
+        "filename": "torq/torq.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-17T21:50:08Z",
+      "side": 1,
+      "message": "```suggestion\n        (\"Command is invalid because --out-dir is not a valid directory\"\n         \" path: %s\" % args.out_dir), None)\n```",
+      "range": {
+        "startLine": 145,
+        "startChar": 10,
+        "endLine": 146,
+        "endChar": 16
+      },
+      "revId": "524791dc78988d4dae114fb620158fc580942ef2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c9e7a15_cdb82b1f",
+        "filename": "torq/torq.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-17T21:50:08Z",
+      "side": 1,
+      "message": "Let\u0027s create a constant list that has all the predefined perfetto config names and then check if the passed value is in the constant list. If it is not then we validate that it is a file. We can also use it for the choices argument.",
+      "range": {
+        "startLine": 190,
+        "startChar": 4,
+        "endLine": 192,
+        "endChar": 50
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "4e499706_73739f17",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 24,
+                "startChar": 0,
+                "endLine": 24,
+                "endChar": 0
+              },
+              "replacement": "PREDEFINED_PERFETTO_CONFIGS \u003d [\u0027lightweight\u0027, \u0027default\u0027, \u0027memory\u0027]\n"
+            },
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 106,
+                "startChar": 0,
+                "endLine": 107,
+                "endChar": 0
+              },
+              "replacement": "                                  choices\u003dPREDEFINED_PERFETTO_CONFIGS,\n"
+            },
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 115,
+                "startChar": 0,
+                "endLine": 116,
+                "endChar": 0
+              },
+              "replacement": "                                  choices\u003dPREDEFINED_PERFETTO_CONFIGS,\n"
+            },
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 190,
+                "startChar": 0,
+                "endLine": 192,
+                "endChar": 0
+              },
+              "replacement": "    if (args.perfetto_config not in PREDEFINED_PERFETTO_CONFIGS and\n"
+            }
+          ]
+        }
+      ],
+      "revId": "524791dc78988d4dae114fb620158fc580942ef2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
