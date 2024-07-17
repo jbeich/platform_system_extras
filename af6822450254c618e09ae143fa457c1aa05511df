@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "756fb22a_3f314e3e",
+        "filename": "torq/torq.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-17T22:40:25Z",
+      "side": 1,
+      "message": "This help message should mention the possible predefined values and mention that a filepath with a config could also be passed. If not, users won\u0027t know that there are some predefined values that could be used.",
+      "range": {
+        "startLine": 51,
+        "startChar": 28,
+        "endLine": 51,
+        "endChar": 67
+      },
+      "revId": "af6822450254c618e09ae143fa457c1aa05511df",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

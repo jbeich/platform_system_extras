@@ -238,6 +238,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "94fe2314_3b843ae6",
+        "filename": "torq/torq.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-17T22:40:25Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "2a3dbba5_d0fb0430",
+      "range": {
+        "startLine": 190,
+        "startChar": 4,
+        "endLine": 192,
+        "endChar": 50
+      },
+      "revId": "524791dc78988d4dae114fb620158fc580942ef2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f28cdaff_be33c606",
