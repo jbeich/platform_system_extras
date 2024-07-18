@@ -55,6 +55,12 @@ TEST(ZstdUtil, smoke) {
   ASSERT_TRUE(compressor->FlushOutputData());
   get_compressor_output();
   ASSERT_NE(compressed_output.size(), 0);
+  ASSERT_EQ(compressor->TotalInputSize(), input_a.size());
+  ASSERT_EQ(compressor->TotalOutputSize(), compressed_output.size());
+
+  // Flush with no new input doesn't affect output.
+  ASSERT_TRUE(compressor->FlushOutputData());
+  ASSERT_TRUE(compressor->GetOutputData().empty());
 
   ASSERT_TRUE(decompressor->AddInputData(compressed_output.data(), compressed_output.size() / 2));
   get_decompressor_output();

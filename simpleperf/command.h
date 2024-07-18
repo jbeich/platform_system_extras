@@ -67,8 +67,8 @@ using OptionFormatMap = std::unordered_map<OptionName, OptionFormat>;
 
 struct OptionValue {
   std::string str_value;
-  uint64_t uint_value;
-  double double_value;
+  uint64_t uint_value = 0;
+  double double_value = 0;
 };
 
 struct OptionValueMap {

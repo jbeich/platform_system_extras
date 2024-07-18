@@ -512,8 +512,7 @@ TEST(record_cmd, stop_when_no_more_targets) {
     sleep(1);
   });
   thread.detach();
-  while (tid == 0)
-    ;
+  while (tid == 0);
   ASSERT_TRUE(RecordCmd()->Run(
       {"-o", tmpfile.path, "-t", std::to_string(tid), "--in-app", "-e", GetDefaultEvent()}));
 }
@@ -1467,4 +1466,16 @@ TEST(record_cmd, delay_option) {
   TemporaryFile tmpfile;
   ASSERT_TRUE(RecordCmd()->Run(
       {"-o", tmpfile.path, "-e", GetDefaultEvent(), "--delay", "100", "sleep", "1"}));
+}
+
+// @CddTest = 6.1/C-0-2
+TEST(record_cmd, compression_option) {
+  TemporaryFile tmpfile;
+  ASSERT_TRUE(RunRecordCmd({"-z"}, tmpfile.path));
+  std::unique_ptr<RecordFileReader> reader = RecordFileReader::CreateInstance(tmpfile.path);
+  ASSERT_TRUE(reader != nullptr);
+  std::vector<std::unique_ptr<Record>> records = reader->DataSection();
+  ASSERT_GT(records.size(), 0U);
+
+  ASSERT_TRUE(RunRecordCmd({"-z=3"}, tmpfile.path));
 }

@@ -83,12 +83,17 @@ class ZstdCompressor : public Compressor {
         return false;
       }
       out_buffer_.ProduceData(output.pos);
+      total_output_size_ += output.pos;
     }
     total_input_size_ += size;
     return true;
   }
 
   bool FlushOutputData() override {
+    if (flushed_input_size_ == total_input_size_) {
+      return true;
+    }
+    flushed_input_size_ = total_input_size_;
     ZSTD_inBuffer input = {nullptr, 0, 0};
     size_t remaining = 0;
     do {
@@ -114,6 +119,7 @@ class ZstdCompressor : public Compressor {
  private:
   ZSTD_CCtx_pointer cctx_;
   CompressionOutBuffer out_buffer_;
+  uint64_t flushed_input_size_ = 0;
 };
 
 using ZSTD_DCtx_pointer = std::unique_ptr<ZSTD_DCtx, decltype(&ZSTD_freeDCtx)>;

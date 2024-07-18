@@ -175,6 +175,18 @@ TEST(command, PreprocessOptions) {
   // unexpected non_option_args
   ASSERT_FALSE(cmd.PreprocessOptions({"non_option_args"}, option_formats, &options,
                                      &ordered_options, nullptr));
+
+  auto parse_args = [&](const std::vector<std::string>& args) {
+    return cmd.PreprocessOptions(args, option_formats, &options, &ordered_options, nullptr);
+  };
+
+  ASSERT_TRUE(parse_args({"--opt-str-after-equal-option"}));
+  std::string s;
+  options.PullStringValue("--opt-str-after-equal-option", &s);
+  ASSERT_EQ(s, "");
+  ASSERT_TRUE(parse_args({"--opt-str-after-equal-option=str_value"}));
+  options.PullStringValue("--opt-str-after-equal-option", &s);
+  ASSERT_EQ(s, "str_value");
 }
 
 // @CddTest = 6.1/C-0-2
