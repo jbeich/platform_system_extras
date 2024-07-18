@@ -316,7 +316,7 @@ def verify_args_valid(args):
 
   if (args.subcommands == "config" and args.config_subcommand == "pull" and
       args.file_path is None):
-    args.file_path = "./" + args.config_name + ".config"
+    args.file_path = "./" + args.config_name + ".pbtxt"
 
   return args, None
 
