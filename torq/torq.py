@@ -261,7 +261,7 @@ def verify_args_valid(args):
     return None, ValidationError(
         ("Command is invalid because hw set --num-cpus cannot be set to"
          " smaller than 1."),
-        ("Set hw set --num-cpus 1 to set 1 active core in "
+        ("Set hw set --num-cpus 1 to set 1 active core in"
          " hardware."))
 
   if (args.subcommands == "hw" and args.hw_subcommand == "set" and
@@ -316,7 +316,7 @@ def verify_args_valid(args):
 
   if (args.subcommands == "config" and args.config_subcommand == "pull" and
       args.file_path is None):
-    args.file_path = "./" + args.config_name + ".config"
+    args.file_path = "./" + args.config_name + ".pbtxt"
 
   return args, None
 
