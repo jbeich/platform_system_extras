@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2f4542d_df24933f",
+        "filename": "torq/torq.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-18T19:43:21Z",
+      "side": 1,
+      "message": "Let\u0027s make the help message follow this format:\n```\nPredefined perfetto configs can be used:\n    default\n    lightweight\n    memory\nA filepath with a custom config could also be provided\n```\nAnd use join method for this. We need to make sure the message is still correct if we add new predefined configs in the future.",
+      "range": {
+        "startLine": 51,
+        "startChar": 28,
+        "endLine": 56,
+        "endChar": 57
+      },
+      "revId": "263c710bc9193b2de2372204e4710f231a252a35",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
