@@ -43,6 +43,10 @@ fi
 if [[ "${dir}" == *.apk ]]; then
   trap 'cleanup_trap' EXIT
 
+  echo
+  echo "Recursively analyzing $dir"
+  echo
+
   if { zipalign --help 2>&1 | grep -q "\-P <pagesize_kb>"; }; then
     echo "=== APK zip-alignment ==="
     zipalign -v -c -P 16 4 "${dir}" | egrep 'lib/arm64-v8a|lib/x86_64|Verification'
@@ -63,6 +67,10 @@ fi
 
 if [[ "${dir}" == *.apex ]]; then
   trap 'cleanup_trap' EXIT
+
+  echo
+  echo "Recursively analyzing $dir"
+  echo
 
   dir_filename=$(basename "${dir}")
   tmp=$(mktemp -d -t "${dir_filename%.apex}_out_XXXXX")

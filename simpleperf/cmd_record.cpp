@@ -285,6 +285,8 @@ RECORD_FILTER_OPTION_HELP_MSG_FOR_RECORDING
 "                 This option is used to provide files with symbol table and\n"
 "                 debug information, which are used for unwinding and dumping symbols.\n"
 "--add-meta-info key=value     Add extra meta info, which will be stored in the recording file.\n"
+"-z[=<compression_level>]      Compress records using zstd. compression level: 1 is the fastest,\n"
+"                              22 is the greatest, 3 is the default.\n"
 "\n"
 "ETM recording options:\n"
 "--addr-filter filter_str1,filter_str2,...\n"
@@ -480,6 +482,8 @@ RECORD_FILTER_OPTION_HELP_MSG_FOR_RECORDING
   std::unique_ptr<ETMBranchListGenerator> etm_branch_list_generator_;
   std::unique_ptr<RegEx> binary_name_regex_;
   std::chrono::milliseconds etm_flush_interval_{kDefaultEtmDataFlushIntervalInMs};
+
+  size_t compression_level_ = 0;
 };
 
 std::string RecordCommand::LongHelpString() const {
@@ -866,6 +870,9 @@ bool RecordCommand::PostProcessRecording(const std::vector<std::string>& args) {
   }
 
   // 4. Dump additional features, and close record file.
+  if (!record_file_writer_->FinishWritingDataSection()) {
+    return false;
+  }
   if (!DumpAdditionalFeatures(args)) {
     return false;
   }
@@ -878,6 +885,16 @@ bool RecordCommand::PostProcessRecording(const std::vector<std::string>& args) {
   time_stat_.post_process_time = GetSystemClock();
 
   // 5. Show brief record result.
+  auto report_compression_stat = [&]() {
+    if (auto compressor = record_file_writer_->GetCompressor(); compressor != nullptr) {
+      uint64_t original_size = compressor->TotalInputSize();
+      uint64_t compressed_size = compressor->TotalOutputSize();
+      LOG(INFO) << "Record compressed: " << ReadableBytes(compressed_size) << " (original "
+                << ReadableBytes(original_size) << ", ratio " << std::setprecision(2)
+                << (static_cast<double>(original_size) / compressed_size) << ")";
+    }
+  };
+
   auto record_stat = event_selection_set_.GetRecordStat();
   if (event_selection_set_.HasAuxTrace()) {
     LOG(INFO) << "Aux data traced: " << ReadableCount(record_stat.aux_data_size);
@@ -885,6 +902,7 @@ bool RecordCommand::PostProcessRecording(const std::vector<std::string>& args) {
       LOG(INFO) << "Aux data lost in user space: " << ReadableCount(record_stat.lost_aux_data_size)
                 << ", consider increasing userspace buffer size(--user-buffer-size).";
     }
+    report_compression_stat();
   } else {
     // Here we report all lost records as samples. This isn't accurate. Because records like
     // MmapRecords are not samples. But It's easier for users to understand.
@@ -905,6 +923,7 @@ bool RecordCommand::PostProcessRecording(const std::vector<std::string>& args) {
     }
     os << ".";
     LOG(INFO) << os.str();
+    report_compression_stat();
 
     LOG(DEBUG) << "Record stat: kernelspace_lost_records="
                << ReadableCount(record_stat.kernelspace_lost_records)
@@ -974,11 +993,11 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
   system_wide_collection_ = options.PullBoolValue("-a");
 
   if (auto value = options.PullValue("--add-counter"); value) {
-    add_counters_ = android::base::Split(*value->str_value, ",");
+    add_counters_ = android::base::Split(value->str_value, ",");
   }
 
   for (const OptionValue& value : options.PullValues("--add-meta-info")) {
-    const std::string& s = *value.str_value;
+    const std::string& s = value.str_value;
     auto split_pos = s.find('=');
     if (split_pos == std::string::npos || split_pos == 0 || split_pos + 1 == s.size()) {
       LOG(ERROR) << "invalid meta-info: " << s;
@@ -988,7 +1007,7 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
   }
 
   if (auto value = options.PullValue("--addr-filter"); value) {
-    auto filters = ParseAddrFilterOption(*value->str_value);
+    auto filters = ParseAddrFilterOption(value->str_value);
     if (filters.empty()) {
       return false;
     }
@@ -996,7 +1015,7 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
   }
 
   if (auto value = options.PullValue("--app"); value) {
-    app_package_name_ = *value->str_value;
+    app_package_name_ = value->str_value;
   }
 
   if (auto value = options.PullValue("--aux-buffer-size"); value) {
@@ -1013,7 +1032,7 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
   }
 
   if (auto value = options.PullValue("--binary"); value) {
-    binary_name_regex_ = RegEx::Create(*value->str_value);
+    binary_name_regex_ = RegEx::Create(value->str_value);
     if (binary_name_regex_ == nullptr) {
       return false;
     }
@@ -1025,7 +1044,7 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
   }
 
   if (auto value = options.PullValue("--clockid"); value) {
-    clockid_ = *value->str_value;
+    clockid_ = value->str_value;
     if (clockid_ != "perf") {
       if (!IsSettingClockIdSupported()) {
         LOG(ERROR) << "Setting clockid is not supported by the kernel.";
@@ -1086,7 +1105,7 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
   in_app_context_ = options.PullBoolValue("--in-app");
 
   for (const OptionValue& value : options.PullValues("-j")) {
-    std::vector<std::string> branch_sampling_types = android::base::Split(*value.str_value, ",");
+    std::vector<std::string> branch_sampling_types = android::base::Split(value.str_value, ",");
     for (auto& type : branch_sampling_types) {
       auto it = branch_sampling_type_map.find(type);
       if (it == branch_sampling_type_map.end()) {
@@ -1103,7 +1122,7 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
   }
 
   for (const OptionValue& value : options.PullValues("--kprobe")) {
-    std::vector<std::string> cmds = android::base::Split(*value.str_value, ",");
+    std::vector<std::string> cmds = android::base::Split(value.str_value, ",");
     for (const auto& cmd : cmds) {
       if (!probe_events.AddKprobe(cmd)) {
         return false;
@@ -1134,7 +1153,7 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
   unwind_dwarf_callchain_ = !options.PullBoolValue("--no-unwind");
 
   if (auto value = options.PullValue("-o"); value) {
-    record_filename_ = *value->str_value;
+    record_filename_ = value->str_value;
   }
 
   if (auto value = options.PullValue("--out-fd"); value) {
@@ -1184,13 +1203,13 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
   }
 
   if (auto value = options.PullValue("--symfs"); value) {
-    if (!Dso::SetSymFsDir(*value->str_value)) {
+    if (!Dso::SetSymFsDir(value->str_value)) {
       return false;
     }
   }
 
   for (const OptionValue& value : options.PullValues("-t")) {
-    if (auto tids = GetTidsFromString(*value.str_value, true); tids) {
+    if (auto tids = GetTidsFromString(value.str_value, true); tids) {
       event_selection_set_.AddMonitoredThreads(tids.value());
     } else {
       return false;
@@ -1200,11 +1219,25 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
   trace_offcpu_ = options.PullBoolValue("--trace-offcpu");
 
   if (auto value = options.PullValue("--tracepoint-events"); value) {
-    if (!EventTypeManager::Instance().ReadTracepointsFromFile(*value->str_value)) {
+    if (!EventTypeManager::Instance().ReadTracepointsFromFile(value->str_value)) {
       return false;
     }
   }
   use_cmd_exit_code_ = options.PullBoolValue("--use-cmd-exit-code");
+
+  if (auto value = options.PullValue("-z"); value) {
+    if (value->str_value.empty()) {
+      // 3 is the default compression level of zstd library, in ZSTD_defaultCLevel().
+      constexpr size_t DEFAULT_COMPRESSION_LEVEL = 3;
+      compression_level_ = DEFAULT_COMPRESSION_LEVEL;
+    } else {
+      if (!android::base::ParseUint(value->str_value, &compression_level_) ||
+          compression_level_ < 1 || compression_level_ > 22) {
+        LOG(ERROR) << "invalid compression level for -z: " << value->str_value;
+        return false;
+      }
+    }
+  }
 
   CHECK(options.values.empty());
 
@@ -1231,7 +1264,7 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
       event_selection_set_.SetSampleRateForNewEvents(rate);
 
     } else if (name == "--call-graph") {
-      std::vector<std::string> strs = android::base::Split(*value.str_value, ",");
+      std::vector<std::string> strs = android::base::Split(value.str_value, ",");
       if (strs[0] == "fp") {
         fp_callchain_sampling_ = true;
         dwarf_callchain_sampling_ = false;
@@ -1258,14 +1291,14 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
       }
 
     } else if (name == "--cpu") {
-      if (auto cpus = GetCpusFromString(*value.str_value); cpus) {
+      if (auto cpus = GetCpusFromString(value.str_value); cpus) {
         event_selection_set_.SetCpusForNewEvents(
             std::vector<int>(cpus.value().begin(), cpus.value().end()));
       } else {
         return false;
       }
     } else if (name == "-e") {
-      std::vector<std::string> event_types = android::base::Split(*value.str_value, ",");
+      std::vector<std::string> event_types = android::base::Split(value.str_value, ",");
       for (auto& event_type : event_types) {
         if (!probe_events.CreateProbeEventIfNotExist(event_type)) {
           return false;
@@ -1278,7 +1311,7 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
       fp_callchain_sampling_ = false;
       dwarf_callchain_sampling_ = true;
     } else if (name == "--group") {
-      std::vector<std::string> event_types = android::base::Split(*value.str_value, ",");
+      std::vector<std::string> event_types = android::base::Split(value.str_value, ",");
       for (const auto& event_type : event_types) {
         if (!probe_events.CreateProbeEventIfNotExist(event_type)) {
           return false;
@@ -1288,7 +1321,7 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
         return false;
       }
     } else if (name == "--tp-filter") {
-      if (!event_selection_set_.SetTracepointFilter(*value.str_value)) {
+      if (!event_selection_set_.SetTracepointFilter(value.str_value)) {
         return false;
       }
     } else {
@@ -1335,7 +1368,6 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
   if (clockid_.empty()) {
     clockid_ = IsSettingClockIdSupported() ? "monotonic" : "perf";
   }
-
   return true;
 }
 
@@ -1449,10 +1481,16 @@ bool RecordCommand::CreateAndInitRecordFile() {
 std::unique_ptr<RecordFileWriter> RecordCommand::CreateRecordFile(const std::string& filename,
                                                                   const EventAttrIds& attrs) {
   std::unique_ptr<RecordFileWriter> writer = RecordFileWriter::CreateInstance(filename);
-  if (writer != nullptr && writer->WriteAttrSection(attrs)) {
-    return writer;
+  if (!writer) {
+    return nullptr;
   }
-  return nullptr;
+  if (compression_level_ != 0 && !writer->SetCompressionLevel(compression_level_)) {
+    return nullptr;
+  }
+  if (!writer->WriteAttrSection(attrs)) {
+    return nullptr;
+  }
+  return writer;
 }
 
 bool RecordCommand::DumpKernelSymbol() {
@@ -1850,7 +1888,7 @@ bool RecordCommand::KeepFailedUnwindingResult(const SampleRecord& r,
 }
 
 std::unique_ptr<RecordFileReader> RecordCommand::MoveRecordFile(const std::string& old_filename) {
-  if (!record_file_writer_->Close()) {
+  if (!record_file_writer_->FinishWritingDataSection() || !record_file_writer_->Close()) {
     return nullptr;
   }
   record_file_writer_.reset();
@@ -1965,7 +2003,7 @@ bool RecordCommand::DumpAdditionalFeatures(const std::vector<std::string>& args)
     kernel_symbols_available = true;
   }
   std::unordered_set<int> loaded_symbol_maps;
-  std::vector<uint64_t> auxtrace_offset;
+  const std::vector<uint64_t>& auxtrace_offset = record_file_writer_->AuxTraceRecordOffsets();
   std::unordered_set<Dso*> debug_unwinding_files;
   bool failed_unwinding_sample = false;
 
@@ -1983,15 +2021,12 @@ bool RecordCommand::DumpAdditionalFeatures(const std::vector<std::string>& args)
       } else {
         CollectHitFileInfo(*sample, nullptr);
       }
-    } else if (r->type() == PERF_RECORD_AUXTRACE) {
-      auto auxtrace = static_cast<const AuxTraceRecord*>(r);
-      auxtrace_offset.emplace_back(auxtrace->location.file_offset - auxtrace->size());
     } else if (r->type() == SIMPLE_PERF_RECORD_UNWINDING_RESULT) {
       failed_unwinding_sample = true;
     }
   };
 
-  if (!record_file_writer_->ReadDataSection(callback)) {
+  if (!event_selection_set_.HasAuxTrace() && !record_file_writer_->ReadDataSection(callback)) {
     return false;
   }
 
@@ -2220,9 +2255,10 @@ bool RecordCommand::DumpInitMapFeature() {
     return false;
   }
   auto callback = [&](const char* data, size_t size) {
-    return record_file_writer_->WriteFeature(PerfFileFormat::FEAT_INIT_MAP, data, size);
+    return record_file_writer_->WriteInitMapFeature(data, size);
   };
-  return map_record_thread_->ReadMapRecordData(callback);
+  return map_record_thread_->ReadMapRecordData(callback) &&
+         record_file_writer_->FinishWritingInitMapFeature();
 }
 
 }  // namespace

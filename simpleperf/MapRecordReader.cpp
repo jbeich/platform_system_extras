@@ -25,6 +25,7 @@
 #include <android-base/strings.h>
 
 #include "environment.h"
+#include "thread_tree.h"
 
 namespace simpleperf {
 
@@ -33,6 +34,13 @@ bool MapRecordReader::ReadKernelMaps() {
   std::vector<KernelMmap> module_mmaps;
   GetKernelAndModuleMmaps(&kernel_mmap, &module_mmaps);
 
+  // Inject an mmap record covering all of kernel's address space. This is used to set up a map for
+  // dynamically allocated BPF JIT regions outside [kernel.kallsyms]. Needs to be added first.
+  MmapRecord bpf_record(attr_, true, UINT_MAX, 0, 0, std::numeric_limits<uint64_t>::max(), 0,
+                        DEFAULT_KERNEL_BPF_MMAP_NAME, event_id_);
+  if (!callback_(&bpf_record)) {
+    return false;
+  }
   MmapRecord mmap_record(attr_, true, UINT_MAX, 0, kernel_mmap.start_addr, kernel_mmap.len, 0,
                          kernel_mmap.filepath, event_id_);
   if (!callback_(&mmap_record)) {
