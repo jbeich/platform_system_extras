@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19999b3c_5938a98d",
+        "filename": "torq/torq.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-07-23T21:34:19Z",
+      "side": 1,
+      "message": "Nit: I think this should be `.pbtxt`.",
+      "range": {
+        "startLine": 319,
+        "startChar": 59,
+        "endLine": 319,
+        "endChar": 64
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "8f2c3938_e23ab303",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 319,
+                "startChar": 0,
+                "endLine": 320,
+                "endChar": 0
+              },
+              "replacement": "    args.file_path \u003d \"./artifacts/\" + args.config_name + \".pbtxt\"\n"
+            }
+          ]
+        }
+      ],
+      "revId": "e47f45e91f0e4581a777c9df18902040d81a630b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
