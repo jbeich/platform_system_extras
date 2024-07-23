@@ -1,0 +1,466 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c887f36_2ce34f78",
+        "filename": "torq/tests/torq_unit_test.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-07-23T16:36:31Z",
+      "side": 1,
+      "message": "This `_object` part is redundant.",
+      "range": {
+        "startLine": 26,
+        "startChar": 20,
+        "endLine": 26,
+        "endChar": 27
+      },
+      "revId": "e6201282e351c9d4542af4d54846e319cbb22f97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a16207f_0c7570ea",
+        "filename": "torq/tests/torq_unit_test.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-07-23T16:36:31Z",
+      "side": 1,
+      "message": "Per go/unit-testing-practices#naming-dos-and-donts, the names of each unit test should clearly state the purpose of the test.\n\nFor example the titles could be `test_\u003cfunction_under_test\u003e_\u003cbehavior\u003e`.",
+      "range": {
+        "startLine": 49,
+        "startChar": 6,
+        "endLine": 49,
+        "endChar": 25
+      },
+      "revId": "e6201282e351c9d4542af4d54846e319cbb22f97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5675f36_0d400fb7",
+        "filename": "torq/tests/torq_unit_test.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-07-23T16:36:31Z",
+      "side": 1,
+      "message": "Can replace this with the `DEFAULT_OUT_DIR` that we defined in the main `torq` file earlier.",
+      "range": {
+        "startLine": 55,
+        "startChar": 35,
+        "endLine": 55,
+        "endChar": 38
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "0db4c5e3_fbd441ab",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/tests/torq_unit_test.py",
+              "range": {
+                "startLine": 20,
+                "startChar": 0,
+                "endLine": 22,
+                "endChar": 0
+              },
+              "replacement": "from torq import create_parser, verify_args_valid, get_command_type, DEFAULT_DUR_MS, MIN_DURATION_MS, DEFAULT_OUT_DIR\n"
+            },
+            {
+              "path": "torq/tests/torq_unit_test.py",
+              "range": {
+                "startLine": 55,
+                "startChar": 0,
+                "endLine": 56,
+                "endChar": 0
+              },
+              "replacement": "    self.assertEqual(args.out_dir, DEFAULT_OUT_DIR)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "e6201282e351c9d4542af4d54846e319cbb22f97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b716f950_36d30be9",
+        "filename": "torq/tests/torq_unit_test.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-07-23T16:36:31Z",
+      "side": 1,
+      "message": "Can we add a TODO comment to parameterize these test functions in the future.\n\nSomething like the below would make the test easier to read and also remove redundancies:\n\n```\n@parametrize(\"input, expected\", [\n    (custom, profiler),\n    (boot, profiler),\n    (user-switch, profiler),\n])\n```\n\nAlternatively, we could use `unittest.TestCase.subTest()` as well.",
+      "range": {
+        "startLine": 62,
+        "startChar": 2,
+        "endLine": 62,
+        "endChar": 35
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "6f9d3dbd_0627f08f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/tests/torq_unit_test.py",
+              "range": {
+                "startLine": 62,
+                "startChar": 0,
+                "endLine": 62,
+                "endChar": 0
+              },
+              "replacement": "  # TODO(b/285191111): Parameterize the test functions.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "e6201282e351c9d4542af4d54846e319cbb22f97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ddcf88b_3950eabc",
+        "filename": "torq/tests/torq_unit_test.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-07-23T16:36:31Z",
+      "side": 1,
+      "message": "When asserting that these execeptions are thrown, we should also validate the contents of the error message per: go/codelab-test-python#testing-exceptional-conditions\n\nOne could use with `self.assertRaisesRegex(SomeException, \u0027regex\u0027):`.\n\nFor example this one might have `argparse.ArgumentError: argument -e/--event: invalid choice: \u0027fake-event\u0027 (choose from \u0027boot\u0027, \u0027user-switch\u0027, \u0027app-startup\u0027, \u0027custom\u0027)`\n\nEvery other function that checks for these exceptions being thrown should also have these checks.",
+      "range": {
+        "startLine": 97,
+        "startChar": 4,
+        "endLine": 98,
+        "endChar": 25
+      },
+      "revId": "e6201282e351c9d4542af4d54846e319cbb22f97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "482a68d5_932aa56c",
+        "filename": "torq/tests/torq_unit_test.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-07-23T16:36:31Z",
+      "side": 1,
+      "message": "Prefer `mock.patch.object` and include `autoSpec\u003dTrue` per go/mock-cookbook#patching",
+      "range": {
+        "startLine": 100,
+        "startChar": 3,
+        "endLine": 100,
+        "endChar": 8
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "16c974e7_74452b72",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/tests/torq_unit_test.py",
+              "range": {
+                "startLine": 17,
+                "startChar": 0,
+                "endLine": 17,
+                "endChar": 0
+              },
+              "replacement": "from unittest import mock\n"
+            },
+            {
+              "path": "torq/tests/torq_unit_test.py",
+              "range": {
+                "startLine": 18,
+                "startChar": 0,
+                "endLine": 19,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "torq/tests/torq_unit_test.py",
+              "range": {
+                "startLine": 100,
+                "startChar": 0,
+                "endLine": 101,
+                "endChar": 0
+              },
+              "replacement": "  @mock.patch.object(\"torq.os.path\", \"isdir\", autospec\u003dTrue)\n"
+            },
+            {
+              "path": "torq/tests/torq_unit_test.py",
+              "range": {
+                "startLine": 117,
+                "startChar": 0,
+                "endLine": 119,
+                "endChar": 0
+              },
+              "replacement": "  @mock.patch.object(\"torq.os.path\", \"isfile\", autospec\u003dTrue)\n  @mock.patch.object(\"torq.os.path\", \"isdir\", autospec\u003dTrue)\n"
+            },
+            {
+              "path": "torq/tests/torq_unit_test.py",
+              "range": {
+                "startLine": 222,
+                "startChar": 0,
+                "endLine": 223,
+                "endChar": 0
+              },
+              "replacement": "  @mock.patch.object(\"torq.os.path\", \"isfile\", autospec\u003dTrue)\n"
+            },
+            {
+              "path": "torq/tests/torq_unit_test.py",
+              "range": {
+                "startLine": 241,
+                "startChar": 0,
+                "endLine": 243,
+                "endChar": 0
+              },
+              "replacement": "  @mock.patch.object(\"torq.os.path\", \"isfile\", autospec\u003dTrue)\n  @mock.patch.object(\"torq.os.path\", \"isdir\", autospec\u003dTrue)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "e6201282e351c9d4542af4d54846e319cbb22f97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6eee1ac9_7f6ab547",
+        "filename": "torq/tests/torq_unit_test.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-07-23T16:36:31Z",
+      "side": 1,
+      "message": "Do we also have a test scenario for when `--perfetto-config` is nothing?",
+      "range": {
+        "startLine": 225,
+        "startChar": 41,
+        "endLine": 225,
+        "endChar": 58
+      },
+      "revId": "e6201282e351c9d4542af4d54846e319cbb22f97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93b5ea04_f4a0fad7",
+        "filename": "torq/tests/torq_unit_test.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-07-23T16:36:31Z",
+      "side": 1,
+      "message": "Can probably also use the `PREDEFINED_PERFETTO_CONFIGS` defined in `torq`.",
+      "range": {
+        "startLine": 229,
+        "startChar": 59,
+        "endLine": 229,
+        "endChar": 66
+      },
+      "revId": "e6201282e351c9d4542af4d54846e319cbb22f97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3785b439_e875e52b",
+        "filename": "torq/tests/torq_unit_test.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-07-23T16:36:31Z",
+      "side": 1,
+      "message": "What about if 4G is not specified?",
+      "revId": "e6201282e351c9d4542af4d54846e319cbb22f97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1898c9dc_dc954dfb",
+        "filename": "torq/tests/torq_unit_test.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-07-23T16:36:31Z",
+      "side": 1,
+      "message": "Can probably also use the `PREDEFINED_PERFETTO_CONFIGS` defined in `torq`.",
+      "range": {
+        "startLine": 326,
+        "startChar": 53,
+        "endLine": 326,
+        "endChar": 64
+      },
+      "revId": "e6201282e351c9d4542af4d54846e319cbb22f97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7df90c84_75aa0b9b",
+        "filename": "torq/tests/torq_unit_test.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-07-23T16:36:31Z",
+      "side": 1,
+      "message": "We need to add a TODO here to ensure that the packagename or however we specify the app names supplies is correct. It\u0027s currently not implemented.",
+      "range": {
+        "startLine": 396,
+        "startChar": 59,
+        "endLine": 396,
+        "endChar": 65
+      },
+      "revId": "e6201282e351c9d4542af4d54846e319cbb22f97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b83ee951_d374e359",
+        "filename": "torq/tests/torq_unit_test.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 524,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-07-23T16:36:31Z",
+      "side": 1,
+      "message": "Should probably mention that it is false because multiple runs were specified.",
+      "range": {
+        "startLine": 524,
+        "startChar": 29,
+        "endLine": 524,
+        "endChar": 46
+      },
+      "revId": "e6201282e351c9d4542af4d54846e319cbb22f97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8786be6c_d99b087b",
+        "filename": "torq/tests/torq_unit_test.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-07-23T16:36:31Z",
+      "side": 1,
+      "message": "The config on the device is usually in `.pbtxt` format.",
+      "range": {
+        "startLine": 573,
+        "startChar": 52,
+        "endLine": 573,
+        "endChar": 58
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "41ce6b81_2743bf7d",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/tests/torq_unit_test.py",
+              "range": {
+                "startLine": 573,
+                "startChar": 0,
+                "endLine": 574,
+                "endChar": 0
+              },
+              "replacement": "    self.assertEqual(args.file_path, \"./lightweight.pbtxt\")\n"
+            },
+            {
+              "path": "torq/tests/torq_unit_test.py",
+              "range": {
+                "startLine": 579,
+                "startChar": 0,
+                "endLine": 580,
+                "endChar": 0
+              },
+              "replacement": "    self.assertEqual(args.file_path, \"./default.pbtxt\")\n"
+            },
+            {
+              "path": "torq/tests/torq_unit_test.py",
+              "range": {
+                "startLine": 585,
+                "startChar": 0,
+                "endLine": 586,
+                "endChar": 0
+              },
+              "replacement": "    self.assertEqual(args.file_path, \"./memory.pbtxt\")\n"
+            }
+          ]
+        }
+      ],
+      "revId": "e6201282e351c9d4542af4d54846e319cbb22f97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61fef284_95dec41f",
+        "filename": "torq/tests/torq_unit_test.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 615,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-07-23T16:36:31Z",
+      "side": 1,
+      "message": "Nit: newline at end of file.",
+      "revId": "e6201282e351c9d4542af4d54846e319cbb22f97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
