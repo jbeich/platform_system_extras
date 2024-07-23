@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8950caa4_4f2cd667",
+        "filename": "torq/tests/torq_unit_test.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-23T21:33:04Z",
+      "side": 1,
+      "message": "Removed this, thank you.",
+      "parentUuid": "0c887f36_2ce34f78",
+      "range": {
+        "startLine": 26,
+        "startChar": 20,
+        "endLine": 26,
+        "endChar": 27
+      },
+      "revId": "e6201282e351c9d4542af4d54846e319cbb22f97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7a16207f_0c7570ea",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-07-23T16:36:31Z",
       "side": 1,
       "message": "Per go/unit-testing-practices#naming-dos-and-donts, the names of each unit test should clearly state the purpose of the test.\n\nFor example the titles could be `test_\u003cfunction_under_test\u003e_\u003cbehavior\u003e`.",
+      "range": {
+        "startLine": 49,
+        "startChar": 6,
+        "endLine": 49,
+        "endChar": 25
+      },
+      "revId": "e6201282e351c9d4542af4d54846e319cbb22f97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7f643cc_e8d8b27c",
+        "filename": "torq/tests/torq_unit_test.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-23T21:33:04Z",
+      "side": 1,
+      "message": "Added relevant function name to all tests, thank you.",
+      "parentUuid": "7a16207f_0c7570ea",
       "range": {
         "startLine": 49,
         "startChar": 6,
@@ -98,6 +146,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eafe19e1_f1e521ab",
+        "filename": "torq/tests/torq_unit_test.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-23T21:33:04Z",
+      "side": 1,
+      "message": "Replaced this, thank you.",
+      "parentUuid": "a5675f36_0d400fb7",
+      "range": {
+        "startLine": 55,
+        "startChar": 35,
+        "endLine": 55,
+        "endChar": 38
+      },
+      "revId": "e6201282e351c9d4542af4d54846e319cbb22f97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b716f950_36d30be9",
@@ -139,6 +211,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "22478c6c_3199ee4d",
+        "filename": "torq/tests/torq_unit_test.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-23T21:33:04Z",
+      "side": 1,
+      "message": "Added this, thank you.",
+      "parentUuid": "b716f950_36d30be9",
+      "range": {
+        "startLine": 62,
+        "startChar": 2,
+        "endLine": 62,
+        "endChar": 35
+      },
+      "revId": "e6201282e351c9d4542af4d54846e319cbb22f97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2ddcf88b_3950eabc",
@@ -152,6 +248,30 @@
       "writtenOn": "2024-07-23T16:36:31Z",
       "side": 1,
       "message": "When asserting that these execeptions are thrown, we should also validate the contents of the error message per: go/codelab-test-python#testing-exceptional-conditions\n\nOne could use with `self.assertRaisesRegex(SomeException, \u0027regex\u0027):`.\n\nFor example this one might have `argparse.ArgumentError: argument -e/--event: invalid choice: \u0027fake-event\u0027 (choose from \u0027boot\u0027, \u0027user-switch\u0027, \u0027app-startup\u0027, \u0027custom\u0027)`\n\nEvery other function that checks for these exceptions being thrown should also have these checks.",
+      "range": {
+        "startLine": 97,
+        "startChar": 4,
+        "endLine": 98,
+        "endChar": 25
+      },
+      "revId": "e6201282e351c9d4542af4d54846e319cbb22f97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa50b700_22fe02e2",
+        "filename": "torq/tests/torq_unit_test.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-23T21:33:04Z",
+      "side": 1,
+      "message": "I tried to do this when implementing the tests but the argparse library is weird and immediately exits out of the program. When I catch it, it only lets me see the error code. This is why in the original code in torq, we don\u0027t catch any exceptions related to argparse.",
+      "parentUuid": "2ddcf88b_3950eabc",
       "range": {
         "startLine": 97,
         "startChar": 4,
@@ -253,6 +373,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e0a47b6_1d6b4ff8",
+        "filename": "torq/tests/torq_unit_test.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-23T21:33:04Z",
+      "side": 1,
+      "message": "Replaced this, thank you.",
+      "parentUuid": "482a68d5_932aa56c",
+      "range": {
+        "startLine": 100,
+        "startChar": 3,
+        "endLine": 100,
+        "endChar": 8
+      },
+      "revId": "e6201282e351c9d4542af4d54846e319cbb22f97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6eee1ac9_7f6ab547",
@@ -266,6 +410,30 @@
       "writtenOn": "2024-07-23T16:36:31Z",
       "side": 1,
       "message": "Do we also have a test scenario for when `--perfetto-config` is nothing?",
+      "range": {
+        "startLine": 225,
+        "startChar": 41,
+        "endLine": 225,
+        "endChar": 58
+      },
+      "revId": "e6201282e351c9d4542af4d54846e319cbb22f97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa7a6e1f_10c8d5c0",
+        "filename": "torq/tests/torq_unit_test.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-23T21:33:04Z",
+      "side": 1,
+      "message": "Added this is the new test_invalid_perfetto_config_command tests, thanks",
+      "parentUuid": "6eee1ac9_7f6ab547",
       "range": {
         "startLine": 225,
         "startChar": 41,
@@ -299,6 +467,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9dacca21_d2515b46",
+        "filename": "torq/tests/torq_unit_test.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-23T21:33:04Z",
+      "side": 1,
+      "message": "Replaced this, thanks.",
+      "parentUuid": "93b5ea04_f4a0fad7",
+      "range": {
+        "startLine": 229,
+        "startChar": 59,
+        "endLine": 229,
+        "endChar": 66
+      },
+      "revId": "e6201282e351c9d4542af4d54846e319cbb22f97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3785b439_e875e52b",
@@ -316,6 +508,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9dac3d17_f6970d39",
+        "filename": "torq/tests/torq_unit_test.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-23T21:33:04Z",
+      "side": 1,
+      "message": "I added this in the new test_invalid_set_memory_subcommand test, thank you.",
+      "parentUuid": "3785b439_e875e52b",
+      "revId": "e6201282e351c9d4542af4d54846e319cbb22f97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1898c9dc_dc954dfb",
@@ -329,6 +539,30 @@
       "writtenOn": "2024-07-23T16:36:31Z",
       "side": 1,
       "message": "Can probably also use the `PREDEFINED_PERFETTO_CONFIGS` defined in `torq`.",
+      "range": {
+        "startLine": 326,
+        "startChar": 53,
+        "endLine": 326,
+        "endChar": 64
+      },
+      "revId": "e6201282e351c9d4542af4d54846e319cbb22f97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50c8000f_e0d83e22",
+        "filename": "torq/tests/torq_unit_test.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-23T21:33:04Z",
+      "side": 1,
+      "message": "Replaced this, thanks.",
+      "parentUuid": "1898c9dc_dc954dfb",
       "range": {
         "startLine": 326,
         "startChar": 53,
@@ -362,6 +596,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "523c0c39_1ab966e3",
+        "filename": "torq/tests/torq_unit_test.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-23T21:33:04Z",
+      "side": 1,
+      "message": "Added this, thanks.",
+      "parentUuid": "7df90c84_75aa0b9b",
+      "range": {
+        "startLine": 396,
+        "startChar": 59,
+        "endLine": 396,
+        "endChar": 65
+      },
+      "revId": "e6201282e351c9d4542af4d54846e319cbb22f97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b83ee951_d374e359",
@@ -375,6 +633,30 @@
       "writtenOn": "2024-07-23T16:36:31Z",
       "side": 1,
       "message": "Should probably mention that it is false because multiple runs were specified.",
+      "range": {
+        "startLine": 524,
+        "startChar": 29,
+        "endLine": 524,
+        "endChar": 46
+      },
+      "revId": "e6201282e351c9d4542af4d54846e319cbb22f97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5bbb1935_2b917287",
+        "filename": "torq/tests/torq_unit_test.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 524,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-23T21:33:04Z",
+      "side": 1,
+      "message": "Added this as a comment, thanks.",
+      "parentUuid": "b83ee951_d374e359",
       "range": {
         "startLine": 524,
         "startChar": 29,
@@ -446,6 +728,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b83d9a81_d2e040b6",
+        "filename": "torq/tests/torq_unit_test.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-23T21:33:04Z",
+      "side": 1,
+      "message": "Fixed this, and added it in the code accordingly, thanks.",
+      "parentUuid": "8786be6c_d99b087b",
+      "range": {
+        "startLine": 573,
+        "startChar": 52,
+        "endLine": 573,
+        "endChar": 58
+      },
+      "revId": "e6201282e351c9d4542af4d54846e319cbb22f97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "61fef284_95dec41f",
@@ -459,6 +765,24 @@
       "writtenOn": "2024-07-23T16:36:31Z",
       "side": 1,
       "message": "Nit: newline at end of file.",
+      "revId": "e6201282e351c9d4542af4d54846e319cbb22f97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ccfb866_b524e21d",
+        "filename": "torq/tests/torq_unit_test.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 615,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-23T21:33:04Z",
+      "side": 1,
+      "message": "Removed this, thanks.",
+      "parentUuid": "61fef284_95dec41f",
       "revId": "e6201282e351c9d4542af4d54846e319cbb22f97",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
