@@ -72,10 +72,10 @@ impl IProfCollectd for ProfcollectdBinderService {
             .context("Failed to perform system-wide trace.")
             .map_err(err_to_binder_status)
     }
-    fn trace_process(&self, tag: &str, process: &str) -> BinderResult<()> {
+    fn trace_process(&self, tag: &str, process: &str, duration: f32) -> BinderResult<()> {
         let lock = &mut *self.lock();
         lock.scheduler
-            .trace_process(&lock.config, tag, process)
+            .trace_process(&lock.config, tag, process, duration)
             .context("Failed to perform process trace.")
             .map_err(err_to_binder_status)
     }
