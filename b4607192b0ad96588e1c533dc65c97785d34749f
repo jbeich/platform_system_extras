@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f11d353_942045b0",
+        "filename": "torq/tests/torq_unit_test.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-24T21:08:09Z",
+      "side": 1,
+      "message": "Changed this, thank you.",
+      "parentUuid": "9b91dd36_e0c85211",
+      "range": {
+        "startLine": 34,
+        "startChar": 2,
+        "endLine": 37,
+        "endChar": 48
+      },
+      "revId": "b4607192b0ad96588e1c533dc65c97785d34749f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c585f656_1b76c1b4",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-07-24T18:20:05Z",
       "side": 1,
       "message": "This should be happening explicitly in the tests. This is what we are actually testing. Remove this method and do this inside the tests. See below comments",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 34
+      },
+      "revId": "b4607192b0ad96588e1c533dc65c97785d34749f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "562b339d_e9509a73",
+        "filename": "torq/tests/torq_unit_test.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-24T21:08:09Z",
+      "side": 1,
+      "message": "Changed this, thank you.",
+      "parentUuid": "c585f656_1b76c1b4",
       "range": {
         "startLine": 39,
         "startChar": 0,
@@ -93,6 +141,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d5e1546_9e1a7877",
+        "filename": "torq/tests/torq_unit_test.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-24T21:08:09Z",
+      "side": 1,
+      "message": "Fixed this, thank you.",
+      "parentUuid": "cc846d42_c9ccc522",
+      "range": {
+        "startLine": 64,
+        "startChar": 4,
+        "endLine": 64,
+        "endChar": 45
+      },
+      "revId": "b4607192b0ad96588e1c533dc65c97785d34749f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7190a72_e9e7460c",
+        "filename": "torq/tests/torq_unit_test.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-24T21:08:09Z",
+      "side": 1,
+      "message": "Changed this, thank you.",
+      "parentUuid": "e4deb2ea_026448b7",
+      "range": {
+        "startLine": 53,
+        "startChar": 2,
+        "endLine": 64,
+        "endChar": 45
+      },
+      "revId": "b4607192b0ad96588e1c533dc65c97785d34749f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e994dede_159a5340",
@@ -106,6 +202,30 @@
       "writtenOn": "2024-07-24T18:20:05Z",
       "side": 1,
       "message": "For this case, we are only testing the parser. The test can simply be that the event is properly set in the args param after validating the args.",
+      "range": {
+        "startLine": 69,
+        "startChar": 4,
+        "endLine": 69,
+        "endChar": 45
+      },
+      "revId": "b4607192b0ad96588e1c533dc65c97785d34749f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a83af222_b0e6573b",
+        "filename": "torq/tests/torq_unit_test.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-24T21:08:09Z",
+      "side": 1,
+      "message": "Changed this, thank you.",
+      "parentUuid": "e994dede_159a5340",
       "range": {
         "startLine": 69,
         "startChar": 4,
@@ -157,6 +277,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6ef0a73_d9c1f2f5",
+        "filename": "torq/tests/torq_unit_test.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-24T21:08:09Z",
+      "side": 1,
+      "message": "Fixed this, thank you.",
+      "parentUuid": "f5afb13c_d926142b",
+      "range": {
+        "startLine": 99,
+        "startChar": 41,
+        "endLine": 99,
+        "endChar": 43
+      },
+      "revId": "b4607192b0ad96588e1c533dc65c97785d34749f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e2bd5763_bbed99a7",
@@ -170,6 +314,30 @@
       "writtenOn": "2024-07-24T18:20:05Z",
       "side": 1,
       "message": "In this tests, they are all valid we can simply do:\n```suggestion\n    mock_is_dir.return_value \u003d true\n```",
+      "range": {
+        "startLine": 106,
+        "startChar": 4,
+        "endLine": 107,
+        "endChar": 74
+      },
+      "revId": "b4607192b0ad96588e1c533dc65c97785d34749f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a5bc98b_ba165036",
+        "filename": "torq/tests/torq_unit_test.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-24T21:08:09Z",
+      "side": 1,
+      "message": "Changed this, thank you.",
+      "parentUuid": "e2bd5763_bbed99a7",
       "range": {
         "startLine": 106,
         "startChar": 4,
@@ -203,6 +371,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "953e70b4_c66d33a0",
+        "filename": "torq/tests/torq_unit_test.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-24T21:08:09Z",
+      "side": 1,
+      "message": "Removed this, thank you.",
+      "parentUuid": "495628ab_0277f8eb",
+      "range": {
+        "startLine": 113,
+        "startChar": 4,
+        "endLine": 115,
+        "endChar": 45
+      },
+      "revId": "b4607192b0ad96588e1c533dc65c97785d34749f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d35edab7_4e5e8c51",
@@ -216,6 +408,30 @@
       "writtenOn": "2024-07-24T18:20:05Z",
       "side": 1,
       "message": "We should be explicitly asserting in the test. Move the logic from `verify_error_message` into the test here. Same for other tests.",
+      "range": {
+        "startLine": 128,
+        "startChar": 3,
+        "endLine": 130,
+        "endChar": 70
+      },
+      "revId": "b4607192b0ad96588e1c533dc65c97785d34749f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec8dfa25_e53f98aa",
+        "filename": "torq/tests/torq_unit_test.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-24T21:08:09Z",
+      "side": 1,
+      "message": "Changed this, thank you.",
+      "parentUuid": "d35edab7_4e5e8c51",
       "range": {
         "startLine": 128,
         "startChar": 3,
@@ -249,6 +465,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2627b2f9_f6c7600a",
+        "filename": "torq/tests/torq_unit_test.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-24T21:08:09Z",
+      "side": 1,
+      "message": "Ethan and I couldn\u0027t figure out how to import it, so we thought maybe we should wait for later because I was stuck on it for a while. Might have to leave for later.",
+      "parentUuid": "4c442368_e540fa44",
+      "range": {
+        "startLine": 353,
+        "startChar": 2,
+        "endLine": 380,
+        "endChar": 67
+      },
+      "revId": "b4607192b0ad96588e1c533dc65c97785d34749f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a6c5a652_c10302a7",
@@ -262,6 +502,30 @@
       "writtenOn": "2024-07-24T18:20:05Z",
       "side": 1,
       "message": "In this cases, let\u0027s explicitly use the predefined name, instead of accessing it through the list. This way if someone changes the predefined name it will break the tests. Same for below cases.",
+      "range": {
+        "startLine": 608,
+        "startChar": 33,
+        "endLine": 609,
+        "endChar": 65
+      },
+      "revId": "b4607192b0ad96588e1c533dc65c97785d34749f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d1b5b39_9baf109a",
+        "filename": "torq/tests/torq_unit_test.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 609,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-24T21:08:09Z",
+      "side": 1,
+      "message": "Changed this, thank you.",
+      "parentUuid": "a6c5a652_c10302a7",
       "range": {
         "startLine": 608,
         "startChar": 33,

@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9bf0251f_5832ab64",
+        "filename": "torq/tests/torq_unit_test.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-24T21:08:09Z",
+      "side": 1,
+      "message": "Changed this, thank you.",
+      "parentUuid": "f064b596_0c6e4c24",
+      "range": {
+        "startLine": 29,
+        "startChar": 2,
+        "endLine": 32,
+        "endChar": 25
+      },
+      "revId": "f3249a370686210c2e74239a670c8c23092f0d4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3e943a00_024c9363",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-07-24T18:20:05Z",
       "side": 1,
       "message": "This should be `expected_command_type`. Remember that method arguments need to be descriptive.",
+      "range": {
+        "startLine": 34,
+        "startChar": 37,
+        "endLine": 34,
+        "endChar": 43
+      },
+      "revId": "f3249a370686210c2e74239a670c8c23092f0d4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc45c2d0_a3cec8d4",
+        "filename": "torq/tests/torq_unit_test.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-24T21:08:09Z",
+      "side": 1,
+      "message": "Changed this, thank you.",
+      "parentUuid": "3e943a00_024c9363",
       "range": {
         "startLine": 34,
         "startChar": 37,
@@ -149,6 +197,30 @@
           ]
         }
       ],
+      "revId": "f3249a370686210c2e74239a670c8c23092f0d4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58fd128f_406d6845",
+        "filename": "torq/torq.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-24T21:08:09Z",
+      "side": 1,
+      "message": "Changed this, thank you.",
+      "parentUuid": "f2fdd60a_0e7bafc2",
+      "range": {
+        "startLine": 319,
+        "startChar": 4,
+        "endLine": 319,
+        "endChar": 65
+      },
       "revId": "f3249a370686210c2e74239a670c8c23092f0d4a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
