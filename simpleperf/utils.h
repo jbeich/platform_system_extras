@@ -78,7 +78,7 @@ class OneTimeFreeAllocator {
 
 class LineReader {
  public:
-  explicit LineReader(std::string_view file_path) : ifs_(file_path) {}
+  explicit LineReader(std::string_view file_path) : ifs_(std::string(file_path).c_str()) {}
   // Return true if open file successfully.
   bool Ok() const { return ifs_.good(); }
   // If available, return next line content with new line, otherwise return nullptr.
@@ -291,6 +291,7 @@ OverflowResult SafeAdd(uint64_t a, uint64_t b);
 void OverflowSafeAdd(uint64_t& dest, uint64_t add);
 
 std::string ReadableCount(uint64_t count);
+std::string ReadableBytes(uint64_t bytes);
 
 }  // namespace simpleperf
 

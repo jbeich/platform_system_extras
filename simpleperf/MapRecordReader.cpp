@@ -25,6 +25,7 @@
 #include <android-base/strings.h>
 
 #include "environment.h"
+#include "thread_tree.h"
 
 namespace simpleperf {
 
@@ -33,6 +34,13 @@ bool MapRecordReader::ReadKernelMaps() {
   std::vector<KernelMmap> module_mmaps;
   GetKernelAndModuleMmaps(&kernel_mmap, &module_mmaps);
 
+  // Inject an mmap record covering all of kernel's address space. This is used to set up a map for
+  // dynamically allocated BPF JIT regions outside [kernel.kallsyms]. Needs to be added first.
+  MmapRecord bpf_record(attr_, true, UINT_MAX, 0, 0, std::numeric_limits<uint64_t>::max(), 0,
+                        DEFAULT_KERNEL_BPF_MMAP_NAME, event_id_);
+  if (!callback_(&bpf_record)) {
+    return false;
+  }
   MmapRecord mmap_record(attr_, true, UINT_MAX, 0, kernel_mmap.start_addr, kernel_mmap.len, 0,
                          kernel_mmap.filepath, event_id_);
   if (!callback_(&mmap_record)) {
@@ -146,7 +154,7 @@ bool MapRecordThread::Join() {
   return thread_result_;
 }
 
-bool MapRecordThread::ReadMapRecords(const std::function<bool(Record*)>& callback) {
+bool MapRecordThread::ReadMapRecordData(const std::function<bool(const char*, size_t)>& callback) {
   off_t offset = ftello(fp_.get());
   if (offset == -1) {
     PLOG(ERROR) << "ftello() failed";
@@ -157,32 +165,18 @@ bool MapRecordThread::ReadMapRecords(const std::function<bool(Record*)>& callbac
     PLOG(ERROR) << "fseek() failed";
     return false;
   }
-  uint64_t nread = 0;
-  std::vector<char> buffer(1024);
-  while (nread < file_size) {
-    if (fread(buffer.data(), Record::header_size(), 1, fp_.get()) != 1) {
+  std::vector<char> buffer(1024 * 1024);
+  uint64_t left_bytes = file_size;
+  while (left_bytes > 0) {
+    size_t to_read = left_bytes > buffer.size() ? buffer.size() : left_bytes;
+    if (fread(buffer.data(), to_read, 1, fp_.get()) != 1) {
       PLOG(ERROR) << "fread() failed";
       return false;
     }
-    RecordHeader header;
-    if (!header.Parse(buffer.data())) {
+    if (!callback(buffer.data(), to_read)) {
       return false;
     }
-    if (buffer.size() < header.size) {
-      buffer.resize(header.size);
-    }
-    if (fread(buffer.data() + Record::header_size(), header.size - Record::header_size(), 1,
-              fp_.get()) != 1) {
-      PLOG(ERROR) << "fread() failed";
-      return false;
-    }
-    auto r = ReadRecordFromBuffer(map_record_reader_.Attr(), header.type, buffer.data(),
-                                  buffer.data() + header.size);
-    CHECK(r);
-    if (!callback(r.get())) {
-      return false;
-    }
-    nread += header.size;
+    left_bytes -= to_read;
   }
   return true;
 }

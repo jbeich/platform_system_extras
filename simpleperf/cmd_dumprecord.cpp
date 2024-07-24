@@ -261,13 +261,13 @@ bool DumpRecordCommand::ParseOptions(const std::vector<std::string>& args) {
     return false;
   }
   if (auto value = options.PullValue("--dump-etm"); value) {
-    if (!ParseEtmDumpOption(*value->str_value, &etm_dump_option_)) {
+    if (!ParseEtmDumpOption(value->str_value, &etm_dump_option_)) {
       return false;
     }
   }
   options.PullStringValue("-i", &record_filename_);
   for (const OptionValue& value : options.PullValues("--symdir")) {
-    if (!Dso::AddSymbolDir(*value.str_value)) {
+    if (!Dso::AddSymbolDir(value.str_value)) {
       return false;
     }
   }
@@ -592,6 +592,12 @@ bool DumpRecordCommand::DumpFeatureSection() {
             PrintIndented(3, "count: %" PRIu64 "\n", count);
           }
         }
+      }
+    } else if (feature == FEAT_INIT_MAP) {
+      PrintIndented(1, "init_map:\n");
+      auto callback = [&](std::unique_ptr<Record> r) { return ProcessRecord(r.get()); };
+      if (!record_file_reader_->ReadInitMapFeature(callback)) {
+        return false;
       }
     }
   }

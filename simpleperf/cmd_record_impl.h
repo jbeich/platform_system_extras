@@ -51,6 +51,8 @@ inline const OptionFormatMap& GetRecordCmdOptionFormats() {
         {"--cycle-threshold", {OptionValueType::UINT, OptionType::SINGLE, AppRunnerType::ALLOWED}},
         {"--decode-etm", {OptionValueType::NONE, OptionType::SINGLE, AppRunnerType::ALLOWED}},
         {"--delay", {OptionValueType::UINT, OptionType::SINGLE, AppRunnerType::ALLOWED}},
+        {"--etm-flush-interval",
+         {OptionValueType::UINT, OptionType::SINGLE, AppRunnerType::ALLOWED}},
         {"--record-timestamp", {OptionValueType::NONE, OptionType::SINGLE, AppRunnerType::ALLOWED}},
         {"--record-cycles", {OptionValueType::NONE, OptionType::SINGLE, AppRunnerType::ALLOWED}},
         {"--duration", {OptionValueType::DOUBLE, OptionType::SINGLE, AppRunnerType::ALLOWED}},
@@ -97,6 +99,8 @@ inline const OptionFormatMap& GetRecordCmdOptionFormats() {
          {OptionValueType::STRING, OptionType::SINGLE, AppRunnerType::CHECK_PATH}},
         {"--use-cmd-exit-code",
          {OptionValueType::NONE, OptionType::SINGLE, AppRunnerType::NOT_ALLOWED}},
+        {"-z",
+         {OptionValueType::OPT_STRING_AFTER_EQUAL, OptionType::SINGLE, AppRunnerType::ALLOWED}},
     };
     OptionFormatMap record_filter_options = GetRecordFilterOptionFormats(true);
     option_formats.insert(record_filter_options.begin(), record_filter_options.end());

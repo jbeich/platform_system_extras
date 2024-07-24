@@ -982,10 +982,11 @@ class ReportGenerator(object):
         self.hw.open_tag('script').add(
             "google.charts.load('current', {'packages': ['corechart', 'table']});").close_tag()
         self.hw.open_tag('style', type='text/css').add("""
-            .colForLine { width: 50px; }
-            .colForCount { width: 100px; }
+            .colForLine { width: 50px; text-align: right; }
+            .colForCount { width: 100px; text-align: right; }
             .tableCell { font-size: 17px; }
             .boldTableCell { font-weight: bold; font-size: 17px; }
+            .textRight { text-align: right; }
             """).close_tag()
         self.hw.close_tag('head')
         self.hw.open_tag('body')
@@ -1027,7 +1028,10 @@ def get_args() -> argparse.Namespace:
     parser.add_argument('--disassemble-job-size', type=int, default=1024*1024,
                         help='address range for one disassemble job')
     parser.add_argument('--binary_filter', nargs='+', help="""Annotate source code and disassembly
-                        only for selected binaries.""")
+                        only for selected binaries, whose recorded paths contains [BINARY_FILTER] as
+                        a substring. Example: to select binaries belonging to an app with package
+                        name 'com.example.myapp', use `--binary_filter com.example.myapp`.
+                        """)
     parser.add_argument(
         '-j', '--jobs', type=int, default=os.cpu_count(),
         help='Use multithreading to speed up disassembly and source code annotation.')

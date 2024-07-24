@@ -27,7 +27,7 @@ Command to control profcollectd behaviour.
 command:
     start       Schedule periodic collection.
     stop        Terminate periodic collection.
-    once        Request an one-off trace.
+    trace       Request an one-off system-wide trace.
     process     Convert traces to perf profiles.
     reconfig    Refresh configuration.
     report      Create a report containing all profiles.
@@ -53,9 +53,9 @@ fn main() -> Result<()> {
             println!("Terminating profile collection");
             libprofcollectd::terminate().context("Failed to terminate collection.")?;
         }
-        "once" => {
-            println!("Trace once");
-            libprofcollectd::trace_once("manual").context("Failed to trace.")?;
+        "trace" => {
+            println!("Performing system-wide trace");
+            libprofcollectd::trace_system("manual").context("Failed to trace.")?;
         }
         "process" => {
             println!("Processing traces");

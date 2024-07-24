@@ -25,7 +25,7 @@ use std::sync::Mutex;
 use std::thread;
 use std::time::{Duration, Instant};
 
-use crate::config::{Config, LOG_FILE, PROFILE_OUTPUT_DIR, TRACE_OUTPUT_DIR};
+use crate::config::{get_sampling_period, Config, LOG_FILE, PROFILE_OUTPUT_DIR, TRACE_OUTPUT_DIR};
 use crate::trace_provider::{self, TraceProvider};
 use anyhow::{anyhow, ensure, Context, Result};
 
@@ -70,10 +70,10 @@ impl Scheduler {
                     Err(_) => {
                         // Did not receive a termination signal, initiate trace event.
                         if check_space_limit(&TRACE_OUTPUT_DIR, &config).unwrap() {
-                            trace_provider.lock().unwrap().trace(
+                            trace_provider.lock().unwrap().trace_system(
                                 &TRACE_OUTPUT_DIR,
                                 "periodic",
-                                &config.sampling_period,
+                                &get_sampling_period(),
                                 &config.binary_filter,
                             );
                         }
@@ -94,14 +94,37 @@ impl Scheduler {
         Ok(())
     }
 
-    pub fn one_shot(&self, config: &Config, tag: &str) -> Result<()> {
+    pub fn trace_system(&self, config: &Config, tag: &str) -> Result<()> {
         let trace_provider = self.trace_provider.clone();
         if check_space_limit(&TRACE_OUTPUT_DIR, config)? {
-            trace_provider.lock().unwrap().trace(
+            trace_provider.lock().unwrap().trace_system(
                 &TRACE_OUTPUT_DIR,
                 tag,
-                &config.sampling_period,
+                &get_sampling_period(),
                 &config.binary_filter,
+            );
+        }
+        Ok(())
+    }
+
+    pub fn trace_process(
+        &self,
+        config: &Config,
+        tag: &str,
+        processes: &str,
+        samplng_period: f32,
+    ) -> Result<()> {
+        let trace_provider = self.trace_provider.clone();
+        let duration = match samplng_period {
+            0.0 => get_sampling_period(),
+            _ => Duration::from_millis(samplng_period as u64),
+        };
+        if check_space_limit(&TRACE_OUTPUT_DIR, config)? {
+            trace_provider.lock().unwrap().trace_process(
+                &TRACE_OUTPUT_DIR,
+                tag,
+                &duration,
+                processes,
             );
         }
         Ok(())
@@ -189,7 +212,7 @@ fn check_space_limit(path: &Path, config: &Config) -> Result<bool> {
         })
     };
 
-    if dir_size(path)? > config.max_trace_limit {
+    if dir_size(path)? > config.max_trace_limit_mb * 1024 * 1024 {
         log::error!("trace storage exhausted.");
         return Ok(false);
     }

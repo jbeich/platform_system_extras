@@ -15,6 +15,7 @@
 //
 
 package {
+    default_team: "trendy_team_llvm_and_toolchains",
     default_applicable_licenses: ["system_extras_simpleperf_license"],
 }
 
@@ -46,6 +47,9 @@ cc_defaults {
                 "-luuid",
             ],
         },
+    },
+    sanitize: {
+        hwaddress: false,
     },
 }
 
@@ -137,6 +141,7 @@ cc_defaults {
         "libopencsd_decoder",
         "libz",
         "libziparchive",
+        "libzstd",
     ],
     target: {
         linux: {
@@ -145,7 +150,6 @@ cc_defaults {
                 "libcutils",
                 "libprocinfo",
                 "libevent",
-                "libc++fs",
                 "librustc_demangle_static",
             ],
         },
@@ -182,6 +186,7 @@ cc_defaults {
         "libsimpleperf_etm_decoder",
         "libsimpleperf_regex",
         "libopencsd_decoder",
+        "libzstd",
     ],
     target: {
         linux: {
@@ -192,7 +197,6 @@ cc_defaults {
                 "libunwindstack",
             ],
             static_libs: [
-                "libc++fs",
                 "libdexfile_support",
                 "librustc_demangle_static",
             ],
@@ -251,6 +255,7 @@ cc_defaults {
         "thread_tree.cpp",
         "tracing.cpp",
         "utils.cpp",
+        "ZstdUtil.cpp",
         ":simpleperf_event_table",
     ],
     target: {
@@ -599,6 +604,7 @@ cc_defaults {
         "test_util.cpp",
         "tracing_test.cpp",
         "utils_test.cpp",
+        "ZstdUtil_test.cpp",
     ],
     target: {
         android: {
@@ -752,5 +758,54 @@ cc_fuzz {
             enabled: false,
         },
     },
+    dictionary: "simpleperf_dict.dict",
     corpus: ["testdata/**/*.data"],
+}
+
+cc_fuzz {
+    name: "simpleperf_writer_fuzzer",
+    defaults: [
+        "simpleperf_static_libs",
+    ],
+    host_supported: true,
+    srcs: [
+        "simpleperf_writer_fuzzer.cpp",
+    ],
+    static_libs: [
+        "libsimpleperf",
+    ],
+    target: {
+        linux: {
+            // Fuzzer may not be able to load libdexfile. So statically link it.
+            static_libs: ["libdexfile_static"],
+        },
+        windows: {
+            enabled: false,
+        },
+    },
+}
+
+genrule {
+    name: "simpleperf_script.zip",
+    tools: [
+        "soong_zip",
+    ],
+    srcs: [
+        "**/*.proto",
+        "app_api/**/*",
+        "doc/**/*",
+        "demo/**/*",
+        "runtest/**/*",
+        "scripts/**/*",
+        "testdata/**/*",
+    ],
+    cmd: "$(location soong_zip) -o $(out) -C system/extras/simpleperf " +
+        "-D system/extras/simpleperf ",
+    out: [
+        "simpleperf/simpleperf_script.zip",
+    ],
+    dist: {
+        targets: ["simpleperf"],
+        dir: "simpleperf",
+    },
 }

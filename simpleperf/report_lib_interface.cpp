@@ -210,6 +210,10 @@ class ReportLib {
   SymbolEntry* GetSymbolOfCurrentSample() { return current_symbol_; }
   CallChain* GetCallChainOfCurrentSample() { return &current_callchain_; }
   const char* GetTracingDataOfCurrentSample() { return current_tracing_data_; }
+  const char* GetProcessNameOfCurrentSample() {
+    const ThreadEntry* thread = thread_tree_.FindThread(current_sample_.pid);
+    return (thread != nullptr) ? thread->comm : "unknown";
+  }
 
   const char* GetBuildIdForPath(const char* path);
   FeatureSection* GetFeatureSection(const char* feature_name);
@@ -646,6 +650,7 @@ Event* GetEventOfCurrentSample(ReportLib* report_lib) EXPORT;
 SymbolEntry* GetSymbolOfCurrentSample(ReportLib* report_lib) EXPORT;
 CallChain* GetCallChainOfCurrentSample(ReportLib* report_lib) EXPORT;
 const char* GetTracingDataOfCurrentSample(ReportLib* report_lib) EXPORT;
+const char* GetProcessNameOfCurrentSample(ReportLib* report_lib) EXPORT;
 
 const char* GetBuildIdForPath(ReportLib* report_lib, const char* path) EXPORT;
 FeatureSection* GetFeatureSection(ReportLib* report_lib, const char* feature_name) EXPORT;
@@ -731,6 +736,10 @@ CallChain* GetCallChainOfCurrentSample(ReportLib* report_lib) {
 
 const char* GetTracingDataOfCurrentSample(ReportLib* report_lib) {
   return report_lib->GetTracingDataOfCurrentSample();
+}
+
+const char* GetProcessNameOfCurrentSample(ReportLib* report_lib) {
+  return report_lib->GetProcessNameOfCurrentSample();
 }
 
 const char* GetBuildIdForPath(ReportLib* report_lib, const char* path) {
