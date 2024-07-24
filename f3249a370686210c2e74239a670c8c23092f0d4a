@@ -3,6 +3,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f064b596_0c6e4c24",
+        "filename": "torq/tests/torq_unit_test.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-24T18:20:05Z",
+      "side": 1,
+      "message": "This is only being used inside of validate_command, so let\u0027s remove this method and move the logic inside of validate_command.",
+      "range": {
+        "startLine": 29,
+        "startChar": 2,
+        "endLine": 32,
+        "endChar": 25
+      },
+      "revId": "f3249a370686210c2e74239a670c8c23092f0d4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e943a00_024c9363",
+        "filename": "torq/tests/torq_unit_test.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-24T18:20:05Z",
+      "side": 1,
+      "message": "This should be `expected_command_type`. Remember that method arguments need to be descriptive.",
+      "range": {
+        "startLine": 34,
+        "startChar": 37,
+        "endLine": 34,
+        "endChar": 43
+      },
+      "revId": "f3249a370686210c2e74239a670c8c23092f0d4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0647d876_5dddc8ec",
         "filename": "torq/tests/torq_unit_test.py",
         "patchSetId": 6
@@ -62,6 +108,47 @@
         "endLine": 541,
         "endChar": 41
       },
+      "revId": "f3249a370686210c2e74239a670c8c23092f0d4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2fdd60a_0e7bafc2",
+        "filename": "torq/torq.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-24T18:20:05Z",
+      "side": 1,
+      "message": "We shouldn\u0027t be creating new directories in the user\u0027s filesystem without it being explicit. If no filepath is provided, we should simply copy the config to the current directory.",
+      "range": {
+        "startLine": 319,
+        "startChar": 4,
+        "endLine": 319,
+        "endChar": 65
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "78852cb5_43ba43b1",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 319,
+                "startChar": 0,
+                "endLine": 320,
+                "endChar": 0
+              },
+              "replacement": "    args.file_path \u003d \"./\" + args.config_name + \".pbtxt\"\n"
+            }
+          ]
+        }
+      ],
       "revId": "f3249a370686210c2e74239a670c8c23092f0d4a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }

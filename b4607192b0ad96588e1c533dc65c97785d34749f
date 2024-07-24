@@ -1,0 +1,275 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b91dd36_e0c85211",
+        "filename": "torq/tests/torq_unit_test.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-24T18:20:05Z",
+      "side": 1,
+      "message": "This should be happening inside the test.",
+      "range": {
+        "startLine": 34,
+        "startChar": 2,
+        "endLine": 37,
+        "endChar": 48
+      },
+      "revId": "b4607192b0ad96588e1c533dc65c97785d34749f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c585f656_1b76c1b4",
+        "filename": "torq/tests/torq_unit_test.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-24T18:20:05Z",
+      "side": 1,
+      "message": "This should be happening explicitly in the tests. This is what we are actually testing. Remove this method and do this inside the tests. See below comments",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 34
+      },
+      "revId": "b4607192b0ad96588e1c533dc65c97785d34749f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4deb2ea_026448b7",
+        "filename": "torq/tests/torq_unit_test.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-24T18:20:05Z",
+      "side": 1,
+      "message": "We should be parsing and validating args inside the test.\n```suggestion\n  def test_create_parser_default_values(self):\n    parser \u003d self.set_up_parser(\"torq.py\")\n    \n    args \u003d parser.parse_args()\n    args, error \u003d verify_args_valid(args)\n\n    self.assertEqual(args.event, \"custom\")\n    self.assertEqual(args.profiler, \"perfetto\")\n    self.assertEqual(args.out_dir, DEFAULT_OUT_DIR)\n    self.assertEqual(args.runs, 1)\n    self.assertEqual(args.perfetto_config, PREDEFINED_PERFETTO_CONFIGS[0])\n    self.assertEqual(args.dur_ms, DEFAULT_DUR_MS)\n    self.assertEqual(args.between_dur_ms, DEFAULT_DUR_MS)\n```",
+      "range": {
+        "startLine": 53,
+        "startChar": 2,
+        "endLine": 64,
+        "endChar": 45
+      },
+      "revId": "b4607192b0ad96588e1c533dc65c97785d34749f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc846d42_c9ccc522",
+        "filename": "torq/tests/torq_unit_test.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-24T18:20:05Z",
+      "side": 1,
+      "message": "Validating the command should occur in a different test. This test is validating the parser not the command creation. Test should test one thing: https://go/tott/649",
+      "range": {
+        "startLine": 64,
+        "startChar": 4,
+        "endLine": 64,
+        "endChar": 45
+      },
+      "revId": "b4607192b0ad96588e1c533dc65c97785d34749f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e994dede_159a5340",
+        "filename": "torq/tests/torq_unit_test.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-24T18:20:05Z",
+      "side": 1,
+      "message": "For this case, we are only testing the parser. The test can simply be that the event is properly set in the args param after validating the args.",
+      "range": {
+        "startLine": 69,
+        "startChar": 4,
+        "endLine": 69,
+        "endChar": 45
+      },
+      "revId": "b4607192b0ad96588e1c533dc65c97785d34749f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5afb13c_d926142b",
+        "filename": "torq/tests/torq_unit_test.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-24T18:20:05Z",
+      "side": 1,
+      "message": "I think it should be `-p` instead",
+      "range": {
+        "startLine": 99,
+        "startChar": 41,
+        "endLine": 99,
+        "endChar": 43
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "a81e1e13_da0797b2",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/tests/torq_unit_test.py",
+              "range": {
+                "startLine": 99,
+                "startChar": 0,
+                "endLine": 100,
+                "endChar": 0
+              },
+              "replacement": "    parser \u003d self.set_up_parser(\"torq.py -p fake-profiler\")\n"
+            }
+          ]
+        }
+      ],
+      "revId": "b4607192b0ad96588e1c533dc65c97785d34749f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2bd5763_bbed99a7",
+        "filename": "torq/tests/torq_unit_test.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-24T18:20:05Z",
+      "side": 1,
+      "message": "In this tests, they are all valid we can simply do:\n```suggestion\n    mock_is_dir.return_value \u003d true\n```",
+      "range": {
+        "startLine": 106,
+        "startChar": 4,
+        "endLine": 107,
+        "endChar": 74
+      },
+      "revId": "b4607192b0ad96588e1c533dc65c97785d34749f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "495628ab_0277f8eb",
+        "filename": "torq/tests/torq_unit_test.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-24T18:20:05Z",
+      "side": 1,
+      "message": "No need to test this extra case because, we are specifying that it is a dir, so no actual check is being made for the `/`",
+      "range": {
+        "startLine": 113,
+        "startChar": 4,
+        "endLine": 115,
+        "endChar": 45
+      },
+      "revId": "b4607192b0ad96588e1c533dc65c97785d34749f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d35edab7_4e5e8c51",
+        "filename": "torq/tests/torq_unit_test.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-24T18:20:05Z",
+      "side": 1,
+      "message": "We should be explicitly asserting in the test. Move the logic from `verify_error_message` into the test here. Same for other tests.",
+      "range": {
+        "startLine": 128,
+        "startChar": 3,
+        "endLine": 130,
+        "endChar": 70
+      },
+      "revId": "b4607192b0ad96588e1c533dc65c97785d34749f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c442368_e540fa44",
+        "filename": "torq/tests/torq_unit_test.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-24T18:20:05Z",
+      "side": 1,
+      "message": "Given the amount of paremeterizable tests, let\u0027s try to enable that now, instead of later.",
+      "range": {
+        "startLine": 353,
+        "startChar": 2,
+        "endLine": 380,
+        "endChar": 67
+      },
+      "revId": "b4607192b0ad96588e1c533dc65c97785d34749f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6c5a652_c10302a7",
+        "filename": "torq/tests/torq_unit_test.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 609,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-24T18:20:05Z",
+      "side": 1,
+      "message": "In this cases, let\u0027s explicitly use the predefined name, instead of accessing it through the list. This way if someone changes the predefined name it will break the tests. Same for below cases.",
+      "range": {
+        "startLine": 608,
+        "startChar": 33,
+        "endLine": 609,
+        "endChar": 65
+      },
+      "revId": "b4607192b0ad96588e1c533dc65c97785d34749f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
