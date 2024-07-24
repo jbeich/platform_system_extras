@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0647d876_5dddc8ec",
+        "filename": "torq/tests/torq_unit_test.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 541,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-07-24T16:41:22Z",
+      "side": 1,
+      "message": "Nit: multiple",
+      "range": {
+        "startLine": 541,
+        "startChar": 32,
+        "endLine": 541,
+        "endChar": 41
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "67de71c7_77d12825",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/tests/torq_unit_test.py",
+              "range": {
+                "startLine": 541,
+                "startChar": 0,
+                "endLine": 542,
+                "endChar": 0
+              },
+              "replacement": "  # UI is false by default when multiple runs are specified.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "f3249a370686210c2e74239a670c8c23092f0d4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
