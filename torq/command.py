@@ -14,8 +14,9 @@
 # limitations under the License.
 #
 
-from command_executor import ProfilerCommandExecutor, HWCommandExecutor,\
+from command_executor import ProfilerCommandExecutor, HWCommandExecutor, \
   ConfigCommandExecutor
+from validation_error import ValidationError
 
 
 class Command:
@@ -25,10 +26,10 @@ class Command:
   def get_type(self):
     return self.type
 
-  def execute(self):
+  def execute(self, device):
     raise NotImplementedError
 
-  def validate(self):
+  def validate(self, device):
     raise NotImplementedError
 
 
@@ -52,28 +53,47 @@ class ProfilerCommand(Command):
     self.from_user = from_user
     self.to_user = to_user
 
-  def execute(self):
+  def execute(self, device):
     command_executor = ProfilerCommandExecutor()
-    command_executor.execute(self)
+    return command_executor.execute(self, device)
 
-  def validate(self):
+  def validate(self, device):
     print("Further validating arguments of ProfilerCommand.")
+    # call relevant Device APIs according to args
+    if self.app is not None:
+      device.app_exists(self.app)
+    if self.simpleperf_event is not None:
+      device.simpleperf_event_exists(self.simpleperf_event)
+    if self.from_user is not None:
+      device.user_exists(self.from_user)
+    if self.to_user is not None:
+      device.user_exists(self.to_user)
     return None
 
 
 class HWCommand(Command):
-  def __init__(self, type, config, num_cpus, memory):
+  def __init__(self, type, hw_config, num_cpus, memory):
     super().__init__(type)
-    self.config = config
+    self.hw_config = hw_config
     self.num_cpus = num_cpus
     self.memory = memory
 
-  def execute(self):
+  def execute(self, device):
     command_executor = HWCommandExecutor()
-    command_executor.execute(self)
+    return command_executor.execute(self, device)
 
-  def validate(self):
+  def validate(self, device):
     print("Further validating arguments of HWCommand.")
+    if self.num_cpus is not None:
+      available_num_cpus = device.get_max_num_cpus()
+      if self.num_cpus > available_num_cpus:
+        return ValidationError(("The number of cpus requested is not"
+                                " available on the device"), None)
+    if self.memory is not None:
+      available_memory = device.get_max_memory()
+      if self.memory > available_memory:
+        return ValidationError(("The amount of memory requested is not"
+                                "available on the device."), None)
     return None
 
 
@@ -83,10 +103,11 @@ class ConfigCommand(Command):
     self.config_name = config_name
     self.file_path = file_path
 
-  def execute(self):
+  def execute(self, device):
     conmand_executor = ConfigCommandExecutor()
-    conmand_executor.execute(self)
+    return conmand_executor.execute(self, device)
 
-  def validate(self):
+  def validate(self, device):
     print("Further validating arguments of ConfigCommand.")
+    # call relevant Device APIs according to args
     return None
