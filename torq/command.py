@@ -14,21 +14,30 @@
 # limitations under the License.
 #
 
-from command_executor import ProfilerCommandExecutor, HWCommandExecutor,\
+from abc import ABC, abstractmethod
+from command_executor import ProfilerCommandExecutor, HWCommandExecutor, \
   ConfigCommandExecutor
+from validation_error import ValidationError
 
 
-class Command:
+class Command(ABC):
+  """
+  Abstract base class representing a command. Its subclasses ProfilerCommand,
+  HWCommand, and ConfigCommand implement the abstract method validate.
+  """
+
   def __init__(self, type):
     self.type = type
+    self.command_executor = None
 
   def get_type(self):
     return self.type
 
-  def execute(self):
-    raise NotImplementedError
+  def execute(self, device):
+    return self.command_executor.execute(self, device)
 
-  def validate(self):
+  @abstractmethod
+  def validate(self, device):
     raise NotImplementedError
 
 
@@ -51,29 +60,45 @@ class ProfilerCommand(Command):
     self.include_ftrace_event = include_ftrace_event
     self.from_user = from_user
     self.to_user = to_user
+    self.command_executor = ProfilerCommandExecutor()
 
-  def execute(self):
-    command_executor = ProfilerCommandExecutor()
-    command_executor.execute(self)
-
-  def validate(self):
+  def validate(self, device):
     print("Further validating arguments of ProfilerCommand.")
+    # TODO: call relevant Device APIs according to args
+    if self.app is not None:
+      device.app_exists(self.app)
+    if self.simpleperf_event is not None:
+      device.simpleperf_event_exists(self.simpleperf_event)
+    if self.from_user is not None:
+      device.user_exists(self.from_user)
+    if self.to_user is not None:
+      device.user_exists(self.to_user)
     return None
 
 
 class HWCommand(Command):
-  def __init__(self, type, config, num_cpus, memory):
+  def __init__(self, type, hw_config, num_cpus, memory):
     super().__init__(type)
-    self.config = config
+    self.hw_config = hw_config
     self.num_cpus = num_cpus
     self.memory = memory
+    self.command_executor = HWCommandExecutor()
 
-  def execute(self):
-    command_executor = HWCommandExecutor()
-    command_executor.execute(self)
-
-  def validate(self):
+  def validate(self, device):
     print("Further validating arguments of HWCommand.")
+    if self.num_cpus is not None:
+      if self.num_cpus > device.get_max_num_cpus():
+        return ValidationError(("The number of cpus requested is not"
+                                " available on the device. Requested: %d,"
+                                " Available: %d"
+                                % (self.num_cpus, device.get_max_num_cpus())),
+                               None)
+    if self.memory is not None:
+      if self.memory > device.get_max_memory():
+        return ValidationError(("The amount of memory requested is not"
+                                "available on the device. Requested: %s,"
+                                " Available: %s"
+                                % (self.memory, device.get_max_memory())), None)
     return None
 
 
@@ -82,11 +107,7 @@ class ConfigCommand(Command):
     super().__init__(type)
     self.config_name = config_name
     self.file_path = file_path
+    self.command_executor = ConfigCommandExecutor()
 
-  def execute(self):
-    conmand_executor = ConfigCommandExecutor()
-    conmand_executor.execute(self)
-
-  def validate(self):
-    print("Further validating arguments of ConfigCommand.")
-    return None
+  def validate(self, device):
+    raise NotImplementedError
