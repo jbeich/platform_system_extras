@@ -14,37 +14,121 @@
 # limitations under the License.
 #
 
-class CommandExecutor:
-  def __init__(self):
-    raise NotImplementedError
+import time
+from abc import ABC, abstractmethod
 
-  def execute(self, command):
-    error = command.validate()
+
+class CommandExecutor(ABC):
+  """
+  Abstract base class representing a command executor. Its subclasses
+  ProfilerCommand, HWCommand, and ConfigCommand implement the abstract method
+  execute_command.
+  """
+  def __init__(self):
+    pass
+
+  def execute(self, command, device):
+    error = device.check_device_connection(command)
     if error is not None:
       return error
-    print("executing", command.get_type(), "command")
-    return None
+    error = command.validate(device)
+    if error is not None:
+      return None
+    print("Executing", command.get_type(), "command")
+    return self.execute_command(command, device)
+
+  @abstractmethod
+  def execute_command(self, command, device):
+    raise NotImplementedError
 
 
 class ProfilerCommandExecutor(CommandExecutor):
-  def __init__(self):
-    pass
 
-  def execute(self, profiler_command):
-    super().execute(profiler_command)
+  def execute_command(self, profiler_command, device):
+    for i in range(profiler_command.runs):
+      print("Performing run %s" % (i + 1))
+      error = self.prepare_device(device, profiler_command)
+      if error is not None:
+        return error
+      error = self.start_event(device, profiler_command)
+      if error is not None:
+        return error
+      error = self.retrieve_perf_data(device, profiler_command)
+      if error is not None:
+        return error
+      error = self.cleanup(device, profiler_command)
+      if error is not None:
+        return error
+      if profiler_command.runs != i + 1:
+        time.sleep(profiler_command.between_dur_ms / 1000)
+    if profiler_command.ui is True:
+      error = self.open_ui(device, profiler_command)
+      if error is not None:
+        return error
+    return None
+
+  def prepare_device(self, device, profiler_command):
+    return None
+
+  def start_event(self, device, profiler_command):
+    return None
+
+  def retrieve_perf_data(self, device, profiler_command):
+    return None
+
+  def cleanup(self, device, profiler_command):
+    return None
+
+  def open_ui(self, device, profiler_command):
+    return None
 
 
 class HWCommandExecutor(CommandExecutor):
-  def __init__(self):
-    pass
 
-  def execute(self, hw_command):
-    super().execute(hw_command)
+  def execute_command(self, hw_command, device):
+    command_type = hw_command.get_type()
+    match command_type:
+      case "hw set":
+        return self.execute_hw_set_command(device, hw_command.hw_config,
+                                           hw_command.num_cpus,
+                                           hw_command.memory)
+      case "hw get":
+        return self.execute_hw_get_command(device)
+      case "hw list":
+        return self.execute_hw_list_command(device)
+
+  def execute_hw_set_command(self, device, hw_config, num_cpus, memory):
+    return None
+
+  def execute_hw_get_command(self, device):
+    return None
+
+  def execute_hw_list_command(self, device):
+    return None
 
 
 class ConfigCommandExecutor(CommandExecutor):
-  def __init__(self):
-    pass
 
-  def execute(self, config_command):
-    super().execute(config_command)
+  def execute(self, command, device):
+    print("Executing", command.get_type(), "command")
+    return self.execute_command(command, device)
+
+  def execute_command(self, config_command, device):
+    command_type = config_command.get_type()
+    match command_type:
+      case "config list":
+        return self.execute_config_list_command()
+      case "config show":
+        return self.execute_config_show_command(config_command.config_name)
+      case "config pull":
+        return self.execute_config_pull_command(config_command.config_name,
+                                               config_command.file_path)
+
+  def execute_config_list_command(self):
+    return None
+
+  def execute_config_show_command(self, config_name):
+    return None
+
+  def execute_config_pull_command(self, config_name, file_path):
+    return None
