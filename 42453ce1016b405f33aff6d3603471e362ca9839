@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb0367c4_2fec139a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-25T16:22:33Z",
+      "side": 1,
+      "message": "This CL is for tool outside of the Android system image. This will not cause any issues in ABTD.",
+      "revId": "42453ce1016b405f33aff6d3603471e362ca9839",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
