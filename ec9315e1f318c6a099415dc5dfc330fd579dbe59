@@ -548,6 +548,47 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5562ae90_388b1a83",
+        "filename": "torq/device.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-07-26T19:58:05Z",
+      "side": 1,
+      "message": "Could you please rename this to `validate_simpleperf_event` and then add a comment as to why we would need to validate it via the device.",
+      "range": {
+        "startLine": 48,
+        "startChar": 6,
+        "endLine": 48,
+        "endChar": 29
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "a3939bf1_e51dafe7",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/device.py",
+              "range": {
+                "startLine": 48,
+                "startChar": 0,
+                "endLine": 49,
+                "endChar": 0
+              },
+              "replacement": "  def validate_simpleperf_event(self, simpleperf_event):\n    \"\"\"Validates that the simpleperf event exists on the device.\n\n    This is needed because the simpleperf event list is not exhaustive.\n    \"\"\"\n"
+            }
+          ]
+        }
+      ],
+      "revId": "ec9315e1f318c6a099415dc5dfc330fd579dbe59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "756c0f8d_e905af19",
         "filename": "torq/device.py",
         "patchSetId": 1
