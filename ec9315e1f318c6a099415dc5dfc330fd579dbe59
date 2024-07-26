@@ -1,0 +1,418 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82469b92_08c12b0e",
+        "filename": "torq/command.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-26T18:51:32Z",
+      "side": 1,
+      "message": "Same as Device class use the `abc` library (https://docs.python.org/3/library/abc.html) to mark the abstract methods. Read the docs to setup the class correctly.",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 14
+      },
+      "revId": "ec9315e1f318c6a099415dc5dfc330fd579dbe59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0ab728a_eebb8ff1",
+        "filename": "torq/command.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-26T18:51:32Z",
+      "side": 1,
+      "message": "Actually, we could create a `command_executor` instance variable here and initialize it to None. Doing this we can implement the execute method here in the super class, and not repeat the same thing in each class.\n\n```\ndef execute(self, device):\n    return self.command_executor.execute(self, device)\n```\n\nIn the subclasses, we just need to initialize the command executor in the constructor, something like:\n```\ndef __init__(self, ...):\n    ...\n    self.command_executor \u003d ProfilerCommandExecutor()\n    ...\n```",
+      "range": {
+        "startLine": 23,
+        "startChar": 1,
+        "endLine": 24,
+        "endChar": 20
+      },
+      "revId": "ec9315e1f318c6a099415dc5dfc330fd579dbe59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c34eb852_5d4d9d2d",
+        "filename": "torq/command.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-26T18:51:32Z",
+      "side": 1,
+      "message": "```suggestion\n      if self.num_cpus \u003e device.get_max_num_cpus():\n```",
+      "range": {
+        "startLine": 88,
+        "startChar": 6,
+        "endLine": 89,
+        "endChar": 44
+      },
+      "revId": "ec9315e1f318c6a099415dc5dfc330fd579dbe59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07f76f80_4008c7d7",
+        "filename": "torq/command.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-26T18:51:32Z",
+      "side": 1,
+      "message": "```suggestion\n      if self.memory \u003e device.get_max_memory():\n```",
+      "range": {
+        "startLine": 93,
+        "startChar": 6,
+        "endLine": 94,
+        "endChar": 40
+      },
+      "revId": "ec9315e1f318c6a099415dc5dfc330fd579dbe59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7698465c_4cb953e4",
+        "filename": "torq/command.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-26T18:51:32Z",
+      "side": 1,
+      "message": "`command_executor`",
+      "range": {
+        "startLine": 107,
+        "startChar": 4,
+        "endLine": 107,
+        "endChar": 20
+      },
+      "revId": "ec9315e1f318c6a099415dc5dfc330fd579dbe59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8239feeb_75ab01cf",
+        "filename": "torq/command.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-26T18:51:32Z",
+      "side": 1,
+      "message": "```suggestion\n    # TODO: call relevant Device APIs according to args\n```",
+      "range": {
+        "startLine": 112,
+        "startChar": 4,
+        "endLine": 112,
+        "endChar": 49
+      },
+      "revId": "ec9315e1f318c6a099415dc5dfc330fd579dbe59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad1bcaf2_5246ff17",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-26T18:51:32Z",
+      "side": 1,
+      "message": "Also, use the `abc` module for this class.",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 22
+      },
+      "revId": "ec9315e1f318c6a099415dc5dfc330fd579dbe59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf82322c_876b509b",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-26T18:51:32Z",
+      "side": 1,
+      "message": "Add some pydoc for each of these abstract classes.",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 22
+      },
+      "revId": "ec9315e1f318c6a099415dc5dfc330fd579dbe59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "254eda3e_c59a5927",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-26T18:51:32Z",
+      "side": 1,
+      "message": "Need to create the `execute_command` method as an abstract method in this class.",
+      "range": {
+        "startLine": 32,
+        "startChar": 4,
+        "endLine": 32,
+        "endChar": 49
+      },
+      "revId": "ec9315e1f318c6a099415dc5dfc330fd579dbe59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7c8e371_d21723f8",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-26T18:51:32Z",
+      "side": 1,
+      "message": "Not sure if we need this once we are using the `abc` module. Check if we can remove these constructors.",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 8
+      },
+      "revId": "ec9315e1f318c6a099415dc5dfc330fd579dbe59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1bf9df4_184b590a",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-26T18:51:32Z",
+      "side": 1,
+      "message": "Opening the UI should happen outside the for loop.",
+      "range": {
+        "startLine": 54,
+        "startChar": 6,
+        "endLine": 54,
+        "endChar": 52
+      },
+      "revId": "ec9315e1f318c6a099415dc5dfc330fd579dbe59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "321347e0_24e56c9c",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-26T18:51:32Z",
+      "side": 1,
+      "message": "This is cleanup.",
+      "range": {
+        "startLine": 54,
+        "startChar": 19,
+        "endLine": 54,
+        "endChar": 26
+      },
+      "revId": "ec9315e1f318c6a099415dc5dfc330fd579dbe59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "663220eb_cfc34e92",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-26T18:51:32Z",
+      "side": 1,
+      "message": "Open UI should be the last thing we do and it should return an error. Also, we need an if statement checking if the ui arg is set to true before opening it.",
+      "range": {
+        "startLine": 54,
+        "startChar": 5,
+        "endLine": 56,
+        "endChar": 20
+      },
+      "revId": "ec9315e1f318c6a099415dc5dfc330fd579dbe59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a20d7837_f5815202",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-26T18:51:32Z",
+      "side": 1,
+      "message": "This is open_ui",
+      "range": {
+        "startLine": 58,
+        "startChar": 21,
+        "endLine": 58,
+        "endChar": 28
+      },
+      "revId": "ec9315e1f318c6a099415dc5dfc330fd579dbe59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f089bf5_84f73b94",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-26T18:51:32Z",
+      "side": 1,
+      "message": "```suggestion\n  def execute_command(self, hw_command, device):\n    if hw_command.get_type() \u003d\u003d \"hw set\":\n      return self.execute_hw_set_command(device, hw_command.hw_config,\n                                          hw_command.num_cpus,\n                                          hw_command.memory)\n    elif hw_command.get_type() \u003d\u003d \"hw get\":\n      return self.execute_hw_get_command(device)\n    elif hw_command.get_type() \u003d\u003d \"hw list\":\n      return self.execute_hw_list_command(device)\n     \n     ...raise exception because of invalid command here\n```",
+      "range": {
+        "startLine": 86,
+        "startChar": 2,
+        "endLine": 101,
+        "endChar": 15
+      },
+      "revId": "ec9315e1f318c6a099415dc5dfc330fd579dbe59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "acea1772_9531480d",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-26T18:51:32Z",
+      "side": 1,
+      "message": "refactor method to follow the suggestion in HWCommandExecutor.execute_command",
+      "range": {
+        "startLine": 117,
+        "startChar": 2,
+        "endLine": 117,
+        "endChar": 52
+      },
+      "revId": "ec9315e1f318c6a099415dc5dfc330fd579dbe59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96c31838_e1e17521",
+        "filename": "torq/device.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-26T18:51:32Z",
+      "side": 1,
+      "message": "Use the `abc` library (https://docs.python.org/3/library/abc.html) to decorate the abstract methods.",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 13
+      },
+      "revId": "ec9315e1f318c6a099415dc5dfc330fd579dbe59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9122c21a_b390521c",
+        "filename": "torq/torq.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-26T18:51:32Z",
+      "side": 1,
+      "message": "Device class is an abstract class. We cannot instantiate it. In `device.py`, create a subclass called AdbDevice that inherits from the Device class. Don\u0027t implement any of the methods just use the inherited ones.\n\n```suggestion\n  device \u003d AdbDevice()\n```",
+      "range": {
+        "startLine": 384,
+        "startChar": 2,
+        "endLine": 384,
+        "endChar": 19
+      },
+      "revId": "ec9315e1f318c6a099415dc5dfc330fd579dbe59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
