@@ -485,6 +485,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fa7a3ff7_5e84fb33",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-07-26T19:22:32Z",
+      "side": 1,
+      "message": "If we\u0027re just calling `.get_type` in every conditional, we can just replace this with a switch statement. Same elsewhere.",
+      "range": {
+        "startLine": 118,
+        "startChar": 7,
+        "endLine": 118,
+        "endChar": 32
+      },
+      "revId": "ec9315e1f318c6a099415dc5dfc330fd579dbe59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "889eea14_b449ac2a",
         "filename": "torq/command_executor.py",
         "patchSetId": 1
