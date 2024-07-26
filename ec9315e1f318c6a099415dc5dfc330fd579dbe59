@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3b020bd4_b2f1cb2d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-07-26T19:12:44Z",
+      "side": 1,
+      "message": "Are we also going to add some relevant tests here?",
+      "revId": "ec9315e1f318c6a099415dc5dfc330fd579dbe59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "82469b92_08c12b0e",
         "filename": "torq/command.py",
         "patchSetId": 1
@@ -49,6 +66,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "38bb4180_f62b6364",
+        "filename": "torq/command.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-07-26T19:12:44Z",
+      "side": 1,
+      "message": "Nit: remove this comment.",
+      "range": {
+        "startLine": 62,
+        "startChar": 4,
+        "endLine": 62,
+        "endChar": 49
+      },
+      "revId": "ec9315e1f318c6a099415dc5dfc330fd579dbe59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c34eb852_5d4d9d2d",
         "filename": "torq/command.py",
         "patchSetId": 1
@@ -72,6 +112,57 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c65cbfe5_4144d479",
+        "filename": "torq/command.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-07-26T19:12:44Z",
+      "side": 1,
+      "message": "Include the number of CPUs requested in the error.",
+      "range": {
+        "startLine": 90,
+        "startChar": 30,
+        "endLine": 91,
+        "endChar": 66
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "c18d16ba_30805eb2",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/command.py",
+              "range": {
+                "startLine": 90,
+                "startChar": 0,
+                "endLine": 92,
+                "endChar": 0
+              },
+              "replacement": "        return ValidationError((\"The number of cpus requested is not available\"\n                                \" on the device. Requested: %d, Available: %d\"\n                                % (self.num_cpus, available_num_cpus)), None)\n"
+            },
+            {
+              "path": "torq/command.py",
+              "range": {
+                "startLine": 96,
+                "startChar": 0,
+                "endLine": 97,
+                "endChar": 0
+              },
+              "replacement": "                                \" available on the device. Requested: %d, \"\n                                \"Available: %d\"), None)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "ec9315e1f318c6a099415dc5dfc330fd579dbe59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "07f76f80_4008c7d7",
         "filename": "torq/command.py",
         "patchSetId": 1
@@ -88,6 +179,29 @@
         "startChar": 6,
         "endLine": 94,
         "endChar": 40
+      },
+      "revId": "ec9315e1f318c6a099415dc5dfc330fd579dbe59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f98d3706_64bb707f",
+        "filename": "torq/command.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-07-26T19:12:44Z",
+      "side": 1,
+      "message": "Include the amount of memory requested in the error.",
+      "range": {
+        "startLine": 95,
+        "startChar": 30,
+        "endLine": 96,
+        "endChar": 66
       },
       "revId": "ec9315e1f318c6a099415dc5dfc330fd579dbe59",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
@@ -371,6 +485,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "889eea14_b449ac2a",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-07-26T19:12:44Z",
+      "side": 1,
+      "message": "Nit: newline at end of this file",
+      "revId": "ec9315e1f318c6a099415dc5dfc330fd579dbe59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "96c31838_e1e17521",
         "filename": "torq/device.py",
         "patchSetId": 1
@@ -388,6 +519,23 @@
         "endLine": 17,
         "endChar": 13
       },
+      "revId": "ec9315e1f318c6a099415dc5dfc330fd579dbe59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "756c0f8d_e905af19",
+        "filename": "torq/device.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-07-26T19:12:44Z",
+      "side": 1,
+      "message": "Nit: need a new line at the end of this file.",
       "revId": "ec9315e1f318c6a099415dc5dfc330fd579dbe59",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
