@@ -589,6 +589,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bf41d7ac_034f53e3",
+        "filename": "torq/device.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-26T20:11:41Z",
+      "side": 1,
+      "message": "Since we are only validating they exists, I think we can keep `simpleperf_events_exists`. Simpleperf event list needs to be run within the device because the simpleperf binary would be inside the device, but this can be inferred from the method being part of the Device class.",
+      "parentUuid": "5562ae90_388b1a83",
+      "range": {
+        "startLine": 48,
+        "startChar": 6,
+        "endLine": 48,
+        "endChar": 29
+      },
+      "revId": "ec9315e1f318c6a099415dc5dfc330fd579dbe59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "756c0f8d_e905af19",
         "filename": "torq/device.py",
         "patchSetId": 1
