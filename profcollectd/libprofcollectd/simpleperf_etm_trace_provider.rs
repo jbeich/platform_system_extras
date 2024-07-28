@@ -56,8 +56,7 @@ impl TraceProvider for SimpleperfEtmTraceProvider {
             event_name,
             "--duration",
             &duration,
-            "--decode-etm",
-            "--exclude-perf",
+            "-z",
             "--binary",
             binary_filter,
             "--no-dump-symbols",
@@ -85,7 +84,7 @@ impl TraceProvider for SimpleperfEtmTraceProvider {
             event_name,
             "--duration",
             &duration,
-            "--decode-etm",
+            "-z",
             "--no-dump-symbols",
             "-o",
             trace_file.to_str().unwrap(),
@@ -119,6 +118,7 @@ impl TraceProvider for SimpleperfEtmTraceProvider {
                 "branch-list",
                 "--binary",
                 binary_filter,
+                "--exclude-perf",
             ];
             simpleperf_profcollect::run_inject_cmd(&args);
             remove_file(&trace_file)?;
