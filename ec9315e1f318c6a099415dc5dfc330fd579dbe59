@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5067469_d25048a3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-29T01:05:14Z",
+      "side": 1,
+      "message": "No, there won\u0027t be tests for this section because the arbitrary class Device is not implemented. This CL\u0027s purpose is to layout the code structure. Tests will be added in the next small cls for each individual section as I implement them.",
+      "parentUuid": "3b020bd4_b2f1cb2d",
+      "revId": "ec9315e1f318c6a099415dc5dfc330fd579dbe59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "82469b92_08c12b0e",
@@ -31,6 +49,30 @@
       "writtenOn": "2024-07-26T18:51:32Z",
       "side": 1,
       "message": "Same as Device class use the `abc` library (https://docs.python.org/3/library/abc.html) to mark the abstract methods. Read the docs to setup the class correctly.",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 14
+      },
+      "revId": "ec9315e1f318c6a099415dc5dfc330fd579dbe59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "194adbba_6a6e1631",
+        "filename": "torq/command.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-29T01:05:14Z",
+      "side": 1,
+      "message": "I integrated this, thank you.",
+      "parentUuid": "82469b92_08c12b0e",
       "range": {
         "startLine": 22,
         "startChar": 0,
@@ -64,6 +106,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c6c7351_c1fe46d5",
+        "filename": "torq/command.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-29T01:05:14Z",
+      "side": 1,
+      "message": "Changed this, thank you.",
+      "parentUuid": "e0ab728a_eebb8ff1",
+      "range": {
+        "startLine": 23,
+        "startChar": 1,
+        "endLine": 24,
+        "endChar": 20
+      },
+      "revId": "ec9315e1f318c6a099415dc5dfc330fd579dbe59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "38bb4180_f62b6364",
@@ -87,6 +153,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "71b4e44f_8aec9e91",
+        "filename": "torq/command.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-29T01:05:14Z",
+      "side": 1,
+      "message": "I replaced this with a todo, thanks.",
+      "parentUuid": "38bb4180_f62b6364",
+      "range": {
+        "startLine": 62,
+        "startChar": 4,
+        "endLine": 62,
+        "endChar": 49
+      },
+      "revId": "ec9315e1f318c6a099415dc5dfc330fd579dbe59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c34eb852_5d4d9d2d",
@@ -100,6 +190,30 @@
       "writtenOn": "2024-07-26T18:51:32Z",
       "side": 1,
       "message": "```suggestion\n      if self.num_cpus \u003e device.get_max_num_cpus():\n```",
+      "range": {
+        "startLine": 88,
+        "startChar": 6,
+        "endLine": 89,
+        "endChar": 44
+      },
+      "revId": "ec9315e1f318c6a099415dc5dfc330fd579dbe59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb201ef5_ec532869",
+        "filename": "torq/command.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-29T01:05:14Z",
+      "side": 1,
+      "message": "Changed this, thank you.",
+      "parentUuid": "c34eb852_5d4d9d2d",
       "range": {
         "startLine": 88,
         "startChar": 6,
@@ -161,6 +275,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "25ae8536_c9d10093",
+        "filename": "torq/command.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-29T01:05:14Z",
+      "side": 1,
+      "message": "Added this, thank you.",
+      "parentUuid": "c65cbfe5_4144d479",
+      "range": {
+        "startLine": 90,
+        "startChar": 30,
+        "endLine": 91,
+        "endChar": 66
+      },
+      "revId": "ec9315e1f318c6a099415dc5dfc330fd579dbe59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "07f76f80_4008c7d7",
@@ -174,6 +312,30 @@
       "writtenOn": "2024-07-26T18:51:32Z",
       "side": 1,
       "message": "```suggestion\n      if self.memory \u003e device.get_max_memory():\n```",
+      "range": {
+        "startLine": 93,
+        "startChar": 6,
+        "endLine": 94,
+        "endChar": 40
+      },
+      "revId": "ec9315e1f318c6a099415dc5dfc330fd579dbe59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "30ae6a96_d1d04b80",
+        "filename": "torq/command.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-29T01:05:14Z",
+      "side": 1,
+      "message": "Changed this, thank you.",
+      "parentUuid": "07f76f80_4008c7d7",
       "range": {
         "startLine": 93,
         "startChar": 6,
@@ -207,6 +369,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aaa38c51_c0708af4",
+        "filename": "torq/command.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-29T01:05:14Z",
+      "side": 1,
+      "message": "Added this, thank you.",
+      "parentUuid": "f98d3706_64bb707f",
+      "range": {
+        "startLine": 95,
+        "startChar": 30,
+        "endLine": 96,
+        "endChar": 66
+      },
+      "revId": "ec9315e1f318c6a099415dc5dfc330fd579dbe59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7698465c_4cb953e4",
@@ -230,6 +416,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "68f90e55_a8921034",
+        "filename": "torq/command.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-29T01:05:14Z",
+      "side": 1,
+      "message": "Fixed this typo, thank you.",
+      "parentUuid": "7698465c_4cb953e4",
+      "range": {
+        "startLine": 107,
+        "startChar": 4,
+        "endLine": 107,
+        "endChar": 20
+      },
+      "revId": "ec9315e1f318c6a099415dc5dfc330fd579dbe59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8239feeb_75ab01cf",
@@ -243,6 +453,30 @@
       "writtenOn": "2024-07-26T18:51:32Z",
       "side": 1,
       "message": "```suggestion\n    # TODO: call relevant Device APIs according to args\n```",
+      "range": {
+        "startLine": 112,
+        "startChar": 4,
+        "endLine": 112,
+        "endChar": 49
+      },
+      "revId": "ec9315e1f318c6a099415dc5dfc330fd579dbe59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb349cf8_1d5d2bbe",
+        "filename": "torq/command.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-29T01:05:14Z",
+      "side": 1,
+      "message": "Added this, thanks.",
+      "parentUuid": "8239feeb_75ab01cf",
       "range": {
         "startLine": 112,
         "startChar": 4,
@@ -299,6 +533,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "93f04312_99c7b92a",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-29T01:05:14Z",
+      "side": 1,
+      "message": "Implemented this, thank you.",
+      "parentUuid": "ad1bcaf2_5246ff17",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 22
+      },
+      "revId": "ec9315e1f318c6a099415dc5dfc330fd579dbe59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad1255fb_5ad8d43f",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-29T01:05:14Z",
+      "side": 1,
+      "message": "Added this, thank you.",
+      "parentUuid": "bf82322c_876b509b",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 22
+      },
+      "revId": "ec9315e1f318c6a099415dc5dfc330fd579dbe59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "254eda3e_c59a5927",
@@ -322,6 +604,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f28642e_f58cf48c",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-29T01:05:14Z",
+      "side": 1,
+      "message": "I added this, thank you.",
+      "parentUuid": "254eda3e_c59a5927",
+      "range": {
+        "startLine": 32,
+        "startChar": 4,
+        "endLine": 32,
+        "endChar": 49
+      },
+      "revId": "ec9315e1f318c6a099415dc5dfc330fd579dbe59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d7c8e371_d21723f8",
@@ -335,6 +641,30 @@
       "writtenOn": "2024-07-26T18:51:32Z",
       "side": 1,
       "message": "Not sure if we need this once we are using the `abc` module. Check if we can remove these constructors.",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 8
+      },
+      "revId": "ec9315e1f318c6a099415dc5dfc330fd579dbe59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9613e7a0_c5ab176b",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-29T01:05:14Z",
+      "side": 1,
+      "message": "I removed them and left it defined only in the Superclass.",
+      "parentUuid": "d7c8e371_d21723f8",
       "range": {
         "startLine": 39,
         "startChar": 0,
@@ -391,6 +721,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "79ca9fa6_fb1c2c73",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-29T01:05:14Z",
+      "side": 1,
+      "message": "Replaced this thank you.",
+      "parentUuid": "321347e0_24e56c9c",
+      "range": {
+        "startLine": 54,
+        "startChar": 19,
+        "endLine": 54,
+        "endChar": 26
+      },
+      "revId": "ec9315e1f318c6a099415dc5dfc330fd579dbe59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "957d78f6_3f38bc47",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-29T01:05:14Z",
+      "side": 1,
+      "message": "Moved this, thank you.",
+      "parentUuid": "a1bf9df4_184b590a",
+      "range": {
+        "startLine": 54,
+        "startChar": 6,
+        "endLine": 54,
+        "endChar": 52
+      },
+      "revId": "ec9315e1f318c6a099415dc5dfc330fd579dbe59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "663220eb_cfc34e92",
@@ -414,6 +792,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "24bd8c27_c9e4a3ca",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-29T01:05:14Z",
+      "side": 1,
+      "message": "I accidentally reversed the function calls. I fixed this, thank you.",
+      "parentUuid": "663220eb_cfc34e92",
+      "range": {
+        "startLine": 54,
+        "startChar": 5,
+        "endLine": 56,
+        "endChar": 20
+      },
+      "revId": "ec9315e1f318c6a099415dc5dfc330fd579dbe59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a20d7837_f5815202",
@@ -427,6 +829,30 @@
       "writtenOn": "2024-07-26T18:51:32Z",
       "side": 1,
       "message": "This is open_ui",
+      "range": {
+        "startLine": 58,
+        "startChar": 21,
+        "endLine": 58,
+        "endChar": 28
+      },
+      "revId": "ec9315e1f318c6a099415dc5dfc330fd579dbe59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "592b7b26_0d5e77d5",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-29T01:05:14Z",
+      "side": 1,
+      "message": "Fixed this, thank you.",
+      "parentUuid": "a20d7837_f5815202",
       "range": {
         "startLine": 58,
         "startChar": 21,
@@ -462,6 +888,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "af047705_ebb904e9",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-29T01:05:14Z",
+      "side": 1,
+      "message": "Changed this, it looks better, thank you. I was wondering if raising an exception is necessary because we already make sure these invalid commands don\u0027t make it through in the torq.py, validate_args method. For now, I didn\u0027t add it, but let me know what you think.",
+      "parentUuid": "5f089bf5_84f73b94",
+      "range": {
+        "startLine": 86,
+        "startChar": 2,
+        "endLine": 101,
+        "endChar": 15
+      },
+      "revId": "ec9315e1f318c6a099415dc5dfc330fd579dbe59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "acea1772_9531480d",
         "filename": "torq/command_executor.py",
         "patchSetId": 1
@@ -473,6 +923,30 @@
       "writtenOn": "2024-07-26T18:51:32Z",
       "side": 1,
       "message": "refactor method to follow the suggestion in HWCommandExecutor.execute_command",
+      "range": {
+        "startLine": 117,
+        "startChar": 2,
+        "endLine": 117,
+        "endChar": 52
+      },
+      "revId": "ec9315e1f318c6a099415dc5dfc330fd579dbe59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7585b58a_dd38dd2f",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-29T01:05:14Z",
+      "side": 1,
+      "message": "Changed this, thank you.",
+      "parentUuid": "acea1772_9531480d",
       "range": {
         "startLine": 117,
         "startChar": 2,
@@ -506,6 +980,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f346730a_e2b893f0",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-29T01:05:14Z",
+      "side": 1,
+      "message": "Changed this, looks a lot better, thank you.",
+      "parentUuid": "fa7a3ff7_5e84fb33",
+      "range": {
+        "startLine": 118,
+        "startChar": 7,
+        "endLine": 118,
+        "endChar": 32
+      },
+      "revId": "ec9315e1f318c6a099415dc5dfc330fd579dbe59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "889eea14_b449ac2a",
@@ -523,6 +1021,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "01e10a0a_e96177cd",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-29T01:05:14Z",
+      "side": 1,
+      "message": "Added this, thanks.",
+      "parentUuid": "889eea14_b449ac2a",
+      "revId": "ec9315e1f318c6a099415dc5dfc330fd579dbe59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "96c31838_e1e17521",
@@ -536,6 +1052,30 @@
       "writtenOn": "2024-07-26T18:51:32Z",
       "side": 1,
       "message": "Use the `abc` library (https://docs.python.org/3/library/abc.html) to decorate the abstract methods.",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 13
+      },
+      "revId": "ec9315e1f318c6a099415dc5dfc330fd579dbe59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a50b27f_342cc133",
+        "filename": "torq/device.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-29T01:05:14Z",
+      "side": 1,
+      "message": "I added this, thank you.",
+      "parentUuid": "96c31838_e1e17521",
       "range": {
         "startLine": 17,
         "startChar": 0,
@@ -611,6 +1151,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b603a68e_f6dbc2f4",
+        "filename": "torq/device.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-29T01:05:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bf41d7ac_034f53e3",
+      "range": {
+        "startLine": 48,
+        "startChar": 6,
+        "endLine": 48,
+        "endChar": 29
+      },
+      "revId": "ec9315e1f318c6a099415dc5dfc330fd579dbe59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "756c0f8d_e905af19",
@@ -628,6 +1192,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "28c8ef98_4f2cedad",
+        "filename": "torq/device.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-29T01:05:14Z",
+      "side": 1,
+      "message": "Added this, thanks.",
+      "parentUuid": "756c0f8d_e905af19",
+      "revId": "ec9315e1f318c6a099415dc5dfc330fd579dbe59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9122c21a_b390521c",
@@ -641,6 +1223,30 @@
       "writtenOn": "2024-07-26T18:51:32Z",
       "side": 1,
       "message": "Device class is an abstract class. We cannot instantiate it. In `device.py`, create a subclass called AdbDevice that inherits from the Device class. Don\u0027t implement any of the methods just use the inherited ones.\n\n```suggestion\n  device \u003d AdbDevice()\n```",
+      "range": {
+        "startLine": 384,
+        "startChar": 2,
+        "endLine": 384,
+        "endChar": 19
+      },
+      "revId": "ec9315e1f318c6a099415dc5dfc330fd579dbe59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10e2c2f0_7c4c328b",
+        "filename": "torq/torq.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-29T01:05:14Z",
+      "side": 1,
+      "message": "Replaced this, thank you.",
+      "parentUuid": "9122c21a_b390521c",
       "range": {
         "startLine": 384,
         "startChar": 2,
