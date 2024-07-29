@@ -42,6 +42,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0516334_a7dfbed6",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-29T18:18:03Z",
+      "side": 1,
+      "message": "Removed this, thank you.",
+      "parentUuid": "acc9b6e7_5b395405",
+      "range": {
+        "startLine": 25,
+        "startChar": 19,
+        "endLine": 26,
+        "endChar": 19
+      },
+      "revId": "c0fc86365c44ea3b6306b1b23302a8b72afe337b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "27fc889f_c0534a67",
@@ -93,6 +117,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "39979351_9724e2b8",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-29T18:18:03Z",
+      "side": 1,
+      "message": "Fixed this, thank you.",
+      "parentUuid": "27fc889f_c0534a67",
+      "range": {
+        "startLine": 38,
+        "startChar": 11,
+        "endLine": 38,
+        "endChar": 12
+      },
+      "revId": "c0fc86365c44ea3b6306b1b23302a8b72afe337b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2b707214_8da8d0cb",
@@ -130,6 +178,30 @@
           ]
         }
       ],
+      "revId": "c0fc86365c44ea3b6306b1b23302a8b72afe337b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c99f096_582e120c",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-29T18:18:03Z",
+      "side": 1,
+      "message": "Yes, it has to be overwritten because ConfigCommandExecutor does not interact with the device and does not need to further validate any args with the device. Thus, ConfigCommandExecutor does not have a validate function unlike ProfilerCommandExecutor and HWCommandExcutor. In Command\u0027s execute method, which ProfilerCommandExecutor and HWCommandExecutor use, validate is called, so we need to overwrite it here to avoid that for this case.",
+      "parentUuid": "2b707214_8da8d0cb",
+      "range": {
+        "startLine": 113,
+        "startChar": 2,
+        "endLine": 115,
+        "endChar": 48
+      },
       "revId": "c0fc86365c44ea3b6306b1b23302a8b72afe337b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
