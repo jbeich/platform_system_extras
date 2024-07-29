@@ -1,0 +1,137 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "acc9b6e7_5b395405",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-07-29T18:02:57Z",
+      "side": 1,
+      "message": "Nit: Can remove this part given it\u0027s redundant.",
+      "range": {
+        "startLine": 25,
+        "startChar": 19,
+        "endLine": 26,
+        "endChar": 19
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "8ce1b919_17bae746",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/command_executor.py",
+              "range": {
+                "startLine": 25,
+                "startChar": 0,
+                "endLine": 27,
+                "endChar": 0
+              },
+              "replacement": "  execute_command.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "c0fc86365c44ea3b6306b1b23302a8b72afe337b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27fc889f_c0534a67",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-07-29T18:02:57Z",
+      "side": 1,
+      "message": "Nit: Capitalize here.",
+      "range": {
+        "startLine": 38,
+        "startChar": 11,
+        "endLine": 38,
+        "endChar": 12
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "8915afe6_f6884d92",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/command_executor.py",
+              "range": {
+                "startLine": 38,
+                "startChar": 0,
+                "endLine": 39,
+                "endChar": 0
+              },
+              "replacement": "    print(\"Executing\", command.get_type(), \"command\")\n"
+            },
+            {
+              "path": "torq/command_executor.py",
+              "range": {
+                "startLine": 114,
+                "startChar": 0,
+                "endLine": 115,
+                "endChar": 0
+              },
+              "replacement": "    print(\"Executing\", command.get_type(), \"command\")\n"
+            }
+          ]
+        }
+      ],
+      "revId": "c0fc86365c44ea3b6306b1b23302a8b72afe337b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b707214_8da8d0cb",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-07-29T18:02:57Z",
+      "side": 1,
+      "message": "Do we need this? Looks like the other executors are just using the base execute command. It looks like this method is not doing anything additional here.",
+      "range": {
+        "startLine": 113,
+        "startChar": 2,
+        "endLine": 115,
+        "endChar": 48
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "09a2acd7_e2762f27",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/command_executor.py",
+              "range": {
+                "startLine": 113,
+                "startChar": 0,
+                "endLine": 117,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "c0fc86365c44ea3b6306b1b23302a8b72afe337b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
