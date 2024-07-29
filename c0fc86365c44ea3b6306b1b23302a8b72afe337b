@@ -204,6 +204,30 @@
       },
       "revId": "c0fc86365c44ea3b6306b1b23302a8b72afe337b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2bc2c0bc_ec190eca",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-07-29T18:19:42Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "2c99f096_582e120c",
+      "range": {
+        "startLine": 113,
+        "startChar": 2,
+        "endLine": 115,
+        "endChar": 48
+      },
+      "revId": "c0fc86365c44ea3b6306b1b23302a8b72afe337b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
