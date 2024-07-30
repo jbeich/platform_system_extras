@@ -49,6 +49,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "93d725f5_33bee0cc",
+        "filename": "torq/command.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-07-30T22:00:56Z",
+      "side": 1,
+      "message": "Do we ever return a `ValidationError` here? I am assuming eventually when we have implemented the device functionality then we should be returning the `ValidationError` for each of the checks similar to `HWCommand`.",
+      "range": {
+        "startLine": 75,
+        "startChar": 6,
+        "endLine": 75,
+        "endChar": 38
+      },
+      "revId": "a936844175e614b387e0a58754ea5480f7023644",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cfba02b6_6e0b01a4",
         "filename": "torq/command_executor.py",
         "patchSetId": 3
