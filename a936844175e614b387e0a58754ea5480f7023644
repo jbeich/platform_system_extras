@@ -354,6 +354,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "011a56d1_1704b1bb",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-30T23:40:12Z",
+      "side": 1,
+      "message": "Fixed this, thank you.",
+      "parentUuid": "f9d956e9_02457be6",
+      "range": {
+        "startLine": 59,
+        "startChar": 6,
+        "endLine": 61,
+        "endChar": 20
+      },
+      "revId": "a936844175e614b387e0a58754ea5480f7023644",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a03026c9_f874dafc",
