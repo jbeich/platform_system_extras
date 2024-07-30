@@ -332,6 +332,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f9d956e9_02457be6",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-30T23:20:42Z",
+      "side": 1,
+      "message": "For the user switch case, we switch to the `--from` user at the beginning so there is no need to switch back to the user at the end of the run. We do want to switch back at the end of all the runs, so that we leave the device as it was in its initial phase.",
+      "parentUuid": "9f7b1e8d_8efb19eb",
+      "range": {
+        "startLine": 59,
+        "startChar": 6,
+        "endLine": 61,
+        "endChar": 20
+      },
+      "revId": "a936844175e614b387e0a58754ea5480f7023644",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a03026c9_f874dafc",
         "filename": "torq/command_executor.py",
         "patchSetId": 3
@@ -602,6 +626,30 @@
       "side": 1,
       "message": "Without it, there is an error when we create the ADBDevice since the constructor of Abstract device is not implemented.",
       "parentUuid": "0c4bcd03_a1f77ddf",
+      "range": {
+        "startLine": 76,
+        "startChar": 2,
+        "endLine": 77,
+        "endChar": 8
+      },
+      "revId": "a936844175e614b387e0a58754ea5480f7023644",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "815b064a_5a7d0bf7",
+        "filename": "torq/device.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-30T23:20:42Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "9b091e83_a8e6fe71",
       "range": {
         "startLine": 76,
         "startChar": 2,

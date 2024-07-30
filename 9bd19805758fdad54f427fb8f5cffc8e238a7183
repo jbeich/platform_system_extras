@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27c9702e_d1164f8d",
+        "filename": "torq/command.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-30T23:20:42Z",
+      "side": 1,
+      "message": "```suggestion\n  Represents commands which profile and trace the system.\n```",
+      "range": {
+        "startLine": 44,
+        "startChar": 41,
+        "endLine": 44,
+        "endChar": 71
+      },
+      "revId": "9bd19805758fdad54f427fb8f5cffc8e238a7183",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c7e4879_4dde7c5e",
+        "filename": "torq/command.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-30T23:20:42Z",
+      "side": 1,
+      "message": "This is not informative, remember that comments should provide valuable informat to the reader, that they would otherwise not know.",
+      "range": {
+        "startLine": 82,
+        "startChar": 2,
+        "endLine": 82,
+        "endChar": 34
+      },
+      "revId": "9bd19805758fdad54f427fb8f5cffc8e238a7183",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b27167cd_8d11c5ce",
+        "filename": "torq/command.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-30T23:20:42Z",
+      "side": 1,
+      "message": "```suggestion\n  Represents commands which get information from the device or\n  change the the device\u0027s hardware.\n```",
+      "range": {
+        "startLine": 82,
+        "startChar": 2,
+        "endLine": 83,
+        "endChar": 39
+      },
+      "revId": "9bd19805758fdad54f427fb8f5cffc8e238a7183",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25cbf985_8b6bf869",
+        "filename": "torq/command.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-30T23:20:42Z",
+      "side": 1,
+      "message": "Not very informative, provide message similar to other comments.",
+      "range": {
+        "startLine": 112,
+        "startChar": 2,
+        "endLine": 112,
+        "endChar": 38
+      },
+      "revId": "9bd19805758fdad54f427fb8f5cffc8e238a7183",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69f71791_10ca8235",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-30T23:20:42Z",
+      "side": 1,
+      "message": "This is not needed as it doesn\u0027t provide much additional information. Update the doc.",
+      "range": {
+        "startLine": 89,
+        "startChar": 2,
+        "endLine": 89,
+        "endChar": 43
+      },
+      "revId": "9bd19805758fdad54f427fb8f5cffc8e238a7183",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57f8484b_908256f8",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-30T23:20:42Z",
+      "side": 1,
+      "message": "Provide a helpful message when raising the exception. Same below",
+      "range": {
+        "startLine": 104,
+        "startChar": 8,
+        "endLine": 104,
+        "endChar": 23
+      },
+      "revId": "9bd19805758fdad54f427fb8f5cffc8e238a7183",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
