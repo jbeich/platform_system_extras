@@ -297,6 +297,8 @@ class ReportLib(object):
         self._GetCallChainOfCurrentSampleFunc.restype = ct.POINTER(CallChainStructure)
         self._GetTracingDataOfCurrentSampleFunc = self._lib.GetTracingDataOfCurrentSample
         self._GetTracingDataOfCurrentSampleFunc.restype = ct.POINTER(ct.c_char)
+        self._GetProcessNameOfCurrentSampleFunc = self._lib.GetProcessNameOfCurrentSample
+        self._GetProcessNameOfCurrentSampleFunc.restype = ct.c_char_p
         self._GetBuildIdForPathFunc = self._lib.GetBuildIdForPath
         self._GetBuildIdForPathFunc.restype = ct.c_char_p
         self._GetFeatureSection = self._lib.GetFeatureSection
@@ -468,6 +470,9 @@ class ReportLib(object):
             field = event.tracing_data_format.fields[i]
             result[field.name] = field.parse_value(data)
         return result
+
+    def GetProcessNameOfCurrentSample(self) -> str:
+        return _char_pt_to_str(self._GetProcessNameOfCurrentSampleFunc(self.getInstance()))
 
     def GetBuildIdForPath(self, path: str) -> str:
         build_id = self._GetBuildIdForPathFunc(self.getInstance(), _char_pt(path))

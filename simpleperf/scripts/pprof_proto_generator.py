@@ -29,8 +29,9 @@ import os
 import os.path
 import re
 import sys
+from typing import Dict
 
-from simpleperf_report_lib import GetReportLib
+from simpleperf_report_lib import GetReportLib, MappingStruct
 from simpleperf_utils import (Addr2Nearestline, BaseArgumentParser, BinaryFinder, extant_dir,
                               flatten_arg_list, log_exit, ReadElf, ToolFinder)
 try:
@@ -273,6 +274,7 @@ class PprofProfileGenerator(object):
             config['binary_cache_dir'] = None
         self.dso_filter = set(config['dso_filters']) if config.get('dso_filters') else None
         self.max_chain_length = config['max_chain_length']
+        self.tagroot = config.get('tagroot', [])
         self.profile = profile_pb2.Profile()
         self.profile.string_table.append('')
         self.string_table = {}
@@ -285,6 +287,7 @@ class PprofProfileGenerator(object):
         self.mapping_list = []
         self.function_map = {}
         self.function_list = []
+        self.pseudo_symbol_location_ids: Dict[str, int] = {}
 
         # Map from dso_name in perf.data to (binary path, build_id).
         self.binary_map = {}
@@ -358,6 +361,7 @@ class PprofProfileGenerator(object):
                 if self._filter_symbol(symbol):
                     location_id = self.get_location_id(entry.ip, entry.symbol)
                     sample.add_location_id(location_id)
+            self.add_tagroot(sample)
             if sample.location_ids:
                 self.add_sample(sample)
 
@@ -376,6 +380,19 @@ class PprofProfileGenerator(object):
             self.gen_profile_function(function)
 
         return self.profile
+
+    def add_tagroot(self, sample: Sample):
+        if not self.tagroot:
+            return
+        for name in self.tagroot[::-1]:
+            if name == 'comm':
+                process_name = self.lib.GetProcessNameOfCurrentSample()
+                location_id = self.get_location_id_for_pseudo_symbol(f'process:{process_name}')
+                sample.add_location_id(location_id)
+            elif name == 'thread_comm':
+                thread_name = self.lib.GetCurrentSample().thread_comm
+                location_id = self.get_location_id_for_pseudo_symbol(f'thread:{thread_name}')
+                sample.add_location_id(location_id)
 
     def _filter_symbol(self, symbol):
         if not self.dso_filter or symbol.dso_name in self.dso_filter:
@@ -430,6 +447,27 @@ class PprofProfileGenerator(object):
         location.id = len(self.location_list) + 1
         self.location_list.append(location)
         self.location_map[location.key] = location
+        return location.id
+
+    def get_location_id_for_pseudo_symbol(self, symbol_name: str) -> int:
+        if not self.pseudo_symbol_location_ids:
+            self.pseudo_symbol_mapping = Mapping(0, 0, 0, self.get_string_id('pseudo_mapping'), 0)
+            self.pseudo_symbol_mapping.id = len(self.mapping_list) + 1
+            self.mapping_list.append(self.pseudo_symbol_mapping)
+        if location_id := self.pseudo_symbol_location_ids.get(symbol_name):
+            return location_id
+        ip = len(self.pseudo_symbol_location_ids)
+        self.pseudo_symbol_mapping.memory_limit = ip + 1
+        function_id = self.get_function_id(symbol_name, 'pseudo_mapping', ip)
+        location = Location(self.pseudo_symbol_mapping.id, ip, ip)
+        if function_id:
+            line = Line()
+            line.function_id = function_id
+            location.lines.append(line)
+        location.id = len(self.location_list) + 1
+        self.location_list.append(location)
+        self.location_map[location.key] = location
+        self.pseudo_symbol_location_ids[symbol_name] = location.id
         return location.id
 
     def get_mapping_id(self, report_mapping, filename, build_id):
@@ -627,6 +665,11 @@ def main():
     parser.add_argument(
         '-j', '--jobs', type=int, default=os.cpu_count(),
         help='Use multithreading to speed up source code annotation.')
+    parser.add_argument('--tagroot', choices=['comm', 'thread_comm'], nargs='+', help="""
+        Add pseudo stack frames at the callstack root.
+        comm: Add 'process:<process_name>' frame
+        thread_comm: Add 'thread:<thread_name>' frame
+    """)
     sample_filter_group = parser.add_argument_group('Sample filter options')
     sample_filter_group.add_argument('--dso', nargs='+', action='append', help="""
         Use samples only in selected binaries.""")
@@ -646,6 +689,7 @@ def main():
     config['ndk_path'] = args.ndk_path
     config['max_chain_length'] = args.max_chain_length
     config['report_lib_options'] = args.report_lib_options
+    config['tagroot'] = args.tagroot
     generator = PprofProfileGenerator(config)
     for record_file in args.record_file:
         generator.load_record_file(record_file)
