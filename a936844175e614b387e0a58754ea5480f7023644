@@ -1,0 +1,326 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6f22194_403e8b29",
+        "filename": "torq/command.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-30T21:23:00Z",
+      "side": 1,
+      "message": "Not needed. Each subclass should have its own doc explaining what it does.",
+      "range": {
+        "startLine": 25,
+        "startChar": 46,
+        "endLine": 26,
+        "endChar": 70
+      },
+      "revId": "a936844175e614b387e0a58754ea5480f7023644",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0efb6e94_afee9c16",
+        "filename": "torq/command.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-30T21:23:00Z",
+      "side": 1,
+      "message": "Add doc explaining this particular command class. Same for other command classes.",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 44,
+        "endChar": 31
+      },
+      "revId": "a936844175e614b387e0a58754ea5480f7023644",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cfba02b6_6e0b01a4",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-30T21:23:00Z",
+      "side": 1,
+      "message": "You are passing `command` here but the name of the parameter is `memory`.",
+      "range": {
+        "startLine": 31,
+        "startChar": 43,
+        "endLine": 31,
+        "endChar": 50
+      },
+      "revId": "a936844175e614b387e0a58754ea5480f7023644",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "140057df_b757ace1",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-30T21:23:00Z",
+      "side": 1,
+      "message": "```suggestion\n      return error\n```",
+      "range": {
+        "startLine": 36,
+        "startChar": 6,
+        "endLine": 36,
+        "endChar": 17
+      },
+      "revId": "a936844175e614b387e0a58754ea5480f7023644",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38856a78_7b5adb5f",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-30T21:23:00Z",
+      "side": 1,
+      "message": "Name the variable `run`. Its more descriptive.",
+      "range": {
+        "startLine": 48,
+        "startChar": 8,
+        "endLine": 48,
+        "endChar": 9
+      },
+      "revId": "a936844175e614b387e0a58754ea5480f7023644",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa5ad3af_6973c936",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-30T21:23:00Z",
+      "side": 1,
+      "message": "I think the cleanup should happen outside the for loop. We should cleanup after all the runs are complete. WDYT?",
+      "range": {
+        "startLine": 59,
+        "startChar": 6,
+        "endLine": 61,
+        "endChar": 20
+      },
+      "revId": "a936844175e614b387e0a58754ea5480f7023644",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a03026c9_f874dafc",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-30T21:23:00Z",
+      "side": 1,
+      "message": "We don\u0027t need the extra variable.\n```suggestion\n    match hw_command.get_type():\n```",
+      "range": {
+        "startLine": 89,
+        "startChar": 4,
+        "endLine": 90,
+        "endChar": 23
+      },
+      "revId": "a936844175e614b387e0a58754ea5480f7023644",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c645a0a2_83dbd490",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-30T21:23:00Z",
+      "side": 1,
+      "message": "Not needed, please delete.",
+      "range": {
+        "startLine": 113,
+        "startChar": 4,
+        "endLine": 113,
+        "endChar": 53
+      },
+      "revId": "a936844175e614b387e0a58754ea5480f7023644",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b5ce9f8_8b08ff8b",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-30T21:23:00Z",
+      "side": 1,
+      "message": "Same here, no need for the local variable.",
+      "range": {
+        "startLine": 117,
+        "startChar": 3,
+        "endLine": 118,
+        "endChar": 23
+      },
+      "revId": "a936844175e614b387e0a58754ea5480f7023644",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b00e2281_b48b7412",
+        "filename": "torq/device.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-30T21:23:00Z",
+      "side": 1,
+      "message": "```suggestion\n  Abstract base class representing a device. This class defines the APIs\n  needed to interact with the current device.\n```",
+      "range": {
+        "startLine": 22,
+        "startChar": 2,
+        "endLine": 23,
+        "endChar": 78
+      },
+      "revId": "a936844175e614b387e0a58754ea5480f7023644",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8bb92e4_acb3e27c",
+        "filename": "torq/device.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-30T21:23:00Z",
+      "side": 1,
+      "message": "Why does check device method is being passed `memory` parameter?",
+      "range": {
+        "startLine": 31,
+        "startChar": 36,
+        "endLine": 31,
+        "endChar": 42
+      },
+      "revId": "a936844175e614b387e0a58754ea5480f7023644",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c4bcd03_a1f77ddf",
+        "filename": "torq/device.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-30T21:23:00Z",
+      "side": 1,
+      "message": "Do we need this?",
+      "range": {
+        "startLine": 76,
+        "startChar": 2,
+        "endLine": 77,
+        "endChar": 8
+      },
+      "revId": "a936844175e614b387e0a58754ea5480f7023644",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f02ce6c_1e43b64b",
+        "filename": "torq/device.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-30T21:23:00Z",
+      "side": 1,
+      "message": "Same here.",
+      "range": {
+        "startLine": 79,
+        "startChar": 35,
+        "endLine": 79,
+        "endChar": 42
+      },
+      "revId": "a936844175e614b387e0a58754ea5480f7023644",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "289ed013_16b68a4e",
+        "filename": "torq/torq.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-30T21:23:00Z",
+      "side": 1,
+      "message": "Is this being used?",
+      "range": {
+        "startLine": 20,
+        "startChar": 30,
+        "endLine": 20,
+        "endChar": 36
+      },
+      "revId": "a936844175e614b387e0a58754ea5480f7023644",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

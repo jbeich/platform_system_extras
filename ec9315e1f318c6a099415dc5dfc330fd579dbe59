@@ -936,6 +936,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "582d8437_504e6570",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-30T21:23:00Z",
+      "side": 1,
+      "message": "This is why we are raise an exception and not return an error in this case. We return error if we are accounting for the issue. In this case if the value is invalid this is not expected so we should raise an exception. So, let\u0027s add the `case _:` and raise the exception there.",
+      "parentUuid": "12c24180_c4290ba2",
+      "range": {
+        "startLine": 86,
+        "startChar": 2,
+        "endLine": 101,
+        "endChar": 15
+      },
+      "revId": "ec9315e1f318c6a099415dc5dfc330fd579dbe59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "acea1772_9531480d",
         "filename": "torq/command_executor.py",
         "patchSetId": 1
