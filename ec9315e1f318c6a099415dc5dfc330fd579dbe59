@@ -958,6 +958,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cac2affb_817376e4",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-30T22:10:23Z",
+      "side": 1,
+      "message": "Added this, thanks.",
+      "parentUuid": "582d8437_504e6570",
+      "range": {
+        "startLine": 86,
+        "startChar": 2,
+        "endLine": 101,
+        "endChar": 15
+      },
+      "revId": "ec9315e1f318c6a099415dc5dfc330fd579dbe59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "acea1772_9531480d",

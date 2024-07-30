@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "db3c75d3_c3085a1d",
+        "filename": "torq/command.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-30T22:10:23Z",
+      "side": 1,
+      "message": "Removed this, thanks.",
+      "parentUuid": "c6f22194_403e8b29",
+      "range": {
+        "startLine": 25,
+        "startChar": 46,
+        "endLine": 26,
+        "endChar": 70
+      },
+      "revId": "a936844175e614b387e0a58754ea5480f7023644",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0efb6e94_afee9c16",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-07-30T21:23:00Z",
       "side": 1,
       "message": "Add doc explaining this particular command class. Same for other command classes.",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 44,
+        "endChar": 31
+      },
+      "revId": "a936844175e614b387e0a58754ea5480f7023644",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd21931e_9b6a57ba",
+        "filename": "torq/command.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-30T22:10:23Z",
+      "side": 1,
+      "message": "Added these for all Subclasses, thank you",
+      "parentUuid": "0efb6e94_afee9c16",
       "range": {
         "startLine": 43,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "206493cb_4ac453b3",
+        "filename": "torq/command.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-30T22:10:23Z",
+      "side": 1,
+      "message": "Yes, these will be implemented in the next CLs.",
+      "parentUuid": "93d725f5_33bee0cc",
+      "range": {
+        "startLine": 75,
+        "startChar": 6,
+        "endLine": 75,
+        "endChar": 38
+      },
+      "revId": "a936844175e614b387e0a58754ea5480f7023644",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cfba02b6_6e0b01a4",
@@ -83,6 +155,30 @@
       "writtenOn": "2024-07-30T21:23:00Z",
       "side": 1,
       "message": "You are passing `command` here but the name of the parameter is `memory`.",
+      "range": {
+        "startLine": 31,
+        "startChar": 43,
+        "endLine": 31,
+        "endChar": 50
+      },
+      "revId": "a936844175e614b387e0a58754ea5480f7023644",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ae98ded_4570dc5b",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-30T22:10:23Z",
+      "side": 1,
+      "message": "Didn\u0027t catch that, thank you. I changed the name of the parameter to command.",
+      "parentUuid": "cfba02b6_6e0b01a4",
       "range": {
         "startLine": 31,
         "startChar": 43,
@@ -116,6 +212,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ab71a05_4d2989ee",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-30T22:10:23Z",
+      "side": 1,
+      "message": "Fixed it, thank you.",
+      "parentUuid": "140057df_b757ace1",
+      "range": {
+        "startLine": 36,
+        "startChar": 6,
+        "endLine": 36,
+        "endChar": 17
+      },
+      "revId": "a936844175e614b387e0a58754ea5480f7023644",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "38856a78_7b5adb5f",
@@ -129,6 +249,30 @@
       "writtenOn": "2024-07-30T21:23:00Z",
       "side": 1,
       "message": "Name the variable `run`. Its more descriptive.",
+      "range": {
+        "startLine": 48,
+        "startChar": 8,
+        "endLine": 48,
+        "endChar": 9
+      },
+      "revId": "a936844175e614b387e0a58754ea5480f7023644",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5f04307_3365f260",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-30T22:10:23Z",
+      "side": 1,
+      "message": "Changed this, thank you.",
+      "parentUuid": "38856a78_7b5adb5f",
       "range": {
         "startLine": 48,
         "startChar": 8,
@@ -164,6 +308,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9f7b1e8d_8efb19eb",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-30T22:10:23Z",
+      "side": 1,
+      "message": "Maybe there can be two cleanup functions? One in the loop and out outside? Each time we need to remove the output file in the device. In an example like user-switch, we have to switch back to the original user each time. But it that case I am not sure what we do in another clean up function after the loop?",
+      "parentUuid": "aa5ad3af_6973c936",
+      "range": {
+        "startLine": 59,
+        "startChar": 6,
+        "endLine": 61,
+        "endChar": 20
+      },
+      "revId": "a936844175e614b387e0a58754ea5480f7023644",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a03026c9_f874dafc",
         "filename": "torq/command_executor.py",
         "patchSetId": 3
@@ -175,6 +343,30 @@
       "writtenOn": "2024-07-30T21:23:00Z",
       "side": 1,
       "message": "We don\u0027t need the extra variable.\n```suggestion\n    match hw_command.get_type():\n```",
+      "range": {
+        "startLine": 89,
+        "startChar": 4,
+        "endLine": 90,
+        "endChar": 23
+      },
+      "revId": "a936844175e614b387e0a58754ea5480f7023644",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7959ea63_2b481d88",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-30T22:10:23Z",
+      "side": 1,
+      "message": "Changed this, thank you.",
+      "parentUuid": "a03026c9_f874dafc",
       "range": {
         "startLine": 89,
         "startChar": 4,
@@ -208,6 +400,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "497b7b82_63fcd02c",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-30T22:10:23Z",
+      "side": 1,
+      "message": "Removed this, thanks.",
+      "parentUuid": "c645a0a2_83dbd490",
+      "range": {
+        "startLine": 113,
+        "startChar": 4,
+        "endLine": 113,
+        "endChar": 53
+      },
+      "revId": "a936844175e614b387e0a58754ea5480f7023644",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2b5ce9f8_8b08ff8b",
@@ -221,6 +437,30 @@
       "writtenOn": "2024-07-30T21:23:00Z",
       "side": 1,
       "message": "Same here, no need for the local variable.",
+      "range": {
+        "startLine": 117,
+        "startChar": 3,
+        "endLine": 118,
+        "endChar": 23
+      },
+      "revId": "a936844175e614b387e0a58754ea5480f7023644",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "923356aa_dc919ae8",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-30T22:10:23Z",
+      "side": 1,
+      "message": "Fixed this, thank you.",
+      "parentUuid": "2b5ce9f8_8b08ff8b",
       "range": {
         "startLine": 117,
         "startChar": 3,
@@ -254,6 +494,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "66781c95_7897a113",
+        "filename": "torq/device.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-30T22:10:23Z",
+      "side": 1,
+      "message": "Replaced this, thanks.",
+      "parentUuid": "b00e2281_b48b7412",
+      "range": {
+        "startLine": 22,
+        "startChar": 2,
+        "endLine": 23,
+        "endChar": 78
+      },
+      "revId": "a936844175e614b387e0a58754ea5480f7023644",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d8bb92e4_acb3e27c",
@@ -267,6 +531,30 @@
       "writtenOn": "2024-07-30T21:23:00Z",
       "side": 1,
       "message": "Why does check device method is being passed `memory` parameter?",
+      "range": {
+        "startLine": 31,
+        "startChar": 36,
+        "endLine": 31,
+        "endChar": 42
+      },
+      "revId": "a936844175e614b387e0a58754ea5480f7023644",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "213bb9bd_faef7c29",
+        "filename": "torq/device.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-30T22:10:23Z",
+      "side": 1,
+      "message": "It was a mistake, meant to put command.",
+      "parentUuid": "d8bb92e4_acb3e27c",
       "range": {
         "startLine": 31,
         "startChar": 36,
@@ -302,6 +590,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9b091e83_a8e6fe71",
+        "filename": "torq/device.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-30T22:10:23Z",
+      "side": 1,
+      "message": "Without it, there is an error when we create the ADBDevice since the constructor of Abstract device is not implemented.",
+      "parentUuid": "0c4bcd03_a1f77ddf",
+      "range": {
+        "startLine": 76,
+        "startChar": 2,
+        "endLine": 77,
+        "endChar": 8
+      },
+      "revId": "a936844175e614b387e0a58754ea5480f7023644",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5f02ce6c_1e43b64b",
         "filename": "torq/device.py",
         "patchSetId": 3
@@ -313,6 +625,30 @@
       "writtenOn": "2024-07-30T21:23:00Z",
       "side": 1,
       "message": "Same here.",
+      "range": {
+        "startLine": 79,
+        "startChar": 35,
+        "endLine": 79,
+        "endChar": 42
+      },
+      "revId": "a936844175e614b387e0a58754ea5480f7023644",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c47e5404_732f5d88",
+        "filename": "torq/device.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-30T22:10:23Z",
+      "side": 1,
+      "message": "Fixed this, thank you.",
+      "parentUuid": "5f02ce6c_1e43b64b",
       "range": {
         "startLine": 79,
         "startChar": 35,
@@ -336,6 +672,30 @@
       "writtenOn": "2024-07-30T21:23:00Z",
       "side": 1,
       "message": "Is this being used?",
+      "range": {
+        "startLine": 20,
+        "startChar": 30,
+        "endLine": 20,
+        "endChar": 36
+      },
+      "revId": "a936844175e614b387e0a58754ea5480f7023644",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b80d2a2e_5b856f0a",
+        "filename": "torq/torq.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-30T22:10:23Z",
+      "side": 1,
+      "message": "No, I removed it, thank you.",
+      "parentUuid": "289ed013_16b68a4e",
       "range": {
         "startLine": 20,
         "startChar": 30,
