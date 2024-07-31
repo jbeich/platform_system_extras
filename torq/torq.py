@@ -68,6 +68,9 @@ def create_parser():
                       help='The user id from which to start the user switch')
   parser.add_argument('--to-user', type=int,
                       help='The user id of user that system is switching to.')
+  parser.add_argument('--serial',
+                      help=(('Specifies serial of the device that will be'
+                             ' used.')))
   subparsers = parser.add_subparsers(dest='subcommands', help='Subcommands')
   hw_parser = subparsers.add_parser('hw',
                                     help=('The hardware subcommand used to'
@@ -126,21 +129,27 @@ def create_parser():
   return parser
 
 
+def user_changed_default_arguments(args):
+  return any([args.event != "custom",
+              args.profiler != "perfetto",
+              args.out_dir != DEFAULT_OUT_DIR,
+              args.dur_ms != DEFAULT_DUR_MS,
+              args.app is not None,
+              args.runs != 1,
+              args.simpleperf_event is not None,
+              args.perfetto_config != "default",
+              args.between_dur_ms != DEFAULT_DUR_MS,
+              args.ui is not None,
+              args.exclude_ftrace_event is not None,
+              args.include_ftrace_event is not None,
+              args.from_user is not None,
+              args.to_user is not None,
+              args.serial is not None])
+
+
 def verify_args_valid(args):
-  if args.subcommands is not None and (args.event != "custom" or
-                                       args.profiler != "perfetto" or
-                                       args.out_dir != DEFAULT_OUT_DIR or
-                                       args.dur_ms != DEFAULT_DUR_MS or
-                                       args.app is not None or
-                                       args.runs != 1 or
-                                       args.simpleperf_event is not None or
-                                       args.perfetto_config != "default" or
-                                       args.between_dur_ms != DEFAULT_DUR_MS or
-                                       args.ui is not None or
-                                       args.exclude_ftrace_event is not None or
-                                       args.include_ftrace_event is not None or
-                                       args.from_user is not None or
-                                       args.to_user is not None):
+  if (args.subcommands is not None and
+      user_changed_default_arguments(args)):
     return None, ValidationError(
         ("Command is invalid because profiler command is followed by a hw"
          " or config command."),
@@ -381,7 +390,7 @@ def main():
     print_error(error)
     return
   command = get_command_type(args)
-  device = AdbDevice()
+  device = AdbDevice(args.serial)
   error = command.execute(device)
   if error is not None:
     print_error(error)

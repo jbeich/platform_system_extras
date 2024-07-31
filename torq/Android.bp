@@ -40,10 +40,22 @@ python_test_host {
     srcs: ["tests/torq_unit_test.py"],
     defaults: ["torq_defaults"],
     version: {
-        py2: {
-            enabled: false,
+        py3: {
+            enabled: true,
             embedded_launcher: false,
         },
+    },
+    test_options: {
+        unit_test: true,
+    },
+}
+
+python_test_host {
+    name: "device_unit_test",
+    main: "tests/device_unit_test.py",
+    srcs: ["tests/device_unit_test.py"],
+    defaults: ["torq_defaults"],
+    version: {
         py3: {
             enabled: true,
             embedded_launcher: false,
