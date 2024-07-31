@@ -116,6 +116,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "837d2906_17303778",
+        "filename": "torq/device.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-31T21:51:19Z",
+      "side": 1,
+      "message": "My mistake, the indentation is correct.",
+      "parentUuid": "a0fb683e_b02c653c",
+      "range": {
+        "startLine": 117,
+        "startChar": 4,
+        "endLine": 118,
+        "endChar": 9
+      },
+      "revId": "5e47f0e3381e893bf8a0b04718e26460e8e46163",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a923db56_a4386e1e",
