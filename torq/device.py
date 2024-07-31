@@ -14,7 +14,10 @@
 # limitations under the License.
 #
 
+import subprocess
+import os
 from abc import ABC, abstractmethod
+from validation_error import ValidationError
 
 
 class Device(ABC):
@@ -24,11 +27,15 @@ class Device(ABC):
   """
 
   @abstractmethod
-  def __init__(self):
+  def __init__(self, serial):
     raise NotImplementedError
 
   @abstractmethod
-  def check_device_connection(self, command):
+  def get_adb_devices(self):
+    raise NotImplementedError
+
+  @abstractmethod
+  def check_device_connection(self):
     raise NotImplementedError
 
   @abstractmethod
@@ -77,11 +84,49 @@ class AdbDevice(Device):
   Class representing a device. APIs interact with the current device through
   the adb bridge.
   """
-  def __init__(self):
-    pass
+  def __init__(self, serial):
+    self.serial = serial
 
-  def check_device_connection(self, command):
-    raise NotImplementedError
+  def get_adb_devices(self):
+    command = None
+    try:
+      command = subprocess.run(["adb", "devices"], capture_output=True)
+    except Exception as e:
+      return None, ValidationError("Command 'adb devices' failed.", None)
+    command_output_lines = command.stdout.decode("utf-8").split("\n")[1:-2]
+    devices = []
+    for line in command_output_lines:
+      words_in_line = line.split('\t')
+      if words_in_line[1] == "device":
+        devices.append(words_in_line[0])
+    return devices, None
+
+  def check_device_connection(self):
+    devices, error = self.get_adb_devices()
+    if error is not None:
+      return error
+    if len(devices) == 0:
+      return ValidationError("There are currently no devices connected.", None)
+    if self.serial is not None:
+      if self.serial not in devices:
+        return ValidationError(("Device with serial %s is not connected."
+                                % self.serial), None)
+    elif "ANDROID_SERIAL" in os.environ:
+      if os.environ["ANDROID_SERIAL"] not in devices:
+        return ValidationError(("Device with serial %s is set as environment"
+                                " variable, ANDROID_SERIAL, but is not"
+                                " connected."
+                                % os.environ["ANDROID_SERIAL"]), None)
+      self.serial = os.environ["ANDROID_SERIAL"]
+    elif len(devices) == 1:
+      self.serial = devices[0]
+    else:
+      return ValidationError(("There is more than one device currently"
+                              " connected."),
+                             ("Run one of the following commands to choose one"
+                              " of the connected devices:\n\t torq --serial %s"
+                              % "\n\t torq --serial ".join(devices)))
+    return None
 
   def get_num_cpus(self):
     raise NotImplementedError
