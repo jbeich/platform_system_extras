@@ -26,7 +26,7 @@ class CommandExecutor(ABC):
     pass
 
   def execute(self, command, device):
-    error = device.check_device_connection(command)
+    error = device.check_device_connection()
     if error is not None:
       return error
     error = command.validate(device)
