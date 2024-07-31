@@ -26,7 +26,7 @@ class CommandExecutor(ABC):
     pass
 
   def execute(self, command, device):
-    error = device.check_device_connection(command)
+    error = device.check_device_connection()
     if error is not None:
       return error
     error = command.validate(device)
@@ -118,7 +118,7 @@ class ConfigCommandExecutor(CommandExecutor):
         return self.execute_config_show_command(config_command.config_name)
       case "config pull":
         return self.execute_config_pull_command(config_command.config_name,
-                                               config_command.file_path)
+                                                config_command.file_path)
       case _:
         raise Exception("Invalid config subcommand was used.")
 
