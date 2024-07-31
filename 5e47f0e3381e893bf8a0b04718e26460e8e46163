@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a2d0cf5_18a095d3",
+        "filename": "torq/Android.bp",
+        "patchSetId": 4
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-31T21:48:54Z",
+      "side": 1,
+      "message": "We don\u0027t need a new build target for these tests. Let\u0027s just have one `python_test_host` and include all the unit tests there.",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 53,
+        "endChar": 16
+      },
+      "revId": "5e47f0e3381e893bf8a0b04718e26460e8e46163",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca056292_96b7d937",
+        "filename": "torq/command.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-31T21:48:54Z",
+      "side": 1,
+      "message": "The command shouldn\u0027t be handling the device\u0027s serial. This should be handled in the Device class.",
+      "range": {
+        "startLine": 64,
+        "startChar": 4,
+        "endLine": 64,
+        "endChar": 24
+      },
+      "revId": "5e47f0e3381e893bf8a0b04718e26460e8e46163",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e801236_6670eb98",
+        "filename": "torq/device.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-31T21:48:54Z",
+      "side": 1,
+      "message": "The serial should be passed via the constructor.\n\n```suggestion\n  def __init__(self, serial):\n```",
+      "range": {
+        "startLine": 30,
+        "startChar": 2,
+        "endLine": 30,
+        "endChar": 21
+      },
+      "revId": "5e47f0e3381e893bf8a0b04718e26460e8e46163",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f40bf04_9395460f",
+        "filename": "torq/device.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-31T21:48:54Z",
+      "side": 1,
+      "message": "```suggestion\n  def __init__(self, serial):\n    if serial is None:\n        self.serial \u003d AdbDevice.get_default_serial()\n    else\n        self.serial \u003d serial\n          \n   ...\n   \n   @staticmethod\n   def get_default_serial():\n       # This method extracts the serial value from ANDROID_SERIAL\n       # env variable or returns None.\n```",
+      "range": {
+        "startLine": 87,
+        "startChar": 2,
+        "endLine": 88,
+        "endChar": 8
+      },
+      "revId": "5e47f0e3381e893bf8a0b04718e26460e8e46163",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0fb683e_b02c653c",
+        "filename": "torq/device.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-31T21:48:54Z",
+      "side": 1,
+      "message": "This is would produce the incorrect code flow. Remember to use `elif` in this case.",
+      "range": {
+        "startLine": 117,
+        "startChar": 4,
+        "endLine": 118,
+        "endChar": 9
+      },
+      "revId": "5e47f0e3381e893bf8a0b04718e26460e8e46163",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a923db56_a4386e1e",
+        "filename": "torq/device.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-31T21:48:54Z",
+      "side": 1,
+      "message": "This logic should use the `self.serial` instance variable to check the device connection. At this point `self.serial` will either have the value passed via `--serial`, value in `ANDROID_SERIAL` env variable or None. If the serial value is set regardless if taken from args or env variable, we do the same checks. If the `self.serial` is None, then we need to follow the flow where no value is specified per the design doc.",
+      "range": {
+        "startLine": 104,
+        "startChar": 2,
+        "endLine": 140,
+        "endChar": 73
+      },
+      "revId": "5e47f0e3381e893bf8a0b04718e26460e8e46163",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "771eca3f_9b8bf814",
+        "filename": "torq/torq.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-31T21:48:54Z",
+      "side": 1,
+      "message": "Actually, `hw set` should use the `serial` argument.",
+      "range": {
+        "startLine": 147,
+        "startChar": 39,
+        "endLine": 147,
+        "endChar": 62
+      },
+      "revId": "5e47f0e3381e893bf8a0b04718e26460e8e46163",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "539f181c_b9150aa3",
+        "filename": "torq/torq.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-31T21:48:54Z",
+      "side": 1,
+      "message": "The serial value should be passed to the device class constructor:\n\n```suggestion\n  command \u003d get_command_type(args)\n  device \u003d AdbDevice(args.serial)\n  error \u003d command.execute(device)\n```",
+      "range": {
+        "startLine": 387,
+        "startChar": 2,
+        "endLine": 389,
+        "endChar": 33
+      },
+      "revId": "5e47f0e3381e893bf8a0b04718e26460e8e46163",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
