@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1020cd09_75c27d80",
+        "filename": "torq/Android.bp",
+        "patchSetId": 4
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-31T23:03:02Z",
+      "side": 1,
+      "message": "Cannot use more than one unit test file per target.",
+      "parentUuid": "3a2d0cf5_18a095d3",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 53,
+        "endChar": 16
+      },
+      "revId": "5e47f0e3381e893bf8a0b04718e26460e8e46163",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ca056292_96b7d937",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-07-31T21:48:54Z",
       "side": 1,
       "message": "The command shouldn\u0027t be handling the device\u0027s serial. This should be handled in the Device class.",
+      "range": {
+        "startLine": 64,
+        "startChar": 4,
+        "endLine": 64,
+        "endChar": 24
+      },
+      "revId": "5e47f0e3381e893bf8a0b04718e26460e8e46163",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "67b3bccc_8ead2f5f",
+        "filename": "torq/command.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-31T23:03:02Z",
+      "side": 1,
+      "message": "I moved it to Device, thank you.",
+      "parentUuid": "ca056292_96b7d937",
       "range": {
         "startLine": 64,
         "startChar": 4,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7bcc5a9_59c90a9f",
+        "filename": "torq/device.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-31T23:03:02Z",
+      "side": 1,
+      "message": "I added this, thank you.",
+      "parentUuid": "3e801236_6670eb98",
+      "range": {
+        "startLine": 30,
+        "startChar": 2,
+        "endLine": 30,
+        "endChar": 21
+      },
+      "revId": "5e47f0e3381e893bf8a0b04718e26460e8e46163",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0f40bf04_9395460f",
@@ -83,6 +155,30 @@
       "writtenOn": "2024-07-31T21:48:54Z",
       "side": 1,
       "message": "```suggestion\n  def __init__(self, serial):\n    if serial is None:\n        self.serial \u003d AdbDevice.get_default_serial()\n    else\n        self.serial \u003d serial\n          \n   ...\n   \n   @staticmethod\n   def get_default_serial():\n       # This method extracts the serial value from ANDROID_SERIAL\n       # env variable or returns None.\n```",
+      "range": {
+        "startLine": 87,
+        "startChar": 2,
+        "endLine": 88,
+        "endChar": 8
+      },
+      "revId": "5e47f0e3381e893bf8a0b04718e26460e8e46163",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2e32c4a_070030b1",
+        "filename": "torq/device.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-31T23:03:02Z",
+      "side": 1,
+      "message": "This removes insightful error logging in the check_device_connection function, so we decided to not add it.",
+      "parentUuid": "0f40bf04_9395460f",
       "range": {
         "startLine": 87,
         "startChar": 2,
@@ -163,6 +259,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7361709_e02ff57e",
+        "filename": "torq/device.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-31T23:03:02Z",
+      "side": 1,
+      "message": "We decided to keep the same logic for error handling, but we simplified the else/if statements by combining them to else if statement, and we return None only once in the end.",
+      "parentUuid": "a923db56_a4386e1e",
+      "range": {
+        "startLine": 104,
+        "startChar": 2,
+        "endLine": 140,
+        "endChar": 73
+      },
+      "revId": "5e47f0e3381e893bf8a0b04718e26460e8e46163",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "771eca3f_9b8bf814",
@@ -186,6 +306,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5c3db48_f2b1e63b",
+        "filename": "torq/torq.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-31T23:03:02Z",
+      "side": 1,
+      "message": "Not needed since it\u0027s now in the Device class.",
+      "parentUuid": "771eca3f_9b8bf814",
+      "range": {
+        "startLine": 147,
+        "startChar": 39,
+        "endLine": 147,
+        "endChar": 62
+      },
+      "revId": "5e47f0e3381e893bf8a0b04718e26460e8e46163",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "539f181c_b9150aa3",
@@ -199,6 +343,30 @@
       "writtenOn": "2024-07-31T21:48:54Z",
       "side": 1,
       "message": "The serial value should be passed to the device class constructor:\n\n```suggestion\n  command \u003d get_command_type(args)\n  device \u003d AdbDevice(args.serial)\n  error \u003d command.execute(device)\n```",
+      "range": {
+        "startLine": 387,
+        "startChar": 2,
+        "endLine": 389,
+        "endChar": 33
+      },
+      "revId": "5e47f0e3381e893bf8a0b04718e26460e8e46163",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "437ca374_50554cc3",
+        "filename": "torq/torq.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-07-31T23:03:02Z",
+      "side": 1,
+      "message": "Added this, thank you.",
+      "parentUuid": "539f181c_b9150aa3",
       "range": {
         "startLine": 387,
         "startChar": 2,
