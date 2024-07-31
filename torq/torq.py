@@ -68,6 +68,9 @@ def create_parser():
                       help='The user id from which to start the user switch')
   parser.add_argument('--to-user', type=int,
                       help='The user id of user that system is switching to.')
+  parser.add_argument('--serial',
+                      help=(('Specifies serial of the device that will be'
+                             ' used.')))
   subparsers = parser.add_subparsers(dest='subcommands', help='Subcommands')
   hw_parser = subparsers.add_parser('hw',
                                     help=('The hardware subcommand used to'
@@ -140,7 +143,8 @@ def verify_args_valid(args):
                                        args.exclude_ftrace_event is not None or
                                        args.include_ftrace_event is not None or
                                        args.from_user is not None or
-                                       args.to_user is not None):
+                                       args.to_user is not None or
+                                       args.serial is not None):
     return None, ValidationError(
         ("Command is invalid because profiler command is followed by a hw"
          " or config command."),
@@ -329,7 +333,7 @@ def create_profiler_command(args):
                          args.perfetto_config, args.between_dur_ms,
                          args.ui, args.exclude_ftrace_event,
                          args.include_ftrace_event, args.from_user,
-                         args.to_user)
+                         args.to_user, args.serial)
 
 
 def create_hw_command(args):

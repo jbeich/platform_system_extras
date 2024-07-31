@@ -45,7 +45,7 @@ class ProfilerCommand(Command):
   """
   def __init__(self, type, event, profiler, out_dir, dur_ms, app, runs,
       simpleperf_event, perfetto_config, between_dur_ms, ui,
-      exclude_ftrace_event, include_ftrace_event, from_user, to_user):
+      exclude_ftrace_event, include_ftrace_event, from_user, to_user, serial):
     super().__init__(type)
     self.event = event
     self.profiler = profiler
@@ -61,6 +61,7 @@ class ProfilerCommand(Command):
     self.include_ftrace_event = include_ftrace_event
     self.from_user = from_user
     self.to_user = to_user
+    self.serial = serial
     self.command_executor = ProfilerCommandExecutor()
 
   def validate(self, device):
