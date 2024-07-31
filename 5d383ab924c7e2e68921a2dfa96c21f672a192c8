@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "528cb9b4_cb8add0d",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-31T00:40:25Z",
+      "side": 1,
+      "message": "No need for suggestions in this case since it is an exception we are raising.",
+      "range": {
+        "startLine": 102,
+        "startChar": 57,
+        "endLine": 103,
+        "endChar": 49
+      },
+      "revId": "5d383ab924c7e2e68921a2dfa96c21f672a192c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35efb5ef_bfe25fda",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-07-31T00:40:25Z",
+      "side": 1,
+      "message": "No need for suggestions in this case since it is an exception we are raising.",
+      "range": {
+        "startLine": 133,
+        "startChar": 61,
+        "endLine": 134,
+        "endChar": 74
+      },
+      "revId": "5d383ab924c7e2e68921a2dfa96c21f672a192c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
