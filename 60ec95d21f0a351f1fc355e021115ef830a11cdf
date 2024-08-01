@@ -1,0 +1,604 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28133e66_8f8b45e4",
+        "filename": "torq/device.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-01T22:32:43Z",
+      "side": 1,
+      "message": "I think it might be good to have a comment at the method level to indicate the expected output of our `adb devices` command so that in the future if the output changes, we can identify how to change the parsing logic.\n\n```\nList of devices attached\nddaf211a\tdevice\ndec5e35f\tdevice\n```",
+      "fixSuggestions": [
+        {
+          "fixId": "2d4d2c42_afd2ef74",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/device.py",
+              "range": {
+                "startLine": 91,
+                "startChar": 0,
+                "endLine": 91,
+                "endChar": 0
+              },
+              "replacement": "    \"\"\"\n    Returns a list of devices connected to the adb bridge.\n    The output of the command \u0027adb devices\u0027 is expected to be of the form:\n    List of devices attached\n    device1:1234\n    device2:5678\n    \"\"\"\n"
+            }
+          ]
+        }
+      ],
+      "revId": "60ec95d21f0a351f1fc355e021115ef830a11cdf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2dc564f8_82435665",
+        "filename": "torq/device.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-01T22:32:43Z",
+      "side": 1,
+      "message": "Rename to `command_output`",
+      "range": {
+        "startLine": 91,
+        "startChar": 4,
+        "endLine": 91,
+        "endChar": 11
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "085cbecf_0372237f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/device.py",
+              "range": {
+                "startLine": 91,
+                "startChar": 0,
+                "endLine": 92,
+                "endChar": 0
+              },
+              "replacement": "    command_output \u003d None\n"
+            },
+            {
+              "path": "torq/device.py",
+              "range": {
+                "startLine": 93,
+                "startChar": 0,
+                "endLine": 94,
+                "endChar": 0
+              },
+              "replacement": "      command_output \u003d subprocess.run([\"adb\", \"devices\"], capture_output\u003dTrue)\n"
+            },
+            {
+              "path": "torq/device.py",
+              "range": {
+                "startLine": 96,
+                "startChar": 0,
+                "endLine": 97,
+                "endChar": 0
+              },
+              "replacement": "    command_output_lines \u003d command_output.stdout.decode(\"utf-8\").split(\"\\n\")[1:-2]\n"
+            }
+          ]
+        }
+      ],
+      "revId": "60ec95d21f0a351f1fc355e021115ef830a11cdf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0fc5f532_ac77476b",
+        "filename": "torq/device.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-01T22:32:43Z",
+      "side": 1,
+      "message": "Either the `ValidationError` should contain the error message or we should be logging it if we are catching the exception.",
+      "range": {
+        "startLine": 95,
+        "startChar": 19,
+        "endLine": 95,
+        "endChar": 73
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "369025f1_4160fbe9",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/device.py",
+              "range": {
+                "startLine": 95,
+                "startChar": 0,
+                "endLine": 96,
+                "endChar": 0
+              },
+              "replacement": "      return None, ValidationError(\"Command \u0027adb devices\u0027 failed.\", e)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "60ec95d21f0a351f1fc355e021115ef830a11cdf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e91db1d1_8cc81b92",
+        "filename": "torq/device.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-01T22:32:43Z",
+      "side": 1,
+      "message": "We should avoid deeply nested conditional statements: go/nest-ninja-tips-episode/6#example-1\n\nLet\u0027s combine these into 1 conditional if statement.",
+      "range": {
+        "startLine": 110,
+        "startChar": 4,
+        "endLine": 111,
+        "endChar": 36
+      },
+      "revId": "60ec95d21f0a351f1fc355e021115ef830a11cdf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e90c3bd_c8ad50d2",
+        "filename": "torq/tests/device_unit_test.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-01T22:32:43Z",
+      "side": 1,
+      "message": "The creation of the `subProcess.CompletedProcess` is repeated in many of the test cases. Can we just have a function that receives the possible list of devices and returns the object.",
+      "range": {
+        "startLine": 41,
+        "startChar": 3,
+        "endLine": 44,
+        "endChar": 19
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "31aa1820_4edc9e00",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/tests/device_unit_test.py",
+              "range": {
+                "startLine": 26,
+                "startChar": 0,
+                "endLine": 26,
+                "endChar": 0
+              },
+              "replacement": "  def create_mock_adb_devices_subprocess(self, devices):\n    return subprocess.CompletedProcess(\n        args\u003d[\u0027adb\u0027, \u0027devices\u0027], returncode\u003d0,\n        stdout\u003db\u0027List of devices attached\\n\u0027 +\n               b\u0027\\n\u0027.join(devices) + b\u0027\\n\u0027,\n        stderr\u003db\u0027\u0027)\n\n"
+            },
+            {
+              "path": "torq/tests/device_unit_test.py",
+              "range": {
+                "startLine": 41,
+                "startChar": 0,
+                "endLine": 45,
+                "endChar": 0
+              },
+              "replacement": "    mock_adb_devices_subprocess.return_value \u003d self.create_mock_adb_devices_subprocess([])\n"
+            },
+            {
+              "path": "torq/tests/device_unit_test.py",
+              "range": {
+                "startLine": 55,
+                "startChar": 0,
+                "endLine": 60,
+                "endChar": 0
+              },
+              "replacement": "    mock_adb_devices_subprocess.return_value \u003d self.create_mock_adb_devices_subprocess([\"mock-device-serial\", \"mock-device-serial2\"])\n"
+            },
+            {
+              "path": "torq/tests/device_unit_test.py",
+              "range": {
+                "startLine": 84,
+                "startChar": 0,
+                "endLine": 88,
+                "endChar": 0
+              },
+              "replacement": "    mock_adb_devices_subprocess.return_value \u003d self.create_mock_adb_devices_subprocess([])\n"
+            },
+            {
+              "path": "torq/tests/device_unit_test.py",
+              "range": {
+                "startLine": 99,
+                "startChar": 0,
+                "endLine": 103,
+                "endChar": 0
+              },
+              "replacement": "    mock_adb_devices_subprocess.return_value \u003d self.create_mock_adb_devices_subprocess([\"mock-device-serial\"])\n"
+            },
+            {
+              "path": "torq/tests/device_unit_test.py",
+              "range": {
+                "startLine": 113,
+                "startChar": 0,
+                "endLine": 117,
+                "endChar": 0
+              },
+              "replacement": "    mock_adb_devices_subprocess.return_value \u003d self.create_mock_adb_devices_subprocess([\"mock-device-serial\"])\n"
+            },
+            {
+              "path": "torq/tests/device_unit_test.py",
+              "range": {
+                "startLine": 132,
+                "startChar": 0,
+                "endLine": 136,
+                "endChar": 0
+              },
+              "replacement": "    mock_adb_devices_subprocess.return_value \u003d self.create_mock_adb_devices_subprocess([\"mock-device-serial\"])\n"
+            },
+            {
+              "path": "torq/tests/device_unit_test.py",
+              "range": {
+                "startLine": 148,
+                "startChar": 0,
+                "endLine": 152,
+                "endChar": 0
+              },
+              "replacement": "    mock_adb_devices_subprocess.return_value \u003d self.create_mock_adb_devices_subprocess([\"mock-device-serial\"])\n"
+            },
+            {
+              "path": "torq/tests/device_unit_test.py",
+              "range": {
+                "startLine": 166,
+                "startChar": 0,
+                "endLine": 170,
+                "endChar": 0
+              },
+              "replacement": "    mock_adb_devices_subprocess.return_value \u003d self.create_mock_adb_devices_subprocess([\"mock-device-serial\"])\n"
+            },
+            {
+              "path": "torq/tests/device_unit_test.py",
+              "range": {
+                "startLine": 181,
+                "startChar": 0,
+                "endLine": 186,
+                "endChar": 0
+              },
+              "replacement": "    mock_adb_devices_subprocess.return_value \u003d self.create_mock_adb_devices_subprocess([\"mock-device-serial\", \"mock-device-serial2\"])\n"
+            }
+          ]
+        }
+      ],
+      "revId": "60ec95d21f0a351f1fc355e021115ef830a11cdf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39df2c1b_da730b8f",
+        "filename": "torq/tests/device_unit_test.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-01T22:32:43Z",
+      "side": 1,
+      "message": "We should extract this device names into a local variable and then compare the string later in the assertion.",
+      "range": {
+        "startLine": 57,
+        "startChar": 43,
+        "endLine": 57,
+        "endChar": 61
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "dbdd149d_ad967c2a",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/tests/device_unit_test.py",
+              "range": {
+                "startLine": 55,
+                "startChar": 0,
+                "endLine": 55,
+                "endChar": 0
+              },
+              "replacement": "    mock_device_serial \u003d \"mock-device-serial\"\n    mock_device_serial2 \u003d \"mock-device-serial2\"\n"
+            },
+            {
+              "path": "torq/tests/device_unit_test.py",
+              "range": {
+                "startLine": 57,
+                "startChar": 0,
+                "endLine": 59,
+                "endChar": 0
+              },
+              "replacement": "        stdout\u003db\u0027List of devices attached\\n\u0027 + mock_device_serial +\n               b\u0027\\tdevice\\n\u0027 + mock_device_serial2 + b\u0027\\tdevice\\n\\n\u0027,\n"
+            },
+            {
+              "path": "torq/tests/device_unit_test.py",
+              "range": {
+                "startLine": 65,
+                "startChar": 0,
+                "endLine": 67,
+                "endChar": 0
+              },
+              "replacement": "    self.assertEqual(devices[0], mock_device_serial)\n    self.assertEqual(devices[1], mock_device_serial2)\n"
+            },
+            {
+              "path": "torq/tests/device_unit_test.py",
+              "range": {
+                "startLine": 99,
+                "startChar": 0,
+                "endLine": 99,
+                "endChar": 0
+              },
+              "replacement": "    mock_device_serial \u003d \"mock-device-serial\"\n"
+            },
+            {
+              "path": "torq/tests/device_unit_test.py",
+              "range": {
+                "startLine": 101,
+                "startChar": 0,
+                "endLine": 102,
+                "endChar": 0
+              },
+              "replacement": "        stdout\u003db\u0027List of devices attached\\n\u0027 + mock_device_serial +\n               b\u0027\\tdevice\\n\\n\u0027,\n"
+            },
+            {
+              "path": "torq/tests/device_unit_test.py",
+              "range": {
+                "startLine": 103,
+                "startChar": 0,
+                "endLine": 104,
+                "endChar": 0
+              },
+              "replacement": "    adbDevice \u003d AdbDevice(mock_device_serial)\n"
+            },
+            {
+              "path": "torq/tests/device_unit_test.py",
+              "range": {
+                "startLine": 113,
+                "startChar": 0,
+                "endLine": 113,
+                "endChar": 0
+              },
+              "replacement": "    mock_device_serial \u003d \"mock-device-serial\"\n    mock_device_serial2 \u003d \"mock-device-serial2\"\n"
+            },
+            {
+              "path": "torq/tests/device_unit_test.py",
+              "range": {
+                "startLine": 115,
+                "startChar": 0,
+                "endLine": 116,
+                "endChar": 0
+              },
+              "replacement": "        stdout\u003db\u0027List of devices attached\\n\u0027 + mock_device_serial +\n               b\u0027\\tdevice\\n\\n\u0027,\n"
+            },
+            {
+              "path": "torq/tests/device_unit_test.py",
+              "range": {
+                "startLine": 117,
+                "startChar": 0,
+                "endLine": 118,
+                "endChar": 0
+              },
+              "replacement": "    adbDevice \u003d AdbDevice(\"invalid-device-serial2\")\n"
+            },
+            {
+              "path": "torq/tests/device_unit_test.py",
+              "range": {
+                "startLine": 123,
+                "startChar": 0,
+                "endLine": 124,
+                "endChar": 0
+              },
+              "replacement": "                                     \" invalid-device-serial2 is not\"\n"
+            },
+            {
+              "path": "torq/tests/device_unit_test.py",
+              "range": {
+                "startLine": 127,
+                "startChar": 0,
+                "endLine": 128,
+                "endChar": 0
+              },
+              "replacement": "  @mock.patch.dict(os.environ, {\"ANDROID_SERIAL\": \"mock-device-serial2\"},\n"
+            },
+            {
+              "path": "torq/tests/device_unit_test.py",
+              "range": {
+                "startLine": 132,
+                "startChar": 0,
+                "endLine": 132,
+                "endChar": 0
+              },
+              "replacement": "    mock_device_serial \u003d \"mock-device-serial\"\n    mock_device_serial2 \u003d \"mock-device-serial2\"\n"
+            },
+            {
+              "path": "torq/tests/device_unit_test.py",
+              "range": {
+                "startLine": 134,
+                "startChar": 0,
+                "endLine": 135,
+                "endChar": 0
+              },
+              "replacement": "        stdout\u003db\u0027List of devices attached\\n\u0027 + mock_device_serial +\n               b\u0027\\tdevice\\n\u0027 + mock_device_serial2 + b\u0027\\tdevice\\n\\n\u0027,\n"
+            },
+            {
+              "path": "torq/tests/device_unit_test.py",
+              "range": {
+                "startLine": 141,
+                "startChar": 0,
+                "endLine": 142,
+                "endChar": 0
+              },
+              "replacement": "    self.assertEqual(adbDevice.serial, mock_device_serial2)\n"
+            },
+            {
+              "path": "torq/tests/device_unit_test.py",
+              "range": {
+                "startLine": 148,
+                "startChar": 0,
+                "endLine": 148,
+                "endChar": 0
+              },
+              "replacement": "    mock_device_serial \u003d \"mock-device-serial\"\n"
+            },
+            {
+              "path": "torq/tests/device_unit_test.py",
+              "range": {
+                "startLine": 150,
+                "startChar": 0,
+                "endLine": 151,
+                "endChar": 0
+              },
+              "replacement": "        stdout\u003db\u0027List of devices attached\\n\u0027 + mock_device_serial +\n               b\u0027\\tdevice\\n\\n\u0027,\n"
+            },
+            {
+              "path": "torq/tests/device_unit_test.py",
+              "range": {
+                "startLine": 166,
+                "startChar": 0,
+                "endLine": 166,
+                "endChar": 0
+              },
+              "replacement": "    mock_device_serial \u003d \"mock-device-serial\"\n"
+            },
+            {
+              "path": "torq/tests/device_unit_test.py",
+              "range": {
+                "startLine": 168,
+                "startChar": 0,
+                "endLine": 169,
+                "endChar": 0
+              },
+              "replacement": "        stdout\u003db\u0027List of devices attached\\n\u0027 + mock_device_serial +\n               b\u0027\\tdevice\\n\\n\u0027,\n"
+            },
+            {
+              "path": "torq/tests/device_unit_test.py",
+              "range": {
+                "startLine": 175,
+                "startChar": 0,
+                "endLine": 176,
+                "endChar": 0
+              },
+              "replacement": "    self.assertEqual(adbDevice.serial, mock_device_serial)\n"
+            },
+            {
+              "path": "torq/tests/device_unit_test.py",
+              "range": {
+                "startLine": 181,
+                "startChar": 0,
+                "endLine": 181,
+                "endChar": 0
+              },
+              "replacement": "    mock_device_serial \u003d \"mock-device-serial\"\n    mock_device_serial2 \u003d \"mock-device-serial2\"\n"
+            },
+            {
+              "path": "torq/tests/device_unit_test.py",
+              "range": {
+                "startLine": 183,
+                "startChar": 0,
+                "endLine": 185,
+                "endChar": 0
+              },
+              "replacement": "        stdout\u003db\u0027List of devices attached\\n\u0027 + mock_device_serial +\n               b\u0027\\tdevice\\n\u0027 + mock_device_serial2 + b\u0027\\tdevice\\n\\n\u0027,\n"
+            },
+            {
+              "path": "torq/tests/device_unit_test.py",
+              "range": {
+                "startLine": 195,
+                "startChar": 0,
+                "endLine": 197,
+                "endChar": 0
+              },
+              "replacement": "                                       \"\\n\\t torq --serial \" +\n                                       mock_device_serial +\n                                       \"\\n\\t torq --serial \" +\n                                       mock_device_serial2)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "60ec95d21f0a351f1fc355e021115ef830a11cdf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9323b270_4e42bd09",
+        "filename": "torq/tests/device_unit_test.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-01T22:32:43Z",
+      "side": 1,
+      "message": "Nit: remove extra space here.",
+      "fixSuggestions": [
+        {
+          "fixId": "626cf963_c0e67274",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/tests/device_unit_test.py",
+              "range": {
+                "startLine": 198,
+                "startChar": 0,
+                "endLine": 199,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "60ec95d21f0a351f1fc355e021115ef830a11cdf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98572cd0_4ae3647b",
+        "filename": "torq/torq.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-01T22:32:43Z",
+      "side": 1,
+      "message": "We should extract this into a function given that the conditional statements are expanding and use the following:\n\n```\nany([\n    args.event !\u003d \"custom\",\n    args.profiler !\u003d \"perfetto\",\n    args.out_dir !\u003d DEFAULT_OUT_DIR,\n    args.dur_ms !\u003d DEFAULT_DUR_MS,\n    args.app is not  None,\n    args.runs !\u003d 1,\n    args.simpleperf_event is not None,\n    args.perfetto_config !\u003d \"default\",\n    args.between_dur_ms !\u003d DEFAULT_DUR_MS,\n    args.ui is not None,\n    args.exclude_ftrace_event is not None,\n    args.include_ftrace_event is not None,\n    args.from_user is not None,\n    args.to_user is not None,\n    args.serial is not None\n])\n```\n\nThe original expression evaluates true if any of the conditions are met.",
+      "range": {
+        "startLine": 133,
+        "startChar": 39,
+        "endLine": 147,
+        "endChar": 62
+      },
+      "revId": "60ec95d21f0a351f1fc355e021115ef830a11cdf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
