@@ -185,6 +185,7 @@ class RecordFileReader {
   bool ReadRecord(std::unique_ptr<Record>& record);
 
   size_t GetAttrIndexOfRecord(const Record* record);
+  size_t GetAttrIndexByEventId(uint64_t event_id);
 
   std::vector<std::string> ReadCmdlineFeature();
   std::vector<BuildIdRecord> ReadBuildIdFeature();

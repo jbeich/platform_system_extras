@@ -92,6 +92,17 @@ struct CallChain {
   CallChainEntry* entries;
 };
 
+struct EventCounter {
+  const char* name;
+  uint64_t id;
+  uint64_t count;
+};
+
+struct EventCounters {
+  size_t nr;
+  EventCounter* event_counter;
+};
+
 struct FeatureSection {
   const char* data;
   uint32_t data_size;
@@ -209,6 +220,11 @@ class ReportLib {
   Event* GetEventOfCurrentSample() { return &current_event_; }
   SymbolEntry* GetSymbolOfCurrentSample() { return current_symbol_; }
   CallChain* GetCallChainOfCurrentSample() { return &current_callchain_; }
+  EventCounters* GetEventCountersOfCurrentSample() {
+    event_counters_ctype_.nr = event_counters_.size();
+    event_counters_ctype_.event_counter = event_counters_.data();
+    return &event_counters_ctype_;
+  }
   const char* GetTracingDataOfCurrentSample() { return current_tracing_data_; }
   const char* GetProcessNameOfCurrentSample() {
     const ThreadEntry* thread = thread_tree_.FindThread(current_sample_.pid);
@@ -224,6 +240,7 @@ class ReportLib {
   void ProcessSwitchRecord(std::unique_ptr<Record> r);
   void AddSampleRecordToQueue(SampleRecord* r);
   bool SetCurrentSample(std::unique_ptr<SampleRecord> sample_record);
+  void SetEventCounters(const SampleRecord& r);
   const EventInfo& FindEvent(const SampleRecord& r);
   void CreateEvents();
 
@@ -240,6 +257,8 @@ class ReportLib {
   Event current_event_;
   SymbolEntry* current_symbol_;
   CallChain current_callchain_;
+  std::vector<EventCounter> event_counters_;
+  EventCounters event_counters_ctype_;
   const char* current_tracing_data_;
   std::vector<std::unique_ptr<Mapping>> current_mappings_;
   std::vector<CallChainEntry> callchain_entries_;
@@ -525,7 +544,27 @@ bool ReportLib::SetCurrentSample(std::unique_ptr<SampleRecord> sample_record) {
   } else {
     current_tracing_data_ = nullptr;
   }
+  SetEventCounters(r);
   return true;
+}
+
+void ReportLib::SetEventCounters(const SampleRecord& r) {
+  if (trace_offcpu_.mode == TraceOffCpuMode::MIXED_ON_OFF_CPU) {
+    return;
+  }
+
+  const auto& ids = r.read_data.ids;
+  const auto& counts = r.read_data.counts;
+  CHECK_EQ(ids.size(), counts.size());
+
+  event_counters_.resize(ids.size());
+  for (size_t i = 0; i < event_counters_.size(); i++) {
+    auto& event_counter = event_counters_[i];
+    event_counter.id = ids[i];
+    event_counter.count = counts[i];
+    size_t attr_index = record_file_reader_->GetAttrIndexByEventId(event_counter.id);
+    event_counter.name = events_[attr_index].name.c_str();
+  };
 }
 
 const EventInfo& ReportLib::FindEvent(const SampleRecord& r) {
@@ -649,6 +688,7 @@ Sample* GetNextSample(ReportLib* report_lib) EXPORT;
 Event* GetEventOfCurrentSample(ReportLib* report_lib) EXPORT;
 SymbolEntry* GetSymbolOfCurrentSample(ReportLib* report_lib) EXPORT;
 CallChain* GetCallChainOfCurrentSample(ReportLib* report_lib) EXPORT;
+EventCounters* GetEventCountersOfCurrentSample(ReportLib* report_lib) EXPORT;
 const char* GetTracingDataOfCurrentSample(ReportLib* report_lib) EXPORT;
 const char* GetProcessNameOfCurrentSample(ReportLib* report_lib) EXPORT;
 
@@ -732,6 +772,10 @@ SymbolEntry* GetSymbolOfCurrentSample(ReportLib* report_lib) {
 
 CallChain* GetCallChainOfCurrentSample(ReportLib* report_lib) {
   return report_lib->GetCallChainOfCurrentSample();
+}
+
+EventCounters* GetEventCountersOfCurrentSample(ReportLib* report_lib) {
+  return report_lib->GetEventCountersOfCurrentSample();
 }
 
 const char* GetTracingDataOfCurrentSample(ReportLib* report_lib) {

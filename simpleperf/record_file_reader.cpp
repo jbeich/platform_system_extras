@@ -455,6 +455,14 @@ size_t RecordFileReader::GetAttrIndexOfRecord(const Record* record) {
   return 0;
 }
 
+size_t RecordFileReader::GetAttrIndexByEventId(uint64_t event_id) {
+  auto it = event_id_to_attr_map_.find(event_id);
+  if (it != event_id_to_attr_map_.end()) {
+    return it->second;
+  }
+  return 0;
+}
+
 bool RecordFileReader::ReadFeatureSection(int feature, std::vector<char>* data) {
   const std::map<int, SectionDesc>& section_map = FeatureSectionDescriptors();
   auto it = section_map.find(feature);
