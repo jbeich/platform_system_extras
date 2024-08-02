@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "937688f9_f9ca8173",
+        "filename": "simpleperf/scripts/pprof_proto_generator.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 2041337
+      },
+      "writtenOn": "2024-08-02T06:15:16Z",
+      "side": 1,
+      "message": "I\u0027m thinking we should fallback to use main_event for the whole record file when we got any failure when getting event_counters?",
+      "revId": "a953c43073b5263e92fa95284bbbacb56c30d80a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "58f77171_aa62fef3",
         "filename": "simpleperf/scripts/pprof_proto_generator.py",
         "patchSetId": 2
