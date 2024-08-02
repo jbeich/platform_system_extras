@@ -323,20 +323,36 @@ class PprofProfileGenerator(object):
         numbers_re = re.compile(r"\d+")
 
         # Process all samples in perf.data, aggregate samples.
+        last_counts: dict[int, int] = {}
         while True:
             report_sample = self.lib.GetNextSample()
             if report_sample is None:
                 self.lib.Close()
                 self.lib = None
                 break
-            event = self.lib.GetEventOfCurrentSample()
+            main_event = self.lib.GetEventOfCurrentSample()
             symbol = self.lib.GetSymbolOfCurrentSample()
             callchain = self.lib.GetCallChainOfCurrentSample()
 
-            sample_type_id = self.get_sample_type_id(event.name)
             sample = Sample()
-            sample.add_value(sample_type_id, 1)
-            sample.add_value(sample_type_id + 1, report_sample.period)
+
+            event_counters = self.lib.GetEventCountersOfCurrentSample()
+            if event_counters.nr < 2:
+                sample_type_id = self.get_sample_type_id(main_event.name)
+                sample.add_value(sample_type_id, 1)
+                sample.add_value(sample_type_id + 1, report_sample.period)
+            else:
+                for i in range(event_counters.nr):
+                    event_counter = event_counters.event_counter[i]
+                    sample_type_id = self.get_sample_type_id(event_counter.name)
+                    sample.add_value(sample_type_id, 1)
+
+                    event_id = event_counter.id
+                    event_acc_count = event_counter.count
+                    last_count = last_counts.get(event_id, 0)
+                    sample.add_value(sample_type_id + 1, event_acc_count - last_count)
+                    last_counts[event_id] = event_acc_count
+
             sample.labels.append(Label(
                 self.get_string_id("thread"),
                 self.get_string_id(report_sample.thread_comm)))
