@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0432e5a3_c0b00809",
+        "filename": "torq/device.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-02T00:56:38Z",
+      "side": 1,
+      "message": "I added this string, thank you.",
+      "parentUuid": "28133e66_8f8b45e4",
+      "revId": "60ec95d21f0a351f1fc355e021115ef830a11cdf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2dc564f8_82435665",
@@ -97,6 +115,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9a703f4_c8f840c1",
+        "filename": "torq/device.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-02T00:56:38Z",
+      "side": 1,
+      "message": "Changed the variable name, thank you.",
+      "parentUuid": "2dc564f8_82435665",
+      "range": {
+        "startLine": 91,
+        "startChar": 4,
+        "endLine": 91,
+        "endChar": 11
+      },
+      "revId": "60ec95d21f0a351f1fc355e021115ef830a11cdf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0fc5f532_ac77476b",
@@ -138,6 +180,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2287129_2ca14a8d",
+        "filename": "torq/device.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-02T00:56:38Z",
+      "side": 1,
+      "message": "Added this, thank you.",
+      "parentUuid": "0fc5f532_ac77476b",
+      "range": {
+        "startLine": 95,
+        "startChar": 19,
+        "endLine": 95,
+        "endChar": 73
+      },
+      "revId": "60ec95d21f0a351f1fc355e021115ef830a11cdf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e91db1d1_8cc81b92",
@@ -151,6 +217,30 @@
       "writtenOn": "2024-08-01T22:32:43Z",
       "side": 1,
       "message": "We should avoid deeply nested conditional statements: go/nest-ninja-tips-episode/6#example-1\n\nLet\u0027s combine these into 1 conditional if statement.",
+      "range": {
+        "startLine": 110,
+        "startChar": 4,
+        "endLine": 111,
+        "endChar": 36
+      },
+      "revId": "60ec95d21f0a351f1fc355e021115ef830a11cdf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79d247aa_eef2b229",
+        "filename": "torq/device.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-02T00:56:38Z",
+      "side": 1,
+      "message": "Combining these would break the logic. There is a case where self.serial is not None but self.serial is in devices. In that case were are successfully connected and we do not want to explore the other conditionals. We want to simply return None. I return None at the end of the function for all the paths that end in a connection, so that\u0027s why there isn\u0027t an explicit nested else statement here.",
+      "parentUuid": "e91db1d1_8cc81b92",
       "range": {
         "startLine": 110,
         "startChar": 4,
@@ -288,6 +378,30 @@
           ]
         }
       ],
+      "revId": "60ec95d21f0a351f1fc355e021115ef830a11cdf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3b32446_7a942321",
+        "filename": "torq/tests/device_unit_test.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-02T00:56:38Z",
+      "side": 1,
+      "message": "Added this, thank you.",
+      "parentUuid": "9e90c3bd_c8ad50d2",
+      "range": {
+        "startLine": 41,
+        "startChar": 3,
+        "endLine": 44,
+        "endChar": 19
+      },
       "revId": "60ec95d21f0a351f1fc355e021115ef830a11cdf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -543,6 +657,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c203f9a_b218fddf",
+        "filename": "torq/tests/device_unit_test.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-02T00:56:38Z",
+      "side": 1,
+      "message": "Added this, thank you.",
+      "parentUuid": "39df2c1b_da730b8f",
+      "range": {
+        "startLine": 57,
+        "startChar": 43,
+        "endLine": 57,
+        "endChar": 61
+      },
+      "revId": "60ec95d21f0a351f1fc355e021115ef830a11cdf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9323b270_4e42bd09",
@@ -580,6 +718,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d3eb60d5_80a4bc6b",
+        "filename": "torq/tests/device_unit_test.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-02T00:56:38Z",
+      "side": 1,
+      "message": "I thought if __name__ \u003d\u003d \u0027__main__\u0027: usually needs 2 lines of space above it? I do this in the other files. If I remove, syntax raises alert.",
+      "parentUuid": "9323b270_4e42bd09",
+      "revId": "60ec95d21f0a351f1fc355e021115ef830a11cdf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "98572cd0_4ae3647b",
         "filename": "torq/torq.py",
         "patchSetId": 6
@@ -591,6 +747,30 @@
       "writtenOn": "2024-08-01T22:32:43Z",
       "side": 1,
       "message": "We should extract this into a function given that the conditional statements are expanding and use the following:\n\n```\nany([\n    args.event !\u003d \"custom\",\n    args.profiler !\u003d \"perfetto\",\n    args.out_dir !\u003d DEFAULT_OUT_DIR,\n    args.dur_ms !\u003d DEFAULT_DUR_MS,\n    args.app is not  None,\n    args.runs !\u003d 1,\n    args.simpleperf_event is not None,\n    args.perfetto_config !\u003d \"default\",\n    args.between_dur_ms !\u003d DEFAULT_DUR_MS,\n    args.ui is not None,\n    args.exclude_ftrace_event is not None,\n    args.include_ftrace_event is not None,\n    args.from_user is not None,\n    args.to_user is not None,\n    args.serial is not None\n])\n```\n\nThe original expression evaluates true if any of the conditions are met.",
+      "range": {
+        "startLine": 133,
+        "startChar": 39,
+        "endLine": 147,
+        "endChar": 62
+      },
+      "revId": "60ec95d21f0a351f1fc355e021115ef830a11cdf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "467b8ee9_7fddd1af",
+        "filename": "torq/torq.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-02T00:56:38Z",
+      "side": 1,
+      "message": "Added this, thank you.",
+      "parentUuid": "98572cd0_4ae3647b",
       "range": {
         "startLine": 133,
         "startChar": 39,
