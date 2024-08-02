@@ -681,6 +681,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "73d9822a_3e609ded",
+        "filename": "torq/tests/device_unit_test.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-02T16:46:26Z",
+      "side": 1,
+      "message": "Added these as a constant variable instead to avoid defining many times.",
+      "parentUuid": "4c203f9a_b218fddf",
+      "range": {
+        "startLine": 57,
+        "startChar": 43,
+        "endLine": 57,
+        "endChar": 61
+      },
+      "revId": "60ec95d21f0a351f1fc355e021115ef830a11cdf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9323b270_4e42bd09",
