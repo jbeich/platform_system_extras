@@ -16,6 +16,29 @@
       "message": "for the record some previous review happened on ag/28577233",
       "revId": "a953c43073b5263e92fa95284bbbacb56c30d80a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58f77171_aa62fef3",
+        "filename": "simpleperf/scripts/pprof_proto_generator.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1077495
+      },
+      "writtenOn": "2024-08-02T05:09:07Z",
+      "side": 1,
+      "message": "if event_counters.nr \u003d\u003d 1, it doesn\u0027t necessary means that main_event.name \u003d\u003d event_counters.event_counter[0].name right?",
+      "range": {
+        "startLine": 340,
+        "startChar": 15,
+        "endLine": 340,
+        "endChar": 36
+      },
+      "revId": "a953c43073b5263e92fa95284bbbacb56c30d80a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
