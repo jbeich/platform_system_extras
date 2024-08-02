@@ -150,6 +150,30 @@
       ],
       "revId": "d62bab3d20e8005523b8771c7493b7dc9f62708c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "52e6323c_f9ee8a76",
+        "filename": "torq/tests/device_unit_test.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-02T22:53:42Z",
+      "side": 1,
+      "message": "I changed this back, thank you.",
+      "parentUuid": "8e76d3a4_a922a5c5",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 22
+      },
+      "revId": "d62bab3d20e8005523b8771c7493b7dc9f62708c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
