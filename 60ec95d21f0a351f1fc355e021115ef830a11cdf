@@ -251,6 +251,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "54dec47c_badf7caf",
+        "filename": "torq/device.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-02T17:59:32Z",
+      "side": 1,
+      "message": "Ah that makes sense, given that there is a precedence that we want to follow.",
+      "parentUuid": "79d247aa_eef2b229",
+      "range": {
+        "startLine": 110,
+        "startChar": 4,
+        "endLine": 111,
+        "endChar": 36
+      },
+      "revId": "60ec95d21f0a351f1fc355e021115ef830a11cdf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9e90c3bd_c8ad50d2",
@@ -754,6 +778,24 @@
       "side": 1,
       "message": "I thought if __name__ \u003d\u003d \u0027__main__\u0027: usually needs 2 lines of space above it? I do this in the other files. If I remove, syntax raises alert.",
       "parentUuid": "9323b270_4e42bd09",
+      "revId": "60ec95d21f0a351f1fc355e021115ef830a11cdf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e066471_e9632e07",
+        "filename": "torq/tests/device_unit_test.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-02T17:59:32Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "d3eb60d5_80a4bc6b",
       "revId": "60ec95d21f0a351f1fc355e021115ef830a11cdf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
