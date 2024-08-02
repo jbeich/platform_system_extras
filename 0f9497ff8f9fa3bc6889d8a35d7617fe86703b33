@@ -1,0 +1,154 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4fc447e_b7105a8f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2024-08-02T17:44:34Z",
+      "side": 1,
+      "message": "LGTM except for a few small suggestions!",
+      "revId": "0f9497ff8f9fa3bc6889d8a35d7617fe86703b33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82a16f1f_09132af3",
+        "filename": "simpleperf/report_lib_interface.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 552,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2024-08-02T17:44:34Z",
+      "side": 1,
+      "message": "User may set other trace offcpu mode for perf.data recorded with --trace-offcpu. So if you don\u0027t need to report counters for perf.data recorded with --trace-offcpu, change to \"trace_offcpu_.mode.has_value()\"?",
+      "range": {
+        "startLine": 552,
+        "startChar": 6,
+        "endLine": 552,
+        "endChar": 61
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "8a54b8c2_80435690",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "simpleperf/report_lib_interface.cpp",
+              "range": {
+                "startLine": 552,
+                "startChar": 0,
+                "endLine": 553,
+                "endChar": 0
+              },
+              "replacement": "  if (trace_offcpu_.mode.has_value()) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "0f9497ff8f9fa3bc6889d8a35d7617fe86703b33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0a81bd2_b07ccf0b",
+        "filename": "simpleperf/scripts/pprof_proto_generator.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2024-08-02T17:44:34Z",
+      "side": 1,
+      "message": "It would be great if you can add a test in pprof_proto_generator_test.py. You can test it with testdata/perf_with_add_counter.data.",
+      "range": {
+        "startLine": 326,
+        "startChar": 0,
+        "endLine": 326,
+        "endChar": 8
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "243e2a3a_69c85ed2",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "simpleperf/scripts/pprof_proto_generator.py",
+              "range": {
+                "startLine": 326,
+                "startChar": 0,
+                "endLine": 327,
+                "endChar": 0
+              },
+              "replacement": "        last_counts: Dict[int, int] \u003d {}\n"
+            }
+          ]
+        }
+      ],
+      "revId": "0f9497ff8f9fa3bc6889d8a35d7617fe86703b33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52575189_fd1236c2",
+        "filename": "simpleperf/scripts/pprof_proto_generator.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2024-08-02T17:44:34Z",
+      "side": 1,
+      "message": "Since this isn\u0027t trivial, could you move the change to a separate method, similar to add_tagroot()?",
+      "range": {
+        "startLine": 344,
+        "startChar": 12,
+        "endLine": 344,
+        "endChar": 15
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "657dd1a0_3f76f725",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "simpleperf/scripts/pprof_proto_generator.py",
+              "range": {
+                "startLine": 344,
+                "startChar": 0,
+                "endLine": 354,
+                "endChar": 0
+              },
+              "replacement": "            self.add_event_counters(sample, event_counters, last_counts)\n"
+            },
+            {
+              "path": "simpleperf/scripts/pprof_proto_generator.py",
+              "range": {
+                "startLine": 399,
+                "startChar": 0,
+                "endLine": 399,
+                "endChar": 0
+              },
+              "replacement": "    def add_event_counters(self, sample: Sample, event_counters, last_counts: dict[int, int]):\n        for i in range(event_counters.nr):\n            event_counter \u003d event_counters.event_counter[i]\n            sample_type_id \u003d self.get_sample_type_id(event_counter.name, is_counter\u003dTrue)\n            sample.add_value(sample_type_id, 1)\n\n            event_id \u003d event_counter.id\n            event_acc_count \u003d event_counter.count\n            last_count \u003d last_counts.get(event_id, 0)\n            sample.add_value(sample_type_id + 1, event_acc_count - last_count)\n            last_counts[event_id] \u003d event_acc_count\n\n"
+            }
+          ]
+        }
+      ],
+      "revId": "0f9497ff8f9fa3bc6889d8a35d7617fe86703b33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
