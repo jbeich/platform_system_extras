@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4b75c8c1_a332f3cd",
+        "filename": "simpleperf/scripts/pprof_proto_generator.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 1077495
+      },
+      "writtenOn": "2024-08-02T06:28:28Z",
+      "side": 1,
+      "message": "Yes, we can print a error message and fallback to the main event.",
+      "parentUuid": "937688f9_f9ca8173",
+      "revId": "a953c43073b5263e92fa95284bbbacb56c30d80a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "58f77171_aa62fef3",
         "filename": "simpleperf/scripts/pprof_proto_generator.py",
         "patchSetId": 2
