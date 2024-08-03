@@ -59,6 +59,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "acc35cd0_153be3bf",
+        "filename": "simpleperf/report_lib_interface.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 552,
+      "author": {
+        "id": 2041337
+      },
+      "writtenOn": "2024-08-03T19:45:22Z",
+      "side": 1,
+      "message": "Done. Remove the mode check.\n\nWe should set counters regardless of the value of trace_offcpu_.mode .",
+      "parentUuid": "82a16f1f_09132af3",
+      "range": {
+        "startLine": 552,
+        "startChar": 6,
+        "endLine": 552,
+        "endChar": 61
+      },
+      "revId": "0f9497ff8f9fa3bc6889d8a35d7617fe86703b33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c0a81bd2_b07ccf0b",
@@ -96,6 +120,30 @@
           ]
         }
       ],
+      "revId": "0f9497ff8f9fa3bc6889d8a35d7617fe86703b33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e2e4f03_91e4d3aa",
+        "filename": "simpleperf/scripts/pprof_proto_generator.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 2041337
+      },
+      "writtenOn": "2024-08-03T19:45:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c0a81bd2_b07ccf0b",
+      "range": {
+        "startLine": 326,
+        "startChar": 0,
+        "endLine": 326,
+        "endChar": 8
+      },
       "revId": "0f9497ff8f9fa3bc6889d8a35d7617fe86703b33",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -147,6 +195,30 @@
           ]
         }
       ],
+      "revId": "0f9497ff8f9fa3bc6889d8a35d7617fe86703b33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5a18e3f_a0ff0c45",
+        "filename": "simpleperf/scripts/pprof_proto_generator.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 2041337
+      },
+      "writtenOn": "2024-08-03T19:45:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "52575189_fd1236c2",
+      "range": {
+        "startLine": 344,
+        "startChar": 12,
+        "endLine": 344,
+        "endChar": 15
+      },
       "revId": "0f9497ff8f9fa3bc6889d8a35d7617fe86703b33",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
