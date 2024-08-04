@@ -298,3 +298,9 @@ class TestPprofProtoGenerator(TestBase):
 
     def test_report_sample_proto_file(self):
         self.run_generator('', testdata_file='display_bitmaps.proto_data')
+
+    def test_tagroot(self):
+        data = self.run_generator(['--tagroot', 'comm', 'thread_comm'])
+        self.assertIn('process:e.sample.tunnel', data)
+        self.assertIn('thread:e.sample.tunnel', data)
+        self.assertIn('thread:Binder:10419_3', data)
