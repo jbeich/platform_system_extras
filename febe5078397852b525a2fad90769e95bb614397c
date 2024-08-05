@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fb95544_297417fa",
+        "filename": "simpleperf/scripts/pprof_proto_generator.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 2041337
+      },
+      "writtenOn": "2024-08-05T07:05:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "869258c9_225ba56f",
+      "revId": "febe5078397852b525a2fad90769e95bb614397c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7d862983_7555fe25",
@@ -49,6 +67,24 @@
       "writtenOn": "2024-08-05T06:53:52Z",
       "side": 1,
       "message": "nit: remove blank line",
+      "revId": "febe5078397852b525a2fad90769e95bb614397c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d30acde6_cfb5b04d",
+        "filename": "simpleperf/scripts/pprof_proto_generator.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 2041337
+      },
+      "writtenOn": "2024-08-05T07:05:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7d862983_7555fe25",
       "revId": "febe5078397852b525a2fad90769e95bb614397c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
