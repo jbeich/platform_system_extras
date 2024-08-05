@@ -1,0 +1,56 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "869258c9_225ba56f",
+        "filename": "simpleperf/scripts/pprof_proto_generator.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 1077495
+      },
+      "writtenOn": "2024-08-05T06:53:52Z",
+      "side": 1,
+      "message": "nit: remove blank line",
+      "fixSuggestions": [
+        {
+          "fixId": "cbced064_d0e43832",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "simpleperf/scripts/pprof_proto_generator.py",
+              "range": {
+                "startLine": 339,
+                "startChar": 0,
+                "endLine": 340,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "febe5078397852b525a2fad90769e95bb614397c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d862983_7555fe25",
+        "filename": "simpleperf/scripts/pprof_proto_generator.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1077495
+      },
+      "writtenOn": "2024-08-05T06:53:52Z",
+      "side": 1,
+      "message": "nit: remove blank line",
+      "revId": "febe5078397852b525a2fad90769e95bb614397c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
