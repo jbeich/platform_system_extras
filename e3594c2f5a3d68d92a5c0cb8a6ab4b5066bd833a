@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4fd6b903_eb7a4cfc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2024-08-07T19:04:25Z",
+      "side": 1,
+      "message": "Not sure if they were unused from the beginning or missed as part of a refactor - but thanks for the cleanup Elliott!",
+      "revId": "e3594c2f5a3d68d92a5c0cb8a6ab4b5066bd833a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
