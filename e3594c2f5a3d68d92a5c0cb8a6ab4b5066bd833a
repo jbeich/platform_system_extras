@@ -16,6 +16,24 @@
       "message": "Not sure if they were unused from the beginning or missed as part of a refactor - but thanks for the cleanup Elliott!",
       "revId": "e3594c2f5a3d68d92a5c0cb8a6ab4b5066bd833a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "38c50b60_3bb7bd2f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003224
+      },
+      "writtenOn": "2024-08-07T19:32:19Z",
+      "side": 1,
+      "message": "yeah, i think it\u0027s just the classic detritus of previous implementations. (i was looking to see who was using \u003csys/_system_properties.h\u003e and why, and this was an easy one :-) )",
+      "parentUuid": "4fd6b903_eb7a4cfc",
+      "revId": "e3594c2f5a3d68d92a5c0cb8a6ab4b5066bd833a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
