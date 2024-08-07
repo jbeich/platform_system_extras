@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b683f041_50644229",
+        "filename": "torq/device.py",
+        "patchSetId": 13
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-08-07T18:26:09Z",
+      "side": 1,
+      "message": "`adb devices` output something like this:\n```\nList of devices attached\nSOMEDEVICE1234\tdevice\ndevice2:5678\tdevice\n```\n\nSo make sure the comment has the correct format that is produced by the command. Also, sometimes when ADB has not been started and you run `adb devices` the output would be something like:\n```\n* daemon not running; starting now at tcp:1234\n* daemon started successfully\nList of devices attached\nSOMEDEVICE1234\tdevice\ndevice2:5678\tdevice\n```\nSo make sure we are parsing these outputs correctly. Please add a unit test for this case.",
+      "range": {
+        "startLine": 94,
+        "startChar": 4,
+        "endLine": 96,
+        "endChar": 16
+      },
+      "revId": "463d0f53bbd6a01fa9d8e4dd1850a7b0920587a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8460993c_81c59276",
+        "filename": "torq/device.py",
+        "patchSetId": 13
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-08-07T18:26:09Z",
+      "side": 1,
+      "message": "This would incorrectly parse the second case mentioned in the previous comment.",
+      "range": {
+        "startLine": 104,
+        "startChar": 4,
+        "endLine": 104,
+        "endChar": 74
+      },
+      "revId": "463d0f53bbd6a01fa9d8e4dd1850a7b0920587a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d8e3c69_919afce9",
+        "filename": "torq/tests/device_unit_test.py",
+        "patchSetId": 13
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-08-07T18:26:09Z",
+      "side": 1,
+      "message": "Let\u0027s rename to: `generate_adb_devices_result`",
+      "range": {
+        "startLine": 30,
+        "startChar": 6,
+        "endLine": 30,
+        "endChar": 40
+      },
+      "revId": "463d0f53bbd6a01fa9d8e4dd1850a7b0920587a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6348697_74f4acd8",
+        "filename": "torq/tests/device_unit_test.py",
+        "patchSetId": 13
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-08-07T18:26:09Z",
+      "side": 1,
+      "message": "Rename to `mock_subprocess_run`. Same in other cases. This is more accurate to what we are actually mocking.",
+      "range": {
+        "startLine": 41,
+        "startChar": 6,
+        "endLine": 41,
+        "endChar": 33
+      },
+      "revId": "463d0f53bbd6a01fa9d8e4dd1850a7b0920587a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62fccb0a_936e9812",
+        "filename": "torq/tests/device_unit_test.py",
+        "patchSetId": 13
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-08-07T18:26:09Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be a lambda expression that raises the Exception? Something like:\n```suggestion\n    mock_adb_devices_subprocess.side_effect \u003d lambda x: raise Exception(MOCK_FAILURE)\n```",
+      "range": {
+        "startLine": 42,
+        "startChar": 46,
+        "endLine": 42,
+        "endChar": 69
+      },
+      "revId": "463d0f53bbd6a01fa9d8e4dd1850a7b0920587a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2701e61_4aa41586",
+        "filename": "torq/tests/device_unit_test.py",
+        "patchSetId": 13
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-08-07T18:26:09Z",
+      "side": 1,
+      "message": "When writing unit tests we usually follow this structure:\n\n```\n\u003cpositive test case\u003e\n\u003cerror case of the positive test case\u003e\n\u003cerror case of the positive test case\u003e\n\u003cpositive test case\u003e\n\u003cerror case of the positive test case\u003e\n\u003cerror case of the positive test case\u003e\n\u003cpositive test case\u003e\n\u003cerror case of the positive test case\u003e\n\u003cerror case of the positive test case\u003e\n```\n\nSo the normal test case is added first and then we add the error cases of that test. Then we go to the next normal flow test and then its error cases and so on. This is helpful because the reader can see first how the code is supposed to work and then you see the ways it can fail.",
+      "range": {
+        "startLine": 63,
+        "startChar": 2,
+        "endLine": 75,
+        "endChar": 33
+      },
+      "revId": "463d0f53bbd6a01fa9d8e4dd1850a7b0920587a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
