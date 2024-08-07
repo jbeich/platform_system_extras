@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2842a81c_8846aada",
+        "filename": "torq/device.py",
+        "patchSetId": 13
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-07T20:38:46Z",
+      "side": 1,
+      "message": "I did not know about this case. Thank you. I added this case in device.py and a unit test in device_unit_test.py.",
+      "parentUuid": "b683f041_50644229",
+      "range": {
+        "startLine": 94,
+        "startChar": 4,
+        "endLine": 96,
+        "endChar": 16
+      },
+      "revId": "463d0f53bbd6a01fa9d8e4dd1850a7b0920587a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8460993c_81c59276",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-08-07T18:26:09Z",
       "side": 1,
       "message": "This would incorrectly parse the second case mentioned in the previous comment.",
+      "range": {
+        "startLine": 104,
+        "startChar": 4,
+        "endLine": 104,
+        "endChar": 74
+      },
+      "revId": "463d0f53bbd6a01fa9d8e4dd1850a7b0920587a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0bfc76c8_53f65098",
+        "filename": "torq/device.py",
+        "patchSetId": 13
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-07T20:38:46Z",
+      "side": 1,
+      "message": "Added logic to handle edge case.",
+      "parentUuid": "8460993c_81c59276",
       "range": {
         "startLine": 104,
         "startChar": 4,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1babdb89_08611507",
+        "filename": "torq/tests/device_unit_test.py",
+        "patchSetId": 13
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-07T20:38:46Z",
+      "side": 1,
+      "message": "Renamed this thank you.",
+      "parentUuid": "7d8e3c69_919afce9",
+      "range": {
+        "startLine": 30,
+        "startChar": 6,
+        "endLine": 30,
+        "endChar": 40
+      },
+      "revId": "463d0f53bbd6a01fa9d8e4dd1850a7b0920587a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b6348697_74f4acd8",
@@ -83,6 +155,30 @@
       "writtenOn": "2024-08-07T18:26:09Z",
       "side": 1,
       "message": "Rename to `mock_subprocess_run`. Same in other cases. This is more accurate to what we are actually mocking.",
+      "range": {
+        "startLine": 41,
+        "startChar": 6,
+        "endLine": 41,
+        "endChar": 33
+      },
+      "revId": "463d0f53bbd6a01fa9d8e4dd1850a7b0920587a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "90802322_da07aac8",
+        "filename": "torq/tests/device_unit_test.py",
+        "patchSetId": 13
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-07T20:38:46Z",
+      "side": 1,
+      "message": "I renamed this, thank you.",
+      "parentUuid": "b6348697_74f4acd8",
       "range": {
         "startLine": 41,
         "startChar": 6,
@@ -116,6 +212,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b773e2a2_a6e9d1ab",
+        "filename": "torq/tests/device_unit_test.py",
+        "patchSetId": 13
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-07T20:38:46Z",
+      "side": 1,
+      "message": "The lambda function does not allow statements such as raise/try/except. This method works correctly:\n\nhttps://docs.python.org/3/library/unittest.mock.html#unittest.mock.Mock.side_effect",
+      "parentUuid": "62fccb0a_936e9812",
+      "range": {
+        "startLine": 42,
+        "startChar": 46,
+        "endLine": 42,
+        "endChar": 69
+      },
+      "revId": "463d0f53bbd6a01fa9d8e4dd1850a7b0920587a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b2701e61_4aa41586",
@@ -129,6 +249,30 @@
       "writtenOn": "2024-08-07T18:26:09Z",
       "side": 1,
       "message": "When writing unit tests we usually follow this structure:\n\n```\n\u003cpositive test case\u003e\n\u003cerror case of the positive test case\u003e\n\u003cerror case of the positive test case\u003e\n\u003cpositive test case\u003e\n\u003cerror case of the positive test case\u003e\n\u003cerror case of the positive test case\u003e\n\u003cpositive test case\u003e\n\u003cerror case of the positive test case\u003e\n\u003cerror case of the positive test case\u003e\n```\n\nSo the normal test case is added first and then we add the error cases of that test. Then we go to the next normal flow test and then its error cases and so on. This is helpful because the reader can see first how the code is supposed to work and then you see the ways it can fail.",
+      "range": {
+        "startLine": 63,
+        "startChar": 2,
+        "endLine": 75,
+        "endChar": 33
+      },
+      "revId": "463d0f53bbd6a01fa9d8e4dd1850a7b0920587a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "12d81770_44f78398",
+        "filename": "torq/tests/device_unit_test.py",
+        "patchSetId": 13
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-07T20:38:46Z",
+      "side": 1,
+      "message": "I rearranged these tests, thank you.",
+      "parentUuid": "b2701e61_4aa41586",
       "range": {
         "startLine": 63,
         "startChar": 2,
