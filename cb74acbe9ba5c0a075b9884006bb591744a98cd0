@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb176223_b3461a1c",
+        "filename": "torq/device.py",
+        "patchSetId": 15
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-07T22:01:08Z",
+      "side": 1,
+      "message": "We do not, I\u0027m using it future code, and forgot to remove it before uploading, thank you.",
+      "parentUuid": "e6ba2b8d_eab2942c",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 11
+      },
+      "revId": "cb74acbe9ba5c0a075b9884006bb591744a98cd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9c47f175_f2543187",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "34172ea5_2cea1438",
+        "filename": "torq/tests/device_unit_test.py",
+        "patchSetId": 15
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-07T22:01:08Z",
+      "side": 1,
+      "message": "I added this, thank you.",
+      "parentUuid": "9c47f175_f2543187",
+      "range": {
+        "startLine": 30,
+        "startChar": 49,
+        "endLine": 30,
+        "endChar": 60
+      },
+      "revId": "cb74acbe9ba5c0a075b9884006bb591744a98cd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8691473f_28712d8c",
@@ -60,6 +108,30 @@
       "writtenOn": "2024-08-07T21:44:56Z",
       "side": 1,
       "message": "We can avoid one memory allocation by doing this instead:\n```suggestion\n    stdout_string \u003d b\u0027List of devices attached\\n\u0027\n    if adb_started:\n      stdout_string \u003d (b\u0027* daemon not running; starting now at tcp:1234\\n\u0027\n                        b\u0027* daemon started successfully\\n\u0027) + stdout_string\n```",
+      "range": {
+        "startLine": 32,
+        "startChar": 4,
+        "endLine": 36,
+        "endChar": 50
+      },
+      "revId": "cb74acbe9ba5c0a075b9884006bb591744a98cd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "47ef5e5a_ee854973",
+        "filename": "torq/tests/device_unit_test.py",
+        "patchSetId": 15
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-07T22:01:08Z",
+      "side": 1,
+      "message": "I replaced this, thank you.",
+      "parentUuid": "8691473f_28712d8c",
       "range": {
         "startLine": 32,
         "startChar": 4,
