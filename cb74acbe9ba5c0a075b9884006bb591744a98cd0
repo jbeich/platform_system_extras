@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6ba2b8d_eab2942c",
+        "filename": "torq/device.py",
+        "patchSetId": 15
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-08-07T21:44:56Z",
+      "side": 1,
+      "message": "Why do we need time now?",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 11
+      },
+      "revId": "cb74acbe9ba5c0a075b9884006bb591744a98cd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c47f175_f2543187",
+        "filename": "torq/tests/device_unit_test.py",
+        "patchSetId": 15
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-08-07T21:44:56Z",
+      "side": 1,
+      "message": "We can make this a default argument, so we don\u0027t need to pass it every time.\n```suggestion\n  def generate_adb_devices_result(self, devices, adb_started\u003dFalse):\n```\nOnly pass the value at the call site when passing True.",
+      "range": {
+        "startLine": 30,
+        "startChar": 49,
+        "endLine": 30,
+        "endChar": 60
+      },
+      "revId": "cb74acbe9ba5c0a075b9884006bb591744a98cd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8691473f_28712d8c",
+        "filename": "torq/tests/device_unit_test.py",
+        "patchSetId": 15
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-08-07T21:44:56Z",
+      "side": 1,
+      "message": "We can avoid one memory allocation by doing this instead:\n```suggestion\n    stdout_string \u003d b\u0027List of devices attached\\n\u0027\n    if adb_started:\n      stdout_string \u003d (b\u0027* daemon not running; starting now at tcp:1234\\n\u0027\n                        b\u0027* daemon started successfully\\n\u0027) + stdout_string\n```",
+      "range": {
+        "startLine": 32,
+        "startChar": 4,
+        "endLine": 36,
+        "endChar": 50
+      },
+      "revId": "cb74acbe9ba5c0a075b9884006bb591744a98cd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
