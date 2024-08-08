@@ -19,11 +19,11 @@ import os
 from command import ProfilerCommand, HWCommand, ConfigCommand
 from device import AdbDevice
 from validation_error import ValidationError
+from config_builder import PREDEFINED_PERFETTO_CONFIGS
 
 DEFAULT_DUR_MS = 10000
 MIN_DURATION_MS = 3000
 DEFAULT_OUT_DIR = "."
-PREDEFINED_PERFETTO_CONFIGS = ['default', 'lightweight', 'memory']
 
 
 def create_parser():
@@ -52,17 +52,17 @@ def create_parser():
                       help=('Predefined perfetto configs can be used:'
                             ' %s. A filepath with a custom config could'
                             ' also be provided.'
-                            % (", ".join(PREDEFINED_PERFETTO_CONFIGS))))
+                            % (", ".join(PREDEFINED_PERFETTO_CONFIGS.keys()))))
   parser.add_argument('--between-dur-ms', type=int, default=DEFAULT_DUR_MS,
                       help='Time (ms) to wait before executing the next event.')
   parser.add_argument('--ui', action=argparse.BooleanOptionalAction,
                       help=('Specifies opening of UI visualization tool'
                             ' after profiling is complete.'))
-  parser.add_argument('--exclude-ftrace-event',
-                      help=('Excludes the ftrace event from the perfetto'
+  parser.add_argument('--excluded-ftrace-events', action='append',
+                      help=('Excludes specified ftrace event from the perfetto'
                             ' config events.'))
-  parser.add_argument('--include-ftrace-event',
-                      help=('Includes the ftrace event in the perfetto'
+  parser.add_argument('--included-ftrace-events', action='append',
+                      help=('Includes specified ftrace event in the perfetto'
                             ' config events.'))
   parser.add_argument('--from-user', type=int,
                       help='The user id from which to start the user switch')
@@ -140,8 +140,8 @@ def user_changed_default_arguments(args):
               args.perfetto_config != "default",
               args.between_dur_ms != DEFAULT_DUR_MS,
               args.ui is not None,
-              args.exclude_ftrace_event is not None,
-              args.include_ftrace_event is not None,
+              args.excluded_ftrace_events is not None,
+              args.included_ftrace_events is not None,
               args.from_user is not None,
               args.to_user is not None,
               args.serial is not None])
@@ -212,7 +212,8 @@ def verify_args_valid(args):
          "\t torq --perfetto-config %s\n"
          "\t A filepath with a config can also be used:\n"
          "\t torq --perfetto-config <config-filepath>"
-         % ("\n\t torq --perfetto-config ".join(PREDEFINED_PERFETTO_CONFIGS))))
+         % ("\n\t torq --perfetto-config"
+            " ".join(PREDEFINED_PERFETTO_CONFIGS.keys()))))
 
   if args.between_dur_ms < MIN_DURATION_MS:
     return None, ValidationError(
@@ -227,19 +228,52 @@ def verify_args_valid(args):
          " if --runs is not a value greater than 1."),
         "Set --runs 2 to run 2 tests.")
 
-  if args.exclude_ftrace_event is not None and args.profiler != "perfetto":
+  if args.excluded_ftrace_events is not None and args.profiler != "perfetto":
     return None, ValidationError(
-        ("Command is invalid because --exclude-ftrace-event cannot be passed"
+        ("Command is invalid because --excluded-ftrace-events cannot be passed"
          " if --profiler is not set to perfetto."),
         ("Set --profiler perfetto to exclude an ftrace event"
          " from perfetto config."))
 
-  if args.include_ftrace_event is not None and args.profiler != "perfetto":
+  if (args.excluded_ftrace_events is not None and
+      len(args.excluded_ftrace_events) != len(set(
+          args.excluded_ftrace_events))):
     return None, ValidationError(
-        ("Command is invalid because --include-ftrace-event cannot be passed"
+        ("Command is invalid because duplicate ftrace events cannot be"
+         " included in --excluded-ftrace-events."),
+        ("--excluded-ftrace-events should only include one instance of an"
+         " ftrace event."))
+
+  if args.included_ftrace_events is not None and args.profiler != "perfetto":
+    return None, ValidationError(
+        ("Command is invalid because --included-ftrace-events cannot be passed"
          " if --profiler is not set to perfetto."),
         ("Set --profiler perfetto to include an ftrace event"
          " in perfetto config."))
+
+  if (args.included_ftrace_events is not None and
+      len(args.included_ftrace_events) != len(set(
+          args.included_ftrace_events))):
+    return None, ValidationError(
+        ("Command is invalid because duplicate ftrace events cannot be"
+         " included in --included-ftrace-events."),
+        ("--included-ftrace-events should only include one instance of an"
+         " ftrace event."))
+
+  if (args.included_ftrace_events is not None and
+      args.excluded_ftrace_events is not None):
+    ftrace_event_intersection = sorted((set(args.excluded_ftrace_events) &
+                                        set(args.included_ftrace_events)))
+    if len(ftrace_event_intersection):
+      return None, ValidationError(
+          ("Command is invalid because ftrace event(s): %s cannot be both"
+           " included and excluded." % ", ".join(ftrace_event_intersection)),
+          ("\n\t ".join("Only set --excluded-ftrace-events %s if you want to"
+                        " exclude %s from the config or"
+                        " --included-ftrace-events %s if you want to include %s"
+                        " in the config."
+                        % (event, event, event, event)
+                        for event in ftrace_event_intersection)))
 
   if args.subcommands == "hw" and args.hw_subcommand is None:
     return None, ValidationError(
@@ -336,8 +370,8 @@ def create_profiler_command(args):
                          args.dur_ms,
                          args.app, args.runs, args.simpleperf_event,
                          args.perfetto_config, args.between_dur_ms,
-                         args.ui, args.exclude_ftrace_event,
-                         args.include_ftrace_event, args.from_user,
+                         args.ui, args.excluded_ftrace_events,
+                         args.included_ftrace_events, args.from_user,
                          args.to_user)
 
 
