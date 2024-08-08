@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6f5a65f_e15c5a77",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-08T18:34:54Z",
+      "side": 1,
+      "message": "If we use a local dynamic import in `get_config_builder_type`, then we can remove this import.",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 46
+      },
+      "revId": "bd13d67e95691ec82dd8c7808753e457d08f00e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f659bd84_d51f0456",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-08T18:34:54Z",
+      "side": 1,
+      "message": "I think it might be better in this case to use a dynamic import if this is the only function that uses this array. If we have plans to add more projet-level constants, then using `common.py` would be better.\n\n`from torq import PREDEFINED_PERFETTO_CONFIGS`",
+      "range": {
+        "startLine": 80,
+        "startChar": 4,
+        "endLine": 80,
+        "endChar": 5
+      },
+      "revId": "bd13d67e95691ec82dd8c7808753e457d08f00e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db98b290_308c4b70",
+        "filename": "torq/common.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-08T18:34:54Z",
+      "side": 1,
+      "message": "Thanks for creating this, but if we are not planning on exposing any more project-level constants, then a local dynamic import would be better for now.",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 66
+      },
+      "revId": "bd13d67e95691ec82dd8c7808753e457d08f00e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
