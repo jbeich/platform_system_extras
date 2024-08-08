@@ -1,5 +1,108 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "974cfe52_ff769967",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-08T23:49:29Z",
+      "side": 1,
+      "message": "We should be making use of built-in exception classes such as `ValueError` per go/pystyle#exceptions-decision.",
+      "range": {
+        "startLine": 96,
+        "startChar": 14,
+        "endLine": 96,
+        "endChar": 23
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "5f966940_341a4b9f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/command_executor.py",
+              "range": {
+                "startLine": 96,
+                "startChar": 0,
+                "endLine": 97,
+                "endChar": 0
+              },
+              "replacement": "        raise ValueError(\"Invalid hw subcommand was used.\")\n"
+            },
+            {
+              "path": "torq/command_executor.py",
+              "range": {
+                "startLine": 123,
+                "startChar": 0,
+                "endLine": 124,
+                "endChar": 0
+              },
+              "replacement": "        raise ValueError(\"Invalid config subcommand was used.\")\n"
+            }
+          ]
+        }
+      ],
+      "revId": "b1d73e26fd9370d3d05c6009a4aa544fc35cf12d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d2fdc48_efe47e43",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-08T23:49:29Z",
+      "side": 1,
+      "message": "Also replace with `ValueError` here.",
+      "range": {
+        "startLine": 123,
+        "startChar": 14,
+        "endLine": 123,
+        "endChar": 23
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "90c794d3_6121f7b1",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/command_executor.py",
+              "range": {
+                "startLine": 96,
+                "startChar": 0,
+                "endLine": 97,
+                "endChar": 0
+              },
+              "replacement": "        raise ValueError(\"Invalid hw subcommand was used.\")\n"
+            },
+            {
+              "path": "torq/command_executor.py",
+              "range": {
+                "startLine": 123,
+                "startChar": 0,
+                "endLine": 124,
+                "endChar": 0
+              },
+              "replacement": "        raise ValueError(\"Invalid config subcommand was used.\")\n"
+            }
+          ]
+        }
+      ],
+      "revId": "b1d73e26fd9370d3d05c6009a4aa544fc35cf12d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
