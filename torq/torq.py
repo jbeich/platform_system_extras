@@ -58,10 +58,10 @@ def create_parser():
   parser.add_argument('--ui', action=argparse.BooleanOptionalAction,
                       help=('Specifies opening of UI visualization tool'
                             ' after profiling is complete.'))
-  parser.add_argument('--exclude-ftrace-event',
+  parser.add_argument('--exclude-ftrace-event', action='append',
                       help=('Excludes the ftrace event from the perfetto'
                             ' config events.'))
-  parser.add_argument('--include-ftrace-event',
+  parser.add_argument('--include-ftrace-event', action='append',
                       help=('Includes the ftrace event in the perfetto'
                             ' config events.'))
   parser.add_argument('--from-user', type=int,
@@ -234,12 +234,42 @@ def verify_args_valid(args):
         ("Set --profiler perfetto to exclude an ftrace event"
          " from perfetto config."))
 
+  if (args.exclude_ftrace_event is not None and
+      len(args.exclude_ftrace_event) != len(set(args.exclude_ftrace_event))):
+    return None, ValidationError(
+        ("Command is invalid because duplicate ftrace events cannot be"
+         " included in --exclude-ftrace-event."),
+        ("--exclude-ftrace-event should only include one instance of an ftrace"
+         " event."))
+
   if args.include_ftrace_event is not None and args.profiler != "perfetto":
     return None, ValidationError(
         ("Command is invalid because --include-ftrace-event cannot be passed"
          " if --profiler is not set to perfetto."),
         ("Set --profiler perfetto to include an ftrace event"
          " in perfetto config."))
+
+  if (args.include_ftrace_event is not None and
+      len(args.include_ftrace_event) != len(set(args.include_ftrace_event))):
+    return None, ValidationError(
+        ("Command is invalid because duplicate ftrace events cannot be"
+         " included in --include-ftrace-event."),
+        ("--include-ftrace-event should only include one instance of an ftrace"
+         " event."))
+
+  if (args.include_ftrace_event is not None and
+      args.exclude_ftrace_event is not None):
+    ftrace_event_intersection = (set(args.exclude_ftrace_event) &
+                                 set(args.include_ftrace_event))
+    if len(ftrace_event_intersection):
+      return None, ValidationError(
+          ("Command is invalid because ftrace event(s): %s cannot be both"
+           " included and excluded." % ", ".join(ftrace_event_intersection)),
+          ("\n\t ".join("Only set --exclude-ftrace-event %s if you want to"
+                     " exclude %s from the config or --include-ftrace-event %s"
+                     " if you want to include %s in the config."
+                     % (event, event, event, event)
+                     for event in ftrace_event_intersection)))
 
   if args.subcommands == "hw" and args.hw_subcommand is None:
     return None, ValidationError(
