@@ -56,7 +56,7 @@ class ProfilerCommand(Command):
     self.simpleperf_event = simpleperf_event
     self.perfetto_config = perfetto_config
     self.between_dur_ms = between_dur_ms
-    self.ui = ui
+    self.use_ui = ui
     self.exclude_ftrace_event = exclude_ftrace_event
     self.include_ftrace_event = include_ftrace_event
     self.from_user = from_user

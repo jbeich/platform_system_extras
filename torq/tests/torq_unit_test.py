@@ -18,7 +18,7 @@ import unittest
 import sys
 import os
 from unittest import mock
-from torq import create_parser, verify_args_valid, get_command_type, \
+from torq import create_parser, verify_args_valid, get_command_type,\
   DEFAULT_DUR_MS, DEFAULT_OUT_DIR
 
 
@@ -483,7 +483,7 @@ class TorqUnitTest(unittest.TestCase):
     args, error = verify_args_valid(args)
 
     self.assertEqual(error, None)
-    self.assertEqual(args.exclude_ftrace_event, "syscall-enter")
+    self.assertEqual(args.exclude_ftrace_event, ["syscall-enter"])
 
     parser = self.set_up_parser(("torq.py -p perfetto --exclude-ftrace-event"
                                  " syscall-enter"))
@@ -491,7 +491,7 @@ class TorqUnitTest(unittest.TestCase):
     args = parser.parse_args()
     args, error = verify_args_valid(args)
 
-    self.assertEqual(args.exclude_ftrace_event, "syscall-enter")
+    self.assertEqual(args.exclude_ftrace_event, ["syscall-enter"])
     self.assertEqual(error, None)
 
     parser = self.set_up_parser(("torq.py -p perfetto --include-ftrace-event"
@@ -500,7 +500,7 @@ class TorqUnitTest(unittest.TestCase):
     args = parser.parse_args()
     args, error = verify_args_valid(args)
 
-    self.assertEqual(args.include_ftrace_event, "syscall-enter")
+    self.assertEqual(args.include_ftrace_event, ["syscall-enter"])
     self.assertEqual(error, None)
 
   def test_verify_args_profiler_and_ftrace_events_invalid_dependencies(self):
@@ -529,6 +529,74 @@ class TorqUnitTest(unittest.TestCase):
                                      " perfetto."))
     self.assertEqual(error.suggestion, ("Set --profiler perfetto to include"
                                         " an ftrace event in perfetto config."))
+
+  def test_verify_args_multiple_valid_exclude_ftrace_events(self):
+    parser = self.set_up_parser(("torq.py --exclude-ftrace-event power/cpu_idle"
+                                 " --exclude-ftrace-event ion/ion_stat"))
+
+    args = parser.parse_args()
+    args, error = verify_args_valid(args)
+
+    self.assertEqual(error, None)
+    self.assertEqual(args.exclude_ftrace_event, ["power/cpu_idle",
+                                                 "ion/ion_stat"])
+
+  def test_verify_args_multiple_invalid_exclude_ftrace_events(self):
+    parser = self.set_up_parser(("torq.py --exclude-ftrace-event power/cpu_idle"
+                                 " --exclude-ftrace-event power/cpu_idle"))
+
+    args = parser.parse_args()
+    args, error = verify_args_valid(args)
+
+    self.assertEqual(error.message, ("Command is invalid because duplicate"
+                                     " ftrace events cannot be"
+                                     " included in --exclude-ftrace-event."))
+    self.assertEqual(error.suggestion, ("--exclude-ftrace-event should only"
+                                        " include one instance of an ftrace"
+                                        " event."))
+
+  def test_verify_args_multiple_valid_include_ftrace_events(self):
+    parser = self.set_up_parser(("torq.py --include-ftrace-event power/cpu_idle"
+                                 " --include-ftrace-event ion/ion_stat"))
+
+    args = parser.parse_args()
+    args, error = verify_args_valid(args)
+
+    self.assertEqual(error, None)
+    self.assertEqual(args.include_ftrace_event, ["power/cpu_idle",
+                                                 "ion/ion_stat"])
+
+  def test_verify_args_multiple_invalid_include_ftrace_events(self):
+    parser = self.set_up_parser(("torq.py --include-ftrace-event power/cpu_idle"
+                                 " --include-ftrace-event power/cpu_idle"))
+
+    args = parser.parse_args()
+    args, error = verify_args_valid(args)
+
+    self.assertEqual(error.message, ("Command is invalid because duplicate"
+                                     " ftrace events cannot be"
+                                     " included in --include-ftrace-event."))
+    self.assertEqual(error.suggestion, ("--include-ftrace-event should only"
+                                        " include one instance of an ftrace"
+                                        " event."))
+
+  def test_verify_args_invalid_overlap_exclude_and_include_ftrace_events(self):
+    parser = self.set_up_parser(("torq.py --exclude-ftrace-event power/cpu_idle"
+                                 " --include-ftrace-event power/cpu_idle"))
+
+    args = parser.parse_args()
+    args, error = verify_args_valid(args)
+
+    self.assertEqual(error.message, ("Command is invalid because ftrace event"
+                                     " power/cpu_idle cannot be both included"
+                                     " and excluded."))
+    self.assertEqual(error.suggestion, ("Only set --include-ftrace-event"
+                                        " power/cpu_idle or if you want to"
+                                        " include power/cpu_idle in the config"
+                                        " or --exclude-ftrace-event"
+                                        " power/cpu_idle or if you want to"
+                                        " exclude power/cpu_idle from the"
+                                        " config."))
 
   def test_verify_args_multiple_valid_simpleperf_events(self):
     parser = self.set_up_parser(("torq.py -p simpleperf -s cpu-cycles"
