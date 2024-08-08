@@ -25,6 +25,8 @@ python_defaults {
         "command_executor.py",
         "validation_error.py",
         "device.py",
+        "config_builder.py",
+        "common.py",
     ],
 }
 
@@ -54,6 +56,22 @@ python_test_host {
     name: "device_unit_test",
     main: "tests/device_unit_test.py",
     srcs: ["tests/device_unit_test.py"],
+    defaults: ["torq_defaults"],
+    version: {
+        py3: {
+            enabled: true,
+            embedded_launcher: false,
+        },
+    },
+    test_options: {
+        unit_test: true,
+    },
+}
+
+python_test_host {
+    name: "config_unit_test",
+    main: "tests/config_unit_test.py",
+    srcs: ["tests/config_unit_test.py"],
     defaults: ["torq_defaults"],
     version: {
         py3: {

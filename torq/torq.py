@@ -19,11 +19,9 @@ import os
 from command import ProfilerCommand, HWCommand, ConfigCommand
 from device import AdbDevice
 from validation_error import ValidationError
+from common import DEFAULT_DUR_MS, DEFAULT_OUT_DIR, PREDEFINED_PERFETTO_CONFIGS
 
-DEFAULT_DUR_MS = 10000
 MIN_DURATION_MS = 3000
-DEFAULT_OUT_DIR = "."
-PREDEFINED_PERFETTO_CONFIGS = ['default', 'lightweight', 'memory']
 
 
 def create_parser():
@@ -58,10 +56,10 @@ def create_parser():
   parser.add_argument('--ui', action=argparse.BooleanOptionalAction,
                       help=('Specifies opening of UI visualization tool'
                             ' after profiling is complete.'))
-  parser.add_argument('--exclude-ftrace-event',
+  parser.add_argument('--exclude-ftrace-event', action='append',
                       help=('Excludes the ftrace event from the perfetto'
                             ' config events.'))
-  parser.add_argument('--include-ftrace-event',
+  parser.add_argument('--include-ftrace-event', action='append',
                       help=('Includes the ftrace event in the perfetto'
                             ' config events.'))
   parser.add_argument('--from-user', type=int,
@@ -234,12 +232,39 @@ def verify_args_valid(args):
         ("Set --profiler perfetto to exclude an ftrace event"
          " from perfetto config."))
 
+  if (args.exclude_ftrace_event is not None and
+      len(args.exclude_ftrace_event) != len(set(args.exclude_ftrace_event))):
+    return None, ValidationError(
+        ("Command is invalid because redundant calls to --exclude-ftrace-event"
+         " cannot be made."),
+        ("Only set --exclude-ftrace-event power/cpu_idle once if you want"
+         " to exclude power/cpu_idle from the config."))
+
   if args.include_ftrace_event is not None and args.profiler != "perfetto":
     return None, ValidationError(
         ("Command is invalid because --include-ftrace-event cannot be passed"
          " if --profiler is not set to perfetto."),
         ("Set --profiler perfetto to include an ftrace event"
          " in perfetto config."))
+
+  if (args.include_ftrace_event is not None and
+      len(args.include_ftrace_event) != len(set(args.include_ftrace_event))):
+    return None, ValidationError(
+        ("Command is invalid because redundant calls to --include-ftrace-event"
+         " cannot be made."),
+        ("Only set --include-ftrace-event power/cpu_idle once if you want"
+         " to include power/cpu_idle in the config."))
+
+  if (args.include_ftrace_event is not None and
+      args.exclude_ftrace_event is not None):
+    for event in args.include_ftrace_event:
+      if event in args.exclude_ftrace_event:
+        return None, ValidationError(
+            ("Command is invalid because ftrace event %s cannot be both"
+             " included and excluded." % event),
+            ("Only set --include-ftrace-event %s or if you want to include %s"
+             " in the config or --exclude-ftrace-event %s or if you want to"
+             " exclude %s from the config." % (event, event, event, event)))
 
   if args.subcommands == "hw" and args.hw_subcommand is None:
     return None, ValidationError(
