@@ -52,6 +52,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6182ddd_7fd5a0eb",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-09T00:08:12Z",
+      "side": 1,
+      "message": "Will changed this, in next cl, thank you.",
+      "parentUuid": "974cfe52_ff769967",
+      "range": {
+        "startLine": 96,
+        "startChar": 14,
+        "endLine": 96,
+        "endChar": 23
+      },
+      "revId": "b1d73e26fd9370d3d05c6009a4aa544fc35cf12d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0d2fdc48_efe47e43",
@@ -99,6 +123,30 @@
           ]
         }
       ],
+      "revId": "b1d73e26fd9370d3d05c6009a4aa544fc35cf12d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "181682d9_9b739381",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-09T00:08:12Z",
+      "side": 1,
+      "message": "Will change this in next cl, thank you.",
+      "parentUuid": "0d2fdc48_efe47e43",
+      "range": {
+        "startLine": 123,
+        "startChar": 14,
+        "endLine": 123,
+        "endChar": 23
+      },
       "revId": "b1d73e26fd9370d3d05c6009a4aa544fc35cf12d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
