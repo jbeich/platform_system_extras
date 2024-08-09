@@ -479,6 +479,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5b7e4da5_72ed73ed",
+        "filename": "torq/torq.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-08-09T16:37:04Z",
+      "side": 1,
+      "message": "Yes, we can keep it generic. But it is a suggestion, so it should be actionable. Maybe something like: \"Remove any duplicate --include-ftrace-event  listed in your terminal command\"",
+      "parentUuid": "f6654a0a_022bf020",
+      "range": {
+        "startLine": 257,
+        "startChar": 10,
+        "endLine": 258,
+        "endChar": 51
+      },
+      "revId": "3de00d1ded28d8415e5d08f2574ee9d463c4004f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "68aa8cbf_c319eb4d",
         "filename": "torq/torq.py",
         "patchSetId": 2
