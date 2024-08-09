@@ -1,0 +1,374 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9876d6b3_9502fcd3",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-09T00:37:44Z",
+      "side": 1,
+      "message": "Let\u0027s define these both in 1 line.",
+      "range": {
+        "startLine": 74,
+        "startChar": 4,
+        "endLine": 75,
+        "endChar": 16
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "5e53e519_94a34b52",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/command_executor.py",
+              "range": {
+                "startLine": 74,
+                "startChar": 0,
+                "endLine": 76,
+                "endChar": 0
+              },
+              "replacement": "    config, error \u003d None, None\n"
+            }
+          ]
+        }
+      ],
+      "revId": "521fbaf75baa913ec4cc7eb3c515436d8ceae213",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1bbfe21a_0d4f74d8",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-09T00:37:44Z",
+      "side": 1,
+      "message": "Let\u0027s use `match/case` here.",
+      "range": {
+        "startLine": 76,
+        "startChar": 4,
+        "endLine": 83,
+        "endChar": 31
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "3cc57618_75a35d3d",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/command_executor.py",
+              "range": {
+                "startLine": 76,
+                "startChar": 0,
+                "endLine": 84,
+                "endChar": 0
+              },
+              "replacement": "    match command.perfetto_config:\n      case PREDEFINED_PERFETTO_CONFIGS[0]:\n        config, error \u003d config_builder.build_default_config(command)\n      case PREDEFINED_PERFETTO_CONFIGS[1]:\n        raise NotImplementedError\n      case PREDEFINED_PERFETTO_CONFIGS[2]:\n        raise NotImplementedError\n      case _:\n        raise NotImplementedError\n"
+            }
+          ]
+        }
+      ],
+      "revId": "521fbaf75baa913ec4cc7eb3c515436d8ceae213",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "854790d2_623d91f7",
+        "filename": "torq/config_builder.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-09T00:37:44Z",
+      "side": 1,
+      "message": "Perhaps we can consider removing this class if we just have a few build methods within the class.",
+      "range": {
+        "startLine": 21,
+        "startChar": 6,
+        "endLine": 21,
+        "endChar": 19
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "9ff4dbeb_d991998b",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/config_builder.py",
+              "range": {
+                "startLine": 18,
+                "startChar": 0,
+                "endLine": 19,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "torq/config_builder.py",
+              "range": {
+                "startLine": 21,
+                "startChar": 0,
+                "endLine": 30,
+                "endChar": 0
+              },
+              "replacement": "def build_default_config(command):\n  if command.dur_ms is None:\n    # This is always defined because it has a default value that is always\n    # set in torq.py.\n    raise ValueError(\"Cannot create config because a valid dur_ms was not\"\n                     \" passed into the ConfigBuilder constructor.\")\n  predefined_ftrace_events \u003d [\"power/suspend_resume\",\n                              \"mm_event/mm_event_record\",\n                              \"kmem/rss_stat\", \"ion/ion_stat\",\n                              \"dmabuf_heap/dma_heap_stat\",\n                              \"kmem/ion_heap_grow\",\n                              \"kmem/ion_heap_shrink\",\n                              \"sched/sched_process_exit\",\n                              \"sched/sched_process_free\",\n                              \"sched/sched_switch\", \"sched/sched_wakeup\",\n                              \"sched/sched_wakeup_new\", \"sched/sched_waking\",\n                              \"task/task_newtask\", \"task/task_rename\",\n                              \"lowmemorykiller/lowmemory_kill\",\n                              \"oom/oom_score_adj_update\", \"oom/mark_victim\",\n                              \"sched/sched_blocked_reason\", \"workqueue/*\",\n                              \"vmscan/*\", \"ftrace/print\",\n                              \"power/cpu_frequency\", \"power/cpu_idle\",\n                              \"power/gpu_frequency\",\n                              \"power/wakeup_source_activate\",\n                              \"power/wakeup_source_deactivate\",\n                              \"gpu_mem/gpu_mem_total\"]\n  ftrace_events_string \u003d (\"ftrace_events: \\\"%s\\\"\"\n                          % (\"\\\"\\n      ftrace_events: \"\n                             \"\\\"\".join(predefined_ftrace_events)))\n"
+            },
+            {
+              "path": "torq/config_builder.py",
+              "range": {
+                "startLine": 31,
+                "startChar": 0,
+                "endLine": 93,
+                "endChar": 0
+              },
+              "replacement": "  config \u003d f\u0027\u0027\u0027\\\n"
+            },
+            {
+              "path": "torq/config_builder.py",
+              "range": {
+                "startLine": 183,
+                "startChar": 0,
+                "endLine": 184,
+                "endChar": 0
+              },
+              "replacement": "      {ftrace_events_string} \n"
+            },
+            {
+              "path": "torq/config_builder.py",
+              "range": {
+                "startLine": 233,
+                "startChar": 0,
+                "endLine": 234,
+                "endChar": 0
+              },
+              "replacement": "  return textwrap.dedent(config), None\n"
+            }
+          ]
+        }
+      ],
+      "revId": "521fbaf75baa913ec4cc7eb3c515436d8ceae213",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aca624d5_cf2daee5",
+        "filename": "torq/config_builder.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-09T00:37:44Z",
+      "side": 1,
+      "message": "Nit: dur_ms",
+      "range": {
+        "startLine": 24,
+        "startChar": 37,
+        "endLine": 24,
+        "endChar": 43
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "47b6f987_c0b1519e",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/config_builder.py",
+              "range": {
+                "startLine": 24,
+                "startChar": 0,
+                "endLine": 25,
+                "endChar": 0
+              },
+              "replacement": "  configs. Users can use the default dur_ms or overwrite it. For the default,\n"
+            }
+          ]
+        }
+      ],
+      "revId": "521fbaf75baa913ec4cc7eb3c515436d8ceae213",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80b199c5_d376fe47",
+        "filename": "torq/config_builder.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-09T00:37:44Z",
+      "side": 1,
+      "message": "Don\u0027t need this empty constructor.",
+      "range": {
+        "startLine": 28,
+        "startChar": 2,
+        "endLine": 29,
+        "endChar": 8
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "ee7e592d_37c18443",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/config_builder.py",
+              "range": {
+                "startLine": 28,
+                "startChar": 0,
+                "endLine": 31,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "521fbaf75baa913ec4cc7eb3c515436d8ceae213",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7321fba8_0e0e9763",
+        "filename": "torq/config_builder.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-09T00:37:44Z",
+      "side": 1,
+      "message": "We\u0027re performing the string processing in another function and passing this list there. Let\u0027s just define this as a local variable in `create_ftrace_events_string`.",
+      "range": {
+        "startLine": 66,
+        "startChar": 4,
+        "endLine": 66,
+        "endChar": 28
+      },
+      "revId": "521fbaf75baa913ec4cc7eb3c515436d8ceae213",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2174c597_fb847e63",
+        "filename": "torq/tests/config_unit_test.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-09T00:37:44Z",
+      "side": 1,
+      "message": "Nit: Remove this space here.",
+      "range": {
+        "startLine": 94,
+        "startChar": 41,
+        "endLine": 94,
+        "endChar": 42
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "bef505a9_ad4a876b",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/tests/config_unit_test.py",
+              "range": {
+                "startLine": 94,
+                "startChar": 0,
+                "endLine": 95,
+                "endChar": 0
+              },
+              "replacement": "      meminfo_counters: MEMINFO_SWAP_FREE\n"
+            },
+            {
+              "path": "torq/tests/config_unit_test.py",
+              "range": {
+                "startLine": 482,
+                "startChar": 0,
+                "endLine": 483,
+                "endChar": 0
+              },
+              "replacement": "      meminfo_counters: MEMINFO_SWAP_FREE\n"
+            }
+          ]
+        }
+      ],
+      "revId": "521fbaf75baa913ec4cc7eb3c515436d8ceae213",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97069491_d6bdb435",
+        "filename": "torq/tests/config_unit_test.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 482,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-09T00:37:44Z",
+      "side": 1,
+      "message": "Nit: remove empty space.",
+      "range": {
+        "startLine": 482,
+        "startChar": 41,
+        "endLine": 482,
+        "endChar": 42
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "cd873ed4_40cf3e12",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/tests/config_unit_test.py",
+              "range": {
+                "startLine": 94,
+                "startChar": 0,
+                "endLine": 95,
+                "endChar": 0
+              },
+              "replacement": "      meminfo_counters: MEMINFO_SWAP_FREE\n"
+            },
+            {
+              "path": "torq/tests/config_unit_test.py",
+              "range": {
+                "startLine": 482,
+                "startChar": 0,
+                "endLine": 483,
+                "endChar": 0
+              },
+              "replacement": "      meminfo_counters: MEMINFO_SWAP_FREE\n"
+            }
+          ]
+        }
+      ],
+      "revId": "521fbaf75baa913ec4cc7eb3c515436d8ceae213",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
