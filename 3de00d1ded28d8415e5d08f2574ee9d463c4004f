@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9f0d166_d04a176e",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-09T17:51:03Z",
+      "side": 1,
+      "message": "I changed it to \"if command.use_ui:\".",
+      "parentUuid": "9c74637c_bcb69d54",
+      "range": {
+        "startLine": 67,
+        "startChar": 7,
+        "endLine": 67,
+        "endChar": 25
+      },
+      "revId": "3de00d1ded28d8415e5d08f2574ee9d463c4004f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "411c2432_621e839f",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "27d55cd9_c0d25120",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-09T17:51:03Z",
+      "side": 1,
+      "message": "Removed class, so I think this no longer can be done.",
+      "parentUuid": "411c2432_621e839f",
+      "range": {
+        "startLine": 72,
+        "startChar": 4,
+        "endLine": 73,
+        "endChar": 56
+      },
+      "revId": "3de00d1ded28d8415e5d08f2574ee9d463c4004f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ca2db1c3_74f436cb",
@@ -60,6 +108,30 @@
       "writtenOn": "2024-08-09T00:24:10Z",
       "side": 1,
       "message": "If the `create_config` function is doing some error checking. I think we can remove this subfunction and just inline it under `execute_command`.",
+      "range": {
+        "startLine": 71,
+        "startChar": 2,
+        "endLine": 76,
+        "endChar": 23
+      },
+      "revId": "3de00d1ded28d8415e5d08f2574ee9d463c4004f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "522c97e5_9d9a4f4b",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-09T17:51:03Z",
+      "side": 1,
+      "message": "I kept figuring which build function to call because I removed the class, so I think this no longer applies.",
+      "parentUuid": "ca2db1c3_74f436cb",
       "range": {
         "startLine": 71,
         "startChar": 2,
@@ -117,6 +189,30 @@
           ]
         }
       ],
+      "revId": "3de00d1ded28d8415e5d08f2574ee9d463c4004f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "94619ba6_7933c49b",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-09T17:51:03Z",
+      "side": 1,
+      "message": "I removed this method because now we do not create any build type instance. We just branch to call functions, so I kept It all in create_config.",
+      "parentUuid": "bd38e6dc_a4fa3df6",
+      "range": {
+        "startLine": 78,
+        "startChar": 6,
+        "endLine": 78,
+        "endChar": 29
+      },
       "revId": "3de00d1ded28d8415e5d08f2574ee9d463c4004f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -252,6 +348,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "25061f85_77c1005e",
+        "filename": "torq/config_builder.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-09T17:51:03Z",
+      "side": 1,
+      "message": "Removed the classes.",
+      "parentUuid": "c477b294_0612b7ed",
+      "range": {
+        "startLine": 22,
+        "startChar": 6,
+        "endLine": 22,
+        "endChar": 19
+      },
+      "revId": "3de00d1ded28d8415e5d08f2574ee9d463c4004f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0f4eaff1_100b66a5",
@@ -303,6 +423,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cbeedb06_e09e6d93",
+        "filename": "torq/config_builder.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-09T17:51:03Z",
+      "side": 1,
+      "message": "Removed the class.",
+      "parentUuid": "0f4eaff1_100b66a5",
+      "range": {
+        "startLine": 28,
+        "startChar": 6,
+        "endLine": 28,
+        "endChar": 18
+      },
+      "revId": "3de00d1ded28d8415e5d08f2574ee9d463c4004f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9b580138_a7809bd6",
@@ -340,6 +484,30 @@
           ]
         }
       ],
+      "revId": "3de00d1ded28d8415e5d08f2574ee9d463c4004f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "09cb5482_bee5c91d",
+        "filename": "torq/config_builder.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-09T17:51:03Z",
+      "side": 1,
+      "message": "Added this, thank you",
+      "parentUuid": "9b580138_a7809bd6",
+      "range": {
+        "startLine": 63,
+        "startChar": 23,
+        "endLine": 66,
+        "endChar": 55
+      },
       "revId": "3de00d1ded28d8415e5d08f2574ee9d463c4004f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -395,6 +563,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4173c984_377a8872",
+        "filename": "torq/torq.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-09T17:51:03Z",
+      "side": 1,
+      "message": "Changed these comments, thank you.",
+      "parentUuid": "1f6c458f_ceccd6ca",
+      "range": {
+        "startLine": 240,
+        "startChar": 37,
+        "endLine": 241,
+        "endChar": 26
+      },
+      "revId": "3de00d1ded28d8415e5d08f2574ee9d463c4004f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9a803025_c2949fe2",
@@ -432,6 +624,30 @@
           ]
         }
       ],
+      "revId": "3de00d1ded28d8415e5d08f2574ee9d463c4004f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "615fc038_fff937a6",
+        "filename": "torq/torq.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-09T17:51:03Z",
+      "side": 1,
+      "message": "Changed this comment, thank you.",
+      "parentUuid": "9a803025_c2949fe2",
+      "range": {
+        "startLine": 255,
+        "startChar": 37,
+        "endLine": 256,
+        "endChar": 26
+      },
       "revId": "3de00d1ded28d8415e5d08f2574ee9d463c4004f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -501,6 +717,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "49e15489_a5f41876",
+        "filename": "torq/torq.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-09T17:51:03Z",
+      "side": 1,
+      "message": "I changed this, thank you.",
+      "parentUuid": "f6654a0a_022bf020",
+      "range": {
+        "startLine": 257,
+        "startChar": 10,
+        "endLine": 258,
+        "endChar": 51
+      },
+      "revId": "3de00d1ded28d8415e5d08f2574ee9d463c4004f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "68aa8cbf_c319eb4d",
@@ -538,6 +778,30 @@
           ]
         }
       ],
+      "revId": "3de00d1ded28d8415e5d08f2574ee9d463c4004f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "930067ba_34478f89",
+        "filename": "torq/torq.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-09T17:51:03Z",
+      "side": 1,
+      "message": "This approach would remove the error logging of the specific event that is redundant.",
+      "parentUuid": "68aa8cbf_c319eb4d",
+      "range": {
+        "startLine": 262,
+        "startChar": 4,
+        "endLine": 263,
+        "endChar": 44
+      },
       "revId": "3de00d1ded28d8415e5d08f2574ee9d463c4004f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }

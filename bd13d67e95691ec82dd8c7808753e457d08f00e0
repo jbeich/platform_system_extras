@@ -136,6 +136,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce4e1f54_071a1d1c",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-09T17:51:03Z",
+      "side": 1,
+      "message": "Match/case does not work with list indexing I think.",
+      "parentUuid": "9dc1aa7e_dfedd252",
+      "range": {
+        "startLine": 80,
+        "startChar": 4,
+        "endLine": 89,
+        "endChar": 25
+      },
+      "revId": "bd13d67e95691ec82dd8c7808753e457d08f00e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "db98b290_308c4b70",

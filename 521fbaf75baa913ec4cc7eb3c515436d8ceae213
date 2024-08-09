@@ -42,6 +42,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "84e5ad5e_b468d71c",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-09T17:51:03Z",
+      "side": 1,
+      "message": "Added this, thank you.",
+      "parentUuid": "9876d6b3_9502fcd3",
+      "range": {
+        "startLine": 74,
+        "startChar": 4,
+        "endLine": 75,
+        "endChar": 16
+      },
+      "revId": "521fbaf75baa913ec4cc7eb3c515436d8ceae213",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1bbfe21a_0d4f74d8",
@@ -79,6 +103,30 @@
           ]
         }
       ],
+      "revId": "521fbaf75baa913ec4cc7eb3c515436d8ceae213",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa340a15_185eb97e",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-09T17:51:03Z",
+      "side": 1,
+      "message": "match/case does not work with list indexing. we would have to use the actual strings.",
+      "parentUuid": "1bbfe21a_0d4f74d8",
+      "range": {
+        "startLine": 76,
+        "startChar": 4,
+        "endLine": 83,
+        "endChar": 31
+      },
       "revId": "521fbaf75baa913ec4cc7eb3c515436d8ceae213",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -164,6 +212,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bff9f7a7_4cedd434",
+        "filename": "torq/config_builder.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-09T17:51:03Z",
+      "side": 1,
+      "message": "Removed the class, thank you.",
+      "parentUuid": "854790d2_623d91f7",
+      "range": {
+        "startLine": 21,
+        "startChar": 6,
+        "endLine": 21,
+        "endChar": 19
+      },
+      "revId": "521fbaf75baa913ec4cc7eb3c515436d8ceae213",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aca624d5_cf2daee5",
@@ -201,6 +273,30 @@
           ]
         }
       ],
+      "revId": "521fbaf75baa913ec4cc7eb3c515436d8ceae213",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c19f95ba_dc0f51ef",
+        "filename": "torq/config_builder.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-09T17:51:03Z",
+      "side": 1,
+      "message": "Fixed this, also changed \"Class\" to \"Methods\".",
+      "parentUuid": "aca624d5_cf2daee5",
+      "range": {
+        "startLine": 24,
+        "startChar": 37,
+        "endLine": 24,
+        "endChar": 43
+      },
       "revId": "521fbaf75baa913ec4cc7eb3c515436d8ceae213",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -246,6 +342,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e5f465e_2094d5d0",
+        "filename": "torq/config_builder.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-09T17:51:03Z",
+      "side": 1,
+      "message": "Removed this along with the class.",
+      "parentUuid": "80b199c5_d376fe47",
+      "range": {
+        "startLine": 28,
+        "startChar": 2,
+        "endLine": 29,
+        "endChar": 8
+      },
+      "revId": "521fbaf75baa913ec4cc7eb3c515436d8ceae213",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7321fba8_0e0e9763",
@@ -259,6 +379,30 @@
       "writtenOn": "2024-08-09T00:37:44Z",
       "side": 1,
       "message": "We\u0027re performing the string processing in another function and passing this list there. Let\u0027s just define this as a local variable in `create_ftrace_events_string`.",
+      "range": {
+        "startLine": 66,
+        "startChar": 4,
+        "endLine": 66,
+        "endChar": 28
+      },
+      "revId": "521fbaf75baa913ec4cc7eb3c515436d8ceae213",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73c6a609_d0d2cf43",
+        "filename": "torq/config_builder.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-09T17:51:03Z",
+      "side": 1,
+      "message": "This list will be different for the memory and lightweight classes, so I was thinking passing it in as a parameter would make the function scale to the other classes in the future.",
+      "parentUuid": "7321fba8_0e0e9763",
       "range": {
         "startLine": 66,
         "startChar": 4,
@@ -320,6 +464,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "89d4b1af_dcee7193",
+        "filename": "torq/tests/config_unit_test.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-09T17:51:03Z",
+      "side": 1,
+      "message": "Removed this, thank you.",
+      "parentUuid": "2174c597_fb847e63",
+      "range": {
+        "startLine": 94,
+        "startChar": 41,
+        "endLine": 94,
+        "endChar": 42
+      },
+      "revId": "521fbaf75baa913ec4cc7eb3c515436d8ceae213",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "97069491_d6bdb435",
@@ -367,6 +535,30 @@
           ]
         }
       ],
+      "revId": "521fbaf75baa913ec4cc7eb3c515436d8ceae213",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "80f2bd15_211017e0",
+        "filename": "torq/tests/config_unit_test.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 482,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-09T17:51:03Z",
+      "side": 1,
+      "message": "Removed this, thank you.",
+      "parentUuid": "97069491_d6bdb435",
+      "range": {
+        "startLine": 482,
+        "startChar": 41,
+        "endLine": 482,
+        "endChar": 42
+      },
       "revId": "521fbaf75baa913ec4cc7eb3c515436d8ceae213",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
