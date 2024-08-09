@@ -284,6 +284,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "848b84ac_93682888",
+        "filename": "torq/config_builder.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-09T21:45:59Z",
+      "side": 1,
+      "message": "I added the class back, and defined them as static methods.",
+      "parentUuid": "1d16ef98_339ceb1e",
+      "range": {
+        "startLine": 21,
+        "startChar": 6,
+        "endLine": 21,
+        "endChar": 19
+      },
+      "revId": "521fbaf75baa913ec4cc7eb3c515436d8ceae213",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aca624d5_cf2daee5",
