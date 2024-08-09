@@ -1,0 +1,1024 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd637f32_1c71974d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-09T23:10:48Z",
+      "side": 1,
+      "message": "Please update the commit message to also reflect the changes in this CL.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 63
+      },
+      "revId": "908484ec402478799f0ecccffe72b06f7cb7854e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "832a07e7_969f8d9f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-09T23:10:48Z",
+      "side": 1,
+      "message": "Also please update this command when the test file is renamed.",
+      "range": {
+        "startLine": 19,
+        "startChar": 12,
+        "endLine": 19,
+        "endChar": 28
+      },
+      "revId": "908484ec402478799f0ecccffe72b06f7cb7854e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a7fa7d4_78b4d264",
+        "filename": "torq/config_builder.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-09T23:10:48Z",
+      "side": 1,
+      "message": "Nit: Given that the suggestions are supposed to actionable let\u0027s use the following form:\n\n`Please specify one of the following possible ftrace events: %s`",
+      "range": {
+        "startLine": 38,
+        "startChar": 50,
+        "endLine": 38,
+        "endChar": 79
+      },
+      "revId": "908484ec402478799f0ecccffe72b06f7cb7854e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce26513c_360171ca",
+        "filename": "torq/config_builder.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-09T23:10:48Z",
+      "side": 1,
+      "message": "Nit: As in the previous part, let\u0027s provide the list of possible ftrace events as well.",
+      "range": {
+        "startLine": 50,
+        "startChar": 37,
+        "endLine": 50,
+        "endChar": 41
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "be8b0dd6_d117ccfc",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/config_builder.py",
+              "range": {
+                "startLine": 50,
+                "startChar": 0,
+                "endLine": 51,
+                "endChar": 0
+              },
+              "replacement": "                                     (\"Possible ftrace events are:\\n\"\n                                      \"%s\"\n                                      % predefined_ftrace_events))\n"
+            }
+          ]
+        }
+      ],
+      "revId": "908484ec402478799f0ecccffe72b06f7cb7854e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4fdee3f0_b444728e",
+        "filename": "torq/config_builder.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-09T23:10:48Z",
+      "side": 1,
+      "message": "Nit: We aren\u0027t passing dur_ms to the constructor. We should change it to the following:\n\n```\nraise ValueError(\"Cannot create config because a valid dur_ms was not set.\")\n```",
+      "range": {
+        "startLine": 62,
+        "startChar": 66,
+        "endLine": 63,
+        "endChar": 65
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "a76584ae_82e9d0b6",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/config_builder.py",
+              "range": {
+                "startLine": 62,
+                "startChar": 0,
+                "endLine": 64,
+                "endChar": 0
+              },
+              "replacement": "    raise ValueError(\"Cannot create config because a valid dur_ms was not set.\")\n"
+            }
+          ]
+        }
+      ],
+      "revId": "908484ec402478799f0ecccffe72b06f7cb7854e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "210a8ba6_b31bbc5c",
+        "filename": "torq/tests/config_unit_test.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-09T23:10:48Z",
+      "side": 1,
+      "message": "We should also rename this file to `config_builder_unit_test.py` to reflect the class under test.",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 1
+      },
+      "revId": "908484ec402478799f0ecccffe72b06f7cb7854e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3926117_3a49bce8",
+        "filename": "torq/tests/config_unit_test.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-09T23:10:48Z",
+      "side": 1,
+      "message": "Please rename this to `ConfigBuilderUnitTest`",
+      "range": {
+        "startLine": 23,
+        "startChar": 6,
+        "endLine": 23,
+        "endChar": 20
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "a23ac4fd_c5adab17",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/tests/config_unit_test.py",
+              "range": {
+                "startLine": 23,
+                "startChar": 0,
+                "endLine": 24,
+                "endChar": 0
+              },
+              "replacement": "class ConfigBuilderUnitTest(unittest.TestCase):\n"
+            }
+          ]
+        }
+      ],
+      "revId": "908484ec402478799f0ecccffe72b06f7cb7854e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14c8a4d5_09bee2b3",
+        "filename": "torq/tests/config_unit_test.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-09T23:10:48Z",
+      "side": 1,
+      "message": "We should use create_autospec here. `MagicMock` is too generic as it can also mock \"magic\" methods per go/mock-cookbook#magic-mock.\n\nExample:\n`mock_command \u003d mock.create_autospec(ProfilerCommand, instance\u003dTrue)`",
+      "range": {
+        "startLine": 26,
+        "startChar": 4,
+        "endLine": 26,
+        "endChar": 35
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "e5c822d4_e798d9ec",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/tests/config_unit_test.py",
+              "range": {
+                "startLine": 20,
+                "startChar": 0,
+                "endLine": 21,
+                "endChar": 0
+              },
+              "replacement": "from config_builder import build_default_config, ProfilerCommand\n"
+            },
+            {
+              "path": "torq/tests/config_unit_test.py",
+              "range": {
+                "startLine": 26,
+                "startChar": 0,
+                "endLine": 27,
+                "endChar": 0
+              },
+              "replacement": "    mock_command \u003d mock.create_autospec(ProfilerCommand, instance\u003dTrue)\n"
+            },
+            {
+              "path": "torq/tests/config_unit_test.py",
+              "range": {
+                "startLine": 204,
+                "startChar": 0,
+                "endLine": 205,
+                "endChar": 0
+              },
+              "replacement": "    mock_command \u003d mock.create_autospec(ProfilerCommand, instance\u003dTrue)\n"
+            },
+            {
+              "path": "torq/tests/config_unit_test.py",
+              "range": {
+                "startLine": 217,
+                "startChar": 0,
+                "endLine": 218,
+                "endChar": 0
+              },
+              "replacement": "    mock_command \u003d mock.create_autospec(ProfilerCommand, instance\u003dTrue)\n"
+            },
+            {
+              "path": "torq/tests/config_unit_test.py",
+              "range": {
+                "startLine": 394,
+                "startChar": 0,
+                "endLine": 395,
+                "endChar": 0
+              },
+              "replacement": "    mock_command \u003d mock.create_autospec(ProfilerCommand, instance\u003dTrue)\n"
+            },
+            {
+              "path": "torq/tests/config_unit_test.py",
+              "range": {
+                "startLine": 437,
+                "startChar": 0,
+                "endLine": 438,
+                "endChar": 0
+              },
+              "replacement": "    mock_command \u003d mock.create_autospec(ProfilerCommand, instance\u003dTrue)\n"
+            },
+            {
+              "path": "torq/tests/config_unit_test.py",
+              "range": {
+                "startLine": 618,
+                "startChar": 0,
+                "endLine": 619,
+                "endChar": 0
+              },
+              "replacement": "    mock_command \u003d mock.create_autospec(ProfilerCommand, instance\u003dTrue)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "908484ec402478799f0ecccffe72b06f7cb7854e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1fd330b8_6331678f",
+        "filename": "torq/tests/config_unit_test.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-09T23:10:48Z",
+      "side": 1,
+      "message": "Nit: Since, we are asserting on long static strings, could we please extract this into a variable so that tests are more concise.",
+      "range": {
+        "startLine": 34,
+        "startChar": 4,
+        "endLine": 201,
+        "endChar": 9
+      },
+      "revId": "908484ec402478799f0ecccffe72b06f7cb7854e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "396d71e2_b262f9a8",
+        "filename": "torq/tests/config_unit_test.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-09T23:10:48Z",
+      "side": 1,
+      "message": "We can remove these since they are unused.",
+      "range": {
+        "startLine": 210,
+        "startChar": 6,
+        "endLine": 210,
+        "endChar": 19
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "26800495_6f452248",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/tests/config_unit_test.py",
+              "range": {
+                "startLine": 210,
+                "startChar": 0,
+                "endLine": 211,
+                "endChar": 0
+              },
+              "replacement": "      build_default_config(mock_command)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "908484ec402478799f0ecccffe72b06f7cb7854e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6e4e790_fcb54d51",
+        "filename": "torq/tests/config_unit_test.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-09T23:10:48Z",
+      "side": 1,
+      "message": "In the positive cases, if we are not utilizing config later on, we can just replace it with `_` like:\n\n`_, error \u003d ...`",
+      "range": {
+        "startLine": 399,
+        "startChar": 4,
+        "endLine": 399,
+        "endChar": 10
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "129c66f6_580d0a31",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/tests/config_unit_test.py",
+              "range": {
+                "startLine": 399,
+                "startChar": 0,
+                "endLine": 400,
+                "endChar": 0
+              },
+              "replacement": "    _, error \u003d build_default_config(mock_command)\n"
+            },
+            {
+              "path": "torq/tests/config_unit_test.py",
+              "range": {
+                "startLine": 623,
+                "startChar": 0,
+                "endLine": 624,
+                "endChar": 0
+              },
+              "replacement": "    _, error \u003d build_default_config(mock_command)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "908484ec402478799f0ecccffe72b06f7cb7854e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f037d612_a4fedb2b",
+        "filename": "torq/tests/config_unit_test.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 565,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-09T23:10:48Z",
+      "side": 1,
+      "message": "Similarly, if possible inject the mock_ftrace_events specified earlier.",
+      "range": {
+        "startLine": 565,
+        "startChar": 22,
+        "endLine": 565,
+        "endChar": 39
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "40ab5e0d_fa590100",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/tests/config_unit_test.py",
+              "range": {
+                "startLine": 440,
+                "startChar": 0,
+                "endLine": 441,
+                "endChar": 0
+              },
+              "replacement": "    mock_command.include_ftrace_event \u003d [\"mock_ftrace_event1\",\n"
+            },
+            {
+              "path": "torq/tests/config_unit_test.py",
+              "range": {
+                "startLine": 565,
+                "startChar": 0,
+                "endLine": 566,
+                "endChar": 0
+              },
+              "replacement": "      ftrace_events: \"mock_ftrace_event1\"\n"
+            }
+          ]
+        }
+      ],
+      "revId": "908484ec402478799f0ecccffe72b06f7cb7854e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52fdf391_47156585",
+        "filename": "torq/tests/config_unit_test.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 605,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-09T23:10:48Z",
+      "side": 1,
+      "message": "In tests, when possible, we should assert on the values that we have provided in the \"Arrange\" phase.\n\nHere, we should check that inject `mock_command.dur_ms` to ensure that if the test inputs change, the expected result is also reflective of this change.",
+      "range": {
+        "startLine": 605,
+        "startChar": 13,
+        "endLine": 605,
+        "endChar": 18
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "3948924d_2c8e42c0",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/tests/config_unit_test.py",
+              "range": {
+                "startLine": 381,
+                "startChar": 0,
+                "endLine": 382,
+                "endChar": 0
+              },
+              "replacement": "duration_ms: {mock_command.dur_ms}\n"
+            }
+          ]
+        }
+      ],
+      "revId": "908484ec402478799f0ecccffe72b06f7cb7854e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4cb18000_5d8b7e64",
+        "filename": "torq/tests/torq_unit_test.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-09T23:10:48Z",
+      "side": 1,
+      "message": "Nit: This can be in another CL, but `verify_args_valid` is a little verbose and redundant. We should consider just renaming it to `verify_args`.",
+      "range": {
+        "startLine": 21,
+        "startChar": 32,
+        "endLine": 21,
+        "endChar": 49
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "4cf96b37_bbcfdb1a",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/tests/torq_unit_test.py",
+              "range": {
+                "startLine": 20,
+                "startChar": 0,
+                "endLine": 20,
+                "endChar": 0
+              },
+              "replacement": "\n"
+            },
+            {
+              "path": "torq/tests/torq_unit_test.py",
+              "range": {
+                "startLine": 21,
+                "startChar": 0,
+                "endLine": 23,
+                "endChar": 0
+              },
+              "replacement": "from torq import create_parser\nfrom torq import DEFAULT_DUR_MS\nfrom torq import DEFAULT_OUT_DIR\nfrom torq import get_command_type\nfrom torq import verify_args_valid\n"
+            }
+          ]
+        }
+      ],
+      "revId": "908484ec402478799f0ecccffe72b06f7cb7854e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "686f263b_f2d25247",
+        "filename": "torq/torq.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-09T23:10:48Z",
+      "side": 1,
+      "message": "Given that we can include multiple ftrace events here, let\u0027s pluralize this to `--excluded-ftrace-events`",
+      "range": {
+        "startLine": 61,
+        "startChar": 23,
+        "endLine": 61,
+        "endChar": 45
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "ea3a33e2_ba6b8545",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 61,
+                "startChar": 0,
+                "endLine": 62,
+                "endChar": 0
+              },
+              "replacement": "  parser.add_argument(\u0027--excluded-ftrace-events\u0027, action\u003d\u0027append\u0027,\n"
+            },
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 64,
+                "startChar": 0,
+                "endLine": 65,
+                "endChar": 0
+              },
+              "replacement": "  parser.add_argument(\u0027--included-ftrace-events\u0027, action\u003d\u0027append\u0027,\n"
+            },
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 143,
+                "startChar": 0,
+                "endLine": 145,
+                "endChar": 0
+              },
+              "replacement": "              args.excluded_ftrace_events is not None,\n              args.included_ftrace_events is not None,\n"
+            },
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 230,
+                "startChar": 0,
+                "endLine": 231,
+                "endChar": 0
+              },
+              "replacement": "  if args.excluded_ftrace_events is not None and args.profiler !\u003d \"perfetto\":\n"
+            },
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 232,
+                "startChar": 0,
+                "endLine": 233,
+                "endChar": 0
+              },
+              "replacement": "        (\"Command is invalid because --excluded-ftrace-events cannot be passed\"\n"
+            },
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 234,
+                "startChar": 0,
+                "endLine": 235,
+                "endChar": 0
+              },
+              "replacement": "        (\"Set --profiler perfetto to exclude ftrace events\"\n"
+            },
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 237,
+                "startChar": 0,
+                "endLine": 239,
+                "endChar": 0
+              },
+              "replacement": "  if (args.excluded_ftrace_events is not None and\n      len(args.excluded_ftrace_events) !\u003d len(set(args.excluded_ftrace_events))):\n"
+            },
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 241,
+                "startChar": 0,
+                "endLine": 244,
+                "endChar": 0
+              },
+              "replacement": "         \" included in --excluded-ftrace-events.\"),\n        (\"--excluded-ftrace-events should only include one instance of an\"\n         \" ftrace event.\"))\n"
+            },
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 245,
+                "startChar": 0,
+                "endLine": 246,
+                "endChar": 0
+              },
+              "replacement": "  if args.included_ftrace_events is not None and args.profiler !\u003d \"perfetto\":\n"
+            },
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 247,
+                "startChar": 0,
+                "endLine": 248,
+                "endChar": 0
+              },
+              "replacement": "        (\"Command is invalid because --included-ftrace-events cannot be passed\"\n"
+            },
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 249,
+                "startChar": 0,
+                "endLine": 250,
+                "endChar": 0
+              },
+              "replacement": "        (\"Set --profiler perfetto to include ftrace events\"\n"
+            },
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 252,
+                "startChar": 0,
+                "endLine": 254,
+                "endChar": 0
+              },
+              "replacement": "  if (args.included_ftrace_events is not None and\n      len(args.included_ftrace_events) !\u003d len(set(args.included_ftrace_events))):\n"
+            },
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 256,
+                "startChar": 0,
+                "endLine": 259,
+                "endChar": 0
+              },
+              "replacement": "         \" included in --included-ftrace-events.\"),\n        (\"--included-ftrace-events should only include one instance of an\"\n         \" ftrace event.\"))\n"
+            },
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 260,
+                "startChar": 0,
+                "endLine": 264,
+                "endChar": 0
+              },
+              "replacement": "  if (args.included_ftrace_events is not None and\n      args.excluded_ftrace_events is not None):\n    ftrace_event_intersection \u003d (set(args.excluded_ftrace_events) \u0026\n                                 set(args.included_ftrace_events))\n"
+            },
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 268,
+                "startChar": 0,
+                "endLine": 270,
+                "endChar": 0
+              },
+              "replacement": "          (\"\\n\\t \".join(\"Only set --excluded-ftrace-events %s if you want to\"\n                     \" exclude %s from the config or --included-ftrace-events %s\"\n"
+            },
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 369,
+                "startChar": 0,
+                "endLine": 371,
+                "endChar": 0
+              },
+              "replacement": "                         args.ui, args.excluded_ftrace_events,\n                         args.included_ftrace_events, args.from_user,\n"
+            }
+          ]
+        }
+      ],
+      "revId": "908484ec402478799f0ecccffe72b06f7cb7854e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d68beefe_f4b8047c",
+        "filename": "torq/torq.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-09T23:10:48Z",
+      "side": 1,
+      "message": "`specified ftrace events`",
+      "range": {
+        "startLine": 62,
+        "startChar": 38,
+        "endLine": 62,
+        "endChar": 54
+      },
+      "revId": "908484ec402478799f0ecccffe72b06f7cb7854e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28779dad_48e6746d",
+        "filename": "torq/torq.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-09T23:10:48Z",
+      "side": 1,
+      "message": "`--included-ftrace-events`",
+      "range": {
+        "startLine": 64,
+        "startChar": 22,
+        "endLine": 64,
+        "endChar": 46
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "7031ee98_14b71691",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 61,
+                "startChar": 0,
+                "endLine": 62,
+                "endChar": 0
+              },
+              "replacement": "  parser.add_argument(\u0027--excluded-ftrace-events\u0027, action\u003d\u0027append\u0027,\n"
+            },
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 64,
+                "startChar": 0,
+                "endLine": 65,
+                "endChar": 0
+              },
+              "replacement": "  parser.add_argument(\u0027--included-ftrace-events\u0027, action\u003d\u0027append\u0027,\n"
+            },
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 143,
+                "startChar": 0,
+                "endLine": 145,
+                "endChar": 0
+              },
+              "replacement": "              args.excluded_ftrace_events is not None,\n              args.included_ftrace_events is not None,\n"
+            },
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 230,
+                "startChar": 0,
+                "endLine": 231,
+                "endChar": 0
+              },
+              "replacement": "  if args.excluded_ftrace_events is not None and args.profiler !\u003d \"perfetto\":\n"
+            },
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 232,
+                "startChar": 0,
+                "endLine": 233,
+                "endChar": 0
+              },
+              "replacement": "        (\"Command is invalid because --excluded-ftrace-events cannot be passed\"\n"
+            },
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 234,
+                "startChar": 0,
+                "endLine": 235,
+                "endChar": 0
+              },
+              "replacement": "        (\"Set --profiler perfetto to exclude ftrace events\"\n"
+            },
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 237,
+                "startChar": 0,
+                "endLine": 239,
+                "endChar": 0
+              },
+              "replacement": "  if (args.excluded_ftrace_events is not None and\n      len(args.excluded_ftrace_events) !\u003d len(set(args.excluded_ftrace_events))):\n"
+            },
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 241,
+                "startChar": 0,
+                "endLine": 244,
+                "endChar": 0
+              },
+              "replacement": "         \" included in --excluded-ftrace-events.\"),\n        (\"--excluded-ftrace-events should only include one instance of an\"\n         \" ftrace event.\"))\n"
+            },
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 245,
+                "startChar": 0,
+                "endLine": 246,
+                "endChar": 0
+              },
+              "replacement": "  if args.included_ftrace_events is not None and args.profiler !\u003d \"perfetto\":\n"
+            },
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 247,
+                "startChar": 0,
+                "endLine": 248,
+                "endChar": 0
+              },
+              "replacement": "        (\"Command is invalid because --included-ftrace-events cannot be passed\"\n"
+            },
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 249,
+                "startChar": 0,
+                "endLine": 250,
+                "endChar": 0
+              },
+              "replacement": "        (\"Set --profiler perfetto to include ftrace events\"\n"
+            },
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 252,
+                "startChar": 0,
+                "endLine": 254,
+                "endChar": 0
+              },
+              "replacement": "  if (args.included_ftrace_events is not None and\n      len(args.included_ftrace_events) !\u003d len(set(args.included_ftrace_events))):\n"
+            },
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 256,
+                "startChar": 0,
+                "endLine": 259,
+                "endChar": 0
+              },
+              "replacement": "         \" included in --included-ftrace-events.\"),\n        (\"--included-ftrace-events should only include one instance of an\"\n         \" ftrace event.\"))\n"
+            },
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 260,
+                "startChar": 0,
+                "endLine": 264,
+                "endChar": 0
+              },
+              "replacement": "  if (args.included_ftrace_events is not None and\n      args.excluded_ftrace_events is not None):\n    ftrace_event_intersection \u003d (set(args.excluded_ftrace_events) \u0026\n                                 set(args.included_ftrace_events))\n"
+            },
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 268,
+                "startChar": 0,
+                "endLine": 270,
+                "endChar": 0
+              },
+              "replacement": "          (\"\\n\\t \".join(\"Only set --excluded-ftrace-events %s if you want to\"\n                     \" exclude %s from the config or --included-ftrace-events %s\"\n"
+            },
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 369,
+                "startChar": 0,
+                "endLine": 371,
+                "endChar": 0
+              },
+              "replacement": "                         args.ui, args.excluded_ftrace_events,\n                         args.included_ftrace_events, args.from_user,\n"
+            }
+          ]
+        }
+      ],
+      "revId": "908484ec402478799f0ecccffe72b06f7cb7854e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cef7dc94_b1c0f36a",
+        "filename": "torq/torq.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-09T23:10:48Z",
+      "side": 1,
+      "message": "`specified ftrace events`",
+      "range": {
+        "startLine": 65,
+        "startChar": 38,
+        "endLine": 65,
+        "endChar": 54
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "72bee0e9_679c6d83",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 65,
+                "startChar": 0,
+                "endLine": 66,
+                "endChar": 0
+              },
+              "replacement": "                      help\u003d(\u0027Includes the specified ftrace event in the perfetto\u0027\n"
+            }
+          ]
+        }
+      ],
+      "revId": "908484ec402478799f0ecccffe72b06f7cb7854e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
