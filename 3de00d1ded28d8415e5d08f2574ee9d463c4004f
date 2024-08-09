@@ -828,6 +828,30 @@
       },
       "revId": "3de00d1ded28d8415e5d08f2574ee9d463c4004f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b6f0f45_fc6b2a11",
+        "filename": "torq/torq.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-09T19:47:40Z",
+      "side": 1,
+      "message": "Makes sense, I add this, thank you.",
+      "parentUuid": "20cd3ef4_4e5eb8aa",
+      "range": {
+        "startLine": 262,
+        "startChar": 4,
+        "endLine": 263,
+        "endChar": 44
+      },
+      "revId": "3de00d1ded28d8415e5d08f2574ee9d463c4004f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
