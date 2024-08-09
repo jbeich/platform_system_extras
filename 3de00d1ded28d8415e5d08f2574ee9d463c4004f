@@ -1,0 +1,521 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c74637c_bcb69d54",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-09T00:24:10Z",
+      "side": 1,
+      "message": "Don\u0027t need to use `is True` here. We can also rename the variable to `use_ui`.",
+      "range": {
+        "startLine": 67,
+        "startChar": 7,
+        "endLine": 67,
+        "endChar": 25
+      },
+      "revId": "3de00d1ded28d8415e5d08f2574ee9d463c4004f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "411c2432_621e839f",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-09T00:24:10Z",
+      "side": 1,
+      "message": "I think we can just push determination of the config builder type down to the config_builder class. \n\nI think something similar to `config, error \u003d build_config(command)` , given that we don\u0027t do any special casing at this level with the different builder types.",
+      "range": {
+        "startLine": 72,
+        "startChar": 4,
+        "endLine": 73,
+        "endChar": 56
+      },
+      "revId": "3de00d1ded28d8415e5d08f2574ee9d463c4004f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca2db1c3_74f436cb",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-09T00:24:10Z",
+      "side": 1,
+      "message": "If the `create_config` function is doing some error checking. I think we can remove this subfunction and just inline it under `execute_command`.",
+      "range": {
+        "startLine": 71,
+        "startChar": 2,
+        "endLine": 76,
+        "endChar": 23
+      },
+      "revId": "3de00d1ded28d8415e5d08f2574ee9d463c4004f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd38e6dc_a4fa3df6",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-09T00:24:10Z",
+      "side": 1,
+      "message": "Can just name this `get_config_builder()`",
+      "range": {
+        "startLine": 78,
+        "startChar": 6,
+        "endLine": 78,
+        "endChar": 29
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "f32ef501_c2ad7032",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/command_executor.py",
+              "range": {
+                "startLine": 72,
+                "startChar": 0,
+                "endLine": 73,
+                "endChar": 0
+              },
+              "replacement": "    config_builder \u003d self.get_config_builder(command.perfetto_config)\n"
+            },
+            {
+              "path": "torq/command_executor.py",
+              "range": {
+                "startLine": 78,
+                "startChar": 0,
+                "endLine": 79,
+                "endChar": 0
+              },
+              "replacement": "  def get_config_builder(self, perfetto_config):\n"
+            }
+          ]
+        }
+      ],
+      "revId": "3de00d1ded28d8415e5d08f2574ee9d463c4004f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c477b294_0612b7ed",
+        "filename": "torq/config_builder.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-09T00:24:10Z",
+      "side": 1,
+      "message": "As discussed, let\u0027s see if we can refactor the ConfigBuilder to remove the sub-classing, which doesn\u0027t seem to provide much beyond being a data class.",
+      "range": {
+        "startLine": 22,
+        "startChar": 6,
+        "endLine": 22,
+        "endChar": 19
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "1d65d7ea_6f4b445d",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/config_builder.py",
+              "range": {
+                "startLine": 18,
+                "startChar": 0,
+                "endLine": 19,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "torq/config_builder.py",
+              "range": {
+                "startLine": 22,
+                "startChar": 0,
+                "endLine": 23,
+                "endChar": 0
+              },
+              "replacement": "def build_config(command):\n"
+            },
+            {
+              "path": "torq/config_builder.py",
+              "range": {
+                "startLine": 24,
+                "startChar": 0,
+                "endLine": 25,
+                "endChar": 0
+              },
+              "replacement": "  Builds a config based on the command passed in.\n"
+            },
+            {
+              "path": "torq/config_builder.py",
+              "range": {
+                "startLine": 26,
+                "startChar": 0,
+                "endLine": 26,
+                "endChar": 0
+              },
+              "replacement": "  if command.dur_ms is None:\n    raise Exception(\"Cannot create config because a valid dur_ms was not\"\n                    \" passed into the ConfigBuilder constructor.\")\n"
+            },
+            {
+              "path": "torq/config_builder.py",
+              "range": {
+                "startLine": 27,
+                "startChar": 0,
+                "endLine": 30,
+                "endChar": 0
+              },
+              "replacement": "  ftrace_events \u003d [\"power/suspend_resume\", \"mm_event/mm_event_record\",\n                   \"kmem/rss_stat\", \"ion/ion_stat\",\n                   \"dmabuf_heap/dma_heap_stat\", \"kmem/ion_heap_grow\",\n                   \"kmem/ion_heap_shrink\", \"sched/sched_process_exit\",\n                   \"sched/sched_process_free\", \"sched/sched_switch\",\n                   \"sched/sched_wakeup\", \"sched/sched_wakeup_new\",\n                   \"sched/sched_waking\", \"task/task_newtask\",\n                   \"task/task_rename\", \"lowmemorykiller/lowmemory_kill\",\n                   \"oom/oom_score_adj_update\", \"oom/mark_victim\",\n                   \"sched/sched_blocked_reason\", \"workqueue/*\", \"vmscan/*\",\n                   \"ftrace/print\", \"power/cpu_frequency\", \"power/cpu_idle\",\n                   \"power/gpu_frequency\", \"power/wakeup_source_activate\",\n                   \"power/wakeup_source_deactivate\", \"gpu_mem/gpu_mem_total\"]\n"
+            },
+            {
+              "path": "torq/config_builder.py",
+              "range": {
+                "startLine": 31,
+                "startChar": 0,
+                "endLine": 31,
+                "endChar": 0
+              },
+              "replacement": "  if command.exclude_ftrace_event is not None:\n    for event in command.exclude_ftrace_event:\n      if event in ftrace_events:\n        ftrace_events.remove(event)\n      else:\n        return None, ValidationError((\"Cannot remove ftrace event %s from\"\n                                      \" config because it is not one\"\n                                      \" of the config\u0027s ftrace events.\"\n                                      % event), None)\n"
+            },
+            {
+              "path": "torq/config_builder.py",
+              "range": {
+                "startLine": 32,
+                "startChar": 0,
+                "endLine": 38,
+                "endChar": 0
+              },
+              "replacement": "  if command.include_ftrace_event is not None:\n    for event in command.include_ftrace_event:\n      if event not in ftrace_events:\n        ftrace_events.append(event)\n      else:\n        return None, ValidationError((\"Cannot add ftrace event %s to config\"\n                                      \" because it is already one of the\"\n                                      \" config\u0027s ftrace events.\" % event),\n                                     None)\n"
+            },
+            {
+              "path": "torq/config_builder.py",
+              "range": {
+                "startLine": 39,
+                "startChar": 0,
+                "endLine": 81,
+                "endChar": 0
+              },
+              "replacement": "  ftrace_events_string \u003d (\"ftrace_events: \\\"%s\\\"\"\n                          % (\"\\\"\\n      \"\n                             \"ftrace_events: \\\"\".join(ftrace_events)))\n"
+            },
+            {
+              "path": "torq/config_builder.py",
+              "range": {
+                "startLine": 82,
+                "startChar": 0,
+                "endLine": 83,
+                "endChar": 0
+              },
+              "replacement": "  config \u003d f\u0027\u0027\u0027\\\n"
+            },
+            {
+              "path": "torq/config_builder.py",
+              "range": {
+                "startLine": 226,
+                "startChar": 0,
+                "endLine": 227,
+                "endChar": 0
+              },
+              "replacement": "  return textwrap.dedent(config), None\n"
+            }
+          ]
+        }
+      ],
+      "revId": "3de00d1ded28d8415e5d08f2574ee9d463c4004f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f4eaff1_100b66a5",
+        "filename": "torq/config_builder.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-09T00:24:10Z",
+      "side": 1,
+      "message": "Can just use `build()` given that we have the context of `ConfigBuilder`.",
+      "range": {
+        "startLine": 28,
+        "startChar": 6,
+        "endLine": 28,
+        "endChar": 18
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "1ef6a3a4_3eed5ebb",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/config_builder.py",
+              "range": {
+                "startLine": 28,
+                "startChar": 0,
+                "endLine": 29,
+                "endChar": 0
+              },
+              "replacement": "  def build(self, command):\n"
+            },
+            {
+              "path": "torq/config_builder.py",
+              "range": {
+                "startLine": 39,
+                "startChar": 0,
+                "endLine": 40,
+                "endChar": 0
+              },
+              "replacement": "  def build(self, command):\n"
+            }
+          ]
+        }
+      ],
+      "revId": "3de00d1ded28d8415e5d08f2574ee9d463c4004f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b580138_a7809bd6",
+        "filename": "torq/config_builder.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-09T00:24:10Z",
+      "side": 1,
+      "message": "Should probably log the possible ftrace events in the config.",
+      "range": {
+        "startLine": 63,
+        "startChar": 23,
+        "endLine": 66,
+        "endChar": 55
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "bde4769a_4dc01928",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/config_builder.py",
+              "range": {
+                "startLine": 63,
+                "startChar": 0,
+                "endLine": 67,
+                "endChar": 0
+              },
+              "replacement": "          return None, ValidationError(\n              (\"Cannot remove ftrace event %s from config because it is not one\"\n               \" of the config\u0027s ftrace events. Possible ftrace events are:\"\n               \" %s.\" % (event, ftrace_events)), None)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "3de00d1ded28d8415e5d08f2574ee9d463c4004f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f6c458f_ceccd6ca",
+        "filename": "torq/torq.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-09T00:24:10Z",
+      "side": 1,
+      "message": "duplicate ftrace events cannot be included in --exclude-ftrace-event",
+      "range": {
+        "startLine": 240,
+        "startChar": 37,
+        "endLine": 241,
+        "endChar": 26
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "71a30b49_280a77d8",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 240,
+                "startChar": 0,
+                "endLine": 242,
+                "endChar": 0
+              },
+              "replacement": "        (\"Command is invalid because duplicate ftrace events cannot be\"\n         \" included in --exclude-ftrace-event.\"),\n"
+            },
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 255,
+                "startChar": 0,
+                "endLine": 257,
+                "endChar": 0
+              },
+              "replacement": "        (\"Command is invalid because duplicate ftrace events cannot be\"\n         \" included in --include-ftrace-event.\"),\n"
+            }
+          ]
+        }
+      ],
+      "revId": "3de00d1ded28d8415e5d08f2574ee9d463c4004f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a803025_c2949fe2",
+        "filename": "torq/torq.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-09T00:24:10Z",
+      "side": 1,
+      "message": "duplicate ftrace events cannot be included in --include-ftrace-event.",
+      "range": {
+        "startLine": 255,
+        "startChar": 37,
+        "endLine": 256,
+        "endChar": 26
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "cb6526d5_468e116e",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 255,
+                "startChar": 0,
+                "endLine": 257,
+                "endChar": 0
+              },
+              "replacement": "        (\"Command is invalid because duplicate ftrace events cannot be\"\n         \" included in --include-ftrace-event.\"),\n"
+            }
+          ]
+        }
+      ],
+      "revId": "3de00d1ded28d8415e5d08f2574ee9d463c4004f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6654a0a_022bf020",
+        "filename": "torq/torq.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-09T00:24:10Z",
+      "side": 1,
+      "message": "I don\u0027t think that we need to have a specific example here. @jahdiel@google.com wdyt?\n\nI think we can keep it generic:\n\"--include-ftrace-event should only include one instance of an ftrace event.\"\n\nSame above.",
+      "range": {
+        "startLine": 257,
+        "startChar": 10,
+        "endLine": 258,
+        "endChar": 51
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "3d946fc0_032800ee",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 257,
+                "startChar": 0,
+                "endLine": 259,
+                "endChar": 0
+              },
+              "replacement": "        (\"--include-ftrace-event should only include one instance of an ftrace\"\n         \" event.\"))\n"
+            }
+          ]
+        }
+      ],
+      "revId": "3de00d1ded28d8415e5d08f2574ee9d463c4004f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68aa8cbf_c319eb4d",
+        "filename": "torq/torq.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-09T00:24:10Z",
+      "side": 1,
+      "message": "We can just check if there is an intersection between set(args.include_ftrace_event) and set(args.exclude_ftrace_event)",
+      "range": {
+        "startLine": 262,
+        "startChar": 4,
+        "endLine": 263,
+        "endChar": 44
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "fd543b9b_da9bfba7",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 262,
+                "startChar": 0,
+                "endLine": 270,
+                "endChar": 0
+              },
+              "replacement": "    if set(args.include_ftrace_event) \u0026 set(args.exclude_ftrace_event):\n      return None, ValidationError(\n          (\"Command is invalid because ftrace event cannot be both\"\n           \" included and excluded.\"),\n          (\"Only set --include-ftrace-event %s or if you want to include %s\"\n           \" in the config or --exclude-ftrace-event %s or if you want to\"\n           \" exclude %s from the config.\" % (args.include_ftrace_event,\n                                             args.include_ftrace_event,\n                                             args.exclude_ftrace_event,\n                                             args.exclude_ftrace_event)))\n"
+            }
+          ]
+        }
+      ],
+      "revId": "3de00d1ded28d8415e5d08f2574ee9d463c4004f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
