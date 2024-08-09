@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2cf6f7a3_5db32914",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-08-09T19:18:34Z",
+      "side": 1,
+      "message": "To make this truly, extensible we need to loop through `PREDEFINED_PERFETTO_CONFIGS` instead. This logic will break if we add a new predefined perfetto config to torq. Please, revise the code and make sure we are not accessing directly the values in the list, but that we are always iterating through the list. Also, we need to make sure we are not depending on the order of the values in the list, this makes things brittle.",
+      "range": {
+        "startLine": 74,
+        "startChar": 4,
+        "endLine": 82,
+        "endChar": 24
+      },
+      "revId": "c620e6a2f0ec0ef2c7c54f34c9f5a521c9cb5cbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
