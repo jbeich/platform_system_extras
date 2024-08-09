@@ -46,6 +46,30 @@
       },
       "revId": "c620e6a2f0ec0ef2c7c54f34c9f5a521c9cb5cbd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "401e206f_b5805c2b",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-09T21:10:30Z",
+      "side": 1,
+      "message": "Discussed offline. If we are concerned about ordering of values, these constant values should be in an Enum class ideally. However, using a map of constant values also makes sense if we want to avoid iterating over these options.\n\nThe use of `getattr` is creative, but we should probably avoid it per go/pystyle#power-features-definition",
+      "parentUuid": "25f7b132_82f77d44",
+      "range": {
+        "startLine": 74,
+        "startChar": 4,
+        "endLine": 82,
+        "endChar": 24
+      },
+      "revId": "c620e6a2f0ec0ef2c7c54f34c9f5a521c9cb5cbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
