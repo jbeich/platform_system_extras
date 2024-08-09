@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d65fe3a_438c87e1",
+        "filename": "torq/config_builder.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-09T23:50:17Z",
+      "side": 1,
+      "message": "Please update this class description.",
+      "range": {
+        "startLine": 23,
+        "startChar": 3,
+        "endLine": 26,
+        "endChar": 10
+      },
+      "revId": "70dcbae1047cd208032a72fff89ab0a68cde24c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
