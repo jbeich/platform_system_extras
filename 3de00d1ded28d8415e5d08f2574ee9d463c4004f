@@ -804,6 +804,30 @@
       },
       "revId": "3de00d1ded28d8415e5d08f2574ee9d463c4004f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20cd3ef4_4e5eb8aa",
+        "filename": "torq/torq.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-09T18:27:46Z",
+      "side": 1,
+      "message": "Can we just get the intersection between the two lists and then just append that to the ValidationError?\n\nThis would also cover the case in which there might be more than 1 event that is common in both lists, rather than exiting on the first instance.",
+      "parentUuid": "930067ba_34478f89",
+      "range": {
+        "startLine": 262,
+        "startChar": 4,
+        "endLine": 263,
+        "endChar": 44
+      },
+      "revId": "3de00d1ded28d8415e5d08f2574ee9d463c4004f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
