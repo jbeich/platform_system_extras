@@ -22,6 +22,30 @@
       },
       "revId": "c620e6a2f0ec0ef2c7c54f34c9f5a521c9cb5cbd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "25f7b132_82f77d44",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-09T20:16:10Z",
+      "side": 1,
+      "message": "I now check if command.perfetto_config is in the list instead. If it\u0027s in the list,  I dynamically construct the name of the build function with command.perfetto_config and I use the getattr library to call it. If it\u0027s not in the list, we call build_custom_config in the future.",
+      "parentUuid": "2cf6f7a3_5db32914",
+      "range": {
+        "startLine": 74,
+        "startChar": 4,
+        "endLine": 82,
+        "endChar": 24
+      },
+      "revId": "c620e6a2f0ec0ef2c7c54f34c9f5a521c9cb5cbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
