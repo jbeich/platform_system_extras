@@ -22,6 +22,30 @@
       },
       "revId": "16efbb52ff4c7d6d054d5c9b51528e8a879050ea",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f40c4ff9_b2cd7001",
+        "filename": "torq/config_builder.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-12T20:42:52Z",
+      "side": 1,
+      "message": "Changed this, thank you.",
+      "parentUuid": "7bee63c7_c29b8b8f",
+      "range": {
+        "startLine": 22,
+        "startChar": 2,
+        "endLine": 27,
+        "endChar": 6
+      },
+      "revId": "16efbb52ff4c7d6d054d5c9b51528e8a879050ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
