@@ -209,6 +209,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0d76f1e4_c2138b36",
+        "filename": "torq/config_builder.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-12T19:02:57Z",
+      "side": 1,
+      "message": "Yeah, I think that we can re-word it to current events so that users won\u0027t include any events that are already pre-defined.",
+      "parentUuid": "96478ce3_6b277229",
+      "range": {
+        "startLine": 50,
+        "startChar": 37,
+        "endLine": 50,
+        "endChar": 41
+      },
+      "revId": "908484ec402478799f0ecccffe72b06f7cb7854e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4fdee3f0_b444728e",
         "filename": "torq/config_builder.py",
         "patchSetId": 9
@@ -546,6 +570,30 @@
       "side": 1,
       "message": "The strings that I use are all slightly different. Should I define these variables as constants or class variables instead? If I do that I won\u0027t be able to inject dur_ms/the included ftrace events anymore. Jahdiel also said it\u0027s fine if we hardcoded the strings.",
       "parentUuid": "1fd330b8_6331678f",
+      "range": {
+        "startLine": 34,
+        "startChar": 4,
+        "endLine": 201,
+        "endChar": 9
+      },
+      "revId": "908484ec402478799f0ecccffe72b06f7cb7854e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7403b0ad_d8a7c1c6",
+        "filename": "torq/tests/config_unit_test.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-12T19:02:57Z",
+      "side": 1,
+      "message": "Ack. If we are defining them as class variables, let\u0027s just make them constant.",
+      "parentUuid": "fe7cfb03_ecc2b009",
       "range": {
         "startLine": 34,
         "startChar": 4,
