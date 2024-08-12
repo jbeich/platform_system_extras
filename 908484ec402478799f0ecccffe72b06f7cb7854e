@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "47de8339_cd02865c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-12T18:55:07Z",
+      "side": 1,
+      "message": "Updated this, thank you.",
+      "parentUuid": "fd637f32_1c71974d",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 63
+      },
+      "revId": "908484ec402478799f0ecccffe72b06f7cb7854e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "832a07e7_969f8d9f",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "127b7daa_1af9b913",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-12T18:55:07Z",
+      "side": 1,
+      "message": "Renamed this, thank you.",
+      "parentUuid": "832a07e7_969f8d9f",
+      "range": {
+        "startLine": 19,
+        "startChar": 12,
+        "endLine": 19,
+        "endChar": 28
+      },
+      "revId": "908484ec402478799f0ecccffe72b06f7cb7854e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2a7fa7d4_78b4d264",
@@ -60,6 +108,30 @@
       "writtenOn": "2024-08-09T23:10:48Z",
       "side": 1,
       "message": "Nit: Given that the suggestions are supposed to actionable let\u0027s use the following form:\n\n`Please specify one of the following possible ftrace events: %s`",
+      "range": {
+        "startLine": 38,
+        "startChar": 50,
+        "endLine": 38,
+        "endChar": 79
+      },
+      "revId": "908484ec402478799f0ecccffe72b06f7cb7854e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f72b6b48_6a56971e",
+        "filename": "torq/config_builder.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-12T18:55:07Z",
+      "side": 1,
+      "message": "Changed this, thank you.",
+      "parentUuid": "2a7fa7d4_78b4d264",
       "range": {
         "startLine": 38,
         "startChar": 50,
@@ -113,6 +185,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "96478ce3_6b277229",
+        "filename": "torq/config_builder.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-12T18:55:07Z",
+      "side": 1,
+      "message": "I did not provide this because I do not currently have access to a list of the possible ftrace-event that we can add. The earlier example is about removing the ftrace events that we are currently using so it makes sense to provide the list of the events we currently use. We shouldn\u0027t provide that list here because in this case that\u0027s invalid.",
+      "parentUuid": "ce26513c_360171ca",
+      "range": {
+        "startLine": 50,
+        "startChar": 37,
+        "endLine": 50,
+        "endChar": 41
+      },
+      "revId": "908484ec402478799f0ecccffe72b06f7cb7854e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4fdee3f0_b444728e",
         "filename": "torq/config_builder.py",
         "patchSetId": 9
@@ -152,6 +248,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a477f7fa_3db51027",
+        "filename": "torq/config_builder.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-12T18:55:07Z",
+      "side": 1,
+      "message": "Changed this, thank you.",
+      "parentUuid": "4fdee3f0_b444728e",
+      "range": {
+        "startLine": 62,
+        "startChar": 66,
+        "endLine": 63,
+        "endChar": 65
+      },
+      "revId": "908484ec402478799f0ecccffe72b06f7cb7854e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "210a8ba6_b31bbc5c",
@@ -165,6 +285,30 @@
       "writtenOn": "2024-08-09T23:10:48Z",
       "side": 1,
       "message": "We should also rename this file to `config_builder_unit_test.py` to reflect the class under test.",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 1
+      },
+      "revId": "908484ec402478799f0ecccffe72b06f7cb7854e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a727f3f_cade8ab7",
+        "filename": "torq/tests/config_unit_test.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-12T18:55:07Z",
+      "side": 1,
+      "message": "Changed this, thank you.",
+      "parentUuid": "210a8ba6_b31bbc5c",
       "range": {
         "startLine": 1,
         "startChar": 0,
@@ -212,6 +356,30 @@
           ]
         }
       ],
+      "revId": "908484ec402478799f0ecccffe72b06f7cb7854e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c6dc039_ea661f77",
+        "filename": "torq/tests/config_unit_test.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-12T18:55:07Z",
+      "side": 1,
+      "message": "Didn\u0027t catch this, thank you.",
+      "parentUuid": "b3926117_3a49bce8",
+      "range": {
+        "startLine": 23,
+        "startChar": 6,
+        "endLine": 23,
+        "endChar": 20
+      },
       "revId": "908484ec402478799f0ecccffe72b06f7cb7854e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -317,6 +485,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e86bc916_f5694ecb",
+        "filename": "torq/tests/config_unit_test.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-12T18:55:07Z",
+      "side": 1,
+      "message": "Changed this, thank you.",
+      "parentUuid": "14c8a4d5_09bee2b3",
+      "range": {
+        "startLine": 26,
+        "startChar": 4,
+        "endLine": 26,
+        "endChar": 35
+      },
+      "revId": "908484ec402478799f0ecccffe72b06f7cb7854e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1fd330b8_6331678f",
@@ -330,6 +522,30 @@
       "writtenOn": "2024-08-09T23:10:48Z",
       "side": 1,
       "message": "Nit: Since, we are asserting on long static strings, could we please extract this into a variable so that tests are more concise.",
+      "range": {
+        "startLine": 34,
+        "startChar": 4,
+        "endLine": 201,
+        "endChar": 9
+      },
+      "revId": "908484ec402478799f0ecccffe72b06f7cb7854e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe7cfb03_ecc2b009",
+        "filename": "torq/tests/config_unit_test.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-12T18:55:07Z",
+      "side": 1,
+      "message": "The strings that I use are all slightly different. Should I define these variables as constants or class variables instead? If I do that I won\u0027t be able to inject dur_ms/the included ftrace events anymore. Jahdiel also said it\u0027s fine if we hardcoded the strings.",
+      "parentUuid": "1fd330b8_6331678f",
       "range": {
         "startLine": 34,
         "startChar": 4,
@@ -377,6 +593,30 @@
           ]
         }
       ],
+      "revId": "908484ec402478799f0ecccffe72b06f7cb7854e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57ca0e5f_e4c2fc8a",
+        "filename": "torq/tests/config_unit_test.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-12T18:55:07Z",
+      "side": 1,
+      "message": "Removed this, thank you.",
+      "parentUuid": "396d71e2_b262f9a8",
+      "range": {
+        "startLine": 210,
+        "startChar": 6,
+        "endLine": 210,
+        "endChar": 19
+      },
       "revId": "908484ec402478799f0ecccffe72b06f7cb7854e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -432,6 +672,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "57483f0d_1d1b22ee",
+        "filename": "torq/tests/config_unit_test.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-12T18:55:07Z",
+      "side": 1,
+      "message": "I added a check that asserts that config is None here, which should be expected.",
+      "parentUuid": "d6e4e790_fcb54d51",
+      "range": {
+        "startLine": 399,
+        "startChar": 4,
+        "endLine": 399,
+        "endChar": 10
+      },
+      "revId": "908484ec402478799f0ecccffe72b06f7cb7854e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f037d612_a4fedb2b",
@@ -483,6 +747,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d3effd6_315827f7",
+        "filename": "torq/tests/config_unit_test.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 565,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-12T18:55:07Z",
+      "side": 1,
+      "message": "I added this, thank you.",
+      "parentUuid": "f037d612_a4fedb2b",
+      "range": {
+        "startLine": 565,
+        "startChar": 22,
+        "endLine": 565,
+        "endChar": 39
+      },
+      "revId": "908484ec402478799f0ecccffe72b06f7cb7854e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "52fdf391_47156585",
@@ -520,6 +808,30 @@
           ]
         }
       ],
+      "revId": "908484ec402478799f0ecccffe72b06f7cb7854e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6afed495_0dddcbf5",
+        "filename": "torq/tests/config_unit_test.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 605,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-12T18:55:07Z",
+      "side": 1,
+      "message": "I added this, thank you.",
+      "parentUuid": "52fdf391_47156585",
+      "range": {
+        "startLine": 605,
+        "startChar": 13,
+        "endLine": 605,
+        "endChar": 18
+      },
       "revId": "908484ec402478799f0ecccffe72b06f7cb7854e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -571,6 +883,30 @@
           ]
         }
       ],
+      "revId": "908484ec402478799f0ecccffe72b06f7cb7854e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7434676e_3279e52e",
+        "filename": "torq/tests/torq_unit_test.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-12T18:55:07Z",
+      "side": 1,
+      "message": "Sounds good, I will add this in a next small Cl that will minor minor changes",
+      "parentUuid": "4cb18000_5d8b7e64",
+      "range": {
+        "startLine": 21,
+        "startChar": 32,
+        "endLine": 21,
+        "endChar": 49
+      },
       "revId": "908484ec402478799f0ecccffe72b06f7cb7854e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -766,6 +1102,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "54cb8a7e_2553d444",
+        "filename": "torq/torq.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-12T18:55:07Z",
+      "side": 1,
+      "message": "Changed this, thank you.",
+      "parentUuid": "686f263b_f2d25247",
+      "range": {
+        "startLine": 61,
+        "startChar": 23,
+        "endLine": 61,
+        "endChar": 45
+      },
+      "revId": "908484ec402478799f0ecccffe72b06f7cb7854e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d68beefe_f4b8047c",
@@ -779,6 +1139,30 @@
       "writtenOn": "2024-08-09T23:10:48Z",
       "side": 1,
       "message": "`specified ftrace events`",
+      "range": {
+        "startLine": 62,
+        "startChar": 38,
+        "endLine": 62,
+        "endChar": 54
+      },
+      "revId": "908484ec402478799f0ecccffe72b06f7cb7854e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "75617c34_7394c47a",
+        "filename": "torq/torq.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-12T18:55:07Z",
+      "side": 1,
+      "message": "Changed this, thank you.",
+      "parentUuid": "d68beefe_f4b8047c",
       "range": {
         "startLine": 62,
         "startChar": 38,
@@ -980,6 +1364,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0334bd64_e4def722",
+        "filename": "torq/torq.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-12T18:55:07Z",
+      "side": 1,
+      "message": "Changed this, thank you.",
+      "parentUuid": "28779dad_48e6746d",
+      "range": {
+        "startLine": 64,
+        "startChar": 22,
+        "endLine": 64,
+        "endChar": 46
+      },
+      "revId": "908484ec402478799f0ecccffe72b06f7cb7854e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cef7dc94_b1c0f36a",
@@ -1017,6 +1425,30 @@
           ]
         }
       ],
+      "revId": "908484ec402478799f0ecccffe72b06f7cb7854e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e2bb785_fed5d959",
+        "filename": "torq/torq.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-12T18:55:07Z",
+      "side": 1,
+      "message": "Changed this, thank you.",
+      "parentUuid": "cef7dc94_b1c0f36a",
+      "range": {
+        "startLine": 65,
+        "startChar": 38,
+        "endLine": 65,
+        "endChar": 54
+      },
       "revId": "908484ec402478799f0ecccffe72b06f7cb7854e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
