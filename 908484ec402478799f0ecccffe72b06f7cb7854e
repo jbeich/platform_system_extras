@@ -231,6 +231,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8c3b9b6_80a15494",
+        "filename": "torq/config_builder.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-12T19:11:05Z",
+      "side": 1,
+      "message": "Added this, thank you.",
+      "parentUuid": "96478ce3_6b277229",
+      "range": {
+        "startLine": 50,
+        "startChar": 37,
+        "endLine": 50,
+        "endChar": 41
+      },
+      "revId": "908484ec402478799f0ecccffe72b06f7cb7854e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4fdee3f0_b444728e",
