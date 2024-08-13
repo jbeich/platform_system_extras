@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1de43c8_819aabd7",
+        "filename": "torq/config_builder.py",
+        "patchSetId": 20
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-13T23:40:38Z",
+      "side": 1,
+      "message": "Deleted this, thank you.",
+      "parentUuid": "1db26fd1_25f52738",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 3
+      },
+      "revId": "71ad49af015f075e0668b81a98fd15d951d237af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "885b90d0_e82d2d97",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "881a792f_df77ce9c",
+        "filename": "torq/config_builder.py",
+        "patchSetId": 20
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-13T23:40:38Z",
+      "side": 1,
+      "message": "Added this, thank you.",
+      "parentUuid": "885b90d0_e82d2d97",
+      "range": {
+        "startLine": 39,
+        "startChar": 51,
+        "endLine": 39,
+        "endChar": 75
+      },
+      "revId": "71ad49af015f075e0668b81a98fd15d951d237af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e0293198_525b0efc",
@@ -60,6 +108,30 @@
       "writtenOn": "2024-08-13T22:07:49Z",
       "side": 1,
       "message": "nit: `any`",
+      "range": {
+        "startLine": 49,
+        "startChar": 61,
+        "endLine": 49,
+        "endChar": 64
+      },
+      "revId": "71ad49af015f075e0668b81a98fd15d951d237af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c7b75f6_990abfe7",
+        "filename": "torq/config_builder.py",
+        "patchSetId": 20
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-13T23:40:38Z",
+      "side": 1,
+      "message": "Replaced this, thank you.",
+      "parentUuid": "e0293198_525b0efc",
       "range": {
         "startLine": 49,
         "startChar": 61,
@@ -111,6 +183,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c967c71_c58ad0b6",
+        "filename": "torq/config_builder.py",
+        "patchSetId": 20
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-13T23:40:38Z",
+      "side": 1,
+      "message": "Replaced this, thank you.",
+      "parentUuid": "16e6ad04_bb16757d",
+      "range": {
+        "startLine": 64,
+        "startChar": 30,
+        "endLine": 91,
+        "endChar": 53
+      },
+      "revId": "71ad49af015f075e0668b81a98fd15d951d237af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b2879b08_6433fdf7",
@@ -124,6 +220,30 @@
       "writtenOn": "2024-08-13T22:07:49Z",
       "side": 1,
       "message": "Let\u0027s indent this 1 more level so that it is clear it is the value of `config`.",
+      "range": {
+        "startLine": 98,
+        "startChar": 2,
+        "endLine": 236,
+        "endChar": 5
+      },
+      "revId": "71ad49af015f075e0668b81a98fd15d951d237af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f3c623b_4c9149ea",
+        "filename": "torq/config_builder.py",
+        "patchSetId": 20
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-13T23:40:38Z",
+      "side": 1,
+      "message": "Added this, thank you.",
+      "parentUuid": "b2879b08_6433fdf7",
       "range": {
         "startLine": 98,
         "startChar": 2,

@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f65674b6_e5f10025",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 19
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-13T23:40:38Z",
+      "side": 1,
+      "message": "Changed this, thank you.",
+      "parentUuid": "e41d35e3_d007b5fe",
+      "range": {
+        "startLine": 52,
+        "startChar": 4,
+        "endLine": 53,
+        "endChar": 67
+      },
+      "revId": "b92cd24d0f684dbd5313191c7a0f65ada40defc4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "48a500fb_26475314",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-08-13T22:07:49Z",
       "side": 1,
       "message": "Let\u0027s use this instead:\n```suggestion\n  def create_config(self, command):\n    if command.perfetto_config in PREDEFINED_PERFETTO_CONFIGS:\n      return PREDEFINED_PERFETTO_CONFIGS[command.perfetto_config](command))\n    else:\n      raise NotImplementedError\n```",
+      "range": {
+        "startLine": 71,
+        "startChar": 2,
+        "endLine": 78,
+        "endChar": 24
+      },
+      "revId": "b92cd24d0f684dbd5313191c7a0f65ada40defc4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2030d97f_c0a850b2",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 19
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-13T23:40:38Z",
+      "side": 1,
+      "message": "Replaced this, thank you.",
+      "parentUuid": "48a500fb_26475314",
       "range": {
         "startLine": 71,
         "startChar": 2,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1269e4aa_52a9d42b",
+        "filename": "torq/torq.py",
+        "patchSetId": 19
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-13T23:40:38Z",
+      "side": 1,
+      "message": "Removed this, thank you.",
+      "parentUuid": "4d2ec07d_747ea2be",
+      "range": {
+        "startLine": 27,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 75
+      },
+      "revId": "b92cd24d0f684dbd5313191c7a0f65ada40defc4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2ddd4e47_58c135e7",
@@ -83,6 +155,30 @@
       "writtenOn": "2024-08-13T22:07:49Z",
       "side": 1,
       "message": "Use `PREDEFINED_PERFETTO_CONFIGS.keys()` instead.",
+      "range": {
+        "startLine": 56,
+        "startChar": 41,
+        "endLine": 56,
+        "endChar": 73
+      },
+      "revId": "b92cd24d0f684dbd5313191c7a0f65ada40defc4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50e5bd6d_922bab90",
+        "filename": "torq/torq.py",
+        "patchSetId": 19
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-13T23:40:38Z",
+      "side": 1,
+      "message": "Replaced this, thank you.",
+      "parentUuid": "2ddd4e47_58c135e7",
       "range": {
         "startLine": 56,
         "startChar": 41,
@@ -116,6 +212,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf35d1c1_10c7e954",
+        "filename": "torq/torq.py",
+        "patchSetId": 19
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-13T23:40:38Z",
+      "side": 1,
+      "message": "Replaced this, thank you.",
+      "parentUuid": "7252c889_e73f522b",
+      "range": {
+        "startLine": 207,
+        "startChar": 34,
+        "endLine": 207,
+        "endChar": 66
+      },
+      "revId": "b92cd24d0f684dbd5313191c7a0f65ada40defc4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7c1af545_caae714a",
@@ -129,6 +249,30 @@
       "writtenOn": "2024-08-13T22:07:49Z",
       "side": 1,
       "message": "Use `PREDEFINED_PERFETTO_CONFIGS.keys()` instead. String join methods takes an iterable: https://docs.python.org/3/library/stdtypes.html#str.join",
+      "range": {
+        "startLine": 217,
+        "startChar": 21,
+        "endLine": 217,
+        "endChar": 53
+      },
+      "revId": "b92cd24d0f684dbd5313191c7a0f65ada40defc4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7598933_2f4b4505",
+        "filename": "torq/torq.py",
+        "patchSetId": 19
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-13T23:40:38Z",
+      "side": 1,
+      "message": "Replaced this, thank you.",
+      "parentUuid": "7c1af545_caae714a",
       "range": {
         "startLine": 217,
         "startChar": 21,
