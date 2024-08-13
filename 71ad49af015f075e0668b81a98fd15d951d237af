@@ -252,6 +252,70 @@
       },
       "revId": "71ad49af015f075e0668b81a98fd15d951d237af",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b712246_6399b9a0",
+        "filename": "torq/tests/config_builder_unit_test.py",
+        "patchSetId": 20
+      },
+      "lineNbr": 633,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-13T23:57:33Z",
+      "side": 1,
+      "message": "Can we have this injected into a template string. Same in other test cases.",
+      "range": {
+        "startLine": 633,
+        "startChar": 39,
+        "endLine": 633,
+        "endChar": 59
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "43370407_7abcb011",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/tests/config_builder_unit_test.py",
+              "range": {
+                "startLine": 632,
+                "startChar": 0,
+                "endLine": 667,
+                "endChar": 0
+              },
+              "replacement": "    self.assertEqual(error.message,\n                     (\"Cannot add ftrace event {ftrace_event} to config\"\n                      \" because it is already one of the config\u0027s ftrace\"\n                      \" events.\").format(ftrace_event\u003d\"power/suspend_resume\"))\n    self.assertEqual(error.suggestion,\n                     (\"Please do not specify one of the following ftrace events\"\n                      \" that are already included:\\n\"\n                      \"[\u0027power/suspend_resume\u0027,\"\n                      \" \u0027mm_event/mm_event_record\u0027,\"\n                      \" \u0027kmem/rss_stat\u0027,\"\n                      \" \u0027ion/ion_stat\u0027,\"\n                      \" \u0027dmabuf_heap/dma_heap_stat\u0027,\"\n                      \" \u0027kmem/ion_heap_grow\u0027,\"\n                      \" \u0027kmem/ion_heap_shrink\u0027,\"\n                      \" \u0027sched/sched_process_exit\u0027,\"\n                      \" \u0027sched/sched_process_free\u0027,\"\n                      \" \u0027sched/sched_switch\u0027,\"\n                      \" \u0027sched/sched_wakeup\u0027,\"\n                      \" \u0027sched/sched_wakeup_new\u0027,\"\n                      \" \u0027sched/sched_waking\u0027,\"\n                      \" \u0027task/task_newtask\u0027,\"\n                      \" \u0027task/task_rename\u0027,\"\n                      \" \u0027lowmemorykiller/lowmemory_kill\u0027,\"\n                      \" \u0027oom/oom_score_adj_update\u0027,\"\n                      \" \u0027oom/mark_victim\u0027,\"\n                      \" \u0027sched/sched_blocked_reason\u0027,\"\n                      \" \u0027workqueue/*\u0027,\"\n                      \" \u0027vmscan/*\u0027,\"\n                      \" \u0027ftrace/print\u0027,\"\n                      \" \u0027power/cpu_frequency\u0027,\"\n                      \" \u0027power/cpu_idle\u0027,\"\n                      \" \u0027power/gpu_frequency\u0027,\"\n                      \" \u0027power/wakeup_source_activate\u0027,\"\n                      \" \u0027power/wakeup_source_deactivate\u0027,\"\n                      \" \u0027gpu_mem/gpu_mem_total\u0027]\"))\n"
+            }
+          ]
+        }
+      ],
+      "revId": "71ad49af015f075e0668b81a98fd15d951d237af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "159587b8_26ab617d",
+        "filename": "torq/tests/torq_unit_test.py",
+        "patchSetId": 20
+      },
+      "lineNbr": 590,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-13T23:57:33Z",
+      "side": 1,
+      "message": "Let\u0027s add a test case for if there are multiple events.",
+      "range": {
+        "startLine": 588,
+        "startChar": 4,
+        "endLine": 590,
+        "endChar": 52
+      },
+      "revId": "71ad49af015f075e0668b81a98fd15d951d237af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

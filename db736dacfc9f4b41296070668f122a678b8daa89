@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09254a22_0233b254",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 21
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-13T23:57:33Z",
+      "side": 1,
+      "message": "Please update the commit message to reflect the current changes.",
+      "range": {
+        "startLine": 10,
+        "startChar": 42,
+        "endLine": 15,
+        "endChar": 20
+      },
+      "revId": "db736dacfc9f4b41296070668f122a678b8daa89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "441c81cf_71d5e826",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 21
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-13T23:57:33Z",
+      "side": 1,
+      "message": "We should throw a `ValueError` here given that the function has been implemented, but the config that was provided was not pre-defined.",
+      "range": {
+        "startLine": 75,
+        "startChar": 12,
+        "endLine": 75,
+        "endChar": 31
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "d9f78750_c5079d39",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/command_executor.py",
+              "range": {
+                "startLine": 75,
+                "startChar": 0,
+                "endLine": 76,
+                "endChar": 0
+              },
+              "replacement": "      raise ValueError\n"
+            }
+          ]
+        }
+      ],
+      "revId": "db736dacfc9f4b41296070668f122a678b8daa89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0fbdcce4_5a14fae0",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 21
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-13T23:57:33Z",
+      "side": 1,
+      "message": "We can just use `run` here instead.",
+      "range": {
+        "startLine": 80,
+        "startChar": 52,
+        "endLine": 80,
+        "endChar": 63
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "34b4a9b3_1193999d",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/command_executor.py",
+              "range": {
+                "startLine": 80,
+                "startChar": 0,
+                "endLine": 81,
+                "endChar": 0
+              },
+              "replacement": "  def prepare_device_for_run(self, command, device, run):\n"
+            },
+            {
+              "path": "torq/command_executor.py",
+              "range": {
+                "startLine": 83,
+                "startChar": 0,
+                "endLine": 85,
+                "endChar": 0
+              },
+              "replacement": "  def execute_run(self, command, device, config, run):\n    print(\"Performing run %s\" % run)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "db736dacfc9f4b41296070668f122a678b8daa89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
