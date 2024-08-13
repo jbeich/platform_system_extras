@@ -1,0 +1,137 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1db26fd1_25f52738",
+        "filename": "torq/config_builder.py",
+        "patchSetId": 20
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-08-13T22:07:49Z",
+      "side": 1,
+      "message": "Delete this comment.",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 3
+      },
+      "revId": "71ad49af015f075e0668b81a98fd15d951d237af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "885b90d0_e82d2d97",
+        "filename": "torq/config_builder.py",
+        "patchSetId": 20
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-08-13T22:07:49Z",
+      "side": 1,
+      "message": "Wouldn\u0027t we need to do something like: `\"\\n\\t\".join(predefined_ftrace_events)`. Same below?",
+      "range": {
+        "startLine": 39,
+        "startChar": 51,
+        "endLine": 39,
+        "endChar": 75
+      },
+      "revId": "71ad49af015f075e0668b81a98fd15d951d237af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0293198_525b0efc",
+        "filename": "torq/config_builder.py",
+        "patchSetId": 20
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-08-13T22:07:49Z",
+      "side": 1,
+      "message": "nit: `any`",
+      "range": {
+        "startLine": 49,
+        "startChar": 61,
+        "endLine": 49,
+        "endChar": 64
+      },
+      "revId": "71ad49af015f075e0668b81a98fd15d951d237af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16e6ad04_bb16757d",
+        "filename": "torq/config_builder.py",
+        "patchSetId": 20
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-08-13T22:07:49Z",
+      "side": 1,
+      "message": "Order them alphabetically.",
+      "range": {
+        "startLine": 64,
+        "startChar": 30,
+        "endLine": 91,
+        "endChar": 53
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "ec8be1a1_ff199049",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/config_builder.py",
+              "range": {
+                "startLine": 64,
+                "startChar": 0,
+                "endLine": 92,
+                "endChar": 0
+              },
+              "replacement": "  predefined_ftrace_events \u003d [\n      \"dmabuf_heap/dma_heap_stat\",\n      \"ftrace/print\",\n      \"gpu_mem/gpu_mem_total\",\n      \"ion/ion_stat\",\n      \"kmem/ion_heap_grow\",\n      \"kmem/ion_heap_shrink\",\n      \"kmem/rss_stat\",\n      \"lowmemorykiller/lowmemory_kill\",\n      \"mm_event/mm_event_record\",\n      \"oom/mark_victim\",\n      \"oom/oom_score_adj_update\",\n      \"power/cpu_frequency\",\n      \"power/cpu_idle\",\n      \"power/gpu_frequency\",\n      \"power/suspend_resume\",\n      \"power/wakeup_source_activate\",\n      \"power/wakeup_source_deactivate\",\n      \"sched/sched_blocked_reason\",\n      \"sched/sched_process_exit\",\n      \"sched/sched_process_free\",\n      \"sched/sched_switch\",\n      \"sched/sched_wakeup\",\n      \"sched/sched_wakeup_new\",\n      \"sched/sched_waking\",\n      \"task/task_newtask\",\n      \"task/task_rename\",\n      \"vmscan/*\",\n      \"workqueue/*\",\n  ]\n"
+            }
+          ]
+        }
+      ],
+      "revId": "71ad49af015f075e0668b81a98fd15d951d237af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2879b08_6433fdf7",
+        "filename": "torq/config_builder.py",
+        "patchSetId": 20
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-08-13T22:07:49Z",
+      "side": 1,
+      "message": "Let\u0027s indent this 1 more level so that it is clear it is the value of `config`.",
+      "range": {
+        "startLine": 98,
+        "startChar": 2,
+        "endLine": 236,
+        "endChar": 5
+      },
+      "revId": "71ad49af015f075e0668b81a98fd15d951d237af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
