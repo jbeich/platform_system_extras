@@ -65,6 +65,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4404ac4a_105b06de",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 21
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-14T00:02:42Z",
+      "side": 1,
+      "message": "Discussed it. The custom config has not been implemented yet.",
+      "parentUuid": "441c81cf_71d5e826",
+      "range": {
+        "startLine": 75,
+        "startChar": 12,
+        "endLine": 75,
+        "endChar": 31
+      },
+      "revId": "db736dacfc9f4b41296070668f122a678b8daa89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0fbdcce4_5a14fae0",
