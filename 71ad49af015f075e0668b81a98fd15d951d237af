@@ -295,6 +295,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "46879a58_d9960817",
+        "filename": "torq/tests/config_builder_unit_test.py",
+        "patchSetId": 20
+      },
+      "lineNbr": 633,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-14T00:51:07Z",
+      "side": 1,
+      "message": "Added this, thank you.",
+      "parentUuid": "7b712246_6399b9a0",
+      "range": {
+        "startLine": 633,
+        "startChar": 39,
+        "endLine": 633,
+        "endChar": 59
+      },
+      "revId": "71ad49af015f075e0668b81a98fd15d951d237af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "159587b8_26ab617d",
@@ -308,6 +332,30 @@
       "writtenOn": "2024-08-13T23:57:33Z",
       "side": 1,
       "message": "Let\u0027s add a test case for if there are multiple events.",
+      "range": {
+        "startLine": 588,
+        "startChar": 4,
+        "endLine": 590,
+        "endChar": 52
+      },
+      "revId": "71ad49af015f075e0668b81a98fd15d951d237af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "577da27e_08ef31a8",
+        "filename": "torq/tests/torq_unit_test.py",
+        "patchSetId": 20
+      },
+      "lineNbr": 590,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-14T00:51:07Z",
+      "side": 1,
+      "message": "Change it to test for multiple events.",
+      "parentUuid": "159587b8_26ab617d",
       "range": {
         "startLine": 588,
         "startChar": 4,

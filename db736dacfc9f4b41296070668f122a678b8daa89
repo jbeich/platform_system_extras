@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "37922abc_3653f30d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 21
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-14T00:51:07Z",
+      "side": 1,
+      "message": "Updated the message, thank you.",
+      "parentUuid": "09254a22_0233b254",
+      "range": {
+        "startLine": 10,
+        "startChar": 42,
+        "endLine": 15,
+        "endChar": 20
+      },
+      "revId": "db736dacfc9f4b41296070668f122a678b8daa89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "441c81cf_71d5e826",
@@ -136,6 +160,30 @@
           ]
         }
       ],
+      "revId": "db736dacfc9f4b41296070668f122a678b8daa89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "479126b8_473565f0",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 21
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-14T00:51:07Z",
+      "side": 1,
+      "message": "Changed this, thank you.",
+      "parentUuid": "0fbdcce4_5a14fae0",
+      "range": {
+        "startLine": 80,
+        "startChar": 52,
+        "endLine": 80,
+        "endChar": 63
+      },
       "revId": "db736dacfc9f4b41296070668f122a678b8daa89",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
