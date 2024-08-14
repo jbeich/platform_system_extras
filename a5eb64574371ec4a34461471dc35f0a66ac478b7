@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a72245ea_90827fd3",
+        "filename": "torq/config_builder.py",
+        "patchSetId": 22
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-08-14T03:15:41Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by Check Contents: Please remove the trailing whitespace.\n\nAnalyzer Description: Validates that changes do not have prohibited expressions in them.\nOwner: ayeaye-team@google.com\n\nPlease remove the trailing whitespace.",
+      "range": {
+        "startLine": 126,
+        "startChar": 0,
+        "endLine": 126,
+        "endChar": 2
+      },
+      "revId": "a5eb64574371ec4a34461471dc35f0a66ac478b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c764a90_7433330e",
+        "filename": "torq/config_builder.py",
+        "patchSetId": 22
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-08-14T03:15:41Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by Check Contents: Please remove the trailing whitespace.\n\nAnalyzer Description: Validates that changes do not have prohibited expressions in them.\nOwner: ayeaye-team@google.com\n\nPlease remove the trailing whitespace.",
+      "range": {
+        "startLine": 132,
+        "startChar": 0,
+        "endLine": 132,
+        "endChar": 2
+      },
+      "revId": "a5eb64574371ec4a34461471dc35f0a66ac478b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a324caf_17a84ee6",
+        "filename": "torq/config_builder.py",
+        "patchSetId": 22
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-08-14T03:15:41Z",
+      "side": 1,
+      "message": "Is this a new method? Aren\u0027t we handling custom configs in upcoming CLs?",
+      "range": {
+        "startLine": 237,
+        "startChar": 0,
+        "endLine": 255,
+        "endChar": 28
+      },
+      "revId": "a5eb64574371ec4a34461471dc35f0a66ac478b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "882efc24_f0d1dc8c",
+        "filename": "torq/tests/torq_unit_test.py",
+        "patchSetId": 22
+      },
+      "lineNbr": 588,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-08-14T03:15:41Z",
+      "side": 1,
+      "message": "Any reason to due a line break here?",
+      "range": {
+        "startLine": 588,
+        "startChar": 0,
+        "endLine": 588,
+        "endChar": 10
+      },
+      "revId": "a5eb64574371ec4a34461471dc35f0a66ac478b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
