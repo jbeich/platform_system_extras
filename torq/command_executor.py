@@ -18,6 +18,9 @@ import time
 from abc import ABC, abstractmethod
 from config_builder import PREDEFINED_PERFETTO_CONFIGS
 
+PERFETTO_TRACE_FILE = "/data/misc/perfetto-traces/trace.perfetto-trace"
+PERFETTO_TRACE_START_DELAY_MS = 500
+
 
 class CommandExecutor(ABC):
   """
@@ -78,17 +81,30 @@ class ProfilerCommandExecutor(CommandExecutor):
     return None
 
   def prepare_device_for_run(self, command, device, run):
-    return None
+    device.root_device()
+    device.remove_file(PERFETTO_TRACE_FILE)
 
   def execute_run(self, command, device, config, run):
     print("Performing run %s" % run)
-    return None
+    process = device.start_perfetto_trace(config)
+    time.sleep(PERFETTO_TRACE_START_DELAY_MS / 1000)
+    error = self.trigger_system_event(command, device)
+    if error is not None:
+      return error
+    self.wait_for_profiling_perfetto_trace_to_end(device, process)
 
   def trigger_system_event(self, command, device):
     return None
 
   def retrieve_perf_data(self, command, device):
-    return None
+    device.get_perfetto_trace_data(PERFETTO_TRACE_FILE, command.out_dir)
+
+  def wait_for_profiling_perfetto_trace_to_end(self, device, process):
+    try:
+      process.wait()
+    except Exception as e:
+      raise Exception(("Failed while waiting for profiling perfetto trace to"
+                       " finish on device %s. %s" % (device.serial, str(e))))
 
   def cleanup(self, command, device):
     return None
