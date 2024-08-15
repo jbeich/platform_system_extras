@@ -147,7 +147,7 @@ def user_changed_default_arguments(args):
               args.serial is not None])
 
 
-def verify_args_valid(args):
+def verify_args(args):
   if (args.subcommands is not None and
       user_changed_default_arguments(args)):
     return None, ValidationError(
@@ -419,7 +419,7 @@ def print_error(error):
 def main():
   parser = create_parser()
   args = parser.parse_args()
-  args, error = verify_args_valid(args)
+  args, error = verify_args(args)
   if error is not None:
     print_error(error)
     return

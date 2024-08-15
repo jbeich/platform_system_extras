@@ -110,7 +110,7 @@ class HWCommandExecutor(CommandExecutor):
       case "hw list":
         return self.execute_hw_list_command(device)
       case _:
-        raise Exception("Invalid hw subcommand was used.")
+        raise ValueError("Invalid hw subcommand was used.")
 
   def execute_hw_set_command(self, device, hw_config, num_cpus, memory):
     return None
@@ -137,7 +137,7 @@ class ConfigCommandExecutor(CommandExecutor):
         return self.execute_config_pull_command(config_command.config_name,
                                                 config_command.file_path)
       case _:
-        raise Exception("Invalid config subcommand was used.")
+        raise ValueError("Invalid config subcommand was used.")
 
   def execute_config_list_command(self):
     return None
