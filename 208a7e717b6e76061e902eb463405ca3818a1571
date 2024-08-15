@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5105c05d_14564098",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-15T18:25:44Z",
+      "side": 1,
+      "message": "Nit: change to `Lint changes in torq.py, tests/torq_unit_test.py, and command_executor.py`",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 90
+      },
+      "revId": "208a7e717b6e76061e902eb463405ca3818a1571",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
