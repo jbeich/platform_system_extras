@@ -23,6 +23,8 @@ from device import AdbDevice
 MOCK_DEVICE_SERIAL = "mock-device-serial"
 MOCK_DEVICE_SERIAL2 = "mock-device-serial2"
 MOCK_FAILURE = "Mock failure."
+MOCK_OUT_DIR = "mock-dir"
+MOCK_TRACE_PATH = "mock-trace-path"
 
 
 class DeviceUnitTest(unittest.TestCase):
@@ -229,6 +231,156 @@ class DeviceUnitTest(unittest.TestCase):
                                         "\n\t torq --serial %s"
                                         % (MOCK_DEVICE_SERIAL,
                                            MOCK_DEVICE_SERIAL2)))
+
+  @mock.patch.object(AdbDevice, "get_adb_devices", autospec=True)
+  @mock.patch.object(subprocess, "run", autospec=True)
+  def test_root_device_success(self, mock_subprocess_run,
+      mock_get_adb_devices):
+    mock_subprocess_run.return_value = (
+        mock.create_autospec(subprocess.CompletedProcess, instance=True))
+    mock_get_adb_devices.return_value = [MOCK_DEVICE_SERIAL], None
+    adbDevice = AdbDevice(MOCK_DEVICE_SERIAL)
+
+    error = adbDevice.root_device()
+
+    self.assertEqual(error, None)
+
+  @mock.patch.object(subprocess, "run", autospec=True)
+  def test_root_device_failure(self, mock_subprocess_run):
+    mock_subprocess_run.side_effect = Exception(MOCK_FAILURE)
+    adbDevice = AdbDevice(MOCK_DEVICE_SERIAL)
+
+    error = adbDevice.root_device()
+
+    self.assertNotEqual(error, None)
+    self.assertEqual(error.message, ("Command 'adb -s %s root' failed. %s"
+                                     % (MOCK_DEVICE_SERIAL, MOCK_FAILURE)))
+    self.assertEqual(error.suggestion, None)
+
+  @mock.patch.object(AdbDevice, "get_adb_devices", autospec=True)
+  @mock.patch.object(subprocess, "run", autospec=True)
+  def test_root_device_times_out_error(self, mock_subprocess_run,
+      mock_get_adb_devices):
+    mock_subprocess_run.return_value = (
+        mock.create_autospec(subprocess.CompletedProcess, instance=True))
+    mock_get_adb_devices.return_value = [], None
+    adbDevice = AdbDevice(MOCK_DEVICE_SERIAL)
+
+    with self.assertRaises(Exception) as e:
+      adbDevice.root_device()
+
+    self.assertEqual(str(e.exception), ("Device with serial %s took too long to"
+                                        " reconnect after being rooted."
+                                        % MOCK_DEVICE_SERIAL))
+
+  @mock.patch.object(subprocess, "run", autospec=True)
+  def test_root_device_and_adb_devices_fails_error(self, mock_subprocess_run):
+    mock_subprocess_run.side_effect = [
+        mock.create_autospec(subprocess.CompletedProcess, instance=True),
+        Exception(MOCK_FAILURE)]
+    adbDevice = AdbDevice(MOCK_DEVICE_SERIAL)
+
+    with self.assertRaises(Exception) as e:
+      adbDevice.root_device()
+
+    self.assertEqual(str(e.exception), ("Command 'adb devices' failed. %s"
+                                        % MOCK_FAILURE))
+
+  @mock.patch.object(subprocess, "run", autospec=True)
+  def test_remove_old_perfetto_trace_file_success(self, mock_subprocess_run):
+    mock_subprocess_run.return_value = (
+        mock.create_autospec(subprocess.CompletedProcess, instance=True))
+    adbDevice = AdbDevice(MOCK_DEVICE_SERIAL)
+
+    error = adbDevice.remove_old_perfetto_trace_file(MOCK_TRACE_PATH)
+
+    self.assertEqual(error, None)
+
+  @mock.patch.object(subprocess, "run", autospec=True)
+  def test_remove_old_perfetto_trace_file_failure(self, mock_subprocess_run):
+    mock_subprocess_run.side_effect = Exception(MOCK_FAILURE)
+    adbDevice = AdbDevice(MOCK_DEVICE_SERIAL)
+
+    error = adbDevice.remove_old_perfetto_trace_file(MOCK_TRACE_PATH)
+
+    self.assertNotEqual(error, None)
+    self.assertEqual(error.message, ("Command 'adb -s %s shell rm "
+                                     "mock-trace-path' failed. %s"
+                                     % (MOCK_DEVICE_SERIAL, MOCK_FAILURE)))
+    self.assertEqual(error.suggestion, None)
+
+  @mock.patch.object(subprocess, "Popen", autospec=True)
+  def test_begin_profiling_perfetto_trace_success(self, mock_subprocess_popen):
+    # Mocking the return value of subprocess.Popen to ensure it's
+    # not modified and returned by AdbDevice.begin_profiling_perfetto_trace
+    mock_subprocess_popen.return_value = mock.Mock()
+    adbDevice = AdbDevice(MOCK_DEVICE_SERIAL)
+
+    mock_process, error = adbDevice.begin_profiling_perfetto_trace(None)
+
+    self.assertEqual(error, None)
+    self.assertEqual(mock_process, mock_subprocess_popen.return_value)
+
+  @mock.patch.object(subprocess, "Popen", autospec=True)
+  def test_begin_profiling_perfetto_trace_failure(self, mock_subprocess_popen):
+    mock_subprocess_popen.side_effect = Exception(MOCK_FAILURE)
+    adbDevice = AdbDevice(MOCK_DEVICE_SERIAL)
+
+    mock_process, error = adbDevice.begin_profiling_perfetto_trace(None)
+
+    self.assertNotEqual(error, None)
+    self.assertEqual(error.message, ("Command 'adb -s %s shell perfetto -c -"
+                                     " --txt -o /data/misc/perfetto-traces/"
+                                     "trace.perfetto-trace <config_string>'"
+                                     " failed. %s"
+                                     % (MOCK_DEVICE_SERIAL, MOCK_FAILURE)))
+    self.assertEqual(error.suggestion, None)
+
+  def test_wait_for_profiling_perfetto_trace_to_end_success(self):
+    mock_subprocess = mock.create_autospec(subprocess.Popen, instance=True)
+    adbDevice = AdbDevice(MOCK_DEVICE_SERIAL)
+
+    error = adbDevice.wait_for_profiling_perfetto_trace_to_end(mock_subprocess)
+
+    self.assertEqual(error, None)
+
+  def test_wait_for_profiling_perfetto_trace_to_end_failure(self):
+    mock_subprocess = mock.create_autospec(subprocess.Popen, instance=True)
+    mock_subprocess.wait.side_effect = Exception(MOCK_FAILURE)
+    adbDevice = AdbDevice(MOCK_DEVICE_SERIAL)
+
+    error = adbDevice.wait_for_profiling_perfetto_trace_to_end(mock_subprocess)
+
+    self.assertNotEqual(error, None)
+    self.assertEqual(error.message, ("Failed while waiting for profiling"
+                                     " perfetto trace to finish on device"
+                                     " %s. %s"
+                                     % (MOCK_DEVICE_SERIAL, MOCK_FAILURE)))
+    self.assertEqual(error.suggestion, None)
+
+  @mock.patch.object(subprocess, "run", autospec=True)
+  def test_get_perfetto_trace_data_success(self, mock_subprocess_run):
+    mock_subprocess_run.return_value = (
+        mock.create_autospec(subprocess.CompletedProcess, instance=True))
+    adbDevice = AdbDevice(MOCK_DEVICE_SERIAL)
+
+    error = adbDevice.get_perfetto_trace_data(MOCK_TRACE_PATH, MOCK_OUT_DIR)
+
+    self.assertEqual(error, None)
+
+  @mock.patch.object(subprocess, "run", autospec=True)
+  def test_get_perfetto_trace_data_failure(self, mock_subprocess_run):
+    mock_subprocess_run.side_effect = Exception(MOCK_FAILURE)
+    adbDevice = AdbDevice(MOCK_DEVICE_SERIAL)
+
+    error = adbDevice.get_perfetto_trace_data(MOCK_TRACE_PATH, MOCK_OUT_DIR)
+
+    self.assertNotEqual(error, None)
+    self.assertEqual(error.message, ("Command 'adb -s %s pull %s"
+                                     " %s/trace.perfetto-trace' failed. %s"
+                                     % (MOCK_DEVICE_SERIAL, MOCK_TRACE_PATH,
+                                        MOCK_OUT_DIR, MOCK_FAILURE)))
+    self.assertEqual(error.suggestion, None)
 
 
 if __name__ == '__main__':

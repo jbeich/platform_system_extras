@@ -1,4 +1,3 @@
-#
 # Copyright (C) 2024 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,6 +15,7 @@
 
 import subprocess
 import os
+import time
 from abc import ABC, abstractmethod
 from validation_error import ValidationError
 
@@ -36,6 +36,26 @@ class Device(ABC):
 
   @abstractmethod
   def check_device_connection(self):
+    raise NotImplementedError
+
+  @abstractmethod
+  def root_device(self):
+    raise NotImplementedError
+
+  @abstractmethod
+  def remove_old_perfetto_trace_file(self, trace_path):
+    raise NotImplementedError
+
+  @abstractmethod
+  def begin_profiling_perfetto_trace(self, config):
+    raise NotImplementedError
+
+  @abstractmethod
+  def wait_for_profiling_perfetto_trace_to_end(self, process):
+    raise NotImplementedError
+
+  @abstractmethod
+  def get_perfetto_trace_data(self, trace_path, out_dir):
     raise NotImplementedError
 
   @abstractmethod
@@ -137,6 +157,78 @@ class AdbDevice(Device):
                               " of the connected devices:\n\t torq --serial %s"
                               % "\n\t torq --serial ".join(devices)))
     return None
+
+  @staticmethod
+  def poll_is_task_completed(timed_out_limit, interval, check_is_completed):
+    start_time = time.time()
+    while True:
+      time.sleep(interval)
+      if check_is_completed():
+        return True
+      if time.time() - start_time > timed_out_limit:
+        return False
+
+  def is_device_reconnected_after_root(self):
+    devices, error = self.get_adb_devices()
+    if error is not None:
+      raise Exception(error.message)
+    if self.serial in devices:
+      return True
+    return False
+
+  def root_device(self):
+    try:
+      subprocess.run(["adb", "-s", self.serial, "root"])
+    except Exception as e:
+      return ValidationError(("Command 'adb -s %s root' failed. %s"
+                              % (self.serial, str(e))), None)
+    if self.poll_is_task_completed(5, 0.5,
+                                   self.is_device_reconnected_after_root):
+      return None
+    raise Exception(("Device with serial %s took too long to reconnect after"
+                     " being rooted." % self.serial))
+
+  def remove_old_perfetto_trace_file(self, trace_path):
+    try:
+      subprocess.run(["adb", "-s", self.serial, "shell", "rm", trace_path])
+      return None
+    except Exception as e:
+      return ValidationError(("Command 'adb -s %s shell rm %s' failed. %s"
+                              % (self.serial, trace_path, str(e))), None)
+
+  def begin_profiling_perfetto_trace(self, config):
+    try:
+      process = subprocess.Popen(("adb -s %s shell perfetto -c - --txt -o"
+                                  " /data/misc/perfetto-traces/"
+                                  "trace.perfetto-trace %s"
+                                  % (self.serial, config)), shell=True)
+      return process, None
+    except Exception as e:
+      return None, ValidationError(("Command 'adb -s %s shell perfetto -c -"
+                                    " --txt -o /data/misc/perfetto-traces/"
+                                    "trace.perfetto-trace <config_string>'"
+                                    " failed. %s" % (self.serial, str(e))),
+                                   None)
+
+  def wait_for_profiling_perfetto_trace_to_end(self, process):
+    try:
+      process.wait()
+      return None
+    except Exception as e:
+      return ValidationError(("Failed while waiting for profiling perfetto"
+                              " trace to finish on device %s. %s"
+                              % (self.serial, str(e))), None)
+
+  def get_perfetto_trace_data(self, trace_path, out_dir):
+    try:
+      subprocess.run(["adb", "-s", self.serial, "pull", trace_path,
+                      "%s/trace.perfetto-trace" % out_dir])
+      return None
+    except Exception as e:
+      return ValidationError(("Command 'adb -s %s pull %s"
+                              " %s/trace.perfetto-trace' failed. %s"
+                              % (self.serial, trace_path, out_dir, str(e))),
+                             None)
 
   def get_num_cpus(self):
     raise NotImplementedError
