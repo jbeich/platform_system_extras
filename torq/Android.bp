@@ -82,3 +82,19 @@ python_test_host {
         unit_test: true,
     },
 }
+
+python_test_host {
+    name: "command_executor_unit_test",
+    main: "tests/command_executor_unit_test.py",
+    srcs: ["tests/command_executor_unit_test.py"],
+    defaults: ["torq_defaults"],
+    version: {
+        py3: {
+            enabled: true,
+            embedded_launcher: false,
+        },
+    },
+    test_options: {
+        unit_test: true,
+    },
+}

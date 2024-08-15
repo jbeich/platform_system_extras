@@ -78,17 +78,31 @@ class ProfilerCommandExecutor(CommandExecutor):
     return None
 
   def prepare_device_for_run(self, command, device, run):
-    return None
+    device.root_device()
+    device.remove_file("/data/misc/perfetto-traces/trace.perfetto-trace")
 
   def execute_run(self, command, device, config, run):
     print("Performing run %s" % run)
-    return None
+    process = device.start_perfetto_trace(config)
+    time.sleep(0.5)
+    error = self.trigger_system_event(command, device)
+    if error is not None:
+      return error
+    self.wait_for_profiling_perfetto_trace_to_end(device, process)
 
   def trigger_system_event(self, command, device):
     return None
 
   def retrieve_perf_data(self, command, device):
-    return None
+    device.get_perfetto_trace_data(
+        "/data/misc/perfetto-traces/trace.perfetto-trace", command.out_dir)
+
+  def wait_for_profiling_perfetto_trace_to_end(self, device, process):
+    try:
+      process.wait()
+    except Exception as e:
+      raise Exception(("Failed while waiting for profiling perfetto trace to"
+                       " finish on device %s. %s" % (device.serial, str(e))))
 
   def cleanup(self, command, device):
     return None
