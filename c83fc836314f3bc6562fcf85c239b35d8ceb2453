@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6340f676_4ce1b9e3",
+        "filename": "torq/device.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-16T20:08:54Z",
+      "side": 1,
+      "message": "Thank you, makes sense, when a command fails through ADB, I now always raise an Exception.",
+      "parentUuid": "42410b3f_8f7c1d7f",
+      "range": {
+        "startLine": 183,
+        "startChar": 5,
+        "endLine": 184,
+        "endChar": 61
+      },
+      "revId": "c83fc836314f3bc6562fcf85c239b35d8ceb2453",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "953a8aa5_dcda28b3",
@@ -37,6 +61,24 @@
       "writtenOn": "2024-08-16T18:02:09Z",
       "side": 1,
       "message": "Let\u0027s make these methods more generic:\n```suggestion\n  def remove_file(self, file_path):\n```\n\nDo the same for other methods, for which this applies.",
+      "revId": "c83fc836314f3bc6562fcf85c239b35d8ceb2453",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce584009_f9a8c563",
+        "filename": "torq/device.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-16T20:08:54Z",
+      "side": 1,
+      "message": "Changed this, thank you.",
+      "parentUuid": "953a8aa5_dcda28b3",
       "revId": "c83fc836314f3bc6562fcf85c239b35d8ceb2453",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -64,6 +106,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f33fc941_3bbf325e",
+        "filename": "torq/device.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-16T20:08:54Z",
+      "side": 1,
+      "message": "Changed this, thank you.",
+      "parentUuid": "7df146c4_fe2c5ea9",
+      "range": {
+        "startLine": 199,
+        "startChar": 6,
+        "endLine": 199,
+        "endChar": 36
+      },
+      "revId": "c83fc836314f3bc6562fcf85c239b35d8ceb2453",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8b5bf892_d05b2148",
@@ -77,6 +143,30 @@
       "writtenOn": "2024-08-16T18:02:09Z",
       "side": 1,
       "message": "I don\u0027t think we need this method in device.py",
+      "range": {
+        "startLine": 213,
+        "startChar": 0,
+        "endLine": 220,
+        "endChar": 61
+      },
+      "revId": "c83fc836314f3bc6562fcf85c239b35d8ceb2453",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "791d7b57_324120b1",
+        "filename": "torq/device.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-16T20:08:54Z",
+      "side": 1,
+      "message": "I moved this to command_executor.py",
+      "parentUuid": "8b5bf892_d05b2148",
       "range": {
         "startLine": 213,
         "startChar": 0,
