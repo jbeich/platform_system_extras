@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "abd985d4_c0c9ac9e",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-16T22:42:49Z",
+      "side": 1,
+      "message": "We should also extract this arbitrary sleep duration into a constant and leave a comment explaining why this sleep is necessary.",
+      "range": {
+        "startLine": 91,
+        "startChar": 4,
+        "endLine": 91,
+        "endChar": 19
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "75e62609_35b4922b",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/command_executor.py",
+              "range": {
+                "startLine": 22,
+                "startChar": 0,
+                "endLine": 22,
+                "endChar": 0
+              },
+              "replacement": "PERFETTO_TRACE_START_DELAY_MS \u003d 500\n\n\n"
+            },
+            {
+              "path": "torq/command_executor.py",
+              "range": {
+                "startLine": 91,
+                "startChar": 0,
+                "endLine": 92,
+                "endChar": 0
+              },
+              "replacement": "    time.sleep(PERFETTO_TRACE_START_DELAY_MS / 1000)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "394e59085d0b9671212bbb4ec7620a5fa92f79b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

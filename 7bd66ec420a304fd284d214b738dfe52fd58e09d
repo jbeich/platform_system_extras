@@ -1,0 +1,400 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c9eb91e_4465954d",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-16T22:42:49Z",
+      "side": 1,
+      "message": "Nit: Let\u0027s extract this into a constant.",
+      "range": {
+        "startLine": 98,
+        "startChar": 8,
+        "endLine": 98,
+        "endChar": 57
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "2c840563_6933fc78",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/command_executor.py",
+              "range": {
+                "startLine": 21,
+                "startChar": 0,
+                "endLine": 21,
+                "endChar": 0
+              },
+              "replacement": "PERFETTO_TRACE_FILE \u003d \"/data/misc/perfetto-traces/trace.perfetto-trace\"\n\n"
+            },
+            {
+              "path": "torq/command_executor.py",
+              "range": {
+                "startLine": 82,
+                "startChar": 0,
+                "endLine": 83,
+                "endChar": 0
+              },
+              "replacement": "    device.remove_file(PERFETTO_TRACE_FILE)\n"
+            },
+            {
+              "path": "torq/command_executor.py",
+              "range": {
+                "startLine": 98,
+                "startChar": 0,
+                "endLine": 99,
+                "endChar": 0
+              },
+              "replacement": "        PERFETTO_TRACE_FILE, command.out_dir)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "7bd66ec420a304fd284d214b738dfe52fd58e09d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b181a18a_71396131",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-16T22:42:49Z",
+      "side": 1,
+      "message": "I think catching the genric exception is ok here per: go/pystyle#exceptions-decision.\n\n```\nNever use catch-all except: statements, or catch Exception or StandardError, unless you are re-raising the exception.\n```",
+      "range": {
+        "startLine": 103,
+        "startChar": 4,
+        "endLine": 103,
+        "endChar": 26
+      },
+      "revId": "7bd66ec420a304fd284d214b738dfe52fd58e09d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67f089af_e1dbd742",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-16T22:42:49Z",
+      "side": 1,
+      "message": "Per go/python-tips/046#a-bare-raise, we can just do a bare raise here:\n\n```\ne.add_note(\"Failed while waiting for profiling perfetto trace to\"\n                       \" finish on device %s\" % device.serial)\nraise\n```",
+      "range": {
+        "startLine": 104,
+        "startChar": 6,
+        "endLine": 105,
+        "endChar": 77
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "7fcfd518_b801d819",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/command_executor.py",
+              "range": {
+                "startLine": 104,
+                "startChar": 0,
+                "endLine": 106,
+                "endChar": 0
+              },
+              "replacement": "      e.add_note(\"Failed while waiting for profiling perfetto trace to\"\n                 \" finish on device %s.\" % device.serial)\n      raise\n"
+            }
+          ]
+        }
+      ],
+      "revId": "7bd66ec420a304fd284d214b738dfe52fd58e09d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ee703d0_c2fd7615",
+        "filename": "torq/device.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-16T22:42:49Z",
+      "side": 1,
+      "message": "Nit: Please add the space back.",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 52
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "8771b9f2_3ed5e3e2",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/device.py",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 2,
+                "endChar": 0
+              },
+              "replacement": "# Copyright (C) 2024 The Android Open Source Project.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "7bd66ec420a304fd284d214b738dfe52fd58e09d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4ac5495_52d2aace",
+        "filename": "torq/device.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-16T22:42:49Z",
+      "side": 1,
+      "message": "Same as above, let\u0027s have a bare raise here and then append additional information here.",
+      "range": {
+        "startLine": 118,
+        "startChar": 6,
+        "endLine": 118,
+        "endChar": 68
+      },
+      "revId": "7bd66ec420a304fd284d214b738dfe52fd58e09d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8f0abff_47847233",
+        "filename": "torq/device.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-16T22:42:49Z",
+      "side": 1,
+      "message": "This can be simplified:\n\n```\nreturn self.serial in self.get_adb_devices()\n```",
+      "range": {
+        "startLine": 165,
+        "startChar": 4,
+        "endLine": 168,
+        "endChar": 16
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "ee7b48df_2af8726e",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/device.py",
+              "range": {
+                "startLine": 165,
+                "startChar": 0,
+                "endLine": 169,
+                "endChar": 0
+              },
+              "replacement": "    return self.serial in self.get_adb_devices()\n"
+            }
+          ]
+        }
+      ],
+      "revId": "7bd66ec420a304fd284d214b738dfe52fd58e09d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c17e28ef_519e29a5",
+        "filename": "torq/device.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-16T22:42:49Z",
+      "side": 1,
+      "message": "Same as above, let\u0027s do a bare raise here and elsewhere in this class.",
+      "range": {
+        "startLine": 174,
+        "startChar": 6,
+        "endLine": 175,
+        "endChar": 48
+      },
+      "revId": "7bd66ec420a304fd284d214b738dfe52fd58e09d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91f7d03d_2487fd2c",
+        "filename": "torq/device.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-16T22:42:49Z",
+      "side": 1,
+      "message": "This can be inlined.",
+      "range": {
+        "startLine": 177,
+        "startChar": 44,
+        "endLine": 177,
+        "endChar": 76
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "67e34ce8_8a2c5899",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/device.py",
+              "range": {
+                "startLine": 164,
+                "startChar": 0,
+                "endLine": 170,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "torq/device.py",
+              "range": {
+                "startLine": 177,
+                "startChar": 0,
+                "endLine": 178,
+                "endChar": 0
+              },
+              "replacement": "                                       lambda: self.serial in self.get_adb_devices()):\n"
+            }
+          ]
+        }
+      ],
+      "revId": "7bd66ec420a304fd284d214b738dfe52fd58e09d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92d384a1_9dd0b5cd",
+        "filename": "torq/tests/command_executor_unit_test.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-16T22:42:49Z",
+      "side": 1,
+      "message": "I think that we should refactor this whole unit test to also test the abstract methods in the base class as well as ProfileCommandExecutor:\n\nSo ideally there should be a CommandExecutorTest and ProfilerCommandExecutorTest that extends the base test class.",
+      "range": {
+        "startLine": 30,
+        "startChar": 6,
+        "endLine": 30,
+        "endChar": 29
+      },
+      "revId": "7bd66ec420a304fd284d214b738dfe52fd58e09d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "539a3039_36ebc701",
+        "filename": "torq/tests/command_executor_unit_test.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-16T22:42:49Z",
+      "side": 1,
+      "message": "We can probably extract this into the setUp method if it is called for every method.",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 77
+      },
+      "revId": "7bd66ec420a304fd284d214b738dfe52fd58e09d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69b64a87_3d193ecd",
+        "filename": "torq/tests/device_unit_test.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-16T22:42:49Z",
+      "side": 1,
+      "message": "I think that we are patching `subprocess.run` in every method, we can just mock it in a setUp function that is called for every test case:\n\ngo/mock-cookbook#patching-setup",
+      "range": {
+        "startLine": 231,
+        "startChar": 2,
+        "endLine": 231,
+        "endChar": 54
+      },
+      "revId": "7bd66ec420a304fd284d214b738dfe52fd58e09d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ad18db5_cde77698",
+        "filename": "torq/tests/device_unit_test.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-16T22:42:49Z",
+      "side": 1,
+      "message": "There should be a comment here indicating that no exception is expected to be thrown with the following:\n```\n# No exception is expected to be thrown\nwith self.assertRaises(Exception):\n      adbDevice.root_device()\n```\n\nLet\u0027s use this pattern in all other test cases where we are just testing the positive case where there is no exception thrown.",
+      "range": {
+        "startLine": 240,
+        "startChar": 4,
+        "endLine": 240,
+        "endChar": 27
+      },
+      "revId": "7bd66ec420a304fd284d214b738dfe52fd58e09d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
