@@ -395,6 +395,30 @@
       },
       "revId": "7bd66ec420a304fd284d214b738dfe52fd58e09d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6170856a_bb83f2a7",
+        "filename": "torq/tests/device_unit_test.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-16T22:59:54Z",
+      "side": 1,
+      "message": "Sorry, don\u0027t add the assertion there.",
+      "parentUuid": "4ad18db5_cde77698",
+      "range": {
+        "startLine": 240,
+        "startChar": 4,
+        "endLine": 240,
+        "endChar": 27
+      },
+      "revId": "7bd66ec420a304fd284d214b738dfe52fd58e09d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
