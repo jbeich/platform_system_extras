@@ -275,6 +275,7 @@ class PprofProfileGenerator(object):
         self.dso_filter = set(config['dso_filters']) if config.get('dso_filters') else None
         self.max_chain_length = config['max_chain_length']
         self.tagroot = config.get('tagroot', [])
+        self.show_event_counters = config['show_event_counters']
         self.profile = profile_pb2.Profile()
         self.profile.string_table.append('')
         self.string_table = {}
@@ -323,6 +324,7 @@ class PprofProfileGenerator(object):
         numbers_re = re.compile(r"\d+")
 
         # Process all samples in perf.data, aggregate samples.
+        last_counts: dict[int, int] = {}
         while True:
             report_sample = self.lib.GetNextSample()
             if report_sample is None:
@@ -333,10 +335,11 @@ class PprofProfileGenerator(object):
             symbol = self.lib.GetSymbolOfCurrentSample()
             callchain = self.lib.GetCallChainOfCurrentSample()
 
-            sample_type_id = self.get_sample_type_id(event.name)
             sample = Sample()
+            sample_type_id = self.get_sample_type_id(event.name)
             sample.add_value(sample_type_id, 1)
             sample.add_value(sample_type_id + 1, report_sample.period)
+            self.add_event_counters(sample, last_counts)
             sample.labels.append(Label(
                 self.get_string_id("thread"),
                 self.get_string_id(report_sample.thread_comm)))
@@ -394,6 +397,22 @@ class PprofProfileGenerator(object):
                 location_id = self.get_location_id_for_pseudo_symbol(f'thread:{thread_name}')
                 sample.add_location_id(location_id)
 
+    def add_event_counters(self, sample: Sample, last_counts: dict[int, int]):
+        if not self.show_event_counters:
+            return
+
+        event_counters = self.lib.GetEventCountersOfCurrentSample()
+        for i in range(event_counters.nr):
+            event_counter = event_counters.event_counter[i]
+            sample_type_id = self.get_sample_type_id(event_counter.name, add_suffix='_counter')
+            sample.add_value(sample_type_id, 1)
+
+            event_id = event_counter.id
+            event_acc_count = event_counter.count
+            last_count = last_counts.get(event_id, 0)
+            sample.add_value(sample_type_id + 1, event_acc_count - last_count)
+            last_counts[event_id] = event_acc_count
+
     def _filter_symbol(self, symbol):
         if not self.dso_filter or symbol.dso_name in self.dso_filter:
             return True
@@ -413,7 +432,9 @@ class PprofProfileGenerator(object):
     def get_string(self, str_id):
         return self.profile.string_table[str_id]
 
-    def get_sample_type_id(self, name):
+    def get_sample_type_id(self, name, *, add_suffix: str = None):
+        if add_suffix is not None:
+            name += add_suffix
         sample_type_id = self.sample_types.get(name)
         if sample_type_id is not None:
             return sample_type_id
@@ -669,6 +690,10 @@ def main():
         Add pseudo stack frames at the callstack root. All possible frames are:
         comm (process:<process_name>), thread_comm (thread:<thread_name>).
     """)
+    parser.add_argument(
+        '--show_event_counters', action='store_true',
+        help='Show events in counters for profile recorded with --add-counter options.'
+    )
     sample_filter_group = parser.add_argument_group('Sample filter options')
     sample_filter_group.add_argument('--dso', nargs='+', action='append', help="""
         Use samples only in selected binaries.""")
@@ -689,6 +714,7 @@ def main():
     config['max_chain_length'] = args.max_chain_length
     config['report_lib_options'] = args.report_lib_options
     config['tagroot'] = args.tagroot
+    config['show_event_counters'] = args.show_event_counters
     generator = PprofProfileGenerator(config)
     for record_file in args.record_file:
         generator.load_record_file(record_file)
