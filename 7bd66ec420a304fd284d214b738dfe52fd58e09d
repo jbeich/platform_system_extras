@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8513ccc_dbe498a3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-19T18:31:51Z",
+      "side": 1,
+      "message": "ddde",
+      "revId": "7bd66ec420a304fd284d214b738dfe52fd58e09d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5c9eb91e_4465954d",
@@ -58,6 +75,30 @@
           ]
         }
       ],
+      "revId": "7bd66ec420a304fd284d214b738dfe52fd58e09d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2fdd4761_52fd21b1",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-19T18:31:51Z",
+      "side": 1,
+      "message": "Changed this, thank you.",
+      "parentUuid": "5c9eb91e_4465954d",
+      "range": {
+        "startLine": 98,
+        "startChar": 8,
+        "endLine": 98,
+        "endChar": 57
+      },
       "revId": "7bd66ec420a304fd284d214b738dfe52fd58e09d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -128,6 +169,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c7235bb0_ba2060f6",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-19T18:31:51Z",
+      "side": 1,
+      "message": "add_note is not supported in Python standard library I believe. I also tried adding a .note member variable but this can no longer be accessed in different contexts, such as unit tests, so it would require subclassing Exception, which is not ideal.",
+      "parentUuid": "67f089af_e1dbd742",
+      "range": {
+        "startLine": 104,
+        "startChar": 6,
+        "endLine": 105,
+        "endChar": 77
+      },
+      "revId": "7bd66ec420a304fd284d214b738dfe52fd58e09d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4ee703d0_c2fd7615",
         "filename": "torq/device.py",
         "patchSetId": 9
@@ -167,6 +232,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5cdd9c23_89e0db3d",
+        "filename": "torq/device.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-19T18:31:51Z",
+      "side": 1,
+      "message": "I added back the # before this line if that\u0027s what you meant. I am a bit confused.",
+      "parentUuid": "4ee703d0_c2fd7615",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 52
+      },
+      "revId": "7bd66ec420a304fd284d214b738dfe52fd58e09d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c4ac5495_52d2aace",
@@ -180,6 +269,30 @@
       "writtenOn": "2024-08-16T22:42:49Z",
       "side": 1,
       "message": "Same as above, let\u0027s have a bare raise here and then append additional information here.",
+      "range": {
+        "startLine": 118,
+        "startChar": 6,
+        "endLine": 118,
+        "endChar": 68
+      },
+      "revId": "7bd66ec420a304fd284d214b738dfe52fd58e09d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7bbd5f2_ce14786b",
+        "filename": "torq/device.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-19T18:31:51Z",
+      "side": 1,
+      "message": "As mentioned above, cannot use add_note in standard Python library.",
+      "parentUuid": "c4ac5495_52d2aace",
       "range": {
         "startLine": 118,
         "startChar": 6,
@@ -231,6 +344,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cbea072f_827d0eb7",
+        "filename": "torq/device.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-19T18:31:51Z",
+      "side": 1,
+      "message": "Replaced this, thank you.",
+      "parentUuid": "a8f0abff_47847233",
+      "range": {
+        "startLine": 165,
+        "startChar": 4,
+        "endLine": 168,
+        "endChar": 16
+      },
+      "revId": "7bd66ec420a304fd284d214b738dfe52fd58e09d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c17e28ef_519e29a5",
@@ -244,6 +381,30 @@
       "writtenOn": "2024-08-16T22:42:49Z",
       "side": 1,
       "message": "Same as above, let\u0027s do a bare raise here and elsewhere in this class.",
+      "range": {
+        "startLine": 174,
+        "startChar": 6,
+        "endLine": 175,
+        "endChar": 48
+      },
+      "revId": "7bd66ec420a304fd284d214b738dfe52fd58e09d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "856f9d33_367b2831",
+        "filename": "torq/device.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-19T18:31:51Z",
+      "side": 1,
+      "message": "As mentioned above, cannot use add_note and cannot access notes from unit tests.",
+      "parentUuid": "c17e28ef_519e29a5",
       "range": {
         "startLine": 174,
         "startChar": 6,
@@ -305,6 +466,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d430870c_fffd7d38",
+        "filename": "torq/device.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-19T18:31:51Z",
+      "side": 1,
+      "message": "Changed this, thank you.",
+      "parentUuid": "91f7d03d_2487fd2c",
+      "range": {
+        "startLine": 177,
+        "startChar": 44,
+        "endLine": 177,
+        "endChar": 76
+      },
+      "revId": "7bd66ec420a304fd284d214b738dfe52fd58e09d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "92d384a1_9dd0b5cd",
@@ -351,6 +536,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "06c3c772_0851fb07",
+        "filename": "torq/tests/command_executor_unit_test.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-19T18:31:51Z",
+      "side": 1,
+      "message": "I added this in the setUp method, thank you.",
+      "parentUuid": "539a3039_36ebc701",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 77
+      },
+      "revId": "7bd66ec420a304fd284d214b738dfe52fd58e09d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "69b64a87_3d193ecd",
@@ -364,6 +573,30 @@
       "writtenOn": "2024-08-16T22:42:49Z",
       "side": 1,
       "message": "I think that we are patching `subprocess.run` in every method, we can just mock it in a setUp function that is called for every test case:\n\ngo/mock-cookbook#patching-setup",
+      "range": {
+        "startLine": 231,
+        "startChar": 2,
+        "endLine": 231,
+        "endChar": 54
+      },
+      "revId": "7bd66ec420a304fd284d214b738dfe52fd58e09d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11d132de_da2034f1",
+        "filename": "torq/tests/device_unit_test.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-19T18:31:51Z",
+      "side": 1,
+      "message": "It\u0027s not called for every test. Some tests use Popen instead.",
+      "parentUuid": "69b64a87_3d193ecd",
       "range": {
         "startLine": 231,
         "startChar": 2,
@@ -411,6 +644,30 @@
       "side": 1,
       "message": "Sorry, don\u0027t add the assertion there.",
       "parentUuid": "4ad18db5_cde77698",
+      "range": {
+        "startLine": 240,
+        "startChar": 4,
+        "endLine": 240,
+        "endChar": 27
+      },
+      "revId": "7bd66ec420a304fd284d214b738dfe52fd58e09d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2c5e0ad_5616dd8c",
+        "filename": "torq/tests/device_unit_test.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-19T18:31:51Z",
+      "side": 1,
+      "message": "I added the comment for every succcesful call, thank you.",
+      "parentUuid": "6170856a_bb83f2a7",
       "range": {
         "startLine": 240,
         "startChar": 4,
