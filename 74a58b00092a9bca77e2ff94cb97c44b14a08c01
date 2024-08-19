@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e54d18ee_a6474ae7",
+        "filename": "torq/device.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-19T22:01:29Z",
+      "side": 1,
+      "message": "We should also extract these out as constants as well.",
+      "range": {
+        "startLine": 171,
+        "startChar": 39,
+        "endLine": 171,
+        "endChar": 45
+      },
+      "revId": "74a58b00092a9bca77e2ff94cb97c44b14a08c01",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
