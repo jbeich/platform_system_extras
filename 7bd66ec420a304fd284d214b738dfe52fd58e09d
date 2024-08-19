@@ -513,6 +513,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6a48114_6f516c26",
+        "filename": "torq/tests/command_executor_unit_test.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-19T18:46:42Z",
+      "side": 1,
+      "message": "Didn\u0027t add this yet because the subclasses won\u0027t have any tests in common to inherit",
+      "parentUuid": "92d384a1_9dd0b5cd",
+      "range": {
+        "startLine": 30,
+        "startChar": 6,
+        "endLine": 30,
+        "endChar": 29
+      },
+      "revId": "7bd66ec420a304fd284d214b738dfe52fd58e09d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "539a3039_36ebc701",
