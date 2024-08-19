@@ -22,6 +22,30 @@
       },
       "revId": "74a58b00092a9bca77e2ff94cb97c44b14a08c01",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b094bde_32850412",
+        "filename": "torq/device.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-19T22:11:14Z",
+      "side": 1,
+      "message": "Added this. Introduced ADB_ROOT_TIMED_OUT_LIMIT_SECS \u003d 5 and POLLING_INTERVAL_SECS \u003d 0.5. Left the name of POLLING_INTERVAL_SECS pretty generic because I reuse this for polling in another context in a future CL",
+      "parentUuid": "e54d18ee_a6474ae7",
+      "range": {
+        "startLine": 171,
+        "startChar": 39,
+        "endLine": 171,
+        "endChar": 45
+      },
+      "revId": "74a58b00092a9bca77e2ff94cb97c44b14a08c01",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
