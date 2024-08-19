@@ -193,6 +193,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "782da80f_c76b3910",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-19T20:55:13Z",
+      "side": 1,
+      "message": "Noted. Can you just chain a new exception here then so that we can retain the original context:\n\ngo/python-tips/046#exception-chaining-with-raise-from",
+      "parentUuid": "c7235bb0_ba2060f6",
+      "range": {
+        "startLine": 104,
+        "startChar": 6,
+        "endLine": 105,
+        "endChar": 77
+      },
+      "revId": "7bd66ec420a304fd284d214b738dfe52fd58e09d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4ee703d0_c2fd7615",
         "filename": "torq/device.py",
         "patchSetId": 9
