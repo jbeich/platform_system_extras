@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16d94e06_668d0fcb",
+        "filename": "partition_tools/lpdump.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 1290458
+      },
+      "writtenOn": "2024-08-19T22:34:52Z",
+      "side": 1,
+      "message": "nit: newline after #endif",
+      "revId": "b8fddc34b12bb4de90112b58e36dc871c1e59aff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
