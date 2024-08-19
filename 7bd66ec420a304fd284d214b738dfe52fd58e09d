@@ -777,6 +777,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "94792cca_bccfde03",
+        "filename": "torq/tests/device_unit_test.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-19T21:19:42Z",
+      "side": 1,
+      "message": "We can add it, in setup anyways, but then unnecessary work would be done for a few test cases.",
+      "parentUuid": "11d132de_da2034f1",
+      "range": {
+        "startLine": 231,
+        "startChar": 2,
+        "endLine": 231,
+        "endChar": 54
+      },
+      "revId": "7bd66ec420a304fd284d214b738dfe52fd58e09d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4ad18db5_cde77698",
         "filename": "torq/tests/device_unit_test.py",
         "patchSetId": 9
