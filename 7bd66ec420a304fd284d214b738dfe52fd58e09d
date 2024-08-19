@@ -215,6 +215,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9106d097_60480d8a",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-19T21:18:41Z",
+      "side": 1,
+      "message": "Added Exception chaining, thank you.",
+      "parentUuid": "782da80f_c76b3910",
+      "range": {
+        "startLine": 104,
+        "startChar": 6,
+        "endLine": 105,
+        "endChar": 77
+      },
+      "revId": "7bd66ec420a304fd284d214b738dfe52fd58e09d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4ee703d0_c2fd7615",
@@ -327,6 +351,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "539776c1_829bc8a5",
+        "filename": "torq/device.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-19T21:18:41Z",
+      "side": 1,
+      "message": "Added Exception chaining, thank you.",
+      "parentUuid": "c7bbd5f2_ce14786b",
+      "range": {
+        "startLine": 118,
+        "startChar": 6,
+        "endLine": 118,
+        "endChar": 68
+      },
+      "revId": "7bd66ec420a304fd284d214b738dfe52fd58e09d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a8f0abff_47847233",
@@ -429,6 +477,30 @@
       "side": 1,
       "message": "As mentioned above, cannot use add_note and cannot access notes from unit tests.",
       "parentUuid": "c17e28ef_519e29a5",
+      "range": {
+        "startLine": 174,
+        "startChar": 6,
+        "endLine": 175,
+        "endChar": 48
+      },
+      "revId": "7bd66ec420a304fd284d214b738dfe52fd58e09d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8a29b99_70f32aa9",
+        "filename": "torq/device.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-19T21:18:41Z",
+      "side": 1,
+      "message": "Added Exception chaining, thank you.",
+      "parentUuid": "856f9d33_367b2831",
       "range": {
         "startLine": 174,
         "startChar": 6,
@@ -575,6 +647,30 @@
       "side": 1,
       "message": "Didn\u0027t add this yet because the subclasses won\u0027t have any tests in common to inherit",
       "parentUuid": "a6a48114_6f516c26",
+      "range": {
+        "startLine": 30,
+        "startChar": 6,
+        "endLine": 30,
+        "endChar": 29
+      },
+      "revId": "7bd66ec420a304fd284d214b738dfe52fd58e09d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c33eadf_8a27f41d",
+        "filename": "torq/tests/command_executor_unit_test.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-19T21:18:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f4d26259_b2e16b4b",
       "range": {
         "startLine": 30,
         "startChar": 6,
