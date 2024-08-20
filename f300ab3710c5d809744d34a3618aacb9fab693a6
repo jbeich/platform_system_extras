@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "091016db_e07dd99d",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-08-20T00:33:29Z",
+      "side": 1,
+      "message": "No need to have a separate method. Simply call `process.wait()` here.",
+      "range": {
+        "startLine": 94,
+        "startChar": 4,
+        "endLine": 94,
+        "endChar": 55
+      },
+      "revId": "f300ab3710c5d809744d34a3618aacb9fab693a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f78559b_44678668",
+        "filename": "torq/device.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-08-20T00:33:29Z",
+      "side": 1,
+      "message": "We don\u0027t need to catch exceptions for this case. If we are catching an exception it is probably to catch a specific exception and handle it properly.\n\n```suggestion\n    command_output \u003d subprocess.run([\"adb\", \"devices\"], capture_output\u003dTrue)\n```",
+      "range": {
+        "startLine": 119,
+        "startChar": 4,
+        "endLine": 122,
+        "endChar": 75
+      },
+      "revId": "f300ab3710c5d809744d34a3618aacb9fab693a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "198230d7_a5258ae3",
+        "filename": "torq/device.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-08-20T00:33:29Z",
+      "side": 1,
+      "message": "As we had discussed offline, there is no need to try/except exception for this case and the below ones. We should only catch a specific exception in the case, there is a way to mitigate the issue or the case we can provide a much better description of the actual issue.\n\nWe don\u0027t excpect for `adb root` to fail, if it does it would be an exceptional case and we should simply let the code raise the exception and crash the program. Same for the adb commands below.\n```suggestion\n    subprocess.run([\"adb\", \"-s\", self.serial, \"root\"])\n```",
+      "range": {
+        "startLine": 169,
+        "startChar": 4,
+        "endLine": 173,
+        "endChar": 55
+      },
+      "revId": "f300ab3710c5d809744d34a3618aacb9fab693a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70c895f7_5deb0f6b",
+        "filename": "torq/device.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-08-20T00:33:29Z",
+      "side": 1,
+      "message": "No need to catch an exception.",
+      "range": {
+        "startLine": 182,
+        "startChar": 4,
+        "endLine": 186,
+        "endChar": 66
+      },
+      "revId": "f300ab3710c5d809744d34a3618aacb9fab693a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43d41ece_e8d234ac",
+        "filename": "torq/device.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-08-20T00:33:29Z",
+      "side": 1,
+      "message": "No need to catch a generic exception.",
+      "range": {
+        "startLine": 189,
+        "startChar": 4,
+        "endLine": 198,
+        "endChar": 70
+      },
+      "revId": "f300ab3710c5d809744d34a3618aacb9fab693a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "915362e4_be67430e",
+        "filename": "torq/device.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-08-20T00:33:29Z",
+      "side": 1,
+      "message": "As discussed in https://android-review.git.corp.google.com/c/platform/system/extras/+/3221194/comment/953a8aa5_dcda28b3/ we should make this method more generic as well. This method is not making anything specific to perfetto, so we can provide a more descriptive name such as:\n\n```suggestion\n  def pull_file(self, file_path, out_dir):\n```\n\nAlso, provide the full path from within the `file_path` argument.",
+      "range": {
+        "startLine": 200,
+        "startChar": 6,
+        "endLine": 200,
+        "endChar": 29
+      },
+      "revId": "f300ab3710c5d809744d34a3618aacb9fab693a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed63d59e_9ca215ef",
+        "filename": "torq/device.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-08-20T00:33:29Z",
+      "side": 1,
+      "message": "No need to catch an exception.",
+      "range": {
+        "startLine": 201,
+        "startChar": 4,
+        "endLine": 207,
+        "endChar": 76
+      },
+      "revId": "f300ab3710c5d809744d34a3618aacb9fab693a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
