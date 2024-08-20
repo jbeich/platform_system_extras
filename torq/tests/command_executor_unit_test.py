@@ -41,6 +41,24 @@ class ProfilerCommandExecutorUnitTest(unittest.TestCase):
     self.command_executor = ProfilerCommandExecutor()
 
   @mock.patch.object(sys, "stdout", new_callable=StringIO)
+  @mock.patch.object(sys, "stdout", new_callable=StringIO)
+  @mock.patch.object(subprocess, "Popen", autospec=True)
+  def test_execute_command_one_run_and_use_ui_success(self, mock_process,
+      mock_terminal_output):
+    with mock.patch("command_executor.open_trace", autospec=True):
+      self.mock_command.runs = 1
+      self.mock_command.out_dir = DEFAULT_OUT_DIR
+      self.mock_command.use_ui = True
+      self.mock_create_config.return_value = MOCK_CONFIG, None
+      self.mock_device.start_perfetto_trace.return_value = mock_process
+
+      error = self.command_executor.execute_command(self.mock_command,
+                                                    self.mock_device)
+
+      self.assertEqual(error, None)
+      self.assertEqual(mock_terminal_output.getvalue().strip(),
+                       "Performing run 1")
+
   @mock.patch.object(subprocess, "Popen", autospec=True)
   def test_execute_command_one_run_no_ui_success(self, mock_process,
       mock_terminal_output):
