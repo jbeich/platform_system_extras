@@ -14,37 +14,136 @@
 # limitations under the License.
 #
 
-class CommandExecutor:
-  def __init__(self):
-    raise NotImplementedError
+import time
+from abc import ABC, abstractmethod
+from config_builder import PREDEFINED_PERFETTO_CONFIGS
 
-  def execute(self, command):
-    error = command.validate()
+
+class CommandExecutor(ABC):
+  """
+  Abstract base class representing a command executor.
+  """
+  def __init__(self):
+    pass
+
+  def execute(self, command, device):
+    error = device.check_device_connection()
     if error is not None:
       return error
-    print("executing", command.get_type(), "command")
-    return None
+    error = command.validate(device)
+    if error is not None:
+      return error
+    return self.execute_command(command, device)
+
+  @abstractmethod
+  def execute_command(self, command, device):
+    raise NotImplementedError
 
 
 class ProfilerCommandExecutor(CommandExecutor):
-  def __init__(self):
-    pass
 
-  def execute(self, profiler_command):
-    super().execute(profiler_command)
+  def execute_command(self, command, device):
+    config, error = self.create_config(command)
+    if error is not None:
+      return error
+    error = self.prepare_device(command, device, config)
+    if error is not None:
+      return error
+    for run in range(1, command.runs + 1):
+      error = self.prepare_device_for_run(command, device, run)
+      if error is not None:
+        return error
+      error = self.execute_run(command, device, config, run)
+      if error is not None:
+        return error
+      error = self.retrieve_perf_data(command, device)
+      if error is not None:
+        return error
+      if command.runs != run:
+        time.sleep(command.between_dur_ms / 1000)
+    error = self.cleanup(command, device)
+    if error is not None:
+      return error
+    if command.use_ui:
+      return self.open_ui(command)
+    return None
+
+  def create_config(self, command):
+    if command.perfetto_config in PREDEFINED_PERFETTO_CONFIGS:
+      return PREDEFINED_PERFETTO_CONFIGS[command.perfetto_config](command)
+    else:
+      raise NotImplementedError
+
+  def prepare_device(self, command, device, config):
+    return None
+
+  def prepare_device_for_run(self, command, device, run):
+    return None
+
+  def execute_run(self, command, device, config, run):
+    print("Performing run %s" % run)
+    return None
+
+  def trigger_system_event(self, command, device):
+    return None
+
+  def retrieve_perf_data(self, command, device):
+    return None
+
+  def cleanup(self, command, device):
+    return None
+
+  def open_ui(self, command):
+    return None
 
 
 class HWCommandExecutor(CommandExecutor):
-  def __init__(self):
-    pass
 
-  def execute(self, hw_command):
-    super().execute(hw_command)
+  def execute_command(self, hw_command, device):
+    match hw_command.get_type():
+      case "hw set":
+        return self.execute_hw_set_command(device, hw_command.hw_config,
+                                           hw_command.num_cpus,
+                                           hw_command.memory)
+      case "hw get":
+        return self.execute_hw_get_command(device)
+      case "hw list":
+        return self.execute_hw_list_command(device)
+      case _:
+        raise ValueError("Invalid hw subcommand was used.")
+
+  def execute_hw_set_command(self, device, hw_config, num_cpus, memory):
+    return None
+
+  def execute_hw_get_command(self, device):
+    return None
+
+  def execute_hw_list_command(self, device):
+    return None
 
 
 class ConfigCommandExecutor(CommandExecutor):
-  def __init__(self):
-    pass
 
-  def execute(self, config_command):
-    super().execute(config_command)
+  def execute(self, command, device):
+    return self.execute_command(command, device)
+
+  def execute_command(self, config_command, device):
+    match config_command.get_type():
+      case "config list":
+        return self.execute_config_list_command()
+      case "config show":
+        return self.execute_config_show_command(config_command.config_name)
+      case "config pull":
+        return self.execute_config_pull_command(config_command.config_name,
+                                                config_command.file_path)
+      case _:
+        raise ValueError("Invalid config subcommand was used.")
+
+  def execute_config_list_command(self):
+    return None
+
+  def execute_config_show_command(self, config_name):
+    return None
+
+  def execute_config_pull_command(self, config_name, file_path):
+    return None
