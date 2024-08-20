@@ -45,7 +45,7 @@ class ProfilerCommand(Command):
   """
   def __init__(self, type, event, profiler, out_dir, dur_ms, app, runs,
       simpleperf_event, perfetto_config, between_dur_ms, ui,
-      exclude_ftrace_event, include_ftrace_event, from_user, to_user):
+      excluded_ftrace_events, included_ftrace_events, from_user, to_user):
     super().__init__(type)
     self.event = event
     self.profiler = profiler
@@ -56,9 +56,9 @@ class ProfilerCommand(Command):
     self.simpleperf_event = simpleperf_event
     self.perfetto_config = perfetto_config
     self.between_dur_ms = between_dur_ms
-    self.ui = ui
-    self.exclude_ftrace_event = exclude_ftrace_event
-    self.include_ftrace_event = include_ftrace_event
+    self.use_ui = ui
+    self.excluded_ftrace_events = excluded_ftrace_events
+    self.included_ftrace_events = included_ftrace_events
     self.from_user = from_user
     self.to_user = to_user
     self.command_executor = ProfilerCommandExecutor()

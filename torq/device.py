@@ -16,8 +16,12 @@
 
 import subprocess
 import os
+import time
 from abc import ABC, abstractmethod
 from validation_error import ValidationError
+
+ADB_ROOT_TIMED_OUT_LIMIT_SECS = 5
+POLLING_INTERVAL_SECS = 0.5
 
 
 class Device(ABC):
@@ -36,6 +40,22 @@ class Device(ABC):
 
   @abstractmethod
   def check_device_connection(self):
+    raise NotImplementedError
+
+  @abstractmethod
+  def root_device(self):
+    raise NotImplementedError
+
+  @abstractmethod
+  def remove_file(self, file_path):
+    raise NotImplementedError
+
+  @abstractmethod
+  def start_perfetto_trace(self, config):
+    raise NotImplementedError
+
+  @abstractmethod
+  def pull_file(self, file_path, host_file):
     raise NotImplementedError
 
   @abstractmethod
@@ -95,12 +115,7 @@ class AdbDevice(Device):
     SOMEDEVICE1234    device
     device2:5678    device
     """
-    command_output = None
-    try:
-      command_output = subprocess.run(["adb", "devices"], capture_output=True)
-    except Exception as e:
-      return None, ValidationError(("Command 'adb devices' failed. %s"
-                                    % str(e)), None)
+    command_output = subprocess.run(["adb", "devices"], capture_output=True)
     output_lines = command_output.stdout.decode("utf-8").split("\n")
     devices = []
     for line in output_lines[:-2]:
@@ -109,12 +124,10 @@ class AdbDevice(Device):
       words_in_line = line.split('\t')
       if words_in_line[1] == "device":
         devices.append(words_in_line[0])
-    return devices, None
+    return devices
 
   def check_device_connection(self):
-    devices, error = self.get_adb_devices()
-    if error is not None:
-      return error
+    devices = self.get_adb_devices()
     if len(devices) == 0:
       return ValidationError("There are currently no devices connected.", None)
     if self.serial is not None:
@@ -137,6 +150,37 @@ class AdbDevice(Device):
                               " of the connected devices:\n\t torq --serial %s"
                               % "\n\t torq --serial ".join(devices)))
     return None
+
+  @staticmethod
+  def poll_is_task_completed(timed_out_limit, interval, check_is_completed):
+    start_time = time.time()
+    while True:
+      time.sleep(interval)
+      if check_is_completed():
+        return True
+      if time.time() - start_time > timed_out_limit:
+        return False
+
+  def root_device(self):
+    subprocess.run(["adb", "-s", self.serial, "root"])
+    if not self.poll_is_task_completed(ADB_ROOT_TIMED_OUT_LIMIT_SECS,
+                                       POLLING_INTERVAL_SECS,
+                                       lambda: self.serial in
+                                               self.get_adb_devices()):
+      raise Exception(("Device with serial %s took too long to reconnect after"
+                       " being rooted." % self.serial))
+
+  def remove_file(self, file_path):
+    subprocess.run(["adb", "-s", self.serial, "shell", "rm", file_path])
+
+  def start_perfetto_trace(self, config):
+    return subprocess.Popen(("adb -s %s shell perfetto -c - --txt -o"
+                             " /data/misc/perfetto-traces/"
+                             "trace.perfetto-trace %s"
+                             % (self.serial, config)), shell=True)
+
+  def pull_file(self, file_path, host_file):
+    subprocess.run(["adb", "-s", self.serial, "pull", file_path, host_file])
 
   def get_num_cpus(self):
     raise NotImplementedError

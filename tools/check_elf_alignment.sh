@@ -74,7 +74,7 @@ if [[ "${dir}" == *.apex ]]; then
 
   dir_filename=$(basename "${dir}")
   tmp=$(mktemp -d -t "${dir_filename%.apex}_out_XXXXX")
-  deapexer extract "${dir}" "${tmp}" >/dev/null 2>&1
+  deapexer extract "${dir}" "${tmp}" || { echo "Failed to deapex." && exit 1; }
   dir="${tmp}"
 fi
 
