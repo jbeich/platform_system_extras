@@ -17,8 +17,10 @@
 import time
 from abc import ABC, abstractmethod
 from config_builder import PREDEFINED_PERFETTO_CONFIGS
+from open_ui import open_trace
 
 PERFETTO_TRACE_FILE = "/data/misc/perfetto-traces/trace.perfetto-trace"
+PERFETTO_WEB_UI_ADDRESS = "https://ui.perfetto.dev"
 PERFETTO_TRACE_START_DELAY_SECS = 0.5
 
 
@@ -52,6 +54,7 @@ class ProfilerCommandExecutor(CommandExecutor):
     error = self.prepare_device(command, device, config)
     if error is not None:
       return error
+    host_file = f"{command.out_dir}/trace.perfetto-trace"
     for run in range(1, command.runs + 1):
       error = self.prepare_device_for_run(command, device, run)
       if error is not None:
@@ -59,7 +62,7 @@ class ProfilerCommandExecutor(CommandExecutor):
       error = self.execute_run(command, device, config, run)
       if error is not None:
         return error
-      error = self.retrieve_perf_data(command, device)
+      error = self.retrieve_perf_data(command, device, host_file)
       if error is not None:
         return error
       if command.runs != run:
@@ -68,7 +71,7 @@ class ProfilerCommandExecutor(CommandExecutor):
     if error is not None:
       return error
     if command.use_ui:
-      return self.open_ui(command)
+      open_trace(host_file, PERFETTO_WEB_UI_ADDRESS)
     return None
 
   def create_config(self, command):
@@ -96,9 +99,8 @@ class ProfilerCommandExecutor(CommandExecutor):
   def trigger_system_event(self, command, device):
     return None
 
-  def retrieve_perf_data(self, command, device):
-    device.pull_file(PERFETTO_TRACE_FILE, ("%s/trace.perfetto-trace"
-                                           % command.out_dir))
+  def retrieve_perf_data(self, command, device, host_file):
+    device.pull_file(PERFETTO_TRACE_FILE, host_file)
 
   def cleanup(self, command, device):
     return None
