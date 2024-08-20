@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d23706e9_7aec3101",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-20T04:00:55Z",
+      "side": 1,
+      "message": "Changed this, thank you.",
+      "parentUuid": "091016db_e07dd99d",
+      "range": {
+        "startLine": 94,
+        "startChar": 4,
+        "endLine": 94,
+        "endChar": 55
+      },
+      "revId": "f300ab3710c5d809744d34a3618aacb9fab693a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1f78559b_44678668",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-08-20T00:33:29Z",
       "side": 1,
       "message": "We don\u0027t need to catch exceptions for this case. If we are catching an exception it is probably to catch a specific exception and handle it properly.\n\n```suggestion\n    command_output \u003d subprocess.run([\"adb\", \"devices\"], capture_output\u003dTrue)\n```",
+      "range": {
+        "startLine": 119,
+        "startChar": 4,
+        "endLine": 122,
+        "endChar": 75
+      },
+      "revId": "f300ab3710c5d809744d34a3618aacb9fab693a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d64d5740_3d7fd71d",
+        "filename": "torq/device.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-20T04:00:55Z",
+      "side": 1,
+      "message": "Makes sense, I changed it, thank you.",
+      "parentUuid": "1f78559b_44678668",
       "range": {
         "startLine": 119,
         "startChar": 4,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e29fe8e1_36a91012",
+        "filename": "torq/device.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-20T04:00:55Z",
+      "side": 1,
+      "message": "This makes sense, sorry I think I got confused and thought you wanted me to raise Exceptions instead of returning ValidationErrors. I removed try/catch statements, thank you.",
+      "parentUuid": "198230d7_a5258ae3",
+      "range": {
+        "startLine": 169,
+        "startChar": 4,
+        "endLine": 173,
+        "endChar": 55
+      },
+      "revId": "f300ab3710c5d809744d34a3618aacb9fab693a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "70c895f7_5deb0f6b",
@@ -83,6 +155,30 @@
       "writtenOn": "2024-08-20T00:33:29Z",
       "side": 1,
       "message": "No need to catch an exception.",
+      "range": {
+        "startLine": 182,
+        "startChar": 4,
+        "endLine": 186,
+        "endChar": 66
+      },
+      "revId": "f300ab3710c5d809744d34a3618aacb9fab693a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "31ffeb21_8e48207f",
+        "filename": "torq/device.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-20T04:00:55Z",
+      "side": 1,
+      "message": "Removed try/catch statements, thank you.",
+      "parentUuid": "70c895f7_5deb0f6b",
       "range": {
         "startLine": 182,
         "startChar": 4,
@@ -116,6 +212,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c78d50e6_5b5c2cfd",
+        "filename": "torq/device.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-20T04:00:55Z",
+      "side": 1,
+      "message": "Removed try/catch statements, thank you.",
+      "parentUuid": "43d41ece_e8d234ac",
+      "range": {
+        "startLine": 189,
+        "startChar": 4,
+        "endLine": 198,
+        "endChar": 70
+      },
+      "revId": "f300ab3710c5d809744d34a3618aacb9fab693a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "915362e4_be67430e",
@@ -139,6 +259,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "75d1e88e_5d7737c2",
+        "filename": "torq/device.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-20T04:00:55Z",
+      "side": 1,
+      "message": "Changed this, thank you.",
+      "parentUuid": "915362e4_be67430e",
+      "range": {
+        "startLine": 200,
+        "startChar": 6,
+        "endLine": 200,
+        "endChar": 29
+      },
+      "revId": "f300ab3710c5d809744d34a3618aacb9fab693a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ed63d59e_9ca215ef",
@@ -152,6 +296,30 @@
       "writtenOn": "2024-08-20T00:33:29Z",
       "side": 1,
       "message": "No need to catch an exception.",
+      "range": {
+        "startLine": 201,
+        "startChar": 4,
+        "endLine": 207,
+        "endChar": 76
+      },
+      "revId": "f300ab3710c5d809744d34a3618aacb9fab693a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "621b12b2_7116fdbd",
+        "filename": "torq/device.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-20T04:00:55Z",
+      "side": 1,
+      "message": "Removed try/catch statements, thank you.",
+      "parentUuid": "ed63d59e_9ca215ef",
       "range": {
         "startLine": 201,
         "startChar": 4,
