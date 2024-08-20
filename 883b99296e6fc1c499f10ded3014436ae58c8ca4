@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "28570e1c_3cc0ed3f",
+        "filename": "torq/device.py",
+        "patchSetId": 13
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-20T16:42:30Z",
+      "side": 1,
+      "message": "Replaced this, thank you.",
+      "parentUuid": "2ae80888_3f0c46bc",
+      "range": {
+        "startLine": 182,
+        "startChar": 22,
+        "endLine": 182,
+        "endChar": 32
+      },
+      "revId": "883b99296e6fc1c499f10ded3014436ae58c8ca4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1fc6e16f_954a7af6",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-08-20T16:26:13Z",
       "side": 1,
       "message": "As mentioned in the previous comment, this method shouldn\u0027t be specific to perfetto. So instead of passing `out_dir` simply pass the complete output file path. Maybe `host_file`?",
+      "range": {
+        "startLine": 184,
+        "startChar": 21,
+        "endLine": 184,
+        "endChar": 44
+      },
+      "revId": "883b99296e6fc1c499f10ded3014436ae58c8ca4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92fa0508_71f3acec",
+        "filename": "torq/device.py",
+        "patchSetId": 13
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-20T16:42:30Z",
+      "side": 1,
+      "message": "Replaced out_dir with host_file, and I pass in the complete path from command_executor.py, now thank you.",
+      "parentUuid": "1fc6e16f_954a7af6",
       "range": {
         "startLine": 184,
         "startChar": 21,
