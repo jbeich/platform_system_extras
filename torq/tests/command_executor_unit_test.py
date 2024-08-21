@@ -16,19 +16,18 @@
 
 import unittest
 import sys
+import subprocess
 import command_executor
 from unittest import mock
 from io import StringIO
 from command import ProfilerCommand
 from command_executor import ProfilerCommandExecutor
-from validation_error import ValidationError
+from device import AdbDevice
 from torq import DEFAULT_OUT_DIR
 
-MOCK_DEVICE = "mock-device"
 MOCK_ERROR = "mock-error"
 MOCK_CONFIG = "mock-config"
-MOCK_HOST_PATH = "mock-host-path"
-MOCK_VALIDATION_ERROR = ValidationError(MOCK_ERROR, None)
+MOCK_SERIAL = "mock-serial"
 
 
 class ProfilerCommandExecutorUnitTest(unittest.TestCase):
@@ -39,50 +38,56 @@ class ProfilerCommandExecutorUnitTest(unittest.TestCase):
 
   @mock.patch.object(sys, "stdout", new_callable=StringIO)
   @mock.patch.object(command_executor, "open_trace", autospec=True)
-  @mock.patch.object(ProfilerCommandExecutor, "retrieve_perf_data",
-                     autospec=True)
-  @mock.patch.object(ProfilerCommandExecutor, "execute_run", autospec=True)
-  @mock.patch.object(ProfilerCommandExecutor, "prepare_device_for_run",
-                     autospec=True)
-  def test_execute_command_print_current_run_success(self,
-      mock_prepare_device_for_run, mock_execute_run, mock_retrieve_perf_data,
-      mock_open_trace,  mock_terminal_output):
+  @mock.patch.object(AdbDevice, "pull_file", autospec=True)
+  @mock.patch.object(subprocess, "Popen", autospec=True)
+  @mock.patch.object(AdbDevice, "start_perfetto_trace", autospec=True)
+  @mock.patch.object(AdbDevice, "remove_file", autospec=True)
+  @mock.patch.object(AdbDevice, "root_device", autospec=True)
+  def test_execute_command_one_run_and_use_ui_success(self, mock_root_device,
+      mock_remove_file, mock_start_perfetto_trace, mock_process,
+      mock_pull_file, mock_open_trace, mock_terminal_output):
     mock_command = mock.create_autospec(ProfilerCommand, instance=True)
     mock_command.runs = 1
-    mock_command.use_ui = False
     mock_command.out_dir = DEFAULT_OUT_DIR
+    mock_command.use_ui = True
+    device = AdbDevice(MOCK_SERIAL)
     self.mock_create_config.return_value = MOCK_CONFIG, None
-    mock_prepare_device_for_run.return_value = None
-    mock_execute_run.side_effect = (lambda profiler_command_executor, device,
-        command, config, run: (print("Performing run %s" % run), None)[1])
-    mock_retrieve_perf_data.return_value = None
+    mock_root_device.return_value = None
+    mock_remove_file.return_value = None
+    mock_start_perfetto_trace.return_value = mock_process
+    mock_process.wait.return_value = None
+    mock_pull_file.return_value = None
     mock_open_trace.return_value = None
     executor = ProfilerCommandExecutor()
 
-    error = executor.execute_command(mock_command, MOCK_DEVICE)
+    error = executor.execute_command(mock_command, device)
 
     self.assertEqual(error, None)
     self.assertEqual(mock_terminal_output.getvalue().strip(),
                      "Performing run 1")
 
-  @mock.patch.object(ProfilerCommandExecutor, "retrieve_perf_data",
-                     autospec=True)
-  @mock.patch.object(ProfilerCommandExecutor, "execute_run", autospec=True)
-  @mock.patch.object(ProfilerCommandExecutor, "prepare_device_for_run",
-                     autospec=True)
-  def test_execute_command_no_ui_success(self, mock_prepare_device_for_run,
-      mock_execute_run, mock_retrieve_perf_data):
+  @mock.patch.object(AdbDevice, "pull_file", autospec=True)
+  @mock.patch.object(subprocess, "Popen", autospec=True)
+  @mock.patch.object(AdbDevice, "start_perfetto_trace", autospec=True)
+  @mock.patch.object(AdbDevice, "remove_file", autospec=True)
+  @mock.patch.object(AdbDevice, "root_device", autospec=True)
+  def test_execute_command_one_run_no_ui_success(self, mock_root_device,
+      mock_remove_file, mock_start_perfetto_trace, mock_process,
+      mock_pull_file):
     mock_command = mock.create_autospec(ProfilerCommand, instance=True)
     mock_command.runs = 1
     mock_command.out_dir = DEFAULT_OUT_DIR
     mock_command.use_ui = False
+    device = AdbDevice(MOCK_SERIAL)
     self.mock_create_config.return_value = MOCK_CONFIG, None
-    mock_prepare_device_for_run.return_value = None
-    mock_execute_run.return_value = None
-    mock_retrieve_perf_data.return_value = None
+    mock_root_device.return_value = None
+    mock_remove_file.return_value = None
+    mock_start_perfetto_trace.return_value = mock_process
+    mock_process.wait.return_value = None
+    mock_pull_file.return_value = None
     executor = ProfilerCommandExecutor()
 
-    error = executor.execute_command(mock_command, MOCK_DEVICE)
+    error = executor.execute_command(mock_command, device)
 
     self.assertEqual(error, None)
 
@@ -97,100 +102,107 @@ class ProfilerCommandExecutorUnitTest(unittest.TestCase):
     self.assertEqual(error.message, MOCK_ERROR)
     self.assertEqual(error.suggestion, None)
 
-  @mock.patch.object(ProfilerCommandExecutor, "prepare_device", autospec=True)
-  def test_execute_command_prepare_device_failure(self, mock_prepare_device):
-    mock_command = mock.create_autospec(ProfilerCommand, instance=True)
-    self.mock_create_config.return_value = MOCK_CONFIG, None
-    mock_prepare_device.return_value = MOCK_VALIDATION_ERROR
-    executor = ProfilerCommandExecutor()
-
-    error = executor.execute_command(mock_command, MOCK_DEVICE)
-
-    self.assertNotEqual(error, None)
-    self.assertEqual(error.message, MOCK_ERROR)
-    self.assertEqual(error.suggestion, None)
-
-  @mock.patch.object(ProfilerCommandExecutor, "prepare_device_for_run",
-                     autospec=True)
-  def test_execute_command_prepare_device_for_run_failure(self,
-      mock_prepare_device_for_run):
+  @mock.patch.object(AdbDevice, "root_device", autospec=True)
+  def test_execute_command_prepare_device_for_run_root_failure(self,
+      mock_root_device):
     mock_command = mock.create_autospec(ProfilerCommand, instance=True)
     mock_command.runs = 1
     mock_command.out_dir = DEFAULT_OUT_DIR
+    device = AdbDevice(MOCK_SERIAL)
     self.mock_create_config.return_value = MOCK_CONFIG, None
-    mock_prepare_device_for_run.return_value = MOCK_VALIDATION_ERROR
+    mock_root_device.side_effect = Exception(MOCK_ERROR)
     executor = ProfilerCommandExecutor()
 
-    error = executor.execute_command(mock_command, MOCK_DEVICE)
+    with self.assertRaises(Exception) as e:
+      executor.execute_command(mock_command, device)
 
-    self.assertNotEqual(error, None)
-    self.assertEqual(error.message, MOCK_ERROR)
-    self.assertEqual(error.suggestion, None)
+    self.assertEqual(str(e.exception), MOCK_ERROR)
 
-  @mock.patch.object(ProfilerCommandExecutor, "execute_run", autospec=True)
-  @mock.patch.object(ProfilerCommandExecutor, "prepare_device_for_run",
-                     autospec=True)
-  def test_execute_command_execute_run_failure(self,
-      mock_prepare_device_for_run, mock_execute_run):
+  @mock.patch.object(AdbDevice, "remove_file", autospec=True)
+  @mock.patch.object(AdbDevice, "root_device", autospec=True)
+  def test_execute_command_prepare_device_for_run_remove_file_failure(self,
+      mock_root_device, mock_remove_file):
     mock_command = mock.create_autospec(ProfilerCommand, instance=True)
     mock_command.runs = 1
     mock_command.out_dir = DEFAULT_OUT_DIR
+    device = AdbDevice(MOCK_SERIAL)
     self.mock_create_config.return_value = MOCK_CONFIG, None
-    mock_prepare_device_for_run.return_value = None
-    mock_execute_run.return_value = MOCK_VALIDATION_ERROR
+    mock_root_device.return_value = None
+    mock_remove_file.side_effect = Exception(MOCK_ERROR)
     executor = ProfilerCommandExecutor()
 
-    error = executor.execute_command(mock_command, MOCK_DEVICE)
+    with self.assertRaises(Exception) as e:
+      executor.execute_command(mock_command, device)
 
-    self.assertNotEqual(error, None)
-    self.assertEqual(error.message, MOCK_ERROR)
-    self.assertEqual(error.suggestion, None)
+    self.assertEqual(str(e.exception), MOCK_ERROR)
 
-  @mock.patch.object(ProfilerCommandExecutor, "retrieve_perf_data",
-                     autospec=True)
-  @mock.patch.object(ProfilerCommandExecutor, "execute_run", autospec=True)
-  @mock.patch.object(ProfilerCommandExecutor, "prepare_device_for_run",
-                     autospec=True)
-  def test_execute_command_retrieve_perf_data_failure(self,
-      mock_prepare_device_for_run, mock_execute_run, mock_retrieve_perf_data):
+  @mock.patch.object(AdbDevice, "start_perfetto_trace", autospec=True)
+  @mock.patch.object(AdbDevice, "remove_file", autospec=True)
+  @mock.patch.object(AdbDevice, "root_device", autospec=True)
+  def test_execute_command_execute_run_start_perfetto_trace_failure(self,
+      mock_root_device, mock_remove_file, mock_start_perfetto_trace):
     mock_command = mock.create_autospec(ProfilerCommand, instance=True)
     mock_command.runs = 1
     mock_command.out_dir = DEFAULT_OUT_DIR
+    device = AdbDevice(MOCK_SERIAL)
     self.mock_create_config.return_value = MOCK_CONFIG, None
-    mock_prepare_device_for_run.return_value = None
-    mock_execute_run.return_value = None
-    mock_retrieve_perf_data.return_value = MOCK_VALIDATION_ERROR
+    mock_root_device.return_value = None
+    mock_remove_file.return_value = None
+    mock_start_perfetto_trace.side_effect = Exception(MOCK_ERROR)
     executor = ProfilerCommandExecutor()
 
-    error = executor.execute_command(mock_command, MOCK_DEVICE)
+    with self.assertRaises(Exception) as e:
+      executor.execute_command(mock_command, device)
 
-    self.assertNotEqual(error, None)
-    self.assertEqual(error.message, MOCK_ERROR)
-    self.assertEqual(error.suggestion, None)
+    self.assertEqual(str(e.exception), MOCK_ERROR)
 
-  @mock.patch.object(ProfilerCommandExecutor, "cleanup", autospec=True)
-  @mock.patch.object(ProfilerCommandExecutor, "retrieve_perf_data",
-                     autospec=True)
-  @mock.patch.object(ProfilerCommandExecutor, "execute_run", autospec=True)
-  @mock.patch.object(ProfilerCommandExecutor, "prepare_device_for_run",
-                     autospec=True)
-  def test_execute_command_cleanup_failure(self, mock_prepare_device_for_run,
-      mock_execute_run, mock_retrieve_perf_data, mock_cleanup):
+  @mock.patch.object(subprocess, "Popen", autospec=True)
+  @mock.patch.object(AdbDevice, "start_perfetto_trace", autospec=True)
+  @mock.patch.object(AdbDevice, "remove_file", autospec=True)
+  @mock.patch.object(AdbDevice, "root_device", autospec=True)
+  def test_execute_command_execute_run_start_process_wait_failure(self,
+      mock_root_device, mock_remove_file, mock_start_perfetto_trace,
+      mock_process):
     mock_command = mock.create_autospec(ProfilerCommand, instance=True)
     mock_command.runs = 1
     mock_command.out_dir = DEFAULT_OUT_DIR
+    device = AdbDevice(MOCK_SERIAL)
     self.mock_create_config.return_value = MOCK_CONFIG, None
-    mock_prepare_device_for_run.return_value = None
-    mock_execute_run.return_value = None
-    mock_retrieve_perf_data.return_value = None
-    mock_cleanup.return_value = MOCK_VALIDATION_ERROR
+    mock_root_device.return_value = None
+    mock_remove_file.return_value = None
+    mock_start_perfetto_trace.return_value = mock_process
+    mock_process.wait.side_effect = Exception(MOCK_ERROR)
     executor = ProfilerCommandExecutor()
 
-    error = executor.execute_command(mock_command, MOCK_DEVICE)
+    with self.assertRaises(Exception) as e:
+      executor.execute_command(mock_command, device)
 
-    self.assertNotEqual(error, None)
-    self.assertEqual(error.message, MOCK_ERROR)
-    self.assertEqual(error.suggestion, None)
+    self.assertEqual(str(e.exception), MOCK_ERROR)
+
+  @mock.patch.object(AdbDevice, "pull_file", autospec=True)
+  @mock.patch.object(subprocess, "Popen", autospec=True)
+  @mock.patch.object(AdbDevice, "start_perfetto_trace", autospec=True)
+  @mock.patch.object(AdbDevice, "remove_file", autospec=True)
+  @mock.patch.object(AdbDevice, "root_device", autospec=True)
+  def test_execute_command_execute_retrieve_perf_data_pull_file_failure(self,
+      mock_root_device, mock_remove_file, mock_start_perfetto_trace,
+      mock_process, mock_pull_file):
+    mock_command = mock.create_autospec(ProfilerCommand, instance=True)
+    mock_command.runs = 1
+    mock_command.out_dir = DEFAULT_OUT_DIR
+    device = AdbDevice(MOCK_SERIAL)
+    self.mock_create_config.return_value = MOCK_CONFIG, None
+    mock_root_device.return_value = None
+    mock_remove_file.return_value = None
+    mock_start_perfetto_trace.return_value = mock_process
+    mock_process.wait.return_value = None
+    mock_pull_file.side_effect = Exception(MOCK_ERROR)
+    executor = ProfilerCommandExecutor()
+
+    with self.assertRaises(Exception) as e:
+      executor.execute_command(mock_command, device)
+
+    self.assertEqual(str(e.exception), MOCK_ERROR)
 
 
 if __name__ == '__main__':
