@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "147080bb_290b79a5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-08-21T17:05:32Z",
+      "side": 1,
+      "message": "Remove this line, its duplicated",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 38
+      },
+      "revId": "8a5e5e317160ea6ff43c9218665e95061e8eaf0e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f079aae4_8a742d03",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-08-21T17:05:32Z",
+      "side": 1,
+      "message": "There is no need to define the variable at the top since you are assigning a new value on each run.",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 65
+      },
+      "revId": "8a5e5e317160ea6ff43c9218665e95061e8eaf0e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33070121_fd2b24a1",
+        "filename": "torq/tests/command_executor_unit_test.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-08-21T17:05:32Z",
+      "side": 1,
+      "message": "If we are unit testing ProfilerCommandExecutor then we shouldn\u0027t be mocking any methods in ProfilerCommandExecutor. I think we missed this on the previous CL.\n\nIf we are only testing the commands implemented in CommandExecutor, then we should be testing that class instead.",
+      "range": {
+        "startLine": 42,
+        "startChar": 2,
+        "endLine": 46,
+        "endChar": 35
+      },
+      "revId": "8a5e5e317160ea6ff43c9218665e95061e8eaf0e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
