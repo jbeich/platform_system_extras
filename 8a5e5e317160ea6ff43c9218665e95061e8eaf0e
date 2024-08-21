@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e8ac9f4d_3f4ecc02",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-21T17:13:18Z",
+      "side": 1,
+      "message": "Nit: Capitalize this.",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 1
+      },
+      "revId": "8a5e5e317160ea6ff43c9218665e95061e8eaf0e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "147080bb_290b79a5",
         "filename": "/COMMIT_MSG",
         "patchSetId": 12
@@ -66,6 +89,329 @@
         "endLine": 46,
         "endChar": 35
       },
+      "revId": "8a5e5e317160ea6ff43c9218665e95061e8eaf0e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f694fdb_cb167c53",
+        "filename": "torq/tests/command_executor_unit_test.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-21T17:13:18Z",
+      "side": 1,
+      "message": "Can you please create a bug to replace these mocks of the class under test. Ideally, we should be mocking some other dependency, such as the Device class in this case.",
+      "range": {
+        "startLine": 71,
+        "startChar": 21,
+        "endLine": 71,
+        "endChar": 44
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "bc164c3c_e9b93a94",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/tests/command_executor_unit_test.py",
+              "range": {
+                "startLine": 73,
+                "startChar": 0,
+                "endLine": 73,
+                "endChar": 0
+              },
+              "replacement": "  # TODO(b/289251111): Replace mocks of the class under test.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "8a5e5e317160ea6ff43c9218665e95061e8eaf0e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b3697a3_ef5f7c0a",
+        "filename": "torq/tests/command_executor_unit_test.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-21T17:13:18Z",
+      "side": 1,
+      "message": "Could we create this mock in one line, by passing in the constructor arguments.\n\nSame elsewhere.",
+      "range": {
+        "startLine": 75,
+        "startChar": 4,
+        "endLine": 78,
+        "endChar": 31
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "68861cea_b9dbafbf",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/tests/command_executor_unit_test.py",
+              "range": {
+                "startLine": 50,
+                "startChar": 0,
+                "endLine": 54,
+                "endChar": 0
+              },
+              "replacement": "    mock_command \u003d mock.create_autospec(ProfilerCommand, instance\u003dTrue,\n        runs\u003d1, use_ui\u003dFalse, out_dir\u003dDEFAULT_OUT_DIR)\n"
+            },
+            {
+              "path": "torq/tests/command_executor_unit_test.py",
+              "range": {
+                "startLine": 75,
+                "startChar": 0,
+                "endLine": 79,
+                "endChar": 0
+              },
+              "replacement": "    mock_command \u003d mock.create_autospec(ProfilerCommand, instance\u003dTrue,\n        runs\u003d1, use_ui\u003dFalse, out_dir\u003dDEFAULT_OUT_DIR)\n"
+            },
+            {
+              "path": "torq/tests/command_executor_unit_test.py",
+              "range": {
+                "startLine": 117,
+                "startChar": 0,
+                "endLine": 120,
+                "endChar": 0
+              },
+              "replacement": "    mock_command \u003d mock.create_autospec(ProfilerCommand, instance\u003dTrue,\n        runs\u003d1, out_dir\u003dDEFAULT_OUT_DIR)\n"
+            },
+            {
+              "path": "torq/tests/command_executor_unit_test.py",
+              "range": {
+                "startLine": 135,
+                "startChar": 0,
+                "endLine": 138,
+                "endChar": 0
+              },
+              "replacement": "    mock_command \u003d mock.create_autospec(ProfilerCommand, instance\u003dTrue,\n        runs\u003d1, out_dir\u003dDEFAULT_OUT_DIR)\n"
+            },
+            {
+              "path": "torq/tests/command_executor_unit_test.py",
+              "range": {
+                "startLine": 156,
+                "startChar": 0,
+                "endLine": 159,
+                "endChar": 0
+              },
+              "replacement": "    mock_command \u003d mock.create_autospec(ProfilerCommand, instance\u003dTrue,\n        runs\u003d1, out_dir\u003dDEFAULT_OUT_DIR)\n"
+            },
+            {
+              "path": "torq/tests/command_executor_unit_test.py",
+              "range": {
+                "startLine": 179,
+                "startChar": 0,
+                "endLine": 182,
+                "endChar": 0
+              },
+              "replacement": "    mock_command \u003d mock.create_autospec(ProfilerCommand, instance\u003dTrue,\n        runs\u003d1, out_dir\u003dDEFAULT_OUT_DIR)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "8a5e5e317160ea6ff43c9218665e95061e8eaf0e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6087eec6_67297a4e",
+        "filename": "torq/tests/command_executor_unit_test.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-21T17:13:18Z",
+      "side": 1,
+      "message": "We can just inline this since it is only used once.",
+      "range": {
+        "startLine": 83,
+        "startChar": 4,
+        "endLine": 85,
+        "endChar": 63
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "94cb4155_144f88e2",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/tests/command_executor_unit_test.py",
+              "range": {
+                "startLine": 60,
+                "startChar": 0,
+                "endLine": 61,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "torq/tests/command_executor_unit_test.py",
+              "range": {
+                "startLine": 62,
+                "startChar": 0,
+                "endLine": 63,
+                "endChar": 0
+              },
+              "replacement": "    error \u003d ProfilerCommandExecutor().execute_command(mock_command, MOCK_DEVICE)\n"
+            },
+            {
+              "path": "torq/tests/command_executor_unit_test.py",
+              "range": {
+                "startLine": 83,
+                "startChar": 0,
+                "endLine": 84,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "torq/tests/command_executor_unit_test.py",
+              "range": {
+                "startLine": 85,
+                "startChar": 0,
+                "endLine": 86,
+                "endChar": 0
+              },
+              "replacement": "    error \u003d ProfilerCommandExecutor().execute_command(mock_command, MOCK_DEVICE)\n"
+            },
+            {
+              "path": "torq/tests/command_executor_unit_test.py",
+              "range": {
+                "startLine": 92,
+                "startChar": 0,
+                "endLine": 93,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "torq/tests/command_executor_unit_test.py",
+              "range": {
+                "startLine": 94,
+                "startChar": 0,
+                "endLine": 95,
+                "endChar": 0
+              },
+              "replacement": "    error \u003d ProfilerCommandExecutor().execute_command(mock_command, MOCK_DEVICE)\n"
+            },
+            {
+              "path": "torq/tests/command_executor_unit_test.py",
+              "range": {
+                "startLine": 105,
+                "startChar": 0,
+                "endLine": 106,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "torq/tests/command_executor_unit_test.py",
+              "range": {
+                "startLine": 107,
+                "startChar": 0,
+                "endLine": 108,
+                "endChar": 0
+              },
+              "replacement": "    error \u003d ProfilerCommandExecutor().execute_command(mock_command, MOCK_DEVICE)\n"
+            },
+            {
+              "path": "torq/tests/command_executor_unit_test.py",
+              "range": {
+                "startLine": 122,
+                "startChar": 0,
+                "endLine": 123,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "torq/tests/command_executor_unit_test.py",
+              "range": {
+                "startLine": 124,
+                "startChar": 0,
+                "endLine": 125,
+                "endChar": 0
+              },
+              "replacement": "    error \u003d ProfilerCommandExecutor().execute_command(mock_command, MOCK_DEVICE)\n"
+            },
+            {
+              "path": "torq/tests/command_executor_unit_test.py",
+              "range": {
+                "startLine": 141,
+                "startChar": 0,
+                "endLine": 142,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "torq/tests/command_executor_unit_test.py",
+              "range": {
+                "startLine": 143,
+                "startChar": 0,
+                "endLine": 144,
+                "endChar": 0
+              },
+              "replacement": "    error \u003d ProfilerCommandExecutor().execute_command(mock_command, MOCK_DEVICE)\n"
+            },
+            {
+              "path": "torq/tests/command_executor_unit_test.py",
+              "range": {
+                "startLine": 163,
+                "startChar": 0,
+                "endLine": 164,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "torq/tests/command_executor_unit_test.py",
+              "range": {
+                "startLine": 165,
+                "startChar": 0,
+                "endLine": 166,
+                "endChar": 0
+              },
+              "replacement": "    error \u003d ProfilerCommandExecutor().execute_command(mock_command, MOCK_DEVICE)\n"
+            },
+            {
+              "path": "torq/tests/command_executor_unit_test.py",
+              "range": {
+                "startLine": 187,
+                "startChar": 0,
+                "endLine": 188,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "torq/tests/command_executor_unit_test.py",
+              "range": {
+                "startLine": 189,
+                "startChar": 0,
+                "endLine": 190,
+                "endChar": 0
+              },
+              "replacement": "    error \u003d ProfilerCommandExecutor().execute_command(mock_command, MOCK_DEVICE)\n"
+            }
+          ]
+        }
+      ],
       "revId": "8a5e5e317160ea6ff43c9218665e95061e8eaf0e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
