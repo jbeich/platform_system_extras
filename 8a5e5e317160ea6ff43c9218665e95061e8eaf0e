@@ -144,6 +144,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "14e14f68_89b7a315",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-21T21:24:02Z",
+      "side": 1,
+      "message": "We need it because we also need to refer to it outside of the loop if it is",
+      "parentUuid": "36534095_5cb0414b",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 65
+      },
+      "revId": "8a5e5e317160ea6ff43c9218665e95061e8eaf0e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "33070121_fd2b24a1",
         "filename": "torq/tests/command_executor_unit_test.py",
         "patchSetId": 12
