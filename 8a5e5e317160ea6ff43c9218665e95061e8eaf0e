@@ -72,6 +72,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "36534095_5cb0414b",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-21T17:15:56Z",
+      "side": 1,
+      "message": "I think that we need to handle the case where we open the trace at the end, which exists outside of the for loop.",
+      "parentUuid": "f079aae4_8a742d03",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 65
+      },
+      "revId": "8a5e5e317160ea6ff43c9218665e95061e8eaf0e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "33070121_fd2b24a1",
         "filename": "torq/tests/command_executor_unit_test.py",
         "patchSetId": 12
