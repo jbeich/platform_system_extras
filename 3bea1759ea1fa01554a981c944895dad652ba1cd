@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "019b59ee_902c442a",
+        "filename": "torq/tests/device_unit_test.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-22T22:19:18Z",
+      "side": 1,
+      "message": "I think we could either just make this a class member or put it in the setup method to avoid having to obtain this mock every time.",
+      "range": {
+        "startLine": 45,
+        "startChar": 2,
+        "endLine": 47,
+        "endChar": 75
+      },
+      "revId": "3bea1759ea1fa01554a981c944895dad652ba1cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f968d731_9fe572f0",
+        "filename": "torq/tests/device_unit_test.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-22T22:19:18Z",
+      "side": 1,
+      "message": "I think we could also refactor the function into something like this:\n\n```\ndef subprocess_output():\n    yield self.generate_empty_completed_process()\n    while True:\n        yield self.generate_adb_devices_result([])\n```",
+      "range": {
+        "startLine": 254,
+        "startChar": 4,
+        "endLine": 256,
+        "endChar": 63
+      },
+      "revId": "3bea1759ea1fa01554a981c944895dad652ba1cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
