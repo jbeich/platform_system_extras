@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d02af2ff_8ac6139a",
+        "filename": "torq/tests/device_unit_test.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-22T22:43:12Z",
+      "side": 1,
+      "message": "I added it as a constant because it\u0027s a mocked completed process really. Let me know what you think.",
+      "parentUuid": "019b59ee_902c442a",
+      "range": {
+        "startLine": 45,
+        "startChar": 2,
+        "endLine": 47,
+        "endChar": 75
+      },
+      "revId": "3bea1759ea1fa01554a981c944895dad652ba1cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f968d731_9fe572f0",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-08-22T22:19:18Z",
       "side": 1,
       "message": "I think we could also refactor the function into something like this:\n\n```\ndef subprocess_output():\n    yield self.generate_empty_completed_process()\n    while True:\n        yield self.generate_adb_devices_result([])\n```",
+      "range": {
+        "startLine": 254,
+        "startChar": 4,
+        "endLine": 256,
+        "endChar": 63
+      },
+      "revId": "3bea1759ea1fa01554a981c944895dad652ba1cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c67c3c4_8ec0b916",
+        "filename": "torq/tests/device_unit_test.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-22T22:43:12Z",
+      "side": 1,
+      "message": "I added this as a static method that we can use later because we also use it for testing reboot in a later cl",
+      "parentUuid": "f968d731_9fe572f0",
       "range": {
         "startLine": 254,
         "startChar": 4,
