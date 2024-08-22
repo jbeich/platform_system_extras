@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d08936f_781ac556",
+        "filename": "torq/tests/command_executor_unit_test.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-22T16:57:57Z",
+      "side": 1,
+      "message": "In this case we are still mocking a method in the test under class. Can we mock the function call that we make to `PREDEFINED_PERFETTO_CONFIGS` in `config_builder`?",
+      "range": {
+        "startLine": 34,
+        "startChar": 4,
+        "endLine": 35,
+        "endChar": 72
+      },
+      "revId": "ce12e87ef2c036137bbc9c17d5d60707e7cdc69e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
