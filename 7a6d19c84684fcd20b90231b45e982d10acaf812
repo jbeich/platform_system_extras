@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b87c8a83_d705ec23",
+        "filename": "simpleperf/dso.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2024-08-22T22:53:57Z",
+      "side": 1,
+      "message": "Are the files in this map restricted to 64-bit binaries in /system?  If not, there may be multiple files with the same name (32-vs-64-bit or multiple copies for the same arch in /vendor or /apex).",
+      "range": {
+        "startLine": 221,
+        "startChar": 23,
+        "endLine": 221,
+        "endChar": 44
+      },
+      "revId": "7a6d19c84684fcd20b90231b45e982d10acaf812",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
