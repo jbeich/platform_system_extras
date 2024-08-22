@@ -22,6 +22,30 @@
       },
       "revId": "ce12e87ef2c036137bbc9c17d5d60707e7cdc69e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "afa128ba_e514efb8",
+        "filename": "torq/tests/command_executor_unit_test.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-22T17:44:12Z",
+      "side": 1,
+      "message": "I changed it to not mock it. Instead, we actually call it now, thank you.",
+      "parentUuid": "3d08936f_781ac556",
+      "range": {
+        "startLine": 34,
+        "startChar": 4,
+        "endLine": 35,
+        "endChar": 72
+      },
+      "revId": "ce12e87ef2c036137bbc9c17d5d60707e7cdc69e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
