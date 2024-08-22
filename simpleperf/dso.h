@@ -47,6 +47,7 @@ class DebugElfFileFinder {
 
  private:
   void CollectBuildIdInDir(const std::string& dir);
+  std::optional<std::string> SearchFileMapByPath(const std::string& path);
 
   std::string vdso_64bit_;
   std::string vdso_32bit_;
