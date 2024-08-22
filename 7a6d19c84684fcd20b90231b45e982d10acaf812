@@ -22,6 +22,30 @@
       },
       "revId": "7a6d19c84684fcd20b90231b45e982d10acaf812",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3052e05_d420ab17",
+        "filename": "simpleperf/dso.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2024-08-22T23:16:31Z",
+      "side": 1,
+      "message": "Not restricted to 64-bit. So need to print out the found binary path for users to double check.\nIn ps2, use match length to increase possibility of founding the correct binaries.\nThis should be enough in most cases.",
+      "parentUuid": "b87c8a83_d705ec23",
+      "range": {
+        "startLine": 221,
+        "startChar": 23,
+        "endLine": 221,
+        "endChar": 44
+      },
+      "revId": "7a6d19c84684fcd20b90231b45e982d10acaf812",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
