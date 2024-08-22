@@ -22,6 +22,30 @@
       },
       "revId": "1ef69ad1b19038a88e47930bae641ab0ad37ba2a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8519cce4_0d87cc46",
+        "filename": "torq/tests/device_unit_test.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-22T22:51:10Z",
+      "side": 1,
+      "message": "I moved the placement of it and I added a comment inside the function, thank you.",
+      "parentUuid": "b1af3a11_f1e35a87",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 32
+      },
+      "revId": "1ef69ad1b19038a88e47930bae641ab0ad37ba2a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
