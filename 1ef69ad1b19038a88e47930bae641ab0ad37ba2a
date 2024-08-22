@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1af3a11_f1e35a87",
+        "filename": "torq/tests/device_unit_test.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-22T22:45:42Z",
+      "side": 1,
+      "message": "Looks good, can you just add a short comment explaining why we need this function.",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 32
+      },
+      "revId": "1ef69ad1b19038a88e47930bae641ab0ad37ba2a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
