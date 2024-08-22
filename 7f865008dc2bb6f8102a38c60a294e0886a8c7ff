@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9385a8e0_c91000ce",
+        "filename": "torq/tests/command_executor_unit_test.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-22T18:35:05Z",
+      "side": 1,
+      "message": "We don\u0027t need to extract this if we are only using it once.",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 46
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "4c6ce45a_f468cf93",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/tests/command_executor_unit_test.py",
+              "range": {
+                "startLine": 30,
+                "startChar": 0,
+                "endLine": 31,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "torq/tests/command_executor_unit_test.py",
+              "range": {
+                "startLine": 59,
+                "startChar": 0,
+                "endLine": 60,
+                "endChar": 0
+              },
+              "replacement": "                     \"Performing run 1\")\n"
+            }
+          ]
+        }
+      ],
+      "revId": "7f865008dc2bb6f8102a38c60a294e0886a8c7ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "928e34c9_c6d64f5c",
+        "filename": "torq/tests/command_executor_unit_test.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-22T18:35:05Z",
+      "side": 1,
+      "message": "We don\u0027t need to extract this to a constant if we are only using it in the setup function.",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 35
+      },
+      "revId": "7f865008dc2bb6f8102a38c60a294e0886a8c7ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
