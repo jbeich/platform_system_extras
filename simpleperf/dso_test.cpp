@@ -96,6 +96,11 @@ TEST(DebugElfFileFinder, add_symbol_dir) {
   ASSERT_TRUE(finder.AddSymbolDir(symfs_dir));
   ASSERT_EQ(finder.FindDebugFile("elf", false, CHECK_ELF_FILE_BUILD_ID),
             symfs_dir + OS_PATH_SEPARATOR + "elf_for_build_id_check");
+
+  // Find debug file by filename.
+  BuildId build_id;
+  ASSERT_EQ(finder.FindDebugFile("/data/elf_for_build_id_check", false, build_id),
+            symfs_dir + OS_PATH_SEPARATOR + "elf_for_build_id_check");
 }
 
 // @CddTest = 6.1/C-0-2

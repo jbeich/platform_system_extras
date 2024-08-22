@@ -152,7 +152,12 @@ std::string DebugElfFileFinder::FindDebugFile(const std::string& dso_path, bool 
 
   // 1. Try build_id_to_file_map.
   if (!build_id_to_file_map_.empty()) {
-    if (!build_id.IsEmpty() || GetBuildIdFromDsoPath(dso_path, &build_id)) {
+    if (build_id.IsEmpty()) {
+      std::optional<std::string> s = SearchFileMapByPath(dso_path);
+      if (s.has_value()) {
+        return s.value();
+      }
+    } else {
       auto it = build_id_to_file_map_.find(build_id.ToString());
       if (it != build_id_to_file_map_.end() && CheckDebugFilePath(it->second, build_id, false)) {
         return it->second;
@@ -205,6 +210,23 @@ std::string DebugElfFileFinder::GetPathInSymFsDir(const std::string& path) {
   std::replace(elf_path.begin(), elf_path.end(), '/', OS_PATH_SEPARATOR);
   return add_symfs_prefix(elf_path);
 }
+
+std::optional<std::string> DebugElfFileFinder::SearchFileMapByPath(const std::string& path) {
+  std::string filename;
+  if (size_t pos = path.rfind('/'); pos != std::string::npos) {
+    filename = path.substr(pos + 1);
+  } else {
+    filename = path;
+  }
+  for (const auto& p : build_id_to_file_map_) {
+    if (EndsWith(p.second, filename)) {
+      LOG(INFO) << "Found " << p.second << " for " << path << " by filename";
+      return p.second;
+    }
+  }
+  return std::nullopt;
+}
+
 }  // namespace simpleperf_dso_impl
 
 static OneTimeFreeAllocator symbol_name_allocator;
