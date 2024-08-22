@@ -24,11 +24,15 @@ MOCK_DEVICE_SERIAL = "mock-device-serial"
 MOCK_DEVICE_SERIAL2 = "mock-device-serial2"
 MOCK_FAILURE = "Mock failure."
 MOCK_FILE_PATH = "mock-file-path"
+MOCK_EXCEPTION = Exception(MOCK_FAILURE)
+MOCK_COMPLETED_PROCESS = mock.create_autospec(subprocess.CompletedProcess,
+                                              instance=True)
 
 
 class DeviceUnitTest(unittest.TestCase):
 
-  def generate_adb_devices_result(self, devices, adb_started=True):
+  @staticmethod
+  def generate_adb_devices_result(devices, adb_started=True):
     devices = [device.encode('utf-8') for device in devices]
     stdout_string = b'List of devices attached\n'
     if not adb_started:
@@ -89,7 +93,7 @@ class DeviceUnitTest(unittest.TestCase):
 
   @mock.patch.object(subprocess, "run", autospec=True)
   def test_get_adb_devices_command_failure_error(self, mock_subprocess_run):
-    mock_subprocess_run.side_effect = Exception(MOCK_FAILURE)
+    mock_subprocess_run.side_effect = MOCK_EXCEPTION
     adbDevice = AdbDevice(None)
 
     with self.assertRaises(Exception) as e:
@@ -157,7 +161,7 @@ class DeviceUnitTest(unittest.TestCase):
   @mock.patch.object(subprocess, "run", autospec=True)
   def test_check_device_connection_adb_devices_command_fails_error(self,
       mock_subprocess_run):
-    mock_subprocess_run.side_effect = Exception(MOCK_FAILURE)
+    mock_subprocess_run.side_effect = MOCK_EXCEPTION
     adbDevice = AdbDevice(None)
 
     with self.assertRaises(Exception) as e:
@@ -223,15 +227,11 @@ class DeviceUnitTest(unittest.TestCase):
                                         % (MOCK_DEVICE_SERIAL,
                                            MOCK_DEVICE_SERIAL2)))
 
-  @mock.patch.object(AdbDevice, "poll_is_task_completed", autospec=True)
-  @mock.patch.object(AdbDevice, "get_adb_devices", autospec=True)
   @mock.patch.object(subprocess, "run", autospec=True)
-  def test_root_device_success(self, mock_subprocess_run,
-      mock_get_adb_devices, mock_poll_is_task_completed):
-    mock_subprocess_run.return_value = (
-        mock.create_autospec(subprocess.CompletedProcess, instance=True))
-    mock_get_adb_devices.return_value = [MOCK_DEVICE_SERIAL], None
-    mock_poll_is_task_completed.return_value = True
+  def test_root_device_success(self, mock_subprocess_run):
+    mock_subprocess_run.side_effect = [
+        MOCK_COMPLETED_PROCESS,
+        self.generate_adb_devices_result([MOCK_DEVICE_SERIAL])]
     adbDevice = AdbDevice(MOCK_DEVICE_SERIAL)
 
     # No exception is expected to be thrown
@@ -239,7 +239,7 @@ class DeviceUnitTest(unittest.TestCase):
 
   @mock.patch.object(subprocess, "run", autospec=True)
   def test_root_device_failure(self, mock_subprocess_run):
-    mock_subprocess_run.side_effect = Exception(MOCK_FAILURE)
+    mock_subprocess_run.side_effect = MOCK_EXCEPTION
     adbDevice = AdbDevice(MOCK_DEVICE_SERIAL)
 
     with self.assertRaises(Exception) as e:
@@ -247,15 +247,19 @@ class DeviceUnitTest(unittest.TestCase):
 
     self.assertEqual(str(e.exception), MOCK_FAILURE)
 
-  @mock.patch.object(AdbDevice, "poll_is_task_completed", autospec=True)
-  @mock.patch.object(AdbDevice, "get_adb_devices", autospec=True)
+  @staticmethod
+  def subprocess_output(first_return_value, polling_return_value):
+    # Mocks the return values of a call to adb root and many followup
+    # calls of adb devices
+    yield first_return_value
+    while True:
+      yield polling_return_value
+
   @mock.patch.object(subprocess, "run", autospec=True)
-  def test_root_device_times_out_error(self, mock_subprocess_run,
-      mock_get_adb_devices, mock_poll_is_task_completed):
-    mock_subprocess_run.return_value = (
-        mock.create_autospec(subprocess.CompletedProcess, instance=True))
-    mock_get_adb_devices.return_value = [], None
-    mock_poll_is_task_completed.return_value = False
+  def test_root_device_times_out_error(self, mock_subprocess_run):
+    mock_subprocess_run.side_effect = lambda args, capture_output=True: (
+      next(self.subprocess_output(self.generate_adb_devices_result([]),
+                                  MOCK_COMPLETED_PROCESS)))
     adbDevice = AdbDevice(MOCK_DEVICE_SERIAL)
 
     with self.assertRaises(Exception) as e:
@@ -267,9 +271,7 @@ class DeviceUnitTest(unittest.TestCase):
 
   @mock.patch.object(subprocess, "run", autospec=True)
   def test_root_device_and_adb_devices_fails_error(self, mock_subprocess_run):
-    mock_subprocess_run.side_effect = [
-        mock.create_autospec(subprocess.CompletedProcess, instance=True),
-        Exception(MOCK_FAILURE)]
+    mock_subprocess_run.side_effect = [MOCK_COMPLETED_PROCESS, MOCK_EXCEPTION]
     adbDevice = AdbDevice(MOCK_DEVICE_SERIAL)
 
     with self.assertRaises(Exception) as e:
@@ -279,8 +281,7 @@ class DeviceUnitTest(unittest.TestCase):
 
   @mock.patch.object(subprocess, "run", autospec=True)
   def test_remove_file_success(self, mock_subprocess_run):
-    mock_subprocess_run.return_value = (
-        mock.create_autospec(subprocess.CompletedProcess, instance=True))
+    mock_subprocess_run.return_value = MOCK_COMPLETED_PROCESS
     adbDevice = AdbDevice(MOCK_DEVICE_SERIAL)
 
     # No exception is expected to be thrown
@@ -288,7 +289,7 @@ class DeviceUnitTest(unittest.TestCase):
 
   @mock.patch.object(subprocess, "run", autospec=True)
   def test_remove_file_failure(self, mock_subprocess_run):
-    mock_subprocess_run.side_effect = Exception(MOCK_FAILURE)
+    mock_subprocess_run.side_effect = MOCK_EXCEPTION
     adbDevice = AdbDevice(MOCK_DEVICE_SERIAL)
 
     with self.assertRaises(Exception) as e:
@@ -310,7 +311,7 @@ class DeviceUnitTest(unittest.TestCase):
 
   @mock.patch.object(subprocess, "Popen", autospec=True)
   def test_start_perfetto_trace_failure(self, mock_subprocess_popen):
-    mock_subprocess_popen.side_effect = Exception(MOCK_FAILURE)
+    mock_subprocess_popen.side_effect = MOCK_EXCEPTION
     adbDevice = AdbDevice(MOCK_DEVICE_SERIAL)
 
     with self.assertRaises(Exception) as e:
@@ -320,8 +321,7 @@ class DeviceUnitTest(unittest.TestCase):
 
   @mock.patch.object(subprocess, "run", autospec=True)
   def test_pull_file_success(self, mock_subprocess_run):
-    mock_subprocess_run.return_value = (
-        mock.create_autospec(subprocess.CompletedProcess, instance=True))
+    mock_subprocess_run.return_value = MOCK_COMPLETED_PROCESS
     adbDevice = AdbDevice(MOCK_DEVICE_SERIAL)
 
     # No exception is expected to be thrown
@@ -329,7 +329,7 @@ class DeviceUnitTest(unittest.TestCase):
 
   @mock.patch.object(subprocess, "run", autospec=True)
   def test_pull_file_failure(self, mock_subprocess_run):
-    mock_subprocess_run.side_effect = Exception(MOCK_FAILURE)
+    mock_subprocess_run.side_effect = MOCK_EXCEPTION
     adbDevice = AdbDevice(MOCK_DEVICE_SERIAL)
 
     with self.assertRaises(Exception) as e:
