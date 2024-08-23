@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3146d40_3471b37c",
+        "filename": "torq/tests/device_unit_test.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-08-23T17:05:34Z",
+      "side": 1,
+      "message": "We should call mocks things that are actually mocks. Let\u0027s rename this values:\n```suggestion\nTEST_DEVICE_SERIAL \u003d \"test-device-serial\"\nTEST_DEVICE_SERIAL2 \u003d \"test-device-serial2\"\nTEST_FILE_PATH \u003d \"test-file-path\"\nTEST_FAILURE_MSG \u003d \"Mock failure.\"\n```",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 33
+      },
+      "revId": "545894bdc2bffbcd2aeb81e8a0240990de596048",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb44c3d1_0ab3d210",
+        "filename": "torq/tests/device_unit_test.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-08-23T17:05:34Z",
+      "side": 1,
+      "message": "This is not a mock. So let\u0027s use a more representative name: `TEST_EXCEPTION`",
+      "range": {
+        "startLine": 27,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 14
+      },
+      "revId": "545894bdc2bffbcd2aeb81e8a0240990de596048",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68905eb5_617ad1a1",
+        "filename": "torq/tests/device_unit_test.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-08-23T17:05:34Z",
+      "side": 1,
+      "message": "Mocks should always be created in the setup method if they will be used for all tests. Mocks keep internal state, which could leak in between tests. Please create the mock in a setup method.",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 60
+      },
+      "revId": "545894bdc2bffbcd2aeb81e8a0240990de596048",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f14bb7d_16413dff",
+        "filename": "torq/tests/device_unit_test.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-08-23T17:05:34Z",
+      "side": 1,
+      "message": "Move this method to the beginning of the class, with the other helper methods.",
+      "range": {
+        "startLine": 250,
+        "startChar": 0,
+        "endLine": 256,
+        "endChar": 32
+      },
+      "revId": "545894bdc2bffbcd2aeb81e8a0240990de596048",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
