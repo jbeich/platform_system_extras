@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc5e0e55_7e5627b4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2024-08-23T02:15:14Z",
+      "side": 1,
+      "message": "ps3, 4: As suggested by Yi, enable the support with an option (instead of enabling it by default). So we can keep a strict build id match check by default, and bypass it when needed.",
+      "revId": "0bf695bcbc37c447ae65df45ef669d8b25c5e459",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
