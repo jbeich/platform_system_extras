@@ -107,6 +107,32 @@ class AdbDevice:
   def pull_file(self, file_path, host_file):
     subprocess.run(["adb", "-s", self.serial, "pull", file_path, host_file])
 
+  def get_all_users(self):
+    command_output = subprocess.run(["adb", "-s", self.serial, "shell", "pm",
+                                     "list", "users"], capture_output=True)
+    output_lines = command_output.stdout.decode("utf-8").split("\n")[1:-1]
+    return [int((line.split("{", 1)[1]).split(":", 1)[0]) for line in
+            output_lines]
+
+  def user_exists(self, user):
+    users = self.get_all_users()
+    if user not in users:
+      return ValidationError(("User ID %s does not exist on device %s."
+                              % (user, self.serial)),
+                             ("Select from one of the following user IDs on"
+                              " device with serial %s: %s"
+                              % (self.serial, ", ".join(map(str, users)))))
+    return None
+
+  def get_current_user(self):
+    command_output = subprocess.run(["adb", "-s", self.serial, "shell", "am",
+                                     "get-current-user"], capture_output=True)
+    return int(command_output.stdout.decode("utf-8").split()[0])
+
+  def perform_user_switch(self, user):
+    subprocess.run(["adb", "-s", self.serial, "shell", "am", "switch-user",
+                    str(user)])
+
   def get_num_cpus(self):
     raise NotImplementedError
 
@@ -132,7 +158,4 @@ class AdbDevice:
     raise NotImplementedError
 
   def simpleperf_event_exists(self, simpleperf_event):
-    raise NotImplementedError
-
-  def user_exists(self, user):
     raise NotImplementedError
