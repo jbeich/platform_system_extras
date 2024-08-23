@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "30c2e773_55a162ba",
+        "filename": "torq/tests/device_unit_test.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-23T17:24:06Z",
+      "side": 1,
+      "message": "Renamed this, thank you.",
+      "parentUuid": "d3146d40_3471b37c",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 33
+      },
+      "revId": "545894bdc2bffbcd2aeb81e8a0240990de596048",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fb44c3d1_0ab3d210",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-08-23T17:05:34Z",
       "side": 1,
       "message": "This is not a mock. So let\u0027s use a more representative name: `TEST_EXCEPTION`",
+      "range": {
+        "startLine": 27,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 14
+      },
+      "revId": "545894bdc2bffbcd2aeb81e8a0240990de596048",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad6c21b9_d317ab0d",
+        "filename": "torq/tests/device_unit_test.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-23T17:24:06Z",
+      "side": 1,
+      "message": "Changed this, thank you.",
+      "parentUuid": "fb44c3d1_0ab3d210",
       "range": {
         "startLine": 27,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab8109dc_795a75d9",
+        "filename": "torq/tests/device_unit_test.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-23T17:24:06Z",
+      "side": 1,
+      "message": "Added this as a helper function because we do not need it for every test, thank you.",
+      "parentUuid": "68905eb5_617ad1a1",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 60
+      },
+      "revId": "545894bdc2bffbcd2aeb81e8a0240990de596048",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0f14bb7d_16413dff",
@@ -83,6 +155,30 @@
       "writtenOn": "2024-08-23T17:05:34Z",
       "side": 1,
       "message": "Move this method to the beginning of the class, with the other helper methods.",
+      "range": {
+        "startLine": 250,
+        "startChar": 0,
+        "endLine": 256,
+        "endChar": 32
+      },
+      "revId": "545894bdc2bffbcd2aeb81e8a0240990de596048",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c533028_2a087574",
+        "filename": "torq/tests/device_unit_test.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-23T17:24:06Z",
+      "side": 1,
+      "message": "Moved this up, thank you.",
+      "parentUuid": "0f14bb7d_16413dff",
       "range": {
         "startLine": 250,
         "startChar": 0,
