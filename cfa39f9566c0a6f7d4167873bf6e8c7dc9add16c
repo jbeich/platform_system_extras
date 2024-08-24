@@ -47,6 +47,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b27bda1_0c903585",
+        "filename": "torq/device.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-08-24T21:05:20Z",
+      "side": 1,
+      "message": "`output_lines` in this case makes sense, because we haven\u0027t parsed out the user id from the lines.",
+      "parentUuid": "9e9c51b0_a2f02d67",
+      "range": {
+        "startLine": 113,
+        "startChar": 4,
+        "endLine": 113,
+        "endChar": 16
+      },
+      "revId": "cfa39f9566c0a6f7d4167873bf6e8c7dc9add16c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "60d3eb54_b44fb973",
@@ -157,6 +181,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f601b8a6_d6f38446",
+        "filename": "torq/device.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-08-24T21:05:20Z",
+      "side": 1,
+      "message": "Those checks should be done from the caller side, the device class should be a straightforward abstraction of the device. It shouldn\u0027t need to do implement any checks.",
+      "parentUuid": "84510bd4_773bfd61",
+      "range": {
+        "startLine": 135,
+        "startChar": 4,
+        "endLine": 136,
+        "endChar": 31
+      },
+      "revId": "cfa39f9566c0a6f7d4167873bf6e8c7dc9add16c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6aac16c6_4d239f49",
@@ -241,6 +289,30 @@
       "writtenOn": "2024-08-24T04:21:44Z",
       "side": 1,
       "message": "Nit: Can we just extract this into a list of users and then we can just compare that list in the test cases.",
+      "range": {
+        "startLine": 65,
+        "startChar": 43,
+        "endLine": 65,
+        "endChar": 73
+      },
+      "revId": "cfa39f9566c0a6f7d4167873bf6e8c7dc9add16c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "26179952_8e100c47",
+        "filename": "torq/tests/device_unit_test.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-08-24T21:05:20Z",
+      "side": 1,
+      "message": "Using lists tends to obfuscate the test logic, because one has to keep going back to check the position of each value in the list. It is more readable if we outline the specific users in the test.",
+      "parentUuid": "7e8320bf_4c94c6d2",
       "range": {
         "startLine": 65,
         "startChar": 43,
