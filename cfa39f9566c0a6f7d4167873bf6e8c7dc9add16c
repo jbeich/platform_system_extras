@@ -1,0 +1,328 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2f81e95_ea862570",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-24T04:21:44Z",
+      "side": 1,
+      "message": "Nit: Could you please just briefly mention what the changes comprised (i.e. added functionality to get users, etc.)",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 25
+      },
+      "revId": "cfa39f9566c0a6f7d4167873bf6e8c7dc9add16c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e9c51b0_a2f02d67",
+        "filename": "torq/device.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-24T04:21:44Z",
+      "side": 1,
+      "message": "Nit: change this to `users`.",
+      "range": {
+        "startLine": 113,
+        "startChar": 4,
+        "endLine": 113,
+        "endChar": 16
+      },
+      "revId": "cfa39f9566c0a6f7d4167873bf6e8c7dc9add16c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60d3eb54_b44fb973",
+        "filename": "torq/device.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-24T04:21:44Z",
+      "side": 1,
+      "message": "I think we can just condense this into 1 line:\n\n```\nreturn [int((line.split(\"{\", 1)[1]).split(\":\", 1)[0]) for user in users] \n```",
+      "range": {
+        "startLine": 114,
+        "startChar": 4,
+        "endLine": 117,
+        "endChar": 16
+      },
+      "revId": "cfa39f9566c0a6f7d4167873bf6e8c7dc9add16c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df0c5047_7d90ac0f",
+        "filename": "torq/device.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-24T04:21:44Z",
+      "side": 1,
+      "message": "Amend to get `get_current_user`",
+      "range": {
+        "startLine": 129,
+        "startChar": 6,
+        "endLine": 129,
+        "endChar": 14
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "9ae1b642_d6f2c2fb",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/device.py",
+              "range": {
+                "startLine": 129,
+                "startChar": 0,
+                "endLine": 130,
+                "endChar": 0
+              },
+              "replacement": "  def get_current_user(self):\n"
+            }
+          ]
+        }
+      ],
+      "revId": "cfa39f9566c0a6f7d4167873bf6e8c7dc9add16c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84510bd4_773bfd61",
+        "filename": "torq/device.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-24T04:21:44Z",
+      "side": 1,
+      "message": "We should also check if we are just switching to the current user.",
+      "range": {
+        "startLine": 135,
+        "startChar": 4,
+        "endLine": 136,
+        "endChar": 31
+      },
+      "revId": "cfa39f9566c0a6f7d4167873bf6e8c7dc9add16c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95c353e6_848217fd",
+        "filename": "torq/device.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-24T04:21:44Z",
+      "side": 1,
+      "message": "We also need to check if this command succeeds (ex. the case where the user does not exist).",
+      "range": {
+        "startLine": 135,
+        "startChar": 4,
+        "endLine": 136,
+        "endChar": 31
+      },
+      "revId": "cfa39f9566c0a6f7d4167873bf6e8c7dc9add16c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6aac16c6_4d239f49",
+        "filename": "torq/tests/device_unit_test.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-24T04:21:44Z",
+      "side": 1,
+      "message": "Nit: Let\u0027s rename this to `mock_users` since we are just mocking the users on the device.",
+      "range": {
+        "startLine": 61,
+        "startChar": 6,
+        "endLine": 61,
+        "endChar": 45
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "f358e389_12650929",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/tests/device_unit_test.py",
+              "range": {
+                "startLine": 61,
+                "startChar": 0,
+                "endLine": 62,
+                "endChar": 0
+              },
+              "replacement": "  def mock_users():\n"
+            },
+            {
+              "path": "torq/tests/device_unit_test.py",
+              "range": {
+                "startLine": 356,
+                "startChar": 0,
+                "endLine": 357,
+                "endChar": 0
+              },
+              "replacement": "        self.mock_users())\n"
+            },
+            {
+              "path": "torq/tests/device_unit_test.py",
+              "range": {
+                "startLine": 376,
+                "startChar": 0,
+                "endLine": 377,
+                "endChar": 0
+              },
+              "replacement": "        self.mock_users())\n"
+            },
+            {
+              "path": "torq/tests/device_unit_test.py",
+              "range": {
+                "startLine": 387,
+                "startChar": 0,
+                "endLine": 388,
+                "endChar": 0
+              },
+              "replacement": "        self.mock_users())\n"
+            }
+          ]
+        }
+      ],
+      "revId": "cfa39f9566c0a6f7d4167873bf6e8c7dc9add16c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e8320bf_4c94c6d2",
+        "filename": "torq/tests/device_unit_test.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-24T04:21:44Z",
+      "side": 1,
+      "message": "Nit: Can we just extract this into a list of users and then we can just compare that list in the test cases.",
+      "range": {
+        "startLine": 65,
+        "startChar": 43,
+        "endLine": 65,
+        "endChar": 73
+      },
+      "revId": "cfa39f9566c0a6f7d4167873bf6e8c7dc9add16c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fec19872_ffbd80dd",
+        "filename": "torq/tests/device_unit_test.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-24T04:21:44Z",
+      "side": 1,
+      "message": "Let\u0027s make this 1 line. Same below.",
+      "range": {
+        "startLine": 357,
+        "startChar": 4,
+        "endLine": 359,
+        "endChar": 37
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "7a9431e1_ef0de50b",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/tests/device_unit_test.py",
+              "range": {
+                "startLine": 357,
+                "startChar": 0,
+                "endLine": 358,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "torq/tests/device_unit_test.py",
+              "range": {
+                "startLine": 359,
+                "startChar": 0,
+                "endLine": 360,
+                "endChar": 0
+              },
+              "replacement": "    users \u003d AdbDevice(TEST_DEVICE_SERIAL).get_all_users()\n"
+            }
+          ]
+        }
+      ],
+      "revId": "cfa39f9566c0a6f7d4167873bf6e8c7dc9add16c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4aac671_ea19e549",
+        "filename": "torq/tests/device_unit_test.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-24T04:21:44Z",
+      "side": 1,
+      "message": "We need to cover the cases where the user doesn\u0027t exist and if we switch to the same user.",
+      "range": {
+        "startLine": 440,
+        "startChar": 6,
+        "endLine": 440,
+        "endChar": 38
+      },
+      "revId": "cfa39f9566c0a6f7d4167873bf6e8c7dc9add16c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
