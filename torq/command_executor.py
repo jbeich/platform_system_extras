@@ -16,6 +16,10 @@
 
 import time
 from abc import ABC, abstractmethod
+from config_builder import PREDEFINED_PERFETTO_CONFIGS
+
+PERFETTO_TRACE_FILE = "/data/misc/perfetto-traces/trace.perfetto-trace"
+PERFETTO_TRACE_START_DELAY_SECS = 0.5
 
 
 class CommandExecutor(ABC):
@@ -41,42 +45,65 @@ class CommandExecutor(ABC):
 
 class ProfilerCommandExecutor(CommandExecutor):
 
-  def execute_command(self, profiler_command, device):
-    for run in range(profiler_command.runs):
-      print("Performing run %s" % (run + 1))
-      error = self.prepare_device(device, profiler_command)
-      if error is not None:
-        return error
-      error = self.start_event(device, profiler_command)
-      if error is not None:
-        return error
-      error = self.retrieve_perf_data(device, profiler_command)
-      if error is not None:
-        return error
-      if profiler_command.runs != run + 1:
-        time.sleep(profiler_command.between_dur_ms / 1000)
-    error = self.cleanup(device, profiler_command)
+  def execute_command(self, command, device):
+    config, error = self.create_config(command)
     if error is not None:
       return error
-    if profiler_command.ui is True:
-      error = self.open_ui(device, profiler_command)
+    error = self.prepare_device(command, device, config)
+    if error is not None:
+      return error
+    for run in range(1, command.runs + 1):
+      error = self.prepare_device_for_run(command, device, run)
       if error is not None:
         return error
+      error = self.execute_run(command, device, config, run)
+      if error is not None:
+        return error
+      error = self.retrieve_perf_data(command, device)
+      if error is not None:
+        return error
+      if command.runs != run:
+        time.sleep(command.between_dur_ms / 1000)
+    error = self.cleanup(command, device)
+    if error is not None:
+      return error
+    if command.use_ui:
+      return self.open_ui(command)
     return None
 
-  def prepare_device(self, device, profiler_command):
+  def create_config(self, command):
+    if command.perfetto_config in PREDEFINED_PERFETTO_CONFIGS:
+      return PREDEFINED_PERFETTO_CONFIGS[command.perfetto_config](command)
+    else:
+      raise NotImplementedError
+
+  def prepare_device(self, command, device, config):
     return None
 
-  def start_event(self, device, profiler_command):
+  def prepare_device_for_run(self, command, device, run):
+    device.root_device()
+    device.remove_file(PERFETTO_TRACE_FILE)
+
+  def execute_run(self, command, device, config, run):
+    print("Performing run %s" % run)
+    process = device.start_perfetto_trace(config)
+    time.sleep(PERFETTO_TRACE_START_DELAY_SECS)
+    error = self.trigger_system_event(command, device)
+    if error is not None:
+      return error
+    process.wait()
+
+  def trigger_system_event(self, command, device):
     return None
 
-  def retrieve_perf_data(self, device, profiler_command):
+  def retrieve_perf_data(self, command, device):
+    device.pull_file(PERFETTO_TRACE_FILE, ("%s/trace.perfetto-trace"
+                                           % command.out_dir))
+
+  def cleanup(self, command, device):
     return None
 
-  def cleanup(self, device, profiler_command):
-    return None
-
-  def open_ui(self, device, profiler_command):
+  def open_ui(self, command):
     return None
 
 
@@ -93,7 +120,7 @@ class HWCommandExecutor(CommandExecutor):
       case "hw list":
         return self.execute_hw_list_command(device)
       case _:
-        raise Exception("Invalid hw subcommand was used.")
+        raise ValueError("Invalid hw subcommand was used.")
 
   def execute_hw_set_command(self, device, hw_config, num_cpus, memory):
     return None
@@ -120,7 +147,7 @@ class ConfigCommandExecutor(CommandExecutor):
         return self.execute_config_pull_command(config_command.config_name,
                                                 config_command.file_path)
       case _:
-        raise Exception("Invalid config subcommand was used.")
+        raise ValueError("Invalid config subcommand was used.")
 
   def execute_config_list_command(self):
     return None
