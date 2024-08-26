@@ -26,7 +26,6 @@ python_defaults {
         "validation_error.py",
         "device.py",
         "config_builder.py",
-        "open_ui.py",
     ],
 }
 
