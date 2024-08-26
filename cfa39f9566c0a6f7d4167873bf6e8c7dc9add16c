@@ -95,6 +95,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ebb1d05f_c38cde29",
+        "filename": "torq/device.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-26T13:06:20Z",
+      "side": 1,
+      "message": "Ah sounds good. I was suggesting that for readability if we condense the parsing logic on line 114. Then it makes sense to specify `users` rather than `lines in output_lines`. But this is fine too.",
+      "parentUuid": "0b27bda1_0c903585",
+      "range": {
+        "startLine": 113,
+        "startChar": 4,
+        "endLine": 113,
+        "endChar": 16
+      },
+      "revId": "cfa39f9566c0a6f7d4167873bf6e8c7dc9add16c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "60d3eb54_b44fb973",
@@ -291,6 +315,30 @@
       "side": 1,
       "message": "I think this might not be necessary. Jahdiel said, for device calls, we shouldn\u0027t raise any exceptions or check for errors because the stack trace provided in the terminal will be better than anything we can provide oursevles. also within the code, this will never be called on a user that doesnt exist (we check if users exist alot earlier in the code, and if they do not, we return an error before we ever call this).",
       "parentUuid": "95c353e6_848217fd",
+      "range": {
+        "startLine": 135,
+        "startChar": 4,
+        "endLine": 136,
+        "endChar": 31
+      },
+      "revId": "cfa39f9566c0a6f7d4167873bf6e8c7dc9add16c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "22119c3a_01553b66",
+        "filename": "torq/device.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-26T13:06:20Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "935d63ac_500dd08d",
       "range": {
         "startLine": 135,
         "startChar": 4,
@@ -579,6 +627,30 @@
       "side": 1,
       "message": "above, meaning the other unresolved comment. we take care of this already in code before we ever call this function. We do not error check device calls to leave the AdbDevice class as abstracted/simple as possible.",
       "parentUuid": "10c42caf_645071d1",
+      "range": {
+        "startLine": 440,
+        "startChar": 6,
+        "endLine": 440,
+        "endChar": 38
+      },
+      "revId": "cfa39f9566c0a6f7d4167873bf6e8c7dc9add16c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ead58d26_5cd2fe4c",
+        "filename": "torq/tests/device_unit_test.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-26T13:06:20Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "2eeb625b_09bf0f9a",
       "range": {
         "startLine": 440,
         "startChar": 6,
