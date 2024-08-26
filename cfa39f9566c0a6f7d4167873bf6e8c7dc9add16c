@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "984a60d9_182b718a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-26T04:47:48Z",
+      "side": 1,
+      "message": "I add this, thank you.",
+      "parentUuid": "d2f81e95_ea862570",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 25
+      },
+      "revId": "cfa39f9566c0a6f7d4167873bf6e8c7dc9add16c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9e9c51b0_a2f02d67",
@@ -94,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b76a2e28_2c6abc88",
+        "filename": "torq/device.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-26T04:47:48Z",
+      "side": 1,
+      "message": "Changed this, thank you.",
+      "parentUuid": "60d3eb54_b44fb973",
+      "range": {
+        "startLine": 114,
+        "startChar": 4,
+        "endLine": 117,
+        "endChar": 16
+      },
+      "revId": "cfa39f9566c0a6f7d4167873bf6e8c7dc9add16c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "df0c5047_7d90ac0f",
@@ -131,6 +179,30 @@
           ]
         }
       ],
+      "revId": "cfa39f9566c0a6f7d4167873bf6e8c7dc9add16c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "12b4bc28_20790b33",
+        "filename": "torq/device.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-26T04:47:48Z",
+      "side": 1,
+      "message": "Changed this, thank you.",
+      "parentUuid": "df0c5047_7d90ac0f",
+      "range": {
+        "startLine": 129,
+        "startChar": 6,
+        "endLine": 129,
+        "endChar": 14
+      },
       "revId": "cfa39f9566c0a6f7d4167873bf6e8c7dc9add16c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -195,6 +267,30 @@
       "side": 1,
       "message": "Those checks should be done from the caller side, the device class should be a straightforward abstraction of the device. It shouldn\u0027t need to do implement any checks.",
       "parentUuid": "84510bd4_773bfd61",
+      "range": {
+        "startLine": 135,
+        "startChar": 4,
+        "endLine": 136,
+        "endChar": 31
+      },
+      "revId": "cfa39f9566c0a6f7d4167873bf6e8c7dc9add16c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "935d63ac_500dd08d",
+        "filename": "torq/device.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-26T04:47:48Z",
+      "side": 1,
+      "message": "I think this might not be necessary. Jahdiel said, for device calls, we shouldn\u0027t raise any exceptions or check for errors because the stack trace provided in the terminal will be better than anything we can provide oursevles. also within the code, this will never be called on a user that doesnt exist (we check if users exist alot earlier in the code, and if they do not, we return an error before we ever call this).",
+      "parentUuid": "95c353e6_848217fd",
       "range": {
         "startLine": 135,
         "startChar": 4,
@@ -272,6 +368,30 @@
           ]
         }
       ],
+      "revId": "cfa39f9566c0a6f7d4167873bf6e8c7dc9add16c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4e349e3_2ecb0ad4",
+        "filename": "torq/tests/device_unit_test.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-26T04:47:48Z",
+      "side": 1,
+      "message": "I changed the name, thank you.",
+      "parentUuid": "6aac16c6_4d239f49",
+      "range": {
+        "startLine": 61,
+        "startChar": 6,
+        "endLine": 61,
+        "endChar": 45
+      },
       "revId": "cfa39f9566c0a6f7d4167873bf6e8c7dc9add16c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -374,6 +494,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "68d9cfb2_8624702b",
+        "filename": "torq/tests/device_unit_test.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-26T04:47:48Z",
+      "side": 1,
+      "message": "I changed this, thank you.",
+      "parentUuid": "fec19872_ffbd80dd",
+      "range": {
+        "startLine": 357,
+        "startChar": 4,
+        "endLine": 359,
+        "endChar": 37
+      },
+      "revId": "cfa39f9566c0a6f7d4167873bf6e8c7dc9add16c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f4aac671_ea19e549",
@@ -387,6 +531,30 @@
       "writtenOn": "2024-08-24T04:21:44Z",
       "side": 1,
       "message": "We need to cover the cases where the user doesn\u0027t exist and if we switch to the same user.",
+      "range": {
+        "startLine": 440,
+        "startChar": 6,
+        "endLine": 440,
+        "endChar": 38
+      },
+      "revId": "cfa39f9566c0a6f7d4167873bf6e8c7dc9add16c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10c42caf_645071d1",
+        "filename": "torq/tests/device_unit_test.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-26T04:47:48Z",
+      "side": 1,
+      "message": "As mentioned above, I do not think this is necessary. Let me know what you think.",
+      "parentUuid": "f4aac671_ea19e549",
       "range": {
         "startLine": 440,
         "startChar": 6,
