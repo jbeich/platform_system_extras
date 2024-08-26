@@ -563,6 +563,30 @@
       },
       "revId": "cfa39f9566c0a6f7d4167873bf6e8c7dc9add16c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2eeb625b_09bf0f9a",
+        "filename": "torq/tests/device_unit_test.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-26T04:52:59Z",
+      "side": 1,
+      "message": "above, meaning the other unresolved comment. we take care of this already in code before we ever call this function. We do not error check device calls to leave the AdbDevice class as abstracted/simple as possible.",
+      "parentUuid": "10c42caf_645071d1",
+      "range": {
+        "startLine": 440,
+        "startChar": 6,
+        "endLine": 440,
+        "endChar": 38
+      },
+      "revId": "cfa39f9566c0a6f7d4167873bf6e8c7dc9add16c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
