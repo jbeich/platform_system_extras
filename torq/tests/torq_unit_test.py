@@ -21,6 +21,8 @@ from unittest import mock
 from torq import create_parser, verify_args, get_command_type,\
   DEFAULT_DUR_MS, DEFAULT_OUT_DIR
 
+TEST_USER_ID = 10
+
 
 class TorqUnitTest(unittest.TestCase):
 
@@ -62,7 +64,8 @@ class TorqUnitTest(unittest.TestCase):
     self.assertEqual(error, None)
     self.assertEqual(args.event, "boot")
 
-    parser = self.set_up_parser("torq.py -e user-switch")
+    parser = self.set_up_parser(
+        "torq.py -e user-switch --to-user %s" % str(TEST_USER_ID))
 
     args = parser.parse_args()
     args, error = verify_args(args)
@@ -366,6 +369,63 @@ class TorqUnitTest(unittest.TestCase):
                                         " be used:\n"
                                         "\t torq --perfetto-config"
                                         " <config-filepath>"))
+
+  def test_verify_args_from_user_and_event_valid_dependency(self):
+    parser = self.set_up_parser(("torq.py -e user-switch --from-user 0"
+                                 " --to-user %s") % str(TEST_USER_ID))
+
+    args = parser.parse_args()
+    args, error = verify_args(args)
+
+    self.assertEqual(error, None)
+
+  def test_verify_args_from_user_and_event_invalid_dependency(self):
+    parser = self.set_up_parser("torq.py --from-user %s" % str(TEST_USER_ID))
+
+    args = parser.parse_args()
+    args, error = verify_args(args)
+
+    self.assertEqual(error.message, ("Command is invalid because --from-user"
+                                     " is passed, but --event is not set to"
+                                     " user-switch."))
+    self.assertEqual(error.suggestion, ("Set --event user-switch --from-user %s"
+                                        " to perform a user-switch from user"
+                                        " %s." % (str(TEST_USER_ID),
+                                                  str(TEST_USER_ID))))
+
+  def test_verify_args_to_user_and_event_valid_dependency(self):
+    parser = self.set_up_parser(
+        "torq.py -e user-switch --to-user %s" % str(TEST_USER_ID))
+
+    args = parser.parse_args()
+    args, error = verify_args(args)
+
+    self.assertEqual(error, None)
+
+  def test_verify_args_to_user_not_passed_and_event_invalid_dependency(self):
+    parser = self.set_up_parser("torq.py -e user-switch")
+
+    args = parser.parse_args()
+    args, error = verify_args(args)
+
+    self.assertEqual(error.message, ("Command is invalid because --to-user is"
+                                     " not passed."))
+    self.assertEqual(error.suggestion, ("Set --event user-switch --to-user"
+                                        " <user-id> to perform a user-switch."))
+
+  def test_verify_args_to_user_and_user_switch_not_set_invalid_dependency(self):
+    parser = self.set_up_parser("torq.py --to-user %s" % str(TEST_USER_ID))
+
+    args = parser.parse_args()
+    args, error = verify_args(args)
+
+    self.assertEqual(error.message, ("Command is invalid because --to-user"
+                                     " is passed, but --event is not set to"
+                                     " user-switch."))
+    self.assertEqual(error.suggestion, ("Set --event user-switch --to-user %s"
+                                        " to perform a user-switch to user"
+                                        " %s." % (str(TEST_USER_ID),
+                                                  str(TEST_USER_ID))))
 
   # TODO: Make sure that package name is correct once feature is implemented.
   def test_verify_args_app_and_event_valid_dependency(self):

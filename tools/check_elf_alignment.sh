@@ -87,10 +87,15 @@ unaligned_libs=()
 echo
 echo "=== ELF alignment ==="
 
-matches="$(find "${dir}" -type f \( -name "*.so" -or -executable \))"
+matches="$(find "${dir}" -type f)"
 IFS=$'\n'
 for match in $matches; do
+  # We could recursively call this script or rewrite it to though.
+  [[ "${match}" == *".apk" ]] && echo "WARNING: doesn't recursively inspect .apk file: ${match}"
+  [[ "${match}" == *".apex" ]] && echo "WARNING: doesn't recursively inspect .apex file: ${match}"
+
   [[ $(file "${match}") == *"ELF"* ]] || continue
+
   res="$(objdump -p "${match}" | grep LOAD | awk '{ print $NF }' | head -1)"
   if [[ $res =~ 2**(1[4-9]|[2-9][0-9]|[1-9][0-9]{2,}) ]]; then
     echo -e "${match}: ${GREEN}ALIGNED${ENDCOLOR} ($res)"

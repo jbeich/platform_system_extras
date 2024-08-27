@@ -17,89 +17,13 @@
 import subprocess
 import os
 import time
-from abc import ABC, abstractmethod
 from validation_error import ValidationError
 
 ADB_ROOT_TIMED_OUT_LIMIT_SECS = 5
 POLLING_INTERVAL_SECS = 0.5
 
 
-class Device(ABC):
-  """
-  Abstract base class representing a device. This class defines the APIs
-  needed to interact with the current device.
-  """
-
-  @abstractmethod
-  def __init__(self, serial):
-    raise NotImplementedError
-
-  @abstractmethod
-  def get_adb_devices(self):
-    raise NotImplementedError
-
-  @abstractmethod
-  def check_device_connection(self):
-    raise NotImplementedError
-
-  @abstractmethod
-  def root_device(self):
-    raise NotImplementedError
-
-  @abstractmethod
-  def remove_file(self, file_path):
-    raise NotImplementedError
-
-  @abstractmethod
-  def start_perfetto_trace(self, config):
-    raise NotImplementedError
-
-  @abstractmethod
-  def pull_file(self, file_path, host_file):
-    raise NotImplementedError
-
-  @abstractmethod
-  def get_num_cpus(self):
-    raise NotImplementedError
-
-  @abstractmethod
-  def get_memory(self):
-    raise NotImplementedError
-
-  @abstractmethod
-  def get_max_num_cpus(self):
-    raise NotImplementedError
-
-  @abstractmethod
-  def get_max_memory(self):
-    raise NotImplementedError
-
-  @abstractmethod
-  def set_hw_config(self, hw_config):
-    raise NotImplementedError
-
-  @abstractmethod
-  def set_num_cpus(self, num_cpus):
-    raise NotImplementedError
-
-  @abstractmethod
-  def set_memory(self, memory):
-    raise NotImplementedError
-
-  @abstractmethod
-  def app_exists(self, app):
-    raise NotImplementedError
-
-  @abstractmethod
-  def simpleperf_event_exists(self, simpleperf_event):
-    raise NotImplementedError
-
-  @abstractmethod
-  def user_exists(self, user):
-    raise NotImplementedError
-
-
-class AdbDevice(Device):
+class AdbDevice:
   """
   Class representing a device. APIs interact with the current device through
   the adb bridge.
@@ -107,7 +31,8 @@ class AdbDevice(Device):
   def __init__(self, serial):
     self.serial = serial
 
-  def get_adb_devices(self):
+  @staticmethod
+  def get_adb_devices():
     """
     Returns a list of devices connected to the adb bridge.
     The output of the command 'adb devices' is expected to be of the form:
@@ -182,6 +107,32 @@ class AdbDevice(Device):
   def pull_file(self, file_path, host_file):
     subprocess.run(["adb", "-s", self.serial, "pull", file_path, host_file])
 
+  def get_all_users(self):
+    command_output = subprocess.run(["adb", "-s", self.serial, "shell", "pm",
+                                     "list", "users"], capture_output=True)
+    output_lines = command_output.stdout.decode("utf-8").split("\n")[1:-1]
+    return [int((line.split("{", 1)[1]).split(":", 1)[0]) for line in
+            output_lines]
+
+  def user_exists(self, user):
+    users = self.get_all_users()
+    if user not in users:
+      return ValidationError(("User ID %s does not exist on device with serial"
+                              " %s." % (user, self.serial)),
+                             ("Select from one of the following user IDs on"
+                              " device with serial %s: %s"
+                              % (self.serial, ", ".join(map(str, users)))))
+    return None
+
+  def get_current_user(self):
+    command_output = subprocess.run(["adb", "-s", self.serial, "shell", "am",
+                                     "get-current-user"], capture_output=True)
+    return int(command_output.stdout.decode("utf-8").split()[0])
+
+  def perform_user_switch(self, user):
+    subprocess.run(["adb", "-s", self.serial, "shell", "am", "switch-user",
+                    str(user)])
+
   def get_num_cpus(self):
     raise NotImplementedError
 
@@ -207,7 +158,4 @@ class AdbDevice(Device):
     raise NotImplementedError
 
   def simpleperf_event_exists(self, simpleperf_event):
-    raise NotImplementedError
-
-  def user_exists(self, user):
     raise NotImplementedError
