@@ -15,8 +15,8 @@
 #
 
 from abc import ABC, abstractmethod
-from command_executor import ProfilerCommandExecutor, HWCommandExecutor, \
-  ConfigCommandExecutor
+from command_executor import ProfilerCommandExecutor, \
+  UserSwitchCommandExecutor, HWCommandExecutor, ConfigCommandExecutor
 from validation_error import ValidationError
 
 
@@ -61,19 +61,25 @@ class ProfilerCommand(Command):
     self.included_ftrace_events = included_ftrace_events
     self.from_user = from_user
     self.to_user = to_user
-    self.command_executor = ProfilerCommandExecutor()
+    self.command_executor = None
+    if event == "user-switch":
+      self.original_user = None
+      self.command_executor = UserSwitchCommandExecutor()
+    else:
+      self.command_executor = ProfilerCommandExecutor()
 
   def validate(self, device):
     print("Further validating arguments of ProfilerCommand.")
-    # TODO: call relevant Device APIs according to args
     if self.app is not None:
       device.app_exists(self.app)
     if self.simpleperf_event is not None:
       device.simpleperf_event_exists(self.simpleperf_event)
     if self.from_user is not None:
-      device.user_exists(self.from_user)
+      error = device.user_exists(self.from_user)
+      if error is not None:
+        return error
     if self.to_user is not None:
-      device.user_exists(self.to_user)
+      return device.user_exists(self.to_user)
     return None
 
 
