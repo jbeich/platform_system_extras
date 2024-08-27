@@ -125,6 +125,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "75d223d9_7266308c",
+        "filename": "torq/tests/torq_unit_test.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-27T01:31:01Z",
+      "side": 1,
+      "message": "I split this into tests: test_verify_args_to_user_not_passed_and_event_invalid_dependency and test_verify_args_to_user_and_user_switch_not_set_invalid_dependency.",
+      "parentUuid": "41612aff_e84687c0",
+      "range": {
+        "startLine": 401,
+        "startChar": 4,
+        "endLine": 410,
+        "endChar": 80
+      },
+      "revId": "733ce137a9b6b7fc5e02e2f5b84e6c88a04c1498",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dcab18ee_b4780031",
@@ -168,6 +192,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "395d2860_c346f2b9",
+        "filename": "torq/torq.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-27T01:31:01Z",
+      "side": 1,
+      "message": "Did you mean to remove it from the suggestion/second string? I am confused here. If you do, some of the other error checking messages in this file use explicit commands in the suggestions, even when it is a bit obvious. Let me know what you think.",
+      "parentUuid": "dcab18ee_b4780031",
+      "range": {
+        "startLine": 187,
+        "startChar": 20,
+        "endLine": 187,
+        "endChar": 32
+      },
+      "revId": "733ce137a9b6b7fc5e02e2f5b84e6c88a04c1498",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "41cab283_a4c02ecf",
         "filename": "torq/torq.py",
         "patchSetId": 3
@@ -179,6 +227,30 @@
       "writtenOn": "2024-08-27T00:53:09Z",
       "side": 1,
       "message": "Nit: `\u003cuser-id\u003e`",
+      "range": {
+        "startLine": 188,
+        "startChar": 35,
+        "endLine": 188,
+        "endChar": 44
+      },
+      "revId": "733ce137a9b6b7fc5e02e2f5b84e6c88a04c1498",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "953bc750_aeb01cf9",
+        "filename": "torq/torq.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-27T01:31:01Z",
+      "side": 1,
+      "message": "Replaced this, thank you.",
+      "parentUuid": "41cab283_a4c02ecf",
       "range": {
         "startLine": 188,
         "startChar": 35,
