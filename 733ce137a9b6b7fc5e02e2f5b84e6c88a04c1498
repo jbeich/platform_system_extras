@@ -1,0 +1,192 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b8bb5cf_0da6555a",
+        "filename": "torq/tests/torq_unit_test.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-27T00:53:09Z",
+      "side": 1,
+      "message": "Can we extract this user-id out into a constant and then assert on it on line 388.",
+      "range": {
+        "startLine": 380,
+        "startChar": 53,
+        "endLine": 380,
+        "endChar": 55
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "d3af3faa_e86b0c7c",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/tests/torq_unit_test.py",
+              "range": {
+                "startLine": 24,
+                "startChar": 0,
+                "endLine": 24,
+                "endChar": 0
+              },
+              "replacement": "USER_ID \u003d 10\n\n"
+            },
+            {
+              "path": "torq/tests/torq_unit_test.py",
+              "range": {
+                "startLine": 372,
+                "startChar": 0,
+                "endLine": 373,
+                "endChar": 0
+              },
+              "replacement": "                                 \" --to-user \" + str(USER_ID)))\n"
+            },
+            {
+              "path": "torq/tests/torq_unit_test.py",
+              "range": {
+                "startLine": 380,
+                "startChar": 0,
+                "endLine": 381,
+                "endChar": 0
+              },
+              "replacement": "    parser \u003d self.set_up_parser(\"torq.py --from-user \" + str(USER_ID))\n"
+            },
+            {
+              "path": "torq/tests/torq_unit_test.py",
+              "range": {
+                "startLine": 390,
+                "startChar": 0,
+                "endLine": 391,
+                "endChar": 0
+              },
+              "replacement": "                                        \" \" + str(USER_ID) + \".\"))\n"
+            },
+            {
+              "path": "torq/tests/torq_unit_test.py",
+              "range": {
+                "startLine": 393,
+                "startChar": 0,
+                "endLine": 394,
+                "endChar": 0
+              },
+              "replacement": "    parser \u003d self.set_up_parser(\"torq.py -e user-switch --to-user \" +\n                                str(USER_ID))\n"
+            },
+            {
+              "path": "torq/tests/torq_unit_test.py",
+              "range": {
+                "startLine": 412,
+                "startChar": 0,
+                "endLine": 413,
+                "endChar": 0
+              },
+              "replacement": "    parser \u003d self.set_up_parser(\"torq.py --to-user \" + str(USER_ID))\n"
+            },
+            {
+              "path": "torq/tests/torq_unit_test.py",
+              "range": {
+                "startLine": 422,
+                "startChar": 0,
+                "endLine": 423,
+                "endChar": 0
+              },
+              "replacement": "                                        \" \" + str(USER_ID) + \".\"))\n"
+            }
+          ]
+        }
+      ],
+      "revId": "733ce137a9b6b7fc5e02e2f5b84e6c88a04c1498",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41612aff_e84687c0",
+        "filename": "torq/tests/torq_unit_test.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-27T00:53:09Z",
+      "side": 1,
+      "message": "This assertion should be split it out into its own test given that this test `test_verify_args_to_user_and_event_invalid_dependency` verifies `to_user`.",
+      "range": {
+        "startLine": 401,
+        "startChar": 4,
+        "endLine": 410,
+        "endChar": 80
+      },
+      "revId": "733ce137a9b6b7fc5e02e2f5b84e6c88a04c1498",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dcab18ee_b4780031",
+        "filename": "torq/torq.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-27T00:53:09Z",
+      "side": 1,
+      "message": "Don\u0027t need this, the event is already `user-switch`",
+      "range": {
+        "startLine": 187,
+        "startChar": 20,
+        "endLine": 187,
+        "endChar": 32
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "9fc546a5_f170161b",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/torq.py",
+              "range": {
+                "startLine": 187,
+                "startChar": 0,
+                "endLine": 188,
+                "endChar": 0
+              },
+              "replacement": "         \" passed.\"),\n"
+            }
+          ]
+        }
+      ],
+      "revId": "733ce137a9b6b7fc5e02e2f5b84e6c88a04c1498",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41cab283_a4c02ecf",
+        "filename": "torq/torq.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-27T00:53:09Z",
+      "side": 1,
+      "message": "Nit: `\u003cuser-id\u003e`",
+      "range": {
+        "startLine": 188,
+        "startChar": 35,
+        "endLine": 188,
+        "endChar": 44
+      },
+      "revId": "733ce137a9b6b7fc5e02e2f5b84e6c88a04c1498",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
