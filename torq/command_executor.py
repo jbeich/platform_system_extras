@@ -18,6 +18,7 @@ import time
 from abc import ABC, abstractmethod
 from config_builder import PREDEFINED_PERFETTO_CONFIGS
 from open_ui import open_trace
+from validation_error import ValidationError
 
 PERFETTO_TRACE_FILE = "/data/misc/perfetto-traces/trace.perfetto-trace"
 PERFETTO_WEB_UI_ADDRESS = "https://ui.perfetto.dev"
@@ -105,6 +106,34 @@ class ProfilerCommandExecutor(CommandExecutor):
 
   def cleanup(self, command, device):
     return None
+
+
+class UserSwitchCommandExecutor(ProfilerCommandExecutor):
+
+  def prepare_device_for_run(self, command, device, run):
+    super().prepare_device_for_run(command, device, run)
+    current_user = device.get_current_user()
+    if run == 1:
+      command.original_user = current_user
+    if command.from_user is None:
+      command.from_user = command.original_user
+    if command.from_user == command.to_user:
+      return ValidationError("Cannot perform user-switch to user %s because the"
+                             " current user on device %s is already %s."
+                             % (command.to_user, device.serial,
+                                command.from_user),
+                             "Choose a --to-user ID that is different than the"
+                             " --from-user ID.")
+    if command.from_user != current_user:
+      device.perform_user_switch(command.from_user)
+
+  def trigger_system_event(self, command, device):
+    device.perform_user_switch(command.to_user)
+
+  def cleanup(self, command, device):
+    current_user = device.get_current_user()
+    if current_user != command.original_user:
+      device.perform_user_switch(command.original_user)
 
 
 class HWCommandExecutor(CommandExecutor):
