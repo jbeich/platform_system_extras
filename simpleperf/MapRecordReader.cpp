@@ -147,9 +147,12 @@ bool MapRecordThread::WriteRecordToFile(Record* record) {
 }
 
 bool MapRecordThread::Join() {
-  thread_.join();
-  if (!thread_result_) {
-    LOG(ERROR) << "map record thread failed";
+  if (!thread_joined_) {
+    thread_.join();
+    thread_joined_ = true;
+    if (!thread_result_) {
+      LOG(ERROR) << "map record thread failed";
+    }
   }
   return thread_result_;
 }
@@ -177,6 +180,45 @@ bool MapRecordThread::ReadMapRecordData(const std::function<bool(const char*, si
       return false;
     }
     left_bytes -= to_read;
+  }
+  return true;
+}
+
+bool MapRecordThread::ReadMapRecords(const std::function<void(const Record*)>& callback) {
+  off_t offset = ftello(fp_.get());
+  if (offset == -1) {
+    PLOG(ERROR) << "ftello() failed";
+    return false;
+  }
+  uint64_t file_size = static_cast<uint64_t>(offset);
+  if (fseek(fp_.get(), 0, SEEK_SET) != 0) {
+    PLOG(ERROR) << "fseek() failed";
+    return false;
+  }
+  uint64_t nread = 0;
+  std::vector<char> buffer(1024);
+  while (nread < file_size) {
+    if (fread(buffer.data(), Record::header_size(), 1, fp_.get()) != 1) {
+      PLOG(ERROR) << "fread() failed";
+      return false;
+    }
+    RecordHeader header;
+    if (!header.Parse(buffer.data())) {
+      return false;
+    }
+    if (buffer.size() < header.size) {
+      buffer.resize(header.size);
+    }
+    if (fread(buffer.data() + Record::header_size(), header.size - Record::header_size(), 1,
+              fp_.get()) != 1) {
+      PLOG(ERROR) << "fread() failed";
+      return false;
+    }
+    auto r = ReadRecordFromBuffer(map_record_reader_.Attr(), header.type, buffer.data(),
+                                  buffer.data() + header.size);
+    CHECK(r);
+    callback(r.get());
+    nread += header.size;
   }
   return true;
 }

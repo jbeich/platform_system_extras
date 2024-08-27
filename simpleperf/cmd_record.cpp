@@ -1776,7 +1776,8 @@ void UpdateMmapRecordForEmbeddedPath(RecordType& r, bool has_prot, uint32_t prot
   }
   std::string filename = r.filename;
   bool name_changed = false;
-  // Some vdex files in map files are marked with deleted flag, but they exist in the file system.
+  // Some vdex files in map files are marked with deleted flag, but they exist in the file
+  // system.
   // It may be because a new file is used to replace the old one, but still worth to try.
   if (android::base::EndsWith(filename, " (deleted)")) {
     filename.resize(filename.size() - 10);
@@ -2025,6 +2026,15 @@ bool RecordCommand::DumpAdditionalFeatures(const std::vector<std::string>& args)
       failed_unwinding_sample = true;
     }
   };
+
+  if (map_record_thread_) {
+    if (!map_record_thread_->Join()) {
+      return false;
+    }
+    if (!map_record_thread_->ReadMapRecords(callback)) {
+      return false;
+    }
+  }
 
   if (!event_selection_set_.HasAuxTrace() && !record_file_writer_->ReadDataSection(callback)) {
     return false;
