@@ -216,6 +216,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f2c35e33_dc8a9b07",
+        "filename": "torq/torq.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-27T02:00:57Z",
+      "side": 1,
+      "message": "No, I meant we don\u0027t need to have to inject it as we already know the event is a user switch.",
+      "parentUuid": "395d2860_c346f2b9",
+      "range": {
+        "startLine": 187,
+        "startChar": 20,
+        "endLine": 187,
+        "endChar": 32
+      },
+      "revId": "733ce137a9b6b7fc5e02e2f5b84e6c88a04c1498",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "41cab283_a4c02ecf",
         "filename": "torq/torq.py",
         "patchSetId": 3
