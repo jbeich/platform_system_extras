@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27472a04_f31499b8",
+        "filename": "simpleperf/cmd_record.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 2048,
+      "author": {
+        "id": 1978766
+      },
+      "writtenOn": "2024-08-28T01:21:51Z",
+      "side": 1,
+      "message": "What does this represent?",
+      "revId": "7d2336d0a3bd97dee801dca8e415d0038a9e1cbd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
