@@ -564,6 +564,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "48f5b94e_5f9fdb90",
+        "filename": "torq/tests/command_executor_unit_test.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-29T23:14:13Z",
+      "side": 1,
+      "message": "I removed the UI, its not a new feature, so we do not need to test it. And I Just renamed this test to test_execute_command_user_switch_all_users_different_success.",
+      "parentUuid": "13415572_eda2e4dd",
+      "range": {
+        "startLine": 273,
+        "startChar": 6,
+        "endLine": 273,
+        "endChar": 50
+      },
+      "revId": "f5d77266ae67a56da759c663a4643d0812d4d4cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "76759ccc_5f140a4b",
