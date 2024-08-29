@@ -3,6 +3,93 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "da190a96_d0aa5e23",
+        "filename": "torq/command.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-29T19:50:23Z",
+      "side": 1,
+      "message": "This can be removed since we are always setting the `command_executor`.",
+      "range": {
+        "startLine": 64,
+        "startChar": 4,
+        "endLine": 64,
+        "endChar": 32
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "e49692a0_be942a79",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/command.py",
+              "range": {
+                "startLine": 64,
+                "startChar": 0,
+                "endLine": 65,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "f5d77266ae67a56da759c663a4643d0812d4d4cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12796a98_a412273a",
+        "filename": "torq/command.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-29T19:50:23Z",
+      "side": 1,
+      "message": "Consider using a switch statement here.",
+      "range": {
+        "startLine": 65,
+        "startChar": 4,
+        "endLine": 65,
+        "endChar": 30
+      },
+      "revId": "f5d77266ae67a56da759c663a4643d0812d4d4cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8343a513_3d88c396",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-29T19:50:23Z",
+      "side": 1,
+      "message": "Could we do the task of saving the original user if `--from_user` is different than the current user in `prepare_device` since we should only do it once and then reset the user in cleanup?",
+      "range": {
+        "startLine": 113,
+        "startChar": 6,
+        "endLine": 113,
+        "endChar": 28
+      },
+      "revId": "f5d77266ae67a56da759c663a4643d0812d4d4cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "64066cac_8328ffc2",
         "filename": "torq/command_executor.py",
         "patchSetId": 9
@@ -19,6 +106,492 @@
         "startChar": 4,
         "endLine": 126,
         "endChar": 48
+      },
+      "revId": "f5d77266ae67a56da759c663a4643d0812d4d4cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89ac1f11_d59481c8",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-29T19:50:23Z",
+      "side": 1,
+      "message": "I think it would be nice to have a log here indicating that we need to switch from the current user to the `from_user`.",
+      "range": {
+        "startLine": 128,
+        "startChar": 0,
+        "endLine": 128,
+        "endChar": 51
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "318d48f0_775fcc57",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/command_executor.py",
+              "range": {
+                "startLine": 128,
+                "startChar": 0,
+                "endLine": 128,
+                "endChar": 0
+              },
+              "replacement": "      print(\"Switching from user %s to user %s\" % (current_user,\n                                                   command.from_user))\n"
+            }
+          ]
+        }
+      ],
+      "revId": "f5d77266ae67a56da759c663a4643d0812d4d4cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e3dabdd_90694aa7",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-29T19:50:23Z",
+      "side": 1,
+      "message": "Inline this please.",
+      "range": {
+        "startLine": 134,
+        "startChar": 4,
+        "endLine": 135,
+        "endChar": 45
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "4ce91a7e_76e1e048",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/command_executor.py",
+              "range": {
+                "startLine": 134,
+                "startChar": 0,
+                "endLine": 136,
+                "endChar": 0
+              },
+              "replacement": "    if device.get_current_user() !\u003d command.original_user:\n"
+            }
+          ]
+        }
+      ],
+      "revId": "f5d77266ae67a56da759c663a4643d0812d4d4cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4a9beba_3919e256",
+        "filename": "torq/tests/command_executor_unit_test.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-29T19:50:23Z",
+      "side": 1,
+      "message": "We should rename this to `do_user_switch` since we are not mocking anything.",
+      "range": {
+        "startLine": 263,
+        "startChar": 6,
+        "endLine": 263,
+        "endChar": 22
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "8616fb92_b623e9ff",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/tests/command_executor_unit_test.py",
+              "range": {
+                "startLine": 263,
+                "startChar": 0,
+                "endLine": 264,
+                "endChar": 0
+              },
+              "replacement": "  def do_user_switch(self, user):\n"
+            },
+            {
+              "path": "torq/tests/command_executor_unit_test.py",
+              "range": {
+                "startLine": 278,
+                "startChar": 0,
+                "endLine": 279,
+                "endChar": 0
+              },
+              "replacement": "          lambda user: self.do_user_switch(user))\n"
+            },
+            {
+              "path": "torq/tests/command_executor_unit_test.py",
+              "range": {
+                "startLine": 299,
+                "startChar": 0,
+                "endLine": 300,
+                "endChar": 0
+              },
+              "replacement": "        lambda user: self.do_user_switch(user))\n"
+            },
+            {
+              "path": "torq/tests/command_executor_unit_test.py",
+              "range": {
+                "startLine": 354,
+                "startChar": 0,
+                "endLine": 355,
+                "endChar": 0
+              },
+              "replacement": "        lambda user: self.do_user_switch(user))\n"
+            },
+            {
+              "path": "torq/tests/command_executor_unit_test.py",
+              "range": {
+                "startLine": 394,
+                "startChar": 0,
+                "endLine": 395,
+                "endChar": 0
+              },
+              "replacement": "        lambda user: self.do_user_switch(user))\n"
+            },
+            {
+              "path": "torq/tests/command_executor_unit_test.py",
+              "range": {
+                "startLine": 415,
+                "startChar": 0,
+                "endLine": 416,
+                "endChar": 0
+              },
+              "replacement": "        lambda user: self.do_user_switch(user))\n"
+            }
+          ]
+        }
+      ],
+      "revId": "f5d77266ae67a56da759c663a4643d0812d4d4cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb6056b9_a9f56c98",
+        "filename": "torq/tests/command_executor_unit_test.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-29T19:50:23Z",
+      "side": 1,
+      "message": "We need a test to check that setting `from_user` to a user other than the current_user can successfully switch to the `from_user`, save the original user, and then finally set the `current_user` back to the original user.\n\nRight now this test and the one below do cover that case, but they are primarily testing `use_ui`.",
+      "range": {
+        "startLine": 273,
+        "startChar": 6,
+        "endLine": 273,
+        "endChar": 50
+      },
+      "revId": "f5d77266ae67a56da759c663a4643d0812d4d4cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76759ccc_5f140a4b",
+        "filename": "torq/tests/command_executor_unit_test.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-29T19:50:23Z",
+      "side": 1,
+      "message": "This is redundant if we are already setting `self.current_user \u003d TEST_USER_ID_3` in `setUp` already. We should move this mock up into `setUp`",
+      "range": {
+        "startLine": 276,
+        "startChar": 0,
+        "endLine": 276,
+        "endChar": 72
+      },
+      "revId": "f5d77266ae67a56da759c663a4643d0812d4d4cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81acbb65_efb7b256",
+        "filename": "torq/tests/command_executor_unit_test.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-29T19:50:23Z",
+      "side": 1,
+      "message": "We are also doing an assignment here. We are going to return whatever value self.current_user is initially. We could just a use a lambda here to return the value of self.current_user.\n\n```\nself.mock_device.get_current_user.return_value \u003d lambda: self.current_user \n```",
+      "range": {
+        "startLine": 276,
+        "startChar": 55,
+        "endLine": 276,
+        "endChar": 72
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "129cb12c_4927d108",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/tests/command_executor_unit_test.py",
+              "range": {
+                "startLine": 261,
+                "startChar": 0,
+                "endLine": 265,
+                "endChar": 0
+              },
+              "replacement": "    self.current_user \u003d lambda: TEST_USER_ID_3\n"
+            },
+            {
+              "path": "torq/tests/command_executor_unit_test.py",
+              "range": {
+                "startLine": 276,
+                "startChar": 0,
+                "endLine": 277,
+                "endChar": 0
+              },
+              "replacement": "      self.mock_device.get_current_user.side_effect \u003d self.current_user\n"
+            },
+            {
+              "path": "torq/tests/command_executor_unit_test.py",
+              "range": {
+                "startLine": 278,
+                "startChar": 0,
+                "endLine": 279,
+                "endChar": 0
+              },
+              "replacement": "          lambda user: self.current_user(user))\n"
+            },
+            {
+              "path": "torq/tests/command_executor_unit_test.py",
+              "range": {
+                "startLine": 284,
+                "startChar": 0,
+                "endLine": 285,
+                "endChar": 0
+              },
+              "replacement": "      self.assertEqual(self.current_user(), self.current_user())\n"
+            },
+            {
+              "path": "torq/tests/command_executor_unit_test.py",
+              "range": {
+                "startLine": 297,
+                "startChar": 0,
+                "endLine": 298,
+                "endChar": 0
+              },
+              "replacement": "    self.mock_device.get_current_user.side_effect \u003d self.current_user\n"
+            },
+            {
+              "path": "torq/tests/command_executor_unit_test.py",
+              "range": {
+                "startLine": 299,
+                "startChar": 0,
+                "endLine": 300,
+                "endChar": 0
+              },
+              "replacement": "        lambda user: self.current_user(user))\n"
+            },
+            {
+              "path": "torq/tests/command_executor_unit_test.py",
+              "range": {
+                "startLine": 305,
+                "startChar": 0,
+                "endLine": 306,
+                "endChar": 0
+              },
+              "replacement": "    self.assertEqual(self.current_user(), self.current_user())\n"
+            },
+            {
+              "path": "torq/tests/command_executor_unit_test.py",
+              "range": {
+                "startLine": 316,
+                "startChar": 0,
+                "endLine": 317,
+                "endChar": 0
+              },
+              "replacement": "    self.mock_device.get_current_user.side_effect \u003d self.current_user\n"
+            },
+            {
+              "path": "torq/tests/command_executor_unit_test.py",
+              "range": {
+                "startLine": 329,
+                "startChar": 0,
+                "endLine": 330,
+                "endChar": 0
+              },
+              "replacement": "    self.mock_device.get_current_user.side_effect \u003d self.current_user\n"
+            },
+            {
+              "path": "torq/tests/command_executor_unit_test.py",
+              "range": {
+                "startLine": 352,
+                "startChar": 0,
+                "endLine": 353,
+                "endChar": 0
+              },
+              "replacement": "    self.mock_device.get_current_user.side_effect \u003d self.current_user\n"
+            },
+            {
+              "path": "torq/tests/command_executor_unit_test.py",
+              "range": {
+                "startLine": 354,
+                "startChar": 0,
+                "endLine": 355,
+                "endChar": 0
+              },
+              "replacement": "        lambda user: self.current_user(user))\n"
+            },
+            {
+              "path": "torq/tests/command_executor_unit_test.py",
+              "range": {
+                "startLine": 360,
+                "startChar": 0,
+                "endLine": 361,
+                "endChar": 0
+              },
+              "replacement": "    self.assertEqual(self.current_user(), self.current_user())\n"
+            },
+            {
+              "path": "torq/tests/command_executor_unit_test.py",
+              "range": {
+                "startLine": 369,
+                "startChar": 0,
+                "endLine": 370,
+                "endChar": 0
+              },
+              "replacement": "    self.mock_device.get_current_user.side_effect \u003d self.current_user\n"
+            },
+            {
+              "path": "torq/tests/command_executor_unit_test.py",
+              "range": {
+                "startLine": 392,
+                "startChar": 0,
+                "endLine": 393,
+                "endChar": 0
+              },
+              "replacement": "    self.mock_device.get_current_user.side_effect \u003d self.current_user\n"
+            },
+            {
+              "path": "torq/tests/command_executor_unit_test.py",
+              "range": {
+                "startLine": 394,
+                "startChar": 0,
+                "endLine": 395,
+                "endChar": 0
+              },
+              "replacement": "        lambda user: self.current_user(user))\n"
+            },
+            {
+              "path": "torq/tests/command_executor_unit_test.py",
+              "range": {
+                "startLine": 400,
+                "startChar": 0,
+                "endLine": 401,
+                "endChar": 0
+              },
+              "replacement": "    self.assertEqual(self.current_user(), self.current_user())\n"
+            },
+            {
+              "path": "torq/tests/command_executor_unit_test.py",
+              "range": {
+                "startLine": 413,
+                "startChar": 0,
+                "endLine": 414,
+                "endChar": 0
+              },
+              "replacement": "    self.mock_device.get_current_user.side_effect \u003d self.current_user\n"
+            },
+            {
+              "path": "torq/tests/command_executor_unit_test.py",
+              "range": {
+                "startLine": 415,
+                "startChar": 0,
+                "endLine": 416,
+                "endChar": 0
+              },
+              "replacement": "        lambda user: self.current_user(user))\n"
+            },
+            {
+              "path": "torq/tests/command_executor_unit_test.py",
+              "range": {
+                "startLine": 421,
+                "startChar": 0,
+                "endLine": 422,
+                "endChar": 0
+              },
+              "replacement": "    self.assertEqual(self.current_user(), self.current_user())\n"
+            }
+          ]
+        }
+      ],
+      "revId": "f5d77266ae67a56da759c663a4643d0812d4d4cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f2a1521_c3297e7c",
+        "filename": "torq/tests/command_executor_unit_test.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-29T19:50:23Z",
+      "side": 1,
+      "message": "This is a tautology. It will always be true, same below.",
+      "range": {
+        "startLine": 284,
+        "startChar": 6,
+        "endLine": 284,
+        "endChar": 60
+      },
+      "revId": "f5d77266ae67a56da759c663a4643d0812d4d4cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6443cb10_f9a6f5b4",
+        "filename": "torq/tests/command_executor_unit_test.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-29T19:50:23Z",
+      "side": 1,
+      "message": "from_user_empty is clearer. Same below.",
+      "range": {
+        "startLine": 345,
+        "startChar": 39,
+        "endLine": 345,
+        "endChar": 51
       },
       "revId": "f5d77266ae67a56da759c663a4643d0812d4d4cd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
