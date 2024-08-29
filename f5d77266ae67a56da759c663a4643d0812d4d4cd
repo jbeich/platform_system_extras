@@ -42,6 +42,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf6f0293_622c3c20",
+        "filename": "torq/command.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-29T23:06:41Z",
+      "side": 1,
+      "message": "Ok removed it, thank you.",
+      "parentUuid": "da190a96_d0aa5e23",
+      "range": {
+        "startLine": 64,
+        "startChar": 4,
+        "endLine": 64,
+        "endChar": 32
+      },
+      "revId": "f5d77266ae67a56da759c663a4643d0812d4d4cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "12796a98_a412273a",
@@ -65,6 +89,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "72d686e5_51a93b29",
+        "filename": "torq/command.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-29T23:06:41Z",
+      "side": 1,
+      "message": "Added this, thank you.",
+      "parentUuid": "12796a98_a412273a",
+      "range": {
+        "startLine": 65,
+        "startChar": 4,
+        "endLine": 65,
+        "endChar": 30
+      },
+      "revId": "f5d77266ae67a56da759c663a4643d0812d4d4cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8343a513_3d88c396",
@@ -78,6 +126,30 @@
       "writtenOn": "2024-08-29T19:50:23Z",
       "side": 1,
       "message": "Could we do the task of saving the original user if `--from_user` is different than the current user in `prepare_device` since we should only do it once and then reset the user in cleanup?",
+      "range": {
+        "startLine": 113,
+        "startChar": 6,
+        "endLine": 113,
+        "endChar": 28
+      },
+      "revId": "f5d77266ae67a56da759c663a4643d0812d4d4cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1de871fb_68614bb7",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-29T23:06:41Z",
+      "side": 1,
+      "message": "Moved it to validation, so only occurs once now.",
+      "parentUuid": "8343a513_3d88c396",
       "range": {
         "startLine": 113,
         "startChar": 6,
@@ -131,6 +203,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8ccb421e_86282c24",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-29T23:06:41Z",
+      "side": 1,
+      "message": "This makes sense, but if we do this, it will lead to us calling user_exists on the current user in many scenarios, which is unnecessary work.",
+      "parentUuid": "f248af8b_1cf1fef4",
+      "range": {
+        "startLine": 118,
+        "startChar": 4,
+        "endLine": 119,
+        "endChar": 47
+      },
+      "revId": "f5d77266ae67a56da759c663a4643d0812d4d4cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "64066cac_8328ffc2",
         "filename": "torq/command_executor.py",
         "patchSetId": 9
@@ -142,6 +238,30 @@
       "writtenOn": "2024-08-29T17:29:15Z",
       "side": 1,
       "message": "Let\u0027s do this in the command `validate()` method. There it makes more sense to set the command fields. We don\u0027t need to do this checks on every run.",
+      "range": {
+        "startLine": 115,
+        "startChar": 4,
+        "endLine": 126,
+        "endChar": 48
+      },
+      "revId": "f5d77266ae67a56da759c663a4643d0812d4d4cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0397d57a_a9ad4ee8",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-29T23:06:41Z",
+      "side": 1,
+      "message": "Implemented this, thank you, introduced no method validate_user_switch.",
+      "parentUuid": "64066cac_8328ffc2",
       "range": {
         "startLine": 115,
         "startChar": 4,
@@ -193,6 +313,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "43e8e877_ae260862",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-29T23:06:41Z",
+      "side": 1,
+      "message": "Added this, thank you. To keep it consistent and not confusing, I added this print statement to the other 2 user switch scenarios.",
+      "parentUuid": "89ac1f11_d59481c8",
+      "range": {
+        "startLine": 128,
+        "startChar": 0,
+        "endLine": 128,
+        "endChar": 51
+      },
+      "revId": "f5d77266ae67a56da759c663a4643d0812d4d4cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0e3dabdd_90694aa7",
@@ -230,6 +374,30 @@
           ]
         }
       ],
+      "revId": "f5d77266ae67a56da759c663a4643d0812d4d4cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6df2e7fd_09b47f10",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-29T23:06:41Z",
+      "side": 1,
+      "message": "Added this, thank you.",
+      "parentUuid": "0e3dabdd_90694aa7",
+      "range": {
+        "startLine": 134,
+        "startChar": 4,
+        "endLine": 135,
+        "endChar": 45
+      },
       "revId": "f5d77266ae67a56da759c663a4643d0812d4d4cd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -327,6 +495,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "df3ef123_8bf8f8c4",
+        "filename": "torq/tests/command_executor_unit_test.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-29T23:06:41Z",
+      "side": 1,
+      "message": "We are mocking though. We are not connecting to the actual device. Instead we are keeping track of a class variable. To make sure all the logic around the actual devices calls is working. We are really doing a reassignment. I cant still change it if you want.",
+      "parentUuid": "d4a9beba_3919e256",
+      "range": {
+        "startLine": 263,
+        "startChar": 6,
+        "endLine": 263,
+        "endChar": 22
+      },
+      "revId": "f5d77266ae67a56da759c663a4643d0812d4d4cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bb6056b9_a9f56c98",
         "filename": "torq/tests/command_executor_unit_test.py",
         "patchSetId": 9
@@ -338,6 +530,30 @@
       "writtenOn": "2024-08-29T19:50:23Z",
       "side": 1,
       "message": "We need a test to check that setting `from_user` to a user other than the current_user can successfully switch to the `from_user`, save the original user, and then finally set the `current_user` back to the original user.\n\nRight now this test and the one below do cover that case, but they are primarily testing `use_ui`.",
+      "range": {
+        "startLine": 273,
+        "startChar": 6,
+        "endLine": 273,
+        "endChar": 50
+      },
+      "revId": "f5d77266ae67a56da759c663a4643d0812d4d4cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13415572_eda2e4dd",
+        "filename": "torq/tests/command_executor_unit_test.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-29T23:06:41Z",
+      "side": 1,
+      "message": "That was the point of these 2 tests. I did not specify because I treated it as a base case and it would be a long test name. The ui was more minor because I thought of having ui and multiple run tests for every event type in the future. I renamed them because I think having an extra test would be redundant and be a copy of no_ui_success with a different name. Let me know what you think.",
+      "parentUuid": "bb6056b9_a9f56c98",
       "range": {
         "startLine": 273,
         "startChar": 6,
@@ -592,6 +808,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8eafc26_f7bc7b5c",
+        "filename": "torq/tests/command_executor_unit_test.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-29T23:06:41Z",
+      "side": 1,
+      "message": "Moved this into setup. It\u0027s a lambda now. We need it because self.current_user changes throughout the tests and this called a lot within the tests too.",
+      "parentUuid": "76759ccc_5f140a4b",
+      "range": {
+        "startLine": 276,
+        "startChar": 0,
+        "endLine": 276,
+        "endChar": 72
+      },
+      "revId": "f5d77266ae67a56da759c663a4643d0812d4d4cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9ec608c_30578cf8",
+        "filename": "torq/tests/command_executor_unit_test.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-29T23:06:41Z",
+      "side": 1,
+      "message": "We cannot do this, because we are actually changing the value of self.current_user a lot. It is not always TEST_USER_ID_3. Just in the beginning and at the end. It\u0027s our way of mocking the original user.",
+      "parentUuid": "81acbb65_efb7b256",
+      "range": {
+        "startLine": 276,
+        "startChar": 55,
+        "endLine": 276,
+        "endChar": 72
+      },
+      "revId": "f5d77266ae67a56da759c663a4643d0812d4d4cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7f2a1521_c3297e7c",
@@ -615,6 +879,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "57b45f6f_cda1c6ea",
+        "filename": "torq/tests/command_executor_unit_test.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-29T23:06:41Z",
+      "side": 1,
+      "message": "Typo, here, sorry, changed it, to TEST_USER_ID_3. I noticed this earlier, but it took me a while to finish everything else in the patch.",
+      "parentUuid": "7f2a1521_c3297e7c",
+      "range": {
+        "startLine": 284,
+        "startChar": 6,
+        "endLine": 284,
+        "endChar": 60
+      },
+      "revId": "f5d77266ae67a56da759c663a4643d0812d4d4cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6443cb10_f9a6f5b4",
@@ -628,6 +916,30 @@
       "writtenOn": "2024-08-29T19:50:23Z",
       "side": 1,
       "message": "from_user_empty is clearer. Same below.",
+      "range": {
+        "startLine": 345,
+        "startChar": 39,
+        "endLine": 345,
+        "endChar": 51
+      },
+      "revId": "f5d77266ae67a56da759c663a4643d0812d4d4cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b4d4ee1_77c90d0b",
+        "filename": "torq/tests/command_executor_unit_test.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-29T23:06:41Z",
+      "side": 1,
+      "message": "Changed this, thank you.",
+      "parentUuid": "6443cb10_f9a6f5b4",
       "range": {
         "startLine": 345,
         "startChar": 39,
