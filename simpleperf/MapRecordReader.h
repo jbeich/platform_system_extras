@@ -60,7 +60,7 @@ class MapRecordThread {
 
   bool Join();
   bool ReadMapRecordData(const std::function<bool(const char*, size_t)>& callback);
-  bool ReadMapRecords(const std::function<void(const Record*)>& callback);
+  bool ReadMapRecords(const std::function<void(const Record*)>& callback, bool only_kernel_maps);
 
  private:
   // functions running in the map record thread

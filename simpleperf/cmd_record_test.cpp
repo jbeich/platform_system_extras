@@ -1102,6 +1102,12 @@ TEST(record_cmd, cs_etm_system_wide) {
     }
   }
   ASSERT_TRUE(has_kernel_build_id);
+
+  // build ids are not dumped if --no-dump-build-id is used.
+  ASSERT_TRUE(RunRecordCmd({"-e", "cs-etm", "-a", "--no-dump-build-id"}, tmpfile.path));
+  reader = RecordFileReader::CreateInstance(tmpfile.path);
+  ASSERT_TRUE(reader);
+  ASSERT_TRUE(reader->ReadBuildIdFeature().empty());
 }
 
 // @CddTest = 6.1/C-0-2

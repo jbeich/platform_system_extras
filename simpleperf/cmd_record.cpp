@@ -273,6 +273,7 @@ class RecordCommand : public Command {
 RECORD_FILTER_OPTION_HELP_MSG_FOR_RECORDING
 "\n"
 "Recording file options:\n"
+"--no-dump-build-id        Don't dump build ids in perf.data.\n"
 "--no-dump-kernel-symbols  Don't dump kernel symbols in perf.data. By default\n"
 "                          kernel symbols will be dumped when needed.\n"
 "--no-dump-symbols       Don't dump symbols in perf.data. By default symbols are\n"
@@ -430,6 +431,7 @@ RECORD_FILTER_OPTION_HELP_MSG_FOR_RECORDING
   bool child_inherit_;
   uint64_t delay_in_ms_ = 0;
   double duration_in_sec_;
+  bool dump_build_id_ = true;
   bool can_dump_kernel_symbols_;
   bool dump_symbols_;
   std::string clockid_;
@@ -1141,6 +1143,7 @@ bool RecordCommand::ParseOptions(const std::vector<std::string>& args,
 
   allow_callchain_joiner_ = !options.PullBoolValue("--no-callchain-joiner");
   allow_truncating_samples_ = !options.PullBoolValue("--no-cut-samples");
+  dump_build_id_ = !options.PullBoolValue("--no-dump-build-id");
   can_dump_kernel_symbols_ = !options.PullBoolValue("--no-dump-kernel-symbols");
   dump_symbols_ = !options.PullBoolValue("--no-dump-symbols");
   if (auto value = options.PullValue("--no-inherit"); value) {
@@ -2031,7 +2034,9 @@ bool RecordCommand::DumpAdditionalFeatures(const std::vector<std::string>& args)
     if (!map_record_thread_->Join()) {
       return false;
     }
-    if (!map_record_thread_->ReadMapRecords(callback)) {
+    // If not dumping build id, we only need to read kernel maps, to dump kernel module addresses
+    // in file feature section.
+    if (!map_record_thread_->ReadMapRecords(callback, !dump_build_id_)) {
       return false;
     }
   }
@@ -2040,7 +2045,10 @@ bool RecordCommand::DumpAdditionalFeatures(const std::vector<std::string>& args)
     return false;
   }
 
-  size_t feature_count = 6;
+  size_t feature_count = 5;
+  if (dump_build_id_) {
+    feature_count++;
+  }
   if (branch_sampling_) {
     feature_count++;
   }
@@ -2059,7 +2067,7 @@ bool RecordCommand::DumpAdditionalFeatures(const std::vector<std::string>& args)
   if (!record_file_writer_->BeginWriteFeatures(feature_count)) {
     return false;
   }
-  if (!DumpBuildIdFeature()) {
+  if (dump_build_id_ && !DumpBuildIdFeature()) {
     return false;
   }
   if (!DumpFileFeature()) {
