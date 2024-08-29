@@ -90,6 +90,47 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f248af8b_1cf1fef4",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-29T21:22:33Z",
+      "side": 1,
+      "message": "Replace with `command.from_user \u003d command.from_user or command.original_user`",
+      "range": {
+        "startLine": 118,
+        "startChar": 4,
+        "endLine": 119,
+        "endChar": 47
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "6b06e0ad_773d38b4",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/command_executor.py",
+              "range": {
+                "startLine": 118,
+                "startChar": 0,
+                "endLine": 120,
+                "endChar": 0
+              },
+              "replacement": "    command.from_user \u003d command.from_user or command.original_user\n"
+            }
+          ]
+        }
+      ],
+      "revId": "f5d77266ae67a56da759c663a4643d0812d4d4cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "64066cac_8328ffc2",
         "filename": "torq/command_executor.py",
         "patchSetId": 9
