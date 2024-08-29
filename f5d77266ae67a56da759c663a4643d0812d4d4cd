@@ -543,6 +543,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d910ead1_a345d5d8",
+        "filename": "torq/tests/command_executor_unit_test.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-29T23:19:39Z",
+      "side": 1,
+      "message": "Sorry for the typos in the above comment. I mean that we are doing many reassignments, which mocks the behavior of the actual device call. This mock lets us know for sure that our logic concerning calling user switches is correct. If you think we should still rename it anyway, let me know please, thank you.",
+      "parentUuid": "df3ef123_8bf8f8c4",
+      "range": {
+        "startLine": 263,
+        "startChar": 6,
+        "endLine": 263,
+        "endChar": 22
+      },
+      "revId": "f5d77266ae67a56da759c663a4643d0812d4d4cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bb6056b9_a9f56c98",
         "filename": "torq/tests/command_executor_unit_test.py",
         "patchSetId": 9
