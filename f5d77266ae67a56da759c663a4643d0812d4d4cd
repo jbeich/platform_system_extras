@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64066cac_8328ffc2",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-08-29T17:29:15Z",
+      "side": 1,
+      "message": "Let\u0027s do this in the command `validate()` method. There it makes more sense to set the command fields. We don\u0027t need to do this checks on every run.",
+      "range": {
+        "startLine": 115,
+        "startChar": 4,
+        "endLine": 126,
+        "endChar": 48
+      },
+      "revId": "f5d77266ae67a56da759c663a4643d0812d4d4cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
