@@ -225,6 +225,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ea782f5_87bf9544",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-29T23:16:36Z",
+      "side": 1,
+      "message": "I changed this code a lot in the new version, so I actually the above comment does not apply to the new code, so I got confused.",
+      "parentUuid": "8ccb421e_86282c24",
+      "range": {
+        "startLine": 118,
+        "startChar": 4,
+        "endLine": 119,
+        "endChar": 47
+      },
+      "revId": "f5d77266ae67a56da759c663a4643d0812d4d4cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "64066cac_8328ffc2",
