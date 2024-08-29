@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d020c69_e4e8986c",
+        "filename": "kcmdlinectrl/kcmdlinectrl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-08-29T08:00:13Z",
+      "side": 1,
+      "message": "Thank you for debugging this issue. It\u0027s unfortunate that `android::base::SetProperty` is flaky. Perhaps this needs to get fixed inside `SetProperty`?\n\nI guess this issue probably also applies to the `kcmdline.binder` property above. Maybe `UpdateProps` as a whole should be retried when either `SetProperty` call fails?\n\nWhat do you think? At the very least, there should be a comment about why we\u0027re retrying.",
+      "revId": "5a5f39f7f7dedf98943ad6fb520060d0f346bccd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
