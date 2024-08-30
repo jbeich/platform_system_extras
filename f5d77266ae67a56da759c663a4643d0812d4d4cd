@@ -589,6 +589,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba841203_e50ce86c",
+        "filename": "torq/tests/command_executor_unit_test.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-30T17:44:37Z",
+      "side": 1,
+      "message": "Actually this makes sense, changed this, thank you",
+      "parentUuid": "d910ead1_a345d5d8",
+      "range": {
+        "startLine": 263,
+        "startChar": 6,
+        "endLine": 263,
+        "endChar": 22
+      },
+      "revId": "f5d77266ae67a56da759c663a4643d0812d4d4cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bb6056b9_a9f56c98",
