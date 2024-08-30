@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5928dd61_fca0fcc6",
+        "filename": "torq/command.py",
+        "patchSetId": 19
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-08-30T18:08:06Z",
+      "side": 1,
+      "message": "In a future CL let\u0027s move this check to the validate_args method.",
+      "range": {
+        "startLine": 92,
+        "startChar": 4,
+        "endLine": 97,
+        "endChar": 52
+      },
+      "revId": "7f3676597f0579745b2d37a2a8653f50cfa24e21",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
