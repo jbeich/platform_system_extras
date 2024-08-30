@@ -67,6 +67,8 @@ class ProfilerCommand(Command):
       case "user-switch":
         self.original_user = None
         self.command_executor = UserSwitchCommandExecutor()
+      case _:
+        raise ValueError("Invalid event name was used.")
 
   def validate(self, device):
     print("Further validating arguments of ProfilerCommand.")
@@ -81,8 +83,7 @@ class ProfilerCommand(Command):
     error = device.user_exists(self.to_user)
     if error is not None:
       return error
-    current_user = device.get_current_user()
-    self.original_user = current_user
+    self.original_user = device.get_current_user()
     if self.from_user is None:
       self.from_user = self.original_user
     else:
