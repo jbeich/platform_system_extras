@@ -73,7 +73,6 @@ inline const OptionFormatMap& GetRecordCmdOptionFormats() {
         {"--no-callchain-joiner",
          {OptionValueType::NONE, OptionType::SINGLE, AppRunnerType::ALLOWED}},
         {"--no-cut-samples", {OptionValueType::NONE, OptionType::SINGLE, AppRunnerType::ALLOWED}},
-        {"--no-dump-build-id", {OptionValueType::NONE, OptionType::SINGLE, AppRunnerType::ALLOWED}},
         {"--no-dump-kernel-symbols",
          {OptionValueType::NONE, OptionType::SINGLE, AppRunnerType::ALLOWED}},
         {"--no-dump-symbols", {OptionValueType::NONE, OptionType::SINGLE, AppRunnerType::ALLOWED}},

@@ -158,10 +158,6 @@ bool MapRecordThread::Join() {
 }
 
 bool MapRecordThread::ReadMapRecordData(const std::function<bool(const char*, size_t)>& callback) {
-  if (fseek(fp_.get(), 0, SEEK_END) != 0) {
-    PLOG(ERROR) << "fseek() failed";
-    return false;
-  }
   off_t offset = ftello(fp_.get());
   if (offset == -1) {
     PLOG(ERROR) << "ftello() failed";
@@ -188,12 +184,7 @@ bool MapRecordThread::ReadMapRecordData(const std::function<bool(const char*, si
   return true;
 }
 
-bool MapRecordThread::ReadMapRecords(const std::function<void(const Record*)>& callback,
-                                     bool only_kernel_maps) {
-  if (fseek(fp_.get(), 0, SEEK_END) != 0) {
-    PLOG(ERROR) << "fseek() failed";
-    return false;
-  }
+bool MapRecordThread::ReadMapRecords(const std::function<void(const Record*)>& callback) {
   off_t offset = ftello(fp_.get());
   if (offset == -1) {
     PLOG(ERROR) << "ftello() failed";
@@ -226,9 +217,6 @@ bool MapRecordThread::ReadMapRecords(const std::function<void(const Record*)>& c
     auto r = ReadRecordFromBuffer(map_record_reader_.Attr(), header.type, buffer.data(),
                                   buffer.data() + header.size);
     CHECK(r);
-    if (only_kernel_maps && !r->InKernel()) {
-      break;
-    }
     callback(r.get());
     nread += header.size;
   }
