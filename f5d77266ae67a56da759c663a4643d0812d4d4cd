@@ -567,6 +567,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "45c09d27_dffcd54e",
+        "filename": "torq/tests/command_executor_unit_test.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-08-30T17:43:59Z",
+      "side": 1,
+      "message": "I see your rationale given that we are just simulating the behavior of the user switch. However, generally using the term mock refers to a test double. In this case we could rename the function to `simulate_user_switch` instead. Otherwise the naming suggests that we are creating a mock function or object.",
+      "parentUuid": "d910ead1_a345d5d8",
+      "range": {
+        "startLine": 263,
+        "startChar": 6,
+        "endLine": 263,
+        "endChar": 22
+      },
+      "revId": "f5d77266ae67a56da759c663a4643d0812d4d4cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bb6056b9_a9f56c98",
         "filename": "torq/tests/command_executor_unit_test.py",
         "patchSetId": 9
