@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9f11fb8_f18e4d47",
+        "filename": "torq/command.py",
+        "patchSetId": 19
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-30T19:48:11Z",
+      "side": 1,
+      "message": "Addressing this in a future CL.",
+      "parentUuid": "3be3cf68_aaa00911",
+      "range": {
+        "startLine": 64,
+        "startChar": 4,
+        "endLine": 64,
+        "endChar": 16
+      },
+      "revId": "7f3676597f0579745b2d37a2a8653f50cfa24e21",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e4bc525b_18f4cc3f",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a57dc7c2_034e0b9e",
+        "filename": "torq/command.py",
+        "patchSetId": 19
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-30T19:48:11Z",
+      "side": 1,
+      "message": "I think we should inline it here actually. This needs to be here event self.from users is not none. Changing this to self.original_user \u003d device.get_current_user(). Adding this to future CL.",
+      "parentUuid": "e4bc525b_18f4cc3f",
+      "range": {
+        "startLine": 84,
+        "startChar": 4,
+        "endLine": 85,
+        "endChar": 37
+      },
+      "revId": "7f3676597f0579745b2d37a2a8653f50cfa24e21",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e716570e_f7eacb21",
@@ -60,6 +108,30 @@
       "writtenOn": "2024-08-30T18:46:05Z",
       "side": 1,
       "message": "I think we can compress the above logic here:\n\n```\nself.from_user \u003d device.get_current_user()\n```",
+      "range": {
+        "startLine": 87,
+        "startChar": 6,
+        "endLine": 87,
+        "endChar": 41
+      },
+      "revId": "7f3676597f0579745b2d37a2a8653f50cfa24e21",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "30c13d97_2dec03b6",
+        "filename": "torq/command.py",
+        "patchSetId": 19
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-30T19:48:11Z",
+      "side": 1,
+      "message": "This needs to be here if we inline the above instead. Adding this to CL.",
+      "parentUuid": "e716570e_f7eacb21",
       "range": {
         "startLine": 87,
         "startChar": 6,
@@ -218,6 +290,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "37699424_0e8dd4ee",
+        "filename": "torq/tests/command_executor_unit_test.py",
+        "patchSetId": 19
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-30T19:48:11Z",
+      "side": 1,
+      "message": "Renaming them in future CL.",
+      "parentUuid": "88fa3c91_df0c6787",
+      "range": {
+        "startLine": 268,
+        "startChar": 6,
+        "endLine": 268,
+        "endChar": 66
+      },
+      "revId": "7f3676597f0579745b2d37a2a8653f50cfa24e21",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e5af5b35_5642038f",
@@ -255,6 +351,30 @@
           ]
         }
       ],
+      "revId": "7f3676597f0579745b2d37a2a8653f50cfa24e21",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7ee5052_7214b122",
+        "filename": "torq/tests/command_executor_unit_test.py",
+        "patchSetId": 19
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-08-30T19:48:11Z",
+      "side": 1,
+      "message": "Renaming in future CL.",
+      "parentUuid": "e5af5b35_5642038f",
+      "range": {
+        "startLine": 329,
+        "startChar": 39,
+        "endLine": 329,
+        "endChar": 64
+      },
       "revId": "7f3676597f0579745b2d37a2a8653f50cfa24e21",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
