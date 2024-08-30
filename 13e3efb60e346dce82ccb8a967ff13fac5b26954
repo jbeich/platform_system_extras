@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed764d35_2c5515d0",
+        "filename": "torq/tests/command_executor_unit_test.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-08-30T19:58:01Z",
+      "side": 1,
+      "message": "Simply call command.execute:\n```suggestion\n      error \u003d self.command.execute(self.mock_device)\n```\nSame for all the cases below.",
+      "range": {
+        "startLine": 50,
+        "startChar": 6,
+        "endLine": 51,
+        "endChar": 69
+      },
+      "revId": "13e3efb60e346dce82ccb8a967ff13fac5b26954",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
