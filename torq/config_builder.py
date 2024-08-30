@@ -247,3 +247,25 @@ PREDEFINED_PERFETTO_CONFIGS = {
     'lightweight': build_lightweight_config,
     'memory': build_memory_config
 }
+
+
+def build_custom_config(command):
+  file_content = ""
+  duration_prefix = "duration_ms:"
+  appended_duration = duration_prefix + " " + str(command.dur_ms)
+  try:
+    with open(command.perfetto_config, "r") as file:
+      for line in file:
+        if line.startswith(duration_prefix):
+          duration = (
+              line[len(duration_prefix):].strip().split(" ")[0].split("#")[0])
+          appended_duration = ""
+          command.dur_ms = int(duration)
+        file_content += line
+  except Exception as e:
+    return None, ValidationError(("Failed to parse custom perfetto-config on"
+                                  "local file path: %s. %s"
+                                  % (command.perfetto_config, str(e))), None)
+  config_string = f"<<EOF\n\n{file_content}\n{appended_duration}\n\nEOF"
+  return config_string, None
+
