@@ -59,6 +59,7 @@ impl TraceProvider for SimpleperfEtmTraceProvider {
             "-z",
             "--binary",
             binary_filter,
+            "--no-dump-build-id",
             "--no-dump-symbols",
             "--no-dump-kernel-symbols",
             "-o",

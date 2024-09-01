@@ -844,6 +844,7 @@ class InjectCommand : public Command {
 "--dump-etm type1,type2,...   Dump etm data. A type is one of raw, packet and element.\n"
 "--exclude-perf               Exclude trace data for the recording process.\n"
 "--symdir <dir>               Look for binaries in a directory recursively.\n"
+"--allow-mismatched-build-id  Allow mismatched build ids when searching for debug binaries.\n"
 "\n"
 "Examples:\n"
 "1. Generate autofdo text output.\n"
@@ -882,6 +883,7 @@ class InjectCommand : public Command {
  private:
   bool ParseOptions(const std::vector<std::string>& args) {
     const OptionFormatMap option_formats = {
+        {"--allow-mismatched-build-id", {OptionValueType::NONE, OptionType::SINGLE}},
         {"--binary", {OptionValueType::STRING, OptionType::SINGLE}},
         {"--dump-etm", {OptionValueType::STRING, OptionType::SINGLE}},
         {"--exclude-perf", {OptionValueType::NONE, OptionType::SINGLE}},
@@ -896,6 +898,9 @@ class InjectCommand : public Command {
       return false;
     }
 
+    if (options.PullBoolValue("--allow-mismatched-build-id")) {
+      Dso::AllowMismatchedBuildId();
+    }
     if (auto value = options.PullValue("--binary"); value) {
       binary_name_regex_ = RegEx::Create(value->str_value);
       if (binary_name_regex_ == nullptr) {

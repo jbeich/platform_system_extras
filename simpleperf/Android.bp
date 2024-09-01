@@ -144,6 +144,9 @@ cc_defaults {
         "libzstd",
     ],
     target: {
+        host: {
+            stl: "libc++_static",
+        },
         linux: {
             static_libs: [
                 "libunwindstack",
@@ -153,15 +156,8 @@ cc_defaults {
                 "librustc_demangle_static",
             ],
         },
-        linux_glibc_x86_64: {
-            stl: "libc++_static",
-        },
-        linux_musl_x86_64: {
-            stl: "libc++_static",
-        },
         windows: {
             enabled: true,
-            stl: "libc++_static",
         },
     },
     use_version_lib: true,
@@ -742,6 +738,9 @@ cc_fuzz {
     defaults: [
         "simpleperf_static_libs",
     ],
+    fuzzing_frameworks: {
+        afl: false,
+    },
     host_supported: true,
     srcs: [
         "libsimpleperf_report_fuzzer.cpp",
@@ -767,6 +766,9 @@ cc_fuzz {
     defaults: [
         "simpleperf_static_libs",
     ],
+    fuzzing_frameworks: {
+        afl: false,
+    },
     host_supported: true,
     srcs: [
         "simpleperf_writer_fuzzer.cpp",

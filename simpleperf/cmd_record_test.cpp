@@ -254,10 +254,8 @@ TEST(record_cmd, fp_callchain_sampling_warning_on_arm) {
     return;
   }
   ASSERT_EXIT(
-      {
-        exit(RunRecordCmd({"--call-graph", "fp"}) ? 0 : 1);
-      },
-      testing::ExitedWithCode(0), "doesn't work well on arm");
+      { exit(RunRecordCmd({"--call-graph", "fp"}) ? 0 : 1); }, testing::ExitedWithCode(0),
+      "doesn't work well on arm");
 }
 
 // @CddTest = 6.1/C-0-2
@@ -1090,7 +1088,26 @@ TEST(record_cmd, cs_etm_system_wide) {
     GTEST_LOG_(INFO) << "Omit this test since etm isn't supported on this device";
     return;
   }
-  ASSERT_TRUE(RunRecordCmd({"-e", "cs-etm", "-a"}));
+  TemporaryFile tmpfile;
+  ASSERT_TRUE(RunRecordCmd({"-e", "cs-etm", "-a"}, tmpfile.path));
+  // Check if build ids are dumped.
+  std::unique_ptr<RecordFileReader> reader = RecordFileReader::CreateInstance(tmpfile.path);
+  ASSERT_TRUE(reader);
+
+  bool has_kernel_build_id = false;
+  for (const auto& build_id_record : reader->ReadBuildIdFeature()) {
+    if (strcmp(build_id_record.filename, DEFAULT_KERNEL_MMAP_NAME) == 0) {
+      has_kernel_build_id = true;
+      break;
+    }
+  }
+  ASSERT_TRUE(has_kernel_build_id);
+
+  // build ids are not dumped if --no-dump-build-id is used.
+  ASSERT_TRUE(RunRecordCmd({"-e", "cs-etm", "-a", "--no-dump-build-id"}, tmpfile.path));
+  reader = RecordFileReader::CreateInstance(tmpfile.path);
+  ASSERT_TRUE(reader);
+  ASSERT_TRUE(reader->ReadBuildIdFeature().empty());
 }
 
 // @CddTest = 6.1/C-0-2
