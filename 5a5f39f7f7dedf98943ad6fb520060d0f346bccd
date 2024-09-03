@@ -34,6 +34,24 @@
       "parentUuid": "6d020c69_e4e8986c",
       "revId": "5a5f39f7f7dedf98943ad6fb520060d0f346bccd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6dae0896_0d57f3cd",
+        "filename": "kcmdlinectrl/kcmdlinectrl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-09-03T09:34:09Z",
+      "side": 1,
+      "message": "Okay, I will wait for you to come to a decision with the kernel community.",
+      "parentUuid": "78048868_5a614bb8",
+      "revId": "5a5f39f7f7dedf98943ad6fb520060d0f346bccd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
