@@ -29,7 +29,6 @@ command:
     stop        Terminate periodic collection.
     trace       Request an one-off system-wide trace.
     process     Convert traces to perf profiles.
-    reconfig    Refresh configuration.
     report      Create a report containing all profiles.
     reset       Clear all local data.
     help        Print this message.
