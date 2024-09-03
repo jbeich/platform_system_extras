@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "80af4b08_d9d744d7",
+        "filename": "torq/config_builder.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-09-03T18:04:59Z",
+      "side": 1,
+      "message": "I defined a stripped_line variable, thank you.",
+      "parentUuid": "34b82acd_ff9df7a8",
+      "range": {
+        "startLine": 258,
+        "startChar": 10,
+        "endLine": 258,
+        "endChar": 14
+      },
+      "revId": "972ae181443cf92f71b711f1d13a23ee89ab9400",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "941f46c4_ca95e7e3",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-09-03T17:20:14Z",
       "side": 1,
       "message": "Why do we need this?",
+      "range": {
+        "startLine": 261,
+        "startChar": 63,
+        "endLine": 261,
+        "endChar": 78
+      },
+      "revId": "972ae181443cf92f71b711f1d13a23ee89ab9400",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a531c56_ea37898f",
+        "filename": "torq/config_builder.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-09-03T18:04:59Z",
+      "side": 1,
+      "message": "Removed this, along with the previous split, thank you.",
+      "parentUuid": "941f46c4_ca95e7e3",
       "range": {
         "startLine": 261,
         "startChar": 63,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f0a4c36_f232faa7",
+        "filename": "torq/tests/config_builder_unit_test.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-09-03T18:04:59Z",
+      "side": 1,
+      "message": "Renamed this, thank you.",
+      "parentUuid": "ad80a2bc_bf88c602",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 16
+      },
+      "revId": "972ae181443cf92f71b711f1d13a23ee89ab9400",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a8826cd4_7049ec91",
@@ -83,6 +155,30 @@
       "writtenOn": "2024-09-03T17:20:14Z",
       "side": 1,
       "message": "There is no need to mock a command, since it is simply a data class. Please use a regular ProfilerCommand. Rename variable to `self.command`.",
+      "range": {
+        "startLine": 598,
+        "startChar": 4,
+        "endLine": 598,
+        "endChar": 76
+      },
+      "revId": "972ae181443cf92f71b711f1d13a23ee89ab9400",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "16907811_e2284391",
+        "filename": "torq/tests/config_builder_unit_test.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 598,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-09-03T18:04:59Z",
+      "side": 1,
+      "message": "Renamed this, thank you.",
+      "parentUuid": "a8826cd4_7049ec91",
       "range": {
         "startLine": 598,
         "startChar": 4,
