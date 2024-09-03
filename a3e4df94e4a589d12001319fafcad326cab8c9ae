@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4fc72f5e_d250d7a9",
+        "filename": "torq/config_builder.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-09-03T21:05:55Z",
+      "side": 1,
+      "message": "In the case the duration_ms is invalid, we can provide a more descriptive error message:\n```suggestion\n  try:\n    with open(command.perfetto_config, \"r\") as file:\n      for line in file:\n        stripped_line \u003d line.strip()\n        if stripped_line.startswith(duration_prefix):\n          duration \u003d stripped_line[len(duration_prefix):].strip()\n          appended_duration \u003d \"\"\n          command.dur_ms \u003d int(duration)\n        file_content +\u003d line\n  except ValueError as e:\n    return None, ValidationError((\"Failed to parse custom perfetto-config on\"\n                                  \" local file path: %s. Invalid duration_ms field in config.\"\n                                  % (command.perfetto_config)), \"Make sure the perfetto config passed via arguments has a valid duration_ms value.\")\n  except Exception as e:\n    return None, ValidationError((\"Failed to parse custom perfetto-config on\"\n                                  \" local file path: %s. %s\"\n                                  % (command.perfetto_config, str(e))), None)\n```",
+      "range": {
+        "startLine": 256,
+        "startChar": 2,
+        "endLine": 268,
+        "endChar": 77
+      },
+      "revId": "a3e4df94e4a589d12001319fafcad326cab8c9ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
