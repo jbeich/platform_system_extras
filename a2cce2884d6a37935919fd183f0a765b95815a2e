@@ -1,0 +1,137 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38e9ad26_89d16404",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-09-04T18:48:03Z",
+      "side": 1,
+      "message": "Nit: `adb wait-for-device`",
+      "range": {
+        "startLine": 12,
+        "startChar": 10,
+        "endLine": 12,
+        "endChar": 25
+      },
+      "revId": "a2cce2884d6a37935919fd183f0a765b95815a2e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6e14963_c2b5cc5c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-09-04T18:48:03Z",
+      "side": 1,
+      "message": "Nit: I think we can remove this trivial detail.",
+      "range": {
+        "startLine": 16,
+        "startChar": 22,
+        "endLine": 18,
+        "endChar": 62
+      },
+      "revId": "a2cce2884d6a37935919fd183f0a765b95815a2e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2f57941_878215b1",
+        "filename": "torq/device.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-09-04T18:48:03Z",
+      "side": 1,
+      "message": "This should be renamed to something like `create_config_file` given that we are not \"pushing\" anything to the device. `push` might be an overloaded term given that we also have `adb push` and these functions are essentially wrappers for adb commands.",
+      "range": {
+        "startLine": 137,
+        "startChar": 6,
+        "endLine": 137,
+        "endChar": 15
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "30b7e1f7_557472c4",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/device.py",
+              "range": {
+                "startLine": 137,
+                "startChar": 0,
+                "endLine": 138,
+                "endChar": 0
+              },
+              "replacement": "  def create_config_file(self, file_path, host_file_string):\n"
+            }
+          ]
+        }
+      ],
+      "revId": "a2cce2884d6a37935919fd183f0a765b95815a2e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a60845f1_6332627a",
+        "filename": "torq/tests/device_unit_test.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-09-04T18:48:03Z",
+      "side": 1,
+      "message": "This function and `mock_sys_boot_completed_result` are effectively doing the same thing.\n\nCould we not just combine them into 1 function that just takes the `stdout` parameter as input for example?\n\n```\ngenerate_mock_completed_process(stdout\u003db\u0027\\n\u0027)\n```",
+      "range": {
+        "startLine": 50,
+        "startChar": 6,
+        "endLine": 50,
+        "endChar": 37
+      },
+      "revId": "a2cce2884d6a37935919fd183f0a765b95815a2e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08f90075_4998ec5a",
+        "filename": "torq/tests/device_unit_test.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-09-04T18:48:03Z",
+      "side": 1,
+      "message": "If we are combining this with the function above, we can remove this function.",
+      "range": {
+        "startLine": 69,
+        "startChar": 6,
+        "endLine": 69,
+        "endChar": 36
+      },
+      "revId": "a2cce2884d6a37935919fd183f0a765b95815a2e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
