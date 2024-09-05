@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0aa8450c_679f31f3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-09-05T23:04:35Z",
+      "side": 1,
+      "message": "Fixed this, thank you.",
+      "parentUuid": "38e9ad26_89d16404",
+      "range": {
+        "startLine": 12,
+        "startChar": 10,
+        "endLine": 12,
+        "endChar": 25
+      },
+      "revId": "a2cce2884d6a37935919fd183f0a765b95815a2e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d6e14963_c2b5cc5c",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-09-04T18:48:03Z",
       "side": 1,
       "message": "Nit: I think we can remove this trivial detail.",
+      "range": {
+        "startLine": 16,
+        "startChar": 22,
+        "endLine": 18,
+        "endChar": 62
+      },
+      "revId": "a2cce2884d6a37935919fd183f0a765b95815a2e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a425037f_adfb356b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-09-05T23:04:35Z",
+      "side": 1,
+      "message": "Removed this, thank you.",
+      "parentUuid": "d6e14963_c2b5cc5c",
       "range": {
         "startLine": 16,
         "startChar": 22,
@@ -88,6 +136,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9c2d076_7f4cdcde",
+        "filename": "torq/device.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-09-05T23:04:35Z",
+      "side": 1,
+      "message": "Changed this to write_to_file, thank you.",
+      "parentUuid": "e2f57941_878215b1",
+      "range": {
+        "startLine": 137,
+        "startChar": 6,
+        "endLine": 137,
+        "endChar": 15
+      },
+      "revId": "a2cce2884d6a37935919fd183f0a765b95815a2e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a60845f1_6332627a",
@@ -111,6 +183,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f42ec719_e7097a35",
+        "filename": "torq/tests/device_unit_test.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-09-05T23:04:35Z",
+      "side": 1,
+      "message": "Instead, I just have the \\n as a default, and I changed it to add the stdout argument before that to avoid passing in \\n many times. So if we pass in \"1\", it will be b\u00271\\n\u0027 and if we pass in nothing, it\u0027s b\u00271\u0027. To make this work, I set the default value of the stdout argument to None in the method definition.",
+      "parentUuid": "a60845f1_6332627a",
+      "range": {
+        "startLine": 50,
+        "startChar": 6,
+        "endLine": 50,
+        "endChar": 37
+      },
+      "revId": "a2cce2884d6a37935919fd183f0a765b95815a2e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "08f90075_4998ec5a",
@@ -124,6 +220,30 @@
       "writtenOn": "2024-09-04T18:48:03Z",
       "side": 1,
       "message": "If we are combining this with the function above, we can remove this function.",
+      "range": {
+        "startLine": 69,
+        "startChar": 6,
+        "endLine": 69,
+        "endChar": 36
+      },
+      "revId": "a2cce2884d6a37935919fd183f0a765b95815a2e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "231418ee_f757668c",
+        "filename": "torq/tests/device_unit_test.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-09-05T23:04:35Z",
+      "side": 1,
+      "message": "Removed it, thank you.",
+      "parentUuid": "08f90075_4998ec5a",
       "range": {
         "startLine": 69,
         "startChar": 6,
