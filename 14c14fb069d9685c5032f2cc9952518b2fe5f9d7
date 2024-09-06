@@ -1,0 +1,65 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80682de2_c2432758",
+        "filename": "torq/tests/device_unit_test.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-09-06T03:53:04Z",
+      "side": 1,
+      "message": "I think we should change this to `BOOT_COMPLETE_OUTPUT`",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 26
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "daeb6b2e_ae91422a",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/tests/device_unit_test.py",
+              "range": {
+                "startLine": 32,
+                "startChar": 0,
+                "endLine": 33,
+                "endChar": 0
+              },
+              "replacement": "BOOT_COMPLETE_OUTPUT \u003d b\"1\\n\"\n"
+            },
+            {
+              "path": "torq/tests/device_unit_test.py",
+              "range": {
+                "startLine": 524,
+                "startChar": 0,
+                "endLine": 525,
+                "endChar": 0
+              },
+              "replacement": "        self.generate_mock_completed_process(BOOT_COMPLETE_OUTPUT))\n"
+            },
+            {
+              "path": "torq/tests/device_unit_test.py",
+              "range": {
+                "startLine": 553,
+                "startChar": 0,
+                "endLine": 554,
+                "endChar": 0
+              },
+              "replacement": "        self.generate_mock_completed_process(BOOT_COMPLETE_OUTPUT))\n"
+            }
+          ]
+        }
+      ],
+      "revId": "14c14fb069d9685c5032f2cc9952518b2fe5f9d7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
