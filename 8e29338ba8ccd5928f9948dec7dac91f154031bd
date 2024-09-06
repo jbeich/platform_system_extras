@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "09ac7c60_b4d3ee40",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-09-06T23:24:15Z",
+      "side": 1,
+      "message": "Nit: functionality",
+      "range": {
+        "startLine": 9,
+        "startChar": 6,
+        "endLine": 9,
+        "endChar": 20
+      },
+      "revId": "8e29338ba8ccd5928f9948dec7dac91f154031bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "13e98b51_f9faa36a",
@@ -14,6 +37,90 @@
       "writtenOn": "2024-09-06T22:39:41Z",
       "side": 1,
       "message": "Really good work in this CL! Perfect CL size and very readable, quality code.",
+      "revId": "8e29338ba8ccd5928f9948dec7dac91f154031bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb2c54c3_23b51029",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-09-06T23:24:15Z",
+      "side": 1,
+      "message": "Let\u0027s follow the naming scheme for the rest of the constants and rename this to: `PERFETTO_BOOT_TRACE_FILE`",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 24
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "9f42d3f5_27e6c2a2",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/command_executor.py",
+              "range": {
+                "startLine": 23,
+                "startChar": 0,
+                "endLine": 24,
+                "endChar": 0
+              },
+              "replacement": "PERFETTO_BOOT_TRACE_FILE \u003d \"/data/misc/perfetto-traces/boottrace.perfetto-trace\"\n"
+            },
+            {
+              "path": "torq/command_executor.py",
+              "range": {
+                "startLine": 140,
+                "startChar": 0,
+                "endLine": 141,
+                "endChar": 0
+              },
+              "replacement": "    device.remove_file(PERFETTO_BOOT_TRACE_FILE)\n"
+            },
+            {
+              "path": "torq/command_executor.py",
+              "range": {
+                "startLine": 157,
+                "startChar": 0,
+                "endLine": 158,
+                "endChar": 0
+              },
+              "replacement": "    device.pull_file(PERFETTO_BOOT_TRACE_FILE, host_file)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "8e29338ba8ccd5928f9948dec7dac91f154031bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2407f85b_a739d34b",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-09-06T23:24:15Z",
+      "side": 1,
+      "message": "This method of collecting boot tracing data only works on T+ per https://perfetto.dev/docs/case-studies/android-boot-tracing\n\nI think that we should make users aware of this or plan to account for this. WDYT @jahdiel@google.com",
+      "range": {
+        "startLine": 138,
+        "startChar": 2,
+        "endLine": 141,
+        "endChar": 60
+      },
       "revId": "8e29338ba8ccd5928f9948dec7dac91f154031bd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },

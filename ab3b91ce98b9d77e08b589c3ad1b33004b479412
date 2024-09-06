@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e3642c7_d3bcf28f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-09-06T23:24:15Z",
+      "side": 1,
+      "message": "Overall, excellent work. Well-sized and quality code.",
+      "revId": "ab3b91ce98b9d77e08b589c3ad1b33004b479412",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "006d7ed5_8083e87d",
+        "filename": "torq/tests/command_executor_unit_test.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-09-06T23:24:15Z",
+      "side": 1,
+      "message": "We also want some test cases for `remove_file` and `root_device` failure as well.",
+      "range": {
+        "startLine": 345,
+        "startChar": 6,
+        "endLine": 345,
+        "endChar": 33
+      },
+      "revId": "ab3b91ce98b9d77e08b589c3ad1b33004b479412",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
