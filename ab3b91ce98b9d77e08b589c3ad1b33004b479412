@@ -39,6 +39,30 @@
       },
       "revId": "ab3b91ce98b9d77e08b589c3ad1b33004b479412",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7033bfad_7cd82ce6",
+        "filename": "torq/tests/command_executor_unit_test.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-09-06T23:39:46Z",
+      "side": 1,
+      "message": "Added these 2 tests, thank you.",
+      "parentUuid": "006d7ed5_8083e87d",
+      "range": {
+        "startLine": 345,
+        "startChar": 6,
+        "endLine": 345,
+        "endChar": 33
+      },
+      "revId": "ab3b91ce98b9d77e08b589c3ad1b33004b479412",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

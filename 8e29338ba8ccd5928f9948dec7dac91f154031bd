@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "6b72bf87_6408d3ea",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-09-06T23:39:46Z",
+      "side": 1,
+      "message": "Fixed this, thank you.",
+      "parentUuid": "09ac7c60_b4d3ee40",
+      "range": {
+        "startLine": 9,
+        "startChar": 6,
+        "endLine": 9,
+        "endChar": 20
+      },
+      "revId": "8e29338ba8ccd5928f9948dec7dac91f154031bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "13e98b51_f9faa36a",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
@@ -98,6 +122,30 @@
           ]
         }
       ],
+      "revId": "8e29338ba8ccd5928f9948dec7dac91f154031bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "494ba23b_6f47b493",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-09-06T23:39:46Z",
+      "side": 1,
+      "message": "Replaced this, thank you.",
+      "parentUuid": "cb2c54c3_23b51029",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 24
+      },
       "revId": "8e29338ba8ccd5928f9948dec7dac91f154031bd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
