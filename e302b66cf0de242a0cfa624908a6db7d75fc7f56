@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "83abdc50_afb9a8d0",
+        "filename": "torq/device.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-09-06T17:12:55Z",
+      "side": 1,
+      "message": "Changed this, thank you.",
+      "parentUuid": "6a34782c_f92a598d",
+      "range": {
+        "startLine": 141,
+        "startChar": 2,
+        "endLine": 143,
+        "endChar": 61
+      },
+      "revId": "e302b66cf0de242a0cfa624908a6db7d75fc7f56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4caa5aa3_1de96955",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-09-06T16:31:33Z",
       "side": 1,
       "message": "rename to `reboot`",
+      "range": {
+        "startLine": 145,
+        "startChar": 6,
+        "endLine": 145,
+        "endChar": 18
+      },
+      "revId": "e302b66cf0de242a0cfa624908a6db7d75fc7f56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f068b69_84575c1c",
+        "filename": "torq/device.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-09-06T17:12:55Z",
+      "side": 1,
+      "message": "Renamed it, thank you.",
+      "parentUuid": "4caa5aa3_1de96955",
       "range": {
         "startLine": 145,
         "startChar": 6,
