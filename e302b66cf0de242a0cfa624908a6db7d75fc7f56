@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a34782c_f92a598d",
+        "filename": "torq/device.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-09-06T16:31:33Z",
+      "side": 1,
+      "message": "Let\u0027s make this more generic. Rename method to `set_prop`, and receive to arguments: `prop` and `value`. This way we could use it for setting any prop.",
+      "range": {
+        "startLine": 141,
+        "startChar": 2,
+        "endLine": 143,
+        "endChar": 61
+      },
+      "revId": "e302b66cf0de242a0cfa624908a6db7d75fc7f56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4caa5aa3_1de96955",
+        "filename": "torq/device.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-09-06T16:31:33Z",
+      "side": 1,
+      "message": "rename to `reboot`",
+      "range": {
+        "startLine": 145,
+        "startChar": 6,
+        "endLine": 145,
+        "endChar": 18
+      },
+      "revId": "e302b66cf0de242a0cfa624908a6db7d75fc7f56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
