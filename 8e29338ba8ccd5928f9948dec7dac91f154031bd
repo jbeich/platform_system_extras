@@ -175,6 +175,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0baaa6c7_9f0d77f6",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1884365
+      },
+      "writtenOn": "2024-09-07T00:24:26Z",
+      "side": 1,
+      "message": "Yes, torq should be smart enough to say that boot tracing is not supported in that version.",
+      "parentUuid": "2407f85b_a739d34b",
+      "range": {
+        "startLine": 138,
+        "startChar": 2,
+        "endLine": 141,
+        "endChar": 60
+      },
+      "revId": "8e29338ba8ccd5928f9948dec7dac91f154031bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0a6c7ec2_33f1c0dd",
         "filename": "torq/tests/command_executor_unit_test.py",
         "patchSetId": 2
