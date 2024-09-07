@@ -197,6 +197,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e2d16f9_f26326f0",
+        "filename": "torq/command_executor.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-09-07T01:04:57Z",
+      "side": 1,
+      "message": "Will do in future cl.",
+      "parentUuid": "0baaa6c7_9f0d77f6",
+      "range": {
+        "startLine": 138,
+        "startChar": 2,
+        "endLine": 141,
+        "endChar": 60
+      },
+      "revId": "8e29338ba8ccd5928f9948dec7dac91f154031bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0a6c7ec2_33f1c0dd",
