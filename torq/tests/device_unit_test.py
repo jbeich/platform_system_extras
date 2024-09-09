@@ -29,8 +29,13 @@ TEST_EXCEPTION = Exception(TEST_FAILURE_MSG)
 TEST_USER_ID_1 = 0
 TEST_USER_ID_2 = 1
 TEST_USER_ID_3 = 2
+TEST_APP_1 = "test-app-1"
+TEST_APP_2 = "test-app-2"
+TEST_APP_3 = "test-app-3"
 TEST_PROP = "test-prop"
 TEST_PROP_VALUE = "test-prop-value"
+TEST_ACTIVITY = "test-activity"
+TEST_PROCESS_ID_OUTPUT = b"8241\n"
 BOOT_COMPLETE_OUTPUT = b"1\n"
 
 
@@ -68,6 +73,13 @@ class DeviceUnitTest(unittest.TestCase):
                                 stdout=(b'Users:\n\tUserInfo{%d:Driver:813}'
                                         b' running\n\tUserInfo{%d:Driver:412}\n'
                                         % (TEST_USER_ID_1, TEST_USER_ID_2)))
+
+  @staticmethod
+  def mock_packages():
+    return mock.create_autospec(subprocess.CompletedProcess, instance=True,
+                                stdout=(b'package:%b\npackage:%b\n'
+                                        % (TEST_APP_1.encode("utf-8"),
+                                           TEST_APP_2.encode("utf-8"))))
 
   @mock.patch.object(subprocess, "run", autospec=True)
   def test_get_adb_devices_returns_devices(self, mock_subprocess_run):
@@ -580,6 +592,209 @@ class DeviceUnitTest(unittest.TestCase):
     self.assertEqual(str(e.exception), ("Device with serial %s took too long to"
                                         " finish rebooting."
                                         % adbDevice.serial))
+
+  @mock.patch.object(subprocess, "run", autospec=True)
+  def test_get_packages_success(self, mock_subprocess_run):
+    mock_subprocess_run.return_value = self.mock_packages()
+    adbDevice = AdbDevice(TEST_DEVICE_SERIAL)
+
+    packages = adbDevice.get_packages()
+
+    self.assertEqual(packages, b'package:test-app-1\npackage:test-app-2\n')
+
+  @mock.patch.object(subprocess, "run", autospec=True)
+  def test_get_packages_failure(self, mock_subprocess_run):
+    mock_subprocess_run.side_effect = TEST_EXCEPTION
+    adbDevice = AdbDevice(TEST_DEVICE_SERIAL)
+
+    with self.assertRaises(Exception) as e:
+      adbDevice.get_packages()
+
+    self.assertEqual(str(e.exception), TEST_FAILURE_MSG)
+
+  @mock.patch.object(subprocess, "run", autospec=True)
+  def test_app_exists_success(self, mock_subprocess_run):
+    mock_subprocess_run.side_effect = [self.mock_packages(),
+                                       self.generate_mock_completed_process(
+                                           b'%s\n' % TEST_APP_1.encode(
+                                               "utf-8"))]
+    adbDevice = AdbDevice(TEST_DEVICE_SERIAL)
+
+    error = adbDevice.app_exists(TEST_APP_1)
+
+    self.assertEqual(error, None)
+
+  @mock.patch.object(subprocess, "run", autospec=True)
+  def test_app_exists_and_app_not_on_device_error(self, mock_subprocess_run):
+    mock_subprocess_run.side_effect = [self.mock_packages(),
+                                       self.generate_mock_completed_process()]
+    adbDevice = AdbDevice(TEST_DEVICE_SERIAL)
+
+    error = adbDevice.app_exists(TEST_APP_3)
+
+    self.assertNotEqual(error, None)
+    self.assertEqual(error.message, ("Package %s does not exist on device"
+                                     " with serial %s."
+                                     % (TEST_APP_3, TEST_DEVICE_SERIAL)))
+    self.assertEqual(error.suggestion, ("Select from one of the following"
+                                        " packages on device with serial %s:"
+                                        " \n\t %s,\n\t %s"
+                                        % (TEST_DEVICE_SERIAL, TEST_APP_1,
+                                           TEST_APP_2)))
+
+  @mock.patch.object(subprocess, "run", autospec=True)
+  def test_app_exists_failure(self, mock_subprocess_run):
+    mock_subprocess_run.side_effect = TEST_EXCEPTION
+    adbDevice = AdbDevice(TEST_DEVICE_SERIAL)
+
+    with self.assertRaises(Exception) as e:
+      adbDevice.app_exists(TEST_APP_1)
+
+    self.assertEqual(str(e.exception), TEST_FAILURE_MSG)
+
+  @mock.patch.object(subprocess, "run", autospec=True)
+  def test_get_process_id_success(self, mock_subprocess_run):
+    mock_subprocess_run.return_value = self.generate_mock_completed_process(
+        TEST_PROCESS_ID_OUTPUT)
+    adbDevice = AdbDevice(TEST_DEVICE_SERIAL)
+
+    process_id = adbDevice.get_process_id(TEST_APP_1)
+
+    self.assertEqual(process_id, "8241")
+
+  @mock.patch.object(subprocess, "run", autospec=True)
+  def test_get_process_id_failure(self, mock_subprocess_run):
+    mock_subprocess_run.side_effect = TEST_EXCEPTION
+    adbDevice = AdbDevice(TEST_DEVICE_SERIAL)
+
+    with self.assertRaises(Exception) as e:
+      adbDevice.get_process_id(TEST_APP_1)
+
+    self.assertEqual(str(e.exception), TEST_FAILURE_MSG)
+
+  @mock.patch.object(subprocess, "run", autospec=True)
+  def test_app_running_success(self, mock_subprocess_run):
+    mock_subprocess_run.return_value = self.generate_mock_completed_process()
+    adbDevice = AdbDevice(TEST_DEVICE_SERIAL)
+
+    error = adbDevice.app_running(TEST_APP_1)
+
+    self.assertEqual(error, None)
+
+  @mock.patch.object(subprocess, "run", autospec=True)
+  def test_app_running_and_app_is_running_error(self, mock_subprocess_run):
+    mock_subprocess_run.return_value = (
+        self.generate_mock_completed_process(TEST_PROCESS_ID_OUTPUT))
+    adbDevice = AdbDevice(TEST_DEVICE_SERIAL)
+
+    error = adbDevice.app_running(TEST_APP_1)
+
+    self.assertNotEqual(error, None)
+    self.assertEqual(error.message, ("Package %s is already running on device"
+                                     " with serial %s."
+                                     % (TEST_APP_1, TEST_DEVICE_SERIAL)))
+    self.assertEqual(error.suggestion, ("Run 'adb -s %s shell am force-stop %s'"
+                                        " to close the package %s before trying"
+                                        " to start it." % (TEST_DEVICE_SERIAL,
+                                                           TEST_APP_1,
+                                                           TEST_APP_1)))
+
+  @mock.patch.object(subprocess, "run", autospec=True)
+  def test_app_running_command_failure(self, mock_subprocess_run):
+    mock_subprocess_run.side_effect = TEST_EXCEPTION
+    adbDevice = AdbDevice(TEST_DEVICE_SERIAL)
+
+    with self.assertRaises(Exception) as e:
+      adbDevice.app_running(TEST_APP_1)
+
+    self.assertEqual(str(e.exception), TEST_FAILURE_MSG)
+
+  @mock.patch.object(subprocess, "run", autospec=True)
+  def test_start_app_success(self, mock_subprocess_run):
+    mock_subprocess_run.return_value = self.generate_mock_completed_process()
+    mock_subprocess_run.return_value.returncode = 0
+    adbDevice = AdbDevice(TEST_DEVICE_SERIAL)
+
+    error = adbDevice.start_app(TEST_APP_1)
+
+    self.assertEqual(error, None)
+
+  @mock.patch.object(subprocess, "run", autospec=True)
+  def test_start_app_and_app_is_service_app_error(self, mock_subprocess_run):
+    mock_subprocess_run.return_value = self.generate_mock_completed_process()
+    mock_subprocess_run.return_value.returncode = 1
+    adbDevice = AdbDevice(TEST_DEVICE_SERIAL)
+
+    error = adbDevice.start_app(TEST_APP_1)
+
+    self.assertNotEqual(error, None)
+    self.assertEqual(error.message, ("Cannot start package %s on device with"
+                                     " serial %s because %s is a service"
+                                     " package, which doesn't implement a MAIN"
+                                     " activity." % (TEST_APP_1,
+                                                     TEST_DEVICE_SERIAL,
+                                                     TEST_APP_1)))
+    self.assertEqual(error.suggestion, None)
+
+  @mock.patch.object(subprocess, "run", autospec=True)
+  def test_start_app_command_failure(self, mock_subprocess_run):
+    mock_subprocess_run.side_effect = TEST_EXCEPTION
+    adbDevice = AdbDevice(TEST_DEVICE_SERIAL)
+
+    with self.assertRaises(Exception) as e:
+      adbDevice.start_app(TEST_APP_1)
+
+    self.assertEqual(str(e.exception), TEST_FAILURE_MSG)
+
+  @mock.patch.object(subprocess, "run", autospec=True)
+  def test_kill_process_id_success(self, mock_subprocess_run):
+    mock_subprocess_run.side_effect = [
+        self.generate_mock_completed_process(TEST_PROCESS_ID_OUTPUT), None]
+    adbDevice = AdbDevice(TEST_DEVICE_SERIAL)
+
+    # No exception is expected to be thrown
+    adbDevice.kill_process_id(TEST_ACTIVITY)
+
+  @mock.patch.object(subprocess, "run", autospec=True)
+  def test_kill_process_id_and_get_process_id_fails_error(self,
+      mock_subprocess_run):
+    mock_subprocess_run.side_effect = TEST_EXCEPTION
+    adbDevice = AdbDevice(TEST_DEVICE_SERIAL)
+
+    with self.assertRaises(Exception) as e:
+      adbDevice.kill_process_id(TEST_ACTIVITY)
+
+    self.assertEqual(str(e.exception), TEST_FAILURE_MSG)
+
+  @mock.patch.object(subprocess, "run", autospec=True)
+  def test_kill_process_id_command_failure(self, mock_subprocess_run):
+    mock_subprocess_run.side_effect = [
+        self.generate_mock_completed_process(TEST_PROCESS_ID_OUTPUT),
+        TEST_EXCEPTION]
+    adbDevice = AdbDevice(TEST_DEVICE_SERIAL)
+
+    with self.assertRaises(Exception) as e:
+      adbDevice.kill_process_id(TEST_ACTIVITY)
+
+    self.assertEqual(str(e.exception), TEST_FAILURE_MSG)
+
+  @mock.patch.object(subprocess, "run", autospec=True)
+  def test_force_stop_app_success(self, mock_subprocess_run):
+    mock_subprocess_run.return_value = None
+    adbDevice = AdbDevice(TEST_DEVICE_SERIAL)
+
+    # No exception is expected to be thrown
+    adbDevice.force_stop_app(TEST_APP_1)
+
+  @mock.patch.object(subprocess, "run", autospec=True)
+  def test_perform_force_stop_app_failure(self, mock_subprocess_run):
+    mock_subprocess_run.side_effect = TEST_EXCEPTION
+    adbDevice = AdbDevice(TEST_DEVICE_SERIAL)
+
+    with self.assertRaises(Exception) as e:
+      adbDevice.force_stop_app(TEST_APP_1)
+
+    self.assertEqual(str(e.exception), TEST_FAILURE_MSG)
 
 
 if __name__ == '__main__':
