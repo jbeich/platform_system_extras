@@ -160,6 +160,57 @@ class AdbDevice:
       raise Exception(("Device with serial %s took too long to finish"
                        " rebooting." % self.serial))
 
+  def get_packages(self):
+    return subprocess.run(["adb", "-s", self.serial, "shell", "pm", "list",
+                           "packages"], capture_output=True).stdout
+
+  def app_exists(self, app):
+    packages = self.get_packages()
+    if subprocess.run("grep %s$" % app, shell=True, capture_output=True,
+                      input=packages
+                      ).stdout.decode("utf-8").split("\n")[0] == "":
+      return ValidationError(("Package %s does not exist on device with serial"
+                              " %s." % (app, self.serial)),
+                             ("Select from one of the following packages on"
+                              " device with serial %s: \n\t %s"
+                              % (self.serial, ((",\n\t ".join(packages.decode(
+                                     "utf-8").removeprefix("package:").split(
+                                     "\npackage:")))[:-1]))))
+    return None
+
+  def get_process_id(self, activity):
+    return subprocess.run("adb -s %s shell pidof %s" % (self.serial, activity),
+                          shell=True, capture_output=True
+                          ).stdout.decode("utf-8").split("\n")[0]
+
+  def app_running(self, app):
+    if self.get_process_id(app) != "":
+      return ValidationError(("Package %s is already running on device with"
+                              " serial %s." % (app, self.serial)),
+                             ("Run 'adb -s %s shell am force-stop %s' to"
+                              " close the package %s before trying to start it."
+                              % (self.serial, app, app)))
+    return None
+
+  def start_app(self, app):
+    if subprocess.run(
+        ["adb", "-s", self.serial, "shell", "am", "start", app],
+        capture_output=True).stderr.decode("utf-8").split("\n")[0] != "":
+      return ValidationError(("Cannot start package %s on device with"
+                              " serial %s because %s is a service package,"
+                              " which doesn't implement a MAIN activity."
+                              % (app, self.serial, app)), None)
+    return None
+
+  def kill_process_id(self, activity):
+    process_id = self.get_process_id(activity)
+    if process_id != "":
+      subprocess.run(["adb", "-s", self.serial, "shell", "kill", "-9",
+                      process_id])
+
+  def force_stop_app(self, app):
+    subprocess.run(["adb", "-s", self.serial, "shell", "am", "force-stop", app])
+
   def get_num_cpus(self):
     raise NotImplementedError
 
@@ -179,9 +230,6 @@ class AdbDevice:
     raise NotImplementedError
 
   def set_memory(self, memory):
-    raise NotImplementedError
-
-  def app_exists(self, app):
     raise NotImplementedError
 
   def simpleperf_event_exists(self, simpleperf_event):
