@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d263643_02dedc5a",
+        "filename": "torq/tests/device_unit_test.py",
+        "patchSetId": 15
+      },
+      "lineNbr": 625,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-09-10T18:29:15Z",
+      "side": 1,
+      "message": "Renamed this, thank you.",
+      "parentUuid": "ecd7d150_6f2ea370",
+      "range": {
+        "startLine": 625,
+        "startChar": 6,
+        "endLine": 625,
+        "endChar": 49
+      },
+      "revId": "87eb958b8a742ddb12212126967679cfefd40ab7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f42faaf4_b2ad45d4",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-09-10T18:20:35Z",
       "side": 1,
       "message": "Rename to `test_package_running`",
+      "range": {
+        "startLine": 672,
+        "startChar": 6,
+        "endLine": 672,
+        "endChar": 37
+      },
+      "revId": "87eb958b8a742ddb12212126967679cfefd40ab7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aad8feba_3340c69f",
+        "filename": "torq/tests/device_unit_test.py",
+        "patchSetId": 15
+      },
+      "lineNbr": 672,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-09-10T18:29:15Z",
+      "side": 1,
+      "message": "Renamed this, thank you.",
+      "parentUuid": "f42faaf4_b2ad45d4",
       "range": {
         "startLine": 672,
         "startChar": 6,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9cc619ae_b4074f49",
+        "filename": "torq/tests/device_unit_test.py",
+        "patchSetId": 15
+      },
+      "lineNbr": 682,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-09-10T18:29:15Z",
+      "side": 1,
+      "message": "Renamed this, thank you.",
+      "parentUuid": "4d49452f_b68de7be",
+      "range": {
+        "startLine": 682,
+        "startChar": 6,
+        "endLine": 682,
+        "endChar": 53
+      },
+      "revId": "87eb958b8a742ddb12212126967679cfefd40ab7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "613d1ad7_95f0f0b6",
@@ -93,6 +165,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0573f39_442a6d33",
+        "filename": "torq/tests/device_unit_test.py",
+        "patchSetId": 15
+      },
+      "lineNbr": 711,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-09-10T18:29:15Z",
+      "side": 1,
+      "message": "Reamed this, thank you.",
+      "parentUuid": "613d1ad7_95f0f0b6",
+      "range": {
+        "startLine": 711,
+        "startChar": 6,
+        "endLine": 711,
+        "endChar": 51
+      },
+      "revId": "87eb958b8a742ddb12212126967679cfefd40ab7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f40c020a_be1f4d0d",
@@ -106,6 +202,30 @@
       "writtenOn": "2024-09-10T18:20:35Z",
       "side": 1,
       "message": "Don\u0027t use `TEST_ACTIVITY`. Let\u0027s use one of the test package constants. Same below.",
+      "range": {
+        "startLine": 744,
+        "startChar": 23,
+        "endLine": 744,
+        "endChar": 36
+      },
+      "revId": "87eb958b8a742ddb12212126967679cfefd40ab7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5689656_25dfa317",
+        "filename": "torq/tests/device_unit_test.py",
+        "patchSetId": 15
+      },
+      "lineNbr": 744,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-09-10T18:29:15Z",
+      "side": 1,
+      "message": "Changed to TEST_PACKAGE_1 and removed TEST_ACTIVITY, thank you.",
+      "parentUuid": "f40c020a_be1f4d0d",
       "range": {
         "startLine": 744,
         "startChar": 23,
