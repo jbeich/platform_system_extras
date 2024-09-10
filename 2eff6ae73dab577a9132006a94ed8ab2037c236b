@@ -305,6 +305,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "86dac160_3f240f75",
+        "filename": "torq/device.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-09-10T17:45:48Z",
+      "side": 1,
+      "message": "Renamed, thank you.",
+      "parentUuid": "049bb79a_e80af8fc",
+      "range": {
+        "startLine": 197,
+        "startChar": 4,
+        "endLine": 197,
+        "endChar": 14
+      },
+      "revId": "2eff6ae73dab577a9132006a94ed8ab2037c236b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "314cf68c_d8a1ae8e",
@@ -433,6 +457,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce090aae_ee8ee181",
+        "filename": "torq/tests/device_unit_test.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-09-10T17:45:48Z",
+      "side": 1,
+      "message": "Renamed, thank you.",
+      "parentUuid": "b518c97e_d6056d33",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 22
+      },
+      "revId": "2eff6ae73dab577a9132006a94ed8ab2037c236b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c7590903_92b653da",
@@ -504,6 +552,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a0fe66c_06516b05",
+        "filename": "torq/tests/device_unit_test.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 676,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-09-10T17:45:48Z",
+      "side": 1,
+      "message": "Renamed, thank you.",
+      "parentUuid": "c7590903_92b653da",
+      "range": {
+        "startLine": 676,
+        "startChar": 4,
+        "endLine": 676,
+        "endChar": 17
+      },
+      "revId": "2eff6ae73dab577a9132006a94ed8ab2037c236b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1d11fdc3_ad2abdd5",
@@ -545,6 +617,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2080811b_aa8e9f99",
+        "filename": "torq/tests/device_unit_test.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 681,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-09-10T17:45:48Z",
+      "side": 1,
+      "message": "Renamed this, thank you.",
+      "parentUuid": "1d11fdc3_ad2abdd5",
+      "range": {
+        "startLine": 681,
+        "startChar": 25,
+        "endLine": 681,
+        "endChar": 51
+      },
+      "revId": "2eff6ae73dab577a9132006a94ed8ab2037c236b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5a8d3b32_3692c7e6",
@@ -582,6 +678,30 @@
           ]
         }
       ],
+      "revId": "2eff6ae73dab577a9132006a94ed8ab2037c236b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c64b196_a6159171",
+        "filename": "torq/tests/device_unit_test.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 691,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-09-10T17:45:48Z",
+      "side": 1,
+      "message": "Renamed this, thank you.",
+      "parentUuid": "5a8d3b32_3692c7e6",
+      "range": {
+        "startLine": 691,
+        "startChar": 23,
+        "endLine": 691,
+        "endChar": 30
+      },
       "revId": "2eff6ae73dab577a9132006a94ed8ab2037c236b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -664,6 +784,54 @@
           ]
         }
       ],
+      "revId": "2eff6ae73dab577a9132006a94ed8ab2037c236b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "305d0750_ecde37fb",
+        "filename": "torq/tests/device_unit_test.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 746,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-09-10T17:45:48Z",
+      "side": 1,
+      "message": "Renamed, thank you.",
+      "parentUuid": "f7ed6148_0c88973c",
+      "range": {
+        "startLine": 746,
+        "startChar": 24,
+        "endLine": 746,
+        "endChar": 38
+      },
+      "revId": "2eff6ae73dab577a9132006a94ed8ab2037c236b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa7def9b_8d5fe1e7",
+        "filename": "torq/tests/device_unit_test.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 746,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-09-10T17:45:48Z",
+      "side": 1,
+      "message": "Removed this, thank you.",
+      "parentUuid": "aafe24da_d58c12a3",
+      "range": {
+        "startLine": 746,
+        "startChar": 47,
+        "endLine": 746,
+        "endChar": 52
+      },
       "revId": "2eff6ae73dab577a9132006a94ed8ab2037c236b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
