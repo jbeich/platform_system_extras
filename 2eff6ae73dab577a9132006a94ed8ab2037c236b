@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0a1fc15_7999bc84",
+        "filename": "torq/device.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-09-10T17:10:23Z",
+      "side": 1,
+      "message": "Changed this, thank you.",
+      "parentUuid": "a438f819_2ab0a988",
+      "range": {
+        "startLine": 168,
+        "startChar": 6,
+        "endLine": 168,
+        "endChar": 16
+      },
+      "revId": "2eff6ae73dab577a9132006a94ed8ab2037c236b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "36f281cc_0f90a9b9",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-09-10T16:55:12Z",
       "side": 1,
       "message": "Rename to `package`",
+      "range": {
+        "startLine": 178,
+        "startChar": 20,
+        "endLine": 178,
+        "endChar": 28
+      },
+      "revId": "2eff6ae73dab577a9132006a94ed8ab2037c236b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "031ac436_caaecb4e",
+        "filename": "torq/device.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-09-10T17:10:23Z",
+      "side": 1,
+      "message": "Changed this, thank you.",
+      "parentUuid": "36f281cc_0f90a9b9",
       "range": {
         "startLine": 178,
         "startChar": 20,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1639599f_32d80b27",
+        "filename": "torq/device.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-09-10T17:10:23Z",
+      "side": 1,
+      "message": "Changed this, thank you.",
+      "parentUuid": "5da75068_b6fb2782",
+      "range": {
+        "startLine": 183,
+        "startChar": 2,
+        "endLine": 184,
+        "endChar": 34
+      },
+      "revId": "2eff6ae73dab577a9132006a94ed8ab2037c236b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "84273980_9ebe8508",
@@ -83,6 +155,30 @@
       "writtenOn": "2024-09-10T16:55:12Z",
       "side": 1,
       "message": "```suggestion\n  def start_package(self, package):\n```",
+      "range": {
+        "startLine": 186,
+        "startChar": 0,
+        "endLine": 186,
+        "endChar": 27
+      },
+      "revId": "2eff6ae73dab577a9132006a94ed8ab2037c236b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "598d5a65_2cd3f6b2",
+        "filename": "torq/device.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-09-10T17:10:23Z",
+      "side": 1,
+      "message": "Changed this, thank you.",
+      "parentUuid": "84273980_9ebe8508",
       "range": {
         "startLine": 186,
         "startChar": 0,
@@ -134,6 +230,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "db472ec0_b8755e98",
+        "filename": "torq/device.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-09-10T17:10:23Z",
+      "side": 1,
+      "message": "Changed this, thank you.",
+      "parentUuid": "fa3fb9e7_a6194432",
+      "range": {
+        "startLine": 196,
+        "startChar": 21,
+        "endLine": 196,
+        "endChar": 29
+      },
+      "revId": "2eff6ae73dab577a9132006a94ed8ab2037c236b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "314cf68c_d8a1ae8e",
@@ -147,6 +267,30 @@
       "writtenOn": "2024-09-10T16:55:12Z",
       "side": 1,
       "message": "```suggestion\n  def force_stop_package(self, package):\n```",
+      "range": {
+        "startLine": 202,
+        "startChar": 2,
+        "endLine": 202,
+        "endChar": 32
+      },
+      "revId": "2eff6ae73dab577a9132006a94ed8ab2037c236b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2869e3c5_d1f51f3c",
+        "filename": "torq/device.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-09-10T17:10:23Z",
+      "side": 1,
+      "message": "Changed this, thank you.",
+      "parentUuid": "314cf68c_d8a1ae8e",
       "range": {
         "startLine": 202,
         "startChar": 2,
