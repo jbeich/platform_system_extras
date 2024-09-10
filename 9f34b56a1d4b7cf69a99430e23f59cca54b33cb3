@@ -160,6 +160,41 @@
       ],
       "revId": "9f34b56a1d4b7cf69a99430e23f59cca54b33cb3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6ef3cae_10859d81",
+        "filename": "torq/tests/device_unit_test.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 759,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-09-10T00:25:32Z",
+      "side": 1,
+      "message": "Nit: `failure`",
+      "fixSuggestions": [
+        {
+          "fixId": "da262f72_e81deec5",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/tests/device_unit_test.py",
+              "range": {
+                "startLine": 759,
+                "startChar": 0,
+                "endLine": 760,
+                "endChar": 0
+              },
+              "replacement": "  def test_kill_process_id_and_get_process_id_failure_error(self,\n"
+            }
+          ]
+        }
+      ],
+      "revId": "9f34b56a1d4b7cf69a99430e23f59cca54b33cb3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
