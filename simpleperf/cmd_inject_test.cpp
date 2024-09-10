@@ -102,6 +102,9 @@ TEST(cmd_inject, output_option) {
   std::string autofdo_data;
   ASSERT_TRUE(RunInjectCmd({"-i", tmpfile.path, "--output", "autofdo"}, &autofdo_data));
   CheckMatchingExpectedData("perf_inject.data", autofdo_data);
+  std::string bolt_data;
+  ASSERT_TRUE(RunInjectCmd({"-i", tmpfile.path, "--output", "bolt"}, &bolt_data));
+  CheckMatchingExpectedData("perf_inject_bolt.data", bolt_data);
 }
 
 // @CddTest = 6.1/C-0-2

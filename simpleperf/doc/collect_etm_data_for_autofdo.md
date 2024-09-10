@@ -187,6 +187,20 @@ We can check if `etm_test_loop.afdo` is used when building etm_test_loop.
 If comparing the disassembly of `out/target/product/generic_arm64/symbols/system/bin/etm_test_loop`
 before and after optimizing with AutoFDO data, we can see different preferences when branching.
 
+## Convert ETM data for llvm-bolt (experiment)
+
+We can also convert ETM data to profiles for [llvm-bolt](https://github.com/llvm/llvm-project/tree/main/bolt).
+The binaries should have an unstripped symbol table, and linked with relocations (--emit-relocs or
+-q linker flag).
+
+```sh
+# symdir is the directory containting etm_test_loop with unstripped symbol table and relocations.
+(host) $ simpleperf inject -i perf.data --output bolt -o perf_inject_bolt.data --symdir symdir
+(host) $ <LLVM_BIN>/perf2bolt --pa -p=perf_inject_bolt.data -o perf.fdata symdir/etm_test_loop
+(host) $ <LLVM_BIN>/llvm-bolt symdir/etm_test_loop -o etm_test_loop.bolt -data=perf.fdata \
+         -reorder-blocks=ext-tsp -reorder-functions=hfsort -split-functions -split-all-cold \
+         -split-eh -dyno-stats
+```
 
 ## Collect ETM data with a daemon
 

@@ -51,6 +51,7 @@ struct AddrPairHash {
 
 enum class OutputFormat {
   AutoFDO,
+  BOLT,
   BranchList,
 };
 
@@ -673,7 +674,7 @@ class AutoFDOWriter {
     }
   }
 
-  bool Write(const std::string& output_filename) {
+  bool WriteAutoFDO(const std::string& output_filename) {
     std::unique_ptr<FILE, decltype(&fclose)> output_fp(fopen(output_filename.c_str(), "w"), fclose);
     if (!output_fp) {
       PLOG(ERROR) << "failed to write to " << output_filename;
@@ -752,6 +753,74 @@ class AutoFDOWriter {
       // Write the binary path in comment.
       fprintf(output_fp.get(), "// build_id: %s\n", key.build_id.ToString().c_str());
       fprintf(output_fp.get(), "// %s\n\n", key.path.c_str());
+    }
+    return true;
+  }
+
+  // Write bolt profile in format documented in
+  // https://github.com/llvm/llvm-project/blob/main/bolt/include/bolt/Profile/DataAggregator.h#L372.
+  bool WriteBolt(const std::string& output_filename) {
+    std::unique_ptr<FILE, decltype(&fclose)> output_fp(fopen(output_filename.c_str(), "w"), fclose);
+    if (!output_fp) {
+      PLOG(ERROR) << "failed to write to " << output_filename;
+      return false;
+    }
+    // autofdo_binary_map is used to store instruction ranges, which can have a large amount. And
+    // it has a larger access time (instruction ranges * executed time). So it's better to use
+    // unorder_maps to speed up access time. But we also want a stable output here, to compare
+    // output changes result from code changes. So generate a sorted output here.
+    std::vector<BinaryKey> keys;
+    for (auto& p : binary_map_) {
+      keys.emplace_back(p.first);
+    }
+    std::sort(keys.begin(), keys.end(),
+              [](const BinaryKey& key1, const BinaryKey& key2) { return key1.path < key2.path; });
+    if (keys.size() > 1) {
+      fprintf(output_fp.get(),
+              "// Please split this file. BOLT only accepts profile for one binary.\n");
+    }
+    for (const auto& key : keys) {
+      const AutoFDOBinaryInfo& binary = binary_map_[key];
+      // Bolt text format needs file_offsets instead of virtual addrs in a binary. So convert
+      // vaddrs to file offsets.
+
+      // Write the binary path in comment.
+      fprintf(output_fp.get(), "// build_id: %s, %s\n", key.build_id.ToString().c_str(),
+              key.path.c_str());
+
+      // Write range_count_map. Sort the output by addrs.
+      std::vector<std::pair<AddrPair, uint64_t>> range_counts;
+      for (std::pair<AddrPair, uint64_t> p : binary.range_count_map) {
+        std::optional<uint64_t> start_offset = binary.VaddrToOffset(p.first.first);
+        std::optional<uint64_t> end_offset = binary.VaddrToOffset(p.first.second);
+        if (start_offset && end_offset) {
+          p.first.first = start_offset.value();
+          p.first.second = end_offset.value();
+          range_counts.emplace_back(p);
+        }
+      }
+      std::sort(range_counts.begin(), range_counts.end());
+      for (const auto& p : range_counts) {
+        fprintf(output_fp.get(), "F %" PRIx64 " %" PRIx64 " %" PRIu64 "\n", p.first.first,
+                p.first.second, p.second);
+      }
+
+      // Write branch_count_map. Sort the output by addrs.
+      std::vector<std::pair<AddrPair, uint64_t>> branch_counts;
+      for (std::pair<AddrPair, uint64_t> p : binary.branch_count_map) {
+        std::optional<uint64_t> from_offset = binary.VaddrToOffset(p.first.first);
+        std::optional<uint64_t> to_offset = binary.VaddrToOffset(p.first.second);
+        if (from_offset) {
+          p.first.first = from_offset.value();
+          p.first.second = to_offset ? to_offset.value() : 0;
+          branch_counts.emplace_back(p);
+        }
+      }
+      std::sort(branch_counts.begin(), branch_counts.end());
+      for (const auto& p : branch_counts) {
+        fprintf(output_fp.get(), "B %" PRIx64 " %" PRIx64 " %" PRIu64 " 0\n", p.first.first,
+                p.first.second, p.second);
+      }
     }
     return true;
   }
@@ -852,6 +921,7 @@ class InjectCommand : public Command {
 "--output <format>            Select output file format:\n"
 "                               autofdo      -- text format accepted by TextSampleReader\n"
 "                                               of AutoFDO\n"
+"                               bolt         -- text format accepted by `perf2bolt --pa`\n"
 "                               branch-list  -- protobuf file in etm_branch_list.proto\n"
 "                             Default is autofdo.\n"
 "--dump-etm type1,type2,...   Dump etm data. A type is one of raw, packet and element.\n"
@@ -879,6 +949,8 @@ class InjectCommand : public Command {
     if (IsPerfDataFile(input_filenames_[0])) {
       switch (output_format_) {
         case OutputFormat::AutoFDO:
+          [[fallthrough]];
+        case OutputFormat::BOLT:
           return ConvertPerfDataToAutoFDO();
         case OutputFormat::BranchList:
           return ConvertPerfDataToBranchList();
@@ -886,6 +958,8 @@ class InjectCommand : public Command {
     } else {
       switch (output_format_) {
         case OutputFormat::AutoFDO:
+          [[fallthrough]];
+        case OutputFormat::BOLT:
           return ConvertBranchListToAutoFDO();
         case OutputFormat::BranchList:
           return ConvertBranchListToBranchList();
@@ -947,6 +1021,8 @@ class InjectCommand : public Command {
       const std::string& output = value->str_value;
       if (output == "autofdo") {
         output_format_ = OutputFormat::AutoFDO;
+      } else if (output == "bolt") {
+        output_format_ = OutputFormat::BOLT;
       } else if (output == "branch-list") {
         output_format_ = OutputFormat::BranchList;
       } else {
@@ -1026,7 +1102,11 @@ class InjectCommand : public Command {
     if (!ReadPerfDataFiles(reader_callback)) {
       return false;
     }
-    return autofdo_writer.Write(output_filename_);
+    if (output_format_ == OutputFormat::AutoFDO) {
+      return autofdo_writer.WriteAutoFDO(output_filename_);
+    }
+    CHECK(output_format_ == OutputFormat::BOLT);
+    return autofdo_writer.WriteBolt(output_filename_);
   }
 
   bool ConvertPerfDataToBranchList() {
@@ -1094,7 +1174,11 @@ class InjectCommand : public Command {
     }
 
     // Step3: Write AutoFDOBinaryInfo.
-    return autofdo_writer.Write(output_filename_);
+    if (output_format_ == OutputFormat::AutoFDO) {
+      return autofdo_writer.WriteAutoFDO(output_filename_);
+    }
+    CHECK(output_format_ == OutputFormat::BOLT);
+    return autofdo_writer.WriteBolt(output_filename_);
   }
 
   bool ConvertBranchListToBranchList() {
