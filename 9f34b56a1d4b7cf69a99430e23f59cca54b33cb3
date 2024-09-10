@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be519e43_1b9373ae",
+        "filename": "torq/device.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-09-10T00:16:28Z",
+      "side": 1,
+      "message": "Why are we doing this via a shell command? Could we not just check if the app exists in the packages output.",
+      "range": {
+        "startLine": 169,
+        "startChar": 4,
+        "endLine": 178,
+        "endChar": 61
+      },
+      "revId": "9f34b56a1d4b7cf69a99430e23f59cca54b33cb3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cbaeb9c6_e73d1d39",
+        "filename": "torq/device.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-09-10T00:16:28Z",
+      "side": 1,
+      "message": "Nit: rename to `get_pid`",
+      "range": {
+        "startLine": 181,
+        "startChar": 6,
+        "endLine": 181,
+        "endChar": 20
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "2ec82920_97da614e",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/device.py",
+              "range": {
+                "startLine": 181,
+                "startChar": 0,
+                "endLine": 182,
+                "endChar": 0
+              },
+              "replacement": "  def get_pid(self, activity):\n"
+            },
+            {
+              "path": "torq/device.py",
+              "range": {
+                "startLine": 206,
+                "startChar": 0,
+                "endLine": 207,
+                "endChar": 0
+              },
+              "replacement": "    process_id \u003d self.get_pid(activity)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "9f34b56a1d4b7cf69a99430e23f59cca54b33cb3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0574d69_408ca39e",
+        "filename": "torq/device.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-09-10T00:16:28Z",
+      "side": 1,
+      "message": "Nit: rename `is_app_running`",
+      "range": {
+        "startLine": 186,
+        "startChar": 6,
+        "endLine": 186,
+        "endChar": 17
+      },
+      "revId": "9f34b56a1d4b7cf69a99430e23f59cca54b33cb3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69fbb6cd_0cd350c5",
+        "filename": "torq/device.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-09-10T00:16:28Z",
+      "side": 1,
+      "message": "This function should just return a boolean value, as the device interface should simply allow us to query information about the device, rather than embed our own validation logic. \n\nWe should move this suggestion to the caller. This would also clarify the function logic. Right now we are testing the negative case, whereas we should always try to use the positive case (go/tott-530). The name `app_running` suggests that an error is returned when the app is not running, but in this case we are doing the inverse.",
+      "range": {
+        "startLine": 187,
+        "startChar": 4,
+        "endLine": 193,
+        "endChar": 15
+      },
+      "revId": "9f34b56a1d4b7cf69a99430e23f59cca54b33cb3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8584b9bf_efdea994",
+        "filename": "torq/device.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-09-10T00:16:28Z",
+      "side": 1,
+      "message": "Nit: rename to `kill_pid`",
+      "range": {
+        "startLine": 205,
+        "startChar": 6,
+        "endLine": 205,
+        "endChar": 21
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "5bd14707_1957b7a9",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/device.py",
+              "range": {
+                "startLine": 205,
+                "startChar": 0,
+                "endLine": 206,
+                "endChar": 0
+              },
+              "replacement": "  def kill_pid(self, activity):\n"
+            }
+          ]
+        }
+      ],
+      "revId": "9f34b56a1d4b7cf69a99430e23f59cca54b33cb3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
