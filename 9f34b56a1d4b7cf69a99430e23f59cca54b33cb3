@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "db3533d9_5a50ea86",
+        "filename": "torq/device.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-09-10T01:47:50Z",
+      "side": 1,
+      "message": "Returned the list, and we simply now check if the app is in this list. Thank you.",
+      "parentUuid": "be519e43_1b9373ae",
+      "range": {
+        "startLine": 169,
+        "startChar": 4,
+        "endLine": 178,
+        "endChar": 61
+      },
+      "revId": "9f34b56a1d4b7cf69a99430e23f59cca54b33cb3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cbaeb9c6_e73d1d39",
@@ -75,6 +99,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "96a7e40b_c0af52d9",
+        "filename": "torq/device.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-09-10T01:47:50Z",
+      "side": 1,
+      "message": "Rename this, thank you.",
+      "parentUuid": "cbaeb9c6_e73d1d39",
+      "range": {
+        "startLine": 181,
+        "startChar": 6,
+        "endLine": 181,
+        "endChar": 20
+      },
+      "revId": "9f34b56a1d4b7cf69a99430e23f59cca54b33cb3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b0574d69_408ca39e",
@@ -98,6 +146,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "36346109_07f31aa8",
+        "filename": "torq/device.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-09-10T01:47:50Z",
+      "side": 1,
+      "message": "Renamed this, thank you.",
+      "parentUuid": "b0574d69_408ca39e",
+      "range": {
+        "startLine": 186,
+        "startChar": 6,
+        "endLine": 186,
+        "endChar": 17
+      },
+      "revId": "9f34b56a1d4b7cf69a99430e23f59cca54b33cb3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "69fbb6cd_0cd350c5",
@@ -111,6 +183,30 @@
       "writtenOn": "2024-09-10T00:16:28Z",
       "side": 1,
       "message": "This function should just return a boolean value, as the device interface should simply allow us to query information about the device, rather than embed our own validation logic. \n\nWe should move this suggestion to the caller. This would also clarify the function logic. Right now we are testing the negative case, whereas we should always try to use the positive case (go/tott-530). The name `app_running` suggests that an error is returned when the app is not running, but in this case we are doing the inverse.",
+      "range": {
+        "startLine": 187,
+        "startChar": 4,
+        "endLine": 193,
+        "endChar": 15
+      },
+      "revId": "9f34b56a1d4b7cf69a99430e23f59cca54b33cb3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ca138c7_33f76b98",
+        "filename": "torq/device.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-09-10T01:47:50Z",
+      "side": 1,
+      "message": "Changed this to return bool, thank you.",
+      "parentUuid": "69fbb6cd_0cd350c5",
       "range": {
         "startLine": 187,
         "startChar": 4,
@@ -162,6 +258,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b174e78_2bec9370",
+        "filename": "torq/device.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-09-10T01:47:50Z",
+      "side": 1,
+      "message": "Renamed this, thank you.",
+      "parentUuid": "8584b9bf_efdea994",
+      "range": {
+        "startLine": 205,
+        "startChar": 6,
+        "endLine": 205,
+        "endChar": 21
+      },
+      "revId": "9f34b56a1d4b7cf69a99430e23f59cca54b33cb3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a6ef3cae_10859d81",
@@ -193,6 +313,24 @@
           ]
         }
       ],
+      "revId": "9f34b56a1d4b7cf69a99430e23f59cca54b33cb3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a743154_1b4276ae",
+        "filename": "torq/tests/device_unit_test.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 759,
+      "author": {
+        "id": 3502236
+      },
+      "writtenOn": "2024-09-10T01:47:50Z",
+      "side": 1,
+      "message": "Fixed, thank you.",
+      "parentUuid": "a6ef3cae_10859d81",
       "revId": "9f34b56a1d4b7cf69a99430e23f59cca54b33cb3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
