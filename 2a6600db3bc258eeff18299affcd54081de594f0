@@ -16,6 +16,29 @@
       "message": "ps2: fix indent",
       "revId": "2a6600db3bc258eeff18299affcd54081de594f0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "255f5e9c_da15fdff",
+        "filename": "simpleperf/cmd_inject.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 778,
+      "author": {
+        "id": 1058860
+      },
+      "writtenOn": "2024-09-10T19:07:27Z",
+      "side": 1,
+      "message": "Is this the correct check?  Did you mean to extract the `path` fields are the same across all keys?",
+      "range": {
+        "startLine": 778,
+        "startChar": 8,
+        "endLine": 778,
+        "endChar": 23
+      },
+      "revId": "2a6600db3bc258eeff18299affcd54081de594f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
