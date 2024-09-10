@@ -101,6 +101,8 @@ cc_binary {
 cc_binary {
     name: "etm_test_loop",
     srcs: ["etm_test_loop.cpp"],
+    // Keep relocation sections of executables for bolt.
+    ldflags: ["-Wl,-q"],
     // afdo: true,
 }
 
