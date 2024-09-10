@@ -256,6 +256,57 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "049bb79a_e80af8fc",
+        "filename": "torq/device.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-09-10T17:26:54Z",
+      "side": 1,
+      "message": "Nit: Change to `pid`",
+      "range": {
+        "startLine": 197,
+        "startChar": 4,
+        "endLine": 197,
+        "endChar": 14
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "c19752cf_37a06e87",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/device.py",
+              "range": {
+                "startLine": 197,
+                "startChar": 0,
+                "endLine": 199,
+                "endChar": 0
+              },
+              "replacement": "    pid \u003d self.get_pid(activity)\n    if pid !\u003d \"\":\n"
+            },
+            {
+              "path": "torq/device.py",
+              "range": {
+                "startLine": 200,
+                "startChar": 0,
+                "endLine": 201,
+                "endChar": 0
+              },
+              "replacement": "                      pid])\n"
+            }
+          ]
+        }
+      ],
+      "revId": "2eff6ae73dab577a9132006a94ed8ab2037c236b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "314cf68c_d8a1ae8e",
         "filename": "torq/device.py",
         "patchSetId": 12
@@ -297,6 +348,322 @@
         "endLine": 202,
         "endChar": 32
       },
+      "revId": "2eff6ae73dab577a9132006a94ed8ab2037c236b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b518c97e_d6056d33",
+        "filename": "torq/tests/device_unit_test.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-09-10T17:26:54Z",
+      "side": 1,
+      "message": "Nit: `TEST_PID`",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 22
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "2af22b42_4685b469",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/tests/device_unit_test.py",
+              "range": {
+                "startLine": 38,
+                "startChar": 0,
+                "endLine": 39,
+                "endChar": 0
+              },
+              "replacement": "TEST_PID_OUTPUT \u003d b\"8241\\n\"\n"
+            },
+            {
+              "path": "torq/tests/device_unit_test.py",
+              "range": {
+                "startLine": 654,
+                "startChar": 0,
+                "endLine": 655,
+                "endChar": 0
+              },
+              "replacement": "        TEST_PID_OUTPUT)\n"
+            },
+            {
+              "path": "torq/tests/device_unit_test.py",
+              "range": {
+                "startLine": 683,
+                "startChar": 0,
+                "endLine": 684,
+                "endChar": 0
+              },
+              "replacement": "        TEST_PID_OUTPUT)\n"
+            },
+            {
+              "path": "torq/tests/device_unit_test.py",
+              "range": {
+                "startLine": 739,
+                "startChar": 0,
+                "endLine": 740,
+                "endChar": 0
+              },
+              "replacement": "        self.generate_mock_completed_process(TEST_PID_OUTPUT), None]\n"
+            },
+            {
+              "path": "torq/tests/device_unit_test.py",
+              "range": {
+                "startLine": 759,
+                "startChar": 0,
+                "endLine": 760,
+                "endChar": 0
+              },
+              "replacement": "        self.generate_mock_completed_process(TEST_PID_OUTPUT),\n"
+            }
+          ]
+        }
+      ],
+      "revId": "2eff6ae73dab577a9132006a94ed8ab2037c236b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7590903_92b653da",
+        "filename": "torq/tests/device_unit_test.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 676,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-09-10T17:26:54Z",
+      "side": 1,
+      "message": "Nit: Could you please change this to `is_running` since we are not longer checking for a returned error.",
+      "range": {
+        "startLine": 676,
+        "startChar": 4,
+        "endLine": 676,
+        "endChar": 17
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "3b76e160_042d038c",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/tests/device_unit_test.py",
+              "range": {
+                "startLine": 676,
+                "startChar": 0,
+                "endLine": 677,
+                "endChar": 0
+              },
+              "replacement": "    is_running \u003d adbDevice.is_app_running(TEST_APP_1)\n"
+            },
+            {
+              "path": "torq/tests/device_unit_test.py",
+              "range": {
+                "startLine": 678,
+                "startChar": 0,
+                "endLine": 679,
+                "endChar": 0
+              },
+              "replacement": "    self.assertEqual(is_running, False)\n"
+            },
+            {
+              "path": "torq/tests/device_unit_test.py",
+              "range": {
+                "startLine": 686,
+                "startChar": 0,
+                "endLine": 687,
+                "endChar": 0
+              },
+              "replacement": "    is_running \u003d adbDevice.is_app_running(TEST_APP_1)\n"
+            },
+            {
+              "path": "torq/tests/device_unit_test.py",
+              "range": {
+                "startLine": 688,
+                "startChar": 0,
+                "endLine": 689,
+                "endChar": 0
+              },
+              "replacement": "    self.assertEqual(is_running, True)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "2eff6ae73dab577a9132006a94ed8ab2037c236b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d11fdc3_ad2abdd5",
+        "filename": "torq/tests/device_unit_test.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 681,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-09-10T17:26:54Z",
+      "side": 1,
+      "message": "Rename to `test_is_app_running_failure` since we are no longer validating that an app is already running.",
+      "range": {
+        "startLine": 681,
+        "startChar": 25,
+        "endLine": 681,
+        "endChar": 51
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "e6917296_8887ab8c",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/tests/device_unit_test.py",
+              "range": {
+                "startLine": 681,
+                "startChar": 0,
+                "endLine": 682,
+                "endChar": 0
+              },
+              "replacement": "  def test_is_app_running_failure(self, mock_subprocess_run):\n"
+            }
+          ]
+        }
+      ],
+      "revId": "2eff6ae73dab577a9132006a94ed8ab2037c236b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a8d3b32_3692c7e6",
+        "filename": "torq/tests/device_unit_test.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 691,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-09-10T17:26:54Z",
+      "side": 1,
+      "message": "Nit: Can we remove the redundant `command` from the function names?",
+      "range": {
+        "startLine": 691,
+        "startChar": 23,
+        "endLine": 691,
+        "endChar": 30
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "4a636bc9_08dfa0cd",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/tests/device_unit_test.py",
+              "range": {
+                "startLine": 691,
+                "startChar": 0,
+                "endLine": 692,
+                "endChar": 0
+              },
+              "replacement": "  def test_app_running_failure(self, mock_subprocess_run):\n"
+            }
+          ]
+        }
+      ],
+      "revId": "2eff6ae73dab577a9132006a94ed8ab2037c236b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aafe24da_d58c12a3",
+        "filename": "torq/tests/device_unit_test.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 746,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-09-10T17:26:54Z",
+      "side": 1,
+      "message": "For consistency, could we remove `error` from all of the negative cases. Specifying `failure` should be sufficient.",
+      "range": {
+        "startLine": 746,
+        "startChar": 47,
+        "endLine": 746,
+        "endChar": 52
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "63f403b5_17e771b7",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/tests/device_unit_test.py",
+              "range": {
+                "startLine": 746,
+                "startChar": 0,
+                "endLine": 747,
+                "endChar": 0
+              },
+              "replacement": "  def test_kill_pid_and_get_process_id_failure(self,\n"
+            }
+          ]
+        }
+      ],
+      "revId": "2eff6ae73dab577a9132006a94ed8ab2037c236b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7ed6148_0c88973c",
+        "filename": "torq/tests/device_unit_test.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 746,
+      "author": {
+        "id": 1978605
+      },
+      "writtenOn": "2024-09-10T17:26:54Z",
+      "side": 1,
+      "message": "Please update to `get_pid` here and elsewhere.",
+      "range": {
+        "startLine": 746,
+        "startChar": 24,
+        "endLine": 746,
+        "endChar": 38
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "73204823_a6c12d81",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "torq/tests/device_unit_test.py",
+              "range": {
+                "startLine": 746,
+                "startChar": 0,
+                "endLine": 747,
+                "endChar": 0
+              },
+              "replacement": "  def test_kill_pid_and_get_pid_failure_error(self,\n"
+            }
+          ]
+        }
+      ],
       "revId": "2eff6ae73dab577a9132006a94ed8ab2037c236b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
